@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SCR022 read only/UI224236/SS313/PG-D350/PT-QRY-HTTP008; deletion QA049 pending. -->
+<!-- SCR022/UI224236/SS313314/PG-D350368/PT-QRY-HTTP008,QDL-BIZ; QA049 approved. -->
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('質問回答')}"></head>
 <body><main class="page question-list-page">
@@ -22,6 +22,6 @@
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
     <table th:if="${!page.rows.empty}"><thead><tr><th>受付日時</th><th class="owner-heading" th:if="${page.filters.admin}">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
-    <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a></td></tr></tbody></table>
+    <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a> <a class="delete" th:href="${question.deleteHref}">削除</a></td></tr></tbody></table>
   </section>
 </main></body></html>

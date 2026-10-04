@@ -77,7 +77,8 @@ final class WebRequestTraceTest {
     }
     // UI224/236 SCR018/019: GET new, POST new and GET accepted are three mappings,
     // but the two /questions/new methods share one safe registered pattern.
-    assertEquals(35, annotations);
+    // NTC/QDL add two POST annotations on already registered safe detail patterns.
+    assertEquals(37, annotations);
     var mapped = new HashSet<>(ROUTES);
     mapped.removeAll(Set.of("/css/**", "/js/**"));
     assertEquals(mapped, actual);

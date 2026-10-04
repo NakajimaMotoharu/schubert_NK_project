@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponse
 import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
+import dev.codex.schubert.nk.web.form.CancelForm;
 import dev.codex.schubert.nk.web.form.NotificationSearchForm;
 import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
@@ -24,17 +25,30 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-/** SCR020/UI224,236/SS313,314; PG-D347/PT-NTF-HTTP001..010; owner is API context only. */
+/** SCR020021/UI224236/SS313314; PG-D347368/PT-NTF-HTTP,NTC-BIZ; API context owns scope. */
 @Controller
 @NullMarked
 public final class NotificationController {
   private final NotificationWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
+  private final Optional<SessionOperationTokenLifecycle> tokens;
+  private static final String RETRY = "処理結果を確認できません。同じ内容で再操作してください。";
 
   public NotificationController(NotificationWireClient client, ApiSessionInvalidHandler invalid) {
     this.client = Objects.requireNonNull(client, "client");
     this.invalid = Objects.requireNonNull(invalid, "invalid");
+    tokens = Optional.empty();
+  }
+
+  /** Full SCR021 shares the exact current-row lifecycle used by the security chain. */
+  public NotificationController(
+      NotificationWireClient client,
+      ApiSessionInvalidHandler invalid,
+      SessionOperationTokenLifecycle tokens) {
+    this.client = Objects.requireNonNull(client, "client");
+    this.invalid = Objects.requireNonNull(invalid, "invalid");
+    this.tokens = Optional.of(Objects.requireNonNull(tokens, "tokens"));
   }
 
   @GetMapping("/notifications")
@@ -93,7 +107,7 @@ public final class NotificationController {
     return "notifications/list";
   }
 
-  /** SCR021 reference only; cancellation/token lifecycle remains QA049, not fullReady. */
+  /** SCR021: fresh current owner/state precedes issuance for the one visible RECEIVED form. */
   @GetMapping("/notifications/{id:[0-9]{1,12}}")
   public @Nullable String detail(
       @PathVariable("id") String target,
@@ -115,6 +129,19 @@ public final class NotificationController {
       response.sendError(404);
       return null;
     }
+    return showDetail(id, actor, model, request, response, Optional.empty(), 200, "");
+  }
+
+  private @Nullable String showDetail(
+      NotificationId id,
+      SessionPrincipal actor,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      Optional<CancelForm> redisplay,
+      int status,
+      String notice)
+      throws IOException {
     final ProtectedReadWireClient.Result result;
     try {
       result =
@@ -130,9 +157,9 @@ public final class NotificationController {
       invalid.handle(request, response);
       return null;
     }
-    int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
-      response.sendError(status);
+    int readStatus = mapper.httpStatus(result.resultCode());
+    if (readStatus != 200) {
+      response.sendError(readStatus);
       return null;
     }
     final NotificationDetailViewModel page;
@@ -145,6 +172,137 @@ public final class NotificationController {
       return null;
     }
     model.addAttribute("page", page);
+    model.addAttribute("notice", notice);
+    if (tokens.isPresent() && "RECEIVED".equals(page.getValues().get("state"))) {
+      if (redisplay.isPresent()) {
+        var form = redisplay.orElseThrow();
+        model.addAttribute(
+            "action", Map.of("fields", form.displayValues(), "issues", form.getIssues()));
+      } else {
+        try {
+          var token = tokens.orElseThrow().issue(session(request), "NTCREQ01");
+          model.addAttribute(
+              "action",
+              Map.of(
+                  "fields",
+                  Map.of(
+                      "operation",
+                      "CANCEL",
+                      "id",
+                      id.value(),
+                      "operation_token",
+                      token.token().toString(),
+                      "confirm",
+                      false),
+                  "issues",
+                  Map.of()));
+        } catch (OperationTokenConflictException conflict) {
+          response.sendError(409);
+          return null;
+        } catch (SessionStoreException failure) {
+          response.sendError(503);
+          return null;
+        }
+      }
+    }
+    response.setStatus(status);
     return "notifications/detail";
+  }
+
+  /** No pre-update detail fetch: API owns the current state, owner and replay/HMAC checks. */
+  @PostMapping("/notifications/{id:[0-9]{1,12}}")
+  public @Nullable String cancel(
+      @PathVariable("id") String target,
+      @RequestParam MultiValueMap<String, String> parameters,
+      Principal principal,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response)
+      throws IOException {
+    Objects.requireNonNull(target, "target");
+    Objects.requireNonNull(parameters, "parameters");
+    Objects.requireNonNull(model, "model");
+    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(response, "response");
+    if (!(Objects.requireNonNull(principal, "principal") instanceof SessionPrincipal actor))
+      throw new SessionStoreException();
+    if (tokens.isEmpty()) {
+      response.sendError(503);
+      return null;
+    }
+    final NotificationId id;
+    try {
+      id = new NotificationId(Long.parseLong(target));
+    } catch (IllegalArgumentException malformed) {
+      response.sendError(404);
+      return null;
+    }
+    var form = CancelForm.bind(id.value(), parameters);
+    if (!form.isValid())
+      return showDetail(
+          id, actor, model, request, response, Optional.of(form), 400, "入力項目を確認してください。");
+    var input = form.toRequest();
+    final WebSessionId session;
+    try {
+      session = session(request);
+      tokens.orElseThrow().require(session, "NTCREQ01", input.operationToken());
+    } catch (OperationTokenConflictException conflict) {
+      response.sendError(409);
+      return null;
+    } catch (SessionStoreException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    final ProtectedReadWireClient.Result result;
+    try {
+      result =
+          client.exchange(
+              new TypedPayloadValues(new LayoutId("NTCREQ01"), input, List.of()),
+              actor.authenticationContext());
+    } catch (ProtectedReadWireException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    if (result.resultCode() == ResultCode.SESSION_INVALID) {
+      invalid.handle(request, response);
+      return null;
+    }
+    int status = mapper.httpStatus(result.resultCode());
+    if (status != 200) {
+      if (status == 400 || status == 409 || status == 503)
+        return showDetail(
+            id,
+            actor,
+            model,
+            request,
+            response,
+            Optional.of(form),
+            status,
+            result.resultCode() == ResultCode.NOT_CANCELLABLE ? "現在の状態では取り消せません。" : RETRY);
+      response.sendError(status);
+      return null;
+    }
+    // Protected facade has validated layout, context, correlation, success body and filler.
+    try {
+      tokens
+          .orElseThrow()
+          .completeVerified(session, "NTCREQ01", input.operationToken(), result.resultCode());
+    } catch (OperationTokenConflictException conflict) {
+      response.sendError(409);
+      return null;
+    } catch (SessionStoreException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    response.setHeader("Location", "/notifications/" + id.value());
+    response.setStatus(302);
+    return null;
+  }
+
+  private static WebSessionId session(HttpServletRequest request) {
+    var current = request.getSession(false);
+    if (current == null) throw new OperationTokenConflictException();
+    try {
+      return WebSessionId.parse(current.getId());
+    } catch (IllegalArgumentException malformed) {
+      throw new OperationTokenConflictException();
+    }
   }
 }

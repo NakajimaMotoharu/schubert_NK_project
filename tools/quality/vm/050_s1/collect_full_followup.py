@@ -686,5 +686,29 @@ if int(identifier[2:5]) >= 452:
         'Signed native V027/Backup/ordinary parent/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no other-source/interrupted result reuse',
     ]
+if int(identifier[2:5]) >= 453:
+    target_names = {'NotificationBusinessMvcConfiguration', 'TargetOperationInput', 'CancelForm',
+                    'QuestionDeleteForm', 'NotificationController', 'QuestionController',
+                    'QuestionDetailViewModel', 'QuestionListViewModel'}
+    target_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.findall('counter') and c.get('name').rsplit('/', 1)[-1] in target_names}
+    assert set(target_coverage) == target_names
+    assert all(k['missed'] == 0 for value in target_coverage.values() for k in value.values())
+    manifest['targetBusinessCoverage'] = target_coverage
+    manifest['bugs'].extend(['BUG-646', 'BUG-647'])
+    manifest['ykt'].extend(['YKT-458', 'YKT-459'])
+    manifest['testIds'].extend([f'PT-TARGET{n:03d}' for n in range(1, 9)]
+                              + [f'NTC-BIZ{n:03d}' for n in range(1, 9)]
+                              + [f'QDL-BIZ{n:03d}' for n in range(1, 10)])
+    manifest['trigger'] = 'PG-D368/QA049: Notification CANCEL/Question DELETE detail-issued retained same-core tokens, closed forms/templates, independent manual304 and32/24 reply bytes, real API/SQL/100 replay, actual secured host HTTP/CSRF,50 descending owner links/token0 and100Unicode summary; fresh shared session/security/inventory six-module feature acceptance'
+    manifest['limitations'] = [
+        'Host actual HTTP/production business API/isolated PostgreSQL and independent JMS fixture only; actual Artemis/native Web not accepted',
+        'Full native resource graph/management/same-owner A release and UNKNOWN outer callback retention remain pending',
+        'Signed V027/Backup/ordinary parent/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no other-source/interrupted result reuse',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

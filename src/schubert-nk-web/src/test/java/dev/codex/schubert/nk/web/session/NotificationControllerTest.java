@@ -1051,7 +1051,7 @@ class NotificationControllerTest {
                   .getResponse()
                   .getStatus());
           assertEquals(
-              405,
+              503,
               mvc.perform(post("/notifications/1").principal(actor(UserRole.USER)))
                   .andReturn()
                   .getResponse()

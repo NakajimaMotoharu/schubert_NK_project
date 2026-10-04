@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.*;
 import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
+import dev.codex.schubert.nk.web.form.QuestionDeleteForm;
 import dev.codex.schubert.nk.web.form.QuestionSearchForm;
 import dev.codex.schubert.nk.web.form.QuestionSubmitForm;
 import dev.codex.schubert.nk.web.messaging.*;
@@ -23,7 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-/** SCR018019022023/UI224236/SS313314323332; PG-D350357/PT-QRY-HTTP001..012/RCPT006A..H. */
+/** SCR018019022023/UI224236/SS313314323332; PG-D350357368/PT-QRY-HTTP/RCPT006/QDL-BIZ. */
 @Controller
 @NullMarked
 public final class QuestionController {
@@ -333,6 +334,19 @@ public final class QuestionController {
       response.sendError(404);
       return null;
     }
+    return showDetail(id, actor, model, request, response, Optional.empty(), 200, "");
+  }
+
+  private @Nullable String showDetail(
+      QuestionId id,
+      SessionPrincipal actor,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      Optional<QuestionDeleteForm> redisplay,
+      int status,
+      String notice)
+      throws IOException {
     final ProtectedReadWireClient.Result result;
     try {
       result =
@@ -348,9 +362,9 @@ public final class QuestionController {
       invalid.handle(request, response);
       return null;
     }
-    int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
-      response.sendError(status);
+    int readStatus = mapper.httpStatus(result.resultCode());
+    if (readStatus != 200) {
+      response.sendError(readStatus);
       return null;
     }
     final QuestionDetailViewModel page;
@@ -363,6 +377,115 @@ public final class QuestionController {
       return null;
     }
     model.addAttribute("page", page);
+    model.addAttribute("notice", notice);
+    if (tokens.isPresent()) {
+      if (redisplay.isPresent()) {
+        var form = redisplay.orElseThrow();
+        model.addAttribute(
+            "action", Map.of("fields", form.displayValues(), "issues", form.getIssues()));
+      } else {
+        try {
+          var token = tokens.orElseThrow().issue(session(request), "QDLREQ01");
+          model.addAttribute(
+              "action",
+              Map.of(
+                  "fields",
+                  Map.of(
+                      "operation",
+                      "DELETE",
+                      "id",
+                      id.value(),
+                      "operation_token",
+                      token.token().toString(),
+                      "confirm",
+                      false),
+                  "issues",
+                  Map.of()));
+        } catch (OperationTokenConflictException conflict) {
+          response.sendError(409);
+          return null;
+        } catch (SessionStoreException failure) {
+          response.sendError(503);
+          return null;
+        }
+      }
+    }
+    response.setStatus(status);
     return "questions/detail";
+  }
+
+  /** Existing detail confirmation handles list selection too; API owns target/owner/HMAC. */
+  @PostMapping("/questions/{id:[0-9]{1,12}}")
+  public @Nullable String delete(
+      @PathVariable("id") String target,
+      @RequestParam MultiValueMap<String, String> parameters,
+      Principal principal,
+      Model model,
+      HttpServletRequest request,
+      HttpServletResponse response)
+      throws IOException {
+    var actor = actor(principal, model, request, response);
+    Objects.requireNonNull(target, "target");
+    Objects.requireNonNull(parameters, "parameters");
+    if (tokens.isEmpty()) {
+      response.sendError(503);
+      return null;
+    }
+    final QuestionId id;
+    try {
+      id = new QuestionId(Long.parseLong(target));
+    } catch (IllegalArgumentException malformed) {
+      response.sendError(404);
+      return null;
+    }
+    var form = QuestionDeleteForm.bind(id.value(), parameters);
+    if (!form.isValid())
+      return showDetail(
+          id, actor, model, request, response, Optional.of(form), 400, "入力項目を確認してください。");
+    var input = form.toRequest();
+    final WebSessionId session;
+    try {
+      session = session(request);
+      tokens.orElseThrow().require(session, "QDLREQ01", input.operationToken());
+    } catch (OperationTokenConflictException conflict) {
+      response.sendError(409);
+      return null;
+    } catch (SessionStoreException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    final ProtectedReadWireClient.Result result;
+    try {
+      result =
+          client.exchange(
+              new TypedPayloadValues(new LayoutId("QDLREQ01"), input, List.of()),
+              actor.authenticationContext());
+    } catch (ProtectedReadWireException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    if (result.resultCode() == ResultCode.SESSION_INVALID) {
+      invalid.handle(request, response);
+      return null;
+    }
+    int status = mapper.httpStatus(result.resultCode());
+    if (status != 200) {
+      if (status == 400 || status == 409 || status == 503)
+        return showDetail(id, actor, model, request, response, Optional.of(form), status, RETRY);
+      response.sendError(status);
+      return null;
+    }
+    // Do not prefetch IF030 here: a deleted question still permits owner-bound QDL replay0200.
+    try {
+      tokens
+          .orElseThrow()
+          .completeVerified(session, "QDLREQ01", input.operationToken(), result.resultCode());
+    } catch (OperationTokenConflictException conflict) {
+      response.sendError(409);
+      return null;
+    } catch (SessionStoreException failure) {
+      return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
+    }
+    response.setHeader("Location", "/questions");
+    response.setStatus(302);
+    return null;
   }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SCR023 read only/UI224236/SS313/PG-D350/PT-QRY-HTTP008; deletion QA049 pending. -->
+<!-- SCR023/UI224236/SS313314/PG-D350368/PT-QRY-HTTP008,QDL-BIZ; QA049 approved. -->
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('質問回答明細')}"></head>
 <body><main class="page question-detail-page">
@@ -11,5 +11,20 @@
     <dt>質問</dt><dd class="question-body" th:text="${page.values.question}"></dd>
     <dt th:if="${page.values.answerAvailable}">回答</dt><dd class="answer-body" th:if="${page.values.answerAvailable}" th:text="${page.values.answer.empty ? '（空の回答）' : page.values.answer}"></dd>
     <dt th:if="${page.values.answerAvailable}">回答日時</dt><dd class="answered-at" th:if="${page.values.answerAvailable}" th:text="${page.values.answeredAt}"></dd>
-  </dl><a class="back" href="/questions">質問回答一覧</a>
+  </dl>
+  <p class="operation-notice" role="alert" th:if="${notice != null and !notice.empty}" th:text="${notice}"></p>
+  <section id="delete-confirm" th:if="${action != null}">
+    <h2>質問・回答の削除確認</h2>
+    <p class="delete-summary" th:text="${page.values.summary}"></p>
+    <div class="operation-errors" role="alert"><p th:each="issue : ${action.issues}" th:text="${issue.value}"></p></div>
+    <form class="delete-form" method="post" th:action="${'/questions/' + page.values.id}">
+      <input type="hidden" name="operation" value="DELETE">
+      <input type="hidden" name="id" th:value="${action.fields.id}">
+      <input type="hidden" name="operation_token" th:value="${action.fields.operation_token}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <label><input type="checkbox" name="confirm" value="true" th:checked="${action.fields.confirm}" required>質問・回答の削除を確認しました</label>
+      <button type="submit">質問・回答を削除</button>
+    </form>
+  </section>
+  <a class="back" href="/questions">質問回答一覧</a>
 </main></body></html>

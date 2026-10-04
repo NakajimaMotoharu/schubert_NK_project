@@ -1,0 +1,533 @@
+{
+  "id": "PG453-target-selected-v4",
+  "sourceHead": "4d61cc280c863853931df975141f351c3db7b387",
+  "sourceDirty": "PG-D368 Notification CANCEL/Question DELETE, same-core retained operation token, closed form/template/view and independent golden/SQL/HTTP/100 replay PT; BUG646 static-null and BUG647 independent order-oracle correction",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T15:46:46+09:00",
+  "finishedAt": "2026-10-04T15:51:18+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg453_selected.sh target-selected-v4 4d61cc280c863853931df975141f351c3db7b387 exact33Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 346,
+  "suites": 33,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 99,
+      "suites": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 182,
+      "suites": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "testClasses": [
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.question.QuestionCommandServiceTest",
+    "dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.question.QuestionMutationReplayServiceTest",
+    "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+    "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+    "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+    "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+    "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+    "dev.codex.schubert.nk.web.session.NotificationControllerTest",
+    "dev.codex.schubert.nk.web.session.QuestionControllerTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+    "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+    "dev.codex.schubert.nk.web.session.TargetBusinessControllerTest",
+    "dev.codex.schubert.nk.web.session.UserAdminControllerTest",
+    "dev.codex.schubert.nk.web.session.UserBusinessControllerTest",
+    "dev.codex.schubert.nk.web.session.WebSecurityChainTest"
+  ],
+  "coverage": {
+    "NotificationController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 649
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 40
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 170
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1060
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 60
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 280
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 43
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "NotificationBusinessMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionDeleteForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 45
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 10
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "TargetOperationInput": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 228
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 40
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 20
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "CancelForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 45
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 10
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 226
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 46
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionListViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 434
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 38
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 77
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "af11d458e85b38400c28e4ada13b5f3a1ecae97e0d1c5b3142f45fb33621fd35",
+  "sourceDiffSha256": "ab235f25e816f3717c58a3daed4cdf5ebc94d031df4f1022f5083d3c0c9aacd1",
+  "logSha256": "cf0242284ad4c51b9f9256ff217e94e3c73627920579df22b37820ac503ffd3d",
+  "sourceArchive": {
+    "privatePath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg453-target-selected-v4.source.tar",
+    "sha256": "45522d5cc2723d3cffffa5657acb6337b1e052f57de21dcf20fca81034c04422"
+  },
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg453-target-selected-v4-frozen",
+  "testIds": [
+    "PT-TARGET001",
+    "PT-TARGET002",
+    "PT-TARGET003",
+    "PT-TARGET004",
+    "PT-TARGET005",
+    "PT-TARGET006",
+    "PT-TARGET007",
+    "PT-TARGET008",
+    "NTC-BIZ001",
+    "NTC-BIZ002",
+    "NTC-BIZ003",
+    "NTC-BIZ004",
+    "NTC-BIZ005",
+    "NTC-BIZ006",
+    "NTC-BIZ007",
+    "NTC-BIZ008",
+    "QDL-BIZ001",
+    "QDL-BIZ002",
+    "QDL-BIZ003",
+    "QDL-BIZ004",
+    "QDL-BIZ005",
+    "QDL-BIZ006",
+    "QDL-BIZ007",
+    "QDL-BIZ008",
+    "QDL-BIZ009"
+  ],
+  "qa": [
+    "QA-049"
+  ],
+  "bugs": [
+    "BUG-646",
+    "BUG-647"
+  ],
+  "ykt": [
+    "YKT-458",
+    "YKT-459"
+  ],
+  "expected": "083: manual304 whole requests and 48/32/24 byte vectors; RECEIVED-only NTC form; QDL detail-issued one token, same pending/completed UUID/first completed time, full10pending refuse; null/missing/unknown/owner/fault/fatal boundaries; real business API SQL version1 and100calls/99Inbox replays; real HTTP CSRF403/update0,302/replay one update, all50 owner links sorted ID50..1 from UI224 and zero list tokens, independently fixed100Unicode-codepoint summary and escaped body; SQL transaction ownership0 on actual sending thread and all resources0 after futures",
+  "actual": "346PT33suite/FES0/static6zero; changed8 executable classes all line/method/class/branch missed0; actual isolated PostgreSQL/business API and same-core secured host HTTP passed",
+  "before": [
+    {
+      "id": "pg453-target-selected-v1",
+      "accepted": false,
+      "exitCode": 1,
+      "tests": 121,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "limitations": [
+        "Web compile NullAway failed; Web/Batch PT and static/coverage not-run"
+      ],
+      "logSha256": "b02e39791e158eb586137185f52c823c1f21fdba936e783a4807334a640de946",
+      "sourceFilesSha256": "e1e2b018cc2460ab6cca09d6971cdaf2ccb2671f8f0fa6cb428d1b5ecf9a52cf",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg453-target-selected-v1-frozen"
+    },
+    {
+      "id": "pg453-target-selected-v2",
+      "accepted": false,
+      "exitCode": 1,
+      "tests": 301,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "limitations": [
+        "HTTP post not reached; Batch and Web static/coverage not-run"
+      ],
+      "logSha256": "8a18516772f6953762042bd014afa0a6e415179c8165566616f6cc8805df6054",
+      "sourceFilesSha256": "a47c594ecdf219524ecf54b466629b0e1aabcdf862190f51b820a37c4afeb6b9",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg453-target-selected-v2-frozen"
+    },
+    {
+      "id": "pg453-target-selected-v3",
+      "accepted": false,
+      "exitCode": 0,
+      "tests": 344,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "limitations": [
+        "Target Notification branch missed1/line missed2; target coverage gate not accepted"
+      ],
+      "logSha256": "7c4b54f8f6d074fa6ad6154050ea14c4544b096e0f9762234ef3a36972cfe03c",
+      "sourceFilesSha256": "ac96ad5f9d7c98913b9394c8e9d804e6f0a56c01b73997ccb450e7d90996f57b",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg453-target-selected-v3-frozen"
+    }
+  ],
+  "limitations": [
+    "Selected host only, actual Artemis/native/full regression not accepted",
+    "Collector added after selected source capture; grouped fresh full includes it",
+    "Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr removed; no real credential/password/session/cookie/token/context/key/DB dump/provider raw output",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "88433e989c3a8d0b7a634269cfffe086804555545e1931558cc1d00dbcdcdaf8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "c95794530b51a692a1b4d163483b9586e9e6851a7230767c2850ba193c7e948a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "89ef4b176b898092c5ccae486adf938f20edb57ee8e7a135cc89bd27a4a1aaf9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionCommandServiceTest.xml",
+      "sha256": "1dc1e628d7293abce04a793e230b11df22adb3e9326e64e4dcfbc725fcca635d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationServiceTest.xml",
+      "sha256": "317ef5895efe49e2b72ca3636de7141427439fc052fbda43810ed5feca553af0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionMutationReplayServiceTest.xml",
+      "sha256": "bd2bb43bb280b90e2ccc5641fd0e7f944006346139158b085b273352b7acd484"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest.xml",
+      "sha256": "5471b0e849fcc5fd6832d9c829c10c35ab92d3731a5fa63192757022039edd37"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest.xml",
+      "sha256": "9718e2fa692569814402d36b8967b62f97f7c69d820f3aaa9374e89fdbd98c82"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "77ecd5f7616f9cf36cd033f8b9ed33fcbb2f19bfe8a5c69e2a9333a4c885abe0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "428f592ff52c36cbc41e194cb2af34a2c9ac241a2f5b16bbbb8372e98284ebe5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "fea62f22594efa227d9a13547240f57cad89ca16c4a14764ece5ee16dc3ad47a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "67fc73d3f0fdc07718890f4f22ee23e643ff79d51ad44d16ef92db7cb0c24f8d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "4acec98fac7118d33473682cc9c419e583f38769c4af1da6eb65c45e7d604097"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "80478707e2cb8ae129533ee25ec7d7baa57e684201a6b69b58272ef0d3d97dfd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "6dfb6e1b53a5cefede545fe3bfbf838303309c36d5444e4545a21d599b911df3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "2146fe7047daeb9753063190f7e8b7fcb8f06821373417ec768f26a29e924c47"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "2b06f47d092e9f40d1f70a41e89372ce59a707fc20ff13b484e2895a210dd0f7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "5fc7abe610b32cbfb10fb1a22665209085a856188f19c156bcfb8e9983013e68"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.form.TargetOperationFormTest.xml",
+      "sha256": "a8a7cf0c3da81be17a0768ccdce15a8b0c25aa2f19cb495b4abb9a5fc375d4a6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "8c7ae634eaf5dbe86ac036ba28cab1c5846bb4b94ac2ed004f005efbfd957dd9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.form.UserMutationFormTest.xml",
+      "sha256": "26c86da03ae9a22d9151cf16520e23083155e518fd7eeec67b7306362d0f73c3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "592555f488db6c755a4c8c53d790309739d08a6e82e4cdf0ed2a76c8967c1903"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "973d638513c0351d37d9e600f7487918b99b8eeab73f6a5638ed2ea713121d55"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "7928c6f0d99bda53a741dbd349cb76ab9df68ef707a66ce71b48dc95f67b1097"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.NotificationControllerTest.xml",
+      "sha256": "b6ad697018afcf718f9f88a711add5779511bd12b379e2e938d2853a5b6817fb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.QuestionControllerTest.xml",
+      "sha256": "2e3c39583f7a01d4d0d576a5726da719a576ed518c37411dfc8d1777ede7a1d3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest.xml",
+      "sha256": "4dfd839fcf55e37e476f742ca54b95a456c195f9e39cf3c31948732f95bb6fb1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test.xml",
+      "sha256": "22c964efcc345dfb7561fd277a6a9a7d4c1996a959eb4e546a7125750fb078da"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "1231cf762378d4b9d67acdc502b4d3ba0355a19ddbb722ffcf323b0b3f813d40"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.TargetBusinessControllerTest.xml",
+      "sha256": "aad91c4058bd4083c0e39ab7c0f4df7d2f0a099966afeb50646d7202de5027b5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "6d44b820dc8c20281047e229bffc9583e864c7feffe372ac0f85a8376597b340"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.UserBusinessControllerTest.xml",
+      "sha256": "f2cf9bc1c95f207f198a61858234dbfa54846795ef6ad2d4aca78196e8d22159"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG453-target-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "e8783b81299e2e200cf80c3105ecbd1e198d341d0db15bbaceb241dc5443f22a"
+    }
+  ]
+}

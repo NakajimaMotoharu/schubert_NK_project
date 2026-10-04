@@ -13,7 +13,7 @@ import java.util.*;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
-/** SCR022 reference/UI224236/SS313314323332; PG-D350/PT-QRY-HTTP004,005,011,012. */
+/** SCR022/UI224236/SS313314323332; PG-D350368/PT-QRY-HTTP004,005,011,012/QDL-BIZ001,006. */
 @NullMarked
 public final class QuestionListViewModel {
   private static final DateTimeFormatter TIME =
@@ -91,7 +91,9 @@ public final class QuestionListViewModel {
             Map.entry("stateLabel", QuestionDetailViewModel.label(data.answerState())),
             Map.entry("submittedAt", TIME.format(data.submittedAt())),
             Map.entry("answeredAt", data.answeredAt().map(TIME::format).orElse("")),
-            Map.entry("detailHref", "/questions/" + data.questionId().value())));
+            Map.entry("detailHref", "/questions/" + data.questionId().value()),
+            Map.entry(
+                "deleteHref", "/questions/" + data.questionId().value() + "#delete-confirm")));
   }
 
   private String link(int number) {

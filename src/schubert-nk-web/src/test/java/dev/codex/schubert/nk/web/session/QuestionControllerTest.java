@@ -691,7 +691,7 @@ class QuestionControllerTest {
                   .getResponse()
                   .getStatus());
           assertEquals(
-              405,
+              503,
               mvc.perform(post("/questions/1").principal(actor(role)))
                   .andReturn()
                   .getResponse()

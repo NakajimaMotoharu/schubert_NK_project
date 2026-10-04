@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
-/** SCR023 reference/UI224236/SS313314323332; PG-D350/PT-QRY-HTTP006,011. */
+/** SCR023/UI224236/SS313314323332; PG-D350368/PT-QRY-HTTP006,011/QDL-BIZ001,009. */
 @NullMarked
 public final class QuestionDetailViewModel {
   private static final DateTimeFormatter TIME =
@@ -32,6 +32,18 @@ public final class QuestionDetailViewModel {
                 Map.entry("submittedAt", TIME.format(data.submittedAt())),
                 Map.entry("answeredAt", data.answeredAt().map(TIME::format).orElse("")),
                 Map.entry("question", data.questionText()),
+                Map.entry(
+                    "summary",
+                    data.questionText()
+                        .substring(
+                            0,
+                            data.questionText()
+                                .offsetByCodePoints(
+                                    0,
+                                    Math.min(
+                                        100,
+                                        data.questionText()
+                                            .codePointCount(0, data.questionText().length()))))),
                 Map.entry("answer", data.answerText().orElse("")),
                 Map.entry("answerAvailable", data.answerState() == AnswerState.ANSWERED)));
   }
