@@ -219,6 +219,8 @@ SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前�
 
 SSC164（内部接続補足）：Morningのready判定は捕捉Rootと同一のboot/PID1/Invocation/MainPID/startTicks/cgroupを、ordinary移行後もmanager/kernel前後で照合する。UID0 Root認証を流用せず、固定NSS ordinary identity/全groups/五cap0/NNP1/固定mainを独立確認する。管理socketは本人FD inodeのexact127.0.0.1（IPv4及びIPv4-mapped IPv6）のみで、wildcard/::1/他inodeを拒否。HTTP200UPと発行permitのreleaseDigestに一致する保持manifest由来の5値を、同じsocket inode及び同親/API世代の前後検査で認定する。API ready→Web真正Root→Web全業務ready→Caddy/原本完了の既存順序は維持、ready単独を親成功にしない。同M/DB/原本/epoch・元30分budgetを維持、unknown/停止不確定は保全する。詳細PTと各scopeの採取不足は018/311及び456に記録する。
 
+SSC185（2026-10-05、内部TX/所有補足）：保持原本を完了する直前のBackup/Cleanup/Expiry evidenceは、同じ借用DBの短transactionで各後条件を再読する。そのtransaction内のowner callbackはRoot/M/A/原本capability・同ordinary API/Web/Caddy世代/identity/socket/ready・元残budgetの純粋な検査に限り、同ConnectionへのDB再読・commit/rollback・autoCommit変更を再入させない。DB全体のrun整合はevidence再読の前後及び各transactionの外側で独立検査し、transaction内のadvisory/timeout/role/SQL後条件は既存Repositoryで維持する。intent保持中と正規退役後のpeer条件を分け、各phaseのRoot/原本/peer検査をDB外側の整合検査の前後にも行う。別Connectionで旧ownerを代用・guard省略・権限緩和・UNKNOWN正常化は禁止。同DBのtransaction状態を保持する独立stateful試験と、元sourceの実失敗を保全したsame-source fresh回帰/実VM completionを必要とする。RD/UI/業務仕様・Current/DIFは変更しない。
+
 ### 5.2 Spring主要値
 
 | Key | Web | API |

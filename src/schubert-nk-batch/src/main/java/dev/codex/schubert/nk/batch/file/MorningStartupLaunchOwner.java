@@ -130,16 +130,21 @@ final class MorningStartupLaunchOwner {
         started -> {
           var caddy = MaintenanceUnitTermination.create(root, morning, MaintenanceUnit.CADDY);
           require(caddy.quiescentObservation().isPresent());
-          BackupUnitStartClient.RetirementGate live =
+          BackupUnitStartClient.RetirementGate livePeer =
               () -> {
                 budget.requireWithin();
+                root.recheck(morning);
                 original.verify();
-                database.recheckConsistent(state.activation().run());
                 for (var service : started) {
                   verifyCurrentLaunch(root, morning, issued, service.service(), service.captured());
                   require(service.readiness().ready());
                 }
+                root.recheck(morning);
               };
+          var liveChecks =
+              new MorningCompletionChecks(
+                  livePeer, () -> database.recheckConsistent(state.activation().run()));
+          BackupUnitStartClient.RetirementGate live = liveChecks::verify;
           live.verify();
           String previousCaddy = MorningCaddyReadiness.coldInvocation(root, morning);
           long caddyDeadline =
@@ -184,23 +189,27 @@ final class MorningStartupLaunchOwner {
             throw failure;
           }
           var confirmedProxy = proxy;
+          var pendingChecks =
+              new MorningCompletionChecks(
+                  () -> {
+                    livePeer.verify();
+                    require(confirmedProxy.ready());
+                  },
+                  () -> database.recheckConsistent(state.activation().run()));
           BackupUnitStartClient.RetirementGate pending =
               () -> {
-                live.verify();
-                require(confirmedProxy.ready());
+                pendingChecks.verify();
                 evidence.verify(
                     database,
                     java.time.Clock.systemUTC(),
-                    () -> {
-                      live.verify();
-                      return budget.remainingNanos();
-                    });
+                    pendingChecks.ownerGuard(budget::remainingNanos));
+                pendingChecks.verify();
               };
-          BackupUnitStartClient.RetirementGate afterRetirement =
+          BackupUnitStartClient.RetirementGate retiredPeer =
               () -> {
                 budget.requireWithin();
+                root.recheck(morning);
                 original.verify();
-                database.recheckConsistent(state.activation().run());
                 for (var service : started) {
                   verifyCurrentLaunch(
                       root, morning, issued, service.service(), service.captured(), false);
@@ -209,6 +218,10 @@ final class MorningStartupLaunchOwner {
                 require(confirmedProxy.ready());
                 root.recheck(morning);
               };
+          var retiredChecks =
+              new MorningCompletionChecks(
+                  retiredPeer, () -> database.recheckConsistent(state.activation().run()));
+          BackupUnitStartClient.RetirementGate afterRetirement = retiredChecks::verify;
           // Registered BEFORE original/DB close; no expired DB/original capability is used there.
           var stopped = new java.util.concurrent.atomic.AtomicBoolean();
           onOuterFailure.accept(
@@ -238,10 +251,8 @@ final class MorningStartupLaunchOwner {
             evidence.verify(
                 database,
                 java.time.Clock.systemUTC(),
-                () -> {
-                  afterRetirement.verify();
-                  return budget.remainingNanos();
-                });
+                retiredChecks.ownerGuard(budget::remainingNanos));
+            afterRetirement.verify();
             var requested =
                 state.completion().isPresent()
                     ? state.completion().orElseThrow()

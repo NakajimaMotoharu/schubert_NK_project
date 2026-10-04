@@ -1,0 +1,114 @@
+{
+  "id": "PG462-timeout-native-v1",
+  "collectedAt": "2026-10-04T21:05:46.183573+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "d30d9fa3d75782a097689d58a18f7a86adec5464",
+  "sourceDirtyAtCollection": true,
+  "productionSource": "00785cf0698aecf1ace1e60b87e8849639e85b97",
+  "release": "0.1.0-PG461",
+  "releaseDigest": "1b7688de234ad15e39ffe578060019ff61fc21efd3c8e0c5aa62c39c95959b3c",
+  "boot": "e07aa706-1acd-4e65-b309-d7f330f79d54",
+  "originalParent": {
+    "invocation": "a93cd4cdb41a4709af0e976b37389598",
+    "result": "timeout",
+    "exitCode": 143,
+    "normalReturnClaimed": false
+  },
+  "commands": [
+    "ssh sudo python3 - < pg462_capture_timeout_private.py",
+    "javac -Werror -Xlint:all Pg462TimeoutIsolation.java Pg462TimeoutIsolationTest.java",
+    "java Pg462TimeoutIsolationTest",
+    "java Pg462TimeoutRetirementTest",
+    "ssh sudo java Pg462TimeoutIsolation verify/isolate",
+    "ssh sudo java Pg462TimeoutRetirement verify/retire"
+  ],
+  "actualToolExits": {
+    "capture": 0,
+    "isolationVerify": 0,
+    "isolation": 0,
+    "retirementVerify": 0,
+    "retirement": 0
+  },
+  "independentChecks": {
+    "isolationAssertions": 60,
+    "retirementAssertions": 10,
+    "oracle": "Explicit timeout143/foreign30/null/authority/23 initial and 21 final names; golden NKLAUNCH1 and independently shell SHA256 owner input"
+  },
+  "environment": {
+    "hostOS": "Linux 7.0.0-38-generic",
+    "hostGuestJdk": "25.0.4",
+    "guestOS": "Ubuntu 26.04",
+    "postgresql": "18.6"
+  },
+  "actual": "All9 terminal, old normal return UNKNOWN; new M/A/DB operator returned normally. Original pending/full301 rows/business/Backup/old16+current4 preserved. Canonical same-permit invalidate/quarantine/typed retirement only. No DDL/new permit/start/deploy/DONE.",
+  "privatePreservation": "Guest pg462-parent-timeout-private/pg462-timeout-retirement root0700; heap and dumps excluded",
+  "bugs": [
+    "BUG-693",
+    "BUG-544"
+  ],
+  "ssc": [
+    "SSC-185",
+    "SSC-168",
+    "SSC-174"
+  ],
+  "qa": [
+    "QA-047"
+  ],
+  "ykt": [
+    "YKT-497",
+    "YKT-388"
+  ],
+  "sourceHashes": {
+    "tools/quality/vm/050_s1/Pg462TimeoutIsolation.java": "4ec75297380b2d6be4cce0b0bf5cb80bf4655d0b079955e3a731bb797dda745d",
+    "tools/quality/vm/050_s1/Pg462TimeoutIsolationTest.java": "c273f08c18e6211dea283a70827598b60641e4ce48e20bb6e585fa77e91ade26",
+    "tools/quality/vm/050_s1/Pg462TimeoutRetirement.java": "751430ac1e6546ecdfcd61f1abd0e21b995a696232fa5d2b609a5e379796effd",
+    "tools/quality/vm/050_s1/Pg462TimeoutRetirementTest.java": "12f31fe08d90d99d3e124a4c03d4ef080c137942fb21c6fc15aecf00f2da048b"
+  },
+  "classHashes": {
+    "Pg462TimeoutIsolation.class": "449072aa01378894932b8c198d6528f383703f4acccae3ea2f1dc8301d4bcec0",
+    "Pg462TimeoutRetirement.class": "8ccbe0db212398f3d38848078cee9aeabfbd9b3b63638148d00fac8b8d6fdf92"
+  },
+  "logs": {
+    "pg462-timeout-capture-v1.log": {
+      "sha256": "0cceee75b942d478f34fe6fe8c845ef4d13543f490a7e85297251b63e51d3ee9",
+      "exitCode": 0,
+      "expectedActualFinalLine": "PG462_TIMEOUT_CAPTURED parentTimeout143=true ordinaryApiWebCaddyStillRunning=true privatePreservation=true normalExitClaimed=false startStopIssued=false"
+    },
+    "pg462-isolation-verify-v1.log": {
+      "sha256": "d68f6245c832b9c036ee348733038ff0cf0fda36d6557324822351b62484415b",
+      "exitCode": 0,
+      "expectedActualFinalLine": "PG462_ISOLATION verifyOnly=true rows301OriginalBackupPreserved=true intentPermitMutation0=true oldNormalReturnClaimed=false newOwnedScopesReturnedNormally=true"
+    },
+    "pg462-isolation-native-v1.log": {
+      "sha256": "3f33dda1ea6ea14682fe9b9979be62a0087ed764f36826598817e0d02839f4ab",
+      "exitCode": 0,
+      "expectedActualFinalLine": "PG462_ISOLATION all9Terminal=true rows301OriginalBackupPreserved=true intentPermitMutation0=true oldNormalReturnClaimed=false newOwnedScopesReturnedNormally=true"
+    },
+    "pg462-retirement-verify-v1.log": {
+      "sha256": "03af75c14e62e19e97338dd9ae0c187766c1c628fc6426b64df8b8777cad1577",
+      "exitCode": 0,
+      "expectedActualFinalLine": "PG462_RETIREMENT verifyOnly=true rows301OriginalBackupPreserved=true all9Terminal=true oldNormalReturnClaimed=false newOwnedScopesReturnedNormally=true"
+    },
+    "pg462-retirement-native-v1.log": {
+      "sha256": "9e2d21907308563760fc278efac78b8fc978856dcfd6da8f9d9722497bbe0e87",
+      "exitCode": 0,
+      "expectedActualFinalLine": "PG462_RETIREMENT currentInvalid=true typedIntentsRetired=true namespace21=true rows301OriginalBackupPreserved=true all9Terminal=true oldNormalReturnClaimed=false newOwnedScopesReturnedNormally=true"
+    }
+  },
+  "files": {
+    "pg462-timeout-capture-v1.log.summary.txt": "0cceee75b942d478f34fe6fe8c845ef4d13543f490a7e85297251b63e51d3ee9",
+    "pg462-isolation-verify-v1.log.summary.txt": "9b0304e7bf75a41fc61e6dc67fb37f83492ae42701902217602c42b5300984e7",
+    "pg462-isolation-native-v1.log.summary.txt": "5e339c72934665266c91281f26ed6ed71316d6546cbd51ad1440e63277152df3",
+    "pg462-retirement-verify-v1.log.summary.txt": "f617b1811016f43c7430424cc7e7a9f86286b898ca243c103623d1b26bc7e473",
+    "pg462-retirement-native-v1.log.summary.txt": "5e17ecdb930c627b04302ed44ee5c6873b9b86f72262355326b23c9bb3e063b0"
+  },
+  "coverageQualified": false,
+  "formal": false,
+  "limits": [
+    "Not old ownership/close resolution",
+    "Not patched Production native completion",
+    "No global coverage100 or CHR full gate",
+    "Tool source hash post-run only; pre-run class stage byte-hash checked separately"
+  ],
+  "redaction": "Fixed allowlisted summary lines and hashes only; private DB/original/heap/credentials/tokens omitted"
+}

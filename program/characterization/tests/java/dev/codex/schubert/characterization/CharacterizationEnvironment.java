@@ -434,7 +434,7 @@ final class CharacterizationEnvironment implements AutoCloseable {
     return Integer.parseInt(matcher.group(1));
   }
 
-  private static List<Credential> loadCredentials(Path path) {
+  static List<Credential> loadCredentials(Path path) {
     try {
       List<Credential> result = new ArrayList<>();
       String user = null;

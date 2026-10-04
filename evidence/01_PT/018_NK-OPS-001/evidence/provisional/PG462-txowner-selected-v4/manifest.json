@@ -1,0 +1,155 @@
+{
+  "id": "PG462-txowner-selected-v4",
+  "collectedAt": "2026-10-04T20:56:07.968844+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "d30d9fa3d75782a097689d58a18f7a86adec5464",
+  "sourceDirtyAtCollection": true,
+  "sourceHashesPostRun": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecksTest.java": "4f5b6ae7699d47668d721d87f0296c43eee10551ed07d1dfbf9bced11fc81ec7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecks.java": "ae9cd894f2b3144101753800fe26ad6205e4e3381e9e3043f67b8cc17810280d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java": "f921efbb3eaf0dcbc18f4cd1b3a4d34f3a4f978806a738d8e315d353d536025b"
+  },
+  "startedAt": "2026-10-05T05:43:11+09:00",
+  "completedAt": "2026-10-05T05:44:50+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg462_txowner_selected_v3.sh",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "web": {
+      "tests": 4,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "batch": {
+      "tests": 30,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    }
+  },
+  "tests": 61,
+  "suites": 9,
+  "independentOracle": "Stateful TX autoCommit=false rejects former combined guard; pure owner leaves TX untouched; literal peer-DB-peer ordering and fail/null guards. A01 all baseline fields exact except approved DIF001/QA045 title.",
+  "coverageNewHelper": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 36
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 12
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 4
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 4
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0,
+      "basis": "Class and all methods have no instrumented branch instructions; linear helper, not global coverage100"
+    }
+  },
+  "coverageQualified": false,
+  "formal": false,
+  "nativeA01": {
+    "productionSource": "00785cf0698aecf1ace1e60b87e8849639e85b97",
+    "run": "PG462-native-a01-v1",
+    "exitCode": 0,
+    "casePass": true,
+    "baselineSha256": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993",
+    "wholeParentAccepted": false,
+    "otherCasesNotRun": true,
+    "logSha256": "3ed38d9102796d85cc73c379447d22c08b7cfaa31a536dcf329690ce59dbcaf1"
+  },
+  "ssc": [
+    "SSC-185"
+  ],
+  "bugs": [
+    "BUG-693",
+    "BUG-692"
+  ],
+  "ykt": [
+    "YKT-497",
+    "YKT-496"
+  ],
+  "previousFailures": [
+    {
+      "v1": 1,
+      "cause": "Batch-only stale installed dependencies; no tests run"
+    },
+    {
+      "v2": 1,
+      "cause": "Compile Guard.check void contract; batch tests not run"
+    }
+  ],
+  "limits": [
+    "Selected targets append existing exec; no whole-source coverage100",
+    "No fabricated pre-run all-source proof",
+    "Parent source00785 timeout143 retained; patched native completion not run",
+    "Formal run24/1964PT/53scope unchanged"
+  ],
+  "environment": {
+    "os": "Linux 7.0.0-38-generic",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15"
+  },
+  "privateLogSha256": "d781814d47ca9431b87f056c511f31d6655678117bb72a53960bc9475e53573d",
+  "redaction": "Only JUnit testcase/summary and already-redacted A01; no properties, stdout, heap, DB dump, tokens, credentials",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "e9a0a47f0a8dd2b2399c067127e52fec887e2c3325076951a3ecdb0fdec9cce5",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "abb41fe33666ae9104155b4ffe2320238c6e1ae6033b28675588975313286842",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "bb1b2b7a80d1012f3227e41bb4115f8603c8dca37a87c271c1de32bc185cc15d",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "1bacacabdccca15e3b7e15932815d927a37e89121656dddb369f68d8dbe908bd",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "45284d8872138411476eb535f2657d4d8c9bea43934de9f85f174656db4270d8",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest.xml": "8b2ad13e90bdb2400d4baaeea8ae2a88f60fd010d8d00f1619ebe57607ecc799",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest.xml": "cd4debad7cb1746beaa6c01fc20978734690ffe28af9e1ca5eb79d8b6d0364b5",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "a1041b88ea213e09089bc4fd2124dc36f0984a6560b0a050aea7585f4086f389",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml": "a974df4c4400ff8d49d2c1c99ca0e5be7cb2bb0c5506cb14e936ff9b57e61cc5",
+    "native/CHR-A01.json": "3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558"
+  }
+}
