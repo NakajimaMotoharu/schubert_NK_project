@@ -102,6 +102,13 @@ SSC178内部配備補足（2026-10-04）：初期IP/internal CAの公開入口�
 
 固定configは `/etc/caddy/Caddyfile` root:caddy0640・single-link・no ACL、祖先はroot:root0700/0750/0755の固定directory（配備時に既定0755を維持）。公開CAだけを `/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt` から読む。`/var`及び`/var/lib`はroot:root、caddy以下はcaddy:caddy、directory0700/0750/0755・no ACL、証明書0640又は0644・single-link・上限64KiBとする。保持inodeの前後同一性と証明書のCA属性/有効期限を確認し、そのCAだけをtrust anchorとして通常hostname検証を維持する。private key・credentialを親の証跡へ取得せず、TLS検証無効化、未知CA代入、旧/run復元をしない。署名candidateのconfig template/BOMを確定してから正規配備し、未配備distributionのdefault profileを合格にしない。実VM/coverage/正式認定は別途未完了。
 
+SSC180（2026-10-05、BUG680/YKT485）：Caddyのcoldは「一度も起動していない」ことと同義ではない。delivery前の固定profileに加え、真正managerの `Result,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic` を固定追加読取し、既存12field/全cgroupの型付きquiescent Observationとの同Invocation・同停止状態を照合する。固定config/Root親/当M・DB・原本・元budgetは継続所有する。前後同じmanager・同terminal・同kernelが必要で、未実行と正常停止履歴は次の二ケースだけとする。
+
+- 初回no-history：inactive/dead、MainPID/ControlPID0、Job空、Invocation空、Result=success/ExecMainCode=0/ExecMainStatus=0、start/exit monotonic0。固定単一validate/runの実効設定はあるが両Exec entryのstart/stopはn/a・pid0・code(null)・status0/0であり、実validate成功を捏造しない。
+- normal-history：inactive/dead、各PID0/Job空、全kernel空、非zero32hex Invocation。Result=success/ExecMainCode=1/ExecMainStatus=0、start monotonic>0/exit>=start、単一validateとdaemonの真正Exec entryがいずれもcode=exited/正常0・実start/end非n/a・非zero PIDである。実systemdの正常0表現はstatus=0、既存fixture互換0/0も値0だけを受け、signal/非zero/未知表示・異常履歴・矛盾・driftは拒否する。
+
+捕捉したcoldの前Invocationを同親のCaddy start factory/preflightまで拘束し、CLI発行前に同coldとwhole-kernelを再照合する。起動後のreadyは当captureと**異なるfresh Invocation**で、Result=success/未終了code0/status0・start>0/exit0、真正validate正常0、既存同manager/kernel/ordinary identity/本人FD55160/TLS200の前後検査を満たすこと。旧Invocationをfreshへ使わず、start受付だけの成功認定、reset-failedによる履歴抹消、旧/run復元・旧permit再利用はしない。start/stop各30秒、親30分及び失敗時Caddy→Web→APIの逆順停止・不明時所有保持は変更しない。RD/UI/画面・電文・業務の変更を伴わない内部再起動境界の補足であり、設計公開は実装/PT/native/正式完了とは区別する。
+
 ## 4. Systemd dependency・unit設定
 
 SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止へ採用しない。NK専用非起動drop-inで `SendSIGKILL=no` と `TimeoutStopSec=30s` を設定し、daemon-reload後の実効 Id/LoadState/KillMode/SendSIGKILL を親の固定8対象と同じ閉集合で確認する。既定Caddyを実測せずにpolicy合格としない。policy確認はstop client/全cgroup終端/Artemis journalの代用でなく、未配置Unitのfake/alias禁止を維持する。
