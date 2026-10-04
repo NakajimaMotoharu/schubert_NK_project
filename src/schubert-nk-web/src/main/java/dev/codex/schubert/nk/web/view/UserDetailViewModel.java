@@ -47,8 +47,9 @@ public final class UserDetailViewModel {
     Objects.requireNonNull(data, "data");
     if (actor.role() != UserRole.ADMIN
         || !requested.equals(data.userId())
-        || data.activeSessionCount() > 2
-        || data.version() < 1) throw new IllegalArgumentException("invalid user detail projection");
+        || data.activeSessionCount() > 2)
+      throw new IllegalArgumentException("invalid user detail projection");
+    // BUG639/YKT452: the typed N9 version already permits 0, including newly created users.
     return new UserDetailViewModel(actor, data);
   }
 

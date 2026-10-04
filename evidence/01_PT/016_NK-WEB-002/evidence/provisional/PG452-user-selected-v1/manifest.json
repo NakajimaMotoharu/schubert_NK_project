@@ -1,0 +1,339 @@
+{
+  "id": "PG452-user-selected-v1",
+  "sourceHead": "1034d60a329a4f1c0f4d7e20480408ce29e124db",
+  "sourceDirty": "PG-D366 atomic visible form issuance and independent group tests; BUG639 zero Version correction and literal positive test; no full User HTTP assembly yet",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T13:16:41+09:00",
+  "finishedAt": "2026-10-04T13:20:40+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg452_selected.sh user-selected-v1 1034d60a329a4f1c0f4d7e20480408ce29e124db exact22Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "testClasses": [
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+    "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+    "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+    "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+    "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+    "dev.codex.schubert.nk.web.session.UserAdminControllerTest",
+    "dev.codex.schubert.nk.web.session.WebSecurityChainTest"
+  ],
+  "exitCode": 0,
+  "tests": 217,
+  "suites": 22,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 51,
+      "suites": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 101,
+      "suites": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "UserAdminController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 283
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 82
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 202
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SessionOperationToken": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 74
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SessionOperationTokenLifecycle": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 400
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 38
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "a610998d5ebcbf85cd00006a11886850e308d7efdfd1253dff404a87739049b4",
+  "sourceDiffSha256": "d846dd57002ee039622c8589c8f31505984c6b7b8eb7a33dd0f85f2decfae7f6",
+  "logSha256": "6008710901fd53aa7dacbd4f2708e3a29584239ea42f8ee33f3732863352439a",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-selected-v1-frozen",
+  "testIds": [
+    "TOKV209A",
+    "TOKV209B",
+    "TOKV209C",
+    "TOKV209D",
+    "TOKV209E",
+    "PT-USER-DETAIL009",
+    "TOKV207208 existing",
+    "PT-USER-DETAIL001..008 existing"
+  ],
+  "qa": [
+    "QA-049"
+  ],
+  "ssc": [
+    "SSC-177"
+  ],
+  "bugs": [
+    "BUG-639",
+    "BUG-640"
+  ],
+  "ykt": [
+    "YKT-452",
+    "YKT-453"
+  ],
+  "expected": "Atomic actual visible form group; pending0..10/need1..4; no UUID or partial pending on shortage; only oldest consumed retirement with stable ties; original/group collision whole rollback; actual commit/close unknown reread;100competing groups5success95conflict/10UUID/10pending; explicit null and deleted boundaries; literal UDT320 valid Version0/max and no ID/active count weakening",
+  "actual": "217PT/22suite/FES0/static6zero; changed and bound4 executable classes B68/L206/M33/C4 all missed0; original and 100 parallel SQL postconditions passed; Version0 direct display passed",
+  "before": [
+    {
+      "id": "PG452-user-before-v1",
+      "accepted": false,
+      "exitCode": 1,
+      "executedTests": 174,
+      "failures": 1,
+      "errors": 2,
+      "skipped": 0,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "d3d59bec39be580b386df479263a54fc3bae29fde28a58ce8c475f55beb462b4",
+      "sourceFilesSha256": "f3d5ffdb751292018ed54c6c05a59e4356d2d33f3efffd7865f9313772e306a6",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-before-v1-frozen"
+    }
+  ],
+  "redaction": "No JUnit properties/stdout/stderr, provider messages, raw logs, real credentials/cookie/context/token/key/dump",
+  "limitations": [
+    "Selected host session/User reference/API/PostgreSQL and independent JMS fixture only; no actual Artemis or native proof",
+    "Full User new/4mutation HTTP assembly and same-group full regression are still pending; this collector was added after frozen selection",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "a01788674b333a78d396f2ca701be8ca0e7f8e713e381df83ba01f6ba0c27060"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "2457efe8b0194cb8499382dfe64c69d0bc94e978a3e0f2bb2f53dec08360be87"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "6b6f1c9df2adec26d2c482d687d11285ea65171214f7b6da730f7365d9891a02"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "473c1f0cfa81b28080546068f80333b5e01b6e0c6f118c6842087b76b62008dd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "15741134f5a47787bee8b380fd0dbd1ed947487811650c3a3d96d409ec443550"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "1cd4f96a4eb5f33a17729db7b1b84a72ba0e4ddd0742e855c4621cca2de4363a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "75387af52c2e222f1497b18bc2d657151abc7c943f1c1fbc724bea153bcd52e7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "af7057f04929b98b12886b30e71d34d9291ad0251c51dafff2b29dd64f76d860"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "18ad147bf3305b26d1d6b9895a02f3437751338ca2a00be5a23b903299621742"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "fc0db7d92396fefb69b6ed4582d9b48d676a64f212f938d047cdc8adeac9587d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "018cb0adc4ae65201eb21492e5caedbee80e0e5a88e6c498eed440e66741f87e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "b48beaeeadca8d739e0c8b6671f6d29f89675d690d04ea61e497b38e6ab5a190"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "1192391c6d7613f63c60d5f193b78f53e4873b2d5a0743bf0cc742ab31403c73"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.form.UserMutationFormTest.xml",
+      "sha256": "fddadcf746e7ad0d0773c85ac5e987ca52a7868feaccbf002efa8f6b43e393fe"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "d356b0acc2390be17cbf7866bcd4c8b8894b235e236df6271519861b87a3aa01"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "372d39c4cee96d72eafa116aea984b39d55f25148b5297291685a04863d28b0e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "d708622188be7ff961ab351e40a19920e0c811357c6f84b59a99473886e1ca04"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest.xml",
+      "sha256": "8d51b6d4b910634fbd6a357b468231ffa2fa2f0852a6c7900fefd3bcae475bdb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test.xml",
+      "sha256": "2ef18cb51a6c8999fbbf7947b8933501a1b78251eb264b68438a3e9b4570bf8a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "8b04ec2797ccb800c09bff6d7328ae981883638ad9f2391f6563ffb8369b313b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "19b17c0d742bcd8ef585371e4e84fdcf77cc53e2554ccae584a23f4e500b4f25"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "db2e2fdc7a4f04141082409b703783456d279ffbadb1bb9b54c7fa918d0b52fd"
+    }
+  ]
+}

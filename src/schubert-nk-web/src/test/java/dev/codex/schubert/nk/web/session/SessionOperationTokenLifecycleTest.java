@@ -54,6 +54,209 @@ class SessionOperationTokenLifecycleTest {
   }
 
   @Test
+  void tokv209aExactCapacityNeverPartiallyPublishesOrGeneratesUuid() throws Exception {
+    for (int before = 0; before <= 10; before++)
+      for (int count = 1; count <= 4; count++)
+        try (var f = new Fixture(db)) {
+          reset(); // BUG640: fixed identity/nonce fixture requires independent subcase rows.
+          f.clock.value = NOW;
+          var session = f.repository.create();
+          var original = pending(before);
+          f.repository.mutate(session.sessionId(), current -> tokens(current, original));
+          var calls = new AtomicInteger();
+          var lifecycle = service(f, calls);
+          var purposes = List.of("USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01").subList(0, count);
+          if (before + count <= 10) {
+            var issued = lifecycle.issueForForms(session.sessionId(), purposes);
+            assertEquals(purposes, issued.stream().map(SessionOperationToken::purpose).toList());
+            assertEquals(count, calls.get());
+            assertEquals(
+                before + count,
+                f.repository
+                    .find(session.sessionId())
+                    .orElseThrow()
+                    .attributes()
+                    .operationTokens()
+                    .size());
+            assertThrows(UnsupportedOperationException.class, issued::clear);
+          } else {
+            assertThrows(
+                OperationTokenConflictException.class,
+                () -> lifecycle.issueForForms(session.sessionId(), purposes));
+            assertEquals(0, calls.get());
+            assertEquals(
+                original,
+                f.repository
+                    .find(session.sessionId())
+                    .orElseThrow()
+                    .attributes()
+                    .operationTokens());
+          }
+          assertEquals(0, f.live.get());
+        }
+  }
+
+  @Test
+  void tokv209bOnlyRequiredConsumedOldestWithStableTieOrderRetire() throws Exception {
+    try (var f = new Fixture(db)) {
+      f.clock.value = NOW;
+      var session = f.repository.create();
+      var original = new ArrayList<>(pending(5));
+      for (int n = 6; n <= 10; n++) {
+        int seconds =
+            switch (n) {
+              case 6 -> 3;
+              case 7, 8 -> 2;
+              case 9 -> 1;
+              default -> 4;
+            };
+        original.add(
+            new SessionOperationToken(
+                "QSBREQ01", new UUID(0, n), NOW, Optional.of(NOW.plusSeconds(seconds))));
+      }
+      f.repository.mutate(session.sessionId(), current -> tokens(current, original));
+      f.clock.value = NOW.plusSeconds(5);
+      var calls = new AtomicInteger();
+      var issued =
+          service(f, calls)
+              .issueForForms(
+                  session.sessionId(), List.of("USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01"));
+      assertEquals(
+          List.of(101L, 102L, 103L, 104L),
+          issued.stream().map(t -> t.token().getLeastSignificantBits()).toList());
+      assertTrue(
+          issued.stream()
+              .allMatch(t -> t.issuedAt().equals(NOW.plusSeconds(5)) && t.completedAt().isEmpty()));
+      var retained =
+          f.repository.find(session.sessionId()).orElseThrow().attributes().operationTokens();
+      assertEquals(
+          List.of(1L, 2L, 3L, 4L, 5L, 10L, 101L, 102L, 103L, 104L),
+          retained.stream().map(t -> t.token().getLeastSignificantBits()).toList());
+      assertEquals(original.getLast(), retained.get(5));
+      assertEquals(4, calls.get());
+      assertEquals(0, f.live.get());
+    }
+  }
+
+  @Test
+  void tokv209cOriginalAndGroupUuidCollisionsRollbackWholeList() throws Exception {
+    for (long duplicate : List.of(1L, 101L))
+      try (var f = new Fixture(db)) {
+        reset();
+        f.clock.value = NOW;
+        var session = f.repository.create();
+        var original = pending(1);
+        f.repository.mutate(session.sessionId(), current -> tokens(current, original));
+        var calls = new AtomicInteger();
+        var lifecycle =
+            new SessionOperationTokenLifecycle(
+                f.repository,
+                f.clock,
+                () -> new UUID(0, calls.incrementAndGet() == 1 ? 101 : duplicate));
+        assertThrows(
+            SessionStoreException.class,
+            () -> lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+        assertEquals(2, calls.get());
+        assertEquals(
+            original,
+            f.repository.find(session.sessionId()).orElseThrow().attributes().operationTokens());
+        assertEquals(0, f.live.get());
+      }
+    for (String failure : List.of("connection.commit", "connection.close"))
+      try (var f = new Fixture(db)) {
+        reset();
+        f.clock.value = NOW;
+        var session = f.repository.create();
+        var calls = new AtomicInteger();
+        f.failure = failure;
+        assertThrows(
+            SessionStoreException.class,
+            () ->
+                service(f, calls)
+                    .issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+        assertTrue(f.hit);
+        f.failure = "";
+        assertEquals(
+            failure.equals("connection.close") ? 2 : 0,
+            f.repository
+                .find(session.sessionId())
+                .orElseThrow()
+                .attributes()
+                .operationTokens()
+                .size());
+        assertEquals(0, f.live.get());
+      }
+  }
+
+  @Test
+  void tokv209dOneHundredCompetingGroupsRespectSameRowAtomicCapacity() throws Exception {
+    try (var f = new Fixture(db)) {
+      f.clock.value = NOW;
+      var session = f.repository.create();
+      var calls = new AtomicInteger();
+      var lifecycle = service(f, calls);
+      try (var executor = Executors.newFixedThreadPool(8)) {
+        var jobs = new ArrayList<Callable<Boolean>>();
+        for (int n = 0; n < 100; n++)
+          jobs.add(
+              () -> {
+                try {
+                  lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01"));
+                  return true;
+                } catch (OperationTokenConflictException capacity) {
+                  return false;
+                }
+              });
+        int accepted = 0;
+        for (var result : executor.invokeAll(jobs, 30, TimeUnit.SECONDS)) {
+          assertFalse(result.isCancelled());
+          if (result.get()) accepted++;
+        }
+        assertEquals(5, accepted);
+      }
+      var retained =
+          f.repository.find(session.sessionId()).orElseThrow().attributes().operationTokens();
+      assertEquals(10, retained.size());
+      assertEquals(10, retained.stream().map(SessionOperationToken::token).distinct().count());
+      assertEquals(10, calls.get());
+      assertTrue(retained.stream().allMatch(t -> t.completedAt().isEmpty()));
+      assertEquals(0, f.live.get());
+    }
+  }
+
+  @Test
+  void tokv209eNullMissingAndUnknownGroupBoundariesBeforeUuid() throws Exception {
+    try (var f = new Fixture(db)) {
+      f.clock.value = NOW;
+      var session = f.repository.create();
+      var calls = new AtomicInteger();
+      var lifecycle = service(f, calls);
+      assertThrows(
+          NullPointerException.class, () -> lifecycle.issueForForms(session.sessionId(), null));
+      assertThrows(
+          NullPointerException.class,
+          () -> lifecycle.issueForForms(session.sessionId(), Arrays.asList((String) null)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> lifecycle.issueForForms(session.sessionId(), List.of()));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> lifecycle.issueForForms(session.sessionId(), Collections.nCopies(11, "USTREQ01")));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> lifecycle.issueForForms(session.sessionId(), List.of("UNKNOWN")));
+      assertThrows(
+          NullPointerException.class, () -> lifecycle.issueForForms(null, List.of("USTREQ01")));
+      f.repository.invalidate(session.sessionId());
+      assertThrows(
+          OperationTokenConflictException.class,
+          () -> lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+      assertEquals(0, calls.get());
+      assertEquals(0, f.live.get());
+    }
+  }
+
+  @Test
   void tokv207IssueRequireCompleteFirstWriteAndAllSuccessCodes() throws Exception {
     try (var f = new Fixture(db)) {
       f.clock.value = NOW;

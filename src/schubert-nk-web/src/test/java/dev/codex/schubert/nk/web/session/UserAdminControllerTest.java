@@ -899,13 +899,32 @@ class UserAdminControllerTest {
   }
 
   @Test
+  void detail009ZeroAndMaximumVersionAreValidIndependentWireValues() throws Exception {
+    for (long version : List.of(0L, 999999999L))
+      try (var f = new Fixture()) {
+        f.detailVersion = version;
+        var model = new ExtendedModelMap();
+        var response = new MockHttpServletResponse();
+        assertEquals(
+            "admin/user-detail",
+            f.controller.detail(42, actor(UserRole.ADMIN), model, raw(), response));
+        assertEquals(200, response.getStatus());
+        assertEquals(
+            version,
+            assertInstanceOf(UserDetailViewModel.class, model.get("page"))
+                .getValues()
+                .get("version"));
+        f.erased();
+      }
+  }
+
+  @Test
   void detail005ProjectionRejectionsDoNotRepairResponse() throws Exception {
-    for (int kind = 0; kind < 4; kind++)
+    for (int kind = 0; kind < 3; kind++)
       try (var f = new Fixture()) {
         if (kind == 0) f.detailId = 43;
         if (kind == 1) f.detailSessions = 3;
-        if (kind == 2) f.detailVersion = 0;
-        if (kind == 3)
+        if (kind == 2)
           f.responder =
               (id, bytes) -> {
                 var reply = f.standard(id, bytes);

@@ -35,38 +35,55 @@ public final class SessionOperationTokenLifecycle {
 
   /** Called for an explicit new form, not a retry. Full pending capacity generates no UUID. */
   public SessionOperationToken issue(WebSessionId session, String purpose) {
-    validate(purpose, new UUID(0, 0));
-    var issued = new AtomicReference<Optional<SessionOperationToken>>(Optional.empty());
+    return issueForForms(session, List.of(purpose)).getFirst();
+  }
+
+  /**
+   * SSC177/PG-D366: one explicit screen's actual visible forms, one fresh short transaction. No
+   * partially saved undisplayed pending tokens; capacity refusal creates no UUID.
+   */
+  public List<SessionOperationToken> issueForForms(WebSessionId session, List<String> purposes) {
+    var required = List.copyOf(purposes);
+    if (required.isEmpty() || required.size() > 10)
+      throw new IllegalArgumentException("invalid operation form count");
+    for (String purpose : required) validate(purpose, new UUID(0, 0));
+    var issued = new AtomicReference<List<SessionOperationToken>>(List.of());
     mutate(
         session,
         current -> {
           var tokens = new ArrayList<>(current.operationTokens());
-          if (tokens.size() == 10) {
-            int oldest = -1;
-            for (int index = 0; index < tokens.size(); index++) {
-              var completion = tokens.get(index).completedAt();
-              if (completion.isPresent()
-                  && (oldest < 0
-                      || completion
-                          .orElseThrow()
-                          .isBefore(tokens.get(oldest).completedAt().orElseThrow())))
-                oldest = index;
+          long pending = tokens.stream().filter(token -> token.completedAt().isEmpty()).count();
+          if (pending + required.size() > 10) return current;
+          var candidates = new ArrayList<SessionOperationToken>();
+          for (String purpose : required) {
+            if (tokens.size() == 10) {
+              int oldest = -1;
+              for (int index = 0; index < tokens.size(); index++) {
+                var completion = tokens.get(index).completedAt();
+                if (completion.isPresent()
+                    && (oldest < 0
+                        || completion
+                            .orElseThrow()
+                            .isBefore(tokens.get(oldest).completedAt().orElseThrow())))
+                  oldest = index;
+              }
+              tokens.remove(oldest);
             }
-            if (oldest < 0) return current;
-            tokens.remove(oldest);
+            var candidate =
+                new SessionOperationToken(
+                    purpose, Objects.requireNonNull(ids.get(), "operation UUID"), now());
+            if (current.operationTokens().stream()
+                    .anyMatch(token -> token.token().equals(candidate.token()))
+                || candidates.stream().anyMatch(token -> token.token().equals(candidate.token())))
+              throw new IllegalArgumentException("operation UUID collision");
+            candidates.add(candidate);
+            tokens.add(candidate);
           }
-          var candidate =
-              new SessionOperationToken(
-                  purpose, Objects.requireNonNull(ids.get(), "operation UUID"), now());
-          // No retry/collision replacement while holding the session transaction.
-          if (current.operationTokens().stream()
-              .anyMatch(token -> token.token().equals(candidate.token())))
-            throw new IllegalArgumentException("operation UUID collision");
-          tokens.add(candidate);
-          issued.set(Optional.of(candidate));
+          issued.set(List.copyOf(candidates));
           return attributes(current, tokens);
         });
-    return issued.get().orElseThrow(OperationTokenConflictException::new);
+    if (issued.get().isEmpty()) throw new OperationTokenConflictException();
+    return issued.get();
   }
 
   /** Retained pending and consumed forms both require fresh API validation outside this call. */
