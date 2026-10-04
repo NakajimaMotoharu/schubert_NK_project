@@ -24,6 +24,7 @@ public final class WebRequestTrace {
       Set.of(
           "/",
           "/login",
+          "/logout",
           "/search",
           "/logs",
           "/error",

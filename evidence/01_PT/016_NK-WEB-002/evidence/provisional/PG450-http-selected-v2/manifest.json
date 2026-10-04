@@ -1,0 +1,900 @@
+{
+  "id": "PG450-http-selected-v2",
+  "sourceHead": "7be8ff8edca8dd2bf293d88efe821e71477d0b31",
+  "sourceDirty": "Logout HTTP/security/audit/route and independent fixture tests",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T11:05:57+09:00",
+  "finishedAt": "2026-10-04T11:09:48+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg450_selected.sh http-selected-v2 7be8ff8edca8dd2bf293d88efe821e71477d0b31 exact32Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "testClasses": [
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest",
+    "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest",
+    "dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest",
+    "dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest",
+    "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+    "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+    "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+    "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest",
+    "dev.codex.schubert.nk.web.revocation.RevocationPayloadCodecTest",
+    "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+    "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+    "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+    "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest",
+    "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+    "dev.codex.schubert.nk.web.session.WebSecurityChainTest"
+  ],
+  "exitCode": 0,
+  "tests": 282,
+  "suites": 32,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 111,
+      "suites": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 106,
+      "suites": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "LogoutController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "LogoutMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadException$Reason": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 21
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadIdentity": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 163
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadCodec": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 455
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 95
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryCoordinator$Outcome": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "LocalLogoutCoordinator$Outcome": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 15
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryCoordinator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 337
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 87
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "EncryptedRevocationPayload": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 55
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "PendingRevocationRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 506
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 41
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 110
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 33
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ClaimedRevocation": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 80
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationFailureCode": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 45
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "LocalLogoutCoordinator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 134
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 38
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebSecurityAudit$Event": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 120
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace$Scope": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 53
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebSecurityAudit$Route": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 9
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebSecurityAudit": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 303
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 52
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 63
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 33
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 358
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 58
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 24
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "JdbcWebSessionStore": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 511
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 30
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 123
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 28
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SessionStoreException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 54
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "EncryptedWebSessionRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 780
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 156
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 46
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 28
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "LocalLogoutHandler": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 180
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 61
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "75aeabc8dcb4a3876763fe7fd47f00a25b5754965b6eaaf26d5a4e6d3ee5f184",
+  "sourceDiffSha256": "c5ac936dd74401bf6f33871133e86bac9ab5049fa4791862d8025b8638e6167a",
+  "logSha256": "d081689fb68880f22ae6ff16b9ab5b4fad433c4523309a816a6fbaae4f2fb001",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg450-http-selected-v2-frozen",
+  "testIds": [
+    "RERUN007A..H",
+    "RERUN006A..H",
+    "RERUN005A..H",
+    "RERUN004A..I",
+    "RERUN003A..G",
+    "RERUN002",
+    "RERUN001-F",
+    "REQ004",
+    "PT-WEB095..100",
+    "PT-WEB158..165"
+  ],
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "bugs": [
+    "BUG-628",
+    "BUG-630",
+    "BUG-631"
+  ],
+  "ykt": [
+    "YKT-445",
+    "YKT-447",
+    "YKT-448"
+  ],
+  "expected": "Literal HTTP302 /login?logout; expired secure HttpOnly SameSite=Lax cookie; old local absent/new row preserved; 0000/0200 no queue; failure NULL-expiry encrypted row, 0 attempts/5 seconds; GET/HEAD405, CSRF/anonymous403 and MQ0; fixed failure/fatal identity/cleared identity; 100 independent HTTP/rows/audits",
+  "actual": "Eight HTTP tests passed; 100 valid distinct session inputs and 100 HTTP302/durable retained rows/audit IDs, local0; handler/controller/MVC/audit/trace/revocation/session24 executable classes all counters missed0",
+  "before": [
+    {
+      "id": "PG450-http-before-v1",
+      "exitCode": 1,
+      "errors": 8,
+      "failures": 0,
+      "skipped": 0,
+      "executedTests": 239,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "7cf5f2ae06a2b2c0736fef948dbb1888b7249c950dc9ca8037f76224c050e834",
+      "sourceFilesSha256": "1111dcc8d3528922391be93f56d92d3ad7d72e08b3ae0ad277511040143b93d6",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg450-http-before-v1-frozen",
+      "failedTests": [
+        "rerun007gClearFailureAlwaysClearsSecurityAndPreservesFatal",
+        "rerun007eFatalWireAndSecondaryInvalidationPreserveOriginalIdentity",
+        "rerun007bActualGetHeadCsrfAndAnonymousNeverRevoke",
+        "rerun007cConstructorNullAndUntrustedBoundariesFailClosed",
+        "rerun007fCommittedResponseAndAuditFailureAreNotLogoutSuccess",
+        "rerun007hHundredHttpLogoutsIndependentRowsAndRequestAudit",
+        "rerun007aActualHttpConfirmedAndQueuedDestroyCookieAndOnlyCurrentRow",
+        "rerun007dStorageAndServletInvalidationFailuresNeverShowSuccess"
+      ]
+    },
+    {
+      "id": "PG450-http-selected-v1",
+      "exitCode": 1,
+      "errors": 1,
+      "failures": 0,
+      "skipped": 0,
+      "executedTests": 239,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "faf1f8bdfce0866b4ae14f5c5c47ff725b208a358881621c76609dae4a50f53b",
+      "sourceFilesSha256": "4bae8f0895ed986978512477268c483b363b11f2ce769af4a5a73d187e3f1afd",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg450-http-selected-v1-frozen",
+      "failedTests": [
+        "rerun007hHundredHttpLogoutsIndependentRowsAndRequestAudit"
+      ]
+    }
+  ],
+  "redaction": "No JUnit properties/stdout/stderr, provider messages, raw logs, real credentials/cookie/context/token/key/dump",
+  "limitations": [
+    "Host HTTP/security/MVC/PostgreSQL and independent JMS fixture only; no actual Artemis or native owner proof",
+    "Retry worker/current revoke key owner/UNKNOWN stop guard and same-source whole regression pending",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "c41f2b349b4402132ad82eba6db6e2e184a9effbb86137d3db0b0bf46cf4152f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "cacc00ec90d7f8b1fd28ef05f308c3e67caab79eef07bacd7f3176f57dc8e5a9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "aa1598c89056dd572c6972a6317406e8fe817c371240ad06b5bb5b1e9d6e2c0a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "a5df9c95abdaa295641a00751236efeb89540f8c49a71fc54d6861e370c58e01"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "d02495c6019ba2d449ded1dcfdd6b6f9af66d085358a948c68bd55e804a0f4e6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "a372e7de4bff2d5a22575bdc96ec38b690767d60f8e11a2b446015d01372e2b6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "a449bfea28f4fa0a8a662150424e1463f0981e43250f3345cf62bc7a12ba91e6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "94a651d2a9ed4562beb895b05712e15d7af2afab2bcb17ebbe9e317de9502e7c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "2b8bf3fa66f32d0e6706b713accf4b3684d2f12f282cf7ecc97499dd308ba8b0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "dc45cc8ed264982a5245d89f33d5c6e47132aad029e632b8202447a2f86e1b15"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "16bdf05bf822dda1195bacc8289036b26c9350e6082e1985f60a44eaba3d6d3d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "33ce01126fe1bf3e0bcb8d85eb319f031b3f7f02e355f3a5ffc8bc7e368fc089"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "4fa00af4ad4f1b2510231d79882b6b306ffc9c5edf04d6a8b541837afc61e6f3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "ce0658dc49983cca829522c38d29cfc3c8c410d4f95269e601ea4423a6290650"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "69b8bcfe2af3138cdfde99c31a79e47b903f316511f1278998afe2146341e68d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "fd1abf7ef6f96aea35a934c61e78cf0a35e7665b77ad12ddc09553b187f75559"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "c1fa56d96da8dfe3fa6c08902f2576a3aea58d041f24f39219818244960ab372"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "76528492c169e7b6c3c7146e5076e9fd52ecaa89ca7ccdb95545249d0a90fcc3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "70a49f8fe89f4736467b6a678b1daae128daadbaac4cc91602a20abf2cb44665"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest.xml",
+      "sha256": "3af16a26c17b1190868df56492e3edb59436f2cd8885e77485922ea4fe791bc0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "d88c09c786de602fd9b2a5b603fbc7c7705be0b2a369f1a9d65944d67462f406"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebSecurityAuditTest.xml",
+      "sha256": "deb88abdc5db5ce830fc1fda75c283df7e60de30cf21b4541d40f4aee772f3eb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest.xml",
+      "sha256": "0d9e2cd8d9ae551d49477aea246ea92263e41d6027c2c1ff203b35910da2a6c8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest.xml",
+      "sha256": "61ed77bf43888051844de933119e044972a012ac0d235a903f0a1d882e5162d2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationPayloadCodecTest.xml",
+      "sha256": "9f8c8aad763484b261efb47fd4b43bddd80f9703c857b72aac1374652f40685b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest.xml",
+      "sha256": "57a11606b56ca682350b048364eadc4108a719c30d58a6a7c442ab102dbc662a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "2be075fdfcdf7c6090b0052564f55bb0359d8ae5d6a24c79dc8427f0a6e082c2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "84685865320eefd23f9d19e64cecd371411ca484b30a8261587a343f7b7c74e5"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.LogoutControllerTest.xml",
+      "sha256": "e42c010cfc1ab976294e44df92c6d3a5ffb7050df6e2aeec3e0d4b4942046516"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest.xml",
+      "sha256": "bf5c60f9fb20db835b841f3c86133ddd68507634ea5c086e6ce140e67373643b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "172bab99aabc00a377fd4ef843c4496eb4087bc5ddcbe27af16c749d7707405f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG450-http-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "c1e3f9d1edf48817731db66d1f96c1ba950b036698bbf042ce83cfa8c77c8503"
+    }
+  ]
+}

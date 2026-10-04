@@ -14,7 +14,7 @@ public sealed class SessionStoreException extends RuntimeException
   }
 
   /** BUG628/YKT445: inspect only transient failures, never retain provider text in this catalog. */
-  static void preserveFatal(Throwable failure) {
+  public static void preserveFatal(Throwable failure) {
     var pending = new java.util.ArrayDeque<Throwable>();
     java.util.Set<Throwable> seen =
         java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());

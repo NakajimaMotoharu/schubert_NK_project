@@ -36,18 +36,20 @@ class WebSecurityAuditTest {
       {"AUTHORIZATION_DENIED", "ROLE", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "PROXY", "DENIED", "WARN"},
       {"AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", "WARN"},
-      {"SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", "INFO"}
+      {"SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", "INFO"},
+      {"LOGOUT_SUCCEEDED", "REVOKED", "SUCCESS", "INFO"},
+      {"LOGOUT_REVOCATION_QUEUED", "RETRY_RETAINED", "SUCCESS", "INFO"}
     };
     for (int i = 0; i < Event.values().length; i++) {
       Event event = Event.values()[i];
-      boolean hasActor = i == 0 || (i >= 3 && i <= 5) || i == 7;
+      boolean hasActor = i == 0 || (i >= 3 && i <= 5) || i >= 7;
       audit.record(
           ID,
           event,
           Optional.of("2001:db8::1"),
           hasActor ? ACTOR : Optional.empty(),
           i == 2 ? 900 : 0,
-          Route.LOGIN);
+          i >= 8 ? Route.LOGOUT : Route.LOGIN);
       var entry = logger.entries.get(i);
       var json = entry.json();
       var keys =
@@ -76,7 +78,7 @@ class WebSecurityAuditTest {
       assertEquals(expected[i][0], json.get("action").getAsString());
       assertEquals(expected[i][2], json.get("outcome").getAsString());
       assertEquals(expected[i][3], json.get("level").getAsString());
-      assertEquals(i == 0 || i == 7 ? Level.INFO : Level.WARNING, entry.level());
+      assertEquals(i == 0 || i >= 7 ? Level.INFO : Level.WARNING, entry.level());
       if (hasActor) {
         assertEquals("reader", json.get("actorUsername").getAsString());
         assertEquals("USER", json.get("actorRole").getAsString());
@@ -84,7 +86,7 @@ class WebSecurityAuditTest {
       var details = json.getAsJsonObject("details");
       var detailKeys = new HashSet<>(Set.of("reason", "route", "targetType"));
       assertEquals("HTTP_REQUEST", details.get("targetType").getAsString());
-      assertEquals("/login", details.get("route").getAsString());
+      assertEquals(i >= 8 ? "/logout" : "/login", details.get("route").getAsString());
       if (i == 2) {
         detailKeys.add("retryAfterSeconds");
         assertEquals(900, details.get("retryAfterSeconds").getAsInt());
@@ -170,6 +172,16 @@ class WebSecurityAuditTest {
       assertThrows(
           IllegalArgumentException.class,
           () -> audit.record(ID, event, Optional.empty(), selected, 0, Route.LOGIN));
+    }
+    for (Event event : List.of(Event.LOGOUT_SUCCEEDED, Event.LOGOUT_REVOCATION_QUEUED)) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> audit.record(ID, event, IP, Optional.empty(), 0, Route.LOGOUT));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> audit.record(ID, event, Optional.empty(), ACTOR, 0, Route.LOGOUT));
+      assertThrows(
+          IllegalArgumentException.class, () -> audit.record(ID, event, IP, ACTOR, 0, Route.LOGIN));
     }
     for (String ip :
         List.of(

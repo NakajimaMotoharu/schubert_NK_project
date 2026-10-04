@@ -43,7 +43,9 @@ public final class WebSecurityAudit {
     ROLE_DENIED("AUTHORIZATION_DENIED", "ROLE", "DENIED", Level.WARNING),
     PROXY_DENIED("AUTHORIZATION_DENIED", "PROXY", "DENIED", Level.WARNING),
     AUTHENTICATION_REQUIRED("AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", Level.WARNING),
-    API_SESSION_INVALID("SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", Level.INFO);
+    API_SESSION_INVALID("SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", Level.INFO),
+    LOGOUT_SUCCEEDED("LOGOUT_SUCCEEDED", "REVOKED", "SUCCESS", Level.INFO),
+    LOGOUT_REVOCATION_QUEUED("LOGOUT_REVOCATION_QUEUED", "RETRY_RETAINED", "SUCCESS", Level.INFO);
 
     private final String action;
     private final String reason;
@@ -60,6 +62,8 @@ public final class WebSecurityAudit {
 
   private static final Set<Event> LOGIN =
       Set.of(Event.LOGIN_SUCCEEDED, Event.LOGIN_FAILED, Event.LOGIN_LOCKED);
+  private static final Set<Event> LOGOUT =
+      Set.of(Event.LOGOUT_SUCCEEDED, Event.LOGOUT_REVOCATION_QUEUED);
   private static final DateTimeFormatter TIMESTAMP =
       new DateTimeFormatterBuilder().appendInstant(3).toFormatter(Locale.ROOT);
   private final Logger logger;
@@ -98,7 +102,10 @@ public final class WebSecurityAudit {
         || (event == Event.AUTHENTICATION_REQUIRED && actor.isPresent())
         || ((event == Event.LOGIN_FAILED || event == Event.LOGIN_LOCKED) && actor.isPresent())
         || (LOGIN.contains(event) && remoteAddress.isEmpty())
-        || (LOGIN.contains(event) && route != Route.LOGIN))
+        || (LOGIN.contains(event) && route != Route.LOGIN)
+        || (LOGOUT.contains(event) && actor.isEmpty())
+        || (LOGOUT.contains(event) && remoteAddress.isEmpty())
+        || (LOGOUT.contains(event) && route != Route.LOGOUT))
       throw new IllegalArgumentException("security audit metadata is invalid");
     Optional<String> client = remoteAddress.map(WebSecurityAudit::canonicalAddress);
     var json = new JsonObject();
