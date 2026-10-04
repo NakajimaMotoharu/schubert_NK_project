@@ -33,6 +33,47 @@ final class WebLogReplayWorkerTest {
   private static final WebLogDispatcher.Report EMPTY = new WebLogDispatcher.Report(0, 0, 0, 0);
 
   @Test
+  void nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry() throws Exception {
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var owner = new java.util.concurrent.atomic.AtomicReference<Thread>();
+    var worker =
+        WebLogReplayWorker.start(
+            () -> {
+              owner.set(Thread.currentThread());
+              entered.countDown();
+              while (release.getCount() != 0) {
+                try {
+                  release.await();
+                } catch (InterruptedException ignored) {
+                  /* held vendor */
+                }
+              }
+              return EMPTY;
+            },
+            Duration.ofMillis(1),
+            Duration.ofMillis(1));
+    assertTrue(entered.await(5, TimeUnit.SECONDS));
+    try {
+      assertThrows(NullPointerException.class, () -> worker.closeWithin(null));
+      assertThrows(IllegalArgumentException.class, () -> worker.closeWithin(Duration.ofNanos(-1)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> worker.closeWithin(Duration.ofSeconds(30).plusNanos(1)));
+      assertTrue(worker.running());
+      assertThrows(IllegalStateException.class, () -> worker.closeWithin(Duration.ZERO));
+      assertThrows(IllegalStateException.class, () -> worker.closeWithin(Duration.ofMillis(1)));
+      assertTrue(owner.get().isAlive());
+      assertFalse(worker.running());
+    } finally {
+      release.countDown();
+      worker.closeWithin(Duration.ofSeconds(30));
+    }
+    assertFalse(owner.get().isAlive());
+    worker.closeWithin(Duration.ZERO);
+  }
+
+  @Test
   void rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects() throws Exception {
     for (boolean sql : new boolean[] {false, true}) {
       var worker =

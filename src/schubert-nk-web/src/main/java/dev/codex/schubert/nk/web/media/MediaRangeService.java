@@ -37,10 +37,18 @@ public final class MediaRangeService {
   }
 
   private final FileSource source;
-  private final Semaphore permits = new Semaphore(20);
+  private final Semaphore permits;
 
   public MediaRangeService(FileSource source) {
+    this(source, 20);
+  }
+
+  /** Validated native configuration may reduce the stream count, never exceed the fixed20 cap. */
+  public MediaRangeService(FileSource source, int maximumStreams) {
     this.source = Objects.requireNonNull(source, "source");
+    if (maximumStreams < 1 || maximumStreams > 20)
+      throw new IllegalArgumentException("media stream count is outside 1..20");
+    permits = new Semaphore(maximumStreams);
   }
 
   /** Bind the verified descriptor to this request before admission, then stream without DB I/O. */

@@ -1,5 +1,9 @@
 # 085 NK-WEB-002 native組立・所有単体テスト仕様書
 
+PG454 C4/native graph初回仕様（未実行）：CONFIG001 client initial1/12/20各実飽和、次要求send0/CAPACITY・全reply後pending0/default12/21拒否。CONFIG002 media上限1/2/20で実stream保持、次BUSY/fileopen0・IOException後全permit回復、0/21/null拒否。CONFIG003 parsed100ms/default2sを全8wire実instanceへ投影し独立固定100msを内部保持値と照合（expected Production生成0）、assembly timeout null/99.999ms/2s+1ns拒否。CONFIG004 native ordinaryは同validated initial/max/timeout/media/management portを使用。STOP005同lifetime停止flag後はownerの100ms pollを待たず受付拒否。LIFE001..003実hook登録/二重登録拒否/健康await/割込/failure/foreign shutdown待機→confirmed owner通知後のみ終了・flag保存。OUTER001はinstrumented別JVMでIO/runtime/fatalの実release UNKNOWN→割込後もattempt1/downstream0/生存を確認し、fixtureをSIGTERM143で停止する。これはordinary service native admission又は正常cleanupの認定でない。ServiceProcessResources既存実PG/五credential/PTをnative保持modeでも正常解放し、legacy compound/partial/null/並行回帰も実行する。全native Root/ordinary/PID同一owner・Caddy/DONE/CHR/同sourcecoverageの後条件は実VMまで未受入。
+
+PG454 C3試験追加（未実行）：NATIVE-OWNER001 vendorのactual Tomcat start後に固定LinkageError、callback捕捉がstart前でport/mapping未公開、legacy自動destroy0、第一stop UNKNOWNでdestroy0・retry actual終了後socket再bind/二重destroy0。OWNER002 actual owned serverと同返却handle/実HTTP200/null owner前resource0、WebApplication同pairのowned実接続。OWNER003 legacy startup fatal×cleanup正常/別fatal/同fatalを独立identity/suppressed件数/cleanup一回で照合。NATIVE-BUDGET001002はLog/revoke実workerを非協力latchで保持しnull/負/>30拒否はworker健康不変更、zero/1ms joinUNKNOWN・実生存、解除後30sactual join→zero retry正常、旧割込/selfjoin/SQL再送も回帰する。期待時刻や終了boolをProductionから生成0、全native未受入。
+
 2026-10-04、PG-D369、NK-WEB-002/NK-OPS-001。RD SYS002004/AUT002004/MQ003008/MON003/FIL001009、UI212223224226232237243253、SS312313314321342343352/QA047049050。既存承認設計の内部接続、業務仕様変更0、未受入。Program/class/methodの追跡は431/441とclass comment、現況456/460。PG453 sourceca0afeの3193成功を新sourceへ流用しない。
 
 ## 同一pair・内部所有能力

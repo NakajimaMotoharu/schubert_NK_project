@@ -386,3 +386,6 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 # PG454 C1/C2追跡追加（2026-10-04）
 
 NK-WEB-002: WebApplication同core/Spring bridge、WebBusinessAssembly full17port/実32path、WebHttpAdmission/Valve＋Lease actual terminal、WebManagementServer bind/start/A/UP/confirmed stop、WebHttpServer actual MVC inventory。ArtemisReplyConsumers/WebBrokerContexts requested/confirmed・retry、NK-OPS-001 ApiManagementServer caller interrupt保存。RD/UI/SSと独立Test ID NATIVE-CORE/GRAPH/READY/STOPは441 PG-D369・016085086/安全PG454-v8manifestへ対応。9対象全counter0は限定hostのみ、Broker native L4M2/全native/full回帰/正式未閉鎖。
+# PG454 C3/C4追跡追加（2026-10-04）
+
+NK-WEB-002: WebNativeRuntime（ordinary借用DB/5credential→三codec/readonly roots/reply/Log/revoke/fullMVC32/管理five-info/一回Ready/初回停止30秒）、WebProcessLifetime（通知/confirmed通知・UNKNOWN frame保持）、WebApplication/WebHttpServer先行partial owner、全validated config/MQ20/media1..20。NK-OPS-001: ServiceProcessResources.executeRetainingUnknown/native release（API/Web外側）、ApiProcessMain同guard。根拠SS313314321342343352/QA047049050/PG-D369370、Test NATIVE-OWNER/BUDGET/CONFIG/LIFE/OUTER・既存各scopeは016085086/安全173manifestへ対応。ordinary native/mainの未到達counterを保持、全source fresh回帰/実VM/正式まで認定0。

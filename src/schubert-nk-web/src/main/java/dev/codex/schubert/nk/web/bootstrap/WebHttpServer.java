@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleState;
@@ -19,6 +20,7 @@ import org.apache.catalina.core.StandardHost;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.FilterDef;
 import org.apache.tomcat.util.descriptor.web.FilterMap;
+import org.jspecify.annotations.Nullable;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -29,17 +31,16 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public final class WebHttpServer implements AutoCloseable {
   private final Tomcat tomcat;
-  private final int port;
   private final AnnotationConfigWebApplicationContext mvc;
   private final Object lifecycleLock = new Object();
   private boolean closed;
   private boolean stopped;
   private boolean destroyed;
+  private boolean started;
 
   private WebHttpServer(Tomcat tomcat, AnnotationConfigWebApplicationContext mvc) {
     this.tomcat = tomcat;
     this.mvc = mvc;
-    this.port = tomcat.getConnector().getLocalPort();
   }
 
   /**
@@ -76,12 +77,27 @@ public final class WebHttpServer implements AutoCloseable {
         runtimeDirectory, port, security, Map.of(), tomcatFactory, featureConfigurations);
   }
 
-  static WebHttpServer startWithFactory(
+  /** Native owner captures even a partially started container before any vendor mutation. */
+  static WebHttpServer startOwned(
+      Path runtimeDirectory,
+      int port,
+      Filter security,
+      Map<Class<?>, ?> dependencies,
+      Consumer<WebHttpServer> owner,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
+    Objects.requireNonNull(owner, "HTTP owner");
+    return startWithOwner(
+        runtimeDirectory, port, security, dependencies, Tomcat::new, owner, featureConfigurations);
+  }
+
+  static WebHttpServer startWithOwner(
       Path runtimeDirectory,
       int port,
       Filter security,
       Map<Class<?>, ?> dependencies,
       Supplier<Tomcat> tomcatFactory,
+      @Nullable Consumer<WebHttpServer> owner,
       Class<?>... featureConfigurations)
       throws LifecycleException {
     Objects.requireNonNull(runtimeDirectory, "runtimeDirectory");
@@ -91,7 +107,10 @@ public final class WebHttpServer implements AutoCloseable {
     validateConfiguration(runtimeDirectory, port, featureConfigurations);
     Map<Class<?>, ?> registeredDependencies = checkedDependencies(dependencies);
     var tomcat = Objects.requireNonNull(tomcatFactory.get(), "tomcatFactory result");
+    var mvc = new AnnotationConfigWebApplicationContext();
+    var result = new WebHttpServer(tomcat, mvc);
     try {
+      if (owner != null) owner.accept(result);
       tomcat.setBaseDir(runtimeDirectory.toString());
       tomcat.setPort(port);
       tomcat.setSilent(true);
@@ -114,7 +133,6 @@ public final class WebHttpServer implements AutoCloseable {
         mapping.setDispatcher(dispatch);
       }
       context.addFilterMap(mapping);
-      var mvc = new AnnotationConfigWebApplicationContext();
       mvc.addBeanFactoryPostProcessor(
           factory ->
               registeredDependencies.forEach(
@@ -141,15 +159,33 @@ public final class WebHttpServer implements AutoCloseable {
       if (context.getState() != LifecycleState.STARTED) {
         throw new LifecycleException("Web MVC startup failed");
       }
-      return new WebHttpServer(tomcat, mvc);
-    } catch (LifecycleException | RuntimeException failure) {
-      try {
-        tomcat.destroy();
-      } catch (LifecycleException cleanup) {
-        failure.addSuppressed(cleanup);
+      synchronized (result.lifecycleLock) {
+        result.started = true;
+      }
+      return result;
+    } catch (LifecycleException | RuntimeException | Error failure) {
+      // Native partial owner keeps the exact phase and all borrowed dependencies until confirmed.
+      if (owner == null) {
+        try {
+          tomcat.destroy();
+        } catch (LifecycleException | RuntimeException | Error cleanup) {
+          if (failure != cleanup) failure.addSuppressed(cleanup);
+        }
       }
       throw failure;
     }
+  }
+
+  static WebHttpServer startWithFactory(
+      Path runtimeDirectory,
+      int port,
+      Filter security,
+      Map<Class<?>, ?> dependencies,
+      Supplier<Tomcat> tomcatFactory,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
+    return startWithOwner(
+        runtimeDirectory, port, security, dependencies, tomcatFactory, null, featureConfigurations);
   }
 
   static void validateConfiguration(Path runtimeDirectory, int port, Class<?>[] configurations) {
@@ -177,8 +213,8 @@ public final class WebHttpServer implements AutoCloseable {
 
   public int port() {
     synchronized (lifecycleLock) {
-      if (closed) throw new IllegalStateException("Web HTTP server is closed");
-      return port;
+      if (closed || !started) throw new IllegalStateException("Web HTTP server is unavailable");
+      return tomcat.getConnector().getLocalPort();
     }
   }
 
@@ -187,7 +223,7 @@ public final class WebHttpServer implements AutoCloseable {
    */
   public java.util.Set<String> mappedPaths() {
     synchronized (lifecycleLock) {
-      if (closed) throw new IllegalStateException("Web HTTP server is closed");
+      if (closed || !started) throw new IllegalStateException("Web HTTP server is unavailable");
       var mappings =
           mvc.getBean(
               org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping

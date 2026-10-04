@@ -44,6 +44,8 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- PG-D370/BUG660: compile-only exact SS343 fixed-runtime-path rationale, not runtime. -->
+    <dependency><groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.10.4</version><scope>provided</scope></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version><type>test-jar</type><scope>test</scope></dependency>
     <!-- PG-D-115 / PT-WEB-142..147 / SS313: explicit MVC/template boundary. -->

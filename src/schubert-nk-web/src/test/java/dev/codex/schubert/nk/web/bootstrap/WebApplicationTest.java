@@ -58,7 +58,11 @@ final class WebApplicationTest {
               source(database::web),
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
               codec);
-      try (var server = app.start(root, 0)) {
+      var captured = new AtomicReference<WebHttpServer>();
+      try (var server =
+          app.startOwnedWithCoreSessionDependencies(
+              root, 0, (core, sessions) -> Map.of(), captured::set)) {
+        assertSame(server, captured.get());
         var request =
             HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
                 .header("X-Forwarded-For", "203.0.113.1")
@@ -401,6 +405,17 @@ final class WebApplicationTest {
               codec);
       assertThrows(
           NullPointerException.class, () -> app.startWithCoreSessionDependencies(root, 0, null));
+      assertThrows(
+          NullPointerException.class,
+          () -> app.startOwnedWithCoreSessionDependencies(root, 0, null, ignored -> {}));
+      assertThrows(
+          NullPointerException.class,
+          () -> app.startOwnedWithCoreSessionDependencies(root, 0, (a, b) -> Map.of(), null));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              app.startOwnedWithCoreSessionDependencies(
+                  root, -1, (a, b) -> Map.of(), ignored -> {}));
       assertThrows(
           NullPointerException.class,
           () -> app.startWithCoreSessionDependencies(null, 0, (a, b) -> Map.of()));

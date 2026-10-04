@@ -108,7 +108,8 @@ final class WebBusinessAssemblyTest {
               new WebMediaAudit(System.getLogger("pgpt.graph.media"), clock, "1", "1"),
               logger,
               revoke,
-              gate);
+              gate,
+              Duration.ofMillis(100));
       Object[] required = {
         client,
         sender,
@@ -129,6 +130,18 @@ final class WebBusinessAssemblyTest {
         assertThrows(NullPointerException.class, () -> construct(required));
         required[index] = original;
       }
+      assertThrows(NullPointerException.class, () -> construct(required, null));
+      var defaults = construct(required);
+      for (Duration bad :
+          new Duration[] {Duration.ofMillis(100).minusNanos(1), Duration.ofSeconds(2).plusNanos(1)})
+        assertThrows(IllegalArgumentException.class, () -> construct(required, bad));
+      assertEquals(
+          Duration.ofMillis(100),
+          WebNativeRuntime.replyTimeout(
+              WebNonSecretConfig.parse("", "nk.web.mq.reply-timeout: 100ms")));
+      assertEquals(
+          Duration.ofSeconds(2), WebNativeRuntime.replyTimeout(WebNonSecretConfig.parse("", "")));
+      assertThrows(NullPointerException.class, () -> WebNativeRuntime.replyTimeout(null));
       var application =
           new WebApplication(
               database,
@@ -147,9 +160,35 @@ final class WebBusinessAssemblyTest {
               0,
               (core, spring) -> {
                 var ports = assembly.dependencies(core, spring);
+                var defaultPorts = defaults.dependencies(core, spring);
+                assertEquals(17, defaultPorts.size());
                 assertEquals(17, ports.size());
                 assertSame(gate, ports.get(WebHttpAdmission.class));
                 assertSame(logger, ports.get(WebRequestLogProducer.class));
+                // Read actual configured client state; expected duration is a handwritten constant.
+                for (Class<?> type :
+                    List.of(
+                        LogSearchWireClient.class,
+                        ScenarioWireClient.class,
+                        AnimationWireClient.class,
+                        MusicWireClient.class,
+                        UserAdministrationWireClient.class,
+                        NotificationWireClient.class,
+                        QuestionWireClient.class,
+                        MediaDescriptorWireClient.class)) {
+                  try {
+                    var wrapped = type.getDeclaredField("client");
+                    wrapped.setAccessible(true);
+                    Object actual = wrapped.get(ports.get(type));
+                    var field = actual.getClass().getDeclaredField("timeout");
+                    field.setAccessible(true);
+                    assertEquals(Duration.ofMillis(100), field.get(actual));
+                    Object defaultActual = wrapped.get(defaultPorts.get(type));
+                    assertEquals(Duration.ofSeconds(2), field.get(defaultActual));
+                  } catch (ReflectiveOperationException brokenFixture) {
+                    throw new AssertionError(brokenFixture);
+                  }
+                }
                 assertThrows(NullPointerException.class, () -> assembly.dependencies(null, spring));
                 assertThrows(NullPointerException.class, () -> assembly.dependencies(core, null));
                 return ports;
@@ -199,6 +238,24 @@ final class WebBusinessAssemblyTest {
         (WebRequestLogProducer) slots[9],
         (RevocationPayloadCodec) slots[10],
         (WebHttpAdmission) slots[11]);
+  }
+
+  @SuppressWarnings("unchecked") // Same fixed fixture slots; only timeout varies independently.
+  private static WebBusinessAssembly construct(Object[] s, Duration timeout) {
+    return new WebBusinessAssembly(
+        (JmsRequestReplyClient) s[0],
+        (ArtemisRequestSender) s[1],
+        (Clock) s[2],
+        (java.util.function.Supplier<UUID>) s[3],
+        (WebSecurityAudit) s[4],
+        (DataSource) s[5],
+        (LargeResultReader) s[6],
+        (MediaRangeService) s[7],
+        (WebMediaAudit) s[8],
+        (WebRequestLogProducer) s[9],
+        (RevocationPayloadCodec) s[10],
+        (WebHttpAdmission) s[11],
+        timeout);
   }
 
   private static HttpResponse<String> get(HttpClient http, String uri) throws Exception {

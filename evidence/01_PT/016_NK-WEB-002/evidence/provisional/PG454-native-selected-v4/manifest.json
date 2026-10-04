@@ -1,0 +1,698 @@
+{
+  "id": "PG454-native-selected-v4",
+  "sourceHead": "2aeb40aeba752e500b7a2d564ad62dd175ce5976",
+  "sourceDirty": "PG-D369/370 C3/C4 native graph/owned HTTP/remaining worker budget/lifetime/validated configuration/native outer UNKNOWN retention; BUG655..660 fixes",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T18:16:00+09:00",
+  "finishedAt": "2026-10-04T18:19:24+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg454_selected.sh native-selected-v4 2aeb40aeba752e500b7a2d564ad62dd175ce5976 exact26Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 173,
+  "suites": 26,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 25,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 33,
+      "suites": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 95,
+      "suites": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "testClasses": [
+    "dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.api.file.ServiceNativeReleaseTest",
+    "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebBusinessAssemblyTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValveTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest",
+    "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+    "dev.codex.schubert.nk.web.media.MediaRangeServiceTest",
+    "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+    "dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest",
+    "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest"
+  ],
+  "coverage": {
+    "ServiceProcessResources": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 252
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 57
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ApiManagementServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 400
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 85
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 34
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "JmsRequestReplyClient": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 214
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 51
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebBrokerContexts": {
+      "INSTRUCTION": {
+        "missed": 19,
+        "covered": 235
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 60
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ArtemisReplyConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 208
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryWorker": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 228
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 54
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebApplication": {
+      "INSTRUCTION": {
+        "missed": 17,
+        "covered": 184
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 34
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebBusinessAssembly": {
+      "INSTRUCTION": {
+        "missed": 2,
+        "covered": 409
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 43
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebNativeRuntime": {
+      "INSTRUCTION": {
+        "missed": 743,
+        "covered": 164
+      },
+      "BRANCH": {
+        "missed": 54,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 149,
+        "covered": 6
+      },
+      "COMPLEXITY": {
+        "missed": 48,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 21,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmission": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 206
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 47
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 21
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 484
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 109
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebProcessLifetime": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 134
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 13
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 14
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmissionValve$Lease": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 25
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmissionValve": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 94
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebManagementServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 529
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 62
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 120
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 46
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebLogReplayWorker": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 263
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 61
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 26
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaRangeService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 242
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 25
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 54
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "ef650267c1fd2b77170181b615b6bf6cbff8a57e1d5cf2c781eebf017aeaf1de",
+  "sourceDiffSha256": "37eb9557dbdae66db223cc2289608a9e2903d41e808ab049f1896751f5ccdaf2",
+  "logSha256": "9fef4f90f1c7ff22b863434475be3610e2fa61f3a4e89be986bcdf0b57109b77",
+  "sourceArchive": {
+    "privatePath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-native-selected-v4.source.tar",
+    "sha256": "b11211fb6fac5342572cdb01b565601e5188b796686779ed62afb6badecd2f0c"
+  },
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-native-selected-v4-frozen",
+  "testIds": [
+    "NATIVE-CORE/GRAPH/READY/STOP/OWNER/BUDGET/CONFIG/LIFE/OUTER",
+    "existing API/SQL/JMS/media/native-entry refusal regression"
+  ],
+  "qa": [
+    "QA-047",
+    "QA-049",
+    "QA-050"
+  ],
+  "bugs": [
+    "BUG-648",
+    "BUG-649",
+    "BUG-650",
+    "BUG-651",
+    "BUG-652",
+    "BUG-653",
+    "BUG-654",
+    "BUG-655",
+    "BUG-656",
+    "BUG-657",
+    "BUG-658",
+    "BUG-659",
+    "BUG-660"
+  ],
+  "ykt": [
+    "YKT-460",
+    "YKT-461",
+    "YKT-462",
+    "YKT-463",
+    "YKT-464",
+    "YKT-465",
+    "YKT-466"
+  ],
+  "expected": "085 C3/C4: capture before real Tomcat vendor start and retain fatal/UNKNOWN owner; actual repeated join with remaining0..30s budget; initial1/12/20 and media1/2/20 saturation/next send or file0/recovery; config100ms across eight real facade fields/default2s; same lifetime TERM admission refusal; child actual native-release UNKNOWN/interrupt/periodic observation attempts1/downstream0/alive with fixture SIGTERM143, not normal provider cleanup; real PG five credentials/normal retained-mode and legacy partial/compound scopes",
+  "actual": "173PT26suite/FES0/static6zero; twelve listed classes every counter missed0. NativeRuntime/ordinary main/native admission not accepted; known missed counters preserved without exclusions",
+  "before": {
+    "resultDocument": "evidence/01_PT/016_NK-WEB-002/086_NK-WEB-002_native組立・所有実行結果.md",
+    "acceptedByThisManifest": false
+  },
+  "limitations": [
+    "Selected host components only; grouped fresh full and actual ordinary native/parent/Caddy/DONE/CHR not accepted",
+    "WebApplication old delegates L3/M2 and Assembly default constructor L1 remain for fresh full; Broker native L4/M2, Lifetime shutdown/retain and NativeRuntime graph require actual native proof",
+    "Collector profile added after byte/source capture; grouped full must include it",
+    "Legacy partial runtime remains under BUG629/YKT446/460 until native scope/non-applicability and independent recurrence proof",
+    "Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr removed; no real credential/password/session/cookie/token/context/key/DB dump/provider raw output",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "f97553f5f3b6c351f2360083db08e030626e754bd5ac3755c227aac401d62606"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "329b1dd939bae23d5d4a42d37c55fa757e459e9b18c4de3a075bff7afdbadf6a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "e34ac4061fcf3fb62be3c7b74e65a421abccc48f37bc2cd5c11db09237c0bd54"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "f679914782b7c9720a501440fbd45e6dc7c12dc2f9292be2fb45e95aff8534d0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceNativeReleaseTest.xml",
+      "sha256": "182281e2e572943d060755728aa8d98af40259d5022bcd4087d0d71bf6928e82"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "e62cf7c44ee8f5e9387b28564f51ad1752172a2d06950d9680093f947a1f2126"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "ae7c4cd71e73d6757a974e6967a7624ab418eb409dbb1274f7a3ddf03949411e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest.xml",
+      "sha256": "aea096366325ef894da81a74a5a29d011738125142cc2ab399b01d21a8cc5e05"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "e73356ac0e6005ddda4285d22656e52187a54dab60e51da70bac0ccb87c33f81"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "d1714583578c084f7a3e2005af9512c362b074047082cb540668d05b8347e1a8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "251f881254e4c4d640a922034b58dcf1a1faa497bc4b65ed10a4f95a1205ac3a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebBusinessAssemblyTest.xml",
+      "sha256": "e76ac9b72b4de0f39e54cfdc25107dd9583ced6cb37ecf3f7ba092544267f9ef"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest.xml",
+      "sha256": "c607e4bc4bdf56820101f785cbdbb52c157dcbf02bb35bf3b53b2a3919db99de"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValveTest.xml",
+      "sha256": "65caefbfecfd33ead1b74365de1df677492c137ee8ca1f097be4dc8f97bb8a05"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "40440431481e55c444709540f4e7d5c81d81dcdf12506c0483ca01312f0f5916"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "1e061c6e2134ac279de99e979bbbcca12cc3c13249fe6d7c0a80824133699507"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest.xml",
+      "sha256": "393861a757b56c94bf4b7b31ad935c2e726bddafc4110d91028e9182cab59929"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest.xml",
+      "sha256": "1522f218667b18563de8324bd000ebdf2acc829ba37ff8625ed12087e2eb9c1b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest.xml",
+      "sha256": "06460096267f677cb100aec72815a36642f1b9f382482156ac29ab7eab574066"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest.xml",
+      "sha256": "7f32c5f22d0ef5e66e5e85b55029da5ebd2361119006d136ce1443b07aba3c74"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "2db94502e1597dfc2f68d017fa7ed0e49f1a805180e0f2cd53fe5f22c121618d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaRangeServiceTest.xml",
+      "sha256": "1d78239904da0664bcfa0c6819c73f15ee5e16ca3267cb78b5060f0009981a7c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "3205473dcc6c6be3b7e86c70d63e02112fd410c59fb027bd7d421b0935e3c6c7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest.xml",
+      "sha256": "ed30fb329102fcf1990ed47edba37c41660c0f6c648d08016f5e79bb185a3484"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "a198801cb83f3a6ef12c22b8d16bb5b93a2c48e8fd6504efffd18ca6941699c6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-native-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest.xml",
+      "sha256": "f1d8c877605661d007b1c80228c2294abe67f4fb643b6535b22f713dc1a24704"
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
-import dev.codex.schubert.nk.web.messaging.WebBrokerContexts;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -97,37 +96,50 @@ public final class WebProcessMain {
   private static void startNative(
       WebStartupInputs loader, Map<String, String> environment, int[] failureCode)
       throws IOException {
-    // R1 incremental entry only. Root admission and DB resource ownership precede the Web-role
-    // JMS probe. Full Broker Ops management, storage and business assembly remain mandatory; HTTP
-    // never starts and A is never released by this incomplete path.
-    ServiceStartupAdmission.create(ServiceConfigFiles.Service.WEB, environment)
-        .execute(
-            () -> {
-              try {
-                var inputs = loader.load();
-                return new ServiceStartupAdmission.Configuration<>(
-                    inputs, inputs.config().canonicalSha256());
-              } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
-                failureCode[0] = 70;
-                throw new IOException("non-secret configuration unavailable");
-              }
-            },
-            (inputs, ready) ->
-                new ServiceProcessResources(
-                        new ServiceProcessResources.Inputs(
-                            ServiceConfigFiles.Service.WEB,
-                            inputs.credentials(),
-                            inputs.config().value("nk.db.url")),
-                        source -> new WebJdbcPool().open(source))
-                    .execute(
-                        (pool, credentials) -> {
-                          try (var broker =
-                              WebBrokerContexts.create(
-                                  credentials, inputs.config().value("nk.mq.url"))) {
-                            new WebDependencyReadiness(pool, broker.contexts()).verify();
-                            ServiceProcessResources.unassembledStartup().run(pool, credentials);
-                          }
-                        }));
+    // One admitted owner: UNKNOWN never unwinds its DB/key/root callback frame.
+    try (var lifetime = new WebProcessLifetime()) {
+      lifetime.install();
+      ServiceStartupAdmission.create(ServiceConfigFiles.Service.WEB, environment)
+          .execute(
+              () -> {
+                try {
+                  var inputs = loader.load();
+                  return new ServiceStartupAdmission.Configuration<>(
+                      inputs, inputs.config().canonicalSha256());
+                } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+                  failureCode[0] = 70;
+                  throw new IOException("non-secret configuration unavailable");
+                }
+              },
+              (inputs, ready) ->
+                  new ServiceProcessResources(
+                          new ServiceProcessResources.Inputs(
+                              ServiceConfigFiles.Service.WEB,
+                              inputs.credentials(),
+                              inputs.config().value("nk.db.url")),
+                          source -> new WebJdbcPool().open(source))
+                      .executeRetainingUnknown(
+                          (pool, credentials) -> {
+                            var runtime =
+                                new WebNativeRuntime(
+                                    pool, credentials, inputs.config(), ready, lifetime::stopping);
+                            try {
+                              runtime.start();
+                              lifetime.await(runtime::healthy);
+                            } catch (org.apache.catalina.LifecycleException failure) {
+                              throw new IOException("Web HTTP startup unavailable");
+                            } finally {
+                              lifetime.stop();
+                              try {
+                                runtime.close();
+                              } catch (IOException | RuntimeException | Error unconfirmed) {
+                                System.err.println("WEB cleanup unconfirmed");
+                                WebProcessLifetime.retainUnknown();
+                              }
+                            }
+                          }));
+      System.err.println("WEB cleanup complete");
+    }
   }
 
   static void fatal(Thread thread, Throwable failure) {

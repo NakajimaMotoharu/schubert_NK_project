@@ -17,7 +17,7 @@ public final class WebLogReplayWorker implements AutoCloseable {
   private static final Duration CLOSE_TIMEOUT = Duration.ofSeconds(5);
   private final DispatchAction action;
   private final long intervalNanos;
-  private final long closeTimeoutMillis;
+  private final Duration closeTimeout;
   private final Thread thread;
   private final AtomicBoolean active = new AtomicBoolean(true);
   private final AtomicBoolean terminal = new AtomicBoolean();
@@ -36,7 +36,7 @@ public final class WebLogReplayWorker implements AutoCloseable {
       throw new IllegalArgumentException("web log worker interval or close timeout is invalid");
     }
     this.intervalNanos = interval.toNanos();
-    this.closeTimeoutMillis = closeTimeout.toMillis();
+    this.closeTimeout = closeTimeout;
     this.thread =
         Thread.ofPlatform()
             .daemon(true)
@@ -94,19 +94,25 @@ public final class WebLogReplayWorker implements AutoCloseable {
 
   @Override
   public void close() {
+    closeWithin(closeTimeout);
+  }
+
+  /** Uses the remaining native budget; zero is a bounded observation, never join(0) forever. */
+  public void closeWithin(Duration remaining) {
+    Objects.requireNonNull(remaining, "log worker close budget");
+    if (remaining.isNegative() || remaining.compareTo(Duration.ofSeconds(30)) > 0)
+      throw new IllegalArgumentException("invalid log worker close budget");
     // BUG629: a requested stop is not a completed join; retry must inspect the live thread.
     active.set(false);
     if (Thread.currentThread() == thread)
       throw new IllegalStateException("web log worker cannot join its own owner");
     thread.interrupt();
     try {
-      thread.join(closeTimeoutMillis);
+      if (!thread.join(remaining))
+        throw new IllegalStateException("web log worker did not stop within its deadline");
     } catch (InterruptedException failure) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException("web log worker stop was interrupted", failure);
-    }
-    if (thread.isAlive()) {
-      throw new IllegalStateException("web log worker did not stop within its deadline");
     }
   }
 

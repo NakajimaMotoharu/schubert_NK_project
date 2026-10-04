@@ -13,10 +13,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
 import org.apache.catalina.LifecycleException;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Restricted production Web composition: DB/JMS transport readiness precedes HTTP binding, then the
@@ -126,6 +128,32 @@ public final class WebApplication {
           dependencies,
       Class<?>... featureConfigurations)
       throws LifecycleException {
+    return startCore(runtimeDirectory, port, dependencies, null, featureConfigurations);
+  }
+
+  /** Same pair and security chain, with partial HTTP ownership retained by the native caller. */
+  WebHttpServer startOwnedWithCoreSessionDependencies(
+      Path runtimeDirectory,
+      int port,
+      BiFunction<EncryptedWebSessionRepository, SpringEncryptedSessionRepository, Map<Class<?>, ?>>
+          dependencies,
+      Consumer<WebHttpServer> owner,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
+    WebHttpServer.validateConfiguration(runtimeDirectory, port, featureConfigurations);
+    Objects.requireNonNull(dependencies, "dependencies");
+    Objects.requireNonNull(owner, "HTTP owner");
+    return startCore(runtimeDirectory, port, dependencies, owner, featureConfigurations);
+  }
+
+  private WebHttpServer startCore(
+      Path runtimeDirectory,
+      int port,
+      BiFunction<EncryptedWebSessionRepository, SpringEncryptedSessionRepository, Map<Class<?>, ?>>
+          dependencies,
+      @Nullable Consumer<WebHttpServer> owner,
+      Class<?>... featureConfigurations)
+      throws LifecycleException {
     new WebDependencyReadiness(database, broker).verify();
     var core = new EncryptedWebSessionRepository(database, codec, clock);
     var sessions = new SpringEncryptedSessionRepository(core, clock);
@@ -133,7 +161,11 @@ public final class WebApplication {
         WebHttpServer.checkedDependencies(dependencies.apply(core, sessions));
     var security =
         new WebSecurityFilterFactory().create(sessions, authentication, audit, requestIds);
-    return WebHttpServer.start(
-        runtimeDirectory, port, security, registeredDependencies, featureConfigurations);
+    if (owner == null) {
+      return WebHttpServer.start(
+          runtimeDirectory, port, security, registeredDependencies, featureConfigurations);
+    }
+    return WebHttpServer.startOwned(
+        runtimeDirectory, port, security, registeredDependencies, owner, featureConfigurations);
   }
 }

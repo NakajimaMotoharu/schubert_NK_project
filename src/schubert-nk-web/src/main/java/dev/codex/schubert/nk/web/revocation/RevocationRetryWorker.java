@@ -14,7 +14,8 @@ import java.util.concurrent.locks.LockSupport;
 public final class RevocationRetryWorker implements AutoCloseable {
   private static final Duration CLOSE_TIMEOUT = Duration.ofSeconds(5);
   private final DispatchAction action;
-  private final long intervalNanos, closeTimeoutMillis;
+  private final long intervalNanos;
+  private final Duration closeTimeout;
   private final Thread thread;
   private final AtomicBoolean active = new AtomicBoolean(true), terminal = new AtomicBoolean();
   private final AtomicLong completed = new AtomicLong(), failed = new AtomicLong();
@@ -29,7 +30,7 @@ public final class RevocationRetryWorker implements AutoCloseable {
         || closeTimeout.compareTo(CLOSE_TIMEOUT) > 0)
       throw new IllegalArgumentException("revocation worker interval or close timeout is invalid");
     intervalNanos = interval.toNanos();
-    closeTimeoutMillis = closeTimeout.toMillis();
+    this.closeTimeout = closeTimeout;
     thread =
         Thread.ofPlatform()
             .daemon(true)
@@ -79,18 +80,25 @@ public final class RevocationRetryWorker implements AutoCloseable {
 
   @Override
   public void close() {
+    closeWithin(closeTimeout);
+  }
+
+  /** Remaining native budget; a timed-out actual join retains the borrowed dependencies. */
+  public void closeWithin(Duration remaining) {
+    Objects.requireNonNull(remaining, "revocation close budget");
+    if (remaining.isNegative() || remaining.compareTo(Duration.ofSeconds(30)) > 0)
+      throw new IllegalArgumentException("invalid revocation close budget");
     active.set(false);
     if (Thread.currentThread() == thread)
       throw new IllegalStateException("revocation worker cannot join its own owner");
     thread.interrupt();
     try {
-      thread.join(closeTimeoutMillis);
+      if (!thread.join(remaining))
+        throw new IllegalStateException("revocation worker did not stop within its deadline");
     } catch (InterruptedException interruption) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException("revocation worker stop was interrupted");
     }
-    if (thread.isAlive())
-      throw new IllegalStateException("revocation worker did not stop within its deadline");
   }
 
   @FunctionalInterface

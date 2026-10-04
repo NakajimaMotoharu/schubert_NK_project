@@ -32,6 +32,117 @@ class WebHttpServerTest {
   @TempDir Path root;
 
   @Test
+  void nativeOwner001CapturePrecedesVendorStartAndFatalKeepsRetryableOwner() throws Exception {
+    var captured = new java.util.concurrent.atomic.AtomicReference<WebHttpServer>();
+    var stops = new AtomicInteger();
+    var destroys = new AtomicInteger();
+    Error fatal = new LinkageError("synthetic startup fatal");
+    var container =
+        new Tomcat() {
+          @Override
+          public void start() throws LifecycleException {
+            assertNotNull(captured.get());
+            assertThrows(IllegalStateException.class, captured.get()::port);
+            assertThrows(IllegalStateException.class, captured.get()::mappedPaths);
+            super.start();
+            throw fatal;
+          }
+
+          @Override
+          public void stop() throws LifecycleException {
+            if (stops.incrementAndGet() == 1) throw new LifecycleException("synthetic UNKNOWN");
+            super.stop();
+          }
+
+          @Override
+          public void destroy() throws LifecycleException {
+            destroys.incrementAndGet();
+            super.destroy();
+          }
+        };
+    assertSame(
+        fatal,
+        assertThrows(
+            LinkageError.class,
+            () ->
+                WebHttpServer.startWithOwner(
+                    root,
+                    0,
+                    (r, s, c) -> c.doFilter(r, s),
+                    Map.of(),
+                    () -> container,
+                    captured::set)));
+    int bound = container.getConnector().getLocalPort();
+    assertTrue(bound > 0);
+    assertEquals(0, destroys.get());
+    try {
+      assertThrows(LifecycleException.class, captured.get()::close);
+      assertEquals(0, destroys.get());
+      captured.get().close();
+      assertEquals(2, stops.get());
+      assertEquals(1, destroys.get());
+      captured.get().close();
+      assertEquals(1, destroys.get());
+      try (var listener = new java.net.ServerSocket(bound)) {
+        assertEquals(bound, listener.getLocalPort());
+      }
+    } finally {
+      captured.get().close();
+    }
+  }
+
+  @Test
+  void nativeOwner002ActualOwnedSuccessAndNullRefusal() throws Exception {
+    Filter security = (r, s, c) -> c.doFilter(r, s);
+    assertThrows(
+        NullPointerException.class,
+        () -> WebHttpServer.startOwned(root, 0, security, Map.of(), null));
+    var captured = new java.util.concurrent.atomic.AtomicReference<WebHttpServer>();
+    var server = WebHttpServer.startOwned(root, 0, security, Map.of(), captured::set);
+    try (var client = HttpClient.newHttpClient()) {
+      assertSame(server, captured.get());
+      assertTrue(server.mappedPaths().contains("/login"));
+      assertEquals(200, send(client, server.port(), "GET", "/login").statusCode());
+    } finally {
+      server.close();
+    }
+  }
+
+  @Test
+  void nativeOwner003LegacyFatalCleanupPreservesIdentityAndSelfSuppression() {
+    for (int mode : new int[] {0, 1, 2}) {
+      Error primary = new LinkageError("synthetic primary");
+      Error secondary = new AssertionError("synthetic cleanup");
+      var closes = new AtomicInteger();
+      var vendor =
+          new Tomcat() {
+            @Override
+            public void start() {
+              throw primary;
+            }
+
+            @Override
+            public void destroy() throws LifecycleException {
+              closes.incrementAndGet();
+              super.destroy();
+              if (mode == 1) throw secondary;
+              if (mode == 2) throw primary;
+            }
+          };
+      assertSame(
+          primary,
+          assertThrows(
+              LinkageError.class,
+              () ->
+                  WebHttpServer.startWithFactory(
+                      root, 0, (r, s, c) -> c.doFilter(r, s), () -> vendor)));
+      assertEquals(1, closes.get());
+      assertEquals(mode == 1 ? 1 : 0, primary.getSuppressed().length);
+      if (mode == 1) assertSame(secondary, primary.getSuppressed()[0]);
+    }
+  }
+
+  @Test
   void rerun008UnknownHttpStopAndDestroyRemainRetryableWithoutSkippingPhase() throws Exception {
     for (boolean stopFails : new boolean[] {true, false}) {
       var stops = new AtomicInteger();

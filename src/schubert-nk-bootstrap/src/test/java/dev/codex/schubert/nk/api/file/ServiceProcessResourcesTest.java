@@ -70,7 +70,7 @@ final class ServiceProcessResourcesTest {
               new InspectorCredentialLoaderTest.TestSecurity(io),
               io,
               ServiceProcessResourcesTest::apiPool);
-      runtime.execute(
+      runtime.executeRetainingUnknown(
           (pool, credentials) -> {
             poolRef.set((HikariDataSource) pool);
             credentialsRef.set(credentials);

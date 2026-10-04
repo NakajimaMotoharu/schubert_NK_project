@@ -8,11 +8,14 @@ import xml.etree.ElementTree as E
 root = Path('/home/mini/codex/project1/work/pgpt-foundation')
 work = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 tag = 'target-selected-v4'
-assert sys.argv[1:] in ([], ['PG454'])
-graph = sys.argv[1:] == ['PG454']
+assert sys.argv[1:] in ([], ['PG454'], ['PG454_NATIVE'])
+native_group = sys.argv[1:] == ['PG454_NATIVE']
+graph = bool(sys.argv[1:])
 run = 'PG454' if graph else 'PG453'
 if graph:
     tag = 'graph-selected-v8'
+if native_group:
+    tag = 'native-selected-v4'
 prefix = work / (run.lower() + '-' + tag)
 frozen = work / (prefix.name + '-frozen')
 out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / (run + '-' + tag)
@@ -27,6 +30,13 @@ if graph:
              'WebHttpAdmissionValve', 'WebHttpAdmissionValve$Lease', 'WebManagementServer'}
 counts = (5, 7, 10, 33, 63, 8) if graph else (5, 7, 10, 99, 182, 43)
 total, suites = (126, 18) if graph else (346, 33)
+if native_group:
+    source = '2aeb40aeba752e500b7a2d564ad62dd175ce5976'
+    names |= {'WebBrokerContexts', 'ServiceProcessResources', 'WebProcessLifetime',
+              'RevocationRetryWorker', 'WebLogReplayWorker', 'JmsRequestReplyClient',
+              'MediaRangeService', 'WebNativeRuntime'}
+    counts = (5, 7, 25, 33, 95, 8)
+    total, suites = 173, 26
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert not out.exists() and prefix.with_suffix('.exit').read_text().strip() == '0'
 assert prefix.with_suffix('.source').read_text().strip() == source
@@ -62,7 +72,10 @@ for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', '
         if name in names and cls.findall('counter'):
             coverage[name] = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))}
                               for c in cls.findall('counter')}
-assert set(coverage) == names and all(c['missed'] == 0 for v in coverage.values() for c in v.values())
+assert set(coverage) == names
+incomplete = {'WebApplication', 'WebBusinessAssembly', 'WebNativeRuntime',
+              'WebProcessLifetime', 'WebBrokerContexts'} if native_group else set()
+assert all(c['missed'] == 0 for n,v in coverage.items() if n not in incomplete for c in v.values())
 assert sum(m['tests'] for m in modules.values()) == total and len(cases) == suites
 before = []
 for version, code, tests, failures, limitations in (
@@ -120,6 +133,21 @@ if graph:
                         'WebBrokerContexts native create/credential-copy line4/method2 missed: not program100%',
                         'Legacy partial runtime/outer owner/worker budget/native graph remain open',
                         'Collector profile added after frozen run; fresh grouped full must include it',
+                        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
+    })
+if native_group:
+    manifest.update({
+        'sourceDirty': 'PG-D369/370 C3/C4 native graph/owned HTTP/remaining worker budget/lifetime/validated configuration/native outer UNKNOWN retention; BUG655..660 fixes',
+        'command': 'bash WorkPG379/pg454_selected.sh native-selected-v4 ' + source + ' exact26Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
+        'testIds': ['NATIVE-CORE/GRAPH/READY/STOP/OWNER/BUDGET/CONFIG/LIFE/OUTER', 'existing API/SQL/JMS/media/native-entry refusal regression'],
+        'bugs': [f'BUG-{n}' for n in range(648, 661)],
+        'ykt': [f'YKT-{n}' for n in range(460, 467)],
+        'expected': '085 C3/C4: capture before real Tomcat vendor start and retain fatal/UNKNOWN owner; actual repeated join with remaining0..30s budget; initial1/12/20 and media1/2/20 saturation/next send or file0/recovery; config100ms across eight real facade fields/default2s; same lifetime TERM admission refusal; child actual native-release UNKNOWN/interrupt/periodic observation attempts1/downstream0/alive with fixture SIGTERM143, not normal provider cleanup; real PG five credentials/normal retained-mode and legacy partial/compound scopes',
+        'actual': '173PT26suite/FES0/static6zero; twelve listed classes every counter missed0. NativeRuntime/ordinary main/native admission not accepted; known missed counters preserved without exclusions',
+        'limitations': ['Selected host components only; grouped fresh full and actual ordinary native/parent/Caddy/DONE/CHR not accepted',
+                        'WebApplication old delegates L3/M2 and Assembly default constructor L1 remain for fresh full; Broker native L4/M2, Lifetime shutdown/retain and NativeRuntime graph require actual native proof',
+                        'Collector profile added after byte/source capture; grouped full must include it',
+                        'Legacy partial runtime remains under BUG629/YKT446/460 until native scope/non-applicability and independent recurrence proof',
                         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
     })
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]

@@ -128,7 +128,7 @@ public final class ApiProcessMain {
                             inputs.credentials(),
                             inputs.config().value("nk.db.url")),
                         source -> new ApiJdbcPool().open(source))
-                    .execute(
+                    .executeRetainingUnknown(
                         (pool, credentials) -> {
                           System.err.println("API startup entered BROKER");
                           try (var broker =

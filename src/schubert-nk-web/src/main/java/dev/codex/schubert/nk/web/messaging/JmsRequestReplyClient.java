@@ -36,8 +36,8 @@ public final class JmsRequestReplyClient {
       ReplyCorrelationRegistry registry, Clock clock, int maximumConcurrent) {
     this.registry = Objects.requireNonNull(registry, "registry");
     this.clock = Objects.requireNonNull(clock, "clock");
-    if (maximumConcurrent < 1 || maximumConcurrent > STANDARD_CONCURRENCY) {
-      throw new IllegalArgumentException("maximum concurrent JMS waits must be between 1 and 12");
+    if (maximumConcurrent < 1 || maximumConcurrent > ReplyCorrelationRegistry.STANDARD_CAPACITY) {
+      throw new IllegalArgumentException("maximum concurrent JMS waits must be between 1 and 20");
     }
     concurrentWaits = new Semaphore(maximumConcurrent);
   }

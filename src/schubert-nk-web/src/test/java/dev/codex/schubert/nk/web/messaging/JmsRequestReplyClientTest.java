@@ -154,47 +154,49 @@ final class JmsRequestReplyClientTest {
   }
 
   @Test
-  void twelveConcurrentWaitsAreAcceptedAndThirteenthIsRejected() throws Exception {
-    JmsRequestReplyClient client = client(new MutableClock(NOW), 12);
-    CountDownLatch entered = new CountDownLatch(12);
-    CountDownLatch release = new CountDownLatch(1);
-    AtomicInteger sends = new AtomicInteger();
-    List<Future<byte[]>> waits = new ArrayList<>();
-    try (ExecutorService executor = Executors.newFixedThreadPool(12)) {
-      for (int index = 1; index <= 12; index++) {
-        UUID id = new UUID(0, index);
-        waits.add(
-            executor.submit(
+  void approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending() throws Exception {
+    for (int maximum : new int[] {1, 12, 20}) {
+      JmsRequestReplyClient client = client(new MutableClock(NOW), maximum);
+      CountDownLatch entered = new CountDownLatch(maximum);
+      CountDownLatch release = new CountDownLatch(1);
+      AtomicInteger sends = new AtomicInteger();
+      List<Future<byte[]>> waits = new ArrayList<>();
+      try (ExecutorService executor = Executors.newFixedThreadPool(maximum)) {
+        for (int index = 1; index <= maximum; index++) {
+          UUID id = new UUID(0, index);
+          waits.add(
+              executor.submit(
+                  () ->
+                      client.exchange(
+                          id,
+                          request(),
+                          Duration.ofSeconds(2),
+                          (correlationId, body) -> {
+                            sends.incrementAndGet();
+                            entered.countDown();
+                            await(release);
+                            client.onReply(correlationId, new byte[] {7});
+                          })));
+        }
+        assertTrue(entered.await(2, TimeUnit.SECONDS));
+        JmsRequestReplyException capacity =
+            assertThrows(
+                JmsRequestReplyException.class,
                 () ->
                     client.exchange(
-                        id,
+                        new UUID(0, maximum + 1),
                         request(),
                         Duration.ofSeconds(2),
-                        (correlationId, body) -> {
-                          sends.incrementAndGet();
-                          entered.countDown();
-                          await(release);
-                          client.onReply(correlationId, new byte[] {7});
-                        })));
+                        (id, body) -> sends.incrementAndGet()));
+        assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
+        release.countDown();
+        for (Future<byte[]> wait : waits) {
+          assertArrayEquals(new byte[] {7}, wait.get(2, TimeUnit.SECONDS));
+        }
       }
-      assertTrue(entered.await(2, TimeUnit.SECONDS));
-      JmsRequestReplyException capacity =
-          assertThrows(
-              JmsRequestReplyException.class,
-              () ->
-                  client.exchange(
-                      new UUID(0, 13),
-                      request(),
-                      Duration.ofSeconds(2),
-                      (id, body) -> sends.incrementAndGet()));
-      assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
-      release.countDown();
-      for (Future<byte[]> wait : waits) {
-        assertArrayEquals(new byte[] {7}, wait.get(2, TimeUnit.SECONDS));
-      }
+      assertEquals(maximum, sends.get());
+      assertEquals(0, client.pendingCount());
     }
-    assertEquals(12, sends.get());
-    assertEquals(0, client.pendingCount());
   }
 
   @Test
@@ -213,7 +215,7 @@ final class JmsRequestReplyClientTest {
         () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), Clock.systemUTC(), 0));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), Clock.systemUTC(), 13));
+        () -> new JmsRequestReplyClient(new ReplyCorrelationRegistry(), Clock.systemUTC(), 21));
 
     JmsRequestReplyClient client = client(new MutableClock(NOW), 1);
     JmsRequestSender sender = (id, body) -> client.onReply(id, new byte[] {1});

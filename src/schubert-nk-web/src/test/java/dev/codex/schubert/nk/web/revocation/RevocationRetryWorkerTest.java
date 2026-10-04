@@ -20,6 +20,46 @@ final class RevocationRetryWorkerTest {
   @TempDir Path root;
 
   @Test
+  void nativeBudget002ZeroIsBoundedAndActualJoinRetainsUnknownWorker() throws Exception {
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var owner = new AtomicReference<Thread>();
+    var worker =
+        RevocationRetryWorker.start(
+            () -> {
+              owner.set(Thread.currentThread());
+              entered.countDown();
+              while (release.getCount() != 0) {
+                try {
+                  release.await();
+                } catch (InterruptedException ignored) {
+                  /* held vendor */
+                }
+              }
+            },
+            Duration.ofMillis(1),
+            Duration.ofMillis(1));
+    assertTrue(entered.await(5, TimeUnit.SECONDS));
+    try {
+      assertThrows(NullPointerException.class, () -> worker.closeWithin(null));
+      assertThrows(IllegalArgumentException.class, () -> worker.closeWithin(Duration.ofNanos(-1)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> worker.closeWithin(Duration.ofSeconds(30).plusNanos(1)));
+      assertTrue(worker.running());
+      assertThrows(IllegalStateException.class, () -> worker.closeWithin(Duration.ZERO));
+      assertThrows(IllegalStateException.class, () -> worker.closeWithin(Duration.ofMillis(1)));
+      assertTrue(owner.get().isAlive());
+      assertFalse(worker.running());
+    } finally {
+      release.countDown();
+      worker.closeWithin(Duration.ofSeconds(30));
+    }
+    assertFalse(owner.get().isAlive());
+    worker.closeWithin(Duration.ZERO);
+  }
+
+  @Test
   void rerun008aPublicCoordinatorOwnsNoOuterDbKeyOrBroker() throws Exception {
     var db = new WebLogDatabaseFixture(root);
     try (var codec = new RevocationPayloadCodec("revoke", new byte[32], null, null)) {

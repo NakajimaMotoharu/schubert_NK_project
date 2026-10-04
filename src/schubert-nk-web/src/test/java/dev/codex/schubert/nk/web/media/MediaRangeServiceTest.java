@@ -213,68 +213,75 @@ class MediaRangeServiceTest {
 
   @Test
   void med030TwentyStreamsRejectTwentyFirstAndRecoverAllPermits() throws Exception {
-    try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
-        var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      var real = new DescriptorFileResolver(held, identity);
-      AtomicInteger opens = new AtomicInteger();
-      var entered = new java.util.concurrent.atomic.AtomicReference<>(new CountDownLatch(20));
-      var release = new java.util.concurrent.atomic.AtomicReference<>(new CountDownLatch(1));
-      var service =
-          new MediaRangeService(
-              (d, op) -> {
-                int position = opens.incrementAndGet();
-                entered.get().countDown();
-                try {
-                  assertTrue(release.get().await(10, TimeUnit.SECONDS));
-                } catch (InterruptedException failure) {
-                  Thread.currentThread().interrupt();
-                  throw new IOException("interrupted");
-                }
-                if (position == 1) throw new IOException("SYNTHETIC_PRIVATE_PATH");
-                real.read(d, op);
-              });
-      for (int round = 0; round < 2; round++) {
-        var tasks = new ArrayList<java.util.concurrent.Future<Boolean>>();
-        try {
-          for (int i = 0; i < 20; i++)
-            tasks.add(
-                executor.submit(
-                    () -> {
-                      try {
-                        deliver(service, inline, Optional.of("bytes=2-4"), false);
-                        return true;
-                      } catch (MediaDeliveryException failure) {
-                        assertEquals(MediaDeliveryException.Reason.UNAVAILABLE, failure.reason());
-                        return false;
-                      }
-                    }));
-          assertTrue(entered.get().await(10, TimeUnit.SECONDS));
-          int before = opens.get();
-          reject(
-              MediaDeliveryException.Reason.BUSY,
-              () -> deliver(service, inline, Optional.empty(), true));
-          reject(
-              MediaDeliveryException.Reason.INVALID_DESCRIPTOR,
-              () ->
-                  service.deliver(
-                      MediaType.AUDIO,
-                      "7",
-                      ContentDisposition.INLINE,
-                      Optional.empty(),
-                      true,
-                      inline,
-                      new FakeResponse("none")));
-          assertEquals(before, opens.get());
-        } finally {
-          release.get().countDown();
+    for (int maximum : new int[] {1, 2, 20}) {
+      try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
+          var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+        var real = new DescriptorFileResolver(held, identity);
+        AtomicInteger opens = new AtomicInteger();
+        var entered =
+            new java.util.concurrent.atomic.AtomicReference<>(new CountDownLatch(maximum));
+        var release = new java.util.concurrent.atomic.AtomicReference<>(new CountDownLatch(1));
+        var service =
+            new MediaRangeService(
+                (d, op) -> {
+                  int position = opens.incrementAndGet();
+                  entered.get().countDown();
+                  try {
+                    assertTrue(release.get().await(10, TimeUnit.SECONDS));
+                  } catch (InterruptedException failure) {
+                    Thread.currentThread().interrupt();
+                    throw new IOException("interrupted");
+                  }
+                  if (position == 1) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                  real.read(d, op);
+                },
+                maximum);
+        for (int round = 0; round < 2; round++) {
+          var tasks = new ArrayList<java.util.concurrent.Future<Boolean>>();
+          try {
+            for (int i = 0; i < maximum; i++)
+              tasks.add(
+                  executor.submit(
+                      () -> {
+                        try {
+                          deliver(service, inline, Optional.of("bytes=2-4"), false);
+                          return true;
+                        } catch (MediaDeliveryException failure) {
+                          assertEquals(MediaDeliveryException.Reason.UNAVAILABLE, failure.reason());
+                          return false;
+                        }
+                      }));
+            assertTrue(entered.get().await(10, TimeUnit.SECONDS));
+            int before = opens.get();
+            reject(
+                MediaDeliveryException.Reason.BUSY,
+                () -> deliver(service, inline, Optional.empty(), true));
+            reject(
+                MediaDeliveryException.Reason.INVALID_DESCRIPTOR,
+                () ->
+                    service.deliver(
+                        MediaType.AUDIO,
+                        "7",
+                        ContentDisposition.INLINE,
+                        Optional.empty(),
+                        true,
+                        inline,
+                        new FakeResponse("none")));
+            assertEquals(before, opens.get());
+          } finally {
+            release.get().countDown();
+          }
+          int success = 0;
+          for (var task : tasks) if (task.get(10, TimeUnit.SECONDS)) success++;
+          assertEquals(round == 0 ? maximum - 1 : maximum, success);
+          entered.set(new CountDownLatch(maximum));
+          release.set(new CountDownLatch(1));
         }
-        int success = 0;
-        for (var task : tasks) if (task.get(10, TimeUnit.SECONDS)) success++;
-        assertEquals(round == 0 ? 19 : 20, success);
-        entered.set(new CountDownLatch(20));
-        release.set(new CountDownLatch(1));
+        assertEquals(maximum * 2, opens.get());
+        assertThrows(NullPointerException.class, () -> new MediaRangeService(null, maximum));
+        assertThrows(IllegalArgumentException.class, () -> new MediaRangeService(real, 0));
+        assertThrows(IllegalArgumentException.class, () -> new MediaRangeService(real, 21));
       }
-      assertEquals(40, opens.get());
     }
   }
 

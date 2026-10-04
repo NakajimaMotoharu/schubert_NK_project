@@ -38,6 +38,7 @@ final class WebBusinessAssembly {
   private final WebRequestLogProducer requestLog;
   private final RevocationPayloadCodec revoke;
   private final WebHttpAdmission admission;
+  private final Duration timeout;
 
   WebBusinessAssembly(
       JmsRequestReplyClient client,
@@ -52,6 +53,41 @@ final class WebBusinessAssembly {
       WebRequestLogProducer requestLog,
       RevocationPayloadCodec revoke,
       WebHttpAdmission admission) {
+    this(
+        client,
+        sender,
+        clock,
+        identifiers,
+        audit,
+        database,
+        files,
+        media,
+        mediaAudit,
+        requestLog,
+        revoke,
+        admission,
+        Duration.ofSeconds(2));
+  }
+
+  WebBusinessAssembly(
+      JmsRequestReplyClient client,
+      ArtemisRequestSender sender,
+      Clock clock,
+      Supplier<UUID> identifiers,
+      WebSecurityAudit audit,
+      DataSource database,
+      LargeResultReader files,
+      MediaRangeService media,
+      WebMediaAudit mediaAudit,
+      WebRequestLogProducer requestLog,
+      RevocationPayloadCodec revoke,
+      WebHttpAdmission admission,
+      Duration timeout) {
+    Objects.requireNonNull(timeout, "reply timeout");
+    if (timeout.compareTo(Duration.ofMillis(100)) < 0
+        || timeout.compareTo(Duration.ofSeconds(2)) > 0)
+      throw new IllegalArgumentException("native reply timeout is outside 100ms..2s");
+    this.timeout = timeout;
     this.client = Objects.requireNonNull(client, "reply client");
     this.sender = Objects.requireNonNull(sender, "request sender");
     this.clock = Objects.requireNonNull(clock, "clock");
@@ -80,7 +116,6 @@ final class WebBusinessAssembly {
       EncryptedWebSessionRepository core, SpringEncryptedSessionRepository sessions) {
     Objects.requireNonNull(core, "core sessions");
     Objects.requireNonNull(sessions, "security sessions");
-    var timeout = Duration.ofSeconds(2);
     var logout = new LogoutWireClient(client, sender, clock, identifiers, timeout);
     return Map.ofEntries(
         Map.entry(

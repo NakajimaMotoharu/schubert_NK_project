@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.bootstrap;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.function.BooleanSupplier;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -14,26 +15,36 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class WebHttpAdmission {
   private final Object lock = new Object();
+  private final BooleanSupplier ownerStopping;
   private boolean accepting;
   private boolean stopping;
   private int active;
 
+  public WebHttpAdmission() {
+    this(() -> false);
+  }
+
+  WebHttpAdmission(BooleanSupplier ownerStopping) {
+    this.ownerStopping = Objects.requireNonNull(ownerStopping, "HTTP stop notification");
+  }
+
   public void admit() throws IOException {
     synchronized (lock) {
-      if (stopping || accepting) throw new IOException("Web HTTP admission unavailable");
+      if (stopping || accepting || ownerStopping.getAsBoolean())
+        throw new IOException("Web HTTP admission unavailable");
       accepting = true;
     }
   }
 
   public boolean accepting() {
     synchronized (lock) {
-      return accepting;
+      return accepting && !ownerStopping.getAsBoolean();
     }
   }
 
   boolean acquire() {
     synchronized (lock) {
-      if (!accepting) return false;
+      if (!accepting || ownerStopping.getAsBoolean()) return false;
       active++;
       return true;
     }

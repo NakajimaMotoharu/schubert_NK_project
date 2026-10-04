@@ -21,6 +21,25 @@ final class WebHttpAdmissionTest {
   @TempDir Path root;
 
   @Test
+  void stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling() throws Exception {
+    assertThrows(NullPointerException.class, () -> new WebHttpAdmission(null));
+    var stopping = new java.util.concurrent.atomic.AtomicBoolean();
+    var gate = new WebHttpAdmission(stopping::get);
+    gate.admit();
+    assertTrue(gate.accepting());
+    assertTrue(gate.acquire());
+    stopping.set(true);
+    assertFalse(gate.accepting());
+    assertFalse(gate.acquire());
+    gate.completed();
+    gate.drain(Duration.ZERO);
+    var stoppedBeforeReady = new WebHttpAdmission(() -> true);
+    assertThrows(IOException.class, stoppedBeforeReady::admit);
+    assertFalse(stoppedBeforeReady.accepting());
+    assertFalse(stoppedBeforeReady.acquire());
+  }
+
+  @Test
   void stop001002BoundaryInterruptAndConcurrentCompletion() throws Exception {
     var gate = new WebHttpAdmission();
     assertFalse(gate.accepting());

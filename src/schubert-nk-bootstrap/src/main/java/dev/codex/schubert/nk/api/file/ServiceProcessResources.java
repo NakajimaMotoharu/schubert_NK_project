@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
 import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -109,18 +110,30 @@ public final class ServiceProcessResources {
   }
 
   public void execute(Operation operation) throws StorageIoException {
+    execute(operation, false);
+  }
+
+  /** Native callback: an unconfirmed release must not unwind downstream key/root owners. */
+  public void executeRetainingUnknown(Operation operation) throws StorageIoException {
+    execute(operation, true);
+  }
+
+  private void execute(Operation operation, boolean retainUnknown) throws StorageIoException {
     Objects.requireNonNull(operation, "startup operation");
     var root = OwnedTransferDirectory.open(directories, inputs.credentials().directory());
     ResourceScope.use(
-        root::close,
+        release(root::close, retainUnknown),
         () -> {
           var reader = new ServiceCredentialReader(root, security, inputs.service(), io);
           var credentials = ServiceCredentialSet.load(reader, inputs.service());
-          return ResourceScope.use(credentials::close, () -> withDatabase(credentials, operation));
+          return ResourceScope.use(
+              release(credentials::close, retainUnknown),
+              () -> withDatabase(credentials, operation, retainUnknown));
         });
   }
 
-  private Boolean withDatabase(ServiceCredentialSet credentials, Operation operation)
+  private Boolean withDatabase(
+      ServiceCredentialSet credentials, Operation operation, boolean retainUnknown)
       throws StorageIoException {
     char[] password =
         credentials.copyPassword(ServiceCredentialId.forService(inputs.service()).getFirst());
@@ -132,15 +145,37 @@ public final class ServiceProcessResources {
       Arrays.fill(password, '\0');
     }
     return ResourceScope.use(
-        source::close,
+        release(source::close, retainUnknown),
         () -> {
           HikariDataSource pool = Objects.requireNonNull(pools.open(source), "database pool");
           return ResourceScope.use(
-              pool::close,
+              release(pool::close, retainUnknown),
               () -> {
                 operation.run(pool, credentials);
                 return Boolean.TRUE;
               });
         });
+  }
+
+  // The native owner holds this exact release frame, including the original failure graph.
+  // No raw provider text, clean marker, automatic retry or downstream cleanup after UNKNOWN.
+  static Closeable release(Closeable resource, boolean retainUnknown) {
+    Objects.requireNonNull(resource, "service resource release");
+    if (!retainUnknown) return resource;
+    return () -> {
+      try {
+        resource.close();
+      } catch (IOException | RuntimeException | Error unconfirmed) {
+        System.err.println("service resource release unconfirmed");
+        while (true) {
+          try {
+            // Periodic observation wakeup, never a release/automatic retry/termination proof.
+            Thread.sleep(1000);
+          } catch (InterruptedException notification) {
+            /* UNKNOWN still owns the full outer frame. */
+          }
+        }
+      }
+    };
   }
 }

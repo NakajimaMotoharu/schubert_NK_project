@@ -710,5 +710,32 @@ if int(identifier[2:5]) >= 453:
         'Signed V027/Backup/ordinary parent/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no other-source/interrupted result reuse',
     ]
+if int(identifier[2:5]) >= 454:
+    graph_names = {'ApiManagementServer', 'ArtemisReplyConsumers', 'WebApplication',
+                   'WebBusinessAssembly', 'WebHttpAdmission', 'WebHttpServer',
+                   'WebHttpAdmissionValve', 'WebHttpAdmissionValve$Lease', 'WebManagementServer',
+                   'ServiceProcessResources', 'RevocationRetryWorker', 'WebLogReplayWorker',
+                   'JmsRequestReplyClient', 'MediaRangeService'}
+    observed_names = graph_names | {'WebNativeRuntime', 'WebProcessLifetime', 'WebBrokerContexts'}
+    graph_coverage = {}
+    for module in ('bootstrap', 'api', 'web'):
+        for c in ET.parse(root / f'src/schubert-nk-{module}/target/site/jacoco/jacoco.xml').findall('.//class'):
+            name = c.get('name').rsplit('/', 1)[-1]
+            if c.findall('counter') and name in observed_names:
+                graph_coverage[name] = {x.get('type'): {'missed': int(x.get('missed')), 'covered': int(x.get('covered'))} for x in c.findall('counter')}
+    assert set(graph_coverage) == observed_names
+    assert all(x['missed'] == 0 for name,v in graph_coverage.items() if name in graph_names for x in v.values())
+    manifest['webNativeComponentCoverage'] = graph_coverage
+    manifest['testIds'].extend(['NATIVE-CORE/GRAPH/READY/STOP/OWNER/BUDGET/CONFIG/LIFE/OUTER'])
+    manifest['bugs'].extend([f'BUG-{n}' for n in range(648, 661)])
+    manifest['ykt'].extend([f'YKT-{n}' for n in range(460, 467)])
+    manifest['trigger'] = 'PG-D369/370 C1..C4: same-pair full business MVC, actual terminal admission/management/partial-owned HTTP, actual remaining-budget joins, approved configuration projection and native UNKNOWN outer-resource retention; fresh shared ownership six-module feature regression'
+    manifest['limitations'] = [
+        'Host full regression and independent component fixtures only; ordinary external native graph/main/Root/parent are not accepted',
+        'Native Runtime and Lifetime/Broker native branches retain their actual missed counters: no exclusions or other-source reuse',
+        'Caddy/held-original completion capability/live-service intent retirement/whole Morning normal0-or10 remain unconnected',
+        'Legacy startup partial ownership BUG629/YKT446/460, signed V027/Backup/current VM/CHR/native coverage100/formal remain pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
