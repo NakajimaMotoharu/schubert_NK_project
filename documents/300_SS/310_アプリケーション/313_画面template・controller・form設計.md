@@ -2,6 +2,8 @@
 
 ## 1. 目的・追跡
 
+SSC176内部接続補足（2026-10-04）：SCR007/010/013の4GETは明示ContentDetailMvcConfigurationの一つのbounded参照adapterへ注入する。既存Scenario/Animation/Music階層controllerは維持し、SCN/VID/MTRの既存verified facade・API0102終端handlerと保持済transferのLargeResultReaderを借用する。Scenario IDは既存game経路と混同しないnumeric mappingで受け、FILEはSS333の属性/hash/全record/held能力を検証してから既存ScenarioDetailViewModelへ渡す。fragment `#entry-ID`はHTTPへ送られず既存entry anchor/`:target`によるhighlightを維持、任意anchorを業務要求へ追加しない。VIDは検証済request-bound metadataだけ、Musicはstored pair_key/role/display_orderによる閉display projectionだけをHTMLへ渡し、descriptor/DTO/context/物理pathを入れない。戻り先・title/pair表示・全順序・media/DL操作はUI223/235のまま。borrowed root・DB/JMS/codecの所有を変えず、画面単体成功でSS342 fullreadyを公開しない。追跡PG-D365/PT-CONTENT001～009/016079080、独立literal wire/DOM/file integrity/境界null例外並行・同source品質/実nativeを別受入とする。RD/UI/DIF/電文/DDL変更なし。
+
 SCR-001～023/090と非画面endpointについて、template、controller method、form、View Model、固定長IF、validation、表示・権限制御を定める。
 
 - 関連UI: 221～226、232～237、264
@@ -83,13 +85,13 @@ SSC-074/QA-045/UIC-005: SCR-001 LoginのGET controllerは`login` templateのみ�
 | 004 | GET `/scenarios` | `scenarios.html` | `ScenarioController.games(Model)` | `GameListViewModel` | IF-003 | USER/ADMIN、FUN-004 |
 | 005 | GET `/scenarios/{game}` | `scenario-routes.html` | `ScenarioController.routes(GameCode,Model)` | `RouteListViewModel` | IF-006 | USER/ADMIN |
 | 006 | GET `/scenarios/{game}/{prefix}` | `scenario-files.html` | `ScenarioController.files(GameCode,RoutePrefix,Model)` | `ScenarioFileListViewModel` | IF-007 | USER/ADMIN |
-| 007 | GET `/scenarios/{id}` | `scenario.html` | `ScenarioController.detail(long,String anchor,Model)` | `ScenarioDetailViewModel` | IF-008 | USER/ADMIN |
+| 007 | GET `/scenarios/{id}` | `scenario.html` | `ContentDetailController.scenario(String,Model)` | `ScenarioDetailViewModel` | IF-008 | USER/ADMIN |
 | 008 | GET `/animation` | `animation.html` | `AnimationController.menu(Model)` | `AnimationMenuViewModel` | IF-010 | USER/ADMIN、FUN-006 |
 | 009 | GET `/animation/main`,`/animation/ova` | `animation-list.html` | `AnimationController.list(AnimationCategory,Model)` | `AnimationListViewModel` | IF-011 | USER/ADMIN |
-| 010 | GET `/animation/opening`,`/animation/videos/{id}` | `animation-watch.html` | `AnimationController.watch(String,Model)` | `AnimationWatchViewModel` | IF-012 | USER/ADMIN |
+| 010 | GET `/animation/opening`,`/animation/videos/{id}` | `animation-watch.html` | `ContentDetailController.opening/watch(String,Model)` | `AnimationWatchViewModel` | IF-012 | USER/ADMIN |
 | 011 | GET `/music` | `music.html` | `MusicController.categories(Model)` | `MusicCategoryViewModel` | IF-013 | USER/ADMIN、FUN-007 |
 | 012 | GET `/music/{category}` | `music-sections.html` | `MusicController.sections(String,Model)` | `MusicSectionViewModel` | IF-014 | USER/ADMIN |
-| 013 | GET `/music/{category}/{section}` | `music-list.html` | `MusicController.tracks(String,String,Model)` | `MusicTrackViewModel` | IF-015 | USER/ADMIN |
+| 013 | GET `/music/{category}/{section}` | `music-list.html` | `ContentDetailController.tracks(String,String,Model)` | `MusicTrackViewModel` | IF-015 | USER/ADMIN |
 | 014 | GET `/logs` | `logs.html` | `LogController.search(LogSearchForm,Model)` | `LogSearchForm` / `LogSearchViewModel` | IF-017 | ADMIN、FUN-008/AUT-002 |
 | 015 | GET `/admin/users` | `admin/user-list.html` | `UserAdminController.list(UserSearchForm,Model)` | `UserSearchForm` / `UserListViewModel` | IF-018 | ADMIN、FUN-009 |
 | 016 | GET `/admin/users/new` | `admin/user-new.html` | `UserAdminController.newForm(Model)` | `UserCreateForm` | なし | ADMIN |
