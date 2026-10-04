@@ -41,6 +41,8 @@ Port変更はconfig manifestを更新し、firewall・Caddy・client URL・healt
 
 ## 3. Caddy
 
+SSC178（2026-10-04）：親の固定Caddy startはworker oneshot ABIを使わず、固定daemon実効profile・真正manager/kernelの同boot/Invocation/MainPID/startTicks/cgroupと本人listenerを前後照合する。`caddy validate`成功は起動成功でなく、実daemonとTLS検証付きHTTPS `/login` 200まで必要。API/Web同世代readyの連続確認と両intent保持を送達不明のfenceとし、別start/restartを二重発行しない。元親30分及びCaddy30秒期限を維持し、失敗時公開停止・逆順全終端/不明隔離はSS341§10へ従う。
+
 ### 3.1 Caddyfile論理形
 
 `<GLOBAL_IP>`、certificate、upstreamは配備時にrenderし、Gitはplaceholder付きtemplateを管理する。

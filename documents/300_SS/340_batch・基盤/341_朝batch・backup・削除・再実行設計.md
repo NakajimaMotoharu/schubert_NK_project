@@ -392,6 +392,8 @@ SSC-076: この保守専用credentialの管理電文はSS321 §10の`nk.expiry.q
 
 ## 10. Readiness・smoke
 
+SSC178（2026-10-04、内部接続補足）：API ordinary ready→Web全業務ready→固定Caddy validate/実daemon/証明書検証付きHTTPS `/login` 200→同原本completeの順とする。元の親M/専用DB/原本/ISSUED/30分deadlineを連続保持し、API/Webは同捕捉boot/Invocation/PID/startTicks/cgroup/本人管理socket/署名5info/readyを各段前後で再検査する。Caddy送達中はAPI/Web両intentが連続した隔離fenceとなり、別receiptを捏造しない。成功時の稼働サービスintent退役は専用live-ready能力でWEB→API、同inode/同親/元deadline・実client0/全client資源closeと全ready/Caddy確認を前後に満たす。worker終了用退役とは別能力とする。通常後段失敗はCaddy→Web→APIを逆順停止し全kernel終端後に観測ownerを閉じ、残留intentを保全して許可abort。送達/停止/半退役/原本完了不明は非成功・所有保持で隔離し、成功へ補完しない。
+
 | Component | Probe | 成功条件 |
 |---|---|---|
 | PostgreSQL | `pg_isready`＋readonly/read-write probe | 想定DB/schema version、role/grant、WAL/disk正常 |
@@ -424,6 +426,8 @@ SSC-054/BUG-138: 手動backup再実行は通常成功stepのskip例外。331 §8
 Manual commandもsystemd transient scopeまたは対応oneshot unitを通し、root shellでJava/SQL/scriptを直接実行しない。
 
 ## 12. Exit code・終了判定
+
+SSC178：Morning全体の正常値は実Backup/Cleanup7step/Expiry及び元SUCCESS/auditを同DBで完全再読した結果からだけ集約する。実Backup FAILED・六BACKUP_UNAVAILABLE・実Transfer/Expiry続行、許容Cleanup/非critical Expiry警告はWARNING10、全正常はSUCCESS0。未実行/不明/critical/安全性異常を10へ正規化しない。現在保持原本Sessionのcompleteを経て全graph・done全値を照合し、外側原本6FD/DB/credential/Mと最後のroot検査が正常帰還したnative typed経路だけが0/10を返す。途中のholder値やAPI/WebUP、原本file単独から親成功を生成しない。全close不明は0/10不可。PG/PTの正常値でIT/STを合格にしない。
 
 | Code | 分類 | Systemd/operation |
 |---:|---|---|
