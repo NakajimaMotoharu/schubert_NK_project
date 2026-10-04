@@ -373,6 +373,16 @@ SSC-010: Session識別子の機密除外は351 §4を正とする。Login発行�
 
 ## QA-049承認反映：JSON v2・current-row lifecycle（2026-10-03）
 
+### 複数の実表示formの原子的発行（SSC-177）
+
+SCR017等で一画面へ複数の承認済み用途formを出す場合、明示GETで実際に表示するformだけの用途列を既存current-row短mutateへ一度渡し、token群を全確保してから画面へ公開する。用途/null/要素・件数1～10を事前に検査する。保持pending数＋要求form数が10を超えるならUUIDを生成せず現在保持listを不変にして409とする（通常access/version更新は既存mutateのtouchであり業務token変更ではない）。
+
+全確保可能なら、free slotを先に使い、残る新form1件につき最古completedAtのconsumedを1件だけ退役する。同時刻は保存list順、pendingは退役しない。候補UUIDは開始時の全保持UUID（退役候補を含む）と今回候補の両方に衝突しないことを検査し、衝突/時刻不正/保存失敗は全list更新をrollbackして成功公開しない。UUID自動再試行・一部formだけのpending保存はしない。単件issue/require/completeのQA049意味、purpose/issuedAt不変・初回completedAt、API owner/HMACと保存結果検証、入力本文非保存、10件上限・8時間idle/Inbox7日起点を変更しない。DB資源を解放してからAPI/JMSへ接続する。
+
+### 検証済み自己Password resetのlocal終端（SSC-177）
+
+現在ADMIN自身への真正UPW0000/0200はAPIの全session失効を確定した結果であり、0102を受信した事実ではない。callerはfresh IF-020の本人束縛とUSRMUT24 target/versionを確認し、完成印を保存した後、同Spring repository markerに属する現在local sessionだけをinvalidateし、display/security contextを消去して固定Loginへ戻す。API critical監査を正とし、API_SESSION_INVALID/0102監査の捏造、追加LGO送信/再送、別local rowや新Login rowの消去はしない。失敗/未確認commitを成功化せず、既存fatal保持・Cookie終端/503契約を維持する。通常の真正API0102専用terminalは従来のevent/redirect/401を変えない。
+
 同HTTP session内の全用途を合計してpending＋consumedを最大10件とする。用途/UUID/issuedAtは不変で、completedAt欠落はpending、検証済0000/0200を初めて確認した時刻だけを完成印として保存する。完成印を業務結果・認可・API成功proofの代用としない。入力本文・password・payload/HMAC対応入力・業務result snapshotをsessionへ保存しない。
 
 保持中の同token/同入力POSTは現在API認証と既存owner/layout/target/payload HMAC・保存済み結果の検証を経て再操作する。結果GETのrefreshではAPI更新再送を行わない。新formで枠が必要になった場合だけcompletedAtが最古のconsumedを1件退役し、同時刻は保存list順で決定する。pendingを退役しない。全10件pendingなら新form発行を拒否する。退役済み/不在tokenのPOSTは409と明示再GETを要求し、API送信・新UUID発行・自動再操作は0とする。
