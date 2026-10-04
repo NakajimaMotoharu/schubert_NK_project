@@ -1,5 +1,11 @@
 # 082 NK-WEB-002 User業務接続実行結果
 
+## 同User変更群fresh全体受入（six-full-v2、15:15:11）
+
+source `5e2afd8911fcb19266d05b62461a62b1da297fc8`、dev-foundation、WorkPG379 pg452_full_v2.shによる全6 fresh clean/format/compile null-Werror/test/static/JaCoCo/JAR/runtime採取、actual0/17:17。3171PT465suite/F/E/S0（protocol81/storage154/bootstrap213/API892/Web809/Batch1022）、SpotBugs6module0。全sourcefiles検査一致/全6actualtarget byteをWorkPG379/pg452-hostへ捕捉し、既存collectorの13User対象・32所有対象・11Content対象全miss0を確認した。新User対象13はB298/L733/M119/C13各miss0、除外追加0。LOCKED解除0000/version1→同token保存0200/version1・解除監査1/Inbox再送1/資源数値0を同sourceで初めて完走。先行v5や不合格v1を補完しない。
+
+安全全体manifest: `../018_NK-OPS-001/evidence/provisional/PG452-user-business-full/manifest.json`、SHA256 `220dbdef65d409343a1c8181b8d0b63ff484da49a5fb8254f432e03f18acf7a3`。XMLはsuite/testcase属性だけ、provider/properties/stdout/stderr/raw電文/DB/session/credentialは含めない。BUG639640修正3c2466b41、BUG641～644修正1528835cf、BUG645修正5e2afd891、各before/独立再試験/対応YKT452～457を同全体へ結びhost対象範囲を完了する。全体host未網羅はB1222/L3477/M567/C39でnative起動等が残るため、全coverage100や正式run24の更新にはしない。次同起動経路の通知取消・質問削除→native全業務/同owner/Caddy/DONE/CHRへ継続。
+
 ## six-full-v1 不合格（14:54:06）
 
 source1528835cf6fd11d9003ead436003e5977749c660、actual1、protocol81/storage154/bootstrap213/API892成功、Web809試行1F/E/S0、合計2149試行/1F。Batch/Web static・reportは未実行なので古いv5 targetを補完しない。sourcefiles一致/実5byte WorkPG379/pg452-six-full-v1-frozen、log SHA256 `f22371d655ce5b6c11a65571bf1a2053dadb482e0116a633238b5da30c15825e`。追加BIZ010 LOCKED解除0000/version1→保存再送0200/version1/failed_count0/locked_untilNULL/監査1/Inbox再送1の後条件まで通過したが、最後の資源assertでInteger0とAtomicInteger本体を比較して失敗（BUG645/YKT457）。修正前起票・全byte捕捉後に数値getだけ是正。業務後条件や先行v5を全体成功へ流用しない。次sourceを固定してfresh全6 v2を実行する。
