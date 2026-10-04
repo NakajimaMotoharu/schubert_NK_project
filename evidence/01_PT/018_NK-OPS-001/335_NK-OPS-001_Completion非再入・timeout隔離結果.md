@@ -1,5 +1,9 @@
 # NK-OPS-001：Completion非再入・timeout隔離結果
 
+06:51追記：safe code-native-v1 SHA80ef663c1cf48f3805129e443b52c9b0d57786bdc0ab10d8500572023ff4845a、真正complete.private SHAe2616bc…を読取確認。root4fileSHAはhost同compiled/sourceと一致・0400/0500。ただしreadonlyobserver実行が__pycache__を自動生成したためruntime閉鎖集合は**失敗/BUG696**、親/observer再起動0、全体受入へ加算0。future -Bの独立tempfixture import2/cache不生成＋one-shot/namespace21/budget1800/newA01 literal ASTをhostでactual0、現cacheは生存中に削除せず私有保全後のrecoverable退避が必要。BUG694/YKT498 class採取及びBUG695/YKT499 helper配置だけ限定完了、Productioncompletion693/旧544は未完了。
+
+06:44追記：sourceca33239da3019dad50b6ebad22318130283d6756のfresh全6は06:13:04～06:30:24/4742actual0、3264PT482suite/FES0/静的6zero/NullAway、全6前後source hash/targetdiff0。safe PG462-txowner-full manifest SHA4916763e9f528338dcc067a2fcb161f7e78de1018abccf4b072d77a732165f9d。署名候補185artifact/61dependency/27SQL28history/entryjar一致、署名verify0→stage18867actual0→真正code-onlyverify68744/activate51017actual0。301full14/業務/原本pending/Backup/Transfer/全9kernel empty/旧16+当4保存、DDL/permit/start0。06:43:42の新外部親4105e7…を一回発行、readonly先行24369へ再付着中、client0は親全completionに加算0。BUG693/YKT497の同source native再試験・正式coverageは未達、旧A01/旧UNKNOWNを新source合格へ流用0。
+
 06:06追記：RET462の実verify62825/retire36234ともactual0。ISSUED/23名/2service intentの当世代から、同permit由来INVALIDへcanonical revoke・publication-first typed quarantine三件・逆順退役を実行し、INVALID/21名/全9終端/301/原本pending/Backup/旧16+当4保持・new-owned outer正常帰還を確認した。旧timeout143/旧close不明は不変、new permit/start/DDL/DONE0。safe PG462-timeout-native-v1 manifest SHA35f64477e0caca01fe6608adffd877b4f42f3e0ff213790442ce915f9d8e5f4c。schema027/code-only新候補と新Production nativecompletionは後続、当工具だけでBUG693/544完了としない。
 
 2026-10-05、dev-foundation。正式PT-WEB-20260925-24/1964PT/53scopeは据置。

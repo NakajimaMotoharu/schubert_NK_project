@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" tests="16" failures="0" errors="0" skipped="0" time="5.815">
+  <testcase name="dbResultBoundaryRejectsIncompleteOrMalformedDlqMetadataRatherThanDefaulting" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.03" />
+  <testcase name="dispatcherTurnsJmsAndStoredWireFailuresIntoRedactedRetryWithoutSend(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.674" />
+  <testcase name="dlqDispatchCrashUsesNewStableDuplicateIdWithoutChangingOriginalWork(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.628" />
+  <testcase name="publicBoundariesRejectNullModesBoundsErrorsAndEveryWireIdentityMutation" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.037" />
+  <testcase name="idem010r04FatalSessionModeAndCloseKeepFatalIdentity" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.007" />
+  <testcase name="initialReceiptSendKeepsItsExactDueTimeWithoutSamplingRetryJitter(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.082" />
+  <testcase name="markSentAndFailureRequireLeaseAndUseExactBoundedRetryState" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.092" />
+  <testcase name="retryJitterReachesTheDatabaseAtEveryBaseAndContinuesAtTheAttemptCap" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.626" />
+  <testcase name="dispatcherPersistsBothDestinationsAndArtemisSuppressesSendMarkCrashDuplicate(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="1.447" />
+  <testcase name="idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.058" />
+  <testcase name="claimsOnlyDueExpiredRowsWithTenSecondLeaseLimitAndNoDispatcherOverlap" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.568" />
+  <testcase name="resultTimesFollowTheObservedJmsFailureAndCommitAfterElapsedSendTime(Path)" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.627" />
+  <testcase name="idem010r02SameProviderFailureOnSessionModeAndCloseKeepsOriginalCause" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.011" />
+  <testcase name="idem010r03DistinctSessionModeAndCloseFailuresKeepFixedPrimary" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.006" />
+  <testcase name="persistedQwkPayloadIsFullyDecodedBeforeOpeningJms" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.014" />
+  <testcase name="idem010r01SameProviderFailureOnStageAndRollbackKeepsOriginalCause" classname="dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest" time="0.005" />
+</testsuite>
