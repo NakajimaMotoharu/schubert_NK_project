@@ -409,12 +409,27 @@ public final class BackupUnitStartClient {
       RetirementGate parent,
       String previousInvocation)
       throws IOException {
+    return createCaddy(root, morning, budget, api, web, parent, parent, previousInvocation);
+  }
+
+  /** SSC186: full peer/DB checks bracket the pair; each intent borrows a pure owner gate. */
+  public static BackupUnitStartClient createCaddy(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      Attempt api,
+      Attempt web,
+      RetirementGate parent,
+      RetirementGate owner,
+      String previousInvocation)
+      throws IOException {
     Objects.requireNonNull(root);
     Objects.requireNonNull(morning);
     Objects.requireNonNull(budget);
     Objects.requireNonNull(api);
     Objects.requireNonNull(web);
     Objects.requireNonNull(parent);
+    Objects.requireNonNull(owner);
     Objects.requireNonNull(previousInvocation);
     if (morning.service() != RootStartupContext.Service.MORNING
         || api.unit != MaintenanceUnit.API
@@ -422,13 +437,12 @@ public final class BackupUnitStartClient {
     root.recheck(morning);
     budget.requireWithin();
     var policy = MaintenanceUnitStopPolicy.create();
+    var admission = caddyAdmissionFence(parent, owner, api, web);
     RetirementGate fence =
         () -> {
           budget.requireWithin();
           root.recheck(morning);
-          parent.verify();
-          api.requireRetained(parent);
-          web.requireRetained(parent);
+          admission.verify();
           root.recheck(morning);
           budget.requireWithin();
         };
@@ -449,6 +463,23 @@ public final class BackupUnitStartClient {
         },
         MaintenanceUnit.CADDY,
         Optional.of(budget));
+  }
+
+  /** PT-OPS-CADDYFENCE001..003: preserve BOTH full checks and each local same-inode check. */
+  static RetirementGate caddyAdmissionFence(
+      RetirementGate parent, RetirementGate owner, Attempt api, Attempt web) throws IOException {
+    Objects.requireNonNull(parent);
+    Objects.requireNonNull(owner);
+    Objects.requireNonNull(api);
+    Objects.requireNonNull(web);
+    if (api.unit != MaintenanceUnit.API || web.unit != MaintenanceUnit.WEB)
+      throw new IOException("Caddy start unavailable");
+    return () -> {
+      parent.verify();
+      api.requireRetained(owner);
+      web.requireRetained(owner);
+      parent.verify();
+    };
   }
 
   /**

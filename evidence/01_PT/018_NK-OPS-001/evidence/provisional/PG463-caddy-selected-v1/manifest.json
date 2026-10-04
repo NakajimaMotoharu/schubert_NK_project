@@ -1,0 +1,176 @@
+{
+  "id": "PG463-caddy-selected-v1",
+  "collectedAt": "2026-10-04T22:26:43.514185+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "cec296ffd0e121c21a8448763973822357d3f51d",
+  "sourceDirtyAtCollection": true,
+  "sourceHashesPostRun": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CaddyAdmissionFenceTest.java": "d55aef67fe1395851a58b75c3a2aa45aa7a174d79c7844a446822dd66b536ae3",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CaddyParentRemainingBudgetTest.java": "d9a674e3b3342eb45f0ae2b58525c700184c27ea495b29372c2583d0c467d32b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": "79e9ba17c2fc3d051075d7a20008fc9bbcf2c0595bdbc2bcaa9a6242263191f9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java": "f609e90f3d408c86907f4cdae9a6cf68f1b146d5cdbf2499622773fb2d900e88"
+  },
+  "startedAt": "2026-10-05T07:10:08+09:00",
+  "completedAt": "2026-10-05T07:11:55+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg463_caddy_selected_v1.sh",
+  "exitCode": 0,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "web": {
+      "tests": 4,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "batch": {
+      "tests": 62,
+      "suites": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    }
+  },
+  "tests": 93,
+  "suites": 14,
+  "changedMethodsCoverage": {
+    "dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.caddyRemainingFloor": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 23
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.caddyAdmissionFence": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 31
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 7
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.lambda$caddyAdmissionFence$0": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "independentOracle": "Literal 12-event order, full fence twice, pure owner four times; 12 failure points x IO/Runtime/Error preserve primary identity; null/roles/retired intent; fixed parent remaining 30s exact boundary without origin mixing/renewal.",
+  "coverageQualified": false,
+  "formal": false,
+  "ssc": [
+    "SSC-186"
+  ],
+  "bugs": [
+    "BUG-697"
+  ],
+  "ykt": [
+    "YKT-501"
+  ],
+  "limits": [
+    "Selected exec appended, whole-source/native coverage not accepted",
+    "Full regression for this dirty source not run",
+    "PG462 source ca332 separate A01 PASS and parent normal30 retained",
+    "Formal run24/1964PT/53scope unchanged"
+  ],
+  "environment": {
+    "os": "Linux 7.0.0-38-generic",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0",
+    "jacoco": "0.8.15"
+  },
+  "privateLogSha256": "353ce064fd659c5a40c456dadaa386b3b927115035e69b312f1e35a327cd027c",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "193d5cfa1242ea0d02d50dd60472989eab8fa045df97d92f88642cda2a44d1fd",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "ad13f32cc0f915dcdb03ea8bb5f19cb3da76b5658ca1b553904ca6005ed6f737",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "f6602707e9a49af7aaac0d46a094ada258d9b73f8b8d74696867bff94365a12a",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "5c82c51e5b7a008ae4f3a018af21154a8ffc39dd498e251dc76cabca307fe5d2",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "028e01e164153c571841783c3a0830b289896b6e32bd43836d0b3892edb3aaf7",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest.xml": "e5436104bb3d935dd014c340b37e1f47f40c51c76f88b7a42e7974f8b571c71f",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest.xml": "4f114d7d036bce64db09f2b0a4def4ffd5c8fa8d26b11f8ce99e0ee8e57df287",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "b95e317f57518fa2943f55d5c4b820b795cf8292fcda991d4db3f2af640a766a",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml": "5680b40f1d1cc07dea7e39dc3a28584b77062d5e72d0eeac484e096694a4c968",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml": "07a30424becff0a5e184cfbcd81df0540f947faf1059ae536af3ca0fb027df2e",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CaddyAdmissionFenceTest.xml": "65bbd1df1d1948b1c18824bcfc31a4072e940ba0a0cd94bd2ca029d547816e54",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.CaddyParentRemainingBudgetTest.xml": "fa098c552e3b59805646df6f3f12caf6af8def1dc758743e9f177f2e4f8e7d8c",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml": "fa714b6d5dae665349c0e072afe9f3feb263378bd4721f96864f8477192beff4",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml": "07ba7f721a413e3c1cedf41d4d757b1f3a5f6c40fc7f447f30c12d70ed56b9a3"
+  },
+  "redaction": "Summary/testcase only; XML properties/stdout/stderr/private DB/session/credentials not copied"
+}

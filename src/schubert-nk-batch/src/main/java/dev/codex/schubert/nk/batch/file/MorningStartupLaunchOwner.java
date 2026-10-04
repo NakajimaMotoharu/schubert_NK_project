@@ -146,12 +146,17 @@ final class MorningStartupLaunchOwner {
                   livePeer, () -> database.recheckConsistent(state.activation().run()));
           BackupUnitStartClient.RetirementGate live = liveChecks::verify;
           live.verify();
+          BackupUnitStartClient.RetirementGate owner =
+              () -> {
+                budget.requireWithin();
+                root.recheck(morning);
+                original.verify();
+                root.recheck(morning);
+                budget.requireWithin();
+              };
           String previousCaddy = MorningCaddyReadiness.coldInvocation(root, morning);
-          long caddyDeadline =
-              Math.min(
-                  budget.deadlineNanos(),
-                  Math.addExact(
-                      System.nanoTime(), java.util.concurrent.TimeUnit.SECONDS.toNanos(30)));
+          // Fix once at the SAME preflight point, in the parent's Linux clock domain.
+          long caddyRemainingFloor = caddyRemainingFloor(budget.remainingNanos());
           var attempt =
               BackupUnitStartClient.createCaddy(
                       root,
@@ -160,6 +165,7 @@ final class MorningStartupLaunchOwner {
                       started.get(0).attempt(),
                       started.get(1).attempt(),
                       live,
+                      owner,
                       previousCaddy)
                   .start();
           if (attempt.status() != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) retain();
@@ -167,11 +173,11 @@ final class MorningStartupLaunchOwner {
           try {
             while (true) {
               live.verify();
-              require(System.nanoTime() < caddyDeadline);
+              require(budget.remainingNanos() > caddyRemainingFloor);
               try {
                 proxy = MorningCaddyReadiness.create(root, morning, budget, previousCaddy);
                 if (proxy.ready()) {
-                  require(System.nanoTime() < caddyDeadline);
+                  require(budget.remainingNanos() > caddyRemainingFloor);
                   break;
                 }
               } catch (IOException notYetReady) {
@@ -266,6 +272,13 @@ final class MorningStartupLaunchOwner {
           }
         });
     return Objects.requireNonNull(completed.get());
+  }
+
+  /** SSC186/PT-OPS-CADDYFENCE004: fixed 30s window, capped by the SAME parent deadline. */
+  static long caddyRemainingFloor(long parentRemaining) throws IOException {
+    if (parentRemaining <= 0 || parentRemaining > java.util.concurrent.TimeUnit.MINUTES.toNanos(30))
+      throw new IOException("Caddy startup budget unavailable");
+    return Math.max(0, parentRemaining - java.util.concurrent.TimeUnit.SECONDS.toNanos(30));
   }
 
   /** Whole Unit/kernel termination only, valid even after original/DB callbacks expire. */
