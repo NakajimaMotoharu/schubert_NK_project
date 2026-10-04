@@ -175,6 +175,7 @@ releases/<version>/
   systemd/*.service
   systemd/*.target
   systemd/*.timer
+  systemd/caddy.service.d/schubert-nk-startup-policy.conf
   operations/bin/schubert-nkctl
   operations/runbooks/
   VERSION
@@ -184,6 +185,8 @@ releases/<version>/
 
 `RELEASE-MANIFEST.json`はapp/protocol/schema/config version、Git commit/tag、JDK/build tool/dependency/BOM、OS対応、
 全artifact hashを持つ。Release directory全fileを検証後にread-onlyにし、稼働中の上書きを禁止。
+
+SSC178（内部署名配備補足）：Caddyは上記固定template及び単一 `systemd/caddy.service.d/schubert-nk-startup-policy.conf` を署名artifactへ含め、その他nested systemd path・任意drop-in名・任意wrapperを受けない。実効profileはSS342§3と親の前後観測で別確認し、BOM合格だけでCaddy起動合格としない。QA048050で承認済みV026/V027を新candidateへ含める場合、schema027・SCHEMA＋V001～027の28履歴を固定した独立期待値とする。旧25版署名release/profile/全原本/Backupを保全し、観測DB/manifestの件数をexpectedへ流用しない。専用M/A/DB所有・全停止・新candidate全署名/BOM認証・保存原本全値/全既存row/業務data/Backupの前後一致・新空table/既存row原値と新権限/NULL契約の後条件を確認し、必要migration以外の修復や旧SQL変更はしない。schema更新とruntime permit/業務ready/ITST合格は別操作・別認定である。
 SSC-021のstorage version/hashもmanifestへ記載し、Web/API（batch使用時も）で同一artifactを使用する。Executable内へ同梱する場合もSBOM/hashの一致を検査し、異なるnative能力実装を混在させない。
 
 ## 4. Config file・設定sourceの優先順

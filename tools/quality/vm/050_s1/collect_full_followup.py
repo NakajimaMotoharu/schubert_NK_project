@@ -733,9 +733,30 @@ if int(identifier[2:5]) >= 454:
     manifest['limitations'] = [
         'Host full regression and independent component fixtures only; ordinary external native graph/main/Root/parent are not accepted',
         'Native Runtime and Lifetime/Broker native branches retain their actual missed counters: no exclusions or other-source reuse',
-        'Caddy/held-original completion capability/live-service intent retirement/whole Morning normal0-or10 remain unconnected',
+        'PG455 Caddy/held-original completion capability/live-service intent retirement/whole Morning normal0-or10 are implemented but native acceptance remains unverified',
         'Legacy startup partial ownership BUG629/YKT446/460, signed V027/Backup/current VM/CHR/native coverage100/formal remain pending',
         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged',
     ]
+if int(identifier[2:5]) >= 455:
+    parent_names = {'ChildStartupContext', 'MorningControlScope', 'MorningBackupStage',
+                    'MorningProcessMain', 'MorningStartupLaunchOwner', 'MorningCompletionEvidence',
+                    'MorningResumeAdmission', 'MorningNewRunAdmission', 'CaddyPublicConfiguration',
+                    'MorningCaddyReadiness', 'BackupUnitStartClient'}
+    parent_coverage = {}
+    for module in ('bootstrap', 'batch'):
+        for c in ET.parse(root / f'src/schubert-nk-{module}/target/site/jacoco/jacoco.xml').findall('.//class'):
+            name = c.get('name').rsplit('/', 1)[-1]
+            if c.findall('counter') and name in parent_names:
+                parent_coverage[name] = {x.get('type'): {'missed': int(x.get('missed')), 'covered': int(x.get('covered'))} for x in c.findall('counter')}
+    assert set(parent_coverage) == parent_names
+    # Observe actual misses; never waive them, aggregate another source, or claim coverage100.
+    manifest['parentCompletionCoverageObserved'] = parent_coverage
+    manifest['parentCompletionCoverage100'] = all(x['missed'] == 0 for v in parent_coverage.values() for x in v.values())
+    manifest['formal'] = False
+    manifest['testIds'].extend(['PARENT455001..008', 'CADDY455001..002', 'CADDYREADY455001..004', 'CHILDCADDY455001', 'INTENTLIVE455001..002'])
+    manifest['ssc'].append('SSC-178')
+    manifest['bugs'].extend(['BUG-661', 'BUG-662'])
+    manifest['ykt'].append('YKT-467')
+    manifest['trigger'] += '; PG455 typed same-original parent completion/live-ready intent/Caddy ownership; PG456 signed027/exact fixed Caddy BOM provisioning dependencies'
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

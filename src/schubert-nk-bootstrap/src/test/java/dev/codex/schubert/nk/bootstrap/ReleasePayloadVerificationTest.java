@@ -358,6 +358,7 @@ final class ReleasePayloadVerificationTest {
             "systemd/test.service",
             "systemd/test.target",
             "systemd/test.timer",
+            "systemd/caddy.service.d/schubert-nk-startup-policy.conf",
             "operations/runbooks/readme.md")) accepted.payload.put(path, new byte[0]);
     accepted.payload.put(
         "web/web.jar",
@@ -394,6 +395,16 @@ final class ReleasePayloadVerificationTest {
         unknown.release.resolve("operations/bin/unapproved-tool"),
         PosixFilePermissions.fromString("rwxr-x---"));
     refused(unknown);
+    for (String path :
+        List.of(
+            "systemd/caddy.service.d/arbitrary.conf",
+            "systemd/other.service.d/schubert-nk-startup-policy.conf",
+            "systemd/caddy.service.d/sub/schubert-nk-startup-policy.conf")) {
+      var unapproved = new Fixture("unapproved-dropin-" + path.replace('/', '-'));
+      unapproved.payload.put(path, new byte[0]);
+      unapproved.publish();
+      refused(unapproved);
+    }
     var f = new Fixture("nested");
     f.payload.put("api/lib/sub/x.jar", new byte[] {1});
     f.publish();

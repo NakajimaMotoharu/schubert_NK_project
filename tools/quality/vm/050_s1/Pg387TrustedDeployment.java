@@ -15,6 +15,11 @@ import java.util.*;
 public final class Pg387TrustedDeployment {
   static Path RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG387");
   static String LABEL="PG387", STEM="pg387", SOURCE="7ba352d6f";
+  static int expectedSqlCount=25;
+  static void expectedSchema(String schema) {
+    if(!Set.of("025","027").contains(schema))throw new IllegalArgumentException("fixed approved schema required");
+    expectedSqlCount=schema.equals("027")?27:25;
+  }
   static UUID ORIGINAL_RUN=UUID.fromString("31100027-2222-4333-8444-555555555555");
   static final Path PRESERVE=Path.of("/var/lib/pgpt-s1-preservation");
   public static void main(String[] args) throws Exception {
@@ -25,16 +30,17 @@ public final class Pg387TrustedDeployment {
           System.err.println(LABEL+" FRAME "+frame.getClassName()+"."+frame.getMethodName()+":"+frame.getLineNumber());
       }
     });
-    if((args.length!=1 && args.length!=3 && args.length!=4) || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
+    if((args.length!=1 && args.length!=3 && args.length!=4 && args.length!=5) || !Set.of("verify","activate").contains(args[0])) throw new IllegalArgumentException("fixed mode");
     if(args.length>=3) {
       if(!args[1].matches("0\\.1\\.0-PG[0-9]{3}") || !args[2].matches("[0-9a-f]{40}"))
         throw new IllegalArgumentException("isolated candidate/source");
       LABEL=args[1].substring(6); STEM=LABEL.toLowerCase(Locale.ROOT); SOURCE=args[2];
       RELEASE=Path.of("/opt/schubert-nk/releases",args[1]);
-      if(args.length==4) {
+      if(args.length>=4) {
         ORIGINAL_RUN=UUID.fromString(args[3]);
         if(!ORIGINAL_RUN.toString().equals(args[3]) || ORIGINAL_RUN.equals(new UUID(0,0)))throw new IllegalArgumentException("explicit preserved original");
       }
+      if(args.length==5)expectedSchema(args[4]);
     }
     if(!Files.readString(Path.of("/var/lib/cloud/data/instance-id")).trim().equals("pgpt-r2-20260927-01")) throw new IllegalStateException("isolated VM only");
     var result=MaintenanceFileLock.create().tryExclusive(() -> {
@@ -108,8 +114,8 @@ public final class Pg387TrustedDeployment {
   }
   static int expectedHistoryCount() {
     // The one still-installed preservation source has V001..023. Never derive expectations
-    // from observed DB/manifest counts; new candidates require the approved V001..025.
-    return LABEL.equals("PG408") && SOURCE.equals("32c6a7b1e79abf114901003c4a8f1300b33bf0c0") ? 24 : 26;
+    // from observed DB/manifest counts; new candidates explicitly require approved 025 or 027.
+    return expectedSqlCount==25 && LABEL.equals("PG408") && SOURCE.equals("32c6a7b1e79abf114901003c4a8f1300b33bf0c0") ? 24 : expectedSqlCount+1;
   }
   static void freezeCandidate() throws Exception {
     // BUG342: host immutable payload, not merely ProtectSystem's private RO view.

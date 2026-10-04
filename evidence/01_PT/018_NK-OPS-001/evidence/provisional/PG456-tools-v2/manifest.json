@@ -1,0 +1,26 @@
+{
+  "id": "PG456-tools-v2",
+  "formal": false,
+  "branch": "dev-foundation",
+  "baseHead": "31fde8ee14e1662a6383fc63201c9f5ace9a6717",
+  "sourceState": "same signed027-Caddy tool group dirty; no subsequent source edits before result capture",
+  "recordedAt": "2026-10-04T20:36:00+09:00",
+  "environment": "host Linux/JDK25.0.4; saved runtime dependencies; JaCoCo0.8.15/ASM9.10.1/SpotBugs annotations4.10.4",
+  "command": "javac -Xlint:all -Werror -cp current-six-target-classes:saved-runtime-dependencies:jacoco:asm:annotations -d WorkPG379/pg456-tools-v2 tools/quality/vm/050_s1/*.java tools/quality/vm/AssembleReleaseFixture.java; java each of three fixed tool-test main classes",
+  "exitCode": 0,
+  "compileWarnings": 0,
+  "tests": [
+    {"testId":"SCHEMA455","class":"Pg455ReleaseSchemaToolTest","independentAssertions":11,"exitCode":0,"privateLog":"WorkPG379/pg456-Pg455ReleaseSchemaToolTest-v2.log","sha256":"3969ae9dca6c5438d10cbf10aad091b81edefb314475085fb336e2acf04a17d8"},
+    {"testId":"SCHEMA421-LEGACY","class":"Pg421ReleaseSchemaToolTest","independentAssertions":4,"exitCode":0,"privateLog":"WorkPG379/pg456-Pg421ReleaseSchemaToolTest-v2.log","sha256":"efe1249cf2d4dc81460a7eed8be4df626c9c561d6a4f6a9eff1016cfe6ceb323"},
+    {"testId":"MIG456-PROFILE-SQL-CADDY","class":"Pg456SignedMigrationTest","independentAssertions":68,"exitCode":0,"privateLog":"WorkPG379/pg456-Pg456SignedMigrationTest-v2.log","sha256":"ba1a369cf62dc17741e5248beb81e9362d605c080b987d43c627e7102fc82bce"}
+  ],
+  "privateCompileLog": "WorkPG379/pg456-compile-v2.log",
+  "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "productionPtCount": 0,
+  "coverage100Accepted": false,
+  "fullRegressionAccepted": false,
+  "nativeAccepted": false,
+  "relatedSsc": ["SSC-178"],
+  "relatedBug": [],
+  "redaction": "fixed counts and private log hashes only; no credentials, private key, token, session, dump, or row bodies"
+}

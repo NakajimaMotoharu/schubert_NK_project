@@ -77,7 +77,7 @@ public final class AssembleReleaseFixture {
         migrations.add(row(rank,version,"SQL",name,
             ChecksumCalculator.calculate(new StringResource(Files.readString(file,StandardCharsets.UTF_8)))));
       }
-      if(rank!=25)throw new IllegalStateException("25 approved migrations required");
+      if(rank!=27)throw new IllegalStateException("27 approved migrations required");
     }
     for(String name:List.of("common","api","web","batch"))
       copy(repo.resolve("src/deployment/config/"+name+".yml.template"),output.resolve("config/templates/"+name+".yml"));
@@ -86,7 +86,7 @@ public final class AssembleReleaseFixture {
     if (args.length == 6) {
       byte[] profile=Files.readAllBytes(Path.of(args[4]));
       var claims=dev.codex.schubert.nk.batch.backup.BackupProfile.consume(profile);
-      if(!claims.versions().app().equals(APP)||!claims.versions().schema().equals("025"))
+      if(!claims.versions().app().equals(APP)||!claims.versions().schema().equals("027"))
         throw new IllegalStateException("effective backup profile version mismatch");
       byte[] recipient=Files.readAllBytes(Path.of(args[5]));
       if(!new String(recipient,StandardCharsets.US_ASCII).matches("age1[023456789acdefghjklmnpqrstuvwxyz]{58}\\n"))
@@ -102,6 +102,10 @@ public final class AssembleReleaseFixture {
       }
     }
     copy(repo.resolve("src/deployment/artemis/etc/broker.xml"),output.resolve("config/artemis/broker.xml.template"));
+    // SSC178: one fixed daemon policy, never arbitrary nested systemd input or runtime authority.
+    copy(repo.resolve("src/deployment/caddy/Caddyfile.template"),output.resolve("config/caddy/Caddyfile.template"));
+    copy(repo.resolve("src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf"),
+        output.resolve("systemd/caddy.service.d/schubert-nk-startup-policy.conf"));
     // SSC165: signed deployment input; installation remains a separate root-owned operation.
     copy(repo.resolve("src/deployment/tmpfiles/schubert-nk-maintenance.conf"),
         output.resolve("config/tmpfiles/schubert-nk-maintenance.conf"));
@@ -121,7 +125,7 @@ public final class AssembleReleaseFixture {
     var deps=new ArrayList<Map<String,Object>>();
     dependencies.forEach((coordinate,paths)->deps.add(map("coordinate",coordinate,"paths",List.copyOf(paths))));
     var manifest=map("format","NKRELEASE1","release",args[3],
-        "versions",map("app",APP,"protocol",APP,"storage",APP,"bootstrap",APP,"schema","025","config","1"),
+        "versions",map("app",APP,"protocol",APP,"storage",APP,"bootstrap",APP,"schema","027","config","1"),
         "source",map("commit",args[2],"tag",args.length==6?"untagged-PGPT-candidate":"PG315-private-fixture"),
         "build",map("jdkVendor",System.getProperty("java.vendor"),"jdkVersion",System.getProperty("java.version"),"mavenVersion","3.9.12"),
         "platform",map("osId","ubuntu","osVersion","26.04","architecture",System.getProperty("os.arch"),"javaFeature",25),
