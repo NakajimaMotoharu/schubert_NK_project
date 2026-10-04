@@ -1,5 +1,9 @@
 # 078 NK-WEB-002 Logout継続再送実行結果
 
+PG450 local-selected-v1 actual0/03:33/2026-10-04 10:28:20 JST、253PT28suite（5/7/10/111/77/43）F/E/S0/static6zero。sourceadf261fb782f0902b8634639273e22da65728d75＋PG-D362/BUG628 dirty、sourcefiles前後一致/全6target byteWorkPG379/pg450-local-selected-v1-frozen保全、安全016 manifest `PG450-local-selected-v1/manifest.json` SHA `dad6009a2a55c8c36a5962c0d9cb254eaf7011d04a40cf7f59ffdc9fd690927f`。全16対象実行class B237/L703/M93/C16の全miss0。新Local2classと既存Session catalogue/lifecycle/JDBCの原子的保存・独立破棄・取得/commit/close未知・fatal/cause/suppressed/cycle・同一例外・rollback全型、100件durable/row復活0・newLogin保全を同runで確認。BUG628/YKT445は限定是正、HTTP Cookie/CSRF/context・workerjoin/key・同sourcefresh全6/native/正式は未完了。全回帰PG4493109と本253を混合しない。
+
+PG450 local-before-v1（2026-10-04 10:15:35）actual1/02:33、Web64試行1F/E/S0・他実4module133PT/FES0、Batch/Web静的未実行・全体合格0。RERUN006Eのfatal DB closeがSessionStoreExceptionへ縮退、BUG628/YKT445を修正前起票。sourceadf261fb782f0902b8634639273e22da65728d75＋PG-D362 dirty、private logSHA f97a7a34389e370b313faffcc4afe820537f81069be6ed80520f0c3a36f91ace、sourcefiles一致/実5moduletarget byteWorkPG379/pg450-local-before-v1-frozen保全。登録/local破棄通常試験は通過したが本sourceの全受入は未完了。新8Local＋JDBC全5公開method/invalidmarker境界のError/循環/rollback再試験へ進み、PG449別source3109をこの失敗へ補完しない。
+
 ## PG449 同QA050所有・DDL・security群の全6回帰
 
 Source `8e12121583ca5bf136f628093d26a67c5cfa516a`、fresh full-v1 actual0/16:52/2026-10-04 10:08:39 JST、3109PT460suite（81/154/213/891/748/1022）F/E/S0・静的6module0。sourcefiles前後一致、全6actualtarget/JAR/runtime依存/XML/execをWorkPG379/pg449-hostへbyte一致保全。safe018 `PG449-retained-logout-full/manifest.json` SHA `eb4bc56d3d8a2408105c9de7818d312124ccf7648ac37d013c1320b95510aace`。collectorは現HEAD/clean src-tools、actual6log集計/XML全件、staticとclass coverageを照合。V02727versioned/28history、API fatal6class・revoke11class各四coverage100、RERUN001-F/002/003A～G/004A～I/005A～Hと既存全PTを同sourceで実行した。BUG622～627/YKT440～444の当該host修正を閉鎖、修正c230694c0/1a6182512/bc03db444/8e1212158（完全hashはGit/限定manifest参照）、旧失敗runを不変更で維持。

@@ -141,7 +141,7 @@ public final class RevocationRetryCoordinator {
     return primary;
   }
 
-  private static void preserveFatal(Throwable failure) {
+  static void preserveFatal(Throwable failure) {
     var pending = new ArrayDeque<Throwable>();
     Set<Throwable> seen = Collections.newSetFromMap(new IdentityHashMap<>());
     pending.add(failure);

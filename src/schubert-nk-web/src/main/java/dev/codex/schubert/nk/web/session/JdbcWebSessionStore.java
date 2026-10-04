@@ -47,15 +47,14 @@ public final class JdbcWebSessionStore {
         }
       }
     } catch (InvalidStoredRow failure) {
+      SessionStoreException.preserveFatal(failure);
       // A malformed row is deletable only after both owned JDBC resources close cleanly.
       // TWR attaches close failures to the private marker; never expose the public invalid-row
       // classification in that case. Fatal close failures retain their identity.
-      for (Throwable closing : failure.getSuppressed()) {
-        if (closing instanceof Error fatal) throw fatal;
-      }
       if (failure.getSuppressed().length != 0) throw new SessionStoreException();
       throw new InvalidSessionRowException();
     } catch (SQLException | RuntimeException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -88,6 +87,7 @@ public final class JdbcWebSessionStore {
         | IllegalArgumentException
         | java.time.DateTimeException
         | SessionStoreException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -124,6 +124,7 @@ public final class JdbcWebSessionStore {
         | IllegalArgumentException
         | java.time.DateTimeException
         | SessionStoreException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -147,6 +148,7 @@ public final class JdbcWebSessionStore {
         | IllegalArgumentException
         | java.time.DateTimeException
         | SessionStoreException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -190,6 +192,7 @@ public final class JdbcWebSessionStore {
         return changed(statement.executeUpdate());
       }
     } catch (SQLException | SessionStoreException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }

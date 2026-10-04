@@ -586,6 +586,54 @@ class JdbcWebSessionStoreTest {
     assertEquals(0, count());
   }
 
+  @Test
+  void rerun006JdbcEverySessionCataloguePreservesFatalAfterOwnedResourceClose() throws Exception {
+    for (int operation = 0; operation < 5; operation++) {
+      final int op = operation;
+      try (var c = db.transaction()) {
+        if (op != 1) STORE.insert(c, row(1, 0));
+        var fault = new Fault();
+        var fatal = new AssertionError("private-jdbc-fatal");
+        fault.failure = op == 0 ? "result.getObject" : "statement.setString";
+        if (op == 0) fault.fatalClose = fatal;
+        else fault.fatalStatementClose = fatal;
+        assertSame(
+            fatal,
+            assertThrows(
+                AssertionError.class,
+                () -> {
+                  if (op == 4) STORE.deleteByHash(fault.wrap(c), hash(1));
+                  else call(op, fault.wrap(c));
+                }));
+        assertTrue(fault.hit);
+        assertEquals(1, fault.statementsClosed);
+        assertEquals(op == 0 ? 1 : 0, fault.resultsClosed);
+        assertFalse(c.isClosed());
+        c.rollback();
+      }
+      assertEquals(0, count());
+    }
+    for (boolean marker : List.of(false, true)) {
+      try (var c = db.transaction()) {
+        STORE.insert(c, row(1, 0));
+        var fault = new Fault();
+        var fatal = new AssertionError("private-nested-jdbc-fatal");
+        var closing = new SQLException("private-jdbc-close", fatal);
+        fault.resultCloseFault = closing;
+        if (marker) fault.columns.put("id", null);
+        else fault.failure = "result.getObject";
+        assertSame(
+            fatal,
+            assertThrows(AssertionError.class, () -> STORE.findLocked(fault.wrap(c), hash(1))));
+        assertEquals(1, fault.statementsClosed);
+        assertEquals(1, fault.resultsClosed);
+        assertFalse(c.isClosed());
+        c.rollback();
+      }
+      assertEquals(0, count());
+    }
+  }
+
   private static void call(int operation, Connection connection) {
     switch (operation) {
       case 0 -> STORE.findLocked(connection, hash(1));
@@ -649,6 +697,8 @@ class JdbcWebSessionStoreTest {
   private static final class Fault {
     String failure = "", nullResource = "", runtimeFailure = "";
     Error fatalClose;
+    Error fatalStatementClose;
+    Throwable resultCloseFault;
     Integer count;
     boolean duplicate, hit, columnHit, runtimeHit;
     int statementsClosed, resultsClosed, nextCalls;
@@ -673,6 +723,14 @@ class JdbcWebSessionStoreTest {
                 if (name.equals("result.close") && fatalClose != null) {
                   method.invoke(target, args);
                   throw fatalClose;
+                }
+                if (name.equals("statement.close") && fatalStatementClose != null) {
+                  method.invoke(target, args);
+                  throw fatalStatementClose;
+                }
+                if (name.equals("result.close") && resultCloseFault != null) {
+                  method.invoke(target, args);
+                  throw resultCloseFault;
                 }
                 int occurrence = seen.merge(name, 1, Integer::sum);
                 if (name.equals(runtimeFailure)) {

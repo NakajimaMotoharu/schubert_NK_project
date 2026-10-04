@@ -1,5 +1,9 @@
 package dev.codex.schubert.nk.web.session;
 
+import dev.codex.schubert.nk.web.revocation.EncryptedRevocationPayload;
+import dev.codex.schubert.nk.web.revocation.PendingRevocationRepository;
+import dev.codex.schubert.nk.web.revocation.RevocationFailureCode;
+import dev.codex.schubert.nk.web.revocation.RevocationPayloadIdentity;
 import dev.codex.schubert.nk.web.security.WebCsrfToken;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
@@ -190,6 +194,28 @@ public final class EncryptedWebSessionRepository {
         });
   }
 
+  /**
+   * QA050/RERUN006: encrypted retry and old local row deletion in one existing short TX. Context
+   * was captured by the authenticated Logout caller; no guessed API expiry or remote I/O. An
+   * already absent old row stays absent; neither this operation nor stale save creates it.
+   */
+  public void invalidateAndRetain(
+      WebSessionId id,
+      RevocationPayloadIdentity identity,
+      EncryptedRevocationPayload payload,
+      RevocationFailureCode reason) {
+    String hash = hash(id);
+    Objects.requireNonNull(identity, "revocation identity");
+    Objects.requireNonNull(payload, "revocation payload");
+    Objects.requireNonNull(reason, "revocation failure code");
+    transaction(
+        connection -> {
+          new PendingRevocationRepository().enqueue(connection, identity, payload, null, reason);
+          store.deleteByHash(connection, hash);
+          return Boolean.TRUE;
+        });
+  }
+
   private Optional<Loaded> load(Connection connection, String hash) {
     Optional<WebSessionRow> found;
     try {
@@ -265,22 +291,25 @@ public final class EncryptedWebSessionRepository {
   }
 
   private <T> T transaction(Work<T> work) {
-    try (var connection = required(dataSource.getConnection())) {
-      connection.setAutoCommit(false);
-      connection.setReadOnly(false);
+    try (var connection = dataSource.getConnection()) {
+      required(connection);
       try {
+        connection.setAutoCommit(false);
+        connection.setReadOnly(false);
         T result = work.execute(connection);
         connection.commit();
         return result;
-      } catch (SQLException | GeneralSecurityException | RuntimeException failure) {
+      } catch (SQLException | GeneralSecurityException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollback) {
-          failure.addSuppressed(rollback);
+        } catch (SQLException | RuntimeException | Error rollback) {
+          if (failure != rollback) failure.addSuppressed(rollback);
         }
+        SessionStoreException.preserveFatal(failure);
         throw new SessionStoreException();
       }
     } catch (SQLException | RuntimeException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -298,6 +327,6 @@ public final class EncryptedWebSessionRepository {
 
   @FunctionalInterface
   private interface Work<T> {
-    T execute(Connection connection) throws GeneralSecurityException;
+    T execute(Connection connection) throws GeneralSecurityException, SQLException;
   }
 }
