@@ -124,6 +124,8 @@ SCR016/017の通常全構成は同じcurrent session repositoryから作ったto
 
 検証済IF-019/021～024の0000/0200・USRMUT24のtarget/versionを確認してから、現在tokenの初回完成印を保存し固定相対redirectとする。入力error/応答喪失はpasswordを消去して同tokenで再入力し、0105ではIF-020の最新値を取得して409を表示する。再表示だけで新token・API更新・自動再送を行わない。自己Password reset成功はAPIで現在を含む全session失効済なので、現在のlocal sessionとdisplay/security contextを終端消去しLoginへ戻す。追加Logout送信や、受信していない0102の監査は生成しない。他Userの成功・旧保持token再送は従来の現在API認証/owner/HMAC/保存結果検証を省略しない。
 
+IDは1～999999999999、optimistic VersionはSS331/IF-020の0～999999999を正とし、新規Userのversion0を表示・更新formから拒否しない。IF-019新規成功はversion0、変更成功は既存APIのversion更新結果、Lock解除の既解除0200は同versionを維持し得る。IDとVersionへ同じpositive条件を適用しない（BUG639/YKT452、上位変更ではなく実装誤りの是正）。
+
 ## 5. Form validation
 
 ### 5.1 共通validator
