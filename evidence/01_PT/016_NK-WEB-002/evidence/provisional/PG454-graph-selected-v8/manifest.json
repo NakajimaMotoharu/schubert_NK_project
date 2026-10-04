@@ -1,0 +1,436 @@
+{
+  "id": "PG454-graph-selected-v8",
+  "sourceHead": "2e529b880b89ca4f141d3ae870b674c4fb884804",
+  "sourceDirty": "PG-D369 C1 same-core bridge/C2 full business assembly, actual HTTP terminal admission and management, requested/confirmed JMS closure; independent boundary/null/async/fatal/interrupt PT",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T17:32:14+09:00",
+  "finishedAt": "2026-10-04T17:35:25+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg454_selected.sh graph-selected-v8 2e529b880b89ca4f141d3ae870b674c4fb884804 exact18Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 126,
+  "suites": 18,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 33,
+      "suites": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 63,
+      "suites": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "testClasses": [
+    "dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebBusinessAssemblyTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValveTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+    "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+    "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+    "dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest",
+    "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest"
+  ],
+  "coverage": {
+    "ApiManagementServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 400
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 85
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 34
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ArtemisReplyConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 208
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebApplication": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 163
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 30
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebBusinessAssembly": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 366
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmission": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 178
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 16
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 42
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 436
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 101
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmissionValve$Lease": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 25
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 3
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebHttpAdmissionValve": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 94
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebManagementServer": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 529
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 62
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 120
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 46
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "e627dce97d11f758f6e1a04bde40505a71a8d6f4e2f567a08bf9cecff8041d9d",
+  "sourceDiffSha256": "d661a72842f0cb2416fae72757424716c7de870ecff0aed6324baf99b2b8eb25",
+  "logSha256": "9416aa9263240187e94dd07d83988688d739c4411a83ae28a00fcac91cb7ea42",
+  "sourceArchive": {
+    "privatePath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-graph-selected-v8.source.tar",
+    "sha256": "1a47ae7b5f154900f030169c73f6906bfcef4519a47f902468cbfd82f147a3b4"
+  },
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-graph-selected-v8-frozen",
+  "testIds": [
+    "NATIVE-CORE001..003",
+    "NATIVE-GRAPH001..002",
+    "NATIVE-READY001..006",
+    "NATIVE-STOP001..004",
+    "reply/broker requested-confirmed retry",
+    "API management caller interrupt"
+  ],
+  "qa": [
+    "QA-047",
+    "QA-049",
+    "QA-050"
+  ],
+  "bugs": [
+    "BUG-648",
+    "BUG-649",
+    "BUG-650",
+    "BUG-651",
+    "BUG-652",
+    "BUG-653",
+    "BUG-654"
+  ],
+  "ykt": [
+    "YKT-460",
+    "YKT-461",
+    "YKT-462"
+  ],
+  "expected": "085: independently handwritten32 MVC paths; actual secured Login200/title/CSRF and protected302; borrowed17 ports with same core/Spring pair; initial503 then admission, real held AsyncContext prevents drain and terminal completion permits it; actual management five fixed info values/DOWN/UP/DOWN, one Ready release, bind before start refusal, actual uncooperative handler and interrupted cleanup UNKNOWN with retry; provider repeated close UNKNOWN/fatal identity; mandatory12 null constructors; no production-derived golden output",
+  "actual": "126PT18suite/FES0/static6zero; nine listed executable classes every counter missed0; actual isolated PG/embedded Artemis/full MVC/HTTP/async/JDK management lifecycle verified",
+  "before": {
+    "resultDocument": "evidence/01_PT/016_NK-WEB-002/086_NK-WEB-002_native組立・所有実行結果.md",
+    "acceptedByThisManifest": false
+  },
+  "limitations": [
+    "Selected host only; full grouped regression/native/formal not accepted",
+    "WebBrokerContexts native create/credential-copy line4/method2 missed: not program100%",
+    "Legacy partial runtime/outer owner/worker budget/native graph remain open",
+    "Collector profile added after frozen run; fresh grouped full must include it",
+    "Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr removed; no real credential/password/session/cookie/token/context/key/DB dump/provider raw output",
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "40a23b92c0c0d2168989d96230bcef63b7cc59bbad96de904d2d52a3333f7030"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "7c490e2d79a00ca78c2864bdef74ffb446d75219f21ec57c308f59833e33fdef"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "4b305846acfbacd7173b019b80b299ca005bbe03fbd1c2acbbb40a7561f0b2ad"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "e46b2f9cddeadce4e1413bd052ea84555940eb8068621f29276f3a7fb5dd139a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "5af6d9530a705ec0eda3d167fc6986e5596d0f3926cba89ef179ed1a94653aac"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "5b2b26cba7c87caaf4046138c2af2252173ea2b3cb5944d287aefda613c93eb7"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "75a16fd88b3495d82c30d4739639356c2798cc159d33dbea1b8d2a2f980be1ed"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebApplicationTest.xml",
+      "sha256": "740132ff5f77275ca99212fc7ab57f5dc7c0932f48c60dcea43f77297d30b73c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebBusinessAssemblyTest.xml",
+      "sha256": "8849330187be6fad9e35ecf4e1e11d92940485e4adefb48c4e7602e8438cce49"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest.xml",
+      "sha256": "f82398c5e73a15574fa928982a4764cd37def61e7f31775b1344f8fdd0599a28"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValveTest.xml",
+      "sha256": "1586bbbc35b6a5be5b5f9702d368ef8cdc3bbabe3de88b6a900ddda6baafc69e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest.xml",
+      "sha256": "67e822845f0c4a5e9c006c69a7bf8fd4a0fb22b4495af9b5cd88444f8be32265"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest.xml",
+      "sha256": "7375e7150caa325a4b712f88933161d1bfdf90fe3c94499cfb4406c44da634a2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest.xml",
+      "sha256": "14323b336ee91f9f0e69a6f6e7517122ad7cd67d01a4aef1023a8384923dc15e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest.xml",
+      "sha256": "b9c3b84b9ccd513ff62ad8426b8eafa8dd7145699d515a6208ab381e4c6eb958"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest.xml",
+      "sha256": "1dbb2814a9124a842dc6283c1e23d909266384e6f2048e58ffa902d659083a56"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest.xml",
+      "sha256": "8329dc989e4a6566ecd1e6ad2de317f434c6ced0b108f384e30c52e31b233658"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG454-graph-selected-v8/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest.xml",
+      "sha256": "fda60a3765488c668ad83b136e5289b316b24ed1d093e84b2f6c0abfca2e0010"
+    }
+  ]
+}

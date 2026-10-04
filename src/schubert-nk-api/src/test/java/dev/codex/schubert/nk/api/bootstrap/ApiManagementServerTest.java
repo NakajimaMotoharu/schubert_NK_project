@@ -17,6 +17,21 @@ import org.junit.jupiter.api.Test;
 /** Independent actual HTTP status/JSON literals, not a native startup admission. READY001..003. */
 final class ApiManagementServerTest {
   @Test
+  void ready005JdkStopMustPreserveCallerInterruptFlag() throws Exception {
+    var server = ApiManagementServer.open(INFO, () -> true, 0);
+    try {
+      assertEquals(503, get(server, "/actuator/health").statusCode());
+      Thread.currentThread().interrupt();
+      server.close();
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertFalse(server.ready());
+    } finally {
+      Thread.interrupted();
+      server.close();
+    }
+  }
+
+  @Test
   void ready003ActualVendorStartedServerFailureClosesBoundOwner() throws Exception {
     var bound = new AtomicInteger();
     var captured =

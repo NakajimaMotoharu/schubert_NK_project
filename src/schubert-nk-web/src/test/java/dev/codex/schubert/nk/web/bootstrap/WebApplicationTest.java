@@ -302,6 +302,114 @@ final class WebApplicationTest {
     }
   }
 
+  @Test
+  void nativeCore001ExactFactoryPairReflectsHeldTokenIntoActualSecuritySession() throws Exception {
+    var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
+    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var codec = codec();
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      var app =
+          application(
+              source(database::web),
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+              codec);
+      var suppliedCore =
+          new AtomicReference<dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository>();
+      var suppliedSpring = new AtomicReference<SpringEncryptedSessionRepository>();
+      var calls = new AtomicInteger();
+      try (var server =
+          app.startWithCoreSessionDependencies(
+              root,
+              0,
+              (core, sessions) -> {
+                calls.incrementAndGet();
+                suppliedCore.set(core);
+                suppliedSpring.set(sessions);
+                return Map.of();
+              })) {
+        var page =
+            client.send(
+                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
+                    .header("X-Forwarded-For", "203.0.113.1")
+                    .header("X-Forwarded-Proto", "https")
+                    .build(),
+                HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, page.statusCode());
+        assertEquals("schubert NK - ログイン", Jsoup.parse(page.body()).title());
+        assertEquals(1, calls.get());
+        String cookie = page.headers().firstValue("Set-Cookie").orElseThrow();
+        String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
+        var session = suppliedSpring.get().findById(sessionId);
+        assertNotNull(session);
+        var principal =
+            new dev.codex.schubert.nk.web.session.SessionPrincipal(
+                "reader",
+                dev.codex.schubert.nk.protocol.layout.semantic.UserRole.USER,
+                dev.codex.schubert.nk.protocol.header.AuthenticationContext.of("a".repeat(64)),
+                clock.instant());
+        session.setAttribute(
+            dev.codex.schubert.nk.web.session.SpringWebSession.PRINCIPAL, principal);
+        var current = dev.codex.schubert.nk.web.session.WebSessionId.parse(session.getId());
+        UUID expected = new UUID(0, 123);
+        assertTrue(
+            suppliedCore
+                .get()
+                .mutate(
+                    current,
+                    attributes ->
+                        new dev.codex.schubert.nk.web.session.SessionAttributes(
+                            attributes.principal(),
+                            attributes.csrfToken(),
+                            attributes.savedRequest(),
+                            java.util.List.of(
+                                new dev.codex.schubert.nk.web.session.SessionOperationToken(
+                                    "QDLREQ01", expected, clock.instant()))))
+                .isPresent());
+        var tokens =
+            new dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycle(
+                suppliedCore.get(), clock);
+        assertEquals(expected, tokens.require(current, "QDLREQ01", expected).token());
+        var fresh = suppliedSpring.get().findById(current.cookieValue());
+        assertNotNull(fresh);
+        java.util.List<dev.codex.schubert.nk.web.session.SessionOperationToken> retained =
+            fresh.getAttribute(dev.codex.schubert.nk.web.session.SpringWebSession.OPERATION_TOKENS);
+        assertNotNull(retained);
+        assertEquals(1, retained.size());
+        assertEquals(expected, retained.getFirst().token());
+        assertEquals("QDLREQ01", retained.getFirst().purpose());
+        assertTrue(retained.getFirst().completedAt().isEmpty());
+      }
+    } finally {
+      broker.stop();
+      database.stop();
+    }
+  }
+
+  @Test
+  void nativeCore002NullFactoryAndLocalPathStopBeforeResources() throws Exception {
+    try (var codec = codec()) {
+      var app =
+          application(
+              source(
+                  () -> {
+                    throw new AssertionError("DB must not be borrowed");
+                  }),
+              () -> {
+                throw new AssertionError("JMS must not be borrowed");
+              },
+              codec);
+      assertThrows(
+          NullPointerException.class, () -> app.startWithCoreSessionDependencies(root, 0, null));
+      assertThrows(
+          NullPointerException.class,
+          () -> app.startWithCoreSessionDependencies(null, 0, (a, b) -> Map.of()));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> app.startWithCoreSessionDependencies(root, -1, (a, b) -> Map.of()));
+    }
+  }
+
   private WebApplication application(
       DataSource db, JmsContextFactory broker, SessionPayloadCodec codec) {
     return new WebApplication(

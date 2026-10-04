@@ -155,7 +155,12 @@ final class ApiManagementServer implements AutoCloseable {
   public void close() {
     if (closed.compareAndSet(false, true)) {
       promoted.set(false);
-      server.stop(0);
+      boolean interrupted = Thread.currentThread().isInterrupted();
+      try {
+        server.stop(0);
+      } finally {
+        if (interrupted) Thread.currentThread().interrupt();
+      }
       executor.shutdownNow();
     }
   }

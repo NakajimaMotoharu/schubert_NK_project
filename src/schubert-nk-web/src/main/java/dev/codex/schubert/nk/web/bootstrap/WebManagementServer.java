@@ -1,0 +1,224 @@
+package dev.codex.schubert.nk.web.bootstrap;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpServer;
+import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
+
+/**
+ * Loopback Web management; NK-WEB-002/NK-OPS-001; SYS002004/MON003; UI243253; SS342
+ * §5.2/SS343/SS352; PG-D369; NATIVE-READY001..006. A requested stop is not termination. Native
+ * assembly retains this owner before calling start().
+ */
+final class WebManagementServer implements AutoCloseable {
+  @FunctionalInterface
+  interface Factory {
+    HttpServer create(InetSocketAddress address, int backlog) throws IOException;
+  }
+
+  private final HttpServer server;
+  private final ThreadPoolExecutor executor;
+  private final BooleanSupplier healthy;
+  private final String information;
+  private final AtomicBoolean promoted = new AtomicBoolean();
+  private final AtomicBoolean promotionAttempted = new AtomicBoolean();
+  private final AtomicBoolean closed = new AtomicBoolean();
+  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final Object stopLock = new Object();
+  private boolean serverStopped;
+  private boolean startAttempted;
+  private volatile boolean started;
+
+  static WebManagementServer open(Map<String, String> information, BooleanSupplier healthy)
+      throws IOException {
+    return open(information, healthy, 8081);
+  }
+
+  // Package-local ephemeral-port component PT; production caller always uses fixed overload.
+  static WebManagementServer open(
+      Map<String, String> information, BooleanSupplier healthy, int port) throws IOException {
+    return open(information, healthy, port, HttpServer::create);
+  }
+
+  static WebManagementServer open(
+      Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
+      throws IOException {
+    var result = bind(information, healthy, port, factory);
+    try {
+      result.start();
+      return result;
+    } catch (RuntimeException | Error failure) {
+      try {
+        result.close();
+      } catch (IOException closing) {
+        failure.addSuppressed(closing);
+      }
+      throw failure;
+    }
+  }
+
+  static WebManagementServer bind(Map<String, String> information, BooleanSupplier healthy)
+      throws IOException {
+    return bind(information, healthy, 8081, HttpServer::create);
+  }
+
+  static WebManagementServer bind(
+      Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
+      throws IOException {
+    Objects.requireNonNull(information, "public information");
+    Objects.requireNonNull(healthy, "runtime health");
+    Objects.requireNonNull(factory, "management factory");
+    String json = publicJson(information);
+    var server =
+        Objects.requireNonNull(
+            factory.create(new InetSocketAddress("127.0.0.1", port), 32), "management server");
+    var executor =
+        new ThreadPoolExecutor(
+            1,
+            1,
+            0,
+            TimeUnit.MILLISECONDS,
+            new ArrayBlockingQueue<>(32),
+            task -> {
+              var thread = new Thread(task, "web-management");
+              thread.setDaemon(true);
+              return thread;
+            });
+    return new WebManagementServer(server, executor, healthy, json);
+  }
+
+  void start() {
+    synchronized (stopLock) {
+      if (stopping.get() || startAttempted)
+        throw new IllegalStateException("Web management start unavailable");
+      startAttempted = true;
+      server.setExecutor(executor);
+      server.createContext("/", this::respond);
+      server.start();
+      started = true;
+    }
+  }
+
+  private WebManagementServer(
+      HttpServer server, ThreadPoolExecutor executor, BooleanSupplier healthy, String information) {
+    this.server = server;
+    this.executor = executor;
+    this.healthy = healthy;
+    this.information = information;
+  }
+
+  private static String publicJson(Map<String, String> information) {
+    var keys = List.of("commit", "app", "config", "schema", "protocol");
+    if (!information.keySet().equals(java.util.Set.copyOf(keys)))
+      throw new IllegalArgumentException("invalid public information");
+    if (!Objects.requireNonNull(information.get("commit"), "release commit")
+        .matches("[0-9a-f]{40}")) throw new IllegalArgumentException("invalid public commit");
+    var json = new StringBuilder("{");
+    for (String key : keys) {
+      String value = Objects.requireNonNull(information.get(key), "public version");
+      if (!value.matches("[A-Za-z0-9][A-Za-z0-9._+\\-]{0,127}"))
+        throw new IllegalArgumentException("invalid public version");
+      if (json.length() > 1) json.append(',');
+      json.append('"').append(key).append("\":\"").append(value).append('"');
+    }
+    return json.append('}').toString();
+  }
+
+  void promote(ServiceStartupAdmission.Ready ready) throws IOException {
+    Objects.requireNonNull(ready, "admission ready");
+    if (!started
+        || stopping.get()
+        || !promotionAttempted.compareAndSet(false, true)
+        || !healthy.getAsBoolean()) throw new IOException("Web readiness unavailable");
+    ready.release();
+    if (stopping.get() || !healthy.getAsBoolean())
+      throw new IOException("Web readiness unavailable");
+    promoted.set(true);
+  }
+
+  boolean ready() {
+    return started && !stopping.get() && promoted.get() && healthy.getAsBoolean();
+  }
+
+  int port() {
+    return server.getAddress().getPort();
+  }
+
+  private void respond(HttpExchange exchange) throws IOException {
+    try (exchange) {
+      String path = exchange.getRequestURI().getRawPath();
+      int status;
+      String body;
+      String contentType = "application/json; charset=utf-8";
+      if (!exchange.getRequestMethod().equals("GET")) {
+        status = 405;
+        body = "{}";
+      } else if ("/actuator/health".equals(path) || "/actuator/health/readiness".equals(path)) {
+        boolean up = ready();
+        status = up ? 200 : 503;
+        body = up ? "{\"status\":\"UP\"}" : "{\"status\":\"DOWN\"}";
+      } else if ("/actuator/info".equals(path)) {
+        status = 200;
+        body = information;
+      } else if ("/actuator/prometheus".equals(path)) {
+        status = 200;
+        contentType = "text/plain; version=0.0.4; charset=utf-8";
+        body =
+            "# TYPE schubert_nk_web_ready gauge\nschubert_nk_web_ready "
+                + (ready() ? "1\n" : "0\n");
+      } else {
+        status = 404;
+        body = "{}";
+      }
+      byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+      exchange.getResponseHeaders().set("Content-Type", contentType);
+      exchange.getResponseHeaders().set("Cache-Control", "no-store");
+      exchange.sendResponseHeaders(status, bytes.length);
+      exchange.getResponseBody().write(bytes);
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    closeWithin(java.time.Duration.ofSeconds(30));
+  }
+
+  void closeWithin(java.time.Duration remaining) throws IOException {
+    Objects.requireNonNull(remaining, "management stop budget");
+    if (remaining.isNegative() || remaining.compareTo(java.time.Duration.ofSeconds(30)) > 0)
+      throw new IllegalArgumentException("invalid stop budget");
+    synchronized (stopLock) {
+      if (closed.get()) return;
+      stopping.set(true);
+      promoted.set(false);
+      if (!serverStopped) {
+        boolean interrupted = Thread.currentThread().isInterrupted();
+        try {
+          server.stop(0);
+          serverStopped = true;
+        } finally {
+          if (interrupted) Thread.currentThread().interrupt();
+        }
+      }
+      executor.shutdownNow();
+      try {
+        if (!executor.awaitTermination(remaining.toNanos(), TimeUnit.NANOSECONDS))
+          throw new IOException("Web management stop unconfirmed");
+      } catch (InterruptedException interrupted) {
+        Thread.currentThread().interrupt();
+        throw new IOException("Web management stop unconfirmed");
+      }
+      closed.set(true);
+    }
+  }
+}

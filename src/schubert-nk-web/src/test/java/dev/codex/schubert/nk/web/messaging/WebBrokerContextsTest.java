@@ -127,8 +127,13 @@ final class WebBrokerContextsTest {
     var failure = assertThrows(IllegalStateException.class, owner::close);
     assertEquals("Web broker factory close failed", failure.getMessage());
     assertNull(failure.getCause());
+    assertThrows(IllegalStateException.class, owner::close);
+    assertEquals(2, ordinary.closes);
+    assertThrows(IllegalStateException.class, () -> owner.contexts().open());
+    ordinary.closeFault = null;
     owner.close();
-    assertEquals(1, ordinary.closes);
+    owner.close();
+    assertEquals(3, ordinary.closes);
 
     var fatal = new FakeFactory();
     var marker = new AssertionError("PT_PUBLIC_FATAL");
@@ -136,6 +141,12 @@ final class WebBrokerContextsTest {
     var fatalOwner = new WebBrokerContexts(() -> new char[] {'P'}, fatal, fatal);
     assertSame(marker, assertThrows(AssertionError.class, fatalOwner::close));
     assertEquals(1, fatal.closes);
+    assertSame(marker, assertThrows(AssertionError.class, fatalOwner::close));
+    assertEquals(2, fatal.closes);
+    fatal.closeFault = null;
+    fatalOwner.close();
+    fatalOwner.close();
+    assertEquals(3, fatal.closes);
   }
 
   private static final class FakeFactory implements ConnectionFactory, AutoCloseable {

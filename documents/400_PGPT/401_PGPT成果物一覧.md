@@ -213,3 +213,6 @@ Program単位PT仕様・結果・sanitized evidenceは`evidence/01_PT/NNN_<Progr
 ## 2026-09-08 電文接続監査の再判定
 
 BUG-023/SSC-012でNK-PRO-002を一時保留した後、正式Run06（8fed52b）全317件/独立error vector/全coverage100%で是正を確認し完了へ復帰。現在の確定完了は5/20（25%、工数換算ではない）。追加Auth mapperも試験済だがAuth Program全体は未完了。
+# PG454 C1/C2限定更新（2026-10-04）
+
+PG-D369/016085086と安全016 PG454-graph-selected-v8を対応付けた。126PT18suite/FES0/静的6zero/対象9class全counter0、実32MVCと同pair/管理/terminal drain/JMS retryを確認。全native・同群fresh全6・正式は未受入、run24/1964/53scope/48.3%不変。次owned native/30秒停止/outer保持→全回帰→signed VM経路→実CHR/native正式、通常限定成功で停止0。現況は456、依存は460。

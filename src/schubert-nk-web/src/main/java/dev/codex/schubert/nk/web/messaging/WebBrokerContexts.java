@@ -33,6 +33,7 @@ public final class WebBrokerContexts implements AutoCloseable {
   private final ConnectionFactory factory;
   private final AutoCloseable owner;
   private boolean closed;
+  private boolean stopping;
 
   public static WebBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
     Objects.requireNonNull(credentials, "Web credentials");
@@ -86,7 +87,7 @@ public final class WebBrokerContexts implements AutoCloseable {
 
   private JMSContext open() {
     synchronized (stateLock) {
-      if (closed) throw new IllegalStateException(UNAVAILABLE);
+      if (stopping) throw new IllegalStateException(UNAVAILABLE);
       char[] copy;
       try {
         copy = Objects.requireNonNull(passwords.get(), "password copy");
@@ -111,14 +112,16 @@ public final class WebBrokerContexts implements AutoCloseable {
   public void close() {
     synchronized (stateLock) {
       if (closed) return;
-      closed = true;
+      stopping = true;
       try {
         owner.close();
       } catch (Error fatal) {
         throw fatal;
       } catch (Exception failure) {
+        dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
         throw new IllegalStateException("Web broker factory close failed");
       }
+      closed = true;
     }
   }
 

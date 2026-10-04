@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,6 +37,97 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-014 A-D: the dedicated Web reply consumer lifecycle on real Artemis and failure paths. */
 final class ArtemisReplyConsumersTest {
+  @Test
+  void nativeSameFatalStartupAndCloseMustNotSelfSuppress() {
+    var fatal = new LinkageError("same synthetic fatal");
+    var closes = new AtomicInteger();
+    var context =
+        (JMSContext)
+            Proxy.newProxyInstance(
+                JMSContext.class.getClassLoader(),
+                new Class<?>[] {JMSContext.class},
+                (proxy, method, args) ->
+                    switch (method.getName()) {
+                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+                      case "createConsumer" ->
+                          Proxy.newProxyInstance(
+                              JMSConsumer.class.getClassLoader(),
+                              new Class<?>[] {JMSConsumer.class},
+                              (p, m, a) -> null);
+                      case "start" -> throw fatal;
+                      case "close" -> {
+                        closes.incrementAndGet();
+                        throw fatal;
+                      }
+                      default -> null;
+                    });
+    assertSame(
+        fatal,
+        assertThrows(
+            LinkageError.class,
+            () ->
+                ArtemisReplyConsumers.start(
+                    () -> context, reply(new ReplyCorrelationRegistry()), ignored -> {})));
+    assertEquals(1, closes.get());
+    assertEquals(0, fatal.getSuppressed().length);
+  }
+
+  @Test
+  void nativeOwnedBindStartOnceAndConfirmedCloseAfterUnknown() {
+    var calls = new AtomicInteger();
+    var closeFailure =
+        new java.util.concurrent.atomic.AtomicReference<Throwable>(
+            new IllegalStateException("synthetic unknown"));
+    var context =
+        (JMSContext)
+            Proxy.newProxyInstance(
+                JMSContext.class.getClassLoader(),
+                new Class<?>[] {JMSContext.class},
+                (proxy, method, args) ->
+                    switch (method.getName()) {
+                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+                      case "createConsumer" ->
+                          Proxy.newProxyInstance(
+                              JMSConsumer.class.getClassLoader(),
+                              new Class<?>[] {JMSConsumer.class},
+                              (p, m, a) -> null);
+                      case "close" -> {
+                        calls.incrementAndGet();
+                        var failure = closeFailure.get();
+                        if (failure != null) throw failure;
+                        yield null;
+                      }
+                      default -> null;
+                    });
+    var owner = ArtemisReplyConsumers.bind(() -> context);
+    assertFalse(owner.ready());
+    assertThrows(NullPointerException.class, () -> owner.start(null, ignored -> {}));
+    assertThrows(
+        NullPointerException.class, () -> owner.start(reply(new ReplyCorrelationRegistry()), null));
+    owner.start(reply(new ReplyCorrelationRegistry()), ignored -> {});
+    assertTrue(owner.ready());
+    assertThrows(
+        IllegalStateException.class,
+        () -> owner.start(reply(new ReplyCorrelationRegistry()), ignored -> {}));
+    assertThrows(IllegalStateException.class, owner::close);
+    assertFalse(owner.ready());
+    assertThrows(IllegalStateException.class, owner::close);
+    assertEquals(2, calls.get());
+    var fatal = new LinkageError("synthetic close fatal");
+    closeFailure.set(fatal);
+    assertSame(fatal, assertThrows(LinkageError.class, owner::close));
+    assertFalse(owner.ready());
+    assertThrows(
+        IllegalStateException.class,
+        () -> owner.start(reply(new ReplyCorrelationRegistry()), ignored -> {}));
+    closeFailure.set(null);
+    owner.close();
+    owner.close();
+    assertEquals(4, calls.get());
+    assertThrows(NullPointerException.class, () -> ArtemisReplyConsumers.bind(null));
+    assertThrows(NullPointerException.class, () -> ArtemisReplyConsumers.bind(() -> null));
+  }
+
   private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
@@ -173,8 +265,8 @@ final class ArtemisReplyConsumersTest {
     assertEquals("Web reply consumer close failed", close.getMessage());
     assertEquals("synthetic-close", close.getCause().getMessage());
     assertFalse(runtime.ready());
-    runtime.close();
-    assertEquals(1, closes.get());
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals(2, closes.get());
 
     AtomicInteger startupCloses = new AtomicInteger();
     IllegalStateException startup =

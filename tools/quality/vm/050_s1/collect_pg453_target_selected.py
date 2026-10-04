@@ -1,19 +1,32 @@
 """Frozen actual PG453 targeted host evidence; never native/full/formal acceptance."""
 import hashlib
 import json
+import sys
 from pathlib import Path
 import xml.etree.ElementTree as E
 
 root = Path('/home/mini/codex/project1/work/pgpt-foundation')
 work = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 tag = 'target-selected-v4'
-prefix = work / ('pg453-' + tag)
-frozen = work / ('pg453-' + tag + '-frozen')
-out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / ('PG453-' + tag)
+assert sys.argv[1:] in ([], ['PG454'])
+graph = sys.argv[1:] == ['PG454']
+run = 'PG454' if graph else 'PG453'
+if graph:
+    tag = 'graph-selected-v8'
+prefix = work / (run.lower() + '-' + tag)
+frozen = work / (prefix.name + '-frozen')
+out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / (run + '-' + tag)
 source = '4d61cc280c863853931df975141f351c3db7b387'
 names = {'NotificationBusinessMvcConfiguration', 'TargetOperationInput', 'CancelForm',
          'QuestionDeleteForm', 'NotificationController', 'QuestionController',
          'QuestionDetailViewModel', 'QuestionListViewModel'}
+if graph:
+    source = '2e529b880b89ca4f141d3ae870b674c4fb884804'
+    names = {'ApiManagementServer', 'ArtemisReplyConsumers', 'WebApplication',
+             'WebBusinessAssembly', 'WebHttpAdmission', 'WebHttpServer',
+             'WebHttpAdmissionValve', 'WebHttpAdmissionValve$Lease', 'WebManagementServer'}
+counts = (5, 7, 10, 33, 63, 8) if graph else (5, 7, 10, 99, 182, 43)
+total, suites = (126, 18) if graph else (346, 33)
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert not out.exists() and prefix.with_suffix('.exit').read_text().strip() == '0'
 assert prefix.with_suffix('.source').read_text().strip() == source
@@ -22,7 +35,7 @@ assert 'BUILD SUCCESS' in log and 'BUILD FAILURE' not in log
 assert log.count('BugInstance size is 0') == 6 and 'do not match with execution data' not in log
 modules, coverage, cases = {}, {}, set()
 for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'),
-                            (5, 7, 10, 99, 182, 43), strict=True):
+                            counts, strict=True):
     target = frozen / module / 'target'
     reports = sorted((target / 'surefire-reports').glob('TEST-*.xml'))
     count = 0
@@ -50,13 +63,15 @@ for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', '
             coverage[name] = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))}
                               for c in cls.findall('counter')}
 assert set(coverage) == names and all(c['missed'] == 0 for v in coverage.values() for c in v.values())
-assert sum(m['tests'] for m in modules.values()) == 346 and len(cases) == 33
+assert sum(m['tests'] for m in modules.values()) == total and len(cases) == suites
 before = []
 for version, code, tests, failures, limitations in (
     (1, 1, 121, 0, ['Web compile NullAway failed; Web/Batch PT and static/coverage not-run']),
     (2, 1, 301, 1, ['HTTP post not reached; Batch and Web static/coverage not-run']),
     (3, 0, 344, 0, ['Target Notification branch missed1/line missed2; target coverage gate not accepted']),
 ):
+    if graph:
+        break  # PG454 failed runs remain individually recorded in 086, never aggregated.
     prior = work / f'pg453-target-selected-v{version}'
     assert prior.with_suffix('.exit').read_text().strip() == str(code)
     before.append({'id': prior.name, 'accepted': False, 'exitCode': code, 'tests': tests,
@@ -65,14 +80,14 @@ for version, code, tests, failures, limitations in (
                    'sourceFilesSha256': sha(prior.with_suffix('.source-files.sha256')),
                    'bytePreservation': str(work / (prior.name + '-frozen'))})
 manifest = {
-    'id': 'PG453-' + tag, 'sourceHead': source,
+    'id': run + '-' + tag, 'sourceHead': source,
     'sourceDirty': 'PG-D368 Notification CANCEL/Question DELETE, same-core retained operation token, closed form/template/view and independent golden/SQL/HTTP/100 replay PT; BUG646 static-null and BUG647 independent order-oracle correction',
     'formal': False, 'fullRun': False, 'native': False, 'branch': 'dev-foundation',
     'startedAt': prefix.with_suffix('.started').read_text().strip(),
     'finishedAt': prefix.with_suffix('.completed').read_text().strip(),
     'environment': 'Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0',
     'command': 'bash WorkPG379/pg453_selected.sh target-selected-v4 ' + source + ' exact33Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
-    'exitCode': 0, 'tests': 346, 'suites': 33, 'modules': modules, 'testClasses': sorted(cases),
+    'exitCode': 0, 'tests': total, 'suites': suites, 'modules': modules, 'testClasses': sorted(cases),
     'coverage': coverage, 'coverageExclusions': [], 'staticAnalysis': {'modules': 6, 'findings': 0},
     'sourceFilesSha256': sha(prefix.with_suffix('.source-files.sha256')),
     'sourceDiffSha256': sha(prefix.with_suffix('.source-diff')), 'logSha256': sha(prefix.with_suffix('.log')),
@@ -90,6 +105,23 @@ manifest = {
                     'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
     'redaction': 'JUnit properties/stdout/stderr removed; no real credential/password/session/cookie/token/context/key/DB dump/provider raw output',
 }
+if graph:
+    manifest.update({
+        'sourceDirty': 'PG-D369 C1 same-core bridge/C2 full business assembly, actual HTTP terminal admission and management, requested/confirmed JMS closure; independent boundary/null/async/fatal/interrupt PT',
+        'command': 'bash WorkPG379/pg454_selected.sh graph-selected-v8 ' + source + ' exact18Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
+        'testIds': ['NATIVE-CORE001..003', 'NATIVE-GRAPH001..002', 'NATIVE-READY001..006', 'NATIVE-STOP001..004', 'reply/broker requested-confirmed retry', 'API management caller interrupt'],
+        'qa': ['QA-047', 'QA-049', 'QA-050'],
+        'bugs': [f'BUG-{n}' for n in range(648, 655)],
+        'ykt': ['YKT-460', 'YKT-461', 'YKT-462'],
+        'expected': '085: independently handwritten32 MVC paths; actual secured Login200/title/CSRF and protected302; borrowed17 ports with same core/Spring pair; initial503 then admission, real held AsyncContext prevents drain and terminal completion permits it; actual management five fixed info values/DOWN/UP/DOWN, one Ready release, bind before start refusal, actual uncooperative handler and interrupted cleanup UNKNOWN with retry; provider repeated close UNKNOWN/fatal identity; mandatory12 null constructors; no production-derived golden output',
+        'actual': '126PT18suite/FES0/static6zero; nine listed executable classes every counter missed0; actual isolated PG/embedded Artemis/full MVC/HTTP/async/JDK management lifecycle verified',
+        'before': {'resultDocument': 'evidence/01_PT/016_NK-WEB-002/086_NK-WEB-002_native組立・所有実行結果.md', 'acceptedByThisManifest': False},
+        'limitations': ['Selected host only; full grouped regression/native/formal not accepted',
+                        'WebBrokerContexts native create/credential-copy line4/method2 missed: not program100%',
+                        'Legacy partial runtime/outer owner/worker budget/native graph remain open',
+                        'Collector profile added after frozen run; fresh grouped full must include it',
+                        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
+    })
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'tests': manifest['tests'], 'coverageClasses': len(coverage), 'manifestSha256': sha(out / 'manifest.json')}))

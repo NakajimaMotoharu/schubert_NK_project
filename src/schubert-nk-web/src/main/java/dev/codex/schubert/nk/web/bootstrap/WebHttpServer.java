@@ -30,13 +30,15 @@ import org.springframework.web.servlet.DispatcherServlet;
 public final class WebHttpServer implements AutoCloseable {
   private final Tomcat tomcat;
   private final int port;
+  private final AnnotationConfigWebApplicationContext mvc;
   private final Object lifecycleLock = new Object();
   private boolean closed;
   private boolean stopped;
   private boolean destroyed;
 
-  private WebHttpServer(Tomcat tomcat) {
+  private WebHttpServer(Tomcat tomcat, AnnotationConfigWebApplicationContext mvc) {
     this.tomcat = tomcat;
+    this.mvc = mvc;
     this.port = tomcat.getConnector().getLocalPort();
   }
 
@@ -126,6 +128,10 @@ public final class WebHttpServer implements AutoCloseable {
             .addValve(new HttpRequestLoggingValve((WebRequestLogProducer) requestLog));
         mvc.register(RequestLogMvcConfiguration.class);
       }
+      Object admission = registeredDependencies.get(WebHttpAdmission.class);
+      if (admission != null) {
+        context.getPipeline().addValve(new WebHttpAdmissionValve((WebHttpAdmission) admission));
+      }
       if (featureConfigurations.length > 0) mvc.register(featureConfigurations);
       var servlet = Tomcat.addServlet(context, "nk-mvc", new DispatcherServlet(mvc));
       servlet.setLoadOnStartup(1);
@@ -135,7 +141,7 @@ public final class WebHttpServer implements AutoCloseable {
       if (context.getState() != LifecycleState.STARTED) {
         throw new LifecycleException("Web MVC startup failed");
       }
-      return new WebHttpServer(tomcat);
+      return new WebHttpServer(tomcat, mvc);
     } catch (LifecycleException | RuntimeException failure) {
       try {
         tomcat.destroy();
@@ -173,6 +179,22 @@ public final class WebHttpServer implements AutoCloseable {
     synchronized (lifecycleLock) {
       if (closed) throw new IllegalStateException("Web HTTP server is closed");
       return port;
+    }
+  }
+
+  /**
+   * Actual bound MVC mappings, not a static annotation inventory; Tomcat still owns the context.
+   */
+  public java.util.Set<String> mappedPaths() {
+    synchronized (lifecycleLock) {
+      if (closed) throw new IllegalStateException("Web HTTP server is closed");
+      var mappings =
+          mvc.getBean(
+              org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+                  .class);
+      var paths = new java.util.HashSet<String>();
+      mappings.getHandlerMethods().keySet().forEach(info -> paths.addAll(info.getPatternValues()));
+      return java.util.Set.copyOf(paths);
     }
   }
 

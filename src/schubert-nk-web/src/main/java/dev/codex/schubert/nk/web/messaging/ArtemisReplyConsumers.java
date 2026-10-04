@@ -18,6 +18,10 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private volatile boolean closed;
+  private volatile boolean stopping;
+  private boolean startAttempted;
+  private volatile boolean started;
+  private final Object stateLock = new Object();
 
   private ArtemisReplyConsumers(JMSContext context) {
     this.context = context;
@@ -31,9 +35,35 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(reply, "reply");
     Objects.requireNonNull(onTerminal, "onTerminal");
-    JMSContext opened = Objects.requireNonNull(factory.open(), "JMS context");
-    ArtemisReplyConsumers runtime = new ArtemisReplyConsumers(opened);
+    ArtemisReplyConsumers runtime = bind(factory);
     try {
+      runtime.start(reply, onTerminal);
+      return runtime;
+    } catch (RuntimeException | Error failure) {
+      try {
+        runtime.close();
+      } catch (RuntimeException | Error closing) {
+        if (failure != closing) failure.addSuppressed(closing);
+      }
+      dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
+      throw new IllegalStateException("Web reply consumer startup failed", failure);
+    }
+  }
+
+  /** Native caller captures this owner before listener setup or delivery can fail. */
+  public static ArtemisReplyConsumers bind(JmsContextFactory factory) {
+    Objects.requireNonNull(factory, "factory");
+    return new ArtemisReplyConsumers(Objects.requireNonNull(factory.open(), "JMS context"));
+  }
+
+  public void start(ArtemisReplyConsumer reply, Consumer<CommittedFatalReplyException> onTerminal) {
+    Objects.requireNonNull(reply, "reply");
+    Objects.requireNonNull(onTerminal, "onTerminal");
+    synchronized (stateLock) {
+      if (stopping || startAttempted)
+        throw new IllegalStateException("Web reply start unavailable");
+      startAttempted = true;
+      JMSContext opened = context;
       opened.setAutoStart(false);
       if (opened.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
         throw new IllegalStateException("Web reply consumer must be transacted");
@@ -48,7 +78,7 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
             try {
               reply.onMessage(opened, message);
             } catch (CommittedFatalReplyException fatal) {
-              if (runtime.terminal.compareAndSet(false, true)) {
+              if (terminal.compareAndSet(false, true)) {
                 onTerminal.accept(fatal);
               }
             } catch (JMSException | RuntimeException retryable) {
@@ -56,19 +86,12 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
             }
           });
       opened.start();
-      return runtime;
-    } catch (RuntimeException failure) {
-      try {
-        runtime.close();
-      } catch (RuntimeException closing) {
-        failure.addSuppressed(closing);
-      }
-      throw new IllegalStateException("Web reply consumer startup failed", failure);
+      started = true;
     }
   }
 
   public boolean ready() {
-    return !closed && !terminal.get();
+    return !stopping && started && !terminal.get();
   }
 
   public boolean terminalFailureObserved() {
@@ -77,14 +100,16 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed) {
-      return;
-    }
-    closed = true;
-    try {
-      context.close();
-    } catch (RuntimeException failure) {
-      throw new IllegalStateException("Web reply consumer close failed", failure);
+    synchronized (stateLock) {
+      if (closed) return;
+      stopping = true;
+      try {
+        context.close();
+      } catch (RuntimeException failure) {
+        dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
+        throw new IllegalStateException("Web reply consumer close failed", failure);
+      }
+      closed = true;
     }
   }
 }
