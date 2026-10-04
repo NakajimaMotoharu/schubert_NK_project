@@ -1,0 +1,456 @@
+{
+  "id": "PG449-retry-selected-v1",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "sourceHead": "bc03db444106aa6b87fd8b0e9135e19bab25e3d1",
+  "sourceDirty": "RevocationRetryCoordinator/RevocationRetryException/independent RevocationRetryCoordinatorTest",
+  "sourceFilesSha256": "ff7601f742a5391e87dd51bbafbe4e032484d7d76143349545e91ed26791d26d",
+  "sourceDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T09:44:43+09:00",
+  "finishedAt": "2026-10-04T09:48:08+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg449_selected.sh retry-selected-v1 bc03db444106aa6b87fd8b0e9135e19bab25e3d1 FieldCodecTest,StorageAttributeGuardTest,FixedServiceIdentityTest,DatabaseMigrationTest,StartupSchemaProjectionTest,InboxInspectionProgressBoundaryTest,LogCleanupProgressBoundaryTest,InspectionParentBoundaryTest,OutboxCleanupBoundaryTest,StepCleanupBoundaryTest,AuthSessionRevocationServiceTest,AuthSessionServiceTest,AuthenticationContextVerifierTest,AdminCommandAuthenticatorTest,LogoutInboxServiceTest,WebRequestTraceTest,RevocationPayloadCodecTest,PendingRevocationRepositoryTest,RevocationRetryCoordinatorTest,BackupStepRepositoryTest,BatchRunRepositoryTest,CleanupDatabaseSessionTest,CleanupStepValuesTest; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "preflight": "Exact same selector passed six-module source-class validation before execution; no failIfNoTests bypass",
+  "exitCode": 0,
+  "tests": 210,
+  "suites": 23,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 111,
+      "suites": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 34,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "RevocationPayloadException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadException$Reason": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 21
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadIdentity": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 163
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 25
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationPayloadCodec": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 455
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 95
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryCoordinator$Outcome": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryCoordinator": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 337
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 87
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 31
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "EncryptedRevocationPayload": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 55
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 13
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationRetryException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "PendingRevocationRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 506
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 41
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 110
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 33
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ClaimedRevocation": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 80
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "RevocationFailureCode": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 45
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "noExecutableInterface": [
+    "dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork"
+  ],
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "qa": [
+    "QA-050"
+  ],
+  "ssc": [
+    "SSC-171"
+  ],
+  "testIds": [
+    "RERUN005A..H",
+    "RERUN004A..I",
+    "RERUN003A..G",
+    "RERUN002",
+    "RERUN001-F"
+  ],
+  "expected": "Independent UI literal256/280 and SQL: API commit then lost reply retained/fresh0200 closes; expired0102 retained/fresh0200 only proves revoke; current lease CAS, 100 claims, per-worker DB0 before remote; fatal identity/resource postconditions",
+  "actual": "Eight new independent real API/PostgreSQL and transport-fixture tests passed; 100 rows produced 100 unique Message IDs/Inbox/audit without retained rows; all JDBC fault postconditions passed",
+  "logSha256": "8375a1f9939a06931b7de387b36a9b9fbf4410e14c13e83acfeb0f43e9cb3191",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg449-retry-selected-v1-frozen",
+  "redaction": "JUnit properties/stdout/stderr/provider text omitted; no runtime secret/context/cookie/token/key/dump/raw log",
+  "limitations": [
+    "JMS transport is an independent fixture, not actual Artemis/native/IT/ST",
+    "Local Logout/worker join/key retention/full Web native/CHR and same-source whole-group full regression pending",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "665799ee869a907350b01e9339ea06fa6a956b4fe52281813a54404d3660f8b2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "0b350784f45b0278606294872bf619ac7736d66d889d84fab0721bc8b79af9df"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest.xml",
+      "sha256": "e82b2f5c073d2e2c119f236e0fd4fcd216ec60754bf543dd41746e7a34af1c01"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest.xml",
+      "sha256": "0669aa3c02293614d66206e512a1df9f97d28cc5343b34d304a393e1940a7785"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest.xml",
+      "sha256": "0e0a3514b9f834c39e6b35cf0d4be6a6c87cf77b916e6ade546e4cbfe7ec99a3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest.xml",
+      "sha256": "214a719b00c99d2bda7bb61243b9d8d3f94772d4ea096361b702b71dc1cdc654"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest.xml",
+      "sha256": "9c029c7b438dd41df4e2d9c6cbae6058e330019adf41ffe0a5e3f35415b22c9e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "5d737bfe2249d7801e567c6bc063b8d5fed99e61945c0fffa5b0a115815869f0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "d38ede204bef0fd1830e0c707845ccb88ecdfd594cf798a3d877e62da2e2e7b4"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "cbb411cf07d4c8c0470ac7a1b20ac69af17749299d9d8207f4e15270a3da7c58"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "377419d04fcce4768df8c6111674c67d87fe0a9090f565be310e31d183a1ed97"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "5d79bce47cf8cdeadb704ce04d07b1aa64ff95faa9935a5c184fe399c45a9368"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "babe2eeec6c26feed8aae49519228cea22aeaa2461f5ec2d13c3e6b60fa1c690"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "51d906ac69cb2069fd0fd195ab292fb44bca1b2c9ff5a0d582b28fab663370dc"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "d36139571e12cc69715576c342273ab7301de825b98233c82f35bd9706621b4e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "ec5da3883903afd2d1a59480c4f544a41dfea97cc55be4b1869a232b7426ec0d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "72457ce0404df7f585a6e2f19c6d1d8a234563a32d47c524db2828f7e88254ed"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "b0076ce4268e16687ef90b5bb11c8f7e6b0ec3b2cd1435f6434082cd779e5850"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "c440d0b5ef9ce16db9e12a7308fcf29510ac8bf46c2ebaf72b8f7be0514fa428"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "61ef09289ef63fcb68d0c88b34af1c7c311dc63c2491d2192ce4e96a439d696a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest.xml",
+      "sha256": "e45622c5b1cb5657cbb7b7410e61a663793296897a300dfd5b03c356e4c112ea"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationPayloadCodecTest.xml",
+      "sha256": "81f0066e7c5976a150d8356759a682b7d4b99121f1ef067b3f08e56e372fb3c4"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG449-retry-selected-v1/junit/web/TEST-dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest.xml",
+      "sha256": "27a0e47a1b7c22fd4c6ee7d856e218b82777fc00b130c2b42b435c23ca792f00"
+    }
+  ]
+}

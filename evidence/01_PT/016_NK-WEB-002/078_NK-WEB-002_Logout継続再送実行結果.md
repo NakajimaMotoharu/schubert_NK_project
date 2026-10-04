@@ -1,5 +1,13 @@
 # 078 NK-WEB-002 Logout継続再送実行結果
 
+## PG449 RERUN005 genuine Logout facade／API限定結果
+
+2026-10-04 retry-selected-v1 actual exit0/03:24/09:48:08 JST、210PT23suite（5/7/10/111/34/43）、F/E/S0・6module静的0。Source bc03db444106aa6b87fd8b0e9135e19bab25e3d1＋PG-D361 coordinator/例外/独立Test。sourcefiles前後一致・全6actualtargetをWorkPG379/pg449-retry-selected-v1-frozenへcp/diff byte一致保存、安全manifest `evidence/provisional/PG449-retry-selected-v1/manifest.json` SHA `6b9a058230bd8132c9a53066a65d539f899293eb900edc2f380b017ca5841a35`。開始日時・command・private log SHA・環境・Test ID・独立期待/actualはmanifestが正。
+
+新A～H全8Testを実行し、API commit後応答喪失→保持→fresh0200、EXPIRED0102同TX→保持→fresh0200、一般0102/9000/異context・correlation/timeout、未知key/tag/oversized remote0、late lease CAS拒否、取得/null/setter/commit/close未知のremote0/再lease、循環cause/suppressedとfatal identity、100row/12workerの実API/Inbox100/監査100/Message ID重複0/row0を確認。独立literal256/280wireと直接SQLをoracleとし、各worker DB資源0で送信する。実MQ transportはJMS fixtureであり実Artemis/native/IT/ST性能は未検証。
+
+全11実行class B153/L368/M47/C11の全miss0。新coordinator/Outcome/例外はB42/L94/M12/C3全miss0、SqlWorkは抽象interfaceで実行counterなし（除外設定0、無意味なassertion0）。旧8classも同run全四coverage100。全source/native coverage100/正式run24は未認定。local Logout原子登録・破棄、workerjoin/旧key保持、同QA050群fresh全6・native27/Web/Caddy/CHRは後続未完了。BUG622～627/YKT440～444の全体回帰閉鎖を本限定試験だけで宣言しない。
+
 RERUN004A～I（2026-10-04 09:13:06）：HEAD1a6182512＋SQL3class/Test/preflight dirty、pending-selected-v2 actual0/03:16/202PT22suite/FES0/static6zero、web.revocation全8class B111L274M35C8の全miss0（新SQL3class B55L133M15C3）。sourcefiles前後一致/全6target byte pg449-pending-selected-v2-frozen一致、安全016 manifest13ee3f5088fb818dafd9c8ced5cb50262c8c2d5d5b76c595ca9bb63860bbb689。独立SQL：初回5s・30s300s900s・100飽和/全closed warning、NULLと過去期限保持、lease±1µs/CAS/2TX/100、原本117/16384byte保持・正常隣接row非阻害、29/116/欠落サイズ区別、4Statement全取得/実行/close/fatal・rollback。BUG625のpreflight正負CLI、BUG626627/YKT442443444は限定是正・同QA050所有群fresh全回帰待ち。修正commitは当保存単位、正式/真wire/native未受入。capture draft manifestf42c5e28…は未公開のcommand表現（preflightの参照表現）をrunner実commandと別preflight説明へ整理前にWork/pg449-pending-selected-v2-draft-manifest.jsonへ保全、XML/coverage/実source/runを変更0・追加試験加算0。
 
 PG449 pending-before-v1（08:56:24）はactual1/01:08/API selector gateでWeb未到達・log69ca0b0c…/実4target byte保全。before-v2（08:59:36）はactual1/01:53/Web17試行0F1E/oversized全claim拒否・log644e75e1…/実5target byte保全、selected-v1（09:05:45）はactual1/02:23/Web25PT通過だが静的3でBatch未実行・logffeab610…/実5target byte保全。各sourcehash前後一致、失敗/未実行を最終202へ足さず、独立RERUN004Fと資源Iで再試験。

@@ -576,5 +576,36 @@ if int(identifier[2:5]) >= 448:
         'V026 native signed migration/Backup, ordinary Morning/API/full Web/Caddy/DONE/intent/native CHR-A01/L01 and native coverage100/formal acceptance pending',
         'formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; failed/partial/other-source results not reused',
     ]
+if int(identifier[2:5]) >= 449:
+    names = {'AuthenticationInfrastructureException', 'AuthSessionRevocationService', 'AuthSessionService',
+             'AuthenticationContextVerifier', 'AdminCommandAuthenticator', 'LogoutInboxService'}
+    auth_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-api/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').rsplit('/', 1)[-1] in names}
+    assert set(auth_coverage) == names
+    assert all(k['missed'] == 0 for value in auth_coverage.values() for k in value.values())
+    manifest['authFatalCoverage'] = auth_coverage
+    revoke_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.get('name').startswith('dev/codex/schubert/nk/web/revocation/') and c.findall('counter')}
+    assert len(revoke_coverage) == 11
+    assert all(k['missed'] == 0 for value in revoke_coverage.values() for k in value.values())
+    manifest['revokeCoverage'] = revoke_coverage
+    manifest['ddl'].update({'versionedMigrations': 27,
+        'appendOnly': 'V001..026 unchanged; V027 only removes pending expires_at NOT NULL; no expiry deletion proof'})
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(622, 628))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(440, 445))
+    manifest['testIds'].extend(['RERUN001-F', 'RERUN002', 'RERUN003A..G', 'RERUN004A..I', 'RERUN005A..H'])
+    manifest['trigger'] = 'PG-D359..361/QA050 ownership group: fatal preservation, V027 and inventory, dedicated encrypted revoke, SQL lease/backoff/retention and genuine Logout facade/API participants; fresh six-module regression'
+    manifest['limitations'] = [
+        'Host genuine facade/API/isolated PostgreSQL and independent JMS fixture only; actual Artemis/native Web not accepted',
+        'Local Logout atomic destruction/enqueue, retry worker shutdown, old key retention and full native assembly pending',
+        'V027 signed native migration/Backup/ordinary Morning/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no interrupted/other-source result reuse',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))
