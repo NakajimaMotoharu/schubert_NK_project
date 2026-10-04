@@ -1,5 +1,11 @@
 # NK-OPS-001：PG459実行結果（未受入）
 
+02:35追記（source固定全回帰・コードのみ正規配備）：Production source8e97eb9138828010926cd47fd10868d8a2d54f11、full-v1/session70011は02:01:07～02:18:35 actual0/3257PT480suite/FES0/SpotBugs6zero/NullAway、全6target byte保存。安全 `PG459-caddy-cold-full/manifest.json` SHA9b1bf04ee688a62f09bfbee1373d7a51f60d31a1c501917481d5d3901e0ed38d。coverage100未達（456のcounter）、選択結果と別sourceを混ぜず、正式認定不変更。
+
+code-only46独立assert/Werror0（ProductionPT0）→assembly22676 actual0→185artifact/27SQL/source027独立hash一致・同pin署名→stage18477/verify61306/activate56511各actual0。元INVALID9/271全14列・全23business/原本pending/Backup/Transfer/旧8record保存・全9kernel空を真正M/A/DBで前後照合、freshINVALID/current承認PG459だけ変更、DDL/permit/start0・全owned正常帰還。工具BUG683表示/684旧class参照は事前起票して修正、旧PG458全BOM/SQLは27のまま不変更。安全 `PG459-code-only-v1/manifest.json` SHAda94d301edbcd5772ff66ffd235d75c062ddbfa2654693b38236441c19f7da6b、command/class/toolsource/publichashと限界を記録。
+
+02:32:59外部親一度発行は別試験、client0を親成功へ加算しない。今後の同親TLS/DONE/intent/全outer終端・実CHR/native100は未受入、現在process/予算/次commandは456先頭を参照。
+
 328仕様対応。正式run24/source858713c0/1964PT53scopeは維持、工程/IT/ST完了ではない。
 
 - 選択v1：NullAway必須regex captureのnullable未確定によりcompile1、Batch未実行。抑制なしで必須group invariantを明示。

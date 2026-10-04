@@ -137,7 +137,7 @@ public final class AssembleReleaseFixture {
     var sums=new StringBuilder();hashes.forEach((path,sha)->sums.append(sha).append("  ").append(path).append('\n'));
     write(output.resolve("SHA256SUMS"),sums.toString().getBytes(StandardCharsets.US_ASCII));
     System.out.println("PT-OPS-NATIVE-028 ASSEMBLED artifacts="+artifacts.size()+" dependencies="+deps.size()
-        +" migrations=25 manifestBytes="+original.length+" manifestSha256="+hash(output.resolve("RELEASE-MANIFEST.json"))
+        +" migrationsSqlCount="+(migrations.size()-1)+" schemaHistoryRows=1 manifestBytes="+original.length+" manifestSha256="+hash(output.resolve("RELEASE-MANIFEST.json"))
         +" authorityIssued=false productionActivation=false");
   }
   private static Map<String,Object> row(int rank,String version,String type,String script,Integer checksum) {

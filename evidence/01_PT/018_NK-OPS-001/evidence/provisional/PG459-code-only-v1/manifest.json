@@ -1,0 +1,124 @@
+{
+  "id": "PG459-code-only-v1",
+  "collectedAt": "2026-10-04T17:35:01.808875+00:00",
+  "branch": "dev-foundation",
+  "hostHeadAtCollection": "8e97eb9138828010926cd47fd10868d8a2d54f11",
+  "toolSourcesDirtyAtCollection": true,
+  "productionSourceCommit": "8e97eb9138828010926cd47fd10868d8a2d54f11",
+  "previousSource": "ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a",
+  "signedRelease": "0.1.0-PG459",
+  "schema": "027",
+  "manifestSha256": "88a6504f93782c65e2328bd719db4133bdc2b3457d0495c9e5887d084fd38311",
+  "environment": {
+    "host": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0",
+    "guest": "Ubuntu26.04/PostgreSQL18.6/JDK25.0.4/Artemis2.56.0"
+  },
+  "toolSourcesSha256": {
+    "tools/quality/vm/050_s1/Pg459CodeOnlyDeployment.java": "70d543cc322ed59688c97d9323a2be41e24b870644f788a15f294daebe4b2d00",
+    "tools/quality/vm/050_s1/Pg459CodeOnlyDeploymentTest.java": "07a2e7297ea2492bb81305143f0ab00ec49b716c5c226890663118a531546bcb",
+    "tools/quality/vm/050_s1/pg459_stage_v1.py": "e0f33f5bc2481c8750663727b3a9a0d90f3bd767f0d86a28d4b682cf44b01879",
+    "tools/quality/vm/050_s1/pg459_watch_parent.py": "d4b473ebf495969ee05455b6cb7e89bddf2f8ad52589d3d51419d49eeb6fd37d",
+    "tools/quality/vm/050_s1/pg459_external_start_once.py": "22e1ca08e7b05cd83c33d343647d40e0c74c749eeb1e964aeb239257334187fa",
+    "tools/quality/vm/050_s1/pg457_stable_actor.py": "ae19f53d3440a63588b3df0bd525fb39762923dbffcc1cc595fedc818ee8ecb3"
+  },
+  "nativeToolClassSha256": "dd17e319d13998041f449695951baf5f490932d7a03f474e01425f73017edb23",
+  "commands": [
+    "javac -Xlint:all -Werror; Pg459CodeOnlyDeploymentTest (46 independent argument/namespace assertions)",
+    "AssembleReleaseFixture <repo> pg459-release-v1 8e97eb9138828010926cd47fd10868d8a2d54f11 0.1.0-PG459 <effective-profile> <public-recipient>",
+    "python3 pg459_stage_v1.py <signed manifest digest>",
+    "guest sudo java --enable-native-access=ALL-UNNAMED -cp <new singleton + preserved16 + signed runtime> Pg459CodeOnlyDeployment <source> <digest> verify|activate"
+  ],
+  "expected": "literal signed027/27SQL/old INVALID9 current boot; genuine M/A/DB; all271x14/all23business/originalPending/Backup/Transfer/old8record preservation; all9kernel empty; DDL/start/permit0; all owned scopes return normally",
+  "actual": "assembly/stage/verify/activate0; full185BOM independently checked; freshINVALID and approval/currentPG459; unchanged signed27SQL/config/all Units; all preservation/terminal/normal owned return flags verified",
+  "independentToolAssertions": 46,
+  "productionPtAdded": 0,
+  "jobs": [
+    {
+      "testId": "CODE459-pg459-assemble-v1.log",
+      "privateLog": "pg459-assemble-v1.log",
+      "privateSha256": "aaf1ebfb231fc7d68ccd2e5e592ee98dbcd1fe00f6552fa855ea6cef6de4fe92",
+      "actualExitCode": 0,
+      "safePath": "logs/pg459-assemble-v1.txt",
+      "timestamps": "execution timestamps not recorded in original command; not inferred from collection time"
+    },
+    {
+      "testId": "CODE459-pg459-stage-v1.log",
+      "privateLog": "pg459-stage-v1.log",
+      "privateSha256": "8fbd8160eca4a77b338cb121f70d95a7a5d0737a3ea652f4d79440e8a43763cd",
+      "actualExitCode": 0,
+      "safePath": "logs/pg459-stage-v1.txt",
+      "timestamps": "execution timestamps not recorded in original command; not inferred from collection time"
+    },
+    {
+      "testId": "CODE459-pg459-code-tool-test-v1.log",
+      "privateLog": "pg459-code-tool-test-v1.log",
+      "privateSha256": "ad7b0f1b3bd80db77bf47c26155f4627e9009a3c488691c8b31da8a4aaa98d43",
+      "actualExitCode": 0,
+      "safePath": "logs/pg459-code-tool-test-v1.txt",
+      "timestamps": "execution timestamps not recorded in original command; not inferred from collection time"
+    },
+    {
+      "testId": "CODE459-pg459-code-verify-v1.log",
+      "privateLog": "pg459-code-verify-v1.log",
+      "privateSha256": "bd0fcd2944983c5554dc982c7b695ffb51510278fc7d3751aa015e0a378bcff4",
+      "actualExitCode": 0,
+      "safePath": "logs/pg459-code-verify-v1.txt",
+      "timestamps": "execution timestamps not recorded in original command; not inferred from collection time"
+    },
+    {
+      "testId": "CODE459-pg459-code-activate-v1.log",
+      "privateLog": "pg459-code-activate-v1.log",
+      "privateSha256": "1439bdb760b0f73414fba5fe1b0ba161d4b3d488a332a7f5cb1e5d871d1a23ed",
+      "actualExitCode": 0,
+      "safePath": "logs/pg459-code-activate-v1.txt",
+      "timestamps": "execution timestamps not recorded in original command; not inferred from collection time"
+    }
+  ],
+  "files": [
+    {
+      "path": "logs/pg459-assemble-v1.txt",
+      "sha256": "aaf1ebfb231fc7d68ccd2e5e592ee98dbcd1fe00f6552fa855ea6cef6de4fe92"
+    },
+    {
+      "path": "logs/pg459-stage-v1.txt",
+      "sha256": "8fbd8160eca4a77b338cb121f70d95a7a5d0737a3ea652f4d79440e8a43763cd"
+    },
+    {
+      "path": "logs/pg459-code-tool-test-v1.txt",
+      "sha256": "ad7b0f1b3bd80db77bf47c26155f4627e9009a3c488691c8b31da8a4aaa98d43"
+    },
+    {
+      "path": "logs/pg459-code-verify-v1.txt",
+      "sha256": "91b9a548d6de4e75f1631983148fe40252b1f2eb781d1c860135e5c746a67ebb"
+    },
+    {
+      "path": "logs/pg459-code-activate-v1.txt",
+      "sha256": "f3cad349320e9fd0490ce5d3b06c77936557a248625624b7d6cca37ca4839e3a"
+    }
+  ],
+  "hostFullRun": "PG459-caddy-cold-full",
+  "hostFullManifestSha256": "9b1bf04ee688a62f09bfbee1373d7a51f60d31a1c501917481d5d3901e0ed38d",
+  "hostFullTests": 3257,
+  "hostFullSuites": 480,
+  "hostFullExitCode": 0,
+  "hostCoverage100": false,
+  "formal": false,
+  "nativeParentAccepted": false,
+  "bugs": [
+    "BUG-683",
+    "BUG-684"
+  ],
+  "ykt": [
+    "YKT-488",
+    "YKT-489"
+  ],
+  "ssc": [
+    "SSC-180"
+  ],
+  "limitations": [
+    "Native parent is independently running and not accepted by code-only evidence",
+    "Tool assertions do not qualify production coverage",
+    "Private original/DB/owner/permit/credentials remain outside Git"
+  ],
+  "redaction": "Fixed flags and public source/hash only; no token, cookie, session ID, password, key, DB dump or originals."
+}
