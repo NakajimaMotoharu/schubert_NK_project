@@ -108,7 +108,7 @@ Password/質問本文をHMACに含める場合も、平文/canonical/単純hash�
 
 | Header | Value/policy |
 |---|---|
-| `Content-Security-Policy` | `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; connect-src 'self'` |
+| `Content-Security-Policy` | `default-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'` |
 | `Strict-Transport-Security` | `max-age=31536000`。Initial certificate警告があってもHTTPS維持 |
 | `X-Content-Type-Options` | `nosniff` |
 | `X-Frame-Options` | `DENY`、CSP frame-ancestorsと二重化 |
@@ -118,6 +118,8 @@ Password/質問本文をHMACに含める場合も、平文/canonical/単純hash�
 
 CaddyとWebの二重headerが相反しないよう、ITで実応答値を1件ずつ照合。
 Inline script/style/event handlerは使わず、same-origin外部JS/CSSへ分離。
+
+SSC-182/BUG-688：上のCSP値・directive順序はSS355のCurrent CHR-A01基準と完全一致させる。script-src/connect-srcはdefault-src selfを継承するので同じ実効制限を維持する。inline/eval/external originを許可せず、比較時のheader正規化・DIF未登録差分の免除・Current基準改変は行わない。独立固定文字列による全応答PTと実NK同source Characterizationで確認する。
 
 ## 8. Input validation pipeline
 
