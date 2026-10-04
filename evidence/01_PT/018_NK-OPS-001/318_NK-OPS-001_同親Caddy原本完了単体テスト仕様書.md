@@ -1,6 +1,6 @@
 # 318 NK-OPS-001 同親Caddy・原本完了単体テスト仕様書
 
-2026-10-04。PG455 / S3-D05 / SSC178。未実行・未受入。設計公開は origin/main `437cdeb5f`（設計source `880c67b82`、PR #9）、実装/試験sourceは実採取後に319へ記録する。
+2026-10-04。PG455 / S3-D05 / SSC178。限定host21suite/146PT・静的6zeroは319へ採取済、全coverage/native/正式は未受入。設計公開はPR9及びCaddy内部配備補足PR10のorigin/main `3818455aa`、実装/試験source・actual command/hashは319/manifestを正とする。
 
 ## 対象と独立oracle
 

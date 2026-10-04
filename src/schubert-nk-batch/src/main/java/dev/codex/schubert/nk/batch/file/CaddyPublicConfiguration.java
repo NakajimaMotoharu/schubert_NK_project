@@ -1,0 +1,231 @@
+package dev.codex.schubert.nk.batch.file;
+
+import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
+
+import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
+import dev.codex.schubert.nk.storage.*;
+import edu.umd.cs.findbugs.annotations.*;
+import java.io.*;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.security.*;
+import java.security.cert.*;
+import java.util.*;
+import javax.net.ssl.*;
+import org.jspecify.annotations.NullMarked;
+
+/** Fixed non-secret Caddy config/public CA only, never key/credential access. SSC178/CADDY455. */
+@NullMarked
+public final class CaddyPublicConfiguration {
+  private CaddyPublicConfiguration() {}
+
+  public static URI site(RootStartupContext root, RootStartupContext.Snapshot morning)
+      throws IOException {
+    var fixed = new FixedServiceIdentity().resolveCaddy();
+    return site(new String(read(root, morning, fixed, false), StandardCharsets.US_ASCII));
+  }
+
+  /** Initial SS342 IP/internal-CA profile, no arbitrary URL/DNS/proxy/HTTP downgrade. */
+  static URI site(String text) throws IOException {
+    Objects.requireNonNull(text);
+    String normalized =
+        text.lines()
+            .map(String::trim)
+            .filter(line -> !line.isEmpty() && !line.startsWith("#"))
+            .collect(java.util.stream.Collectors.joining("\n"));
+    String global = "{\nadmin off\nauto_https disable_redirects\nskip_install_trust\n}\n";
+    require(normalized.startsWith(global));
+    normalized = normalized.substring(global.length());
+    int firstEnd = normalized.indexOf('\n');
+    require(firstEnd > 0);
+    String first = normalized.substring(0, firstEnd);
+    require(first.startsWith("https://") && first.endsWith(":55160 {"));
+    String address = first.substring(8, first.length() - 8);
+    String bind;
+    if (address.startsWith("[") && address.endsWith("]")) {
+      bind = address.substring(1, address.length() - 1);
+      require(bind.contains(":") && bind.matches("[0-9a-fA-F:]{2,39}"));
+      require(java.net.InetAddress.getByName(bind) instanceof java.net.Inet6Address);
+    } else {
+      require(address.matches("(?:0|[1-9][0-9]{0,2})(?:\\.(?:0|[1-9][0-9]{0,2})){3}"));
+      for (String octet : address.split("\\.")) require(Integer.parseInt(octet) <= 255);
+      bind = address;
+    }
+    String expected = "https://" + address + ":55160 {\nbind " + bind + "\n" + BODY;
+    require(normalized.equals(expected));
+    return URI.create("https://" + address + ":55160/login");
+  }
+
+  private static final String BODY =
+      """
+      tls internal
+      request_body {
+      max_size 2MB
+      }
+      header {
+      Strict-Transport-Security "max-age=31536000"
+      X-Content-Type-Options "nosniff"
+      X-Frame-Options "DENY"
+      Referrer-Policy "same-origin"
+      -Server
+      }
+      reverse_proxy 127.0.0.1:8080 {
+      header_up X-Forwarded-For {remote_host}
+      header_up X-Forwarded-Proto {scheme}
+      header_up X-Forwarded-Host {host}
+      transport http {
+      dial_timeout 2s
+      response_header_timeout 30s
+      read_timeout 60s
+      write_timeout 60s
+      }
+      }
+      }""";
+
+  public static SSLContext tls(RootStartupContext root, RootStartupContext.Snapshot morning)
+      throws IOException {
+    var fixed = new FixedServiceIdentity().resolveCaddy();
+    byte[] bytes = read(root, morning, fixed, true);
+    try {
+      var input = new ByteArrayInputStream(bytes);
+      var certificate =
+          (X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(input);
+      require(input.available() == 0 && certificate.getBasicConstraints() >= 0);
+      certificate.checkValidity();
+      var store = KeyStore.getInstance(KeyStore.getDefaultType());
+      store.load(null, null);
+      store.setCertificateEntry("fixed-caddy-public-ca", certificate);
+      var trust = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+      trust.init(store);
+      var context = SSLContext.getInstance("TLS");
+      context.init(null, trust.getTrustManagers(), null);
+      root.recheck(morning);
+      return context;
+    } catch (GeneralSecurityException failure) {
+      throw new IOException("Caddy TLS admission unavailable");
+    } finally {
+      Arrays.fill(bytes, (byte) 0);
+    }
+  }
+
+  private static byte[] read(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      FixedServiceIdentity.Value fixed,
+      boolean ca)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(morning);
+    require(morning.service() == RootStartupContext.Service.MORNING);
+    root.recheck(morning);
+    var directory =
+        OwnedTransferDirectory.open(
+            LinuxHostDirectoryCalls.create(), Path.of(ca ? "/var" : "/etc"));
+    return ResourceScope.use(
+        directory::close,
+        () ->
+            walk(
+                root,
+                morning,
+                fixed,
+                ca,
+                List.of(directory),
+                ca
+                    ? List.of(
+                        "lib", "caddy", ".local", "share", "caddy", "pki", "authorities", "local")
+                    : List.of("caddy"),
+                0));
+  }
+
+  private static byte[] walk(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      FixedServiceIdentity.Value fixed,
+      boolean ca,
+      List<OwnedTransferDirectory> held,
+      List<String> segments,
+      int index)
+      throws IOException {
+    root.recheck(morning);
+    var current = held.getLast();
+    var security = LinuxInodeSecurity.create();
+    boolean ordinary = ca && index >= 2;
+    var before =
+        current.atDirectory(
+            p -> directory(p, security, ordinary ? fixed.uid() : 0, ordinary ? fixed.gid() : 0));
+    byte[] bytes;
+    if (index < segments.size()) {
+      var child = current.openExistingChild(segments.get(index));
+      bytes =
+          ResourceScope.use(
+              child::close,
+              () -> {
+                var next = new ArrayList<>(held);
+                next.add(child);
+                return walk(root, morning, fixed, ca, List.copyOf(next), segments, index + 1);
+              });
+    } else {
+      bytes =
+          current.atExistingEntryHandle(
+              ca ? "root.crt" : "Caddyfile",
+              p -> {
+                var metadata = file(p, security, ca ? fixed.uid() : 0, fixed.gid(), ca);
+                var input = Files.newInputStream(p);
+                byte[] actual = ResourceScope.use(input::close, () -> input.readNBytes(65537));
+                require(actual.length == metadata.size());
+                require(metadata.equals(file(p, security, ca ? fixed.uid() : 0, fixed.gid(), ca)));
+                return actual;
+              });
+    }
+    var after =
+        current.atDirectory(
+            p -> directory(p, security, ordinary ? fixed.uid() : 0, ordinary ? fixed.gid() : 0));
+    require(
+        before.mode() == after.mode()
+            && before.uid() == after.uid()
+            && before.gid() == after.gid()
+            && before.links() == after.links()
+            && before.device() == after.device()
+            && before.inode() == after.inode());
+    root.recheck(morning);
+    return bytes;
+  }
+
+  private static EnvironmentInodePolicy.Metadata directory(
+      Path held, InodeSecurityCalls security, long uid, long gid) throws IOException {
+    var m = metadata(held, security);
+    require(
+        m.uid() == uid
+            && m.gid() == gid
+            && m.links() >= 2
+            && Set.of(040700, 040750, 040755).contains(m.mode()));
+    return m;
+  }
+
+  private static EnvironmentInodePolicy.Metadata file(
+      Path held, InodeSecurityCalls security, long uid, long gid, boolean ca) throws IOException {
+    var m = metadata(held, security);
+    require(
+        m.uid() == uid
+            && m.gid() == gid
+            && m.links() == 1
+            && m.size() > 0
+            && m.size() <= 65536
+            && (m.mode() == 0100640 || (ca && m.mode() == 0100644)));
+    return m;
+  }
+
+  private static EnvironmentInodePolicy.Metadata metadata(Path held, InodeSecurityCalls security)
+      throws IOException {
+    var m =
+        EnvironmentInodePolicy.metadata(
+            Files.readAttributes(
+                held, "unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime"));
+    require(m.device() >= 0 && m.inode() > 0);
+    byte[] acl = security.accessAcl(held, 44);
+    require(acl != null && acl.length == 0);
+    return m;
+  }
+}

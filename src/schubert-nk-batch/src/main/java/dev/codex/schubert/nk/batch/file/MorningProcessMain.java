@@ -17,11 +17,11 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * External same-owner Morning→Backup wiring. Actual artifacts/DB are completed and request/marker
- * retired only after full termination and original/current proof. S2/S3 are not assembled yet:
- * partial valid invocations still exit30, never0/10. A fresh normal worker failure is recorded and
- * safely retired, but subsequent cleanup/issuer remains incomplete. UNKNOWN is retained under the
- * outer oneshot budget; no unexecuted phase is invented as FAILED. No raw diagnostic is printed.
- * NK-OPS-001; OPS009/UI251/SS341/343/SSC100-102; PG339; PT-OPS-MMAIN001-007.
+ * retired only after full termination and original/current proof. Typed native completion follows
+ * actual cleanup/issuer, both ordinary services, Caddy and same held original DONE; only all outer
+ * scopes' normal closure may return0/10. Legacy partial admissions still exit30. UNKNOWN retains
+ * the outer oneshot budget; no unexecuted phase is invented as FAILED. No raw diagnostic is
+ * printed. NK-OPS-001; OPS009/UI251/SS341/343/SSC100-102; PG339; PT-OPS-MMAIN001-007.
  */
 @NullMarked
 public final class MorningProcessMain {
@@ -37,26 +37,25 @@ public final class MorningProcessMain {
 
   private MorningProcessMain() {}
 
+  @FunctionalInterface
+  interface CompletedAdmission {
+    dev.codex.schubert.nk.batch.repository.MaintenanceCompletion execute(
+        MorningParentBudget budget, Optional<UUID> runId) throws IOException;
+  }
+
   public static void main(String[] args) {
-    System.exit(
-        run(
-            args,
-            MorningProcessMain::executeBackup,
-            (budget, runId) -> executeBackup(budget, Optional.of(runId))));
+    System.exit(runCompleted(args, MorningProcessMain::executeCompletedBackup));
   }
 
-  private static void executeBackup(MorningParentBudget budget) throws IOException {
-    executeBackup(budget, Optional.empty());
-  }
-
-  private static void executeBackup(MorningParentBudget entryBudget, Optional<UUID> runId)
-      throws IOException {
+  private static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion
+      executeCompletedBackup(MorningParentBudget entryBudget, Optional<UUID> runId)
+          throws IOException {
     var entryRoot = RootStartupContext.create();
     var entrySnapshot = entryRoot.capture(RootStartupContext.Service.MORNING);
     var budget =
         MorningParentBudget.borrow(
             entryRoot.maintenanceDeadline(entrySnapshot, entryBudget.deadlineNanos()));
-    MorningBackupStage.VerifiedEpochWork<MorningBackupUnitCycle.Outcome> work =
+    MorningBackupStage.VerifiedEpochWork<MorningCompletionEvidence> work =
         (state,
             database,
             epoch,
@@ -369,15 +368,23 @@ public final class MorningProcessMain {
                           };
                       var issued = publication.issue(permit, actualProof);
                       actualProof.verify(StartupPermitFiles.IssuePhase.AFTER_READBACK, issued);
-                      return backupOutcome;
+                      return new MorningCompletionEvidence(
+                          backupOutcome,
+                          begins,
+                          backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS
+                              ? Optional.of(completion.verifiedManifest())
+                              : Optional.empty(),
+                          backupCompleted.rows(),
+                          backupCompleted.receipt(),
+                          cleanup,
+                          expiry);
                     });
               });
         };
-    if (runId.isPresent()) {
-      MorningBackupStage.resumeVerifiedEpoch(budget, runId.orElseThrow(), work);
-    } else {
-      MorningBackupStage.freshVerifiedEpoch(budget, work);
-    }
+    var completed = MorningBackupStage.completedEpoch(budget, runId, work);
+    budget.requireWithin();
+    entryRoot.recheck(entrySnapshot);
+    return completed;
   }
 
   /** SSC108/136, BUG393: the permit binds SHA-256 of the complete canonical frame, not its text. */
@@ -498,9 +505,21 @@ public final class MorningProcessMain {
   }
 
   static int run(String[] args, Admission admission, ResumeAdmission resume) {
-    Objects.requireNonNull(args, "Morning arguments");
     Objects.requireNonNull(admission, "fixed Morning admission");
     Objects.requireNonNull(resume, "fixed Morning resume admission");
+    return runCompleted(
+        args,
+        (budget, selected) -> {
+          if (selected.isPresent()) resume.verify(budget, selected.orElseThrow());
+          else admission.verify(budget);
+          throw new IOException("Morning partial admission incomplete");
+        });
+  }
+
+  /** Native typed result arrives only after all original/DB/credential/M owners closed normally. */
+  static int runCompleted(String[] args, CompletedAdmission admission) {
+    Objects.requireNonNull(args, "Morning arguments");
+    Objects.requireNonNull(admission, "completed Morning admission");
     Optional<UUID> selected = Optional.empty();
     if (args.length != 0) {
       if (args.length != 2 || !"--resume".equals(args[0]) || args[1] == null) return 70;
@@ -516,10 +535,10 @@ public final class MorningProcessMain {
     try {
       var budget = MorningParentBudget.create();
       budget.requireWithin();
-      if (selected.isPresent()) resume.verify(budget, selected.orElseThrow());
-      else admission.verify(budget);
+      var completed =
+          Objects.requireNonNull(admission.execute(budget, selected), "actual completion");
       budget.requireWithin();
-      return 30;
+      return completed.outcome().exitCode();
     } catch (IOException
         | StopGateException
         | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {

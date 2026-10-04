@@ -29,7 +29,7 @@ final class ChildBrokerTest {
     return s.getBytes(StandardCharsets.US_ASCII);
   }
 
-  static final class Fixture implements ChildStartupContext.Io {
+  static class Fixture implements ChildStartupContext.Io {
     String manager = UNIT,
         status = STATUS,
         boot = BOOT + "\n",

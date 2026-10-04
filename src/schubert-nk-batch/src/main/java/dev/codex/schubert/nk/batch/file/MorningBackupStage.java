@@ -69,6 +69,23 @@ final class MorningBackupStage {
 
   private MorningBackupStage() {}
 
+  @FunctionalInterface
+  private interface VerifiedResultScope<T, R> {
+    R execute(MorningControlScope.VerifiedEpochWork<T> work) throws IOException;
+  }
+
+  static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion completedEpoch(
+      MorningParentBudget budget,
+      java.util.Optional<UUID> runId,
+      VerifiedEpochWork<MorningCompletionEvidence> work)
+      throws IOException {
+    return verifiedEpoch(
+        budget,
+        runId,
+        work,
+        continuation -> MorningControlScope.executeCompletedEpoch(budget, runId, continuation));
+  }
+
   static <T> T freshVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> work)
       throws IOException {
     return verifiedEpoch(budget, java.util.Optional.empty(), work);
@@ -81,6 +98,23 @@ final class MorningBackupStage {
 
   private static <T> T verifiedEpoch(
       MorningParentBudget budget, java.util.Optional<UUID> runId, VerifiedEpochWork<T> work)
+      throws IOException {
+    return verifiedEpoch(
+        budget,
+        runId,
+        work,
+        continuation ->
+            runId.isPresent()
+                ? MorningControlScope.executeResumeVerifiedEpoch(
+                    budget, runId.orElseThrow(), continuation)
+                : MorningControlScope.executeVerifiedEpoch(budget, continuation));
+  }
+
+  private static <T, R> R verifiedEpoch(
+      MorningParentBudget budget,
+      java.util.Optional<UUID> runId,
+      VerifiedEpochWork<T> work,
+      VerifiedResultScope<T, R> scope)
       throws IOException {
     Objects.requireNonNull(budget, "parent Morning budget");
     Objects.requireNonNull(work, "verified backup work");
@@ -159,11 +193,7 @@ final class MorningBackupStage {
                 return result;
               });
         };
-    if (runId.isPresent()) {
-      return MorningControlScope.executeResumeVerifiedEpoch(
-          budget, runId.orElseThrow(), continuation);
-    }
-    return MorningControlScope.executeVerifiedEpoch(budget, continuation);
+    return scope.execute(continuation);
   }
 
   static <T> T freshEpoch(MorningParentBudget budget, OwnedEpochWork<T> work) throws IOException {

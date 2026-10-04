@@ -1,0 +1,521 @@
+{
+  "id": "PG455-parent-selected-v4",
+  "sourceHead": "1ef0e4cbc9c33c3eac5446d13b35f57415626c44",
+  "sourceDirty": "SSC178 parent closure initial connection, seven independent Test classes; collector profile added only after actual source/hash/XML/static/byte capture, not a new tested Production version",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T19:59:12+09:00",
+  "finishedAt": "2026-10-04T20:01:52+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg454_selected.sh parent455-selected-v4 1ef0e4cbc9c33c3eac5446d13b35f57415626c44 exact21Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "exitCode": 0,
+  "tests": 146,
+  "suites": 21,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 11,
+      "suites": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 6,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 109,
+      "suites": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "testClasses": [
+    "dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest",
+    "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest",
+    "dev.codex.schubert.nk.batch.file.CaddyPublicConfigurationTest",
+    "dev.codex.schubert.nk.batch.file.MorningBackupStageTest",
+    "dev.codex.schubert.nk.batch.file.MorningCompletedMainTest",
+    "dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest",
+    "dev.codex.schubert.nk.batch.file.MorningControlScopeTest",
+    "dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest",
+    "dev.codex.schubert.nk.batch.file.MorningOriginalCompletionTest",
+    "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+    "dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest",
+    "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+    "dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest",
+    "dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest",
+    "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+    "dev.codex.schubert.nk.batch.platform.ServiceIntentReadyRetirementTest",
+    "dev.codex.schubert.nk.bootstrap.ChildBrokerTest",
+    "dev.codex.schubert.nk.bootstrap.ChildCaddyTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest"
+  ],
+  "coverage": {
+    "ChildStartupContext": {
+      "INSTRUCTION": {
+        "missed": 925,
+        "covered": 745
+      },
+      "BRANCH": {
+        "missed": 151,
+        "covered": 93
+      },
+      "LINE": {
+        "missed": 157,
+        "covered": 122
+      },
+      "COMPLEXITY": {
+        "missed": 98,
+        "covered": 47
+      },
+      "METHOD": {
+        "missed": 11,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningControlScope": {
+      "INSTRUCTION": {
+        "missed": 602,
+        "covered": 413
+      },
+      "BRANCH": {
+        "missed": 9,
+        "covered": 11
+      },
+      "LINE": {
+        "missed": 151,
+        "covered": 95
+      },
+      "COMPLEXITY": {
+        "missed": 39,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 34,
+        "covered": 27
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningBackupStage": {
+      "INSTRUCTION": {
+        "missed": 315,
+        "covered": 159
+      },
+      "BRANCH": {
+        "missed": 8,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 79,
+        "covered": 29
+      },
+      "COMPLEXITY": {
+        "missed": 19,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 15,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningProcessMain": {
+      "INSTRUCTION": {
+        "missed": 788,
+        "covered": 211
+      },
+      "BRANCH": {
+        "missed": 23,
+        "covered": 17
+      },
+      "LINE": {
+        "missed": 235,
+        "covered": 48
+      },
+      "COMPLEXITY": {
+        "missed": 29,
+        "covered": 17
+      },
+      "METHOD": {
+        "missed": 17,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningStartupLaunchOwner": {
+      "INSTRUCTION": {
+        "missed": 1250,
+        "covered": 54
+      },
+      "BRANCH": {
+        "missed": 78,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 336,
+        "covered": 16
+      },
+      "COMPLEXITY": {
+        "missed": 67,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 28,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningCompletionEvidence": {
+      "INSTRUCTION": {
+        "missed": 22,
+        "covered": 412
+      },
+      "BRANCH": {
+        "missed": 22,
+        "covered": 58
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 22,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningResumeAdmission": {
+      "INSTRUCTION": {
+        "missed": 36,
+        "covered": 195
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 5
+      },
+      "LINE": {
+        "missed": 5,
+        "covered": 44
+      },
+      "COMPLEXITY": {
+        "missed": 2,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningNewRunAdmission": {
+      "INSTRUCTION": {
+        "missed": 58,
+        "covered": 242
+      },
+      "BRANCH": {
+        "missed": 3,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 13,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 4,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 2,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "CaddyPublicConfiguration": {
+      "INSTRUCTION": {
+        "missed": 507,
+        "covered": 147
+      },
+      "BRANCH": {
+        "missed": 78,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 94,
+        "covered": 24
+      },
+      "COMPLEXITY": {
+        "missed": 53,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 13,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MorningCaddyReadiness": {
+      "INSTRUCTION": {
+        "missed": 95,
+        "covered": 557
+      },
+      "BRANCH": {
+        "missed": 19,
+        "covered": 63
+      },
+      "LINE": {
+        "missed": 22,
+        "covered": 93
+      },
+      "COMPLEXITY": {
+        "missed": 16,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "BackupUnitStartClient": {
+      "INSTRUCTION": {
+        "missed": 267,
+        "covered": 299
+      },
+      "BRANCH": {
+        "missed": 12,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 73,
+        "covered": 61
+      },
+      "COMPLEXITY": {
+        "missed": 24,
+        "covered": 20
+      },
+      "METHOD": {
+        "missed": 17,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "c8cc59d98fe3bc72a0e69e56425e5a2d15b77c3a95601564094b01877d5019cd",
+  "sourceDiffSha256": "7af8fb4f90878ca0307fcedbf5de5b46bdb7cebe188e9e5f0d73deaa3c4ec8af",
+  "logSha256": "eb2930a8b9182776247a8d39371c16c6677b46011dad77190d50fd3f85e5ef2d",
+  "sourceArchive": {
+    "privatePath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-parent455-selected-v4.source.tar",
+    "sha256": "c5a2dc9f8b13c1d7b2dc4b990fa921242baed398e3cfe7698d2f375e460c5549"
+  },
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg454-parent455-selected-v4-frozen",
+  "testIds": [
+    "ORIG455001..007",
+    "PARENT455001..007",
+    "MAIN455001..003",
+    "CADDY455001..010"
+  ],
+  "qa": [],
+  "bugs": [
+    "BUG-662"
+  ],
+  "ykt": [
+    "YKT-467"
+  ],
+  "expected": "318/319 literal same-thread activation and immutable completion, actual full-row envelope outcomes0/10 including failed Backup continuation, Caddy fixed manager/kernel/socket/TLS profile and rejected directives, live intent pre/post retirement and outer-failure observer ordering. Not native authority or Production-built expected",
+  "actual": "146PT21suite/FES0/static6zero. All observed counters retained, coverage100 NOT accepted; ordinary Morning/Caddy/DONE/native/CHR/full/formal pending",
+  "before": [
+    {
+      "id": "pg454-parent455-selected-v1",
+      "exitCode": 1,
+      "accepted": false,
+      "limitation": "Batch initial compile type errors; full not run"
+    },
+    {
+      "id": "pg454-parent455-selected-v2",
+      "exitCode": 1,
+      "accepted": false,
+      "limitation": "Batch NullAway nullable Optional supplier result; Batch PT not run"
+    },
+    {
+      "id": "pg454-parent455-selected-v3",
+      "exitCode": 1,
+      "accepted": false,
+      "tests": 146,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticFindings": 2,
+      "limitation": "BUG662 unnecessary suppressions; Batch jacoco report not run"
+    }
+  ],
+  "limitations": [
+    "All11 classes contain preserved misses; host/native closure remains incomplete, no exclusions",
+    "Full grouped source regression and actual same-parent external route required before acceptance",
+    "Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged; IT/ST not accepted"
+  ],
+  "redaction": "JUnit properties/stdout/stderr removed; no real credential/password/session/cookie/token/context/key/DB dump/provider raw output",
+  "ssc": [
+    "SSC-178"
+  ],
+  "coverageGateAccepted": false,
+  "coverageObservationOnly": true,
+  "files": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest.xml",
+      "sha256": "921d8e10886b2db1ccb41624658100772be0dedff85213db14465f293edf6376"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.CaddyPublicConfigurationTest.xml",
+      "sha256": "32b4eb23886ae2eed3fa4579517ee475150731f4c9c8375b43d1f8a14c1727a8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningBackupStageTest.xml",
+      "sha256": "7207024088b096ab51993ede597185e864c4ba950c826ac90e6c583458fba8c6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletedMainTest.xml",
+      "sha256": "238fd129cdb923ff48542d3b3cd4b7ebbe712da3ffc7aee03ccefc4a4833a53a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest.xml",
+      "sha256": "11e3641bf11e3df7c4e5e66628b2776e1c45f653ecd8f7120e4d026c83970c08"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningControlScopeTest.xml",
+      "sha256": "115894fa1df46c820813c591ed7d6912d6d50dd89a6f9cee4d82cc2a965f28c1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest.xml",
+      "sha256": "e5a3c82e0e0909b9e0e6832b8cb5ff8e09233bc929315e277df138be498043aa"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningOriginalCompletionTest.xml",
+      "sha256": "c33ea22bff3574846a978d3a6c608256d9190d03e6a3557d0d61405041c801dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningProcessMainTest.xml",
+      "sha256": "3a9d5d930698b651663998f48cf79c1e3be19fce29349a30faf2a0a12ae19db4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest.xml",
+      "sha256": "d4563ae9789b2a5de155fce823a6ee15fec340128b6afb401679c7368cef94c9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml",
+      "sha256": "980accfec78cf1b6f9d15eeb76322197c135f6c3ca3d0f0fa604cc2ee19789a6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml",
+      "sha256": "799af3455ae6e8b24eeb9179792f4b01312883522972ee4b3b83330cc6463668"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml",
+      "sha256": "3537e1be55790c57e7572553d5a790944a869221ee7e9a6888c01dea8c1b435f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest.xml",
+      "sha256": "2357c0df215569e1c90aa2d1d35685b8111487bbedf27c7d1e89c251ef5821e5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/batch/TEST-dev.codex.schubert.nk.batch.platform.ServiceIntentReadyRetirementTest.xml",
+      "sha256": "4fd1c9495a54ac1adaccfddeb0224cf889fde71e4afad7deea76d94c5e775d73"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest.xml",
+      "sha256": "8b56b62c2d74a3a461811be8d1b2d7fefbfe59180251371b0f0d57254bb1ef70"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildBrokerTest.xml",
+      "sha256": "4dbb83b161fc759f0bc9f063edaac2ba836b36c99c76ec9dea9b0db7a6e8f9e4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildCaddyTest.xml",
+      "sha256": "82ee8499cf0795b8c63638ef82dd9a30e0361f4b199a7084623d0551312d9e8c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "5a774920ed7d5602092dbd4831f1c9c420e1f476c03192e23d5f7fa5f726020d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "2a1edb06e2deb12df8c33479e7885d785e376a1e284575e0fa8b46494e2f088e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4/junit/web/TEST-dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest.xml",
+      "sha256": "735426acd2e16e11e1f169bd40417a02dca0d659b438095f83513eb6d954d51e"
+    }
+  ]
+}

@@ -28,7 +28,7 @@ final class MorningStartupLaunchOwner {
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "SS343/SSC137 fixed startup root; no caller path or arbitrary file")
-  static void publish(
+  private static void prepare(
       RootStartupContext root,
       RootStartupContext.Snapshot morning,
       MorningParentBudget budget,
@@ -83,6 +83,18 @@ final class MorningStartupLaunchOwner {
     root.recheck(morning);
     original.verify();
     database.recheckConsistent(state.activation().run());
+  }
+
+  static void publish(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database,
+      MorningNewRunAdmission.OriginalProof original,
+      StartupPermitRecords.Epoch issued)
+      throws IOException {
+    prepare(root, morning, budget, state, database, original, issued);
     startPending(root, morning, budget, state, database, original, issued);
   }
 
@@ -90,7 +102,182 @@ final class MorningStartupLaunchOwner {
       MaintenanceUnit unit,
       MaintenanceUnitTermination termination,
       BackupUnitStartClient.Attempt attempt,
-      MorningServiceReadiness readiness) {}
+      MorningServiceReadiness readiness,
+      ServiceConfigFiles.Service service,
+      RootStartupContext.Snapshot captured) {}
+
+  /** Typed native completion only; callback stays under the same original/DB/M scopes. */
+  static MaintenanceCompletion publishCompleted(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      MaintenanceRunState state,
+      MorningDatabaseSession.Access database,
+      MorningNewRunAdmission.OriginalProof original,
+      StartupPermitRecords.Epoch issued,
+      MorningCompletionEvidence evidence,
+      java.util.function.Consumer<MorningControlScope.Gate> onOuterFailure)
+      throws IOException {
+    Objects.requireNonNull(evidence);
+    Objects.requireNonNull(onOuterFailure);
+    prepare(root, morning, budget, state, database, original, issued);
+    var completed = new java.util.concurrent.atomic.AtomicReference<MaintenanceCompletion>();
+    MorningStartupLaunchOwner.<Started>sequence(
+        (service, earlier) ->
+            startService(
+                root, morning, budget, state, database, original, issued, service, earlier),
+        started -> stopStarted(root, morning, budget, state, database, original, started),
+        started -> {
+          var caddy = MaintenanceUnitTermination.create(root, morning, MaintenanceUnit.CADDY);
+          require(caddy.quiescentObservation().isPresent());
+          BackupUnitStartClient.RetirementGate live =
+              () -> {
+                budget.requireWithin();
+                original.verify();
+                database.recheckConsistent(state.activation().run());
+                for (var service : started) {
+                  verifyCurrentLaunch(root, morning, issued, service.service(), service.captured());
+                  require(service.readiness().ready());
+                }
+              };
+          live.verify();
+          long caddyDeadline =
+              Math.min(
+                  budget.deadlineNanos(),
+                  Math.addExact(
+                      System.nanoTime(), java.util.concurrent.TimeUnit.SECONDS.toNanos(30)));
+          var attempt =
+              BackupUnitStartClient.createCaddy(
+                      root,
+                      morning,
+                      budget,
+                      started.get(0).attempt(),
+                      started.get(1).attempt(),
+                      live)
+                  .start();
+          if (attempt.status() != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) retain();
+          MorningCaddyReadiness proxy;
+          try {
+            while (true) {
+              live.verify();
+              require(System.nanoTime() < caddyDeadline);
+              try {
+                proxy = MorningCaddyReadiness.create(root, morning, budget);
+                if (proxy.ready()) {
+                  require(System.nanoTime() < caddyDeadline);
+                  break;
+                }
+              } catch (IOException notYetReady) {
+                // Do not accept uncertainty; bounded failure stops the whole owned graph.
+              }
+              pause();
+            }
+          } catch (IOException | RuntimeException | Error failure) {
+            stopOnly(root, morning, budget, MaintenanceUnit.CADDY, caddy);
+            try {
+              attempt.preserveObservation();
+            } catch (IOException | RuntimeException | Error unknownClose) {
+              retain();
+            }
+            throw failure;
+          }
+          var confirmedProxy = proxy;
+          BackupUnitStartClient.RetirementGate pending =
+              () -> {
+                live.verify();
+                require(confirmedProxy.ready());
+                evidence.verify(
+                    database,
+                    java.time.Clock.systemUTC(),
+                    () -> {
+                      live.verify();
+                      return budget.remainingNanos();
+                    });
+              };
+          BackupUnitStartClient.RetirementGate afterRetirement =
+              () -> {
+                budget.requireWithin();
+                original.verify();
+                database.recheckConsistent(state.activation().run());
+                for (var service : started) {
+                  verifyCurrentLaunch(
+                      root, morning, issued, service.service(), service.captured(), false);
+                  require(service.readiness().ready());
+                }
+                require(confirmedProxy.ready());
+                root.recheck(morning);
+              };
+          // Registered BEFORE original/DB close; no expired DB/original capability is used there.
+          var stopped = new java.util.concurrent.atomic.AtomicBoolean();
+          onOuterFailure.accept(
+              () -> {
+                if (stopped.compareAndSet(false, true)) {
+                  stopOnly(root, morning, budget, MaintenanceUnit.CADDY, caddy);
+                  for (int i = started.size() - 1; i >= 0; i--)
+                    stopOnly(
+                        root, morning, budget, started.get(i).unit(), started.get(i).termination());
+                }
+              });
+          try {
+            pending.verify();
+            // Caddy borrows both delivery fences; its client closes BEFORE either marker retires.
+            attempt.retireReadyAfter(pending, pending);
+            started
+                .get(1)
+                .attempt()
+                .retireReadyAfter(
+                    pending,
+                    () -> {
+                      afterRetirement.verify();
+                      started.get(0).attempt().requireRetained(afterRetirement);
+                    });
+            started.get(0).attempt().retireReadyAfter(afterRetirement, afterRetirement);
+            afterRetirement.verify();
+            evidence.verify(
+                database,
+                java.time.Clock.systemUTC(),
+                () -> {
+                  afterRetirement.verify();
+                  return budget.remainingNanos();
+                });
+            var requested =
+                state.completion().isPresent()
+                    ? state.completion().orElseThrow()
+                    : evidence.completion(state.activation(), java.time.Clock.systemUTC());
+            require(original.complete(requested).equals(requested));
+            afterRetirement.verify();
+            completed.set(requested);
+          } catch (IOException | RuntimeException | Error uncertainCompletion) {
+            // Half retirement, publication/readback or close unknown must not unwind the parent.
+            retain();
+          }
+        });
+    return Objects.requireNonNull(completed.get());
+  }
+
+  /** Whole Unit/kernel termination only, valid even after original/DB callbacks expire. */
+  private static void stopOnly(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      MaintenanceUnit unit,
+      MaintenanceUnitTermination termination) {
+    try {
+      if (termination.quiescentObservation().isEmpty()) {
+        var stopped = MaintenanceUnitStopClient.create(root, morning).stop(unit);
+        if (stopped.status() != MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO) retain();
+        while (termination.quiescentObservation().isEmpty()) {
+          budget.requireWithin();
+          root.recheck(morning);
+          pause();
+        }
+      }
+      budget.requireWithin();
+      root.recheck(morning);
+    } catch (IOException | RuntimeException | Error unknown) {
+      retain();
+    }
+  }
 
   /** API ready then Web under the same parent. Later completion is not fabricated here. */
   private static void startPending(
@@ -296,7 +483,7 @@ final class MorningStartupLaunchOwner {
           database.recheckConsistent(state.activation().run());
           verifyCurrentLaunch(root, morning, issued, service, observedChild);
           require(readiness.ready());
-          return new Started(unit, termination, attempt, readiness);
+          return new Started(unit, termination, attempt, readiness, service, observedChild);
         }
         pause();
       }
@@ -341,16 +528,28 @@ final class MorningStartupLaunchOwner {
     throw new IOException("service startup not ready");
   }
 
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification = "SSC164 recheck only fixed same-epoch startup directory and launch")
   private static void verifyCurrentLaunch(
       RootStartupContext root,
       RootStartupContext.Snapshot morning,
       StartupPermitRecords.Epoch issued,
       ServiceConfigFiles.Service service,
       RootStartupContext.Snapshot captured)
+      throws IOException {
+    verifyCurrentLaunch(root, morning, issued, service, captured, true);
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification =
+          "SSC178 fixed same-epoch directory, permits intent-free verification only after retirement")
+  private static void verifyCurrentLaunch(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      StartupPermitRecords.Epoch issued,
+      ServiceConfigFiles.Service service,
+      RootStartupContext.Snapshot captured,
+      boolean pending)
       throws IOException {
     root.recheckServiceGeneration(morning, captured);
     var directory =
@@ -364,7 +563,7 @@ final class MorningStartupLaunchOwner {
           require(issued.equals(permits.current()));
           permits.readIssued();
           var files = new StartupLaunchFiles(directory, security, issued);
-          files.requireStartIntent(service);
+          if (pending) files.requireStartIntent(service);
           var owner = files.readOwner();
           owner.parentsGuard().check();
           var expected =
@@ -393,7 +592,7 @@ final class MorningStartupLaunchOwner {
     }
   }
 
-  private static void retain() {
+  static void retain() {
     for (; ; ) {
       java.util.concurrent.locks.LockSupport.parkNanos(
           java.util.concurrent.TimeUnit.SECONDS.toNanos(1));

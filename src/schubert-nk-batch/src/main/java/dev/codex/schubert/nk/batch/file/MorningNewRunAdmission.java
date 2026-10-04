@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
@@ -18,6 +19,7 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import org.jspecify.annotations.NullMarked;
@@ -48,10 +50,21 @@ final class MorningNewRunAdmission {
   }
 
   @FunctionalInterface
-  interface Files {
+  interface Files extends OriginalFiles {
     MaintenanceRunState start(BatchRun run, UUID activation) throws IOException;
+  }
 
+  /** SSC178: only the currently held original owner can implement these capabilities. */
+  interface OriginalFiles {
     default void verify(MaintenanceActivation expected) throws IOException {
+      throw unavailable();
+    }
+
+    default MaintenanceCompletion complete(MaintenanceCompletion expected) throws IOException {
+      throw unavailable();
+    }
+
+    default void verifyCompleted(MaintenanceCompletion expected) throws IOException {
       throw unavailable();
     }
   }
@@ -78,6 +91,10 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface OriginalProof {
     void verify() throws IOException;
+
+    default MaintenanceCompletion complete(MaintenanceCompletion expected) throws IOException {
+      throw unavailable();
+    }
   }
 
   @FunctionalInterface
@@ -137,6 +154,24 @@ final class MorningNewRunAdmission {
                                   throws IOException {
                                 context.recheck(expected);
                                 files.observe(activation);
+                                context.recheck(expected);
+                              }
+
+                              public MaintenanceCompletion complete(MaintenanceCompletion value)
+                                  throws IOException {
+                                context.recheck(expected);
+                                var result = files.complete(value);
+                                context.recheck(expected);
+                                return result;
+                              }
+
+                              public void verifyCompleted(MaintenanceCompletion value)
+                                  throws IOException {
+                                context.recheck(expected);
+                                if (!files
+                                    .observeStartup(value.activation())
+                                    .completed()
+                                    .equals(Optional.of(value))) throw unavailable();
                                 context.recheck(expected);
                               }
                             }));
@@ -205,7 +240,6 @@ final class MorningNewRunAdmission {
                         || !state.activation().id().equals(activation)
                         || state.completion().isPresent()) throw unavailable();
                     root.verify();
-                    long ownerThread = Thread.currentThread().threadId();
                     var alive = new java.util.concurrent.atomic.AtomicBoolean(true);
                     T completed;
                     try {
@@ -214,14 +248,12 @@ final class MorningNewRunAdmission {
                               continuation.execute(
                                   state,
                                   databaseAccess,
-                                  () -> {
-                                    if (!alive.get()
-                                        || Thread.currentThread().threadId() != ownerThread)
-                                      throw unavailable();
-                                    root.verify();
-                                    files.verify(state.activation());
-                                    root.verify();
-                                  }),
+                                  scopedOriginalProof(
+                                      root,
+                                      files,
+                                      state,
+                                      alive,
+                                      MorningNewRunAdmission::unavailable)),
                               "Morning continuation");
                     } finally {
                       alive.set(false);
@@ -232,6 +264,59 @@ final class MorningNewRunAdmission {
             });
     root.verify();
     return Objects.requireNonNull(result, "Morning new-run result");
+  }
+
+  /** Same Session/thread/lifetime; complete uncertainty cannot revert to pending proof. ORIG455. */
+  static OriginalProof scopedOriginalProof(
+      Gate root,
+      OriginalFiles files,
+      MaintenanceRunState state,
+      java.util.concurrent.atomic.AtomicBoolean alive,
+      Supplier<IOException> failure) {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(files);
+    Objects.requireNonNull(state);
+    Objects.requireNonNull(alive);
+    Objects.requireNonNull(failure);
+    long ownerThread = Thread.currentThread().threadId();
+    return new OriginalProof() {
+      private Optional<MaintenanceCompletion> completed = state.completion();
+      private boolean attempted;
+
+      private void owner() throws IOException {
+        if (!alive.get() || Thread.currentThread().threadId() != ownerThread) throw failure.get();
+      }
+
+      public void verify() throws IOException {
+        owner();
+        if (attempted && completed.isEmpty()) throw failure.get();
+        root.verify();
+        if (completed.isPresent()) files.verifyCompleted(completed.orElseThrow());
+        else files.verify(state.activation());
+        root.verify();
+        owner();
+      }
+
+      public MaintenanceCompletion complete(MaintenanceCompletion expected) throws IOException {
+        Objects.requireNonNull(expected);
+        owner();
+        if (attempted || !state.activation().equals(expected.activation())) throw failure.get();
+        if (completed.isPresent() && !completed.orElseThrow().equals(expected)) throw failure.get();
+        verify();
+        attempted = true;
+        // An existing done is immutable: validate it, never republish with a new clock/outcome.
+        if (completed.isEmpty()) {
+          var actual = Objects.requireNonNull(files.complete(expected));
+          if (!expected.equals(actual)) throw failure.get();
+          files.verifyCompleted(expected);
+          root.verify();
+          owner();
+          completed = Optional.of(actual);
+        }
+        verify();
+        return completed.orElseThrow();
+      }
+    };
   }
 
   private static IOException unavailable() {

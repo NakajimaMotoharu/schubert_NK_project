@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.file;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
 import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
@@ -38,7 +39,7 @@ final class MorningResumeAdmission {
   }
 
   @FunctionalInterface
-  interface Files {
+  interface Files extends MorningNewRunAdmission.OriginalFiles {
     MaintenanceRunState resume(UUID runId, UUID nextActivation) throws IOException;
 
     default void verify(MaintenanceActivation activation) throws IOException {
@@ -106,6 +107,24 @@ final class MorningResumeAdmission {
                                 files.observe(activation);
                                 context.recheck(expected);
                               }
+
+                              public MaintenanceCompletion complete(MaintenanceCompletion value)
+                                  throws IOException {
+                                context.recheck(expected);
+                                var result = files.complete(value);
+                                context.recheck(expected);
+                                return result;
+                              }
+
+                              public void verifyCompleted(MaintenanceCompletion value)
+                                  throws IOException {
+                                context.recheck(expected);
+                                if (!files
+                                    .observeStartup(value.activation())
+                                    .completed()
+                                    .equals(java.util.Optional.of(value))) throw unavailable();
+                                context.recheck(expected);
+                              }
                             }));
           }
         },
@@ -155,7 +174,6 @@ final class MorningResumeAdmission {
                     root.verify();
                     databaseAccess.requireConsistent(state.activation().run());
                     root.verify();
-                    long ownerThread = Thread.currentThread().threadId();
                     var alive = new java.util.concurrent.atomic.AtomicBoolean(true);
                     T completed;
                     try {
@@ -164,14 +182,12 @@ final class MorningResumeAdmission {
                               continuation.execute(
                                   state,
                                   databaseAccess,
-                                  () -> {
-                                    if (!alive.get()
-                                        || Thread.currentThread().threadId() != ownerThread)
-                                      throw unavailable();
-                                    root.verify();
-                                    files.verify(state.activation());
-                                    root.verify();
-                                  }),
+                                  MorningNewRunAdmission.scopedOriginalProof(
+                                      root::verify,
+                                      files,
+                                      state,
+                                      alive,
+                                      MorningResumeAdmission::unavailable)),
                               "Morning continuation");
                     } finally {
                       alive.set(false);

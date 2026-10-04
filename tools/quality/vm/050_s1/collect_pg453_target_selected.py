@@ -8,7 +8,8 @@ import xml.etree.ElementTree as E
 root = Path('/home/mini/codex/project1/work/pgpt-foundation')
 work = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 tag = 'target-selected-v4'
-assert sys.argv[1:] in ([], ['PG454'], ['PG454_NATIVE'], ['PG454_LEGACY'])
+assert sys.argv[1:] in ([], ['PG454'], ['PG454_NATIVE'], ['PG454_LEGACY'], ['PG455_PARENT'])
+parent = sys.argv[1:] == ['PG455_PARENT']
 legacy = sys.argv[1:] == ['PG454_LEGACY']
 native_group = sys.argv[1:] in (['PG454_NATIVE'], ['PG454_LEGACY'])
 graph = bool(sys.argv[1:])
@@ -19,9 +20,13 @@ if native_group:
     tag = 'native-selected-v4'
 if legacy:
     tag = 'legacy-selected-v1'
+if parent:
+    tag = 'parent455-selected-v4'
 prefix = work / (run.lower() + '-' + tag)
 frozen = work / (prefix.name + '-frozen')
 out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / (run + '-' + tag)
+if parent:
+    out = root / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG455-parent-selected-v4'
 source = '4d61cc280c863853931df975141f351c3db7b387'
 names = {'NotificationBusinessMvcConfiguration', 'TargetOperationInput', 'CancelForm',
          'QuestionDeleteForm', 'NotificationController', 'QuestionController',
@@ -44,6 +49,14 @@ if legacy:
     source = 'f772f26e0b7a75d885b3147d99ce5edfa611db0f'
     counts = (5, 7, 25, 33, 96, 8)
     total, suites = 174, 26
+if parent:
+    source = '1ef0e4cbc9c33c3eac5446d13b35f57415626c44'
+    names = {'MorningCompletionEvidence', 'MorningCaddyReadiness', 'CaddyPublicConfiguration',
+             'MorningStartupLaunchOwner', 'MorningNewRunAdmission', 'MorningResumeAdmission',
+             'MorningControlScope', 'MorningBackupStage', 'MorningProcessMain',
+             'BackupUnitStartClient', 'ChildStartupContext'}
+    counts = (5, 7, 11, 6, 8, 109)
+    total, suites = 146, 21
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert not out.exists() and prefix.with_suffix('.exit').read_text().strip() == '0'
 assert prefix.with_suffix('.source').read_text().strip() == source
@@ -84,6 +97,8 @@ incomplete = {'WebApplication', 'WebBusinessAssembly', 'WebNativeRuntime',
               'WebProcessLifetime', 'WebBrokerContexts'} if native_group else set()
 if legacy:
     incomplete -= {'WebApplication', 'WebBusinessAssembly'}
+if parent:
+    incomplete = names  # Observe every miss; this profile expressly refuses coverage/native acceptance.
 assert all(c['missed'] == 0 for n,v in coverage.items() if n not in incomplete for c in v.values())
 assert sum(m['tests'] for m in modules.values()) == total and len(cases) == suites
 before = []
@@ -172,6 +187,26 @@ if legacy:
                         'Same S3 parent completion contract group must run fresh full before ordinary candidate/native acceptance',
                         'Legacy partial runtime BUG629/YKT446/460 remains open',
                         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
+    })
+if parent:
+    manifest.update({
+        'id': 'PG455-parent-selected-v4',
+        'sourceDirty': 'SSC178 parent closure initial connection, seven independent Test classes; collector profile added only after actual source/hash/XML/static/byte capture, not a new tested Production version',
+        'command': 'bash WorkPG379/pg454_selected.sh parent455-selected-v4 ' + source + ' exact21Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
+        'testIds': ['ORIG455001..007', 'PARENT455001..007', 'MAIN455001..003', 'CADDY455001..010'],
+        'qa': [], 'ssc': ['SSC-178'], 'bugs': ['BUG-662'], 'ykt': ['YKT-467'],
+        'expected': '318/319 literal same-thread activation and immutable completion, actual full-row envelope outcomes0/10 including failed Backup continuation, Caddy fixed manager/kernel/socket/TLS profile and rejected directives, live intent pre/post retirement and outer-failure observer ordering. Not native authority or Production-built expected',
+        'actual': '146PT21suite/FES0/static6zero. All observed counters retained, coverage100 NOT accepted; ordinary Morning/Caddy/DONE/native/CHR/full/formal pending',
+        'coverageGateAccepted': False,
+        'coverageObservationOnly': True,
+        'before': [
+            {'id': 'pg454-parent455-selected-v1', 'exitCode': 1, 'accepted': False, 'limitation': 'Batch initial compile type errors; full not run'},
+            {'id': 'pg454-parent455-selected-v2', 'exitCode': 1, 'accepted': False, 'limitation': 'Batch NullAway nullable Optional supplier result; Batch PT not run'},
+            {'id': 'pg454-parent455-selected-v3', 'exitCode': 1, 'accepted': False, 'tests': 146, 'failures': 0, 'errors': 0, 'skipped': 0, 'staticFindings': 2, 'limitation': 'BUG662 unnecessary suppressions; Batch jacoco report not run'},
+        ],
+        'limitations': ['All11 classes contain preserved misses; host/native closure remains incomplete, no exclusions',
+                        'Full grouped source regression and actual same-parent external route required before acceptance',
+                        'Formal PT-WEB-20260925-24/1964PT/53scope/48.3% unchanged; IT/ST not accepted'],
     })
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')

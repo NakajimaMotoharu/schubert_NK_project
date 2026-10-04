@@ -96,6 +96,30 @@ final class MorningControlScope {
 
   private MorningControlScope() {}
 
+  @FunctionalInterface
+  private interface AfterPublication<T, R> {
+    R execute(
+        RootStartupContext root,
+        RootStartupContext.Snapshot morning,
+        MorningParentBudget budget,
+        MaintenanceRunState state,
+        dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Access database,
+        MorningNewRunAdmission.OriginalProof original,
+        Epoch issued,
+        T result,
+        java.util.function.Consumer<Gate> onOuterFailure)
+        throws IOException;
+  }
+
+  static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion executeCompletedEpoch(
+      MorningParentBudget budget,
+      Optional<UUID> runId,
+      VerifiedEpochWork<MorningCompletionEvidence> trustedWork)
+      throws IOException {
+    return executeVerifiedEpoch(
+        budget, runId, trustedWork, MorningStartupLaunchOwner::publishCompleted);
+  }
+
   /** Actual original owner remains nested inside the SAME M/A/DB/current callback. */
   static <T> T executeVerifiedEpoch(MorningParentBudget budget, VerifiedEpochWork<T> trustedWork)
       throws IOException {
@@ -110,17 +134,38 @@ final class MorningControlScope {
   private static <T> T executeVerifiedEpoch(
       MorningParentBudget budget, java.util.Optional<UUID> runId, VerifiedEpochWork<T> trustedWork)
       throws IOException {
+    return executeVerifiedEpoch(
+        budget,
+        runId,
+        trustedWork,
+        (root, morning, parent, state, database, original, issued, result, onOuterFailure) -> {
+          MorningStartupLaunchOwner.publish(
+              root, morning, parent, state, database, original, issued);
+          return result;
+        });
+  }
+
+  private static <T, R> R executeVerifiedEpoch(
+      MorningParentBudget budget,
+      java.util.Optional<UUID> runId,
+      VerifiedEpochWork<T> trustedWork,
+      AfterPublication<T, R> completion)
+      throws IOException {
     Objects.requireNonNull(budget, "parent Morning budget");
     Objects.requireNonNull(trustedWork, "verified original work");
+    Objects.requireNonNull(runId);
+    Objects.requireNonNull(completion);
     budget.requireWithin();
     var root = RootStartupContext.create();
     var snapshot = root.capture(RootStartupContext.Service.MORNING);
     // BUG391: after original/DB scope closure, only abort may use this owner, never issue/DB/proof.
     var publicationOwner =
         new java.util.concurrent.atomic.AtomicReference<MorningPermitPublication>();
+    var graphOwner = new java.util.concurrent.atomic.AtomicReference<Gate>();
     Gate gate =
         () ->
-            protectPublication(
+            protectGraph(
+                graphOwner,
                 publicationOwner,
                 () -> {
                   budget.requireWithin();
@@ -131,77 +176,106 @@ final class MorningControlScope {
     var startup = StartupAdmissionFile.create();
     var initialStop =
         new java.util.concurrent.atomic.AtomicReference<MorningUnitTerminals.Snapshot>();
-    return executeStopAndStartup(
-        gate,
-        maintenance::tryExclusive,
-        () ->
-            protectPublication(
-                publicationOwner,
-                () -> {
-                  try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
-                    intent.requireClear();
-                  }
-                  try (var intent = BackupStartIntentFiles.createPublication(root, snapshot)) {
-                    intent.requireClear();
-                  }
-                  requireNoExpiryRequest(root, snapshot);
-                  MorningNewRunAdmission.VerifiedContinuation<T> continuation =
-                      (state, database, original) -> {
-                        var publication =
-                            MorningPermitPublication.create(
-                                root, snapshot, budget, state, database, original);
-                        publicationOwner.set(publication);
-                        try {
-                          T result =
-                              afterOriginal(
-                                  gate,
-                                  () -> MorningStopPass.create(root, snapshot, budget).execute(),
-                                  startup::tryExclusive,
-                                  () ->
-                                      initialStop.set(MorningUnitTerminals.capture(root, snapshot)),
-                                  () -> {
-                                    Epoch epoch =
-                                        MorningCurrentInvalidation.invalidate(
-                                            root, snapshot, state);
-                                    if (epoch.state() != State.INVALID
-                                        || !epoch.activation().equals(state.activation()))
-                                      throw unavailable();
-                                    publication.bind(epoch);
-                                    original.verify();
-                                    return trustedWork.execute(
-                                        state,
-                                        database,
-                                        epoch,
-                                        original,
-                                        Objects.requireNonNull(
-                                            initialStop.get(), "actual A-after-stop set"),
-                                        publication);
-                                  });
-                          gate.verify();
-                          original.verify();
-                          database.recheckConsistent(state.activation().run());
-                          publication.commit();
-                          MorningStartupLaunchOwner.publish(
-                              root,
-                              snapshot,
-                              budget,
-                              state,
-                              database,
-                              original,
-                              publication.expected());
-                          return result;
-                        } catch (IOException | RuntimeException | Error failure) {
-                          publication.abort();
-                          throw failure;
-                        }
-                      };
-                  if (runId.isPresent()) {
-                    return MorningResumeAdmission.create(root, snapshot)
-                        .executeVerified(runId.orElseThrow(), continuation);
-                  }
-                  return MorningNewRunAdmission.create(root, snapshot)
-                      .executeVerified(continuation);
-                }));
+    try {
+      return executeStopAndStartup(
+          gate,
+          maintenance::tryExclusive,
+          () ->
+              protectGraph(
+                  graphOwner,
+                  publicationOwner,
+                  () -> {
+                    try (var intent = BackupStartIntentFiles.create(root, snapshot)) {
+                      intent.requireClear();
+                    }
+                    try (var intent = BackupStartIntentFiles.createPublication(root, snapshot)) {
+                      intent.requireClear();
+                    }
+                    requireNoExpiryRequest(root, snapshot);
+                    MorningNewRunAdmission.VerifiedContinuation<R> continuation =
+                        (state, database, original) -> {
+                          var publication =
+                              MorningPermitPublication.create(
+                                  root, snapshot, budget, state, database, original);
+                          publicationOwner.set(publication);
+                          try {
+                            T result =
+                                afterOriginal(
+                                    gate,
+                                    () -> MorningStopPass.create(root, snapshot, budget).execute(),
+                                    startup::tryExclusive,
+                                    () ->
+                                        initialStop.set(
+                                            MorningUnitTerminals.capture(root, snapshot)),
+                                    () -> {
+                                      Epoch epoch =
+                                          MorningCurrentInvalidation.invalidate(
+                                              root, snapshot, state);
+                                      if (epoch.state() != State.INVALID
+                                          || !epoch.activation().equals(state.activation()))
+                                        throw unavailable();
+                                      publication.bind(epoch);
+                                      original.verify();
+                                      return trustedWork.execute(
+                                          state,
+                                          database,
+                                          epoch,
+                                          original,
+                                          Objects.requireNonNull(
+                                              initialStop.get(), "actual A-after-stop set"),
+                                          publication);
+                                    });
+                            gate.verify();
+                            original.verify();
+                            database.recheckConsistent(state.activation().run());
+                            publication.commit();
+                            return completion.execute(
+                                root,
+                                snapshot,
+                                budget,
+                                state,
+                                database,
+                                original,
+                                publication.expected(),
+                                result,
+                                graphOwner::set);
+                          } catch (IOException | RuntimeException | Error failure) {
+                            publication.abort();
+                            throw failure;
+                          }
+                        };
+                    if (runId.isPresent()) {
+                      return MorningResumeAdmission.create(root, snapshot)
+                          .executeVerified(runId.orElseThrow(), continuation);
+                    }
+                    return MorningNewRunAdmission.create(root, snapshot)
+                        .executeVerified(continuation);
+                  }));
+    } catch (IOException | RuntimeException | Error outerFailure) {
+      // Post-completion M close uncertainty is not normal exit, nor proof M is still held.
+      if (graphOwner.get() != null) MorningStartupLaunchOwner.retain();
+      throw outerFailure;
+    }
+  }
+
+  /** Stop captured daemon graph before invalidation; callback uses no expired inner caps. */
+  static <T> T protectGraph(
+      java.util.concurrent.atomic.AtomicReference<Gate> graph,
+      java.util.concurrent.atomic.AtomicReference<MorningPermitPublication> publication,
+      LinuxFileLock.Operation<T> operation)
+      throws IOException {
+    Objects.requireNonNull(graph);
+    return protectPublication(
+        publication,
+        () -> {
+          try {
+            return operation.execute();
+          } catch (IOException | RuntimeException | Error failure) {
+            var observer = graph.get();
+            if (observer != null) observer.verify();
+            throw failure;
+          }
+        });
   }
 
   /** BUG391: invoked under M; retained owner prevents this operation returning to M's close. */

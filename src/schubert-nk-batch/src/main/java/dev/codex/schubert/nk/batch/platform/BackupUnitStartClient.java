@@ -93,7 +93,7 @@ public final class BackupUnitStartClient {
 
   @FunctionalInterface
   interface Policy {
-    void requireSafe();
+    void requireSafe() throws IOException;
   }
 
   @FunctionalInterface
@@ -113,11 +113,15 @@ public final class BackupUnitStartClient {
     default void closeObservation() throws IOException {
       throw new IOException("service observation close unavailable");
     }
+
+    default void requireRetained() throws IOException {
+      throw new IOException("service intent proof unavailable");
+    }
   }
 
   /** Parent-supplied proof, evaluated while its M/A/original/request owners are still held. */
   @FunctionalInterface
-  interface RetirementGate {
+  public interface RetirementGate {
     void verify() throws IOException;
   }
 
@@ -324,6 +328,10 @@ public final class BackupUnitStartClient {
               public void closeObservation() throws IOException {
                 marker.close();
               }
+
+              public void requireRetained() throws IOException {
+                marker.requirePresent(token);
+              }
             };
           } catch (IOException | RuntimeException | Error failure) {
             try {
@@ -367,6 +375,63 @@ public final class BackupUnitStartClient {
     return attempt;
   }
 
+  /** SSC178: fixed daemon; API/Web's still-owned intents are the delivery fence, not receipts. */
+  public static BackupUnitStartClient createCaddy(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      Attempt api,
+      Attempt web,
+      RetirementGate parent)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(budget);
+    Objects.requireNonNull(api);
+    Objects.requireNonNull(web);
+    Objects.requireNonNull(parent);
+    if (morning.service() != RootStartupContext.Service.MORNING
+        || api.unit != MaintenanceUnit.API
+        || web.unit != MaintenanceUnit.WEB) throw new IOException("Caddy start unavailable");
+    root.recheck(morning);
+    budget.requireWithin();
+    var policy = MaintenanceUnitStopPolicy.create();
+    RetirementGate fence =
+        () -> {
+          budget.requireWithin();
+          root.recheck(morning);
+          parent.verify();
+          api.requireRetained(parent);
+          web.requireRetained(parent);
+          root.recheck(morning);
+          budget.requireWithin();
+        };
+    return new BackupUnitStartClient(
+        () -> {
+          root.recheck(morning);
+          fence.verify();
+        },
+        () -> {
+          MorningCaddyReadiness.requireConfiguration(root, morning);
+          policy.requireSafe(MaintenanceUnit.CADDY);
+        },
+        new MaintenanceUnitStopClient.NativeStart()::execute,
+        () -> {
+          fence.verify();
+          return new MarkerLease() {
+            public void retire() throws IOException {
+              fence.verify();
+            }
+
+            public void requireRetained() throws IOException {
+              fence.verify();
+            }
+          };
+        },
+        MaintenanceUnit.CADDY,
+        Optional.of(budget));
+  }
+
   private static void interrupted() {
     if (Thread.currentThread().isInterrupted())
       throw new StopGateException(StopGateFailure.INTERRUPTED);
@@ -402,6 +467,40 @@ public final class BackupUnitStartClient {
 
     public synchronized Status status() {
       return status;
+    }
+
+    /** Same inode owners and confirmed client release; neither ready nor retirement authority. */
+    public synchronized void requireRetained(RetirementGate gate) throws IOException {
+      Objects.requireNonNull(gate);
+      if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
+          || status != Status.CLIENT_EXITED_ZERO
+          || !stdinClosed
+          || !streamsClosed
+          || retired
+          || retiring
+          || retireUncertain) throw new IOException("service intent proof unavailable");
+      context.recheck();
+      gate.verify();
+      marker.requireRetained();
+      gate.verify();
+      context.recheck();
+    }
+
+    /** Live daemon profile/ordinary peer gates are distinct from the worker terminus contract. */
+    public synchronized void retireReadyAfter(RetirementGate before, RetirementGate after)
+        throws IOException {
+      Objects.requireNonNull(before);
+      Objects.requireNonNull(after);
+      if ((unit != MaintenanceUnit.API
+              && unit != MaintenanceUnit.WEB
+              && unit != MaintenanceUnit.CADDY)
+          || !stdinClosed
+          || !streamsClosed) throw new IOException("live intent retirement unavailable");
+      retireAfter(before);
+      // Failure after unlink/close is UNKNOWN and must be retained by the enclosing parent.
+      context.recheck();
+      after.verify();
+      context.recheck();
     }
 
     /** Close-only: marker stays durable, no receipt/retirement/unlock authority is granted. */

@@ -1,0 +1,242 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
+import java.io.IOException;
+import java.util.*;
+import org.junit.jupiter.api.Test;
+
+/** SS342/SSC178/CADDY455: literal manager/kernel/HTTP values, no native authority. */
+final class MorningCaddyReadinessTest {
+  static final String INV = "7".repeat(32);
+  static final ChildStartupContext.Observed ACTOR =
+      new ChildStartupContext.Observed(
+          "11111111-1111-4111-8111-111111111111",
+          43,
+          12345,
+          200,
+          201,
+          List.of(201L),
+          "0::/system.slice/caddy.service\n",
+          true,
+          true);
+
+  static Map<String, String> values() {
+    var m = new HashMap<String, String>();
+    String text =
+        """
+        Id=caddy.service
+        LoadState=loaded
+        ActiveState=active
+        SubState=running
+        MainPID=43
+        InvocationID=77777777777777777777777777777777
+        Job=
+        Type=notify
+        Restart=no
+        KillMode=control-group
+        SendSIGKILL=no
+        NoNewPrivileges=yes
+        CapabilityBoundingSet=
+        AmbientCapabilities=
+        User=caddy
+        Group=caddy
+        SupplementaryGroups=
+        TimeoutStartUSec=30s
+        TimeoutStopUSec=30s
+        ExecStartPre={ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[Sun 2026-10-04 19:00:00 JST] ; stop_time=[Sun 2026-10-04 19:00:01 JST] ; pid=42 ; code=exited ; status=0/0 }
+        ExecStart={ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[Sun 2026-10-04 19:00:02 JST] ; stop_time=[n/a] ; pid=43 ; code=(null) ; status=0/0 }
+        """;
+    text.lines()
+        .forEach(
+            line -> {
+              int i = line.indexOf('=');
+              m.put(line.substring(0, i), line.substring(i + 1));
+            });
+    return m;
+  }
+
+  static final class Fixture implements MorningCaddyReadiness.Io {
+    Map<String, String> manager = values();
+    ChildStartupContext.Observed actor = ACTOR;
+    Set<String> before = Set.of("12345"), after = Set.of("12345");
+    int status = 200, sockets, guards, failGuard, calls, failIo;
+    final List<String> events = new ArrayList<>();
+
+    void guard() throws IOException {
+      events.add("guard");
+      if (++guards == failGuard) throw new IOException("fixed fault");
+    }
+
+    void io() throws IOException {
+      if (++calls == failIo) throw new IOException("fixed fault");
+    }
+
+    public Map<String, String> manager() throws IOException {
+      io();
+      events.add("manager");
+      return manager;
+    }
+
+    public ChildStartupContext.Observed actor(String invocation) throws IOException {
+      io();
+      assertEquals(INV, invocation);
+      events.add("actor");
+      return actor;
+    }
+
+    public Set<String> sockets(long pid) throws IOException {
+      io();
+      assertEquals(43, pid);
+      events.add("socket");
+      return ++sockets == 1 ? before : after;
+    }
+
+    public int login() throws IOException {
+      io();
+      events.add("TLS-login");
+      return status;
+    }
+
+    MorningCaddyReadiness create() throws IOException {
+      return new MorningCaddyReadiness(this::guard, this);
+    }
+  }
+
+  @Test
+  void caddy455001TrueHttpsAndSameActorSocketOrder() throws Exception {
+    var f = new Fixture();
+    var observer = f.create();
+    f.events.clear();
+    assertTrue(observer.ready());
+    assertEquals(
+        List.of(
+            "guard",
+            "manager",
+            "actor",
+            "socket",
+            "TLS-login",
+            "guard",
+            "actor",
+            "manager",
+            "socket",
+            "guard"),
+        f.events);
+  }
+
+  @Test
+  void caddy455002AllFixedProfileFieldsMissingOrChangedReject() throws Exception {
+    MorningCaddyReadiness.profile(values());
+    for (String key : values().keySet()) {
+      var missing = values();
+      missing.remove(key);
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(missing), key);
+      var changed = values();
+      changed.put(key, "unexpected");
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(changed), key);
+    }
+    for (String pid : List.of("0", "1", "01", "2147483648", "9999999999", "-1")) {
+      var m = values();
+      m.put("MainPID", pid);
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
+    }
+    for (String inv : List.of("0".repeat(32), "A".repeat(32), "7".repeat(31))) {
+      var m = values();
+      m.put("InvocationID", inv);
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
+    }
+    for (String mutation :
+        List.of("status=30/0", "ignore_errors=yes", "code=killed", "start_time=[n/a]")) {
+      var m = values();
+      String source = m.get("ExecStartPre");
+      m.put(
+          "ExecStartPre",
+          mutation.startsWith("start_time")
+              ? source.replace("start_time=[Sun 2026-10-04 19:00:00 JST]", mutation)
+              : source.replace(
+                  mutation.startsWith("status")
+                      ? "status=0/0"
+                      : mutation.startsWith("ignore") ? "ignore_errors=no" : "code=exited",
+                  mutation));
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
+    }
+    assertThrows(NullPointerException.class, () -> MorningCaddyReadiness.profile(null));
+  }
+
+  @Test
+  void caddy455003SocketOrHttpsFailureNeverReady() throws Exception {
+    for (int status : List.of(301, 302, 403, 500, 503)) {
+      var f = new Fixture();
+      f.status = status;
+      assertFalse(f.create().ready());
+    }
+    var f = new Fixture();
+    f.before = Set.of();
+    assertFalse(f.create().ready());
+    assertFalse(f.events.contains("TLS-login"));
+    f = new Fixture();
+    f.after = Set.of("99999");
+    assertFalse(f.create().ready());
+    f = new Fixture();
+    f.before = Set.of("12345", "88888");
+    assertTrue(f.create().ready());
+  }
+
+  @Test
+  void caddy455004EveryObservationGuardAndGenerationFailureRejects() throws Exception {
+    for (int i = 1; i <= 5; i++) {
+      var f = new Fixture();
+      f.failGuard = i;
+      assertThrows(IOException.class, () -> f.create().ready());
+    }
+    for (int i = 1; i <= 10; i++) {
+      var f = new Fixture();
+      f.failIo = i;
+      assertThrows(IOException.class, () -> f.create().ready());
+    }
+    var f = new Fixture();
+    var observer = f.create();
+    f.manager = values();
+    f.manager.put("InvocationID", "8".repeat(32));
+    assertThrows(IOException.class, observer::ready);
+    f = new Fixture();
+    observer = f.create();
+    f.actor =
+        new ChildStartupContext.Observed(
+            ACTOR.boot(), 43, 12346, 200, 201, List.of(201L), ACTOR.cgroup(), true, true);
+    assertThrows(IOException.class, observer::ready);
+    var wrong = new Fixture();
+    wrong.actor =
+        new ChildStartupContext.Observed(
+            ACTOR.boot(), 44, 12345, 200, 201, List.of(201L), ACTOR.cgroup(), true, true);
+    assertThrows(IOException.class, wrong::create);
+    assertThrows(NullPointerException.class, () -> new MorningCaddyReadiness(null, new Fixture()));
+    assertThrows(NullPointerException.class, () -> new MorningCaddyReadiness(() -> {}, null));
+  }
+
+  @Test
+  void caddy455005IndependentProcAddressAndListenerVectors() {
+    assertEquals("0100007F", MorningCaddyReadiness.kernelAddress(new byte[] {127, 0, 0, 1}));
+    assertEquals(
+        "0000000000000000FFFF00000100007F",
+        MorningCaddyReadiness.kernelAddress(
+            new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 255, (byte) 255, 127, 0, 0, 1}));
+    assertThrows(
+        IllegalArgumentException.class, () -> MorningCaddyReadiness.kernelAddress(new byte[5]));
+    String row = "0: 0100007F:D778 00000000:0000 0A 0 0 0 0 0 12345\n";
+    assertEquals(
+        Set.of("12345"), MorningCaddyReadiness.listeners(row, Set.of("12345"), "0100007F", false));
+    for (String bad :
+        List.of(
+            row.replace("0A", "01"),
+            row.replace("12345", "0"),
+            row.replace("D778", "D777"),
+            row.replace("0100007F", "00000000"),
+            ""))
+      assertEquals(
+          Set.of(), MorningCaddyReadiness.listeners(bad, Set.of("12345"), "0100007F", false));
+    assertEquals(
+        Set.of(), MorningCaddyReadiness.listeners(row, Set.of("99999"), "0100007F", false));
+  }
+}

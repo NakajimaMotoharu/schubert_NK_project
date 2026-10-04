@@ -123,6 +123,11 @@ public final class FixedServiceIdentity {
     return resolveMaintenance("schubert-artemis", List.of("schubert-artemis"));
   }
 
+  /** SSC178: fixed Caddy primary only, no application/credential/data groups. */
+  public Value resolveCaddy() throws IOException {
+    return resolveMaintenance("caddy", List.of("caddy"));
+  }
+
   /** SSC126: fixed asset owner, not an application service or an issuer capability. */
   public Value resolveDataOwner() throws IOException {
     return resolveMaintenance("schubert-data", List.of("schubert-data", "schubert-read"));

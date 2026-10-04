@@ -90,6 +90,10 @@ public final class ChildStartupContext {
     default byte[] brokerUnit() throws IOException {
       throw unavailable();
     }
+
+    default byte[] caddyUnit() throws IOException {
+      throw unavailable();
+    }
   }
 
   private final Io io;
@@ -223,6 +227,18 @@ public final class ChildStartupContext {
   /** SSC125/BROKERSTART001: Root reads the fixed daemon, never arbitrary process authority. */
   public Observed verifyBroker(UUID boot, String invocation, FixedServiceIdentity.Value fixed)
       throws IOException {
+    return verifyDaemon(boot, invocation, fixed, false);
+  }
+
+  /** SSC178: Caddy daemon, never an API/Web Root identity or oneshot receipt. */
+  public Observed verifyCaddy(UUID boot, String invocation, FixedServiceIdentity.Value fixed)
+      throws IOException {
+    return verifyDaemon(boot, invocation, fixed, true);
+  }
+
+  private Observed verifyDaemon(
+      UUID boot, String invocation, FixedServiceIdentity.Value fixed, boolean caddy)
+      throws IOException {
     Objects.requireNonNull(boot, "same broker boot");
     Objects.requireNonNull(invocation, "fresh broker Invocation");
     Objects.requireNonNull(fixed, "fixed broker NSS identity");
@@ -230,7 +246,8 @@ public final class ChildStartupContext {
     byte[] first = new byte[0], second = new byte[0];
     try {
       require(!Thread.currentThread().isInterrupted());
-      first = Objects.requireNonNull(io.brokerUnit(), "broker manager bytes");
+      first =
+          Objects.requireNonNull(caddy ? io.caddyUnit() : io.brokerUnit(), "daemon manager bytes");
       String source = text(first, 4096);
       require(source.endsWith("\n"));
       var values = new HashMap<String, String>();
@@ -254,12 +271,13 @@ public final class ChildStartupContext {
                       "InvocationID",
                       "ControlGroup")));
       require(
-          "artemis.service".equals(values.get("Id"))
+          (caddy ? "caddy.service" : "artemis.service").equals(values.get("Id"))
               && "loaded".equals(values.get("LoadState"))
               && "active".equals(values.get("ActiveState"))
               && "running".equals(values.get("SubState"))
               && invocation.equals(values.get("InvocationID"))
-              && "/system.slice/artemis.service".equals(values.get("ControlGroup")));
+              && (caddy ? "/system.slice/caddy.service" : "/system.slice/artemis.service")
+                  .equals(values.get("ControlGroup")));
       long pid = positive(Objects.requireNonNull(values.get("MainPID")), Integer.MAX_VALUE, 10);
       require(pid >= 2);
       var actual = capture(pid, false, fixed.uid());
@@ -270,9 +288,15 @@ public final class ChildStartupContext {
               && actual.groups().equals(fixed.groups())
               && actual.zeroCapabilities()
               && actual.noNewPrivileges()
-              && actual.cgroup().equals("0::/system.slice/artemis.service\n"));
+              && actual
+                  .cgroup()
+                  .equals(
+                      caddy
+                          ? "0::/system.slice/caddy.service\n"
+                          : "0::/system.slice/artemis.service\n"));
       require(actual.equals(capture(pid, false, fixed.uid())));
-      second = Objects.requireNonNull(io.brokerUnit(), "broker manager bytes");
+      second =
+          Objects.requireNonNull(caddy ? io.caddyUnit() : io.brokerUnit(), "daemon manager bytes");
       require(Arrays.equals(first, second) && !Thread.currentThread().isInterrupted());
       return actual;
     } catch (IOException known) {
@@ -551,6 +575,10 @@ public final class ChildStartupContext {
 
     public byte[] brokerUnit() throws IOException {
       return unit("artemis.service");
+    }
+
+    public byte[] caddyUnit() throws IOException {
+      return unit("caddy.service");
     }
 
     private byte[] unit(String fixedUnit) throws IOException {

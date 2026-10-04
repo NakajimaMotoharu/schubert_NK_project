@@ -48,6 +48,12 @@ SSC178（2026-10-04）：親の固定Caddy startはworker oneshot ABIを使わ�
 `<GLOBAL_IP>`、certificate、upstreamは配備時にrenderし、Gitはplaceholder付きtemplateを管理する。
 
 ```caddyfile
+{
+    admin off
+    auto_https disable_redirects
+    skip_install_trust
+}
+
 https://<GLOBAL_IP>:55160 {
     bind <GLOBAL_IP>
     tls internal
@@ -91,6 +97,10 @@ https://<GLOBAL_IP>:55160 {
 - Private keyはCaddy専用state/credential、root/Caddyのみ読取。Fingerprint、有効期限、検証手順をconfig manifestへ記録。
 - Domain/公的証明書移行時はsite address/TLSだけ変更。`tls_insecure_skip_verify`はupstream/clientとも使わない。
 - Deploy前に`caddy fmt --diff`、`caddy adapt --validate`、`caddy validate`、起動後TLS/header/loopback upstreamを試験。
+
+SSC178内部配備補足（2026-10-04）：初期IP/internal CAの公開入口は55160だけで、admin API・HTTP80への自動redirect listener・host trust store自動書込を無効とする。固定IPはliteral IPv4又はbracket付きIPv6、bindは同じIP（IPv6ではbracketなし）、DNS・proxy・任意URLへの変更は受けない。外部業務画面や既定55160のTLS契約は不変更。固定Caddy daemonはUser/Group=caddy、SupplementaryGroups空、Type=notify、Restart=no、start/stop30s、KillMode=control-group、SendSIGKILL=no、NoNewPrivileges=yes、bounding/ambient五capを全0、UMask0027。ExecStartPreは単一 `/usr/bin/caddy validate --config /etc/caddy/Caddyfile`、ExecStartは単一 `/usr/bin/caddy run --config /etc/caddy/Caddyfile`、任意wrapper/reload/環境出力を使わない。親はdelivery前のcold実効profileと固定configを読み、成功後はfresh Invocationの実validate終了0、同manager/kernel/cmdline/ordinary identity、本人FDの同IP55160 LISTEN inodeとHTTPS200を前後確認する。
+
+固定configは `/etc/caddy/Caddyfile` root:caddy0640・single-link・no ACL、祖先はroot:root0700/0750/0755の固定directory（配備時に既定0755を維持）。公開CAだけを `/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt` から読む。`/var`及び`/var/lib`はroot:root、caddy以下はcaddy:caddy、directory0700/0750/0755・no ACL、証明書0640又は0644・single-link・上限64KiBとする。保持inodeの前後同一性と証明書のCA属性/有効期限を確認し、そのCAだけをtrust anchorとして通常hostname検証を維持する。private key・credentialを親の証跡へ取得せず、TLS検証無効化、未知CA代入、旧/run復元をしない。署名candidateのconfig template/BOMを確定してから正規配備し、未配備distributionのdefault profileを合格にしない。実VM/coverage/正式認定は別途未完了。
 
 ## 4. Systemd dependency・unit設定
 
