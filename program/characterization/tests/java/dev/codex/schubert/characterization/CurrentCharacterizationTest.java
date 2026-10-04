@@ -912,13 +912,14 @@ class CurrentCharacterizationTest {
     environment.resetLogs();
     try (BrowserContext context = context(false)) {
       Page page = login(context, environment.secondaryCredential());
-      page.navigate(environment.baseUrl() + "/search?q=%E6%84%9B");
-      page.navigate(environment.baseUrl() + "/logs?log_type=ACTION&page=1");
-      List<String> actions =
-          queryStrings("SELECT coalesce(action,'') FROM scenario.app_logs ORDER BY id");
-      List<String> types = queryStrings("SELECT log_type FROM scenario.app_logs ORDER BY id");
-      int displayed = page.locator("article.log-row").count();
-      assertFalse(actions.isEmpty());
+      Map<String, Object> observed =
+          captureLogProjection(
+              page,
+              environment.baseUrl(),
+              () ->
+                  new LogProjectionRows(
+                      queryStrings("SELECT coalesce(action,'') FROM scenario.app_logs ORDER BY id"),
+                      queryStrings("SELECT log_type FROM scenario.app_logs ORDER BY id")));
       recordSupplemental(
           "CHR-L01",
           "web-log-outbox-retry",
@@ -926,23 +927,38 @@ class CurrentCharacterizationTest {
           map(
               "currentArchitecture", "direct current-process database logging",
               "nkRequirement", "Web log outbox retry with Broker/API outage"));
-      sink.write(
-          "CHR-L01",
-          map(
-              "databaseActions",
-              actions,
-              "databaseTypes",
-              types,
-              "displayedRows",
-              displayed,
-              "pageSize",
-              100,
-              "sort",
-              "logged_at desc,id desc",
-              "detailsElements",
-              page.locator("article.log-row details.log-details").count()));
+      sink.write("CHR-L01", observed);
     }
   }
+
+  /** Same Current L01 navigation/projection. The caller owns fixture/reset and DB access. */
+  static Map<String, Object> captureLogProjection(
+      Page page, String baseUrl, LogProjectionQuery query) throws Exception {
+    page.navigate(baseUrl + "/search?q=%E6%84%9B");
+    page.navigate(baseUrl + "/logs?log_type=ACTION&page=1");
+    LogProjectionRows rows = query.read();
+    assertFalse(rows.actions().isEmpty());
+    return map(
+        "databaseActions",
+        rows.actions(),
+        "databaseTypes",
+        rows.types(),
+        "displayedRows",
+        page.locator("article.log-row").count(),
+        "pageSize",
+        100,
+        "sort",
+        "logged_at desc,id desc",
+        "detailsElements",
+        page.locator("article.log-row details.log-details").count());
+  }
+
+  @FunctionalInterface
+  interface LogProjectionQuery {
+    LogProjectionRows read() throws Exception;
+  }
+
+  record LogProjectionRows(List<String> actions, List<String> types) {}
 
   @Test
   @Order(22)
@@ -1134,15 +1150,25 @@ class CurrentCharacterizationTest {
 
   private static Page login(
       BrowserContext context, CharacterizationEnvironment.Credential credential) {
-    Page page = submitLogin(context, credential);
-    assertEquals(environment.baseUrl() + "/", page.url());
+    return login(context, environment.baseUrl(), credential);
+  }
+
+  static Page login(
+      BrowserContext context, String baseUrl, CharacterizationEnvironment.Credential credential) {
+    Page page = submitLogin(context, baseUrl, credential);
+    assertEquals(baseUrl + "/", page.url());
     return page;
   }
 
   private static Page submitLogin(
       BrowserContext context, CharacterizationEnvironment.Credential credential) {
+    return submitLogin(context, environment.baseUrl(), credential);
+  }
+
+  static Page submitLogin(
+      BrowserContext context, String baseUrl, CharacterizationEnvironment.Credential credential) {
     Page page = context.newPage();
-    page.navigate(environment.baseUrl() + "/login");
+    page.navigate(baseUrl + "/login");
     page.locator("input[name=username]").fill(credential.username());
     page.locator("input[name=password]").fill(credential.password());
     page.locator("form.login-form button[type=submit]").click();

@@ -1,0 +1,53 @@
+{
+  "id": "PG461-chr-shared-l01-unit-v1",
+  "branch": "dev-foundation",
+  "sourceCommitBeforeChanges": "00785cf0698aecf1ace1e60b87e8849639e85b97",
+  "sourceDirtyAtExecution": true,
+  "exitCode": 0,
+  "tests": 10,
+  "suites": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "finishedAt": "2026-10-05T05:00:04+09:00",
+  "startTime": "not persisted; not inferred",
+  "environment": "Linux/JDK25.0.4/Maven3.9.12",
+  "command": "./mvnw -o -pl program/characterization spotless:apply test -Dtest=SharedLogProjectionDriverTest,TargetAdapterTest,ArtifactSinkTest,ArtifactComparatorTest (3 existing classes/10 actual cases)",
+  "testIds": [
+    "CHR-L01-shared-operation-order",
+    "CHR-L01-query-failure"
+  ],
+  "relatedSsc": [
+    "SSC-182",
+    "SSC-183"
+  ],
+  "expected": "literal Current navigation order/search/ACTION/page1, DB snapshot read once before DOM counts, independent actions/types and 2 rows/details; empty and failed DB query cannot pass",
+  "actual": "10 actual cases pass; nonexistent ArtifactSinkTest selector produced no cases and is not counted",
+  "sourceFilesSha256": {
+    "program/characterization/tests/java/dev/codex/schubert/characterization/CurrentCharacterizationTest.java": "e7df3676b1b1a86849459855310fd4e4efa8b3613903134e165181ffdd29cbe1",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/SharedLogProjectionDriverTest.java": "d3ca9bd8a71e3f4d61e1744e335e95969316ee1499ef46942ecd9cf57506dc7d"
+  },
+  "logSha256": "4aefa63f79501b6b24db2f983d8b240ef7d83f5fa4b6af7478d3f92a4346f9d9",
+  "files": [
+    {
+      "path": "TEST-dev.codex.schubert.characterization.SharedLogProjectionDriverTest.xml",
+      "sha256": "85369ea05d14065a3a1b236f1849e7d3b28341f7a88bbd28c0692945c2ed5c66"
+    },
+    {
+      "path": "TEST-dev.codex.schubert.characterization.TargetAdapterTest.xml",
+      "sha256": "a4fd2f8904dbf28c66af0670629b396f1e1cc18509a6febe8efdf87fb8dbac05"
+    },
+    {
+      "path": "TEST-dev.codex.schubert.characterization.ArtifactComparatorTest.xml",
+      "sha256": "b84e98a605c1abd21003f4f0aabf0b79ec44ceb32c098b9f0a4bc1a2d7b92a00"
+    }
+  ],
+  "formal": false,
+  "nativeL01Accepted": false,
+  "productionPtAdded": 0,
+  "coverageQualified": false,
+  "limitations": [
+    "No browser or VM fixture run; no Current baseline rewrite, action normalization, source/run substitution or outage replay acceptance."
+  ],
+  "redaction": "Only suite/case names and public flags; XML properties/stdout/stderr omitted; no credential or token."
+}

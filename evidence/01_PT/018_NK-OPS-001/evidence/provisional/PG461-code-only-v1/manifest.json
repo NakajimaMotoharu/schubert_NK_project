@@ -1,0 +1,93 @@
+{
+  "id": "PG461-code-only-v1",
+  "collectedAt": "2026-10-04T19:55:55.910223+00:00",
+  "headAtCollection": "00785cf0698aecf1ace1e60b87e8849639e85b97",
+  "branch": "dev-foundation",
+  "productionSourceCommit": "00785cf0698aecf1ace1e60b87e8849639e85b97",
+  "previousSource": "8e97eb9138828010926cd47fd10868d8a2d54f11",
+  "signedRelease": "0.1.0-PG461",
+  "schema": "027",
+  "manifestSha256": "1b7688de234ad15e39ffe578060019ff61fc21efd3c8e0c5aa62c39c95959b3c",
+  "nativeToolClassSha256": "4d3be00fda0c7096061c1e30990ecf75c5ba46d654288dfa6ab130b8edd0b35d",
+  "hostFullManifestSha256": "1349c903932bbeadb95b4bcfff84464b11538ab9eb0870bfa36c43b3ba598c6d",
+  "hostFullTests": 3260,
+  "hostFullSuites": 481,
+  "assembly": {
+    "artifacts": 185,
+    "sql": 27,
+    "signatureVerified": true,
+    "allSixTargetsFrozenByteEqual": true
+  },
+  "environment": {
+    "host": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0",
+    "guest": "Ubuntu26.04/PostgreSQL18.6/JDK25.0.4/Artemis2.56.0"
+  },
+  "commands": [
+    "AssembleReleaseFixture repo pg461-release-v1 source00785 0.1.0-PG461 approved-effective-profile public-recipient; independent185BOM/27SQL/frozen6/Ed25519 verification",
+    "pg461_stage_v1.py manifestDigest sourceCommit",
+    "Pg461CodeOnlyDeployment sourceCommit manifestDigest verify",
+    "Pg461CodeOnlyDeployment sourceCommit manifestDigest activate"
+  ],
+  "results": [
+    {
+      "testId": "CODE461-STAGE",
+      "exitCode": 0,
+      "actual": "PG461_STAGE exactSource=true signedCandidateBytes=true rootToolAndStableObserver=true wrapperExecutableMetadata=true previousCurrentUnchanged=true ddl0=true starts0=true permits0=true",
+      "expected": "332 specification: signed027, same source; full291x14/business/original/Backup/Transfer and old16 preserved, all9 empty, no DDL/start/permit, all owned scopes normal return",
+      "privateLog": "pg461-stage-v1.log",
+      "privateLogSha256": "322c1a37b892f288ca0fd7791c1711e598cc76540da5be3e12dd7f3ed0e8e800",
+      "executionTime": "Original command did not persist timestamp; collection time is not execution time"
+    },
+    {
+      "testId": "CODE461-VERIFY",
+      "exitCode": 0,
+      "actual": "PG461_CODE_ONLY_VERIFIED signed027=true all291Full14AndBusinessOriginalBackupTransferPreserved=true all9KernelEmpty=true ddl0=true permits0=true starts0=true ownedClosed=true",
+      "expected": "332 specification: signed027, same source; full291x14/business/original/Backup/Transfer and old16 preserved, all9 empty, no DDL/start/permit, all owned scopes normal return",
+      "privateLog": "pg461-code-verify-v1.log",
+      "privateLogSha256": "db606c9f20b3ff13541c9ace98866b161223fb72a89583c16eadb19c9225521f",
+      "executionTime": "Original command did not persist timestamp; collection time is not execution time"
+    },
+    {
+      "testId": "CODE461-ACTIVATE",
+      "exitCode": 0,
+      "actual": "PG461_CODE_ONLY_ACTIVATED signed027=true all291Full14AndBusinessOriginalBackupTransferPreserved=true all9KernelEmpty=true ddl0=true permits0=true starts0=true ownedClosed=true",
+      "expected": "332 specification: signed027, same source; full291x14/business/original/Backup/Transfer and old16 preserved, all9 empty, no DDL/start/permit, all owned scopes normal return",
+      "privateLog": "pg461-code-activate-v1.log",
+      "privateLogSha256": "6d56104047d2ae60d766352387e588c4c78c9a05ecc525c6b6c7d5dc1797c2fb",
+      "executionTime": "Original command did not persist timestamp; collection time is not execution time"
+    }
+  ],
+  "files": [
+    {
+      "path": "CODE461-STAGE.txt",
+      "sha256": "322c1a37b892f288ca0fd7791c1711e598cc76540da5be3e12dd7f3ed0e8e800"
+    },
+    {
+      "path": "CODE461-VERIFY.txt",
+      "sha256": "1f591d4daa3cb97dd38a1c6392c8cb681dabb10c64f0437c6cf69fa5e0f9bc47"
+    },
+    {
+      "path": "CODE461-ACTIVATE.txt",
+      "sha256": "15a341079786c6c2cbc3f15974594b0b987997783acb31ca4715b6fcc3b50279"
+    }
+  ],
+  "productionPtAdded": 0,
+  "formal": false,
+  "coverage100": false,
+  "nativeParentAccepted": false,
+  "bugs": [
+    "BUG-691"
+  ],
+  "ykt": [
+    "YKT-495"
+  ],
+  "ssc": [
+    "SSC-182",
+    "SSC-183"
+  ],
+  "limitations": [
+    "Code-only provisioning is not parent, CHR, native coverage100 or formal acceptance; external parent is separately observed.",
+    "Private keys/originals/DB/authority records remain outside Git."
+  ],
+  "redaction": "Only fixed public flags, source and hashes; no token/session/cookie/password/key/DB dump or owner payload."
+}
