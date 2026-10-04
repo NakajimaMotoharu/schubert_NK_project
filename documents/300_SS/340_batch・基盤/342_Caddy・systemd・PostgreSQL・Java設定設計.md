@@ -41,6 +41,8 @@ Port変更はconfig manifestを更新し、firewall・Caddy・client URL・healt
 
 ## 3. Caddy
 
+SSC186（2026-10-05、内部補足）：Caddy startの同owner複合fenceは、scope前後に両ordinary peer/current/launch/identity/socket/info/ready→同DB整合→両peerを確認する。その間のAPI/Web各intentは既存context→純粋owner→same token/inode/current/permit→純粋owner→contextを保持し、局所ownerは同Root/M/保持原本/元budgetだけを検証する。局所intent検査へfull両peer/同DB再検査を再入させず、複合前後へ集約する（検査省略ではない）。起動preflight前の既存起点で親の同Linux単調remainingNanosから30秒の下限を一回固定し、起点を遅らせたりpollで再生成したりしない。親残量が30秒未満なら親期限を優先、境界同値/clock異常は拒否。System.nanoTimeのprocess-local originとLinux絶対期限を混ぜない。真正Caddy ready認証の前後に当起動期限を要求し、成功後の継続peer/DONE/退役検査は元親期限で拘束する（成功後も30秒startup期限を継承して健全なdaemonを拒否しない）。Caddy30秒/親30分、全固定認証、失敗時逆順全終端/不明保持、RD/UI/業務仕様は不変更。
+
 SSC178（2026-10-04）：親の固定Caddy startはworker oneshot ABIを使わず、固定daemon実効profile・真正manager/kernelの同boot/Invocation/MainPID/startTicks/cgroupと本人listenerを前後照合する。`caddy validate`成功は起動成功でなく、実daemonとTLS検証付きHTTPS `/login` 200まで必要。API/Web同世代readyの連続確認と両intent保持を送達不明のfenceとし、別start/restartを二重発行しない。元親30分及びCaddy30秒期限を維持し、失敗時公開停止・逆順全終端/不明隔離はSS341§10へ従う。
 
 ### 3.1 Caddyfile論理形
