@@ -75,4 +75,3 @@ manifest = {
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'tests': 327, 'coverageClasses': 32, 'manifestSha256': sha(out / 'manifest.json')}))
-
