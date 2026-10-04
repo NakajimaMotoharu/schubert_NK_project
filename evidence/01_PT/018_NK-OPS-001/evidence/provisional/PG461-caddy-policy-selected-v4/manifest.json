@@ -1,0 +1,150 @@
+{
+  "id": "PG461-caddy-policy-selected-v4",
+  "collectedAt": "2026-10-04T18:57:27.671598+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "c4ee3045d85a014a4042ea247d07fe8ed72a0e62",
+  "sourceDirtyAtCollection": true,
+  "sourceFilesSha256": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CaddyPublicCaMetadataTest.java": "06cccac8c20d43224d34fd214055916acaf57e6bbde6cfe11acd1d6e3c211c12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java": "cbbf2077e7b39115e290ce04173b7a8169563158bc48edf10e59a304cf4b3941",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderTest.java": "06b3928c0de01a97eb735f3bb572e70a416fd714c09533985c5c009cf9ec6fcc",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/EmbeddedWebSecurityTest.java": "581b90b41944efdb4e2f097a4ff528a5065c8351f4919ffe9a8b35c754a3fda8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderWriter.java": "81a1415ddd5f15e93439b343bcb629ec35aecfb30f09cd326eba08f76bb54233"
+  },
+  "formal": false,
+  "hostExitCode": 0,
+  "tests": 50,
+  "suites": 9,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "7415a7ad76ebd0846d288e32c8f3a4460068a10a7da544a70bc248b8e533ff6b"
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "6b201e69604414dd476faf50fcf806cea7f46400083f7280733e50e90f1652b4"
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "e20b47f3fc844e5669e3a8a0ea3ae9fd05c332ec6cb189702f3de7b65d4ed34c"
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "3d2612cc55c5adbd6604891699d98846b89f6f6a2fe644ada0666f65797d2ff9"
+    },
+    "web": {
+      "tests": 8,
+      "suites": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "d560299cf067995881c0fc492b75b2ec5da5d41a6efe40553cd5df25f09e441f"
+    },
+    "batch": {
+      "tests": 15,
+      "suites": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "b3a660d3fbc01ff11b761b12bbd52824ca1aac3311d7cac858218d3e7dea1d42"
+    }
+  },
+  "hostLogSha256": "354b799cff05529d401b07e885c609081a1781e79f592662726ef4293943b1ba",
+  "privateLog": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg461-policy-selected-v4.log",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "node": "24.19.0",
+  "spotbugs": "4.10.4",
+  "jacoco": "0.8.15",
+  "nullAwayCompile": "PASS",
+  "command": "six reactor spotless:check test-compile test exact9classes spotbugs:check (pg461-policy-selected-v4.log)",
+  "testIds": [
+    "CA461001",
+    "CA461002",
+    "CA461003",
+    "WEB091",
+    "WEB092",
+    "WEB093",
+    "WEB094",
+    "CHR-A01"
+  ],
+  "expected": "Independent Current CSP literal and all-response duplicates/concurrency/security checks; fixed public CA modes0600/0640/0644 only, config0640 only; owner/link/size/null/unknown boundaries rejected; unchanged readiness regression",
+  "actual": "All exact50 testcases PASS, F/E/S0; static6zero. Real A01 pending patched source.",
+  "bugs": [
+    "BUG-688",
+    "BUG-689"
+  ],
+  "ykt": [
+    "YKT-493",
+    "YKT-494"
+  ],
+  "ssc": [
+    "SSC-182",
+    "SSC-183"
+  ],
+  "coverage": {
+    "qualified": false,
+    "reason": "Selected no-clean append and native paths unexecuted; no coverage100 claim"
+  },
+  "priorFailures": [
+    {
+      "run": "v1",
+      "exitCode": 1,
+      "cause": "No selected protocol tests; test bodies not run"
+    },
+    {
+      "run": "v2",
+      "exitCode": 1,
+      "cause": "Hard POM failIfNoTests correctly retained; no selected protocol tests"
+    },
+    {
+      "run": "v3",
+      "exitCode": 1,
+      "cause": "Batch method format check failed; batch tests not run"
+    }
+  ],
+  "limitations": [
+    "Source hashes collected after selected run, no fabricated pre-run all-source proof",
+    "Targets include old main Jars; selected test-compile classes are current, no deployable Jar or full gate claimed",
+    "Native PG460/source8e97 failed30/A01CSP mismatch preserved separately",
+    "Formal run24/1964PT/53scope remains unchanged",
+    "Global start time not captured; collection time is not execution time"
+  ],
+  "redaction": "JUnit properties/stdout/stderr omitted. No credentials/session/token/password/private original/dump/key.",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "70c8afc5c9740ce79cd5ea88827090556091b95ef54b737df9f9af8f36038780",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "ed79fd8ac94d4485d7db14f804166013c81db1a7e0815e4706df186d4ae5f190",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "360d88dfefe224dfda0f5780e3d7f8cbadbea61e18c5f3e115313c8e2d056170",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "4615386fdf979b8fa909acb612fad9641fb844b86c67260219ea7c508f12696d",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "f1621001db8e3e49c76768b26762efc390756f9e6c3c2f16f439e9262701de3c",
+    "junit/web/TEST-dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.xml": "252938cf4f41daaaa2301df672d3e348297c70bee5e89f428b2aab81d258f02f",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml": "13e315a0d23e341f74aaa393ff896baf3fd7258bec1c9be805f795c9e7eafae8",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.CaddyPublicConfigurationTest.xml": "f19ad1ad13239cdc31db4986704362ff443ee54a7ae585ccb5199e9c2daa2275",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.CaddyPublicCaMetadataTest.xml": "20998ba6d8ab8511468a379d53fc4fa63cd0a49987f398b129703a5a908a5c8f"
+  }
+}

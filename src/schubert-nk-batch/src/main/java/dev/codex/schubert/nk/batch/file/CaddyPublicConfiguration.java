@@ -82,7 +82,8 @@ public final class CaddyPublicConfiguration {
       write_timeout 60s
       }
       }
-      }""";
+      }\
+      """;
 
   public static SSLContext tls(RootStartupContext root, RootStartupContext.Snapshot morning)
       throws IOException {
@@ -207,14 +208,21 @@ public final class CaddyPublicConfiguration {
   private static EnvironmentInodePolicy.Metadata file(
       Path held, InodeSecurityCalls security, long uid, long gid, boolean ca) throws IOException {
     var m = metadata(held, security);
+    requireFileMetadata(m, uid, gid, ca);
+    return m;
+  }
+
+  /** SSC183: owner-only public CA is not a configuration or private-key permission waiver. */
+  static void requireFileMetadata(EnvironmentInodePolicy.Metadata m, long uid, long gid, boolean ca)
+      throws IOException {
+    Objects.requireNonNull(m);
     require(
         m.uid() == uid
             && m.gid() == gid
             && m.links() == 1
             && m.size() > 0
             && m.size() <= 65536
-            && (m.mode() == 0100640 || (ca && m.mode() == 0100644)));
-    return m;
+            && (m.mode() == 0100640 || (ca && (m.mode() == 0100600 || m.mode() == 0100644))));
   }
 
   private static EnvironmentInodePolicy.Metadata metadata(Path held, InodeSecurityCalls security)

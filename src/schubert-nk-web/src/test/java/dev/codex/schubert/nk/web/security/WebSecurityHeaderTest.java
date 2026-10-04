@@ -17,7 +17,7 @@ class WebSecurityHeaderTest {
   private static final Map<String, String> EXPECTED =
       Map.of(
           "Content-Security-Policy",
-              "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; connect-src 'self'",
+              "default-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
           "Strict-Transport-Security", "max-age=31536000",
           "X-Content-Type-Options", "nosniff",
           "X-Frame-Options", "DENY",
