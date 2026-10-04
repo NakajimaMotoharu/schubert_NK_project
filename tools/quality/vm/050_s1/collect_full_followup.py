@@ -676,8 +676,8 @@ if int(identifier[2:5]) >= 452:
     assert all(k['missed'] == 0 for value in user_coverage.values() for k in value.values())
     manifest['userBusinessCoverage'] = user_coverage
     manifest['ssc'].append('SSC-177')
-    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(639, 645))
-    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(452, 457))
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(639, 646))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(452, 458))
     manifest['testIds'].extend([f'PT-USER-BIZ{n:03d}' for n in range(1, 13)] + ['TOKV209A..E', 'PT-USER-DETAIL009', 'PT-ADM-TIME001', 'BIZ011-TX'])
     manifest['trigger'] = 'PG-D366/367 SSC177: atomic same-core visible tokens, full User new/create/status/role/password/unlock HTTP, verified self-reset local terminal, millisecond-only User wire projection; fresh shared session/security/API six-module feature acceptance'
     manifest['limitations'] = [

@@ -1,5 +1,9 @@
 # 082 NK-WEB-002 User業務接続実行結果
 
+## six-full-v1 不合格（14:54:06）
+
+source1528835cf6fd11d9003ead436003e5977749c660、actual1、protocol81/storage154/bootstrap213/API892成功、Web809試行1F/E/S0、合計2149試行/1F。Batch/Web static・reportは未実行なので古いv5 targetを補完しない。sourcefiles一致/実5byte WorkPG379/pg452-six-full-v1-frozen、log SHA256 `f22371d655ce5b6c11a65571bf1a2053dadb482e0116a633238b5da30c15825e`。追加BIZ010 LOCKED解除0000/version1→保存再送0200/version1/failed_count0/locked_untilNULL/監査1/Inbox再送1の後条件まで通過したが、最後の資源assertでInteger0とAtomicInteger本体を比較して失敗（BUG645/YKT457）。修正前起票・全byte捕捉後に数値getだけ是正。業務後条件や先行v5を全体成功へ流用しない。次sourceを固定してfresh全6 v2を実行する。
+
 ## user-http-selected-v5 限定接続合格（14:31:42終了、全体/native未受入）
 
 source3c2466b41af997ca3534436bba055d86ad7d18f6＋PG-D366/367 dirty、actual0/242PT24suite/F/E/S0、protocol5/storage7/bootstrap10/API59/Web118/Batch43、SpotBugs6module0/NullAway-Werror成功。sourcefiles全一致、全6actualtargetをWorkPG379/pg452-user-http-selected-v5-frozenに捕捉済み。安全manifest `evidence/provisional/PG452-user-http-selected-v5/manifest.json` SHA256 `ced7cf1409c98cae70e611afeb53829e3974478f95ad22bb565d99865a2d3738`。log `e54f3bcd03a136000957d5529b80f9368b550ab47abc1552e2cfa211009340ab`、sourcefiles `7849c09e76f7c7b01822636c2e7f6ce766ba55b2f2951d349352b6920d1ea2c3`。実行前src/tools全byteのprivate archive SHA256 `cb6a8541c14b317f7a4ea35e862360328266693a0609b0d4299dfac1357a9844`（0600・Gitへ保存しない）。捕捉後の追加LOCKED解除再送method/collectorはこの成功sourceへ含めない。

@@ -952,7 +952,7 @@ class UserBusinessControllerTest {
               .orElseThrow()
               .completedAt()
               .isPresent());
-      assertEquals(0, f.security.f.live);
+      assertEquals(0, f.security.f.live.get());
       f.erased();
     }
   }
