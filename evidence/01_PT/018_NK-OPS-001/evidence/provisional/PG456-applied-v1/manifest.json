@@ -1,0 +1,192 @@
+{
+  "run": "PG456-applied-v1",
+  "program": "NK-OPS-001",
+  "status": "provisional_tool_and_isolated_deployment_only",
+  "branch": "dev-foundation",
+  "productionSource": "559bf7eacb401d6d07037dbdd295b32f174976a0",
+  "toolSourceFiles": {
+    "tools/quality/vm/050_s1/Pg456AppliedCompletion.java": "f9793e6cc37f12e6f8c2fb56c410bec7ab779e449c69e52d2f8063d99ca06dab",
+    "tools/quality/vm/050_s1/Pg456AppliedCompletionTest.java": "672a32517f6ad1c48aad51e4b2d1306c510e4afd2151f27325f3805aef13c112",
+    "tools/quality/vm/050_s1/Pg456SignedMigration.java": "653bc4df4a3db1b97f1041838bdf4409f82f675225a20aeb9e41988b50a0cf1f",
+    "tools/quality/vm/050_s1/Pg456SignedMigrationTest.java": "b81cfcb8f93e9d82974be1232d6938f21ee59eea89e5d445cdaa553316b52669",
+    "tools/quality/vm/050_s1/pg456_stage_applied_tools.py": "9b9f35b2f21d21d6eb3f7145a49a23e97916033fcea85ed8af2ce08e998d2b3b",
+    "tools/quality/vm/050_s1/pg456_applied_tools_v7.sh": "5d387cfd014cd4bcdc116fc2a695cbcd7b3082112ff861854ea4bcb33e31607b",
+    "tools/quality/vm/050_s1/pg456_stage_candidate.py": "fba54a9bcc320ee7039f4864c0dba0afe4d18c88b2a8a65d7d749aa30dfeca71",
+    "tools/quality/vm/050_s1/pg456_stage_mode_test.py": "af93e4be800cdf23a2f8a3b5948b52cbbfb8dd27d808ca300f5f77d5dbbbc85f",
+    "tools/quality/vm/050_s1/collect_pg456_applied.py": "e9c7b5bbfcf78f5bac85f4235e47506922797960878f0c5f18020202a0465da5"
+  },
+  "rootClosedOperatorClassSha256": {
+    "Pg387TrustedDeployment.class": "c9d358d3c1e0a5e99f36da88d2b5002636180e45fe843153ce708c839d356e8e",
+    "Pg387TrustedDeployment$Checked.class": "7f5711bbe7ea9334d640f2e680a979dab9016f8f083086ac02ce99780694acd4",
+    "Pg407FailedRootRecovery.class": "c20e5b5807222504b16361773209b36432eea6e2b9bd5e1fc266b3bd4d718fdf",
+    "Pg410KnownAuthRecovery.class": "fc2fb674726ef26f33e1ff7bd052f04990a638b183e935e25e01bac8f6e7b9b6",
+    "Pg410KnownAuthRecovery$Receipt.class": "080d21ca47bacaa12b197841f75d2018756e106f64f579232711b689f3ef906a",
+    "Pg422KnownIncompleteRecovery.class": "d5286ffd7d0a769d23de80921379b8b869e5d0ce8fe139f39828915c05f5b45a",
+    "Pg422SignedMigration.class": "1d8f8d23a2f34ce2aa135bbe9cbfeb33476cfbae6f44ed04e083ac6712558db2",
+    "Pg422SignedMigration$Data.class": "0b6517e77ca3db85443ba60776247b566052678b674fcf434d6c750236cd0a93",
+    "Pg423AssetFixtureRecovery.class": "0de65f644427774ffe21553a0a3a1a02a3c8448eb79e93bd9f4b86b4738c690e",
+    "Pg424KnownApiRecovery.class": "53bf3a1e52c330e4424982cb57c1dea5db3f4e728b3a5a9d7f9b2f9f84ae18bf",
+    "Pg425KnownApiRecovery.class": "7484c6bc5b2b02da3b5b70523dc76986b10022710e3c37149615766a131d9a7a",
+    "Pg428ColdBootPreparation.class": "bc076f9ae248ef9cb4d1c7a42e48ee3efc1db6ddc2401314082c901eca3d97fc",
+    "Pg428ColdBootPreparation$1Node.class": "ae23e7d52e14541edc4ed3d3f2c6ac192642690cb9bd466273cfce379c68de0e",
+    "Pg456SignedMigration.class": "63092d6bf358999a146994828802344c451b41aa6034858cb870cc7d5c7cd9e9",
+    "Pg456SignedMigration$Data.class": "d3e0b0aca6d69c7094dec6bd99763afda48897ac4e6c533881fa7d9b0a3a0b58",
+    "Pg456AppliedCompletion.class": "ddce9f232a0641df514aad05efc259f145a1642a00562e0b82285485b251a064"
+  },
+  "sourceBinding": "Production six-module classes/jars unchanged; operator source has separately pinned hashes",
+  "signedManifestSha256": "21affa1850d60f3a7d54f5dbcc37e12c6460563865771fa49a52a433fe91b424",
+  "privateRestorePointSha256": "d77412eeeb88159bd56b2d2f099195480cc99baebf4843b2e4d069c790bd271e",
+  "commands": [
+    "bash tools/quality/vm/050_s1/pg456_applied_tools_v7.sh",
+    "Pg456AppliedCompletion <fixed-source40> <fixed-manifest64> verify",
+    "Pg456AppliedCompletion <fixed-source40> <fixed-manifest64> complete",
+    "python3 tools/quality/vm/050_s1/pg456_stage_mode_test.py"
+  ],
+  "environment": {
+    "hostJdk": "25.0.4",
+    "guestJdk": "25.0.4",
+    "guestPostgresql": "18.6",
+    "guestOs": "Ubuntu 26.04",
+    "guestKernel": "7.0.0-34-generic",
+    "maven": "3.9.12",
+    "flyway": "13.4.0"
+  },
+  "toolTests": [
+    {
+      "tool": "Pg455ReleaseSchemaToolTest",
+      "independentAssertions": 11,
+      "actualExitCode": 0,
+      "path": "logs/pg456-Pg455ReleaseSchemaToolTest-v7.log",
+      "sha256": "3969ae9dca6c5438d10cbf10aad091b81edefb314475085fb336e2acf04a17d8"
+    },
+    {
+      "tool": "Pg421ReleaseSchemaToolTest",
+      "independentAssertions": 4,
+      "actualExitCode": 0,
+      "path": "logs/pg456-Pg421ReleaseSchemaToolTest-v7.log",
+      "sha256": "efe1249cf2d4dc81460a7eed8be4df626c9c561d6a4f6a9eff1016cfe6ceb323"
+    },
+    {
+      "tool": "Pg456SignedMigrationTest",
+      "independentAssertions": 68,
+      "actualExitCode": 0,
+      "path": "logs/pg456-Pg456SignedMigrationTest-v7.log",
+      "sha256": "ba1a369cf62dc17741e5248beb81e9362d605c080b987d43c627e7102fc82bce"
+    },
+    {
+      "tool": "Pg456AppliedCompletionTest",
+      "independentAssertions": 27,
+      "actualExitCode": 0,
+      "path": "logs/pg456-Pg456AppliedCompletionTest-v7.log",
+      "sha256": "19d20b18039c426a11d1d8e2ff7b80e9a1e24a340ae23d642ffdef8dfeac96a8"
+    }
+  ],
+  "nativeToolAttempts": [
+    {
+      "testIds": [
+        "MIG456-APPLIED-PRESERVATION",
+        "MIG456-APPLIED-COMPLETE"
+      ],
+      "rawLogSha256": "755d63c083db349c8a3b6a48e12203b9a86a9752efcf9ae1fca11ed652a16b6e",
+      "safePath": "logs/pg456-applied-verify-v1.log",
+      "safeSha256": "76d69e1abc03c88ed01828c30b1bf234a6bdbdafe56e9fe2ac7b9c0a5c4b7fb2",
+      "actualExitCode": 1,
+      "accepted": false,
+      "observedLogCompletedAt": "2026-10-04T12:52:14.330014+00:00",
+      "exactStartTimestampRecorded": false
+    },
+    {
+      "testIds": [
+        "MIG456-APPLIED-PRESERVATION",
+        "MIG456-APPLIED-COMPLETE"
+      ],
+      "rawLogSha256": "6464d0189a9b09b390bb63c4d47729ea54f2385569e7a767c42fde3c8c0f41c1",
+      "safePath": "logs/pg456-applied-verify-v2.log",
+      "safeSha256": "f61aee10ad6365885e2500fbbbf8e5a2d089dd95efbe40f0b1d4a3577115235d",
+      "actualExitCode": 1,
+      "accepted": false,
+      "observedLogCompletedAt": "2026-10-04T12:54:55.230085+00:00",
+      "exactStartTimestampRecorded": false
+    },
+    {
+      "testIds": [
+        "MIG456-APPLIED-PRESERVATION",
+        "MIG456-APPLIED-COMPLETE"
+      ],
+      "rawLogSha256": "e27597d95f6dfb6e8109c97d2c94722dde3146985475803b5baed3b500865c7f",
+      "safePath": "logs/pg456-applied-verify-v3.log",
+      "safeSha256": "10aa8546b71c069793c43dbf3f82325f322066cf1f6a11c2a84051a80828429c",
+      "actualExitCode": 1,
+      "accepted": false,
+      "observedLogCompletedAt": "2026-10-04T12:57:24.580151+00:00",
+      "exactStartTimestampRecorded": false
+    },
+    {
+      "testIds": [
+        "MIG456-APPLIED-PRESERVATION",
+        "MIG456-APPLIED-COMPLETE"
+      ],
+      "rawLogSha256": "724cdee5975828e8fbd1d24916d0d84ba4c80402c11368284dc79f4a00d85338",
+      "safePath": "logs/pg456-applied-verify-v4.log",
+      "safeSha256": "c4b53fd8fdaa08cf5ef6b31a863fc8e53918fe8927f8a56e186dcd57fe06c121",
+      "actualExitCode": 0,
+      "accepted": true,
+      "observedLogCompletedAt": "2026-10-04T12:59:37.873210+00:00",
+      "exactStartTimestampRecorded": false
+    },
+    {
+      "testIds": [
+        "MIG456-APPLIED-PRESERVATION",
+        "MIG456-APPLIED-COMPLETE"
+      ],
+      "rawLogSha256": "9426065a57366021c1040d4d52cdfb923b88bada9c5f4e685f1355bbe6bbaa4a",
+      "safePath": "logs/pg456-applied-complete-v1.log",
+      "safeSha256": "595f2559215424357ab363f0595bb8b070ba73301a85c7a69caddc35a402c59a",
+      "actualExitCode": 0,
+      "accepted": true,
+      "observedLogCompletedAt": "2026-10-04T13:00:18.950228+00:00",
+      "exactStartTimestampRecorded": false
+    }
+  ],
+  "compileActualExit": 0,
+  "compileWarnings": 0,
+  "expectations": {
+    "historyBefore": 26,
+    "historyAfter": 28,
+    "existingBusinessTablesPreserved": 23,
+    "batchRowsPreserved": 251,
+    "batchColumnsPreserved": 14,
+    "backupEntriesPreserved": 20,
+    "postconditions": 11,
+    "partialPrivilegeRejected": true,
+    "productionDdlRepeated": 0,
+    "newPermitsIssued": 0,
+    "originalStillPending": true
+  },
+  "relatedBugs": [
+    663,
+    664,
+    665,
+    666,
+    667,
+    668,
+    669,
+    670
+  ],
+  "relatedYkts": [
+    468,
+    469,
+    470,
+    471,
+    472,
+    473,
+    474,
+    475
+  ],
+  "productionPtCredit": 0,
+  "coverage100Accepted": false,
+  "wholeMorningAccepted": false,
+  "formalAcceptanceUpdated": false,
+  "secretsCopied": false,
+  "timestampLimitation": "Native operator start timestamps were not emitted; actual invocation/completion and separately captured running time retained, not reconstructed"
+}

@@ -142,14 +142,20 @@ public final class Pg456SignedMigration {
     String sql="""
         select (select count(*)=0 from schubert_web_session.web_receipt_references),
           (select not attnotnull from pg_catalog.pg_attribute where attrelid='schubert_web_session.pending_context_revocations'::regclass and attname='expires_at' and not attisdropped),
-          has_table_privilege('schubert_web_session','schubert_web_session.web_receipt_references','SELECT,INSERT,DELETE'),
+          (has_table_privilege('schubert_web_session','schubert_web_session.web_receipt_references','SELECT')
+           and has_table_privilege('schubert_web_session','schubert_web_session.web_receipt_references','INSERT')
+           and has_table_privilege('schubert_web_session','schubert_web_session.web_receipt_references','DELETE')),
           not has_table_privilege('schubert_web_session','schubert_web_session.web_receipt_references','UPDATE'),
           has_table_privilege('schubert_backup','schubert_web_session.web_receipt_references','SELECT'),
           not has_table_privilege('schubert_app','schubert_web_session.web_receipt_references','SELECT'),
           not has_table_privilege('schubert_batch','schubert_web_session.web_receipt_references','SELECT'),
           has_function_privilege('schubert_batch','schubert.maintenance_cleanup_web_receipt_references(uuid,timestamptz,integer)','EXECUTE'),
           not has_function_privilege('schubert_app','schubert.maintenance_cleanup_web_receipt_references(uuid,timestamptz,integer)','EXECUTE'),
-          (select count(*)=4 and bool_and(convalidated) from pg_catalog.pg_constraint where conrelid='schubert_web_session.web_receipt_references'::regclass),
+          ((select count(*)=4 and bool_and(convalidated)
+             and array_agg(conname::text order by conname::text)=array['ck_web_receipt_references_question','ck_web_receipt_references_receipt','ck_web_receipt_references_submitted','pk_web_receipt_references']::text[]
+             from pg_catalog.pg_constraint where conrelid='schubert_web_session.web_receipt_references'::regclass and contype in ('p','c'))
+           and (select count(*)=3 and bool_and(attnotnull) from pg_catalog.pg_attribute
+             where attrelid='schubert_web_session.web_receipt_references'::regclass and attname in ('receipt_id','question_id','submitted_at') and not attisdropped)),
           to_regclass('schubert_web_session.ix_web_receipt_references_question_id') is not null
         """;
     try(var query=db.createStatement()) {
@@ -235,7 +241,7 @@ public final class Pg456SignedMigration {
           }
           original(db);var originals=Pg428ColdBootPreparation.original();var rows=Pg407FailedRootRecovery.databaseRows(db);
           if(rows.size()!=251)throw new IllegalStateException("saved251 full14-column rows required");
-          var backup=Pg407FailedRootRecovery.backupSnapshot();var data=business(schema);
+          var backup=Pg428ColdBootPreparation.backupSnapshot();var data=business(schema);
           if(!Pg422SignedMigration.history(schema).equals(expected(CANDIDATE,OLD,25)))throw new IllegalStateException("independent old26 history differs");
           byte[] before=Pg410KnownAuthRecovery.material(PROFILE,4096),next=Files.readAllBytes(CANDIDATE.resolve("config/effective/backup-profile.json"));
           var metadata=Pg410KnownAuthRecovery.metadata(PROFILE);
@@ -244,11 +250,11 @@ public final class Pg456SignedMigration {
           save("backup-profile-before.json",before);restorePoint();
           System.out.println("PG456_STAGE PRIVATE_RESTORE_POINT_OLD26_VERIFIED");migrate();postconditions(schema);
           if(!Pg422SignedMigration.history(schema).equals(expected(CANDIDATE,OLD,27)) || !rows.equals(Pg407FailedRootRecovery.databaseRows(db))
-              || !data.equals(business(schema)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot()) || !originals.equals(Pg428ColdBootPreparation.original()))throw new IllegalStateException("migration preservation differs");
+              || !data.equals(business(schema)) || !backup.equals(Pg428ColdBootPreparation.backupSnapshot()) || !originals.equals(Pg428ColdBootPreparation.original()))throw new IllegalStateException("migration preservation differs");
           original(db);Pg387TrustedDeployment.terminalAll();caddy();
           replace(PROFILE,next,Math.toIntExact(new FixedServiceIdentity().configurationGroup()),"rw-r-----");Pg387TrustedDeployment.activate(approval);
           postconditions(schema);original(db);Pg387TrustedDeployment.terminalAll();
-          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(schema)) || !backup.equals(Pg407FailedRootRecovery.backupSnapshot())
+          if(!rows.equals(Pg407FailedRootRecovery.databaseRows(db)) || !data.equals(business(schema)) || !backup.equals(Pg428ColdBootPreparation.backupSnapshot())
               || !originals.equals(Pg428ColdBootPreparation.original()))throw new IllegalStateException("activation preservation differs");db.rollback();
         }
         System.out.println("PG456_DEPLOYED source="+args[0]+" signatureAndBom=true migrations=2 history=28 existing251RowsOriginalBusinessBackupUnchanged=true profileSchema027=true permitsIssued=0 businessReady=false");
