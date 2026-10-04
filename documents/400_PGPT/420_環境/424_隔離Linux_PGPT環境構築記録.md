@@ -43,3 +43,8 @@ QEMU依存qemu-system-common/data、seabios、ipxe-qemu、libaio1t64/libfdt1/lib
 6. 停止はVM内正常shutdown、実QEMU PID/command終端確認を優先。無関係processをkillしない。現在は起動したままnative PT準備に使用中。
 
 Production main成功、専用service UID/LoadCredentialの実属性、全root/OS排他、Ops readiness/Expiry、SCRAM/password配布、業務handler、実NK CHR-A01/L01は未達。一般ubuntu UID1000をProduction serviceへ読み替えず、必須gateをfixture/root権限で迂回しない。
+# SSC181 Caddy NSS限定配備記録（2026-10-05）
+
+Ubuntu26.04 shadow-utils `passwd 1:4.17.4-2ubuntu3`、実helpのgpasswd root指定は`--root`/`-Q`（`-R`はrestrict）。実固定サービスUID993/GID978を変えず、distributionのwww-data(33) memberに含まれていたcaddyだけを管理者が削除する。systemd `SupplementaryGroups=`空だけではNSS initgroupsを消せないため、Production identity gateを緩めない。
+
+再現：330仕様/331結果に従い、現boot/同signed source/全9停止/真正M-A-DB・原本Backup/DB281全列/startup13を認証→new-only私有chroot literalで`gpasswd --root <fixture> -d caddy www-data`検証→root0700/0600 SAVE `/var/lib/pgpt-s1-preservation/pg460-caddy-nss`へgroup/gshadow/passwd/nsswitch/既存backup before-imageを同期→同全gate下で`gpasswd -d caddy www-data`→group/shadowの当member以外・primary/他member/自動backup・全業務値/所有正常帰還を照合。32独立fixture（host25含む）及び実管理actual0、actual groups978のみ。生NSS/gshadow/原本/dumpをGitへ出さない。未知の場合は隔離/保有し、無差別usermod、サービスからの自動NSS再設定、旧before-image丸ごと復元をしない。既存signedPG459/source8e97/027は再配備/DDLせず新onlyguardで親一度を実行中、親/CHR/coverage正式受入は別。

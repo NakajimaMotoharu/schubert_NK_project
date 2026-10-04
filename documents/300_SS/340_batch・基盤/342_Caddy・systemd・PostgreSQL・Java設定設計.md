@@ -111,6 +111,8 @@ SSC180（2026-10-05、BUG680/YKT485）：Caddyのcoldは「一度も起動して
 
 ## 4. Systemd dependency・unit設定
 
+SSC181（2026-10-05、BUG685/YKT490）：専用Caddyの実効NSS groupsはprimary `caddy`だけで、kernelの全Uid/Gid及びgroupsを固定identityへ一致させる。`SupplementaryGroups=`の空設定はsystemdの追加指定を消すだけで、accountの既存NSS supplementary所属（distributionの`www-data`等）を削除しない。配備管理者は起動前にgetent/passwd/group/idの実値を前後認証し、未知・余剰groupがあれば起動gateを緩めず配備未完として隔離する。実測で特定済みの当VM `caddy`→`www-data`余剰所属だけを是正する場合、真正M/A/限定DB所有、固定全Unit/kernel終端、同署名/current/原本/Backup/DB/旧記録の完全保全を先行し、root私有before-imageを同期保存してから管理者の正規group操作で当memberだけを除去する。primary/passwd/他group/他memberは不変更、現在NSSが専用primaryのみ・完全保存後条件・全owned scope正常帰還を確認し、未知・途中失敗は隔離/所有保有とする。Applicationがgroupを自動修復せず、一般的usermod/全group再作成・権限緩和・既存原本/permit復元は禁止。真正fresh Caddy identity/TLS/DONE/intent/親全終端及び独立反例の再試験まで実環境の完了とはしない。上位業務/RD/UI/公開port/画面の変更を伴わない内部配備補足。
+
 SSC101/PG318: Caddy package実Unitの既定 `SendSIGKILL=yes` を親保守停止へ採用しない。NK専用非起動drop-inで `SendSIGKILL=no` と `TimeoutStopSec=30s` を設定し、daemon-reload後の実効 Id/LoadState/KillMode/SendSIGKILL を親の固定8対象と同じ閉集合で確認する。既定Caddyを実測せずにpolicy合格としない。policy確認はstop client/全cgroup終端/Artemis journalの代用でなく、未配置Unitのfake/alias禁止を維持する。
 
 ### 4.1 Dependency

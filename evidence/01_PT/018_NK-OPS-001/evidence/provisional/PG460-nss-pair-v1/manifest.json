@@ -1,0 +1,176 @@
+{
+  "id": "PG460-nss-pair-v1",
+  "collectedAt": "2026-10-04T18:28:35.169222+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "4a2129e5b5959ae8d9d2718ff053854bd9de4ef4",
+  "toolSourcesDirtyAtCollection": true,
+  "productionSourceCommit": "8e97eb9138828010926cd47fd10868d8a2d54f11",
+  "signedRelease": "0.1.0-PG459",
+  "signedManifestSha256": "88a6504f93782c65e2328bd719db4133bdc2b3457d0495c9e5887d084fd38311",
+  "environment": {
+    "host": "Linux/JDK25.0.4/Maven3.9.12",
+    "guest": "Ubuntu26.04/PostgreSQL18.6/JDK25.0.4",
+    "passwdPackage": "1:4.17.4-2ubuntu3"
+  },
+  "commands": [
+    "javac -Xlint:all -Werror; independent Tool Tests",
+    "Pg460OwnedIsolation; Pg460Known30PairRecovery verify; Pg460Known30PairRecovery (no args)",
+    "Pg460CaddyNssPreparationTest native-fixture: gpasswd --root <private fixture> -d caddy www-data",
+    "Pg460CaddyNssPreparation: genuine M/A/DB; gpasswd -d caddy www-data"
+  ],
+  "toolSourcesSha256": {
+    "tools/quality/vm/050_s1/Pg460CapturedPeersTest.java": "2ec4b544d087692a98307d50bccd1144780d01a4e0f766a4d834e99346427cff",
+    "tools/quality/vm/050_s1/Pg460CaddyNssPreparation.java": "0b5a280479bdfb6e91bbb944b8c6015617837e3c098b367ec84ef0eb768bd52a",
+    "tools/quality/vm/050_s1/collect_pg460_nss_pair.py": "369271878614fc3693c630055667ae7a4d7464d9993fe971624b027e93997fcf",
+    "tools/quality/vm/050_s1/Pg460Known30PairRecovery.java": "6ae55402913ec4d402d2be87d80126252dafe8211b254bf4573d3300747ebad9",
+    "tools/quality/vm/050_s1/Pg460OwnedIsolation.java": "cc3bd2cc56c543b554f4d7dc68fc8fea59ee6bd1a30b27579bdf27f80ef1e70e",
+    "tools/quality/vm/050_s1/pg460_stage_known30_tools_v1.py": "9eb299b75b28bb4e7fdbf0cfb6362a4cb687c6cc212cefe9edc167762b49829e",
+    "tools/quality/vm/050_s1/pg460_stage_nss_tools_v2.py": "42336fe38295d1b3de9ad6b70d9fc89b8dcaaa7eb41f949fcbaac28c75860839",
+    "tools/quality/vm/050_s1/pg460_external_start_once.py": "2668db622064d47df7d3d377042e6715ee68c58f7250e8b50421921060543422",
+    "tools/quality/vm/050_s1/pg460_stage_nss_tools_v3.py": "815139aa2c7e02bc3d208e4d0f455cdcbb2f25d3a599ad65d804100bae132544",
+    "tools/quality/vm/050_s1/pg460_stage_peer_capture.py": "fcf58792614cc0ee072abb3595011f65791b29e6a4629f00ea94274fa6d33099",
+    "tools/quality/vm/050_s1/Pg460Known30PairRecoveryTest.java": "1b3125f9393fb0a1211358a29b3d71ddb98d41cae274e6063c4eb7e547ad9ca6",
+    "tools/quality/vm/050_s1/pg460_capture_a01_when_ready.py": "dde201cea3a6e4f1e51537953126e5905ecade4503bd4559770103a4ad92308c",
+    "tools/quality/vm/050_s1/pg460_capture_known30_private.py": "d4fbf23a1a3478585b70970db90b6ab5d705f9bc0ed3fb12393b2d743dfed031",
+    "tools/quality/vm/050_s1/Pg460CapturedPeers.java": "9c75c74ba071665cd4fa6e98a55e9980182bbdad0e70c8d5658e4bd16e0d3dd0",
+    "tools/quality/vm/050_s1/Pg460CaddyNssPreparationTest.java": "59ebab3183abd1e59032558f2a0cc7e42a1c519fa4f8f8b4fce69c6645a7c4fb"
+  },
+  "toolClassesSha256": {
+    "pg460-known30-tool-v1/Pg460Known30PairRecoveryTest.class": "296fd992614e96f992dc57c27ce8da1d071ddd7f57e3f817993241a3c7160dc4",
+    "pg460-known30-tool-v1/Pg460CapturedPeersTest.class": "50e213b2da15094a26ca901b58e626444484657c6a6414a8c19de51e3175ea41",
+    "pg460-known30-tool-v1/Pg460CapturedPeers.class": "2beed11a1bed7ba58598790fe12f1c18385af9e93a41a64be91fad412437756a",
+    "pg460-known30-tool-v1/Pg460Known30PairRecovery.class": "b1abdf38a45769e29948f83a321ab6e7779a7048cf67ab52fbfe9da328e67333",
+    "pg460-known30-tool-v1/Pg460OwnedIsolation.class": "6da9032710cd8ec429385b509c97868a7ecea6f9f3c316a834d8e12964a6958f",
+    "pg460-nss-tool-v3/Pg460CaddyNssPreparationTest.class": "cf89f80ce69eec6b5bfa6e07eb70e76830c2b716db48876221b1df351195ac89",
+    "pg460-nss-tool-v3/Pg460CaddyNssPreparation.class": "ed75c7baa2b4cea4bb37d038516892ffcde9547a59d338d52f36d63d31fbe5e8"
+  },
+  "results": [
+    {
+      "testId": "PAIR460-POST",
+      "exitCode": 0,
+      "actual": "PG460_TIMEOUT_TOOL_PASS independentAssertions=278 productionPt0=true nativeMutation=false",
+      "expected": "PG460_TIMEOUT_TOOL_PASS independentAssertions=278 productionPt0=true nativeMutation=false",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-tool-test-v1.log",
+      "privateLogSha256": "a686bce94d230b31dfed94877fa5b12f9501f41ce8c57066ca8de926a0514d84",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    },
+    {
+      "testId": "PAIR460-PEERS",
+      "exitCode": 0,
+      "actual": "PG460_PEERS_TOOL_PASS independentAssertions=14 productionPt0=true nativeMutation=false",
+      "expected": "PG460_PEERS_TOOL_PASS independentAssertions=14 productionPt0=true nativeMutation=false",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-peer-test-v1.log",
+      "privateLogSha256": "3490cdd0ff6c8f2de75bde7b9d9d6ce0ddd0cf879b1eb53ae6788bfe5071cec3",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    },
+    {
+      "testId": "PAIR460-NATIVE",
+      "exitCode": 0,
+      "actual": "PG460_KNOWN30_PAIR_RECOVERED actualParentKnownFailure30=true sameEpochInvalid=true typedThreeIntentsRetired=true all281OriginalBackupTransferPreserved=true all9KernelEmpty=true newPermitIssued=false normalExitClaimed=false bothExternalRootsCaptured=true allOwnedScopesReturnedNormally=true",
+      "expected": "PG460_KNOWN30_PAIR_RECOVERED actualParentKnownFailure30=true sameEpochInvalid=true typedThreeIntentsRetired=true all281OriginalBackupTransferPreserved=true all9KernelEmpty=true newPermitIssued=false normalExitClaimed=false bothExternalRootsCaptured=true allOwnedScopesReturnedNormally=true",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-pair-recover-v2.log",
+      "privateLogSha256": "3e5c2a53af243662d828761960c68dc48141bd0232a78ae0509e4b560dafdf3b",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    },
+    {
+      "testId": "NSS460-LITERAL",
+      "exitCode": 0,
+      "actual": "PG460_NSS_TOOL_PASS independentAssertions=25 productionPt0=true",
+      "expected": "PG460_NSS_TOOL_PASS independentAssertions=25 productionPt0=true",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-nss-host-test-v3.log",
+      "privateLogSha256": "938847af54d81aeb9954a032e23dafb51d1a967c989c3b0aa7b61072a5c4b0df",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    },
+    {
+      "testId": "NSS460-FIXTURE",
+      "exitCode": 0,
+      "actual": "PG460_NSS_NATIVE_FIXTURE_PASS literalGroupShadowOtherMemberBackupPreserved=true actualCaddyNssUnchanged=true fixtureRetainedPrivate=true productionPt0=true",
+      "expected": "PG460_NSS_NATIVE_FIXTURE_PASS literalGroupShadowOtherMemberBackupPreserved=true actualCaddyNssUnchanged=true fixtureRetainedPrivate=true productionPt0=true",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-nss-native-fixture-v3.log",
+      "privateLogSha256": "e9a4fef56e7a5c84e62354b9ce93684f2cb1387725ea4efd32e367338e4920ad",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    },
+    {
+      "testId": "NSS460-NATIVE",
+      "exitCode": 0,
+      "actual": "PG460_NSS_PREPARED primaryOnly978=true onlyKnownWwwDataMemberRemoved=true all281BusinessOriginalBackupStartupPreserved=true all9KernelEmpty=true allOwnedScopesReturnedNormally=true startsPermitsDdl0=true privateBeforeImagesPreserved=true",
+      "expected": "PG460_NSS_PREPARED primaryOnly978=true onlyKnownWwwDataMemberRemoved=true all281BusinessOriginalBackupStartupPreserved=true all9KernelEmpty=true allOwnedScopesReturnedNormally=true startsPermitsDdl0=true privateBeforeImagesPreserved=true",
+      "oracle": "330 specification and independent literals/typed owner/postconditions",
+      "privateLog": "pg460-nss-native-v3.log",
+      "privateLogSha256": "e0cfe301b20deac6fec74258babdc5e82d2abc50bb1f15cd0eed837ad3c0d08f",
+      "executionTime": "not recorded in original log; collection time is not execution time"
+    }
+  ],
+  "files": [
+    {
+      "path": "PAIR460-POST.txt",
+      "sha256": "c040ce8e00988ebc51a3ff69714b00967dfd2ebab2ff872007e48ef7d8df2bef"
+    },
+    {
+      "path": "PAIR460-PEERS.txt",
+      "sha256": "3490cdd0ff6c8f2de75bde7b9d9d6ce0ddd0cf879b1eb53ae6788bfe5071cec3"
+    },
+    {
+      "path": "PAIR460-NATIVE.txt",
+      "sha256": "5835cabe1f5f8e81323d04b79770631b9a2832ceb8363ce7ee3b76ace29b68bf"
+    },
+    {
+      "path": "NSS460-LITERAL.txt",
+      "sha256": "938847af54d81aeb9954a032e23dafb51d1a967c989c3b0aa7b61072a5c4b0df"
+    },
+    {
+      "path": "NSS460-FIXTURE.txt",
+      "sha256": "d92f2bcdcf8ed86d6cfd9dd5f49a2be7e48fa17b66e357c11aa8622f1a264548"
+    },
+    {
+      "path": "NSS460-NATIVE.txt",
+      "sha256": "521405f4d353d541a86be7a6e2d7f7e6b789be559fddf81c03528e4ac0331052"
+    }
+  ],
+  "failedExecutionsPreserved": [
+    {
+      "log": "pg460-pair-recover-v1.log",
+      "exitCode": 1,
+      "reason": "unsupported recover argument, no mutation"
+    },
+    {
+      "log": "pg460-nss-native-fixture-v1.log",
+      "exitCode": 1,
+      "reason": "BUG687 wrong -R flag; no actual NSS mutation"
+    }
+  ],
+  "independentAssertions": {
+    "recovery": 278,
+    "peer": 14,
+    "nssHost": 25,
+    "nssNativeFixture": 32,
+    "nssFixtureIncludesHost25": true
+  },
+  "bugs": [
+    "BUG-685",
+    "BUG-686",
+    "BUG-687"
+  ],
+  "ykt": [
+    "YKT-490",
+    "YKT-491",
+    "YKT-492"
+  ],
+  "ssc": [
+    "SSC-181"
+  ],
+  "productionPtAdded": 0,
+  "formal": false,
+  "coverage100": false,
+  "newNativeParentAccepted": false,
+  "redaction": "Only exact public flags/source/hash. No NSS contents, gshadow, DB dump, original, credential, token, session/cookie or owner payload.",
+  "limitations": [
+    "NSS administrative and old-cohort pair retirement proof only; new parent/CHR/native coverage are separate.",
+    "Tool assertions do not qualify production coverage; no old BUG544 resolution."
+  ]
+}

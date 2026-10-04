@@ -78,29 +78,32 @@ class CurrentCharacterizationTest {
     try (BrowserContext context = context(false)) {
       Page page = context.newPage();
       Response response = page.navigate(environment.baseUrl() + "/login");
-      assertNotNull(response);
-      assertEquals(200, response.status());
-      Locator username = page.locator("input[name=username]");
-      Locator password = page.locator("input[name=password]");
-      Locator csrf = page.locator("input[name=_csrf]");
-      assertEquals(1, username.count());
-      assertEquals("username", username.getAttribute("autocomplete"));
-      assertNotNull(username.getAttribute("autofocus"));
-      assertEquals("current-password", password.getAttribute("autocomplete"));
-      assertEquals("", password.inputValue());
-      assertEquals(1, csrf.count());
-      sink.write(
-          "CHR-A01",
-          map(
-              "statusCode", response.status(),
-              "title", page.title(),
-              "usernameAutocomplete", username.getAttribute("autocomplete"),
-              "usernameAutofocus", true,
-              "passwordAutocomplete", password.getAttribute("autocomplete"),
-              "passwordValue", "",
-              "csrf", "<TOKEN>",
-              "securityHeaders", securityHeaders(response)));
+      sink.write("CHR-A01", captureLoginDisplay(page, response));
     }
+  }
+
+  /** Same A01 driver/oracle for Current and externally owned NK; SS355 §6–9. */
+  static Map<String, Object> captureLoginDisplay(Page page, Response response) {
+    assertNotNull(response);
+    assertEquals(200, response.status());
+    Locator username = page.locator("input[name=username]");
+    Locator password = page.locator("input[name=password]");
+    Locator csrf = page.locator("input[name=_csrf]");
+    assertEquals(1, username.count());
+    assertEquals("username", username.getAttribute("autocomplete"));
+    assertNotNull(username.getAttribute("autofocus"));
+    assertEquals("current-password", password.getAttribute("autocomplete"));
+    assertEquals("", password.inputValue());
+    assertEquals(1, csrf.count());
+    return map(
+        "statusCode", response.status(),
+        "title", page.title(),
+        "usernameAutocomplete", username.getAttribute("autocomplete"),
+        "usernameAutofocus", true,
+        "passwordAutocomplete", password.getAttribute("autocomplete"),
+        "passwordValue", "",
+        "csrf", "<TOKEN>",
+        "securityHeaders", securityHeaders(response));
   }
 
   @Test
@@ -1100,18 +1103,19 @@ class CurrentCharacterizationTest {
   }
 
   private static BrowserContext context(boolean javaScriptDisabled) {
-    return environment
-        .browser()
-        .newContext(
-            new Browser.NewContextOptions()
-                .setIgnoreHTTPSErrors(true)
-                .setViewportSize(1366, 768)
-                .setDeviceScaleFactor(1)
-                .setLocale("ja-JP")
-                .setTimezoneId("Asia/Tokyo")
-                .setColorScheme(ColorScheme.LIGHT)
-                .setReducedMotion(ReducedMotion.REDUCE)
-                .setJavaScriptEnabled(!javaScriptDisabled));
+    return environment.browser().newContext(desktopOptions(javaScriptDisabled));
+  }
+
+  static Browser.NewContextOptions desktopOptions(boolean javaScriptDisabled) {
+    return new Browser.NewContextOptions()
+        .setIgnoreHTTPSErrors(true)
+        .setViewportSize(1366, 768)
+        .setDeviceScaleFactor(1)
+        .setLocale("ja-JP")
+        .setTimezoneId("Asia/Tokyo")
+        .setColorScheme(ColorScheme.LIGHT)
+        .setReducedMotion(ReducedMotion.REDUCE)
+        .setJavaScriptEnabled(!javaScriptDisabled);
   }
 
   private static BrowserContext mobileContext() {
