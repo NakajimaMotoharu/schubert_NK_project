@@ -1,5 +1,11 @@
 # 078 NK-WEB-002 Logout継続再送実行結果
 
+## PG449 同QA050所有・DDL・security群の全6回帰
+
+Source `8e12121583ca5bf136f628093d26a67c5cfa516a`、fresh full-v1 actual0/16:52/2026-10-04 10:08:39 JST、3109PT460suite（81/154/213/891/748/1022）F/E/S0・静的6module0。sourcefiles前後一致、全6actualtarget/JAR/runtime依存/XML/execをWorkPG379/pg449-hostへbyte一致保全。safe018 `PG449-retained-logout-full/manifest.json` SHA `eb4bc56d3d8a2408105c9de7818d312124ccf7648ac37d013c1320b95510aace`。collectorは現HEAD/clean src-tools、actual6log集計/XML全件、staticとclass coverageを照合。V02727versioned/28history、API fatal6class・revoke11class各四coverage100、RERUN001-F/002/003A～G/004A～I/005A～Hと既存全PTを同sourceで実行した。BUG622～627/YKT440～444の当該host修正を閉鎖、修正c230694c0/1a6182512/bc03db444/8e1212158（完全hashはGit/限定manifest参照）、旧失敗runを不変更で維持。
+
+全体host未網羅B1222/L3477/M567/C39は前fullと同じ残数で、新revoke11class追加の未網羅0。native27profile/Backup/ordinaryAPI/fullWeb/Caddy/DONE/intent/実CHR-A01/L01/native100・local Logout/workerjoin/旧key保持は未完了。正式PT-WEB-20260925-24/1964PT/53scope/48.3%を更新しない。PG442中断143/別sourcePG448/限定210をこの3109へ加算0。
+
 ## PG449 RERUN005 genuine Logout facade／API限定結果
 
 2026-10-04 retry-selected-v1 actual exit0/03:24/09:48:08 JST、210PT23suite（5/7/10/111/34/43）、F/E/S0・6module静的0。Source bc03db444106aa6b87fd8b0e9135e19bab25e3d1＋PG-D361 coordinator/例外/独立Test。sourcefiles前後一致・全6actualtargetをWorkPG379/pg449-retry-selected-v1-frozenへcp/diff byte一致保存、安全manifest `evidence/provisional/PG449-retry-selected-v1/manifest.json` SHA `6b9a058230bd8132c9a53066a65d539f899293eb900edc2f380b017ca5841a35`。開始日時・command・private log SHA・環境・Test ID・独立期待/actualはmanifestが正。
