@@ -221,6 +221,8 @@ SSC164（内部接続補足）：Morningのready判定は捕捉Rootと同一のb
 
 ### 5.2 Spring主要値
 
+SSC185（2026-10-05、内部TX/所有補足）：保持原本を完了する直前のBackup/Cleanup/Expiry evidenceは、同じ借用DBの短transactionで各後条件を再読する。そのtransaction内のowner callbackはRoot/M/A/原本capability・同ordinary API/Web/Caddy世代/identity/socket/ready・元残budgetの純粋な検査に限り、同ConnectionへのDB再読・commit/rollback・autoCommit変更を再入させない。DB全体のrun整合はevidence再読の前後及び各transactionの外側で独立検査し、transaction内のadvisory/timeout/role/SQL後条件は既存Repositoryで維持する。intent保持中と正規退役後のpeer条件を分け、各phaseのRoot/原本/peer検査をDB外側の整合検査の前後にも行う。別Connectionで旧ownerを代用・guard省略・権限緩和・UNKNOWN正常化は禁止。同DBのtransaction状態を保持する独立stateful試験と、元sourceの実失敗を保全したsame-source fresh回帰/実VM completionを必要とする。RD/UI/業務仕様・Current/DIFは変更しない。
+
 | Key | Web | API |
 |---|---|---|
 | `server.address` | `127.0.0.1` | Main HTTP disabled |
