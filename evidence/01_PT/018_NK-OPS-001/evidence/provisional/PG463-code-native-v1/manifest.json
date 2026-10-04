@@ -1,0 +1,43 @@
+{
+  "id": "PG463-code-native-v1",
+  "collectedAt": "2026-10-05T08:02:19+09:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "11c1feb1c0b51543f98c28e3f54213274648f06f",
+  "productionSourceCommit": "11c1feb1c0b51543f98c28e3f54213274648f06f",
+  "productionAndToolSourcesUnchangedAfterFull": true,
+  "formal": false,
+  "productionPtAdded": 0,
+  "coverage100": false,
+  "nativeWholeParentAccepted": false,
+  "environment": {"host":"Linux/JDK25.0.4/Maven3.9.12/Node24.19.0", "guest":"Ubuntu26.04/PostgreSQL18.6/JDK25.0.4", "boot":"e07aa706-1acd-4e65-b309-d7f330f79d54"},
+  "fixture": "Canonical current INVALID after typed known30 recovery; 25 startup records including retained old20/current4; all311 rows/full14 columns; original pending/Backup/Transfer/business/fixture unchanged; all9 kernel empty",
+  "independentOracle": "Literal 25 namespace and each missing/foreign rejection, source/manifest/watch bindings, actual 185 artifact byte hashes/61 dependency coordinates/27 SQL/28 history and frozen entry jars; public ED25519 same pin; owned pre/post DB/original/Backup snapshots",
+  "results": [
+    {"testId":"PT-OPS-CODE463001", "command":"bash tools/quality/vm/050_s1/pg463_code_tools_v1.sh", "exitCode":0, "independentAssertions":68, "compileXlintAllWerror":0},
+    {"testId":"PT-OPS-COHORT463001", "command":"python3 -B tools/quality/vm/050_s1/pg463_check_cohort_bindings.py", "exitCode":0, "actualManifestWatchSource":true},
+    {"testId":"PT-OPS-CODE463002", "command":"fresh current-source AssembleReleaseFixture new-only pg463-release-v3; frozen six + provided Flyway13.4.0; independent byte/count verification", "exitCode":0, "actualArtifacts":185, "actualDependencies":61, "actualSql":27, "actualHistoryRows":28, "frozenEntryJarsEqual":true, "validV2V3AllBytesEqual":true},
+    {"testId":"PT-OPS-CODE463003", "command":"openssl pkeyutl Ed25519 sign then independent public DER verify; new-only tar", "exitCode":0, "signatureVerified":true, "privateMode":"0600"},
+    {"testId":"PT-OPS-CODE463004", "command":"python3 -B tools/quality/vm/050_s1/pg463_stage_v1.py manifestDigest sourceCommit", "toolSession":41157, "exitCode":0, "closedTools4":true, "directoryMode":"root0500", "fileMode":"root0400", "cacheFiles":0},
+    {"testId":"PT-OPS-CODE463005", "command":"Pg463CodeOnlyDeployment sourceCommit manifestDigest verify", "toolSession":3704, "exitCode":0, "allOwnedScopesClosed":true, "mutation0":true},
+    {"testId":"PT-OPS-CODE463006", "command":"Pg463CodeOnlyDeployment sourceCommit manifestDigest activate", "toolSession":33365, "exitCode":0, "allOwnedScopesClosed":true, "schema":"027", "rows":311, "columns":14, "startupRecords":25, "oldRecords":20, "originalPending":true, "backupTransferBusinessFixturePreserved":true, "all9KernelEmpty":true, "ddlIssued":0, "permitIssued":0, "unitsStarted":0, "approvalCurrentSwitched":true}
+  ],
+  "signedManifestSha256":"0cfd6453948feff4e63912c3169224b0800a0d2c1246f5e06207cab7964386d1",
+  "signatureSha256":"478ec18ace2ef2f4367da330f42167a850aa6f2ad57d6d7512f1a093a2e89eb4",
+  "archiveSha256":"45440ae30b437c57fc1c995216bce2cee248224d6d8d27392674f2a4e83a0f07",
+  "privateCompleteSha256":"eba0474b1b531339eab8aa956ce5b9eb54eb577271b4b6327f7fec39f023eb5d",
+  "assemblerSourceSha256":"0e679b0f254bd180a8e59260ccb672e668497319c78d7b919b9f579e882507f6",
+  "assemblerClassSha256":"dfcaa8a0538661c289c73a486e55415b254b2c3b20e39c962fa957bd7e667f8e",
+  "rootToolsSha256":{
+    "Pg463CodeOnlyDeployment.class":"2f7b5690518ef948d77d25d36a80d7e6f330698f899da38d168d9c776592576e",
+    "pg463_watch_parent.py":"119207cc1177f1db98ac9a4a479bc9e973bc8afc62998ac1fa310bb1de85b8f3",
+    "pg457_stable_actor.py":"ae19f53d3440a63588b3df0bd525fb39762923dbffcc1cc595fedc818ee8ecb3",
+    "pg462_observer_identity.py":"7df885527e2589705740db5cf78d11791d022cca4f850adc4454dc78a1d77ec4"
+  },
+  "failedOrLimitedExecutionsPreserved":[{"run":"assemble-v1", "exitCode":1, "reason":"BUG702 missing provided Flyway; partial58MiB preserved; signature/deploy0"},{"run":"assemble-v2", "exitCode":0, "reason":"BUG703 old diagnostic25 only; actual185/61/27/28 and allv2-v3 byte equal; used freshv3 for signature"}],
+  "ssc":["SSC-186"],
+  "qa":["QA-047"],
+  "bugs":["BUG-700","BUG-702","BUG-703"],
+  "ykt":["YKT-502","YKT-504","YKT-505"],
+  "limits":["Deployment/operator limited acceptance only", "Later external parent start client0 is not whole parent success", "Caddy/DONE/intent/outer/nativecoverage/CHR and formal run remain pending", "Old normal30/timeouts/UNKNOWN/BUG544 not resolved by new operator success"],
+  "redaction":"Public count/boolean/source/hash only; no dump/original/raw credential/secret/session/cookie/token/private key/provider output"
+}

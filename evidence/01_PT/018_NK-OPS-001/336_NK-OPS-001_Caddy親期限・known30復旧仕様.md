@@ -12,6 +12,11 @@
 | PT-OPS-KNOWN463002 | literal18field終端、NKLAUNCH1独立byte、旧20＋当4＋epoch.current、全phase/欠落/foreign/逆戻り/UNKNOWN close | 親30・API/Web143のみ、typed WEB→API→publicationの3段退役、最終25。350独立assert、全旧記録各欠落拒否、unknown時M/A又はMを保持し旧失敗を正常化しない |
 | PT-OPS-KNOWN463003 | 同e07boot/currentbcd85、私有14captureSet/fullBOM027、全311/full14/business/fixture/原本/Backup | 新operator M→A→DB/advisory取得、固定enum reverse isolation→全9kernel空。verify変異0→canonical quarantine/typed三退役→原本pending/DB等不変/最終25/outer正常帰還。旧tool/親normal0or10の主張0 |
 | PT-OPS-CODE463001 | code-only literal25集合/全欠落/foreign intent/args/null/固定旧新source/release | 独立68assert/Werror0、OLDca332/PG462/digest421、NEXTPG463、311保存。新候補signature/frozen byte/current同世代を実配備前後に照合。DDL/start/permit0 |
+| PT-OPS-CODE463002 | fixed all6 source/run成功後のnew-only候補、current Assembler source/classをcompile | 全185fileの独立SHA/size、61dependency/27SQL/28history、3entry jarと凍結producer byte一致。v1partial/v2旧diagnosticをv3正規診断へ加算しない |
+| PT-OPS-CODE463003 | 原manifest byteのEd25519署名・固定public DER別verify | verify0/signature64byte、sig/tar0600、privatekeyを候補/VM/Gitへ格納0 |
+| PT-OPS-CODE463004 | new-only signed候補及び4toolをVMにstage | artifact完全byte・closed4/root0500/file0400、余剰cache0、前current不変更。既存destがあれば拒否 |
+| PT-OPS-CODE463005 | canonical current/全9停止/実M-A-DB/旧新署名/fullBOMでverify | actual0/変異0、全311/14/原本/Backup/Transfer/全25/業務/fixture不変、outer実正常帰還 |
+| PT-OPS-CODE463006 | 同条件のactivate | epoch.currentだけnewINVALID、旧20＋当4全byte/metadata不変、approval/currentだけ正規切替、全DB/原本/Backup/Transfer保存、DDL/permit/start0、outer実正常帰還 |
 | PT-OPS-COHORT463001 | actualmanifest/watchhashと全新工具literal/oneStart/loaded/25/budget1800 | opaque sourceを行数置換で変えない、compile-only annotationsを明示しWerror保持。oldcohort/不存在Unit/余剰namespace拒否 |
 | CHR-A01 PG462 | 共通Current driver、同ca332真正Caddy TLS200 | 全Current固定oracle一致、承認DIF001/QA045 titleだけ変更。親normal30/全gate/新source成功へ合算しない |
 
