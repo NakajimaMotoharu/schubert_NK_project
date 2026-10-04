@@ -116,6 +116,14 @@ PathはUI 221のURLをGET/POSTとも維持する。SCR-017は同一POST pathにh
 `@PostMapping(params="operation=STATUS")`等のallowlistで操作別handler/form validationへ分岐する。SCR-021/023も同じ。
 Operation欠落・複数・未知値はMQ送信前に400とし、form actionとpath IDはCharacterization Testで比較する。
 
+### 4.1 SCR016/017のsession・API接続補足（SSC-177）
+
+SCR016/017の通常全構成は同じcurrent session repositoryから作ったtoken lifecycleを明示注入し、旧read-only構成を全Readyへ使わない。SCR017はfresh IF-020に基づく操作別formを表示し、自己無効化/自己ADMIN解除を許すformを出さず、Lock解除はlock中だけ表示する。実際に表示するform群のtokenは314の単一短TXで全確保し、不足時に未表示pendingを部分発行しない。
+
+同POST pathの閉じたoperation dispatcher（又は操作別mapping）でSTATUS/ROLE/PASSWORD/UNLOCKを分離し、欠落/多重/未知operationはMQ前400にする。既存formを借用してpath ID/version/確認/用途tokenを検査し、password確認を電文へ重複送信しない。PasswordResetFormへ与えるtarget usernameは現在の真正IF-020だけを正とし、HTTP hidden値を正にしない。
+
+検証済IF-019/021～024の0000/0200・USRMUT24のtarget/versionを確認してから、現在tokenの初回完成印を保存し固定相対redirectとする。入力error/応答喪失はpasswordを消去して同tokenで再入力し、0105ではIF-020の最新値を取得して409を表示する。再表示だけで新token・API更新・自動再送を行わない。自己Password reset成功はAPIで現在を含む全session失効済なので、現在のlocal sessionとdisplay/security contextを終端消去しLoginへ戻す。追加Logout送信や、受信していない0102の監査は生成しない。他Userの成功・旧保持token再送は従来の現在API認証/owner/HMAC/保存結果検証を省略しない。
+
 ## 5. Form validation
 
 ### 5.1 共通validator
