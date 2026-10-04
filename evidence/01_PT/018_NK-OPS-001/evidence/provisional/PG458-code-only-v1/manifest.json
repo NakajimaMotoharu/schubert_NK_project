@@ -1,0 +1,131 @@
+{
+  "id": "PG458-code-only-v1",
+  "collectedAt": "2026-10-04T15:42:39.841929+00:00",
+  "branch": "dev-foundation",
+  "hostHeadAtCollection": "ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a",
+  "toolSourcesDirtyAtCollection": true,
+  "productionSourceCommit": "ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a",
+  "previousSignedSource": "559bf7eacb401d6d07037dbdd295b32f174976a0",
+  "signedRelease": "0.1.0-PG458",
+  "signedManifestSha256": "d0413fc29171dc69363ec173e1d37dcc8bf3d25da2f26cc474ca80b7b316d6b2",
+  "environment": {
+    "host": "Linux/JDK25.0.4/Maven3.9.12/Node24.19.0",
+    "guest": "Ubuntu26.04/PostgreSQL18.6/JDK25.0.4/Artemis2.56.0"
+  },
+  "commands": [
+    "javac -Xlint:all -Werror against actual guest16-class closed base; Pg458CodeOnlyDeploymentTest",
+    "python3 pg458_stage_v1.py d0413fc29171dc69363ec173e1d37dcc8bf3d25da2f26cc474ca80b7b316d6b2",
+    "guest sudo java Pg458CodeOnlyDeployment ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a d0413fc29171dc69363ec173e1d37dcc8bf3d25da2f26cc474ca80b7b316d6b2 verify|activate",
+    "python3 pg458_stage_watch_v2.py"
+  ],
+  "toolSourcesSha256": {
+    "tools/quality/vm/050_s1/Pg458CodeOnlyDeployment.java": "4c38ecd99c5fe02fd8f9207dbc4a3180c3d593366e3c3989aa37e33aa26af179",
+    "tools/quality/vm/050_s1/Pg458CodeOnlyDeploymentTest.java": "4330ec5b39f444e04d3faf4db7e41cefa21cdc11e249fea6f8cfad0c3a0e5ccd",
+    "tools/quality/vm/050_s1/pg458_stage_v1.py": "ff6b14fac6d1dce478bb6dbe3ca0c8487768fe012ee850080111039f2f357556",
+    "tools/quality/vm/050_s1/pg458_stage_watch_v2.py": "37b3c7d65bbc7f338494926381aaa71eb9e95c1a43ab2f9df0983e0534662469",
+    "tools/quality/vm/050_s1/pg458_watch_parent.py": "4076c5fb747cdc27e8a29b1470cf6c41c141a19ffe081bf70e70a522d1cf1e60",
+    "tools/quality/vm/050_s1/pg457_stable_actor.py": "ae19f53d3440a63588b3df0bd525fb39762923dbffcc1cc595fedc818ee8ecb3"
+  },
+  "nativeToolClassSha256": "506331e0d414edf7ce449eafa3818da9a79b750eb5660111ac2a4972f141a1dd",
+  "jobs": [
+    {
+      "privateLog": "pg458-stage-v1.log",
+      "privateLogSha256": "aa9ecbd2788701a50b92fbbf55a580ef6727629ad043586d7037212ac55f7ba9",
+      "exitCode": 0,
+      "exitBasis": "actual tool session returned0; success flags are additional postconditions",
+      "safePath": "logs/pg458-stage-v1.txt"
+    },
+    {
+      "privateLog": "pg458-code-verify-v1.log",
+      "privateLogSha256": "c404a7d5b6b33c3b4ec63ab9b0850ef1d369cb2af004b8c3b44e2d0760d63577",
+      "exitCode": 0,
+      "exitBasis": "actual tool session returned0; success flags are additional postconditions",
+      "safePath": "logs/pg458-code-verify-v1.txt"
+    },
+    {
+      "privateLog": "pg458-code-activate-v1.log",
+      "privateLogSha256": "db001d81a2a596ba850f61ecb1e5fd015a23b326798adab79430080a754cd7f3",
+      "exitCode": 0,
+      "exitBasis": "actual tool session returned0; success flags are additional postconditions",
+      "safePath": "logs/pg458-code-activate-v1.txt"
+    },
+    {
+      "privateLog": "pg458-watch-stage-v2.log",
+      "privateLogSha256": "8833d4bcb4a85d8895801e534138e44e74b21d66e5ed15dba4146e82e7f070e0",
+      "exitCode": 0,
+      "exitBasis": "actual tool session returned0; success flags are additional postconditions",
+      "safePath": "logs/pg458-watch-stage-v2.txt"
+    },
+    {
+      "privateLog": "pg458-code-tool-test-v1.log",
+      "privateLogSha256": "6ed01298157e22b9d5caab78515fbedb88809d2c46f0b9f1b9b3660aef18c748",
+      "exitCode": 0,
+      "exitBasis": "actual tool session returned0; success flags are additional postconditions",
+      "safePath": "logs/pg458-code-tool-test-v1.txt"
+    }
+  ],
+  "testIds": [
+    "CODE458001",
+    "CODE458002",
+    "CODE458003"
+  ],
+  "independentToolAssertions": 42,
+  "productionPtAdded": 0,
+  "expected": "literal signed027/current boot/old INVALID exact5, genuine M/A/DB, full261x14/all23business/originalPending/Backup20/Transfer preservation, all9 stopped, DDL/start/permit0; normal owned callback return only",
+  "actual": "verify0 and activate0; signed current/approvalPG458/fresh INVALID; signed Unit delta0; all complete preservation/kernel/ownedclose flags confirmed",
+  "hostFullRun": "PG458-caddy-timeout-full",
+  "hostFullManifestSha256": "9357f776614877674b9ac64e7791bdd385b8befbe35598ff04233e0ce77db8fd",
+  "hostFullStartedAt": "2026-10-05T00:04:17+09:00",
+  "hostFullCompletedAt": "2026-10-05T00:21:40+09:00",
+  "hostFullExitCode": 0,
+  "hostFullTests": 3254,
+  "hostFullSuites": 480,
+  "hostCoverage100": false,
+  "formal": false,
+  "nativeParentAccepted": false,
+  "bugs": [
+    "BUG-678",
+    "BUG-679"
+  ],
+  "ykt": [
+    "YKT-483",
+    "YKT-484"
+  ],
+  "ssc": [
+    "SSC-178",
+    "SSC-179"
+  ],
+  "limitations": [
+    "Tool/native execution start/end timestamps were not recorded by original commands; collection time is not execution time",
+    "Full host byte/source was frozen before runtime follow-up; standalone stale jars and partial fixture remain private; original PT is not rerun or combined with other source",
+    "External parent started once, current execution pending; observer Root/ordinary/TLS/DONE/whole closure and native coverage/CHR/formal remain unaccepted",
+    "Tool assertions42 cover arguments/namespace only, not production PT/coverage100; observer20 is separate"
+  ],
+  "redaction": "Only fixed stage/postcondition flags, public source/hash and sanitized dependency proof. No original, DB dump, owner/permit, cookie/session/token/password/signing key.",
+  "files": [
+    {
+      "path": "logs/pg458-stage-v1.txt",
+      "sha256": "aa9ecbd2788701a50b92fbbf55a580ef6727629ad043586d7037212ac55f7ba9"
+    },
+    {
+      "path": "logs/pg458-code-verify-v1.txt",
+      "sha256": "c404a7d5b6b33c3b4ec63ab9b0850ef1d369cb2af004b8c3b44e2d0760d63577"
+    },
+    {
+      "path": "logs/pg458-code-activate-v1.txt",
+      "sha256": "db001d81a2a596ba850f61ecb1e5fd015a23b326798adab79430080a754cd7f3"
+    },
+    {
+      "path": "logs/pg458-watch-stage-v2.txt",
+      "sha256": "8833d4bcb4a85d8895801e534138e44e74b21d66e5ed15dba4146e82e7f070e0"
+    },
+    {
+      "path": "logs/pg458-code-tool-test-v1.txt",
+      "sha256": "6ed01298157e22b9d5caab78515fbedb88809d2c46f0b9f1b9b3660aef18c748"
+    },
+    {
+      "path": "runtime-proof.json",
+      "sha256": "6f85fc31ffaf2c82e79016f834bba2258ed430f918c837337ced4a9d49619995"
+    }
+  ]
+}

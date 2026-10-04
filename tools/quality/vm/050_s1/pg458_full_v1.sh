@@ -25,7 +25,7 @@ task_result=0
 (
 umask 0027
 umask > "$task_base.child-umask"
-./mvnw -o --no-transfer-progress -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar org.apache.maven.plugins:maven-dependency-plugin:3.9.0:copy-dependencies org.apache.maven.plugins:maven-dependency-plugin:3.9.0:list -DincludeScope=runtime -DoutputFile=target/runtime-dependencies.txt -DappendOutput=false
+./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar org.apache.maven.plugins:maven-dependency-plugin:3.9.0:copy-dependencies org.apache.maven.plugins:maven-dependency-plugin:3.9.0:list -DincludeScope=runtime -DoutputDirectory=target/runtime-dependencies -DoutputFile=target/runtime-dependencies.txt -DappendOutput=false
 ) > "$task_base.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base.exit"
 date --iso-8601=seconds > "$task_base.completed"

@@ -40,6 +40,10 @@ def get(port,path):
 seen=False;roots={};ready=set();proxy=False;prior=None;deadline=time.monotonic()+1900;morning=None
 while time.monotonic()<deadline:
     states={role:actor(role) for role in UNITS};m=states['morning']
+    # BUG671/YKT476: unstable manager/kernel sandwich is neither a generation proof
+    # nor a stable violation. Reobserve before binding the parent or validating a child.
+    if m.get('race'):
+        time.sleep(.01);continue
     if int(m['MainPID']):
         seen=True
         if morning is None:
@@ -60,6 +64,7 @@ while time.monotonic()<deadline:
                 if before:
                     health=get(port,'/actuator/health/readiness');info=get(port,'/actuator/info')
                     aa=actor(role);mm=actor('morning')
+                    if aa.get('race') or mm.get('race'):continue
                     if health==(200,b'{"status":"UP"}') and info[0]==200 and json.loads(info[1])==INFO:
                         assert same(a,aa) and same(m,mm) and before.intersection(sockets(aa,port))
                         assert role in roots and same(roots[role],aa),'captured Root-to-ordinary generation missing'
