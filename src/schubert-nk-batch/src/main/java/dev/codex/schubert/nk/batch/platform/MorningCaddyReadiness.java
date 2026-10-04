@@ -95,7 +95,7 @@ public final class MorningCaddyReadiness {
       throw unavailable();
     String pre = Objects.requireNonNull(values.get("ExecStartPre"));
     if (!pre.matches(
-            "\\{ path=/usr/bin/caddy ; argv\\[\\]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=\\[[^\\]\\n]+\\] ; stop_time=\\[[^\\]\\n]+\\] ; pid=[1-9][0-9]{0,9} ; code=exited ; status=0/0 \\}")
+            "\\{ path=/usr/bin/caddy ; argv\\[\\]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=\\[[^\\]\\n]+\\] ; stop_time=\\[[^\\]\\n]+\\] ; pid=[1-9][0-9]{0,9} ; code=exited ; status=0(?:/0)? \\}")
         || pre.contains("[n/a]")) throw unavailable();
     String start = Objects.requireNonNull(values.get("ExecStart"));
     if (!start.matches(

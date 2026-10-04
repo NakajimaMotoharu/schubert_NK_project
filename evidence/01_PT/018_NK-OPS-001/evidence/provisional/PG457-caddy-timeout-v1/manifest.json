@@ -1,0 +1,243 @@
+{
+  "id": "PG457-caddy-timeout-v1",
+  "collectedAt": "2026-10-04T14:47:49.210611+00:00",
+  "formal": false,
+  "hostSourceHead": "9d1f29f5ed62b924a6809d686838ed51069d4ab3",
+  "hostSourceDirty": true,
+  "hostSourceFiles": {
+    "tools/quality/vm/050_s1/Pg457OwnedIsolation.java": "1f12478bb8eb673e43453044a62915f1160fa1aabea83a0e4e85b76c201eab46",
+    "tools/quality/vm/050_s1/Pg457OwnedIsolationTest.java": "0710149bb8e0681d48b613f1205850857286033e1cbfcc8792e777cc6f3e596d",
+    "tools/quality/vm/050_s1/Pg457TimeoutPairRecovery.java": "41ffe60ba1686ea4130a3d2669c7af9b1c46f61a31e795dfe67d9b02a4364a46",
+    "tools/quality/vm/050_s1/Pg457TimeoutPairRecoveryTest.java": "370b063d6368ae63744f9d69e8d95cb19abb19b2851e67d7b7d52b91360cb2cc",
+    "tools/quality/vm/050_s1/collect_pg457_grouped.py": "3d5fe80f03a298c1e033f28f98a0223903977a6ffbd90815d4fb659f80f454b0",
+    "tools/quality/vm/050_s1/pg457_capture_retained_private.py": "def105be55883118fde7072d87a5d3ebfe60f5591551268580dda10a082f4624",
+    "tools/quality/vm/050_s1/pg457_observe_existing_parent.py": "f3711e1ec2bc12fac8eb1be0c25422375cbaaf2e3753701f95962983922ac5cb",
+    "tools/quality/vm/050_s1/pg457_stage_isolation_tool.py": "20f07c8fb69c0f122548f903145f44d348121ed965810be80b268818b645d454",
+    "tools/quality/vm/050_s1/pg457_stage_timeout_recovery.py": "64405f04242a2c864a69ac7a7e0e1593aaa5bce87db847d80003f4651b991e36",
+    "tools/quality/vm/050_s1/pg457_stage_timeout_recovery_v3.py": "8ed14c8f290aa08ab6a061c894308d22368f27724cdcb768d7ab960769338822",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java": "59d4f80f67d2d19c51668c39c529c6879a0e0bce040a447c8e6ab909a60615e6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": "b33c0b411845d806328aa87bda0b25989ef0b4f0eb18700ce2879a44eece4716",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java": "1fb7f4fde332c4f8ee21015ad03e7c7a1613cb0c9c8f73577e992a3956fa885d",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootFailedStartPairRecoveryTest.java": "0b2bd05d1330915719228f13f16bf248f3d0bc357418cb10d3616ebc7452f7bb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClientTest.java": "90f6b11244ed478e54b48ee864b0e7e84f136b16c3a3985f560e5119c2e20736",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java": "b1efc9f3142dc8a0abc3fbf1500c446405a9e38e31e12c0025ee07b2b9044b1c"
+  },
+  "nativeProductionSource": "559bf7eacb401d6d07037dbdd295b32f174976a0",
+  "nativeRelease": "0.1.0-PG456",
+  "nativeManifestSha256": "21affa1850d60f3a7d54f5dbcc37e12c6460563865771fa49a52a433fe91b424",
+  "privateCaptureSetSha256": "c9a01ff80c118373f474e0d1993f72601808d4cc4bbbc8227b62714ca7edf215",
+  "command": "six-reactor spotless:check test-compile jar:test-jar test exact10classes spotbugs:check jacoco:report; pg457-caddy-selected-v6.log",
+  "hostExitCode": 0,
+  "hostLogSha256": "1889fa2ee9acdd6daf79201f6deb8d9599504da1f1811e61338ef5293d103d16",
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "b0685e4353323b14a9b523ee37c64f526119a6a3b311afdaaaa772ad76b1dd05"
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "cd6c01cf0b93f4475b13be4cbef61024ed21ad3104af31f6920d21f80e1ee94a"
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "76de15d03981d602de3c2d3fc378b5d6ce261450cb01a15c77dd829f480a578c"
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "dc8dbb2e9d52d4378688bd496763a06f79870a633b587e8d58077ce7e83ad8e7"
+    },
+    "web": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "40cc53bba4307d6cb7fcd0d0e5a862af01a5a0049edfcb279cf939b5d70f7054"
+    },
+    "batch": {
+      "tests": 51,
+      "suites": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "a991e2ccb09d4f37ca9fab27c059ad64737daef7cccac1983321c9a860dc9420"
+    }
+  },
+  "tests": 86,
+  "suites": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "nullAwayCompile": "PASS",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "spotbugs": "4.10.4",
+  "jacoco": "0.8.15",
+  "nativeJobs": [
+    {
+      "name": "pg457-isolation-native-v1.log",
+      "exitCode": 0,
+      "rawPrivateSha256": "8028fbfe24cff890616e46a4961ce1da57462e5a20eecd3777ebf884535a0728",
+      "safePath": "logs/pg457-isolation-native-v1.log",
+      "qualified": true
+    },
+    {
+      "name": "pg457-timeout-verify-v1.log",
+      "exitCode": 1,
+      "rawPrivateSha256": "650a9e37cddb77e313b593c9bd00db4e79a4d851cf23e8eee939b92fd5d1a1ea",
+      "safePath": "logs/pg457-timeout-verify-v1.log",
+      "qualified": false
+    },
+    {
+      "name": "pg457-timeout-verify-v2.log",
+      "exitCode": 1,
+      "rawPrivateSha256": "30c6684cb3b3995f1e947a9551361549b4530af013a1471c90f4a0df06f05d86",
+      "safePath": "logs/pg457-timeout-verify-v2.log",
+      "qualified": false
+    },
+    {
+      "name": "pg457-timeout-verify-v3.log",
+      "exitCode": 1,
+      "rawPrivateSha256": "1e621a0f7883d913ad4c6be5533f042e0035f2186cff04d226dc165b99353a79",
+      "safePath": "logs/pg457-timeout-verify-v3.log",
+      "qualified": false
+    },
+    {
+      "name": "pg457-timeout-verify-v4.log",
+      "exitCode": 1,
+      "rawPrivateSha256": "f2fb09786d4c45fae5bd481a77472ca831c2733cff33ae0c4da5380eb9e3cdfb",
+      "safePath": "logs/pg457-timeout-verify-v4.log",
+      "qualified": false
+    },
+    {
+      "name": "pg457-timeout-verify-v5.log",
+      "exitCode": 0,
+      "rawPrivateSha256": "c3b8be07ac55c7d9586aea13ba4b01cd9aefdc508b4ed1005871d25ac2ca7be6",
+      "safePath": "logs/pg457-timeout-verify-v5.log",
+      "qualified": false
+    },
+    {
+      "name": "pg457-timeout-verify-v6.log",
+      "exitCode": 0,
+      "rawPrivateSha256": "c3b8be07ac55c7d9586aea13ba4b01cd9aefdc508b4ed1005871d25ac2ca7be6",
+      "safePath": "logs/pg457-timeout-verify-v6.log",
+      "qualified": true
+    },
+    {
+      "name": "pg457-timeout-recover-v1.log",
+      "exitCode": 0,
+      "rawPrivateSha256": "ed6ecc97c2a4e3ce37e0aeadcec81fcbbc9414a4017115965eadf20dcecfc55e",
+      "safePath": "logs/pg457-timeout-recover-v1.log",
+      "qualified": true
+    }
+  ],
+  "toolOnlyAssertions": {
+    "isolation": 12,
+    "timeoutLatest": 197,
+    "productionPtCount": 0
+  },
+  "toolCompileLatestLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "toolIndependentLatestLogSha256": "dbcb52baee70adeda296c5a6a8081a89a372a977ac01176f216139eac58c995b",
+  "toolClassSha256": "0e0938a01f7b95c838cb9e7862fc681d713dc534e1881b1647d6e62d95a93b8d",
+  "bugs": [
+    "BUG-671",
+    "BUG-672",
+    "BUG-673",
+    "BUG-674",
+    "BUG-675",
+    "BUG-676",
+    "BUG-677"
+  ],
+  "ssc": [
+    "SSC-179",
+    "SSC-178"
+  ],
+  "qa": [
+    "QA-047"
+  ],
+  "testIds": [
+    "CADDY457001",
+    "CADDY457002",
+    "CADDY457003",
+    "ROOTPAIR179-001",
+    "ROOTPAIR179-002",
+    "TIMEOUT457-ENV",
+    "TIMEOUT457-PHASE",
+    "TIMEOUT457-NATIVE"
+  ],
+  "coverage": {
+    "qualified": false,
+    "reason": "selected run without clean; append exec may contain older source, never accepted for coverage100"
+  },
+  "limitations": [
+    "Formal run24/1964PT/53scope unchanged",
+    "Whole fresh six regression/new signed source/native Caddy/CHR/coverage100 pending",
+    "External Web Root was not captured; actual parent launch correlation is distinct",
+    "Source capture after selected completion, not invented pre-run all-source proof"
+  ],
+  "before": [
+    {
+      "run": "selected-v3",
+      "tests": 60,
+      "exitCode": 0,
+      "frozenPrivate": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg457-caddy-selected-v3-frozen",
+      "coverageQualified": false
+    },
+    {
+      "run": "selected-v4",
+      "exitCode": 1,
+      "batchTestsNotRun": true,
+      "reason": "new test fixture hook checked IOException compile failure"
+    },
+    {
+      "run": "selected-v5",
+      "exitCode": 1,
+      "tests": 86,
+      "failures": 1,
+      "reason": "old retirement-only fixture deliberately rejects current replacement; new publication fixture required"
+    }
+  ],
+  "redaction": "Exact selected XML properties/stdout/stderr removed; fixed operator flags/class frames only; private owner/permit/launch/credentials/session/data/dump not copied",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "c0c22c54436bbd8536eff53dd1f7e7fc5fe22bf6b976807a95dadfeede08517c",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "ac78384940345ea7e6573b83d1f39ea703231c3efd691090006cfee4e47eb16f",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "aecfea1145d2cd5e205f5c288387a2bb53e4ddd10f4c64c840740dd1739a1f08",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "1dbb3aac98d8e1f2e510cae53f26670ce20e7bf926dfb53854cc279f34b43eb4",
+    "junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml": "b45ca442a3d2b440602e28da8be558dbebdaa9da3b54d8acae25b0315028c6d0",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml": "c865b9c6083081c89018ffa6145d57a761289e8b824c194336521e730f127f91",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml": "a0d2c8d7f40aa135965da2bfb91a85e5ed98bc412b31daa601554a9ef81b42e3",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "94c6ef0c129c9f093f32fa380a0fa64d33ed4e5be6977383985d9632fa2a060d",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartPairRecoveryTest.xml": "6672fecfd6abec19fe02e5e2c77a05599be68df1bdd43d0cf1d15a9dea94bfb2",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml": "eb548862e1b31a531a8a711500a26394a244b23afc55fa9f35c8a65a8c5f65c4",
+    "logs/pg457-isolation-native-v1.log": "8028fbfe24cff890616e46a4961ce1da57462e5a20eecd3777ebf884535a0728",
+    "logs/pg457-timeout-verify-v1.log": "650a9e37cddb77e313b593c9bd00db4e79a4d851cf23e8eee939b92fd5d1a1ea",
+    "logs/pg457-timeout-verify-v2.log": "30c6684cb3b3995f1e947a9551361549b4530af013a1471c90f4a0df06f05d86",
+    "logs/pg457-timeout-verify-v3.log": "1e621a0f7883d913ad4c6be5533f042e0035f2186cff04d226dc165b99353a79",
+    "logs/pg457-timeout-verify-v4.log": "f2fb09786d4c45fae5bd481a77472ca831c2733cff33ae0c4da5380eb9e3cdfb",
+    "logs/pg457-timeout-verify-v5.log": "c3b8be07ac55c7d9586aea13ba4b01cd9aefdc508b4ed1005871d25ac2ca7be6",
+    "logs/pg457-timeout-verify-v6.log": "c3b8be07ac55c7d9586aea13ba4b01cd9aefdc508b4ed1005871d25ac2ca7be6",
+    "logs/pg457-timeout-recover-v1.log": "ed6ecc97c2a4e3ce37e0aeadcec81fcbbc9414a4017115965eadf20dcecfc55e"
+  }
+}

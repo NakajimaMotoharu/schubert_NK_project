@@ -758,5 +758,17 @@ if int(identifier[2:5]) >= 455:
     manifest['bugs'].extend(['BUG-661', 'BUG-662'])
     manifest['ykt'].append('YKT-467')
     manifest['trigger'] += '; PG455 typed same-original parent completion/live-ready intent/Caddy ownership; PG456 signed027/exact fixed Caddy BOM provisioning dependencies'
+if identifier == 'PG458-caddy-timeout-full':
+    manifest['trigger'] = 'PG457 Caddy normal-zero serialization/borrowed observation close and SSC179 linked same-epoch failed-pair quarantine: fresh source-frozen six-module regression before new signed PG458 code-only candidate'
+    manifest['testIds'].extend(['CADDY457001..003', 'ROOTPAIR179001..002'])
+    manifest['ssc'].append('SSC-179')
+    manifest['bugs'].extend(['BUG-671', 'BUG-672', 'BUG-673', 'BUG-674', 'BUG-675', 'BUG-676', 'BUG-677'])
+    manifest['ykt'].extend(f'YKT-{n}' for n in range(476, 483))
+    manifest['limitations'] = [
+        'Host fresh full regression only; native PG457 recovery used previous signed source559 and is not PG458 acceptance',
+        'Observed coverage misses remain required work; no exclusions, interrupted-run or other-source reuse',
+        'Same-source external parent/Caddy TLS/DONE/whole outer closure/CHR/native coverage100 pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

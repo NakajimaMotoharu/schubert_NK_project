@@ -104,6 +104,145 @@ final class RootFailedStartPairRecoveryTest {
   }
 
   @Test
+  void issuedPairWithoutPublicationUsesSameEpochRevokeThenQuarantineThenReverseRetirement()
+      throws Exception {
+    try (var f = new Fixture()) {
+      var pair = f.observe();
+      String issued =
+          "NKEPOCH1\nstate=ISSUED\n"
+              + StartupLaunchFilesTest.BIND
+              + "permit_sha256="
+              + f.f.sha
+              + "\n";
+      String invalid =
+          "NKEPOCH1\nstate=INVALID\n" + StartupLaunchFilesTest.BIND + "permit_sha256=-\n";
+      f.f.put("epoch.current", issued);
+      Files.delete(f.f.f.parent.resolve("permit-start.intent"));
+      var retained = new HashMap<String, byte[]>();
+      for (String name :
+          List.of(
+              f.f.epoch + ".permit",
+              f.f.epoch + ".owner",
+              f.f.epoch + ".API.launch",
+              f.f.epoch + ".WEB.launch"))
+        retained.put(name, Files.readAllBytes(f.f.f.parent.resolve(name)));
+      // The old retirement-only fixture deliberately forbids current replacement. This new
+      // publication fixture permits only canonical atomic current replacement, not recovery IO.
+      var publication =
+          new StartupPermitFiles.Io() {
+            public Map<String, Object> attributes(Path p) throws IOException {
+              return f.f.attributes(p);
+            }
+
+            public String filesystem(Path p) {
+              return f.f.filesystem(p);
+            }
+
+            public java.nio.channels.SeekableByteChannel open(Path p) throws IOException {
+              return f.f.open(p);
+            }
+
+            public InspectorEnvironmentPublisher.Writer openWriter(Path p) throws IOException {
+              return f.f.openWriter(p);
+            }
+
+            public java.security.MessageDigest digest()
+                throws java.security.NoSuchAlgorithmException {
+              return f.f.digest();
+            }
+
+            public void replace(Path directory, String part, String current) throws IOException {
+              assertEquals("epoch.current", current);
+              Files.move(
+                  directory.resolve(part),
+                  directory.resolve(current),
+                  StandardCopyOption.ATOMIC_MOVE,
+                  StandardCopyOption.REPLACE_EXISTING);
+            }
+          };
+      var permits = new StartupPermitFiles(f.f.f.root, f.f.f, publication, UUID::randomUUID);
+      assertEquals(pair.api().permit(), permits.readIssued());
+      assertThrows(IOException.class, f::observe); // ISSUED is not failed-Pair authority.
+      permits.revoke(pair.api().invalid(), pair.api().permit());
+      assertEquals(invalid, Files.readString(f.f.f.parent.resolve("epoch.current")));
+      assertFalse(Files.exists(f.f.f.parent.resolve("permit-start.intent")));
+      assertThrows(IOException.class, f::observe); // Publication quarantine is still required.
+      var publications = new ArrayList<String>();
+      f.f.f.hook =
+          (event, count) -> {
+            if (event.equals("sync")) {
+              assertEquals(
+                  "",
+                  assertDoesNotThrow(
+                      () -> Files.readString(f.f.f.parent.resolve("permit-start.intent"))));
+              for (String name : f.names())
+                assertEquals(
+                    "", assertDoesNotThrow(() -> Files.readString(f.f.f.parent.resolve(name))));
+              publications.add("publication-first");
+            }
+          };
+      f.quarantine(pair);
+      assertFalse(publications.isEmpty());
+      assertEquals(pair, f.observe());
+      var order = new ArrayList<String>();
+      f.f.f.hook =
+          (event, count) -> {
+            if (event.equals("sync"))
+              for (String name : f.names())
+                if (!Files.exists(f.f.f.parent.resolve(name)) && !order.contains(name))
+                  order.add(name);
+          };
+      f.retire(pair, expected -> assertEquals(pair, expected));
+      assertEquals(
+          List.of(
+              f.f.epoch + ".WEB.start.intent",
+              f.f.epoch + ".API.start.intent",
+              "permit-start.intent"),
+          order);
+      assertEquals(invalid, Files.readString(f.f.f.parent.resolve("epoch.current")));
+      for (var entry : retained.entrySet())
+        assertArrayEquals(
+            entry.getValue(), Files.readAllBytes(f.f.f.parent.resolve(entry.getKey())));
+      try (var paths = Files.list(f.f.f.parent)) {
+        assertEquals(
+            Set.of(
+                "epoch.current",
+                f.f.epoch + ".permit",
+                f.f.epoch + ".owner",
+                f.f.epoch + ".API.launch",
+                f.f.epoch + ".WEB.launch"),
+            paths
+                .map(p -> p.getFileName().toString())
+                .collect(java.util.stream.Collectors.toSet()));
+      }
+      assertThrows(IOException.class, permits::readIssued);
+    }
+  }
+
+  @Test
+  void sameEpochRevokeNeverRepairsForeignIssuedDigestOrCreatesPublication() throws Exception {
+    try (var f = new Fixture()) {
+      var pair = f.observe();
+      String foreign =
+          "NKEPOCH1\nstate=ISSUED\n"
+              + StartupLaunchFilesTest.BIND
+              + "permit_sha256="
+              + "9".repeat(64)
+              + "\n";
+      f.f.put("epoch.current", foreign);
+      Files.delete(f.f.f.parent.resolve("permit-start.intent"));
+      var permits = new StartupPermitFiles(f.f.f.root, f.f.f, f.f, UUID::randomUUID);
+      assertThrows(
+          IOException.class, () -> permits.revoke(pair.api().invalid(), pair.api().permit()));
+      assertEquals(foreign, Files.readString(f.f.f.parent.resolve("epoch.current")));
+      assertFalse(Files.exists(f.f.f.parent.resolve("permit-start.intent")));
+      for (String role : List.of("API", "WEB"))
+        assertEquals(
+            "", Files.readString(f.f.f.parent.resolve(f.f.epoch + "." + role + ".start.intent")));
+    }
+  }
+
+  @Test
   void eachMissingNonemptyAndSymlinkMarkerRefusesWithoutRetirement() throws Exception {
     for (int index = 0; index < 3; index++)
       for (String fault : List.of("missing", "nonempty", "symlink"))

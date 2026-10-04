@@ -1,0 +1,19 @@
+PG456 STAGE PINNED_SIGNATURE_VERIFIED
+PG456 STAGE FULL_CANDIDATE_BOM_VERIFIED
+PG457_RECOVERY_REFUSED stage=DB_BUSINESS type=org.postgresql.util.PSQLException secondaryCount=0 diagnosticsRedacted=true
+PG457_RECOVERY_FRAME Pg456SignedMigration.business:79
+PG457_RECOVERY_FRAME Pg457TimeoutPairRecovery.lambda$main$4:152
+PG457_RECOVERY_FRAME Pg457TimeoutPairRecovery.lambda$main$3:144
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.batch.file.StartupAdmissionFile.lambda$tryExclusive$0:73
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.batch.file.StartupAdmissionFile.lambda$tryExclusiveObserved$2:110
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.LinuxFileLock.lambda$acquireStartup$2:179
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.LinuxFileLock.locked:202
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.LinuxFileLock.lambda$acquireStartup$1:179
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.ResourceScope.use:30
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.LinuxFileLock.lambda$acquireStartup$0:175
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.ResourceScope.use:30
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.storage.LinuxFileLock.acquireStartup:169
+PG457_RECOVERY_REFUSED stage=DB_BUSINESS type=dev.codex.schubert.nk.storage.StorageIoException secondaryCount=0 diagnosticsRedacted=true
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.batch.file.MaintenanceFileLock.unavailable:212
+PG457_RECOVERY_FRAME dev.codex.schubert.nk.batch.file.MaintenanceFileLock.tryExclusive:111
+PG457_RECOVERY_FRAME Pg457TimeoutPairRecovery.main:142

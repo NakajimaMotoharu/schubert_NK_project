@@ -15,8 +15,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Trusted operator's borrowed startup capability only. Caller continuously holds M/A, dedicated
  * DB/advisory, complete original and signed old/candidate release proof, and independently proves
- * old normal30 receipts plus current whole-kernel termination. Observation is never authority or
- * historical close/run success. NK-OPS-001/OPS009/UI251/SS342/343/SSC144/PT-OPS-ROOTREC001..005.
+ * approved fixed actual termination receipts plus current whole-kernel termination. SSC168's old
+ * normal30/Web50 proof and SSC179's isolated timeout143/owned-stop143 proof are distinct; the
+ * latter requires same-epoch canonical revoke and publication-first quarantine before Pair
+ * retirement. Observation is never authority or historical close/run success.
+ * NK-OPS-001/OPS009/UI251/SS342/343/SSC144/168/179/PT-OPS-ROOTREC001..005.
  */
 @NullMarked
 public final class RootFailedStartRecovery {

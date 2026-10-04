@@ -19,7 +19,7 @@ final class BackupUnitStartClientTest {
 
   @Test
   void rootownerfd001CloseOnlyPreservesIntentAndCannotGrantRetirement() throws Exception {
-    for (var unit : List.of(MaintenanceUnit.API, MaintenanceUnit.WEB)) {
+    for (var unit : List.of(MaintenanceUnit.API, MaintenanceUnit.WEB, MaintenanceUnit.CADDY)) {
       var closes = new java.util.concurrent.atomic.AtomicInteger();
       var retires = new java.util.concurrent.atomic.AtomicInteger();
       var process = child();
@@ -53,6 +53,65 @@ final class BackupUnitStartClientTest {
           IOException.class, () -> attempt.retireAfter(() -> fail("close-only is not retirement")));
       assertEquals(1, closes.get());
       assertEquals(0, retires.get());
+      process.allClosed();
+    }
+  }
+
+  @Test
+  void caddy457001BorrowedFenceCloseVerifiesWithoutReleasingAnyServiceOwner() throws Exception {
+    var events = new ArrayList<String>();
+    var marker = BackupUnitStartClient.caddyFence(() -> events.add("same-live-API-WEB-fence"));
+    assertTrue(events.isEmpty());
+    marker.requireRetained();
+    marker.closeObservation();
+    marker.retire();
+    assertEquals(
+        List.of("same-live-API-WEB-fence", "same-live-API-WEB-fence", "same-live-API-WEB-fence"),
+        events);
+    assertThrows(NullPointerException.class, () -> BackupUnitStartClient.caddyFence(null));
+    for (Throwable failure :
+        List.of(
+            new IOException("fixed IO"),
+            new IllegalStateException("fixed unknown"),
+            new AssertionError("fixed fatal"))) {
+      var broken =
+          BackupUnitStartClient.caddyFence(
+              () -> {
+                if (failure instanceof IOException io) throw io;
+                if (failure instanceof RuntimeException unknown) throw unknown;
+                throw (Error) failure;
+              });
+      assertSame(failure, assertThrows(failure.getClass(), broken::requireRetained));
+      assertSame(failure, assertThrows(failure.getClass(), broken::closeObservation));
+      assertSame(failure, assertThrows(failure.getClass(), broken::retire));
+    }
+  }
+
+  @Test
+  void caddy457002WorkerRolesCannotCloseServiceObservation() throws Exception {
+    for (var unit : MaintenanceUnit.values()) {
+      if (List.of(MaintenanceUnit.API, MaintenanceUnit.WEB, MaintenanceUnit.CADDY).contains(unit))
+        continue;
+      var process = child();
+      var attempt =
+          new BackupUnitStartClient(
+                  () -> {},
+                  () -> {},
+                  command -> process,
+                  () ->
+                      new BackupUnitStartClient.MarkerLease() {
+                        public void retire() {
+                          fail("no retirement");
+                        }
+
+                        public void closeObservation() {
+                          fail("worker cannot use service close");
+                        }
+                      },
+                  unit,
+                  java.util.Optional.empty())
+              .start();
+      assertThrows(IOException.class, attempt::preserveObservation);
       process.allClosed();
     }
   }

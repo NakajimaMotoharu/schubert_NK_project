@@ -418,18 +418,31 @@ public final class BackupUnitStartClient {
         new MaintenanceUnitStopClient.NativeStart()::execute,
         () -> {
           fence.verify();
-          return new MarkerLease() {
-            public void retire() throws IOException {
-              fence.verify();
-            }
-
-            public void requireRetained() throws IOException {
-              fence.verify();
-            }
-          };
+          return caddyFence(fence);
         },
         MaintenanceUnit.CADDY,
         Optional.of(budget));
+  }
+
+  /**
+   * BUG673: no owned Caddy marker exists; only the live API/Web fence is borrowed. Close-only
+   * verifies that fence, never retires either service intent or releases an owner.
+   */
+  static MarkerLease caddyFence(RetirementGate fence) {
+    Objects.requireNonNull(fence, "same live service fence");
+    return new MarkerLease() {
+      public void retire() throws IOException {
+        fence.verify();
+      }
+
+      public void requireRetained() throws IOException {
+        fence.verify();
+      }
+
+      public void closeObservation() throws IOException {
+        fence.verify();
+      }
+    };
   }
 
   private static void interrupted() {
@@ -505,7 +518,9 @@ public final class BackupUnitStartClient {
 
     /** Close-only: marker stays durable, no receipt/retirement/unlock authority is granted. */
     public synchronized void preserveObservation() throws IOException {
-      if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
+      if ((unit != MaintenanceUnit.API
+              && unit != MaintenanceUnit.WEB
+              && unit != MaintenanceUnit.CADDY)
           || retired
           || retiring
           || retireUncertain) throw new IOException("service observation close unavailable");

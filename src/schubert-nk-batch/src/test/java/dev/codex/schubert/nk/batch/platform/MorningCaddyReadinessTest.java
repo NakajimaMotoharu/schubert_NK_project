@@ -105,6 +105,24 @@ final class MorningCaddyReadinessTest {
   }
 
   @Test
+  void caddy457003ActualSystemdValidateZeroAndOnlyNormalZeroVariantsAccepted() throws Exception {
+    for (String status : List.of("0", "0/0")) {
+      var m = values();
+      m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=" + status));
+      MorningCaddyReadiness.profile(m);
+      var f = new Fixture();
+      f.manager = m;
+      assertTrue(f.create().ready());
+    }
+    for (String status :
+        List.of("00", "1", "30", "0/1", "1/0", "0/00", "0/0/0", "0x0", "", "unexpected")) {
+      var m = values();
+      m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=" + status));
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m), status);
+    }
+  }
+
+  @Test
   void caddy455001TrueHttpsAndSameActorSocketOrder() throws Exception {
     var f = new Fixture();
     var observer = f.create();
