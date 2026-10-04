@@ -770,7 +770,7 @@ class UserAdminControllerTest {
                 .getResponse()
                 .getStatus());
       assertEquals(
-          405,
+          503,
           mvc.perform(post("/admin/users/42").principal(actor(UserRole.ADMIN)))
               .andReturn()
               .getResponse()

@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 
 /** SCR017/FUN009/AUT002003/UI225236/SS313314; PG-D353/PT-USER-CHANGE001..016. */
 @NullMarked
-public final class UserRoleForm implements AutoCloseable {
+public final class UserRoleForm implements UserChangeForm {
   private final UserMutationInput input;
 
   private UserRoleForm(UserMutationInput input) {

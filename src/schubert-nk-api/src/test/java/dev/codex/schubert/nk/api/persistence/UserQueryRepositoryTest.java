@@ -157,6 +157,53 @@ class UserQueryRepositoryTest {
   }
 
   @Test
+  void bizUserTime001SubMillisecondDatabaseTimesProjectWithoutChangingSqlValues() throws Exception {
+    seed(1);
+    sql(
+        "update schubert.app_users set password_changed_at='2026-09-08T00:01:00.123456Z',created_at='2026-09-08T00:00:59.999999Z',updated_at='2026-09-08T00:01:00.999999Z',last_login_at='2026-09-08T00:00:59.000001Z',locked_until='2026-09-08T00:02:00.000001Z' where id=1");
+    try (var c = read()) {
+      var detail =
+          QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(1)), NOW).orElseThrow();
+      byte[] expected = detailBytes(1, "u001", "USER", "LOCKED", 0, "SYSTEM", "SYSTEM");
+      put(expected, 89, "20260908090200000");
+      put(expected, 106, "20260908090059000");
+      put(expected, 123, "20260908090100123");
+      put(expected, 140, "20260908090059999");
+      put(expected, 157, "20260908090100999");
+      assertArrayEquals(expected, fixed(detail).copyData());
+      var list = QUERIES.search(c, ADMIN, request(null, null, null, 1), NOW);
+      assertEquals(1, list.records().size());
+      var record = assertInstanceOf(UserRecord.class, list.records().getFirst());
+      assertEquals(Optional.of(Instant.parse("2026-09-08T00:02:00Z")), record.lockedUntil());
+      assertEquals(Optional.of(Instant.parse("2026-09-08T00:00:59Z")), record.lastLogin());
+      assertEquals(Instant.parse("2026-09-08T00:00:59.999Z"), record.createdAt());
+      assertEquals(Instant.parse("2026-09-08T00:01:00.999Z"), record.updatedAt());
+    }
+    try (var c = database.api();
+        var s = c.createStatement();
+        var r =
+            s.executeQuery(
+                "select password_changed_at,created_at,updated_at,last_login_at,locked_until from schubert.app_users where id=1")) {
+      assertTrue(r.next());
+      assertEquals(
+          Instant.parse("2026-09-08T00:01:00.123456Z"),
+          r.getObject(1, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-08T00:00:59.999999Z"),
+          r.getObject(2, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-08T00:01:00.999999Z"),
+          r.getObject(3, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-08T00:00:59.000001Z"),
+          r.getObject(4, java.time.OffsetDateTime.class).toInstant());
+      assertEquals(
+          Instant.parse("2026-09-08T00:02:00.000001Z"),
+          r.getObject(5, java.time.OffsetDateTime.class).toInstant());
+    }
+  }
+
+  @Test
   void adm003DisabledAndLockBoundariesUseOneFixedInstant() throws Exception {
     seed(1);
     sql("update schubert.app_users set locked_until='2026-09-08T00:01:00Z'");

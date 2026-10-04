@@ -1,6 +1,30 @@
 # 082 NK-WEB-002 User業務接続実行結果
 
+## user-http-selected-v5 限定接続合格（14:31:42終了、全体/native未受入）
+
+source3c2466b41af997ca3534436bba055d86ad7d18f6＋PG-D366/367 dirty、actual0/242PT24suite/F/E/S0、protocol5/storage7/bootstrap10/API59/Web118/Batch43、SpotBugs6module0/NullAway-Werror成功。sourcefiles全一致、全6actualtargetをWorkPG379/pg452-user-http-selected-v5-frozenに捕捉済み。安全manifest `evidence/provisional/PG452-user-http-selected-v5/manifest.json` SHA256 `ced7cf1409c98cae70e611afeb53829e3974478f95ad22bb565d99865a2d3738`。log `e54f3bcd03a136000957d5529b80f9368b550ab47abc1552e2cfa211009340ab`、sourcefiles `7849c09e76f7c7b01822636c2e7f6ce766ba55b2f2951d349352b6920d1ea2c3`。実行前src/tools全byteのprivate archive SHA256 `cb6a8541c14b317f7a4ea35e862360328266693a0609b0d4299dfac1357a9844`（0600・Gitへ保存しない）。捕捉後の追加LOCKED解除再送method/collectorはこの成功sourceへ含めない。
+
+User接続13 executable classはline/method/class/branch全miss0（Controller B124/L295/M18/C1、API UserQueryRepository B52/L130/M18/C1、全counterはmanifest）。実HTTP same-coreログイン→新User作成→自己PASSWORD→302/login/Max-Age0/暗号local row0/業務auth revoke1、自己SECURITY監査1/架空SESSION_EXPIRED・追加LGO0。真正APIではversion0→詳細→STATUS1/同token保存再送1/別input409、ROLE2/両category監査各1、UNLOCK既解除0200同版2、他UserPASSWORD3を確認。100並行同tokenは全302/version1/Inbox再送99、送信thread local TX0/全future後global0。TIME001は五μsDB原値不変と独立ms固定wire、負/null/failure/capacity/unknown全観点を含む。hostのJMS transport fixtureでありArtemis/native/Web親ready/CHR/全体正式は未完了。
+
+### v4不合格を保全（14:21:54）
+
+actual1、Web118試行2F/E/S0、Batch/Web静的未実行。BIZ009真正HTTP自己終端は成功したが2監査集計期待は不合格、全合格へ流用0。実5byte WorkPG379/pg452-user-http-selected-v4-frozen、log `0b5bc3dc810e4e4d58f21f8cba2176c70e81125322844243f20b4460c465d340`。BUG644原仮説「過去監査混入」は初期化後も2で不成立、SS351§5は作成/STATUS/ROLEのACTIONとSECURITYを各1保存する。誤aggregate1 oracleを独立category別SQL各1/target/successへ訂正（Production監査・上位oracle不変更）、YKT456対象3SQL＋Role/Password/Unlockを確認しv5成功。fresh全体・修正commitまで未閉鎖。
+
+### user-http-selected-v3 不合格（14:14:27）
+
+actual1、API59（UserQueryRepository8含む）まで成功、Web115試行3F/0E/0S、Batch/Web static・coverage report未実行。全sourcefiles一致/実5byteWorkPG379/pg452-user-http-selected-v3-frozen、log SHA256 `e27f11f0a9fcc2921a8689ab967ff30e5930387d2994b2c62b7c1699ec0f3340`。BUG641は独立TIME001五μs原値/固定ms wire＋UserQueryRepository B52/L130/M18/C1全miss0、真正API BIZ010作成0/詳細0/更新1/同token再送1まで到達したが後続監査assertで停止。BIZ011100futureは302/実version1まで到達し送信thread local TX0の反例は解消したが監査成功count1期待/2実で停止（BUG644）。BIZ009は/login cookieへ到達、plain TOKENをDOMと誤読して空CSRF/Login403（BUG642未閉鎖）。部分到達をBIZ010/011全合格や3F補完へ使わず、BUG644/YKT456修正前登録後にfixture隔離/入口body契約を是正してv4へ進む。Production audit期待値/CSRF/DB原値・wirestrictは不変更。
+
+### user-http-selected-v2 中断ではなく不合格（14:02:53）
+
+actual1、protocol5/storage7/bootstrap10/API51成功、Web115試行0F/3E/0S、Batch/Web静的・coverage report未実行。sourcefiles全一致、実5target WorkPG379/pg452-user-http-selected-v2-frozen、private log SHA256 `0c26031e2aa8c7669e03db7780201d4b1941bdbaf13928e3332488b29f1cac5d`。BIZ010作成version0後UDTのsub-ms未投影（BUG641）、BIZ009menuMvcで未mappingの/fixture cookie不在（BUG642）、BIZ011他thread稼働を送信thread所有と誤判定（BUG643）。source3c246＋dirtyを保全して修正前台帳登録、失敗runへ後続成功を補完せず、未到達の全User往復/100/self-resetを合格へ加算0。
+
 PG-D366/SSC177/081・057、2026-10-04。token群と正規Version0の先行接続だけであり、全User HTTP/native/正式認定は未完了。
+
+## 同User HTTP先行観点・未受入（13:51終了）
+
+HEAD3c2466b41af997ca3534436bba055d86ad7d18f6＋User full3arg/画面/terminal及び新独立6PTのdirty source。`pg452_selected.sh user-http-selected-v1` exact23class（全6canary含む）はactual0/223PT23suite/F/E/S0/static6module0/compile null-Werror成功。内訳protocol5/storage7/bootstrap10/API51/Web107/Batch43。BIZ001/002/003/004/005/009の先行6methodは372/60/68/324/60 byte、実表示token数/容量、fresh競合UDT/同token、実MVC DOMの確認に限定する。
+
+source-files SHA256 `7159e37234b79973117ae05ef6440701e900ac88e0f5b24f01aad36a61fb985a`は全検査一致、log SHA256 `8c6fc2c6f3c5bb5387e7aa888e7984f1eb9b97f700938feba5fe7a8eab84b1db`、全6actualtargetはWorkPG379/pg452-user-http-selected-v1-frozenへ別保存済み。raw private log/電文/DBをGitへ混入しない。Controller残B30/L53/M1/C0、CreateView残B2/L4/M1/C0、ApiInvalid残B9/L2/M1/C0、BusinessConfig全4counter0であり、本先行選択を100%や全機能合格へ加算しない。次は同群の真正API create0/detail/update1/0200・実Security same-core HTTP/self UPW、100同token競合、全非成功/保存失敗/null/fatalを追加し、source固定選択を行う。全User機能受入/同群fresh全6/native/CHR/正式は未完了。
 
 ## 先行selected-v1
 

@@ -46,6 +46,7 @@ public final class WebRequestTrace {
           "/audio/{id}",
           "/audio/{id}/download",
           "/admin/users",
+          "/admin/users/new",
           "/admin/users/{id:[0-9]{1,12}}",
           "/questions",
           "/questions/new",

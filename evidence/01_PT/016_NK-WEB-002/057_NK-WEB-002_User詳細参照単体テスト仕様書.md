@@ -5,7 +5,7 @@
 | Test ID | 入力・操作/fixture | 独立期待値・観点 |
 |---|---|---|
 | PT-USER-DETAIL001 | ADMIN/UDT target42・0000/0200 | UI236 UDTREQ12 numericID/UDTRSP320の全byteを手作成、requested ID=returned ID、username/role/state/日時/actor/active count/versionの明示表示値 |
-| PT-USER-DETAIL002 | real MVC/Thymeleaf GET HEAD/特殊username・actor | User詳細title/common Menu/通知/Logout CSRF、全field escaped・password/token/contextなし、unknown numeric route404・POST未実装405/API0 |
+| PT-USER-DETAIL002 | real MVC/Thymeleaf GET HEAD/特殊username・actor | User詳細title/common Menu/通知/Logout CSRF、全field escaped・password/token/contextなし、unknown numeric route404。PG452/SSC177の同class業務POST追加後、旧2引数partial MVCはfull token依存なしで503/API0。旧read-only時点405結果は058へ歴史保全し本sourceへ流用しない。full構成の業務POSTは081/BIZを正とする |
 | PT-USER-DETAIL003 | USER/欠落・誤principal/ID0・13桁・非ASCII | USER403/ADMIN不存在404、API未送信、null境界拒否 |
 | PT-USER-DETAIL004 | 全result code/JMS/timeout/correlation・context・reserved異常 | WebResultMapper固定HTTP、0102既存session terminal、wire invalid503/元buffer0/pending0、予期しないErrorを正常扱いしない |
 | PT-USER-DETAIL005 | 応答target不一致/count3/欠落日時 | 正規payloadでも表示invariant違反503、wire mandatory破損503、要求値へ修復しない。version0を異常とした旧誤記はBUG639/YKT452によりSS331/N9正常へ是正し009で確認、過去結果は改変しない |

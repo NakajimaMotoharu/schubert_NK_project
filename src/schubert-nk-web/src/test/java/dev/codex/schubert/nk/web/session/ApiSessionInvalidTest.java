@@ -656,6 +656,71 @@ class ApiSessionInvalidTest {
   }
 
   // PG194: shared test-only security harness with explicit database ownership.
+  @Test
+  void biz007VerifiedSelfResetIsNotSyntheticSessionInvalid() throws Exception {
+    try (var h = new Harness()) {
+      var r = h.mock("POST", "/admin/users/1");
+      var p = actor("admin", UserRole.ADMIN);
+      setActor(p);
+      snapshot(r, p);
+      var session = new MockHttpSession();
+      r.setSession(session);
+      var response = new MockHttpServletResponse();
+      h.handler.handleVerifiedSelfReset(r, response);
+      assertTrue(session.isInvalid());
+      assertEquals(302, response.getStatus());
+      assertEquals("/login", response.getHeader("Location"));
+      cleared(r);
+      assertTrue(h.log.events.isEmpty());
+      assertThrows(
+          NullPointerException.class, () -> h.handler.handleVerifiedSelfReset(null, response));
+      assertThrows(NullPointerException.class, () -> h.handler.handleVerifiedSelfReset(r, null));
+      assertThrows(
+          IllegalStateException.class,
+          () -> h.handler.handleVerifiedSelfReset(new MockHttpServletRequest(), response));
+      final var absentActor = h.mock("POST", "/admin/users/1");
+      assertThrows(
+          SessionStoreException.class,
+          () -> h.handler.handleVerifiedSelfReset(absentActor, response));
+      setActor(p);
+      final var absentSession = h.mock("POST", "/admin/users/1");
+      assertThrows(
+          SessionStoreException.class,
+          () -> h.handler.handleVerifiedSelfReset(absentSession, response));
+      setActor(p);
+      final var foreign = h.mock("POST", "/admin/users/1");
+      foreign.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, new Object());
+      assertThrows(
+          SessionStoreException.class, () -> h.handler.handleVerifiedSelfReset(foreign, response));
+      setActor(p);
+      final var committedRequest = h.mock("POST", "/admin/users/1");
+      var committedSession = new MockHttpSession();
+      committedRequest.setSession(committedSession);
+      var committed = new MockHttpServletResponse();
+      committed.flushBuffer();
+      assertThrows(
+          IOException.class, () -> h.handler.handleVerifiedSelfReset(committedRequest, committed));
+      assertTrue(committedSession.isInvalid());
+      assertTrue(h.log.events.isEmpty());
+      var fatal = new AssertionError("private-self-terminal-fatal");
+      final var fatalRequest = h.mock("POST", "/admin/users/1");
+      fatalRequest.setSession(
+          new MockHttpSession() {
+            @Override
+            public void invalidate() {
+              throw fatal;
+            }
+          });
+      setActor(p);
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class,
+              () -> h.handler.handleVerifiedSelfReset(fatalRequest, response)));
+      assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+  }
+
   static final class Harness implements AutoCloseable {
     final Fixture f;
     final SpringEncryptedSessionRepository adapter;

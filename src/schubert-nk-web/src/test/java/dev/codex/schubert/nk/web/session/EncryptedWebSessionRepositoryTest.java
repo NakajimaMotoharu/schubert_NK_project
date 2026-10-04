@@ -748,6 +748,44 @@ class EncryptedWebSessionRepositoryTest {
     assertEquals(0, error.getSuppressed().length);
   }
 
+  @Test
+  void bizOwnership001FixtureDistinguishesSendingThreadFromOtherBorrowers() throws Exception {
+    try (var fixture = new Fixture();
+        var executor = Executors.newSingleThreadExecutor()) {
+      var opened = new CountDownLatch(1);
+      var release = new CountDownLatch(1);
+      var peer =
+          executor.submit(
+              () -> {
+                try (var connection = fixture.source.getConnection()) {
+                  assertFalse(connection.isClosed());
+                  assertEquals(1, fixture.threadLive.getOrDefault(Thread.currentThread(), 0));
+                  opened.countDown();
+                  assertTrue(release.await(10, TimeUnit.SECONDS));
+                }
+                assertEquals(0, fixture.threadLive.getOrDefault(Thread.currentThread(), 0));
+                return null;
+              });
+      try {
+        assertTrue(opened.await(10, TimeUnit.SECONDS));
+        assertEquals(1, fixture.live.get());
+        assertEquals(0, fixture.threadLive.getOrDefault(Thread.currentThread(), 0));
+        try (var connection = fixture.source.getConnection()) {
+          assertFalse(connection.isClosed());
+          assertEquals(2, fixture.live.get());
+          assertEquals(1, fixture.threadLive.getOrDefault(Thread.currentThread(), 0));
+        }
+        assertEquals(1, fixture.live.get());
+        assertEquals(0, fixture.threadLive.getOrDefault(Thread.currentThread(), 0));
+      } finally {
+        release.countDown();
+      }
+      peer.get(10, TimeUnit.SECONDS);
+      assertEquals(0, fixture.live.get());
+      assertTrue(fixture.threadLive.isEmpty());
+    }
+  }
+
   static final class Fixture implements AutoCloseable {
     private final WebLogDatabaseFixture database;
 
@@ -766,6 +804,7 @@ class EncryptedWebSessionRepositoryTest {
     final AtomicInteger live = new AtomicInteger(),
         commits = new AtomicInteger(),
         rollbacks = new AtomicInteger();
+    final ConcurrentMap<Thread, Integer> threadLive = new ConcurrentHashMap<>();
     volatile String failure = "", runtimeFailure = "";
     String nullColumn = "";
     Integer deleteCount, updateCount;
@@ -784,6 +823,7 @@ class EncryptedWebSessionRepositoryTest {
                   }
                   if (nullConnection) return null;
                   live.incrementAndGet();
+                  threadLive.merge(Thread.currentThread(), 1, Integer::sum);
                   return wrap(Connection.class, openDatabase(), "connection", "");
                 }));
     final EncryptedWebSessionRepository repository =
@@ -803,7 +843,16 @@ class EncryptedWebSessionRepositoryTest {
                 String name = kind + "." + method.getName();
                 if (name.equals("connection.commit")) commits.incrementAndGet();
                 if (name.equals("connection.rollback")) rollbacks.incrementAndGet();
-                if (name.equals("connection.close")) live.decrementAndGet();
+                if (name.equals("connection.close")) {
+                  live.decrementAndGet();
+                  threadLive.compute(
+                      Thread.currentThread(),
+                      (thread, count) -> {
+                        if (count == null)
+                          throw new AssertionError("unowned fixture connection close");
+                        return count == 1 ? null : count - 1;
+                      });
+                }
                 if (name.equals("connection.rollback") && rollbackFailure) {
                   rollbackHit = true;
                   throw new SQLException("private-rollback-marker");

@@ -1,15 +1,22 @@
 """Actual frozen atomic User token/Version selection; no full/native/formal acceptance."""
 import hashlib
 import json
+import sys
 from pathlib import Path
 import xml.etree.ElementTree as E
 
 root = Path('/home/mini/codex/project1/work/pgpt-foundation')
 work = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
-prefix = work / 'pg452-user-selected-v1'
-frozen = work / 'pg452-user-selected-v1-frozen'
-out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-selected-v1'
-source = '1034d60a329a4f1c0f4d7e20480408ce29e124db'
+assert sys.argv[1:] in ([], ['user-http-selected-v5'])
+http = bool(sys.argv[1:])
+tag = 'user-http-selected-v5' if http else 'user-selected-v1'
+prefix = work / ('pg452-' + tag)
+frozen = work / ('pg452-' + tag + '-frozen')
+out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / ('PG452-' + tag)
+source = '3c2466b41af997ca3534436bba055d86ad7d18f6' if http else '1034d60a329a4f1c0f4d7e20480408ce29e124db'
+names = {'SessionOperationTokenLifecycle', 'SessionOperationToken', 'UserDetailViewModel', 'UserAdminController'}
+if http:
+    names.update({'UserBusinessMvcConfiguration', 'UserCreateViewModel', 'UserCreateForm', 'UserStatusForm', 'UserRoleForm', 'PasswordResetForm', 'UserUnlockForm', 'ApiSessionInvalidHandler', 'UserQueryRepository'})
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert not out.exists() and prefix.with_suffix('.exit').read_text().strip() == '0'
 assert prefix.with_suffix('.source').read_text().strip() == source
@@ -17,7 +24,7 @@ log = prefix.with_suffix('.log').read_text()
 assert 'BUILD SUCCESS' in log and 'BUILD FAILURE' not in log and log.count('BugInstance size is 0') == 6
 assert 'do not match with execution data' not in log
 modules, coverage = {}, {}
-for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'), (5, 7, 10, 51, 101, 43), strict=True):
+for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'), (5, 7, 10, 59, 118, 43) if http else (5, 7, 10, 51, 101, 43), strict=True):
     reports = sorted((frozen / module / 'surefire-reports').glob('TEST-*.xml'))
     count = 0
     for report in reports:
@@ -39,10 +46,10 @@ for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', '
     assert not static.findall('BugInstance') and int(static.find('Errors').get('errors')) == 0
     for cls in E.parse(frozen / module / 'site/jacoco/jacoco.xml').findall('.//class'):
         name = cls.get('name').rsplit('/', 1)[-1]
-        if cls.findall('counter') and name in ('SessionOperationTokenLifecycle', 'SessionOperationToken', 'UserDetailViewModel', 'UserAdminController'):
+        if cls.findall('counter') and name in names:
             coverage[name] = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))} for c in cls.findall('counter')}
-assert len(coverage) == 4 and all(c['missed'] == 0 for value in coverage.values() for c in value.values())
-assert sum(m['tests'] for m in modules.values()) == 217 and sum(m['suites'] for m in modules.values()) == 22
+assert set(coverage) == names and all(c['missed'] == 0 for value in coverage.values() for c in value.values())
+assert sum(m['tests'] for m in modules.values()) == (242 if http else 217) and sum(m['suites'] for m in modules.values()) == (24 if http else 22)
 before = [{
     'id': 'PG452-user-before-v1', 'accepted': False, 'exitCode': 1,
     'executedTests': 174, 'failures': 1, 'errors': 2, 'skipped': 0,
@@ -71,6 +78,24 @@ manifest = {
 assert manifest['ssc'] == ['SSC-177'] and manifest['qa'] == ['QA-049']
 assert manifest['bugs'] == ['BUG-639', 'BUG-640'] and manifest['ykt'] == ['YKT-452', 'YKT-453']
 assert manifest['testIds'][:6] == ['TOKV209A', 'TOKV209B', 'TOKV209C', 'TOKV209D', 'TOKV209E', 'PT-USER-DETAIL009']
+if http:
+    manifest.update({
+        'id': 'PG452-' + tag, 'sourceHead': source,
+        'sourceDirty': 'PG-D366/367 full same-core User create/change/verified self-reset HTTP, API five-time millisecond projection and independent PT; source archive captured before this collector enhancement',
+        'tests': 242, 'suites': 24,
+        'command': 'bash WorkPG379/pg452_selected.sh user-http-selected-v5 ' + source + ' exact24Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
+        'sourceArchive': {'privatePath': str(work / ('pg452-' + tag + '-source.tar')), 'sha256': sha(work / ('pg452-' + tag + '-source.tar'))},
+        'expected': '081 PT-USER-BIZ001..012 and PT-ADM-TIME001: independent literal 372/60/68/324/60 requests, UDT320/USRMUT24 replies and DOM/SQL; token retention/completion/null/failure; real business API version0/first1/replay unchanged,100 same-token calls produce one change and99 Inbox replays, ACTION and SECURITY separately one audit for create/status/role, self-reset HTTP302/login and cookie/core/auth-session terminal; five microsecond DB values unchanged with fixed millisecond wire',
+        'actual': '242PT24suite/FES0/static6zero;13 executable classes all line/method/class/branch missed0; full same-core real HTTP self-reset and isolated real business API/SQL/100 replay assertions passed',
+        'bugs': [f'BUG-{n:03d}' for n in range(639, 645)],
+        'ykt': [f'YKT-{n:03d}' for n in range(452, 457)],
+        'limitations': ['Host HTTP/production business API/isolated PostgreSQL and independent JMS fixture; actual Artemis/native path and formal not accepted', 'Same-group fresh full regression and signed/native Web/Caddy/DONE/CHR/native coverage pending', 'Formal PT-WEB-20260925-24/1964PT/53scope unchanged'],
+    })
+    manifest['testIds'].extend([f'PT-USER-BIZ{n:03d}' for n in range(1, 13)] + ['PT-ADM-TIME001', 'BIZ011-TX ownership'])
+    for version, failures, errors in ((2, 0, 3), (3, 3, 0), (4, 2, 0)):
+        prior = work / f'pg452-user-http-selected-v{version}'
+        assert prior.with_suffix('.exit').read_text().strip() == '1'
+        manifest['before'].append({'id': f'PG452-user-http-selected-v{version}', 'accepted': False, 'exitCode': 1, 'failures': failures, 'errors': errors, 'skipped': 0, 'notRun': ['Batch', 'Web static/coverage'], 'logSha256': sha(prior.with_suffix('.log')), 'sourceFilesSha256': sha(prior.with_suffix('.source-files.sha256')), 'bytePreservation': str(work / f'pg452-user-http-selected-v{version}-frozen')})
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
-print(json.dumps({'tests': 217, 'coverageClasses': 4, 'manifestSha256': sha(out / 'manifest.json')}))
+print(json.dumps({'tests': manifest['tests'], 'coverageClasses': len(coverage), 'manifestSha256': sha(out / 'manifest.json')}))

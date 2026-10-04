@@ -246,7 +246,10 @@ public final class UserQueryRepository {
   private static Optional<Instant> optionalTime(ResultSet result, String column)
       throws SQLException {
     java.time.OffsetDateTime value = result.getObject(column, java.time.OffsetDateTime.class);
-    return value == null ? Optional.empty() : Optional.of(value.toInstant());
+    // BUG641/YKT454: DB comparisons retain microseconds; only this wire projection is millis.
+    return value == null
+        ? Optional.empty()
+        : Optional.of(value.toInstant().truncatedTo(java.time.temporal.ChronoUnit.MILLIS));
   }
 
   private static Instant requiredTime(ResultSet result, String column) throws SQLException {

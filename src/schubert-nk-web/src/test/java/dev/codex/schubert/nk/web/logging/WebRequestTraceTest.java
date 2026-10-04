@@ -47,6 +47,7 @@ final class WebRequestTraceTest {
           "/audio/{id}",
           "/audio/{id}/download",
           "/admin/users",
+          "/admin/users/new",
           "/admin/users/{id:[0-9]{1,12}}",
           "/questions",
           "/questions/new",
@@ -76,7 +77,7 @@ final class WebRequestTraceTest {
     }
     // UI224/236 SCR018/019: GET new, POST new and GET accepted are three mappings,
     // but the two /questions/new methods share one safe registered pattern.
-    assertEquals(32, annotations);
+    assertEquals(35, annotations);
     var mapped = new HashSet<>(ROUTES);
     mapped.removeAll(Set.of("/css/**", "/js/**"));
     assertEquals(mapped, actual);

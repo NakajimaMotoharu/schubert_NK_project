@@ -660,5 +660,31 @@ if int(identifier[2:5]) >= 451:
     assert set(content_test_ids).issubset(manifest['testIds'])
     manifest['trigger'] = 'PG-D365/SSC176: fixed Scenario detail/Animation watch/Music section four GET mappings, closed display templates, borrowed held FILE reader and REQUEST inventory, independent literal byte/DOM/SQL/security/null/NFC/boundary tests; fresh six-module feature acceptance'
     manifest['limitations'].append('Content read host acceptance only; User new/mutation and Notification cancellation/Question deletion plus full native graph remain pending; no native/full-ready/formal claim')
+if int(identifier[2:5]) >= 452:
+    user_names = {'UserAdminController', 'UserBusinessMvcConfiguration', 'UserCreateViewModel',
+                  'UserDetailViewModel', 'SessionOperationTokenLifecycle', 'SessionOperationToken',
+                  'UserCreateForm', 'UserStatusForm', 'UserRoleForm', 'PasswordResetForm',
+                  'UserUnlockForm', 'ApiSessionInvalidHandler', 'UserQueryRepository'}
+    user_coverage = {}
+    for module in ('api', 'web'):
+        for c in ET.parse(root / f'src/schubert-nk-{module}/target/site/jacoco/jacoco.xml').findall('.//class'):
+            name = c.get('name').rsplit('/', 1)[-1]
+            if c.findall('counter') and name in user_names:
+                assert name not in user_coverage
+                user_coverage[name] = {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))} for k in c.findall('counter')}
+    assert set(user_coverage) == user_names
+    assert all(k['missed'] == 0 for value in user_coverage.values() for k in value.values())
+    manifest['userBusinessCoverage'] = user_coverage
+    manifest['ssc'].append('SSC-177')
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in range(639, 645))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in range(452, 457))
+    manifest['testIds'].extend([f'PT-USER-BIZ{n:03d}' for n in range(1, 13)] + ['TOKV209A..E', 'PT-USER-DETAIL009', 'PT-ADM-TIME001', 'BIZ011-TX'])
+    manifest['trigger'] = 'PG-D366/367 SSC177: atomic same-core visible tokens, full User new/create/status/role/password/unlock HTTP, verified self-reset local terminal, millisecond-only User wire projection; fresh shared session/security/API six-module feature acceptance'
+    manifest['limitations'] = [
+        'Host actual HTTP/production business API/isolated PostgreSQL and independent JMS fixture only; actual Artemis/native Web not accepted',
+        'Notification cancellation/Question deletion, full native graph/management/same-owner A release and UNKNOWN callback retention remain pending',
+        'Signed native V027/Backup/ordinary parent/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no other-source/interrupted result reuse',
+    ]
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

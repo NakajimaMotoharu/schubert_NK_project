@@ -1,0 +1,633 @@
+{
+  "id": "PG452-user-http-selected-v5",
+  "sourceHead": "3c2466b41af997ca3534436bba055d86ad7d18f6",
+  "sourceDirty": "PG-D366/367 full same-core User create/change/verified self-reset HTTP, API five-time millisecond projection and independent PT; source archive captured before this collector enhancement",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T14:27:36+09:00",
+  "finishedAt": "2026-10-04T14:31:42+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg452_selected.sh user-http-selected-v5 3c2466b41af997ca3534436bba055d86ad7d18f6 exact24Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "testClasses": [
+    "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest",
+    "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest",
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+    "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+    "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+    "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest",
+    "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+    "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+    "dev.codex.schubert.nk.web.session.UserAdminControllerTest",
+    "dev.codex.schubert.nk.web.session.UserBusinessControllerTest",
+    "dev.codex.schubert.nk.web.session.WebSecurityChainTest"
+  ],
+  "exitCode": 0,
+  "tests": 242,
+  "suites": 24,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 59,
+      "suites": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 118,
+      "suites": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "UserQueryRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 595
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 52
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 130
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 44
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 18
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserAdminController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1266
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 124
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 295
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 81
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 18
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserBusinessMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserUnlockForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserRoleForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 69
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserStatusForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 69
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "PasswordResetForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 55
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 14
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserCreateForm": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 402
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 48
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 74
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserCreateViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 76
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "UserDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 202
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SessionOperationToken": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 74
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 17
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 7
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SessionOperationTokenLifecycle": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 400
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 38
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ApiSessionInvalidHandler": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 134
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 22
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 36
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 15
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "7849c09e76f7c7b01822636c2e7f6ce766ba55b2f2951d349352b6920d1ea2c3",
+  "sourceDiffSha256": "d7397bd8f6275706dac57d733be562dd77f2f9439b55750287e79edc40af0659",
+  "logSha256": "e54f3bcd03a136000957d5529b80f9368b550ab47abc1552e2cfa211009340ab",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-http-selected-v5-frozen",
+  "testIds": [
+    "TOKV209A",
+    "TOKV209B",
+    "TOKV209C",
+    "TOKV209D",
+    "TOKV209E",
+    "PT-USER-DETAIL009",
+    "TOKV207208 existing",
+    "PT-USER-DETAIL001..008 existing",
+    "PT-USER-BIZ001",
+    "PT-USER-BIZ002",
+    "PT-USER-BIZ003",
+    "PT-USER-BIZ004",
+    "PT-USER-BIZ005",
+    "PT-USER-BIZ006",
+    "PT-USER-BIZ007",
+    "PT-USER-BIZ008",
+    "PT-USER-BIZ009",
+    "PT-USER-BIZ010",
+    "PT-USER-BIZ011",
+    "PT-USER-BIZ012",
+    "PT-ADM-TIME001",
+    "BIZ011-TX ownership"
+  ],
+  "qa": [
+    "QA-049"
+  ],
+  "ssc": [
+    "SSC-177"
+  ],
+  "bugs": [
+    "BUG-639",
+    "BUG-640",
+    "BUG-641",
+    "BUG-642",
+    "BUG-643",
+    "BUG-644"
+  ],
+  "ykt": [
+    "YKT-452",
+    "YKT-453",
+    "YKT-454",
+    "YKT-455",
+    "YKT-456"
+  ],
+  "expected": "081 PT-USER-BIZ001..012 and PT-ADM-TIME001: independent literal 372/60/68/324/60 requests, UDT320/USRMUT24 replies and DOM/SQL; token retention/completion/null/failure; real business API version0/first1/replay unchanged,100 same-token calls produce one change and99 Inbox replays, ACTION and SECURITY separately one audit for create/status/role, self-reset HTTP302/login and cookie/core/auth-session terminal; five microsecond DB values unchanged with fixed millisecond wire",
+  "actual": "242PT24suite/FES0/static6zero;13 executable classes all line/method/class/branch missed0; full same-core real HTTP self-reset and isolated real business API/SQL/100 replay assertions passed",
+  "before": [
+    {
+      "id": "PG452-user-before-v1",
+      "accepted": false,
+      "exitCode": 1,
+      "executedTests": 174,
+      "failures": 1,
+      "errors": 2,
+      "skipped": 0,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "d3d59bec39be580b386df479263a54fc3bae29fde28a58ce8c475f55beb462b4",
+      "sourceFilesSha256": "f3d5ffdb751292018ed54c6c05a59e4356d2d33f3efffd7865f9313772e306a6",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-before-v1-frozen"
+    },
+    {
+      "id": "PG452-user-http-selected-v2",
+      "accepted": false,
+      "exitCode": 1,
+      "failures": 0,
+      "errors": 3,
+      "skipped": 0,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "0c26031e2aa8c7669e03db7780201d4b1941bdbaf13928e3332488b29f1cac5d",
+      "sourceFilesSha256": "eb3465ac6dabd4667385a2c0c98465fc44096c8ccc81d53b98882d811c3788ad",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-http-selected-v2-frozen"
+    },
+    {
+      "id": "PG452-user-http-selected-v3",
+      "accepted": false,
+      "exitCode": 1,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "e27f11f0a9fcc2921a8689ab967ff30e5930387d2994b2c62b7c1699ec0f3340",
+      "sourceFilesSha256": "09cd07e86d9988cf2fe50ae8e14408621df5e97ce4c26b42d82a047f44974e49",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-http-selected-v3-frozen"
+    },
+    {
+      "id": "PG452-user-http-selected-v4",
+      "accepted": false,
+      "exitCode": 1,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": [
+        "Batch",
+        "Web static/coverage"
+      ],
+      "logSha256": "0b5bc3dc810e4e4d58f21f8cba2176c70e81125322844243f20b4460c465d340",
+      "sourceFilesSha256": "f7f2192c6f8d930fce2dd8f6746410ff89c493457b25f28aa3cf110382ab8d5e",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-http-selected-v4-frozen"
+    }
+  ],
+  "redaction": "No JUnit properties/stdout/stderr, provider messages, raw logs, real credentials/cookie/context/token/key/dump",
+  "limitations": [
+    "Host HTTP/production business API/isolated PostgreSQL and independent JMS fixture; actual Artemis/native path and formal not accepted",
+    "Same-group fresh full regression and signed/native Web/Caddy/DONE/CHR/native coverage pending",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "sourceArchive": {
+    "privatePath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg452-user-http-selected-v5-source.tar",
+    "sha256": "cb6a8541c14b317f7a4ea35e862360328266693a0609b0d4299dfac1357a9844"
+  },
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml",
+      "sha256": "cc7bbfcbd380a2093774befba57213e6aa7cf9f2b90619741d2c3f772a5360d0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest.xml",
+      "sha256": "b36768e948249fd96822c9cedbb8d4763a619520ce0cce690166f0b0d8c462d6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest.xml",
+      "sha256": "e8bf9ad9312686393b7d265f9a3c3ebe0d57e37158bec40a16ac74ebe5cce430"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "f5baae2663c80fe793327bcc6c6ef281c237aa32207a989909c772f352f65c4a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "6ed1eeb38fb39ec9269980041ae71da7f978590831fb884e218de3286723ee17"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/api/TEST-dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest.xml",
+      "sha256": "f000a0d82c8cc4b2f123d5416d924b35e108900fc305dab2441745a5644c7c82"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "46c39a495a2cc292e4bd1f27523dc8a45ac678e2fbc230c3cb877e4c51a34ddd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "58abf95a36c93c57ab34e6e60d122671441f9ec08766852dfdc285055f1964eb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "ed3260b8ed2c4dcc8e1f22e22023b24dbe3f59cd682fe31e8e3b3b1e1797f741"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "95bc2b10518780f563963171fe00a35e5781a5f2d8c8f5ec79427b9af396c508"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "dd01696c362e1d1d795e8e909bd3b039b2cf7900525863da8b304f55038d076b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "eaa9587e52a16d4043a52dc078b588ebb74157aecdc543c367b0975ffdb7c8b0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "226b22de533e60b1a08892d1642104f7adda498f254a941caed1436728e6ca72"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.form.UserCreateFormTest.xml",
+      "sha256": "95290d6e9aaa0468b46fc501dbd0fc963e971eb931073b8db57cb87c1c617cd8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.form.UserMutationFormTest.xml",
+      "sha256": "51a89a4ef6c0882ce54daa7546f5b23eb06b789ff8c5806ee8a92c76884c9b21"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "06ad17e4b48038f2b58c827507b402fff40cd206648d205e43e30f6775c71320"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "dd93519e060ed42fd410c40faf4651b35c750988f654b0d52a704365fb8d550a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest.xml",
+      "sha256": "5ab133bbe20fe6b051bb286a8ae92ab5c1618f1cafbfbf30e914767abf94b67e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest.xml",
+      "sha256": "32ea50ebbeb9735bcbb6948c69d05f4c03c5757f845d3e0075c1e604fd42820e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test.xml",
+      "sha256": "cafeaecc2ccf2fc0863ac5eb2efd704a9427be091db5f0a6edb270aa3942d87e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "5be1152d5fbc79ab317dc4183a28122cbb5bfe2d633c0b315712e4d1602e9b5b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.UserAdminControllerTest.xml",
+      "sha256": "1a960bd209431aa3cae8d8dbb8a5929dee384679bd07f77af29e00e23c34451b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.UserBusinessControllerTest.xml",
+      "sha256": "93454103068dacdc0184195a4ddacba42cdbec7da33fa30595b0712537ead565"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG452-user-http-selected-v5/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "a470a8811482e63f9933cea4efb29fbd728ada4b9fdff47050fff4f689f62529"
+    }
+  ]
+}

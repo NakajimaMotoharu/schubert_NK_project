@@ -307,7 +307,36 @@ class EmbeddedWebSecurityTest {
                 ApiSessionInvalidHandler>
             mvcSetup)
         throws Exception {
+      this(
+          root,
+          secureRandom,
+          database,
+          provider,
+          menuMvc,
+          errorMvc,
+          mvcSetup,
+          (mvc, repository) -> {});
+    }
+
+    /** Independent full-MVC tests must borrow the exact core used by the security filter. */
+    Server(
+        Path root,
+        boolean secureRandom,
+        WebLogDatabaseFixture database,
+        Optional<MqAuthenticationProvider> provider,
+        boolean menuMvc,
+        boolean errorMvc,
+        java.util.function.BiConsumer<
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext,
+                ApiSessionInvalidHandler>
+            mvcSetup,
+        java.util.function.BiConsumer<
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext,
+                EncryptedWebSessionRepository>
+            coreSetup)
+        throws Exception {
       Objects.requireNonNull(mvcSetup);
+      Objects.requireNonNull(coreSetup);
       assertFalse(errorMvc && !menuMvc);
       f = new Fixture(Objects.requireNonNull(database));
       f.clock.value = Instant.now();
@@ -488,6 +517,7 @@ class EmbeddedWebSecurityTest {
         var mvc =
             new org.springframework.web.context.support.AnnotationConfigWebApplicationContext();
         mvc.register(dev.codex.schubert.nk.web.config.WebMvcConfiguration.class);
+        coreSetup.accept(mvc, repository);
         mvcSetup.accept(mvc, new ApiSessionInvalidHandler(adapter, audit));
         var dispatcher = new org.springframework.web.servlet.DispatcherServlet(mvc);
         var wrapper = Tomcat.addServlet(context, "mvc", dispatcher);

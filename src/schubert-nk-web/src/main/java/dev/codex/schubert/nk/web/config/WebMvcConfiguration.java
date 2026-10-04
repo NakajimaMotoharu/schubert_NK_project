@@ -89,6 +89,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
           "music-list",
           "logs",
           "admin/user-list",
+          "admin/user-new",
           "admin/user-detail",
           "notifications/list",
           "notifications/detail",
