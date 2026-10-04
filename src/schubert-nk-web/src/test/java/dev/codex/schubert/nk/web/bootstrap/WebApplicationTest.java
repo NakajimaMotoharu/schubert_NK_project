@@ -137,6 +137,72 @@ final class WebApplicationTest {
   }
 
   @Test
+  void nativeCore003LegacyEntriesStillUseActualEncryptedSecurityChain() throws Exception {
+    // BUG661: literal HTTP/SQL expectations cover the legacy delegates, not a coverage-only call.
+    var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("legacy-pg")));
+    var broker = startBroker(Files.createDirectory(root.resolve("legacy-broker")));
+    try (var factory = new ActiveMQConnectionFactory("vm://0");
+        var codec = codec();
+        var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
+      var app =
+          application(
+              source(database::web),
+              () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
+              codec);
+      var supplied = new AtomicReference<SpringEncryptedSessionRepository>();
+      for (int entry = 0; entry < 2; entry++) {
+        try (var server =
+            entry == 0
+                ? app.start(root, 0)
+                : app.startWithSessionDependencies(
+                    root,
+                    0,
+                    sessions -> {
+                      assertNull(supplied.get());
+                      supplied.set(sessions);
+                      return Map.of();
+                    })) {
+          var uri = URI.create("http://127.0.0.1:" + server.port() + "/login");
+          var page =
+              client.send(
+                  HttpRequest.newBuilder(uri)
+                      .header("X-Forwarded-For", "203.0.113.1")
+                      .header("X-Forwarded-Proto", "https")
+                      .build(),
+                  HttpResponse.BodyHandlers.ofString());
+          assertEquals(200, page.statusCode());
+          var html = Jsoup.parse(page.body());
+          assertEquals("schubert NK - ログイン", html.title());
+          assertFalse(html.select("input[name=_csrf]").isEmpty());
+          assertTrue(
+              page.headers()
+                  .firstValue("Set-Cookie")
+                  .orElse("")
+                  .startsWith("SCHUBERT_NK_SESSION="));
+          try (var connection = database.web();
+              var statement = connection.createStatement();
+              var rows =
+                  statement.executeQuery(
+                      "select count(*) from schubert_web_session.web_http_sessions")) {
+            assertTrue(rows.next());
+            assertEquals(entry + 1L, rows.getLong(1));
+            assertFalse(rows.next());
+          }
+          assertEquals(
+              403,
+              client
+                  .send(HttpRequest.newBuilder(uri).build(), HttpResponse.BodyHandlers.ofString())
+                  .statusCode());
+        }
+      }
+      assertNotNull(supplied.get());
+    } finally {
+      broker.stop();
+      database.stop();
+    }
+  }
+
+  @Test
   void scr119NullAndInvalidInputStopsBeforeDependencyProbe() throws Exception {
     try (var codec = codec()) {
       DataSource db = source(() -> connection(true));

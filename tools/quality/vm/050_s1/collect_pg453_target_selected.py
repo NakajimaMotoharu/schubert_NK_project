@@ -8,14 +8,17 @@ import xml.etree.ElementTree as E
 root = Path('/home/mini/codex/project1/work/pgpt-foundation')
 work = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 tag = 'target-selected-v4'
-assert sys.argv[1:] in ([], ['PG454'], ['PG454_NATIVE'])
-native_group = sys.argv[1:] == ['PG454_NATIVE']
+assert sys.argv[1:] in ([], ['PG454'], ['PG454_NATIVE'], ['PG454_LEGACY'])
+legacy = sys.argv[1:] == ['PG454_LEGACY']
+native_group = sys.argv[1:] in (['PG454_NATIVE'], ['PG454_LEGACY'])
 graph = bool(sys.argv[1:])
 run = 'PG454' if graph else 'PG453'
 if graph:
     tag = 'graph-selected-v8'
 if native_group:
     tag = 'native-selected-v4'
+if legacy:
+    tag = 'legacy-selected-v1'
 prefix = work / (run.lower() + '-' + tag)
 frozen = work / (prefix.name + '-frozen')
 out = root / 'evidence/01_PT/016_NK-WEB-002/evidence/provisional' / (run + '-' + tag)
@@ -37,6 +40,10 @@ if native_group:
               'MediaRangeService', 'WebNativeRuntime'}
     counts = (5, 7, 25, 33, 95, 8)
     total, suites = 173, 26
+if legacy:
+    source = 'f772f26e0b7a75d885b3147d99ce5edfa611db0f'
+    counts = (5, 7, 25, 33, 96, 8)
+    total, suites = 174, 26
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert not out.exists() and prefix.with_suffix('.exit').read_text().strip() == '0'
 assert prefix.with_suffix('.source').read_text().strip() == source
@@ -75,6 +82,8 @@ for module, expected in zip(('protocol', 'storage', 'bootstrap', 'api', 'web', '
 assert set(coverage) == names
 incomplete = {'WebApplication', 'WebBusinessAssembly', 'WebNativeRuntime',
               'WebProcessLifetime', 'WebBrokerContexts'} if native_group else set()
+if legacy:
+    incomplete -= {'WebApplication', 'WebBusinessAssembly'}
 assert all(c['missed'] == 0 for n,v in coverage.items() if n not in incomplete for c in v.values())
 assert sum(m['tests'] for m in modules.values()) == total and len(cases) == suites
 before = []
@@ -148,6 +157,20 @@ if native_group:
                         'WebApplication old delegates L3/M2 and Assembly default constructor L1 remain for fresh full; Broker native L4/M2, Lifetime shutdown/retain and NativeRuntime graph require actual native proof',
                         'Collector profile added after byte/source capture; grouped full must include it',
                         'Legacy partial runtime remains under BUG629/YKT446/460 until native scope/non-applicability and independent recurrence proof',
+                        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
+    })
+if legacy:
+    manifest.update({
+        'sourceDirty': 'BUG661 legacy positive HTTP/SQL test; Production source unchanged from f772f26e0. Collector profile final metadata updated after actual source/hash/byte capture, not a new tested production version',
+        'command': 'bash WorkPG379/pg454_selected.sh legacy-selected-v1 ' + source + ' exact26Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report',
+        'bugs': [f'BUG-{n}' for n in range(648, 662)],
+        'testIds': ['NATIVE-CORE003', 'NATIVE-CORE/GRAPH/READY/STOP/OWNER/BUDGET/CONFIG/LIFE/OUTER', 'existing API/SQL/JMS/media regression'],
+        'expected': 'Legacy start and Function entry use actual secured login/CSRF/encrypted session SQL and direct request403; all fourteen required component classes every counter missed0',
+        'actual': '174PT26suite/FES0/static6zero; fourteen listed component classes every counter missed0. NativeRuntime/ordinary main/admission not accepted',
+        'limitations': ['Selected components only; previous full3221 sourcef772 lacks these test paths and was rejected by required coverage gate',
+                        'Broker native/Lifetime shutdown-retain/NativeRuntime require actual native proof',
+                        'Same S3 parent completion contract group must run fresh full before ordinary candidate/native acceptance',
+                        'Legacy partial runtime BUG629/YKT446/460 remains open',
                         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope unchanged'],
     })
 manifest['files'] = [{'path': str(p.relative_to(root)), 'sha256': sha(p)} for p in sorted(out.rglob('*')) if p.is_file()]
