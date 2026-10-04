@@ -141,6 +141,7 @@ final class MorningStartupLaunchOwner {
                 }
               };
           live.verify();
+          String previousCaddy = MorningCaddyReadiness.coldInvocation(root, morning);
           long caddyDeadline =
               Math.min(
                   budget.deadlineNanos(),
@@ -153,7 +154,8 @@ final class MorningStartupLaunchOwner {
                       budget,
                       started.get(0).attempt(),
                       started.get(1).attempt(),
-                      live)
+                      live,
+                      previousCaddy)
                   .start();
           if (attempt.status() != BackupUnitStartClient.Status.CLIENT_EXITED_ZERO) retain();
           MorningCaddyReadiness proxy;
@@ -162,7 +164,7 @@ final class MorningStartupLaunchOwner {
               live.verify();
               require(System.nanoTime() < caddyDeadline);
               try {
-                proxy = MorningCaddyReadiness.create(root, morning, budget);
+                proxy = MorningCaddyReadiness.create(root, morning, budget, previousCaddy);
                 if (proxy.ready()) {
                   require(System.nanoTime() < caddyDeadline);
                   break;

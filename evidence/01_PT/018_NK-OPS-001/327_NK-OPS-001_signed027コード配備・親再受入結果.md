@@ -1,4 +1,6 @@
-# NK-OPS-001：PG458実行結果（継続中）
+# NK-OPS-001：PG458実行結果（親拒否30、未受入）
+
+01:30追記：親は00:53:30にnormal known failure30で終了、observer16833 actual0。新API/WebのRoot/ordinary同peer・HTTP200UP/info5/socket/identityは限定確認できたが、Caddy start前のcold Invocation空条件（BUG680/SSC180/YKT485）で拒否された。Caddy/TLS/DONE/whole/CHRは未受入、Artemisは稼働中。下表の「実行中」は発行直後履歴、現在値は456先頭を正とする。別Sourceの成功や途中観測を全体合格に加算しない。
 
 326仕様に対応。正式認定・IT/ST合格ではない。Production source=`ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a`、code-only工具は後続dirty成果として別hashを保持。安全manifestは018/`evidence/provisional/PG458-caddy-timeout-full/manifest.json` SHA9357f776614877674b9ac64e7791bdd385b8befbe35598ff04233e0ce77db8fdと`PG458-code-only-v1/manifest.json` SHAdceb38b290b6e008ec47c0166465853f4f9c83a68980ad611fcae9af7f885abc。
 

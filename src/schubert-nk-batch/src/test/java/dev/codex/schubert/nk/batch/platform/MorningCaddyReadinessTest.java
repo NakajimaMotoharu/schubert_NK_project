@@ -45,6 +45,11 @@ final class MorningCaddyReadinessTest {
         SupplementaryGroups=
         TimeoutStartUSec=30s
         TimeoutStopUSec=30s
+        Result=success
+        ExecMainCode=0
+        ExecMainStatus=0
+        ExecMainStartTimestampMonotonic=1000000
+        ExecMainExitTimestampMonotonic=0
         ExecStartPre={ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[Sun 2026-10-04 19:00:00 JST] ; stop_time=[Sun 2026-10-04 19:00:01 JST] ; pid=42 ; code=exited ; status=0/0 }
         ExecStart={ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[Sun 2026-10-04 19:00:02 JST] ; stop_time=[n/a] ; pid=43 ; code=(null) ; status=0/0 }
         """;
@@ -55,6 +60,168 @@ final class MorningCaddyReadinessTest {
               m.put(line.substring(0, i), line.substring(i + 1));
             });
     return m;
+  }
+
+  static Map<String, String> normalHistory() {
+    var m = values();
+    m.put("ActiveState", "inactive");
+    m.put("SubState", "dead");
+    m.put("MainPID", "0");
+    m.put("ExecMainCode", "1");
+    m.put("ExecMainExitTimestampMonotonic", "2000000");
+    m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=0"));
+    m.put(
+        "ExecStart",
+        m.get("ExecStart")
+            .replace("stop_time=[n/a]", "stop_time=[Sun 2026-10-04 19:01:00 JST]")
+            .replace("code=(null)", "code=exited")
+            .replace("status=0/0", "status=0"));
+    return m;
+  }
+
+  static Map<String, String> noHistory() {
+    var m = normalHistory();
+    m.put("InvocationID", "");
+    m.put("ExecMainCode", "0");
+    m.put("ExecMainStartTimestampMonotonic", "0");
+    m.put("ExecMainExitTimestampMonotonic", "0");
+    m.put(
+        "ExecStartPre",
+        "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }");
+    m.put(
+        "ExecStart",
+        "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }");
+    return m;
+  }
+
+  @Test
+  void caddy180001ColdIsInitialOrNormalHistoryNotInvocationEmptyOnly() throws Exception {
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(normalHistory()));
+    assertEquals("", MorningCaddyReadiness.cold(noHistory()));
+    var legacy = normalHistory();
+    legacy.replaceAll(
+        (key, value) ->
+            key.startsWith("ExecStart") ? value.replace("status=0 }", "status=0/0 }") : value);
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(legacy));
+    var bound = normalHistory();
+    bound.put("ExecMainStartTimestampMonotonic", "18446744073709551615");
+    bound.put("ExecMainExitTimestampMonotonic", "18446744073709551615");
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(bound));
+    var min = normalHistory();
+    min.put("ExecStart", min.get("ExecStart").replace("pid=43", "pid=2"));
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(min));
+    var max = normalHistory();
+    max.put("ExecStart", max.get("ExecStart").replace("pid=43", "pid=2147483647"));
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(max));
+  }
+
+  @Test
+  void caddy180002ColdRejectsAbnormalContradictoryUnknownAndMalformedHistory() {
+    for (var change :
+        Map.ofEntries(
+                Map.entry("ActiveState", "active"),
+                Map.entry("SubState", "running"),
+                Map.entry("MainPID", "43"),
+                Map.entry("Job", "123"),
+                Map.entry("Result", "timeout"),
+                Map.entry("ExecMainCode", "0"),
+                Map.entry("ExecMainStatus", "143"),
+                Map.entry("ExecMainStartTimestampMonotonic", "0"),
+                Map.entry("ExecMainExitTimestampMonotonic", "999999"),
+                Map.entry("InvocationID", "0".repeat(32)))
+            .entrySet()) {
+      var m = normalHistory();
+      m.put(change.getKey(), change.getValue());
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), change.getKey());
+    }
+    for (String field :
+        List.of("ExecMainStartTimestampMonotonic", "ExecMainExitTimestampMonotonic"))
+      for (String bad :
+          List.of("-1", "01", "", "18446744073709551616", "184467440737095516150", "x")) {
+        var m = normalHistory();
+        m.put(field, bad);
+        assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m));
+      }
+    for (String key : List.of("ExecStartPre", "ExecStart"))
+      for (String bad :
+          List.of(
+              "status=1",
+              "code=killed",
+              "pid=1",
+              "pid=2147483648",
+              "stop_time=[n/a]",
+              "start_time=[n/a]")) {
+        var m = normalHistory();
+        String old = m.get(key);
+        String replaced =
+            bad.startsWith("pid=")
+                ? old.replace(key.equals("ExecStartPre") ? "pid=42" : "pid=43", bad)
+                : bad.startsWith("start_time")
+                    ? old.replace(
+                        key.equals("ExecStartPre")
+                            ? "start_time=[Sun 2026-10-04 19:00:00 JST]"
+                            : "start_time=[Sun 2026-10-04 19:00:02 JST]",
+                        bad)
+                    : bad.startsWith("stop_time")
+                        ? old.replace(
+                            key.equals("ExecStartPre")
+                                ? "stop_time=[Sun 2026-10-04 19:00:01 JST]"
+                                : "stop_time=[Sun 2026-10-04 19:01:00 JST]",
+                            bad)
+                        : old.replace(bad.startsWith("status") ? "status=0" : "code=exited", bad);
+        m.put(key, replaced);
+        assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), key + bad);
+      }
+    for (String key :
+        List.of(
+            "ExecMainCode",
+            "ExecMainStartTimestampMonotonic",
+            "ExecMainExitTimestampMonotonic",
+            "ExecStartPre",
+            "ExecStart")) {
+      var m = noHistory();
+      m.put(key, normalHistory().get(key));
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), key);
+    }
+    var missing = normalHistory();
+    missing.remove("Result");
+    assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(missing));
+    var nullable = normalHistory();
+    nullable.put("ExecMainStartTimestampMonotonic", null);
+    assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(nullable));
+  }
+
+  @Test
+  void caddy180003NewReadyCannotReusePriorColdGeneration() throws Exception {
+    var f = new Fixture();
+    var fresh = new MorningCaddyReadiness(() -> {}, f, "88888888888888888888888888888888");
+    assertTrue(fresh.ready());
+    assertThrows(
+        IOException.class,
+        () ->
+            new MorningCaddyReadiness(() -> {}, new Fixture(), "77777777777777777777777777777777"));
+    for (String malformed : List.of("0".repeat(32), "x", "8".repeat(31), "8".repeat(33)))
+      assertThrows(
+          IOException.class, () -> new MorningCaddyReadiness(() -> {}, new Fixture(), malformed));
+    assertThrows(
+        NullPointerException.class, () -> new MorningCaddyReadiness(() -> {}, new Fixture(), null));
+    for (var change :
+        Map.of(
+                "Result",
+                "exit-code",
+                "ExecMainCode",
+                "1",
+                "ExecMainStatus",
+                "10",
+                "ExecMainStartTimestampMonotonic",
+                "0",
+                "ExecMainExitTimestampMonotonic",
+                "1")
+            .entrySet()) {
+      var mutated = new Fixture();
+      mutated.manager.put(change.getKey(), change.getValue());
+      assertThrows(IOException.class, () -> mutated.create(), change.getKey());
+    }
   }
 
   static final class Fixture implements MorningCaddyReadiness.Io {

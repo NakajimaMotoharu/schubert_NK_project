@@ -1,0 +1,131 @@
+{
+  "id": "PG459-caddy-cold-selected-v2",
+  "collectedAt": "2026-10-04T16:53:51.753369+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "d67e71273aafbf556409c62a896316ffc23a8b6e",
+  "sourceDirtyAtCollection": true,
+  "sourceFilesSha256": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java": "52be91abba3b4dedc546ce661de26d8f4ded6fee98bc129ce477c9f815e8ced4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java": "f7a08da91e4357f251936751a65cf199c2d91beacf5c832c36787f2205c70ee7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": "4ae83def13ededc746874249e29e7670dbe6d6a57a7eafea10ae764ad431361d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java": "7f8d9514d6eb9a799f2908bdd1792b9ea14ec00eac2377fabc189b1a1ba7484f"
+  },
+  "formal": false,
+  "hostExitCode": 0,
+  "tests": 89,
+  "suites": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "212d34bf04f05eacfe2f9b06c268d50afc7fdcc5bfa0c8a19af1a27228a88324"
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "905115c2a74407b41b365231ce379034a2c7c00eb1de0dcb30ee29f50a93b4c4"
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "3744fcb12e85c57db6646bab6f2dfdd30342dec3634ce751fc0bf3e5c18d6369"
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "be663fb43acb025df891f033cdbd627a2c65ad2904cae7b0ce93540ced42ffb3"
+    },
+    "web": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "44f78fc1947c3157b51fea76003bf1219497e397c6637ec45fc0f0bd88087b4b"
+    },
+    "batch": {
+      "tests": 54,
+      "suites": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0,
+      "privateTargetInventorySha256": "70d27cdc3de3f0798b959ef5f32361e87f7fde13819e3f5f428871c51f83ede3"
+    }
+  },
+  "hostLogSha256": "180c4ce6669d908d09c22ea32f0127aea0604ee3baa63be8ece08a734ccb6a59",
+  "privateLog": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg459-selected-v2.log",
+  "java": "25.0.4",
+  "maven": "3.9.12",
+  "node": "24.19.0",
+  "spotbugs": "4.10.4",
+  "jacoco": "0.8.15",
+  "nullAwayCompile": "PASS",
+  "command": "six reactor spotless:apply test-compile jar:test-jar test exact10classes spotbugs:check jacoco:report (pg459-selected-v2.log)",
+  "testIds": [
+    "CADDY180001",
+    "CADDY180002",
+    "CADDY180003"
+  ],
+  "expected": "Independent literal initial/normal-history receipt fields; U64/PID limits; malformed/null/unknown/abnormal rejection; prior/new Invocation inequality; existing ownership regression",
+  "actual": "All exact89 testcases PASS, no F/E/S; static6 zero",
+  "bugs": [
+    "BUG-680"
+  ],
+  "ykt": [
+    "YKT-485"
+  ],
+  "ssc": [
+    "SSC-180"
+  ],
+  "coverage": {
+    "qualified": false,
+    "reason": "Selected no-clean run, JaCoCo append may include older exec. Whole native methods remain unexecuted; no coverage100 claim"
+  },
+  "priorFailure": {
+    "run": "selected-v1",
+    "exitCode": 1,
+    "batchTestsNotRun": true,
+    "cause": "New mandatory regex group required explicit nonnull contract; static suppression not used",
+    "privateLogSha256": "8a6d43ab58fdea57003915bbe6a0e7556353a0e50d6d99d67aab992f123d16a1"
+  },
+  "limitations": [
+    "Source hash collected after selected run, not fabricated pre-run all-source proof",
+    "Native Production is separate ea1/sourcePG458; no result combined into host formal acceptance",
+    "Execution global start timestamp not captured; exact per-suite XML timestamps retained; collection is not execution time",
+    "Formal run24/1964PT/53scope unchanged"
+  ],
+  "redaction": "JUnit properties/stdout/stderr removed. No credentials/session/token/password/private original/dump/key included.",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "f7fe0839c5577517fffca911d30b6841ff0ce96a45aa8abc0ec36625685fbaff",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "d47dcbfa0167e5f89dd9b0e716fd1a693fd65a14da334d78f3d2575a19d908d1",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "84e237758532f7247cfeda35d8165e38ed752937a6fa163257d76e7ad2ec51ba",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "df60a8e73cbb9735f6a7d5e15dceff56a4c865defe8b1e326489ddf0cfe5908f",
+    "junit/web/TEST-dev.codex.schubert.nk.web.view.PageViewModelTest.xml": "e1576351dcf043b994b643424dbf7fba478c6fff46d2074129f45d5db3ecfe7a",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml": "e5d0e9d63f773f43261f567096e1e2b1ee1f4e0254edb90947c60b6e89446fcf",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml": "5f5a87b228cb6b09ab491b345c4a5169e252b97f669a8a99ef3b210b2bb3ba69",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "94c6ef0c129c9f093f32fa380a0fa64d33ed4e5be6977383985d9632fa2a060d",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.RootFailedStartPairRecoveryTest.xml": "495892e388fcd02b61d636321d31bc157e4e333d9542378e6a96e286dae6c77c",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.StartupPermitFilesTest.xml": "b64091c71232e6346c0272f73c816ded3d1ca4743656003084c737b2966d6789"
+  }
+}

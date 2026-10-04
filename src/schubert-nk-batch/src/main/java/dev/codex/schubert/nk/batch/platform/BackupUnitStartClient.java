@@ -390,6 +390,32 @@ public final class BackupUnitStartClient {
     Objects.requireNonNull(api);
     Objects.requireNonNull(web);
     Objects.requireNonNull(parent);
+    return createCaddy(
+        root,
+        morning,
+        budget,
+        api,
+        web,
+        parent,
+        MorningCaddyReadiness.coldInvocation(root, morning));
+  }
+
+  public static BackupUnitStartClient createCaddy(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      Attempt api,
+      Attempt web,
+      RetirementGate parent,
+      String previousInvocation)
+      throws IOException {
+    Objects.requireNonNull(root);
+    Objects.requireNonNull(morning);
+    Objects.requireNonNull(budget);
+    Objects.requireNonNull(api);
+    Objects.requireNonNull(web);
+    Objects.requireNonNull(parent);
+    Objects.requireNonNull(previousInvocation);
     if (morning.service() != RootStartupContext.Service.MORNING
         || api.unit != MaintenanceUnit.API
         || web.unit != MaintenanceUnit.WEB) throw new IOException("Caddy start unavailable");
@@ -412,7 +438,8 @@ public final class BackupUnitStartClient {
           fence.verify();
         },
         () -> {
-          MorningCaddyReadiness.requireConfiguration(root, morning);
+          if (!previousInvocation.equals(MorningCaddyReadiness.coldInvocation(root, morning)))
+            throw new IOException("Caddy cold generation changed");
           policy.requireSafe(MaintenanceUnit.CADDY);
         },
         new MaintenanceUnitStopClient.NativeStart()::execute,

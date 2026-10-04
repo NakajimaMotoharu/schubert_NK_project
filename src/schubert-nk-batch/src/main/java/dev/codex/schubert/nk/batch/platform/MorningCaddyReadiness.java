@@ -11,6 +11,7 @@ import java.nio.file.*;
 import java.util.*;
 import javax.net.ssl.HttpsURLConnection;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /** Same-parent fixed Caddy daemon/validate/owned TLS login proof. SS342/SSC178/CADDY455. */
 @NullMarked
@@ -39,6 +40,16 @@ public final class MorningCaddyReadiness {
   public static MorningCaddyReadiness create(
       RootStartupContext root, RootStartupContext.Snapshot morning, MorningParentBudget budget)
       throws IOException {
+    return create(root, morning, budget, "");
+  }
+
+  /** SSC180: prior cold generation is a rejection constraint, never startup authority. */
+  public static MorningCaddyReadiness create(
+      RootStartupContext root,
+      RootStartupContext.Snapshot morning,
+      MorningParentBudget budget,
+      String previousInvocation)
+      throws IOException {
     Objects.requireNonNull(root);
     Objects.requireNonNull(morning);
     Objects.requireNonNull(budget);
@@ -48,16 +59,24 @@ public final class MorningCaddyReadiness {
           budget.requireWithin();
           root.recheck(morning);
         },
-        new NativeIo(root, morning));
+        new NativeIo(root, morning),
+        previousInvocation);
   }
 
   MorningCaddyReadiness(Guard guard, Io io) throws IOException {
+    this(guard, io, "");
+  }
+
+  MorningCaddyReadiness(Guard guard, Io io, String previousInvocation) throws IOException {
     this.guard = Objects.requireNonNull(guard);
     this.io = Objects.requireNonNull(io);
+    Objects.requireNonNull(previousInvocation);
+    if (!previousInvocation.isEmpty() && !generation(previousInvocation)) throw unavailable();
     guard.check();
     var manager = Objects.requireNonNull(io.manager());
     profile(manager);
     invocation = Objects.requireNonNull(manager.get("InvocationID"));
+    if (invocation.equals(previousInvocation)) throw unavailable();
     pid = Long.parseLong(Objects.requireNonNull(manager.get("MainPID")));
     captured = Objects.requireNonNull(io.actor(invocation));
     if (captured.pid() != pid) throw unavailable();
@@ -87,6 +106,11 @@ public final class MorningCaddyReadiness {
     configuration(values);
     if (!"active".equals(values.get("ActiveState")) || !"running".equals(values.get("SubState")))
       throw unavailable();
+    if (!"success".equals(values.get("Result"))
+        || !"0".equals(values.get("ExecMainCode"))
+        || !"0".equals(values.get("ExecMainStatus"))
+        || number(values.get("ExecMainStartTimestampMonotonic")).signum() == 0
+        || number(values.get("ExecMainExitTimestampMonotonic")).signum() != 0) throw unavailable();
     String pidText = Objects.requireNonNull(values.get("MainPID"));
     if (!pidText.matches("[1-9][0-9]{0,9}")
         || Long.parseLong(pidText) < 2
@@ -126,7 +150,18 @@ public final class MorningCaddyReadiness {
             Map.entry("TimeoutStopUSec", "30s"));
     var keys = new HashSet<>(fixed.keySet());
     keys.addAll(
-        List.of("MainPID", "InvocationID", "ExecStartPre", "ExecStart", "ActiveState", "SubState"));
+        List.of(
+            "MainPID",
+            "InvocationID",
+            "ExecStartPre",
+            "ExecStart",
+            "ActiveState",
+            "SubState",
+            "Result",
+            "ExecMainCode",
+            "ExecMainStatus",
+            "ExecMainStartTimestampMonotonic",
+            "ExecMainExitTimestampMonotonic"));
     if (!values.keySet().equals(keys)) throw unavailable();
     for (var entry : fixed.entrySet())
       if (!entry.getValue().equals(values.get(entry.getKey()))) throw unavailable();
@@ -142,18 +177,86 @@ public final class MorningCaddyReadiness {
 
   public static void requireConfiguration(
       RootStartupContext root, RootStartupContext.Snapshot morning) throws IOException {
+    coldInvocation(root, morning);
+  }
+
+  /** Continuous actual parent and whole-kernel observation, first boot or normal history. */
+  public static String coldInvocation(RootStartupContext root, RootStartupContext.Snapshot morning)
+      throws IOException {
     Objects.requireNonNull(root);
     Objects.requireNonNull(morning);
     root.recheck(morning);
     var io = new NativeIo(root, morning);
     var before = io.manager();
+    String previous = cold(before);
+    var terminal = MaintenanceUnitTermination.create(root, morning, MaintenanceUnit.CADDY);
+    var first = terminal.quiescentObservation().orElseThrow(MorningCaddyReadiness::unavailable);
+    var second = terminal.quiescentObservation().orElseThrow(MorningCaddyReadiness::unavailable);
+    if (!previous.equals(first.manager().observedValues().get(10))
+        || !first.manager().matches(second.manager())
+        || first.leafPresent() != second.leafPresent()
+        || !first.directories().equals(second.directories())
+        || !before.equals(io.manager())) throw unavailable();
+    root.recheck(morning);
+    return previous;
+  }
+
+  static String cold(Map<String, String> before) throws IOException {
     configuration(before);
     if (!"inactive".equals(before.get("ActiveState"))
         || !"dead".equals(before.get("SubState"))
         || !"0".equals(before.get("MainPID"))
-        || !"".equals(before.get("InvocationID"))
-        || !before.equals(io.manager())) throw unavailable();
-    root.recheck(morning);
+        || !"success".equals(before.get("Result"))
+        || !"0".equals(before.get("ExecMainStatus"))) throw unavailable();
+    String invocation = Objects.requireNonNull(before.get("InvocationID"));
+    var start = number(before.get("ExecMainStartTimestampMonotonic"));
+    var ended = number(before.get("ExecMainExitTimestampMonotonic"));
+    String pre = Objects.requireNonNull(before.get("ExecStartPre"));
+    String run = Objects.requireNonNull(before.get("ExecStart"));
+    if (invocation.isEmpty()) {
+      if (!"0".equals(before.get("ExecMainCode"))
+          || start.signum() != 0
+          || ended.signum() != 0
+          || !unused(pre, "validate")
+          || !unused(run, "run")) throw unavailable();
+    } else if (!generation(invocation)
+        || !"1".equals(before.get("ExecMainCode"))
+        || start.signum() == 0
+        || ended.compareTo(start) < 0
+        || !normal(pre, "validate")
+        || !normal(run, "run")) throw unavailable();
+    return invocation;
+  }
+
+  private static boolean generation(String value) {
+    return value.matches("(?!0{32}$)[0-9a-f]{32}");
+  }
+
+  private static java.math.BigInteger number(@Nullable String value) throws IOException {
+    if (value == null || !value.matches("0|[1-9][0-9]{0,19}")) throw unavailable();
+    var number = new java.math.BigInteger(value);
+    if (number.compareTo(new java.math.BigInteger("18446744073709551615")) > 0) throw unavailable();
+    return number;
+  }
+
+  private static boolean unused(String value, String operation) {
+    return value.equals(
+        "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy "
+            + operation
+            + " --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }");
+  }
+
+  private static boolean normal(String value, String operation) {
+    var match =
+        java.util.regex.Pattern.compile(
+                "\\{ path=/usr/bin/caddy ; argv\\[\\]=/usr/bin/caddy "
+                    + operation
+                    + " --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=\\[[^\\]\\n]+\\] ; stop_time=\\[[^\\]\\n]+\\] ; pid=([1-9][0-9]{0,9}) ; code=exited ; status=0(?:/0)? \\}")
+            .matcher(value);
+    if (!match.matches() || value.contains("[n/a]")) return false;
+    // This mandatory capture participates in every successful match; no optional group exists.
+    long process = Long.parseLong(Objects.requireNonNull(match.group(1)));
+    return process >= 2 && process <= Integer.MAX_VALUE;
   }
 
   static Set<String> listeners(
@@ -208,7 +311,7 @@ public final class MorningCaddyReadiness {
                       "--no-pager",
                       "--no-ask-password",
                       "show",
-                      "--property=Id,LoadState,ActiveState,SubState,MainPID,InvocationID,Job,Type,Restart,KillMode,SendSIGKILL,NoNewPrivileges,CapabilityBoundingSet,AmbientCapabilities,User,Group,SupplementaryGroups,TimeoutStartUSec,TimeoutStopUSec,ExecStartPre,ExecStart",
+                      "--property=Id,LoadState,ActiveState,SubState,MainPID,InvocationID,Job,Type,Restart,KillMode,SendSIGKILL,NoNewPrivileges,CapabilityBoundingSet,AmbientCapabilities,User,Group,SupplementaryGroups,TimeoutStartUSec,TimeoutStopUSec,ExecStartPre,ExecStart,Result,ExecMainCode,ExecMainStatus,ExecMainStartTimestampMonotonic,ExecMainExitTimestampMonotonic",
                       "caddy.service"),
                   8192);
       if (bytes.length == 0 || bytes[bytes.length - 1] != '\n') throw unavailable();

@@ -1,0 +1,149 @@
+{
+  "id": "PG459-known30-native-v1",
+  "collectedAt": "2026-10-04T16:57:01.715335+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "d67e71273aafbf556409c62a896316ffc23a8b6e",
+  "toolSourceDirty": true,
+  "nativeProductionSource": "ea1c13aa6a1b0fca2c2f4de1769a7c5afd70244a",
+  "nativeRelease": "0.1.0-PG458",
+  "nativeManifestSha256": "d0413fc29171dc69363ec173e1d37dcc8bf3d25da2f26cc474ca80b7b316d6b2",
+  "toolSourcesSha256": {
+    "tools/quality/vm/050_s1/pg459_stage_known30_tools_v4.py": "fac8223405286813577f5b0687d7247756fdb1c7e402429a13fe3dd7e383f860",
+    "tools/quality/vm/050_s1/Pg459Known30PairRecovery.java": "97885a649dd54f8b9c00a6e5dffe9a812d670bea3787fa09e7b1a74f32a0a4df",
+    "tools/quality/vm/050_s1/Pg459CapturedPeers.java": "1827fe6210447100b184f3221e3b7d860b8c7b825609b3ecf6868f7c659c7da1",
+    "tools/quality/vm/050_s1/collect_pg459_selected.py": "f5f7c5d08f43da10bb7002c159ba7ccdb4d0a945a303c87c85e0597cfee976e7",
+    "tools/quality/vm/050_s1/pg459_full_v1.sh": "279966d2d87e5d252bf697c0240f21f15a0f41eee95d1606f9464c159f6ebfef",
+    "tools/quality/vm/050_s1/pg459_stage_peer_capture.py": "0608eaaa7de21c8f2e9d3c5720374d99083288c96de73e299915f4fae68262f4",
+    "tools/quality/vm/050_s1/Pg459Known30PairRecoveryTest.java": "91f6bef81bfeff035aaa626b3196587c42988abc65d6f25fe8b6cf2b5bfd6616",
+    "tools/quality/vm/050_s1/collect_pg459_native_known30.py": "0ee74a2ff328d40b2a819507e0aa938072d9e0d86e125ad62508aa0506c8a462",
+    "tools/quality/vm/050_s1/Pg459CapturedPeersTest.java": "8a2494ca68c6fd3a41f167ee19fa8a0595d2803a22b0d9bc5aadc0146b129670",
+    "tools/quality/vm/050_s1/Pg459OwnedIsolation.java": "4e0fcaf3d0b7be3866609e66c66a183bd11874283bcf112c39bb308170dd5f49",
+    "tools/quality/vm/050_s1/pg459_capture_known30_private.py": "98ac1032d9bf2fdecbc457c0115faf8fa2a02ee9ef1e4880e9c2cd92e90ae894"
+  },
+  "nativeClassesSha256": {
+    "Pg459Known30PairRecovery.class": "182bc0929bdfc72d3414e9cc1aec2a57d3746d5b0b52ed3226e327936139691f",
+    "Pg459OwnedIsolation.class": "156f36cdc020173b1c8a8b2968a4d87f154b038b27cce9ba5696cfca627204b6",
+    "Pg459CapturedPeers.class": "b3ed4282c591f569554feb4d708ec48fd08953faabec8054f3a5ae95a0438484"
+  },
+  "privateCaptureSetSha256": "9733dd823ccdcdd0cdfdaf8e664757220a001262e14c795ae8f7ed9432b0db5a",
+  "observerSha256": "58274a05166aafbab06eeae7f82cb4f326c86137510346de2f985a57d423237b",
+  "toolIndependentAssertions": {
+    "recovery": 240,
+    "peers": 14
+  },
+  "productionPtAdded": 0,
+  "commands": [
+    "javac -Xlint:all -Werror against frozenPG458 full-byte batch/api/runtime and actual16base; Pg459Known30PairRecoveryTest/Pg459CapturedPeersTest",
+    "python3 pg459_capture_known30_private.py (guest Root stdin)",
+    "python3 pg459_stage_peer_capture.py; python3 pg459_stage_known30_tools_v4.py",
+    "guest sudo java --enable-native-access=ALL-UNNAMED Pg459OwnedIsolation",
+    "guest sudo java --enable-native-access=ALL-UNNAMED Pg459Known30PairRecovery verify; then once without verify"
+  ],
+  "environment": {
+    "host": "Linux/JDK25.0.4",
+    "guest": "Ubuntu26.04/JDK25.0.4/PostgreSQL18.6/Artemis2.56.0"
+  },
+  "testIds": [
+    "PAIR459-PRESERVE",
+    "PAIR459-CLOSE",
+    "PEER459-001",
+    "NATIVE459-ISOLATE",
+    "NATIVE459-PAIR"
+  ],
+  "expected": "Fixed parent normal30/owned pair143, both actualRoot/ordinary ready, true M/A/DB/full271x14/23business/originalpending/Backup/Transfer/signature preserved; reverse fixedUnit stops then exactly3 typed intents retired; INVALID9 nonintent files including prior4 preserved; all owned scopes normalreturn; no new authority/deploy/DDL",
+  "actual": "isolation0/preflight0/typed retire0, fixed expected preservation/kernel/close flags all true. Parent whole success not claimed",
+  "bugs": [
+    "BUG-681",
+    "BUG-682"
+  ],
+  "ykt": [
+    "YKT-486",
+    "YKT-487"
+  ],
+  "ssc": [
+    "SSC-136",
+    "SSC-168",
+    "SSC-179"
+  ],
+  "qa": [
+    "QA-047"
+  ],
+  "formal": false,
+  "nativeParentAccepted": false,
+  "coverageQualified": false,
+  "limitations": [
+    "Independent tool assertions are ProductionPT0/coverage0",
+    "Global native execution start/end timestamps not recorded in original commands; collection time is not substituted",
+    "Native source ea1 differs from host SSC180 dirty source; no results mixed",
+    "Original BUG544/UNKNOWN not resolved; whole native Caddy/TLS/DONE/CHR/formal pending"
+  ],
+  "redaction": "Fixed stage/postcondition flags/source/hash only; no raw owner/permit/launch/session/cookie/token/password/private key/DB dump/original contents.",
+  "jobs": [
+    {
+      "privateLog": "pg459-known30-capture-v1.log",
+      "rawSha256": "56ae5282c6dfba7d2aa2dd54720a2c3717ad0ec1f52a28f78893a02f1b2989ca",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-known30-capture-v1.txt"
+    },
+    {
+      "privateLog": "pg459-peer-capture-v1.log",
+      "rawSha256": "242d94fa6b322f2c54fb846adcc7f602756880550aab3647aa1588971bcf34e7",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-peer-capture-v1.txt"
+    },
+    {
+      "privateLog": "pg459-known30-stage-v4.log",
+      "rawSha256": "6edc0ac26239fbd71a89b0ec88fb19a9e7c3d738acfa87f3f8ccda61fcaa9c2a",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-known30-stage-v4.txt"
+    },
+    {
+      "privateLog": "pg459-tool-test-v4.log",
+      "rawSha256": "d744402c8792d17f9efa8abc4082a5eb4101dc5fc2a4d4c417dd67766f557506",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-tool-test-v4.txt"
+    },
+    {
+      "privateLog": "pg459-peer-test-v4.log",
+      "rawSha256": "e50b4e7bd2385d7fbcdf86212b4a790490dad442975192d0b1bb8827e70586d5",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-peer-test-v4.txt"
+    },
+    {
+      "privateLog": "pg459-isolation-native-v1.log",
+      "rawSha256": "ed91a91de748d662a77087fb2692e9f7ed1823576594b9b4ea9e2c8de0ee400b",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-isolation-native-v1.txt"
+    },
+    {
+      "privateLog": "pg459-pair-verify-v1.log",
+      "rawSha256": "8475cf3853f7d6a5d5728e196ca6df81583a8039c30526297b84d1233b33996c",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-pair-verify-v1.txt"
+    },
+    {
+      "privateLog": "pg459-pair-recover-v1.log",
+      "rawSha256": "d9961d460b17583c176f247bc00255cd413c9d4d2773558f8aaeccca3b390b45",
+      "exitCode": 0,
+      "exitBasis": "actual returned tool session exit0, fixed native flags additional",
+      "safePath": "logs/pg459-pair-recover-v1.txt"
+    }
+  ],
+  "files": {
+    "logs/pg459-known30-capture-v1.txt": "56ae5282c6dfba7d2aa2dd54720a2c3717ad0ec1f52a28f78893a02f1b2989ca",
+    "logs/pg459-peer-capture-v1.txt": "242d94fa6b322f2c54fb846adcc7f602756880550aab3647aa1588971bcf34e7",
+    "logs/pg459-known30-stage-v4.txt": "6edc0ac26239fbd71a89b0ec88fb19a9e7c3d738acfa87f3f8ccda61fcaa9c2a",
+    "logs/pg459-tool-test-v4.txt": "d744402c8792d17f9efa8abc4082a5eb4101dc5fc2a4d4c417dd67766f557506",
+    "logs/pg459-peer-test-v4.txt": "e50b4e7bd2385d7fbcdf86212b4a790490dad442975192d0b1bb8827e70586d5",
+    "logs/pg459-isolation-native-v1.txt": "ed91a91de748d662a77087fb2692e9f7ed1823576594b9b4ea9e2c8de0ee400b",
+    "logs/pg459-pair-verify-v1.txt": "8475cf3853f7d6a5d5728e196ca6df81583a8039c30526297b84d1233b33996c",
+    "logs/pg459-pair-recover-v1.txt": "d9961d460b17583c176f247bc00255cd413c9d4d2773558f8aaeccca3b390b45"
+  }
+}
