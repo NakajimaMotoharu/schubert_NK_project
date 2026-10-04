@@ -1,0 +1,582 @@
+{
+  "id": "PG451-content-selected-v2",
+  "sourceHead": "5c933eacc394bec8ac85e69294824a52944bdf4f",
+  "sourceDirty": "PG-D365 fixed content read mappings, borrowed file reader, display maps/templates, literal wire/DOM/security tests before PT-CONTENT010 and collector addition",
+  "formal": false,
+  "fullRun": false,
+  "native": false,
+  "branch": "dev-foundation",
+  "startedAt": "2026-10-04T12:38:36+09:00",
+  "finishedAt": "2026-10-04T12:42:29+09:00",
+  "environment": "Linux7.0.0-38/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/JaCoCo0.8.15/SpotBugs4.10.4.0",
+  "command": "bash WorkPG379/pg451_selected.sh content-selected-v2 5c933eacc394bec8ac85e69294824a52944bdf4f exact36Testclasses; six modules clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report",
+  "testClasses": [
+    "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+    "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+    "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest",
+    "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest",
+    "dev.codex.schubert.nk.api.security.AuthSessionServiceTest",
+    "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest",
+    "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest",
+    "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+    "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+    "dev.codex.schubert.nk.web.logging.HttpRequestLoggingValveTest",
+    "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+    "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+    "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+    "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+    "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+    "dev.codex.schubert.nk.web.session.AnimationControllerTest",
+    "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+    "dev.codex.schubert.nk.web.session.ContentDetailControllerTest",
+    "dev.codex.schubert.nk.web.session.MediaControllerTest",
+    "dev.codex.schubert.nk.web.session.MusicControllerTest",
+    "dev.codex.schubert.nk.web.session.ScenarioControllerTest",
+    "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+    "dev.codex.schubert.nk.web.session.WebSecurityChainTest",
+    "dev.codex.schubert.nk.web.storage.LargeResultReaderTest",
+    "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+    "dev.codex.schubert.nk.web.view.AnimationTemplateTest",
+    "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+    "dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest",
+    "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+    "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest",
+    "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest"
+  ],
+  "exitCode": 0,
+  "tests": 323,
+  "suites": 36,
+  "modules": {
+    "protocol": {
+      "tests": 5,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "storage": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "api": {
+      "tests": 71,
+      "suites": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "web": {
+      "tests": 187,
+      "suites": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "batch": {
+      "tests": 43,
+      "suites": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "ContentDetailController": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 433
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 22
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 103
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 20
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ContentDetailMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebMvcConfiguration": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 232
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 35
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 10
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace$Scope": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 53
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 15
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebRequestTrace": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 374
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 58
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 24
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ScenarioDetailViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 239
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 52
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 26
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "AnimationWatchViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 90
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 9
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 23
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MusicTrackViewModel": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 286
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 66
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "FileIntegrityException": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "LargeResultReader": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 108
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 29
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "MediaResponseDecoder": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 423
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 31
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 87
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageExclusions": [],
+  "staticAnalysis": {
+    "modules": 6,
+    "findings": 0
+  },
+  "sourceFilesSha256": "1509178c2cc261271023d0b6ab03f50c4a356da5a8e58abccc8c57341b52f5c2",
+  "sourceDiffSha256": "606953e80e10bd22ced7021791d49445638bd15c8305853c4118c5cb84f77cab",
+  "logSha256": "94481fd2dee438d1d557a350fbb9ba5deb3d54308aba5d4c8f149057b293a3ad",
+  "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg451-content-selected-v2-frozen",
+  "testIds": [
+    "PT-CONTENT001",
+    "PT-CONTENT002",
+    "PT-CONTENT003",
+    "PT-CONTENT004",
+    "PT-CONTENT005",
+    "PT-CONTENT006",
+    "PT-CONTENT007",
+    "PT-CONTENT008",
+    "PT-CONTENT009"
+  ],
+  "qa": [],
+  "ssc": [
+    "SSC-176"
+  ],
+  "bugs": [
+    "BUG-635",
+    "BUG-636",
+    "BUG-637"
+  ],
+  "ykt": [
+    "YKT-450"
+  ],
+  "expected": "SCN INLINE0/1/200 and held FILE1/201/10000; valid VIDEO prefix and invalid prefix503; literal back links and escaped title; music stored4pairs/5players/3missing sides; zero music404; fixed error codes/null/immutable maps; anonymous302, authenticated GETHEAD200/POST405, genuine0102terminal, 100 independent reads",
+  "actual": "323 PT/36 suites/FES0, static6zero; eleven affected classes all four coverage counters missed0; closed MVC/DOM/file/security and independent wire assertions passed",
+  "before": [
+    {
+      "id": "PG451-content-before-v1",
+      "accepted": false,
+      "exitCode": 1,
+      "stage": "Web testCompile; Web PT/Batch/Web static not run",
+      "executedTests": 93,
+      "failures": 0,
+      "errors": 0,
+      "logSha256": "f18c982066151ffeeee960f578b476295de98b7ef2f5a4170166f908d6a084bc",
+      "sourceFilesSha256": "67b9905bfb71d8cb3edc8042015192fabd6599380c47bf5ab1ec5dcbe0350d10",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg451-content-before-v1-frozen"
+    },
+    {
+      "id": "PG451-content-selected-v1",
+      "accepted": false,
+      "exitCode": 1,
+      "stage": "Web PT; Batch/Web static not run",
+      "executedTests": 280,
+      "failures": 3,
+      "errors": 0,
+      "logSha256": "ee96838432342787e8b7df4eb78b34a7139ab96895f4f58dca5ce3fc75863239",
+      "sourceFilesSha256": "2aceee7188832aa13b88a143b8596a413a6aa19655729cb81a8a52abe5f8dd7f",
+      "bytePreservation": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg451-content-selected-v1-frozen"
+    }
+  ],
+  "redaction": "No JUnit properties/stdout/stderr, provider messages, raw logs, real credentials/cookie/context/token/key/dump",
+  "limitations": [
+    "Selected host MVC/security/held file/PostgreSQL with independent JMS fixture only; no actual Artemis or native owner proof",
+    "PT-CONTENT010 and this collector added after frozen selection; fresh same-source full regression required and not yet accepted",
+    "Formal PT-WEB-20260925-24/1964PT/53scope unchanged"
+  ],
+  "files": [
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.database.DatabaseMigrationTest.xml",
+      "sha256": "a8cd1eb29d86556d6e36270ee641a3ed8f08829b5aae49ad536b50875099fc10"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest.xml",
+      "sha256": "af75470908c16885b28dcaa1a2e67634e233274916917a3fc4956bc3228fe2b8"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest.xml",
+      "sha256": "0abd8b28f54c859dfc2973e30b102811cfc434c8f946f6d9d80fec36d5c77e0c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest.xml",
+      "sha256": "6d8a99384721f7d8c11593105acf6b902b13136bed1b48aad07ee5f6a5c7bbda"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthSessionServiceTest.xml",
+      "sha256": "f751583dec46585daee4bc88a1f7c61eb38a11331e4a36ab63f09dc312c0d42c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest.xml",
+      "sha256": "9e7110c5f06b98bad7f76d8d09165852339c728e98e22d2dbe07a203b91c55a2"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/api/TEST-dev.codex.schubert.nk.api.security.LogoutInboxServiceTest.xml",
+      "sha256": "d2c8cde5009a72442ae129c614bb74e937aaf9062ae809b689f8368a1277820e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest.xml",
+      "sha256": "41d3cd3543f47d18aff9222f351aa017cd83d59642c72fc1532ccde4e10be6cd"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest.xml",
+      "sha256": "efd0456302e289c6b7123ee32d45c7597839f59bdfe2ac0fc10afa736213cb1c"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest.xml",
+      "sha256": "a903dfc988306a9d8bc0b867b0c018fe194db27d63406e59acd9ff17f82edf38"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/batch/TEST-dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest.xml",
+      "sha256": "0ad00b639c81d437ebd3e8b2aab17d6045d2d92fef8895bf8078ce2001d283f0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml",
+      "sha256": "400f7f192432a3842530f32a7e4932df8ea52736f45bd88000ea2a6114846ec9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "sha256": "cd861cf1b766a6bf9010ebb8b4ab9e34b04c83b55c4e2db74f006b30cff915e1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/storage/TEST-dev.codex.schubert.nk.storage.StorageAttributeGuardTest.xml",
+      "sha256": "ab0a7f3c83ce790fd34225dc0465ef2f74dbf5522e39608db2272434163329e0"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.HttpRequestLoggingValveTest.xml",
+      "sha256": "3e4d00aa4294f0abec00649edeb77d45bd61f02fd525a3aa722bbcc06eb4d9f3"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.logging.WebRequestTraceTest.xml",
+      "sha256": "f0fa97b2be3fa2b6db32783de37369a365dca2923adada54ddf12e8ecd31775a"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.media.MediaResponseDecoderTest.xml",
+      "sha256": "2369094b42a9a584a3d37496a83ba3116e188efcddd5cedf395946fd36706207"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.messaging.AnimationWireClientTest.xml",
+      "sha256": "c1a05ed0ab1542de3ea997b8b16b4de7628b42b5d113d90cfbd5189b1f0902bb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.messaging.MusicWireClientTest.xml",
+      "sha256": "4b13312b164ffa208966483c4371958f7386d96e8ea338f2435f9970cfd35f95"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest.xml",
+      "sha256": "cbe4d15907fd0523f5e220320771f6d537c1db4fdff404aa293b6274822bc97d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.AnimationControllerTest.xml",
+      "sha256": "56b4782747f3282a1f655b1613a40c2220cbfdec100fbc9573d432d45ae3c53e"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ApiSessionInvalidTest.xml",
+      "sha256": "d91ce3ccdefc4cdf916c51cd2bde946018cd8b5c13c857b6e583548178876ec4"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ContentDetailControllerTest.xml",
+      "sha256": "7572587f592904807f281ef5876f82982a34d946b36dfcfc5ad8e556eed821a6"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.MediaControllerTest.xml",
+      "sha256": "dc6ab12647a99d4b9b08ee292edce0224d32ed1302de445bf644ab0080d72ff1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.MusicControllerTest.xml",
+      "sha256": "324435d283f22dd513c12e851d7be2d07d7d1813ffac3690a396db4b56627029"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.ScenarioControllerTest.xml",
+      "sha256": "e0527fa68a83ce1dde58f25dde91b71f2dadd15ca7fb920ccb98b781294e3c69"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.SpringWebSessionTest.xml",
+      "sha256": "dd78ddb7b9fec17ede751197db752e836ef86a59a37b461614a200276dd0fa4b"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.session.WebSecurityChainTest.xml",
+      "sha256": "6cf3246cb7dfafb328c52517099b317725d75a42e89833709de3bdd8168f47b9"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.storage.LargeResultReaderTest.xml",
+      "sha256": "dd03cde28055ef8a9d90b04bac11a2eed33c62de3e3eb704b0418fb7c778069f"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest.xml",
+      "sha256": "7cfec834bf1c55b86079042dde3053408fdb57606cda631844245d15263e66ce"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationTemplateTest.xml",
+      "sha256": "88f14bbb02d2a07c71f4c8edaa48de8450f8fdb148b8649c8e8a4c25e35f85f1"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.AnimationViewModelTest.xml",
+      "sha256": "51626a45c5a3c6f3e2b5362b42ee9263859958cf00fcd79ad2109a4277e2440d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest.xml",
+      "sha256": "6660db927cd10d160b1c696a36dbde07c0c879929fcfe1110b27299be0e6e664"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest.xml",
+      "sha256": "e54631947a5ec376c0285446b3afbebba7d3f7699b5c7b2838ea55505a18d94d"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest.xml",
+      "sha256": "42f0e794af2020d591a73f57e9dcc1d45c7a656328b0e5ff61db39954c225aeb"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/evidence/provisional/PG451-content-selected-v2/junit/web/TEST-dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest.xml",
+      "sha256": "caa2b5cbcec80dee235574741a53e02ae1248eac82748407d85df07a2ae64d22"
+    }
+  ]
+}

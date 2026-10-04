@@ -636,5 +636,29 @@ if int(identifier[2:5]) >= 450:
         'V027 signed native migration/Backup/ordinary Morning/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no interrupted/other-source result reuse',
     ]
+if int(identifier[2:5]) >= 451:
+    content_names = {'ContentDetailController', 'ContentDetailMvcConfiguration',
+                     'AnimationWatchViewModel', 'MusicTrackViewModel', 'WebMvcConfiguration',
+                     'LargeResultReader', 'FileIntegrityException', 'ScenarioDetailViewModel',
+                     'MediaResponseDecoder'}
+    content_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.findall('counter') and
+        (c.get('name').rsplit('/', 1)[-1] in content_names or
+         c.get('name').rsplit('/', 1)[-1].startswith('WebRequestTrace'))}
+    assert len(content_coverage) == 11
+    assert all(k['missed'] == 0 for value in content_coverage.values() for k in value.values())
+    manifest['contentReadCoverage'] = content_coverage
+    manifest['ssc'].append('SSC-176')
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in (635, 636, 637, 638))
+    manifest['ykt'].extend(['YKT-450', 'YKT-451'])
+    content_test_ids = ['PT-CONTENT%03d' % n for n in range(1, 11)]
+    manifest['testIds'].extend(content_test_ids)
+    assert 'SSC-176' in manifest['ssc'] and 'YKT-450' in manifest['ykt']
+    assert set(content_test_ids).issubset(manifest['testIds'])
+    manifest['trigger'] = 'PG-D365/SSC176: fixed Scenario detail/Animation watch/Music section four GET mappings, closed display templates, borrowed held FILE reader and REQUEST inventory, independent literal byte/DOM/SQL/security/null/NFC/boundary tests; fresh six-module feature acceptance'
+    manifest['limitations'].append('Content read host acceptance only; User new/mutation and Notification cancellation/Question deletion plus full native graph remain pending; no native/full-ready/formal claim')
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps({'source': source, 'tests': manifest['tests'], 'coverage': coverage, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest()}))

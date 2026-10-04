@@ -20,16 +20,16 @@ import java.util.Objects;
  * NK-SCN-001; RD FIL-001..009; UI237/243; SS333 §6/7; SSC-021; PT-SCN-008-RD05. Caller owns an
  * admitted root. No physical path/channel leaves this adapter.
  */
-final class LargeResultReader {
+public final class LargeResultReader {
   private final OwnedTransferDirectory root;
   private final StorageIdentity identity;
 
-  LargeResultReader(OwnedTransferDirectory root, StorageIdentity identity) {
+  public LargeResultReader(OwnedTransferDirectory root, StorageIdentity identity) {
     this.root = Objects.requireNonNull(root, "root");
     this.identity = Objects.requireNonNull(identity, "identity");
   }
 
-  List<ScenarioEntryRecord> readScenario(LargeResultDescriptor descriptor)
+  public List<ScenarioEntryRecord> readScenario(LargeResultDescriptor descriptor)
       throws FileIntegrityException {
     Objects.requireNonNull(descriptor, "descriptor");
     try {
