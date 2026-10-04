@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.bootstrap;
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import dev.codex.schubert.nk.web.logging.WebLogPayloadCodec;
+import dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec;
 import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,11 +11,11 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Owns two purpose-separated Web current-key codecs for a native process scope. Copies borrowed
+ * Owns three purpose-separated Web current-key codecs for a native process scope. Copies borrowed
  * from the fixed Web credential set are erased even when the second acquisition or constructor
- * fails. Previous-key rotation, revoke encryption, HTTP readiness and broker ownership are separate
- * mandatory gates; this owner cannot declare the process ready. NK-WEB-002; AUT001, MON003,SYS004;
- * UI226/242/253; SS314/324/343/352; PG367/PT-WEB-NKEY001..004; 471 D01/05/06.
+ * fails. Previous-key rotation, HTTP readiness and broker ownership are separate mandatory gates;
+ * this owner cannot declare the process ready. NK-WEB-002; AUT001, MON003,SYS004; UI226/242/253;
+ * SS314/324/343/352; PG367/PT-WEB-NKEY001..004; 471 D01/05/06.
  */
 @NullMarked
 public final class WebNativeCodecs implements AutoCloseable {
@@ -27,11 +28,14 @@ public final class WebNativeCodecs implements AutoCloseable {
   private final Object stateLock = new Object();
   private final SessionPayloadCodec session;
   private final WebLogPayloadCodec log;
+  private final RevocationPayloadCodec revoke;
   private boolean closed;
 
-  private WebNativeCodecs(SessionPayloadCodec session, WebLogPayloadCodec log) {
+  private WebNativeCodecs(
+      SessionPayloadCodec session, WebLogPayloadCodec log, RevocationPayloadCodec revoke) {
     this.session = session;
     this.log = log;
+    this.revoke = revoke;
   }
 
   public static WebNativeCodecs create(ServiceCredentialSet credentials) {
@@ -54,7 +58,9 @@ public final class WebNativeCodecs implements AutoCloseable {
     Objects.requireNonNull(source, "Web key source");
     byte @Nullable [] sessionKey = null;
     byte @Nullable [] logKey = null;
+    byte @Nullable [] revokeKey = null;
     @Nullable SessionPayloadCodec sessionCodec = null;
+    @Nullable WebLogPayloadCodec logCodec = null;
     try {
       sessionKey =
           Objects.requireNonNull(
@@ -62,19 +68,27 @@ public final class WebNativeCodecs implements AutoCloseable {
       logKey =
           Objects.requireNonNull(
               source.copyKey(ServiceCredentialId.WEB_LOG_AES_CURRENT), "Web Log key");
+      revokeKey =
+          Objects.requireNonNull(
+              source.copyKey(ServiceCredentialId.WEB_REVOKE_AES_CURRENT), "Web revoke key");
       sessionCodec =
           new SessionPayloadCodec(
               source.version(ServiceCredentialId.WEB_SESSION_AES_CURRENT), sessionKey, null, null);
-      var logCodec =
+      logCodec =
           new WebLogPayloadCodec(
               source.version(ServiceCredentialId.WEB_LOG_AES_CURRENT), logKey, null, null);
-      return new WebNativeCodecs(sessionCodec, logCodec);
+      var revokeCodec =
+          new RevocationPayloadCodec(
+              source.version(ServiceCredentialId.WEB_REVOKE_AES_CURRENT), revokeKey, null, null);
+      return new WebNativeCodecs(sessionCodec, logCodec, revokeCodec);
     } catch (RuntimeException | Error failure) {
+      if (logCodec != null) logCodec.close();
       if (sessionCodec != null) sessionCodec.close();
       throw failure;
     } finally {
       if (sessionKey != null) Arrays.fill(sessionKey, (byte) 0);
       if (logKey != null) Arrays.fill(logKey, (byte) 0);
+      if (revokeKey != null) Arrays.fill(revokeKey, (byte) 0);
     }
   }
 
@@ -94,6 +108,14 @@ public final class WebNativeCodecs implements AutoCloseable {
     }
   }
 
+  /** Third purpose, retained until the worker and every borrower has been joined. */
+  public RevocationPayloadCodec revoke() {
+    synchronized (stateLock) {
+      requireOpen();
+      return revoke;
+    }
+  }
+
   private void requireOpen() {
     if (closed) throw new IllegalStateException("Web native codecs are closed");
   }
@@ -104,9 +126,13 @@ public final class WebNativeCodecs implements AutoCloseable {
       if (closed) return;
       closed = true;
       try {
-        log.close();
+        revoke.close();
       } finally {
-        session.close();
+        try {
+          log.close();
+        } finally {
+          session.close();
+        }
       }
     }
   }

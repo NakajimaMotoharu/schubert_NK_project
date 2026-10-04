@@ -32,6 +32,40 @@ class WebHttpServerTest {
   @TempDir Path root;
 
   @Test
+  void rerun008UnknownHttpStopAndDestroyRemainRetryableWithoutSkippingPhase() throws Exception {
+    for (boolean stopFails : new boolean[] {true, false}) {
+      var stops = new AtomicInteger();
+      var destroys = new AtomicInteger();
+      var container =
+          new Tomcat() {
+            @Override
+            public void stop() throws LifecycleException {
+              if (stops.incrementAndGet() == 1 && stopFails)
+                throw new LifecycleException("synthetic unknown stop");
+              super.stop();
+            }
+
+            @Override
+            public void destroy() throws LifecycleException {
+              if (destroys.incrementAndGet() == 1 && !stopFails)
+                throw new LifecycleException("synthetic unknown destroy");
+              super.destroy();
+            }
+          };
+      var server =
+          WebHttpServer.startWithFactory(root, 0, (r, s, c) -> c.doFilter(r, s), () -> container);
+      assertThrows(LifecycleException.class, server::close);
+      assertThrows(IllegalStateException.class, server::port);
+      assertEquals(stopFails ? 0 : 1, destroys.get());
+      server.close();
+      assertEquals(stopFails ? 2 : 1, stops.get());
+      assertEquals(stopFails ? 1 : 2, destroys.get());
+      server.close();
+      assertEquals(stopFails ? 1 : 2, destroys.get());
+    }
+  }
+
+  @Test
   void scr109ActualLoopbackLoginAndClosedRoutes() throws Exception {
     var admissions = new AtomicInteger();
     Filter security =

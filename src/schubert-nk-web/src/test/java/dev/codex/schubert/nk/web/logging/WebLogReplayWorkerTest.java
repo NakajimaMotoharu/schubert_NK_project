@@ -33,6 +33,89 @@ final class WebLogReplayWorkerTest {
   private static final WebLogDispatcher.Report EMPTY = new WebLogDispatcher.Report(0, 0, 0, 0);
 
   @Test
+  void rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects() throws Exception {
+    for (boolean sql : new boolean[] {false, true}) {
+      var worker =
+          WebLogReplayWorker.start(
+              () -> {
+                Error fatal = new AssertionError("private fatal");
+                if (sql) throw new SQLException("private", fatal);
+                throw new IllegalStateException("private", fatal);
+              },
+              Duration.ofMillis(1),
+              Duration.ofSeconds(1));
+      try {
+        await(worker::terminalFailureObserved);
+        assertFalse(worker.running());
+        assertEquals(0, worker.snapshot().failedCycles());
+        assertEquals(0, worker.snapshot().completedCycles());
+      } finally {
+        worker.close();
+      }
+    }
+    var owner = new java.util.concurrent.atomic.AtomicReference<WebLogReplayWorker>();
+    var proceed = new CountDownLatch(1);
+    var worker =
+        WebLogReplayWorker.start(
+            () -> {
+              try {
+                assertTrue(proceed.await(5, TimeUnit.SECONDS));
+              } catch (InterruptedException unexpected) {
+                throw new AssertionError(unexpected);
+              }
+              owner.get().close();
+              return EMPTY;
+            },
+            Duration.ofMillis(1),
+            Duration.ofSeconds(1));
+    owner.set(worker);
+    proceed.countDown();
+    try {
+      await(() -> worker.snapshot().failedCycles() == 1);
+      assertFalse(worker.terminalFailureObserved());
+    } finally {
+      worker.close();
+    }
+  }
+
+  @Test
+  void rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed() throws Exception {
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var exited = new CountDownLatch(1);
+    var worker =
+        WebLogReplayWorker.start(
+            () -> {
+              entered.countDown();
+              try {
+                while (release.getCount() != 0) {
+                  try {
+                    release.await();
+                  } catch (InterruptedException ignored) {
+                    /* synthetic noninterruptible provider */
+                  }
+                }
+                return EMPTY;
+              } finally {
+                exited.countDown();
+              }
+            },
+            Duration.ofMillis(1),
+            Duration.ofMillis(1));
+    assertTrue(entered.await(5, TimeUnit.SECONDS));
+    try {
+      assertThrows(IllegalStateException.class, worker::close);
+      assertFalse(worker.running()); // requested is not termination; second close must prove it.
+      assertThrows(IllegalStateException.class, worker::close);
+      assertEquals(1, exited.getCount());
+    } finally {
+      release.countDown();
+      assertTrue(exited.await(5, TimeUnit.SECONDS));
+      worker.close();
+    }
+  }
+
+  @Test
   void realOutboxRetriesInBackgroundAndSendsOnce() throws Exception {
     WebLogDatabaseFixture db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("db")));
     try (WebLogPayloadCodec codec = new WebLogPayloadCodec("test", new byte[32], null, null);

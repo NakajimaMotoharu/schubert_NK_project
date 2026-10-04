@@ -29,6 +29,7 @@ final class WebNativeCodecsCredentialTest {
       try (var owner = WebNativeCodecs.create(web)) {
         assertNotNull(owner.session());
         assertNotNull(owner.log());
+        assertNotNull(owner.revoke());
       }
       web.close();
       assertThrows(IllegalStateException.class, () -> WebNativeCodecs.create(web));

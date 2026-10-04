@@ -32,6 +32,8 @@ public final class WebHttpServer implements AutoCloseable {
   private final int port;
   private final Object lifecycleLock = new Object();
   private boolean closed;
+  private boolean stopped;
+  private boolean destroyed;
 
   private WebHttpServer(Tomcat tomcat) {
     this.tomcat = tomcat;
@@ -177,13 +179,14 @@ public final class WebHttpServer implements AutoCloseable {
   @Override
   public void close() throws LifecycleException {
     synchronized (lifecycleLock) {
-      if (closed) return;
+      if (destroyed) return;
       closed = true;
-      try {
+      if (!stopped) {
         tomcat.stop();
-      } finally {
-        tomcat.destroy();
+        stopped = true;
       }
+      tomcat.destroy();
+      destroyed = true;
     }
   }
 }

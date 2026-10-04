@@ -68,6 +68,7 @@ public final class WebLogReplayWorker implements AutoCloseable {
         lastReport = Objects.requireNonNull(action.dispatch(), "web log report");
         completedCycles.incrementAndGet();
       } catch (SQLException | RuntimeException failure) {
+        dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
         // Do not emit provider text or payload. A later due/expired lease is replayed next cycle.
         failedCycles.incrementAndGet();
       }
@@ -77,9 +78,9 @@ public final class WebLogReplayWorker implements AutoCloseable {
     }
   }
 
-  /** This is worker liveness, not full Web/API readiness or delivery confirmation. */
+  /** Scheduled-work health only, never termination proof; close verifies the actual thread join. */
   public boolean running() {
-    return active.get() && thread.isAlive();
+    return active.get() && !terminal.get();
   }
 
   public boolean terminalFailureObserved() {
@@ -93,9 +94,10 @@ public final class WebLogReplayWorker implements AutoCloseable {
 
   @Override
   public void close() {
-    if (!active.compareAndSet(true, false)) {
-      return;
-    }
+    // BUG629: a requested stop is not a completed join; retry must inspect the live thread.
+    active.set(false);
+    if (Thread.currentThread() == thread)
+      throw new IllegalStateException("web log worker cannot join its own owner");
     thread.interrupt();
     try {
       thread.join(closeTimeoutMillis);

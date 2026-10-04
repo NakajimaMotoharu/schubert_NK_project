@@ -19,6 +19,7 @@ import dev.codex.schubert.nk.web.security.MqAuthenticationProvider;
 import dev.codex.schubert.nk.web.security.MqLoginClient;
 import dev.codex.schubert.nk.web.security.MqLoginContextProbe;
 import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Duration;
@@ -50,6 +51,9 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
   private final BooleanSupplier replayRunning;
   private final AtomicBoolean terminal;
   private final AtomicBoolean closed = new AtomicBoolean();
+  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final Object stopLock = new Object();
+  private int stoppedResources;
 
   /** Package-local lifecycle seam for deterministic close-failure PT. */
   WebLogApplicationRuntime(
@@ -220,7 +224,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
   }
 
   public int port() {
-    if (closed.get()) {
+    if (closed.get() || stopping.get()) {
       throw new IllegalStateException("Web Log runtime is closed");
     }
     return port.getAsInt();
@@ -229,6 +233,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
   /** Local ownership health, not full deployment or API readiness. */
   public boolean ready() {
     return !closed.get()
+        && !stopping.get()
         && !terminal.get()
         && replyReady.getAsBoolean()
         && replayRunning.getAsBoolean();
@@ -240,20 +245,22 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
 
   @Override
   public void close() {
-    if (!closed.compareAndSet(false, true)) {
-      return;
-    }
-    Exception failure = null;
-    for (AutoCloseable resource : new AutoCloseable[] {http, replay, replies}) {
-      try {
-        resource.close();
-      } catch (Exception closing) {
-        if (failure == null) failure = closing;
-        else if (failure != closing) failure.addSuppressed(closing);
+    synchronized (stopLock) {
+      if (closed.get()) return;
+      stopping.set(true);
+      var resources = new AutoCloseable[] {http, replay, replies};
+      while (stoppedResources < resources.length) {
+        try {
+          resources[stoppedResources].close();
+        } catch (Exception closing) {
+          // Never release a downstream borrower after an UNKNOWN drain/join/close.
+          // This owner remains retryable; the native callback must retain its outer frame.
+          SessionStoreException.preserveFatal(closing);
+          throw new IllegalStateException("Web Log runtime stop failed");
+        }
+        stoppedResources++;
       }
-    }
-    if (failure != null) {
-      throw new IllegalStateException("Web Log runtime stop failed", failure);
+      closed.set(true);
     }
   }
 

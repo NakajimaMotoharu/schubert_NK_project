@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -58,6 +58,38 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG231: real Log-path Web boot plus deterministic resource-failure boundaries. */
 final class WebLogApplicationRuntimeTest {
+
+  @Test
+  void rerun008UnknownWorkerJoinMustRetainReplyOwnerAndAllowRetry() {
+    var workerKnownStopped = new AtomicBoolean();
+    var repliesClosed = new AtomicInteger();
+    var httpClosed = new AtomicInteger();
+    var runtime =
+        new WebLogApplicationRuntime(
+            httpClosed::incrementAndGet,
+            () -> {
+              if (!workerKnownStopped.get())
+                throw new IllegalStateException("synthetic join UNKNOWN");
+            },
+            repliesClosed::incrementAndGet,
+            () -> 1234,
+            () -> true,
+            () -> true,
+            new AtomicBoolean());
+    assertTrue(runtime.ready());
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertFalse(runtime.ready());
+    assertEquals(0, repliesClosed.get());
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals(0, repliesClosed.get());
+    workerKnownStopped.set(true);
+    runtime.close();
+    assertEquals(1, repliesClosed.get());
+    runtime.close();
+    assertEquals(1, repliesClosed.get());
+    assertEquals(1, httpClosed.get());
+  }
+
   @TempDir Path root;
   private final Clock clock = Clock.systemUTC();
 
@@ -544,7 +576,7 @@ final class WebLogApplicationRuntimeTest {
   }
 
   @Test
-  void scr130LifecycleAggregatesCloseFailuresAndReadinessBoundaries() throws Exception {
+  void scr130LifecycleRetainsUnknownResourceAndReadinessBoundaries() throws Exception {
     var order = new java.util.ArrayList<String>();
     var terminal = new AtomicBoolean();
     var runtime =
@@ -569,11 +601,11 @@ final class WebLogApplicationRuntimeTest {
     assertTrue(runtime.ready());
     IllegalStateException failure = assertThrows(IllegalStateException.class, runtime::close);
     assertEquals("Web Log runtime stop failed", failure.getMessage());
-    assertEquals("http close", failure.getCause().getMessage());
-    assertEquals(2, failure.getCause().getSuppressed().length);
-    assertEquals(java.util.List.of("http", "worker", "reply"), order);
-    runtime.close();
-    assertEquals(3, order.size());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+    assertEquals(java.util.List.of("http"), order);
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals(java.util.List.of("http", "http"), order);
     assertFalse(runtime.ready());
     assertThrows(IllegalStateException.class, runtime::port);
     var notReady =
@@ -605,9 +637,9 @@ final class WebLogApplicationRuntimeTest {
             owner, owner, owner, () -> 1, () -> true, () -> true, new AtomicBoolean());
     IllegalStateException stopped = assertThrows(IllegalStateException.class, runtime::close);
     assertEquals("Web Log runtime stop failed", stopped.getMessage());
-    assertSame(shared, stopped.getCause());
+    assertNull(stopped.getCause());
     assertEquals(0, shared.getSuppressed().length);
-    assertEquals(3, closes.get());
+    assertEquals(1, closes.get());
 
     IllegalStateException startup = new IllegalStateException("synthetic startup failure");
     AtomicInteger startupCloses = new AtomicInteger();

@@ -592,7 +592,7 @@ if int(identifier[2:5]) >= 449:
          for k in c.findall('counter')}
         for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
         if c.get('name').startswith('dev/codex/schubert/nk/web/revocation/') and c.findall('counter')}
-    assert len(revoke_coverage) == 11
+    assert len(revoke_coverage) == (15 if int(identifier[2:5]) >= 450 else 11)
     assert all(k['missed'] == 0 for value in revoke_coverage.values() for k in value.values())
     manifest['revokeCoverage'] = revoke_coverage
     manifest['ddl'].update({'versionedMigrations': 27,
@@ -604,6 +604,35 @@ if int(identifier[2:5]) >= 449:
     manifest['limitations'] = [
         'Host genuine facade/API/isolated PostgreSQL and independent JMS fixture only; actual Artemis/native Web not accepted',
         'Local Logout atomic destruction/enqueue, retry worker shutdown, old key retention and full native assembly pending',
+        'V027 signed native migration/Backup/ordinary Morning/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
+        'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no interrupted/other-source result reuse',
+    ]
+if int(identifier[2:5]) >= 450:
+    names = {'JdbcWebSessionStore', 'SessionStoreException', 'EncryptedWebSessionRepository',
+             'LocalLogoutHandler', 'LogoutController', 'LogoutMvcConfiguration',
+             'WebLogApplicationRuntime', 'WebHttpServer', 'WebNativeCodecs', 'WebNativeCodecs$1',
+             'WebLogReplayWorker', 'WebLogReplayWorker$Snapshot'}
+    owned_coverage = {c.get('name').rsplit('/', 1)[-1]:
+        {k.get('type'): {'missed': int(k.get('missed')), 'covered': int(k.get('covered'))}
+         for k in c.findall('counter')}
+        for c in ET.parse(root / 'src/schubert-nk-web/target/site/jacoco/jacoco.xml').findall('.//class')
+        if c.findall('counter') and
+        (c.get('name').startswith('dev/codex/schubert/nk/web/revocation/') or
+         c.get('name').rsplit('/', 1)[-1] in names or
+         c.get('name').rsplit('/', 1)[-1].startswith(('WebSecurityAudit', 'WebRequestTrace')))}
+    assert len(owned_coverage) == 32
+    assert all(k['missed'] == 0 for value in owned_coverage.values() for k in value.values())
+    manifest['logoutOwnedCoverage'] = owned_coverage
+    manifest['bugs'].extend(f'BUG-{n:03d}' for n in (628, 630, 631, 632, 633, 634))
+    manifest['ykt'].extend(f'YKT-{n:03d}' for n in (445, 447, 448, 449))
+    manifest['testIds'].extend(['RERUN006A..H', 'RERUN007A..H', 'RERUN008A..E', 'NKEY005',
+                              'REQUEST actual valve', 'Log repeated UNKNOWN join/hidden fatal',
+                              'Runtime confirmed phases/HTTP stop-destroy phases'])
+    manifest['trigger'] = 'PG-D362..364/QA050: atomic local destruction and durable retained retry, real Logout HTTP/security/closed audit, actual workers join/confirmed stop phases/current third key; fresh six-module ownership regression'
+    manifest['limitations'] = [
+        'Host genuine facade/API/isolated PostgreSQL and independent JMS fixture only; actual Artemis/native Web not accepted',
+        'BUG629/YKT446 remain open for legacy startPath/closeAfterFailure and native outer callback UNKNOWN retention; no final stop receipt from requested stop',
+        'Mandatory business routes and full native resource graph/management/owner A release remain pending',
         'V027 signed native migration/Backup/ordinary Morning/API/Web/Caddy/DONE/intent/CHR-A01/L01/native coverage100 pending',
         'Formal PT-WEB-20260925-24/source858713c0/1964PT/53scope/48.3% unchanged; no interrupted/other-source result reuse',
     ]
