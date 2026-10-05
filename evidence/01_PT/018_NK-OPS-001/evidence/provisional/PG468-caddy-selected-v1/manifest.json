@@ -1,0 +1,160 @@
+{
+  "id": "PG468-caddy-selected-v1",
+  "collectedAt": "2026-10-05T04:32:19.999408+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "2251dff5db5332cdfdb36fac9e6f162ddeddf260",
+  "sourceDirtyAtCollection": true,
+  "sourceHashesPostRun": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java": "52509c2c20ee50a370777db4f7e0579a0314c8264e220be59fc43ff6b2d64519",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java": "b13cfffc4b3b05b687b1d1c4f085242bc3953cf95d7a35e84f01c1e1e2cd34f0"
+  },
+  "startedAt": "2026-10-05T13:29:47+09:00",
+  "completedAt": "2026-10-05T13:31:16+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg468_caddy_selected_v1.sh",
+  "exitCode": 0,
+  "tests": 96,
+  "suites": 14,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "web": {
+      "tests": 4,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "batch": {
+      "tests": 65,
+      "suites": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    }
+  },
+  "changedColdCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 128
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 38
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 24
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 20
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "nativeColdInvocationCoverage": {
+    "INSTRUCTION": {
+      "missed": 75,
+      "covered": 0
+    },
+    "BRANCH": {
+      "missed": 10,
+      "covered": 0
+    },
+    "LINE": {
+      "missed": 16,
+      "covered": 0
+    },
+    "COMPLEXITY": {
+      "missed": 6,
+      "covered": 0
+    },
+    "METHOD": {
+      "missed": 1,
+      "covered": 0
+    }
+  },
+  "independentOracle": "Independent fixed manager literals: retained strict normal F18 plus both exact unused auxiliary entries; mixed/modified/null/missing/foreign/bad retained states rejected, old invocation rejected by fresh ready. Existing actual owner/DB/kernel/budget controls.",
+  "bugs": [
+    "BUG-730",
+    "BUG-731"
+  ],
+  "ssc": [
+    "SSC-192"
+  ],
+  "ykt": [
+    "YKT-517"
+  ],
+  "testIds": [
+    "CADDY192001",
+    "CADDY192002",
+    "CADDY192003"
+  ],
+  "privateLogSha256": "1e5ef8f61ae778b3e7548b1819c23bf6a8a3dae53b994606428e440f477e1fa8",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "e359e2d919a211f2ca52c9d2898f012e46cde3f2e4b7a98ae90a7898c95b8b0e",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "d0fcb33399f91ef0e7c58c9c0be5ead59fa708dfca5cdc2d7ad37e4b98a12cd4",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "2c725c40d071132220aec1456b572da6706b69a802399549cd1c40044e0ecf72",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "b8155c67ef995bb7347f521a8f9c7eb10eb3de4e120c9c4525e53e796eddda95",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "8f537d0c8e4fdcea4ba468569e9e023578460f256e9fcb7992dc131a1581fbb8",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest.xml": "41f7876fbabf1ae0cf0b09e25673aef0d82708fd885d59dfbcd68aa90a6bc179",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest.xml": "000fa276522a6e60b63e72c1ce485f52b1c2efff26b3096d359ff674149f8225",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "345fe1497612619c26a43d8724275610122e61aede8de731562c5e07dd3fb714",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml": "46220c50abec58073d0f49902f21859fc38f6025f16069cfac14dbe1c0b7a0c4",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest.xml": "74308496b58208c84e33c0dfbeadf8a72f74dccecfcf27c55f5e54d7e68d15ac",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.CaddyAdmissionFenceTest.xml": "1bfa9afe370ea30642bd72a76f9808c075af5cddf7b40873e15a4e61b12b4a91",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.CaddyParentRemainingBudgetTest.xml": "95c5db8f14e6d6e1215f25917c1a82064577b989655ef39f694130c20f7cf764",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest.xml": "60c2100ede78edbb2055e25cd52354280a643e5306cdc8991293d3fece65eab4",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml": "1fbb6298bc2c98d37c6dffd00686333a9eb16c9f6a48d9c929525db8140a88c0"
+  },
+  "formal": false,
+  "coverageQualified": false,
+  "limits": [
+    "96 selected only, old XML not counted",
+    "cold counters only; coldInvocation/native surface unaccepted",
+    "New-source full/native not run; old df9 parent30 and PG464 success separate",
+    "No full CHR, QA051 comparator pending, formal run24 unchanged"
+  ],
+  "environment": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0",
+    "jacoco": "0.8.15",
+    "hostOS": "Linux 7.0.0-38-generic"
+  },
+  "redaction": "Case identity/timing and hashes only; XML properties/stdout/stderr/private DB/session/credential omitted"
+}

@@ -223,8 +223,10 @@ public final class MorningCaddyReadiness {
         || !"1".equals(before.get("ExecMainCode"))
         || start.signum() == 0
         || ended.compareTo(start) < 0
-        || !normal(pre, "validate")
-        || !normal(run, "run")) throw unavailable();
+        || !((normal(pre, "validate") && normal(run, "run"))
+            // SS342/SSC192: reload-cleared auxiliary data rejects the old generation only.
+            // It is not evidence of validation, readiness, ownership, or normal outer close.
+            || (unused(pre, "validate") && unused(run, "run")))) throw unavailable();
     return invocation;
   }
 

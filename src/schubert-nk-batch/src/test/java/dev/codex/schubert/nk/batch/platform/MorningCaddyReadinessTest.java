@@ -95,6 +95,87 @@ final class MorningCaddyReadinessTest {
   }
 
   @Test
+  void caddy192001ReloadClearedAuxiliaryHistoryRetainsOnlyPreviousGeneration() throws Exception {
+    var retained = normalHistory();
+    // Independent manager literals: daemon-reload clears both auxiliary entries, not F18.
+    retained.put("ExecStartPre", noHistory().get("ExecStartPre"));
+    retained.put("ExecStart", noHistory().get("ExecStart"));
+    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(retained));
+    assertThrows(
+        IOException.class,
+        () ->
+            new MorningCaddyReadiness(() -> {}, new Fixture(), "77777777777777777777777777777777"));
+    var fresh =
+        new MorningCaddyReadiness(() -> {}, new Fixture(), "88888888888888888888888888888888");
+    assertTrue(fresh.ready());
+  }
+
+  @Test
+  void caddy192002MixedOrMalformedReloadEntriesNeverBecomeColdAuthority() {
+    for (String key : List.of("ExecStartPre", "ExecStart")) {
+      var mixed = normalHistory();
+      mixed.put(key, noHistory().get(key));
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(mixed), key);
+      for (String bad :
+          List.of(
+              "path=/tmp/caddy",
+              "ignore_errors=yes",
+              "pid=1",
+              "code=exited",
+              "status=1/FAILURE",
+              "start_time=[Mon 2026-10-05 13:00:00 JST]")) {
+        var altered = normalHistory();
+        altered.put("ExecStartPre", noHistory().get("ExecStartPre"));
+        altered.put("ExecStart", noHistory().get("ExecStart"));
+        String entry = altered.get(key);
+        String expectedPart =
+            bad.startsWith("path=")
+                ? "path=/usr/bin/caddy"
+                : bad.startsWith("ignore_errors=")
+                    ? "ignore_errors=no"
+                    : bad.startsWith("pid=")
+                        ? "pid=0"
+                        : bad.startsWith("code=")
+                            ? "code=(null)"
+                            : bad.startsWith("status=") ? "status=0/0" : "start_time=[n/a]";
+        altered.put(key, entry.replace(expectedPart, bad));
+        assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(altered), key + bad);
+      }
+    }
+  }
+
+  @Test
+  void caddy192003ResetAuxiliaryEntriesCannotHideBadRetainedF18OrProfile() {
+    for (var change :
+        Map.ofEntries(
+                Map.entry("ActiveState", "failed"),
+                Map.entry("SubState", "running"),
+                Map.entry("MainPID", "43"),
+                Map.entry("Job", "123"),
+                Map.entry("Result", "exit-code"),
+                Map.entry("ExecMainCode", "0"),
+                Map.entry("ExecMainStatus", "143"),
+                Map.entry("ExecMainStartTimestampMonotonic", "0"),
+                Map.entry("ExecMainExitTimestampMonotonic", "999999"),
+                Map.entry("InvocationID", "0".repeat(32)),
+                Map.entry("Id", "foreign.service"),
+                Map.entry("User", "root"),
+                Map.entry("NoNewPrivileges", "no"))
+            .entrySet()) {
+      var altered = normalHistory();
+      altered.put("ExecStartPre", noHistory().get("ExecStartPre"));
+      altered.put("ExecStart", noHistory().get("ExecStart"));
+      altered.put(change.getKey(), change.getValue());
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(altered), change.getKey());
+    }
+    var missing = normalHistory();
+    missing.put("ExecStartPre", noHistory().get("ExecStartPre"));
+    missing.put("ExecStart", noHistory().get("ExecStart"));
+    missing.remove("ExecMainExitTimestampMonotonic");
+    assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(missing));
+  }
+
+  @Test
   void caddy180001ColdIsInitialOrNormalHistoryNotInvocationEmptyOnly() throws Exception {
     assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(normalHistory()));
     assertEquals("", MorningCaddyReadiness.cold(noHistory()));
