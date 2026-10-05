@@ -661,6 +661,10 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 
 ### 8.2 Bootstrap account
 
+SSC190（PG465、正常完了後の管理者code-only配備補足）：前親が正規DONEまで完了した場合の配備を、失敗復旧又はpending原本用の配備工具で代用しない。管理者は現boot・正規署名/current・親実正常終端の記録・完全DONE値・active/pending不存在・DB全既存値・Backup現物/Transfer・全startup原byte/metadataを再認証し、同M/A及びDB保守排他を取得する。生存Caddy/Web/API/Artemisは現manager/kernel/普通identity/INFO/socketを同世代で前後照合してから逆順に所有停止し、全対象Unit/kernelの真正終端を確認する。stop client成功やGC値だけで旧workerの正常帰還を認定しない。旧失敗/UNKNOWNを今回の正常終端に混ぜない。
+
+全対象停止後、保持DONEを`observeStartup`の完全completionで再検査する。pending専用`Session.observe`へDONEを渡したり、active/pending/原本を復元して条件を満たしたりしない。旧ISSUEDのpermit/owner/launchは署名世代の相関資料であり再利用する起動権限ではない。管理者配備の既存`invalidate`で同boot/同保存activationの新INVALIDを発行し、旧permit/owner/launch原byteを全保持する。新permit/start/DDL/業務run更新0で正規candidate/BOM/approval/currentを切り替え、署名された新bootstrap Unitだけを既定disabledで配置する。全旧原本/DB/Backup/Transfer/record集合・新INVALID/署名・Unit内容・全scope正常返却を独立再試験してから次のbootstrap一回startへ進む。不明/半切替/close不明は保全・隔離・M/A保持、成功へ推定しない。切替後の通常Morningは新runを正規生成し、保存DONEをpendingへ戻さず原本/Backupを保持する。親30分/各Unit期限・既存コードの起動品質を緩和しない。
+
 SSC189（PG465、専用Unitの起動/保守排他の内部具体化）：bootstrapは通常API/Web用のpermit・JMS・5credential組立を流用しない。専用Unitは既存schubert-api UID/GID/固定supplementary groups、全capability0、NoNewPrivileges=true、kernel cgroupが固定`/system.slice/schubert-nk-bootstrap-admin.service`であることを既存ChildStartupContext/FixedServiceIdentityで認証する。固定`/run/credentials/schubert-nk-bootstrap-admin.service`だけを受け付け、username/password/db-apiの3つを保持inode/ACL/read-only/bounded/strict UTF8で読む。通常API/Web credential enumへbootstrap秘密を追加しない。設定は既存API非秘密設定、DBは既存schubert_app admission、argv/秘密env/URLやrole overrideなし。前後同boot/PID/startTicks/identity/cgroupで世代を再検査し、全credential/DB/source/root資源が正常返却した後だけ0又は20を返す。実Unitは無効がdefaultで通常restartなし、0と既存skip20を区別して記録する。
 
 初期作成TXは既存保守排他71419602に`pg_try_advisory_xact_lock_shared`で参加し、保守がexclusiveを保持していれば即時拒否・作成0、NULL/欠落/余剰結果も拒否する。その後のmembership71419601→table lock→存在確認はSSC188と同じで、共有保守lockはcommit/rollbackまで保持する。これはMaintenance namespace/原本/epoch/permit発行の権限ではない。実credential sourceは別sessionでLogin/変更/ADMIN確認を終えてから退役し、DB/原本/Backup/Current保全を独立検査する。固定Unitを署名BOMへ含め、未登録コードや私有classをProduction実入口の代用にしない。
