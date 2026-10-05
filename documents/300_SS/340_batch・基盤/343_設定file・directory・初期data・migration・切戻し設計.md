@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC194横断補足（2026-10-06）：SSC193普通terminalの新private inode/dir通常返却は、SS342のPT-only outer stop holdがJVM終了を待つ区間内に完了させる。元application finished後のmainだけからdump完了を推定しない。終了期限/Root管理namespace/旧exec・原本Backup・tmpfs cold保全・profile default不変更、部分dump及び非成功は保全し未受入とする。設計反映はfresh全6/同source実TERM・dump・正常owned返却・正式品質の完了ではない。
+
 ## SSC193 隔離PG/PT native採取namespace（2026-10-06、§11.1配備補足）
 
 既存Production namespace/初期data/migration/原本Backupを変更しない。隔離PG/PTの現bootで `/run` と `/run/schubert-nk` はRoot:Root0755、既存 `/run/schubert-nk/pt-coverage` はRoot:Root0711・ACLなしとし、旧coverage領域とexecを全保全する。新role名は `root-api193` / `root-web193`（Root:Root0700）、`ordinary-api193` / `ordinary-web193`（当固定NSS accountのUID:primary GID0700）だけ。管理者が正常停止/現boot・元原本/Backup・current/lock/署名の保全を確認して新規専用directoryを作成し、runtimeは作成/chmod/chown/置換・旧/runの復元を行わない。agent固定pin/Root0755 parent/0644単link/ACLなし/ROはSS342 SSC193で規定する。出力roleはtmpfs・RWを保持capabilityから検査する。
