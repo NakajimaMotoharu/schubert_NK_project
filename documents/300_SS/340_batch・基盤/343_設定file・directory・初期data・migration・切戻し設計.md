@@ -666,6 +666,10 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 - `app_users` 0件の場合だけ実行、複数回/既存Userありは無変更でexit 20。固定default passwordなし。
 - 作成後に別sessionでLogin・password変更・ADMIN権限を確認。Bootstrap credential sourceは承認済み手順で無効化/削除。
 
+SSC188（PG465、初期ADMINの内部transaction補足、RD/UI変更なし）：初期作成は通常の認証済みADMIN向けUser CREATE入口を偽のactorで呼ばず、専用oneshotから借用write transactionで行う。READ COMMITTED・autoCommit=false・readOnly=falseを必須にし、既存ADMIN membership advisory lock71419601→app_users SHARE ROW EXCLUSIVE table lock→全Userの存在検査→0件時だけINSERTの順とする。table lockは非協調INSERTも遮断し、commit/rollbackまで保持する。既存Userなら種類/statusを問わずexit20相当の非作成結果、hash化・行更新・監査追加なし。callerがcommit/rollback/closeを所有し、commit又はclose不明を正常成功へ変換しない。
+
+usernameは画面の新規Userと同じNFC/trim/64byte・ASCII `[A-Za-z0-9._-]+`、comparison key Locale.ROOT、passwordは同PasswordPolicy/PasswordHasherを使用する。初期role ADMIN/status ACTIVE/version0、created_by/updated_by NULL（認証済み既存actorは存在しない）、日時は同一UTC値。初期作成の既存USER_CREATED ACTION/SECURITY監査は同transaction、actor列NULL、detailsに固定source BOOTSTRAPと新targetUserIdだけを記録し、credential/hash/平文を含めない。新しいaction/DIFは追加しない。既存DBrole/grantとV002/V005を再利用しDDL/既存migration checksumは変更しない。個別credential読取・専用Unitの同定、資源後条件、実Login/変更/credential退役は別途同じ経路のnative受入条件として維持する。
+
 ## 9. Flyway migration
 
 ### 9.1 責務分離
