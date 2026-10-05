@@ -1,6 +1,8 @@
 # NK-OPS-001 停止済Backup最終完了 単体テスト仕様書
 
-Program/class/method：MorningCompletionEvidence.verify/constructor、MorningProcessMainの同cycle引継ぎ、既存MorningBackupUnitCycle.completedReceipt/recheckCompletedBackup、BackupUnitReceiptGate.requireStoppedResult。関連RD OPS009/BAK001/DAT009、UI251、SS341342343 SSC135136185186187、QA047、BUG704/YKT506。現在は仕様先行、試験未実行・合格0。
+Program/class/method：MorningCompletionEvidence.verify/constructor、MorningProcessMainの同cycle引継ぎ、既存MorningBackupUnitCycle.completedReceipt/recheckCompletedBackup、BackupUnitReceiptGate.requireStoppedResult。関連RD OPS009/BAK001/DAT009、UI251、SS341342343 SSC135136185186187、QA047、BUG704/YKT506。実結果は339を正とし、限定選択を全回帰/native合格へ加算しない。
+
+復旧工具の補助Test ID：PT-OPS-ISO464001=同PG463 timeout143/真正peer18反例・隔離60反例、PT-OPS-RET464001=同INVALID/型付き退役10反例、PT-OPS-CODE464001=固定旧署名/全29集合/321行保存のcode-only引数集合72反例。手書きargument/namespace/actor literalが独立oracle、実VMのverify→isolate→verify→retireを各actual0・全9terminal/全321列/原本Backup保持/intent0で照合し、旧UNKNOWN正常化は期待しない。commandはpg464_timeout_tools_v2.sh/pg464_code_tools_v2.sh及び各class mainのverify/isolate/retire/activate、環境JDK25.0.4/同e07VM/PG18.6、安全PG464-timeout-native-v1 manifestにsource/class/log hash・実session/exitを記録。工具assert数はProduction PT/coverageへ加算0、CodeOnly native verify/activateは未実行。
 
 ## 目的と独立oracle
 

@@ -1,5 +1,11 @@
 # NK-OPS-001 停止済Backup最終完了 実行結果
 
+## 2026-10-05 09:00 JST 実結果追記（限定・正式未認定）
+
+SSC187実装は同cycle.completedReceiptの参照同一性とrecheckCompletedBackupを使用し、Cleanup/ExpiryのKEEP_ACTIVE及びDB/原本/期限を維持。選択v1はimport欠落でactual1/未実行（BUG705）、v2を経てv3はactual0/89PT13suite/FES0/静的6zero/NullAway。STOPCOMP独立4PTは手書き18field/current/coldGC/foreign/partial/owner/kernel/30分境界/DB行・原本差異を検証。safe `evidence/provisional/PG464-stopcomp-selected-v3/manifest.json`、変更verify全counter miss0、constructor既存15branch/1line miss、全回帰/native/global100未達。
+
+旧親は08:29:09 timeout143、observer24911 actual0/15record、parent.exec SHA5d1dc41d5a09849cf6251d5dfa2b60354d16feeae18c452a27bebad071c6f5fc/同凍結BatchBootstrap NoMatch0。旧A01 PASSは11cだけで親成功へ加算0。新operator工具18+60+10assert/Werror0、capture→owned隔離→typed退役のactual0を確認。全9terminal/321全値・原本pending・BackupTransfer/旧24+当4保持、INVALID1ba8…/29/intent0。新outer正常帰還だけ確認し、旧143/UNKNOWNは不変更。BUG706 argv遷移識別の是正は真正普通proofを弱めない18反例/現VMで再試験。CodeOnly v2の72assert/Werror0、BUG707架空完了file除去、native候補切替は未実行。新source full/署名/native結果は後記し、formal run24は据置。
+
 2026-10-05 JST。338/SSC187/BUG704/YKT506。修正実装・独立PT・fresh全6・修正後nativeは未実行、合格0。正式PT-WEB-20260925-24/1964PT/53scope/48.3%据置。
 
 ## 修正前実障害の根拠

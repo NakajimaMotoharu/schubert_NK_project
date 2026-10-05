@@ -1,0 +1,137 @@
+{
+  "id": "PG464-timeout-native-v1",
+  "collectedAt": "2026-10-05T00:01:41.419918+00:00",
+  "headAtCollection": "b43e0f19eb32f5f4dedba57948f9c3f3c2f3033f",
+  "sourceDirtyAtCollection": true,
+  "branch": "dev-foundation",
+  "deployedSource": "11c1feb1c0b51543f98c28e3f54213274648f06f",
+  "testIds": [
+    "PT-OPS-ISO464001",
+    "PT-OPS-RET464001",
+    "PT-OPS-CODE464001"
+  ],
+  "independentToolAssertions": {
+    "peers": 18,
+    "isolation": 60,
+    "retirement": 10,
+    "codeOnly": 72
+  },
+  "actualCompletedCommands": [
+    {
+      "class": "Pg464TimeoutIsolation",
+      "mode": "verify",
+      "session": 76660,
+      "exitCode": 0
+    },
+    {
+      "class": "Pg464TimeoutIsolation",
+      "mode": "isolate",
+      "session": 42672,
+      "exitCode": 0
+    },
+    {
+      "class": "Pg464TimeoutRetirement",
+      "mode": "verify",
+      "session": 35169,
+      "exitCode": 0
+    },
+    {
+      "class": "Pg464TimeoutRetirement",
+      "mode": "retire",
+      "session": 22935,
+      "exitCode": 0
+    }
+  ],
+  "postconditions": {
+    "allNineTerminal": true,
+    "preservedFullFourteenColumnRows": 321,
+    "originalPendingBackupTransferPreserved": true,
+    "startupNamespaceCount": 29,
+    "intentCount": 0,
+    "canonicalState": "INVALID",
+    "newOwnedScopesReturnedNormally": true,
+    "ddlIssued": 0,
+    "newStart": 0
+  },
+  "oldParentExit": 143,
+  "oldParentAccepted": false,
+  "oldUnknownNormalized": false,
+  "codeOnlyNativeExecuted": false,
+  "formal": false,
+  "productionPtCredit": 0,
+  "bugs": [
+    "BUG-704",
+    "BUG-706",
+    "BUG-707"
+  ],
+  "ykt": [
+    "YKT-506",
+    "YKT-507",
+    "YKT-504"
+  ],
+  "ssc": [
+    "SSC-187"
+  ],
+  "privateLogHashes": {
+    "pg464-timeout-isolation-verify-v1.log": {
+      "sha256": "1cc5b9b7a93ec4a072d5a569baf0bfdb2f114ff333c3e898de30064bb6410954",
+      "size": 238
+    },
+    "pg464-timeout-isolation-v1.log": {
+      "sha256": "2e4897652cf22cf8e44873eff600979189184f04eed0701c4d4041e1a7fe65c8",
+      "size": 240
+    },
+    "pg464-timeout-retirement-verify-v1.log": {
+      "sha256": "627cc3bd13d691eeec8d53e86400539691e04fec10042049ac96a6202ba2fd47",
+      "size": 230
+    },
+    "pg464-timeout-retirement-v1.log": {
+      "sha256": "dbcb9c66595db8474f5346ca103566e6c334ddcf7955247df577e05593121c15",
+      "size": 1836
+    },
+    "pg464-timeout-peers-v2.log": {
+      "sha256": "a0ffd6392ff92a18e62b08c489f21513a661311e6db7fa7ca712451c3552c1f5",
+      "size": 87
+    },
+    "pg464-timeout-isolation-tests-v2.log": {
+      "sha256": "e0da982ed90298e5763a9b524755c1f59378bb817d6e71efba8f37ace9ae2541",
+      "size": 93
+    },
+    "pg464-timeout-retirement-tests-v2.log": {
+      "sha256": "bd56e51c0c937473e5cd1493a5abf521c12302824295644a641c5ae742b2250e",
+      "size": 99
+    },
+    "pg464-code-tests-v2.log": {
+      "sha256": "4424b403aa4d78b129d1816a7006cf76a488b523d9d5d81e48b0d649c32945a6",
+      "size": 134
+    }
+  },
+  "sourceHashes": {
+    "tools/quality/vm/050_s1/Pg464CodeOnlyDeployment.java": "5e95f79f93c38747afdf5a9de0fe1ea1b9bcf0ed214f49eaadc11c4ccb8c9c02",
+    "tools/quality/vm/050_s1/Pg464TimeoutIsolation.java": "0c6a7f50e022eb6429d858a671f7959d66215b61011e4438dd71ea63e590ef96",
+    "tools/quality/vm/050_s1/Pg464TimeoutIsolationTest.java": "c3bbce29518bdcb5997fc53cc91e4b816d587357b96d9319b0e5042932ddb1a1",
+    "tools/quality/vm/050_s1/Pg464TimeoutRetirement.java": "66f1dc943cc2ecc44741b76fed9d46562e1b3062a910bb91f466c4838a5749c2",
+    "tools/quality/vm/050_s1/Pg464CodeOnlyDeploymentTest.java": "8467b822374fad21e4231ed778bfa1c2b63a7e264ff2ccbb22360ad6622e8e87",
+    "tools/quality/vm/050_s1/Pg464CapturedPeersTest.java": "aa785d9bf6c686c160c5cee5192ce790bd0b6677d0a12d46ef4185a7c248c659",
+    "tools/quality/vm/050_s1/Pg464CapturedPeers.java": "439a7a4762d00815018ce4626d23af31a1f8c6b1febae44f5567f9388994ed1b",
+    "tools/quality/vm/050_s1/Pg464TimeoutRetirementTest.java": "3cb8b7c5f701a4f65396d27cd8709e08540f345c4525bc6bd23c3ec118b894d1"
+  },
+  "classHashes": {
+    "pg464-timeout-tool-v2/Pg464TimeoutRetirementTest.class": "d4b894b243c4fe7ac55b9c27f94bd9efc52e4944ad2fd256460fa7d28fe28aeb",
+    "pg464-timeout-tool-v2/Pg464TimeoutRetirementTest$Action.class": "23c6c11be49821884f51128d783a90ee5e59810d4868ca2d35661e877d8619ad",
+    "pg464-timeout-tool-v2/Pg464TimeoutIsolation.class": "80bf2a475a5d4746eadd3f592a90a7ebcc76483ed02433f1feb3919259994928",
+    "pg464-timeout-tool-v2/Pg464TimeoutIsolationTest.class": "0f799d30321806023a7db30806c45769b991094a32d398fc1f2d7075a5f8d5f6",
+    "pg464-timeout-tool-v2/Pg464CapturedPeersTest.class": "698f13b99f7becb1632568244cbc8d996c3b676ebc7e38a642a4c8f8d160e281",
+    "pg464-timeout-tool-v2/Pg464CapturedPeers.class": "e9b97a9e6af01ccce57ca1d3765c2d3cf39d48489e3c00aaccb89f296953b1ee",
+    "pg464-timeout-tool-v2/Pg464TimeoutRetirement.class": "75e5335bc8415d8d07634dbba0298f7bd403e3d0d1699ca9e958c53f1a7df933",
+    "pg464-code-tools-v2/Pg464CodeOnlyDeployment.class": "e0e3c0bcee41923e887e938d40b67e7b96f411b5fd6a82995d044d0ef41939cc",
+    "pg464-code-tools-v2/Pg464CodeOnlyDeploymentTest.class": "dce6ad300544cd0ac32347fc68dcf4464ab40db9947bed9f6d1f6ce226e1b572"
+  },
+  "limits": [
+    "Operator assertions are not Production coverage.",
+    "New-source full/native pending.",
+    "Retirement has no complete.private; normal return uses actual command exits.",
+    "Old timeout remains failed; all preservation/private heaps remain outside Git."
+  ],
+  "redaction": "Hashes/counts/approved class identity only; private wire/DB/credentials omitted."
+}

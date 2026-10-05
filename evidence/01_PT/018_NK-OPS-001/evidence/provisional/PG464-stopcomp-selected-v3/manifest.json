@@ -1,0 +1,163 @@
+{
+  "id": "PG464-stopcomp-selected-v3",
+  "collectedAt": "2026-10-04T23:50:36.754898+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "b43e0f19eb32f5f4dedba57948f9c3f3c2f3033f",
+  "sourceDirtyAtCollection": true,
+  "sourceHashesPostRun": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/StoppedBackupFixture.java": "11ef7eaebae015e6d42f8b8808c5e794be382b0e316b32e03253e426cd2c070b",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StoppedBackupCompletionTest.java": "df666dc6c75325298778f4155fa2f28ba46e6e18fc653d9777215b47843b849c",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidenceTest.java": "bfda02192442d7ad38683b4fe5df83772a86ef12789878b93b9b4dd1c0a370e8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java": "7b7d74a7f9faca0ef821fb9a2ac99f869252ba6f41f05617187d6c94080b73b7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java": "316d30f2a7ee1947417e8656120899c339ad14022a08a0789745a090b5ae5860"
+  },
+  "startedAt": "2026-10-05T08:46:55+09:00",
+  "completedAt": "2026-10-05T08:48:13+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg464_stopcomp_selected_v3.sh",
+  "exitCode": 0,
+  "tests": 89,
+  "suites": 13,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "bootstrap": {
+      "tests": 10,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "api": {
+      "tests": 2,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "web": {
+      "tests": 4,
+      "suites": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    },
+    "batch": {
+      "tests": 58,
+      "suites": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "staticViolations": 0
+    }
+  },
+  "changedVerifyCoverage": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 103
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 10
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 22
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 6
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "existingConstructorOpenCoverage": {
+    "INSTRUCTION": {
+      "missed": 14,
+      "covered": 213
+    },
+    "BRANCH": {
+      "missed": 15,
+      "covered": 37
+    },
+    "LINE": {
+      "missed": 1,
+      "covered": 35
+    },
+    "COMPLEXITY": {
+      "missed": 15,
+      "covered": 12
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "independentOracle": "Handwritten 18-field bus/kernel literal, fresh0/30 -> explicit stop -> original receipt/cycle; stopped/GC/foreign/partial/null/owner/kernel/30m boundary and exact seven-event order. Full DB row/original reference mismatches reject.",
+  "bugs": [
+    "BUG-704",
+    "BUG-705"
+  ],
+  "ssc": [
+    "SSC-187"
+  ],
+  "ykt": [
+    "YKT-506"
+  ],
+  "testIds": [
+    "PT-OPS-STOPCOMP001",
+    "PT-OPS-STOPCOMP002",
+    "PT-OPS-STOPCOMP003"
+  ],
+  "privateLogSha256": "88f878c78f6ba46ed9f726b73e52604d331b872c293f261d54ef69eaa94861f9",
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "e5cfd2be7aa0c0602184af2084d2825e8116510b170c431720bb4289d158b899",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "06bb99aba50b15c2a80747f349ab116f5fb1d568aea55df0e6aecfea1535f18f",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "1366107a7206ee1cc3c7065bb412b1ad67068358b9915008ee22ae3463c1ffcc",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.xml": "64b4d1d2e11d0f23808434fbdfe87af31f058019a81f5afe4d2b61351b19bc74",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "b0104ead7b94a8dce7e3e16b946a28c01c13a327ca384772d8aafa1e0830f50d",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest.xml": "33e1bf4009502778e9c709f22022390b1d0943f0e92c886e7ba8ac7c449407cf",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest.xml": "b3c5224050066837b54eff819dd1a54a8f1d11e1df8eb2b1b9439d04fc1b17ad",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.StoppedBackupCompletionTest.xml": "b4951f0c840d5df51a31ee904feed0c0e3331a4be8a49c34b050eb0e9e2ab41c",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest.xml": "c5a1b8f586ad6e1e69f362da9eb1d4e36ce5a5511e227194998eb02cdc265d50",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest.xml": "f6cf7ab198538bcaa824256875a75dce0be3197d2b7afb3d2bcd78a03d0a60ad",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest.xml": "ade85c5a6a62e99aa24dbb27cdcec77fb9822938866be1d1551c79057447084b",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest.xml": "2b7cd672e4abfbf587240e5978701a5ce09f2328e219a94a1461d4b735619794",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest.xml": "f5bf5ba61126e4a7e97652fa199a8f9bb8e03ac115ceeb1d68b9c13620ad7019"
+  },
+  "formal": false,
+  "coverageQualified": false,
+  "limits": [
+    "89 selected only, old XML not counted",
+    "Constructor existing15 branch/1 line miss remain explicit; no record/class100 claim",
+    "MorningProcessMain assembly changed argument is native-only pending",
+    "New-source full/native not run; old11c A01/parent143 separate",
+    "No full CHR, QA051 comparator pending, formal run24 unchanged"
+  ],
+  "environment": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0",
+    "jacoco": "0.8.15",
+    "hostOS": "Linux 7.0.0-38-generic"
+  },
+  "redaction": "Case identity/timing and hashes only; XML properties/stdout/stderr/private DB/session/credential omitted"
+}

@@ -376,6 +376,7 @@ public final class MorningProcessMain {
                               : Optional.empty(),
                           backupCompleted.rows(),
                           backupCompleted.receipt(),
+                          backupCycle,
                           cleanup,
                           expiry);
                     });

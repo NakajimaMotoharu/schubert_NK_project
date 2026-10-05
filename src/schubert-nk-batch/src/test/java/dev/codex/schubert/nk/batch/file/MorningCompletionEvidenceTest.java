@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.file;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle;
+import dev.codex.schubert.nk.batch.platform.StoppedBackupFixture;
 import dev.codex.schubert.nk.batch.repository.*;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
@@ -18,6 +19,7 @@ final class MorningCompletionEvidenceTest {
   static MorningCompletionEvidence fixture(String mode) throws Exception {
     var input = MorningPrestartEvidenceTest.input(mode);
     var rows = input.backup().rows();
+    var stopped = new StoppedBackupFixture(mode.equals("failed") ? 30 : 0, true);
     return new MorningCompletionEvidence(
         mode.equals("failed")
             ? MorningBackupUnitCycle.Outcome.FAILED
@@ -28,7 +30,8 @@ final class MorningCompletionEvidenceTest {
             ? Optional.empty()
             : Optional.of(MorningPrestartEvidenceTest.MANIFEST),
         rows,
-        input.backup().receipt(),
+        stopped.receipt,
+        stopped.cycle,
         input.cleanup(),
         input.expiry());
   }
@@ -146,6 +149,7 @@ final class MorningCompletionEvidenceTest {
                 f.manifest(),
                 f.backup(),
                 f.backupReceipt(),
+                f.backupCycle(),
                 f.cleanup(),
                 f.expiry()));
     assertThrows(
@@ -157,6 +161,7 @@ final class MorningCompletionEvidenceTest {
                 Optional.empty(),
                 f.backup(),
                 f.backupReceipt(),
+                f.backupCycle(),
                 f.cleanup(),
                 f.expiry()));
     assertThrows(
@@ -168,6 +173,7 @@ final class MorningCompletionEvidenceTest {
                 f.manifest(),
                 f.backup(),
                 f.backupReceipt(),
+                f.backupCycle(),
                 f.cleanup(),
                 f.expiry()));
     assertThrows(NullPointerException.class, () -> f.verify(null, CLOCK, () -> 10_000_000_000L));

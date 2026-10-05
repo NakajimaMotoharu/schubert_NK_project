@@ -12,7 +12,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import org.jspecify.annotations.NullMarked;
 
-/** Immutable actual ten-step data, never closed retention/file authority. SS341/343 SSC178/318. */
+/**
+ * Actual ten-step data plus the same still-owned stopped Backup cycle; no reconstructed authority.
+ * NK-OPS-001/OPS009/BAK001; UI251; SS341/342/343 SSC187; PT-OPS-STOPCOMP001..004.
+ */
 @NullMarked
 record MorningCompletionEvidence(
     MorningBackupUnitCycle.Outcome backupOutcome,
@@ -20,6 +23,7 @@ record MorningCompletionEvidence(
     Optional<BackupManifest> manifest,
     MorningDatabaseSession.BackupObservation backup,
     BackupUnitReceiptGate.TerminalReceipt backupReceipt,
+    MorningBackupUnitCycle backupCycle,
     MorningCleanupExecution.Completion cleanup,
     MorningDatabaseSession.ExpiryObservation expiry) {
   MorningCompletionEvidence {
@@ -28,6 +32,7 @@ record MorningCompletionEvidence(
     Objects.requireNonNull(manifest);
     Objects.requireNonNull(backup);
     Objects.requireNonNull(backupReceipt);
+    Objects.requireNonNull(backupCycle);
     Objects.requireNonNull(cleanup);
     Objects.requireNonNull(expiry);
     var run = begins.database().run();
@@ -81,7 +86,9 @@ record MorningCompletionEvidence(
         || !cleanup.references().equals(database.cleanupReferences(actual, owner)))
       throw unavailable();
     database.recheckExpiry(expiry, owner);
-    backupReceipt.requireStillPresent();
+    // Backup was explicitly stopped by this completed cycle. KEEP_ACTIVE is only for the others.
+    if (backupCycle.completedReceipt() != backupReceipt) throw unavailable();
+    backupCycle.recheckCompletedBackup();
     cleanup.receipt().requireStillPresent();
     expiry.receipt().requireStillPresent();
     database.recheckConsistent(run);
