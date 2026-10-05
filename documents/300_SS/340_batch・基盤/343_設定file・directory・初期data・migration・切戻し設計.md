@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC192配備補足（2026-10-05、BUG730/YKT517）：正規署名code-only配備のdaemon-reloadは、停止済みCaddyの正常F18/旧Invocationを保持しつつ補助Exec履歴を両exact未実行へ戻すことがある。これをSS342 SSC192の旧世代拒否dataとして分類し、設定変更前後・全kernel停止・原本DB/Backup保全と新所有を維持する。補助n/aを旧処理成功へ補完せず、片側混合/未知/失敗履歴を拒否し、新Caddyは新普通actor・真正validate・新Invocation/socket/TLSで再認証する。旧/run/permit/原本を復元して再起動したことにせず、設計公開はnative受入と区別する。
+
 SSC191（QA047内、BUG720/YKT511、SSC190の正常DONE配備停止中断）：旧工具の保持UNKNOWNにresume/exit APIがない場合、旧操作をそのまま成功再開するのではなく、次の限定管理者handoffを別入口とする。業務/原本/Current baselineの修復、新permit、DDL、startは本handoffでは実行しない。
 
 1. 固定隔離環境の管理者start・namespace変更禁止、timer/path等の自動起動抑止を全移譲区間継続する。現在boot/旧工具PID/startTicks/loaded class・固定entry/実M/A inodeとOFD flock/専用DB session・advisory及び実保持scope、署名old/currentと候補、私有保存の完全原本DONE/activepending不存在・全DB14列/業務原値/history/Backup全属性hash/Transfer/33startup名前・全byte metadataを再同定する。履歴PIDや一般UNKNOWN表示だけから所有scopeを推定しない。

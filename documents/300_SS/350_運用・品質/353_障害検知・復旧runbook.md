@@ -227,6 +227,8 @@ RPO/RTO計測は検知からpublic再開まで。復旧で失われるaccount変
 
 ### 20.3 原因究明と是正の計画
 
+SSC192：親known30がCaddy発行前に終端した場合、同source execと全9真正manager/kernel、原本/Backup/namespace/3intentを私有保全し、両ordinary API/Webのowned TERM後条件と残Brokerを現値で分離する。daemon-reload後の保持正常F18＋両exact未実行補助履歴はSS342の旧世代拒否dataであり、親成功/旧validate成功/旧close成功へ変換しない。新所有で全cohort隔離・typed退役・原本全保全を確定後だけ、修正済み固定source/正規署名から新run一回へ進む。片側混合/世代競合/未知は隔離を維持し、二重start/reset-failed/旧原本pending復元はしない。BUG730/YKT517の独立再発防止・fresh全回帰・実Caddy/DONE/全後条件を記録する。
+
 SSC191：正常DONE原本/ISSUEDと生存普通actorを伴うcode-only工具の部分停止UNKNOWNは、20.2の旧pending/INVALID/3intentを代入せずSS343 SSC191の別限定handoffへ分岐する。旧holderがM/Aを実保持中に管理者start/namespace変更禁止を継続して残同世代全9Unitを正規停止・全保全を確定し、その後だけ固定工具のpidfd通常TERMを「旧操作中断143/旧close未知」と記録する。新実M/A/advisory取得・旧session/kernel消失・全完全DONE/DB/Backup/byte再照合後にだけ別completed回復入口へ進む。旧工具TERMや普通Web143を工程成功/旧UNKNOWN解決へ変換しない。全phaseと独立fault/native後条件を915/916/PTへ記録し、同時に新start/epoch/DDLを発行しない。
 
 SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失していれば20.2の現物typed退役を実行したとは扱わず、SS343 SSC165/174の新boot冷停止・完全原本/全DB/Backup・現承認再認証に分岐する。旧/run raw復元、消失intentの成功退役推定、OS停止を旧工具正常closeとする扱いは禁止。管理session/自動更新抑止は隔離環境の起動前提でありProduction start gate代用ではない。現在9Unit/full18・全kernel・現boot M/A inode・専用DB所有を別証明し、限定新INVALIDと旧UNKNOWN未解明を別結果として記録する。QA047の原因究明・対策・独立再発防止/native検証の未完了状態は維持する。
