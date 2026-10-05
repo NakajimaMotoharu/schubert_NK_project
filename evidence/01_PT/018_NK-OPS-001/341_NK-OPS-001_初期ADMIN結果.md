@@ -1,5 +1,11 @@
 # 初期ADMIN 実行結果
 
+## 2026-10-05 12:24 JST SSC191停止・移譲前の独立結果
+
+Production/full/candidate df9不変、3289PT488suite/静的6zeroは同sourceの保存結果。SSC191設計only PR22→origin/main4ea9d8bdeb3da0c81f713bd1754a741534a3794e、dev c2bedec1a。DEPLOY006：手書きTERM oracle240/control173 assertions actual0（Production PT加算0）。実Web同Invocation791 journal/F18で通常143 stop dataを確認、Unit成功・旧工具close成功はfalse。新only private journal600/親700、旧privacy障害BUG721を遡及成功化0。
+
+DEPLOY007：Pg466HandoffReadback snapshot actual0、新read-only全scope通常帰還/原本正常DONE/331全14列/23table/Backup20/Transfer/履歴28/namespace33を保存照合。旧工具PID1438705/tick12405848/classfcbd、M/A実OFD及びinode1974/1975保持をinspect actual0で確認。旧DBsession観測は0、論理Java objectから生存・正常closeを推定0。元activate/session6498はUNKNOWN保持中、actualexit未確定。DEPLOY008/isolate/TERM/新ownership/新current/初期ADMIN/native100は未実行。私有hash/commandはPG466-handoff-preflight/manifest、原本・rawjournal・credential Git格納0。
+
 ## 2026-10-05 11:44 JST 全回帰・正常DONE配備前検証
 
 同Production source df9a33febf3703f0d18ac2c4ef56fd0225aac2b9、full/session88697 actual0/11:19:59完走/3289PT488suite/FES0/静的6zero、全src/tools hash不変、全6 targetを新only pg465-hostへbyte照合固定。018 PG465-bootstrap-fullは独立XML/counter・logSHAと現在SSC188189を記録、未網羅は保持、formal/native100不認定。候補PG465-v2は186/61/SQL27/history28、追加Unit1、全size/hash/ED署名検証0、manifest8b8e82f4…、まだcurrent未変更。

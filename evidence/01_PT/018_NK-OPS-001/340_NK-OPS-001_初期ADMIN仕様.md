@@ -24,3 +24,6 @@ expectedはDDL/固定SQL後条件と独立JCA/手書き列から算出。Product
 |PT-ADM-DEPLOY003|手書き8Unit逆順（Caddy,Web,API,Cleanup,Inspector,Expiry,Backup,Artemis）と全8fault位置、faultの同一性/後続発行0。各stop直前は固定F18/同PIDInvocationtickを再認証、UNKNOWN保持|
 |PT-ADM-DEPLOY004|実VM verify、同M/A/DB/currentboot/signedoldnew/5INFO/ordinarycaps0/socket/TLS/current親journal jobdone/正常DONE/DB331/Backup20/原本/Transfer/33byte。全scope通常返却、startpermitDDL0、停止を受入したと読み替え0|
 |PT-ADM-DEPLOY005|実VM一回activate、同所有Unit真正正常停止/kernel/旧PID消失、新INVALIDだけ、raw32byte/DB全値/原本DONE/Backup20/Transfer不変、signedcurrent切替/新bootstrapUnit staticinactive、全scope正常返却後のみ成功。発見故障は修正前BUG、未実行/UNKNOWNを成功へ算入0|
+|PT-ADM-DEPLOY006|SSC191独立literal F18/journal oracle：API/Webの境界、null、重複key/cursor、foreign identity、cleanup欠落/順序/unknownを拒否。通常143はstop dataでありUnit/旧工具成功ではない。工具制御の各外部故障位置で後続発行0|
+|PT-ADM-DEPLOY007|旧holder同boot/PID/tick/class/実M/A inode-OFD、現在DBsessionを事実記録。真正停止Web full18/journal及び新read-only正常帰還・正常DONE/原本/331全14列/23table/Backup20/Transfer/履歴28/namespace33保存照合。旧close推定0|
+|PT-ADM-DEPLOY008|実同holder保持下API→保守→Brokerの停止だけ→全9kernel/全原本再読→固定pidfdで旧工具一回TERM。旧143/interrupted/closeUnknownと新M/A/DB再認証・新completed recovery通常帰還を分離。start/permit/DDL0、未知時隔離保持|

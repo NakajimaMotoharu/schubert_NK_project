@@ -1,0 +1,20 @@
+{
+  "observedAt": "2026-10-05T12:24:01+09:00",
+  "branch": "dev-foundation",
+  "toolDesignCommit": "c2bedec1a",
+  "productionSource": "df9a33febf3703f0d18ac2c4ef56fd0225aac2b9",
+  "designMain": "4ea9d8bdeb3da0c81f713bd1754a741534a3794e",
+  "environment": {"hostJdk": "25.0.4", "guestJdk": "25.0.4", "guestOs": "Ubuntu 26.04", "database": "PostgreSQL 18.6"},
+  "tests": [
+    {"id": "PT-ADM-DEPLOY006", "command": "python3 -B tools/quality/vm/050_s1/pg466_term_witness_test.py", "exit": 0, "independentAssertions": 240, "privateLogSha256": "50c7a94e51873b10cd47e21186b679639fd5aa537da8c7b507a7f0966503f0fb"},
+    {"id": "PT-ADM-DEPLOY006", "command": "python3 -B tools/quality/vm/050_s1/pg466_handoff_test.py", "exit": 0, "independentAssertions": 173, "privateLogSha256": "ed8cbb7f6d9ae10a8fdfd673d9733b5283076c9041ac7ffd032488e3767670ce"},
+    {"id": "PT-ADM-DEPLOY007", "command": "Pg466HandoffReadback snapshot", "exit": 0, "classSha256": "d82b3a4d608d753018608a2375851831d04e97b29cbce5f013cebe3fab780737", "privateLogSha256": "9737ffc3207cc349cc4a651f46fe092122a65230e4d164c41b8021d030490573", "actual": "new read-only scopes returned normally; complete old data snapshot unchanged", "oldCloseSuccess": false},
+    {"id": "PT-ADM-DEPLOY008", "status": "NOT_RUN", "expected": "actual nine-unit isolation then fixed old-tool interruption then new ownership; no old-close normalization"}
+  ],
+  "sourceSha256": {"Pg466HandoffReadback.java": "ca7f5cbf4fc643b0f15345cdd9d57308a0b8a01c2bc6108842cd966691721a50", "pg466_handoff.py": "ff47b6d848fa151eb16d2737a9d0487d88a44511d3e19a5024456259aa4eee69", "pg466_term_witness.py": "e257ac5b9dea23ba91f68231717ee787b839f5d08d95fd67d62ac3c20b568a78"},
+  "related": ["SSC191", "BUG720", "BUG721", "YKT511", "YKT512"],
+  "rawPrivateMaterialIncluded": false,
+  "productionPtAdded": 0,
+  "formalAccepted": false,
+  "coverage100Accepted": false
+}
