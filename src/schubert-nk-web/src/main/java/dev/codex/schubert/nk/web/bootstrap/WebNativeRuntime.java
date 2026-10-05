@@ -8,7 +8,6 @@ import dev.codex.schubert.nk.web.media.*;
 import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.revocation.*;
 import dev.codex.schubert.nk.web.security.*;
-import dev.codex.schubert.nk.web.session.SessionStoreException;
 import dev.codex.schubert.nk.web.storage.LargeResultReader;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
@@ -55,8 +54,7 @@ final class WebNativeRuntime implements AutoCloseable {
   private volatile @Nullable WebHttpServer http;
   private volatile @Nullable WebManagementServer management;
   private boolean startAttempted;
-  private int stoppedPhase;
-  private long stopDeadline;
+  private final WebRuntimeStop stop = new WebRuntimeStop(System::nanoTime);
 
   WebNativeRuntime(
       DataSource database,
@@ -245,16 +243,17 @@ final class WebNativeRuntime implements AutoCloseable {
     var log = replay;
     var revoke = retry;
     var web = http;
-    return !ownerStopping.getAsBoolean()
-        && !stopping.get()
-        && !terminal.get()
-        && reply != null
-        && log != null
-        && revoke != null
-        && web != null
-        && reply.ready()
-        && log.running()
-        && revoke.running();
+    return WebRuntimeHealth.healthy(
+        ownerStopping,
+        stopping::get,
+        terminal::get,
+        reply,
+        log,
+        revoke,
+        web,
+        ArtemisReplyConsumers::ready,
+        WebLogReplayWorker::running,
+        RevocationRetryWorker::running);
   }
 
   boolean ready() {
@@ -265,10 +264,9 @@ final class WebNativeRuntime implements AutoCloseable {
   @Override
   public void close() throws IOException {
     synchronized (ownerLock) {
-      if (stopping.compareAndSet(false, true))
-        stopDeadline = System.nanoTime() + Duration.ofSeconds(30).toNanos();
+      if (stopping.compareAndSet(false, true)) stop.begin();
       admission.refuse();
-      StopAction[] phases = {
+      WebRuntimeStop.Step[] phases = {
         admission::drain,
         left -> {
           var value = http;
@@ -307,23 +305,8 @@ final class WebNativeRuntime implements AutoCloseable {
           if (value != null) value.close();
         }
       };
-      while (stoppedPhase < phases.length) {
-        Duration left = Duration.ofNanos(Math.max(0, stopDeadline - System.nanoTime()));
-        try {
-          phases[stoppedPhase].close(left);
-        } catch (IOException | org.apache.catalina.LifecycleException | RuntimeException failure) {
-          SessionStoreException.preserveFatal(failure);
-          throw new IOException("Web stop unconfirmed");
-        }
-        stoppedPhase++;
-        if (System.nanoTime() > stopDeadline) throw new IOException("Web stop unconfirmed");
-      }
+      stop.close(phases);
     }
-  }
-
-  @FunctionalInterface
-  private interface StopAction {
-    void close(Duration remaining) throws IOException, org.apache.catalina.LifecycleException;
   }
 
   static Duration replyTimeout(WebNonSecretConfig config) {

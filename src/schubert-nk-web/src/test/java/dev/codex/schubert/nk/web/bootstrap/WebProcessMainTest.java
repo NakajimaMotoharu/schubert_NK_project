@@ -57,6 +57,15 @@ final class WebProcessMainTest {
           throw new AssertionError("file IO forbidden");
         };
     assertEquals(70, main.run(new String[] {"override"}, ENV, forbidden));
+    assertEquals(
+        70,
+        main.run(
+            new String[] {"override"},
+            ENV,
+            forbidden,
+            inputs -> {
+              throw new AssertionError("rejected argv must not execute startup");
+            }));
     assertEquals(70, main.run(new String[0], Map.of(), forbidden));
     assertEquals(
         70,

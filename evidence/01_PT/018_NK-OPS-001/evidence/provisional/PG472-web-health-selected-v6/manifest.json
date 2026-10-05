@@ -1,0 +1,306 @@
+{
+  "id": "PG472-web-health-selected-v6",
+  "programId": [
+    "NK-OPS-001",
+    "NK-WEB-002"
+  ],
+  "TestIDs": [
+    "PT-OPS-NWEB-PART001..003",
+    "PT-WEB-IDENT-CONSIST001",
+    "PT-OPS-NWEB-HEALTH001..004"
+  ],
+  "branch": "dev-foundation",
+  "baseCommit": "3ec1d288746c2ecbcc5e38a48bdc81f5c3428247",
+  "dirtySource": true,
+  "sourceDiffSha256": "370b3225fd1c6225b1ebc010a3159fe75b89237e7ee2b707945c5021dd1a96ca",
+  "selectedTestSha256": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebRequestIdentityConsistencyTest.java": "e8864370dd2e43b77b9628a1e8b1fc20231e40e35fd703a2cf2774328c9a5ab9",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntimePartialTest.java": "cd42aa72e26f48fa1f95535978563a34b2cdab517dac9d20409bfd1e9b5c8c82",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java": "16e0006ad559f544b0b1698d598169192c216b6f20edd107836503d4e4e72579"
+  },
+  "sourceFrozenForFormal": false,
+  "started": "2026-10-06T06:52:00,697851122+09:00",
+  "completed": "2026-10-06T06:53:05,044911779+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg472_web_health_selected_v3.sh",
+  "actualExit": 0,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "F": 0,
+      "E": 0,
+      "S": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "tests": 7,
+          "xmlSha256": "8c0c17d243f6e9d87920bceec34e64eb5631ae8e903e2b44d93700cae32c9ad3",
+          "methods": [
+            "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+            "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+            "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+            "headerEncodingMatchesIndependentUi232GoldenVector",
+            "responseAndEventHeadersRoundTripWithoutLeakingContext",
+            "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+            "transportAndRouteContractsRejectEveryMismatch"
+          ]
+        }
+      ]
+    },
+    "storage": {
+      "tests": 20,
+      "suites": 2,
+      "F": 0,
+      "E": 0,
+      "S": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "tests": 8,
+          "xmlSha256": "6a29dd0bd9fca15b71f86889c3fbf521360e60d47ebd443a32596ccbdd149e92",
+          "methods": [
+            "unknownCompoundFailures",
+            "knownIoFailures",
+            "unknownBodyFailures",
+            "concurrentScopes",
+            "nullAndNullableContracts",
+            "nestedScopes",
+            "knownBodyUnknownCleanup",
+            "successfulOwnership"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+          "tests": 12,
+          "xmlSha256": "a2478d4f63011ed1dee7dc3b9f9a41156876fdb033a382cffff282b9d3c6c134",
+          "methods": [
+            "nameAndNullContracts",
+            "nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement",
+            "nfile193002MissingNullAndUnsafeNameDoNotMutate",
+            "nfile193004ConcurrentNamedEntryHasExactlyOneWriter",
+            "faultAndUncertainOutcomes",
+            "scopedOwnership",
+            "nativePrivateCreation",
+            "retainedNamespace",
+            "nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd",
+            "unsupportedAndNativeArguments",
+            "concurrentSinglePublication",
+            "atomicNoReplace"
+          ]
+        }
+      ]
+    },
+    "bootstrap": {
+      "tests": 15,
+      "suites": 2,
+      "F": 0,
+      "E": 0,
+      "S": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+          "tests": 10,
+          "xmlSha256": "14025651d52110344347c98653253955f54dd5c42b8c6a9e29ccc07474a4faa7",
+          "methods": [
+            "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored",
+            "serviceid007EveryOwnedCloseAndUnknownFailurePreserved",
+            "serviceid001BothFixedAccountsExplicitRequiredGroups",
+            "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets",
+            "serviceid003UidGidBoundariesAndCanonicalDecimal",
+            "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker",
+            "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection",
+            "issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority",
+            "serviceid005ByteNullAndImmutableValueInvariant",
+            "dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+          "tests": 5,
+          "xmlSha256": "816f535695e02d0f223be3f1f885bb3d6971a348e123561c032ea6f64e824327",
+          "methods": [
+            "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
+            "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose",
+            "opsCredset001FiveFixedMaterialsPerServiceAreOwnedAndClosed",
+            "opsCredset002WrongIdNullAndClosedStateReject",
+            "opsCredset004ConcurrentIndependentLoads"
+          ]
+        }
+      ]
+    },
+    "api": {
+      "tests": 4,
+      "suites": 1,
+      "F": 0,
+      "E": 0,
+      "S": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest",
+          "tests": 4,
+          "xmlSha256": "ff40717ad3dade5a262c8be37f2bb761337c37744a51e333e44996e8f0d425fa",
+          "methods": [
+            "opsApiMain002FailuresAndUnknownRemainNonSuccess",
+            "opsApiMain003FatalDiagnosticIsFixed",
+            "opsApiMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal",
+            "opsApiMain004ActualExternalMainRejectsMissingConfigAndArgv"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "tests": 23,
+      "suites": 7,
+      "F": 0,
+      "E": 0,
+      "S": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest",
+          "tests": 4,
+          "xmlSha256": "767c11dd557a64e2b75192705e5c1e007aeb3446bd2f9b7a87c0cd078b894d76",
+          "methods": [
+            "opsWebMain002FailuresAndUnknownRemainNonSuccess",
+            "opsWebMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal",
+            "opsWebMain003FatalDiagnosticIsFixed",
+            "opsWebMain004ActualExternalMainRejectsMissingConfigAndArgv"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+          "tests": 3,
+          "xmlSha256": "56992082c8bee27f3884eceaf65e9a51dab2bb8287951d74e108e7d2d8f06043",
+          "methods": [
+            "life001StopFailureInterruptNullAndHookInstallation",
+            "life002ForeignHookWaitsForActualOwnerNotificationAndPreservesInterrupt",
+            "life003HealthyOwnerAwaitsIndependentStop"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimePartialTest",
+          "tests": 3,
+          "xmlSha256": "0e027675c9542b76885166f296113d9dad6f4bf9024cc3bbb9fd118b433d72c2",
+          "methods": [
+            "part001EmptyOwnerIsUnreadyAndClosesWithoutPromotingOrTouchingDependencies",
+            "part002AdmissionInfoFailureIsOriginalAndNeverPromotes",
+            "part003AbsentInputsFailBeforeAnyAcquisition"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.WebRequestIdentityConsistencyTest",
+          "tests": 3,
+          "xmlSha256": "31f14db9a7beb9d3530d7cb66ac056c16484f80816e98465c92576f6882b5508",
+          "methods": [
+            "transportContextSaveFailureStopsBeforeDownstreamWithoutCauseOrFallback",
+            "contextSuppliesMissingInternalIdWithoutGeneratingAnother",
+            "existingVerifiedContextCannotBeReboundToAnotherServerIdentity"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+          "tests": 4,
+          "xmlSha256": "9273088d7796562518a3384117a4e1fa6115c74dd18e87cd095f06dd1c7040e9",
+          "methods": [
+            "health004OwnerNotificationFailureKeepsIdentityAndDoesNotProbeResources",
+            "health003ProviderFailureIsNotSwallowedOrConvertedToUp",
+            "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+            "health002AllPresentAndLiveCallsEachProviderOnceInOriginalOrder"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+          "tests": 5,
+          "xmlSha256": "087d64faa78086c987278e4b8f43b0c292c7dbe778b2a81e0ba13db83fb0bbb9",
+          "methods": [
+            "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+            "stop003DeadlineBoundaryDoesNotExtendAndExpiredRemainingIsZero",
+            "stop004LifecycleAndRuntimeFailuresRemainFixedAndDoNotAdvance",
+            "stop001NormalPhaseOrderAndRepeatedCloseNeverReleaseTwice",
+            "stop005FatalIdentityDirectAndNestedNeverTurnsIntoNormalStop"
+          ]
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebUnknownRetentionTest",
+          "tests": 1,
+          "xmlSha256": "500b932f0ece30375a2223fc9422e533f3a0d4223e54b128bc5cd858f3ad542b",
+          "methods": [
+            "unknownOwnerNeverReturnsOrUnwindsAfterInterruptInIsolatedFixtureJvm"
+          ]
+        }
+      ]
+    }
+  },
+  "tests": 69,
+  "suites": 13,
+  "F": 0,
+  "E": 0,
+  "S": 0,
+  "staticModules": 5,
+  "staticFindings": 0,
+  "NullAwayWerror": "PASS",
+  "format": "PASS",
+  "environment": {
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "OS": "Linux host"
+  },
+  "independentOracle": "literal conditions/order/UUID/IOException identity; no production-generated expected",
+  "localClassCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 33
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 6
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 11
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 1
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "wholeCoverage100": false,
+  "oldNativeReused": false,
+  "priorV1": {
+    "actualExit": 1,
+    "WebNewTests": "NOT_RUN",
+    "BUG": "BUG-758"
+  },
+  "priorV2": {
+    "actualExit": 0,
+    "tests": 57,
+    "suites": 10,
+    "XML": "previously inspected; not rehashed after v3 overwrote XML",
+    "logSha256": "f0de0d44c0f637976d25c5a39d5ea45920d7069ececdace82df12bde93290658"
+  },
+  "privateLogSha256": "60d304772b223b054e1b89420bb50d7bcc7fd82e175f88bdc48df575e0ea6902",
+  "failedV4V5Retained": true,
+  "coverageXMLSha256": "566d0f1c633a1f14ac0269a7b5217d380ae1ecc8759b34b0f0439e59527746f5",
+  "BUG": [
+    "BUG-758",
+    "BUG-759"
+  ],
+  "YKT": [
+    "YKT-538",
+    "YKT-539"
+  ],
+  "PGD": [
+    "PG-D377"
+  ],
+  "formalUpdated": false,
+  "ITSTAccepted": false,
+  "rawSecretsExported": false
+}
