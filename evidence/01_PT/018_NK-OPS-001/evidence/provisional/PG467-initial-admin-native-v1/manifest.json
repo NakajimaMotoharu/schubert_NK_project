@@ -1,0 +1,23 @@
+{
+  "observedAt": "2026-10-05T12:56:34+09:00",
+  "branch": "dev-foundation",
+  "productionSource": "df9a33febf3703f0d18ac2c4ef56fd0225aac2b9",
+  "deploymentToolSource": "63ba519ba",
+  "release": "0.1.0-PG465",
+  "releaseManifestSha256": "8b8e82f43146f4a89e02237a0b28e010442c59d3e7c8066c96f13d8b414d8e9e",
+  "actual": [
+    {"testId": "PT-ADM-DEPLOY008", "command": "pg466_recovery_native_v1.sh", "exit": 0, "privateLogSha256": "772060f578a1ac536b470261dc131b2f6566ddad794b47ab7885cdb7c2cc8a8a", "newOwnedMAAndDbReturnedNormally": true, "originalDoneRows331Backup20Preserved": true, "currentSignedPG465": true, "newEpochInvalid": true, "oldToolNormalClose": false},
+    {"testId": "PT-ADM-BOOT007", "command": "initial bootstrap one start", "observerExit": 1, "status": "PARTIAL; pre-exec observer refused, real ADMIN1 and same-source job128979 done; exact terminal status not captured before GC", "newCreationRepeated": false, "formalPass": false},
+    {"testId": "PT-ADM-BOOT007", "command": "existing ADMIN first observation", "observerExit": 1, "status": "PARTIAL; ordinary actor captured, systemd GC before exact terminal status; job129718 done does not alone prove status20", "formalPass": false},
+    {"testId": "PT-ADM-BOOT007", "command": "pg467_bootstrap_unit.py existing (ref observer v4)", "observerExit": 0, "actualUnitExit": 20, "privateLogSha256": "fe82056ec720c1470762f86d76979487ffbf9478ee6804fdf6ce4d40cf791a86", "sameOrdinaryActor": true, "kernelEmpty": true, "userAndLogsAllValuesUnchanged": true, "adminCount": 1, "independentAuditPostcondition": "ACTION/SECURITY2, NULL actor, same target, BOOTSTRAP/SUCCESS", "observationReferenceReleased": true},
+    {"testId": "PT-ADM-BOOT008", "command": "Pg467BeforeNewRun", "exit": 0, "privateLogSha256": "a4ec4b81276da76f45fbc13fc9183559d00fd3a66d2d7ae947b84add130756c1", "newReadOnlyMAAndDbReturnedNormally": true, "oldOriginalDone": true, "rows331": true, "namespace33": true, "admin1": true, "parentStartIssued": false}
+  ],
+  "sourceRegression": {"tests": 3289, "suites": 488, "exit": 0, "staticModulesZero": 6, "coverage100": false},
+  "tools": {"guestDbusPython": "1.4.0", "jdk": "25.0.4", "database": "18.6"},
+  "related": ["SSC188", "SSC189", "SSC190", "SSC191", "BUG720", "BUG722", "BUG724", "BUG725", "BUG726", "BUG727", "BUG728", "YKT511", "YKT513", "YKT514", "YKT515", "YKT516"],
+  "productionPtAdded": 0,
+  "rawJournalCredentialsPasswordSessionIncluded": false,
+  "oldUnknownNormalized": false,
+  "formalAccepted": false,
+  "itStAccepted": false
+}

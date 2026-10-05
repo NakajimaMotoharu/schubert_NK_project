@@ -1,5 +1,13 @@
 # 初期ADMIN 実行結果
 
+## 2026-10-05 12:56 JST 新配備・初期ADMIN実業務依存
+
+DEPLOY008新completed recovery/session59757 actual0、工具source63ba519ba、Production/full/candidate df9同一。実新M→A→DBadvisory/readonlyschema/元全値→正常DONEを保持して新INVALID/signedPG465/新bootstrapUnit staticinactive→元全値/旧32raw metadata→全新scope正常返却/complete.private。旧activate143/closeUnknownを新successへ流用0。logSHA772060f5…、旧sourcee4から新df9切替だけ、DDL/permit/start0。
+
+BOOT007初期Unit一回に対しobserverはpre-execで1、ADMINは1件/旧job128979done/finished。新規作成を繰り返さず、既存時試行は普通actor捕捉→GCのため1、exact20未受入。次ref付きv4はactualobserver0・真正sameactor/kernel/F18/Unit終了20・User/Log全row hash不変・ACTION/SECURITY2/NULLactor/same target/BOOTSTRAP SUCCESSを独立SQL照合。DBus既存1.4.0の同sender RefUnit/UnrefUnitは観測metadata保持だけ、Unitbytes/reset/DB変更0、参照返却確認。初期作成0と既存20を同試験へ補完しない。password等はnew-onlyhost600/guest400/私有directory、Git・log・argv格納0。BUG726/728のobserver因果を分離、import配置BUG727の旧失敗も保持。
+
+BOOT008新sourceのnewrun前Snapshot Pg467BeforeNewRun actual0/Werror0/実新M/A/readonlyDB正常返却、currentPG465/INVALID/旧OriginalDONE/331原本/33namespace/admin1/全23business/Backup20/Transfer/history28を新onlyRoot pg467-before-new-runへ保全。真正新Morning/ログイン/変更/credential退役/全CHR/native100/formalは未実行。safe PG467-initial-admin-native-v1/manifest、正式run24/1964PT53scope/48.3%不変。次はobserver先行→新run一回外部Morning、元30min/同Root ordinary/API所有保持Web/Caddy/原本complete/intent退役→真正業務認証へ継続。
+
 ## 2026-10-05 12:40 JST 実所有停止・旧工具中断の分離
 
 DEPLOY008：実API同Invocation/F18/fulljournal正常cleanup→process stopped/通常143を確認、Cleanup通常0。そのRequiresによるBroker/Expiry同世代停止はvendor全journal・F18/kernelで再認証、全9terminal2回/全原本331/23table/20Backup/Transfer/33 metadata/raw、旧実M/A保持をfinalize-isolation actual0で閉じた。固定pidfd旧工具TERM一回、元activate/session6498 actual143/INTERRUPTED/oldCloseUnknown（成功ではない）。reap競合は信号追加0のfinalize-term actual0で全9/原本/旧本人FD/OFD/DBsession不在を確認。current旧PG464、INVALID/配備/ADMIN/新run未実行。
