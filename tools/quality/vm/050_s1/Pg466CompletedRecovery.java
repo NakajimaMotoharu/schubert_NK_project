@@ -22,7 +22,7 @@ public final class Pg466CompletedRecovery {
     try(var f=FileChannel.open(p,StandardOpenOption.READ)){f.force(true);}require(Arrays.equals(data,Files.readAllBytes(p)));Pg387TrustedDeployment.sync(SAVE);
   }
   static void terminal()throws Exception{
-    byte[] data=Pg425KnownApiRecovery.command(new byte[0],"/usr/bin/python3","-B","/var/lib/pgpt-s1-preservation/pg466-tool-v5/pg466_handoff.py","closed");
+    byte[] data=Pg425KnownApiRecovery.command(new byte[0],"/usr/bin/python3","-B","/var/lib/pgpt-s1-preservation/pg466-tool-v6/pg466_handoff.py","closed");
     require(new String(data,StandardCharsets.US_ASCII).equals("PG466_CLOSED allNineUnchanged=true oldPhysicalHolderAbsent=true oldCloseUnknown=true\n"));
     Pg387TrustedDeployment.requireNoUndeliveredWork();
   }
