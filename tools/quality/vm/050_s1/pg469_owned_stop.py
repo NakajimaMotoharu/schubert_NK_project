@@ -43,6 +43,13 @@ def kernel_empty(unit):
 def terminal(v):return v['MainPID']==v['ControlPID']=='0' and v['Job']=='' and v['ActiveState'] in ('inactive','failed')
 def same_generation(before,after):
  return all(before[k]==after[k] for k in ('Id','LoadState','InvocationID','ExecMainStartTimestampMonotonic','Type','Restart','RemainAfterExit','KillMode','SendSIGKILL'))
+def normal_terminal(before,after):
+ if not isinstance(before,dict) or not isinstance(after,dict) or set(before)!=FIELDS or set(after)!=FIELDS or not all(isinstance(v,str) for v in (*before.values(),*after.values())):return False
+ if before['Id'] not in ('caddy.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service') or before['LoadState']!='loaded' or not same_generation(before,after):return False
+ if not terminal(after) or after['ActiveState']!='inactive' or after['SubState']!='dead' or after['Result']!='success':return False
+ if before['Result']!='success' or before['ControlPID']!='0' or before['Job']!='' or not before['MainPID'].isdigit():return False
+ if before['MainPID']=='0':return after['ExecMainCode']==before['ExecMainCode'] and after['ExecMainStatus']==before['ExecMainStatus'] and after['ExecMainExitTimestampMonotonic']==before['ExecMainExitTimestampMonotonic']
+ return before['ActiveState']=='active' and before['SubState']=='running' and before['ExecMainCode']==before['ExecMainStatus']==before['ExecMainExitTimestampMonotonic']=='0' and after['ExecMainCode']=='1' and after['ExecMainStatus']=='0' and before['ExecMainStartTimestampMonotonic'].isdigit() and after['ExecMainExitTimestampMonotonic'].isdigit() and 0<int(before['ExecMainStartTimestampMonotonic'])<=int(after['ExecMainExitTimestampMonotonic'])
 def broker_witness(before,after,raw):
  require(isinstance(before,dict) and isinstance(after,dict) and set(before)==set(after)==FIELDS and all(isinstance(v,str) for v in (*before.values(),*after.values())))
  require(before['Id']=='artemis.service' and before['LoadState']=='loaded' and before['ActiveState']=='active' and before['SubState']=='running' and before['Result']=='success' and before['MainPID'].isdigit() and int(before['MainPID'])>0 and before['ControlPID']=='0' and before['Job']=='')
@@ -82,9 +89,7 @@ def stop_one(unit,captures,ticks):
   data=broker_witness(before,current,raw) if unit=='artemis.service' else witness('API' if 'api' in unit else 'WEB',before,current,raw,before['MainPID'],'999' if 'api' in unit else '997')
   save(unit+'.stop-witness.private',json.dumps(data,sort_keys=True).encode())
  else:
-  require(current['ActiveState']=='inactive' and current['Result']=='success')
-  if before['MainPID']!='0':require(current['ExecMainCode']=='1' and current['ExecMainStatus']=='0')
-  else:require(current['ExecMainCode']==before['ExecMainCode'] and current['ExecMainStatus']==before['ExecMainStatus'])
+  require(normal_terminal(before,current))
  require(current==show(unit) and holder()==owner);save(unit+'.stopped.private',json.dumps(current,sort_keys=True).encode())
  print('PG469_OWNED_STOP unit='+unit+' explicit='+str(issued).lower()+' sameGeneration=true kernelEmpty=true starts0=true',flush=True)
 def main():

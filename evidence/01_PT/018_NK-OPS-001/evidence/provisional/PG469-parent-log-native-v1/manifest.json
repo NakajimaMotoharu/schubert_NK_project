@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "classification": "PROVISIONAL_NATIVE_NOT_FORMAL",
+  "created": "2026-10-05T17:21:46.736878+00:00",
+  "branch": "dev-foundation",
+  "productionSource": "d3bba6db6eb9fec13e4847a10541cf337f575731",
+  "toolsBaseHead": "25e93947dd5b4bb356a2e4d0634dfa64b6d387f1",
+  "toolsDirtyAtExecution": true,
+  "release": "PG469",
+  "manifestSha256": "cc5e4dd7ca70d3a21e1145dd35b9f047856c4ab83bfac6f11722663ba7744462",
+  "environment": {
+    "guest": "Ubuntu26.04",
+    "JDK": "25.0.4",
+    "PostgreSQL": "18.6"
+  },
+  "executions": {
+    "pg469-parent-observer-v1": {
+      "actualExit": 0,
+      "started": "2026-10-06T01:33:53+09:00",
+      "completed": "2026-10-06T01:55:12+09:00"
+    },
+    "pg469-readback-native-v1": {
+      "actualExit": 0,
+      "started": "2026-10-06T02:06:46+09:00",
+      "completed": "2026-10-06T02:06:48+09:00"
+    },
+    "pg469-l01-native-v1": {
+      "actualExit": 0,
+      "started": "2026-10-06T02:07:48+09:00",
+      "completed": "2026-10-06T02:08:01+09:00"
+    },
+    "pg469-log-outage-native-v1": {
+      "actualExit": 0,
+      "started": "2026-10-06T02:16:04+09:00",
+      "completed": "2026-10-06T02:16:23+09:00"
+    }
+  },
+  "parent": {
+    "invocation": "aabcc2c3ef1444a7bb07b3183b220c14",
+    "job": 162935,
+    "pid1DoneMicros": "1791219312310761",
+    "rows": 361,
+    "oldFull14RowsPreserved": 351,
+    "startupEntries": 45,
+    "oldStartupByteMetadataPreserved": 40,
+    "intent": 0,
+    "unchangedBusinessTables": 19,
+    "allBackupPreserved": true,
+    "allNewOwnedScopesReturned": true
+  },
+  "nativeCoverage": {
+    "singleParentSession": true,
+    "sameFrozenSixModuleBytes": true,
+    "noMatch": 0,
+    "partialLines": [
+      47,
+      543
+    ],
+    "qualified100": false,
+    "ordinaryWebAgent": false
+  },
+  "chrA01": {
+    "actualExit": 0,
+    "approvedDIF": "001",
+    "artifactSha256": "3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558"
+  },
+  "l01": {
+    "status": "OBSERVED_NOT_ACCEPTED",
+    "QA": "QA-051",
+    "actionCounts": {
+      "LOGIN_SUCCEEDED": 1,
+      "SCENARIO_SEARCHED": 1,
+      "HTTP_REQUEST_COMPLETED": 11
+    },
+    "categoryCounts": {
+      "SECURITY": 1,
+      "ACTION": 1,
+      "REQUEST": 11
+    },
+    "displayedRows": 2,
+    "detailsElements": 2,
+    "auditInboxPostconditions": {
+      "scenarioActions": 1,
+      "matchedCommittedInbox": 1,
+      "uniqueMessages": 1,
+      "fixedActionFields": 1
+    },
+    "sqlActualExit": 0,
+    "sqlSha256": "3cb1f35b18f47b974307196428f94af78c1d9c1719201ea673bf5f94685fe896",
+    "earlierDraftSqlExit": 3,
+    "earlierDraftSqlNotPassed": true
+  },
+  "webLocalProjection": {
+    "productionSource": "d3bba6db6eb9fec13e4847a10541cf337f575731",
+    "capturedAt": "2026-10-05T17:09:34.923402+00:00",
+    "cutoff": "2026-10-05T17:09:24.208435+00:00",
+    "localEventIdMatchedRows": 337,
+    "missing": 0,
+    "duplicates": 0,
+    "fieldMismatch": 0,
+    "samePeerBeforeAfter": true,
+    "outageReplayTested": false,
+    "chrPass": false,
+    "mutations": 0,
+    "journalSha256": "29fa6e47210ca1449f8c09d614cd9af41614e9dc36a251c27103c7f94fac5839",
+    "dbSha256": "97a9fdde93e5c6afe166811ef8930d2ee3e81fab62c06e7ccca7a311f3f8e92b"
+  },
+  "webBrokerLinkOutage": {
+    "source": "d3bba6db6eb9fec13e4847a10541cf337f575731",
+    "events": 5,
+    "http200": 5,
+    "blockedErrors": 5,
+    "dbBeforeRecovery": 0,
+    "afterSent": 5,
+    "afterDbExactOnce": 5,
+    "firewallRestored": true,
+    "samePeers": true,
+    "brokerProcessStopped": false,
+    "actualWebBrokerCommunicationOutage": true,
+    "chrPass": false,
+    "formal": false,
+    "localSha256": "9168747db6e64ddf2e1f6a9dcd5d309df137670a3c7509c0cf8a4d1a5ff55cea",
+    "finished": "2026-10-05T17:16:24.008551+00:00"
+  },
+  "independentToolAssertions": {
+    "readback": 374,
+    "projectionNegative": 17,
+    "outage": 102
+  },
+  "privateHashes": {
+    "pg469-parent-journal-private-v1.jsonl": "87ab58c7672874831262e51e8c4be076311487d183c763653fb77b5198429eb6",
+    "pg469-parent-native-v1.exec": "07d738dc29cc2c7108d30130755d6bd41a8bc2663eb71c050edb493e17ef6062",
+    "pg469-readback-native-v1.private.log": "b4c36883ca3818509c6b9310c3bd2ed569e48bda8cc3abc2773db779b20d5e0d",
+    "pg469-readback-oracle-v1.private.log": "7fa1e3173a3d7bd4dd998ee47e9b8fa5497fe3154724163fb11f418be425fe2e",
+    "pg469-l01-v1/L01-observed.private.json": "077f923a88764dec28133c3f22bc6bfd6d07d6b92206c6accd668c2701e84eba",
+    "pg469-log-outage-native-v1.private.log": "a4c5db4bf70528f454f73cdb395324a55c5e22cbc22ed87e26adb8b6ba4b7303",
+    "pg469-log-outage-oracle-v1.log": "2ecf9a8dfaa5c2c794cb269c9ab8861f53d272e41bb9008c4015523136a58511"
+  },
+  "toolsSha256": {
+    "pg469_parent_native_probe.py": "c433ea378dc5f6401581b20df139bbef4b70d03a84bb94cd2597d56f3609304d",
+    "pg469_readback_compile_v1.sh": "06dddcb95a91ab65235646dab04ec757bc85a1a1b659b5eafe3da32f068c7b87",
+    "pg469_socks_v1.sh": "fef7ce8df6f06b2a19b07712a4cea184e139bc0e7a1d433aefbd87034d3434b0",
+    "pg469_full_v1.sh": "fc82b8a87d90bc456cae1e49b765c4f93e1d4838d83d97e4c007da83433b8750",
+    "pg469_l01_native_v1.sh": "09d94df01983b0c86f3eac1bc7b424f5f5697d5ac76ee4c9bc97fe3f31deee2a",
+    "pg469_stage_current_v2.sh": "572389a9a052e9dcda82ce616973700eb0224d494878d7c1a8fd49d841381a14",
+    "pg469_l01_compile_v1.sh": "e03bf127f1d6a11fad6424945801aae9e36c4d05db3c37998644801640941fe2",
+    "pg469_scenario_selected_v3.sh": "0e2bd88d856ddc5278a05cae6ba682bca1cf89f665f678a0793e7d64d807fbc8",
+    "pg469_completed_verify_v1.sh": "35bd326e9987feb381fb13350510dbe4a9bb48b57ff00895517a72b9ff49e46d",
+    "pg469_log_outage_native_v1.sh": "73fd17b22519fc4bc1e8d208e896efcccc385dfc1eda85fc9ee2848476f33c6b",
+    "pg469_readback_stage_v1.sh": "4f32f53b805670567c66e5ecb60d7776629b149b0a37e6f8cfdb0915d3ebcd70",
+    "pg469_collect_current_v1.py": "499584b0598494e36bbeb423922a28002f773d7fd18951fff0ca6d966d0eb61d",
+    "pg469_collect_parent_log_native_v1.py": "a0e10e88bc16a2ce200d7b0e3a4d4ae9edc46e5a44708405270edf73ef58dde6",
+    "pg469_completed_verify_v2.sh": "b94adf22082fc83c562b39ce6ef0ade672b46226cd993caac29d9376064aded8",
+    "pg469_current_native_v3.sh": "6b42eb240724320c9518cf4db4497374a513ecfb06a433f9cf4266c7941e51b5",
+    "pg469_current_compile_v3.sh": "1d6dd276fdb82ab805b220eee0051d80843a25084aa53c57f5d1eb7265844fbc",
+    "pg469_completed_compile_v2.sh": "83f46d2c149a5b948574d7e1543b1ec0d39bf267a7b8f749d17711bf9fbc2e44",
+    "pg469_current_compile_v1.sh": "89e4e4b6833cef4e60b764043c27b5736383b70a24d1e62c585d4f3f40206258",
+    "pg469_completed_compile_v3.sh": "56f76254f69196ddf81e4c7c67648c4ab0d9163e307e2b38f98d30f7d052cdb2",
+    "pg469_candidate_build_v1.py": "6d6b51ad9bae24007d22352b8db5ddca0d1a10edaec02a8f975af3eb90c35026",
+    "pg469_readback_native_v1.sh": "31308aee25aa326550e8467cab9dfd972ce7d770964da68314ea973e1e801f49",
+    "pg469_current_compile_v2.sh": "8b66ef0a2089b322faa1a0b9012ff1ec2024c4e5ab0a160eb3a95938afa6b561",
+    "pg469_log_readback.py": "86138b0f66d751b4c4eb5f6f0eb8be9fa7d257a3b413fec7629ecfac5d60b7af",
+    "pg469_external_start_once.py": "0ca3e5c1a33cc5c8febc5ff8013ce8fd91ae0cf27b1694cfedf99ea8d4af1a51",
+    "pg469_watch_parent.py": "ad0ffa7794268ad9d448c4d91326e8c0f2ebe9ce4500f2f4adddba36a4226366",
+    "pg469_check_completed_stage_v1.py": "cdd1c199da44fc06aea079a42aa61d43628c3c009c42e4a6e3bd9e1de30227bf",
+    "pg469_prepare_observer_v1.py": "3e86e19c76684d78f2cb2a5f6dbf66122204399fbdd76093b348acebae136ce1",
+    "pg469_collect_full_v1.py": "e2cc8bec7fbc50bde7a25747bfd0a4bf330d16f300156151cecc8f18edfc7087",
+    "pg469_live_peer_check.py": "53c1688726d011c039316efe1182e3aed12a4b48556d29627c7df49528ae70af",
+    "pg469_stage_completed_v1.sh": "6a27ca8bae29105426602a8839a8330a55e35f8c004b8be3f4c4122fc4f8efc8",
+    "pg469_completed_compile_v1.sh": "28fdc7a314d644e70c884f8dcbdc4429f971228fdeeaa6c9322bbc6b2fa10b18",
+    "pg469_native_file_identity.py": "17f64a3ba1ffc8ad67385cec11656dca4cb9a80af724eaffcb52c33149230708",
+    "pg469_log_network_outage.py": "a24219931ea94d6719b1284bc90c0d0000c7cf1ff470507ddb10a328f1915bf1",
+    "pg469_owned_stop.py": "28641f3248d8d39a25471bdb3eeefa0d2128243a74a3e0b5bb029c509cc8ae5e",
+    "pg469_capture_a01_when_ready.py": "1edccdaa7c82eed28364c3d1d6cae286cad5f2d4692bbfb6def2fcbf18a89104",
+    "pg469_native_file_identity_test.py": "e04edf9cb2d617fd4d5bb8af91cbd3739675e8397cb3909a15e416d3d3adcbf5",
+    "pg469_collect_code_only_v1.py": "bcac2a2b5e2bd79c6ca8fb70393ceec59643597f1176abd4aa7baef91db69524",
+    "pg469_scenario_selected_v2.sh": "2080f7434efaed52c425f51f9a5617dfb39cef1510665df63d47a83acf0f6d92",
+    "pg469_stage_current_v3.sh": "08335237b7d68a65bf023a7d4b5e07cf0f708ea252d8352d4ea20e7eb318f8b5",
+    "pg469_observe_parent_v1.sh": "fbb77a1cf9810344ab1c05f276c550359f5d6a359ebc4f64e469bd62655a1011",
+    "pg469_complete_observer_preservation_v1.py": "a35a195156f533cfb34a026063e2ead46af20591e5e5a3bbd610db5efb0a0d0c",
+    "pg469_normal_terminal_test.py": "d96fe1be17754c46d15bf2ab96431af728b737d5a85b4fc7be8c69e9df5797db",
+    "pg469_scenario_selected_v1.sh": "f345284f30fa0fd3cc713ca7c48ad0589e08d0717eb75b91feca810ea0f4c899",
+    "pg469_stage_completed_v2.sh": "6e9765dae744403dc9b3008bd053b0ef33dca6cddbeb8caa8a522247f70d3168",
+    "pg469_owned_stop_test.py": "500df971bd16f727bfa491da97ba842ca09ceb91cc1464eec7e9c5c375597def",
+    "pg469_completed_activate_v1.sh": "dec59fd12b23f3028d9b3a1f06ce3ba51b271fcdb44e71eeb155e44fb3b0b75b",
+    "pg469_current_native_v2.sh": "d870089ff28aa382b7fd7d4ff81b0099ceba8114c8467a8271169a27aff49d7c",
+    "pg469_stage_candidate_v1.py": "fb93386059ef428eb9b1d72a65b573d24d04e7c8d1a25cbde9cfeb66229ba5bc",
+    "pg469_log_network_outage_test.py": "a2a194d6790fcf1dbacd3f07ca14bb7d41c56f520fa4bd30b681093bc6ccd07e",
+    "Pg469CompletedReadback.java": "cfce473b01dc7688a21c7bfb8fc40e7be37743b2b57c4b50f3812b20aca46282",
+    "Pg469CompletedReadbackTest.java": "a75574954535fb10dc00c79cb5f84053a5145a30d31fa9847c0b42904ab3329b"
+  },
+  "BUG": [
+    "BUG-742",
+    "BUG-749",
+    "BUG-750"
+  ],
+  "YKT": [
+    "YKT-523",
+    "YKT-527",
+    "YKT-530"
+  ],
+  "SSC": [
+    "SSC-190",
+    "SSC-191"
+  ],
+  "rawSecretExported": false,
+  "fullProductionRegression": {
+    "source": "d3bba6db6eb9fec13e4847a10541cf337f575731",
+    "passed": 3301,
+    "suites": 489,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "staticModulesZero": 6,
+    "existingSafeManifestSha256": "b647ebdda31001a906cdb80d711cae77e650816e89b921afac69001cbb64ef06"
+  },
+  "formal": {
+    "unchanged": true,
+    "run": "PT-WEB-20260925-24",
+    "productionPTCount": 1964,
+    "scopes": 53
+  },
+  "notAccepted": [
+    "allCHR",
+    "BrokerProcessStop",
+    "ApiProcessStop",
+    "allNativeCoverage100",
+    "allPGPT",
+    "ITST"
+  ]
+}
