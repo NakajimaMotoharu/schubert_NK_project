@@ -1,0 +1,141 @@
+{
+  "id": "PG469-scenario-selected-v3",
+  "programId": "NK-SCN-001",
+  "testIds": [
+    "PT-SCN-AUD469001",
+    "PT-SCN-AUD469002",
+    "PT-SCN-AUD469003",
+    "PT-SCN-AUD469004",
+    "PT-SCN-AUD469005",
+    "PT-SCN-AUD469006",
+    "PT-SCN-AUD469007",
+    "PT-SCN-AUD469008"
+  ],
+  "branch": "dev-foundation",
+  "baseHead": "2dd7b4b55117bb62862bcdcaa01a8232d451980a",
+  "sourceFixed": false,
+  "productionDirty": true,
+  "command": "bash tools/quality/vm/050_s1/pg469_scenario_selected_v3.sh faults",
+  "suites": [
+    {
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "8edbf6ac6e5c97d50074f5d22e84048d086bcad87bae6f1ac93134691a9e0f5e"
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "18697c62547a04bc294cadf4cafbce4534b5357a95c3a9ed18c9b9364113a114"
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "1366febf0085322da8afcb2b43e25796ad76f6476f9e7bcfe0d77c9b9a16b6c8"
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "39ab421fdb2ae6cb7b210369f25d9dbed667820cc8604aeb2e0331d80a32bdec"
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioAuditWriterTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "a1802f55e37c38af6412291d9f3283cbe3cda5bf53852d5675ab26f3f0ce5723"
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "3d10404a18407b0afad9c1892d925e74d60857f6807300ea1cc2e52b35570cf8"
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": null,
+      "xmlSha256": "a73df44fcca08c762fc02a434a522e65788293fe54c9b829b1654035cc673c54"
+    }
+  ],
+  "started": "2026-10-05T15:43:43+09:00",
+  "completed": "2026-10-05T15:44:51+09:00",
+  "exit": 0,
+  "environment": {
+    "os": "Linux host/isolated PostgreSQL18",
+    "jdk": "25.0.4",
+    "maven": "3.9.12"
+  },
+  "sourceHashes": {
+    "ScenarioAuditWriter": "fcf0f33881cf6da00bfaf5bdc490a2338b3918a2216179a69848268e4de40860",
+    "ScenarioApplicationService": "fedf4aa2a94ea6ead082db7e3e2617565faa97d6a3d1a150f1e66fe2e05856e4"
+  },
+  "actualTests": 51,
+  "staleOtherTargetXmlIncluded": false,
+  "staticModules": 4,
+  "staticIssues": 0,
+  "developmentCoverage": {
+    "writerMissed": {
+      "branch": 0,
+      "line": 0,
+      "method": 0,
+      "class": 0
+    },
+    "writerCovered": {
+      "branch": 7,
+      "line": 35,
+      "method": 2,
+      "class": 1
+    },
+    "execAccumulatedAcrossDevelopment": true,
+    "formalSingleRunCoverage": false
+  },
+  "logSha256": "5cc7108cebc067696e357cf0f7e5e374ecd92432399cd8f3dd4fb5410862491d",
+  "relatedBugs": [
+    "BUG-742",
+    "BUG-743"
+  ],
+  "relatedYkt": [
+    "YKT-523",
+    "YKT-524"
+  ],
+  "red": {
+    "actualExit": 1,
+    "apiFailures": 2,
+    "logSha256": "f72ad758383f16d760f6078ec325efd0a7242861bf6e594f9c66850b18cc9016"
+  },
+  "freshAllSixPassed": false,
+  "nativeThisSourcePassed": false,
+  "formalPass": false,
+  "secretsInGit": false
+}

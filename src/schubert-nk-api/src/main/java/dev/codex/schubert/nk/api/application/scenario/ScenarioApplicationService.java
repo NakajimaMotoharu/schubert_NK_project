@@ -55,6 +55,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
   private final Clock clock;
   private final Supplier<UUID> identifiers;
   private final MessageStageGuard guard = new MessageStageGuard();
+  private final ScenarioAuditWriter audit = new ScenarioAuditWriter();
 
   public ScenarioApplicationService(
       DataSource database,
@@ -230,9 +231,15 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
               identity,
               ignored ->
                   switch (prepared) {
-                    case Success success ->
-                        responses.captureSuccess(
-                            request, actor, success.value(), identifiers.get(), clock.instant());
+                    case Success success -> {
+                      var responseId = identifiers.get();
+                      var completedAt = clock.instant();
+                      var captured =
+                          responses.captureSuccess(
+                              request, actor, success.value(), responseId, completedAt);
+                      audit.write(connection, actor, request, success.value(), completedAt);
+                      yield captured;
+                    }
                     case Failed failed ->
                         responses.captureFailure(
                             request, actor, failed.code(), identifiers.get(), clock.instant());

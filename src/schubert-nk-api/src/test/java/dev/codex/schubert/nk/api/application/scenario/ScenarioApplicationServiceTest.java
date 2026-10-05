@@ -67,6 +67,7 @@ final class ScenarioApplicationServiceTest {
 
   @BeforeEach
   void seed() throws Exception {
+    sql("truncate schubert.app_logs");
     sql("truncate schubert.games cascade");
     sql("delete from schubert.request_inbox");
     sql("delete from schubert.auth_sessions");
@@ -75,6 +76,134 @@ final class ScenarioApplicationServiceTest {
         "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) "
             + "select id,'owner'||id,'key'||id,'unusable-fixture-hash','USER','ACTIVE','2026-09-08Z','2026-09-08Z','2026-09-08Z' from (values(101),(102)) t(id)");
     session("b", 1, 101);
+  }
+
+  @Test
+  void successAuditIsAtomicAndNotRepeatedForSavedSearchAndDetail() throws Exception {
+    master(2);
+    try (var h = new Harness()) {
+      for (String prefix : List.of("SRC", "SCN")) {
+        var message = request(prefix);
+        assertEquals(
+            "0000", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+        assertScenarioAudit(
+            message, prefix.equals("SRC") ? "SCENARIO_SEARCHED" : "SCENARIO_VIEWED", 2);
+        assertEquals(
+            "0200", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+        assertScenarioAudit(
+            message, prefix.equals("SRC") ? "SCENARIO_SEARCHED" : "SCENARIO_VIEWED", 2);
+      }
+      assertEquals(2, count("schubert.app_logs"));
+      assertEquals(2, count("schubert.request_inbox"));
+    }
+  }
+
+  @Test
+  void criticalAuditFailureRollsBackInboxAndCanBeRetried() throws Exception {
+    master(2);
+    sql(
+        "create function schubert.fail_scenario_audit() returns trigger language plpgsql as $$ begin raise exception 'synthetic audit failure'; end $$");
+    sql(
+        "create trigger fail_scenario_audit before insert on schubert.app_logs for each row execute function schubert.fail_scenario_audit()");
+    try (var h = new Harness()) {
+      var message = request("SRC");
+      try {
+        assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(message));
+        assertEquals(0, count("schubert.request_inbox"));
+        assertEquals(0, count("schubert.app_logs"));
+        assertEquals(0, h.live.get());
+      } finally {
+        sql("drop trigger fail_scenario_audit on schubert.app_logs");
+        sql("drop function schubert.fail_scenario_audit()");
+      }
+      assertEquals(
+          "0000", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+      assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+    }
+  }
+
+  @Test
+  void concurrentSameMessageAuditsOnceAndDistinctMessagesAuditIndividually() throws Exception {
+    master(2);
+    try (var h = new Harness();
+        var workers = Executors.newFixedThreadPool(12)) {
+      var message = request("SRC");
+      var start = new CountDownLatch(1);
+      List<Future<String>> replies = new ArrayList<>();
+      for (int n = 0; n < 24; n++)
+        replies.add(
+            workers.submit(
+                () -> {
+                  assertTrue(start.await(10, TimeUnit.SECONDS));
+                  return ascii(h.service.process(message), 208, 4);
+                }));
+      start.countDown();
+      List<String> codes = new ArrayList<>();
+      for (var reply : replies) codes.add(reply.get(20, TimeUnit.SECONDS));
+      assertEquals(1, Collections.frequency(codes, "0000"));
+      assertEquals(23, Collections.frequency(codes, "0200"));
+      assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+      var first = workers.submit(() -> ascii(h.service.process(request("SRC")), 208, 4));
+      var second = workers.submit(() -> ascii(h.service.process(request("SRC")), 208, 4));
+      assertEquals("0000", first.get(10, TimeUnit.SECONDS));
+      assertEquals("0000", second.get(10, TimeUnit.SECONDS));
+      assertEquals(3, count("schubert.app_logs"));
+      assertEquals(3, count("schubert.request_inbox"));
+    }
+  }
+
+  @Test
+  void committedAuditRemainsExactlyOnceAfterUnknownResponse() throws Exception {
+    for (String fault : List.of("afterCommit", "close")) {
+      seed();
+      master(2);
+      try (var h = new Harness()) {
+        var message = request("SRC");
+        h.faultConnection = 2;
+        h.fault = fault;
+        assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(message));
+        assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+        assertEquals(1, count("schubert.request_inbox"));
+        h.fault = "none";
+        assertEquals("0200", ascii(h.service.process(message), 208, 4));
+        assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+        assertEquals(0, h.live.get());
+      }
+    }
+    seed();
+    try (var h = new Harness()) {
+      h.identifierFaultAt = 1;
+      assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(request("SRC")));
+      assertEquals(0, count("schubert.app_logs"));
+      assertEquals(0, count("schubert.request_inbox"));
+    }
+  }
+
+  private static void assertScenarioAudit(
+      WireMessage<FixedPayload> message, String action, int resultCount) throws Exception {
+    try (var c = database.admin();
+        var s =
+            c.prepareStatement(
+                "select service,category,level,action,message,actor_user_id,actor_username,correlation_id,logged_at,details::text from schubert.app_logs where message_id=?")) {
+      s.setObject(1, message.header().messageId());
+      try (var rows = s.executeQuery()) {
+        assertTrue(rows.next(), "successful business action must have a committed critical audit");
+        assertEquals("API", rows.getString(1));
+        assertEquals("ACTION", rows.getString(2));
+        assertEquals("INFO", rows.getString(3));
+        assertEquals(action, rows.getString(4));
+        assertEquals(action, rows.getString(5));
+        assertEquals(101, rows.getLong(6));
+        assertEquals("owner101", rows.getString(7));
+        assertEquals(message.header().correlationId(), rows.getObject(8));
+        assertEquals(NOW, rows.getObject(9, OffsetDateTime.class).toInstant());
+        var details = com.google.gson.JsonParser.parseString(rows.getString(10)).getAsJsonObject();
+        assertEquals(Set.of("layout", "resultCount"), details.keySet());
+        assertEquals(message.header().layoutId().value(), details.get("layout").getAsString());
+        assertEquals(resultCount, details.get("resultCount").getAsInt());
+        assertFalse(rows.next(), "saved replay must not duplicate the business audit");
+      }
+    }
   }
 
   @Test
@@ -99,6 +228,7 @@ final class ScenarioApplicationServiceTest {
         h.ids.set(0);
       }
       assertEquals(6, count("schubert.request_inbox"));
+      assertEquals(1, count("schubert.app_logs")); // Only SRC succeeded; SCN0104 is not a view.
       try (var c = database.api();
           var s = c.createStatement();
           var r =
@@ -182,6 +312,8 @@ final class ScenarioApplicationServiceTest {
         assertEquals(file ? 1 : 0, h.published.get());
         assertEquals(0, h.live.get());
         assertEquals(List.of(true, false), h.modes);
+        if (count <= 10000) assertScenarioAudit(request, "SCENARIO_VIEWED", count);
+        else assertEquals(0, count("schubert.app_logs"));
         var saved = stored(request);
         sql("update schubert.script_entries set body='changed after first response'");
         assertArrayEquals(
@@ -189,6 +321,7 @@ final class ScenarioApplicationServiceTest {
             h.service.process(request));
         assertEquals(saved, stored(request));
         assertEquals(file ? 1 : 0, h.published.get());
+        assertEquals(count <= 10000 ? 1 : 0, count("schubert.app_logs"));
       }
     }
     seed();
@@ -218,6 +351,7 @@ final class ScenarioApplicationServiceTest {
       assertArrayEquals(
           golden("SCN", request, h, "0200", true, 201, 3), h.service.process(request));
       assertEquals(2, h.published.get());
+      assertScenarioAudit(request, "SCENARIO_VIEWED", 201);
       var replaced = stored(request);
       assertEquals(first.subList(0, 5), replaced.subList(0, 5));
       byte[] after =
