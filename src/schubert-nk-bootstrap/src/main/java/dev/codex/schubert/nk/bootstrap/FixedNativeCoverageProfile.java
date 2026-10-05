@@ -41,7 +41,7 @@ public final class FixedNativeCoverageProfile {
       ServiceConfigFiles.@Nullable Service service,
       @Nullable Phase phase,
       @Nullable String invocation,
-      @Nullable List<@Nullable String> options) {
+      @Nullable List<? extends @Nullable String> options) {
     if (service == null || phase == null || options == null)
       throw new IllegalArgumentException("fixed PT role, phase and options required");
     String selected = null;

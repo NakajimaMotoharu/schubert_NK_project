@@ -127,7 +127,7 @@ final class ApiProcessMainTest {
   }
 
   @Test
-  void opsApiMain003FatalDiagnosticIsFixed() {
+  void opsApiMain003FatalDiagnosticIsFixed() throws IOException {
     synchronized (System.class) {
       PrintStream original = System.err;
       Thread thread = Thread.currentThread();

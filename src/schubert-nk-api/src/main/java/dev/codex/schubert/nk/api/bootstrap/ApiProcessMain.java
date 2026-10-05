@@ -9,6 +9,9 @@ import dev.codex.schubert.nk.api.logging.WebLogIngestService;
 import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
 import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
 import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -47,10 +50,27 @@ public final class ApiProcessMain {
     void execute(ApiStartupInputs.Values inputs) throws IOException;
   }
 
-  public void main(String[] arguments) {
+  public void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);
-    int status = run(arguments, environment, source);
-    System.err.println("API process stopped");
+    var coverage =
+        FixedNativeCoverageCheckpoint.fromCurrentJvm(
+            ServiceConfigFiles.Service.API,
+            FixedNativeCoverageProfile.Phase.ORDINARY,
+            environment.get("INVOCATION_ID"));
+    int status;
+    if (coverage.isPresent()) {
+      try (var hold = FixedNativeCoverageStopHold.open()) {
+        hold.verifyOwner();
+        status = run(arguments, environment, source);
+        System.err.println("API process stopped");
+        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+        hold.verifyOwner();
+        System.err.println("API fixed PT native capture complete");
+      }
+    } else {
+      status = run(arguments, environment, source);
+      System.err.println("API process stopped");
+    }
     termination.accept(status);
   }
 

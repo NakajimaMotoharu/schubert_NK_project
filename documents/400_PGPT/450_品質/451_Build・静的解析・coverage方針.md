@@ -1,5 +1,7 @@
 # Build・静的解析・coverage方針
 
+SSC193採取補足（2026-10-06）：隔離PG/PTの固定pin/output=none/公開getExecutionData(false)・held新0600 inode・Root exec直前と普通owned帰還後終端はSS342343を正とする。host選択は独立literal/metadata/byte/FD/null/並行/例外の限定証拠、実main/session/真正manager及びstop後条件の代用ではない。正式runへ加えるexecは同source/frozen byte/boot/Invocation/PID/start/time/pointを独立に照合し、before-execだけから普通成功を推定しない。全counter100%、既定argv/env/2FD/security/owner/budget・独立oracle・非秘密/trace・全scope/run条件は不変更、除外追加/累積exec/別source流用0。
+
 2026-09-30運用参照: 次回の受入経路・coverage閉鎖・検証の区切りは[477 §4～5](../470_PMO/477_GPT61Sol実行計画・再開判定.md)を参照する。本書の品質条件は変更しない。小部品追加だけで全正式認定を繰り返さず、下記の機能受入・変更後停止・PR/工程gate・横断変更では所定の全体検証を実施する。各正式runの前に実際のtriggerと対象受入IDを1行で残す。管理文書だけの今回改定は新規試験認定ではない。
 
 PG201追補（2026-09-20）: Production JavaScriptはNode24.19.0の構文checkと実script/独立DOM event fixtureをJUnitから必須実行する。V8 line/function/branchを各100%へ強制し、対象Production fileがcoverage表に実在することを確認する。検索scriptはclass定義なし（class0/0、除外なし）、定義した全functionをmethod相当として100%・source file inventory1/1を検査する。JavaのJaCoCo4指標100%は従来どおり維持。8Node subcaseは1JUnit内数。Node不存在/異version、構文失敗、対象なし、failed/skipped/todoを合格にしない。実Browser描画・IT/STは別gate。

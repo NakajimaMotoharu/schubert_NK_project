@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -39,10 +42,27 @@ public final class WebProcessMain {
     void execute(WebStartupInputs.Values inputs) throws IOException;
   }
 
-  public void main(String[] arguments) {
+  public void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(WebProcessMain::fatal);
-    int status = run(arguments, environment, source);
-    System.err.println("WEB process stopped");
+    var coverage =
+        FixedNativeCoverageCheckpoint.fromCurrentJvm(
+            ServiceConfigFiles.Service.WEB,
+            FixedNativeCoverageProfile.Phase.ORDINARY,
+            environment.get("INVOCATION_ID"));
+    int status;
+    if (coverage.isPresent()) {
+      try (var hold = FixedNativeCoverageStopHold.open()) {
+        hold.verifyOwner();
+        status = run(arguments, environment, source);
+        System.err.println("WEB process stopped");
+        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+        hold.verifyOwner();
+        System.err.println("WEB fixed PT native capture complete");
+      }
+    } else {
+      status = run(arguments, environment, source);
+      System.err.println("WEB process stopped");
+    }
     termination.accept(status);
   }
 

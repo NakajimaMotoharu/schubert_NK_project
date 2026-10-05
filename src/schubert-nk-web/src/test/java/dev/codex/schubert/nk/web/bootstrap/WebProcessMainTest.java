@@ -127,7 +127,7 @@ final class WebProcessMainTest {
   }
 
   @Test
-  void opsWebMain003FatalDiagnosticIsFixed() {
+  void opsWebMain003FatalDiagnosticIsFixed() throws IOException {
     synchronized (System.class) {
       PrintStream original = System.err;
       Thread thread = Thread.currentThread();

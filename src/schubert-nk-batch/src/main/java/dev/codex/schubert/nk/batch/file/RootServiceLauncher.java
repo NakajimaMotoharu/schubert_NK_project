@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
 import dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.bootstrap.StartupProofFrame;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -29,8 +32,19 @@ public final class RootServiceLauncher {
 
   private RootServiceLauncher() {}
 
-  public static void main(String[] args) {
-    System.exit(run(args, RootServiceLauncher::preflight));
+  public static void main(String[] args) throws IOException {
+    Optional<FixedNativeCoverageCheckpoint> coverage = Optional.empty();
+    if (args.length == 1 && ("API".equals(args[0]) || "WEB".equals(args[0])))
+      coverage =
+          FixedNativeCoverageCheckpoint.fromCurrentJvm(
+              ServiceConfigFiles.Service.valueOf(args[0]),
+              FixedNativeCoverageProfile.Phase.ROOT,
+              System.getenv("INVOCATION_ID"));
+    var admittedCoverage = coverage;
+    int status = run(args, service -> preflight(service, admittedCoverage));
+    if (coverage.isPresent())
+      coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    System.exit(status);
   }
 
   static int run(String[] args, Admission admission) {
@@ -53,7 +67,9 @@ public final class RootServiceLauncher {
     }
   }
 
-  private static void preflight(ServiceConfigFiles.Service service) throws IOException {
+  private static void preflight(
+      ServiceConfigFiles.Service service, Optional<FixedNativeCoverageCheckpoint> coverage)
+      throws IOException {
     var root = RootStartupContext.create();
     var actor =
         switch (service) {
@@ -97,13 +113,24 @@ public final class RootServiceLauncher {
                                 issued,
                                 facts.rootsSha256());
                         var arguments =
-                            new FixedServiceExecArguments(service, identity).arguments();
+                            new FixedServiceExecArguments(service, identity)
+                                .arguments(
+                                    coverage.map(FixedNativeCoverageCheckpoint::ordinaryProfile));
                         LinuxSealedProof.create()
                             .withProof(
                                 frame.encode(),
                                 proofFd -> {
                                   root.recheck(snapshot);
                                   owner.parentsGuard().check();
+                                  if (coverage.isPresent()) {
+                                    coverage
+                                        .orElseThrow()
+                                        .capture(FixedNativeCoverageCheckpoint.Point.BEFORE_EXEC);
+                                    // Export owns/closes its third FD before only A/proof
+                                    // inheritance.
+                                    root.recheck(snapshot);
+                                    owner.parentsGuard().check();
+                                  }
                                   LinuxExecDescriptors.create()
                                       .withInherited(
                                           admission.descriptor(),
