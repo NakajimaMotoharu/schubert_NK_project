@@ -124,7 +124,7 @@ final class NativeCoveragePrivateFile {
                 ResourceScope.use(
                     parent::close,
                     () -> {
-                      Identity parentBefore = directory(parent, security, 0, 0, 040711);
+                      Identity parentBefore = directory(parent, security, 0, 0, 040755);
                       String role =
                           (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT
                                   ? "root-"
@@ -156,7 +156,7 @@ final class NativeCoveragePrivateFile {
                             require(saved.equals(directory(reopened, security, uid, gid, 040700)));
                             return Boolean.TRUE;
                           });
-                      require(parentBefore.equals(directory(parent, security, 0, 0, 040711)));
+                      require(parentBefore.equals(directory(parent, security, 0, 0, 040755)));
                       return Boolean.TRUE;
                     });
                 require(serviceBefore.equals(directory(service, security, 0, 0, 040755)));
