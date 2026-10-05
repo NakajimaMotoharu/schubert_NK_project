@@ -12,6 +12,8 @@ SSC111/SSC109補足：root Cleanup/Expiryも署名release原本をPID1 host view
 
 SSC107/BUG322（PG/PT）：親Morning候補の`Type=simple`＋`TimeoutStartSec=30min`はJava親全体の上限でなく、`Before=Backup/Cleanup/...`も親処理完了barrierにならない。親を`Type=oneshot`にし`TimeoutStartSec=30min`を実行中全体に適用する。親から子への`Before=`は外し、親がM/A/原本を所有して固定Unitを明示起動する。morning targetは親だけを`Requires`し`After`で親完了を待つ。旧「全unitをWants」は廃止し、子の並列自動起動を禁止する。`SendSIGKILL=no`と後続保全を維持し、timeout時にOS lock解放/Unit終端/marker修復を推定しない。実効Type/MainPID/timeout、短縮隔離probe、全Unit依存順と親の30分単調budgetはPTで確認する。Web/API/Artemis `Type=simple`の個別readinessは引き続き別pollであり、その`TimeoutStartSec`を長期稼働期限へ転用しない。RD/UI変更なし。
 
+SSC191（BUG720/YKT511、QA047内管理操作）：普通API/Webが真正ready後に管理者所有の正規`systemctl stop`を受けた場合、JVMの全owner正常返却後のSIGTERM終了はCode1/status143、旧Unitではfailed/failed/result exit-codeになり得る。143単独・manager冷停止・GCを正常scope返却/worker成功へ読み替えない。生存時同boot/Invocation/PID/ticks・ordinary identity/署名class/Unit・start、停止後full18/時刻/固定policy/kernel/旧PID消失を束縛し、同Invocation全journal（未選別、最大4MiB）からtrusted PID/UIDのexact `API|WEB cleanup complete`→`API|WEB process stopped`各1を順序・start～end内で確認する。重複key/cursor・foreign/null/未知型・不正UTF8・未知cleanup/fatal・未完/信号/timeoutは拒否。これは当管理停止の独立witnessでありUnit成功、親0/10、旧工具close成功ではない。固定UnitへのSuccessExitStatus143追加やreset-failedだけで表示を修復しない。後続は新fresh owned起動、ready/全後条件を別に実証する。保持工具のhandoffはSS343 SSC191/SS353§20.2の別限定入口に従う。
+
 ## 1. 目的・状態
 
 Caddy、systemd、PostgreSQL、Artemis、Web/API/batch Java processの初期実効値、入力file、port、resource上限、
