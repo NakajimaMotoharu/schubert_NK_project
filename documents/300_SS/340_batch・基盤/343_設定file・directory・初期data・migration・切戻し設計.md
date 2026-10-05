@@ -661,6 +661,10 @@ H2、in-memory JMS、UTF-8以外のwire、relaxed validation、ADMIN固定passwo
 
 ### 8.2 Bootstrap account
 
+SSC189（PG465、専用Unitの起動/保守排他の内部具体化）：bootstrapは通常API/Web用のpermit・JMS・5credential組立を流用しない。専用Unitは既存schubert-api UID/GID/固定supplementary groups、全capability0、NoNewPrivileges=true、kernel cgroupが固定`/system.slice/schubert-nk-bootstrap-admin.service`であることを既存ChildStartupContext/FixedServiceIdentityで認証する。固定`/run/credentials/schubert-nk-bootstrap-admin.service`だけを受け付け、username/password/db-apiの3つを保持inode/ACL/read-only/bounded/strict UTF8で読む。通常API/Web credential enumへbootstrap秘密を追加しない。設定は既存API非秘密設定、DBは既存schubert_app admission、argv/秘密env/URLやrole overrideなし。前後同boot/PID/startTicks/identity/cgroupで世代を再検査し、全credential/DB/source/root資源が正常返却した後だけ0又は20を返す。実Unitは無効がdefaultで通常restartなし、0と既存skip20を区別して記録する。
+
+初期作成TXは既存保守排他71419602に`pg_try_advisory_xact_lock_shared`で参加し、保守がexclusiveを保持していれば即時拒否・作成0、NULL/欠落/余剰結果も拒否する。その後のmembership71419601→table lock→存在確認はSSC188と同じで、共有保守lockはcommit/rollbackまで保持する。これはMaintenance namespace/原本/epoch/permit発行の権限ではない。実credential sourceは別sessionでLogin/変更/ADMIN確認を終えてから退役し、DB/原本/Backup/Current保全を独立検査する。固定Unitを署名BOMへ含め、未登録コードや私有classをProduction実入口の代用にしない。
+
 - 現行`user_pass.txt`を移行せず、初期ADMINを安全なoneshot `schubert-nk-bootstrap-admin.service`で1件作成。
 - Username/passwordはsystemd credentialから読み、passwordは画面と同じvalidation、`{pbkdf2-v1}`でhash化し、平文はmemory使用後zero。
 - `app_users` 0件の場合だけ実行、複数回/既存Userありは無変更でexit 20。固定default passwordなし。
