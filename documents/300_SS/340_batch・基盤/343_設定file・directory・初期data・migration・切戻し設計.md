@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC193 隔離PG/PT native採取namespace（2026-10-06、§11.1配備補足）
+
+既存Production namespace/初期data/migration/原本Backupを変更しない。隔離PG/PTの現bootで `/run` と `/run/schubert-nk` はRoot:Root0755、既存 `/run/schubert-nk/pt-coverage` はRoot:Root0711・ACLなしとし、旧coverage領域とexecを全保全する。新role名は `root-api193` / `root-web193`（Root:Root0700）、`ordinary-api193` / `ordinary-web193`（当固定NSS accountのUID:primary GID0700）だけ。管理者が正常停止/現boot・元原本/Backup・current/lock/署名の保全を確認して新規専用directoryを作成し、runtimeは作成/chmod/chown/置換・旧/runの復元を行わない。agent固定pin/Root0755 parent/0644単link/ACLなし/ROはSS342 SSC193で規定する。出力roleはtmpfs・RWを保持capabilityから検査する。
+
+既存OwnedTransferDirectoryのNOFOLLOW absolute segment/child保持と0600新private entryを使用する。nameは真正32hex INVと`.before-exec.exec`または`.terminal.exec`だけ、同role/phaseが決定しcallerの任意pathを受けない。`createPrivateEntry`はsingle segment/null/operation/closedをmutation前に検査し、O_EXCL|O_NOFOLLOW|O_CLOEXEC/0600で新inodeを保持する。writerは `/proc/self/fd/N` の実inodeへ有限byteをwrite/forceし、通常channel close→元file inode/owner/group/mode/nlink1/size/fullhash→保持native FD通常close→directory sync→同nameの保持再open/inode/fullhash→directory identity及びrole再open/通常closeを確認する。名前/dir置換を追従せず、既存regular/symlink/partialの内容一致を再利用・再forceの根拠としない。ACL/owner/mode/device/inode/size/namespace差異・write/force/close不明は非成功、partialを削除せず私有保全する。
+
+runtime出力はRoot/ordinary世代別、同INVでも各role領域が分離される。Root before-exec/known終端・ordinary所有帰還後終端の意味はSS342 SSC193を正とする。原始exec/session/私有診断はGitへ格納せず、source/run/sessionの実限定照合・counter/hash/正常終了及び不明範囲だけをsafe manifestへ保存する。Cold bootで消失した旧tmpfs出力を旧archiveから現/runへ復元しない。設計公開は新profile配備・fresh全6/native100/正式品質完了ではない。
+
 SSC192配備補足（2026-10-05、BUG730/YKT517）：正規署名code-only配備のdaemon-reloadは、停止済みCaddyの正常F18/旧Invocationを保持しつつ補助Exec履歴を両exact未実行へ戻すことがある。これをSS342 SSC192の旧世代拒否dataとして分類し、設定変更前後・全kernel停止・原本DB/Backup保全と新所有を維持する。補助n/aを旧処理成功へ補完せず、片側混合/未知/失敗履歴を拒否し、新Caddyは新普通actor・真正validate・新Invocation/socket/TLSで再認証する。旧/run/permit/原本を復元して再起動したことにせず、設計公開はnative受入と区別する。
 
 SSC191（QA047内、BUG720/YKT511、SSC190の正常DONE配備停止中断）：旧工具の保持UNKNOWNにresume/exit APIがない場合、旧操作をそのまま成功再開するのではなく、次の限定管理者handoffを別入口とする。業務/原本/Current baselineの修復、新permit、DDL、startは本handoffでは実行しない。
