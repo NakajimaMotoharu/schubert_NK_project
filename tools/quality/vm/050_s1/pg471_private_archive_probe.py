@@ -1,4 +1,8 @@
-"""Root file primitive oracle in a new isolated fixture; no app, authority, DB or source transition."""
+"""Root file primitive oracle in a new isolated fixture; no app/DB/source transition.
+Host invocation MUST use pg471_private_command.py with a new .private.log in
+WorkPG379; bare shell redirection is not an approved private logging boundary.
+The already completed Root fixture is not reissued for this host-only correction.
+"""
 import os,pathlib,stat,sys
 sys.path.insert(0,'/var/lib/pgpt-s1-preservation/pg471-completed-tools-v1')
 from pg471_prepare_native_v2 import create_file

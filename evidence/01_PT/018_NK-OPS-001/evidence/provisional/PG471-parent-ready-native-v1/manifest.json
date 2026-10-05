@@ -1,0 +1,140 @@
+{
+  "id": "PG471-parent-ready-native-v1",
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-NPARENT195006",
+    "PT-OPS-NPARENT195007",
+    "CHR-A01",
+    "CHR-L01"
+  ],
+  "collectedAt": "2026-10-05T21:04:59.775127+00:00",
+  "branch": "dev-foundation",
+  "productionSource": "717d72dd844fff286b4c696b9d08c41b136f0a6c",
+  "release": "PG471",
+  "manifestSha256": "47f7a338de848c83e96d2fc8208a9eade43e9d4e5218c79b3834603e27648b18",
+  "environment": {
+    "OS": "Ubuntu26.04",
+    "JDK": "25.0.4",
+    "PostgreSQL": "18.6",
+    "Maven": "3.9.12"
+  },
+  "commands": [
+    "python3 -B tools/quality/vm/050_s1/pg471_capture_parent_journal_v1.py",
+    "bash tools/quality/vm/050_s1/pg471_readback_native_v3.sh",
+    "bash tools/quality/vm/050_s1/pg471_l01_native_v1.sh"
+  ],
+  "actualExit": 0,
+  "oldReadbackExit": [
+    1,
+    1
+  ],
+  "oldReadbackNotPassed": true,
+  "parent": {
+    "pid1SameBootJobInvocationDoneCount": 1,
+    "job": 179382,
+    "invocation": "2cb76b9c627e430ebc4dbec0761f9ebb",
+    "withinOriginal30Minutes": true,
+    "sameRootOrdinaryApiWeb": true,
+    "ownedSocket": true,
+    "infoFieldsMatched": 5,
+    "caddyTlsLogin200": true,
+    "caddyZeroCaps": true,
+    "backendRetained": true,
+    "rows": 371,
+    "oldFull14RowsPreserved": 361,
+    "newRows10Skipped": true,
+    "startupEntries": 49,
+    "oldCanonicalByteMetadataPreserved": 44,
+    "canonicalEpochGroups": 12,
+    "intent": 0,
+    "originalDone": true,
+    "previousBackupPreserved": true,
+    "unchangedBusinessTables": 19,
+    "newReadOnlyScopesReturnedNormally": true
+  },
+  "chrA01": {
+    "case": "CHR-A01",
+    "productionSource": "717d72dd844fff286b4c696b9d08c41b136f0a6c",
+    "startedAt": "2026-10-05T20:39:13.441654+00:00",
+    "completedAt": "2026-10-05T20:39:16.154838+00:00",
+    "exitCode": 0,
+    "privateLogSha256": "cfdcc7a3c53e14ef4eb86b16855ee1337df6882ebe2558c06aacbd71fed76e01",
+    "harnessClassesSha256": "122dcc4c1be482ac3239325de6fb3d4bec12747d05adce3929c319ab5bdfd71d",
+    "sharedCurrentDriver": true,
+    "fullGate": false,
+    "otherCasesNotRun": true,
+    "wholeParentAccepted": false
+  },
+  "l01": {
+    "status": "OBSERVED_NOT_ACCEPTED",
+    "QA": "QA-051",
+    "actions": {
+      "LOGIN_SUCCEEDED": 1,
+      "SCENARIO_SEARCHED": 1,
+      "HTTP_REQUEST_COMPLETED": 11
+    },
+    "DOMRows": 3,
+    "details": 3,
+    "passwordReset": false,
+    "outageReplayNotThisRun": true
+  },
+  "native": {
+    "rootApiBytes": 73700,
+    "rootWebBytes": 73700,
+    "rootPrivate600": true,
+    "ordinaryTermNotRun": true,
+    "sessionsNotYetValidated": true,
+    "coverage100": false
+  },
+  "independentToolAssertions": {
+    "readback": 384,
+    "l01": 19,
+    "nativeTerm": 28,
+    "nativeControl": 265,
+    "nativeStop": 24,
+    "privateLog": 15
+  },
+  "fullRegression": {
+    "source": "717d72dd844fff286b4c696b9d08c41b136f0a6c",
+    "PT": 3328,
+    "suite": 493,
+    "F": 0,
+    "E": 0,
+    "S": 0,
+    "staticModulesZero": 6
+  },
+  "privateHashes": {
+    "pg471-parent-journal-private-v1.jsonl": "35cddb605698e84cf49b34b1ca4333e41680b88c0c0dbf91badc64fe2a1d6818",
+    "pg471-readback-native-v1.private.log": "6996be2f98e9b2e25d93631a4090a109256a8cd96bfc91b3b674d61b29efb04d",
+    "pg471-readback-native-v2.private.log": "3d290df7f09815b10651a752830d1388fdb1f8813cc2490e360632a3fb7396a0",
+    "pg471-readback-native-v3.private.log": "e1e8acbab777a42fe3d449728f19bbd27d4aba28d8284911629df8a5bf38af11",
+    "pg471-readback-oracle-v4.private.log": "811c146f343bb8af62368f3353d4bc2e9092be6a50816f2179ed07892859f4fc",
+    "pg471-l01-v1/L01-observed.private.json": "1701678f7fb3a568bd53236ead4e53959d8692238ec6865fa0313cf1e0debce9",
+    "pg471-chr-a01-execution.private.json": "f373e848e3841f62626d22504d221f31b20b944c8918c010e11f3b427f96863e"
+  },
+  "BUG": [
+    "BUG-753",
+    "BUG-754",
+    "BUG-755",
+    "BUG-756",
+    "BUG-757"
+  ],
+  "YKT": [
+    "YKT-533",
+    "YKT-534",
+    "YKT-535",
+    "YKT-536",
+    "YKT-537"
+  ],
+  "SSC": [
+    "SSC-193",
+    "SSC-194",
+    "SSC-195"
+  ],
+  "rawExported": false,
+  "formalUpdated": false,
+  "formalRun": "PT-WEB-20260925-24",
+  "formalPT": 1964,
+  "formalScopes": 53,
+  "ITSTAccepted": false
+}
