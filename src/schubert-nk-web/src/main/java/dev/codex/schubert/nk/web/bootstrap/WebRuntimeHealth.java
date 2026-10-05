@@ -13,6 +13,11 @@ import org.jspecify.annotations.Nullable;
 final class WebRuntimeHealth {
   private WebRuntimeHealth() {}
 
+  /** PG-D378/WEB-REM001: exact existing captured-management conjunction. */
+  static <T> boolean ready(@Nullable T management, Predicate<T> probe) {
+    return management != null && probe.test(management);
+  }
+
   static <R, L, V> boolean healthy(
       BooleanSupplier ownerStopping,
       BooleanSupplier stopping,

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+PG473/PG-D378追跡：NK-WEB-002/NK-OPS-001、SYS002004/AUT002004/MON003/UI212222226252253/SS313314321342343352。WebRuntimeHealth.ready→WEB-REM001、WebRuntimeFailureSignal.run/accept→002、WebNativeRuntime.requireMappings/start二重拒否→003、WebRuntimeExecution.execute/実UNKNOWN interval保持→004、WebTerminalCapture.currentJvm/open/capture/Owner→005、WebProcessMain.admittedConfiguration/run/main→006。独立WebRuntimeRemainder/Execution/TerminalCapture/AdmissionRemainder及び既UnknownRetention各Test、018361/362とsafe PG473 selected manifestに一意対応する。default固定native authority/borrowed scope順序不変、package-only testability、正常fixtureを真正nativeへ算入0、全回帰/同source nativeは別gate。
+
 PG472/PG-D377追記（2026-10-06、NK-WEB-002/NK-OPS-001）：WebNativeRuntimeのcaptured資源health判断はpackage内WebRuntimeHealth（MON003/SS313342352/HEALTH001..004）、所有lock内confirmed-phase/元30秒停止はWebRuntimeStop（SYS004/SS342352/STOP001..005）へ同意味で分離。default provider/clock/volatile snapshot/所有・昇格は不変更。部分owner PART001..003、identity CONSIST001..003、実資源なし隔離UNKNOWN001、Main argv負例と018354355356に対応し、新test helperはtest sourceのみ。69選択13suite/static5は限定受入、source固定fresh六module及び同source実nativeは別gate、旧717の3328/native8を新source正式へ流用しない。
 
 SSC195/PG-D376：NativeCoveragePrivateFile.export親755照合、LinuxDirectoryCalls.openDirectory固定flagsの真正UID独立再現、pg471_prepare_nativeのRoot同inode711→755/4role/閉Unit設定、currentD3保全のPg471 owned接続（工具準備中）をNK-OPS-001/SYS002004/OPS009/TST004/UI212251/SS333342343/451・018352353/PT-OPS-NPARENT195001..006/BUG754/YKT534へ対応付ける。source/run/counterの旧source誤流用を禁止、正式及びnative未受入。

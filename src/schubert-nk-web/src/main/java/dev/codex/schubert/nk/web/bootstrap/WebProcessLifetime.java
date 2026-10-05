@@ -92,13 +92,15 @@ final class WebProcessLifetime implements AutoCloseable {
 
   /** Never unwind the native borrowed frame or manufacture a clean-stop marker after UNKNOWN. */
   static void retainUnknown() {
-    while (true) {
-      try {
-        // Remain observable without ever returning the borrowed frame after UNKNOWN.
-        Thread.sleep(1000);
-      } catch (InterruptedException notification) {
-        /* Still unconfirmed; outer resources retained. */
-      }
+    while (true) holdUnknownInterval();
+  }
+
+  /** Observation wakeup only: never confirms, retries, releases or returns an UNKNOWN owner. */
+  static void holdUnknownInterval() {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException notification) {
+      /* Still unconfirmed; caller retains the exact outer resources and failure frame. */
     }
   }
 }

@@ -1,9 +1,6 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -25,6 +22,7 @@ public final class WebProcessMain {
   private final Map<String, String> environment;
   private final NonSecretConfigSource source;
   private final IntConsumer termination;
+  private final WebTerminalCapture.Factory captures;
 
   public WebProcessMain() {
     this(System.getenv(), ServiceConfigFiles.production(), System::exit);
@@ -32,9 +30,18 @@ public final class WebProcessMain {
 
   WebProcessMain(
       Map<String, String> environment, NonSecretConfigSource source, IntConsumer termination) {
+    this(environment, source, termination, WebTerminalCapture::currentJvm);
+  }
+
+  WebProcessMain(
+      Map<String, String> environment,
+      NonSecretConfigSource source,
+      IntConsumer termination,
+      WebTerminalCapture.Factory captures) {
     this.environment = Map.copyOf(Objects.requireNonNull(environment, "environment"));
     this.source = Objects.requireNonNull(source, "source");
     this.termination = Objects.requireNonNull(termination, "termination");
+    this.captures = Objects.requireNonNull(captures, "native PT captures");
   }
 
   @FunctionalInterface
@@ -44,18 +51,14 @@ public final class WebProcessMain {
 
   public void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(WebProcessMain::fatal);
-    var coverage =
-        FixedNativeCoverageCheckpoint.fromCurrentJvm(
-            ServiceConfigFiles.Service.WEB,
-            FixedNativeCoverageProfile.Phase.ORDINARY,
-            environment.get("INVOCATION_ID"));
+    var coverage = captures.find(environment.get("INVOCATION_ID"));
     int status;
     if (coverage.isPresent()) {
-      try (var hold = FixedNativeCoverageStopHold.open()) {
+      try (var hold = coverage.orElseThrow().open()) {
         hold.verifyOwner();
         status = run(arguments, environment, source);
         System.err.println("WEB process stopped");
-        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+        coverage.orElseThrow().capture();
         hold.verifyOwner();
         System.err.println("WEB fixed PT native capture complete");
       }
@@ -121,16 +124,7 @@ public final class WebProcessMain {
       lifetime.install();
       ServiceStartupAdmission.create(ServiceConfigFiles.Service.WEB, environment)
           .execute(
-              () -> {
-                try {
-                  var inputs = loader.load();
-                  return new ServiceStartupAdmission.Configuration<>(
-                      inputs, inputs.config().canonicalSha256());
-                } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
-                  failureCode[0] = 70;
-                  throw new IOException("non-secret configuration unavailable");
-                }
-              },
+              () -> admittedConfiguration(loader, failureCode),
               (inputs, ready) ->
                   new ServiceProcessResources(
                           new ServiceProcessResources.Inputs(
@@ -143,20 +137,11 @@ public final class WebProcessMain {
                             var runtime =
                                 new WebNativeRuntime(
                                     pool, credentials, inputs.config(), ready, lifetime::stopping);
-                            try {
-                              runtime.start();
-                              lifetime.await(runtime::healthy);
-                            } catch (org.apache.catalina.LifecycleException failure) {
-                              throw new IOException("Web HTTP startup unavailable");
-                            } finally {
-                              lifetime.stop();
-                              try {
-                                runtime.close();
-                              } catch (IOException | RuntimeException | Error unconfirmed) {
-                                System.err.println("WEB cleanup unconfirmed");
-                                WebProcessLifetime.retainUnknown();
-                              }
-                            }
+                            WebRuntimeExecution.execute(
+                                runtime::start,
+                                () -> lifetime.await(runtime::healthy),
+                                lifetime::stop,
+                                runtime::close);
                           }));
       System.err.println("WEB cleanup complete");
     }
@@ -164,5 +149,17 @@ public final class WebProcessMain {
 
   static void fatal(Thread thread, Throwable failure) {
     System.err.println("WEB process failed");
+  }
+
+  /** PG-D378/WEB-REM006: original admission callback, no file/identity/factory override. */
+  static ServiceStartupAdmission.Configuration<WebStartupInputs.Values> admittedConfiguration(
+      WebStartupInputs loader, int[] failureCode) throws IOException {
+    try {
+      var inputs = loader.load();
+      return new ServiceStartupAdmission.Configuration<>(inputs, inputs.config().canonicalSha256());
+    } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      failureCode[0] = 70;
+      throw new IOException("non-secret configuration unavailable");
+    }
   }
 }

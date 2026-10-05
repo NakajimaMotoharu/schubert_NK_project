@@ -63,10 +63,15 @@ final class WebUnknownRetentionTest {
                     }
                   });
       awaitRetained(owner, closed);
+      // Observe ownership after a complete normal hold interval, not only initial suspension.
+      Thread.sleep(1200);
+      awaitRetained(owner, closed);
       owner.interrupt();
       long until = System.nanoTime() + TimeUnit.SECONDS.toNanos(3);
       while (owner.isInterrupted() && System.nanoTime() < until) Thread.sleep(1);
       if (owner.isInterrupted()) throw new AssertionError("interrupt not consumed");
+      awaitRetained(owner, closed);
+      Thread.sleep(1200);
       awaitRetained(owner, closed);
       System.out.println("UNKNOWN_FIXTURE_RETAINED interruptConsumed=true scopesClosed=0");
     }

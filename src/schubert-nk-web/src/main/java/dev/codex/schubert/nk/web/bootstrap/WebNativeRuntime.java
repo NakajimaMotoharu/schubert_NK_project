@@ -42,6 +42,8 @@ final class WebNativeRuntime implements AutoCloseable {
   private final WebHttpAdmission admission;
   private final BooleanSupplier ownerStopping;
   private final AtomicBoolean terminal = new AtomicBoolean();
+  private final WebRuntimeFailureSignal<CommittedFatalReplyException> failureSignal =
+      new WebRuntimeFailureSignal<>(terminal);
   private final AtomicBoolean stopping = new AtomicBoolean();
   private final Object ownerLock = new Object();
   private volatile @Nullable WebBrokerContexts broker;
@@ -119,7 +121,7 @@ final class WebNativeRuntime implements AutoCloseable {
           .start(
               new ArtemisReplyConsumer(
                   client, new JmsReplyDecoder(), new ArtemisReplyDlqSender(clock)),
-              failure -> terminal.set(true));
+              failureSignal);
       replay = WebLogReplayWorker.start(dispatcher, "native-web", 100, Duration.ofSeconds(1));
       var logout = new LogoutWireClient(client, sender, clock, UUID::randomUUID, timeout);
       retry =
@@ -140,7 +142,7 @@ final class WebNativeRuntime implements AutoCloseable {
               UUID::randomUUID,
               app,
               version,
-              () -> terminal.set(true));
+              failureSignal);
       var assembly =
           new WebBusinessAssembly(
               client,
@@ -175,8 +177,7 @@ final class WebNativeRuntime implements AutoCloseable {
           assembly::dependencies,
           owned -> http = owned,
           WebBusinessAssembly.configurations());
-      if (!Objects.requireNonNull(http).mappedPaths().equals(REQUIRED_PATHS))
-        throw new IOException("Web business mapping unavailable");
+      requireMappings(Objects.requireNonNull(http).mappedPaths());
       management =
           WebManagementServer.bind(
               information,
@@ -228,6 +229,11 @@ final class WebNativeRuntime implements AutoCloseable {
           "/notifications",
           "/notifications/{id:[0-9]{1,12}}");
 
+  /** PG-D378/WEB-REM003: exact route set check, no new configuration or repair. */
+  static void requireMappings(Set<String> paths) throws IOException {
+    if (!paths.equals(REQUIRED_PATHS)) throw new IOException("Web business mapping unavailable");
+  }
+
   private static void verify(OwnedTransferDirectory root, StorageIdentity identity)
       throws StorageIoException {
     root.atDirectory(
@@ -258,7 +264,7 @@ final class WebNativeRuntime implements AutoCloseable {
 
   boolean ready() {
     var control = management;
-    return control != null && control.ready();
+    return WebRuntimeHealth.ready(control, WebManagementServer::ready);
   }
 
   @Override

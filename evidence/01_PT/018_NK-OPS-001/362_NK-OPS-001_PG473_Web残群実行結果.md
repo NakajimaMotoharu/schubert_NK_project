@@ -1,0 +1,7 @@
+# PG473 Web残群実行結果
+
+v3/session91028 actual0、選択81PT/17suite/FES0/static5zero/formatNullAwayWerror PASS。safe manifest SHA256 7952a599e395f0cf2709835f975d00ed12d1ac3012f0af05bc47794915014770。WebRuntimeExecution実UNKNOWN・三種close故障・通常間隔前後/interrupt後/outer close0を確認し、INSTRUCTION/LINE/METHOD/CLASS miss0（BRANCHなし）。旧retainUnknown契約も実子JVMで保持を確認。新FactoryのRoot真正default取得/所有captureとnative main正常終了は実同source接続で確認するまで未網羅、全体coverageは未受入。v2/v1証跡を保持し、source固定fresh全6が次gate。
+
+v2/session29108 actual0（08:43:57終了）、fresh選択XML 81PT/17suite/F/E/S各0、5module静的0・format/NullAway/Werror成功。safe PG473-web-remaining-selected-v2 manifest SHA256 adae5cb99f7b8ff2f7ee7ecb4da5297808a5544e8b48e049259b92d4379d22cd。compile失敗v1と別source nativeを混ぜず、clean無し累積coverageは暫定。実UNKNOWN保持呼出し後方probeの1行と、実native default factory/終了分岐は未網羅として維持。v3は同1000ms/interrupt消費の待機intervalと、元execute/retainUnknown各frame内の無期限loopへ整理し、実childのouter close0/両通常間隔/interrupt後を再試験する。新native/full/正式は未受入。
+
+2026-10-06 08:41 JST、v1/session13942 actual1・53.150sec。新helper Consumer<Throwable>が既ArtemisReplyConsumers.startのConsumer<CommittedFatalReplyException>へ型不変で結合できずcompile error。新helper初稿の未実装型結合/TDD red、Web新試験NOT_RUN、既成功のPG472/c8/full/nativeやupstream成功を当群合格へ算入0。実VM/current c8/原本Backupは不変更。typed generic signalを同terminal AtomicBooleanへ結合し、PUBLIC/ENV override無しでnewv2へ進む。oldv1 log/source/exitを私有PG379へ保持。source未固定・coverage/static/new native/正式未受入。
