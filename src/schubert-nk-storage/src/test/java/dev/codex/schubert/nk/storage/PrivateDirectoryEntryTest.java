@@ -67,6 +67,125 @@ class PrivateDirectoryEntryTest {
   }
 
   @Test
+  void nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement() throws Exception {
+    Calls calls = new Calls();
+    String name = "1234567890abcdef1234567890abcdef.terminal.exec";
+    try (var directory = OwnedTransferDirectory.open(calls, root)) {
+      int before = calls.closes;
+      directory.createPrivateEntry(
+          name,
+          held -> {
+            assertEquals(0100600, Files.getAttribute(held, "unix:mode"));
+            assertEquals(1, Files.getAttribute(held, "unix:nlink"));
+            assertEquals(2, calls.live.size());
+            Files.move(root.resolve(name), root.resolve("retained.exec"));
+            Files.write(root.resolve(name), new byte[] {9});
+            write(held, CONTENT);
+            return true;
+          });
+      directory.sync();
+      assertEquals(before + 1, calls.closes);
+      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("retained.exec")));
+      assertArrayEquals(new byte[] {9}, Files.readAllBytes(root.resolve(name)));
+      failure(
+          StorageIoException.Reason.COLLISION,
+          () -> directory.createPrivateEntry(name, p -> fail("existing callback")));
+      Files.createSymbolicLink(root.resolve("linked.exec"), root.resolve("retained.exec"));
+      failure(
+          StorageIoException.Reason.COLLISION,
+          () -> directory.createPrivateEntry("linked.exec", p -> fail("symlink callback")));
+      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("retained.exec")));
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void nfile193002MissingNullAndUnsafeNameDoNotMutate() throws Exception {
+    Calls calls = new Calls();
+    var directory = OwnedTransferDirectory.open(calls, root);
+    try (directory) {
+      assertThrows(
+          IllegalArgumentException.class, () -> directory.createPrivateEntry(null, p -> true));
+      assertThrows(
+          IllegalArgumentException.class, () -> directory.createPrivateEntry("fixed.exec", null));
+      for (String name : new String[] {"", ".", "..", "a/b", "a\0b"})
+        assertThrows(
+            IllegalArgumentException.class, () -> directory.createPrivateEntry(name, p -> true));
+      assertEquals(0, calls.mutations);
+    }
+    failure(
+        StorageIoException.Reason.UNAVAILABLE,
+        () -> directory.createPrivateEntry("fixed.exec", p -> fail("closed callback")));
+    assertEquals(0, calls.mutations);
+  }
+
+  @Test
+  void nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd() throws Exception {
+    Calls calls = new Calls();
+    try (var directory = OwnedTransferDirectory.open(calls, root)) {
+      calls.fail = "create";
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> directory.createPrivateEntry("create.exec", p -> fail("failed create callback")));
+      assertFalse(Files.exists(root.resolve("create.exec")));
+      calls.fail = "";
+      for (String kind : new String[] {"write", "close", "both"}) {
+        int before = calls.closes;
+        failure(
+            StorageIoException.Reason.UNAVAILABLE,
+            () ->
+                directory.createPrivateEntry(
+                    kind + ".exec",
+                    held -> {
+                      write(held, CONTENT);
+                      if (!kind.equals("write")) calls.fail = "close";
+                      if (!kind.equals("close"))
+                        throw new IOException("private failure not exported");
+                      return true;
+                    }));
+        calls.fail = "";
+        assertEquals(before + 1, calls.closes);
+        assertEquals(1, calls.live.size());
+        assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve(kind + ".exec")));
+        failure(
+            StorageIoException.Reason.COLLISION,
+            () -> directory.createPrivateEntry(kind + ".exec", p -> fail("partial reused")));
+      }
+    }
+    assertTrue(calls.live.isEmpty());
+  }
+
+  @Test
+  void nfile193004ConcurrentNamedEntryHasExactlyOneWriter() throws Exception {
+    try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
+        var executor = Executors.newFixedThreadPool(4)) {
+      var results = new ArrayList<java.util.concurrent.Future<Boolean>>();
+      for (int i = 0; i < 16; i++)
+        results.add(
+            executor.submit(
+                () -> {
+                  try {
+                    directory.createPrivateEntry(
+                        "one.exec",
+                        held -> {
+                          write(held, CONTENT);
+                          return true;
+                        });
+                    return true;
+                  } catch (StorageIoException failure) {
+                    assertEquals(StorageIoException.Reason.COLLISION, failure.reason());
+                    return false;
+                  }
+                }));
+      int winners = 0;
+      for (var result : results) if (result.get(5, TimeUnit.SECONDS)) winners++;
+      assertEquals(1, winners);
+      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("one.exec")));
+      assertEquals(0100600, Files.getAttribute(root.resolve("one.exec"), "unix:mode"));
+    }
+  }
+
+  @Test
   void atomicNoReplace() throws Exception {
     try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       create(directory, ID, CONTENT);

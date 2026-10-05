@@ -110,4 +110,45 @@ final class FixedServiceExecArgumentsTest {
       for (var future : futures) assertTrue(future.get(5, TimeUnit.SECONDS).booleanValue());
     }
   }
+
+  @Test
+  void rexec193FixedOrdinaryAgentIsTheOnlyAdditionalArgument() {
+    String inv = "1234567890abcdef1234567890abcdef";
+    String prefix =
+        "-javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar=output=none,append=false,dumponexit=false,sessionid=";
+    for (var service : ServiceConfigFiles.Service.values()) {
+      var command =
+          new FixedServiceExecArguments(
+              service, service == ServiceConfigFiles.Service.API ? API_IDENTITY : WEB_IDENTITY);
+      String option = prefix + service.name() + "-" + inv + "-ordinary";
+      var profile =
+          FixedNativeCoverageProfile.parse(
+              service, FixedNativeCoverageProfile.Phase.ORDINARY, inv, List.of(option));
+      var actual = command.arguments(profile);
+      assertEquals(option, actual.get(9));
+      var withoutAgent = new ArrayList<>(actual);
+      withoutAgent.remove(9);
+      assertEquals(command.arguments(), withoutAgent);
+      assertThrows(UnsupportedOperationException.class, () -> actual.add("unexpected"));
+      var rootProfile =
+          FixedNativeCoverageProfile.parse(
+              service,
+              FixedNativeCoverageProfile.Phase.ROOT,
+              inv,
+              List.of(prefix + service.name() + "-" + inv + "-root"));
+      assertThrows(IllegalArgumentException.class, () -> command.arguments(rootProfile));
+      var other =
+          service == ServiceConfigFiles.Service.API
+              ? ServiceConfigFiles.Service.WEB
+              : ServiceConfigFiles.Service.API;
+      var otherProfile =
+          FixedNativeCoverageProfile.parse(
+              other,
+              FixedNativeCoverageProfile.Phase.ORDINARY,
+              inv,
+              List.of(prefix + other.name() + "-" + inv + "-ordinary"));
+      assertThrows(IllegalArgumentException.class, () -> command.arguments(otherProfile));
+      assertThrows(IllegalArgumentException.class, () -> command.arguments(null));
+    }
+  }
 }

@@ -49,6 +49,18 @@ public final class FixedServiceExecArguments {
 
   /** The first argv element is the held /usr/bin/setpriv ELF; no shell or arbitrary JVM option. */
   public List<String> arguments() {
+    return arguments(java.util.Optional.empty());
+  }
+
+  /** SSC193: only the same service's closed ordinary PT profile; default vector stays identical. */
+  public List<String> arguments(java.util.Optional<FixedNativeCoverageProfile> profile) {
+    if (profile == null) throw new IllegalArgumentException("fixed PT profile required");
+    profile.ifPresent(
+        value -> {
+          if (value.service() != service
+              || value.phase() != FixedNativeCoverageProfile.Phase.ORDINARY)
+            throw new IllegalArgumentException("fixed ordinary PT role required");
+        });
     var argv = new ArrayList<String>();
     argv.addAll(
         List.of(
@@ -65,6 +77,7 @@ public final class FixedServiceExecArguments {
             "-Dfile.encoding=UTF-8",
             "-Duser.timezone=UTC",
             "-XX:+ExitOnOutOfMemoryError"));
+    profile.ifPresent(value -> argv.add(9, value.argument()));
     argv.addAll(
         switch (service) {
           case WEB -> WEB_JAVA;

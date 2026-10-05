@@ -249,6 +249,23 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     }
   }
 
+  /**
+   * SSC193: one admitted new-only 0600 entry, held O_EXCL/NOFOLLOW/CLOEXEC inode throughout I/O. No
+   * arbitrary path, existing-file recovery, deletion or implicit directory sync. The caller
+   * authenticates namespace/owner/ACL and forces content, then syncs and closes the owned
+   * directory. NK-OPS-001 / OPS009,TST004 / UI251 / SS333343451 / PT-OPS-NFILE193001..004.
+   */
+  public <T> T createPrivateEntry(String name, FileOperation<T> operation)
+      throws StorageIoException {
+    synchronized (stateLock) {
+      if (name == null || operation == null)
+        throw new IllegalArgumentException("private entry name and operation required");
+      requireSegment(name);
+      requireOpen();
+      return withEntry(calls.createPrivateFile(descriptor, name), operation);
+    }
+  }
+
   private <T> T withEntry(int ownedDescriptor, FileOperation<T> operation)
       throws StorageIoException {
     EntryHandle entry = new EntryHandle(calls, ownedDescriptor);
