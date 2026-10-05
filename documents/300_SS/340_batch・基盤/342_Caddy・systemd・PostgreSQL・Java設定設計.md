@@ -1,5 +1,15 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC193 隔離PG/PTの固定native採取（2026-10-06、内部補足、業務仕様変更なし）
+
+§4.2/§5のProduction既定argv・5環境項目・A/proofの2FD・same-PID exec・固定NSS/UID/GID/groups/caps/NNP・署名/current/Root全gate・親及びUnit元期限は不変更。隔離PG/PT VMだけで、Root管理agent `/opt/pgpt-tools-pg390/jacoco-agent.jar`（JaCoCo0.8.15、307843byte、SHA256 `fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d`、Root:Root0644・parent0755・ACLなし・実Unit mountでRO）を完全一致で認証する。閉じたoptionは`-javaagent:<上記固定path>=output=none,append=false,dumponexit=false,sessionid=ROLE-INV-phase`の一項だけ、ROLEはAPI/WEB、phaseはroot/ordinary、INVは同managerが生成した非zero lowercase32hex Invocation。Root Unitの`${INVOCATION_ID}`展開値をRoot捕捉世代と照合し、同role ordinaryの固定Java argv index9へこの一項だけ引き継ぐ。JAVA_TOOL_OPTIONS、任意option/path/env、socket/TCP/JMX、attach/reset、private反射、Production compile依存、coverage除外は追加しない。既定及び無関係host agentでは当採取を有効にせず、予約prefixの重複・他role/phase/INV/未知optionは拒否する。
+
+agentは`output=none`でpremain/終了時のpath作成・切詰め・再openを行わない。公開RT.getAgentとIAgent.getVersion/getSessionId/getExecutionData(false)だけを公開methodで呼び、pin済CodeSourceと固定version `0.8.15.202606040825`、前後sessionを確認して5byte以上16MiB以下の新規exec byteを取得する。実Root full preflight及びowner/元budget再照合後、exec直前に`<INV>.before-exec.exec`を当Root専用領域へ新規書込し、全新file/dir FDを正常閉鎖した後にRoot/owner/元budgetを再照合して既存2FDだけを継承する。failed execのknown終端は別`<INV>.terminal.exec`、未知/未帰還を正常へ変換しない。before-exec dumpだけでexec成功を認定しない。
+
+ordinary API/Webは既存runの全owned application scopeが実際に帰還し、既存stopped診断を行った後・既存終了要求の前に、同role/INVの`<INV>.terminal.exec`を記録する。UNKNOWN保持やlive runの途中から終端dumpを捏造しない。採取点のattemptはagent/I/O前に一回消費し、partial/未知/既存fileを再試行・修復・成功扱いにしない。出力はSS343 SSC193のheld新0600 inode契約を用い、実Root/ordinary世代・NSS/cgroup/INV・pinを前後検証する。Root profileだけ通常普通argvへの型付き項目を許し、普通mainの起動権限を当profileから発行しない。
+
+UnitのPG/PT限定ReadWritePathsは当role Root/ordinaryの新専用directoryだけを追加し、既存転送領域・UMask0027・最小権限は維持する。実dumpに同source/frozen class byte、boot/Invocation/PID/start/session/time、真正owned stop/manager journal/全kernel後条件を結び付け、失敗・skip・未実行・別sourceを100%へ算入しない。SS343/451及びPT-OPS-NC193/REXEC193/NFILE193/NCHECK193/NEXPORT193へ横断追跡。設計確定は実装・fresh全6・実native・正式認定の完了を意味せず、これらは台帳に未受入で維持する。
+
 SSC187：API/Web/Caddyの同世代ready後も、正規原本DONEの直前・typed intent退役前後に実保守証拠を再読する。Backupだけは明示停止済みの同MorningBackupUnitCycle＋元TerminalReceiptを用い、completedReceipt参照同一/recheckCompletedBackup（同owner/baseline/stop結果/全kernel）を要求する。停止前KEEP_ACTIVE receiptの現存を再要求しない。Cleanup/Expiryの保持receipt、純peerとTX外DB整合、真正Root→ordinary/同socket/info/identity、原本の保持能力、元budget、逆順停止・UNKNOWN保持は変更しない。opaque cycleを実callback内で引き継ぎ、receipt値だけからownerを再構成したりno-op gateへ置き換えたりしない。SS341/343 SSC135136及びBUG704/YKT506、実装/PT/native未受入。
 
 SSC137/S3失敗停止追補（実装前）：pending起動のAPI/Web slotは同M/原本/正常A後の親が、真正cold全Unit確認→durable intent→正常start client→実Root世代二読→launch公開まで所有する。未完成ordinaryが50等で退出してもRestart=on-failureを成功又は別起動のreadyへ読み替えない。捕捉した元PID/startTicksの真正proc消滅を同boot/root/Morningの下で二読後、固定slotを通常stop clientで停止し全Unit/kernel空を確認する。UNKNOWN/未捕捉/stop不明/終端不明では元M/DB/原本を保有して外側期限まで隔離。全停止した失敗は当回permit revoke＋残intent保全で非成功終了し、GC/coldから成功receiptを生成しない。これは境界接続の失敗枝でありready/completed/M最終close保証は別未受入。
