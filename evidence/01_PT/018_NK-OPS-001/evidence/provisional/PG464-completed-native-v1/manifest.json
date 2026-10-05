@@ -1,0 +1,41 @@
+{
+  "status": "LIMITED_NATIVE_COMPLETED_NOT_FORMAL",
+  "testIds": ["PT-OPS-STOPCOMP004", "PT-OPS-READBACK464001", "PT-OPS-EXIT464001"],
+  "productionSource": "e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45",
+  "branch": "dev-foundation",
+  "environment": {"hostJdk":"25.0.4", "guest":"Ubuntu 26.04", "postgresql":"18.6", "boot":"e07aa706-1acd-4e65-b309-d7f330f79d54"},
+  "parent": {
+    "invocation":"cc0ac086826446ba928afe79561b0898", "job":114896,
+    "startJst":"2026-10-05T09:23:51.825+09:00", "normalEndJst":"2026-10-05T09:42:36.918+09:00",
+    "originalDeadlineJst":"2026-10-05T09:53:51+09:00", "jobResult":"done", "normalOutcome":"SUCCESS",
+    "normalReturnSourceLines":[540,542], "gcManagerZeroAloneUsedAsExitProof":false,
+    "successProof":"same invocation journal deactivated successfully + job done; same frozen-byte native normal return; Original DONE SUCCESS; fresh M/A and DB scopes return normally"
+  },
+  "readback": {
+    "command":"Pg464CompletedReadback (fixed zero-argument read-only main, classpath documented in 339)",
+    "session":6309, "actualExit":0, "toolVersion":"v7", "independentToolAssertions":178,
+    "classSha256":"f9f7921f26ca95d6038768ef316fcc723ab984d89f7f118c8d657a3389f4649d",
+    "logPrivatePath":"WorkPG379/pg464-completed-native-v7.log",
+    "logSha256":"af8f089eabfca12299d17015ab5495f02058609b13f9b3f38a9857abbe95e715",
+    "fullFourteenColumnRows":331, "oldPrefixRowsPreserved":321,
+    "startupNames":33, "activeIntents":0, "oldRecordBytesPreserved":28,
+    "backupRowsAndBytesPreserved":20,
+    "businessTables":23, "unchangedTables":19,
+    "changedTechnicalTables":["schubert.app_logs","schubert.batch_runs","schubert_web_session.web_http_sessions","schubert_web_session.web_log_outbox"],
+    "appUsers":0, "authSessions":0, "httpSessionDdlViolations":0,
+    "newReadOnlyMAAndDatabaseScopesReturnedNormally":true,
+    "productionPtCredit":0, "ddlOrStartOrPermitIssuance":0
+  },
+  "coverageDiagnostic": {
+    "command":"python3 tools/quality/vm/050_s1/pg464_completed_parent_probe.py",
+    "version":"v2", "actualExit":0, "immutableExecSha256":"463b116f46f92dd9a7507af58d0647ef5ea8333fc22314796e55979d4ee5dc68",
+    "singleSession":true, "startEpochMillis":1791159831962, "dumpEpochMillis":1791160956892,
+    "frozenModules":6, "noMatchClasses":0, "partialNativeSourceLines":[47,543],
+    "diagnosticPrivatePath":"WorkPG379/pg464-parent-diagnostic-v2.txt", "diagnosticSha256":"9975632fd1a92bca07386bf6e6ceefd89e3a0f9a687bc10274d0d2ff8676685a"
+  },
+  "privateJournalSha256":"36f9228bd1979c8f86af8eadc08c71b52511777da3f42e95e86faa93c8f6cfe3",
+  "bugs":["BUG-704","BUG-708","BUG-709","BUG-710","BUG-711","BUG-712"],
+  "ssc":"SSC-187", "ykt":["YKT-505","YKT-506","YKT-508","YKT-509"],
+  "failedVersionsPreserved":true, "rawPrivateDataCommitted":false,
+  "formal":false, "coverage100":false, "wholeCharacterizationAccepted":false, "itStAccepted":false
+}

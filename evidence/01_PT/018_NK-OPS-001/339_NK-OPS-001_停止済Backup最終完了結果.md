@@ -1,5 +1,15 @@
 # NK-OPS-001 停止済Backup最終完了 実行結果
 
+## 正規同source親完了・独立読戻し（2026-10-05 10:30 JST）
+
+Production e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45/PG464027/全6frozenに対し、09:23:51.825開始の一回親cc0ac086826446ba928afe79561b0898/job114896が元30分内09:42:36.918正常完了。JobResult done/正常deactivation、同exec single session/NoMatch0/normal return542、Original DONE SUCCESS、新M/A/2DB外側正常帰還を独立照合。GC後manager0だけではactual exitを認定しない。真正API/Web/Caddy保持、実A01 waiter67896 actual0/PASS・承認DIF001QA045のみ。旧11c/timeout143/UNKNOWNの成功化0。
+
+readback v7（6309 actual0、Werror/178手書き工具assert0）は331全14/旧321prefix一致、23snapshotの19hash不変、技術4tableだけ変化、Backup20metadata/byte、固定Asset/Transfer、33names/intent0/旧28recordbyteを確認。独立SQL user0/auth0/HTTPsessionDDL違反0。class f9f7921f26ca95d6038768ef316fcc723ab984d89f7f118c8d657a3389f4649d。command=`java -cp <pg464-completed-readback-v7:pg461-known30-tool-v3:pg456-applied-tools-v7:PG464 batch/api jars and libs> Pg464CompletedReadback`、VM JDK25.0.4/PG18.6/同e07boot。新readOnlyのみでstart/DDL/permit0、178はProduction PT数へ加算0。
+
+BUG708 helper不存在、709 writable repositoryのreadOnly誤用、710 Data.digest field誤認、711匿名CSRFの正規session変更誤拒否を新工具だけ是正、v1～v6失敗保全。BUG712 probev1/session11267 actual1はreturn542とcatch543・System.exit47を全full要求した誤り。v2は同immutable execSHA463b116f…を再使用してactual0/全6NoMatch0/singleactualsession、normal execute540/return542 full、47/543 partialを維持。native/global100未認定、正式run24据置。
+
+安全証跡=`evidence/provisional/PG464-completed-native-v1/manifest.json`、全private log/journal/exec/diagnostic hashを記載、rawDB/session/key/permitはGit非格納。STOPCOMP004の親正常完了後条件だけ限定受入、全CHR/native100/全PGPT完了の宣言ではない。
+
 ## 新source fresh全6（2026-10-05 09:22 JST）
 
 e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45/09:02:47～09:19:48/session68583/actual0、3272PT485suite/FES0/全6static0・NullAway、source前後hash/全6new-only凍結一致。command pg464_full_v1.sh <当source>、WorkPG379/pg464-six-full-v1.{log,started,completed,exit,source,source-files.sha256}、safe provisional/PG464-stopped-backup-full。変更verify I103/B10/L22/M1全miss0、constructor含むglobal100/native未受入、正式run24据置。185BOM/61deps/27SQL28historyの正規署名候補PG464027/digestb080dfa29bbed038d9a1f0f25196de34e8b75b5c1ee28f7035164a622ea15e7eは配置までactual0、同新sourceの実親完了はまだ未実行。旧11c A01/親143を当結果へ加算0。
