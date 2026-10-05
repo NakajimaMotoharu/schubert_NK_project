@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC195（2026-10-06、BUG754/YKT534、SSC193親FD補足）：普通UIDのheld O_RDONLY directory FDに必要なread/traverseのため、固定4role名だけを持つ非秘密pt-coverage親はSS343のRoot:Root0755・ACLなしとする。各role0700/exec0600、agent pin/RO/UID/groups/NNP、元scope/security/budget/defaultは不変更。operatorは正常owned停止/M/A/DB・原本Backup/旧exec保全を確認した区間でのみ既存親0711の同inodeを一回0755へ変更、runtimeはmode照合のみ。親readは固定role名を読むためだけで、private child内容/exec/session/credentialへ権限を付与しない。真正普通UIDで711拒否755成功を独立確認し、Rootだけの成功を両ordinary/nativeの代用にしない。
+
 SSC194（2026-10-06、SSC193の普通TERM採取接続補足、BUG753/YKT533）：PT profile有効時だけ、既application Lifetimeの外側に固定main所有のstop holdを一つ設ける。追加hookはprovider操作/close/exitをせず、mainの採取完了又は非成功unwindまで待機する。元application hookのfinished解放だけでJVMがhaltしmainのdumpを切らない。mainは外側hold登録/owner照合→既runの全owned business scope帰還→既stopped診断→SSC193新terminal採取/全newfile及びdir正常返却→owner再照合/固定非秘密capture-complete診断→外側hold通常close→既終了要求の順。defaultは追加hook0、既停止・UNKNOWN保持・143を0へ補正しない意味・元Unit及び親期限・2FD/securityは不変更。Runtime.removeShutdownHookの正常true、not-owned false、不正null、及び公開APIが規定するshutdown-in-progressだけを分離し、thread.isAlive/GCから推定しない。失敗時は採取/marker/終端だけを完全成功へ流用せず、fatal/partial/不明及び全kernel後条件を含む独立native判定を要求する。host決定的並行及び実子JVM TERM143はcomponent証拠、実API/Web/native100/正式の代用ではない。
 
 ## SSC193 隔離PG/PTの固定native採取（2026-10-06、内部補足、業務仕様変更なし）
