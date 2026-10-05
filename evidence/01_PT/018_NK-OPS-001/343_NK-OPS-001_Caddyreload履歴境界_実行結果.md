@@ -1,5 +1,11 @@
 # NK-OPS-001 Caddy reload履歴境界 実行結果
 
+## 2026-10-05 14:25 JST 是正工具・正規候補・新親（限定）
+
+fullsourceBBB/3292PT488/FES0/static6zeroは不変。先のv1候補について「正規BOM186」は**署名検証だけでは不十分であり実BOM合格未達に訂正**（BUG735 VERSION更新後hash不一致、BUG736 checksumのmanifest行欠落）。新v3候補は全186最終byte・187辞書順checksum・exactVERSIONを旧正規PG465と独立照合、署名前後全byte検査、実code-verify/activate v6各actual0、signature/全BOM/SQL27・同原本341全14/Backup/business/Transfer/旧36保持/全新scope通常returnを確認。新digest8e7db782c198677015ea58572349e9748bbb19beefbd6e04afec6de1ad7630a3、v1/v2guest候補はRootpg468-rejected-release-v1/v2へrecoverable保全、旧私有signature/logも保持、失敗を合格に加算0。
+
+新Pair verify/retire v4各actual0、37namespace/全9kernel終端、currentPG468 code-only後observer17270・A01wait86837先行、新親1603248/c067/job142470は14:21:12一回/元30min期限14:51:12。client0≠親合格、Caddy新generation/DONE/A01/native100は未受入。safe PG468-code-native-v1/manifestに秘密非表示privatehash/command段階・新M/A/owned後条件を対応、BUG733～738/YKT495518519520521、工具独立assertはProduction PTへ加算0。正式run24/1964PT53scope/48.3%据置。
+
 ## Fresh全6・正規候補（2026-10-05 14:04 JST）
 
 Production source **bbb244e5191e68adee2f6251dfdbbba53e9b64b4**、full62752 actual0、13:39:13～13:56:13、**3292PT/488suite/FES0/全6static0/NullAway/Werror/format0/source前後hash不変**。安全PG468-caddy-reload-full/manifest SHA648020121ed2dde426f78b91fd2a79a25f2d069200c3dbb138d5af0185adc4a9。未網羅B/L/M/C=Protocol0/Storage0/Bootstrap53-34-16-0/API101-190-11-0/Web57-189-26-0/Batch1239-3660-597-39、除外/別source補完0、native100/正式run24は未受入。

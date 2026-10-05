@@ -34,16 +34,22 @@ public final class NativeNkBootstrapAuthentication {
     catch(Throwable failure){System.err.println("NK_BOOTSTRAP_AUTH_FAILED diagnosticsRedacted=true pass=false");System.exit(1);}
   }
   static void run(String[] args)throws Exception{
-    require(args.length==1 && args[0].equals("df9a33febf3703f0d18ac2c4ef56fd0225aac2b9"));
-    Path input=PRIVATE.resolve("pg467-bootstrap-account.private.json"),updated=PRIVATE.resolve("pg467-active-account.private.json");require(!Files.exists(updated));
+    require(args.length==1 && args[0].equals("bbb244e5191e68adee2f6251dfdbbba53e9b64b4"));
+    Path input=PRIVATE.resolve("pg467-bootstrap-account.private.json"),updated=PRIVATE.resolve("pg468-active-account.private.json");require(!Files.exists(updated));
     require(!Files.isSymbolicLink(input) && Files.getPosixFilePermissions(input).equals(Set.of(PosixFilePermission.OWNER_READ,PosixFilePermission.OWNER_WRITE)));
     byte[] raw=Files.readAllBytes(input);require(raw.length<=4096);com.fasterxml.jackson.databind.JsonNode account;
     try{account=JSON.readTree(raw);}finally{Arrays.fill(raw,(byte)0);}
     require(account.size()==2 && account.path("username").isTextual() && account.path("password").isTextual());String username=account.path("username").textValue(),oldPassword=account.path("password").textValue();require(username.matches("[a-z0-9_]{1,64}"));
     var before=query("select json_build_object('count',count(*),'id',max(id),'role',max(role),'hash',max(password_hash),'version',max(version)) from schubert.app_users where username='"+username+"'");require(before.path("count").intValue()==1 && before.path("role").asText().equals("ADMIN"));independentPassword(before.path("hash").textValue(),oldPassword);
     byte[] random=new byte[32];new SecureRandom().nextBytes(random);String password=Base64.getUrlEncoder().withoutPadding().encodeToString(random);Arrays.fill(random,(byte)0);
-    Files.createFile(updated,java.nio.file.attribute.PosixFilePermissions.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rw-------")));JSON.writeValue(updated.toFile(),Map.of("username",username,"password",password));
     try(Playwright pw=Playwright.create();Browser browser=pw.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));BrowserContext context=browser.newContext(CurrentCharacterizationTest.desktopOptions(false).setProxy("socks5://127.0.0.1:55169"))){
+      var info=context.request().get(BASE+"/actuator/info");require(info.status()==200);
+      var information=JSON.readTree(info.body());require(information.size()==5 && information.path("commit").asText().equals(args[0]) && information.path("app").asText().equals("0.1.0-SNAPSHOT") && information.path("config").asText().equals("1") && information.path("schema").asText().equals("027") && information.path("protocol").asText().equals("0.1.0-SNAPSHOT"));info.dispose();
+      byte[] candidate=JSON.writeValueAsBytes(Map.of("username",username,"password",password));
+      try(var file=java.nio.channels.FileChannel.open(updated,Set.of(StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS),java.nio.file.attribute.PosixFilePermissions.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rw-------")))){
+        var buffer=java.nio.ByteBuffer.wrap(candidate);while(buffer.hasRemaining())file.write(buffer);file.force(true);
+      }finally{Arrays.fill(candidate,(byte)0);}
+      try(var directory=java.nio.channels.FileChannel.open(PRIVATE,StandardOpenOption.READ)){directory.force(true);}
       Page page=CurrentCharacterizationTest.login(context,BASE,new CharacterizationEnvironment.Credential(username,oldPassword));require(page.url().equals(BASE+"/"));
       require(context.cookies().stream().anyMatch(c->c.secure && c.httpOnly && c.path.equals("/") && String.valueOf(c.sameSite).equalsIgnoreCase("LAX")));
       var response=page.navigate(BASE+"/admin/users");require(response!=null && response.status()==200);var row=page.locator("tr.user-row").filter(new Locator.FilterOptions().setHasText(username));require(row.count()==1 && row.locator("td.role").innerText().equals("ADMIN"));row.locator("a.detail").click();page.waitForLoadState();

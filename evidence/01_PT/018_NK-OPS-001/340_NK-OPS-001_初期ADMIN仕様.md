@@ -1,5 +1,7 @@
 # 初期ADMIN 単体テスト仕様
 
+BOOT008追補（2026-10-05/BUG738）：当signed Production sourceBBBとWebのinfo5固定値を先行照合。既作成ADMIN1の現passwordは既privatefileから取得、新候補はnew-onlypg468-active-account.private.json/600/NOFOLLOW・全bytewrite/fileforce/parentforce後だけ実HTTP変更。旧更新候補衝突時は再生成・変更を発行しない。Current共有driver3arg・独立Python PBKDF2固定vector10（正常1/不正6/異password3）/実JCA310000/SQLversion+1・旧session全revoke・ADMIN DOM・新login1sessionを期待とする。秘密/DOM/bodyログ保存0、変更後bootstrap credentialはUnit/kernel終端及び既存時再送20契約を確認しrecoverable退役。実親受入前は準備だけでBOOT008完了にしない。
+
 PG465/NK-ADM-001 BootstrapAdminService.create/audit/require及び後続専用oneshot/credential owner。関連AUT001002/DAT009/MON004/OPS009/UI225226242/SS314331332343§8.2/351352/SSC188。既存UserCommandServiceの認証済ADMIN入口は空DBへ流用しない。
 
 |Test ID|fixture/入力・操作|独立期待値|

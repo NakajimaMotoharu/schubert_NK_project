@@ -17,7 +17,7 @@ assert current.readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG468')
 assert hashlib.sha256((current/'RELEASE-MANIFEST.json').read_bytes()).hexdigest()==DIGEST
 assert json.loads((current/'RELEASE-MANIFEST.json').read_bytes())['source']['commit']==SOURCE
 save=pathlib.Path('/var/lib/pgpt-s1-preservation/pg468-code-only')
-assert b'newOwnedScopesReturnedNormally=true' in (save/'complete.private').read_bytes()
+assert (save/'complete.private').read_bytes()==b'codeOnly=true\nschema027=true\nallOwnedScopesReturnedNormally=true\nall341Preserved=true\noldThirtySixRecordsPreserved=true\nunitsStarted=0\n'
 units=['schubert-nk-morning-controller.service','schubert-nk-backup.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-api.service','schubert-nk-web.service','artemis.service','caddy.service']
 for unit in units:
  raw=subprocess.check_output(['/usr/bin/systemctl','show',unit,'-p','MainPID','-p','ControlPID','-p','Job','-p','ControlGroup','-p','LoadState'],text=True,timeout=5)
@@ -46,6 +46,7 @@ fd=os.open(save,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
 print(json.dumps(d));raise SystemExit(r.returncode)
 '''
 r=subprocess.run(SSH+['sudo -n /usr/bin/python3 -B -'],input=('SOURCE='+repr(SOURCE)+'\nDIGEST='+repr(DIGEST)+'\n'+PAYLOAD).encode(),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+with (WORK/'pg468-external-start-v2.private.log').open('xb') as log:log.write(r.stdout);log.write(r.stderr)
 print(r.stdout.decode(),end='')
 if r.returncode:print('PG468_EXTERNAL_START_REFUSED actual='+str(r.returncode)+' priorGuardRequiresReattachment=true privateDiagnostics=true')
 raise SystemExit(r.returncode)

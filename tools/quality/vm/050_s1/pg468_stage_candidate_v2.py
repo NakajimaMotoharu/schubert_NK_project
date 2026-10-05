@@ -1,0 +1,75 @@
+"""New-only exact PG468 candidate/tool/observer placement. No activation/DDL/start/permit."""
+import hashlib,json,pathlib,re,subprocess,sys
+ROOT=pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation')
+WORK=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
+PRIVATE=pathlib.Path('/home/mini/codex/project1/work/pgpt-vm/private')
+assert len(sys.argv)==3 and re.fullmatch(r'[0-9a-f]{64}',sys.argv[1]) and re.fullmatch(r'[0-9a-f]{40}',sys.argv[2])
+DIGEST=sys.argv[1]
+SOURCE=sys.argv[2]
+OPTIONS=['-i',str(PRIVATE/'vm-access'),'-o','BatchMode=yes','-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile='+str(PRIVATE/'known_hosts')]
+SSH=['ssh',*OPTIONS,'-p','22222','ubuntu@127.0.0.1']
+SCP=['scp',*OPTIONS,'-P','22222']
+FILES={'release.tar':PRIVATE/'pg468-release-v2.tar','manifest.sig':PRIVATE/'pg468-manifest-v2.sig',
+       'Pg468CodeOnlyDeployment.class':WORK/'pg468-recovery-tools-v5/Pg468CodeOnlyDeployment.class',
+       'pg468_watch_parent.py':ROOT/'tools/quality/vm/050_s1/pg468_watch_parent.py',
+       'pg457_stable_actor.py':ROOT/'tools/quality/vm/050_s1/pg457_stable_actor.py',
+       'pg462_observer_identity.py':ROOT/'tools/quality/vm/050_s1/pg462_observer_identity.py'}
+EXPECTED={name:hashlib.sha256(path.read_bytes()).hexdigest() for name,path in FILES.items()}
+subprocess.run(SSH+['umask 077; test ! -e /home/ubuntu/pg468-stage-v2 && mkdir /home/ubuntu/pg468-stage-v2'],check=True)
+for name,path in FILES.items():subprocess.run(SCP+[str(path),'ubuntu@127.0.0.1:/home/ubuntu/pg468-stage-v2/'+name],check=True)
+PAYLOAD='''import hashlib,grp,json,os,pathlib,stat,tarfile
+assert os.geteuid()==0 and pathlib.Path('/var/lib/cloud/data/instance-id').read_text().strip()=='pgpt-r2-20260927-01'
+assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='e07aa706-1acd-4e65-b309-d7f330f79d54'
+stage=pathlib.Path('/home/ubuntu/pg468-stage-v2');base=pathlib.Path('/var/lib/pgpt-s1-preservation');release=pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG468');tools=base/'pg468-code-tools-v1';sig=base/'pg468-manifest.sig'
+rejected=base/'pg468-rejected-release-v1'
+assert release.is_dir() and not release.is_symlink() and not rejected.exists()
+oldmanifest=release/'RELEASE-MANIFEST.json'
+assert hashlib.sha256(oldmanifest.read_bytes()).hexdigest()=='64e01ab3bafc87329a86d8d69ccbb6e212eb82335b4b684466eb3e469d88eb87'
+old=json.loads(oldmanifest.read_bytes());bad=[]
+for a in old['artifacts']:
+ p=release/a['path']
+ if p.stat().st_size!=a['size'] or hashlib.sha256(p.read_bytes()).hexdigest()!=a['sha256']:bad.append(a['path'])
+assert bad==['VERSION']
+assert not tools.exists() and not sig.exists() and pathlib.Path('/opt/schubert-nk/current').readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG465')
+os.rename(release,rejected)
+for p in (release,tools,sig):assert not p.exists() and not p.is_symlink()
+assert set(p.name for p in stage.iterdir())==set(EXPECTED)
+for name,digest in EXPECTED.items():
+ p=stage/name;s=p.lstat();assert stat.S_ISREG(s.st_mode) and s.st_nlink==1 and hashlib.sha256(p.read_bytes()).hexdigest()==digest
+group=grp.getgrnam('schubert').gr_gid
+with tarfile.open(stage/'release.tar','r:') as archive:
+ members=archive.getmembers();names=set()
+ for member in members:
+  path=pathlib.PurePosixPath(member.name)
+  assert not path.is_absolute() and '..' not in path.parts and (member.isfile() or member.isdir()) and path.as_posix() not in names
+  names.add(path.as_posix())
+ release.mkdir(mode=0o750);os.chown(release,0,group);archive.extractall(release,filter='data')
+manifest=release/'RELEASE-MANIFEST.json';assert hashlib.sha256(manifest.read_bytes()).hexdigest()==DIGEST
+data=json.loads(manifest.read_bytes());assert data['release']=='0.1.0-PG468' and data['source']['commit']==SOURCE and data['versions']['schema']=='027'
+for artifact in data['artifacts']:
+ p=release/artifact['path'];assert p.is_file() and not p.is_symlink() and p.stat().st_size==artifact['size'] and hashlib.sha256(p.read_bytes()).hexdigest()==artifact['sha256']
+for p in [release,*release.rglob('*')]:
+ s=p.lstat();assert not p.is_symlink() and (stat.S_ISDIR(s.st_mode) or (stat.S_ISREG(s.st_mode) and s.st_nlink==1))
+ executable=p.relative_to(release).as_posix() in ('operations/bin/schubert-nkctl','operations/bin/schubert-nk-inbox-inspector')
+ os.chown(p,0,group);os.chmod(p,0o750 if p.is_dir() or executable else 0o640)
+ if p.is_file():
+  with p.open('rb') as stream:os.fsync(stream.fileno())
+tools.mkdir(mode=0o700)
+for name in ('Pg468CodeOnlyDeployment.class','pg468_watch_parent.py','pg457_stable_actor.py','pg462_observer_identity.py'):
+ fd=os.open(tools/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o400)
+ with os.fdopen(fd,'wb') as stream:stream.write((stage/name).read_bytes());stream.flush();os.fsync(stream.fileno())
+ assert hashlib.sha256((tools/name).read_bytes()).hexdigest()==EXPECTED[name]
+assert {p.name for p in tools.iterdir()}==set(EXPECTED)-{'release.tar','manifest.sig'}
+os.chmod(tools,0o500)
+fd=os.open(sig,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o400)
+with os.fdopen(fd,'wb') as stream:stream.write((stage/'manifest.sig').read_bytes());stream.flush();os.fsync(stream.fileno())
+assert sig.stat().st_size==64 and hashlib.sha256(sig.read_bytes()).hexdigest()==EXPECTED['manifest.sig']
+for p in (tools,base,release,release.parent):
+ fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+print('PG468_STAGE exactSource=true signedCandidateBytes=true rootToolAndStableObserver=true wrapperExecutableMetadata=true previousCurrentUnchanged=true ddl0=true starts0=true permits0=true')
+'''
+result=subprocess.run(SSH+['sudo -n /usr/bin/python3 -'],input=('EXPECTED='+repr(EXPECTED)+'\nDIGEST='+repr(DIGEST)+'\nSOURCE='+repr(SOURCE)+'\n'+PAYLOAD).encode(),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+with (WORK/'pg468-stage-v2.private.log').open('xb') as log:log.write(result.stdout);log.write(result.stderr)
+print(result.stdout.decode(),end='')
+if result.returncode:print('PG468_STAGE_REFUSED actual='+str(result.returncode)+' privateDiagnostics=true')
+raise SystemExit(result.returncode)

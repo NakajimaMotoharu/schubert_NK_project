@@ -13,7 +13,7 @@ FILES={'release.tar':PRIVATE/'pg468-release.tar','manifest.sig':PRIVATE/'pg468-m
        'Pg468CodeOnlyDeployment.class':WORK/'pg468-recovery-tools-v5/Pg468CodeOnlyDeployment.class',
        'pg468_watch_parent.py':ROOT/'tools/quality/vm/050_s1/pg468_watch_parent.py',
        'pg457_stable_actor.py':ROOT/'tools/quality/vm/050_s1/pg457_stable_actor.py',
-       'pg462_observer_identity.py':ROOT/'tools/quality/vm/050_s1/pg468_observer_identity.py'}
+       'pg462_observer_identity.py':ROOT/'tools/quality/vm/050_s1/pg462_observer_identity.py'}
 EXPECTED={name:hashlib.sha256(path.read_bytes()).hexdigest() for name,path in FILES.items()}
 subprocess.run(SSH+['umask 077; test ! -e /home/ubuntu/pg468-stage && mkdir /home/ubuntu/pg468-stage'],check=True)
 for name,path in FILES.items():subprocess.run(SCP+[str(path),'ubuntu@127.0.0.1:/home/ubuntu/pg468-stage/'+name],check=True)
@@ -44,7 +44,7 @@ for p in [release,*release.rglob('*')]:
  if p.is_file():
   with p.open('rb') as stream:os.fsync(stream.fileno())
 tools.mkdir(mode=0o700)
-for name in ('Pg468CodeOnlyDeployment.class','pg468_watch_parent.py','pg457_stable_actor.py','pg468_observer_identity.py'):
+for name in ('Pg468CodeOnlyDeployment.class','pg468_watch_parent.py','pg457_stable_actor.py','pg462_observer_identity.py'):
  fd=os.open(tools/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o400)
  with os.fdopen(fd,'wb') as stream:stream.write((stage/name).read_bytes());stream.flush();os.fsync(stream.fileno())
  assert hashlib.sha256((tools/name).read_bytes()).hexdigest()==EXPECTED[name]
