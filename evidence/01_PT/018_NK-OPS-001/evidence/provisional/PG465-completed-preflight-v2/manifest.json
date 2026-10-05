@@ -1,0 +1,16 @@
+{
+  "id": "PG465-completed-preflight-v2",
+  "formal": false,
+  "productionSource": "df9a33febf3703f0d18ac2c4ef56fd0225aac2b9",
+  "toolSource": "Pg465CompletedDeployment.java plus Test.java, live peer script and immediate-generation guard; saved in accompanying commit",
+  "environment": "host and guest Linux/JDK25.0.4; VM e07aa706-1acd-4e65-b309-d7f330f79d54",
+  "testIds": ["PT-ADM-DEPLOY001", "PT-ADM-DEPLOY002", "PT-ADM-DEPLOY003", "PT-ADM-DEPLOY004"],
+  "host": {"compile": "javac -Xlint:all -Werror", "command": "bash tools/quality/vm/050_s1/pg465_completed_tools_v3.sh", "exitCode": 0, "independentAssertions": 103, "productionTestsAdded": 0, "logSha256": "a369b1b74393a6fbf4ff7ef34bb4438d25180a4386b053b7df3b6f9c65226967"},
+  "native": {"command": "sudo /opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp fixed root-v2/legacy helpers/frozen PG465/runtime/providedFlyway Pg465CompletedDeployment verify", "exitCode": 0, "logSha256": "1bd4e2dcd694cfe701172eccb3e3708ffcc6b15ffdb575f26a4a09ef969e8dd2", "classSha256HostGuest": "fcbd363e811e45dbb9bf3cd7bfef1a9c47f5199dcb7e1ac0dbd7c1bec6651ed8", "normalOwnedScopeClosure": true, "originalDonePreserved": true, "rows": 331, "backupFiles": 20, "namespaceFiles": 33, "starts": 0, "permits": 0, "ddl": 0},
+  "candidate": {"manifestSha256": "8b8e82f43146f4a89e02237a0b28e010442c59d3e7c8066c96f13d8b414d8e9e", "artifacts": 186, "dependencies": 61, "sql": 27, "history": 28, "signatureVerified": true, "currentChanged": false},
+  "bugs": ["BUG-716", "BUG-717", "BUG-718", "BUG-719"],
+  "ykt": ["YKT-510"],
+  "ssc": ["SSC-188", "SSC-189", "SSC-190"],
+  "limitations": ["Native stop/current activation/initial ADMIN/login/credential retirement not yet executed", "Native/full coverage100 and formal run24 not updated", "Old UNKNOWN/timeout BUG544/YKT388 not normalized"],
+  "redaction": "Private file bodies, DB results, credentials, passwords, keys, tokens, sessions, raw responses and journals omitted; hashes/counts only"
+}
