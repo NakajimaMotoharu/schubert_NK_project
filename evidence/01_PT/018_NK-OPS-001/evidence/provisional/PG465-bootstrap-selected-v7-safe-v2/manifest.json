@@ -1,0 +1,832 @@
+{
+  "status": "SELECTED_PASS_NOT_NATIVE_OR_FORMAL",
+  "collectedAt": "2026-10-05T01:59:37.533683+00:00",
+  "branch": "dev-foundation",
+  "headAtCollection": "c838a2e72ab7146fbf40c2f7a051c1b7d83d34ce",
+  "dirtySource": true,
+  "sourceHashes": {
+    "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/BootstrapCredentialLoaderTest.java": "40b495e0f45b20637885c49d59d996440abf379754b7e98687fd106e03485f9b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": "73168b762bc142c1ed918af32d861b6bc2a098c5fa16ddd00c526aefc6ec0c39",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMainTest.java": "d490c40840dd37c828df4dc6e116b41c578ff50de1c5dcf232e016112782e1c3",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java": "ec94da22a7ac61a42c5575a77d6487a9731081447330ad82715ab5acda9fb5b8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java": "098337f54228a57ce84303c124f4deacbc75e999bbc19cd60ce8bc3d1e11d3c1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "92a2e1e393d01678de79fa5d84518c4f9b5c99269e95ab195ff9c92967dbab43"
+  },
+  "command": "six-module Maven selected command documented in 341; PG465 v7 log",
+  "actualExit": 0,
+  "tests": 90,
+  "suites": 13,
+  "modules": {
+    "protocol": {
+      "tests": 7,
+      "suites": 1,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    },
+    "storage": {
+      "tests": 8,
+      "suites": 1,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    },
+    "bootstrap": {
+      "tests": 37,
+      "suites": 4,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    },
+    "api": {
+      "tests": 30,
+      "suites": 5,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    },
+    "web": {
+      "tests": 4,
+      "suites": 1,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    },
+    "batch": {
+      "tests": 4,
+      "suites": 1,
+      "FES": [
+        0,
+        0,
+        0
+      ],
+      "staticViolations": 0
+    }
+  },
+  "coverage": {
+    "dev/codex/schubert/nk/api/file/InspectorCredentialLoader": {
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 56,
+          "covered": 609
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 62
+        },
+        "LINE": {
+          "missed": 11,
+          "covered": 111
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 47
+        },
+        "METHOD": {
+          "missed": 4,
+          "covered": 16
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 28
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 6
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "load": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 55
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 11
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "loadDatabasePassword": {
+          "INSTRUCTION": {
+            "missed": 41,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 8,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          }
+        },
+        "readBackupPgpass": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          }
+        },
+        "readBackupRequest": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          }
+        },
+        "readMaintenanceOwner": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          }
+        },
+        "readBootstrapUsername": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "readBootstrapPassword": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "consumeBootstrap": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "readBackupMaterial": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 52
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 10
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "readService": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 60
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 12
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "readOptional": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 34
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 8
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "readFile": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 102
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 20
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 16
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 11
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "directory": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 42
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 6
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "file": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 64
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 17
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "metadata": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 118
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 20
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 13
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 11
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "require": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 7
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "lambda$readOptional$0": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 11
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService": {
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 292
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 66
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 21
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 13
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "create": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 233
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 30
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 52
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 16
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "audit": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 38
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 9
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "require": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome": {
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 15
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<clinit>": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 15
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain": {
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 118,
+          "covered": 130
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 19
+        },
+        "LINE": {
+          "missed": 32,
+          "covered": 30
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "main": {
+          "INSTRUCTION": {
+            "missed": 20,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 8,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          }
+        },
+        "run": {
+          "INSTRUCTION": {
+            "missed": 98,
+            "covered": 27
+          },
+          "BRANCH": {
+            "missed": 1,
+            "covered": 3
+          },
+          "LINE": {
+            "missed": 24,
+            "covered": 7
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "createAndCommit": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 44
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 9
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "requireActor": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 43
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 12
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 10
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 7
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "requireSame": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 13
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    }
+  },
+  "files": {
+    "junit/protocol/TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml": "cb24a51fee48f337a132e41918a2d91fa764abb67944f1281811ca7d5d71c8c6",
+    "junit/storage/TEST-dev.codex.schubert.nk.storage.ResourceScopeTest.xml": "4f1c643b713fb3e3c79edd90aed7e3ec5f5f28598d800dc93d55832e07c3b3cc",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest.xml": "ab8a70954419f900781f6842f095c37f3e42b11444cddd3cd2ef4133c4f634e7",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.xml": "d02022d70763bd40ef318e1b6bbafc4477742dad1fb2e5c1c589c441fab46285",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest.xml": "4690ffb1771dc1bd4062f3f9f5a93b7dee52d59218bfaadd10789c3adbaa819c",
+    "junit/bootstrap/TEST-dev.codex.schubert.nk.api.file.BootstrapCredentialLoaderTest.xml": "d272b62f3a234e25e274081efcf8fb1b71c51a271f5a3e95a7206e8220eec53e",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest.xml": "dc60c9942883a817359d6bdc247df8cf4373dff5e69f3aefd885f43fd3563182",
+    "junit/api/TEST-dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest.xml": "faf1a1d8e9871d2784000389412e2b8dfb591476426991cb886dbb40ccface6a",
+    "junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordHasherTest.xml": "7840bc326542c6f44e38d6237ee99acfd67e2213fe3a33b0f677b042028d41af",
+    "junit/api/TEST-dev.codex.schubert.nk.api.security.PasswordPolicyTest.xml": "205cbc8553a48b428acf16689877f49083212d0b8a93a7f19f6889bc464d9d00",
+    "junit/api/TEST-dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest.xml": "40a49d27d8c0ad18684f1f17900ad0fa2b7c68a0dca1c514ac8b7ce8952ea38d",
+    "junit/web/TEST-dev.codex.schubert.nk.web.security.WebSecurityHeaderTest.xml": "36b8804d1cde6f44de5ec94769f7661a8a3a98c8208ece6c6a949e2b0c5b5574",
+    "junit/batch/TEST-dev.codex.schubert.nk.batch.file.StoppedBackupCompletionTest.xml": "ea9230611a9837444ab52939ba287b6f0dda7b81d8a7253d7704ce1426624a5a"
+  },
+  "privateLogSha256": "d889c5a0c9d003eb54b23f0ae2e348ac1a239a545408964c60b6125e499a2438",
+  "ssc": [
+    "SSC-188",
+    "SSC-189"
+  ],
+  "bugs": [
+    "BUG-713",
+    "BUG-714"
+  ],
+  "oracle": "Handwritten SQL rows/audit and JCA PBKDF2; 100 parallel transactions; noncooperating table lock; real maintenance exclusive/shared lock; audit rollback; commit-before/after unknown; fixed actor field/credential IO negatives",
+  "testIds": [
+    "PT-ADM-BOOT001",
+    "PT-ADM-BOOT002",
+    "PT-ADM-BOOT003",
+    "PT-ADM-BOOT004",
+    "PT-ADM-BOOT005",
+    "PT-ADM-BOOT006",
+    "PT-ADM-BOOT007"
+  ],
+  "environment": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0",
+    "postgresqlFixture": "18",
+    "jacoco": "0.8.15"
+  },
+  "formal": false,
+  "wholeCoverage100": false,
+  "nativeUnitAccepted": false,
+  "fullRegressionAccepted": false,
+  "redaction": "No properties/stdout/stderr/DB row/credential/session values in safe XML; hashes/counts only"
+}

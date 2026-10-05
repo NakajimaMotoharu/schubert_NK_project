@@ -110,6 +110,25 @@ public final class InspectorCredentialLoader {
     return readBackupMaterial("maintenance-owner", 1024);
   }
 
+  /** SSC188: dedicated bootstrap Unit only; not an ordinary API/Web credential catalog ID. */
+  public InspectorDbCredential readBootstrapUsername() throws InspectorCredentialException {
+    return consumeBootstrap(readBackupMaterial("bootstrap-admin-username", 256));
+  }
+
+  /** Fixed private input; creation policy is applied by BootstrapAdminService, not this decoder. */
+  public InspectorDbCredential readBootstrapPassword() throws InspectorCredentialException {
+    return consumeBootstrap(readBackupMaterial("bootstrap-admin-password", 65536));
+  }
+
+  private static InspectorDbCredential consumeBootstrap(byte[] owned)
+      throws InspectorCredentialException {
+    try {
+      return InspectorDbCredential.consume(owned);
+    } catch (IllegalArgumentException invalid) {
+      throw new InspectorCredentialException();
+    }
+  }
+
   private byte[] readBackupMaterial(String name, int maximum) throws InspectorCredentialException {
     byte[] buffer = new byte[maximum + 1];
     try {

@@ -1,0 +1,46 @@
+# NK-ADM-001/NK-OPS-001; AUT001002/DAT009/MON004/OPS009/UI225226242; SS343§8.2/SSC188.
+# Disabled by default. Provision private synthetic/approved credentials; verify and retire after use.
+[Unit]
+Description=Schubert NK initial ADMIN (one-shot only)
+After=postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=oneshot
+User=schubert-api
+Group=schubert-api
+SupplementaryGroups=schubert schubert-read schubert-web
+WorkingDirectory=/opt/schubert-nk/current/api
+EnvironmentFile=/etc/schubert-nk/api.env
+UnsetEnvironment=JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH
+LoadCredential=db-api:/etc/schubert-nk/credentials/db-api
+LoadCredential=bootstrap-admin-username:/etc/schubert-nk/credentials/bootstrap-admin-username
+LoadCredential=bootstrap-admin-password:/etc/schubert-nk/credentials/bootstrap-admin-password
+ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xmx256m -cp /opt/schubert-nk/current/api/api.jar:/opt/schubert-nk/current/api/lib/* dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMain
+SuccessExitStatus=20
+Restart=no
+TimeoutStartSec=30s
+TimeoutStopSec=30s
+SendSIGKILL=no
+MemoryMax=512M
+UMask=0077
+CapabilityBoundingSet=
+AmbientCapabilities=
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal
