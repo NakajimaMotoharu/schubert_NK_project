@@ -11,7 +11,7 @@ with journal_path.open('xb') as stream:
 assert r.returncode==0
 journal=[json.loads(l) for l in (WORK/'pg469-parent-journal-private-v1.jsonl').read_text().splitlines()]
 done=[r for r in journal if r.get('MESSAGE_ID')=='39f53479d3a045ac8e11786248231fbf' and r.get('INVOCATION_ID')=='aabcc2c3ef1444a7bb07b3183b220c14' and r.get('JOB_ID')=='162935' and r.get('JOB_RESULT')=='done']
-assert len(done)==1 
+assert len(done)==1
 os.umask(0o077)
 target=WORK/'pg469-parent-native-v1.exec'
 assert not target.exists()
