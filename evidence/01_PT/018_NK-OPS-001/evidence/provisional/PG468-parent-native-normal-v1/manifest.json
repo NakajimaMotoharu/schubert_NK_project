@@ -1,0 +1,148 @@
+{
+  "id": "PG468-parent-native-normal-v1",
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-CADDY192004",
+    "PT-OPS-COMPLETED468001",
+    "PT-OPS-COMPLETED468002",
+    "CHR-A01"
+  ],
+  "branch": "dev-foundation",
+  "productionSource": "bbb244e5191e68adee2f6251dfdbbba53e9b64b4",
+  "operatorHeadBeforeThisSave": "dd35a19fcd5c96170a92a0b878d7fe6ce4effb12",
+  "sourceFrozen": true,
+  "manifestSha256": "8e7db782c198677015ea58572349e9748bbb19beefbd6e04afec6de1ad7630a3",
+  "capturedAt": "2026-10-05T05:54:35.623603+00:00",
+  "parentStartAt": "2026-10-05T05:21:12.505357Z",
+  "parentDeadlineAt": "2026-10-05T05:51:12Z",
+  "parentJobDoneAt": "2026-10-05T05:40:38.206452+00:00",
+  "environment": {
+    "jdk": "25.0.4",
+    "guest": "Ubuntu26.04",
+    "postgresql": "18.6",
+    "maven": "3.9.12"
+  },
+  "acceptance": {
+    "sameBootRootOrdinaryApiWeb": true,
+    "samePeerGenerationIdentitySocketInfo5": true,
+    "caValidatedCaddyTls200": true,
+    "parentPid1ExactInvocationJobDone": true,
+    "gcZeroNotAuthority": true,
+    "sameSourceNativeSingleSessionNoMismatch": true,
+    "nativeNormalReturnPath": true,
+    "originalDoneSuccess": true,
+    "currentRows": 351,
+    "oldRowsFull14Preserved": 341,
+    "oldStartupRecordsPreserved": 36,
+    "currentNamespace": 41,
+    "intentCount": 0,
+    "allPreviousBackupBusinessTransferPreserved": true,
+    "unchangedBusinessTables": 19,
+    "permittedChangedTables": [
+      "schubert.app_logs",
+      "schubert.batch_runs",
+      "schubert_web_session.web_http_sessions",
+      "schubert_web_session.web_log_outbox"
+    ],
+    "readOnlyActualMAAndDatabaseOwnedScopesClosedNormally": true,
+    "completedNativeExit": 0,
+    "readbackIndependentToolAssertions": 293,
+    "nativeA01Exit": 0,
+    "nativeA01Pass": true,
+    "nativeL01Pass": false,
+    "oldKnown30Normalized": false,
+    "oldToolUnknownNormalized": false,
+    "formalPass": false,
+    "coverage100": false,
+    "allChrPassed": false,
+    "productionPtAdded": 0
+  },
+  "coverageLimitations": [
+    "Native exit bridge/catch remain partial lines47/543; all6 same-byte analysis is not coverage100",
+    "Full3292/488/FES0/static6zero belongs exact BBB source; no old PG441/442/464/467 substitution"
+  ],
+  "commands": [
+    "bash tools/quality/vm/050_s1/pg468_completed_compile_v2.sh",
+    "bash tools/quality/vm/050_s1/pg468_completed_native_v2.sh",
+    "python3 -B tools/quality/vm/050_s1/pg468_parent_native_probe.py",
+    "python3 -B tools/quality/vm/050_s1/pg468_capture_a01_when_ready.py bbb244e5191e68adee2f6251dfdbbba53e9b64b4"
+  ],
+  "relatedBugs": [
+    "BUG-730",
+    "BUG-739"
+  ],
+  "relatedYkt": [
+    "YKT-517",
+    "YKT-516"
+  ],
+  "relatedSsc": [
+    "SSC-192",
+    "SSC-191"
+  ],
+  "files": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-parent-watch-private-v1.jsonl",
+      "sha256": "83a05974ac37b7950a77c09328556df0cec3d4d23343dfd41aba3784a191f61b",
+      "bytes": 23350,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-parent-journal-private-v1.jsonl",
+      "sha256": "bb78074c3e8ed8f92ad6c8a710e2fe21cf94a85118763adeab938ef95da9b399",
+      "bytes": 15924,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-parent-native-v1.exec",
+      "sha256": "5ac6cecc2c3cadecdbac82cf155af0f33533fbb26d5dba1b16846aee44452f7c",
+      "bytes": 85576,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-parent-diagnostic-v1.txt",
+      "sha256": "91b638e6ec1fbf5347066d0c942a766f26b8440e5b12af4c9ac9c749274ef66e",
+      "bytes": 18509,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-completed-native-v2.private.log",
+      "sha256": "e5697a616dd8376686a159fb19ab9c10642f85cf4c7dd4c4dc92d62a7f31b68b",
+      "bytes": 778,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-completed-compile-v2.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-completed-oracle-v2.private.log",
+      "sha256": "8441a071e0ffb2b42c496ce6f7da21ee40bd0ebb135c2de539f50f0351c82db3",
+      "bytes": 62,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-chr-a01-execution.private.json",
+      "sha256": "925022e6c067234b26b649ace237dacb579ee123407193c0cbd6c9411f1edae5",
+      "bytes": 483,
+      "mode": "0o600",
+      "contentInGit": false
+    },
+    {
+      "path": "program/characterization/reports/nk/PG468-native-a01-v1/artifacts/CHR-A01.json",
+      "sha256": "3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558",
+      "contentInGit": true,
+      "csrfPlaceholderOnly": true
+    }
+  ],
+  "currentBaselineChanged": false,
+  "secretsRedacted": true
+}

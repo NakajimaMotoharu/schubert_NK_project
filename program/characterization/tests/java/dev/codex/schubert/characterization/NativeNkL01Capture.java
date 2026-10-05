@@ -26,9 +26,11 @@ public final class NativeNkL01Capture {
   private NativeNkL01Capture() {}
 
   public static void main(String[] args) throws Exception {
-    if (args.length != 2 || !args[1].matches("[0-9a-f]{40}"))
-      throw new IllegalArgumentException("new private output directory and source commit required");
+    if (args.length != 3 || !args[1].equals("bbb244e5191e68adee2f6251dfdbbba53e9b64b4")
+        || !args[2].equals(PRIVATE.resolve("pg468-active-account.private.json").toString()))
+      throw new IllegalArgumentException("new private output, exact source and retained active credential required");
     Path output = Path.of(args[0]);
+    NativeNkBootstrapAuthentication.actualSource(args[1]);
     Files.createDirectory(output);
     Files.setPosixFilePermissions(
         output,
@@ -36,14 +38,17 @@ public final class NativeNkL01Capture {
             PosixFilePermission.OWNER_READ,
             PosixFilePermission.OWNER_WRITE,
             PosixFilePermission.OWNER_EXECUTE));
-    Path credentials =
-        Path.of(
-            "/home/mini/codex/project1/work/characterization-runtime/credentials/current-users.txt");
-    if (!Files.getPosixFilePermissions(credentials)
+    Path credentials = Path.of(args[2]);
+    if (Files.isSymbolicLink(credentials) || !Files.getPosixFilePermissions(credentials)
         .equals(Set.of(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE)))
       throw new IllegalStateException("private credential permission differs");
-    var accounts = CharacterizationEnvironment.loadCredentials(credentials);
-    var account = accounts.size() > 1 ? accounts.get(1) : accounts.getFirst();
+    byte[] credentialBytes=Files.readAllBytes(credentials);
+    if(credentialBytes.length>4096)throw new IllegalStateException("private credential bounds differ");
+    com.fasterxml.jackson.databind.JsonNode retained;
+    try{retained=JSON.readTree(credentialBytes);}finally{java.util.Arrays.fill(credentialBytes,(byte)0);}
+    if(retained.size()!=2 || !retained.path("username").isTextual() || !retained.path("password").isTextual())
+      throw new IllegalStateException("private credential shape differs");
+    var account = new CharacterizationEnvironment.Credential(retained.path("username").textValue(),retained.path("password").textValue());
     var before =
         query("select json_build_object('maxId',coalesce(max(id),0)) from schubert.app_logs");
     long watermark = before.path("maxId").longValue();

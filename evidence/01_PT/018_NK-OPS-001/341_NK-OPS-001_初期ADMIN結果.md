@@ -1,5 +1,11 @@
 # 初期ADMIN 実行結果
 
+## 2026-10-05 15:32 JST 同BBB実認証・既存20・退役の限定結果
+
+BOOT008実認証93835 actual0（14:53:22～26）/独立JCA/ADMIN一覧明細/自己変更/version+1/旧sessionrevoke/新login。auth compilev6 Werror0/独立40assertionsは工具でProduction PT加算0。新active私有600を変更前file/parentforce、旧initialは無効・自動再reset禁止。bootstrapexisting84027 actualobserver0/actualUnit20、同ordinarycaps0/NNP/同source/User全値/BOOTSTRAP audit2不変、同sender RefUnitを正常返却。allapp_logs不変を意味しない。
+
+BOOT009退役verify25510/retire58716 actual0、15:19:31～33、metadata28/Werror0、新ownedM/A/DB/全351行/原本Backup/Transfer/User/currentを保持して初期2fileだけRootpg468-bootstrap-retired-v1へATOMIC_MOVE/400でrecoverable保全。元path不在・他credentials不変、再発行禁止。DB read-onlyだがfilesystem変更あり。safe PG468-auth-retirement-v1、私有原文はGit外。BUG738/740/741/YKT521522446、正式run24/coverage100/native全CHRは更新なし。
+
 ## 2026-10-05 14:25 JST BOOT008準備・新親継続（未受入）
 
 PG468 sourceBBB/full3292/正規v3digest8e7/currentPG468。旧bootstrap作成結果はdf9の限定でありBBB native全品質へ流用0。BUG738候補durability/source5info先行照合を是正、pg468_auth_compile_v4/session28281 actual0/Werror0/独立JCA10vector0、新工具はProduction PT加算0、nativepassword変更0/newactivefile未生成/credential退役0。旧helper/frozen tools/初期私有credentialを保持、誤再作成をしない。次は同新親/Root ordinary APIWeb/Caddy/DONEを閉じてからBOOＴ008実HTTP/SQLへ一回接続し、途中失敗時は私有候補intentへ再付着する（再reset自動発行0）。safe PG468-code-native-v1/manifest、正式run24/1964PT53scope/48.3%不変。

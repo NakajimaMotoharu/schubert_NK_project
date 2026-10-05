@@ -18,6 +18,16 @@ public final class NativeNkBootstrapAuthentication {
   static final String BASE="https://10.0.2.15:55160";
   static final ObjectMapper JSON=new ObjectMapper();
   static void require(boolean b){if(!b)throw new IllegalStateException("fixed authentication oracle failed");}
+  static boolean information(com.fasterxml.jackson.databind.JsonNode info,String source){
+    return info!=null && source!=null && info.isObject() && info.size()==5 && info.path("commit").isTextual() && source.equals(info.path("commit").textValue())
+        && info.path("app").isTextual() && info.path("app").textValue().equals("0.1.0-SNAPSHOT") && info.path("config").isTextual() && info.path("config").textValue().equals("1")
+        && info.path("schema").isTextual() && info.path("schema").textValue().equals("027") && info.path("protocol").isTextual() && info.path("protocol").textValue().equals("0.1.0-SNAPSHOT");
+  }
+  static void actualSource(String source)throws Exception{
+    var p=new ProcessBuilder("ssh","-i",PRIVATE.resolve("vm-access").toString(),"-p","22222","-oBatchMode=yes","-oConnectTimeout=5","-oServerAliveInterval=5","-oServerAliveCountMax=1","-oIdentitiesOnly=yes","-oStrictHostKeyChecking=yes","-oUserKnownHostsFile="+PRIVATE.resolve("known_hosts"),"ubuntu@127.0.0.1","/usr/bin/curl -fsS --max-time 5 http://127.0.0.1:8081/actuator/info").redirectError(ProcessBuilder.Redirect.DISCARD).start();
+    byte[] bytes=p.getInputStream().readNBytes(4097);require(p.waitFor(10,java.util.concurrent.TimeUnit.SECONDS) && p.exitValue()==0 && bytes.length<=4096);
+    require(information(JSON.readTree(bytes),source));
+  }
   static com.fasterxml.jackson.databind.JsonNode query(String sql)throws Exception{
     var p=new ProcessBuilder("ssh","-i",PRIVATE.resolve("vm-access").toString(),"-p","22222","-oBatchMode=yes","-oIdentitiesOnly=yes","-oStrictHostKeyChecking=yes","-oUserKnownHostsFile="+PRIVATE.resolve("known_hosts"),"ubuntu@127.0.0.1","sudo -n -u postgres /usr/bin/psql -X -qAt -v ON_ERROR_STOP=1 -d schubert_nk").redirectError(ProcessBuilder.Redirect.DISCARD).start();
     try(var in=p.getOutputStream()){in.write(("BEGIN READ ONLY; SET LOCAL statement_timeout='5s';\n"+sql+";\nCOMMIT;\n").getBytes(java.nio.charset.StandardCharsets.UTF_8));}
@@ -31,10 +41,15 @@ public final class NativeNkBootstrapAuthentication {
   }
   public static void main(String[] args){
     try{run(args);System.out.println("NK_BOOTSTRAP_AUTH_ACCEPTED login=true adminHttpDom=true selfPasswordReset=true oldSessionsRevoked=true newLogin=true independentJca=true credentialRetirementPending=true chrL01Pass=false secretsPrinted=false");}
-    catch(Throwable failure){System.err.println("NK_BOOTSTRAP_AUTH_FAILED diagnosticsRedacted=true pass=false");System.exit(1);}
+    catch(Throwable failure){
+      System.err.println("NK_BOOTSTRAP_AUTH_FAILED type="+failure.getClass().getName()+" diagnosticsRedacted=true pass=false");
+      for(var frame:failure.getStackTrace())if(frame.getClassName().equals(NativeNkBootstrapAuthentication.class.getName()))System.err.println("NK_BOOTSTRAP_AUTH_FRAME "+frame.getMethodName()+":"+frame.getLineNumber());
+      System.exit(1);
+    }
   }
   static void run(String[] args)throws Exception{
     require(args.length==1 && args[0].equals("bbb244e5191e68adee2f6251dfdbbba53e9b64b4"));
+    actualSource(args[0]);
     Path input=PRIVATE.resolve("pg467-bootstrap-account.private.json"),updated=PRIVATE.resolve("pg468-active-account.private.json");require(!Files.exists(updated));
     require(!Files.isSymbolicLink(input) && Files.getPosixFilePermissions(input).equals(Set.of(PosixFilePermission.OWNER_READ,PosixFilePermission.OWNER_WRITE)));
     byte[] raw=Files.readAllBytes(input);require(raw.length<=4096);com.fasterxml.jackson.databind.JsonNode account;
@@ -43,8 +58,6 @@ public final class NativeNkBootstrapAuthentication {
     var before=query("select json_build_object('count',count(*),'id',max(id),'role',max(role),'hash',max(password_hash),'version',max(version)) from schubert.app_users where username='"+username+"'");require(before.path("count").intValue()==1 && before.path("role").asText().equals("ADMIN"));independentPassword(before.path("hash").textValue(),oldPassword);
     byte[] random=new byte[32];new SecureRandom().nextBytes(random);String password=Base64.getUrlEncoder().withoutPadding().encodeToString(random);Arrays.fill(random,(byte)0);
     try(Playwright pw=Playwright.create();Browser browser=pw.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));BrowserContext context=browser.newContext(CurrentCharacterizationTest.desktopOptions(false).setProxy("socks5://127.0.0.1:55169"))){
-      var info=context.request().get(BASE+"/actuator/info");require(info.status()==200);
-      var information=JSON.readTree(info.body());require(information.size()==5 && information.path("commit").asText().equals(args[0]) && information.path("app").asText().equals("0.1.0-SNAPSHOT") && information.path("config").asText().equals("1") && information.path("schema").asText().equals("027") && information.path("protocol").asText().equals("0.1.0-SNAPSHOT"));info.dispose();
       byte[] candidate=JSON.writeValueAsBytes(Map.of("username",username,"password",password));
       try(var file=java.nio.channels.FileChannel.open(updated,Set.of(StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS),java.nio.file.attribute.PosixFilePermissions.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rw-------")))){
         var buffer=java.nio.ByteBuffer.wrap(candidate);while(buffer.hasRemaining())file.write(buffer);file.force(true);

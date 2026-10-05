@@ -1,0 +1,79 @@
+{
+  "branch": "dev-foundation",
+  "productionSource": "bbb244e5191e68adee2f6251dfdbbba53e9b64b4",
+  "operatorHeadBeforeSave": "dd35a19fcd5c96170a92a0b878d7fe6ce4effb12",
+  "environment": {
+    "hostJdk": "25.0.4",
+    "guestJdk": "25.0.4",
+    "guestOs": "Ubuntu26.04",
+    "postgresql": "18.6"
+  },
+  "formalPass": false,
+  "coverage100": false,
+  "productionPtAdded": 0,
+  "capturedAt": "2026-10-05T15:32:00+09:00",
+  "id": "PG468-auth-retirement-v1",
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-ADM-BOOT008",
+    "PT-ADM-BOOT009"
+  ],
+  "auth": {
+    "exit": 0,
+    "start": "2026-10-05T14:53:22+09:00",
+    "end": "2026-10-05T14:53:26+09:00",
+    "independentToolAssertions": 40,
+    "adminBusinessViews": true,
+    "selfPasswordChangeVersionIncrement": 1,
+    "oldSessionsRevoked": true,
+    "newLogin": true,
+    "independentPbkdf2": true,
+    "candidateDurableBeforeChange": true,
+    "repeatResetForbidden": true,
+    "logPrivate": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg468-auth-native-v1.private.log",
+    "logSha256": "db2be1b3a243fa9c2b779ed78af52ba8d1a89d0aa54e5cbfcb553cc37a96aa4e"
+  },
+  "bootstrapExisting": {
+    "observerExit": 0,
+    "unitExit": 20,
+    "userAndFilteredBootstrapAuditUnchanged": true,
+    "ordinaryActorAndKernelVerified": true,
+    "refReleasedNormally": true,
+    "logSha256": "bee87aa8ad6d04a7af5af10e6984d951242b41e2fccc5e6a921b8c56c3047f1b"
+  },
+  "retirement": {
+    "verifyExit": 0,
+    "retireExit": 0,
+    "start": "2026-10-05T15:19:31+09:00",
+    "end": "2026-10-05T15:19:33+09:00",
+    "independentToolAssertions": 28,
+    "dbReadOnly": true,
+    "filesystemReadOnly": false,
+    "atomicMovedCredentialFiles": 2,
+    "otherCredentialsUnchanged": true,
+    "originalBackupTransferUserCurrentPreserved": true,
+    "originalFullRows": 351,
+    "allNewOwnedScopesReturnedNormally": true,
+    "recoverablePrivatePath": "/var/lib/pgpt-s1-preservation/pg468-bootstrap-retired-v1",
+    "repeatRetirementForbidden": true,
+    "allUnknownFaultBranchesAccepted": false,
+    "logSha256": "18a8cd42db0e87438d78ed7d51d30a3f029a6a3be1400bfac9a52d19a04eb010"
+  },
+  "commands": [
+    "bash tools/quality/vm/050_s1/pg468_auth_compile_v6.sh",
+    "bash tools/quality/vm/050_s1/pg468_retirement_compile_v1.sh",
+    "bash tools/quality/vm/050_s1/pg468_retirement_native_v1.sh verify",
+    "bash tools/quality/vm/050_s1/pg468_retirement_native_v1.sh retire"
+  ],
+  "relatedBugs": [
+    "BUG-738",
+    "BUG-740",
+    "BUG-741"
+  ],
+  "relatedYkt": [
+    "YKT-521",
+    "YKT-522",
+    "YKT-446"
+  ],
+  "secretsInGit": false
+}
