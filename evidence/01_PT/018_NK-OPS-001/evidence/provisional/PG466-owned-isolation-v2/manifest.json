@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-10-05T12:40:15+09:00",
+  "branch": "dev-foundation",
+  "productionSource": "df9a33febf3703f0d18ac2c4ef56fd0225aac2b9",
+  "designMain": "4ea9d8bdeb3da0c81f713bd1754a741534a3794e",
+  "testId": "PT-ADM-DEPLOY008",
+  "independentToolAssertions": {"ordinaryTerm": 240, "control": 173, "mapOrder": 18, "vendorStop": 33, "newRecoverySequence": 20},
+  "productionPtAdded": 0,
+  "actualCommands": [
+    {"command": "Pg466HandoffReadback verify (v3)", "exit": 0, "privateLogSha256": "9737ffc3207cc349cc4a651f46fe092122a65230e4d164c41b8021d030490573", "oldSnapshotUnchanged": true},
+    {"command": "pg466_native_v1.sh isolate (v2)", "exit": 1, "status": "partial; API and Cleanup explicitly stopped; dependent Broker/Expiry stopped; guard refused continuation"},
+    {"command": "pg466_native_v1.sh finalize-isolation", "exit": 0, "privateLogSha256": "0b53aae313993c88df2cca79b2f0b6585f272268c9e2ed3adbf012e83e174125", "allNineKernelEmpty": true, "fullOriginalDatabaseBackupTransferNamespaceUnchanged": true, "oldRealMAHeld": true},
+    {"command": "pg466_native_v1.sh terminate", "exit": 1, "status": "one TERM issued, reaping observation race; no second signal"},
+    {"command": "original PG465 activate/session6498", "exit": 143, "status": "INTERRUPTED", "oldNormalClose": false, "oldActivated": false},
+    {"command": "pg466_native_v1.sh finalize-term", "exit": 0, "privateLogSha256": "5d5eac81348b8e7fa61f459c4137e0f7e219130abc69eb30877f33335a7c8949", "signalsIssued": 0, "oldPhysicalHolderAbsent": true},
+    {"command": "pg466_recovery_compile_v1.sh", "exit": 0, "werror": true, "privateTestLogSha256": "e3aa822de785d171efff7ae00a8e8a51189693f1033e122157a3c4c497b98d81", "newClassSha256": "16a5ae5fae270b84069552cfc978d0f34bb585ff082cfa8eed797f14974c10b4", "nativeRecovery": "NOT_RUN"}
+  ],
+  "related": ["SSC191", "QA047", "BUG720", "BUG721", "BUG722", "BUG723", "BUG724", "BUG725", "YKT511", "YKT512", "YKT513", "YKT514", "YKT515"],
+  "oldUnknownNormalized": false,
+  "currentRelease": "PG464",
+  "newStarts": 0,
+  "permitsIssued": 0,
+  "ddlChanges": 0,
+  "rawPrivateMaterialIncluded": false,
+  "formalAccepted": false,
+  "coverage100Accepted": false
+}

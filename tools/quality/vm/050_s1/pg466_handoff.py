@@ -3,8 +3,8 @@ Usage inspect|isolate|terminate; each mutating phase is new-only and independent
 Runs as root in the fixed PG/PT VM. TERM only after all-nine stop/readback isolation receipt.
 """
 import hashlib,json,os,pathlib,select,signal,stat,subprocess,sys,time
-from pg466_term_witness import witness,FIELDS
-ROOT=pathlib.Path('/var/lib/pgpt-s1-preservation/pg466-handoff')
+from pg466_term_witness import witness,FIELDS,unique
+ROOT=pathlib.Path('/var/lib/pgpt-s1-preservation/pg466-handoff-v2')
 PID=1438705;TICKS=12405848
 BOOT='e07aa706-1acd-4e65-b309-d7f330f79d54'
 SOURCE='e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45'
@@ -12,7 +12,7 @@ CLASS='fcbd363e811e45dbb9bf3cd7bfef1a9c47f5199dcb7e1ac0dbd7c1bec6651ed8'
 EXPECTED={'schubert-nk-api.service':('1338494','9269078370384fdaab05ca9a0fcd50bd'),'artemis.service':('1227864','c784737af61e48778d0c8fa2c4f68037')}
 ORDER=['schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service']
 ALL=['caddy.service','schubert-nk-web.service',*ORDER,'schubert-nk-morning-controller.service']
-CP='/var/lib/pgpt-s1-preservation/pg466-tool-v1:/var/lib/pgpt-s1-preservation/pg465-completed-tool-v2:/var/lib/pgpt-s1-preservation/pg464-completed-readback-v7:/var/lib/pgpt-s1-preservation/pg464-code-tools-v2:/var/lib/pgpt-s1-preservation/pg461-known30-tool-v3:/var/lib/pgpt-s1-preservation/pg456-applied-tools-v7:/opt/schubert-nk/releases/0.1.0-PG465/operations/batch.jar:/opt/schubert-nk/releases/0.1.0-PG465/operations/lib/*:/opt/schubert-nk/releases/0.1.0-PG465/api/api.jar:/opt/schubert-nk/releases/0.1.0-PG465/api/lib/*:/var/lib/pgpt-s1-preservation/pg465-completed-tool-v1/flyway-core-13.4.0.jar'
+CP='/var/lib/pgpt-s1-preservation/pg466-tool-v3:/var/lib/pgpt-s1-preservation/pg465-completed-tool-v2:/var/lib/pgpt-s1-preservation/pg464-completed-readback-v7:/var/lib/pgpt-s1-preservation/pg464-code-tools-v2:/var/lib/pgpt-s1-preservation/pg461-known30-tool-v3:/var/lib/pgpt-s1-preservation/pg456-applied-tools-v7:/opt/schubert-nk/releases/0.1.0-PG465/operations/batch.jar:/opt/schubert-nk/releases/0.1.0-PG465/operations/lib/*:/opt/schubert-nk/releases/0.1.0-PG465/api/api.jar:/opt/schubert-nk/releases/0.1.0-PG465/api/lib/*:/var/lib/pgpt-s1-preservation/pg465-completed-tool-v1/flyway-core-13.4.0.jar'
 def require(b):
     if not b:raise ValueError('fixed handoff refused')
 def command(args,timeout=5,limit=4194304):
@@ -111,23 +111,72 @@ def terminate():
     finally:os.close(fd)
     deadline=time.monotonic()+15
     while (pathlib.Path('/proc')/str(PID)).exists() and time.monotonic()<deadline:
-        require(tick(PID)==TICKS);time.sleep(.01)
+        try:require(tick(PID)==TICKS)
+        except FileNotFoundError:break
+        time.sleep(.01)
+    complete_interruption()
+def complete_interruption():
+    # May finalize the already-issued TERM after a reaping observation failed; no signal.
+    require((ROOT/'term-request.private').exists() and (ROOT/'isolated.private').exists())
     require(not (pathlib.Path('/proc')/str(PID)).exists());all_terminal()
     database=command(['/usr/bin/sudo','-n','-u','postgres','/usr/bin/psql','-X','-A','-t','-d','schubert_nk','-c',"select count(*) from pg_catalog.pg_stat_activity where usename in ('schubert_batch','schubert_migration')"]).strip();require(database==b'0')
     require(not any(line.split()[4:5]==[str(PID)] for line in pathlib.Path('/proc/locks').read_text().splitlines()))
     save('interrupted.private',b'interrupted=true\nexpectedExit143=true\noldCloseUnknown=true\noldActivated=false\noldPhysicalHolderAbsent=true\nnewOwnershipNotYetAcquired=true\n')
     print('PG466_OLD_TOOL_INTERRUPTED normalCloseNotInferred=true oldPhysicalHolderAbsent=true newOwnershipRequired=true',flush=True)
+def broker_witness(before,after,raw):
+    require(before['MainPID']=='1227864' and before['InvocationID']=='c784737af61e48778d0c8fa2c4f68037')
+    require(after['InvocationID']==before['InvocationID'] and after['ExecMainStartTimestampMonotonic']==before['ExecMainStartTimestampMonotonic'] and after['Result']=='success' and after['ExecMainCode']=='1' and after['ExecMainStatus']=='143')
+    require(0<len(raw)<=4194304 and raw.endswith(b'\n'));cursors=set();stopped=0
+    for line in raw.decode('utf-8',errors='strict').splitlines():
+        row=json.loads(line,object_pairs_hook=unique)
+        for key in ('__CURSOR','__MONOTONIC_TIMESTAMP','__REALTIME_TIMESTAMP','_BOOT_ID','_SYSTEMD_UNIT','_SYSTEMD_INVOCATION_ID','PRIORITY','MESSAGE'):require(isinstance(row.get(key),str))
+        require(row['_BOOT_ID']==BOOT.replace('-','') and row['_SYSTEMD_UNIT']=='artemis.service' and row['_SYSTEMD_INVOCATION_ID']==before['InvocationID'])
+        require(row['PRIORITY'] in ('4','5','6','7') and row['__CURSOR'] and row['__CURSOR'] not in cursors);cursors.add(row['__CURSOR'])
+        require(row['__MONOTONIC_TIMESTAMP'].isdigit() and row['__REALTIME_TIMESTAMP'].isdigit() and int(before['ExecMainStartTimestampMonotonic'])<=int(row['__MONOTONIC_TIMESTAMP'])<=int(after['ExecMainExitTimestampMonotonic']))
+        message=row['MESSAGE'];require('AMQ224' not in message and not any(x in message.split() for x in ('ERROR','FATAL')))
+        if 'AMQ221002: Apache Artemis Message Broker version 2.56.0' in message and ' stopped, uptime ' in message:stopped+=1
+    require(stopped==1 and not pathlib.Path('/proc/1227864').exists());return {'rows':len(cursors),'sha256':hashlib.sha256(raw).hexdigest(),'vendorStopData':True,'oldCloseSuccess':False}
+def finalize_isolation():
+    # BUG724 exact partial: API+Cleanup explicit stops, Broker/Expiry dependent stops.
+    require(not (ROOT/'isolated.private').exists() and (ROOT/'captured-before.private').exists())
+    require(set(p.name for p in ROOT.iterdir())=={'isolation-start.private','web-full-journal.private.jsonl','web-stop-witness.private','before-isolation.private.log','captured-before.private','api-full-journal.private.jsonl','api-stop-witness.private','schubert-nk-api.service.stopped.private','schubert-nk-cleanup.service.stopped.private'})
+    before=holder();captures=json.loads((ROOT/'captured-before.private').read_text(),object_pairs_hook=unique);states=all_terminal()
+    require(set(captures)==set(ORDER));web_stopped()
+    for unit in ORDER:
+        old=captures[unit];current=states[unit];require(set(old)==FIELDS and old['InvocationID']==current['InvocationID'] and old['ExecMainStartTimestampMonotonic']==current['ExecMainStartTimestampMonotonic'])
+        if unit=='schubert-nk-api.service':
+            raw=(ROOT/'api-full-journal.private.jsonl').read_bytes();witness('API',old,current,raw,'1338494','999');require(not pathlib.Path('/proc/1338494').exists())
+        elif unit=='artemis.service':
+            raw=command(['/usr/bin/journalctl','--boot='+BOOT.replace('-',''),'_SYSTEMD_INVOCATION_ID='+old['InvocationID'],'-o','json','--no-pager']);data=broker_witness(old,current,raw)
+            save('broker-full-journal.private.jsonl',raw);save('broker-stop-witness.private',json.dumps(data).encode())
+        else:require(current['ActiveState']=='inactive' and current['Result']=='success' and current['ExecMainCode']==old['ExecMainCode'] and current['ExecMainStatus']==old['ExecMainStatus'])
+    readback('verify','after-dependent-isolation');require(holder()['locks']==before['locks'] and states==all_terminal())
+    save('isolated.private',json.dumps({'allNine':states,'holder':holder(),'newStarts':0,'oldActivated':False,'oldCloseUnknown':True,'explicitStops':['API','Cleanup'],'dependentStops':['Artemis','Expiry']},sort_keys=True).encode())
+    print('PG466_ISOLATED allNineKernelEmpty=true originalAllValuesPreserved=true oldHolderStillAuthenticated=true dependentStopsAuthenticated=true oldCloseUnknown=true',flush=True)
 def main():
-    require(os.geteuid()==0 and len(sys.argv)==2 and sys.argv[1] in ('inspect','isolate','terminate'))
+    require(os.geteuid()==0 and len(sys.argv)==2 and sys.argv[1] in ('inspect','isolate','finalize-isolation','terminate','finalize-term','closed'))
     require(pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==BOOT and pathlib.Path('/var/lib/cloud/data/instance-id').read_text().strip()=='pgpt-r2-20260927-01')
-    require(pathlib.Path('/opt/schubert-nk/current').readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG464'))
+    if sys.argv[1]!='closed':require(pathlib.Path('/opt/schubert-nk/current').readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG464'))
     for target in ('timers.target','paths.target'):
         require(command(['/usr/bin/systemctl','show',target,'--property=LoadState']).strip()==b'LoadState=masked')
+    # BUG722 first attempt failed before any capture/stop issuance; do not erase its guard.
+    prior=pathlib.Path('/var/lib/pgpt-s1-preservation/pg466-handoff')
+    require(set(p.name for p in prior.iterdir())=={'isolation-start.private','web-full-journal.private.jsonl','web-stop-witness.private','before-isolation.private.log'})
+    prior_log=(prior/'before-isolation.private.log').read_bytes()
+    require(len(prior_log)<4096 and b'Pg466HandoffReadback.main(Pg466HandoffReadback.java:55)' in prior_log)
     # Administrative starts/namespace updates are prohibited for this entire controlled
     # operator sequence; the fixed VM has no production automatic scheduling enabled.
     if sys.argv[1]=='inspect':print(json.dumps(holder(),sort_keys=True));return
     if not ROOT.exists():ROOT.mkdir(mode=0o700)
     require(stat.S_IMODE(ROOT.stat().st_mode)==0o700 and ROOT.stat().st_uid==0)
     if sys.argv[1]=='isolate':isolate()
+    elif sys.argv[1]=='finalize-isolation':finalize_isolation()
+    elif sys.argv[1]=='finalize-term':
+        readback('verify','after-already-issued-term');complete_interruption()
+    elif sys.argv[1]=='closed':
+        require((ROOT/'interrupted.private').exists() and not (pathlib.Path('/proc')/str(PID)).exists())
+        saved=json.loads((ROOT/'isolated.private').read_text(),object_pairs_hook=unique)
+        require(all_terminal()==saved['allNine'] and not any(line.split()[4:5]==[str(PID)] for line in pathlib.Path('/proc/locks').read_text().splitlines()))
+        print('PG466_CLOSED allNineUnchanged=true oldPhysicalHolderAbsent=true oldCloseUnknown=true',flush=True)
     else:terminate()
 if __name__=='__main__':main()

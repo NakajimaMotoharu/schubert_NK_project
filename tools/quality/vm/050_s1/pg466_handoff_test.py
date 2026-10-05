@@ -54,7 +54,10 @@ for key,value in [('MainPID','1338495'),('InvocationID','b'*32),('ControlPID','1
 with tempfile.TemporaryDirectory(prefix='pg466-term-control-') as tmp,contextlib.ExitStack() as stack:
     root=pathlib.Path(tmp);(root/'isolated.private').touch();events=[]
     stack.enter_context(patch.object(h,'ROOT',root));stack.enter_context(patch.object(h,'all_terminal',lambda:events.append('allNine')));stack.enter_context(patch.object(h,'readback',lambda mode,label:events.append('readback')))
-    stack.enter_context(patch.object(h,'holder',lambda:{'pid':1438705,'locks':{'m':'literal'}}));stack.enter_context(patch.object(h,'save',lambda name,data:events.append(name)))
+    def private_save(name,data):
+        events.append(name)
+        if name=='term-request.private':(root/name).touch()
+    stack.enter_context(patch.object(h,'holder',lambda:{'pid':1438705,'locks':{'m':'literal'}}));stack.enter_context(patch.object(h,'save',private_save))
     stack.enter_context(patch.object(h,'os',types.SimpleNamespace(pidfd_open=lambda pid,flag:(check(pid==1438705 and flag==0) or 77),close=lambda fd:(check(fd==77),events.append('fdClosed')))))
     stack.enter_context(patch.object(h,'signal',types.SimpleNamespace(SIGTERM=15,pidfd_send_signal=lambda fd,sig,data,flags:(check((fd,sig,data,flags)==(77,15,None,0)),events.append('TERM')))))
     stack.enter_context(patch.object(h,'select',types.SimpleNamespace(POLLIN=1,poll=lambda:types.SimpleNamespace(register=lambda fd,event:check((fd,event)==(77,1)),poll=lambda timeout:(check(timeout==15000) or [(77,1)])))))

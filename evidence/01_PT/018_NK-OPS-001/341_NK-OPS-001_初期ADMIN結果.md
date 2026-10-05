@@ -1,5 +1,11 @@
 # 初期ADMIN 実行結果
 
+## 2026-10-05 12:40 JST 実所有停止・旧工具中断の分離
+
+DEPLOY008：実API同Invocation/F18/fulljournal正常cleanup→process stopped/通常143を確認、Cleanup通常0。そのRequiresによるBroker/Expiry同世代停止はvendor全journal・F18/kernelで再認証、全9terminal2回/全原本331/23table/20Backup/Transfer/33 metadata/raw、旧実M/A保持をfinalize-isolation actual0で閉じた。固定pidfd旧工具TERM一回、元activate/session6498 actual143/INTERRUPTED/oldCloseUnknown（成功ではない）。reap競合は信号追加0のfinalize-term actual0で全9/原本/旧本人FD/OFD/DBsession不在を確認。current旧PG464、INVALID/配備/ADMIN/新run未実行。
+
+BUG722の4相違はbusiness/backup/original及びfixture内nestedMapの別JVM表示順。既存snapshotは書換0、構造canonical比較/要素欠落・重複・値/hash差拒否18反例、新onlyv3 actualverify0で当原因を再試験。YKT513のfixture対象外候補は原因解明後対象へ訂正。BUG723 annotation CP欠落はWerrorを落とさず旧3固定依存を復元しv3compile0。BUG724依存stopは新start/二重stop0の全世代再照合、BUG725/proc raceはpidfd終了後の消失限定/異tick拒否・read-only finalization。各失敗/部分snapshot/guardは保全。TERM240/control173/vendor33/Map18/newrecovery20は工具assertionsでProduction3289へ加算0。新recoveryはWerror/順序全6故障0だけ、実M/A/DB新ownership/activate通常closeは未実行。安全PG466-owned-isolation-v2/manifest、正式run24据置。
+
 ## 2026-10-05 12:24 JST SSC191停止・移譲前の独立結果
 
 Production/full/candidate df9不変、3289PT488suite/静的6zeroは同sourceの保存結果。SSC191設計only PR22→origin/main4ea9d8bdeb3da0c81f713bd1754a741534a3794e、dev c2bedec1a。DEPLOY006：手書きTERM oracle240/control173 assertions actual0（Production PT加算0）。実Web同Invocation791 journal/F18で通常143 stop dataを確認、Unit成功・旧工具close成功はfalse。新only private journal600/親700、旧privacy障害BUG721を遡及成功化0。

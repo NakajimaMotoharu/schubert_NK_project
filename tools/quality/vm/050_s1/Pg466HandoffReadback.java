@@ -52,7 +52,11 @@ public final class Pg466HandoffReadback {
       }Pg387TrustedDeployment.sync(SAVE);Pg387TrustedDeployment.sync(SAVE.getParent());
     }
     try(var entries=Files.list(SAVE)){require(entries.map(p->p.getFileName().toString()).collect(java.util.stream.Collectors.toSet()).equals(before.keySet().stream().map(k->k+".private").collect(java.util.stream.Collectors.toSet())));}
-    for(var e:before.entrySet())require(e.getValue().equals(Files.readString(SAVE.resolve(e.getKey()+".private"))));
+    for(var e:before.entrySet()){
+      String saved=Files.readString(SAVE.resolve(e.getKey()+".private"));
+      if(Set.of("business","backup","original","fixture").contains(e.getKey()))require(Pg466MapText.canonical(e.getValue()).equals(Pg466MapText.canonical(saved)));
+      else require(e.getValue().equals(saved));
+    }
     require(before.equals(values()));
     System.out.println("PG466_HANDOFF_READBACK allReadOnlyScopesReturnedNormally=true actualNewObservation=true oldToolCloseNotInferred=true full331=true backup20=true originalDone=true startup33=true mutation0=true");
   }
