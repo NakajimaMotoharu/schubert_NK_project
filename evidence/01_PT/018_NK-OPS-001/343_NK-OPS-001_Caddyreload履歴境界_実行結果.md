@@ -1,5 +1,13 @@
 # NK-OPS-001 Caddy reload履歴境界 実行結果
 
+## Fresh全6・正規候補（2026-10-05 14:04 JST）
+
+Production source **bbb244e5191e68adee2f6251dfdbbba53e9b64b4**、full62752 actual0、13:39:13～13:56:13、**3292PT/488suite/FES0/全6static0/NullAway/Werror/format0/source前後hash不変**。安全PG468-caddy-reload-full/manifest SHA648020121ed2dde426f78b91fd2a79a25f2d069200c3dbb138d5af0185adc4a9。未網羅B/L/M/C=Protocol0/Storage0/Bootstrap53-34-16-0/API101-190-11-0/Web57-189-26-0/Batch1239-3660-597-39、除外/別source補完0、native100/正式run24は未受入。
+
+new-only WorkPG379/pg468-host全6byte照合凍結、pg468-release-v1は正規BOM186/SQL27/history28互換・全projectJar凍結byte一致、署名検証0、manifestSHA **64e01ab3bafc87329a86d8d69ccbb6e212eb82335b4b684466eb3e469d88eb87**。currentは旧df9/PG465を保持、新候補はまだVM未配置/未配備。full collectorの歴史段落は現native合格を意味しない。
+
+旧known30隔離15745 actual0（全9kernel/同341全14/business/全原本BackupTransfer/40namespace保持・新owned通常帰還）。verify61718 actual1/PERMIT_READ/変異0は新activationの別callerを旧定数で拒否（BUG733/YKT495）、保存。tracked修正後v5/12580はWerror0/Pair427＋配備80独立assert、元draft v4の全4classとbyte一致、Root immutable v4配置92517 actual0。工具commitはProduction/full固定bbbと別記、src/POMはbbbと差分0。是正nativeverify/typed退役/配備/親/A01/正式はまだ未受入。
+
 2026-10-05 13:31:16、selected/session95032 actual0、96PT/14suite/FES各0、静的全6違反0、NullAway/Werror/format合格。変更cold method全counter miss0；native coldInvocation及び全体100は未受入。safe `evidence/provisional/PG468-caddy-selected-v1/manifest.json` SHA41bb57a751d605f72d490927c58c841249b422558b480b2eb2d7fd12d77fd7bc、code/test sourcehash・fresh XML署名/時刻/各counter/環境・commandを記録。対象Production変更はMorningCaddyReadiness.coldのみ、HEAD2251dff5d＋dirty時点、保存sourceは次commit。
 
 REDv1はProtocolでtest selector不適合actual1（BUG731/batch未実行）。REDv2/session75548 actual1、CADDY192001が旧codeでIOException、残11caseは成功、失敗証跡保全。GREENは同独立test値を変更せずProduction境界をSSC192に整合。

@@ -16,6 +16,11 @@ public final class Pg468Known30PairRecoveryTest {
   }
   public static void main(String[] args){
     if(args.length!=0)throw new IllegalArgumentException("literal only");
+    check(Pg468Known30PairRecovery.ACTIVATION.equals(UUID.fromString("1f026aa2-899a-4f22-aca9-32f4918a03c8")));
+    check(Pg468OwnedIsolation.SOURCE.equals("df9a33febf3703f0d18ac2c4ef56fd0225aac2b9"));
+    check(Pg468OwnedIsolation.DIGEST.equals("8b8e82f43146f4a89e02237a0b28e010442c59d3e7c8066c96f13d8b414d8e9e"));
+    check(Pg468Known30PairRecovery.CAPTURE_SHA.equals("549c6bfb866b68b0fa3d1edffaa02fc87975dfdfc43af20a4af932bb4d3a2927"));
+    check(Pg468Known30PairRecovery.retainedNames().size()==32);
     for(int i=0;i<3;i++){
       var valid=receipt(i);check(Pg468Known30PairRecovery.terminal(valid,i));
       for(var entry:Map.of("Result","success","ExecMainStatus","31","MainPID","11","InvocationID","1".repeat(32),"LoadState","not-found","KillMode","process","SendSIGKILL","yes","Type","exec","ExecMainStartTimestampMonotonic","0","ExecMainExitTimestampMonotonic","1").entrySet()){

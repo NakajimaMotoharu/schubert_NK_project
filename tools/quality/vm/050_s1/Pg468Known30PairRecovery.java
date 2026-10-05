@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * No start/deploy/migration/new epoch/new permit/original completion or historical close claim.
  */
 public final class Pg468Known30PairRecovery {
+  static final UUID ACTIVATION=UUID.fromString("1f026aa2-899a-4f22-aca9-32f4918a03c8");
   static final String BOOT="e07aa706-1acd-4e65-b309-d7f330f79d54";
   static final String CAPTURE_SHA="549c6bfb866b68b0fa3d1edffaa02fc87975dfdfc43af20a4af932bb4d3a2927";
   static final Path STARTUP=Pg468OwnedIsolation.STARTUP;
@@ -176,7 +177,7 @@ public final class Pg468Known30PairRecovery {
           stage="DB_PREPARE";db.setAutoCommit(false);try(var s=db.createStatement();var r=s.executeQuery("select pg_try_advisory_lock(71419602)")){require(r.next() && r.getBoolean(1) && !r.next());}
           stage="CURRENT_READ";var files=new StartupPermitFiles(root,LinuxInodeSecurity.create());var issued=files.current();require(issued.state()==StartupPermitRecords.State.INVALID && issued.epoch().toString().equals("37599b0d-d64a-41e9-92b5-bfeec4e5e6b6") && actualNames().equals(names(issued,true)));
           stage="PERMIT_READ";var observed=RootFailedStartRecovery.observePair(root,LinuxInodeSecurity.create());require(issued.equals(observed.api().invalid()));var permit=observed.api().permit();require(permit.releaseDigest().equals(Pg468OwnedIsolation.DIGEST) && issued.boot().toString().equals(BOOT)
-              && issued.activation().run().id().equals(Pg407FailedRootRecovery.RUN) && issued.activation().id().equals(Pg407FailedRootRecovery.ACTIVATION));
+              && issued.activation().run().id().equals(Pg407FailedRootRecovery.RUN) && issued.activation().id().equals(ACTIVATION));
           stage="ORIGINAL_SNAPSHOT";var original=Pg428ColdBootPreparation.original();stage="BACKUP_SNAPSHOT";var backup=Pg428ColdBootPreparation.backupSnapshot();stage="FIXTURE_SNAPSHOT";var fixture=Pg428ColdBootPreparation.fixtureSnapshot();stage="DB_ROWS";var rows=Pg407FailedRootRecovery.databaseRows(db);stage="DB_BUSINESS";var business=Pg456SignedMigration.business(schema);require(rows.size()==341);
           var startup=new TreeMap<String,byte[]>();var metadata=new TreeMap<String,Map<String,Object>>();
           for(String n:actualNames()){startup.put(n,Pg410KnownAuthRecovery.material(STARTUP.resolve(n),4096));metadata.put(n,Pg410KnownAuthRecovery.metadata(STARTUP.resolve(n)));}
