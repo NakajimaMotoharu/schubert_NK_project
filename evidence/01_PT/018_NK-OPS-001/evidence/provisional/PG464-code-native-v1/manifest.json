@@ -1,0 +1,37 @@
+{
+  "id": "PG464-code-native-v1",
+  "recordedAt": "2026-10-05T09:25:03+09:00",
+  "branch": "dev-foundation",
+  "productionSource": "e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45",
+  "previousSource": "11c1feb1c0b51543f98c28e3f54213274648f06f",
+  "release": "0.1.0-PG464",
+  "manifestSha256": "b080dfa29bbed038d9a1f0f25196de34e8b75b5c1ee28f7035164a622ea15e7e",
+  "environment": "same e07 VM/Ubuntu26.04/PostgreSQL18.6/JDK25.0.4",
+  "commands": [
+    {"tool": "pg464_stage_v1.py", "session": 91177, "exitCode": 0},
+    {"tool": "Pg464CodeOnlyDeployment", "mode": "verify", "session": 91429, "exitCode": 0},
+    {"tool": "Pg464CodeOnlyDeployment", "mode": "activate", "session": 63420, "exitCode": 0}
+  ],
+  "testIds": ["PT-OPS-CODE464001", "PT-OPS-STOPCOMP004"],
+  "bugs": ["BUG-707"],
+  "ykt": ["YKT-504"],
+  "ssc": ["SSC-187"],
+  "independentExpected": {
+    "artifacts": 185, "dependencies": 61, "sql": 27, "history": 28,
+    "preservedFullFourteenColumnRows": 321, "startupNamespaceCount": 29,
+    "preservedHistoricalRecords": 28, "intentCount": 0, "allNineKernelEmpty": true,
+    "originalPendingBackupTransferPreserved": true, "ddl": 0, "permitsIssued": 0, "starts": 0,
+    "newOwnedScopesReturnedNormally": true
+  },
+  "actualMatchesExpected": true,
+  "nativeParentAccepted": false,
+  "formal": false,
+  "oldUnknownNormalized": false,
+  "privateLogHashes": {
+    "pg464-stage-v1.log": "7fdffd73895bf0e3d83b3e00b7447277dca39e4188f7aa696def4613edb5e278",
+    "pg464-code-only-verify-v1.log": "5ff45ca6b6c16c9be115fa291e2e4863bde1a30dd7fbd6064f705737cbf0d349",
+    "pg464-code-only-native-v1.log": "0f79586b303536774c03d2a0f0448e0401759fe3c2efa68164f7c16376a786c7"
+  },
+  "redaction": "Counts/hashes/Unit operation identity only; no credential, dump, raw permit/session/token or private heap.",
+  "limitations": ["Code-only deployment is not whole-parent/native coverage100 acceptance", "Old timeout143 remains failed", "New external parent is separately observed under its original 30 minute budget"]
+}

@@ -1,5 +1,9 @@
 # NK-OPS-001 停止済Backup最終完了 実行結果
 
+## 新source fresh全6（2026-10-05 09:22 JST）
+
+e4c7f0b84b02a2124a0aba2a7b682ad482d5cd45/09:02:47～09:19:48/session68583/actual0、3272PT485suite/FES0/全6static0・NullAway、source前後hash/全6new-only凍結一致。command pg464_full_v1.sh <当source>、WorkPG379/pg464-six-full-v1.{log,started,completed,exit,source,source-files.sha256}、safe provisional/PG464-stopped-backup-full。変更verify I103/B10/L22/M1全miss0、constructor含むglobal100/native未受入、正式run24据置。185BOM/61deps/27SQL28historyの正規署名候補PG464027/digestb080dfa29bbed038d9a1f0f25196de34e8b75b5c1ee28f7035164a622ea15e7eは配置までactual0、同新sourceの実親完了はまだ未実行。旧11c A01/親143を当結果へ加算0。
+
 ## 2026-10-05 09:00 JST 実結果追記（限定・正式未認定）
 
 SSC187実装は同cycle.completedReceiptの参照同一性とrecheckCompletedBackupを使用し、Cleanup/ExpiryのKEEP_ACTIVE及びDB/原本/期限を維持。選択v1はimport欠落でactual1/未実行（BUG705）、v2を経てv3はactual0/89PT13suite/FES0/静的6zero/NullAway。STOPCOMP独立4PTは手書き18field/current/coldGC/foreign/partial/owner/kernel/30分境界/DB行・原本差異を検証。safe `evidence/provisional/PG464-stopcomp-selected-v3/manifest.json`、変更verify全counter miss0、constructor既存15branch/1line miss、全回帰/native/global100未達。
