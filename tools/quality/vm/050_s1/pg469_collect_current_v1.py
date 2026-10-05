@@ -1,0 +1,24 @@
+"""Sanitized actual old-cohort readback/new-candidate preparation, not deployment acceptance."""
+import datetime,hashlib,json,pathlib,subprocess,os
+os.umask(0o077)
+R=pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation');W=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
+files=['pg469-current-native-v2.private.log','pg469-current-native-v3.private.log','pg469-current-compile-v3.private.log','pg469-current-oracle-v3.private.log','pg469-candidate-stage-v1.private.log','pg469-completed-stage-v1.private.log','pg469-completed-stage-check-v1.private.log','pg469-completed-compile-v3.private.log','pg469-completed-oracle-v3.private.log','pg469-completed-verify-v1.private.log','pg469-completed-verify-v2.private.log','pg469-stop-oracle-v1.private.log','pg469-term-oracle-v1.private.log']
+assert (W/'pg469-current-native-v2.exit').read_text().strip()=='1'
+assert (W/'pg469-current-native-v3.exit').read_text().strip()=='0'
+assert (W/'pg469-completed-verify-v1.exit').read_text().strip()=='1'
+assert (W/'pg469-completed-verify-v2.exit').read_text().strip()=='0'
+assert 'independentAssertions=374' in (W/'pg469-current-oracle-v3.private.log').read_text()
+assert 'independentAssertions=111' in (W/'pg469-completed-oracle-v3.private.log').read_text()
+assert 'independentAssertions=221' in (W/'pg469-stop-oracle-v1.private.log').read_text()
+assert 'independentAssertions=240' in (W/'pg469-term-oracle-v1.private.log').read_text()
+assert 'PG469_CURRENT newReadOnlyMAAndDatabaseScopesReturnedNormally=true' in (W/'pg469-current-native-v3.private.log').read_text()
+assert 'PG469_COMPLETED_VERIFIED normalOwnedClose=true' in (W/'pg469-completed-verify-v2.private.log').read_text()
+out=R/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG469-current-preparation-v1';assert not out.exists();out.mkdir(parents=True)
+d={'id':'PG469-current-preparation-v1','programId':'NK-OPS-001','testIds':['PT-OPS-CURRENT469001','PT-OPS-CURRENT469002','PT-OPS-CURRENT469003','PT-OPS-CURRENT469004'],'branch':'dev-foundation','operatorHeadBeforeThisSave':subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),'capturedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'environment':{'hostJdk':'25.0.4','guestJdk':'25.0.4','guestOs':'Ubuntu26.04','postgresql':'18.6','maven':'3.9.12'},'actualOldNativeSource':'bbb244e5191e68adee2f6251dfdbbba53e9b64b4','candidateSource':'d3bba6db6eb9fec13e4847a10541cf337f575731','candidateDigest':'cc5e4dd7ca70d3a21e1145dd35b9f047856c4ab83bfac6f11722663ba7744462','acceptance':{'currentReadbackExit':0,'rows351Old341Full14Preserved':True,'originalDoneSuccess':True,'allBackupPreserved':True,'namespace41Intent0':True,'old36Preserved':True,'authenticatedUsers':1,'passwordVersion':1,'authContexts':3,'revokedContexts':1,'nonRevokedContexts':2,'retiredInitialCredentialsPreserved':True,'newReadOnlyMAAndDbScopesReturnedNormally':True,'newCandidateSigned186Canonical187':True,'candidateFreezeOnly':True,'sameOldPeerIdentitySocketInfoTlsUnderMA':True,'completedVerifyExit':0,'deploymentActivateExecuted':False,'newNativeSourceAccepted':False,'coverage100':False,'formalPass':False,'productionPtAdded':0},'independentOperatorAssertions':{'current':374,'completed':111,'stop':221,'ordinaryTermControl':240},'negativeRuns':{'currentV2Exit':1,'stageV1Exit':1,'completedVerifyV1Exit':1,'v1PeerRefusalCauseUnconfirmed':True},'coverageLimitations':['Operator assertions are not Production PT or coverage','Unknown resource-close injected native branches remain unaccepted','Candidate/source D3 full3301 is separate from old BBB native readback'],'relatedBugs':['BUG-744','BUG-745','BUG-746','BUG-747','BUG-748'],'relatedYkt':['YKT-525','YKT-526','YKT-527','YKT-528','YKT-529'],'relatedSsc':['SSC-190','SSC-191'],'commands':['bash tools/quality/vm/050_s1/pg469_current_native_v3.sh','python3 -B tools/quality/vm/050_s1/pg469_stage_candidate_v1.py','python3 -B tools/quality/vm/050_s1/pg469_check_completed_stage_v1.py','bash tools/quality/vm/050_s1/pg469_completed_verify_v2.sh'],'files':[]}
+for name in files:
+ p=W/name;assert p.is_file() and p.stat().st_mode&0o077==0
+ d['files'].append({'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size,'contentInGit':False})
+for name in ['Pg469CurrentReadback.java','Pg469CurrentReadbackTest.java','Pg469CompletedDeployment.java','Pg469CompletedDeploymentTest.java','pg469_owned_stop.py','pg469_owned_stop_test.py','pg469_live_peer_check.py']:
+ p=R/'tools/quality/vm/050_s1'/name;d['files'].append({'path':str(p.relative_to(R)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size,'contentInGit':True})
+with (out/'manifest.json').open('x') as f:json.dump(d,f,ensure_ascii=False,indent=2);f.write('\n')
+print('PG469_CURRENT_SAFE_MANIFEST sha256='+hashlib.sha256((out/'manifest.json').read_bytes()).hexdigest()+' activationAccepted=false rawPrivateInGit=false')

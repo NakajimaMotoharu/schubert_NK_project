@@ -1,0 +1,210 @@
+{
+  "id": "PG469-current-preparation-v1",
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-CURRENT469001",
+    "PT-OPS-CURRENT469002",
+    "PT-OPS-CURRENT469003",
+    "PT-OPS-CURRENT469004"
+  ],
+  "branch": "dev-foundation",
+  "operatorHeadBeforeThisSave": "2f39ae9b48b6466a205d96ff03814a73c1fcd9f5",
+  "capturedAt": "2026-10-05T16:23:39.349472+00:00",
+  "environment": {
+    "hostJdk": "25.0.4",
+    "guestJdk": "25.0.4",
+    "guestOs": "Ubuntu26.04",
+    "postgresql": "18.6",
+    "maven": "3.9.12"
+  },
+  "actualOldNativeSource": "bbb244e5191e68adee2f6251dfdbbba53e9b64b4",
+  "candidateSource": "d3bba6db6eb9fec13e4847a10541cf337f575731",
+  "candidateDigest": "cc5e4dd7ca70d3a21e1145dd35b9f047856c4ab83bfac6f11722663ba7744462",
+  "acceptance": {
+    "currentReadbackExit": 0,
+    "rows351Old341Full14Preserved": true,
+    "originalDoneSuccess": true,
+    "allBackupPreserved": true,
+    "namespace41Intent0": true,
+    "old36Preserved": true,
+    "authenticatedUsers": 1,
+    "passwordVersion": 1,
+    "authContexts": 3,
+    "revokedContexts": 1,
+    "nonRevokedContexts": 2,
+    "retiredInitialCredentialsPreserved": true,
+    "newReadOnlyMAAndDbScopesReturnedNormally": true,
+    "newCandidateSigned186Canonical187": true,
+    "candidateFreezeOnly": true,
+    "sameOldPeerIdentitySocketInfoTlsUnderMA": true,
+    "completedVerifyExit": 0,
+    "deploymentActivateExecuted": false,
+    "newNativeSourceAccepted": false,
+    "coverage100": false,
+    "formalPass": false,
+    "productionPtAdded": 0
+  },
+  "independentOperatorAssertions": {
+    "current": 374,
+    "completed": 111,
+    "stop": 221,
+    "ordinaryTermControl": 240
+  },
+  "negativeRuns": {
+    "currentV2Exit": 1,
+    "stageV1Exit": 1,
+    "completedVerifyV1Exit": 1,
+    "v1PeerRefusalCauseUnconfirmed": true
+  },
+  "coverageLimitations": [
+    "Operator assertions are not Production PT or coverage",
+    "Unknown resource-close injected native branches remain unaccepted",
+    "Candidate/source D3 full3301 is separate from old BBB native readback"
+  ],
+  "relatedBugs": [
+    "BUG-744",
+    "BUG-745",
+    "BUG-746",
+    "BUG-747",
+    "BUG-748"
+  ],
+  "relatedYkt": [
+    "YKT-525",
+    "YKT-526",
+    "YKT-527",
+    "YKT-528",
+    "YKT-529"
+  ],
+  "relatedSsc": [
+    "SSC-190",
+    "SSC-191"
+  ],
+  "commands": [
+    "bash tools/quality/vm/050_s1/pg469_current_native_v3.sh",
+    "python3 -B tools/quality/vm/050_s1/pg469_stage_candidate_v1.py",
+    "python3 -B tools/quality/vm/050_s1/pg469_check_completed_stage_v1.py",
+    "bash tools/quality/vm/050_s1/pg469_completed_verify_v2.sh"
+  ],
+  "files": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-current-native-v2.private.log",
+      "sha256": "64557a33bef980193fe7589ee61a4291de3f23ed21a4787ca9a16487a0daf2e3",
+      "bytes": 704,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-current-native-v3.private.log",
+      "sha256": "1853e26d041bac483eb64d668d298e644581c52c3e995b0b058bcf98a337055b",
+      "bytes": 964,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-current-compile-v3.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-current-oracle-v3.private.log",
+      "sha256": "8bd897d60308e177ec86ee9645cb6d6b67a990c54a51047ab7801e6f968929af",
+      "bytes": 60,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-candidate-stage-v1.private.log",
+      "sha256": "ee0b9f9ec6895ef6d967e175a54fc3e86c5086e659c9f342ca35303b56954df7",
+      "bytes": 142,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-stage-v1.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-stage-check-v1.private.log",
+      "sha256": "e2ef50f82d43afdc9b6884ff23fcd32ce679cfb3d4f871180f16b1796d44cf34",
+      "bytes": 123,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-compile-v3.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-oracle-v3.private.log",
+      "sha256": "3d2cc8d08e0e86d39211036c9c422bd057a3550ecfa23a9e819035fdccc0ce67",
+      "bytes": 92,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-verify-v1.private.log",
+      "sha256": "e7ed068ae9cc426aff33812c31d863c0d95e0b7611cef6a0c4f18816bc56dac7",
+      "bytes": 5839,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-completed-verify-v2.private.log",
+      "sha256": "00ab5f2254edbb00efce82e85c93585a8529ee595f0661a0eed292730eac2c36",
+      "bytes": 343,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-stop-oracle-v1.private.log",
+      "sha256": "41c28ee317cdfa6e9e6b9d00b56afc4847b8bc04c3c5cab9d6366feb016ba4cb",
+      "bytes": 289,
+      "contentInGit": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg469-term-oracle-v1.private.log",
+      "sha256": "50c7a94e51873b10cd47e21186b679639fd5aa537da8c7b507a7f0966503f0fb",
+      "bytes": 89,
+      "contentInGit": false
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg469CurrentReadback.java",
+      "sha256": "a98b3aa11d9f79ed597e7b6ddf551738aa5eeb0038c03a3bcf29f22d1df2dba5",
+      "bytes": 17051,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg469CurrentReadbackTest.java",
+      "sha256": "e88a8abd888a9a82956c2d1d38a63c83dcae5151f1edceaac14461770247a060",
+      "bytes": 7849,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg469CompletedDeployment.java",
+      "sha256": "f50ae45409ba6c845f99b9ae9ea97400f43d1d01b20c3fc2eb64b2ac2640f594",
+      "bytes": 21751,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg469CompletedDeploymentTest.java",
+      "sha256": "1aba5a8bcb536212cc90147da3d3746db2cf80e3de1388e48f0f03fa438dbbf0",
+      "bytes": 6445,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg469_owned_stop.py",
+      "sha256": "94fde9f5b7338ebb45ea5ad560fa34954460396bec3e14d2d62ef203b6fc768b",
+      "bytes": 8245,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg469_owned_stop_test.py",
+      "sha256": "500df971bd16f727bfa491da97ba842ca09ceb91cc1464eec7e9c5c375597def",
+      "bytes": 5649,
+      "contentInGit": true
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg469_live_peer_check.py",
+      "sha256": "53c1688726d011c039316efe1182e3aed12a4b48556d29627c7df49528ae70af",
+      "bytes": 5605,
+      "contentInGit": true
+    }
+  ]
+}
