@@ -516,3 +516,4 @@ pending_context_revocationsはAPI/Web sessionの期限cleanupと分け、expires
 # 朝batch・backup・削除・再実行設計
 
 SSC202（2026-10-06、SSC200201/BUG788/YKT562）：隔離PG/PT VMの同日別run参照修正では、成功済みBackup二stepとCleanup七SKIPを持つ未完了runを保全し、027→028移行・pending code-only・一回用通常resumeを別の正常所有区間として認定する。元cutoff/activationをoperatorが更新せず、手DB terminal修復/日次業務再処理をしない。既成功Backupは元schema027の真正manifest/全byte/元二handleで通常same-run再用し、新profile028へ書き換えない。新規Backupだけ現在署名/profile028と整合させる。親fresh Invocationからの30分budget、実Unitの期限、API所有のままWeb/Caddy/原本DONE、失敗逆順停止・全後条件は既契約のまま。各段の実source/終了コード/全資源正常帰還を確認するまで次段の権限・成功を与えない。
+SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
