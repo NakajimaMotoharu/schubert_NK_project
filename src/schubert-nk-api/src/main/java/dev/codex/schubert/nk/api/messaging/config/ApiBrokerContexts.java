@@ -7,7 +7,9 @@ import jakarta.jms.JMSContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -32,22 +34,31 @@ public final class ApiBrokerContexts implements AutoCloseable {
 
   public static ApiBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
     Objects.requireNonNull(credentials, "credentials");
-    var provider = ArtemisConnectionFactoryProvider.INSTANCE;
-    var sync = provider.create(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, endpoint);
+    return createOwned(
+        () -> credentials.copyPassword(ServiceCredentialId.MQ_API),
+        endpoint,
+        ArtemisConnectionFactoryProvider.INSTANCE::create);
+  }
+
+  /**
+   * PG-D379: same partial factory ownership; package-only deterministic provider fault boundary.
+   */
+  static ApiBrokerContexts createOwned(
+      Supplier<char[]> passwords,
+      String endpoint,
+      BiFunction<
+              ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
+          provider) {
+    Objects.requireNonNull(passwords, "password source");
+    Objects.requireNonNull(provider, "factory provider");
+    var sync = provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, endpoint);
     try {
       var webLog =
-          provider.create(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, endpoint);
+          provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, endpoint);
       try {
         var async =
-            provider.create(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, endpoint);
-        return new ApiBrokerContexts(
-            () -> credentials.copyPassword(ServiceCredentialId.MQ_API),
-            sync,
-            webLog,
-            async,
-            sync,
-            webLog,
-            async);
+            provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, endpoint);
+        return new ApiBrokerContexts(passwords, sync, webLog, async, sync, webLog, async);
       } catch (RuntimeException | Error failure) {
         try {
           webLog.close();

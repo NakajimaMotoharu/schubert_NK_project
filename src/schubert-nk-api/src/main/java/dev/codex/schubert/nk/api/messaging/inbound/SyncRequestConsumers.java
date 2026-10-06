@@ -97,7 +97,8 @@ public final class SyncRequestConsumers implements AutoCloseable {
       } catch (RuntimeException | Error notification) {
         if (notification instanceof Error && !(failure instanceof Error)) {
           retained = notification;
-          if (notification != failure) notification.addSuppressed(failure);
+          // Error notification and non-Error failure cannot be the same object (PG-D379).
+          notification.addSuppressed(failure);
         } else if (notification != failure) failure.addSuppressed(notification);
       }
       runtime.closeAfterFailure(retained);
