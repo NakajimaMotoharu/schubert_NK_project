@@ -1,0 +1,11 @@
+# API所有運用補完結果（PG476、限定）
+
+base df40a6bf89c6f91df7403788357b2f54ed543f83/dev-foundation/dirty tests、Production main/POMはPG475/979cと同byte。JDK25.0.4/Maven3.9.12/PG18/JaCoCo0.8.15。実command v1/v2/v3とsource/diff/time/exit/log/XML/coverage/compiled byteはWorkPG379の同stemと各-frozen私有へ対応する。
+
+v1 actual1：新OWN003 fixtureのClock故障誘発がTransferStartupProbeより早かった。期待固定診断は変えず、公開DirectoryCallsによる実probe正常close後だけ故障誘発へ修正。旧failed target/source/初稿XMLはpg476-api-owned-selected-v1-failedに分離、失敗を合格へ算入0。
+
+v2 actual0：87PT11suite/FES0/static4zero/format-NullAwayWerror。OWN001..003/全provider原順復元/借用FD保持・実PG独立後条件を確認。safe manifest SHA bb89c0c6363e3af3cc2e9837e321ba3fe7f93fa85da2eeaa9951bd63ecd984fa。InspectionRunExecutorとInspectorProcessは全四counter missed0。ApiApplicationPreparationはbranch0/line3（他DB source経路）、ApiProcessMainはbranch12/line83/method8未網羅。
+
+v3 actual0：87PT11suite/FES0/static4zero、OWN004四引数argv拒否をMAIN001の同admission methodへ追加し、IO/assembly0を確認。safe manifest SHA 6f65de2cd3c950ae92b1f0f98bb7337d52d1e39ec60af6bec45583f71810e93f。ApiProcessMain branch11/line83/method8。他counter同v2。v3 manifestの新TestID一覧はOWN001..003表記のためOWN004は本結果/374→MAIN001/XMLに追跡し、正式trace gate資料には未採用とする。追加manifest正規化はPG477同群の新成果で行い過去manifestは上書きしない。
+
+いずれも限定host/component結果。新production SSC196実装へ本結果を流用0、必要fresh全6/真正Unit/native/NoMatch/全global100/正式run24/全CHR/ITSTは未認定。関連実装判断PG-D381・SSC119149161、起票対象の既Production仕様違反0・新fixture初稿失敗のみ。証跡にrawcredential/token/session/DB値を出さない。

@@ -57,6 +57,16 @@ final class ApiProcessMainTest {
           throw new AssertionError("file IO forbidden");
         };
     assertEquals(70, main.run(new String[] {"override"}, ENV, forbidden));
+    // PT-OPS-API-OWN004: four-argument public component admission rejects argv before IO.
+    assertEquals(
+        70,
+        main.run(
+            new String[] {"override"},
+            ENV,
+            forbidden,
+            inputs -> {
+              throw new AssertionError("assembly after rejected argv");
+            }));
     assertEquals(70, main.run(new String[0], Map.of(), forbidden));
     assertEquals(
         70,

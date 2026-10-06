@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import dev.codex.schubert.nk.api.file.InspectorApplication;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.security.NoSuchAlgorithmException;
@@ -32,6 +34,13 @@ public final class InspectorLauncher {
   public static void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(InspectorLauncher::fatal);
     new InspectorLauncher().write(arguments, System.getenv(), System.out, NATIVE);
+    var coverage =
+        FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
+            FixedNativeCoverageProfile.TerminalRole.INSPECTOR, System.getenv("INVOCATION_ID"));
+    if (coverage.isPresent()) {
+      coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+      System.err.println("Inspector fixed PT native capture complete");
+    }
   }
 
   /** Returns an internal code, not an OS/parent-gate certificate. */

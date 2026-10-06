@@ -86,15 +86,12 @@ final class NativeCoveragePrivateFile {
             || (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT
                 && name.equals(profile.invocation() + ".before-exec.exec")));
     var security = LinuxInodeSecurity.create();
-    var fixed = new FixedServiceIdentity().resolve(profile.service());
+    var fixed = profile.identity(new FixedServiceIdentity());
     long uid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.uid();
     long gid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.gid();
     require(security.effectiveUid() == uid);
     require(profile.invocation().equals(System.getenv("INVOCATION_ID")));
-    String cgroup =
-        "0::/system.slice/schubert-nk-"
-            + profile.service().name().toLowerCase(java.util.Locale.ROOT)
-            + ".service\n";
+    String cgroup = profile.cgroup();
     require(cgroup.equals(Files.readString(Path.of("/proc/self/cgroup"))));
     var ordinary =
         profile.phase() == FixedNativeCoverageProfile.Phase.ORDINARY
@@ -125,12 +122,7 @@ final class NativeCoveragePrivateFile {
                     parent::close,
                     () -> {
                       Identity parentBefore = directory(parent, security, 0, 0, 040755);
-                      String role =
-                          (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT
-                                  ? "root-"
-                                  : "ordinary-")
-                              + profile.service().name().toLowerCase(java.util.Locale.ROOT)
-                              + "193";
+                      String role = profile.directory();
                       var target = parent.openExistingChild(role);
                       Identity saved =
                           ResourceScope.use(
@@ -169,7 +161,7 @@ final class NativeCoveragePrivateFile {
         profile.invocation().equals(System.getenv("INVOCATION_ID"))
             && cgroup.equals(Files.readString(Path.of("/proc/self/cgroup")))
             && security.effectiveUid() == uid
-            && fixed.equals(new FixedServiceIdentity().resolve(profile.service())));
+            && fixed.equals(profile.identity(new FixedServiceIdentity())));
     if (ordinary.isPresent())
       require(ordinary.orElseThrow().equals(new ChildStartupContext().capture()));
   }

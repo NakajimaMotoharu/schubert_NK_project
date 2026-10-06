@@ -1,0 +1,330 @@
+{
+  "id": "PG476-api-owned-selected-v2",
+  "programId": [
+    "NK-OPS-001",
+    "NK-DAT-001"
+  ],
+  "TestIDs": [
+    "PT-OPS-API-OWN001..003"
+  ],
+  "pendingTestIDs": [],
+  "PGD": "PG-D381",
+  "baseCommit": "df40a6bf89c6f91df7403788357b2f54ed543f83",
+  "branch": "dev-foundation",
+  "dirtySource": true,
+  "started": "2026-10-06T13:07:53,402882449+09:00",
+  "completed": "2026-10-06T13:10:03,781972314+09:00",
+  "actualExit": 0,
+  "command": "bash tools/quality/vm/050_s1/pg476_api_owned_selected_v2.sh",
+  "tests": 87,
+  "suites": 11,
+  "F": 0,
+  "E": 0,
+  "S": 0,
+  "XML": [
+    {
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "xmlSha256": "72a05a60281efeda1d24eec99376a21da07d5b82b07459b134e34467ea085d27",
+      "methods": [
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+      "tests": 12,
+      "xmlSha256": "27752abf3c0ec000fbf7eca5b9656f2cf14d7ddffb91ebfdc5baf3e91aef80c8",
+      "methods": [
+        "nameAndNullContracts",
+        "nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement",
+        "nfile193002MissingNullAndUnsafeNameDoNotMutate",
+        "nfile193004ConcurrentNamedEntryHasExactlyOneWriter",
+        "faultAndUncertainOutcomes",
+        "scopedOwnership",
+        "nativePrivateCreation",
+        "retainedNamespace",
+        "nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd",
+        "unsupportedAndNativeArguments",
+        "concurrentSinglePublication",
+        "atomicNoReplace"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "xmlSha256": "0e794709297b2b0dc70fb5b34ddd3ec790a12ff00eaa08d3f983ffbaf3a55148",
+      "methods": [
+        "unknownCompoundFailures",
+        "knownIoFailures",
+        "unknownBodyFailures",
+        "concurrentScopes",
+        "nullAndNullableContracts",
+        "nestedScopes",
+        "knownBodyUnknownCleanup",
+        "successfulOwnership"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "tests": 10,
+      "xmlSha256": "64281ac6f63ac67d0ea1c7e893244e9aca94ea338928f91fd9b4a8260da505fb",
+      "methods": [
+        "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored",
+        "serviceid007EveryOwnedCloseAndUnknownFailurePreserved",
+        "serviceid001BothFixedAccountsExplicitRequiredGroups",
+        "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets",
+        "serviceid003UidGidBoundariesAndCanonicalDecimal",
+        "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker",
+        "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection",
+        "issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority",
+        "serviceid005ByteNullAndImmutableValueInvariant",
+        "dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+      "tests": 5,
+      "xmlSha256": "e8f71521aa42959c1d4a21222a69e388e6adf3e8b8219674f81b793411941170",
+      "methods": [
+        "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
+        "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose",
+        "opsCredset001FiveFixedMaterialsPerServiceAreOwnedAndClosed",
+        "opsCredset002WrongIdNullAndClosedStateReject",
+        "opsCredset004ConcurrentIndependentLoads"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.storage.ApiApplicationPreparationTest",
+      "tests": 5,
+      "xmlSha256": "207352931dfa9ff7488699b063576794eb5aab6f141793364a804c97bd6e6ff8",
+      "methods": [
+        "prep001RealProbeFullScanAndAll31GraphAreBorrowedNotProcessReady",
+        "prep004PublicNullAndPartialMissingRootsNeverCallOperation",
+        "prep003PrimaryIoRuntimeAndFatalIdentityDoNotCloseBorrowedOwners",
+        "own003MissingCryptographyHasFixedDiagnosticAndKeepsBorrowedRoots",
+        "prep002ManifestAndRootFailuresNeverExposeProcessors"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest",
+      "tests": 4,
+      "xmlSha256": "aa2894a481b364f9af3476b10568eaf0e87e49a2be9fda3a471af22d9393843b",
+      "methods": [
+        "opsApiMain002FailuresAndUnknownRemainNonSuccess",
+        "opsApiMain003FatalDiagnosticIsFixed",
+        "opsApiMain001AdmissionBeforeAssemblyAndUnwiredNativeRefusal",
+        "opsApiMain004ActualExternalMainRejectsMissingConfigAndArgv"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest",
+      "tests": 4,
+      "xmlSha256": "15b0332426911d902ea028d69360653bba4ae60fe2b0817d2a7daa617dca126c",
+      "methods": [
+        "boot007CommitUnknownCannotBecomeSuccessAndRepeatCannotDuplicate",
+        "boot007EveryActorFieldAndSameGenerationMustMatch",
+        "boot007ArgumentAndNamespaceDenyBeforeAnyIo",
+        "boot007NormalCommitAndRepeat20ConsumeInputsAndLeaveCallerOwnership"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest",
+      "tests": 9,
+      "xmlSha256": "2e6b08236152b8f5b22fb01d3868919852f02146a20a997135b21899205c9de5",
+      "methods": [
+        "storageFailurePreservesLastConfirmedOnly",
+        "resultAndNullContracts",
+        "failuresDoNotLeakOrBecomeSuccess",
+        "interruptionRemainsVisible",
+        "deadlineAndClockBoundaries",
+        "moreThanOneChunkCompletes",
+        "emptyAndCompletedRunsSucceed",
+        "own001ParentCheckSuccessAndLossHaveIndependentSqlPostconditions",
+        "protectedRowsEndWithWarning"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.file.InspectorApplicationTest",
+      "tests": 9,
+      "xmlSha256": "983fe1ac62fa0ea64b5d6eed4ae0853641cdab3291e0795ee0ac8ee2f2b003cc",
+      "methods": [
+        "concurrentLifetimes",
+        "nativeAdmission",
+        "databaseFailure",
+        "successAndResume",
+        "interruptedExecution",
+        "nullContracts",
+        "rootFailures",
+        "protectedResult",
+        "credentialFailures"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest",
+      "tests": 14,
+      "xmlSha256": "f053435343973e58722e21d6373f8daecd8c4e1389a9d9e7433e0dbb90c31975",
+      "methods": [
+        "versionsAndPurposeSeparation",
+        "ownedCopiesAndMaterialLifetimes",
+        "previousKeysAndAtomicDeletion",
+        "unverifiableRowsWarnWithoutMutation",
+        "databaseFailureAndResume",
+        "own002ParentAcceptedThroughActualSqlAndPublicLoaderRetainsRoot",
+        "currentOnlyAndEmptyScan",
+        "closedMaterialFailsBeforeDatabase",
+        "missingAndFaultedKeyLoads",
+        "sameParentGuardRejectsBeforeKeysAndClosesKeysAfterLaterFailure",
+        "publicLoaderFailureAndRedaction",
+        "constructorAndSnapshotContracts",
+        "timeoutsAndInterruptionCloseKeys",
+        "singleUseAndConcurrentContenders"
+      ]
+    }
+  ],
+  "staticModules": 4,
+  "staticFindings": 0,
+  "formatNullAwayWerror": "PASS",
+  "localCounters": {
+    "ApiApplicationPreparation": {
+      "INSTRUCTION": {
+        "missed": 24,
+        "covered": 417
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 12
+      },
+      "LINE": {
+        "missed": 3,
+        "covered": 78
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "InspectionRunExecutor": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 146
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 38
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "InspectorProcess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 242
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 49
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ApiProcessMain": {
+      "INSTRUCTION": {
+        "missed": 289,
+        "covered": 156
+      },
+      "BRANCH": {
+        "missed": 12,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 83,
+        "covered": 45
+      },
+      "COMPLEXITY": {
+        "missed": 15,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 8,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageXMLSha256": "5d9847c1c945d520b410223a4ebc4349e0d774bcf4d763fc0f3a6f579eee13c4",
+  "privateLogSha256": "f6ea7a9537f11dc9ffe2c91e638c096ac1b64ed9fa301cee242c78a38acd5fff",
+  "sourceDiffSha256BeforeFormatting": "33a4533e35d3d3723acb4b7e4dac2952467189d51feea1b872c801c10c319709",
+  "sourceFilesSha256": "569f9528641eba7ca295200ef2845ba3acc8b2575b1941d4a68198e69806c819",
+  "environment": {
+    "OS": "Linux",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15"
+  },
+  "independentOracle": "fixed diagnostic, literal UUID/UTC/keys and real PG18 SQL postconditions, real directory FD and independent provider absence/restoration; no expected via production process",
+  "accumulatedExec": false,
+  "sourceBeforeFormattingIsOnlyHash": true,
+  "initialDraftTestClassesFrozen": true,
+  "wholeCoverage100": false,
+  "nativeAccepted": false,
+  "formalUpdated": false,
+  "oldNativeReused": false,
+  "rawSecretsExported": false,
+  "ITSTAccepted": false
+}

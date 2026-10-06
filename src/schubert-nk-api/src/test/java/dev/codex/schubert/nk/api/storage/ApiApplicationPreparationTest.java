@@ -237,6 +237,87 @@ final class ApiApplicationPreparationTest {
   }
 
   @Test
+  @org.junit.jupiter.api.parallel.ResourceLock("JCA_PROVIDERS")
+  void own003MissingCryptographyHasFixedDiagnosticAndKeepsBorrowedRoots() throws Exception {
+    Path transfer = transfer();
+    var transferIdentity = identity(transfer);
+    var original = java.security.Security.getProviders();
+    AtomicInteger probeDate = new AtomicInteger(-1);
+    AtomicInteger transitions = new AtomicInteger();
+    AtomicInteger operations = new AtomicInteger();
+    var nativeCalls = LinuxDirectoryCalls.create();
+    var calls =
+        (dev.codex.schubert.nk.storage.DirectoryCalls)
+            java.lang.reflect.Proxy.newProxyInstance(
+                nativeCalls.getClass().getClassLoader(),
+                new Class<?>[] {dev.codex.schubert.nk.storage.DirectoryCalls.class},
+                (proxy, method, arguments) -> {
+                  Object returned;
+                  try {
+                    returned = method.invoke(nativeCalls, arguments);
+                  } catch (java.lang.reflect.InvocationTargetException failure) {
+                    throw failure.getCause();
+                  }
+                  if (method.getName().equals("openDirectory")
+                      && arguments != null
+                      && arguments[1].equals("20260908")
+                      && probeDate.get() == -1) probeDate.set((Integer) returned);
+                  if (method.getName().equals("close")
+                      && arguments != null
+                      && arguments[0].equals(probeDate.get())
+                      && transitions.get() == 0) {
+                    transitions.incrementAndGet();
+                    for (var provider : java.security.Security.getProviders())
+                      if (provider.getService("MessageDigest", "SHA-256") != null)
+                        java.security.Security.removeProvider(provider.getName());
+                    assertThrows(
+                        java.security.NoSuchAlgorithmException.class,
+                        () -> java.security.MessageDigest.getInstance("SHA-256"));
+                  }
+                  return returned;
+                });
+    try (var credential = new PublicApiCredentialFixture(directory);
+        var codecs = ApiNativeCodecs.create(credential.credentials());
+        var root = OwnedTransferDirectory.open(calls, transfer);
+        var assets = new MediaAssetFixture(directory.resolve("own003-assets"))) {
+      try {
+        var failure =
+            assertThrows(
+                IOException.class,
+                () ->
+                    ApiApplicationPreparation.executeBorrowed(
+                        unusedDatabase(),
+                        codecs,
+                        root,
+                        transferIdentity,
+                        assets.held,
+                        assets.identity,
+                        7,
+                        CLOCK,
+                        () -> {
+                          throw new AssertionError("dispatch before exposure");
+                        },
+                        (processors, outbox) -> operations.incrementAndGet()));
+        assertEquals("API cryptography unavailable", failure.getMessage());
+        assertNull(failure.getCause(), "private provider details must not escape");
+        assertEquals(1, transitions.get());
+        assertEquals(0, operations.get());
+        assertEquals(Boolean.TRUE, root.atDirectory(Files::isDirectory));
+        assertEquals(Boolean.TRUE, assets.held.atDirectory(Files::isDirectory));
+      } finally {
+        for (int i = 0; i < original.length; i++)
+          if (java.security.Security.getProvider(original[i].getName()) == null)
+            java.security.Security.insertProviderAt(original[i], i + 1);
+      }
+      var restored = java.security.Security.getProviders();
+      assertEquals(original.length, restored.length);
+      for (int i = 0; i < original.length; i++) assertSame(original[i], restored[i]);
+      assertEquals(
+          32, java.security.MessageDigest.getInstance("SHA-256").digest(new byte[0]).length);
+    }
+  }
+
+  @Test
   void prep004PublicNullAndPartialMissingRootsNeverCallOperation() throws Exception {
     var database = unusedDatabase();
     var operation =

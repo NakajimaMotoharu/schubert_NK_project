@@ -56,6 +56,50 @@ final class InspectionRunExecutorTest {
   }
 
   @Test
+  void own001ParentCheckSuccessAndLossHaveIndependentSqlPostconditions() throws Exception {
+    try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
+      AtomicInteger checked = new AtomicInteger();
+      var guarded =
+          new InspectionRunExecutor(
+              service(f, InspectionRunExecutorTest::connection),
+              () -> 0,
+              Optional.of(
+                  () -> {
+                    checked.incrementAndGet();
+                    return LIMIT;
+                  }));
+      assertEquals(
+          new InspectionExecution(SUCCESS, Optional.of(progress(0, 0, true))), guarded.run(RUN));
+      assertEquals(2, checked.get());
+      assertEquals("0|0|0|true", stored());
+      reset();
+      AtomicInteger connections = new AtomicInteger();
+      var denied =
+          new InspectionRunExecutor(
+              service(
+                  f,
+                  () -> {
+                    connections.incrementAndGet();
+                    return connection();
+                  }),
+              () -> 0,
+              Optional.of(
+                  () -> {
+                    throw new java.io.IOException("synthetic parent unavailable");
+                  }));
+      assertEquals(new InspectionExecution(TIME_LIMIT, Optional.empty()), denied.run(RUN));
+      assertEquals(0, connections.get());
+      assertEquals("0", progressCount());
+      assertEquals("0", inboxCount());
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InspectionRunExecutor(
+                  service(f, InspectionRunExecutorTest::connection), () -> 0, null));
+    }
+  }
+
+  @Test
   void emptyAndCompletedRunsSucceed() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
       var result = executor(f, () -> 0).run(RUN);

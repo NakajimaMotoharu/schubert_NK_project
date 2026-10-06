@@ -7,6 +7,8 @@ import dev.codex.schubert.nk.api.file.InspectorCredentialLoader;
 import dev.codex.schubert.nk.api.file.ServiceCredentialException;
 import dev.codex.schubert.nk.api.file.ServiceCredentialReader;
 import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
@@ -39,6 +41,18 @@ public final class BootstrapAdminMain {
       System.err.println("Initial ADMIN bootstrap failed");
     }
     System.err.println("Initial ADMIN bootstrap finished");
+    try {
+      var coverage =
+          FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
+              FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP, System.getenv("INVOCATION_ID"));
+      if (coverage.isPresent()) {
+        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+        System.err.println("Bootstrap fixed PT native capture complete");
+      }
+    } catch (Throwable failure) {
+      System.err.println("Initial ADMIN bootstrap failed");
+      status = 50;
+    }
     System.exit(status);
   }
 

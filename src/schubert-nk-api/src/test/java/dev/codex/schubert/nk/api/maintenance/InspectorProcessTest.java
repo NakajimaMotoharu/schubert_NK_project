@@ -385,6 +385,51 @@ final class InspectorProcessTest {
   }
 
   @Test
+  void own002ParentAcceptedThroughActualSqlAndPublicLoaderRetainsRoot() throws Exception {
+    try (var source = new Source()) {
+      AtomicInteger checks = new AtomicInteger();
+      var process =
+          new InspectorProcess(
+              source,
+              InspectorProcessTest::connection,
+              Set.of("v1"),
+              () -> 0,
+              Optional.of(
+                  () -> {
+                    checks.incrementAndGet();
+                    return 1_800_000_000_000L;
+                  }));
+      assertEquals(SUCCESS, process.execute(RUN).status());
+      assertEquals("0|0|0|true", stored());
+      assertEquals(4, source.calls);
+      assertTrue(checks.get() > 6, "parent must remain checked through keys and SQL");
+      source.assertClosed();
+      assertThrows(IllegalStateException.class, () -> process.execute(RUN));
+    }
+    Path directory = Files.createDirectory(root.resolve("own002-public-loader"));
+    try (var owned = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), directory)) {
+      var loader = new InspectorCredentialLoader(owned, LinuxInodeSecurity.create());
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard unavailable =
+          () -> {
+            throw new java.io.IOException("synthetic parent unavailable");
+          };
+      var process = InspectorProcess.withParent(loader, noDatabase(), Set.of("v1"), unavailable);
+      assertCredentialFailure(() -> process.execute(RUN));
+      assertThrows(IllegalStateException.class, () -> process.execute(RUN));
+      assertThrows(
+          NullPointerException.class,
+          () -> InspectorProcess.withParent(null, noDatabase(), Set.of("v1"), unavailable));
+      assertThrows(
+          NullPointerException.class,
+          () -> InspectorProcess.withParent(loader, noDatabase(), Set.of("v1"), null));
+      assertEquals(Boolean.TRUE, owned.atDirectory(Files::isDirectory));
+      try (var files = Files.list(directory)) {
+        assertEquals(0, files.count());
+      }
+    }
+  }
+
+  @Test
   void sameParentGuardRejectsBeforeKeysAndClosesKeysAfterLaterFailure() throws Exception {
     for (int failAt : List.of(1, 3, 6)) {
       try (var source = new Source()) {

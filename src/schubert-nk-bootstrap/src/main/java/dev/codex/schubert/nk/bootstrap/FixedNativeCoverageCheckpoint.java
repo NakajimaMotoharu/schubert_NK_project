@@ -75,6 +75,26 @@ public final class FixedNativeCoverageCheckpoint {
     } catch (IllegalArgumentException failure) {
       throw unavailable();
     }
+    return open(profile);
+  }
+
+  /** SSC196: terminal-only real Unit actors; never ordinary startup proof/forwarding. */
+  public static Optional<FixedNativeCoverageCheckpoint> fromCurrentTerminalJvm(
+      FixedNativeCoverageProfile.TerminalRole role, @Nullable String admittedInvocation)
+      throws IOException {
+    Optional<FixedNativeCoverageProfile> profile;
+    try {
+      profile =
+          FixedNativeCoverageProfile.parseTerminal(
+              role, admittedInvocation, ManagementFactory.getRuntimeMXBean().getInputArguments());
+    } catch (IllegalArgumentException failure) {
+      throw unavailable();
+    }
+    return open(profile);
+  }
+
+  private static Optional<FixedNativeCoverageCheckpoint> open(
+      Optional<FixedNativeCoverageProfile> profile) throws IOException {
     if (profile.isEmpty()) return Optional.empty();
     NativeCoveragePrivateFile.verifyPinnedAgent();
     var value = profile.orElseThrow();
