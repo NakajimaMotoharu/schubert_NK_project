@@ -21,7 +21,8 @@ public final class Pg490PendingMigration {
   static final Path NEXT=Path.of("/opt/schubert-nk/releases/0.1.0-PG489");
   static final Path OLD=Path.of("/opt/schubert-nk/releases/0.1.0-PG486");
   static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg490-schema028");
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg490-migration-tools-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg490-migration-tools-v2");
+  static final List<String> BUSINESS_ROLES=List.of("schubert_batch","schubert_app","schubert_web_session","schubert_inbox_inspector","schubert_backup");
   static final Path PROFILE=Path.of("/etc/schubert-nk/backup-profile.json");
   static final UUID RUN=UUID.fromString("91a748b4-1abe-484c-9682-44f46429b324");
   static final UUID ACTIVATION=UUID.fromString("179758d2-5b77-443a-a743-bf0065e732ea");
@@ -102,7 +103,7 @@ public final class Pg490PendingMigration {
     String function="schubert.maintenance_read_success_progress(uuid,timestamptz,text,timestamptz)";
     try(var q=schema.createStatement()){q.setQueryTimeout(5);
       try(var r=q.executeQuery("select pg_get_userbyid(proowner)='nk_owner',prosecdef,proconfig @> array['search_path=pg_catalog, schubert','TimeZone=UTC']::text[] from pg_proc where oid='"+function+"'::regprocedure")){require(r.next() && r.getBoolean(1) && r.getBoolean(2) && r.getBoolean(3) && !r.next());}
-      for(String role:List.of("schubert_batch","schubert_app","schubert_web_session","schubert_inspector","schubert_backup")){
+      for(String role:BUSINESS_ROLES){
         try(var r=q.executeQuery("select has_function_privilege('"+role+"','"+function+"','EXECUTE')")){require(r.next() && r.getBoolean(1)==role.equals("schubert_batch") && !r.next());}
       }
       try(var r=q.executeQuery("select not exists(select 1 from pg_proc p, lateral aclexplode(p.proacl) a where p.oid='"+function+"'::regprocedure and a.grantee=0)")){require(r.next() && r.getBoolean(1) && !r.next());}

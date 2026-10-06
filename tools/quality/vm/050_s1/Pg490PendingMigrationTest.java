@@ -20,6 +20,7 @@ public final class Pg490PendingMigrationTest {
     check(!Pg490PendingMigration.schemaOnly(null,next));check(!Pg490PendingMigration.schemaOnly(old,null));
     check(Pg490PendingMigration.RUN.toString().equals("91a748b4-1abe-484c-9682-44f46429b324"));
     check(Pg490PendingMigration.CUTOFF.toString().equals("2026-10-06T12:06:14.564793Z"));
+    check(Pg490PendingMigration.BUSINESS_ROLES.equals(List.of("schubert_batch","schubert_app","schubert_web_session","schubert_inbox_inspector","schubert_backup")));
     System.out.println("PG490_PURE_ORACLE independentAssertions="+checks+" guestMutations0=true productionPT0=true");
   }
 }

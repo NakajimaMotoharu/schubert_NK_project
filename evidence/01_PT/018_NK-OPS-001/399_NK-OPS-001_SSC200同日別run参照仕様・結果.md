@@ -1,5 +1,7 @@
 # 399 SSC200 同日別run成功参照
 
+2026-10-06 23:35：freshPG489-v2/Production38899a05b5c2daeecfc5af8ea5ae748e29954c60 actual0/3406PT510suite/FES0/static6zero/全source・JAR・XML/hashfreezeを照合。manifest0ff7bc918d96034950ddfac65b656b55f4814c774c3efd898788bcfa70dab162、privatefreeze WorkPG379/pg489-host-v2。CleanupTerminalRepository/Entry/progressSeal全四必要counter missed0、既closed consumer/profile/inputModeも0、global coverage100はfalse（batch L3728/M608/C39/B1214 missedなど他未閉鎖を保持）。新署名候補187artifact/SQL28・BOM652a5e4a…/signed options不変更をstage actual0、current/DB/Unit不変更。次の限定migration正常は400へ分離し、親same-run/全native/正式は未受入。BUG793794のfresh全体再試験は完了、旧a52F3E1を保持する。
+
 2026-10-06 22:53：PG489 full-v1はsource a52a6274固定/実exit1、510suite/3406PTのうちbatch F3E1で拒否、前半五static0/batch static・coverage・JAR未実行。BUG793794/YKT563565を修正前起票、raw XMLはWorkPG379/pg489-refused-full-v1、公開refusal manifest e8755ecdd6ab8e74015db260853159451c6f8753fc9b4ff14722d688ebdfac56。schema inventory三fixtureを承認V028へ、Guard旧末尾仮定を独立型catalogへ修正し、PG490 limited-v1 actual0/87PT10suite/FES0/static5zero・差分前後同一を別保全。manifest83fb5b9b5515beef552f2e1a5302c6c9a19e5f1210381b144420937db366d6ed。次は新source固定fresh全六PG489-v2、旧v1/別source/限定成功を合格へ加算0。
 
 関連RD OPS009/OPS011/UI251§11、SS331§8.3/341343、SSC200/BUG788/YKT562。現在範囲は詳細設計具体化・原本readonly lookup実装と独立試験、全接続/実VM/正式は未完了。製造/PTを同群で進める。参照型・wire・DB-portを全体でつなぐまで新native/start/配備を発行しない。

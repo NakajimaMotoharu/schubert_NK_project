@@ -1,5 +1,5 @@
 """SSC202 fixed pending migration witness; no start or runtime authority. Raw values stay private."""
-import ast, hashlib, json, os, pathlib, re, stat, subprocess, sys, time
+import ast, hashlib, json, os, pathlib, re, stat, subprocess, sys, time, grp
 import dbus
 
 SAVE = pathlib.Path('/var/lib/pgpt-s1-preservation/pg490-schema028')
@@ -12,6 +12,12 @@ phase = 'PREFLIGHT'
 def require(value):
     if not value:
         raise ValueError('fixed migration witness refused')
+
+def profile_security(values, xattrs, group):
+    return (isinstance(values, list) and len(values) == 9 and isinstance(group, int)
+            and values[2:6] == [0, group, stat.S_IFREG | 0o640, 1]
+            and 0 < values[6] <= 4096 and 'system.posix_acl_access' not in xattrs
+            and 'system.posix_acl_default' not in xattrs)
 
 def profile_only(old, new, expected):
     if set(old) != set(new):
@@ -51,7 +57,10 @@ def execute():
     class Binding(ast.NodeTransformer):
         def visit_Constant(self, n):
             if isinstance(n.value, str) and "a.application_name='PG480-fixed-recovery'" in n.value:
-                return ast.copy_location(ast.Constant(n.value.replace('PG480-fixed-recovery', 'PG490-fixed-migration')), n)
+                text = n.value.replace('PG480-fixed-recovery', 'PG490-fixed-migration')
+                text = text.replace("'schubert_api','schubert_web','schubert_inspector'", "'schubert_app','schubert_web_session','schubert_inbox_inspector','schubert_backup'")
+                text = text.replace("l.objsubid=1 and l.granted", "l.objsubid=1 and l.mode='ExclusiveLock' and l.granted")
+                return ast.copy_location(ast.Constant(text), n)
             return n
     code = Binding().visit(ast.Module(body=constants + definitions, type_ignores=[]))
     ast.fix_missing_locations(code); exec(compile(code, '<pinned immutable primitives>', 'exec'), globals())
@@ -92,11 +101,18 @@ def execute():
         manager.RefUnit(unit); refs.append(unit)
     def snapshot(db_required=True):
         require(owner() == held and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip() == BOOT)
+        profile = pathlib.Path(PROFILE)
+        profile_before = metadata(profile)
+        require(profile_security(profile_before, os.listxattr(profile), grp.getgrnam('schubert').gr_gid))
+        parent_before = metadata(profile.parent)
+        require(parent_before[2] == 0 and stat.S_ISDIR(parent_before[4]) and parent_before[4] & 0o022 == 0
+                and 'system.posix_acl_access' not in os.listxattr(profile.parent)
+                and 'system.posix_acl_default' not in os.listxattr(profile.parent))
         if db_required:
             locked_database()
         else:
             require(command(['/usr/bin/sudo','-n','-u','postgres','/usr/bin/psql','-X','-qAt','-d','schubert_nk','-c',
-                             "select count(*) from pg_stat_activity where datname='schubert_nk' and usename in ('schubert_batch','schubert_api','schubert_web','schubert_inspector'); select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted;"],4096).splitlines() == [b'0',b'0'])
+                             "select count(*) from pg_stat_activity where datname='schubert_nk' and usename in ('schubert_batch','schubert_app','schubert_web_session','schubert_inbox_inspector','schubert_backup'); select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted;"],4096).splitlines() == [b'0',b'0'])
         units = {u: show(u,FIELDS) for u in UNITS}
         for u,v in units.items():
             require(v['Id'] == u and v['LoadState'] == 'loaded' and v['MainPID'] == v['ControlPID'] == '0' and not v['Job'])
@@ -123,6 +139,8 @@ def execute():
         trees = {name: tree(pathlib.Path(name)) for name in previous['trees']}
         conf = {u: show(u,configuration_fields()) for u in UNITS}
         require(str(pathlib.Path('/opt/schubert-nk/current').readlink()) == OLD)
+        require(profile_before == metadata(profile) and parent_before == metadata(profile.parent)
+                and profile_security(metadata(profile), os.listxattr(profile), grp.getgrnam('schubert').gr_gid))
         return {'units': units, 'trees': trees, 'configuration': conf, 'rows': rows}
     before = snapshot(); require(before == snapshot() and before['trees'] == previous['trees'])
     def save(name, value):
