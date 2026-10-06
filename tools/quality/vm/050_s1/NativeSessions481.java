@@ -1,7 +1,7 @@
 import java.io.File;
 import org.jacoco.core.tools.ExecFileLoader;
 
-/** BREC198010-N01: nine fixed same-source/current-invocation native streams. */
+/** BREC198010-V06: nine fixed same-source/current-invocation native streams. */
 public final class NativeSessions481 {
   public static void main(String[] args)throws Exception {
     if(args.length!=12)throw new IllegalArgumentException("nine fresh files and three time bounds required");

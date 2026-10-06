@@ -12,5 +12,12 @@ Program NK-OPS-001、operator Pg481PendingDeployment/original/publish/References
 |BREC198010-R01|別新所有でRoot runtime一回用resume固定引数準備|独立signedbase＋既PG477native literalへ --resume 49437eda-1681-43a9-883a-424eb55a6166だけ。Unit/hardening不変更・before-image・一回reload・全実効束縛・全scope正常。旧/未知dropin/agent/UUID/余剰拒否|
 |BREC198010-R02|新durableguard/observer・通常same-run start一回|Production beginBackupのみ旧二件ABANDONED化/新二件と旧request私有置換、同activation可能・旧cutoff保持、真正Backup.CONFIG/manifest/Inspector/親RootordinaryAPI保持Web/Caddy/DONE、独立旧cutofforacle/旧part非eligible保持・全保全、元30min/逆順ownedTERM|
 |BREC198010-R03|真正全終端後の別M/A/DB/Refでruntime退役|型付きexactsinglefile/sync/reload/readback、既署名base/PG477nativeのnoargs復帰、旧履歴/archive不変|
+|BREC198010-V01|CompletedReadback/main、親DONEとDB後条件読取|署名PG479/bab、same ISSUED/run494/cutoff、原本SUCCESS、旧411行全17列・旧2ABANDONED・新10SUCCESS/各count/failure0/要求三空、全新scope通常帰還|
+|BREC198010-V02|独立全24 cleanup survivor照合、UI起動前|旧cutoff/独立decrypt goldenからAuth1/WebHTTP1381/Inbox7だけ削除、他全column/旧411不変、新生成rowの正常性はV01で別判定|
+|BREC198010-V03|shared Current実CHR-A01|HTTP200/DOM/headers全値一致、承認DIF001/QA045のタイトルだけ、Current baseline不変|
+|BREC198010-V04|shared Current実L01観測|20公開args負値/実Login・Log投影、rawは私有・QA051比較待ち、watermarkのみをcorrelation又はPASSとしない|
+|BREC198010-V05|現ordinary peer同世代8owned TERM|真正PID1 parent start-job done、Caddy→Web→API→Cleanup→Inspector→Expiry→Backup→Broker、全kernel空・全423batch17列/postL01全business/原本Backup/startup不変、全scope通常。API/Web143は普通停止data・Unit通常成功ではない|
+|BREC198010-V06|同babの新9nativeとfrozen六module計数|正規実実行時刻内の単一session、Root/ordinary四roleとInspector ID一致、NoMatch0、B/L/M/C不足は実数で保持・旧source流用/除外/未達合格0|
+|BREC198010-V07|新Backup四artifact・旧物/SQL独立後条件|旧22file/dir実体保全＋新bundle5要素だけ、三実hash/config tar独立8member/input byte-mode一致/age暗号header、DB SUCCESS1と2/attempt2/byte/manifest step一致・旧ABANDONED/part不変。pg_restore list成功は復元IT/ST合格ではない|
 
 環境=host/隔離VM JDK25.0.4/Python3.14/guestboot e07aa。command bash tools/quality/vm/050_s1/pg481_pending_compile_v1.sh（v1compile未実装accessor誤記actual1→v2）、python3 -B tools/quality/vm/050_s1/pg481_pending_native_v1.py。ログ/DB/rawheap/credentialはworkPG379/Root私有だけ、Gitは集計/hashのみ。Coverage：工具検査をProductionPTへ算入0、ProductionPG479の3381/508/static6zeroは既結果保持、同source真正native/global100/CHR正式は未達。Failed/skipped/notrunを成功へ加算しない。BUG771/YKT551・BUG544/YKT388継続、結果387へ。

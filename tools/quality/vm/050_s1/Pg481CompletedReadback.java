@@ -6,7 +6,7 @@ import java.nio.file.*;
 import java.time.*;
 import java.util.*;
 
-/** BREC198010-R02: fresh fixed DONE readback; no recovery, permit or start. */
+/** BREC198010-V01: fresh fixed DONE readback; no recovery, permit or start. */
 public final class Pg481CompletedReadback {
   static String phase="PREFLIGHT";
   static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg481-completed-readback");

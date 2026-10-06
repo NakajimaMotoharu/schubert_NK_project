@@ -1,5 +1,11 @@
 # SSC198 pending配備・同run再開結果
 
+18:32追補：R03 runtime退役=session27928 actual0 18:25:14～20、新別M/A/実DB71419602/10持続Ref/全10full18/kernel・全24DB/private全tree/Fragment/dropin同byte下で、fixed1fileだけOwnedTransferDirectory.unlinkEntry/sync→一回reload/noargs→各後条件・DB/Refchild/A/M正常。Rootpg481-runtime-retirement complete/before/after、旧archive/原本/Backup/Transfer/native/全17credential不変更。BUG781独立fixturev1～3actual1（括弧/構文判定）を保存、v4actual0/28検査/Werror0、本native前のwrapper拒否はVM実行NOT_RUN。Production source同bab。
+
+V07独立Backup後条件actual0、旧22物全byte/inode/mode＋新bundle5要素だけ、三SHA/SS343固定8config tar全byte/mode一致・age暗号header・DB SUCCESS pair1/2 attempt2/byte8752947/61640・元ABANDONED/旧part不変、manifestSHAe115ee0ffa254a3ad82048e204ae4689e49a97cd7177e6686c66c26ec13a8e80、私有fullpostSHA593cb80f962741f9fee2c5de1dadc1f2a766192b017d45234bb6a9561573b5ec。pg_restore listは可読構造だけで実restore/ITSTではない、credential復号未実施。B771の真正archive・同sourcefresh nativeを再試験済み。
+
+BUG782/YKT559 trace訂正：下位検証V01 completed、V02 cleanup全24、V03A01、V04L01観測（比較未合格）、V05ownedTERM、V06九native、V07Backupへ分解し386に追加。前18:20文のR03/N01下位引用及び元native manifest旧testIdsは誤label、元SHA7362…76ecを不変保持したtrace-correction.jsonを正とする。R03は本段のruntime実0だけへ束縛、15仕様ID一意/同source/元manifest不変検査actual0。collector歴史payload/9rawstream/source/counterは改変しない。全global100/正式/ITST/BUG544/QA051は別未受入。
+
 18:20追補（BREC198010-R02/R03/N01）：Production同bab/PG479 full3381PT508suite/FES0/static6zero。親INVd756e9246bcb4000b54240b5e8e0b438/job266536/start230596493687→PID1 UnitSucceeded232130331922/start-job done232130332185（元30min内・oneshot/SuccessExitStatus空）。GC表示を実exit0代用せずRootstop/parent.private.jsonlの実記録で確認。readback76343actual0/Rootpg481-completed-readbackは同ISSUED/run494/cutoff・原本SUCCESS・旧411全17列＋旧2ABANDONED＋新10SUCCESS/failure0/request三namespace空、全新scope正常。独立fullrow45検査＋全24survivor実0/hash ef116b…e71、Auth1/WebHTTP1381/Inbox7。
 
 新Inspector7a680e5bfa894529999fca22bc76390b正常0/21361byte freshnative、Expiry正常0、Root普通API/Web同INV/info/schema027/socket/CaddyTLS200、CHR-A01sharedCurrent actual0/PASS/承認DIF001 QA045のみ。L01sharedCurrent20独立/Werror0→観測36482actual0、QA051比較保留・watermarkはevent correlationではない/outage再送未試験・合格加算0。raw DOM/account/log/DB/dump/credentialsはwork/Root私有のみ。
