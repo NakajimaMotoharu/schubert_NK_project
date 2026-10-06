@@ -363,7 +363,7 @@ final class MorningBackupArtifacts {
                 : name.equals("web.env")
                     ? identities.resolve(ServiceConfigFiles.Service.WEB).gid()
                     : identities.configurationGroup();
-    int mode = credential || name.endsWith(".env") ? 0100600 : 0100640;
+    int mode = inputMode(name, credential);
     return directory.atExistingEntryHandle(
         name,
         held -> {
@@ -373,6 +373,14 @@ final class MorningBackupArtifacts {
           check();
           return result;
         });
+  }
+
+  /** SS343 SSC197 / BUG771: static Inspector env is not an API/Web private env. */
+  static int inputMode(String name, boolean credential) {
+    Objects.requireNonNull(name, "fixed backup input name");
+    if (!(credential ? CREDENTIALS : CONFIG).contains(name))
+      throw new IllegalArgumentException("backup input name outside fixed catalog");
+    return credential || name.equals("api.env") || name.equals("web.env") ? 0100600 : 0100640;
   }
 
   private void write(OwnedTransferDirectory pending, String name, Writer writer)
