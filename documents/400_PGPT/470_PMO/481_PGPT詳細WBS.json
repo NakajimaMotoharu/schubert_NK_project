@@ -1,6 +1,9 @@
 {
   "schemaVersion": 1,
   "revision": "WBS-v1-20261007",
+  "costRevision": "WBS-cost-v1-20261007",
+  "costBudgetRef": "484_WBSコスト枠・細分化.json",
+  "costUnit": "weekly_quota_percentage_points",
   "scope": "PG/PT全体。IT/ST本体と期限計画を含めない。",
   "scopeCompleteness": "20Program/24CHRを網羅。RD/UI/SS要求・全method/DDL/configの完全性監査はWBS-G13として未完を明示する。",
   "unit": "契約/成果物の作業項目。1項目=1人日/同一token工数ではない。",
@@ -150,6 +153,18 @@
   "tasks": [
     {
       "id": "WBS-P001-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-001",
       "program": "NK-PRO-001",
       "relatedPrograms": [],
@@ -173,6 +188,18 @@
     },
     {
       "id": "WBS-P001-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-001",
       "program": "NK-PRO-001",
       "relatedPrograms": [],
@@ -196,6 +223,18 @@
     },
     {
       "id": "WBS-P001-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-001",
       "program": "NK-PRO-001",
       "relatedPrograms": [],
@@ -219,6 +258,18 @@
     },
     {
       "id": "WBS-P002-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-002",
       "program": "NK-PRO-002",
       "relatedPrograms": [],
@@ -245,6 +296,18 @@
     },
     {
       "id": "WBS-P002-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-002",
       "program": "NK-PRO-002",
       "relatedPrograms": [],
@@ -271,6 +334,18 @@
     },
     {
       "id": "WBS-P002-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-002",
       "program": "NK-PRO-002",
       "relatedPrograms": [],
@@ -297,6 +372,18 @@
     },
     {
       "id": "WBS-P002-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-002",
       "program": "NK-PRO-002",
       "relatedPrograms": [],
@@ -323,6 +410,18 @@
     },
     {
       "id": "WBS-P003-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -348,6 +447,18 @@
     },
     {
       "id": "WBS-P003-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -373,6 +484,18 @@
     },
     {
       "id": "WBS-P003-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -398,6 +521,19 @@
     },
     {
       "id": "WBS-P004-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1.5,
+        "base": 4,
+        "high": 9,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "測定経路/既存artifactを照合し、欠落実装/独立試験のみ追加。entry無しを未実装と決めつけない。CHR各case実行と全回帰は別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P004-01"
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "relatedPrograms": [],
@@ -424,6 +560,18 @@
     },
     {
       "id": "WBS-P004-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "relatedPrograms": [],
@@ -450,6 +598,18 @@
     },
     {
       "id": "WBS-P004-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "relatedPrograms": [],
@@ -476,6 +636,18 @@
     },
     {
       "id": "WBS-P004-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "relatedPrograms": [],
@@ -502,6 +674,18 @@
     },
     {
       "id": "WBS-P004-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "relatedPrograms": [],
@@ -528,6 +712,18 @@
     },
     {
       "id": "WBS-P005-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-001",
       "program": "NK-MSG-001",
       "relatedPrograms": [],
@@ -554,6 +750,18 @@
     },
     {
       "id": "WBS-P005-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-001",
       "program": "NK-MSG-001",
       "relatedPrograms": [],
@@ -580,6 +788,18 @@
     },
     {
       "id": "WBS-P005-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-001",
       "program": "NK-MSG-001",
       "relatedPrograms": [],
@@ -606,6 +826,18 @@
     },
     {
       "id": "WBS-P005-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-001",
       "program": "NK-MSG-001",
       "relatedPrograms": [],
@@ -632,6 +864,18 @@
     },
     {
       "id": "WBS-P006-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-002",
       "program": "NK-MSG-002",
       "relatedPrograms": [],
@@ -658,6 +902,18 @@
     },
     {
       "id": "WBS-P006-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-002",
       "program": "NK-MSG-002",
       "relatedPrograms": [],
@@ -684,6 +940,18 @@
     },
     {
       "id": "WBS-P006-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-002",
       "program": "NK-MSG-002",
       "relatedPrograms": [],
@@ -710,6 +978,18 @@
     },
     {
       "id": "WBS-P006-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-002",
       "program": "NK-MSG-002",
       "relatedPrograms": [],
@@ -736,6 +1016,18 @@
     },
     {
       "id": "WBS-P006-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MSG-002",
       "program": "NK-MSG-002",
       "relatedPrograms": [],
@@ -762,6 +1054,18 @@
     },
     {
       "id": "WBS-P007-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -788,6 +1092,18 @@
     },
     {
       "id": "WBS-P007-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -814,6 +1130,18 @@
     },
     {
       "id": "WBS-P007-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -840,6 +1168,18 @@
     },
     {
       "id": "WBS-P007-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -866,6 +1206,18 @@
     },
     {
       "id": "WBS-P007-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -892,6 +1244,18 @@
     },
     {
       "id": "WBS-P007-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-AUT-001",
       "program": "NK-AUT-001",
       "relatedPrograms": [],
@@ -918,6 +1282,18 @@
     },
     {
       "id": "WBS-P008-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -944,6 +1320,18 @@
     },
     {
       "id": "WBS-P008-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -970,6 +1358,18 @@
     },
     {
       "id": "WBS-P008-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -996,6 +1396,18 @@
     },
     {
       "id": "WBS-P008-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -1022,6 +1434,18 @@
     },
     {
       "id": "WBS-P008-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -1048,6 +1472,18 @@
     },
     {
       "id": "WBS-P008-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-SCN-001",
       "program": "NK-SCN-001",
       "relatedPrograms": [],
@@ -1074,6 +1510,18 @@
     },
     {
       "id": "WBS-P009-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MED-001",
       "program": "NK-MED-001",
       "relatedPrograms": [],
@@ -1100,6 +1548,18 @@
     },
     {
       "id": "WBS-P009-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MED-001",
       "program": "NK-MED-001",
       "relatedPrograms": [],
@@ -1126,6 +1586,18 @@
     },
     {
       "id": "WBS-P009-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MED-001",
       "program": "NK-MED-001",
       "relatedPrograms": [],
@@ -1152,6 +1624,18 @@
     },
     {
       "id": "WBS-P009-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MED-001",
       "program": "NK-MED-001",
       "relatedPrograms": [],
@@ -1178,6 +1662,18 @@
     },
     {
       "id": "WBS-P009-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MED-001",
       "program": "NK-MED-001",
       "relatedPrograms": [],
@@ -1204,6 +1700,18 @@
     },
     {
       "id": "WBS-P010-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ADM-001",
       "program": "NK-ADM-001",
       "relatedPrograms": [],
@@ -1229,6 +1737,18 @@
     },
     {
       "id": "WBS-P010-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ADM-001",
       "program": "NK-ADM-001",
       "relatedPrograms": [],
@@ -1254,6 +1774,18 @@
     },
     {
       "id": "WBS-P010-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ADM-001",
       "program": "NK-ADM-001",
       "relatedPrograms": [],
@@ -1279,6 +1811,18 @@
     },
     {
       "id": "WBS-P010-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ADM-001",
       "program": "NK-ADM-001",
       "relatedPrograms": [],
@@ -1304,6 +1848,18 @@
     },
     {
       "id": "WBS-P010-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ADM-001",
       "program": "NK-ADM-001",
       "relatedPrograms": [],
@@ -1329,6 +1885,18 @@
     },
     {
       "id": "WBS-P011-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QST-001",
       "program": "NK-QST-001",
       "relatedPrograms": [],
@@ -1355,6 +1923,18 @@
     },
     {
       "id": "WBS-P011-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QST-001",
       "program": "NK-QST-001",
       "relatedPrograms": [],
@@ -1381,6 +1961,18 @@
     },
     {
       "id": "WBS-P011-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QST-001",
       "program": "NK-QST-001",
       "relatedPrograms": [],
@@ -1407,6 +1999,18 @@
     },
     {
       "id": "WBS-P011-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QST-001",
       "program": "NK-QST-001",
       "relatedPrograms": [],
@@ -1433,6 +2037,18 @@
     },
     {
       "id": "WBS-P012-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ASY-001",
       "program": "NK-ASY-001",
       "relatedPrograms": [],
@@ -1459,6 +2075,18 @@
     },
     {
       "id": "WBS-P012-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ASY-001",
       "program": "NK-ASY-001",
       "relatedPrograms": [],
@@ -1485,6 +2113,18 @@
     },
     {
       "id": "WBS-P012-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-ASY-001",
       "program": "NK-ASY-001",
       "relatedPrograms": [
@@ -1513,6 +2153,18 @@
     },
     {
       "id": "WBS-P013-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-NTF-001",
       "program": "NK-NTF-001",
       "relatedPrograms": [],
@@ -1538,6 +2190,18 @@
     },
     {
       "id": "WBS-P013-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-NTF-001",
       "program": "NK-NTF-001",
       "relatedPrograms": [],
@@ -1563,6 +2227,18 @@
     },
     {
       "id": "WBS-P014-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QRY-001",
       "program": "NK-QRY-001",
       "relatedPrograms": [],
@@ -1589,6 +2265,18 @@
     },
     {
       "id": "WBS-P014-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QRY-001",
       "program": "NK-QRY-001",
       "relatedPrograms": [],
@@ -1615,6 +2303,18 @@
     },
     {
       "id": "WBS-P014-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-QRY-001",
       "program": "NK-QRY-001",
       "relatedPrograms": [],
@@ -1641,6 +2341,18 @@
     },
     {
       "id": "WBS-P015-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1667,6 +2379,18 @@
     },
     {
       "id": "WBS-P015-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1693,6 +2417,18 @@
     },
     {
       "id": "WBS-P015-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1719,6 +2455,18 @@
     },
     {
       "id": "WBS-P015-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1745,6 +2493,18 @@
     },
     {
       "id": "WBS-P015-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1771,6 +2531,18 @@
     },
     {
       "id": "WBS-P015-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1797,6 +2569,18 @@
     },
     {
       "id": "WBS-P015-07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-001",
       "program": "NK-WEB-001",
       "relatedPrograms": [],
@@ -1823,6 +2607,18 @@
     },
     {
       "id": "WBS-P016-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1848,6 +2644,18 @@
     },
     {
       "id": "WBS-P016-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1873,6 +2681,18 @@
     },
     {
       "id": "WBS-P016-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1898,6 +2718,18 @@
     },
     {
       "id": "WBS-P016-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1923,6 +2755,18 @@
     },
     {
       "id": "WBS-P016-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1948,6 +2792,18 @@
     },
     {
       "id": "WBS-P016-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1973,6 +2829,18 @@
     },
     {
       "id": "WBS-P016-07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -1998,6 +2866,18 @@
     },
     {
       "id": "WBS-P016-08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2023,6 +2903,18 @@
     },
     {
       "id": "WBS-P016-09",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2048,6 +2940,18 @@
     },
     {
       "id": "WBS-P016-10",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2073,6 +2977,18 @@
     },
     {
       "id": "WBS-P016-11",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2098,6 +3014,18 @@
     },
     {
       "id": "WBS-P016-12",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2123,6 +3051,18 @@
     },
     {
       "id": "WBS-P016-13",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2148,6 +3088,18 @@
     },
     {
       "id": "WBS-P016-14",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2173,6 +3125,18 @@
     },
     {
       "id": "WBS-P016-15",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2198,6 +3162,18 @@
     },
     {
       "id": "WBS-P016-16",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2223,6 +3199,18 @@
     },
     {
       "id": "WBS-P016-17",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2248,6 +3236,18 @@
     },
     {
       "id": "WBS-P016-18",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2273,6 +3273,18 @@
     },
     {
       "id": "WBS-P016-19",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2298,6 +3310,18 @@
     },
     {
       "id": "WBS-P016-20",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2323,6 +3347,18 @@
     },
     {
       "id": "WBS-P016-21",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2348,6 +3384,18 @@
     },
     {
       "id": "WBS-P016-22",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2373,6 +3421,18 @@
     },
     {
       "id": "WBS-P016-23",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2398,6 +3458,18 @@
     },
     {
       "id": "WBS-P016-24",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2423,6 +3495,19 @@
     },
     {
       "id": "WBS-P016-25",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "既存JS/CSS契約確認・JS入力/DOM/branchの独立測定。Web業務HTTP/CHRの別作業を重複計上しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P016-25"
+      },
       "parent": "NK-WEB-002",
       "program": "NK-WEB-002",
       "relatedPrograms": [],
@@ -2448,6 +3533,19 @@
     },
     {
       "id": "WBS-P017-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P017-01"
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2474,6 +3572,19 @@
     },
     {
       "id": "WBS-P017-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P017-02"
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2500,6 +3611,19 @@
     },
     {
       "id": "WBS-P017-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P017-03"
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2526,6 +3650,18 @@
     },
     {
       "id": "WBS-P017-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2552,6 +3688,18 @@
     },
     {
       "id": "WBS-P017-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2578,6 +3726,18 @@
     },
     {
       "id": "WBS-P017-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2604,6 +3764,18 @@
     },
     {
       "id": "WBS-P017-07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2630,6 +3802,18 @@
     },
     {
       "id": "WBS-P017-08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2656,6 +3840,18 @@
     },
     {
       "id": "WBS-P017-09",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2682,6 +3878,18 @@
     },
     {
       "id": "WBS-P017-10",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2708,6 +3916,18 @@
     },
     {
       "id": "WBS-P017-11",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2734,6 +3954,19 @@
     },
     {
       "id": "WBS-P017-12",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P017-12"
+      },
       "parent": "NK-BAT-001",
       "program": "NK-BAT-001",
       "relatedPrograms": [],
@@ -2760,6 +3993,18 @@
     },
     {
       "id": "WBS-P018-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2786,6 +4031,18 @@
     },
     {
       "id": "WBS-P018-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2812,6 +4069,18 @@
     },
     {
       "id": "WBS-P018-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2838,6 +4107,19 @@
     },
     {
       "id": "WBS-P018-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P018-04"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2864,6 +4146,18 @@
     },
     {
       "id": "WBS-P018-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2890,6 +4184,18 @@
     },
     {
       "id": "WBS-P018-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2916,6 +4222,18 @@
     },
     {
       "id": "WBS-P018-07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2942,6 +4260,19 @@
     },
     {
       "id": "WBS-P018-08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 5,
+        "high": 11,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "同対象host公開契約の未網羅・境界・独立fixtureの追加/是正。Nの実VM操作・同型helper割当G13・全回帰実行K01は含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P018-08"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2968,6 +4299,18 @@
     },
     {
       "id": "WBS-P018-09",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -2994,6 +4337,19 @@
     },
     {
       "id": "WBS-P018-10",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1.5,
+        "base": 4,
+        "high": 9,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "測定経路/既存artifactを照合し、欠落実装/独立試験のみ追加。entry無しを未実装と決めつけない。CHR各case実行と全回帰は別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P018-10"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "relatedPrograms": [],
@@ -3020,6 +4376,19 @@
     },
     {
       "id": "WBS-P019-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1.5,
+        "base": 4,
+        "high": 9,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "測定経路/既存artifactを照合し、欠落実装/独立試験のみ追加。entry無しを未実装と決めつけない。CHR各case実行と全回帰は別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P019-01"
+      },
       "parent": "NK-MIG-001",
       "program": "NK-MIG-001",
       "relatedPrograms": [],
@@ -3046,6 +4415,18 @@
     },
     {
       "id": "WBS-P019-02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3.5,
+        "estimateBasis": "B-HOST",
+        "confidence": "LOW",
+        "costScope": "対象host未網羅の境界/例外/並行/再送を契約に従い一群で追加/是正し限定再試験。全回帰実行はK01。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-MIG-001",
       "program": "NK-MIG-001",
       "relatedPrograms": [],
@@ -3072,6 +4453,19 @@
     },
     {
       "id": "WBS-P019-03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 6,
+        "high": 14,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "PG/PTの移行・切替・切戻しartifactと隔離fixtureによる独立試験。実本番移行/IT/STは含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P019-03"
+      },
       "parent": "NK-MIG-001",
       "program": "NK-MIG-001",
       "relatedPrograms": [],
@@ -3098,6 +4492,19 @@
     },
     {
       "id": "WBS-P019-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 6,
+        "high": 14,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "PG/PTの移行・切替・切戻しartifactと隔離fixtureによる独立試験。実本番移行/IT/STは含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P019-04"
+      },
       "parent": "NK-MIG-001",
       "program": "NK-MIG-001",
       "relatedPrograms": [],
@@ -3124,6 +4531,19 @@
     },
     {
       "id": "WBS-P019-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 6,
+        "high": 14,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "PG/PTの移行・切替・切戻しartifactと隔離fixtureによる独立試験。実本番移行/IT/STは含めない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P019-05"
+      },
       "parent": "NK-MIG-001",
       "program": "NK-MIG-001",
       "relatedPrograms": [],
@@ -3150,6 +4570,19 @@
     },
     {
       "id": "WBS-P020-01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1.5,
+        "base": 4,
+        "high": 9,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "測定経路/既存artifactを照合し、欠落実装/独立試験のみ追加。entry無しを未実装と決めつけない。CHR各case実行と全回帰は別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-P020-01"
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "relatedPrograms": [],
@@ -3175,6 +4608,18 @@
     },
     {
       "id": "WBS-P003-04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -3200,6 +4645,18 @@
     },
     {
       "id": "WBS-P003-05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -3225,6 +4682,18 @@
     },
     {
       "id": "WBS-P003-06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -3250,6 +4719,18 @@
     },
     {
       "id": "WBS-P003-07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -3275,6 +4756,18 @@
     },
     {
       "id": "WBS-P003-08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.1,
+        "base": 0.35,
+        "high": 0.8,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当対象契約/oracle/TestID/traceの個別監査・限定追試。共通collector/gate監査はG、native実接続はN、全回帰実行はK01へ別計上。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-PRO-003",
       "program": "NK-PRO-003",
       "relatedPrograms": [],
@@ -3300,6 +4793,18 @@
     },
     {
       "id": "WBS-F01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.05,
+        "base": 0.1,
+        "high": 0.3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "確認済み基盤を再構築せず、当sourceとの整合差分のみ照合。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FOUNDATION",
@@ -3325,6 +4830,18 @@
     },
     {
       "id": "WBS-F02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.05,
+        "base": 0.1,
+        "high": 0.3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "確認済み基盤を再構築せず、当sourceとの整合差分のみ照合。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FOUNDATION",
@@ -3349,6 +4866,18 @@
     },
     {
       "id": "WBS-F03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.05,
+        "base": 0.1,
+        "high": 0.3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "確認済み基盤を再構築せず、当sourceとの整合差分のみ照合。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FOUNDATION",
@@ -3373,6 +4902,18 @@
     },
     {
       "id": "WBS-F04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.05,
+        "base": 0.1,
+        "high": 0.3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "確認済み基盤を再構築せず、当sourceとの整合差分のみ照合。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FOUNDATION",
@@ -3398,6 +4939,18 @@
     },
     {
       "id": "WBS-C01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3422,6 +4975,18 @@
     },
     {
       "id": "WBS-C02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3446,6 +5011,18 @@
     },
     {
       "id": "WBS-C03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3470,6 +5047,18 @@
     },
     {
       "id": "WBS-C04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3494,6 +5083,18 @@
     },
     {
       "id": "WBS-C05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3518,6 +5119,18 @@
     },
     {
       "id": "WBS-C06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3542,6 +5155,18 @@
     },
     {
       "id": "WBS-C07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3566,6 +5191,18 @@
     },
     {
       "id": "WBS-C08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.6,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "当設定のSS/文書/配布内容差分監査。Nの実Unit/TLS/権限操作とProduction追加を除く。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "CONFIG",
@@ -3590,6 +5227,18 @@
     },
     {
       "id": "WBS-N01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.3,
+        "base": 1,
+        "high": 2,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3615,6 +5264,18 @@
     },
     {
       "id": "WBS-N02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 3,
+        "high": 7,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3640,6 +5301,18 @@
     },
     {
       "id": "WBS-N03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3665,6 +5338,18 @@
     },
     {
       "id": "WBS-N04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3690,6 +5375,18 @@
     },
     {
       "id": "WBS-N05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3715,6 +5412,18 @@
     },
     {
       "id": "WBS-N06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 2,
+        "high": 5,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3740,6 +5449,18 @@
     },
     {
       "id": "WBS-N07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 2,
+        "high": 5,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3765,6 +5486,18 @@
     },
     {
       "id": "WBS-N08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 2,
+        "high": 5,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3790,6 +5523,18 @@
     },
     {
       "id": "WBS-N09",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 3,
+        "high": 7,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3815,6 +5560,18 @@
     },
     {
       "id": "WBS-N10",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 3,
+        "high": 7,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3840,6 +5597,18 @@
     },
     {
       "id": "WBS-N11",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 2,
+        "high": 5,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3863,6 +5632,18 @@
     },
     {
       "id": "WBS-N12",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0,
+        "base": 0,
+        "high": 0,
+        "estimateBasis": "B-VERIFIED",
+        "confidence": "VERIFIED_LIMITED_SCOPE",
+        "costScope": "a2/PG498限定受入済の追加残作業0。同じsourceの再確認を再加点しない。source変更時の再認証はK01変更ログへ起票。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3886,6 +5667,18 @@
     },
     {
       "id": "WBS-N13",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0,
+        "base": 0,
+        "high": 0,
+        "estimateBasis": "B-VERIFIED",
+        "confidence": "VERIFIED_LIMITED_SCOPE",
+        "costScope": "a2/PG498限定受入済の追加残作業0。同じsourceの再確認を再加点しない。source変更時の再認証はK01変更ログへ起票。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3911,6 +5704,18 @@
     },
     {
       "id": "WBS-N14",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3937,6 +5742,19 @@
     },
     {
       "id": "WBS-N15",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 5,
+        "base": 12,
+        "high": 25,
+        "estimateBasis": "B-NATIVE",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-N15"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3962,6 +5780,19 @@
     },
     {
       "id": "WBS-N16",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 3,
+        "base": 8,
+        "high": 18,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-N16"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -3985,6 +5816,19 @@
     },
     {
       "id": "WBS-N17",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 4,
+        "high": 10,
+        "estimateBasis": "B-OWNERSHIP",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-N17"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "VM_CONNECTION",
@@ -4008,6 +5852,18 @@
     },
     {
       "id": "WBS-N18",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.3,
+        "base": 1,
+        "high": 3,
+        "estimateBasis": "B-VM",
+        "confidence": "LOW",
+        "costScope": "実VMの当対象接続/fixture/観測/正常・拒否・資源後条件・証跡採取。Production修正は該当P、共通全回帰はK01。N15は採取経路と未採取経路のfixture、N16は障害注入matrix、N17は旧原因/証跡の原因監査を担当し相互の再実行は一度だけ。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-DAT-001",
       "program": "NK-DAT-001",
       "kind": "VM_CONNECTION",
@@ -4032,6 +5888,18 @@
     },
     {
       "id": "WBS-CHR-A01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.2,
+        "base": 0.5,
+        "high": 1.5,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4057,6 +5925,18 @@
     },
     {
       "id": "WBS-CHR-A02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4083,6 +5963,18 @@
     },
     {
       "id": "WBS-CHR-A03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4109,6 +6001,18 @@
     },
     {
       "id": "WBS-CHR-U01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4135,6 +6039,18 @@
     },
     {
       "id": "WBS-CHR-U02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4161,6 +6077,18 @@
     },
     {
       "id": "WBS-CHR-S01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4187,6 +6115,18 @@
     },
     {
       "id": "WBS-CHR-S02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4213,6 +6153,18 @@
     },
     {
       "id": "WBS-CHR-S03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4239,6 +6191,18 @@
     },
     {
       "id": "WBS-CHR-S04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4265,6 +6229,18 @@
     },
     {
       "id": "WBS-CHR-S05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4291,6 +6267,18 @@
     },
     {
       "id": "WBS-CHR-S06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4317,6 +6305,18 @@
     },
     {
       "id": "WBS-CHR-S07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4343,6 +6343,18 @@
     },
     {
       "id": "WBS-CHR-S08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4369,6 +6381,18 @@
     },
     {
       "id": "WBS-CHR-M01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4395,6 +6419,18 @@
     },
     {
       "id": "WBS-CHR-M02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4421,6 +6457,18 @@
     },
     {
       "id": "WBS-CHR-M03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4447,6 +6495,18 @@
     },
     {
       "id": "WBS-CHR-M04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4473,6 +6533,18 @@
     },
     {
       "id": "WBS-CHR-M05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4499,6 +6571,18 @@
     },
     {
       "id": "WBS-CHR-M06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4525,6 +6609,18 @@
     },
     {
       "id": "WBS-CHR-M07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4551,6 +6647,18 @@
     },
     {
       "id": "WBS-CHR-L01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 3,
+        "high": 7,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4577,6 +6685,18 @@
     },
     {
       "id": "WBS-CHR-E01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4603,6 +6723,18 @@
     },
     {
       "id": "WBS-CHR-N01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4629,6 +6761,18 @@
     },
     {
       "id": "WBS-CHR-O01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.25,
+        "base": 0.75,
+        "high": 1.8,
+        "estimateBasis": "B-CHR",
+        "confidence": "LOW",
+        "costScope": "各caseの実NK fixture/独立比較/承認DIF/manifest・限定是正照合。共通harness製造はP020、実起動はN、全CHR横断判定はG06。L01はQA051回答後の承認済み範囲のみ、待機コスト0・業務仕様の承認を仮定しない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-CHR-001",
       "program": "NK-CHR-001",
       "kind": "CHR",
@@ -4655,6 +6799,18 @@
     },
     {
       "id": "WBS-G01",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 2,
+        "high": 5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4678,6 +6834,18 @@
     },
     {
       "id": "WBS-G02",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.3,
+        "base": 1,
+        "high": 3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4701,6 +6869,19 @@
     },
     {
       "id": "WBS-G03",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 2,
+        "base": 6,
+        "high": 12,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-G03"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4724,6 +6905,18 @@
     },
     {
       "id": "WBS-G04",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 1,
+        "base": 3,
+        "high": 7,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4747,6 +6940,18 @@
     },
     {
       "id": "WBS-G05",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4770,6 +6975,18 @@
     },
     {
       "id": "WBS-G06",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.3,
+        "base": 1,
+        "high": 3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4793,6 +7010,18 @@
     },
     {
       "id": "WBS-G07",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.2,
+        "base": 0.5,
+        "high": 1.5,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4816,6 +7045,18 @@
     },
     {
       "id": "WBS-G08",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4839,6 +7080,18 @@
     },
     {
       "id": "WBS-G09",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4862,6 +7115,18 @@
     },
     {
       "id": "WBS-G10",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4885,6 +7150,18 @@
     },
     {
       "id": "WBS-G11",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 3,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4908,6 +7185,18 @@
     },
     {
       "id": "WBS-G12",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 0.5,
+        "base": 1.5,
+        "high": 4,
+        "estimateBasis": "B-AUDIT",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": true
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
@@ -4931,6 +7220,19 @@
     },
     {
       "id": "WBS-G13",
+      "remainingCost": {
+        "unit": "weekly_quota_percentage_points",
+        "low": 3,
+        "base": 8,
+        "high": 18,
+        "estimateBasis": "B-UNKNOWN",
+        "confidence": "LOW",
+        "costScope": "全scopeの当gate横断照合/差分整理と最終判定。個別P監査、N実試験、CHR実行、全回帰実行K01を再計上しない。不足発見は対象P/N/CHRへ紐付け予算移管/版更新、当gateで隠れた製造を行わない。",
+        "actualSpentPp": null,
+        "actualAttribution": "UNMEASURED_PER_WBS",
+        "countsInTotal": false,
+        "subdivisionRef": "484_WBSコスト枠・細分化.json#WBS-G13"
+      },
       "parent": "NK-OPS-001",
       "program": "NK-OPS-001",
       "kind": "FINAL_GATE",
