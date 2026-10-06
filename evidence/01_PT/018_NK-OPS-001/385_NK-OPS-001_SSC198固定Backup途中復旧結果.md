@@ -1,5 +1,7 @@
 # SSC198 固定Backup途中復旧結果（暫定）
 
+2026-10-06 16:38追補：pg480-backup-compile-v3 actual0、javac25.0.4 Xlint:all/Werror零、独立Java14＋Python44assertion。前v1は新testの±1nanoが既microsecond constructor契約で拒否されNOT_PASS、新fixture±1000nano境界へ修正しv2/v3各actual0（Production変更0）。型付き89とは別工具判定でProductionPTに加算しない。署名oldPG477/newPG479・全signed SQL/config/Unit byte同一、固定完全pending、PID1実Backup start253068/stop253215 done、全10metadata/kernel・config hardening・24DB/原本Backup/Transfer/startup/native原値を新M/A/advisory/持続10Ref下で認証するnative工具を実装。実VM退役/通常scope帰還はまだ未実行。
+
 仕様384/SSC198/BUG771/YKT551、2026-10-06、branchdev-foundation、Production固定bab704707b8fd7e0dc7581c4489f0892236efe73・工具WIP保存commit後記。Root operator工具をProduction jarへ混入0。
 
 BREC198001～008: 初回v1/Werror0/61assertions/actual0、unlink/sync/再隔離syncと全public/internal null境界を追加したv2/Werror0/89assertions/actual0。実保持FD＋syntheticRootmetadata＋独立public literal、phase/primary-identity/secondary/self suppression/再隔離/未知/借用rootと別request保全。fakesで実VM・全scope閉鎖を成功扱い0、ProductionPT0。compile/oracle旧v1/v2はWorkPG379に別保存。
