@@ -1,7 +1,7 @@
 """SSC196: long-lived metadata-only sender under the actual Java M/A owner.
 No start/stop/permit/DDL; unknown keeps this sender and the parent owner isolated.
 """
-import os,pathlib,subprocess,json,stat,sys,time,hashlib,pwd
+import os,pathlib,subprocess,json,stat,sys,time,hashlib,pwd,re
 import dbus
 os.umask(0o077)
 BOOT='e07aa706-1acd-4e65-b309-d7f330f79d54'
@@ -103,6 +103,45 @@ def retire(unit):
   q=p.parent/'pg477-native-coverage.conf';fd=os.open(q,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,stat.S_IMODE(s.st_mode))
   with os.fdopen(fd,'wb') as f:os.fchown(f.fileno(),s.st_uid,s.st_gid);os.fchmod(f.fileno(),stat.S_IMODE(s.st_mode));f.write(next_data);f.flush();os.fsync(f.fileno())
   sync(q.parent);require(material(q)[0]==next_data)
+def exec_record(value):
+ if not isinstance(value,str) or len(value)>65536:return None
+ pattern=r"\{ path=([^ ;\r\n]+) ; argv\[\]=([^\r\n]*?) ; ignore_errors=(yes|no) ; start_time=\[([^\]\r\n]*)\] ; stop_time=\[([^\]\r\n]*)\] ; pid=([0-9]+) ; code=([^ ;\r\n]+) ; status=([^ ;\r\n]+) \}"
+ found=re.fullmatch(pattern,value)
+ if not found:return None
+ parsed=found.groups()
+ if not parsed[0].startswith('/') or any(x in parsed[1] for x in [' ; ignore_errors=',' ; start_time=',' ; stop_time=',' ; pid=',' ; code=',' ; status=']):return None
+ return parsed
+def after_exec(value):
+ parsed=exec_record(value)
+ return parsed is not None and parsed[3:]==('n/a','n/a','0','(null)','0/0')
+def same_declaration(before,after):
+ old=exec_record(before);new=exec_record(after)
+ return old is not None and new is not None and old[:3]==new[:3] and after_exec(after)
+def signed_declaration(unit,before,after):
+ if unit not in ('caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service','schubert-nk-morning-controller.service','schubert-nk-bootstrap-admin.service'):return False
+ old=exec_record(before);new=exec_record(after)
+ if old is None or new is None or not after_exec(after):return False
+ path,argv,ignore=old[:3];expected=(path,argv,ignore)
+ if unit=='schubert-nk-morning-controller.service':
+  tail=' --resume 31100027-2222-4333-8444-555555555555'
+  if not argv.endswith(tail) or argv.count(tail)!=1:return False
+  expected=(path,argv[:-len(tail)],ignore)
+ elif unit=='schubert-nk-inbox-inspector.service':
+  prior='/opt/pgpt-tools-pg390/schubert-nk-inbox-inspector'
+  if (path,argv,ignore)!=(prior,prior,'no'):return False
+  target='/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector';expected=(target,target,'no')
+ elif unit=='schubert-nk-bootstrap-admin.service':
+  prefix='/usr/bin/java --enable-native-access=ALL-UNNAMED'
+  if path!='/usr/bin/java' or not argv.startswith(prefix+' ') or '-javaagent:' in argv:return False
+  agent=' -javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar=output=none,append=false,dumponexit=false,sessionid=BOOTSTRAP-${INVOCATION_ID}-ordinary'
+  expected=(path,prefix+agent+argv[len(prefix):],ignore)
+ return new[:3]==expected
+def effective_rw(unit,before,after):
+ if not isinstance(before,str) or not isinstance(after,str):return False
+ if unit=='schubert-nk-morning-controller.service':return before==after
+ if unit=='schubert-nk-inbox-inspector.service':return after=='/run/schubert-nk/pt-coverage/ordinary-inspector196'
+ if unit=='schubert-nk-bootstrap-admin.service':return after=='/run/schubert-nk/pt-coverage/ordinary-bootstrap196'
+ return False
 def configure():
  global configured
  require(sys.argv[1]=='activate' and not configured and stopped()==before)
@@ -123,11 +162,13 @@ def configure():
  for unit in UNITS:
   after=show(unit,CONFIG)
   allowed={'ExecStart','DropInPaths','ReadWritePaths'} if unit in ['schubert-nk-inbox-inspector.service','schubert-nk-bootstrap-admin.service','schubert-nk-morning-controller.service'] else set()
-  require(all(after[k]==config_before[unit][k] for k in CONFIG-allowed))
+  require(all(after[k]==config_before[unit][k] for k in CONFIG-allowed-{'ExecStart'}))
+  require(signed_declaration(unit,config_before[unit]['ExecStart'],after['ExecStart']))
  for unit in ['schubert-nk-inbox-inspector.service','schubert-nk-bootstrap-admin.service','schubert-nk-morning-controller.service']:
   value=show(unit,FIELDS|{'ExecStart','DropInPaths','ReadWritePaths'})
   require('--resume' not in value['ExecStart'] and '/opt/pgpt-tools-pg390/schubert-nk-inbox-inspector' not in value['ExecStart'])
-  if 'morning' in unit:require(value['DropInPaths']=='/etc/systemd/system/'+unit+'.d/pg477-native-coverage.conf' and value['ReadWritePaths']=='/run/schubert-nk/pt-coverage/parent')
+  require(effective_rw(unit,config_before[unit]['ReadWritePaths'],value['ReadWritePaths']))
+  if 'morning' in unit:require(value['DropInPaths']=='/etc/systemd/system/'+unit+'.d/pg477-native-coverage.conf')
   elif 'inspector' in unit:require(value['DropInPaths']=='' and value['ReadWritePaths']=='/run/schubert-nk/pt-coverage/ordinary-inspector196' and 'operations/bin/schubert-nk-inbox-inspector' in value['ExecStart'])
   else:require(value['DropInPaths']=='' and value['ReadWritePaths']=='/run/schubert-nk/pt-coverage/ordinary-bootstrap196' and 'sessionid=BOOTSTRAP-${INVOCATION_ID}-ordinary' in value['ExecStart'])
  save('unit-reference-after.private.json',json.dumps(stopped(),sort_keys=True).encode())

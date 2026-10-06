@@ -3,8 +3,8 @@ import ast,pathlib,types
 from pg466_term_witness import FIELDS
 source=pathlib.Path(__file__).with_name('pg477_unit_references.py').read_text()
 tree=ast.parse(source)
-selected=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['require','dropin_preview','show']]
-assert len(selected)==3
+selected=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['require','dropin_preview','show','effective_rw']]
+assert len(selected)==4
 checks=0
 def check(value):
  global checks
@@ -48,4 +48,15 @@ for key in literal:
  current[0]=raw+(key+'=foreign\n').encode();reject(namespace['show'],unit)
  current[0]=('\n'.join(k+'='+v for k,v in literal.items() if k!=key)+'\n').encode();reject(namespace['show'],unit)
 current[0]=b'\xff';reject(namespace['show'],unit)
+rw=namespace['effective_rw']
+old='/run/schubert-nk /var/lib/schubert-nk/maintenance /srv/schubert-nk/backup /run/schubert-nk/pt-coverage/parent'
+check(rw(unit,old,old))
+for wrong in ['/run/schubert-nk/pt-coverage/parent',old+' /foreign',' '.join(old.split()[::-1]),old.replace('/srv/schubert-nk/backup','/foreign'),'']:
+ check(not rw(unit,old,wrong))
+for actor,expected in [(inspector,'/run/schubert-nk/pt-coverage/ordinary-inspector196'),('schubert-nk-bootstrap-admin.service','/run/schubert-nk/pt-coverage/ordinary-bootstrap196')]:
+ check(rw(actor,'',expected))
+ for wrong in [expected+' /foreign',expected+'/',old,'',None]:check(not rw(actor,'',wrong))
+for actor in [None,'foreign.service']:
+ check(not rw(actor,old,old))
+check(not rw(unit,None,old));check(not rw(unit,old,None))
 print('PG477_UNIT_REFERENCES_TEST independentAssertions='+str(checks)+' nativeMutation0=true productionPT0=true')
