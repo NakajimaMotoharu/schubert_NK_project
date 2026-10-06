@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC204（2026-10-07、QA047/BUG799/YKT570）：PG493 parenttimeout143/pending原本であっても、startup現在73file・API/WEB/publication intentが既不存在ならSSC179の二intent Pair復旧を流用しない。failure私有snapshot/current二読・同boot/署名/当epoch/owner/launch/全旧fileを認証し、連続fresh M/A/専用DB/全10Unit・原本/24table442batch/Backup/Transfer/native保全下で同live4cohortを逆順owned停止/全kernel確認する。元73file/全原値不変後にだけ同epochを既canonical revokeでINVALIDへし、元permit/owner/launchを保持、このoperatorのintent退役数0・旧closeUNKNOWNを記録する。不明なら隔離継続、正常新所有scope帰還後だけ別pending配備/runtime正規退役・一回通常resumeを許す。旧/run復元・存在しないintent作成・newEpoch/permit/start/DONE/DB手修正0。
+
 SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
 
 ## SSC198 Backup archive途中の限定復旧（2026-10-06）
