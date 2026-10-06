@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
+
 ## SSC198 Backup archive途中の限定復旧（2026-10-06）
 
 SSC198限定補足（同日17:02）：型付きmarker退役→Unit不変更pending code-only→別正常所有の固定runtime resume引数準備→durable一回予約/observer先行/外部Morning一回→元cutoffのProduction通常resume→真正全終端後の一回引数正規退役、を順に別認定する。各管理段は新M/A/実DB/10Refと完全pending/旧全原値を再認証し、未知又は送達不明は再付着/保全する。同activation保持は正規挙動であり無理に更新しない。未実行段や通常start client0をfresh worker/archive/親全体成功へ加算しない。SS341/343の固定runtime名・唯一二引数・終端後退役条件を適用する。
