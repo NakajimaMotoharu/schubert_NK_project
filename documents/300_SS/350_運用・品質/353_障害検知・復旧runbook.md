@@ -254,3 +254,8 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 ### 20.4 再試験・完了判定
 
 正規非空Transfer directory/file、実行中変異、symlink、読取り失敗、primary/secondary close失敗、owner/budget不明、再開/停止失敗を独立PTする。工具修正と同sourceのnative Pair退役・全後条件の検証、原因分析報告（確定/未確定/封じ込め理由を区別）、対策/横断再発防止の根拠が揃うまでBUG544/YKT388は対応中を維持する。限定復旧と原因究明は実行chatが担当し、PMOは根拠をレビューして不足時に対象範囲・順序を調整する。本書更新時点では復旧・工具修正・再試験を実施済みとは扱わない。
+# SSC202 同run限定準備の再認証（2026-10-07）
+
+PG491正常code-only帰還後、元run `91a748b4-1abe-484c-9682-44f46429b324`・元cutoff/activation/INVALIDを維持する。PG489署名baseと既native literalから固定`--resume`二引数だけを加え、`/run/systemd/system/schubert-nk-morning-controller.service.d/pg492-once-resume.conf`をnew-only作成する。既退役後のRoot:Root0755/ACLなし空directoryは前後認証して利用できるが、未知file/drop-in/別argv/二重agentは拒否する。別新M/A/実batch専用DB・exclusive advisory/十Ref/current kernel・全24table/432行/原本Backup/schema028を保持し、一回reload後全有効宣言と資源後条件を照合、全scope正常帰還後のみdurable予約・observer・一回外部startへ進む。旧工具/旧run/旧receiptの流用とoperator業務DB更新はしない。真正全親終端後に別所有で設定を退役し、不明/partialは隔離保持する。独立工具oracleと実nativeを別記し、本記述だけで親全体・coverage・正式受入としない。
+SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
+SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。

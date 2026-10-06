@@ -907,3 +907,8 @@ QA050は2026-10-03に15分継続再試行とIT/ST性能問題時の間隔変更�
 ## QA-050承認反映：期限NULL migration・間隔調整（2026-10-03）
 
 pending_context_revocations.expires_atのNN解除は旧migration不変・実末尾の次versionでappend-only導入する。既存暗号row/attempt/claim/lease/index/grantを保全し、未確認期限を8h等で補完せず期限だけの自動DELETEを停止する。nullable未対応の旧reader/cleanupへ切戻す場合は互換性と残row保全を事前確認し、NULLを推測値へ変えたりrow削除/旧鍵廃棄で回避しない。初期5秒/30秒/5分と継続15分で実装し、IT/STで性能問題が確認されたら利用者の承認方針内で間隔を調整する。変更値・測定根拠・対象設定/source・反映/切戻し手順、失効確認遅延への影響を記録し、同条件再試験後にUI/SS/台帳とmainの確定設計を更新する。試験前に根拠なく初期15分を別値へ変更しない。
+# SSC202 一回用runtime固定名（2026-10-07）
+
+PG491正常code-only帰還後、元run `91a748b4-1abe-484c-9682-44f46429b324`・元cutoff/activation/INVALIDを維持する。PG489署名baseと既native literalから固定`--resume`二引数だけを加え、`/run/systemd/system/schubert-nk-morning-controller.service.d/pg492-once-resume.conf`をnew-only作成する。既退役後のRoot:Root0755/ACLなし空directoryは前後認証して利用できるが、未知file/drop-in/別argv/二重agentは拒否する。別新M/A/実batch専用DB・exclusive advisory/十Ref/current kernel・全24table/432行/原本Backup/schema028を保持し、一回reload後全有効宣言と資源後条件を照合、全scope正常帰還後のみdurable予約・observer・一回外部startへ進む。旧工具/旧run/旧receiptの流用とoperator業務DB更新はしない。真正全親終端後に別所有で設定を退役し、不明/partialは隔離保持する。独立工具oracleと実nativeを別記し、本記述だけで親全体・coverage・正式受入としない。
+SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
+SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
