@@ -254,3 +254,6 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 ### 20.4 再試験・完了判定
 
 正規非空Transfer directory/file、実行中変異、symlink、読取り失敗、primary/secondary close失敗、owner/budget不明、再開/停止失敗を独立PTする。工具修正と同sourceのnative Pair退役・全後条件の検証、原因分析報告（確定/未確定/封じ込め理由を区別）、対策/横断再発防止の根拠が揃うまでBUG544/YKT388は対応中を維持する。限定復旧と原因究明は実行chatが担当し、PMOは根拠をレビューして不足時に対象範囲・順序を調整する。本書更新時点では復旧・工具修正・再試験を実施済みとは扱わない。
+# 障害検知・復旧runbook
+
+SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。

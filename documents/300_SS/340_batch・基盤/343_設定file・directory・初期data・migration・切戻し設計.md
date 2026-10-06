@@ -907,3 +907,6 @@ QA050は2026-10-03に15分継続再試行とIT/ST性能問題時の間隔変更�
 ## QA-050承認反映：期限NULL migration・間隔調整（2026-10-03）
 
 pending_context_revocations.expires_atのNN解除は旧migration不変・実末尾の次versionでappend-only導入する。既存暗号row/attempt/claim/lease/index/grantを保全し、未確認期限を8h等で補完せず期限だけの自動DELETEを停止する。nullable未対応の旧reader/cleanupへ切戻す場合は互換性と残row保全を事前確認し、NULLを推測値へ変えたりrow削除/旧鍵廃棄で回避しない。初期5秒/30秒/5分と継続15分で実装し、IT/STで性能問題が確認されたら利用者の承認方針内で間隔を調整する。変更値・測定根拠・対象設定/source・反映/切戻し手順、失効確認遅延への影響を記録し、同条件再試験後にUI/SS/台帳とmainの確定設計を更新する。試験前に根拠なく初期15分を別値へ変更しない。
+# 設定file・directory・初期data・migration・切戻し設計
+
+## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
