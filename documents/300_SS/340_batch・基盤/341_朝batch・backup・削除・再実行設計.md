@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC200（2026-10-06、BUG788/YKT562、実装前補足）：通常noargsの新runと明示same-run resumeの双方で、UI251§11/SS331§8.3の同日成功SKIPを維持する。Cleanup正常fresh receiptと今回七terminalを読んだ後、ALREADY_SUCCESSFULだけ元成功を同business_date/stepの唯一完全SUCCESSとして読取り、元の検証済原本anchor/run/cutoff・row/attempt/start/end/resultとLog END/Inbox progressを独立に保持する。同runであることを必須にせず、別日/不足/矛盾/非唯一/未来/今回handle同一/元非SUCCESSは拒否。親の現在M/A/DB/advisory・元30min budget・current/現activationと元原本照合を省略しない。Expiryも元原本と元cutoffのSUCCESS audit及び現在cutoff fresh MQ selected0を分離、元auditを更新/新stage/purgeへ流用しない。今回SKIP all0/ended=started・fresh Unit終端/receiptは維持し、元成功や旧receiptを今回業務実行の成功に算入しない。CompletionEvidence・prestart・issuer直前/公開後の全再確認へ同じ型付き元参照を通す。Backup same-run成功再用の既契約、失敗pair/Transfer/critical、owned逆順停止/全後条件は緩和しない。
+
 SSC199（2026-10-06、BUG784/YKT560）：Cleanup終端/拒否/元成功参照のDB readbackはSS332のSSC063/199合成例外契約に従う。親の借用transactionと期限は保持し、未知provider/closeを既知DB失敗へ補完しない。各owned Statement/ResultSetは正常closeまで値不返却、七stepと十四列のvalue不正は狭いpure検査だけで固定SQL不正へ分類する。readback成功だけで原本・Unit・OS/root/Epoch authorityを追加しない。CTERM006～008の正常/異常/204合成・原行SQL後条件、必要全回帰/同source実経路を別に確認する。親未知時のretention/再隔離、古いUNKNOWN-close記録、業務結果/実receiptは不変更。
 
 ## SSC198 Backup途中保全後の正規resume（2026-10-06、BUG771/YKT551）
