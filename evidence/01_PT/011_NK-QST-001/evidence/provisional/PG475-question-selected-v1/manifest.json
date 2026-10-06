@@ -1,0 +1,185 @@
+{
+  "id": "PG475-question-selected-v1",
+  "programId": [
+    "NK-QST-001"
+  ],
+  "TestIDs": [
+    "PT-QST-ASUB-008..011"
+  ],
+  "pendingTestIDs": [
+    "PT-QST-ASUB-012"
+  ],
+  "PGD": "PG-D380",
+  "baseCommit": "ed1c95ded797db971a9291609236360a8ebf5938",
+  "branch": "dev-foundation",
+  "dirtySource": true,
+  "started": "2026-10-06T11:47:18,453012026+09:00",
+  "completed": "2026-10-06T11:48:52,320358613+09:00",
+  "actualExit": 0,
+  "command": "bash tools/quality/vm/050_s1/pg475_question_selected_v1.sh",
+  "tests": 53,
+  "suites": 7,
+  "F": 0,
+  "E": 0,
+  "S": 0,
+  "XML": [
+    {
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "xmlSha256": "d8d913bd7a0d4b0c033d0431d8e354ea9cca25f3fdf9ce4d6458d758bac0aab4",
+      "methods": [
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+      "tests": 12,
+      "xmlSha256": "aafa879b63ada128d392dcf97857c7cec3b715d6dde673b91c51542391b0130a",
+      "methods": [
+        "nameAndNullContracts",
+        "nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement",
+        "nfile193002MissingNullAndUnsafeNameDoNotMutate",
+        "nfile193004ConcurrentNamedEntryHasExactlyOneWriter",
+        "faultAndUncertainOutcomes",
+        "scopedOwnership",
+        "nativePrivateCreation",
+        "retainedNamespace",
+        "nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd",
+        "unsupportedAndNativeArguments",
+        "concurrentSinglePublication",
+        "atomicNoReplace"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "xmlSha256": "a188ff596362503eca70738cf8eabe88253b4376346bf839213a77c71ab4ad5f",
+      "methods": [
+        "unknownCompoundFailures",
+        "knownIoFailures",
+        "unknownBodyFailures",
+        "concurrentScopes",
+        "nullAndNullableContracts",
+        "nestedScopes",
+        "knownBodyUnknownCleanup",
+        "successfulOwnership"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "tests": 10,
+      "xmlSha256": "fa9f4ab69f8379ee6c9c4e8756af445834cb76a3df38c8b0123d46db9b8418df",
+      "methods": [
+        "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored",
+        "serviceid007EveryOwnedCloseAndUnknownFailurePreserved",
+        "serviceid001BothFixedAccountsExplicitRequiredGroups",
+        "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets",
+        "serviceid003UidGidBoundariesAndCanonicalDecimal",
+        "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker",
+        "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection",
+        "issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority",
+        "serviceid005ByteNullAndImmutableValueInvariant",
+        "dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+      "tests": 5,
+      "xmlSha256": "f219e7ec31fb48159a9b45ad6b11fb579b719942971caeb32da223f76d5a3ced",
+      "methods": [
+        "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
+        "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose",
+        "opsCredset001FiveFixedMaterialsPerServiceAreOwnedAndClosed",
+        "opsCredset002WrongIdNullAndClosedStateReject",
+        "opsCredset004ConcurrentIndependentLoads"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionBoundaryRemainderTest",
+      "tests": 4,
+      "xmlSha256": "7f2c0d036646a32dff62ec6f9c02aaac3cee774db611fe6c70efef21d6ab67b2",
+      "methods": [
+        "asub009AuthenticationAndSentTimeoutSecondaryAreNotSuccess",
+        "asub011OtherConstraintSqlstateAndUpdateZeroRollbackWithoutRetry",
+        "asub008FutureHeaderAndCommittedDeadlineNeverRestartBudget",
+        "asub010IndependentDriverProofColumnsAndExtraRowFailClosed"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+      "tests": 7,
+      "xmlSha256": "3624403aa2587e9ada6eae3eccecc44386c75b029ec4c1061213dc1b712b003f",
+      "methods": [
+        "asub007ProductionConstructorAndMissingConfigurationAreFailClosed",
+        "asub005SnapshotAndExactWorkProofRejectCorruptionWithoutFreshBusiness",
+        "asub003AuthConflictAndPurgedInboxNeverCreateAliasOrDuplicate",
+        "asub002TotalDeadlineCommitRemainsAndLaterReplayRequiresOriginalSent",
+        "asub006ReceiptOnlyCollisionRetryAndClosedBoundary",
+        "asub001ActualAcceptanceDedicatedSendAndFrozenSameAndNewMessageReplay(Path)",
+        "asub004EveryAtomicParticipantFaultRollsBackAndRetainsNoSecrets"
+      ]
+    }
+  ],
+  "staticModules": 4,
+  "staticFindings": 0,
+  "formatNullAwayWerror": "PASS",
+  "localCounters": {
+    "QuestionSubmissionService": {
+      "INSTRUCTION": {
+        "missed": 11,
+        "covered": 1668
+      },
+      "BRANCH": {
+        "missed": 13,
+        "covered": 115
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 342
+      },
+      "COMPLEXITY": {
+        "missed": 13,
+        "covered": 76
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 25
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageXMLSha256": "c7101f69105c873e070e7395b578f3efcde9bd3bf252e8100ecf0f43b2c4c9de",
+  "privateLogSha256": "93e45135eb8b15ee053b4b14ccf54f6e7a4f2b54c897273fac6417171361e483",
+  "sourceDiffSha256BeforeFormatting": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sourceFilesSha256": "3fc4f8546a48a955d8d448e67be0f919cfcdca44e7087e998df342e2ddf9413a",
+  "environment": {
+    "OS": "Linux",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15"
+  },
+  "independentOracle": "existing independent 320byte literal, fixed UTC/UUID, real PG18 SQL postconditions, driver result/SQLSTATE negative; no expected via production process",
+  "accumulatedExec": false,
+  "wholeCoverage100": false,
+  "nativeAccepted": false,
+  "formalUpdated": false,
+  "oldNativeReused": false,
+  "rawSecretsExported": false,
+  "ITSTAccepted": false
+}

@@ -84,47 +84,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
   public byte[] process(WireMessage<FixedPayload> message) {
     Objects.requireNonNull(message, "message");
     try (var request = QuestionSubmitRequest.decode(message)) {
-      Instant received = clock.instant().truncatedTo(ChronoUnit.MICROS);
-      long start = nanos.getAsLong();
-      Instant deadline = request.header().sentAt().plusSeconds(2);
-      if (received.plusSeconds(2).isBefore(deadline)) deadline = received.plusSeconds(2);
-      long budget = Math.max(0, Duration.between(received, deadline).toNanos());
-      if (expired(start, budget)) return failure(request, ResultCode.TEMPORARY_FAILURE);
-      Outcome outcome;
-      try {
-        outcome = transaction(request, received, start, budget);
-      } catch (RetainedRequest failure) {
-        // The newly inserted PROCESSING row was rolled back. Never restore/predict history.
-        if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
-        if (failure.actorId != 0) auditRetained(request, failure);
-        return failure(request, failure.code);
-      }
-      if (outcome instanceof Denied denied) return failure(request, denied.code());
-      if (outcome instanceof InvalidMessage)
-        throw new PermanentProtocolException("question request differs from saved identity");
-      Accepted accepted = (Accepted) outcome;
-      if (expired(start, budget)) return failure(request, ResultCode.TEMPORARY_FAILURE);
-      wakeDispatcher.run();
-      while (!expired(start, budget)) {
-        boolean confirmed;
-        try {
-          confirmed = sent(accepted, request, start, budget);
-        } catch (RetainedRequest elapsed) {
-          if (elapsed.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
-          break;
-        }
-        if (confirmed) {
-          if (expired(start, budget)) break;
-          return reply(
-              request,
-              Optional.of(accepted.data()),
-              accepted.replay() ? ResultCode.IDEMPOTENT_SUCCESS : ResultCode.SUCCESS);
-        }
-        if (Thread.currentThread().isInterrupted()) throw new TemporaryInfrastructureException();
-        long remaining = budget - (nanos.getAsLong() - start);
-        if (remaining > 0) LockSupport.parkNanos(Math.min(remaining, 10_000_000));
-      }
-      return failure(request, ResultCode.TEMPORARY_FAILURE);
+      return processOwned(request);
     } catch (PermanentProtocolException failure) {
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       throw failure;
@@ -135,6 +95,51 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
 
   private boolean expired(long start, long budget) {
     return nanos.getAsLong() - start >= budget;
+  }
+
+  /** One request owner; reply, exception classification and clearing keep their original order. */
+  private byte[] processOwned(QuestionSubmitRequest request) throws SQLException {
+    Instant received = clock.instant().truncatedTo(ChronoUnit.MICROS);
+    long start = nanos.getAsLong();
+    Instant deadline = request.header().sentAt().plusSeconds(2);
+    if (received.plusSeconds(2).isBefore(deadline)) deadline = received.plusSeconds(2);
+    long budget = Math.max(0, Duration.between(received, deadline).toNanos());
+    if (expired(start, budget)) return failure(request, ResultCode.TEMPORARY_FAILURE);
+    Outcome outcome;
+    try {
+      outcome = transaction(request, received, start, budget);
+    } catch (RetainedRequest failure) {
+      // The newly inserted PROCESSING row was rolled back. Never restore/predict history.
+      if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
+      if (failure.actorId != 0) auditRetained(request, failure);
+      return failure(request, failure.code);
+    }
+    if (outcome instanceof Denied denied) return failure(request, denied.code());
+    if (outcome instanceof InvalidMessage)
+      throw new PermanentProtocolException("question request differs from saved identity");
+    Accepted accepted = (Accepted) outcome;
+    if (expired(start, budget)) return failure(request, ResultCode.TEMPORARY_FAILURE);
+    wakeDispatcher.run();
+    while (!expired(start, budget)) {
+      boolean confirmed;
+      try {
+        confirmed = sent(accepted, request, start, budget);
+      } catch (RetainedRequest elapsed) {
+        if (elapsed.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
+        break;
+      }
+      if (confirmed) {
+        if (expired(start, budget)) break;
+        return reply(
+            request,
+            Optional.of(accepted.data()),
+            accepted.replay() ? ResultCode.IDEMPOTENT_SUCCESS : ResultCode.SUCCESS);
+      }
+      if (Thread.currentThread().isInterrupted()) throw new TemporaryInfrastructureException();
+      long remaining = budget - (nanos.getAsLong() - start);
+      if (remaining > 0) LockSupport.parkNanos(Math.min(remaining, 10_000_000));
+    }
+    return failure(request, ResultCode.TEMPORARY_FAILURE);
   }
 
   private Outcome transaction(
@@ -173,43 +178,54 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
     }
     if (expired(start, budget)) throw new RetainedRequest(ResultCode.TEMPORARY_FAILURE);
     try (var canonical = request.canonical(actor)) {
-      BoundInboxExecution bound;
-      try {
-        bound =
-            inbox.executeBound(
-                connection,
-                new InboxRequest(
-                    request.header().messageId(),
-                    request.header().correlationId(),
-                    OptionalLong.of(actor.userId()),
-                    Optional.of(request.operationToken()),
-                    canonical,
-                    received,
-                    received.plusSeconds(604800)),
-                c -> create(c, request, actor, clock.instant().truncatedTo(ChronoUnit.MICROS)));
-      } catch (InboxException conflict) {
-        if (conflict.getSuppressed().length != 0) throw conflict;
-        if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {
-          audit(connection, Optional.of(actor), request, "QUESTION_SUBMITTED", "0105", received);
-          return new Denied(ResultCode.CONFLICT);
-        }
-        if (conflict.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {
-          audit(
-              connection,
-              Optional.of(actor),
-              request,
-              "PROTOCOL_REJECTED",
-              "MESSAGE_IDENTITY",
-              received);
-          return new InvalidMessage();
-        }
-        throw conflict;
-      }
-      Accepted result = read(request, actor, bound);
-      if (result.replay())
-        audit(connection, Optional.of(actor), request, "INBOX_REPLAYED", "0200", received);
-      return result;
+      return executeCanonical(connection, request, actor, canonical, received);
     }
+  }
+
+  /** Canonical scope closes before its caller commits, including conflict and fatal paths. */
+  private Outcome executeCanonical(
+      Connection connection,
+      QuestionSubmitRequest request,
+      AuthenticatedActor actor,
+      CanonicalRequest canonical,
+      Instant received)
+      throws SQLException {
+    BoundInboxExecution bound;
+    try {
+      bound =
+          inbox.executeBound(
+              connection,
+              new InboxRequest(
+                  request.header().messageId(),
+                  request.header().correlationId(),
+                  OptionalLong.of(actor.userId()),
+                  Optional.of(request.operationToken()),
+                  canonical,
+                  received,
+                  received.plusSeconds(604800)),
+              c -> create(c, request, actor, clock.instant().truncatedTo(ChronoUnit.MICROS)));
+    } catch (InboxException conflict) {
+      if (conflict.getSuppressed().length != 0) throw conflict;
+      if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {
+        audit(connection, Optional.of(actor), request, "QUESTION_SUBMITTED", "0105", received);
+        return new Denied(ResultCode.CONFLICT);
+      }
+      if (conflict.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {
+        audit(
+            connection,
+            Optional.of(actor),
+            request,
+            "PROTOCOL_REJECTED",
+            "MESSAGE_IDENTITY",
+            received);
+        return new InvalidMessage();
+      }
+      throw conflict;
+    }
+    Accepted result = read(request, actor, bound);
+    if (result.replay())
+      audit(connection, Optional.of(actor), request, "INBOX_REPLAYED", "0200", received);
+    return result;
   }
 
   private InboxCompletion create(
