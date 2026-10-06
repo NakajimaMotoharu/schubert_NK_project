@@ -173,6 +173,43 @@ final class MorningOriginalCompletionTest {
     assertEquals(1, f.publish);
   }
 
+  /** COMP203003: retained checks keep owner/root failures and UNKNOWN completion rejection. */
+  @Test
+  void comp203003RetainedOriginalIsNeverCompletionOrEscapedOwnership() throws Exception {
+    var f = new Fixture();
+    var proof = f.proof();
+    proof.verifyRetained();
+    assertEquals(List.of("root", "pending", "root"), f.events);
+    assertEquals(0, f.publish);
+    f.alive.set(false);
+    assertThrows(IOException.class, proof::verifyRetained);
+    assertEquals(3, f.events.size());
+    var unknown = new Fixture();
+    unknown.wrongResult = true;
+    var uncertain = unknown.proof();
+    assertThrows(IOException.class, () -> uncertain.complete(DONE));
+    assertThrows(IOException.class, uncertain::verifyRetained);
+    var defaults = new MorningNewRunAdmission.OriginalFiles() {};
+    assertThrows(IOException.class, () -> defaults.verifyRetained(ACTIVATION));
+    var legacyCalls = new java.util.concurrent.atomic.AtomicInteger();
+    MorningNewRunAdmission.OriginalProof legacy = legacyCalls::incrementAndGet;
+    legacy.verifyRetained();
+    assertEquals(1, legacyCalls.get());
+    var foreign = new Fixture();
+    var retained = foreign.proof();
+    try (var executor = Executors.newSingleThreadExecutor()) {
+      executor
+          .submit(() -> assertThrows(IOException.class, retained::verifyRetained))
+          .get(5, TimeUnit.SECONDS);
+    }
+    assertTrue(foreign.events.isEmpty());
+    for (int rootFault : List.of(1, 2)) {
+      var fault = new Fixture();
+      fault.rootFault = rootFault;
+      assertSame(fault.io, assertThrows(IOException.class, fault.proof()::verifyRetained));
+    }
+  }
+
   @Test
   void orig455002ExistingDoneIsReadOnlyAndOtherTimeOutcomeNeverOverwrites() throws Exception {
     var f = new Fixture();

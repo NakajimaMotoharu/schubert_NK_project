@@ -30,9 +30,17 @@ final class MorningCompletionChecks {
 
   /** Pure owner check, also valid while the same borrowed connection has autoCommit=false. */
   MaintenanceOwnerFrame.Guard ownerGuard(MaintenanceOwnerFrame.Guard remainingBudget) {
+    return ownerGuard(remainingBudget, peer);
+  }
+
+  /** SSC203: full peer proof is required at compound boundaries; SQL keeps live ownership. */
+  MaintenanceOwnerFrame.Guard ownerGuard(
+      MaintenanceOwnerFrame.Guard remainingBudget,
+      BackupUnitStartClient.RetirementGate retainedOwner) {
     Objects.requireNonNull(remainingBudget);
+    Objects.requireNonNull(retainedOwner);
     return () -> {
-      peer.verify();
+      retainedOwner.verify();
       return remainingBudget.remainingNanos();
     };
   }

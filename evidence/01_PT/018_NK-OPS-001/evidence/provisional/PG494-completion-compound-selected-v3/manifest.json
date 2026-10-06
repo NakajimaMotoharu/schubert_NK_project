@@ -1,0 +1,327 @@
+{
+  "id": "PG494-completion-compound-selected-v3",
+  "branch": "dev-foundation",
+  "baseHead": "0c15c0093529704867c95e7ea942d9c4ebe64f6b",
+  "testedDirtyDiffSha256": "1734d25adbe8bca39a928ff0e5b12e9e8a4e64dbc113f7aa5c41569becaea825",
+  "sourceBeforeFormatterDiffSha256": "5f50c7eab1b5dfa7cde3c456556890b1cfe2e71345496ca2c6c2cf1947d7f22c",
+  "sourceFixedCommit": false,
+  "actualExit": 0,
+  "started": "2026-10-07T01:05:47,970538738+09:00",
+  "completed": "2026-10-07T01:09:04,979470061+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg494_completion_selected_v3.sh",
+  "modules": [
+    {
+      "module": "protocol",
+      "suites": [
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "tests": 7,
+          "xmlSha256": "8ad25dd9eb33c9b7eda056405f29431ad6bbf7441f18d003e2d884b101bdc545"
+        }
+      ],
+      "tests": 7,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 14126,
+          "covered": 3279
+        },
+        "BRANCH": {
+          "missed": 767,
+          "covered": 243
+        },
+        "LINE": {
+          "missed": 2861,
+          "covered": 603
+        },
+        "COMPLEXITY": {
+          "missed": 1087,
+          "covered": 186
+        },
+        "METHOD": {
+          "missed": 645,
+          "covered": 96
+        },
+        "CLASS": {
+          "missed": 133,
+          "covered": 24
+        }
+      },
+      "coverageXmlSha256": "2727533c7b8d5a0b3bc771aabe04a4f2e9b23587daa56b0bf1a2a88c7c50413c"
+    },
+    {
+      "module": "storage",
+      "suites": [
+        {
+          "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "tests": 8,
+          "xmlSha256": "49c8a6e877185c7e427c99c9b8f1bce96f6f4962f69aa67a009da6f7f7a795e1"
+        }
+      ],
+      "tests": 8,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 5850,
+          "covered": 90
+        },
+        "BRANCH": {
+          "missed": 497,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 1108,
+          "covered": 27
+        },
+        "COMPLEXITY": {
+          "missed": 494,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 245,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 33,
+          "covered": 3
+        }
+      },
+      "coverageXmlSha256": "b70ac7ff944cbea3b50dc5fa154f53fff04925bd707a80290d5ca829c28b6c16"
+    },
+    {
+      "module": "bootstrap",
+      "suites": [
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+          "tests": 10,
+          "xmlSha256": "1a92f3d0fd150d90124e5b2a5d6fa4220dc709f6e0634f16b92547e11249ae4c"
+        }
+      ],
+      "tests": 10,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 13534,
+          "covered": 586
+        },
+        "BRANCH": {
+          "missed": 1476,
+          "covered": 64
+        },
+        "LINE": {
+          "missed": 2526,
+          "covered": 106
+        },
+        "COMPLEXITY": {
+          "missed": 1190,
+          "covered": 60
+        },
+        "METHOD": {
+          "missed": 452,
+          "covered": 28
+        },
+        "CLASS": {
+          "missed": 69,
+          "covered": 3
+        }
+      },
+      "coverageXmlSha256": "3c4f705b99b1f937e0f787a45515f65c34fd572894bbb4ef9d111d42c9b76109"
+    },
+    {
+      "module": "api",
+      "suites": [
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest",
+          "tests": 4,
+          "xmlSha256": "ce65aa00e978d3023b4b469a3df1f4a235e3b18144a551324c1bbcfa2dc8838a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+          "tests": 19,
+          "xmlSha256": "42ac50d28510ebeae570fa580f6e0cedc402a91d81753727b7fdf5005cbadb0b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+          "tests": 8,
+          "xmlSha256": "d33cd28abc76081cdecb710449cf6a33c92c00033eb4df8cb9a8b6bcf2dc4abe"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "548fcb3a7cb81922179f9022c0b97659ea7ba6ab87707284b6796aa364a57143"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "c6f5c4726362c5c70d64376697a9bd830469a9a57ce138c80f6696a0ff52c96a"
+        }
+      ],
+      "tests": 47,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 48302,
+          "covered": 339
+        },
+        "BRANCH": {
+          "missed": 3950,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 10477,
+          "covered": 94
+        },
+        "COMPLEXITY": {
+          "missed": 3491,
+          "covered": 23
+        },
+        "METHOD": {
+          "missed": 1461,
+          "covered": 19
+        },
+        "CLASS": {
+          "missed": 301,
+          "covered": 5
+        }
+      },
+      "coverageXmlSha256": "d4b8c927b47bdeb20f480f01f2137ae98ca59ab619d3473fc220daa6f6bf72ca"
+    },
+    {
+      "module": "batch",
+      "suites": [
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest",
+          "tests": 1,
+          "xmlSha256": "07746ba6d2309142136594cea2fc4e91bd99e48ba635347872a7904c41f10cf1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+          "tests": 34,
+          "xmlSha256": "fd6da883b6f3065b14f4974d9ab975391106fd92e655216df635ecf181056c49"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest",
+          "tests": 5,
+          "xmlSha256": "6c3a801af83d27f835ee0af40236237c7b6b3e4a62b0548ae0385431c38e4fff"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest",
+          "tests": 4,
+          "xmlSha256": "2446f7cf87799bf58c6123605c15f8ce24def52af0b808e475b2e51b8dadd3da"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest",
+          "tests": 12,
+          "xmlSha256": "d7d4078ac1ef3e275d7c5b224eb9802955159793679e27e7fe04b500b592821e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningOriginalCompletionTest",
+          "tests": 10,
+          "xmlSha256": "869529d07fa72e12dc8079982a8945d8a7efbf601fba9fa62e15cb5383210d52"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningPrestartEvidenceTest",
+          "tests": 5,
+          "xmlSha256": "57cede980cbcf3885779178443ae9f2c7cb19e3bfff5fc34258344dcbd6197e7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+          "tests": 11,
+          "xmlSha256": "ab66d0cacd46cd4a6c03aac3dcda54927c6851f6bffbb4005ce57585ed245dcb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest",
+          "tests": 11,
+          "xmlSha256": "03ab870042c31579590feb083f42d140dd14a1ec060f6cb4edc9fc3577cc2a5e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+          "tests": 3,
+          "xmlSha256": "2ea850e3c0102887c4b434a20d5c5590d435b16234b69b5bcc3782e3eb29f716"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest",
+          "tests": 4,
+          "xmlSha256": "96eb942bc37e50c077a7d3d25153503b7062bea1f45b2f8e7be703f00951ef12"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepositoryTest",
+          "tests": 16,
+          "xmlSha256": "2f4ccc7763dd199e6ef8a9b943de89df6ef350e0dbd50ccf218eba6f39b28cbf"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest",
+          "tests": 5,
+          "xmlSha256": "3815d46d6ae041af52b5210449b99f4f4c3df05ca4776c4da9d9b679bfb887df"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+          "tests": 20,
+          "xmlSha256": "033b1ba4ec9f90cdc32e0667e927cd99fb5414743102a18157b14a6fdb740a1d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.MorningExpirySessionTest",
+          "tests": 2,
+          "xmlSha256": "205d84a9969ebb865f00e14e890f6f02cc0efed44a34054ddc94c41f154acab2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.SuccessProgressSealTest",
+          "tests": 3,
+          "xmlSha256": "40a1a8e625e46aeef619c836cf6a56e91b3689fb011f17e3949d757874fb1072"
+        }
+      ],
+      "tests": 146,
+      "coverage": {
+        "INSTRUCTION": {
+          "missed": 62906,
+          "covered": 19051
+        },
+        "BRANCH": {
+          "missed": 6114,
+          "covered": 1715
+        },
+        "LINE": {
+          "missed": 13030,
+          "covered": 3854
+        },
+        "COMPLEXITY": {
+          "missed": 5523,
+          "covered": 1089
+        },
+        "METHOD": {
+          "missed": 2152,
+          "covered": 532
+        },
+        "CLASS": {
+          "missed": 229,
+          "covered": 105
+        }
+      },
+      "coverageXmlSha256": "da690afbdfbe34c6ebb5eaf356346b70f8c475ef5348bec2b88d292232c0dd63"
+    }
+  ],
+  "tests": 218,
+  "suites": 24,
+  "staticModules": 5,
+  "staticIssues": 0,
+  "FES": 0,
+  "testIds": [
+    "RLOOK493001",
+    "COMP203001..004",
+    "existing retained-original group"
+  ],
+  "related": [
+    "SSC-203",
+    "BUG-799",
+    "BUG-800",
+    "BUG-801",
+    "YKT-570"
+  ],
+  "logSha256": "93d659bbdeae261ace42b786d2f50df717422371a749410941556c64084c1155",
+  "environment": {
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15"
+  },
+  "coverage100": false,
+  "formal": false,
+  "nativeAccepted": false,
+  "ITSTAccepted": false,
+  "rawLogsInGit": false
+}

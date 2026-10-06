@@ -77,10 +77,18 @@ final class MorningCompletionEvidenceTest {
           List.of(
               "owner",
               "recheckConsistent",
+              "owner",
               "observeBackup",
+              "owner",
+              "owner",
               mode.equals("failed") ? "observeCleanupBackupUnavailable" : "observeCleanup",
+              "owner",
+              "owner",
               "cleanupReferences",
+              "owner",
+              "owner",
               "recheckExpiry",
+              "owner",
               "recheckConsistent",
               "owner"),
           events);
@@ -135,6 +143,66 @@ final class MorningCompletionEvidenceTest {
                 default -> throw new AssertionError("unexpected DB operation " + name);
               };
             });
+  }
+
+  /** COMP203002: all eight independent compound boundaries are mandatory, never cached. */
+  @Test
+  void comp203002ChangedCompoundBoundaryRefusesBeforeOrAfterItsDatabaseRead() throws Exception {
+    var reads = List.of("observeBackup", "observeCleanup", "cleanupReferences", "recheckExpiry");
+    for (int failAt = 0; failAt <= 8; failAt++) {
+      var f = fixture("new");
+      var events = new ArrayList<String>();
+      var calls = new java.util.concurrent.atomic.AtomicInteger();
+      var failure = new IOException("independent peer/graph changed");
+      int refused = failAt;
+      dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.RetirementGate boundary =
+          () -> {
+            int call = calls.incrementAndGet();
+            events.add("boundary" + call);
+            if (call == refused) throw failure;
+          };
+      var db = database(f, events, "");
+      if (failAt == 0) {
+        f.verify(
+            db,
+            CLOCK,
+            () -> 10_000_000_000L,
+            (id, at) -> MorningPrestartEvidenceTest.RUN,
+            boundary);
+        assertEquals(8, calls.get());
+        for (int i = 0; i < 4; i++) {
+          int before = events.indexOf("boundary" + (2 * i + 1));
+          int read = events.indexOf(reads.get(i));
+          int after = events.indexOf("boundary" + (2 * i + 2));
+          assertTrue(before < read && read < after);
+        }
+      } else {
+        assertSame(
+            failure,
+            assertThrows(
+                IOException.class,
+                () ->
+                    f.verify(
+                        db,
+                        CLOCK,
+                        () -> 10_000_000_000L,
+                        (id, at) -> MorningPrestartEvidenceTest.RUN,
+                        boundary)));
+        assertEquals(failAt, calls.get());
+        assertEquals(failAt / 2, events.stream().filter(reads::contains).count());
+        assertEquals("boundary" + failAt, events.getLast());
+      }
+    }
+    var f = fixture("new");
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            f.verify(
+                database(f, new ArrayList<>(), ""),
+                CLOCK,
+                () -> 10_000_000_000L,
+                (id, at) -> MorningPrestartEvidenceTest.RUN,
+                null));
   }
 
   @Test

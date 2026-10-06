@@ -91,6 +91,100 @@ final class MaintenanceRunFilesTest {
     }
   }
 
+  /** RLOOK493001/BUG799/YKT570: independent graph/listing and no-write oracle. */
+  @Test
+  void comp203004RetainedNamespaceChecksReadNoGraphAndRejectReplacementOrExpiredSession()
+      throws Exception {
+    for (String mode : List.of("normal", "replaced", "interrupt"))
+      try (var f = fixture()) {
+        var held = new java.util.concurrent.atomic.AtomicReference<MaintenanceRunFiles.Session>();
+        Action operation =
+            () ->
+                f.files.execute(
+                    s -> {
+                      held.set(s);
+                      f.reset();
+                      if (mode.equals("replaced")) f.replace("runs");
+                      if (mode.equals("interrupt")) Thread.currentThread().interrupt();
+                      try {
+                        if (mode.equals("normal")) s.verifyRetained();
+                        else failure(s::verifyRetained);
+                      } finally {
+                        Thread.interrupted();
+                      }
+                      for (String io :
+                          List.of("namesOpen", "openRead", "create", "write", "unlink", "sync"))
+                        assertEquals(0, f.count(io), io);
+                      return true;
+                    });
+        if (mode.equals("replaced")) failure(operation::execute);
+        else operation.execute();
+        failure(held.get()::verifyRetained);
+        assertEquals(0, f.live.size());
+      }
+  }
+
+  /** RLOOK493001/BUG799/YKT570: independent graph/listing and no-write oracle. */
+  @Test
+  void successReferenceUsesTwoWholeSnapshotsAndRejectsSecondSnapshotDrift() throws Exception {
+    for (String fault :
+        List.of("none", "unrelated", "prior", "namespace", "listing", "close", "interrupt"))
+      try (var f = fixture()) {
+        f.seed(true, false, true);
+        var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+        var activation = new MaintenanceActivation(current, OTHER);
+        f.files.execute(s -> s.start(current, OTHER));
+        Action operation =
+            () ->
+                f.files.execute(
+                    s -> {
+                      for (var requested : List.of(RUN, current)) {
+                        f.reset();
+                        if (fault.equals("unrelated")) f.on("namesOpen", 4, f::otherCompleted);
+                        if (fault.equals("prior"))
+                          f.on(
+                              "namesOpen",
+                              4,
+                              () ->
+                                  Files.writeString(f.attempts.resolve(ACT_ID + ".done"), DONE10));
+                        if (fault.equals("namespace"))
+                          f.on("namesOpen", 4, () -> f.replace("runs"));
+                        if (fault.equals("listing") || fault.equals("close")) {
+                          f.fail = fault.equals("listing") ? "namesOpen" : "namesClose";
+                          f.failAt = 4;
+                        }
+                        if (fault.equals("interrupt"))
+                          f.on("namesOpen", 4, () -> Thread.currentThread().interrupt());
+                        if (fault.equals("none")) {
+                          assertEquals(
+                              requested,
+                              s.successReferenceRun(activation, requested.id(), current.cutoff()));
+                          assertEquals(6, f.count("namesOpen"));
+                          assertEquals(6, f.count("namesClose"));
+                        } else {
+                          try {
+                            failure(
+                                () ->
+                                    s.successReferenceRun(
+                                        activation, requested.id(), current.cutoff()));
+                          } finally {
+                            Thread.interrupted();
+                          }
+                        }
+                        for (String write : List.of("create", "publish", "write", "unlink", "sync"))
+                          assertEquals(0, f.count(write), write);
+                        // Mutation cases change the fixture once; never reuse that graph as a fresh
+                        // success.
+                        if (!fault.equals("none")) break;
+                      }
+                      return true;
+                    });
+        if (fault.equals("namespace")) failure(operation::execute);
+        else operation.execute();
+        assertEquals(0, f.live.size());
+      }
+  }
+
   @Test
   void successReferenceRejectsDifferentBusinessDayAndFutureCompletion() throws Exception {
     for (boolean future : List.of(false, true))

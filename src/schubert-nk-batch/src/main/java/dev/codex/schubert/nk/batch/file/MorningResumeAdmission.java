@@ -108,6 +108,13 @@ final class MorningResumeAdmission {
                                 context.recheck(expected);
                               }
 
+                              public void verifyRetained(MaintenanceActivation activation)
+                                  throws IOException {
+                                context.recheck(expected);
+                                files.verifyRetained();
+                                context.recheck(expected);
+                              }
+
                               public MaintenanceCompletion complete(MaintenanceCompletion value)
                                   throws IOException {
                                 context.recheck(expected);

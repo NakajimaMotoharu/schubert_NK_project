@@ -415,6 +415,15 @@ public final class MaintenanceRunFiles {
       attemptFiles = new DurableRecordFiles(roots.get(5), security, io);
     }
 
+    /** SSC203: retained namespace/owner only; never a graph or completion certificate. */
+    public void verifyRetained() throws StorageIoException {
+      perform(
+          () -> {
+            verifyNamespace();
+            return Boolean.TRUE;
+          });
+    }
+
     public MaintenanceRunState start(BatchRun run, UUID activationId) throws StorageIoException {
       Objects.requireNonNull(run, "fixed run");
       Objects.requireNonNull(activationId, "activation identity");
@@ -521,7 +530,9 @@ public final class MaintenanceRunFiles {
       return perform(
           () -> {
             Graph first = scan();
-            require(first.equals(scan()) && first.active().equals(Optional.of(current)));
+            // BUG799/RLOOK493001: bracket pure validation with two complete retained scans.
+            // No cached graph or anchor-only read: the final scan rejects unrelated drift too.
+            require(first.active().equals(Optional.of(current)));
             require(
                 !observed.isBefore(current.run().cutoff())
                     && !observed.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))

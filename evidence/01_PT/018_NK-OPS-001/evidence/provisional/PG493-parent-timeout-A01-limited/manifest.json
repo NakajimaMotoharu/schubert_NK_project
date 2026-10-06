@@ -1,0 +1,64 @@
+{
+  "id": "PG493-parent-timeout-A01-limited",
+  "branch": "dev-foundation",
+  "productionSource": "38899a05b5c2daeecfc5af8ea5ae748e29954c60",
+  "A01": {
+    "case": "CHR-A01",
+    "productionSource": "38899a05b5c2daeecfc5af8ea5ae748e29954c60",
+    "startedAt": "2026-10-06T15:37:00.677075+00:00",
+    "completedAt": "2026-10-06T15:37:03.687283+00:00",
+    "exitCode": 0,
+    "privateLogSha256": "17f07a55dbd0a77854c4502a4b1c48c836687cf5642f724cba2cfb383939ef38",
+    "harnessClassesSha256": "122dcc4c1be482ac3239325de6fb3d4bec12747d05adce3929c319ab5bdfd71d",
+    "sharedCurrentDriver": true,
+    "fullGate": false,
+    "otherCasesNotRun": true,
+    "wholeParentAccepted": false
+  },
+  "A01ArtifactSha256": "3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558",
+  "currentBaselineSha256": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993",
+  "commands": [
+    "bash tools/quality/vm/050_s1/pg493_a01_native_v1.sh",
+    "ssh existing-guest sudo -n python3 -B < tools/quality/vm/050_s1/pg493_capture_failure.py"
+  ],
+  "parent": {
+    "invocation": "52accf6d68f44487b6e0b3635c20396f",
+    "result": "timeout",
+    "actualExit": 143,
+    "kernelEmpty": true,
+    "normalCloseAccepted": false
+  },
+  "privateCapture": {
+    "actualExit": 0,
+    "observedAt": "2026-10-06T15:49:20.464359+00:00",
+    "snapshotSha256": "6515cdbfaee4df2f518acb1cd85d527f65dea1f0daa505e86d04c1eb2c903752",
+    "oldBatchRowsPreserved": 432,
+    "batchRows": 442,
+    "other20TablesUnchanged": true,
+    "legitimateHttpWriteTables": [
+      "app_logs",
+      "web_log_outbox",
+      "web_http_sessions"
+    ],
+    "liveCohortRetained": 4,
+    "startStopMutations": 0
+  },
+  "environment": {
+    "VM": "Ubuntu 26.04",
+    "JDK": "25.0.4",
+    "hostKernel": "7.0.0-38-generic"
+  },
+  "related": [
+    "BUG-799",
+    "YKT-570",
+    "QA-047",
+    "SSC-203"
+  ],
+  "allCHRPassed": false,
+  "allParentPassed": false,
+  "nativeSameSourceAccepted": false,
+  "coverage100": false,
+  "formal": false,
+  "ITSTAccepted": false,
+  "rawSecretsInGit": false
+}

@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate;
+import dev.codex.schubert.nk.batch.platform.BackupUnitStartClient;
 import dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle;
 import dev.codex.schubert.nk.batch.repository.*;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
@@ -88,23 +89,47 @@ record MorningCompletionEvidence(
       MaintenanceOwnerFrame.Guard owner,
       dev.codex.schubert.nk.batch.repository.SuccessRunLookup originals)
       throws IOException {
+    verify(database, clock, owner, originals, owner::check);
+  }
+
+  /** SSC203: full proofs bracket each compound read outside its TX, never a cached acceptance. */
+  void verify(
+      MorningDatabaseSession.Access database,
+      Clock clock,
+      MaintenanceOwnerFrame.Guard owner,
+      dev.codex.schubert.nk.batch.repository.SuccessRunLookup originals,
+      BackupUnitStartClient.RetirementGate boundary)
+      throws IOException {
     Objects.requireNonNull(database);
     Objects.requireNonNull(clock);
     Objects.requireNonNull(owner);
     Objects.requireNonNull(originals);
+    Objects.requireNonNull(boundary);
     owner.check();
     var run = begins.database().run();
     database.recheckConsistent(run);
-    if (!backup.equals(database.observeBackup(begins, manifest, now(clock), owner)))
+    if (!backup.equals(
+        checked(boundary, () -> database.observeBackup(begins, manifest, now(clock), owner))))
       throw unavailable();
     var actual =
-        backupOutcome == MorningBackupUnitCycle.Outcome.FAILED
-            ? database.observeCleanupBackupUnavailable(run, cleanup.receipt().exitCode(), owner)
-            : database.observeCleanup(run, cleanup.receipt().exitCode(), owner);
+        checked(
+            boundary,
+            () ->
+                backupOutcome == MorningBackupUnitCycle.Outcome.FAILED
+                    ? database.observeCleanupBackupUnavailable(
+                        run, cleanup.receipt().exitCode(), owner)
+                    : database.observeCleanup(run, cleanup.receipt().exitCode(), owner));
     if (!cleanup.terminal().equals(actual)
-        || !cleanup.references().equals(database.cleanupReferences(actual, owner, originals)))
+        || !cleanup
+            .references()
+            .equals(checked(boundary, () -> database.cleanupReferences(actual, owner, originals))))
       throw unavailable();
-    database.recheckExpiry(expiry, owner);
+    checked(
+        boundary,
+        () -> {
+          database.recheckExpiry(expiry, owner);
+          return Boolean.TRUE;
+        });
     // Backup was explicitly stopped by this completed cycle. KEEP_ACTIVE is only for the others.
     if (backupCycle.completedReceipt() != backupReceipt) throw unavailable();
     backupCycle.recheckCompletedBackup();
@@ -112,6 +137,19 @@ record MorningCompletionEvidence(
     expiry.receipt().requireStillPresent();
     database.recheckConsistent(run);
     owner.check();
+  }
+
+  @FunctionalInterface
+  private interface Read<T> {
+    T execute() throws IOException;
+  }
+
+  private static <T> T checked(BackupUnitStartClient.RetirementGate boundary, Read<T> read)
+      throws IOException {
+    boundary.verify();
+    T value = read.execute();
+    boundary.verify();
+    return value;
   }
 
   MaintenanceCompletion completion(MaintenanceActivation activation, Clock clock)

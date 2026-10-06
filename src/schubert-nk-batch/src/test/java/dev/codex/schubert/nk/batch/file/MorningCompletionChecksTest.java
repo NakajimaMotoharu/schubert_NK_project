@@ -94,7 +94,7 @@ final class MorningCompletionChecksTest {
       fixture.verify(db, MorningCompletionEvidenceTest.CLOCK, checks.ownerGuard(() -> 83L));
       checks.verify();
       assertEquals(4, txCalls.get());
-      assertEquals(14, peers.get()); // Two bracketed reads + first/final owner + 4 TXs twice.
+      assertEquals(22, peers.get()); // Four compound read boundaries additionally retain old guard.
       assertTrue(autoCommit.get());
     }
   }
@@ -154,5 +154,34 @@ final class MorningCompletionChecksTest {
     assertThrows(NullPointerException.class, () -> new MorningCompletionChecks(() -> {}, null));
     var checks = new MorningCompletionChecks(() -> {}, () -> {});
     assertThrows(NullPointerException.class, () -> checks.ownerGuard(null));
+    assertThrows(NullPointerException.class, () -> checks.ownerGuard(() -> 1L, null));
+  }
+
+  /** COMP203001: SQL callbacks retain live ownership, full peers only at compound boundaries. */
+  @Test
+  void comp203001FullBoundaryAndRetainedOwnerAreIndependentAndFailClosed() throws Exception {
+    var full = new AtomicInteger();
+    var local = new AtomicInteger();
+    var checks = new MorningCompletionChecks(full::incrementAndGet, () -> {});
+    var alive = new AtomicBoolean(true);
+    var failure = new IOException("independent retained owner expired");
+    var owner =
+        checks.ownerGuard(
+            () -> 71L,
+            () -> {
+              if (!alive.get()) throw failure;
+              local.incrementAndGet();
+            });
+    checks.verify();
+    assertEquals(2, full.get());
+    for (int i = 0; i < 52; i++) assertEquals(71L, owner.remainingNanos());
+    assertEquals(52, local.get());
+    assertEquals(2, full.get());
+    alive.set(false);
+    assertSame(failure, assertThrows(IOException.class, owner::check));
+    assertEquals(52, local.get());
+    assertEquals(2, full.get());
+    checks.verify();
+    assertEquals(4, full.get());
   }
 }

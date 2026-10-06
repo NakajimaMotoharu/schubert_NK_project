@@ -202,14 +202,23 @@ final class MorningStartupLaunchOwner {
                     require(confirmedProxy.ready());
                   },
                   () -> database.recheckConsistent(state.activation().run()));
+          BackupUnitStartClient.RetirementGate retainedOwner =
+              () -> {
+                budget.requireWithin();
+                root.recheck(morning);
+                original.verifyRetained();
+                root.recheck(morning);
+                budget.requireWithin();
+              };
           BackupUnitStartClient.RetirementGate pending =
               () -> {
                 pendingChecks.verify();
                 evidence.verify(
                     database,
                     java.time.Clock.systemUTC(),
-                    pendingChecks.ownerGuard(budget::remainingNanos),
-                    original::referenceRun);
+                    pendingChecks.ownerGuard(budget::remainingNanos, retainedOwner),
+                    original::referenceRun,
+                    pendingChecks::verify);
                 pendingChecks.verify();
               };
           BackupUnitStartClient.RetirementGate retiredPeer =
@@ -258,8 +267,9 @@ final class MorningStartupLaunchOwner {
             evidence.verify(
                 database,
                 java.time.Clock.systemUTC(),
-                retiredChecks.ownerGuard(budget::remainingNanos),
-                original::referenceRun);
+                retiredChecks.ownerGuard(budget::remainingNanos, retainedOwner),
+                original::referenceRun,
+                retiredChecks::verify);
             afterRetirement.verify();
             var requested =
                 state.completion().isPresent()

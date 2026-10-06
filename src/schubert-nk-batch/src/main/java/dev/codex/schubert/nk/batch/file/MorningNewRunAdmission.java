@@ -56,6 +56,10 @@ final class MorningNewRunAdmission {
 
   /** SSC178: only the currently held original owner can implement these capabilities. */
   interface OriginalFiles {
+    default void verifyRetained(MaintenanceActivation expected) throws IOException {
+      verify(expected);
+    }
+
     default BatchRun referenceRun(
         MaintenanceActivation current, UUID priorId, java.time.Instant observed)
         throws IOException {
@@ -97,6 +101,10 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface OriginalProof {
     void verify() throws IOException;
+
+    default void verifyRetained() throws IOException {
+      verify();
+    }
 
     default BatchRun referenceRun(UUID priorId, java.time.Instant observed) throws IOException {
       throw unavailable();
@@ -164,6 +172,13 @@ final class MorningNewRunAdmission {
                                   throws IOException {
                                 context.recheck(expected);
                                 files.observe(activation);
+                                context.recheck(expected);
+                              }
+
+                              public void verifyRetained(MaintenanceActivation activation)
+                                  throws IOException {
+                                context.recheck(expected);
+                                files.verifyRetained();
                                 context.recheck(expected);
                               }
 
@@ -314,6 +329,15 @@ final class MorningNewRunAdmission {
         root.verify();
         if (completed.isPresent()) files.verifyCompleted(completed.orElseThrow());
         else files.verify(state.activation());
+        root.verify();
+        owner();
+      }
+
+      public void verifyRetained() throws IOException {
+        owner();
+        if (attempted && completed.isEmpty()) throw failure.get();
+        root.verify();
+        files.verifyRetained(state.activation());
         root.verify();
         owner();
       }
