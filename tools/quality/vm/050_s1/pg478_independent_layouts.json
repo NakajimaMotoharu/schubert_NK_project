@@ -1,0 +1,649 @@
+{
+  "GAMRSP01": {
+    "dataLength": 9,
+    "recordLength": 272,
+    "maximumRecords": 10,
+    "dataFields": [
+      [
+        "Total count",
+        0,
+        9,
+        "N",
+        "M"
+      ]
+    ],
+    "recordFields": [
+      [
+        "Game code",
+        0,
+        12,
+        "X",
+        "M"
+      ],
+      [
+        "Title",
+        12,
+        256,
+        "X",
+        "M"
+      ],
+      [
+        "Display order",
+        268,
+        3,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        271,
+        1,
+        "X",
+        "F"
+      ]
+    ],
+    "publication": "234_認証・検索・シナリオ電文仕様.md"
+  },
+  "SPKRSP01": {
+    "dataLength": 9,
+    "recordLength": 152,
+    "maximumRecords": 500,
+    "dataFields": [
+      [
+        "Total count",
+        0,
+        9,
+        "N",
+        "M"
+      ]
+    ],
+    "recordFields": [
+      [
+        "Speaker ID",
+        0,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "Speaker名",
+        12,
+        128,
+        "X",
+        "M"
+      ],
+      [
+        "出現件数",
+        140,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        149,
+        3,
+        "X",
+        "F"
+      ]
+    ],
+    "publication": "234_認証・検索・シナリオ電文仕様.md"
+  },
+  "SRCRSP01": {
+    "dataLength": 48,
+    "recordLength": 5584,
+    "maximumRecords": 100,
+    "dataFields": [
+      [
+        "Effective page",
+        0,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "Page size",
+        6,
+        3,
+        "N",
+        "M"
+      ],
+      [
+        "Total count",
+        9,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Total pages",
+        18,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "First result",
+        24,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Last result",
+        33,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        42,
+        6,
+        "X",
+        "F"
+      ]
+    ],
+    "recordFields": [
+      [
+        "Entry ID",
+        0,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "Script file ID",
+        12,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "Game code",
+        24,
+        12,
+        "X",
+        "M"
+      ],
+      [
+        "章title",
+        36,
+        256,
+        "X",
+        "O"
+      ],
+      [
+        "Line番号",
+        292,
+        8,
+        "N",
+        "M"
+      ],
+      [
+        "Entry type",
+        300,
+        10,
+        "X",
+        "M"
+      ],
+      [
+        "Speaker名",
+        310,
+        128,
+        "X",
+        "O"
+      ],
+      [
+        "本文",
+        438,
+        4096,
+        "X",
+        "M"
+      ],
+      [
+        "Audio有無",
+        4534,
+        1,
+        "B",
+        "M"
+      ],
+      [
+        "Audio ID",
+        4535,
+        12,
+        "X",
+        "C"
+      ],
+      [
+        "Script display path",
+        4547,
+        512,
+        "X",
+        "M"
+      ],
+      [
+        "Audio display path",
+        5059,
+        512,
+        "X",
+        "C"
+      ],
+      [
+        "Reserved",
+        5571,
+        13,
+        "X",
+        "F"
+      ]
+    ],
+    "publication": "234_認証・検索・シナリオ電文仕様.md"
+  },
+  "USRRSP01": {
+    "dataLength": 48,
+    "recordLength": 168,
+    "maximumRecords": 50,
+    "dataFields": [
+      [
+        "Effective page",
+        0,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "Page size",
+        6,
+        3,
+        "N",
+        "M"
+      ],
+      [
+        "Total count",
+        9,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Total pages",
+        18,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "First result",
+        24,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Last result",
+        33,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        42,
+        6,
+        "X",
+        "F"
+      ]
+    ],
+    "recordFields": [
+      [
+        "User ID",
+        0,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "Username",
+        12,
+        64,
+        "X",
+        "M"
+      ],
+      [
+        "Role",
+        76,
+        5,
+        "X",
+        "M"
+      ],
+      [
+        "State",
+        81,
+        8,
+        "X",
+        "M"
+      ],
+      [
+        "Locked until",
+        89,
+        17,
+        "X",
+        "O"
+      ],
+      [
+        "Last Login",
+        106,
+        17,
+        "X",
+        "O"
+      ],
+      [
+        "Created at",
+        123,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Updated at",
+        140,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Version",
+        157,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        166,
+        2,
+        "X",
+        "F"
+      ]
+    ],
+    "publication": "236_管理・質問・通知電文仕様.md"
+  },
+  "UDTRSP01": {
+    "dataLength": 320,
+    "recordLength": 0,
+    "maximumRecords": 0,
+    "dataFields": [
+      [
+        "User ID",
+        0,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "Username",
+        12,
+        64,
+        "X",
+        "M"
+      ],
+      [
+        "Role",
+        76,
+        5,
+        "X",
+        "M"
+      ],
+      [
+        "State",
+        81,
+        8,
+        "X",
+        "M"
+      ],
+      [
+        "Locked until",
+        89,
+        17,
+        "X",
+        "O"
+      ],
+      [
+        "Last Login",
+        106,
+        17,
+        "X",
+        "O"
+      ],
+      [
+        "Password changed at",
+        123,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Created at",
+        140,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Updated at",
+        157,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Active session数",
+        174,
+        3,
+        "N",
+        "M"
+      ],
+      [
+        "Version",
+        177,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Created by",
+        186,
+        64,
+        "X",
+        "M"
+      ],
+      [
+        "Updated by",
+        250,
+        64,
+        "X",
+        "M"
+      ],
+      [
+        "Reserved",
+        314,
+        6,
+        "X",
+        "F"
+      ]
+    ],
+    "recordFields": [],
+    "publication": "236_管理・質問・通知電文仕様.md"
+  },
+  "LGSRSP01": {
+    "dataLength": 48,
+    "recordLength": 2088,
+    "maximumRecords": 100,
+    "dataFields": [
+      [
+        "Effective page",
+        0,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "Page size",
+        6,
+        3,
+        "N",
+        "M"
+      ],
+      [
+        "Total count",
+        9,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Total pages",
+        18,
+        6,
+        "N",
+        "M"
+      ],
+      [
+        "First result",
+        24,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Last result",
+        33,
+        9,
+        "N",
+        "M"
+      ],
+      [
+        "Reserved",
+        42,
+        6,
+        "X",
+        "F"
+      ]
+    ],
+    "recordFields": [
+      [
+        "Log ID",
+        0,
+        12,
+        "N",
+        "M"
+      ],
+      [
+        "発生日時",
+        12,
+        17,
+        "N",
+        "M"
+      ],
+      [
+        "Log type",
+        29,
+        16,
+        "X",
+        "M"
+      ],
+      [
+        "Level",
+        45,
+        8,
+        "X",
+        "M"
+      ],
+      [
+        "Action",
+        53,
+        64,
+        "X",
+        "O"
+      ],
+      [
+        "Message",
+        117,
+        512,
+        "X",
+        "M"
+      ],
+      [
+        "HTTP request ID",
+        629,
+        36,
+        "X",
+        "O"
+      ],
+      [
+        "業務Message ID",
+        665,
+        36,
+        "X",
+        "O"
+      ],
+      [
+        "Correlation ID",
+        701,
+        36,
+        "X",
+        "O"
+      ],
+      [
+        "HTTP method",
+        737,
+        8,
+        "X",
+        "O"
+      ],
+      [
+        "Path",
+        745,
+        256,
+        "X",
+        "O"
+      ],
+      [
+        "HTTP status",
+        1001,
+        3,
+        "X",
+        "O"
+      ],
+      [
+        "Elapsed ms",
+        1004,
+        9,
+        "X",
+        "O"
+      ],
+      [
+        "Remote address",
+        1013,
+        45,
+        "X",
+        "O"
+      ],
+      [
+        "Details",
+        1058,
+        1024,
+        "X",
+        "O"
+      ],
+      [
+        "Reserved",
+        2082,
+        6,
+        "X",
+        "F"
+      ]
+    ],
+    "publication": "235_メディア・ログ電文仕様.md"
+  }
+}
