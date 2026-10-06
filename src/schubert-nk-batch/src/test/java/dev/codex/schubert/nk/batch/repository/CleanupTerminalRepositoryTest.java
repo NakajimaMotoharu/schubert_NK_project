@@ -103,7 +103,8 @@ final class CleanupTerminalRepositoryTest {
     assertEquals(accepted, new CleanupTerminalRepository.RejectedSnapshot(RUN, accepted).entries());
     var wrongSlots = new ArrayList<>(accepted);
     Collections.reverse(wrongSlots);
-    assertThrows(IllegalArgumentException.class,
+    assertThrows(
+        IllegalArgumentException.class,
         () -> new CleanupTerminalRepository.RejectedSnapshot(RUN, wrongSlots));
     assertEquals(entries, new CleanupTerminalRepository.Snapshot(entries).entries());
     assertThrows(
