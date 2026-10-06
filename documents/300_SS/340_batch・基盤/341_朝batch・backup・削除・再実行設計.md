@@ -513,3 +513,6 @@ Package名/versionと非秘密config hashは記録可。
 ## QA-050承認反映：失効再試行rowの保全（2026-10-03）
 
 pending_context_revocationsはAPI/Web sessionの期限cleanupと分け、expires_at NULL/経過、attempt_count=100、一般0102、未知、復号不能を理由に朝batchで削除しない。検証済0000/0200と現在leaseの確認を行うWeb retrierが削除を所有し、固定maintenance functionにも推測期限削除を残さない。必要な旧鍵は未解決row/borrowerが0になるまで保全する。15分継続再試行とIT/ST性能問題時の間隔見直しはSS314/354。実cleanup/restore/鍵rotationの独立PTで保全を確認する。
+# 朝batch・backup・削除・再実行設計
+
+SSC202（2026-10-06、SSC200201/BUG788/YKT562）：隔離PG/PT VMの同日別run参照修正では、成功済みBackup二stepとCleanup七SKIPを持つ未完了runを保全し、027→028移行・pending code-only・一回用通常resumeを別の正常所有区間として認定する。元cutoff/activationをoperatorが更新せず、手DB terminal修復/日次業務再処理をしない。既成功Backupは元schema027の真正manifest/全byte/元二handleで通常same-run再用し、新profile028へ書き換えない。新規Backupだけ現在署名/profile028と整合させる。親fresh Invocationからの30分budget、実Unitの期限、API所有のままWeb/Caddy/原本DONE、失敗逆順停止・全後条件は既契約のまま。各段の実source/終了コード/全資源正常帰還を確認するまで次段の権限・成功を与えない。
