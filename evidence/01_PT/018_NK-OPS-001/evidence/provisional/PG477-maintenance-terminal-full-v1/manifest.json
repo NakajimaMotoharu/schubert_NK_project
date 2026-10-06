@@ -1,0 +1,3028 @@
+{
+  "id": "PG477-maintenance-terminal-full-v1",
+  "productionSource": "cce61f63900b1479f9f8dbdc338e222b1c8c38a3",
+  "branch": "dev-foundation",
+  "actualExit": 0,
+  "started": "2026-10-06T13:23:41+09:00",
+  "completed": "2026-10-06T13:41:22+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg477_full_v1.sh cce61f63900b1479f9f8dbdc338e222b1c8c38a3",
+  "modules": [
+    {
+      "module": "protocol",
+      "suiteCount": 17,
+      "tests": 81,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+          "tests": 7,
+          "xmlSha256": "f5e20cbb194372930f02cc8acedd0b6ea827130e3959540d72764b517be87f93"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+          "tests": 6,
+          "xmlSha256": "2c75bf2af97cc5e8a790a4a62ec613d20c66e1eeb2c7d072c9de4f6be06809c4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+          "tests": 4,
+          "xmlSha256": "7238230049af49421dbd4bffb91673153e3533c5bd280d51bc3d063724aa0d85"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+          "tests": 8,
+          "xmlSha256": "060af7f6a6a7820309a4480fc9be420698af5ca86d374c8088ef56a363ad4b3e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+          "tests": 5,
+          "xmlSha256": "47168b944988dc5c78b6dcdbe3754e857dc1c2a037a6adc3e1ea4b5a6acfb277"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+          "tests": 7,
+          "xmlSha256": "e8c9ee3c2a89dac140cf54738b71eb8f09ea5a850481313e60197704d6ec998a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+          "tests": 4,
+          "xmlSha256": "db666abd819d03fbcedc6d705846b4c285d23d7404f2072a50aba45f18450194"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+          "tests": 3,
+          "xmlSha256": "2b687f2ad452d2d05c43d002aa2296eb5a7c7ca9ce54cec6985f1dcaacf0e6a2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+          "tests": 8,
+          "xmlSha256": "0fb190b1b1978fe82356341d5887226389225f3899f4e46fbd96b6cc918047cc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+          "tests": 4,
+          "xmlSha256": "b7c58b89d7795030051c15fc88daa12f9183aaab4e47abe16b0314eafba7e138"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+          "tests": 5,
+          "xmlSha256": "54654a869fa1a961038502e1def241353339703f5f6e3ef512df3419cbf6396d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+          "tests": 2,
+          "xmlSha256": "2ad43eff595e626308b75624999665317766edb965aa9477a80d3921e80dbdc2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+          "tests": 3,
+          "xmlSha256": "e689ee636256009588c21ca42022ba64ce9e4e6a0aba6091ee3291fe81d59721"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+          "tests": 3,
+          "xmlSha256": "fd34b69b4e0885c2e48bd6f1b05cc3e4af7eaa1626c22a33c145bf5bae50aaef"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+          "tests": 3,
+          "xmlSha256": "b01b7d9e5a891fd647e6edf3b730872b018f47a8a76468c6b6183df3a03ae843"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+          "tests": 4,
+          "xmlSha256": "e07cc4a1617170463ff640badcfc0b4b1d1bdc0185b18c5c0f4ad1c5f0b956b5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+          "tests": 5,
+          "xmlSha256": "ac3c4f6b653e910c56c6544f0ca9961d624a530f4a629afd12d480cd7d5a6d8b"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17405
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 1010
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3464
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1273
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 741
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 157
+        }
+      },
+      "coverageXmlSha256": "1b67894847c9879d7d6f2c8bbef9a3413a79961ab71f52a0fcea470bb4d71107",
+      "projectJarSha256": "fe65f41540fcaae7b52a4495bbabb90b59dfcf09db6d062d48a2b8e43fd1c50e"
+    },
+    {
+      "module": "storage",
+      "suiteCount": 22,
+      "tests": 158,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+          "tests": 9,
+          "xmlSha256": "04a6557ce6adebb7a8224ca923e62ca3049c02dbffa3f8ebaada0b36335ebbe0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
+          "tests": 8,
+          "xmlSha256": "55c8d9494bdee7c10be6c5cb76d3dc6ea5886beaae21b49e8185325bf3555f9a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.StorageRootLayoutTest",
+          "tests": 2,
+          "xmlSha256": "1abf89cea623f4a687c504c5c44c2682ba00da7138ab7ca6dd6f8c6d673f50b3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxMonotonicClockTest",
+          "tests": 3,
+          "xmlSha256": "2da63f41f80aaee9d120ad440996cc844b366a8129dbe50c591953a069579da1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ExistingFileAccessTest",
+          "tests": 5,
+          "xmlSha256": "ff5786e901a966c435c15d9d4ec7f8f9e551b53c98153a4b53faf6a0bf3f83dc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest",
+          "tests": 5,
+          "xmlSha256": "7238b95d4f8f6b041b80131d1bd1b1bd04eb64cea3752a014512751de19b665e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+          "tests": 5,
+          "xmlSha256": "930603e845ac5de06cb071d2923c1145d495b95f23cb6bf61442ad1d3fd6bede"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
+          "tests": 8,
+          "xmlSha256": "7ccdde2ce0eae1adedb2cd5927691770d168dbf26fe4488b1e4b332f227c3e70"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.StorageRootInspectionTest",
+          "tests": 3,
+          "xmlSha256": "3c05aacb5e2854dea921a8b8d92d8f5a0a6b54bc7f360e137d35875d794c79e5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ServiceCredentialIdTest",
+          "tests": 4,
+          "xmlSha256": "5f8209ede81cd7c04d2b149c3e3bb005ae224e4ea0d957504fc7bbd5a2075eb5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+          "tests": 16,
+          "xmlSha256": "1d34a4528c2857a230a68bd5095713c757fede9eda52188ce1eb5da1072d8b10"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxSealedProofTest",
+          "tests": 8,
+          "xmlSha256": "dc38591dc782ab39e13e71c1eb77ea77af0cbb6979ba5c7e3c96357e400888aa"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest",
+          "tests": 8,
+          "xmlSha256": "2a0d93f47fdfea04022372074984707c6b311b1d1ef83dd68262d44e11589fd6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxStartupFileLockTest",
+          "tests": 8,
+          "xmlSha256": "02c45fdd0625ad9937792e05a8975baaddcad61e8c6d31c374778f882b29f054"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest",
+          "tests": 7,
+          "xmlSha256": "4df7d446df7dc30af7b8921612900db95b12a33aeb5239a1d08e9824a26abbd9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxFileLockTest",
+          "tests": 8,
+          "xmlSha256": "c73b69252d93611f527c043fde1a5f867f2d3ec8c0297f844641b89ac0e17c6b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest",
+          "tests": 8,
+          "xmlSha256": "5ee63a0ca492fa088851b50fb228473eb7fca82a121ce5c4f84f8301b1bc48dc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+          "tests": 7,
+          "xmlSha256": "c95edb46edfabc8fa00ceec7d881b8bb50b337d3dcc4fe2e5caef7ce76aad893"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxProcessExecTest",
+          "tests": 8,
+          "xmlSha256": "a1ca15597cf45524bacad9089da8a53bd037f9b0ea7e333ba405e03e711f5984"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest",
+          "tests": 8,
+          "xmlSha256": "b947cee32d4f0a883f04adfd648aaef9871bfd9541746550d440c9ed428e6fab"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "tests": 8,
+          "xmlSha256": "d0375d7c78f66bbcbedcb7e28867eabd33dccba62b0ace8734612a76a967f2b1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+          "tests": 12,
+          "xmlSha256": "1be29debaf98e0627e75096ce880d2223f28ee1aa8567039a04fffe0e8e32e68"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5940
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 505
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1135
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 502
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 249
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 36
+        }
+      },
+      "coverageXmlSha256": "c994fbd7f4b10caebd86cc9ac4f3316afaf30e3875830b35a4dfbb67f8878717",
+      "projectJarSha256": "a72b175c3f187c135de14582238f9edea41619612e41d755e9c2b0c6fa5c615f"
+    },
+    {
+      "module": "bootstrap",
+      "suiteCount": 37,
+      "tests": 246,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ChildCaddyTest",
+          "tests": 2,
+          "xmlSha256": "c457260d7a30a747b014176304654ef277ccd80d70a828dcbcc5a2211b3b4178"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHoldTest",
+          "tests": 6,
+          "xmlSha256": "e9b576b1e215f4646a54eafca95071af37d0ee79901196cb9b20ff084ee2c270"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ReleaseApprovalTest",
+          "tests": 8,
+          "xmlSha256": "d878ab815e0e3bf78e1e573d60d3958438db2b55b796577d7a827aa4bc2aac24"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.BootstrapCredentialLoaderTest",
+          "tests": 3,
+          "xmlSha256": "7d82c14a305771411ef16211033ae441ccaf56c74e1c1a1a04ed3cd987035647"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.ServiceDatabaseAdmissionTest",
+          "tests": 4,
+          "xmlSha256": "d1ab25e6439e5de1a1deef5cce1be32c4997448eef07d345ed5845137c16c34f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorAesCredentialTest",
+          "tests": 8,
+          "xmlSha256": "8688ffe3853174ab61c70f643af6cd11f861bccce8f3b3a2437b7d928e62b7c8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+          "tests": 8,
+          "xmlSha256": "615da5d85f7ce4b3e0c709ea3aa9ce6acfa62a4873c6040180e20baaa96f5470"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+          "tests": 9,
+          "xmlSha256": "26f44e8b6ca97fc555e3c131c481b9bfb961d62602df1ecb6c6e311508c09160"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.TerminalNativeCoverageProfileTest",
+          "tests": 4,
+          "xmlSha256": "84f34250e01fc7028bfa0d5c404f11e904805b4cc652e5da1b7066c625e47e4c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "tests": 4,
+          "xmlSha256": "2fdd6c95de3dacd04578b31cb81b3ea671ef2b2fb4b0b4b49aa778fcd333473f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+          "tests": 10,
+          "xmlSha256": "076a7ee461520eef7fce96b08e6e8b0bcbfd30965f30917f1eafcd0f7290c51d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+          "tests": 5,
+          "xmlSha256": "6494d04d49bf944083101c2eee75df9447a899b8af8aacbd9545c38ed2f82c7d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorCredentialAccessTest",
+          "tests": 8,
+          "xmlSha256": "baab64416ea1b7b4e1d5316ec1949a17d098419dd2022af1da3e294f9e6f52a2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.StartupReleaseManifestTest",
+          "tests": 9,
+          "xmlSha256": "ccb50bff65c06db58df332d7c61416d36de1f42d6d66c3f98224b7bfbe66a865"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ChildMaintenanceParentTest",
+          "tests": 3,
+          "xmlSha256": "357806b9816bd0b995c0aaaccae37da0a4a6f236c09ddfed51ed5d04906fa6e3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.NativeCoveragePrivateFileTest",
+          "tests": 5,
+          "xmlSha256": "004c55ea57331ffbee4016d9ef01fda846e7a24459b85a3449a3d48ce51f7506"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.InspectorDatabaseCredentialLoaderTest",
+          "tests": 5,
+          "xmlSha256": "ed8929ba452a2871cc5545986fa998de84006b702fd8292467ec00445c20d876"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+          "tests": 6,
+          "xmlSha256": "4b482505a841c21e838be5f0b8f9588f7c20b334dc17c1c5e4627dba6cc94600"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ChildMaintenanceInspectorTest",
+          "tests": 2,
+          "xmlSha256": "7dbb776bf9adb7a90b0124a1e1ea994c4fd3b3db75aff89b0cea9f1ea489c487"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+          "tests": 7,
+          "xmlSha256": "f5d998c04d05d179fe41808de38c66893806025f4f984cc21a1b9952e2dae8dc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ReleaseInventoryTest",
+          "tests": 16,
+          "xmlSha256": "20680f89dfec6a2d7f48eea5eca9d5f1721075c7a3123a8f2e4a5e2caa4d8feb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrameTest",
+          "tests": 4,
+          "xmlSha256": "074f8866ba9387a5ab5807368806ea910ee50e1dc48cc704c43d0c9a01b1ae86"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ServiceNativeReleaseTest",
+          "tests": 1,
+          "xmlSha256": "c17dcab8dd961ac021e0ebcab2071de165ac388eb77bd075ebe6fef61f07692d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest",
+          "tests": 10,
+          "xmlSha256": "03cfad6310b92814d458332c7d95510dc026d5f5c30b9acae97c1a5b262a2c10"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.StartupProofFrameTest",
+          "tests": 8,
+          "xmlSha256": "404e0f29b9f9a1fc0991f3662739096e0d8fa75d5c3faff26fc40e52101b28ec"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourceTest",
+          "tests": 6,
+          "xmlSha256": "c5aaf3152f9ad599d1309aa961478e732764de9c9120830f05048536abd46767"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfileTest",
+          "tests": 5,
+          "xmlSha256": "3bf7ac8be339123b49a9f940dac10a65cf1bee5535bdfaec3b61355aac01a0ad"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest",
+          "tests": 11,
+          "xmlSha256": "f3c2b5a462ce13e2d32635bfd98bbfc4ddba4121ba4b28d0a63779eb1dddb570"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.FixedServiceExecArgumentsTest",
+          "tests": 5,
+          "xmlSha256": "5568d4a57e8cd64b800e2d9ef251d0b97891510e7f2f2ef2cac9e14ed75929be"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.BackupCredentialLoaderTest",
+          "tests": 8,
+          "xmlSha256": "428f1fe2066dde58f08ff54f0e1b01aa1a92b8d760012ec51c42534b0a995ea5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebNonSecretConfigTest",
+          "tests": 7,
+          "xmlSha256": "8fdf560c0a889ce00acaa0ad9909da619342107fd104db16745d5176b66e6051"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ServiceCredentialReaderTest",
+          "tests": 12,
+          "xmlSha256": "993e4795e2435bea238a5b9c05811c0e9768e839c302330fb71ad1b4fc6a1b0f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ServiceProcessResourcesTest",
+          "tests": 7,
+          "xmlSha256": "bb98cf7c89801b215283bcf37a2835b46a58ebbac0187564b7aab7bd47f33463"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ChildBrokerTest",
+          "tests": 2,
+          "xmlSha256": "17873db945283710b9fb91768c08afc8dcf42aa12890db233212f1b9b91bd28a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest",
+          "tests": 12,
+          "xmlSha256": "a730b182ce3f8d21e8dd88c30c586270418e1cd41d74673a8d8915f730345bc3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.bootstrap.ChildStartupContextTest",
+          "tests": 8,
+          "xmlSha256": "2df3915ee9f3396040bc242494ed41f9d8ebea107582bd7393e7db4aa7e7e314"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.BackupRequestCredentialLoaderTest",
+          "tests": 8,
+          "xmlSha256": "e32eed6903c320fa56ecaf2c329d26be4a614a20992fde5eb315b33231ac8fde"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 853,
+          "covered": 13267
+        },
+        "BRANCH": {
+          "missed": 125,
+          "covered": 1415
+        },
+        "LINE": {
+          "missed": 171,
+          "covered": 2461
+        },
+        "COMPLEXITY": {
+          "missed": 127,
+          "covered": 1123
+        },
+        "METHOD": {
+          "missed": 35,
+          "covered": 445
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 71
+        }
+      },
+      "coverageXmlSha256": "437787359c3858ee9f9165a5c05581480cd95002713b424174f658f49d375a9d",
+      "projectJarSha256": "a081da158602fddd2c6a19e8d693abee2cae6350c4fe359b5fbe881849ba589d"
+    },
+    {
+      "module": "api",
+      "suiteCount": 152,
+      "tests": 934,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.api.security.LoginAttemptStateTest",
+          "tests": 5,
+          "xmlSha256": "8a3c3d522b5282611386128ca189a21fe6cba5f5630aa46dd7921dfe36866c9e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+          "tests": 14,
+          "xmlSha256": "2ee84c6bd2748199b910b0a62dcf9dae83f8c53af45c69ab3845bcbfb6fcdfb5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest",
+          "tests": 8,
+          "xmlSha256": "345819b7fe6322a301aebb84e10e20bc546da30e2bdd61544f68d905b2dae13c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxDeletionBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "1cf88181286577212b421d77566f755e473171bed7a033690975017df9c1c08c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationServiceTest",
+          "tests": 9,
+          "xmlSha256": "da2eecf6de3053c57fb336c2084b07bcc9ba48e4ff8b2b932e48140648c6c7ba"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest",
+          "tests": 7,
+          "xmlSha256": "0cc096199916042c915ec6bf5d8d79ee8228a24b188b655cb27fb7bfa761c711"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiConfigurationLoaderTest",
+          "tests": 5,
+          "xmlSha256": "504da73d0f9894ee259da74c03111e18c0c6a542a1981b2800244901b081087e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.InboxModelTest",
+          "tests": 5,
+          "xmlSha256": "b1a82c9ddfb47bc2a70bf043de609aaf829b82f3e91f8949b24d51e9acf24ff5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioMessageGuardTest",
+          "tests": 3,
+          "xmlSha256": "1b1c0186ef9555bb6b0676d80e25b5e6a08c73485ee5349b6100b997595882eb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.BootstrapAdminServiceTest",
+          "tests": 10,
+          "xmlSha256": "b6d8eea9b046550c46ac398a6e4233b220583c94f7184e55187fe3a435f4b959"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.log.LogRequestTest",
+          "tests": 3,
+          "xmlSha256": "0e099b51bc7e606e91fc0147a5b3b4f4a82bf1cd14a8e31508b0d60ec4715520"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.RequiredColumnTest",
+          "tests": 1,
+          "xmlSha256": "16d23aa9f1ae534b98fa6c3ab7d34750a5b13bf87421d300c2ecbc0d2be3b681"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+          "tests": 5,
+          "xmlSha256": "ad1e8fc3f90d9f6372533591674f1a8312a963264db3d11995d0430387869905"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntimeTest",
+          "tests": 3,
+          "xmlSha256": "8a1c7537fa7e52a0fa5fefee75165563f02751e05bed974d2a60ca286fc6a7e2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.LoginAttemptRepositoryTest",
+          "tests": 6,
+          "xmlSha256": "a64e91aa6eef224d5a426891e3c88d41ca7229259e246bc91a62370f54f6637d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.logging.MessageStoreCleanupTest",
+          "tests": 4,
+          "xmlSha256": "af5a1bafffd1ed792765700bd9af8f0b6bbd8119c7a625a1f1250294e385134f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.DatabaseMigrationTest",
+          "tests": 19,
+          "xmlSha256": "318aec1de1018d95c59c79367c79544e03996abe759d78d7a6953b62011a9174"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.log.LogQueryApplicationServiceTest",
+          "tests": 9,
+          "xmlSha256": "102517c5f9f1aa8b7c81920c0b4cc2c8f070df0bac135aa6ebf4f6199c362837"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationServiceTest",
+          "tests": 7,
+          "xmlSha256": "7f8db51a922fec8dfb1f59a32c34fe637ccb7f6a331a58c954d99aa64694b450"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+          "tests": 13,
+          "xmlSha256": "bc4916996741274048f6faa1a7715272bcb2da98e939cddd715f724d4ab3cb99"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest",
+          "tests": 7,
+          "xmlSha256": "41e4dfc56393552c6fd1cadb9fcd7564f1eb51e078897805338c67dca8baafdd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnectionsTest",
+          "tests": 7,
+          "xmlSha256": "8b61e20c9fc766adaeb475e87b02deedbd8c0fbb74a32d3c03acfc23024e96e4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest",
+          "tests": 4,
+          "xmlSha256": "58491ad97dfda34c13f0c5fafc7f110e6fb7dc42ccb2bbdf399d102eeb2bdf9b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisSecurityTest",
+          "tests": 1,
+          "xmlSha256": "e904e0211f3d656f784e66c3874b212bd8f875bdc55c6534219a3b76413cde9d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorLaunchConfigurationTest",
+          "tests": 4,
+          "xmlSha256": "a9f210fd5b9877733bffa28bd9f77dd6cc76100c2ffc5f86356507216b8e7ac3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiConsumerTerminalRemainderTest",
+          "tests": 3,
+          "xmlSha256": "a3d5c7691038461d5a0eb6a9f58f5f8bbfda88ea3e3b520b4edd3149d4ade202"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.FingerprintKeyRingTest",
+          "tests": 3,
+          "xmlSha256": "aa83e8bd6c102d294238ef6e25a31e9f7f8580b04a87f38cbb977c2d6cbd9656"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+          "tests": 2,
+          "xmlSha256": "57a6625bfbf5562921f70ca2ff19a834785716a77e9e0cf0c33259f00c9a2328"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayServiceTest",
+          "tests": 6,
+          "xmlSha256": "ae8942d56e66661410cfd877aa5365f27f6aad5af5a0adec587fc8d8c1980163"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.LoginReplayServiceTest",
+          "tests": 5,
+          "xmlSha256": "3454750d1d655296c115f516e6acbd9ab1a8c76c3c2d9e5070af0f3b8b82da1b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionReceiptIdTest",
+          "tests": 8,
+          "xmlSha256": "2a6fb69079c892364d8eed851c556ea137acc87541ac4d25600b3206174b95c7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.StepCleanupBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "117e5c0b292d0131c7ee6f535e18d8bf264092b46a534a9cada35ea217906f40"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMessageWriterTest",
+          "tests": 3,
+          "xmlSha256": "102b03c6a1757c59e23c766fcc6da314c8f79242e50ab120e8d132137e56e392"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioRequestTest",
+          "tests": 3,
+          "xmlSha256": "506ec3008a580f1db8f53c4560f6bfc807478faa5da02093cc215c3487b502f7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+          "tests": 5,
+          "xmlSha256": "b0b86115964b4239d70fde92c6ec104cc774b70713ac58d96e1f81cd8cd7fa2a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.media.MediaApplicationServiceTest",
+          "tests": 7,
+          "xmlSha256": "c0d769021f24531b71d2525da3c26e106f5c761469771ab11c6362900b3a17ce"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest",
+          "tests": 4,
+          "xmlSha256": "93ffd4445368c8a93af6835c3ba3157273cc0aa302b0ddb0a9a90f5394d38153"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.InspectorApplicationTest",
+          "tests": 9,
+          "xmlSha256": "a012e8ce173c3db1d2b7535cf6da8ee661d69bd279ab6e2c818417c4a77d1a6a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionMutationInboxInspectorTest",
+          "tests": 16,
+          "xmlSha256": "963d662c496e5355fdd47b10ece97c297ab5875c601c35eda5148d3ea1f37e9f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "tests": 6,
+          "xmlSha256": "701cecd904ae911a00fe2b153992e0046567bc48c604414e83b76c65be633819"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.OutboxCleanupBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "3091e905193380164aa344b5e7bcade97786b7df05836388ffb6ab1caa2f9ce7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.log.LogReplayServiceTest",
+          "tests": 3,
+          "xmlSha256": "b33614220a7c92fbe27593e7a5af7a8b7da2e3ba53baf853673d01f6daa5624a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+          "tests": 14,
+          "xmlSha256": "491323f7fe5c744ea2ed547c528fdb6eae18c9cdf1bab27dfe6d90de69a3ffbd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferRootInspectionTest",
+          "tests": 5,
+          "xmlSha256": "847152441031f6a42841010e8bacaf26e72f80259bf84ea78c09c1f4dc8ad570"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiProcessLifetimeTest",
+          "tests": 4,
+          "xmlSha256": "e56840e39be7aad099950343b4f14a328c30cdda6f106e5a24a5bd97dc7865cd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.ContextHashTest",
+          "tests": 3,
+          "xmlSha256": "7636b0229e99aa1a83943a3a7739bbea48382410a97075c2d011e67eba74a878"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+          "tests": 7,
+          "xmlSha256": "4009d44600e5a5ec2741a02f6e40c4a9b49e22b710a2a5128e4ec7928ada9a77"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest",
+          "tests": 2,
+          "xmlSha256": "a26a7e5d53ee94d8c947ac19f4dced8ae8f52bff2c2b46b41e41b8b1bcffa7e7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+          "tests": 16,
+          "xmlSha256": "cecf28ebe9ba9540520596d342f08f58fc6cf96638451fa872959947afb25e97"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.BackupRerunBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "61df6e4f15bc346d321fa08f3ecea21dd7e3c8069d81385dcefcd978b7c831ca"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.ApplicationServiceUnitTest",
+          "tests": 4,
+          "xmlSha256": "774ca699a9ccc313b40d17099d63c13191da24e79d113901ed1294fbdbb888f2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMainTest",
+          "tests": 4,
+          "xmlSha256": "e59e5384adcb355bb78b88df125bd600b034eeeb8953e22a8461ae97a7a38c69"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorProcessTest",
+          "tests": 14,
+          "xmlSha256": "0c4a0ed313508d4906d3833c903be3a317cc8217245159ef9a28142cd12e0492"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AdminCommandAuthenticatorTest",
+          "tests": 7,
+          "xmlSha256": "0bb198c304e1dbe0515908f766fb29b77c66d1b7e7a73d72639abf4abd2ddbb1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.LogoutInboxServiceTest",
+          "tests": 13,
+          "xmlSha256": "8e73a1443a87c21e69651d4a2bbc2e1e1feb4af911a67427df02ca79ae18c3a2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.persistence.ScenarioRepositoryTest",
+          "tests": 18,
+          "xmlSha256": "bdc1cc534e6eb5eb8f9872eb18af5e06d2e6509d3fc8dac536cda024f71dc14d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.media.MediaReplayServiceTest",
+          "tests": 5,
+          "xmlSha256": "6dbb4b4a4550887c4b1857478312b0efd691bb72c45ca1e95fae4f9f2ecc8e3e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+          "tests": 9,
+          "xmlSha256": "05397c6daf9eb2cb547b2c7014c40a7c0ff51edc7b64990de2d7ed8beb5a717d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserQueryReplayServiceTest",
+          "tests": 4,
+          "xmlSha256": "98fb00ac58ad9888f612cfb7b73493c11cc16d01fb2f480233daf85872bfe2e9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest",
+          "tests": 4,
+          "xmlSha256": "e2ef65148e90f248a7e6a539a73c36f1c07fe11557df5ab19a164d4501fc5add"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+          "tests": 2,
+          "xmlSha256": "a7ca695741f6b7cae1340c5221d247a4ceb6b8019865749022f3cd34b628d306"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthSessionRevocationServiceTest",
+          "tests": 8,
+          "xmlSha256": "53288e45cdeba6f43d9659db123283114e8fce7dcff207e1d344b3c9b715ae83"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+          "tests": 4,
+          "xmlSha256": "5c9c35b2b506f9f8195187bba39ea5c3ee473f473c86ffc0350ac363a0682086"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisFileJournalTest",
+          "tests": 6,
+          "xmlSha256": "a0fc0e26be65087b6e3b28051eaf49acd3ba1ec603bbb3df2aec572dea48f018"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxInspectionBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "d0e0cf69392bfc9ff958ae2bdeca7a441f33544eb3cd472ab86d7e88c86766f7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.LoginUsernameTest",
+          "tests": 3,
+          "xmlSha256": "7fb461291bdd37eeb32dc89bbf10f22e5841e454304a297ac8658db92ebfb3b2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.InternalEventListenerTest",
+          "tests": 6,
+          "xmlSha256": "693f6c1398a201d0d7ce3a074327700049ea4ccf6737f2844ce72f5cd8d18c83"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+          "tests": 6,
+          "xmlSha256": "e480e5f7bb0ec155295ae101a44afc850f247b24f9a2a0657b35e43d05ca62fc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthorizationServiceTest",
+          "tests": 2,
+          "xmlSha256": "90835c17943a47683e32cebdd3ac0800f395b8aa06b29f15120bd63087653620"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest",
+          "tests": 8,
+          "xmlSha256": "111fd3fa1dc0790e2b719e349cbda2eacd32d3eef5e1573f3a3047c705b1b594"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.PasswordHasherTest",
+          "tests": 3,
+          "xmlSha256": "ec961dc41d7f30001ed003513b216db4e45b2a758d5a15532db937b0d2bd3647"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.StubAnswerProviderTest",
+          "tests": 5,
+          "xmlSha256": "7bbc537c58a5ddc265a3fdce67eb296ccff3c2ed6314fce0b33e8b0f482419eb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+          "tests": 6,
+          "xmlSha256": "49ce3053a7f3b10ad318af750dac62e70263c90e9d2e016039da8eb46af58285"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ApiBrokerFactoryRemainderTest",
+          "tests": 2,
+          "xmlSha256": "6508e641ce5521554eb39a5c76184774d577f707cd401aac515dad1ea0642077"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationServiceTest",
+          "tests": 12,
+          "xmlSha256": "279c2890496064e31ecaf86189a9347c32468e17a2f8a85b89995d37d456abdc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.persistence.MediaRepositoryTest",
+          "tests": 11,
+          "xmlSha256": "2d349f4ab3de56df92567e79c738a6fad5c09b80bcdfe51a922b28deae0c772b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+          "tests": 8,
+          "xmlSha256": "ceb1f1f2dd2576b0df3de5f1e7fc28b6a4a0e77aca25f3b99cbc6ed1a76e6480"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthenticationServiceTest",
+          "tests": 7,
+          "xmlSha256": "353325bb7e202fe26d3f385b641adeacfca8099a5050753791c903e1490e310d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioFileRegeneratorTest",
+          "tests": 3,
+          "xmlSha256": "12050c4fd48c581b3717b3b7b47fabf0ce5f1ea95fd3de06569ded14692ad207"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthenticationContextVerifierTest",
+          "tests": 10,
+          "xmlSha256": "6a24a06c0a46940032850cd5844b4a4315af75f7d001a788541b8ddd6f02ddac"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+          "tests": 5,
+          "xmlSha256": "8a708257cb9fe54176ce65a710e09aae815781ecdf148ac8c4ba0222fc7f9b79"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.OperationFingerprintTest",
+          "tests": 5,
+          "xmlSha256": "4fb8345fd7eea6b77323772ea8e0d05990b7e0c58b3013d0ab37e73c10d25fac"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressTest",
+          "tests": 9,
+          "xmlSha256": "342245151a16842c6c2c53a4229739a31f4afa513942fcf5c568752791683c9c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationServiceTest",
+          "tests": 9,
+          "xmlSha256": "a3dd1b373f0e1ea5ca3438c12e98c0599972bb4e74322e577499ab6028abcce8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisTransportContractTest",
+          "tests": 2,
+          "xmlSha256": "683e22ce8d812ded3417eb46bf36c2135fe59bd89d0694f2c76f797c12a29e07"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+          "tests": 3,
+          "xmlSha256": "d935d3cd55e0878aad811eec58ba0fc3080a9fd12c4352b6d5bc63bfe16b08c9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiStartupInputsTest",
+          "tests": 4,
+          "xmlSha256": "a41ad9426da74237e83b9959d7c425c41cbd5b069336ed0e157f71bb8444721e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest",
+          "tests": 5,
+          "xmlSha256": "01e727a778651eb95d1fa384d6d6a134488a67da2c5b9ca8599ef7b1356278da"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.QuestionDlqMigrationTest",
+          "tests": 4,
+          "xmlSha256": "612374d0131f8f82237b651886eb624280fbfcc84c590045ce340ec26c1f7312"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.dispatch.LogPathSyncRequestProcessorTest",
+          "tests": 5,
+          "xmlSha256": "a8fc17cd46f8f2e4d6bdbe295328481377b78a05927c33f39ac73841799bf97e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferStoragePreparationTest",
+          "tests": 2,
+          "xmlSha256": "a14e497f40ca934b205d6a5ecb709be7398cc9192e9ca4c1c47ad78b969028c5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.AssetManifestLoaderTest",
+          "tests": 2,
+          "xmlSha256": "b7a0124012dc746bac07eac1f3d0ced9a95c6cd3bf04bdce515607c56d5a2c3e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.RunReferenceBoundaryTest",
+          "tests": 10,
+          "xmlSha256": "959caa13c5f3baf85e77b7901b49c370e63b9b01ae3516b8f3eb82a6b46abaeb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxInspectionProgressBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "53a7bb0186f7d7cc20f82aaff36777de9f9b1635b270558906e477b18f715032"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectionParentBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "6326376970bcfafeece30943d7d15d680a7cf284e5f15211fab8d061669e8184"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxModelTest",
+          "tests": 4,
+          "xmlSha256": "03e94390019f8253308457c39c5358792553efc107063b87741cc604354f0b04"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.ApiApplicationPreparationTest",
+          "tests": 5,
+          "xmlSha256": "4873072500b50ce6747319d6273f2c9e0c3b55c22ac538f34968c01c838fa2a8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.LogCleanupProgressBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "b69d90f1da4860b922e60e2290de2b4b45f00cb87450f921e89dd6fa6e356688"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest",
+          "tests": 3,
+          "xmlSha256": "c343a117cc53013e4272904ea893cbc164a6d840c9034b3b135735215aa3c785"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferCapacityTest",
+          "tests": 5,
+          "xmlSha256": "f6a98da84089e26cb94a9926c5f35b86a2601d8b24f3dabd46649e516568428b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.persistence.LogQueryRepositoryTest",
+          "tests": 6,
+          "xmlSha256": "de222f6742a72df6335e51f60f96a36b189f76006b5d7d1105b6b1606ba50945"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.NonAuthenticationInboxInspectorTest",
+          "tests": 8,
+          "xmlSha256": "bf7245fe1695f93e9990b743e7c299338caec6d0c7d546d41462fa4b4c983220"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.HeldMediaFileInspectorTest",
+          "tests": 3,
+          "xmlSha256": "2f50f3d732defb3f39aec94d6a07af384989831e30affece48708fb88db544e0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorDeploymentTest",
+          "tests": 8,
+          "xmlSha256": "3e74f94b113202cc5f98372c7dcc59cca5331b6290cb629140ca26ff8f1e88e6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+          "tests": 4,
+          "xmlSha256": "389cc96682f105b4ad2074e3c40d36486a2d5876f8e77f45af985b36abf87cf0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiJdbcPoolTest",
+          "tests": 3,
+          "xmlSha256": "be5bc87284b615f727e48ec7d6f27a840d9716c85570a22c210f87ca17229c0f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthSessionServiceTest",
+          "tests": 6,
+          "xmlSha256": "fce8c3819bae9cb8d2e5c5041c7ffccbda0fe9fa109585b910a3a24492c24943"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.persistence.UserQueryRepositoryTest",
+          "tests": 8,
+          "xmlSha256": "d23b8e0015e9d118b98d7cfbbf4b0d5deb6c6e420b26c7127868175614a54239"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest",
+          "tests": 2,
+          "xmlSha256": "e8db72c6b52762cf299bcb01c7b22ebf38fa0d7cab875de65eec0f44e6be5f57"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+          "tests": 8,
+          "xmlSha256": "55db8e5d7b2dab581c4a66906b34503ccdb8dfd3d0a68bb8b503aa7fc603ceb3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest",
+          "tests": 10,
+          "xmlSha256": "065317b13de3df44b02d8aad6796b9969bd2836d77045d88b93e7a25ce0a3976"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+          "tests": 7,
+          "xmlSha256": "038f95899f2482d5d5dab03678d158d5a53b339b4da3be6ac5c49d0871ed6787"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.BoundInboxExecutionTest",
+          "tests": 4,
+          "xmlSha256": "5c7647663539f749c29e9decd7ec1f4956b81d198f0cf137e3003aee4bdf203b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferContentVerifierTest",
+          "tests": 3,
+          "xmlSha256": "b3c67e983322a423ab5bbf35bd5b2f6261c133fad4a290b8148f7d1b5dc7c545"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.bootstrap.ApiManagementServerTest",
+          "tests": 6,
+          "xmlSha256": "788e3be8726aad065bc6372c2f830bae3424eff0047060f550a5173d429ac0c7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+          "tests": 5,
+          "xmlSha256": "e006a7d7b501cba5410d37bd5b2778823ec3764253b81ddb70ef8e0d320c2532"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionBoundaryRemainderTest",
+          "tests": 6,
+          "xmlSha256": "a763189c3db96a9befb3c0327c59c6752081ddbcefffb0aa9e4714ce50687479"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+          "tests": 12,
+          "xmlSha256": "912007219da69680473857d4e75f542b53d21e86212aa8128b4310cbc2a40ef1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.JdbcScenarioSnapshotReplacementTest",
+          "tests": 3,
+          "xmlSha256": "955b3fd0232f17fcc6353f1b4eef02a75cb7e38262efbdb2c0502752d8379503"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+          "tests": 2,
+          "xmlSha256": "274b8f2fce305ed123afb76725d5d08b01f3fc35d93094cde7aa062856fdf213"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+          "tests": 4,
+          "xmlSha256": "96b8a09851dbba1ba3d978578fec023c1b04698a711c89d6c37c6e90488d7838"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.media.MediaRequestTest",
+          "tests": 3,
+          "xmlSha256": "912eb344e16f2545da47e3dd00bc0833b7baae41667caf8074f8d4726b3acc56"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionMutationReplayServiceTest",
+          "tests": 4,
+          "xmlSha256": "a711802f2dae29c1d5f10c221e8d4709fccd1f00b68a9f4b299bb4c0356be3c4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.ResultBoundResponseSnapshotCodecTest",
+          "tests": 8,
+          "xmlSha256": "d26bc5a6ebd813862b8205d437b5a29c5e923c8814bdf0187ae229e73aadf56d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+          "tests": 3,
+          "xmlSha256": "463185a881467a0989306fb16f5cb04f11bf848194c6a0749d642b7a9413a1d7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioAuditWriterTest",
+          "tests": 5,
+          "xmlSha256": "cf4476df3f365ccc5fab14c112ea070aa00e2b3490a4eac3de6469f849b0838b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.NotificationStateMigrationTest",
+          "tests": 3,
+          "xmlSha256": "d2b3407eb5f378035779b4d6cae5736c5dab9a17a44b99220796a36e31e24b18"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectionRunExecutorTest",
+          "tests": 9,
+          "xmlSha256": "2bdf7aa820e36314a8e5c108f19f52e77f92491bf2271914617dadc334b7f8c0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxMaintenanceBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "0dc604137feb36a1066ac2cc3191f0b6b02b1ce3fdf55a375a86581d0e905719"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboundJmsAdapterTest",
+          "tests": 2,
+          "xmlSha256": "700b2cf3ce16998891826a3f5146bf00e26eafa29bf1f9c4c6c8382ee5345535"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.database.StartupSchemaProjectionTest",
+          "tests": 8,
+          "xmlSha256": "e95534a04993636ec84c1e413497d25872d121732c6fdbc2eb0c2504f1700468"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisConnectionFactoryProviderTest",
+          "tests": 3,
+          "xmlSha256": "83886b056289482293aa95b1e28aecbc2983b13d041dc057e5c1742606649b3c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferUsageScannerTest",
+          "tests": 6,
+          "xmlSha256": "31dd8c1e70b07f8d2b27b65932668131c1c9e9669ce0730d0cf038caac941636"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.dispatch.ApiSyncRequestDispatcherTest",
+          "tests": 6,
+          "xmlSha256": "ff758771cf4aa2bc9bc0c960bc50c2ad1a4fb48f61be41d75b6a0afa5b6ad51d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+          "tests": 3,
+          "xmlSha256": "f95e21c6d70543613bf78dc9145c62ef93ca5750fe81747b61a3fb967fbdf5f4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InspectorSettingsTest",
+          "tests": 3,
+          "xmlSha256": "b3598664b1ac380f33ec11e28a9f0b9d444123c1cbc7d774e9c6d814147c8394"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionSubmitRequestTest",
+          "tests": 8,
+          "xmlSha256": "468e8d890257107517e45751377266d795d1d78f891d955ff9e5de14bc9eee8c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationServiceTest",
+          "tests": 7,
+          "xmlSha256": "f3fe56e303cccd400047f5763189274205bafc20748df3f17e67b43391c85803"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest",
+          "tests": 7,
+          "xmlSha256": "e453cbab6715cfc043faf781f75303c8b6911263c09a4da412332161fb51f98a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.TransferStartupProbeTest",
+          "tests": 6,
+          "xmlSha256": "9a0f8caea34343034142cfef1a0a3f523ddfff8a92884ec7bb9d9623fa7b90c7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+          "tests": 9,
+          "xmlSha256": "fd3245ea01710b12bfea26f55f2a6747b78398401f2dda333aa3cc3700d85b5e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.logging.RequestLogDetailsTest",
+          "tests": 2,
+          "xmlSha256": "ebd6aa90f0a5f21994ca5cbd214ef5dc897ea2c9deff17136f35d019c4802b74"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionCommandServiceTest",
+          "tests": 9,
+          "xmlSha256": "9721d69fc6ad6d0f25552e2c8b2abb3ebd71db7ec728cd4bf4346fc0ca78e690"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest",
+          "tests": 8,
+          "xmlSha256": "d6418457a7da4624ee80ad3f3e74a6e133ea8285a34ec22b75878df57eb9167c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthenticationResponseMapperTest",
+          "tests": 3,
+          "xmlSha256": "1171cc0ff64a5b531dfb26a4e554ad0a065a21229348fb10c30b20cefe170cc5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+          "tests": 5,
+          "xmlSha256": "8493fb625365b8e1a1fbf57d7f13b80221078d73698cd989650213034691b2c4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.security.AuthContextCodecTest",
+          "tests": 7,
+          "xmlSha256": "50267f594507367c6fa89cbdfae882e0a9c9d8bc5e07ce528056821e8111089c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiConsumerRemainderTest",
+          "tests": 4,
+          "xmlSha256": "104e075c76a340622238153fc015d664eb56c4b62a8b8b1599bdcca60c20874d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinatorTest",
+          "tests": 11,
+          "xmlSha256": "f9a43a7f7638e91c082cdfcda7c52eeb7c700ca654125895d693e17c5cef9635"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+          "tests": 5,
+          "xmlSha256": "899705fbfe0838c4425e96b206b35d7a90f97484d6bc8e4f442d63cabca19635"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.maintenance.CleanupSafetyBoundaryTest",
+          "tests": 8,
+          "xmlSha256": "d2c964c10e5428e3e523996a670e6a5758cc5ac0c4b04e165d26c9d55987c35c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.application.admin.UserCommandServiceTest",
+          "tests": 10,
+          "xmlSha256": "cce661cc7052f995b550e46852e4a0eec5b6b98c6751ba45042e73231738d25f"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 599,
+          "covered": 47993
+        },
+        "BRANCH": {
+          "missed": 27,
+          "covered": 3935
+        },
+        "LINE": {
+          "missed": 160,
+          "covered": 10401
+        },
+        "COMPLEXITY": {
+          "missed": 26,
+          "covered": 3486
+        },
+        "METHOD": {
+          "missed": 10,
+          "covered": 1468
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 306
+        }
+      },
+      "coverageXmlSha256": "f8f66862234b61f6a2646733b68cb5b71ba2def14974c4f28084d78ad0c9d7d0",
+      "projectJarSha256": "b839d6fc2b3b9648491895a7d655fd7018bebc2d2ae22a596632bbaaaec1988d"
+    },
+    {
+      "module": "web",
+      "suiteCount": 129,
+      "tests": 886,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.web.view.LogSearchScriptTest",
+          "tests": 1,
+          "xmlSha256": "293c39eb599b716a09f269393236f13c677ecbcf73516cac097c70cd5ebb4bfd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoaderTest",
+          "tests": 5,
+          "xmlSha256": "4b4b01940c0d0d46d9502ebdd5f84f032b65d55a9289fbe8bf09518a28ee5201"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebTerminalCaptureTest",
+          "tests": 3,
+          "xmlSha256": "13fdd0c2c7a2dfb746729bc400df0ab08df0428b9fc634ffa6763ed97fdbbb54"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest",
+          "tests": 4,
+          "xmlSha256": "a1cd90831686b329f8dc1550412265724078f8a2f815d425da0d0dbc6e018392"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebStartupInputsTest",
+          "tests": 4,
+          "xmlSha256": "23d3aee8e8d35a8167159cfe1da5ca2f1484f2983ad976cd2a0549569f6aa67e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebUnknownRetentionTest",
+          "tests": 1,
+          "xmlSha256": "f0bc1de25a604444423642ae49d6db18f08094ce567393704d64ad053d72f50f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebApplicationTest",
+          "tests": 10,
+          "xmlSha256": "023b3b73ed7fe98616b4c92b8a1554c5c1c7a2e95b4728599b5d4638017a0355"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionSavedRequestTest",
+          "tests": 6,
+          "xmlSha256": "84045bd526a42901bfdc9eec77947e550047ebe567c55d8317e2ddc15b598b0c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModelTest",
+          "tests": 8,
+          "xmlSha256": "6ec397e184e0ed5ee2362578f80b3f47f58514222d2190ffbd0abcefe2374cd0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+          "tests": 8,
+          "xmlSha256": "ba5ccffbfb26fc8cb5a2e0c1bc31618c0409c596786cfae98d81867b5a77cd67"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioHierarchyViewModelTest",
+          "tests": 12,
+          "xmlSha256": "4a6707dcd58dbb69e118a958130738c3929afc040fee3fd599603b6a78f249b2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.AnimationControllerTest",
+          "tests": 12,
+          "xmlSha256": "ad5e9f9a653a41044ae04f8b6e0b4f7e1cfadc3d8b96075c87d2e26184c5fbca"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.MenuMvcTest",
+          "tests": 6,
+          "xmlSha256": "fe84df3e60a2623fbd7c49d6f576631cd385ac83ec29b320bb985a91a855b5bd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionLoginHandlerTest",
+          "tests": 8,
+          "xmlSha256": "04c509197c0acb620f3277eb811cc0f9836b2623deeedaa783524080e64eecc9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionSecurityContextTest",
+          "tests": 8,
+          "xmlSha256": "ee5cb03c84e199d9df16db3f3e116b098cd94944d357674e984db2f12b241436"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+          "tests": 5,
+          "xmlSha256": "d4578362b54a7adced61915e408d6775b05aa14c71dcce97cf837b4e2745ba5a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.AnimationViewModelTest",
+          "tests": 8,
+          "xmlSha256": "fbe986f4b19955bcb10e48079d72cb6ccc39cc8a1a87185fac5588c7cdee1e5f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+          "tests": 4,
+          "xmlSha256": "70b34903b24c15b10d33f771ba4e121d6f1e34d49c152f9756e91430dcc1e985"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioDetailTemplateTest",
+          "tests": 8,
+          "xmlSha256": "0c92ae1844ad79f9f13e05e89ebb1af4fa40f4029050be35454302554433875a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.UserBusinessControllerTest",
+          "tests": 16,
+          "xmlSha256": "43f8793e802480dbbf08714585ca1a5de1d5f5336b83ae43862ae8354c5301cb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.MusicHierarchyTemplateTest",
+          "tests": 6,
+          "xmlSha256": "7f6cc416918b05d136e7dd45519467d1104a9b6fc1df64b4c64a24dd85046281"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValveTest",
+          "tests": 2,
+          "xmlSha256": "ab0b4c620d7ae9a9197d9509f71a8121eccd4da7419f723cc9188983cd2a8a9f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+          "tests": 6,
+          "xmlSha256": "f9e9398c332200cfd4f72fcce5a2078deae0d0f874b3b9a469edfed049acdef2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.WebBrokerContextsTest",
+          "tests": 4,
+          "xmlSha256": "f5e2ed5257a6cef23566aef14c0c2ea4bf1a2ae1eae12890edd2856bf7d6d67a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+          "tests": 8,
+          "xmlSha256": "b676cad0363e599ae8e9d48803d895da489b9165350325cacda2f3cecd2046ec"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.MqLoginClientTest",
+          "tests": 6,
+          "xmlSha256": "5aa0cc6fb30ab0ba43a5e9df52603032b7e79b2c691a0c8040cde2fefb8e9d2f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.ContentDetailControllerTest",
+          "tests": 10,
+          "xmlSha256": "f1bdeaa8cc565490665fe178d4582838581246c6280a6e37f4833a6ee4e5cf8b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionFormLoginTest",
+          "tests": 9,
+          "xmlSha256": "1320f2aa590a1b5bad202d0a5cb52d68327eaec48c7756557b2c7c82dbfd6265"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeRemainderTest",
+          "tests": 4,
+          "xmlSha256": "39f73e22f75778b6a1d9a8901100cf313990524295a0f600af01e548c1c5da66"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycleTest",
+          "tests": 11,
+          "xmlSha256": "647e4d46260d947e465930b5ed208d8fe453ee940f1f30c6385762903a08d265"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.ScenarioControllerTest",
+          "tests": 16,
+          "xmlSha256": "e00dec0cfe9211566dd5db7c5339ed432631c0d06aa0b24fa72809fbc0bc4ea4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.UserAdminControllerTest",
+          "tests": 19,
+          "xmlSha256": "72891651441554087c7b2dafa6c899c642347258faf30e69a7ebc21402888117"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+          "tests": 6,
+          "xmlSha256": "ee9c6479f7512604a4f0d672ec9b672613af0f173a49ea16c1ba2c67f6e3e71d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.WebSessionIdTest",
+          "tests": 4,
+          "xmlSha256": "863eead4ecb483c831d3ebe1f04c1bf4b335a0c81aeb9d4186c38e021e3fd8db"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+          "tests": 8,
+          "xmlSha256": "22749c4210ae55f1725f72f74337d2cd5293b2d8b1b1104e357df990e1658b61"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionPayloadCodecTest",
+          "tests": 9,
+          "xmlSha256": "4be74c2bf07afb6f9d657537aadab4c19e89fc0f3d2eae0ef3cbc7ecd5d47314"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+          "tests": 8,
+          "xmlSha256": "97b06ac787bef68d48a7cde7aac17064cd8397113d6e900c2b207becbdca02fc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.revocation.PendingRevocationRepositoryTest",
+          "tests": 9,
+          "xmlSha256": "036e52ea08767136a8cea4bc6c1ef70d02918c9bcb984bab1c80b950965f0a24"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.MusicHierarchyViewModelTest",
+          "tests": 8,
+          "xmlSha256": "eec8f01daecd2c5b06469679dda9515bca98ccb6413cb0182c2088e3476f5f77"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessMainTest",
+          "tests": 4,
+          "xmlSha256": "05b207397b7253ee5d4f97c0d6f2a96b8b8c25ab42150aaca6fd7503039164e6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.ScenarioSearchControllerTest",
+          "tests": 12,
+          "xmlSha256": "8c8ca27c2aa3e2090f5931af964e308d79a146d0c2bd789f4ab8d45d97773da1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.PageViewModelTest",
+          "tests": 8,
+          "xmlSha256": "d0db0f9391043dd78c3a6f7a26ab80a50a3de943328687849316bf71c0183399"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.MusicWireClientTest",
+          "tests": 8,
+          "xmlSha256": "34f4fc8bd04fd6373118b82956f217e020d719869fa8f34842bb96f7428e92c0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.LogSearchResultsViewModelTest",
+          "tests": 8,
+          "xmlSha256": "f1ed9b96ebfb6d9f038debd77a47e27e98036f5830f4077e70cf91d15cdf38c8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SpringWebSessionTest",
+          "tests": 7,
+          "xmlSha256": "6db93efe2b49eaeecaaf187dffe4df05c6313bc159e99c5c622d406d98431f02"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest",
+          "tests": 1,
+          "xmlSha256": "c729f01bd1e13e73b6fd3d1e123ca0f4c6bdc984ae2d2773516bf82b4768ea05"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+          "tests": 4,
+          "xmlSha256": "085d0a63f3d42171b5de2224bed4eea3523fbb9f8a5f79503f06c6d141460a7b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.HttpRequestLoggingValveTest",
+          "tests": 9,
+          "xmlSha256": "2d70884e23f751c64886cc79824dc428d714fd7d9bcf24a061a805c1c88e69c8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioSearchViewModelTest",
+          "tests": 8,
+          "xmlSha256": "df9f9ac8ef933672115467f05d065bcdcea40dd8b361f1a41c4fa66f8b049076"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+          "tests": 6,
+          "xmlSha256": "f640cae29642017f5ba8aa2fc7aed1e99de2150595c016e835f9a8deb2595217"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimePartialTest",
+          "tests": 3,
+          "xmlSha256": "715b376a67e974cb85e9cf283fb85d66d309f5fbe8e2fbeca24154dc5fe1b589"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.MqLoginContextProbeTest",
+          "tests": 3,
+          "xmlSha256": "75256e167f76118890640f5c9a5a383fa7119946d21645085925a60fe199d671"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.NotificationControllerTest",
+          "tests": 18,
+          "xmlSha256": "09d9563d6a85a3bfa57bdff4d1f18835fb9df9b2be2f1d3dce2e1ed8e7a77cde"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest",
+          "tests": 4,
+          "xmlSha256": "bf38c9e97269694c28256c4d3f76ddc91cc00192395f07435ecdb84fb6633787"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.LogSearchViewModelTest",
+          "tests": 8,
+          "xmlSha256": "62ea1807d902c9d45fe5f36eb0ede02839d70bb25d27de403aa233b2bbd5b408"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+          "tests": 9,
+          "xmlSha256": "4fdc4b0913555b1e35cdfd524b20e1c7f7915c00abf19923d828c626497b1418"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+          "tests": 11,
+          "xmlSha256": "450401a33d448b6f61115c759826c260bb19024d2b94233985a532252838c195"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.DescriptorFileResolverTest",
+          "tests": 1,
+          "xmlSha256": "ac26babb17e73e04fa2d3e683ffd3bf3efe9962aaecf1c93790aa6ce525e2d1a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.ApiSessionInvalidTest",
+          "tests": 9,
+          "xmlSha256": "662105f617fe15b7433f7932cbe5571b1b0f723bfa86bfc2099e5af68431831d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.ScenarioWireClientTest",
+          "tests": 8,
+          "xmlSha256": "e9774b3735390eeecb14a04338bba8cae3251b53c33fe4dc28ae038287ce0750"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+          "tests": 10,
+          "xmlSha256": "34a13d30006435d8289284e17140899427a102c63144770dcf331f1b44eb6350"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.LogControllerTest",
+          "tests": 11,
+          "xmlSha256": "9e492a88cd4141f417eca9bcb7358e6cf97727e33eb5cbf8a9ae5419e8d90002"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.MqAuthenticationProviderTest",
+          "tests": 5,
+          "xmlSha256": "0622c53d7309b2460b853aefa1646343ae6afa99f4a1f4a7b4f0da31bbf09f70"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+          "tests": 7,
+          "xmlSha256": "3290c52d1e8dacd248f9a902203f8a3a12e6acc858962d6f44978a48fa12d037"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.AnimationWireClientTest",
+          "tests": 8,
+          "xmlSha256": "65291e6b0f404568442755259b1cb5d9388510ccbb7bf78c691de0ebdad3df6a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+          "tests": 8,
+          "xmlSha256": "7d571389eceeeda8996983c32cf4b5fa87df4f80e065ef53eeb070ba5121533d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.MediaRangeServiceTest",
+          "tests": 6,
+          "xmlSha256": "5454d4539a80986d9ffe5fb524eca39af6768bc06962d50547395b4ad7cee08b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.MediaResponseDecoderTest",
+          "tests": 4,
+          "xmlSha256": "a4bcb09765a1b43f99a13f48c99a82fb1153bcb5dc02bc884f1d640522f5412e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.MediaControllerTest",
+          "tests": 10,
+          "xmlSha256": "e07d31d54affdce2cbd91ce3d648ce87f314bbaa4901443d68e06940e0bef71f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.AnimationTemplateTest",
+          "tests": 8,
+          "xmlSha256": "e6694fb2b91e5bfbffc6e27ab694256b928c47d648a76acd8360c038a14438eb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebAdmissionRemainderTest",
+          "tests": 3,
+          "xmlSha256": "968dc23b1825bda3cda190c0bfe3bbfb3cd7fb1b3d9ed12753235caafe5f5be1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.WebSecurityChainTest",
+          "tests": 7,
+          "xmlSha256": "7a311e9c5c91f21c254eba123c91b022a089009629e2533e38a51681bdb95675"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+          "tests": 1,
+          "xmlSha256": "571e3c31d635d2a782bfb5a4eef5d17c336a872664aaf1eb541933a8b2ee4213"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+          "tests": 8,
+          "xmlSha256": "a72d7f33c3f45e3ceef9cd720c651751c66bc83c0dd086ab0233b69369a5c5f0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.MediaBodyStreamerTest",
+          "tests": 2,
+          "xmlSha256": "ad0a2718c5130be18052b44c9da4fea93bfda9304e1c773ba099dd0fa9c762ae"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.LogSearchTemplateTest",
+          "tests": 8,
+          "xmlSha256": "6f9b3fd7500712806ac1dba74c24994a9ea955d4aa4e87aaec5769c9f0db28f6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogDatabaseFixtureTest",
+          "tests": 3,
+          "xmlSha256": "add8e5b25d099349a5a529098c173e4e1743ccf5cd13e2528eb457005cad2efd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+          "tests": 9,
+          "xmlSha256": "545c8ff409730bccb0b589b96476b1df2070ac5031fa812f6222b0bb82d2ee89"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+          "tests": 9,
+          "xmlSha256": "bb49644a07793b61dd9614d07c068539b9d428ecab00cbde48013628cba3835a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "tests": 6,
+          "xmlSha256": "49a5b32dee857de28cd1bff64d0afe6aaf8bea4eabe47766f81ba91afddd89b3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+          "tests": 4,
+          "xmlSha256": "7fd8db9fc383b698bb45c838f21f22218dec56a2d8b2bf7a297cda35b368d40c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.QuestionInputScriptTest",
+          "tests": 1,
+          "xmlSha256": "96c7643cb3db8f3e33a95a9f5e8df82735c65c2d055888798a6884fabf5b9913"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+          "tests": 5,
+          "xmlSha256": "5308e4090d84dccd80437727781e79cfb901e56d9247eb1ef04d46ee8486db03"
+        },
+        {
+          "class": "dev.codex.schubert.nk.api.file.WebNativeCodecsCredentialTest",
+          "tests": 1,
+          "xmlSha256": "887057b34e817bc4170b13d1efe44821c2a511d3594c89a298149cb94034c3b4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogOutboxRepositoryTest",
+          "tests": 4,
+          "xmlSha256": "4c4d9846a9c5e86b23aff56d39b273fe19cc10e1f726585c5b94244af476a271"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.revocation.RevocationPayloadCodecTest",
+          "tests": 7,
+          "xmlSha256": "9f5f85e49468782bf780d90914ac908af1c0bf24aaa8d341263973e69d8bf562"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioDetailViewModelTest",
+          "tests": 12,
+          "xmlSha256": "666d65b614df45370b0adf2c4188c5a6589534f4b204ec463e1a1cd9594370a8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+          "tests": 16,
+          "xmlSha256": "9d430195366592360353895bccda63759c521bbf99459cdbb26c12d29844bcf9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.TargetBusinessControllerTest",
+          "tests": 14,
+          "xmlSha256": "efa33ffd65071e35e0117aaad518f3b69657c12e76eb8762bbca26e268e5eee6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest",
+          "tests": 4,
+          "xmlSha256": "c901364ea7c3c001083e5e47344393a00d12b44c9b3c1fe9fec33ea674a9ce5b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+          "tests": 8,
+          "xmlSha256": "0a07320051a429ab301ac6cbdb08a87e84b05500e9913d11b4f2e0b3999d91f7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+          "tests": 7,
+          "xmlSha256": "e64e274e614bea97a93b44eb2009621fd6a4be675a80ae85f08b205e39efc377"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+          "tests": 8,
+          "xmlSha256": "61d5094d362361cf3180034da518f2f710cc2cdeb94a5ee1d63807e04788193a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.WebCsrfIntegrationTest",
+          "tests": 5,
+          "xmlSha256": "31c888ce418e33f1b2022bed52a3c235003c2e9ef52f5e0a4d49deefee19ba91"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+          "tests": 5,
+          "xmlSha256": "c3dac2e1a7512b86e52e69bb9af28009af6134ab3d542dc6b24b6c21f569ac3d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+          "tests": 9,
+          "xmlSha256": "dabf53931edb9aa1b53c94e93ce45c626a87d06f5f3484b1f126ac90b2babfc7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+          "tests": 3,
+          "xmlSha256": "c1262df9cd098a1a465ab9d398f727375abb0de88f8e870b38739e911834a15e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebBusinessAssemblyTest",
+          "tests": 1,
+          "xmlSha256": "ee824ac1a3cb4ba2dd9e987877a75dbec2167ebcd74c41af02aad5534bb9304c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeDependencyTest",
+          "tests": 1,
+          "xmlSha256": "1279d3d5e422d4d601e192aba33445480ca3873f9a5cc5364caf8c5b87e3ccfd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+          "tests": 12,
+          "xmlSha256": "f2631020105a3ae89b82d4d3aa9fc66dd38a23c45cd70045d9f9aeb0ee1397a7"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+          "tests": 8,
+          "xmlSha256": "fa1e30afd359da6f4662820eb06fd3a439d31d425d42d0d388ac57c255870d90"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+          "tests": 4,
+          "xmlSha256": "1b91a456be65dbe07047ee9f7c1d4c7186ca3af6116a616efbb23d32264d9886"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+          "tests": 3,
+          "xmlSha256": "2a5fdb5ebd001e1c53733cb99b9e3a19d7135dc033658b38574b0f34b950c625"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.storage.LargeResultReaderTest",
+          "tests": 5,
+          "xmlSha256": "3fb53c742dac8c0cca9abed71bb34f7515adf123e279af0bffdd8022cd42cb23"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.WebRequestSecurityTest",
+          "tests": 8,
+          "xmlSha256": "2d78a1e5930810b9dce8a3f7d46112c4e5f2939f25ced37c58fdb2344032f0c4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionAccessFailureTest",
+          "tests": 6,
+          "xmlSha256": "624bf7303d3b511499c370f0636e40fecd8c162449954135a4261ffb4c7a33a1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.SavedRequestTargetTest",
+          "tests": 4,
+          "xmlSha256": "64f3362b7b7427f9da1f3a769d1ea41d85dffce2041f2aea7b7c7928427af0d8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionAttributeCodecTest",
+          "tests": 7,
+          "xmlSha256": "115f38d2dd539b43ed2cb70b497f9f5593ed0d0c9150efd58238b5995036e809"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebJdbcPoolTest",
+          "tests": 3,
+          "xmlSha256": "5d884ec428ab43ad69a9711ccca1b5236d9f8cefcf036334d275da929335e281"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.MusicControllerTest",
+          "tests": 12,
+          "xmlSha256": "b43a657802c407829c1ec25813a66b7da390c09fbe78cba80bda6b31561f364b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.WebCsrfTokenTest",
+          "tests": 4,
+          "xmlSha256": "15f768a1fe164bb245431f27227de01228c3ba98130e0e30f9223536c15232b2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+          "tests": 5,
+          "xmlSha256": "b2798ea0d8799bdf35dcfa5f9721782b0050a16850bf08b282864ac5944c6847"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+          "tests": 5,
+          "xmlSha256": "3c3c616a9825022167f478feb79c2803884dc65bddbd524f1dc6448850151cb9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.WebSecurityHeaderTest",
+          "tests": 4,
+          "xmlSha256": "1f8f1a5b41265d5f88cc77009b4955ea8da216b159d9878bb956be34b9052a73"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+          "tests": 11,
+          "xmlSha256": "736236804c2efed02314e79e9804b630c6b397e61d254a4f72f3d5af449f0868"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+          "tests": 8,
+          "xmlSha256": "df141ec38a5c2c810a312b15b7736a6f7959fca33b85d85471fb1bde838cdbd9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebApiLogReplayIntegrationTest",
+          "tests": 2,
+          "xmlSha256": "8fe7f53d3f9531e798cb52aff092b43481826ecb3c0956db17ceb039e7a52ba3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.controller.LoginControllerTest",
+          "tests": 4,
+          "xmlSha256": "198c9c571e1692ab497a3cb329c231fe603163d7a75a2fb1617276cf5c67f245"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.WebRequestIdentityConsistencyTest",
+          "tests": 3,
+          "xmlSha256": "22ebad701d014df725607e47f061281f480e6b8a4abaad4b9a35acd75d3ce09a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+          "tests": 9,
+          "xmlSha256": "df9b21f973be950efa21c19626ff0bd94736a3fdd18f242715ab353d70488267"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.session.QuestionControllerTest",
+          "tests": 23,
+          "xmlSha256": "f1104a894113d62371bf5177b6aa8c2a10cf1eda2a527e4d67b185a636c8e9a0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.view.ScenarioSearchTemplateTest",
+          "tests": 8,
+          "xmlSha256": "9f8a70adad223252bd6e538bf6cf3d652fbf0aa72ad731822f6e30dc15aa4e21"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.media.ContentDispositionFactoryTest",
+          "tests": 1,
+          "xmlSha256": "4d351073d34c8ff7fac048a00683d0aa48697b7c1a0d60e2b69653d29e100d87"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+          "tests": 2,
+          "xmlSha256": "b0f6c9fbc328d04ac5670eaaaa39bc5e36639ca664d5b1ac23d2d32235ae7aa9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+          "tests": 8,
+          "xmlSha256": "ebaad258c3bfaf32e04ebc7c0b41ac2d5ae89cd8d4b61b27c9c6099c6e99ce28"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+          "tests": 10,
+          "xmlSha256": "60ee5157804666c4f87b8ea8772729df7972afb1e94475d33c1f2d41c70bc828"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+          "tests": 8,
+          "xmlSha256": "bf3672d59c57ebad990d214bff224c3d5d9199cfb58d94bd095e0e8932c5b457"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.security.ClosedServletSecurityFilterTest",
+          "tests": 4,
+          "xmlSha256": "57768e5db93d39e76e43a223de83ce2831bdf43706a43cbc9d86687b07b76d7f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+          "tests": 8,
+          "xmlSha256": "fdc6198292f4edadd524c49dd7dbb6807da6cd29712377f1bc792ddc7d476d94"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 494,
+          "covered": 37953
+        },
+        "BRANCH": {
+          "missed": 9,
+          "covered": 3085
+        },
+        "LINE": {
+          "missed": 95,
+          "covered": 8477
+        },
+        "COMPLEXITY": {
+          "missed": 20,
+          "covered": 3099
+        },
+        "METHOD": {
+          "missed": 11,
+          "covered": 1542
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 279
+        }
+      },
+      "coverageXmlSha256": "82d8330011cd335bbffa2c8af4f7856f48637998781c3be691e53748bf35b9a7",
+      "projectJarSha256": "32b7ac688189e8561ba1445cef8849b1e206ecdd274a7b8d89944697ae5dee0d"
+    },
+    {
+      "module": "batch",
+      "suiteCount": 150,
+      "tests": 1073,
+      "FES": 0,
+      "XML": [
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceRunRetirementTest",
+          "tests": 16,
+          "xmlSha256": "a45756bfa5a993ac768def1f5e537497e6290358e362238808f4d3a5d76932d0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceBrokerTest",
+          "tests": 3,
+          "xmlSha256": "6f4c91648e43e491d21e1f2d96e4bd4582ba5418361839bc41138f4f376c71f4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+          "tests": 7,
+          "xmlSha256": "e0285149ae13c13f61f39c7ebab165f655cefb4e322335ea19c85d5e7d62d168"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.CleanupServiceUnitTest",
+          "tests": 4,
+          "xmlSha256": "53e82fc97ae1817940f28b052f47893f2b8ea7e4890673fe4ea271eed997e9cd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest",
+          "tests": 12,
+          "xmlSha256": "5d29c87060311fba8eb552d937c31f2e8e1d1a9fc416ba74b5ad4fbcfb63ebb5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StartupPermitRecordsTest",
+          "tests": 8,
+          "xmlSha256": "7a073fb2030d753e84bb0d34c367c9a5bd0a5491cdc953a0f59738a6e0caaa7d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest",
+          "tests": 1,
+          "xmlSha256": "f6c1fd382ea17ea974c56704c7e595504cc1248526ae281871eea440314f96c1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+          "tests": 10,
+          "xmlSha256": "5782691ed9ea43402d2ca1579eea53be33e92dd3d3b6bb08dd4587b1d0cbec7d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.DurableRecordFilesTest",
+          "tests": 12,
+          "xmlSha256": "344d5b84078f64ee3cb4497b52c59b8ddf0ec9d2ca7e27bcdbb244bf066046f6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningNoPriorBrokerTest",
+          "tests": 8,
+          "xmlSha256": "08fa85709940a7cc1656a2fe603af542a2fc7778a04e73f19e7a66844a3d3dd2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupBundleCompletionTest",
+          "tests": 9,
+          "xmlSha256": "63c7e0fdaa2d45987c696a0e9d0d4b7b0b8dc31a2a16ab534311ba2bafed4d8d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest",
+          "tests": 3,
+          "xmlSha256": "e3c7a66c6cb8d8073ccd47abc0e79a7f6f7478cbf95c1947059823a375fcd8c8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.backup.BackupCommitServiceTest",
+          "tests": 8,
+          "xmlSha256": "23b9f024e6b8a2008ad841b4b73244d4030e3d2f12dfafa58df70acae239389b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CaddyPublicConfigurationTest",
+          "tests": 3,
+          "xmlSha256": "ca21dd3c489ef8f53589916961ca8ab300cf26ab066e1b32d49bcb2d92f862b4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+          "tests": 8,
+          "xmlSha256": "4d15dfb8799893c1601f2e46343cc5c8be4affadcde09e7828cbeb457bb5c083"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.BackupStepRepositoryTest",
+          "tests": 8,
+          "xmlSha256": "194667593b8b45d18e599bed614a8e1a301abdda82c6bb1d0cacfa0af8e3aa88"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
+          "tests": 8,
+          "xmlSha256": "ed902364b5a9d338108f5eab5d5de6579c32a78745dfbe6ba273c10a23fca4cd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupBundlePublisherTest",
+          "tests": 16,
+          "xmlSha256": "a1269c985e9d803721cad261058a56f6f2307daa7b9c1d107f0820009e43099e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflightTest",
+          "tests": 6,
+          "xmlSha256": "89716c608dc415538a24efafb2610df89626f6d180668c47765f8e5ece663c86"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupDatabaseWorkerTest",
+          "tests": 10,
+          "xmlSha256": "bf45a34b03f4cff50b30085d460bcfc86693f55eb6076e18d33498e41d2ee7d3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest",
+          "tests": 6,
+          "xmlSha256": "97f8ac29b303880e485f55e948dd4756cb50a647c555b0c4fc01f430356f55f2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupStageTest",
+          "tests": 9,
+          "xmlSha256": "5540550fa4ebab629ce287ad414c7bb2713640663061761db1091b9824e4d1d3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+          "tests": 8,
+          "xmlSha256": "5c0d6c850d33975a32b90abf330c8c11ba4f187ff4f036acbe6b80a44127e24d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitTerminationTest",
+          "tests": 10,
+          "xmlSha256": "d8b037ff9e1d9924697c9e6ab621ce4a224f7609e4971580cb9849fc514a3a17"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupManifestReaderTest",
+          "tests": 24,
+          "xmlSha256": "b28a71a316c06f4e7e5a376897c014f4f443c4473d65afd5694146c3cf18bb44"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+          "tests": 10,
+          "xmlSha256": "c4eb2244ac73fc3cc262099bb6abb9a8e3ad50f4798238c192320e956a2c1fd6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+          "tests": 10,
+          "xmlSha256": "6e172cc157ee768d1e605ca573442f45e6f125eca8969c0983dfe10b4f89653f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest",
+          "tests": 8,
+          "xmlSha256": "71b0782369c118c33c7239162c89af5ea320324a21259f1e723999266efc9b53"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+          "tests": 30,
+          "xmlSha256": "6ef11e1af946650cea14db1abe03280c7f511f8824376bfa01a1938e40a711e3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningPreviousBrokerTest",
+          "tests": 4,
+          "xmlSha256": "edef7b11e1c0a7a5c60aed8ff6fa56e4b7fd663349864e437d4c8ffe1ffc0b49"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootFailedStartRecoveryTest",
+          "tests": 4,
+          "xmlSha256": "d3f2983d51065d1a6ef4f8630d31faed348a79391206a2e6f0f985b4b82a5cd1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycleTest",
+          "tests": 6,
+          "xmlSha256": "dafc11f1a7f8c3cda85dca85ecf177d3084ec52a7b259527c5c843c3a58bab24"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+          "tests": 6,
+          "xmlSha256": "b780de40c2d0610a40a035de1f6f1405201081d73122377b85b3eaed0e06d719"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+          "tests": 3,
+          "xmlSha256": "861f15c228ad97c3204c08144f1bc17fdb10fe6cfbd0d93fff411baede78aec4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupDatabaseCopyTest",
+          "tests": 8,
+          "xmlSha256": "c2f5646173630f8a5f642019d9a0b235704a9895d578909f49225bb321795eba"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningPrestartEvidenceTest",
+          "tests": 4,
+          "xmlSha256": "5c554621da2abe9391e361063acbf107ba5f61e193b0365a085f08ff37a4bbf6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.BackupTerminalObservationTest",
+          "tests": 3,
+          "xmlSha256": "cd0d1063b4d24592daaa205a69cbc1683e4c98b352d6d3e4624c97d3a05016ae"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StoppedBackupCompletionTest",
+          "tests": 4,
+          "xmlSha256": "7cdff3f136973e9de8a75c3b42754d8426c583f3caf043bedc10542316bf1bb2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CaddyPublicCaMetadataTest",
+          "tests": 3,
+          "xmlSha256": "abf9df81661a65f7637c8cc9f1fbcb66606f8d2645d43d97e5e9ea713e8924d6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BrokerJournalQueryTest",
+          "tests": 3,
+          "xmlSha256": "efa025ffe068dd8bc004953a73111a3d1acfceddebeb3e048fe1c018d46410e5"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupPreflightTest",
+          "tests": 5,
+          "xmlSha256": "1c46b190a46ae10adc648fb509d95a9372cd97579a9879a59c8a96c5801f9deb"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.ExpiryOwnerTest",
+          "tests": 2,
+          "xmlSha256": "42cb8737ebd8ed58b64ac923053fc7ee7f6da49281e5342a5444c20283c0eeac"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequestTest",
+          "tests": 4,
+          "xmlSha256": "28cbf5fd9018df263e7c72f9d3f02ef65661e36f60243e6540b8a637ebeec292"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest",
+          "tests": 1,
+          "xmlSha256": "241d3d5a9fa2efd1ecd5a8658d96fb1b445fcd2d2670c4d8525272e733513755"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepositoryTest",
+          "tests": 8,
+          "xmlSha256": "0a74e9c5f415d11179542376feec7f578c35716f05c82ddffa522830ecda04a2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceRecordsTest",
+          "tests": 8,
+          "xmlSha256": "e660b55c974252d70127ee71457756668a8dbdcb6bbfb324a6563fe23485384a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisUnknownBoundaryTest",
+          "tests": 4,
+          "xmlSha256": "d94ea07d349e72718ca45c1e493041cb05103680a39c7d2295f787a95ad728e4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupRetentionTest",
+          "tests": 8,
+          "xmlSha256": "360603b8d67e1282ad78c5c786b3bd67372f130c3b9fd0794cf6706a33dc419f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironmentTest",
+          "tests": 6,
+          "xmlSha256": "b679030a832b5d07a883892bc437d02e94480a8b7e651b8590979db65bf25e67"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClientTest",
+          "tests": 3,
+          "xmlSha256": "9b316e932fb01c1a2dea925c08ecce94f6802c7488f9d2fee81e58cfb336a657"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningResumeAdmissionTest",
+          "tests": 11,
+          "xmlSha256": "9e88e8f60fab82608a5acf30e03a335badb01f1fc7afef6ed6635c9904a90d02"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupObservedCompletionTest",
+          "tests": 2,
+          "xmlSha256": "6afa26830d9eef36e030031ae011b949d985ec9249ab41bba50b6b249d23f76e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+          "tests": 13,
+          "xmlSha256": "d61dd92ca7245b71d193c791179b95eaf334c592a65803e20cb01c98394e2d7a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningStartupRootsTest",
+          "tests": 4,
+          "xmlSha256": "964f1f8e5a4ce901374168b4514472df5b5ae42effee0e7bdd2fbb27bc3d0e1f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningGateEvidenceTest",
+          "tests": 5,
+          "xmlSha256": "d98cfa99da1cd6f4c6b165d782f91897e1ca425a1c5c187a28ad0e5598734e70"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest",
+          "tests": 3,
+          "xmlSha256": "b91b51a24af110180dcbd5643148885528c60c902ff4b0ebe642a24ac5b1d7c0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClientTest",
+          "tests": 3,
+          "xmlSha256": "5ac52adaaf809404bcbe4eb93d020ac14ceda2d5f3378e30cfdb1ea2011c107e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCompletionChecksTest",
+          "tests": 4,
+          "xmlSha256": "bef57f14998aac7537e89fe1c5b258fe492b556750a5b24d5734ccf411b89b3a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest",
+          "tests": 4,
+          "xmlSha256": "391907e0c10176b4a134e08e564cad922b8db0d921d9216c25b223790bbb8a14"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupNativePreflightTest",
+          "tests": 4,
+          "xmlSha256": "fc799e3bf78ec9c802dd15deecc2e8dd5a30b1eaab9aafae2095d451b50c3ecd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshotTest",
+          "tests": 7,
+          "xmlSha256": "c4c33a6196ce189b3d47403fc6a2e04a001b040e80c55befaf1d8d3ea8d02856"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningParentBudgetTest",
+          "tests": 3,
+          "xmlSha256": "41eb399bc373783e9d80b3a17b7cb7b1a64c77c9ec35c6905404e2b3c3ea10a9"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
+          "tests": 17,
+          "xmlSha256": "64fd32a3e7d745e7e23163761c0dc078f472d2e08cfd93f0d16479e9c8d0f230"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StartupLaunchRecordTest",
+          "tests": 4,
+          "xmlSha256": "a41dde6283ebf276a2a6c4b536fa01afac63abb901886d96ac75322f460ab36d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoffTest",
+          "tests": 9,
+          "xmlSha256": "1d9799c122326c8e7fe8c6dea4da448a49713bfbf463e9e8e1ee328a18ef6fb8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupMaintenanceWorkTest",
+          "tests": 4,
+          "xmlSha256": "78f40d61f019b183482195f9d7905ba534a38a84f0e77aa898e558c3bbea6cac"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepositoryTest",
+          "tests": 7,
+          "xmlSha256": "0753f24ea9cdf87a50ecd6c7caeb5e08f9538dc76b46ee01a2223108891ceb06"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupManifestPublisherTest",
+          "tests": 16,
+          "xmlSha256": "f37466f5e10f20e256fff1a8b9e589322121ae266936ee249097239fd099ffb8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootServiceProofTest",
+          "tests": 3,
+          "xmlSha256": "59d1210120ea602ed933744bafdab04ef35a5533c4251e7261d5cfb309799ebc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest",
+          "tests": 6,
+          "xmlSha256": "6caafb68d0679e3f958e758b781271d5282ae673dad9be3132f780fb75178c2c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCurrentInvalidationTest",
+          "tests": 6,
+          "xmlSha256": "1890ba90efc71b571b2c0f255952fa2005a0b679be8a9568ef285a996fd4ba2f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClientTest",
+          "tests": 3,
+          "xmlSha256": "690998995c060e5a075718032508b28710cfcc8018365a96239fef9e675da9f0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningOriginalCompletionTest",
+          "tests": 7,
+          "xmlSha256": "ff189c3d859f567b27ed9df3afa19057edbab3cc98f485dc560c045e29951485"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ServiceIntentReadyRetirementTest",
+          "tests": 3,
+          "xmlSha256": "8850bdfc97e45e6a7235a7dd68f7052a4b211e513095d4de139328ff6af2144a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+          "tests": 9,
+          "xmlSha256": "5a843638851fc09325fb72cc827a8524f5b21465c0e737f3a2710232b3054e20"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningRootScopeTest",
+          "tests": 6,
+          "xmlSha256": "2c1706c70ce36d1d6208d14637712d7895a0e1db1763549716533457c45fe749"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest",
+          "tests": 9,
+          "xmlSha256": "154dc90cf2d3590c424c4a9cb1acdfcf94de5da7646c7d6f32824a3cf35deb4b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest",
+          "tests": 8,
+          "xmlSha256": "ad6783481f80f5747661d96cb6c70e00df4e345039ec78e7a8fa60a5c08d3522"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClientTest",
+          "tests": 5,
+          "xmlSha256": "95a9918d389ce98352eb6537a937040ea1ec0f1f1f96f8bee2bdefc5b392a36a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningUnitTerminalsTest",
+          "tests": 6,
+          "xmlSha256": "9ba6cdf768176aa3d489fef77787f3e0b1ae37e5785ad440bac2cd9db8b21d5c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningServiceUnitTest",
+          "tests": 4,
+          "xmlSha256": "8f307315ef151f5625d2f1a57694c2a0ab50f8a14bcf43ead2c8b67d948360e0"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCompletedMainTest",
+          "tests": 4,
+          "xmlSha256": "e549408f0e620b33ef78e5c2251b04435c1c03161d54085a8dfd6d162b0c6de8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGateTest",
+          "tests": 11,
+          "xmlSha256": "c69759a1a30ebbabc12c3ef4d5ff7319a616c347f94411cd743058d309f29732"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootReleaseApprovalReaderTest",
+          "tests": 8,
+          "xmlSha256": "a8b985154eaec1b1174690f2287e5aec25314a0d67cc73bc1370638c1d58ed42"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningControlScopeTest",
+          "tests": 18,
+          "xmlSha256": "c22e22e231e95c50192bc50d56704a627b5e127f01919968d26f35b2ed388718"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BackupUnitStartClientTest",
+          "tests": 16,
+          "xmlSha256": "08e3591c4f53aef51792f5ecc4502b8022d461cf963cdbb1ed20c2ce50fa4f10"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.WebReceiptCleanupTest",
+          "tests": 4,
+          "xmlSha256": "ee077948b0b7575f62e33153cc0a64453719bc75ad3a65eac88c4c1fb9920389"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupStepRepositoryTest",
+          "tests": 8,
+          "xmlSha256": "2f040167da74fa8441db39fa59bee60a24755c26dbae7eba31f0b02bc78693c1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest",
+          "tests": 8,
+          "xmlSha256": "82103b16c214639813320af3efc84cc6a16f75ffbe681f5a5a16c9bc1f5a4391"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.BackupArchiveProcessTest",
+          "tests": 10,
+          "xmlSha256": "f36c7632396e396dcc9c2ff8b0defd31dd1613c6df5943571b1f2188495d340b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCleanupCompletionTest",
+          "tests": 1,
+          "xmlSha256": "55167c0e0fed5c5935c20fffcce6ce97b7069ba5e9c4d1c63e1c5d29a7b3c2ba"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+          "tests": 15,
+          "xmlSha256": "b448e17ffef1cbd7462ced4c2ea02d7dc42498861a9b7051080214f431250d9a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.BackupFailureSnapshotTest",
+          "tests": 3,
+          "xmlSha256": "53e3adaea70f8c7e06e9366d3a32f3ae6d661d13f2c25ac0971fbe1fff4f41ed"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest",
+          "tests": 2,
+          "xmlSha256": "a7eb44fa06ea7a08dcf36f3e352ada756a18a15c91ff2a6e97e399d35ab67276"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessNativeTest",
+          "tests": 3,
+          "xmlSha256": "5618de954f140b941f3ee83d92ff9e0fe6ad92b19e686cca2ba9576910d950ec"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningCompletionEvidenceTest",
+          "tests": 3,
+          "xmlSha256": "90ca07331d8621a876ad3c8d6ebe77e52cde97ec2870469591a3c11f8b98b877"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CaddyParentRemainingBudgetTest",
+          "tests": 1,
+          "xmlSha256": "79a1e604fe4742a1058862c7bc1acd09fba348d0be340dfe0f95a0ffee8a83ce"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest",
+          "tests": 12,
+          "xmlSha256": "4aaeff98951d8da6e7c3d222b7e4f3190dd719a49ee79a6d615e6fc6ef4ca2d6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryTest",
+          "tests": 8,
+          "xmlSha256": "4fe21d4d310a7e5f6e5ec4cd8b33a6aa08b39ed38fc4d77d972ad2538e1f6f7e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ExpiryWorkerRequestTest",
+          "tests": 3,
+          "xmlSha256": "996cef49a04a56d07e07e46f4ba75a96e73603bc840f81a247a088b5031b746a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootServiceLauncherTest",
+          "tests": 6,
+          "xmlSha256": "4cda4ea9f2b736119b968e9bdfae194817758ee296c4386e95501015fd2bb7e4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+          "tests": 16,
+          "xmlSha256": "e4ff8ff2ef36923067f4615b5ee5caf6247107e1caf4b732e31867c2f4e54919"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.BatchRunRepositoryTest",
+          "tests": 18,
+          "xmlSha256": "712742c9c81117a401f9a62f2ab318fa776aa0d222048bde975470e7a6268ce8"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.TransferCleanupTest",
+          "tests": 4,
+          "xmlSha256": "0885d607f8a513c1b304e18758f7a0161536b9bb4c9e4619cc5061a6a6e19a31"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningStopPassTest",
+          "tests": 9,
+          "xmlSha256": "379b82b0036718b1d3ddd33d882ad3530012a824e69c287a0411f682ed2ca47d"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootFailedStartPairRecoveryTest",
+          "tests": 11,
+          "xmlSha256": "2a1bde4a55115c03f6d59f97a13e366560bee8f1e2e82437c9fe1225a93259de"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootServiceCredentialSourceTest",
+          "tests": 3,
+          "xmlSha256": "9fe9554e0a59776f2b8e9f0c575c1156cd32bde867efed1e0ba3e9aaddea1449"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuardTest",
+          "tests": 2,
+          "xmlSha256": "97c12312eb983b6d37f7069b28a81ddc459752bdfcf1d9aa291404d1906e2105"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupDatabaseSessionTest",
+          "tests": 9,
+          "xmlSha256": "2b79db7dba224bbdb547a803de61d9b495d6473e5a0be0c4e44fbd2fba296ae1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+          "tests": 16,
+          "xmlSha256": "41e1f058f1c039d858d20e759ce1a3003e71e8a62820924c26dfc869d0e1bb41"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ArtemisServiceUnitTest",
+          "tests": 4,
+          "xmlSha256": "4fd01028585ae47c032e6bd33bcd484600a2f126b9366063cbab2f961efde879"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.MorningExpirySessionTest",
+          "tests": 2,
+          "xmlSha256": "94be67daf83d42ba3a2447767fff2f02b77842c5c5e96f521bbdab908a34ec4c"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MorningStopEvidenceTest",
+          "tests": 3,
+          "xmlSha256": "10f4c2a7680931401d4f37918f1039ba4e4b4cff91a3047bd44cf5fff13fb819"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+          "tests": 13,
+          "xmlSha256": "6d81272ac81f30ce50d52ce363d545083fed65b45132c3cff42815aead7ceb2b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClientTest",
+          "tests": 3,
+          "xmlSha256": "3a52ba94467740ade4010e2b653d9c95f0f6ccf3875b6dac79570544d4ccdc23"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.CleanupProcessMainTest",
+          "tests": 6,
+          "xmlSha256": "4468d409b88bfa670ba61b7fa0aea77eee0539ecfd3602a7028b19ebc3577b14"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.RootReleaseAdmissionTest",
+          "tests": 12,
+          "xmlSha256": "ccd8c2c12adf66ee6907d67c62fb17595e81f126d2f9f1934d7d3afdb9042c81"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.InspectorUnitCycleTest",
+          "tests": 3,
+          "xmlSha256": "50df42b9d43d09aa13e4a9668bf68efc78075ed71838cc0e5f6a945752b7b561"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest",
+          "tests": 6,
+          "xmlSha256": "25a886ee17cfd9ae19644e8366431952e6cbe2aeecf819677b719a30fab47ae6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.BackupManifestCodecTest",
+          "tests": 8,
+          "xmlSha256": "8ad06582d33f313fe69d1d67270d7c93d30c76f4c317b4906fa69919f95933cd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootBatchCredentialReaderTest",
+          "tests": 14,
+          "xmlSha256": "75907f3e9903b20a68c5ebf41c7a40574961b98e20f78220644de5d5ba83571f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningNewRunAdmissionTest",
+          "tests": 12,
+          "xmlSha256": "a793b400dc98e1a6721206f0c19237b24fb633a06eb17621359113ed89cfc2ce"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisReadinessClientTest",
+          "tests": 4,
+          "xmlSha256": "7668f6fa704ffc542f0e761eb40b9eaaebda72c9665efdb14ebc83ed37511e20"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.RootServiceUnitTest",
+          "tests": 2,
+          "xmlSha256": "612c71105024cab2846fd6651580968e7d2ae1aeaf3e579120534b67c532d42f"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupCompletionTest",
+          "tests": 2,
+          "xmlSha256": "926c7c7ef2d9b60c190f072b466afd72ce3e503c7dcf30c3f70308372681bc76"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupRepositoryTest",
+          "tests": 17,
+          "xmlSha256": "3397632477ca6233f46edc4eda0f45165158fdde6ae8250448315b5cada908fc"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest",
+          "tests": 4,
+          "xmlSha256": "0877b3bf7621f16a1084e88466281348d0d6f963419ad491715014a6a06dd962"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.BatchStepValuesTest",
+          "tests": 8,
+          "xmlSha256": "7f309a32d950c176a72aaa677eb1d9d7506c4ee3aa7c714af4f5e1d43ba93d24"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.CleanupUnitCycleTest",
+          "tests": 4,
+          "xmlSha256": "2cf0bfb551d606b4436821be5e54d5bc49a94843d0baed9298b59e9cb5b4cb13"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.backup.BackupManifestValuesTest",
+          "tests": 8,
+          "xmlSha256": "8b3b3a3d99bc6f9a91a4f0c801a865f5ad180c04fef7829931aedd0146dd946e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest",
+          "tests": 9,
+          "xmlSha256": "b77ee177175a14b5aa8d8ea2c610301851cffb9cff4730483e3bdcbc1d8cd533"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmissionTest",
+          "tests": 4,
+          "xmlSha256": "9e4aaaeb79a23f79007f9797a0b86f227904adb6de884c99bbdbd83b40105eaa"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisExpiryManagementAuthorizationTest",
+          "tests": 1,
+          "xmlSha256": "a35b35d3bfac8bac504da037c0296515884d18ea2ad2b15bc03b7c3ca81de0e4"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningProcessMainTest",
+          "tests": 11,
+          "xmlSha256": "31c3cfddb77504ce2fef6089c44579bfa59ce66fc760505be6149753e92db14e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest",
+          "tests": 12,
+          "xmlSha256": "e3a01bfccde29af6d9fed195f8cd767a32ff4a8cb5517c4df45af8665525a29a"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.CaddyAdmissionFenceTest",
+          "tests": 3,
+          "xmlSha256": "889dab83ebac43a32b81f2cc6ba1e890893a2839855670c12ad32f9d80971942"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.CleanupStepValuesTest",
+          "tests": 8,
+          "xmlSha256": "b03bb2c998adae377a10688d3018f7a907846aabe855d0b688586053960f5894"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
+          "tests": 9,
+          "xmlSha256": "bfeb828e0c2f04ab67294d0f391ba76cd7c5f2f7fef12ecbbb75dfe1e26c0cca"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.StartupLaunchFilesTest",
+          "tests": 4,
+          "xmlSha256": "d877d70a8d674bdd1db933ad5d8c0c2bc67292ec11c95cf1a806a472640e9420"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
+          "tests": 4,
+          "xmlSha256": "7bc7260a9b7a3e69ae05fc84c257974602b15ea9d735c8372535632b36d2a4b3"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest",
+          "tests": 9,
+          "xmlSha256": "b4dc8136180f09c2db745c08d934e461f1add1cd252510f606358b30414efbf1"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest",
+          "tests": 20,
+          "xmlSha256": "eb5c1a9110f4f1abe3bec2cee3fd4550de01c8c1d189a72bb4c779fd42f5a2cd"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.cleanup.InspectionAttemptTest",
+          "tests": 8,
+          "xmlSha256": "cc4aa5ea0341c631bd4ba4e3f8c54118328c1b9cdf2168ea8da4a3e9cb6a9989"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.backup.BackupProfileTest",
+          "tests": 3,
+          "xmlSha256": "a88f1bf373ac8edf810ea228d10cb004056313e681c3b13738113b76347ff70e"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+          "tests": 9,
+          "xmlSha256": "2a767e8de7623dd74bb664168c668b27ed8f47448a682940dbc43bb04a4e5d73"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.RootServiceAdmissionScopeTest",
+          "tests": 6,
+          "xmlSha256": "7153f051100567ff2eec62227ad7e6e18616b8489dd5201a19d5b96f6cb70295"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.ApplicationStopGateTest",
+          "tests": 8,
+          "xmlSha256": "216a85e5d69c5e5b232dbf64be8d5233f5822e355b2302f78da507253fea67d2"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.file.MorningBackupCatalogTest",
+          "tests": 1,
+          "xmlSha256": "7569358f57b1d7aebaafa12ad27408ef8b342d253207aaad4efd12551e6b0e3b"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicyTest",
+          "tests": 7,
+          "xmlSha256": "1961790006216ed1fb8f345a7507295e437fea9e6feefbfc6316ac7c0b83c0f6"
+        },
+        {
+          "class": "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest",
+          "tests": 3,
+          "xmlSha256": "95aaa2e25550b8dd45e2dcb91eec0b6eb02e42b6b5d5d6c9ceafac51f7ee50bf"
+        }
+      ],
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15323,
+          "covered": 65511
+        },
+        "BRANCH": {
+          "missed": 1249,
+          "covered": 6496
+        },
+        "LINE": {
+          "missed": 3677,
+          "covered": 12898
+        },
+        "COMPLEXITY": {
+          "missed": 1482,
+          "covered": 5041
+        },
+        "METHOD": {
+          "missed": 598,
+          "covered": 2039
+        },
+        "CLASS": {
+          "missed": 39,
+          "covered": 294
+        }
+      },
+      "coverageXmlSha256": "4b9c1c7f3c60aff6c406538f431ed2f76a975b2461defc11ac91aa01623b6cce",
+      "projectJarSha256": "ff1974c8ce7783ac80f777e4560ad35dbabbd1379df998d71c6fcc600d2eb628"
+    }
+  ],
+  "tests": 3378,
+  "suiteCount": 507,
+  "FES": 0,
+  "staticModules": 6,
+  "staticIssues": 0,
+  "formatNullAwayWerrorPassed": true,
+  "sourceBeforeAfterUnchanged": true,
+  "allFrozenBytesMatched": true,
+  "closedConsumerClassCounters": {
+    "ApiBrokerContexts": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 298
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 27
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ApiMessagingRuntime": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 301
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 67
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebLogConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 220
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 63
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 22
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionWorkConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 231
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 63
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SyncRequestConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 292
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 80
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionSubmissionService": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1649
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 114
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 344
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 84
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 27
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "InspectionRunExecutor": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 146
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 18
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 38
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "InspectorProcess": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 242
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 8
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 49
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 11
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "FixedNativeCoverageProfile": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 242
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 44
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 55
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 14
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "PGD": "PG-D382",
+  "testIds": [
+    "PT-OPS-API-OWN001..004",
+    "PT-OPS-NC196001..004",
+    "PT-OPS-NC193/NCHECK193/NEXPORT193",
+    "all existing six-module PTs"
+  ],
+  "globalCoverage100": false,
+  "nativeSameSourceAccepted": false,
+  "allChrPassed": false,
+  "formalPass": false,
+  "oldNativeReused": false,
+  "ITSTAccepted": false,
+  "rawLogsInGit": false,
+  "logSha256": "a83fae7e816472af238e9777c66c98b9272a54800e6de3ba58936a17a899255f",
+  "sourceFilesSha256": "d5c28b6f00a8a0769a581302225ad096da532bf17da6594576814646a2a90d5c",
+  "environment": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "node": "24.19.0",
+    "jacoco": "0.8.15"
+  }
+}

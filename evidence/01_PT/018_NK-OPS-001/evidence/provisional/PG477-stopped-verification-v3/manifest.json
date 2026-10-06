@@ -1,0 +1,113 @@
+{
+  "id": "PG477-stopped-verification-v3",
+  "productionSource": "cce61f63900b1479f9f8dbdc338e222b1c8c38a3",
+  "branch": "dev-foundation",
+  "toolSource": "same production HEAD plus independently tested PG-D383 tool changes; hash-pinned",
+  "jdk": "25.0.4",
+  "os": "Linux",
+  "toolStatic": "javac -Xlint:all -Werror actual0",
+  "testIds": [
+    "PT-OPS-PG477-DEP001",
+    "PT-OPS-PG477-DEP002",
+    "PT-OPS-PG477-DEP003"
+  ],
+  "independentToolAssertions": {
+    "java": 141,
+    "stoppedNative": 153,
+    "references": 89,
+    "handoff": 120,
+    "productionPtAdded": 0
+  },
+  "actualRuns": [
+    {
+      "name": "verify-v1",
+      "actualExit": 143,
+      "result": "INTERRUPTED_OLD_CLOSE_UNKNOWN",
+      "bug": "BUG-764"
+    },
+    {
+      "name": "handoff-v1",
+      "actualExit": 0,
+      "started": "2026-10-06T14:09:47+09:00",
+      "completed": "2026-10-06T14:09:52+09:00",
+      "oldCloseSuccessInferred": false
+    },
+    {
+      "name": "verify-v2",
+      "actualExit": 1,
+      "result": "FAILED",
+      "bug": "BUG-765"
+    },
+    {
+      "name": "verify-v3",
+      "actualExit": 0,
+      "started": "2026-10-06T14:16:04+09:00",
+      "completed": "2026-10-06T14:16:07+09:00",
+      "command": "bash tools/quality/vm/050_s1/pg477_stopped_verify_v3.sh",
+      "expected": "all old values preserved, same stopped Unit generations, new M/A DB/Ref resources returned normally; no activation",
+      "actual": "matched"
+    }
+  ],
+  "currentActivated": false,
+  "oldNativeArchivePending": true,
+  "oldNativeStreams": 25,
+  "oldHeaps": 2,
+  "startupFiles": 65,
+  "batchRows": 411,
+  "businessTables": 23,
+  "extraReceiptRows": 0,
+  "privateEvidence": "WorkPG379 corresponding private log/exit/source and guest fixed Root tools/handoff/readback; raw secrets excluded",
+  "related": [
+    "SSC-196",
+    "BUG-764",
+    "YKT-544",
+    "BUG-765",
+    "YKT-545"
+  ],
+  "formalAccepted": false,
+  "nativeAccepted": false,
+  "globalCoverage100": false,
+  "secretValuesIncluded": false,
+  "toolFiles": [
+    {
+      "path": "tools/quality/vm/050_s1/Pg477StoppedDeployment.java",
+      "sha256": "12f30d367a4b83186825e46b6fd314771db5b846d5ce7e77b53e70af7f4dc05d"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg477StoppedDeploymentTest.java",
+      "sha256": "2b3d8c1ccaa1536a61f5bdd813f03555497a6c26ff1c70b944a3c461c1cd70d7"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg477UnitReferences.java",
+      "sha256": "09f86ab19874e5527807bc7647c5a85ed0ba97006cedb7dcca5a4add4f628320"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/Pg477HandoffReadback.java",
+      "sha256": "c3d634136ee9255cf7e629cc7d16fc69523f42411d2c2b0bbf7c85e1b12a2621"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_stopped_native.py",
+      "sha256": "aecb6c6d996d1305d96dbfb04ba1bd91291cc747a4e9c964becfa1d287336fc0"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_unit_references.py",
+      "sha256": "e3e0da8108d5fff740076cf75055ae48cf35b617ade491d8de5cdecdf811b934"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_handoff.py",
+      "sha256": "916672ad77feee71c5368ba540beff5cea5946eeb984ddd3892329c083878869"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_stopped_native_test.py",
+      "sha256": "7b8a938ac3766a7e94db49399e5d76ffd3af5f8cb85bb026fe23a6bee888160b"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_unit_references_test.py",
+      "sha256": "ec6f772f313cee891edca8b256b146e6010c9b0c0ac03e8880b54908ac423179"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg477_handoff_test.py",
+      "sha256": "cc07d8b88b3ca775fedaed8bb28c8c1b566a93371c38b6c0051d2fbd2e423da4"
+    }
+  ]
+}
