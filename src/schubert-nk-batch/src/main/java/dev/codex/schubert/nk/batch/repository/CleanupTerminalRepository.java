@@ -11,7 +11,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * Independent seven-step full-column readback after genuine Cleanup receipt and DB reacquisition.
  * Data only, never Unit/OS/root/Epoch authority. NK-BAT-001/OPS009/DAT009/UI251/SS331/341/343/
- * SSC119; PT-OPS-CEXEC001. Borrowed transaction is never committed/closed/configured here.
+ * SSC119/199, SS332; PT-OPS-CEXEC001/CTERM006..009. Borrowed transaction is never
+ * committed/closed/configured here.
  */
 @NullMarked
 public final class CleanupTerminalRepository {
@@ -144,42 +145,62 @@ public final class CleanupTerminalRepository {
     try {
       check(run);
       var values = new EnumMap<BatchStep, Entry>(BatchStep.class);
-      try (var statement = connection.prepareStatement(SQL)) {
+      @Nullable PreparedStatement statement = connection.prepareStatement(SQL);
+      @Nullable Throwable statementFailure = null;
+      try {
         var query = present(statement);
         query.setQueryTimeout(seconds());
         query.setObject(1, run.id());
         query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
-        try (var rows = query.executeQuery()) {
+        @Nullable ResultSet rows = query.executeQuery();
+        @Nullable Throwable rowsFailure = null;
+        try {
           var row = present(rows);
           while (row.next()) {
             require(values.size() < STEPS.size());
-            var step = BatchStep.valueOf(present(row.getString("step")));
-            require(STEPS.contains(step));
-            var entry = entry(row, run, observedAt);
-            var result = entry.result();
-            var reason = result.reason();
-            var status = result.status();
-            boolean deletion = step != BatchStep.CLEAN_TRANSFER;
-            if (failedBackup && deletion) {
+            var entry = entry(projection(row), run, observedAt);
+            var step = entry.attempt().step();
+            // Entry already establishes the closed allowlist.
+            var reason = entry.result().reason();
+            if (failedBackup && step != BatchStep.CLEAN_TRANSFER) {
+              // Immutable BatchStepResult enforces BACKUP_UNAVAILABLE -> SKIPPED/zero.
+              // Independently malformed status/counts still reject during value decoding.
               require(
-                  status == BatchStepResult.Status.SKIPPED
-                      && reason == BatchStepResult.Reason.BACKUP_UNAVAILABLE
-                      && entry.attempt().startedAt().equals(entry.endedAt())
-                      && result.target() == 0
-                      && result.success() == 0
-                      && result.failure() == 0
-                      && result.bytes() == 0);
+                  reason == BatchStepResult.Reason.BACKUP_UNAVAILABLE
+                      && entry.attempt().startedAt().equals(entry.endedAt()));
             } else require(reason != BatchStepResult.Reason.BACKUP_UNAVAILABLE);
             require(values.put(step, entry) == null);
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowsFailure = failure;
+          throw failure;
+        } finally {
+          if (rows != null) {
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;
+            }
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null) {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
           }
         }
       }
       var ordered = new ArrayList<Entry>();
       for (var step : STEPS) ordered.add(present(values.get(step)));
-      var snapshot = new Snapshot(ordered);
+      var result = snapshot(ordered);
       check(run);
-      return snapshot;
-    } catch (SQLException | IllegalArgumentException known) {
+      return result;
+    } catch (SQLException known) {
       throw new BatchRepositoryException();
     }
   }
@@ -198,78 +219,154 @@ public final class CleanupTerminalRepository {
         }
         var handle = currentRow.attempt();
         require(handle.skipped() && currentRow.endedAt().equals(handle.startedAt()));
-        try (var statement =
-            present(
-                connection.prepareStatement(
-                    "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
-                        + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
-                        + " from schubert.batch_runs where run_id=? and business_date=? and step=?"
-                        + " and status='SUCCESS' and attempt<? order by attempt desc limit 2"))) {
-          statement.setQueryTimeout(seconds());
-          statement.setObject(1, run.id());
-          statement.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
-          statement.setString(3, handle.step().name());
-          statement.setInt(4, handle.attempt());
-          try (var rows = present(statement.executeQuery())) {
-            require(rows.next());
-            var prior = entry(rows, run, handle.startedAt());
+        @Nullable PreparedStatement statement =
+            connection.prepareStatement(
+                "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
+                    + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
+                    + " from schubert.batch_runs where run_id=? and business_date=? and step=?"
+                    + " and status='SUCCESS' and attempt<? order by attempt desc limit 2");
+        @Nullable Throwable statementFailure = null;
+        Entry prior;
+        try {
+          var query = present(statement);
+          query.setQueryTimeout(seconds());
+          query.setObject(1, run.id());
+          query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+          query.setString(3, handle.step().name());
+          query.setInt(4, handle.attempt());
+          @Nullable ResultSet rows = query.executeQuery();
+          @Nullable Throwable rowsFailure = null;
+          try {
+            var row = present(rows);
+            require(row.next());
+            prior = entry(projection(row), run, handle.startedAt());
             require(
                 prior.attempt().step() == handle.step()
                     && prior.attempt().id() != handle.id()
                     && prior.attempt().attempt() < handle.attempt()
                     && prior.result().status() == BatchStepResult.Status.SUCCESS
-                    && prior.result().reason() == BatchStepResult.Reason.NONE
-                    && !rows.next());
-            references.add(Optional.of(prior));
+                    && !row.next());
+            // BatchStepResult establishes SUCCESS -> Reason.NONE.
+          } catch (SQLException | RuntimeException | Error failure) {
+            rowsFailure = failure;
+            throw failure;
+          } finally {
+            if (rows != null) {
+              try {
+                rows.close();
+              } catch (SQLException | RuntimeException | Error secondary) {
+                if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;
+              }
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          statementFailure = failure;
+          throw failure;
+        } finally {
+          if (statement != null) {
+            try {
+              statement.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+            }
           }
         }
+        references.add(Optional.of(prior));
         check(run);
       }
       check(run);
       return List.copyOf(references);
-    } catch (SQLException | IllegalArgumentException known) {
+    } catch (SQLException known) {
       throw new BatchRepositoryException();
     }
   }
 
-  private static Entry entry(ResultSet row, BatchRun run, Instant observedAt) throws SQLException {
-    var step = BatchStep.valueOf(present(row.getString("step")));
+  // SSC199/BUG784/CTERM006..009. Provider calls must stay outside pure value catches.
+  private record Projection(
+      long id,
+      @Nullable UUID runId,
+      @Nullable LocalDate date,
+      String step,
+      int attempt,
+      Instant started,
+      Optional<Instant> ended,
+      String status,
+      long target,
+      long success,
+      long failure,
+      long bytes,
+      @Nullable String code,
+      @Nullable String summary) {}
+
+  private static Projection projection(ResultSet row) throws SQLException {
+    long id = present(row.getObject("id", Long.class));
+    var run = row.getObject("run_id", UUID.class);
+    var date = row.getObject("business_date", LocalDate.class);
+    var step = present(row.getString("step"));
+    int attempt = present(row.getObject("attempt", Integer.class));
     var started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
-    var ended = present(row.getObject("ended_at", OffsetDateTime.class)).toInstant();
-    require(
-        !ended.isAfter(observedAt)
-            && run.id().equals(row.getObject("run_id", UUID.class))
-            && run.cutoff()
-                .atZone(ZoneId.of("Asia/Tokyo"))
-                .toLocalDate()
-                .equals(row.getObject("business_date", LocalDate.class)));
-    var status = BatchStepResult.Status.valueOf(present(row.getString("status")));
+    var ended =
+        Optional.ofNullable(row.getObject("ended_at", OffsetDateTime.class))
+            .map(OffsetDateTime::toInstant);
+    var status = present(row.getString("status"));
+    long target = present(row.getObject("target_count", Long.class));
+    long success = present(row.getObject("success_count", Long.class));
+    long failure = present(row.getObject("failure_count", Long.class));
+    long bytes = present(row.getObject("byte_count", Long.class));
     var code = row.getString("error_code");
-    var reason = code == null ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.valueOf(code);
-    var result =
-        new BatchStepResult(
-            status,
-            present(row.getObject("target_count", Long.class)),
-            present(row.getObject("success_count", Long.class)),
-            present(row.getObject("failure_count", Long.class)),
-            present(row.getObject("byte_count", Long.class)),
-            reason);
-    require(Objects.equals(reason.summary(), row.getString("error_summary")));
-    return new Entry(
-        new BatchStepAttempt(
-            present(row.getObject("id", Long.class)),
-            run,
-            step,
-            present(row.getObject("attempt", Integer.class)),
-            started,
-            status == BatchStepResult.Status.SKIPPED),
-        ended,
-        result);
+    var summary = row.getString("error_summary");
+    return new Projection(
+        id, run, date, step, attempt, started, ended, status, target, success, failure, bytes, code,
+        summary);
   }
 
-  /**
-   * SSC120/BUG365: same locked run, preserve nonexistent/partial/terminal DB facts without writes.
-   */
+  private static Entry entry(Projection row, BatchRun run, Instant observedAt) throws SQLException {
+    try {
+      require(row.ended().isPresent());
+      var ended = row.ended().orElseThrow();
+      require(
+          !ended.isAfter(observedAt)
+              && run.id().equals(row.runId())
+              && run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate().equals(row.date()));
+      var status = BatchStepResult.Status.valueOf(row.status());
+      var result = terminal(row, status);
+      return new Entry(
+          new BatchStepAttempt(
+              row.id(),
+              run,
+              BatchStep.valueOf(row.step()),
+              row.attempt(),
+              row.started(),
+              status == BatchStepResult.Status.SKIPPED),
+          ended,
+          result);
+    } catch (IllegalArgumentException invalidValue) {
+      throw new SQLDataException("Cleanup terminal projection invalid");
+    }
+  }
+
+  private static BatchStepResult terminal(Projection row, BatchStepResult.Status status)
+      throws SQLException {
+    var reason =
+        row.code() == null
+            ? BatchStepResult.Reason.NONE
+            : BatchStepResult.Reason.valueOf(row.code());
+    var result =
+        new BatchStepResult(
+            status, row.target(), row.success(), row.failure(), row.bytes(), reason);
+    require(Objects.equals(reason.summary(), row.summary()));
+    return result;
+  }
+
+  private static Snapshot snapshot(List<Entry> entries) throws SQLException {
+    try {
+      return new Snapshot(entries);
+    } catch (IllegalArgumentException invalidValue) {
+      throw new SQLDataException("Cleanup terminal projection invalid");
+    }
+  }
+
+  /** SSC120/BUG365: preserve nonexistent/partial/terminal DB facts without writes. */
   public RejectedSnapshot readRejected(BatchRun run, Instant observedAt) {
     Objects.requireNonNull(run, "same rejected run");
     Objects.requireNonNull(observedAt, "actual rejection observation");
@@ -277,82 +374,99 @@ public final class CleanupTerminalRepository {
     try {
       check(run);
       var values = new EnumMap<BatchStep, RejectedEntry>(BatchStep.class);
-      try (var statement = connection.prepareStatement(SQL)) {
+      @Nullable PreparedStatement statement = connection.prepareStatement(SQL);
+      @Nullable Throwable statementFailure = null;
+      try {
         var query = present(statement);
         query.setQueryTimeout(seconds());
         query.setObject(1, run.id());
         query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
-        try (var rows = query.executeQuery()) {
+        @Nullable ResultSet rows = query.executeQuery();
+        @Nullable Throwable rowsFailure = null;
+        try {
           var row = present(rows);
           while (row.next()) {
             require(values.size() < STEPS.size());
-            var step = BatchStep.valueOf(present(row.getString("step")));
-            require(STEPS.contains(step));
-            var started = present(row.getObject("started_at", OffsetDateTime.class)).toInstant();
-            require(
-                !started.isAfter(observedAt)
-                    && run.id().equals(row.getObject("run_id", UUID.class))
-                    && run.cutoff()
-                        .atZone(ZoneId.of("Asia/Tokyo"))
-                        .toLocalDate()
-                        .equals(row.getObject("business_date", LocalDate.class)));
-            var ended =
-                Optional.ofNullable(row.getObject("ended_at", OffsetDateTime.class))
-                    .map(OffsetDateTime::toInstant);
-            var status = present(row.getString("status"));
-            long target = present(row.getObject("target_count", Long.class));
-            long success = present(row.getObject("success_count", Long.class));
-            long failure = present(row.getObject("failure_count", Long.class));
-            long bytes = present(row.getObject("byte_count", Long.class));
-            var code = row.getString("error_code");
-            var summary = row.getString("error_summary");
-            Optional<BatchStepResult> result;
-            if (status.equals("RUNNING")) {
-              require(
-                  ended.isEmpty()
-                      && target == 0
-                      && success == 0
-                      && failure == 0
-                      && bytes == 0
-                      && code == null
-                      && summary == null);
-              result = Optional.empty();
-            } else {
-              require(ended.isPresent() && !ended.orElseThrow().isAfter(observedAt));
-              var reason =
-                  code == null ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.valueOf(code);
-              var terminal =
-                  new BatchStepResult(
-                      BatchStepResult.Status.valueOf(status),
-                      target,
-                      success,
-                      failure,
-                      bytes,
-                      reason);
-              require(Objects.equals(reason.summary(), summary));
-              result = Optional.of(terminal);
+            var value = rejected(projection(row), run, observedAt);
+            // RejectedEntry already establishes the closed allowlist.
+            require(values.put(value.attempt().step(), value) == null);
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowsFailure = failure;
+          throw failure;
+        } finally {
+          if (rows != null) {
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;
             }
-            var attempt =
-                new BatchStepAttempt(
-                    present(row.getObject("id", Long.class)),
-                    run,
-                    step,
-                    present(row.getObject("attempt", Integer.class)),
-                    started,
-                    result
-                        .map(value -> value.status() == BatchStepResult.Status.SKIPPED)
-                        .orElse(false));
-            require(values.put(step, new RejectedEntry(attempt, ended, result)) == null);
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
+      } finally {
+        if (statement != null) {
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
           }
         }
       }
       var ordered = new ArrayList<Optional<RejectedEntry>>();
       for (var step : STEPS) ordered.add(Optional.ofNullable(values.get(step)));
-      var snapshot = new RejectedSnapshot(run, ordered);
+      var result = rejectedSnapshot(run, ordered);
       check(run);
-      return snapshot;
-    } catch (SQLException | IllegalArgumentException known) {
+      return result;
+    } catch (SQLException known) {
       throw new BatchRepositoryException();
+    }
+  }
+
+  private static RejectedEntry rejected(Projection row, BatchRun run, Instant observedAt)
+      throws SQLException {
+    try {
+      require(
+          !row.started().isAfter(observedAt)
+              && run.id().equals(row.runId())
+              && run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate().equals(row.date()));
+      Optional<BatchStepResult> result;
+      if (row.status().equals("RUNNING")) {
+        require(
+            row.ended().isEmpty()
+                && row.target() == 0
+                && row.success() == 0
+                && row.failure() == 0
+                && row.bytes() == 0
+                && row.code() == null
+                && row.summary() == null);
+        result = Optional.empty();
+      } else {
+        require(row.ended().isPresent() && !row.ended().orElseThrow().isAfter(observedAt));
+        result = Optional.of(terminal(row, BatchStepResult.Status.valueOf(row.status())));
+      }
+      var attempt =
+          new BatchStepAttempt(
+              row.id(),
+              run,
+              BatchStep.valueOf(row.step()),
+              row.attempt(),
+              row.started(),
+              result.map(value -> value.status() == BatchStepResult.Status.SKIPPED).orElse(false));
+      return new RejectedEntry(attempt, row.ended(), result);
+    } catch (IllegalArgumentException invalidValue) {
+      throw new SQLDataException("Cleanup rejection projection invalid");
+    }
+  }
+
+  private static RejectedSnapshot rejectedSnapshot(
+      BatchRun run, List<Optional<RejectedEntry>> entries) throws SQLException {
+    try {
+      return new RejectedSnapshot(run, entries);
+    } catch (IllegalArgumentException invalidValue) {
+      throw new SQLDataException("Cleanup rejection projection invalid");
     }
   }
 

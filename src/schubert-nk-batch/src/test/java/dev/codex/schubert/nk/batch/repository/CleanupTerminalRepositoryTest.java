@@ -4,13 +4,316 @@ import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.Path;
+import java.sql.Connection;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
 final class CleanupTerminalRepositoryTest {
+  @Test
+  void cterm006ProjectionFaultsAndOwnedJdbcResources() throws Exception {
+    for (boolean rejected : List.of(false, true)) {
+      for (String column :
+          List.of(
+              "step",
+              "status",
+              "id",
+              "attempt",
+              "started_at",
+              "run_id",
+              "business_date",
+              "target_count",
+              "success_count",
+              "failure_count",
+              "byte_count",
+              "ended_at")) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql = "select distinct on(step)";
+        probe.columns.put(column, null);
+        refusedProjection(probe, rejected);
+      }
+      for (var item :
+          Map.<String, Object>ofEntries(
+                  Map.entry("id", 1000L),
+                  Map.entry("run_id", UUID.fromString("00000000-0000-4000-8000-000000000002")),
+                  Map.entry("business_date", LocalDate.of(2026, 9, 14)),
+                  Map.entry("step", "BACKUP_DB"),
+                  Map.entry("status", "UNKNOWN"),
+                  Map.entry("error_code", "UNKNOWN"),
+                  Map.entry("error_summary", "synthetic wrong summary"),
+                  Map.entry("target_count", -1L),
+                  Map.entry("success_count", -1L),
+                  Map.entry("failure_count", -1L),
+                  Map.entry("byte_count", -1L),
+                  Map.entry("started_at", OffsetDateTime.parse("2026-10-01T00:00:00Z")),
+                  Map.entry("ended_at", OffsetDateTime.parse("2026-10-01T00:00:00Z")))
+              .entrySet()) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql = "select distinct on(step)";
+        probe.columns.put(item.getKey(), item.getValue());
+        refusedProjection(probe, rejected);
+      }
+      for (String fault : List.of("null-statement", "null-rows", "eighth", "duplicate")) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql = "select distinct on(step)";
+        probe.nullStatement = fault.equals("null-statement");
+        probe.nullRows = fault.equals("null-rows");
+        probe.extraLastRow = fault.equals("eighth");
+        if (fault.equals("duplicate")) probe.columns.put("step", "CLEAN_NOTIFICATION");
+        refusedProjection(probe, rejected);
+      }
+    }
+  }
+
+  @Test
+  void cterm007TransactionAndRunningProjectionAreNotAuthority() throws Exception {
+    for (var item :
+        Map.<String, Object>of(
+                "getAutoCommit",
+                true,
+                "isReadOnly",
+                true,
+                "getTransactionIsolation",
+                Connection.TRANSACTION_SERIALIZABLE)
+            .entrySet()) {
+      var probe = new BatchJdbcProbe();
+      probe.selectedSql = "select distinct on(step)";
+      probe.connectionValues.put(item.getKey(), item.getValue());
+      refusedProjection(probe, true);
+      assertEquals(0, probe.selectedStatements);
+    }
+    var inconsistent = new BatchJdbcProbe();
+    inconsistent.selectedSql = "maintenance_read_run_references";
+    inconsistent.columns.put("identity_consistent", false);
+    refusedProjection(inconsistent, true);
+    for (String column :
+        List.of(
+            "ended_at",
+            "target_count",
+            "success_count",
+            "failure_count",
+            "byte_count",
+            "error_code",
+            "error_summary")) {
+      var probe = new BatchJdbcProbe();
+      probe.selectedSql = "select distinct on(step)";
+      probe.columns.put("status", "RUNNING");
+      probe.columns.put("ended_at", null);
+      for (String count : List.of("target_count", "success_count", "failure_count", "byte_count"))
+        probe.columns.put(count, 0L);
+      probe.columns.put(
+          column,
+          switch (column) {
+            case "ended_at" -> OffsetDateTime.parse("2026-09-13T02:00:01Z");
+            case "error_code", "error_summary" -> "synthetic unexpected value";
+            default -> 1L;
+          });
+      refusedProjection(probe, true);
+    }
+  }
+
+  @Test
+  void cterm008SqlBodyMustNotHideFatalOwnedClose() throws Exception {
+    for (String path : List.of("read", "rejected", "references")) {
+      seed();
+      if (path.equals("references")) insertCurrentSkips();
+      for (var sample : JdbcResourceCases.all()) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql =
+            path.equals("references") ? "and status='SUCCESS'" : "select distinct on(step)";
+        if (sample.primary() != null)
+          probe.thrown.put(
+              sample.body().substring(sample.body().indexOf('.') + 1), sample.primary());
+        probe.thrown.put(
+            sample.close().equals("row.close") ? "resultClose" : "statementClose",
+            sample.secondary());
+        try (var raw = locked(db, false)) {
+          String sql =
+              "select json_agg(to_jsonb(t) order by id)::text from schubert.batch_runs t where run_id='"
+                  + RUN.id()
+                  + "'";
+          String before = query(raw, sql);
+          var current =
+              new CleanupTerminalRepository(raw, () -> 10_000_000_000L).read(RUN, OBSERVED);
+          var subject = new CleanupTerminalRepository(probe.wrap(raw), () -> 10_000_000_000L);
+          Throwable actual =
+              assertThrows(
+                  Throwable.class,
+                  () -> {
+                    switch (path) {
+                      case "read" -> subject.read(RUN, OBSERVED);
+                      case "rejected" -> subject.readRejected(RUN, OBSERVED);
+                      case "references" -> subject.references(current);
+                      default -> throw new AssertionError("unknown public path");
+                    }
+                  });
+          sample.verify(actual);
+          assertBorrowed(probe, raw);
+          assertEquals(before, query(raw, sql), "read failure preserves all SQL rows/columns");
+          raw.rollback();
+        }
+      }
+    }
+  }
+
+  private void refusedProjection(BatchJdbcProbe probe, boolean rejected) throws Exception {
+    try (var raw = locked(db, false)) {
+      var subject = new CleanupTerminalRepository(probe.wrap(raw), () -> 10_000_000_000L);
+      var failure =
+          assertThrows(
+              BatchRepositoryException.class,
+              () -> {
+                if (rejected) subject.readRejected(RUN, OBSERVED);
+                else subject.read(RUN, OBSERVED);
+              });
+      assertEquals("batch repository operation failed", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+      assertBorrowed(probe, raw);
+      raw.rollback();
+    }
+  }
+
+  @Test
+  void cterm009FailedBackupProfileAndIndependentPriorIdentity() throws Exception {
+    String skips =
+        "update schubert.batch_runs set status='SKIPPED',ended_at=started_at,target_count=0,success_count=0,failure_count=0,byte_count=0,error_code='BACKUP_UNAVAILABLE',error_summary='verified backup unavailable' where id between 1000 and 1005";
+    try (var admin = db.admin()) {
+      sql(admin, skips);
+    }
+    try (var raw = locked(db, false)) {
+      var subject = new CleanupTerminalRepository(raw, () -> 10_000_000_000L);
+      var actual = subject.readBackupUnavailable(RUN, OBSERVED);
+      assertEquals(0, actual.exitCode());
+      for (int i = 0; i < 6; i++) {
+        var entry = actual.entries().get(i);
+        assertEquals(STEPS[i], entry.attempt().step().name());
+        assertEquals(BatchStepResult.Status.SKIPPED, entry.result().status());
+        assertEquals(BatchStepResult.Reason.BACKUP_UNAVAILABLE, entry.result().reason());
+        assertEquals(0, entry.result().target());
+        assertEquals(0, entry.result().success());
+        assertEquals(0, entry.result().failure());
+        assertEquals(0, entry.result().bytes());
+        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), entry.endedAt());
+      }
+      assertEquals(BatchStepResult.Status.SUCCESS, actual.entries().get(6).result().status());
+      assertEquals(7, subject.readRejected(RUN, OBSERVED).entries().size());
+      assertThrows(BatchRepositoryException.class, () -> subject.read(RUN, OBSERVED));
+      raw.rollback();
+    }
+    for (String mutation : List.of("normal", "late", "reason", "transfer", "counts")) {
+      seed();
+      try (var admin = db.admin()) {
+        if (!mutation.equals("normal")) sql(admin, skips);
+        switch (mutation) {
+          case "late" ->
+              sql(
+                  admin,
+                  "update schubert.batch_runs set ended_at=started_at+interval '1 second' where id=1000");
+          case "reason" ->
+              sql(
+                  admin,
+                  "update schubert.batch_runs set error_code='ALREADY_SUCCESSFUL',error_summary='step already successful for business date' where id=1000");
+          case "transfer" -> sql(admin, skips.replace("between 1000 and 1005", "=1006"));
+          default -> {}
+        }
+      }
+      try (var raw = locked(db, false)) {
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql = "select distinct on(step)";
+        if (mutation.equals("counts")) probe.columns.put("target_count", 1L);
+        assertThrows(
+            BatchRepositoryException.class,
+            () ->
+                new CleanupTerminalRepository(probe.wrap(raw), () -> 10_000_000_000L)
+                    .readBackupUnavailable(RUN, OBSERVED));
+        assertBorrowed(probe, raw);
+        raw.rollback();
+      }
+    }
+    seed();
+    insertCurrentSkips();
+    for (String fault :
+        List.of(
+            "null-statement",
+            "null-rows",
+            "missing",
+            "duplicate",
+            "step",
+            "id",
+            "attempt",
+            "status",
+            "not-skipped",
+            "late-current")) {
+      try (var raw = locked(db, false)) {
+        var current = new CleanupTerminalRepository(raw, () -> 10_000_000_000L).read(RUN, OBSERVED);
+        var probe = new BatchJdbcProbe();
+        probe.selectedSql = "and status='SUCCESS'";
+        switch (fault) {
+          case "null-statement" -> probe.nullStatement = true;
+          case "null-rows" -> probe.nullRows = true;
+          case "missing" -> probe.empty = true;
+          case "duplicate" -> probe.duplicate = true;
+          case "step" -> probe.columns.put("step", "CLEAN_TRANSFER");
+          case "id" -> probe.columns.put("id", 2000L);
+          case "attempt" -> probe.columns.put("attempt", 2);
+          case "status" -> {
+            probe.columns.put("status", "WARNING");
+            probe.columns.put("error_code", "PROTECTED_RECORDS");
+            probe.columns.put("error_summary", "protected records retained");
+          }
+          case "not-skipped", "late-current" -> {
+            var entries = new ArrayList<>(current.entries());
+            var row = entries.getFirst();
+            var attempt = row.attempt();
+            if (fault.equals("not-skipped"))
+              attempt =
+                  new BatchStepAttempt(
+                      attempt.id(),
+                      attempt.run(),
+                      attempt.step(),
+                      attempt.attempt(),
+                      attempt.startedAt(),
+                      false);
+            entries.set(
+                0,
+                new CleanupTerminalRepository.Entry(
+                    attempt,
+                    fault.equals("late-current") ? row.endedAt().plusSeconds(1) : row.endedAt(),
+                    row.result()));
+            current = new CleanupTerminalRepository.Snapshot(entries);
+          }
+          default -> throw new AssertionError("unregistered fixture");
+        }
+        var input = current;
+        assertThrows(
+            BatchRepositoryException.class,
+            () ->
+                new CleanupTerminalRepository(probe.wrap(raw), () -> 10_000_000_000L)
+                    .references(input));
+        assertBorrowed(probe, raw);
+        raw.rollback();
+      }
+    }
+  }
+
+  private static void assertBorrowed(BatchJdbcProbe probe, Connection raw) throws Exception {
+    assertEquals(0, probe.liveRows);
+    assertEquals(0, probe.liveStatements);
+    assertEquals(0, probe.commits);
+    assertEquals(0, probe.rollbacks);
+    assertEquals(0, probe.closes);
+    assertEquals(0, probe.autoChanges);
+    assertEquals(0, probe.saves);
+    assertEquals(0, probe.deletes);
+    assertFalse(raw.getAutoCommit());
+    assertFalse(raw.isClosed());
+  }
+
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   private static final Instant OBSERVED = Instant.parse("2026-09-30T00:00:00Z");

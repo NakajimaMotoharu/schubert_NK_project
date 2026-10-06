@@ -18,6 +18,8 @@ final class BatchJdbcProbe {
   String lastSqlState = "unobserved", lastSql = "unobserved";
   boolean empty, duplicate, commitAfter, fresh = true;
   boolean nullStatement, nullRows;
+  boolean extraLastRow;
+  final Map<String, Object> connectionValues = new HashMap<>();
   int commits, closes, rollbacks, saves, deletes, selectedStatements, autoChanges;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeDelete = c -> {};
@@ -35,6 +37,7 @@ final class BatchJdbcProbe {
             new Class<?>[] {Connection.class},
             (p, m, a) -> {
               String name = m.getName();
+              if (connectionValues.containsKey(name)) return connectionValues.get(name);
               if (name.equals("setSavepoint")) saves++;
               if (name.equals("setAutoCommit")) autoChanges++;
               if (name.equals("rollback")) rollbacks++;
@@ -124,6 +127,7 @@ final class BatchJdbcProbe {
                 position[0]++;
                 if (empty) return false;
                 if (duplicate && position[0] == 2) return true;
+                if (extraLastRow && position[0] == 8) return true;
               }
               if (name.equals("close")) {
                 liveRows--;
