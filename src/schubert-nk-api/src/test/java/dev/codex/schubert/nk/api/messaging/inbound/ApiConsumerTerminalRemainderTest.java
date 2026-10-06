@@ -29,9 +29,11 @@ class ApiConsumerTerminalRemainderTest {
   @Test
   void protocolTerminalAndDirectFatalBothRemainStickyAcrossAllThreeGroups(@TempDir Path root)
       throws Exception {
-    for (boolean protocolFirst : List.of(false, true)) {
-      var broker =
-          InternalEventListenerTest.start(root.resolve(protocolFirst ? "protocol" : "fatal"));
+    // BUG762/YKT542: never replace the normal provider return with only fault injection.
+    for (int mode : List.of(0, 1, 2)) {
+      boolean protocolFirst = mode == 2;
+      boolean uncertain = mode == 1;
+      var broker = InternalEventListenerTest.start(root.resolve("mode" + mode));
       try (var factory = new ActiveMQConnectionFactory("vm://0");
           var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
         var slots = new ArrayList<Slot>();
@@ -53,8 +55,7 @@ class ApiConsumerTerminalRemainderTest {
                         if (m.getName().equals("rollback")) {
                           rollbacks.incrementAndGet();
                           real.rollback();
-                          if (!protocolFirst)
-                            throw new JMSRuntimeException("synthetic uncertainty");
+                          if (uncertain) throw new JMSRuntimeException("synthetic uncertainty");
                           return null;
                         }
                         Object value = QuestionWorkConsumersTest.invoke(real, m, a);

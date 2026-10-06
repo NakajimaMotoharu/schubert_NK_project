@@ -1,0 +1,108 @@
+{
+  "id": "PG474-full-v1-coverage-refused",
+  "productionSource": "abdb6f35a008f7e92f189ba7488856cf7c0ddc57",
+  "branch": "dev-foundation",
+  "started": "2026-10-06T10:16:19+09:00",
+  "completed": "2026-10-06T10:33:43+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg474_full_v1.sh abdb6f35a008f7e92f189ba7488856cf7c0ddc57",
+  "buildTestScriptActualExit": 0,
+  "tests": 3365,
+  "suites": 505,
+  "F": 0,
+  "E": 0,
+  "S": 0,
+  "staticModules": 6,
+  "staticFindings": 0,
+  "modules": [
+    {
+      "module": "protocol",
+      "tests": 81,
+      "suites": 17,
+      "FES": 0,
+      "coverageXmlSha256": "c20eddc1201b323ad0256168597767652606c766aaf996ecea8a2602126a95b3"
+    },
+    {
+      "module": "storage",
+      "tests": 158,
+      "suites": 22,
+      "FES": 0,
+      "coverageXmlSha256": "dcacf219c8012d548717aa923b88b412ede92f655d54061879afa0d1aa60e592"
+    },
+    {
+      "module": "bootstrap",
+      "tests": 242,
+      "suites": 36,
+      "FES": 0,
+      "coverageXmlSha256": "7620a9fe3433fc7662a97bd832b1799a78b8b1fe35025a327efaa0289fad6e15"
+    },
+    {
+      "module": "api",
+      "tests": 925,
+      "suites": 151,
+      "FES": 0,
+      "coverageXmlSha256": "0969e2b2fcde9fa48029dc2f55dd1c0100d7451b0e2117da428e330c1e3f4356"
+    },
+    {
+      "module": "web",
+      "tests": 886,
+      "suites": 129,
+      "FES": 0,
+      "coverageXmlSha256": "17ef10360512c5a30a8ea28941ed3d281197beef7b9158bb13239409fe73c894"
+    },
+    {
+      "module": "batch",
+      "tests": 1073,
+      "suites": 150,
+      "FES": 0,
+      "coverageXmlSha256": "540c4c9e15404182c6108ea4c2087cd385e80205513f6470d4049f1dd10365e2"
+    }
+  ],
+  "consumerCounters": {
+    "INSTRUCTION": {
+      "missed": 3,
+      "covered": 289
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 46
+    },
+    "LINE": {
+      "missed": 2,
+      "covered": 78
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 32
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 9
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "qualityCollectorActualExit": 1,
+  "qualityAccepted": false,
+  "globalCoverage100": false,
+  "reason": "fresh Sync consumer normal rollback missed LINE80/83; accumulated selected exec had masked missing fixture",
+  "BUG": "BUG-762",
+  "YKT": "YKT-542",
+  "TestIDs": [
+    "PT-OPS-API-REM004"
+  ],
+  "privateLogSha256": "1081733e43f00c8d44b4327cc8dea8dbd4de7a81f73130d5c493ef80b309ae4a",
+  "sourceFilesSha256": "95625ffd58455a74a6f42e6b0897cce2f74f4c91acd4558b9cebc5b41f8b827d",
+  "environment": {
+    "OS": "Linux",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "Node": "24.19.0"
+  },
+  "rawSecretsInGit": false,
+  "nativeAccepted": false,
+  "formalUpdated": false,
+  "ITSTAccepted": false
+}

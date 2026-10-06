@@ -1,0 +1,396 @@
+{
+  "id": "PG474-api-consumers-selected-v6",
+  "programId": [
+    "NK-MSG-001",
+    "NK-MSG-002",
+    "NK-ASY-001",
+    "NK-OPS-001"
+  ],
+  "TestIDs": [
+    "PT-OPS-API-REM001..004",
+    "PT-OPS-API-FACT001"
+  ],
+  "PGD": "PG-D379",
+  "baseCommit": "abdb6f35a008f7e92f189ba7488856cf7c0ddc57",
+  "branch": "dev-foundation",
+  "dirtySource": true,
+  "started": "2026-10-06T10:36:33,519848870+09:00",
+  "completed": "2026-10-06T10:37:35,070299508+09:00",
+  "actualExit": 0,
+  "command": "bash tools/quality/vm/050_s1/pg474_api_consumers_selected_v6.sh",
+  "tests": 86,
+  "suites": 14,
+  "F": 0,
+  "E": 0,
+  "S": 0,
+  "XML": [
+    {
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": 7,
+      "xmlSha256": "e46061bcb78c4d7bb3692b8222602be7683c2008acea7657ceaa8b42fd2c2fbb",
+      "methods": [
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+      "tests": 12,
+      "xmlSha256": "7c215ecf21af308b0c87e340cdf0e7f0fc2199935ebccbee791c719f797867c6",
+      "methods": [
+        "nameAndNullContracts",
+        "nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement",
+        "nfile193002MissingNullAndUnsafeNameDoNotMutate",
+        "nfile193004ConcurrentNamedEntryHasExactlyOneWriter",
+        "faultAndUncertainOutcomes",
+        "scopedOwnership",
+        "nativePrivateCreation",
+        "retainedNamespace",
+        "nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd",
+        "unsupportedAndNativeArguments",
+        "concurrentSinglePublication",
+        "atomicNoReplace"
+      ]
+    },
+    {
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "tests": 8,
+      "xmlSha256": "827d7727182906df79a95481a70274691bf32d7a88e5c8f81fe9edc9e0a87e49",
+      "methods": [
+        "unknownCompoundFailures",
+        "knownIoFailures",
+        "unknownBodyFailures",
+        "concurrentScopes",
+        "nullAndNullableContracts",
+        "nestedScopes",
+        "knownBodyUnknownCleanup",
+        "successfulOwnership"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.bootstrap.FixedServiceIdentityTest",
+      "tests": 10,
+      "xmlSha256": "9322e7c2f3f27d78e5d7755ec5d00ac4d18bf685f5ccd7576f409ba03c0371dc",
+      "methods": [
+        "serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored",
+        "serviceid007EveryOwnedCloseAndUnknownFailurePreserved",
+        "serviceid001BothFixedAccountsExplicitRequiredGroups",
+        "serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets",
+        "serviceid003UidGidBoundariesAndCanonicalDecimal",
+        "serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker",
+        "serviceid008ConcurrentLiteralVectorsAndNativeUnprovisionedRejection",
+        "issuerRootsUseFixedDataMigrationAndReadGroupWithoutApplicationAuthority",
+        "serviceid005ByteNullAndImmutableValueInvariant",
+        "dedicatedInspectorUsesOnlyFixedPrimaryConfigurationAndReadGroups"
+      ]
+    },
+    {
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.ServiceCredentialSetTest",
+      "tests": 5,
+      "xmlSha256": "95af6b4e1c31c80756290f8906d62d0714cb74f9671e9c614cdbfc08d3f9f504",
+      "methods": [
+        "opsCredset003MissingMalformedAndUncheckedFailureClearPartial",
+        "opsCredset005CallerMonitorCannotDelaySecretCopyOrClose",
+        "opsCredset001FiveFixedMaterialsPerServiceAreOwnedAndClosed",
+        "opsCredset002WrongIdNullAndClosedStateReject",
+        "opsCredset004ConcurrentIndependentLoads"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+      "tests": 2,
+      "xmlSha256": "4a72162f6b31644b5ced6b5290ce0e3b3a6f27f3202e8aae58337586609fc847",
+      "methods": [
+        "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.config.ApiBrokerContextsTest",
+      "tests": 7,
+      "xmlSha256": "e452ada610def897b4dd42bb56f5acb65be947e806f0b8161b0069815c113694",
+      "methods": [
+        "passwordAcquisitionFaultsAreRedacted",
+        "missingDependenciesFailBeforeContextCreation",
+        "distinctSyncAndLogFactoriesUseFixedRoleAndEraseEveryCopy",
+        "closeTriesBothFactoriesAndPreservesFatalPriority",
+        "invalidLengthsNullAndProviderFaultEraseOwnedCopies",
+        "completeThirdProfileOwnsDistinctFactoryErasesCopyAndClosesAllOnFault",
+        "closeIsIdempotentAndRejectsEscapedSupplierBeforeSecretAccess"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.config.ApiBrokerFactoryRemainderTest",
+      "tests": 2,
+      "xmlSha256": "991359d5812a2605050eb20ccaa0a48e57ef465bf6a038ed4750af32a72ee455",
+      "methods": [
+        "everyPartialFactoryFaultClosesEarlierProfilesAndPreservesIdentity",
+        "nullInternalPortsRejectBeforeAnyFactoryOrPasswordCopy"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiConsumerRemainderTest",
+      "tests": 4,
+      "xmlSha256": "43983254310287e49d9c4cca6546ce505b0a43867c9ee4a636f8030ff775e93b",
+      "methods": [
+        "syncDrainPromotesLaterErrorButAttemptsAllFourContexts",
+        "partialConsumerCleanupFatalAndSameIdentityAreNeverNormalSuccess",
+        "factoryFailureSignalsBeforeClosingAllEarlierOwnersWithFatalPriority",
+        "completeProfileClosesInReverseGroupOrderAndPreservesDistinctFatalIdentity"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiConsumerTerminalRemainderTest",
+      "tests": 3,
+      "xmlSha256": "7aa408600cde1ecca3dc146e1e954c1c9bd7f20a54912f3d4e6f19f89596d4e7",
+      "methods": [
+        "ordinaryQuestionWorkCommitsExactlyOnceAndRemainsReady(Path)",
+        "twoIndependentFatalGroupsStopOuterOwnerOnceAndNeverAckOrResume(Path)",
+        "protocolTerminalAndDirectFatalBothRemainStickyAcrossAllThreeGroups(Path)"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntimeTest",
+      "tests": 10,
+      "xmlSha256": "0e800b9faa1f9642426759d4c077d81d74bf1651f81cce870b6621cf088e5fb1",
+      "methods": [
+        "core001ActualSixContextsThirdFifoProfileAndOneFatalAcrossThreeQueues(Path)",
+        "validatesAllPortsBeforeOpeningAnyContext",
+        "opensFiveConsumersAndSignalsOneTerminalAcrossGroups(Path)",
+        "fifthContextFailureClosesFourEarlierContexts",
+        "failedSecondStartupPreservesFirstCloseFailure",
+        "closeHandlesOnlySyncFailure",
+        "approvedSyncAndWebLogProfilesHaveSeparateRuntimeSuppliers(Path)",
+        "core002EveryPartialFactoryRuntimeOrFatalReleasesAllEarlierContexts",
+        "closeAttemptsBothGroupsAndPreservesBothFailures",
+        "core003CompleteNullPortsFailBeforeOpeningAnyContext"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+      "tests": 5,
+      "xmlSha256": "829a4864b6ee901175c324f0041227e16c0ce41c47604c28e25b7e36f28649a6",
+      "methods": [
+        "core004EveryPartialContextStageClosesAndFatalPriorityIsPreserved",
+        "core008SameCloseThrowableNeverSuppressesItselfOrSkipsLaterContexts",
+        "core006NullPortsAndFactoryDoNotGrantReady",
+        "core007AllPartialOwnersSignalStopBeforeCloseAndPreserveNotificationFaults",
+        "core005ActualErrorRollbackNeverAcknowledgesOrLeaksBusinessContinuation(Path)"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+      "tests": 6,
+      "xmlSha256": "c39294dd154c925b51a71e1d7aeb6d62745a7d41ee84289bdb86ae3537d6643e",
+      "methods": [
+        "fourConsumersReceiveAndCommitOneReply(Path)",
+        "failedStartupPreservesClosingFailureAsSuppressed",
+        "temporaryBusinessFailureRollsBackAndRedelivers(Path)",
+        "closeIsIdempotentAndAggregatesAllContextFailures",
+        "partialStartupRejectsWrongSessionAndClosesAll(Path)",
+        "invalidMessageCommitsToDlqAndSignalsTerminal(Path)"
+      ]
+    },
+    {
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+      "tests": 5,
+      "xmlSha256": "a6b522438f2408f7615d881fe0d99e043cf9ade61fa059611c26ff0b9b9909c9",
+      "methods": [
+        "startupRejectsNullAndWrongModeBeforeDelivery(Path)",
+        "closeIsIdempotentAndStartupPreservesCloseFailure",
+        "permanentInvalidEventsCommitDlqAndSignalTerminalOnce(Path)",
+        "temporaryProcessorFailureRollsBackAndRedelivers(Path)",
+        "oneConsumerCommitsValidatedWebLog(Path)"
+      ]
+    }
+  ],
+  "staticModules": 4,
+  "staticFindings": 0,
+  "formatNullAwayWerror": "PASS",
+  "localCounters": {
+    "ApiBrokerContexts": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 298
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 27
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 15
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "ApiMessagingRuntime": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 301
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 67
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "WebLogConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 220
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 63
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 22
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "QuestionWorkConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 231
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 63
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 19
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "SyncRequestConsumers": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 292
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 80
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 32
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "coverageXMLSha256": "f2d72692f0cb0f0c68dd51285afb9c7ef63433ebfa3c2c823f8cba23087b1640",
+  "privateLogSha256": "7c4e21fa8338dc3657d060da8e0ca8ded56c7f20ee99edb164b3584cea3eb96e",
+  "sourceDiffSha256": "75f13890541980138595419cf8fdf3aa750bd48b04a57caa93dbb5363f73aa7a",
+  "sourceFilesSha256": "f6566a1fe00e1da45d86b55726013539b6aa1acaba709d2a71ce180198c948e5",
+  "environment": {
+    "OS": "Linux",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15"
+  },
+  "independentOracle": "literal provider profile/order, Throwable identity, actual embedded broker golden wire/ACK/rollback; wrong-type provider object is rejection-only",
+  "v1": {
+    "actualExit": 1,
+    "API": "NOT_RUN",
+    "reason": "new draft JUnit conditional generic inference compile"
+  },
+  "v2": {
+    "actualExit": 0,
+    "tests": 81,
+    "suites": 13,
+    "F": 0,
+    "E": 0,
+    "S": 0,
+    "staticModules": 4,
+    "privateLogSha256": "882c6be384b8932eaf234fce68e3670a5b378a88fa3fab6c2f3f3ab7329c2150",
+    "XMLFrozen": false,
+    "notReusedForV3": true
+  },
+  "accumulatedExec": true,
+  "wholeCoverage100": false,
+  "nativeAccepted": false,
+  "formalUpdated": false,
+  "oldNativeReused": false,
+  "rawSecretsExported": false,
+  "ITSTAccepted": false
+}

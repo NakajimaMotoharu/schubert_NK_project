@@ -13,7 +13,7 @@ os.umask(0o077)
 ROOT = pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation')
 WORK = pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 version = sys.argv[1]
-assert version in ('v3', 'v4', 'v5')
+assert version in ('v3', 'v4', 'v5', 'v6')
 stem = WORK / ('pg474-api-consumers-selected-' + version)
 def read(suffix):
     return pathlib.Path(str(stem) + suffix).read_text().strip()

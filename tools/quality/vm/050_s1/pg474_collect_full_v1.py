@@ -7,12 +7,15 @@ import pathlib
 import re
 import shutil
 import subprocess
+import sys
 import xml.etree.ElementTree as E
 
 os.umask(0o077)
 ROOT = pathlib.Path('/home/mini/codex/project1/work/pgpt-foundation')
 WORK = pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
-stem = WORK / 'pg474-six-full-v1'
+version = sys.argv[1]
+assert version in ('v1', 'v2')
+stem = WORK / ('pg474-six-full-' + version)
 def read(suffix):
     return pathlib.Path(str(stem) + suffix).read_text().strip()
 def sha(path):
@@ -28,7 +31,7 @@ assert 'BUILD SUCCESS' in log and log.count('BugInstance size is 0') == 6
 assert log.count('No errors/warnings found') == 6
 started = datetime.datetime.fromisoformat(read('.started')).timestamp()
 completed = datetime.datetime.fromisoformat(read('.completed')).timestamp()
-frozen = WORK / 'pg474-host'
+frozen = WORK / ('pg474-host' if version == 'v1' else 'pg474-host-v2')
 assert not frozen.exists()
 frozen.mkdir(mode=0o700)
 rows=[]
@@ -36,6 +39,7 @@ for module in ['protocol','storage','bootstrap','api','web','batch']:
     target = ROOT/'src'/('schubert-nk-'+module)/'target'
     copy = frozen/module
     shutil.copytree(target,copy)
+    copy.chmod(0o700)
     for path in copy.rglob('*'):
         path.chmod(0o700 if path.is_dir() else 0o600)
         if path.is_file(): assert sha(path)==sha(target/path.relative_to(copy))
@@ -67,9 +71,9 @@ for name in ['ApiBrokerContexts','ApiMessagingRuntime','WebLogConsumers','Questi
     counters={c.get('type'):{'missed':int(c.get('missed')),'covered':int(c.get('covered'))} for c in matches[0].findall('counter')}
     assert all(counters[k]['missed']==0 and counters[k]['covered']>0 for k in ['LINE','METHOD','CLASS','BRANCH'])
     closed[name]=counters
-payload={'id':'PG474-api-consumers-full','productionSource':SOURCE,'branch':'dev-foundation','actualExit':0,
+payload={'id':'PG474-api-consumers-full-' + version,'productionSource':SOURCE,'branch':'dev-foundation','actualExit':0,
     'started':read('.started'),'completed':read('.completed'),
-    'command':'bash tools/quality/vm/050_s1/pg474_full_v1.sh '+SOURCE,
+    'command':'bash tools/quality/vm/050_s1/pg474_full_' + version + '.sh '+SOURCE,
     'modules':rows,'tests':3365,'suiteCount':505,'FES':0,'staticModules':6,'staticIssues':0,
     'formatNullAwayWerrorPassed':True,'sourceBeforeAfterUnchanged':True,'allFrozenBytesMatched':True,
     'closedConsumerClassCounters':closed,'PGD':'PG-D379','testIds':['PT-OPS-API-REM001..004','PT-OPS-API-FACT001'],
@@ -78,7 +82,7 @@ payload={'id':'PG474-api-consumers-full','productionSource':SOURCE,'branch':'dev
     'logSha256':sha(pathlib.Path(str(stem)+'.log')),
     'sourceFilesSha256':sha(pathlib.Path(str(stem)+'.source-files.sha256')),
     'environment':{'jdk':'25.0.4','maven':'3.9.12','node':'24.19.0','jacoco':'0.8.15'}}
-out=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG474-api-consumers-full/manifest.json'
+out=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/('PG474-api-consumers-full-' + version)/'manifest.json'
 assert not out.exists()
 out.parent.mkdir(parents=True)
 with out.open('x') as stream:
