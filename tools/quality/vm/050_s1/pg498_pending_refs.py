@@ -157,7 +157,7 @@ def execute():
             require(not list(pathlib.Path('/run/schubert-nk',name).iterdir()))
         trees = {name: tree(pathlib.Path(name)) for name in previous['trees']}
         conf = {u: show(u,configuration_fields()) for u in UNITS}
-        
+
         require(profile_before == metadata(profile) and parent_before == metadata(profile.parent)
                 and profile_security(metadata(profile), os.listxattr(profile), grp.getgrnam('schubert').gr_gid))
         return {'units': units, 'trees': trees, 'configuration': conf, 'rows': rows, 'current': str(pathlib.Path('/opt/schubert-nk/current').readlink())}
