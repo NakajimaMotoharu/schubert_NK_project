@@ -7,10 +7,10 @@ from pg471_native_term_witness import witness
 ROOT=pathlib.Path('/var/lib/pgpt-s1-preservation/pg474-native-stop-v1')
 BOOT='e07aa706-1acd-4e65-b309-d7f330f79d54'
 ORDER=['caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service']
-EXPECTED={'caddy.service':('DRAFT_CADDY_PID','DRAFT_CADDY_INV'),
- 'schubert-nk-web.service':('DRAFT_WEB_PID','DRAFT_WEB_INV'),
- 'schubert-nk-api.service':('DRAFT_API_PID','DRAFT_API_INV'),
- 'artemis.service':('DRAFT_BROKER_PID','DRAFT_BROKER_INV')}
+EXPECTED={'caddy.service':('3050671','8651f422421d46c1b4935732b4b44e9c'),
+ 'schubert-nk-web.service':('3044912','9cfb59cef62d4a0498a3702172803ca2'),
+ 'schubert-nk-api.service':('3042573','354cbffa0db149ae88dd59c02a98f157'),
+ 'artemis.service':('2916988','2e41bfacb1184b7b9d72e752ac8f3218')}
 def require(value):
  if not value:raise ValueError('current owned stop refused')
 def validate_live(captures):

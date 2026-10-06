@@ -33,9 +33,9 @@ public final class Pg474NativeStop {
     Pg425KnownApiRecovery.command(new byte[0],"/usr/bin/python3","-B",TOOLS.resolve("pg474_native_owned_stop.py").toString(),action);
   }
   static void peers()throws Exception{
-    Pg474CompletedReadback.peer("schubert-nk-api.service",DRAFT_API_PID,"DRAFT_API_INV");
-    Pg474CompletedReadback.peer("schubert-nk-web.service",DRAFT_WEB_PID,"DRAFT_WEB_INV");
-    Pg474CompletedReadback.peer("caddy.service",DRAFT_CADDY_PID,"DRAFT_CADDY_INV");
+    Pg474CompletedReadback.peer("schubert-nk-api.service",3042573,"354cbffa0db149ae88dd59c02a98f157");
+    Pg474CompletedReadback.peer("schubert-nk-web.service",3044912,"9cfb59cef62d4a0498a3702172803ca2");
+    Pg474CompletedReadback.peer("caddy.service",3050671,"8651f422421d46c1b4935732b4b44e9c");
   }
   public static void main(String[] args)throws Exception{
     require(Arrays.equals(args,new String[]{"stop"}) && !Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));

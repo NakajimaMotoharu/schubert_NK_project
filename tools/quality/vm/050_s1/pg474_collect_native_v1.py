@@ -14,7 +14,7 @@ for stem in ['pg474-six-full-v2','pg474-native-stop-v1','pg474-readback-native-v
     assert (W/(stem+'.exit')).read_text().strip()=='0'
 assert subprocess.check_output(['git','diff',SOURCE,'--','src','pom.xml'],cwd=T)==b''
 roles=['parent','backup','cleanup','expiry','root-api193','root-web193','ordinary-api193','ordinary-web193']
-names=['parent.exec','backup.exec','cleanup.exec','expiry.exec','DRAFT_API_INV.before-exec.exec','DRAFT_WEB_INV.before-exec.exec','DRAFT_API_INV.terminal.exec','DRAFT_WEB_INV.terminal.exec']
+names=['parent.exec','backup.exec','cleanup.exec','expiry.exec','354cbffa0db149ae88dd59c02a98f157.before-exec.exec','9cfb59cef62d4a0498a3702172803ca2.before-exec.exec','354cbffa0db149ae88dd59c02a98f157.terminal.exec','9cfb59cef62d4a0498a3702172803ca2.terminal.exec']
 ssh=['ssh','-i',str(P/'vm-access'),'-p','22222','-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts'),'ubuntu@127.0.0.1']
 native=[];metadata=[]
 for role,name in zip(roles,names):

@@ -69,7 +69,7 @@ print('PG474_STOP_ORACLE independentAssertions='+str(count)+' nativeMutation0=tr
 
 # Literal current cohort, separate from tested EXPECTED constants.
 captures={u:b(u) for u in ['caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service']}
-for u,pid,inv in [('caddy.service','2790116','ad0a34dc0667429bb89ea219a40390b5'),('schubert-nk-web.service','2784401','4504c595204d47f4a110059e71c13c63'),('schubert-nk-api.service','2782055','e93ae37bc6b54a24abd2c62e0e8c431e'),('artemis.service','2658275','cf13a00dd22c4d5da835ae3905a48214')]:
+for u,pid,inv in [('caddy.service','3050671','8651f422421d46c1b4935732b4b44e9c'),('schubert-nk-web.service','3044912','9cfb59cef62d4a0498a3702172803ca2'),('schubert-nk-api.service','3042573','354cbffa0db149ae88dd59c02a98f157'),('artemis.service','2916988','2e41bfacb1184b7b9d72e752ac8f3218')]:
  captures[u].update(MainPID=pid,InvocationID=inv)
 h.validate_live(captures);check(True)
 for unit in ['caddy.service','schubert-nk-web.service','schubert-nk-api.service','artemis.service']:

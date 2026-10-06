@@ -126,9 +126,9 @@ public final class Pg474CompletedReadback {
           if(jobDone(row))doneJobs++;
         }require(doneJobs==1);
         Pg407FailedRootRecovery.checkTree(Path.of("/sys/fs/cgroup/system.slice/schubert-nk-morning-controller.service"));
-        peer("schubert-nk-api.service",DRAFT_API_PID,"DRAFT_API_INV");
-        peer("schubert-nk-web.service",DRAFT_WEB_PID,"DRAFT_WEB_INV");
-        peer("caddy.service",DRAFT_CADDY_PID,"DRAFT_CADDY_INV");
+        peer("schubert-nk-api.service",3042573,"354cbffa0db149ae88dd59c02a98f157");
+        peer("schubert-nk-web.service",3044912,"9cfb59cef62d4a0498a3702172803ca2");
+        peer("caddy.service",3050671,"8651f422421d46c1b4935732b4b44e9c");
         Pg387TrustedDeployment.requireNoUndeliveredWork();
         try { try(var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),Path.of("/run/schubert-nk/startup"));
             var db=Pg407FailedRootRecovery.openDatabase();var schema=Pg422SignedMigration.openSchema()) {
