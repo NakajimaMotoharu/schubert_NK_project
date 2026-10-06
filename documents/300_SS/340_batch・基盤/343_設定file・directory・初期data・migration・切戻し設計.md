@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC204（2026-10-07、BUG799/YKT570、当PG493 timeout143・intent不存在だけの限定operator復旧）：元親INV52accf6d/PID3905484/boot e07aa706のtimeout143・全kernel空を正常化せず、真正live API4105598/INV730085ab、Web4108080/INV1dedba9e、Caddy4113865/INVb656fdfe、Artemis3939714/INV12360e61をfresh M/A/専用DB/advisory・同署名PG489/source388/schema028・全10Unitで現在値認証する。startupは同ISSUED epoch4d35762d-54b4-4187-ab03-cc9b7e9e3baf/元run91a748b4-1abe-484c-9682-44f46429b324/activation179758d2-5b77-443a-a743-bf0065e732ea、73file=当current/permit/owner/API-WEB launch＋旧17epoch各4file、三intent0を私有保存と二読で照合する。原本完全pending・24table全列/442batch・Backup/Transfer/nativeを保全し、SSC179の同cohort逆順owned停止/全kernel終端/原値再認証後のみ既canonical revokeで同epochINVALIDをcurrent一件へ公開する。Pair再構成・intent復元/新規作成/このoperatorによる退役済認定は禁止（退役数0）。旧68file及び当permit/owner/launch原byte/属性・原本/全DB/Backup/Transferを維持、newEpoch/permit/start/DONE/手DB変更0。半停止/失効/close不明はM/Aを保持し隔離を継続、全新資源正常帰還後だけ別pending配備/固定runtime正規退役/通常resumeへ進む。旧UNKNOWN/timeoutを正常化せず、独立拒否・各段fault/順序及び実現在世代の前後条件を記録する。
+
 SSC203（2026-10-07、BUG799/YKT570）：完了compound読取り内の継続原本検査は同保持Sessionの六namespaceを再openして保持inode/device/securityと照合し、alive/owner-thread/未確定完了禁止/Root/元budgetを確認する。namespace検査だけからgraph/業務成功/DONEを発行せず、SS342のcompound前後と各intent退役前後で全graph/全row/seal/peer/receiptを独立再読する。原本内容や旧/run復元・SQL変更・capability再構成・cache・期限緩和0。
 
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
