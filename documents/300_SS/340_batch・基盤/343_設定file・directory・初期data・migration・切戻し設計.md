@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC203（2026-10-07、BUG799/YKT570）：完了compound読取り内の継続原本検査は同保持Sessionの六namespaceを再openして保持inode/device/securityと照合し、alive/owner-thread/未確定完了禁止/Root/元budgetを確認する。namespace検査だけからgraph/業務成功/DONEを発行せず、SS342のcompound前後と各intent退役前後で全graph/全row/seal/peer/receiptを独立再読する。原本内容や旧/run復元・SQL変更・capability再構成・cache・期限緩和0。
+
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 
 対象は隔離VMのPG487 pending `91a748b4-1abe-484c-9682-44f46429b324`・元cutoff/activation・INVALIDだけとする。新M→A→専用DB/advisory71419602→固定10Refとsame boot/loaded Unit/全kernel終端を保持し、署名PG486/schema027/current/approval・空request・完全原本graph・全24業務table・432batch十四列・Backup32/Transfer2・config/native/Unitの私有before-imageを取得する。停止済みRemainAfterExitのactive/exitedはlive PIDと混同せず、既terminal契約で判定する。旧失敗親30を正常closeへ変換しない。

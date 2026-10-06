@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC203（2026-10-07、BUG799/YKT570）：親完了の各compound DB readはSS342の全peer/元graph/run整合をTX外の前後で確認し、TX内SQL境界は同保持原本namespace/owner-thread/Root/M/A/元budgetを継続認証する。元全row/progress seal・各typed intent退役前後の全証跡・DONE直前・同親30分を維持し、途中失効/変更/close不明は隔離する。業務再処理・同日SKIP/Backup契約変更0。
+
 SSC202（2026-10-06、SSC200201/BUG788/YKT562）：隔離PG/PT VMの同日別run参照修正では、成功済みBackup二stepとCleanup七SKIPを持つ未完了runを保全し、027→028移行・pending code-only・一回用通常resumeを別の正常所有区間として認定する。元cutoff/activationをoperatorが更新せず、手DB terminal修復/日次業務再処理をしない。既成功Backupは元schema027の真正manifest/全byte/元二handleで通常same-run再用し、新profile028へ書き換えない。新規Backupだけ現在署名/profile028と整合させる。親fresh Invocationからの30分budget、実Unitの期限、API所有のままWeb/Caddy/原本DONE、失敗逆順停止・全後条件は既契約のまま。各段の実source/終了コード/全資源正常帰還を確認するまで次段の権限・成功を与えない。
 
 SSC201（2026-10-06、SSC200/BUG788/YKT562）：Cleanup元SUCCESSのCLEAN_LOG/CLEAN_INBOX_OUTBOXに限り、元run/cutoff/終了時刻で331所定readonly全進捗照会を同owned DB TX下で実行し、64hex sealを元Entryに別保持する。元14列と全row sealを親のactual/issuer前・公開後/completion再読で比較し、cursorだけの変更・count/END変更・未完了/不足/別identityを拒否する。sealはデータであってresume/Unit/permit権限ではない。Log/Inbox以外にsealを付けない、現在SKIPのzero・fresh receipt・元原本所有前後を維持し、業務の再削除・raw cursor公開・新grant0。旧原本・旧progress・旧結果の更新/再解釈0。
