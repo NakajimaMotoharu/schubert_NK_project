@@ -249,11 +249,58 @@ final class MorningPrestartEvidenceTest {
   }
 
   @Test
+  void wire200002CrossRunReferenceHasThirteenFieldsAndKeepsCurrentReceipt() throws Exception {
+    var reused = input("reused");
+    var references = new ArrayList<>(reused.cleanup().references());
+    var old = references.getFirst().orElseThrow();
+    var oldRun =
+        new BatchRun(
+            UUID.fromString("00000000-0000-4000-8000-000000000099"),
+            Instant.parse("2026-09-12T15:01:00Z"));
+    references.set(
+        0,
+        Optional.of(
+            new CleanupTerminalRepository.Entry(
+                new BatchStepAttempt(
+                    100,
+                    oldRun,
+                    BatchStep.CLEAN_NOTIFICATION,
+                    1,
+                    Instant.parse("2026-09-13T02:01:00Z"),
+                    false),
+                Instant.parse("2026-09-13T02:01:01Z"),
+                success(1, 10))));
+    var cleanup =
+        new MorningCleanupExecution.Completion(
+            reused.cleanup().terminal(), reused.cleanup().receipt(), references);
+    String golden;
+    try (var stream =
+        Objects.requireNonNull(
+            getClass().getResourceAsStream("/ops/issuer-prestart-reused-v2-golden.txt"))) {
+      golden = new String(stream.readAllBytes(), StandardCharsets.US_ASCII);
+    }
+    String expected =
+        golden.replace(
+            "|0|12345678-9abc-def0-8123-456789abcdef,2026-09-12T15:00:00.000000Z,100,1,",
+            "|0|00000000-0000-4000-8000-000000000099,2026-09-12T15:01:00.000000Z,100,1,");
+    assertNotEquals(golden, expected);
+    assertEquals(
+        expected,
+        encode(
+            new Input(reused.backup(), cleanup, reused.expiry()),
+            Optional.of("1".repeat(64)),
+            texts()));
+    assertEquals(
+        old.attempt().run(),
+        reused.cleanup().references().getFirst().orElseThrow().attempt().run());
+  }
+
+  @Test
   void issstep007ReferenceForeignRunWarningsAndMutableGateInput() throws Exception {
     var reused = input("reused");
     var current = reused.cleanup().terminal().entries().get(0).attempt();
     var prior = reused.cleanup().references().get(0).orElseThrow();
-    var foreign = new BatchRun(new UUID(0, 99), RUN.cutoff());
+    var foreign = new BatchRun(new UUID(0, 99), RUN.cutoff().minusSeconds(86400));
     for (var handle :
         List.of(
             new BatchStepAttempt(
@@ -436,7 +483,7 @@ final class MorningPrestartEvidenceTest {
     byte[] golden;
     try (var stream =
         Objects.requireNonNull(
-            getClass().getResourceAsStream("/ops/issuer-prestart-new-golden.txt"))) {
+            getClass().getResourceAsStream("/ops/issuer-prestart-new-v2-golden.txt"))) {
       golden = stream.readAllBytes();
     }
     assertArrayEquals(golden, encoded.getBytes(StandardCharsets.US_ASCII));
@@ -449,7 +496,7 @@ final class MorningPrestartEvidenceTest {
       byte[] expected;
       try (var stream =
           Objects.requireNonNull(
-              getClass().getResourceAsStream("/ops/issuer-prestart-" + mode + "-golden.txt"))) {
+              getClass().getResourceAsStream("/ops/issuer-prestart-" + mode + "-v2-golden.txt"))) {
         expected = stream.readAllBytes();
       }
       assertArrayEquals(

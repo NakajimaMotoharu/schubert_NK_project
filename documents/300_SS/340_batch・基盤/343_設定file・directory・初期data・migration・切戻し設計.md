@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC201（2026-10-06、SSC200/BUG788/YKT562）：新V028の同source署名schema履歴/関数inventoryを候補、Root admission、Backup条件へ横断し、旧V001～027のchecksum・所有/権限・全実DBを保全する。基表cursorのrawを通常log/PT/Gitへ保存せず、全row seal/独立非秘密fixture/hashだけを公開する。PG/PT VMへのmigration/配備はfresh全回帰と専用pending復旧/実DB保全認証後の正規所有経路のみ、設計公開や限定試験をmigration/起動の許可として扱わない。
+
+SSC200（2026-10-06、BUG788/YKT562、実装前補足）：保持中の原本Sessionへ、現activationを前後照合し全graph/inodeを二読するUUID限定readonly completed-run lookupを追加する。指定UUIDの実anchorと完了した元activation/完了時刻を確認して元BatchRunを返すdata能力だけで、active/pendingの書換え、resume/退役/permit、一覧を所有証明へ変換する操作ではない。欠落/退役途中/非完了/同日不一致/時刻逆転/graph競合は拒否し、元原本をDB値から再生成しない。
+
+新生産sourceのprestart canonicalはNKPRESTART2とし、ALREADY_SUCCESSFUL referenceを固定順 prior_run_id,prior_cutoff_utc,row_id,attempt,started_utc,ended_utc,status,target,success,failure,bytes,reason,artifact_sha256 の13値へ明示拡張する。UUID/UTC6µs・ASCII/LF/既上限・固定slot・SUCCESS/NONE/元終了≦今回開始・同business_dateを検査、今回header/producer/fresh receiptと元完全成功を別保持する。Backup元参照は引き続きsame-run、非SKIPはliteral -、削除/Expiry artifactだけliteral -。既NKPERMIT1のdigest field/鍵/所有gate、外部64電文は不変更。旧NKPRESTART1保存byte/digestを新文法へ書き換えず旧source証拠として保全、混在を拒否する。
+
+別run対応のExpiry requestはNKEXPIRYSKIP2、既10fieldの後にprior_run_id,prior_cutoff_utc,prior_step_id,prior_attempt,prior_started,prior_endedを固定順追加（ASCII/LF/canonical、最大1024byte維持）。元handleは元run/cutoffで構築し、今回runへ偽装しない。従来NKEXPIRY1の通常経路は不変更、旧NKEXPIRYSKIP1の保存物は保全し新sourceのcross-run証拠へ流用しない。同日/step・元完全SUCCESS/元原本・元audit cutoff−7日・現在fresh selector0を親/子/最終issuerで独立再読し、不明/非0では再purgeせず保全拒否する。新request/intentは通常親の現在所有だけが発行・正規退役する。
+
 ## SSC198 固定Backup途中世代の限定operator隔離退役・pending配備（2026-10-06）
 
 SSC198限定補足（同日17:02、固定same-run一回用Unit引数）：pending code-onlyのUnit不変更条件とは別の新M→A→実専用DB/advisory71419602→private10Ref所有区間で、一回用 `/run/systemd/system/schubert-nk-morning-controller.service.d/pg481-once-resume.conf` だけをRoot管理new-onlyで作成できる。Root0755単一実directory/Root0644単一link・ACL無しregular file、旧署名base・既PG477 native drop-inは全byte/metadata保持する。唯一deltaは固定Morningの既署名base＋既native parent optionの独立literal argvへ `--resume 49437eda-1681-43a9-883a-424eb55a6166` 二引数を加えるExecStart再宣言（他Unit/RW/hardening/credential変更0）。未知drop-in/二重agent/余剰argv/別UUIDを拒否し、全Unit/kernel停止の同世代でdurable before-image保存→一回daemon-reload→effective ExecStart宣言/DropInPaths/RW/全hardening/旧停止18propertyを再照合する。独立expectedを実測argvから自己生成しない。新scopeが全部正常帰還してから別の一回予約/observer/startへ進む。reload/readback/close不明は隔離保全・再発行0。

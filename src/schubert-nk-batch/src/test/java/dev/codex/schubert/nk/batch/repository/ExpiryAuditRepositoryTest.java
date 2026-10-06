@@ -48,6 +48,77 @@ final class ExpiryAuditRepositoryTest {
   }
 
   @Test
+  void exp200001SameDayForeignSuccessUsesRetainedCutoffAndDoesNotRewriteAudit() throws Exception {
+    try (var admin = db.admin()) {
+      execute(
+          admin,
+          """
+          insert into schubert.batch_runs
+          (id,run_id,business_date,step,attempt,started_at,ended_at,status,
+           target_count,success_count,failure_count,byte_count,error_code,error_summary,
+           expiry_cutoff_at,expiry_before_count,expiry_after_count)
+          values (42,'12345678-9abc-def0-8123-456789abcdef','2026-09-13',
+           'CLEAN_EXPIRY',1,'2026-09-12T15:00:01Z','2026-09-12T15:00:02Z',
+           'SUCCESS',2,2,0,200,null,null,'2026-09-05T15:00:00.000500Z',3,1)
+          """);
+    }
+    var current =
+        new BatchRun(
+            UUID.fromString("00000000-0000-4000-8000-000000000200"),
+            Instant.parse("2026-09-12T15:00:03Z"));
+    var observed = Instant.parse("2026-09-12T15:00:04Z");
+    var owner = (dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard) () -> 10_000_000_000L;
+    try (var connection = locked()) {
+      var subject = new ExpiryAuditRepository(connection);
+      assertThrows(java.io.IOException.class, () -> subject.successful(current, observed, owner));
+      var calls = new java.util.ArrayList<UUID>();
+      var found =
+          subject
+              .successful(
+                  current,
+                  observed,
+                  owner,
+                  (id, time) -> {
+                    assertEquals(RUN.id(), id);
+                    assertEquals(observed, time);
+                    calls.add(id);
+                    return RUN;
+                  })
+              .orElseThrow();
+      assertEquals(java.util.List.of(RUN.id()), calls);
+      assertEquals(
+          new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), found.handle());
+      assertEquals(
+          new ExpiryAuditRepository.Snapshot(
+              "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+          found.audit());
+      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.successful(current, observed, owner, (id, time) -> current));
+      var unavailable = new java.io.IOException("owned reference unavailable");
+      assertSame(
+          unavailable,
+          assertThrows(
+              java.io.IOException.class,
+              () ->
+                  subject.successful(
+                      current,
+                      observed,
+                      owner,
+                      (id, time) -> {
+                        throw unavailable;
+                      })));
+      assertThrows(
+          NullPointerException.class, () -> subject.successful(current, observed, owner, null));
+      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertFalse(connection.getAutoCommit());
+      assertFalse(connection.isClosed());
+      connection.rollback();
+    }
+  }
+
+  @Test
   void bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff() throws Exception {
     try (var parent = locked();
         var observer = db.open("schubert_batch")) {

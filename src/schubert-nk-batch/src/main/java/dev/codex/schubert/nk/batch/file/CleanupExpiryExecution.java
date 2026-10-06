@@ -292,7 +292,7 @@ final class CleanupExpiryExecution {
     require(
         "SUCCESS".equals(existing.status())
             && reference.ended().equals(existing.ended())
-            && request.cutoff().minus(7, ChronoUnit.DAYS).equals(existing.cutoff())
+            && reference.cutoff().minus(7, ChronoUnit.DAYS).equals(existing.cutoff())
             && before != null
             && after != null
             && before >= after
@@ -315,6 +315,17 @@ final class CleanupExpiryExecution {
     context.recheck(expected);
     require(request.boot().toString().equals(expected.boot()));
     MaintenanceRunFiles.observeHost(context, expected, request.original());
+    if (request.prior().isPresent()) {
+      var prior = request.prior().orElseThrow();
+      var anchor =
+          MaintenanceRunFiles.observeSuccessReferenceHost(
+              context,
+              expected,
+              request.original(),
+              prior.run(),
+              Instant.now().truncatedTo(ChronoUnit.MICROS));
+      require(anchor.equals(request.priorHandle().run()));
+    }
     var startup =
         OwnedTransferDirectory.open(
             LinuxHostDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));

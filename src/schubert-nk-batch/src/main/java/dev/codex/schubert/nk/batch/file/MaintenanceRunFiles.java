@@ -150,6 +150,38 @@ public final class MaintenanceRunFiles {
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
+      justification = "SSC200 fixed authoritative /var readonly Expiry original lookup")
+  static BatchRun observeSuccessReferenceHost(
+      RootStartupContext context,
+      RootStartupContext.Snapshot expected,
+      MaintenanceActivation current,
+      UUID priorId,
+      Instant observed)
+      throws IOException {
+    Objects.requireNonNull(context);
+    Objects.requireNonNull(expected);
+    Objects.requireNonNull(current);
+    Objects.requireNonNull(priorId);
+    Objects.requireNonNull(observed);
+    require(expected.service() == RootStartupContext.Service.EXPIRY);
+    context.recheck(expected);
+    var files =
+        new MaintenanceRunFiles(
+            Path.of("/var"),
+            LinuxHostDirectoryCalls.create(),
+            LinuxInodeSecurity.create(),
+            new NioIo(),
+            UUID::randomUUID,
+            () -> MessageDigest.getInstance("SHA-256"));
+    var prior = files.execute(session -> session.successReferenceRun(current, priorId, observed));
+    context.recheck(expected);
+    return prior;
+  }
+
+  /** SSC137: fixed service Root reads the whole original graph; never resumes or mutates it. */
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
       justification =
           "SSC137 fixed host/private /var original observation, no caller path or M capability")
   static StartupOriginal observeStartup(
@@ -473,6 +505,51 @@ public final class MaintenanceRunFiles {
             // graph() places this run in pending iff its current activation has no done record.
             require(first.pending().equals(Optional.of(expected.run().id())));
             return active;
+          });
+    }
+
+    /**
+     * SSC200 / RLOOK200001: data only, exact retained anchor under this SAME live Session.
+     * Current-run references may use the owned pending anchor; a different run must be completed.
+     * Never derive cutoff from a DB timestamp, change active, resume or grant authority.
+     */
+    public BatchRun successReferenceRun(
+        MaintenanceActivation current, UUID priorId, Instant observed) throws StorageIoException {
+      Objects.requireNonNull(current);
+      Objects.requireNonNull(priorId);
+      Objects.requireNonNull(observed);
+      return perform(
+          () -> {
+            Graph first = scan();
+            require(first.equals(scan()) && first.active().equals(Optional.of(current)));
+            require(
+                !observed.isBefore(current.run().cutoff())
+                    && !observed.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))
+                    && observed.getNano() % 1000 == 0);
+            BatchRun prior = first.runs().get(priorId);
+            if (prior == null) throw unavailable();
+            require(
+                prior
+                    .cutoff()
+                    .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                    .toLocalDate()
+                    .equals(
+                        current
+                            .run()
+                            .cutoff()
+                            .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                            .toLocalDate()));
+            if (!priorId.equals(current.run().id())) {
+              require(!first.pending().equals(Optional.of(priorId)));
+              require(
+                  first.done().values().stream()
+                      .anyMatch(
+                          value ->
+                              value.activation().run().equals(prior)
+                                  && !value.endedAt().isAfter(observed)));
+            } else require(prior.equals(current.run()));
+            require(first.equals(scan()));
+            return prior;
           });
     }
 

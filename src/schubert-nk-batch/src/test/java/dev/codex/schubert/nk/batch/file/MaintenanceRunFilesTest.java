@@ -42,6 +42,79 @@ final class MaintenanceRunFilesTest {
   private static final String DONE0 = DONE_PREFIX + "0\n", DONE10 = DONE_PREFIX + "10\n";
   @TempDir Path temporary;
 
+  /** RLOOK200001: independent retained bytes/cutoff, not a DB-derived original. */
+  @Test
+  void successReferenceReadsRetainedSameDayOriginalWithoutChangingActive() throws Exception {
+    try (var f = fixture()) {
+      f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
+      f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS)));
+      var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+      var activation = new MaintenanceActivation(current, OTHER);
+      f.files.execute(s -> s.start(current, OTHER));
+      var before = new MaintenanceRunFiles.StartupOriginal(activation, Optional.empty());
+      assertEquals(before, f.files.execute(s -> s.observeStartup(activation)));
+      assertEquals(
+          RUN, f.files.execute(s -> s.successReferenceRun(activation, RUN.id(), current.cutoff())));
+      assertEquals(
+          current, f.files.execute(s -> s.successReferenceRun(activation, NEXT, current.cutoff())));
+      assertEquals(before, f.files.execute(s -> s.observeStartup(activation)));
+      for (Instant time :
+          List.of(
+              current.cutoff().minusNanos(1000),
+              current.cutoff().plusNanos(1),
+              Instant.parse("9999-12-31T23:59:59.999999Z").plusNanos(1000)))
+        assertThrows(
+            IOException.class,
+            () -> f.files.execute(s -> s.successReferenceRun(activation, RUN.id(), time)));
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(
+                  s ->
+                      s.successReferenceRun(
+                          activation,
+                          UUID.fromString("22222222-2222-4222-8222-222222222222"),
+                          current.cutoff())));
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(s -> s.successReferenceRun(ACTIVATION, RUN.id(), current.cutoff())));
+      assertThrows(
+          NullPointerException.class,
+          () -> f.files.execute(s -> s.successReferenceRun(null, RUN.id(), current.cutoff())));
+      assertThrows(
+          NullPointerException.class,
+          () -> f.files.execute(s -> s.successReferenceRun(activation, null, current.cutoff())));
+      assertThrows(
+          NullPointerException.class,
+          () -> f.files.execute(s -> s.successReferenceRun(activation, RUN.id(), null)));
+    }
+  }
+
+  @Test
+  void successReferenceRejectsDifferentBusinessDayAndFutureCompletion() throws Exception {
+    for (boolean future : List.of(false, true))
+      try (var f = fixture()) {
+        f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
+        var done =
+            new MaintenanceCompletion(
+                ACTIVATION,
+                Instant.parse("2026-09-12T07:00:00Z"),
+                MaintenanceCompletion.Outcome.WARNING);
+        f.files.execute(s -> s.complete(done));
+        var current =
+            new BatchRun(
+                NEXT, Instant.parse(future ? "2026-09-12T06:00:00Z" : "2026-09-13T06:00:00Z"));
+        var activation = new MaintenanceActivation(current, OTHER);
+        f.files.execute(s -> s.start(current, OTHER));
+        assertThrows(
+            IOException.class,
+            () ->
+                f.files.execute(
+                    s -> s.successReferenceRun(activation, RUN.id(), current.cutoff())));
+      }
+  }
+
   @Test
   void startupOriginalWholeGraphPendingCompletedAndForeignNeverAuthorizeMutation()
       throws Exception {

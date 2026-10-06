@@ -70,9 +70,28 @@ record MorningCompletionEvidence(
   void verify(
       MorningDatabaseSession.Access database, Clock clock, MaintenanceOwnerFrame.Guard owner)
       throws IOException {
+    var run = begins.database().run();
+    verify(
+        database,
+        clock,
+        owner,
+        (id, observed) -> {
+          if (!id.equals(run.id())) throw unavailable();
+          return run;
+        });
+  }
+
+  /** SSC200: completion and issuer rechecks use the same retained original owner. */
+  void verify(
+      MorningDatabaseSession.Access database,
+      Clock clock,
+      MaintenanceOwnerFrame.Guard owner,
+      dev.codex.schubert.nk.batch.repository.SuccessRunLookup originals)
+      throws IOException {
     Objects.requireNonNull(database);
     Objects.requireNonNull(clock);
     Objects.requireNonNull(owner);
+    Objects.requireNonNull(originals);
     owner.check();
     var run = begins.database().run();
     database.recheckConsistent(run);
@@ -83,7 +102,7 @@ record MorningCompletionEvidence(
             ? database.observeCleanupBackupUnavailable(run, cleanup.receipt().exitCode(), owner)
             : database.observeCleanup(run, cleanup.receipt().exitCode(), owner);
     if (!cleanup.terminal().equals(actual)
-        || !cleanup.references().equals(database.cleanupReferences(actual, owner)))
+        || !cleanup.references().equals(database.cleanupReferences(actual, owner, originals)))
       throw unavailable();
     database.recheckExpiry(expiry, owner);
     // Backup was explicitly stopped by this completed cycle. KEEP_ACTIVE is only for the others.

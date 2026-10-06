@@ -66,7 +66,8 @@ public final class ExpiryAuditRepository {
   }
 
   /**
-   * Immutable same-run SUCCESS identity + complete audit, never the current SKIP handle. SSC125.
+   * Immutable retained SUCCESS identity + complete audit, never the current SKIP handle.
+   * SSC125/200.
    */
   public record Prior(BatchStepAttempt handle, Snapshot audit) {
     public Prior {
@@ -81,28 +82,53 @@ public final class ExpiryAuditRepository {
       dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
       throws IOException {
     Objects.requireNonNull(run);
+    return successful(
+        run,
+        observed,
+        owner,
+        (id, time) -> {
+          if (!id.equals(run.id())) throw new IOException("Expiry original unavailable");
+          return run;
+        });
+  }
+
+  /** EXP200001: day-based SKIP resolves the actual retained anchor, never a DB-derived cutoff. */
+  public Optional<Prior> successful(
+      BatchRun run,
+      Instant observed,
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+      SuccessRunLookup originals)
+      throws IOException {
+    Objects.requireNonNull(run);
     Objects.requireNonNull(observed);
     Objects.requireNonNull(owner);
+    Objects.requireNonNull(originals);
     BatchStepAttempt.time(run, observed);
     owner.check();
     guarded(run);
     try (var statement =
         required(
             connection.prepareStatement(
-                "select id,attempt,started_at from schubert.batch_runs where run_id=? and business_date=?"
+                "select id,run_id,attempt,started_at from schubert.batch_runs where business_date=?"
                     + " and step='CLEAN_EXPIRY' and status='SUCCESS' order by attempt desc limit 2"))) {
       statement.setQueryTimeout(owner.queryTimeoutSeconds());
-      statement.setObject(1, run.id());
-      statement.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+      var day = run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
+      statement.setObject(1, day);
       try (var rows = required(statement.executeQuery())) {
         if (!rows.next()) {
           owner.check();
           return Optional.empty();
         }
+        var priorId = required(rows.getObject("run_id", java.util.UUID.class));
+        var priorRun = Objects.requireNonNull(originals.resolve(priorId, observed));
+        if (!priorId.equals(priorRun.id())
+            || !day.equals(priorRun.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate()))
+          throw new BatchRepositoryException();
+        guarded(priorRun);
         var handle =
             new BatchStepAttempt(
                 required(rows.getObject("id", Long.class)),
-                run,
+                priorRun,
                 BatchStep.CLEAN_EXPIRY,
                 required(rows.getObject("attempt", Integer.class)),
                 required(rows.getObject("started_at", OffsetDateTime.class)).toInstant(),

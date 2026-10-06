@@ -36,6 +36,7 @@ final class MorningOriginalCompletionTest {
     int rootFault;
     boolean wrongResult;
     boolean expireAfterPublish;
+    boolean expireAfterReference;
     final IOException io = new IOException("fixed fixture failure");
     final IllegalStateException runtime = new IllegalStateException("fixed fixture failure");
     final AssertionError fatal = new AssertionError("fixed fixture failure");
@@ -76,6 +77,17 @@ final class MorningOriginalCompletionTest {
       assertEquals(Optional.of(expected), stored);
     }
 
+    public BatchRun referenceRun(MaintenanceActivation current, UUID priorId, Instant observed)
+        throws IOException {
+      assertEquals(ACTIVATION, current);
+      assertEquals(UUID.fromString("00000000-0000-0000-0000-000000000454"), priorId);
+      assertEquals(Instant.parse("2026-10-04T09:00:30Z"), observed);
+      events.add("reference");
+      if (fault.equals("reference")) failure();
+      if (expireAfterReference) alive.set(false);
+      return new BatchRun(priorId, Instant.parse("2026-10-04T08:00:00Z"));
+    }
+
     MorningNewRunAdmission.OriginalProof proof() {
       return MorningNewRunAdmission.scopedOriginalProof(
           this::root,
@@ -84,6 +96,61 @@ final class MorningOriginalCompletionTest {
           alive,
           () -> new IOException("scope unavailable"));
     }
+  }
+
+  @Test
+  void rlook200002RetainedLookupCannotEscapeOriginalOwnerThreadOrLifetime() throws Exception {
+    var f = new Fixture();
+    var proof = f.proof();
+    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
+    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    assertEquals(
+        new BatchRun(id, Instant.parse("2026-10-04T08:00:00Z")), proof.referenceRun(id, observed));
+    assertEquals(
+        List.of("root", "pending", "root", "reference", "root", "pending", "root"), f.events);
+    assertEquals(0, f.publish);
+    assertThrows(NullPointerException.class, () -> proof.referenceRun(null, observed));
+    assertThrows(NullPointerException.class, () -> proof.referenceRun(id, null));
+    var failure = new java.util.concurrent.atomic.AtomicReference<Throwable>();
+    var thread =
+        new Thread(
+            () -> {
+              try {
+                proof.referenceRun(id, observed);
+              } catch (Throwable actual) {
+                failure.set(actual);
+              }
+            });
+    thread.start();
+    thread.join();
+    assertInstanceOf(IOException.class, failure.get());
+    f.alive.set(false);
+    assertThrows(IOException.class, () -> proof.referenceRun(id, observed));
+    assertEquals(1, f.events.stream().filter("reference"::equals).count());
+  }
+
+  @Test
+  void rlook200002LookupFailureAndPostReadOwnerLossNeverReturnTheData() throws Exception {
+    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
+    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    for (int kind = 0; kind < 3; kind++) {
+      var f = new Fixture();
+      f.kind = kind;
+      f.fault = "reference";
+      var proof = f.proof();
+      var actual = assertThrows(Throwable.class, () -> proof.referenceRun(id, observed));
+      assertSame(kind == 0 ? f.io : kind == 1 ? f.runtime : f.fatal, actual);
+      assertEquals(0, f.publish);
+    }
+    var f = new Fixture();
+    f.expireAfterReference = true;
+    var proof = f.proof();
+    assertThrows(IOException.class, () -> proof.referenceRun(id, observed));
+    assertEquals(0, f.publish);
+    var empty = new MorningNewRunAdmission.OriginalFiles() {};
+    assertThrows(IOException.class, () -> empty.referenceRun(ACTIVATION, id, observed));
+    MorningNewRunAdmission.OriginalProof legacy = () -> {};
+    assertThrows(IOException.class, () -> legacy.referenceRun(id, observed));
   }
 
   @Test

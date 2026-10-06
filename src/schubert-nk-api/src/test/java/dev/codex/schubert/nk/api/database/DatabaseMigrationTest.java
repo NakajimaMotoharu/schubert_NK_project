@@ -1083,6 +1083,7 @@ final class DatabaseMigrationTest {
             "migration/V025__question_dlq_outbox_identity.sql",
             "migration/V026__web_receipt_references.sql",
             "migration/V027__pending_revocation_unknown_expiry.sql",
+            "migration/V028__retained_success_progress_seals.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())

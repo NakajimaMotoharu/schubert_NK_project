@@ -225,7 +225,8 @@ public final class MorningProcessMain {
                                 original.verify();
                                 broker.recheck();
                                 return budget.remainingNanos();
-                              });
+                              },
+                              original::referenceRun);
                       EnvironmentInodePolicy.require(cleanup.references().equals(references));
                       database.recheckConsistent(state.activation().run());
                       budget.requireWithin();
@@ -342,7 +343,9 @@ public final class MorningProcessMain {
                                     .references()
                                     .equals(
                                         database.cleanupReferences(
-                                            cleanup.terminal(), issuerOwner)));
+                                            cleanup.terminal(),
+                                            issuerOwner,
+                                            original::referenceRun)));
                             database.recheckExpiry(expiry, issuerOwner);
                             retention.recheck();
                             previousBroker.recheck(broker.live());

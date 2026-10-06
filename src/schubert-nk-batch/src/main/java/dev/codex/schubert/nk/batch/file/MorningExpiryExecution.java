@@ -101,7 +101,10 @@ final class MorningExpiryExecution {
           parent.check();
           var begins =
               database.beginExpiry(
-                  state.activation().run(), Instant.now().truncatedTo(ChronoUnit.MICROS), parent);
+                  state.activation().run(),
+                  Instant.now().truncatedTo(ChronoUnit.MICROS),
+                  parent,
+                  original::referenceRun);
           var handle = begins.current();
           var prior =
               begins
@@ -109,6 +112,8 @@ final class MorningExpiryExecution {
                   .map(
                       value ->
                           new CleanupWorkerRequest.Expiry.PriorExpiry(
+                              value.handle().run().id(),
+                              value.handle().run().cutoff(),
                               value.handle().id(),
                               value.handle().attempt(),
                               value.handle().startedAt(),

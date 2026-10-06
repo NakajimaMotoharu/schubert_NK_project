@@ -248,7 +248,9 @@ final class MorningCleanupExecution {
           if (terminal.exitCode() == 30) throw new IOException("Cleanup rejected");
           var observed = Objects.requireNonNull(result.get(), "actual Cleanup readback");
           return new Completion(
-              observed, cycle.completedReceipt(), database.cleanupReferences(observed, parent));
+              observed,
+              cycle.completedReceipt(),
+              database.cleanupReferences(observed, parent, original::referenceRun));
         });
   }
 

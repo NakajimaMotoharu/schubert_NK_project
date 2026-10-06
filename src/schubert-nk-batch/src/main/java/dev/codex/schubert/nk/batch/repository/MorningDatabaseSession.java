@@ -289,6 +289,17 @@ public final class MorningDatabaseSession {
       throw unavailable();
     }
 
+    /** SSC200: data-only lookup remains bound to the live original owner. */
+    default ExpiryBegins beginExpiry(
+        BatchRun run,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+        SuccessRunLookup originals)
+        throws IOException {
+      Objects.requireNonNull(originals);
+      return beginExpiry(run, now, owner);
+    }
+
     default ExpiryObservation observeExpiry(
         ExpiryBegins begins,
         dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt receipt,
@@ -345,6 +356,16 @@ public final class MorningDatabaseSession {
       Objects.requireNonNull(expected);
       Objects.requireNonNull(owner);
       throw unavailable();
+    }
+
+    /** SSC200: retained original lookup belongs to the still-owned parent, not DB row claims. */
+    default java.util.List<Optional<CleanupTerminalRepository.Entry>> cleanupReferences(
+        CleanupTerminalRepository.Snapshot expected,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+        SuccessRunLookup originals)
+        throws IOException {
+      Objects.requireNonNull(originals);
+      return cleanupReferences(expected, owner);
     }
 
     default CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected(
@@ -1228,8 +1249,27 @@ public final class MorningDatabaseSession {
         dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
         throws IOException {
       Objects.requireNonNull(run);
+      return beginExpiry(
+          run,
+          now,
+          owner,
+          (id, time) -> {
+            if (!id.equals(run.id())) throw unavailable();
+            return run;
+          });
+    }
+
+    @Override
+    public ExpiryBegins beginExpiry(
+        BatchRun run,
+        Instant now,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+        SuccessRunLookup originals)
+        throws IOException {
+      Objects.requireNonNull(run);
       Objects.requireNonNull(now);
       Objects.requireNonNull(owner);
+      Objects.requireNonNull(originals);
       guard();
       if (!cleanupVerified
           || expiryHandoffStarted
@@ -1241,7 +1281,7 @@ public final class MorningDatabaseSession {
         if (!connection.getAutoCommit() || connection.isReadOnly()) throw unavailable();
         connection.setAutoCommit(false);
         new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(owner).bind(connection);
-        var prior = new ExpiryAuditRepository(connection).successful(run, now, owner);
+        var prior = new ExpiryAuditRepository(connection).successful(run, now, owner, originals);
         var repository = new BatchRunRepository(connection);
         var current = repository.begin(run, BatchStep.CLEAN_EXPIRY, now, true);
         if (current.skipped() != prior.isPresent()) throw unavailable();
@@ -1440,7 +1480,25 @@ public final class MorningDatabaseSession {
         dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner)
         throws IOException {
       Objects.requireNonNull(expected);
+      var run = expected.entries().getFirst().attempt().run();
+      return cleanupReferences(
+          expected,
+          owner,
+          (id, observed) -> {
+            if (!id.equals(run.id())) throw unavailable();
+            return run;
+          });
+    }
+
+    @Override
+    public java.util.List<Optional<CleanupTerminalRepository.Entry>> cleanupReferences(
+        CleanupTerminalRepository.Snapshot expected,
+        dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner,
+        SuccessRunLookup originals)
+        throws IOException {
+      Objects.requireNonNull(expected);
       Objects.requireNonNull(owner);
+      Objects.requireNonNull(originals);
       guard();
       if (!cleanupVerified || !handoffStarted) throw unavailable();
       var run = expected.entries().getFirst().attempt().run();
@@ -1456,7 +1514,7 @@ public final class MorningDatabaseSession {
                 ? repository.read(run, now)
                 : repository.readBackupUnavailable(run, now);
         if (!expected.equals(actual)) throw unavailable();
-        var references = repository.references(actual);
+        var references = repository.references(actual, originals);
         guard();
         owner.check();
         connection.rollback();

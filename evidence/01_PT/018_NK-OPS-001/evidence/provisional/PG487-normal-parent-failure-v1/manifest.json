@@ -1,0 +1,84 @@
+{
+  "id": "PG487-normal-parent-failure-v1",
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-PG487001",
+    "PT-OPS-PG487002",
+    "PT-OPS-PG487003",
+    "PT-OPS-PG487004"
+  ],
+  "productionSource": "2e017b4063960bfb5f2483f10510d1a6a3391a9f",
+  "toolHead": "5f060d221b9d25e27ea2f3dfe20b9e73b9b2968c",
+  "branch": "dev-foundation",
+  "release": "PG486",
+  "signedManifestSha256": "230c6174931a8d98a34e4369086619c54cb0668e0793baf2f1efce3e0993bd1d",
+  "environment": {
+    "guest": "Ubuntu26.04",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "OSBoot": "e07aa706-1acd-4e65-b309-d7f330f79d54"
+  },
+  "started": "2026-10-06T12:06:12.916396+00:00",
+  "observerCompleted": "2026-10-06T21:08:55+09:00",
+  "collectedAt": "2026-10-06T12:27:32.569684+00:00",
+  "command": "python3 -B tools/quality/vm/050_s1/pg487_external_start_once.py 2e017b4063960bfb5f2483f10510d1a6a3391a9f 230c6174931a8d98a34e4369086619c54cb0668e0793baf2f1efce3e0993bd1d",
+  "input": "approved signed release / ordinary noargs / actual preserved same-day previous SUCCESS",
+  "expected": "new normal parent within original 1800s; current SKIP and independently bound earlier same-day SUCCESS; API/Web/Caddy full same-peer readiness",
+  "actualParentExit": 30,
+  "observerTransportExit": 0,
+  "externalStartClientExit": 0,
+  "readiness": [],
+  "rootGenerations": [],
+  "capture": {
+    "failureCapture": true,
+    "parentExit": 30,
+    "old423AllRowsRetained": true,
+    "other23TablesSame": true,
+    "batchRows": 432,
+    "snapshotSha256": "5c2108ca88f39b2a68c374b2314b569be0dbb844016bce1861801eb1b379ca87",
+    "captureIsNotNormalScopeReceipt": true,
+    "starts0": true,
+    "repairs0": true,
+    "rawExported": false
+  },
+  "diagnosis": {
+    "independentSqlActualExit0": true,
+    "currentSevenCanonicalSkips": true,
+    "earlierSameDayOtherRunSuccesses": 7,
+    "sameRunSuccesses": 0,
+    "requirementRouteFailed": true,
+    "exactLostThrowTraceClaimed": false,
+    "source": "2e017b4063960bfb5f2483f10510d1a6a3391a9f",
+    "BUG": "BUG-788",
+    "SS": [
+      "SS331-8.3",
+      "SS341",
+      "SS343"
+    ],
+    "starts0": true,
+    "updates0": true,
+    "privateSnapshotSha256": "5c2108ca88f39b2a68c374b2314b569be0dbb844016bce1861801eb1b379ca87"
+  },
+  "privateEvidenceHashes": {
+    "pg487-parent-watch-private-v1.jsonl": "8cecd76bd0e13325da1faf9aa24e678bfb890ec6de52d0bb2eccab832ca945fe",
+    "pg487-external-start-v1.private.log": "36cab1b6d2c8557c94dee781a87d0e7cd72c8b0cfa0d92494aa601c116c23308",
+    "pg487-failure-capture-v1.private.log": "026f633ba790d9f5debfe5150ee3f7fc0d2e276a50a14c67245aad637f10c6d4",
+    "pg487-reference-sql-diagnosis-v1.private.log": "98071dd9f4246262ec94f41461f8923c3d75971e77b6b85bc635b3f91ce5110c"
+  },
+  "BUG": [
+    "BUG-788"
+  ],
+  "YKT": [
+    "YKT-562"
+  ],
+  "SSC": [
+    "SSC-200"
+  ],
+  "rawExported": false,
+  "routeAccepted": false,
+  "coverage100": false,
+  "formalUpdated": false,
+  "ITSTAccepted": false,
+  "restartOrRepairIssued": false
+}

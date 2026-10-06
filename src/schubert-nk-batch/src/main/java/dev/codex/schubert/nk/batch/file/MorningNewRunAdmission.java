@@ -56,6 +56,12 @@ final class MorningNewRunAdmission {
 
   /** SSC178: only the currently held original owner can implement these capabilities. */
   interface OriginalFiles {
+    default BatchRun referenceRun(
+        MaintenanceActivation current, UUID priorId, java.time.Instant observed)
+        throws IOException {
+      throw unavailable();
+    }
+
     default void verify(MaintenanceActivation expected) throws IOException {
       throw unavailable();
     }
@@ -91,6 +97,10 @@ final class MorningNewRunAdmission {
   @FunctionalInterface
   interface OriginalProof {
     void verify() throws IOException;
+
+    default BatchRun referenceRun(UUID priorId, java.time.Instant observed) throws IOException {
+      throw unavailable();
+    }
 
     default MaintenanceCompletion complete(MaintenanceCompletion expected) throws IOException {
       throw unavailable();
@@ -155,6 +165,17 @@ final class MorningNewRunAdmission {
                                 context.recheck(expected);
                                 files.observe(activation);
                                 context.recheck(expected);
+                              }
+
+                              public BatchRun referenceRun(
+                                  MaintenanceActivation current,
+                                  UUID priorId,
+                                  java.time.Instant observed)
+                                  throws IOException {
+                                context.recheck(expected);
+                                var value = files.successReferenceRun(current, priorId, observed);
+                                context.recheck(expected);
+                                return value;
                               }
 
                               public MaintenanceCompletion complete(MaintenanceCompletion value)
@@ -315,6 +336,16 @@ final class MorningNewRunAdmission {
         }
         verify();
         return completed.orElseThrow();
+      }
+
+      public BatchRun referenceRun(UUID priorId, java.time.Instant observed) throws IOException {
+        Objects.requireNonNull(priorId);
+        Objects.requireNonNull(observed);
+        verify();
+        var value =
+            Objects.requireNonNull(files.referenceRun(state.activation(), priorId, observed));
+        verify();
+        return value;
       }
     };
   }

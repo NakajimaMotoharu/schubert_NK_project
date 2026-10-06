@@ -208,7 +208,8 @@ final class MorningStartupLaunchOwner {
                 evidence.verify(
                     database,
                     java.time.Clock.systemUTC(),
-                    pendingChecks.ownerGuard(budget::remainingNanos));
+                    pendingChecks.ownerGuard(budget::remainingNanos),
+                    original::referenceRun);
                 pendingChecks.verify();
               };
           BackupUnitStartClient.RetirementGate retiredPeer =
@@ -257,7 +258,8 @@ final class MorningStartupLaunchOwner {
             evidence.verify(
                 database,
                 java.time.Clock.systemUTC(),
-                retiredChecks.ownerGuard(budget::remainingNanos));
+                retiredChecks.ownerGuard(budget::remainingNanos),
+                original::referenceRun);
             afterRetirement.verify();
             var requested =
                 state.completion().isPresent()

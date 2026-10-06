@@ -57,7 +57,7 @@ final class MorningPrestartEvidence {
     Objects.requireNonNull(manifestSha);
     var gates = new HashMap<String, byte[]>();
     Map.copyOf(gateFrames).forEach((id, frame) -> gates.put(id, frame.clone()));
-    var text = MorningGateEvidence.header("NKPRESTART1", epoch, backup.morning(), broker);
+    var text = MorningGateEvidence.header("NKPRESTART2", epoch, backup.morning(), broker);
     require(gates.keySet().equals(Set.copyOf(GATES)));
     var producers = new HashSet<String>();
     for (String value :
@@ -229,12 +229,16 @@ final class MorningPrestartEvidence {
     require(result.status() == BatchStepResult.Status.SUCCESS);
     require(
         !handle.skipped()
-            && handle.run().equals(current.run())
+            && handle.businessDate().equals(current.businessDate())
             && handle.step() == current.step()
             && handle.id() != current.id()
             && handle.attempt() < current.attempt()
             && !ended.isAfter(current.startedAt()));
-    return handle.id()
+    return handle.run().id()
+        + ","
+        + time(handle.run().cutoff())
+        + ","
+        + handle.id()
         + ","
         + handle.attempt()
         + ","

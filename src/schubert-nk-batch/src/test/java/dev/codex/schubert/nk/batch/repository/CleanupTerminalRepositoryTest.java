@@ -14,7 +14,163 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
 final class CleanupTerminalRepositoryTest {
+  /** CTERM200001: literal same-day foreign run; current skip and prior success stay separate. */
+  @Test
+  void cterm200001DifferentRunNeedsExactRetainedOriginalAndCannotChangeEitherResult()
+      throws Exception {
+    insertCurrentSkips();
+    var currentRun =
+        new BatchRun(
+            UUID.fromString("00000000-0000-4000-8000-000000000200"),
+            Instant.parse("2026-09-13T02:00:02Z"));
+    try (var admin = db.admin()) {
+      sql(
+          admin,
+          "update schubert.batch_runs set run_id='00000000-0000-4000-8000-000000000200' where id between 2000 and 2006");
+    }
+    try (var raw = locked(db, false)) {
+      var subject = new CleanupTerminalRepository(raw, () -> 10_000_000_000L);
+      var current = subject.read(currentRun, OBSERVED);
+      assertThrows(BatchRepositoryException.class, () -> subject.references(current));
+      var calls = new ArrayList<UUID>();
+      var prior =
+          subject.references(
+              current,
+              (id, observed) -> {
+                assertEquals(RUN.id(), id);
+                assertEquals(Instant.parse("2026-09-13T02:00:02Z"), observed);
+                calls.add(id);
+                return RUN;
+              });
+      assertEquals(Collections.nCopies(14, RUN.id()), calls);
+      for (int i = 0; i < 7; i++) {
+        var old = prior.get(i).orElseThrow();
+        var now = current.entries().get(i);
+        assertEquals(1000 + i, old.attempt().id());
+        assertEquals(RUN, old.attempt().run());
+        assertEquals(STEPS[i], old.attempt().step().name());
+        assertEquals(1, old.attempt().attempt());
+        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), old.attempt().startedAt());
+        assertEquals(Instant.parse("2026-09-13T02:00:01Z"), old.endedAt());
+        assertEquals(
+            new BatchStepResult(
+                BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
+            old.result());
+        assertEquals(2000 + i, now.attempt().id());
+        assertEquals(currentRun, now.attempt().run());
+        assertEquals(
+            new BatchStepResult(
+                BatchStepResult.Status.SKIPPED,
+                0,
+                0,
+                0,
+                0,
+                BatchStepResult.Reason.ALREADY_SUCCESSFUL),
+            now.result());
+      }
+      var io = new java.io.IOException("public synthetic original refusal");
+      assertSame(
+          io,
+          assertThrows(
+              java.io.IOException.class,
+              () ->
+                  subject.references(
+                      current,
+                      (id, at) -> {
+                        throw io;
+                      })));
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.references(current, (id, at) -> currentRun));
+      assertThrows(NullPointerException.class, () -> subject.references(current, null));
+      assertEquals(current, subject.read(currentRun, OBSERVED));
+      assertFalse(raw.getAutoCommit());
+      assertFalse(raw.isClosed());
+      assertEquals("14", query(raw, "select count(*) from schubert.batch_runs"));
+      raw.rollback();
+    }
+  }
+
   /** CTERM010 / SS332 SSC199: public values; literal seven-slot/time/identity oracle. */
+  @Test
+  void ref201004CompleteProgressSealIsRetainedAndCursorOnlyChangesCannotPassReread()
+      throws Exception {
+    insertCurrentSkips();
+    try (var c = locked(db, false)) {
+      var subject = new CleanupTerminalRepository(c, () -> 10_000_000_000L);
+      var current = subject.read(RUN, OBSERVED);
+      var expected = subject.references(current);
+      assertEquals(
+          Optional.of(SuccessProgressSealTest.hash(SuccessProgressSealTest.INBOX_JSON)),
+          expected.get(3).orElseThrow().progressSeal());
+      assertEquals(
+          Optional.of(SuccessProgressSealTest.hash(SuccessProgressSealTest.LOG_JSON)),
+          expected.get(4).orElseThrow().progressSeal());
+      for (int i : List.of(0, 1, 2, 5, 6))
+        assertTrue(expected.get(i).orElseThrow().progressSeal().isEmpty());
+      try (var admin = db.admin()) {
+        sql(admin, "update schubert.log_cleanup_progress set after_id=2");
+      }
+      var changed = subject.references(current);
+      assertNotEquals(expected, changed);
+      assertNotEquals(expected.get(4), changed.get(4));
+      for (int i : List.of(0, 1, 2, 3, 5, 6)) assertEquals(expected.get(i), changed.get(i));
+      assertEquals(current, subject.read(RUN, OBSERVED));
+      try (var admin = db.admin()) {
+        sql(admin, "update schubert.log_cleanup_progress set after_id=1");
+      }
+      assertEquals(expected, subject.references(current));
+      try (var admin = db.admin()) {
+        sql(admin, "update schubert.inbox_inspection_progress set completed_at=null");
+      }
+      assertThrows(BatchRepositoryException.class, () -> subject.references(current));
+      assertEquals(
+          "25P02",
+          assertThrows(java.sql.SQLException.class, () -> query(c, "select 1")).getSQLState());
+      c.rollback(); // The borrowed failed TX is recovered only by its caller, never the repository.
+      assertEquals(current, subject.read(RUN, OBSERVED));
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isClosed());
+      c.rollback();
+    }
+  }
+
+  @Test
+  void ref201005SealDataContractDoesNotGrantAuthorityToOtherStepsOrSkips() {
+    var handle = new BatchStepAttempt(42, RUN, BatchStep.CLEAN_LOG, 1, START, false);
+    var ended = START.plusSeconds(1);
+    var result =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE);
+    var value =
+        new CleanupTerminalRepository.Entry(handle, ended, result, Optional.of("a".repeat(64)));
+    assertEquals(Optional.of("a".repeat(64)), value.progressSeal());
+    assertEquals(handle, value.attempt());
+    assertEquals(ended, value.endedAt());
+    assertEquals(result, value.result());
+    for (String bad : List.of("", "A".repeat(64), "a".repeat(63), "g".repeat(64)))
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupTerminalRepository.Entry(handle, ended, result, Optional.of(bad)));
+    var other = new BatchStepAttempt(42, RUN, BatchStep.CLEAN_TRANSFER, 1, START, false);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CleanupTerminalRepository.Entry(other, ended, result, value.progressSeal()));
+    var skip = new BatchStepAttempt(42, RUN, BatchStep.CLEAN_LOG, 1, START, true);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CleanupTerminalRepository.Entry(skip, ended, result, value.progressSeal()));
+    var warning =
+        new BatchStepResult(
+            BatchStepResult.Status.WARNING, 1, 0, 0, 0, BatchStepResult.Reason.PROTECTED_RECORDS);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new CleanupTerminalRepository.Entry(handle, ended, warning, value.progressSeal()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupTerminalRepository.Entry(handle, ended, result, null));
+  }
+
   @Test
   void cterm010PublicValuesRejectInvalidTimeDuplicateAndForeignRun() {
     var ended = Instant.parse("2026-09-13T02:00:01Z");
@@ -221,13 +377,17 @@ final class CleanupTerminalRepositoryTest {
 
   @Test
   void cterm008SqlBodyMustNotHideFatalOwnedClose() throws Exception {
-    for (String path : List.of("read", "rejected", "references")) {
+    for (String path : List.of("read", "rejected", "references", "progress")) {
       seed();
-      if (path.equals("references")) insertCurrentSkips();
+      if (path.equals("references") || path.equals("progress")) insertCurrentSkips();
       for (var sample : JdbcResourceCases.all()) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql =
-            path.equals("references") ? "and status='SUCCESS'" : "select distinct on(step)";
+            switch (path) {
+              case "references" -> "and status='SUCCESS'";
+              case "progress" -> "select proof_sha256";
+              default -> "select distinct on(step)";
+            };
         if (sample.primary() != null)
           probe.thrown.put(
               sample.body().substring(sample.body().indexOf('.') + 1), sample.primary());
@@ -250,7 +410,7 @@ final class CleanupTerminalRepositoryTest {
                     switch (path) {
                       case "read" -> subject.read(RUN, OBSERVED);
                       case "rejected" -> subject.readRejected(RUN, OBSERVED);
-                      case "references" -> subject.references(current);
+                      case "references", "progress" -> subject.references(current);
                       default -> throw new AssertionError("unknown public path");
                     }
                   });
@@ -277,6 +437,52 @@ final class CleanupTerminalRepositoryTest {
       assertNull(failure.getCause());
       assertEquals(0, failure.getSuppressed().length);
       assertBorrowed(probe, raw);
+      raw.rollback();
+    }
+  }
+
+  /** REF201006: public JDBC projection/close failures; never exclude the new owned scopes. */
+  @Test
+  void ref201006ProgressProjectionAndChangedOriginalCannotReturnAProof() throws Exception {
+    insertCurrentSkips();
+    for (String fault : List.of("statement", "rows", "missing", "duplicate", "null", "invalid")) {
+      var probe = new BatchJdbcProbe();
+      probe.selectedSql = "select proof_sha256";
+      switch (fault) {
+        case "statement" -> probe.nullStatement = true;
+        case "rows" -> probe.nullRows = true;
+        case "missing" -> probe.empty = true;
+        case "duplicate" -> probe.duplicate = true;
+        case "null" -> probe.columns.put("proof_sha256", null);
+        case "invalid" -> probe.columns.put("proof_sha256", "A".repeat(64));
+        default -> throw new AssertionError("unknown literal fixture");
+      }
+      try (var raw = locked(db, false)) {
+        var current = new CleanupTerminalRepository(raw, () -> 10_000_000_000L).read(RUN, OBSERVED);
+        var subject = new CleanupTerminalRepository(probe.wrap(raw), () -> 10_000_000_000L);
+        assertThrows(BatchRepositoryException.class, () -> subject.references(current));
+        assertBorrowed(probe, raw);
+        assertEquals(
+            current, new CleanupTerminalRepository(raw, () -> 10_000_000_000L).read(RUN, OBSERVED));
+        raw.rollback();
+      }
+    }
+    try (var raw = locked(db, false)) {
+      var subject = new CleanupTerminalRepository(raw, () -> 10_000_000_000L);
+      var current = subject.read(RUN, OBSERVED);
+      var changed =
+          new BatchRun(UUID.fromString("00000000-0000-4000-8000-000000000999"), RUN.cutoff());
+      int[] reads = {0};
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.references(current, (id, observed) -> ++reads[0] == 1 ? RUN : changed));
+      assertEquals(2, reads[0]);
+      assertEquals(current, subject.read(RUN, OBSERVED));
+      var wrongDay = new BatchRun(RUN.id(), RUN.cutoff().minusSeconds(86400));
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.references(current, (id, observed) -> wrongDay));
+      assertEquals(current, subject.read(RUN, OBSERVED));
       raw.rollback();
     }
   }
@@ -553,6 +759,24 @@ final class CleanupTerminalRepositoryTest {
 
   private void insertCurrentSkips() throws Exception {
     try (var c = db.admin()) {
+      sql(c, "delete from schubert.log_cleanup_progress");
+      sql(c, "delete from schubert.inbox_inspection_progress");
+      sql(
+          c,
+          """
+          insert into schubert.log_cleanup_progress
+          (run_id,cutoff,after_logged_at,after_id,target_count,deleted_count,skipped_count,completed_at)
+          values ('12345678-9abc-def0-8123-456789abcdef','2026-09-12T15:00:00Z',
+                  '2026-06-01T00:00:00Z',1,1,1,0,'2026-09-13T02:00:01Z')
+          """);
+      sql(
+          c,
+          """
+          insert into schubert.inbox_inspection_progress
+          (run_id,cutoff,after_message_id,inspected_count,deleted_count,protected_count,completed_at)
+          values ('12345678-9abc-def0-8123-456789abcdef','2026-09-12T15:00:00Z',
+                  '00000000-0000-4000-8000-000000000101',1,1,0,'2026-09-13T02:00:01Z')
+          """);
       for (int index = 0; index < 7; index++)
         sql(
             c,

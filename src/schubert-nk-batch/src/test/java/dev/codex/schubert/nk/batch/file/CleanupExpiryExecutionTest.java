@@ -53,6 +53,8 @@ final class CleanupExpiryExecutionTest {
               true,
               Optional.of(
                   new CleanupWorkerRequest.Expiry.PriorExpiry(
+                      UUID.fromString("38100000-2222-4333-8444-555555555555"),
+                      Instant.parse("2026-09-30T00:00:00Z"),
                       42,
                       1,
                       Instant.parse("2026-09-30T00:00:01Z"),

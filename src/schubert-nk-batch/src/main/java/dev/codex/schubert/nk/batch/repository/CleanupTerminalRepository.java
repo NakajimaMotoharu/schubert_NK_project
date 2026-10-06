@@ -32,11 +32,27 @@ public final class CleanupTerminalRepository {
           + " ('CLEAN_NOTIFICATION','CLEAN_QUESTION','CLEAN_SESSION','CLEAN_INBOX_OUTBOX',"
           + "'CLEAN_LOG','CLEAN_BATCH_RUN','CLEAN_TRANSFER') order by step,attempt desc";
 
-  public record Entry(BatchStepAttempt attempt, Instant endedAt, BatchStepResult result) {
+  public record Entry(
+      BatchStepAttempt attempt,
+      Instant endedAt,
+      BatchStepResult result,
+      Optional<String> progressSeal) {
+    public Entry(BatchStepAttempt attempt, Instant endedAt, BatchStepResult result) {
+      this(attempt, endedAt, result, Optional.empty());
+    }
+
     public Entry {
       Objects.requireNonNull(attempt, "current step");
       Objects.requireNonNull(endedAt, "actual terminal time");
       Objects.requireNonNull(result, "actual terminal result");
+      Objects.requireNonNull(progressSeal, "retained progress seal");
+      if (progressSeal.isPresent()
+          && (!progressSeal.orElseThrow().matches("[0-9a-f]{64}")
+              || (attempt.step() != BatchStep.CLEAN_LOG
+                  && attempt.step() != BatchStep.CLEAN_INBOX_OUTBOX)
+              || attempt.skipped()
+              || result.status() != BatchStepResult.Status.SUCCESS))
+        throw new IllegalArgumentException("Cleanup progress seal invalid");
       if (!STEPS.contains(attempt.step())
           || endedAt.isBefore(attempt.startedAt())
           || endedAt.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))
@@ -207,7 +223,25 @@ public final class CleanupTerminalRepository {
 
   /** SSC126/ISSSTEP003: separate same-run complete SUCCESS references, never current SKIP data. */
   public List<Optional<Entry>> references(Snapshot current) {
+    Objects.requireNonNull(current);
+    var run = current.entries().getFirst().attempt().run();
+    try {
+      return references(
+          current,
+          (id, observed) -> {
+            if (!id.equals(run.id())) throw new IOException("original lookup required");
+            return run;
+          });
+    } catch (IOException known) {
+      throw new BatchRepositoryException();
+    }
+  }
+
+  /** SSC200: same-business-date SUCCESS with exact separately owned original anchor. */
+  public List<Optional<Entry>> references(Snapshot current, SuccessRunLookup originals)
+      throws IOException {
     Objects.requireNonNull(current, "current complete Cleanup results");
+    Objects.requireNonNull(originals, "same live original owner");
     var run = current.entries().getFirst().attempt().run();
     try {
       check(run);
@@ -223,23 +257,34 @@ public final class CleanupTerminalRepository {
             connection.prepareStatement(
                 "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
                     + "target_count,success_count,failure_count,byte_count,error_code,error_summary"
-                    + " from schubert.batch_runs where run_id=? and business_date=? and step=?"
+                    + " from schubert.batch_runs where business_date=? and step=?"
                     + " and status='SUCCESS' and attempt<? order by attempt desc limit 2");
         @Nullable Throwable statementFailure = null;
         Entry prior;
         try {
           var query = present(statement);
           query.setQueryTimeout(seconds());
-          query.setObject(1, run.id());
-          query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
-          query.setString(3, handle.step().name());
-          query.setInt(4, handle.attempt());
+          query.setObject(1, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+          query.setString(2, handle.step().name());
+          query.setInt(3, handle.attempt());
           @Nullable ResultSet rows = query.executeQuery();
           @Nullable Throwable rowsFailure = null;
           try {
             var row = present(rows);
             require(row.next());
-            prior = entry(projection(row), run, handle.startedAt());
+            var projected = projection(row);
+            var priorRun =
+                Objects.requireNonNull(
+                    originals.resolve(present(projected.runId()), handle.startedAt()));
+            require(
+                priorRun.id().equals(projected.runId())
+                    && priorRun
+                        .cutoff()
+                        .atZone(ZoneId.of("Asia/Tokyo"))
+                        .toLocalDate()
+                        .equals(handle.businessDate()));
+            check(priorRun);
+            prior = entry(projected, priorRun, handle.startedAt());
             require(
                 prior.attempt().step() == handle.step()
                     && prior.attempt().id() != handle.id()
@@ -247,7 +292,7 @@ public final class CleanupTerminalRepository {
                     && prior.result().status() == BatchStepResult.Status.SUCCESS
                     && !row.next());
             // BatchStepResult establishes SUCCESS -> Reason.NONE.
-          } catch (SQLException | RuntimeException | Error failure) {
+          } catch (SQLException | IOException | RuntimeException | Error failure) {
             rowsFailure = failure;
             throw failure;
           } finally {
@@ -259,7 +304,7 @@ public final class CleanupTerminalRepository {
               }
             }
           }
-        } catch (SQLException | RuntimeException | Error failure) {
+        } catch (SQLException | IOException | RuntimeException | Error failure) {
           statementFailure = failure;
           throw failure;
         } finally {
@@ -271,6 +316,20 @@ public final class CleanupTerminalRepository {
             }
           }
         }
+        if (prior.attempt().step() == BatchStep.CLEAN_LOG
+            || prior.attempt().step() == BatchStep.CLEAN_INBOX_OUTBOX) {
+          prior =
+              new Entry(
+                  prior.attempt(),
+                  prior.endedAt(),
+                  prior.result(),
+                  Optional.of(progressSeal(prior)));
+        }
+        require(
+            prior
+                .attempt()
+                .run()
+                .equals(originals.resolve(prior.attempt().run().id(), handle.startedAt())));
         references.add(Optional.of(prior));
         check(run);
       }
@@ -282,6 +341,52 @@ public final class CleanupTerminalRepository {
   }
 
   // SSC199/BUG784/CTERM006..009. Provider calls must stay outside pure value catches.
+  /** SSC201/REF200001: full private progress stays in DB; caller retains the immutable seal. */
+  private String progressSeal(Entry prior) throws SQLException {
+    var statement =
+        connection.prepareStatement(
+            "select proof_sha256 from schubert.maintenance_read_success_progress(?,?,?,?)");
+    @Nullable Throwable statementFailure = null;
+    try {
+      var checked = present(statement);
+      checked.setQueryTimeout(seconds());
+      checked.setObject(1, prior.attempt().run().id());
+      checked.setObject(2, prior.attempt().run().cutoff().atOffset(ZoneOffset.UTC));
+      checked.setString(3, prior.attempt().step().name());
+      checked.setObject(4, prior.endedAt().atOffset(ZoneOffset.UTC));
+      var rows = checked.executeQuery();
+      @Nullable Throwable rowsFailure = null;
+      try {
+        var row = present(rows);
+        require(row.next());
+        var seal = present(row.getString("proof_sha256"));
+        require(seal.matches("[0-9a-f]{64}") && !row.next());
+        return seal;
+      } catch (SQLException | RuntimeException | Error failure) {
+        rowsFailure = failure;
+        throw failure;
+      } finally {
+        if (rows != null)
+          try {
+            rows.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;
+          }
+      }
+    } catch (SQLException | RuntimeException | Error failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      if (statement != null)
+        try {
+          statement.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+        }
+    }
+  }
+
+  // SSC199 provider calls remain outside pure value catches.
   private record Projection(
       long id,
       @Nullable UUID runId,

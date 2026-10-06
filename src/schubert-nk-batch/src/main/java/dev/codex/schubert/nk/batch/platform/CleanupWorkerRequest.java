@@ -133,10 +133,15 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
     }
 
     /** Complete original identity; never substitute this handle for the current SKIP. SSC117. */
-    public record PriorExpiry(long id, int attempt, Instant started, Instant ended) {
+    public record PriorExpiry(
+        UUID run, Instant cutoff, long id, int attempt, Instant started, Instant ended) {
       public PriorExpiry {
+        Objects.requireNonNull(run, "prior run");
+        Objects.requireNonNull(cutoff, "prior cutoff");
         Objects.requireNonNull(started, "prior start");
         Objects.requireNonNull(ended, "prior end");
+        new BatchStepAttempt(
+            id, new BatchRun(run, cutoff), BatchStep.CLEAN_EXPIRY, attempt, started, false);
         if (id < 1
             || id > 999999999999L
             || attempt < 1
@@ -176,7 +181,11 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
         var previous = prior.orElseThrow();
         if (previous.id() == stepId
             || previous.attempt() >= attempt
-            || previous.started().isBefore(cutoff)
+            || !previous
+                .cutoff()
+                .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                .toLocalDate()
+                .equals(cutoff.atZone(java.time.ZoneId.of("Asia/Tokyo")).toLocalDate())
             || previous.ended().isAfter(started)) throw invalid();
       }
     }
@@ -194,7 +203,7 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
       var previous = prior.orElseThrow(() -> invalid());
       return new BatchStepAttempt(
           previous.id(),
-          new BatchRun(run, cutoff),
+          new BatchRun(previous.run(), previous.cutoff()),
           BatchStep.CLEAN_EXPIRY,
           previous.attempt(),
           previous.started(),
@@ -206,7 +215,11 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
           prior
               .map(
                   p ->
-                      "prior_step_id="
+                      "prior_run_id="
+                          + p.run()
+                          + "\nprior_cutoff_utc="
+                          + p.cutoff()
+                          + "\nprior_step_id="
                           + p.id()
                           + "\nprior_attempt="
                           + p.attempt()
@@ -216,7 +229,7 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
                           + p.ended()
                           + "\n")
               .orElse("");
-      return ((skipped ? "NKEXPIRYSKIP1\nrun=" : "NKEXPIRY1\nrun=")
+      return ((skipped ? "NKEXPIRYSKIP2\nrun=" : "NKEXPIRY1\nrun=")
               + run
               + "\nactivation="
               + activation
@@ -260,9 +273,9 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
                 "attempt=",
                 "started=",
                 "skipped=");
-        boolean reuse = rows[0].equals("NKEXPIRYSKIP1");
+        boolean reuse = rows[0].equals("NKEXPIRYSKIP2");
         if ((!reuse && !rows[0].equals("NKEXPIRY1"))
-            || rows.length != (reuse ? 16 : 12)
+            || rows.length != (reuse ? 18 : 12)
             || !rows[rows.length - 1].isEmpty()) throw invalid();
         String[] values = new String[10];
         for (int i = 0; i < 10; i++) {
@@ -274,19 +287,26 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
         if (reuse) {
           var priorKeys =
               java.util.List.of(
-                  "prior_step_id=", "prior_attempt=", "prior_started=", "prior_ended=");
-          String[] fields = new String[4];
-          for (int i = 0; i < 4; i++) {
+                  "prior_run_id=",
+                  "prior_cutoff_utc=",
+                  "prior_step_id=",
+                  "prior_attempt=",
+                  "prior_started=",
+                  "prior_ended=");
+          String[] fields = new String[6];
+          for (int i = 0; i < 6; i++) {
             if (!rows[i + 11].startsWith(priorKeys.get(i))) throw invalid();
             fields[i] = rows[i + 11].substring(priorKeys.get(i).length());
           }
           previous =
               Optional.of(
                   new PriorExpiry(
-                      Long.parseLong(fields[0]),
-                      Integer.parseInt(fields[1]),
-                      Instant.parse(fields[2]),
-                      Instant.parse(fields[3])));
+                      UUID.fromString(fields[0]),
+                      Instant.parse(fields[1]),
+                      Long.parseLong(fields[2]),
+                      Integer.parseInt(fields[3]),
+                      Instant.parse(fields[4]),
+                      Instant.parse(fields[5])));
         }
         var request =
             new Expiry(
