@@ -2,6 +2,8 @@
 
 ## SSC198 Backup archive途中の限定復旧（2026-10-06）
 
+SSC198限定補足（同日17:02）：型付きmarker退役→Unit不変更pending code-only→別正常所有の固定runtime resume引数準備→durable一回予約/observer先行/外部Morning一回→元cutoffのProduction通常resume→真正全終端後の一回引数正規退役、を順に別認定する。各管理段は新M/A/実DB/10Refと完全pending/旧全原値を再認証し、未知又は送達不明は再付着/保全する。同activation保持は正規挙動であり無理に更新しない。未実行段や通常start client0をfresh worker/archive/親全体成功へ加算しない。SS341/343の固定runtime名・唯一二引数・終端後退役条件を適用する。
+
 今回の明示復旧・内部SSC自走指示下で、SS343 SSC198の固定Backup途中世代を対象とする。QA047のPair/正常DONE復旧へ未完了Backupを代入しない。元期限のMorning timeout143/旧親消失・fresh Backup実0/明示stop0・全10Unit/kernel終端を私有保全、新M/A/専用DB/advisory/10Refでsame boot/署名/INVALID/完全pending原本と全DB・原本Backup/旧request/空固定markerを再認証する。条件不足は隔離のまま独立host作業を継続する。
 
 型付き固定Backup marker退役と正常新所有帰還→exact pending/request/二RUNNING/part保全専用code-only→通常同run resumeの三段を別認定する。operatorはDB ABANDONED化/request置換/手unlink/新permit/startを行わない。未完成.part/旧全値を保存し、旧timeoutを旧close正常・BUG544歴史原因解決・今回親成功に変換しない。各段不明はtyped再隔離/連続M-A保全、例外/close/再隔離の結果を分ける。独立拒否/faultと実native再試験、同source451全品質/正式条件が必要。詳細条件はSS343 SSC198、通常resume順序はSS341 SSC198/SSC114を正とする。
