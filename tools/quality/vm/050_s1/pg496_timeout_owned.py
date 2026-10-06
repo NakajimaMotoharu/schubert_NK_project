@@ -123,10 +123,15 @@ def stop_one(unit):
  require(all((ROOT/(p+'.stopped.private')).is_file() for p in ORDER[:index]))
  owner=holder();parent();before=json.loads((ROOT/'units-before.private.json').read_text())[unit];current=show(unit);issued=False
  if unit in EXPECTED:
-  require(current==before);actor(unit,current);require(holder()==owner)
-  save(unit+'.stop-reserved.private',b'oneOwnedStop=true\n')
-  result=subprocess.run(['/usr/bin/systemctl','stop',unit],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=120)
-  require(result.returncode==0);issued=True;current=show(unit)
+  if current==before:
+   actor(unit,current);require(holder()==owner)
+   save(unit+'.stop-reserved.private',b'oneOwnedStop=true\n')
+   result=subprocess.run(['/usr/bin/systemctl','stop',unit],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=120)
+   require(result.returncode==0);issued=True;current=show(unit)
+  else:
+   # BUG805: Cleanup Requires dependencies can have stopped this captured actor first.
+   # Do not reissue stop: same generation + complete native/vendor witness below is mandatory.
+   require(same_generation(before,current) and current['ActiveState'] in ['inactive','failed'])
  elif current['ActiveState']=='active' and current['SubState']=='exited':
   require(current==before);save(unit+'.stop-reserved.private',b'oneOwnedStop=true\n')
   result=subprocess.run(['/usr/bin/systemctl','stop',unit],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=120)

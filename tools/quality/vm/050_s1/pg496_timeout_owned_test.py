@@ -29,10 +29,11 @@ for raw in [None,b'',epoch[:-1],b'\xff\n',epoch+b'unknown=x\n',issued.replace(b'
 check(h.ORDER==['caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service'])
 check(h.EXTRA==['schubert-nk-morning-controller.service','schubert-nk-bootstrap-admin.service'])
 check(h.EXPECTED=={'caddy.service':('4113865','b656fdfe067a4cb8a542708750af019c',25667027),'schubert-nk-web.service':('4108080','1dedba9e9ee648fb94eca6232385e018',25663790),'schubert-nk-api.service':('4105598','730085ab1173444b83c9bf2c8127c94e',25662174),'artemis.service':('3939714','12360e619aa7445684692c59badc7c51',25552139)})
-def caddy_stop(fault=None,foreign=False,missing_predecessor=False):
+def caddy_stop(fault=None,foreign=False,missing_predecessor=False,dependent=False):
  events=[];error=RuntimeError('literal fault');unit='caddy.service'
  before={'Id':unit,'LoadState':'loaded','ActiveState':'active','SubState':'running','MainPID':'4113865','ControlPID':'0','Job':'','InvocationID':'b656fdfe067a4cb8a542708750af019c','ExecMainCode':'0','ExecMainStatus':'0','Result':'success','ExecMainStartTimestampMonotonic':'256670270000','ExecMainExitTimestampMonotonic':'0','KillMode':'control-group','SendSIGKILL':'no','Restart':'no','Type':'simple','RemainAfterExit':'no'}
  after={**before,'ActiveState':'inactive','SubState':'dead','MainPID':'0','ExecMainCode':'1','ExecMainStatus':'0','ExecMainExitTimestampMonotonic':'257200000000'};current=dict(before)
+ if dependent:current=dict(after)
  if foreign:current['InvocationID']='f'*32
  def event(name):
   events.append(name)
@@ -61,4 +62,10 @@ for at in range(1,len(events)+1):
  check('save:caddy.service.stopped.private' not in failed[:-1])
 for kwargs in [{'foreign':True},{'missing_predecessor':True}]:
  failed,error=caddy_stop(**kwargs);check(isinstance(error,ValueError) and 'STOP' not in failed)
+events,error=caddy_stop(dependent=True);check(error is None and 'STOP' not in events and 'save:caddy.service.stop-reserved.private' not in events)
+check(events.index('kernel')<events.index('save:caddy.service.stopped.private'))
+for at in range(1,len(events)+1):
+ failed,error=caddy_stop(at,dependent=True);check(isinstance(error,RuntimeError) and len(failed)==at)
+ check('STOP' not in failed and 'save:caddy.service.stopped.private' not in failed[:-1])
+events,error=caddy_stop(dependent=True,foreign=True);check(isinstance(error,ValueError) and 'STOP' not in events)
 print('PG496_PYTHON_ORACLE independentAssertions='+str(count)+' nativeMutation0=true productionPT0=true')
