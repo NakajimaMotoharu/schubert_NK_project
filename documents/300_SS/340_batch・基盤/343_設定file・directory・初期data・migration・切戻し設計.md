@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC198 固定Backup途中世代の限定operator隔離退役・pending配備（2026-10-06）
+
+本経路は利用者の今回明示復旧・内部SSC自走指示下の隔離PG/PT VM/Root管理者だけ。QA047の旧Pair退役を一般化せず、Runtime起動主体・Root権限・通常admissionを増やさない。元30分後の真正Morning timeout/normalCode1/status143・同boot/INV/start/end/旧PID-startTicks消失、fresh Backup正常0と明示stop0を元Invocation/full journalへ束縛する。全10Unitの18property/全kernel/Job/PIDを二読、未知/coldだけの結果復元や旧close正常化は不可。
+
+新しい連続M→A→専用DB/advisory→固定10Ref保持下でold/new署名BOM/current承認/全namespaceとsame run/cutoff/activationの完全未完了原本・current INVALID/digest無しを再認証する。全24DB/旧411全列全行・旧全原本/Backup/Transfer及び当回新dump-only.part、Root0600/link1/ACL無し/tmpfsの旧request全byte・固定空backup-start.intent全metadataを私有保全/前後照合する。残留allowlistはこのexact request＋markerだけ、他intent/途中part/未知名を許可しない（既Backup保存tree内の旧.part保全は別）。旧子成功はarchive成功pair/親成功の代用ではない。
+
+専用型付き退役入口だけが既observeQuarantine→同owner token retire→directory sync→不存在/readbackを行う。任意Unit/name/単純unlink/API-Web Pairへの拡張0。unlink後のsync/readback/資源close不明は固定Backup markerをtyped再隔離しM/Aを保持、再隔離不明も成功を返さない。旧request/二RUNNING/partを変更せず、全DB/root/ref/A/M正常帰還後だけ新退役完了を私有保存する。旧143/UNKNOWN/close不明は別証跡のまま。
+
+その後の専用pending code-onlyは同exact原本/request/二RUNNING/partと全保全を認証した新M/A/DB/Refの連続区間で行う。一般requireNoUndeliveredWork/normalDoneを緩めず、旧署名/currentとnew fresh全6/署名/全payloadを保持してapproval/currentだけを一回切替し、同既INVALID原byte・実config/Unit/hardening/DDL/旧nativeを保全する。newEpoch/permit/start/DB更新0、未完了配備/closeは隔離維持。全scope正常帰還後だけ既SSC114/SS341 SSC198の通常同run resumeを別発行できる。各段独立fault/未知/foreign/owner競合/close/半退役再隔離と実全後条件を915/916/PTへ記録し、native未受入の公開設計を工程成功としない。
+
 ## SSC197 固定Backup入力のmode横断（2026-10-06、BUG771/YKT551）
 
 SS341 SSC121の静的復旧config8名は、api.env/web.envだけRoot:既API/Web primary GID0600、common.yml/api.yml/web.yml/batch.yml/backup-profile.json/inbox-inspector.envはRoot:schubert0640。Inspector静的envは§6.9の0640のままであり、`.env` suffixを理由に0600へ変更しない。credential固定17名はRoot:Root0600、runtime Inspector envはarchive対象外。全allowlist・regular/link1/ACLなし・保持前後metadata・署名payload・実archive hash等の既存検査を維持する。既成功bundle、設定原byte/権限、秘密配布、業務外部仕様は変更しない。固定名ごとの独立mode表と未知/null/他catalog取り違えを試験し、実親Backup完成は別native受入を必要とする。

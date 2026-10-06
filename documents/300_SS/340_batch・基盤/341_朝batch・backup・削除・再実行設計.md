@@ -1,5 +1,9 @@
 # 朝batch・backup・削除・再実行設計
 
+## SSC198 Backup途中保全後の正規resume（2026-10-06、BUG771/YKT551）
+
+SS343 SSC198の限定operator退役・pending code-onlyはBackup成功/親正常closeではない。旧両RUNNING/全14列とdump-only.part/requestを保持する。通常の明示同run resumeだけが既beginBackup(recoverAbandoned=true)で旧両FAILED/ABANDONED＋新両RUNNINGを同transactionへcommitし、requireAbandonedRequestの新transaction再読後にSSC114 prepareResumeReplacementへ進む。新requestは元run/cutoffと新実開始時刻へ束縛し、旧requestのbyte/metadataを先に私有保全する。旧.partは自動修復/削除せず新attemptと別に保持、成功bundle/件数へ補完しない。旧6Backup＋新成功1が最大7で、未完成.partは保持する非適格世代であり、retentionで旧保全物を消してよい根拠にしない。新fresh worker/CONFIG実archive/両SUCCESS/後続削除・全原本/DONE・最外資源正常帰還は別必須。既成功day skip・期限・業務・operator DB更新権限を変更しない。
+
 SSC187/BUG704：最終completionでのBackup実結果確認は、同親で実行を完了した既存MorningBackupUnitCycleの停止後証明を借用する。executeObservedのfresh正常receipt→明示stop client正常0→全kernel終端→同baseline/元receiptの停止後再読→request/intent退役を経た同cycleと元TerminalReceiptを保持し、最終検査ではcompletedReceiptの参照同一とrecheckCompletedBackupを再要求する。Backup明示停止後にKEEP_ACTIVE専用requireStillPresentを適用しない。完全GC coldは元receiptを持つ同cycleの停止後条件としてのみ受理し、coldからreceipt0を作らない。Cleanup/Expiryは従来どおり保持中のfresh receiptを厳密再読する。DB全行/原本/同M/A/同世代・同budgetの既存検査は省略しない。別cycle/未完了/別receipt/部分cold/別Invocation/未知/資源close不明は拒否し、通常完了へ変換しない。外部結果・Backup失敗時WARNING/SKIP・元30分期限は変更しない。
 
 SSC175（2026-10-04、QA048の受付参照保守）：既存business cleanup/SESSION/INBOX-OUTBOX/LOGの順序とBackup失敗時六SKIPは不変更。既存`CLEAN_BATCH_RUN`のtechnical共有stepを一度だけbeginし、固定`WEB_RECEIPTS`→既存`BATCH_RUNS`→`INBOX_PROGRESS`→`LOG_PROGRESS`の順に処理する（既存3kind間の順は保持）。各chunkは現在原本run開始cutoff/親OS・DB排他/30分deadline/実両backup成功と完全step handleを保持し、1,000件以内のDELETE/累積を同TXでcommitする。全4kindが実完了した後だけ合算累積でfinishし、SKIP LOCKED残・rollback/commit不明/子失敗を0件完了にしない。孤児条件は物理questions不存在のみ、存続質問locator独自TTL0、Web/業務復元の片方向原則はSS313/331。新BatchStep・questions件数へのlocator加算・既存削除predicate変更はない。Backup失敗ならlocator削除も0、既存完全成功stepの通常skip/resume契約は保持する。新technical tableは両schemaを含む同一custom dumpに収め、旧成功bundleへのtable/hash追加はしない（SS343）。Production/DDL/独立PT/nativeは未受入。
