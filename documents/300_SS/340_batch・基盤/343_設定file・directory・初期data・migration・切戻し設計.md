@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
+
+対象は隔離VMのPG487 pending `91a748b4-1abe-484c-9682-44f46429b324`・元cutoff/activation・INVALIDだけとする。新M→A→専用DB/advisory71419602→固定10Refとsame boot/loaded Unit/全kernel終端を保持し、署名PG486/schema027/current/approval・空request・完全原本graph・全24業務table・432batch十四列・Backup32/Transfer2・config/native/Unitの私有before-imageを取得する。停止済みRemainAfterExitのactive/exitedはlive PIDと混同せず、既terminal契約で判定する。旧失敗親30を正常closeへ変換しない。
+
+移行前にRoot0700/0600私有pg_dumpの真正正常終端・header/list検証・syncを完了する。既V001～027の全byte/checksumと旧28履歴を独立に照合し、署名候補のV028一件だけをmigration専用roleでappend-only適用する。許可deltaはV028一履歴行、SSC201関数/owner/search_path/親専用EXECUTE、backup-profileのschema027→028一値だけ。全業務row・元原本/Backup/Transfer/epoch・Unit・既configは不変更、旧profileを保全しnew-only part/atomic/readbackでprofileを公開する。各段未知なら私有証拠と保持所有を残し、Flyway repair/clean/再発行/手DB更新/自動rollbackをしない。
+
+移行正常帰還後のpending code-onlyは別の新所有でcurrent/approvalだけを署名候補へ公開し、epoch/原本/Unit不変更を証明する。続く別所有の一回用Root resume drop-inは固定元UUID二引数のみ、独立argv/metadata/effective再照合・予約/observer/一回start・真正終端後の正規退役というSSC112114198契約を適用する。元027Backupは元manifestのまま通常再用し、028への偽装/再dumpをしない。途中証跡を全親/CHR/native coverage/正式へ算入しない。
+
 SSC201（2026-10-06、SSC200/BUG788/YKT562）：新V028の同source署名schema履歴/関数inventoryを候補、Root admission、Backup条件へ横断し、旧V001～027のchecksum・所有/権限・全実DBを保全する。基表cursorのrawを通常log/PT/Gitへ保存せず、全row seal/独立非秘密fixture/hashだけを公開する。PG/PT VMへのmigration/配備はfresh全回帰と専用pending復旧/実DB保全認証後の正規所有経路のみ、設計公開や限定試験をmigration/起動の許可として扱わない。
 
 SSC200（2026-10-06、BUG788/YKT562、実装前補足）：保持中の原本Sessionへ、現activationを前後照合し全graph/inodeを二読するUUID限定readonly completed-run lookupを追加する。指定UUIDの実anchorと完了した元activation/完了時刻を確認して元BatchRunを返すdata能力だけで、active/pendingの書換え、resume/退役/permit、一覧を所有証明へ変換する操作ではない。欠落/退役途中/非完了/同日不一致/時刻逆転/graph競合は拒否し、元原本をDB値から再生成しない。

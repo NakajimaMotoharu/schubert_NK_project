@@ -1,5 +1,7 @@
 # 399 SSC200 同日別run成功参照
 
+2026-10-06 22:53：PG489 full-v1はsource a52a6274固定/実exit1、510suite/3406PTのうちbatch F3E1で拒否、前半五static0/batch static・coverage・JAR未実行。BUG793794/YKT563565を修正前起票、raw XMLはWorkPG379/pg489-refused-full-v1、公開refusal manifest e8755ecdd6ab8e74015db260853159451c6f8753fc9b4ff14722d688ebdfac56。schema inventory三fixtureを承認V028へ、Guard旧末尾仮定を独立型catalogへ修正し、PG490 limited-v1 actual0/87PT10suite/FES0/static5zero・差分前後同一を別保全。manifest83fb5b9b5515beef552f2e1a5302c6c9a19e5f1210381b144420937db366d6ed。次は新source固定fresh全六PG489-v2、旧v1/別source/限定成功を合格へ加算0。
+
 関連RD OPS009/OPS011/UI251§11、SS331§8.3/341343、SSC200/BUG788/YKT562。現在範囲は詳細設計具体化・原本readonly lookup実装と独立試験、全接続/実VM/正式は未完了。製造/PTを同群で進める。参照型・wire・DB-portを全体でつなぐまで新native/start/配備を発行しない。
 
 ## 独立期待値・観点
@@ -31,3 +33,6 @@ SS331341343/914の4fileをisolated e48443ee7→PR32通常squash merge→origin/m
 PG488 selected-v1/session58474 actual1/F0E1。上限年fixtureをISO不正な10000年文字列で生成し、lookup以前のInstant.parseで失敗したためBUG789を修正前起票。有限最大literal+1000nsへ是正し、source固定selected-v2/session61982は21:42:15にactual0、106PT/9suite/FES0/static5zero。独立lookup・所有前後・別thread/IO・元SUCCESS14列/currentSKIPを確認。私有WorkPG379/pg488-host-v2へXML/classes/exec/coverage/staticをfreeze、公開PG488-retained-run-selected-v2 manifestSHA4c5c8ef31f9ac1e45adc8502534220d31669adcb32e22315af58aa5396d7efc6。v1失敗保持、全回帰/native/coverage100/正式はfalse。
 
 次の変更群は同所有OriginalProofからCleanup actual/issuer前後/Completionへlookup引数を接続し、Expiry prior検索を同日全runへ、保持原本から元run/cutoffを解決する。NKPRESTART2の13field、新NKEXPIRYSKIP2の6prior fieldを実装中。旧NKPRESTART1独立goldenは保持し、新v2 literalを別fileへ作成。通常NKEXPIRY1とNKPERMIT1は不変更。Expiry子は固定readonly原本再認証と元cutoff−7日audit/current selector0を分離。EXP200001/WIRE200001～002を同群独立試験へ追加したselected-v3/session89146が実行中。Log END/Inbox summary/cursor再読接続、全scope100、fresh全回帰、pending専用復旧・新source nativeは未受入。実VMの再start/配備/permit発行0。
+# 追加readonly実原本観測（2026-10-06 22:26）
+
+PG489-prior-original-observation-v1 actual0、私有 `work/pgpt-runs/PG379/pg489-prior-original-observation-v1.private.json` SHA256 `8e4a0c336c6443603965f375622b862742cf3affc3369ee569266e9456997247`。PG487固定snapshot（5c2108ca…）の同日CLEAN七SUCCESS＋Expiry SUCCESS計八行/一元runに対し、現保持原本NKRUN1/NKDONE1の実UUID/cutoff・before/after同値、Log/Inbox ENDのcutoff一致を確認した。書込/復旧/authority付与0、raw cursor/DB値を通常ログへ出力0。captured DB snapshotとlive原本の診断的比較であり、fresh M/A/DB/十Refによる全graphのnative受入や親成功には算入しない。

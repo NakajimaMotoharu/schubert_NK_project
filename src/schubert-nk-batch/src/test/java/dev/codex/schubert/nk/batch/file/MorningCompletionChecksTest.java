@@ -59,7 +59,18 @@ final class MorningCompletionChecksTest {
                     assertTrue(autoCommit.get(), "no nested entry");
                     if (method.getName().equals("recheckConsistent"))
                       return method.invoke(delegate, args);
-                    var guard = (MaintenanceOwnerFrame.Guard) args[args.length - 1];
+                    // Independent SSC200 argument catalog: the original lookup follows the guard.
+                    int guardIndex =
+                        method.getName().equals("cleanupReferences") ? 1 : args.length - 1;
+                    assertEquals(
+                        MaintenanceOwnerFrame.Guard.class, method.getParameterTypes()[guardIndex]);
+                    if (method.getName().equals("cleanupReferences") && args.length == 3) {
+                      assertEquals(
+                          dev.codex.schubert.nk.batch.repository.SuccessRunLookup.class,
+                          method.getParameterTypes()[2]);
+                      assertNotNull(args[2]);
+                    }
+                    var guard = (MaintenanceOwnerFrame.Guard) args[guardIndex];
                     autoCommit.set(false);
                     try {
                       assertEquals(83L, guard.remainingNanos());
