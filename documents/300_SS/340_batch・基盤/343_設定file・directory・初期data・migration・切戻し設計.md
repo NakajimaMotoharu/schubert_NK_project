@@ -2,6 +2,10 @@
 
 ## SSC198 固定Backup途中世代の限定operator隔離退役・pending配備（2026-10-06）
 
+SSC198限定補足（同日17:02、固定same-run一回用Unit引数）：pending code-onlyのUnit不変更条件とは別の新M→A→実専用DB/advisory71419602→private10Ref所有区間で、一回用 `/run/systemd/system/schubert-nk-morning-controller.service.d/pg481-once-resume.conf` だけをRoot管理new-onlyで作成できる。Root0755単一実directory/Root0644単一link・ACL無しregular file、旧署名base・既PG477 native drop-inは全byte/metadata保持する。唯一deltaは固定Morningの既署名base＋既native parent optionの独立literal argvへ `--resume 49437eda-1681-43a9-883a-424eb55a6166` 二引数を加えるExecStart再宣言（他Unit/RW/hardening/credential変更0）。未知drop-in/二重agent/余剰argv/別UUIDを拒否し、全Unit/kernel停止の同世代でdurable before-image保存→一回daemon-reload→effective ExecStart宣言/DropInPaths/RW/全hardening/旧停止18propertyを再照合する。独立expectedを実測argvから自己生成しない。新scopeが全部正常帰還してから別の一回予約/observer/startへ進む。reload/readback/close不明は隔離保全・再発行0。
+
+今回親及び全対象kernelの真正終端後、別M/A/DB/10Ref管理区間でこの一回用runtime fileだけを原byte保持→同inode確認→正規退役→dirsync→daemon-reload/readbackし、既noargs＋PG477 nativeへ戻す。稼働中設定変更/旧/run復元/署名baseの編集/一般resume fallback化は禁止。host拒否/fault/引数優先順位・実VM新Invocation/元cutoff/全旧値保全/正常所有帰還を別証跡とする。これは隔離PG/PTの既SSC112/114通常resumeのsystemd束縛で、RD/UI・日次業務・QA047承認範囲を拡大しない。
+
 本経路は利用者の今回明示復旧・内部SSC自走指示下の隔離PG/PT VM/Root管理者だけ。QA047の旧Pair退役を一般化せず、Runtime起動主体・Root権限・通常admissionを増やさない。元30分後の真正Morning timeout/normalCode1/status143・同boot/INV/start/end/旧PID-startTicks消失、fresh Backup正常0と明示stop0を元Invocation/full journalへ束縛する。全10Unitの18property/全kernel/Job/PIDを二読、未知/coldだけの結果復元や旧close正常化は不可。
 
 新しい連続M→A→専用DB/advisory→固定10Ref保持下でold/new署名BOM/current承認/全namespaceとsame run/cutoff/activationの完全未完了原本・current INVALID/digest無しを再認証する。全24DB/旧411全列全行・旧全原本/Backup/Transfer及び当回新dump-only.part、Root0600/link1/ACL無し/tmpfsの旧request全byte・固定空backup-start.intent全metadataを私有保全/前後照合する。残留allowlistはこのexact request＋markerだけ、他intent/途中part/未知名を許可しない（既Backup保存tree内の旧.part保全は別）。旧子成功はarchive成功pair/親成功の代用ではない。
