@@ -1,4 +1,8 @@
 # 設定file・directory・初期data・migration・切戻し設計
+## SSC196 二つの固定terminal role namespace（2026-10-06）
+
+SSC193/195の親Root:Root0755/ACLなし/tmpfs下へ、正常owned停止・M/A/DB/全原本・旧Backup/current/旧native全byte保全を認証したRoot operatorだけがnew-only `ordinary-inspector196`（既resolveInspectorのUID:primary GID0700）と`ordinary-bootstrap196`（既schubert-api UID:primary GID0700）を作成する。runtime mkdir/chmod/chown/repair/置換0。出力は`<INV>.terminal.exec`一回だけ、新単link0600・同保持FDのwrite/force/close/dirsync・再読hash・前後identityを維持する。Root/before-execやAPI/WEB専用roleへのalias0、旧exec/heaps/原本/Backup/退役済秘密は全保全し現/runへ復元しない。Unit/identity/phase/session/default及び採取失敗はSS342 SSC196を正とする。rawexec/credential/session/DB値は私有だけ、safe evidenceはhash/counter/actualsource-run/kernelと未確定事項だけ。公開設計は実装/native/正式品質受入ではない。
+
 
 SSC194横断補足（2026-10-06）：SSC193普通terminalの新private inode/dir通常返却は、SS342のPT-only outer stop holdがJVM終了を待つ区間内に完了させる。元application finished後のmainだけからdump完了を推定しない。終了期限/Root管理namespace/旧exec・原本Backup・tmpfs cold保全・profile default不変更、部分dump及び非成功は保全し未受入とする。設計反映はfresh全6/同source実TERM・dump・正常owned返却・正式品質の完了ではない。
 
