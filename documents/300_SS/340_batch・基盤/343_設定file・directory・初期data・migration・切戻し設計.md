@@ -910,3 +910,4 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 # 設定file・directory・初期data・migration・切戻し設計
 
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
+SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
