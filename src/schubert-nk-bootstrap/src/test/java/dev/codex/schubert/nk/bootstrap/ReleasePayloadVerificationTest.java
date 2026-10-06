@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.storage.*;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -19,6 +20,98 @@ import org.junit.jupiter.api.io.TempDir;
  * Independent literal release/ZIP/CRC fixture. Synthetic owner/RO policy is not native admission.
  */
 final class ReleasePayloadVerificationTest {
+  @Test
+  void fullBom011IndependentHostileZipAndManifestVectors() throws Exception {
+    Map<String, byte[]> manifestVectors = new LinkedHashMap<>();
+    for (String value :
+        List.of("", " ", "lib/missing.jar", "../storage.jar", "/storage.jar", "lib\\storage.jar"))
+      manifestVectors.put(
+          "bad-" + manifestVectors.size(),
+          ("Manifest-Version: 1.0\r\nClass-Path: " + value + "\r\n\r\n")
+              .getBytes(StandardCharsets.US_ASCII));
+    for (var item : manifestVectors.entrySet()) {
+      var f = new Fixture("manifest-" + item.getKey());
+      f.payload.put("web/web.jar", jar(Map.of("META-INF/MANIFEST.MF", item.getValue())));
+      f.publish();
+      refused(f);
+    }
+    for (String name :
+        List.of(
+            "/absolute.class",
+            "x\\foreign.class",
+            "../foreign.class",
+            "x/../foreign.class",
+            "nested.jar")) {
+      var f = new Fixture("zip-name-" + Math.abs(name.hashCode()));
+      f.payload.put("web/web.jar", jar(Map.of(name, new byte[] {1})));
+      f.publish();
+      refused(f);
+    }
+    var empty = new Fixture("empty-zip");
+    empty.payload.put("web/web.jar", jar(Map.of()));
+    empty.publish();
+    refused(empty);
+    var valid = new Fixture("manifest-without-classpath");
+    valid.payload.put(
+        "web/web.jar",
+        jar(
+            Map.of(
+                "META-INF/MANIFEST.MF",
+                "Manifest-Version: 1.0\r\n\r\n".getBytes(StandardCharsets.US_ASCII),
+                "module-info.class",
+                new byte[] {7},
+                "META-INF/",
+                new byte[0])));
+    valid.publish();
+    assertEquals(
+        valid.payload.size(),
+        valid.subject().verifyCandidate(valid.approval).artifactHashes().size());
+    valid.released();
+  }
+
+  @Test
+  void fullBom012PayloadChannelContractFailuresCloseEveryOwnedResource() throws Exception {
+    for (String fault :
+        List.of(
+            "size",
+            "initial-position",
+            "zero",
+            "invalid-eof",
+            "count",
+            "oversized",
+            "position",
+            "eof-buffer",
+            "eof-position",
+            "short",
+            "final-size",
+            "close",
+            "open",
+            "null")) {
+      var f = new Fixture("channel-" + fault);
+      f.channelFault = fault;
+      if (fault.equals("null")) {
+        assertThrows(NullPointerException.class, () -> f.subject().verifyCandidate(f.approval));
+        f.released();
+      } else refused(f);
+      assertEquals(1, f.channelFaultReached, "intended VERSION channel was reached: " + fault);
+      assertEquals(
+          fault.equals("open") ? 0 : 1,
+          f.channelCloses,
+          "channel normal close attempted once: " + fault);
+    }
+  }
+
+  @Test
+  void fullBom013EnumerationNullForeignAndDuplicateAreNotSignedChildren() throws Exception {
+    for (String fault : List.of("null", "foreign", "duplicate")) {
+      var f = new Fixture("enumeration-" + fault);
+      f.namesFault = fault;
+      refused(f);
+      assertEquals(1, f.namesFaultReached);
+      assertEquals(1, f.namesCloses);
+    }
+  }
+
   @Test
   void fullBom010OnlyFixedSignedBootProvisioningFileIsPermittedAndTamperRefuses() throws Exception {
     var f = new Fixture("signed-fixed-tmpfiles");
@@ -110,6 +203,8 @@ final class ReleasePayloadVerificationTest {
     final TreeMap<String, byte[]> payload = new TreeMap<>();
     ReleaseApproval approval;
     boolean readonly = true, nullNames, nullArchive, failNames, failArchive;
+    String channelFault = "", namesFault = "";
+    int channelFaultReached, channelCloses, namesFaultReached, namesCloses;
 
     Fixture(String name) throws Exception {
       opt = Files.createDirectories(temporary.resolve(name).resolve("opt"));
@@ -194,11 +289,97 @@ final class ReleasePayloadVerificationTest {
     }
 
     public SeekableByteChannel open(Path held) throws IOException {
-      return nio.open(held);
+      if (channelFault.isEmpty() || !Files.isSameFile(held, release.resolve("VERSION")))
+        return nio.open(held);
+      channelFaultReached++;
+      if (channelFault.equals("open")) throw new IOException("synthetic provider unavailable");
+      var channel = nio.open(held);
+      if (channelFault.equals("null")) {
+        channel.close();
+        channelCloses++;
+        return null;
+      }
+      return new SeekableByteChannel() {
+        int reads, sizes;
+
+        public int read(ByteBuffer buffer) throws IOException {
+          reads++;
+          if (channelFault.equals("zero")) return 0;
+          if (channelFault.equals("invalid-eof")) return -2;
+          if (channelFault.equals("short")) return -1;
+          int n = channel.read(buffer);
+          if (n >= 0 && channelFault.equals("count")) return n + 1;
+          if (n >= 0 && channelFault.equals("oversized")) {
+            buffer.put((byte) 7);
+            return n + 1;
+          }
+          if (n < 0 && channelFault.equals("eof-buffer")) buffer.put((byte) 7);
+          return n;
+        }
+
+        public long position() throws IOException {
+          if (channelFault.equals("initial-position")
+              || (reads > 0 && channelFault.equals("position"))
+              || (reads > 1 && channelFault.equals("eof-position"))) return channel.position() + 1;
+          return channel.position();
+        }
+
+        public long size() throws IOException {
+          sizes++;
+          return channel.size()
+              + ((channelFault.equals("size") || (sizes > 1 && channelFault.equals("final-size")))
+                  ? 1
+                  : 0);
+        }
+
+        public void close() throws IOException {
+          channel.close();
+          channelCloses++;
+          if (channelFault.equals("close")) throw new IOException("synthetic close unavailable");
+        }
+
+        public boolean isOpen() {
+          return channel.isOpen();
+        }
+
+        public int write(ByteBuffer buffer) {
+          throw new AssertionError("read-only verification");
+        }
+
+        public SeekableByteChannel position(long value) {
+          throw new AssertionError("no seek authority");
+        }
+
+        public SeekableByteChannel truncate(long value) {
+          throw new AssertionError("no mutation authority");
+        }
+      };
     }
 
     public DirectoryStream<Path> names(Path held) throws IOException {
       if (failNames) throw new IOException("PRIVATE");
+      if (!namesFault.isEmpty() && Files.isSameFile(held, release)) {
+        namesFaultReached++;
+        var stream = StartupReleaseManifest.Io.super.names(held);
+        var entries = new ArrayList<Path>();
+        stream.forEach(entries::add);
+        switch (namesFault) {
+          case "null" -> entries.add(null);
+          case "foreign" -> entries.add(temporary.resolve("foreign-child"));
+          case "duplicate" -> entries.add(entries.getFirst());
+          default -> throw new AssertionError("unregistered fixture");
+        }
+        return new DirectoryStream<>() {
+          public Iterator<Path> iterator() {
+            return entries.iterator();
+          }
+
+          public void close() throws IOException {
+            stream.close();
+            namesCloses++;
+          }
+        };
+      }
       return nullNames ? null : StartupReleaseManifest.Io.super.names(held);
     }
 

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BooleanSupplier;
 import java.util.function.IntConsumer;
 import org.jspecify.annotations.NullMarked;
 
@@ -189,10 +190,10 @@ public final class ApiProcessMain {
                                   try (var management =
                                       ApiManagementServer.open(
                                           information,
-                                          () ->
-                                              groupsReady.get()
-                                                  && !lifetime.stopping()
-                                                  && outbox.healthy())) {
+                                          applicationReadiness(
+                                              groupsReady::get,
+                                              lifetime::stopping,
+                                              outbox::healthy))) {
                                     System.err.println("API startup entered CONSUMERS");
                                     try (var runtime =
                                         ApiMessagingRuntime.start(
@@ -209,7 +210,8 @@ public final class ApiProcessMain {
                                         groupsReady.set(true);
                                         System.err.println("API startup entered ADMISSION_RELEASE");
                                         management.promote(ready);
-                                        lifetime.await(() -> runtime.ready() && outbox.healthy());
+                                        lifetime.await(
+                                            runtimeReadiness(runtime::ready, outbox::healthy));
                                       } finally {
                                         lifetime.stop();
                                         groupsReady.set(false);
@@ -223,6 +225,24 @@ public final class ApiProcessMain {
       // Exact normal whole-cleanup marker; generic stopped diagnostics are not success evidence.
       System.err.println("API cleanup complete");
     }
+  }
+
+  // PG-D389/PT-OPS-API-HEALTH001..003. These read-only predicates neither admit nor promote.
+  // Bind once, sample on each request, preserve short-circuit order and exact supplier failure.
+  static BooleanSupplier applicationReadiness(
+      BooleanSupplier groupsReady, BooleanSupplier stopping, BooleanSupplier outboxHealthy) {
+    Objects.requireNonNull(groupsReady, "consumer groups readiness");
+    Objects.requireNonNull(stopping, "process stop state");
+    Objects.requireNonNull(outboxHealthy, "outbox health");
+    return () ->
+        groupsReady.getAsBoolean() && !stopping.getAsBoolean() && outboxHealthy.getAsBoolean();
+  }
+
+  static BooleanSupplier runtimeReadiness(
+      BooleanSupplier consumersReady, BooleanSupplier outboxHealthy) {
+    Objects.requireNonNull(consumersReady, "consumers readiness");
+    Objects.requireNonNull(outboxHealthy, "outbox health");
+    return () -> consumersReady.getAsBoolean() && outboxHealthy.getAsBoolean();
   }
 
   static void fatal(Thread thread, Throwable failure) {
