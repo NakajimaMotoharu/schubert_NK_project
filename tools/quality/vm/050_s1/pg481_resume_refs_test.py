@@ -34,6 +34,11 @@ class FixedRuntime:
  def __truediv__(self,name):return runtime_path/name
  def iterdir(self):return [pathlib.Path('pg481-once-resume.conf')]
 env['RUNTIME']=FixedRuntime();env['compare'](after,True);check(True)
+historical=copy.deepcopy(before);historical['configuration']['other.service']['ExecStart']=historical['configuration']['other.service']['ExecStart'].replace('start_time=[n/a]','start_time=[Tue 2026-10-06 06:28:53 UTC]').replace('stop_time=[n/a]','stop_time=[Tue 2026-10-06 06:28:54 UTC]').replace('pid=0','pid=3419000').replace('code=(null)','code=exited').replace('status=0/0','status=0')
+env['before']=historical;env['compare'](after,True);check(True)
+for oldfield,newfield in [('path=/usr/bin/java','path=/usr/bin/foreign'),('ignore_errors=no','ignore_errors=yes'),(' -cp fixed',' -cp foreign')]:
+ bad=copy.deepcopy(after);bad['configuration']['other.service']['ExecStart']=bad['configuration']['other.service']['ExecStart'].replace(oldfield,newfield);refused(lambda:env['compare'](bad,True))
+env['before']=copy.deepcopy(before)
 env['compare'](copy.deepcopy(before),False);check(True)
 for key in fields:
  bad=copy.deepcopy(after);bad['configuration'][morning][key]='foreign';refused(lambda:env['compare'](bad,True))

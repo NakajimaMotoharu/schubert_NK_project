@@ -33,7 +33,11 @@ def compare(actual,changed):
    require(all(got[k]==conf[k] for k in CONFIG-{'ExecStart','DropInPaths'}))
    require(exec_record(got['ExecStart'])[:3]==('/usr/bin/java',new_argv,'no'))
    require(got['DropInPaths']==str(NATIVE)+' '+str(RUNTIME/NAME))
-  else:require(actual['configuration'][unit]==conf)
+  else:
+   got=actual['configuration'][unit]
+   require(all(got[k]==conf[k] for k in CONFIG-{'ExecStart'}))
+   old_decl=exec_record(conf['ExecStart']);new_decl=exec_record(got['ExecStart'])
+   require(old_decl is not None and new_decl is not None and old_decl[:3]==new_decl[:3])
  require(strict(RUNTIME/NAME,0o644,4096)==dropin)
  require(set(p.name for p in RUNTIME.iterdir())=={NAME})
 phase='PREFLIGHT';bus=None;refs=[];changed=False
