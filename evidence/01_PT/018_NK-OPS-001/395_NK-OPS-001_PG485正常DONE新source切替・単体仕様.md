@@ -1,5 +1,13 @@
 # 395 NK-OPS-001 PG485 正常DONE新source切替・単体仕様
 
+## PG486同契約改訂（2026-10-06 20:15）
+
+PG485/source8664の全6実成功と内record未網羅を396に保全し、CTERM010 test-only補完後のPG486 sourceを全6で固定する。実装工具=Pg486CompletedDeployment/pg486_completed_refs.py、host compile v2=独立Java25＋Python63項目/strict javac warning0、sourceはTools新変更込みで次固定commitに記録。初稿compile v1はimport未実装のNOT_RUN、失敗logを保全。BUG786は拒否用fixtureのprefix UUID置換誤り、全UUID同一literalへ是正しfresh別UUIDの受理も独立確認、red v1 actual1/green v2 actual0（63）を別保存。
+
+工具は新M→A→実専用DB/advisory71419602→10Unit持続Ref→三固定complete hash＋最新原24DB/423全列＋元snapshot raw hash→全現在tree/config/Unit署名宣言同値→旧ISSUEDのtyped readIssued→既存invalidate→新approval/currentの正規atomic切替→全原本/native保全＋新INVALID/同activationの独立ASCII照合→DB正常rollback/closeと実role backend0→Ref/child/A/M通常返却の順。新source/digest CLIは署名照合の要求値であり権限としない。全既存native/heapをnew-only私有archiveへ保存、旧run/receiptの更新・Unit start/reload・DDL・任意原本unlink0。SS343 SSC190範囲であり追加業務承認不要。
+
+BUG544予防nativeは、保存7source hash一致の修正Pg428ColdBootPreparationも同javacで新only工具へ含め、現非空Transfer/固定asset/configのfixtureSnapshotを切替前後で実行する。元675/21/16 host証拠を当新native成功へ流用せず、actual0/全新scope通常返却後だけ実証を追加する。旧close UNKNOWNは永久に監査保全。現時点native未実行、DONE485001..007の実環境受入は未了。
+
 2026-10-06、PG/PT。RD OPS009/DAT009、UI251、SS341/342/343 SSC190/191/196/198、QA047。Program=固定管理者配備工具（Production PT件数0）、対象Production source=`8664edc5c976274e5a2954858cb03f17bcc0e056`。実装・実試験前の独立期待値。新工具の実path/hash・command・結果は396又はprovisional manifestへ記録する。未実行をPASSにしない。
 
 ## 固定事前条件

@@ -14,6 +14,108 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
 final class CleanupTerminalRepositoryTest {
+  /** CTERM010 / SS332 SSC199: public values; literal seven-slot/time/identity oracle. */
+  @Test
+  void cterm010PublicValuesRejectInvalidTimeDuplicateAndForeignRun() {
+    var ended = Instant.parse("2026-09-13T02:00:01Z");
+    var success =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE);
+    var skipped =
+        new BatchStepResult(
+            BatchStepResult.Status.SKIPPED, 0, 0, 0, 0, BatchStepResult.Reason.ALREADY_SUCCESSFUL);
+    var entries = new ArrayList<CleanupTerminalRepository.Entry>();
+    for (String step :
+        List.of(
+            "CLEAN_NOTIFICATION",
+            "CLEAN_QUESTION",
+            "CLEAN_SESSION",
+            "CLEAN_INBOX_OUTBOX",
+            "CLEAN_LOG",
+            "CLEAN_BATCH_RUN",
+            "CLEAN_TRANSFER")) {
+      entries.add(
+          new CleanupTerminalRepository.Entry(
+              new BatchStepAttempt(
+                  entries.size() + 1, RUN, BatchStep.valueOf(step), 1, START, false),
+              ended,
+              success));
+    }
+    var first = entries.getFirst();
+    var maximum = Instant.parse("9999-12-31T23:59:59.999999Z");
+    assertEquals(
+        maximum, new CleanupTerminalRepository.Entry(first.attempt(), maximum, success).endedAt());
+    for (Instant invalid : List.of(maximum.plusNanos(1000), ended.plusNanos(1))) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupTerminalRepository.Entry(first.attempt(), invalid, success));
+    }
+    var foreign =
+        new BatchRun(UUID.fromString("00000000-0000-4000-8000-000000000003"), RUN.cutoff());
+    for (boolean duplicate : List.of(false, true)) {
+      var changed = new ArrayList<>(entries);
+      var second = entries.get(1).attempt();
+      changed.set(
+          1,
+          new CleanupTerminalRepository.Entry(
+              new BatchStepAttempt(
+                  duplicate ? 1 : 2, duplicate ? RUN : foreign, second.step(), 1, START, false),
+              ended,
+              success));
+      assertThrows(
+          IllegalArgumentException.class, () -> new CleanupTerminalRepository.Snapshot(changed));
+      var rejected =
+          changed.stream()
+              .map(
+                  e ->
+                      Optional.of(
+                          new CleanupTerminalRepository.RejectedEntry(
+                              e.attempt(), Optional.of(e.endedAt()), Optional.of(e.result()))))
+              .toList();
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupTerminalRepository.RejectedSnapshot(RUN, rejected));
+    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedEntry(
+                first.attempt(), Optional.of(START.minusSeconds(1)), Optional.of(success)));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedEntry(
+                first.attempt(), Optional.of(START), Optional.of(skipped)));
+    var skipAttempt = new BatchStepAttempt(100, RUN, BatchStep.CLEAN_NOTIFICATION, 2, START, true);
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedEntry(
+                skipAttempt, Optional.empty(), Optional.empty()));
+    var accepted =
+        entries.stream()
+            .map(
+                e ->
+                    Optional.of(
+                        new CleanupTerminalRepository.RejectedEntry(
+                            e.attempt(), Optional.of(e.endedAt()), Optional.of(e.result()))))
+            .toList();
+    assertEquals(accepted, new CleanupTerminalRepository.RejectedSnapshot(RUN, accepted).entries());
+    var wrongSlots = new ArrayList<>(accepted);
+    Collections.reverse(wrongSlots);
+    assertThrows(IllegalArgumentException.class,
+        () -> new CleanupTerminalRepository.RejectedSnapshot(RUN, wrongSlots));
+    assertEquals(entries, new CleanupTerminalRepository.Snapshot(entries).entries());
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupTerminalRepository.Snapshot(Arrays.asList(first, null)));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new CleanupTerminalRepository.RejectedSnapshot(
+                RUN, Arrays.asList(Optional.empty(), null)));
+  }
+
   @Test
   void cterm006ProjectionFaultsAndOwnedJdbcResources() throws Exception {
     for (boolean rejected : List.of(false, true)) {

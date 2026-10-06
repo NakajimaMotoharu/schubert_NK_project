@@ -1,5 +1,13 @@
 # PG484 CleanupDB境界・借用資源仕様
 
+## PG486 CTERM010 公開value record境界（2026-10-06）
+
+PG485 fresh実XMLで内record合計7branch/2line残を確認。Production変更/SQL変更/除外はせず、Entry/Snapshot/RejectedEntry/RejectedSnapshotの本来の公開invariantを独立literal fixtureで検証する。正常七slotはCLEAN_NOTIFICATION/QUESTION/SESSION/INBOX_OUTBOX/LOG/BATCH_RUN/TRANSFER、id1～7・run fixture・started2026-09-13T02:00:00Z・ended02:00:01Z・SUCCESS(1,1,0,0,NONE)。expectedはこの明示list/time/拒否契約でありrepository.readの戻り値から生成しない。
+
+Test ID=PT-OPS-CTERM010：上限9999-12-31T23:59:59.999999Zは受理、その+1000ns及び正常ended+1nsを拒否。第二slotのforeign runとduplicate id、RejectedEntryのended<started/non-skipped+SKIPPED/skipped+RUNNING(empty)、null collection要素を拒否。正常全七slotの両Snapshot値をliteral入力と一致確認する。public record factoryは入力にのみ使用、独立拒否oracleをProduction検査methodで生成しない。実PG18 fixtureの通常scopeを既存BeforeEachで維持する。
+
+command=`bash tools/quality/vm/050_s1/pg486_cleanup_terminal_selected_v1.sh`、source=3e6f1a304基点＋CTERM010 test-only dirty、private証跡WorkPG379/pg486-cleanup-terminal-selected-v1.*。当追記時点は試験実行中/結果未確定。Coverageはouter＋全4内record＋Projectionの四counter全miss0（分岐のないrecordはBRANCH無し）を実XMLで確認する。PG485全体成功を当新test/sourceの成功へ流用しない。
+
 NK-OPS-001/NK-BAT-001、CleanupTerminalRepository.read/references/readRejected/entry/check、RD DAT009/OPS009/MON004、UI251、SS331332341343/SSC063119120126、PG-D390。production入口のみ、実PG18 fixtureと公開JDBC probe、private reflection0。
 
 |Test ID|入力/操作・独立期待値|
