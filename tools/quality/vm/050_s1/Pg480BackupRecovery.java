@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 /** SSC198/BREC198009: isolated fixed Backup recovery, not generic admission or deployment. */
 public final class Pg480BackupRecovery {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg480-backup-tools-v1");
-  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg480-backup-recovery");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg480-backup-tools-v3");
+  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg480-backup-recovery-v3");
   static final Path REQUEST=Path.of("/run/schubert-nk/backup-request");
   static final String BOOT="e07aa706-1acd-4e65-b309-d7f330f79d54";
   static String phase="PREFLIGHT";
@@ -25,6 +25,7 @@ public final class Pg480BackupRecovery {
         && e.activation().run().cutoff().equals(Instant.parse("2026-10-06T06:28:43.734078Z"));
   }
   static void retain(){System.err.println("PG480_UNKNOWN phase="+phase+" ownershipRetained=true oldCloseNotInferred=true");for(;;)try{Thread.sleep(1000);}catch(InterruptedException notification){Thread.interrupted();}}
+  static void diagnose(Throwable failure){System.err.println("PG480_FAILURE type="+failure.getClass().getName());for(var frame:failure.getStackTrace())if(frame.getClassName().equals("Pg480BackupRecovery"))System.err.println("PG480_FRAME method="+frame.getMethodName()+" line="+frame.getLineNumber());}
   static void signature()throws Exception{
     Pg464CodeOnlyDeployment.configure("PG477","cce61f63900b1479f9f8dbdc338e222b1c8c38a3",Path.of("/opt/schubert-nk/releases/0.1.0-PG477"));
     var approval=Pg387TrustedDeployment.verify();
@@ -32,6 +33,7 @@ public final class Pg480BackupRecovery {
         && Arrays.equals(approval.encode(),Files.readAllBytes(Path.of("/etc/schubert-nk/release-approval/current"))));
     StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(approval);
     Pg464CodeOnlyDeployment.configure("PG479","bab704707b8fd7e0dc7581c4489f0892236efe73",Path.of("/opt/schubert-nk/releases/0.1.0-PG479"));
+    Pg387TrustedDeployment.freezeCandidate();
     var candidate=Pg387TrustedDeployment.verify();
     require(candidate.manifestSha256().equals("a1c34cddba7d02cc479ccbe311a7ef7210f31f8aa1070f7685a2985d5503f286"));
     for(String name:List.of("systemd","db/migration","config"))try(var paths=Files.walk(Path.of("/opt/schubert-nk/releases/0.1.0-PG477",name))){
@@ -59,8 +61,9 @@ public final class Pg480BackupRecovery {
     }catch(Exception failure){throw new IOException("fixed quarantine proof unavailable",failure);}
   }
   static final class References {
-    final Process child;final InputStream input;final OutputStream output;
-    References(String mode,int pid)throws Exception{
+    final Process child;final InputStream input;final OutputStream output;final java.sql.Connection database;final int backend;
+    References(String mode,int pid,java.sql.Connection db)throws Exception{
+      database=Objects.requireNonNull(db);backend=pid;
       Path log=TOOLS.resolve("refs-"+mode+".private.log");
       Files.createFile(log,java.nio.file.attribute.PosixFilePermissions.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rw-------")));
       child=new ProcessBuilder("/usr/bin/python3","-B",TOOLS.resolve("pg480_backup_refs.py").toString(),mode,Integer.toString(pid)).redirectError(log.toFile()).start();
@@ -75,7 +78,10 @@ public final class Pg480BackupRecovery {
       }throw new IOException("reference unavailable");
     }
     void check(BackupInterruptedStartRecovery.Phase value)throws IOException{
-      try{output.write((value.name()+"\n").getBytes(StandardCharsets.US_ASCII));output.flush();await("REF_CHECKED");original();}
+      try{
+        try(var s=database.createStatement();var r=s.executeQuery("select pg_backend_pid(),exists(select 1 from pg_locks where pid=pg_backend_pid() and locktype='advisory' and classid=0 and objid=71419602 and objsubid=1 and granted)")){
+          require(r.next() && r.getInt(1)==backend && r.getBoolean(2) && !r.next());}
+        output.write((value.name()+"\n").getBytes(StandardCharsets.US_ASCII));output.flush();await("REF_CHECKED");original();}
       catch(Exception failure){throw new IOException("continuous recovery proof refused",failure);}
     }
     void release()throws Exception{output.write("release\n".getBytes(StandardCharsets.US_ASCII));output.flush();await("REF_RELEASED");
@@ -94,7 +100,7 @@ public final class Pg480BackupRecovery {
             db.setReadOnly(true);db.setAutoCommit(false);int pid;
             try(var s=db.createStatement();var r=s.executeQuery("select pg_backend_pid(),set_config('application_name','PG480-fixed-recovery',false),pg_try_advisory_lock(71419602)")){
               require(r.next() && r.getBoolean(3));pid=r.getInt(1);require(!r.next());}
-            phase="REFERENCE_SCOPE";var refs=new References(args[0],pid);
+            phase="REFERENCE_SCOPE";var refs=new References(args[0],pid,db);
             try{
               phase="BORROWED_ROOT";var root=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),REQUEST);
               boolean touched=false;
@@ -115,7 +121,7 @@ public final class Pg480BackupRecovery {
             }catch(Exception|Error failure){retain();throw failure;}
           }catch(Exception|Error failure){retain();throw failure;}
           phase="A_SCOPE_CLOSE";return Boolean.TRUE;
-        }catch(Exception|Error failure){retain();throw failure;}
+        }catch(Exception|Error failure){diagnose(failure);retain();throw failure;}
       })).orElseThrow();phase="M_SCOPE_CLOSE";return result;}catch(Exception|Error failure){retain();throw failure;}
     })).orElseThrow());
     phase="COMPLETE_PUBLISH";Path done=SAVE.resolve("complete.private");

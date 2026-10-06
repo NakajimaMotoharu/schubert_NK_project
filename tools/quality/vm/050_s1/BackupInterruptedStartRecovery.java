@@ -13,7 +13,7 @@ import java.util.Objects;
  * Borrows the fixed request root; NEVER closes it, starts a unit or edits DB/request.
  */
 public final class BackupInterruptedStartRecovery {
-  public enum Phase { OBSERVING, BEFORE_RETIRE, RETIRED, REISOLATING, QUARANTINED }
+  public enum Phase { OBSERVING, BEFORE_RETIRE, RETIRING, RETIRED, REISOLATING, QUARANTINED }
   @FunctionalInterface
   public interface Proof { void verify(Phase phase) throws IOException; }
 
@@ -42,6 +42,7 @@ public final class BackupInterruptedStartRecovery {
       files.requirePresent(intent);
       phase[0]=Phase.BEFORE_RETIRE;
       proof.verify(phase[0]);
+      phase[0]=Phase.RETIRING;
       mightRetire=true;
       files.retire(intent);
       root.sync();

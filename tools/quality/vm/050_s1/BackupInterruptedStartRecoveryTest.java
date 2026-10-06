@@ -24,6 +24,17 @@ public final class BackupInterruptedStartRecoveryTest {
   public static void main(String[] args)throws Exception {
     Path temp=Files.createTempDirectory("pg480-marker-oracle-");
     try(var f=fixture(temp)) {
+      var inside=new ArrayList<Boolean>();
+      BackupInterruptedStartRecovery.retire(f.root,f,f,p->{
+        boolean present=Files.exists(f.parent.resolve("backup-start.intent"));
+        if(p==BackupInterruptedStartRecovery.Phase.BEFORE_RETIRE && !present)throw new IOException("literal before must be present");
+        if(p==BackupInterruptedStartRecovery.Phase.RETIRED && present)throw new IOException("literal after must be absent");
+        if(p.name().equals("RETIRING"))inside.add(present);
+      });
+      check(inside.contains(true) && inside.contains(false));
+      check(inside.get(0) && !inside.get(inside.size()-1));retained(f);
+    }
+    try(var f=fixture(temp)) {
       var phases=new ArrayList<BackupInterruptedStartRecovery.Phase>();
       BackupInterruptedStartRecovery.retire(f.root,f,f,phases::add);
       check(!Files.exists(f.parent.resolve("backup-start.intent")));
@@ -38,7 +49,7 @@ public final class BackupInterruptedStartRecoveryTest {
       check((Long)Files.getAttribute(f.parent.resolve("backup-start.intent"),"unix:ino")==ino);
       retained(f);
     }
-    for(var failing:List.of(BackupInterruptedStartRecovery.Phase.OBSERVING,BackupInterruptedStartRecovery.Phase.BEFORE_RETIRE,BackupInterruptedStartRecovery.Phase.RETIRED)) {
+    for(var failing:List.of(BackupInterruptedStartRecovery.Phase.OBSERVING,BackupInterruptedStartRecovery.Phase.BEFORE_RETIRE,BackupInterruptedStartRecovery.Phase.RETIRING,BackupInterruptedStartRecovery.Phase.RETIRED)) {
       try(var f=fixture(temp)) {
         IOException primary=new IOException("fixed failure");
         try { BackupInterruptedStartRecovery.retire(f.root,f,f,p->{if(p==failing)throw primary;});throw new AssertionError("failure returned success"); }

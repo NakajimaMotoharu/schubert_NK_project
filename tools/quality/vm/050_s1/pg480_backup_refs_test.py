@@ -1,7 +1,7 @@
 """Independent public fixture checks. AST loads definitions only; no DBus/VM side effect."""
-import ast,pathlib,os,stat,subprocess,tempfile
+import ast,pathlib,os,stat,subprocess,tempfile,json,hashlib,types
 source=pathlib.Path(__file__).with_name('pg480_backup_refs.py');tree=ast.parse(source.read_text())
-names=['require','metadata','strict','epoch_ok','request_ok','pending_rows','same','show']
+names=['require','metadata','strict','epoch_ok','request_ok','pending_rows','marker_namespace_ok','same','show']
 defs=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names]
 env={'os':os,'stat':stat,'pathlib':pathlib,'RUN':'49437eda-1681-43a9-883a-424eb55a6166','UNITS':['fixed.service']}
 exec(compile(ast.Module(body=defs,type_ignores=[]),str(source),'exec'),env)
@@ -37,3 +37,40 @@ with tempfile.TemporaryDirectory(prefix='pg480-literal-') as tmp:
  check(env['strict'](p,0o600,0)==b'');p.write_bytes(b'x');refused(lambda:env['strict'](p,0o600,0));p.chmod(0o640);refused(lambda:env['strict'](p,0o600,1))
  p.chmod(0o600);os.link(p,pathlib.Path(tmp)/'alias');refused(lambda:env['strict'](p,0o600,1));(pathlib.Path(tmp)/'alias').unlink();p.unlink();refused(lambda:env['strict'](p,0o600,1))
 print('PG480_REFERENCE_ORACLE assertions='+str(n)+' actual0=true vmMutation0=true')
+
+# BUG774/775: actually execute the new operator's loader with distinct public before-image
+# and pinned current policy. Genuine old helper remains unchanged; history is not blanked.
+definition=next(x for x in tree.body if isinstance(x,ast.FunctionDef) and x.name=='approved_configuration')
+policy=source.with_name('pg477_unit_references.py').read_bytes()
+check(hashlib.sha256(policy).hexdigest()=='b198cecd883e9a2f8cf2406dd2c92b0dca369ebd9ce3701c087205ef19311ca4')
+fields=set('ExecStart,DropInPaths,ReadWritePaths,User,Group,SupplementaryGroups,NoNewPrivileges,ProtectSystem,ProtectHome,PrivateTmp,PrivateDevices,RestrictSUIDSGID,CapabilityBoundingSet,AmbientCapabilities,UMask,LimitCORE,TimeoutStartUSec,TimeoutStopUSec,MemoryMax,TasksMax'.split(','))
+def record(argv,history):return '{ path=/usr/bin/java ; argv[]='+argv+' ; ignore_errors=no ; start_time=['+('Tue 2026-10-06 06:28:42 UTC' if history else 'n/a')+'] ; stop_time=['+('Tue 2026-10-06 06:58:42 UTC' if history else 'n/a')+'] ; pid='+('3418691' if history else '0')+' ; code='+('exited' if history else '(null)')+' ; status='+('143' if history else '0/0')+' }'
+old={k:'fixed-public-literal' for k in fields};old['ExecStart']=record('/usr/bin/java -cp fixed BackupWorker',False)
+fixture={'configuration':{'schubert-nk-backup.service':old}}
+class FixedPath:
+ def __init__(self,name):self.name=name
+ def __truediv__(self,name):return FixedPath(self.name+'/'+name)
+ def read_bytes(self):
+  assert self.name=='/var/lib/pgpt-s1-preservation/pg477-completed-tools-v1/pg477_unit_references.py';return policy
+ def read_text(self):
+  if self.name=='/var/lib/pgpt-s1-preservation/pg477-completed-tools-v1/pg477_unit_references.py':return policy.decode()
+  assert self.name=='/var/lib/pgpt-s1-preservation/pg477-stopped-tools-v3/refs-activate-before.private.json';return json.dumps(fixture)
+loader={'pathlib':types.SimpleNamespace(Path=FixedPath),'ast':ast,'json':json,'hashlib':hashlib,'CONFIG':fields,'require':env['require']}
+exec(compile(ast.Module(body=[definition],type_ignores=[]),str(source),'exec'),loader)
+conf=dict(old);conf['ExecStart']=record('/usr/bin/java -cp fixed BackupWorker',True)
+loader['approved_configuration']('schubert-nk-backup.service',conf);check(True)
+for history in ['0','143','9']:
+ value=dict(conf);value['ExecStart']=conf['ExecStart'].replace('status=143','status='+history)
+ loader['approved_configuration']('schubert-nk-backup.service',value);check(True) # Declaration only; full18 separately rejects foreign history.
+for key in fields-{'ExecStart'}:
+ value=dict(conf);value[key]='foreign';refused(lambda:loader['approved_configuration']('schubert-nk-backup.service',value))
+for value in [conf['ExecStart'].replace('BackupWorker','ForeignWorker'),conf['ExecStart'].replace('ignore_errors=no','ignore_errors=yes'),'',None]:
+ bad=dict(conf);bad['ExecStart']=value;refused(lambda:loader['approved_configuration']('schubert-nk-backup.service',bad))
+print('PG480_CONFIGURATION_ORACLE assertions='+str(n-44)+' actual0=true historyNotNormalized=true vmMutation0=true')
+before_count=n
+for phase,present,absent in [('OBSERVING',True,False),('BEFORE_RETIRE',True,False),('RETIRING',True,True),('RETIRED',False,True),('REISOLATING',True,True),('QUARANTINED',True,False)]:
+ check(env['marker_namespace_ok']({'backup-request','backup-start.intent'},phase)==present)
+ check(env['marker_namespace_ok']({'backup-request'},phase)==absent)
+ for names in [set(),{'backup-start.intent'},{'backup-request','foreign'},{'backup-request','backup-start.intent','foreign'}]:check(not env['marker_namespace_ok'](names,phase))
+for phase in [None,'FOREIGN','release']:check(not env['marker_namespace_ok']({'backup-request'},phase))
+print('PG480_NAMESPACE_ORACLE assertions='+str(n-before_count)+' actual0=true typedInternalBoundary=true vmMutation0=true')

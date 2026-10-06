@@ -1,0 +1,67 @@
+"""BUG773/SSC191 exact pre-mutation Java only pidfd handoff; historical close remains unknown."""
+import ast,hashlib,json,os,pathlib,select,signal,stat,subprocess,sys,time
+import dbus
+PID=3564075;TICKS=22777604;CLASS='1c3390df7759250713edaac8b59184c79f2890f428e2af61b19b1a5556676352'
+BOOT='e07aa706-1acd-4e65-b309-d7f330f79d54'
+ROOT=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-handoff-v1')
+SOURCE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-tools-v1/pg480_backup_refs.py')
+def require(v):
+ if not v:raise ValueError('exact Backup tool handoff refused')
+def tick():return int((pathlib.Path('/proc')/str(PID)/'stat').read_text().rpartition(')')[2].split()[19])
+def actor():
+ require(tick()==TICKS);p=pathlib.Path('/proc')/str(PID);args=(p/'cmdline').read_bytes().split(b'\0')
+ require(len(args)==7 and args[0]==b'/opt/jdk-25.0.4/bin/java' and args[1:3]==[b'--enable-native-access=ALL-UNNAMED',b'-cp'] and args[-3:]==[b'Pg480BackupRecovery',b'retire',b''])
+ require(hashlib.sha256(SOURCE.with_name('Pg480BackupRecovery.class').read_bytes()).hexdigest()==CLASS)
+ tasks=sorted(p.joinpath('task').iterdir());require(tasks and not any(t.joinpath('children').read_text().strip() for t in tasks) and tick()==TICKS)
+ targets=[]
+ for fd in p.joinpath('fd').iterdir():
+  try:targets.append(str(fd.readlink()))
+  except FileNotFoundError:continue
+ for name in ['maintenance.lock','startup-admission.lock']:
+  path=pathlib.Path('/run/schubert-nk')/name;s=path.lstat();require(s.st_uid==s.st_gid==0 and stat.S_IMODE(s.st_mode)==0o600 and s.st_nlink==1 and str(path) in targets)
+  matches=[]
+  for line in pathlib.Path('/proc/locks').read_text().splitlines():
+   f=line.split()
+   if len(f)>=8 and f[1:5]==['FLOCK','ADVISORY','WRITE',str(PID)]:
+    d=f[5].split(':')
+    if len(d)==3 and tuple(int(x,16) for x in d[:2])+(int(d[2]),)==(os.major(s.st_dev),os.minor(s.st_dev),s.st_ino):matches.append(line)
+  require(len(matches)==1)
+ require(not pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-recovery').exists())
+def snapshot():
+ require(pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==BOOT)
+ units={}
+ for u in UNITS:
+  v=show(u,FIELDS);require(v==previous['units'][u] and v['MainPID']==v['ControlPID']=='0' and not v['Job']);kernel(u);units[u]=v
+ require(command(['/usr/bin/sudo','-n','-u','postgres','/usr/bin/psql','-X','-q','-A','-t','-d','schubert_nk','-c',"select count(*) from pg_stat_activity where datname='schubert_nk' and usename in ('schubert_batch','schubert_api','schubert_web','schubert_inspector');"],4096).strip()==b'0')
+ paths=['/var/lib/schubert-nk/maintenance','/srv/schubert-nk/backup','/srv/schubert-nk/data/transfer','/run/schubert-nk/startup','/run/schubert-nk/backup-request','/run/schubert-nk/cleanup-request','/run/schubert-nk/expiry-request','/run/schubert-nk/pt-coverage','/etc/schubert-nk']
+ return {'units':units,'rows':rows(),'trees':{p:tree(pathlib.Path(p)) for p in paths},'current':str(pathlib.Path('/opt/schubert-nk/current').readlink())}
+def save(name,value):
+ with (ROOT/name).open('x') as f:os.fchmod(f.fileno(),0o600);json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+ fd=os.open(ROOT,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
+phase='PREFLIGHT';bus=None;refs=[]
+try:
+ require(os.geteuid()==0 and sys.argv[1:]==['handoff'] and not ROOT.exists());os.umask(0o077)
+ code=ast.parse(SOURCE.read_text());definitions=[n for n in code.body if isinstance(n,ast.FunctionDef) and n.name in ['command','metadata','tree','show','rows','kernel']]
+ require(len(definitions)==6);exec(compile(ast.Module(body=definitions,type_ignores=[]),'<fixed readonly witness>','exec'),globals())
+ previous=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg479-archive-diagnosis/after-terminal.private.json').read_text())
+ UNITS=list(previous['units']);FIELDS=set(next(iter(previous['units'].values())));actor();ROOT.mkdir(mode=0o700)
+ bus=dbus.SystemBus(private=True);manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager')
+ phase='REF_ACQUIRE'
+ for u in UNITS:manager.RefUnit(u);refs.append(u)
+ before=snapshot();actor();save('before.private.json',before)
+ fd=os.pidfd_open(PID,0)
+ try:
+  actor();require(snapshot()==before);phase='EXACT_PIDFD_TERM';signal.pidfd_send_signal(fd,signal.SIGTERM)
+  poll=select.poll();poll.register(fd,select.POLLIN);require(poll.poll(5000))
+ finally:os.close(fd)
+ end=time.monotonic()+5
+ while pathlib.Path('/proc',str(PID)).exists() and time.monotonic()<end:time.sleep(.01)
+ require(not pathlib.Path('/proc',str(PID)).exists());phase='AFTER_HANDOFF';after=snapshot();require(after==before);save('after.private.json',after)
+ require(not any(r.split()[4:5]==[str(PID)] for r in pathlib.Path('/proc/locks').read_text().splitlines()))
+ phase='REF_RELEASE'
+ for u in reversed(refs):manager.UnrefUnit(u)
+ bus.close();save('interrupted.private.json',{'oldPid':PID,'oldTicks':TICKS,'oldClass':CLASS,'oldCloseUnknown':True,'oldSuccessInferred':False,'allOldValuesUnchanged':True,'newScopeReturnedNormally':True,'newOwnershipRequired':True})
+ print('PG480_HANDOFF exactPidfdTerm=true allOldValuesUnchanged=true oldCloseUnknown=true newScopeReturnedNormally=true starts0=true')
+except Exception:
+ print('PG480_HANDOFF_UNKNOWN phase='+phase+' refsRetained=true',file=sys.stderr,flush=True)
+ while True:time.sleep(1)

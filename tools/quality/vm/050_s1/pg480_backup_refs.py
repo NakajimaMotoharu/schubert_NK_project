@@ -3,8 +3,8 @@ No service/DB/request mutation. Raw snapshots are Root private; replies contain 
 """
 import ast,hashlib,json,os,pathlib,stat,subprocess,sys,time
 import dbus
-TOOLS=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-tools-v1')
-SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-recovery')
+TOOLS=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-tools-v3')
+SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg480-backup-recovery-v3')
 BOOT='e07aa706-1acd-4e65-b309-d7f330f79d54'
 RUN='49437eda-1681-43a9-883a-424eb55a6166'
 PARENT='795eec6b633244148b40b26d0251a8ed'
@@ -71,9 +71,14 @@ def configuration_fields():
 def approved_configuration(unit,conf):
  import re
  directory=pathlib.Path('/var/lib/pgpt-s1-preservation/pg477-stopped-tools-v3')
- source=ast.parse((directory/'pg477_unit_references.py').read_text());names=['exec_record','after_exec','same_declaration','signed_declaration','effective_rw']
+ policy=pathlib.Path('/var/lib/pgpt-s1-preservation/pg477-completed-tools-v1/pg477_unit_references.py')
+ require(hashlib.sha256(policy.read_bytes()).hexdigest()=='b198cecd883e9a2f8cf2406dd2c92b0dca369ebd9ce3701c087205ef19311ca4')
+ source=ast.parse(policy.read_text());names=['exec_record','after_exec','same_declaration','signed_declaration','effective_rw']
  definitions=[n for n in source.body if isinstance(n,ast.FunctionDef) and n.name in names];require(len(definitions)==5)
  env={'re':re};exec(compile(ast.Module(body=definitions,type_ignores=[]),'<fixed configuration policy>','exec'),env)
+ # This immutable old policy expected no newer startup. Here declaration alone is compared;
+ # exact real auxiliary history remains separately bound to full18 and PID1 receipts below.
+ env['after_exec']=lambda value:env['exec_record'](value) is not None
  old=json.loads((directory/'refs-activate-before.private.json').read_text())['configuration'][unit]
  allowed={'ExecStart','DropInPaths','ReadWritePaths'} if unit in ['schubert-nk-inbox-inspector.service','schubert-nk-bootstrap-admin.service','schubert-nk-morning-controller.service'] else {'ExecStart'}
  require(all(conf[k]==old[k] for k in CONFIG-allowed) and env['signed_declaration'](unit,old['ExecStart'],conf['ExecStart']))
@@ -86,7 +91,12 @@ def request_ok(request):
  return isinstance(request,bytes) and request.startswith(('NKBACKUP1\nrun='+RUN+'\nstarted=').encode()) and request.endswith(b'\n') and len(request.splitlines())==3
 def pending_rows(values):
  return (isinstance(values,list) and len(values)==2 and {r.get('step') for r in values}=={'BACKUP_DB','BACKUP_CONFIG'} and all(r.get('run_id')==RUN and r.get('status')=='RUNNING' and r.get('ended_at') is None and all(r.get(k)==0 for k in ['target_count','success_count','failure_count','byte_count']) and r.get('error_code') is None and r.get('error_summary') is None for r in values))
-def snapshot(phase):
+def marker_namespace_ok(names,phase):
+ if phase not in ['OBSERVING','BEFORE_RETIRE','RETIRING','RETIRED','REISOLATING','QUARANTINED']:return False
+ if names not in [{'backup-request'},{'backup-request','backup-start.intent'}]:return False
+ marked='backup-start.intent' in names
+ return marked if phase in ['OBSERVING','BEFORE_RETIRE','QUARANTINED'] else not marked if phase=='RETIRED' else True
+def snapshot(phase,database_required=True):
  require(owner()==held and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==BOOT and not pathlib.Path('/proc/3418691').exists())
  units={};conf={}
  for unit in UNITS:
@@ -99,7 +109,10 @@ def snapshot(phase):
  for kind,job,message in [('start','253068','39f53479d3a045ac8e11786248231fbf'),('stop','253215','9d1aaa27d60140bd96365438aad20286')]:
   matches=[r for r in journal if r.get('_PID')=='1' and r.get('UNIT')=='schubert-nk-backup.service' and r.get('INVOCATION_ID')==BACKUP and r.get('JOB_TYPE')==kind and r.get('JOB_ID')==job and r.get('JOB_RESULT')=='done' and r.get('MESSAGE_ID')==message]
   require(len(matches)==1)
- locked_database();db=rows()
+ if database_required:locked_database()
+ else:
+  require(command(['/usr/bin/sudo','-n','-u','postgres','/usr/bin/psql','-X','-q','-A','-t','-d','schubert_nk','-c',"select count(*) from pg_stat_activity where datname='schubert_nk' and usename in ('schubert_batch','schubert_api','schubert_web','schubert_inspector'); select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted;"],4096).splitlines()==[b'0',b'0'])
+ db=rows()
  original=tree(pathlib.Path('/var/lib/schubert-nk/maintenance'));backup=tree(pathlib.Path('/srv/schubert-nk/backup'));transfer=tree(pathlib.Path('/srv/schubert-nk/data/transfer'))
  require(original==previous['original'] and backup==previous['backup'] and transfer==previous['transfer'])
  startup=tree(pathlib.Path('/run/schubert-nk/startup'))
@@ -107,9 +120,7 @@ def snapshot(phase):
  epoch=strict(pathlib.Path('/run/schubert-nk/startup/epoch.current'),0o600,1024)
  require(epoch_ok(epoch))
  requestroot=pathlib.Path('/run/schubert-nk/backup-request');names=set(p.name for p in requestroot.iterdir());marked='backup-start.intent' in names
- require(names==({'backup-request','backup-start.intent'} if marked else {'backup-request'}))
- if phase in ['OBSERVING','BEFORE_RETIRE','QUARANTINED']:require(marked)
- if phase=='RETIRED':require(not marked)
+ require(marker_namespace_ok(names,phase))
  request=strict(requestroot/'backup-request',0o600,400)
  require(request_ok(request))
  if marked:require(strict(requestroot/'backup-start.intent',0o600,0)==b'')
@@ -137,16 +148,20 @@ try:
  fd=os.open(SAVE,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  print('REF_READY',flush=True)
  for line in sys.stdin.buffer:
-  name=line.rstrip(b'\n').decode('ascii');require(name in ['OBSERVING','BEFORE_RETIRE','RETIRED','REISOLATING','QUARANTINED','release'])
+  name=line.rstrip(b'\n').decode('ascii');require(name in ['OBSERVING','BEFORE_RETIRE','RETIRING','RETIRED','REISOLATING','QUARANTINED','release'])
   phase=name
   if name=='release':
    # Caller has closed DB; dedicated readback above is repeated before that close.
-   require(owner()==held)
+   same(snapshot('RETIRED' if sys.argv[1]=='retire' else 'BEFORE_RETIRE',False))
    for unit in UNITS:require(show(unit,FIELDS)==before['units'][unit]);kernel(unit)
    for unit in reversed(refs):manager.UnrefUnit(unit)
    bus.close();print('REF_RELEASED',flush=True);sys.exit(0)
   same(snapshot(name));print('REF_CHECKED',flush=True)
  raise ValueError('owner channel ended early')
-except Exception:
+except Exception as failure:
+ import traceback
+ print('PG480_REFERENCE_FAILURE type='+type(failure).__name__,file=sys.stderr,flush=True)
+ for frame in traceback.extract_tb(failure.__traceback__):
+  if frame.filename==__file__:print('PG480_REFERENCE_FRAME method='+frame.name+' line='+str(frame.lineno),file=sys.stderr,flush=True)
  print('REF_FAILED',flush=True);print('PG480_REFERENCE_UNKNOWN phase='+phase+' ownerRetained=true',file=sys.stderr,flush=True)
  while True:time.sleep(1)
