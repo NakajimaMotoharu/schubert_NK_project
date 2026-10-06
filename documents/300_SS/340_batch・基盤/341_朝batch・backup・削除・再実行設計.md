@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC199（2026-10-06、BUG784/YKT560）：Cleanup終端/拒否/元成功参照のDB readbackはSS332のSSC063/199合成例外契約に従う。親の借用transactionと期限は保持し、未知provider/closeを既知DB失敗へ補完しない。各owned Statement/ResultSetは正常closeまで値不返却、七stepと十四列のvalue不正は狭いpure検査だけで固定SQL不正へ分類する。readback成功だけで原本・Unit・OS/root/Epoch authorityを追加しない。CTERM006～008の正常/異常/204合成・原行SQL後条件、必要全回帰/同source実経路を別に確認する。親未知時のretention/再隔離、古いUNKNOWN-close記録、業務結果/実receiptは不変更。
+
 ## SSC198 Backup途中保全後の正規resume（2026-10-06、BUG771/YKT551）
 
 SSC198限定補足（同日17:02、通常resumeのUnit束縛）：未完了active/pendingの通常 `MorningResumeAdmission` は同activationを保持でき、元run/cutoffを変えない。「必ず新activation」を期待値にしない。親は新実Invocation/startから元30分budgetを持つ。operatorのpending配備とは別の正常所有区間でSS343所定の一回用runtime drop-inを準備し、durable新予約とobserver先行後に固定Morning Unitへ一回だけ外部startする。送達不明/既予約は再付着し同startを繰り返さない。ABANDONED化、requestの新transaction確認・置換、fresh Backupと後続処理はProduction通常resumeが行い、operatorでは行わない。元PG478のtimeout/旧close未知は新実行と別に維持する。
