@@ -12,3 +12,5 @@ Production source a2e98ce9e96c42425921e3686e8ae7a94bff9e6c、PG495/schema028。�
 実行: `python3 -B tools/quality/vm/050_s1/pg525_prestop_handoff_native_v1.py`。SSH/stdout/logはRoot/host私有へ保存、GitにはSHA・終了値・集計のみ。new-only予約の再実行は禁止。終了前preflightは同source execute(False)で読み取りだけ行う。旧PG524 actual143になってもclose UNKNOWNは正常化しない。
 
 静的: Python undefined0（固定AST注入名だけ）、独立111assert。工具試験はProduction PT/coverageへ加算しない。Production全回帰/native100・正式認定は未更新。VM結果は実行後追記する。
+
+実結果: source886551e32、native3925 actual0/log997c0de4…、Root before65d6da45…/completeee4317dc…。Ref→Java限定TERM/全owner消失・自peer/FLOCK0/全raw前後二読/live4保持/業務操作0を独立再読。旧native96236はactual143/947.317479852s/log1a8d0997…・closeUNKNOWN維持。safe=evidence/provisional/PG525-prestop-owned-handoff-v1/manifest.json。PG526fresh再試験と横展開閉鎖は未完。
