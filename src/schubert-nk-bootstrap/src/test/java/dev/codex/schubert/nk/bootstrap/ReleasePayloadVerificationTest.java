@@ -21,6 +21,56 @@ import org.junit.jupiter.api.io.TempDir;
  */
 final class ReleasePayloadVerificationTest {
   @Test
+  void fullBom014ArchiveMetadataAndStreamDisagreementRefuseAndClose() throws Exception {
+    for (String fault :
+        List.of(
+            "duplicate",
+            "negative-size",
+            "oversized-entry",
+            "short-stream",
+            "long-stream",
+            "too-many")) {
+      var f = new Fixture("archive-contract-" + fault);
+      f.archiveFault = fault;
+      refused(f);
+      assertEquals(1, f.archiveFaultReached, "the API archive contract was exercised");
+      assertEquals(1, f.archiveCloses, "the acquired archive was closed exactly once");
+      assertEquals(
+          fault.endsWith("stream") ? 1 : 0,
+          f.archiveStreamCloses,
+          "entry stream ownership is not leaked on size disagreement");
+    }
+  }
+
+  @Test
+  void fullBom015MigrationEntriesBelongOnlyToApiAndHaveSqlSuffix() throws Exception {
+    var wrongRole = new Fixture("migration-wrong-role");
+    wrongRole.payload.put("web/web.jar", jar(Map.of(SQL_PATH, SQL)));
+    wrongRole.publish();
+    refused(wrongRole);
+    var wrongSuffix = new Fixture("migration-wrong-suffix");
+    wrongSuffix.payload.put(
+        "api/api.jar", jar(Map.of(SQL_PATH, SQL, "db/migration/notes.txt", new byte[] {1})));
+    wrongSuffix.publish();
+    refused(wrongSuffix);
+    var version = new Fixture("signed-wrong-version-bytes");
+    version.payload.put("VERSION", "1.2.3-OTHER\n".getBytes(StandardCharsets.US_ASCII));
+    version.publish();
+    refused(version);
+  }
+
+  @Test
+  void fullBom016ForeignDeviceAndOversizedMaterialRefuseBeforeRead() throws Exception {
+    for (String fault : List.of("directory-device", "payload-device", "material-size")) {
+      var f = new Fixture("metadata-" + fault);
+      f.metadataFault = fault;
+      refused(f);
+      assertTrue(f.metadataFaultReached > 0, "the intended held inode metadata was observed");
+      assertEquals(0, f.versionOpens, "invalid namespace/material is refused before VERSION read");
+    }
+  }
+
+  @Test
   void fullBom011IndependentHostileZipAndManifestVectors() throws Exception {
     Map<String, byte[]> manifestVectors = new LinkedHashMap<>();
     for (String value :
@@ -203,8 +253,9 @@ final class ReleasePayloadVerificationTest {
     final TreeMap<String, byte[]> payload = new TreeMap<>();
     ReleaseApproval approval;
     boolean readonly = true, nullNames, nullArchive, failNames, failArchive;
-    String channelFault = "", namesFault = "";
+    String channelFault = "", namesFault = "", archiveFault = "", metadataFault = "";
     int channelFaultReached, channelCloses, namesFaultReached, namesCloses;
+    int archiveFaultReached, archiveCloses, archiveStreamCloses, metadataFaultReached, versionOpens;
 
     Fixture(String name) throws Exception {
       opt = Files.createDirectories(temporary.resolve(name).resolve("opt"));
@@ -281,6 +332,16 @@ final class ReleasePayloadVerificationTest {
       value.put("uid", 0);
       int mode = (Integer) value.get("mode");
       value.put("gid", mode == 040755 || mode == 0120777 ? 0 : 986);
+      if (metadataFault.equals("directory-device") && Files.isSameFile(held, release)) {
+        value.put("dev", ((Number) value.get("dev")).longValue() + 1);
+        metadataFaultReached++;
+      } else if (!metadataFault.isEmpty() && Files.isSameFile(held, release.resolve("VERSION"))) {
+        if (metadataFault.equals("payload-device"))
+          value.put("dev", ((Number) value.get("dev")).longValue() + 1);
+        else if (metadataFault.equals("material-size")) value.put("size", 67_108_865L);
+        else throw new AssertionError("unregistered fixture");
+        metadataFaultReached++;
+      }
       return value;
     }
 
@@ -289,6 +350,7 @@ final class ReleasePayloadVerificationTest {
     }
 
     public SeekableByteChannel open(Path held) throws IOException {
+      if (Files.isSameFile(held, release.resolve("VERSION"))) versionOpens++;
       if (channelFault.isEmpty() || !Files.isSameFile(held, release.resolve("VERSION")))
         return nio.open(held);
       channelFaultReached++;
@@ -385,6 +447,53 @@ final class ReleasePayloadVerificationTest {
 
     public ZipFile archive(Path held) throws IOException {
       if (failArchive) throw new IOException("PRIVATE");
+      if (!archiveFault.isEmpty() && Files.isSameFile(held, release.resolve("api/api.jar"))) {
+        archiveFaultReached++;
+        return new ZipFile(held.toFile()) {
+          public int size() {
+            return archiveFault.equals("too-many") ? 131073 : super.size();
+          }
+
+          public Enumeration<? extends ZipEntry> entries() {
+            var entries = new ArrayList<ZipEntry>();
+            super.entries().asIterator().forEachRemaining(entries::add);
+            if (archiveFault.equals("duplicate")) entries.add(entries.getFirst());
+            for (int index = 0; index < entries.size(); index++) {
+              var entry = entries.get(index);
+              if (entry.getName().equals(SQL_PATH)) {
+                if (archiveFault.equals("negative-size"))
+                  entries.set(
+                      index,
+                      new ZipEntry(entry) {
+                        public long getSize() {
+                          return -1;
+                        }
+                      });
+                else if (archiveFault.equals("oversized-entry")) entry.setSize(67_108_865);
+              }
+            }
+            return Collections.enumeration(entries);
+          }
+
+          public InputStream getInputStream(ZipEntry entry) throws IOException {
+            if (!archiveFault.endsWith("stream") || !entry.getName().equals(SQL_PATH))
+              return super.getInputStream(entry);
+            byte[] bytes =
+                Arrays.copyOf(SQL, SQL.length + (archiveFault.equals("short-stream") ? -1 : 1));
+            return new ByteArrayInputStream(bytes) {
+              public void close() throws IOException {
+                super.close();
+                archiveStreamCloses++;
+              }
+            };
+          }
+
+          public void close() throws IOException {
+            super.close();
+            archiveCloses++;
+          }
+        };
+      }
       return nullArchive ? null : StartupReleaseManifest.Io.super.archive(held);
     }
 
