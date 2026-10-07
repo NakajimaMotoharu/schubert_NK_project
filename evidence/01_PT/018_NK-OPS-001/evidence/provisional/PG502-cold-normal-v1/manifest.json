@@ -1,0 +1,100 @@
+{
+  "id": "PG501-failure-owned-handoff-PG502-cold-v1",
+  "classification": "PROVISIONAL_LIMITED_OPERATIONS_PT_NOT_FORMAL",
+  "recordedAtJST": "2026-10-08T01:22:17+09:00",
+  "branch": "dev-foundation",
+  "gitHeadBefore": "63fd894c2a28ad9762a7f9bb41922abbcb45ccc6",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "productionRun": "PG495",
+  "toolSourceHashes": {
+    "tools/quality/vm/050_s1/Pg501ColdPreparation.java": "8f7f67cb3af0f318fecb8541be24dfa24415caee1df63678d41735a553e5f3f6",
+    "tools/quality/vm/050_s1/pg501_cold_refs.py": "d50a95f0522b1b63a9b52c3454f77083309595147e42740c2836cfa75b24b382",
+    "tools/quality/vm/050_s1/pg501_cold_owned_handoff.py": "74ed8b378b11aaa6d2e35292407c797db75f54658b35c79312d7fb0aee9b952c",
+    "tools/quality/vm/050_s1/pg501_cold_handoff_test.py": "5bb88b37ee655446c8a6a62a6beb8b83ad4cd185109fefb107522653d90e87b9",
+    "tools/quality/vm/050_s1/pg501_cold_handoff_native_v1.py": "5ecf5b3822c84c07d858cdb0b1eaa719aec296d07711b676193b6ca1b65730f3",
+    "tools/quality/vm/050_s1/Pg502ColdPreparation.java": "6c43c4d86e98f21b3d7ada83537952fb5e44acdad2fdf3bc8f8d907f25aa8d6a",
+    "tools/quality/vm/050_s1/Pg502DatabaseContractTest.java": "4c3968875be512a4ef1c1ed6484fba1acf19b49b272958b5c870f824a29061fc",
+    "tools/quality/vm/050_s1/pg502_cold_refs.py": "06cc9b07c617417493358b3cc485f39984238f46cef4cc3f81dc116fbd8b7f3f",
+    "tools/quality/vm/050_s1/pg502_cold_test.py": "3b431e9fa0823925616bad4a08514eff80dcf6ba05fd527b9a97190b65ec673b",
+    "tools/quality/vm/050_s1/pg502_cold_compile_v1.sh": "62cf948669bee4e64d5d7e061f68a587466b3c575f1b4841a264eff30458ad70",
+    "tools/quality/vm/050_s1/pg502_cold_native_v1.py": "d7236e6c446e999c108cb1327d246eaa00f8480048a9664b066bec6790be3203"
+  },
+  "environment": {
+    "os": null,
+    "jdk": "25.0.4 (fixed /opt path; fresh version output not captured)",
+    "python": null,
+    "guestBoot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "versionLimit": "Unknown current version fields retained null; no historical versions substituted."
+  },
+  "tests": [
+    {
+      "ids": "PT-OPS-PG501-081..104",
+      "independentAssertions": 24,
+      "exitCode": 0,
+      "scope": "operator identity vectors; signals0"
+    },
+    {
+      "id": "PT-OPS-PG501-105",
+      "command": "python3 -B tools/quality/vm/050_s1/pg501_cold_handoff_native_v1.py",
+      "exitCode": 0,
+      "expected": "fixed child then parent owned TERM only; full original DB/trees and10 cold units unchanged twice; peers/advisory/locks0; oldCloseUNKNOWN",
+      "actual": "all expected conditions observed",
+      "privateLogSha256": "bef938a9f99ed9e0128804e61f534ac5571ced587cd1919ad9347ed05f72619f"
+    },
+    {
+      "id": "PG501-original-native-v1",
+      "exitCode": 143,
+      "result": "INTERRUPTED_OWNED_TERM_NOT_NORMAL_CLOSE",
+      "privateLogSha256": "6be67f86b027f6a04ec73c4210ff1e8ad64a771f720ffbfb67676f37fb58141d"
+    },
+    {
+      "ids": "PT-OPS-PG502-001..076",
+      "independentAssertions": 76,
+      "exitCode": 0,
+      "scope": "cold/epoch/null/foreign/bounded pure guards"
+    },
+    {
+      "ids": "PT-OPS-PG502-077..092",
+      "independentAssertions": 16,
+      "exitCode": 0,
+      "scope": "5 rejected JDBC parent modes/statement0; regular RW projection/lifecycle contracts"
+    },
+    {
+      "ids": "PT-OPS-PG502-093..096",
+      "command": "python3 -B tools/quality/vm/050_s1/pg502_cold_native_v1.py",
+      "exitCode": 0,
+      "expected": "fresh RW-parent/independent RO/10Ref/M-A/typed BOM187/new boot INVALID1, requests empty, nine coverage owners/modes, full24/442 and102 originals unchanged, all new scopes normal",
+      "actual": "all expected conditions observed; oldRuntimeRetired=0/start=0/DB updates=0",
+      "privateLogSha256": "90e8fd828a115e1a88223dd4909a73a4710d27434907279429961318a5d3e09c"
+    }
+  ],
+  "rootPrivateEvidence": {
+    "refsAfterSha256": "07d74f8b4a5dbf99b801ff2f272e57d1e693dfba61d323800dc180fc6b6d2f49",
+    "completeSha256": "e83c845bb124996d820dd47e50c52b8b05c1eb683a0be99c4fe75e452db03f29",
+    "rawGitStored": false
+  },
+  "expectedOracle": "SS331/332 borrowed RW contract; SS343 fixed cold full18 and independent ASCII golden; immutable PG498after full24/442/five trees102 original metadata/hash; old read-only snapshots not regenerated from production",
+  "related": [
+    "BUG-810",
+    "YKT-579",
+    "SSC-206",
+    "SSC-207"
+  ],
+  "designMain": "2937a713740e50d5b5638d98e5cfd3682257cfdf",
+  "coverage": {
+    "productionTestIncrement": 0,
+    "formalIncrement": 0,
+    "line": null,
+    "branch": null,
+    "class": null,
+    "method": null,
+    "reason": "Operator partial execution does not certify production/native coverage."
+  },
+  "notAccepted": [
+    "Old runtime genuine retirement; old scope normal close",
+    "True ordinary parent DONE/API retained Web/Caddy owned stop",
+    "same-source native100/full formal quality",
+    "all N11/N14 fault/competition matrices"
+  ],
+  "sanitization": "No credential/raw session/token/key/DB dump/original data in this artifact; original private files retained."
+}
