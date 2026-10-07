@@ -21,9 +21,9 @@ import org.junit.jupiter.api.io.TempDir;
  */
 final class ReleasePayloadVerificationTest {
   @Test
-  void fullBom017InterruptAfterChannelAcquisitionClosesWithoutReading() throws Exception {
+  void fullBom017InterruptDuringReadClosesAcquiredChannel() throws Exception {
     var f = new Fixture("interrupt-after-acquire");
-    f.channelFault = "interrupt-on-open";
+    f.channelFault = "interrupt-after-position";
     try {
       refused(f);
     } finally {
@@ -31,6 +31,7 @@ final class ReleasePayloadVerificationTest {
     }
     assertEquals(1, f.channelFaultReached);
     assertEquals(1, f.channelCloses);
+    assertEquals(1, f.channelPositiveReads, "one completed read precedes cancellation");
   }
 
   @Test
@@ -302,6 +303,7 @@ final class ReleasePayloadVerificationTest {
     boolean readonly = true, nullNames, nullArchive, failNames, failArchive;
     String channelFault = "", namesFault = "", archiveFault = "", metadataFault = "";
     int channelFaultReached, channelCloses, namesFaultReached, namesCloses;
+    int channelPositiveReads;
     int archiveFaultReached, archiveCloses, archiveStreamCloses, metadataFaultReached, versionOpens;
 
     Fixture(String name) throws Exception {
@@ -408,7 +410,6 @@ final class ReleasePayloadVerificationTest {
         channelCloses++;
         return null;
       }
-      if (channelFault.equals("interrupt-on-open")) Thread.currentThread().interrupt();
       return new SeekableByteChannel() {
         int reads, sizes;
 
@@ -418,6 +419,7 @@ final class ReleasePayloadVerificationTest {
           if (channelFault.equals("invalid-eof")) return -2;
           if (channelFault.equals("short")) return -1;
           int n = channel.read(buffer);
+          if (n > 0) channelPositiveReads++;
           if (n >= 0 && channelFault.equals("count")) return n + 1;
           if (n >= 0 && channelFault.equals("oversized")) {
             buffer.put((byte) 7);
@@ -431,7 +433,10 @@ final class ReleasePayloadVerificationTest {
           if (channelFault.equals("initial-position")
               || (reads > 0 && channelFault.equals("position"))
               || (reads > 1 && channelFault.equals("eof-position"))) return channel.position() + 1;
-          return channel.position();
+          long actual = channel.position();
+          if (reads > 0 && channelFault.equals("interrupt-after-position"))
+            Thread.currentThread().interrupt();
+          return actual;
         }
 
         public long size() throws IOException {

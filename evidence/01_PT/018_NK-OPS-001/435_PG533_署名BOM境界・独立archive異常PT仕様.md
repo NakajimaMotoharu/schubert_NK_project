@@ -14,7 +14,7 @@
 | PT-OPS-FULLBOM014 / fullBom014ArchiveMetadataAndStreamDisagreementRefuseAndClose | duplicate ZIP entry、SQL size -1/67108865、SQL stream長 -1/+1、archive entry count 131073を個別注入 | 承認payloadは一意、material最大67108864、stream長=entry size、archive上限131072。全件IOException/redacted message、狙ったarchive一回、archive close一回、取得済みentry stream close一回 |
 | PT-OPS-FULLBOM015 / fullBom015MigrationEntriesBelongOnlyToApiAndHaveSqlSuffix | Web内SQL、API内非SQL migration、署名hashと合致するが異なるVERSION bytes | SQLはAPIのみ/.sql、VERSIONは承認release+LF。署名一致だけでは受入不可。IOException、全owned FD解放 |
 | PT-OPS-FULLBOM016 / fullBom016ForeignDeviceAndOversizedMaterialRefuseBeforeRead | release directory/ VERSIONのforeign device、VERSION material size 67108865 | 同一filesystem/最大material契約違反をVERSION channel取得前に拒否。狙ったmetadata実到達、VERSION open 0、全owned FD解放 |
-| PT-OPS-FULLBOM017 / fullBom017InterruptAfterChannelAcquisitionClosesWithoutReading | VERSION channel取得直後にcallerのinterrupt、最後にtest側で解除 | read前に拒否、取消を勝手に解除0、取得済channelを一回close、owned FD全解放 |
+| PT-OPS-FULLBOM017 / fullBom017InterruptDuringReadClosesAcquiredChannel | VERSION最初のpositive read/position後にcallerのinterrupt、最後にtest側で解除 | 次read-loop入口で拒否、取消を勝手に解除0、取得済channelを一回close、owned FD全解放。v5の取得直後取消ではFileChannel自身がloop前に拒否したためv6で明示した到達を検証 |
 | PT-OPS-FULLBOM018 / fullBom018ManifestBoundsSameSizeTamperAndEnumerationLimitRefuse | manifest size 0/1048577、同サイズVERSION byte改変、directory entries16385 | manifest範囲1..1048576、hash一致、列挙最大16384に反するため拒否、列挙stream一回close |
 | PT-OPS-FULLBOM019 / fullBom019RegisteredThirdPartyJarIsNotAnNkSharedDependency | 独立literal登録したorg.example:vendor:1.0/API lib jar | NK共通依存と区別し正規third-party jarを受入、独立SHAとartifact件数一致、FD全解放 |
 
