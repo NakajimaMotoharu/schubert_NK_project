@@ -21,7 +21,7 @@
 
 - 初回source254aa287a/v1 actual1（jar版解決）、source42f0e6cbc/v2 actual1（SpotBugs prefix解決）、どちらも親pomに起因するcompile/PT前拒否。BUG826/YKT595起票後、依存storage/bootstrapを明示選択し親pomを含めない別v3へ固定、`bash tools/quality/vm/050_s1/pg533_bom_pt_v3.sh <full HEAD>`。旧v1/v2を再実行しない。
 - Host Linux/JDK25.0.4/Maven3.9.12、既存offline repositoryを使用。
-- storage/bootstrapのcompile/NullAway/SpotBugs、BOM16PT、JaCoCo四counterを同じsource/runで照合する。storageの選択対象なしは合格PTへ加算しない。
+- v3 sourcec4117fe97 actual1はstorageの選択PT0件をfailIfNoTests規約が拒否、bootstrap未実行。規約を緩めず、別v4 `bash tools/quality/vm/050_s1/pg533_bom_pt_v4.sh <full HEAD>` でstorage/bootstrapの全PT・compile/NullAway/SpotBugs・BOM16PT・JaCoCo四counterを同じsource/runで照合する。旧v1～3は不合格保持。
 - 私有ログ/source hash/XML/exit: `/home/mini/codex/project1/work/pgpt-runs/PG379/pg533-bom-pt-v1.*`。公開manifestは終了後にsanitized結果・hash・不足counterを記録する。
 - 失敗は未実装TDD/fixture/実装障害を分類し、承認済み実装の違反は915/916へ修正前に起票する。
 - BUG/SSC: BUG826/YKT595、SSC追加なし。正式認定PT-WEB-20260925-24は据置。未網羅/未実行をPASSとしない。
