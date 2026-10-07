@@ -11,3 +11,5 @@ Productiona2/PG495/schema028、SS343353/QA047/SSC215、旧PG528 immutable3とPG5
 | PG529-V02 | 当Ref→Java限定pidfdTERM一回/全owner-peer-lock0/全terminalと全原値前後二読不変/新Ref-bus正常close、元PG528 closeUNKNOWN・refs-only保存を保持、業務操作0 | pg529_terminal_handoff_native_v1.py |
 
 修正前BUG825/YKT594登録、SSC215 design-onlysource1b72c3932/PR50で公開、main確認commitは456へ保存。独立1483assert/undefined0、host静的Sourceと実guest immutable pinを結合、testのSource/pytest等をguestへ移さない。wrapperは旧終了を推定せず、別native session97468の実143/ログ/時間を回収後に照合する。新回収new-only、旧source/stage/業務STOP再実行禁止。private rawはGitへ入れずsafehash/実値のみ。別fresh全M-A/DB/十Ref/FD正常readback/native・Production100%/正式は未完、結果後記。
+
+実結果: source3b068c1c3、native35718 actual0/log5d32d935…、Root before4dd70916…/complete0f673d9b…・全raw/全terminal二読不変・自peer-lock0/新Ref正常解放。旧97468 actual143/455.564523256s/loga15407b4…/closeUNKNOWN保持、before未保存のまま。main2bd98be836e5bd6492bb9840a51a0f48487b7f66確認。safe=evidence/provisional/PG529-terminal-handoff-v1/manifest.json。
