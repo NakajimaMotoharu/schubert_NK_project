@@ -1,0 +1,143 @@
+{
+  "run": "PG513-refused-PG514-owned-handoff-v2",
+  "recordedAt": "2026-10-08T03:41:31+09:00",
+  "branch": "dev-foundation",
+  "operatorBase": "2424ca078a26fb8aaa0f9f507487d005107b8e17",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "productionRelease": "PG495",
+  "schema": "028",
+  "productionChanged": false,
+  "formalRunDelta": {
+    "tests": 0,
+    "scopes": 0
+  },
+  "environment": {
+    "jdk": "25.0.4",
+    "postgresql": "18",
+    "artemis": "2.56.0",
+    "hostPython": "3.14",
+    "guestPython": "version not collected in this run; do not infer from host",
+    "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441"
+  },
+  "design": {
+    "ssc209": {
+      "source": "f3d9a0fe999e16c6f12c8e43741a5531e39f6d39",
+      "main": "05bb5b2b4fe364f744e35c9cfb429b9e74f62523",
+      "pr": 44,
+      "actualIssuedProfileApplicable": false
+    },
+    "ssc210": {
+      "source": "c35375fa08f20ca204f4a0b10c4e868798fcab3b",
+      "main": "0fa0005c8b167d9afacdf0d775a1b795d859f5e8",
+      "pr": 45
+    }
+  },
+  "tests": [
+    {
+      "ids": [
+        "PT-OPS-PG513-001",
+        "PT-OPS-PG513-004",
+        "PT-OPS-PG513-005"
+      ],
+      "command": "bash tools/quality/vm/050_s1/pg513_single_api_compile_v7.sh",
+      "exit": 0,
+      "expected": "independent synthetic Root/tmpfs real FD normal/fault preserve3+sameAPI re-quarantine",
+      "actual": {
+        "javaAssertions": 20907,
+        "faultPositions": 1304,
+        "referenceAssertions": 190,
+        "brokerVendorPid1Assertions": 48,
+        "Werror": 0
+      },
+      "productionTests": 0
+    },
+    {
+      "ids": [
+        "PT-OPS-PG513-002",
+        "PT-OPS-PG513-006"
+      ],
+      "command": "python3 -B tools/quality/vm/050_s1/pg513_single_api_native_v1.py",
+      "exit": 143,
+      "result": "REFUSED_BEFORE_STOP_THEN_OWNED_HANDOFF",
+      "elapsedSeconds": 1045.213155546,
+      "actual": {
+        "reached": "signature/BOM187/M-A/DB/advisory/tenRef/fullraw before double check",
+        "refusal": "current actualISSUED, wrong expectedINVALID, no business mutation",
+        "epochState": "ISSUED",
+        "bootRunActivationMatch": true
+      },
+      "privateLogSha256": "f6129464be5e7648c0d9dde53025c612b6b89daf64c5c2b28c08fec62ae75d5e",
+      "bug": "BUG-817",
+      "oldCloseUnknown": true
+    },
+    {
+      "ids": [
+        "PT-OPS-PG514-001"
+      ],
+      "command": "python3 -B tools/quality/vm/050_s1/pg514_epoch_handoff_test.py; python3 -B tools/quality/vm/050_s1/pg514_reference_schema_test.py",
+      "exit": 0,
+      "actual": {
+        "actorAssertions": 27,
+        "artifactSchemaAssertions": 73
+      },
+      "productionTests": 0
+    },
+    {
+      "ids": [
+        "PT-OPS-PG514-002"
+      ],
+      "command": "python3 -B tools/quality/vm/050_s1/pg514_epoch_handoff_native_v1.py",
+      "exit": 1,
+      "result": "REFERENCE_SCHEMA_REFUSAL_BEFORE_SAVE_SIGNAL",
+      "privateLogSha256": "b00d89c9424b12d5eb93c58a96bb00f8d108f39aca6eea83a5171769c7d80869",
+      "bug": "BUG-818"
+    },
+    {
+      "ids": [
+        "PT-OPS-PG514-002",
+        "PT-OPS-PG514-003",
+        "PT-OPS-PG514-004"
+      ],
+      "command": "python3 -B tools/quality/vm/050_s1/pg514_epoch_handoff_native_v2.py (executed original bytes preserved as .py.executed-v2)",
+      "exit": 0,
+      "result": "LIMITED_FIXED_PRESTOP_OWNER_HANDOFF_PASS",
+      "expected": "fixed child→Java one pidfdTERM/fullraw and businesscohort unchanged/currentISSUED preserved/peers-locks0/oldcloseUNKNOWN",
+      "actual": {
+        "childAndJavaGone": true,
+        "fullRawUnchangedTwice": true,
+        "currentStillIssued": true,
+        "businessCohortUnchanged": true,
+        "businessActions": 0,
+        "peerAdvisoryLocks": 0
+      },
+      "privateLogSha256": "d039e916cf1459d31f59347e27d72387082aa62d8cf80c50aaae878600d93965",
+      "privateReceiptPath": "/var/lib/pgpt-s1-preservation/pg514-issued-owned-handoff-v2/complete.private.json",
+      "privateReceiptSha256": "d1609b932980f852f94149e8f0726fdae8959b717ba03f33b882a22c1cb6b2ad",
+      "labelMapping": {
+        "canonical": "PG514-epoch-handoff-v2",
+        "executedPrintedLegacy": "PG514-epoch-handoff-v1",
+        "reason": "BUG-819 case-sensitive replacement omitted printed ID; no rerun or original log edit"
+      },
+      "oldCloseUnknown": true
+    }
+  ],
+  "preservation": {
+    "originalTables": 24,
+    "batchRows": 452,
+    "persistentEntries": 102,
+    "oldParentResult": "timeout143",
+    "currentState": "ISSUED",
+    "currentSha256": "87a7556e280c58a61d1390d69f5ecde78c430fd807f8a025c401af8bd17dd21e",
+    "oldNativeKept": true,
+    "baselineUnmodified": true,
+    "credentialTokenSessionRawIncluded": false
+  },
+  "remaining": [
+    "new ownership correctISSUED->ownedstop->sameepochcanonical revoke->singleAPI marker retirement",
+    "sixnativeRoles/newruntime retirement/fresh resume/trueparentDONE/ownedstop/coverage/CHR/formal"
+  ],
+  "coverage": {
+    "productionFourCounters100Accepted": false,
+    "operatorAssertionsNotProductionPT": true
+  }
+}

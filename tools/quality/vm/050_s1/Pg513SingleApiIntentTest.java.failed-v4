@@ -1,0 +1,95 @@
+package dev.codex.schubert.nk.batch.file;
+
+import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.*;
+import java.security.*;
+import java.util.*;
+
+/** PT-OPS-PG513-001004005: independent public golden bytes, real FD, synthetic Root/tmpfs. */
+public final class Pg513SingleApiIntentTest {
+  static int checks;
+  static void check(boolean v){checks++;if(!v)throw new AssertionError("single intent independent oracle");}
+  static final String E="31100027-4444-4333-8444-555555555555";
+  static final String B="boot_id=31100027-3333-4333-8444-555555555555\nepoch_id="+E+"\nrun_id=31100027-2222-4333-8444-555555555555\ncutoff_utc=2026-09-27T15:00:00.000000Z\nactivation_id=31100027-6666-4777-8888-999999999999\n";
+  static final String CURRENT="NKEPOCH1\nstate=INVALID\n"+B+"permit_sha256=-\n";
+  static final String PERMIT="NKPERMIT1\n"+B+"broker_invocation_id="+"2".repeat(32)+"\nrelease_sha256="+"b".repeat(64)+"\napi_config_sha256="+"c".repeat(64)+"\nweb_config_sha256="+"d".repeat(64)+"\nroots_sha256="+"e".repeat(64)+"\nprestart_steps_sha256="+"f".repeat(64)+"\n";
+  static final String OWNER="""
+      NKMAINTOWNER1
+      boot=31100027-3333-4333-8444-555555555555
+      run=31100027-2222-4333-8444-555555555555
+      activation=31100027-6666-4777-8888-999999999999
+      cutoff=2026-09-27T15:00:00Z
+      epoch=31100027-4444-4333-8444-555555555555
+      morning_invocation=bbb6dc1276a4459da65143db3e4ee3f0
+      morning_pid=5872
+      morning_start_ticks=380665
+      cleanup_invocation=-
+      cleanup_pid=-
+      cleanup_start_ticks=-
+      deadline_nanos=5608000000000
+      """;
+  static final class Fixture implements AutoCloseable,StartupPermitFiles.Io {
+    final BackupPublicationFixture f;
+    Fixture(Path temporary)throws Exception{
+      f=new BackupPublicationFixture(temporary);Files.delete(f.child);
+      f.metadata=(role,v)->{v.put("uid",0);v.put("gid",0);};
+      put("epoch.current",CURRENT);put(E+".permit",PERMIT);put(E+".owner",OWNER);put(E+".API.start.intent","");
+      f.events.clear();f.counts.clear();f.position=0;
+    }
+    void put(String n,String bytes)throws IOException{Files.writeString(f.parent.resolve(n),bytes);Files.setAttribute(f.parent.resolve(n),"unix:mode",0600);}
+    void preserved()throws IOException{
+      check(Files.readString(f.parent.resolve("epoch.current")).equals(CURRENT));
+      check(Files.readString(f.parent.resolve(E+".permit")).equals(PERMIT));
+      check(Files.readString(f.parent.resolve(E+".owner")).equals(OWNER));
+      check(!Files.exists(f.parent.resolve(E+".API.launch")) && !Files.exists(f.parent.resolve("permit-start.intent")));
+    }
+    void retire()throws Exception{
+      var epoch=StartupPermitRecords.readEpoch(CURRENT.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+      Pg513SingleApiIntent.retire(f.root,epoch,epoch.activation(),"b".repeat(64),this::preserved,()->{},f,this);
+    }
+    public Map<String,Object> attributes(Path p)throws IOException{return f.attributes(p);}
+    public String filesystem(Path p){return f.filesystem(p);}
+    public SeekableByteChannel open(Path p)throws IOException{return f.open(p);}
+    public InspectorEnvironmentPublisher.Writer openWriter(Path p)throws IOException{return f.openWriter(p);}
+    public void replace(Path d,String p,String c){throw new AssertionError("current rewrite forbidden");}
+    public MessageDigest digest()throws NoSuchAlgorithmException{return MessageDigest.getInstance("SHA-256");}
+    public void close()throws dev.codex.schubert.nk.storage.StorageIoException{f.track=false;f.close();}
+  }
+  public static void main(String[] ignored)throws Exception{
+    Set<String> three=Set.of("epoch.current",E+".permit",E+".owner");var four=new HashSet<>(three);four.add(E+".API.start.intent");
+    check(Pg513SingleApiIntent.namespace(three,E,false));check(Pg513SingleApiIntent.namespace(four,E,true));
+    check(!Pg513SingleApiIntent.namespace(three,E,true));check(!Pg513SingleApiIntent.namespace(four,E,false));
+    check(!Pg513SingleApiIntent.namespace(null,E,true));check(!Pg513SingleApiIntent.namespace(four,null,true));
+    for(String s:List.of("","foreign",E.replace("31100027","3110002a").toUpperCase(Locale.ROOT),"00000000-0000-0000-0000-000000000000"))check(!Pg513SingleApiIntent.namespace(four,s,true));
+    for(String n:List.of("permit-start.intent",E+".API.launch",E+".WEB.start.intent","foreign",E+".WEB.launch")){
+      var wrong=new HashSet<>(four);wrong.add(n);check(!Pg513SingleApiIntent.namespace(wrong,E,true));
+    }
+    Path temporary=Files.createTempDirectory("pg513-synthetic-oracle-");
+    int positions;
+    try(var fixture=new Fixture(temporary)){
+      fixture.retire();fixture.preserved();check(!Files.exists(fixture.f.parent.resolve(E+".API.start.intent")));
+      positions=fixture.f.position;check(fixture.f.events.contains("unlink") && fixture.f.events.contains("sync"));
+    }
+    for(int fault=1;fault<=positions;fault++)try(var fixture=new Fixture(temporary)){
+      fixture.f.faultAt=fault;
+      try{fixture.retire();throw new AssertionError("injected fault accepted");}catch(IOException|IllegalArgumentException expected){check(true);}
+      fixture.f.faultAt=0;fixture.preserved();
+      // Post-unlink uncertainty attempts only same API quarantine, never invented publication/Pair.
+      if(fixture.f.events.contains("unlink")) {
+        boolean present=Files.exists(fixture.f.parent.resolve(E+".API.start.intent"));
+        if(!present)System.err.println("PG513_PUBLIC_FAULT index="+fault+" positions="+fixture.f.position+" events="+fixture.f.events.subList(Math.max(0,fixture.f.events.size()-12),fixture.f.events.size()));
+        check(present);
+      }
+    }
+    for(String name:List.of("permit-start.intent",E+".WEB.start.intent",E+".API.launch"))try(var fixture=new Fixture(temporary)){
+      fixture.put(name,"");try{fixture.retire();throw new AssertionError("foreign namespace accepted");}catch(IOException expected){check(true);}
+      check(!fixture.f.events.contains("unlink"));fixture.preserved();
+    }
+    try(var fixture=new Fixture(temporary)){
+      fixture.put(E+".API.start.intent","corrupt");try{fixture.retire();throw new AssertionError("nonempty marker accepted");}catch(IOException expected){check(true);}
+      check(Files.readString(fixture.f.parent.resolve(E+".API.start.intent")).equals("corrupt"));fixture.preserved();
+    }
+    System.out.println("PG513_SINGLE_API_ORACLE independentAssertions="+checks+" faultPositions="+positions+" realFD=true syntheticRootTmpfs=true vmActions0=true productionPT0=true");
+  }
+}
