@@ -19,9 +19,9 @@
 
 ## 実行と証跡
 
-- Source固定後 `bash tools/quality/vm/050_s1/pg533_bom_pt_v1.sh <full HEAD>`。
+- 初回source254aa287a/v1 actual1、親pomのjar plugin版解決失敗、compile/PT未実行。BUG826/YKT595起票後、Source固定して `bash tools/quality/vm/050_s1/pg533_bom_pt_v2.sh <full HEAD>`。旧v1を再実行しない。
 - Host Linux/JDK25.0.4/Maven3.9.12、既存offline repositoryを使用。
 - storage/bootstrapのcompile/NullAway/SpotBugs、BOM16PT、JaCoCo四counterを同じsource/runで照合する。storageの選択対象なしは合格PTへ加算しない。
 - 私有ログ/source hash/XML/exit: `/home/mini/codex/project1/work/pgpt-runs/PG379/pg533-bom-pt-v1.*`。公開manifestは終了後にsanitized結果・hash・不足counterを記録する。
 - 失敗は未実装TDD/fixture/実装障害を分類し、承認済み実装の違反は915/916へ修正前に起票する。
-- BUG/SSC: 現段階では追加なし。正式認定PT-WEB-20260925-24は据置。未網羅/未実行をPASSとしない。
+- BUG/SSC: BUG826/YKT595、SSC追加なし。正式認定PT-WEB-20260925-24は据置。未網羅/未実行をPASSとしない。
