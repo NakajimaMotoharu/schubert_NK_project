@@ -2,6 +2,8 @@
 
 ## 限定実績（2026-10-08 04:57JST）
 
+05:04:22/05:04:35にAPI504968/INV844d…/ticks1616183、Web507277/INV7127…/ticks1617567のRoot UID0を捕捉し、同PID/INV/ticksのordinary UID999-GID981/UID997-GID980・supplementaryGroups/NNoNewPrivs1/allCaps0へ移行。05:04:34 API/05:04:50 WebのHTTP200-UP/infoa2-schema028/同socket・同親を二読照合。05:05:06 Caddy同世代/zeroCaps/公開CA TLS/login200、A01 sharedCurrentdriver+承認DIF001-titleのみでactual0/PASS（05:05:07.999～10.794UTC換算前記録、JST05:05:07.999～10.794）。safe evidence/provisional/PG522-connection-positive-v1/manifest.json、report program/characterization/reports/nk/PG522-native-a01-v1/artifacts/CHR-A01.json。parentDONE/ownedstop/native100/全CHR/正式はまだ不加算。上のUTC表記の誤解を避け、原manifestのISO20:05UTC=翌05:05JSTを正とする。
+
 observer3payload new-only stage actual0/logf162b575…、一回外部startclient0、親INV8f4514e…/PID320189/ticks1508984/Job26968を捕捉。元1800sの当親継続、observer1954/A01待機18540へ再付着、二重起動0。今回Cleanup INV4e71…・Expiry INVcb737…はCode1/status0/Resultsuccess、Artemis INV3808…/PID353417稼働を観測。API/Web/Caddyと親DONEは未受入。
 追加source51baeff97のreadonly pre-UI全列照合actual0、旧452行/その他23tableの全列保持、新10段の承認済みSKIPを独立literalで確認。Root私有snapshot60d4fcc3…・hostlog02782455…、safe evidence/provisional/PG522-preui-rows-v1/manifest.json。生存中の原本/Unit終端・親合格を推論せず、次current世代へ追随する。追加依存inventory22assert/166af4a8eでBUG822/YKT591工具範囲閉鎖、ProductionPT加点0。
 

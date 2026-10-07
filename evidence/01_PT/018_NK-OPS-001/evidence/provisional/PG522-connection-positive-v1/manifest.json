@@ -1,0 +1,193 @@
+{
+  "run": "PG522-connection-positive-v1",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "toolSourceCommit": "cf369e9e4",
+  "parent": {
+    "pid": 320189,
+    "invocation": "8f4514e19fd94c429f2587af71edb53a",
+    "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "originalBudgetSeconds": 1800
+  },
+  "rootCaptures": {
+    "api": {
+      "at": "2026-10-07T20:04:22.025275+00:00",
+      "MainPID": "504968",
+      "InvocationID": "844d2217a6494e4f9f852fc4f488a0fa",
+      "startTicks": 1616183,
+      "entry": "dev.codex.schubert.nk.batch.file.RootServiceLauncher",
+      "process": {
+        "Uid": "0\t0\t0\t0",
+        "Gid": "0\t0\t0\t0",
+        "Groups": "980 981 982 986",
+        "CapInh": "0000000000000000",
+        "CapPrm": "00000000000801c4",
+        "CapEff": "00000000000801c4",
+        "CapBnd": "00000000000801c4",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1"
+      }
+    },
+    "web": {
+      "at": "2026-10-07T20:04:35.782372+00:00",
+      "MainPID": "507277",
+      "InvocationID": "7127bb06489a4218acd2b72570ce1ec5",
+      "startTicks": 1617567,
+      "entry": "dev.codex.schubert.nk.batch.file.RootServiceLauncher",
+      "process": {
+        "Uid": "0\t0\t0\t0",
+        "Gid": "0\t0\t0\t0",
+        "Groups": "980 982 986",
+        "CapInh": "0000000000000000",
+        "CapPrm": "00000000000801c4",
+        "CapEff": "00000000000801c4",
+        "CapBnd": "00000000000801c4",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1"
+      }
+    }
+  },
+  "ordinaryCaptures": {
+    "api": {
+      "at": "2026-10-07T20:04:31.063212+00:00",
+      "MainPID": "504968",
+      "InvocationID": "844d2217a6494e4f9f852fc4f488a0fa",
+      "startTicks": 1616183,
+      "entry": "dev.codex.schubert.nk.api.bootstrap.ApiProcessMain",
+      "process": {
+        "Uid": "999\t999\t999\t999",
+        "Gid": "981\t981\t981\t981",
+        "Groups": "980 981 982 986",
+        "CapInh": "0000000000000000",
+        "CapPrm": "0000000000000000",
+        "CapEff": "0000000000000000",
+        "CapBnd": "0000000000000000",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1"
+      }
+    },
+    "web": {
+      "at": "2026-10-07T20:04:44.777168+00:00",
+      "MainPID": "507277",
+      "InvocationID": "7127bb06489a4218acd2b72570ce1ec5",
+      "startTicks": 1617567,
+      "entry": "dev.codex.schubert.nk.web.bootstrap.WebProcessMain",
+      "process": {
+        "Uid": "997\t997\t997\t997",
+        "Gid": "980\t980\t980\t980",
+        "Groups": "980 982 986",
+        "CapInh": "0000000000000000",
+        "CapPrm": "0000000000000000",
+        "CapEff": "0000000000000000",
+        "CapBnd": "0000000000000000",
+        "CapAmb": "0000000000000000",
+        "NoNewPrivs": "1"
+      }
+    }
+  },
+  "readyTlsEvents": [
+    {
+      "at": "2026-10-07T20:04:34.438775+00:00",
+      "ready": "api",
+      "sameRootOrdinary": true,
+      "sameParent": true,
+      "ownedSocket": true,
+      "info": {
+        "commit": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+        "app": "0.1.0-SNAPSHOT",
+        "config": "1",
+        "schema": "028",
+        "protocol": "0.1.0-SNAPSHOT"
+      },
+      "wholeMorningAccepted": false
+    },
+    {
+      "at": "2026-10-07T20:04:50.349157+00:00",
+      "ready": "web",
+      "sameRootOrdinary": true,
+      "sameParent": true,
+      "ownedSocket": true,
+      "info": {
+        "commit": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+        "app": "0.1.0-SNAPSHOT",
+        "config": "1",
+        "schema": "028",
+        "protocol": "0.1.0-SNAPSHOT"
+      },
+      "wholeMorningAccepted": false
+    },
+    {
+      "at": "2026-10-07T20:05:06.946027+00:00",
+      "caddyTlsLogin200": true,
+      "sameApiWeb": true,
+      "sameCaddySocket": true,
+      "caddyZeroCaps": true,
+      "publicCaValidated": true,
+      "bodyLogged": false,
+      "wholeMorningAccepted": false
+    },
+    {
+      "terminalObserved": true,
+      "parentResult": "success",
+      "parentCode": "0",
+      "parentExit": "0",
+      "readyObserved": [
+        "api",
+        "web"
+      ],
+      "rootsCaptured": [
+        "api",
+        "web"
+      ],
+      "caddyTlsLogin200": true,
+      "backendAlive": {
+        "api": true,
+        "web": true
+      },
+      "automaticStop": false,
+      "wholeMorningAccepted": false
+    }
+  ],
+  "chrA01": {
+    "case": "CHR-A01",
+    "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+    "startedAt": "2026-10-07T20:05:07.999483+00:00",
+    "completedAt": "2026-10-07T20:05:10.794395+00:00",
+    "exitCode": 0,
+    "privateLogSha256": "e4b4d768c50fecc02be5d2dc5c64f4ae3c4e908404963a1e6604488251b8b87d",
+    "harnessClassesSha256": "122dcc4c1be482ac3239325de6fb3d4bec12747d05adce3929c319ab5bdfd71d",
+    "sharedCurrentDriver": true,
+    "fullGate": false,
+    "otherCasesNotRun": true,
+    "wholeParentAccepted": false
+  },
+  "chrArtifactSha256": "3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558",
+  "sameSourceScopeEvidence": true,
+  "parentDoneAccepted": false,
+  "ownedStopsAccepted": false,
+  "native100": false,
+  "formalChanged": false,
+  "acceptance": "LIMITED_POSITIVE_CONNECTION",
+  "testIds": [
+    "PT-OPS-PG522-003",
+    "PT-OPS-PG522-005"
+  ],
+  "scopeRefs": [
+    "WBS-N05",
+    "WBS-N06",
+    "WBS-N07",
+    "WBS-N08",
+    "WBS-CHR-A01"
+  ],
+  "related": [
+    "BUG-813",
+    "BUG-814",
+    "YKT-582",
+    "YKT-583",
+    "YKT-585",
+    "QA-045",
+    "QA-047"
+  ],
+  "privateWatchStillLive": true,
+  "coverage": "NOT_FORMAL; positive connection only, full negative and scope closures remain",
+  "credentialsOrTokensRecorded": false
+}
