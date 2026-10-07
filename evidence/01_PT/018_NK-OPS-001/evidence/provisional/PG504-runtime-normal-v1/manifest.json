@@ -1,0 +1,97 @@
+{
+  "id": "PG503-failure-owned-handoff-PG504-runtime-normal-v1",
+  "classification": "PROVISIONAL_LIMITED_OPERATIONS_PT_NOT_FORMAL",
+  "recordedAtJST": "2026-10-08T01:34:47+09:00",
+  "branch": "dev-foundation",
+  "gitHeadBefore": "ab06e642a5b49762c7b89367b0eaa13f41419c7c",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "productionRun": "PG495",
+  "guestBoot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+  "environment": {
+    "measuredAtJST": "2026-10-08T01:34:47+09:00",
+    "os": "Linux7.0.0-34-generic Ubuntu",
+    "jdk": "25.0.4+7-1-26.04-Ubuntu",
+    "python": "3.14.4",
+    "psql": "18.6-0ubuntu0.26.04.1",
+    "systemd": "259.5-0ubuntu3.4",
+    "limit": "Fresh post-run version measurement; earlier unmeasured environment fields not silently replaced."
+  },
+  "runs": [
+    {
+      "id": "PG503-resume-native-v1",
+      "reportedId": "PG503-cold-native-v1",
+      "command": "python3 -B tools/quality/vm/050_s1/pg503_resume_native_v1.py",
+      "exitCode": 143,
+      "status": "OWNED_TERM_NOT_NORMAL_CLOSE",
+      "cause": "BUG811: umask077 mkdir0755=>0700; guard refused before file/reload/start",
+      "privateLogSha256": "e4e19c71d26f69d29ccbab4991dc99e500a9298e27e59801242529152661208f"
+    },
+    {
+      "id": "PG503-runtime-handoff-v1",
+      "reportedId": "PG501-cold-handoff-v1",
+      "command": "python3 -B tools/quality/vm/050_s1/pg503_runtime_handoff_native_v1.py",
+      "exitCode": 0,
+      "status": "LIMITED_OWNED_HANDOFF",
+      "actual": "fixed child3291 then parent3262 only TERM; full10cold/24tables442batch/persistent102+startup/native/config unchanged twice; empty runtime inode2576 mode0700 retained; peers/advisory/locks0; oldCloseUNKNOWN",
+      "privateLogSha256": "ea44b3b28b585ff6bd80582c501a4891d071ba29f83fd85185400616037574e1"
+    },
+    {
+      "id": "PG504-resume-native-v1",
+      "reportedId": "PG504-resume-native-v1",
+      "command": "python3 -B tools/quality/vm/050_s1/pg504_resume_native_v1.py",
+      "exitCode": 0,
+      "startedAtUTC": "2026-10-07T16:33:33.522275+00:00",
+      "completedAtUTC": "2026-10-07T16:33:39.491296+00:00",
+      "elapsedSeconds": 5.969021,
+      "status": "ALL_NEW_SCOPES_NORMAL",
+      "expected": "fresh M/A/DB/advisory/10Ref; full original values/cold/current signature; known empty held inode fchmod0755/dirsync; fixed one-run resume file/new-only/reload once; all effective config and raw originals preserved; all scopes normal",
+      "actual": "all expected conditions observed; businessstart=0/DBupdates=0/oldRuntimeRetirementNotInferred",
+      "privateLogSha256": "7b000d3f91233b07defff49054df1e6c8a75f5b191be088f28cb1fd79914e0c9"
+    }
+  ],
+  "independentChecks": {
+    "pg503Java": 10,
+    "pg503Python": 65,
+    "pg504Java": 10,
+    "pg504Python": 65,
+    "pg504Preflight": 25,
+    "compileWerror": 0,
+    "initialPreflightFailed": true,
+    "preflightRetryCause": "Independent literal ID check caught old cold-label before VM delivery (BUG812); fixed current PG504 writer and new preflight-v2 output.",
+    "productionTestsAdded": 0
+  },
+  "rootPrivateEvidence": {
+    "handoffCompleteSha256": "1c69227dfba0df61f3f546307ff5055d09cfbf655cc73360ae3ef23421732fec",
+    "refsAfterSha256": "67fa28ad6f289589994af0be7022a20fe12b673685d0c151ffb791dd91fec52e",
+    "refsAfterBytes": 21379350,
+    "completeSha256": "ac7a0eb9af359638ed84bab5951afe69cfc2636e2b460233f82029560aa762ad",
+    "completeBytes": 125,
+    "rawGitStored": false
+  },
+  "related": [
+    "BUG811",
+    "YKT580",
+    "BUG812",
+    "YKT581",
+    "SSC208",
+    "411",
+    "412"
+  ],
+  "designMain": "980bedee23e31028f516c18c271108d44396e3bb",
+  "designSource": "5a9aad2d336283096ceb35e76a80243d58d9bf28",
+  "coverage": {
+    "productionIncrement": 0,
+    "formalIncrement": 0,
+    "line": null,
+    "method": null,
+    "class": null,
+    "branch": null
+  },
+  "expectedOracle": "SS343 fixed owner/mode and SSC198 independent ASCII base/native/resume golden. Full raw baseline PG502 normal receipt plus immutable PG498 original full24/442; expected not recomputed from production.",
+  "notAccepted": [
+    "Genuine old runtime retirement (cold disappearance not proof)",
+    "external normal Morning parent DONE/API retained Web/Caddy/owned stop",
+    "same-source native100/formal quality/full fault/competition matrix"
+  ],
+  "sanitization": "No credential/raw session/token/key/DB dump/original material; wrong historical print labels preserved and explicitly mapped, not silently rewritten."
+}
