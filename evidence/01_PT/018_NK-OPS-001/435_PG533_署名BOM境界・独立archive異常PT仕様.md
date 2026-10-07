@@ -19,7 +19,7 @@
 
 ## 実行と証跡
 
-- 初回source254aa287a/v1 actual1、親pomのjar plugin版解決失敗、compile/PT未実行。BUG826/YKT595起票後、Source固定して `bash tools/quality/vm/050_s1/pg533_bom_pt_v2.sh <full HEAD>`。旧v1を再実行しない。
+- 初回source254aa287a/v1 actual1（jar版解決）、source42f0e6cbc/v2 actual1（SpotBugs prefix解決）、どちらも親pomに起因するcompile/PT前拒否。BUG826/YKT595起票後、依存storage/bootstrapを明示選択し親pomを含めない別v3へ固定、`bash tools/quality/vm/050_s1/pg533_bom_pt_v3.sh <full HEAD>`。旧v1/v2を再実行しない。
 - Host Linux/JDK25.0.4/Maven3.9.12、既存offline repositoryを使用。
 - storage/bootstrapのcompile/NullAway/SpotBugs、BOM16PT、JaCoCo四counterを同じsource/runで照合する。storageの選択対象なしは合格PTへ加算しない。
 - 私有ログ/source hash/XML/exit: `/home/mini/codex/project1/work/pgpt-runs/PG379/pg533-bom-pt-v1.*`。公開manifestは終了後にsanitized結果・hash・不足counterを記録する。
