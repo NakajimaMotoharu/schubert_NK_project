@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC206（2026-10-08）：SS343の現PG495/source a2/別boot/全24・442・永続102要素のcold限定復旧を適用する。旧/run/runtime/startupとhost bind消失を旧PG499正規退役又は資源closeの証拠へ読み替えず、旧native143/UNKNOWNとBUG544/YKT388を保持する。新M/A/専用DB/advisory/十Ref・現全10cold/kernel・保存原値/署名/BOM/profile・全新scope正常を独立実証した範囲だけ通常same-run resumeへ進める。原値不一致/未知owner/混在current/不明closeでは隔離継続、旧raw復元/一般UNKNOWN補修/新ISSUED/start/手DB書込は当復旧段0。cold工具のprofile/byte境界失敗も915/916・独立再現/再試験へ追跡する。
+
 SSC205（2026-10-07）：SS343のPG496・pending/no-intent・revoke前7receipt後UNKNOWNだけについて、先行依存終端Artemisの完全vendor/PID1/full18/kernel、API/Web cleanup/native・元全24/原本BackupTransfer/設定/startup原byte不変を固定ownerの実保持下で私有捕捉する。boot/PID/ticks/Root/argv/class・全task子0/M-A inode/他owner無し/専用DB又は既idle消失を現在認証して一回pidfd TERM、旧actual143/close不明を別保持。全peer/lock/旧process/kernel消失・全原値不変更後にだけ別fresh所有の同epoch canonical失効を許し、全新scope正常を独立証明する。旧native/backup/DB/原本保全、raw秘密Git非格納、停止データを親成功・旧資源正常closeにしない。不明時は隔離/再付着、start/新epoch/permit/Pair/DONE/DDL/手DB書込は発行しない。
 
 SSC204（2026-10-07、QA047/BUG799/YKT570）：PG493 parenttimeout143/pending原本であっても、startup現在73file・API/WEB/publication intentが既不存在ならSSC179の二intent Pair復旧を流用しない。failure私有snapshot/current二読・同boot/署名/当epoch/owner/launch/全旧fileを認証し、連続fresh M/A/専用DB/全10Unit・原本/24table442batch/Backup/Transfer/native保全下で同live4cohortを逆順owned停止/全kernel確認する。元73file/全原値不変後にだけ同epochを既canonical revokeでINVALIDへし、元permit/owner/launchを保持、このoperatorのintent退役数0・旧closeUNKNOWNを記録する。不明なら隔離継続、正常新所有scope帰還後だけ別pending配備/runtime正規退役・一回通常resumeを許す。旧/run復元・存在しないintent作成・newEpoch/permit/start/DONE/DB手修正0。
