@@ -166,6 +166,10 @@ def main():
     require(strict(CREDS/name,0o400,256)==value)
     require(not(SAVE/(name+'.retired.private')).exists())
     retire_no_replace(credsfd,name,savefd)
+    retired=SAVE/(name+'.retired.private')
+    require(strict(retired,0o400,256)==value)
+    require(metadata(retired)[:7]==prepared[str(CREDS/name)]['metadata'][:7])
+    require(not os.path.lexists(CREDS/name))
    os.fsync(credsfd);os.fsync(savefd);prepared.clear();post=snapshot(True);save('after.private.json',post)
    state='RETIRED';print('REF_CHECKED',flush=True)
   elif action=='release':

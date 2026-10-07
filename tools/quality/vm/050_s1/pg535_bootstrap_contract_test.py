@@ -23,6 +23,18 @@ def directory(uid=0, gid=0):
 
 
 class BootstrapContractTest(unittest.TestCase):
+    def test_probe_run_and_all_artifacts_use_one_independent_literal(self):
+        source = (pathlib.Path(__file__).parent / 'pg535_bootstrap_snapshot_probe_v2.py').read_text()
+        module = ast.parse(source)
+        run = [n.value.value for n in module.body if isinstance(n, ast.Assign)
+               and any(isinstance(t, ast.Name) and t.id == 'RUN' for t in n.targets)]
+        self.assertEqual(['PG535-snapshot-probe-v2'], run)
+        self.assertIn("'run':RUN", source)
+        for suffix in ('.private.log', '.exit', '.source.json'):
+            self.assertIn("RUN.lower()+'" + suffix + "'", source)
+        self.assertNotIn('probe-v1', source)
+        self.assertNotIn('probe-v3', source)
+
     def test_retirement_is_atomic_no_replace_and_never_overwrites_existing_preservation(self):
         for result in (0, -1):
             calls = []
