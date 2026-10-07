@@ -1,0 +1,131 @@
+{
+  "run": "PG505-failure-PG512-diagnosis",
+  "recordedAt": "2026-10-08T02:28:20+09:00",
+  "source": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "operatorBase": "03ca11d5f655fab55d82b8c18ee34f6bffd5ae46",
+  "branch": "dev-foundation",
+  "environment": {
+    "os": "Ubuntu PGPT isolation VM",
+    "jdk": "25.0.4",
+    "postgresql": "18",
+    "artemis": "2.56.0",
+    "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "tools": "recorded operator Python3 and Java25; original logs Root-private"
+  },
+  "productionChanged": false,
+  "formalRunDelta": {
+    "tests": 0,
+    "scopes": 0
+  },
+  "coverageAccepted": false,
+  "tests": [
+    {
+      "id": "PT-OPS-PG505-004",
+      "exit": 143,
+      "result": "FAILED",
+      "expected": "same parent Root ordinaryAPI Web Caddy genuineDONE in original1800s",
+      "actual": "API namespace failed before Java5 times, no genuineDONE",
+      "elapsedSeconds": 1800.027009,
+      "bug": "BUG-814"
+    },
+    {
+      "id": "PT-OPS-PG505-005",
+      "result": "NOT_RUN",
+      "actual": "A01 waiting ended2, no TLS; no formal acceptance"
+    },
+    {
+      "id": "PT-OPS-PG505-006",
+      "exit": 0,
+      "result": "LIMITED_READONLY_PRESERVATION_PASS",
+      "expected": "old442 all columns unchanged+10 independent SKIP steps; other23 and persistent102 unchanged",
+      "actual": {
+        "batchRows": 452,
+        "oldRows": 442,
+        "newRows": 10,
+        "persistentEntries": 102
+      },
+      "privatePath": "/var/lib/pgpt-s1-preservation/pg505-parent-failure-v1/observed.private.json",
+      "sha256": "d60070bd92c13b10b129e2793edb39a2436dad730e3dae6d4d7733c5e5ffd21d",
+      "bug": "BUG-815",
+      "priorUnsuccessfulVersions": [
+        "pg505_capture_failure.py",
+        "pg505_capture_failure_v2.py"
+      ],
+      "command": "ssh fixed private identity -> sudo python3 -B - < pg505_capture_failure_v3.py"
+    },
+    {
+      "id": "PT-OPS-PG506-001002",
+      "exit": 0,
+      "independentAssertions": 158,
+      "result": "PURE_OPERATOR_CONTRACT_PASS",
+      "productionTests": 0
+    },
+    {
+      "id": "PT-OPS-PG506-005",
+      "exit": 0,
+      "result": "LIMITED_BROKER_ACTOR_PASS",
+      "sha256": "e009757d0da1cc34783a6c184d21f90162ae8ade7f3a6bd7630b3e997a5cfed4"
+    },
+    {
+      "id": "PT-OPS-PG506-006",
+      "exit": 0,
+      "result": "LIMITED_OPS_PASS",
+      "sha256": "d247435db0e1482debbadb2da119c127c89cb8209999016c214b841de2e67cac",
+      "failedProbe": {
+        "version": "PG508",
+        "exit": 2,
+        "sha256": "1d48dff806c8964ddf5f7606d6ffb64ab1d68ea1bed66e9177c9df1ad7c01188",
+        "reason": "wrong original credential namespace rejected before MQ"
+      }
+    },
+    {
+      "id": "PT-OPS-PG506-007",
+      "exit": 0,
+      "result": "LIMITED_PRESSURE_PASS",
+      "actual": {
+        "queueCount": 6,
+        "criticalCount": 0
+      },
+      "sha256": "68ee67a65f58ebe8695cb705f2ba9fcfaecbcbe43d00f92d2283acd01f103497",
+      "failedProbe": {
+        "version": "PG510",
+        "exit": 1,
+        "sha256": "a5b710ecd9e07822444cb7cd3ee08be4bcca56851413e09a34ab7c1205c7ac3e",
+        "reason": "atime included in stat equality",
+        "bug": "BUG-816"
+      }
+    },
+    {
+      "id": "PT-OPS-PG506-008",
+      "exit": 0,
+      "result": "READONLY_CAUSE_PROVEN",
+      "command": "ssh fixed private identity -> sudo python3 -B - < pg512_api_namespace_readonly_v2.py",
+      "expected": "fixed currentboot API journal exact missing ordinary-api193; independent SS6 role literal",
+      "actual": {
+        "journalRows": 33,
+        "exactMissingOrdinaryApi193": 5,
+        "namespaceFailures": 5,
+        "missingRoles": 6
+      },
+      "privatePath": "/var/lib/pgpt-s1-preservation/pg512-api-namespace-v1/api-journal.private.jsonl",
+      "sha256": "151a73820d0344d9f123e4f5b0ab884a51f7663dea6efd61f59456d25eb408ff",
+      "bugs": [
+        "BUG-813",
+        "BUG-814"
+      ],
+      "initialUnacceptedDiagnosticTest": "v1 raw JSON-key-order equality failed before SAVE; v2 compares parsed full rows; original source retained"
+    }
+  ],
+  "references": [
+    "SS331332341342343353",
+    "QA047",
+    "BUG813814815816",
+    "YKT582583584585"
+  ],
+  "remaining": [
+    "owned recovery actual API intent/no launch",
+    "missing six native roles repair under new ownership",
+    "same source true parentDONE/native100/CHR/formal"
+  ],
+  "secretsIncluded": false
+}

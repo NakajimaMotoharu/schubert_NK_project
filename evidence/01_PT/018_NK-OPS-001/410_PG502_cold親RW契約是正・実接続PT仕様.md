@@ -1,5 +1,7 @@
 # PG502 cold親RW契約是正・実接続PT仕様（限定正常完了）
 
+2026-10-08現追加評価BUG813：所有scope正常帰還/full原値/新INVALIDの実測は保持するが、prepared native catalogはSSC193/196の6roleを欠落し完全性不合格。実装と同じ不足9catalogによる照合を独立網羅期待値として使用しない。現在のnative前提受入は未完へ戻す（正式/WBS認定元々0）。旧Root/tools/private証跡を変更せず、別new-only正常owned区間で是正・再試験する。
+
 実結果2026-10-08 01:22JST：host独立76+16/compile Werror0、native70184 actual0、093..096全新scope正常。詳細safe manifest=`evidence/provisional/PG502-cold-normal-v1/manifest.json`、Root refs-after SHA07d74f8b4a5dbf99b801ff2f272e57d1e693dfba61d323800dc180fc6b6d2f49。以下表の計画欄「未実行」は初期状態の記録で、この実結果を現在値とする。全fault/競合/同source親全体・native coverage・正式は未受入。
 
 NK-OPS-001/NK-BAT-001、WBS-N11/N14/G13.07、RD SYS-011/OPS-009～017、UI211/212/243/251～253、SS331332343353/SSC206207、BUG810/YKT579。

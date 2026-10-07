@@ -1,5 +1,7 @@
 # PG504 同inode明示mode・一回resume再試験仕様（実行前）
 
+追加評価BUG813：当runtime/全新scope正常・既原値保持は実測通りだが、PG502のnative role完全性は不足。PG504 normal receiptだけで後続native採取の全前提合格を認定しない。SSC193/196の6role cross-checkと正常owned停止後の別準備を要する。
+
 現在結果2026-10-08 01:34JST：hostJava10/Python65/Werror0、初回preflightのID負チェック失敗は不合格保持（BUG812）、new preflight-v2独立25正常。native88050 actual0/5.969021s・101..103全新scope正常。Root after SHA67fa28ad6f289589994af0be7022a20fe12b673685d0c151ffb791dd91fec52e・complete SHAac7a0eb9af359638ed84bab5951afe69cfc2636e2b460233f82029560aa762ad、safe evidence/provisional/PG504-runtime-normal-v1/manifest.json。以下初期「未実行」欄は計画履歴で、現在結果はここを正とする。親全体/coverage100/全faultmatrix/正式は未受入。
 
 NK-OPS-001/NK-BAT-001、WBS-N14/N11/G13.07、RD SYS-011/OPS-009～017、UI251～253、SS341343353/SSC198202206208、QA047/BUG811812/YKT580581。sourcea2/PG495/schema028/bootcc9不変更。
