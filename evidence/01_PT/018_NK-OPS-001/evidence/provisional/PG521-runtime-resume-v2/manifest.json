@@ -1,0 +1,57 @@
+{
+  "run": "PG521-runtime-resume-v2",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "toolSourceCommit": "e6540c3d36f5692a7b534bed12969c1bac6a5efc",
+  "branch": "dev-foundation",
+  "command": "python3 -B tools/quality/vm/050_s1/pg521_resume_native_v2.py",
+  "exitCode": 0,
+  "elapsedSeconds": 6.497433880998869,
+  "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+  "privateLogSha256": "8c4626ed5a14b8bd58f8ff2e520ad1fcc6d572baa9230272d910e10b6dae353c",
+  "artifacts": {
+    "before": "c758d3316b1b10605d44d1caecca3c93cdf1d0cb1897348d95b57daf2c424b96",
+    "after": "f72d6c82d7ab352e415b3d9547ec83cf5c3a0a9d80a77a1d795720e8f9f8991e",
+    "runtime": "3992c3bcbe97066de238cb97678bb71537643bb598dd5b63a702b15d9e2e44e3",
+    "complete": "479f6c1def5b869850c43bf708355a362ec6c80dd5ec5652a40627e4ba9ead80"
+  },
+  "testIds": [
+    "PT-OPS-PG521-001",
+    "PT-OPS-PG521-002",
+    "PT-OPS-PG521-003",
+    "PT-OPS-PG521-004"
+  ],
+  "related": [
+    "BUG-822",
+    "YKT-591",
+    "SSC-198",
+    "SSC-212",
+    "QA-047"
+  ],
+  "hostOracles": {
+    "compare": 33,
+    "cli": 6,
+    "writer": 75,
+    "faultPositions": 19,
+    "javacWarnings": 0,
+    "productionPT": 0
+  },
+  "independentPostconditions": {
+    "allNewScopesReturnedNormally": true,
+    "all24Tables452BatchRowsUnchanged": true,
+    "nativeRoles15AndOld4ExecUnchanged": true,
+    "currentInvalid3Unchanged": true,
+    "whole10Unit18KernelTerminal": true,
+    "peerAdvisory0": true,
+    "fixedRuntimeFromHeldFdPrepared": true,
+    "reloadCount": 1,
+    "starts": 0
+  },
+  "acceptance": "LIMITED_FRESH_RESUME_PREPARATION",
+  "formalRunChanged": false,
+  "wholeParentDone": false,
+  "native100": false,
+  "os": "isolated Linux PGPT VM",
+  "jdk": "25.0.4",
+  "redaction": "private artifact bodies/credentials/session/token/DB dump omitted",
+  "timestamps": "host private native log holds exact start/end; safe independent confirmation 2026-10-08 04:44JST"
+}

@@ -1,3 +1,7 @@
+## v2実結果（2026-10-08 04:44JST）
+
+工具source e6540c3d3、native69221 actual0/6.497433881s/log8c4626ed…。新M-A/DB/十Ref/保持FDの全scope正常、固定643byte runtime3992c3bc…をnew-only公開/sync/一回reload。独立再読はbefore c758d…/after f72d6c82…/complete479f6c1d…、全24table/452batch・whole10Unit18/kernel終端・旧exec4/native15・INVALID3・peer/advisory0を確認。safe manifestは evidence/provisional/PG521-runtime-resume-v2/manifest.json。初回v1拒否を合格へ算入0、真正親DONE/native100/正式認定未更新。
+
 # PG521 現保存点から別fresh一回resume設定
 
 NK-OPS-001/WBS-N14/SS343353/SSC198212/QA047。Productiona2/PG495/f699/schema028、既N14予算0.5/1.5/4群内、旧PG520正規退役と別new-only区間。工具限定をProductionPT/全親DONE/native100/正式へ加算0。
