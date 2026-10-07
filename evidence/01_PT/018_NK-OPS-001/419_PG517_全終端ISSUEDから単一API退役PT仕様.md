@@ -1,5 +1,7 @@
 # PG517 全終端ISSUEDから単一API退役
 
+実結果（2026-10-08 04:02JST）：native/session13964 actual0/23.424142440s、全新M/A/DB/十Ref/bus/root正常。stop0/同epochcanonical失効一回・単一API intent退役、startup3/元permit-owner不変。独立Root expected-invalid literalとの原byte等値、全24/452不変、全peer/advisory/FLOCK0を再読確認。after/retired SHA df3c5fc4…、complete962a…、current85776…/264byte、hostlog100ae…、safe manifestへ一意join。旧timeout143/closeUNKNOWNを成功化0。元の「未実行」記述は着手前仕様履歴として保持。native6role/runtime/新親DONE/native100/CHR/正式/工程全体は未受入。
+
 NK-OPS-001 / WBS-N10 / PT-OPS-PG517-001～006 / SS343353/SSC205209210211/QA047/BUG817820・YKT586589。Productiona2/PG495/schema028不変更、工具限定assertはProduction PT加点0。
 
 001: PG516正常handoff raw36362db…/complete d160…/wholevendor80a9…/PID1 87ab…/broker1c69…を原byteで固定し、PG505全row/treeとの厳密同値、現在同boot/署名187/currentPG495/元4startup ISSUEDと旧owner消失を確認。初期ISSUEDからderiveしたINVALIDだけを許す。

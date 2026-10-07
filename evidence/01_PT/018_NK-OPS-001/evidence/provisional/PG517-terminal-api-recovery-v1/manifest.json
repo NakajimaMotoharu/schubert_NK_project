@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001",
+  "wbsLeaf": "WBS-N10",
+  "run": "PG517-terminal-api-recovery-v1",
+  "branch": "dev-foundation",
+  "executionCommit": "b62cbe0ec4124e69846a0fee37aa308de851a25c",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "release": "PG495",
+  "schema": "028",
+  "status": "LIMITED_CANONICAL_REVOKE_SINGLE_API_RETIREMENT_ALL_NEW_SCOPES_PASS",
+  "command": "python3 -B tools/quality/vm/050_s1/pg517_terminal_api_native_v1.py",
+  "actualExit": 0,
+  "elapsedSeconds": 23.424142439998832,
+  "tests": [
+    "PT-OPS-PG517-001",
+    "PT-OPS-PG517-002",
+    "PT-OPS-PG517-003",
+    "PT-OPS-PG517-004",
+    "PT-OPS-PG517-005",
+    "PT-OPS-PG517-006"
+  ],
+  "hostAssertions": {
+    "issued": 35102,
+    "issuedReadFaultPositions": 302,
+    "transitionFaultPositions": 1699,
+    "singleMarker": 20907,
+    "singleFaultPositions": 1304,
+    "terminalReference": 152,
+    "vendorPid1": 48
+  },
+  "expected": {
+    "canonicalInvalidLiteral": true,
+    "startupFiles": 3,
+    "original24Tables452RowsUnchanged": true,
+    "permitOwnerUnchanged": true,
+    "oldNativeBytesPreserved": true,
+    "newScopesNormal": true,
+    "peersLocks0": true,
+    "stops0": true,
+    "starts0": true,
+    "databaseUpdates0": true
+  },
+  "actual": {
+    "canonicalInvalidLiteral": true,
+    "startupFiles": 3,
+    "original24Tables452RowsUnchanged": true,
+    "permitOwnerUnchanged": true,
+    "oldNativeBytesPreserved": true,
+    "newScopesNormal": true,
+    "peersLocks0": true,
+    "stops0": true,
+    "starts0": true,
+    "databaseUpdates0": true
+  },
+  "privateEvidence": {
+    "root": "/var/lib/pgpt-s1-preservation/pg517-terminal-api-recovery-v1",
+    "before": "506c9066342d2ef613d653cd54cd4f5873e7d3b90bdfb20b1baa08feb5cce298",
+    "after": "df3c5fc4f918c52941cf8acee3b0d26e5c7b96dc404ec73c10b084c0835e19e2",
+    "retired": "df3c5fc4f918c52941cf8acee3b0d26e5c7b96dc404ec73c10b084c0835e19e2",
+    "complete": "962a30fb2b18602f1e1c1a1bd6d2626d12664761e1bed10ff0af023686883880",
+    "expectedCurrent": "85776ad116f8f506a97a51a092afee8d2da2378bbe682c5cbf183ab3672f4da3",
+    "hostLog": "100ae482c0b72fad4f9e937353a2dff35ab3ebf07cdfcb9cc49d4b91a152ee20"
+  },
+  "bugs": [
+    "BUG-817",
+    "BUG-820"
+  ],
+  "ykts": [
+    "YKT-586",
+    "YKT-589"
+  ],
+  "ssc": [
+    "SSC-209",
+    "SSC-210",
+    "SSC-211"
+  ],
+  "coverage": "Operator only; no Production100% claim",
+  "productionPTDelta": 0,
+  "wbsAcceptedDelta": 0,
+  "formalDelta": 0,
+  "old143CloseUnknownRetained": true,
+  "secretRawIncluded": false
+}
