@@ -1,5 +1,7 @@
 # PG535 Bootstrap既存ADMIN20・新owned scope実PT仕様
 
+2026-10-08追補：sourceb024cb52d/compile-v2 Werror0/独立8＋CLI6/probe-v2actual0を束縛、実一回Unitは08:33:45～46JSTのordinary同actor/正常20/1.666104s/真正PID1Job41051/nativecapture成功。ただしsnapshot76 ExecStart実履歴差を設定差としたBUG829で工具closeUNKNOWN・二source退役未実行、旧run全体合格0。BUG828probe誤runは旧v1保全・v2訂正、同二source/normal20原値を438/SSC216へ保全継承し二重start0。新Tools/stageはv1、hostcompiled classesはv2、旧prototype段落は着手時履歴として読む。
+
 Program NK-ADM-001/NK-OPS-001、RD AUT001002/DAT009/OPS009/SCM、UI225226242/251、SS343 8.2 SSC188189190196/343 SSC213～215、451/487、WBS-N15.02既予算0.83/2/4.17pp再利用（新加算0）。PG534契約に続く同一未採取経路。Production maina2/PG495/schema028/BOMf699、当PG533 host test source6bbeの415PT結果はnative成功へ代用しない。
 
 ## 固定入力と独立oracle
