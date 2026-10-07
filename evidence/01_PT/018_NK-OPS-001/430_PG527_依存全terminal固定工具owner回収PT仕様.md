@@ -13,3 +13,5 @@ Productiona2/PG495/schema028、SS343/353 SSC214・QA047。design-onlysource9b794
 初期preflightは新broker全journalのJSON field出力順によるrawSHA差でguard拒否、操作/SAVE/TERM0（未実装fixtureとして保持、合格へ算入0）。全cursor/全field値/stream順を独立canonical JSON hashで比較し、新captureの**rawbyteは別privateファイル/SHAのまま保持**。既DB/raw artifact/旧SAVEを正規化して書換0、外部画面/電文順序は無関係で変更0。
 
 実行OS Ubuntu VM、bootcc9、Python標準lib＋既dbus、source固定後new-only一回。全private/hashはRoot pg527-prestop-owned-handoff-v1とhostPG379へ、Gitは秘密無し集計。独立595assert/undefined0、Production PT/coverage増分0。旧PG526工具のactual143/UNKNOWNと当限定回収actual0を区別し、別fresh全M-A/DB/十Ref正常終端/readback/native/正式品質は未完。実結果後記。
+
+実結果: source0612eeab2、native20678 actual0/log6f06d5ef…、beforec8c6b915…/complete0f673d9b…、全terminal二読/原値保持・固定工具owner消失/自peer-lock0/newRef正常close。旧PG52672205 actual143/710.619917573s/logaec5095a…・closeUNKNOWNを保持。独立後読で全10Unit18差0、native現8file（API-Web終端2を追加）、native100又は正式全受入へ加点0。safe=evidence/provisional/PG527-terminal-handoff-v1/manifest.json。
