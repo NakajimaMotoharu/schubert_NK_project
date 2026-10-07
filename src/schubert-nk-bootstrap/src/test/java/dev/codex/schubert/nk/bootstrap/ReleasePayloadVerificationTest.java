@@ -21,6 +21,53 @@ import org.junit.jupiter.api.io.TempDir;
  */
 final class ReleasePayloadVerificationTest {
   @Test
+  void fullBom017InterruptAfterChannelAcquisitionClosesWithoutReading() throws Exception {
+    var f = new Fixture("interrupt-after-acquire");
+    f.channelFault = "interrupt-on-open";
+    try {
+      refused(f);
+    } finally {
+      assertTrue(Thread.interrupted(), "cancellation is retained, then cleared by the test");
+    }
+    assertEquals(1, f.channelFaultReached);
+    assertEquals(1, f.channelCloses);
+  }
+
+  @Test
+  void fullBom018ManifestBoundsSameSizeTamperAndEnumerationLimitRefuse() throws Exception {
+    for (int size : new int[] {0, 1_048_577}) {
+      var f = new Fixture("manifest-size-" + size);
+      Files.write(f.release.resolve("RELEASE-MANIFEST.json"), new byte[size]);
+      refused(f);
+    }
+    var sameSize = new Fixture("same-size-tamper");
+    Files.writeString(
+        sameSize.release.resolve("VERSION"), "1.2.3-PG314\n", StandardCharsets.US_ASCII);
+    refused(sameSize);
+    var enumeration = new Fixture("enumeration-limit");
+    enumeration.namesFault = "limit";
+    refused(enumeration);
+    assertEquals(1, enumeration.namesFaultReached);
+    assertEquals(1, enumeration.namesCloses);
+  }
+
+  @Test
+  void fullBom019RegisteredThirdPartyJarIsNotAnNkSharedDependency() throws Exception {
+    var f = new Fixture("third-party-dependency");
+    f.payload.put("api/lib/vendor.jar", jar(Map.of("org/example/Vendor.class", new byte[] {8})));
+    f.literal.deps.put(
+        "org.example:vendor:1.0",
+        "{\"coordinate\":\"org.example:vendor:1.0\",\"paths\":[\"api/lib/vendor.jar\"]}");
+    f.publish();
+    var accepted = f.subject().verifyCandidate(f.approval);
+    assertEquals(f.payload.size(), accepted.artifactHashes().size());
+    assertEquals(
+        hash(f.payload.get("api/lib/vendor.jar")),
+        accepted.artifactHashes().get("api/lib/vendor.jar"));
+    f.released();
+  }
+
+  @Test
   void fullBom014ArchiveMetadataAndStreamDisagreementRefuseAndClose() throws Exception {
     for (String fault :
         List.of(
@@ -361,6 +408,7 @@ final class ReleasePayloadVerificationTest {
         channelCloses++;
         return null;
       }
+      if (channelFault.equals("interrupt-on-open")) Thread.currentThread().interrupt();
       return new SeekableByteChannel() {
         int reads, sizes;
 
@@ -429,6 +477,11 @@ final class ReleasePayloadVerificationTest {
           case "null" -> entries.add(null);
           case "foreign" -> entries.add(temporary.resolve("foreign-child"));
           case "duplicate" -> entries.add(entries.getFirst());
+          case "limit" -> {
+            entries.clear();
+            for (int index = 0; index <= 16384; index++)
+              entries.add(held.resolve("unsigned-" + index));
+          }
           default -> throw new AssertionError("unregistered fixture");
         }
         return new DirectoryStream<>() {
