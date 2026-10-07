@@ -38,3 +38,9 @@ source dbea258c7、2026-10-08 07:30:20～07:31:09JST、actual0/source不変。st
 次=追加017～019のsourceを固定し別 `pg533_bom_pt_v5.sh <HEAD>`。v4合格を変更後sourceへ流用せず、同じ2module全PT/static/counterを一回実行する。工程正式認定/全体native/IT/STを更新0。
 
 v5 source2e7977976/actual0/413PT・F/E/S0、BOM残1branch（loop interrupt前にFileChannelが拒否）。v6 sourcea0198551d80f185426a7f8d60aa498ee10aab0be/07:36:13～07:37:02JST/actual0/413PT・F/E/S0/static2module0、positive read一回後の取消と全closeを検証しBOM LINE244/METHOD31/CLASS1/BRANCH190全100%。WBS-P018-02の5family全体はStartupReleaseManifest createHost/Contents互換constructorが6line・2method未実行なので閉鎖まだ0。RELEASE010011を追加し別v7で全2moduleを再試験する。同じ作業群予算内、native操作0、旧v6を新sourceへ流用0。
+
+## v7 対象全family counter閉鎖（正式受入ではない）
+
+source6bbedeef8516c59d6ace7f871dc070024bd862f3、07:39:58～07:40:47JST/actual0/source不変、415PT/59suite（storage158/22・bootstrap257/37）F/E/S0、NullAway/SpotBugs2module0。独立host非Root拒否・互換constructor copy/null契約とBOM19PTを含む。WBS対象5family（下位型/record含む）LINE726/METHOD129/CLASS15/BRANCH386は全miss0。共通source a2に対して新storage/bootstrap165classの全byte一致を独立ZIP比較、全XML/static/jar/source/logをprivate pg533-bom-pt-v7-artifactsへ保存。safe manifest=`evidence/provisional/PG533-bom-pt-v7/manifest.json`。
+
+486はPG495基点を保持し当WBS一件だけ明示selected override（manifest/source/run/XML/静的/hash/元jarとの全classbyte一致・owner全module/PT非空）を機械再認証する。技術HOST_COUNTERS_CLOSED92→93/HOST_GAPS23→22、正式ACCEPTED0。audit拡張を独立正常/誤hash/source/run/WBS/失敗/正式誤称/不一致XML・jar・static/empty/owner module欠落で検査する（管理test、Production PT加算0）。全体全回帰/正式/残nativeを今回run成功に置換0、工数率null・旧scope/費用は維持。

@@ -1,0 +1,122 @@
+{
+  "programId": "NK-OPS-001",
+  "run": "PG533-bom-pt-v7",
+  "runRecordStem": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg533-bom-pt-v7",
+  "wbsIds": [
+    "WBS-P018-02"
+  ],
+  "branch": "dev-foundation",
+  "source": "6bbedeef8516c59d6ace7f871dc070024bd862f3",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "actualExit": 0,
+  "sourceUnchanged": true,
+  "FES": 0,
+  "staticIssues": 0,
+  "startedJST": "2026-10-08T07:39:58+09:00",
+  "completedJST": "2026-10-08T07:40:47+09:00",
+  "command": "bash tools/quality/vm/050_s1/pg533_bom_pt_v7.sh <full HEAD>",
+  "environment": {
+    "os": "Linux 7.0.0-38-generic",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "spotbugsPlugin": "4.10.4.0",
+    "hostUid": 1000
+  },
+  "coverageRoot": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg533-bom-pt-v7-artifacts",
+  "logSha256": "69f01702c37213484d8203408a1d6f7ec665204ad87d4f6a6def92a6a900a9d9",
+  "tests": 415,
+  "suites": 59,
+  "modules": [
+    {
+      "module": "storage",
+      "pt": {
+        "tests": 158,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": 22,
+      "coverageXmlSha256": "98013cf5a9d396b61ed4d7589cd73550f1da7f8a4ffb447f128cadab32fb7228",
+      "jarSha256": "225f5b1eedee1b76af9b868ee1fe8c22262e5f8ce1f74dd22b323cfc265fc651",
+      "priorJar": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg495-host/storage/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "priorJarSha256": "fe91a43a30b9c7880fcd137553264d7251158e8278272a017a035a521de1349c",
+      "spotbugsXmlSha256": "a7b0c124f7b421757b14edaeb588fb16d1882aa466cc8f5c2a87e271b08b53d0",
+      "productionClassInventoryEqual": true,
+      "comparedClasses": 72,
+      "classByteMismatch": 0,
+      "missed": {
+        "LINE": 0,
+        "METHOD": 0,
+        "CLASS": 0,
+        "BRANCH": 0
+      }
+    },
+    {
+      "module": "bootstrap",
+      "pt": {
+        "tests": 257,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": 37,
+      "coverageXmlSha256": "565bd4e12d6f8087239e967808e5efdf2a62a18e05c9a0c3439fda90987b7081",
+      "jarSha256": "1c8dfbb41ba6874725fbcbcd4b35c787062544db97e54b88111f151cf0400339",
+      "priorJar": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg495-host/bootstrap/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "priorJarSha256": "6a002bc7b8115a46f6e10b3c2222728f771ffa1a5488789b90854240d8ba64a9",
+      "spotbugsXmlSha256": "4b5c33932eba79118425533dfec88f13076eaa2a88b37efbb95a5286d3623cc1",
+      "productionClassInventoryEqual": true,
+      "comparedClasses": 93,
+      "classByteMismatch": 0,
+      "missed": {
+        "LINE": 165,
+        "METHOD": 33,
+        "CLASS": 1,
+        "BRANCH": 88
+      }
+    }
+  ],
+  "wbsMeasuredFamilies": 5,
+  "wbsCounters": {
+    "LINE": {
+      "missed": 0,
+      "covered": 726
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 129
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 15
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 386
+    }
+  },
+  "formalUpdated": false,
+  "acceptedWbsDelta": 0,
+  "nativeAccepted": false,
+  "ITSTAccepted": false,
+  "BUG": [
+    "BUG-826"
+  ],
+  "YKT": [
+    "YKT-595"
+  ],
+  "SSC": [],
+  "testIds": [
+    "PT-OPS-FULLBOM001..019",
+    "PT-OPS-RELEASE001..011"
+  ],
+  "oracle": "Independent literal release inventory, SHA256/ZIP, fixed SQL/CRC -690524359; malformed metadata/stream vectors; refusal and every owned resource close. No private reflection or production-generated expected result.",
+  "unaccepted": [
+    "target contract/trace/exit dependencies and formal acceptance",
+    "other module full PT and coverage100",
+    "same source all mandatory native roles/negative",
+    "remaining CHR/QA051 held comparison",
+    "IT/ST"
+  ]
+}

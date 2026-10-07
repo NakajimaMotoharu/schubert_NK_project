@@ -11,6 +11,7 @@ import pathlib
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+import zipfile
 from decimal import Decimal
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -128,6 +129,65 @@ def check_cost_rollup(originals, shared, children):
     return leaves, grouped
 
 
+def selected_measurement(row, production_source, prior_root):
+    """Pinned per-WBS selected result, never a mixed-source formal whole-run claim."""
+    override = row['measurementOverride']
+    path = ROOT / override['manifest']
+    require(digest(path) == override['manifestSha256'], 'selected manifest hash')
+    manifest = read_json(path)
+    require(manifest['source'] == override['source']
+            and re.fullmatch('[0-9a-f]{40}', manifest['source'])
+            and manifest['productionSource'] == production_source
+            and manifest['run'] == override['run']
+            and row['id'] in manifest['wbsIds'], 'selected source/run/WBS mismatch')
+    require(manifest['actualExit'] == manifest['FES'] == manifest['staticIssues'] == 0
+            and manifest['sourceUnchanged'] is True
+            and manifest['formalUpdated'] is False
+            and manifest['acceptedWbsDelta'] == 0, 'selected incomplete/formal claim')
+    stem = pathlib.Path(manifest['runRecordStem'])
+    require(pathlib.Path(str(stem) + '.source').read_text().strip() == manifest['source']
+            and pathlib.Path(str(stem) + '.exit').read_text().strip() == '0'
+            and digest(pathlib.Path(str(stem) + '.log')) == manifest['logSha256'], 'selected run record')
+    data = {}
+    for module in manifest['modules']:
+        name = module['module']
+        require(name not in data, 'selected duplicate module')
+        directory = pathlib.Path(manifest['coverageRoot']) / name
+        xml = directory / 'site/jacoco/jacoco.xml'
+        jar = directory / ('schubert-nk-' + name + '-0.1.0-SNAPSHOT.jar')
+        prior = pathlib.Path(module['priorJar'])
+        require(prior == pathlib.Path(prior_root) / name / jar.name, 'selected baseline jar binding')
+        require(digest(xml) == module['coverageXmlSha256']
+                and digest(jar) == module['jarSha256']
+                and digest(prior) == module['priorJarSha256'], 'selected artifact hash')
+        with zipfile.ZipFile(jar) as fresh, zipfile.ZipFile(prior) as original:
+            a = [n for n in fresh.namelist() if n.endswith('.class')]
+            b = [n for n in original.namelist() if n.endswith('.class')]
+            require(len(a) == len(set(a)) and len(b) == len(set(b)) and set(a) == set(b),
+                    'selected production class inventory')
+            require(all(fresh.read(n) == original.read(n) for n in a), 'selected production byte drift')
+        static = directory / 'spotbugsXml.xml'
+        require(digest(static) == module['spotbugsXmlSha256']
+                and not ET.parse(static).getroot().findall('.//BugInstance'), 'selected static result')
+        suites = [ET.parse(p).getroot() for p in (directory / 'surefire-reports').glob('TEST-*.xml')]
+        pt = {k: sum(int(s.attrib.get(k, 0)) for s in suites)
+              for k in ('tests', 'failures', 'errors', 'skipped')}
+        require(pt == module['pt'] and pt['tests'] > 0
+                and pt['failures'] == pt['errors'] == pt['skipped'] == 0, 'selected XML result')
+        groups = {}
+        for node in ET.parse(xml).getroot().findall('./package/class'):
+            family = node.attrib['name'].split('$')[0]
+            values = groups.setdefault(family, {k: [0, 0] for k in ('LINE', 'METHOD', 'CLASS', 'BRANCH')})
+            for counter in node.findall('counter'):
+                if counter.attrib['type'] in values:
+                    pair = values[counter.attrib['type']]
+                    pair[0] += int(counter.attrib['missed'])
+                    pair[1] += int(counter.attrib['covered'])
+        data[name] = groups
+    require(data, 'selected empty modules')
+    return data
+
+
 def check_measurement(snapshot, inventory):
     binding = inventory['measurementBindings']
     manifest = read_json(ROOT / binding['manifest'])
@@ -153,12 +213,17 @@ def check_measurement(snapshot, inventory):
     for row in snapshot['rows']:
         if 'measuredFamilies' not in row:
             continue
+        row_data = selected_measurement(row, snapshot['source'], binding['coverageRoot']) if 'measurementOverride' in row else data
+        if 'measurementOverride' in row:
+            require(all(a['module'] in row_data for a in inventory['artifacts']
+                        if a['owner'] == row['id'] and a['kind'] == 'JAVA' and a['module'] in data),
+                    'selected omitted owner module')
         targets = [a for a in inventory['artifacts'] if a['owner'] == row['id']
-                   and a['kind'] == 'JAVA' and a['module'] in data]
+                   and a['kind'] == 'JAVA' and a['module'] in row_data]
         counters = []
         declaration_only = 0
         for artifact in targets:
-            counter = data[artifact['module']].get(artifact['class'])
+            counter = row_data[artifact['module']].get(artifact['class'])
             if artifact.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE':
                 require(counter is not None and all(sum(v) == 0 for v in counter.values()),
                         'interface gained executable counters')
