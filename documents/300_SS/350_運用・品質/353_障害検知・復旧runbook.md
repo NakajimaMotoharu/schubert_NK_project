@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC207（2026-10-08）：SS343のPG501 NEW_NAMESPACE前・親DB契約混同に限定したowned child→Java pidfd TERM回収を適用する。actual143/closeUNKNOWNを成功化しない。全cold/現在boot/署名/完全原本/全24/442/永続102・新namespace不在/immutable/source/所有を独立に保存し、元所有消失/peer-lock0/全原値不変更を確認後だけ別新工具へ進む。DB idle期限切れ、GC、OS cleanupは旧資源正常帰還の証拠でなく、SOURCE/所有不明時は隔離・再付着を維持する。BUG810のRW親/独立RO reader是正と実再発防止は別受入条件。
+
 SSC206（2026-10-08）：SS343の現PG495/source a2/別boot/全24・442・永続102要素のcold限定復旧を適用する。旧/run/runtime/startupとhost bind消失を旧PG499正規退役又は資源closeの証拠へ読み替えず、旧native143/UNKNOWNとBUG544/YKT388を保持する。新M/A/専用DB/advisory/十Ref・現全10cold/kernel・保存原値/署名/BOM/profile・全新scope正常を独立実証した範囲だけ通常same-run resumeへ進める。原値不一致/未知owner/混在current/不明closeでは隔離継続、旧raw復元/一般UNKNOWN補修/新ISSUED/start/手DB書込は当復旧段0。cold工具のprofile/byte境界失敗も915/916・独立再現/再試験へ追跡する。
 
 SSC205（2026-10-07）：SS343のPG496・pending/no-intent・revoke前7receipt後UNKNOWNだけについて、先行依存終端Artemisの完全vendor/PID1/full18/kernel、API/Web cleanup/native・元全24/原本BackupTransfer/設定/startup原byte不変を固定ownerの実保持下で私有捕捉する。boot/PID/ticks/Root/argv/class・全task子0/M-A inode/他owner無し/専用DB又は既idle消失を現在認証して一回pidfd TERM、旧actual143/close不明を別保持。全peer/lock/旧process/kernel消失・全原値不変更後にだけ別fresh所有の同epoch canonical失効を許し、全新scope正常を独立証明する。旧native/backup/DB/原本保全、raw秘密Git非格納、停止データを親成功・旧資源正常closeにしない。不明時は隔離/再付着、start/新epoch/permit/Pair/DONE/DDL/手DB書込は発行しない。
