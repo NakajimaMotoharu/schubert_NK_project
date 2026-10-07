@@ -1,0 +1,125 @@
+package dev.codex.schubert.nk.batch.file;
+
+import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.*;
+import java.security.*;
+import java.util.*;
+
+/** PT-OPS-PG513-001004005: independent public golden bytes, real FD, synthetic Root/tmpfs. */
+public final class Pg515IssuedApiRecoveryTest {
+  static int checks;
+  static void check(boolean v){checks++;if(!v)throw new AssertionError("single intent independent oracle");}
+  static final String E="31100027-4444-4333-8444-555555555555";
+  static final String B="boot_id=31100027-3333-4333-8444-555555555555\nepoch_id="+E+"\nrun_id=31100027-2222-4333-8444-555555555555\ncutoff_utc=2026-09-27T15:00:00.000000Z\nactivation_id=31100027-6666-4777-8888-999999999999\n";
+  static final String CURRENT="NKEPOCH1\nstate=INVALID\n"+B+"permit_sha256=-\n";
+  static final String PERMIT="NKPERMIT1\n"+B+"broker_invocation_id="+"2".repeat(32)+"\nrelease_sha256="+"b".repeat(64)+"\napi_config_sha256="+"c".repeat(64)+"\nweb_config_sha256="+"d".repeat(64)+"\nroots_sha256="+"e".repeat(64)+"\nprestart_steps_sha256="+"f".repeat(64)+"\n";
+  static final String OWNER="""
+      NKMAINTOWNER1
+      boot=31100027-3333-4333-8444-555555555555
+      run=31100027-2222-4333-8444-555555555555
+      activation=31100027-6666-4777-8888-999999999999
+      cutoff=2026-09-27T15:00:00Z
+      epoch=31100027-4444-4333-8444-555555555555
+      morning_invocation=bbb6dc1276a4459da65143db3e4ee3f0
+      morning_pid=5872
+      morning_start_ticks=380665
+      cleanup_invocation=-
+      cleanup_pid=-
+      cleanup_start_ticks=-
+      deadline_nanos=5608000000000
+      """;
+  static class Fixture implements AutoCloseable,StartupPermitFiles.Io {
+    final BackupPublicationFixture f;
+    Fixture(Path temporary)throws Exception{
+      f=new BackupPublicationFixture(temporary);Files.delete(f.child);
+      f.metadata=(role,v)->{v.put("uid",0);v.put("gid",0);};
+      put("epoch.current",CURRENT);put(E+".permit",PERMIT);put(E+".owner",OWNER);put(E+".API.start.intent","");
+      f.events.clear();f.counts.clear();f.position=0;
+    }
+    void put(String n,String bytes)throws IOException{Files.writeString(f.parent.resolve(n),bytes);Files.setAttribute(f.parent.resolve(n),"unix:mode",0600);}
+    void immutable()throws IOException{
+      check(Files.readString(f.parent.resolve("epoch.current")).equals(CURRENT));
+      check(Files.readString(f.parent.resolve(E+".permit")).equals(PERMIT));
+      check(Files.readString(f.parent.resolve(E+".owner")).equals(OWNER));
+    }
+    void preserved()throws IOException{
+      immutable();check(!Files.exists(f.parent.resolve(E+".API.launch")) && !Files.exists(f.parent.resolve("permit-start.intent")));
+    }
+    void retire()throws Exception{
+      var epoch=StartupPermitRecords.readEpoch(CURRENT.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+      Pg513SingleApiIntent.retire(f.root,epoch,epoch.activation(),"b".repeat(64),this::preserved,()->{},f,this);
+    }
+    public Map<String,Object> attributes(Path p)throws IOException{return f.attributes(p);}
+    public String filesystem(Path p){return f.filesystem(p);}
+    public SeekableByteChannel open(Path p)throws IOException{return f.open(p);}
+    public InspectorEnvironmentPublisher.Writer openWriter(Path p)throws IOException{return f.openWriter(p);}
+    public void replace(Path d,String p,String c){throw new AssertionError("current rewrite forbidden");}
+    public MessageDigest digest()throws NoSuchAlgorithmException{return MessageDigest.getInstance("SHA-256");}
+    public void close()throws dev.codex.schubert.nk.storage.StorageIoException{f.track=false;f.close();}
+  }
+  static final String ISSUED=issuedText();
+  static String issuedText() {
+    try {return CURRENT.replace("state=INVALID","state=ISSUED").replace("permit_sha256=-","permit_sha256="+HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(PERMIT.getBytes(java.nio.charset.StandardCharsets.US_ASCII))));}
+    catch(NoSuchAlgorithmException failure){throw new AssertionError(failure);}
+  }
+  static class IssuedFixture extends Fixture {
+    IssuedFixture(Path temp)throws Exception{super(temp);put("epoch.current",ISSUED);f.events.clear();f.counts.clear();f.position=0;}
+    void immutableOriginals()throws IOException {
+      check(Files.readString(f.parent.resolve(E+".permit")).equals(PERMIT));
+      check(Files.readString(f.parent.resolve(E+".owner")).equals(OWNER));
+      check(!Files.exists(f.parent.resolve(E+".API.launch")) && !Files.exists(f.parent.resolve("permit-start.intent")));
+    }
+    StartupPermitRecords.Permit authenticate()throws IOException {
+      var epoch=StartupPermitRecords.readEpoch(ISSUED.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+      return Pg515IssuedApiRecovery.issued(f.root,epoch,epoch.activation(),"b".repeat(64),f,this);
+    }
+    void transition()throws IOException {
+      var issued=StartupPermitRecords.readEpoch(ISSUED.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+      var permit=authenticate();var invalid=Pg515IssuedApiRecovery.invalid(issued);
+      var files=new StartupPermitFiles(f.root,f,this,()->java.util.UUID.fromString("aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee"));
+      check(invalid.equals(files.revoke(invalid,permit)));check(Files.readString(f.parent.resolve("epoch.current")).equals(CURRENT));
+      immutableOriginals();check(Files.readString(f.parent.resolve(E+".API.start.intent")).isEmpty());
+      Pg513SingleApiIntent.retire(f.root,invalid,invalid.activation(),"b".repeat(64),this::preserved,()->{},f,this);
+    }
+    @Override public void replace(Path dir,String part,String current)throws IOException {
+      check(current.equals("epoch.current") && part.equals("aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee.part"));
+      Files.move(dir.resolve(part),dir.resolve(current),StandardCopyOption.ATOMIC_MOVE);
+    }
+  }
+  public static void main(String[] ignored)throws Exception {
+    Path temporary=Files.createTempDirectory("pg515-issued-synthetic-oracle-");int positions;
+    try(var fixture=new IssuedFixture(temporary)){
+      var p=fixture.authenticate();check(p.releaseDigest().equals("b".repeat(64)));
+      positions=fixture.f.position;fixture.transition();fixture.preserved();
+      check(!Files.exists(fixture.f.parent.resolve(E+".API.start.intent")));
+      check(!Files.exists(fixture.f.parent.resolve("aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee.part")));
+    }
+    for(int point=1;point<=positions;point++)try(var fixture=new IssuedFixture(temporary)){
+      int fault=point;
+      fixture.f.hook=(name,n)->{
+        if(!name.equals("clock") && !name.equals("effectiveUid") && fixture.f.position+1==fault)
+          fixture.f.faults.put(name+"#"+n,new dev.codex.schubert.nk.storage.StorageIoException(dev.codex.schubert.nk.storage.StorageIoException.Reason.UNAVAILABLE));
+      };
+      try{fixture.authenticate();throw new AssertionError("issued read fault accepted");}catch(IOException|IllegalArgumentException expected){check(true);}
+      fixture.immutableOriginals();check(Files.readString(fixture.f.parent.resolve("epoch.current")).equals(ISSUED));
+      check(Files.exists(fixture.f.parent.resolve(E+".API.start.intent")));
+    }
+    for(String n:List.of("permit-start.intent",E+".WEB.start.intent",E+".API.launch","foreign"))try(var fixture=new IssuedFixture(temporary)){
+      fixture.put(n,"");try{fixture.authenticate();throw new AssertionError("foreign accepted");}catch(IOException expected){check(true);}
+      check(Files.readString(fixture.f.parent.resolve("epoch.current")).equals(ISSUED));
+    }
+    for(String bad:List.of("corrupt",""))try(var fixture=new IssuedFixture(temporary)){
+      fixture.put("epoch.current",bad);try{fixture.authenticate();throw new AssertionError("bad epoch accepted");}catch(IOException expected){check(true);}
+      fixture.immutableOriginals();check(Files.readString(fixture.f.parent.resolve("epoch.current")).equals(bad));
+    }
+    try(var fixture=new IssuedFixture(temporary)){
+      fixture.put(E+".API.start.intent","corrupt");try{fixture.authenticate();throw new AssertionError("bad marker accepted");}catch(IOException expected){check(true);}
+      check(Files.readString(fixture.f.parent.resolve(E+".API.start.intent")).equals("corrupt"));
+    }
+    var invalid=StartupPermitRecords.readEpoch(CURRENT.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+    try{Pg515IssuedApiRecovery.invalid(invalid);throw new AssertionError("invalid replay accepted");}catch(IOException expected){check(true);}
+    try{Pg515IssuedApiRecovery.invalid(null);throw new AssertionError("null accepted");}catch(IOException expected){check(true);}
+    System.out.println("PG515_ISSUED_ORACLE independentAssertions="+checks+" readFaultPositions="+positions+" goldenCanonicalTransition=true realFD=true syntheticRootTmpfs=true vmActions0=true productionPT0=true");
+  }
+}

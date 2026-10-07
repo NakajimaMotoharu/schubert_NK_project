@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001",
+  "wbsLeaf": "WBS-N10",
+  "run": "PG516-terminal-handoff-v1",
+  "status": "LIMITED_OWNER_HANDOFF_PASS_OLD_NATIVE143_UNKNOWN_PRESERVED",
+  "branch": "dev-foundation",
+  "executionBaseCommit": "f5d573ce60cc15cc798e76a7d1aced34baae92e6",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "release": "PG495",
+  "schema": "028",
+  "jvm": "25.0.4",
+  "testIds": [
+    "PT-OPS-PG516-001",
+    "PT-OPS-PG516-002",
+    "PT-OPS-PG516-003",
+    "PT-OPS-PG516-004"
+  ],
+  "command": "python3 -B tools/quality/vm/050_s1/pg516_terminal_handoff_native_v1.py",
+  "actualExit": 0,
+  "hostIndependentAssertions": {
+    "ownerPrimaryPeer": 63,
+    "artifactSchema": 73
+  },
+  "bugIds": [
+    "BUG-820"
+  ],
+  "yktIds": [
+    "YKT-589"
+  ],
+  "ssc": [
+    "SSC-205",
+    "SSC-210",
+    "SSC-211"
+  ],
+  "designOnlyMainCommit": "dd2e8bedccbe483ac476e0349ce0eb2fac4ca111",
+  "designPr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/46",
+  "expected": [
+    "fixed child then Java pidfd TERM once each",
+    "whole ten terminal units, DB24-452/persistent102/startup4ISSUED/native/runtime/config unchanged relative to validated partial-stop profile",
+    "peer-advisory-flock zero; old close unknown"
+  ],
+  "actual": {
+    "ownedTerm": true,
+    "allOriginalValuesUnchangedTwice": true,
+    "currentIssuedPreserved": true,
+    "peersLocks0": true,
+    "businessActions0": true,
+    "stops0": true,
+    "revoke0": true,
+    "intentRetire0": true
+  },
+  "oldPG515": {
+    "actualExit": 143,
+    "elapsedSeconds": 373.91954287200133,
+    "privateLogSha256": "4b268b3588a770ab8779034437bf865429c273b1f1baac73c9d284fef6bdc400",
+    "cause": "Artemis ExecStart primary termination history incorrectly compared as immutable config; all DB rows unchanged",
+    "oldClose": "UNKNOWN",
+    "isolationPrintInterpretation": "Original issued marker authenticated/preserved; no marker creation inferred from API_MARKER_RESTORED_CURRENT_MA label",
+    "partialReceipt": "Expiry stopped exists; Cleanup stop-reserved exists; Cleanup/Broker stopped absent; absence preserved"
+  },
+  "privateEvidence": {
+    "root": "/var/lib/pgpt-s1-preservation/pg516-terminal-issued-handoff-v1",
+    "beforeSha256": "36362db410eb99db610dc896adf95bb2c9f485c9c81518da0c99cdd353758a80",
+    "completeSha256": "d1609b932980f852f94149e8f0726fdae8959b717ba03f33b882a22c1cb6b2ad",
+    "vendorSha256": "80a915f03aaccd50cf00615113e50aa1b4e54219eb79af36a9b523d5dbf5d33b",
+    "pid1Sha256": "87ab69fec569541ea8b76118e4692a4b03fdc7dcbc50e91557fa81614b9b3889",
+    "brokerWitnessSha256": "1c697a99098f72a985ea657e91968e6f636a004ab1314d7b7e1feac444f21ddb",
+    "hostLogSha256": "0667059e9b57ddb61cbe30b8168336988e64a37bb1d6f041affdcb86d7bcc19e"
+  },
+  "productionPTDelta": 0,
+  "wbsAcceptedDelta": 0,
+  "formalDelta": 0,
+  "coverage": "operator test only, no production coverage acceptance",
+  "notAccepted": [
+    "fresh canonical sameepochrevoke/APIintent retirement",
+    "native6roles/runtime/freshparentDONE/native100/CHR/formal/ITST"
+  ],
+  "secretRawIncluded": false
+}
