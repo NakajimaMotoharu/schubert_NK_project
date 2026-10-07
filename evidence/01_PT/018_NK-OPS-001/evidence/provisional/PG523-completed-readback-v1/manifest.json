@@ -1,0 +1,74 @@
+{
+  "run": "PG523-completed-readback-v1",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "toolSourceCommit": "1c36a352d4d3005f7bf78c70dfdefb678e6325e5",
+  "branch": "dev-foundation",
+  "command": "python3 -B tools/quality/vm/050_s1/pg523_completed_native_v1.py",
+  "actualExit": 0,
+  "elapsedSeconds": 2.9292987339977117,
+  "privateLogSha256": "b47cef5e44891a62de91ef6a567878c14c99a5592e871c6fea808b70c7fc3183",
+  "privateArtifacts": {
+    "before": "07b5dc48adeaa97f3aba60f47ba1086df847302fb962f4467504c832497a53ec",
+    "after": "07b5dc48adeaa97f3aba60f47ba1086df847302fb962f4467504c832497a53ec",
+    "complete": "351201a9d449f02da44037d7b589c44d597b590cb412a8aa258cd0b2b3d4ed31"
+  },
+  "parent": {
+    "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "invocation": "8f4514e19fd94c429f2587af71edb53a",
+    "originalPid": 320189,
+    "job": 26968,
+    "startMonotonicUs": 15089848500,
+    "doneMonotonicUs": 16431357068,
+    "elapsedSeconds": 1341.508568,
+    "budgetSeconds": 1800,
+    "pid1ActualDone": true,
+    "unitGcZerosNotUsedAsProof": true
+  },
+  "postconditions": {
+    "originalCurrentRunDoneSuccess": true,
+    "startIntentSuffixAbsent": true,
+    "old452AllColumnsPreserved": true,
+    "newTenLiteralSkipAndAttemptIncrement": true,
+    "requestsEmpty": true,
+    "allNewScopesNormal": true,
+    "ownDbPeerAdvisory0": true,
+    "beforeAfterOriginalStartupRowsUnitsEqual": true,
+    "apiWebCaddyStillSameLiveGeneration": true
+  },
+  "hostTests": {
+    "pythonOracleAssertions": 80,
+    "cliAssertions": 6,
+    "nullNpe": 0,
+    "javacWarnings": 0,
+    "pythonUndefined": 0,
+    "productionPtDelta": 0
+  },
+  "testIds": [
+    "PT-OPS-PG523-001",
+    "PT-OPS-PG523-002",
+    "PT-OPS-PG523-003",
+    "PT-OPS-PG523-004",
+    "PT-OPS-PG523-005"
+  ],
+  "environment": {
+    "os": "Ubuntu26.04 isolated PGPT VM",
+    "jdk": "25.0.4",
+    "postgres": "18"
+  },
+  "confirmedAtJST": "2026-10-08T05:33:48+09:00",
+  "exactExecutionTimestampRef": "host Root-private log start/end ISO timestamps",
+  "rawExported": false,
+  "native100": false,
+  "ownedStopCompleted": false,
+  "formalUpdated": false,
+  "old143UnknownNormalized": false,
+  "related": [
+    "QA-047",
+    "SSC-198",
+    "SSC-212",
+    "BUG-813",
+    "BUG-814",
+    "YKT-582",
+    "YKT-583"
+  ]
+}

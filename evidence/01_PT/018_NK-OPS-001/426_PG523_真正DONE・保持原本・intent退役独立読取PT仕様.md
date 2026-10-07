@@ -1,5 +1,9 @@
 # PG523 真正DONE・保持原本・intent退役の独立読取
 
+## 実結果（2026-10-08 05:33:48JST確認）
+
+source1c36a352d/native5134 actual0/2.929298734s、logb47cef5e…、before=after07b5dc48…/complete351201a9…（Root private shape units/rows/pid1/startup/originals）。新M-A/RODB/advisory/十Ref/FD全scope正常、当親真正DONE1341.508568s・原本SUCCESS/全startintent退役/3request空・旧452全列+新10承認SKIP/stepattempt増分を確認。独立再読beforeAfter一致/462行/10Unit、当DBpeer/advisory0。safe evidence/provisional/PG523-completed-readback-v1/manifest.json。API/Web/Caddy同世代live保持、owned停止とnative100/全品質は後続、旧143UNKNOWNは不変更。
+
 NK-OPS-001、WBS-N09/SS341342343353/SSC198212/QA047。Productiona2/PG495/f699/schema028固定、既N05～N09群3/10.5/26pp内、追加群予算を二重加算0。正式run24/1964/53scopeは変更しない。
 
 - PT-OPS-PG523-001: 今回親bootcc9/INV8f4514e…/元Main320189/start15089848500us/Job26968を独立固定。PID1 start19:46:29.837227UTC、success/DONE20:08:51.344734UTC/monotonic16431357068usの4record、elapsed1341.508568s<=元1800s。GC後の空INV/0codeを成功根拠にしない。異boot/異INV/非PID1/UID/COMM/Unit・過去Job/stop/failed/欠落/重複/範囲外は拒否。
