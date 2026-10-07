@@ -1,0 +1,156 @@
+{
+  "id": "PG500-cold-readonly-v1",
+  "formal": false,
+  "productionTestCount": 0,
+  "branch": "dev-foundation",
+  "expectedProductionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "timeUTC": "2026-10-07T15:52:46.249549+00:00",
+  "hostKernel": "7.0.0-38-generic",
+  "head": "2a6dfe0179a957dca9692e70170dafd838eb3ff4",
+  "privateLogHashes": {
+    "pg500-restart-readonly-v1.private.log": "bd273a5b8594f4317e503cb83fc491472a32b3f299c563118b7553487fd4e00f",
+    "pg500-restart-readonly-v2.private.log": "50d2cd1b72dadb32b564b7d0bebf135d29cb80ad8e5e0b0474e125de64d6a011",
+    "pg500-persistent-readonly-v1.private.log": "9b0b53126986146660e934ca592b53b4a5b2152f30700420accc2e334ebe9262"
+  },
+  "sourceFiles": [
+    {
+      "path": "tools/quality/vm/050_s1/pg500_boot_isolated_v1.sh",
+      "sha256": "73b4c2884fdc8ce9d6cab7e81ac587b135d0b2974e9baf30c5582a4045e465b6"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg500_offline_capture_v1.sh",
+      "sha256": "527dc199e092757a501e4c93056d4bb1d4cbb087380fae4cbda674e52ee30dcf"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg500_persistent_readonly_v1.py",
+      "sha256": "24066a1261435fe36369c951cd20fac426a6df2be7d9df5a3b5d5ebf20b9caf2"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg500_readonly_test.py",
+      "sha256": "762e0bb2e6f81c3357ede1cf40b3a6213e75321eec258e8a1d349c896c46aef0"
+    },
+    {
+      "path": "tools/quality/vm/050_s1/pg500_restart_readonly_v1.py",
+      "sha256": "ab1738f8fa33f1e49e312cb1ee2e58b769c086be5f21f049b63ef67446c9cc41"
+    }
+  ],
+  "actual": {
+    "persistentRoots": 5,
+    "persistentEntries": 102,
+    "differences": [],
+    "volatileAbsent": 4,
+    "currentBoot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "releaseHostReadOnly": false,
+    "runtimePresent": false,
+    "starts": 0,
+    "databaseUpdates": 0,
+    "oldRetirementProven": false
+  },
+  "operatorSourceDirty": true,
+  "wbs": [
+    "WBS-G13.07",
+    "WBS-N11",
+    "WBS-N14"
+  ],
+  "environment": {
+    "hostKernel": "7.0.0-38-generic",
+    "guestBoot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+    "guestOSVersion": null,
+    "guestJdkVersion": null,
+    "note": "fresh guest version not queried; no inferred version proof"
+  },
+  "tests": [
+    {
+      "testId": "PT-OPS-PG500-002",
+      "command": "python3 -B tools/quality/vm/050_s1/pg499_runtime_retirement_test.py",
+      "exitCode": 0,
+      "assertions": 28
+    },
+    {
+      "testId": "PT-OPS-PG500-003",
+      "command": "bash tools/quality/vm/050_s1/pg500_offline_capture_v1.sh",
+      "exitCode": 0,
+      "expected": "source disk identity/hash unchanged and private copy identical",
+      "actual": "PASS"
+    },
+    {
+      "testId": "PT-OPS-PG500-004",
+      "command": "bash tools/quality/vm/050_s1/pg500_boot_isolated_v1.sh",
+      "exitCode": 0,
+      "expected": "management-only, no business start; cold full18/10Unit and empty kernel",
+      "actual": "PASS"
+    },
+    {
+      "testId": "PT-OPS-PG500-005",
+      "command": "python3 -B tools/quality/vm/050_s1/pg500_restart_readonly_v1.py --corrected-v2; python3 -B tools/quality/vm/050_s1/pg500_persistent_readonly_v1.py",
+      "exitCode": 0,
+      "expected": {
+        "tables": 24,
+        "batchRows": 442,
+        "persistentRoots": 5,
+        "persistentEntries": 102,
+        "differences": 0
+      },
+      "actual": {
+        "tables": 24,
+        "batchRows": 442,
+        "persistentRoots": 5,
+        "persistentEntries": 102,
+        "differences": [],
+        "volatileAbsent": 4,
+        "currentBoot": "cc9ed874-7f4f-450e-a188-8de1e42c8441",
+        "releaseHostReadOnly": false,
+        "runtimePresent": false,
+        "starts": 0,
+        "databaseUpdates": 0,
+        "oldRetirementProven": false
+      }
+    },
+    {
+      "testId": "PT-OPS-PG500-006",
+      "expected": "different boot with missing runtime must not be credited as retirement",
+      "actual": "old runtime/startup absent; retirement remains NOT_ACCEPTED",
+      "exitCode": 0
+    },
+    {
+      "testId": "PT-OPS-PG500-LIMIT-001..009",
+      "command": "python3 -B tools/quality/vm/050_s1/pg500_readonly_test.py",
+      "assertions": 9,
+      "exitCode": 0
+    }
+  ],
+  "nonpassing": [
+    {
+      "command": "pg500_restart_readonly_v1.py",
+      "exitCode": 1,
+      "cause": "BUG809: full DB 21,337,529byte over initial8MiB guard",
+      "sha256": "bd273a5b8594f4317e503cb83fc491472a32b3f299c563118b7553487fd4e00f"
+    },
+    {
+      "command": "initial readonly fixture",
+      "exitCode": 1,
+      "cause": "DEVNULL missing, no native execution"
+    }
+  ],
+  "bugs": [
+    "BUG-809",
+    "BUG-808",
+    "BUG-544"
+  ],
+  "ykt": [
+    "YKT-578",
+    "YKT-577",
+    "YKT-388"
+  ],
+  "ssc": [
+    "SSC-206",
+    "SSC-174"
+  ],
+  "coverage": "operator-only, Production/native100 not proven",
+  "limitations": [
+    "WBS/full contract not ACCEPTED; formal PT1964/53scope unchanged.",
+    "typedBOM/hostRO/newINVALID under fresh M/A/DB/10Ref not yet executed.",
+    "PG499 corrected pin host28 only; old runtime disappeared with boot, no normal retirement proof."
+  ],
+  "redaction": "only code/counters/hash/boot, no credential/token/session/key/master/raw DB/native bytes"
+}
