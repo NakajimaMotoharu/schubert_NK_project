@@ -17,8 +17,9 @@ PG534新private読取りcapture SHA c2ba4940463f57937cd377aeb063acdd8a8fdeb2df2c
 | PT-OPS-PG534-ROLE001 | literal8 current roleを十closed roleへjoin | present8/missing ordinary-bootstrap196・ordinary-inspector196の2、native/coverage受入false |
 | PT-OPS-PG534-ROLE002 | phantom Root/誤名alias/unknown/duplicate/null/非list | 全拒否、類推でrole拡張しない |
 | PT-OPS-PG534-ROLE003 | 実private metadata、uid/gid/mode/サイズ0・上限超過・bool・名前/dir/row変異 | 正常metadata8のみ分類、全不一致拒否、古い5namespaceは保存対象でcurrent採取0 |
+| PT-OPS-PG534-ROLE004 | 現十Unit集合・二terminalのordinaryUser/Group/entry・oneshot/Restart/RemainAfterExit/終了code/idleを結合、全14field×2Unit×foreign/null/missing | 同設計のdeclareのみ認証、全不一致/alias/Root phase/unknown Unit拒否、startupAuthorized=false（生actor/署名全体/原本/所有の代替0） |
 
-command=`python3 -B tools/quality/vm/050_s1/pg534_native_role_contract_test.py`、3管理test（subcase内数）、Production PT加算0。既host v7のTerminalNativeCoverageProfileTest4PTは別source固定結果の参照とし新テスト件数へ加点0。未採取2roleの実Unit正常終了/nativeと全mandatory negative/PID-INV/source/actorはまだ未受入。
+command=`python3 -B tools/quality/vm/050_s1/pg534_native_role_contract_test.py`、4管理test（subcase内数）、Production PT加算0。既host v7のTerminalNativeCoverageProfileTest4PTは別source固定結果の参照とし新テスト件数へ加点0。未採取2roleの実Unit正常終了/nativeと全mandatory negative/PID-INV/source/actorはまだ未受入。
 
 ## 次の実fixture契約
 

@@ -15,6 +15,11 @@ CURRENT = {
     'ordinary-bootstrap196': ('schubert-nk-bootstrap-admin.service', 999, 981, 'terminal.exec'),
 }
 HISTORICAL = frozenset(('ordinary-web', 'ordinary-api', 'inspector', 'root-web', 'root-api'))
+UNITS = frozenset(('caddy.service', 'schubert-nk-web.service', 'schubert-nk-api.service',
+                   'schubert-nk-cleanup.service', 'schubert-nk-inbox-inspector.service',
+                   'schubert-nk-expiry-cleanup.service', 'schubert-nk-backup.service',
+                   'artemis.service', 'schubert-nk-morning-controller.service',
+                   'schubert-nk-bootstrap-admin.service'))
 
 
 def require(value):
@@ -51,3 +56,33 @@ def inventory(native):
     for role in HISTORICAL:
         require(isinstance(native[role], list))
     return classify(present)
+
+
+def terminal_units(units):
+    """Declaration/idle planning check only; no PID1 receipt/actor/runtime authorization."""
+    require(isinstance(units, dict) and set(units) == UNITS)
+    for unit, user, remain, expected_codes in (
+            ('schubert-nk-bootstrap-admin.service', 'schubert-api', 'no', {'20'}),
+            ('schubert-nk-inbox-inspector.service', 'schubert-inbox-inspector', 'yes', {'10'})):
+        row = units[unit]
+        fields = {'Id', 'LoadState', 'User', 'Group', 'Type', 'Restart', 'RemainAfterExit',
+                  'MainPID', 'ControlPID', 'Job', 'SuccessExitStatus', 'KillMode',
+                  'SendSIGKILL', 'ExecStart'}
+        require(isinstance(row, dict) and fields <= set(row)
+                and all(isinstance(row[k], str) for k in fields))
+        require(isinstance(row, dict) and row['Id'] == unit and row['LoadState'] == 'loaded'
+                and row['User'] == row['Group'] == user and row['Type'] == 'oneshot'
+                and row['Restart'] == 'no' and row['RemainAfterExit'] == remain
+                and row['MainPID'] == row['ControlPID'] == '0' and row['Job'] == '')
+        require(isinstance(row['SuccessExitStatus'], str)
+                and set(row['SuccessExitStatus'].split()) == expected_codes)
+        require(row['KillMode'] == 'control-group' and row['SendSIGKILL'] == 'no')
+        entry = row['ExecStart']
+        require(isinstance(entry, str))
+        if unit == 'schubert-nk-bootstrap-admin.service':
+            require('dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMain' in entry
+                    and 'BOOTSTRAP-' in entry and '-ordinary' in entry
+                    and 'RootStartupMain' not in entry)
+        else:
+            require('/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector' in entry)
+    return {'terminalUnitsDeclared': 2, 'metadataOnly': True, 'startupAuthorized': False}

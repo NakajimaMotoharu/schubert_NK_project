@@ -4,10 +4,35 @@ import json
 import pathlib
 import unittest
 
-from pg534_native_role_contract import classify, inventory
+from pg534_native_role_contract import classify, inventory, terminal_units
 
 
 class NativeRoleContractTest(unittest.TestCase):
+    def test_current_terminal_unit_phase_actor_declaration_and_unknown_refuse(self):
+        path = pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379/pg534-role-current-readonly-v1.private.json')
+        units = json.loads(path.read_text())['units']
+        self.assertEqual({'terminalUnitsDeclared': 2, 'metadataOnly': True, 'startupAuthorized': False},
+                         terminal_units(units))
+        for unit in ('schubert-nk-bootstrap-admin.service', 'schubert-nk-inbox-inspector.service'):
+            for key in ('Id', 'LoadState', 'User', 'Group', 'Type', 'Restart', 'RemainAfterExit',
+                        'MainPID', 'ControlPID', 'Job', 'SuccessExitStatus', 'KillMode',
+                        'SendSIGKILL', 'ExecStart'):
+                for fault in ('foreign', 'null', 'missing'):
+                    bad = copy.deepcopy(units)
+                    if fault == 'missing':
+                        del bad[unit][key]
+                    else:
+                        bad[unit][key] = None if fault == 'null' else 'foreign'
+                    with self.subTest(unit=unit, key=key, fault=fault), self.assertRaises(ValueError):
+                        terminal_units(bad)
+        bad = copy.deepcopy(units)
+        bad['schubert-nk-bootstrap-admin.service']['ExecStart'] = bad['schubert-nk-bootstrap-admin.service']['ExecStart'].replace('BOOTSTRAP-', 'API-')
+        with self.assertRaises(ValueError):
+            terminal_units(bad)
+        for bad in (None, {}, [], {**units, 'root-bootstrapadmin196': {}}):
+            with self.assertRaises(ValueError):
+                terminal_units(bad)
+
     def test_literal_required10_and_present8_missing_two(self):
         actual = classify(['parent', 'backup', 'cleanup', 'expiry', 'root-api193', 'root-web193',
                            'ordinary-api193', 'ordinary-web193'])
