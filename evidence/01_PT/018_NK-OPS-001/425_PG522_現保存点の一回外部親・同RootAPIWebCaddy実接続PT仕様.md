@@ -1,5 +1,10 @@
 # PG522 現保存点の一回外部親・同Root API/Web/Caddy
 
+## 限定実績（2026-10-08 04:57JST）
+
+observer3payload new-only stage actual0/logf162b575…、一回外部startclient0、親INV8f4514e…/PID320189/ticks1508984/Job26968を捕捉。元1800sの当親継続、observer1954/A01待機18540へ再付着、二重起動0。今回Cleanup INV4e71…・Expiry INVcb737…はCode1/status0/Resultsuccess、Artemis INV3808…/PID353417稼働を観測。API/Web/Caddyと親DONEは未受入。
+追加source51baeff97のreadonly pre-UI全列照合actual0、旧452行/その他23tableの全列保持、新10段の承認済みSKIPを独立literalで確認。Root私有snapshot60d4fcc3…・hostlog02782455…、safe evidence/provisional/PG522-preui-rows-v1/manifest.json。生存中の原本/Unit終端・親合格を推論せず、次current世代へ追随する。追加依存inventory22assert/166af4a8eでBUG822/YKT591工具範囲閉鎖、ProductionPT加点0。
+
 NK-OPS-001、WBS-N05～N09、RD SYS/ENV/PER/AVL/OPS/MON、UI211212/231/243/251253、SS341342343/SSC193196198202212、QA047/QA045、BUG813814822・YKT582583585591。Productiona2/PG495/f699/schema028固定。旧PG505 timeout143/旧UNKNOWNを成功へ転用しない。
 
 | Test ID | 独立期待値・前提／操作 | 合格条件・証跡 |

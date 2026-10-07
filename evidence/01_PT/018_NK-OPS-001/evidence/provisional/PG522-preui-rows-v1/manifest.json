@@ -1,0 +1,50 @@
+{
+  "run": "PG522-preui-rows-v1",
+  "source": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "toolSourceCommit": "51baeff97",
+  "branch": "dev-foundation",
+  "command": "python3 -B tools/quality/vm/050_s1/pg522_capture_preui_rows_once.py",
+  "actualExit": 0,
+  "elapsedSeconds": null,
+  "elapsedUnknownReason": "Wrapper did not record monotonic elapsed; do not infer from discussion time.",
+  "privateSnapshot": "/var/lib/pgpt-s1-preservation/pg522-preui-rows-v1/full-rows.private.json",
+  "privateSnapshotSha256": "60d4fcc339a4f2a82d56da74a8239220a2e17cfd820c6fba4db90c9d0d0f6c9a",
+  "privateLogSha256": "027824556a11407c2db8ce5ffeff9432e5c19f55691a73c07f910dd6cf8f805e",
+  "parent": {
+    "invocation": "8f4514e19fd94c429f2587af71edb53a",
+    "pid": 320189,
+    "job": 26968,
+    "boot": "cc9ed874-7f4f-450e-a188-8de1e42c8441"
+  },
+  "expectation": {
+    "old452AllColumnsPreserved": true,
+    "newTenExactApprovedSkip": true,
+    "other23TablesAllColumnsUnchanged": true,
+    "sameParentTwoReadAndUiNotStarted": true,
+    "normalCurrentCleanupAndExpiryExit0": true
+  },
+  "oracle": "SS341 same business date success -> SKIPPED with zero counts / ALREADY_SUCCESSFUL / literal reason; prior fixed PG521 full-column rows independently compared; no Production expected generator",
+  "testIds": [
+    "PT-OPS-PG522-001",
+    "PT-OPS-PG522-005"
+  ],
+  "environment": {
+    "os": "Ubuntu26.04 isolated PGPT VM",
+    "jdk": "25.0.4",
+    "postgres": "18"
+  },
+  "coverage": "NOT_APPLICABLE_READONLY_OPERATOR_PROOF; Production PT delta0",
+  "parentAccepted": false,
+  "native100": false,
+  "formalChanged": false,
+  "rawExported": false,
+  "related": [
+    "BUG-813",
+    "BUG-814",
+    "YKT-582",
+    "YKT-583",
+    "QA-047"
+  ],
+  "confirmedAtJST": "2026-10-08T04:57:10+09:00",
+  "executionTimestampRef": "Root-private snapshot at and host log filesystem timestamps"
+}
