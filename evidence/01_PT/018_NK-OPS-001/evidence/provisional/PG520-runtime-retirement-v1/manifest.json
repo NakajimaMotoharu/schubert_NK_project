@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001",
+  "wbs": "WBS-N14",
+  "run": "PG520-runtime-retirement-v1",
+  "status": "LIMITED_RUNTIME_RETIREMENT_PASS_ALL_NEW_SCOPES",
+  "sourceCommit": "6e8394967ce66d08e40e4a9be5a0e861f30721d2",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "release": "PG495",
+  "schema": "028",
+  "branch": "dev-foundation",
+  "command": "python3 -B tools/quality/vm/050_s1/pg520_retirement_native_v1.py",
+  "actualExit": 0,
+  "elapsedSeconds": 6.840800734000368,
+  "hostTests": {
+    "compareAssertions": 28,
+    "modulePathAssertions": 8,
+    "oldUndefinedReproduced": true,
+    "newUndefined": 0,
+    "Werror": 0
+  },
+  "actual": {
+    "sameFixedRuntimeRetired": true,
+    "directorySync": true,
+    "daemonReloadOnce": true,
+    "allDeclaredConfigurationPreservedExceptResumeRemoval": true,
+    "whole24And452RowsUnchanged": true,
+    "native15AndOldExec4Unchanged": true,
+    "invalid3Preserved": true,
+    "allUnit18Preserved": true,
+    "allNewScopesNormal": true,
+    "starts0": true,
+    "databaseUpdates0": true
+  },
+  "privateEvidence": {
+    "root": "/var/lib/pgpt-s1-preservation/pg520-runtime-retirement-v1",
+    "before": "98e69ea12721aac4c6cd020b683aea9b5104fb0e044393d329e6f846f23f37e3",
+    "after": "c758d3316b1b10605d44d1caecca3c93cdf1d0cb1897348d95b57daf2c424b96",
+    "complete": "7c85d7e84504a514c54981de3d6c4689dc33f04f172eaf3c0211db9a822e5e0b",
+    "runtimeBefore": "3992c3bcbe97066de238cb97678bb71537643bb598dd5b63a702b15d9e2e44e3",
+    "hostLog": "71eabc14867d5f6098e7460f73de010543ff15f64d83b02cfb7e5f4b4a18dcc3"
+  },
+  "ssc": [
+    "SSC-198",
+    "SSC-212"
+  ],
+  "bugs": [
+    "BUG-821"
+  ],
+  "ykts": [
+    "YKT-590"
+  ],
+  "oldNative143UnknownPreserved": true,
+  "notAccepted": [
+    "separatefreshResume/externalparentDONE/APIWebCaddy",
+    "native100/CHR/451formal/PGPTcomplete/ITST"
+  ],
+  "productionPTDelta": 0,
+  "wbsAcceptedDelta": 0,
+  "formalDelta": 0,
+  "rawSecretsIncluded": false
+}

@@ -1,5 +1,7 @@
 # PG520 scope静的是正後の正規runtime退役
 
+実結果（2026-10-08 04:29JST）：newnative92504 actual0/6.840800734s、同固定runtime原byte/inode保全→unlink/dirsync/一回reload→新全DB/十Ref/bus/runtimeFD/A/M正常。Root after c758d331…/complete7c85…/元runtime3992…/hostlog71eabc…をsafe manifestへ固定。独立再読で固定file不存在・全24/452/全tree/native15・元INVALID3・全Unit18不変・peer/advisory0を確認。旧PG519143/closeUNKNOWNを保持、後続freshresume/真正親DONE/native100/CHR/正式/工程・ITST未受入。着手前未実行記述は履歴として保持。
+
 NK-OPS-001/WBS-N14/SS343353/SSC198212/QA047/BUG821/YKT590。既N14開始0.5/1.5/4pp群内の是正再試験、追加新予算を二重加算0。Productiona2/PG495/schema028不変更、元PG519143/548.555s・closeUNKNOWN、正常限定handoff0/raw093f…/completec368…を保持。
 
 PT-OPS-PG520-001: 421の現boot/全24-452/INVALID3/native15/terminal/固定runtime契約を継承し、別new-only TOOLS/SAVE pg520-runtime-retirement-v1/新M-A/DB/advisory/十Refへ接続。旧13680/native/stage再実行0。
