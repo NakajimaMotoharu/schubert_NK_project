@@ -1,7 +1,7 @@
 """SSC198 R03 fixed runtime retirement witness; only exact outer typed unlink allowed."""
 import ast,hashlib,json,os,pathlib,re,stat,subprocess,sys,time
 import dbus
-SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg521-runtime-resume-v1')
+SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg521-runtime-resume-v2')
 RUNTIME=pathlib.Path('/run/systemd/system/schubert-nk-morning-controller.service.d')
 NAME='pg492-once-resume.conf';MORNING='schubert-nk-morning-controller.service'
 NATIVE=pathlib.Path('/etc/systemd/system')/(MORNING+'.d')/'pg477-native-coverage.conf'

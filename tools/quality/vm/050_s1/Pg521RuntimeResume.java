@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 /** SSC198 separate fixed runtime preparation only. No service start/DB mutation. */
 public final class Pg521RuntimeResume {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg521-resume-tools-v1");
-  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg521-runtime-resume-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg521-resume-tools-v2");
+  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg521-runtime-resume-v2");
   static String phase="PREFLIGHT";
   static void require(boolean value){if(!value)throw new IllegalStateException("fixed runtime resume refused");}
   static void retain(Throwable failure){

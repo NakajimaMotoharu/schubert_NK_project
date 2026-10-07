@@ -8,3 +8,9 @@ NK-OPS-001/WBS-N14/SS343353/SSC198212/QA047。Productiona2/PG495/f699/schema028�
 - 004: full18/全原値・unitFiles/nativeに変化0、MorningだけfixedsuffixとDropInPaths追加、他宣言とhardening/ReadWritePaths保持。DB rollback/close→十Ref逆順/bus→全FD/A/M新scope正常後だけ一回resume準備を認定。その後だけ新durableobserver/予約/外部Morningを一回発行する。旧actual143/UNKNOWNを補完0。
 
 Host `bash tools/quality/vm/050_s1/pg521_resume_compile_v1.sh` actual0/Werror0、writer `python3 -B tools/quality/vm/050_s1/pg521_runtime_writer_test.py` actual0。実command `python3 -B tools/quality/vm/050_s1/pg521_resume_native_v1.py` は別new-only TOOLS pg521-resume-tools-v1/SAVE pg521-runtime-resume-v1、着手時未実行、sourceを固定して一回だけ実行しactual/全scope/原値/hashを追記。真正親budget1800s/Root120sの期限や承認済み外部仕様・451品質は緩和0。
+
+## v1拒否と別v2是正（2026-10-08）
+
+v1 actual1（session69258）、log SHA256 2562e06bf283deaa62af7d3cee9c344636f28934fca36f7687fd4400c6f6481f。Root400へ5payloadをstageした後、host専用source/Pyflakes検査をguestで実行して未配備Java source参照に失敗。Java/M-A/DB/Ref/SAVE/runtime作成/reload/startはいずれも未実行。BUG822/YKT591を修正前起票し、旧source/stage/logは保存、v1再実行禁止。
+
+是正版v2はhost独立oracle33assert・CLI6assert・writer75assert/19故障位置/Werror0を固定compiledclassとPython原byteへ結合する。host専用source/static検査はguestへ移さず、guestは新M/A/DB/十Refと現在原値・署名を認証して実経路を検証する。compile-v2 actual0、native-v2はこの記述時点で未実行。TOOLS=pg521-resume-tools-v2、SAVE=pg521-runtime-resume-v2、command=`python3 -B tools/quality/vm/050_s1/pg521_resume_native_v2.py`。旧stage、旧失敗及びProduction sourceの品質結果を混同しない。
