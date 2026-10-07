@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "revision": "EXEC-METRICS-v1-20261008-PMO",
+  "wbsRevision": "WBS-v2-20261007-PMO",
+  "costRevision": "WBS-cost-v2-20261007-PMO",
+  "baseline": {
+    "remainingPp": {
+      "low": 90.9,
+      "base": 269.8,
+      "high": 642.6
+    },
+    "snapshot": "486_WBS現行実績.json",
+    "formal": "PT-WEB-20260925-24",
+    "technicalClosed": 92,
+    "wholeEffortCompletionRate": null,
+    "note": "計画の比較基点。現在枠/現在VM状態/今回製造成果ではない。"
+  },
+  "executionWriter": "PGPTのみ。監査はread-only。single writer/UTF-8 JSONL、一行完成後append、途切れた末尾行は次回へ保留。",
+  "eventPath": "/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/events.jsonl",
+  "usagePath": "/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/usage.jsonl",
+  "monitorPath": "/home/mini/codex/project1/work/PMO/hourly-monitor",
+  "cadence": "開始、作業群開始、意味ある実装/試験/受入、失敗/再試行、停止/全完了。長時間jobは約1時間checkpoint、毎tool計測不要。",
+  "eventTemplate": {
+    "eventId": null,
+    "executionId": null,
+    "groupId": null,
+    "eventType": null,
+    "timeJST": null,
+    "previousEventId": null,
+    "wbsRevision": "WBS-v2-20261007-PMO",
+    "costRevision": "WBS-cost-v2-20261007-PMO",
+    "wbsLeafIds": [],
+    "source": null,
+    "run": null,
+    "gitHead": null,
+    "sourceEvidenceRefs": [],
+    "estimateAtGroupStartPp": {
+      "low": null,
+      "base": null,
+      "high": null
+    },
+    "estimateAtGroupStartTokenN": null,
+    "remainingEstimatePp": {
+      "low": null,
+      "base": null,
+      "high": null
+    },
+    "estimateChangeReason": null,
+    "acceptedDelta": {
+      "closedIds": [],
+      "reopenedIds": [],
+      "criteriaSatisfied": [],
+      "evidenceRefs": []
+    },
+    "technicalMeasurementDelta": {
+      "newClosedIds": [],
+      "reopenedIds": [],
+      "scopeAddedIds": [],
+      "scopeRemovedIds": [],
+      "coverageBySource": []
+    },
+    "actualPaths": [],
+    "formalRunDelta": null,
+    "unaccepted": [],
+    "attempt": null,
+    "attemptResult": null,
+    "failureIds": [],
+    "retryCause": null,
+    "workCategory": null,
+    "elapsedSeconds": null,
+    "externalJobWaitSeconds": null,
+    "timeOverlapNote": null,
+    "quotaBefore": null,
+    "quotaAfter": null,
+    "observedSharedPp": null,
+    "sameQuotaWindow": null,
+    "attribution": "UNKNOWN",
+    "otherChatUsageKnown": false,
+    "otherChatUsedPp": null,
+    "actualAllocatedPp": null,
+    "tokenMeasurementIds": [],
+    "tokenTotals": null,
+    "tokenCoverageNote": null,
+    "nextCommand": null,
+    "stopReason": null,
+    "pgptAllComplete": false,
+    "modelRequested": "gpt-6.1-sol",
+    "reasoningRequested": "high",
+    "modelObserved": null,
+    "reasoningObserved": null,
+    "modelVerificationMethod": null
+  },
+  "eventTypes": [
+    "EXECUTION_START",
+    "GROUP_START",
+    "CHECKPOINT",
+    "ATTEMPT_END",
+    "ACCEPTANCE",
+    "ESTIMATE_CHANGE",
+    "EXECUTION_STOP",
+    "PGPT_COMPLETE"
+  ],
+  "workCategories": [
+    "IMPLEMENTATION",
+    "CONTRACT_AUDIT",
+    "SELECTED_TEST",
+    "FULL_REGRESSION",
+    "NATIVE_CONNECTION",
+    "RECOVERY",
+    "REVIEW",
+    "ADMIN"
+  ],
+  "quotaReadingFields": [
+    "fetchedAtJST",
+    "limitId",
+    "windowDurationMins",
+    "resetsAt",
+    "usedPercent",
+    "remainingPercent",
+    "source"
+  ],
+  "costRules": [
+    "leafだけの群見積りを開始時固定。split parentとchildrenを併算せず、K01回帰/共有主担当/個別契約費の境界を保存。K02未使用予備は成果なし。",
+    "同limit/窓長/resetで時刻順かつafter.used>=before.usedのみ共有差を計算。reset跨ぎはnull、別窓へ分割。整数精度や測定時刻ずれを残す。",
+    "他chat/PMO/レビュー不明又は複数WBSはSHARED_GROUP/UNKNOWN、個別実費null。単独WBS・他費0が証明済みの場合だけSOLE_WBS配賦。",
+    "開始予算、群開始見積り、実消費、残見積り、完了時見込みを分ける。予算増減/完了時取り消しで元見積りを消さない。",
+    "同event/measurementId/responseを二重計上せず、再開/再監査を新成果にしない。scope変更と製造手戻りを区別。"
+  ],
+  "tokenRules": [
+    "N=input_tokens-cached_input_tokens+output_tokens、T=input_tokens+output_tokens。cached/reasoningはそれぞれ入力/出力内数。",
+    "数値usageをresponse_id重複除去。圧縮も独立response usageがあれば加算。token_count累計差/last繰返し加算/枠割合換算を禁止。",
+    "親/許可レビュー/PMO別窓。親子探索は現在明示されたIDだけ、全履歴探索はしない。未確認子・schema不明・初回cursor前・flush遅延は欠測を明記。",
+    "usageメタデータ増分だけのcollectorを実施側が走らせる。PMOはusage.jsonl数値を読むだけでprivate raw/推論/原文DB/credentialを保存しない。",
+    "取得不能N/Tはnull、観測済み0とは区別。record窓とWBS群の時刻ずれはUNALLOCATED。response IDはhashだけを状態保存し本文を出力しない。"
+  ],
+  "usageCommands": {
+    "init": "python3 -B tools/quality/pmo_usage_increment.py init --thread-id 01a05ae6-b388-7360-ad9b-c97d488d093b --role PGPT",
+    "poll": "python3 -B tools/quality/pmo_usage_increment.py poll --thread-id 01a05ae6-b388-7360-ad9b-c97d488d093b --role PGPT",
+    "note": "同thread/roleに一人のwriter。initは既存cursorを上書きせず、初回末尾から。許可レビューは明示IDを同CLIへ指定。PMO roleは自身IDだけ、hourly-monitor/token-usageへ--output-dirを指定しPGPT域を編集しない。数値record非提供時はnullを保存。"
+  },
+  "monitorRules": [
+    "各回fresh枠→wait_threads cursor→Git/最新456→必要なWBS変更/新eventのみ。JSONL path/inode/offsetとevent/measurementIDをstateに保存し不完全末尾は保留。",
+    "初回はWBS版/hash/見積りを比較基点に、sourceとscope変更は別系列。台帳上のformalとtechnical/acceptedを分ける。",
+    "毎時quota共有増分とexecution usageは異なる窓で合算禁止。PMO自身のusageも別系列。欠測/他chat未分離を隠さない。",
+    "標準超過/追加5pp/同原因反復/受入証拠不足を診断。混合quotaは個別予算超過の証拠ではない。長job待ちのみで停滞としない。",
+    "PGPT_COMPLETE証拠又はEXECUTION_STOPでrun-summaryを監査域に保存。quota stopは未完繰越。hourlyはquota<=10/不明、人の停止、PG/PT全完了で既存設定を保持してPAUSED。",
+    "完了時作業群別に開始見積り/累積実数/欠測率/初回合格/再試行/原因/実接続/criteria/source/scope/残見積りを集計しWBS次版の提案を作る。毎時監査は大幅な計画変更を確定しない。"
+  ]
+}

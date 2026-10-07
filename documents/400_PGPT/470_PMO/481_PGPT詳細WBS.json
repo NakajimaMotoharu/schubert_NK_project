@@ -234,9 +234,11 @@
 },
   "executionPolicy": {
   "scopePreflight": "WBS-G13.07で初期割当/要求/責務を照合しscopeを確定、最終releaseで差分再照合。G13完了を通常製造の先行条件にして循環させない。",
-  "noManufactureRestart": true,
   "designPublication": "AGENTS.mdに従い確定設計は当作業中mainへ設計だけ反映。G10の工程全体mergeまで待たない。",
   "aliasRule": "REFERENCE_ONLYは重複費/独立達成へ算入しない。参照先の同source受入と追跡確認で終端化。",
-  "sourceInvalidation": "source変更時は影響する受入を再検証待ちへ。旧counter/VM成功を新sourceへ転記しない。"
+  "sourceInvalidation": "source変更時は影響する受入を再検証待ちへ。旧counter/VM成功を新sourceへ転記しない。",
+  "managementRevisionStartsManufacture": false,
+  "startAuthorization": "利用者が478をPGPT実施チャットへ投入しfresh枠/現所有を確認して開始。PMO資料作成や監査による自動開始なし。",
+  "metricsRef": "487_WBS実行計測規約.json"
 }
 }

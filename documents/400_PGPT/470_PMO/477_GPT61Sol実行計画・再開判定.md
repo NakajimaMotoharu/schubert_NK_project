@@ -1,118 +1,84 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
-2026-10-07 PMO修正v2：現行正本481/484、全対象・主担当485、現行実績486を適用。旧v1比較は482/Git65eddcへ固定。G13初期trace監査を先行し、36共有classの製造/共通PT費は主担当だけ、P019-02は共通参照0費用。個別criteria/終了依存/QA051を満たすまでACCEPTEDにしない。主担当集合への測定変更による89→92を手戻りと数えない。`python3 -B tools/quality/wbs_progress_audit.py` は更新前後、`--baseline-v1` は旧比較保全確認。現在依頼はPMO管理修正のみで、製造再開・定期監視再開ではない。
+2026-10-08 PMO実行・計測改訂。9/30版の開始状態・S0起点・token仮予算・「自動監視なし」は本版で置換する。旧計画はGit履歴へ保全。WBSのscope/費用/受入条件を今回変更しない。プロンプトの作成は製造開始ではなく、利用者が478を実施チャットへ投入して開始する。
 
-2026-10-07コスト管理追加：479/481各WBSのremainingCostと483/484を適用。週次枠ppの低位90.90/標準269.80/高位642.60（共通費込み、保証/暦週/金額ではない）。標準4pp以上等の21元項目＋共通2費用を83子へ分割、実行費用leaf252（予備K02を除く実作業251）・旧測定分母190/123は保全、現行は122非参照部品。個別実消費は未分離のためnull。次回の小区切りで同resetのused前後、WBS群/source/run/成果・手戻り/実消費と残見積り/他chat並走を保存する。標準超過又は追加5ppごとに予実と停滞原因を点検し再較正、混合費を成果件数で割って単価と断定しない。親子・個別/共通費の二重加算0。予算到達だけで停止せず451品質/自走/10・5保全/PG499優先順は維持。
+## 1. 正本・モデル・運用境界
 
-2026-10-07現行報告規則：利用者指示により[479詳細WBS](479_詳細WBS・進捗算定規則.md)/[480期間実績](480_WBS実績・期間差分.md)/481作業正本/485全対象/486現行snapshot（482は旧比較履歴）を追加適用する。旧48.3%単独で現況を代表させず、全体190初版、旧部品123と現行122非参照部品の測定達成/未達/未照合、VM18/CHR24/gate13、期間の新達成/再開/純増/scope増減/N/Tを分ける。counter/試験数を契約完了/正式/工数率へ変換しない。完全性/契約/oracle/trace監査と工数未較正も可視化する。品質・モデル分担・自走・10/5保全・PG499接続優先は不変更、管理資料作成は実装再開/工程加点ではない。
+対象treeは `/home/mini/codex/project1/work/pgpt-foundation`、branchは `dev-foundation`。元PGPT依頼、承認済RD/UI/SS/DIF、[451品質条件](../450_品質/451_Build・静的解析・coverage方針.md)、[473起動主体](473_起動gate主体・共用境界の実装判断.md)を維持する。478が貼付指示、456先頭が実況、460が残件。現在のGit/実環境を正とし、管理HEADや旧成功sourceへ巻き戻さない。
 
-2026-09-30 JST。対象はSchubert_NKの残PG/PT。利用モデルと実行単位を改訂し、[475の是正要件](475_20260929実績評価・計画見直し判定.md)と[476の工数管理](476_残工数トークン見積・差分監査.md)を適用する。計画作成による実装・正式認定・進捗加点はない。
-
-## 1. 今回の変更と適用順位
-
-**主実行をGPT-6.1 Sol / high（高）へ変更する。PMOはGPT-6.1 Sol / ultra（ウルトラ）を維持し、実行側の難しい統合判断には同モデルultraの対象限定レビューを使う。** 新モデルだけに効率改善を期待せず、最初の完成単位を「外部Morning入口から実Backup一往復」に絞り、実経路・coverage・消費量を同時に点検する。
-
-次回の運用は本書477と[478の実行指示](478_再開プロンプト_GPT61Sol.md)を正とする。471/472の旧モデル・旧開始基準・停滞判定を置き換える。元PGPT依頼、RD/UI/SS、承認済DIF、[451の品質条件](../450_品質/451_Build・静的解析・coverage方針.md)、[473の起動主体](473_起動gate主体・共用境界の実装判断.md)は維持する。実績の正本は456、全残件は460。下位部品が増えたことだけで停滞判定を免除しない。
-
-## 2. モデル選定の根拠と担当
-
-公式の[モデル選択資料](https://developers.openai.com/api/docs/guides/model-selection)はGPT-6.1 Solを、複雑な作業で時間・費用も管理したい場合の選択肢とし、同じ入力で品質を満たす設定を評価するよう説明している。[Work/Codexのモデル説明](https://learn.chatgpt.com/docs/models)では、高い推論ほど時間・tokenを使い、ultraは補助agentを使うモードである。これらは一般的な選定根拠であり、このプロジェクトの改善率を示すベンチマークではない。
-
-9/30の実行環境のmodel metadataで`gpt-6.1-sol`とlow/medium/high/xhigh/max/ultraを確認した。APIの設定範囲とアプリの推論選択は混同しない。親の設定は実施チャットの入力欄で利用者が選択する。指示文だけで変更済みとはしない。
-
-| 担当・対象 | モデル / 推論 | 実行方法と選択理由 |
+| 担当 | 指定モデル・推論 | 運用 |
 |---|---|---|
-| 主実装、試験是正、実VM接続、受入の継続 | **GPT-6.1 Sol / high** | 一つの所有・起動経路を親が完結させる。現在の資源所有、失敗時継続、native/VM試験を軽・中へ一律に下げず、高から実測評価する |
-| 最初のSSC108・接続図・網羅計画、又は同じ原因の停滞 | **GPT-6.1 Sol / ultra** | 論点を限定した読み取りレビュー1名。接続差分案、所有関係、独立試験、決定すべき残事項を返す。全履歴forkや定型作業の再調査を避ける |
-| PMOの進捗評価、受入判定、見積り・計画改訂 | **GPT-6.1 Sol / ultra** | 利用者の現在設定を維持。必要時の監査・介入を担当し、実施側の通常checkpointごとには呼び出さない |
-| 集計、hash、差分、coverage counter、台帳の機械照合 | 既存script / CLI | モデルへ成功ログ全文を返して再集計しない。別の軽量モデル導入・定型agent追加は行わない |
-| 別観点が必要な未解決契約 | **GPT-6 Astra / high**を例外使用可 | 6.1 Solのレビュー後も具体的反例が未解決の場合に限り、同時に走らせずレビュー役を交代する。routine実装・毎段階レビューには使わない |
+| PGPT主実行 | GPT-6.1 Sol / high（高） | 実装・独立試験・実接続・品質閉鎖まで一つの親が継続する。設定は利用者が実施チャットで選び、指定と実確認を区別する |
+| PMO | GPT-6.1 Sol / ultra（ウルトラ） | 既存毎時診断で進捗・品質・予実を確認。実施モデルを上書きしない |
+| 難しい統合判断 | 既承認のGPT-6.1 Sol / ultra限定レビュー | 反復失敗の具体的な未解決反例がある場合に限る。既存権限内で親＋読み取りレビュー1名まで。全履歴fork/追加agent連鎖/定型集計へのモデル投入なし。委任不可なら親が独立資料で点検し継続 |
+| 機械集計 | 既存CLI/script | 成功ログ全文をモデルに再読させない |
 
-通常の同時稼働は親＋レビュー1名まで。レビュー役はsource/採番/正式runを編集・実行せず、さらにagentを増やさない。共有枠・親子別tokenを含めて管理する。実行環境にultraの対象限定委任がなければ同モデルxhigh、委任自体が使えなければ親の独立資料に基づく再点検で進め、補助toolの有無だけで停止しない。xhigh→ultra→Astraを機械的に順番投入しない。
+旧例外のAstra/high交代は具体的反例がSol限定レビュー後も残る場合のみ、同時併走なし。モデル変更を毎時監査が自動実施しない。これは既承認分担の維持で、モデル性能による値引きを見積りへ加えない。
 
-**高を選ぶのはPMOの初期判断であり、6.1 Sol高が旧Sol高より何%優れるという測定結果ではない。** 実行親を全時間ultraにすると、直列に所有する接続作業まで多重調査になり得る。まず高で受入までの成果を測り、具体的な設計不足が残る範囲だけ強いレビューを投入する。親設定の途中変更を自己申告だけで行わない。
+## 2. WBSと費用の比較基点
 
-## 3. 再開基準とreset
+現行正本は [479](479_詳細WBS・進捗算定規則.md)、481/484、全対象主担当485、現行実績486。旧v1は482/Git65eddc固定。WBS-v2-20261007-PMO／WBS-cost-v2-20261007-PMOを開始基点とする。190元ID、83子、費用leaf252（予備K02を除く実作業251）。281RD・935artifact・24画面・64layoutの割当済みは要件充足の認定ではない。
 
-| 項目 | 9/30の確認基準 |
+残費用は低90.90／標準269.80／高642.60 **週次共有枠pp**、確度LOW。100ppは枠1回分で、token数・費用・暦週へ換算しない。旧476の4,250万/9,350万/1億8,700万Nと旧S1の425～850万Nは過去仮説として保全し、現行残費用の予算や停止上限に再利用しない。今回の開始後実測からtoken見積りを較正する。
+
+G13.07の初期trace照合を先行して、要求・対象artifact・TestID・独立oracle・担当WBSを結ぶ。G13.01～.06の領域別照合を対象着手前に行い、不足をWBS/見積りの版変更として保存する。最終G13はrelease差分まで再照合する。G13全完了を通常製造の先行条件にして循環させない。depsは受入終了条件で、早期調査・captureを禁止する条件ではない。
+
+36共有classの製造/共通PT/共通counterは主担当だけ。消費側固有の業務契約/oracleは別途必要。P019-02参照は0費用、単独達成へ加点しない。親子費・共通費を二重加算しない。21宣言interfaceのcounter非適用は理由付きで保持し、契約監査やJava対象の除外へ拡大しない。
+
+92 HOST_COUNTERS_CLOSED／23 HOST_GAPS／7 NON_JAVA／1 REFERENCE_ONLYは技術測定の内訳。旧89→92はscope/主担当/適用性変更であり今回の新成果ではない。個別criteria・同source証跡・終了依存・QA解決までACCEPTEDにしない。工数完成率は未較正null、旧48.3%や試験/行/commit数で工程率を作らない。
+
+## 3. 保存点と最初の実行
+
+以下は **10/7 02:55停止記録の履歴**。VM/processの現在生存や成功を保証しない。
+
+| 区分 | 保存点 |
 |---|---|
-| 作業tree / branch | `/home/mini/codex/project1/work/pgpt-foundation` / `dev-foundation` |
-| 本改訂前HEAD | `614d8c139`、clean。本書等の管理文書commitが後続する。開始時の最新HEADを使用し巻き戻さない |
-| 実装停止 / 最新限定source | `b05f96c3e` / `1acade420339eb81f79b717036a69f030ee1949e`、PG378 |
-| 最後の正式認定 | `PT-WEB-20260925-24` / `858713c0bf310ae8bf62078b0a1cedbce4e968db`、1,964PT / 53scope |
-| 最新限定結果 | Production6 2,517PT / 369suite、F/E/S各0、SpotBugs6module 0。全coverage・正式collectorは未達 |
-| 完成率 / 外部受入 | 暫定中心48.3%据置。外部API/Web業務起動、実NK CHR-A01/L01未受入 |
-| 枠と券 | 9/30照会は週次used95% / remaining5%、**利用可能Full reset券1枚**。自然reset表示は10/4 05:23:10 JST。利用者が券使用後に再開する予定 |
+| Production | a2e98ce9e96c42425921e3686e8ae7a94bff9e6c、PG495、release0.1.0-PG495、schema028 |
+| host限定全回帰 | PG495 3411PT/510suite/FES0/静的6module0。global100/正式/native全体未受入 |
+| 当source限定VM | PG498 signed typed BOM187/SQL28/history29 readonly検証、pending code-only公開。新親真正DONEではない |
+| PG498証跡 | evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG498-pending-readonly-v2/manifest.json、after参照SHA1ef541deba93311f167df38135930dd1a935fddb7cc54d9cf2b02bfb1b77fdc3 |
+| 次の未完 | PG499 runtime退役v1は工具pinのGit正規化hashと原byteの不一致でSAVE前拒否。BUG808/YKT577、host28assert是正済み、実VM再試験未実行 |
+| 正式 | PT-WEB-20260925-24、source858713c0bf310ae8bf62078b0a1cedbce4e968db、1964PT/53scope |
+| 外部保留 | QA051比較範囲/表記だけ。独立Log/replay等は継続可、L01最終PASSにしない |
 
-券は今回PMOでは消費していない。券の存在、期限到来、指示文中の「resetした」だけから残量を推定しない。再開直前に実際の枠を照会し、reset後の開始値を新しい計測期間として保存する。[公式reset説明](https://learn.chatgpt.com/docs/app-server)も、消費後にrate limitsを再取得するよう定める。自動券消費・追加課金は本指示に含めない。
+再開順：fresh枠→Git/既存dirty/最新HEAD→実施側が現在VM・Unit/kernel/process・署名/source/epoch・保全原値を再認証→初期trace/WBS群と計測窓を確定→PG499正規退役の実再試験→別fresh一回用通常resume→当source真正親DONE/owned停止/native→残製造・CHR・coverage・正式gate/引継ぎ。
 
-開始時はGit/remote・既存変更・最新source差分・実行中process・未認定stash7件を再確認する。元treeのScenario未追跡3fileはcheckpoint107/219のhashで保全し、stashを適用/削除/合格算入しない。QEMU/Unit/PIDの9/29状態は履歴であり、現在の生存を保証しない。新しい成果があれば実物へ追随し、旧sourceへ復元しない。
+最初のhost commandは `python3 -B tools/quality/vm/050_s1/pg499_runtime_retirement_test.py`。是正refsを別new-only TOOLS v2/compile-v3/native-v2へ固定し、新M/A/専用DB/十RefでPG499退役・dirsync/reload・全新scope正常を実証する。原runtime pg492-once-resume.confの退役未実行を再確認してから処理する。旧pg499_retirement_native_v1.py/旧PG492 wrappersを直接再実行しない。
 
-現在の枠をtoolで得られなければ利用者の現在UI確認値を使える。両方不明なら読み取り・保全確認まで行い、新規実装は始めない。残10%以下も同様に保全段階へ移る。モデルは指定値と実確認値を別記し、機械確認不能だけで止まらない。信頼できる情報で設定が指定と異なる場合は新規実装前に設定差を報告する。
+退役完了後、別fresh一回用設定→durable一回予約/observer/外部Morning→**元30分の同Root/API所有を保ったWeb/Caddyと真正DONE**→逆順ownedTERM/native同a2へ進む。旧PG493親143/旧native143/UNKNOWNを新成功で正常化しない。新sourceがあれば、当sourceへ正当に再束縛して再検証し、a2へresetしない。
 
-## 4. 最初の受入経路とWIP制限
+stash7、元Scenario3、Current baseline、旧失敗cohort・private originals/Backup/DBを保全し、未知ownerへの操作や二重起動をしない。正式DIF以外の業務仕様を変えない。QA047原因・対策・再発防止、QA048業務DB正と整合構造、QA049承認事項、QA050の15分周期＋IT/ST性能時に調整という既方針も維持する。
 
-最初の着手時に一度、SSC108と以下の接続図を短くレビューする。資料読取・設計説明を成果として終了せず、直ちに同じ経路の実装・検証へ進む。
+## 4. 実行粒度と品質
 
-`MorningProcessMain → MorningControlScope.executeOwnedEpoch → MorningBackupStageのEpoch付きOwnedWork → MorningBackupUnitCycle → 真正Unit/worker → 実artifact・step結果/全終端 → marker/request後条件`
+未完の新規経路は一つ。その所有・契約に必要な変更群を閉じてから次の依存作業へ進む。G13初期照合、一区切り完了、通常報告、push、限定レビューの終了で停止しない。資料だけで終了せずPG/PT全完了又は停止条件まで自走する。大幅な仕様/工程/モデル/品質変更は利用者判断へ提示し、独立承認済み作業を継続する。
 
-現状はMainがread-only exit30、Stageが旧Epochなし経路、UnitCycleのProduction呼出しが未接続。存在する部品を接続し、同じ機能を別helperとして作り直さない。次表のSは内部の完成区切りで、R/Dや工程完成率の分母を置き換えない。
+451のJava四counter各100%、適用JS100%、静的0、独立oracle、境界/null/異常/並行/再送、BUG修正前再現/YKT、Current baseline、CHR/DIF、秘密/trace、正式同一source/run/scopeは不変更。Production自身から期待値を作らず、人工呼出し・対象除外・成功読み替えで100%にしない。Backup所定FAILED/SKIPPED起動継続は正規分岐として保ち、未実行をその結果へ置換しない。Backup成功を新絶対条件にしない。
 
-| 段階 | 必須作業と終了時の観測 |
-|---|---|
-| S0 契約・採取方法を確定 | SSC108の実観測集合、canonical byte/順序、boot/run/activation/Epoch、owner・freshness、成功/失敗/skipの意味をSS341/342/343と独立goldenに確定。既存method、不足値、接続差分、host/VM別のcoverage採取を対応付ける |
-| **S1 外部Morning→実Backup一往復** | 一つの親30分budget、同じM/A/原本DB/Epoch内でStage→Cycleを呼ぶ。隔離PG/PT VMの外部Production入口から真正Unitを試行し、fresh Invocation、worker/Unit全終端、実archive・step/receipt、marker/request後条件を確認。成功とSS所定の失敗・再開・hard-timeoutを独立試験する |
-| S2 必要保守→正規issuer | Cleanup/Transfer、Artemis/Expiry等の当該起動に必須な実結果を接続し、SSC108の実観測に基づくcurrent/permit発行まで通す。`StartupPermitFiles.issue`の正規Production callerと結果束縛を実証 |
-| S3 root→API/Web業務ready | 全preflight、proof/FD、held ELF、SS342 §4.2の同PID権限移行/execを接続。正規permit、A解放と同じ起動経路からProduction API/Webを実起動し、PID/ready/失敗・停止後条件を確認 |
-| S4 実NK互換と起動経路受入 | 同じProduction経路でCHR-A01/L01と必要なLog再送をcapture。承認済DIF以外の差分0、全coverage・正式同一source/run/scope・秘密/trace gateを揃える |
-| R4 後続PG/PT | 460/SS362の残Resource、Logout/User、質問受付/replay/worker/回答/通知、本文/media、残運用・移行/切戻し、最終受入へ依存順で継続する |
+開発中は変更moduleと影響suite、全回帰は契約変更群/横断変更/受入gateで必要な範囲を選ぶ。triggerと未実行範囲を記録し、同source成功全回帰を根拠なく反復しない。正式runはsource/試験/設定/toolsを固定し、失敗・skip/flaky/not-run・未認定stash・別sourceの成功を混ぜない。
 
-**同時に新規着手する未完了経路は一つ。** その経路の所有・起動契約に必要な変更群をまとめ、変更契約の独立試験/網羅を閉じてから無関係な機能へ移る。既存全moduleの不足は消さず追跡し、S1で全部直すと称した無関係な横展開もしない。同じ起動経路に残るnative接続/採取はS2/S3へ継続できるが、S1の実経路検証だけで正式認定にはしない。
+WBS更新前後は `python3 -B tools/quality/wbs_progress_audit.py`。`--baseline-v1` は旧比較保全の必要時/最終時に実施。管理検査をProduction PTへ加算しない。受入/見積り/scope変更は481/484/485/486に版・根拠・前後差を残す。確定RD/UI/SSはAGENTS.mdに従い当作業中に設計だけmainへ反映し、PGPT全完了まで待たない。
 
-追加依存には「接続箇所、根拠SS、この経路への必要性、既存部品で不足する理由、終了試験」を付け、D01～D07の下位条件へ記す。実起動へつながらない拒否probe、read-only wrapper、一般化frameworkを増やすだけの作業は次区間の主対象にしない。新規採番は実台帳の末尾から行う。
+## 5. 実施側計測とPMO毎時監査
 
-SS341のBackup失敗時はBUSINESS/TECHNICAL削除SKIPPED・起動継続の正規分岐を維持する。**Backup成功を全起動の新しい絶対条件にしない。** 実試行と結果の真正性が必要で、未実装/未実行をFAILED/SKIPPEDへ読み替えない。`--no-block` client成功はworker成功ではない。UNKNOWN/hard-timeoutのM/A・残留marker・次回隔離条件はBUG322/SSC107/YKT254等の実仕様と試験で閉じる。gateを迂回した直起動、no-op RetirementGate、ProcessBuilderでの別PIDを同PID execとする代用は認めない。
+[487計測規約](487_WBS実行計測規約.json)を適用する。実施側だけが `/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/events.jsonl` を追記し、PMOは読み取りだけ。開始/作業群開始/意味ある実装・試験区切り/失敗・再試行/受入/停止/全完了で1event、長時間job中は約1時間ごとに既知状態のみcheckpoint。監査専用 `/home/mini/codex/project1/work/PMO/hourly-monitor` はPMOのみが更新する。監査用返信依頼・PMO返答待ちは作らない。
 
-## 5. 品質を閉じる実行方法
+着手前のleaf単位低/標準/高見積りを固定し、群/source/run・達成criteria・未達・再開・scope増減・実経路/coverage/正式差・実時間・retry原因・次command・残見積りを保存する。元baselineの残269.80ppを実績の発生とともに消してしまわず、初期予算/累積実消費/現行残予算/完了時見込みを分ける。実時間はmodel稼働と外部job待ちを区別し、時間経過だけで停滞にしない。
 
-451の品質条件は変更しない。Javaのline/method/class/branch各100%、適用JSのcoverage100%、静的0、独立oracle、境界/null/異常/並行/再送、BUG修正前再現/必要YKT、Current baseline、CHR/DIF、秘密/trace、全scope同一sourceの正式証跡が必要である。
+usageは取得時刻・limitID・窓長・reset・used/remainingの前後。reset跨ぎ、並走他chat/PMO/レビューが不明なら個別actualSpentPp=null、共有観測差のまま保存。単独WBSと他費0が証明された時だけ481/484のactualObservationsへ配賦する。親子/成果数割/同観測の二重配賦は禁止。
 
-最新PG378の未網羅はBootstrap B/L/M/C=37/11/4/0、API=3/32/4/0、Web=1/25/4/0、Batch=31/365/137/17、Protocol/Storage=0。全体B/L/M/C=72/433/149/17である。これは開始比較基準であり、以後の実数を短い現況に更新する。
+**実token計測**はusage数値だけを取得する既存機能、又は本版 `tools/quality/pmo_usage_increment.py` の増分収集を使用する。初回は末尾cursorを作り、全過去会話・内部推論・成功rawログを再読しない。数値usageをresponse_id単位に重複除去し、圧縮を含むresponse記録も対象にする。N=input−cached_input+output、T=input+output、cachedは入力内数/reasoningは出力内数。親・許可されたレビュー・PMOを別々に数え、未発見子やschema不明/欠測/flush遅延は欠測範囲を残す。token_count累計差やquota割合から実N/Tを捏造しない。実数を得られない場合はnull＋取得不能理由、監査/製造をその理由だけで停止しない。計測開始前の今turn分は未捕捉と記す。
 
-- 実装前に変更methodのhost/VM到達方法、独立期待値、採取command・同一source照合方法を決める。native外部mainは実プロセスで採取し、人工的呼出し・対象除外・期待値のProduction生成で100%を作らない。
-- 開発中は変更moduleと依存/影響suiteを選択し、対象と未実行範囲を暫定記録する。未網羅の「既存不足・今回追加・今回解消」を区別し、閉鎖方法不明の面を際限なく増やさない。
-- 全回帰は個々のhelperでなく同じ所有・起動契約の変更群で行う。機能受入、変更後停止、PR/工程gate、POM/共通codec/DDL/security等の横断変更では451所定の全体検証を実施する。横断影響がある変更群は、他機能へ進む前に全回帰する。triggerと対象受入IDを1行で残す。試験回数の上限は設けない。
-- 正式run前にNode/toolchain/PATH、format、collector owner/JUnit引数署名/XML、coverage対象、017/019等の既存負canary、VM採取方法を照合する。新しい大型collectorを作らず、既存scriptを利用する。
-- 正式runではsource/試験/設定/toolsを固定する。Maven exit0、`jacoco:report`成功、部分manifest一致だけで正式合格にしない。F/E/S/flaky/disabled/not-run、未認定stash、別sourceの古い結果は合格へ混ぜない。
+標準枠超過又は同reset追加5ppの観測ごとに予実/原因/次受入証拠を自己点検する。混合観測の超過は診断用で、PGPT専有予算超過と断定しない。同原因反復や約20ppで実経路証拠が増えない場合は対象限定の接続/所有/oracle点検を行い、必要な差分と次観測を具体化する。数値到達だけで停止/合格/品質緩和はしない。
 
-source未変更の再開や管理文書だけの改訂は既存結果との照合を行い、再実行を新規成果として数えない。必要な是正・再検証は省略しない。未認定sourceの保存はその状態を明記し、受入済みと区別する。
+既存 `schubert-nk-pmo` を約毎時で利用し、wait_threads増分、Git、最新456、変更WBS/487eventの小範囲を確認する。PMOは実施branch/台帳/VM/jobへ介入せず、根拠ある既方針内の軽微是正だけ同実施チャットへ1回送る。親が対応中の事項を重複送信しない。PMO/他chatを含む共有観測とPGPT実tokenを分け、通知は意味ある進展/是正/失敗/判断/停止だけ。
 
-## 6. 消費管理、停滞への是正、PMO介入
+実行停止・全完了時は、PMOが監査領域へrun-summaryを保存する。作業群別の凍結見積り/実数/欠測・初回合格/再試行・原因・scope改訂・残見積り・品質/実経路の達成を集計し、WBS見直しの候補を提示する。枠停止はPGPT全完了と読み替えず未完を繰越す。今の計画にない大幅な見積り/モデル変更は自動で確定しない。
 
-476の**N＝未キャッシュ入力＋出力、T＝全入力＋出力**を使う。Nは週次枠/課金の公式換算単位ではない。推論tokenは出力の内数、cachedは入力の内数として二重加算しない。親子を含め、reset跨ぎは計測期間を分ける。取得できない値は不明とし、共有枠からtokenへ換算しない。
+## 6. 停止・保全・復帰
 
-最初のS1はAパッケージの内数で**425～850万N**の仮予算、約**170万N**で自己点検する。これは計画是正/再見積りの契機であり、追加の自動停止上限ではない。全残PG/PTの楽観/標準/悪化は引き続き**4,250万 / 9,350万 / 1億8,700万N**。6.1 Solへの変更を理由に割り引かず、既に見積りに含む集約・重複削減を再控除しない。IT/ST本体は含めない。
+実施側は開始と意味ある区切りでfresh枠を照会する。週次又は該当短期残10%以下で新規実装を止め、必要検証・証跡/差分/計測/次commandを保全し、5%付近までに停止する。保全余力不足なら早めに新着手を控える。取得不能時は現在UI値でも確認可、両方不明なら新規実装を始めない。自動reset券消費・追加課金・枠回復による無指示再開はしない。
 
-開始時と意味ある実装/試験区切りで共有枠を確認し、次を短く保存する。170万Nと約10ppが近い場合は一度の点検で両方を扱う。長大rawログを毎command再集計しない。利用可能なusage記録の増分・既存scriptを使い、機密や内部推論本文を資料へ転載しない。
+毎時監査自身は残10%以下又は枠取得不能で新監査/是正を始めず、最小停止記録を残し既存schedule/prompt/target等を維持してPAUSED、結果確認する。PGPTを強制停止しない。PG/PT全完了又は利用者による実施停止でも監査をPAUSEDにする。単なるidle/turn完了だけでPGPT全完了と判断しない。
 
-`S/R段階・D closed/reopened/new | 残接続・次区間で得る外部観測1件 | 実経路source/command/result | coverage既存/追加/解消 | 正式runとtrigger | N/T/共有used/reset | 次command`
-
-| 点検条件 | 自走中に必ず行う是正 |
-|---|---|
-| 約170万N又は共有観測約10pp | 同じ外部経路の接続と実証、網羅残数を確認。実証が増えなければ次区間の外部観測を一つ固定し、作業順/契約変更群を修正する |
-| 約20ppで実経路の証拠が増えない | 下位helperや試験件数が増えても対象限定レビューを必須化。接続図・最小再現・coverage計画から具体的差分案を選び、実装/実測へ反映する。「次は結線」の再記載だけで継続しない |
-| S1上端850万Nまでに経路が閉じない | 未接続の理由と次に得る証拠を再算定。統合設計/残工数を修正して同経路へ継続する。数値到達だけで停止しない |
-| 修正後も同じ因果で停滞 | 同じ材料のレビュー反復を避け、未解決反例を絞ってAstra/highへ交代可。PMO介入要の事実をcheckpointへ残し、独立して進められる承認済み依存は継続する |
-| S1又は後続受入が閉じた時点 | 実N/T、実行回数、初回合格率、やり直し原因、接続/網羅の達成を評価。まずAの残り・最終Gを再見積りし、次回のモデル/推論設定はPMOで改訂する |
-
-PMOは利用者から本チャットで途中確認/停止報告を受けたとき、上表を判定する。必要なら478 Cを具体化した介入指示を提示する。モデルの強化だけを介入策にしない。新しい自動監視・別チャットへの自動送信は設定していない。実施側はPMO返答待ちだけで停止しない。
-
-## 7. 継続・停止・復帰
-
-S1、S4、review、通常報告の終了は停止条件ではない。旧15pp試走上限・約12pp保全・試走後PMO待ちは適用しない。S4後も残PG/PTへ自走する。計画の説明・短い能力試走で今回の実行を終了しない。
-
-残10%以下で新規実装を止め、必要検証・証跡・差分・次手順の保全へ移り、5%付近までに停止する。保全余力が不足しそうなら着手を早めに控える。枠により正式gateを完遂できなければ未認定として保存する。その他はPG/PT全完了、利用者停止指示、実環境の継続不能、不可欠な外部入力がなく独立承認済み作業も尽きた場合に停止する。
-
-内部技術判断・SS補足・採番・必要依存の解消は自走する。QA045/046は回答済み。新たな外部仕様承認が不可欠な範囲だけ保留し、独立作業へ進む。VM作業は隔離PG/PT環境で行い、既存test-only Unit等は状態を確認・退避/復旧可能にしてProduction構成へ接続する。既存UnitをProduction認定済みと誤認しない。
-
-最新の短い現況は456の先頭1か所、依存の変更は460、正式結果は各Program manifestへ保存し、他資料には参照を残す。中断前にbranch/HEAD/dirty、S/R/D、正式/暫定source/run、実行中process・job・log、保全hash、未確定事項、次command、枠・計測期間・モデル確認方法を保存する。メモリ内draftや`/tmp`だけに頼らず、意味ある単位でGit保存する。再開は478 Bを使い、現在地から進み、新しい成果の巻戻し・適用済み処理の二重実行を避ける。
+その他の実施停止はPG/PT全完了、利用者停止、実環境継続不能、不可欠な外部入力待ちで独立作業も尽きた場合。中断前に456先頭/460とeventへHEAD/dirty・source/run・所有/job/安全な証跡参照・枠・最後の計測cursor・未認定・次commandを永続保存する。復帰は478 Bで同じ現在地から継続し、既実行の起動/配備/退役/試験を二重発行しない。
