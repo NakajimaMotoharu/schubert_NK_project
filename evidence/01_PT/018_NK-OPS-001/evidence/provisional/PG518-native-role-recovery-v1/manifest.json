@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001",
+  "run": "PG518-native-role-recovery-v1",
+  "wbsLeafIds": [
+    "WBS-N15.01",
+    "WBS-N15.02",
+    "WBS-N15.04",
+    "WBS-N15.05"
+  ],
+  "executionBaseCommit": "9a496facdc5c51cbcf6d643353fe77068b036aa0",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "release": "PG495",
+  "schema": "028",
+  "branch": "dev-foundation",
+  "status": "LIMITED_MISSING6_NATIVE_ROLE_PREPARATION_PASS",
+  "command": "python3 -B tools/quality/vm/050_s1/pg518_native_role_native_v1.py",
+  "actualExit": 0,
+  "elapsedSeconds": 28.15413036099926,
+  "hostTests": {
+    "directoryAssertions": 78,
+    "faultPositions": 19,
+    "namespaceDeltaAssertions": 182,
+    "approvedCatalogAssertions": 158,
+    "Werror": 0
+  },
+  "actual": {
+    "newRoles": 6,
+    "totalRoles": 15,
+    "legacyRolesPreserved": 9,
+    "oldExecFilesPreserved": 4,
+    "whole24And452DBUnchanged": true,
+    "currentInvalid3Preserved": true,
+    "allNewScopesNormal": true,
+    "starts0": true,
+    "databaseUpdates0": true
+  },
+  "nssRoles": {
+    "root-api193": [
+      0,
+      0
+    ],
+    "root-web193": [
+      0,
+      0
+    ],
+    "ordinary-api193": [
+      999,
+      981
+    ],
+    "ordinary-web193": [
+      997,
+      980
+    ],
+    "ordinary-inspector196": [
+      991,
+      976
+    ],
+    "ordinary-bootstrap196": [
+      999,
+      981
+    ]
+  },
+  "roleMode": "0700",
+  "roleAcl": "NONE",
+  "roleFs": "tmpfs",
+  "privateEvidence": {
+    "root": "/var/lib/pgpt-s1-preservation/pg518-native-role-recovery-v1",
+    "before": "df3c5fc4f918c52941cf8acee3b0d26e5c7b96dc404ec73c10b084c0835e19e2",
+    "after": "420b5cfe66b3d47b5d44473d1e663d681c6ac13c629b9c9de119b6dd304a35ff",
+    "prepared": "420b5cfe66b3d47b5d44473d1e663d681c6ac13c629b9c9de119b6dd304a35ff",
+    "complete": "2641e40f8f6fc25c724eb387beb145cade5b9d7852a45100dc4e525e33f2e49f",
+    "hostLog": "3b9bf92e69d30639fc7005e63156bae80fbc4c60036ee5d2d5d3d947df975ad3"
+  },
+  "bugs": [
+    "BUG-813",
+    "BUG-814"
+  ],
+  "ykts": [
+    "YKT-582",
+    "YKT-583"
+  ],
+  "ssc": [
+    "SSC-193",
+    "SSC-196",
+    "SSC-209",
+    "SSC-211"
+  ],
+  "notAccepted": [
+    "fresh parent ordinaryAPI/Web/Caddy/genuineDONE",
+    "current native100/allN15 child criteria/sourcefreeze",
+    "runtime retirement/freshresume/CHR/451formal/ITST"
+  ],
+  "productionPTDelta": 0,
+  "wbsAcceptedDelta": 0,
+  "formalDelta": 0,
+  "rawSecretIncluded": false
+}

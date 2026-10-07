@@ -1,0 +1,74 @@
+package dev.codex.schubert.nk.batch.file;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+/** Independent SS343 names/NSS vectors, real FD, explicit synthetic Root/tmpfs; no VM authority. */
+public final class Pg518NativeRoleDirectoryTest {
+  static int checks;
+  static void check(boolean v){checks++;if(!v)throw new AssertionError("native role independent oracle");}
+  static class Fixture implements AutoCloseable,Pg518NativeRoleDirectory.Io {
+    final BackupPublicationFixture f;final dev.codex.schubert.nk.storage.OwnedTransferDirectory held;
+    int uid,gid;boolean clean=true;boolean corrupt;
+    Fixture(Path temp)throws Exception {
+      f=new BackupPublicationFixture(temp);Files.delete(f.child);
+      Files.setPosixFilePermissions(f.parent,java.nio.file.attribute.PosixFilePermissions.fromString("rwxr-xr-x"));
+      f.metadata=(role,v)->{v.put("uid",role.equals("parent")?0:uid);v.put("gid",role.equals("parent")?0:gid);};
+      var nativeCalls=dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+      var calls=(dev.codex.schubert.nk.storage.DirectoryCalls)java.lang.reflect.Proxy.newProxyInstance(
+        getClass().getClassLoader(),new Class<?>[]{dev.codex.schubert.nk.storage.DirectoryCalls.class},(proxy,method,args)->{
+          String name=method.getName();
+          if(!Set.of("openRoot","openDirectory","createPrivateDirectory","sync","close").contains(name))throw new AssertionError("foreign role mutation");
+          if(!name.equals("close"))f.point(name);
+          Object value;
+          try{value=method.invoke(nativeCalls,args);}catch(java.lang.reflect.InvocationTargetException failure){throw failure.getCause();}
+          if(name.equals("close")){f.descriptors.remove((Integer)args[0]);f.point("close");}
+          else if(name.equals("openRoot")||name.equals("openDirectory"))f.descriptors.add((Integer)value);
+          return value;
+        });
+      f.track=false;held=dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(calls,f.parent);f.track=true;
+      f.position=0;f.counts.clear();f.events.clear();
+    }
+    public Map<String,Object> metadata(Path p)throws IOException {
+      var v=f.attributes(p);var result=new HashMap<String,Object>();
+      for(String k:List.of("dev","ino","uid","gid","mode","nlink","size","lastModifiedTime","ctime"))result.put(k,v.get(k));
+      if(corrupt)result.put("uid",null);return result;
+    }
+    public void owner(Path p,int u,int g)throws IOException{f.point("beforeUid");uid=u;f.point("betweenUidGid");gid=g;f.point("afterGid");}
+    public boolean cleanTmpfs(Path p)throws IOException{f.point("cleanTmpfs");return clean;}
+    void prepare()throws IOException{Pg518NativeRoleDirectory.prepare(held,"ordinary-api193",999,999,this);}
+    public void close()throws dev.codex.schubert.nk.storage.StorageIoException{f.track=false;held.close();f.close();}
+  }
+  public static void main(String[] ignored)throws Exception {
+    Set<String> gold=Set.of("root-api193","root-web193","ordinary-api193","ordinary-web193","ordinary-inspector196","ordinary-bootstrap196");
+    check(Pg518NativeRoleDirectory.ROLES.equals(gold));
+    for(String name:gold){check(Pg518NativeRoleDirectory.fixedRole(name,0,0));check(Pg518NativeRoleDirectory.fixedRole(name,999,999)==!name.startsWith("root-"));}
+    for(String name:List.of("","foreign","ordinary-api","../ordinary-api193"))check(!Pg518NativeRoleDirectory.fixedRole(name,999,999));
+    check(!Pg518NativeRoleDirectory.fixedRole(null,0,0));check(!Pg518NativeRoleDirectory.fixedRole("ordinary-api193",-1,0));
+    Path temp=Files.createTempDirectory("pg518-native-role-synthetic-");int positions;
+    try(var fixture=new Fixture(temp)){
+      Files.createDirectory(fixture.f.parent.resolve("legacy"));Files.writeString(fixture.f.parent.resolve("legacy/old.exec"),"independent-old-exec");
+      fixture.prepare();positions=fixture.f.position;
+      check(Files.isDirectory(fixture.f.parent.resolve("ordinary-api193")));
+      check(Files.readString(fixture.f.parent.resolve("legacy/old.exec")).equals("independent-old-exec"));
+      check(fixture.f.events.contains("sync"));check(fixture.uid==999 && fixture.gid==999);
+      try{fixture.prepare();throw new AssertionError("existing repaired");}catch(IOException expected){check(true);}
+    }
+    for(int point=1;point<=positions;point++)try(var fixture=new Fixture(temp)){
+      Files.createDirectory(fixture.f.parent.resolve("legacy"));Files.writeString(fixture.f.parent.resolve("legacy/old.exec"),"independent-old-exec");
+      int fault=point;fixture.f.hook=(name,n)->{
+        if(!name.equals("clock") && !name.equals("effectiveUid") && fixture.f.position+1==fault)
+          fixture.f.faults.put(name+"#"+n,new dev.codex.schubert.nk.storage.StorageIoException(dev.codex.schubert.nk.storage.StorageIoException.Reason.UNAVAILABLE));
+      };
+      try{fixture.prepare();throw new AssertionError("fault accepted");}catch(IOException expected){check(true);}
+      check(Files.readString(fixture.f.parent.resolve("legacy/old.exec")).equals("independent-old-exec"));
+    }
+    for(String role:gold)try(var fixture=new Fixture(temp)){
+      int id=role.startsWith("root-")?0:999;
+      Pg518NativeRoleDirectory.prepare(fixture.held,role,id,id,fixture);
+      check(Files.isDirectory(fixture.f.parent.resolve(role)));check(fixture.uid==id && fixture.gid==id);
+    }
+    try(var fixture=new Fixture(temp)){fixture.clean=false;try{fixture.prepare();throw new AssertionError("unclean accepted");}catch(IOException expected){check(true);}check(!Files.exists(fixture.f.parent.resolve("ordinary-api193")));}
+    try(var fixture=new Fixture(temp)){fixture.corrupt=true;try{fixture.prepare();throw new AssertionError("null metadata accepted");}catch(IOException expected){check(true);}check(!Files.exists(fixture.f.parent.resolve("ordinary-api193")));}
+    System.out.println("PG518_ROLE_ORACLE independentAssertions="+checks+" faultPositions="+positions+" heldFD=true syntheticRootTmpfs=true legacyPreserved=true vmActions0=true productionPT0=true");
+  }
+}
