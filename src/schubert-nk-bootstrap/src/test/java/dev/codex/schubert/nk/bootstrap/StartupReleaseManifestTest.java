@@ -20,6 +20,57 @@ final class StartupReleaseManifestTest {
   @TempDir Path temporary;
 
   @Test
+  void release010HostFactoryDoesNotGrantUnprivilegedRootInspection() throws Exception {
+    assertNotEquals(0, LinuxInodeSecurity.create().effectiveUid(), "host PT runs unprivileged");
+    var host = StartupReleaseManifest.createHost(986);
+    IOException failure = assertThrows(IOException.class, host::sha256);
+    assertEquals("release manifest unavailable", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+    for (long invalid : new long[] {-1, 0, 4294967295L})
+      assertThrows(
+          IllegalArgumentException.class, () -> StartupReleaseManifest.createHost(invalid));
+  }
+
+  @Test
+  void release011CompatibilityContentsCopiesMetadataAndHasNoImplicitAuthority() {
+    var build = new HashMap<String, String>();
+    build.put("jdkVersion", "25.0.4");
+    var platform = new HashMap<String, String>();
+    platform.put("osId", "linux");
+    var value =
+        new StartupReleaseManifest.Contents(
+            "literal-release", "a".repeat(64), List.of(), build, platform);
+    build.put("jdkVersion", "changed-after-construction");
+    platform.clear();
+    assertEquals("literal-release", value.version());
+    assertEquals("a".repeat(64), value.sha256());
+    assertEquals(List.of(), value.migrations());
+    assertEquals(Map.of("jdkVersion", "25.0.4"), value.build());
+    assertEquals(Map.of("osId", "linux"), value.platform());
+    assertEquals(Map.of(), value.versions());
+    assertEquals(Map.of(), value.artifactHashes());
+    assertThrows(UnsupportedOperationException.class, () -> value.build().put("x", "y"));
+    assertThrows(UnsupportedOperationException.class, () -> value.platform().put("x", "y"));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new StartupReleaseManifest.Contents(null, "a".repeat(64), List.of(), build, platform));
+    assertThrows(
+        NullPointerException.class,
+        () -> new StartupReleaseManifest.Contents("v", null, List.of(), build, platform));
+    assertThrows(
+        NullPointerException.class,
+        () -> new StartupReleaseManifest.Contents("v", "a".repeat(64), null, build, platform));
+    assertThrows(
+        NullPointerException.class,
+        () -> new StartupReleaseManifest.Contents("v", "a".repeat(64), List.of(), null, platform));
+    assertThrows(
+        NullPointerException.class,
+        () -> new StartupReleaseManifest.Contents("v", "a".repeat(64), List.of(), build, null));
+  }
+
+  @Test
   void release009PublicInfoOnlyFromSameHeldAdmittedBytes() throws Exception {
     var f = new Fixture("public-info");
     String json = new ReleaseInventoryTest.Fixture().text().replace("1.2.3-PG313", "v1");

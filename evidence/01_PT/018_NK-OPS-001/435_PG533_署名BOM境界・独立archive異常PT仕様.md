@@ -17,6 +17,8 @@
 | PT-OPS-FULLBOM017 / fullBom017InterruptDuringReadClosesAcquiredChannel | VERSION最初のpositive read/position後にcallerのinterrupt、最後にtest側で解除 | 次read-loop入口で拒否、取消を勝手に解除0、取得済channelを一回close、owned FD全解放。v5の取得直後取消ではFileChannel自身がloop前に拒否したためv6で明示した到達を検証 |
 | PT-OPS-FULLBOM018 / fullBom018ManifestBoundsSameSizeTamperAndEnumerationLimitRefuse | manifest size 0/1048577、同サイズVERSION byte改変、directory entries16385 | manifest範囲1..1048576、hash一致、列挙最大16384に反するため拒否、列挙stream一回close |
 | PT-OPS-FULLBOM019 / fullBom019RegisteredThirdPartyJarIsNotAnNkSharedDependency | 独立literal登録したorg.example:vendor:1.0/API lib jar | NK共通依存と区別し正規third-party jarを受入、独立SHAとartifact件数一致、FD全解放 |
+| PT-OPS-RELEASE010 / release010HostFactoryDoesNotGrantUnprivilegedRootInspection | 実hostの非Root callerが固定host factoryでsha256読取り、group -1/0/4294967295 | UID!=0を必須事前条件としRoot host能力を付与せずredacted IOException、group範囲外はIllegalArgumentException。privileged VM操作なし |
+| PT-OPS-RELEASE011 / release011CompatibilityContentsCopiesMetadataAndHasNoImplicitAuthority | 既存5引数constructor、独立literal mapを構築後変更、各nonnull依存null | snapshot copy・未指定versions/artifactHashes空・不変collection、nullはprogramming contract違反でNPE。NPEをcatchし正常化する実装0 |
 
 既存001～013には正常、null、欠落、byte改変、namespace、例外、並行/interrupt、全取得/解放faultを維持する。本追加は変更bootstrap試験群の限定検証であり、全体・native・正式coverage100%合格に加算しない。DB/JMS/実VM、原本/Backup、Current baselineを変更しない。
 
@@ -34,3 +36,5 @@
 source dbea258c7、2026-10-08 07:30:20～07:31:09JST、actual0/source不変。storage158PT/22suite、bootstrap252PT/37suite、F/E/S0、NullAway compile/SpotBugs2module0。BOM16PT全PASS、当class LINE244/METHOD31/CLASS1は全covered、BRANCH184covered/6miss（PG495 host16miss→6）。module全100%ではない。v4 XML/SpotBugs/BOM XMLをprivate `pg533-bom-pt-v4-artifacts` に保存し次cleanで上書き0。
 
 次=追加017～019のsourceを固定し別 `pg533_bom_pt_v5.sh <HEAD>`。v4合格を変更後sourceへ流用せず、同じ2module全PT/static/counterを一回実行する。工程正式認定/全体native/IT/STを更新0。
+
+v5 source2e7977976/actual0/413PT・F/E/S0、BOM残1branch（loop interrupt前にFileChannelが拒否）。v6 sourcea0198551d80f185426a7f8d60aa498ee10aab0be/07:36:13～07:37:02JST/actual0/413PT・F/E/S0/static2module0、positive read一回後の取消と全closeを検証しBOM LINE244/METHOD31/CLASS1/BRANCH190全100%。WBS-P018-02の5family全体はStartupReleaseManifest createHost/Contents互換constructorが6line・2method未実行なので閉鎖まだ0。RELEASE010011を追加し別v7で全2moduleを再試験する。同じ作業群予算内、native操作0、旧v6を新sourceへ流用0。
