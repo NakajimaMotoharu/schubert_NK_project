@@ -7,18 +7,18 @@ test "$#" = 1
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg585-access-reactor-v2
+task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg585-access-reactor-v3
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
-export PATH=$JAVA_HOME/bin:$PATH
+export PATH=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin:$JAVA_HOME/bin:$PATH
 date --iso-8601=seconds > "$task_base/started"
 git rev-parse HEAD > "$task_base/source"
 git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum > "$task_base/source-files.sha256"
 task_result=0
 (
 umask 0027
-./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-batch -am clean spotless:check test-compile org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar test spotbugs:check jacoco:report
+./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar
 ) > "$task_base/build.private.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base/exit"
 date --iso-8601=seconds > "$task_base/completed"

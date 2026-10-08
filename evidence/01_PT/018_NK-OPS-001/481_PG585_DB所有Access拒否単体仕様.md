@@ -2,6 +2,8 @@
 
 ## BUG869再試験計画追記
 
+v2は-am集約rootのspotbugs prefixが宣言されずgoal選択exit1/PT0（BUG870/YKT639）。v3は既PG540成功runnerと同じ六module明示選択・node/test-jar/goal順を採用、依存を同reactor内で解決する。旧二失敗は保持、工具だけ是正/Production変更0、正式受入へ加算0。
+
 v1単module compileはstale SNAPSHOT依存でexit1/PT0、保存source92e9acfe2とprivate pg585-access-selected-v1/exit/log/source全hash保持。v2は-amで同source六依存reactorを構築しsix PT/static/counterを一回実行、trigger=具体依存byte不一致・新matrixと既各moduleの一貫確認。下記単batch指定は事前計画履歴、新scopeは六module（追加共通回帰費はK01既費用枠/専有額不明、元P017見積りを消さず重複配賦0）。fresh各jarの全mainclassbyte/XML/静的をPG540と比較し、PG541/565 selectedの実装済み追加試験も同freshhostrunで実行、native18との混合は同classbyteを実証するまで未認定。
 
 Program NK-BAT-001/MorningDatabaseSession.Access、主担当P017-01.02、関連RD OPS009/DAT009/UI251/SS341343/SSC129133200。対象同null/引数/閉鎖capability仕様は不変更、Productionソース969のmain classbyteを保持し試験だけ追加。実VM正常起動・旧hostselected試験は別scope、当host試験を実native認証代替にしない。
