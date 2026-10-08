@@ -374,6 +374,39 @@ final class NativeCoverageExportTest {
     // Independent getent exit2 proves the rejecting prerequisite; no fake role/UID grant or write.
   }
 
+  @Test
+  void nexport619001TypedOracleMutationsHaveTheSpecifiedValuesRatherThanTypeErrors()
+      throws Exception {
+    for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino")) {
+      var f = fixture(ROLES.get(0));
+      f.fault = "target#1:" + field;
+      long originalInode = (Long) Files.getAttribute(f.target, "unix:ino");
+      try (var held = OwnedTransferDirectory.open(f.calls, f.target)) {
+        var metadata = held.atDirectory(f::attributes);
+        assertNotNull(metadata);
+        Object value = metadata.get(field);
+        if (field.equals("dev") || field.equals("ino")) {
+          assertInstanceOf(Long.class, value);
+          assertEquals(field.equals("dev") ? 0L : originalInode + 1, value);
+        } else {
+          assertInstanceOf(Integer.class, value);
+          assertEquals(Integer.valueOf(1), value);
+        }
+      }
+      assertTrue(f.calls.live.isEmpty());
+    }
+    var f = fixture(ROLES.get(0));
+    f.fault = "file#1:nlink";
+    Files.write(f.output("terminal"), new byte[] {9}, StandardOpenOption.CREATE_NEW);
+    try (var held = OwnedTransferDirectory.open(f.calls, f.target)) {
+      var metadata = held.atExistingEntryHandle(INV + ".terminal.exec", f::attributes);
+      assertNotNull(metadata);
+      assertInstanceOf(Integer.class, metadata.get("nlink"));
+      assertEquals(Integer.valueOf(2), metadata.get("nlink"));
+    }
+    assertTrue(f.calls.live.isEmpty());
+  }
+
   private static final class Fixture implements NativeCoveragePrivateFile.Io {
     final Path run, service, parent, target;
     final Role role;
@@ -530,12 +563,15 @@ final class NativeCoverageExportTest {
       String prefix = part + "#" + visit + ":";
       if (fault.equals(prefix + "null")) return null;
       for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino"))
-        if (fault.equals(prefix + field))
-          values.put(
-              field,
-              (field.equals("dev") || field.equals("ino"))
-                  ? Long.valueOf(field.equals("ino") ? ((Long) values.get("ino")) + 1 : 0)
-                  : Integer.valueOf(1));
+        if (fault.equals(prefix + field)) {
+          if (field.equals("dev") || field.equals("ino")) {
+            long changed = field.equals("ino") ? ((Long) values.get("ino")) + 1 : 0;
+            values.put(field, Long.valueOf(changed));
+          } else {
+            int changed = field.equals("nlink") && part.equals("file") ? 2 : 1;
+            values.put(field, Integer.valueOf(changed));
+          }
+        }
       return values;
     }
 

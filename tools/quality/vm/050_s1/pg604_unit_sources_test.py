@@ -28,6 +28,9 @@ class SourceProfile(unittest.TestCase):
         self.assertEqual(actual,sources(reordered))
 
     def test_every_unit_missing_null_foreign_and_drop_change(self):
+        alias=copy.deepcopy(GOLDEN)
+        alias['schubert-nk-artemis.service']=alias.pop('artemis.service')
+        with self.assertRaises(ValueError):sources(alias)
         for unit in GOLDEN:
             for change in('missing','null','fragment','extra_field','drop_null','drop_extra','drop_missing'):
                 bad=copy.deepcopy(GOLDEN)
