@@ -16,6 +16,8 @@ class Binding(unittest.TestCase):
             self.assertIn(literal, code)
         self.assertNotIn("baseline['bounds']", code)
         self.assertNotIn("['systemctl','start'", code)
+        self.assertNotIn('p.lstat()==s', code)
+        self.assertIn('metadata9(p.lstat())==metadata9(s) and not os.listxattr(p)', code)
 
     def test_genuine_new_resume_job_not_old_cutoff_budget(self):
         tree = ast.parse((Path(__file__).parent/'pg609_parent_receipt.py').read_text())

@@ -42,6 +42,10 @@ def payload():
     marker = "'wholeFormalAccepted':False}))"
     assert value.count(marker) == 1
     value = value.replace(marker, "'wholeFormalAccepted':False,'ownedUnits':{u:{k:v[k]for k in ('MainPID','InvocationID','ExecMainStartTimestampMonotonic','ActiveState','SubState')}for u,v in after['units'].items()},'parentEndedUTC':done.decode('ascii').splitlines()[4]}))")
+    marker = 'require(0<len(raw)<=limit and p.lstat()==s)'
+    assert value.count(marker) == 1
+    value = value.replace(marker, 'require(0<len(raw)<=limit and metadata9(p.lstat())==metadata9(s) and not os.listxattr(p))')
+    value = value.replace('def strict(p,limit):', 'def metadata9(s):return(s.st_dev,s.st_ino,s.st_uid,s.st_gid,s.st_mode,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)\ndef strict(p,limit):')
     assert "baseline['bounds']" not in value
     return value
 
