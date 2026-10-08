@@ -1,5 +1,7 @@
 # PG553 通常新run事前独立oracle
 
+2026-10-08 v2訂正（BUG846847/YKT615616、Production source不変更）：v1 preflight actual1/総9件を6以下と誤認、続くoracle actual1/入力未作成を保持。下記旧<=6/v1記述は履歴であり、現在期待値ではない。現v2はstrict正規名・exact四regular fileから適格**上界**を算出、manifest/content/DB成功を未検査なので適格件数と断定しない。全旧9保存、上界4/保護下界5/新上界5<=保持7・削除0を独立に期待。Rootは `pg553-newrun-preflight-v2`、host actual0/typed receipt→guest同source/BOM/before hashを検証後のみoracle stage/run。管理5testに9件・partial/extra/foreign名/symlink/null・上界6/7境界・exit1/143/bool/null/欠落/foreign hash/先行guardを追加。旧PG478工具は履歴、Production保持実装はSS341通りなので変更しない。新v2実VMは未実行、合格加点0。
+
 NK-BAT-001/NK-OPS-001/NK-MIG-001、RD BAK/OPS/MIG、UI251/232/236固定byte表、SS331332341/343 SSC190、451/487、WBS-N15.04生Morning-Cleanup ordinaryInspector streamの準備。着手前event0058固定既leaf予算0.83/2/4.17pp、PG548SOURCE969共通codeonly公開を再実行/再加算0。new current969/PG548/BOMa224/schema028・PG552全scopenormal/privateafter封印済。新run用にnoargs/新cutoff/activation/新Backupと正規Cleanup期待値、旧completed/原本/Backup保全を独立に定義、旧runをresume0。
 
 |Test ID|対象/fixture/操作|独立期待値・根拠|

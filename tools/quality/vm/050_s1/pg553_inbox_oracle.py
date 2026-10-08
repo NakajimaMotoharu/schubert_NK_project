@@ -63,7 +63,8 @@ def validate(row,wire,layout):
    audio=record[4534:4535];require((audio==b'0' and record[4535:4547]==b' '*12 and record[5059:5571]==b' '*512) or (audio==b'1' and re.fullmatch(b'[0-9]{12}',bytes(record[4535:4547])) is not None and bytes(record[5059:5571]).strip()))
 def main():
  require(os.geteuid()==0 and sys.argv[1:]==['capture'])
- root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg553-newrun-preflight-v1');data=json.loads((root/'before.private.json').read_text());layouts=json.loads(pathlib.Path(__file__).with_name('pg478_independent_layouts.json').read_text())
+ root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg553-newrun-preflight-v2');data=json.loads((root/'before.private.json').read_text());layouts=json.loads(pathlib.Path(__file__).with_name('pg478_independent_layouts.json').read_text())
+ require(data['source']=='969d8ded10c0bf5841d9e3a5c531e922caf4a24a' and data['manifestSha256']=='a224ea9cf421b06e7029b1f8845f2a7eb3d620b5ec2bdf90bfe64c731b99515b')
  low=candidates(data['rows'],data['bounds']['lower']);high=candidates(data['rows'],data['bounds']['upper']);require(low==high and all(not v for k,v in low.items() if k not in ['auth_sessions','web_http_sessions','inbox_scan_candidates']))
  keypath=pathlib.Path('/etc/schubert-nk/credentials/api-inbox-response-aes-current');before=keypath.lstat();require(stat.S_ISREG(before.st_mode) and before.st_uid==0 and before.st_nlink==1 and not keypath.is_symlink() and stat.S_IMODE(before.st_mode) in [0o400,0o600])
  raw=keypath.read_bytes();parts=raw.split(b'\n');require(len(parts)==4 and parts[0]==b'NKKEY1' and parts[1]==b'v1' and not parts[-1]);key=bytearray(base64.b64decode(parts[2],validate=True));require(len(key)==32 and before==keypath.lstat())
