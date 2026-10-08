@@ -361,6 +361,7 @@ final class MorningDatabaseSessionTest {
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, null, owner));
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, began, null));
               if (priorMode >= 0) {
+                phase.set("priorInsert");
                 long priorId = 595000000L + scenario;
                 try (var sql =
                     observer.prepareStatement(
@@ -376,8 +377,10 @@ final class MorningDatabaseSessionTest {
                   priorBefore.set(mdb588Audit(observer, priorRun));
                   readBefore.set(mdb588Audit(observer, run));
                 } catch (SQLException failure) {
+                  lastSqlState.set(String.valueOf(failure.getSQLState()));
                   throw new IOException("fixture retained expiry", failure);
                 }
+                phase.set("priorBegin");
                 var reused =
                     session.beginExpiry(
                         run,
@@ -422,6 +425,7 @@ final class MorningDatabaseSessionTest {
                 assertEquals(
                     Optional.of(new ExpiryAuditRepository.Prior(literalHandle, literalAudit)),
                     reused.prior());
+                phase.set("priorHandoff");
                 assertEquals(
                     0,
                     session.handoffExpiry(
@@ -441,6 +445,7 @@ final class MorningDatabaseSessionTest {
                   throw new IOException("fixture retained current audit", failure);
                 }
                 assertThrows(IOException.class, () -> session.observeExpiry(reused, thirty, owner));
+                phase.set("priorObserve");
                 var observed = session.observeExpiry(reused, zero, owner);
                 assertEquals(reused, observed.begins());
                 assertEquals(began.plusSeconds(4), observed.ended());
