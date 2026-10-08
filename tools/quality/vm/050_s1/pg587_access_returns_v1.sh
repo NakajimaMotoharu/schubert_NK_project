@@ -37,6 +37,10 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg592-session-transition-faults-v2
     task_prior=pg590-cleanup-expiry-db-v1
     ;;
+  PG594)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v1
+    task_prior=pg592-session-transition-faults-v2
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -49,7 +53,7 @@ git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum >
 python3 -B - "$task_base" "$task_prior" "$task_profile" <<'PY'
 import hashlib,json,pathlib,sys,zipfile
 base=pathlib.Path(sys.argv[1]);w=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
-assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1','pg588-session-readback-v2','pg589-session-sql-close-v1','pg590-cleanup-expiry-db-v1')
+assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1','pg588-session-readback-v2','pg589-session-sql-close-v1','pg590-cleanup-expiry-db-v1','pg592-session-transition-faults-v2')
 old=w/sys.argv[2];manifest=json.loads((old/'manifest.safe.json').read_bytes())
 assert manifest['actualExit']==0 and manifest['mainClassBytesEqualInstalledCurrentPG585']==1600
 for module in ('protocol','storage','bootstrap','api','web','batch'):
@@ -59,6 +63,11 @@ for module in ('protocol','storage','bootstrap','api','web','batch'):
  assert values[0]==values[1]==values[2]and values[0]
 p=pathlib.Path('src/schubert-nk-batch/target/jacoco.exec')
 expected=manifest['selectedExecSha256']
+if sys.argv[3]=='PG594':
+ full=w/'pg593-grouped-six-host-v1';proof=json.loads((full/'manifest.safe.json').read_bytes())
+ assert hashlib.sha256((full/'manifest.safe.json').read_bytes()).hexdigest()=='5b4c4289bed0815a9abf0f0634b23f399b7ed586239559704ee1dac8f9ad8d95'
+ assert proof['actualExit']==0 and proof['tests']==3447 and proof['allMainClassesByteEqual']==1600
+ expected=proof['moduleResults']['batch']['execSha256']
 if sys.argv[3]=='PG588V2':
  failed=w/'pg588-session-readback-v1'
  assert (failed/'source').read_text().strip()=='4f03d7af68a5d2d942104ca649859675fc405987' and (failed/'exit').read_bytes()==b'1\n'

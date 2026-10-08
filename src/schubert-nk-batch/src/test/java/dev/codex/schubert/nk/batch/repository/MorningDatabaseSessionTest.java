@@ -169,6 +169,30 @@ final class MorningDatabaseSessionTest {
   }
 
   private void mdb590Scenarios(int seed, String faultPhase, String faultMethod) throws Exception {
+    mdb590Scenarios(seed, faultPhase, faultMethod, false);
+  }
+
+  @Test
+  void mdb594001ActualAutocommitAndReadonlyDriftRefusesSixTransitionsBeforeMutation()
+      throws Exception {
+    int seed = 25;
+    for (String phase :
+        List.of(
+            "failedBackupSnapshot",
+            "observeBackup",
+            "observeCleanup",
+            "cleanupReferences",
+            "beginExpiry",
+            "observeExpiry")) {
+      for (String method : List.of("getAutoCommit", "isReadOnly")) {
+        mdb590Scenarios(seed++, phase, method, true);
+      }
+    }
+    assertEquals(37, seed);
+  }
+
+  private void mdb590Scenarios(int seed, String faultPhase, String faultMethod, boolean drift)
+      throws Exception {
     var zero = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(0);
     var ten = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(10);
     var thirty = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(30);
@@ -218,7 +242,9 @@ final class MorningDatabaseSessionTest {
                                   DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
                                 readBefore.set(mdb588Audit(audit, run));
                               }
-                              throw new SQLException("PRIVATE_TRANSITION_SQL_FAULT");
+                              if (!drift) throw new SQLException("PRIVATE_TRANSITION_SQL_FAULT");
+                              if (faultMethod.equals("getAutoCommit")) actual.setAutoCommit(false);
+                              else actual.setReadOnly(true);
                             }
                             try {
                               return method.invoke(actual, args);
