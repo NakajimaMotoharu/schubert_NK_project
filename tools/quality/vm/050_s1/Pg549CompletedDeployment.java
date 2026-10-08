@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /** SS343 SSC190 / PT-OPS-PG549-C001..005: exact PG522 SUCCESS, fresh INVALID code-only. No old DONE resume/start/DDL. */
 public final class Pg549CompletedDeployment {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-tools-v4");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-tools-v5");
   static Path SAVE;
   static String mode;
   static final Path APPROVAL=Path.of("/etc/schubert-nk/release-approval/current");
@@ -112,7 +112,7 @@ public final class Pg549CompletedDeployment {
     }
   }
   public static void main(String[] args)throws Exception{
-    require(arguments(args));mode=args[0];SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-"+mode+"-v4");require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));
+    require(arguments(args));mode=args[0];SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-"+mode+"-v5");require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));
     require(MaintenanceFileLock.create().tryExclusive(()->Pg387TrustedDeployment.checked(()->{
       try{return StartupAdmissionFile.create().tryExclusive(a->Pg387TrustedDeployment.checked(()->{
         try{

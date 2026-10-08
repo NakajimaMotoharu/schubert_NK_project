@@ -3,19 +3,20 @@ import ast
 import hashlib
 import json
 import os
+import pathlib
 from pathlib import Path
 import re
 import sys
 import time
 import dbus
 from pg543_runtime_readback import load,BOOT,RUNTIME
-from pg549_completed_contract import OLD,NEXT,EPOCH,APPROVAL,NEW_APPROVAL,changed_only,require
+from pg549_completed_contract import OLD,NEXT,EPOCH,APPROVAL,NEW_APPROVAL,changed_only,phase_action,require
 
 
 def main():
     require(os.geteuid()==0 and len(sys.argv)==3 and sys.argv[1]in('verify','activate')and sys.argv[2].isdigit())
     mode=sys.argv[1];backend=int(sys.argv[2]);require(backend>1);os.umask(0o077)
-    save=Path('/var/lib/pgpt-s1-preservation/pg549-completed-'+mode+'-v4')
+    save=Path('/var/lib/pgpt-s1-preservation/pg549-completed-'+mode+'-v5')
     boundary_raw=Path('/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v2/boundaries.private.json').read_bytes()
     require(hashlib.sha256(boundary_raw).hexdigest()=='0e7fe76e884f918d936842d8bf887c03f816099a11a9a988d022720a13c43726')
     env,baseline,initial,_,_,captured=load(post=True,caddy_before=json.loads(boundary_raw)['caddyExecStartPre'])
@@ -26,7 +27,7 @@ def main():
         def visit_Constant(self,n):
             return ast.copy_location(ast.Constant(b'Pg549CompletedDeployment'),n)if n.value==b'Pg480BackupRecovery'else n
     node=Binding().visit(node);ast.fix_missing_locations(node)
-    ownenv=dict(globals());ownenv.update({n:env[n]for n in('strict','command')})
+    ownenv={'pathlib':pathlib,'os':os,'sys':sys,'require':require,**{n:env[n]for n in('strict','command')}}
     exec(compile(ast.Module(body=[node],type_ignores=[]),'<fixed completed owner>','exec'),ownenv)
     held=ownenv['owner']()
     def owner():require(ownenv['owner']()==held)
@@ -83,9 +84,10 @@ def main():
         os.fsync(savefd)
     connection();before=extras(initial());require(before==snapshot()==snapshot()and before['current']==OLD)
     old_epoch=env['strict'](Path(EPOCH),0o600,4096);save_json('before.private.json',before);print('REF_READY',flush=True)
-    changed=False
+    changed=False;state='READY'
     for line in sys.stdin.buffer:
         action=line.rstrip(b'\n').decode('ascii');require(action in('before','after','release'))
+        state=phase_action(state,action)
         owner();directories()
         if action=='release':live=False
         now=snapshot()

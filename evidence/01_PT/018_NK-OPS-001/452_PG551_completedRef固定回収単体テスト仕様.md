@@ -1,5 +1,7 @@
 # PG551 completedRef pre-SAVE固定pair回収
 
+H003実行成功=source697c2a1aef5e48ebd1ce9ca9dabdfd95570f4b08/2026-10-08T03:16:22.902045～03:16:28.092744Z/actual0/5.190701529s、同四helperSHA/pidfd Ref→RootだけTERM。Root before=after fd96ee8d…/22,177,069B・complete03ebd13e…/208B、全oldowner-peer-advisory-FLOCK0・全元原値不変・新Refbus正常、公開manifest=evidence/provisional/PG551-completed-ref-execute-v1/manifest.json。旧v4verify143/hostHEADassert1/closeUNKNOWN保持、oldsuccess捏造0。SSC222designonly sourcecbb133051/PR58→origin/main822fffb7c699b1edb64792090937106f15fd043eをfetch/三file確認、impl工具証跡混入0。
+
 NK-OPS-001、RD OPS/BAK/MIG、UI251、SS343353/SSC222/QA047、BUG843/YKT612、PG549-C007。旧source868c2d4e6/v4補助NameErrorでbefore/SAVE原値未取得、oldRoot576780/Ref576809・DB576807・M-A保持とidle60s後peer0を分ける。
 
 |Test ID|対象・入力/操作|独立期待値・根拠|

@@ -11,6 +11,7 @@ EPOCH=STARTUP+'/epoch.current'
 APPROVAL='/etc/schubert-nk/release-approval/current'
 DIGEST='a224ea9cf421b06e7029b1f8845f2a7eb3d620b5ec2bdf90bfe64c731b99515b'
 NEW_APPROVAL=('NKRELEASEAPPROVAL1\nversion=0.1.0-PG548\nmanifest_sha256='+DIGEST+'\n').encode()
+SNAPSHOT_FIELDS=frozenset('backup bootstrapOldProofs bootstrapTools configuration credentials dependencies native oldProofs originals parentPid1 pid1Stop rows runtime startup units current approval unitFiles caddyPre'.split())
 
 
 def require(value):
@@ -47,10 +48,12 @@ def replacement(old,new,raw,mode):
 
 
 def changed_only(before,after,old_epoch,new_epoch):
-    require(type(before)is dict and type(after)is dict and set(before)==set(after))
+    require(type(before)is dict and type(after)is dict and set(before)==set(after)==SNAPSHOT_FIELDS)
+    require(before['runtime']is None and after['runtime']is None and all(v is not None for k,v in before.items()if k!='runtime')and all(v is not None for k,v in after.items()if k!='runtime'))
     require(before['current']==OLD and after['current']==NEXT)
     for key in before.keys()-{'current','startup','approval'}:require(before[key]==after[key])
     old,new=before['startup'],after['startup'];require(set(old)==set(new) and EPOCH in old and STARTUP in old)
+    require(type(old_epoch)is bytes and old[EPOCH]['sha256']==hashlib.sha256(old_epoch).hexdigest()and old[EPOCH]['metadata'][6]==len(old_epoch))
     for name,value in old.items():
         if name==EPOCH:replacement(value,new[name],new_epoch,0o600)
         elif name==STARTUP:
@@ -59,3 +62,9 @@ def changed_only(before,after,old_epoch,new_epoch):
     replacement(before['approval'],after['approval'],NEW_APPROVAL,0o400)
     epoch_transition(old_epoch,new_epoch)
     return True
+
+
+def phase_action(state,action):
+    transitions={'READY':{'before':'READY','after':'CHECKED'},'CHECKED':{'release':'CLOSED'}}
+    require(type(state)is str and type(action)is str and action in transitions.get(state,{}))
+    return transitions[state][action]
