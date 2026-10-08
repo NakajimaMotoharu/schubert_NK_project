@@ -136,11 +136,6 @@ final class NativeCoveragePrivateFile {
         });
   }
 
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification =
-          "SSC193/PG-D375 fixed Linux run/proc capability and four PT role directories only; NEXPORT193/native; no arbitrary path or coverage exclusion")
   static void export(FixedNativeCoverageProfile profile, String name, byte[] bytes)
       throws IOException {
     export(profile, name, bytes, new NativeIo());
