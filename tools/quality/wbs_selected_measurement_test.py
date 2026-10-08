@@ -95,13 +95,15 @@ class SelectedMeasurementTest(unittest.TestCase):
             self.assertFalse(any(a.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE'
                                  for a in inventory['artifacts'] if a['owner'] == owner and a['kind'] == 'JAVA'))
 
-    def test_current_fresh_six_uses_its_own_inventory_and_no_old_selected_override(self):
+    def test_current_fresh_six_and_later_selected_result_keep_their_own_bindings(self):
         snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
         inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
         self.assertEqual('969d8ded10c0bf5841d9e3a5c531e922caf4a24a', snapshot['source'])
         self.assertEqual(snapshot['source'], inventory['source'])
         self.assertEqual(inventory['measurementBindings']['run'], snapshot['measurementRun'])
-        self.assertFalse(any('measurementOverride' in row for row in snapshot['rows']))
+        selected = [row for row in snapshot['rows'] if 'measurementOverride' in row]
+        self.assertEqual(['WBS-P017-12'], [row['id'] for row in selected])
+        self.assertEqual('PG541-timeout-cardinality-selected-v1', selected[0]['measurementOverride']['run'])
         for row in snapshot['rows']:
             if row['measurementStatus'] == 'VM_STEP_VERIFIED':
                 self.assertEqual('a2e98ce9e96c42425921e3686e8ae7a94bff9e6c', row['measurementSource'])
