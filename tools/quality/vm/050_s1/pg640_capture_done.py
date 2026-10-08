@@ -3,6 +3,7 @@
 Read-only; no start/stop/repair. Reuses inspected capture structure, not old result.
 """
 import hashlib
+import datetime
 import json
 import os
 from pathlib import Path
@@ -38,6 +39,9 @@ def payload():
     assert value.count(bounded) == 1
     value = value.replace(bounded, "require(cutoff=='2026-10-08T18:32:42.140966Z')")
     value = value.replace("activation=matches[0];done_path=", "activation=matches[0];require(activation=='7d381b67-b37b-48c6-99ac-e04a336f887d');done_path=")
+    marker = "'wholeFormalAccepted':False}))"
+    assert value.count(marker) == 1
+    value = value.replace(marker, "'wholeFormalAccepted':False,'ownedUnits':{u:{k:v[k]for k in ('MainPID','InvocationID','ExecMainStartTimestampMonotonic','ActiveState','SubState')}for u,v in after['units'].items()},'parentEndedUTC':done.decode('ascii').splitlines()[4]}))")
     assert "baseline['bounds']" not in value
     return value
 
@@ -55,12 +59,14 @@ def main():
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile='+str(P/'known_hosts'),
            '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']
     code = 'RECEIPT='+repr((R/'pg609_parent_receipt.py').read_text())+'\n'+payload()
+    started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     result = subprocess.run(ssh, input=code.encode(), capture_output=True, timeout=90)
     with (W/'pg640-completed-readonly-v1.private.log').open('xb') as f:
         f.write(result.stderr); f.flush(); os.fsync(f.fileno())
     with (W/'pg640-completed-readonly-v1.exit').open('x') as f: f.write(str(result.returncode)+'\n')
     if result.returncode == 0:
         safe = json.loads(result.stdout)
+        safe.update(startedUTC=started, endedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat())
         safe['operatorSource'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
         with (W/'pg640-completed-readonly-v1.safe.json').open('x') as f: json.dump(safe, f, sort_keys=True)
         print(json.dumps(safe))
