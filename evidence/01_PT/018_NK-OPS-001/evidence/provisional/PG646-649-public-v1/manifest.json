@@ -1,0 +1,60 @@
+{
+  "run": "PG646-649-public-v1",
+  "atUTC": "2026-10-08T21:34:26.638508+00:00",
+  "operatorSource": "2c2403ed29040c99257f65452cedb7b9296687c4",
+  "productionSource": "36fe7a0b938489d61d17d49c1c30a6fbbef699d5",
+  "tests": [
+    "PG647-C001..004",
+    "PG647-O001..005",
+    "PG647-J001",
+    "PG647-R001",
+    "PG648-C001..003",
+    "PG648-R001",
+    "PG649-C001",
+    "PG649-R001"
+  ],
+  "specs": [
+    "527_PG647_完了runtime635正規退役.md",
+    "528_PG648_正規退役独立後条件.md",
+    "529_PG649_八Backup私有保全.md"
+  ],
+  "bugs": [
+    "BUG-906",
+    "BUG-907"
+  ],
+  "ykt": [
+    "YKT-675",
+    "YKT-676"
+  ],
+  "files": {
+    "pg646-completed-baseline-v1.safe.json": {
+      "sha256": "514553e2dcb1c665354f606512860015c2127754e3afa47afeaacb352b089c64",
+      "bytes": 499
+    },
+    "pg647-build-v1.safe.json": {
+      "sha256": "789470f0031c88597bd147717f9f83a0463873c52ab1d8c977dfde51532161c9",
+      "bytes": 638
+    },
+    "pg647-stage-v1.safe.json": {
+      "sha256": "5475398a916f010092696309811d2f5d1cb62f5856b3f01cdbd7da4c271e438a",
+      "bytes": 2449
+    },
+    "pg647-retire-v1.safe.json": {
+      "sha256": "0aeca49e07bf0b2519fa392b6cfdeb8e69adfd885f25bc77ee024ad87251413b",
+      "bytes": 2448
+    },
+    "pg648-retirement-post-v1.safe.json": {
+      "sha256": "b2b40afdb02014accd6fa238d4a5a57fcfd04e78f78e2a894ea837210fd6c151",
+      "bytes": 780
+    },
+    "pg649-backup-preserve-v1.safe.json": {
+      "sha256": "e7667bca6036869d5e04cb7850263da9a0b20b47ce2255d7df03488f75e2251e",
+      "bytes": 393
+    }
+  },
+  "stageLabelCorrection": "Original pg647-stage-v1.safe.json run=PG635-stage-v1 is preserved unchanged; actual PG647 immutable new directory/operator/hash; BUG907/527 correct identity. No restaging.",
+  "rawExported": false,
+  "privateArchivesExported": false,
+  "formalAccepted": false,
+  "coverage100": false
+}
