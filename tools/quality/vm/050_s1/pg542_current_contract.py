@@ -6,6 +6,16 @@ UNITS = frozenset({
     'artemis.service', 'schubert-nk-morning-controller.service',
     'schubert-nk-bootstrap-admin.service'})
 
+POST_RETIREMENT_FIELDS = frozenset({'backup', 'bootstrapOldProofs', 'bootstrapTools',
+    'configuration', 'credentials', 'dependencies', 'native', 'oldProofs', 'originals',
+    'parentPid1', 'pid1Stop', 'rows', 'runtime', 'startup', 'units'})
+
+
+def post_retirement_schema(value):
+    if not isinstance(value, dict) or set(value) != POST_RETIREMENT_FIELDS or any(v is None for v in value.values()):
+        raise ValueError('post-retirement snapshot schema refused')
+    return True
+
 
 def current_units(values):
     if not isinstance(values, dict) or set(values) != UNITS:

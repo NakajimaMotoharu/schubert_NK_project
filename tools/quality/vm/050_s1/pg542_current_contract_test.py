@@ -1,10 +1,24 @@
 """PG542 literal loaded/Id/idle negatives; management only, Production credit0."""
 import copy
 import unittest
-from pg542_current_contract import current_units
+from pg542_current_contract import current_units, post_retirement_schema
 
 
 class CurrentUnitsTest(unittest.TestCase):
+    def test_post_retirement_has_no_runtime_preparation_current_field(self):
+        fields=('backup', 'bootstrapOldProofs', 'bootstrapTools', 'configuration', 'credentials',
+                'dependencies', 'native', 'oldProofs', 'originals', 'parentPid1', 'pid1Stop',
+                'rows', 'runtime', 'startup', 'units')
+        value={name:{} for name in fields}
+        self.assertTrue(post_retirement_schema(value))
+        for invalid in (None, [], {}, {**value, 'current':'/foreign'}, {**value,'units':None}):
+            with self.assertRaises(ValueError):
+                post_retirement_schema(invalid)
+        for name in fields:
+            broken=dict(value);del broken[name]
+            with self.assertRaises(ValueError):
+                post_retirement_schema(broken)
+
     def fixture(self):
         names = ('caddy.service', 'schubert-nk-web.service', 'schubert-nk-api.service',
                  'schubert-nk-cleanup.service', 'schubert-nk-inbox-inspector.service',
