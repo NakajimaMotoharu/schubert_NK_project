@@ -90,4 +90,37 @@ final class MaintenanceMutationGuardTest {
                         })
                     .check()));
   }
+
+  /** MG541001: public JDBC cardinality fault, independently verified real TX effects. */
+  @Test
+  void mg541001TimeoutProjectionRequiresExactlyOneRowWithoutTakingTransactionOwnership()
+      throws Exception {
+    for (boolean duplicate : List.of(false, true)) {
+      try (var c = db.open("schubert_batch")) {
+        c.setAutoCommit(false);
+        var probe = new ServiceJdbcProbe();
+        if (duplicate) probe.duplicate.add("timeout");
+        else probe.empty.add("timeout");
+        var error =
+            assertThrows(
+                SQLDataException.class,
+                () -> new MaintenanceMutationGuard(() -> 10_000_000_000L).bind(probe.wrap(c)));
+        assertEquals("maintenance timeout unavailable", error.getMessage());
+        assertNull(error.getCause());
+        assertEquals(duplicate ? 2 : 1, probe.seen.get("timeout.next"));
+        assertEquals(1, probe.seen.get("timeout.resultClose"));
+        assertEquals(1, probe.seen.get("timeout.statementClose"));
+        assertEquals(0, probe.commits);
+        assertEquals(0, probe.rollbacks);
+        assertEquals(0, probe.closes);
+        assertFalse(c.isClosed());
+        assertFalse(c.getAutoCommit());
+        // Real set_config ran even though its public result cardinality was corrupted.
+        assertEquals("5s", query(c, "show statement_timeout"));
+        c.rollback();
+        c.setAutoCommit(true);
+        assertEquals("30min", query(c, "show statement_timeout"));
+      }
+    }
+  }
 }
