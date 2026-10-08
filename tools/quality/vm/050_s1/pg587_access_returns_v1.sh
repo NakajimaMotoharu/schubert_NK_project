@@ -65,6 +65,10 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg595-retained-expiry-anchor-v2
     task_prior=pg594-real-db-drift-v5
     ;;
+  PG595V3)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg595-retained-expiry-anchor-v3
+    task_prior=pg594-real-db-drift-v5
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -111,6 +115,10 @@ if sys.argv[3]=='PG594V4':
 if sys.argv[3]=='PG595V2':
  failed=w/'pg595-retained-expiry-anchor-v1'
  assert (failed/'source').read_text().strip()=='ac933435203d369bf5be91e2f9abf0573bbfb192' and (failed/'exit').read_bytes()==b'1\n'
+ expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
+if sys.argv[3]=='PG595V3':
+ failed=w/'pg595-retained-expiry-anchor-v2'
+ assert (failed/'source').read_text().strip()=='3af6a8ece45054dddd89ead1467c9a68c45b9213' and (failed/'exit').read_bytes()==b'1\n'
  expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
 assert hashlib.sha256(p.read_bytes()).hexdigest()==expected;p.rename(base/'preexisting-selected-batch.exec')
 PY

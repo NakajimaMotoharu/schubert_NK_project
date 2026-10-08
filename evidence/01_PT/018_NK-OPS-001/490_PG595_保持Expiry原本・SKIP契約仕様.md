@@ -1,5 +1,7 @@
 # PG595 保持Expiry原本・SKIP契約
 
+V1/V2新39PT/F1E0/exit1はBUG880/YKT649、V2最小診断でpriorObserveを特定。SKIP30拒否がtransaction開始後にSessionをabortするのに、fixtureが同Sessionで0成功を要求していた。正常0と独立第五条件30拒否へ分離、seed37～41、五条件を同新1PT内へ記録。旧/current全row不変、失敗後はconnection close/ack観測だけ、再利用しない。新commandは同closed runner PG595V3、前failedexec認証と全旧38回帰、期待値緩和0・Production変更0。V1/V2failedexec/XML/log別source保持、実結果は後記。
+
 P017-01.03既群.66/1.66/3.66pp継承、追加費重複0、NK-BAT-001/OPS009/DAT009/UI251/SS331341343/SSC125200。PT-OPS-MDB595001、MorningDatabaseSession.Session.beginExpiry/observeExpiry、四条件を新1PT内で検証する。
 
 実隔離host DB、既独立failedBackup→Cleanup sixSKIP/TransferSUCCESS→verified後、別run・同営業日の保持Expiry SUCCESSをliteral SQLで作る。旧run cutoff=current+1秒、開始fixture midnight-10秒/終了-9秒、attempt1・target1/success1/failure0/byte17・expiry cutoff旧run-7日/before2/after1。独立oracleはこれらliteralから構成しProduction expected生成0。

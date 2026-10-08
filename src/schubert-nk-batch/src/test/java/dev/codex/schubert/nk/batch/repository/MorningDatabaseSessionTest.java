@@ -199,7 +199,7 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb595001RetainedExpiryUsesExactOriginalAnchorAndRejectsWrongMissingNullLookup()
       throws Exception {
-    for (int mode = 0; mode < 4; mode++) mdb590Scenarios(37 + mode, "", "", false, mode);
+    for (int mode = 0; mode < 5; mode++) mdb590Scenarios(37 + mode, "", "", false, mode);
   }
 
   private void mdb590Scenarios(
@@ -444,9 +444,8 @@ final class MorningDatabaseSessionTest {
                 } catch (SQLException failure) {
                   throw new IOException("fixture retained current audit", failure);
                 }
-                assertThrows(IOException.class, () -> session.observeExpiry(reused, thirty, owner));
                 phase.set("priorObserve");
-                var observed = session.observeExpiry(reused, zero, owner);
+                var observed = session.observeExpiry(reused, priorMode == 4 ? thirty : zero, owner);
                 assertEquals(reused, observed.begins());
                 assertEquals(began.plusSeconds(4), observed.ended());
                 assertEquals(
