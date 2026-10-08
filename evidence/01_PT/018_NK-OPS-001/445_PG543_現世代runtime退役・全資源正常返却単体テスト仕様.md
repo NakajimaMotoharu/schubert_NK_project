@@ -1,5 +1,7 @@
 # PG543 現世代runtime退役・全資源正常返却
 
+検証順更新2026-10-08 10:51JST：source4e868fc3c stage-v2actual0/probe-v2actual1は十Refなしのdependency比較で拒否。safe診断は四AfterのInspector一token欠落だけ（BUG835/YKT604）、単発loaded照会は同時十Refの代用にならない。C005のprobeは厳密基準へ拒否したまま保全・PASS0、C006の新M-A/RODB/十Ref固定verifyで全原値同値と正常返却を実証してからC007へ進む。snapshot/dependency oracleは弱め0、旧probe再発行0。
+
 実試験更新2026-10-08 10:47JST：source03f875237でnew Tools-v1 stage actual0/probe actual1、release配布Unitをeffective Root0644でstrictしたため拒否（BUG834/YKT603）。旧tool配置/failedlog保全、freshM-A/DB/Ref/SAVE/退役/reload/新start0。署名PG495 stage規約のRoot:schubert(986)/0640/単linkとmanifestのpath/size/shaへ是正、独立literal正/誤GID/mode/type/nlink/size/null/extraの4管理test/Werror新compile-v2/Pyflakes0。新Tools-v2/native-v2をnew-onlyで固定、v1操作再発行0、結果後記。C004/C007の実fault matrix未完、純source順序検査だけで故障網羅認定しない。
 
 NK-OPS-001 / RD OPS009・BAK/BKO / UI251 / SS342343353 SSC192198216217・QA047。ProductionはVM a2/PG495/schema028、host候補969/PG540とは別。PT管理工具、Production PT加点0。
