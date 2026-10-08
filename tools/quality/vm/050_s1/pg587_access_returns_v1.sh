@@ -3,11 +3,22 @@
 set -euC
 umask 077
 cd /home/mini/codex/project1/work/pgpt-foundation
-test "$#" = 1
+test "$#" = 1 -o "$#" = 2
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg587-access-returns-v1
+task_profile=${2:-PG587}
+case "$task_profile" in
+  PG587)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg587-access-returns-v1
+    task_prior=pg586-access-selected-v3
+    ;;
+  PG588)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg588-session-readback-v1
+    task_prior=pg587-access-returns-v1
+    ;;
+  *) exit 2 ;;
+esac
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
@@ -15,10 +26,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 date --iso-8601=seconds > "$task_base/started"
 git rev-parse HEAD > "$task_base/source"
 git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum > "$task_base/source-files.sha256"
-python3 -B - "$task_base" <<'PY'
+python3 -B - "$task_base" "$task_prior" <<'PY'
 import hashlib,json,pathlib,sys,zipfile
 base=pathlib.Path(sys.argv[1]);w=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
-old=w/'pg586-access-selected-v3';manifest=json.loads((old/'manifest.safe.json').read_bytes())
+assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1')
+old=w/sys.argv[2];manifest=json.loads((old/'manifest.safe.json').read_bytes())
 assert manifest['actualExit']==0 and manifest['mainClassBytesEqualInstalledCurrentPG585']==1600
 for module in ('protocol','storage','bootstrap','api','web','batch'):
  name='schubert-nk-'+module;jar=name+'-0.1.0-SNAPSHOT.jar';values=[]
@@ -47,5 +59,5 @@ if test "$task_result" = 0; then
     cp "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.$task_class.xml" "$task_base/"
   done
 fi
-printf 'PG587_SELECTED actualExit=%s sourceUnchanged=true wholeAcceptance=false\n' "$task_result"
+printf '%s_SELECTED actualExit=%s sourceUnchanged=true wholeAcceptance=false\n' "$task_profile" "$task_result"
 exit "$task_result"

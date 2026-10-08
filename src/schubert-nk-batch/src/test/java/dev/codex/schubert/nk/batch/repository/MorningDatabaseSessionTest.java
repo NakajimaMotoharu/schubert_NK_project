@@ -120,6 +120,240 @@ final class MorningDatabaseSessionTest {
         "PUBLIC_PASSWORD".getBytes(java.nio.charset.StandardCharsets.US_ASCII));
   }
 
+  private static String mdb588Audit(Connection observer, BatchRun run) throws SQLException {
+    try (var statement =
+        observer.prepareStatement(
+            "select coalesce(jsonb_agg(to_jsonb(t) order by id),'[]'::jsonb)::text from schubert.batch_runs t where run_id=?")) {
+      statement.setObject(1, run.id());
+      try (var rows = statement.executeQuery()) {
+        assertTrue(rows.next());
+        String value = rows.getString(1);
+        assertNotNull(value);
+        assertFalse(rows.next());
+        return value;
+      }
+    }
+  }
+
+  /** MDB588001..003 / P017-01.03 / OPS009,DAT009/UI251/SS341343/SSC199200. */
+  @Test
+  void mdb588001TypedCleanup30EmptyReadbackDoesNotFabricateRowsOrReleaseParent() throws Exception {
+    var receipt = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(30);
+    var foreign = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(30);
+    var normal = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(0);
+    var run =
+        new BatchRun(
+            UUID.fromString("58800000-2222-4333-8444-555555555551"),
+            Instant.parse("2026-10-07T15:00:00Z"));
+    Instant began = Instant.parse("2026-10-08T00:00:00Z");
+    var connection = new AtomicReference<Connection>();
+    var retained = new AtomicReference<MorningDatabaseSession.Access>();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            (url, properties) -> {
+              var value = DriverManager.getConnection(url, properties);
+              connection.set(value);
+              return value;
+            },
+            c -> {});
+    try (var observer = db.admin()) {
+      subject.execute(
+          credential(),
+          session -> {
+            retained.set(session);
+            dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner =
+                () -> 5_000_000_000L;
+            assertThrows(
+                IOException.class, () -> session.observeCleanupRejected(run, receipt, owner));
+            var pair = session.beginBackup(run, began, false);
+            assertThrows(
+                IOException.class, () -> session.observeCleanupRejected(run, receipt, owner));
+            confirmActualFailedPair(session, pair);
+            assertThrows(
+                IOException.class, () -> session.observeCleanupRejected(run, receipt, owner));
+            assertEquals(30, session.handoffCleanup(() -> 30));
+            try {
+              String before = mdb588Audit(observer, run);
+              var actual = session.observeCleanupRejected(run, receipt, owner);
+              assertEquals(run, actual.run());
+              assertEquals(
+                  List.of(
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty()),
+                  actual.entries());
+              assertEquals("CleanupRejectedSnapshot[data=<redacted>]", actual.toString());
+              assertEquals(before, mdb588Audit(observer, run));
+              assertNotNull(connection.get());
+              assertTrue(connection.get().getAutoCommit());
+              assertFalse(connection.get().isReadOnly());
+              assertFalse(advisory(observer));
+              assertThrows(
+                  IOException.class, () -> session.observeCleanupRejected(run, foreign, owner));
+              assertThrows(
+                  IOException.class, () -> session.observeCleanupRejected(run, normal, owner));
+              var failure = new IOException("PUBLIC_OWNER_DEADLINE");
+              assertSame(
+                  failure,
+                  assertThrows(
+                      IOException.class,
+                      () ->
+                          session.observeCleanupRejected(
+                              run,
+                              receipt,
+                              () -> {
+                                throw failure;
+                              })));
+              assertEquals(before, mdb588Audit(observer, run));
+            } catch (SQLException failure) {
+              throw new IOException("isolated DB assertion", failure);
+            }
+            return Boolean.TRUE;
+          });
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+      assertTrue(connection.get().isClosed());
+      assertThrows(
+          IOException.class,
+          () -> retained.get().observeCleanupRejected(run, receipt, () -> 5_000_000_000L));
+    }
+  }
+
+  @Test
+  void mdb588002Typed30PartialRunningAndFailedSlotsStayExactAndUnmodified() throws Exception {
+    var receipt = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(30);
+    var run =
+        new BatchRun(
+            UUID.fromString("58800000-2222-4333-8444-555555555552"),
+            Instant.parse("2026-10-07T15:00:00Z"));
+    Instant began = Instant.parse("2026-10-08T00:00:00Z");
+    var subject =
+        new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+    try (var observer = db.admin()) {
+      subject.execute(
+          credential(),
+          session -> {
+            var pair = session.beginBackup(run, began, false);
+            confirmActualFailedPair(session, pair);
+            assertEquals(
+                30,
+                session.handoffCleanup(
+                    () -> {
+                      try (var child = db.open("schubert_batch");
+                          var statement =
+                              child.prepareStatement(
+                                  "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values (588201,?,'2026-10-08','CLEAN_NOTIFICATION',1,'2026-10-08T00:00:00Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-08','CLEAN_QUESTION',1,'2026-10-08T00:00:00Z','2026-10-08T00:00:01Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch command failed')")) {
+                        assertTrue(advisory(child));
+                        statement.setObject(1, run.id());
+                        statement.setObject(2, run.id());
+                        assertEquals(2, statement.executeUpdate());
+                      } catch (SQLException failure) {
+                        throw new IOException("isolated partial fixture", failure);
+                      }
+                      return 30;
+                    }));
+            try {
+              String before = mdb588Audit(observer, run);
+              var actual = session.observeCleanupRejected(run, receipt, () -> 5_000_000_000L);
+              var first =
+                  new CleanupTerminalRepository.RejectedEntry(
+                      new BatchStepAttempt(
+                          588201, run, BatchStep.CLEAN_NOTIFICATION, 1, began, false),
+                      Optional.empty(),
+                      Optional.empty());
+              var second =
+                  new CleanupTerminalRepository.RejectedEntry(
+                      new BatchStepAttempt(588202, run, BatchStep.CLEAN_QUESTION, 1, began, false),
+                      Optional.of(began.plusSeconds(1)),
+                      Optional.of(
+                          new BatchStepResult(
+                              BatchStepResult.Status.FAILED,
+                              1,
+                              0,
+                              1,
+                              0,
+                              BatchStepResult.Reason.COMMAND_FAILURE)));
+              assertEquals(
+                  List.of(
+                      Optional.of(first),
+                      Optional.of(second),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty()),
+                  actual.entries());
+              assertEquals(before, mdb588Audit(observer, run));
+              assertFalse(advisory(observer));
+            } catch (SQLException failure) {
+              throw new IOException("isolated partial readback", failure);
+            }
+            return Boolean.TRUE;
+          });
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+    }
+  }
+
+  @Test
+  void mdb588003UnexpectedTransactionOrReadOnlyCannotEnterRejectedReadback() throws Exception {
+    var receipt = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(30);
+    var run =
+        new BatchRun(
+            UUID.fromString("58800000-2222-4333-8444-555555555553"),
+            Instant.parse("2026-10-07T15:00:00Z"));
+    var retained = new AtomicReference<Connection>();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            (url, properties) -> {
+              var c = DriverManager.getConnection(url, properties);
+              retained.set(c);
+              return c;
+            },
+            c -> {});
+    subject.execute(
+        credential(),
+        session -> {
+          var pair = session.beginBackup(run, Instant.parse("2026-10-08T00:00:00Z"), false);
+          confirmActualFailedPair(session, pair);
+          assertEquals(30, session.handoffCleanup(() -> 30));
+          dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner = () -> 5_000_000_000L;
+          try {
+            var c = retained.get();
+            assertNotNull(c);
+            c.setAutoCommit(false);
+            assertThrows(
+                IOException.class, () -> session.observeCleanupRejected(run, receipt, owner));
+            assertFalse(c.getAutoCommit());
+            c.rollback();
+            c.setAutoCommit(true);
+            c.setReadOnly(true);
+            assertThrows(
+                IOException.class, () -> session.observeCleanupRejected(run, receipt, owner));
+            assertTrue(c.isReadOnly());
+            c.setReadOnly(false);
+            assertThrows(
+                NullPointerException.class,
+                () -> session.observeCleanupRejected(null, receipt, owner));
+            assertThrows(
+                NullPointerException.class, () -> session.observeCleanupRejected(run, null, owner));
+            assertThrows(
+                NullPointerException.class,
+                () -> session.observeCleanupRejected(run, receipt, null));
+          } catch (SQLException failure) {
+            throw new IOException("isolated transaction fixture", failure);
+          }
+          return Boolean.TRUE;
+        });
+    assertTrue(retained.get().isClosed());
+  }
+
   @Test
   void bresume001GenuinePriorPairAndCurrentSkipAreSeparateCommittedRows() throws Exception {
     var run =
