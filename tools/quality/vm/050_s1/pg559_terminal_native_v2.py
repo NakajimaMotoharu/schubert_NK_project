@@ -51,4 +51,4 @@ with log.open('xb') as f:
  elapsed=time.monotonic()-began
  f.write((datetime.datetime.now(datetime.timezone.utc).isoformat()+'\n').encode());f.flush();os.fsync(f.fileno())
 with (W/'pg559-terminal-native-v2.exit').open('x') as f:f.write(str(result.returncode)+'\n')
-print(json.dumps({'run':'PG559-terminal-readback-v1','actualExit':result.returncode,'elapsedSeconds':elapsed,'privateLogSha256':hashlib.sha256(log.read_bytes()).hexdigest(),'oldCloseNotInferred':True,'productionPT0':True}));raise SystemExit(result.returncode)
+print(json.dumps({'run':'PG559-terminal-readback-v2','actualExit':result.returncode,'elapsedSeconds':elapsed,'privateLogSha256':hashlib.sha256(log.read_bytes()).hexdigest(),'oldCloseNotInferred':True,'productionPT0':True}));raise SystemExit(result.returncode)

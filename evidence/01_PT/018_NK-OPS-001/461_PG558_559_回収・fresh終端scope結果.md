@@ -1,5 +1,12 @@
 # PG558限定回収とPG559 fresh正常scope
 
+## 実再試験（2026-10-08 14:22JST、旧結果は下記履歴として保持）
+
+PG559-v1はBUG853 SQL字句でpre-SAVE拒否・実143/511.914s、oldcloseUNKNOWN保持。SSC224 source2eb86c456/PR60/main06cb006519852d18900890bebbaa1a5c59a8aaef design-only公開。PG560 current902135/902164固定pair回収：preflight0/loge52a7cb…、execute0/log6cea655…/old原値二読不変・新Ref正常/旧資源0。Rootold/errorfc04799f…は保持しbeforeを捏造0。
+
+修正source34a85129e、PG559-v2全new-ownedpaths/五payload固定・Werror0/CLI6/独立6test/typedgraph888/Pyflakes0。BUG853/854 pure型付きSQL/当backend全数/identity/他全client/advisory四count、BUG855lexists/親exact空・三request namespace/ACK前directorysync。実PostgreSQL readonly parse actual0/hash52e0a6b28970c1a43d67b0ab85495ee0b5704254c3679ac489d894ccb5178cce。
+新実PG559-v2 actual0/7.575922809999611s/logbc3031b82d1bcffdf057905c4e5eff34134f7e1b36016a988c7656c14b296b01・Root v2 exact4file、before=afterSHA23263d00948c5df5aca9aa4741a4d0266d9b8d20ebe400c7d180f89bb9ce6677/complete32e96c1a39d31e3c760213d997804677afcd8dd0cbde76eb028c7dc65873c403/Refstderr empty。全M-A/RODB/advisory/十Ref/本人FD/Startup原本Dir/原本DONE及び全24/原本Backup/oldproof/native/currentの二読→DB rollback-close→Ref正常child0→A/M正常、終了後全owner-peer-advisory-FLOCK0を別照合。before/afterだけでcloseを推定せずJava実0+complete全literalをjoin。BUG856：console最終run labelのみ旧v1残り、actualTools/SAVE/log/exit v2と源byteを独立照合してrun=v2へ訂正、実回帰再発行0。管理oracle6testはProductionPT0、native/session/classbyte/global/CHR/正式は別残件。
+
 RD OPS009/BKO/DAT009/UI251/SS343353/SSC214215223/QA047、BUG851852/YKT620621。design-only e6241da3a/PR59通常merge→origin/main bb4db03a8b6c5024a1045e791f2f7c71262dacd3確認、三文書のみ・工具/未受入source/evidence混入0。
 
 PG558-MATRIX459assert、OWNER63assert＋strict singleton-list/dict join負例、Pyflakes0。preflight-v1 actual1（BUG852、元値不変、PID1record表現差のみ）/log7da7f6c…保持。是正source452198175、preflight-v2 actual0/log0cf746f318f77a31c406dfe6c845f955db16e0a2982374e0d451b5a720eb9ce6→execute-v2 actual0/log7bbbd1a176aed195fd60f0cf5c586be9b46861d1594201729c59063fc537ef03。

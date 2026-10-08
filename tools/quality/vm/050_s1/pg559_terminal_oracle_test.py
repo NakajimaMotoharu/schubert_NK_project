@@ -39,6 +39,8 @@ class RowsTests(unittest.TestCase):
    for external in ('pg498-pending-tools-v2','pg498-pending-tools-v3'):
     if external in text:self.assertNotIn(external.replace('-v2','-v1').replace('-v3','-v1'),text)
   self.assertIn('assert len(files)==5',driver);self.assertIn("'Ran 6 tests'",driver)
+  self.assertIn("'run':'PG559-terminal-readback-v2'",driver)
+  self.assertNotIn('PG559-terminal-readback-v1',driver)
  def test_peer_sql_and_release(self):
   for bad in (None,True,False,0,1,-1,2147483648,'77',77.0):
    with self.assertRaises(ValueError):env['peer_query'](bad)
