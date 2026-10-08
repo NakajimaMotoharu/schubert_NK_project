@@ -34,10 +34,10 @@ def terminal():
    for p in (cg/'cgroup.procs',*cg.rglob('cgroup.procs')):assert not p.read_text().strip()
 terminal()
 root=pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG621')
-stage=pathlib.Path('/home/ubuntu/pg622-stage-v1')
+stage=pathlib.Path('/home/ubuntu/pg622-stage-v2')
 sig=pathlib.Path('/var/lib/pgpt-s1-preservation/pg621-manifest.sig')
 assert not os.path.lexists(root)and not os.path.lexists(sig)
-archive=stage/'pg622-release-v1.tar';signature=stage/'pg621-manifest-v1.sig'
+archive=stage/'pg622-release-v2.tar';signature=stage/'pg621-manifest-v1.sig'
 assert hashlib.sha256(archive.read_bytes()).hexdigest()==TARHASH
 signature_bytes=signature.read_bytes();assert len(signature_bytes)==64 and hashlib.sha256(signature_bytes).hexdigest()==SIGHASH
 policy={};exec(compile(CONTRACT,'<pinned closed archive policy>','exec'),policy)
@@ -88,8 +88,8 @@ def main():
     for name, row in rows.items():
         p = RELEASE / name
         assert not p.is_symlink() and p.stat().st_size == row['size'] and hashlib.sha256(p.read_bytes()).hexdigest() == row['sha256']
-    bundle = P / 'pg622-release-v1.tar'; signature = P / 'pg621-manifest-v1.sig'
-    log = W / 'pg622-candidate-stage-v1.private.log'
+    bundle = P / 'pg622-release-v2.tar'; signature = P / 'pg621-manifest-v1.sig'
+    log = W / 'pg622-candidate-stage-v2.private.log'
     assert not bundle.exists() and not log.exists()
     with tarfile.open(bundle, 'x:') as tar:
         for p in sorted(RELEASE.rglob('*')):
@@ -103,12 +103,12 @@ def main():
     scp = ['scp', *opts, '-P', '22222']
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     with log.open('xb') as f:
-        subprocess.run(ssh + ['test ! -e /home/ubuntu/pg622-stage-v1 && sudo -n test ! -e /opt/schubert-nk/releases/0.1.0-PG621 && sudo -n test ! -e /var/lib/pgpt-s1-preservation/pg621-manifest.sig && mkdir -m 700 /home/ubuntu/pg622-stage-v1'], stdout=f, stderr=f, check=True)
-        subprocess.run(scp + [str(bundle), str(signature), 'ubuntu@127.0.0.1:/home/ubuntu/pg622-stage-v1/'], stdout=f, stderr=f, check=True)
+        subprocess.run(ssh + ['test ! -e /home/ubuntu/pg622-stage-v2 && sudo -n test ! -e /opt/schubert-nk/releases/0.1.0-PG621 && sudo -n test ! -e /var/lib/pgpt-s1-preservation/pg621-manifest.sig && mkdir -m 700 /home/ubuntu/pg622-stage-v2'], stdout=f, stderr=f, check=True)
+        subprocess.run(scp + [str(bundle), str(signature), 'ubuntu@127.0.0.1:/home/ubuntu/pg622-stage-v2/'], stdout=f, stderr=f, check=True)
         prefix = 'SOURCE=' + repr(SOURCE) + '\nDIGEST=' + repr(DIGEST) + '\n'
         prefix += 'TARHASH=' + repr(hashlib.sha256(bundle.read_bytes()).hexdigest()) + '\n'
         prefix += 'SIGHASH=' + repr(hashlib.sha256(signature.read_bytes()).hexdigest()) + '\n'
-        prefix += 'CONTRACT=' + repr((Path(__file__).parent / 'pg622_stage_contract.py').read_text()) + '\n'
+        prefix += 'CONTRACT=' + repr((Path(__file__).parent / 'pg601_stage_contract.py').read_text()) + '\n'
         result = subprocess.run(ssh + ['sudo -n python3 -B -'], input=(prefix + PAYLOAD).encode(), stdout=f, stderr=f)
         f.flush(); os.fsync(f.fileno())
     witness = b'PG622_UNUSED_CANDIDATE_PLACED artifacts187=true signatureVerified=true currentUnchanged=true businessActions0=true\n'
@@ -120,7 +120,7 @@ def main():
             'helperSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             'currentUnchanged': result.returncode == 0, 'candidateOnly': True,
             'activationNotRun': True, 'formalAccepted': False}
-    with (W / 'pg622-candidate-stage-v1.safe.json').open('x') as f:
+    with (W / 'pg622-candidate-stage-v2.safe.json').open('x') as f:
         json.dump(safe, f, indent=2); f.write('\n'); f.flush(); os.fsync(f.fileno())
     print(json.dumps({'actualExit': result.returncode, 'unusedCandidateOnly': True,
                       'currentUnchangedVerified': result.returncode == 0, 'formalAccepted': False}))
