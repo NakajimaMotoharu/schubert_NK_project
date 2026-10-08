@@ -3,11 +3,15 @@
 set -euC
 umask 077
 cd /home/mini/codex/project1/work/pgpt-foundation
-test "$#" = 1
+test "$#" = 1 -o "$#" = 2
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg585-access-reactor-v3
+case "${2:-PG585}" in
+  PG585) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg585-access-reactor-v3 ;;
+  PG593) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg593-grouped-six-host-v1 ;;
+  *) exit 2 ;;
+esac
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
@@ -35,5 +39,5 @@ if test "$task_result" = 0; then
     cp "src/schubert-nk-$task_module/target/site/jacoco/jacoco.xml" "$task_base/$task_module/"
   done
 fi
-printf 'PG585_ACCESS_PT actualExit=%s sourceUnchanged=true\n' "$task_result"
+printf '%s_FULL_PT actualExit=%s sourceUnchanged=true\n' "${2:-PG585}" "$task_result"
 exit "$task_result"
