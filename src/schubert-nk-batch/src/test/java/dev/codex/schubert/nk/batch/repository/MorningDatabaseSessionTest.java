@@ -147,6 +147,28 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb590001FailedBackupCleanupSkipAndExpiryTerminalReceiptsMatchIndependentSql()
       throws Exception {
+    mdb590Scenarios(0, "", "");
+  }
+
+  @Test
+  void mdb592001SixReadbackTransitionsRejectEverySqlPortFailureAndPreserveRows() throws Exception {
+    int seed = 1;
+    for (String phase :
+        List.of(
+            "failedBackupSnapshot",
+            "observeBackup",
+            "observeCleanup",
+            "cleanupReferences",
+            "beginExpiry",
+            "observeExpiry")) {
+      for (String method : List.of("getAutoCommit", "isReadOnly", "prepareStatement", "rollback")) {
+        mdb590Scenarios(seed++, phase, method);
+      }
+    }
+    assertEquals(25, seed);
+  }
+
+  private void mdb590Scenarios(int seed, String faultPhase, String faultMethod) throws Exception {
     var zero = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(0);
     var ten = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(10);
     var thirty = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(30);
@@ -163,12 +185,19 @@ final class MorningDatabaseSessionTest {
             "CLEAN_BATCH_RUN",
             "CLEAN_TRANSFER");
     for (int index = 0; index < 6; index++) {
-      int scenario = index;
+      int scenario = seed * 6 + index;
       int terminal = index % 3;
-      Instant began = Instant.parse("2026-09-20T00:00:00Z").plusSeconds(index * 86400L);
-      var run = new BatchRun(new UUID(590001, index + 1), began.minusSeconds(32400));
+      boolean matchingReceipt = index < 3;
+      var fixtureDate =
+          seed == 0
+              ? java.time.LocalDate.of(2026, 9, 20).plusDays(index)
+              : java.time.LocalDate.of(2010, 1, 1).plusDays(scenario);
+      Instant began = fixtureDate.atStartOfDay(java.time.ZoneOffset.UTC).toInstant();
+      var run = new BatchRun(new UUID(590001, scenario + 1), began.minusSeconds(32400));
       var retained = new AtomicReference<Connection>();
       var readBefore = new AtomicReference<String>();
+      var phase = new AtomicReference<>("");
+      var injected = new AtomicBoolean();
       var subject =
           new MorningDatabaseSession(
               actualUrl,
@@ -176,6 +205,28 @@ final class MorningDatabaseSessionTest {
               (url, properties) -> {
                 var actual = DriverManager.getConnection(url, properties);
                 retained.set(actual);
+                if (!faultPhase.isEmpty()) {
+                  return (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (proxy, method, args) -> {
+                            if (phase.get().equals(faultPhase)
+                                && method.getName().equals(faultMethod)
+                                && injected.compareAndSet(false, true)) {
+                              try (var audit =
+                                  DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+                                readBefore.set(mdb588Audit(audit, run));
+                              }
+                              throw new SQLException("PRIVATE_TRANSITION_SQL_FAULT");
+                            }
+                            try {
+                              return method.invoke(actual, args);
+                            } catch (InvocationTargetException failure) {
+                              throw failure.getCause();
+                            }
+                          });
+                }
                 return actual;
               },
               c -> {});
@@ -187,6 +238,19 @@ final class MorningDatabaseSessionTest {
               assertThrows(IOException.class, () -> session.handoffExpiry(() -> 0));
               var backup = session.beginBackup(run, began, false);
               confirmActualFailedPair(session, backup);
+              phase.set("failedBackupSnapshot");
+              var failedSnapshot = session.failedBackupSnapshot(backup, owner);
+              assertEquals(began.plusSeconds(1), failedSnapshot.endedAt());
+              phase.set("observeBackup");
+              var backupRows =
+                  session.observeBackup(backup, Optional.empty(), began.plusSeconds(1), owner);
+              assertEquals(2, backupRows.current().size());
+              for (var row : backupRows.current()) {
+                assertEquals(BatchStepResult.Status.FAILED, row.result().status());
+                assertEquals(BatchStepResult.Reason.COMMAND_FAILURE, row.result().reason());
+                assertEquals(began.plusSeconds(1), row.ended());
+              }
+              phase.set("");
               assertEquals(
                   0,
                   session.handoffCleanup(
@@ -202,7 +266,7 @@ final class MorningDatabaseSessionTest {
                             boolean transfer = step == 6;
                             sql.setLong(1, 590000000L + scenario * 100 + step);
                             sql.setObject(2, run.id());
-                            sql.setObject(3, java.time.LocalDate.of(2026, 9, 20 + scenario));
+                            sql.setObject(3, fixtureDate);
                             sql.setString(4, names.get(step));
                             sql.setObject(
                                 5, began.plusSeconds(2).atOffset(java.time.ZoneOffset.UTC));
@@ -222,6 +286,7 @@ final class MorningDatabaseSessionTest {
                         }
                         return 0;
                       }));
+              phase.set("observeCleanup");
               var cleanup = session.observeCleanupBackupUnavailable(run, 0, owner);
               assertEquals(7, cleanup.entries().size());
               for (int step = 0; step < 7; step++) {
@@ -243,12 +308,16 @@ final class MorningDatabaseSessionTest {
                 assertEquals(0, entry.result().failure());
                 assertEquals(0, entry.result().bytes());
               }
+              phase.set("cleanupReferences");
               assertEquals(
                   Collections.nCopies(7, Optional.empty()),
                   session.cleanupReferences(cleanup, owner));
+              phase.set("");
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, null, owner));
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, began, null));
+              phase.set("beginExpiry");
               var expiry = session.beginExpiry(run, began.plusSeconds(4), owner);
+              phase.set("");
               assertFalse(expiry.current().skipped());
               assertEquals(Optional.empty(), expiry.prior());
               assertThrows(
@@ -299,10 +368,11 @@ final class MorningDatabaseSessionTest {
               }
               assertThrows(
                   IOException.class, () -> session.observeExpiry(expiry, cleanupReceipt, owner));
+              phase.set("observeExpiry");
               var actual =
                   session.observeExpiry(
                       expiry,
-                      scenario < 3 ? receipts.get(terminal) : terminal == 0 ? thirty : zero,
+                      matchingReceipt ? receipts.get(terminal) : terminal == 0 ? thirty : zero,
                       owner);
               assertEquals(expiry, actual.begins());
               assertEquals(began.plusSeconds(5), actual.ended());
@@ -322,12 +392,14 @@ final class MorningDatabaseSessionTest {
               assertEquals(Long.valueOf(terminal == 0 ? 0 : 1), actual.audit().after());
               return Boolean.TRUE;
             };
-        if (scenario < 3) assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
+        if (seed == 0 && index < 3)
+          assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
         else
           assertEquals(
               "root batch database unavailable",
               assertThrows(IOException.class, () -> subject.execute(credential(), operation))
                   .getMessage());
+        if (seed != 0) assertTrue(injected.get(), faultPhase + ":" + faultMethod);
         assertEquals(readBefore.get(), mdb588Audit(observer, run));
         assertTrue(retained.get().isClosed());
         awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
