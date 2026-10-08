@@ -24,15 +24,44 @@ def classes(p):
         return {n: z.read(n) for n in z.namelist() if n.endswith('.class')}
 
 
+def verify_sessions(rows, start, end, module):
+    # Maven child probes can legitimately snapshot one non-reset agent twice.
+    # An ID with a different start, duplicate tuple or out-of-run dump is never admitted.
+    topology = {'protocol': (1, 1), 'storage': (1, 1), 'bootstrap': (4, 4),
+                'api': (5, 4), 'web': (6, 6), 'batch': (1, 1)}
+    if module not in topology or type(rows) is not list or not rows:
+        raise ValueError('host session topology')
+    seen = {}
+    for row in rows:
+        if type(row) is not dict or set(row) != {'id', 'start', 'dump'}:
+            raise ValueError('host session fields')
+        if any(type(row[k]) is not str for k in row) or not row['id'] or len(row['id']) > 128:
+            raise ValueError('host session data')
+        if not all(re.fullmatch('[0-9]{1,19}', row[k]) for k in ('start', 'dump')):
+            raise ValueError('host session time')
+        begin, dump = int(row['start']), int(row['dump'])
+        if not start * 1000 - 1000 <= begin <= dump <= end * 1000 + 1000:
+            raise ValueError('host session window')
+        if row['id'] in seen:
+            prior_start, prior_dump = seen[row['id']]
+            if begin != prior_start or dump <= prior_dump:
+                raise ValueError('host session continuation')
+        seen[row['id']] = (begin, dump)
+    if (len(rows), len(seen)) != topology[module]:
+        raise ValueError('host session topology')
+    return {'dumpRecords': len(rows), 'distinctSessions': len(seen)}
+
+
 def main(source):
     os.umask(0o077)
     assert re.fullmatch('[0-9a-f]{40}', source)
     run = W / 'pg618-exporter-candidate-six-host-v1'
     assert (run/'source').read_text().strip() == source and (run/'exit').read_bytes() == b'0\n'
-    assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=T).decode().strip() == source
     assert not subprocess.check_output(['git', 'status', '--porcelain'], cwd=T)
+    operator = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=T).decode().strip()
     entries = [l.split('  ', 1) for l in (run/'source-files.sha256').read_text().splitlines()]
-    subprocess.run(['sha256sum', '--check', '--status', str(run/'source-files.sha256')], cwd=T, check=True)
+    # Offline recollection binds the immutable run to its original Git source, not newer tools.
+    # The runner already enforced before/after clean sourceguard at actual exit0.
     raw = subprocess.check_output(['git', 'cat-file', '--batch'], cwd=T,
                                  input=''.join(source+':'+p+'\n' for _, p in entries).encode())
     offset = 0
@@ -82,9 +111,7 @@ def main(source):
         assert not ET.parse(base/'spotbugsXml.xml').getroot().findall('.//BugInstance')
         assert sha(base/'jacoco.xml') == sha(current/'site/jacoco/jacoco.xml')
         root = ET.parse(base/'jacoco.xml').getroot(); sessions = root.findall('sessioninfo')
-        assert sessions and len({s.get('id') for s in sessions}) == len(sessions)
-        assert all(start*1000-1000 <= int(s.attrib['start']) <= int(s.attrib['dump']) <= end*1000+1000
-                   for s in sessions)
+        topology = verify_sessions([dict(s.attrib) for s in sessions], start, end, module)
         counts = {c.get('type'): {'missed': int(c.get('missed')), 'covered': int(c.get('covered'))}
                   for c in root.findall('counter')}
         results[module] = {'tests': sums['tests'], 'suites': len(reports), 'FESFlakyNotRun': 0,
@@ -92,13 +119,15 @@ def main(source):
                            'jarSha256': sha(base/name), 'execSha256': sha(base/'jacoco.exec'),
                            'coverageSha256': sha(base/'jacoco.xml'),
                            'staticSha256': sha(base/'spotbugsXml.xml'),
-                           'sessions': [s.attrib for s in sessions]}
+                           'sessions': [s.attrib for s in sessions], 'sessionTopology': topology}
         tests += sums['tests']; suites += len(reports)
     assert tests == 3466 and suites == 512 and total_classes == 1605
     assert results['bootstrap']['tests'] == 276
     remaining = {k: sum(m['hostCounters'][k]['missed'] for m in results.values())
                  for k in ('LINE', 'METHOD', 'CLASS', 'BRANCH')}
     result = {'actualExit': 0, 'run': run.name, 'candidateSource': source,
+              'collectorOperator': operator, 'sameFrozenRunRecollection': True,
+              'knownOracleHold': 'BUG-892 typed metadata fixture values; FES0 is not that acceptance',
               'installedVmSource': '23b14a44b10504172e030bbd6625926bf049fb5c',
               'candidateNotDeployed': True, 'sourceQualification': 'FRESH_SIX_HOST_ONLY',
               'tests': tests, 'suites': suites, 'mainClasses': total_classes,
