@@ -33,6 +33,10 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg592-session-transition-faults-v1
     task_prior=pg590-cleanup-expiry-db-v1
     ;;
+  PG592V2)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg592-session-transition-faults-v2
+    task_prior=pg590-cleanup-expiry-db-v1
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -58,6 +62,10 @@ expected=manifest['selectedExecSha256']
 if sys.argv[3]=='PG588V2':
  failed=w/'pg588-session-readback-v1'
  assert (failed/'source').read_text().strip()=='4f03d7af68a5d2d942104ca649859675fc405987' and (failed/'exit').read_bytes()==b'1\n'
+ expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
+if sys.argv[3]=='PG592V2':
+ failed=w/'pg592-session-transition-faults-v1'
+ assert (failed/'source').read_text().strip()=='678ae3a396092a99978c7c15e6f101f92123c999' and (failed/'exit').read_bytes()==b'1\n'
  expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
 assert hashlib.sha256(p.read_bytes()).hexdigest()==expected;p.rename(base/'preexisting-selected-batch.exec')
 PY

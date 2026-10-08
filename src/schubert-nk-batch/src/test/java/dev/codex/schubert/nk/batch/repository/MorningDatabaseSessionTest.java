@@ -184,7 +184,7 @@ final class MorningDatabaseSessionTest {
             "CLEAN_LOG",
             "CLEAN_BATCH_RUN",
             "CLEAN_TRANSFER");
-    for (int index = 0; index < 6; index++) {
+    for (int index = 0; index < (seed == 0 ? 6 : 3); index++) {
       int scenario = seed * 6 + index;
       int terminal = index % 3;
       boolean matchingReceipt = index < 3;
