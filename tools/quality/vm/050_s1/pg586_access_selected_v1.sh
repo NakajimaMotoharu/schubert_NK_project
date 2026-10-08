@@ -7,7 +7,7 @@ test "$#" = 1
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg586-access-selected-v1
+task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg586-access-selected-v2
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
@@ -19,18 +19,16 @@ python3 -B - "$task_base" <<'PY'
 import hashlib,json,pathlib,sys
 base=pathlib.Path(sys.argv[1]);old=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379/pg585-access-reactor-v3')
 assert (old/'exit').read_bytes()==b'0\n'
-manifest=json.loads((old/'manifest.safe.json').read_bytes())
+manifest=json.loads((old/'manifest.safe.json').read_bytes());failed=old.parent/'pg586-access-selected-v1'
+assert (failed/'exit').read_bytes()==b'1\n'
 for module,expected in manifest['moduleResults'].items():
  p=pathlib.Path('src')/('schubert-nk-'+module)/'target/jacoco.exec'
- assert hashlib.sha256(p.read_bytes()).hexdigest()==expected['execSha256']
-for module in manifest['moduleResults']:
- p=pathlib.Path('src')/('schubert-nk-'+module)/'target/jacoco.exec'
- p.rename(base/('preexisting-'+module+'.exec'))
+ assert not p.exists()and hashlib.sha256((failed/('preexisting-'+module+'.exec')).read_bytes()).hexdigest()==expected['execSha256']
 PY
 task_result=0
 (
 umask 0027
-./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar -Dtest=MorningDatabaseAccessContractTest,MorningDatabaseSessionTest -Dsurefire.failIfNoSpecifiedTests=false
+./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar -Dtest=MorningDatabaseAccessContractTest,MorningDatabaseSessionTest -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false
 ) > "$task_base/build.private.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base/exit"
 date --iso-8601=seconds > "$task_base/completed"
