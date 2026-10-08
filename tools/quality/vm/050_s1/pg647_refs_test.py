@@ -26,7 +26,7 @@ class Protocol(unittest.TestCase):
                      'Pg642NativeStop.class','pg646_completed_baseline.py','pg647_runtime_retirement_refs.py',
                      "build['files'].items()", 'pg647-cli-v1.private.log', 'PG647_STAGED'):
             self.assertIn(text, value)
-        for text in ('pg635-resume-tools-v1','Pg635ResumePreparation','pg629_failed_receipt.py'):
+        for text in ('pg635-resume-tools-v1','Pg635ResumePreparation','pg629_failed_receipt.py','PG635-'):
             self.assertNotIn(text, value)
 
     def test_runtime_initial_security_and_each_namespace_fd_recheck(self):

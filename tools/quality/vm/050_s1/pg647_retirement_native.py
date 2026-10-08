@@ -29,6 +29,7 @@ def source():
         ('Pg635ResumePreparation','Pg647RuntimeRetirement'),
         ('pg635-compile-v1','pg647-compile-v1'),
         ("'pg635-'", "'pg647-'"), ('PG635_STAGED','PG647_STAGED'),
+        ('PG635-', 'PG647-'),
     ):
         assert old in raw; raw = raw.replace(old, new)
     assert 'Pg635ResumePreparation' not in raw and "('stage','prepare')" not in raw
