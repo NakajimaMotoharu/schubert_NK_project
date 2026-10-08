@@ -30,7 +30,7 @@ for name,unit in names:
  else:start=int(b['units'][unit]['ExecMainStartTimestampMonotonic']);end=int(a['units'][unit]['ExecMainExitTimestampMonotonic'])
  assert 0<start<=end and start>=57679957905 and end<=60394564274
  p=parent/name;s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1 and 0<s.st_size<=16777216
- raw=p.read_bytes();assert metadata(s)==metadata(p.lstat());sealed=a['native'][str(p)];assert metadata(s)==sealed['metadata']and hashlib.sha256(raw).hexdigest()==sealed['sha256'];selected.append({'relative':name,'unit':unit,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':s.st_size,'metadata':metadata(s),'lowerMs':(offset+start)//1000-1000,'upperMs':(offset+end)//1000+1000})
+ raw=p.read_bytes();assert metadata(s)==metadata(p.lstat());digest=hashlib.sha256(raw).hexdigest();assert digest==HASHES[name];selected.append({'relative':name,'unit':unit,'sha256':digest,'bytes':s.st_size,'metadata':metadata(s),'lowerMs':(offset+start)//1000-1000,'upperMs':(offset+end)//1000+1000})
 assert len(selected)==8 and len({v['relative']for v in selected})==8
 print(json.dumps(selected))
 '''
@@ -45,13 +45,14 @@ def main():
     changed=subprocess.check_output(['git','diff','--name-only',SOURCE,'--','src','pom.xml'],cwd=T,text=True).splitlines()
     allowed={'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuardTest.java',*{'src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/'+n for n in ('ChildBrokerTest.java','ChildMaintenanceInspectorTest.java','ChildMaintenanceParentTest.java')}}
     assert set(changed)<=allowed
-    work=W/'pg581-current-eighteen-native-v2';assert not os.path.lexists(work)
+    work=W/'pg581-current-eighteen-native-v3';assert not os.path.lexists(work)
     prior=W/'pg571-current-ten-native-v2';assert sha(prior/'manifest.safe.json')=='1b3cbe0935f3435411854f38ce66779b3923bbf13e57201765527a19a99eb48f'
     old=json.loads((prior/'manifest.safe.json').read_bytes());nine=W/'pg561-current-native-v2';nine_manifest=json.loads((nine/'manifest.safe.json').read_bytes())
     assert sha(nine/'manifest.safe.json')=='e253b4e23d25dc030da33ad67fbb41d9a492426492416931dbeefc31cc73ed8a'and old['productionSource']==SOURCE and old['actualExit']==0
     assert (W/'pg579-native-stop-v1.exit').read_bytes()==b'0\n'and(W/'pg580-terminal-final-v1.exit').read_bytes()==b'0\n'
     ssh=['ssh','-i',str(P/'vm-access'),'-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts'),'-p','22222','ubuntu@127.0.0.1']
-    selected=json.loads(subprocess.check_output(ssh+['sudo -n python3 -B -'],input=PAYLOAD.encode(),timeout=30))
+    hashes={'backup/backup.exec':'4da6fba373ef344ba3cd2afec081aa73942ab34daa42a33e9e22d863a25a7bb1','cleanup/cleanup.exec':'f9ec59c1666bf6e5e6a267231391a3f6f08204d76c88438d0ce27a17ffc73fac','expiry/expiry.exec':'048eda5942975678b675beaa1d21f99097ba221000a2b42dc4d57a41e4345f9d','parent/parent.exec':'138cb7981fb257e98dc6e9eb8388772d2762d0d04b329be07cd74916c2620e01','ordinary-api193/2b3ced54b1ca4b1e9614d3fc62d4b257.terminal.exec':'41f419ba26ba15b49bd0c2861f7c947579aa50f48563cdce2662cdb57025fc38','root-api193/2b3ced54b1ca4b1e9614d3fc62d4b257.before-exec.exec':'4c19befd3e4b731ebc734f28c7582e26a9f7827d43fe9d05738ee35cf5639693','ordinary-web193/c9949e0a2b84426f84395ccf97cbe3eb.terminal.exec':'713a08727245a04b59f0f31c239055ffea7e0c6dee75d9c6da4d8b8844b38496','root-web193/c9949e0a2b84426f84395ccf97cbe3eb.before-exec.exec':'e7d2f11f3509d76db3f238c2e5e5e89db3c519c228d8b7b587d58b7c48df67cb'}
+    selected=json.loads(subprocess.check_output(ssh+['sudo -n python3 -B -'],input=('HASHES='+repr(hashes)+'\n'+PAYLOAD).encode(),timeout=30))
     work.mkdir(mode=0o700);native=[]
     for i,v in enumerate(nine_manifest['currentNativeFiles']):
         p=nine/(str(i)+'.exec');assert sha(p)==v['sha256'];native.append(p)
