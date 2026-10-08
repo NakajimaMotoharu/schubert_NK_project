@@ -143,26 +143,55 @@ public final class FixedNativeCoverageCheckpoint {
   }
 
   /** Only documented PUBLIC RT/IAgent methods, no private reflection, attach, reset or sockets. */
-  private static final class PublicAgent implements Agent {
+  // PG-D395 / NCHECK597: internal data-provider ports, never startup authority.
+  static final class PublicAgent implements Agent {
+    @FunctionalInterface
+    interface Classes {
+      @Nullable Class<?> load(String name) throws ClassNotFoundException;
+    }
+
+    @FunctionalInterface
+    interface Sources {
+      void verify(Class<?> type) throws IOException, java.net.URISyntaxException;
+    }
+
+    @FunctionalInterface
+    interface Invocation {
+      @Nullable Object invoke(Method method, @Nullable Object target, Object[] arguments)
+          throws ReflectiveOperationException;
+    }
+
     private final Object agent;
     private final Method version;
     private final Method session;
     private final Method data;
+    private final Invocation invocation;
 
     PublicAgent() throws IOException {
+      this(
+          name -> Class.forName(name, true, ClassLoader.getSystemClassLoader()),
+          PublicAgent::requirePinnedSource,
+          (method, target, arguments) -> method.invoke(target, arguments));
+    }
+
+    PublicAgent(@Nullable Classes classes, @Nullable Sources sources, @Nullable Invocation invoke)
+        throws IOException {
+      if (classes == null || sources == null || invoke == null)
+        throw new IllegalArgumentException("fixed PT agent dependencies required");
+      invocation = invoke;
       try {
-        var loader = ClassLoader.getSystemClassLoader();
-        var rt = Class.forName("org.jacoco.agent.rt.RT", true, loader);
-        var type = Class.forName("org.jacoco.agent.rt.IAgent", true, loader);
-        requirePinnedSource(rt);
-        requirePinnedSource(type);
-        Object actual = rt.getMethod("getAgent").invoke(null);
+        var rt = classes.load("org.jacoco.agent.rt.RT");
+        var type = classes.load("org.jacoco.agent.rt.IAgent");
+        if (rt == null || type == null) throw unavailable();
+        sources.verify(rt);
+        sources.verify(type);
+        Object actual = invocation.invoke(rt.getMethod("getAgent"), null, new Object[0]);
         if (actual == null || !type.isInstance(actual)) throw unavailable();
         agent = actual;
         version = type.getMethod("getVersion");
         session = type.getMethod("getSessionId");
         data = type.getMethod("getExecutionData", boolean.class);
-      } catch (ReflectiveOperationException | java.net.URISyntaxException failure) {
+      } catch (ReflectiveOperationException | java.net.URISyntaxException | IOException failure) {
         throw unavailable();
       }
     }
@@ -172,8 +201,7 @@ public final class FixedNativeCoverageCheckpoint {
         matchType = SuppressMatchType.EXACT,
         justification =
             "SSC193/PG-D375 fixed Linux pinned agent CodeSource only; NCHECK193/NEXPORT193/native; no arbitrary path or coverage exclusion")
-    private static void requirePinnedSource(Class<?> type)
-        throws IOException, java.net.URISyntaxException {
+    static void requirePinnedSource(Class<?> type) throws IOException, java.net.URISyntaxException {
       var source = type.getProtectionDomain().getCodeSource();
       if (source == null || source.getLocation() == null) throw unavailable();
       require(
@@ -193,7 +221,7 @@ public final class FixedNativeCoverageCheckpoint {
 
     private String string(Method method) throws IOException {
       try {
-        Object value = method.invoke(agent);
+        Object value = invocation.invoke(method, agent, new Object[0]);
         if (!(value instanceof String text)) throw unavailable();
         return text;
       } catch (ReflectiveOperationException failure) {
@@ -204,7 +232,7 @@ public final class FixedNativeCoverageCheckpoint {
     @Override
     public byte[] executionDataWithoutReset() throws IOException {
       try {
-        Object value = data.invoke(agent, false);
+        Object value = invocation.invoke(data, agent, new Object[] {false});
         if (!(value instanceof byte[] bytes)) throw unavailable();
         return bytes;
       } catch (ReflectiveOperationException failure) {

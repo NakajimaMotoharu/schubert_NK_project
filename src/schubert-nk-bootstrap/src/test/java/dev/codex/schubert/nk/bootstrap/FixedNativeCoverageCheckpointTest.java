@@ -15,6 +15,228 @@ final class FixedNativeCoverageCheckpointTest {
   private static final String INV = "1234567890abcdef1234567890abcdef";
   private static final byte[] GOLDEN = {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
 
+  public static final class PublicFixture {
+    boolean reset = true;
+    int reads;
+
+    public String getVersion() {
+      return "0.8.15";
+    }
+
+    public String getSessionId() {
+      return "API-1234567890abcdef1234567890abcdef-root";
+    }
+
+    public byte[] getExecutionData(boolean value) {
+      reset = value;
+      reads++;
+      return new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
+    }
+  }
+
+  public static final class PublicRtFixture {
+    public static Object getAgent() {
+      return new PublicFixture();
+    }
+  }
+
+  public static final class MetadataFixture {}
+
+  private static FixedNativeCoverageCheckpoint.PublicAgent.Classes fixtureClasses() {
+    return name -> {
+      assertTrue(Set.of("org.jacoco.agent.rt.RT", "org.jacoco.agent.rt.IAgent").contains(name));
+      return name.endsWith(".RT") ? PublicRtFixture.class : PublicFixture.class;
+    };
+  }
+
+  private static void agentRefused(org.junit.jupiter.api.function.Executable operation) {
+    var failure = assertThrows(IOException.class, operation);
+    assertEquals("fixed PT native capture unavailable", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  @Test
+  void ncheck597001RealPublicReflectionReadsLiteralDataWithoutReset() throws Exception {
+    var fixture = new PublicFixture();
+    var sources = new ArrayList<Class<?>>();
+    var invoked = new ArrayList<String>();
+    var agent =
+        new FixedNativeCoverageCheckpoint.PublicAgent(
+            fixtureClasses(),
+            sources::add,
+            (method, target, arguments) -> {
+              invoked.add(method.getName());
+              if (method.getName().equals("getAgent")) {
+                assertNull(target);
+                assertEquals(0, arguments.length);
+                return fixture;
+              }
+              assertSame(fixture, target);
+              return method.invoke(target, arguments);
+            });
+    assertEquals("0.8.15", agent.version());
+    assertEquals("API-1234567890abcdef1234567890abcdef-root", agent.session());
+    assertArrayEquals(
+        new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+        agent.executionDataWithoutReset());
+    assertFalse(fixture.reset);
+    assertEquals(1, fixture.reads);
+    assertEquals(List.of(PublicRtFixture.class, PublicFixture.class), sources);
+    assertEquals(List.of("getAgent", "getVersion", "getSessionId", "getExecutionData"), invoked);
+  }
+
+  @Test
+  void ncheck597002ConstructorMissingNullTypeAndProviderFailuresNeverExposeRawCause() {
+    FixedNativeCoverageCheckpoint.PublicAgent.Invocation reflection = (m, t, a) -> m.invoke(t, a);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FixedNativeCoverageCheckpoint.PublicAgent(null, c -> {}, reflection));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FixedNativeCoverageCheckpoint.PublicAgent(fixtureClasses(), null, reflection));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new FixedNativeCoverageCheckpoint.PublicAgent(fixtureClasses(), c -> {}, null));
+    for (String missing : List.of("org.jacoco.agent.rt.RT", "org.jacoco.agent.rt.IAgent")) {
+      agentRefused(
+          () ->
+              new FixedNativeCoverageCheckpoint.PublicAgent(
+                  name -> name.equals(missing) ? null : fixtureClasses().load(name),
+                  c -> {},
+                  reflection));
+    }
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                name -> {
+                  throw new ClassNotFoundException("PRIVATE_CLASS");
+                },
+                c -> {},
+                reflection));
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                name -> PublicFixture.class, c -> {}, reflection));
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                fixtureClasses(),
+                c -> {
+                  throw new IOException("PRIVATE_SOURCE");
+                },
+                reflection));
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                fixtureClasses(),
+                c -> {
+                  throw new java.net.URISyntaxException("PRIVATE", "PRIVATE_URI");
+                },
+                reflection));
+    for (Object invalid : Arrays.asList(null, "PRIVATE_AGENT")) {
+      agentRefused(
+          () ->
+              new FixedNativeCoverageCheckpoint.PublicAgent(
+                  fixtureClasses(), c -> {}, (m, t, a) -> invalid));
+    }
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                fixtureClasses(),
+                c -> {},
+                (m, t, a) -> {
+                  throw new java.lang.reflect.InvocationTargetException(
+                      new IllegalStateException("PRIVATE_AGENT"));
+                }));
+    agentRefused(
+        () ->
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                name -> name.endsWith(".RT") ? PublicRtFixture.class : MetadataFixture.class,
+                c -> {},
+                (m, t, a) -> new MetadataFixture()));
+    // Actual host agent/classpath is not the fixed native CodeSource; never claims native success.
+    agentRefused(FixedNativeCoverageCheckpoint.PublicAgent::new);
+  }
+
+  @Test
+  void ncheck597003NullWrongTypesAndReflectionFailuresAtEveryPublicGetterAreFixed()
+      throws Exception {
+    for (String method : List.of("getVersion", "getSessionId", "getExecutionData")) {
+      for (int mode = 0; mode < 3; mode++) {
+        int fault = mode;
+        var agent =
+            new FixedNativeCoverageCheckpoint.PublicAgent(
+                fixtureClasses(),
+                c -> {},
+                (m, t, a) -> {
+                  if (m.getName().equals(method)) {
+                    if (fault == 0) return null;
+                    if (fault == 1) return Integer.valueOf(7);
+                    throw new IllegalAccessException("PRIVATE_INVOCATION");
+                  }
+                  return m.invoke(t, a);
+                });
+        agentRefused(
+            () -> {
+              if (method.equals("getVersion")) agent.version();
+              else if (method.equals("getSessionId")) agent.session();
+              else agent.executionDataWithoutReset();
+            });
+      }
+    }
+  }
+
+  private static Class<?> metadataClass(@Nullable java.security.CodeSource source)
+      throws Exception {
+    String resource = "FixedNativeCoverageCheckpointTest$MetadataFixture.class";
+    byte[] bytes;
+    try (var input = FixedNativeCoverageCheckpointTest.class.getResourceAsStream(resource)) {
+      assertNotNull(input);
+      bytes = input.readAllBytes();
+    }
+    class Loader extends ClassLoader {
+      Loader() {
+        super(null);
+      }
+
+      Class<?> define() {
+        return defineClass(
+            MetadataFixture.class.getName(),
+            bytes,
+            0,
+            bytes.length,
+            new java.security.ProtectionDomain(source, null));
+      }
+    }
+    return new Loader().define();
+  }
+
+  @Test
+  void ncheck597004CodeSourceMetadataNullLocationForeignAndFixedPathAreSeparate() throws Exception {
+    agentRefused(() -> FixedNativeCoverageCheckpoint.PublicAgent.requirePinnedSource(Object.class));
+    agentRefused(
+        () -> FixedNativeCoverageCheckpoint.PublicAgent.requirePinnedSource(metadataClass(null)));
+    agentRefused(
+        () ->
+            FixedNativeCoverageCheckpoint.PublicAgent.requirePinnedSource(
+                metadataClass(
+                    new java.security.CodeSource(null, (java.security.cert.Certificate[]) null))));
+    agentRefused(
+        () ->
+            FixedNativeCoverageCheckpoint.PublicAgent.requirePinnedSource(
+                metadataClass(
+                    new java.security.CodeSource(
+                        java.nio.file.Path.of("/PUBLIC_WRONG/agent.jar").toUri().toURL(),
+                        (java.security.cert.Certificate[]) null))));
+    FixedNativeCoverageCheckpoint.PublicAgent.requirePinnedSource(
+        metadataClass(
+            new java.security.CodeSource(
+                java.nio.file.Path.of("/opt/pgpt-tools-pg390/jacoco-agent.jar").toUri().toURL(),
+                (java.security.cert.Certificate[]) null)));
+    // Metadata-only path check is not hash/owner/real-Unit/authority acceptance.
+  }
+
   private static FixedNativeCoverageProfile profile(
       ServiceConfigFiles.Service service, FixedNativeCoverageProfile.Phase phase) {
     String suffix = phase == FixedNativeCoverageProfile.Phase.ROOT ? "root" : "ordinary";
