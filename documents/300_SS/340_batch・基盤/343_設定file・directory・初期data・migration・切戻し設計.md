@@ -2,6 +2,8 @@
 
 ## SSC228 固定failed30・二Backup SUCCESS後のpending code-only補足（2026-10-09）
 
+数値訂正（BUG898/YKT667、2026-10-09）：以下の33.986083秒は転記算術誤り。真正manager start97060184910/end97094171993の独立差は **33.987083秒**。二値・INV/job/status30・原証跡は不変更、開始/終了の厳密照合と元1800秒条件を維持し、旧誤記を履歴として保存する。
+
 SSC198の一般pending原本保全を維持し、旧二RUNNING/request/part profileとは別に次の固定状態を許す。boot cc9ed874-7f4f-450e-a188-8de1e42c8441、current72fb7440697ee1048a5c0145055dc1cc3c577914/PG621/BOM4a2c35463b37956632b6586dfe18f07320777ea863696b25c1e14e913dd3fa1e/schema028。原本run e49243d5-de84-4714-8612-6912ddc17e9e/cutoff2026-10-08T18:32:42.140966Z/activation7d381b67-b37b-48c6-99ac-e04a336f887dはactive109byte・同begin・anchor整合、completion EMPTY。pendingは未完了graphの導出値であり物理fileを作らず、activeの削除/改名/再公開も行わない。
 
 真正PID1同boot/INV3a2de24f931544c0a2fd83556a659cd0/job98394/exit30、start97060184910/end97094171993/33.986083秒を完全履歴で認証し、旧PID不存在・十Unit全kernel/job空を確認する。旧失敗/外側close未知を正常へ書き換えない。全24表/494batch行は二読、元492行全値不変、新e492 BACKUP_DB/CONFIG各SUCCESS attempt2だけ、非Backup新行0。全Backup/旧原本/保持startup/INVALID epoch・requests三空・intents/runtime無し、Unit全停止18属性/設定/署名source-files、client/advisory/FLOCK0を固定private sealと照合する。Backup dump/master/raw credentialはGit/通常証跡へ保存しない。
