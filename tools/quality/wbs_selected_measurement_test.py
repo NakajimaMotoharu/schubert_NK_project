@@ -70,5 +70,24 @@ class SelectedMeasurementTest(unittest.TestCase):
                 audit.check_measurement(snapshot, inventory)
 
 
+    def test_declaration_interface_is_not_an_executable_family(self):
+        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
+        inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
+        row = next(r for r in snapshot['rows'] if r['id'] == 'WBS-P017-12')
+        owned = [a for a in inventory['artifacts'] if a['owner'] == row['id'] and a['kind'] == 'JAVA']
+        self.assertEqual(16, len(owned))
+        self.assertEqual(1, sum(a.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE' for a in owned))
+        self.assertEqual(15, row['measuredFamilies'])
+        self.assertEqual(1, row['nonExecutableFamilies'])
+        audit.check_measurement(snapshot, inventory)
+        bad = copy.deepcopy(snapshot)
+        next(r for r in bad['rows'] if r['id'] == row['id'])['measuredFamilies'] = 16
+        with self.assertRaisesRegex(ValueError, 'measurement drift: WBS-P017-12'):
+            audit.check_measurement(bad, inventory)
+        for owner in ('WBS-P017-04', 'WBS-P018-02'):
+            self.assertFalse(any(a.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE'
+                                 for a in inventory['artifacts'] if a['owner'] == owner and a['kind'] == 'JAVA'))
+
+
 if __name__ == '__main__':
     unittest.main()
