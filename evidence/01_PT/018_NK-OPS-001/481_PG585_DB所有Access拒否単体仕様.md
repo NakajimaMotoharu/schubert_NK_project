@@ -1,5 +1,11 @@
 # PG585 非native Accessの公開拒否・null契約
 
+## v3実結果（2026-10-08 18:23JST、当source新六回帰0）
+
+source f820710d1a274530418a389e5dcb755441356dd0、期間2026-10-08T18:03:48+09:00～2026-10-08T18:21:46+09:00/1078s。六module 3435PT/511suite・F/E/S/flaky/not-run0、追加MACCESS4全部成功、NullAway-Werror/format/静的六module0。全main1600classがPG540/Production969とbyte完全同値、src/pom差分はtest5pathのみ。過去selectedPG541/565を流用せず当fullrunで実行、NoMatch0の既current18nativeと同classbyte diagnosticを作成し追加29line16method8branch・未網羅1003line181method12class879branch。正式1964/53/24/global100/全WBS認定は不変更。
+
+私有PG379/pg585-access-reactor-v3/manifest.safe.json SHA 96b0f247b5770bed3b9777d336f3f2bdc0d916281811d7a880ab6ae604d41f6a、sourcefilesSHA 5d27d20c465e04df816e74fd001b079e4a85857e13b52dd5b523ee1c724cbcf6、logSHA c894a4d5f044e6a2f7c33de0d8c4c33447acd78d7f8c56ccfac5bb495192dea8。公開manifestは数値/六jar-exec-static-coverage hash、510個別XMLhashは私有manifestで一意保持。post-run collectorは独立sourceSHA 7f83286d4c41c2e29992e8015ae260c7084900353ef7cb5bb6743e98c69e141f・Maven sourceに混在しない/ProductionPT加点0。当全結果はsource/run固定、旧v1stale依存/v2NoPluginはexit1/PT0のまま保全。BUG869870/YKT638639当工具依存契約のみ修正再試験完了、全PGPT未完。
+
 ## BUG869再試験計画追記
 
 v2は-am集約rootのspotbugs prefixが宣言されずgoal選択exit1/PT0（BUG870/YKT639）。v3は既PG540成功runnerと同じ六module明示選択・node/test-jar/goal順を採用、依存を同reactor内で解決する。旧二失敗は保持、工具だけ是正/Production変更0、正式受入へ加算0。
