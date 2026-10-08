@@ -62,6 +62,9 @@ def main(source, selector='PG618'):
         'PG620': ('pg620-typed-oracle-six-host-v1', 'pg619-typed-exporter-component-v1',
                   'c04a2ef7c704a22202f145048b328c7e8a811d0da2600fbd1443b64138d4d04f',
                   3467, 277, None),
+        'PG630': ('pg630-retention-factory-six-host-v1', 'pg628-retention-factory-component-v1',
+                  'e5ab539ed7e48de9889f6acbe28a8e2f71b3d20a633714ea6b548fc0ca3340b8',
+                  3468, 277, None),
     }
     assert selector in profiles
     run_name, selected_name, selected_sha, expected_tests, expected_bootstrap, hold = profiles[selector]
@@ -90,8 +93,9 @@ def main(source, selector='PG618'):
     end = datetime.datetime.fromisoformat((run/'completed').read_text().strip()).timestamp()
     selected = W/selected_name
     assert sha(selected/'manifest.safe.json') == selected_sha
-    old = W/'pg599-candidate-bootstrap-six-host-v1'
-    assert sha(old/'manifest.safe.json') == 'cdd971634fe0f5acabe091db476f25838a55730172d3cc07244180e708f4e47d'
+    old = W/('pg620-typed-oracle-six-host-v1'if selector=='PG630'else'pg599-candidate-bootstrap-six-host-v1')
+    expected_old = 'e83d2c34652b8c2bea5c1b9c02f00e9b757b88b5de6b1fb45e79b615ec003b57'if selector=='PG630'else'cdd971634fe0f5acabe091db476f25838a55730172d3cc07244180e708f4e47d'
+    assert sha(old/'manifest.safe.json') == expected_old
     old_record = json.loads((old/'manifest.safe.json').read_bytes())
     results = {}; total_classes = tests = suites = 0
     for module in MODULES:
@@ -99,9 +103,10 @@ def main(source, selector='PG618'):
         name = 'schubert-nk-'+module+'-0.1.0-SNAPSHOT.jar'
         actual = classes(base/name)
         assert actual == classes(current/name)
-        reference = selected/name if module == 'bootstrap' else old/module/name
+        selected_module = 'batch'if selector=='PG630'else'bootstrap'
+        reference = selected/name if module == selected_module else old/module/name
         assert actual == classes(reference) and actual
-        if module != 'bootstrap':
+        if module != selected_module:
             assert sha(old/module/name) == old_record['moduleResults'][module]['jarSha256']
         total_classes += len(actual)
         sums = {k: 0 for k in ('tests', 'failures', 'errors', 'skipped')}; hashes = {}
@@ -138,7 +143,7 @@ def main(source, selector='PG618'):
     result = {'actualExit': 0, 'run': run.name, 'candidateSource': source,
               'collectorOperator': operator, 'sameFrozenRunRecollection': True,
               'knownOracleHold': hold,
-              'installedVmSource': '23b14a44b10504172e030bbd6625926bf049fb5c',
+              'installedVmSource': '72fb7440697ee1048a5c0145055dc1cc3c577914'if selector=='PG630'else'23b14a44b10504172e030bbd6625926bf049fb5c',
               'candidateNotDeployed': True, 'sourceQualification': 'FRESH_SIX_HOST_ONLY',
               'tests': tests, 'suites': suites, 'mainClasses': total_classes,
               'allMainBytesEqualSelectedCandidate': True, 'FESFlakyNotRunIndicators': 0,

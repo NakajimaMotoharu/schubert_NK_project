@@ -18,3 +18,9 @@ Root所有metadataはtestに明示したモデル（host実UID1000と混同0）�
 `bash tools/quality/vm/050_s1/pg628_retention_factory_pt_v1.sh <固定40SHA>`：batch3suite選択、freshjacoco1session/sourceguard/NullAway/Spotless/Spotbugs/原exec・原XML保全。新method/component counters、XML/FES/skipped/rerun/静的/source/終了codeを照合後記、全PGPT100ではない。
 
 現時点新選択試験未実行。変更されたfactory使用影響を同source六回帰で確認し、新候補署名・未使用配置/現failure所有再認証/正規active→pending/一回resume/当source真正DONE/ownedstop/nativeへ。元失敗active e492/cutoff18:32:42.140966Z/7d381、Backup2SUCCESSと元原本を保全し、旧33secを成功へ変換しない。
+
+## 選択実結果
+
+PG628 source8c979e55550dd74b651e50b4b4743e732fa607ea/actual0、50PT/3suite/FES-rerun-flaky0、staticbatch0/NullAway・qualified/Spotless/sourceguard合格、fresh1session窓正常。ISSRET009/既7-8-9と全negative完了、newfactorymethod適用全counter100。family残22L2M1B（Root useなど）は未到達でwhole100にしない。Production byteはMorningBackupRetention.class一変更、class集合不変/全1605、その他mainはPG620同byte。manifest e5ab539ed7e48de9889f6acbe28a8e2f71b3d20a633714ea6b548fc0ca3340b8。旧source72VMのBUG897は実再試験待ちで完了0。
+
+次PG630：Production default factory change/初実削除影響の必要同source六fresh一回、expected3468/512suite/bootstrap277/static6zero/1605、一changedMBR主byteをPG628、他五moduleをfrozenPG620 e83…へ照合。`bash tools/quality/vm/050_s1/pg585_access_pt_v1.sh <固定40HEAD> PG630`→`python3 -B tools/quality/vm/050_s1/pg618_collect_candidate_full.py <同SHA> PG630`。selected50をfullへ二重加点せず、旧3467/nativeを新source成功へ輸入0。
