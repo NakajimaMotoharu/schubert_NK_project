@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC232 当PG662 verifyのimport前失敗・固定Java限定回収（2026-10-09）
+
+SSC202/221/224/226の工具起動前error-only限定回収を当保存profileへ固定する。current36fe/PG631/BOM57a/schema028/bootcc9、601-ad15真正DONE・PG655正常ownedSTOP・PG661全20/24表514不変更。PG662source152c262f1 immutable11payloadの参照子はpg556_parent_receipt推移import欠落でmain前exit1、SAVEはrefs-prepare.private.logだけ/SHA c1935ed537f31f678be275164c100acc7db979986bf47cd0688d0ec363b0d761、before/Ref/credential/start未発行、旧scopeUNKNOWN。固定RootJava2141065/ticks11112630/argvSHA4406b878234be0e15d15334e7238c029f27ebd0e8a85a63624546608d67c6367、exe/opt/jdk-25.0.4/bin/java・parent sudo2141063（TERM対象外）・全task子0/実M-A inodeFD-FLOCK/他owner0・全peer/advisory0を現在再認証する。
+
+新metadata十Refで全20の同source/全24-514/十Unit主要18/全署名source18/typed依存/四namespace/credentials/原本Backup/native/current/approval/旧proof/toolを二読しPG661seal8963796af5d95b30f01169d79bed2d6055782988af497dd09903b8f73a8af4d8へjoinする。新onlyprivate profileと一回pidfdTERM予約を耐久保存し直前同peer/owner/原値を再照合した場合だけ当Javaへ通常TERM一回。本人15秒内消失・全M-A holder/DBpeer/advisory0/全十kernel・全原値二読不変/新Refbus正常返却を必要とし旧actual143/closeUNKNOWNを保持する。sudo/SSH/他owner/businessへ拡張0・SIGKILL/OS停止0・再start/retire/reload/配備/DBwrite/原本修復0。別freshv2のhost推移import非操作正常/依存欠落拒否→新verify→正常後新executeと独立post/native資格へ進む。証拠不足/新失敗は隔離・二重TERM0、正式/global/ITST合格へ読み替えない。
+
 ## SSC231 当PG631完了後のBootstrap既存ADMIN一回試験（2026-10-09）
 
 SSC225の業務/所有/credential/実専用Unit/元30秒・既存20/作成0/全24不変契約を維持し、Production36fe7a0b938489d61d17d49c1c30a6fbbef699d5・release0.1.0-PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9へ専用新only工具を再束縛する。601297d0-a8ba-47da-852b-0ffeae409965/cutoff2026-10-08T21:33:23.332578Z/ad15ac4a-8d8e-4970-bcb3-2e000050ce77真正DONE1793.235293s・PG655正常ownedSTOP/PG656全資源0/PG658同source資格16を前提に、別fresh readonlyで現在全24-514/十主要18/設定18source/typed依存/四閉namespace/credentials/原本Backup/native/current/approval・既proof/toolの全20を二読する。readonlyは実操作権限ではなく新M-A/前post専用DB・十Ref・保持namespaceFDの各scopeで原値を再確認する。
