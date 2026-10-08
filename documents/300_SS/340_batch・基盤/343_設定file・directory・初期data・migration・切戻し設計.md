@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC229 当PG631・failed30原本の新一回用resume準備（2026-10-09）
+
+SSC228実正常切替/独立全19後条件after4d77bd92b7a7c3c85481b342659375e9be5fb7a50c0cd19f72363efb0f719879、current36fe/PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9、同e492/元cutoff18:32:42.140966Z/7d381activation/既INVALID・全24-494を固定する。既runtime Root0755/単一実directory/ACL access-default無し/空を前後確認し、別new-only `/run/systemd/system/schubert-nk-morning-controller.service.d/pg635-once-resume.conf` を実保持dirFD相対O_EXCL/NOFOLLOW、Root0644/link1/ACL0、force/dirsyncで作成する。旧runtime復元/再使用/namespace repair0、署名base/既nativeの独立literalに `--resume e49243d5-de84-4714-8612-6912ddc17e9e` 二引数だけ追加し、RW/hardening/credential/他argvは不変。
+
+新M→A→実専用RODB/advisory71419602→samepeer/owner→十Ref/namespaceFDを連続保持し、一回reload前後の全19原値を独立照合する。主要全十18属性/旧INV/start/end/code/status・全kernel/Job空はexact保持。SSC192/220補助履歴分類の当profileは、Morning固定新argv＋n/a,n/a,0,(null),0/0、七Unit（Artemis/Caddy/API/Backup/Cleanup/Expiry/Web）のsaved exact又は同path/argv/ignore_errors＋exact未実行へのresetだけ。現Inbox/Bootstrapは全config exact、未知/別宣言/部分reset不可。CaddyPre/Runはpaired同old又は両exact未実行だけ。旧143/30・close未知は主要18/原保存で保持し、n/aから旧成功・旧正常close・新readyを作らない。旧source/private証跡を当sourceへ流用せず、一回設定準備をstart許可そのものにしない。
+
+全epoch/startup/原本/Backup/全24DB/current/approval/credential/native、旧18Unitfileの全byte metadataは不変、新runtime一fileと有効Morning宣言/DropInPaths及び承認済補助表示だけ有限delta。全新DB rollback-close/peer-advisory0/Ref-bus-FD/A/M正常・独立post後のみ別fresh observer/durable一回startへ進む。不明時保全/隔離・reload/同slot再発行0。新親1800秒/既Unit期限、同Root普通API-Web-Caddy/真正DONE/ownedstop/native・REUSED_SUCCESS削除0・別NEW_SUCCESS保持期限実試験を維持、RD/UI/外部仕様変更0、実装/PT未完。
+
 ## SSC228 固定failed30・二Backup SUCCESS後のpending code-only補足（2026-10-09）
 
 数値訂正（BUG898/YKT667、2026-10-09）：以下の33.986083秒は転記算術誤り。真正manager start97060184910/end97094171993の独立差は **33.987083秒**。二値・INV/job/status30・原証跡は不変更、開始/終了の厳密照合と元1800秒条件を維持し、旧誤記を履歴として保存する。
