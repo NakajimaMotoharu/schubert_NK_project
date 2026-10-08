@@ -82,7 +82,8 @@ def decrypt(encoded, version, key, aad, maximum):
     return plaintext, nonce
 
 
-def event_wire(outbox, wire, log, local):
+def event_wire(outbox, wire, log, local, expected_path='/login'):
+    require(expected_path in ('/login', '/css/**'))
     require(len(wire) == 2336)
     stamp = instant(log['logged_at']).astimezone(datetime.timezone(datetime.timedelta(hours=9)))
     jst = (stamp.strftime('%Y%m%d%H%M%S') + f'{stamp.microsecond // 1000:03}').encode('ascii')
@@ -94,7 +95,7 @@ def event_wire(outbox, wire, log, local):
     require(data[:17] == jst and data[2067:] == b' ' * 13)
     expected = [(17, 16, 'REQUEST'), (33, 8, 'INFO'), (41, 64, 'HTTP_REQUEST_COMPLETED'),
                 (105, 512, 'HTTP request completed'), (617, 36, log['request_id']),
-                (653, 8, 'GET'), (661, 256, '/login'), (917, 3, '200'),
+                (653, 8, 'GET'), (661, 256, expected_path), (917, 3, '200'),
                 (920, 9, str(log['duration_ms'])), (929, 45, log['remote_address']),
                 (974, 64, ''), (1038, 5, '')]
     for start, length, value in expected:
@@ -108,7 +109,7 @@ def event_wire(outbox, wire, log, local):
     require(log['action'] == 'HTTP_REQUEST_COMPLETED' and log['category'] == 'REQUEST'
             and log['level'] == 'INFO' and log['service'] == 'WEB'
             and log['message'] == 'HTTP request completed' and log['http_method'] == 'GET'
-            and log['request_uri'] == '/login' and type(log['status_code']) is int
+            and log['request_uri'] == expected_path and type(log['status_code']) is int
             and log['status_code'] == 200 and log['actor_user_id'] is None
             and log['actor_username'] is None and log['security_hold_until'] is None)
     require(type(log['duration_ms']) is int and 0 <= log['duration_ms'] <= 999999999)
@@ -133,7 +134,7 @@ def event_wire(outbox, wire, log, local):
             and local['messageId'] == outbox['message_id']
             and local['correlationId'] == outbox['correlation_id']
             and local['requestId'] == log['request_id'] and local['httpMethod'] == 'GET'
-            and local['path'] == '/login' and type(local['status']) is int
+            and local['path'] == expected_path and type(local['status']) is int
             and local['status'] == 200 and type(local['elapsedMs']) is int
             and local['elapsedMs'] == log['duration_ms']
             and local['remoteAddress'] == log['remote_address'])
