@@ -13,6 +13,7 @@ case "${2:-PG585}" in
   PG596) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg596-fixture-retained-six-host-v1 ;;
   PG599) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg599-candidate-bootstrap-six-host-v1 ;;
   PG618) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg618-exporter-candidate-six-host-v1 ;;
+  PG620) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg620-typed-oracle-six-host-v1 ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"

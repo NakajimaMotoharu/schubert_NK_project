@@ -52,10 +52,20 @@ def verify_sessions(rows, start, end, module):
     return {'dumpRecords': len(rows), 'distinctSessions': len(seen)}
 
 
-def main(source):
+def main(source, selector='PG618'):
     os.umask(0o077)
     assert re.fullmatch('[0-9a-f]{40}', source)
-    run = W / 'pg618-exporter-candidate-six-host-v1'
+    profiles = {
+        'PG618': ('pg618-exporter-candidate-six-host-v1', 'pg617-export-component-v3',
+                  '1262c1f28e80ba739388d97d7f5c1d03bb0e71a514013d76435cba19812c47d3',
+                  3466, 276, 'BUG-892 typed metadata fixture values; FES0 is not that acceptance'),
+        'PG620': ('pg620-typed-oracle-six-host-v1', 'pg619-typed-exporter-component-v1',
+                  'c04a2ef7c704a22202f145048b328c7e8a811d0da2600fbd1443b64138d4d04f',
+                  3467, 277, None),
+    }
+    assert selector in profiles
+    run_name, selected_name, selected_sha, expected_tests, expected_bootstrap, hold = profiles[selector]
+    run = W / run_name
     assert (run/'source').read_text().strip() == source and (run/'exit').read_bytes() == b'0\n'
     assert not subprocess.check_output(['git', 'status', '--porcelain'], cwd=T)
     operator = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=T).decode().strip()
@@ -78,8 +88,8 @@ def main(source):
     assert log.count('BUILD SUCCESS') == 1 and 'BUILD FAILURE' not in log
     start = datetime.datetime.fromisoformat((run/'started').read_text().strip()).timestamp()
     end = datetime.datetime.fromisoformat((run/'completed').read_text().strip()).timestamp()
-    selected = W/'pg617-export-component-v3'
-    assert sha(selected/'manifest.safe.json') == '1262c1f28e80ba739388d97d7f5c1d03bb0e71a514013d76435cba19812c47d3'
+    selected = W/selected_name
+    assert sha(selected/'manifest.safe.json') == selected_sha
     old = W/'pg599-candidate-bootstrap-six-host-v1'
     assert sha(old/'manifest.safe.json') == 'cdd971634fe0f5acabe091db476f25838a55730172d3cc07244180e708f4e47d'
     old_record = json.loads((old/'manifest.safe.json').read_bytes())
@@ -121,13 +131,13 @@ def main(source):
                            'staticSha256': sha(base/'spotbugsXml.xml'),
                            'sessions': [s.attrib for s in sessions], 'sessionTopology': topology}
         tests += sums['tests']; suites += len(reports)
-    assert tests == 3466 and suites == 512 and total_classes == 1605
-    assert results['bootstrap']['tests'] == 276
+    assert tests == expected_tests and suites == 512 and total_classes == 1605
+    assert results['bootstrap']['tests'] == expected_bootstrap
     remaining = {k: sum(m['hostCounters'][k]['missed'] for m in results.values())
                  for k in ('LINE', 'METHOD', 'CLASS', 'BRANCH')}
     result = {'actualExit': 0, 'run': run.name, 'candidateSource': source,
               'collectorOperator': operator, 'sameFrozenRunRecollection': True,
-              'knownOracleHold': 'BUG-892 typed metadata fixture values; FES0 is not that acceptance',
+              'knownOracleHold': hold,
               'installedVmSource': '23b14a44b10504172e030bbd6625926bf049fb5c',
               'candidateNotDeployed': True, 'sourceQualification': 'FRESH_SIX_HOST_ONLY',
               'tests': tests, 'suites': suites, 'mainClasses': total_classes,
@@ -148,4 +158,4 @@ def main(source):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) == 3 else 'PG618')
