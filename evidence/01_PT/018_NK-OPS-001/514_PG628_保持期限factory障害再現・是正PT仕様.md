@@ -1,5 +1,7 @@
 # PG628 保持期限factory障害再現・是正PT
 
+追記PG630（2026-10-09）：source36fe7a0b938489d61d17d49c1c30a6fbbef699d5、fresh六full actual0/18:06/3468PT/512suite/bootstrap277/static6zero/1605class、sourceguard/全XML-FES-flaky-not-run0/各exec窓/mainbyte同一を検査。manifest067b8a155fe5a137aebb9c732bf800122752cb173ca8a09f3c41087d9efc178b、fullhost残3942L625M39C1191B/global100未達/native未輸入。selected50/別source3467の成功を合算0。候補正規配備/実再開/NEW_SUCCESS削除再試験未実施。BUG898/YKT667：旧33.986s記述の原二値97060184910～97094171993差は33.987083s、原fail/log保全、本訂正を正とする。
+
 BUG897/YKT666/PG-D400、SS341§6.3/343§6.17、WBS-P017-05既.5/1.5/3.5pp。scopeは既native保持期限へのProduction adapter束縛一箇所/package-private factory methodと回帰Test、新class0/no new public operation/path/authority/除外0。この費用の明記は最初の修正編集後・選択試験前、着手前記録遅延として487eventへ保持し遡って記録済みとしない。K01全回帰/N15native及び修復は別費で二重加算しない。
 
 ## 独立oracle・実欠陥
