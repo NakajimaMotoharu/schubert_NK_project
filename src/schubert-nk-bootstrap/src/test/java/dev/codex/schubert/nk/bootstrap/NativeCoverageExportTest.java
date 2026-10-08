@@ -27,7 +27,7 @@ final class NativeCoverageExportTest {
       long gid,
       List<Long> groups,
       FixedNativeCoverageProfile.Phase phase,
-      @Nullable FixedNativeCoverageProfile.TerminalRole terminal) {}
+      FixedNativeCoverageProfile.@Nullable TerminalRole terminal) {}
 
   private static final List<Role> ROLES =
       List.of(
