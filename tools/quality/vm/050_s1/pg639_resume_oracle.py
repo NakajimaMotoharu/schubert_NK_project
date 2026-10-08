@@ -71,14 +71,15 @@ def validate(old, new, old_backup, new_backup):
                      and (row['step'] not in STEPS[:2] or r['run_id'] == RUN)]
         require(len(successes) == 1 and successes[0]['run_id'] ==
                 (RUN if row['step'] in STEPS[:2] else REFERENCE))
+        require(all(row[k] is None for k in
+                    ('expiry_cutoff_at', 'expiry_before_count', 'expiry_after_count')))
         if row['step'] == 'CLEAN_EXPIRY':
-            require(instant(row['expiry_cutoff_at']) == instant(CUTOFF) - datetime.timedelta(days=7)
-                    and type(row['expiry_before_count']) is int
-                    and type(row['expiry_after_count']) is int
-                    and row['expiry_before_count'] == row['expiry_after_count'] == 0)
-        else:
-            require(all(row[k] is None for k in
-                        ('expiry_cutoff_at', 'expiry_before_count', 'expiry_after_count')))
+            prior_expiry = successes[0]
+            require(instant(prior_expiry['expiry_cutoff_at']) ==
+                    instant('2026-10-01T15:32:46.368375Z')
+                    and type(prior_expiry['expiry_before_count']) is int
+                    and type(prior_expiry['expiry_after_count']) is int
+                    and prior_expiry['expiry_before_count'] == prior_expiry['expiry_after_count'] == 0)
     return {'oldBatchRowsUnchanged': 494, 'newSameRunSkippedAttempts': 10,
             'all24TablesIndependentPostcondition': True, 'backupAllMetadataAndHashesUnchanged': True,
             'originalSuccessReferencesUnchanged': True, 'retentionDeletes': 0,

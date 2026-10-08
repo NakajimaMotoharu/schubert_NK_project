@@ -14,7 +14,7 @@ os.umask(0o077)
 def require(v):
  if not v:raise ValueError('current resume readonly capture refused')
 require(os.geteuid()==0 and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441')
-base=pathlib.Path('/var/lib/pgpt-s1-preservation');fresh=base/'pg637-fresh-resume-v2';root=base/'pg639-resume-post-v1'
+base=pathlib.Path('/var/lib/pgpt-s1-preservation');fresh=base/'pg637-fresh-resume-v2';root=base/'pg639-resume-post-v2'
 raw=(fresh/'before.private.json').read_bytes();require(hashlib.sha256(raw).hexdigest()=='c946eaae7147aff0fb328bfabda0d779133f7c04cc30a9a0427d58ae7da76d2e');old=json.loads(raw)
 issued=json.loads((fresh/'external-start-issued.private.json').read_bytes());require(issued['MainPID']=='1522744'and issued['InvocationID']=='293d218b06454bd1a8ff350bb93de2d5'and issued['Job']=='104329'and issued['ExecMainStartTimestampMonotonic']=='103062293730')
 helper=(base/'pg480-backup-tools-v3/pg480_backup_refs.py').read_bytes();require(hashlib.sha256(helper).hexdigest()=='0dd9ded789de2205ecb7f60080f3f57c2d489e28c0436d4a309a4dab386d0eb7')
@@ -47,7 +47,7 @@ root.mkdir(mode=0o700)
 with(root/'full-rows.private.json').open('x')as f:os.fchmod(f.fileno(),0o600);json.dump({'rows':n,'backup':backup,'parent':p,'summary':summary},f,sort_keys=True);f.flush();os.fsync(f.fileno())
 for d in(root,root.parent):
  fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);os.fsync(fd);os.close(fd)
-summary.update(actualExit=0,productionSource='36fe7a0b938489d61d17d49c1c30a6fbbef699d5',run='PG639-resume-post-v1',snapshotSha256=hashlib.sha256((root/'full-rows.private.json').read_bytes()).hexdigest(),sameParentGeneration=True)
+summary.update(actualExit=0,productionSource='36fe7a0b938489d61d17d49c1c30a6fbbef699d5',run='PG639-resume-post-v2',snapshotSha256=hashlib.sha256((root/'full-rows.private.json').read_bytes()).hexdigest(),sameParentGeneration=True)
 print(json.dumps(summary))
 '''
 
@@ -60,18 +60,18 @@ def main():
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile='+str(P/'known_hosts'),
            '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']
     payload = 'ORACLE='+repr((R/'pg639_resume_oracle.py').read_text())+'\n'+PAYLOAD
-    with (W/'pg639-post-v1.private.log').open('xb') as log:
+    with (W/'pg639-post-v2.private.log').open('xb') as log:
         result = subprocess.run(ssh, input=payload.encode(), stdout=subprocess.PIPE, stderr=log)
         log.flush(); os.fsync(log.fileno())
-    with (W/'pg639-post-v1.exit').open('x') as f: f.write(str(result.returncode)+'\n')
+    with (W/'pg639-post-v2.exit').open('x') as f: f.write(str(result.returncode)+'\n')
     if result.returncode == 0:
         safe = json.loads(result.stdout)
         safe['operatorSource'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
-        with (W/'pg639-post-v1.safe.json').open('x') as f: json.dump(safe, f, sort_keys=True)
+        with (W/'pg639-post-v2.safe.json').open('x') as f: json.dump(safe, f, sort_keys=True)
         print(json.dumps(safe))
     else:
         print(json.dumps({'actualExit': result.returncode,
-                          'privateLogSha256': hashlib.sha256((W/'pg639-post-v1.private.log').read_bytes()).hexdigest()}))
+                          'privateLogSha256': hashlib.sha256((W/'pg639-post-v2.private.log').read_bytes()).hexdigest()}))
     raise SystemExit(result.returncode)
 
 

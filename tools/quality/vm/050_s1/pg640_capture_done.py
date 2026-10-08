@@ -50,7 +50,7 @@ def main():
     terminal = observed[-1]
     assert terminal['terminalObserved'] and terminal['parentExit'] == '0' and terminal['parentResult'] == 'success'
     assert set(terminal['readyObserved']) == set(terminal['rootsCaptured']) == {'api', 'web'} and terminal['caddyTlsLogin200']
-    assert (W/'pg639-post-v1.exit').read_bytes() == b'0\n'
+    assert (W/'pg639-post-v2.exit').read_bytes() == b'0\n'
     ssh = ['ssh', '-i', str(P/'vm-access'), '-oBatchMode=yes', '-oIdentitiesOnly=yes',
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile='+str(P/'known_hosts'),
            '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']

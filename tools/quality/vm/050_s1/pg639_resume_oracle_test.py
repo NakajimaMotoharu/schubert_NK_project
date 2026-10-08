@@ -17,14 +17,16 @@ def fixture():
         rows[i] = dict(rows[i], step=step, business_date='2026-10-09',
                        run_id=('e49243d5-de84-4714-8612-6912ddc17e9e' if i < 2
                                else '3a53b979-fa01-47dd-92a6-7b26affcfb5c'))
+        if i == 9:
+            rows[i].update(expiry_cutoff_at='2026-10-01T15:32:46.368375+00:00',
+                           expiry_before_count=0, expiry_after_count=0)
         added.append({'id': 495 + i, 'run_id': 'e49243d5-de84-4714-8612-6912ddc17e9e',
                       'business_date': '2026-10-09', 'step': step, 'attempt': 2,
                       'started_at': '2026-10-08T20:15:00+00:00', 'ended_at': '2026-10-08T20:15:00+00:00',
                       'status': 'SKIPPED', 'target_count': 0, 'success_count': 0,
                       'failure_count': 0, 'byte_count': 0, 'error_code': 'ALREADY_SUCCESSFUL',
                       'error_summary': 'step already successful for business date',
-                      'expiry_cutoff_at': '2026-10-01T18:32:42.140966+00:00' if i == 9 else None,
-                      'expiry_before_count': 0 if i == 9 else None, 'expiry_after_count': 0 if i == 9 else None})
+                      'expiry_cutoff_at': None, 'expiry_before_count': None, 'expiry_after_count': None})
     old = {'schubert.batch_runs': rows, **{'table' + str(i): [{'id': i, 'value': None}] for i in range(23)}}
     new = copy.deepcopy(old); new['schubert.batch_runs'].extend(added)
     backup = {'fixed/file': {'metadata': [0, 1], 'sha256': 'literal'}}
@@ -39,7 +41,7 @@ class Oracle(unittest.TestCase):
     def test_each_new_column_corruption(self):
         for key in fixture()[1]['schubert.batch_runs'][-1]:
             with self.subTest(key=key):
-                values = fixture(); values[1]['schubert.batch_runs'][-1][key] = None
+                values = fixture(); values[1]['schubert.batch_runs'][-1][key] = 'corrupt'
                 with self.assertRaises((ValueError, KeyError, TypeError)):
                     validate(*values)
 
@@ -53,6 +55,17 @@ class Oracle(unittest.TestCase):
                 if mutation == 'extra': b['table0'].append({'id': 42})
                 if mutation == 'missing': b['schubert.batch_runs'].pop()
                 if mutation == 'duplicate': b['schubert.batch_runs'][-1] = b['schubert.batch_runs'][-2]
+                with self.assertRaises(ValueError): validate(a, b, c, d)
+
+    def test_original_audit_not_current_skip_audit(self):
+        a, b, c, d = fixture()
+        b['schubert.batch_runs'][-1].update(expiry_cutoff_at='2026-10-01T18:32:42.140966+00:00',
+                                          expiry_before_count=0, expiry_after_count=0)
+        with self.assertRaises(ValueError): validate(a, b, c, d)
+        for key in ('expiry_cutoff_at', 'expiry_before_count', 'expiry_after_count'):
+            with self.subTest(key=key):
+                a, b, c, d = fixture(); a['schubert.batch_runs'][9][key] = None
+                b['schubert.batch_runs'][9][key] = None
                 with self.assertRaises(ValueError): validate(a, b, c, d)
 
 
