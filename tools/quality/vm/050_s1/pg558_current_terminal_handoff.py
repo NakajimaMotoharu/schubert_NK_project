@@ -14,6 +14,13 @@ PINS={"Pg557NativeStop$References.class":"5ac8b49634a2e30dc323542061d67d21b35ee0
 FOUR=['caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service']
 def require(v):
  if not v:raise ValueError('fixed terminal-cohort handoff refused')
+def profile_matches(value,profile):
+ keys=('units','configuration','dependencies','rows','startup','originals','backup','native','oldProofs')
+ if type(value)is not dict or type(profile)is not dict:return False
+ if any(k not in value or k not in profile or value[k]!=profile[k]for k in keys):return False
+ actual=value.get('pid1Stop');expected=profile.get('pid1Stop')
+ if type(actual)is not dict or type(expected)is not dict or set(actual)!=set(expected)or len(actual)!=3:return False
+ return all(type(actual[k])is list and len(actual[k])==1 and type(expected[k])is dict and actual[k][0]==expected[k]for k in actual)
 def identity(value,pid,ticks,argv,parent=None):
  return(isinstance(value,dict)and set(value)=={'pid','ticks','argv','uid','parent','children'}and type(value['pid'])is int and value['pid']==pid and type(value['ticks'])is int and value['ticks']==ticks and value['argv']==argv and value['uid']==['0']*4 and type(value['parent'])is int and(parent is None or value['parent']==parent)and isinstance(value['children'],set)and all(type(c)is int and c>1 for c in value['children']))
 def process(pid):
@@ -154,7 +161,7 @@ def execute(perform=True):
  bus=dbus.SystemBus(private=True);handoff_bus=bus;manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager');refs=[]
  for u in UNITS:manager.RefUnit(u);refs.append(u)
  owner(True);value=raw();owner(True);require(value==raw());owner(True)
- require(all(value[k]==profile[k]for k in ('units','configuration','dependencies','rows','startup','originals','backup','native','oldProofs','pid1Stop')))
+ require(profile_matches(value,profile))
  require(type(perform)is bool)
  if not perform:
   for u in reversed(refs):manager.UnrefUnit(u)

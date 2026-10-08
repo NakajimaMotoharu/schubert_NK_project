@@ -58,3 +58,19 @@ assert "execute(sys.argv[1]=='execute')" in source_text
 assert 'require(not runtime.exists())' in source_text
 assert 'not SAVE.exists()' in source_text and "open('x')" in source_text
 print('PG558_BINDINGS currentProfile=true implicitExpiryFixtureRequired=true stops0=true')
+
+exec(compile(ast.Module(body=[n for n in source.body if isinstance(n,ast.FunctionDef)and n.name=='profile_matches'],type_ignores=[]),'<independent profile shape>','exec'),env)
+profile={k:{'literal':'independent'}for k in ('units','configuration','dependencies','rows','startup','originals','backup','native','oldProofs')}
+profile['pid1Stop']={k:{'JOB_ID':j}for k,j in [('expiry','64603'),('broker','64601'),('cleanup','64600')]}
+actual=copy.deepcopy(profile);actual['pid1Stop']={k:[v]for k,v in profile['pid1Stop'].items()}
+assert env['profile_matches'](actual,profile)
+assert not env['profile_matches'](profile,profile)
+assert not env['profile_matches'](None,profile)
+assert not env['profile_matches'](actual,None)
+for k in actual:
+ bad=copy.deepcopy(actual);del bad[k];assert not env['profile_matches'](bad,profile)
+ bad=copy.deepcopy(actual);bad[k]=None;assert not env['profile_matches'](bad,profile)
+for k in profile['pid1Stop']:
+ for v in ([],None,{},[profile['pid1Stop'][k]]*2,[{'JOB_ID':'foreign'}]):
+  bad=copy.deepcopy(actual);bad['pid1Stop'][k]=v;assert not env['profile_matches'](bad,profile)
+print('PG558_PROFILE_JOIN_ORACLE singletonRecordShape=true absentNullDuplicateForeignRejected=true')
