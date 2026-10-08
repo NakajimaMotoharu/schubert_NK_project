@@ -9,7 +9,7 @@ payload=r'''
 import datetime,dbus,hashlib,importlib.util,json,os,pathlib,stat,subprocess
 assert os.geteuid()==0 and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441'
 env={};exec(compile(RECEIPT,'<independent genuine parent>','exec'),env)
-root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg556-completed-readonly-v1');assert not root.exists()
+root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg556-completed-readonly-v2');assert not root.exists()
 pre=pathlib.Path('/var/lib/pgpt-s1-preservation/pg553-preflight-tools-v2/pg553_newrun_preflight.py')
 spec=importlib.util.spec_from_file_location('sealed_preflight',pre);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 current=pathlib.Path('/opt/schubert-nk/current');raw=(current/'RELEASE-MANIFEST.json').read_bytes();assert current.readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG548') and hashlib.sha256(raw).hexdigest()==m.DIGEST and json.loads(raw)['source']['commit']==m.SOURCE
@@ -35,10 +35,8 @@ try:
   return {'units':units,'rows':data,'trees':trees,'current':str(current.readlink()),'pid1':rows,'completionSha256':hashlib.sha256(done).hexdigest(),'source':m.SOURCE,'manifestSha256':m.DIGEST,'genuineCompletion':summary}
  before=snapshot();assert before==snapshot()
  preui=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg555-preui-v1/full-rows.private.json').read_bytes());assert preui['source']==m.SOURCE and preui['run']==env['RUN']and preui['cutoff']==env['CUTOFF']
- for t,old in preui['rows'].items():
-  if t not in ['schubert.batch_runs','schubert_web_session.web_http_sessions']:
-   assert before['rows'][t]==old
-  else:assert all(r in before['rows'][t]for r in old)
+ survivor_env={};exec(compile(SURVIVORS,'<strict independent old column preservation>','exec'),survivor_env)
+ before['appendOnlyRowsObservedNotAccepted']=survivor_env['survivors_preserved'](preui['rows'],before['rows'])
  before['preuiSurvivorsPreserved']=True;before['newGeneratedRowsAccepted']=False;before['authority']=False
  root.mkdir(mode=0o700)
  with(root/'before.private.json').open('x')as f:os.fchmod(f.fileno(),0o600);json.dump(before,f,sort_keys=True);f.flush();os.fsync(f.fileno())
@@ -51,8 +49,8 @@ with(root/'complete.private').open('xb')as f:os.fchmod(f.fileno(),0o600);f.write
 fd=os.open(root,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
 print(json.dumps({'genuineCompletion':summary,'sameSource':True,'preuiSurvivorsPreserved':True,'newGeneratedRowsAccepted':False,'metadataScopesNormal':True,'operationAuthority':False,'snapshotSha256':hashlib.sha256((root/'before.private.json').read_bytes()).hexdigest(),'completeSha256':hashlib.sha256((root/'complete.private').read_bytes()).hexdigest()}))
 '''
-log=W/'pg556-completed-readonly-v1.private.log';assert not log.exists()
+log=W/'pg556-completed-readonly-v2.private.log';assert not log.exists()
 with log.open('xb')as f:
- result=subprocess.run(ssh+['sudo -n python3 -B -'],input=('RECEIPT='+repr((R/'pg556_parent_receipt.py').read_text())+'\n'+payload).encode(),stdout=f,stderr=f);f.flush();os.fsync(f.fileno())
-with(W/'pg556-completed-readonly-v1.exit').open('x')as f:f.write(str(result.returncode)+'\n')
+ result=subprocess.run(ssh+['sudo -n python3 -B -'],input=('RECEIPT='+repr((R/'pg556_parent_receipt.py').read_text())+'\nSURVIVORS='+repr((R/'pg556_survivors.py').read_text())+'\n'+payload).encode(),stdout=f,stderr=f);f.flush();os.fsync(f.fileno())
+with(W/'pg556-completed-readonly-v2.exit').open('x')as f:f.write(str(result.returncode)+'\n')
 print('PG556_COMPLETED_READONLY actualExit='+str(result.returncode)+' privateLogSha256='+hashlib.sha256(log.read_bytes()).hexdigest());raise SystemExit(result.returncode)

@@ -1,5 +1,7 @@
 # PG556 真正親完了独立receipt仕様
 
+v2訂正（BUG849/YKT618）: v1actual1/line34は正常GET/login観測で追加されたapp_logs114/web_log_outbox114/WebHTTP114の追加を拒否。全旧rowは不変、新生成全受入ではないという方針を維持し、append-only四tableだけ観測未受入へ分類。旧全24row canonical全列保持・他table追加/旧改変/削除/重複row/null/追加PrimaryID重複拒否を独立2test、真正receipt2testを維持。新Root/outputはpg556-completed-readonly-v2のみ、旧v1失敗/NormalReffinally帰還を保全。Log→outbox114・session暗号payload全品質は別残件、許容追加を品質合格としない。原本の新真正DONE認定と未受入生成rowを分離する。
+
 実collector=pg556_capture_completed.py。先行observeractual0/preuifact0のみ、oldstartの再発行0。現current969/BOM/bootを認証、十metadataRef正常close、独立PID1 receipt/NKDONE1→current24rows/原本BackupStartupTransfer/Unit18の二snapshot一致。preuiのsurvivor全列維持（batch/WebHTTP新生成のみ追加を観測・未受入として分離）。Rootprivate sealed snapshot/normalcomplete・hashのみ通常出力、operationAuthority=false。現在未実行/未合格、逆順owned停止とnativeの別source-binding起点にする。
 
 NK-BAT/OPS、SS343/SSC190218、451、WBS-N15.04依存。PT-OPS-PG556-DONE001: 同current source969/PG548、実親581443/Invocation075ad6644b284056a6cccf7af252519b、PID1start job59402/startMono44878901762、実新run b7e73994-b951-4696-bdd1-cfbc8a10e734/cutoff2026-10-08T04:03:00.714124Z/activation12f1af04-180e-405c-8738-853bbd875443。
