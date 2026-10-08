@@ -1,5 +1,7 @@
 # PG676 Inspector所有guard内部契約
 
+v1/source31cd compile1/PT未実行 BUG915、v2/sourcee172 compile0/新fixture class初期化Error6 BUG916（旧44正常でも全群不合格）をW私有に保持。生成copy-listの未到達+混入BUG917を修正前起票→splitlines/明示8suiteに是正、既InspectionRunExecutorTest9を追加して59PT/8suiteを予測。新v3だけ実行、同正常期待・順序不変更、literal complete progress追加は既SS324 invariantに適合するfixture是正でProduction変更0。
+
 Program NK-DAT-001/NK-OPS-001、InspectorApplication.validateOwner/executeGuarded、RD DAT009/OPS009/FIL006・UI212241251・SS324341343352、PG-D402/SSC119。PT-INSP-OWN676001..006はInspectorOwnerContractTestの6method：所有全一致/四単独差分＋null、前中後順序、親喪失/期限、Inspector変更/読取失敗、処理後期限/型別例外、null無操作。fixtureはliteral UUID/Instant/親PID-ticksの内部データ、実OS所有証明ではない。
 
 oracleはSS343のboot/run/cutoff/Cleanup必須・親→Inspector→remaining→業務→再確認順を独立literal listでassert。各mismatchで固定IOException・業務0、IOException/NoSuchAlgorithmは同instance伝播、期限後は結果不返却。null依存で観測/業務0。既DB9PTで実hostDB/credential/close後条件、InspectorProcess14PT・入口4+8を一群選択し業務/DB/redaction変更0を確認。並行/再送は既progress suite担当で重複加点0。

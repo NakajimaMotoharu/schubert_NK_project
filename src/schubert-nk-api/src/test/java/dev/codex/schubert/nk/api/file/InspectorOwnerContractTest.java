@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.file;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.api.maintenance.InspectionExecution;
+import dev.codex.schubert.nk.api.maintenance.InspectionProgress;
 import dev.codex.schubert.nk.api.maintenance.InspectionRun;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
@@ -20,7 +21,9 @@ final class InspectorOwnerContractTest {
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 2), Instant.parse("2026-10-09T00:00:00.123456Z"));
   private static final InspectionExecution RESULT =
-      new InspectionExecution(InspectionExecution.Status.SUCCESS, Optional.empty());
+      new InspectionExecution(
+          InspectionExecution.Status.SUCCESS,
+          Optional.of(new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true)));
 
   private static MaintenanceOwnerFrame owner(UUID boot, UUID run, Instant cutoff, boolean cleanup) {
     return new MaintenanceOwnerFrame(
