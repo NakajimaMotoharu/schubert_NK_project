@@ -1,5 +1,13 @@
 # PG575～579 実A01・Cookie・真正DONE・所有停止
 
+## PG579/580実結果追記（2026-10-08 17:29JST）
+
+PG579固定d54a1fbf2/payload8/actual0、17:21:23～17:21:44JST・20.410257533s。四explicit stopだけ（Caddy/Web/API/Cleanup）、Expiry/Artemisは所定依存終端・再STOP0、API/WebとBrokerの143は全vendor journal/同INV/PID/ticks/kernelの正規停止証跡として検証、旧143UNKNOWNを成功化0。全八receipt/全new DB-Ref-A-M正常、原本/Startup/Backup/全24不変、completeSHA8f31ba931b056ae9776855ac503403e9688eb34316873169eb20205aae3badae、before3a302026…/aftercb5951e3…を私有封印。
+
+PG580別readonlyactual0、署名187全byte/current・真PID1-NKDONE1を独立再認証、新工具8hash/全proof保持、全24・原本StartupBackup/全十Unit設定・主18を不変二読、全kernel/全actor/全client/advisory/FLOCK0、旧runtime/request三empty、native19physicalfileのmetadata二読安定。新metadata十RefのUnref/busも正常帰還。これは9history/当current等の分類や四counter100の認定でなく、次に各stream source/Unit固有window/SessionInfo/classbyteを照合する。公開[manifest](evidence/provisional/PG575-580-current-parent-client-stop-v1/manifest.json)に全private-safe/proof/toolhashをjoin、秘密/rawsession-cookie-token-key-export0。
+
+BUG866/YKT635のdurable予約/receipt共通saveは独立2正常・file-dir失敗/入替負例と実wholeownedstop/正常finalで当工具範囲閉鎖。旧歴史file-only syncを耐crash正常と読み替えず、新scopeだけを受入。原本/新Backup全byte・新Log全件/currentnative counters/global/正式/残PGPT/ITSTは別未受入。
+
 474475/SS313314341343353355、SCP004/TST001～005/AUT001/OPS009/MON003、WBS-N15.04/CHR-A01同群（開始1.03/2.5/5.67pp）を継承。Production969/PG548/schema028/branchdev-foundation。旧failed/UNKNOWN/Currentbaseline/全私有原本・旧native保全、正式1964/53/24は未更新。
 
 |Test ID|実証・独立期待値|
