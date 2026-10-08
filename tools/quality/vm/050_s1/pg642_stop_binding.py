@@ -4,6 +4,7 @@ Input is the genuine PG640 readonly receipt, not live process guesses or old evi
 Generation only; never starts/stops/deploys. Generated files are new private artifacts.
 """
 import re
+import datetime
 from pathlib import Path
 
 R = Path(__file__).resolve().parent
@@ -17,7 +18,7 @@ def require(value):
 
 
 def bindings(proof):
-    require(type(proof) is dict and proof.get('actualExit') == 0
+    require(type(proof) is dict and type(proof.get('actualExit')) is int and proof.get('actualExit') == 0
             and proof.get('productionSource') == SOURCE
             and proof.get('batchRun') == 'e49243d5-de84-4714-8612-6912ddc17e9e'
             and proof.get('cutoff') == '2026-10-08T18:32:42.140966Z'
@@ -28,6 +29,8 @@ def bindings(proof):
     end = proof['genuineCompletion']['endMonotonicUs']
     require(type(end) is int and 103062293730 <= end <= 104862293730)
     require(type(proof['parentEndedUTC']) is str and re.fullmatch(r'2026-10-08T[0-9:]{8}\.[0-9]{6}Z', proof['parentEndedUTC']) is not None)
+    ended = datetime.datetime.fromisoformat(proof['parentEndedUTC'].replace('Z', '+00:00'))
+    require(ended >= datetime.datetime.fromisoformat('2026-10-08T18:32:42.140966+00:00'))
     result = [
         ('Pg611NativeStop', 'Pg642NativeStop'), ('Pg611NativeArgumentTest', 'Pg642NativeArgumentTest'),
         ('pg611', 'pg642'), ('PG611', 'PG642'),

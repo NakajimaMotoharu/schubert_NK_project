@@ -40,6 +40,12 @@ class Binding(unittest.TestCase):
                            ('parentEndedUTC', None)):
             v = fixture(); v[key] = value
             with self.subTest(key=key), self.assertRaises((ValueError, KeyError, TypeError)): bindings(v)
+        for value in (False, True, None):
+            v = fixture(); v['actualExit'] = value
+            with self.subTest(value=value), self.assertRaises(ValueError): bindings(v)
+        for value in ('2026-10-08T99:99:99.000000Z', '2026-10-08T10:00:00.000000Z'):
+            v = fixture(); v['parentEndedUTC'] = value
+            with self.subTest(value=value), self.assertRaises(ValueError): bindings(v)
         for value in (103062293729, 104862293731, None, True):
             v = fixture(); v['genuineCompletion']['endMonotonicUs'] = value
             with self.subTest(value=value), self.assertRaises(ValueError): bindings(v)
