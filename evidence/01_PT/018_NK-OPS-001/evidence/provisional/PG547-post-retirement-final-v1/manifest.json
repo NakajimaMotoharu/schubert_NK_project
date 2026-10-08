@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "run": "PG547-post-retirement-final-v1",
+  "program": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-PG546-P005",
+    "PT-OPS-PG543-C008"
+  ],
+  "specification": "evidence/01_PT/018_NK-OPS-001/448_PG546_已runtime退役のfresh正常後条件受入単体テスト仕様.md",
+  "productionSource": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
+  "subjectSource": "2d9dfd7c13f195807063c81ea78dbd7dcb1aad1a",
+  "operatorSource": "9cbf5275afbb8303e0594df298ddccaf42a55e01",
+  "branch": "dev-foundation",
+  "command": "python3 -B tools/quality/vm/050_s1/pg547_post_retirement_final_v1.py",
+  "environment": {
+    "hostOS": "Linux 7.0.0-38",
+    "guestOS": "Ubuntu 26.04",
+    "JDK": "25.0.4",
+    "PostgreSQL": "18"
+  },
+  "actualExit": 0,
+  "startedUTC": "2026-10-08T02:29:30.766509+00:00",
+  "completedUTC": "2026-10-08T02:29:33.112441+00:00",
+  "expected": {
+    "all24Unchanged": true,
+    "batchRows": 462,
+    "nativeFiles": 9,
+    "runtimeAbsent": true,
+    "major18Unchanged": true,
+    "kernelEmpty": true,
+    "oldFixedPairsAbsent": true,
+    "peerAdvisoryFlock0": true,
+    "refsNormallyClosed": true,
+    "signatureValid": true,
+    "namespaceUnitActions": 0
+  },
+  "actual": {
+    "all24Unchanged": true,
+    "allBusinessKernelEmpty": true,
+    "allTenMajor18Unchanged": true,
+    "batchRows": 462,
+    "bomSha256": "f6992c4de95477594987d2f10def06110d0c28cb6d4fd063da47bd0bab7e7d44",
+    "namespaceUnitActions0": true,
+    "nativeFiles": 9,
+    "newMetadataRefsNormallyClosed": true,
+    "oldFixedPairsAbsent": true,
+    "peerAdvisoryFlock0": true,
+    "rawExportedToGit": false,
+    "rootProofs": {
+      "pg543-runtime-retirement-v2": {
+        "before.private.json": {
+          "bytes": 22177723,
+          "sha256": "c34c058226c43e55b90ce3342a6b21cc74e6137a1a4084daaba7662ad04add59"
+        },
+        "boundaries.private.json": {
+          "bytes": 5239,
+          "sha256": "0e7fe76e884f918d936842d8bf887c03f816099a11a9a988d022720a13c43726"
+        },
+        "refs-prepare.private.log": {
+          "bytes": 215,
+          "sha256": "a8c3ee7da596b32f5d46a9dd149b485728fcff28633f42c1d00ef562af775120"
+        },
+        "retire-reserved.private.json": {
+          "bytes": 53,
+          "sha256": "7f00183f1e5902202a402138e59329e7abf0858a813b42d1da3ead87c99514a9"
+        },
+        "runtime-before.private": {
+          "bytes": 643,
+          "sha256": "3992c3bcbe97066de238cb97678bb71537643bb598dd5b63a702b15d9e2e44e3"
+        }
+      },
+      "pg544-runtime-owned-handoff-v1": {
+        "after.private.json": {
+          "bytes": 22177723,
+          "sha256": "c34c058226c43e55b90ce3342a6b21cc74e6137a1a4084daaba7662ad04add59"
+        },
+        "before.private.json": {
+          "bytes": 22177723,
+          "sha256": "c34c058226c43e55b90ce3342a6b21cc74e6137a1a4084daaba7662ad04add59"
+        },
+        "complete.private.json": {
+          "bytes": 208,
+          "sha256": "03ebd13e9b28a67222d60eeee03ce42bcc6c002a90ddd44c728ed937c381c3e9"
+        },
+        "term-reserved.private.json": {
+          "bytes": 79,
+          "sha256": "81024d0b44bd8345526fda41c242e9314241e65104127531f306010941aa7444"
+        }
+      },
+      "pg545-runtime-owned-handoff-v1": {
+        "after.private.json": {
+          "bytes": 22177069,
+          "sha256": "fd96ee8dfb31b31bc9c457712ea257cd354382e4623cf17b5373daba71f97432"
+        },
+        "before.private.json": {
+          "bytes": 22177069,
+          "sha256": "fd96ee8dfb31b31bc9c457712ea257cd354382e4623cf17b5373daba71f97432"
+        },
+        "complete.private.json": {
+          "bytes": 208,
+          "sha256": "03ebd13e9b28a67222d60eeee03ce42bcc6c002a90ddd44c728ed937c381c3e9"
+        },
+        "term-reserved.private.json": {
+          "bytes": 79,
+          "sha256": "c27bbf884297e26419be5bfeb6202403f7d29b7462e2ec5cd6935807d3db8b1e"
+        }
+      },
+      "pg546-post-retirement-readback-v1": {
+        "after.private.json": {
+          "bytes": 22177069,
+          "sha256": "fd96ee8dfb31b31bc9c457712ea257cd354382e4623cf17b5373daba71f97432"
+        },
+        "before.private.json": {
+          "bytes": 22177069,
+          "sha256": "fd96ee8dfb31b31bc9c457712ea257cd354382e4623cf17b5373daba71f97432"
+        },
+        "complete.private": {
+          "bytes": 174,
+          "sha256": "a54d763def5487dc63a342c5faf46fa3d0e6f87200668d0a6e73a90981ead767"
+        },
+        "refs-prepare.private.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "runtimeAbsent": true,
+    "signatureCryptographicallyReverified": true,
+    "source": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c"
+  },
+  "subjectToolHashes": {
+    "Pg546PostRetirementAdmission$References.class": "1267952804ccb835b3d0b10adc7d7d2d9b9d57f370bc83c269fd1501e5b28241",
+    "Pg546PostRetirementAdmission.class": "7e056a507a37048fa02e320c4c119a8626c9a24ed09b7cc574c7280ffd8e1ca2",
+    "pg542_current_contract.py": "32cdd48d0e68202340a796008310662b39845278dbe71d0cb4c3687d2fd9a312",
+    "pg543_retirement_contract.py": "c2b3fe88ce6934eb5ced5254b7ea9d1f40c931a58eb58098adc0e90e7abc6176",
+    "pg543_runtime_readback.py": "1b2be1929d4b886dd8513fc8771315641031e79708375cd3defdc079db9277da",
+    "pg546_post_retirement_refs.py": "2b35c1211e00a064ab0f5094efb054a95fb71d438edbf0e7f163b2eccac89f69"
+  },
+  "helperSha256": "f1434c8768dafed4d90bb60bb7cd83cd26036b865f1465518c6fa70c66c5af46",
+  "privateLogSha256": "7ae1fe8e14730b4d590757ca111e7e14a637bf9062b505bb70de1dc90ae6899e",
+  "relatedBUG": [
+    "BUG-833",
+    "BUG-834",
+    "BUG-835",
+    "BUG-836",
+    "BUG-837",
+    "BUG-838",
+    "BUG-839",
+    "BUG-840"
+  ],
+  "relatedYKT": [
+    "YKT-602",
+    "YKT-603",
+    "YKT-604",
+    "YKT-605",
+    "YKT-606",
+    "YKT-607",
+    "YKT-608",
+    "YKT-609"
+  ],
+  "relatedSSC": [
+    "SSC-219",
+    "SSC-220"
+  ],
+  "old143UnknownNotNormalized": true,
+  "coverageApplicable": false,
+  "productionPTAdded": 0,
+  "formalAccepted": false,
+  "rawExportedToGit": false,
+  "scope": "Completed current-runtime retirement postcondition only. Pending host candidate969/native all source/CHR/global100/formal not accepted."
+}
