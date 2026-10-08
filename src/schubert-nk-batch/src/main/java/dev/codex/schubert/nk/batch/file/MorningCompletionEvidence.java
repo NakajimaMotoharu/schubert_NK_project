@@ -15,7 +15,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Actual ten-step data plus the same still-owned stopped Backup cycle; no reconstructed authority.
- * NK-OPS-001/OPS009/BAK001; UI251; SS341/342/343 SSC187; PT-OPS-STOPCOMP001..004.
+ * NK-OPS-001/OPS009/BAK001; UI251; SS341/342/343 SSC187/218;
+ * PT-OPS-STOPCOMP001..004/PARENT540001..004.
  */
 @NullMarked
 record MorningCompletionEvidence(
@@ -37,6 +38,11 @@ record MorningCompletionEvidence(
     Objects.requireNonNull(cleanup);
     Objects.requireNonNull(expiry);
     var run = begins.database().run();
+    // SSC218: prove run binding before handle equality can imply it. Both admission
+    // boundaries remain independently observable for ordinary immutable typed data.
+    for (var row : backup.current()) {
+      if (!run.equals(row.attempt().run())) throw invalid();
+    }
     if (!run.equals(begins.configuration().run())
         || !begins.database().equals(backup.current().get(0).attempt())
         || !begins.configuration().equals(backup.current().get(1).attempt())
@@ -46,7 +52,6 @@ record MorningCompletionEvidence(
         || (backupOutcome == MorningBackupUnitCycle.Outcome.SUCCESS)
             != (backupReceipt.exitCode() == 0)) throw invalid();
     for (var row : backup.current()) {
-      if (!run.equals(row.attempt().run())) throw invalid();
       if (backupOutcome == MorningBackupUnitCycle.Outcome.FAILED) {
         if (row.result().status() != BatchStepResult.Status.FAILED
             || row.result().reason() != BatchStepResult.Reason.COMMAND_FAILURE) throw invalid();
