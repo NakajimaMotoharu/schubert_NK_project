@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Root-issued nonsecret correlation, NEVER a lock/parent-liveness/Epoch capability. The fixed
@@ -112,13 +113,30 @@ public record MaintenanceOwnerFrame(
   public Guard parentsGuard() {
     var context = new ChildStartupContext();
     var clock = LinuxMonotonicClock.create();
+    return parentsGuard(clock::nowNanos, context::verifyMaintenanceParent);
+  }
+
+  @FunctionalInterface
+  interface Clock {
+    long nowNanos() throws IOException;
+  }
+
+  @FunctionalInterface
+  interface ParentProbe {
+    void check(ChildStartupContext.MaintenanceParent kind, MaintenanceOwnerFrame owner)
+        throws IOException;
+  }
+
+  /** PG-D403: internal observation contract; no replacement native clock/parent authority. */
+  Guard parentsGuard(@Nullable Clock clock, @Nullable ParentProbe probe) {
+    if (clock == null || probe == null)
+      throw new IllegalArgumentException("maintenance observations required");
     return () -> {
       if (Thread.currentThread().isInterrupted()) throw unavailable();
       long before = clock.nowNanos();
       if (before >= deadlineNanos) throw unavailable();
-      context.verifyMaintenanceParent(ChildStartupContext.MaintenanceParent.MORNING, this);
-      if (cleanup.isPresent())
-        context.verifyMaintenanceParent(ChildStartupContext.MaintenanceParent.CLEANUP, this);
+      probe.check(ChildStartupContext.MaintenanceParent.MORNING, this);
+      if (cleanup.isPresent()) probe.check(ChildStartupContext.MaintenanceParent.CLEANUP, this);
       long after = clock.nowNanos();
       if (Thread.currentThread().isInterrupted() || after < before || after >= deadlineNanos)
         throw unavailable();
