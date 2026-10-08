@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Operation-owned file adapter; no main, unit or parent safety authority. NK-DAT-001;
@@ -76,20 +77,54 @@ public final class InspectorApplication {
         throw new IOException("maintenance owner unavailable");
       }
     }
-    if (!owner.boot().toString().equals(initial.boot())
+    validateOwner(run, initial.boot(), owner);
+    return executeGuarded(
+        run,
+        owner.parentsGuard(),
+        () -> expected.equals(context.verifyInspector(owner.boot(), invocation, fixed)),
+        this::execute);
+  }
+
+  /** PG-D402 data-only equality; never grants an OS admission. */
+  static void validateOwner(
+      @Nullable InspectionRun run, @Nullable String boot, @Nullable MaintenanceOwnerFrame owner)
+      throws IOException {
+    if (run == null || boot == null || owner == null)
+      throw new IllegalArgumentException("inspector owner contract required");
+    if (!owner.boot().toString().equals(boot)
         || !owner.run().equals(run.id())
         || !owner.cutoff().equals(run.cutoff())
         || owner.cleanup().isEmpty()) throw new IOException("maintenance owner unavailable");
-    var parents = owner.parentsGuard();
+  }
+
+  @FunctionalInterface
+  interface InspectorProbe {
+    boolean same() throws IOException;
+  }
+
+  @FunctionalInterface
+  interface OwnedOperation {
+    InspectionExecution execute(InspectionRun run, Optional<MaintenanceOwnerFrame.Guard> guard)
+        throws IOException, NoSuchAlgorithmException;
+  }
+
+  /** PT-INSP-OWN676001..006: internal order/budget contract, not live ownership proof. */
+  static InspectionExecution executeGuarded(
+      @Nullable InspectionRun run,
+      @Nullable MaintenanceOwnerFrame.Guard parents,
+      @Nullable InspectorProbe probe,
+      @Nullable OwnedOperation operation)
+      throws IOException, NoSuchAlgorithmException {
+    if (run == null || parents == null || probe == null || operation == null)
+      throw new IllegalArgumentException("inspector guard contract required");
     MaintenanceOwnerFrame.Guard guard =
         () -> {
           parents.check();
-          if (!expected.equals(context.verifyInspector(owner.boot(), invocation, fixed)))
-            throw new IOException("maintenance owner unavailable");
+          if (!probe.same()) throw new IOException("maintenance owner unavailable");
           return parents.remainingNanos();
         };
     guard.check();
-    var result = execute(run, Optional.of(guard));
+    var result = operation.execute(run, Optional.of(guard));
     guard.check();
     return result;
   }
