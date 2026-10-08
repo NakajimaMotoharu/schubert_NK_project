@@ -12,6 +12,7 @@ case "${2:-PG585}" in
   PG593) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg593-grouped-six-host-v1 ;;
   PG596) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg596-fixture-retained-six-host-v1 ;;
   PG599) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg599-candidate-bootstrap-six-host-v1 ;;
+  PG618) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg618-exporter-candidate-six-host-v1 ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -24,6 +25,7 @@ git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum >
 task_result=0
 (
 umask 0027
+python3 -B tools/quality/qualified_nullable_check.py &&
 ./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -Dnk.pt.node=/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node -pl src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch clean spotless:check test-compile jar:test-jar test spotbugs:check jacoco:report jar:jar
 ) > "$task_base/build.private.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base/exit"
