@@ -2,7 +2,7 @@
 import copy
 from pathlib import Path
 import unittest
-from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action, release_metadata
+from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action, release_metadata, table_names
 
 
 def execution(argv, supplement=('Wed 2026-10-07 20:08:51 UTC','Wed 2026-10-07 20:08:52 UTC','320189','exited','0')):
@@ -22,6 +22,20 @@ def fixture():
 
 
 class Contract(unittest.TestCase):
+    def test_both_independent_schema_catalogs(self):
+        names=['answers','app_logs','app_users','async_jobs','audio_files','auth_sessions','batch_runs','entry_audio_links','games','inbox_inspection_progress','log_cleanup_progress','login_ip_attempts','media_assets','mq_outbox','notifications','questions','request_inbox','script_entries','script_files','speakers']
+        web=['pending_context_revocations','web_http_sessions','web_log_outbox','web_receipt_references']
+        good={**{'schubert.'+n:[] for n in names},**{'schubert_web_session.'+n:[] for n in web}}
+        self.assertTrue(table_names(good))
+        for key in good:
+            bad=copy.deepcopy(good);del bad[key]
+            with self.assertRaises(ValueError):table_names(bad)
+            bad=copy.deepcopy(good);bad[key]=None
+            with self.assertRaises(ValueError):table_names(bad)
+        for name in ('public.web_http_sessions','schubert_web_session.foreign','schubert.answers;drop table x','unknown'):
+            with self.assertRaises(ValueError):table_names({**good,name:[]})
+        with self.assertRaises(ValueError):table_names(None)
+
     def test_release_role_not_effective_unit(self):
         good=[1,2,0,986,0o100640,1,1836,1,2];self.assertTrue(release_metadata(good))
         for index,value in ((2,999),(3,0),(3,981),(4,0o100644),(4,0o040640),(5,2),(6,0),(6,16385),(1,None)):

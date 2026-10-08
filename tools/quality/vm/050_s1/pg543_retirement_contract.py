@@ -10,6 +10,19 @@ CONFIG = frozenset('ExecStart DropInPaths ReadWritePaths User Group Supplementar
 NATIVE = '/etc/systemd/system/'+MORNING+'.d/pg477-native-coverage.conf'
 RUNTIME = '/run/systemd/system/'+MORNING+'.d/pg492-once-resume.conf'
 EMPTY = ('n/a', 'n/a', '0', '(null)', '0/0')
+TABLES = frozenset('schubert.answers schubert.app_logs schubert.app_users schubert.async_jobs schubert.audio_files schubert.auth_sessions schubert.batch_runs schubert.entry_audio_links schubert.games schubert.inbox_inspection_progress schubert.log_cleanup_progress schubert.login_ip_attempts schubert.media_assets schubert.mq_outbox schubert.notifications schubert.questions schubert.request_inbox schubert.script_entries schubert.script_files schubert.speakers schubert_web_session.pending_context_revocations schubert_web_session.web_http_sessions schubert_web_session.web_log_outbox schubert_web_session.web_receipt_references'.split())
+
+
+def table_names(value):
+    require(isinstance(value,dict) and set(value)==TABLES)
+    require(all(isinstance(v,list) for v in value.values()))
+    return True
+
+
+def old_peer_state(counts, finished, idle60):
+    require(type(finished)is bool and type(idle60)is bool and type(counts)is list and len(counts)==4 and all(type(v)is bytes for v in counts))
+    require(counts==[b'0',b'0',b'0',b'0'] and idle60 or not finished and counts==[b'1',b'1',b'0',b'1'])
+    return 'EXPIRED_UNKNOWN' if counts[0]==b'0' else 'OWNED_UNKNOWN'
 
 
 def release_metadata(value):

@@ -9,7 +9,7 @@ import re
 import stat
 import subprocess
 import pathlib
-from pg543_retirement_contract import validate_snapshot, configurations, release_metadata, MORNING, CADDY, require
+from pg543_retirement_contract import validate_snapshot, configurations, release_metadata, table_names, MORNING, CADDY, require
 
 OLD = Path('/var/lib/pgpt-s1-preservation/pg537-bootstrap-retire-v1')
 RUNTIME = Path('/run/systemd/system/'+MORNING+'.d/pg492-once-resume.conf')
@@ -38,7 +38,7 @@ def load(owner=None):
         retired = OLD/(name+'.retired.private'); old = before['credentials'][str(src)]
         require(not os.path.lexists(src) and env['metadata'](retired)[:7] == old['metadata'][:7])
         require(hashlib.sha256(strict(retired,0o400,256)).hexdigest() == old['sha256'])
-    require(len(baseline['rows']) == 24 and len(baseline['rows']['schubert.batch_runs']) == 462)
+    table_names(baseline['rows']); require(len(baseline['rows']['schubert.batch_runs']) == 462)
     paths = {'credentials':'/etc/schubert-nk/credentials','startup':'/run/schubert-nk/startup',
              'originals':'/var/lib/schubert-nk/maintenance','backup':'/srv/schubert-nk/backup',
              'native':'/run/schubert-nk/pt-coverage','oldProofs':'/var/lib/pgpt-s1-preservation/pg526-native-stop-v1',
@@ -104,7 +104,7 @@ def load(owner=None):
             require(actual == expected_stop); value['pid1Stop'][u] = actual
         sql = "begin isolation level repeatable read read only;set local timezone='UTC';"
         for table in baseline['rows']:
-            require(re.fullmatch(r'schubert\.[a-z_]+',table) is not None)
+            require(re.fullmatch(r'(schubert|schubert_web_session)\.[a-z_]+',table) is not None)
             sql += "select json_build_object('table','"+table+"','rows',coalesce(jsonb_agg(j order by j::text),'[]'::jsonb))from(select to_jsonb(t)j from "+table+" t)q;"
         value['rows'] = {}
         for line in command(['/usr/bin/sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',sql+'commit;']).splitlines():
