@@ -1,5 +1,7 @@
 # PG546 已runtime退役のfresh正常後条件受入
 
+実P003/P004更新=source2d9dfd7c1（40hashは当safe.source）、stage-v1actual0、readback-v1actual0/6.620421s、署名187/current・RODB/tag/advisory/十Ref/全post原値/full18/補助n-a/保持runtimeDirとDB/Ref/bus/FD/A-M全正常。before/after/complete/error0をRoot pg546-post-retirement-readback-v1へ封印、unlink/reload/start/DBwrite0/旧closeUNKNOWN不変更。独立P005は別PG547 collector source固定後一回、全metadataRef正常・原値/主要18/全kernel/署名/peer-lock0/旧固定両pair不存在/Rootbefore=afterとcompleteを再読し公開manifestへsealする（次、未実行）。別collector/sourceと当subject helperclass hashは明示して結合、Production sourceはa2のまま・候補969/native/global/CHR/正式未受入。
+
 NK-OPS-001 / RD OPS009/BAK/BKO / UI251 / SS342343353 SSC220・QA047、BUG840/YKT609。VMa2/PG495/schema028/bootcc9、host候補969/PG540は別。PG543已unlink/dirsync/one reload・oldscope143/normalcloseUNKNOWNを保持、新PG545source1a9fdda3f/execute-v1 actual0/5.115441s/log SHA f3bd4290bf1b36bb3e212edb95fd9bb8bae582cb2f3605af06419c4ca4518b86で固定Ref→Root回収/全原値二読/全oldowner-peer-lock0/新Refbus正常。元operationの再発行は禁止。
 
 |Test ID|入力・操作・対象|独立期待値・根拠|
