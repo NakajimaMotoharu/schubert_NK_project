@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC230（2026-10-09、runtime635退役の当profile）：一回reload後も全十Unit主要18/全kernel/Job空・genuine新parentPID1及び元完了原本をexact保持する。Morning補助ExecStartは署名base＋既nativeのplain argv（--resume二引数無し）/exact未実行履歴、DropInPathsは既nativeだけ。補助履歴resetの許容はSSC229と同七Artemis/Caddy/API/Backup/Cleanup/Expiry/Webの同path/argv/ignore_errors＋exact n/a,n/a,0,(null),0/0だけ（Morningは上記plain argv）、Inbox/Bootstrap全config exact。CaddyPre/Runは同old又はpaired exact未実行、他hardening/credential/RW/argvはexact。主要143/0や旧UNKNOWNをn/aから正常化しない。現runtimefileの除去以外のUnit source/宣言/rootapproval/current/epoch/DB変更はしない。
+
 SSC229（2026-10-09、SS343当PG631/e492新一回用resume固定profile）：Root0755/ACL access-default無し空runtimeを保持dirFDでnew-only pg635-once-resume.confへ、署名base/native literal＋同run --resume二引数だけ、reload一回。全十主要18/旧INV/143-30/全kernel・DB原本を保持し、SSC220の補助metadata resetを当七Unitだけへ限定、Inbox/Bootstrap全config exact、CaddyPre/Run両同old又は両exact未実行・片側混合拒否。n/aを旧正常close/新readyへ読み替えず、全新scope/独立post後に別一回start・新親元1800s同RootordinaryAPI-Web-Caddyを要求。設計公開は実起動/native/正式未受入。
 
 SSC228（2026-10-09、固定failed30 pending code-only）：SS343 SSC228のe492原本・既INVALID/Unit全停止/現PG621と新source36fe候補を再認証し、verify/activateではUnit/ExecStart/drop-in/reload/start/stopを変更しない。正規切替の全scope正常/独立post後だけ別new-only一回用同run resumeを準備する。物理activeを移動せず同cutoff/activationを維持、新親Invocationに対する元1800秒budget・既Unit期限・same Root/ordinary API-Web-Caddy/真正DONE・逆順owned停止を要求する。旧INV3a2de/status30/close未知は新成功へ読み替えない。REUSED_SUCCESS保持期限削除0とNEW_SUCCESS実削除再試験を分離し、API readyやobserver0だけを親成功にしない。設計only公開・実装/VM/native/正式未受入。
