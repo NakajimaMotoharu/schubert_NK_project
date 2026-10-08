@@ -26,3 +26,7 @@ JDK25.0.4 `bash tools/quality/vm/050_s1/pg624_compile_contract_v1.sh`：actual0/
 `python3 -B tools/quality/vm/050_s1/pg624_completed_native.py stage|verify|activate` はclean/operatorcommit固定で各new-only一回。現時点未実行。再実行しない。UNKNOWNは保持、旧closed操作/旧completed再開なし。
 
 証跡はPG379/pg624-{mode}-v1.safe.json/exit、Root-private19before/after/complete、公開sanitizedmanifest/hash。rawDB/credential/native/session/key/permitはGit0。source/run/終了code/全field/資源後条件を独立確認後だけ当範囲限定受入。新candidate通常親/native/global100/formalは別未受入。
+
+## 実VM結果（2026-10-09）
+
+工具stage/verify operator8c24f8330、activate/独立post313b2a7fc、stage/verify/activate全0、所要.2148/8.4939/9.5266秒。PG625別readonly postverify/postactivate全0。19before SHA8a95a8e824685442adb2c428aeb27b60399e6bc17a24dd4db6f95363a2d6fb39、verifyafter同値、activateafter11675ec02384a125f762014ebb1da251a2ab07c466aa8465bcd0f05ee284ce91。全24二読492/十Unit-kernel0/署名187/全metadata正常/client-advisory-FLOCK0、ISSUED→新INVALID/current621/approval4a2以外変更0。current72fb/PG621になったが新source ordinary/native/global/formal0。初回hostguard拒否BUG896/YKT665を修正前起票後限定完了、旧PG604成功保持/二重実行0。公開provisional/PG624-completed-cutover-v1にはsafe5件＋hashmanifest、private原本別保存。
