@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC219追補（BUG839/YKT608、2026-10-08）：同固定旧工具の初回RObackend571406/tag/advisory観測と、既batch role idle60s後のcurrent backend・全peer/advisory0を分離して保持する。これはDB期限後消失の分類だけで、旧Java/Ref正常closeの証拠ではない。SS343のexact1/全0二profile、固定Root571379/Ref571408・全元原値/十Ref/私有予約→Ref→Java限定TERM→全旧owner/peer-lock消失/新scope正常を維持する。一般UNKNOWNへ拡張0・再接続/Unit/配備/退役/reloadの再発行0。新fresh正常scopeには専用RODB/advisoryと所定正常closeが引き続き必須。
+
 SSC219（2026-10-08、BUG836/YKT605、QA047）：PG543 verify-v2/sourcee6eb8306aの固定Root571379/Ref571408、署名currenta2/PG495/schema028/bootcc9だけ。拒否はWeb session schema名の不足でbefore-image/予約/runtimeコピー/unlink/reload前、SAVE readonly-v1はerror logのみ。SS343の固定ticks/argv/immutablepayload・M-A本人FD/FLOCK・専用RODB/tag/advisory/peerを再認証、新metadata十Refと全元原値二読・私有一回予約後のみRef→Java pidfdTERM143。旧scope closeUNKNOWN/旧143を成功化せず、全owner-peer-advisory-FLOCK消失/新Ref-bus正常/全24-462と原本Backup/current/native9/runtime保持を再読して別fresh正規再試験へ進む。SQL oracleは既承認の業務20＋Web4閉集合、実物/行/期待値の改変0。途中失敗は隔離/部分証跡を保持、TERM/配備/start/reload/退役を二重発行0、一般UNKNOWNへ拡大0。親30min/正式451/native全scope条件を緩和しない。
 
 SSC217（2026-10-08、BUG829/YKT598・SSC216のfresh退役前GC観測補足、RD/UI変更なし）：PG536 fixed工具回収はsourcec2b7f5be4/actual0、十Ref保持内のbefore=after全原値SHAaa8f9216…とcomplete03ebd13e…を封印し、真正ordinary BootstrapのINV08face…/PID567513/ticks2872520/正規20/元30s以内1.666104s/真正PID1Job41051/native一件を保持したまま旧143UNKNOWNと新Ref/bus正常・全旧peer-advisory-FLOCK0を別認定した。新参照を解放した後、当Bootstrapだけsystemd GCでInvocationID空・ExecMainCode/Status/Start/ExitMonotonicがexact0に戻ったことを現在値で確認。これは新正常0・旧close成功・再起動許可ではない。
