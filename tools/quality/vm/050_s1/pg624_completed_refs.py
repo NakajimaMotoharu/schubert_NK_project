@@ -144,5 +144,5 @@ if __name__=='__main__':
         import traceback
         print('REF_FAILED',flush=True);print('PG624_UNKNOWN type='+type(failure).__name__,file=sys.stderr,flush=True)
         for frame in traceback.extract_tb(failure.__traceback__):
-            if'pg604_'in frame.filename:print('PG624_FRAME method='+frame.name+' line='+str(frame.lineno),file=sys.stderr,flush=True)
+            if'pg624_'in frame.filename or 'pg604_unit_sources' in frame.filename:print('PG624_FRAME method='+frame.name+' line='+str(frame.lineno),file=sys.stderr,flush=True)
         while True:time.sleep(1)

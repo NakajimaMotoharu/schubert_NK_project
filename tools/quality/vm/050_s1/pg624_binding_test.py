@@ -16,6 +16,11 @@ class BindingTest(unittest.TestCase):
         self.assertNotIn('/0.1.0-PG621/operations/batch.jar',wrapper)
         self.assertIn("'pg611_parent_receipt.py'",wrapper)
         self.assertIn("oracle.count('\\nOK\\n')==5",wrapper)
+        self.assertNotIn("'pg604-'+mode",wrapper)
+        self.assertEqual(wrapper.count("'pg624-'+mode+'-v1.safe.json'"),2)
+        for mode in ('stage','verify','activate'):
+            self.assertEqual('pg624-'+mode+'-v1.private.log',f'pg624-{mode}-v1.private.log')
+        self.assertIn("'pg624-'+mode+'-v1.exit'",wrapper)
 
     def test_witness_pins_and_complete_stops_and_activation_reauthentication(self):
         source=(R/'pg624_completed_refs.py').read_text()

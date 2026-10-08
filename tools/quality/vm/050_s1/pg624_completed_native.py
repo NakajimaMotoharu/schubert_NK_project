@@ -25,6 +25,7 @@ def main():
     assert(W/'pg624-compile-v1.private.log').read_bytes()==b''
     oracle=(W/'pg624-oracle-v1.private.log').read_text()
     assert oracle.count('\nOK\n')==5 and 'FAILED'not in oracle and 'PG624_INDEPENDENT_DATA_CLI conditions20=true productionPT0=true' in oracle
+    assert(W/'pg624-binding-supplement-v1.private.log').read_text().count('\nOK\n')==1
     files={n:W/'pg624-completed-tools-v1'/n for n in('Pg624CompletedDeployment.class','Pg624CompletedDeployment$References.class')}
     for n in('pg624_completed_contract.py','pg624_completed_refs.py','pg604_unit_sources.py','pg611_parent_receipt.py'):files[n]=R/n
     hashes={n:hashlib.sha256(p.read_bytes()).hexdigest()for n,p in files.items()}
@@ -42,8 +43,8 @@ for name,sha in DEPENDENCIES.items():
     payload='DEPENDENCIES='+repr(dependencies)+'\nPREFIXES='+repr(PREFIXES)+'\nHASHES='+repr(hashes)+'\nDEST='+repr(DEST)+'\n'+check
     opts=['-i',str(P/'vm-access'),'-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts')]
     ssh=['ssh',*opts,'-p','22222','ubuntu@127.0.0.1']
-    log=W/('pg604-'+mode+'-v1.private.log');assert not log.exists()
-    assert not(W/('pg604-'+mode+'-v1.safe.json')).exists()
+    log=W/('pg624-'+mode+'-v1.private.log');assert not log.exists()
+    assert not(W/('pg624-'+mode+'-v1.safe.json')).exists()
     started=datetime.datetime.now(datetime.timezone.utc).isoformat()
     with log.open('xb')as f:
         if mode=='stage':
@@ -81,9 +82,9 @@ for p in r.iterdir():
             cp=':'.join('/var/lib/pgpt-s1-preservation/'+p for p in PREFIXES)+':/opt/schubert-nk/releases/0.1.0-PG600/operations/batch.jar:/opt/schubert-nk/releases/0.1.0-PG600/operations/lib/*:/opt/schubert-nk/releases/0.1.0-PG600/api/api.jar:/opt/schubert-nk/releases/0.1.0-PG600/api/lib/*:/var/lib/pgpt-s1-preservation/pg465-completed-tool-v1/flyway-core-13.4.0.jar'
             result=subprocess.run(ssh+['sudo -n /opt/jdk-25.0.4/bin/java --enable-native-access=ALL-UNNAMED -cp "'+cp+'" Pg624CompletedDeployment '+mode],stdout=f,stderr=f)
         elapsed=time.monotonic()-began;f.flush();os.fsync(f.fileno())
-    with(W/('pg604-'+mode+'-v1.exit')).open('x')as f:f.write(str(result.returncode)+'\n')
+    with(W/('pg624-'+mode+'-v1.exit')).open('x')as f:f.write(str(result.returncode)+'\n')
     safe={'run':'PG624-'+mode+'-v1','operatorSource':source,'candidateSource':'72fb7440697ee1048a5c0145055dc1cc3c577914','actualExit':result.returncode,'elapsedSeconds':elapsed,'startedUTC':started,'completedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'privateLogSha256':hashlib.sha256(log.read_bytes()).hexdigest(),'toolHashes':hashes,'externalDependencyHashes':dependencies,'rawExported':False,'formalAccepted':False,'oldUnknownNormalized':False}
-    with(W/('pg604-'+mode+'-v1.safe.json')).open('x')as f:json.dump(safe,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+    with(W/('pg624-'+mode+'-v1.safe.json')).open('x')as f:json.dump(safe,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     print(json.dumps({'run':safe['run'],'actualExit':result.returncode,'elapsedSeconds':elapsed,'oldUnknownNormalized':False,'formalAccepted':False}))
     raise SystemExit(result.returncode)
 
