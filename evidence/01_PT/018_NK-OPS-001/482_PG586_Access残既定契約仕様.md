@@ -1,5 +1,13 @@
 # PG586 Access残既定契約・同data readback
 
+## v3実結果（2026-10-08 18:42JST）
+
+固定source 55363131eb0d071869c48c8468a7aa1be0724ea9/期間2026-10-08T18:37:16+09:00～2026-10-08T18:39:02+09:00/106s、phase2BUILD SUCCESS/FAILURE0、selected27PT（MACCESS7/MDB20）・FESflaky0。依存build skipは合格加算0、非選択module/test not-runを成功へ読み替え0。旧六host・current六jar・導入m2六jarのmain1600classbyte同値、batch静的0・XMLnewmtime/hash・Gitblobにより全sourcefilehashを独立照合。旧v1/v2選択前拒否はexit1/PT0のまま保持。
+
+四counter診断は同classbyte union追加15line6method2branch、全残988line175method12class877branch。Access単体はMETHOD22/22・CLASS1/1・BRANCH4/4、LINE50/52（2行残）、全100達成とはしない。manifestSHA beeb915905e15e480fce9e1dbd5e650e64ef92eb9a7cbd718f72ffbf57c6474f・selectedexecSHA 67d4c645989ac0ba5beb7193fdd9de57d47eef9080cebc2351c87fdbb122802e・sourcefileSHA cde2504715825da2d99366d2ec0d7daa55bb93bf3fe5e61cd2d748ef56a5844b・logSHA 239fbd95812b8d9603fd054a37846d4d6567ebcf93424346548a1ca8026c036c。postcollectorSHA 68f6f7b8623f538a81fe96232901456d76068ed3206422695e24207a08b33e24、新publicmanifestに全27XMLhash/source/run/期間/残件。正式全scope・nativefaultmatrix・工程完了0。
+
+BUG871/YKT640は実pom literal優先順位を保持し同source依存build→必須twoXML方式で当工具範囲解決。BUG872/YKT641の二phasefirst失敗継続リスクは実v3では未発生（2SUCCESS0FAILURE確認）、source変更前起票後に明示&&と独立shellfixturefirst拒否second未発行/second失敗exit保持を確認、実再試験0/旧正常result改変0。残2LINEは同dataの既定戻り値転送2ケースMACCESS587001/002で実検証予定、人工到達/除外を使用しない。
+
 ## v1拒否・v2再試験
 
 v2もNoTests拒否、CLIとpom literal優先順位を実設定で確認した。v3はsame-source六dependency build/install（試験skipは加点0）と、batch二class正規試験を二phaseへ分離、failIfNoTests=trueは一切変更しない。依存m2jarは現source全mainbyte/PG585へ独立照合する。実対象結果/FES/newXML/method-counterはcollectorで照合し、未実施をPASSに変更0。
