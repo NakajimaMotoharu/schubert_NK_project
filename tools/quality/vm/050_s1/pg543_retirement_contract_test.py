@@ -2,7 +2,7 @@
 import copy
 from pathlib import Path
 import unittest
-from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action, release_metadata, table_names
+from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action, release_metadata, table_names, same_units
 
 
 def execution(argv, supplement=('Wed 2026-10-07 20:08:51 UTC','Wed 2026-10-07 20:08:52 UTC','320189','exited','0')):
@@ -22,6 +22,13 @@ def fixture():
 
 
 class Contract(unittest.TestCase):
+    def test_all_major_fields_remain_exact(self):
+        old=fixture()['units'];self.assertTrue(same_units(old,copy.deepcopy(old)))
+        for u in UNITS:
+            for k in FIELDS:
+                for fault in ('foreign',None,True):
+                    bad=copy.deepcopy(old);bad[u][k]=fault
+                    with self.assertRaises(ValueError):same_units(old,bad)
     def test_both_independent_schema_catalogs(self):
         names=['answers','app_logs','app_users','async_jobs','audio_files','auth_sessions','batch_runs','entry_audio_links','games','inbox_inspection_progress','log_cleanup_progress','login_ip_attempts','media_assets','mq_outbox','notifications','questions','request_inbox','script_entries','script_files','speakers']
         web=['pending_context_revocations','web_http_sessions','web_log_outbox','web_receipt_references']
@@ -74,6 +81,9 @@ class Contract(unittest.TestCase):
         new[CADDY]['ExecStart']=execution('/usr/bin/java fixed',empty)
         self.assertTrue(configurations(old,new,expected,pre,execution('/usr/bin/java validate',empty)))
         with self.assertRaises(ValueError):configurations(old,new,expected,pre,pre)
+        for u in UNITS:
+            new[u]['ExecStart']=execution('/usr/bin/java native'if u==MORNING else'/usr/bin/java fixed',empty)
+        self.assertTrue(configurations(old,new,expected,pre,execution('/usr/bin/java validate',empty)))
         new=copy.deepcopy(old);new[MORNING].update(ExecStart=execution('/usr/bin/java native'),DropInPaths=NATIVE)
         for u in UNITS:
             for field in CONFIG:

@@ -9,14 +9,15 @@ import re
 import stat
 import subprocess
 import pathlib
-from pg543_retirement_contract import validate_snapshot, configurations, release_metadata, table_names, MORNING, CADDY, require
+from pg543_retirement_contract import validate_snapshot, configurations, release_metadata, table_names, same_units, record, EMPTY, MORNING, CADDY, require
 
 OLD = Path('/var/lib/pgpt-s1-preservation/pg537-bootstrap-retire-v1')
 RUNTIME = Path('/run/systemd/system/'+MORNING+'.d/pg492-once-resume.conf')
 BOOT = 'cc9ed874-7f4f-450e-a188-8de1e42c8441'
 
 
-def load(owner=None):
+def load(owner=None,post=False,caddy_before=None):
+    require(type(post)is bool and (caddy_before is None or type(caddy_before)is str))
     raw = Path('/var/lib/pgpt-s1-preservation/pg480-backup-tools-v3/pg480_backup_refs.py').read_bytes()
     require(hashlib.sha256(raw).hexdigest() == '0dd9ded789de2205ecb7f60080f3f57c2d489e28c0436d4a309a4dab386d0eb7')
     names = {'command','show','metadata','tree','strict','kernel'}
@@ -47,7 +48,7 @@ def load(owner=None):
     depraw = Path('/var/lib/pgpt-s1-preservation/pg535-bootstrap-tools-v1/pg529_dependency_graph.py').read_bytes()
     require(hashlib.sha256(depraw).hexdigest() == '5931ef9687aa24fa693f0d15d96d912b19c9ca7b365ffd25f4588d2c39f5de60')
     deps = dict(re=re); exec(compile(depraw,'<sealed dependency set policy>','exec'),deps)
-    caddy_pre = show(CADDY,{'ExecStartPre'})['ExecStartPre']
+    caddy_pre = show(CADDY,{'ExecStartPre'})['ExecStartPre'] if caddy_before is None else caddy_before
     native = strict(Path('/etc/systemd/system/'+MORNING+'.d/pg477-native-coverage.conf'),0o644,4096)
     basepath = Path('/opt/schubert-nk/releases/0.1.0-PG495/systemd')/MORNING
     bm=env['metadata'](basepath); release_metadata(bm)
@@ -74,7 +75,7 @@ def load(owner=None):
             require(stat.S_ISREG(meta[4]) and meta[2] == 0 and meta[5] == 1 and 'system.posix_acl_access' not in os.listxattr(p))
             captured_files[name] = {'metadata':meta,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
             require(meta == env['metadata'](p))
-    def snapshot(changed=False):
+    def snapshot(changed=post):
         require(Path('/proc/sys/kernel/random/boot_id').read_text().strip() == BOOT)
         if owner is not None:
             owner()
@@ -84,13 +85,15 @@ def load(owner=None):
         value = {k:tree(Path(p)) for k,p in paths.items()}
         require(all(v == baseline[k] for k,v in value.items()))
         value['units'] = {u:show(u,env['FIELDS']) for u in env['UNITS']}
-        require(value['units'] == baseline['units'])
+        same_units(baseline['units'],value['units'])
         for u in env['UNITS']:
             env['kernel'](u)
         value['configuration'] = {u:show(u,set(c)) for u,c in baseline['configuration'].items()}
         nowpre = show(CADDY,{'ExecStartPre'})['ExecStartPre']
         if changed:
             configurations(baseline['configuration'],value['configuration'],expected,caddy_pre,nowpre)
+            if post:
+                require(all(record(c['ExecStart'])[3:]==EMPTY for c in value['configuration'].values()) and record(nowpre)[3:]==EMPTY)
         else:
             require(value['configuration'] == baseline['configuration'] and nowpre == caddy_pre)
         value['dependencies'] = deps['dependency_graph']({u:show(u,set(deps['GRAPH_FIELDS'])) for u in env['UNITS']},env['UNITS'])

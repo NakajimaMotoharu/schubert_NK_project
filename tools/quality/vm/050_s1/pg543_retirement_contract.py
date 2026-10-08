@@ -59,16 +59,23 @@ def validate_snapshot(value):
     return True
 
 
+def same_units(expected,actual):
+    current_units(expected); current_units(actual)
+    for unit in UNITS:
+        for row in (expected[unit],actual[unit]):
+            require(isinstance(row,dict) and set(row)==FIELDS and all(type(v)is str for v in row.values()))
+    require(actual==expected)
+    return True
+
+
 def configurations(before, actual, expected_morning, before_caddy_pre, actual_caddy_pre):
-    """Only Morning's independently authenticated no-resume declaration and paired Caddy reset."""
+    """SSC220 fixed declaration + saved/exact empty supplement; full18 separately immutable."""
     require(set(before) == set(actual) == UNITS)
     for unit in UNITS:
         old, new = before[unit], actual[unit]
         require(set(old) == set(new) == CONFIG and all(isinstance(v, str) for v in [*old.values(), *new.values()]))
-        allowed = {'ExecStart', 'DropInPaths'} if unit == MORNING else {'ExecStart'} if unit == CADDY else set()
+        allowed = {'ExecStart', 'DropInPaths'} if unit == MORNING else {'ExecStart'}
         require(all(old[k] == new[k] for k in CONFIG - allowed))
-        if not allowed:
-            continue
         left, right = record(old['ExecStart']), record(new['ExecStart'])
         require(left is not None and right is not None)
         if unit == MORNING:
@@ -77,10 +84,12 @@ def configurations(before, actual, expected_morning, before_caddy_pre, actual_ca
             # Declaration changed: systemd either retains this exact saved supplement or clears it.
             require(right[3:] in (left[3:], EMPTY))
             require(old['DropInPaths'].split() == [NATIVE, RUNTIME] and new['DropInPaths'] == NATIVE)
-        else:
+        elif unit==CADDY:
             oldpre, newpre = record(before_caddy_pre), record(actual_caddy_pre)
             require(oldpre is not None and newpre is not None and right[:3] == left[:3] and oldpre[:3] == newpre[:3])
             require((right[3:], newpre[3:]) in ((left[3:], oldpre[3:]), (EMPTY, EMPTY)))
+        else:
+            require(right[:3]==left[:3] and right[3:]in(left[3:],EMPTY))
     return True
 
 
