@@ -6,6 +6,14 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from pg478_cleanup_oracle import instant,candidates
 def require(value):
  if not value:raise ValueError('independent snapshot proof refused')
+def bounded_candidates(rows,bounds,cutoff):
+ low=candidates(rows,bounds['lower']);high=candidates(rows,bounds['upper'])
+ require(instant(bounds['lower'])<=instant(cutoff)<=instant(bounds['upper']))
+ expected=candidates(rows,cutoff)
+ require(all(set(low[k])<=set(expected[k])<=set(high[k]) for k in low))
+ require(all(low[k]==high[k] for k in low if k!='web_http_sessions'))
+ require(all(not v for k,v in expected.items()if k not in ['auth_sessions','login_ip_attempts','web_http_sessions','inbox_scan_candidates']))
+ return low,expected,high
 def aad(row):
  parts=[b'api-inbox-response',b'schubert.request_inbox',uuid.UUID(row['message_id']).bytes,b'\1',row['response_key_version'].encode('ascii'),row['response_layout_id'].encode('ascii'),b'001',struct.pack('>q',row['owner_user_id'])]
  return b''.join(struct.pack('>I',len(p))+p for p in parts)
@@ -65,7 +73,7 @@ def main():
  require(os.geteuid()==0 and sys.argv[1:]==['capture'])
  root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg553-newrun-preflight-v2');data=json.loads((root/'before.private.json').read_text());layouts=json.loads(pathlib.Path(__file__).with_name('pg478_independent_layouts.json').read_text())
  require(data['source']=='969d8ded10c0bf5841d9e3a5c531e922caf4a24a' and data['manifestSha256']=='a224ea9cf421b06e7029b1f8845f2a7eb3d620b5ec2bdf90bfe64c731b99515b')
- low=candidates(data['rows'],data['bounds']['lower']);high=candidates(data['rows'],data['bounds']['upper']);require(low==high and all(not v for k,v in low.items() if k not in ['auth_sessions','web_http_sessions','inbox_scan_candidates']))
+ low,_,high=bounded_candidates(data['rows'],data['bounds'],data['bounds']['lower'])
  keypath=pathlib.Path('/etc/schubert-nk/credentials/api-inbox-response-aes-current');before=keypath.lstat();require(stat.S_ISREG(before.st_mode) and before.st_uid==0 and before.st_nlink==1 and not keypath.is_symlink() and stat.S_IMODE(before.st_mode) in [0o400,0o600])
  raw=keypath.read_bytes();parts=raw.split(b'\n');require(len(parts)==4 and parts[0]==b'NKKEY1' and parts[1]==b'v1' and not parts[-1]);key=bytearray(base64.b64decode(parts[2],validate=True));require(len(key)==32 and before==keypath.lstat())
  deleted=[];proof=[]
@@ -77,9 +85,9 @@ def main():
    try:validate(row,wire,layouts[row['response_layout_id']]);deleted.append(row['message_id']);proof.append({'messageId':row['message_id'],'plaintextSha256':hashlib.sha256(wire).hexdigest(),'byteLength':len(wire),'valid':True})
    finally:wire[:]=b'\0'*len(wire)
  finally:key[:]=b'\0'*len(key)
- require(len(deleted)==7)
- result={'bounds':data['bounds'],'expected':low,'inboxExpectedDeleted':sorted(deleted),'inboxExpectedProtected':[],'inboxIndependentProof':proof,'sameThroughoutAdmissionWindow':True,'starts0':True}
+ require(sorted(deleted)==low['inbox_scan_candidates'])
+ result={'source':data['source'],'manifestSha256':data['manifestSha256'],'beforeSha256':hashlib.sha256((root/'before.private.json').read_bytes()).hexdigest(),'bounds':data['bounds'],'expectedLower':low,'expectedUpper':high,'actualCutoffIndependentCalculationRequired':True,'varyingCategories':[k for k in low if low[k]!=high[k]],'inboxExpectedDeleted':sorted(deleted),'inboxExpectedProtected':sorted(r['message_id'] for r in data['rows']['schubert.request_inbox']if r['message_id']not in deleted),'inboxIndependentProof':proof,'starts0':True}
  with (root/'cleanup-oracle.private.json').open('x') as f:os.fchmod(f.fileno(),0o600);json.dump(result,f,sort_keys=True);f.flush();os.fsync(f.fileno())
  fd=os.open(root,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
- print(json.dumps({'independentCandidateCounts':{k:len(v) for k,v in low.items()},'independentValidInbox7':True,'plaintextLogged':False,'starts0':True},sort_keys=True))
+ print(json.dumps({'independentCandidateCountsLower':{k:len(v) for k,v in low.items()},'independentCandidateCountsUpper':{k:len(v) for k,v in high.items()},'independentValidInboxCount':len(deleted),'actualCutoffIndependentCalculationRequired':True,'plaintextLogged':False,'starts0':True},sort_keys=True))
 if __name__=='__main__':main()
