@@ -12,6 +12,7 @@ case "${2:-v1}" in
   v2) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v2 ;;
   v3) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v3 ;;
   PG598) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg598-ordinary-process-policy-v1 ;;
+  PG598V2) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg598-ordinary-process-policy-v2 ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -30,7 +31,7 @@ for module in ('protocol','storage','bootstrap','api','web','batch'):
  name='schubert-nk-'+module;jar=name+'-0.1.0-SNAPSHOT.jar';a=[]
  for p in (old/module/jar,pathlib.Path('src')/name/'target'/jar,pathlib.Path('/home/mini/codex/project1/work/toolchain/m2/repository/dev/codex/schubert')/name/'0.1.0-SNAPSHOT'/jar):
   with zipfile.ZipFile(p)as z:a.append({n:z.read(n)for n in z.namelist()if n.endswith('.class')})
- if sys.argv[2]in ('v3','PG598') and module=='bootstrap':
+ if sys.argv[2]in ('v3','PG598','PG598V2') and module=='bootstrap':
   selected=w/('pg597-public-agent-driver-v2' if sys.argv[2]=='v3' else 'pg597-public-agent-driver-v3')
   digest='0e1e4dda99bd901da2471f619cf7afc878f96d5581335a1f048881c9dddb1214' if sys.argv[2]=='v3' else '03a51266e880357b55e4c1f0809962324da8a228cabd6580de2656bee13bea6b'
   assert hashlib.sha256((selected/'manifest.safe.json').read_bytes()).hexdigest()==digest
@@ -47,14 +48,20 @@ elif sys.argv[2]=='v2':
  log=(failed/'build.private.log').read_text();assert 'COMPILATION ERROR'in log and 'testCompile'in log
  assert not pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec').exists()
  assert hashlib.sha256((failed/'preexisting-bootstrap.exec').read_bytes()).hexdigest()==proof['moduleResults']['bootstrap']['execSha256']
-else:
+elif sys.argv[2]in ('v3','PG598'):
  p=pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec')
  assert hashlib.sha256(p.read_bytes()).hexdigest()==selected_proof['execSha256']
  p.rename(pathlib.Path(sys.argv[1])/'preexisting-bootstrap.exec')
+else:
+ failed=w/'pg598-ordinary-process-policy-v1'
+ assert (failed/'exit').read_bytes()==b'1\n' and 'COMPILATION ERROR'in (failed/'build.private.log').read_text()
+ assert not pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec').exists()
+ assert hashlib.sha256((failed/'preexisting-bootstrap.exec').read_bytes()).hexdigest()==selected_proof['execSha256']
 PY
 task_result=0
 (
 umask 0027
+python3 -B tools/quality/qualified_nullable_check.py
 ./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-bootstrap spotless:check test-compile test spotbugs:check jacoco:report jar:jar -Dtest=FixedNativeCoverageCheckpointTest,FixedNativeCoverageProfileTest,NativeCoveragePrivateFileTest,FixedNativeCoverageStopHoldTest
 ) > "$task_base/build.private.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base/exit"

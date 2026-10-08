@@ -161,8 +161,8 @@ final class NativeCoveragePrivateFile {
 
   /** PG-D396/NEXPORT598: observed data policy, never startup or namespace authority. */
   static void verifyOrdinaryProcess(
-      @Nullable FixedServiceIdentity.Value fixed,
-      @Nullable ChildStartupContext.Observed own,
+      FixedServiceIdentity.@Nullable Value fixed,
+      ChildStartupContext.@Nullable Observed own,
       @Nullable String cgroup)
       throws IOException {
     if (fixed == null || own == null || cgroup == null) throw unavailable();
@@ -176,7 +176,7 @@ final class NativeCoveragePrivateFile {
   }
 
   static void verifySameOrdinaryProcess(
-      @Nullable ChildStartupContext.Observed before, @Nullable ChildStartupContext.Observed after)
+      ChildStartupContext.@Nullable Observed before, ChildStartupContext.@Nullable Observed after)
       throws IOException {
     if (before == null || after == null) throw unavailable();
     require(before.equals(after));
