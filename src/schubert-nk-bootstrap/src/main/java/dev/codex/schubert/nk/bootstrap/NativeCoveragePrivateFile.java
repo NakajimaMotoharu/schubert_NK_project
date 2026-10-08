@@ -56,7 +56,7 @@ final class NativeCoveragePrivateFile {
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
       justification = "PG-D399 fixed native run/proc observations; no configurable namespace")
-  private static final class NativeIo implements Io {
+  static final class NativeIo implements Io {
     public InodeSecurityCalls security() {
       return LinuxInodeSecurity.create();
     }

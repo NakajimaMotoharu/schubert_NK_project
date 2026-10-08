@@ -1,5 +1,7 @@
 # PG617 exporter内部観測・実FD仕様
 
+v2実結果：source e0868154f54b02d0691dcd459705cc942732d66f、2026-10-09 02:01:58JST/21.598s/actual0、選択5suite43PT-FES0/flaky0、追加6Test、qualified73/fixtures8/violation0、NullAway compile/format/Spotbugs bootstrap0、新session1/start1791478907604/dump1791478909495。実tmpfs/held FDとモデルRootmetadataを区別し、core export全分岐成功/拒否、全scope解放後の末尾漂移拒否と元byte保持を確認。family本体残29line/8method/12branch、NativeIo残7line/7method（既fixed-path component及び別source native資格は次作業）、global100ではない。私有manifest SHA9ab0165531c109326ab99a2a6e1adbc9f9cbef396993987e7f0ae4eee9ef4170、公表evidence/provisional/PG617-export-component-v2/manifest.json、全XML/exec/jar/static/log/sourceは私有同run。BUG889 qualified annotation/BUG890 obsolete suppression・YKT658659当変更範囲を是正・再試験済、v1 43PT/static1/actual1と初期static違反は失敗のまま保全。VM新操作0、formal/WBS受入0。
+
 Program NK-OPS-001、NativeCoveragePrivateFile.export/write/Io/NativeIo。RD OPS009/TST004/SYS002004、UI212/251、SS342/343/354・SSC193/196、PG-D399、WBS P018-08.01（共通実装費 .67/1.67/3.67pp）、.02固有driverは別費を重複加算しない。正常既VMsource23b/PG600の8nativeとは別sourceのcomponent試験。正式受入/全工程完了ではない。
 
 PT-OPS-NEXPORT617001：固定六directory/cgroup/phase/nameの独立literal。Root API/Webのterminal/before-exec、ordinary API/Web/Inspector/Bootstrapのterminalを実tmpfs新tree・実FD・実byteで出力。期待literal byte、物理0600/single-link/hostUID、sync一回、全owned FD正常close/残0、全観測再照合。Root UID/GIDはmodel metadataのみ、実Root権限/Unit成功と主張しない。
@@ -8,5 +10,8 @@ PT-OPS-NEXPORT617003：祖先/targetのowner/mode/ACL/link/inode/device・filesy
 PT-OPS-NEXPORT617004：target close/reopen identity及びparent/service/run各再検査漂移。全close試行・owned FD解放後の非成功と元byte保持。
 PT-OPS-NEXPORT617005：各scope/file/sync/observer例外。正常に解放されたFDとreported close failureを区別し、ResourceScope正常を捏造しない。異常は実close後にエラーを注入し、試行と残FD0を確認。
 PT-OPS-NEXPORT617006：末尾env/cgroup/effectiveUID/NSS・ordinary全九field変化。全directory scope閉鎖後に拒否、出力はbyte一致で隔離保持。変更before/after値は独立literal。
+
+PT-OPS-NEXPORT617007：package-private固定NativeIoを実hostで検証。/run held FDが実/run同inode、Filesystem/全六属性/size/ROと独立Files読取が一致、close後handle使用拒否。current JVMのPID/boot/UID/GID/groups/cgroup/五cap/Nnpを独立/proc及びProcessHandleと照合。未知serviceやstartup権限を作らず、実Root Unit成功の代替にしない。
+PT-OPS-NEXPORT617008：実hostの固定schubert-api NSS欠落を独立getent exit2/空出力でprecondition確認し、default resolver及びdefault exportはnamespace取得前にsanitized service identity unavailable/nullcauseで拒否。稼働VMの正規NSSと混同せず、host前提が違えば試験失敗/未受入（skipによる合格0）。通常defaultの任意path/configurable UIDを導入しない。
 
 実行予定：Java25/Maven offline bootstrap selected NativeCoveragePrivateFileTest/NativeCoverageExportTest/ChildStartupContextTest/FixedNativeCoverageCheckpointTest/FixedServiceIdentityTest、format/NullAway/Spotbugs、既exec保全→absent/newsession・XML/coverage/sourceguard/hash。全source固定後コマンド、実exit/日時・XML/FES・静的/coverage未達・BUG/YKT・証跡manifestを結果時追記。失敗済み実装仕様違反は修正前915、TDD未実装初期compile/testは未完として保持。全scope/regression/nativeは別sourceへ旧成功を流用しない。

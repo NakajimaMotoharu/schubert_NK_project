@@ -304,6 +304,76 @@ final class NativeCoverageExportTest {
     }
   }
 
+  @Test
+  void nexport617007NativeAdapterReadsOnlyFixedRunAndCurrentHostObservations() throws Exception {
+    var io = new NativeCoveragePrivateFile.NativeIo();
+    assertEquals(System.getenv("INVOCATION_ID"), io.invocation());
+    assertEquals(Files.readString(Path.of("/proc/self/cgroup")), io.cgroup());
+    var status = new HashMap<String, String>();
+    for (String line : Files.readAllLines(Path.of("/proc/self/status"))) {
+      int separator = line.indexOf(':');
+      if (separator > 0)
+        status.put(line.substring(0, separator), line.substring(separator + 1).strip());
+    }
+    long uid = Long.parseLong(status.get("Uid").split("\\s+")[1]);
+    long gid = Long.parseLong(status.get("Gid").split("\\s+")[1]);
+    assertEquals(uid, io.security().effectiveUid());
+    var observed = io.ordinary();
+    assertEquals(ProcessHandle.current().pid(), observed.pid());
+    assertEquals(
+        Files.readString(Path.of("/proc/sys/kernel/random/boot_id")).strip(), observed.boot());
+    assertEquals(uid, observed.uid());
+    assertEquals(gid, observed.gid());
+    assertEquals(
+        Arrays.stream(status.get("Groups").split("\\s+")).map(Long::parseLong).sorted().toList(),
+        observed.groups());
+    assertEquals(Files.readString(Path.of("/proc/self/cgroup")), observed.cgroup());
+    assertEquals(status.get("NoNewPrivs").equals("1"), observed.noNewPrivileges());
+    assertEquals(
+        List.of("CapInh", "CapPrm", "CapEff", "CapBnd", "CapAmb").stream()
+            .allMatch(key -> status.get(key).equals("0000000000000000")),
+        observed.zeroCapabilities());
+    var directory = io.openRun();
+    try (directory) {
+      directory.atDirectory(
+          held -> {
+            assertTrue(Files.isSameFile(Path.of("/run"), held));
+            assertEquals(Files.getFileStore(Path.of("/run")).type(), io.filesystem(held));
+            assertEquals(
+                Files.readAttributes(Path.of("/run"), "unix:uid,gid,mode,nlink,dev,ino"),
+                io.attributes(held));
+            assertEquals(Files.getAttribute(Path.of("/run"), "unix:size"), io.size(held));
+            assertEquals(
+                Files.getFileStore(Path.of("/run")).isReadOnly(),
+                io.security().readOnlyFilesystem(held));
+            return true;
+          });
+    }
+    assertThrows(StorageIoException.class, () -> directory.atDirectory(held -> true));
+  }
+
+  @Test
+  void nexport617008DefaultExportRejectsActualMissingFixedNssBeforeNamespaceWrite()
+      throws Exception {
+    var query = new ProcessBuilder("/usr/bin/getent", "passwd", "schubert-api").start();
+    assertEquals(2, query.waitFor(), "host fixture requires no production service NSS account");
+    assertEquals(0, query.getInputStream().readAllBytes().length);
+    var io = new NativeCoveragePrivateFile.NativeIo();
+    assertEquals(
+        "service identity unavailable",
+        assertThrows(IOException.class, () -> io.resolver().resolve(ServiceConfigFiles.Service.API))
+            .getMessage());
+    var error =
+        assertThrows(
+            IOException.class,
+            () ->
+                NativeCoveragePrivateFile.export(
+                    profile(ROLES.get(0)), INV + ".terminal.exec", GOLDEN));
+    assertEquals("service identity unavailable", error.getMessage());
+    assertNull(error.getCause());
+    // Independent getent exit2 proves the rejecting prerequisite; no fake role/UID grant or write.
+  }
+
   private static final class Fixture implements NativeCoveragePrivateFile.Io {
     final Path run, service, parent, target;
     final Role role;

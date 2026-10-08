@@ -6,7 +6,7 @@ test "$#" = 1
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg617-export-component-v2
+task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg617-export-component-v3
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
@@ -17,7 +17,7 @@ git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum >
 python3 -B - "$task_base" <<'PY'
 import hashlib,pathlib,sys
 root=pathlib.Path(sys.argv[1]);old=pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec')
-assert old.is_file() and hashlib.sha256(old.read_bytes()).hexdigest()=='de38b5aae542a5f6d7118a01c903c856740a9c8d718fb9a0940e39133aa6b8e2'
+assert old.is_file() and hashlib.sha256(old.read_bytes()).hexdigest()=='a3ace331fe65096ab08963739d1c1fa9c40846d776cce221ebee72c89d57dbad'
 preserved=root/'preexisting-bootstrap.exec';assert not preserved.exists()
 old.rename(preserved);assert not old.exists()
 PY
