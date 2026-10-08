@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC218（2026-10-08、SSC187内部admission補足）：完成証拠のBackupObservationはList.copyOfした二rowと同runを上流constructorで固定する。MorningCompletionEvidenceは、nonnull確定後、全Backup rowのrunをbegins.database.runへ照合してから、begins二run・完全DB/Config handle・Backup target・outcome/manifest/exitcodeを合同し、各Backup resultとCleanup/Expiryのrun/result/receiptを検査する。handle完全等値から暗黙に導かれるrunを後段で再び拒否条件にせず、異runの有効typed pairと同run異handleをそれぞれ独立拒否する。全既拒否条件・固定diagnostic/redaction/純data性・正常/異常入力の受入集合を保持し、guard削除/人工反射/coverage除外・DBやauthority再構成はしない。独立正常/各境界/上流immutable pairの再発防止、当新sourceのfresh全回帰/静的解析/四counterと必要native同source再束縛を行い、旧別source成功を流用しない。RD/UI/DIF/画面/電文/DB契約は不変更。設計公開は実装・正式品質完了ではない。
+
 SSC203（2026-10-07、BUG799/YKT570、SSC185内部境界補足）：完了の各compound DB read（Backup観測・Cleanup観測・Cleanup元参照全列/seal・Expiry再読）は、その直前/正常帰還直後のTX外で全Root/保持原本graph/同ordinary API-Web-Caddy世代・identity/socket/info/ready/run整合を独立に再認証する。SQLごとのTX内owner callbackは同owner-thread/alive/未確定完了禁止、同保持Sessionの六namespace inode/security、Root/M/A、元残budgetの継続検査を行い、全graph/HTTPの同じ証明を毎SQLへ再帰展開せず、DB再入・commit/rollbackはしない。全graph/全row/seal/receiptの実再読、SSC187各typed intent退役前後と原本DONE直前の全証跡再読は維持する。cache/別Connection/guard削除/no-op/期限延長/UNKNOWN正常化を禁止する。compound後の変化は成功を返さず隔離、SQL中の所有/namespace/期限失効も非成功。RD/UI/DIF不変更、独立境界・失効・再入拒否PTと変更群fresh回帰/実nativeを必要とする。
 ## SSC196 真正Inspector・Bootstrapの隔離PT terminal採取（2026-10-06）
 
