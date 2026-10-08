@@ -121,6 +121,15 @@ final class MorningDatabaseSessionTest {
   }
 
   private static String mdb588Audit(Connection observer, BatchRun run) throws SQLException {
+    try (var query = observer.createStatement();
+        var role =
+            query.executeQuery("select current_database(),session_user::text,current_user::text")) {
+      assertTrue(role.next());
+      assertEquals("schubert_nk", role.getString(1));
+      assertEquals("pgpt_admin", role.getString(2));
+      assertEquals("pgpt_admin", role.getString(3));
+      assertFalse(role.next());
+    }
     try (var statement =
         observer.prepareStatement(
             "select coalesce(jsonb_agg(to_jsonb(t) order by id),'[]'::jsonb)::text from schubert.batch_runs t where run_id=?")) {
@@ -158,7 +167,7 @@ final class MorningDatabaseSessionTest {
               return value;
             },
             c -> {});
-    try (var observer = db.admin()) {
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
       subject.execute(
           credential(),
           session -> {
@@ -230,11 +239,11 @@ final class MorningDatabaseSessionTest {
     var run =
         new BatchRun(
             UUID.fromString("58800000-2222-4333-8444-555555555552"),
-            Instant.parse("2026-10-07T15:00:00Z"));
-    Instant began = Instant.parse("2026-10-08T00:00:00Z");
+            Instant.parse("2026-10-06T15:00:00Z"));
+    Instant began = Instant.parse("2026-10-07T00:00:10Z");
     var subject =
         new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
-    try (var observer = db.admin()) {
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
       subject.execute(
           credential(),
           session -> {
@@ -244,10 +253,11 @@ final class MorningDatabaseSessionTest {
                 30,
                 session.handoffCleanup(
                     () -> {
-                      try (var child = db.open("schubert_batch");
+                      try (var child =
+                              DriverManager.getConnection(actualUrl, "schubert_batch", "");
                           var statement =
                               child.prepareStatement(
-                                  "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values (588201,?,'2026-10-08','CLEAN_NOTIFICATION',1,'2026-10-08T00:00:00Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-08','CLEAN_QUESTION',1,'2026-10-08T00:00:00Z','2026-10-08T00:00:01Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch command failed')")) {
+                                  "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values (588201,?,'2026-10-07','CLEAN_NOTIFICATION',1,'2026-10-07T00:00:11Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-07','CLEAN_QUESTION',1,'2026-10-07T00:00:11Z','2026-10-07T00:00:12Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch command failed')")) {
                         assertTrue(advisory(child));
                         statement.setObject(1, run.id());
                         statement.setObject(2, run.id());
@@ -263,13 +273,19 @@ final class MorningDatabaseSessionTest {
               var first =
                   new CleanupTerminalRepository.RejectedEntry(
                       new BatchStepAttempt(
-                          588201, run, BatchStep.CLEAN_NOTIFICATION, 1, began, false),
+                          588201,
+                          run,
+                          BatchStep.CLEAN_NOTIFICATION,
+                          1,
+                          began.plusSeconds(1),
+                          false),
                       Optional.empty(),
                       Optional.empty());
               var second =
                   new CleanupTerminalRepository.RejectedEntry(
-                      new BatchStepAttempt(588202, run, BatchStep.CLEAN_QUESTION, 1, began, false),
-                      Optional.of(began.plusSeconds(1)),
+                      new BatchStepAttempt(
+                          588202, run, BatchStep.CLEAN_QUESTION, 1, began.plusSeconds(1), false),
+                      Optional.of(began.plusSeconds(2)),
                       Optional.of(
                           new BatchStepResult(
                               BatchStepResult.Status.FAILED,
@@ -305,7 +321,7 @@ final class MorningDatabaseSessionTest {
     var run =
         new BatchRun(
             UUID.fromString("58800000-2222-4333-8444-555555555553"),
-            Instant.parse("2026-10-07T15:00:00Z"));
+            Instant.parse("2026-10-05T15:00:00Z"));
     var retained = new AtomicReference<Connection>();
     var subject =
         new MorningDatabaseSession(
@@ -320,7 +336,7 @@ final class MorningDatabaseSessionTest {
     subject.execute(
         credential(),
         session -> {
-          var pair = session.beginBackup(run, Instant.parse("2026-10-08T00:00:00Z"), false);
+          var pair = session.beginBackup(run, Instant.parse("2026-10-06T00:00:20Z"), false);
           confirmActualFailedPair(session, pair);
           assertEquals(30, session.handoffCleanup(() -> 30));
           dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner = () -> 5_000_000_000L;

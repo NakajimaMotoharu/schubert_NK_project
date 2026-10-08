@@ -17,6 +17,10 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg588-session-readback-v1
     task_prior=pg587-access-returns-v1
     ;;
+  PG588V2)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg588-session-readback-v2
+    task_prior=pg587-access-returns-v1
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -26,7 +30,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 date --iso-8601=seconds > "$task_base/started"
 git rev-parse HEAD > "$task_base/source"
 git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum > "$task_base/source-files.sha256"
-python3 -B - "$task_base" "$task_prior" <<'PY'
+python3 -B - "$task_base" "$task_prior" "$task_profile" <<'PY'
 import hashlib,json,pathlib,sys,zipfile
 base=pathlib.Path(sys.argv[1]);w=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1')
@@ -38,7 +42,12 @@ for module in ('protocol','storage','bootstrap','api','web','batch'):
   with zipfile.ZipFile(p)as z:values.append({n:z.read(n)for n in z.namelist()if n.endswith('.class')})
  assert values[0]==values[1]==values[2]and values[0]
 p=pathlib.Path('src/schubert-nk-batch/target/jacoco.exec')
-assert hashlib.sha256(p.read_bytes()).hexdigest()==manifest['selectedExecSha256'];p.rename(base/'preexisting-selected-batch.exec')
+expected=manifest['selectedExecSha256']
+if sys.argv[3]=='PG588V2':
+ failed=w/'pg588-session-readback-v1'
+ assert (failed/'source').read_text().strip()=='4f03d7af68a5d2d942104ca649859675fc405987' and (failed/'exit').read_bytes()==b'1\n'
+ expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
+assert hashlib.sha256(p.read_bytes()).hexdigest()==expected;p.rename(base/'preexisting-selected-batch.exec')
 PY
 task_result=0
 (
