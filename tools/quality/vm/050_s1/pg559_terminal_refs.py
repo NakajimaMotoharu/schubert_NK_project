@@ -3,7 +3,7 @@ import ast,datetime,hashlib,json,os,pathlib,re,stat,subprocess,sys,time
 import dbus
 from pg529_dependency_graph import dependency_graph
 from pg556_parent_receipt import completed
-SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg559-terminal-readback-v1')
+SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg559-terminal-readback-v2')
 BOOT='cc9ed874-7f4f-450e-a188-8de1e42c8441'
 PRESERVED=pathlib.Path('/var/lib/pgpt-s1-preservation/pg558-current-owned-handoff-v1')
 BASE_SHA='51c4c14e2828fca4bf0703cbc8db2cab2feddb3e1b02af4da8b202b2f8e23cb1'
@@ -27,6 +27,13 @@ def peer_query(backend):
   "select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and objsubid=1 and granted;")
 def peer_counts_valid(present,lines):
  return type(present)is bool and type(lines)is list and lines==([b'1',b'1',b'0',b'1']if present else[b'0',b'0',b'0',b'0'])
+def namespace_valid(value):
+ if type(value)is not dict or set(value)!={'backup-request','cleanup-request','expiry-request','runtime-parent'}:return False
+ for n,v in value.items():
+  if type(v)is not dict or set(v)!={'metadata','entries','xattrs'}or v['entries']!=[]or type(v['entries'])is not list or v['xattrs']!=[]or type(v['xattrs'])is not list:return False
+  m=v['metadata'];mode=stat.S_IFDIR|(0o755 if n=='runtime-parent'else 0o700)
+  if type(m)is not list or len(m)!=9 or any(type(x)is not int or x<0 for x in m)or m[1]<1 or m[2:5]!=[0,0,mode]:return False
+ return True
 def main():
  require(os.geteuid()==0 and len(sys.argv)==3 and sys.argv[1]=='readback'and sys.argv[2].isdigit());backend=int(sys.argv[2]);os.umask(0o077)
  require(pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==BOOT)
@@ -72,12 +79,18 @@ def main():
   trees={k:tree(pathlib.Path(p))for k,p in [('startup','/run/schubert-nk/startup'),('originals','/var/lib/schubert-nk/maintenance'),('backup','/srv/schubert-nk/backup'),('native','/run/schubert-nk/pt-coverage'),('oldProofs','/var/lib/pgpt-s1-preservation/pg557-native-stop-v1')]};require(all(v==baseline[k]for k,v in trees.items()))
   broker_raw=strict(PRESERVED/'broker-full-journal.private.jsonl',0o600,4194304);require(hashlib.sha256(broker_raw).hexdigest()=='5bc1c91076d2ce950bcc4f231d02a53b5ad944d0c18f65931f6308c40844bdae')
   broker_current=command(['/usr/bin/journalctl','--boot='+BOOT.replace('-',''),'_SYSTEMD_INVOCATION_ID='+baseline['units']['artemis.service']['InvocationID'],'-o','json','--no-pager']);require([json.loads(l)for l in broker_raw.splitlines()]==[json.loads(l)for l in broker_current.splitlines()])
-  require(not pathlib.Path('/run/systemd/system/schubert-nk-morning-controller.service.d/pg492-once-resume.conf').exists())
+  runtime_parent=pathlib.Path('/run/systemd/system/schubert-nk-morning-controller.service.d')
+  require(not os.path.lexists(runtime_parent/'pg492-once-resume.conf'))
+  namespace={}
+  for n,p in {**{n:pathlib.Path('/run/schubert-nk')/n for n in ('backup-request','cleanup-request','expiry-request')},'runtime-parent':runtime_parent}.items():
+   m=metadata(p);namespace[n]={'metadata':m,'entries':sorted(c.name for c in p.iterdir()),'xattrs':os.listxattr(p)};require(m==metadata(p))
+  require(namespace_valid(namespace))
   require(str(pathlib.Path('/opt/schubert-nk/current').readlink())=='/opt/schubert-nk/releases/0.1.0-PG548')
   require(current=={u:show(u,fields)for u in units}and owner()==held);connection(present)
-  return {'units':current,'configuration':configuration,'rows':data,'dependencies':dependencies,'pid1Stop':pid1,'parentPid1':journal,'runtimeAbsent':True,**trees}
+  return {'units':current,'configuration':configuration,'rows':data,'dependencies':dependencies,'pid1Stop':pid1,'parentPid1':journal,'runtimeAbsent':True,'namespace':namespace,**trees}
  def save(name,value):
   with (SAVE/name).open('x')as f:os.fchmod(f.fileno(),0o600);json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+  fd=os.open(SAVE,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);os.fsync(fd);os.close(fd)
  before=snapshot(True);require(before==snapshot(True));save('before.private.json',before);print('REF_READY',flush=True)
  for line in sys.stdin.buffer:
   action=line.rstrip(b'\n').decode('ascii');require(action in ('before','release'));require(snapshot(action!='release')==before)

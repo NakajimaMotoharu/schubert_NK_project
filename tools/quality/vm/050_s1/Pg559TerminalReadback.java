@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 /** SS341343/SSC198 fixed same-cohort owned TERM only. No service start/DB/epoch mutation. */
 public final class Pg559TerminalReadback {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg559-terminal-tools-v1");
-  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg559-terminal-readback-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg559-terminal-tools-v2");
+  static final Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg559-terminal-readback-v2");
   static String phase="PREFLIGHT";
   static void require(boolean value){if(!value)throw new IllegalStateException("fixed completed readback refused");}
   static void retain(Throwable failure){

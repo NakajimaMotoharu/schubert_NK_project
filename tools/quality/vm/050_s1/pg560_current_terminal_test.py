@@ -1,5 +1,5 @@
 """BUG851/YKT620: actual oneshot dependency chain, fixed10 matrix, JSON field order only."""
-import ast,copy,json,hashlib,pathlib,types
+import ast,copy,json,hashlib,pathlib
 import pg557_native_owned_stop as h
 R=pathlib.Path(__file__).parent;source=ast.parse((R/'pg560_current_terminal_handoff.py').read_text());env={'h':h,'json':json,'hashlib':hashlib,'FOUR':h.ORDER[:4]}
 names={'require','terminal_matrix','journal_value_hash'}
