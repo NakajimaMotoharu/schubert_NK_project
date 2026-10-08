@@ -23,7 +23,7 @@ require(hashlib.sha256(old.read_bytes()).hexdigest()=='e4cad29a26fb9592bc5cf6615
 spec=importlib.util.spec_from_file_location('sealed_preflight_library',old);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 namespace={'__name__':'independent_cleanup_library'};exec(compile(ORACLE,'<independent SS cleanup selectors>','exec'),namespace)
 guard={'__name__':'independent_prior_history_guard'};exec(compile(GUARD,'<fixed prior-history contract>','exec'),guard)
-root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg605-fresh-parent-v1')
+root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg605-fresh-parent-v2')
 release=pathlib.Path('/opt/schubert-nk/current');raw=(release/'RELEASE-MANIFEST.json').read_bytes()
 require(release.readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG600')and hashlib.sha256(raw).hexdigest()==DIGEST and json.loads(raw)['source']['commit']==SOURCE)
 def connection():
@@ -37,7 +37,8 @@ def connection():
     d=f[5].split(':');require((int(d[0],16),int(d[1],16),int(d[2]))!=(os.major(s.st_dev),os.minor(s.st_dev),s.st_ino))
 def rows():
  q="begin isolation level repeatable read read only;set local timezone='UTC';"
- q+="select json_build_object('lower',now(),'upper',now()+interval '30 minutes','day',(now()at time zone 'Asia/Tokyo')::date);"
+ # Admission is finite two minutes; the parent's independent runtime budget remains 1800s.
+ q+="select json_build_object('lower',now(),'upper',now()+interval '2 minutes','day',(now()at time zone 'Asia/Tokyo')::date);"
  for t in m.TABLES:q+="select json_build_object('table','"+t+"','rows',coalesce(jsonb_agg(j order by j::text),'[]'::jsonb))from(select to_jsonb(t)j from "+t+" t)q;"
  lines=m.command(['sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',q+'commit;']).splitlines();require(len(lines)==25)
  result={}
@@ -97,11 +98,11 @@ def main():
     mode = sys.argv[1]
     assert subprocess.check_output(['git', 'status', '--porcelain'], cwd=R) == b''
     if mode == 'start':
-        assert (W / 'pg605-prepare-v1.exit').read_bytes() == b'0\n'
+        assert (W / 'pg605-prepare-v2.exit').read_bytes() == b'0\n'
         assert (W / 'pg606-observer-v1.started').exists() and not (W / 'pg606-observer-v1.exit').exists()
         first = json.loads((W / 'pg606-watch-private-v1.jsonl').open().readline())
         assert first == {'observerPrepared': True, 'source': SOURCE, 'manifestSha256': DIGEST, 'starts0': True}
-    base = W / ('pg605-' + mode + '-v1')
+    base = W / ('pg605-' + mode + '-v2')
     assert not any(os.path.lexists(str(base) + '.' + s) for s in ('private.log', 'exit', 'safe.json'))
     ssh = ['ssh', '-i', str(P / 'vm-access'), '-oBatchMode=yes', '-oIdentitiesOnly=yes',
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile=' + str(P / 'known_hosts'),

@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
         for day in (None,False,'2026-10-08','2026-10-10'):
             self.assertFalse(prior_history(rows,day))
 
-    def test_literal229_only_stable_thirty_minutes(self):
+    def test_literal229_only_stable_admission_bounds(self):
         good={k:[] for k in ('notifications','questions','auth_sessions','login_ip_attempts','web_http_sessions',
             'schubert.mq_outbox','schubert_web_session.web_log_outbox','app_logs','batch_runs',
             'schubert.inbox_inspection_progress','schubert.log_cleanup_progress','web_receipt_references','inbox_scan_candidates')}
@@ -54,6 +54,9 @@ class Test(unittest.TestCase):
         self.assertEqual(payload.count(start),1)
         self.assertLess(payload.index("persist('external-start-guard.private.json'"),payload.index(start))
         self.assertIn("'originalBudgetSeconds':1800",payload)
+        self.assertIn("now()+interval '2 minutes'",payload)
+        self.assertIn("datetime.datetime.fromisoformat(before['bounds']['upper'])",payload)
+        self.assertIn('pg605-fresh-parent-v2',payload)
         self.assertIn("'--resume'not in execstart",payload)
         self.assertIn("'priorBatchRows':482",payload)
         self.assertIn('pg604-completed-activate-v1/after.private.json',payload)
