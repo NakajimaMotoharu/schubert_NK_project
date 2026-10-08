@@ -1,5 +1,9 @@
 # PG600 署名candidate生成仕様
 
+## 実結果（2026-10-08 23:04:26JST）
+
+operator c15125e31d4cf648765a5ff0c8d46d0a2a8ab361、candidate23b。独立二tool test/Pyflakes0→新only生成actual0、signature64byte/既pin検証成功、187artifact/schema028/28SQL/history29・許容三class変更三interface追加・三bootstrap配布同byte。BOMa6342b8a764565cdfea256a781029d419888c7b58c0c3f9b00685e30feaa786f、署名SHA9839b98f…、host gate cdd97163…、public `evidence/provisional/PG600-candidate-build-v1/manifest.json`。changed payload12はfresh archiveのZIP metadataを含み、class変更は独立に三件だけを確認。guest mutation0/current/permit/DB/Unit変更0、未配備/正式未受入。生成済出力とsignatureを再作成しない。
+
 WBS-P018-02既共有枠0.5/1.5/3.5週次ppを着手前固定（PG599全回帰K01別、重複費0）。分類5：PG-D397、SS343既code-only/187artifact/schema028の候補生成契約内、起動権限・SS/RD/UI/oracle変更なし。候補を作るだけでcurrent/approval/permit/DB/Unit/親を変更しない。
 
 対象 `pg600_candidate_contract.py` / `pg600_candidate_build.py`。Test PT-OPS-PG600-C001：独立literal六module・許容三変更三interface追加をcount12で受入、module欠落/追加・class除去/未知追加/追加欠落/他変更/必須変更無し/空/不正digest/不正名/NULLを拒否。C002：認証済旧BOMa224の全187実payload/hash/size・symlink無し/全inventoryと新PG5993457/511/六静的0/全XMLhash/frozenjarを合同し、全1603byteの限定deltaを検査。旧rowを新rowとaliasにせず独立に保持する。
