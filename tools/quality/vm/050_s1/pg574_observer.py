@@ -18,13 +18,13 @@ def main():
     assert sys.argv[1:] in (['stage'], ['watch'])
     ssh = ['ssh','-i',str(P/'vm-access'),'-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts'),'-p','22222','ubuntu@127.0.0.1']
     if sys.argv[1] == 'stage':
-        assert (W/'pg573-prepare-v1.exit').read_bytes()==b'0\n'
+        assert (W/'pg573-prepare-v2.exit').read_bytes()==b'0\n'
         files={name:(R/name).read_bytes()for name in ('pg554_watch_parent.py','pg554_stable_actor.py','pg462_observer_identity.py')}
         payload='FILES='+repr(files)+'\nDEST='+repr(DEST)+'\n'+r'''
 import hashlib,json,os,pathlib,subprocess
 os.umask(0o077);assert os.geteuid()==0
 assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441'
-before=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg573-fresh-parent-v1/before.private.json').read_bytes())
+before=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg573-fresh-parent-v2/before.private.json').read_bytes())
 for unit,v in before['units'].items():
  current=dict(l.split('=',1)for l in subprocess.check_output(['systemctl','show',unit,'--property='+','.join(v)],text=True).splitlines());assert current==v
 root=pathlib.Path(DEST);assert not os.path.lexists(root);root.mkdir(mode=0o700)

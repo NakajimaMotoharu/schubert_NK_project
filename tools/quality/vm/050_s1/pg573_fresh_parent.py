@@ -23,7 +23,7 @@ require(hashlib.sha256(old.read_bytes()).hexdigest()=='e4cad29a26fb9592bc5cf6615
 spec=importlib.util.spec_from_file_location('sealed_preflight_library',old);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 namespace={'__name__':'independent_cleanup_library'};exec(compile(ORACLE,'<independent SS cleanup selectors>','exec'),namespace)
 guard={'__name__':'independent_prior_history_guard'};exec(compile(GUARD,'<fixed prior-history contract>','exec'),guard)
-root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg573-fresh-parent-v1')
+root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg573-fresh-parent-v2')
 release=pathlib.Path('/opt/schubert-nk/current');raw=(release/'RELEASE-MANIFEST.json').read_bytes()
 require(release.readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG548')and hashlib.sha256(raw).hexdigest()==DIGEST and json.loads(raw)['source']['commit']==SOURCE)
 def connection():
@@ -74,7 +74,7 @@ if MODE=='prepare':
   else:
    fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY);os.fsync(fd);os.close(fd)
  persist('prepared.private.json',{'beforeSha256':hashlib.sha256((root/'before.private.json').read_bytes()).hexdigest(),'source':SOURCE,'starts0':True,'priorToday10Preserved':True})
- print(json.dumps({'actualExit':0,'prepared':True,'starts0':True,'beforeSha256':hashlib.sha256((root/'before.private.json').read_bytes()).hexdigest(),'cleanupCandidates':0,'priorBatchRows':472,'backupEligibleUpperBound':retention['eligibleUpperBound']}))
+ print(json.dumps({'actualExit':0,'prepared':True,'starts0':True,'beforeSha256':hashlib.sha256((root/'before.private.json').read_bytes()).hexdigest(),'webSessionCleanupCandidates':115,'otherCleanupCandidates':0,'priorBatchRows':472,'backupEligibleUpperBound':retention['eligibleUpperBound']}))
 else:
  require(MODE=='start'and root.is_dir()and not os.path.lexists(root/'external-start-guard.private.json'))
  before=json.loads((root/'before.private.json').read_bytes());prepared=json.loads((root/'prepared.private.json').read_bytes())
@@ -95,11 +95,11 @@ def main():
     mode = sys.argv[1]
     assert subprocess.check_output(['git', 'status', '--porcelain'], cwd=R) == b''
     if mode == 'start':
-        assert (W / 'pg573-prepare-v1.exit').read_bytes() == b'0\n'
+        assert (W / 'pg573-prepare-v2.exit').read_bytes() == b'0\n'
         assert (W / 'pg574-observer-v1.started').exists() and not (W / 'pg574-observer-v1.exit').exists()
         first = json.loads((W / 'pg574-watch-private-v1.jsonl').open().readline())
         assert first == {'observerPrepared': True, 'source': SOURCE, 'manifestSha256': DIGEST, 'starts0': True}
-    base = W / ('pg573-' + mode + '-v1')
+    base = W / ('pg573-' + mode + '-v2')
     assert not any(os.path.lexists(str(base) + '.' + s) for s in ('private.log', 'exit', 'safe.json'))
     ssh = ['ssh', '-i', str(P / 'vm-access'), '-oBatchMode=yes', '-oIdentitiesOnly=yes',
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile=' + str(P / 'known_hosts'),

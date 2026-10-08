@@ -7,4 +7,8 @@ def prior_history(rows, day):
 
 
 def empty_oracle(low, high):
-    return type(low) is dict and type(high) is dict and bool(low) and low == high and all(type(v) is list and v == [] for v in low.values())
+    categories={'notifications','questions','auth_sessions','login_ip_attempts','web_http_sessions','schubert.mq_outbox','schubert_web_session.web_log_outbox','app_logs','batch_runs','schubert.inbox_inspection_progress','schubert.log_cleanup_progress','web_receipt_references','inbox_scan_candidates'}
+    if type(low) is not dict or type(high) is not dict or set(low)!=categories or low!=high: return False
+    if any(type(v) is not list for v in low.values()): return False
+    sessions=low['web_http_sessions']
+    return len(sessions)==115 and all(type(v)is str and bool(v)for v in sessions) and len(set(sessions))==115 and all(v==[]for k,v in low.items()if k!='web_http_sessions')
