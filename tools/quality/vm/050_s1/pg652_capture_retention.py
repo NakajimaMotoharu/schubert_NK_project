@@ -31,11 +31,11 @@ s=bundle.lstat();require(stat.S_ISDIR(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMO
 require({p.name for p in bundle.iterdir()}=={'MANIFEST.json','schubert_nk.dump','config.tar','credentials.tar.age'})
 values={}
 for name in ('MANIFEST.json','schubert_nk.dump','config.tar','credentials.tar.age'):
- p=bundle/name;first=metadata(p);require(stat.S_ISREG(first[4])and first[5]==1 and 0<first[6]<=16777216 and not os.listxattr(p))
+ file_path=bundle/name;first=metadata(file_path);require(stat.S_ISREG(first[4])and first[5]==1 and 0<first[6]<=16777216 and not os.listxattr(file_path))
  require((first[2],first[3],stat.S_IMODE(first[4]))==((992,977,0o600)if name=='schubert_nk.dump'else(0,0,0o600)))
- fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ fd=os.open(file_path,os.O_RDONLY|os.O_NOFOLLOW)
  with os.fdopen(fd,'rb')as f:values[name]=f.read()
- require(metadata(p)==first and hashlib.sha256(values[name]).hexdigest()==backup[str(p)]['sha256'])
+ require(metadata(file_path)==first and hashlib.sha256(values[name]).hexdigest()==backup[str(file_path)]['sha256'])
 expected=json.loads(strict(fresh/'cleanup-oracle.private.json',0o600,33554432))['retention']
 summary=env['validate'](old['rows'],n,old['backup'],backup,expected,values['MANIFEST.json'],{k:v for k,v in values.items()if k!='MANIFEST.json'},anchor,old['bounds'])
 require(hashlib.sha256(pathlib.Path('/etc/schubert-nk/backup-age-recipient').read_bytes()).hexdigest()==json.loads(values['MANIFEST.json'])['recipientSha256'])
@@ -43,7 +43,10 @@ restore=subprocess.run(['/usr/lib/postgresql/18/bin/pg_restore','--list',str(bun
 summary.update(actualDumpList0=True,newFileSecurity=True)
 '''
     assert raw.count(marker)==1;raw=raw.replace(marker,replacement)
-    return raw
+    raw=raw.replace('pg652-retention-post-v1','pg652-retention-post-v2').replace('PG639-resume-post-v2','PG652-retention-post-v2')
+    marker="root.mkdir(mode=0o700)"
+    assert raw.count(marker)==1
+    return raw.replace(marker,"require(type(p)is dict and p['MainPID']=='1826480')\n"+marker)
 
 
 def main():
@@ -52,14 +55,14 @@ def main():
     assert(W/'pg650-start-v2.exit').read_bytes()==b'0\n'
     ssh=['ssh','-i',str(P/'vm-access'),'-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts'),'-p','22222','ubuntu@127.0.0.1','sudo -n python3 -B -']
     code='ORACLE='+repr((R/'pg652_retention_oracle.py').read_text())+'\n'+payload()
-    with(W/'pg652-retention-post-v1.private.log').open('xb')as log:
+    with(W/'pg652-retention-post-v2.private.log').open('xb')as log:
         result=subprocess.run(ssh,input=code.encode(),stdout=subprocess.PIPE,stderr=log);log.flush();os.fsync(log.fileno())
-    with(W/'pg652-retention-post-v1.exit').open('x')as f:f.write(str(result.returncode)+'\n')
+    with(W/'pg652-retention-post-v2.exit').open('x')as f:f.write(str(result.returncode)+'\n')
     if result.returncode==0:
         safe=json.loads(result.stdout);safe['operatorSource']=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-        with(W/'pg652-retention-post-v1.safe.json').open('x')as f:json.dump(safe,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+        with(W/'pg652-retention-post-v2.safe.json').open('x')as f:json.dump(safe,f,sort_keys=True);f.flush();os.fsync(f.fileno())
         print(json.dumps(safe))
-    else:print(json.dumps({'actualExit':result.returncode,'privateLogSha256':hashlib.sha256((W/'pg652-retention-post-v1.private.log').read_bytes()).hexdigest()}))
+    else:print(json.dumps({'actualExit':result.returncode,'privateLogSha256':hashlib.sha256((W/'pg652-retention-post-v2.private.log').read_bytes()).hexdigest()}))
     raise SystemExit(result.returncode)
 
 

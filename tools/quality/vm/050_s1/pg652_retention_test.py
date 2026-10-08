@@ -1,5 +1,6 @@
 """Literal new-success/skip/byte/retention normal and tamper vectors."""
 import copy
+import ast
 import hashlib
 import json
 import stat
@@ -62,10 +63,14 @@ class Retention(unittest.TestCase):
 
     def test_readonly_current_generation_and_all_row_windows(self):
         v=payload();compile(v,'<current retention capture>','exec')
-        for x in ('1826480','095f6d1d7f8442b7b2b44ae59a4314f5','107901545407','pg650-fresh-parent-v2','==514','<=514','pg652-retention-post-v1','summary=env[',"['retention']",'pg_restore', 'n==rows()'):
+        for x in ('1826480','095f6d1d7f8442b7b2b44ae59a4314f5','107901545407','pg650-fresh-parent-v2','==514','<=514','pg652-retention-post-v2','summary=env[',"['retention']",'pg_restore', 'n==rows()',"require(type(p)is dict",'file_path=bundle/name'):
             self.assertIn(x,v)
-        for x in ('daemon-reload','.unlink(',"['systemctl','start'","['systemctl','stop'"):
+        for x in ('daemon-reload','.unlink(',"['systemctl','start'","['systemctl','stop'",'PG639-resume-post-v2','pg652-retention-post-v1'):
             self.assertNotIn(x,v)
+        tree=ast.parse(v)
+        assigned=[n for n in ast.walk(tree)if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='p'for t in n.targets)]
+        self.assertEqual(len(assigned),1);self.assertIsInstance(assigned[0].value,ast.Call)
+        self.assertEqual(assigned[0].value.func.id,'parent')
 
 
 if __name__=='__main__':unittest.main()
