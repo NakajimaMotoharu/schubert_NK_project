@@ -1,0 +1,77 @@
+{
+  "run": "PG640-644-public-v1",
+  "recordedJST": "2026-10-09T06:00:03.180011+09:00",
+  "branch": "dev-foundation",
+  "operatorHead": "61281410b0e72c58aa0f06b6dff91811629ab022",
+  "productionSource": "36fe7a0b938489d61d17d49c1c30a6fbbef699d5",
+  "release": "0.1.0-PG631",
+  "manifestSha256": "57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe",
+  "actualExit": {
+    "genuineDone": 0,
+    "compile": 0,
+    "cli": 0,
+    "ownedStop": 0,
+    "postV2": 0,
+    "native": 0
+  },
+  "commands": [
+    "pg640_capture_done.py",
+    "pg642_compile.py",
+    "pg642_native_stop.py",
+    "pg643_terminal_final.py",
+    "pg644_native_counter.py"
+  ],
+  "files": {
+    "pg640-completed-readonly-v1.safe.json": "2744be7d909eee9660298de0b600eb49cd61c2218d4b8606b3c1f41c33cb78bc",
+    "pg642-native-build-v1.safe.json": "a4e7df34a4ed6792fdd670f1a020b507f1e081f5a94d9e2e77d0dad195f549db",
+    "pg642-native-stop-v1.safe.json": "f3df1af1b92c755a36d4a92003487c6b1c695806d4e04a74cbc05b244829f7bd",
+    "pg643-terminal-final-v2.safe.json": "0733c18fdfaac01beca7ef67b5608e6c6b986fe3e1267e7efa771ddbbfe77a53",
+    "pg644-native-counters.safe.json": "a11158d52964c664f52d7b6fe04aaa3873948ba747234ca32275ee57e0ddbf05"
+  },
+  "parentBudgetSeconds": 1800,
+  "parentElapsedSeconds": 1697.279879,
+  "ownedStopElapsedSeconds": 21.58033875100955,
+  "nativeStreams": 8,
+  "singleSessions": 8,
+  "classByteMismatch": 0,
+  "sameSourceHostTests": 3468,
+  "sameSourceHostSuites": 512,
+  "staticModules": 6,
+  "staticIssues": 0,
+  "nativeGain": {
+    "LINE": 2647,
+    "METHOD": 408,
+    "CLASS": 28,
+    "BRANCH": 333
+  },
+  "remaining": {
+    "LINE": 1295,
+    "METHOD": 217,
+    "CLASS": 11,
+    "BRANCH": 858
+  },
+  "global100": false,
+  "formalAccepted": false,
+  "relatedBUG": [
+    "BUG-897",
+    "BUG-902",
+    "BUG-903",
+    "BUG-904",
+    "BUG-905"
+  ],
+  "relatedSSC": [
+    "SSC-228",
+    "SSC-229"
+  ],
+  "authSecretsExported": false,
+  "measurementSessionIdsHashed": true,
+  "privateRawEvidence": "Root-private PG640/PG642/PG643; host PG644 raw streams private",
+  "environment": {
+    "os": "Ubuntu26.04",
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "postgresql": "18.6",
+    "artemis": "2.56.0"
+  }
+}

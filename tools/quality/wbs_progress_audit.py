@@ -27,8 +27,16 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        require(key not in result, 'duplicate WBS JSON key: ' + key)
+        result[key] = value
+    return result
+
+
 def read_json(path):
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(), object_pairs_hook=unique_object)
 
 
 def digest(path):
@@ -282,7 +290,7 @@ def verify_baseline():
     exec(compile(code, '<historical wbs audit>', 'exec'), namespace)
     historical_master = json.loads(subprocess.check_output(['git', 'show', BASELINE + ':documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json'], cwd=ROOT, text=True))
     historical_budget = json.loads(subprocess.check_output(['git', 'show', BASELINE + ':documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json'], cwd=ROOT, text=True))
-    historical_snapshot = read_json(PMO / '482_WBS実績snapshot_20261007.json')
+    read_json(PMO / '482_WBS実績snapshot_20261007.json')  # Validate frozen JSON; hash is checked below.
     require(digest(PMO / '482_WBS実績snapshot_20261007.json') == read_json(PMO / '481_PGPT詳細WBS.json')['baselineV1']['snapshotSha256'], 'historical snapshot changed')
     # The v1 assertions remain frozen. Supply Git-backed data/docs, never write temporary repo files.
     original_read = pathlib.Path.read_text
