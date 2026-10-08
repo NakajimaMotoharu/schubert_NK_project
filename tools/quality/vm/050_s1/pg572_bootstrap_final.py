@@ -1,6 +1,5 @@
 """Independent readonly seal of already completed PG570. No start/stop/restore."""
 import datetime
-import hashlib
 import json
 import os
 import pathlib
@@ -20,6 +19,9 @@ require(hashlib.sha256(raw).hexdigest()=='0dd9ded789de2205ecb7f60080f3f57c2d489e
 parsed=ast.parse(raw);names={'command','metadata','strict','show','tree','configuration_fields','kernel'}
 nodes=[n for n in parsed.body if isinstance(n,ast.FunctionDef)and n.name in names]
 require(len(nodes)==len(names))
+constants=[n for n in parsed.body if isinstance(n,ast.Assign)and all(isinstance(t,ast.Name)and t.id in {'UNITS','FIELDS'}for t in n.targets)]
+require(len(constants)==2)
+nodes=constants+nodes
 exec(compile(ast.Module(body=nodes,type_ignores=[]),'<sealed readonly metadata>','exec'),globals())
 proof=base/'pg570-bootstrap-existing-v1';verify=base/'pg570-bootstrap-verify-v1'
 before=strict(proof/'before.private.json',0o600,33554432);after=strict(proof/'after.private.json',0o600,33554432)
@@ -74,17 +76,17 @@ def main():
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile=' + str(P / 'known_hosts'),
            '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']
     for suffix in ('private.log', 'exit', 'safe.json'):
-        assert not os.path.lexists(W / ('pg572-bootstrap-final-v1.' + suffix))
+        assert not os.path.lexists(W / ('pg572-bootstrap-final-v2.' + suffix))
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     result = subprocess.run(ssh, input=PAYLOAD.encode(), capture_output=True, timeout=90)
-    with (W / 'pg572-bootstrap-final-v1.private.log').open('xb') as f:
+    with (W / 'pg572-bootstrap-final-v2.private.log').open('xb') as f:
         f.write(result.stderr); f.flush(); os.fsync(f.fileno())
-    with (W / 'pg572-bootstrap-final-v1.exit').open('x') as f:
+    with (W / 'pg572-bootstrap-final-v2.exit').open('x') as f:
         f.write(str(result.returncode) + '\n')
     if result.returncode == 0:
         safe = json.loads(result.stdout)
-        safe.update(startedUTC=started, completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat())
-        with (W / 'pg572-bootstrap-final-v1.safe.json').open('x') as f:
+        safe.update(run='PG572-bootstrap-final-v2', startedUTC=started, completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat())
+        with (W / 'pg572-bootstrap-final-v2.safe.json').open('x') as f:
             json.dump(safe, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
     print(json.dumps({'actualExit': result.returncode, 'rawExported': False}))
     raise SystemExit(result.returncode)
