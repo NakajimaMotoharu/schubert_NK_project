@@ -28,7 +28,7 @@ def source():
     old="prefix += 'GUARD=' + repr((R / 'pg650_fresh_contract.py').read_text()) + '\\n'"
     new="prefix += 'GUARD=' + repr(guest_contract()) + '\\n'"
     assert raw.count(old)==1;raw=raw.replace(old,new)
-    return raw
+    return raw.replace('pg650-fresh-parent-v1','pg650-fresh-parent-v2').replace('pg650-prepare-v1','pg650-prepare-v2').replace("'pg650-' + mode + '-v1'","'pg650-' + mode + '-v2'")
 
 
 def guest_contract():

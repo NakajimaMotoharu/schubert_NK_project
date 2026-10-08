@@ -11,7 +11,7 @@ def source():
     old="files={name:(R/name).read_bytes()for name in ('pg651_watch_parent.py','pg554_stable_actor.py','pg462_observer_identity.py')}"
     new="files={name:(R/('pg638_watch_parent.py'if name=='pg651_watch_parent.py'else name)).read_bytes()for name in ('pg651_watch_parent.py','pg554_stable_actor.py','pg462_observer_identity.py')}"
     assert raw.count(old)==1;raw=raw.replace(old,new)
-    return raw
+    return raw.replace('pg650-prepare-v1','pg650-prepare-v2').replace('pg650-fresh-parent-v1','pg650-fresh-parent-v2')
 
 
 if __name__=='__main__':

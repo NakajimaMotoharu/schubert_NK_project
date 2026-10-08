@@ -37,7 +37,8 @@ def prior_history(rows,day):
     skip=[r for r in current if r['status']=='SKIPPED']
     return (len(today)==22 and len(prior)==10 and {r['step']for r in prior}==steps and all(r['status']=='SUCCESS'for r in prior)
             and len(current)==12 and len(original)==2 and {r['step']for r in original}=={'BACKUP_DB','BACKUP_CONFIG'}
-            and all(r['attempt']==2 for r in original)and len(skip)==10 and {r['step']for r in skip}==steps and all(r['attempt']==3 for r in skip))
+            and all(r['attempt']==2 for r in original)and len(skip)==10 and {r['step']for r in skip}==steps
+            and all(r['attempt']==(3 if r['step']in {'BACKUP_DB','BACKUP_CONFIG'}else 2)for r in skip))
 
 
 def retention_upper(root,rows):

@@ -41,24 +41,26 @@ class Contract(unittest.TestCase):
         old=[{'business_date':'2026-10-08','run_id':'old','status':'SUCCESS','step':'BACKUP_DB','attempt':1}for _ in range(482)]
         today=[{'business_date':'2026-10-09','run_id':'3a53b979-fa01-47dd-92a6-7b26affcfb5c','status':'SUCCESS','step':s,'attempt':1}for s in steps]
         today +=[{'business_date':'2026-10-09','run_id':'e49243d5-de84-4714-8612-6912ddc17e9e','status':'SUCCESS','step':s,'attempt':2}for s in steps[:2]]
-        today +=[{'business_date':'2026-10-09','run_id':'e49243d5-de84-4714-8612-6912ddc17e9e','status':'SKIPPED','step':s,'attempt':3}for s in steps]
+        today +=[{'business_date':'2026-10-09','run_id':'e49243d5-de84-4714-8612-6912ddc17e9e','status':'SKIPPED','step':s,'attempt':3 if s in steps[:2]else 2}for s in steps]
         rows=old+today;self.assertTrue(prior_history(rows,'2026-10-09'))
         for bad in (None,[],rows[:-1],rows+[today[0]],rows[:-1]+[None]):self.assertFalse(prior_history(bad,'2026-10-09'))
         for index in (482,492,494):
             for key,value in (('step','foreign'),('status','FAILED'),('run_id','foreign'),('business_date','2026-10-08')):
                 bad=copy.deepcopy(rows);bad[index][key]=value
                 with self.subTest(index=index,key=key):self.assertFalse(prior_history(bad,'2026-10-09'))
-        bad=copy.deepcopy(rows);bad[-1]['attempt']=2;self.assertFalse(prior_history(bad,'2026-10-09'))
+        for index in range(494,504):
+            bad=copy.deepcopy(rows);bad[index]['attempt']=2 if index<496 else 3
+            with self.subTest(wrong_attempt=index):self.assertFalse(prior_history(bad,'2026-10-09'))
 
     def test_finite_current_transport_before_single_start(self):
         v=source();g=guest_contract();o=observer()
         for x in (v,g,o):compile(x,'<new campaign>','exec')
-        for x in ('pg650-fresh-parent-v1','pg651-observer-v1.started',"'priorBatchRows':504","'priorTodayRuns':22",'pg649-prior-eight-backups',"guard['completed_epoch']","'originalBudgetSeconds':1800","interval '2 minutes'"):
+        for x in ('pg650-fresh-parent-v2','pg651-observer-v1.started',"'priorBatchRows':504","'priorTodayRuns':22",'pg649-prior-eight-backups',"guard['completed_epoch']","'originalBudgetSeconds':1800","interval '2 minutes'"):
             self.assertIn(x,v)
         action="['systemctl','start','--no-block','schubert-nk-morning-controller.service']"
         self.assertEqual(v.count(action),1);self.assertLess(v.index("persist('external-start-guard.private.json'"),v.index(action))
         self.assertIn("'expectedRetentionDeletes':2",g);self.assertIn("'maximumEligibleAfterNew':9",g)
-        self.assertIn('pg638_watch_parent.py',o);self.assertIn('pg650-fresh-parent-v1',o)
+        self.assertIn('pg638_watch_parent.py',o);self.assertIn('pg650-fresh-parent-v2',o)
         for x in ('PG621','pg626-prepare-v2','invalid_epoch','11675ec0'):
             self.assertNotIn(x,v)
 
