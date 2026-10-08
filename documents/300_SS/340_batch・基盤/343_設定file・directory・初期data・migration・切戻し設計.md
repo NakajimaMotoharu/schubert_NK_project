@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC230 当completed原本のruntime635正規退役（2026-10-09）
+
+current36fe/PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9、同e492/cutoff2026-10-08T18:32:42.140966Z/activation7d381b67-b37b-48c6-99ac-e04a336f887dの真正PID1 job104329 DONE1697.279879s・原本ended2026-10-08T20:40:56.335977Z・new正常ownedSTOP/全新scope正常を保持する。PG646readonly full19二読/全24-504/全十kernel-peer-advisory-FLOCK0・19effective source・runtime1のseal e9c9b270aea859cc13f69f24bee4406c401a61786b3081b698f20e9ac82be40cを固定するが、read-only捕捉だけで操作権限を作らない。
+
+別new-only工具/保存先・新連続M→A→実専用RODB/advisory71419602→samepeer/owner→十Ref/namespaceとruntime実dirFDを保持し、全19と同genuine DONE/正常停止seal/現completed graph/ISSUED epochを直前・直後に同scopeで再認証する。Root0755/ACL access-default0の既実directory・Root0644/link1/ACL0/runtime635一件を認証し、署名base/既nativeから独立算出した同e492 --resume literalとmetadata9/SHAが全値一致する当一件だけを保持directoryからunlinkする。原directoryをremove/rename/再作成せず、force/dirsync→一回daemon-reload→全後条件→DB/Ref/bus/FD/A/M正常返却・独立全原値/資源後条件の順を閉じる。fileの不在を既退役済み正常と推定しない。
+
+許容deltaはruntimefile一件の不在、Unit source19→18（他全path/byte/security exact）、Morning補助ExecStart plain native argvとnative-only DropInPaths、342の有限補助履歴reset/Caddy pairedだけ。runtime directoryのunlinkに伴うsize/mtime/ctimeだけは効果として記録し、dev/inode/uid/gid/mode/nlink/ACLと実保持FD identityはexact。その他全19（原本/元DONE/旧failure/epoch/全24/Backup/credentials/native/currentapproval/current/旧Proof/BootstrapProof・tool/全依存/主要十18）は不変更。旧完了3a53/失敗e492の途中原保存を新成功で書換・正常化しない。unknown/部分unlink/reload/closeは隔離・所有保持、一般修復/旧scope再開へ拡張しない。全正常後のみ別fresh新通常runへ進む。RD/UI/DIF/親30分/要求coverage不変更。
+
 ## SSC229 当PG631・failed30原本の新一回用resume準備（2026-10-09）
 
 SSC228実正常切替/独立全19後条件after4d77bd92b7a7c3c85481b342659375e9be5fb7a50c0cd19f72363efb0f719879、current36fe/PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9、同e492/元cutoff18:32:42.140966Z/7d381activation/既INVALID・全24-494を固定する。既runtime Root0755/単一実directory/ACL access-default無し/空を前後確認し、別new-only `/run/systemd/system/schubert-nk-morning-controller.service.d/pg635-once-resume.conf` を実保持dirFD相対O_EXCL/NOFOLLOW、Root0644/link1/ACL0、force/dirsyncで作成する。旧runtime復元/再使用/namespace repair0、署名base/既nativeの独立literalに `--resume e49243d5-de84-4714-8612-6912ddc17e9e` 二引数だけ追加し、RW/hardening/credential/他argvは不変。
