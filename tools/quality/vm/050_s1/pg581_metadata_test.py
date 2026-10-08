@@ -6,6 +6,16 @@ import unittest
 
 
 class MetadataContract(unittest.TestCase):
+    def test_sealed_after_schema(self):
+        module = ast.parse(pathlib.Path(__file__).with_name('pg581_native_counter.py').read_text())
+        payload = next(ast.literal_eval(n.value) for n in module.body if isinstance(n, ast.Assign)
+                       and any(isinstance(t, ast.Name) and t.id == 'PAYLOAD' for t in n.targets))
+        keys = {ast.literal_eval(n.slice) for n in ast.walk(ast.parse(payload))
+                if isinstance(n, ast.Subscript) and isinstance(n.value, ast.Name)
+                and n.value.id in ('a', 'b') and isinstance(n.slice, ast.Constant)}
+        self.assertEqual({'rows', 'pid1', 'units'}, keys)
+        self.assertLessEqual(keys, {'backup', 'configuration', 'originals', 'pid1', 'rows', 'startup', 'units'})
+
     def test_exact_nine_attributes(self):
         module = ast.parse(pathlib.Path(__file__).with_name('pg581_native_counter.py').read_text())
         payload = next(ast.literal_eval(n.value) for n in module.body if isinstance(n, ast.Assign)
