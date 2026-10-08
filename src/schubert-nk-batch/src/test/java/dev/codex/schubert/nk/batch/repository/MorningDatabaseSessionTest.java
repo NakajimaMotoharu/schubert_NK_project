@@ -144,6 +144,163 @@ final class MorningDatabaseSessionTest {
     }
   }
 
+  @Test
+  void mdb589001ActualReadbackSqlFailuresCloseConnectionWithoutChangingCommittedRows()
+      throws Exception {
+    var receipt = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(30);
+    var points =
+        List.of(
+            "getAutoCommit",
+            "isReadOnly",
+            "setAutoCommitFalse",
+            "prepareStatement",
+            "rollback",
+            "setAutoCommitTrue",
+            "ownerBind");
+    for (int index = 0; index < points.size(); index++) {
+      String point = points.get(index);
+      Instant began = Instant.parse("2026-09-10T00:00:00Z").plusSeconds(index * 86400L);
+      var run = new BatchRun(new UUID(589001, index + 1), began.minusSeconds(32400));
+      var enabled = new AtomicBoolean();
+      var injected = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      var ownerChecks = new AtomicInteger();
+      var before = new AtomicReference<String>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var actual = DriverManager.getConnection(url, properties);
+                retained.set(actual);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (proxy, method, args) -> {
+                          String name = method.getName();
+                          boolean hit =
+                              name.equals(point)
+                                  || (name.equals("setAutoCommit")
+                                      && point.equals(
+                                          "setAutoCommit"
+                                              + ((boolean) args[0] ? "True" : "False")));
+                          if (enabled.get() && hit && injected.getAndIncrement() == 0)
+                            throw new SQLException("PRIVATE_SQL_FAULT");
+                          try {
+                            return method.invoke(actual, args);
+                          } catch (InvocationTargetException failure) {
+                            throw failure.getCause();
+                          }
+                        });
+              },
+              c -> {});
+      try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+        var failure =
+            assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          var pair = session.beginBackup(run, began, false);
+                          confirmActualFailedPair(session, pair);
+                          assertEquals(30, session.handoffCleanup(() -> 30));
+                          try {
+                            before.set(mdb588Audit(observer, run));
+                          } catch (SQLException known) {
+                            throw new IOException("fixture audit", known);
+                          }
+                          enabled.set(true);
+                          session.observeCleanupRejected(
+                              run,
+                              receipt,
+                              () -> {
+                                if (point.equals("ownerBind")
+                                    && ownerChecks.incrementAndGet() == 2) {
+                                  injected.incrementAndGet();
+                                  throw new IOException("PRIVATE_OWNER_FAULT");
+                                }
+                                return 5_000_000_000L;
+                              });
+                          fail("fault must reject readback");
+                          return Boolean.TRUE;
+                        }),
+                point);
+        assertEquals("root batch database unavailable", failure.getMessage(), point);
+        assertNull(failure.getCause(), point);
+        assertEquals(0, failure.getSuppressed().length, point);
+        assertTrue(injected.get() >= 1, point);
+        assertTrue(retained.get().isClosed(), point);
+        assertEquals(before.get(), mdb588Audit(observer, run), point);
+        awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+      }
+    }
+  }
+
+  @Test
+  void mdb589002ActualCloseFaultPriorityStillReleasesOwnedAdvisory() throws Exception {
+    for (boolean bodyFailed : List.of(false, true)) {
+      for (Throwable secondary :
+          List.of(
+              new SQLException("PRIVATE_CLOSE"),
+              new IllegalStateException("PRIVATE_CLOSE"),
+              new AssertionError("PRIVATE_CLOSE"))) {
+        var retained = new AtomicReference<Connection>();
+        var closeCount = new AtomicInteger();
+        var subject =
+            new MorningDatabaseSession(
+                actualUrl,
+                () -> {},
+                (url, properties) -> {
+                  var actual = DriverManager.getConnection(url, properties);
+                  retained.set(actual);
+                  return (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (proxy, method, args) -> {
+                            if (method.getName().equals("close")) {
+                              closeCount.incrementAndGet();
+                              actual.close();
+                              throw secondary;
+                            }
+                            try {
+                              return method.invoke(actual, args);
+                            } catch (InvocationTargetException failure) {
+                              throw failure.getCause();
+                            }
+                          });
+                },
+                c -> {});
+        Throwable actualFailure =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          session.requireUnused(
+                              new BatchRun(
+                                  new UUID(589002, 1), Instant.parse("2026-09-01T15:00:00Z")));
+                          if (bodyFailed) throw new IOException("PRIVATE_BODY");
+                          return Boolean.TRUE;
+                        }));
+        if (secondary instanceof SQLException) {
+          assertInstanceOf(IOException.class, actualFailure);
+          assertEquals("root batch database unavailable", actualFailure.getMessage());
+          assertNull(actualFailure.getCause());
+          assertEquals(0, actualFailure.getSuppressed().length);
+        } else assertSame(secondary, actualFailure);
+        assertEquals(1, closeCount.get());
+        assertTrue(retained.get().isClosed());
+        try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+          awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+        }
+      }
+    }
+  }
+
   /** MDB588001..003 / P017-01.03 / OPS009,DAT009/UI251/SS341343/SSC199200. */
   @Test
   void mdb588001TypedCleanup30EmptyReadbackDoesNotFabricateRowsOrReleaseParent() throws Exception {
