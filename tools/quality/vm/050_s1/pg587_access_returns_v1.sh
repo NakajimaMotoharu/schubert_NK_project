@@ -41,6 +41,10 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v1
     task_prior=pg592-session-transition-faults-v2
     ;;
+  PG594V2)
+    task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v2
+    task_prior=pg592-session-transition-faults-v2
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -75,6 +79,10 @@ if sys.argv[3]=='PG588V2':
 if sys.argv[3]=='PG592V2':
  failed=w/'pg592-session-transition-faults-v1'
  assert (failed/'source').read_text().strip()=='678ae3a396092a99978c7c15e6f101f92123c999' and (failed/'exit').read_bytes()==b'1\n'
+ expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
+if sys.argv[3]=='PG594V2':
+ failed=w/'pg594-real-db-drift-v1'
+ assert (failed/'source').read_text().strip()=='162cf98f3d23567f66605709de9476ec0b4f6de2' and (failed/'exit').read_bytes()==b'1\n'
  expected=hashlib.sha256((failed/'failed-batch.exec').read_bytes()).hexdigest()
 assert hashlib.sha256(p.read_bytes()).hexdigest()==expected;p.rename(base/'preexisting-selected-batch.exec')
 PY

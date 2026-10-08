@@ -221,6 +221,7 @@ final class MorningDatabaseSessionTest {
       var retained = new AtomicReference<Connection>();
       var readBefore = new AtomicReference<String>();
       var phase = new AtomicReference<>("");
+      var lastSqlState = new AtomicReference<>("");
       var injected = new AtomicBoolean();
       var subject =
           new MorningDatabaseSession(
@@ -249,6 +250,8 @@ final class MorningDatabaseSessionTest {
                             try {
                               return method.invoke(actual, args);
                             } catch (InvocationTargetException failure) {
+                              if (failure.getCause() instanceof SQLException sql)
+                                lastSqlState.set(sql.getSQLState());
                               throw failure.getCause();
                             }
                           });
@@ -418,14 +421,36 @@ final class MorningDatabaseSessionTest {
               assertEquals(Long.valueOf(terminal == 0 ? 0 : 1), actual.audit().after());
               return Boolean.TRUE;
             };
-        if (seed == 0 && index < 3)
-          assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
-        else
+        if (seed == 0 && index < 3) {
+          try {
+            assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
+          } catch (IOException failure) {
+            throw new AssertionError(
+                "fixture phase="
+                    + phase.get()
+                    + " scenario="
+                    + scenario
+                    + " sqlstate="
+                    + lastSqlState.get(),
+                failure);
+          }
+        } else
           assertEquals(
               "root batch database unavailable",
               assertThrows(IOException.class, () -> subject.execute(credential(), operation))
                   .getMessage());
-        if (seed != 0) assertTrue(injected.get(), faultPhase + ":" + faultMethod);
+        if (seed != 0)
+          assertTrue(
+              injected.get(),
+              faultPhase
+                  + ":"
+                  + faultMethod
+                  + " actualPhase="
+                  + phase.get()
+                  + " scenario="
+                  + scenario
+                  + " sqlstate="
+                  + lastSqlState.get());
         assertEquals(readBefore.get(), mdb588Audit(observer, run));
         assertTrue(retained.get().isClosed());
         awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
