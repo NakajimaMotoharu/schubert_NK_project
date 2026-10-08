@@ -29,6 +29,17 @@ require(hashlib.sha256(before).hexdigest()=='1d42516cf498d3ae58b5ba8a6253844676e
 require(hashlib.sha256(after).hexdigest()=='8cd3195cc3a326ba4a2a84ba2cd5abe6e931bcd2131c2609c29983e9c85bd164')
 b=json.loads(before);a=json.loads(after)
 require(len(a['rows'])==24 and a['rows']==b['rows'])
+sys.path.insert(0,str(base/'pg570-bootstrap-tools-v1'))
+from pg535_bootstrap_contract import UNIT,normal20
+from pg536_bootstrap_execution_contract import record
+gc_nodes=[n for n in ast.parse(GC_SOURCE).body if isinstance(n,ast.FunctionDef)]
+exec(compile(ast.Module(body=gc_nodes,type_ignores=[]),'<strict known20 currentGC observation>','exec'),globals())
+require(normal20(a['units'][UNIT]))
+actor=json.loads(strict(proof/'actor.private.json',0o600,4096))
+require(actor['invocation']==a['units'][UNIT]['InvocationID']=='c0592572f0f94070964eb3ee4ff4903c'and actor['pid']=='907340'and actor['zeroCapabilities']is True)
+pid1=[json.loads(line)for line in strict(proof/'pid1.private.jsonl',0o600,1048576).splitlines()]
+jobs=[v for v in pid1 if v.get('MESSAGE_ID')=='39f53479d3a045ac8e11786248231fbf'and v.get('JOB_TYPE')=='start'and v.get('JOB_RESULT')=='done']
+require(len(jobs)==1 and jobs[0].get('_PID')=='1'and jobs[0].get('_UID')=='0'and jobs[0].get('_BOOT_ID')=='cc9ed8747f4f450ea1888de1e42c8441'and jobs[0].get('INVOCATION_ID')==actor['invocation'])
 require(strict(verify/'before.private.json',0o600,33554432)==strict(verify/'after.private.json',0o600,33554432))
 for mode,root in [('verify',verify),('execute',proof)]:
  require(strict(root/'complete.private',0o600,4096)==('allNewScopesReturnedNormally=true\nall24DatabaseUnchanged=true\nmode='+mode+'\n').encode())
@@ -41,8 +52,10 @@ for entry in data['artifacts']:
 command(['openssl','pkeyutl','-verify','-rawin','-pubin','-keyform','DER','-inkey','/etc/schubert-nk/deployment-key/pin.der','-in',str(release/'RELEASE-MANIFEST.json'),'-sigfile',str(base/'pg548-manifest.sig')],4096)
 def snapshot():
  for u,v in a['units'].items():
-  require(show(u,set(v))==v and v['MainPID']==v['ControlPID']=='0'and not v['Job']);kernel(u)
-  require(show(u,configuration_fields())==a['configuration'][u])
+  current=show(u,set(v));conf=show(u,configuration_fields());require(current['MainPID']==current['ControlPID']=='0'and not current['Job']);kernel(u)
+  if u==UNIT and current!=v:
+   require(current_gc_after_known20(v,current)and configuration_after_gc(a['configuration'][u],conf,actor))
+  else:require(current==v and conf==a['configuration'][u])
  for name,path in [('startup','/run/schubert-nk/startup'),('originals','/var/lib/schubert-nk/maintenance'),('backup','/srv/schubert-nk/backup'),('native','/run/schubert-nk/pt-coverage'),('oldProofs','/var/lib/pgpt-s1-preservation/pg557-native-stop-v1'),('credentials','/etc/schubert-nk/credentials')]:require(tree(pathlib.Path(path))==a[name])
  q="begin isolation level repeatable read read only;set local timezone='UTC';";rows={}
  for t in a['rows']:
@@ -76,17 +89,18 @@ def main():
            '-oStrictHostKeyChecking=yes', '-oUserKnownHostsFile=' + str(P / 'known_hosts'),
            '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']
     for suffix in ('private.log', 'exit', 'safe.json'):
-        assert not os.path.lexists(W / ('pg572-bootstrap-final-v2.' + suffix))
+        assert not os.path.lexists(W / ('pg572-bootstrap-final-v3.' + suffix))
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    result = subprocess.run(ssh, input=PAYLOAD.encode(), capture_output=True, timeout=90)
-    with (W / 'pg572-bootstrap-final-v2.private.log').open('xb') as f:
+    gc_source = pathlib.Path(__file__).with_name('pg537_bootstrap_gc_contract.py').read_text()
+    result = subprocess.run(ssh, input=('GC_SOURCE=' + repr(gc_source) + '\n' + PAYLOAD).encode(), capture_output=True, timeout=90)
+    with (W / 'pg572-bootstrap-final-v3.private.log').open('xb') as f:
         f.write(result.stderr); f.flush(); os.fsync(f.fileno())
-    with (W / 'pg572-bootstrap-final-v2.exit').open('x') as f:
+    with (W / 'pg572-bootstrap-final-v3.exit').open('x') as f:
         f.write(str(result.returncode) + '\n')
     if result.returncode == 0:
         safe = json.loads(result.stdout)
-        safe.update(run='PG572-bootstrap-final-v2', startedUTC=started, completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat())
-        with (W / 'pg572-bootstrap-final-v2.safe.json').open('x') as f:
+        safe.update(run='PG572-bootstrap-final-v3', currentGcNotInferredAsSuccess=True, startedUTC=started, completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat())
+        with (W / 'pg572-bootstrap-final-v3.safe.json').open('x') as f:
             json.dump(safe, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
     print(json.dumps({'actualExit': result.returncode, 'rawExported': False}))
     raise SystemExit(result.returncode)
