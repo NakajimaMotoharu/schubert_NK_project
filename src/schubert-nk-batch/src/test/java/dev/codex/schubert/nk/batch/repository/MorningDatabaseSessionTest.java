@@ -310,6 +310,7 @@ final class MorningDatabaseSessionTest {
                             assertEquals(1, sql.executeUpdate());
                           }
                           child.commit();
+                          releaseAdvisory(child);
                         } catch (SQLException failure) {
                           throw new IOException("fixture cleanup", failure);
                         }
@@ -385,6 +386,7 @@ final class MorningDatabaseSessionTest {
                           sql.setLong(9, expiry.current().id());
                           sql.setObject(10, run.id());
                           assertEquals(1, sql.executeUpdate());
+                          releaseAdvisory(child);
                         } catch (SQLException failure) {
                           throw new IOException("fixture expiry", failure);
                         }
@@ -733,6 +735,7 @@ final class MorningDatabaseSessionTest {
                         statement.setObject(1, run.id());
                         statement.setObject(2, run.id());
                         assertEquals(2, statement.executeUpdate());
+                        releaseAdvisory(child);
                       } catch (SQLException failure) {
                         throw new IOException("isolated partial fixture", failure);
                       }
@@ -930,7 +933,7 @@ final class MorningDatabaseSessionTest {
               return skipped;
             });
     try (var connection = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
-      awaitReleased(connection, TimeUnit.SECONDS.toNanos(5));
+      awaitAcquired(connection, TimeUnit.SECONDS.toNanos(5));
       connection.setAutoCommit(false);
       var repository = new BatchRunRepository(connection);
       repository.verifyAlreadySuccessful(current.database());
@@ -948,6 +951,7 @@ final class MorningDatabaseSessionTest {
             rows.getString(1));
         assertFalse(rows.next());
       }
+      releaseAdvisory(connection);
     }
   }
 
@@ -2018,6 +2022,7 @@ final class MorningDatabaseSessionTest {
                               DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
                             assertTrue(advisory(child));
                             assertFalse(advisory(observer));
+                            releaseAdvisory(child);
                             return "CHILD";
                           } catch (SQLException failure) {
                             throw new IOException("child database unavailable");
@@ -2143,10 +2148,97 @@ final class MorningDatabaseSessionTest {
   }
 
   private static void awaitReleased(Connection observer, long budgetNanos) throws Exception {
+    awaitAcquired(observer, budgetNanos);
+    // JDBC close sends Terminate without a server acknowledgement.
+    releaseAdvisory(observer);
+  }
+
+  private static void awaitAcquired(Connection observer, long budgetNanos) throws Exception {
     long deadline = System.nanoTime() + budgetNanos;
     while (!advisory(observer)) {
       if (System.nanoTime() >= deadline) fail("server advisory release deadline exceeded");
       TimeUnit.MILLISECONDS.sleep(5);
+    }
+  }
+
+  private static void releaseAdvisory(Connection connection) throws SQLException {
+    try (var statement = connection.prepareStatement("select pg_advisory_unlock(71419602)");
+        var rows = statement.executeQuery()) {
+      assertTrue(rows.next());
+      assertTrue(rows.getBoolean(1));
+      assertFalse(rows.next());
+    }
+    assertFalse(ownsAdvisory(connection));
+  }
+
+  private static boolean ownsAdvisory(Connection connection) throws SQLException {
+    try (var statement = connection.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select exists(select 1 from pg_locks where locktype='advisory' and pid=pg_backend_pid() and classid=0 and objid=71419602 and objsubid=1 and granted)")) {
+      assertTrue(rows.next());
+      boolean value = rows.getBoolean(1);
+      assertFalse(rows.next());
+      return value;
+    }
+  }
+
+  @Test
+  void mdb594002RetainedChildRefusesHandoffAndAcknowledgedUnlockAllowsParentReacquire()
+      throws Exception {
+    var reachedAfterHandoff = new AtomicInteger();
+    try (var parent = DriverManager.getConnection(actualUrl, "schubert_batch", "");
+        var child = DriverManager.getConnection(actualUrl, "schubert_batch", "");
+        var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+      try {
+        assertTrue(advisory(parent));
+        assertThrows(
+            dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff.Failure.class,
+            () -> {
+              dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff.execute(
+                  parent,
+                  () -> {
+                    try {
+                      assertTrue(advisory(child));
+                      assertTrue(ownsAdvisory(child));
+                    } catch (SQLException failure) {
+                      throw new IOException("fixture retained child", failure);
+                    }
+                    return 0;
+                  });
+              reachedAfterHandoff.incrementAndGet();
+            });
+        assertEquals(0, reachedAfterHandoff.get());
+        assertFalse(ownsAdvisory(parent));
+        assertTrue(ownsAdvisory(child));
+        assertFalse(advisory(observer));
+        releaseAdvisory(child);
+        assertTrue(advisory(parent));
+        assertEquals(
+            0,
+            dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff.execute(
+                parent,
+                () -> {
+                  try {
+                    assertTrue(advisory(child));
+                    assertFalse(advisory(observer));
+                    releaseAdvisory(child);
+                  } catch (SQLException failure) {
+                    throw new IOException("fixture acknowledged child", failure);
+                  }
+                  return 0;
+                }));
+        reachedAfterHandoff.incrementAndGet();
+        assertEquals(1, reachedAfterHandoff.get());
+        assertTrue(ownsAdvisory(parent));
+        assertFalse(ownsAdvisory(child));
+        assertFalse(advisory(observer));
+      } finally {
+        if (ownsAdvisory(child)) releaseAdvisory(child);
+        if (ownsAdvisory(parent)) releaseAdvisory(parent);
+      }
+      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+      assertFalse(ownsAdvisory(observer));
     }
   }
 

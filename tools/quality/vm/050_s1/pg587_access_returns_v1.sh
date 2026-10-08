@@ -45,6 +45,15 @@ case "$task_profile" in
     task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v2
     task_prior=pg592-session-transition-faults-v2
     ;;
+  PG594V3|PG594V4)
+    if test "$task_profile" = PG594V3; then
+      task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v3
+      task_prior=pg594-real-db-drift-v2
+    else
+      task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg594-real-db-drift-v4
+      task_prior=pg594-real-db-drift-v3
+    fi
+    ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -57,7 +66,7 @@ git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum >
 python3 -B - "$task_base" "$task_prior" "$task_profile" <<'PY'
 import hashlib,json,pathlib,sys,zipfile
 base=pathlib.Path(sys.argv[1]);w=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
-assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1','pg588-session-readback-v2','pg589-session-sql-close-v1','pg590-cleanup-expiry-db-v1','pg592-session-transition-faults-v2')
+assert sys.argv[2]in ('pg586-access-selected-v3','pg587-access-returns-v1','pg588-session-readback-v2','pg589-session-sql-close-v1','pg590-cleanup-expiry-db-v1','pg592-session-transition-faults-v2','pg594-real-db-drift-v2','pg594-real-db-drift-v3')
 old=w/sys.argv[2];manifest=json.loads((old/'manifest.safe.json').read_bytes())
 assert manifest['actualExit']==0 and manifest['mainClassBytesEqualInstalledCurrentPG585']==1600
 for module in ('protocol','storage','bootstrap','api','web','batch'):
