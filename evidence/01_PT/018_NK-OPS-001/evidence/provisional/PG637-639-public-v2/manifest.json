@@ -1,0 +1,53 @@
+{
+  "run": "PG637-639-public-v2",
+  "recordedJST": "2026-10-09T05:23:31.912845+09:00",
+  "source": "36fe7a0b938489d61d17d49c1c30a6fbbef699d5",
+  "operatorSource": "4c7c7a2f0db7940ddb4e6f3e329e01f1c1f8860c",
+  "branch": "dev-foundation",
+  "commands": [
+    "pg637_resume_once.py prepare",
+    "pg638_observer.py stage/watch",
+    "pg637_resume_once.py start",
+    "pg639_capture_resume.py"
+  ],
+  "actualExit": {
+    "prepareV2": 0,
+    "stageV1": 0,
+    "startV2": 0,
+    "postV2": 0,
+    "prepareV1": 1,
+    "postV1": 1
+  },
+  "files": {
+    "pg637-prepare-v2.safe.json": "0575aeaf0ac8676adebb70d5f626fa0fbc72c7dc903a93a505e8100757675ad0",
+    "pg637-start-v2.safe.json": "7ee57696950cd52946a060af6d94635b243cd9c2f051be52ad1f861fdf0222c3",
+    "pg639-post-v2.safe.json": "3db5916f4b85abcc3ad13483f192db17d461e24bf68330b2f3d8b8a85725ebc5"
+  },
+  "tests": [
+    "PG637-P001",
+    "PG637-S001",
+    "PG639-C001..003",
+    "PG639-R001"
+  ],
+  "relatedBugs": [
+    "BUG-902",
+    "BUG-903"
+  ],
+  "ssc": [
+    "SSC-228",
+    "SSC-229"
+  ],
+  "environment": {
+    "os": "Ubuntu26.04",
+    "jdk": "25.0.4",
+    "postgresql": "18.6",
+    "artemis": "2.56.0"
+  },
+  "formalAccepted": false,
+  "wholeCoverage100": false,
+  "parentDone": false,
+  "nativePending": true,
+  "rawSecretsExported": false,
+  "privateEvidence": "Root-private pg637-fresh-resume-v2/pg639-resume-post-v2; old refusals remain private",
+  "timingNote": "PG637 safe has actual start/end UTC; PG639 exact command timing not emitted, recordedJST is publication not execution start."
+}
