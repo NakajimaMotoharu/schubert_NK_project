@@ -1,0 +1,13 @@
+# PG561～563 当source実native・新十step・実Backup独立結果
+
+Production969d8ded10c0bf5841d9e3a5c531e922caf4a24a/PG548/schema028、branch dev-foundation、元genuineParent581443/075ad664/job59402/runb7e73994/1503.187759s/1800。RD OPS009/BAK/BKO/DAT009/UI251/SS341343/SSC193214223224/451、WBS-N15.04限定。正式PT24/1964/53は不変更、IT/ST完了宣言0。
+
+PG561（producer767e33dcf）actual0、新九streamだけ/private binary保持。Source guardの既PG541一test33行差分は別hash・未知main/pom/test拒否の独立testを追加、BUG857 v1実1/emptyworkdir保持。旧Root/ordinaryAPI-Web四/Bootstrap一を混用0、single session各1/当genuineParent-start～当stopJob範囲・sealed全metadata/hash・同PG540六frozen jar NoMatch0。public manifest=provisional/PG561-current-nine-native-v2/manifest.json/private originalSHAe253b4e23d25dc030da33ad67fbb41d9a492426492416931dbeefc31cc73ed8a。
+
+PG562（producercd1eb3837）actual0/private gapSHA4603c4204738b4f8a69f9988e498618f14277f669b43a747919ec64478103d52、host-onlyから新LINE3056/METHOD460/CLASS28/BRANCH405消化。残：protocol/storage/web各counter0、bootstrap L88/M12/C0/B73、api L60/M2/C0/B8、batch L960/M188/C12/B818。計L1108/M202/C12/B899、技術診断でglobal100未達。PG541追加Timeout branch2成功はこのPG540＋新九stream系列に合算0・未実装に戻さない。現在Bootstrap新stream不足/異常matrix/全品質は残件。
+
+PG563（producer4c181662e）独立SSliteral normal/null/foreign/duplicate/型/順序/hash/数値bool等3test、実readonly guest consumer actual0/stderr空。全旧462全列保持・新十step17column/JSTdate/uniqueid/run/attempt/SUCCESS・時刻/byte数・expectedselector件数、SESSION1862=auth9+IP1+HTTP1852/INBOX28/他保守0、Expiry cutoff=開始−7日/0→0。両Backup完全handle/MANIFEST canonical/実schema028・固定実version/独立三hash-size、dump10479812byte/config+credentials61640byte、実pg_restore --list0。config archive固定8名regular/元byte-mode同値、公開recipientSHA一致、全旧Backupfile保全/旧9＋新1/世代削除0。Root safe結果SHAae273296976a5e64b5901f9f3d8bc0b724023c6748bcbaef1640be80b4406841、private bundle5d1d101b25dbed5526cc5387bd721cbe8a149d29a7563b0f4527a1db741b8121。
+
+host4c686ea07のoffserver age1.2.1検証 actual0：別私有keyで復号し公開recipient fingerprint一致、17regularRoot600/全17credential byteがcurrent原本と一致。private keyはVMへ送付0、平文disk保存0・filename-permission一覧/値/raw dump/session/cookie/token Git出力0。safe結果privatePG379/pg563-host-credential-verify-v1/result.safe.json、比較cataloghashはprivate限定。DB restoreデータ内容/rehearsal/ITSTは本検証で成功扱い0。
+
+Commands=pg561_current_native_counter.py/pg562_current_native_gap.py/pg563_capture_backup.py/pg563_verify_private_credentials.py、各sourceは同commitで固定push後実行。日時・JDK25.0.4/JaCoCo0.8.15/ASM9.10.1/PG18.6/age1.2.1/Linuxは45614:59/manifest/private結果へjoin。Input/expected/actual=上記SSliteral＋sealedPG553before/PG555preui/PG559after、Production codecからexpected生成0。全Java counter100/正式全scope/source-run/CHR/追加114 Log-outbox-WebHTTP全業務独立後条件は未達、管理oracleをProduction PT加点0。
