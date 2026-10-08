@@ -92,6 +92,14 @@ final class MorningBackupRetention {
     this.started = started;
   }
 
+  /**
+   * BUG897/ISSRET009: same writable fixed-root adapter as MorningBackupArtifacts publication.
+   * Host-view inspection ports remain read-only; the enclosing Root/M/A guard owns mutations.
+   */
+  static dev.codex.schubert.nk.storage.DirectoryCalls directoryCalls() {
+    return dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+  }
+
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
@@ -110,9 +118,7 @@ final class MorningBackupRetention {
     Objects.requireNonNull(work);
     owner.check();
     var identity = new dev.codex.schubert.nk.bootstrap.FixedServiceIdentity().resolveBackup();
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxHostDirectoryCalls.create(), Path.of("/srv/schubert-nk/backup"));
+    var root = OwnedTransferDirectory.open(directoryCalls(), Path.of("/srv/schubert-nk/backup"));
     return ResourceScope.use(
         root::close,
         () -> {

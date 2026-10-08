@@ -24,7 +24,8 @@ final class MorningBackupRetentionTest {
   void issret001SevenEightNineUseExactOldestSet() throws Exception {
     for (int generations : List.of(7, 8, 9)) {
       try (var f = new BackupArtifactFixture(temporary);
-          var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
+          var root =
+              OwnedTransferDirectory.open(MorningBackupRetention.directoryCalls(), f.parent)) {
         var names = generations(f, generations - 1);
         var subject = subject(f, root, acceptsAll());
         var result =
@@ -47,6 +48,76 @@ final class MorningBackupRetentionTest {
         assertFalse(result.toString().contains(DIR));
         f.released();
       }
+    }
+  }
+
+  @Test
+  void issret009ProductionFactoryNotReadOnlyAndRefusalChangesNothing() throws Exception {
+    var calls = MorningBackupRetention.directoryCalls();
+    assertInstanceOf(LinuxDirectoryCalls.class, calls);
+    try (var f = new BackupArtifactFixture(temporary)) {
+      var names = generations(f, 7);
+      var preserved = new TreeMap<Path, byte[]>();
+      try (var paths = Files.walk(f.parent)) {
+        for (var path : paths.filter(Files::isRegularFile).toList())
+          preserved.put(path, Files.readAllBytes(path));
+      }
+      var mutations = new AtomicInteger();
+      var readOnly =
+          (DirectoryCalls)
+              java.lang.reflect.Proxy.newProxyInstance(
+                  getClass().getClassLoader(),
+                  new Class<?>[] {DirectoryCalls.class},
+                  (proxy, method, args) -> {
+                    if (Set.of("unlink", "sync", "removeEmptyDirectory")
+                        .contains(method.getName())) {
+                      mutations.incrementAndGet();
+                      throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+                    }
+                    try {
+                      return method.invoke(calls, args);
+                    } catch (java.lang.reflect.InvocationTargetException failure) {
+                      throw failure.getCause();
+                    }
+                  });
+      try (var root = OwnedTransferDirectory.open(readOnly, f.parent)) {
+        var subject = subject(f, root, acceptsAll());
+        assertThrows(
+            StorageIoException.class,
+            () ->
+                subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected)));
+        assertEquals(1, mutations.get());
+        assertThrows(IOException.class, subject::result);
+        try (var children = Files.list(f.parent)) {
+          assertEquals(names, children.map(p -> p.getFileName().toString()).sorted().toList());
+        }
+        for (String name : names)
+          try (var files = Files.list(f.parent.resolve(name))) {
+            assertEquals(
+                Set.copyOf(NAMES),
+                files
+                    .map(p -> p.getFileName().toString())
+                    .collect(java.util.stream.Collectors.toSet()));
+          }
+        f.unchanged();
+        for (var entry : preserved.entrySet())
+          assertArrayEquals(entry.getValue(), Files.readAllBytes(entry.getKey()));
+      }
+      // Corrected production-selected adapter, same files and claims, real unlink/rmdir/fsync.
+      try (var root = OwnedTransferDirectory.open(calls, f.parent)) {
+        var subject = subject(f, root, acceptsAll());
+        var result =
+            subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected));
+        assertEquals(List.of(names.getFirst()), result.deleted);
+        assertEquals(7, result.after.size());
+        assertFalse(Files.exists(f.parent.resolve(names.getFirst()), LinkOption.NOFOLLOW_LINKS));
+        for (var entry : preserved.entrySet())
+          if (!entry.getKey().startsWith(f.parent.resolve(names.getFirst())))
+            assertArrayEquals(entry.getValue(), Files.readAllBytes(entry.getKey()));
+        subject.recheck();
+        f.unchanged();
+      }
+      f.released();
     }
   }
 
