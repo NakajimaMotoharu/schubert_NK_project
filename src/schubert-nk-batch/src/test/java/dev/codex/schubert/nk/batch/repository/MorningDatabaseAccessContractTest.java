@@ -5,15 +5,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.backup.BackupVersions;
+import dev.codex.schubert.nk.batch.file.BackupBundleCompletion;
 import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
+import dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture;
+import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
+import dev.codex.schubert.nk.bootstrap.StartupReleaseManifest;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * PT-OPS-MACCESS585001..004 / OPS009,DAT009 / UI251 / SS341343 / SSC129133200. Data claims and a
@@ -26,7 +39,7 @@ final class MorningDatabaseAccessContractTest {
           Instant.parse("2026-10-08T00:00:00Z"));
   private static final Instant NOW = Instant.parse("2026-10-08T01:00:00Z");
 
-  private static final class Unsupported implements MorningDatabaseSession.Access {
+  private static class Unsupported implements MorningDatabaseSession.Access {
     public void requireUnused(BatchRun run) {
       fail("unsupported default must not forward to DB operation");
     }
@@ -66,6 +79,162 @@ final class MorningDatabaseAccessContractTest {
     assertEquals("root batch database unavailable", failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
+  }
+
+  @Test
+  void maccess586001ReceiptAndCleanupDataDoNotCreateDatabaseAuthority() throws Exception {
+    var access = new Unsupported();
+    MaintenanceOwnerFrame.Guard owner = () -> fail("unsupported owner must not run");
+    var expiry =
+        new MorningDatabaseSession.ExpiryBegins(
+            new BatchStepAttempt(586001, RUN, BatchStep.CLEAN_EXPIRY, 1, NOW, false),
+            Optional.empty());
+    var receipt = ExpiryReceiptFixture.receipt(0);
+    denied(() -> access.observeExpiry(expiry, receipt, owner));
+    denied(
+        () -> access.observeCleanupRejected(RUN, ExpiryReceiptFixture.cleanupReceipt(30), owner));
+    assertThrows(NullPointerException.class, () -> access.observeExpiry(expiry, null, owner));
+    assertThrows(NullPointerException.class, () -> access.observeExpiry(expiry, receipt, null));
+    assertThrows(
+        NullPointerException.class, () -> access.observeCleanupRejected(RUN, receipt, null));
+    var entries = new ArrayList<CleanupTerminalRepository.Entry>();
+    var success =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 0, 0, 0, 0, BatchStepResult.Reason.NONE);
+    for (int i = 0; i < CleanupTerminalRepository.STEPS.size(); i++) {
+      entries.add(
+          new CleanupTerminalRepository.Entry(
+              new BatchStepAttempt(
+                  586010 + i, RUN, CleanupTerminalRepository.STEPS.get(i), 1, NOW, false),
+              NOW.plusSeconds(1),
+              success));
+    }
+    var snapshot = new CleanupTerminalRepository.Snapshot(entries);
+    denied(() -> access.cleanupReferences(snapshot, owner));
+    denied(
+        () ->
+            access.cleanupReferences(
+                snapshot, owner, (id, observed) -> fail("lookup must not run")));
+    assertThrows(NullPointerException.class, () -> access.cleanupReferences(snapshot, null));
+  }
+
+  @Test
+  void maccess586002BorrowedTemporaryFileCapabilityDoesNotCommitBackup(@TempDir Path directory)
+      throws Exception {
+    var access = new Unsupported();
+    var manifest = claims();
+    var pair =
+        new MorningDatabaseSession.BackupBegins(
+            manifest.databaseStep(), manifest.configurationStep());
+    long uid = ((Number) Files.getAttribute(directory, "unix:uid")).longValue();
+    long gid = ((Number) Files.getAttribute(directory, "unix:gid")).longValue();
+    try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), directory)) {
+      var completion = new BackupBundleCompletion(held, LinuxInodeSecurity.create(), uid, gid);
+      denied(
+          () ->
+              access.completeBackup(
+                  pair, completion, "20261008-100001-58500000-2222-4333-8444-555555555555"));
+      try (var files = Files.list(directory)) {
+        assertEquals(0, files.count());
+      }
+    }
+  }
+
+  @Test
+  void maccess586003DefaultReadbackBindsSameDataAndForwardsSameOwner() throws Exception {
+    MaintenanceOwnerFrame.Guard owner = () -> fail("data readback is not native owner admission");
+    var facts =
+        new RootReleaseAdmission.DatabaseInspection(
+            new StartupReleaseManifest.Contents(
+                "PUBLIC", "a".repeat(64), List.of(), Map.of(), Map.of()),
+            List.of(),
+            Map.of());
+    var expected =
+        new MorningDatabaseSession.DatabaseObservation(
+            "schubert_batch", "schubert_batch", "schubert_nk", true, false, 2, false, true, facts);
+    var changed =
+        new MorningDatabaseSession.DatabaseObservation(
+            "schubert_batch", "schubert_batch", "schubert_nk", false, false, 2, false, true, facts);
+    var observed = new java.util.concurrent.atomic.AtomicReference<>(expected);
+    var reads = new AtomicInteger();
+    var access =
+        new Unsupported() {
+          @Override
+          public MorningDatabaseSession.DatabaseObservation inspectPermitDatabase(
+              MaintenanceOwnerFrame.Guard actual) {
+            assertSame(owner, actual);
+            reads.incrementAndGet();
+            return observed.get();
+          }
+        };
+    assertDoesNotThrow(() -> access.recheckPermitDatabase(expected, owner));
+    observed.set(changed);
+    denied(() -> access.recheckPermitDatabase(expected, owner));
+    assertThrows(NullPointerException.class, () -> access.recheckPermitDatabase(expected, null));
+    assertEquals(2, reads.get());
+    assertEquals("MorningDatabaseObservation[actual=<redacted>]", expected.toString());
+
+    var begins =
+        new MorningDatabaseSession.ExpiryBegins(
+            new BatchStepAttempt(586101, RUN, BatchStep.CLEAN_EXPIRY, 1, NOW, false),
+            Optional.empty());
+    var receipt = ExpiryReceiptFixture.receipt(0);
+    var result =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 0, 0, 0, 0, BatchStepResult.Reason.NONE);
+    var audit =
+        new ExpiryAuditRepository.Snapshot(
+            "SUCCESS",
+            RUN.cutoff().minusSeconds(604800),
+            0L,
+            0L,
+            0,
+            0,
+            0,
+            0,
+            NOW.plusSeconds(1),
+            null,
+            null);
+    var expectedExpiry =
+        new MorningDatabaseSession.ExpiryObservation(
+            begins, NOW.plusSeconds(1), result, audit, receipt);
+    var laterAudit =
+        new ExpiryAuditRepository.Snapshot(
+            "SUCCESS",
+            RUN.cutoff().minusSeconds(604800),
+            0L,
+            0L,
+            0,
+            0,
+            0,
+            0,
+            NOW.plusSeconds(2),
+            null,
+            null);
+    var changedExpiry =
+        new MorningDatabaseSession.ExpiryObservation(
+            begins, NOW.plusSeconds(2), result, laterAudit, receipt);
+    var expiryObserved = new java.util.concurrent.atomic.AtomicReference<>(expectedExpiry);
+    var expiryAccess =
+        new Unsupported() {
+          @Override
+          public MorningDatabaseSession.ExpiryObservation observeExpiry(
+              MorningDatabaseSession.ExpiryBegins actualBegins,
+              dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt
+                  actualReceipt,
+              MaintenanceOwnerFrame.Guard actualOwner) {
+            assertSame(begins, actualBegins);
+            assertSame(receipt, actualReceipt);
+            assertSame(owner, actualOwner);
+            return expiryObserved.get();
+          }
+        };
+    assertDoesNotThrow(() -> expiryAccess.recheckExpiry(expectedExpiry, owner));
+    expiryObserved.set(changedExpiry);
+    denied(() -> expiryAccess.recheckExpiry(expectedExpiry, owner));
+    assertThrows(
+        NullPointerException.class, () -> expiryAccess.recheckExpiry(expectedExpiry, null));
+    assertEquals("ExpiryObservation[actual=<redacted>]", expectedExpiry.toString());
   }
 
   @Test
