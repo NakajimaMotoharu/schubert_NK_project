@@ -1,5 +1,11 @@
 # PG588 実隔離DBのtyped30拒否readback
 
+## 実結果（2026-10-08 19:21JST）
+
+v2 source6ccb6704bb3fb1c3118880a0968352bacad9ca73、19:20:43～19:21:17/34秒、actual0。MACCESS9＋MDB23=32PT・F/E/S/flaky0、batch静的0/NullAwayWerror/format、main1600classbyteがPG585/current/m2完全同値。三独立日付と全observer/child actualUrlで再現防止し、旧FAILED Backup二行/partial RUNNING・FAILED全column不変、親advisory維持/解放、transaction flag保持と終了Connection closeを確認。旧v1 F1E2/exec/log/source/二XMLは保持し合格へ加算しない。
+
+manifestSHA1b1e3254da7cde466e0147b054cb9dedf85c47f848cfa8bc958881300f43adc0、selectedexecSHAfe366a5c34f435739f151140d2cc683d5dea971e08d5527be94c6c6dcd72d947、両XML/sourcefiles/log/collector/policy hashは公開manifest参照。PG585比42L7M15B、直前PG587比25L1M13Bだけを新技術成果として記録。診断全残961line174method12class864branch。Access四100維持、Session/global四100・nativefaultmatrix・正式全scope未達、当32を全体回帰にしない。
+
 ## v1失敗とv2是正（BUG874/875・YKT643/644）
 
 v1 source4f03d7af68a5d2d942104ca649859675fc405987、actual exit1、32PT/F1/E2/S0。subjectはschubert_nk、observer/childはpostgresを参照しており、加えて同日fixtureの終了が別caseの開始より未来だった。上位設計・Production・未来履歴拒否を変更しない。全XML/log/source/失敗execをv1 privateへ新規保全し、v1を再実行しない。
