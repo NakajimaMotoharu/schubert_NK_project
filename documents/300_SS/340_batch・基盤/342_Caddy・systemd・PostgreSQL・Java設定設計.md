@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC231（2026-10-09）：当PG631完成・正常全停止後の専用Bootstrap一回existing-onlyは343を正とする。既署名Unitの30s/Restart=no/disabled/SuccessExitStatus20・hardening/credential/name/UID/GID/groups/cap0/NNPを変更せず、新二sourceだけ正規入力世代として作成・私有退役する。新十Ref保持で当Bootstrapの元INVと新normal20を分離、他九主要18/全宣言/依存と18Unit source byteは保持。全24/既原本/Startup/Backup/current/approval/旧Proofを二読し、M-A/前postDB/Ref/FDの正常closeと実資源0を閉じる。古いBootstrap credentialの復元・Unit再配備/reload・通常service再start・空UserDBへの拡張・旧source native輸入を禁止する。
+
 SSC230（2026-10-09、runtime635退役の当profile）：一回reload後も全十Unit主要18/全kernel/Job空・genuine新parentPID1及び元完了原本をexact保持する。Morning補助ExecStartは署名base＋既nativeのplain argv（--resume二引数無し）/exact未実行履歴、DropInPathsは既nativeだけ。補助履歴resetの許容はSSC229と同七Artemis/Caddy/API/Backup/Cleanup/Expiry/Webの同path/argv/ignore_errors＋exact n/a,n/a,0,(null),0/0だけ（Morningは上記plain argv）、Inbox/Bootstrap全config exact。CaddyPre/Runは同old又はpaired exact未実行、他hardening/credential/RW/argvはexact。主要143/0や旧UNKNOWNをn/aから正常化しない。現runtimefileの除去以外のUnit source/宣言/rootapproval/current/epoch/DB変更はしない。
 
 SSC229（2026-10-09、SS343当PG631/e492新一回用resume固定profile）：Root0755/ACL access-default無し空runtimeを保持dirFDでnew-only pg635-once-resume.confへ、署名base/native literal＋同run --resume二引数だけ、reload一回。全十主要18/旧INV/143-30/全kernel・DB原本を保持し、SSC220の補助metadata resetを当七Unitだけへ限定、Inbox/Bootstrap全config exact、CaddyPre/Run両同old又は両exact未実行・片側混合拒否。n/aを旧正常close/新readyへ読み替えず、全新scope/独立post後に別一回start・新親元1800s同RootordinaryAPI-Web-Caddyを要求。設計公開は実起動/native/正式未受入。

@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC231 当PG631完了後のBootstrap既存ADMIN一回試験（2026-10-09）
+
+SSC225の業務/所有/credential/実専用Unit/元30秒・既存20/作成0/全24不変契約を維持し、Production36fe7a0b938489d61d17d49c1c30a6fbbef699d5・release0.1.0-PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9へ専用新only工具を再束縛する。601297d0-a8ba-47da-852b-0ffeae409965/cutoff2026-10-08T21:33:23.332578Z/ad15ac4a-8d8e-4970-bcb3-2e000050ce77真正DONE1793.235293s・PG655正常ownedSTOP/PG656全資源0/PG658同source資格16を前提に、別fresh readonlyで現在全24-514/十主要18/設定18source/typed依存/四閉namespace/credentials/原本Backup/native/current/approval・既proof/toolの全20を二読する。readonlyは実操作権限ではなく新M-A/前post専用DB・十Ref・保持namespaceFDの各scopeで原値を再確認する。
+
+ADMIN一件を認証してから現在空の固定二sourceへ新CSPRNG試験入力をO_EXCL/NOFOLLOW/root0400/link1/ACL0発行する。旧PG535537570のinput/permit/valueを復元・再利用せず、通常Loginにも使わない。前DB/advisory正常返却・全peer0→durable一回予約→署名専用Bootstrap Unit一回→元30秒normal20/PID1当job/ordinaryUIDgroups/cap0/NNP/cgroup・当INV native一file→別post DB/advisory/全24完全不変/他九Unit・設定/依存/原本Backup保持→新二source同inode-byteの私有RENAME_NOREPLACE退役/両dirsync→postDB/Ref/bus/保持FD/A/M正常返却→独立全資源0の順を維持する。元runtimeは空/18source、DDL・配備・reload・Morning/APIWeb/Caddy再start/permit発行/手DBwrite0。未知は隔離・二重start/別passwordで回復扱い0。旧969/PG548/472row結果は履歴固定、当36fe nativeへ輸入0。設計確定は実受入やglobal/formal/ITST完了ではない。
+
 ## SSC230 当completed原本のruntime635正規退役（2026-10-09）
 
 current36fe/PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9、同e492/cutoff2026-10-08T18:32:42.140966Z/activation7d381b67-b37b-48c6-99ac-e04a336f887dの真正PID1 job104329 DONE1697.279879s・原本ended2026-10-08T20:40:56.335977Z・new正常ownedSTOP/全新scope正常を保持する。PG646readonly full19二読/全24-504/全十kernel-peer-advisory-FLOCK0・19effective source・runtime1のseal e9c9b270aea859cc13f69f24bee4406c401a61786b3081b698f20e9ac82be40cを固定するが、read-only捕捉だけで操作権限を作らない。
