@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "revision": "WBS-v2-20261007-PMO",
-  "source": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
-  "assessmentHead": "65eddc1a290167c0edfdc99673b79f3d8e99a3fd",
+  "source": "969d8ded10c0bf5841d9e3a5c531e922caf4a24a",
+  "assessmentHead": "969d8ded10c0bf5841d9e3a5c531e922caf4a24a",
   "assignmentMeaning": "管理scope/費用主担当を網羅。全entry UNASSESSEDは意味的受入未照合。対象不存在/仕様不足をscope追加又は具体BUG/QAへ記録、全ID所有済だけでG13完了にしない。",
   "preflightOwner": "WBS-G13",
   "sources": {
@@ -599,7 +599,7 @@
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningBrokerExecution","owner":"WBS-P017-10","basis":"v1対象の責務分離/共通費主担当","sha256":"eb5e153c00b56efdc018ec2574a1fe9fd0a2628654f5241f3517cd44eb0f4d8a","costOwner":"WBS-P017-10","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningCleanupExecution","owner":"WBS-P017-07","basis":"削除保持/SQL/実子","sha256":"7093e0f4be306a079d1c6c45bb3c5dd5449e018c5bed9158505e60e6447d2d7a","costOwner":"WBS-P017-07","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecks.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningCompletionChecks","owner":"WBS-P017-12","basis":"v1対象の責務分離/共通費主担当","sha256":"aaf7bd560303448b658017fe295435e342d89f0ab21e0be0bdabe3303326ebf9","costOwner":"WBS-P017-12","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
-    {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningCompletionEvidence","owner":"WBS-P017-12","basis":"v1対象の責務分離/共通費主担当","sha256":"71bd38cb5f4ba9e6562adf270d64b4a6fbb013893a75507bc2993bb65119d9f3","costOwner":"WBS-P017-12","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
+    {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningCompletionEvidence","owner":"WBS-P017-12","basis":"v1対象の責務分離/共通費主担当","sha256":"f540f618807ea240137735e3aaa2107f891382faa34f29ec5ff040f03b3ee1a9","costOwner":"WBS-P017-12","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningControlScope.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningControlScope","owner":"WBS-P017-01","basis":"v1対象の責務分離/共通費主担当","sha256":"c31dc71b2a33c218d11c44d854f4eb46cce2129ef5d46e2c86509e01d2896d9a","costOwner":"WBS-P017-01","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation","owner":"WBS-P018-03","basis":"許可/世代/launch原本","sha256":"93036f3cfc469dfaf1cb0f71e433aee5a3f9c94fc826121e647b1ecb121f1e41","costOwner":"WBS-P018-03","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
     {"path":"src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java","kind":"JAVA","module":"batch","class":"dev/codex/schubert/nk/batch/file/MorningExpiryExecution","owner":"WBS-P017-11","basis":"v1対象の責務分離/共通費主担当","sha256":"db222dca795152cd13dad353bb854200497b8a62ab917afd4964503b6749d67c","costOwner":"WBS-P017-11","acceptance":"UNASSESSED","counterApplicability":"EXECUTABLE_OR_MEASUREMENT_REQUIRED"},
@@ -1351,9 +1351,9 @@
     {"id":"SCOPE-V2-002","type":"REFERENCE_ONLY","wbs":"WBS-P019-02","owner":"WBS-P018-02","reason":"共通署名/BOM/3class検証を一元化。190ID履歴は保全、独立費/独立達成は除外。"}
   ],
   "measurementBindings": {
-  "run": "PG495",
-  "source": "a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",
-  "coverageRoot": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg495-host",
-  "manifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG495-completion-compound-full-v1/manifest.json"
+  "run": "PG540-completion-admission-six-v1",
+  "source": "969d8ded10c0bf5841d9e3a5c531e922caf4a24a",
+  "coverageRoot": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg540-six-host-v1",
+  "manifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG540-completion-admission-six-v1/manifest.json"
 }
 }

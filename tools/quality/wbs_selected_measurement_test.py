@@ -2,6 +2,7 @@
 import copy
 import json
 import pathlib
+import subprocess
 import unittest
 from unittest.mock import patch
 
@@ -9,8 +10,14 @@ import wbs_progress_audit as audit
 
 
 class SelectedMeasurementTest(unittest.TestCase):
+    @staticmethod
+    def selected_snapshot(name):
+        # Explicit immutable selected-result fixture, not a claim about the new all-six source.
+        return json.loads(subprocess.check_output([
+            'git', 'show', '09528f72f:documents/400_PGPT/470_PMO/' + name], cwd=audit.ROOT))
+
     def setUp(self):
-        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
+        snapshot = self.selected_snapshot('486_WBS現行実績.json')
         self.row = next(r for r in snapshot['rows'] if r['id'] == 'WBS-P018-02')
         self.source = snapshot['source']
         self.prior = '/home/mini/codex/project1/work/pgpt-runs/PG379/pg495-host'
@@ -59,8 +66,8 @@ class SelectedMeasurementTest(unittest.TestCase):
                     audit.selected_measurement(self.row, self.source, self.prior)
 
     def test_owner_module_cannot_be_omitted_to_hide_gaps(self):
-        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
-        inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
+        snapshot = self.selected_snapshot('486_WBS現行実績.json')
+        inventory = self.selected_snapshot('485_WBS網羅性・受入対応.json')
         manifest = copy.deepcopy(self.manifest)
         manifest['modules'] = [m for m in manifest['modules'] if m['module'] == 'storage']
         target = audit.ROOT / self.row['measurementOverride']['manifest']
@@ -71,8 +78,8 @@ class SelectedMeasurementTest(unittest.TestCase):
 
 
     def test_declaration_interface_is_not_an_executable_family(self):
-        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
-        inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
+        snapshot = self.selected_snapshot('486_WBS現行実績.json')
+        inventory = self.selected_snapshot('485_WBS網羅性・受入対応.json')
         row = next(r for r in snapshot['rows'] if r['id'] == 'WBS-P017-12')
         owned = [a for a in inventory['artifacts'] if a['owner'] == row['id'] and a['kind'] == 'JAVA']
         self.assertEqual(16, len(owned))
@@ -87,6 +94,19 @@ class SelectedMeasurementTest(unittest.TestCase):
         for owner in ('WBS-P017-04', 'WBS-P018-02'):
             self.assertFalse(any(a.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE'
                                  for a in inventory['artifacts'] if a['owner'] == owner and a['kind'] == 'JAVA'))
+
+    def test_current_fresh_six_uses_its_own_inventory_and_no_old_selected_override(self):
+        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
+        inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
+        self.assertEqual('969d8ded10c0bf5841d9e3a5c531e922caf4a24a', snapshot['source'])
+        self.assertEqual(snapshot['source'], inventory['source'])
+        self.assertEqual(inventory['measurementBindings']['run'], snapshot['measurementRun'])
+        self.assertFalse(any('measurementOverride' in row for row in snapshot['rows']))
+        for row in snapshot['rows']:
+            if row['measurementStatus'] == 'VM_STEP_VERIFIED':
+                self.assertEqual('a2e98ce9e96c42425921e3686e8ae7a94bff9e6c', row['measurementSource'])
+                self.assertFalse(row['appliesToPendingHostCandidate'])
+        audit.check_measurement(snapshot, inventory)
 
 
 if __name__ == '__main__':
