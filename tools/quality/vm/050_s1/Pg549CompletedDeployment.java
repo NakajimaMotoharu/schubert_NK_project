@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /** SS343 SSC190 / PT-OPS-PG549-C001..005: exact PG522 SUCCESS, fresh INVALID code-only. No old DONE resume/start/DDL. */
 public final class Pg549CompletedDeployment {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-tools-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-tools-v4");
   static Path SAVE;
   static String mode;
   static final Path APPROVAL=Path.of("/etc/schubert-nk/release-approval/current");
@@ -102,15 +102,23 @@ public final class Pg549CompletedDeployment {
     StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(next);
     require(!Arrays.equals(Files.readAllBytes(SAVE.resolve("old-epoch.private")),Files.readAllBytes(Path.of("/run/schubert-nk/startup/epoch.current"))));
   }
+  static void immutableCandidate()throws Exception {
+    var p=new ProcessBuilder("/usr/bin/findmnt","--noheadings","--output","OPTIONS","--mountpoint",NEXT.toString()).redirectInput(Path.of("/dev/null").toFile()).start();
+    try(var input=p.getInputStream();var error=p.getErrorStream()){
+      byte[] raw=input.readNBytes(4097);require(raw.length<=4096 && error.readNBytes(4097).length==0);int result=p.waitFor();
+      require(result==0 || result==1);
+      if(result==0)require(Arrays.asList(new String(raw,StandardCharsets.US_ASCII).trim().split(",")).contains("ro"));
+      else Pg387TrustedDeployment.freezeCandidate();
+    }
+  }
   public static void main(String[] args)throws Exception{
-    require(arguments(args));mode=args[0];SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-"+mode+"-v1");require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));
+    require(arguments(args));mode=args[0];SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg549-completed-"+mode+"-v4");require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));
     require(MaintenanceFileLock.create().tryExclusive(()->Pg387TrustedDeployment.checked(()->{
       try{return StartupAdmissionFile.create().tryExclusive(a->Pg387TrustedDeployment.checked(()->{
         try{
           phase="SIGNED_ORIGINAL";Pg464CodeOnlyDeployment.configure("PG495","a2e98ce9e96c42425921e3686e8ae7a94bff9e6c",OLD);Pg387TrustedDeployment.expectedSqlCount=28;
           var prior=Pg387TrustedDeployment.verify();require(prior.manifestSha256().equals("f6992c4de95477594987d2f10def06110d0c28cb6d4fd063da47bd0bab7e7d44") && Arrays.equals(prior.encode(),Files.readAllBytes(APPROVAL)) && OLD.equals(Files.readSymbolicLink(CURRENT)));
           StartupReleaseManifest.createHost(new FixedServiceIdentity().configurationGroup()).verify(prior);original();
-          Pg464CodeOnlyDeployment.configure("PG548",source,NEXT);Pg387TrustedDeployment.expectedSqlCount=28;var next=Pg387TrustedDeployment.verify();require(next.manifestSha256().equals(digest));signedFiles();
           Pg428ColdBootPreparation.newDirectory(SAVE,0,0);var database=Pg407FailedRootRecovery.openDatabase();
           try{
             database.setReadOnly(true);database.setAutoCommit(false);int pid;
@@ -118,8 +126,10 @@ public final class Pg549CompletedDeployment {
               require(r.next() && r.getBoolean(3));pid=r.getInt(1);require(!r.next());}
             phase="REFERENCE_SCOPE";var refs=new References(pid,database);
             try{
-              refs.check("before");phase="COMPLETED_BEFORE";
-              if(mode.equals("activate")){phase="CANDIDATE_FREEZE";Pg387TrustedDeployment.freezeCandidate();phase="CODE_ONLY_PUBLISH";publish(next);}phase="DONE_AFTER";refs.check("after");
+              refs.check("before");phase="CANDIDATE_READONLY";
+              Pg464CodeOnlyDeployment.configure("PG548",source,NEXT);Pg387TrustedDeployment.expectedSqlCount=28;
+              immutableCandidate();phase="CANDIDATE_TYPED_BOM";var next=Pg387TrustedDeployment.verify();require(next.manifestSha256().equals(digest));signedFiles();refs.check("before");
+              if(mode.equals("activate")){phase="CODE_ONLY_PUBLISH";publish(next);}phase="DONE_AFTER";refs.check("after");
               
               phase="DATABASE_CLOSE";database.rollback();database.close();phase="REFERENCE_CLOSE";refs.release();
             }catch(Exception|Error failure){retain(failure);throw failure;}

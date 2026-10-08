@@ -15,7 +15,7 @@ from pg549_completed_contract import OLD,NEXT,EPOCH,APPROVAL,NEW_APPROVAL,change
 def main():
     require(os.geteuid()==0 and len(sys.argv)==3 and sys.argv[1]in('verify','activate')and sys.argv[2].isdigit())
     mode=sys.argv[1];backend=int(sys.argv[2]);require(backend>1);os.umask(0o077)
-    save=Path('/var/lib/pgpt-s1-preservation/pg549-completed-'+mode+'-v1')
+    save=Path('/var/lib/pgpt-s1-preservation/pg549-completed-'+mode+'-v4')
     boundary_raw=Path('/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v2/boundaries.private.json').read_bytes()
     require(hashlib.sha256(boundary_raw).hexdigest()=='0e7fe76e884f918d936842d8bf887c03f816099a11a9a988d022720a13c43726')
     env,baseline,initial,_,_,captured=load(post=True,caddy_before=json.loads(boundary_raw)['caddyExecStartPre'])

@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import unittest
+from pathlib import Path
 from pg549_completed_contract import OLD,NEXT,STARTUP,EPOCH,NEW_APPROVAL,epoch_transition,changed_only
 
 OLD_EPOCH=b'NKEPOCH1\nstate=ISSUED\nboot_id=cc9ed874-7f4f-450e-a188-8de1e42c8441\nepoch_id=11111111-2222-4333-8444-555555555555\nrun_id=91a748b4-1abe-484c-9682-44f46429b324\ncutoff_utc=2026-10-06T12:06:14.564793Z\nactivation_id=179758d2-5b77-443a-a743-bf0065e732ea\npermit_sha256='+b'1'*64+b'\n'
@@ -12,6 +13,15 @@ def file(raw,inode,mode):return {'metadata':[1,inode,0,0,0o100000|mode,1,len(raw
 
 
 class ContractTest(unittest.TestCase):
+    def test_readonly_precedes_typed_bom_in_owned_scope(self):
+        source=Path(__file__).with_name('Pg549CompletedDeployment.java').read_text()
+        body=source[source.index('public static void main'):]
+        self.assertLess(body.index('var refs=new References'),body.index('immutableCandidate();'))
+        self.assertLess(body.index('immutableCandidate();'),body.index('phase="CANDIDATE_TYPED_BOM"'))
+        self.assertLess(body.index('phase="CANDIDATE_TYPED_BOM"'),body.index('publish(next)'))
+        self.assertIn('if(result==0)require',source)
+        self.assertIn('else Pg387TrustedDeployment.freezeCandidate();',source)
+
     def test_epoch_normal_and_negative(self):
         epoch_transition(OLD_EPOCH,NEW_EPOCH)
         for value in (None,b'',NEW_EPOCH+b'foreign=x\n',NEW_EPOCH.replace(b'state=INVALID',b'state=ISSUED'),NEW_EPOCH.replace(b'22222222-2222-4333-8444-555555555555',b'11111111-2222-4333-8444-555555555555'),NEW_EPOCH.replace(b'2026-10-06T12:06:14.564793Z',b'2026-10-07T12:06:14.564793Z'),NEW_EPOCH.replace(b'activation_id=179758d2',b'activation_id=279758d2'),NEW_EPOCH.replace(b'permit_sha256=-',b'permit_sha256='+b'1'*64)):
