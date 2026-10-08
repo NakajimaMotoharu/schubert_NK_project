@@ -12,8 +12,8 @@ import dbus
 from pg543_runtime_readback import load, RUNTIME
 from pg543_retirement_contract import phase_action, require
 
-SAVE = Path('/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v1')
-PROBE = Path('/var/lib/pgpt-s1-preservation/pg543-runtime-readonly-v1')
+SAVE = Path('/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v2')
+PROBE = Path('/var/lib/pgpt-s1-preservation/pg543-runtime-readonly-v2')
 
 
 def main():

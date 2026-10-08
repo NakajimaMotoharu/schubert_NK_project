@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 /** SSC198 separate fixed runtime preparation only. No service start/DB mutation. */
 public final class Pg543RuntimeRetirement {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg543-retirement-tools-v2");
-  static Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg543-retirement-tools-v3");
+  static Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v2");
   static String phase="PREFLIGHT";
   static String readonlyMode="retire";
   static void require(boolean value){if(!value)throw new IllegalStateException("fixed runtime resume refused");}
@@ -45,7 +45,7 @@ public final class Pg543RuntimeRetirement {
   public static void main(String[] args)throws Exception{
     require(args.length==1 && Set.of("retire","verify").contains(args[0]));
     boolean readonly="verify".equals(args[0]);readonlyMode=args[0];
-    if(readonly)SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg543-runtime-readonly-v1");
+    if(readonly)SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg543-runtime-readonly-v2");
     require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));
     require(MaintenanceFileLock.create().tryExclusive(()->Pg387TrustedDeployment.checked(()->{
       try{return StartupAdmissionFile.create().tryExclusive(a->Pg387TrustedDeployment.checked(()->{
