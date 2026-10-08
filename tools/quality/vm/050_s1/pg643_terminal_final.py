@@ -14,10 +14,11 @@ P = Path('/home/mini/codex/project1/work/pgpt-vm/private')
 SEAL = r'''
 import hashlib,json,os,pathlib,stat
 assert os.geteuid()==0
+def metadata9(s):return(s.st_dev,s.st_ino,s.st_uid,s.st_gid,s.st_mode,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
 r=pathlib.Path('/var/lib/pgpt-s1-preservation/pg642-native-stop-v1');v={}
 for name in ('before.private.json','after.private.json','parent.private.jsonl','complete.private'):
  p=r/name;s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_uid==s.st_gid==0 and stat.S_IMODE(s.st_mode)==0o600 and s.st_nlink==1 and not os.listxattr(p)and 0<s.st_size<=67108864
- raw=p.read_bytes();assert p.lstat()==s;v[name]=hashlib.sha256(raw).hexdigest()
+ raw=p.read_bytes();assert metadata9(p.lstat())==metadata9(s)and not os.listxattr(p);v[name]=hashlib.sha256(raw).hexdigest()
 print(json.dumps(v))
 '''
 
@@ -26,7 +27,7 @@ def payload(proof, seals):
     value = previous.PAYLOAD
     for old, new in bindings(proof): value = value.replace(old, new)
     for old, new in (
-        ('pg613', 'pg643'), ('PG613', 'PG643'), ('pg600-manifest.sig', 'pg631-manifest.sig'),
+        ('pg613-terminal-final-v1', 'pg643-terminal-final-v2'), ('PG613-terminal-final-v1', 'PG643-terminal-final-v2'), ('pg600-manifest.sig', 'pg631-manifest.sig'),
         ('19b7e618ef04f79aff6cde2c2dbf45269c1f9651efaa44f04d81d84d02b85912', seals['before.private.json']),
         ('a7e90f2973f966def39d473f09274383bc866ad37d98b73c96658ece0a09c849', seals['after.private.json']),
         ('8f31ba931b056ae9776855ac503403e9688eb34316873169eb20205aae3badae', seals['complete.private']),
@@ -34,6 +35,10 @@ def payload(proof, seals):
     ):
         assert old in value
         value = value.replace(old, new)
+    marker = "require(p.lstat()==s and hashlib.sha256(raw).hexdigest()==sha)"
+    assert value.count(marker) == 1
+    value = value.replace(marker, "require(metadata9(p.lstat())==metadata9(s) and not os.listxattr(p) and hashlib.sha256(raw).hexdigest()==sha)")
+    value = value.replace('def sealed(name,sha):', 'def metadata9(s):return(s.st_dev,s.st_ino,s.st_uid,s.st_gid,s.st_mode,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)\ndef sealed(name,sha):')
     return value
 
 
@@ -55,14 +60,14 @@ def main():
     code = 'HASHES='+repr(hashes)+'\nRECEIPT='+repr(receipt)+'\n'+payload(proof, seals)
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     result = subprocess.run(ssh, input=code.encode(), capture_output=True, timeout=90)
-    with (W/'pg643-terminal-final-v1.private.log').open('xb') as f:
+    with (W/'pg643-terminal-final-v2.private.log').open('xb') as f:
         f.write(result.stderr); f.flush(); os.fsync(f.fileno())
-    with (W/'pg643-terminal-final-v1.exit').open('x') as f: f.write(str(result.returncode)+'\n')
+    with (W/'pg643-terminal-final-v2.exit').open('x') as f: f.write(str(result.returncode)+'\n')
     if result.returncode == 0:
         safe = json.loads(result.stdout)
         safe.update(startedUTC=started, endedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                     operatorSource=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip())
-        with (W/'pg643-terminal-final-v1.safe.json').open('x') as f: json.dump(safe, f, sort_keys=True)
+        with (W/'pg643-terminal-final-v2.safe.json').open('x') as f: json.dump(safe, f, sort_keys=True)
         print(json.dumps({k:safe[k] for k in ('actualExit', 'run', 'all24UnchangedTwice', 'allTenUnitsKernelEmpty', 'allActorGone', 'allClientAdvisoryFlock0', 'whole187SignedArtifactBytesVerified', 'nativePhysicalFiles')}))
     else: print(json.dumps({'actualExit': result.returncode, 'privateLogSha256': hashlib.sha256(result.stderr).hexdigest()}))
     raise SystemExit(result.returncode)
