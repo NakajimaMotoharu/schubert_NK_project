@@ -16,6 +16,61 @@ final class NativeCoveragePrivateFileTest {
   private static final String NAME = "1234567890abcdef1234567890abcdef.terminal.exec";
   @TempDir Path root;
 
+  private static final String PUBLIC_CGROUP = "0::/system.slice/schubert-nk-api.service\n";
+
+  private static ChildStartupContext.Observed observed(int difference) {
+    return new ChildStartupContext.Observed(
+        difference == 1 ? "PUBLIC_BOOT_B" : "PUBLIC_BOOT_A",
+        difference == 2 ? 43 : 42,
+        difference == 3 ? 101 : 100,
+        difference == 4 ? 201 : 200,
+        difference == 5 ? 202 : 201,
+        difference == 6 ? List.of(201L, 203L) : List.of(201L, 202L),
+        difference == 7 ? "0::/PUBLIC_OTHER\n" : PUBLIC_CGROUP,
+        difference != 8,
+        difference != 9);
+  }
+
+  private static void processRefused(org.junit.jupiter.api.function.Executable operation) {
+    var error = assertThrows(IOException.class, operation);
+    assertEquals("fixed PT native capture unavailable", error.getMessage());
+    assertNull(error.getCause());
+    assertEquals(0, error.getSuppressed().length);
+  }
+
+  @Test
+  void nexport598001OrdinaryObservedDataRequiresEveryRoleAndPrivilegeField() throws Exception {
+    var fixed = new FixedServiceIdentity.Value(200, 201, List.of(201L, 202L));
+    NativeCoveragePrivateFile.verifyOrdinaryProcess(fixed, observed(0), PUBLIC_CGROUP);
+    for (int difference = 4; difference <= 9; difference++) {
+      int field = difference;
+      processRefused(
+          () ->
+              NativeCoveragePrivateFile.verifyOrdinaryProcess(
+                  fixed, observed(field), PUBLIC_CGROUP));
+    }
+    processRefused(
+        () -> NativeCoveragePrivateFile.verifyOrdinaryProcess(null, observed(0), PUBLIC_CGROUP));
+    processRefused(
+        () -> NativeCoveragePrivateFile.verifyOrdinaryProcess(fixed, null, PUBLIC_CGROUP));
+    processRefused(() -> NativeCoveragePrivateFile.verifyOrdinaryProcess(fixed, observed(0), null));
+    // Literal data validation is not a real UID/cgroup/native process or startup proof.
+  }
+
+  @Test
+  void nexport598002EveryChangedFullObservedFieldAndMissingSnapshotRefusesAcceptance()
+      throws Exception {
+    var before = observed(0);
+    NativeCoveragePrivateFile.verifySameOrdinaryProcess(before, observed(0));
+    for (int difference = 1; difference <= 9; difference++) {
+      int field = difference;
+      processRefused(
+          () -> NativeCoveragePrivateFile.verifySameOrdinaryProcess(before, observed(field)));
+    }
+    processRefused(() -> NativeCoveragePrivateFile.verifySameOrdinaryProcess(null, before));
+    processRefused(() -> NativeCoveragePrivateFile.verifySameOrdinaryProcess(before, null));
+  }
+
   private long uid() throws IOException {
     return Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid"));
   }

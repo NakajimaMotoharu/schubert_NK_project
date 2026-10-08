@@ -1,5 +1,9 @@
 # PG597 PUBLIC agent反射契約
 
+## V3実結果（2026-10-08 22:00:46 JST）
+
+sourcef7fd97a45（fullはpublic operatorSource）/27PT/FESflaky-notrun指標0/actual0/13s/静的bootstrap0/NullAwayWerror/format/sourceguard不変。第五terminal factory条件両role無計測設定→empty/null role→固定拒否を確認。publicAgent branch22/22維持、四counter100未達・default native未受入。candidate1603main・二変更/abstract三追加/削除0・他五module byte不変。private manifest SHA03a51266e880357b55e4c1f0809962324da8a228cabd6580de2656bee13bea6b/public同run、旧V1compile0PT/旧V2成功は別source保存。VM969/currentPG548/原本Backup/旧18native変更0、当candidateへ旧native/PG596full成功を流用0。次測定保存のordinary process/全snapshot不変policyを内部データ判定として独立試験し、必要変更群回帰→当source native default/保存処理観測へ継続。
+
 ## V1/V2実結果・V3追加（2026-10-08 21:54:46 JST）
 
 V1source23bea04fa/newPT0/testCompile1はBUG881/YKT650 qualified Nullable記述位置、旧XML6加算0/全前exec保持。V2sourcefcd707f526a7ba2099c51f6ca090fcf01e15b01d/26PT/FESflaky-notrun指標0/actual0・14s/静的bootstrap0/NullAwayWerror/format、private manifest SHA0e1e4dda99bd901da2471f619cf7afc878f96d5581335a1f048881c9dddb1214/public同run。PUBLIC agent branch22/22、line38covered3missed/method7covered2missed/class1covered、default実nativebinding未観測あり・四100未達。

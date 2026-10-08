@@ -11,6 +11,7 @@ case "${2:-v1}" in
   v1) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v1 ;;
   v2) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v2 ;;
   v3) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v3 ;;
+  PG598) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg598-ordinary-process-policy-v1 ;;
   *) exit 2 ;;
 esac
 test ! -e "$task_base"
@@ -29,9 +30,11 @@ for module in ('protocol','storage','bootstrap','api','web','batch'):
  name='schubert-nk-'+module;jar=name+'-0.1.0-SNAPSHOT.jar';a=[]
  for p in (old/module/jar,pathlib.Path('src')/name/'target'/jar,pathlib.Path('/home/mini/codex/project1/work/toolchain/m2/repository/dev/codex/schubert')/name/'0.1.0-SNAPSHOT'/jar):
   with zipfile.ZipFile(p)as z:a.append({n:z.read(n)for n in z.namelist()if n.endswith('.class')})
- if sys.argv[2]=='v3' and module=='bootstrap':
-  selected=w/'pg597-public-agent-driver-v2';assert hashlib.sha256((selected/'manifest.safe.json').read_bytes()).hexdigest()=='0e1e4dda99bd901da2471f619cf7afc878f96d5581335a1f048881c9dddb1214'
-  selected_proof=json.loads((selected/'manifest.safe.json').read_bytes());assert selected_proof['actualExit']==0 and selected_proof['selectedTests']==26
+ if sys.argv[2]in ('v3','PG598') and module=='bootstrap':
+  selected=w/('pg597-public-agent-driver-v2' if sys.argv[2]=='v3' else 'pg597-public-agent-driver-v3')
+  digest='0e1e4dda99bd901da2471f619cf7afc878f96d5581335a1f048881c9dddb1214' if sys.argv[2]=='v3' else '03a51266e880357b55e4c1f0809962324da8a228cabd6580de2656bee13bea6b'
+  assert hashlib.sha256((selected/'manifest.safe.json').read_bytes()).hexdigest()==digest
+  selected_proof=json.loads((selected/'manifest.safe.json').read_bytes());assert selected_proof['actualExit']==0 and selected_proof['selectedTests']==(26 if sys.argv[2]=='v3' else 27)
   with zipfile.ZipFile(selected/jar)as z:current={n:z.read(n)for n in z.namelist()if n.endswith('.class')}
   assert a[0]==a[2] and a[1]==current and a[0]
  else:assert a[0]==a[1]==a[2]and a[0]

@@ -98,14 +98,7 @@ final class NativeCoveragePrivateFile {
             ? java.util.Optional.of(new ChildStartupContext().capture())
             : java.util.Optional.<ChildStartupContext.Observed>empty();
     if (ordinary.isPresent()) {
-      var own = ordinary.orElseThrow();
-      require(
-          own.uid() == uid
-              && own.gid() == gid
-              && own.groups().equals(fixed.groups())
-              && own.zeroCapabilities()
-              && own.noNewPrivileges()
-              && own.cgroup().equals(cgroup));
+      verifyOrdinaryProcess(fixed, ordinary.orElseThrow(), cgroup);
     }
     var run = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/run"));
     ResourceScope.use(
@@ -163,7 +156,30 @@ final class NativeCoveragePrivateFile {
             && security.effectiveUid() == uid
             && fixed.equals(profile.identity(new FixedServiceIdentity())));
     if (ordinary.isPresent())
-      require(ordinary.orElseThrow().equals(new ChildStartupContext().capture()));
+      verifySameOrdinaryProcess(ordinary.orElseThrow(), new ChildStartupContext().capture());
+  }
+
+  /** PG-D396/NEXPORT598: observed data policy, never startup or namespace authority. */
+  static void verifyOrdinaryProcess(
+      @Nullable FixedServiceIdentity.Value fixed,
+      @Nullable ChildStartupContext.Observed own,
+      @Nullable String cgroup)
+      throws IOException {
+    if (fixed == null || own == null || cgroup == null) throw unavailable();
+    require(
+        own.uid() == fixed.uid()
+            && own.gid() == fixed.gid()
+            && own.groups().equals(fixed.groups())
+            && own.zeroCapabilities()
+            && own.noNewPrivileges()
+            && own.cgroup().equals(cgroup));
+  }
+
+  static void verifySameOrdinaryProcess(
+      @Nullable ChildStartupContext.Observed before, @Nullable ChildStartupContext.Observed after)
+      throws IOException {
+    if (before == null || after == null) throw unavailable();
+    require(before.equals(after));
   }
 
   /** Borrowed directory only; all file callbacks retain the originally created inode descriptor. */
