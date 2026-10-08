@@ -135,6 +135,26 @@ final class ChildStartupContextTest {
   }
 
   @Test
+  void childctx009MissingUnitObserversNeverReturnOwnershipData() throws Exception {
+    // SS343: absent fixed observers must not mint Morning/Cleanup/Inspector/Broker evidence.
+    var io = new Fixture();
+    for (var parent : ChildStartupContext.MaintenanceParent.values()) {
+      var error = assertThrows(IOException.class, () -> io.maintenanceUnit(parent));
+      assertEquals("child startup context unavailable", error.getMessage());
+      assertNull(error.getCause());
+    }
+    var inspector = assertThrows(IOException.class, io::inspectorUnit);
+    var broker = assertThrows(IOException.class, io::brokerUnit);
+    var caddy = assertThrows(IOException.class, io::caddyUnit);
+    for (var error : List.of(inspector, broker, caddy)) {
+      assertEquals("child startup context unavailable", error.getMessage());
+      assertNull(error.getCause());
+    }
+    // Refused unit observers neither alter the self-capture fixture nor produce parent-unit data.
+    assertEquals(own(), io.subject().capture());
+  }
+
+  @Test
   void childctx001IndependentGoldenBindingsAndBothUnits() throws Exception {
     assertEquals(own(), new Fixture().subject().capture());
     verify(GOLDEN, own());
