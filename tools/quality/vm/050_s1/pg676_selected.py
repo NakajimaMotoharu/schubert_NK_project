@@ -7,7 +7,7 @@ R = Path(__file__).resolve().parent
 
 def source():
     raw = (R/'pg669_entry_selected_v1.sh').read_text()
-    raw = raw.replace('pg669-entry-component-v1', 'pg676-inspector-owner-component-v1')
+    raw = raw.replace('pg669-entry-component-v1', 'pg676-inspector-owner-component-v2')
     raw = raw.replace('PG669_ENTRY_SELECTED', 'PG676_OWNER_SELECTED')
     raw = raw.replace('InspectorEntryBoundaryTest,', 'InspectorOwnerContractTest,InspectorEntryBoundaryTest,')
     raw = raw.replace('  dev.codex.schubert.nk.api.file.InspectorApplicationTest',

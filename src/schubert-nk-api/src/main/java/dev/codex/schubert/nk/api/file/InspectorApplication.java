@@ -111,7 +111,7 @@ public final class InspectorApplication {
   /** PT-INSP-OWN676001..006: internal order/budget contract, not live ownership proof. */
   static InspectionExecution executeGuarded(
       @Nullable InspectionRun run,
-      @Nullable MaintenanceOwnerFrame.Guard parents,
+      MaintenanceOwnerFrame.@Nullable Guard parents,
       @Nullable InspectorProbe probe,
       @Nullable OwnedOperation operation)
       throws IOException, NoSuchAlgorithmException {
