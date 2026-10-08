@@ -82,6 +82,89 @@ final class MorningDatabaseAccessContractTest {
   }
 
   @Test
+  void maccess587001OriginalAwareExpiryDefaultForwardsSameArgumentsAndBorrowedData()
+      throws Exception {
+    MaintenanceOwnerFrame.Guard owner = () -> fail("data dispatch cannot mint native owner");
+    var expected =
+        new MorningDatabaseSession.ExpiryBegins(
+            new BatchStepAttempt(587001, RUN, BatchStep.CLEAN_EXPIRY, 1, NOW, false),
+            Optional.empty());
+    var calls = new AtomicInteger();
+    var access =
+        new Unsupported() {
+          @Override
+          public MorningDatabaseSession.ExpiryBegins beginExpiry(
+              BatchRun actualRun, Instant actualTime, MaintenanceOwnerFrame.Guard actualOwner) {
+            assertSame(RUN, actualRun);
+            assertSame(NOW, actualTime);
+            assertSame(owner, actualOwner);
+            calls.incrementAndGet();
+            return expected;
+          }
+        };
+    assertSame(
+        expected,
+        access.beginExpiry(RUN, NOW, owner, (id, time) -> fail("default must not consume lookup")));
+    assertEquals(1, calls.get());
+    assertThrows(NullPointerException.class, () -> access.beginExpiry(RUN, NOW, owner, null));
+    assertEquals(1, calls.get());
+  }
+
+  @Test
+  void maccess587002OriginalAwareCleanupDefaultForwardsSameSnapshotAndBorrowedData()
+      throws Exception {
+    MaintenanceOwnerFrame.Guard owner = () -> fail("data dispatch cannot mint native owner");
+    var steps =
+        List.of(
+            BatchStep.CLEAN_NOTIFICATION,
+            BatchStep.CLEAN_QUESTION,
+            BatchStep.CLEAN_SESSION,
+            BatchStep.CLEAN_INBOX_OUTBOX,
+            BatchStep.CLEAN_LOG,
+            BatchStep.CLEAN_BATCH_RUN,
+            BatchStep.CLEAN_TRANSFER);
+    var entries = new ArrayList<CleanupTerminalRepository.Entry>();
+    var success =
+        new BatchStepResult(
+            BatchStepResult.Status.SUCCESS, 0, 0, 0, 0, BatchStepResult.Reason.NONE);
+    for (int i = 0; i < steps.size(); i++)
+      entries.add(
+          new CleanupTerminalRepository.Entry(
+              new BatchStepAttempt(587010 + i, RUN, steps.get(i), 1, NOW, false),
+              NOW.plusSeconds(1),
+              success));
+    var snapshot = new CleanupTerminalRepository.Snapshot(entries);
+    List<Optional<CleanupTerminalRepository.Entry>> expected =
+        List.of(
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty(),
+            Optional.empty());
+    var calls = new AtomicInteger();
+    var access =
+        new Unsupported() {
+          @Override
+          public List<Optional<CleanupTerminalRepository.Entry>> cleanupReferences(
+              CleanupTerminalRepository.Snapshot actual, MaintenanceOwnerFrame.Guard actualOwner) {
+            assertSame(snapshot, actual);
+            assertSame(owner, actualOwner);
+            calls.incrementAndGet();
+            return expected;
+          }
+        };
+    assertSame(
+        expected,
+        access.cleanupReferences(
+            snapshot, owner, (id, time) -> fail("default must not consume lookup")));
+    assertEquals(1, calls.get());
+    assertThrows(NullPointerException.class, () -> access.cleanupReferences(snapshot, owner, null));
+    assertEquals(1, calls.get());
+  }
+
+  @Test
   void maccess586001ReceiptAndCleanupDataDoNotCreateDatabaseAuthority() throws Exception {
     var access = new Unsupported();
     MaintenanceOwnerFrame.Guard owner = () -> fail("unsupported owner must not run");
