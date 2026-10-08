@@ -193,6 +193,18 @@ final class MorningDatabaseSessionTest {
 
   private void mdb590Scenarios(int seed, String faultPhase, String faultMethod, boolean drift)
       throws Exception {
+    mdb590Scenarios(seed, faultPhase, faultMethod, drift, -1);
+  }
+
+  @Test
+  void mdb595001RetainedExpiryUsesExactOriginalAnchorAndRejectsWrongMissingNullLookup()
+      throws Exception {
+    for (int mode = 0; mode < 4; mode++) mdb590Scenarios(37 + mode, "", "", false, mode);
+  }
+
+  private void mdb590Scenarios(
+      int seed, String faultPhase, String faultMethod, boolean drift, int priorMode)
+      throws Exception {
     var zero = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(0);
     var ten = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(10);
     var thirty = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(30);
@@ -208,7 +220,7 @@ final class MorningDatabaseSessionTest {
             "CLEAN_LOG",
             "CLEAN_BATCH_RUN",
             "CLEAN_TRANSFER");
-    for (int index = 0; index < (seed == 0 ? 6 : 3); index++) {
+    for (int index = 0; index < (priorMode >= 0 ? 1 : seed == 0 ? 6 : 3); index++) {
       int scenario = seed * 6 + index;
       int terminal = index % 3;
       boolean matchingReceipt = index < 3;
@@ -218,6 +230,9 @@ final class MorningDatabaseSessionTest {
               : java.time.LocalDate.of(2010, 1, 1).plusDays(scenario);
       Instant began = fixtureDate.atStartOfDay(java.time.ZoneOffset.UTC).toInstant();
       var run = new BatchRun(new UUID(590001, scenario + 1), began.minusSeconds(32400));
+      var priorRun = new BatchRun(new UUID(595001, scenario + 1), run.cutoff().plusSeconds(1));
+      var priorBefore = new AtomicReference<String>();
+      var originalCalls = new AtomicInteger();
       var retained = new AtomicReference<Connection>();
       var readBefore = new AtomicReference<String>();
       var phase = new AtomicReference<>("");
@@ -345,6 +360,102 @@ final class MorningDatabaseSessionTest {
               phase.set("");
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, null, owner));
               assertThrows(NullPointerException.class, () -> session.beginExpiry(run, began, null));
+              if (priorMode >= 0) {
+                long priorId = 595000000L + scenario;
+                try (var sql =
+                    observer.prepareStatement(
+                        "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary,expiry_cutoff_at,expiry_before_count,expiry_after_count) values(?,?,?,'CLEAN_EXPIRY',1,?,?,'SUCCESS',1,1,0,17,null,null,?,2,1)")) {
+                  sql.setLong(1, priorId);
+                  sql.setObject(2, priorRun.id());
+                  sql.setObject(3, fixtureDate);
+                  sql.setObject(4, began.minusSeconds(10).atOffset(java.time.ZoneOffset.UTC));
+                  sql.setObject(5, began.minusSeconds(9).atOffset(java.time.ZoneOffset.UTC));
+                  sql.setObject(
+                      6, priorRun.cutoff().minusSeconds(604800).atOffset(java.time.ZoneOffset.UTC));
+                  assertEquals(1, sql.executeUpdate());
+                  priorBefore.set(mdb588Audit(observer, priorRun));
+                  readBefore.set(mdb588Audit(observer, run));
+                } catch (SQLException failure) {
+                  throw new IOException("fixture retained expiry", failure);
+                }
+                var reused =
+                    session.beginExpiry(
+                        run,
+                        began.plusSeconds(4),
+                        owner,
+                        (id, at) -> {
+                          originalCalls.incrementAndGet();
+                          assertEquals(priorRun.id(), id);
+                          assertEquals(began.plusSeconds(4), at);
+                          if (priorMode == 1)
+                            return new BatchRun(
+                                priorRun.id(), priorRun.cutoff().plusSeconds(86400));
+                          if (priorMode == 2) throw new IOException("PUBLIC_ORIGINAL_REFUSAL");
+                          if (priorMode == 3) return null;
+                          return priorRun;
+                        });
+                assertTrue(reused.current().skipped());
+                assertEquals(2, reused.current().attempt());
+                assertEquals(run, reused.current().run());
+                assertEquals(began.plusSeconds(4), reused.current().startedAt());
+                var literalHandle =
+                    new BatchStepAttempt(
+                        priorId,
+                        priorRun,
+                        BatchStep.CLEAN_EXPIRY,
+                        1,
+                        began.minusSeconds(10),
+                        false);
+                var literalAudit =
+                    new ExpiryAuditRepository.Snapshot(
+                        "SUCCESS",
+                        priorRun.cutoff().minusSeconds(604800),
+                        2L,
+                        1L,
+                        1,
+                        1,
+                        0,
+                        17,
+                        began.minusSeconds(9),
+                        null,
+                        null);
+                assertEquals(
+                    Optional.of(new ExpiryAuditRepository.Prior(literalHandle, literalAudit)),
+                    reused.prior());
+                assertEquals(
+                    0,
+                    session.handoffExpiry(
+                        () -> {
+                          try (var child =
+                              DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+                            assertTrue(advisory(child));
+                            releaseAdvisory(child);
+                          } catch (SQLException failure) {
+                            throw new IOException("fixture retained handoff", failure);
+                          }
+                          return 0;
+                        }));
+                try {
+                  readBefore.set(mdb588Audit(observer, run));
+                } catch (SQLException failure) {
+                  throw new IOException("fixture retained current audit", failure);
+                }
+                assertThrows(IOException.class, () -> session.observeExpiry(reused, thirty, owner));
+                var observed = session.observeExpiry(reused, zero, owner);
+                assertEquals(reused, observed.begins());
+                assertEquals(began.plusSeconds(4), observed.ended());
+                assertEquals(
+                    new BatchStepResult(
+                        BatchStepResult.Status.SKIPPED,
+                        0,
+                        0,
+                        0,
+                        0,
+                        BatchStepResult.Reason.ALREADY_SUCCESSFUL),
+                    observed.result());
+                assertEquals(literalAudit, observed.audit());
+                return Boolean.TRUE;
+              }
               phase.set("beginExpiry");
               var expiry = session.beginExpiry(run, began.plusSeconds(4), owner);
               phase.set("");
@@ -423,7 +534,7 @@ final class MorningDatabaseSessionTest {
               assertEquals(Long.valueOf(terminal == 0 ? 0 : 1), actual.audit().after());
               return Boolean.TRUE;
             };
-        if (seed == 0 && index < 3) {
+        if ((seed == 0 && index < 3) || priorMode == 0) {
           try {
             assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
           } catch (IOException failure) {
@@ -436,12 +547,14 @@ final class MorningDatabaseSessionTest {
                     + lastSqlState.get(),
                 failure);
           }
+        } else if (priorMode == 3) {
+          assertThrows(NullPointerException.class, () -> subject.execute(credential(), operation));
         } else
           assertEquals(
               "root batch database unavailable",
               assertThrows(IOException.class, () -> subject.execute(credential(), operation))
                   .getMessage());
-        if (seed != 0)
+        if (seed != 0 && priorMode < 0)
           assertTrue(
               injected.get(),
               faultPhase
@@ -454,6 +567,10 @@ final class MorningDatabaseSessionTest {
                   + " sqlstate="
                   + lastSqlState.get());
         assertEquals(readBefore.get(), mdb588Audit(observer, run));
+        if (priorMode >= 0) {
+          assertEquals(1, originalCalls.get());
+          assertEquals(priorBefore.get(), mdb588Audit(observer, priorRun));
+        }
         assertTrue(retained.get().isClosed());
         awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
       }
