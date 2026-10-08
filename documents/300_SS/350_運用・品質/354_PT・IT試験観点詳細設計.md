@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC228（2026-10-09、SS343固定failed30 pending profileの独立PT）：未完了active/graph-derived pending/completionEMPTYの全byte不変、別run/cutoff/activation、偽DONE、unknown namespace、署名/classdelta/SQL28、currentfailedPID1/INV/job/status30/予算、全24/494行・二BackupSUCCESS/元492全値、Backup/startup/epoch/Unit/sourcefiles・same-peer/owner/十九観測二読を独立literalで検証する。verify全不変、activate approval/currentだけ、epoch/active/DB/Unit変異を拒否。M/A/DB/advisory/十Ref/FD正常帰還とresources0、close/競合/半切替保全を分ける。別fresh resumeで同e492SUCCESSpair再検証・fresh worker/CONFIG・新二SKIP zero counts/bytes・八既成功参照/十attempt494→504・元原本同activationから真正DONE・owned停止/nativeを確認する。REUSED_SUCCESSの削除0/全旧Backup不変とBUG897 NEW_SUCCESS保持期限の実削除を別caseにし、hostfactory50や旧source成功をnative受入へ加算しない。全quality/CHR/DIF/同source正式条件を緩和せずIT/ST完了を宣言しない。
+
 SSC227（2026-10-08、SS343の新candidate completed code-only）：独立literalで現oldPG548/source969/a224・新PG600/source23b/a634・完全DONE/run/cutoff/activationを固定し、全snapshot型/欠落/null/foreign/同peer/所有/namespace/有限delta/approval/epoch全fieldを検証する。旧ISSUED→同activation新UUIDv4 INVALID以外、DB482row/原本Backup/credential/native/Unit設定・履歴変更を拒否。fresh verifyとactivateを別new-only scopeで行い、全M-A/DB/十Ref/bus/FD正常・peer/advisory/FLOCK0/全原値再読を独立に採取する。PG5993457/511・静的六0は新candidate host成功、旧18nativeは非輸入/global四100未達/正式24-1964-53不変更。配備後に新source実Root/普通main/真正親DONE/owned停止/native/CHR/DIFと正式source/run全scopeを確認し、未実行・unknown・別source・失敗・skipを合格に加算しない。IT/ST完了宣言はしない。
 
 ## 1. 目的・状態・追跡
