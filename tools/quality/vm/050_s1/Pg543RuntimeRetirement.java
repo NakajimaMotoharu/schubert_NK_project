@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /** SSC198 separate fixed runtime preparation only. No service start/DB mutation. */
 public final class Pg543RuntimeRetirement {
-  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg543-retirement-tools-v1");
+  static final Path TOOLS=Path.of("/var/lib/pgpt-s1-preservation/pg543-retirement-tools-v2");
   static Path SAVE=Path.of("/var/lib/pgpt-s1-preservation/pg543-runtime-retirement-v1");
   static String phase="PREFLIGHT";
   static String readonlyMode="retire";

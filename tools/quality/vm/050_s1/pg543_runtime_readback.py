@@ -1,6 +1,7 @@
 """Current PG537 post-retirement full provenance; no mutation and no implicit old owner."""
 import ast
 import hashlib
+import grp
 import json
 import os
 from pathlib import Path
@@ -8,7 +9,7 @@ import re
 import stat
 import subprocess
 import pathlib
-from pg543_retirement_contract import validate_snapshot, configurations, MORNING, CADDY, require
+from pg543_retirement_contract import validate_snapshot, configurations, release_metadata, MORNING, CADDY, require
 
 OLD = Path('/var/lib/pgpt-s1-preservation/pg537-bootstrap-retire-v1')
 RUNTIME = Path('/run/systemd/system/'+MORNING+'.d/pg492-once-resume.conf')
@@ -48,7 +49,14 @@ def load(owner=None):
     deps = dict(re=re); exec(compile(depraw,'<sealed dependency set policy>','exec'),deps)
     caddy_pre = show(CADDY,{'ExecStartPre'})['ExecStartPre']
     native = strict(Path('/etc/systemd/system/'+MORNING+'.d/pg477-native-coverage.conf'),0o644,4096)
-    base = strict(Path('/opt/schubert-nk/releases/0.1.0-PG495/systemd/'+MORNING),0o644,16384)
+    basepath = Path('/opt/schubert-nk/releases/0.1.0-PG495/systemd')/MORNING
+    bm=env['metadata'](basepath); release_metadata(bm)
+    require(grp.getgrnam('schubert').gr_gid==986 and 'system.posix_acl_access' not in os.listxattr(basepath))
+    base=basepath.read_bytes(); require(env['metadata'](basepath)==bm)
+    manifest_raw=Path('/opt/schubert-nk/releases/0.1.0-PG495/RELEASE-MANIFEST.json').read_bytes()
+    require(hashlib.sha256(manifest_raw).hexdigest()=='f6992c4de95477594987d2f10def06110d0c28cb6d4fd063da47bd0bab7e7d44')
+    artifact=[v for v in json.loads(manifest_raw)['artifacts'] if v['path']=='systemd/'+MORNING]
+    require(len(artifact)==1 and artifact[0]['size']==len(base) and artifact[0]['sha256']==hashlib.sha256(base).hexdigest())
     # Independent declared golden comes from signed/native bytes, not observed argv.
     require(native.startswith(b'# PGPT only:') and b'--resume' not in native)
     lines = [l[10:] for l in native.decode('ascii').splitlines() if l.startswith('ExecStart=') and l != 'ExecStart=']

@@ -1,5 +1,6 @@
 """SSC198/192/217 current-generation finite delta; no resource operations here."""
 import re
+import stat
 from pg542_current_contract import UNITS, current_units, post_retirement_schema
 
 MORNING = 'schubert-nk-morning-controller.service'
@@ -9,6 +10,12 @@ CONFIG = frozenset('ExecStart DropInPaths ReadWritePaths User Group Supplementar
 NATIVE = '/etc/systemd/system/'+MORNING+'.d/pg477-native-coverage.conf'
 RUNTIME = '/run/systemd/system/'+MORNING+'.d/pg492-once-resume.conf'
 EMPTY = ('n/a', 'n/a', '0', '(null)', '0/0')
+
+
+def release_metadata(value):
+    require(isinstance(value,list) and len(value)==9 and all(type(v) is int for v in value))
+    require(value[2:6]==[0,986,stat.S_IFREG|0o640,1] and 0<value[6]<=16384)
+    return True
 
 
 def require(value):

@@ -1,5 +1,7 @@
 # PG543 現世代runtime退役・全資源正常返却
 
+実試験更新2026-10-08 10:47JST：source03f875237でnew Tools-v1 stage actual0/probe actual1、release配布Unitをeffective Root0644でstrictしたため拒否（BUG834/YKT603）。旧tool配置/failedlog保全、freshM-A/DB/Ref/SAVE/退役/reload/新start0。署名PG495 stage規約のRoot:schubert(986)/0640/単linkとmanifestのpath/size/shaへ是正、独立literal正/誤GID/mode/type/nlink/size/null/extraの4管理test/Werror新compile-v2/Pyflakes0。新Tools-v2/native-v2をnew-onlyで固定、v1操作再発行0、結果後記。C004/C007の実fault matrix未完、純source順序検査だけで故障網羅認定しない。
+
 NK-OPS-001 / RD OPS009・BAK/BKO / UI251 / SS342343353 SSC192198216217・QA047。ProductionはVM a2/PG495/schema028、host候補969/PG540とは別。PT管理工具、Production PT加点0。
 
 |Test ID|対象・入力・操作|独立期待値・根拠|

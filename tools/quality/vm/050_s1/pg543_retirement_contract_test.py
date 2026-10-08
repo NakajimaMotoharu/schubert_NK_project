@@ -2,7 +2,7 @@
 import copy
 from pathlib import Path
 import unittest
-from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action
+from pg543_retirement_contract import UNITS, FIELDS, CONFIG, MORNING, CADDY, NATIVE, RUNTIME, validate_snapshot, configurations, phase_action, release_metadata
 
 
 def execution(argv, supplement=('Wed 2026-10-07 20:08:51 UTC','Wed 2026-10-07 20:08:52 UTC','320189','exited','0')):
@@ -22,6 +22,14 @@ def fixture():
 
 
 class Contract(unittest.TestCase):
+    def test_release_role_not_effective_unit(self):
+        good=[1,2,0,986,0o100640,1,1836,1,2];self.assertTrue(release_metadata(good))
+        for index,value in ((2,999),(3,0),(3,981),(4,0o100644),(4,0o040640),(5,2),(6,0),(6,16385),(1,None)):
+            bad=good.copy();bad[index]=value
+            with self.assertRaises(ValueError):release_metadata(bad)
+        for bad in (None,good[:-1],good+[0]):
+            with self.assertRaises(ValueError):release_metadata(bad)
+
     def test_closed_schema(self):
         good=fixture(); self.assertTrue(validate_snapshot(good))
         for group in ('configuration','units'):
