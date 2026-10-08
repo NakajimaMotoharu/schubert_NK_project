@@ -1,0 +1,85 @@
+{
+  "run": "PG661-666-public-v1",
+  "atUTC": "2026-10-08T22:40:22.211309+00:00",
+  "operatorSource": "93a0542178d4a9b977379d4b72c53245f70a834f",
+  "productionSource": "36fe7a0b938489d61d17d49c1c30a6fbbef699d5",
+  "branch": "dev-foundation",
+  "os": "Ubuntu26.04 guest/Linux host",
+  "jdk": "25.0.4",
+  "tools": {
+    "jacoco": "0.8.15",
+    "asm": "9.10.1",
+    "postgresql": "18.6",
+    "pyflakes": "3.4.0"
+  },
+  "specs": [
+    "538_PG661_当sourceBootstrap前全20原値.md",
+    "539_PG662_当source既存ADMIN正規起動仕様.md",
+    "540_PG663_参照子import前固定Java回収仕様.md",
+    "541_PG664_推移import是正と既存ADMIN新試験枠.md",
+    "542_PG665_当既存ADMIN独立全20後条件.md",
+    "543_PG666_当Bootstrap単sessionと資格17合算.md"
+  ],
+  "testIds": [
+    "BOOT662001..004",
+    "PG663-C001..003",
+    "BOOT664001..004",
+    "BOOT665001..002",
+    "BOOT666001..002"
+  ],
+  "bugs": [
+    "BUG-911"
+  ],
+  "ykt": [
+    "YKT-680"
+  ],
+  "ssc": [
+    "SSC-231",
+    "SSC-232"
+  ],
+  "historicalFailure": {
+    "run": "PG662-verify-v1",
+    "operatorSource": "152c262f1",
+    "referenceExit": 1,
+    "transportJavaExit": 143,
+    "hostCollectorExit": 1,
+    "hostCollectorPostSourceGuard": true,
+    "normalClose": "UNKNOWN",
+    "errorOnlySha256": "c1935ed537f31f678be275164c100acc7db979986bf47cd0688d0ec363b0d761",
+    "normalizedAsSuccess": false
+  },
+  "files": {
+    "pg661-completed-baseline-v1.safe.json": {
+      "sha256": "27a4c8acdb0797629efde16503911affea841e090193cb68e9fefd5640bdbaf2",
+      "bytes": 499
+    },
+    "pg663-handoff-preflight-v1.safe.json": {
+      "sha256": "ec7fafe72e70f248cbd25e9357d25234f300013867bc168421bd3f65fdfacd1c",
+      "bytes": 1812
+    },
+    "pg663-handoff-execute-v1.safe.json": {
+      "sha256": "5f5e5b5c374aa315e17fd83db1444c43dd673ecf8a0e4cacc2a7ec96a3cb7cfa",
+      "bytes": 1809
+    },
+    "pg664-bootstrap-verify-v1.safe.json": {
+      "sha256": "b844c450c7b225d5bc97fa8aba448742a4a82d8b77c247f3007eb2f6d4a8554c",
+      "bytes": 1676
+    },
+    "pg664-bootstrap-execute-v1.safe.json": {
+      "sha256": "a3690908c4da3e4147ecc523a8b9438f691b21c76cbb9819d661a199f5fac184",
+      "bytes": 1678
+    },
+    "pg665-bootstrap-final-v3.safe.json": {
+      "sha256": "a45322021a8fc1048deb455ccabb9d3572ef236d0761978060aec1e076ccdea5",
+      "bytes": 2718
+    },
+    "pg666.safe.json": {
+      "sha256": "1f6afe2c4271993c29d8987d48c6beadb02cca6864bdb3d85dc6360e18d0584b",
+      "bytes": 3401
+    }
+  },
+  "rawExported": false,
+  "credentialAndPrivateExecutionDataExported": false,
+  "formalAccepted": false,
+  "coverage100": false
+}
