@@ -18,6 +18,15 @@ def same_value(before,actual):
 def same_rows(before,actual):
  if type(before)is not dict or type(actual)is not dict or len(before)!=24 or set(before)!=set(actual):return False
  return all(type(before[t])is list and type(actual[t])is list and same_value(before[t],actual[t])for t in before)
+def peer_query(backend):
+ require(type(backend)is int and 1<backend<=2147483647)
+ fixed=str(backend)
+ return ("select count(*) from pg_stat_activity where pid="+fixed+";"
+  "select count(*) from pg_stat_activity a where a.pid="+fixed+" and a.usename='schubert_batch' and a.datname='schubert_nk' and a.application_name='PG559-terminal-readback' and exists(select 1 from pg_locks l where l.pid=a.pid and l.locktype='advisory' and l.classid=0 and l.objid=71419602 and l.objsubid=1 and l.mode='ExclusiveLock' and l.granted);"
+  "select count(*) from pg_stat_activity where datname='schubert_nk' and backend_type='client backend' and pid not in ("+fixed+",pg_backend_pid());"
+  "select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and objsubid=1 and granted;")
+def peer_counts_valid(present,lines):
+ return type(present)is bool and type(lines)is list and lines==([b'1',b'1',b'0',b'1']if present else[b'0',b'0',b'0',b'0'])
 def main():
  require(os.geteuid()==0 and len(sys.argv)==3 and sys.argv[1]=='readback'and sys.argv[2].isdigit());backend=int(sys.argv[2]);os.umask(0o077)
  require(pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()==BOOT)
@@ -39,8 +48,7 @@ def main():
  held=owner();bus=dbus.SystemBus(private=True);manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager');refs=[]
  for u in units:manager.RefUnit(u);refs.append(u)
  def connection(present):
-  q="select count(*) from pg_stat_activity a where a.pid="+str(backend)+"and a.usename='schubert_batch'and a.datname='schubert_nk'and a.application_name='PG559-terminal-readback'and exists(select 1 from pg_locks l where l.pid=a.pid and l.locktype='advisory'and l.classid=0 and l.objid=71419602 and l.objsubid=1 and l.mode='ExclusiveLock'and l.granted);select count(*) from pg_stat_activity where datname='schubert_nk'and usename in ('schubert_batch','schubert_app','schubert_web_session','schubert_backup','schubert_inbox_inspector')and pid<>"+str(backend)+";"
-  require(command(['/usr/bin/sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',q],4096).splitlines()==[b'1'if present else b'0',b'0'])
+  require(peer_counts_valid(present,command(['/usr/bin/sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',peer_query(backend)],4096).splitlines()))
  def snapshot(present):
   require(owner()==held);connection(present)
   current={u:show(u,fields)for u in units};require(current==baseline['units'])
