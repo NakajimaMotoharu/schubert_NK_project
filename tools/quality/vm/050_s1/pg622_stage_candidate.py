@@ -113,7 +113,7 @@ def main():
         f.flush(); os.fsync(f.fileno())
     witness = b'PG622_UNUSED_CANDIDATE_PLACED artifacts187=true signatureVerified=true currentUnchanged=true businessActions0=true\n'
     if result.returncode == 0: assert log.read_bytes() == witness
-    safe = {'run': 'PG622-candidate-stage-v1', 'actualExit': result.returncode,
+    safe = {'run': 'PG622-candidate-stage-v2', 'actualExit': result.returncode,
             'candidateSource': SOURCE, 'operatorSource': operator, 'manifestSha256': DIGEST,
             'startedUTC': started, 'completedUTC': datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'privateLogSha256': hashlib.sha256(log.read_bytes()).hexdigest(),

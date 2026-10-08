@@ -23,6 +23,8 @@ class StageBinding(unittest.TestCase):
         for value in ('pg622-stage-v2','pg622-release-v2.tar','pg622-candidate-stage-v2'):
             self.assertIn(value,script)
         self.assertNotIn('pg622-stage-v1',script)
+        self.assertIn("'run': 'PG622-candidate-stage-v2'",script)
+        self.assertNotIn('PG622-candidate-stage-v1',script)
         self.assertEqual('72fb7440697ee1048a5c0145055dc1cc3c577914',constant('SOURCE'))
         self.assertEqual('4a2c35463b37956632b6586dfe18f07320777ea863696b25c1e14e913dd3fa1e',constant('DIGEST'))
         payload=constant('PAYLOAD');tree=ast.parse(payload)
