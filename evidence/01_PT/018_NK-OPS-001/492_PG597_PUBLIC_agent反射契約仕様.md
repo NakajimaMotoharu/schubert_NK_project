@@ -1,5 +1,13 @@
 # PG597 PUBLIC agent反射契約
 
+## V1/V2実結果・V3追加（2026-10-08 21:54:46 JST）
+
+V1source23bea04fa/newPT0/testCompile1はBUG881/YKT650 qualified Nullable記述位置、旧XML6加算0/全前exec保持。V2sourcefcd707f526a7ba2099c51f6ca090fcf01e15b01d/26PT/FESflaky-notrun指標0/actual0・14s/静的bootstrap0/NullAwayWerror/format、private manifest SHA0e1e4dda99bd901da2471f619cf7afc878f96d5581335a1f048881c9dddb1214/public同run。PUBLIC agent branch22/22、line38covered3missed/method7covered2missed/class1covered、default実nativebinding未観測あり・四100未達。
+
+Production candidate physical1603class、旧1600から親Checkpoint/内PublicAgent二byte変更・三abstract interface追加・他五module byte不変・削除0。三interfaceは実行counter無し、coverage除外設定0。VM installed source969/PG548は変えていない、旧18nativeの変更class byteを新証跡へ混ぜ0・PG596旧main3450full流用0。BUG881構文範囲完了、formal/global不変更。
+
+NCHECK597005を明示1PTとしてV3へ追加。実Maven JVMにreserved `/opt/pgpt-tools-pg390` option無しを独立確認し、INSPECTOR/BOOTSTRAP terminal factoryはOptional.emptyでauthority/file出力を作らない、null roleは固定IOException/cause無し。既六checkpoint契約と同四suiteを再選択27PT予定。V3command `bash tools/quality/vm/050_s1/pg597_public_agent_driver_v1.sh <固定HEAD> v3`、前V2exec/Jar/hashを認証して隔離/append0、main byteは同candidate2差分だけを確認、実前PASS加算0。
+
 Program NK-OPS-001、FixedNativeCoverageCheckpoint.PublicAgent、P018-08.01/.02、SYS002004/OPS009/TST004/UI212251/SS342343354451/SSC193/PG-D395。通常defaultの固定system loader/二FQN/AGENT_PATH/公開Method三本/nonreset falseを維持、private内部portだけを試験し、fixtureをnative authority/source認定にしない。
 
 NCHECK597001 正常：実public Java reflection fixtureの版0.8.15・固定Session文字列・独立golden wire、Class二本/source検査順序・三method戻り値・false引数を確認。expectedはfixture literalでProduction生成0。

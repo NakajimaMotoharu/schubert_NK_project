@@ -42,6 +42,19 @@ final class FixedNativeCoverageCheckpointTest {
 
   public static final class MetadataFixture {}
 
+  @Test
+  void ncheck597005TerminalFactoryWithNoReservedAgentDoesNotCreateNativeAuthority()
+      throws Exception {
+    assertTrue(
+        java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
+            .noneMatch(option -> option.startsWith("-javaagent:/opt/pgpt-tools-pg390/")));
+    for (var role : FixedNativeCoverageProfile.TerminalRole.values()) {
+      assertEquals(
+          Optional.empty(), FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(role, null));
+    }
+    agentRefused(() -> FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(null, null));
+  }
+
   private static FixedNativeCoverageCheckpoint.PublicAgent.Classes fixtureClasses() {
     return name -> {
       assertTrue(Set.of("org.jacoco.agent.rt.RT", "org.jacoco.agent.rt.IAgent").contains(name));
