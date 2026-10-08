@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC229（2026-10-09、SS343当PG631/e492新一回用resume固定profile）：Root0755/ACL access-default無し空runtimeを保持dirFDでnew-only pg635-once-resume.confへ、署名base/native literal＋同run --resume二引数だけ、reload一回。全十主要18/旧INV/143-30/全kernel・DB原本を保持し、SSC220の補助metadata resetを当七Unitだけへ限定、Inbox/Bootstrap全config exact、CaddyPre/Run両同old又は両exact未実行・片側混合拒否。n/aを旧正常close/新readyへ読み替えず、全新scope/独立post後に別一回start・新親元1800s同RootordinaryAPI-Web-Caddyを要求。設計公開は実起動/native/正式未受入。
+
 SSC228（2026-10-09、固定failed30 pending code-only）：SS343 SSC228のe492原本・既INVALID/Unit全停止/現PG621と新source36fe候補を再認証し、verify/activateではUnit/ExecStart/drop-in/reload/start/stopを変更しない。正規切替の全scope正常/独立post後だけ別new-only一回用同run resumeを準備する。物理activeを移動せず同cutoff/activationを維持、新親Invocationに対する元1800秒budget・既Unit期限・same Root/ordinary API-Web-Caddy/真正DONE・逆順owned停止を要求する。旧INV3a2de/status30/close未知は新成功へ読み替えない。REUSED_SUCCESS保持期限削除0とNEW_SUCCESS実削除再試験を分離し、API readyやobserver0だけを親成功にしない。設計only公開・実装/VM/native/正式未受入。
 
 SSC227（2026-10-08、SS343新candidate completed profile）：現PG548/source969の正規PG573 DONEとPG579 owned全停止をfresh PG602で再読した上で、署名済unusedPG600/source23b/BOMa634へのcode-only更新を新M-A/専用DB/十Ref保持下で行う。既Unit/config/DB/migrationは同byte、旧143/failed履歴は保持する。候補のhostRO/typedBOM・有限INVALID/approval/current delta・全scope正常後だけ配備を認定し、その後の通常Morningは新runで当source実Root→ordinary/真正DONE/逆順owned停止/native/CHRを閉じる。親30分/既Unit期限・固定agent/profile/nonreset/new-only/所有/identity/socket/info・SS343/451品質を変更しない。旧native18を変更三classへ輸入せず、新candidate未受入・設計only公開と区別する。
