@@ -3,11 +3,15 @@
 set -euC
 umask 077
 cd /home/mini/codex/project1/work/pgpt-foundation
-test "$#" = 1
+test "$#" = 1 -o "$#" = 2
 [[ "$1" =~ ^[0-9a-f]{40}$ ]]
 test "$(git rev-parse HEAD)" = "$1"
 test -z "$(git status --porcelain)"
-task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v1
+case "${2:-v1}" in
+  v1) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v1 ;;
+  v2) task_base=/home/mini/codex/project1/work/pgpt-runs/PG379/pg597-public-agent-driver-v2 ;;
+  *) exit 2 ;;
+esac
 test ! -e "$task_base"
 mkdir -m 700 "$task_base"
 export JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4
@@ -15,7 +19,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 date --iso-8601=seconds > "$task_base/started"
 git rev-parse HEAD > "$task_base/source"
 git ls-files src tools pom.xml | LC_ALL=C sort -u | xargs -r -d '\n' sha256sum > "$task_base/source-files.sha256"
-python3 -B - "$task_base" <<'PY'
+python3 -B - "$task_base" "${2:-v1}" <<'PY'
 import hashlib,json,pathlib,sys,zipfile
 w=pathlib.Path('/home/mini/codex/project1/work/pgpt-runs/PG379');old=w/'pg596-fixture-retained-six-host-v1'
 assert hashlib.sha256((old/'manifest.safe.json').read_bytes()).hexdigest()=='a91fd3f455aa79b64f32a971b9a4757ca62b58d31e93c3627c394f5a703570f1'
@@ -25,9 +29,15 @@ for module in ('protocol','storage','bootstrap','api','web','batch'):
  for p in (old/module/jar,pathlib.Path('src')/name/'target'/jar,pathlib.Path('/home/mini/codex/project1/work/toolchain/m2/repository/dev/codex/schubert')/name/'0.1.0-SNAPSHOT'/jar):
   with zipfile.ZipFile(p)as z:a.append({n:z.read(n)for n in z.namelist()if n.endswith('.class')})
  assert a[0]==a[1]==a[2]and a[0]
-p=pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec')
-assert hashlib.sha256(p.read_bytes()).hexdigest()==proof['moduleResults']['bootstrap']['execSha256']
-p.rename(pathlib.Path(sys.argv[1])/'preexisting-bootstrap.exec')
+if sys.argv[2]=='v1':
+ p=pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec')
+ assert hashlib.sha256(p.read_bytes()).hexdigest()==proof['moduleResults']['bootstrap']['execSha256']
+ p.rename(pathlib.Path(sys.argv[1])/'preexisting-bootstrap.exec')
+else:
+ failed=w/'pg597-public-agent-driver-v1';assert (failed/'exit').read_bytes()==b'1\n'
+ log=(failed/'build.private.log').read_text();assert 'COMPILATION ERROR'in log and 'testCompile'in log
+ assert not pathlib.Path('src/schubert-nk-bootstrap/target/jacoco.exec').exists()
+ assert hashlib.sha256((failed/'preexisting-bootstrap.exec').read_bytes()).hexdigest()==proof['moduleResults']['bootstrap']['execSha256']
 PY
 task_result=0
 (

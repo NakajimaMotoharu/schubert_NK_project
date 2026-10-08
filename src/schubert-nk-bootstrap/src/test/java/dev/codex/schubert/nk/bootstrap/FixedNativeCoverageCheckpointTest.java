@@ -187,7 +187,7 @@ final class FixedNativeCoverageCheckpointTest {
     }
   }
 
-  private static Class<?> metadataClass(@Nullable java.security.CodeSource source)
+  private static Class<?> metadataClass(java.security.@Nullable CodeSource source)
       throws Exception {
     String resource = "FixedNativeCoverageCheckpointTest$MetadataFixture.class";
     byte[] bytes;
