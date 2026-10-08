@@ -130,6 +130,39 @@ final class BackupBundleCompletionTest {
   }
 
   @Test
+  void bat539001ChangedValidReadbackTimeNeverReturnsCommittedSuccess() throws Exception {
+    // Independent SQL fault AFTER the actual owner write commit. Both complete rows remain
+    // otherwise valid, but their time no longer equals the value returned by that commit.
+    Instant drift = Instant.parse("2026-09-12T15:00:04.987653Z");
+    try (var f = fixture();
+        var c = owned()) {
+      assertTrue(drift.isAfter(f.expected.contentFinishedAt()));
+      var p = new CompletionJdbcProbe();
+      var writes = new AtomicInteger();
+      p.after =
+          (key, n) -> {
+            if (key.equals("connection.commit")) {
+              assertEquals(1, n);
+              sql(
+                  "update schubert.batch_runs set ended_at='2026-09-12T15:00:04.987653Z'"
+                      + " where id in (90000,90001)");
+              writes.incrementAndGet();
+            }
+          };
+      repositoryFailure(() -> complete(completion(f, () -> WALL), p.wrap(c), f));
+      assertEquals(1, writes.get());
+      assertEquals(1, p.seen.get("connection.commit"));
+      assertEquals(0, p.seen.getOrDefault("connection.rollback", 0));
+      assertFalse(c.getAutoCommit());
+      assertFalse(c.isClosed());
+      succeeded(drift);
+      p.released();
+      f.released();
+      f.unchanged();
+    }
+  }
+
+  @Test
   void invalidFilesAndHandleBinding() throws Exception {
     for (String bad :
         List.of(

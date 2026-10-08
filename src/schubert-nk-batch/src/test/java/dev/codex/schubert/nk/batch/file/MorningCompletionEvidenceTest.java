@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.file;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture;
 import dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle;
 import dev.codex.schubert.nk.batch.platform.StoppedBackupFixture;
 import dev.codex.schubert.nk.batch.repository.*;
@@ -203,6 +204,236 @@ final class MorningCompletionEvidenceTest {
                 () -> 10_000_000_000L,
                 (id, at) -> MorningPrestartEvidenceTest.RUN,
                 null));
+  }
+
+  @Test
+  void parent539001BeginsAndTargetAndOutcomeMustMatchTheActualPair() throws Exception {
+    var f = fixture("new");
+    var otherRun =
+        new BatchRun(
+            UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+            f.begins().database().run().cutoff());
+    var database = f.begins().database();
+    var config = f.begins().configuration();
+    var foreign =
+        new BatchStepAttempt(
+            config.id(),
+            otherRun,
+            config.step(),
+            config.attempt(),
+            config.startedAt(),
+            config.skipped());
+    for (var begins :
+        List.of(
+            new MorningDatabaseSession.BackupBegins(database, foreign),
+            new MorningDatabaseSession.BackupBegins(
+                new BatchStepAttempt(
+                    91000,
+                    database.run(),
+                    database.step(),
+                    database.attempt(),
+                    database.startedAt(),
+                    database.skipped()),
+                config),
+            new MorningDatabaseSession.BackupBegins(
+                database,
+                new BatchStepAttempt(
+                    91001,
+                    config.run(),
+                    config.step(),
+                    config.attempt(),
+                    config.startedAt(),
+                    config.skipped())))) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new MorningCompletionEvidence(
+                  f.backupOutcome(),
+                  begins,
+                  f.manifest(),
+                  f.backup(),
+                  f.backupReceipt(),
+                  f.backupCycle(),
+                  f.cleanup(),
+                  f.expiry()));
+    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new MorningCompletionEvidence(
+                f.backupOutcome(),
+                f.begins(),
+                f.manifest(),
+                f.backup(),
+                f.expiry().receipt(),
+                f.backupCycle(),
+                f.cleanup(),
+                f.expiry()));
+    var failedReceipt = new StoppedBackupFixture(30, true);
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new MorningCompletionEvidence(
+                f.backupOutcome(),
+                f.begins(),
+                f.manifest(),
+                f.backup(),
+                failedReceipt.receipt,
+                f.backupCycle(),
+                f.cleanup(),
+                f.expiry()));
+  }
+
+  @Test
+  void parent539002WarningCompletionAndActualStepTimeBoundariesAreIndependent() throws Exception {
+    var f = fixture("new");
+    for (String time : List.of("2026-09-13T02:00:30Z", "2026-09-13T02:01:30Z")) {
+      var error =
+          assertThrows(
+              IOException.class,
+              () ->
+                  f.completion(
+                      MorningPrestartEvidenceTest.EPOCH.activation(),
+                      Clock.fixed(Instant.parse(time), ZoneOffset.UTC)));
+      assertEquals("Morning completion evidence unavailable", error.getMessage());
+      assertNull(error.getCause());
+    }
+    var rows = new ArrayList<>(f.cleanup().terminal().entries());
+    var first = rows.getFirst();
+    rows.set(
+        0,
+        new CleanupTerminalRepository.Entry(
+            first.attempt(),
+            first.endedAt(),
+            new BatchStepResult(
+                BatchStepResult.Status.WARNING,
+                2,
+                1,
+                1,
+                10,
+                BatchStepResult.Reason.PROTECTED_RECORDS)));
+    var cleanup =
+        new MorningCleanupExecution.Completion(
+            new CleanupTerminalRepository.Snapshot(rows),
+            ExpiryReceiptFixture.cleanupReceipt(10, "c".repeat(32)),
+            f.cleanup().references());
+    var warning =
+        new MorningCompletionEvidence(
+            f.backupOutcome(),
+            f.begins(),
+            f.manifest(),
+            f.backup(),
+            f.backupReceipt(),
+            f.backupCycle(),
+            cleanup,
+            f.expiry());
+    assertEquals(
+        MaintenanceCompletion.Outcome.WARNING,
+        warning.completion(MorningPrestartEvidenceTest.EPOCH.activation(), CLOCK).outcome());
+    var expiry =
+        expiry(f, BatchStepResult.Status.WARNING, BatchStepResult.Reason.PROTECTED_RECORDS, 10);
+    var expiryWarning =
+        new MorningCompletionEvidence(
+            f.backupOutcome(),
+            f.begins(),
+            f.manifest(),
+            f.backup(),
+            f.backupReceipt(),
+            f.backupCycle(),
+            f.cleanup(),
+            expiry);
+    assertEquals(
+        MaintenanceCompletion.Outcome.WARNING,
+        expiryWarning.completion(MorningPrestartEvidenceTest.EPOCH.activation(), CLOCK).outcome());
+    for (var invalid :
+        List.of(
+            expiry(f, BatchStepResult.Status.WARNING, BatchStepResult.Reason.PROTECTED_RECORDS, 0),
+            expiry(f, BatchStepResult.Status.SUCCESS, BatchStepResult.Reason.NONE, 10),
+            expiry(f, BatchStepResult.Status.FAILED, BatchStepResult.Reason.COMMAND_FAILURE, 30))) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new MorningCompletionEvidence(
+                  f.backupOutcome(),
+                  f.begins(),
+                  f.manifest(),
+                  f.backup(),
+                  f.backupReceipt(),
+                  f.backupCycle(),
+                  f.cleanup(),
+                  invalid));
+    }
+  }
+
+  private static MorningDatabaseSession.ExpiryObservation expiry(
+      MorningCompletionEvidence f,
+      BatchStepResult.Status status,
+      BatchStepResult.Reason reason,
+      int code)
+      throws Exception {
+    long success = status == BatchStepResult.Status.SUCCESS ? 2 : 1;
+    long failure = status == BatchStepResult.Status.SUCCESS ? 0 : 1;
+    var result = new BatchStepResult(status, 2, success, failure, 200, reason);
+    var audit =
+        new ExpiryAuditRepository.Snapshot(
+            status.name(),
+            Instant.parse("2026-09-05T15:00:00Z"),
+            3L,
+            1L,
+            2,
+            success,
+            failure,
+            200,
+            Instant.parse("2026-09-13T02:02:01Z"),
+            reason.code(),
+            reason.summary());
+    return new MorningDatabaseSession.ExpiryObservation(
+        f.expiry().begins(),
+        Instant.parse("2026-09-13T02:02:01Z"),
+        result,
+        audit,
+        ExpiryReceiptFixture.receipt(code, "d".repeat(32)));
+  }
+
+  @Test
+  void parent539003DefaultOriginalLookupAcceptsOnlyTheExactRetainedRun() throws Exception {
+    var f = fixture("new");
+    var events = new ArrayList<String>();
+    var delegate = database(f, events, "");
+    var lookups = new java.util.concurrent.atomic.AtomicInteger();
+    var db =
+        (MorningDatabaseSession.Access)
+            Proxy.newProxyInstance(
+                getClass().getClassLoader(),
+                new Class<?>[] {MorningDatabaseSession.Access.class},
+                (proxy, method, args) -> {
+                  if (method.getName().equals("cleanupReferences")) {
+                    var lookup = (SuccessRunLookup) args[2];
+                    assertEquals(
+                        MorningPrestartEvidenceTest.RUN,
+                        lookup.resolve(
+                            UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
+                            Instant.parse("2026-09-13T02:03:00.123456Z")));
+                    var rejected =
+                        assertThrows(
+                            IOException.class,
+                            () ->
+                                lookup.resolve(
+                                    UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+                                    Instant.parse("2026-09-13T02:03:00.123456Z")));
+                    assertEquals("Morning completion evidence unavailable", rejected.getMessage());
+                    assertNull(rejected.getCause());
+                    lookups.addAndGet(2);
+                  }
+                  try {
+                    return method.invoke(delegate, args);
+                  } catch (java.lang.reflect.InvocationTargetException failure) {
+                    throw failure.getCause();
+                  }
+                });
+    f.verify(db, CLOCK, () -> 10_000_000_000L);
+    assertEquals(2, lookups.get());
+    assertEquals(1, Collections.frequency(events, "cleanupReferences"));
   }
 
   @Test
