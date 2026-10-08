@@ -70,6 +70,18 @@ def peer_socket(rows, socket_inodes, port):
     return True
 
 
+def directory_identity(s):
+    return (s.st_dev, s.st_ino, s.st_uid, s.st_gid, s.st_mode, s.st_nlink)
+
+
+def directory_witness(path_stat, fd_stat, initial_stat, attributes, runtime):
+    require(directory_identity(path_stat) == directory_identity(fd_stat) == directory_identity(initial_stat)
+            and not {'system.posix_acl_access', 'system.posix_acl_default'}.intersection(attributes))
+    if runtime:
+        require((path_stat.st_uid, path_stat.st_gid, path_stat.st_mode, path_stat.st_nlink)
+                == (0, 0, stat.S_IFDIR | 0o755, 2))
+
+
 def main():
     os.umask(0o077)
     require(os.geteuid() == 0 and len(sys.argv) == 3 and sys.argv[1] == 'retire' and sys.argv[2].isdigit())
@@ -89,10 +101,9 @@ def main():
     paths = (SAVE, Path('/run/schubert-nk/startup'), Path('/etc/schubert-nk/release-approval'), RUNTIME)
     fds = [os.open(p, os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW) for p in paths]; initial = [os.fstat(fd) for fd in fds]
     def directories():
-        def identity(s): return (s.st_dev, s.st_ino, s.st_uid, s.st_gid, s.st_mode, s.st_nlink)
         for p, fd, s in zip(paths, fds, initial):
-            require(identity(p.lstat()) == identity(os.fstat(fd)) == identity(s)
-                    and not {'system.posix_acl_access', 'system.posix_acl_default'}.intersection(os.listxattr(p)))
+            directory_witness(p.lstat(), os.fstat(fd), s, os.listxattr(p), p == RUNTIME)
+    directories()
     live = True; removed = False
     def connection():
         sql = "select count(*)from pg_stat_activity a where a.pid="+str(backend)+" and a.usename='schubert_batch'and a.datname='schubert_nk'and a.application_name='PG647-runtime-retirement'and a.state='idle in transaction'and exists(select 1 from pg_locks l where l.pid=a.pid and l.locktype='advisory'and l.classid=0 and l.objid=71419602 and l.objsubid=1 and l.mode='ExclusiveLock'and l.granted);"
