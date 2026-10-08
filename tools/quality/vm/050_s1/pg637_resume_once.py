@@ -12,12 +12,12 @@ P=Path('/home/mini/codex/project1/work/pgpt-vm/private')
 SOURCE='36fe7a0b938489d61d17d49c1c30a6fbbef699d5'
 DIGEST='57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe'
 PAYLOAD=r'''
-import ast,datetime,hashlib,json,os,pathlib,re,shutil,stat,subprocess,sys,time
+import ast,datetime,dbus,hashlib,json,os,pathlib,re,shutil,stat,subprocess,sys,time
 os.umask(0o077)
 def require(v):
  if not v:raise ValueError('fresh prepared resume admission rejected')
 require(os.geteuid()==0 and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441')
-base=pathlib.Path('/var/lib/pgpt-s1-preservation');root=base/'pg637-fresh-resume-v1'
+base=pathlib.Path('/var/lib/pgpt-s1-preservation');root=base/'pg637-fresh-resume-v2'
 raw=(base/'pg480-backup-tools-v3/pg480_backup_refs.py').read_bytes();require(hashlib.sha256(raw).hexdigest()=='0dd9ded789de2205ecb7f60080f3f57c2d489e28c0436d4a309a4dab386d0eb7')
 parsed=ast.parse(raw);wanted={'command','metadata','strict','show','tree','configuration_fields','kernel'}
 nodes=[n for n in parsed.body if isinstance(n,ast.FunctionDef)and n.name in wanted]
@@ -61,23 +61,30 @@ def persist(name,value):
  with(root/name).open('x')as f:os.fchmod(f.fileno(),0o600);json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
  for p in (root,root.parent):
   fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);os.fsync(fd);os.close(fd)
-if MODE=='prepare':
- require(not os.path.lexists(root));before=capture();require(before==capture());root.mkdir(mode=0o700);persist('before.private.json',before)
- native=root/'native-before';shutil.copytree('/run/schubert-nk/pt-coverage',native,symlinks=False)
- for p in (native,*native.rglob('*')):
-  require(not p.is_symlink());os.chmod(p,0o700 if p.is_dir()else 0o600)
-  fd=os.open(p,os.O_RDONLY|(os.O_DIRECTORY if p.is_dir()else 0));os.fsync(fd);os.close(fd)
- now=datetime.datetime.now(datetime.timezone.utc);persist('admission.private.json',{'lower':now.isoformat(),'upper':(now+datetime.timedelta(minutes=2)).isoformat(),'source':SOURCE,'starts0':True})
- print(json.dumps({'prepared':True,'starts0':True,'source':SOURCE,'sameOriginalRun':True,'sameCutoffActivation':True,'originalBudgetSeconds':1800}))
-else:
- require(MODE=='start'and root.is_dir()and not os.path.lexists(root/'external-start-guard.private.json'))
- capture();require(json.loads(strict(root/'before.private.json',0o600,67108864))==expected)
- admitted=json.loads(strict(root/'admission.private.json',0o600,4096));now=datetime.datetime.now(datetime.timezone.utc)
- require(datetime.datetime.fromisoformat(admitted['lower'])<=now<=datetime.datetime.fromisoformat(admitted['upper'])and admitted['source']==SOURCE)
- persist('external-start-guard.private.json',{'at':now.isoformat(),'source':SOURCE,'run':'e49243d5-de84-4714-8612-6912ddc17e9e','originalBudgetSeconds':1800,'attemptReserved':True,'repeatForbidden':True})
- r=subprocess.run(['/usr/bin/systemctl','start','--no-block','schubert-nk-morning-controller.service'],capture_output=True,timeout=15)
- d=show('schubert-nk-morning-controller.service',{'InvocationID','MainPID','Job','ExecMainStartTimestampMonotonic'});d.update(clientExit=r.returncode,clientSuccessIsNotParentSuccess=True)
- persist('external-start-issued.private.json',d);print(json.dumps(d));raise SystemExit(r.returncode)
+bus=dbus.SystemBus(private=True);manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager');refs=[]
+try:
+ for unit in UNITS:manager.RefUnit(unit);refs.append(unit)
+ if MODE=='prepare':
+  require(not os.path.lexists(root));before=capture();require(before==capture());root.mkdir(mode=0o700);persist('before.private.json',before)
+  native=root/'native-before';shutil.copytree('/run/schubert-nk/pt-coverage',native,symlinks=False)
+  for p in (native,*native.rglob('*')):
+   require(not p.is_symlink());os.chmod(p,0o700 if p.is_dir()else 0o600)
+   fd=os.open(p,os.O_RDONLY|(os.O_DIRECTORY if p.is_dir()else 0));os.fsync(fd);os.close(fd)
+  now=datetime.datetime.now(datetime.timezone.utc);persist('admission.private.json',{'lower':now.isoformat(),'upper':(now+datetime.timedelta(minutes=2)).isoformat(),'source':SOURCE,'starts0':True})
+  print(json.dumps({'prepared':True,'starts0':True,'source':SOURCE,'sameOriginalRun':True,'sameCutoffActivation':True,'originalBudgetSeconds':1800}))
+ else:
+  require(MODE=='start'and root.is_dir()and not os.path.lexists(root/'external-start-guard.private.json'))
+  capture();require(json.loads(strict(root/'before.private.json',0o600,67108864))==expected)
+  admitted=json.loads(strict(root/'admission.private.json',0o600,4096));now=datetime.datetime.now(datetime.timezone.utc)
+  require(datetime.datetime.fromisoformat(admitted['lower'])<=now<=datetime.datetime.fromisoformat(admitted['upper'])and admitted['source']==SOURCE)
+  persist('external-start-guard.private.json',{'at':now.isoformat(),'source':SOURCE,'run':'e49243d5-de84-4714-8612-6912ddc17e9e','originalBudgetSeconds':1800,'attemptReserved':True,'repeatForbidden':True})
+  r=subprocess.run(['/usr/bin/systemctl','start','--no-block','schubert-nk-morning-controller.service'],capture_output=True,timeout=15)
+  d=show('schubert-nk-morning-controller.service',{'InvocationID','MainPID','Job','ExecMainStartTimestampMonotonic'});d.update(clientExit=r.returncode,clientSuccessIsNotParentSuccess=True)
+  persist('external-start-issued.private.json',d);print(json.dumps(d));raise SystemExit(r.returncode)
+finally:
+ for unit in reversed(refs):manager.UnrefUnit(unit)
+ bus.close()
+
 '''
 
 
@@ -87,11 +94,11 @@ def main():
     assert subprocess.check_output(['git','status','--porcelain'],cwd=R.parents[3])==b''
     proof=json.loads((W/'pg636-prepare-post-v1.safe.json').read_bytes());assert proof['actualExit']==0
     if mode=='start':
-        assert (W/'pg637-prepare-v1.exit').read_bytes()==b'0\n'
+        assert (W/'pg637-prepare-v2.exit').read_bytes()==b'0\n'
         assert (W/'pg638-observer-v1.started').exists()and not(W/'pg638-observer-v1.exit').exists()
         with(W/'pg638-watch-private-v1.jsonl').open()as f:first=json.loads(f.readline())
         assert first=={'observerPrepared':True,'source':SOURCE,'manifestSha256':DIGEST,'starts0':True}
-    base=W/('pg637-'+mode+'-v1');assert not any(Path(str(base)+'.'+v).exists()for v in ('private.log','exit','safe.json'))
+    base=W/('pg637-'+mode+'-v2');assert not any(Path(str(base)+'.'+v).exists()for v in ('private.log','exit','safe.json'))
     ssh=['ssh','-i',str(P/'vm-access'),'-oBatchMode=yes','-oIdentitiesOnly=yes','-oStrictHostKeyChecking=yes','-oUserKnownHostsFile='+str(P/'known_hosts'),'-p','22222','ubuntu@127.0.0.1','sudo -n python3 -B -']
     started=datetime.datetime.now(datetime.timezone.utc).isoformat();payload='MODE='+repr(mode)+'\nSOURCE='+repr(SOURCE)+'\nDIGEST='+repr(DIGEST)+'\n'+PAYLOAD
     result=subprocess.run(ssh,input=payload.encode(),capture_output=True,timeout=90)

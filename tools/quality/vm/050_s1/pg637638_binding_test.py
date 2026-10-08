@@ -35,11 +35,22 @@ class Binding(unittest.TestCase):
         self.assertIn("sys.argv[3]=='PG631'",watcher);self.assertNotIn('PG621',watcher)
         self.assertIn("'schema':'028'",watcher);self.assertIn('same(roots[role],aa)',watcher)
         self.assertIn("'wholeMorningAccepted':False",watcher)
-        self.assertIn("pg637-fresh-resume-v1/before.private.json",wrapper)
-        self.assertIn("W/'pg637-prepare-v1.exit'",wrapper)
+        self.assertIn("pg637-fresh-resume-v2/before.private.json",wrapper)
+        self.assertIn("W/'pg637-prepare-v2.exit'",wrapper)
         self.assertIn("'pg638_watch_parent.py'",wrapper)
         for text in (watcher,wrapper):
             self.assertNotIn('systemctl start',text);self.assertNotIn('systemctl stop',text)
+
+    def test_ref_owned_admission_and_start_scope(self):
+        tree=ast.parse(literal('PAYLOAD'))
+        guarded=next(n for n in tree.body if isinstance(n,ast.Try) and n.finalbody)
+        source=ast.unparse(guarded)
+        self.assertIn('manager.RefUnit(unit)',source)
+        self.assertIn('manager.UnrefUnit(unit)',source)
+        self.assertIn('bus.close()',source)
+        self.assertLess(source.index('manager.RefUnit(unit)'),source.index("MODE == 'prepare'"))
+        self.assertGreater(source.index('finally:'),source.index("'external-start-issued.private.json'"))
+        self.assertIn('dbus.SystemBus(private=True)',literal('PAYLOAD'))
 
 
 if __name__=='__main__':unittest.main()
