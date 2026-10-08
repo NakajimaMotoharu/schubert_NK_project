@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Private receipt producer; the required OS wrapper owns process exit mapping. NK-DAT-001;
@@ -33,14 +34,47 @@ public final class InspectorLauncher {
 
   public static void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(InspectorLauncher::fatal);
-    new InspectorLauncher().write(arguments, System.getenv(), System.out, NATIVE);
+    complete(
+        arguments,
+        System.getenv(),
+        System.out,
+        NATIVE,
+        InspectorLauncher::captureNative,
+        System.err);
+  }
+
+  /** PG-D401: an internal measurement callback only, not an Inspector admission/owner grant. */
+  @FunctionalInterface
+  interface Capture {
+    boolean run() throws IOException;
+  }
+
+  /** PT-DB-INBOX-669001..004: receipt must be durable at the stream before terminal capture. */
+  static void complete(
+      String @Nullable [] arguments,
+      @Nullable Map<String, String> environment,
+      @Nullable PrintStream output,
+      @Nullable Factory factory,
+      @Nullable Capture capture,
+      @Nullable PrintStream diagnostics)
+      throws IOException {
+    if (arguments == null
+        || environment == null
+        || output == null
+        || factory == null
+        || capture == null
+        || diagnostics == null) throw new IllegalArgumentException("inspector entry required");
+    new InspectorLauncher().write(arguments, environment, output, factory);
+    if (capture.run()) diagnostics.println("Inspector fixed PT native capture complete");
+  }
+
+  private static boolean captureNative() throws IOException {
     var coverage =
         FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
             FixedNativeCoverageProfile.TerminalRole.INSPECTOR, System.getenv("INVOCATION_ID"));
-    if (coverage.isPresent()) {
-      coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
-      System.err.println("Inspector fixed PT native capture complete");
-    }
+    if (coverage.isEmpty()) return false;
+    coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    return true;
   }
 
   /** Returns an internal code, not an OS/parent-gate certificate. */

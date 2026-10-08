@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Dedicated initial ADMIN oneshot, never an ordinary API startup/permit bypass. All IO stays within
@@ -33,27 +35,62 @@ public final class BootstrapAdminMain {
   private static final String CREDENTIAL_DIRECTORY = "/run/credentials/" + UNIT;
 
   public static void main(String[] arguments) {
+    System.exit(
+        launch(
+            arguments,
+            System.getenv(),
+            new BootstrapAdminMain()::run,
+            BootstrapAdminMain::captureNative,
+            System.err));
+  }
+
+  /** PG-D401: internal data/control-flow ports, never an OS admission or startup capability. */
+  @FunctionalInterface
+  interface Operation {
+    int run(String[] arguments, Map<String, String> environment) throws Exception;
+  }
+
+  @FunctionalInterface
+  interface Capture {
+    boolean run() throws IOException;
+  }
+
+  /** PT-ADM-BOOT669001..005: fixed exit/diagnostic order with independent failure vectors. */
+  static int launch(
+      String @Nullable [] arguments,
+      @Nullable Map<String, String> environment,
+      @Nullable Operation operation,
+      @Nullable Capture capture,
+      @Nullable PrintStream diagnostics) {
+    if (arguments == null
+        || environment == null
+        || operation == null
+        || capture == null
+        || diagnostics == null) throw new IllegalArgumentException("bootstrap entry required");
     int status = 50;
     try {
-      status = new BootstrapAdminMain().run(arguments, System.getenv());
+      status = operation.run(arguments, environment);
     } catch (Throwable failure) {
       // Only a fixed diagnostic escapes, never JDBC/file/provider details or credentials.
-      System.err.println("Initial ADMIN bootstrap failed");
+      diagnostics.println("Initial ADMIN bootstrap failed");
     }
-    System.err.println("Initial ADMIN bootstrap finished");
+    diagnostics.println("Initial ADMIN bootstrap finished");
     try {
-      var coverage =
-          FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
-              FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP, System.getenv("INVOCATION_ID"));
-      if (coverage.isPresent()) {
-        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
-        System.err.println("Bootstrap fixed PT native capture complete");
-      }
+      if (capture.run()) diagnostics.println("Bootstrap fixed PT native capture complete");
     } catch (Throwable failure) {
-      System.err.println("Initial ADMIN bootstrap failed");
+      diagnostics.println("Initial ADMIN bootstrap failed");
       status = 50;
     }
-    System.exit(status);
+    return status;
+  }
+
+  private static boolean captureNative() throws IOException {
+    var coverage =
+        FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
+            FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP, System.getenv("INVOCATION_ID"));
+    if (coverage.isEmpty()) return false;
+    coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    return true;
   }
 
   int run(String[] arguments, Map<String, String> environment)
