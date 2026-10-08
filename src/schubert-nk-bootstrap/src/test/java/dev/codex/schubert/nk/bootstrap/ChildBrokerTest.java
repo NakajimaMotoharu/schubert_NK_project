@@ -171,4 +171,32 @@ final class ChildBrokerTest {
       Thread.interrupted();
     }
   }
+
+  @Test
+  void brokerstart003InterruptAfterSecondManagerReadDeniesAndErasesBothBuffers() {
+    var fixture =
+        new Fixture() {
+          int readsForInterruption;
+
+          @Override
+          public byte[] brokerUnit() {
+            byte[] result = super.brokerUnit();
+            if (++readsForInterruption == 2) Thread.currentThread().interrupt();
+            return result;
+          }
+        };
+    try {
+      var error =
+          assertThrows(
+              IOException.class,
+              () -> new ChildStartupContext(fixture).verifyBroker(BOOT, INV, FIXED));
+      assertEquals("child startup context unavailable", error.getMessage());
+      assertNull(error.getCause());
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertEquals(2, fixture.owned.size());
+      for (byte[] buffer : fixture.owned) assertArrayEquals(new byte[buffer.length], buffer);
+    } finally {
+      Thread.interrupted();
+    }
+  }
 }

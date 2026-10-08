@@ -99,6 +99,27 @@ final class ChildMaintenanceInspectorTest {
     return text.getBytes(StandardCharsets.US_ASCII);
   }
 
+  @Test
+  void cinspect005TerminalInterruptPidOneAndCapturedUidDifferentFromNssDeny() {
+    for (String fault : List.of("pidOne", "ownUid", "terminalInterrupt")) {
+      var fixture = new Fixture();
+      fixture.fault = fault;
+      try {
+        var error =
+            assertThrows(
+                IOException.class,
+                () -> new ChildStartupContext(fixture).verifyInspector(BOOT, INV, FIXED),
+                fault);
+        assertEquals("child startup context unavailable", error.getMessage());
+        assertNull(error.getCause());
+        assertEquals(fault.equals("terminalInterrupt"), Thread.currentThread().isInterrupted());
+        for (byte[] buffer : fixture.owned) assertArrayEquals(new byte[buffer.length], buffer);
+      } finally {
+        Thread.interrupted();
+      }
+    }
+  }
+
   private static final class Fixture implements ChildStartupContext.Io {
     String fault = "";
     int managerReads, childReads, wrapperReads;
@@ -110,7 +131,7 @@ final class ChildMaintenanceInspectorTest {
     }
 
     public long uid() {
-      return fault.equals("uid") ? 201 : 200;
+      return fault.equals("uid") || fault.equals("ownUid") ? 201 : 200;
     }
 
     public String filesystem() {
@@ -144,6 +165,7 @@ final class ChildMaintenanceInspectorTest {
       if (fault.equals("gid")) result = result.replace("201 201 201 201", "202 202 202 202");
       if (fault.equals("wrapperUid") && pid == 43)
         result = result.replace("200 200 200 200", "201 201 201 201");
+      if (fault.equals("ownUid")) result = result.replace("200 200 200 200", "201 201 201 201");
       if (fault.equals("groups")) result = result.replace("200 201 202", "200 201 203");
       if (fault.equals("caps"))
         result = result.replace("CapEff:\t0000000000000000", "CapEff:\t0000000000000001");
@@ -171,6 +193,7 @@ final class ChildMaintenanceInspectorTest {
       text =
           switch (fault) {
             case "samePid" -> text.replace("MainPID=43", "MainPID=44");
+            case "pidOne" -> text.replace("MainPID=43", "MainPID=1");
             case "badPid" -> text.replace("MainPID=43", "MainPID=01");
             case "invocation" -> text.replace(INV, "8".repeat(32));
             case "unit" ->
@@ -191,6 +214,8 @@ final class ChildMaintenanceInspectorTest {
           };
       byte[] received = bytes(text);
       owned.add(received);
+      if (fault.equals("terminalInterrupt") && managerReads == 2)
+        Thread.currentThread().interrupt();
       return received;
     }
   }

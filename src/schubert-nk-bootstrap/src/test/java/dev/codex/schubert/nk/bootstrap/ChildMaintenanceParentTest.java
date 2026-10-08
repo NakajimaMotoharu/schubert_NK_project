@@ -149,6 +149,29 @@ class ChildMaintenanceParentTest {
         1_800_000_000_007L);
   }
 
+  @Test
+  void cparent005TerminalInterruptAndWrongSubstateCannotBecomeLiveRoot() {
+    for (var kind : ChildStartupContext.MaintenanceParent.values()) {
+      for (String fault : List.of("substate", "terminalInterrupt")) {
+        var fixture = new Fixture();
+        fixture.fault = fault;
+        try {
+          var error =
+              assertThrows(
+                  IOException.class,
+                  () -> new ChildStartupContext(fixture).verifyMaintenanceParent(kind, owner()),
+                  fault);
+          assertEquals("child startup context unavailable", error.getMessage());
+          assertNull(error.getCause());
+          assertEquals(fault.equals("terminalInterrupt"), Thread.currentThread().isInterrupted());
+          for (byte[] buffer : fixture.owned) assertArrayEquals(new byte[buffer.length], buffer);
+        } finally {
+          Thread.interrupted();
+        }
+      }
+    }
+  }
+
   static final class Fixture implements ChildStartupContext.Io {
     String fault = "";
     String groups = "0";
@@ -234,6 +257,7 @@ class ChildMaintenanceParentTest {
             case "unit" -> text.replace("Id=" + unit, "Id=other.service");
             case "invocation" -> text.replace("5".repeat(32), "7".repeat(32));
             case "inactive" -> text.replace("ActiveState=activating", "ActiveState=inactive");
+            case "substate" -> text.replace("SubState=start", "SubState=exited");
             case "managerPid" -> text.replace("MainPID=42", "MainPID=99");
             case "managerGroup" ->
                 text.replace("ControlGroup=/system.slice/" + unit, "ControlGroup=/other");
@@ -246,6 +270,7 @@ class ChildMaintenanceParentTest {
           };
       byte[] result = bytes(text);
       owned.add(result);
+      if (fault.equals("terminalInterrupt") && units == 2) Thread.currentThread().interrupt();
       return result;
     }
 
