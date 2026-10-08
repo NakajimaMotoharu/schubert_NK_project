@@ -1,0 +1,563 @@
+package dev.codex.schubert.nk.bootstrap;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.storage.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.*;
+import org.jspecify.annotations.Nullable;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+/** NEXPORT617: modeled Root metadata is data only; actual host tmpfs, FD and bytes stay real. */
+final class NativeCoverageExportTest {
+  private static final String INV = "1234567890abcdef1234567890abcdef";
+  private static final byte[] GOLDEN = {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
+  @TempDir Path temporary;
+  private int sequence;
+
+  private record Role(
+      String directory,
+      String label,
+      String cgroup,
+      long uid,
+      long gid,
+      List<Long> groups,
+      FixedNativeCoverageProfile.Phase phase,
+      @Nullable FixedNativeCoverageProfile.TerminalRole terminal) {}
+
+  private static final List<Role> ROLES =
+      List.of(
+          new Role(
+              "root-api193",
+              "API",
+              "0::/system.slice/schubert-nk-api.service\n",
+              0,
+              0,
+              List.of(),
+              FixedNativeCoverageProfile.Phase.ROOT,
+              null),
+          new Role(
+              "root-web193",
+              "WEB",
+              "0::/system.slice/schubert-nk-web.service\n",
+              0,
+              0,
+              List.of(),
+              FixedNativeCoverageProfile.Phase.ROOT,
+              null),
+          new Role(
+              "ordinary-api193",
+              "API",
+              "0::/system.slice/schubert-nk-api.service\n",
+              999,
+              981,
+              List.of(980L, 981L, 982L, 986L),
+              FixedNativeCoverageProfile.Phase.ORDINARY,
+              null),
+          new Role(
+              "ordinary-web193",
+              "WEB",
+              "0::/system.slice/schubert-nk-web.service\n",
+              998,
+              980,
+              List.of(980L, 982L, 986L),
+              FixedNativeCoverageProfile.Phase.ORDINARY,
+              null),
+          new Role(
+              "ordinary-inspector196",
+              "INSPECTOR",
+              "0::/system.slice/schubert-nk-inbox-inspector.service\n",
+              991,
+              976,
+              List.of(976L, 982L, 986L),
+              FixedNativeCoverageProfile.Phase.ORDINARY,
+              FixedNativeCoverageProfile.TerminalRole.INSPECTOR),
+          new Role(
+              "ordinary-bootstrap196",
+              "BOOTSTRAP",
+              "0::/system.slice/schubert-nk-bootstrap-admin.service\n",
+              999,
+              981,
+              List.of(980L, 981L, 982L, 986L),
+              FixedNativeCoverageProfile.Phase.ORDINARY,
+              FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP));
+
+  private static FixedNativeCoverageProfile profile(Role role) {
+    String option =
+        "-javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar"
+            + "=output=none,append=false,dumponexit=false,sessionid="
+            + role.label()
+            + "-"
+            + INV
+            + "-"
+            + (role.phase() == FixedNativeCoverageProfile.Phase.ROOT ? "root" : "ordinary");
+    return role.terminal() != null
+        ? FixedNativeCoverageProfile.parseTerminal(role.terminal(), INV, List.of(option))
+            .orElseThrow()
+        : FixedNativeCoverageProfile.parse(
+                role.label().equals("WEB")
+                    ? ServiceConfigFiles.Service.WEB
+                    : ServiceConfigFiles.Service.API,
+                role.phase(),
+                INV,
+                List.of(option))
+            .orElseThrow();
+  }
+
+  private Fixture fixture(Role role) throws IOException {
+    return new Fixture(temporary.resolve("case-" + sequence++), role);
+  }
+
+  private static void refused(Fixture f) {
+    assertThrows(IOException.class, () -> f.export("terminal"));
+    assertTrue(f.calls.live.isEmpty(), "all owned descriptors must be released after refusal");
+  }
+
+  @Test
+  void nexport617001SixLiteralRolesAndRootBeforeExecUseRealHeldOutput() throws Exception {
+    for (Role role : ROLES) {
+      var f = fixture(role);
+      f.export("terminal");
+      f.success("terminal");
+      assertEquals(2, f.invocations);
+      assertEquals(2, f.cgroups);
+      assertEquals(2, f.resolvers);
+      assertEquals(role.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : 2, f.snapshots);
+      if (role.phase() == FixedNativeCoverageProfile.Phase.ROOT) {
+        var before = fixture(role);
+        before.export("before-exec");
+        before.success("before-exec");
+      }
+    }
+  }
+
+  @Test
+  void nexport617002InitialObservationsAndNullsCannotCreateAnyOutput() throws Exception {
+    for (String fault :
+        List.of(
+            "uid#1",
+            "invocation#1",
+            "invocation-null#1",
+            "cgroup#1",
+            "resolver#1",
+            "ordinary#1",
+            "ordinary#2",
+            "ordinary#3",
+            "ordinary#4",
+            "ordinary#5",
+            "ordinary#6")) {
+      var f = fixture(ROLES.get(2));
+      f.fault = fault;
+      refused(f);
+      assertEquals(0, f.calls.creates, fault);
+      assertFalse(Files.exists(f.output("terminal")));
+    }
+    var f = fixture(ROLES.get(0));
+    for (String name : List.of("foreign", INV + ".unknown.exec", "../terminal.exec"))
+      assertThrows(
+          IOException.class,
+          () -> NativeCoveragePrivateFile.export(profile(f.role), name, GOLDEN, f));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NativeCoveragePrivateFile.export(null, INV, GOLDEN, f));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NativeCoveragePrivateFile.export(profile(f.role), null, GOLDEN, f));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NativeCoveragePrivateFile.export(profile(f.role), INV, null, f));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NativeCoveragePrivateFile.export(profile(f.role), INV, GOLDEN, null));
+    var ordinary = fixture(ROLES.get(2));
+    assertThrows(IOException.class, () -> ordinary.export("before-exec"));
+    assertEquals(0, ordinary.calls.creates);
+    assertTrue(f.calls.live.isEmpty());
+  }
+
+  @Test
+  void nexport617003EachHeldDirectoryAndFileObservationRejectsBeforeAcceptance() throws Exception {
+    for (String part : List.of("run", "service", "parent", "target"))
+      for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino", "acl", "null"))
+        for (int visit : part.equals("target") ? new int[] {1, 2, 3, 4, 5} : new int[] {1, 2}) {
+          var f = fixture(ROLES.get(0));
+          f.fault = part + "#" + visit + ":" + field;
+          refused(f);
+        }
+    for (String fault :
+        List.of(
+            "filesystem",
+            "readonly",
+            "file#1:uid",
+            "file#1:mode",
+            "file#1:nlink",
+            "file#1:dev",
+            "size#1:null",
+            "size#1:negative",
+            "size#1:unknown",
+            "size#1:nonzero",
+            "size#2:wrong",
+            "size#3:wrong",
+            "file#2:ino",
+            "file#3:ino")) {
+      var f = fixture(ROLES.get(0));
+      f.fault = fault;
+      refused(f);
+    }
+    var existing = fixture(ROLES.get(0));
+    Files.write(existing.output("terminal"), new byte[] {9}, StandardOpenOption.CREATE_NEW);
+    refused(existing);
+    assertArrayEquals(new byte[] {9}, Files.readAllBytes(existing.output("terminal")));
+    var symlink = fixture(ROLES.get(0));
+    Path target = symlink.parent.resolve("original");
+    Files.write(target, new byte[] {8}, StandardOpenOption.CREATE_NEW);
+    Files.createSymbolicLink(symlink.output("terminal"), target);
+    refused(symlink);
+    assertTrue(Files.isSymbolicLink(symlink.output("terminal")));
+    assertArrayEquals(new byte[] {8}, Files.readAllBytes(target));
+    var missing = fixture(ROLES.get(0));
+    Files.move(missing.target, missing.target.resolveSibling("preserved"));
+    refused(missing);
+    assertEquals(0, missing.calls.creates);
+  }
+
+  @Test
+  void nexport617004RechecksAndCloseFailuresNeverReportSuccessfulPublication() throws Exception {
+    for (String fault :
+        List.of(
+            "target#3:ino",
+            "target#4:ino",
+            "target#5:ino",
+            "parent#2:ino",
+            "service#2:ino",
+            "run#2:ino",
+            "close:target#1",
+            "close:target#2",
+            "close:parent#1",
+            "close:service#1",
+            "close:run#1",
+            "close:file#1",
+            "close:file#2",
+            "sync",
+            "replace-target")) {
+      var f = fixture(ROLES.get(0));
+      f.fault = fault;
+      refused(f);
+      assertArrayEquals(
+          GOLDEN,
+          Files.readAllBytes(
+              fault.equals("replace-target")
+                  ? f.parent.resolve("saved-target").resolve(INV + ".terminal.exec")
+                  : f.output("terminal")));
+      assertEquals(1, f.calls.creates);
+      assertFalse(f.calls.closes.isEmpty());
+    }
+  }
+
+  @Test
+  void nexport617005ObserverExceptionsAlwaysReleaseAcquiredScopes() throws Exception {
+    for (String fault :
+        List.of(
+            "throw:open",
+            "throw:filesystem",
+            "throw:attributes",
+            "throw:size",
+            "throw:cgroup",
+            "throw:ordinary",
+            "throw:resolver")) {
+      var f = fixture(ROLES.get(2));
+      f.fault = fault;
+      refused(f);
+    }
+    for (int length : new int[] {0, 4, 16 * 1024 * 1024 + 1}) {
+      var f = fixture(ROLES.get(0));
+      assertThrows(
+          IOException.class,
+          () ->
+              NativeCoveragePrivateFile.export(
+                  profile(f.role), INV + ".terminal.exec", new byte[length], f));
+      assertEquals(0, f.calls.creates);
+      assertTrue(f.calls.live.isEmpty());
+    }
+  }
+
+  @Test
+  void nexport617006FinalIdentityAndEveryOrdinaryFieldDriftRejectsWithRetainedBytes()
+      throws Exception {
+    for (String fault :
+        List.of("invocation#2", "invocation-null#2", "cgroup#2", "uid#2", "resolver#2")) {
+      var f = fixture(ROLES.get(2));
+      f.fault = fault;
+      refused(f);
+      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("terminal")));
+    }
+    for (int field = 1; field <= 9; field++) {
+      var f = fixture(ROLES.get(2));
+      f.fault = "ordinary-final#" + field;
+      refused(f);
+      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("terminal")));
+      assertEquals(2, f.snapshots);
+    }
+  }
+
+  private static final class Fixture implements NativeCoveragePrivateFile.Io {
+    final Path run, service, parent, target;
+    final Role role;
+    final Calls calls;
+    final Map<String, Integer> visits = new HashMap<>();
+    String fault = "";
+    int invocations, cgroups, resolvers, snapshots, uidReads, sizeReads;
+
+    Fixture(Path run, Role role) throws IOException {
+      this.run = run;
+      this.role = role;
+      service = run.resolve("schubert-nk");
+      parent = service.resolve("pt-coverage");
+      target = parent.resolve(role.directory());
+      Files.createDirectories(target);
+      for (Path path : List.of(run, service, parent))
+        Files.setPosixFilePermissions(path, PosixFilePermissions.fromString("rwxr-xr-x"));
+      Files.setPosixFilePermissions(target, PosixFilePermissions.fromString("rwx------"));
+      calls = new Calls(this);
+      assertEquals("tmpfs", Files.getFileStore(target).type(), "fixture requires a real tmpfs");
+    }
+
+    Path output(String phase) {
+      return target.resolve(INV + "." + phase + ".exec");
+    }
+
+    void export(String phase) throws IOException {
+      NativeCoveragePrivateFile.export(profile(role), INV + "." + phase + ".exec", GOLDEN, this);
+    }
+
+    void success(String phase) throws IOException {
+      assertArrayEquals(GOLDEN, Files.readAllBytes(output(phase)));
+      assertEquals(0100600, Files.getAttribute(output(phase), "unix:mode"));
+      assertEquals(1, Files.getAttribute(output(phase), "unix:nlink"));
+      assertEquals(
+          Files.getAttribute(run, "unix:uid"),
+          Files.getAttribute(output(phase), "unix:uid"),
+          "physical owner stays the actual host UID, not modeled Root");
+      assertEquals(1, calls.creates);
+      assertEquals(1, calls.syncs);
+      assertTrue(calls.live.isEmpty());
+      assertEquals(Map.of("run", 2, "service", 2, "parent", 2, "target", 5, "file", 3), visits);
+    }
+
+    private void fail(String operation) throws IOException {
+      if (fault.equals("throw:" + operation)) throw new IOException("public fixture unavailable");
+    }
+
+    public InodeSecurityCalls security() {
+      return new InodeSecurityCalls() {
+        final InodeSecurityCalls physical = LinuxInodeSecurity.create();
+
+        public byte[] accessAcl(Path held, int max) throws StorageIoException {
+          try {
+            String key = part(held) + "#" + visits.getOrDefault(part(held), 0) + ":acl";
+            return fault.equals(key) ? new byte[] {1} : physical.accessAcl(held, max);
+          } catch (IOException e) {
+            throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+          }
+        }
+
+        public boolean readOnlyFilesystem(Path held) throws StorageIoException {
+          return fault.equals("readonly") || physical.readOnlyFilesystem(held);
+        }
+
+        public long effectiveUid() {
+          return fault.equals("uid#" + ++uidReads) ? role.uid() + 1 : role.uid();
+        }
+      };
+    }
+
+    public FixedServiceIdentity resolver() {
+      resolvers++;
+      return new FixedServiceIdentity(
+          command -> {
+            fail("resolver");
+            var values = new HashMap<>(FixedServiceIdentityTest.GOLDEN);
+            values.put(
+                "passwd/schubert-inbox-inspector",
+                "schubert-inbox-inspector:x:991:976::/nonexistent:/usr/sbin/nologin\n");
+            values.put("group/schubert-inbox-inspector", "schubert-inbox-inspector:x:976:\n");
+            if (fault.equals("resolver#" + resolvers))
+              values.put(
+                  "passwd/schubert-api",
+                  "schubert-api:x:997:981::/nonexistent:/usr/sbin/nologin\n");
+            return values
+                .getOrDefault(command.get(1) + "/" + command.get(2), "")
+                .getBytes(StandardCharsets.US_ASCII);
+          });
+    }
+
+    public OwnedTransferDirectory openRun() throws IOException {
+      fail("open");
+      return OwnedTransferDirectory.open(calls, run);
+    }
+
+    public @Nullable String invocation() {
+      int call = ++invocations;
+      if (fault.equals("invocation-null#" + call)) return null;
+      return fault.equals("invocation#" + call) ? "foreign" : INV;
+    }
+
+    public String cgroup() throws IOException {
+      fail("cgroup");
+      return fault.equals("cgroup#" + ++cgroups) ? "0::/foreign\n" : role.cgroup();
+    }
+
+    public ChildStartupContext.Observed ordinary() throws IOException {
+      fail("ordinary");
+      snapshots++;
+      int initial = 0, finalField = 0;
+      for (int i = 1; i <= 9; i++) {
+        if (snapshots == 1 && fault.equals("ordinary#" + i)) initial = i;
+        if (snapshots == 2 && fault.equals("ordinary-final#" + i)) finalField = i;
+      }
+      int field = finalField;
+      return new ChildStartupContext.Observed(
+          field == 1 ? "PUBLIC_BOOT_B" : "PUBLIC_BOOT_A",
+          field == 2 ? 43 : 42,
+          field == 3 ? 101 : 100,
+          initial == 1 || field == 4 ? 997 : role.uid(),
+          initial == 2 || field == 5 ? 979 : role.gid(),
+          initial == 3 || field == 6 ? List.of(979L) : role.groups(),
+          initial == 6 || field == 7 ? "0::/foreign\n" : role.cgroup(),
+          initial != 4 && field != 8,
+          initial != 5 && field != 9);
+    }
+
+    public String filesystem(Path held) throws IOException {
+      fail("filesystem");
+      return fault.equals("filesystem") ? "ext4" : Files.getFileStore(held).type();
+    }
+
+    private String part(Path held) throws IOException {
+      Path path = Files.readSymbolicLink(held);
+      if (path.equals(run)) return "run";
+      if (path.equals(service)) return "service";
+      if (path.equals(parent)) return "parent";
+      if (path.equals(target)) return "target";
+      return Files.isRegularFile(held) ? "file" : "ancestor";
+    }
+
+    public @Nullable Map<String, ? extends @Nullable Object> attributes(Path held)
+        throws IOException {
+      fail("attributes");
+      String part = part(held);
+      int visit = visits.merge(part, 1, Integer::sum);
+      var values =
+          new HashMap<String, Object>(
+              Files.readAttributes(held, "unix:uid,gid,mode,nlink,dev,ino"));
+      boolean actor = part.equals("target") || part.equals("file");
+      values.put("uid", (int) (actor ? role.uid() : 0));
+      values.put("gid", (int) (actor ? role.gid() : 0));
+      String prefix = part + "#" + visit + ":";
+      if (fault.equals(prefix + "null")) return null;
+      for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino"))
+        if (fault.equals(prefix + field))
+          values.put(
+              field,
+              (field.equals("dev") || field.equals("ino"))
+                  ? Long.valueOf(field.equals("ino") ? ((Long) values.get("ino")) + 1 : 0)
+                  : Integer.valueOf(1));
+      return values;
+    }
+
+    public @Nullable Object size(Path held) throws IOException {
+      fail("size");
+      String prefix = "size#" + ++sizeReads + ":";
+      if (fault.equals(prefix + "null")) return null;
+      if (fault.equals(prefix + "unknown")) return "unknown";
+      if (fault.equals(prefix + "negative")) return -1L;
+      if (fault.equals(prefix + "nonzero") || fault.equals(prefix + "wrong")) return 1L;
+      return Files.getAttribute(held, "unix:size");
+    }
+  }
+
+  private static final class Calls implements DirectoryCalls {
+    final DirectoryCalls actual = LinuxDirectoryCalls.create();
+    final Fixture fixture;
+    final Set<Integer> live = new HashSet<>();
+    final Map<String, Integer> closes = new HashMap<>();
+    int creates, syncs;
+
+    Calls(Fixture fixture) {
+      this.fixture = fixture;
+    }
+
+    int own(int fd) {
+      assertTrue(live.add(fd));
+      return fd;
+    }
+
+    public int openRoot() throws StorageIoException {
+      return own(actual.openRoot());
+    }
+
+    public int openDirectory(int parent, String name) throws StorageIoException {
+      return own(actual.openDirectory(parent, name));
+    }
+
+    public int openEntry(int parent, String name) throws StorageIoException {
+      return own(actual.openEntry(parent, name));
+    }
+
+    public int createFile(int parent, String name) throws StorageIoException {
+      return own(actual.createFile(parent, name));
+    }
+
+    public int createPrivateFile(int parent, String name) throws StorageIoException {
+      creates++;
+      return own(actual.createPrivateFile(parent, name));
+    }
+
+    public void createDirectory(int parent, String name) throws StorageIoException {
+      actual.createDirectory(parent, name);
+    }
+
+    public void publish(int parent, String from, String to) throws StorageIoException {
+      actual.publish(parent, from, to);
+    }
+
+    public void unlink(int parent, String name) throws StorageIoException {
+      actual.unlink(parent, name);
+    }
+
+    public void sync(int fd) throws StorageIoException {
+      syncs++;
+      actual.sync(fd);
+      if (fixture.fault.equals("sync"))
+        throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+    }
+
+    public void close(int fd) throws StorageIoException {
+      String part;
+      try {
+        part = fixture.part(Path.of("/proc/self/fd/" + fd));
+      } catch (IOException failure) {
+        throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+      }
+      assertTrue(live.remove(fd));
+      actual.close(fd);
+      int count = closes.merge(part, 1, Integer::sum);
+      if (fixture.fault.equals("replace-target") && part.equals("target") && count == 1) {
+        try {
+          Files.move(fixture.target, fixture.parent.resolve("saved-target"));
+          Files.createDirectory(fixture.target);
+          Files.setPosixFilePermissions(
+              fixture.target, PosixFilePermissions.fromString("rwx------"));
+        } catch (IOException failure) {
+          throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+        }
+      }
+      if (fixture.fault.equals("close:" + part + "#" + count))
+        throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+    }
+  }
+}

@@ -31,6 +31,69 @@ final class NativeCoveragePrivateFile {
 
   private record FileState(Identity identity, long size) {}
 
+  /** PG-D399: data observations only; no startup evidence, configurable path or privilege grant. */
+  interface Io {
+    InodeSecurityCalls security();
+
+    FixedServiceIdentity resolver();
+
+    OwnedTransferDirectory openRun() throws IOException;
+
+    @Nullable String invocation();
+
+    String cgroup() throws IOException;
+
+    ChildStartupContext.Observed ordinary() throws IOException;
+
+    String filesystem(Path held) throws IOException;
+
+    @Nullable Map<String, ? extends @Nullable Object> attributes(Path held) throws IOException;
+
+    @Nullable Object size(Path held) throws IOException;
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification = "PG-D399 fixed native run/proc observations; no configurable namespace")
+  private static final class NativeIo implements Io {
+    public InodeSecurityCalls security() {
+      return LinuxInodeSecurity.create();
+    }
+
+    public FixedServiceIdentity resolver() {
+      return new FixedServiceIdentity();
+    }
+
+    public OwnedTransferDirectory openRun() throws IOException {
+      return OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/run"));
+    }
+
+    public @Nullable String invocation() {
+      return System.getenv("INVOCATION_ID");
+    }
+
+    public String cgroup() throws IOException {
+      return Files.readString(Path.of("/proc/self/cgroup"));
+    }
+
+    public ChildStartupContext.Observed ordinary() throws IOException {
+      return new ChildStartupContext().capture();
+    }
+
+    public String filesystem(Path held) throws IOException {
+      return Files.getFileStore(held).type();
+    }
+
+    public Map<String, Object> attributes(Path held) throws IOException {
+      return Files.readAttributes(held, "unix:uid,gid,mode,nlink,dev,ino");
+    }
+
+    public Object size(Path held) throws IOException {
+      return Files.getAttribute(held, "unix:size");
+    }
+  }
+
   @SuppressFBWarnings(
       value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
       matchType = SuppressMatchType.EXACT,
@@ -80,83 +143,96 @@ final class NativeCoveragePrivateFile {
           "SSC193/PG-D375 fixed Linux run/proc capability and four PT role directories only; NEXPORT193/native; no arbitrary path or coverage exclusion")
   static void export(FixedNativeCoverageProfile profile, String name, byte[] bytes)
       throws IOException {
+    export(profile, name, bytes, new NativeIo());
+  }
+
+  static void export(
+      @Nullable FixedNativeCoverageProfile profile,
+      @Nullable String name,
+      byte @Nullable [] bytes,
+      @Nullable Io io)
+      throws IOException {
+    if (profile == null || name == null || bytes == null || io == null)
+      throw new IllegalArgumentException("private PT export dependencies required");
     // Name is admitted by the closed profile; a second path cannot be substituted by a caller.
     require(
         name.equals(profile.invocation() + ".terminal.exec")
             || (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT
                 && name.equals(profile.invocation() + ".before-exec.exec")));
-    var security = LinuxInodeSecurity.create();
-    var fixed = profile.identity(new FixedServiceIdentity());
+    var security = io.security();
+    var fixed = profile.identity(io.resolver());
     long uid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.uid();
     long gid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.gid();
     require(security.effectiveUid() == uid);
-    require(profile.invocation().equals(System.getenv("INVOCATION_ID")));
+    require(profile.invocation().equals(io.invocation()));
     String cgroup = profile.cgroup();
-    require(cgroup.equals(Files.readString(Path.of("/proc/self/cgroup"))));
+    require(cgroup.equals(io.cgroup()));
     var ordinary =
         profile.phase() == FixedNativeCoverageProfile.Phase.ORDINARY
-            ? java.util.Optional.of(new ChildStartupContext().capture())
+            ? java.util.Optional.of(io.ordinary())
             : java.util.Optional.<ChildStartupContext.Observed>empty();
     if (ordinary.isPresent()) {
       verifyOrdinaryProcess(fixed, ordinary.orElseThrow(), cgroup);
     }
-    var run = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/run"));
+    var run = io.openRun();
     ResourceScope.use(
         run::close,
         () -> {
-          Identity top = directory(run, security, 0, 0, 040755);
+          Identity top = directory(run, security, 0, 0, 040755, io);
           var service = run.openExistingChild("schubert-nk");
           ResourceScope.use(
               service::close,
               () -> {
-                Identity serviceBefore = directory(service, security, 0, 0, 040755);
+                Identity serviceBefore = directory(service, security, 0, 0, 040755, io);
                 var parent = service.openExistingChild("pt-coverage");
                 ResourceScope.use(
                     parent::close,
                     () -> {
-                      Identity parentBefore = directory(parent, security, 0, 0, 040755);
+                      Identity parentBefore = directory(parent, security, 0, 0, 040755, io);
                       String role = profile.directory();
                       var target = parent.openExistingChild(role);
                       Identity saved =
                           ResourceScope.use(
                               target::close,
                               () -> {
-                                Identity original = directory(target, security, uid, gid, 040700);
+                                Identity original =
+                                    directory(target, security, uid, gid, 040700, io);
                                 target.atDirectory(
                                     held -> {
                                       require(
-                                          "tmpfs".equals(Files.getFileStore(held).type())
+                                          "tmpfs".equals(io.filesystem(held))
                                               && !security.readOnlyFilesystem(held));
                                       return Boolean.TRUE;
                                     });
-                                write(target, security, uid, gid, name, bytes);
+                                write(target, security, uid, gid, name, bytes, io);
                                 require(
-                                    original.equals(directory(target, security, uid, gid, 040700)));
+                                    original.equals(
+                                        directory(target, security, uid, gid, 040700, io)));
                                 return original;
                               });
                       var reopened = parent.openExistingChild(role);
                       ResourceScope.use(
                           reopened::close,
                           () -> {
-                            require(saved.equals(directory(reopened, security, uid, gid, 040700)));
+                            require(
+                                saved.equals(directory(reopened, security, uid, gid, 040700, io)));
                             return Boolean.TRUE;
                           });
-                      require(parentBefore.equals(directory(parent, security, 0, 0, 040755)));
+                      require(parentBefore.equals(directory(parent, security, 0, 0, 040755, io)));
                       return Boolean.TRUE;
                     });
-                require(serviceBefore.equals(directory(service, security, 0, 0, 040755)));
+                require(serviceBefore.equals(directory(service, security, 0, 0, 040755, io)));
                 return Boolean.TRUE;
               });
-          require(top.equals(directory(run, security, 0, 0, 040755)));
+          require(top.equals(directory(run, security, 0, 0, 040755, io)));
           return Boolean.TRUE;
         });
     require(
-        profile.invocation().equals(System.getenv("INVOCATION_ID"))
-            && cgroup.equals(Files.readString(Path.of("/proc/self/cgroup")))
+        profile.invocation().equals(io.invocation())
+            && cgroup.equals(io.cgroup())
             && security.effectiveUid() == uid
-            && fixed.equals(profile.identity(new FixedServiceIdentity())));
-    if (ordinary.isPresent())
-      verifySameOrdinaryProcess(ordinary.orElseThrow(), new ChildStartupContext().capture());
+            && fixed.equals(profile.identity(io.resolver())));
+    if (ordinary.isPresent()) verifySameOrdinaryProcess(ordinary.orElseThrow(), io.ordinary());
   }
 
   /** PG-D396/NEXPORT598: observed data policy, never startup or namespace authority. */
@@ -191,15 +267,27 @@ final class NativeCoveragePrivateFile {
       String name,
       byte[] bytes)
       throws IOException {
+    write(directory, security, uid, gid, name, bytes, new NativeIo());
+  }
+
+  private static void write(
+      OwnedTransferDirectory directory,
+      InodeSecurityCalls security,
+      long uid,
+      long gid,
+      String name,
+      byte[] bytes,
+      Io io)
+      throws IOException {
     if (directory == null || security == null || name == null || bytes == null)
       throw new IllegalArgumentException("private PT output dependencies required");
     require(bytes.length >= 5 && bytes.length <= FixedNativeCoverageCheckpoint.MAX_BYTES);
-    Identity before = directory(directory, security, uid, gid, 040700);
+    Identity before = directory(directory, security, uid, gid, 040700, io);
     FileState saved =
         directory.createPrivateEntry(
             name,
             held -> {
-              FileState original = file(held, security, uid, gid, 0100600);
+              FileState original = file(held, security, uid, gid, 0100600, io);
               require(original.size() == 0);
               try (var channel = FileChannel.open(held, StandardOpenOption.WRITE)) {
                 var buffer = ByteBuffer.wrap(bytes);
@@ -207,7 +295,7 @@ final class NativeCoveragePrivateFile {
                 channel.force(true);
                 require(channel.size() == bytes.length);
               }
-              FileState after = file(held, security, uid, gid, 0100600);
+              FileState after = file(held, security, uid, gid, 0100600, io);
               require(original.identity().equals(after.identity()) && after.size() == bytes.length);
               require(hash(held, bytes.length).equals(digest(bytes)));
               return after;
@@ -217,31 +305,43 @@ final class NativeCoveragePrivateFile {
     directory.atExistingEntryHandle(
         name,
         held -> {
-          require(saved.equals(file(held, security, uid, gid, 0100600)));
+          require(saved.equals(file(held, security, uid, gid, 0100600, io)));
           require(hash(held, bytes.length).equals(digest(bytes)));
           return Boolean.TRUE;
         });
-    require(before.equals(directory(directory, security, uid, gid, 040700)));
+    require(before.equals(directory(directory, security, uid, gid, 040700, io)));
   }
 
   private static Identity directory(
       OwnedTransferDirectory directory, InodeSecurityCalls security, long uid, long gid, int mode)
       throws IOException {
-    return directory.atDirectory(held -> checked(held, security, uid, gid, mode));
+    return directory(directory, security, uid, gid, mode, new NativeIo());
+  }
+
+  private static Identity directory(
+      OwnedTransferDirectory directory,
+      InodeSecurityCalls security,
+      long uid,
+      long gid,
+      int mode,
+      Io io)
+      throws IOException {
+    return directory.atDirectory(
+        held -> checked(io.attributes(held), security.accessAcl(held, 44), uid, gid, mode));
   }
 
   private static FileState file(
       Path held, InodeSecurityCalls security, long uid, long gid, int mode) throws IOException {
-    Identity value = checked(held, security, uid, gid, mode);
-    Object size = Files.getAttribute(held, "unix:size");
-    if (!(size instanceof Long length) || length < 0) throw unavailable();
-    return new FileState(value, length);
+    return file(held, security, uid, gid, mode, new NativeIo());
   }
 
-  private static Identity checked(
-      Path held, InodeSecurityCalls security, long uid, long gid, int mode) throws IOException {
-    Map<String, Object> a = Files.readAttributes(held, "unix:uid,gid,mode,nlink,dev,ino");
-    return checked(a, security.accessAcl(held, 44), uid, gid, mode);
+  private static FileState file(
+      Path held, InodeSecurityCalls security, long uid, long gid, int mode, Io io)
+      throws IOException {
+    Identity value = checked(io.attributes(held), security.accessAcl(held, 44), uid, gid, mode);
+    Object size = io.size(held);
+    if (!(size instanceof Long length) || length < 0) throw unavailable();
+    return new FileState(value, length);
   }
 
   /** Independent metadata oracle port; never grants namespace or process authority. */
