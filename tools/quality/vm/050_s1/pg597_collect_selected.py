@@ -26,10 +26,10 @@ def classes(p):
 def main(source, version='v2'):
     os.umask(0o077)
     assert re.fullmatch('[0-9a-f]{40}', source)
-    assert version in ('v2', 'v3', 'PG598')
-    run_name = 'pg598-ordinary-process-policy-v1' if version == 'PG598' else 'pg597-public-agent-driver-' + version
+    assert version in ('v2', 'v3', 'PG598', 'PG598V2')
+    run_name = 'pg598-ordinary-process-policy-v2' if version == 'PG598V2' else 'pg598-ordinary-process-policy-v1' if version == 'PG598' else 'pg597-public-agent-driver-' + version
     run = W / run_name
-    expected_tests = 26 if version == 'v2' else 29 if version == 'PG598' else 27
+    expected_tests = 26 if version == 'v2' else 29 if version in ('PG598', 'PG598V2') else 27
     assert (run / 'source').read_text().strip() == source and (run / 'exit').read_bytes() == b'0\n'
     entries = [line.split('  ', 1) for line in (run / 'source-files.sha256').read_text().splitlines()]
     objects = subprocess.check_output(['git', 'cat-file', '--batch'], cwd=T,
@@ -52,7 +52,7 @@ def main(source, version='v2'):
     tests = {}
     hashes = {}
     for cls, count in (('FixedNativeCoverageCheckpointTest', 10 if version == 'v2' else 11), ('FixedNativeCoverageProfileTest', 5),
-                       ('NativeCoveragePrivateFileTest', 7 if version == 'PG598' else 5), ('FixedNativeCoverageStopHoldTest', 6)):
+                       ('NativeCoveragePrivateFileTest', 7 if version in ('PG598', 'PG598V2') else 5), ('FixedNativeCoverageStopHoldTest', 6)):
         name = 'TEST-dev.codex.schubert.nk.bootstrap.' + cls + '.xml'
         p = run / name
         current = T / 'src/schubert-nk-bootstrap/target/surefire-reports' / name
@@ -78,7 +78,7 @@ def main(source, version='v2'):
     assert not set(before) - set(after)
     assert added == sorted(prefix + '$PublicAgent$' + n + '.class' for n in ('Classes', 'Sources', 'Invocation'))
     expected_changes = [prefix + '.class', prefix + '$PublicAgent.class']
-    if version == 'PG598':
+    if version in ('PG598', 'PG598V2'):
         expected_changes.append('dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.class')
     assert changed == sorted(expected_changes)
     unchanged = 0
@@ -99,7 +99,7 @@ def main(source, version='v2'):
     result = {'actualExit': 0, 'run': run_name, 'operatorSource': source,
               'candidateProductionSource': source, 'installedVmProductionSource': '969d8ded10c0bf5841d9e3a5c531e922caf4a24a',
               'sourceQualification': 'UNACCEPTED_PRODUCTION_CANDIDATE_NOT_DEPLOYED',
-              'tests': tests, 'selectedTests': expected_tests, 'newTestCases': 4 if version == 'v2' else 7 if version == 'PG598' else 5, 'FESFlakyNotRun': 0,
+              'tests': tests, 'selectedTests': expected_tests, 'newTestCases': 4 if version == 'v2' else 7 if version in ('PG598', 'PG598V2') else 5, 'FESFlakyNotRun': 0,
               'outsideSelectedNotRunCredit0': True, 'staticModules': 1, 'staticIssues': 0,
               'beforeMainClasses': 1600, 'candidateMainClasses': 1603, 'changedClasses': changed,
               'addedAbstractInterfaces': added, 'removedClasses': [], 'interfaceExclusionConfigured': False,

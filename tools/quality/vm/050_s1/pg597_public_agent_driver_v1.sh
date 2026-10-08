@@ -61,7 +61,7 @@ PY
 task_result=0
 (
 umask 0027
-python3 -B tools/quality/qualified_nullable_check.py
+python3 -B tools/quality/qualified_nullable_check.py &&
 ./mvnw -o --no-transfer-progress -Dstyle.color=never -Djansi.force=false -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-bootstrap spotless:check test-compile test spotbugs:check jacoco:report jar:jar -Dtest=FixedNativeCoverageCheckpointTest,FixedNativeCoverageProfileTest,NativeCoveragePrivateFileTest,FixedNativeCoverageStopHoldTest
 ) > "$task_base/build.private.log" 2>&1 || task_result=$?
 printf '%s\n' "$task_result" > "$task_base/exit"
