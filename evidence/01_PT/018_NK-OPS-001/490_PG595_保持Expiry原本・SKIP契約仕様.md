@@ -1,5 +1,9 @@
 # PG595 保持Expiry原本・SKIP契約
 
+## V3限定実結果（2026-10-08 21:07:26 JST）
+
+sourceb69815c09（fullSHAはprivate/sourceとpublic operatorSource）、五条件・全旧38合計39PT/F0E0S0/actual0、独立原本cutoff/audit全列保持・current SKIP literal/不正原本-取得拒否-null-30別Session拒否/Connection close/ack lock解放、Spotbugs0/NullAwayWerror/format/1600class同969。private manifest SHA599b55670e892c8d308552b943f45a4c6ff490f333963fb50ea9dfa82daec9ff/public同run。PG594比0line/0method/0class/2branch診断増、全残938/173/12/839。BUG880/YKT649当fixture範囲閉鎖、V1/V2failedを成功へ変換0、BUG878品質保留・正式24/1964/53不変更。次PG596 shared変更群fresh六全回帰。
+
 V1/V2新39PT/F1E0/exit1はBUG880/YKT649、V2最小診断でpriorObserveを特定。SKIP30拒否がtransaction開始後にSessionをabortするのに、fixtureが同Sessionで0成功を要求していた。正常0と独立第五条件30拒否へ分離、seed37～41、五条件を同新1PT内へ記録。旧/current全row不変、失敗後はconnection close/ack観測だけ、再利用しない。新commandは同closed runner PG595V3、前failedexec認証と全旧38回帰、期待値緩和0・Production変更0。V1/V2failedexec/XML/log別source保持、実結果は後記。
 
 P017-01.03既群.66/1.66/3.66pp継承、追加費重複0、NK-BAT-001/OPS009/DAT009/UI251/SS331341343/SSC125200。PT-OPS-MDB595001、MorningDatabaseSession.Session.beginExpiry/observeExpiry、四条件を新1PT内で検証する。
