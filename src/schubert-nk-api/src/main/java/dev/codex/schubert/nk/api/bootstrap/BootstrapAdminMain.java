@@ -47,7 +47,8 @@ public final class BootstrapAdminMain {
   /** PG-D401: internal data/control-flow ports, never an OS admission or startup capability. */
   @FunctionalInterface
   interface Operation {
-    int run(String[] arguments, Map<String, String> environment) throws Exception;
+    int run(String[] arguments, Map<String, String> environment)
+        throws IOException, SQLException, java.security.NoSuchAlgorithmException;
   }
 
   @FunctionalInterface

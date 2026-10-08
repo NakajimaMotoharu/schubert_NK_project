@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +99,30 @@ final class BootstrapEntryBoundaryTest {
       }
       assertEquals(
           "Initial ADMIN bootstrap finished\nInitial ADMIN bootstrap failed\n",
+          bytes.toString(StandardCharsets.UTF_8));
+    }
+  }
+
+  @Test
+  void everyDeclaredCheckedFamilyRemainsFixedNonSuccess() throws Exception {
+    for (int kind : new int[] {0, 1, 2}) {
+      var bytes = new ByteArrayOutputStream();
+      try (var diagnostics = new PrintStream(bytes, false, StandardCharsets.UTF_8)) {
+        assertEquals(
+            50,
+            BootstrapAdminMain.launch(
+                new String[0],
+                Map.of(),
+                (arguments, environment) -> {
+                  if (kind == 0) throw new IOException("untrusted details");
+                  if (kind == 1) throw new SQLException("untrusted details");
+                  throw new NoSuchAlgorithmException("untrusted details");
+                },
+                () -> false,
+                diagnostics));
+      }
+      assertEquals(
+          "Initial ADMIN bootstrap failed\nInitial ADMIN bootstrap finished\n",
           bytes.toString(StandardCharsets.UTF_8));
     }
   }
