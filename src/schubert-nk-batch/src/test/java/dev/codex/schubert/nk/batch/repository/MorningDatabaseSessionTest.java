@@ -1034,7 +1034,7 @@ final class MorningDatabaseSessionTest {
         IOException.class,
         () -> held.get().failedBackupSnapshot(attempts.get(), () -> 10_000_000_000L));
     try (var observer = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
-      awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+      awaitAcquired(observer, TimeUnit.SECONDS.toNanos(5));
       observer.setAutoCommit(false);
       var repository = new BatchRunRepository(observer);
       repository.verifyFinished(attempts.get().database(), ended, failed);
@@ -1061,6 +1061,7 @@ final class MorningDatabaseSessionTest {
           assertFalse(rows.next());
         }
       }
+      releaseAdvisory(observer);
     }
   }
 
