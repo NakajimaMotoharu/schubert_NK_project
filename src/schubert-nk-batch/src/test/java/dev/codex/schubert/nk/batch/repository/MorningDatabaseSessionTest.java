@@ -145,6 +145,197 @@ final class MorningDatabaseSessionTest {
   }
 
   @Test
+  void mdb590001FailedBackupCleanupSkipAndExpiryTerminalReceiptsMatchIndependentSql()
+      throws Exception {
+    var zero = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(0);
+    var ten = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(10);
+    var thirty = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.receipt(30);
+    var cleanupReceipt =
+        dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(0);
+    var receipts = List.of(zero, ten, thirty);
+    var names =
+        List.of(
+            "CLEAN_NOTIFICATION",
+            "CLEAN_QUESTION",
+            "CLEAN_SESSION",
+            "CLEAN_INBOX_OUTBOX",
+            "CLEAN_LOG",
+            "CLEAN_BATCH_RUN",
+            "CLEAN_TRANSFER");
+    for (int index = 0; index < 6; index++) {
+      int scenario = index;
+      int terminal = index % 3;
+      Instant began = Instant.parse("2026-09-20T00:00:00Z").plusSeconds(index * 86400L);
+      var run = new BatchRun(new UUID(590001, index + 1), began.minusSeconds(32400));
+      var retained = new AtomicReference<Connection>();
+      var readBefore = new AtomicReference<String>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var actual = DriverManager.getConnection(url, properties);
+                retained.set(actual);
+                return actual;
+              },
+              c -> {});
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner = () -> 5_000_000_000L;
+      try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+        MorningDatabaseSession.Operation<Boolean> operation =
+            session -> {
+              assertThrows(IOException.class, () -> session.beginExpiry(run, began, owner));
+              assertThrows(IOException.class, () -> session.handoffExpiry(() -> 0));
+              var backup = session.beginBackup(run, began, false);
+              confirmActualFailedPair(session, backup);
+              assertEquals(
+                  0,
+                  session.handoffCleanup(
+                      () -> {
+                        try (var child =
+                                DriverManager.getConnection(actualUrl, "schubert_batch", "");
+                            var sql =
+                                child.prepareStatement(
+                                    "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values(?,?,?,?,1,?,?,?,0,0,0,0,?,?)")) {
+                          assertTrue(advisory(child));
+                          child.setAutoCommit(false);
+                          for (int step = 0; step < names.size(); step++) {
+                            boolean transfer = step == 6;
+                            sql.setLong(1, 590000000L + scenario * 100 + step);
+                            sql.setObject(2, run.id());
+                            sql.setObject(3, java.time.LocalDate.of(2026, 9, 20 + scenario));
+                            sql.setString(4, names.get(step));
+                            sql.setObject(
+                                5, began.plusSeconds(2).atOffset(java.time.ZoneOffset.UTC));
+                            sql.setObject(
+                                6,
+                                began
+                                    .plusSeconds(transfer ? 3 : 2)
+                                    .atOffset(java.time.ZoneOffset.UTC));
+                            sql.setString(7, transfer ? "SUCCESS" : "SKIPPED");
+                            sql.setString(8, transfer ? null : "BACKUP_UNAVAILABLE");
+                            sql.setString(9, transfer ? null : "verified backup unavailable");
+                            assertEquals(1, sql.executeUpdate());
+                          }
+                          child.commit();
+                        } catch (SQLException failure) {
+                          throw new IOException("fixture cleanup", failure);
+                        }
+                        return 0;
+                      }));
+              var cleanup = session.observeCleanupBackupUnavailable(run, 0, owner);
+              assertEquals(7, cleanup.entries().size());
+              for (int step = 0; step < 7; step++) {
+                var entry = cleanup.entries().get(step);
+                assertEquals(names.get(step), entry.attempt().step().name());
+                assertEquals(590000000L + scenario * 100 + step, entry.attempt().id());
+                assertEquals(step < 6, entry.attempt().skipped());
+                assertEquals(
+                    step < 6 ? BatchStepResult.Status.SKIPPED : BatchStepResult.Status.SUCCESS,
+                    entry.result().status());
+                assertEquals(
+                    step < 6
+                        ? BatchStepResult.Reason.BACKUP_UNAVAILABLE
+                        : BatchStepResult.Reason.NONE,
+                    entry.result().reason());
+                assertEquals(began.plusSeconds(step < 6 ? 2 : 3), entry.endedAt());
+                assertEquals(0, entry.result().target());
+                assertEquals(0, entry.result().success());
+                assertEquals(0, entry.result().failure());
+                assertEquals(0, entry.result().bytes());
+              }
+              assertEquals(
+                  Collections.nCopies(7, Optional.empty()),
+                  session.cleanupReferences(cleanup, owner));
+              assertThrows(NullPointerException.class, () -> session.beginExpiry(run, null, owner));
+              assertThrows(NullPointerException.class, () -> session.beginExpiry(run, began, null));
+              var expiry = session.beginExpiry(run, began.plusSeconds(4), owner);
+              assertFalse(expiry.current().skipped());
+              assertEquals(Optional.empty(), expiry.prior());
+              assertThrows(
+                  IOException.class,
+                  () -> session.observeExpiry(expiry, receipts.get(terminal), owner));
+              assertEquals(
+                  receipts.get(terminal).exitCode(),
+                  session.handoffExpiry(
+                      () -> {
+                        try (var child =
+                                DriverManager.getConnection(actualUrl, "schubert_batch", "");
+                            var sql =
+                                child.prepareStatement(
+                                    "update schubert.batch_runs set status=?,ended_at=?,target_count=1,success_count=?,failure_count=?,byte_count=25,error_code=?,error_summary=?,expiry_cutoff_at=?,expiry_before_count=1,expiry_after_count=? where id=? and run_id=? and step='CLEAN_EXPIRY' and status='RUNNING'")) {
+                          assertTrue(advisory(child));
+                          sql.setString(1, List.of("SUCCESS", "WARNING", "FAILED").get(terminal));
+                          sql.setObject(2, began.plusSeconds(5).atOffset(java.time.ZoneOffset.UTC));
+                          sql.setLong(3, terminal == 0 ? 1 : 0);
+                          sql.setLong(4, terminal == 0 ? 0 : 1);
+                          sql.setString(
+                              5,
+                              terminal == 0
+                                  ? null
+                                  : terminal == 1 ? "COMMAND_FAILURE" : "SAFETY_FAILURE");
+                          sql.setString(
+                              6,
+                              terminal == 0
+                                  ? null
+                                  : terminal == 1
+                                      ? "batch command failed"
+                                      : "batch safety check failed");
+                          sql.setObject(
+                              7,
+                              run.cutoff().minusSeconds(604800).atOffset(java.time.ZoneOffset.UTC));
+                          sql.setLong(8, terminal == 0 ? 0 : 1);
+                          sql.setLong(9, expiry.current().id());
+                          sql.setObject(10, run.id());
+                          assertEquals(1, sql.executeUpdate());
+                        } catch (SQLException failure) {
+                          throw new IOException("fixture expiry", failure);
+                        }
+                        return receipts.get(terminal).exitCode();
+                      }));
+              try {
+                readBefore.set(mdb588Audit(observer, run));
+              } catch (SQLException failure) {
+                throw new IOException("fixture audit", failure);
+              }
+              assertThrows(
+                  IOException.class, () -> session.observeExpiry(expiry, cleanupReceipt, owner));
+              var actual =
+                  session.observeExpiry(
+                      expiry,
+                      scenario < 3 ? receipts.get(terminal) : terminal == 0 ? thirty : zero,
+                      owner);
+              assertEquals(expiry, actual.begins());
+              assertEquals(began.plusSeconds(5), actual.ended());
+              assertEquals(
+                  List.of(
+                          BatchStepResult.Status.SUCCESS,
+                          BatchStepResult.Status.WARNING,
+                          BatchStepResult.Status.FAILED)
+                      .get(terminal),
+                  actual.result().status());
+              assertEquals(1, actual.result().target());
+              assertEquals(terminal == 0 ? 1 : 0, actual.result().success());
+              assertEquals(terminal == 0 ? 0 : 1, actual.result().failure());
+              assertEquals(25, actual.result().bytes());
+              assertEquals(run.cutoff().minusSeconds(604800), actual.audit().cutoff());
+              assertEquals(Long.valueOf(1), actual.audit().before());
+              assertEquals(Long.valueOf(terminal == 0 ? 0 : 1), actual.audit().after());
+              return Boolean.TRUE;
+            };
+        if (scenario < 3) assertEquals(Boolean.TRUE, subject.execute(credential(), operation));
+        else
+          assertEquals(
+              "root batch database unavailable",
+              assertThrows(IOException.class, () -> subject.execute(credential(), operation))
+                  .getMessage());
+        assertEquals(readBefore.get(), mdb588Audit(observer, run));
+        assertTrue(retained.get().isClosed());
+        awaitReleased(observer, TimeUnit.SECONDS.toNanos(5));
+      }
+    }
+  }
+
+  @Test
   void mdb589001ActualReadbackSqlFailuresCloseConnectionWithoutChangingCommittedRows()
       throws Exception {
     var receipt = dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture.cleanupReceipt(30);
