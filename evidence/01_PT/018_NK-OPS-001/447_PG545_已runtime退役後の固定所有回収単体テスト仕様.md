@@ -1,5 +1,7 @@
 # PG545 已runtime退役後の固定所有回収
 
+実H004更新=source1a9fdda3fb2164946a4a0bf99a9d3ebaf1f5d3df/同preflight四byteSHA/2026-10-08 11:16:28～33JST/actual0/5.115441s/log f3bd4290bf1b36bb3e212edb95fd9bb8bae582cb2f3605af06419c4ca4518b86。固定Ref→Root onlyTERM、全原値/current/runtime不存在/十F18・全補助n-a不変二読/全oldowner-peer-advisory-FLOCK0/新Refbus正常。Rootpg545-runtime-owned-handoff-v1私有封印、公開metadata/manifest後記。旧retire-v3 remote143/hostHEADassert1（変更前source固定の不一致を拒否）・closeUNKNOWN保全、新scopeの成功を流用0。PG546別fresh正常post-readbackは未実行。
+
 NK-OPS-001、RD OPS009/BAK/BKO/UI251/SS342343353 SSC220、QA047、BUG840/YKT609。VMsourcea2/PG495/schema028/bootcc9、旧operator source d44293eedd5adef2a542068d95bee4c5d5428957。固定Root573159/ticks3787228/argv3884a575…・唯一Ref573188/ticks3787344/argvb3360a48…/backend573186、sudo573157は対象外。runtime不存在、已unlink/dirsync/one reloadは再発行しない。
 
 |Test ID|対象・入力・操作|独立期待値と根拠|
