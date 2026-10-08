@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC227（2026-10-08、SS343の新candidate completed code-only）：独立literalで現oldPG548/source969/a224・新PG600/source23b/a634・完全DONE/run/cutoff/activationを固定し、全snapshot型/欠落/null/foreign/同peer/所有/namespace/有限delta/approval/epoch全fieldを検証する。旧ISSUED→同activation新UUIDv4 INVALID以外、DB482row/原本Backup/credential/native/Unit設定・履歴変更を拒否。fresh verifyとactivateを別new-only scopeで行い、全M-A/DB/十Ref/bus/FD正常・peer/advisory/FLOCK0/全原値再読を独立に採取する。PG5993457/511・静的六0は新candidate host成功、旧18nativeは非輸入/global四100未達/正式24-1964-53不変更。配備後に新source実Root/普通main/真正親DONE/owned停止/native/CHR/DIFと正式source/run全scopeを確認し、未実行・unknown・別source・失敗・skipを合格に加算しない。IT/ST完了宣言はしない。
+
 ## 1. 目的・状態・追跡
 
 SSC-014: Username表示64byteと比較key96byteを分離し、U+0130×32/NFC/trim/Locale.ROOT/ギリシャ語文脈を独立literalで確認。旧64byte CHECKでの拒否を再現し、append-only V007で95/96受理・97/空/NULL拒否・UK維持・既存値非変更・Login audit64byteを検証する。表示/wireを拡張せず全scalarのUTF-8 lower最大3/2をJDK更新guardにする。
