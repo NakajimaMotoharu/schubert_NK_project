@@ -13,12 +13,12 @@ public final class Pg797OwnedDatabaseTest {
   }
   static final class Fixture{
     boolean closed,auto,readOnly=true,locked=true,nullNumber,first=true,second;
-    int backend=17,queries,cursor;String role="schubert_batch",database="schubert_nk",application="PG798-fixed-pending",transaction="on",fault="";Throwable failure=new SQLException("PRIVATE");
+    int backend=17,queries,cursor;String role="schubert_batch",session="schubert_batch",database="schubert_nk",application="PG798-fixed-pending",transaction="on",fault="";Throwable failure=new SQLException("PRIVATE");
     void at(String method)throws Throwable{if(fault.equals(method))throw failure;}
     ResultSet rows(){cursor=0;return(ResultSet)Proxy.newProxyInstance(getClass().getClassLoader(),new Class<?>[]{ResultSet.class},(p,m,a)->{
       at("result."+m.getName());return switch(m.getName()){
         case"next"->++cursor==1?first:second;case"getInt"->backend;case"wasNull"->nullNumber;case"getBoolean"->locked;
-        case"getString"->switch((int)a[0]){case 2->role;case 3->database;case 4->application;case 5->transaction;default->throw new AssertionError("foreign field");};case"close"->null;default->throw new AssertionError("unexpected result call");};});}
+        case"getString"->switch((int)a[0]){case 2->role;case 3->database;case 4->application;case 5->transaction;case 7->session;default->throw new AssertionError("foreign field");};case"close"->null;default->throw new AssertionError("unexpected result call");};});}
     Statement statement(){return(Statement)Proxy.newProxyInstance(getClass().getClassLoader(),new Class<?>[]{Statement.class},(p,m,a)->{
       at("statement."+m.getName());if(m.getName().equals("close"))return null;
       check(m.getName().equals("executeQuery"));String q=(String)a[0];check(q.startsWith("select pg_backend_pid(),current_user,current_database(),current_setting('application_name')")&&q.contains("71419602")&&q.contains("mode='ExclusiveLock'")&&!q.contains("set_config"));queries++;return rows();});}
@@ -37,10 +37,11 @@ public final class Pg797OwnedDatabaseTest {
       check(!l.heartbeatAllowed());int count=v.queries;refused(SQLException.class,l::verify);check(v.queries==count);
     }
     var open=new Fixture();var l=open.lease();refused(SQLException.class,l::confirmClosed);check(!l.heartbeatAllowed());
-    var schema=new Fixture();schema.role="schubert_migration";schema.application="PG797-fixed-snapshot";schema.locked=false;
+    var schema=new Fixture();schema.role="nk_owner";schema.session="schubert_migration";schema.application="PG797-fixed-snapshot";schema.locked=false;
     var schemaLease=new Pg797OwnedDatabase(schema.connection(),new Pg797OwnedDatabase.Expected(17,"schubert_migration","PG797-fixed-snapshot","schubert_nk",true,false));schemaLease.verify();check(schemaLease.heartbeatAllowed());schema.closed=true;schemaLease.confirmClosed();
     var rw=new Fixture();rw.readOnly=false;rw.transaction="off";rw.application="PG797-fixed-recovery";var rwLease=new Pg797OwnedDatabase(rw.connection(),new Pg797OwnedDatabase.Expected(17,"schubert_batch","PG797-fixed-recovery","schubert_nk",false,true));rwLease.verify();check(rwLease.heartbeatAllowed());
     for(Object[]policy:List.of(new Object[]{"schubert_migration",false,false},new Object[]{"schubert_migration",true,true},new Object[]{"schubert_batch",true,false}))refused(IllegalArgumentException.class,()->new Pg797OwnedDatabase.Expected(17,(String)policy[0],"PG797-fixed-probe","schubert_nk",(boolean)policy[1],(boolean)policy[2]));
+    for(String session:Arrays.asList("foreign",null)){var s=new Fixture();s.session=session;var sl=s.lease();refused(SQLException.class,sl::verify);check(!sl.heartbeatAllowed());}
     var other=new Fixture();var owned=other.lease();var error=new AtomicReference<Throwable>();var t=new Thread(()->{try{owned.verify();}catch(Throwable failure){error.set(failure);}});t.start();t.join();check(error.get()instanceof SQLException&&!owned.heartbeatAllowed()&&other.queries==0);
     refused(NullPointerException.class,()->new Pg797OwnedDatabase(null,new Pg797OwnedDatabase.Expected(17,"schubert_batch","PG798-fixed-pending","schubert_nk")));
     refused(NullPointerException.class,()->new Pg797OwnedDatabase(new Fixture().connection(),null));

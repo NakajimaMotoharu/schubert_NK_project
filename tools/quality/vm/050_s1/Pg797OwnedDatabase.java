@@ -10,6 +10,7 @@ public final class Pg797OwnedDatabase {
       if(backend<2||!java.util.Set.of("schubert_batch","schubert_migration").contains(role)||!application.matches("PG[0-9]{3}-[a-z-]{1,32}")||!database.equals("schubert_nk")||role.equals("schubert_migration")&&(!readOnly||advisory)||role.equals("schubert_batch")&&!advisory)throw new IllegalArgumentException("fixed database expectation unavailable");
     }
     @Override public String toString(){return "OwnedDatabase.Expected[REDACTED]";}
+    public String effectiveRole(){return role.equals("schubert_migration")?"nk_owner":"schubert_batch";}
   }
   private final Connection connection;
   private final Expected expected;
@@ -22,9 +23,9 @@ public final class Pg797OwnedDatabase {
     if(lost||closed)throw unavailable();
     try {
       require(thread==Thread.currentThread().threadId()&&!connection.isClosed()&&!connection.getAutoCommit()&&connection.isReadOnly()==expected.readOnly());
-      try(var s=connection.createStatement();var r=s.executeQuery("select pg_backend_pid(),current_user,current_database(),current_setting('application_name'),current_setting('transaction_read_only'),exists(select 1 from pg_locks where pid=pg_backend_pid() and locktype='advisory' and classid=0 and objid=71419602 and objsubid=1 and mode='ExclusiveLock' and granted)")){
+      try(var s=connection.createStatement();var r=s.executeQuery("select pg_backend_pid(),current_user,current_database(),current_setting('application_name'),current_setting('transaction_read_only'),exists(select 1 from pg_locks where pid=pg_backend_pid() and locktype='advisory' and classid=0 and objid=71419602 and objsubid=1 and mode='ExclusiveLock' and granted),session_user")){
         require(r.next());int backend=r.getInt(1);require(!r.wasNull()&&backend==expected.backend());
-        require(expected.role().equals(r.getString(2))&&expected.database().equals(r.getString(3))&&expected.application().equals(r.getString(4))&&(expected.readOnly()?"on":"off").equals(r.getString(5)));
+        require(expected.effectiveRole().equals(r.getString(2))&&expected.role().equals(r.getString(7))&&expected.database().equals(r.getString(3))&&expected.application().equals(r.getString(4))&&(expected.readOnly()?"on":"off").equals(r.getString(5)));
         boolean held=r.getBoolean(6);require(!r.wasNull()&&held==expected.advisory()&&!r.next());
       }
     }catch(SQLException|RuntimeException|Error failure){lost=true;throw failure;}
