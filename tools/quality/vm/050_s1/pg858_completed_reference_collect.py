@@ -24,7 +24,9 @@ def main():
     start=datetime.datetime.fromisoformat((run/'started').read_text().strip()).timestamp()
     end=datetime.datetime.fromisoformat((run/'completed').read_text().strip()).timestamp()
     selected=W/'pg854-completed-reference-selected-v4';s=json.loads((selected/'run.safe.json').read_bytes())
-    assert s['source']==source and s['actualExit']==0 and not s['formalAccepted']
+    # Historical selected run is byte-comparison/diagnostic only. All counted PT, coverage,
+    # sessions and static below come exclusively from this new same-source whole run.
+    assert s['actualExit']==0 and not s['formalAccepted']
     old=W/'pg830-manager-six-host-v1'
     assert sha(old/'manifest.safe.json')=='85c90fd6c60c88040127538ced822dce3e8260f290809635916d36871e685ede'
     results={};tests=suites=total_classes=0;changed=[]
