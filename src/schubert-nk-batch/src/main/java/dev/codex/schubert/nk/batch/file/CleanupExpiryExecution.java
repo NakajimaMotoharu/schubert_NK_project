@@ -79,7 +79,6 @@ final class CleanupExpiryExecution {
       MaintenanceOwnerFrame.Guard guard)
       throws IOException {
     guard.check();
-    var mutation = new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(guard);
     try (var maintenancePassword = reader.readMaintenanceMq();
         var opsPassword = reader.readOpsMq()) {
       long timeout = mqTimeoutMillis(guard);
@@ -117,133 +116,35 @@ final class CleanupExpiryExecution {
           Arrays.fill(ops, '\0');
           maintenanceSession.start();
           opsSession.start();
-          guard.check();
           var health = new ArtemisStartupObservation();
-          health.inspect(opsSession); // Actual authenticated Ops gate before observation/purge.
           var purge = new ArtemisExpiryPurgeClient();
-          var observed = purge.observe(maintenanceSession, request.handle().run());
-          guard.check();
-          var audit = new ExpiryAuditRepository(connection);
-          if (request.skipped()) {
-            connection.setAutoCommit(false);
-            mutation.bind(connection);
-            verifyPriorExpiry(connection, request, observed.selectedCount());
-            connection.rollback();
-            connection.setAutoCommit(true);
-            guard.check();
-            require(
-                health.inspect(opsSession).get("nk.expiry")
-                    != ArtemisQueuePressureClient.Pressure.CRITICAL);
-            return 0;
-          }
-          connection.setAutoCommit(false);
-          mutation.bind(connection);
-          var stage =
-              audit.stage(
-                  request.handle(),
-                  observed.beforeCount(),
-                  observed.selectedCount(),
-                  observed.estimatedSelectedBytes());
-          guard.check();
-          connection.commit();
-          guard.check();
-          connection.setAutoCommit(true);
-          connection.setAutoCommit(false);
-          mutation.bind(connection);
-          require(
-              audit
-                  .read(request.handle())
-                  .equals(
-                      Optional.of(
-                          new ExpiryAuditRepository.Snapshot(
-                              "RUNNING",
-                              stage.cutoff(),
-                              stage.before(),
-                              null,
-                              stage.target(),
-                              0,
-                              0,
-                              stage.estimatedBytes(),
-                              null,
-                              null,
-                              null))));
-          connection.rollback();
-          connection.setAutoCommit(true);
-          guard.check();
-          @Nullable Long after = null;
-          boolean purgeSucceeded = false;
-          try {
-            guard.check();
-            var actual = purge.purgeObserved(maintenanceSession, request.handle().run(), observed);
-            guard.check();
-            after = actual.afterCount();
-            purgeSucceeded = true;
-          } catch (ArtemisExpiryPurgeException actualFailure) {
-            // Real attempted purge. No fabricated after=0/before and no unexecuted FAILED.
-          }
-          boolean healthy = false;
-          try {
-            healthy =
-                health.inspect(opsSession).get("nk.expiry")
-                    != ArtemisQueuePressureClient.Pressure.CRITICAL;
-          } catch (ArtemisManagementReadinessException actualHealthFailure) {
-            /* Actual Ops failure blocks startup. */
-          }
-          BatchStepResult.Status status =
-              healthy
-                  ? (purgeSucceeded
-                      ? BatchStepResult.Status.SUCCESS
-                      : BatchStepResult.Status.WARNING)
-                  : BatchStepResult.Status.FAILED;
-          BatchStepResult.Reason reason =
-              !healthy
-                  ? BatchStepResult.Reason.SAFETY_FAILURE
-                  : purgeSucceeded
-                      ? BatchStepResult.Reason.NONE
-                      : BatchStepResult.Reason.COMMAND_FAILURE;
-          long removed = after == null ? 0 : stage.before() - after;
-          var result =
-              new BatchStepResult(
-                  status,
-                  stage.target(),
-                  removed,
-                  purgeSucceeded ? 0 : stage.target(),
-                  stage.estimatedBytes(),
-                  reason);
-          Instant ended = Instant.now().truncatedTo(ChronoUnit.MICROS);
-          guard.check();
-          connection.setAutoCommit(false);
-          mutation.bind(connection);
-          audit.finish(request.handle(), stage, ended, after, result);
-          guard.check();
-          connection.commit();
-          guard.check();
-          connection.setAutoCommit(true);
-          connection.setAutoCommit(false);
-          mutation.bind(connection);
-          require(
-              audit
-                  .read(request.handle())
-                  .equals(
-                      Optional.of(
-                          new ExpiryAuditRepository.Snapshot(
-                              status.name(),
-                              stage.cutoff(),
-                              stage.before(),
-                              after,
-                              result.target(),
-                              result.success(),
-                              result.failure(),
-                              result.bytes(),
-                              ended,
-                              reason.code(),
-                              reason.summary()))));
-          connection.rollback();
-          connection.setAutoCommit(true);
-          guard.check();
-          return status == BatchStepResult.Status.SUCCESS
-              ? 0
-              : status == BatchStepResult.Status.WARNING ? 10 : 30;
+          return executeAuthenticated(
+              connection,
+              request,
+              guard,
+              new ExpiryWork() {
+                @Override
+                public boolean healthy() {
+                  return health.inspect(opsSession).get("nk.expiry")
+                      != ArtemisQueuePressureClient.Pressure.CRITICAL;
+                }
+
+                @Override
+                public ArtemisExpiryPurgeClient.Observation observe(BatchRun run) {
+                  return purge.observe(maintenanceSession, run);
+                }
+
+                @Override
+                public ArtemisExpiryPurgeClient.Result purge(
+                    BatchRun run, ArtemisExpiryPurgeClient.Observation observed) {
+                  return purge.purgeObserved(maintenanceSession, run, observed);
+                }
+
+                @Override
+                public Instant now() {
+                  return Instant.now().truncatedTo(ChronoUnit.MICROS);
+                }
+              });
         }
       } finally {
         Arrays.fill(maintenance, '\0');
@@ -252,6 +153,147 @@ final class CleanupExpiryExecution {
     } catch (SQLException | ActiveMQException failure) {
       throw new IOException("Expiry execution unavailable");
     }
+  }
+
+  /** PG-D404: data-only result work; confers no OS, credential or parent admission. */
+  interface ExpiryWork {
+    boolean healthy();
+
+    ArtemisExpiryPurgeClient.Observation observe(BatchRun run);
+
+    ArtemisExpiryPurgeClient.Result purge(
+        BatchRun run, ArtemisExpiryPurgeClient.Observation observed);
+
+    Instant now();
+  }
+
+  /** PT-OPS-EXP711001..008: borrowed authenticated DB/MQ result transaction contract. */
+  static int executeAuthenticated(
+      @Nullable Connection connection,
+      CleanupWorkerRequest.@Nullable Expiry request,
+      MaintenanceOwnerFrame.@Nullable Guard guard,
+      @Nullable ExpiryWork work)
+      throws IOException, SQLException {
+    if (connection == null || request == null || guard == null || work == null)
+      throw new IllegalArgumentException("Expiry result contract required");
+    guard.check();
+    var mutation = new dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard(guard);
+    work.healthy(); // Actual authenticated Ops gate before observation/purge.
+    var observed = work.observe(request.handle().run());
+    guard.check();
+    var audit = new ExpiryAuditRepository(connection);
+    if (request.skipped()) {
+      connection.setAutoCommit(false);
+      mutation.bind(connection);
+      verifyPriorExpiry(connection, request, observed.selectedCount());
+      connection.rollback();
+      connection.setAutoCommit(true);
+      guard.check();
+      require(work.healthy());
+      return 0;
+    }
+    connection.setAutoCommit(false);
+    mutation.bind(connection);
+    var stage =
+        audit.stage(
+            request.handle(),
+            observed.beforeCount(),
+            observed.selectedCount(),
+            observed.estimatedSelectedBytes());
+    guard.check();
+    connection.commit();
+    guard.check();
+    connection.setAutoCommit(true);
+    connection.setAutoCommit(false);
+    mutation.bind(connection);
+    require(
+        audit
+            .read(request.handle())
+            .equals(
+                Optional.of(
+                    new ExpiryAuditRepository.Snapshot(
+                        "RUNNING",
+                        stage.cutoff(),
+                        stage.before(),
+                        null,
+                        stage.target(),
+                        0,
+                        0,
+                        stage.estimatedBytes(),
+                        null,
+                        null,
+                        null))));
+    connection.rollback();
+    connection.setAutoCommit(true);
+    guard.check();
+    @Nullable Long after = null;
+    boolean purgeSucceeded = false;
+    try {
+      guard.check();
+      var actual = work.purge(request.handle().run(), observed);
+      guard.check();
+      after = actual.afterCount();
+      purgeSucceeded = true;
+    } catch (ArtemisExpiryPurgeException actualFailure) {
+      // Real attempted purge. No fabricated after=0/before and no unexecuted FAILED.
+    }
+    boolean healthy = false;
+    try {
+      healthy = work.healthy();
+    } catch (ArtemisManagementReadinessException actualHealthFailure) {
+      /* Actual Ops failure blocks startup. */
+    }
+    BatchStepResult.Status status =
+        healthy
+            ? (purgeSucceeded ? BatchStepResult.Status.SUCCESS : BatchStepResult.Status.WARNING)
+            : BatchStepResult.Status.FAILED;
+    BatchStepResult.Reason reason =
+        !healthy
+            ? BatchStepResult.Reason.SAFETY_FAILURE
+            : purgeSucceeded ? BatchStepResult.Reason.NONE : BatchStepResult.Reason.COMMAND_FAILURE;
+    long removed = after == null ? 0 : stage.before() - after;
+    var result =
+        new BatchStepResult(
+            status,
+            stage.target(),
+            removed,
+            purgeSucceeded ? 0 : stage.target(),
+            stage.estimatedBytes(),
+            reason);
+    Instant ended = work.now();
+    guard.check();
+    connection.setAutoCommit(false);
+    mutation.bind(connection);
+    audit.finish(request.handle(), stage, ended, after, result);
+    guard.check();
+    connection.commit();
+    guard.check();
+    connection.setAutoCommit(true);
+    connection.setAutoCommit(false);
+    mutation.bind(connection);
+    require(
+        audit
+            .read(request.handle())
+            .equals(
+                Optional.of(
+                    new ExpiryAuditRepository.Snapshot(
+                        status.name(),
+                        stage.cutoff(),
+                        stage.before(),
+                        after,
+                        result.target(),
+                        result.success(),
+                        result.failure(),
+                        result.bytes(),
+                        ended,
+                        reason.code(),
+                        reason.summary()))));
+    connection.rollback();
+    connection.setAutoCommit(true);
+    guard.check();
+    return status == BatchStepResult.Status.SUCCESS
+        ? 0
+        : status == BatchStepResult.Status.WARNING ? 10 : 30;
   }
 
   /** Closed correlation only; actual parent/kernel/current authentication is mandatory outside. */
