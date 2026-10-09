@@ -6,9 +6,12 @@ import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.bootstrap.ChildStartupContext.Observed;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity.Value;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -39,6 +42,43 @@ class BootstrapAdminMainTest {
   @AfterAll
   static void stop() throws Exception {
     db.stop();
+  }
+
+  /** PT-ADM-BOOT707001: actual public entry, fixed70 without credentials/OS admission. */
+  @Test
+  void boot707001ExternalMainRejectsMissingNamespaceAndArgvWithoutSecretDiagnostics()
+      throws Exception {
+    for (var arguments : List.of(List.<String>of(), List.of("override"))) {
+      var command = new ArrayList<String>();
+      command.add(Path.of(System.getProperty("java.home"), "bin/java").toString());
+      ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
+          .filter(arg -> arg.startsWith("-javaagent:") && arg.contains("jacoco"))
+          .forEach(command::add);
+      command.addAll(
+          List.of(
+              "--enable-native-access=ALL-UNNAMED",
+              "-cp",
+              System.getProperty("java.class.path"),
+              BootstrapAdminMain.class.getName()));
+      command.addAll(arguments);
+      var builder = new ProcessBuilder(command);
+      builder.environment().clear();
+      var stdout = Files.createTempFile(root, "boot707-out-", ".txt");
+      var stderr = Files.createTempFile(root, "boot707-err-", ".txt");
+      builder.redirectOutput(stdout.toFile()).redirectError(stderr.toFile());
+      var process = builder.start();
+      try {
+        assertTrue(process.waitFor(15, TimeUnit.SECONDS));
+        assertEquals(70, process.exitValue());
+      } finally {
+        if (process.isAlive()) {
+          process.destroy();
+          assertTrue(process.waitFor(5, TimeUnit.SECONDS));
+        }
+      }
+      assertEquals("", Files.readString(stdout));
+      assertEquals("Initial ADMIN bootstrap finished\n", Files.readString(stderr));
+    }
   }
 
   @Test

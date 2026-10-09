@@ -120,6 +120,78 @@ final class MorningDatabaseSessionTest {
         "PUBLIC_PASSWORD".getBytes(java.nio.charset.StandardCharsets.US_ASCII));
   }
 
+  /** MDB707001: absent/failed retained rows must not acquire a reusable Backup claim. */
+  @Test
+  void mdb707001FailedAndMissingRetentionRowsStayIneligibleWithIndependentSqlPostcondition()
+      throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("70700000-2222-4333-8444-555555555555"),
+            Instant.parse("2026-12-01T15:00:00Z"));
+    var started = Instant.parse("2026-12-02T02:00:00Z");
+    var ended = started.plusSeconds(3);
+    var failed =
+        new BatchStepResult(
+            BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl, () -> {}, DriverManager::getConnection, connection -> {});
+    subject.execute(
+        credential(),
+        session -> {
+          var begins = session.beginBackup(run, started, false);
+          session.failBackup(begins, ended, failed, failed);
+          var manifest =
+              new BackupManifest(
+                  begins.database(),
+                  begins.configuration(),
+                  started,
+                  started.plusSeconds(2),
+                  new BackupVersions(
+                      "public-host",
+                      "1.0",
+                      "023",
+                      "ubuntu-26.04",
+                      "25.0.4",
+                      "18.6",
+                      "2.56.0",
+                      "1.2.1"),
+                  "0".repeat(64),
+                  new BackupFileDigest(26, "1".repeat(64)),
+                  new BackupFileDigest(35, "2".repeat(64)),
+                  new BackupFileDigest(32, "3".repeat(64)));
+          assertThrows(
+              IOException.class, () -> session.retainedBackupSuccessful(manifest, started));
+          assertThrows(
+              NullPointerException.class, () -> session.retainedBackupSuccessful(manifest, null));
+          try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+              var sql = observer.createStatement()) {
+            // This is the isolated host fixture only. No VM/current database is changed.
+            for (int expectedRows : new int[] {2, 1, 0}) {
+              assertFalse(session.retainedBackupSuccessful(manifest, ended.plusSeconds(1)));
+              try (var rows =
+                  sql.executeQuery(
+                      "select count(*),coalesce(string_agg(status,',' order by step),'') from schubert.batch_runs where run_id='70700000-2222-4333-8444-555555555555'")) {
+                assertTrue(rows.next());
+                assertEquals(expectedRows, rows.getInt(1));
+                assertEquals(
+                    expectedRows == 2 ? "FAILED,FAILED" : expectedRows == 1 ? "FAILED" : "",
+                    rows.getString(2));
+                assertFalse(rows.next());
+              }
+              if (expectedRows > 0)
+                assertEquals(
+                    1,
+                    sql.executeUpdate(
+                        "delete from schubert.batch_runs where id=(select min(id) from schubert.batch_runs where run_id='70700000-2222-4333-8444-555555555555')"));
+            }
+          } catch (SQLException failure) {
+            throw new IOException("isolated retention fixture", failure);
+          }
+          return true;
+        });
+  }
+
   private static String mdb588Audit(Connection observer, BatchRun run) throws SQLException {
     try (var query = observer.createStatement();
         var role =
