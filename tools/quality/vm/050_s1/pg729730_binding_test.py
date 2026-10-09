@@ -16,9 +16,13 @@ class BindingTest(unittest.TestCase):
             self.assertIn(text,raw)
         for old in ('pg680','pg698','pg697','pg696','9bd505','b710c69','3489'):
             self.assertNotIn(old,raw)
-        for key,value in (('actualExit',1),('productionSource','9bd50536f692610036a0ed8b83e0a8b35fe2a66f'),('batchRun','8633b77f-77dc-4a78-88b4-41165f159b43')):
+        for key,value in (('actualExit',1),('actualExit',False),('actualExit',0.0),('actualExit',None),('actualExit','0'),('productionSource','9bd50536f692610036a0ed8b83e0a8b35fe2a66f'),('batchRun','8633b77f-77dc-4a78-88b4-41165f159b43')):
             bad=copy.deepcopy(proof);bad[key]=value
             with self.assertRaises(AssertionError):code({},bad,{'before.private.json':'1'*64,'after.private.json':'2'*64})
+        for key in ('genuineRootDone','genuinePid1StartDone'):
+            for value in (False,1,None,'true'):
+                bad=copy.deepcopy(proof);bad['genuineCompletion'][key]=value
+                with self.assertRaises(AssertionError):code({},bad,{'before.private.json':'1'*64,'after.private.json':'2'*64})
 
     def test_catalog_and_post_exact_slots(self):
         raw=catalog('1'*64);compile(raw,'<current catalog>', 'exec')

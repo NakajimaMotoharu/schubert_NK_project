@@ -24,8 +24,18 @@ def namespace():
     return env
 
 
-def code(hashes,proof,seals):return namespace()['code'](hashes,proof,seals)
+def code(hashes,proof,seals):
+    assert type(proof)is dict and type(proof.get('actualExit'))is int and proof['actualExit']==0
+    assert proof['genuineCompletion']['genuineRootDone']is True and proof['genuineCompletion']['genuinePid1StartDone']is True
+    return namespace()['code'](hashes,proof,seals)
 def catalog(before_sha):return namespace()['catalog'](before_sha)
 
 
-if __name__=='__main__':namespace()['main']()
+if __name__=='__main__':
+    env=namespace()
+    previous_code=env['code']
+    def strict_code(hashes,proof,seals):
+        assert type(proof)is dict and type(proof.get('actualExit'))is int and proof['actualExit']==0
+        assert proof['genuineCompletion']['genuineRootDone']is True and proof['genuineCompletion']['genuinePid1StartDone']is True
+        return previous_code(hashes,proof,seals)
+    env['code']=strict_code;env['main']()

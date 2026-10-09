@@ -7,6 +7,8 @@ R=Path(__file__).resolve().parent
 
 def source():
     return replace((R/'pg699_public_parent.py').read_text(), (
+        ("assert v.get('actualExit',v.get('clientExit'))==0", "exit_code=v.get('actualExit',v.get('clientExit'));assert type(exit_code)is int and exit_code==0"),
+        ("assert v['actualExit']==0 and v['productionSource']==SOURCE", "assert type(v['actualExit'])is int and v['actualExit']==0 and v['productionSource']==SOURCE"),
         ('pg689','pg721'),('pg690','pg722'),('PG690','PG722'),('pg692','pg724'),
         ('pg693','pg725'),('pg694','pg726'),('pg696','pg728'),('pg697','pg729'),('pg698','pg730'),
         ('9bd50536f692610036a0ed8b83e0a8b35fe2a66f','1ec19782a1afe22d1de75b05f4cd12b8a8a8a172'),

@@ -12,7 +12,8 @@ class BindingTest(unittest.TestCase):
             self.assertIn(token,raw)
         for old in ('pg689','pg690','pg692','pg693','pg694','pg696','pg697','pg698','9bd505'):
             self.assertNotIn(old,raw)
-        self.assertIn("assert v['actualExit']==0",raw)
+        self.assertIn("assert type(v['actualExit'])is int and v['actualExit']==0",raw)
+        self.assertIn('type(exit_code)is int and exit_code==0',raw)
 
 
 if __name__=='__main__':unittest.main()
