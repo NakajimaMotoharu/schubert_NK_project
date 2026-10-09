@@ -1,8 +1,18 @@
 """Two independently qualified current-e016 cohorts only; not old-source evidence union."""
-import datetime,hashlib,json,os,subprocess
+import datetime,hashlib,json,os,re,subprocess
 from pathlib import Path
 W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379');J=Path('/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin');T=Path(__file__).resolve().parents[4]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def session_identities(rows):
+ if type(rows)is not list or len(rows)!=16:raise ValueError('qualified sixteen current sessions required')
+ ids=[]
+ for s in rows:
+  if type(s)is not dict or set(s)!={'dumpMs','index','sessionIdSha256','sessions','startMs'}:raise ValueError('qualified session schema refused')
+  if any(type(s[k])is not int for k in ('dumpMs','index','sessions','startMs'))or s['index']!=0 or s['sessions']!=1 or not 0<s['startMs']<=s['dumpMs']:raise ValueError('qualified session fields refused')
+  if type(s['sessionIdSha256'])is not str or re.fullmatch('[0-9a-f]{64}',s['sessionIdSha256'])is None:raise ValueError('qualified session hash refused')
+  ids.append(s['sessionIdSha256'])
+ if len(set(ids))!=16:raise ValueError('qualified session identity duplicated')
+ return ids
 def main():
  os.umask(0o077);assert subprocess.check_output(['git','status','--porcelain'])==b''
  source='e01612fcd7f2752df5ae0836b78538fd5e87f120'
@@ -15,7 +25,7 @@ def main():
   for i,selected in enumerate(m['selected']):
    p=base/(str(i)+'.exec');assert sha(p)==selected['sha256'];streams.append(p)
  assert len(streams)==16 and records[0]['hostExecHashes']==records[1]['hostExecHashes']
- ids=[s['id']for m in records for s in m['singleSessions']];assert len(ids)==len(set(ids))==16
+ session_identities([s for m in records for s in m['singleSessions']])
  work=W/'pg892-current-sixteen-native-v1';assert not work.exists();work.mkdir(mode=0o700)
  helper=W/'pg571-current-ten-native-v2/classes';assert sha(helper/'NativeCoverage.class')=='37227f2f494bf2cc8e36eb52ba47c65af3e79ccaeb0c3efcb1fdf9f5d3e0af5a'
  repo=Path('/home/mini/codex/project1/work/toolchain/m2/repository');cp=[str(helper)]
