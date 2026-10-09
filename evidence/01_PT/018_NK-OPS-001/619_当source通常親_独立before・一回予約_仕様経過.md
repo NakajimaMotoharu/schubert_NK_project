@@ -1,5 +1,9 @@
 # 619 当source通常親：独立before・一回予約・経過（全体未受入）
 
+08:57JST更新：observer956実終了0（23:30:57.587985Z～23:57:08.553576Z）、真正Root世代からAPI23:52:44Z/Web23:53:00Z ordinary ready・所有socket/info/同親、Caddy23:53:11Z TLS login200を保持。終端は親success/code0/exit0/Job無し・API/Web両生存。PG961 CHR-A01 actual0（23:55:11～14Z）、Current baseline SHA df68edf…不変、DIF001 title-only、rawCookie/token出力0・他case/fullgate未実行。新生成レポートはprogram/characterization/reports/nk/PG961-native-a01-v1/artifacts/CHR-A01.json。
+
+PG960初回はCHR新規レポートのuntrackedでclean-tree preflight停止（exit1、guestへの照合・変更前、親失敗ではない）。レポートをsanitize確認しcommit後、同親の独立genuine照合を実行する。既親start/observer/CHRを再実行せず、後続965freeze/966ownedstop/968post/969nativeへ。fresh08:57:23JST shared89/rem11、券未使用。
+
 08:43JST現在：同親3844442/0bb4/213904はactivating/start、旧API/Web143・Caddyinactiveのままで新ready未受入。新停止生成963と独立964（三case）、新freeze965/dispatch966と独立967（二case）、新post968/native969と独立970（二case）を準備。旧864 immutable helper byteはABI工具のみ、実proofは960/961、全hostは926/source40ef/3560/manifest4ae512…だけに束縛し、旧native/e016合算0。UTC midnightを跨ぐ日付条件だけ09|10へ内部補足、monotonic START+1800000000/元期限203180374989は不変更。
 
 初回TDD prototype失敗は964 F1（fixtureがrefsにliteral deadlineを要求、実receipt式START+1800000000を検査へ変更）、967 F2→F1（未完成transformで実物に存在しないPG877/pg862ラベルを要求）で、実stop/guest操作前。未実装工具の初回失敗としてProduction障害・PT成功に算入しない。原因を残し、PG971で最終七工具case/private log/hashを独立再保存する。BUG998の実修正・959再試験とは混同しない。
