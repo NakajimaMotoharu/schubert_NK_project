@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.platform;
 
 import dev.codex.schubert.nk.storage.ResourceScope;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
@@ -314,6 +316,11 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     private Native() {}
 
     @SuppressWarnings("restricted")
+    @SuppressFBWarnings(
+        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        matchType = SuppressMatchType.EXACT,
+        justification =
+            "SSC239 fixed Linux ABI library; root-owned nonwritable ancestors, no environment override. BUG957/PT-OPS-MANAGER817012.")
     static Calls calls() throws IOException {
       String os = System.getProperty("os.name", "");
       String arch = System.getProperty("os.arch", "");
