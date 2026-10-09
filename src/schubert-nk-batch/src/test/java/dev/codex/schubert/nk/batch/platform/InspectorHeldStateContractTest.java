@@ -6,13 +6,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.TreeMap;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /**
  * NK-DAT-001/NK-OPS-001; DAT009/OPS009; UI212/251; SS341 7.4/343/352; WBS-P004-04;
- * PT-SNAPSHOT-911001..008. Literal observations, never Unit/kernel/owner authority.
+ * PT-SNAPSHOT-911001..009. Literal observations, never Unit/kernel/owner authority.
  */
 final class InspectorHeldStateContractTest {
   private static final String INV = "11111111111111111111111111111111";
@@ -296,6 +297,31 @@ final class InspectorHeldStateContractTest {
       assertFalse(
           snapshot(InspectorUnitSnapshot.Target.MORNING, fields).sameStoppedExecution(before),
           change.toString());
+    }
+  }
+
+  @Test
+  void snapshot911009StatusTenIsOnlyRecognizedForApprovedMaintenanceTargets() {
+    for (var target : NAMES.keySet()) {
+      for (String status : List.of("0", "10", "30")) {
+        boolean worker =
+            List.of(
+                    InspectorUnitSnapshot.Target.INSPECTOR,
+                    InspectorUnitSnapshot.Target.BACKUP,
+                    InspectorUnitSnapshot.Target.CLEANUP,
+                    InspectorUnitSnapshot.Target.EXPIRY)
+                .contains(target);
+        OptionalInt expected =
+            worker && status.equals("0")
+                ? OptionalInt.of(0)
+                : worker && target != InspectorUnitSnapshot.Target.BACKUP && status.equals("10")
+                    ? OptionalInt.of(10)
+                    : OptionalInt.empty();
+        assertEquals(
+            expected,
+            snapshot(target, Map.of("ExecMainStatus", status)).receiptAfter(Optional.empty()),
+            target + "/" + status);
+      }
     }
   }
 

@@ -8,6 +8,8 @@ PT-SNAPSHOT-911007: ActiveState={inactive,active,failed,unknown-state}、SubStat
 
 PT-SNAPSHOT-911008はMorning旧停止観測の五実行値を独立同値/一件差で確認（INV、Code、Status、start、end）、異Result/stateもfalse。911001の八Target×八expectedTargetはidentity literal一致だけtrue。911006へJob/PID/INV/Code/status/Result欠落・異値を追加。PG911v5はSnapshot参照十三suite＋既制御scopeの十四suiteを新sourceで一括実行し、対象class四counterを新execのみで測定する。旧v4の45PT/FES0/static0は限定結果で、v5や全回帰の結果へ加算しない。
 
+PG911v5 actual0/105PT/14suite/FES0/staticbatch0、Snapshot206L/31M/1C全実行・319/320branch。残1はreceiptAfterのmaintenance status10区分である。PT-SNAPSHOT-911009（追加前独立期待値）八Target×status0/10/30の24組: 四workerの0のみreceipt0、Inspector/Cleanup/Expiryの10のみreceipt10、Backup10/全daemon/30はempty。SS343の所定status10を認定範囲外へ拡げない。同source PG915全回帰で新9PTと既全scopeを試験し、fresh全体3550PT/523suite/1632mainが計画件数（実測により照合）。v5の105PTを全体件数へ足さない。
+
 Program NK-DAT-001/NK-OPS-001、WBS主担当P004-04（他programへの共通費二重計上0）。class/method InspectorUnitSnapshot.heldCleanup/heldMaintenance/brokerStoppedNormally/inactiveBaseline/backupTerminalAfter/normalRejectedAfter/running。RD DAT-009/OPS-009、UI212/251、SS341§7.4/343/352。開始Production e016/current862、PG908当20native残class22branch/4line/1method。着手前既leaf予算low.5/base1.5/high3.5週次枠pp/LOW、共有費を個別配賦しない。
 
 fixtureは全18key/固定Unit名/oneshot又はsimple/Restart/Remain/zero PID/Job/固定独立inv/Code1/Status0/monotonic100～200の手書き値をASCII LFへencode。expectedはSSの必要条件と独立literal真偽・SUCCESS/FAILED enum、Productionの判定を呼んでexpectedを生成しない。snapshotは観測dataだけでkernel/NSS/source/親/許可/実Unit成功の代替ではない。
