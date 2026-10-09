@@ -31,7 +31,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   private boolean closed;
   private boolean uncertain;
   private @Nullable String peer;
-  private @Nullable LinuxSystemdQuery.Budget budget;
+  private LinuxSystemdQuery.@Nullable Budget budget;
 
   LinuxSystemdSession(Calls calls, Arena arena) {
     this.calls = Objects.requireNonNull(calls);
