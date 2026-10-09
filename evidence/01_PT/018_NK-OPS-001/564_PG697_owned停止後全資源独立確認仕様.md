@@ -1,5 +1,7 @@
 # PG697 owned停止後独立後条件
 
+実operator1f980641d9/source9bd actual0：all24UnchangedTwice/allTenUnitsKernelEmpty/allActorGone/allClientAdvisoryFlock0/whole187SignedArtifactBytesVerified true、全新metadataScope正常・当newstop complete/親DONE/全封印hash・原本Backupstartup保持。nativePhysicalFiles37安定二読（物理数＝資格数ではない）、raw私有Root697/Wsafe/log/exit0、再操作0。formal/全四100未受入、565当八streamを別資格。
+
 NK-OPS-001/SS343SSC190191233/451/N15.02現経路。POST697001はPG696actualstop0とPG693genuinebeforehash/actualactivation/終了時間を前提とし、Root696 before-after/parentjournal/completeのmetadata9/Root600/nlink1/noACL/size/hashを封印、actual全normalScope及びoriginalBackupStartupRowsPreserved/start0/oldUnknownNormalizedfalseの固定completeを照合する。新PG696生成工具八hash・新receipt/当source9bd/currentPG682/187artifact/schema028・pin署名pg682manifestを確認する。
 
 002はfresh十metadataRefで二読し全十Unitfull/設定/kernel空、owned全actor/PID/task/socket消失・24表/原本Backupstartup/namespace原値と全client/advisory/FLOCK0を独立確認、新metadataScope正常返却を認証。native全physicalfileのmetadata/byte安定性も二読、旧post/別sourceに流用0。raw/privateRoot証跡はGit0、operator/時刻/source/run/exit/hashはW/pg697-terminal-final-v1.safe/log/exitへ、Root同result-safe保存。command `python3 -B tools/quality/vm/050_s1/pg697_terminal_final.py`、現在binding2/Pyflakes0だけ・actual未実行。再TERM/再start/reload/SQLwrite0、全PGPT/formal/ITST受入0。
