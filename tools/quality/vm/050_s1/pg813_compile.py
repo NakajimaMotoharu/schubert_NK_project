@@ -12,7 +12,7 @@ def source():
  raw=raw.replace(marker,"    for name in ('Pg797OwnedDatabase.java','Pg797OwnedDatabaseTest.java','Pg798DatabaseScope.java','Pg798DatabaseScopeTest.java'):sources[name]=(R/name).read_text()\n"+marker)
  raw=raw.replace("str(target/'Pg813FailedRecoveryTest.java')])","str(target/'Pg813FailedRecoveryTest.java'),*[str(target/n)for n in ('Pg797OwnedDatabase.java','Pg797OwnedDatabaseTest.java','Pg798DatabaseScope.java','Pg798DatabaseScopeTest.java')]])")
  raw=raw.replace('80594db5e3a5588a26b05be729e80a40f750a44230f34c3e025f923f365ddba4',p.SNAPSHOT)
- raw=raw.replace('pg813-frozen-v1.safe.json','pg813-frozen-v2.safe.json').replace("'-v1.private.log'","'-v2.private.log'").replace("'-v1.exit'","'-v2.exit'").replace('pg813-database-oracle-v1','pg813-database-oracle-v2')
+ raw=raw.replace('pg813-frozen-v1.safe.json','pg813-frozen-v2.safe.json').replace("'-v1.private.log'","'-v2.private.log'").replace("'-v1.exit'","'-v2.exit'").replace('pg813-database-oracle-v1','pg813-database-oracle-v2').replace('pg813-oracle-v1.private.log','pg813-oracle-v2.private.log')
  marker="    files={f.name:"
  raw=raw.replace(marker,"    with(W/'pg813-database-oracle-v1.private.log').open('xb')as log:\n        for name in ('Pg797OwnedDatabaseTest','Pg798DatabaseScopeTest'):\n            subprocess.run([str(JDK/'java'),'--enable-native-access=ALL-UNNAMED','-cp',cp,name],stdout=log,stderr=log,check=True)\n        log.flush();os.fsync(log.fileno())\n"+marker)
  raw=raw.replace("'pythonIndependentAssertions':151","'pythonIndependentTests':3,'databaseFaultOracle':True,'productionPTAdded':0").replace("'pythonAssertions':151","'pythonIndependentTests':3,'databaseFaultOracle':True,'productionPTAdded':0")
