@@ -4,7 +4,7 @@ import pg784_stopped_baseline as transport
 PAYLOAD=r'''
 import pathlib,sys,os,subprocess,json,hashlib,stat
 os.umask(0o077);assert os.geteuid()==0
-base=pathlib.Path('/var/lib/pgpt-s1-preservation');save=base/'pg812-current-timeout-v2';assert not os.path.lexists(save)
+base=pathlib.Path('/var/lib/pgpt-s1-preservation');save=base/'pg812-current-timeout-v3';assert not os.path.lexists(save)
 sys.path.insert(0,str(base/'pg805-resume-tools-v2'));import pg805_snapshot as h
 from pg777_reference_capability import CaptureReferences
 h.load_definitions();old=h.baseline();assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441'
@@ -44,18 +44,16 @@ with CaptureReferences():
  for unit,a in value['actors'].items():
   b=second['actors'][unit];assert all(a[k]==b[k]for k in('pid','ticks','argvSha256','cgroup','exe'))
  assert value['rows'].keys()==old['rows'].keys()and len(value['rows'])==24
- for table,rows in old['rows'].items():
-  if table=='schubert.batch_runs':assert not(collections.Counter(rows)-collections.Counter(value['rows'][table]))
-  else:assert value['rows'][table]==rows
+ row_changes={table:{'beforeCount':len(rows),'actualCount':len(value['rows'][table]),'removedCount':sum((collections.Counter(rows)-collections.Counter(value['rows'][table])).values()),'addedCount':sum((collections.Counter(value['rows'][table])-collections.Counter(rows)).values())}for table,rows in old['rows'].items()if rows!=value['rows'][table]}
  save.mkdir(mode=0o700)
  with(save/'current.private.json').open('x')as f:os.fchmod(f.fileno(),0o600);json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
 epoch=pathlib.Path('/run/schubert-nk/startup/epoch.current').read_bytes()
 with(save/'epoch.private').open('xb')as f:os.fchmod(f.fileno(),0o600);f.write(epoch);f.flush();os.fsync(f.fileno())
 for d in(save,save.parent):
  fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);os.fsync(fd);os.close(fd)
-print(json.dumps({'actualExit':0,'readonlyCapture':True,'source':'102cdf1d365ab321f74b523237590eee764ae858','all24Captured':True,'batchRows':len(value['rows']['schubert.batch_runs']),'startupEntries':len(value['trees']['/run/schubert-nk/startup'])-1,'originalActive':pathlib.Path('/var/lib/schubert-nk/maintenance/active').exists(),'actors':{u:{k:v[k]for k in('pid','ticks','argvSha256')}for u,v in value['actors'].items()},'snapshotSha256':hashlib.sha256((save/'current.private.json').read_bytes()).hexdigest(),'epochSha256':hashlib.sha256(epoch).hexdigest(),'genuineAccepted':False,'formalAccepted':False}))
+print(json.dumps({'actualExit':0,'readonlyCapture':True,'source':'102cdf1d365ab321f74b523237590eee764ae858','all24Captured':True,'rowChangesNotAccepted':row_changes,'batchRows':len(value['rows']['schubert.batch_runs']),'startupEntries':len(value['trees']['/run/schubert-nk/startup'])-1,'originalActive':pathlib.Path('/var/lib/schubert-nk/maintenance/active').exists(),'actors':{u:{k:v[k]for k in('pid','ticks','argvSha256')}for u,v in value['actors'].items()},'snapshotSha256':hashlib.sha256((save/'current.private.json').read_bytes()).hexdigest(),'epochSha256':hashlib.sha256(epoch).hexdigest(),'genuineAccepted':False,'formalAccepted':False}))
 '''
 
 if __name__=='__main__':
- ast.parse(PAYLOAD);raw=inspect.getsource(transport.main).replace('pg784-stopped-current-v1','pg812-current-timeout-v2');context={**transport.__dict__,'PAYLOAD':PAYLOAD}
+ ast.parse(PAYLOAD);raw=inspect.getsource(transport.main).replace('pg784-stopped-current-v1','pg812-current-timeout-v3');context={**transport.__dict__,'PAYLOAD':PAYLOAD}
  exec(compile(raw,'<812 actual949 preownedstop full capture>', 'exec'),context);context['main']()
