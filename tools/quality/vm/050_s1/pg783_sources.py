@@ -55,6 +55,10 @@ def java():
 
 def helper():
     raw=bind(prior.helper()).replace('pg783-failed758-recovery-v1','pg783-existing-pair-retire-v1')
+    # An inactive Unit may be GC'd after the independent786 Ref scope closes.
+    # Only the typed idle transition is admitted; no old execution success is inferred.
+    raw=raw.replace("require(old is not None and new is not None and old[:4]==new[:4]and old[5]==new[5])", "require(accepted(old,new,show(unit),{}))")
+    raw=(R/'pg785_exec_history.py').read_text()+'\n'+raw
     tree=ast.parse(raw);node=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='verify_live')
     lines=raw.splitlines(keepends=True)
     replacement=r'''def verify_live():
@@ -66,8 +70,8 @@ def helper():
     raw=''.join(lines[:node.lineno-1])+replacement+''.join(lines[node.end_lineno:])
     node=next(n for n in ast.parse(raw).body if isinstance(n,ast.FunctionDef)and n.name=='baseline');lines=raw.splitlines(keepends=True)
     replacement=r'''def baseline():
- path=pathlib.Path('/var/lib/pgpt-s1-preservation/pg782-retained779-handoff-v1/after.private.json');data=path.read_bytes()
- require(hashlib.sha256(data).hexdigest()=='97eb9c35044bbb3c9cd71fe0a63ea89a026e053a6fcfe09a8072af0628e99e8d')
+ path=pathlib.Path('/var/lib/pgpt-s1-preservation/pg786-stopped-current-v1/before.private.json');data=path.read_bytes()
+ require(hashlib.sha256(data).hexdigest()=='b6165c75ccc067991654d0b43db272096fc05019029d7e15e31af157cf35ad23')
  value=json.loads(data);require(len(value['rows'])==24 and len(value['rows']['schubert.batch_runs'])==544)
  return {**value,'capturedSnapshot':value}
 '''
@@ -80,7 +84,7 @@ def helper():
  if action=='verify':verify_live();return
  require(ROOT.is_dir()and not ROOT.is_symlink()and ROOT.stat().st_uid==ROOT.stat().st_gid==0 and stat.S_IMODE(ROOT.stat().st_mode)==0o700)
  if action=='capture':
-  verify_live();before=snapshot();require(before==snapshot());save('snapshot-before.private.json',json.dumps(before,sort_keys=True).encode());return
+  verify_live();before=snapshot();require(before==snapshot());save('snapshot-before.private.json',json.dumps(before,sort_keys=True).encode());save('units-before.private.json',json.dumps({u:show(u)for u in ORDER+EXTRA},sort_keys=True).encode());return
  for u in ORDER+EXTRA:
   v=show(u);require(v['MainPID']==v['ControlPID']=='0'and v['Job']=='');kernel_empty(u)
  before=json.loads((ROOT/'snapshot-before.private.json').read_text());actual=snapshot();startup='/run/schubert-nk/startup'
