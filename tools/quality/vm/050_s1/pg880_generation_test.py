@@ -16,7 +16,9 @@ class Test(unittest.TestCase):
   fixture={'actualExit':0,'beforeSha256':'a'*64}
   with patch.object(once,'inputs',return_value=(proof,seals,prefix)),patch.object(once.Path,'read_bytes',return_value=b'{"actualExit":0,"beforeSha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}'):
    raw=once.payload()
-  ast.parse(raw)
+  tree=ast.parse(raw)
+  persist=[n for n in ast.walk(tree)if isinstance(n,ast.FunctionDef)and n.name=='persist'];self.assertEqual(len(persist),1)
+  self.assertFalse(any(isinstance(n,ast.Call)and isinstance(n.func,ast.Name)and n.func.id=='standard_snapshot'for n in ast.walk(persist[0])))
   self.assertEqual(raw.count("subprocess.run(['/usr/bin/systemctl','start','--no-block','schubert-nk-morning-controller.service']"),1)
   self.assertLess(raw.index("persist('external-start-guard.private.json'"),raw.index("subprocess.run(['/usr/bin/systemctl','start'"))
   for v in('pg880-ordinary-before-v1','pg882-ordinary-once-v1',"require(value==standard_snapshot())",'manager.LoadUnit(u);manager.RefUnit(u)',"for u in reversed(refs):manager.UnrefUnit(u)"):

@@ -12,8 +12,8 @@ def payload():
  body=body.replace('resources();limited=protected();assert limited==protected();assert standard_snapshot(limited)==before==standard_snapshot(protected());resources()','assert standard_snapshot()==before==standard_snapshot()')
  body=body.replace('assert standard_snapshot(protected())==before;resources()','assert standard_snapshot()==before')
  body=body[:body.index('\nprint(json.dumps(values))')]
- a=body.index('\n assert before[')
- # Keep initial baseline/save/functions outside operation, then indent all under held Ref try.
+ # Dedent old with-body once, preserving the nested persist function independently.
+ a=body.index('\n assert standard_snapshot()==before')
  leading=body[:a];tail=body[a:]
  leading='\n'.join(' '+line if line else line for line in leading.splitlines())
  once_body=leading+tail
