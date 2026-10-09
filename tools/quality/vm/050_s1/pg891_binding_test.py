@@ -13,4 +13,10 @@ class Test(unittest.TestCase):
  def test_end_foreign_or_outside_original_budget(self):
   for end in (None,True,185542282250,187342282252):
    with self.assertRaises(AssertionError):counter.code({},'a'*64,'b'*64,end)
+ def test_real_generated_import_surface_without_operations(self):
+  for module in (compile_tool,stop,final):
+   env={'__file__':module.__file__,'__name__':'independent_import_contract_not_main'}
+   exec(compile(module.source(),'<generated whole non-main import contract>','exec'),env)
+  import pg887_stop_binding as binding
+  self.assertEqual(binding.SOURCE,'e01612fcd7f2752df5ae0836b78538fd5e87f120')
 if __name__=='__main__':unittest.main()

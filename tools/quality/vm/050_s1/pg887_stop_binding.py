@@ -2,6 +2,7 @@
 import ast
 from pathlib import Path
 R=Path(__file__).resolve().parent
+SOURCE='e01612fcd7f2752df5ae0836b78538fd5e87f120'
 def module_source():
  raw=(R/'pg877_stop_binding.py').read_text()
  for old,new in (
