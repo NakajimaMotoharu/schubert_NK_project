@@ -18,4 +18,6 @@ PG853v3、凍結Production2a0d5aa392c85a1dc12a1cdb423978e8500895b8の六JAR/当G
 
 ## 候補選択（正式受入ではない）
 
+v2独立照合：actual0、九suite97PT、F/E/S/flaky/not-run0、SpotBugs0、formatter0。原本lookup新wrapper三methodはmiss0、lambdaに3branch残（未受入）。pending graph・current cutoff不一致を独立byteで追加し、prior pending禁止の重複条件はwholeGraphの「唯一pending＋active current」又はcompleted「pending空」が既に証明するため削除。prior DONE/終了<=observed判定と全Graph二読は維持し、prior pendingの実反例は入口で拒否をassertする。coverage除外/人工到達0。新v3で変更後sourceを別run検証、v2を新sourceへ流用0。
+
 PG854v1はroot plugin prefixで拒否/BUG971、PTnot-run。v2はbatch-onlyの影響九suiteを所定formatter/test-compile/test/SpotBugs/JaCoCo/JARで実行、source da5eba19b（Production候補b926の三classと同bytes）、command `python3 -B tools/quality/vm/050_s1/pg854_completed_reference_selected_v2.py`。終了/XML/counter/hashの独立照合は後記まで未認定。私有保存=`/home/mini/codex/project1/work/pgpt-runs/PG379/pg854-completed-reference-selected-v2`。OS/JDK/command/source/hashはrun.safe.json、rawログ非Git。VM現Production2a/832に候補未配備、全回帰/native/global100/正式24-1964-53は未完。

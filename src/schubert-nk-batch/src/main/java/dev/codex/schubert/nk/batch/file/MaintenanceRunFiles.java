@@ -578,7 +578,10 @@ public final class MaintenanceRunFiles {
                             .atZone(java.time.ZoneId.of("Asia/Tokyo"))
                             .toLocalDate()));
             if (!priorId.equals(current.run().id())) {
-              require(!first.pending().equals(Optional.of(priorId)));
+              // Graph permits at most one pending run. The pending capability requires active
+              // current, whose Graph invariant excludes a different pending run; completed
+              // capability above requires no pending run at all. Keep the independent prior DONE
+              // check below, without re-testing a condition already proved by the phase/Graph.
               require(
                   first.done().values().stream()
                       .anyMatch(

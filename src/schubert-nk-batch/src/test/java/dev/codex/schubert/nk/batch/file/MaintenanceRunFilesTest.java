@@ -167,6 +167,31 @@ final class MaintenanceRunFilesTest {
 
   /** RLOOK852005: full second graph, no cached anchor-only completed proof. */
   @Test
+  void completedReferenceRejectsPendingGraphAndDifferentCurrentCutoff() throws Exception {
+    try (var f = fixture()) {
+      f.seed(true, false, true);
+      var done = completion(MaintenanceCompletion.Outcome.SUCCESS);
+      var wrongRun = new BatchRun(RUN.id(), RUN.cutoff().plusNanos(1000));
+      var wrong =
+          new MaintenanceCompletion(
+              new MaintenanceActivation(wrongRun, ACTIVATION.id()), done.endedAt(), done.outcome());
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(s -> s.completedSuccessReferenceRun(wrong, RUN.id(), RUN.cutoff())));
+      Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
+      assertThrows(
+          IOException.class,
+          () -> f.files.execute(s -> s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff())));
+      assertThrows(
+          IOException.class,
+          () -> f.files.execute(s -> s.completedSuccessReferenceRun(done, OTHER, RUN.cutoff())));
+      assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+    }
+  }
+
+  /** RLOOK852005: full second graph, no cached anchor-only completed proof. */
+  @Test
   void completedReferenceRejectsWholeGraphDriftWithoutMutation() throws Exception {
     for (String fault :
         List.of("none", "unrelated", "prior", "namespace", "listing", "close", "interrupt"))
