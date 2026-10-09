@@ -106,6 +106,107 @@ final class MorningStartupLaunchOwner {
       ServiceConfigFiles.Service service,
       RootStartupContext.Snapshot captured) {}
 
+  /** SSC237/PT-OPS-COMPLETION790001..004: literal phases, never provider data or authority. */
+  enum CompletionPhase {
+    CADDY_BEFORE,
+    CADDY_AFTER,
+    WEB_BEFORE,
+    WEB_AFTER,
+    API_HELD,
+    API_BEFORE,
+    API_AFTER,
+    ALL_RETIRED,
+    DONE_BEFORE,
+    DONE_AFTER
+  }
+
+  static final class CompletionProgress {
+    private final java.util.function.LongSupplier clock;
+    private final java.util.function.Consumer<String> sink;
+    private final long started;
+    private CompletionPhase phase = CompletionPhase.CADDY_BEFORE;
+
+    CompletionProgress(
+        java.util.function.LongSupplier clock, java.util.function.Consumer<String> sink) {
+      this.clock = Objects.requireNonNull(clock);
+      this.sink = Objects.requireNonNull(sink);
+      started = clock.getAsLong();
+    }
+
+    void phase(CompletionPhase next) {
+      phase = Objects.requireNonNull(next);
+      emit("VERIFY");
+    }
+
+    void failure(Throwable failure) {
+      Objects.requireNonNull(failure);
+      emit(failure instanceof IOException ? "IO" : failure instanceof Error ? "FATAL" : "RUNTIME");
+    }
+
+    private void emit(String classification) {
+      sink.accept(
+          "event=morning.completion phase="
+              + phase
+              + " classification="
+              + classification
+              + " elapsedNanos="
+              + (clock.getAsLong() - started));
+    }
+  }
+
+  @FunctionalInterface
+  interface CompletionRetirement {
+    void retire(
+        BackupUnitStartClient.RetirementGate before, BackupUnitStartClient.RetirementGate after)
+        throws IOException;
+  }
+
+  @FunctionalInterface
+  interface ApiRetained {
+    void require(BackupUnitStartClient.RetirementGate gate) throws IOException;
+  }
+
+  static void retireCompleted(
+      CompletionRetirement caddy,
+      CompletionRetirement web,
+      CompletionRetirement api,
+      ApiRetained apiRetained,
+      BackupUnitStartClient.RetirementGate pending,
+      BackupUnitStartClient.RetirementGate retired,
+      CompletionProgress progress)
+      throws IOException {
+    Objects.requireNonNull(caddy);
+    Objects.requireNonNull(web);
+    Objects.requireNonNull(api);
+    Objects.requireNonNull(apiRetained);
+    Objects.requireNonNull(pending);
+    Objects.requireNonNull(retired);
+    Objects.requireNonNull(progress);
+    caddy.retire(
+        completionGate(CompletionPhase.CADDY_BEFORE, pending, progress),
+        completionGate(CompletionPhase.CADDY_AFTER, pending, progress));
+    web.retire(
+        completionGate(CompletionPhase.WEB_BEFORE, pending, progress),
+        () -> {
+          completionGate(CompletionPhase.WEB_AFTER, retired, progress).verify();
+          apiRetained.require(completionGate(CompletionPhase.API_HELD, retired, progress));
+        });
+    api.retire(
+        completionGate(CompletionPhase.API_BEFORE, retired, progress),
+        completionGate(CompletionPhase.API_AFTER, retired, progress));
+    completionGate(CompletionPhase.ALL_RETIRED, retired, progress).verify();
+  }
+
+  private static BackupUnitStartClient.RetirementGate completionGate(
+      CompletionPhase phase,
+      BackupUnitStartClient.RetirementGate proof,
+      CompletionProgress progress) {
+    return () -> {
+      progress.phase(phase);
+      proof.verify();
+    };
+  }
+
   /** Typed native completion only; callback stays under the same original/DB/M scopes. */
   static MaintenanceCompletion publishCompleted(
       RootStartupContext root,
@@ -237,7 +338,17 @@ final class MorningStartupLaunchOwner {
           var retiredChecks =
               new MorningCompletionChecks(
                   retiredPeer, () -> database.recheckConsistent(state.activation().run()));
-          BackupUnitStartClient.RetirementGate afterRetirement = retiredChecks::verify;
+          BackupUnitStartClient.RetirementGate afterRetirement =
+              () -> {
+                retiredChecks.verify();
+                evidence.verify(
+                    database,
+                    java.time.Clock.systemUTC(),
+                    retiredChecks.ownerGuard(budget::remainingNanos, retainedOwner),
+                    original::referenceRun,
+                    retiredChecks::verify);
+                retiredChecks.verify();
+              };
           // Registered BEFORE original/DB close; no expired DB/original capability is used there.
           var stopped = new java.util.concurrent.atomic.AtomicBoolean();
           onOuterFailure.accept(
@@ -249,37 +360,28 @@ final class MorningStartupLaunchOwner {
                         root, morning, budget, started.get(i).unit(), started.get(i).termination());
                 }
               });
+          var progress = new CompletionProgress(System::nanoTime, System.out::println);
           try {
-            pending.verify();
-            // Caddy borrows both delivery fences; its client closes BEFORE either marker retires.
-            attempt.retireReadyAfter(pending, pending);
-            started
-                .get(1)
-                .attempt()
-                .retireReadyAfter(
-                    pending,
-                    () -> {
-                      afterRetirement.verify();
-                      started.get(0).attempt().requireRetained(afterRetirement);
-                    });
-            started.get(0).attempt().retireReadyAfter(afterRetirement, afterRetirement);
-            afterRetirement.verify();
-            evidence.verify(
-                database,
-                java.time.Clock.systemUTC(),
-                retiredChecks.ownerGuard(budget::remainingNanos, retainedOwner),
-                original::referenceRun,
-                retiredChecks::verify);
-            afterRetirement.verify();
+            // Real Attempts invoke each before/after proof around their typed owned marker.
+            retireCompleted(
+                attempt::retireReadyAfter,
+                started.get(1).attempt()::retireReadyAfter,
+                started.get(0).attempt()::retireReadyAfter,
+                started.get(0).attempt()::requireRetained,
+                pending,
+                afterRetirement,
+                progress);
+            completionGate(CompletionPhase.DONE_BEFORE, afterRetirement, progress).verify();
             var requested =
                 state.completion().isPresent()
                     ? state.completion().orElseThrow()
                     : evidence.completion(state.activation(), java.time.Clock.systemUTC());
             require(original.complete(requested).equals(requested));
-            afterRetirement.verify();
+            completionGate(CompletionPhase.DONE_AFTER, afterRetirement, progress).verify();
             completed.set(requested);
           } catch (IOException | RuntimeException | Error uncertainCompletion) {
             // Half retirement, publication/readback or close unknown must not unwind the parent.
+            progress.failure(uncertainCompletion);
             retain();
           }
         });
