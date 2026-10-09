@@ -175,6 +175,13 @@ SSC198限定補足（同日17:02、固定same-run一回用Unit引数）：pendin
 ## SSC197 固定Backup入力のmode横断（2026-10-06、BUG771/YKT551）
 
 SS341 SSC121の静的復旧config8名は、api.env/web.envだけRoot:既API/Web primary GID0600、common.yml/api.yml/web.yml/batch.yml/backup-profile.json/inbox-inspector.envはRoot:schubert0640。Inspector静的envは§6.9の0640のままであり、`.env` suffixを理由に0600へ変更しない。credential固定17名はRoot:Root0600、runtime Inspector envはarchive対象外。全allowlist・regular/link1/ACLなし・保持前後metadata・署名payload・実archive hash等の既存検査を維持する。既成功bundle、設定原byte/権限、秘密配布、業務外部仕様は変更しない。固定名ごとの独立mode表と未知/null/他catalog取り違えを試験し、実親Backup完成は別native受入を必要とする。
+
+## SSC234 CLOSINGのnew-only原本とBootstrap entry（2026-10-09）
+
+SS342の二terminal roleだけ、同owner/同profile/同checkpointでTERMINAL全帰還後に`<INV>.closing.exec`を新単link0600/保持FD/write-force-close-dirsync/hash/再読・前後identityで一回追加する。旧terminal/before-exec/原本Backupを保持し、repair/再試行/別path/別session/RootやAPI-Web aliasを許さない。attemptはagent/I/O前に消費し、TERMINAL失敗後/先行CLOSING/foreign-thread/重複は拒否する。追加点の末尾は同body独立試験で閉じ、採取点連鎖をしない。agent option/pin/outputnone/dumponexitfalse/private namespace/UID等は既契約を維持する。
+
+SSC083のJava25 instance-main termination portをBootstrapAdminMainにも限定適用する。公開noargは固定環境・本番operation・測定callback・System.err・System::exitをbind、package ctorは同mainの順序/終了値を独立確認するdata/control-flow portのみ。FQCN/zeroargv/既0・20・50・70/初期ADMIN動作/未知business failureの既固定診断は不変更。CLOSING/終了portをadmission/初期作成authorityへ流用しない。
+
 ## SSC196 二つの固定terminal role namespace（2026-10-06）
 
 SSC193/195の親Root:Root0755/ACLなし/tmpfs下へ、正常owned停止・M/A/DB/全原本・旧Backup/current/旧native全byte保全を認証したRoot operatorだけがnew-only `ordinary-inspector196`（既resolveInspectorのUID:primary GID0700）と`ordinary-bootstrap196`（既schubert-api UID:primary GID0700）を作成する。runtime mkdir/chmod/chown/repair/置換0。出力は`<INV>.terminal.exec`一回だけ、新単link0600・同保持FDのwrite/force/close/dirsync・再読hash・前後identityを維持する。Root/before-execやAPI/WEB専用roleへのalias0、旧exec/heaps/原本/Backup/退役済秘密は全保全し現/runへ復元しない。Unit/identity/phase/session/default及び採取失敗はSS342 SSC196を正とする。rawexec/credential/session/DB値は私有だけ、safe evidenceはhash/counter/actualsource-run/kernelと未確定事項だけ。公開設計は実装/native/正式品質受入ではない。
