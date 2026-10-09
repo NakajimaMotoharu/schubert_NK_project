@@ -53,7 +53,7 @@ def payload(proof,seals,pins,mode):
   require(not pathlib.Path('/proc/3832792').exists());OWNED=False;locks(False);require(snapshot()==native==snapshot());locks(False)
   private('after.private.json',json.dumps(value,sort_keys=True).encode());private('complete.private',b'oldCloseUnknown=true\\nownedToolGone=true\\nallResources0=true\\noriginalsUnchanged=true\\nunitStarts0=true\\n')
 '''+raw[b:]
- raw+="print(json.dumps({'actualExit':0,'mode':MODE,'toolGone':MODE=='execute','allResources0':MODE=='execute','oldNormalClose':False,'originalsUnchanged':True,'unitStartsStopsReloads0':True}))\n"
+ raw+="\nprint(json.dumps({'actualExit':0,'mode':MODE,'toolGone':MODE=='execute','allResources0':MODE=='execute','oldNormalClose':False,'originalsUnchanged':True,'unitStartsStopsReloads0':True}))\n"
  ast.parse(raw);return 'PINS='+repr(pins)+'\nMODE='+repr(mode)+'\n'+raw
 def main():
  mode=sys.argv[1];assert mode in('preflight','execute');os.umask(0o077);assert subprocess.check_output(['git','status','--porcelain'])==b''
