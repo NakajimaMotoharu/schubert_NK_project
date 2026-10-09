@@ -4,6 +4,14 @@ import unittest
 from pathlib import Path
 import pg835_pending_sources as p
 class Test(unittest.TestCase):
+    def test_fresh_v2_names_are_closed_and_old_failures_not_overwritten(self):
+        from pg835_pending_v2 import source,bind
+        for mode in ('compile','stage','activate'):
+            raw=source(mode);ast.parse(raw)
+            self.assertNotIn('pg835-frozen-v1.safe.json',raw)
+            self.assertNotIn('pg835-pending-tools-v1',raw)
+            self.assertIn('pg835-frozen-v2.safe.json',raw)
+        self.assertIn('pg835-pending-codeonly-v2',bind(p.java()))
     def test_direct_entrypoints_are_unique_before_any_dispatch(self):
         directory=Path(__file__).resolve().parent
         for name in ('pg835_pending_native.py','pg835_candidate_place.py','pg835_pending_compile.py'):
