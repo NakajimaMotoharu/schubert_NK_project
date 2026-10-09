@@ -1,0 +1,95 @@
+{
+  "program": "NK-OPS-001",
+  "wbsLeaf": "WBS-N15.02",
+  "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "operatorSources": [
+    "3388532d2d14d161c84c54a6f2cea13a093be5dc",
+    "36a5744b05d7312bef1f056f91e47282980c59d7"
+  ],
+  "branch": "dev-foundation",
+  "commands": [
+    "python3 -B tools/quality/vm/050_s1/pg933_candidate_test.py",
+    "python3 -B tools/quality/vm/050_s1/pg932_candidate_build.py",
+    "python3 -B tools/quality/vm/050_s1/pg935_current_preflight.py",
+    "python3 -B tools/quality/vm/050_s1/pg937_stage_test.py",
+    "python3 -B tools/quality/vm/050_s1/pg936_stage_candidate.py preflight",
+    "python3 -B tools/quality/vm/050_s1/pg936_stage_candidate.py",
+    "python3 -B tools/quality/vm/050_s1/pg938_stage_post.py",
+    "python3 -B tools/quality/vm/050_s1/pg939_retained_stage_post.py"
+  ],
+  "testIds": [
+    "PT-DEP-932001-FINITE-FOUR",
+    "PT-DEP-932002-NEW-ONLY-PINS",
+    "PT-DEP-936001-TREE-SCHEMA",
+    "PT-DEP-936002-FULL-PINS",
+    "PT-DEP-938001-SIGNATURE-METADATA",
+    "PT-DEP-939001-RETAINED-POST"
+  ],
+  "actualExit": 0,
+  "toolTests": 4,
+  "toolTestsAddedToProductionPT": false,
+  "manifestSha256": "b75e8bd539edf40d1324896a16e51842d00a3983ba1eae661c86ab68d4692524",
+  "signatureSha256": "5c65a97770eee412ddab66a471c1d398b36f3c571aa500fc816c60a7c6c43b79",
+  "artifacts": 187,
+  "schema": "028",
+  "SQL": 28,
+  "history": 29,
+  "changedClasses": 4,
+  "addedClasses": 0,
+  "fullHostSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "fullHostTests": 3560,
+  "fullHostManifestSha256": "4ae512d3b3a8e85d81fcd8e9ef04279fff58114c42e9b158adc61299d8211fdf",
+  "runHashes": {
+    "pg932-candidate-build-v1.safe.json": "03fa16ec543549dc9b0b33aaa7aa7b0e850336a36cf745a110a21cbad13aeaef",
+    "pg935-current-preflight-v1.safe.json": "278c0950ca3064835fd6735f55a13088aa69d9aee31aaa172f3e1533766e32d7",
+    "pg936-candidate-stage-v6.safe.json": "d232673f5ee7a2df068225b77838b06a582f9b61cb8812cd87055c6267b0b867",
+    "pg938-independent-stage-post-v1.safe.json": "f35ddcd1abb1de174464d0a99f60b0fc8e7be123c42eecf76c1b8a963164c902",
+    "pg939-current-stage-post-v1.safe.json": "09e63b50366abf274879385f36fdcc04752e5dc53c2eb8aef1bdab61f8a0bb65"
+  },
+  "runTimes": {
+    "pg932-candidate-build-v1.safe.json": {
+      "startedUTC": "2026-10-09T22:47:51.841068+00:00",
+      "completedUTC": "2026-10-09T22:47:51.994962+00:00"
+    },
+    "pg935-current-preflight-v1.safe.json": {
+      "startedUTC": "2026-10-09T22:48:33.866923+00:00",
+      "elapsedSeconds": 3.807455
+    },
+    "pg936-candidate-stage-v6.safe.json": {
+      "startedUTC": "2026-10-09T22:51:51.669374+00:00",
+      "completedUTC": "2026-10-09T22:51:56.787208+00:00"
+    },
+    "pg938-independent-stage-post-v1.safe.json": {
+      "startedUTC": "2026-10-09T22:53:20.239807+00:00",
+      "elapsedSeconds": 0.822364
+    },
+    "pg939-current-stage-post-v1.safe.json": {
+      "startedUTC": "2026-10-09T22:53:21.189925+00:00",
+      "elapsedSeconds": 3.193569
+    }
+  },
+  "privateLogHashes": {
+    "pg932-candidate-build-v1.safe.json": "0fd23954193f64e60f5b4b5f381cd1ea9d580aece00a6bbbc98e664302ce6b79",
+    "pg935-current-preflight-v1.safe.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg936-candidate-stage-v6.safe.json": "9de208e6322da00498d7470a536fe6e540b26bdcef2bffdcc45022d9b3d095f6",
+    "pg938-independent-stage-post-v1.safe.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pg939-current-stage-post-v1.safe.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independentOracle": "literal four allowed class changes and reject omission/foreign/added; retained original/backup/credentials/startup/oldProofs/native schema has exact nine metadata and SHA, all24-584/full32/tenRef before-after equality; independent candidate 187 bytes/mode/uid/gid/link/noACL/canonical checksum/signature",
+  "expected": "new-only unused PG932 with same approved schema/SQL/remaining artifacts, current e016 unchanged; all retained data and resources unchanged/empty",
+  "actual": "new signed candidate placed once; independent187 and fresh all24/full32/DB-M-A/kernel proof actual0; original snapshot SHA unchanged",
+  "installedSource": "e01612fcd7f2752df5ae0836b78538fd5e87f120",
+  "installedRelease": "0.1.0-PG862",
+  "stagedRelease": "0.1.0-PG932",
+  "currentUnchanged": true,
+  "stageOnly": true,
+  "publicationNotRun": true,
+  "newNativePending": true,
+  "formalAccepted": false,
+  "wholeWbsAccepted": false,
+  "rawExported": false,
+  "diagnosticFailuresNotAcceptance": [
+    "metadata inspection SyntaxError exit1, then absent legacy trees KeyError exit1; readonly before any stage, no PT or success credit"
+  ],
+  "specification": "evidence/01_PT/018_NK-OPS-001/617_当source署名候補_停止stage・独立後条件_仕様結果.md"
+}
