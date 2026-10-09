@@ -155,6 +155,14 @@ final class MaintenanceRunFilesTest {
                   s ->
                       s.completedSuccessReferenceRun(
                           done, RUN.id(), Instant.parse("2026-09-12T05:00:00Z"))));
+      Files.writeString(
+          f.attempts.resolve(ACT_ID + ".done"),
+          DONE0.replace("2026-09-12T05:06:07.234567Z", "2026-09-12T07:06:07.234567Z"));
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(
+                  s -> s.completedSuccessReferenceRun(done, RUN.id(), current.cutoff())));
       f.files.execute(
           s -> s.start(new BatchRun(OTHER, Instant.parse("2026-09-12T08:00:00Z")), NEXT));
       assertThrows(

@@ -5,7 +5,7 @@ import pg813_sources as prior
 R=Path(__file__).resolve().parent
 SOURCE='2a0d5aa392c85a1dc12a1cdb423978e8500895b8'
 DIGEST='8bcb3453c182be8f0719818899ec3bd7e86070f7b02086015ecc33c27e10b977'
-SNAPSHOT='31835fbf4052046f393059d4fe797b7cb82852e99f540d1370e61829ad994b71'
+SNAPSHOT='289e9efc63292bbf1d4a0e952bf98b98bca390550b3a41b492288dd1bdfe0fb5'
 EPOCH='8b153538-1523-4987-a456-6cbea0d345ee'
 PAIRS=((prior.SOURCE,SOURCE),(prior.DIGEST,DIGEST),('Pg813','Pg856'),('PG813','PG856'),('pg813','pg856'),
  ('failed949-tools-v2','failed-done-tools-v1'),('failed949-recovery-v2','failed-done-recovery-v1'),
@@ -15,7 +15,7 @@ PAIRS=((prior.SOURCE,SOURCE),(prior.DIGEST,DIGEST),('Pg813','Pg856'),('PG813','P
  ('3344741','3507964'),('02ae69dca0514d8c917831eee3ca82b6','8c46100f289f47b9a24d2c12bd443ba2'),('15743589','17242685'),
  ('3350579','3509997'),('42e945fbd2894199b7dfca297c989627','87dd86b0f2c243198a05ae36903fdefa'),('15746848','17244888'),
  ('3158873','3427249'),('cb2f7a6c4beb4420a0e96adb65fb6f11','9a576ea327854479a3196fe41b2c0a61'),('15613132','17151412'),
- ('pg812-current-timeout-v4','pg855-doneafter-current-v1'),(prior.SNAPSHOT,SNAPSHOT))
+ ('pg812-current-timeout-v4','pg855-doneafter-current-v2'),(prior.SNAPSHOT,SNAPSHOT))
 def bind(raw):
     for a,b in PAIRS: raw=raw.replace(a,b)
     return raw
@@ -56,6 +56,9 @@ def java():
     return raw
 def helper():
     raw=bind(prior.helper()).replace(prior.EPOCH,EPOCH).replace('==554','==564').replace('== 554','== 564')
+    fields='Id,Type,Restart,RemainAfterExit,KillMode,SendSIGKILL,TimeoutStartUSec,TimeoutStopUSec,ExecStart,ExecStop,User,Group,SupplementaryGroups,NoNewPrivileges,CapabilityBoundingSet,AmbientCapabilities,ProtectSystem,ProtectHome,PrivateTmp,PrivateDevices,RestrictAddressFamilies,ReadWritePaths,ReadOnlyPaths,Requires,After,FragmentPath,DropInPaths'
+    assert raw.count(fields)==1
+    raw=raw.replace(fields,fields+',RestrictSUIDSGID,UMask,LimitCORE,MemoryMax,TasksMax')
     # No intent exists. The canonical revoke changes only epoch.current; no pseudo-retirement.
     assert "elif action=='retired':require(newnames==oldnames-intents)" in raw
     raw=raw.replace("elif action=='retired':require(newnames==oldnames-intents)","elif action=='retired':require(newnames==oldnames)")

@@ -10,10 +10,10 @@ def namespace():
     return h
 class Test(unittest.TestCase):
     def test_exact_cohort_and_no_intent_operation(self):
-        h=namespace();self.assertEqual(18,len(h.FIELDS));self.assertEqual(27,len(h.FIELDS_CONFIGURATION))
+        h=namespace();self.assertEqual(18,len(h.FIELDS));self.assertEqual(32,len(h.FIELDS_CONFIGURATION))
         self.assertEqual(('3506798','eeb1b35ca3214176adae5d45bb6432ab',17241379),h.EXPECTED['schubert-nk-api.service'])
         self.assertEqual(('3507964','8c46100f289f47b9a24d2c12bd443ba2',17242685),h.EXPECTED['schubert-nk-web.service'])
-        self.assertIn('31835fbf4052046f393059d4fe797b7cb82852e99f540d1370e61829ad994b71',p.helper())
+        self.assertIn('289e9efc63292bbf1d4a0e952bf98b98bca390550b3a41b492288dd1bdfe0fb5',p.helper())
         j=p.java();self.assertNotIn('PairEvidence',j);self.assertNotIn('quarantinePair',j);self.assertNotIn('retirePair',j)
         self.assertIn('validateCohort(epoch,permit,startup)',j);self.assertIn('37356ff23d0393924c22079bd4c87fce7c3070155d84704fb1cb143e7b1c60a5',j)
         self.assertLess(j.index('helper("terminal")'),j.index('files.revoke(invalid,permit)'))
