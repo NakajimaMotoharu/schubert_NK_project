@@ -1,5 +1,7 @@
 # PG743 SSC234同期closing・同main単体仕様
 
+実選択結果：PG743source1997a7212/exit1 prefix、PG744a22d013ec/exit1 no-tests依存をBUG925/YKT694として保全。修正e24b246d5→PG745actual0/88PT12suite（bootstrap38/5、API50/7）/FES0/static2zero/NullAway-Werror-format0。新lifecycle27L18B5M1C各100%、Inspector39L22B10M1C各100%。Bootstrap mainの同body終了portでreturnを実検査、nativebusiness24L/1B等は別未実行。PG746Werrorcompile/同session/latest/probe独立oracle0、manifest26cb3b18f8542af5819f1f3a28496a2e3351bed6048fb9ae0fe66ecefa14530c。新source未配備、旧1ec/PG715/534/九native保持。936artifact/811Java outer/37共有へ物理一class追加、主担当P018-08だけ、accepted追加0/残費用未改訂。
+
 NK-OPS-001/NK-ADM-001/NK-DAT-001、RD OPS009/TST004/AUT001002/DAT009、UI212225226241251、SS342343354/451/SSC234。分類4/internal measurement only、RD/UI/DB/業務/Root/API-Web/budget不変更。design source a99873e67→main design-only0d4a63cbe/PR72/main e5e4314e53fd520d10b96d47cf6b0f07e7ba42cb MERGED・origin再確認。mainは既SS正本を保持、451は実施branchだけ。限定review完了、hook順序依存でなく同期closing採用。
 
 対象：FixedNativeCoverageTerminal terminal/closing/constructor(主担当P018-08)、Checkpoint.capture/Profile.supportsClosing/NativeCoveragePrivateFile.export、BootstrapAdminMain constructor/main(P010-05)、InspectorLauncher.completeAndClose/main(P004-04)。TERMINALを保持、same-owner/同checkpoint正常帰還後のCLOSING一回・無reset・new0600の正常close/dirsync/再読からmarkerを出す。agent無はI/O0、既業務status/receiptを保存、採取失敗非成功・collector資格未受入。source固定後 selected bootstrap/API依存reactor、static/NullAway/Werror/format/XMLを独立確認、新Productionのため変更群必要全6fresh。実VMの資格/所定全品質は別受入。
