@@ -22,7 +22,7 @@ BODY=r'''
   }
   static void pulse()throws Exception{
     long now=System.nanoTime();
-    if(lastPulse==0||now-lastPulse>=TimeUnit.SECONDS.toNanos(1)){
+    if(lastPulse==0||now-lastPulse>=java.util.concurrent.TimeUnit.SECONDS.toNanos(1)){
       if(batchLease!=null)batchLease.verify();if(schemaLease!=null)schemaLease.verify();lastPulse=System.nanoTime();
     }
   }
@@ -35,7 +35,7 @@ BODY=r'''
     for(int n=0;n<15;n++){
       batchLease.verify();schemaLease.verify();observations++;Thread.sleep(5000);pulse();
     }
-    require(System.nanoTime()-began>=TimeUnit.SECONDS.toNanos(75)&&observations==15);batchLease.verify();schemaLease.verify();
+    require(System.nanoTime()-began>=java.util.concurrent.TimeUnit.SECONDS.toNanos(75)&&observations==15);batchLease.verify();schemaLease.verify();
     helper("verify");parent();signed();pending(invalid,db);
     require(invalid.equals(new StartupPermitFiles(root,LinuxInodeSecurity.create()).current())&&actualNames().equals(retiredNames())&&original.equals(Pg428ColdBootPreparation.original())&&backups.equals(Pg481NativeStop.backup())&&rows.equals(business(schema)));
     save("body-complete.private","sameTwoServersAliveOver75s=true\nroleIdleTimeoutUnchanged=true\nall24Preserved=true\nstartsStopsRevokeRetire0=true\nnewOuterScopesNotYetReturned=true\n");
