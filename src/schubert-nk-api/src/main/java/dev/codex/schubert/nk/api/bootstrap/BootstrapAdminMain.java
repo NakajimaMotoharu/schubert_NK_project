@@ -7,8 +7,8 @@ import dev.codex.schubert.nk.api.file.InspectorCredentialLoader;
 import dev.codex.schubert.nk.api.file.ServiceCredentialException;
 import dev.codex.schubert.nk.api.file.ServiceCredentialReader;
 import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
 import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageTerminal;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.function.IntConsumer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -34,14 +35,57 @@ public final class BootstrapAdminMain {
   static final String UNIT = "schubert-nk-bootstrap-admin.service";
   private static final String CREDENTIAL_DIRECTORY = "/run/credentials/" + UNIT;
 
-  public static void main(String[] arguments) {
-    System.exit(
-        launch(
-            arguments,
-            System.getenv(),
-            new BootstrapAdminMain()::run,
-            BootstrapAdminMain::captureNative,
-            System.err));
+  private final Map<String, String> environment;
+  private final Operation operation;
+  private final Capture capture;
+  private final Capture closing;
+  private final PrintStream diagnostics;
+  private final IntConsumer termination;
+
+  /** Java25 instance-main native binding; no configurable startup authority. SSC234. */
+  public BootstrapAdminMain() {
+    environment = System.getenv();
+    operation = this::run;
+    var measurement =
+        new FixedNativeCoverageTerminal(
+            FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP, environment.get("INVOCATION_ID"));
+    capture = measurement::terminal;
+    closing = measurement::closing;
+    diagnostics = System.err;
+    termination = System::exit;
+  }
+
+  BootstrapAdminMain(
+      @Nullable Map<String, String> environment,
+      @Nullable Operation operation,
+      @Nullable Capture capture,
+      @Nullable Capture closing,
+      @Nullable PrintStream diagnostics,
+      @Nullable IntConsumer termination) {
+    if (environment == null
+        || operation == null
+        || capture == null
+        || closing == null
+        || diagnostics == null
+        || termination == null)
+      throw new IllegalArgumentException("bootstrap main dependencies required");
+    this.environment = Map.copyOf(environment);
+    this.operation = operation;
+    this.capture = capture;
+    this.closing = closing;
+    this.diagnostics = diagnostics;
+    this.termination = termination;
+  }
+
+  public void main(String[] arguments) {
+    int status = launch(arguments, environment, operation, capture, diagnostics);
+    try {
+      if (closing.run()) diagnostics.println("Bootstrap fixed PT native closing complete");
+    } catch (Throwable failure) {
+      diagnostics.println("Initial ADMIN bootstrap failed");
+      status = 50;
+    }
+    termination.accept(status);
   }
 
   /** PG-D401: internal data/control-flow ports, never an OS admission or startup capability. */
@@ -83,15 +127,6 @@ public final class BootstrapAdminMain {
       status = 50;
     }
     return status;
-  }
-
-  private static boolean captureNative() throws IOException {
-    var coverage =
-        FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
-            FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP, System.getenv("INVOCATION_ID"));
-    if (coverage.isEmpty()) return false;
-    coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
-    return true;
   }
 
   int run(String[] arguments, Map<String, String> environment)

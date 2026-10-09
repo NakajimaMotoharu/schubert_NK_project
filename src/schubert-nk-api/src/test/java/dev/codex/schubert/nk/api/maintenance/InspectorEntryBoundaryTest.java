@@ -12,6 +12,85 @@ import org.junit.jupiter.api.Test;
 
 /** PT-DB-INBOX-669001..004 / SS343354 / PG-D401: no synthetic native admission. */
 final class InspectorEntryBoundaryTest {
+  /** SSC234/PT-DB-CLOSE743001: same completed receipt/callback returns before CLOSING. */
+  @Test
+  void close743001ClosingRunsAfterCompleteReturnsWithLiteralReceiptAndDiagnostic()
+      throws Exception {
+    for (boolean enabled : new boolean[] {false, true}) {
+      var out = new ByteArrayOutputStream();
+      var err = new ByteArrayOutputStream();
+      try (var output = new PrintStream(out);
+          var diagnostics = new PrintStream(err)) {
+        InspectorLauncher.completeAndClose(
+            new String[] {"unexpected"},
+            Map.of(),
+            output,
+            settings -> {
+              throw new AssertionError("no business IO");
+            },
+            () -> enabled,
+            () -> {
+              assertEquals("NKINSPECTOR1 70\n", out.toString(StandardCharsets.UTF_8));
+              assertEquals(
+                  enabled ? "Inspector fixed PT native capture complete\n" : "",
+                  err.toString(StandardCharsets.UTF_8));
+              return enabled;
+            },
+            diagnostics);
+      }
+      assertEquals(
+          enabled
+              ? "Inspector fixed PT native capture complete\nInspector fixed PT native closing complete\n"
+              : "",
+          err.toString(StandardCharsets.UTF_8));
+    }
+  }
+
+  /** SSC234/PT-DB-CLOSE743002: no marker/fallback on closing failure; null before business. */
+  @Test
+  void close743002ClosingFailureAndMissingNeverManufactureSuccess() throws Exception {
+    var out = new ByteArrayOutputStream();
+    var err = new ByteArrayOutputStream();
+    try (var output = new PrintStream(out);
+        var diagnostics = new PrintStream(err)) {
+      InspectorLauncher.Factory factory =
+          s -> {
+            throw new AssertionError("no IO");
+          };
+      InspectorLauncher.Capture terminal = () -> true;
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              InspectorLauncher.completeAndClose(
+                  new String[0], Map.of(), output, factory, terminal, null, diagnostics));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              InspectorLauncher.completeAndClose(
+                  new String[0], Map.of(), output, factory, terminal, terminal, null));
+      assertEquals(0, out.size());
+      var failure = new IOException("PRIVATE");
+      assertSame(
+          failure,
+          assertThrows(
+              IOException.class,
+              () ->
+                  InspectorLauncher.completeAndClose(
+                      new String[] {"unexpected"},
+                      Map.of(),
+                      output,
+                      factory,
+                      terminal,
+                      () -> {
+                        throw failure;
+                      },
+                      diagnostics)));
+      assertEquals("NKINSPECTOR1 70\n", out.toString(StandardCharsets.UTF_8));
+      assertEquals(
+          "Inspector fixed PT native capture complete\n", err.toString(StandardCharsets.UTF_8));
+    }
+  }
+
   @Test
   void fixedReceiptBeforeOptionalCaptureWithNoConfigurationIo() throws Exception {
     for (boolean present : new boolean[] {false, true}) {

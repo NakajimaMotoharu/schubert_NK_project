@@ -105,6 +105,11 @@ public final class FixedNativeCoverageProfile {
     return phase;
   }
 
+  /** SSC234: only the two fixed ordinary oneshot roles support a closing measurement. */
+  boolean supportsClosing() {
+    return terminalRole != null;
+  }
+
   public String invocation() {
     return invocation;
   }

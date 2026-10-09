@@ -135,6 +135,36 @@ final class NativeCoverageExportTest {
     }
   }
 
+  /** SSC234/PT-OPS-NCLOSE743001: real held new-only file, modeled metadata is not OS proof. */
+  @Test
+  void nclose743001ClosingOnlyTwoTerminalRolesNeverReplacesTheirPreservedTerminal()
+      throws Exception {
+    for (Role role : ROLES) {
+      var f = fixture(role);
+      if (role.terminal() == null) {
+        assertThrows(IOException.class, () -> f.export("closing"));
+        assertEquals(0, f.calls.creates);
+      } else {
+        f.export("terminal");
+        f.success("terminal");
+        f.export("closing");
+        assertArrayEquals(
+            new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+            Files.readAllBytes(f.output("closing")));
+        assertArrayEquals(
+            new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+            Files.readAllBytes(f.output("terminal")));
+        assertEquals(0100600, Files.getAttribute(f.output("closing"), "unix:mode"));
+        assertEquals(1, Files.getAttribute(f.output("closing"), "unix:nlink"));
+        assertEquals(2, f.calls.creates);
+        assertEquals(2, f.calls.syncs);
+        assertThrows(IOException.class, () -> f.export("closing"));
+        assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("closing")));
+        assertTrue(f.calls.live.isEmpty());
+      }
+    }
+  }
+
   @Test
   void nexport617002InitialObservationsAndNullsCannotCreateAnyOutput() throws Exception {
     for (String fault :

@@ -152,6 +152,7 @@ final class NativeCoveragePrivateFile {
     // Name is admitted by the closed profile; a second path cannot be substituted by a caller.
     require(
         name.equals(profile.invocation() + ".terminal.exec")
+            || (profile.supportsClosing() && name.equals(profile.invocation() + ".closing.exec"))
             || (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT
                 && name.equals(profile.invocation() + ".before-exec.exec")));
     var security = io.security();

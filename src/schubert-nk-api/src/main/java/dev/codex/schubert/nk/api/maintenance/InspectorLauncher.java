@@ -2,8 +2,8 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import dev.codex.schubert.nk.api.file.InspectorApplication;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
 import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
+import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageTerminal;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.security.NoSuchAlgorithmException;
@@ -34,12 +34,16 @@ public final class InspectorLauncher {
 
   public static void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(InspectorLauncher::fatal);
-    complete(
+    var measurement =
+        new FixedNativeCoverageTerminal(
+            FixedNativeCoverageProfile.TerminalRole.INSPECTOR, System.getenv("INVOCATION_ID"));
+    completeAndClose(
         arguments,
         System.getenv(),
         System.out,
         NATIVE,
-        InspectorLauncher::captureNative,
+        measurement::terminal,
+        measurement::closing,
         System.err);
   }
 
@@ -68,13 +72,20 @@ public final class InspectorLauncher {
     if (capture.run()) diagnostics.println("Inspector fixed PT native capture complete");
   }
 
-  private static boolean captureNative() throws IOException {
-    var coverage =
-        FixedNativeCoverageCheckpoint.fromCurrentTerminalJvm(
-            FixedNativeCoverageProfile.TerminalRole.INSPECTOR, System.getenv("INVOCATION_ID"));
-    if (coverage.isEmpty()) return false;
-    coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
-    return true;
+  /** SSC234: completed receipt/terminal callback returns before the finite closing point. */
+  static void completeAndClose(
+      String @Nullable [] arguments,
+      @Nullable Map<String, String> environment,
+      @Nullable PrintStream output,
+      @Nullable Factory factory,
+      @Nullable Capture capture,
+      @Nullable Capture closing,
+      @Nullable PrintStream diagnostics)
+      throws IOException {
+    if (closing == null || diagnostics == null)
+      throw new IllegalArgumentException("inspector closing required");
+    complete(arguments, environment, output, factory, capture, diagnostics);
+    if (closing.run()) diagnostics.println("Inspector fixed PT native closing complete");
   }
 
   /** Returns an internal code, not an OS/parent-gate certificate. */

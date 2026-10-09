@@ -22,7 +22,8 @@ import org.jspecify.annotations.Nullable;
 public final class FixedNativeCoverageCheckpoint {
   public enum Point {
     BEFORE_EXEC,
-    TERMINAL
+    TERMINAL,
+    CLOSING
   }
 
   static final String VERSION = "0.8.15.202606040825";
@@ -46,6 +47,7 @@ public final class FixedNativeCoverageCheckpoint {
   private final Agent agent;
   private final Export export;
   private final EnumSet<Point> attempted = EnumSet.noneOf(Point.class);
+  private boolean terminalCompleted;
 
   FixedNativeCoverageCheckpoint(
       @Nullable FixedNativeCoverageProfile profile,
@@ -114,9 +116,11 @@ public final class FixedNativeCoverageCheckpoint {
     synchronized (lock) {
       if (point == null
           || (point == Point.BEFORE_EXEC
-              && profile.phase() != FixedNativeCoverageProfile.Phase.ROOT))
+              && profile.phase() != FixedNativeCoverageProfile.Phase.ROOT)
+          || (point == Point.CLOSING && !profile.supportsClosing()))
         throw new IllegalArgumentException("fixed PT checkpoint point required");
       if (!attempted.add(point)) throw unavailable();
+      if (point == Point.CLOSING) require(terminalCompleted);
       require(VERSION.equals(agent.version()) && profile.sessionId().equals(agent.session()));
       byte[] value = agent.executionDataWithoutReset();
       if (value == null || value.length < 5 || value.length > MAX_BYTES) throw unavailable();
@@ -129,8 +133,14 @@ public final class FixedNativeCoverageCheckpoint {
               && value[3] == 0x10
               && value[4] == 7);
       require(VERSION.equals(agent.version()) && profile.sessionId().equals(agent.session()));
-      String suffix = point == Point.BEFORE_EXEC ? ".before-exec.exec" : ".terminal.exec";
+      String suffix =
+          switch (point) {
+            case BEFORE_EXEC -> ".before-exec.exec";
+            case TERMINAL -> ".terminal.exec";
+            case CLOSING -> ".closing.exec";
+          };
       export.write(profile.invocation() + suffix, value.clone());
+      if (point == Point.TERMINAL) terminalCompleted = true;
     }
   }
 
