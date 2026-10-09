@@ -161,6 +161,27 @@ final class InspectorApplicationTest {
       assertEquals(1, calls.finalCloses);
       assertEquals(0, count("inbox_inspection_progress"));
     }
+    try (var f = fixture()) {
+      var calls = new Calls(f.root);
+      var io = new TestIo();
+      var app = application(f, calls, io);
+      dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard available = () -> 5_000_000_000L;
+      var first = app.execute(RUN, Optional.of(available));
+      assertEquals(InspectionExecution.Status.SUCCESS, first.status());
+      assertEquals(
+          new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true),
+          first.lastConfirmed().orElseThrow());
+      assertEquals(1, count("inbox_inspection_progress"));
+      var replay = app.execute(RUN, Optional.of(available));
+      assertEquals(InspectionExecution.Status.SUCCESS, replay.status());
+      assertEquals(
+          new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true),
+          replay.lastConfirmed().orElseThrow());
+      assertEquals(
+          1, count("inbox_inspection_progress"), "borrowed-guard replay never duplicates progress");
+      assertTrue(calls.live.isEmpty());
+      cleared(io);
+    }
   }
 
   @Test

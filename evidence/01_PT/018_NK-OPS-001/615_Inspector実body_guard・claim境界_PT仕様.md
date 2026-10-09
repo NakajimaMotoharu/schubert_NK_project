@@ -5,6 +5,7 @@ NK-DAT-001/NK-OPS-001、P004-04（guard/claim）とP018-03.02（UID同値）、D
 | Test ID | 入力/操作 | 独立期待値/後条件 |
 |---|---|---|
 | PT-APP-925001 | Operation-owned実bodyへguardがIOException（private diagnostics入り）を返す。独立temp credential fixture、既real JDBC fixture | InspectorCredentialException/no cause/suppression0、credential file read0/DB progress0・全保持dir閉鎖。failstopを成功/INTERRUPTEDへ変えない |
+| PT-APP-925001（正常・再送対照） | 借用guardが明示5e9 nanosを返すisolated operation bodyを新fixtureで一回＋same-run再送 | SUCCESS/明示InspectionProgress(RUN,empty,0,0,0,true)、SQL progress行1のまま重複0・全保持dir/読取buffer解放。これはData/operation port対照で真の親生存/Unit起動認定ではない |
 | PT-APP-925002 | private owner readerからSS343 literal NKMAINTOWNER1正常claim又はmalformed原文を一件取得 | 正常は明示boot/run/deadline/Parent値・cleanup absentのdataだけでUnit/Rootadmissionを意味しない。malformedはIOException固定maintenance owner unavailable/no cause/suppression0・owned readbuffer消去/dir閉鎖 |
 | PT-APP-925003 | private owner file欠落/reader I/O拒否 | 元InspectorCredentialException分類保持（generic parser IOExceptionへ誤変換しない）、秘密/raw例外原文の公開0・全資源解放 |
 | PT-COMMON-925004 | 第1capture UIDは固定200、第2captureだけ全4UID202へ変化 | 外側冗長UID比較を削除しても内側UID検査でIOException・buffer消去/manager前後比較の弱体化0。既一回目UID不一致・Root caller非0も既suiteで回帰 |
