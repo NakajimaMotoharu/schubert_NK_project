@@ -10,6 +10,7 @@ def code(hashes,before_sha,after_sha):
  value=previous_code(hashes)
  for old,new in (
   ('36fe7a0b938489d61d17d49c1c30a6fbbef699d5',SOURCE),
+  ('pg642-native-stop-v1.exit','pg877-stop-v1.exit'),
   ('pg642-native-stop-v1','pg877-native-stop-v1'),('pg643-terminal-final-v2','pg878-terminal-final-v1'),
   ('011d96090bac12c58f0a9531455e72bb79a23a413d5b16fa886c9df8dac4bf3c',after_sha),
   ('c9da5fd175734ba356629295d5ef96818e14dd3d4c997381dcf246a291cd1d65',before_sha),
