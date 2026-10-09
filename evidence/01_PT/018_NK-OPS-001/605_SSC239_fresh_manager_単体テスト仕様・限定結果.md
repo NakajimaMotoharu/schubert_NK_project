@@ -37,4 +37,6 @@ Java25.0.4/Maven3.9.12、Ubuntu Linux x86_64、host/VM systemd/libsystemd0=259.5
 
 ## 未受入・後続
 
+826 source70e41eee1f0d7185c95e1fc91e87b0dbd9c78905は65PT/FES0/静的0。元query/property直前Budget・policy/ABI例外試験を追加し、Queryの四counter100、Sessionのline/method/class100・branch残2を実計測。Native/Factory/Owner/Propertyは四100、空interfaceはcounterなしで除外設定ではない。残2は取得失敗後の未開始busとunref異型の独立negativeへ追加して次828を別newrunにする。旧825/824を当新sourceの完了結果へ流用0。SS239設計3文書のみPR77/main a5cd475de86ad38ced9ec88674ddfd7098660367に公開済、実装/PT/親/正式完了とは別。
+
 952～957は直接是正・825/824限定実証ありだがYKT全対象/新source分岐/全回帰閉鎖までは未完。949親timeout原因・新真正DONEは未解決、停止中比較速度から原因や負荷中性能を推定しない。正式PT-WEB-20260925-24/1964/53、global四100、CHR・IT/ST受入を本結果で更新しない。SSC239は記述確定と設計onlymainを別管理する。

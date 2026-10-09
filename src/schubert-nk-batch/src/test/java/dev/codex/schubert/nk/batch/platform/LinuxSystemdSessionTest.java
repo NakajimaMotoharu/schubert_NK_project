@@ -153,6 +153,7 @@ final class LinuxSystemdSessionTest {
           segment(a[3]).set(ValueLayout.JAVA_LONG, 0, arrayLength);
         }
         case "sd_bus_message_unref", "sd_bus_close_unref" -> {
+          if (name.equals(wrongType)) return "invalid native release type";
           return badRelease ? bus : MemorySegment.NULL;
         }
         case "sd_bus_set_method_call_timeout" -> {
@@ -450,6 +451,31 @@ final class LinuxSystemdSessionTest {
         () -> LinuxSystemdSession.Native.bind(name -> Optional.empty(), name -> Optional.empty()));
     var actual = LinuxSystemdSession.Native.calls();
     assertThrows(IOException.class, () -> actual.call("unregistered"));
+  }
+
+  @Test
+  void failedBusAllocationRemainsUnstartedAndWrongReleaseTypeIsUnconfirmed() throws Exception {
+    try (var data = Arena.ofConfined()) {
+      var calls = new Calls(data);
+      calls.nullPointer = "sd_bus_new";
+      var session = new LinuxSystemdSession(calls, Arena.ofConfined());
+      assertThrows(IOException.class, () -> session.start(() -> 5000000));
+      assertThrows(IOException.class, () -> session.owner(5000000));
+      assertFalse(session.closed());
+      session.close();
+      assertTrue(session.closed());
+    }
+    try (var data = Arena.ofConfined();
+        var owned = Arena.ofConfined()) {
+      var calls = new Calls(data);
+      var session = new LinuxSystemdSession(calls, owned);
+      session.start(() -> 5000000);
+      calls.wrongType = "sd_bus_close_unref";
+      assertThrows(IOException.class, session::close);
+      assertFalse(session.closed());
+      assertThrows(IOException.class, () -> session.owner(5000000));
+      assertThrows(IOException.class, session::close);
+    }
   }
 
   @Test
