@@ -23,6 +23,7 @@ def java():
  raw=raw.replace('while(System.nanoTime()<deadline){while(input.available()>0)', 'while(System.nanoTime()<deadline){if(!phase.equals("REF_CLOSE"))pulse();while(input.available()>0)')
  raw=raw.replace('phase="REFERENCE_SCOPE";var refs=new References(pid,db);','lease=new Pg797OwnedDatabase(db,new Pg797OwnedDatabase.Expected(pid,"schubert_batch","PG805-runtime-resume","schubert_nk",true,true));pulse();phase="REFERENCE_SCOPE";var refs=new References(pid,db);')
  raw=raw.replace('phase="DB_CLOSE";db.rollback();db.close();','pulse();phase="DB_CLOSE";db.rollback();db.close();lease.confirmClosed();')
+ raw=raw.replace('Pg464CodeOnlyDeployment.configure("PG796","'+SOURCE+'",Path.of("/opt/schubert-nk/releases/0.1.0-PG796"));','Pg387TrustedDeployment.LABEL="PG796";Pg387TrustedDeployment.STEM="pg796";Pg387TrustedDeployment.SOURCE="'+SOURCE+'";Pg387TrustedDeployment.RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG796");')
  return raw
 
 def fixed_dropin_source():

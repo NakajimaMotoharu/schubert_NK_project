@@ -63,5 +63,12 @@ class Test(unittest.TestCase):
   for name,value in sources().items():
    if name.endswith('.py'):ast.parse(value)
   self.assertNotIn('pg799-',raw);self.assertNotIn('Pg799',raw);self.assertNotIn('Pg778',native())
+ def test_v2_direct_setter_and_fresh_all_namespaces(self):
+  from pg805_resume_v2 import compile_source,native_source
+  for raw in(compile_source(),native_source()):ast.parse(raw)
+  self.assertNotIn('Pg464CodeOnlyDeployment',p.java())
+  for literal in('Pg387TrustedDeployment.LABEL="PG796"','Pg387TrustedDeployment.STEM="pg796"','Pg387TrustedDeployment.SOURCE="'+p.SOURCE+'"','Pg387TrustedDeployment.RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG796")'):
+   self.assertIn(literal,p.java())
+  self.assertIn('pg805-resume-tools-v2',native_source());self.assertIn('pg805-frozen-v2.safe.json',compile_source());self.assertIn('pg805-stage-v2.exit',native_source())
 
 if __name__=='__main__':unittest.main()
