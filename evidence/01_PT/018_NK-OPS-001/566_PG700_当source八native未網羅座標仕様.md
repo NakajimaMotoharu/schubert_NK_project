@@ -1,5 +1,7 @@
 # PG700 current9bd八native＋六host未網羅座標
 
+実source9bd/PG698当8+host6=14exec actual0、XMLcounter一致/除外0、bootstrap6family/API4/batch117、gapSHAff388432b03cd39cfcf642c4d9f566b94db88306618a180f4d05270b2a0ee4e9。API残はBootstrapAdminMain34L2M3B（新sourcenormalADMIN未採取）/InspectorLauncher2L1B/InspectorApplication20L1M2B（当日Cleanup所定SKIPで正規Inspectorowner未発行）/ApiProcessMain11L1M。bootstrapはprivatecoverage/ChildContext/InspectorCredentialLoader等、batch117familyをW/pg700-current-native-gap-v1/gap.safe.json・三XMLへ固定。次current21前提の同source既存ADMINnormal20→独立全後条件/newstream資格、その後正規Inspectorfixtureと残hostnegative/null/close matrix。旧36fe17や969成功の輸入0、座標だけのProduction合格加点0。
+
 NK-OPS-001/SS354/451/WBS-N15.02/06現経路整理・費用追加0。GAP700001はactualPG698manifest e55c6095…/source9bd/八唯一sessionとPG680hostmanifest b710…/六exec/JARをhash認証し、計14execだけを既NativeCoverageXml471/JaCoCo0.8.15/ASM9.10.1へ渡す。bootstrap/API/batch XMLを当countermissed1037L179M12C794Bと一致させ、全class/method/line/branch座標を保存する。protocol/storage/webは当698で四missed0のため新未網羅抽出対象外、除外してcoverageを上げる操作ではない。
 
 host独立binding1/Pyflakes0、command `python3 -B tools/quality/vm/050_s1/pg700_native_gap.py`、W/pg700-current-native-gap-v1/三XML/gap.safe.jsonとSHAをsource/runへ対応。rawexec/sessionは私有、counter/座標は秘密なしだけwhitelist公開可能、Production PT加点0。実未実行、旧36fe17/969/XML結果を新sourceに流用0。座標抽出だけでは未網羅閉鎖/正式受入0、次同sourceADMIN/正規Inspectorfixture及びhostnegative/null/closeを必要な依存順に実施する。
