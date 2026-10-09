@@ -1,0 +1,359 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import dev.codex.schubert.nk.storage.ResourceScope;
+import java.io.IOException;
+import java.lang.foreign.*;
+import java.lang.invoke.MethodHandle;
+import java.nio.file.*;
+import java.util.*;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * SSC239 Linux LP64 libsystemd public sd-bus ABI, fixed local socket and fixed read properties.
+ * NK-OPS-001/OPS009/SYS002/UI251/SS343354; PT-OPS-MANAGER817007..012. ABI: systemd v257 sd-bus.h,
+ * independently rechecked for the deployed Ubuntu library. No environment bus address,
+ * process/shell, fallback, mutable state cache or remote endpoint.
+ */
+@NullMarked
+final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
+  private static final String DESTINATION = "org.freedesktop.systemd1";
+  private static final long OWNER_MASK = (1L << 31) | 9L; // unique name, PID, UID; no AUGMENT.
+
+  @FunctionalInterface
+  interface Calls {
+    Object call(String symbol, Object... arguments) throws IOException;
+  }
+
+  private final Calls calls;
+  private final Arena arena;
+  private final long thread = Thread.currentThread().threadId();
+  private MemorySegment bus = MemorySegment.NULL;
+  private boolean closed;
+  private boolean uncertain;
+  private @Nullable String peer;
+
+  LinuxSystemdSession(Calls calls, Arena arena) {
+    this.calls = Objects.requireNonNull(calls);
+    this.arena = Objects.requireNonNull(arena);
+  }
+
+  static final class Factory {
+    private @Nullable Calls binding;
+
+    LinuxSystemdSession create() throws IOException {
+      // Only immutable native ABI handles are shared. Every bus/owner/property read is fresh.
+      if (binding == null) binding = Native.calls();
+      return new LinuxSystemdSession(binding, Arena.ofConfined());
+    }
+  }
+
+  private void check() throws IOException {
+    if (closed || uncertain || thread != Thread.currentThread().threadId())
+      throw LinuxSystemdQuery.unavailable();
+  }
+
+  private MemorySegment text(String value) {
+    return arena.allocateFrom(value);
+  }
+
+  private int integer(String symbol, Object... args) throws IOException {
+    Object value = call(symbol, args);
+    if (!(value instanceof Integer code) || code < 0) throw LinuxSystemdQuery.unavailable();
+    return code;
+  }
+
+  private Object call(String symbol, Object... args) throws IOException {
+    try {
+      return calls.call(symbol, args);
+    } catch (IOException | RuntimeException | Error failure) {
+      // Native-call uncertainty is not a normal close. The query retains this session/arena.
+      uncertain = true;
+      throw failure;
+    }
+  }
+
+  private MemorySegment pointer() {
+    return arena.allocate(ValueLayout.ADDRESS);
+  }
+
+  private void timeout(long micros) throws IOException {
+    check();
+    if (bus.address() == 0 || micros < 1 || micros > 5_000_000)
+      throw LinuxSystemdQuery.unavailable();
+    integer("sd_bus_set_method_call_timeout", bus, micros);
+  }
+
+  @Override
+  public void start(long micros) throws IOException {
+    check();
+    if (bus.address() != 0) throw LinuxSystemdQuery.unavailable();
+    MemorySegment result = pointer();
+    Object status = call("sd_bus_new", result);
+    bus = result.get(ValueLayout.ADDRESS, 0); // Capture ownership even if the status is a failure.
+    if (!(status instanceof Integer code) || code < 0 || bus.address() == 0)
+      throw LinuxSystemdQuery.unavailable();
+    timeout(micros);
+    integer("sd_bus_set_address", bus, text("unix:path=/run/dbus/system_bus_socket"));
+    integer("sd_bus_set_bus_client", bus, 1);
+    integer("sd_bus_set_allow_interactive_authorization", bus, 0);
+    integer("sd_bus_start", bus);
+  }
+
+  @Override
+  public LinuxSystemdQuery.Owner owner(long micros) throws IOException {
+    timeout(micros);
+    MemorySegment result = pointer();
+    Object status = call("sd_bus_get_name_creds", bus, text(DESTINATION), OWNER_MASK, result);
+    MemorySegment credentials = result.get(ValueLayout.ADDRESS, 0);
+    return ResourceScope.use(
+        () -> release("sd_bus_creds_unref", credentials),
+        () -> {
+          if (!(status instanceof Integer code) || code < 0 || credentials.address() == 0)
+            throw LinuxSystemdQuery.unavailable();
+          var pid = arena.allocate(ValueLayout.JAVA_INT);
+          var uid = arena.allocate(ValueLayout.JAVA_INT);
+          var unique = pointer();
+          integer("sd_bus_creds_get_pid", credentials, pid);
+          integer("sd_bus_creds_get_uid", credentials, uid);
+          integer("sd_bus_creds_get_unique_name", credentials, unique);
+          var owner =
+              new LinuxSystemdQuery.Owner(
+                  pid.get(ValueLayout.JAVA_INT, 0),
+                  uid.get(ValueLayout.JAVA_INT, 0),
+                  string(unique.get(ValueLayout.ADDRESS, 0)));
+          peer = owner.unique();
+          return owner;
+        });
+  }
+
+  @Override
+  @SuppressWarnings("restricted")
+  public String read(
+      RootStartupContext.Service service, LinuxSystemdQuery.Property property, long micros)
+      throws IOException {
+    Objects.requireNonNull(service);
+    Objects.requireNonNull(property);
+    timeout(micros);
+    MemorySegment path =
+        text(
+            "/org/freedesktop/systemd1/unit/"
+                + service.unit().replace("_", "_5f").replace("-", "_2d").replace(".", "_2e"));
+    String unique = peer;
+    if (unique == null || !unique.matches(":[0-9]+\\.[0-9]+"))
+      throw LinuxSystemdQuery.unavailable();
+    // A unique bus name cannot auto-activate a service if its captured owner disappears.
+    MemorySegment destination = text(unique);
+    MemorySegment type = text("org.freedesktop.systemd1." + property.kind);
+    MemorySegment name = text(property.member);
+    if (property.type == 's') {
+      var result = pointer();
+      Object status =
+          call(
+              "sd_bus_get_property_string",
+              bus,
+              destination,
+              path,
+              type,
+              name,
+              MemorySegment.NULL,
+              result);
+      MemorySegment value = result.get(ValueLayout.ADDRESS, 0);
+      return ResourceScope.use(
+          () -> {
+            if (value.address() != 0) call("free", value);
+          },
+          () -> {
+            if (!(status instanceof Integer code) || code < 0)
+              throw LinuxSystemdQuery.unavailable();
+            return string(value);
+          });
+    }
+    if (property.type == 'u' || property.type == 't') {
+      var value = arena.allocate(ValueLayout.JAVA_LONG);
+      integer(
+          "sd_bus_get_property_trivial",
+          bus,
+          destination,
+          path,
+          type,
+          name,
+          MemorySegment.NULL,
+          (byte) property.type,
+          value);
+      return property.type == 'u'
+          ? Integer.toUnsignedString(value.get(ValueLayout.JAVA_INT, 0))
+          : Long.toUnsignedString(value.get(ValueLayout.JAVA_LONG, 0));
+    }
+    var result = pointer();
+    Object status =
+        call(
+            "sd_bus_get_property",
+            bus,
+            destination,
+            path,
+            type,
+            name,
+            MemorySegment.NULL,
+            result,
+            text("ay"));
+    MemorySegment message = result.get(ValueLayout.ADDRESS, 0);
+    return ResourceScope.use(
+        () -> release("sd_bus_message_unref", message),
+        () -> {
+          if (!(status instanceof Integer code) || code < 0 || message.address() == 0)
+            throw LinuxSystemdQuery.unavailable();
+          var data = pointer();
+          var size = arena.allocate(ValueLayout.JAVA_LONG);
+          integer("sd_bus_message_read_array", message, (byte) 'y', data, size);
+          long length = size.get(ValueLayout.JAVA_LONG, 0);
+          if (length == 0) return "";
+          MemorySegment value = data.get(ValueLayout.ADDRESS, 0);
+          if (length != 16 || value.address() == 0) throw LinuxSystemdQuery.unavailable();
+          return HexFormat.of().formatHex(value.reinterpret(16).toArray(ValueLayout.JAVA_BYTE));
+        });
+  }
+
+  @SuppressWarnings("restricted")
+  private static String string(MemorySegment value) throws IOException {
+    if (value.address() == 0) throw LinuxSystemdQuery.unavailable();
+    MemorySegment memory = value.reinterpret(4097);
+    return decode(index -> memory.get(ValueLayout.JAVA_BYTE, index));
+  }
+
+  @FunctionalInterface
+  interface Octets {
+    byte read(int index);
+  }
+
+  static String decode(Octets memory) throws IOException {
+    Objects.requireNonNull(memory);
+    byte[] bytes = new byte[4097];
+    // sd-bus supplies a NUL-terminated owned/borrowed C string. Only read up to that NUL.
+    int end = 0;
+    while (end < bytes.length) {
+      byte octet = memory.read(end);
+      if (octet == 0) break;
+      bytes[end++] = octet;
+    }
+    if (end > 4096) throw LinuxSystemdQuery.unavailable();
+    return new String(bytes, 0, end, java.nio.charset.StandardCharsets.UTF_8);
+  }
+
+  private void release(String symbol, MemorySegment value) throws IOException {
+    if (value.address() == 0) return;
+    Object after = call(symbol, value);
+    if (!(after instanceof MemorySegment pointer) || pointer.address() != 0) {
+      uncertain = true;
+      throw LinuxSystemdQuery.unavailable();
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    check();
+    release("sd_bus_close_unref", bus);
+    arena.close();
+    closed = true;
+  }
+
+  @Override
+  public boolean closed() {
+    return closed;
+  }
+
+  static final class Native {
+    private Native() {}
+
+    @SuppressWarnings("restricted")
+    static Calls calls() throws IOException {
+      String os = System.getProperty("os.name", "");
+      String arch = System.getProperty("os.arch", "");
+      if (!os.equals("Linux")
+          || ValueLayout.ADDRESS.byteSize() != 8
+          || !Set.of("amd64", "x86_64", "aarch64").contains(arch))
+        throw LinuxSystemdQuery.unavailable();
+      Path path =
+          Path.of(
+              "/usr/lib",
+              arch.equals("aarch64") ? "aarch64-linux-gnu" : "x86_64-linux-gnu",
+              "libsystemd.so.0");
+      Path real = path.toRealPath();
+      for (Path current = real; current != null; current = current.getParent()) {
+        var attributes = Files.readAttributes(current, "unix:uid,mode", LinkOption.NOFOLLOW_LINKS);
+        if (!attributes.get("uid").equals(0) || ((int) attributes.get("mode") & 0022) != 0)
+          throw LinuxSystemdQuery.unavailable();
+      }
+      SymbolLookup systemd = SymbolLookup.libraryLookup(real, Arena.global());
+      SymbolLookup libc = Linker.nativeLinker().defaultLookup();
+      return bind(systemd, libc);
+    }
+
+    @SuppressWarnings("restricted")
+    static Calls bind(SymbolLookup systemd, SymbolLookup libc) throws IOException {
+      var handles = new HashMap<String, MethodHandle>();
+      var pointer = ValueLayout.ADDRESS;
+      var integer = ValueLayout.JAVA_INT;
+      var longValue = ValueLayout.JAVA_LONG;
+      var octet = ValueLayout.JAVA_BYTE;
+      var descriptors =
+          Map.ofEntries(
+              Map.entry("sd_bus_new", FunctionDescriptor.of(integer, pointer)),
+              Map.entry("sd_bus_set_address", FunctionDescriptor.of(integer, pointer, pointer)),
+              Map.entry("sd_bus_set_bus_client", FunctionDescriptor.of(integer, pointer, integer)),
+              Map.entry(
+                  "sd_bus_set_allow_interactive_authorization",
+                  FunctionDescriptor.of(integer, pointer, integer)),
+              Map.entry(
+                  "sd_bus_set_method_call_timeout",
+                  FunctionDescriptor.of(integer, pointer, longValue)),
+              Map.entry("sd_bus_start", FunctionDescriptor.of(integer, pointer)),
+              Map.entry(
+                  "sd_bus_get_name_creds",
+                  FunctionDescriptor.of(integer, pointer, pointer, longValue, pointer)),
+              Map.entry("sd_bus_creds_get_pid", FunctionDescriptor.of(integer, pointer, pointer)),
+              Map.entry("sd_bus_creds_get_uid", FunctionDescriptor.of(integer, pointer, pointer)),
+              Map.entry(
+                  "sd_bus_creds_get_unique_name", FunctionDescriptor.of(integer, pointer, pointer)),
+              Map.entry("sd_bus_creds_unref", FunctionDescriptor.of(pointer, pointer)),
+              Map.entry("sd_bus_close_unref", FunctionDescriptor.of(pointer, pointer)),
+              Map.entry("sd_bus_message_unref", FunctionDescriptor.of(pointer, pointer)),
+              Map.entry(
+                  "sd_bus_get_property_string",
+                  FunctionDescriptor.of(
+                      integer, pointer, pointer, pointer, pointer, pointer, pointer, pointer)),
+              Map.entry(
+                  "sd_bus_get_property_trivial",
+                  FunctionDescriptor.of(
+                      integer, pointer, pointer, pointer, pointer, pointer, pointer, octet,
+                      pointer)),
+              Map.entry(
+                  "sd_bus_get_property",
+                  FunctionDescriptor.of(
+                      integer, pointer, pointer, pointer, pointer, pointer, pointer, pointer,
+                      pointer)),
+              Map.entry(
+                  "sd_bus_message_read_array",
+                  FunctionDescriptor.of(integer, pointer, octet, pointer, pointer)),
+              Map.entry("free", FunctionDescriptor.ofVoid(pointer)));
+      for (var entry : descriptors.entrySet()) {
+        SymbolLookup lookup = entry.getKey().equals("free") ? libc : systemd;
+        var address = lookup.find(entry.getKey()).orElseThrow(LinuxSystemdQuery::unavailable);
+        handles.put(
+            entry.getKey(), Linker.nativeLinker().downcallHandle(address, entry.getValue()));
+      }
+      return (symbol, arguments) -> {
+        try {
+          MethodHandle handle = handles.get(symbol);
+          if (handle == null) throw LinuxSystemdQuery.unavailable();
+          Object value = handle.invokeWithArguments(arguments);
+          return value == null ? MemorySegment.NULL : value;
+        } catch (RuntimeException | Error failure) {
+          throw failure;
+        } catch (Throwable failure) {
+          throw LinuxSystemdQuery.unavailable();
+        }
+      };
+    }
+  }
+}

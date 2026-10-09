@@ -304,7 +304,8 @@ public final class RootStartupContext {
     String boot = ascii(io.boot(), 37);
     require(
         boot.matches(
-            "(?!00000000-0000-0000-0000-000000000000\\n$)[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\n"));
+            "(?!00000000-0000-0000-0000-000000000000\\n"
+                + "$)[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\n"));
     long pid = io.pid();
     require(pid >= 2 && pid <= Integer.MAX_VALUE);
     long initStart = start(io.stat(1), 1);
@@ -398,17 +399,20 @@ public final class RootStartupContext {
   }
 
   static final class NativeIo implements Io {
-    private final SystemctlStateSource.Start start;
+    private final UnitQuery query;
     private final LinkRead link;
 
     interface LinkRead {
       Path read(Path path) throws IOException;
     }
 
+    @FunctionalInterface
+    interface UnitQuery {
+      byte[] read(Service service, String fields) throws IOException;
+    }
+
     NativeIo() {
-      this(
-          command -> SystemctlStateSource.NativeProcess.builder(command).start(),
-          Files::readSymbolicLink);
+      this(LinuxSystemdQuery.create()::read, Files::readSymbolicLink);
     }
 
     NativeIo(SystemctlStateSource.Start start) {
@@ -416,8 +420,17 @@ public final class RootStartupContext {
     }
 
     NativeIo(SystemctlStateSource.Start start, LinkRead link) {
-      this.start = Objects.requireNonNull(start, "system manager query");
+      this(processQuery(start), link);
+    }
+
+    private NativeIo(UnitQuery query, LinkRead link) {
+      this.query = Objects.requireNonNull(query, "system manager query");
       this.link = Objects.requireNonNull(link, "kernel init executable");
+    }
+
+    private static UnitQuery processQuery(SystemctlStateSource.Start start) {
+      Objects.requireNonNull(start, "system manager query");
+      return (service, fields) -> queryUnit(start, service, fields);
     }
 
     private final LinuxInodeSecurity security = LinuxInodeSecurity.create();
@@ -467,7 +480,8 @@ public final class RootStartupContext {
         value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
         matchType = SuppressMatchType.EXACT,
         justification =
-            "SSC086/087 fixed kernel proc stat, validated PID and NOFOLLOW leaf; ROOTCTX003/008/native014")
+            "SSC086/087 fixed kernel proc stat, validated PID and NOFOLLOW leaf;"
+                + " ROOTCTX003/008/native014")
     public byte[] stat(long pid) throws IOException {
       return read(Path.of("/", "proc", Long.toString(pid), "stat"), 4097);
     }
@@ -477,7 +491,8 @@ public final class RootStartupContext {
         value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
         matchType = SuppressMatchType.EXACT,
         justification =
-            "SSC086/087 fixed kernel proc cgroup, validated PID and NOFOLLOW leaf; ROOTCTX004/008/native014")
+            "SSC086/087 fixed kernel proc cgroup, validated PID and NOFOLLOW leaf;"
+                + " ROOTCTX004/008/native014")
     public byte[] cgroup(long pid) throws IOException {
       return read(Path.of("/", "proc", Long.toString(pid), "cgroup"), 4097);
     }
@@ -510,16 +525,17 @@ public final class RootStartupContext {
 
     @Override
     public byte[] unit(Service service) throws IOException {
-      return queryUnit(
+      return query.read(
           service, "Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup");
     }
 
     @Override
     public byte[] unitDeadline(Service service) throws IOException {
-      return queryUnit(service, "Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic");
+      return query.read(service, "Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic");
     }
 
-    private byte[] queryUnit(Service service, String fields) throws IOException {
+    private static byte[] queryUnit(
+        SystemctlStateSource.Start start, Service service, String fields) throws IOException {
       Process process =
           Objects.requireNonNull(
               start.execute(
