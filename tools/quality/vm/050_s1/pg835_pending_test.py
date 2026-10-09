@@ -31,6 +31,8 @@ class Test(unittest.TestCase):
         self.assertIn("PARENT='7ea672e8a76c4a4a8a7994652366a4cc'",snapshot)
         self.assertIn("v['ExecMainStartTimestampMonotonic']=='155954641282'",snapshot)
         self.assertIn("accepted(old,new,show(unit),baseline()['units'][unit])",snapshot)
+        self.assertIn("b'2a0d5aa392c85a1dc12a1cdb423978e8500895b8'",snapshot)
+        self.assertNotIn("b'102cdf1d365ab321f74b523237590eee764ae858'",snapshot)
         self.assertNotIn('e4093109ab234700b61dd45711126e4e',snapshot)
         self.assertNotIn('137240785885',snapshot)
         self.assertIn('/releases/0.1.0-PG832',refs)

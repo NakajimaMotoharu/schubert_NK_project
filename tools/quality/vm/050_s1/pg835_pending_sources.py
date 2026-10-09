@@ -28,6 +28,7 @@ def snapshot_library():
     raw=raw.replace("PARENT='e4093109ab234700b61dd45711126e4e'", "PARENT='7ea672e8a76c4a4a8a7994652366a4cc'")
     raw=raw.replace("v['ExecMainStartTimestampMonotonic']=='137240785885'", "v['ExecMainStartTimestampMonotonic']=='155954641282'")
     raw=raw.replace('accepted(old,new,show(unit),{})', "accepted(old,new,show(unit),baseline()['units'][unit])")
+    raw=raw.replace(repr(OLD_SOURCE),repr(SOURCE))
     ast.parse(raw);return raw
 def refs():
     raw=bind(old.refs()).replace("SOURCE='"+OLD_SOURCE+"'","SOURCE='"+SOURCE+"'")
