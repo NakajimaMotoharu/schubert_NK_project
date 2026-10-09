@@ -13,9 +13,9 @@ W = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 
 def recipe(raw):
     before_cp = next(line for line in raw.splitlines() if line.startswith('task_cp='))
-    for name in ('completed-tools', 'compile', 'oracle'):
+    for name, count in (('completed-tools', 1), ('compile', 1), ('oracle', 2)):
         old = 'pg685-' + name + '-v2'
-        assert raw.count(old) == 1
+        assert raw.count(old) == count
         raw = raw.replace(old, 'pg685-' + name + '-v4')
     assert next(line for line in raw.splitlines() if line.startswith('task_cp=')) == before_cp
     return raw
