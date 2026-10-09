@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC238/PT-OPS-DBLIVENESS797001～004：保持工具の同Connection/server現在所有を、固定backend/role/application/database/readOnly/advisoryと同threadへ束縛して確認する。正常wait/retainの各再確認、closed/null/異thread/各固定値差/SQL/Runtime/Errorを独立注入し、DB_NOT_CONFIRMEDへの一方向遷移・以降query/再取得0・正常close推定0を検査する。role60sを変更/解除せず、間隔内の長時間待機を実VMでread-onlyに確認、元parent1800sの変更も0。失敗scope隔離/正規handoffと新scope通常rollback/close/十Ref/FD/M-A/実DB/advisory0を別証跡で照合する。旧779143/喪失server0を新成功へ置換しない。工具試験はProduction PTへ加点0。
+
 SSC237/PT-OPS-COMPLETION790001～004：実完了orchestrationのCaddy/Web/API各before/after、API-held、DONE前後を手書きliteral順序へ照合する。各境界のpeer/row/seal/receipt・close/元budget失効とIOException/Runtime/Error、nullを独立に拒否し、後続退役とDONEを発行0。同owner-threadとTX内純owner/TX外全evidenceを維持する。fixed phase/failure分類/経過だけの診断を、秘密を含む例外message/stack不出力の反例で確認する。初期重複fullの除去はCaddyの本来before/after gateが両方実到達する試験を伴う。BUG927の旧143は失敗保持、現停止query測定を原因/合格へ読み替えず、変更source fresh選択/静的0/所定全回帰/実親真正DONE・owned停止・当nativeと正式四100は別に実証する。
 
 SSC236（2026-10-09）：343の現779保持toolだけ、PID/ticks/exe/argv/親子/同source hash・M/A実inode/OFD・十Ref/heldFD・serverbackend/advisory実0とobjectを独立照合する。全十kernel0/元42三intent/原本/全24-544/Backup/Transfer等二読→pidfd通常TERM各一回又は既終端skip→全旧子/FD/OFD/Ref/server消失・旧closeUNKNOWN維持→別freshDB/M-A/十Refで既INVALID既三intentだけtyped退役→39/全元値保持/新全scope通常返却を検査する。repeat callback二回/多回で診断書込0、最終一回receipt再作成拒否、各fault/foreign/PIDreuse/部分終端/close不明・readonlyheartbeat/同backend失活/未知を正常化しない観点を追加。schema/role timeoutを解除せず実60s lossを原因証拠へ残す。工具hostassertはProduction PTへ加点0、旧779/780/親143を新成功へ合算0。四counter100%/全scope同source/run/CHR/DIF/秘密trace・IT/ST別条件を維持。
