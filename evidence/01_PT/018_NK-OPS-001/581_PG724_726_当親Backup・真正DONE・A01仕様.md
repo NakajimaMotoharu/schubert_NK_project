@@ -1,5 +1,7 @@
 # PG724–726 当親Backup・真正DONE・A01
 
+PG726 actual0、12:26:38.403762～41.283879JST/source1ec/currentparentAPI-Web-Caddy前後一致。共有CurrentdriverでCHR-A01 PASS/HTTP200/title「schubert NK - ログイン」/承認DIF001のみ、baselineSHA df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993保持、csrf `<TOKEN>`/passwordValue空/秘密cookie非公開。成果物`program/characterization/reports/nk/PG726-native-a01-v1/artifacts/CHR-A01.json`。observer47840も実終了0/terminalObservedtrue/parentExit0-success/API-Web双方rootcaptured/CaddyTLS200。725初回は当sanitized成果物untrackedによるclean前提拒否、VM発行/新slot0、保存後独立Root/PID1検査へ進む。全CHR/正式/ITST合格ではない。
+
 PG734 owned-readonly診断actual0、12:18:01JST/operatorb95b0e54d/currentboot・PID1全tuple・startticks12754929・currentPG715を前後照合、業務変更/start-stop0。私有Thread.print SHA44ed090eeeb862b972bbc36b340df999e4dc694b1ec2ad6805c8620cfc6ac44d。mainはMorningPermitPublication.issue→MorningBackupRetention.recheck→DB.retainedBackupSuccessful→RootReleaseAdmission.verifyMorning→RootStartupContext.queryUnitの途中で、UNKNOWN保持frameではない。一回だけ診断・budget延長0、rawstack/stderrはW私有のみ。17分時点の進行観測はDONE認定でなく、性能は後続IT/STへ引継ぎ。
 
 PG724 actual0/operator ed69b199e：当55ac run/cutoff03:00:51.014287Z、元524全column保持＋新10=534・Backup二SUCCESS attempt6/他八SKIP attempt5・同parentgeneration、dump-list0・一retention削除・五protectedと旧六全byte不変更。snapshotSHA cc7d323bcbcfd31979e82f66f6810137bdec492bc98d9772e3546a2aff38b50d、W/pg724-retention-post-v1.safe.json/exit0。削除された旧91a bundleは721private98ff0d…から復元可。真正DONE/726実A01はまだ未受入。
