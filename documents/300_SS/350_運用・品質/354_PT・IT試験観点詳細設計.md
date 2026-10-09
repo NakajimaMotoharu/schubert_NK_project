@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+SSC240/RLOOK852001..005（SS343、BUG968/YKT737）：Productionと独立した固定anchor/begin/DONE bytes・historical SKIP時刻から、同Session pending参照→完全DONE/active退役→pending拒否→typedcompleted data-only参照を検査する。current SUCCESS/WARNINGの両正常、同run/別prior終了境界、observed未来/current cutoff/microsecond/上限/同JST日、unknown/別active/DONE tuple違い/全Graph二読競合/namespace/IO/Runtime/Error/異thread・失効・close/nullを検査する。current DONE終了<=historical SKIPを要求しない（時間の意味が異なる）。全元DB成功条件と同owner・budgetは維持し、原本/DB/permission書込0、独立例外identityとbyte/hash不変更をassertする。修正前は凍結2a/JAR/同sourceFixtureの実Sessionで旧拒否を再現する。新sourceの影響九suite/静的/所定全回帰→実真正親DONE_AFTER→ownedstop/nativeまで同source/run整合を維持、限定PTのみでglobal100/正式/ITST PASS0。
+
+SSC241/REC856001..004（SS343、QA047、当DONE後failed親）：固定9c08 failed143/完全DONE/全intent無し/8b153538ISSUEDと現832署名を独立oracleへ束縛する。別親・旧PID再利用・generation/argv/cgroup/UID/cap変化・current/BOM/原本/全24/Backup/Unitconfig・DBserver喪失/Ref/FD/M-A/close不明の拒否、逆順ownedstop/native/vendor、十kernel終端→同epoch canonical INVALIDの順序を検査。Pair生成/intent退役/旧成功補完は0。全新scope通常帰還、独立24table全列・原本DONE/Backup/Transfer/credential/config/Unitbyte・資源0/元failed不変を実VMで確認してからruntime841退役へ進む。未実行を合格に加算0、当2a停止nativeは後続新source正式coverageへ流用しない。
+
 ## SSC239 fixed fresh system-manager readerの独立PT（2026-10-09）
 
 SS343の固定full7/deadline4 fieldについて、公式systemd公開ABI/vtableから手書きinterface/type/byte oracleを作り、Productionからexpectedを生成しない。固定DBus request宛先/auto-start0/PID1/bus EUID0/unique owner前後、string NUL読取長/ASCII4096境界、uint32/64最大、Invocation長0/16/他長、NULL/欠落/未知field/型/異thread/interrupt/missing symbol/platform/library祖先uid-modeを検査する。native全呼出IO/Runtime/Error・取得途中fault・unref/arena close不明のcapability保持と次read拒否を独立stateful fixtureで確認する。

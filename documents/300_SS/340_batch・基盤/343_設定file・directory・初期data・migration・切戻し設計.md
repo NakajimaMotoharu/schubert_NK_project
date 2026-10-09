@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC240（2026-10-10、BUG968/YKT737、SSC200/203のDONE後data-only参照補足）：同Root/Session/threadのconfirmed completionがあるOriginalProofは、pending参照能力へ戻さずtyped completed参照へ分岐する。active/pending空・current run anchor/activation begin/完全DONE全tuple一致と全Graph二読を必須とし、正規SUCCESS(0)とWARNING(10)を維持する。historical SKIP observedはcurrent DONE終了より前でも正常で、参照する別prior runの終了<=observed、同JST日、observed>=current cutoff・microsecond・上限、未知run/別active/Graph・namespace変化/owner-thread-lifetime-budget失効の拒否は維持する。これは読取データの根拠であり新DB/起動/原本変更権限ではない。complete不明をpendingへ戻す・active再作成・DONE書換・観測clockで過去SKIPを書換0。DONE_AFTERのDB成功参照もこの同じtyped経路を使う。DB側のprior成功条件は別に維持し、current全体をSUCCESSだけへ狭めない。
+
+SSC241（2026-10-10、SSC179/211/235の当DONE後timeout限定）：当Production2a/PG832/BOM8bcb/schema028/bootcc9の親9c08/3417355が元1800sでtimeout/1/143、親kernel空・PID不存在であり、原本9de2/021111完全DONE・active/pending無し・全start intent無し、ISSUED epoch8b153538である場合の別new-only復旧入口を定義する。新連続M→A→専用batchDB/advisory＋readonly schemaの実生存→十Refと保持dirFD→署名full187/28SQL29history・全24/原本DONE/Backup/Transfer/native/config/Unitbyteと現在四actor generation/PID/ticks/argv/権限/cgroup二読を先行する。同世代Caddy→Web→API→残保守→Artemisの正規owned停止・native/vendor witness・十kernel空後だけ同epoch canonical INVALIDを正規revokeで公開、permit/owner/launch/全履歴原値は不変更。intent無しは復元/Pair生成/退役加算しない。新scope全正常帰還と独立全原値/資源0確認後にruntime841を正規退役する。旧親143/UNKNOWNを成功化せず、元DONEを書換/消去/同run再resumeして真正成功を作らない。後続は品質確定した当source署名code-onlyと別fresh通常run・元30分真正DONE/ownedstop/nativeである。unknown・半停止・close不明は新所有を隔離保持し次操作を拒否、RD/UI/DIF/期限変更0。
+
 ## SSC239 fresh system-manager読取transport（2026-10-09、QA047内部補足）
 
 RootStartupContextの固定Unit照会は、同owner-threadのJava25 FFM/libsystemd公開sd-bus ABIによる固定ローカルreadだけへ置換する。GNU/Linux LP64のamd64/x86_64/aarch64を明示し、固定`/usr/lib/<対応arch>/libsystemd.so.0`のrealpath及び全祖先uid0/non-group-other-writeを検証する。immutable ABI MethodHandle以外の返信/owner/許可はcacheしない。環境bus/library指定、user/remote bus、process運用fallback、新権限付与は不可。
