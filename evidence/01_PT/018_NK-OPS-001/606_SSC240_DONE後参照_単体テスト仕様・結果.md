@@ -1,5 +1,9 @@
 # 606 SSC240 DONE後参照：単体テスト仕様・限定結果
 
+## 全六host資格（2026-10-10、正式受入ではない）
+
+Sourcee01612fcd7f2752df5ae0836b78538fd5e87f120、PG857-command `python3 -B tools/quality/vm/050_s1/pg857_completed_reference_full.py`、actual0/1081.424303s。PG858独立command `python3 -B tools/quality/vm/050_s1/pg858_completed_reference_collect.py` actual0、全3541PT/522suite/1632main、FESflakyNotRun0、静的6module0・formatter0・NullAway compile0。全source/run XML/session/JAR/sourceguardを照合、全計数は新fullrunのみ（旧305a98PTは診断/byte参照）。manifestSHAfcc7df91f91af8867e2c911fd54e7a834c6d3ef313fc028be0d8c9f417e0d6c6、私有PG379/pg857-completed-reference-six-host-v1。hostmissL3818/M631/C40/B1135、global100未達。旧2a/830との差は+7PT、三Source family既class15byte差/追加削除0。scopeGenuine/newnative/実ALREADY再試験は未了でBUG968/YKT737未閉鎖、正式24-1964-53/ITSTは更新0。
+
 対象=NK-OPS-001 / MaintenanceRunFiles.Session.successReferenceRun/completedSuccessReferenceRun、MorningNewRunAdmission.OriginalProof.referenceRun、MorningResumeAdmissionの同Session adapter。関連NK-OPS-001/009、UI251、SS341/343/354、SSC200/203/240、QA047、BUG968/YKT737。Production配置はsrc配下のみ、characterization基準不変更。
 
 |Test ID|目的・入力/操作・fixture|独立期待値/根拠|
