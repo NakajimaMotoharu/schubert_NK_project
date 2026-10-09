@@ -1,5 +1,7 @@
 # PG690/691 currentPG682 ordinary親
 
+実operator603d99f1fe1ce8d4ee0c1733750972f06db4e589、prepare0/09:42:53～55JST/封印before c2a125086080538d44a434dd3313999d45d075a7debab2f103e984908707d982。observerstage0→watchsession68090（新immutable3/firstrecord9bd-076f一致）→durable一回start0/09:43:08～09JST、親2146618/INV6b3dd954959c43c1bbac2164ec9d0c6b/job122726/startmono119288459330。session46140/35959は終了0、watch稼働・元1800s（deadline121088459330µs）維持。source9bd/PG682、生存/ready/親成功は動的で別採取する。外startclient0は真正親DONE0、旧601起動/退役/停止再発行0、元namespace/原本保全と新native-beforeRootcopy保持。
+
 NK-OPS-001/SS342343354/SSC233/451、N15.02/event0171着手前.83/2/4.17pp。Production9bd/PG682076f/hostPG6803489-516/static6zero、配備PG685～687全21限定成功に接続する。当親は旧601DONEをresumeしない。新ordinary noargs admissionが新run/activation/cutoff/permitを正規発行、元各Unit期限と独立親1800sを保持し、実Root/API-Web-Caddy/genuineDONEを閉じる。APIready/clientexit0だけでは親合格0。
 
 FRESH690001：全七Backup34file私有保全（PG689 c72706889deac3eb707517654472c41874dadd31296a25cd9e1ffcd828507fe5/81489920byte/12dir47entry/readonly0）を固定、Root685after f69b52ee…全DB514を再照合。現INVALID601/ad15/同bootを確認、当日履歴32=prior成功10+mid成功2/skip10+last成功2/skip8を独立literalfixtureと全row異常/欠落で確認。保持期限7→8→7はmanifest/DB成功pairから選び、旧最古一件20261006-172236…だけが対象・五protected不変。Actual後条件は別収集、事前selectorだけでdelete合格0。
