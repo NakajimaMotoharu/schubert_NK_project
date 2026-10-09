@@ -1,8 +1,15 @@
 """Independent phase/source/baseline/directory/whole bundle guard before compile or VM."""
 import ast
 import unittest
+from pathlib import Path
 import pg835_pending_sources as p
 class Test(unittest.TestCase):
+    def test_direct_entrypoints_are_unique_before_any_dispatch(self):
+        directory=Path(__file__).resolve().parent
+        for name in ('pg835_pending_native.py','pg835_candidate_place.py','pg835_pending_compile.py'):
+            tree=ast.parse((directory/name).read_text())
+            mains=[n for n in tree.body if isinstance(n,ast.If)and '__name__'in ast.unparse(n.test)]
+            self.assertEqual(1,len(mains),name)
     def test_before_after_sources_and_full_current_baseline(self):
         java=p.java();snapshot=p.snapshot_library();refs=p.refs();guard=p.before_freeze()
         for raw in (snapshot,refs,guard):ast.parse(raw)

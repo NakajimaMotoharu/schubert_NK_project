@@ -71,6 +71,3 @@ print('PG835_IMMUTABLE_STAGE filesVerified=true startStopRevoke0=true')
 
 
 if __name__=='__main__':main()
-
-if __name__=='__main__':
-    main()
