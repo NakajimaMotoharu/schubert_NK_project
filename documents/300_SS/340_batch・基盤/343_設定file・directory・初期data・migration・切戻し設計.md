@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC233 現completed原値21・所有変更群のcode-only再束縛（2026-10-09）
+
+SSC227のcompleted code-only有限deltaを、別new-only固定profileで現物へ適用する。current36fe7a0b938489d61d17d49c1c30a6fbbef699d5/release0.1.0-PG631/BOM57a5355d7d0c6a3af7ff2ec619eacee20ee9236916de25e02b95953ffa6aa2fe/schema028/bootcc9ed874-7f4f-450e-a188-8de1e42c8441。現run601297d0-a8ba-47da-852b-0ffeae409965/cutoff2026-10-08T21:33:23.332578Z/activationad15ac4a-8d8e-4970-bcb3-2e000050ce77の真正PID1 INV095f6d1d7f8442b7b2b44ae59a4314f5/job111752/start107901545407/end109694780700/DONE1793.235293s・原本ended2026-10-08T22:03:10.738020Z、PG655正常ownedSTOPを保持する。PG664 existingADMIN20/当actor2142585-ticks11164505/INV65bfe1da3b9e454997f1d899fea9510e/job119175/元30秒内1.593351s・新二input同inode-byte私有退役とPG665全20正常を別履歴として保持する。旧成功を新候補の受入へ流用しない。
+
+PG684v2はRootreadonly/十Refの現全21二読を別newonlyに保存、seal c039e70561fd7e5bab3ecf5ce204462d8415f4022d13793711c338a64d2f663d。旧20項へcurrent664 immutable tools/verify/execute私有原byteを加え、全24表514batch行・十主要/設定/依存・署名18source/runtime空/四namespace・startup/原本/Backup/credentials/native/currentapproval・旧停止/旧Bootstrapproof-tool・親PID1を保全する。GCは既sealednormal20と五idle項/宣言ExecStart補助履歴だけのSSC217で照合し、GCから20成功や正常closeを逆算しない。private input/DB/master/execをGitへ保存しない。readonlysealは操作権限でなく、新連続scopeで原値を再照合する。
+
+新candidateはsource9bd50536f692610036a0ed8b83e0a8b35fe2a66f/PG680-681 fresh3489PT516suite/static6zero/main1612、release0.1.0-PG682/BOM076fbb16c96eecc0357cbc41b4c081c9cb9d652ea6da94d67625ac7623e5d480/署名187artifact/schema028/SQL28/history29。API既3class＋MaintenanceOwnerFrame/既Guard/Parent3byte・内部abstract7が閉差分で、既Guard/Parent executableは独立javap一致。全非JAR/DDL/設定/Unit/依存GAV/外部仕様は同byte、JARは当freshsource全byte資格を要する。
+
+別newonly verify/activate毎に、新M→A→old同pin署名/current/observeStartup完全DONE→専用readonly schubert_batch DB/71419602Exclusive/固定tag→本人owner/samepeer→十Refと保持namespace-dirFD/全21二読→unusedcandidate hostRO/同pin型付BOM187/schema028→有限deltaと全原値二読→DBrollback-close/peer-advisory0/Ref-bus-dirFD/A/M正常→completeを維持する。verifyは全原値不変更。activateは同boot/run/cutoff/activationの新UUIDv4INVALID epoch・Root0400approvalVersionPG682/BOM076f・current symlinkだけを原子的公開し、旧ISSUED原byte/metadata/permit/owner/launch/DONE・全DB/Backup/privateproof/nativeを保持する。startup親directoryの正規size/mtime/ctimeとepochの新inode以外は変化を許さない。newpermit/start/stop/reload/DDL/migration/DBwrite/原本修復0。新DB/Ref/bus/FD/A/M帰還又は全後条件が未知なら隔離/所有保持、旧UNKNOWN正常化0・同slot再実行0。正常後だけ別fresh通常親/同RootordinaryAPI-Web-Caddy/元30分/owned逆順停止/同source nativeへ進む。新global100/CHR/正式/ITSTは別gate。
+
 ## SSC232 当PG662 verifyのimport前失敗・固定Java限定回収（2026-10-09）
 
 SSC202/221/224/226の工具起動前error-only限定回収を当保存profileへ固定する。current36fe/PG631/BOM57a/schema028/bootcc9、601-ad15真正DONE・PG655正常ownedSTOP・PG661全20/24表514不変更。PG662source152c262f1 immutable11payloadの参照子はpg556_parent_receipt推移import欠落でmain前exit1、SAVEはrefs-prepare.private.logだけ/SHA c1935ed537f31f678be275164c100acc7db979986bf47cd0688d0ec363b0d761、before/Ref/credential/start未発行、旧scopeUNKNOWN。固定RootJava2141065/ticks11112630/argvSHA4406b878234be0e15d15334e7238c029f27ebd0e8a85a63624546608d67c6367、exe/opt/jdk-25.0.4/bin/java・parent sudo2141063（TERM対象外）・全task子0/実M-A inodeFD-FLOCK/他owner0・全peer/advisory0を現在再認証する。
