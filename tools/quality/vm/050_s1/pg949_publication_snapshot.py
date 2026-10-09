@@ -12,7 +12,7 @@ def payload(mode):
     raw=ast.unparse(ast.fix_missing_locations(tree))+'\n'
     if mode=='after':
         start=raw.index('approval_root =');end=raw.index('from pg944_parent_receipt import completed',start)
-        replacement="before_path=pathlib.Path('/var/lib/pgpt-s1-preservation/pg949-publication-before-v1/after.private.json')\nsaved=json.loads(before_path.read_bytes())\nbaseline['trees']=saved['comparison']['trees']\n"
+        replacement="before_path=pathlib.Path('/var/lib/pgpt-s1-preservation/pg949-publication-before-v1/after.private.json')\ns=before_path.lstat();assert stat.S_ISREG(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode),s.st_nlink)==(0,0,0o600,1)and not os.listxattr(before_path)\nbefore_raw=before_path.read_bytes();assert before_path.lstat()==s and hashlib.sha256(before_raw).hexdigest()=='88fe076a608f8877b54bd9e250c5684fa7117667fbd952f46871382550e47d22'\nsaved=json.loads(before_raw)\nbaseline['trees']=saved['comparison']['trees']\n"
         raw=raw[:start]+replacement+raw[end:]
         marker='assert current.readlink() == old';assert raw.count(marker)==1;raw=raw.replace(marker,"assert current.readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG932')")
         raw+="SAVE=pathlib.Path('/var/lib/pgpt-s1-preservation/pg942-activate-v1');phase='after';expected_epoch=expected()\n"
