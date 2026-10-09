@@ -19,7 +19,7 @@ def source(mode):
 if __name__=='__main__':
     mode=sys.argv[1];assert mode in('compile','stage','activate')
     if mode=='compile':
-        old=profile.java;profile.java=lambda:java(old())
+        old=profile.java;profile.java=lambda old=old:java(old())
         for name in ('refs','before_freeze'):
             old=getattr(profile,name);setattr(profile,name,lambda old=old:bind(old()))
     exec(compile(source(mode),'<835 corrected candidate source v3>', 'exec'),{'__file__':str(R/'pg835_pending_v3.py'),'__name__':'__main__'})
