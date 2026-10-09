@@ -19,7 +19,7 @@ PAIRS=(('Pg779FailedRecovery','Pg813FailedRecovery'),('pg779','pg813'),('PG779',
  ('2841798','3158873'),('47c9e398cfc043dfa7504bedbe486269','cb2f7a6c4beb4420a0e96adb65fb6f11'),('13746502','15613132'))
 def bind(raw):
  for old,new in PAIRS:raw=raw.replace(old,new)
- return raw
+ return raw.replace('pg813-failed758-tools-v1','pg813-failed949-tools-v2').replace('pg813-failed758-recovery-v1','pg813-failed949-recovery-v2')
 NAMES=r'''  static Set<String> names(){
     var n=new HashSet<String>();n.add("epoch.current");
     for(String epoch:List.of("3c5cdcc5-204c-40fd-a731-996c6cd859e8","41691d5c-68c5-40c9-9bcc-899ce341df6b","538fe967-f9cb-4770-a03c-9bab715d0fdc","a3fd90d9-7470-4695-9ee8-c818fe19e42d","a46f1379-6025-4850-9930-658a72b0fa70","c84f3015-5f29-4844-868b-57de02b1b3fc","e45cbbc0-3eea-4b3b-bd00-2bb39e3ecc19","f5a2d1aa-3879-4f21-8e48-cfb40e48b677","e9f11f1c-f087-458a-aad0-8c1e4e140571",EPOCH))
@@ -83,7 +83,7 @@ def helper():
  ast.parse(raw);return raw
 
 def java_test():
- raw=bind((R/'Pg778FailedRecoveryTest.java').read_text())
+ raw=bind(prior.bind((R/'Pg778FailedRecoveryTest.java').read_text()))
  raw=raw.replace('names().size()==41&&Pg813FailedRecovery.retiredNames().size()==39','names().size()==44&&Pg813FailedRecovery.retiredNames().size()==43')
  raw=raw.replace('"e9f11f1c-f087-458a-aad0-8c1e4e140571"))','"e9f11f1c-f087-458a-aad0-8c1e4e140571","0eece14c-f832-47c2-b7dd-14125682e7ea"))')
  raw=raw.replace('expected.add("e9f11f1c-f087-458a-aad0-8c1e4e140571.API.start.intent");expected.add("e9f11f1c-f087-458a-aad0-8c1e4e140571.WEB.start.intent");','expected.add("0eece14c-f832-47c2-b7dd-14125682e7ea.API.start.intent");')

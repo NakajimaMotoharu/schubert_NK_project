@@ -31,5 +31,16 @@ class RecoveryContract(unittest.TestCase):
   self.assertIn('while(!process.waitFor(250',raw);self.assertIn('pulse();',raw)
   self.assertIn('RootFailedStartRecovery.quarantinePair',raw);self.assertIn('RootFailedStartRecovery.retirePair',raw)
   self.assertNotIn('PG750',raw);self.assertIn('rows()==554',raw)
+ def test_actual_generated_namespaces_and_separate_v2(self):
+  from pg813_compile import source as compiler
+  from pg813_native import source as transport
+  test=p.java_test()
+  self.assertIn('public final class Pg813FailedRecoveryTest',test)
+  self.assertNotIn('Pg778',test);self.assertNotIn('Pg779',test)
+  self.assertIn('names().size()==44',test);self.assertIn('retiredNames().size()==43',test)
+  for raw in(compiler(),transport()):
+   ast.parse(raw);self.assertIn('pg813-failed949-tools-v2',raw);self.assertNotIn('pg813-frozen-v1',raw)
+  self.assertIn('pg813-frozen-v2.safe.json',compiler());self.assertIn('pg813-stage-v2.exit',transport())
+  self.assertIn('pg813-failed949-recovery-v2',p.java());self.assertIn('pg813-failed949-recovery-v2',p.helper())
 
 if __name__=='__main__':unittest.main()
