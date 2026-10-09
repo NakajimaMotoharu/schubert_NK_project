@@ -2,6 +2,8 @@
 from pg778_sources import java as prior_java,helper as prior_helper
 from pg778_sources import SOURCE as SOURCE,DIGEST as DIGEST
 
+__all__=('SOURCE','DIGEST','bind','java','helper')
+
 
 def bind(raw):return raw.replace('Pg778FailedRecovery','Pg779FailedRecovery').replace('pg778','pg779').replace('PG778','PG779')
 
