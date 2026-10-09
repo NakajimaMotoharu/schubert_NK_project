@@ -1,5 +1,11 @@
 # InspectorUnitSnapshot残条件の独立追加試験
 
+## 実測結果（2026-10-10 06:44JST、限定閉鎖・工程認定ではない）
+
+PG915 source4ebf34debdda9c655717af8acae09b571efd8133、06:25:25.961～06:43:43.317JST、実1097.355527秒/終了0。PG916独立source/blob/JAR/session/XML/静的資格0、全3550PT/523suite/1632main/FESFlakyNotRun0/static六0・NullAwayqualified compile0・format0。対象Snapshotは206/206line、31/31method、1/1class、320/320branchで全100%。PG857の同classは208/212L・30/31M・306/328B、missed22のうち論理同値削除したfalse四分岐と新たに試験した十八分岐を区別（total8arm削除/covered4削除、covered差+14）。coverage除外0・golden期待値変更0。BUG996997/YKT765766は工具/fixture原因のみ完了、旧v1未実行1/v2F1/912install1は保持。
+
+全体host残3814L630M40C1113Bなのでglobal100/正式は未完。新候補未配備、旧e016/20nativeを新sourceへ合算0。公開sanitized `evidence/provisional/PG911-916-snapshot-host-v1/manifest.json` に全module XML/hash/source/run/command/OS/tool/actualと各selected別source別件数を保持。rawログ/XML/JAR/execはprivate WorkPG379/pg915-snapshot-six-host-v1（hashで一意）、manifest hashは公開に保存、rawcredential/token/native/sessionの公開0。WBS-P00404全24artifact・終了依存の受入ではなく、この一class四counterと独立PTの限定閉鎖である。旧開始予定/未実行の記述は以下の履歴として保持。
+
 ## 追加同値oracle（PG-D407、実装前定義）
 
 PT-SNAPSHOT-911007: ActiveState={inactive,active,failed,unknown-state}、SubState={dead,exited,failed,running,unknown-substate}、Result={success,exit-code,unknown-result}の60組を各Backup/Cleanup/Expiry/Artemisへ入力。Job/PID0、INV固定新規、Code1/start100/end200、StatusはBackup70/Cleanup・Expiry30/Artemis143。独立quiescent式は状態対がinactive/dead又はactive/exited又はfailed/failed。Backupの期待FAILEDはfailed/failed＋exit-code、それ以外empty。Cleanup/Expiry既知拒否はfailed/failed＋exit-code、Artemis旧normalstopはinactive/dead＋success又はfailed/failed＋exit-code。他の合法tokenはこの列のunknownと同値（比較対象literal以外に影響する述語0）。parseのslash-free grammarにより状態対分解は一意。quiescent=falseならいずれもreject。四重複条件の削除前後で全結果同値であり、kernel/所有認定を含まない。
