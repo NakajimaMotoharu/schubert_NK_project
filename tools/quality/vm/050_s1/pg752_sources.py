@@ -33,7 +33,12 @@ def bind(raw):
         ("('pg664-bootstrap-tools-v1','pg664-bootstrap-verify-v1','pg664-bootstrap-existing-v1','pg702-bootstrap-tools-v1','pg702-bootstrap-verify-v1','pg702-bootstrap-existing-v1')",
          "('pg664-bootstrap-tools-v1','pg664-bootstrap-verify-v1','pg664-bootstrap-existing-v1','pg702-bootstrap-tools-v1','pg702-bootstrap-verify-v1','pg702-bootstrap-existing-v1','pg737-bootstrap-tools-v1','pg737-bootstrap-verify-v1','pg737-bootstrap-existing-v1')"),
     )
-    return replace(raw,tuple((a,b)for a,b in pairs if a in raw))
+    # BUG926: restoration markers are created by prior pairs, never filter on initial raw.
+    for old,new in pairs:
+        if old in raw:raw=raw.replace(old,new)
+    for marker in ('NEXT_RELEASE_752','NEXT_SOURCE_752','NEXT_BOM_752'):
+        if marker in raw:raise ValueError('unrestored candidate binding')
+    return raw.replace('pg752-completed-tools-v1','pg752-completed-tools-v2')
 
 
 def java():return bind(previous.java())
