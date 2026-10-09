@@ -1,5 +1,6 @@
 """SSC233 independent legacy oracle retargeted to literal current cohort; no VM action."""
 import ast
+import builtins
 import sys
 import types
 import unittest
@@ -55,6 +56,29 @@ class CurrentGraphTest(unittest.TestCase):
         self.assertIn('phase="DATABASE_CLOSE";database.rollback();database.close();phase="REFERENCE_CLOSE";refs.release()', java)
         self.assertNotIn('PG600', java); self.assertNotIn('PG621', java)
         self.assertIn(p.SOURCE, java); self.assertIn(p.DIGEST, java)
+
+    def test_actual_nonroot_import_graph_and_each_missing_helper(self):
+        # HOST-only import stub, never part of a VM tool bundle or startup authority.
+        previous = sys.modules.get('dbus'); original_import = builtins.__import__
+        sys.modules['dbus'] = types.ModuleType('dbus')
+        try:
+            module('pg685_completed_contract', p.contract())
+            normal = {'__name__': 'no_vm_operation', '__file__': str(R/'pg685_completed_refs.py')}
+            exec(compile(p.refs(), '<nonroot exact imports>', 'exec'), normal)
+            self.assertTrue(callable(normal['main']))
+            self.assertEqual('/opt/schubert-nk/releases/0.1.0-PG631', normal['OLD'])
+            for missing in ('pg685_completed_contract', 'pg604_unit_sources'):
+                def guarded(name, globals=None, locals=None, fromlist=(), level=0):
+                    if name == missing:
+                        raise ModuleNotFoundError('missing required helper')
+                    return original_import(name, globals, locals, fromlist, level)
+                env = {'__name__': 'missing_dependency_no_vm', '__file__': normal['__file__'],
+                       '__builtins__': {**vars(builtins), '__import__': guarded}}
+                with self.subTest(missing=missing), self.assertRaises(ModuleNotFoundError):
+                    exec(compile(p.refs(), '<one-helper missing>', 'exec'), env)
+        finally:
+            if previous is None: sys.modules.pop('dbus', None)
+            else: sys.modules['dbus'] = previous
 
 
 if __name__ == '__main__':

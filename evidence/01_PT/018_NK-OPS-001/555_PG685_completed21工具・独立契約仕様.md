@@ -1,5 +1,7 @@
 # PG685 completed21工具・独立契約
 
+初稿compile-v1/operator33d139bca＋未commit新工具はJavaCLI先頭quote欠落でshell2(BUG920YKT689)、javac三class/graphだけ正常・CLI未実行、全群認定0。旧script SHA de317c314afcbdb0f8b48b9a4c015a8d0f25821c712f71828b4a51f710d79368 はW/pg685_compile_v1.failed.shへ私有原byte保全、未commit失敗草稿だけworktreeから除去・履歴/証跡消去0。newv2 `bash -n ... && bash ...`でactual0/Werror0/JavaCLI条件20正常、W/pg685-completed-tools-v2/compile-v2/oracle-v2を保全。以後追加したhost推移import正常＋required二helper各欠落拒否はVM操作なく実行、stubdbusはhostonly/配備0。
+
 NK-OPS-001/SSC233/SS342343354/451、WBS-N15.06接続支援（開始0167見積.84/2/4.16pp継承、親子重複費0）。PG685は旧624を直接実行せず、当601/ad15/095-job111752/元107901545407→109694780700/DONE22:03:10.738020Zと現36fe/PG631/21seal c039e705…・新9bd/PG682/BOM076fbb16…へ新onlysourceを固定する。
 
 PT-OPS-CODE685001：独立旧oracleのhandliteralを現UUID/time/BOMへ再束縛し、READY-before/after-release、同run/cutoff/activation新INVALIDUUIDv4・旧原値/namespace/currentBootstrapProofs含む21完全保持、単独未知/型/null/NaN/許可外file-inode-mode-hash/旧permit変異を全拒否（内4case、外3graphcaseに内数）。002 refs AST/全globals/全21字段・現sealed原値・真正PID1と同namespaceを確認。003 receipt/Java old-source/current-candidate/source/schema/DB-close→Ref-close順をliteral検査。初稿の内test数3→実4、oldactivation prefix negativeが現positiveへ作用しない誤fixtureはTDD内で是正（実工具/業務発行0、成功認定前）。Production期待/契約変更0。
