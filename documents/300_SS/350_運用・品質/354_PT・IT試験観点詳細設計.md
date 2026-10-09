@@ -1,5 +1,13 @@
 # PT・IT試験観点詳細設計
 
+## SSC239 fixed fresh system-manager readerの独立PT（2026-10-09）
+
+SS343の固定full7/deadline4 fieldについて、公式systemd公開ABI/vtableから手書きinterface/type/byte oracleを作り、Productionからexpectedを生成しない。固定DBus request宛先/auto-start0/PID1/bus EUID0/unique owner前後、string NUL読取長/ASCII4096境界、uint32/64最大、Invocation長0/16/他長、NULL/欠落/未知field/型/異thread/interrupt/missing symbol/platform/library祖先uid-modeを検査する。native全呼出IO/Runtime/Error・取得途中fault・unref/arena close不明のcapability保持と次read拒否を独立stateful fixtureで確認する。
+
+仮想元時計で接続認証/Hello待ち、連続複数RPC、引数準備後/timeout setter直後の期限切れを注入し、5秒全体・残1µs境界・次RPC0・期限renew0・通常closeと不明closeの区別を検証する。実259.5の同source未配備jarを停止中隔離VMでsystemctl before→native→systemctl afterへ比較し、固定全field/owner/回数/経過/FD/子processと全十Unit不変を記録する。property値やraw private credentialを公開logへ出さない。
+
+各fieldの型と全分岐/例外/nullを451四counter100へ含める。固定security pathのEXACT理由付けをPT仕様と静的記録へ対応させ、coverage除外やanalysis全域抑制をしない。限定比較/少数PT/ホスト静的0から全体品質・旧timeout解決を逆算しない。新source所定全回帰/同source native・真正親DONE/owned停止、CHR/DIF/global/formalは別受入。IT/STの負荷中性能・本番Linux検証へ引き継ぎ、PG/PT結果でIT/ST合格を宣言しない。
+
 SSC238/PT-OPS-DBLIVENESS797001～004：保持工具の同Connection/server現在所有を、固定backend/role/application/database/readOnly/advisoryと同threadへ束縛して確認する。正常wait/retainの各再確認、closed/null/異thread/各固定値差/SQL/Runtime/Errorを独立注入し、DB_NOT_CONFIRMEDへの一方向遷移・以降query/再取得0・正常close推定0を検査する。role60sを変更/解除せず、間隔内の長時間待機を実VMでread-onlyに確認、元parent1800sの変更も0。失敗scope隔離/正規handoffと新scope通常rollback/close/十Ref/FD/M-A/実DB/advisory0を別証跡で照合する。旧779143/喪失server0を新成功へ置換しない。工具試験はProduction PTへ加点0。
 
 SSC237/PT-OPS-COMPLETION790001～004：実完了orchestrationのCaddy/Web/API各before/after、API-held、DONE前後を手書きliteral順序へ照合する。各境界のpeer/row/seal/receipt・close/元budget失効とIOException/Runtime/Error、nullを独立に拒否し、後続退役とDONEを発行0。同owner-threadとTX内純owner/TX外全evidenceを維持する。fixed phase/failure分類/経過だけの診断を、秘密を含む例外message/stack不出力の反例で確認する。初期重複fullの除去はCaddyの本来before/after gateが両方実到達する試験を伴う。BUG927の旧143は失敗保持、現停止query測定を原因/合格へ読み替えず、変更source fresh選択/静的0/所定全回帰/実親真正DONE・owned停止・当nativeと正式四100は別に実証する。
