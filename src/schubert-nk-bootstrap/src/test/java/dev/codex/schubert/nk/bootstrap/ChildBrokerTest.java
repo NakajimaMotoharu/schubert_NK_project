@@ -37,7 +37,7 @@ final class ChildBrokerTest {
     String state = "S";
     long rootUid = 0;
     boolean managerDrift, kernelDrift;
-    int reads, ticks;
+    int reads, ticks, kernelReads;
     final List<byte[]> owned = new ArrayList<>();
 
     public long pid() {
@@ -53,10 +53,12 @@ final class ChildBrokerTest {
     }
 
     public byte[] boot() {
+      kernelReads++;
       return bytes(boot);
     }
 
     public byte[] stat(long pid) {
+      kernelReads++;
       assertEquals(43, pid);
       return bytes(
           "43 (vendor java) "
@@ -68,10 +70,12 @@ final class ChildBrokerTest {
     }
 
     public byte[] status(long pid) {
+      kernelReads++;
       return bytes(status);
     }
 
     public byte[] cgroup(long pid) {
+      kernelReads++;
       return bytes(cgroup);
     }
 
@@ -80,6 +84,30 @@ final class ChildBrokerTest {
           bytes(managerDrift && reads++ > 0 ? manager.replace(INV, "8".repeat(32)) : manager);
       owned.add(b);
       return b;
+    }
+  }
+
+  @Test
+  void common922002MalformedInvocationRejectsBeforeBrokerOrCaddyObservation() {
+    for (String invocation :
+        List.of(
+            "",
+            "0".repeat(32),
+            "A".repeat(32),
+            "7".repeat(31),
+            "11111111-1111-4111-8111-111111111111")) {
+      var broker = new Fixture();
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(broker).verifyBroker(BOOT, invocation, FIXED));
+      assertTrue(broker.owned.isEmpty(), "No manager observation for invalid broker invocation");
+      assertEquals(0, broker.kernelReads);
+      var caddy = new ChildCaddyTest.Fixture();
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(caddy).verifyCaddy(BOOT, invocation, FIXED));
+      assertTrue(caddy.owned.isEmpty(), "No manager observation for invalid caddy invocation");
+      assertEquals(0, caddy.kernelReads);
     }
   }
 

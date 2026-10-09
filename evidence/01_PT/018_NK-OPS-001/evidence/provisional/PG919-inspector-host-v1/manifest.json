@@ -1,0 +1,156 @@
+{
+  "program": "NK-DAT-001/NK-OPS-001",
+  "wbsLeaf": "WBS-P004-04",
+  "testIds": [
+    "PT-INSPECTOR-919001",
+    "PT-INSPECTOR-919002",
+    "PT-INSPECTOR-919003",
+    "PT-INSPECTOR-919004"
+  ],
+  "source": "ca0e03feeae55d7c32663ab32894cdf596f8ba8a",
+  "productionMainByteReference": "4ebf34debdda9c655717af8acae09b571efd8133",
+  "installedVmSource": "e01612fcd7f2752df5ae0836b78538fd5e87f120",
+  "branch": "dev-foundation",
+  "startedUTC": "2026-10-09T21:49:30.748331+00:00",
+  "endedUTC": "2026-10-09T21:50:03.803493+00:00",
+  "command": [
+    "./mvnw",
+    "-o",
+    "--no-transfer-progress",
+    "-Dstyle.color=never",
+    "-Djansi.force=false",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "src/schubert-nk-batch",
+    "spotless:check",
+    "test-compile",
+    "test",
+    "spotbugs:check",
+    "jacoco:report",
+    "jar:jar",
+    "-Dtest=InspectorEnvironmentFilesTest,InspectorEnvironmentPublisherTest,InspectorEnvironmentReaderTest,BrokerJournalQueryTest,InspectorUnitProbeTest,InspectorHeldStateContractTest,InspectorUnitSnapshotTest,ArtemisUnitSnapshotTest",
+    "-Dsurefire.failIfNoSpecifiedTests=false"
+  ],
+  "environment": {
+    "OS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4",
+    "NullAway": "0.14.1"
+  },
+  "actualExit": 0,
+  "tests": 66,
+  "suites": 8,
+  "FESFlakyNotRun": 0,
+  "staticIssues": 0,
+  "runManifestSha256": "d22319c2e695bdcdbe39dbf3e4e6088224b29f7ceba8b350c7de413b56b3d5d8",
+  "privateLogSha256": "a6234c19a7fbae9601de5b6dc730adff8c8cf99d69caa9f2dcbe0e5f9e2a448f",
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisherTest.xml": "6145243fd4e2aa663367a438129ba2419f2e8c691cf176151e24b70c19c554e4",
+    "TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest.xml": "4869a89bfa83efe11d9b8dadf66f75f841710f72ae32e364625ab127a2195a78",
+    "TEST-dev.codex.schubert.nk.batch.platform.InspectorHeldStateContractTest.xml": "4c5d68ba2f223ec867da6fde926b5d860a78b70d73dbd0fa40a9b3e0e3623d08",
+    "TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentReaderTest.xml": "4294b1b866cc8099578f84641d904e3d139010c5cf8fb8451d78183da3fa81f6",
+    "TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalQueryTest.xml": "65b312fe2ac3c1ab0680b7880d22695ea7d5e618238f25f6eddccb5953a014f4",
+    "TEST-dev.codex.schubert.nk.batch.platform.ArtemisUnitSnapshotTest.xml": "086bcc1947c7cac9f573235ccfdf8d30a6e0697b0dd5497a8dccb7912811222d",
+    "TEST-dev.codex.schubert.nk.batch.file.InspectorEnvironmentFilesTest.xml": "a781117ff959e9b0d38219465a53bbf6579d1730dbde1cd4033f9f251573ff24",
+    "TEST-dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.xml": "b6ee914cd9b288210203a77967c58209a731a826db32dbfff86b9ab4c4f69fd2"
+  },
+  "coverageSha256": "b1828752e0e3fd19c01cfa5b65699173aae048bd9730f14f6eed14efd40a5ca7",
+  "execSha256": "81cd472fea15c7722da08d5eeaa4fc71482faf05b3f22086d514934f22718d31",
+  "jarSha256": "d6640c9c13214e0f6ad9d2db6a405d50a6e09a726d62405f1b9ca38cd52b708c",
+  "staticSha256": "4f1c7e7e1eeaf98e23bd754b0ed3d0a3fdd35f48328dd08c8a7b0c2616ec0304",
+  "all343MainClassByteMismatch": 0,
+  "classCounters": {
+    "dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles": {
+      "INSTRUCTION": {
+        "covered": 804,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 38,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 131,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 45,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 26,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher": {
+      "INSTRUCTION": {
+        "covered": 637,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 46,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 134,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 48,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 25,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader": {
+      "INSTRUCTION": {
+        "covered": 572,
+        "missed": 13
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 125,
+        "missed": 4
+      },
+      "COMPLEXITY": {
+        "covered": 32,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 20,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "expected": "foreign retirement refused/unlink0 and original bytes retained; own retirement once; known stale entries refused/no mutation; unknown unrelated data preserved; three actual monotonic expiry boundaries TIMEOUT/all streams closed/owned child stopped",
+  "actual": "All four cases passed with explicit resource assertions; Files/Publisher four100; NativeReader branch100 with four native-boundary lines still unexecuted",
+  "independentOracle": "SS341/343/352 fixed owner/namespace/5s cap and literal controlled provider deadlines in 613/testmethods, not production-generated expected",
+  "bugIds": [],
+  "coverageExclusions": false,
+  "oldNativeImported": false,
+  "fullRegressionForThisTestSource": false,
+  "diagnosticSameMainByteOnly": true,
+  "formalAccepted": false,
+  "wholeWbsAcceptedDelta": 0,
+  "rawExported": false,
+  "specification": "evidence/01_PT/018_NK-OPS-001/613_Inspector残異常系_独立PT仕様.md"
+}

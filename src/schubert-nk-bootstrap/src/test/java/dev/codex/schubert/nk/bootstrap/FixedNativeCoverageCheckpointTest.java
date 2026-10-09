@@ -43,6 +43,29 @@ final class FixedNativeCoverageCheckpointTest {
   public static final class MetadataFixture {}
 
   @Test
+  void common922001CurrentJvmFactoryRejectsMissingRoleWithoutCreatingAgentAuthority()
+      throws Exception {
+    var before = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments();
+    assertTrue(
+        before.stream()
+            .noneMatch(option -> option.startsWith("-javaagent:/opt/pgpt-tools-pg390/")));
+    agentRefused(
+        () ->
+            FixedNativeCoverageCheckpoint.fromCurrentJvm(
+                null, FixedNativeCoverageProfile.Phase.ORDINARY, null));
+    agentRefused(
+        () ->
+            FixedNativeCoverageCheckpoint.fromCurrentJvm(
+                ServiceConfigFiles.Service.API, null, null));
+    assertEquals(
+        Optional.empty(),
+        FixedNativeCoverageCheckpoint.fromCurrentJvm(
+            ServiceConfigFiles.Service.API, FixedNativeCoverageProfile.Phase.ORDINARY, null));
+    assertEquals(
+        before, java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments());
+  }
+
+  @Test
   void ncheck597005TerminalFactoryWithNoReservedAgentDoesNotCreateNativeAuthority()
       throws Exception {
     assertTrue(
