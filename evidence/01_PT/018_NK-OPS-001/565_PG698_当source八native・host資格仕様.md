@@ -1,0 +1,7 @@
+# PG698 current9bd八native＋frozenhost資格
+
+NK-OPS-001/SS354355/451/WBS-N15.06（既予算内残資格、別leaf共通費二重0）。NATIVE698001はPG697全post0/Root696before-aftersealとactualPG693genuineparentを確認、当Invocationに属するBackup/Cleanup/Expiry/Parent・ordinaryAPI/Webterminal・RootAPI/Webbefore-exec八streamのfilemetadata/hash/サイズとPID1real-monotonic offset・actual開始終了窓へ唯一JaCoCo sessionを照合する。旧source36fe/17native/969case/旧run成功を輸入0、物理file名の193は承認Production固定directoryのため変更しない。
+
+002はPG680source9bd/manifest b710c69b798fcd14b35644541aed835689d81e6f0cbf40c3d67786e014f599e6/3489PT516suite/static6zero/fresh六exec/jarhashを当sourcebyteへ固定、JaCoCo0.8.15/ASM9.10.1/Java25.0.4の既独立NativeCoverage/NativeSessions571byteをpinし、六module全LINE/METHOD/CLASS/BRANCHのhost/union/missed差分を計算。classByteMismatch0/NoMatch0と非負増分が必要、未100/別source/class不一致/未実行を合格へ補完0。
+
+command `python3 -B tools/quality/vm/050_s1/pg698_native_counter.py`、W/pg698-current-eight-native-v1にrawexec/session/privatecounterログ/安全manifestを私有保全、Git公開はwhitelistのcounters/hash/sourceのみ・rawsession0。native-parent窓119288459330～actualend≤121088459330µs、genuineRoot/親DONEが必須。現在literalbinding2/Pyflakes0、実採取未実行。正式53scope/all同source-run/四100/全trace-secret/CHR/全台帳閉鎖等は別gateであり、本八stream限定資格だけではformal/PGPT/ITST完了0。
