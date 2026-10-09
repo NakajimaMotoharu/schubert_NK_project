@@ -91,8 +91,9 @@ def refs():return 'SOURCE='+repr(SOURCE)+'\nDIGEST='+repr(DIGEST)+'\n'+approval_
 
 
 def before_freeze():
-    return r'''import os,pathlib,sys
+    raw=r'''import os,pathlib,sys
 import pg799_snapshot as h
+from pg777_reference_capability import CaptureReferences
 assert os.geteuid()==0
 h.load_definitions();h.parent()
 assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441'
@@ -107,3 +108,5 @@ q="select count(*)from pg_stat_activity where datname='schubert_nk'and backend_t
 assert h.command(['/usr/bin/sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',q]).splitlines()==[b'0',b'0']
 print('PG799_FREEZE_GUARD full24TreesOriginalSame=true all10Kernel0=true businessResource0=true')
 '''
+    start=raw.index('for unused in range(2):');end=raw.index('print(',start)
+    return raw[:start]+'with CaptureReferences():\n'+''.join(' '+line+'\n'for line in raw[start:end].splitlines())+raw[end:]

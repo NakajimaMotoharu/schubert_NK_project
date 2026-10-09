@@ -40,5 +40,14 @@ class Test(unittest.TestCase):
         self.assertNotIn("if action=='recover'",raw)
         self.assertNotIn('Pg778',raw)
         self.assertNotIn('systemctl',PAYLOAD)
+    def test_refs_held_during_whole_prefreeze_capture_and_new_v2(self):
+        from pg799_pending_v2 import compile_source,native_source
+        from pg801_guard_handoff import payload
+        ast.parse(compile_source());ast.parse(native_source());ast.parse(payload())
+        tree=ast.parse(p.before_freeze());scope=next(n for n in tree.body if isinstance(n,ast.With))
+        self.assertTrue(any(isinstance(n,ast.For)for n in scope.body))
+        self.assertIn('CaptureReferences()',ast.unparse(scope.items[0].context_expr))
+        self.assertIn('pg799-pending-tools-v2',native_source());self.assertIn('pg799-frozen-v2.safe.json',compile_source())
+        self.assertNotIn('SIGKILL',payload());self.assertIn('signal.SIGTERM',payload())
 
 if __name__=='__main__':unittest.main()
