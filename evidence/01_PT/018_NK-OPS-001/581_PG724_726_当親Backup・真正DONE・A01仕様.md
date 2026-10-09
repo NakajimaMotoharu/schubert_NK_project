@@ -1,5 +1,7 @@
 # PG724–726 当親Backup・真正DONE・A01
 
+PG734 owned-readonly診断actual0、12:18:01JST/operatorb95b0e54d/currentboot・PID1全tuple・startticks12754929・currentPG715を前後照合、業務変更/start-stop0。私有Thread.print SHA44ed090eeeb862b972bbc36b340df999e4dc694b1ec2ad6805c8620cfc6ac44d。mainはMorningPermitPublication.issue→MorningBackupRetention.recheck→DB.retainedBackupSuccessful→RootReleaseAdmission.verifyMorning→RootStartupContext.queryUnitの途中で、UNKNOWN保持frameではない。一回だけ診断・budget延長0、rawstack/stderrはW私有のみ。17分時点の進行観測はDONE認定でなく、性能は後続IT/STへ引継ぎ。
+
 PG724 actual0/operator ed69b199e：当55ac run/cutoff03:00:51.014287Z、元524全column保持＋新10=534・Backup二SUCCESS attempt6/他八SKIP attempt5・同parentgeneration、dump-list0・一retention削除・五protectedと旧六全byte不変更。snapshotSHA cc7d323bcbcfd31979e82f66f6810137bdec492bc98d9772e3546a2aff38b50d、W/pg724-retention-post-v1.safe.json/exit0。削除された旧91a bundleは721private98ff0d…から復元可。真正DONE/726実A01はまだ未受入。
 
 関連SS343/354/SSC233、WBS-N15.04/CHR-A01。当source1ec19782a/PG715/74d353/schema028、普通親実一回start12:00:49JST、PID2468821/INV2aff8ecf3b7d4d15b24a8af0f73a8745/job132812/start127549297774µs/deadline129349297774µs。observer47840（pg723watch）保持、旧8633DONEの再resume・budget延長0。工具sourceは本spec含む次commitへ。
