@@ -3,9 +3,24 @@ import ast
 import unittest
 from pathlib import Path
 import pg744_closing_selected as candidate
+import pg745_closing_selected as final
 
 
 class ReactorTest(unittest.TestCase):
+    def test_final_only_changed_leafs_no_failifnotests_override(self):
+        raw = final.source()
+        tree = ast.parse(raw)
+        command = next(node.value for node in ast.walk(tree) if isinstance(node, ast.Assign)
+                       and any(isinstance(t, ast.Name) and t.id == 'command' for t in node.targets))
+        values = [node.value for node in command.elts if isinstance(node, ast.Constant)]
+        self.assertNotIn('-am', values)
+        self.assertEqual('src/schubert-nk-bootstrap,src/schubert-nk-api', values[values.index('-pl')+1])
+        self.assertNotIn('-DfailIfNoTests=false', values)
+        self.assertNotIn('-DskipTests', values)
+        self.assertIn("D = W / 'pg745-closing-selected-v1'", raw)
+        self.assertIn("'src/schubert-nk-protocol','src/schubert-nk-storage'", raw)
+        self.assertIn('1ec19782a1afe22d1de75b05f4cd12b8a8a8a172', raw)
+
     def test_explicit_leafs_and_new_slot_without_aggregator_or_am(self):
         raw = candidate.source()
         tree = ast.parse(raw)
