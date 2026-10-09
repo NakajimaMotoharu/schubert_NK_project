@@ -6,6 +6,7 @@ from pg847_native_stop import source as prior
 R=Path(__file__).resolve().parent
 def source():
  raw=prior().replace('Pg847','Pg877').replace('PG847','PG877').replace('pg847','pg877').replace('PG832','PG862').replace('pg832','pg862')
+ raw=raw.replace('Immutable stage; distinct once-only failed143 verify/recover. Unknown stays attached.','Immutable new genuine1902 stage/ownedstop only; unknown stays attached.')
  raw=raw.replace('pg846-completed-readonly-v1','pg875-completed-readonly-v1').replace('pg849-chr-a01-native-v1','pg876-chr-a01-native-v1')
  marker="proof=json.loads((W/'pg875-completed-readonly-v1.safe.json').read_text());"
  assert raw.count(marker)==1

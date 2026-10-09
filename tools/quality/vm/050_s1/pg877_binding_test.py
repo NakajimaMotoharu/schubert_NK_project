@@ -33,4 +33,12 @@ class Test(unittest.TestCase):
   self.assertEqual(env['configuration_value'](raw)['After'],'a.service z.service')
   for bad in (None,raw+'Unknown=\n',raw.replace('ExecStop=\n',''),raw.replace('After=z.service a.service','After=a.service a.service')):
    with self.assertRaises(ValueError):env['configuration_value'](bad)
+ def test_transport_closure(self):
+  import ast
+  import pg877_native_stop as transport
+  raw=transport.source();ast.parse(raw)
+  for val in ('pg877-native-tools-v1','pg877-frozen-v1.safe.json','pg875-completed-readonly-v1.exit','pg876-chr-a01-native-v1.exit','Pg877NativeArgumentTest','Pg877NativeStop stop','0.1.0-PG862',"sys.argv[1]in ('stage','stop')"):
+   self.assertIn(val,raw)
+  for val in ('Pg847','pg847','PG832','systemctl start','Pg877NativeStopTest','verify/recover'):
+   self.assertNotIn(val,raw)
 if __name__=='__main__':unittest.main()
