@@ -199,10 +199,21 @@ final class InspectorHeldStateContractTest {
     var broker =
         snapshot(
             InspectorUnitSnapshot.Target.ARTEMIS,
-            Map.of("ActiveState", "active", "SubState", "running", "MainPID", "17"));
+            Map.of(
+                "ActiveState", "active",
+                "SubState", "running",
+                "MainPID", "17",
+                "ExecMainCode", "0",
+                "ExecMainExitTimestampMonotonic", "0"));
     assertTrue(broker.running(17, INV));
     assertFalse(broker.running(18, INV));
     assertFalse(broker.running(17, "22222222222222222222222222222222"));
+    assertFalse(
+        snapshot(
+                InspectorUnitSnapshot.Target.ARTEMIS,
+                Map.of("ActiveState", "active", "SubState", "running", "MainPID", "17"))
+            .running(17, INV),
+        "A completed-execution default is not a live daemon; SS341 SSC125 start>0/end0");
   }
 
   private static InspectorUnitSnapshot snapshot(

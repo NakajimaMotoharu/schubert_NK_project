@@ -11,7 +11,7 @@ fixtureは全18key/固定Unit名/oneshot又はsimple/Restart/Remain/zero PID/Job
 | PT-SNAPSHOT-911003 | Artemis Code1/status143/start100/end200、inactive-dead-success又はfailed-failed-exit-code | normal stop data true。PID/Job/INV欠落/Code2/Status0/時刻0逆転/Resulttimeout/異stateはfalse。違うTargetもfalse |
 | PT-SNAPSHOT-911004 | inactive-dead/JobPID0、Inspector Remainyes/no、SubState異物/Job1 | exact idleだけtrue。InspectorRemainnoはfalse |
 | PT-SNAPSHOT-911005 | Backup新INV Code1/正常0又は正常nonzero70、同INV/partial/JobPID/時刻0逆転/Code2/未知Result | exactSUCCESS又はFAILED。旧同INV・unknown/signal/partialはempty |
-| PT-SNAPSHOT-911006 | Cleanup/Expiry正常30新INV、oldsame/時刻0逆転、Artemis active-running Main17/同INV又は別PID/INV | 既知拒否は該当Targetだけtrue、same/partialはfalse。running dataは同PID/INVだけtrue |
+| PT-SNAPSHOT-911006 | Cleanup/Expiry正常30新INV、oldsame/時刻0逆転、Artemis active-running Main17/Code0/Status0/start100/end0（SS341 SSC125）、同INV又は別PID/INV | 既知拒否は該当Targetだけtrue、same/partialはfalse。running dataは完備live profileの同PID/INVだけtrue。Code1/end200の終了済みdefaultはfalse |
 
 入力と操作のtest codeはInspectorHeldStateContractTest各method、関連既InspectorUnitSnapshotTest/InspectorUnitCycleTest/InspectorUnitProbeTest/MorningControlScopeTestも選択し回帰する。初回失敗は未実装追加oracleの調整と既実装違反を区別し、後者のみ修正前BUG/YKT登録。null/欠落/未知は既parser試験と新state/partial負例を併用、NPEをcatchして正常扱いしない。並行/再送/所有/IOは実actor判定ではなく明示outstanding PID/Job/旧同INVのデータ境界として扱い、全プログラムの並行試験を代用しない。
 
