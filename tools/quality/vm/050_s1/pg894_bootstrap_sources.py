@@ -47,6 +47,7 @@ def java():
 def helper(baseline_sha):
  assert len(baseline_sha)==64 and all(x in '0123456789abcdef'for x in baseline_sha)
  raw=bind((R/'pg570_bootstrap_existing.py').read_text()).replace('BASELINE895_SHA',baseline_sha)
+ raw=raw.replace('from pg536_bootstrap_execution_contract import configuration as history_configuration\n','')
  raw=raw.replace('from pg559_terminal_refs import peer_query,peer_counts_valid,namespace_valid','from pg894_db_contract import peer_query,peer_counts_valid,namespace_valid')
  raw=raw.replace('for unit in units:manager.RefUnit(unit);refs.append(unit)','for unit in units:manager.LoadUnit(unit);manager.RefUnit(unit);refs.append(unit)')
  marker="require(SAVE.is_dir()";index=raw.rfind('\n',0,raw.index(marker))+1
@@ -78,11 +79,12 @@ def files(baseline_sha):
  parsed=ast.parse((R/'pg559_terminal_refs.py').read_text());names={'require','peer_query','peer_counts_valid','namespace_valid'}
  defs=[n for n in parsed.body if isinstance(n,ast.FunctionDef)and n.name in names];assert len(defs)==4
  raw['pg894_db_contract.py']=ast.unparse(ast.Module(body=defs,type_ignores=[])).replace('PG559-terminal-readback','PG894-bootstrap-guard')+'\n'
- for name in('pg536_bootstrap_execution_contract.py','pg529_dependency_graph.py','pg570_directory_identity.py','pg457_stable_actor.py','pg887_parent_receipt.py'):
-  raw[name]=(R/name).read_text()if name!='pg887_parent_receipt.py'else(Path('/home/mini/codex/project1/work/pgpt-runs/PG379')/'pg887-native-tools-v1'/name).read_text()
+ for name in('pg529_dependency_graph.py','pg570_directory_identity.py','pg457_stable_actor.py','pg887_parent_receipt.py'):
+  target='pg894_directory_identity.py'if name=='pg570_directory_identity.py'else name
+  raw[target]=(R/name).read_text()if name!='pg887_parent_receipt.py'else(Path('/home/mini/codex/project1/work/pgpt-runs/PG379')/'pg887-native-tools-v1'/name).read_text()
  raw['pg894_configuration.py']=(R/'pg847_configuration.py').read_text()
  raw['pg894_configuration_capture.py']=(R/'pg775_configuration.py').read_text().replace('FragmentPath,DropInPaths','FragmentPath,DropInPaths,RestrictSUIDSGID,UMask,LimitCORE,MemoryMax,TasksMax')+ADDITIONAL
- raw['pg894_exec_record.py']=parser_source()
+ raw['pg894_exec_record.py']='import re\n'+parser_source()
  for name,value in raw.items():
   if name.endswith('.py'):ast.parse(value)
  return raw
