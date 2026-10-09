@@ -4,6 +4,7 @@ from pg836_fixed_handoff import payload
 class Test(unittest.TestCase):
     def test_exact_owner_readonly_cohort_and_no_business_operations(self):
         raw=payload();ast.parse(raw)
+        self.assertIn('import ast\n',raw)
         for value in ('3412116,16855351','0.1.0-PG796','pg835-pending-codeonly',
                       'knownPreDatabaseOwnerGone=true','signal.SIGTERM','oldCloseUnknown=true',
                       "all(not(task/'children').read_text().strip()",'before==h.snapshot()',

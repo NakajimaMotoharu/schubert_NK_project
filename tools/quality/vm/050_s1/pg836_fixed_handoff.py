@@ -13,6 +13,7 @@ for name in ('parent_value','configuration'):
 '''
 def payload():
     raw=previous().replace('pg801-guard-handoff-v1','pg836-pre-freeze-handoff-v1')
+    raw='import ast\n'+raw
     raw=raw.replace('pg799','pg835').replace('Pg799','Pg835').replace('0.1.0-PG750','0.1.0-PG796')
     raw=raw.replace('3112232','3412116').replace('15308543','16855351')
     raw=raw.replace('102cdf1d365ab321f74b523237590eee764ae858','2a0d5aa392c85a1dc12a1cdb423978e8500895b8')
