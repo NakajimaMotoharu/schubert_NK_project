@@ -36,8 +36,8 @@ final class ChildBrokerTest {
         cgroup = "0::/system.slice/artemis.service\n";
     String state = "S";
     long rootUid = 0;
-    boolean managerDrift, kernelDrift;
-    int reads, ticks, kernelReads;
+    boolean managerDrift, kernelDrift, uidDrift;
+    int reads, ticks, kernelReads, statusReads;
     final List<byte[]> owned = new ArrayList<>();
 
     public long pid() {
@@ -71,7 +71,11 @@ final class ChildBrokerTest {
 
     public byte[] status(long pid) {
       kernelReads++;
-      return bytes(status);
+      statusReads++;
+      return bytes(
+          uidDrift && statusReads > 1
+              ? status.replace("200 200 200 200", "202 202 202 202")
+              : status);
     }
 
     public byte[] cgroup(long pid) {
@@ -85,6 +89,24 @@ final class ChildBrokerTest {
       owned.add(b);
       return b;
     }
+  }
+
+  @Test
+  void common925004SecondCaptureUidChangeStillRejectsWithInnerUidContract() {
+    var broker = new Fixture();
+    broker.uidDrift = true;
+    assertThrows(
+        IOException.class, () -> new ChildStartupContext(broker).verifyBroker(BOOT, INV, FIXED));
+    assertEquals(2, broker.statusReads);
+    assertTrue(
+        broker.owned.stream().allMatch(value -> Arrays.equals(value, new byte[value.length])));
+    var caddy = new ChildCaddyTest.Fixture();
+    caddy.uidDrift = true;
+    assertThrows(
+        IOException.class, () -> new ChildStartupContext(caddy).verifyCaddy(BOOT, INV, FIXED));
+    assertEquals(2, caddy.statusReads);
+    assertTrue(
+        caddy.owned.stream().allMatch(value -> Arrays.equals(value, new byte[value.length])));
   }
 
   @Test

@@ -71,11 +71,7 @@ public final class InspectorApplication {
     MaintenanceOwnerFrame owner;
     try (var root = OwnedTransferDirectory.open(directories, settings.credentialRoot())) {
       var reader = new InspectorCredentialLoader(root, security, io);
-      try {
-        owner = MaintenanceOwnerFrame.consume(reader.readMaintenanceOwner());
-      } catch (IllegalArgumentException invalid) {
-        throw new IOException("maintenance owner unavailable");
-      }
+      owner = readMaintenanceOwner(reader);
     }
     validateOwner(run, initial.boot(), owner);
     return executeGuarded(
@@ -129,8 +125,19 @@ public final class InspectorApplication {
     return result;
   }
 
-  private InspectionExecution execute(
-      InspectionRun run, Optional<MaintenanceOwnerFrame.Guard> guard)
+  /** PG-D408: private claim data only, never Unit/Root admission; PT-APP-925002..003. */
+  static MaintenanceOwnerFrame readMaintenanceOwner(InspectorCredentialLoader reader)
+      throws IOException {
+    Objects.requireNonNull(reader, "private owner reader");
+    try {
+      return MaintenanceOwnerFrame.consume(reader.readMaintenanceOwner());
+    } catch (IllegalArgumentException invalid) {
+      throw new IOException("maintenance owner unavailable");
+    }
+  }
+
+  /** PG-D408: operation body port, native entry still owns all admission; PT-APP-925001. */
+  InspectionExecution execute(InspectionRun run, Optional<MaintenanceOwnerFrame.Guard> guard)
       throws StorageIoException, InspectorCredentialException, NoSuchAlgorithmException {
     Objects.requireNonNull(run, "inspection run");
     // BUG-134/YKT-105: no interruptible credential IO before the outer startup gate.

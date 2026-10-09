@@ -1,0 +1,114 @@
+{
+  "program": "NK-OPS-001",
+  "wbsLeaves": [
+    "WBS-P018-03.02",
+    "WBS-P018-08.02"
+  ],
+  "testIds": [
+    "PT-COMMON-922001",
+    "PT-COMMON-922002"
+  ],
+  "source": "f01ad6e1de50468477aa7daf41ed188f423994ed",
+  "branch": "dev-foundation",
+  "startedUTC": "2026-10-09T22:01:44.927880+00:00",
+  "endedUTC": "2026-10-09T22:02:00.183092+00:00",
+  "command": [
+    "./mvnw",
+    "-o",
+    "--no-transfer-progress",
+    "-Dstyle.color=never",
+    "-Djansi.force=false",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "src/schubert-nk-bootstrap",
+    "spotless:check",
+    "test-compile",
+    "test",
+    "spotbugs:check",
+    "jacoco:report",
+    "jar:jar",
+    "-Dtest=FixedNativeCoverageCheckpointTest,FixedNativeCoverageProfileTest,FixedNativeCoverageStopHoldTest,ChildBrokerTest,ChildCaddyTest,ChildStartupContextTest",
+    "-Dsurefire.failIfNoSpecifiedTests=false"
+  ],
+  "environment": {
+    "OS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4",
+    "NullAway": "0.14.1"
+  },
+  "actualExit": 0,
+  "tests": 38,
+  "suites": 6,
+  "FESFlakyNotRun": 0,
+  "staticIssues": 0,
+  "same102MainClassByteMismatch": 0,
+  "mainByteReference": "4ebf34debdda9c655717af8acae09b571efd8133",
+  "runManifestSha256": "f6f049f3a8d7044ca499c0d1d08bf40ade3c0be46661083ad6b0716ba22042d6",
+  "privateLogSha256": "694f0dd9a8855953aaab0dc5b997ad7e22b68d39c68cd434811d4564b907fe2e",
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.bootstrap.ChildCaddyTest.xml": "5a51611d47b49abd92d7d5b08250de0d5fb7ce930458454494c11d9c38213719",
+    "TEST-dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHoldTest.xml": "2baf4b6ab5acca9b49d9c0ae5a5974d51289630220bcb3cbf023fcaa5cd17ec3",
+    "TEST-dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest.xml": "c74d0a4211d7afab41dab183473eae785ef8d109ef3fbfc7e06549fc712961ed",
+    "TEST-dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfileTest.xml": "0029467ad7f902be1df12f032c0f38edd86e5380cf5c18c733eb6e86217e8c65",
+    "TEST-dev.codex.schubert.nk.bootstrap.ChildBrokerTest.xml": "330e6732a04a1532b5205ba4eac8cbd3981877858c0d07fbec6f9eb8e39d0b55",
+    "TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml": "d4bf4f037841304a87dfde03239c2a37f994485c394a7cc5eb0b43f04fb73d26"
+  },
+  "execSha256": "10594c198b1fb3c61c2ef586175e4f3255b3195c52e13f6502b6ef725d2a4364",
+  "coverageSha256": "4f946b7c2bcc393b89ff272ee3a51288dca122032605ae571b23dfc434f75e90",
+  "staticSha256": "0fbc73839149e6ad335b1341109ea3bef95f9542830c08bbf39cae0035551243",
+  "jarSha256": "9e1e4bd7c37f6900663b14eebfc3c6a48e1b30350f93e31edb004a69880dff1b",
+  "methods": {
+    "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.fromCurrentJvm": {
+      "INSTRUCTION": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext.verifyDaemon": {
+      "INSTRUCTION": {
+        "covered": 289,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 53,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 50,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 27,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "independentOracle": "614 literal no authority on absent role/default unchanged JVM; malformed INV must refuse before any manager/kernel observation",
+  "expected": "generic IOException/empty default; invalid INV rejects with OS read0",
+  "actual": "Both new cases passed with message/no cause/no suppression/JVM input unchanged/manager and kernel0 assertions",
+  "formalAccepted": false,
+  "differentTestSourceSameMainByteDiagnosticOnly": true,
+  "oldNativeImported": false,
+  "wholeClassOrWbsClosed": false,
+  "rawExported": false,
+  "bugIds": [],
+  "specification": "evidence/01_PT/018_NK-OPS-001/614_共通起動境界_独立negative_PT仕様.md"
+}

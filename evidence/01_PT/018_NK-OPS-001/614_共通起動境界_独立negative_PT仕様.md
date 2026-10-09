@@ -1,5 +1,7 @@
 # 共通起動境界の独立negative PT仕様
 
+実測PG922 sourcef01ad6e1de50468477aa7daf41ed188f423994ed/07:01:44.928～07:02:00.183JST、actual0/38PT/6suite/FES0/staticbootstrap0。全102main class byteはPG915/4ebfと一致、argv/environment/agent/起動権限変更0。追加二caseの期待IOException/empty・generic message・原因/suppression無し・不正INV五種×二daemonのmanager/kernel読取0を実assertで確認。公開PG922-common-host-v1 manifestへsource/command/tool/XML/coverage/static/exec/JAR/loghashとmethod単位counterを保存する。全class/全WBS/global/native/正式へ加点0、異testsource同main-byteの限定診断である。初期仕様・未実行表記は以下の開始時点履歴。
+
 NK-OPS-001・OPS-009/SYS-002/SYS-004/TST-004、UI212/251、SS343/451、主担当P018-03.02（daemonデータ境界）/P018-08.02（計測factory）。開始前見積りlow.15/base.5/high1.2週次共有pp/LOW、各既.02子budget .67/1.67/3.67内の限定subset、親子/共通/全体費加算0。P00404の実OS/InspectorNative依存は未完のまま、必要共通境界を独立正常・異常・null試験で確認する。
 
 | Test ID | 事前条件・入力/操作 | 独立期待値・資源後条件 |

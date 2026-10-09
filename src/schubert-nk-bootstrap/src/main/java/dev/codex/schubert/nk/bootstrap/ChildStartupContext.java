@@ -283,7 +283,6 @@ public final class ChildStartupContext {
       var actual = capture(pid, false, fixed.uid());
       require(
           actual.boot().equals(boot.toString())
-              && actual.uid() == fixed.uid()
               && actual.gid() == fixed.gid()
               && actual.groups().equals(fixed.groups())
               && actual.zeroCapabilities()

@@ -8,6 +8,7 @@ import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.TestSecurity
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.maintenance.*;
 import dev.codex.schubert.nk.storage.*;
+import java.io.IOException;
 import java.nio.file.*;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -133,6 +134,90 @@ final class InspectorApplicationTest {
       assertEquals(0, count("inbox_inspection_progress"));
       cleared(otherIo);
     }
+  }
+
+  @Test
+  void app925001GuardIoFailurePrecedesAllCredentialAndDatabaseIo() throws Exception {
+    try (var f = fixture()) {
+      var calls = new Calls(f.root);
+      var io = new TestIo();
+      var failure =
+          assertThrows(
+              InspectorCredentialException.class,
+              () ->
+                  application(f, calls, io)
+                      .execute(
+                          RUN,
+                          Optional.of(
+                              () -> {
+                                throw new IOException(
+                                    "independent-private-diagnostic-never-export");
+                              })));
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+      assertEquals(0, io.fileAttributes);
+      assertTrue(io.buffers.isEmpty());
+      assertTrue(calls.live.isEmpty());
+      assertEquals(1, calls.finalCloses);
+      assertEquals(0, count("inbox_inspection_progress"));
+    }
+  }
+
+  @Test
+  void app925002OwnerParserConsumesLiteralDataAndSanitizesMalformedClaim() throws Exception {
+    String golden =
+        "NKMAINTOWNER1\nboot=11111111-1111-4111-8111-111111111111\n"
+            + "run=22222222-2222-4222-8222-222222222222\n"
+            + "activation=33333333-3333-4333-8333-333333333333\n"
+            + "cutoff=2026-09-27T15:00:00Z\nepoch=44444444-4444-4444-8444-444444444444\n"
+            + "morning_invocation=55555555555555555555555555555555\nmorning_pid=42\n"
+            + "morning_start_ticks=12345\ncleanup_invocation=-\ncleanup_pid=-\n"
+            + "cleanup_start_ticks=-\ndeadline_nanos=1800000000007\n";
+    for (String input : List.of(golden, "independent-private-diagnostic-invalid")) {
+      try (var f = fixture()) {
+        Files.writeString(f.root.resolve("maintenance-owner"), input);
+        var calls = new Calls(f.root);
+        var io = new TestIo();
+        try (var root = OwnedTransferDirectory.open(calls, f.root)) {
+          var reader = new InspectorCredentialLoader(root, new TestSecurity(io), io);
+          if (input.equals(golden)) {
+            var observed = InspectorApplication.readMaintenanceOwner(reader);
+            assertEquals(UUID.fromString("11111111-1111-4111-8111-111111111111"), observed.boot());
+            assertEquals(UUID.fromString("22222222-2222-4222-8222-222222222222"), observed.run());
+            assertEquals(1_800_000_000_007L, observed.deadlineNanos());
+            assertEquals(42, observed.morning().pid());
+            assertTrue(observed.cleanup().isEmpty(), "data parse is not Inspector admission");
+          } else {
+            var failure =
+                assertThrows(
+                    IOException.class, () -> InspectorApplication.readMaintenanceOwner(reader));
+            assertEquals("maintenance owner unavailable", failure.getMessage());
+            assertNull(failure.getCause());
+            assertEquals(0, failure.getSuppressed().length);
+          }
+        }
+        assertTrue(calls.live.isEmpty());
+        assertEquals(1, calls.finalCloses);
+        cleared(io);
+      }
+    }
+  }
+
+  @Test
+  void app925003OwnerReaderFailureRetainsCredentialFailureClassification() throws Exception {
+    try (var f = fixture()) {
+      var calls = new Calls(f.root);
+      var io = new TestIo();
+      try (var root = OwnedTransferDirectory.open(calls, f.root)) {
+        var reader = new InspectorCredentialLoader(root, new TestSecurity(io), io);
+        assertThrows(
+            InspectorCredentialException.class,
+            () -> InspectorApplication.readMaintenanceOwner(reader));
+      }
+      assertTrue(calls.live.isEmpty());
+      cleared(io);
+    }
+    assertThrows(NullPointerException.class, () -> InspectorApplication.readMaintenanceOwner(null));
   }
 
   @Test
