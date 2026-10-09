@@ -78,7 +78,7 @@ def files(baseline_sha):
  raw['pg894_parent_join.py']=(R/'pg569_parent_join.py').read_text().replace('from pg556_parent_receipt import completed','from pg887_parent_receipt import completed')
  parsed=ast.parse((R/'pg559_terminal_refs.py').read_text());names={'require','peer_query','peer_counts_valid','namespace_valid'}
  defs=[n for n in parsed.body if isinstance(n,ast.FunctionDef)and n.name in names];assert len(defs)==4
- raw['pg894_db_contract.py']=ast.unparse(ast.Module(body=defs,type_ignores=[])).replace('PG559-terminal-readback','PG894-bootstrap-guard')+'\n'
+ raw['pg894_db_contract.py']='import stat\n'+ast.unparse(ast.Module(body=defs,type_ignores=[])).replace('PG559-terminal-readback','PG894-bootstrap-guard')+'\n'
  for name in('pg529_dependency_graph.py','pg570_directory_identity.py','pg457_stable_actor.py','pg887_parent_receipt.py'):
   target='pg894_directory_identity.py'if name=='pg570_directory_identity.py'else name
   raw[target]=(R/name).read_text()if name!='pg887_parent_receipt.py'else(Path('/home/mini/codex/project1/work/pgpt-runs/PG379')/'pg887-native-tools-v1'/name).read_text()
