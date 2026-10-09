@@ -14,6 +14,7 @@ def before():
     assert r['actualExit']==0 and r['all24Preserved'] and r['M_A0'] and r['databaseClient0'] and r['sameEpochInvalid']
     assert r['source']==SOURCE and r['batchRows']==564 and r['startupEntries']==47
     return r['snapshotSha256']
+SNAPSHOT=before()
 def bind(raw):
     from pg856_sources import bind as cohort
     raw=cohort(raw)
@@ -23,18 +24,25 @@ def bind(raw):
     return raw.replace(fields,fields+',RestrictSUIDSGID,UMask,LimitCORE,MemoryMax,TasksMax')
 def java():return bind(old.java())
 def java_test():return bind(old.java_test())
-def snapshot_library():return bind(old.snapshot_library())
+def snapshot_library():
+    raw=bind(old.snapshot_library())
+    marker="fields['epoch_id']=='0eece14c-f832-47c2-b7dd-14125682e7ea'"
+    assert raw.count(marker)==1
+    return raw.replace(marker,"fields['epoch_id']=='8b153538-1523-4987-a456-6cbea0d345ee'")
 def helper():return bind(old.helper())
 def sources():
     result={'Pg860RuntimeRetirement.java':java(),'Pg860RuntimeRetirementTest.java':java_test(),'pg860_runtime_retirement_refs.py':helper(),'pg860_snapshot.py':snapshot_library()}
     for name in ('pg481_native_owned_stop.py','pg480_backup_refs.py','pg466_term_witness.py','pg471_native_term_witness.py'):result[name]=(R/name).read_text()
     result['pg777_reference_capability.py']=(W/'pg856-failed-done-tools-v2/pg777_reference_capability.py').read_text()
     return result
+def native_source():
+    import pg815_retirement_native as native
+    return bind(native.source())
 if __name__=='__main__':
     assert len(sys.argv)==2 and sys.argv[1]in ('compile','stage','retire')
     SNAPSHOT=before()
     if sys.argv[1]=='compile':
         raw=bind(compiler.source()).replace('import pg860_retirement_sources as p','import pg860_retirement as p').replace('pg860_retirement_test.py','pg860_retirement_test.py')
-    else:raw=bind((R/'pg815_retirement_native.py').read_text())
+    else:raw=native_source()
     ast.parse(raw)
     exec(compile(raw,'<860 normal existing841 retirement dispatch>', 'exec'),{'__file__':str(R/'pg860_retirement.py'),'__name__':'__main__','sources':sources})
