@@ -51,6 +51,19 @@ def generate(proof):
  java=java.replace('phase="DB_CLOSE";db.rollback();db.close();','pulse();phase="DB_CLOSE";db.rollback();db.close();lease.confirmClosed();')
  java=java.replace('phase="COMPLETE_PUBLISH";','phase="COMPLETE_PUBLISH";Pg481PendingDeployment.privateWrite(SAVE.resolve("observations.private"),("maxGapNanos="+maxGap+"\\n").getBytes(StandardCharsets.US_ASCII));')
  values['Pg847NativeStop.java']=java
+ refs=values['pg847_native_refs.py']
+ refs=refs.replace("UNITS,FIELDS=sealed['UNITS'],sealed['FIELDS']", "UNITS,FIELDS=sealed['UNITS'],sealed['FIELDS']\n from pg847_configuration import FIELDS as CONFIG_FIELDS,same as config_same\n configuration_fields=lambda:CONFIG_FIELDS")
+ old="cfg={u:show(u,configuration_fields())for u in UNITS};signed_cfg=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg841-runtime-resume-v1/after.private.json').read_bytes())['configuration']"
+ assert refs.count(old)==1
+ refs=refs.replace(old,"cfg={u:show(u,configuration_fields())for u in UNITS};signed_cfg=json.loads(original)['configuration']")
+ marker="expected=signed_cfg[u];require(set(v)==set(expected)and all(v[k]==expected[k]for k in v if k!='ExecStart'))"
+ assert refs.count(marker)==1
+ refs=refs.replace(marker,"expected=signed_cfg[u];require(config_same(expected,v,exec_record))")
+ old="old=first['configuration'][u];require(set(v)==set(old)and all(v[k]==old[k]for k in old if k!='ExecStart'))"
+ assert refs.count(old)==1
+ refs=refs.replace(old,"old=first['configuration'][u];require(config_same(old,v,exec_record))")
+ values['pg847_native_refs.py']=refs
+ values['pg847_configuration.py']=(R/'pg847_configuration.py').read_text()
  for name,raw in values.items():
   if name.endswith('.py'):ast.parse(raw)
  return values

@@ -9,7 +9,9 @@ class Test(unittest.TestCase):
   for v in('Pg797OwnedDatabase.Expected(pid,"schubert_batch","PG847-native-stop","schubert_nk",true,true)','lease.confirmClosed()','maxGapNanos','Pg387TrustedDeployment.LABEL="PG832"',p.SOURCE,p.DIGEST,'2026-10-09T15:21:57.000000Z'):
    self.assertIn(v,java)
   self.assertNotIn('Pg464CodeOnlyDeployment',java)
-  for v in('pg846-completed-readonly-v1','pg841-runtime-resume-v1','9c08566fff9945a492eaae25559c3084','171417627031',p.SOURCE,p.DIGEST):self.assertIn(v,refs)
+  for v in('pg846-completed-readonly-v1','9c08566fff9945a492eaae25559c3084','171417627031',p.SOURCE,p.DIGEST,'from pg847_configuration import FIELDS as CONFIG_FIELDS,same as config_same',"signed_cfg=json.loads(original)['configuration']"):
+   self.assertIn(v,refs)
+  self.assertIn('pg847_configuration.py',files)
   self.assertNotIn('systemctl start',refs)
  def test_foreign_sources_failed_done_and_outside_original_budget(self):
   for key,value in(('actualExit',143),('productionSource','102cdf1d365ab321f74b523237590eee764ae858'),('batchRun','55ac70e7-0180-4c32-8c91-5a379ebedf24'),('activation','7d381b67-b37b-48c6-99ac-e04a336f887d')):

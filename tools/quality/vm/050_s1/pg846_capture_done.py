@@ -21,11 +21,21 @@ def payload():
   ("m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)","m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.TABLES=tuple(baseline['rows']);require(len(m.TABLES)==24 and len(baseline['rows']['schubert.batch_runs'])==554)"),
  ):
   assert a in raw,a;raw=raw.replace(a,b)
+ marker="return {'units':units,'rows':data"
+ assert raw.count(marker)==1
+ fields=(R/'pg847_configuration.py').read_text()
+ raw="CONFIG_SCHEMA="+repr(fields)+'\n'+raw
+ raw=raw.replace("after=snapshot();", "after=snapshot();")
+ raw=raw.replace(marker,"config_env={};exec(compile(CONFIG_SCHEMA,'<independent full32 contract>','exec'),config_env);config_fields=config_env['FIELDS'];require(len(config_fields)==32)\n  configuration={u:show_configuration(u,config_fields)for u in m.UNITS}\n  "+marker.replace("'rows':data","'configuration':configuration,'rows':data"))
+ marker=' def snapshot():'
+ assert raw.count(marker)==1
+ raw=raw.replace(marker," def show_configuration(u,keys):\n  values=dict(l.split('=',1)for l in m.command(['systemctl','show',u,'--property='+','.join(sorted(keys))]).decode().splitlines());require(set(values)==keys);return values\n"+marker)
  ast.parse(raw);return raw
 
 def main():
  os.umask(0o077);assert not subprocess.check_output(['git','status','--porcelain'])
  assert(W/'pg843-watch-v1.exit').read_bytes()==b'0\n'and(W/'pg842-resume-post-v1.exit').read_bytes()==b'0\n'
+ assert(W/'pg849-chr-a01-native-v1.exit').read_bytes()==b'0\n'
  observed=json.loads((W/'pg843-parent-watch-v1.private.jsonl').read_text().splitlines()[-1])
  assert observed['terminalObserved']and observed['parentExit']=='0'and observed['parentResult']=='success'
  assert set(observed['readyObserved'])==set(observed['rootsCaptured'])=={'api','web'}and observed['caddyTlsLogin200']
