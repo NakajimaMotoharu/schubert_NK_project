@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * NK-DAT-001/NK-OPS-001; DAT009/OPS009; UI212/251; SS341 7.4/343/352; WBS-P004-04;
- * PT-SNAPSHOT-911001..007. Literal observations, never Unit/kernel/owner authority.
+ * PT-SNAPSHOT-911001..008. Literal observations, never Unit/kernel/owner authority.
  */
 final class InspectorHeldStateContractTest {
   private static final String INV = "11111111111111111111111111111111";
@@ -32,6 +32,9 @@ final class InspectorHeldStateContractTest {
   void snapshot911001OnlyCleanupInspectorExpiryAreHeldMaintenanceData() {
     for (var target : NAMES.keySet()) {
       var observed = snapshot(target, Map.of());
+      for (var expectedTarget : NAMES.keySet()) {
+        assertEquals(target == expectedTarget, observed.isTarget(expectedTarget));
+      }
       assertEquals(
           target == InspectorUnitSnapshot.Target.CLEANUP, observed.heldCleanup(), target.name());
       assertEquals(
@@ -195,6 +198,13 @@ final class InspectorHeldStateContractTest {
       }
       for (var change :
           List.of(
+              Map.of("Job", "7"),
+              Map.of("MainPID", "17"),
+              Map.of("ControlPID", "18"),
+              Map.of("InvocationID", ""),
+              Map.of("ExecMainCode", "2"),
+              Map.of("ExecMainStatus", "70"),
+              Map.of("Result", "timeout"),
               Map.of("ExecMainStartTimestampMonotonic", "0"),
               Map.of("ExecMainExitTimestampMonotonic", "99"))) {
         var bad = new TreeMap<>(failure);
@@ -264,6 +274,28 @@ final class InspectorHeldStateContractTest {
               fields.toString());
         }
       }
+    }
+  }
+
+  @Test
+  void snapshot911008StoppedGenerationRequiresAllFiveOriginalExecutionValues() {
+    var stopped = Map.of("ActiveState", "inactive", "SubState", "dead");
+    var before = snapshot(InspectorUnitSnapshot.Target.MORNING, stopped);
+    assertTrue(before.sameStoppedExecution(before));
+    for (var change :
+        List.of(
+            Map.of("InvocationID", "22222222222222222222222222222222"),
+            Map.of("ExecMainStatus", "30"),
+            Map.of("ExecMainStartTimestampMonotonic", "101"),
+            Map.of("ExecMainExitTimestampMonotonic", "201"),
+            Map.of("ExecMainCode", "2"),
+            Map.of("Result", "timeout"),
+            Map.of("ActiveState", "active", "SubState", "exited"))) {
+      var fields = new TreeMap<>(stopped);
+      fields.putAll(change);
+      assertFalse(
+          snapshot(InspectorUnitSnapshot.Target.MORNING, fields).sameStoppedExecution(before),
+          change.toString());
     }
   }
 
