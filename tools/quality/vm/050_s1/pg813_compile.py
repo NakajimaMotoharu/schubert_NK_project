@@ -16,5 +16,6 @@ def source():
  marker="    files={f.name:"
  raw=raw.replace(marker,"    with(W/'pg813-database-oracle-v1.private.log').open('xb')as log:\n        for name in ('Pg797OwnedDatabaseTest','Pg798DatabaseScopeTest'):\n            subprocess.run([str(JDK/'java'),'--enable-native-access=ALL-UNNAMED','-cp',cp,name],stdout=log,stderr=log,check=True)\n        log.flush();os.fsync(log.fileno())\n"+marker)
  raw=raw.replace("'pythonIndependentAssertions':151","'pythonIndependentTests':3,'databaseFaultOracle':True,'productionPTAdded':0").replace("'pythonAssertions':151","'pythonIndependentTests':3,'databaseFaultOracle':True,'productionPTAdded':0")
+ raw=raw.replace('pg813-database-oracle-v1','pg813-database-oracle-v2')
  ast.parse(raw);return raw
 if __name__=='__main__':exec(compile(source(),'<813 single full compiler assembly>','exec'),{'__file__':str(R/'pg813_compile.py'),'__name__':'__main__','refs_source':refs_source})

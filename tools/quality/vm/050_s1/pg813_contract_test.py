@@ -41,6 +41,7 @@ class RecoveryContract(unittest.TestCase):
   for raw in(compiler(),transport()):
    ast.parse(raw);self.assertIn('pg813-failed949-tools-v2',raw);self.assertNotIn('pg813-frozen-v1',raw)
   self.assertIn('pg813-frozen-v2.safe.json',compiler());self.assertIn('pg813-stage-v2.exit',transport())
+  self.assertIn('pg813-oracle-v2.private.log',compiler());self.assertNotIn('pg813-oracle-v1',compiler());self.assertNotIn('pg813-database-oracle-v1',compiler())
   self.assertIn('pg813-failed949-recovery-v2',p.java());self.assertIn('pg813-failed949-recovery-v2',p.helper())
 
 if __name__=='__main__':unittest.main()
