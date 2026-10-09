@@ -92,19 +92,19 @@ final class LinuxSystemdQueryTest {
             () -> 0);
     assertArrayEquals(
         ("Id=schubert-nk-api.service\n"
-             + "LoadState=loaded\n"
-             + "ActiveState=active\n"
-             + "SubState=running\n"
-             + "MainPID=200\n"
-             + "InvocationID=00112233445566778899aabbccddeeff\n"
-             + "ControlGroup=/system.slice/schubert-nk-api.service\n")
+                + "LoadState=loaded\n"
+                + "ActiveState=active\n"
+                + "SubState=running\n"
+                + "MainPID=200\n"
+                + "InvocationID=00112233445566778899aabbccddeeff\n"
+                + "ControlGroup=/system.slice/schubert-nk-api.service\n")
             .getBytes(StandardCharsets.US_ASCII),
         query.read(RootStartupContext.Service.API, FIELDS));
     assertArrayEquals(
         ("Id=schubert-nk-api.service\n"
-             + "InvocationID=00112233445566778899aabbccddeeff\n"
-             + "MainPID=200\n"
-             + "ExecMainStartTimestampMonotonic=3000000\n")
+                + "InvocationID=00112233445566778899aabbccddeeff\n"
+                + "MainPID=200\n"
+                + "ExecMainStartTimestampMonotonic=3000000\n")
             .getBytes(StandardCharsets.US_ASCII),
         query.read(RootStartupContext.Service.API, DEADLINE));
     assertEquals(2, created.size());
