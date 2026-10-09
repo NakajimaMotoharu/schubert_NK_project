@@ -4,6 +4,17 @@ import unittest
 from pathlib import Path
 import pg835_pending_sources as p
 class Test(unittest.TestCase):
+    def test_v3_existing_freeze_is_readonly_and_candidate_argv_current_are_distinct(self):
+        from pg835_pending_v3 import source,java
+        generated=java(p.java())
+        self.assertNotIn('freezeCandidate()',generated)
+        self.assertIn('Files.getFileStore(NEXT).isReadOnly()',generated)
+        self.assertIn('/proc/1/ns/mnt',generated)
+        self.assertIn('pg835-pending-tools-v3',generated)
+        for mode in ('compile','stage','activate'):
+            raw=source(mode);ast.parse(raw)
+            self.assertNotIn('pg835-frozen-v2',raw)
+            self.assertIn('pg835-frozen-v3',raw)
     def test_fresh_v2_names_are_closed_and_old_failures_not_overwritten(self):
         from pg835_pending_v2 import source,bind
         for mode in ('compile','stage','activate'):
