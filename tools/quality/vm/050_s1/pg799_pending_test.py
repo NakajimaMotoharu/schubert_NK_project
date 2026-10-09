@@ -49,5 +49,13 @@ class Test(unittest.TestCase):
         self.assertIn('CaptureReferences()',ast.unparse(scope.items[0].context_expr))
         self.assertIn('pg799-pending-tools-v2',native_source());self.assertIn('pg799-frozen-v2.safe.json',compile_source())
         self.assertNotIn('SIGKILL',payload());self.assertIn('signal.SIGTERM',payload())
+    def test_after_switch_and_failure_inside_refs_not_old_source(self):
+        tree=ast.parse(p.refs());main=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='main')
+        held=next(n for n in ast.walk(main)if isinstance(n,ast.With))
+        self.assertTrue(any(isinstance(n,ast.Try)for n in held.body))
+        self.assertIn("h.parent = after_parent",ast.unparse(tree))
+        after=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='after_parent')
+        self.assertIn('0.1.0-PG796',ast.unparse(after));self.assertNotIn('0.1.0-PG750',ast.unparse(after))
+        self.assertIn('PG799_REFERENCE_FRAME',p.refs())
 
 if __name__=='__main__':unittest.main()

@@ -87,7 +87,26 @@ if __name__=='__main__':
 '''
 
 
-def refs():return 'SOURCE='+repr(SOURCE)+'\nDIGEST='+repr(DIGEST)+'\n'+approval_oracle()+'\n'+REFS
+def refs():
+    raw=REFS.replace('def snapshot(db_required):',r'''def after_parent():
+ h.require(h.parent_value(h.show(h.EXTRA[0]))and not pathlib.Path('/proc/2797579').exists());h.kernel_empty(h.EXTRA[0])
+ h.require(pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cc9ed874-7f4f-450e-a188-8de1e42c8441'and pathlib.Path('/opt/schubert-nk/current').readlink()==pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG796'))
+ h.require(hashlib.sha256(pathlib.Path('/opt/schubert-nk/current/RELEASE-MANIFEST.json').read_bytes()).hexdigest()==DIGEST)
+def snapshot(db_required):''')
+    old="phase=line.rstrip(b'\\n');h.require(phase in (b'before',b'after',b'release'));actual=snapshot(phase!=b'release')"
+    assert raw.count(old)==1
+    raw=raw.replace(old,"phase=line.rstrip(b'\\n');h.require(phase in (b'before',b'after',b'release'))\n   if phase in(b'after',b'release'):h.parent=after_parent\n   actual=snapshot(phase!=b'release')")
+    # Catch while references are still genuinely held; outer close errors stay UNKNOWN.
+    start=raw.index('  before=snapshot(True)');end=raw.index(" print('REF_RELEASED'",start)
+    inner='  try:\n'+''.join(' '+line+'\n'for line in raw[start:end].splitlines())+r'''  except BaseException as failure:
+   print('REF_FAILED',flush=True);print('PG799_REFERENCE_UNKNOWN phase='+locals().get('phase',b'initial').decode('ascii',errors='replace')+' type='+type(failure).__name__,file=sys.stderr,flush=True)
+   import traceback
+   for frame in traceback.extract_tb(failure.__traceback__):
+    if frame.filename==__file__:print('PG799_REFERENCE_FRAME method='+frame.name+' line='+str(frame.lineno),file=sys.stderr,flush=True)
+   while True:time.sleep(1)
+'''
+    raw=raw[:start]+inner+raw[end:]
+    return 'SOURCE='+repr(SOURCE)+'\nDIGEST='+repr(DIGEST)+'\n'+approval_oracle()+'\n'+raw
 
 
 def before_freeze():
