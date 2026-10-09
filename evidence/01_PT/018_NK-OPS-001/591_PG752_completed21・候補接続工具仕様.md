@@ -1,5 +1,7 @@
 # PG752 completed21・新candidate接続工具
 
+実再試験operatorb9411b428：756compile-v2/Werror/graph3/CLI20 actual0、752immutabletools-v2 stage0、754unused750stage0、752verify0/9.737529032s→755verify全21post0、752activate0/10.149503369s→755activate全21post0。現在8d/PG750/a96/全24二読534/十kernel-peer-advisory-FLOCK0/九旧private保持/新scope通常帰還。RootafterSHA301fd4e8c2801c5b6c2356ae789a19a7b474ed49559852667a428eaac80cf263、W/pg755-activate-post-v2.safe.json、BUG926/YKT695当工具閉鎖。旧compile-v1は三marker契約未受入のまま原byte保持。新sourcefreshparent/native/formalは未受入、全回帰748同source3513結果保持・工具だけ変更で反復0。
+
 BUG926/YKT695発見後：旧752compile-v1/immutabletools-v1はWerror/CLI20の限定成功を保存するが、三marker未復元のため実候補契約未受入・VM操作0。source順次判定へ是正、全九生成surface/三marker0/old715-next750/source-digestの独立binding3・graph3/ownerreceipt4/Pyflakes0成功。次`pg756_compile.py`で新tools-v2/compile-v2/oracle-v2/frozen-v2だけを固定し、752v1再発行/上書き0。nativeはv2source/hash/metadataを必須にstage→verify→activateへ進む、fresh全回帰は同8dProduction不変更なので反復0。修正source/新実結果は後記。
 
 SS343354/SSC233234/PG-D405、WBS-N15.01/N15.04。current1ec/PG715/74d353・751readonlyactual0/8c722e…/全21/534・55ac-ab889/DONE ended03:30:40.608594Z・PID1INV2aff/job132812/127549297774→129343844863・元1800sを固定する。新候補8d/7483513/519/static6zero/750a96ddf/187/schema028・old7byte/new2だけ。新M-A/専用RODB-advisory71419602/samepeer/十Ref/保持namespaceFD・全21二読の連続区間、verify不変更→別activate有限epochINVALID/Root0400approval/currentだけ、newpermit/start/migration/DBwrite/原本復元0。九old664702737private tree/原534/全24/Backup/旧43native/旧UNKNOWNを保全する。
