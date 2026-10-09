@@ -524,6 +524,22 @@ public final class MaintenanceRunFiles {
      */
     public BatchRun successReferenceRun(
         MaintenanceActivation current, UUID priorId, Instant observed) throws StorageIoException {
+      return referenceRun(current, Optional.empty(), priorId, observed);
+    }
+
+    /** SSC240/RLOOK852001: exact DONE is data proof, never startup/DB authority. */
+    public BatchRun completedSuccessReferenceRun(
+        MaintenanceCompletion expected, UUID priorId, Instant observed) throws StorageIoException {
+      Objects.requireNonNull(expected);
+      return referenceRun(expected.activation(), Optional.of(expected), priorId, observed);
+    }
+
+    private BatchRun referenceRun(
+        MaintenanceActivation current,
+        Optional<MaintenanceCompletion> completion,
+        UUID priorId,
+        Instant observed)
+        throws StorageIoException {
       Objects.requireNonNull(current);
       Objects.requireNonNull(priorId);
       Objects.requireNonNull(observed);
@@ -532,7 +548,18 @@ public final class MaintenanceRunFiles {
             Graph first = scan();
             // BUG799/RLOOK493001: bracket pure validation with two complete retained scans.
             // No cached graph or anchor-only read: the final scan rejects unrelated drift too.
-            require(first.active().equals(Optional.of(current)));
+            if (completion.isEmpty()) require(first.active().equals(Optional.of(current)));
+            else {
+              MaintenanceCompletion expected = completion.orElseThrow();
+              require(
+                  first.active().isEmpty()
+                      && first.pending().isEmpty()
+                      && current.run().equals(first.runs().get(current.run().id()))
+                      && current.equals(first.begins().get(current.id()))
+                      && expected.equals(first.done().get(current.id())));
+              // observed is the historical SKIP start; current DONE normally ends later.
+              // The referenced prior run's end <= observed check below is unchanged.
+            }
             require(
                 !observed.isBefore(current.run().cutoff())
                     && !observed.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))

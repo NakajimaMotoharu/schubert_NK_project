@@ -134,6 +134,20 @@ final class MorningResumeAdmission {
                                 return value;
                               }
 
+                              public dev.codex.schubert.nk.batch.repository.BatchRun
+                                  referenceCompletedRun(
+                                      MaintenanceCompletion completion,
+                                      UUID priorId,
+                                      java.time.Instant observed)
+                                      throws IOException {
+                                context.recheck(expected);
+                                var value =
+                                    files.completedSuccessReferenceRun(
+                                        completion, priorId, observed);
+                                context.recheck(expected);
+                                return value;
+                              }
+
                               public void verifyCompleted(MaintenanceCompletion value)
                                   throws IOException {
                                 context.recheck(expected);

@@ -42,6 +42,176 @@ final class MaintenanceRunFilesTest {
   private static final String DONE0 = DONE_PREFIX + "0\n", DONE10 = DONE_PREFIX + "10\n";
   @TempDir Path temporary;
 
+  /**
+   * BUG968/RLOOK852001: real same Session, unchanged historical reference after active retirement.
+   */
+  @Test
+  void doneAfterRealSessionRetainsTypedDataReferenceButRejectsPendingCapability() throws Exception {
+    try (var f = fixture()) {
+      f.files.execute(
+          s -> {
+            s.start(RUN, ACTIVATION.id());
+            assertEquals(RUN, s.successReferenceRun(ACTIVATION, RUN.id(), RUN.cutoff()));
+            var done =
+                new MaintenanceCompletion(
+                    ACTIVATION,
+                    Instant.parse("2026-09-12T05:06:07.234567Z"),
+                    MaintenanceCompletion.Outcome.SUCCESS);
+            assertEquals(done, s.complete(done));
+            assertEquals(
+                new MaintenanceRunFiles.StartupOriginal(ACTIVATION, Optional.of(done)),
+                s.observeStartup(ACTIVATION));
+            assertFalse(Files.exists(f.maintenance.resolve("active")));
+            assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+            assertThrows(
+                IOException.class, () -> s.successReferenceRun(ACTIVATION, RUN.id(), RUN.cutoff()));
+            var before = new HashMap<>(f.counts);
+            assertEquals(RUN, s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
+            assertEquals(before.getOrDefault("write", 0), f.counts.getOrDefault("write", 0));
+            assertEquals(before.getOrDefault("remove", 0), f.counts.getOrDefault("remove", 0));
+            assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+            return RUN;
+          });
+    }
+  }
+
+  /**
+   * RLOOK852002: completed current is exact data proof, never missing/failed/future/foreign
+   * authority.
+   */
+  @Test
+  void completedReferenceRefusesForeignDonePendingUnknownAndHistoricalTimeFaults()
+      throws Exception {
+    try (var f = fixture()) {
+      f.files.execute(
+          s -> {
+            s.start(RUN, ACTIVATION.id());
+            var done = completion(MaintenanceCompletion.Outcome.SUCCESS);
+            assertThrows(
+                IOException.class,
+                () -> s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
+            s.complete(done);
+            for (var bad :
+                List.of(
+                    completion(MaintenanceCompletion.Outcome.WARNING),
+                    new MaintenanceCompletion(
+                        ACTIVATION,
+                        done.endedAt().plusNanos(1000),
+                        MaintenanceCompletion.Outcome.SUCCESS),
+                    new MaintenanceCompletion(
+                        new MaintenanceActivation(RUN, NEXT),
+                        done.endedAt(),
+                        MaintenanceCompletion.Outcome.SUCCESS)))
+              assertThrows(
+                  IOException.class,
+                  () -> s.completedSuccessReferenceRun(bad, RUN.id(), RUN.cutoff()));
+            for (Instant t :
+                List.of(
+                    RUN.cutoff().minusNanos(1000),
+                    RUN.cutoff().plusNanos(1),
+                    Instant.parse("9999-12-31T23:59:59.999999Z").plusNanos(1000)))
+              assertThrows(
+                  IOException.class, () -> s.completedSuccessReferenceRun(done, RUN.id(), t));
+            assertThrows(
+                IOException.class, () -> s.completedSuccessReferenceRun(done, NEXT, RUN.cutoff()));
+            assertThrows(
+                NullPointerException.class,
+                () -> s.completedSuccessReferenceRun(null, RUN.id(), RUN.cutoff()));
+            assertThrows(
+                NullPointerException.class,
+                () -> s.completedSuccessReferenceRun(done, null, RUN.cutoff()));
+            assertThrows(
+                NullPointerException.class,
+                () -> s.completedSuccessReferenceRun(done, RUN.id(), null));
+            return RUN;
+          });
+    }
+  }
+
+  /** RLOOK200001: independent retained bytes/cutoff, not a DB-derived original. */
+  @Test
+  void completedWarningRetainsHistoricalPriorButNeverPendingOrForeignActive() throws Exception {
+    try (var f = fixture()) {
+      f.seed(true, false, true);
+      var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+      var activation = new MaintenanceActivation(current, OTHER);
+      var done =
+          new MaintenanceCompletion(
+              activation,
+              Instant.parse("2026-09-12T07:00:00Z"),
+              MaintenanceCompletion.Outcome.WARNING);
+      f.files.execute(s -> s.start(current, OTHER));
+      f.files.execute(s -> s.complete(done));
+      assertEquals(
+          RUN,
+          f.files.execute(s -> s.completedSuccessReferenceRun(done, RUN.id(), current.cutoff())));
+      assertEquals(
+          current,
+          f.files.execute(s -> s.completedSuccessReferenceRun(done, NEXT, current.cutoff())));
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(
+                  s ->
+                      s.completedSuccessReferenceRun(
+                          done, RUN.id(), Instant.parse("2026-09-12T05:00:00Z"))));
+      f.files.execute(
+          s -> s.start(new BatchRun(OTHER, Instant.parse("2026-09-12T08:00:00Z")), NEXT));
+      assertThrows(
+          IOException.class,
+          () ->
+              f.files.execute(
+                  s -> s.completedSuccessReferenceRun(done, RUN.id(), current.cutoff())));
+    }
+  }
+
+  /** RLOOK852005: full second graph, no cached anchor-only completed proof. */
+  @Test
+  void completedReferenceRejectsWholeGraphDriftWithoutMutation() throws Exception {
+    for (String fault :
+        List.of("none", "unrelated", "prior", "namespace", "listing", "close", "interrupt"))
+      try (var f = fixture()) {
+        f.seed(true, false, true);
+        var done = completion(MaintenanceCompletion.Outcome.SUCCESS);
+        Action operation =
+            () ->
+                f.files.execute(
+                    s -> {
+                      f.reset();
+                      if (fault.equals("unrelated")) f.on("namesOpen", 4, f::otherCompleted);
+                      if (fault.equals("prior"))
+                        f.on(
+                            "namesOpen",
+                            4,
+                            () -> Files.writeString(f.attempts.resolve(ACT_ID + ".done"), DONE10));
+                      if (fault.equals("namespace")) f.on("namesOpen", 4, () -> f.replace("runs"));
+                      if (fault.equals("listing") || fault.equals("close")) {
+                        f.fail = fault.equals("listing") ? "namesOpen" : "namesClose";
+                        f.failAt = 4;
+                      }
+                      if (fault.equals("interrupt"))
+                        f.on("namesOpen", 4, () -> Thread.currentThread().interrupt());
+                      try {
+                        if (fault.equals("none")) {
+                          assertEquals(
+                              RUN, s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
+                          assertEquals(6, f.count("namesOpen"));
+                          assertEquals(6, f.count("namesClose"));
+                        } else
+                          failure(
+                              () -> s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
+                      } finally {
+                        Thread.interrupted();
+                      }
+                      for (String write : List.of("create", "publish", "unlink", "write", "sync"))
+                        assertEquals(0, f.count(write));
+                      return RUN;
+                    });
+        if (fault.equals("namespace")) failure(operation::execute);
+        else operation.execute();
+      }
+  }
+
   /** RLOOK200001: independent retained bytes/cutoff, not a DB-derived original. */
   @Test
   void successReferenceReadsRetainedSameDayOriginalWithoutChangingActive() throws Exception {

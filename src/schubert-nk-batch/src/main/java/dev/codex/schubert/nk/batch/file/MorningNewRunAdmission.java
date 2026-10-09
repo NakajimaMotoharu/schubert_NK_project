@@ -66,6 +66,13 @@ final class MorningNewRunAdmission {
       throw unavailable();
     }
 
+    /** SSC240: a confirmed exact completion selects a separate data-only capability. */
+    default BatchRun referenceCompletedRun(
+        MaintenanceCompletion expected, UUID priorId, java.time.Instant observed)
+        throws IOException {
+      throw unavailable();
+    }
+
     default void verify(MaintenanceActivation expected) throws IOException {
       throw unavailable();
     }
@@ -199,6 +206,19 @@ final class MorningNewRunAdmission {
                                 var result = files.complete(value);
                                 context.recheck(expected);
                                 return result;
+                              }
+
+                              public BatchRun referenceCompletedRun(
+                                  MaintenanceCompletion completion,
+                                  UUID priorId,
+                                  java.time.Instant observed)
+                                  throws IOException {
+                                context.recheck(expected);
+                                var value =
+                                    files.completedSuccessReferenceRun(
+                                        completion, priorId, observed);
+                                context.recheck(expected);
+                                return value;
                               }
 
                               public void verifyCompleted(MaintenanceCompletion value)
@@ -367,7 +387,10 @@ final class MorningNewRunAdmission {
         Objects.requireNonNull(observed);
         verify();
         var value =
-            Objects.requireNonNull(files.referenceRun(state.activation(), priorId, observed));
+            Objects.requireNonNull(
+                completed.isPresent()
+                    ? files.referenceCompletedRun(completed.orElseThrow(), priorId, observed)
+                    : files.referenceRun(state.activation(), priorId, observed));
         verify();
         return value;
       }

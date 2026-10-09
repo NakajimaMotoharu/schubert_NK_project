@@ -88,6 +88,13 @@ final class MorningOriginalCompletionTest {
       return new BatchRun(priorId, Instant.parse("2026-10-04T08:00:00Z"));
     }
 
+    public BatchRun referenceCompletedRun(
+        MaintenanceCompletion expected, UUID priorId, Instant observed) throws IOException {
+      assertEquals(Optional.of(expected), stored);
+      events.add("completed-reference");
+      return referenceRun(expected.activation(), priorId, observed);
+    }
+
     MorningNewRunAdmission.OriginalProof proof() {
       return MorningNewRunAdmission.scopedOriginalProof(
           this::root,
@@ -96,6 +103,66 @@ final class MorningOriginalCompletionTest {
           alive,
           () -> new IOException("scope unavailable"));
     }
+  }
+
+  /** SSC240/RLOOK852003: historical SKIP precedes current WARNING DONE; no republish. */
+  @Test
+  void completedLookupSwitchesToTypedDataOnlyForPublishedAndExistingWarning() throws Exception {
+    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
+    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    for (boolean existing : List.of(false, true)) {
+      var f = new Fixture();
+      if (existing) f.stored = Optional.of(DONE);
+      var proof = f.proof();
+      if (!existing) assertEquals(DONE, proof.complete(DONE));
+      f.events.clear();
+      assertEquals(
+          new BatchRun(id, Instant.parse("2026-10-04T08:00:00Z")),
+          proof.referenceRun(id, observed));
+      assertEquals(
+          List.of(
+              "root", "done", "root", "completed-reference", "reference", "root", "done", "root"),
+          f.events);
+      assertEquals(existing ? 0 : 1, f.publish);
+      assertEquals(Optional.of(DONE), f.stored);
+      f.alive.set(false);
+      assertThrows(IOException.class, () -> proof.referenceRun(id, observed));
+    }
+  }
+
+  /** RLOOK852004: completed reference preserves exact exception/owner and fail-closed default. */
+  @Test
+  void completedReferenceFailureOwnerAndMissingAdapterNeverReturnData() throws Exception {
+    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
+    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    for (int kind = 0; kind < 3; kind++) {
+      var f = new Fixture();
+      f.stored = Optional.of(DONE);
+      f.kind = kind;
+      f.fault = "reference";
+      assertSame(
+          kind == 0 ? f.io : kind == 1 ? f.runtime : f.fatal,
+          assertThrows(Throwable.class, () -> f.proof().referenceRun(id, observed)));
+      assertEquals(0, f.publish);
+    }
+    var f = new Fixture();
+    f.stored = Optional.of(DONE);
+    f.expireAfterReference = true;
+    assertThrows(IOException.class, () -> f.proof().referenceRun(id, observed));
+    var foreign = new Fixture();
+    foreign.stored = Optional.of(DONE);
+    var proof = foreign.proof();
+    try (var executor = Executors.newSingleThreadExecutor()) {
+      executor
+          .submit(() -> assertThrows(IOException.class, () -> proof.referenceRun(id, observed)))
+          .get(5, TimeUnit.SECONDS);
+    }
+    assertTrue(foreign.events.isEmpty());
+    assertThrows(
+        IOException.class,
+        () ->
+            new MorningNewRunAdmission.OriginalFiles() {}.referenceCompletedRun(
+                DONE, id, observed));
   }
 
   @Test
