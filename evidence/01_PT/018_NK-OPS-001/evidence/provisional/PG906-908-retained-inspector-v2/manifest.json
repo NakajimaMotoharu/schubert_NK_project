@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001/NK-DAT-001",
+  "testIds": [
+    "INSP906001",
+    "INSP906002",
+    "INSP906003",
+    "INSP907001",
+    "INSP908001"
+  ],
+  "branch": "dev-foundation",
+  "productionSource": "e01612fcd7f2752df5ae0836b78538fd5e87f120",
+  "operatorSource": "d76369db96ea9b193e05f7dfb1bdfdbf07fec7ac",
+  "recordedUTC": "2026-10-09T20:44:08.922767+00:00",
+  "command": [
+    "python3 -B tools/quality/vm/050_s1/pg906_progress_epoch_test.py",
+    "python3 -B tools/quality/vm/050_s1/pg906_retained_inspector_v2.py",
+    "python3 -B tools/quality/vm/050_s1/pg907_inspector_native_counter.py",
+    "python3 -B tools/quality/vm/050_s1/pg908_current_gap.py"
+  ],
+  "environment": {
+    "hostOS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "jdk": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "ASM": "9.10.1"
+  },
+  "actualExit": 0,
+  "postElapsedSeconds": 3.078983,
+  "postSafeManifestSha256": "f7a6f089b3942e7417cf32ad8a3dc02f98f6d6902ca7c3e50b15a46f6631fe1d",
+  "postSnapshotSha256": "4aa97f5a256d8d74283f83310b6c8e042dc0f8ca0bcd957bc68abed2fce257cb",
+  "inspectorJournalSha256": "e766d45ee8762ed61dacc3a39a54952e021189a1d8334f65a8d45697ecb4d1ef",
+  "preStartNativeBeforeSha256": "a8c6c5d4dca5c02b1ae6b3ee797ba87d129b0dc4851ae31f6e7609ebfd31d980",
+  "normalCurrentProgressVerified": true,
+  "currentLiveUnitExitStatus": null,
+  "pastUnitStatusNotInferredFromGc": true,
+  "newUnitStarts": 0,
+  "independentExpectedSource": "Literal SS343 current first Root/cutoff/progress0 and distinct source capture phases/PID1 monotonic window/independent SHA256",
+  "nativeManifestSha256": "250d575bcd57a6eb52401c6abe5f274b53e30b39240f009b14f1d89a540866d5",
+  "gapManifestSha256": "aacb229138785b503d26571b47d927f92cd4f0de8141608adb9a65a362f987be",
+  "inspectorNativeHashes": [
+    "75b4dc1db7e23e0d8e3d552a81f1f9959d95ef87b933f3ec75a30158d36bf17f",
+    "6f817e054e12c7c93c8bf466dda11e986c97e495b40471004b24867d6a901f4a"
+  ],
+  "hostRun": "PG857/3541PT/522suite/static6zero",
+  "streams": 20,
+  "distinctProcesses": 18,
+  "classByteMismatch": 0,
+  "oldSourceImported": 0,
+  "incrementalVsPG903": {
+    "BRANCH": 2,
+    "CLASS": 0,
+    "LINE": 18,
+    "METHOD": 3
+  },
+  "remaining": {
+    "BRANCH": 756,
+    "CLASS": 12,
+    "LINE": 839,
+    "METHOD": 162
+  },
+  "all24CurrentPreserved": true,
+  "signedArtifacts": 187,
+  "allResources0": true,
+  "bug": "BUG-995",
+  "crossExpansion": "YKT-764",
+  "globalCoverage100": false,
+  "formalAccepted": false,
+  "wholeWbsAcceptedDelta": 0,
+  "ITSTAccepted": false,
+  "rawExported": false,
+  "specification": "evidence/01_PT/018_NK-OPS-001/611_当e016_保持Inspector_native照合_仕様・結果.md"
+}
