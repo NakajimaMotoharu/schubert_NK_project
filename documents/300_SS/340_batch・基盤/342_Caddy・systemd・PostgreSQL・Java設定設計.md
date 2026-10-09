@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC235（2026-10-09、QA047内のPG758失敗世代復旧）：343の当source限定profileを適用する。親の元1800秒timeout143/RootDONE無しを正常終了へ置換せず、API/Web/Caddy/Artemisの捕捉同世代を発行直前再照合し、新M→A→専用DB/advisory71419602・固定十Unitの同private bus Refと実保持FDの下でCaddy→Web→API→残保守→Artemisを正規停止する。依存による先行停止は同世代の真正kernel/native/PID1/vendor witnessで検証し、stopを再発行しない。current七startup現物・親/child launchとsecurity・元原本/全24/Backup/Transfer/旧失敗証跡を保全する。全kernel/当native終端・後条件成立後だけ正規同epoch失効と既存Pair退役へ進む。配備/再起動/期限延長/未知ownerへの停止0。停止中Unitは固定LoadUnit/RefUnitで観測保持できるがstartはしない。各通常資源close不明は非成功・再隔離し、旧失敗のclose成功を推論しない。
+
 SSC233（2026-10-09）：現PG631のcompleted601/正常停止・current Bootstrap20からPG682所有内部変更群へcode-only再束縛する固定profileは343SSC233を正とする。旧失敗/原本/全24-514/18Unitfile・hardening/既native設定・十主要と依存・元1800秒/各Unit期限を保持する。新candidateは187/SQL28/history29の同pin型付き資格、verify/activate別連続M-A/専用RODB/十Ref/保持dirFDで全21原値を照合し、同run/cutoff/activation新INVALID epoch・Root0400approval/currentだけを公開。daemon-reload/Unit配置/新permit/業務start/stopを当切替へ混在させない。GCは既normal20から有限idleだけ、旧unknownclose/成功推定をしない。正常全scope/独立post後だけ別fresh起動/所有/同source実nativeへ、host成功や候補署名だけでUnit/coverage/formalを受入しない。
 
 SSC231（2026-10-09）：当PG631完成・正常全停止後の専用Bootstrap一回existing-onlyは343を正とする。既署名Unitの30s/Restart=no/disabled/SuccessExitStatus20・hardening/credential/name/UID/GID/groups/cap0/NNPを変更せず、新二sourceだけ正規入力世代として作成・私有退役する。新十Ref保持で当Bootstrapの元INVと新normal20を分離、他九主要18/全宣言/依存と18Unit source byteは保持。全24/既原本/Startup/Backup/current/approval/旧Proofを二読し、M-A/前postDB/Ref/FDの正常closeと実資源0を閉じる。古いBootstrap credentialの復元・Unit再配備/reload・通常service再start・空UserDBへの拡張・旧source native輸入を禁止する。
