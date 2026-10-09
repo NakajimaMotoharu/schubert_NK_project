@@ -1,0 +1,9 @@
+# PG770 currentBootstrap最新closing一session資格
+
+SS354/SSC234/451、WBS-N15.02。真正761/owned764/full765/八native766/全21baseline767/currentADMIN768及び769meta/fullpostの同source8d/PG750/544全後条件が前提。source/root/actor/時刻/shaはactualmetaの厳格型・整数0・genuine真・30秒・544・全normalからしか生成しない。独立host766manifestSHA/7483513host全六JAR/exec/NoMatch0へ束縛、旧1ec9/旧parent/nativeを輸入しない。
+
+NAT770001最新closing・終端保全・二物理別inode0600/bytehash・当owner/role/window/signedsource・固定746oraclemanifest26cb3b18f8542af5819f1f3a28496a2e3351bed6048fb9ae0fe66ecefa14530c/JAR全byte/二single-session/start同一/probe単調を必須とするrecipe、terminalをstreamsへ追加しない・746資格前に通常session/counter集計しない、002 unknownhash/null/bool/uppercase/短SHA拒否：2test0/Pyflakes0、ProductionPTへ加点0。
+
+実command `python3 -B tools/quality/vm/050_s1/pg770_closing_native.py`、W/pg770-current-nine-native-v1へprivateterminalとclosing二物理を保存、746publicJaCoCoCoreが同JVMsession/role/invocation/window/全NKclassID/probe長/前true消失0を独立確認。closingQualificationはsafehash/timestamp/countのみ、terminalIncludedInCounter=false/closingOnlyIncludedInCounter=true、物理二fileを二sessionへ加算しない。実counterは当八＋closing一＋同sourcehost六execだけ。marker三つ/Unit20/full21は769が検証、末尾失敗やfallbackを合格扱いしない。
+
+各class/method/line/branchの実missed/gain/manifestSHA/operator/source/run/時間・終了codeは実後追記、rawexec/session/DB/key/privateログGit0、全scope同source/formal/global100未完。Currentbaseline/ITST結果は変更しない。
