@@ -1,0 +1,170 @@
+{
+  "source": "5a5f40919c401d6c74289a0279bf885edd6112d1",
+  "startedUTC": "2026-10-09T22:22:04.942503+00:00",
+  "endedUTC": "2026-10-09T22:22:42.976067+00:00",
+  "command": [
+    "./mvnw",
+    "-o",
+    "--no-transfer-progress",
+    "-Dstyle.color=never",
+    "-Djansi.force=false",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "src/schubert-nk-bootstrap,src/schubert-nk-api",
+    "spotless:check",
+    "test-compile",
+    "test",
+    "spotbugs:check",
+    "jacoco:report",
+    "jar:jar",
+    "-Dtest=ChildBrokerTest,ChildCaddyTest,ChildStartupContextTest,MaintenanceOwnerFrameTest,InspectorApplicationTest,InspectorEntryBoundaryTest,InspectorLauncherTest,InspectorProcessTest",
+    "-Dsurefire.failIfNoSpecifiedTests=false"
+  ],
+  "actualExit": 0,
+  "candidateDeployed": false,
+  "installedVmSource": "e01612fcd7f2752df5ae0836b78538fd5e87f120",
+  "program": "NK-OPS-001",
+  "branch": "dev-foundation",
+  "wbsLeaves": [
+    "WBS-P004-04",
+    "WBS-P018-03.02"
+  ],
+  "testIds": [
+    "PT-APP-925001",
+    "PT-APP-925002",
+    "PT-APP-925003",
+    "PT-COMMON-925004"
+  ],
+  "environment": {
+    "OS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "JDK": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "SpotBugs": "4.10.4",
+    "NullAway": "0.14.1"
+  },
+  "tests": 60,
+  "suites": 8,
+  "FESFlakyNotRun": 0,
+  "staticIssues": 0,
+  "methods": {
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext.verifyDaemon(Ljava/util/UUID;Ljava/lang/String;Ldev/codex/schubert/nk/bootstrap/FixedServiceIdentity$Value;Z)Ldev/codex/schubert/nk/bootstrap/ChildStartupContext$Observed;": {
+      "INSTRUCTION": {
+        "covered": 283,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 52,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 49,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 27,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorApplication.execute(Ldev/codex/schubert/nk/api/maintenance/InspectionRun;)Ldev/codex/schubert/nk/api/maintenance/InspectionExecution;": {
+      "INSTRUCTION": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorApplication.readMaintenanceOwner(Ldev/codex/schubert/nk/api/file/InspectorCredentialLoader;)Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame;": {
+      "INSTRUCTION": {
+        "covered": 14,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 4,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/api/file/InspectorApplication.execute(Ldev/codex/schubert/nk/api/maintenance/InspectionRun;Ljava/util/Optional;)Ldev/codex/schubert/nk/api/maintenance/InspectionExecution;": {
+      "INSTRUCTION": {
+        "covered": 79,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 18,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "changedClassNames": [
+    "dev/codex/schubert/nk/api/file/InspectorApplication.class",
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext$NativeIo.class",
+    "dev/codex/schubert/nk/bootstrap/ChildStartupContext.class"
+  ],
+  "byteComparisonReference": "4ebf34debdda9c655717af8acae09b571efd8133",
+  "independentOracle": "615 hand-written owner frame and fixed progress/SQL row counts; guard IO before credentials/SQL; guard-present success and replay once; second capture foreign UID refuses",
+  "expected": "guard IOException generic rejection/zero SQL; available guard SUCCESS and same run replay row1; malformed frame IOException; missing reader credential exception; changed UID IOException",
+  "actual": "All stated assertions passed, held roots closed and buffers wiped",
+  "runManifestSha256": "7edd73c8d6f60bf9ebf3fb2c5419e0a265144676f0ca78574c40463d92c7f3f8",
+  "privateLogSha256": "b98991ecc1990479c76eec4245739a19f89e7e30151b9ac192df0511f9d6a15f",
+  "xmlHashes": {
+    "bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildCaddyTest.xml": "f4e6dbb2dfe55012fd87e60a1f0e5126fc756367c3333eba524721ed13b7424b",
+    "bootstrap/TEST-dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrameTest.xml": "1d19cb64394782e484bf67d103509429c80de861883b78e54907384a0559a7d8",
+    "bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildBrokerTest.xml": "eb530d7069917a9e8aab8de2a04e211c464908cd419cb559ca7d7b83b3a53265",
+    "bootstrap/TEST-dev.codex.schubert.nk.bootstrap.ChildStartupContextTest.xml": "724be1baea1e7a04f720dc0d43f09062ee66912b909b3a282ad34593c2966c3e",
+    "api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorEntryBoundaryTest.xml": "865c5c7265af665765b0ae916d2ffddac614049a45dbb934c3a0288965e04da0",
+    "api/TEST-dev.codex.schubert.nk.api.file.InspectorApplicationTest.xml": "06982203bd401f9e1bb071c194fefd0f416469dae0c5dc0fcefdd9860a404b91",
+    "api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorProcessTest.xml": "38387fdd3b8c2540ac10ff1947dad992b480188e3e697eece7152fdb81ea7176",
+    "api/TEST-dev.codex.schubert.nk.api.maintenance.InspectorLauncherTest.xml": "0ea270b1ef53fb6e9a5893f27dba66d4f4829364681bd5c616979e89dcde2d1d"
+  },
+  "artifactHashes": {
+    "bootstrap/jacoco.xml": "625e483eb292e2f553f8d82557664a965cbd420cac0c4cd8803e664a14ac2b4f",
+    "bootstrap/jacoco.exec": "c94af4c3a71734331b711275ff4a941bb31017721dcb7f5d91d6f1a07ff04ccc",
+    "bootstrap/spotbugsXml.xml": "bc9294f8d27fcf4048ded9586248bf37d67ad8a424d8805739498e199855834d",
+    "bootstrap/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "1212928062549dfc9f6abee1c33c82fc5dd723e114fc7ca65e45b5070dc58ef7",
+    "api/jacoco.xml": "1119ca7cc663f2217a0d5f46ab94ac6cd67d87492959f776a08c95b0bb4bfd5f",
+    "api/jacoco.exec": "24823b10e88d29fb12288e35bc761fe2e99edcd969dcf4a77053ab21475e5048",
+    "api/spotbugsXml.xml": "f9e4fcf162631ccc163407d2eae0f20ffbbcdea05b2f6c7f1e8cdba8f3ddc97c",
+    "api/schubert-nk-api-0.1.0-SNAPSHOT.jar": "7a1c62ad8205274c1e8bff5daba6757e37fa2e627c67e682c8810d482d210a69"
+  },
+  "formalAccepted": false,
+  "wholeClassOrWbsClosed": false,
+  "oldNativeImported": false,
+  "wholeRegressionPending": true,
+  "rawExported": false,
+  "bugIds": [],
+  "specification": "evidence/01_PT/018_NK-OPS-001/615_Inspector実body_guard・claim境界_PT仕様.md"
+}

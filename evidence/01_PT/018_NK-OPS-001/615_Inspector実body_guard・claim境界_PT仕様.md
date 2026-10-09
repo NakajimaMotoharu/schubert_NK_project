@@ -11,3 +11,8 @@ NK-DAT-001/NK-OPS-001、P004-04（guard/claim）とP018-03.02（UID同値）、D
 | PT-COMMON-925004 | 第1capture UIDは固定200、第2captureだけ全4UID202へ変化 | 外側冗長UID比較を削除しても内側UID検査でIOException・buffer消去/manager前後比較の弱体化0。既一回目UID不一致・Root caller非0も既suiteで回帰 |
 
 正常/欠落/null/境界/unknown/競合/再送は既Application/entry/guard/credentials/ChildBroker/Caddy suitesを同群で回帰。期待値は手書きcanonical metadata・SS所定拒否・SQL後条件、Productionでexpected生成0。providerは観測/所有portに限定し実startupを合格化しない。新main変更群は独立selected後、必要fresh同source全六を実行する。実source/command/tool/exit/counter/hashは未実行として後記、失敗/flaky/skipped/not-run加点0。
+# PG925v2限定実結果（正式受入ではない）
+
+source `5a5f40919c401d6c74289a0279bf885edd6112d1`、2026-10-10 07:22:04.942503～07:22:42.976067JST、38.033564秒、実終了0。60PT/8suite/FESFlakyNotRun0、SpotBugs二module0。実body guard18L1M6B、owner読取4L1M、daemon49L1M52Bの全適用counter missed0。正常guard/同run再送SQL row1の対照も実行済み。全class/全scope/nativeは未受入であり、PG926 fresh全六へ進む。
+
+証跡: `evidence/provisional/PG925-body-host-v2/manifest.json`（Test ID・独立期待値・環境・command・XML/exec/coverage/static/JAR/hash・private log hashを保持、raw機密なし）。旧v1成功は別source結果として保持し合算しない。関連BUGなし。
