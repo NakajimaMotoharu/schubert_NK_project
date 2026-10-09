@@ -39,6 +39,8 @@ Java25.0.4/Maven3.9.12、Ubuntu Linux x86_64、host/VM systemd/libsystemd0=259.5
 
 ### 2026-10-10 00:14 当sourceの実接続増分（正式認定ではない）
 
+00:36追補：同親9c08からAPI/ordinary17:16.???の推定は用いず実UTC15:28:46.132163、Web15:29:01.177853、CaddyTLS15:29:09.687967にsame-peer/Root-to-ordinary/identity/socket/info2aをobserverが実認証。PG849当source共通Current A01はUTC15:29:59.952487～15:30:02.783658/actual0/PASS、artifactSHA3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558。Current baselineSHA df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993を不変更、DIF001/QA045承認titleだけ適用・他DOM/security同値、CSRFは<TOKEN>にredactしraw cookie/token/password0。公開`program/characterization/reports/nk/PG849-native-a01-v1/manifest.json`へsource/operator/日時/command/exit/期待値/実値/hash/正式falseを保存。親真正は未認定、ready/A01だけで成功0。847生成工具の設定20対現capture27不整合をBUG967/YKT736へ先行起票、独立union32・全項目変異・宣言と補助履歴分離へ是正、actual stopは未発行。
+
 | Test ID / command | 入力・独立期待値 / 実結果 | 証跡（私有root PG379） |
 |---|---|---|
 | FREEZE835004 / `pg835_pending_v6.py compile; stage; activate` | current102/796→candidate2a/832、既exactbind RO/PID1同mntnamespaceを固定mountinfo root/target/source型と独立23反例で証明、署名187/fullBOM・全新scope通常終了、DB更新/start0。実compile/Java33/Python4/stage/activate0、activate20.666150s | pg835-frozen-v6.safe.json / pg835-activate-v6.safe.json、実logSHA941ec7697fce8a3b9d8c1bf3afd4be6a28b39b115e04595dac48910aa249293e |
