@@ -1,5 +1,7 @@
 # PG728–730 当source所有停止とnative
 
+実結果operator20337ce0e：728compileWerror0/CLI6/nullNpe0、owned逆順STOP actual0/22.231016275s/03:32:54.109377～33:16.550987UTC、全八receipt正常/再操作0。729actual0/全24二読不変/全十kernel・actor・client/advisory/FLOCK0/187署名/native42安定、afterSHA3dc7e756a77c066f53c7503f8109564c559475ffda98e157c1eb2b0ee62e5c32。730actual0/当八唯一session＋PG713host6を1614同byteでNoMatch0、manifest2f575a4bbd2dd3ae83eb493c12aef0899c3702b6f9bf04bdf5bd46449facb500、gain2866L450M28C372B/残948L179M12C766B。旧source輸入0/全四100未達。sanitized九receipt公開f0eb9426fa317d83fba7055cb525fe109bc30bb0f452d1467d3785186e421403、rawexec/session/DB/credential/Backup0。BUG924修正cb0dec906/型負例3と実730/733成功で当工具閉鎖、正式未変更。
+
 BUG924/YKT693：未発行730資格入口の独立fixture.actualExit=FalseがPython等価0で通ることをhost再現・修正前起票、strict int0/二genuine booleanTrueをcurrent入口・実maindelegationに追加。公開733も各receipt/currentnative終了0をstrict型へ。正常/False/0.0/null/文字列・genuine false/1/null/文字列拒否、binding2＋公開1/Pyflakes0。728は既strict型、725は実SSH整数/独立RootPID1から構成のため非該当。実730/native/公開733未発行、当親/source/DBへの変更0、修正commitは本記録含む次commit、実結果後記。
 
 関連SS341/343/354・SSC198/233、WBS-N15.04。前提725真正PID1/RootDONE、726当実A01PASS、source1ec/PG715/74d353、run55ac70e7-0180-4c32-8c91-5a379ebedf24/cutoff03:00:51.014287Z、parent2aff/job132812/mono127549297774→元129349297774。新activationと各actorは真正725実proofからだけ取得、旧c681/8633/9bd拒否。

@@ -1,5 +1,11 @@
 # IT・ST引継ぎ事項
 
+## 2026-10-09 当source普通親の実測引継ぎ（PG/PT限定・IT/ST未実施）
+
+現正式はPT-WEB-20260925-24/1964PT/53scopeのまま。新candidate1ec19782a/PG715/schema028はhost3502PT517suite/static6zero、当ordinary55ac sameRootAPI-Web-Caddy/実CurrentA01/真正PID1-RootDONE/ownedstop/全24資源0/八nativeを限定検証済みだが、全四coverage100/全CHR/正式工程は未完了。下段9/20以前の正式・割合は履歴で現在率に使わない。
+
+PG725 original1800sで1794.547089s（余裕5.452911s）、旧PG693 source9bd1752.251786s（別sourceで比較性能認定0）。PG734の一回owned診断ではpermit発行→保持Backup/DB→RootUnit再検証中。Linux serverで同一source・同所有契約/元budgetを保持して起動所要、CPU/DB/Unit・artifact確認の内訳、負荷変動、失敗後逆順停止/復旧、長期運用を測定する。PG/PTだけで性能/ST合格やbudget緩和を宣言しない。今回VMの単発値をp95/RTOへ換算しない。
+
 2026-09-20 最新確定: 正式PT-WEB-20260920-27/source3b980d71f5573342b7c787ad6eed53db6d8c2940、10:14:36～10:27:24 JST/Maven12:47/exit0、全1719PT（Protocol80/Storage82/API689/Web460/Batch367/CHR41）、failed/error/skipped0。6Java全line/method/class/branch100%、Production5 NullAway/Enforcer/Spotless/SpotBugs未解決0、固定path3method限定review継続・coverage除外追加なし、CHR SpotBugs未設定。JS1file全line/function/branch100%、18collector/41scope整合・81負canary成功。DB29/266＋Batch25/281＋OPS17/142＋QST2/16＋ASY1/5＋Web25/219＝99部分成果929PT（全1719の内数）、今回再開比+304PT/+34部分成果。PG215 Log画面状態8PT・PG216実template8PTを限定認定、BUG226/YKT182完了。LogのBrowser入力検査/ADMIN HTTPは未実装。BUG195/206/YKT154/162/SSC063、実archive/親/質問受付全体/残Web・本文controller-file/readiness/Logout/QA045/実NKgateは未完了。固定加重40.85～52.35%（中心46.6%≒47%、約41～52%）を維持。残量9%で利用者指定の停止、元dev-web3file保全、PGPT/IT/ST未完了。以下は履歴。
 
 過去記録（正式12、当時の件数比は現在の加重進捗に使用しない）: 最新確定: 正式PT-WEB-20260909-12、source 970681dfb6e2a0ba021c71402cdc5b69fb950b0d、dev-web、2026-09-09 03:27:49～03:32:41 JST。全790件（Protocol80/Storage34/API394/Web241/CHR41）、failed/error/skipped0、5対象moduleのline/method/class/branch全100%、NullAway/Enforcer/format PASS、SpotBugs0。Web165件、Admin73、Inbox11+3+4、Media61、Scenario155/Auth91等は重複する内数。API0102のlocal session破棄/HTTP終端/全result分類8件を追加PASS、DB削除前・commit故障/実HTTP/100並行/新Login非削除を確認、SSC-048完了、7collector収集成功。CHR41はrunner単体試験であり実NK互換gateではない。Logout revoke queue・本番logger固定/残画面/全layout登録/起動/実NK CHR、QA-045承認依存は継続。確定Program5/20=25%（件数比、工数換算なし）、再走待ち1件（RERUN-001/SSC-045、455のLogout期限設計）。PG-D-118のScenario6電文clientとPT166～173を先行仕様化し、画面接続へ継続する。以下は履歴。

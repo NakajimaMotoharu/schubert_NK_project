@@ -1,5 +1,7 @@
 # PG724–726 当親Backup・真正DONE・A01
 
+PG725当source真正DONE actual0/operator20337ce0e、当55ac/ab8895ca-4fb1-440d-b174-bc9f1f27505a/cutoff03:00:51.014287Z、PID1 start127549297774/end129343844863・1794.547089s<1800/余裕5.452911s、Rootended03:30:40.608594Z、sameRunActivationCutoff・同RootAPI/Web/Caddy・全新scope正常、beforeSHA b372b6f211a744c8f2f93eca9674f44c8953efff90f58fb634d1dfbd66e892e2。旧Done/timeout流用0。Root/Unit全private raw保持、公開は九safe f0eb942…へ。時間余裕の小ささはITST実server性能確認へ引継ぎ・budget変更/ITST合格宣言0。
+
 PG726 actual0、12:26:38.403762～41.283879JST/source1ec/currentparentAPI-Web-Caddy前後一致。共有CurrentdriverでCHR-A01 PASS/HTTP200/title「schubert NK - ログイン」/承認DIF001のみ、baselineSHA df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993保持、csrf `<TOKEN>`/passwordValue空/秘密cookie非公開。成果物`program/characterization/reports/nk/PG726-native-a01-v1/artifacts/CHR-A01.json`。observer47840も実終了0/terminalObservedtrue/parentExit0-success/API-Web双方rootcaptured/CaddyTLS200。725初回は当sanitized成果物untrackedによるclean前提拒否、VM発行/新slot0、保存後独立Root/PID1検査へ進む。全CHR/正式/ITST合格ではない。
 
 PG734 owned-readonly診断actual0、12:18:01JST/operatorb95b0e54d/currentboot・PID1全tuple・startticks12754929・currentPG715を前後照合、業務変更/start-stop0。私有Thread.print SHA44ed090eeeb862b972bbc36b340df999e4dc694b1ec2ad6805c8620cfc6ac44d。mainはMorningPermitPublication.issue→MorningBackupRetention.recheck→DB.retainedBackupSuccessful→RootReleaseAdmission.verifyMorning→RootStartupContext.queryUnitの途中で、UNKNOWN保持frameではない。一回だけ診断・budget延長0、rawstack/stderrはW私有のみ。17分時点の進行観測はDONE認定でなく、性能は後続IT/STへ引継ぎ。
