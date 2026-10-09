@@ -1,5 +1,7 @@
 # Build・静的解析・coverage方針
 
+SSC234（2026-10-09）：固定INSPECTOR/BOOTSTRAPの同期CLOSINGはSS342343354を正とし、terminal→closing同source/単一session/actor/時刻順/probe単調性/完了markerを独立照合してlatest closing一つを選ぶ。古いterminalへのfallback/同session union/採取点連鎖/除外0。追加点自身のtail・同main terminationは独立port試験、実native権限/終端の代用にしない。Root BEFORE_EXEC/API-Web terminal/全四100/正式同source全scope条件は不変更。
+
 SSC193採取補足（2026-10-06）：隔離PG/PTの固定pin/output=none/公開getExecutionData(false)・held新0600 inode・Root exec直前と普通owned帰還後終端はSS342343を正とする。host選択は独立literal/metadata/byte/FD/null/並行/例外の限定証拠、実main/session/真正manager及びstop後条件の代用ではない。正式runへ加えるexecは同source/frozen byte/boot/Invocation/PID/start/time/pointを独立に照合し、before-execだけから普通成功を推定しない。全counter100%、既定argv/env/2FD/security/owner/budget・独立oracle・非秘密/trace・全scope/run条件は不変更、除外追加/累積exec/別source流用0。
 
 2026-09-30運用参照: 次回の受入経路・coverage閉鎖・検証の区切りは[477 §4～5](../470_PMO/477_GPT61Sol実行計画・再開判定.md)を参照する。本書の品質条件は変更しない。小部品追加だけで全正式認定を繰り返さず、下記の機能受入・変更後停止・PR/工程gate・横断変更では所定の全体検証を実施する。各正式runの前に実際のtriggerと対象受入IDを1行で残す。管理文書だけの今回改定は新規試験認定ではない。

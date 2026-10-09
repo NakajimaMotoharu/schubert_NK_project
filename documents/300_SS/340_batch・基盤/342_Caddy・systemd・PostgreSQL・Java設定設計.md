@@ -16,6 +16,10 @@ SSC218（2026-10-08、SSC187内部admission補足）：完成証拠のBackupObse
 
 SSC203（2026-10-07、BUG799/YKT570、SSC185内部境界補足）：完了の各compound DB read（Backup観測・Cleanup観測・Cleanup元参照全列/seal・Expiry再読）は、その直前/正常帰還直後のTX外で全Root/保持原本graph/同ordinary API-Web-Caddy世代・identity/socket/info/ready/run整合を独立に再認証する。SQLごとのTX内owner callbackは同owner-thread/alive/未確定完了禁止、同保持Sessionの六namespace inode/security、Root/M/A、元残budgetの継続検査を行い、全graph/HTTPの同じ証明を毎SQLへ再帰展開せず、DB再入・commit/rollbackはしない。全graph/全row/seal/receiptの実再読、SSC187各typed intent退役前後と原本DONE直前の全証跡再読は維持する。cache/別Connection/guard削除/no-op/期限延長/UNKNOWN正常化を禁止する。compound後の変化は成功を返さず隔離、SQL中の所有/namespace/期限失効も非成功。RD/UI/DIF不変更、独立境界・失効・再入拒否PTと変更群fresh回帰/実nativeを必要とする。
 
+## SSC234 同期CLOSING採取（2026-10-09、隔離PTのみ）
+
+SSC196のINSPECTOR/BOOTSTRAP ordinary二roleだけ、同main ownerが同checkpointのTERMINAL export/callback正常帰還と業務entryのreturn/既診断を確認後、固定`<INV>.closing.exec`を一回同期採取する。追加hook/vendor hook順序依存0、Root execve/BEFORE_EXEC及びAPI/Web stop-holdは不変更。default agent無しは両点I/O0。TERMINAL失敗は従来通り、CLOSING失敗はBootstrap50/Inspector既IOExceptionへ固定診断、全正常export/postcheck帰還後のみ`Bootstrap|Inspector fixed PT native closing complete`を出す。元Unit権限/phase/session/argv/owner/receipt/期限/親30分を維持する。CLOSINGは業務成功や正常停止を発行しない、実終端/全資源後条件は独立認証する。
+
 ## SSC196 真正Inspector・Bootstrapの隔離PT terminal採取（2026-10-06）
 
 SSC193/195の固定pin公開agent/held新inode採取を二roleだけ拡張する。対応はINSPECTOR→`schubert-nk-inbox-inspector.service`/既`resolveInspector()`、BOOTSTRAP→`schubert-nk-bootstrap-admin.service`/既schubert-api固定UID・primary GID・全必要groups。これらはphase ORDINARY/TERMINALのみ、session literal `INSPECTOR|BOOTSTRAP-<INV>-ordinary`、API/WEB alias・Root/before-exec・起動proof/profile転送を拒否する。既API/WEB四profileは不変更。agent無しdefaultは採取/I/O0、既argv/environment/receipt/exit/owner/元Unit期限・親30minは不変更。隔離配置時だけ既wrapperのJava optionに固定pin agent一項と必要roleのReadWritePathsを加える。任意option/path/socket/環境forward0。
