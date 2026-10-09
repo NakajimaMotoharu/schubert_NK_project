@@ -30,9 +30,11 @@ def java():
  raw=raw.replace(old,'Pg387TrustedDeployment.LABEL="PG862";Pg387TrustedDeployment.STEM="pg862";Pg387TrustedDeployment.SOURCE="'+SOURCE+'";Pg387TrustedDeployment.RELEASE=Path.of("/opt/schubert-nk/releases/0.1.0-PG862");')
  raw=raw.replace('  static String phase="PREFLIGHT";','''  static String phase="PREFLIGHT";
   static Pg797OwnedDatabase lease;
+  static boolean lossReported;
   static long lastPulse,maxGap;
   static void pulse()throws Exception{if(lease==null)return;long now=System.nanoTime();if(lastPulse!=0)maxGap=Math.max(maxGap,now-lastPulse);if(lastPulse!=0&&now-lastPulse>=TimeUnit.SECONDS.toNanos(30))throw new java.sql.SQLException("owned database observation interval exceeded");lease.verify();lastPulse=now;}
 ''')
+ raw=raw.replace('for(;;)try{Thread.sleep(1000);}catch(InterruptedException notification){Thread.interrupted();}','for(;;){if(lease!=null&&!lossReported)try{pulse();}catch(Exception|Error lost){System.err.println("PG894_DB_NOT_CONFIRMED ownershipNotInferred=true");lossReported=true;}try{Thread.sleep(1000);}catch(InterruptedException notification){Thread.interrupted();}}')
  raw=raw.replace('while(System.nanoTime()<deadline){','while(System.nanoTime()<deadline){pulse();')
  marker='return database;';assert raw.count(marker)==1
  raw=raw.replace(marker,'lease=new Pg797OwnedDatabase(database,new Pg797OwnedDatabase.Expected(backend(database),"schubert_batch","PG894-bootstrap-guard","schubert_nk",true,true));lastPulse=0;pulse();return database;')
