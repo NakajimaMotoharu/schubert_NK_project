@@ -33,7 +33,9 @@ class Test(unittest.TestCase):
    namespace={'pathlib':pathlib,'hashlib':hashlib,'json':json,'os':os,'datetime':datetime,'standard_snapshot':snapshot,'subprocess':types.SimpleNamespace(run=run,check_output=check_output,PIPE=subprocess.PIPE)}
    exec(compile(code,'<independent actual filesystem once-body fixture>','exec'),namespace)
    issued=json.loads((save/'external-start-issued.private.json').read_bytes());guard=json.loads((save/'external-start-guard.private.json').read_bytes())
-   self.assertEqual(issued['clientExit'],0);self.assertEqual(issued['MainPID'],'1234');self.assertEqual(len(state['calls']),1);self.assertEqual(state['snapshots'],2)
+   self.assertEqual(issued['clientExit'],0);self.assertEqual(issued['MainPID'],'1234');self.assertEqual(len(state['calls']),1)
+   # Two pre-start reads plus one after private native-before preservation, all before issue.
+   self.assertEqual(state['snapshots'],3)
    self.assertTrue(guard['repeatForbidden']);self.assertEqual(guard['beforeSha256'],hashlib.sha256(golden).hexdigest());self.assertTrue(issued['clientSuccessIsNotParentSuccess'])
    self.assertEqual((save/'native-before/fixture.exec').read_bytes(),b'independent harmless fixture only')
 if __name__=='__main__':unittest.main()
