@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * NK-DAT-001/NK-OPS-001; DAT009/OPS009; UI212/251; SS341 7.4/343/352; WBS-P004-04;
- * PT-SNAPSHOT-911001..006. Literal observations, never Unit/kernel/owner authority.
+ * PT-SNAPSHOT-911001..007. Literal observations, never Unit/kernel/owner authority.
  */
 final class InspectorHeldStateContractTest {
   private static final String INV = "11111111111111111111111111111111";
@@ -186,6 +186,13 @@ final class InspectorHeldStateContractTest {
           observed.expiryRejectedAfter(Optional.empty()));
       assertFalse(observed.cleanupRejectedAfter(Optional.of(SAME)));
       assertFalse(observed.expiryRejectedAfter(Optional.of(SAME)));
+      if (target == InspectorUnitSnapshot.Target.EXPIRY) {
+        var noRemain = new TreeMap<>(failure);
+        noRemain.put("RemainAfterExit", "no");
+        var observedNoRemain = snapshot(target, noRemain);
+        assertTrue(observedNoRemain.quiescent());
+        assertFalse(observedNoRemain.expiryRejectedAfter(Optional.empty()));
+      }
       for (var change :
           List.of(
               Map.of("ExecMainStartTimestampMonotonic", "0"),
@@ -214,6 +221,50 @@ final class InspectorHeldStateContractTest {
                 Map.of("ActiveState", "active", "SubState", "running", "MainPID", "17"))
             .running(17, INV),
         "A completed-execution default is not a live daemon; SS341 SSC125 start>0/end0");
+  }
+
+  @Test
+  void snapshot911007IndependentStatePartitionPreservesAllTerminalPredicates() {
+    for (String active : List.of("inactive", "active", "failed", "unknown-state")) {
+      for (String sub : List.of("dead", "exited", "failed", "running", "unknown-substate")) {
+        for (String result : List.of("success", "exit-code", "unknown-result")) {
+          boolean stopped =
+              (active.equals("inactive") && sub.equals("dead"))
+                  || (active.equals("active") && sub.equals("exited"))
+                  || (active.equals("failed") && sub.equals("failed"));
+          boolean failed =
+              active.equals("failed") && sub.equals("failed") && result.equals("exit-code");
+          var fields = Map.of("ActiveState", active, "SubState", sub, "Result", result);
+          var backupFields = new TreeMap<>(fields);
+          backupFields.put("ExecMainStatus", "70");
+          var backup = snapshot(InspectorUnitSnapshot.Target.BACKUP, backupFields);
+          assertEquals(stopped, backup.quiescent(), fields.toString());
+          assertEquals(
+              failed ? Optional.of(MorningBackupUnitCycle.Outcome.FAILED) : Optional.empty(),
+              backup.backupTerminalAfter(Optional.empty()),
+              fields.toString());
+          var rejectionFields = new TreeMap<>(fields);
+          rejectionFields.put("ExecMainStatus", "30");
+          assertEquals(
+              failed,
+              snapshot(InspectorUnitSnapshot.Target.CLEANUP, rejectionFields)
+                  .cleanupRejectedAfter(Optional.empty()),
+              fields.toString());
+          assertEquals(
+              failed,
+              snapshot(InspectorUnitSnapshot.Target.EXPIRY, rejectionFields)
+                  .expiryRejectedAfter(Optional.empty()),
+              fields.toString());
+          var brokerFields = new TreeMap<>(fields);
+          brokerFields.put("ExecMainStatus", "143");
+          assertEquals(
+              failed
+                  || (active.equals("inactive") && sub.equals("dead") && result.equals("success")),
+              snapshot(InspectorUnitSnapshot.Target.ARTEMIS, brokerFields).brokerStoppedNormally(),
+              fields.toString());
+        }
+      }
+    }
   }
 
   private static InspectorUnitSnapshot snapshot(

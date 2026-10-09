@@ -199,7 +199,6 @@ public final class InspectorUnitSnapshot {
     if (receiptAfter(previous).orElse(-1) == 0)
       return Optional.of(MorningBackupUnitCycle.Outcome.SUCCESS);
     if (value("ActiveState").equals("failed")
-        && value("SubState").equals("failed")
         && value("Result").equals("exit-code")
         && !value("ExecMainStatus").equals("0"))
       return Optional.of(MorningBackupUnitCycle.Outcome.FAILED);
@@ -223,7 +222,6 @@ public final class InspectorUnitSnapshot {
         && invocationId().isPresent()
         && !invocationId().equals(previous)
         && value("ActiveState").equals("failed")
-        && value("SubState").equals("failed")
         && value("Result").equals("exit-code")
         && value("ExecMainCode").equals("1")
         && value("ExecMainStatus").equals("30")
@@ -338,12 +336,8 @@ public final class InspectorUnitSnapshot {
         && value("ExecMainStatus").equals("143")
         && executionStart().signum() > 0
         && executionEnd().compareTo(executionStart()) >= 0
-        && ((value("ActiveState").equals("failed")
-                && value("SubState").equals("failed")
-                && value("Result").equals("exit-code"))
-            || (value("ActiveState").equals("inactive")
-                && value("SubState").equals("dead")
-                && value("Result").equals("success")));
+        && ((value("ActiveState").equals("failed") && value("Result").equals("exit-code"))
+            || (value("ActiveState").equals("inactive") && value("Result").equals("success")));
   }
 
   boolean heldCleanup() {

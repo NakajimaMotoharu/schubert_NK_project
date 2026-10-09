@@ -1,5 +1,11 @@
 # InspectorUnitSnapshot残条件の独立追加試験
 
+## 追加同値oracle（PG-D407、実装前定義）
+
+PT-SNAPSHOT-911007: ActiveState={inactive,active,failed,unknown-state}、SubState={dead,exited,failed,running,unknown-substate}、Result={success,exit-code,unknown-result}の60組を各Backup/Cleanup/Expiry/Artemisへ入力。Job/PID0、INV固定新規、Code1/start100/end200、StatusはBackup70/Cleanup・Expiry30/Artemis143。独立quiescent式は状態対がinactive/dead又はactive/exited又はfailed/failed。Backupの期待FAILEDはfailed/failed＋exit-code、それ以外empty。Cleanup/Expiry既知拒否はfailed/failed＋exit-code、Artemis旧normalstopはinactive/dead＋success又はfailed/failed＋exit-code。他の合法tokenはこの列のunknownと同値（比較対象literal以外に影響する述語0）。parseのslash-free grammarにより状態対分解は一意。quiescent=falseならいずれもreject。四重複条件の削除前後で全結果同値であり、kernel/所有認定を含まない。
+
+911006へExpiry Remain=noの合法fixtureを追加しquiescent=trueかつexpiryRejected=falseを期待。source変更後は旧native/全回帰を新sourceへ読み替えず、PG911v4 new-only限定検証→必要なfresh全体回帰へ進む。
+
 Program NK-DAT-001/NK-OPS-001、WBS主担当P004-04（他programへの共通費二重計上0）。class/method InspectorUnitSnapshot.heldCleanup/heldMaintenance/brokerStoppedNormally/inactiveBaseline/backupTerminalAfter/normalRejectedAfter/running。RD DAT-009/OPS-009、UI212/251、SS341§7.4/343/352。開始Production e016/current862、PG908当20native残class22branch/4line/1method。着手前既leaf予算low.5/base1.5/high3.5週次枠pp/LOW、共有費を個別配賦しない。
 
 fixtureは全18key/固定Unit名/oneshot又はsimple/Restart/Remain/zero PID/Job/固定独立inv/Code1/Status0/monotonic100～200の手書き値をASCII LFへencode。expectedはSSの必要条件と独立literal真偽・SUCCESS/FAILED enum、Productionの判定を呼んでexpectedを生成しない。snapshotは観測dataだけでkernel/NSS/source/親/許可/実Unit成功の代替ではない。
