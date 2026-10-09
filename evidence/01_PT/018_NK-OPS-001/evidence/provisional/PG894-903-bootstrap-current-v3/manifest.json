@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "program": "NK-OPS-001/NK-AUT-001",
+  "testIds": [
+    "BOOT894001",
+    "BOOT894002",
+    "BOOT894003",
+    "BOOT894004",
+    "BOOT894005",
+    "BOOT894006",
+    "BOOT894007",
+    "BOOT894008",
+    "BOOT901001",
+    "BOOT901002"
+  ],
+  "source": "e01612fcd7f2752df5ae0836b78538fd5e87f120",
+  "branch": "dev-foundation",
+  "operatorSource": "7a47e40cd3fa8e4afe978c107b056093638cfff9",
+  "recordedUTC": "2026-10-09T20:29:09.025913+00:00",
+  "environment": {
+    "hostOS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "jdk": "25.0.4",
+    "Maven": "3.9.12",
+    "JaCoCo": "0.8.15",
+    "ASM": "9.10.1",
+    "pyflakes": "3.4.0",
+    "guestBootSha256": "fa365c2c915ea7c791dae018016f42c83d5d550dd58d374a4228636607b0dc87"
+  },
+  "commands": [
+    "python3 -B tools/quality/vm/050_s1/pg894_source_test.py",
+    "python3 -B tools/quality/vm/050_s1/pg894_compile_v3.py",
+    "python3 -B tools/quality/vm/050_s1/pg894_native_v3.py verify",
+    "python3 -B tools/quality/vm/050_s1/pg894_native_v3.py execute",
+    "python3 -B tools/quality/vm/050_s1/pg901_bootstrap_post_v3.py",
+    "python3 -B tools/quality/vm/050_s1/pg903_bootstrap_native_counter.py"
+  ],
+  "runs": {
+    "pg894-verify-v1": {
+      "actualExit": 143,
+      "startedUTC": "2026-10-09T20:01:25.520871+00:00",
+      "privateLogSha256": "a8d24daae75ab6c17367fb8f6a399ae2f3488da6e9e1c5185da01c048c458c4c",
+      "completedUTC": "2026-10-09T20:08:23.579455+00:00",
+      "operatorSource": "0e154fdb019299673ccc5f36ed3b490791e2d0c4",
+      "safeManifestSha256": "927602cdf8ffecf69a0e09334a26c821d7ca541328c12e494cfa04f17209196c"
+    },
+    "pg894-verify-v2": {
+      "actualExit": 143,
+      "startedUTC": "2026-10-09T20:17:01.913907+00:00",
+      "privateLogSha256": "ee7358f5394f8071055271a7d072739aed86e799d432f5211eec88d79ddb95d1",
+      "completedUTC": "2026-10-09T20:20:07.397745+00:00",
+      "operatorSource": "125781ed6ae1c47f84a8419cf0dfcd7bbc17107f",
+      "safeManifestSha256": "743e8a8332f96d8b20f5689c13c8a6880db37a842ebefd150f73d9896819d4e4"
+    },
+    "pg896-handoff-execute-v1": {
+      "actualExit": 0,
+      "startedUTC": "2026-10-09T20:08:20.852000+00:00",
+      "privateLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedSeconds": 4.674156,
+      "safeManifestSha256": "1636dc2dc3499d7e2b469020a534e74bbbe96b235ee677c94958745bbecc062c"
+    },
+    "pg899-handoff-execute-v1": {
+      "actualExit": 0,
+      "startedUTC": "2026-10-09T20:20:03.680910+00:00",
+      "privateLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedSeconds": 5.403465,
+      "safeManifestSha256": "ed07aece9e0ac0bd3b310fe38505608fbedb11450a06e2127406c2b2c8e28c9d"
+    },
+    "pg894-verify-v3": {
+      "actualExit": 0,
+      "startedUTC": "2026-10-09T20:21:36.837693+00:00",
+      "privateLogSha256": "f78ebe8dfd076eceef99469e4ef0a72caee992fb95eebcc1d5a4fabeb70479bd",
+      "completedUTC": "2026-10-09T20:21:42.618948+00:00",
+      "operatorSource": "e03fda4d8a4903a0197b547b31ce2b8b6b409565",
+      "safeManifestSha256": "3acae27dbd4fd8f02b93f2cefcc1e0d4046b066fad689b559da6eda80853bca0"
+    },
+    "pg894-execute-v3": {
+      "actualExit": 0,
+      "startedUTC": "2026-10-09T20:21:55.421188+00:00",
+      "privateLogSha256": "aa389451183db35134d184c222d501265a2ab79e26e9a519b4f72dedc8b820a9",
+      "completedUTC": "2026-10-09T20:22:09.959522+00:00",
+      "operatorSource": "e03fda4d8a4903a0197b547b31ce2b8b6b409565",
+      "safeManifestSha256": "ed226504db03112bef02a4a4d2b138d7ba58bf68ae82d157ef29cb7b7482fe5a"
+    },
+    "pg901-bootstrap-post-v1": {
+      "actualExit": 1,
+      "startedUTC": "2026-10-09T20:24:06.411902+00:00",
+      "privateLogSha256": "69cc2c1eaec6cf1bd36b824676b0bcb908f9902ea156e55083c7c191b449f631",
+      "elapsedSeconds": 1.436541,
+      "safeManifestSha256": "ec872a3ad89325b407d09d38ef9e19b361c7b3c44b285f6f30b9e2fb9bb3e959"
+    },
+    "pg901-bootstrap-post-v2": {
+      "actualExit": 1,
+      "startedUTC": "2026-10-09T20:26:34.411907+00:00",
+      "privateLogSha256": "f4fc6a3811c240d0662793b2c4b772aa90f019ebb59cd999035afdb00317d4b4",
+      "elapsedSeconds": 1.063535,
+      "safeManifestSha256": "8edda3834a0c4ac1251592c6ed7d9c77f91c8e62a5b50f8c4221291695c2a57f"
+    },
+    "pg901-bootstrap-post-v3": {
+      "actualExit": 0,
+      "startedUTC": "2026-10-09T20:27:43.344868+00:00",
+      "privateLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsedSeconds": 3.308061,
+      "safeManifestSha256": "3aa5a9758de879df6a43360ddee9851141701f19818ace44d21bb61079b7b51a"
+    }
+  },
+  "independentOracle": "SS343 literal code20 and full24 SQL postconditions, full32 declaration/history distinction, actual PID1 monotonic window and SHA256 independent calculation",
+  "bootstrapExpectedStatus": 20,
+  "bootstrapActualStatus": 20,
+  "bootstrapUnitElapsedSeconds": 1.885832,
+  "bootstrapProofHashes": {
+    "after.private.json": "12fe270ba81c82d716b0fd67a333870d66db8e95d752e72b11948496decb1cd9",
+    "before.private.json": "5aa0206afcefebc850b962ba1c2809341bf61a6d983c1d0a264cb0e1fe060ea1",
+    "complete.private": "8ea827c8f702ef50dc4858b619549c0575593512d4978c90a3c731bfe8ce4410",
+    "pid1.private.jsonl": "541d204e7acbdba11b8ae1c70312c9304f9f4dfec48fbfcacf338e7a08134243"
+  },
+  "bootstrapNativeHashes": [
+    "4d9b57f1266c606fd6b2fb94c71ee23b580858c77ff0a1f2b8f0f3550e32b721",
+    "3ace273badaf9f959419e0a9f25b2d3db5ab3c6021e56803bf2537922da9b8b3"
+  ],
+  "bootstrapPostSnapshotSha256": "4aa97f5a256d8d74283f83310b6c8e042dc0f8ca0bcd957bc68abed2fce257cb",
+  "nativeManifestSha256": "70f040c6f8193539b92b186e2df90113a67ec2b422f0173a3e40cb5d24d61b38",
+  "hostSourceRun": "PG857/3541PT/522suite/static6zero",
+  "nativeStreams": 18,
+  "distinctCurrentProcesses": 17,
+  "bootstrapDumpsSameProcess": 2,
+  "classByteMismatch": 0,
+  "oldSourceImported": 0,
+  "incrementalVsPG892": {
+    "BRANCH": 1,
+    "CLASS": 0,
+    "LINE": 27,
+    "METHOD": 2
+  },
+  "remaining": {
+    "BRANCH": 758,
+    "CLASS": 12,
+    "LINE": 857,
+    "METHOD": 165
+  },
+  "all24PreservedTwice": true,
+  "signedArtifactBytes": 187,
+  "allResources0": true,
+  "captured20BeforeCurrentGc": true,
+  "gcDoesNotInferPastSuccess": true,
+  "syntheticInputsRetiredPrivate": true,
+  "bugs": [
+    "BUG-991",
+    "BUG-992",
+    "BUG-993",
+    "BUG-994"
+  ],
+  "crossExpansion": [
+    "YKT-760",
+    "YKT-761",
+    "YKT-762",
+    "YKT-763"
+  ],
+  "rawExported": false,
+  "secretsExported": false,
+  "globalCoverage100": false,
+  "wholeWbsAcceptedDelta": 0,
+  "formalAccepted": false,
+  "ITSTAccepted": false,
+  "specification": "evidence/01_PT/018_NK-OPS-001/610_当e016_既存ADMIN_Bootstrap_仕様・結果.md"
+}

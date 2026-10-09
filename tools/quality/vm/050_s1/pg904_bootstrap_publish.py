@@ -1,0 +1,24 @@
+"""Emit sanitized public evidence/WBS patch; no raw native/credential/session export."""
+import hashlib,json,platform
+from pathlib import Path
+T=Path('/home/mini/codex/project1/work/pgpt-foundation');W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def main():
+ post=json.loads((W/'pg901-bootstrap-post-v3.safe.json').read_bytes());native=W/'pg903-current-eighteen-native-v1/manifest.safe.json';n=json.loads(native.read_bytes())
+ assert post['actualExit']==n['actualExit']==0 and sha(native)=='70f040c6f8193539b92b186e2df90113a67ec2b422f0173a3e40cb5d24d61b38'
+ runs={}
+ for name in ('pg894-verify-v1','pg894-verify-v2','pg896-handoff-execute-v1','pg899-handoff-execute-v1','pg894-verify-v3','pg894-execute-v3','pg901-bootstrap-post-v1','pg901-bootstrap-post-v2','pg901-bootstrap-post-v3'):
+  p=W/(name+'.safe.json');v=json.loads(p.read_bytes());assert int((W/(name+'.exit')).read_text())==v['actualExit']
+  runs[name]={k:v[k]for k in ('actualExit','startedUTC','privateLogSha256')}
+  for k in ('completedUTC','elapsedSeconds','operatorSource'):
+   if k in v:runs[name][k]=v[k]
+  runs[name]['safeManifestSha256']=sha(p)
+ value={'schemaVersion':1,'program':'NK-OPS-001/NK-AUT-001','testIds':['BOOT894001','BOOT894002','BOOT894003','BOOT894004','BOOT894005','BOOT894006','BOOT894007','BOOT894008','BOOT901001','BOOT901002'],'source':n['productionSource'],'branch':'dev-foundation','operatorSource':n['operatorSource'],'recordedUTC':n['recordedUTC'],'environment':{'hostOS':platform.platform(),'python':platform.python_version(),'jdk':'25.0.4','Maven':'3.9.12','JaCoCo':'0.8.15','ASM':'9.10.1','pyflakes':'3.4.0','guestBootSha256':hashlib.sha256(b'cc9ed874-7f4f-450e-a188-8de1e42c8441').hexdigest()},'commands':['python3 -B tools/quality/vm/050_s1/pg894_source_test.py','python3 -B tools/quality/vm/050_s1/pg894_compile_v3.py','python3 -B tools/quality/vm/050_s1/pg894_native_v3.py verify','python3 -B tools/quality/vm/050_s1/pg894_native_v3.py execute','python3 -B tools/quality/vm/050_s1/pg901_bootstrap_post_v3.py','python3 -B tools/quality/vm/050_s1/pg903_bootstrap_native_counter.py'],'runs':runs,'independentOracle':'SS343 literal code20 and full24 SQL postconditions, full32 declaration/history distinction, actual PID1 monotonic window and SHA256 independent calculation','bootstrapExpectedStatus':20,'bootstrapActualStatus':20,'bootstrapUnitElapsedSeconds':post['bootstrap']['unitElapsedSeconds'],'bootstrapProofHashes':post['bootstrapProofHashes'],'bootstrapNativeHashes':n['bootstrapNativeHashes'],'bootstrapPostSnapshotSha256':post['beforeSha256'],'nativeManifestSha256':sha(native),'hostSourceRun':'PG857/3541PT/522suite/static6zero','nativeStreams':18,'distinctCurrentProcesses':17,'bootstrapDumpsSameProcess':2,'classByteMismatch':0,'oldSourceImported':0,'incrementalVsPG892':n['incrementalVsPG892'],'remaining':n['remaining'],'all24PreservedTwice':post['all24UnchangedTwice'],'signedArtifactBytes':187,'allResources0':post['allClientAdvisoryFlock0'],'captured20BeforeCurrentGc':post['capturedNormal20VerifiedBeforeCurrent'],'gcDoesNotInferPastSuccess':True,'syntheticInputsRetiredPrivate':post['currentCredentialsRetired'],'bugs':['BUG-991','BUG-992','BUG-993','BUG-994'],'crossExpansion':['YKT-760','YKT-761','YKT-762','YKT-763'],'rawExported':False,'secretsExported':False,'globalCoverage100':False,'wholeWbsAcceptedDelta':0,'formalAccepted':False,'ITSTAccepted':False,'specification':'evidence/01_PT/018_NK-OPS-001/610_当e016_既存ADMIN_Bootstrap_仕様・結果.md'}
+ target=T/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG894-903-bootstrap-current-v3/manifest.json';assert not target.exists()
+ wbs=T/'documents/400_PGPT/470_PMO/486_WBS現行実績.json';raw=wbs.read_text();line=next(l for l in raw.splitlines()if l.startswith('  "currentE016ConnectionObservation":'))
+ original=json.loads(raw)['currentE016ConnectionObservation'];observation={**original,'run':'PG875/876/877/878/879/883/884/885/893/887/890/891/892/894v3/901v3/903','status':'TWO_GENUINE_ALREADYEIGHT_A01_OWNEDSTOP_BOOTSTRAP20_NATIVE18_QUALIFIED_NOT_GLOBAL_FORMAL','currentSingleSessionNativeStreams':18,'currentDistinctProcesses':17,'bootstrapNormal20':True,'bootstrapUnitElapsedSeconds':post['bootstrap']['unitElapsedSeconds'],'secondParentElapsedSeconds':1460.676594,'secondOwnedStopElapsedSeconds':27.533949,'incrementalVsPG892':n['incrementalVsPG892'],'remainingDiagnostic':n['remaining'],'evidence':value['specification'],'nativeEvidence':str(target.relative_to(T)),'firstCurrentObservationPreserved':original}
+ newline='  "currentE016ConnectionObservation": '+json.dumps(observation,ensure_ascii=False,separators=(',',':'))+','
+ print('*** Begin Patch\n*** Add File: '+str(target))
+ print('\n'.join('+'+l for l in json.dumps(value,ensure_ascii=False,indent=2).splitlines()))
+ print('*** Update File: '+str(wbs)+'\n@@\n-'+line+'\n+'+newline+'\n*** End Patch')
+if __name__=='__main__':main()
