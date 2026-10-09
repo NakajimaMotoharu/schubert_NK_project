@@ -181,11 +181,13 @@ final class LinuxSystemdQueryTest {
         s.runtime = kind == 1;
         s.fatal = kind == 2;
         var query = new LinuxSystemdQuery(() -> s, () -> 0);
-        assertThrows(
-            kind == 0
-                ? IOException.class
-                : kind == 1 ? IllegalStateException.class : AssertionError.class,
-            () -> query.read(RootStartupContext.Service.API, FIELDS));
+        Class<? extends Throwable> expected =
+            switch (kind) {
+              case 0 -> IOException.class;
+              case 1 -> IllegalStateException.class;
+              default -> AssertionError.class;
+            };
+        assertThrows(expected, () -> query.read(RootStartupContext.Service.API, FIELDS));
         assertTrue(s.closed);
         assertEquals("close", s.events.getLast());
       }

@@ -255,7 +255,7 @@ final class LinuxSystemdSessionTest {
         assertThrows(
             IOException.class,
             () -> {
-              session.start(5000000);
+              session.start(() -> 5000000);
               session.owner(4999999);
               session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
               session.read(
@@ -284,7 +284,7 @@ final class LinuxSystemdSessionTest {
       var calls = new Calls(data);
       calls.arrayLength = 0;
       var session = new LinuxSystemdSession(calls, owned);
-      session.start(5000000);
+      session.start(() -> 5000000);
       session.owner(4999999);
       assertEquals(
           "",
@@ -308,7 +308,7 @@ final class LinuxSystemdSessionTest {
         assertThrows(
             IOException.class,
             () -> {
-              session.start(5000000);
+              session.start(() -> 5000000);
               session.owner(4999999);
               session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
               session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997);
