@@ -391,8 +391,8 @@ final class LinuxSystemdSessionTest {
   @Test
   void authenticationAndSuccessiveRpcUseOneOriginalBudget() throws Exception {
     for (boolean authentication : new boolean[] {true, false}) {
-      try (var data = Arena.ofConfined();
-          var owned = Arena.ofConfined()) {
+      try (var data = Arena.ofConfined()) {
+        var owned = Arena.ofConfined();
         var calls = new Calls(data);
         calls.readyAfter = authentication ? Integer.MAX_VALUE : 2;
         calls.waitDelayMicros = authentication ? 2000000 : 500000;
