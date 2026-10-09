@@ -35,6 +35,30 @@ final class InspectorEnvironmentFilesTest {
   @TempDir Path temporary;
 
   @Test
+  void inspector919001ForeignThreadCannotRetireOwnedEnvironment() throws Exception {
+    try (var f = fixture();
+        var executor = Executors.newSingleThreadExecutor()) {
+      assertEquals(
+          "complete",
+          f.files.executeOwned(
+              RUN,
+              retirement -> {
+                var denied =
+                    executor.submit(
+                        () -> assertThrows(StorageIoException.class, retirement::retire));
+                assertNotNull(assertDoesNotThrow(() -> denied.get(5, TimeUnit.SECONDS)));
+                assertEquals(RUNTIME, Files.readString(f.target));
+                assertEquals(0, f.count("unlink"));
+                retirement.retire();
+                assertFalse(Files.exists(f.target));
+                return "complete";
+              }));
+      assertEquals(1, f.count("unlink"));
+      f.released();
+    }
+  }
+
+  @Test
   void nativeOwnedRetirementOccursBeforeCallbackIntentAndCannotEscape() throws Exception {
     InspectorEnvironmentFiles.Retirement[] saved = {null};
     try (var f = fixture()) {

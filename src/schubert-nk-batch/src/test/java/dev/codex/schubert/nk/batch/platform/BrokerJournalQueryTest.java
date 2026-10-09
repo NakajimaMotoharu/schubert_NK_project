@@ -4,12 +4,71 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS343 SSC125; BROKERQUERY001..003. Independent process IO. */
 final class BrokerJournalQueryTest {
   private static final List<String> COMMAND = List.of("/usr/bin/journalctl", "--output=json");
+
+  @Test
+  void inspector919003StartAndCompletedWaitRespectOriginalQueryBudget() {
+    var slowStart = new Child(new byte[0]);
+    var reader =
+        new InspectorUnitProbe.NativeReader(
+            command -> {
+              assertEquals(COMMAND, command);
+              consumeNanos(100_000_000L);
+              return slowStart;
+            });
+    assertEquals(
+        StopGateFailure.TIMEOUT,
+        assertThrows(
+                StopGateException.class, () -> reader.executeStreaming(COMMAND, 16, 50_000_000L))
+            .reason());
+    assertEquals(1, slowStart.stdoutClosed);
+    assertEquals(1, slowStart.stdinClosed);
+    assertEquals(1, slowStart.stderrClosed);
+    assertFalse(slowStart.isAlive());
+    var slowWait = new Child(new byte[0]);
+    slowWait.waitDelayNanos = 100_000_000L;
+    assertEquals(
+        StopGateFailure.TIMEOUT,
+        assertThrows(
+                StopGateException.class,
+                () -> reader(slowWait).executeStreaming(COMMAND, 16, 50_000_000L))
+            .reason());
+    assertEquals(1, slowWait.stdoutClosed);
+    assertEquals(1, slowWait.stdinClosed);
+    assertEquals(1, slowWait.stderrClosed);
+    assertFalse(slowWait.isAlive());
+  }
+
+  @Test
+  void inspector919004ExpiredStdoutDrainCancelsReaderAndClosesEveryStream() throws Exception {
+    var blocked = new Child(new byte[0]);
+    blocked.readDelayNanos = 5_000_000_000L;
+    assertEquals(
+        StopGateFailure.TIMEOUT,
+        assertThrows(
+                StopGateException.class,
+                () -> reader(blocked).executeStreaming(COMMAND, 16, 1_000_000_000L))
+            .reason());
+    assertTrue(blocked.drainFinished.await(5, TimeUnit.SECONDS));
+    assertEquals(1, blocked.stdoutClosed);
+    assertEquals(1, blocked.stdinClosed);
+    assertEquals(1, blocked.stderrClosed);
+    assertFalse(blocked.isAlive());
+  }
+
+  private static void consumeNanos(long nanos) {
+    long end = System.nanoTime() + nanos;
+    while (System.nanoTime() < end && !Thread.currentThread().isInterrupted()) {
+      java.util.concurrent.locks.LockSupport.parkNanos(
+          Math.min(20_000_000L, end - System.nanoTime()));
+    }
+  }
 
   @Test
   void concurrentDrainAndOwnedStreams() {
@@ -100,6 +159,9 @@ final class BrokerJournalQueryTest {
     private Throwable readFailure;
     private long waitBound;
     private TimeUnit waitUnit;
+    private long waitDelayNanos, readDelayNanos;
+    private final CountDownLatch drainStarted = new CountDownLatch(1);
+    private final CountDownLatch drainFinished = new CountDownLatch(1);
 
     Child(byte[] bytes) {
       this.bytes = bytes;
@@ -111,6 +173,16 @@ final class BrokerJournalQueryTest {
         @Override
         public byte[] readNBytes(int count) throws IOException {
           assertTrue(Thread.currentThread().isVirtual());
+          if (readDelayNanos > 0) {
+            drainStarted.countDown();
+            try {
+              consumeNanos(readDelayNanos);
+              if (Thread.currentThread().isInterrupted())
+                throw new InterruptedIOException("fixture cancelled");
+            } finally {
+              drainFinished.countDown();
+            }
+          }
           if (readFailure instanceof IOException failure) throw failure;
           if (readFailure instanceof RuntimeException failure) throw failure;
           if (readFailure instanceof Error failure) throw failure;
@@ -155,6 +227,8 @@ final class BrokerJournalQueryTest {
       waitBound = timeout;
       waitUnit = unit;
       if (interrupt) throw new InterruptedException("fixture");
+      if (readDelayNanos > 0) assertTrue(drainStarted.await(5, TimeUnit.SECONDS));
+      if (waitDelayNanos > 0) consumeNanos(waitDelayNanos);
       alive = !completed;
       return completed;
     }

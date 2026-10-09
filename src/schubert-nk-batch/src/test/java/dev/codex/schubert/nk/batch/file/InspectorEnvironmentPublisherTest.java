@@ -34,6 +34,32 @@ final class InspectorEnvironmentPublisherTest {
   @TempDir Path temporary;
 
   @Test
+  void inspector919002FreshnessNeverReusesFixedEntriesOrDeletesUnrelatedRoleData()
+      throws Exception {
+    for (String name : List.of(NAME, "11111111-1111-4111-8111-111111111111.part")) {
+      try (var f = fixture()) {
+        Path preserved = f.directory.resolve(name);
+        Files.writeString(preserved, "independent-old-byte-vector");
+        assertThrows(StorageIoException.class, f.publisher::requireFresh);
+        assertEquals("independent-old-byte-vector", Files.readString(preserved));
+        assertEquals(0, f.count("unlink"));
+        assertEquals(0, f.count("create"));
+        f.released();
+      }
+    }
+    try (var f = fixture()) {
+      Path unrelated = f.directory.resolve("other-role-observation");
+      Files.writeString(unrelated, "unrelated-preserved-byte-vector");
+      f.publisher.requireFresh();
+      assertEquals("unrelated-preserved-byte-vector", Files.readString(unrelated));
+      assertFalse(Files.exists(f.target));
+      assertEquals(0, f.count("unlink"));
+      assertEquals(0, f.count("create"));
+      f.released();
+    }
+  }
+
+  @Test
   void createAndRetire() throws Exception {
     try (var f = fixture()) {
       f.publisher.prepare(RUN);
