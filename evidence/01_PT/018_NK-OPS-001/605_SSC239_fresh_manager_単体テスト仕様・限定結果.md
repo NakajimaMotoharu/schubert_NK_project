@@ -37,6 +37,12 @@ Java25.0.4/Maven3.9.12、Ubuntu Linux x86_64、host/VM systemd/libsystemd0=259.5
 
 ## 未受入・後続
 
+23:02同source確定結果：candidate`2a0d5aa392c85a1dc12a1cdb423978e8500895b8`/PG828選択66PT・7suite/FES0/static0、Query/Session及び全実装nestedのline/method/class/適用branch各100（branch無しliteral/recordは自動疎counter、除外設定0）。PG827は同jarSHA d3f0f85ba839b37a931a945531d648f1c3f55325a4caf5af972f12cf937148af、host/VM各40独立比較実0・FD50→50/48→48・全十停止不変、nativeVM median2,714,505ns/max8,366,135ns、旧726成功流用0。selectedmanifestSHA c52e72241b7fb1bd10b7e799963b1846465fdae72dd2371eed5586a7576bc0a4、native結果SHA2290ac93fc42ca452a5c247877cd8b7891afcbd0c0a52c67a623396ddb479bb2/guest log61587c478bb56c85278d47c93172984470b04fc7f4e2103f846d01157f18f2a7。
+
+451 trigger=RootStartupContext実運用IOの横断変更。PG830 same2a fresh全6 clean build/test/SpotBugs/jacoco実0（終了23:01:04JST）、PG831独立collectorはfrozen全source Gitblob/前後clean・全XML独立case/FESFlakyNotRun0・coverage同session/同JARbyte・六static0・当828batchclass/未変更五moduleのoldcurrent class全部一致を照合し実0。3534PT/522suite/1632main、前102から+17PT/+2suite/+12class、changedはRootStartupContext.class/NativeIo.class二つのみ・新class12・削除0。全体missedはLINE3808/METHOD629/CLASS40/BRANCH1137でglobal100=false、親/native受入/正式は未完。manifestSHA85c90fd6c60c88040127538ced822dce3e8260f290809635916d36871e685ede、private830/source/started/completed/build.private.log/exit/source-files.sha256・六module XML/exec/static/JARを保存。実elapsedはmanifestから記録、17:27はMaven表示（曖昧な推定秒数へ置換しない）。実行command=`python3 -B tools/quality/vm/050_s1/pg830_manager_full.py`、資格`python3 -B tools/quality/vm/050_s1/pg831_manager_collect.py`（既manifestはnew-onlyで再発行0）。
+
+この同source二readerの単体四100/実停止比較/全6成功は952～958の直接是正を実証するが、広いP018所有scope全受入/BUG949真正親因果/global四100/CHR/正式/IT-ST完了を意味しない。次はsigned candidate832のliteral2changed/12addedを独立fixtureで資格→現在816/827停止基点の新全原値/DB/Refへ再認証→正規code-only→別fresh一回resume/元30分真正DONE→owned停止/当source native/後続。現current796/source102/原本active/Backup/runtime空を保全し、旧808再start0。
+
 826 source70e41eee1f0d7185c95e1fc91e87b0dbd9c78905は65PT/FES0/静的0。元query/property直前Budget・policy/ABI例外試験を追加し、Queryの四counter100、Sessionのline/method/class100・branch残2を実計測。Native/Factory/Owner/Propertyは四100、空interfaceはcounterなしで除外設定ではない。残2は取得失敗後の未開始busとunref異型の独立negativeへ追加して次828を別newrunにする。旧825/824を当新sourceの完了結果へ流用0。SS239設計3文書のみPR77/main a5cd475de86ad38ced9ec88674ddfd7098660367に公開済、実装/PT/親/正式完了とは別。
 
 952～957は直接是正・825/824限定実証ありだがYKT全対象/新source分岐/全回帰閉鎖までは未完。949親timeout原因・新真正DONEは未解決、停止中比較速度から原因や負荷中性能を推定しない。正式PT-WEB-20260925-24/1964/53、global四100、CHR・IT/ST受入を本結果で更新しない。SSC239は記述確定と設計onlymainを別管理する。
