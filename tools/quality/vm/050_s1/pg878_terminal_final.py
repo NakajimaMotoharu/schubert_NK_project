@@ -26,7 +26,6 @@ def payload(proof,seals):
  assert raw.count(old)==1
  raw=raw.replace(old,"require(complete_configuration(command(['systemctl','show',u,'--property='+','.join(sorted(FIELDS))]).decode(),u)==after['configuration'][u])")
  # Configuration FIELDS32 must not replace the independent state FIELDS18.
- raw=raw.replace("after=json.loads(sealed('after.private.json'", "after=json.loads(sealed('after.private.json'")
  raw=raw.replace("require(show(u,FIELDS)==v", "require(show(u,STATE_FIELDS)==v")
  raw=raw.replace(pure+'\n'+ADDITIONAL,'STATE_FIELDS=FIELDS\n'+pure+'\n'+ADDITIONAL)
  marker="native=snapshot();require(native==snapshot())"
