@@ -9,7 +9,7 @@ class Test(unittest.TestCase):
     def test_literal_history_states_and_all_refusals(self):
         before=('/fixed','/fixed literal','no','start','n/a','7','(null)','0')
         closed={'MainPID':'0','ControlPID':'0','Job':'','InvocationID':'abc','Result':'exit-code','ExecMainCode':'1','ExecMainStatus':'143','ExecMainStartTimestampMonotonic':'10','ExecMainExitTimestampMonotonic':'20'}
-        after=('/fixed','/fixed literal','no','start','stop','7','exited','143')
+        after=('/fixed','/fixed literal','no','start','Fri 2026-10-09 07:15:44 UTC','7','exited','143')
         self.assertTrue(accepted(before,after,closed,dict(closed)));self.assertTrue(accepted(before,before,closed,closed))
         for i in range(8):
             bad=list(after);bad[i]='foreign';self.assertFalse(accepted(before,tuple(bad),closed,closed))
