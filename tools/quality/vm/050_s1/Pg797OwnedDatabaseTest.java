@@ -37,6 +37,10 @@ public final class Pg797OwnedDatabaseTest {
       check(!l.heartbeatAllowed());int count=v.queries;refused(SQLException.class,l::verify);check(v.queries==count);
     }
     var open=new Fixture();var l=open.lease();refused(SQLException.class,l::confirmClosed);check(!l.heartbeatAllowed());
+    var schema=new Fixture();schema.role="schubert_migration";schema.application="PG797-fixed-snapshot";schema.locked=false;
+    var schemaLease=new Pg797OwnedDatabase(schema.connection(),new Pg797OwnedDatabase.Expected(17,"schubert_migration","PG797-fixed-snapshot","schubert_nk",true,false));schemaLease.verify();check(schemaLease.heartbeatAllowed());schema.closed=true;schemaLease.confirmClosed();
+    var rw=new Fixture();rw.readOnly=false;rw.transaction="off";rw.application="PG797-fixed-recovery";var rwLease=new Pg797OwnedDatabase(rw.connection(),new Pg797OwnedDatabase.Expected(17,"schubert_batch","PG797-fixed-recovery","schubert_nk",false,true));rwLease.verify();check(rwLease.heartbeatAllowed());
+    for(Object[]policy:List.of(new Object[]{"schubert_migration",false,false},new Object[]{"schubert_migration",true,true},new Object[]{"schubert_batch",true,false}))refused(IllegalArgumentException.class,()->new Pg797OwnedDatabase.Expected(17,(String)policy[0],"PG797-fixed-probe","schubert_nk",(boolean)policy[1],(boolean)policy[2]));
     var other=new Fixture();var owned=other.lease();var error=new AtomicReference<Throwable>();var t=new Thread(()->{try{owned.verify();}catch(Throwable failure){error.set(failure);}});t.start();t.join();check(error.get()instanceof SQLException&&!owned.heartbeatAllowed()&&other.queries==0);
     refused(NullPointerException.class,()->new Pg797OwnedDatabase(null,new Pg797OwnedDatabase.Expected(17,"schubert_batch","PG798-fixed-pending","schubert_nk")));
     refused(NullPointerException.class,()->new Pg797OwnedDatabase(new Fixture().connection(),null));
