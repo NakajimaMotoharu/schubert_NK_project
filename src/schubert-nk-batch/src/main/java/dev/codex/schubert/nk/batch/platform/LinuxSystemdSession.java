@@ -18,7 +18,6 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   private static final String DESTINATION = "org.freedesktop.systemd1";
-  private static final long OWNER_MASK = (1L << 31) | 9L; // unique name, PID, UID; no AUGMENT.
 
   @FunctionalInterface
   interface Calls {
@@ -32,6 +31,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   private boolean closed;
   private boolean uncertain;
   private @Nullable String peer;
+  private @Nullable LinuxSystemdQuery.Budget budget;
 
   LinuxSystemdSession(Calls calls, Arena arena) {
     this.calls = Objects.requireNonNull(calls);
@@ -77,53 +77,101 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     return arena.allocate(ValueLayout.ADDRESS);
   }
 
-  private void timeout(long micros) throws IOException {
+  private long remaining(long micros) throws IOException {
     check();
-    if (bus.address() == 0 || micros < 1 || micros > 5_000_000)
+    var current = budget;
+    if (current == null || bus.address() == 0 || micros < 1 || micros > 5_000_000)
       throw LinuxSystemdQuery.unavailable();
-    integer("sd_bus_set_method_call_timeout", bus, micros);
+    long left = Math.min(micros, current.remainingMicros());
+    if (left < 1 || left > 5_000_000) throw LinuxSystemdQuery.unavailable();
+    return left;
+  }
+
+  private void timeout(long micros) throws IOException {
+    long left = remaining(micros);
+    if (integer("sd_bus_is_ready", bus) != 1) throw LinuxSystemdQuery.unavailable();
+    integer("sd_bus_set_method_call_timeout", bus, left);
   }
 
   @Override
-  public void start(long micros) throws IOException {
+  public void start(LinuxSystemdQuery.Budget source) throws IOException {
     check();
+    Objects.requireNonNull(source);
     if (bus.address() != 0) throw LinuxSystemdQuery.unavailable();
+    budget = source;
     MemorySegment result = pointer();
     Object status = call("sd_bus_new", result);
     bus = result.get(ValueLayout.ADDRESS, 0); // Capture ownership even if the status is a failure.
     if (!(status instanceof Integer code) || code < 0 || bus.address() == 0)
       throw LinuxSystemdQuery.unavailable();
-    timeout(micros);
+    integer("sd_bus_set_method_call_timeout", bus, remaining(5_000_000));
     integer("sd_bus_set_address", bus, text("unix:path=/run/dbus/system_bus_socket"));
     integer("sd_bus_set_bus_client", bus, 1);
     integer("sd_bus_set_allow_interactive_authorization", bus, 0);
     integer("sd_bus_start", bus);
+    // BUS_RUNNING is established with bounded process/wait before any synchronous RPC.
+    // sd_bus_call's implicit bus_ensure_running would otherwise wait without our deadline.
+    while (integer("sd_bus_is_ready", bus) != 1) {
+      remaining(5_000_000);
+      if (integer("sd_bus_process", bus, MemorySegment.NULL) == 0)
+        integer("sd_bus_wait", bus, remaining(5_000_000));
+    }
+    remaining(5_000_000);
   }
 
   @Override
   public LinuxSystemdQuery.Owner owner(long micros) throws IOException {
+    String unique = ownerValue("GetNameOwner", DESTINATION, 's', micros);
+    if (unique.length() > 64 || !unique.matches(":[0-9]+\\.[0-9]+"))
+      throw LinuxSystemdQuery.unavailable();
+    int pid =
+        Integer.parseUnsignedInt(ownerValue("GetConnectionUnixProcessID", unique, 'u', micros));
+    int euid = Integer.parseUnsignedInt(ownerValue("GetConnectionUnixUser", unique, 'u', micros));
+    var owner = new LinuxSystemdQuery.Owner(pid, euid, unique);
+    peer = unique;
+    return owner;
+  }
+
+  private String ownerValue(String member, String argument, char kind, long micros)
+      throws IOException {
     timeout(micros);
     MemorySegment result = pointer();
-    Object status = call("sd_bus_get_name_creds", bus, text(DESTINATION), OWNER_MASK, result);
-    MemorySegment credentials = result.get(ValueLayout.ADDRESS, 0);
+    Object status =
+        call(
+            "sd_bus_message_new_method_call",
+            bus,
+            result,
+            text("org.freedesktop.DBus"),
+            text("/org/freedesktop/DBus"),
+            text("org.freedesktop.DBus"),
+            text(member));
+    MemorySegment request = result.get(ValueLayout.ADDRESS, 0);
     return ResourceScope.use(
-        () -> release("sd_bus_creds_unref", credentials),
+        () -> release("sd_bus_message_unref", request),
         () -> {
-          if (!(status instanceof Integer code) || code < 0 || credentials.address() == 0)
+          if (!(status instanceof Integer code) || code < 0 || request.address() == 0)
             throw LinuxSystemdQuery.unavailable();
-          var pid = arena.allocate(ValueLayout.JAVA_INT);
-          var uid = arena.allocate(ValueLayout.JAVA_INT);
-          var unique = pointer();
-          integer("sd_bus_creds_get_pid", credentials, pid);
-          integer("sd_bus_creds_get_uid", credentials, uid);
-          integer("sd_bus_creds_get_unique_name", credentials, unique);
-          var owner =
-              new LinuxSystemdQuery.Owner(
-                  pid.get(ValueLayout.JAVA_INT, 0),
-                  uid.get(ValueLayout.JAVA_INT, 0),
-                  string(unique.get(ValueLayout.ADDRESS, 0)));
-          peer = owner.unique();
-          return owner;
+          integer("sd_bus_message_set_auto_start", request, 0);
+          integer("sd_bus_message_append_basic", request, (byte) 's', text(argument));
+          var output = pointer();
+          // Each explicit RPC receives the original query's remaining budget, never renewed.
+          timeout(micros);
+          Object called =
+              call("sd_bus_call", bus, request, remaining(micros), MemorySegment.NULL, output);
+          MemorySegment reply = output.get(ValueLayout.ADDRESS, 0);
+          return ResourceScope.use(
+              () -> release("sd_bus_message_unref", reply),
+              () -> {
+                if (!(called instanceof Integer ok) || ok < 0 || reply.address() == 0)
+                  throw LinuxSystemdQuery.unavailable();
+                var value = kind == 's' ? pointer() : arena.allocate(ValueLayout.JAVA_INT);
+                if (integer("sd_bus_message_read_basic", reply, (byte) kind, value) != 1)
+                  throw LinuxSystemdQuery.unavailable();
+                remaining(micros);
+                return kind == 's'
+                    ? string(value.get(ValueLayout.ADDRESS, 0))
+                    : Integer.toUnsignedString(value.get(ValueLayout.JAVA_INT, 0));
+              });
         });
   }
 
@@ -269,8 +317,9 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     static Calls calls() throws IOException {
       String os = System.getProperty("os.name", "");
       String arch = System.getProperty("os.arch", "");
-      if (!os.equals("Linux")
+      if (!"Linux".equals(os)
           || ValueLayout.ADDRESS.byteSize() != 8
+          || arch == null
           || !Set.of("amd64", "x86_64", "aarch64").contains(arch))
         throw LinuxSystemdQuery.unavailable();
       Path path =
@@ -281,8 +330,9 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
       Path real = path.toRealPath();
       for (Path current = real; current != null; current = current.getParent()) {
         var attributes = Files.readAttributes(current, "unix:uid,mode", LinkOption.NOFOLLOW_LINKS);
-        if (!attributes.get("uid").equals(0) || ((int) attributes.get("mode") & 0022) != 0)
-          throw LinuxSystemdQuery.unavailable();
+        if (!Integer.valueOf(0).equals(attributes.get("uid"))
+            || !(attributes.get("mode") instanceof Integer mode)
+            || (mode & 0022) != 0) throw LinuxSystemdQuery.unavailable();
       }
       SymbolLookup systemd = SymbolLookup.libraryLookup(real, Arena.global());
       SymbolLookup libc = Linker.nativeLinker().defaultLookup();
@@ -308,14 +358,25 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
                   "sd_bus_set_method_call_timeout",
                   FunctionDescriptor.of(integer, pointer, longValue)),
               Map.entry("sd_bus_start", FunctionDescriptor.of(integer, pointer)),
+              Map.entry("sd_bus_is_ready", FunctionDescriptor.of(integer, pointer)),
+              Map.entry("sd_bus_process", FunctionDescriptor.of(integer, pointer, pointer)),
+              Map.entry("sd_bus_wait", FunctionDescriptor.of(integer, pointer, longValue)),
               Map.entry(
-                  "sd_bus_get_name_creds",
-                  FunctionDescriptor.of(integer, pointer, pointer, longValue, pointer)),
-              Map.entry("sd_bus_creds_get_pid", FunctionDescriptor.of(integer, pointer, pointer)),
-              Map.entry("sd_bus_creds_get_uid", FunctionDescriptor.of(integer, pointer, pointer)),
+                  "sd_bus_message_new_method_call",
+                  FunctionDescriptor.of(
+                      integer, pointer, pointer, pointer, pointer, pointer, pointer)),
               Map.entry(
-                  "sd_bus_creds_get_unique_name", FunctionDescriptor.of(integer, pointer, pointer)),
-              Map.entry("sd_bus_creds_unref", FunctionDescriptor.of(pointer, pointer)),
+                  "sd_bus_message_set_auto_start",
+                  FunctionDescriptor.of(integer, pointer, integer)),
+              Map.entry(
+                  "sd_bus_message_append_basic",
+                  FunctionDescriptor.of(integer, pointer, octet, pointer)),
+              Map.entry(
+                  "sd_bus_call",
+                  FunctionDescriptor.of(integer, pointer, pointer, longValue, pointer, pointer)),
+              Map.entry(
+                  "sd_bus_message_read_basic",
+                  FunctionDescriptor.of(integer, pointer, octet, pointer)),
               Map.entry("sd_bus_close_unref", FunctionDescriptor.of(pointer, pointer)),
               Map.entry("sd_bus_message_unref", FunctionDescriptor.of(pointer, pointer)),
               Map.entry(

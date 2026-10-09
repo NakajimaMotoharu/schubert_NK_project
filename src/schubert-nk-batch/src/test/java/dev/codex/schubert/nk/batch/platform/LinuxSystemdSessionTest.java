@@ -14,8 +14,16 @@ final class LinuxSystemdSessionTest {
     final Arena data;
     final MemorySegment bus, creds, message;
     final List<String> events = new ArrayList<>();
-    String failure = "", wrongType = "", nullPointer = "", unique = ":1.7", string = "loaded";
+    String failure = "",
+        wrongType = "",
+        nullPointer = "",
+        unique = ":1.7",
+        string = "loaded",
+        member = "";
     int arrayLength = 16;
+    int readyAfter, readyReads;
+    long elapsedMicros, rpcDelayMicros, waitDelayMicros;
+    final List<Long> rpcBudgets = new ArrayList<>();
     boolean badRelease;
 
     Calls(Arena data) {
@@ -40,20 +48,58 @@ final class LinuxSystemdSessionTest {
             assertEquals("unix:path=/run/dbus/system_bus_socket", segment(a[1]).getString(0));
         case "sd_bus_set_bus_client" -> assertEquals(1, a[1]);
         case "sd_bus_set_allow_interactive_authorization" -> assertEquals(0, a[1]);
-        case "sd_bus_get_name_creds" -> {
-          assertEquals("org.freedesktop.systemd1", segment(a[1]).getString(0));
-          assertEquals(2147483657L, a[2]);
-          segment(a[3])
+        case "sd_bus_message_new_method_call" -> {
+          assertEquals("org.freedesktop.DBus", segment(a[2]).getString(0));
+          assertEquals("/org/freedesktop/DBus", segment(a[3]).getString(0));
+          assertEquals("org.freedesktop.DBus", segment(a[4]).getString(0));
+          member = segment(a[5]).getString(0);
+          assertTrue(
+              List.of("GetNameOwner", "GetConnectionUnixProcessID", "GetConnectionUnixUser")
+                  .contains(member));
+          segment(a[1])
               .set(ValueLayout.ADDRESS, 0, name.equals(nullPointer) ? MemorySegment.NULL : creds);
         }
-        case "sd_bus_creds_get_pid" -> segment(a[1]).set(ValueLayout.JAVA_INT, 0, 1);
-        case "sd_bus_creds_get_uid" -> segment(a[1]).set(ValueLayout.JAVA_INT, 0, 0);
-        case "sd_bus_creds_get_unique_name" ->
-            segment(a[1])
+        case "sd_bus_message_set_auto_start" -> assertEquals(0, a[1]);
+        case "sd_bus_message_append_basic" -> {
+          assertEquals((byte) 's', a[1]);
+          assertEquals(
+              member.equals("GetNameOwner") ? "org.freedesktop.systemd1" : unique,
+              segment(a[2]).getString(0));
+        }
+        case "sd_bus_call" -> {
+          assertTrue((long) a[2] > 0 && (long) a[2] <= 5000000);
+          long left = (long) a[2];
+          rpcBudgets.add(left);
+          elapsedMicros += Math.min(left, rpcDelayMicros);
+          if (rpcDelayMicros >= left) return -110;
+          segment(a[4])
+              .set(ValueLayout.ADDRESS, 0, name.equals(nullPointer) ? MemorySegment.NULL : message);
+        }
+        case "sd_bus_message_read_basic" -> {
+          if (member.equals("GetNameOwner")) {
+            assertEquals((byte) 's', a[1]);
+            segment(a[2])
                 .set(
                     ValueLayout.ADDRESS,
                     0,
                     name.equals(nullPointer) ? MemorySegment.NULL : data.allocateFrom(unique));
+          } else {
+            assertEquals((byte) 'u', a[1]);
+            segment(a[2])
+                .set(ValueLayout.JAVA_INT, 0, member.equals("GetConnectionUnixProcessID") ? 1 : 0);
+          }
+          return name.equals(wrongType) ? 0 : 1;
+        }
+        case "sd_bus_is_ready" -> {
+          return readyReads++ >= readyAfter ? 1 : 0;
+        }
+        case "sd_bus_process" -> {
+          return 0;
+        }
+        case "sd_bus_wait" -> {
+          assertTrue((long) a[1] > 0 && (long) a[1] <= 5000000);
+          elapsedMicros += Math.min((long) a[1], waitDelayMicros);
+        }
         case "sd_bus_get_property_string", "sd_bus_get_property_trivial", "sd_bus_get_property" -> {
           assertEquals(":1.7", segment(a[1]).getString(0));
           assertEquals(
@@ -61,7 +107,11 @@ final class LinuxSystemdSessionTest {
               segment(a[2]).getString(0));
           String member = segment(a[4]).getString(0);
           if (name.equals("sd_bus_get_property_string")) {
-            assertEquals("org.freedesktop.systemd1.Unit", segment(a[3]).getString(0));
+            assertEquals(
+                member.equals("ControlGroup")
+                    ? "org.freedesktop.systemd1.Service"
+                    : "org.freedesktop.systemd1.Unit",
+                segment(a[3]).getString(0));
             segment(a[6])
                 .set(
                     ValueLayout.ADDRESS,
@@ -100,7 +150,7 @@ final class LinuxSystemdSessionTest {
                           HexFormat.of().parseHex("00112233445566778899aabbccddeeff")));
           segment(a[3]).set(ValueLayout.JAVA_LONG, 0, arrayLength);
         }
-        case "sd_bus_creds_unref", "sd_bus_message_unref", "sd_bus_close_unref" -> {
+        case "sd_bus_message_unref", "sd_bus_close_unref" -> {
           return badRelease ? bus : MemorySegment.NULL;
         }
         case "free", "sd_bus_start", "sd_bus_set_method_call_timeout" -> {}
@@ -115,11 +165,14 @@ final class LinuxSystemdSessionTest {
     try (var data = Arena.ofConfined()) {
       var calls = new Calls(data);
       var session = new LinuxSystemdSession(calls, Arena.ofConfined());
-      session.start(5000000);
+      session.start(() -> 5000000);
       assertEquals(new LinuxSystemdQuery.Owner(1, 0, ":1.7"), session.owner(4999999));
       assertEquals(
           "loaded",
           session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.LOAD, 4999998));
+      assertEquals(
+          "loaded",
+          session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.GROUP, 4999998));
       assertEquals(
           "4294967295",
           session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997));
@@ -133,8 +186,7 @@ final class LinuxSystemdSessionTest {
       session.close();
       assertTrue(session.closed());
       assertTrue(
-          calls.events.containsAll(
-              List.of("free", "sd_bus_creds_unref", "sd_bus_message_unref", "sd_bus_close_unref")));
+          calls.events.containsAll(List.of("free", "sd_bus_message_unref", "sd_bus_close_unref")));
       assertThrows(IOException.class, session::close);
     }
   }
@@ -149,11 +201,12 @@ final class LinuxSystemdSessionTest {
             "sd_bus_set_bus_client",
             "sd_bus_set_allow_interactive_authorization",
             "sd_bus_start",
-            "sd_bus_get_name_creds",
-            "sd_bus_creds_get_pid",
-            "sd_bus_creds_get_uid",
-            "sd_bus_creds_get_unique_name",
-            "sd_bus_creds_unref",
+            "sd_bus_is_ready",
+            "sd_bus_message_new_method_call",
+            "sd_bus_message_set_auto_start",
+            "sd_bus_message_append_basic",
+            "sd_bus_call",
+            "sd_bus_message_read_basic",
             "sd_bus_get_property_string",
             "free",
             "sd_bus_get_property_trivial",
@@ -169,7 +222,7 @@ final class LinuxSystemdSessionTest {
         assertThrows(
             IOException.class,
             () -> {
-              session.start(5000000);
+              session.start(() -> 5000000);
               session.owner(4999999);
               session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
               session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997);
@@ -188,8 +241,9 @@ final class LinuxSystemdSessionTest {
     for (String bad :
         List.of(
             "sd_bus_new",
-            "sd_bus_get_name_creds",
-            "sd_bus_creds_get_unique_name",
+            "sd_bus_message_new_method_call",
+            "sd_bus_call",
+            "sd_bus_message_read_basic",
             "sd_bus_get_property_string",
             "sd_bus_get_property",
             "sd_bus_message_read_array")) {
@@ -215,7 +269,7 @@ final class LinuxSystemdSessionTest {
         var calls = new Calls(data);
         calls.arrayLength = length;
         var session = new LinuxSystemdSession(calls, owned);
-        session.start(5000000);
+        session.start(() -> 5000000);
         session.owner(4999999);
         assertThrows(
             IOException.class,
@@ -240,7 +294,9 @@ final class LinuxSystemdSessionTest {
     for (String bad :
         List.of(
             "sd_bus_new",
-            "sd_bus_get_name_creds",
+            "sd_bus_message_new_method_call",
+            "sd_bus_call",
+            "sd_bus_message_read_basic",
             "sd_bus_get_property_string",
             "sd_bus_get_property",
             "sd_bus_get_property_trivial"))
@@ -296,8 +352,8 @@ final class LinuxSystemdSessionTest {
       var calls = new Calls(data);
       var s = new LinuxSystemdSession(calls, owned);
       assertThrows(IOException.class, () -> s.owner(5000000));
-      s.start(5000000);
-      assertThrows(IOException.class, () -> s.start(5000000));
+      s.start(() -> 5000000);
+      assertThrows(IOException.class, () -> s.start(() -> 5000000));
       assertThrows(
           IOException.class,
           () -> s.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 5000000));
@@ -317,10 +373,7 @@ final class LinuxSystemdSessionTest {
       thread.join();
       assertInstanceOf(IOException.class, error.get());
       calls.unique = "foreign";
-      s.owner(5000000);
-      assertThrows(
-          IOException.class,
-          () -> s.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 5000000));
+      assertThrows(IOException.class, () -> s.owner(5000000));
       calls.unique = ":1.7";
       calls.badRelease = true;
       assertThrows(IOException.class, () -> s.owner(5000000));
@@ -332,6 +385,48 @@ final class LinuxSystemdSessionTest {
     try (var data = Arena.ofConfined()) {
       assertThrows(
           NullPointerException.class, () -> new LinuxSystemdSession(new Calls(data), null));
+    }
+  }
+
+  @Test
+  void authenticationAndSuccessiveRpcUseOneOriginalBudget() throws Exception {
+    for (boolean authentication : new boolean[] {true, false}) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var calls = new Calls(data);
+        calls.readyAfter = authentication ? Integer.MAX_VALUE : 2;
+        calls.waitDelayMicros = authentication ? 2000000 : 500000;
+        calls.rpcDelayMicros = authentication ? 0 : 2000000;
+        var session = new LinuxSystemdSession(calls, owned);
+        LinuxSystemdQuery.Budget budget =
+            () -> {
+              long left = 5000000 - calls.elapsedMicros;
+              if (left < 1) throw new IOException("literal whole deadline");
+              return left;
+            };
+        if (authentication) assertThrows(IOException.class, () -> session.start(budget));
+        else {
+          session.start(budget);
+          assertEquals(1000000, calls.elapsedMicros);
+          assertThrows(IOException.class, () -> session.owner(5000000));
+          assertEquals(List.of(4000000L, 2000000L), calls.rpcBudgets);
+        }
+        assertEquals(5000000, calls.elapsedMicros);
+        session.close();
+        assertTrue(session.closed());
+      }
+    }
+    for (String boundary : List.of("sd_bus_process", "sd_bus_wait")) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var calls = new Calls(data);
+        calls.readyAfter = Integer.MAX_VALUE;
+        calls.failure = boundary;
+        var session = new LinuxSystemdSession(calls, owned);
+        assertThrows(IOException.class, () -> session.start(() -> 5000000));
+        assertThrows(IOException.class, session::close);
+        assertFalse(session.closed());
+      }
     }
   }
 

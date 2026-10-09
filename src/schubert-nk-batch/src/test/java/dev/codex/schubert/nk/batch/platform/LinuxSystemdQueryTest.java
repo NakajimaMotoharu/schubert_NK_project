@@ -50,7 +50,8 @@ final class LinuxSystemdQueryTest {
       }
     }
 
-    public void start(long micros) throws IOException {
+    public void start(LinuxSystemdQuery.Budget budget) throws IOException {
+      long micros = budget.remainingMicros();
       assertTrue(micros > 0 && micros <= 5000000);
       at("start");
     }

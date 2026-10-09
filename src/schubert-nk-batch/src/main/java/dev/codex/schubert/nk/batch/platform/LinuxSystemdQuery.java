@@ -22,7 +22,7 @@ final class LinuxSystemdQuery {
     SUB("SubState", "Unit", 's'),
     PID("MainPID", "Service", 'u'),
     INVOCATION("InvocationID", "Unit", 'a'),
-    GROUP("ControlGroup", "Unit", 's'),
+    GROUP("ControlGroup", "Service", 's'),
     START("ExecMainStartTimestampMonotonic", "Service", 't');
 
     final String member;
@@ -36,7 +36,7 @@ final class LinuxSystemdQuery {
     }
   }
 
-  record Owner(int pid, int uid, String unique) {
+  record Owner(int pid, int euid, String unique) {
     Owner {
       Objects.requireNonNull(unique);
     }
@@ -47,8 +47,13 @@ final class LinuxSystemdQuery {
     }
   }
 
+  @FunctionalInterface
+  interface Budget {
+    long remainingMicros() throws IOException;
+  }
+
   interface Session {
-    void start(long remainingMicros) throws IOException;
+    void start(Budget budget) throws IOException;
 
     Owner owner(long remainingMicros) throws IOException;
 
@@ -108,10 +113,10 @@ final class LinuxSystemdQuery {
       return ResourceScope.use(
           session::close,
           () -> {
-            session.start(remaining(began));
+            session.start(() -> remaining(began));
             Owner first = session.owner(remaining(began));
             if (first.pid() != 1
-                || first.uid() != 0
+                || first.euid() != 0
                 || first.unique().length() > 64
                 || !first.unique().matches(":[0-9]+\\.[0-9]+")) throw unavailable();
             var result = new StringBuilder();
