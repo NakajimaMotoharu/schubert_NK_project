@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC239 fresh system-manager読取transport（2026-10-09、QA047内部補足）
+
+RootStartupContextの固定Unit照会は、同owner-threadのJava25 FFM/libsystemd公開sd-bus ABIによる固定ローカルreadだけへ置換する。GNU/Linux LP64のamd64/x86_64/aarch64を明示し、固定`/usr/lib/<対応arch>/libsystemd.so.0`のrealpath及び全祖先uid0/non-group-other-writeを検証する。immutable ABI MethodHandle以外の返信/owner/許可はcacheしない。環境bus/library指定、user/remote bus、process運用fallback、新権限付与は不可。
+
+各queryにfresh私有接続を所有し、固定`unix:path=/run/dbus/system_bus_socket`へ接続する。元query全体5秒のBudgetで認証/Helloのprocess/waitをboundedに行い、RUNNING確認前の同期RPCは禁止する。固定DBus driverへauto-start0のGetNameOwnerを発行し、返ったunique nameのGetConnectionUnixProcessID/GetConnectionUnixUserを別の明示一RPCで読取、PID1/bus EUID0/unique形式を照合する。propertyはそのunique宛先だけであり暗黙service activationを行わない。全property後に再びwell-knownのowner/PID/EUIDをfresh取得して前後同一を確認する。
+
+固定Service enumだけを対象とする。full projection=Id/LoadState/ActiveState/SubState/MainPID/InvocationID/ControlGroup、deadline projection=Id/InvocationID/MainPID/ExecMainStartTimestampMonotonic。Id/Load/Active/Sub/InvocationはUnit interface、ControlGroup/MainPID/ExecMainStartTimestampMonotonicはService interface。string/uint32/uint64/ayを実ABIで厳密読取し、Invocationは長0又は16byte、unsigned値を十進・IDをhexで表す。ASCII printable・各値/全返信4096byte以内、NUL文字列はNULまで逐次読取し未終端/超過/NULLを拒否する。systemctl旧読取は独立比較・故障注入試験だけに残す。
+
+全引数準備後のRPC直前に、同元Budget残量を再取得してtimeout設定・ready/期限を検査する。owner三RPCも同元残量、接続waitを含めrenew/5秒延長0、親1800秒/各Unit期限も不変更。既Root kernel PID1/exe/boot/UID/proc/二読/全field、同peer/generation/identity/socket/info/ready・全row/seal/receipt・typed退役前後の証明を省略しない。bus/message/credential相当の所有返信・malloc文字列・arenaは当threadのscopeで解放する。IO/Runtime/Error/型/close不明は拒否・不明capability保持/次照会0、強制kill/不明closeの正常化をしない。
+
+導入OSpackage版/入手元/ABI/header/hashと再現command、独立literal/stateful・境界/null/時刻/所有/解放故障PT、同sourceの実停止VM full値/FD/時刻比較を記録する。固定security library pathの静的検査は既kernel固定pathと同じEXACT局所理由付けのみ、global除外/coverage緩和0。停止中速度は旧timeout原因・負荷中性能・親受入の代用にしない。BUG949原因/新source全体回帰/署名code-only/別fresh一回resume/元30分真正DONE・owned停止/native/global四100/正式は別に実証する。RD/UI/DIF/業務仕様変更なし、承認QA047内の内部補足。
+
 SSC238（2026-10-09、QA047/BUG936、保持工具の実DB生存）：隔離PG/PTの新pending code-only/resume工具がDBを所有して待機/未知保持する間、同owner-thread・同Connection・固定backend/role/application/database/readOnly/advisory71419602の現在生存を読取SELECTで確認する。JDBC object保有から実server所持を推定しない。確認間隔は既role60s idle timeout未満とし、既60s/親1800sの設定値・権限を変更しない。SELECTはbusiness更新/commit/新Connection取得を行わず、Unit/runtime/許可の再発行権限でもない。SQL/closed/異thread/値不一致/Runtime/Errorで所有確認を失ったらDB_NOT_CONFIRMEDに固定し、以降heartbeat/別Connectionでの再取得を止め、M/A/十Ref/原本等を隔離のまま正規fixedhandoffへ渡す。旧779の失活/143/close未知を補完しない。通常解放は当scopeの真正rollback/DB close/十Ref Unref・bus/FD/入場lock後条件を別確認し、未確認を成功としない。
 
 SSC237（2026-10-09、SSC187203の全証拠配線補足）：真正DONEの完了証拠をCaddy/Web/API各intent退役前後へ同じ保持DB/原本能力で渡す。Web退役直後・API退役前後も、全Backup/Cleanup/Expiry行・参照/seal・明示停止済Backup cycle/元receipt・Cleanup/Expiry保持receiptと同ordinary peer/current/launch/identity/socket/info/readyを実再確認する。typed marker自体は既Attemptだけが所有し、純gateは追加marker/receiptを生成せず、DBを新規再取得しない。半退役/未知close/証拠変化は次退役/DONE0・同scope隔離。失敗のfixed phase/class/monotonic経過以外に例外原文・DB値・credential・tokenを出さない。旧FAILED_TIMEOUT143と新source真正成功を分離、旧原本active/Backup/Current baselineを保全し、新source所定quality→code-only→別fresh一回resumeで実証する。追加QA/RD/UI/DIF変更は不要。

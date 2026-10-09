@@ -218,6 +218,23 @@ final class LinuxSystemdQueryTest {
 
   @Test
   void originalFiveSecondsWholeQueryNotPerRpcAndSubMicrosecondBoundary() {
+    int[] interruptedReads = {0};
+    var interruptedSession = new Session();
+    var interruptedQuery =
+        new LinuxSystemdQuery(
+            () -> interruptedSession,
+            () -> {
+              if (interruptedReads[0]++ > 0) Thread.currentThread().interrupt();
+              return 0;
+            });
+    try {
+      assertThrows(
+          IOException.class, () -> interruptedQuery.read(RootStartupContext.Service.API, FIELDS));
+      assertTrue(interruptedSession.closed);
+      assertEquals(List.of("close"), interruptedSession.events);
+    } finally {
+      Thread.interrupted();
+    }
     for (long elapsed : new long[] {-1, 4_999_999_001L, 5_000_000_000L, Long.MAX_VALUE}) {
       var s = new Session();
       int[] reads = {0};

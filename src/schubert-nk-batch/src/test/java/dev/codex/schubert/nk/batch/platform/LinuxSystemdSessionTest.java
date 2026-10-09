@@ -15,6 +15,7 @@ final class LinuxSystemdSessionTest {
     final MemorySegment bus, creds, message;
     final List<String> events = new ArrayList<>();
     String failure = "",
+        negative = "",
         wrongType = "",
         nullPointer = "",
         unique = ":1.7",
@@ -24,7 +25,7 @@ final class LinuxSystemdSessionTest {
     int readyAfter, readyReads;
     long elapsedMicros, rpcDelayMicros, waitDelayMicros;
     final List<Long> rpcBudgets = new ArrayList<>();
-    boolean badRelease;
+    boolean badRelease, expireAtSetter;
 
     Calls(Arena data) {
       this.data = data;
@@ -40,6 +41,7 @@ final class LinuxSystemdSessionTest {
     public Object call(String name, Object... a) throws IOException {
       events.add(name);
       if (name.equals(failure)) throw new IOException("literal native fault");
+      if (name.equals(negative)) return -5;
       switch (name) {
         case "sd_bus_new" ->
             segment(a[0])
@@ -153,7 +155,10 @@ final class LinuxSystemdSessionTest {
         case "sd_bus_message_unref", "sd_bus_close_unref" -> {
           return badRelease ? bus : MemorySegment.NULL;
         }
-        case "free", "sd_bus_start", "sd_bus_set_method_call_timeout" -> {}
+        case "sd_bus_set_method_call_timeout" -> {
+          if (expireAtSetter) elapsedMicros = 5000000;
+        }
+        case "free", "sd_bus_start" -> {}
         default -> throw new AssertionError("unexpected ABI call " + name);
       }
       return name.equals(wrongType) ? MemorySegment.NULL : 0;
@@ -445,5 +450,144 @@ final class LinuxSystemdSessionTest {
         () -> LinuxSystemdSession.Native.bind(name -> Optional.empty(), name -> Optional.empty()));
     var actual = LinuxSystemdSession.Native.calls();
     assertThrows(IOException.class, () -> actual.call("unregistered"));
+  }
+
+  @Test
+  void everyPropertyRejectsExpiredSetterBeforeRpc() throws Exception {
+    for (var property : LinuxSystemdQuery.Property.values()) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var calls = new Calls(data);
+        var session = new LinuxSystemdSession(calls, owned);
+        session.start(() -> 5000000 - calls.elapsedMicros);
+        session.owner(5000000);
+        long before =
+            calls.events.stream().filter(n -> n.startsWith("sd_bus_get_property")).count();
+        calls.expireAtSetter = true;
+        assertThrows(
+            IOException.class,
+            () -> session.read(RootStartupContext.Service.API, property, 5000000));
+        assertEquals(5000000, calls.elapsedMicros);
+        assertEquals(
+            before, calls.events.stream().filter(n -> n.startsWith("sd_bus_get_property")).count());
+        assertFalse(session.closed());
+      }
+    }
+  }
+
+  @Test
+  void explicitPlatformAndLibraryTrustContractsRejectMissingOrWritableMetadata() throws Exception {
+    for (String arch : List.of("amd64", "x86_64"))
+      assertEquals(
+          java.nio.file.Path.of("/usr/lib/x86_64-linux-gnu/libsystemd.so.0"),
+          LinuxSystemdSession.Native.library("Linux", arch, 8));
+    assertEquals(
+        java.nio.file.Path.of("/usr/lib/aarch64-linux-gnu/libsystemd.so.0"),
+        LinuxSystemdSession.Native.library("Linux", "aarch64", 8));
+    assertThrows(IOException.class, () -> LinuxSystemdSession.Native.library(null, "amd64", 8));
+    assertThrows(
+        IOException.class, () -> LinuxSystemdSession.Native.library("Windows", "amd64", 8));
+    assertThrows(IOException.class, () -> LinuxSystemdSession.Native.library("Linux", null, 8));
+    assertThrows(
+        IOException.class, () -> LinuxSystemdSession.Native.library("Linux", "unknown", 8));
+    assertThrows(IOException.class, () -> LinuxSystemdSession.Native.library("Linux", "amd64", 4));
+    LinuxSystemdSession.Native.trusted(Map.of("uid", 0, "mode", 0100755));
+    for (var metadata :
+        List.<Map<String, ?>>of(
+            Map.of(),
+            Map.of("uid", 1, "mode", 0100755),
+            Map.of("uid", "0", "mode", 0100755),
+            Map.of("uid", 0),
+            Map.of("uid", 0, "mode", "755"),
+            Map.of("uid", 0, "mode", 0100775),
+            Map.of("uid", 0, "mode", 0100757)))
+      assertThrows(IOException.class, () -> LinuxSystemdSession.Native.trusted(metadata));
+    assertThrows(NullPointerException.class, () -> LinuxSystemdSession.Native.trusted(null));
+  }
+
+  @Test
+  void nativeInvocationPreservesUnknownRuntimeFatalAndSanitizesCheckedFailures() throws Exception {
+    assertEquals(
+        "literal",
+        LinuxSystemdSession.Native.invoke(
+            java.lang.invoke.MethodHandles.constant(String.class, "literal"), new Object[0]));
+    assertEquals(
+        MemorySegment.NULL,
+        LinuxSystemdSession.Native.invoke(
+            java.lang.invoke.MethodHandles.empty(
+                java.lang.invoke.MethodType.methodType(void.class)),
+            new Object[0]));
+    for (Throwable failure :
+        List.of(
+            new IOException("private checked"),
+            new IllegalStateException("private runtime"),
+            new AssertionError("private fatal"))) {
+      var handle =
+          java.lang.invoke.MethodHandles.throwException(Object.class, failure.getClass())
+              .bindTo(failure);
+      if (failure instanceof IOException) {
+        var actual =
+            assertThrows(
+                IOException.class, () -> LinuxSystemdSession.Native.invoke(handle, new Object[0]));
+        assertEquals("system manager read unavailable", actual.getMessage());
+        assertNull(actual.getCause());
+      } else {
+        assertSame(
+            failure,
+            assertThrows(
+                failure.getClass(),
+                () -> LinuxSystemdSession.Native.invoke(handle, new Object[0])));
+      }
+    }
+    assertThrows(IOException.class, () -> LinuxSystemdSession.Native.invoke(null, new Object[0]));
+  }
+
+  @Test
+  void negativeNativeStatusesAndInvalidBudgetStayFailedButOwnedReleaseIsChecked() throws Exception {
+    for (String point :
+        List.of(
+            "sd_bus_new",
+            "sd_bus_set_address",
+            "sd_bus_message_new_method_call",
+            "sd_bus_call",
+            "sd_bus_message_read_basic",
+            "sd_bus_get_property_string",
+            "sd_bus_get_property")) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var calls = new Calls(data);
+        calls.negative = point;
+        var session = new LinuxSystemdSession(calls, owned);
+        assertThrows(
+            IOException.class,
+            () -> {
+              session.start(() -> 5000000);
+              session.owner(5000000);
+              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 5000000);
+              session.read(
+                  RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 5000000);
+            });
+        assertFalse(session.closed());
+      }
+    }
+    for (long bad : new long[] {0, -1, 5000001}) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var session = new LinuxSystemdSession(new Calls(data), owned);
+        assertThrows(IOException.class, () -> session.start(() -> bad));
+      }
+    }
+    try (var data = Arena.ofConfined();
+        var owned = Arena.ofConfined()) {
+      var calls = new Calls(data);
+      calls.unique = ":1." + "1".repeat(65);
+      var session = new LinuxSystemdSession(calls, owned);
+      session.start(() -> 5000000);
+      assertThrows(IOException.class, () -> session.owner(5000000));
+      calls.unique = ":1.7";
+      session.owner(5000000);
+      calls.readyAfter = Integer.MAX_VALUE;
+      assertThrows(IOException.class, () -> session.owner(5000000));
+    }
   }
 }

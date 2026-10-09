@@ -84,15 +84,16 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     var current = budget;
     if (current == null || bus.address() == 0 || micros < 1 || micros > 5_000_000)
       throw LinuxSystemdQuery.unavailable();
-    long left = Math.min(micros, current.remainingMicros());
+    long left = current.remainingMicros();
     if (left < 1 || left > 5_000_000) throw LinuxSystemdQuery.unavailable();
-    return left;
+    return Math.min(micros, left);
   }
 
   private void timeout(long micros) throws IOException {
     long left = remaining(micros);
     if (integer("sd_bus_is_ready", bus) != 1) throw LinuxSystemdQuery.unavailable();
     integer("sd_bus_set_method_call_timeout", bus, left);
+    remaining(micros); // Setter/ready work must not cross the original deadline before sending.
   }
 
   @Override
@@ -184,20 +185,21 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
       throws IOException {
     Objects.requireNonNull(service);
     Objects.requireNonNull(property);
-    timeout(micros);
+    remaining(micros);
     MemorySegment path =
         text(
             "/org/freedesktop/systemd1/unit/"
                 + service.unit().replace("_", "_5f").replace("-", "_2d").replace(".", "_2e"));
     String unique = peer;
-    if (unique == null || !unique.matches(":[0-9]+\\.[0-9]+"))
-      throw LinuxSystemdQuery.unavailable();
+    if (unique == null) throw LinuxSystemdQuery.unavailable();
+    // peer is established only by owner(), after its strict unique-name validation.
     // A unique bus name cannot auto-activate a service if its captured owner disappears.
     MemorySegment destination = text(unique);
     MemorySegment type = text("org.freedesktop.systemd1." + property.kind);
     MemorySegment name = text(property.member);
     if (property.type == 's') {
       var result = pointer();
+      timeout(micros);
       Object status =
           call(
               "sd_bus_get_property_string",
@@ -221,6 +223,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     }
     if (property.type == 'u' || property.type == 't') {
       var value = arena.allocate(ValueLayout.JAVA_LONG);
+      timeout(micros);
       integer(
           "sd_bus_get_property_trivial",
           bus,
@@ -236,6 +239,8 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
           : Long.toUnsignedString(value.get(ValueLayout.JAVA_LONG, 0));
     }
     var result = pointer();
+    var signature = text("ay");
+    timeout(micros);
     Object status =
         call(
             "sd_bus_get_property",
@@ -246,7 +251,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
             name,
             MemorySegment.NULL,
             result,
-            text("ay"));
+            signature);
     MemorySegment message = result.get(ValueLayout.ADDRESS, 0);
     return ResourceScope.use(
         () -> release("sd_bus_message_unref", message),
@@ -316,34 +321,45 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     private Native() {}
 
     @SuppressWarnings("restricted")
-    @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-        matchType = SuppressMatchType.EXACT,
-        justification =
-            "SSC239 fixed Linux ABI library; root-owned nonwritable ancestors, no environment override. BUG957/PT-OPS-MANAGER817012.")
     static Calls calls() throws IOException {
-      String os = System.getProperty("os.name", "");
-      String arch = System.getProperty("os.arch", "");
-      if (!"Linux".equals(os)
-          || ValueLayout.ADDRESS.byteSize() != 8
-          || arch == null
-          || !Set.of("amd64", "x86_64", "aarch64").contains(arch))
-        throw LinuxSystemdQuery.unavailable();
       Path path =
-          Path.of(
-              "/usr/lib",
-              arch.equals("aarch64") ? "aarch64-linux-gnu" : "x86_64-linux-gnu",
-              "libsystemd.so.0");
+          library(
+              System.getProperty("os.name", ""),
+              System.getProperty("os.arch", ""),
+              ValueLayout.ADDRESS.byteSize());
       Path real = path.toRealPath();
       for (Path current = real; current != null; current = current.getParent()) {
         var attributes = Files.readAttributes(current, "unix:uid,mode", LinkOption.NOFOLLOW_LINKS);
-        if (!Integer.valueOf(0).equals(attributes.get("uid"))
-            || !(attributes.get("mode") instanceof Integer mode)
-            || (mode & 0022) != 0) throw LinuxSystemdQuery.unavailable();
+        trusted(attributes);
       }
       SymbolLookup systemd = SymbolLookup.libraryLookup(real, Arena.global());
       SymbolLookup libc = Linker.nativeLinker().defaultLookup();
       return bind(systemd, libc);
+    }
+
+    @SuppressFBWarnings(
+        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        matchType = SuppressMatchType.EXACT,
+        justification =
+            "SSC239 fixed protected Linux ABI library, no caller path. BUG957/MANAGER817012.")
+    static Path library(@Nullable String os, @Nullable String arch, long addressBytes)
+        throws IOException {
+      if (!"Linux".equals(os)
+          || addressBytes != 8
+          || arch == null
+          || !Set.of("amd64", "x86_64", "aarch64").contains(arch))
+        throw LinuxSystemdQuery.unavailable();
+      return Path.of(
+          "/usr/lib",
+          arch.equals("aarch64") ? "aarch64-linux-gnu" : "x86_64-linux-gnu",
+          "libsystemd.so.0");
+    }
+
+    static void trusted(Map<String, ?> attributes) throws IOException {
+      Objects.requireNonNull(attributes);
+      if (!Integer.valueOf(0).equals(attributes.get("uid"))
+          || !(attributes.get("mode") instanceof Integer mode)
+          || (mode & 0022) != 0) throw LinuxSystemdQuery.unavailable();
     }
 
     @SuppressWarnings("restricted")
@@ -410,18 +426,19 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
         handles.put(
             entry.getKey(), Linker.nativeLinker().downcallHandle(address, entry.getValue()));
       }
-      return (symbol, arguments) -> {
-        try {
-          MethodHandle handle = handles.get(symbol);
-          if (handle == null) throw LinuxSystemdQuery.unavailable();
-          Object value = handle.invokeWithArguments(arguments);
-          return value == null ? MemorySegment.NULL : value;
-        } catch (RuntimeException | Error failure) {
-          throw failure;
-        } catch (Throwable failure) {
-          throw LinuxSystemdQuery.unavailable();
-        }
-      };
+      return (symbol, arguments) -> invoke(handles.get(symbol), arguments);
+    }
+
+    static Object invoke(@Nullable MethodHandle handle, Object[] arguments) throws IOException {
+      try {
+        if (handle == null) throw LinuxSystemdQuery.unavailable();
+        Object value = handle.invokeWithArguments(arguments);
+        return value == null ? MemorySegment.NULL : value;
+      } catch (RuntimeException | Error failure) {
+        throw failure;
+      } catch (Throwable failure) {
+        throw LinuxSystemdQuery.unavailable();
+      }
     }
   }
 }

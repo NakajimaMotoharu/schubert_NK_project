@@ -1,5 +1,6 @@
 """SSC239 new-only read-only host/VM comparison. No deployment, DB, start/stop or permit."""
 import base64
+import argparse
 import datetime
 import hashlib
 import io
@@ -80,14 +81,20 @@ public final class Pg824ManagerComparison {
 '''
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--selected', required=True, type=int)
+    parser.add_argument('--run', required=True, type=int)
+    args = parser.parse_args()
+    assert args.selected >= 825 and args.run >= 824 and args.selected != args.run
+    label = 'pg' + str(args.run) + '-manager-native-v1'
     os.umask(0o077)
     assert not subprocess.check_output(['git', 'status', '--porcelain'], cwd=T)
-    selected = W / 'pg825-manager-selected-v1'
+    selected = W / ('pg'+str(args.selected)+'-manager-selected-v1')
     run = json.loads((selected / 'run.safe.json').read_text())
     assert (selected / 'exit').read_text() == '0\n' and run['actualExit'] == 0
     batch = selected / 'batch/schubert-nk-batch-0.1.0-SNAPSHOT.jar'
     assert hashlib.sha256(batch.read_bytes()).hexdigest() == run['files']['batch/' + batch.name]
-    root = W / 'pg824-manager-native-v1'; root.mkdir(mode=0o700)
+    root = W / label; root.mkdir(mode=0o700)
     source = root / 'Pg824ManagerComparison.java'; source.write_text(JAVA)
     classes = root / 'classes'; classes.mkdir(mode=0o700)
     libs = W / 'pg796-release-v1/operations/lib'
@@ -135,6 +142,7 @@ if r.returncode:print(json.dumps({'actualExit':r.returncode,'privateLogSha256':h
 value=json.loads((root/'native.private.log').read_text());value.update(allTenStoppedUnchanged=True,candidateDeployed=False,privateLogSha256=hashlib.sha256((root/'native.private.log').read_bytes()).hexdigest())
 print(json.dumps(value))
 '''
+    payload = payload.replace('pg824-manager-native-v1', label)
     payload = 'ENCODED='+repr(encoded)+'\nEXPECTED='+repr(hashlib.sha256(batch.read_bytes()).hexdigest())+'\n'+payload
     ssh = ['ssh', '-i', str(P/'vm-access'), '-oBatchMode=yes', '-oIdentitiesOnly=yes', '-oStrictHostKeyChecking=yes',
            '-oUserKnownHostsFile='+str(P/'known_hosts'), '-p', '22222', 'ubuntu@127.0.0.1', 'sudo -n python3 -B -']
@@ -144,7 +152,7 @@ print(json.dumps(value))
     if result.returncode:
         print(json.dumps({'actualExit':result.returncode,'phase':'NATIVE','privateOutputSha256':hashlib.sha256(result.stdout).hexdigest()}))
         raise SystemExit(result.returncode)
-    value = {'actualExit':0,'source':run['source'],'operatorSource':subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip(),
+    value = {'actualExit':0,'run':label,'selectedRun':args.selected,'source':run['source'],'operatorSource':subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip(),
              'host':json.loads((root/'host.private.log').read_text()),'vm':json.loads(result.stdout),
              'batchJarSha256':hashlib.sha256(batch.read_bytes()).hexdigest(),'helperSha256':hashlib.sha256(JAVA.encode()).hexdigest(),
              'recordedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'candidateDeployed':False,'formalAccepted':False,'productionPTAdded':0}
