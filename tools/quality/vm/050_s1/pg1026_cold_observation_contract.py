@@ -129,6 +129,28 @@ class HeldInventory:
             observed.append((name, current, acl, digest))
         return tuple(observed)
 
+    def open_file(self):
+        """Pin one separately provisioned file, without claiming parent closure.
+
+        Closed release inventories MUST use open(), not this material-file scope.
+        """
+        if self.held or self.closed or len(self.records) != 1:
+            raise ValueError('single material scope refused')
+        name = next(iter(self.records))
+        if '/' in name:
+            raise ValueError('single material name refused')
+        try:
+            fd = self._hold(None, '/', True)
+            for component in self.root.parts[1:]:
+                fd = self._hold(fd, component, True)
+            self.root_fd = fd
+            self._hold(fd, name, False)
+            self.capture()
+            return self
+        except BaseException:
+            self.close()
+            raise
+
     def close(self):
         if self.closed:
             raise ValueError('inventory double close')

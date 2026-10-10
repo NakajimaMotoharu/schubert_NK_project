@@ -89,6 +89,17 @@ class Contract(unittest.TestCase):
         (root / 'nested').chmod(0o770)
         with self.assertRaises(ValueError): HeldInventory(str(root), records, os.getuid()).open()
 
+    def test_actual_separate_material_scope_does_not_claim_directory_closure(self):
+        root, records = self.fixture()
+        (root / 'unrelated').write_bytes(b'not release inventory')
+        held = HeldInventory(str(root), records, os.getuid()).open_file()
+        try:
+            self.assertEqual(records[0]['sha256'], held.capture()[-1][3])
+            (root / 'payload').chmod(0o400)
+            with self.assertRaises(ValueError): held.capture()
+        finally: held.close()
+        with self.assertRaises(ValueError): HeldInventory(str(root), records + [{**records[0], 'path':'other'}], os.getuid()).open_file()
+
     def test_actual_reservation_durable_exclusive_and_symlink_refused(self):
         root, _ = self.fixture()
         fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
