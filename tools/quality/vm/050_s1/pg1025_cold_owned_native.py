@@ -35,6 +35,13 @@ def source():
     with Path(str(base)+'.begin.safe.json').open('x')as f:json.dump(begin_record,f,sort_keys=True);f.flush();os.fsync(f.fileno())
 """
     raw=raw.replace(marker,reservation+marker)
+    # BUG1016: this task may remain in UNKNOWN while the host legitimately moves
+    # forward. Completion HEAD is not the dispatch/source identity.
+    source_marker="'operatorSource':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()"
+    assert raw.count(source_marker)==2
+    first=raw.index(source_marker);last=raw.rindex(source_marker)
+    assert last>first
+    raw=raw[:last]+raw[last:].replace(source_marker,"'operatorSource':begin_record['operatorSource']",1)
     assert 'execute'not in raw and 'pg983-'not in raw
     ast.parse(raw);return raw
 
