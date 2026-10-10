@@ -5,7 +5,7 @@ from pg1091_cold_activation_refs import source as refs_source
 from pg1069_cold_candidate_sources import replace_once
 
 PUBLISH=r'''
-  static void publication(ReleaseApproval candidate,References refs,MaintenanceRunFiles.Session session)throws Exception {
+  static void publication(dev.codex.schubert.nk.bootstrap.ReleaseApproval candidate,References refs,MaintenanceRunFiles.Session session)throws Exception {
     require(candidate.version().equals("0.1.0-PG1068")&&candidate.manifestSha256().equals("0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d"));
     Path startup=Path.of("/run/schubert-nk/startup");
     try(var entries=Files.list(startup)){require(entries.findAny().isEmpty());}

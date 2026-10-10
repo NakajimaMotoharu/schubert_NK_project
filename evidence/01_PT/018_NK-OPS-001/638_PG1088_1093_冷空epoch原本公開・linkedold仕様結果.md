@@ -1,5 +1,11 @@
 # SSC249250 cold-empty有限公開・linkedold
 
+## 20:25JST 失敗保全・新生成source資格
+
+PG1092初回compile実1、operator4aaf68b91cb0d82712ca842b505d960c7f920eaf、11:12:42.479440～11:12:44.078543UTC。ReleaseApproval型未解決、Java oracle not-run、guestActions0、旧frozen/logをW/pg1092-cold-activation-frozen-v1.safe.json及びpg1091-cold-tools-v1へ保全。既成功fixtureをJava/実公開成功へ流用しない。
+
+PT-DEP-1091003：全生成global binding/単一定義・未使用旧read_pair/fds/runtime等除去。PT-DEP-1094001～002：実私有literal20byteのsigned material FD/hash/全metadata/linkedidentity/dir/link、同inode内容変更の拒否、newclass/activate/固定slot完全一致。host fixtureだけでRoot祖先資格を主張せず/tmpは本番trusted inventoryの対象外。新1094family/1095compile/1096transport、旧slot上書き・旧1093発行0。source test3/observer2は限定0、Java/VMは未実行。
+
 Program NK-OPS-001/SS343353/SSC249250/QA047内部対策内。source/Root期限/業務/RD/UI/DIF変更0。current40ef/PG932・unused1068RO/full・完全DONE原本eeae/091663・空startup/全24/原本Backupを基点に別newscopeで切り替える。formal24/1964/53不変更。
 
 PT-DEP-1088001～004：host私有tempだけのactual exchange・oldinode/target/ACL/linked1・private移動/双方fsync・errnoEIO/EXDEV/ENOENT/EPERM/ENOSYSの一回/no retry・null/欠落/未知fd/名/別link/非link拒否。fake旧新target literalで独立期待を定義しProduction結果から作らない。

@@ -18,7 +18,12 @@ def source():
           'BASELINE_HASH','BOM','PIN_HASH','SIG_HASH','CONFIG_FIELDS','RELEASE','FIELDS'}
     nodes=[]
     for n in ast.parse(raw).body:
-        if isinstance(n,(ast.Import,ast.ImportFrom,ast.FunctionDef)):nodes.append(n)
+        if isinstance(n,(ast.Import,ast.ImportFrom)):nodes.append(n)
+        elif isinstance(n,ast.FunctionDef):
+            # These old entrypath helpers are replaced by this finite observer;
+            # do not retain unreachable references to old PREPARED/sealed state.
+            if n.name not in {'runtime_namespaces','parent','fds','read_pair','private','retain'}:
+                nodes.append(n)
         elif isinstance(n,ast.Assign)and all(isinstance(t,ast.Name)for t in n.targets):
             if {t.id for t in n.targets}<=keep:nodes.append(n)
     code=ast.unparse(ast.Module(body=nodes,type_ignores=[]))+'\n'

@@ -1,10 +1,31 @@
 """Independent fixed before/epoch/approval/exchange/normal closure and golden contracts."""
 import ast
+import builtins
+import symtable
 import unittest
 from pg1091_cold_activation_sources import files
 
 
 class Activation(unittest.TestCase):
+    def test_generated_observer_globals_and_single_active_helpers(self):
+        code=files()['pg1091_cold_refs.py']
+        table=symtable.symtable(code,'cold-observer','exec')
+        bound={s.get_name() for s in table.get_symbols()
+               if s.is_assigned() or s.is_imported() or s.is_namespace()}
+        unknown=set()
+        def walk(scope):
+            for symbol in scope.get_symbols():
+                name=symbol.get_name()
+                if symbol.is_global() and symbol.is_referenced() and name not in bound and not hasattr(builtins,name):
+                    unknown.add(name)
+            for child in scope.get_children():walk(child)
+        walk(table)
+        self.assertEqual(set(),unknown)
+        names=[n.name for n in ast.parse(code).body if isinstance(n,ast.FunctionDef)]
+        self.assertEqual(len(names),len(set(names)))
+        self.assertNotIn('read_pair',names)
+        self.assertNotIn('fds',names)
+
     def test_exact_new_family_mode_and_no_legacy_or_remount(self):
         value=files()
         self.assertEqual({'Pg1091ColdActivation.java','Pg1091ColdActivationTest.java','pg1091_cold_refs.py'},set(value))
