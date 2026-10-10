@@ -1,8 +1,10 @@
 import ast
 import copy
+import hashlib
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import Mock
 from pg1189_current_resume_a01 import code
 from pg876_public_artifact_check import check
 
@@ -25,6 +27,35 @@ class ResumeA01Test(unittest.TestCase):
             with self.assertRaises(AssertionError):check(bad, baseline)
         bad = copy.deepcopy(literal);bad['securityHeaders']['set-cookie'] = 'raw'
         with self.assertRaises(AssertionError):check(bad, baseline)
+
+    def test_actual_generated_guard_normal_and_each_runtime_binding_negative(self):
+        # Standard SHA-256 abc golden vector is independent of release or tool code.
+        sha = 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
+        self.assertEqual(hashlib.sha256(b'abc').hexdigest(), sha)
+        ns = {'__name__': 'data'};exec(code(), ns)
+        text = ns['GUARD'].replace('0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d', sha)
+        parsed = ast.parse(text);nodes = [n for n in parsed.body if not isinstance(n, (ast.Import, ast.ImportFrom))]
+        bytecode = compile(ast.Module(body=nodes,type_ignores=[]), '<actual cold GUARD>', 'exec')
+        fixed = {'boot':'cbca8738-3b24-4090-b77c-bf029677cdd6','pid':'430851','inv':'a14cc600a4fd4f2e9d8c4731ad9d754b','start':'51172132518','age':1_000_000,'release':'/opt/schubert-nk/releases/0.1.0-PG1068','manifest':b'abc','childPid':'123'}
+        def execute(value):
+            class Entry:
+                def __init__(self,p):self.p=p
+                def __truediv__(self,name):return Entry(self.p+'/'+name)
+                def readlink(self):return value['release']
+                def read_text(self):return value['boot']+'\n'
+                def read_bytes(self):
+                    if self.p.endswith('RELEASE-MANIFEST.json'):return value['manifest']
+                    if self.p.endswith('external-start-issued.private.json'):
+                        return b'{"InvocationID":"a14cc600a4fd4f2e9d8c4731ad9d754b","MainPID":"430851","ExecMainStartTimestampMonotonic":"51172132518"}'
+                    raise AssertionError('unexpected fixture read')
+            def output(cmd,**kwargs):
+                unit=cmd[2];parent=unit=='schubert-nk-morning-controller.service'
+                return 'InvocationID='+str(value['inv'] if parent else '1'*32)+'\nMainPID='+str(value['pid'] if parent else value['childPid'])+'\nExecMainStartTimestampMonotonic='+str(value['start'])+'\n'
+            env={'pathlib':Mock(Path=Entry),'subprocess':Mock(check_output=output),'hashlib':hashlib,'json':json,'time':Mock(monotonic_ns=lambda:51172132518*1000+value['age']),'print':lambda *a:None}
+            exec(bytecode,env)
+        execute(fixed)
+        for key,value in [('boot','cc9ed874-7f4f-450e-a188-8de1e42c8441'),('pid','0'),('pid','430852'),('inv','f'*32),('start','51172132519'),('age',1_800_000_000_000),('release','/opt/foreign'),('manifest',b'foreign'),('childPid','0')]:
+            with self.subTest(key=key),self.assertRaises(AssertionError):execute(dict(fixed,**{key:value}))
 
 
 if __name__ == '__main__':unittest.main()

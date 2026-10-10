@@ -6,6 +6,7 @@ from pg961_current_a01 import code as previous
 def code():
     s = previous()
     changes = [('PG961', 'PG1189'), ('pg961', 'pg1189'), ('pg956', 'pg1183'),
+               ('cc9ed874-7f4f-450e-a188-8de1e42c8441', 'cbca8738-3b24-4090-b77c-bf029677cdd6'),
                ('pg957-ordinary-once-v1', 'pg1184-canonical-resume-once-v1'),
                ('pg954-ordinary-before-v1', 'pg1182-canonical-runtime-post-v1'),
                ('40ef6e894573d2ffab1d1732124960f9c98d5f97', 'd5b00104280028d9ea81b44c1d1c805f3c2861ed'),
