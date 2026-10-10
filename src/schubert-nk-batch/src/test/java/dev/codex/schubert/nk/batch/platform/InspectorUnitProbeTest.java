@@ -565,7 +565,8 @@ final class InspectorUnitProbeTest {
   @Test
   void streamingLiteralByteLimitAndOverflowCloseActualProcess() throws Exception {
     for (String literal : List.of("ABCD", "ABCDE")) {
-      var process = new ProcessBuilder("/usr/bin/printf", "%s", literal).start();
+      var process =
+          new ObservedProcess(new ProcessBuilder("/usr/bin/printf", "%s", literal).start());
       var reader = new InspectorUnitProbe.NativeReader(command -> process);
       if (literal.length() == 4) {
         byte[] actual =
@@ -585,8 +586,90 @@ final class InspectorUnitProbeTest {
       }
       assertFalse(process.isAlive());
       assertEquals(0, process.exitValue());
-      assertThrows(IOException.class, () -> process.getInputStream().read());
-      assertThrows(IOException.class, () -> process.getOutputStream().write(65));
+      assertEquals(1, process.stdoutCloses.get());
+      assertEquals(1, process.stdinCloses.get());
+      assertEquals(1, process.stderrCloses.get());
+    }
+  }
+
+  /** Transparent actual-process delegation; closure is observed independently of EOF behavior. */
+  private static final class ObservedProcess extends Process {
+    private final Process delegate;
+    final AtomicInteger stdoutCloses = new AtomicInteger();
+    final AtomicInteger stdinCloses = new AtomicInteger();
+    final AtomicInteger stderrCloses = new AtomicInteger();
+    private final InputStream output;
+    private final OutputStream input;
+    private final InputStream error;
+
+    ObservedProcess(Process delegate) {
+      this.delegate = delegate;
+      output = observed(delegate.getInputStream(), stdoutCloses);
+      error = observed(delegate.getErrorStream(), stderrCloses);
+      input =
+          new FilterOutputStream(delegate.getOutputStream()) {
+            @Override
+            public void close() throws IOException {
+              stdinCloses.incrementAndGet();
+              super.close();
+            }
+          };
+    }
+
+    private static InputStream observed(InputStream stream, AtomicInteger closes) {
+      return new FilterInputStream(stream) {
+        @Override
+        public void close() throws IOException {
+          closes.incrementAndGet();
+          super.close();
+        }
+      };
+    }
+
+    @Override
+    public InputStream getInputStream() {
+      return output;
+    }
+
+    @Override
+    public OutputStream getOutputStream() {
+      return input;
+    }
+
+    @Override
+    public InputStream getErrorStream() {
+      return error;
+    }
+
+    @Override
+    public int waitFor() throws InterruptedException {
+      return delegate.waitFor();
+    }
+
+    @Override
+    public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
+      return delegate.waitFor(timeout, unit);
+    }
+
+    @Override
+    public int exitValue() {
+      return delegate.exitValue();
+    }
+
+    @Override
+    public boolean isAlive() {
+      return delegate.isAlive();
+    }
+
+    @Override
+    public void destroy() {
+      delegate.destroy();
+    }
+
+    @Override
+    public Process destroyForcibly() {
+      delegate.destroyForcibly();
+      return this;
     }
   }
 
