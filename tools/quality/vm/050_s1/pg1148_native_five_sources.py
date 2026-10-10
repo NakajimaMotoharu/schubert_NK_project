@@ -102,7 +102,9 @@ def refs():
     start=text.index('def startup_preserved(');end=text.index('def values():',start)
     text=text[:start]+text[end:]
     start=text.index('def actor(');end=text.index('def execute():',start)
-    text=text[:start]+text[end:]
+    text=text[:start]+'''def all_terminal():
+ cohort();return {u:show(u,FIELDS)for u in UNITS}
+'''+text[end:]
     start=text.index(" require(set(baseline)==");end=text.index(' backend=int(sys.argv[1]);',start)
     text=text[:start]+''' require(len(baseline['rows'])==24 and len(baseline['rows']['schubert.batch_runs'])==604)
  FIELDS.clear();FIELDS.update(baseline['units'][UNITS[0]])

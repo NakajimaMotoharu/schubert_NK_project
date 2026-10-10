@@ -16,6 +16,20 @@ class NativeFiveTest(unittest.TestCase):
             self.assertFalse(literal in java or literal in refs,literal)
         self.assertEqual(java.count('case "ordinary-api193"->"schubert-api";'),1)
 
+    def test_live_terminal_call_closure_independent_rows(self):
+        tree=ast.parse(files()['pg1148_native_role_refs.py'])
+        definitions={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}
+        calls={n.func.id for n in ast.walk(tree)if isinstance(n,ast.Call)and isinstance(n.func,ast.Name)}
+        for name in ['all_terminal','cohort','values','namespace_config','coverage_preserved','holder','identity']:
+            self.assertIn(name,calls);self.assertIn(name,definitions)
+        for name in ['actor','broker_stop','canonical_invalid','namespace_failure_proof']:
+            self.assertNotIn(name,calls)
+        # Exercise exact retained body against independent ten terminal vectors.
+        rows={str(i):{'MainPID':'0','ControlPID':'0','Job':'','ActiveState':'inactive'}for i in range(10)}
+        checks=[];scope={'cohort':lambda:checks.append('ten-cohort'),'UNITS':tuple(rows),'FIELDS':{'MainPID','ControlPID','Job','ActiveState'},'show':lambda u,fields:dict(rows[u])}
+        exec(compile(ast.Module(body=[definitions['all_terminal']],type_ignores=[]),'<retained terminal contract>','exec'),scope)
+        self.assertEqual(scope['all_terminal'](),rows);self.assertEqual(checks,['ten-cohort'])
+
     def test_literal_metadata_vectors_no_exclusion(self):
         # Numeric stat values and separate old file hash fixture, not Production generation.
         p=COVERAGE
