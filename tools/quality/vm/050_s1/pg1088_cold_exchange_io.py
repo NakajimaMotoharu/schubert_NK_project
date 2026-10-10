@@ -8,6 +8,13 @@ import os
 import stat
 
 
+def _identity(value):
+    # SSC250's complete nine-field contract excludes access time: readlink
+    # itself may update it under relatime. Never exclude mtime/ctime or ACL.
+    return (value.st_dev,value.st_ino,value.st_uid,value.st_gid,value.st_mode,value.st_nlink,
+            value.st_size,value.st_mtime_ns,value.st_ctime_ns)
+
+
 def _native(directory,stage):
     libc=ctypes.CDLL(None,use_errno=True)
     function=libc.renameat2
@@ -34,7 +41,7 @@ def linked_attributes(directory,name,held):
     first=os.fstat(held)
     if not stat.S_ISLNK(first.st_mode)or first.st_nlink!=1:raise ValueError('held link type/count refused')
     linked=os.stat(name,dir_fd=directory,follow_symlinks=False)
-    if first!=linked:raise ValueError('held/linked identity refused')
+    if _identity(first)!=_identity(linked):raise ValueError('held/linked identity refused')
     target=os.readlink('',dir_fd=held)
     if target!=os.readlink(name,dir_fd=directory):raise ValueError('held/linked target refused')
     # Use the held directory spelling only after verifying its actual FD/link.
@@ -42,7 +49,7 @@ def linked_attributes(directory,name,held):
     path='/proc/self/fd/'+str(directory)+'/'+name
     attrs=tuple(os.listxattr(path,follow_symlinks=False))
     last=os.fstat(held)
-    if first!=last or last!=os.stat(name,dir_fd=directory,follow_symlinks=False):
+    if _identity(first)!=_identity(last) or _identity(last)!=_identity(os.stat(name,dir_fd=directory,follow_symlinks=False)):
         raise ValueError('held/linked identity changed')
     if target!=os.readlink('',dir_fd=held)or target!=os.readlink(name,dir_fd=directory):
         raise ValueError('held/linked target changed')

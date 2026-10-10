@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC251（2026-10-10）：BUG1025のPG1096部分交換・current1068/INVALID/oldpart linked1は343同項の固定16222/16248認証・独立十Ref/全原値・pidfd耐久各一回TERM/全資源postで回収する。旧activate/再交換/oldfallback/DB修復/SIGKILL/oldtool改変0。別newscopeで固定旧partをprivateへ移動/dirsync/全9metadata-target-ACLを閉鎖、読取自身のatimeと9fieldを区別する。旧actual不明/失敗を新正常から補完せず、普通Root/Inspector/native/正式は別受入。
+
 SSC250（2026-10-10）：cold code-onlyのcurrent旧linkは属性検査できないunlink O_PATHへ正常値を補完せず、343同項の固定RENAME_EXCHANGE→linked旧inode/target/ACL再読→private linked保存/dirsyncを用いる。半交換/移動不明は隔離・再交換/再送/任意unlink/oldfallback0。approval正規nlink0とcurrent linked1を別oracleで検査、全値/資源/normalclose・freshRoot/native/正式は別受入。
 
 SSC249（2026-10-10）：completed-cold空epoch code-onlyは343同項のcurrent40ef/unused1068/当DONE/全原値基点から別newscopeで行う。旧pending/ISSUED用工具やexpired ownerを借用0。必要candidateRO/fullverifier後だけ正規empty対応INVALID→atomic approval→atomic current→全post/newnormalclose、同phaseの有限dir/file/link効果を独立oracleで検査しold原byteを保全する。unknown/半公開/close不明は隔離、oldfallback/再発行/DB-原本修復0。切替後のRootは別freshnoargs/新run・元30分、Inspector合法日/native/正式品質は別受入。

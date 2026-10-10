@@ -1,5 +1,11 @@
 # SSC249250 cold-empty有限公開・linkedold
 
+## 20:48JST 実部分交換BUG1025・SSC251回収へ
+
+PG1095/sourceb73a8bd2ce02d7f8d9072248c7cb51822dc7f3dbは11:25:42.321674～11:25:44.408570UTC/全7phase0/guest0。PG1096stage同source11:26:03.146418～11:26:03.504517UTC/実0/logSHAa0114bb4ae57ffd79253405d08dd23858198e4b7f30697edf3f667b6d85b084b。activateはcurrent1068/approval1068/newINVALID後、oldpart linked1/EXCHANGE ValueErrorで所有保持、実終了コード未知、完了/after/正常closeなし。refs74byte/SHA1b183218bcbef8ef17e7adba05b1a360c76ccd0956303c36ff32fdc0de109fa1、私有原byte/FD/旧結果を保全。
+
+BUG1025/YKT794修正前登録、PT-DEP-1088005は旧atime1→exchange→readlink自身更新/旧helper ValueError・tuple7のみ変化を独立再現、修正後9field/target/ACL一致で0、既4も回帰0。PT-DEP-1097001～003は固定旧part linked1+新current/approval/正規INVALIDだけ許す全graph、old9field/hash/ACL/target/余分entry/null/欠落/oldcurrent/未知拒否。PT-DEP-1098001～002は固定actor/全global/source/readonly/旧approval原FD/Ref正規closeのhost資格、VMpreflight未実行。SSC251designsource db37255fb/maina90b503258b51037f624c08ac935beb79a75ca7d/PR89 MERGED、実回収/全post/再発防止実経路まで障害未完、formal100へ加算0。
+
 ## 20:25JST 失敗保全・新生成source資格
 
 PG1092初回compile実1、operator4aaf68b91cb0d82712ca842b505d960c7f920eaf、11:12:42.479440～11:12:44.078543UTC。ReleaseApproval型未解決、Java oracle not-run、guestActions0、旧frozen/logをW/pg1092-cold-activation-frozen-v1.safe.json及びpg1091-cold-tools-v1へ保全。既成功fixtureをJava/実公開成功へ流用しない。

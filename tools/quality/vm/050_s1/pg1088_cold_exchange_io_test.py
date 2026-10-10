@@ -8,6 +8,21 @@ from pg1088_cold_exchange_io import exchange,linked_attributes
 
 
 class Exchange(unittest.TestCase):
+    def test_stale_atime_readlink_observation_keeps_complete_contract_identity(self):
+        with tempfile.TemporaryDirectory(prefix='pg1088-stale-atime-fixture-')as tmp:
+            root=Path(tmp);(root/'current').symlink_to('/fixture/old');(root/'pg1088-current.part').symlink_to('/fixture/new')
+            os.utime(root/'current',ns=(1,1),follow_symlinks=False)
+            fd=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+            old=os.open('current',os.O_PATH|os.O_NOFOLLOW,dir_fd=fd)
+            try:
+                exchange(fd,'pg1088-current.part');first=os.fstat(old)
+                expected=[first.st_dev,first.st_ino,first.st_uid,first.st_gid,first.st_mode,
+                          first.st_nlink,first.st_size,first.st_mtime_ns,first.st_ctime_ns]
+                row=linked_attributes(fd,'pg1088-current.part',old)
+                self.assertEqual(expected,row['metadata']);self.assertEqual('/fixture/old',row['target'])
+                self.assertEqual([],row['acl']);self.assertNotEqual(first.st_atime_ns,os.fstat(old).st_atime_ns)
+            finally:os.close(old);os.close(fd)
+
     def test_actual_exchange_preserves_public_presence_old_inode_link_target_and_attrs(self):
         with tempfile.TemporaryDirectory(prefix='pg1088-exchange-fixture-')as tmp:
             root=Path(tmp);(root/'current').symlink_to('/fixture/old');(root/'pg1088-current.part').symlink_to('/fixture/new')
