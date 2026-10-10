@@ -1,5 +1,13 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-10-10 利用者承認v3・今回実行override
+
+残予測はPMO `wbs-reestimate-v3-PGPT-20261008-PG500.json` / `PMO-remaining-v3-20261010` / SHA256 `6f7faa627cf64a1496dd980faf59406170e3458d00773fc7e8d83bf754f98298`、低310.68/標準586.75/高1297.64週次共有pp。下記当初90.90/269.80/642.60と過去群開始見積りは比較履歴として維持。252leaf（実251＋予備1）、190元/83子/共有主担当/参照費0、品質・受入不変更。
+
+今回だけ実施側停止規則を週次残>1%で安全な小群を継続、<=3%で先行保全、fresh<=1%で新製造/試験/VM変更停止へ置換する。指定既存reset券を最大一枚、利用者指定 `reset_credit.py status/redeem --checkpoint .../pgpt-reset-control/reset-ready-checkpoint.json` の正規手順でのみ消費可能。policy/stateを変更せず、同UUID/creditの一論理消費を保持。receipt `continueAllowed=true` とfresh枠回復の両方を確認後に同chatで続行。reset前後は別窓・消費相殺/実token捏造/成果再加算0。対象外/取得・操作不能/短期先行制約では保全報告、券使用後再度<=1では停止。二枚目/新券/追加課金0。従来10/5・自動reset禁止は今回実施側には適用しない。
+
+PMO毎時監査はPAUSEDを維持し、再開・閾値変更・hourly-monitor編集0。PGPT event/usageは既存cursorで増分保存。G13.07初期join→各領域開始join→最終release差分、群開始leaf/stage/見積版/hash/予算subset/次証拠、終了実績/残工程差を保存。N/P/CHR/K01/G費用を重複計上せず、K01標準12campaign/35pp・triggerなし全回帰0。89pp×99%=88.11は過去cycle限定仮定で個別実費ではない。通常commit/小受入/報告/PMO待ちで停止しない。
+
 2026-10-08 PMO実行・計測改訂。9/30版の開始状態・S0起点・token仮予算・「自動監視なし」は本版で置換する。旧計画はGit履歴へ保全。WBSのscope/費用/受入条件を今回変更しない。プロンプトの作成は製造開始ではなく、利用者が478を実施チャットへ投入して開始する。
 
 ## 1. 正本・モデル・運用境界
