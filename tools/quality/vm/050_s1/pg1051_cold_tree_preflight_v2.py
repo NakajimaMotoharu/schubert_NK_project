@@ -35,6 +35,7 @@ def dispatch(run, name, script):
         ('PG1099-partial-exchange-handoff-v1', 'pg1099-partial-exchange-handoff-v1'),
         ('PG1103-linked-preservation-post-v1', 'pg1103-linked-preservation-post-v1'),
         ('PG1105-stale-atime-guest-fixture-v1', 'pg1105-stale-atime-guest-fixture-v1'),
+        ('PG1106-ordinary-cold-before-v1', 'pg1106-ordinary-cold-before-v1'),
     }:
         raise ValueError('fixed preflight dispatch identity refused')
     os.umask(0o077)
