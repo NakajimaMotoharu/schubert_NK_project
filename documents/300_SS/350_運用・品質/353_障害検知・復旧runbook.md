@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+SSC262：ordinary真正ISSUED-DONE後のnew signed source code-onlyはSS343の固定finite profileを使い、cold空startup/旧INVALIDへ現在値を代用しない。oldRoot PID1/原本DONEと正常ownedstop・全原24/full32/187/Backup/credential/native/Unit/runtime、unused candidate signed/hostROを新M/A/readonlybatch/advisory/実heartbeat/十Ref/保持FD内で再認証する。既Root/Backup/placement/freezeを繰り返さず、独立phase oracleのcanonicalINVALID→Root0400approval→new sibling/exchange→oldlinked private保全→全正常/独立postの順だけを行う。
+
+epoch/approvalはold regular FDの原byte・正規nlink0/有限ctime、oldcurrentは同inode/oldtarget/ACL/nlink1/有限ctimeをlinkedpathで二読する。未知/半公開/close不明はそのownerと全原値/各実phaseを私有保全して隔離し、旧正常close・旧成功・coldstartup・旧permit/fallbackを補作成しない。新交換又は旧link移動の耐久完了が既確認なら再発行せず、新scopeの正規限定再認証/回収へ進む。独立unknown/null/不正順/全field/外entry/foreignbinding/短IO/close/race testと当Source実postを要求する。code-only後もnewsource真正Root/元30分/API-Web-Caddy/逆順ownedstop/defaultexport/native/CHR/451は別fresh受入、PG/PT結果からIT/ST合格を宣言しない。
+
 SSC260：SSC259のwrongbasename pg1160はfile原byteと有効argvを分離し、start0/当native・原本・DB・Backup・全18実historyを保全する。固定失敗Java415524/child415553の現boot/PID/ticks/argv/親子/Bus/M-A/実peerと全値を私有二読→child/Java各一回pidfd TERM/耐久予約→全資源0/全原値post/旧actual143又はUNKNOWN保持→別fresh連続正常管理で固定誤fileだけtypedheldentry退役/dirsync・訂正reload一回→全scope正常/独立post→既Root0755/ACL0空同inode Unit.dにzz-pg1160正規new-onlyfile準備/有効argv・agent1・全終了後条件→新observer/一回予約/startへ進む。旧操作の再発行、別ownerへの介入、手unlink/原本再生成、成功推定をしない。
 
 全十ExecStart表示後半は元tuple又は同bootreloadでの全empty tupleのみ認めるが、全fieldを解析・元raw保全し、設定前三field/全他設定/全18実履歴・kernelを維持する。表示emptyを旧実失敗history消去や旧scope正常終了にしない。basename重複/順位逆転/未知override/部分empty/foreignargv/ignore変異/null・retirement/prepare IO故障と実samepending有効宣言/Root/nativeまで独立再試験する。設計公開・限定管理・正式品質を分ける。
