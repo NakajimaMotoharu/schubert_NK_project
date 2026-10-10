@@ -1,4 +1,6 @@
 # 障害検知・復旧runbook
+SSC248（2026-10-10）：当1075/1076 pre-Ref失敗は343同項の固定11678/11704だけ。childのstdio3/Ref0を現在認証し、旧Refs子D-Busを代用しない。新tenRef/FD・親RODB heartbeat/socket/実M-A/全原値二読・両pidfd/各耐久一回TERM・親peer0→同子PPID1→全post/new正常closeを維持。旧actualとUNKNOWNを保持、coldprepared/current/DB/原本/Backup/空epochの修復0、候補place再発行0。
+
 SSC247（2026-10-10）：completed-coldの未使用候補配置はSS343同項の限定deltaとfresh M/A/RODB/advisory/heartbeat/tenRef/原本Sessionを使う。兄弟release追加前のcurrent full verifier・全原値認証と、追加後のcurrent祖先FD保持を区別し、旧metadataを無断rebaseしない。current/approval/空epoch/全DB/原本Backup/Unit/有限準備dirを変更しない。partial/close不明では旧tool再実行・起動・current切替をせず、保持所有と現在値を保存する。候補配置完了は親起動/Inspector/native/正式品質完了ではない。
 
 
