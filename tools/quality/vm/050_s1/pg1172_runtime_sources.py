@@ -19,6 +19,7 @@ def refs():
     s=s[:start]+" runtime_parent=metadata(RUNTIME);require(runtime_parent[2:6]==[0,0,stat.S_IFDIR|0o755,2]and not os.listxattr(RUNTIME)and not list(RUNTIME.iterdir()))\n require(tree(pathlib.Path('/run/systemd/system'))==baseline['runtime'])"+s[end:]
     start=s.index('def require_runtime_tree():');end=s.index('def execute():',start)
     s=s[:start]+TREE+s[end:]
+    s='import re\n'+s
     ast.parse(s);return s
 
 
