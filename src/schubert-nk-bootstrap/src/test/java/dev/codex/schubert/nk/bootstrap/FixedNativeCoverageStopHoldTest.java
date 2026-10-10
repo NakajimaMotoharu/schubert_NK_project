@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.management.ManagementFactory;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -158,9 +159,19 @@ final class FixedNativeCoverageStopHoldTest {
         Duration.ofSeconds(15),
         () -> {
           String java = Path.of(System.getProperty("java.home"), "bin", "java").toString();
+          // PG1271 coordinates showed that the already-real TERM probe's child was
+          // outside Surefire capture. Preserve its independent behavior oracle;
+          // instrument only this newly owned host test JVM with the same agent.
+          // This is not app/native evidence or a synthetic call to removeNative.
+          var agents =
+              ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
+                  .filter(value -> value.startsWith("-javaagent:") && value.contains("jacoco"))
+                  .toList();
+          assertEquals(1, agents.size(), "same-run Surefire JaCoCo agent required");
           var child =
               new ProcessBuilder(
                       java,
+                      agents.getFirst(),
                       "-cp",
                       System.getProperty("java.class.path"),
                       FixedNativeCoverageStopHoldProbe.class.getName())
