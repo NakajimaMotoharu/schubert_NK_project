@@ -1,0 +1,215 @@
+{
+  "program": "NK-OPS-001",
+  "branch": "dev-foundation",
+  "environment": {
+    "hostKernel": "Linux 7.0.0-38-generic",
+    "guestKernel": "Linux 7.0.0-34-generic",
+    "jdk": "25.0.4+7-1-26.04-Ubuntu",
+    "python": "3.14.4",
+    "maven": "3.9.12",
+    "database": "PostgreSQL18.6",
+    "versionProvenance": "fresh host/guest uname/java/python and421424 fixed installed toolchain"
+  },
+  "expected": {
+    "currentSourceUnchanged": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+    "candidateSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+    "artifacts": 187,
+    "tablesUnchanged": 24,
+    "originalBatchRowsUnchanged": 594,
+    "resourcesAfter": 0,
+    "startupEmpty": true,
+    "newScopesNormal": true
+  },
+  "executionCommands": [
+    "python3 -B tools/quality/vm/050_s1/pg1068_stream_candidate_build.py",
+    "python3 -B tools/quality/vm/050_s1/pg1077_cold_candidate_tree_preflight.py",
+    "python3 -B tools/quality/vm/050_s1/pg1078_cold_candidate_tree_handoff.py",
+    "python3 -B tools/quality/vm/050_s1/pg1080_cold_candidate_compile_v3.py",
+    "python3 -B tools/quality/vm/050_s1/pg1081_cold_candidate_native_v3.py stage",
+    "python3 -B tools/quality/vm/050_s1/pg1081_cold_candidate_native_v3.py place",
+    "python3 -B tools/quality/vm/050_s1/pg1082_cold_unused_candidate_post.py"
+  ],
+  "rerunPolicy": "Recorded commands are completed fixed slots; do not replay. New slots/source required.",
+  "testIds": [
+    "PT-DEP-1067001..003",
+    "PT-DEP-1069001..006",
+    "PT-DEP-1077001..004",
+    "PT-DEP-1078001",
+    "PT-DEP-1071001..002"
+  ],
+  "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "unusedCandidateSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+  "candidateRelease": "0.1.0-PG1068",
+  "scopes": [
+    {
+      "run": "PG1068-candidate-build-v1",
+      "candidateSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+      "operatorSource": "ca323b7ab02fec9c39443f51a6d0e63343d31c74",
+      "startedUTC": "2026-10-10T09:26:13.614087+00:00",
+      "completedUTC": "2026-10-10T09:26:13.758387+00:00",
+      "mainClasses": 1632,
+      "changedClasses": 1,
+      "manifestSha256": "0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d",
+      "artifacts": 187,
+      "signatureVerified": true,
+      "signatureSha256": "5715949985848b49b4acf23aeb2e30ea1ecfca925e94e36baa735b1e4d18152b",
+      "privateLogSha256": "0fd23954193f64e60f5b4b5f381cd1ea9d580aece00a6bbbc98e664302ce6b79",
+      "guestMutations0": true,
+      "formalAccepted": false,
+      "privateManifestSha256": "f32696c71f0b857f100165c0a4198a5a4b1f1ca1ba5e7b077cc5068f6b5e5e27",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1068-candidate-build-v1.safe.json"
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T09:59:55.540389+00:00",
+      "formalAccepted": false,
+      "logSha256": "adb35fbc3186e2e0f562a6d012be135f77bf5cbf034d73f031f4ccb2ff710906",
+      "operatorSource": "4f8c1202735033b3cfeba995e9fb5d2db819c06d",
+      "run": "PG1077-cold-candidate-tree-preflight-v1",
+      "scriptSha256": "6bb5fe324d187e0cbf5fba02505b89b8a6750f004b7e5af9e7e9139f545f5f7d",
+      "startedUTC": "2026-10-10T09:59:51.920766+00:00",
+      "privateManifestSha256": "252261cf607d355a228ecfe7f102b6dbd0c2c37a5c899c52c2d75398da4f2cc1",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1077-cold-candidate-tree-preflight-v1/manifest.safe.json",
+      "observed": {
+        "allOriginalsUnchangedTwice": true,
+        "allTenColdFull32": true,
+        "beforePrivateSha256": "72437519936f1f47e3f0beedc1c0e4ef22b6c18fc059c1e1ff29bf4528f0a89c",
+        "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+        "observerNormalClose": true,
+        "oldOperationNormalClose": false,
+        "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97"
+      }
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T10:00:34.746878+00:00",
+      "formalAccepted": false,
+      "logSha256": "81b5ac16dfbe435502dce0ae81dbcc80b3288504ad3ac22a2b502beef4ca1888",
+      "operatorSource": "4f8c1202735033b3cfeba995e9fb5d2db819c06d",
+      "run": "PG1078-cold-candidate-tree-handoff-v1",
+      "scriptSha256": "1b410415c6b2aaf208411496927a6c0df44befdfd1d436d831669a54584847c0",
+      "startedUTC": "2026-10-10T10:00:18.005913+00:00",
+      "privateManifestSha256": "412fdd89c984a04f90dc55a6ef6774b028e598b1f2d018cb4a7390bdfd1b17d2",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1078-cold-candidate-tree-handoff-v1/manifest.safe.json",
+      "observed": {
+        "afterPrivateSha256": "062e4ccbe2b01cfba50b9cd1523a51b607d488a6a3281949e2a9b2fc824736a8",
+        "allOldClientsAdvisoryAndFlocks0": true,
+        "allOriginalsUnchangedTwice": true,
+        "allTenColdFull32": true,
+        "beforePrivateSha256": "d896e498ab568a27644adc3c94b51d95e0052ea177fee448e5c1889e8f0a3f6a",
+        "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+        "childExitUnknown": true,
+        "observerNormalClose": true,
+        "oldChildGone": true,
+        "oldOperationNormalClose": false,
+        "oldParentGone": true,
+        "reservationDurable": true,
+        "signalsAttempted": 2,
+        "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97"
+      }
+    },
+    {
+      "action": "place",
+      "actualExit": 143,
+      "completedUTC": "2026-10-10T10:00:28.545380+00:00",
+      "formalAccepted": false,
+      "operatorSource": "9e9b91faefab576cbb1f1c574e22cd97f8214ebb",
+      "privateLogSha256": "cbc1868c8bbb209f9724edbf7b0611f263411df5115ba68c6e9f2dc8019639ad",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T09:48:23.863715+00:00",
+      "unusedColdCandidatePlaced": false,
+      "privateManifestSha256": "f82cbd98a0bb9dfa7f67f953d3d93f46f5021f90275fc0ee020801877cdaea06",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1076-place-v1.safe.json"
+    },
+    {
+      "actualExit": 0,
+      "candidateManifestSha256": "0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d",
+      "candidateSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+      "completedUTC": "2026-10-10T10:03:14.166612+00:00",
+      "formalAccepted": false,
+      "operatorSource": "c8d23352c43fdab296993bfca2d94c8668847207",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "run": "PG1080-cold-candidate-compile-v3",
+      "startedUTC": "2026-10-10T10:03:12.379877+00:00",
+      "privateManifestSha256": "76deb03a6919db57be3540a9ee150788937b9c834972838ba731e1fa958665c3",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1080-cold-candidate-frozen-v3.safe.json"
+    },
+    {
+      "action": "stage",
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T10:04:06.361457+00:00",
+      "formalAccepted": false,
+      "operatorSource": "c8d23352c43fdab296993bfca2d94c8668847207",
+      "privateLogSha256": "c2b11537f57dedf9bcbf12307015dcc6ac88898bec682e10510409e8ea976f42",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T10:04:06.025434+00:00",
+      "unusedColdCandidatePlaced": false,
+      "privateManifestSha256": "8605c53640c6645fb09594e0c3bed3017be173320333822f71565ef02a23fce5",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1081-stage-v1.safe.json"
+    },
+    {
+      "action": "place",
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T10:04:43.296792+00:00",
+      "formalAccepted": false,
+      "operatorSource": "c8d23352c43fdab296993bfca2d94c8668847207",
+      "privateLogSha256": "16cc68ab08873e2d933f5324c1a82c85bd7fd6d3535b14a323185e73440332cc",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T10:04:32.377149+00:00",
+      "unusedColdCandidatePlaced": true,
+      "privateManifestSha256": "1cc2b4ab3675b167422fab88a64157cbc393eb61e6e80cd15dfd3ae481cd7cc4",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1081-place-v1.safe.json"
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T10:08:10.443770+00:00",
+      "formalAccepted": false,
+      "logSha256": "70c953c1ccf49ecc9600fb70e9cdc543c3ced0549dd1434ebe1053e1d9cab603",
+      "operatorSource": "9c464361e232f5058ae52dec4bf979aeb2cbfdc5",
+      "run": "PG1082-cold-unused-candidate-post-v1",
+      "scriptSha256": "be046c76fb9069d3d8324d2d6e3d8d74414c26b17319b986fb046e8674605c21",
+      "startedUTC": "2026-10-10T10:08:06.261619+00:00",
+      "privateManifestSha256": "a686bd1140a58b7c8407641fe73212bea4715480d1dfbd9b17f2c77fe1c5b73f",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1082-cold-unused-candidate-post-v1/manifest.safe.json",
+      "observed": {
+        "afterPrivateSha256": "412eb77968cd3f28d5bf2869df52b3625233809ba119b2b90cf9080e976516bf",
+        "allClientsAdvisoryAndFlocks0": true,
+        "beforePrivateSha256": "1cbb10fa83df138d5f3fe6b40b8107e16475e280745797f6e9e5a58d030073a9",
+        "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+        "candidateNotActivated": true,
+        "exactPreparedNamespaceTwice": true,
+        "observerRefsNormalClose": true,
+        "oldActorsGone": true,
+        "payloadHostReadonly": true,
+        "sameAll24OriginalsTwice": true,
+        "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+        "startupEpochAndRequestsEmpty": true,
+        "unusedCandidateFullPostVerified": true
+      }
+    }
+  ],
+  "bugs": [
+    "BUG-1023",
+    "BUG-1024"
+  ],
+  "ykt": [
+    "YKT-792",
+    "YKT-793"
+  ],
+  "ssc": [
+    "SSC-247",
+    "SSC-248"
+  ],
+  "acceptedScope": "unused signed candidate placement and independent post only",
+  "sourceRunScopesKeptSeparate": true,
+  "oldFailedResultNormalized": false,
+  "coverage": "tooling qualification only; no new Production/native or formal counters",
+  "formalAccepted": false,
+  "wholeWbsAcceptedDelta": 0,
+  "currentActivated": false,
+  "environmentReference": [
+    "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md",
+    "documents/400_PGPT/420_環境/424_隔離Linux_PGPT環境構築記録.md"
+  ],
+  "secretsIncluded": false
+}
