@@ -46,6 +46,7 @@ def java_files():
         text = common((HERE / name).read_text())
         name = common(name)
         if name == 'Pg1134SingleApiRecovery.java':
+            text = 'import dev.codex.schubert.nk.batch.file.Pg1134SingleApiIntent;\nimport dev.codex.schubert.nk.batch.file.Pg1134IssuedApiRecovery;\n' + text
             text = replace(text, 'a2e98ce9e96c42425921e3686e8ae7a94bff9e6c', SOURCE)
             text = replace(text, 'f6992c4de95477594987d2f10def06110d0c28cb6d4fd063da47bd0bab7e7d44', BOM)
             text = text.replace('PG495', 'PG1068').replace('pg495', 'pg1068')
