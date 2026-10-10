@@ -163,15 +163,10 @@ final class FixedNativeCoverageStopHoldTest {
           // outside Surefire capture. Preserve its independent behavior oracle;
           // instrument only this newly owned host test JVM with the same agent.
           // This is not app/native evidence or a synthetic call to removeNative.
-          var agents =
-              ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
-                  .filter(value -> value.startsWith("-javaagent:") && value.contains("jacoco"))
-                  .toList();
-          assertEquals(1, agents.size(), "same-run Surefire JaCoCo agent required");
           var child =
               new ProcessBuilder(
                       java,
-                      agents.getFirst(),
+                      sameRunCoverageAgent(),
                       "-cp",
                       System.getProperty("java.class.path"),
                       FixedNativeCoverageStopHoldProbe.class.getName())
@@ -198,6 +193,50 @@ final class FixedNativeCoverageStopHoldTest {
             }
           }
         });
+  }
+
+  @Test
+  void nhold194007RealShutdownRefusalIsCapturedAfterTheActualRemoval() {
+    assertTimeoutPreemptively(
+        Duration.ofSeconds(15),
+        () -> {
+          String java = Path.of(System.getProperty("java.home"), "bin", "java").toString();
+          var child =
+              new ProcessBuilder(
+                      java,
+                      sameRunCoverageAgent(),
+                      "-cp",
+                      System.getProperty("java.class.path"),
+                      FixedNativeCoverageRemovalDuringShutdownProbe.class.getName())
+                  .redirectErrorStream(true)
+                  .start();
+          try (var input = child.inputReader(StandardCharsets.UTF_8);
+              var command = child.getOutputStream()) {
+            assertEquals("READY", input.readLine());
+            assertTrue(child.toHandle().destroy());
+            assertEquals("SHUTDOWN_STARTED", input.readLine());
+            assertTrue(child.isAlive(), "owned witness permits observing real shutdown refusal");
+            command.write('C');
+            command.flush();
+            assertEquals("REMOVAL_SHUTTING_DOWN_CAPTURED", input.readLine());
+            assertTrue(child.waitFor(5, TimeUnit.SECONDS));
+            assertEquals(143, child.exitValue(), "TERM is not normalized to normal exit");
+          } finally {
+            if (child.isAlive()) {
+              child.destroyForcibly();
+              child.waitFor(5, TimeUnit.SECONDS);
+            }
+          }
+        });
+  }
+
+  private static String sameRunCoverageAgent() {
+    var agents =
+        ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
+            .filter(value -> value.startsWith("-javaagent:") && value.contains("jacoco"))
+            .toList();
+    assertEquals(1, agents.size(), "same-run Surefire JaCoCo agent required");
+    return agents.getFirst();
   }
 
   private static void waiting(Thread thread) throws Exception {
