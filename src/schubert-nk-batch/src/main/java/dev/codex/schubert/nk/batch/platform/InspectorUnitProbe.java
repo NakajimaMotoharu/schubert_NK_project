@@ -209,7 +209,7 @@ public final class InspectorUnitProbe {
                                   } catch (java.util.concurrent.TimeoutException timeoutFailure) {
                                     throw new StopGateException(StopGateFailure.TIMEOUT);
                                   } catch (java.util.concurrent.ExecutionException readFailure) {
-                                    propagateQueryFailure(readFailure);
+                                    throw queryFailure(readFailure);
                                   }
                                   if (bytes[0].length > limit)
                                     throw new StopGateException(StopGateFailure.MALFORMED_STATE);
@@ -241,11 +241,11 @@ public final class InspectorUnitProbe {
         matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
         justification =
             "SSC125: FutureTask wraps actual provider failures; preserve unknown RuntimeException/Error identity, never normalize as ordinary IO or success")
-    private static void propagateQueryFailure(java.util.concurrent.ExecutionException failure) {
+    private static RuntimeException queryFailure(java.util.concurrent.ExecutionException failure) {
       Throwable cause = failure.getCause();
-      if (cause instanceof RuntimeException unknown) throw unknown;
+      if (cause instanceof RuntimeException unknown) return unknown;
       if (cause instanceof Error unknown) throw unknown;
-      throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+      return new StopGateException(StopGateFailure.COMMAND_FAILURE);
     }
 
     byte[] execute(List<String> command, int limit) {

@@ -600,6 +600,7 @@ final class InspectorUnitProbeTest {
         List.of(
             new IOException("public IO"),
             new IllegalStateException("public unknown"),
+            new NullPointerException("public unknown null contract"),
             new AssertionError("public fatal"))) {
       Process actual = new ProcessBuilder("/usr/bin/printf", "%s", "ABCD").start();
       var stream =
