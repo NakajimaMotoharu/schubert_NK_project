@@ -21,6 +21,12 @@ Program NK-OPS-001 / NK-DAT-001、Production40ef6e894573d2ffab1d1732124960f9c98d
 
 ## 実行・品質・費用境界
 
+11:59追補：997v1/v2の各compressed copyは5GiB上限でactual1。v1開始seal/convert code欠落をBUG1003/YKT772として起票、v2はbegin/convert/failureを永続保存し実convert1/source/backing stableを確認（v2の実行中に追加したexception handlerはそのrunで実行されたと主張しない、当時の非0receiptは存在）。未知returncodeを-25等へ補完0。失敗copyだけ各5GiBをhash/metadata/log/failure保持後除去、元disk/backing/旧snapshot/privateを保持。partialはどちらも合格ではない。
+
+新1000は元保存diskを不変更のread-only backingにする197248byteのCOW作業層を作成。独立qemu-img compare actual0、元disk/backing identityと開始hash一致、旧内部snapshot保持。standalone backupとは主張せず、以後のguest変更を新 `work/pgpt-vm/private/pg1000-cold-overlay-v1/active.qcow2` にのみ記録する。VM保存元instance.qcow2を直接起動しない。free6.9GiB回復。次1001はSS343既basic.target/ネット・SSH・PGのみ、timers/paths mask、canonical unit商用起動0の同flagsで一回予約先行起動、独立argv一case0。boot/current再認証は未実行。
+
+追加PT-DEP-997002/003：非0convert/compare/null/bool/metadata全五要素変異でboot許可false、failure receipt overwrite拒否、OSError記録は型/phaseだけ・raw messageなし、最終三工具case0。初回追加TDD E1はfixture assertionのdirectory参照誤りで不合格保持、是正後三case0・Production PT加算0。995/正式/旧成功は書換0。今回N11同stage内の再試行で開始費用を再加算せず、残見積/時間/個別実費は既区間の欠測を明記する。
+
 `python3 -B tools/quality/vm/050_s1/pg996_v3_initial_join_test.py` / `pg996_v3_initial_join.py`、host Linux7.0.0-38/Python3.14、branchdev-foundation、開始HEAD70f98a3。manifest `evidence/provisional/PG996-v3-initial-join-v1/manifest.json` SHA05b7fb466f5bbca754f5cdb7bb0e18d9006817826c42b6a27465de39cb2e8fbb。二工具caseと管理auditをProduction PT/coverageへ加算0。正式24/1964/53・coverage100条件は不変更。
 
 G13.07三stage低/標準/高 .6/1/1.8＋.95/1.5/2.75＋.4/.75/1.3＝1.95/3.25/5.85。N11四stage .25/.75/1.5＋.5/1/2＋.5/.75/1.5＋.25/.25/1＝1.5/2.75/6。親費用追加0。0259に事前配分、PG997専用stage eventはjob開始後の遅延として記録（時刻捏造0）。共有枠/個別実費/実tokenを分離、N/Tと個別ppは欠測null。
