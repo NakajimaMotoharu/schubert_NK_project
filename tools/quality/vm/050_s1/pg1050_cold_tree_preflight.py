@@ -23,6 +23,11 @@ def payload():
     prefix = 'SOURCE_SHA=' + repr(hashlib.sha256(old_child.read_bytes()).hexdigest()) + '\n'
     prefix += 'PINS=' + repr(frozen['fileHashes']) + '\nFIXED_FUNCTION=' + repr(ast.unparse(node)) + '\n'
     prefix += 'SOCKET_SOURCE=' + repr(__import__('pathlib').Path(__file__).with_name('pg1054_cold_socket_contract.py').read_text()) + '\n'
+    prefix += 'CORRECTED_CONTRACT_SOURCE=' + repr(__import__('pathlib').Path(__file__).with_name('pg1026_cold_observation_contract.py').read_text()) + '\n'
+    marker="contract=types.ModuleType('contract')"
+    if head.count(marker)!=1:
+        raise ValueError('fixed corrected contract adapter refused')
+    head=head.replace(marker,"env['CONTRACT_SOURCE']=CORRECTED_CONTRACT_SOURCE\n"+marker)
     raw = prefix + head + '\n' + BODY
     ast.parse(raw)
     return raw
@@ -32,6 +37,15 @@ BODY = r'''
 import dbus,time,stat,re
 exec(FIXED_FUNCTION,env)
 socket_module=types.ModuleType('socket_contract');exec(SOCKET_SOURCE,socket_module.__dict__)
+def readonly_runtime_namespaces():
+ root=pathlib.Path('/run/schubert-nk')
+ workers={name:(int(env['command'](['id','-u',role],32)),int(env['command'](['id','-g',role],32)))for name,role in [('backup','schubert-backup'),('inspector','schubert-inbox-inspector')]}
+ entries={'@root':[p.name for p in root.iterdir()],'maintenance':[p.name for p in (root/'maintenance').iterdir()]}
+ meta={'@root':env['metadata'](root),'maintenance':env['metadata'](root/'maintenance')}
+ assert not os.listxattr(root)and not os.listxattr(root/'maintenance')
+ contract.namespace_layout(entries,meta,workers,False)
+ return {}
+env['runtime_namespaces']=readonly_runtime_namespaces
 save=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1037-cold-prepared-v1/tree-preflight-v1')
 assert not os.path.lexists(save);save.mkdir(mode=0o700)
 held=[];refs=[];bus=None;manager=None;phase='ENTRY'

@@ -10,8 +10,9 @@ from pg1032_cold_handoff_preflight_v5 import missing_globals
 
 class Preparation(unittest.TestCase):
     def fixture(self,prepared):
-        entries={'@root':['maintenance.lock','startup-admission.lock']}
-        meta={'@root':[28,7,0,0,stat.S_IFDIR|0o755,7 if prepared else 2,80,11,12]}
+        entries={'@root':['maintenance.lock','startup-admission.lock','maintenance'],'maintenance':[]}
+        meta={'@root':[28,7,0,0,stat.S_IFDIR|0o755,8 if prepared else 3,80,11,12],
+              'maintenance':[28,9,0,0,stat.S_IFDIR|0o700,2,40,11,12]}
         if prepared:
             entries['@root']+=['startup','backup-request','cleanup-request','expiry-request','pt-coverage']
             for name in ['startup','backup-request','cleanup-request','expiry-request','pt-coverage']:

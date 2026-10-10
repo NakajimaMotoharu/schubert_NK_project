@@ -127,12 +127,13 @@ def parent():
   'authority':{k:status[k].strip()for k in ('Uid','Gid','Groups','NoNewPrivs','CapInh','CapPrm','CapEff','CapBnd','CapAmb')},'cgroup':(p/'cgroup').read_text(),'locks':fixed}
 def runtime_namespaces():
  root=pathlib.Path('/run/schubert-nk');names=['startup','backup-request','cleanup-request','expiry-request','pt-coverage']
+ require(not os.listxattr(root)and not os.listxattr(root/'maintenance'))
  workers={name:(int(command(['id','-u',role],32)),int(command(['id','-g',role],32)))for name,role in [('backup','schubert-backup'),('inspector','schubert-inbox-inspector')]}
- expected={'maintenance.lock','startup-admission.lock'}
+ expected={'maintenance.lock','startup-admission.lock','maintenance'}
  if not PREPARED:
-  contract.namespace_layout({'@root':[p.name for p in root.iterdir()]},{'@root':metadata(root)},workers,False);return {}
+  contract.namespace_layout({'@root':[p.name for p in root.iterdir()],'maintenance':[p.name for p in (root/'maintenance').iterdir()]},{'@root':metadata(root),'maintenance':metadata(root/'maintenance')},workers,False);return {}
  expected.update(names);require({p.name for p in root.iterdir()}==expected)
- result={}
+ result={'maintenance':metadata(root/'maintenance')}
  for name in names:
   p=root/name;m=metadata(p);require(m[2:5]==[0,0,stat.S_IFDIR|(0o711 if name=='pt-coverage'else 0o700)]and not os.listxattr(p))
   result[name]=m
@@ -189,7 +190,7 @@ def retain(failure):
 try:
  phase='BYTE_AUTH';captured_parent=parent();controls();authenticate()
  phase='HELD_DIRECTORIES'
- for name in ['/run/schubert-nk','/var/lib/schubert-nk/maintenance']:
+ for name in ['/run/schubert-nk','/run/schubert-nk/maintenance','/var/lib/schubert-nk/maintenance']:
   p=pathlib.Path(name);fixed=metadata(p);require(fixed[2]==fixed[3]==0 and stat.S_ISDIR(fixed[4])and not os.listxattr(p))
   directory_fds.append((p,os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW),fixed))
  phase='TEN_REFS';bus=dbus.SystemBus(private=True)

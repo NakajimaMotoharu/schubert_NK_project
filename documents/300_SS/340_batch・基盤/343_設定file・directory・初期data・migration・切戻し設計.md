@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC246（2026-10-10、BUG1020/YKT789）：cold finite layoutは既§6.9の`/run/schubert-nk/maintenance`を省略しない。before root:root0755のclosed entriesはmaintenance.lock/startup-admission.lock/maintenance、nlink3。maintenanceはroot:root0700・nlink2・ACL0・空を保持する。SSC243のstartup/backup-request/cleanup-request/expiry-request/pt-coverageだけ5dir追加後、rootnlink8、coverage711/六childrole等は既契約のまま。before/after双方でmaintenanceを厳密二読し、identity/全metadata/空が同じことをFDで証明する。unknown entry/非空/不明を修復や除外で通さず拒否する。
+
+当1055-v3/source da73f7001・新metadataobserver7427/start1860448/argvSHA5a5cff3ba9f3379bceb96da8fda3ef4a6ab51547f4b5cd0c1d9305e99b4c2ad0、Root/usr/bin/python3.14、child0、UNKNOWN/Ref-FD349だけのnew-only限定退役を認める。全task/authority/cgroup/完全argv/generationと当guestscript/失敗log/source、observer独自D-Bus unique名/UID0/PID7427とtenRef、全捕捉FD metadata/ACL/linked inode・保持189signed/tool107/pin/signature/approvalを二読する。observerはDB socket/advisory/M-Aを持たず、旧5463/5489はSSC245の同source/世代/FD/kernelM-A/readonlyDB heartbeat/socket/原値で現在認証する。全原値/十coldfull32/連続dispatch禁止/timerpath・corrected finite beforeをnewobserverのRef-FD内で二読する。
+
+本人pidfd→全二読→O_EXCL/NOFOLLOW file+dir fsync一回TERM予約→予約後全再読→普通TERM一回→旧7427実PID/当D-Bus接続/FD消失を確認する。SIGKILL/別actor/再送/直接DBterminate/oldhelper hotpatchは禁止。旧5463/5489/M-A/同DB transactionと全原値・namespace/config/署名を独立再二読し、新Ref-bus-FD正常close後だけ限定退役受入にする。途中不明/変異はnewobserverのRef/FD内で隔離、旧正常Unref/FDclose/actualexitを補完しない。旧host44275はactualexitを別採取、退役成功やcold準備成功へ流用しない。全条件後だけ別fresh corrected preflight→SSC245 fixedtreeへ進み、別新scopeへの一般権限に拡張しない。
+
 SSC245（2026-10-10、BUG1017/YKT786、今回fixed1037のみ）：SSC244 noDB/child0を今回RODB+唯一子へ無条件流用しない。元source776/f08/frozen1038・Java5463/1373880/argvfcb09442…と唯一Refs子5489を、同bootcbca/current40ef-PG932/実exe・全task子集合・PPID・全authority/cgroup・全FD/inode・child payload hashで二読固定する。旧SQL42601/UNKNOWNの元receipt・完成原本を保持、future SQL空白修正で旧工具を再成功化しない。
 
 新observerは既連続admin dispatch禁止/抑止timer-pathを全区間維持し、十Ref・全189signedfile/祖先/pin/signature/approval・oldtool凍結payload・原値FDを保持する。全DB clientを列挙し、観測自身以外は同source親の唯一backend/role/application/database/backend_start/xact_start・same advisory/実heartbeat queryだけを許容する。SSC238の同Connection実readOnly/onを確認する認証済pulseと、その喪失を示さない保持log・現在server peerを合わせ、60s idle期限を解除せず、別backend/role/query/失効・DB変更を拒否する。元childが既UNKNOWNでも権限を拡張せず、scope内の既signed/metadata/全24-594/原本59/Backup47/credential19/旧proof28/十coldfull32/kernel0を独立二読する。

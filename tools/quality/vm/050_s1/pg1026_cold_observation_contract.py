@@ -279,7 +279,7 @@ def namespace_layout(entries, meta, workers, prepared):
             raise ValueError('namespace worker identity refused')
     names = {'startup','backup-request','cleanup-request','expiry-request','pt-coverage'}
     children = {'parent','cleanup','expiry','root-api','backup','inspector'}
-    keys = {'@root'} | (names | {'pt-coverage/'+n for n in children} if prepared else set())
+    keys = {'@root','maintenance'} | (names | {'pt-coverage/'+n for n in children} if prepared else set())
     if set(entries) != keys or set(meta) != keys:
         raise ValueError('namespace object set refused')
     for name in keys:
@@ -288,10 +288,10 @@ def namespace_layout(entries, meta, workers, prepared):
         if (type(value) is not list or any(type(x) is not str for x in value) or len(value) != len(set(value))
             or type(m) is not list or len(m) != 9 or any(type(x) is not int for x in m)):
             raise ValueError('namespace metadata/entries refused')
-        expected = {'maintenance.lock','startup-admission.lock'} | (names if prepared else set()) if name == '@root' else children if name == 'pt-coverage' else set()
+        expected = {'maintenance.lock','startup-admission.lock','maintenance'} | (names if prepared else set()) if name == '@root' else children if name == 'pt-coverage' else set()
         mode = 0o755 if name == '@root' else 0o711 if name == 'pt-coverage' else 0o700
         owner = workers.get(name.removeprefix('pt-coverage/'), (0,0)) if name.startswith('pt-coverage/') else (0,0)
-        links = 7 if name == '@root' and prepared else 8 if name == 'pt-coverage' else 2
+        links = (8 if prepared else 3) if name == '@root' else 8 if name == 'pt-coverage' else 2
         if set(value) != expected or m[2:6] != [*owner,stat.S_IFDIR|mode,links]:
             raise ValueError('namespace finite delta refused')
     return True
