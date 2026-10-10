@@ -71,7 +71,7 @@ def tree_identity():
  env['owned_flocks'](contract.fd_alias_records(aliases),locks,5463)
  return {'parent':parent,'child':child,'locks':locks}
 def peer():
- sql="select json_build_object('pid',pid,'backendStart',backend_start::text,'transactionStart',xact_start::text,'role',usename,'application',application_name,'database',datname,'state',state,'query',query,'clientPort',client_port,'clientAddress',client_addr::text)from pg_stat_activity where datname='schubert_nk'and pid="+str(env['OWNER_BACKEND'])+';'
+ sql="select json_build_object('pid',pid,'backendStart',backend_start::text,'transactionStart',xact_start::text,'role',usename,'application',application_name,'database',datname,'state',state,'query',query,'clientPort',client_port,'clientAddress',host(client_addr))from pg_stat_activity where datname='schubert_nk'and pid="+str(env['OWNER_BACKEND'])+';'
  rows=env['command'](['sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',sql],65536).splitlines()
  assert len(rows)==1;v=json.loads(rows[0]);assert v['pid']==env['OWNER_BACKEND']and v['role']=='schubert_batch'and v['application']=='PG243-cold-empty'and v['database']=='schubert_nk'and v['backendStart']and v['transactionStart']
  assert v['state']in ('active','idle in transaction')

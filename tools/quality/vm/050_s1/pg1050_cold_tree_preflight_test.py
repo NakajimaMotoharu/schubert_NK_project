@@ -29,6 +29,8 @@ class Preflight(unittest.TestCase):
             self.assertIn(expected,raw)
         self.assertIn('all(snapshot[k]==sealed[k]',raw)
         self.assertIn('first==tree_identity()and server==peer()',raw)
+        self.assertIn("'clientAddress',host(client_addr)",raw)
+        self.assertNotIn("'clientAddress',client_addr::text",raw)
 
 
 if __name__=='__main__':
