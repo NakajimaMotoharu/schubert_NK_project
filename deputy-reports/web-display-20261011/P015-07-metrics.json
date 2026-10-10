@@ -1,0 +1,170 @@
+{
+  "wbs": "WBS-P015-07",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "changeCommit": "commit-index.json records final commit after save",
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "beginJST": "2026-10-11T08:15:57.462671+09:00",
+  "endJST": "2026-10-11T08:18:48.359221+09:00",
+  "wallElapsedSeconds": 170.89655,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "originalEstimateReason": "not captured yet; 481/484 committed values preserved unchanged",
+  "userRevisedRemainingEstimatePp": 1.25,
+  "groupStartEstimatePp": 1.25,
+  "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25",
+  "residualPredictionPp": null,
+  "residualReason": "formal same-source dependency and whole-module quality unverified; no guessed split",
+  "changeReason": "approved UI222 NK title and visible brand absent in common fragment",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "sha256": "9b34c1dfdd51f9e732ca44176dd6899ea4f1ff7d11349f4338a17229accfa512"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/CommonLayoutContractTest.java",
+      "sha256": "937184210d55124d09b01517915dd391b95427ab2443bc48c29d33ee4d281519"
+    }
+  ],
+  "criteriaSatisfied": [
+    "independent normal/escaped/branded-title literal render",
+    "visible NK brand, USER/ADMIN escaped username/role, nav/POST Logout contract",
+    "two actual pagination fragments first/middle/last/empty/unsearched/top/bottom",
+    "PageViewModel pure8, same compiled class counters all missed0"
+  ],
+  "criteriaUnmet": [
+    "full module NullAway/SpotBugs/coverage",
+    "actual CSRF security-chain integration",
+    "P015-02 and downstream same-source exit dependencies",
+    "actual browser/CHR/formal acceptance"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "TOOL_FAILURE",
+      "exit": 1,
+      "tests": 3,
+      "successful": 0,
+      "failed": 3,
+      "reason": "private classpath missing commons-logging, fixed Spring7.0.9 POM pin1.3.5 copied; not a specification failure"
+    },
+    {
+      "attempt": 2,
+      "kind": "PRE_FIX_REPRODUCTION",
+      "exit": 1,
+      "tests": 3,
+      "successful": 1,
+      "failed": 2,
+      "reason": "common title lacks NK brand"
+    },
+    {
+      "attempt": 3,
+      "kind": "TITLE_FIX_AND_PAGE",
+      "exit": 0,
+      "tests": 11,
+      "successful": 11,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0,
+      "coverageScope": "PageViewModel alone"
+    },
+    {
+      "attempt": 4,
+      "kind": "VISIBLE_BRAND_REPRODUCTION",
+      "exit": 1,
+      "tests": 4,
+      "successful": 3,
+      "failed": 1,
+      "reason": "common userActions visible brand absent; same unit, no whole-suite repetition"
+    },
+    {
+      "attempt": 5,
+      "kind": "FINAL_COMMON_FRAGMENT",
+      "exit": 0,
+      "tests": 4,
+      "successful": 4,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0,
+      "samePageClassReexecuted": false
+    }
+  ],
+  "classCoverage": {
+    "scope": "PageViewModel only",
+    "moduleQualityPassed": false,
+    "counters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 192
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 33
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 27
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "argv": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx128m",
+      "-cp",
+      "target/deputy-common-layout/classes:../dependencies/junit-jupiter-api-5.13.4.jar:../dependencies/junit-jupiter-engine-5.13.4.jar:../dependencies/junit-jupiter-params-5.13.4.jar:../dependencies/junit-platform-launcher-1.13.4.jar:../dependencies/junit-platform-engine-1.13.4.jar:../dependencies/junit-platform-commons-1.13.4.jar:../dependencies/opentest4j-1.3.0.jar:../dependencies/apiguardian-api-1.1.2.jar:../dependencies/jspecify-1.0.0.jar:../dependencies/thymeleaf-3.1.5.RELEASE.jar:../dependencies/thymeleaf-spring6-3.1.5.RELEASE.jar:../dependencies/attoparser-2.0.7.RELEASE.jar:../dependencies/unbescape-1.1.6.RELEASE.jar:../dependencies/slf4j-api-2.0.18.jar:../dependencies/jsoup-1.23.2.jar:../dependencies/tomcat-embed-core-11.0.25.jar:../dependencies/micrometer-observation-1.17.1.jar:../dependencies/micrometer-commons-1.17.1.jar:../dependencies/spring-core-7.0.9.jar:../dependencies/spring-beans-7.0.9.jar:../dependencies/spring-expression-7.0.9.jar:../dependencies/spring-context-7.0.9.jar:../dependencies/spring-aop-7.0.9.jar:../dependencies/spring-web-7.0.9.jar:../dependencies/spring-webmvc-7.0.9.jar:../dependencies/spring-test-7.0.9.jar:../dependencies/commons-logging-1.3.5.jar:../dependencies/org.jacoco.agent-0.8.15-runtime.jar:../dependencies/org.jacoco.core-0.8.15.jar:../dependencies/org.jacoco.report-0.8.15.jar:../dependencies/asm-9.10.1.jar:../dependencies/asm-commons-9.10.1.jar:../dependencies/asm-tree-9.10.1.jar",
+      "ScopedCoverageReport",
+      "target/deputy-common-layout/jacoco.exec",
+      "target/deputy-common-layout/jacoco.xml",
+      "src/schubert-nk-web/src/main/java",
+      "target/deputy-common-layout/classes/dev/codex/schubert/nk/web/view/PageViewModel.class"
+    ]
+  },
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 24,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:18:47 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:18:48 UTC",
+    "limitId": "codex",
+    "limitName": null,
+    "normalModelSlug": null,
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    },
+    "secondary": null,
+    "credits": {
+      "hasCredits": false,
+      "unlimited": false,
+      "balance": "0"
+    },
+    "individualLimit": null,
+    "spendControlReached": false,
+    "planType": "prolite",
+    "rateLimitReachedType": null
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "tokenUsage": null,
+  "wholeLeafAccepted": false,
+  "moduleQualityPassed": false,
+  "checkpoint": "P015-07-results.md"
+}

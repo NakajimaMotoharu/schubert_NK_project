@@ -1,0 +1,86 @@
+{
+  "wbs": "WBS-P015-07",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "dfdd518e2",
+  "beginJST": "2026-10-11T08:15:57.462671+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/layout.html",
+      "owner": "WBS-P015-07"
+    }
+  ],
+  "readOnlyProduction": [
+    "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+    "src/schubert-nk-web/src/main/resources/templates/fragments/log-pagination.html",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/PageViewModel.java"
+  ],
+  "testAllowlist": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/CommonLayoutContractTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/PageViewModelTest.java"
+  ],
+  "initializationSafety": "Direct SpringTemplateEngine/FileTemplateResolver/WebContext/MockServlet request-response; no application context, config registration, controller/security/service/DB/JMS/network. PageViewModelTest pure DTO/string templates/concurrency8 only; no external connections. Pinned private jars, own sourcepath/classes/JaCoCo output; single JUnit launch parallel disabled.",
+  "expectations": {
+    "normalTitles": [
+      [
+        "Logs",
+        "schubert NK - Logs"
+      ],
+      [
+        "質問要求",
+        "schubert NK - 質問要求"
+      ]
+    ],
+    "existingBrandedTitlesUnchanged": [
+      "schubert NK - 検索",
+      "エラー - schubert NK",
+      "schubert NK"
+    ],
+    "escapedTitle": {
+      "input": "章<img src=x> & 題",
+      "text": "schubert NK - 章<img src=x> & 題",
+      "injectedNodes": 0
+    },
+    "paginationLiteralRows": [
+      [
+        1,
+        100,
+        201
+      ],
+      [
+        101,
+        200,
+        201
+      ],
+      [
+        201,
+        201,
+        201
+      ]
+    ],
+    "emptyAndUnsearched": "no navigation",
+    "commonHeader": {
+      "brand": "schubert NK",
+      "usernameEscaped": "利用者<img src=x>",
+      "role": [
+        "USER",
+        "ADMIN"
+      ],
+      "links": [
+        "/",
+        "/notifications"
+      ],
+      "logout": "POST /logout"
+    }
+  },
+  "originalEstimate484": null,
+  "userRevisedRemainingPp": 1.25,
+  "groupStartEstimatePp": 1.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 24,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "moduleGateAssertion": false,
+  "formalAccepted": false
+}

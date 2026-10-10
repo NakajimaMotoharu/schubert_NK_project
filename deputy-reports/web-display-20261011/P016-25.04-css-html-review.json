@@ -1,0 +1,126 @@
+{
+  "wbs": "WBS-P016-25.04",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "readSourceCommit": "dfdd518e2",
+  "beginJST": "2026-10-11T08:13:17+09:00",
+  "endJST": "2026-10-11T08:14:22.989248+09:00",
+  "ownerBoundary": "CSS owned P016-25; common fragment issues routed to P015-07; screen-specific template issues to respective P016 screen; no duplicate changes/tests/cost",
+  "cssObserved": {
+    "colors": [
+      "#202124",
+      "#5f6368",
+      "#f6f7f9",
+      "#ffffff",
+      "#1f6feb",
+      "#dde1e6",
+      "#8a1c1c",
+      "#fdecec",
+      "#176b37",
+      "#eaf7ee"
+    ],
+    "pageMaxWidthPx": 1180,
+    "pagePaddingPx": 24,
+    "fontPx": 16,
+    "headingPx": 28,
+    "focusOutlinePx": 2,
+    "menuColumnsDesktop": 2,
+    "responsiveBreakpointMaxPx": 900,
+    "loginShellMaxWidthPx": 420,
+    "questionTextareaWidth": "100%",
+    "sourceHash": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d"
+  },
+  "uiAuthority": [
+    "UI222§2,3,5,8,9",
+    "SS313§7,10"
+  ],
+  "cssCorrectionNeeded": false,
+  "HTMLReadFindings": [
+    {
+      "item": "3 external JS entries, defer, no inline script/handler",
+      "status": "read verified"
+    },
+    {
+      "item": "27 HTML/fragment files use th:text/value/href, no th:utext/innerHTML/eval",
+      "status": "read verified; runtime escape remains per-screen test"
+    },
+    {
+      "item": "Most common head callers omit NK title brand; shared head currently reflects title verbatim",
+      "owner": "WBS-P015-07",
+      "status": "concrete UI222 QA045/UIC005 inconsistency routed to next common contract"
+    },
+    {
+      "item": "Question required label has no 必須 indicator",
+      "owner": "WBS-P016-18",
+      "status": "screen-specific candidate, do not charge common/CSS"
+    },
+    {
+      "item": "Other required operation fields lack visible required indicator",
+      "owner": "individual reserved screens",
+      "status": "screen-by-screen review needed; no bulk edits"
+    }
+  ],
+  "notApplicable": [
+    "CSS has no V8/JaCoCo executable counters: no coverage exclusion added",
+    "CSS static review is not actual browser visual verification",
+    "hidden CSRF/operation token required for POST is distinct from banned secret DOM data attributes; real secrets not read"
+  ],
+  "productionChanges": [],
+  "testsRun": [],
+  "criteriaSatisfied": [
+    "CSS design constants and script/CSS entry read mapping",
+    "HTML escape operator/secret-data attribute static review and ownership routing"
+  ],
+  "criteriaUnmet": [
+    "actual browser rendered visual/responsive/accessibility comparison",
+    "per-screen runtime escape validation",
+    "P015-02 same-source exit acceptance",
+    "all-leaf formal quality"
+  ],
+  "originalEstimate": {
+    "484Base": 1.25
+  },
+  "userRevisedRemainingEstimate": {
+    "v3Base": 2.0
+  },
+  "groupStartEstimate": {
+    "B": 2.0,
+    "unit": "weekly_quota_percentage_points"
+  },
+  "residualPredictionPp": null,
+  "leafActualSpentPp": null,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 24,
+    "remainingPercent": 76,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "N": null,
+  "T": null,
+  "tokenUsage": null,
+  "wholeLeafAccepted": false,
+  "checkpoint": "P016-25.04-css-html-review.json",
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:18:47 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:18:48 UTC",
+    "limitId": "codex",
+    "limitName": null,
+    "normalModelSlug": null,
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    },
+    "secondary": null,
+    "credits": {
+      "hasCredits": false,
+      "unlimited": false,
+      "balance": "0"
+    },
+    "individualLimit": null,
+    "spendControlReached": false,
+    "planType": "prolite",
+    "rateLimitReachedType": null
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0
+}

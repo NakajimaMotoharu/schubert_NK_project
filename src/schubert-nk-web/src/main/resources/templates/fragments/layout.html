@@ -4,13 +4,14 @@
   <head th:fragment="head(title)">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${title}">schubert NK</title>
+    <title th:text="${#strings.contains(title, 'schubert NK') ? title : 'schubert NK - ' + title}">schubert NK</title>
     <link rel="stylesheet" th:href="@{/css/schubert.css}">
   </head>
   <body>
     <header class="topbar" th:fragment="topbar(topbar)">
       <h1 th:text="${topbar.brand}">schubert NK</h1>
       <div class="topbar-actions" th:fragment="userActions(topbar)">
+        <span class="site-brand" th:text="${topbar.brand}">schubert NK</span>
         <nav class="nav-links" aria-label="共通ナビゲーション">
           <a th:href="@{/}">メニュー</a>
           <a th:href="@{/notifications}">通知</a>

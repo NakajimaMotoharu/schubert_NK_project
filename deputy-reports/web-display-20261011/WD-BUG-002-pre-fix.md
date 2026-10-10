@@ -1,0 +1,5 @@
+# WD-BUG-002 (副担当ローカル、正式915採番待ち)
+
+UI222 QA045/UIC005はLoginを含む全画面のbrand/titleをschubert NKへ統一する承認済仕様。共通layout.htmlはtitleをそのままth:textへ渡すため、Logs/質問要求等の未brand titleを出す。書込み前に既commit全27templateのhead呼出しを列挙し、既brand呼出しと未brand呼出しの両方を確認。P015-07固有費とし各画面へ再計上しない。独立期待はUI222§2のブランドと既存呼出し文字列、escapeはSS313§7/10から作成。既にbrandを含む既存title（検索/エラー/Menu）は維持し、未brandだけ同一headで補完する。描画fixtureはcontroller/DB/JMSを使わない。
+
+共通userActionsには可視brandもなく、page titleだけのheaderではNK表記がない。UI222の全画面可視brand条項と独立commonHeader fixtureの期待schubert NK/actual空で再現（4test中1失敗）。既存閉TopBarViewModel.brandを共通fragmentへ表示する修正候補を同じP015-07契約へ記録。nav/username/role/Logoutは既存通り。
