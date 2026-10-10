@@ -36,5 +36,5 @@ def owned_peer_sql(backend):
     tag="usename='schubert_batch'and application_name='PG243-cold-empty'and backend_type='client backend'and state in('idle in transaction','active')"
     return ("select count(*)from pg_stat_activity where datname='schubert_nk'and "+roles+"and pid<>"+str(backend)+";"
       "select count(*)from pg_locks where locktype='advisory'and classid=0 and objid=71419602 and granted and pid<>"+str(backend)+";"
-      "select count(*)from pg_stat_activity a where datname='schubert_nk'and pid="+str(backend)+"and "+tag+
+      "select count(*)from pg_stat_activity a where datname='schubert_nk'and pid="+str(backend)+" and "+tag+
       "and exists(select 1 from pg_locks l where l.pid=a.pid and locktype='advisory'and classid=0 and objid=71419602 and objsubid=1 and mode='ExclusiveLock'and granted);")

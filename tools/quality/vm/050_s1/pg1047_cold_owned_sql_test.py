@@ -3,6 +3,7 @@ import ast
 import re
 import unittest
 from pg1037_cold_preparation_sources import guest
+from pg1023_cold_contract import owned_peer_sql as legacy_future_sql
 
 
 def functions():
@@ -20,17 +21,19 @@ def functions():
 
 class OwnedSql(unittest.TestCase):
     def test_independent_exact_peer_predicate_and_statement_count(self):
-        sql = functions()(5497)
-        self.assertEqual(3, len([x for x in sql.split(';') if x]))
-        self.assertIn("where datname='schubert_nk'and pid=5497 and usename='schubert_batch'", sql)
-        self.assertIn("l.pid=a.pid and locktype='advisory'", sql)
-        self.assertIn("objsubid=1 and mode='ExclusiveLock'and granted", sql)
+        for function in (functions(), legacy_future_sql):
+            sql = function(5497)
+            self.assertEqual(3, len([x for x in sql.split(';') if x]))
+            self.assertIn("where datname='schubert_nk'and pid=5497 and usename='schubert_batch'", sql)
+            self.assertIn("l.pid=a.pid and locktype='advisory'", sql)
+            self.assertIn("objsubid=1 and mode='ExclusiveLock'and granted", sql)
 
     def test_backend_boundaries_have_separate_numeric_tokens(self):
-        for backend in (0, 2, 5497, 2147483646):
-            sql = functions()(backend)
-            self.assertIsNone(re.search(r'\d(?:and|or|select)\b', sql))
-            self.assertIn('pid=' + str(backend) + ' and ', sql)
+        for function in (functions(), legacy_future_sql):
+            for backend in (0, 2, 5497, 2147483646):
+                sql = function(backend)
+                self.assertIsNone(re.search(r'\d(?:and|or|select)\b', sql))
+                self.assertIn('pid=' + str(backend) + ' and ', sql)
 
     def test_historical_counterexample_is_rejected_not_rewritten(self):
         historical = 'pid=5497and usename='
