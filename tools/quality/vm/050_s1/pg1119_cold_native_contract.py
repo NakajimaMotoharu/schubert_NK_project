@@ -4,14 +4,20 @@ NK-OPS-001/SS343/353; BUG1029/YKT798; PT-DEP-1119001..005.
 Existing bytes/metadata are independently retained by the eventual owned scope.
 """
 ROOT_ROLES = {'parent','cleanup','expiry','root-api','root-api193','root-web193'}
-ACCOUNT_ROLES = {'backup':'schubert-backup','inspector':'schubert-inspector',
-                 'ordinary-api193':'schubert-api','ordinary-web193':'schubert-web'}
+ACCOUNT_ROLES = {'backup':'schubert-backup','inspector':'schubert-inbox-inspector',
+                 'ordinary-api193':'schubert-api','ordinary-web193':'schubert-web',
+                 'ordinary-inspector196':'schubert-inbox-inspector'}
 LEGACY = {'parent','cleanup','expiry','root-api','backup','inspector'}
-NEW = {'root-api193','root-web193','ordinary-api193','ordinary-web193'}
+NEW = {'root-api193','root-web193','ordinary-api193','ordinary-web193','ordinary-inspector196'}
+UNITS = {'morning':'schubert-nk-morning-controller.service',
+         'api':'schubert-nk-api.service','web':'schubert-nk-web.service',
+         'backup':'schubert-nk-backup.service','cleanup':'schubert-nk-cleanup.service',
+         'expiry':'schubert-nk-expiry-cleanup.service',
+         'inspector':'schubert-nk-inbox-inspector.service'}
 RW = {
     'morning': {'parent'}, 'api': {'root-api193','ordinary-api193'},
     'web': {'root-web193','ordinary-web193'}, 'backup': {'backup'},
-    'cleanup': {'cleanup'}, 'expiry': set(), 'inspector': set(),
+    'cleanup': {'cleanup'}, 'expiry': {'expiry'}, 'inspector': {'ordinary-inspector196'},
 }
 
 
@@ -34,8 +40,11 @@ def plan(parent, entries, effective_rw, accounts):
             raise ValueError('native fixed NSS identity refused')
     if type(effective_rw) is not dict or set(effective_rw)!=set(RW):
         raise ValueError('native effective role declarations refused')
-    if any(type(v) is not set or v!=RW[k] for k,v in effective_rw.items()):
-        raise ValueError('native effective RW declaration drift')
+    for role,value in effective_rw.items():
+        if (type(value) is not dict or set(value)!={'unit','loadState','rw'} or
+            value['unit']!=UNITS[role]or value['loadState']!='loaded' or
+            type(value['rw']) is not set or value['rw']!=RW[role]):
+            raise ValueError('native loaded Unit/RW declaration drift')
     def owner(role):
         return (0,0) if role in ROOT_ROLES else accounts[ACCOUNT_ROLES[role]]
     for role,value in entries.items():

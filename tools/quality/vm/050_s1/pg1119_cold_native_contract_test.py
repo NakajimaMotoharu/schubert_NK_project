@@ -7,7 +7,7 @@ from pg1119_cold_native_contract import plan
 class NativeTest(unittest.TestCase):
     def fixture(self):
         parent=dict(kind='directory',uid=0,gid=0,mode=0o711,acl=[])
-        accounts={'schubert-backup':(1101,1101),'schubert-inspector':(1102,1102),
+        accounts={'schubert-backup':(1101,1101),'schubert-inbox-inspector':(1102,1102),
                   'schubert-api':(1103,1103),'schubert-web':(1104,1104)}
         entries={x:dict(kind='directory',uid=0,gid=0,mode=0o700,acl=[])
                  for x in ['parent','cleanup','expiry','root-api']}
@@ -15,14 +15,20 @@ class NativeTest(unittest.TestCase):
         entries['inspector']=dict(kind='directory',uid=1102,gid=1102,mode=0o700,acl=[])
         rw={'morning':{'parent'},'api':{'root-api193','ordinary-api193'},
             'web':{'root-web193','ordinary-web193'},'backup':{'backup'},
-            'cleanup':{'cleanup'},'expiry':set(),'inspector':set()}
+            'cleanup':{'cleanup'},'expiry':{'expiry'},'inspector':{'ordinary-inspector196'}}
+        ids={'morning':'schubert-nk-morning-controller.service','api':'schubert-nk-api.service',
+             'web':'schubert-nk-web.service','backup':'schubert-nk-backup.service',
+             'cleanup':'schubert-nk-cleanup.service','expiry':'schubert-nk-expiry-cleanup.service',
+             'inspector':'schubert-nk-inbox-inspector.service'}
+        rw={k:dict(unit=ids[k],loadState='loaded',rw=v)for k,v in rw.items()}
         return parent,entries,rw,accounts
 
-    def test_old_six_require_four_new_roles_and_parent_read(self):
+    def test_old_six_require_five_new_roles_and_parent_read(self):
         args=self.fixture();value=plan(*args)
         self.assertEqual(value['parentModeChange'],(0o711,0o755))
         self.assertEqual(value['newOnlyDirectories'],[
             dict(role='ordinary-api193',uid=1103,gid=1103,mode=0o700),
+            dict(role='ordinary-inspector196',uid=1102,gid=1102,mode=0o700),
             dict(role='ordinary-web193',uid=1104,gid=1104,mode=0o700),
             dict(role='root-api193',uid=0,gid=0,mode=0o700),
             dict(role='root-web193',uid=0,gid=0,mode=0o700)])
@@ -33,8 +39,8 @@ class NativeTest(unittest.TestCase):
     def test_complete_and_partly_existing_roles(self):
         parent,entries,rw,accounts=self.fixture();parent['mode']=0o755
         entries['root-api193']=dict(kind='directory',uid=0,gid=0,mode=0o700,acl=[])
-        self.assertEqual(len(plan(parent,entries,rw,accounts)['newOnlyDirectories']),3)
-        for role,uid in [('root-web193',0),('ordinary-api193',1103),('ordinary-web193',1104)]:
+        self.assertEqual(len(plan(parent,entries,rw,accounts)['newOnlyDirectories']),4)
+        for role,uid in [('root-web193',0),('ordinary-api193',1103),('ordinary-web193',1104),('ordinary-inspector196',1102)]:
             entries[role]=dict(kind='directory',uid=uid,gid=uid,mode=0o700,acl=[])
         value=plan(parent,entries,rw,accounts)
         self.assertIsNone(value['parentModeChange']);self.assertEqual(value['newOnlyDirectories'],[])
@@ -62,13 +68,24 @@ class NativeTest(unittest.TestCase):
     def test_declaration_account_and_inventory_drift(self):
         for role in ['morning','api','web','backup','cleanup','expiry','inspector']:
             for bad in [None,[],{'root-api'},set(),{'unknown'}]:
-                args=list(self.fixture());args[2][role]=bad
-                if bad==self.fixture()[2][role]:continue
+                args=list(self.fixture());args[2][role]['rw']=bad
                 with self.subTest(role=role),self.assertRaises(ValueError):plan(*args)
         for bad in [(0,0),(True,1103),(1103,),[1103,1103],None]:
             args=list(self.fixture());args[3]['schubert-api']=bad
             with self.assertRaises(ValueError):plan(*args)
         args=list(self.fixture());args[1]['unknown']={}
+        with self.assertRaises(ValueError):plan(*args)
+
+    def test_real_loaded_unit_ids_and_wrong_alias_counterexample(self):
+        for role,wrong in [('expiry','schubert-nk-expiry.service'),
+                           ('inspector','schubert-nk-inspector.service')]:
+            args=list(self.fixture());args[2][role]['unit']=wrong
+            with self.assertRaises(ValueError):plan(*args)
+        for role in self.fixture()[2]:
+            for key,bad in [('unit',None),('loadState','not-found'),('loadState',None)]:
+                args=list(self.fixture());args[2][role][key]=bad
+                with self.assertRaises(ValueError):plan(*args)
+        args=list(self.fixture());args[3]['schubert-inspector']=args[3].pop('schubert-inbox-inspector')
         with self.assertRaises(ValueError):plan(*args)
 
 

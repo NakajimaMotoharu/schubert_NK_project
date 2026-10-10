@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC255（2026-10-10）：343同項の正規Expiry/Inspector ID・loaded/type/NSS/RWを用い、別名not-foundの空値からagent/dir不在を推定しない。ordinary-inspector196をSSC254有限new-only整備対象へ追加、Inspector agent資格は別未完・Expiry既agent保持。元13host結果は不完全scopeとして保存、当PG1115timeout143/API226/元pending/四startupfile/Artemis現ownerを全二読・限定回収/postしてから別freshscopeへ進む。旧start/permit/raw復元・途中mkdir/restart・元30分延長0、全七role独立matrixと実再試験/native/正式の未完を維持する。
+
 SSC254（2026-10-10）：cold後のNAMESPACE226は全effective native/RW宣言と実directoryのjoinで原因を確定する。ordinary-api193/root-api193等の欠落とcoverage親711を、旧六role成功から正常補完しない。343同項の既SSC193195準拠0755親/固定四role0700を、当live親の元期限終端・当cohort限定回収/全post後の別fresh管理scopeでのみ有限整備する。原本/DB/Backup/署名/source/既execを保全、unknown/半完了は隔離、途中mkdir/再start/期限延長/旧permit再利用0。全role独立fixtureと実再試験/native/正式品質は未完を維持する。
 
 SSC253（2026-10-10）：SSC252のprivate一件仮定を343同項の既知3dir完全閉集合/実stage/source/Rootmode証明へ修正し、固定位置+3だけ許す。新scope9field・原値/専用namespace/署名品質は不変更。起動前readonly134103だけfixed pidfd耐久TERM一回/全postで回収、旧actual別保存。live1112観測を維持し第3watch stage0、別nestedonceでRoot一回/元30分へ進む。
