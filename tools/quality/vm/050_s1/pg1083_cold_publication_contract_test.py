@@ -97,7 +97,7 @@ class Finite(unittest.TestCase):
     def test_old_fd_original_remains_same_despite_known_atomic_unlink(self):
         before=fixture();after=actual('after')
         for path,root in ((A+'/current',A),(C+'/current',C)):
-            old=before[root][path];fd=copy.deepcopy(old);fd['metadata'][5]=0;fd['metadata'][8]=25
+            old=before[root][path];fd=copy.deepcopy(old);fd['metadata'][5]=1 if root==C else 0;fd['metadata'][8]=25
             self.assertTrue(verify_retained(path,old,fd,'after',after,20,30))
             for index in (0,1,2,3,4,5,6,7,8):
                 bad=copy.deepcopy(fd);bad['metadata'][index]+=100

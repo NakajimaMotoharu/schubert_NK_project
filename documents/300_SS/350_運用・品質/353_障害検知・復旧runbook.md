@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC250（2026-10-10）：cold code-onlyのcurrent旧linkは属性検査できないunlink O_PATHへ正常値を補完せず、343同項の固定RENAME_EXCHANGE→linked旧inode/target/ACL再読→private linked保存/dirsyncを用いる。半交換/移動不明は隔離・再交換/再送/任意unlink/oldfallback0。approval正規nlink0とcurrent linked1を別oracleで検査、全値/資源/normalclose・freshRoot/native/正式は別受入。
+
 SSC249（2026-10-10）：completed-cold空epoch code-onlyは343同項のcurrent40ef/unused1068/当DONE/全原値基点から別newscopeで行う。旧pending/ISSUED用工具やexpired ownerを借用0。必要candidateRO/fullverifier後だけ正規empty対応INVALID→atomic approval→atomic current→全post/newnormalclose、同phaseの有限dir/file/link効果を独立oracleで検査しold原byteを保全する。unknown/半公開/close不明は隔離、oldfallback/再発行/DB-原本修復0。切替後のRootは別freshnoargs/新run・元30分、Inspector合法日/native/正式品質は別受入。
 
 SSC248（2026-10-10）：当1075/1076 pre-Ref失敗は343同項の固定11678/11704だけ。childのstdio3/Ref0を現在認証し、旧Refs子D-Busを代用しない。新tenRef/FD・親RODB heartbeat/socket/実M-A/全原値二読・両pidfd/各耐久一回TERM・親peer0→同子PPID1→全post/new正常closeを維持。旧actualとUNKNOWNを保持、coldprepared/current/DB/原本/Backup/空epochの修復0、候補place再発行0。

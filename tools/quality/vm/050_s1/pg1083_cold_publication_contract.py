@@ -132,7 +132,8 @@ def verify_retained(path,fixed,observed,phase,after,begin_ns,end_ns):
         if now[:6]!=old[:6]or now[6]!=size:raise ValueError('retained parent identity refused')
         _changed_time(now,begin_ns,end_ns)
     elif replaced:
-        if now[:5]!=old[:5]or now[5]!=0 or now[6:8]!=old[6:8]or not begin_ns<=now[8]<=end_ns:
+        expected_links=1 if path==CURRENT+'/current'else 0
+        if now[:5]!=old[:5]or now[5]!=expected_links or now[6:8]!=old[6:8]or not begin_ns<=now[8]<=end_ns:
             raise ValueError('retained replaced inode refused')
         if observed['sha256']!=fixed['sha256']or observed['target']!=fixed['target']:
             raise ValueError('retained original bytes/link refused')
