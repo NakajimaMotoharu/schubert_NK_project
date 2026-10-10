@@ -175,6 +175,24 @@ def all_client_sql(parent_backend):
             + str(parent_backend) + ";")
 
 
+def fd_alias_records(lines):
+    """Normalize only exact fdinfo aliases; kernel cardinality is checked separately."""
+    if type(lines) is not list or any(type(line) is not str for line in lines):
+        raise ValueError('fdinfo records refused')
+    result = []
+    for line in lines:
+        fields = line.split()
+        if (len(fields) != 8 or not fields[0].endswith(':')
+            or not fields[0][:-1].isdigit() or fields[1:4] != ['FLOCK', 'ADVISORY', 'WRITE']
+            or not fields[4].isdigit() or fields[6:] != ['0', 'EOF']):
+            raise ValueError('fdinfo lock refused')
+        # Record number is local to a descriptor, not a kernel lock identity.
+        canonical = '1: ' + ' '.join(fields[1:])
+        if canonical not in result:
+            result.append(canonical)
+    return result
+
+
 def durable_reservation(directory_fd, name, data):
     """New fixed private reservation only; partial writes remain non-replayable."""
     if (type(directory_fd) is not int or directory_fd < 0 or type(name) is not str

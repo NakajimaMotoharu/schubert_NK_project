@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation
+from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records
 
 
 class Contract(unittest.TestCase):
@@ -115,6 +115,25 @@ class Contract(unittest.TestCase):
             for name, data in (('../123.term-reserved.private.json', literal), ('123.term-reserved.private.json', None), ('123.term-reserved.private.json', b'')):
                 with self.assertRaises(ValueError): durable_reservation(fd, name, data)
         finally: os.close(fd)
+
+    def test_actual_flock_fd_alias_and_literal_non_alias(self):
+        import fcntl
+        root, _ = self.fixture()
+        fd = os.open(root / 'payload', os.O_RDONLY)
+        duplicate = os.dup(fd)
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            records = [line.removeprefix('lock:').strip() for n in (fd, duplicate)
+                       for line in Path('/proc/self/fdinfo/' + str(n)).read_text().splitlines() if line.startswith('lock:')]
+            self.assertEqual(2, len(records))
+            self.assertEqual(1, len(fd_alias_records(records)))
+        finally:
+            os.close(duplicate)
+            os.close(fd)
+        self.assertEqual(['1: FLOCK ADVISORY WRITE 121 08:01:7 0 EOF', '1: FLOCK ADVISORY WRITE 122 08:01:7 0 EOF'],
+                         fd_alias_records(['2: FLOCK ADVISORY WRITE 121 08:01:7 0 EOF', '1: FLOCK ADVISORY WRITE 121 08:01:7 0 EOF', '3: FLOCK ADVISORY WRITE 122 08:01:7 0 EOF']))
+        for lines in (None, [None], ['1: -> FLOCK ADVISORY WRITE 121 08:01:7 0 EOF'], ['1: FLOCK ADVISORY READ 121 08:01:7 0 EOF']):
+            with self.assertRaises(ValueError): fd_alias_records(lines)
 
     def test_all_roles_sql_independent_literal_and_rows(self):
         self.assertEqual("select count(*)from pg_stat_activity where datname='schubert_nk'and backend_type='client backend'and pid<>pg_backend_pid()and pid<>121;", all_client_sql(121))
