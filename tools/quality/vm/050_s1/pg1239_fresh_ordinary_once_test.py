@@ -1,4 +1,5 @@
 import ast
+import hashlib
 import unittest
 import pg1239_fresh_ordinary_once as p
 
@@ -7,7 +8,13 @@ class FreshOnceTest(unittest.TestCase):
         s=p.payload();t=ast.parse(s);compile(s,'<actual one normal Root>','exec')
         n=next(n for n in t.body if isinstance(n,ast.FunctionDef)and n.name=='observer_argv')
         env={};exec(compile(ast.Module(body=[n],type_ignores=[]),'<actual independent-byte argv>','exec'),env)
-        self.assertEqual(env['observer_argv']().split(b'\0'),[b'/usr/bin/python3',b'-B',b'/var/lib/pgpt-s1-preservation/pg1237-observer-v1/pg1237_watch_parent.py',b'd5b00104280028d9ea81b44c1d1c805f3c2861ed',b'0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',b'PG1068',b''])
+        self.assertEqual(env['observer_argv']().split(b'\0'),[b'python3',b'-B',b'/var/lib/pgpt-s1-preservation/pg1237-observer-v1/pg1237_watch_parent.py',b'd5b00104280028d9ea81b44c1d1c805f3c2861ed',b'0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',b'PG1068',b''])
+        # Independent actually observed current command bytes, not computed by
+        # the production/launcher function or duplicate guessed declaration.
+        self.assertEqual(hashlib.sha256(env['observer_argv']()).hexdigest(),'217d6ba4629df1a17cae4b0208fa322aa0fa42b3d463892bf0ae9f2d0c1c4b8f')
+        for field in range(6):
+            parts=env['observer_argv']().split(b'\0');parts[field]=b'foreign'
+            self.assertNotEqual(b'\0'.join(parts),env['observer_argv']())
         starts=[]
         for n in ast.walk(t):
             if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='run'and n.args and isinstance(n.args[0],ast.List):

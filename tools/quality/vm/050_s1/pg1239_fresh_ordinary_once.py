@@ -43,7 +43,7 @@ def watch_identity():
   matches.append({'pid':int(p.name),'ticks':int((p/'stat').read_text().rpartition(')')[2].split()[19]),'argvSha256':hashlib.sha256(cmd).hexdigest()})
  require(len(matches)==1);return matches[0]
 def observer_argv():
- return b'\0'.join([b'/usr/bin/python3',b'-B',b'/var/lib/pgpt-s1-preservation/pg1237-observer-v1/pg1237_watch_parent.py',b'd5b00104280028d9ea81b44c1d1c805f3c2861ed',b'0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',b'PG1068'])+b'\0'
+ return b'\0'.join([b'python3',b'-B',b'/var/lib/pgpt-s1-preservation/pg1237-observer-v1/pg1237_watch_parent.py',b'd5b00104280028d9ea81b44c1d1c805f3c2861ed',b'0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',b'PG1068'])+b'\0'
 def persist(name,v):
  with(SAVE/name).open('xb')as f:os.fchmod(f.fileno(),0o600);f.write(json.dumps(v,sort_keys=True).encode());f.flush();os.fsync(f.fileno())
  for p in [SAVE,SAVE.parent]:
