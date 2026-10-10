@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC245（2026-10-10）：当1037 cold失敗はBEFOREの所有SQL数値AND連結欠落/42601で、原本SDK wrapperにIOExceptionが再包装された。新SQLは独立literalと実PG旧42601/新二読[0,0,1]で是正し、元guest/frozen/UNKNOWNをhotpatchしない。現在5463/1373880＋唯一Refs子5489・RODB/same-peer heartbeat/十Ref/189fileFDを固定treeとしてSS343の新profileで認証する。旧SSC244 noDB/child0 handoffを流用0。連続dispatch禁止・newobserverRefFD保持・両pidfd・耐久各一回予約→親普通TERM一回/DB-lock消失と原値二読→同世代子普通TERM一回/全資源postを順守、SIGKILL/直接DBterminate/再送/期限解除/別actor禁止。片側/unknownならobserver内隔離、正常close補完0。旧actualexitと新退役resultを分離し、全条件後だけ別fresh cold準備へ進む。新業務仕様承認は不要、当source実独立反例とactualhandoffは未受入。
+
 SSC244（2026-10-10）：coldのbyte真正性と実hostRO/immutable検証を分離する。当PG1023 SIGNED_CURRENTのnoDB/noRef/no原本Session失敗はSS343固定handoffの唯一actor/source/generation/全payload・両flock・child/DB0・全原値二読→pidfd ordinaryTERM一回→143/UNKNOWN保持・全actor/flock消失と全元値二読/observer正常closeだけで退役する。別actor/旧UNKNOWN補完/Root開始/DB・epoch・namespace・mount変更を禁止、変異/timeoutは隔離し再発行しない。正規退役後だけ別fresh byte-auth/readbackへ戻り、実RO設定後のfull immutable verifier/準備/Root/native/正式条件を省略しない。
 
 追加再発防止：handoff全区間の管理者dispatch禁止/timer-path抑止、予約file/dirsyncと予約後再認証、全task子/全security/捕捉inode-FD、署名全ancestor/metadata/ACL/identity/hash、全DB client backend（自己観測だけ除外）、失敗時Ref/FD保持、実旧transportcode別採取は343同項どおり省略しない。冷読取のartifact hashだけ/5roleだけを全原値やDB0の証明に使用しない。
