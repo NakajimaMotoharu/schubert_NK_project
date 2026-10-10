@@ -26,11 +26,12 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 /** P016-16/UI222,225/SS313: closed synthetic User-create display; password canaries are public. */
 class UserCreateDisplayContractTest {
   private static final UUID PUBLIC_TOKEN = UUID.fromString("12345678-1234-4234-8234-123456789abc");
-  private static final List<String> FIELDS = List.of("username", "password", "password_confirmation", "role", "enabled");
+  private static final List<String> FIELDS =
+      List.of("username", "password", "password_confirmation", "role", "enabled");
 
   private static SessionPrincipal actor() {
-    return new SessionPrincipal("fixture-admin", UserRole.ADMIN,
-        AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+    return new SessionPrincipal(
+        "fixture-admin", UserRole.ADMIN, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static Document render(UserCreateViewModel page) {
@@ -44,9 +45,12 @@ class UserCreateDisplayContractTest {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setRequestURI("/admin/users/new");
-    var exchange = JakartaServletWebApplication.buildApplication(servlet)
-        .buildExchange(request, new MockHttpServletResponse());
-    return Jsoup.parse(engine.process("admin/user-new", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    return Jsoup.parse(
+        engine.process(
+            "admin/user-new", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
   }
 
   @Test
@@ -61,10 +65,15 @@ class UserCreateDisplayContractTest {
     }
     assertEquals("USER", dom.select("select[name=role] option[selected]").val());
     assertEquals("true", dom.select("select[name=enabled] option[selected]").val());
-    assertEquals(List.of("operation_token", "username", "password", "password_confirmation", "role", "enabled"),
+    assertEquals(
+        List.of(
+            "operation_token", "username", "password", "password_confirmation", "role", "enabled"),
         dom.select("form input,form select").stream()
-            .filter(node -> !node.attr("name").isEmpty() && !node.closest("form").hasClass("logout-form"))
-            .map(node -> node.attr("name")).toList());
+            .filter(
+                node ->
+                    !node.attr("name").isEmpty() && !node.closest("form").hasClass("logout-form"))
+            .map(node -> node.attr("name"))
+            .toList());
     assertEquals("/admin/users/new", dom.select("#user-new-form").attr("action"));
     assertEquals("post", dom.select("#user-new-form").attr("method"));
     assertEquals("", dom.select("input[name=password]").val());
@@ -73,19 +82,38 @@ class UserCreateDisplayContractTest {
 
   @Test
   void invalidUserCreateSummaryTargetsExistingControlsAndNeverRedisplaysPassword() {
-    try (var form = UserCreateForm.bind(Map.of(
-        "username", List.of("<invalid-user>"), "password", List.of("short"),
-        "password_confirmation", List.of("different"), "role", List.of("OTHER"),
-        "enabled", List.of("unknown"), "operation_token", List.of("invalid"),
-        "owner", List.of("never-reflect-owner")))) {
+    try (var form =
+        UserCreateForm.bind(
+            Map.of(
+                "username",
+                List.of("<invalid-user>"),
+                "password",
+                List.of("short"),
+                "password_confirmation",
+                List.of("different"),
+                "role",
+                List.of("OTHER"),
+                "enabled",
+                List.of("unknown"),
+                "operation_token",
+                List.of("invalid"),
+                "owner",
+                List.of("never-reflect-owner")))) {
       assertFalse(form.isValid());
       assertThrows(IllegalArgumentException.class, form::toRequest);
       var dom = render(UserCreateViewModel.redisplay(actor(), form, PUBLIC_TOKEN, "", false));
       assertEquals(7, dom.select(".validation-summary li a").size());
-      assertEquals(Set.of("#user-new-username", "#user-new-password", "#user-new-password_confirmation",
-          "#user-new-role", "#user-new-enabled", "#user-new-form"),
+      assertEquals(
+          Set.of(
+              "#user-new-username",
+              "#user-new-password",
+              "#user-new-password_confirmation",
+              "#user-new-role",
+              "#user-new-enabled",
+              "#user-new-form"),
           Set.copyOf(dom.select(".validation-summary li a").eachAttr("href")));
-      for (var anchor : dom.select(".validation-summary li a")) assertEquals(1, dom.select(anchor.attr("href")).size());
+      for (var anchor : dom.select(".validation-summary li a"))
+        assertEquals(1, dom.select(anchor.attr("href")).size());
       assertEquals("", dom.select("input[name=password]").val());
       assertEquals("", dom.select("input[name=password_confirmation]").val());
       assertFalse(dom.outerHtml().contains("different"));

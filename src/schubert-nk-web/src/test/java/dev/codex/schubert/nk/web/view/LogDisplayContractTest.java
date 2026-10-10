@@ -25,8 +25,8 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 /** P016-14/UI222,225/SS313: closed actual Log DOM fixture, no controller/DB/JMS. */
 class LogDisplayContractTest {
   private static SessionPrincipal actor(UserRole role) {
-    return new SessionPrincipal("fixture-admin", role,
-        AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+    return new SessionPrincipal(
+        "fixture-admin", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static Document render(LogSearchViewModel page) {
@@ -40,26 +40,54 @@ class LogDisplayContractTest {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setRequestURI("/logs");
-    var exchange = JakartaServletWebApplication.buildApplication(servlet)
-        .buildExchange(request, new MockHttpServletResponse());
-    return Jsoup.parse(engine.process("logs", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    return Jsoup.parse(
+        engine.process("logs", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
   }
 
   @Test
   void logSummaryAnchorsResolveAndUnknownValuesStayEscaped() {
     String q = "<script>" + "x".repeat(257);
-    var form = LogSearchForm.bind(Map.of(
-        "q", List.of(q), "log_type", List.of("<unknown-log>"),
-        "action", List.of("a".repeat(65)), "path", List.of("p".repeat(257)),
-        "level", List.of("<unknown-level>"), "from", List.of("bad-from"),
-        "to", List.of("bad-to"), "page", List.of("+1"), "owner", List.of("not-public")));
+    var form =
+        LogSearchForm.bind(
+            Map.of(
+                "q",
+                List.of(q),
+                "log_type",
+                List.of("<unknown-log>"),
+                "action",
+                List.of("a".repeat(65)),
+                "path",
+                List.of("p".repeat(257)),
+                "level",
+                List.of("<unknown-level>"),
+                "from",
+                List.of("bad-from"),
+                "to",
+                List.of("bad-to"),
+                "page",
+                List.of("+1"),
+                "owner",
+                List.of("not-public")));
     assertFalse(form.isValid());
     assertThrows(IllegalStateException.class, form::toRequest);
     var dom = render(LogSearchViewModel.invalid(actor(UserRole.ADMIN), form));
-    assertEquals(List.of("#log-filters", "#log-q", "#log-log_type", "#log-action",
-        "#log-path", "#log-level", "#log-from", "#log-to", "#log-filters"),
+    assertEquals(
+        List.of(
+            "#log-filters",
+            "#log-q",
+            "#log-log_type",
+            "#log-action",
+            "#log-path",
+            "#log-level",
+            "#log-from",
+            "#log-to",
+            "#log-filters"),
         dom.select("#log-errors li a").eachAttr("href"));
-    for (var anchor : dom.select("#log-errors li a")) assertEquals(1, dom.select(anchor.attr("href")).size());
+    for (var anchor : dom.select("#log-errors li a"))
+      assertEquals(1, dom.select(anchor.attr("href")).size());
     assertEquals(q, dom.select("input[name=q]").val());
     assertEquals("<unknown-log>", dom.select("select[name=log_type] option[selected]").val());
     assertEquals("<unknown-level>", dom.select("select[name=level] option[selected]").val());
@@ -73,14 +101,21 @@ class LogDisplayContractTest {
 
   @Test
   void adminEmptyLogKeepsDatePrecisionInputOrderAndFixedControlIds() {
-    var form = LogSearchForm.bind(Map.of("from", List.of("2026-10-01T00:00:00.123"),
-        "to", List.of("2026-11-01T00:00:00.123")));
+    var form =
+        LogSearchForm.bind(
+            Map.of(
+                "from",
+                List.of("2026-10-01T00:00:00.123"),
+                "to",
+                List.of("2026-11-01T00:00:00.123")));
     assertTrue(form.isValid()); // Exact 31-day boundary from SSC073, no rounding.
-    var page = LogSearchViewModel.success(actor(UserRole.ADMIN), form,
-        new PagedResponseData(1, 100, 0, 1, 0, 0), List.of());
+    var page =
+        LogSearchViewModel.success(
+            actor(UserRole.ADMIN), form, new PagedResponseData(1, 100, 0, 1, 0, 0), List.of());
     var dom = render(page);
     assertEquals("schubert NK - Logs", dom.title());
-    assertEquals(List.of("q", "log_type", "action", "path", "level", "from", "to"),
+    assertEquals(
+        List.of("q", "log_type", "action", "path", "level", "from", "to"),
         dom.select("form.log-filters input,form.log-filters select").eachAttr("name"));
     for (String name : List.of("q", "log_type", "action", "path", "level", "from", "to")) {
       var control = dom.selectFirst("[name=" + name + "]");
@@ -97,8 +132,10 @@ class LogDisplayContractTest {
     assertTrue(dom.select("#log-errors").hasAttr("hidden"));
     assertEquals("該当するデータはありません", dom.select(".empty-results").text());
     assertEquals(0, dom.select("nav.pagination").size());
-    assertThrows(IllegalArgumentException.class,
-        () -> LogSearchViewModel.success(actor(UserRole.USER), form,
-            new PagedResponseData(1, 100, 0, 1, 0, 0), List.of()));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            LogSearchViewModel.success(
+                actor(UserRole.USER), form, new PagedResponseData(1, 100, 0, 1, 0, 0), List.of()));
   }
 }

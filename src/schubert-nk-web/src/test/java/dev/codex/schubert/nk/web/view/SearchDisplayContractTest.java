@@ -25,8 +25,8 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 /** P016-03/UI222,223/SS313: independent actual template expectations, no MVC/DB/service. */
 class SearchDisplayContractTest {
   private static SessionPrincipal actor() {
-    return new SessionPrincipal("fixture-user", UserRole.USER,
-        AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+    return new SessionPrincipal(
+        "fixture-user", UserRole.USER, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static Document render(ScenarioSearchViewModel page) {
@@ -40,24 +40,46 @@ class SearchDisplayContractTest {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setRequestURI("/search");
-    var exchange = JakartaServletWebApplication.buildApplication(servlet)
-        .buildExchange(request, new MockHttpServletResponse());
-    return Jsoup.parse(engine.process("search", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    return Jsoup.parse(
+        engine.process("search", new WebContext(exchange, Locale.JAPAN, Map.of("page", page))));
   }
 
   @Test
   void invalidValuesAreEscapedAndEverySummaryAnchorResolvesToItsControl() {
     String rawQ = "<script>" + "x".repeat(257);
-    var form = ScenarioSearchForm.bind(Map.of(
-        "q", List.of(rawQ), "game", List.of("<unknown-game>"),
-        "speaker", List.of("<img>&"), "chapter", List.of("章<&>"),
-        "entry_type", List.of("<unknown-type>"), "voice", List.of("<unknown-voice>"),
-        "page", List.of("+1"), "owner", List.of("do-not-reflect")));
+    var form =
+        ScenarioSearchForm.bind(
+            Map.of(
+                "q",
+                List.of(rawQ),
+                "game",
+                List.of("<unknown-game>"),
+                "speaker",
+                List.of("<img>&"),
+                "chapter",
+                List.of("章<&>"),
+                "entry_type",
+                List.of("<unknown-type>"),
+                "voice",
+                List.of("<unknown-voice>"),
+                "page",
+                List.of("+1"),
+                "owner",
+                List.of("do-not-reflect")));
     assertFalse(form.isValid());
     assertThrows(IllegalStateException.class, form::toRequest);
     var dom = render(ScenarioSearchViewModel.invalid(actor(), form));
-    assertEquals(List.of("#search-filters", "#search-q", "#search-game",
-        "#search-entry_type", "#search-voice", "#search-filters"),
+    assertEquals(
+        List.of(
+            "#search-filters",
+            "#search-q",
+            "#search-game",
+            "#search-entry_type",
+            "#search-voice",
+            "#search-filters"),
         dom.select("#search-errors li a").eachAttr("href"));
     for (var anchor : dom.select("#search-errors li a")) {
       assertEquals(1, dom.select(anchor.attr("href")).size());
@@ -77,12 +99,19 @@ class SearchDisplayContractTest {
 
   @Test
   void emptyResultsPreserveInputOrderAndLabelControlAssociation() {
-    var page = ScenarioSearchViewModel.success(actor(), ScenarioSearchForm.bind(Map.of()),
-        List.of(), List.of(), new PagedResponseData(1, 100, 0, 1, 0, 0), List.of());
+    var page =
+        ScenarioSearchViewModel.success(
+            actor(),
+            ScenarioSearchForm.bind(Map.of()),
+            List.of(),
+            List.of(),
+            new PagedResponseData(1, 100, 0, 1, 0, 0),
+            List.of());
     var dom = render(page);
     assertEquals("ja", dom.select("html").attr("lang"));
     assertEquals("schubert NK - 検索", dom.title());
-    assertEquals(List.of("q", "game", "speaker", "chapter", "entry_type", "voice"),
+    assertEquals(
+        List.of("q", "game", "speaker", "chapter", "entry_type", "voice"),
         dom.select("form.filters input,form.filters select").eachAttr("name"));
     for (String name : List.of("q", "game", "speaker", "chapter", "entry_type", "voice")) {
       var control = dom.selectFirst("[name=" + name + "]");

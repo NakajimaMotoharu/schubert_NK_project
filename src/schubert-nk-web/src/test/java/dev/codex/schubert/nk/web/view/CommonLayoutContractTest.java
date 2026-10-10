@@ -31,19 +31,23 @@ class CommonLayoutContractTest {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setRequestURI("/deputy-fixture");
-    var exchange = JakartaServletWebApplication.buildApplication(servlet)
-        .buildExchange(request, new MockHttpServletResponse());
-    return Jsoup.parse(engine.process(template, Set.of(selector),
-        new WebContext(exchange, Locale.JAPAN, values)));
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    return Jsoup.parse(
+        engine.process(template, Set.of(selector), new WebContext(exchange, Locale.JAPAN, values)));
   }
 
   @Test
   void commonTitleHasApprovedNkBrandWithoutDuplicatingExistingBrand() {
-    for (var row : new String[][] {
-        {"Logs", "schubert NK - Logs"}, {"質問要求", "schubert NK - 質問要求"},
-        {"schubert NK - 検索", "schubert NK - 検索"},
-        {"エラー - schubert NK", "エラー - schubert NK"},
-        {"schubert NK", "schubert NK"}}) {
+    for (var row :
+        new String[][] {
+          {"Logs", "schubert NK - Logs"},
+          {"質問要求", "schubert NK - 質問要求"},
+          {"schubert NK - 検索", "schubert NK - 検索"},
+          {"エラー - schubert NK", "エラー - schubert NK"},
+          {"schubert NK", "schubert NK"}
+        }) {
       var dom = render("fragments/layout", "head", Map.of("title", row[0]));
       assertEquals(1, dom.select("title").size());
       assertEquals(row[1], dom.title());
@@ -63,8 +67,13 @@ class CommonLayoutContractTest {
   @Test
   void commonHeaderShowsNkBrandAndEscapedIdentityWithoutChangingNavigation() {
     for (String role : new String[] {"USER", "ADMIN"}) {
-      var dom = render("fragments/layout", "userActions", Map.of("topbar",
-          Map.of("brand", "schubert NK", "username", "利用者<img src=x>", "role", role)));
+      var dom =
+          render(
+              "fragments/layout",
+              "userActions",
+              Map.of(
+                  "topbar",
+                  Map.of("brand", "schubert NK", "username", "利用者<img src=x>", "role", role)));
       assertEquals("schubert NK", dom.select(".site-brand").text());
       assertEquals("利用者<img src=x>", dom.select(".login-user").text());
       assertEquals(role, dom.select(".login-role").text());
@@ -82,26 +91,51 @@ class CommonLayoutContractTest {
     for (String template : new String[] {"fragments/pagination", "fragments/log-pagination"}) {
       String fragment = template.endsWith("log-pagination") ? "logs" : "search";
       for (boolean bottom : new boolean[] {false, true}) {
-        for (var expected : new int[][] {{1,100,201,0,2}, {101,200,201,1,3}, {201,201,201,2,0}}) {
-          var numbers = Map.of("empty", false, "firstResult", expected[0],
-              "lastResult", expected[1], "totalCount", expected[2]);
+        for (var expected :
+            new int[][] {{1, 100, 201, 0, 2}, {101, 200, 201, 1, 3}, {201, 201, 201, 2, 0}}) {
+          var numbers =
+              Map.of(
+                  "empty",
+                  false,
+                  "firstResult",
+                  expected[0],
+                  "lastResult",
+                  expected[1],
+                  "totalCount",
+                  expected[2]);
           var page = new HashMap<String, Object>();
           page.put("results", Optional.of(Map.of("page", numbers)));
-          page.put("previousHref", expected[3] == 0 ? Optional.empty() : Optional.of("?page=" + expected[3]));
-          page.put("nextHref", expected[4] == 0 ? Optional.empty() : Optional.of("?page=" + expected[4]));
+          page.put(
+              "previousHref",
+              expected[3] == 0 ? Optional.empty() : Optional.of("?page=" + expected[3]));
+          page.put(
+              "nextHref",
+              expected[4] == 0 ? Optional.empty() : Optional.of("?page=" + expected[4]));
           var dom = render(template, fragment, Map.of("page", page, "bottom", bottom));
           assertEquals(1, dom.select("nav.pagination").size());
           assertEquals(bottom, dom.select("nav").hasClass("bottom-nav"));
-          assertEquals(expected[0] + " - " + expected[1] + " / 201", dom.select("nav > div").text());
-          assertEquals(1, dom.select("nav > a,nav > span").stream()
-              .filter(node -> node.text().equals("前の100件")).count());
-          assertEquals(1, dom.select("nav > a,nav > span").stream()
-              .filter(node -> node.text().equals("次の100件")).count());
-          assertEquals((expected[3] > 0 ? 1 : 0) + (expected[4] > 0 ? 1 : 0), dom.select("nav > a").size());
+          assertEquals(
+              expected[0] + " - " + expected[1] + " / 201", dom.select("nav > div").text());
+          assertEquals(
+              1,
+              dom.select("nav > a,nav > span").stream()
+                  .filter(node -> node.text().equals("前の100件"))
+                  .count());
+          assertEquals(
+              1,
+              dom.select("nav > a,nav > span").stream()
+                  .filter(node -> node.text().equals("次の100件"))
+                  .count());
+          assertEquals(
+              (expected[3] > 0 ? 1 : 0) + (expected[4] > 0 ? 1 : 0), dom.select("nav > a").size());
         }
-        for (var results : new Optional<?>[] {
-            Optional.empty(), Optional.of(Map.of("page", Map.of("empty", true)))}) {
-          var dom = render(template, fragment, Map.of("page", Map.of("results", results), "bottom", bottom));
+        for (var results :
+            new Optional<?>[] {
+              Optional.empty(), Optional.of(Map.of("page", Map.of("empty", true)))
+            }) {
+          var dom =
+              render(
+                  template, fragment, Map.of("page", Map.of("results", results), "bottom", bottom));
           assertEquals(0, dom.select("nav.pagination").size());
         }
       }

@@ -24,9 +24,23 @@ class NotificationDetailDisplayContractTest {
     values.put("id", 7);
     values.put("receiptId", "01ARZ3NDEKTSV4RRFFQ69G5FAV");
     values.put("state", state);
-    values.put("stateLabel", Map.of("RECEIVED", "受付中", "PROCESSING", "処理中", "COMPLETED", "処理完了", "ERROR", "エラー", "CANCELLED", "取消済み").get(state));
+    values.put(
+        "stateLabel",
+        Map.of(
+                "RECEIVED",
+                "受付中",
+                "PROCESSING",
+                "処理中",
+                "COMPLETED",
+                "処理完了",
+                "ERROR",
+                "エラー",
+                "CANCELLED",
+                "取消済み")
+            .get(state));
     values.put("submittedAt", "2026-10-11 08:00:00");
-    for (String name : List.of("startedAt", "completedAt", "errorAt", "cancelledAt")) values.put(name, "");
+    for (String name : List.of("startedAt", "completedAt", "errorAt", "cancelledAt"))
+      values.put(name, "");
     values.put("deleted", deleted);
     values.put("question", " 質問<img> & 本文");
     values.put("answerAvailable", state.equals("COMPLETED") && !deleted);
@@ -34,9 +48,25 @@ class NotificationDetailDisplayContractTest {
     values.put("questionHref", "/questions/9");
     values.put("errorCode", "E-SYNTHETIC");
     values.put("userFacingError", "現在処理できません。");
-    var page = Map.of("topBar", Map.of("brand", "schubert NK", "username", "fixture-user", "role", "USER"), "values", values);
+    var page =
+        Map.of(
+            "topBar",
+            Map.of("brand", "schubert NK", "username", "fixture-user", "role", "USER"),
+            "values",
+            values);
     // Stale action is intentional: the display layer must still respect the closed state.
-    var action = Map.of("fields", Map.of("id", 7, "operation_token", "12345678-1234-4234-8234-123456789abc", "confirm", false), "issues", issues);
+    var action =
+        Map.of(
+            "fields",
+            Map.of(
+                "id",
+                7,
+                "operation_token",
+                "12345678-1234-4234-8234-123456789abc",
+                "confirm",
+                false),
+            "issues",
+            issues);
     var resolver = new FileTemplateResolver();
     resolver.setPrefix("src/schubert-nk-web/src/main/resources/templates/");
     resolver.setSuffix(".html");
@@ -47,9 +77,24 @@ class NotificationDetailDisplayContractTest {
     var servlet = new MockServletContext();
     var request = new MockHttpServletRequest(servlet);
     request.setRequestURI("/notifications/7");
-    var exchange = JakartaServletWebApplication.buildApplication(servlet).buildExchange(request, new MockHttpServletResponse());
-    return Jsoup.parse(engine.process("notifications/detail", new WebContext(exchange, Locale.JAPAN,
-        Map.of("page", page, "action", action, "notice", "", "_csrf", Map.of("parameterName", "_csrf", "token", "public-csrf-fixture")))));
+    var exchange =
+        JakartaServletWebApplication.buildApplication(servlet)
+            .buildExchange(request, new MockHttpServletResponse());
+    return Jsoup.parse(
+        engine.process(
+            "notifications/detail",
+            new WebContext(
+                exchange,
+                Locale.JAPAN,
+                Map.of(
+                    "page",
+                    page,
+                    "action",
+                    action,
+                    "notice",
+                    "",
+                    "_csrf",
+                    Map.of("parameterName", "_csrf", "token", "public-csrf-fixture")))));
   }
 
   @Test
@@ -71,7 +116,8 @@ class NotificationDetailDisplayContractTest {
     assertEquals(1, dom.select("#notification-cancel-confirm[name=confirm][required]").size());
     assertTrue(dom.select("label[for=notification-cancel-confirm]").text().contains("必須"));
     assertEquals(2, dom.select(".operation-errors a").size());
-    for (var anchor : dom.select(".operation-errors a")) assertEquals(1, dom.select(anchor.attr("href")).size());
+    for (var anchor : dom.select(".operation-errors a"))
+      assertEquals(1, dom.select(anchor.attr("href")).size());
     assertEquals("/notifications/7", dom.select("#notification-cancel-form").attr("action"));
     assertEquals("post", dom.select("#notification-cancel-form").attr("method"));
     assertEquals(1, dom.select("#notification-cancel-form input[name=_csrf][type=hidden]").size());
@@ -82,6 +128,7 @@ class NotificationDetailDisplayContractTest {
   void deletedCompletedNoticeHidesBodiesAndAnswerNavigation() {
     var dom = render("COMPLETED", true, Map.of());
     assertEquals("質問・回答は削除済みです。", dom.select(".deleted").text());
-    assertEquals(0, dom.select(".question-body,.answer-body,.question-detail,form.cancel-form").size());
+    assertEquals(
+        0, dom.select(".question-body,.answer-body,.question-detail,form.cancel-form").size());
   }
 }
