@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC245（2026-10-10、BUG1017/YKT786、今回fixed1037のみ）：SSC244 noDB/child0を今回RODB+唯一子へ無条件流用しない。元source776/f08/frozen1038・Java5463/1373880/argvfcb09442…と唯一Refs子5489を、同bootcbca/current40ef-PG932/実exe・全task子集合・PPID・全authority/cgroup・全FD/inode・child payload hashで二読固定する。旧SQL42601/UNKNOWNの元receipt・完成原本を保持、future SQL空白修正で旧工具を再成功化しない。
+
+新observerは既連続admin dispatch禁止/抑止timer-pathを全区間維持し、十Ref・全189signedfile/祖先/pin/signature/approval・oldtool凍結payload・原値FDを保持する。全DB clientを列挙し、観測自身以外は同source親の唯一backend/role/application/database/backend_start/xact_start・same advisory/実heartbeat queryだけを許容する。SSC238の同Connection実readOnly/onを確認する認証済pulseと、その喪失を示さない保持log・現在server peerを合わせ、60s idle期限を解除せず、別backend/role/query/失効・DB変更を拒否する。元childが既UNKNOWNでも権限を拡張せず、scope内の既signed/metadata/全24-594/原本59/Backup47/credential19/旧proof28/十coldfull32/kernel0を独立二読する。
+
+親子両方のgenerationへ先にpidfdを束縛し、各actorのO_EXCL/NOFOLLOW一回予約をfile+directory fsyncで耐久化する。親送信前に全tree/peer/原値を再読しordinary TERM一回→親pidfd終端と実PID/旧DB backend/advisory/M-A消失・全原値不変を確認する。次に元の同世代子だけを、同argv/UID-GID/caps/cgroup/全FD・保持Ref/原値・旧親不在/PPID1へ限定して再認証し、子の予約後も再読してordinary TERM一回を送る。SIGKILL/名前検索kill/別actor/再送/server pg_terminate_backend/旧helper hotpatchを禁止する。予約・送信・wait・pidfd-close/Ref-FD不明又は片側終了なら新observerのRef/FD内で隔離を保持し、続きを自動再発行しない。
+
+両実PID/全旧client-advisory/両M-Aflock/旧Ref接続・保持FDの消失と全原値/十Unit宣言・kernel/抑止の独立二読、newobserver全Ref-bus-FD正常close後の資源0を別証拠で閉じる。旧parentのactualexitはhostexec30116から別採取し、子exitは取得不能ならunknownと記録する。旧JDBC rollback/closeや旧Ref Unrefを正常と認定せず、旧失敗143/UNKNOWNを保持する。限定tree退役はcold準備/Root/PGPT完了ではない。原本/DBrow/epoch/config/mount/runtimeを変更せず、全後条件後だけ別fresh new-only準備scopeへ進む。業務親1800秒・既Unit期限・RD/UI/DIF・coverage条件は不変更。
+
 SSC244（2026-10-10、BUG1009/YKT778）：coldのhostRO前は固定pinで署名原byte・source/BOM/approval/187artifactのmetadata/hash・旧原値を二読して真正性を認証する。これはimmutable payload/起動admissionではない。ReleasePayloadVerificationのreadOnlyFilesystemを満たすfull verifierは、正規M/A/専用RODB・実pulse/tenRef/heldFD内の必要hostRO設定後だけ実行する。warm用verifyCandidateをRO前に呼び、UNKNOWNを正常化することを禁止する。readonly前段はbyte認証と所有readbackのみで、epoch/namespace/mount/DBrow/業務Unitを変更しない。
 
 今回固定PG1023失敗工具（source5a8aacfc8、frozen0dd14dce…、current40ef/PG932/BOMb75e/bootcbca、SIGNED_CURRENTのIO・RODB/tenRef/原本Session前、M/A-only、complete無し）だけのnew-only fixedhandoffを設ける。別のRoot/旧tool/actorへ拡張しない。新read-only observerのtenRef内で、当Java argv/UID-GID/boot/startticks/実exe・全凍結payloadを二読し、唯一のactor・child0・DBclient/advisory0・両M/Aflock同actorと型/metadata・全十cold/full32/kernel空・全24-594/原本59/Backup47/credential19/旧proof28/署名187不変更を確認する。同世代pidfdへ束縛してordinary TERMを一回だけ送り、SIGKILL/再送/forceはしない。timeout/変異/閉鎖不明は隔離維持。
