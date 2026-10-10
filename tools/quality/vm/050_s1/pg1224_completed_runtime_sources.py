@@ -63,7 +63,8 @@ ACTION=r'''
     for part in ['run','systemd','system','schubert-nk-morning-controller.service.d']:
      child=os.open(part,flags,dir_fd=fd);fds.append(child)
      st=os.fstat(child);require(st.st_uid==st.st_gid==0 and stat.S_ISDIR(st.st_mode)and not st.st_mode&0o022 and not os.listxattr(child));fd=child
-    retirement.retire_entry(fd,first['runtime'][retirement.ROOT]['metadata'],first['unitFilesActual'][retirement.TARGET])
+    entry=first['runtime'][retirement.TARGET]
+    retirement.retire_entry(fd,first['runtime'][retirement.ROOT]['metadata'],entry['metadata']+[entry['sha256']])
     for index,part in enumerate(['run','systemd','system','schubert-nk-morning-controller.service.d'],1):
      s=os.stat(part,dir_fd=fds[index-1],follow_symlinks=False);t=os.fstat(fds[index]);require((s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_gid)==(t.st_dev,t.st_ino,t.st_mode,t.st_uid,t.st_gid))
    finally:

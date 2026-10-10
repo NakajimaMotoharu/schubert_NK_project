@@ -52,6 +52,16 @@ class RuntimeContractTest(unittest.TestCase):
             with self.assertRaises(ValueError):p.same_except_runtime(b,n,parse)
         print('PG1223_LITERAL_ORACLE negativeCases='+str(checks)+' productionExpected0=true')
 
+    def test_actual_disjoint_runtime_and_unit_file_scopes(self):
+        b,a=fixture();b['unitFilesActual'].pop(p.TARGET)
+        self.assertTrue(p.same_except_runtime(b,a,parse))
+        for field in ['unitFilesActual','runtime']:
+            n=copy.deepcopy(a);n[field]['foreign']=None
+            with self.assertRaises(ValueError):p.same_except_runtime(b,n,parse)
+        for field in ['metadata','sha256']:
+            n=copy.deepcopy(b);n['runtime'][p.TARGET][field]=[0]*9 if field=='metadata'else'foreign'
+            with self.assertRaises(ValueError):p.same_except_runtime(n,a,parse)
+
     def exercise(self,fault=0,foreign=False,symlink=False):
         events=[];opened=set();native=p.metadata
         class Ops:

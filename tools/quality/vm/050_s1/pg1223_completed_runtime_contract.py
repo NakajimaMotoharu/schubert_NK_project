@@ -24,11 +24,11 @@ def same_except_runtime(before,after,parse):
     require(set(before)>={'configuration','runtime','unitFilesActual','units','rows','startup','originals','backup','extraDurable','pid1'})
     for k in before.keys()-{'configuration','runtime','unitFilesActual'}:require(before[k]==after[k])
     old_files=before['unitFilesActual'];new_files=after['unitFilesActual']
-    require(type(old_files)is dict and TARGET in old_files and new_files=={k:v for k,v in old_files.items()if k!=TARGET})
+    require(type(old_files)is dict and new_files=={k:v for k,v in old_files.items()if k!=TARGET})
     old_tree=before['runtime'];new_tree=after['runtime']
     require(type(old_tree)is dict and set(new_tree)==set(old_tree)-{TARGET}and ROOT in new_tree)
     item=old_tree[TARGET];require(item['sha256']==SHA and item['metadata'][2:7]==[0,0,stat.S_IFREG|0o644,1,647])
-    require(old_files[TARGET]==item['metadata']+[item['sha256']])
+    if TARGET in old_files:require(old_files[TARGET]==item['metadata']+[item['sha256']])
     for path,v in new_tree.items():
         if path!=ROOT:require(v==old_tree[path])
         else:
