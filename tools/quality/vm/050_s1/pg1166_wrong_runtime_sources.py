@@ -20,11 +20,7 @@ JAVA=r'''refs.check("terminal");phase="FIXED_WRONG_RUNTIME_RETIREMENT";
       byte[] expected=Files.readAllBytes(SAVE.resolve("runtime-before.private"));
       require(expected.length==647);
       try(var runtime=OwnedTransferDirectory.open(LinuxDirectoryCalls.create(),Path.of("/run/systemd/system/schubert-nk-morning-controller.service.d"))){
-        runtime.atExistingEntryHandle("pg1160-once-resume.conf",held->{
-          var m=Files.readAttributes(held,"unix:uid,gid,mode,nlink,size");
-          require(m.equals(Map.of("uid",0,"gid",0,"mode",0100644,"nlink",1,"size",647L)) && Arrays.equals(expected,Files.readAllBytes(held)));
-          refs.check("before");runtime.unlinkEntry("pg1160-once-resume.conf");runtime.sync();return Boolean.TRUE;
-        });
+        dev.codex.schubert.nk.batch.file.Pg1166WrongRuntimeEntry.retire(runtime,expected,()->refs.check("before"));
       }
       require(!Files.exists(Path.of("/run/systemd/system/schubert-nk-morning-controller.service.d/pg1160-once-resume.conf"),LinkOption.NOFOLLOW_LINKS));
       Pg425KnownApiRecovery.command(new byte[0],"/usr/bin/systemctl","daemon-reload");refs.check("removed");'''
@@ -74,4 +70,9 @@ def require_runtime_tree():
 '''
 
 
-def files():return {'Pg1166WrongRuntimeRetirement.java':java(),'pg1166_wrong_runtime_refs.py':refs()}
+def files():
+    from pathlib import Path
+    root=Path(__file__).resolve().parent
+    return {'Pg1166WrongRuntimeRetirement.java':java(),'pg1166_wrong_runtime_refs.py':refs(),
+            'Pg1166WrongRuntimeEntry.java':(root/'Pg1166WrongRuntimeEntry.java').read_text(),
+            'Pg1166WrongRuntimeEntryTest.java':(root/'Pg1166WrongRuntimeEntryTest.java').read_text()}
