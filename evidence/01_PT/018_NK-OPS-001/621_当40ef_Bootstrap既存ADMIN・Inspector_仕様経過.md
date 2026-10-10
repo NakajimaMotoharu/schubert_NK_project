@@ -1,5 +1,7 @@
 # 621 当40ef：Bootstrap既存ADMIN・Inspector実native（未実行）
 
+09:10更新（修正前BUG1000/YKT769）：PG978v1 actual1/3.037284s、全24/full32/所有読取後のfixture604を拒否、起動/DBwrite/credential作成0。後述20記録は誤算であり期待値として使用しない。SS341/331の一回分Backup二step＋Cleanup八step＝10記録で584→594、Root原本/Expiry専用auditは別記録先。独立sealed954584/960594/963594・ADMIN一件同roleをreadonly確認、DBを604へ合わせない。新981/v2で594と全旧strict gateを固定、982独立二caseへ誤604拒否/新slot/全24・ADMIN/credential無しを保存し、旧v1は失敗保持。後続Bootstrap/Inspectorも新current594/fullbeforeへ束縛、旧894584を改変しない。
+
 Program NK-OPS-001/BootstrapProcessMain/InspectorApplication、RD OPS009/TST004・UI251・SS341/343/354/451、現source40ef/PG932/frozen9263560PT・523suite/当native972-v2八streamに限定。620真正親・owned全停止を前提に、旧e016903/907の成功・streamを流用しない。
 
 PT-DEP-978001：968固定全after/proof/toolhashと現署名BOM/source/full24/full32/十Unit/kernel/actor/advisory/flock/原本Backup/credentials/全namespace/nativeをfresh二読。独立期待値は全物理after-image保持、当eeae一回Morningでbatch_rows584→604（Root＋Backup＋Cleanup＋Expiryの20記録）、app_users一件ADMIN、bootstrap-admin-username/password実体無し。新user/password/permit生成0・DBwrite/unitstart0。979一literal生成試験0はVM検証の代用ではない。
