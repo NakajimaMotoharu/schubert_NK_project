@@ -1,5 +1,9 @@
 # 621 当40ef：Bootstrap既存ADMIN・Inspector実native（未実行）
 
+09:15更新：新before981-v2 actual0/3.279344s、be3ea723300b870ed2dce9477a5666bd9b59d7cc5fe7fc682e1cbbd26afec0cd、全24-594/full32/tenkernel-actor-clientDB-advisory-flock0/187署名・元原本Backup/ADMIN一件/no credential入力を再確認。共通978/979のfixtureも594へ修正（旧v1artifact/commitは保全、再実行しない）、981-v2はnewslotだけ追加。983新profileはsource40ef/PG932/eeae/091663ce/0bb4/PID1Job213904/START201380374989/DONE202927375873と実963 immutable receiptへ固定、旧helper ABIのコードだけを使用し旧native/proof合算0。
+
+979/982/984/987の四subject七工具caseを988へ独立再保存。初回TDD F1三種（982metadataをwrapperへ要求・984不在method名・987不在uppercase）を不合格として残す。初回982 F1後readonly-v2が実行されたが、VM mutation無し、fixture是正・最終全七成功まで受入しない。現段階はbefore/profileのみ、Bootstrap Unitstart/verify/execute/native未実行。次clean985 fullABI/Werror/Javaoracle→独立postを当sourceへ組立ててから986新stage/verify/execute一回→全post/nativeへ。
+
 09:10更新（修正前BUG1000/YKT769）：PG978v1 actual1/3.037284s、全24/full32/所有読取後のfixture604を拒否、起動/DBwrite/credential作成0。後述20記録は誤算であり期待値として使用しない。SS341/331の一回分Backup二step＋Cleanup八step＝10記録で584→594、Root原本/Expiry専用auditは別記録先。独立sealed954584/960594/963594・ADMIN一件同roleをreadonly確認、DBを604へ合わせない。新981/v2で594と全旧strict gateを固定、982独立二caseへ誤604拒否/新slot/全24・ADMIN/credential無しを保存し、旧v1は失敗保持。後続Bootstrap/Inspectorも新current594/fullbeforeへ束縛、旧894584を改変しない。
 
 Program NK-OPS-001/BootstrapProcessMain/InspectorApplication、RD OPS009/TST004・UI251・SS341/343/354/451、現source40ef/PG932/frozen9263560PT・523suite/当native972-v2八streamに限定。620真正親・owned全停止を前提に、旧e016903/907の成功・streamを流用しない。
