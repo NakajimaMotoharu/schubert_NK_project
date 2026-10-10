@@ -192,7 +192,7 @@ public final class Pg1306TransitionTest{
   reject(expected,new MaintenanceCompletion(foreign,END,MaintenanceCompletion.Outcome.SUCCESS));
   reject(expected,new MaintenanceCompletion(ACTIVATION,END.minusNanos(1000),MaintenanceCompletion.Outcome.SUCCESS));
   reject(expected,new MaintenanceCompletion(ACTIVATION,END.plusNanos(1000),MaintenanceCompletion.Outcome.SUCCESS));
-  reject(expected,new MaintenanceCompletion(ACTIVATION,END,MaintenanceCompletion.Outcome.FAILED));
+  reject(expected,new MaintenanceCompletion(new MaintenanceActivation(new BatchRun(RUN,CUT),OTHER),END,MaintenanceCompletion.Outcome.SUCCESS));
   reject(expected,new MaintenanceCompletion(ACTIVATION,END,MaintenanceCompletion.Outcome.WARNING));
   Pg1306OrdinaryPublication.invalidExpected=null;
   if(checks!=14)throw new AssertionError("independent transition count");
