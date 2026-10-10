@@ -1,0 +1,96 @@
+{
+  "wbs": "WBS-P016-18",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "ffcdcf5eb",
+  "changeCommitReference": "../commit-index.json maps the artifact commit after commit",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "sha256": "92e833f3bc5959a858fdf45ac932690a5a1114fdadb6d4ada0652dbe1a85eebb",
+      "owner": "WBS-P016-18"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionInputDisplayContractTest.java",
+      "sha256": "63a7ccfc261953e269fb12060ca708843bac8a9f8cf6861d1e94307690d245f2"
+    }
+  ],
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "beginJST": "2026-10-11T08:23:54.050645+09:00",
+  "endJST": "2026-10-11T08:24:45.504927+09:00",
+  "wallElapsedSeconds": 51.454282,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "userRevisedRemainingEstimatePp": 1.25,
+  "groupStartEstimateD": 3.25,
+  "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25",
+  "revisedResidualPredictionPp": null,
+  "residualReason": "Formal dependency/source/integration quality unverified; no guessed cost split",
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:24:44 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:24:45 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 25,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "sharedQuotaIsNotLeafActualCost": true,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "moduleQualityPassed": false,
+  "wholeLeafAccepted": false,
+  "criteriaSatisfied": [
+    "Question visible required label and native required association",
+    "Question text escaped, leading space retained, NFC, 4096 normal and 4097 error with full redisplay",
+    "Missing/unknown fields fixed error display and no raw reflection; explicit POST, hidden operation token, external script entry"
+  ],
+  "criteriaUnmet": [
+    "Real controller/CSRF/session/API/JMS/acceptance/post effects",
+    "Whole Java class/module static/coverage; actual browser visual"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "INITIAL_REPRODUCTION_AND_MEASUREMENT_ERROR",
+      "exit": 1,
+      "tests": 3,
+      "passed": 1,
+      "failed": 2,
+      "reason": "required indicator missing; Jsoup.val trims observed textarea leading space"
+    },
+    {
+      "attempt": 2,
+      "kind": "CORRECTED_PRE_FIX_REPRODUCTION",
+      "exit": 1,
+      "tests": 3,
+      "passed": 2,
+      "failed": 1,
+      "reason": "wholeText raw observation used; expectation unchanged; required indicator still absent"
+    },
+    {
+      "attempt": 3,
+      "kind": "POST_FIX_LIMITED",
+      "exit": 0,
+      "tests": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    }
+  ],
+  "coverage": null,
+  "changeReason": "UI222 visible required label missing, WD-BUG-005; no body/token/JS gate change",
+  "lastCheckpoint": "P016-18-metrics.json"
+}

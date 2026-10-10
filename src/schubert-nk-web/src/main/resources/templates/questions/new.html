@@ -10,7 +10,7 @@
   </div>
   <form class="question-input" method="post" th:action="@{/questions/new}">
     <input type="hidden" name="operation_token" th:value="${page.values.operationToken}">
-    <label for="question">質問</label><textarea id="question" name="question" rows="6" required th:text="${page.values.question}"></textarea>
+    <label for="question">質問 <span class="required-label">必須</span></label><textarea id="question" name="question" rows="6" required th:text="${page.values.question}"></textarea>
     <p>残り <span data-question-remaining>4096</span> byte</p>
     <p class="field-error" th:if="${page.issues.containsKey('question')}" th:text="${page.issues.question}"></p>
     <button type="submit">送信</button>

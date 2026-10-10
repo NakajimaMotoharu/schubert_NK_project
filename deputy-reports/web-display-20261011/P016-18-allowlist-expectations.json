@@ -1,0 +1,40 @@
+{
+  "wbs": "WBS-P016-18",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "ffcdcf5eb",
+  "beginJST": "2026-10-11T08:23:54.050645+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+      "owner": "WBS-P016-18"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionInputDisplayContractTest.java"
+  ],
+  "executionSafety": "Actual Thymeleaf template render only; pure QuestionSubmitForm and request-only QuestionSubmitViewModel.redisplay. Immutable synthetic principal, never real login/session/token registry. No controller/security chain/service/DB/JMS/context/network. Single Java process/private pinned jars/source compilation.",
+  "expectations": {
+    "source": "UI222§5/9,UI224§2,SS313§5.2/7/10",
+    "label": "質問 and visible 必須, for question",
+    "textarea": {
+      "id": "question",
+      "required": true,
+      "rows": "6",
+      "name": "question"
+    },
+    "body": "NFC without trim; HTML escaped; 4096 limit and 4097 unchanged redisplay rejected",
+    "unknownMissing": "fixed field/form error, unknown values not reflected",
+    "submit": "POST /questions/new, explicit button; JS defer entry one",
+    "token": "request-only hidden field; no data attributes/visible value; synthetic fixture only"
+  },
+  "originalEstimate": null,
+  "userRevisedRemainingPp": 1.25,
+  "groupStartD": 3.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "formalAccepted": false
+}
