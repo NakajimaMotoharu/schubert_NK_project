@@ -1,5 +1,7 @@
 # 621 当40ef：Bootstrap既存ADMIN・Inspector実native（未実行）
 
+09:21更新：986stage actual0/00:19:24Zを保持。verify初回はhost guardが旧stage-v1を読みFileNotFound、guest/所有scope/Unit/fixture未発行（BUG1001/YKT770修正前起票）。Source main/frozen983/profile/private正常stageを変更せず、host read guardを実stage-v3へ訂正・987三phase生成/消費caseへ追加、既stage反復0。後続実verify/execute/post/nativeの成功を待ち、host拒否をUnit失敗に読み替えない。
+
 09:19内部補足：旧profileの「normal20」は20試験／20条件ではなく、SS343の既存ADMINを検出したUnit正常終了コード20。PG985 actualABI/Werror/独立Javaoracle0、operator8b0942f4c・newprofile983/frozen-v3/source40ef。新post989は真正captured終了20・PID1/30秒→同generation又は承認済みGC現在値を全tenLoad/Ref内で照合し、元成功をGCから推定しない。990独立生成一case0、実Unit未起動。
 
 既存ADMINが業務用user/passwordを追加しない契約を検証する。UnitのLoadCredential成立に必要な二個の明示synthetic test fixtureのみを正規profileでprivateに生成・Unit停止後NOREPLACE退役する（旧894/SS343既承認手順）。業務credential作成/変更は0、既存credentials全byteを保全、raw値をGit/通常logへ出さない。「credential作成0」はここまでのbefore操作に限る。全24不変・existingADMIN・二新dump同一process・全資源帰還を独立postで確認するまで受入しない。
