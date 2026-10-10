@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC254（2026-10-10）：cold後のNAMESPACE226は全effective native/RW宣言と実directoryのjoinで原因を確定する。ordinary-api193/root-api193等の欠落とcoverage親711を、旧六role成功から正常補完しない。343同項の既SSC193195準拠0755親/固定四role0700を、当live親の元期限終端・当cohort限定回収/全post後の別fresh管理scopeでのみ有限整備する。原本/DB/Backup/署名/source/既execを保全、unknown/半完了は隔離、途中mkdir/再start/期限延長/旧permit再利用0。全role独立fixtureと実再試験/native/正式品質は未完を維持する。
+
 SSC253（2026-10-10）：SSC252のprivate一件仮定を343同項の既知3dir完全閉集合/実stage/source/Rootmode証明へ修正し、固定位置+3だけ許す。新scope9field・原値/専用namespace/署名品質は不変更。起動前readonly134103だけfixed pidfd耐久TERM一回/全postで回収、旧actual別保存。live1112観測を維持し第3watch stage0、別nestedonceでRoot一回/元30分へ進む。
 
 SSC252（2026-10-10）：BUG1026のRoot起動前工具20312だけを343同項のfixed/read-only/guard無し/全原値・privateBus・pidfd耐久TERM一回で回収し、旧不合格を正常化0。crossscope共有祖先の限定効果は位置/型/identity/security/全artifact原値と新scope9fieldを維持して分離する。次nestedonce/新watch/current1068/noargs/元30分/一回予約から進む。旧watch期限をRootbudgetへ転用・延長せず、同start/oldresume再発行0。
