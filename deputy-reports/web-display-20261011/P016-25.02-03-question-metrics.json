@@ -1,0 +1,137 @@
+{
+  "wbs": [
+    "WBS-P016-25.02",
+    "WBS-P016-25.03"
+  ],
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "changeCommit": "commit recorded by external commit-index.json after this report",
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "sourceFiles": [
+    {
+      "path": "src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs",
+      "sha256": "869254f2f9b7b1a31d938d8f8537836a5b28f8813be99aaa60cbf4e5e7426f95"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+      "sha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa"
+    }
+  ],
+  "originalEstimate": {
+    "P016-25.02": 1.25,
+    "P016-25.03": 1.25
+  },
+  "revisedRemainingEstimate": {
+    "P016-25.02": 3.25,
+    "P016-25.03": 4.75
+  },
+  "groupStartEstimate": {
+    "A": 9.0,
+    "unit": "weekly_quota_percentage_points",
+    "versionHash": "c5f9d74e2c72e9dc8ab2dbc86725ed178a8b7c1d030cd0f1603b9f2d44c1cca9",
+    "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25"
+  },
+  "phases": [
+    {
+      "wbs": "WBS-P016-25.02",
+      "completed": "independent button expectation/DOM fixture, pre-fix failure",
+      "notAccepted": "whole .02 including form/view/unknown server criteria and final same-source dependency"
+    },
+    {
+      "wbs": "WBS-P016-25.03",
+      "completed": "question JS correction and limited V8 100%",
+      "notAccepted": "unchanged two JS same-source formal measurement and P015-02 acceptance"
+    }
+  ],
+  "residualPredictionPp": null,
+  "changeReason": "approved UI222 section8 disabled display missing in existing source; local pre-fix issue WD-BUG-001",
+  "criteria": [
+    {
+      "id": "PT-WD-QST-DIS001",
+      "actual": "PT-QST-JS001-H valid submit disables button",
+      "status": "PASS"
+    },
+    {
+      "id": "PT-WD-QST-DIS002",
+      "actual": "PT-QST-JS001-H initially invalid submit leaves button enabled",
+      "status": "PASS"
+    },
+    {
+      "id": "PT-WD-QST-DIS003",
+      "actual": "PT-QST-JS001-H corrected input without input event is freshly validated and disables on explicit submit",
+      "status": "PASS"
+    },
+    {
+      "id": "PT-QST-JS001-B",
+      "actual": "missing question/remaining/button fixed structure exception",
+      "status": "PASS"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "trigger": "new independent specification assertion, existing Production pre-fix",
+      "command": "node-v24.19.0 --test --test-reporter=tap src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs",
+      "exit": 1,
+      "tests": 8,
+      "pass": 6,
+      "fail": 2,
+      "skipped": 0,
+      "todo": 0,
+      "result": "EXPECTED_REPRODUCTION_NOT_PASS"
+    },
+    {
+      "attempt": 2,
+      "trigger": "Production correction for WD-BUG-001",
+      "command": "node-v24.19.0 --check question-input-validation.js; node-v24.19.0 --test --experimental-test-coverage --test-reporter=tap --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100 --test-coverage-include=<absolute Production script> question-input-validation.test.cjs",
+      "syntaxExit": 0,
+      "exit": 0,
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "todo": 0,
+      "coverage": {
+        "scope": "question-input-validation.js only",
+        "linePercent": 100,
+        "functionPercent": 100,
+        "branchPercent": 100,
+        "productionFiles": 1,
+        "exclusions": 0,
+        "class": "0/0 no class defined"
+      }
+    }
+  ],
+  "beginJST": "2026-10-11T08:11:34.008812+09:00",
+  "endJST": "2026-10-11T08:12:54.131218+09:00",
+  "wallElapsedSeconds": 80.122406,
+  "externalJobWaitSeconds": 0,
+  "quotaBefore": {
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056,
+    "usedPercent": 24,
+    "remainingPercent": 76
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:12:06 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:12:07 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    },
+    "secondary": null
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "formalAccepted": false,
+  "moduleQualityPassed": false,
+  "wholeLeafCompleted": false,
+  "lastCheckpoint": "P016-25.02-03-question-results.md"
+}

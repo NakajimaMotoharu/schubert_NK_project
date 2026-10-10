@@ -1,0 +1,41 @@
+{
+  "unit": "P016-25.02/.03 question script submit display",
+  "beginJST": "2026-10-11T08:11:34.008812+09:00",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+      "owner": "WBS-P016-25"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs"
+  ],
+  "reportsOnly": "deputy-reports/web-display-20261011",
+  "executionSafety": "Node built-in test/assert/fs/path/vm only; local source-read and DOM double; no network/DB/JMS/service/shared output; single test job; no JUnit launcher changes",
+  "toolchain": {
+    "nodeVersion": "v24.19.0",
+    "nodeSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+  },
+  "quotaAtBegin": {
+    "limitId": "codex",
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056,
+    "usedPercent": 24,
+    "remainingPercent": 76
+  },
+  "estimates": {
+    "original484Base": {
+      "P016-25.02": 1.25,
+      "P016-25.03": 1.25
+    },
+    "userRevisedRemaining": {
+      "P016-25.02": 3.25,
+      "P016-25.03": 4.75
+    },
+    "groupStartA": 9.0
+  },
+  "outsideScope": [
+    "controller/security/session/wire/DB/VM/formal ledgers/pom/runtime"
+  ]
+}

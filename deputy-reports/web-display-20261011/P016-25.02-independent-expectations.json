@@ -1,0 +1,99 @@
+{
+  "wbs": "WBS-P016-25.02",
+  "status": "SPECIFICATION_EXPECTATIONS_DRAFT_ONLY",
+  "reservationConfirmed": false,
+  "authority": [
+    "UI222§5/8",
+    "UI224§2",
+    "SS313§5.2/10"
+  ],
+  "existingCoveredCases": [
+    "PT-SCR025-A..H",
+    "PT-SCR092-A..H",
+    "PT-QST-JS001-A..H"
+  ],
+  "newCandidateCases": [
+    {
+      "id": "PT-WD-QST-DIS001",
+      "reason": "UI222§8 says operation POST button is disabled after press; existing question JS tests have no button state assertions",
+      "fixture": {
+        "question": "質問",
+        "submitButton": {
+          "type": "submit",
+          "disabled": false
+        }
+      },
+      "operation": "valid submit event",
+      "expected": {
+        "customValidity": "",
+        "remainingText": "4090",
+        "preventDefault": 0,
+        "reportValidity": 0,
+        "submitButtonDisabled": true,
+        "rawQuestionUnchanged": "質問",
+        "automaticResubmit": 0
+      }
+    },
+    {
+      "id": "PT-WD-QST-DIS002",
+      "fixture": {
+        "question": "",
+        "submitButton": {
+          "type": "submit",
+          "disabled": false
+        }
+      },
+      "operation": "invalid submit event",
+      "expected": {
+        "customValidity": "入力項目を確認してください。",
+        "remainingText": "4096",
+        "preventDefault": 1,
+        "reportValidity": 1,
+        "submitButtonDisabled": false,
+        "automaticResubmit": 0
+      }
+    },
+    {
+      "id": "PT-WD-QST-DIS003",
+      "fixture": {
+        "question": "x ",
+        "submitButton": {
+          "type": "submit",
+          "disabled": false
+        }
+      },
+      "operation": [
+        "invalid submit",
+        "set question to x without input event",
+        "explicit valid submit"
+      ],
+      "expected": {
+        "preventDefaultTotal": 1,
+        "reportValidityTotal": 1,
+        "remainingText": "4095",
+        "rawQuestionUnchanged": "x",
+        "submitButtonDisabled": true,
+        "automaticResubmit": 0
+      }
+    }
+  ],
+  "notApplicable": [
+    {
+      "condition": "raw HTMLInputElement.value null",
+      "reason": "Native textarea.value is always a string; absent node covered by existing structure cases. Artificial null property is not a browser input contract."
+    },
+    {
+      "condition": "unknown enum rejection in JS",
+      "reason": "No enum on question input. Search/Log enums handled by pure Forms/typed binding; no new JS duplication."
+    },
+    {
+      "condition": "DB/JMS/network/parallel transaction/replay",
+      "reason": "Script uses local DOM only. Operation token ownership and replay belong to controller/security/session/API and remain primary scope."
+    }
+  ],
+  "unresolved": [
+    "Whether existing source has another client handler satisfying disabled display must be checked before making changes",
+    "Reservation/base/source must be primary-confirmed",
+    "P015-02/formal acceptance remain open"
+  ]
+}
