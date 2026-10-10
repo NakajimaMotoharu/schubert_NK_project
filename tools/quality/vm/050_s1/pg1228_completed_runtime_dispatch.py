@@ -8,7 +8,7 @@ def source():
     s=s.replace("(['stage'],['stop'])","(['stage'],['retire'])")
     s=s.replace('stage or stop required','stage or retire required')
     s=s.replace("'pg1217-frozen-v1.safe.json'","'pg1226-frozen-v1.safe.json'").replace("frozen['genuineParentBeforeSha256']","frozen['completedBeforeSha256']")
-    s=s.replace("'pg1219-current-full32-preflight-v1.safe.json'","'pg1227-runtime-schema-preflight-v1.safe.json'").replace("pre['fullCurrentBeforeIdentical']","pre['actualDisjointScopeOracle']")
+    s=s.replace("'pg1219-current-full32-preflight-v1.safe.json'","'pg1229-runtime-schema-preflight-v2.safe.json'").replace("pre['fullCurrentBeforeIdentical']","pre['actualDisjointScopeOracle'] and pre['run']=='PG1229-runtime-schema-preflight-v2' and pre['productionSource']==SOURCE")
     s=s.replace("'Pg1224NativeStop stop'","'Pg1224NativeStop retire'")
     compile(s,'<current runtime new-only dispatch>','exec');return s
 

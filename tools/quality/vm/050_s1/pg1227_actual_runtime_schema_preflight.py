@@ -5,7 +5,7 @@ import pg1223_completed_runtime_contract as contract
 from pg847_configuration import FIELDS
 
 def payload():
-    s=previous.payload();marker='print(json.dumps(result))'
+    s=previous.payload().replace("'run':'PG1222-completed-retirement-preflight-v1'","'run':'PG1227-runtime-schema-preflight-v1'");marker='print(json.dumps(result))'
     if s.count(marker)!=1:raise ValueError('exact actual preflight result insertion required')
     c=inspect.getsource(contract).replace('from pg847_configuration import FIELDS','FIELDS='+repr(FIELDS))
     extra='\nimport copy,types\nretirement=types.ModuleType("actual_current_retirement");exec('+repr(c)+',retirement.__dict__)\n'+SCHEMA
