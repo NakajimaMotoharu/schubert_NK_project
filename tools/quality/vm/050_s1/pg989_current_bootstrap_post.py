@@ -6,12 +6,15 @@ def base_source():
     raw=(R/'pg901_bootstrap_post.py').read_text()
     for a,b in (('from pg895_bootstrap_before import payload as previous,W,P','from pg981_current_bootstrap_before_v2 import payload as previous,W,P'),('from pg894_sources_v3 import files','from pg983_current_bootstrap_sources import files'),('pg894','pg983'),('pg895-bootstrap-before-v1','pg978-bootstrap-before-v2'),('pg885','pg960'),('pg890','pg968'),('pg887','pg963'),('pg901-bootstrap-post-v1','pg989-bootstrap-post-v3'),('PG901-bootstrap-post-v1','PG989-bootstrap-post-v3'),('2a4f222e0d9759ac7c764f3e3c581a9774ad74de01971f15bf28e759dbc04e6e','be3ea723300b870ed2dce9477a5666bd9b59d7cc5fe7fc682e1cbbd26afec0cd')):
         assert a in raw,a;raw=raw.replace(a,b)
+    assert raw.count('PG895-bootstrap-before-v1')==1
+    raw=raw.replace('PG895-bootstrap-before-v1','PG978-bootstrap-before-v2')
     ast.parse(raw);return raw
 def base_namespace():
     env={'__file__':str(R/'pg989_current_bootstrap_post.py'),'__name__':'current_bootstrap_post_definitions'}
     exec(compile(base_source(),'<989 actual current source base post>','exec'),env);return env
 def payload(proof,seals):
     raw=base_namespace()['payload'](proof,seals)
+    assert "'run':'PG989-bootstrap-post-v3'" in raw
     hashes=json.loads((W/'pg983-frozen-v3.safe.json').read_bytes())['fileHashes']
     authenticate='''
 tools=base/'pg983-bootstrap-tools-v3'
