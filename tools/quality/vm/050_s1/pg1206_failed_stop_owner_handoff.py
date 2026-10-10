@@ -53,9 +53,9 @@ try:
  terminate_once(PID,TICKS,verify,reserve,os.pidfd_open,send,wait,os.close)
  require(signals==1 and not pathlib.Path('/proc',str(PID)).exists());free_locks()
  after=current();require(after==current())
- with(SAVE/'after.private.json').open('xb')as f:os.fchmod(f.fileno(),0o600);json.dump(after,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+ with(SAVE/'after.private.json').open('xb')as f:os.fchmod(f.fileno(),0o600);f.write(json.dumps(after,sort_keys=True).encode());f.flush();os.fsync(f.fileno())
  for i,raw_journal in enumerate(JOURNAL_READS):
-  with(SAVE/('journal-read-'+str(i)+'.private.json')).open('xb')as f:os.fchmod(f.fileno(),0o600);json.dump(raw_journal,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+  with(SAVE/('journal-read-'+str(i)+'.private.json')).open('xb')as f:os.fchmod(f.fileno(),0o600);f.write(json.dumps(raw_journal,sort_keys=True).encode());f.flush();os.fsync(f.fileno())
  os.fsync(reservation_fd);os.close(reservation_fd);reservation_fd=None
 except Exception as failure:
  if reservation_attempted:
