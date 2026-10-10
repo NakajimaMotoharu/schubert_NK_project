@@ -1,0 +1,71 @@
+{
+  "wbs": "WBS-P016-04",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "beginJST": "2026-10-11T08:44:17.666490+09:00",
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/scenarios.html"
+  ],
+  "productionChangesPermittedThisUnit": [],
+  "testExecutionPermittedThisUnit": [],
+  "authority": [
+    "UI223§4/SS313§4.1,7"
+  ],
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "groupStartEstimateE": 17.25,
+  "N": null,
+  "T": null,
+  "leafActualSpentPp": null,
+  "endJST": "2026-10-11T08:44:52.386932+09:00",
+  "independentExpectations": {
+    "source": "UI223§4.1/SS313§4.1,7",
+    "Game": "display_order supplied sequence retained; href fixed /scenarios/<known game>; title HTML escaped",
+    "empty": "該当するデータはありません",
+    "navigation": "/search and common userActions; role-independent hierarchy business links"
+  },
+  "readCriteriaSatisfied": [
+    "stream projection keeps supplied order, enum gameCode creates fixed relative href",
+    "copy immutable/<=10/null model rules and closed Card strings",
+    "Game template title/card/name escape operators, empty message/card2-column existingCSS"
+  ],
+  "existingEvidenceReadOnly": [
+    "Game/Route/File ScenarioHierarchyViewModelTest PT-WEB182..193",
+    "template comment PT-SCR001..016; actual HTTP/MVC belongs primary"
+  ],
+  "newProductionChange": false,
+  "testsRun": [],
+  "reasonNoNewTest": "No screen-specific mismatch; existing independent hierarchy oracle covers contract, avoid repeating shared hierarchy suite",
+  "criteriaUnmet": [
+    "upstream source order/API/controller/current CHR/P015-02 full quality",
+    "actual browser/HTTP/native/formal acceptance"
+  ],
+  "readFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java",
+      "sha256": "06a752ff0e787a23a7a928cbd869544e9066155f8ecaaf071765bbf8cfe7fb61"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/scenarios.html",
+      "sha256": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234"
+    }
+  ],
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:44:51 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:44:52 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 26,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "originalEstimate": null,
+  "remainingPredictionPp": null,
+  "wholeLeafAccepted": false
+}

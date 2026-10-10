@@ -1,0 +1,41 @@
+{
+  "wbs": "WBS-P016-10",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "c1278bd1f4d83171425d8f981967102ad5c65347",
+  "beginJST": "2026-10-11T08:49:10.616547+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+      "owner": "WBS-P016-25",
+      "baseSha256": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/animation-watch.html",
+      "owner": "WBS-P016-10",
+      "baseSha256": "50cef0d1cd535d0c374205e63df51ba4308675541eb0fcc523168c0e34fc0b6c"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationWatchDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [],
+  "expectedAuthority": [
+    "UI222§2/9",
+    "UI223§6"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "width": "watch max-width1280px",
+    "aspect": "video16:9 within available width",
+    "media": "controls preload=metadata playsinline no autoplay",
+    "nav": "nonempty aria-label and supplied fixed back links"
+  },
+  "executionSafety": "Direct Thymeleaf with literal closed Map fixture, no controller/descriptor/wire/security context; CSS declaration inspection only (browser acceptance unmet)."
+}

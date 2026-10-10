@@ -1,0 +1,84 @@
+{
+  "wbs": "WBS-P016-06",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "beginJST": "2026-10-11T08:45:26.659578+09:00",
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/scenario-files.html"
+  ],
+  "productionChangesPermittedThisUnit": [],
+  "testExecutionPermittedThisUnit": [],
+  "authority": [
+    "UI223§4.1/SS313§4.1,7"
+  ],
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "groupStartEstimateE": 17.25,
+  "criteriaReviewed": [
+    "UI223 §4.1 supplied file order, title/path/count escaped display, fixed id link, two digit route title and parent navigation",
+    "immutable <=500 cards/null/prefix validation in pure projection"
+  ],
+  "independentExistingOracle": [
+    "ScenarioHierarchyViewModelTest.web184FileDisplay literal ids/title/path/count/href",
+    "web185/null and web186/prefix invalid boundaries"
+  ],
+  "result": "source/design concordance; no demonstrated display defect",
+  "unmet": [
+    "upstream fallback chapterTitle/sectionCode/filename and actual file order",
+    "HTTP/404/CHR/module quality and whole leaf acceptance"
+  ],
+  "testsNotExecutedReason": "Existing independent expectations already cover projection; main-controlled template/service paths not rerun",
+  "endJST": "2026-10-11T08:47:43.624792+09:00",
+  "wallElapsedSeconds": 136.965214,
+  "externalJobWaitSeconds": 0,
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "readFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java",
+      "sha256": "01bf3bf14458eaa54078c1abba488e56ef575921ba0069af6209136f4212fe39"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/scenario-files.html",
+      "sha256": "d76bebbaacd86eca98f38b25eb918aacead98d44ea05f7c4bd5a619cfb71fa8f"
+    }
+  ],
+  "originalEstimate": null,
+  "revisedRemainingPredictionPp": null,
+  "productionChanges": [],
+  "testsRun": [],
+  "attemptCount": 0,
+  "quotaAfter": {
+    "limitId": "codex",
+    "limitName": null,
+    "normalModelSlug": null,
+    "primary": {
+      "usedPercent": 26,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    },
+    "secondary": null,
+    "credits": {
+      "hasCredits": false,
+      "unlimited": false,
+      "balance": "0"
+    },
+    "individualLimit": null,
+    "spendControlReached": false,
+    "planType": "prolite",
+    "rateLimitReachedType": null
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "wholeLeafAccepted": false,
+  "moduleQualityPassed": false,
+  "checkpoint": "deputy-reports/web-display-20261011/P016-06-read-allowlist.json"
+}

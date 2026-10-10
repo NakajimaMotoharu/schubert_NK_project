@@ -1,0 +1,1 @@
+UI222§2/9、UI223§6: animation-watch has .video-page/.video-shell but stylesheet has no corresponding width/16:9 declarations; local navigation lacks aria-label. DB-free DOM/CSS literal contract will expose these mismatches. Visual Browser/CHR acceptance remains primary.
