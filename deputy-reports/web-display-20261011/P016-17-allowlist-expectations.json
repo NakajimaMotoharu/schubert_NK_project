@@ -1,0 +1,50 @@
+{
+  "wbs": "WBS-P016-17",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "95cf50c60",
+  "beginJST": "2026-10-11T08:29:00.388476+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html",
+      "owner": "WBS-P016-17",
+      "baseSha256": "659c9e6b0cc083c40a675a086ab7c9fd75a17378ea7be58b94b5ed9619eaa569"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserDetailDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserChangeForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserDetailViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-detail.html"
+  ],
+  "expectedAuthority": [
+    "UI222§5/8/9",
+    "UI225§5",
+    "SS313§5.2/6.2/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "productionBoundary": "Reserved user-detail display template only, no mutation/controller/security/version semantics",
+  "expectations": {
+    "source": "UI222§5,SS313§10,UI225§5",
+    "ids": "user-<operation>-form / user-<operation>-confirm / user-ROLE-role / user-PASSWORD-password(_confirmation)",
+    "summary": "visible control issues -> their exact id; hidden/version/token/form -> operation form",
+    "required": "Role selector, both password inputs and each confirmation checkbox show 必須 and native required",
+    "detail": "closed values escaped, timestamps JST, active sessions <=2 projection invariant",
+    "ownerBoundary": "Controller supplies self/owner/state-safe forms; fixture verifies only displayed subset and does not certify owner/authorization/last-admin"
+  },
+  "executionSafety": "Pure UserDetailViewModel with typed DTO or closed operation Map fixtures; direct Thymeleaf/MockServlet. No controller/registry/security/DB/JMS/service/network. sourcepath recompiles own dependencies only."
+}
