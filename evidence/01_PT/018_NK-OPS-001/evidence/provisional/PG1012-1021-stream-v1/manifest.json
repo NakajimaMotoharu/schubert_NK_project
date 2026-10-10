@@ -1,0 +1,58 @@
+{
+  "run": "PG1012-1021-stream-v1",
+  "branch": "dev-foundation",
+  "candidateSource": "d4faf8e7eadd2d22563e15380ff80f43883cd6a8",
+  "installedSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "testIds": ["PT-DEP-1007001", "PT-DEP-1007002", "PT-DEP-1015001"],
+  "execution": {
+    "command": "python3 -B tools/quality/vm/050_s1/pg1020_stream_selected_v9.py",
+    "environment": "Linux host / JDK25.0.4 / Maven3.9.12 / offline qualified dependency cache",
+    "exitCode": 0,
+    "tests": 34,
+    "suites": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "flakyRerunNotRunIndicators": 0,
+    "staticIssues": 0,
+    "elapsedSeconds": 43.50705099105835
+  },
+  "input": {
+    "limit": 4,
+    "literalNormal": "ABCD",
+    "literalOverflow": "ABCDE",
+    "providerFailures": ["IOException", "IllegalStateException", "NullPointerException", "AssertionError"]
+  },
+  "independentExpectedAndActual": {
+    "normalBytes": [65, 66, 67, 68],
+    "overflowReason": "MALFORMED_STATE",
+    "knownIoReason": "COMMAND_FAILURE",
+    "unknownObjectIdentityPreserved": true,
+    "eachOfThreeStreamCloseCalls": 1,
+    "actualProcessExit": 0
+  },
+  "nativeReaderCoverage": {
+    "LINE": {"covered": 129, "missed": 0},
+    "METHOD": {"covered": 20, "missed": 0},
+    "CLASS": {"covered": 1, "missed": 0},
+    "BRANCH": {"covered": 24, "missed": 0}
+  },
+  "byteQualification": {
+    "unchangedBatchJarClassEntries": 567,
+    "changedBatchJarClassEntries": 1,
+    "analyzedBatchClasses": 343,
+    "jarClassEntries": 568,
+    "qualifiedDependencyClassEntries": {"protocol": 174, "storage": 72, "bootstrap": 102}
+  },
+  "privateSafeReferences": {
+    "pg1012-stream-failed-preservation-v1/manifest.safe.json": "d90aea90f71ff25fa6e6751027d76c724b4ebd0918594987c1d8a0e29c5eda54",
+    "pg1013-qualified-dependency-cache-v1/manifest.safe.json": "be11e10554ee109ad344a30b15d060db2e95818e2be9ede535fd52718781074e",
+    "pg1020-stream-selected-v9/qualified.safe.json": "238e467689b8f846de843384feef1da63821789e11464e7acb61ba5be4d3a5a5"
+  },
+  "bugs": ["BUG-1006", "BUG-1007", "BUG-1008"],
+  "deploymentAndNativePending": true,
+  "wholeRegressionPending": true,
+  "formalAccepted": false,
+  "wholeWbsAccepted": false,
+  "rawExported": false
+}
