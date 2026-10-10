@@ -1,0 +1,57 @@
+{
+  "wbs": "WBS-P016-03",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "9206039e2",
+  "beginJST": "2026-10-11T08:19:56.299409+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+      "owner": "WBS-P016-03"
+    }
+  ],
+  "readOnlyProduction": [
+    "web/form/ScenarioSearchForm.java",
+    "web/view/ScenarioSearchViewModel.java",
+    "web/view/ScenarioSearchResultsViewModel.java"
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchDisplayContractTest.java"
+  ],
+  "existingSuiteReadOnly": [
+    "ScenarioSearchFormTest",
+    "ScenarioSearchViewModelTest"
+  ],
+  "executionSafety": "Standalone Thymeleaf file render with mock servlet exchange and pure typed model/DTOs. SessionPrincipal is synthetic display-only immutable value; no real authentication/security/session implementation exercised. No WebMvcConfiguration/MockMvc/controller/service/DB/JMS/network context. Read existing Form/View tests safe but do not repeat fulfilled boundary work unless needed; new template defect tests alone initially.",
+  "expectations": {
+    "source": "SS313§10 validation summary anchor required, §6 invalid raw display escaped; UI222§5/9 label/control binding",
+    "fieldIds": {
+      "q": "search-q",
+      "game": "search-game",
+      "speaker": "search-speaker",
+      "chapter": "search-chapter",
+      "entry_type": "search-entry_type",
+      "voice": "search-voice"
+    },
+    "formId": "search-filters",
+    "errorLinks": {
+      "q": "#search-q",
+      "game": "#search-game",
+      "entry_type": "#search-entry_type",
+      "voice": "#search-voice",
+      "page": "#search-filters",
+      "form": "#search-filters"
+    },
+    "empty": "該当するデータはありません, no pagination",
+    "unknownValues": "escaped selected redisplay, not passed to service/request"
+  },
+  "originalEstimate": null,
+  "userRevisedRemainingPp": 0.75,
+  "groupStartD": 3.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 24,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "formalAccepted": false
+}

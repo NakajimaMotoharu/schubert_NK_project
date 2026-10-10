@@ -1,0 +1,46 @@
+
+Test run finished after 422 ms
+[         2 containers found      ]
+[         0 containers skipped    ]
+[         2 containers started    ]
+[         0 containers aborted    ]
+[         2 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         2 tests failed          ]
+
+
+Failures (2):
+  JUnit Jupiter:SearchDisplayContractTest:invalidValuesAreEscapedAndEverySummaryAnchorResolvesToItsControl()
+    MethodSource [className = 'dev.codex.schubert.nk.web.view.SearchDisplayContractTest', methodName = 'invalidValuesAreEscapedAndEverySummaryAnchorResolvesToItsControl', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <[#search-filters, #search-q, #search-game, #search-entry_type, #search-voice, #search-filters]> but was: <[]>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       dev.codex.schubert.nk.web.view.SearchDisplayContractTest.invalidValuesAreEscapedAndEverySummaryAnchorResolvesToItsControl(SearchDisplayContractTest.java:59)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+  JUnit Jupiter:SearchDisplayContractTest:emptyResultsPreserveInputOrderAndLabelControlAssociation()
+    MethodSource [className = 'dev.codex.schubert.nk.web.view.SearchDisplayContractTest', methodName = 'emptyResultsPreserveInputOrderAndLabelControlAssociation', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <search-q> but was: <>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       dev.codex.schubert.nk.web.view.SearchDisplayContractTest.emptyResultsPreserveInputOrderAndLabelControlAssociation(SearchDisplayContractTest.java:90)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.

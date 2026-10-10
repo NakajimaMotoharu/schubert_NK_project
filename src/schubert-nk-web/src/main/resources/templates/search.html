@@ -13,29 +13,31 @@
       </div>
     </header>
     <div id="search-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
-      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
+      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}">
+        <a th:href="${error.name == 'form' or error.name == 'page' ? '#search-filters' : '#search-' + error.name}" th:text="${error.message}"></a>
+      </li></ul>
     </div>
-    <form class="filters" method="get" th:action="@{/search}">
+    <form id="search-filters" class="filters" method="get" th:action="@{/search}">
       <label><span>本文</span>
-        <input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="search-errors">
+        <input id="search-q" name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="search-errors">
       </label>
       <label><span>ゲーム</span>
-        <select name="game" aria-describedby="search-errors">
+        <select id="search-game" name="game" aria-describedby="search-errors">
           <option value="" th:selected="${page.filters.game.empty}">すべて</option>
           <option th:each="game : ${page.games}" th:value="${game}" th:text="${game}" th:selected="${page.filters.game == game}"></option>
         </select>
       </label>
       <label><span>話者</span>
-        <select name="speaker" aria-describedby="search-errors">
+        <select id="search-speaker" name="speaker" aria-describedby="search-errors">
           <option value="" th:selected="${page.filters.speaker.empty}">すべて</option>
           <option th:each="speaker : ${page.speakers}" th:value="${speaker}" th:text="${speaker}" th:selected="${page.filters.speaker == speaker}"></option>
         </select>
       </label>
       <label><span>章タイトル</span>
-        <input name="chapter" th:value="${page.filters.chapter}" placeholder="タイトル" aria-describedby="search-errors">
+        <input id="search-chapter" name="chapter" th:value="${page.filters.chapter}" placeholder="タイトル" aria-describedby="search-errors">
       </label>
       <label><span>形態</span>
-        <select name="entry_type" aria-describedby="search-errors">
+        <select id="search-entry_type" name="entry_type" aria-describedby="search-errors">
           <option value="" th:selected="${page.filters.entryType.empty}">すべて</option>
           <option value="dialogue" th:selected="${page.filters.entryType == 'dialogue'}">セリフ</option>
           <option value="narration" th:selected="${page.filters.entryType == 'narration'}">ナレーション</option>
@@ -44,7 +46,7 @@
         </select>
       </label>
       <label><span>音声</span>
-        <select name="voice" aria-describedby="search-errors">
+        <select id="search-voice" name="voice" aria-describedby="search-errors">
           <option value="" th:selected="${page.filters.voice.empty}">すべて</option>
           <option value="with" th:selected="${page.filters.voice == 'with'}">あり</option>
           <option value="without" th:selected="${page.filters.voice == 'without'}">なし</option>

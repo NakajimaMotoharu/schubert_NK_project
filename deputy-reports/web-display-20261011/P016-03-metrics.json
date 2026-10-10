@@ -1,0 +1,91 @@
+{
+  "wbs": "WBS-P016-03",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "9206039e2",
+  "changeCommitReference": "../commit-index.json maps the artifact commit after commit",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/search.html",
+      "sha256": "00e46bca766cb964e8957205f46ab4fcc563ba4948cd3593e2af194afc0d9df3",
+      "owner": "WBS-P016-03"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/SearchDisplayContractTest.java",
+      "sha256": "0beec81f26220324bc73df47f73d5e86b91391f3def9e6892033727fd67a8c2d"
+    }
+  ],
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "beginJST": "2026-10-11T08:19:56.299409+09:00",
+  "endJST": "2026-10-11T08:21:27.788734+09:00",
+  "wallElapsedSeconds": 91.489325,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "userRevisedRemainingEstimatePp": 0.75,
+  "groupStartEstimateD": 3.25,
+  "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25",
+  "revisedResidualPredictionPp": null,
+  "residualReason": "Formal dependency/source/integration quality unverified; no guessed cost split",
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 24,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:21:27 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:21:27 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 25,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 1,
+  "sharedQuotaIsNotLeafActualCost": true,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "moduleQualityPassed": false,
+  "wholeLeafAccepted": false,
+  "criteriaSatisfied": [
+    "Actual search HTML error anchors reach existing controls/form for fixed field/form/page errors",
+    "Input order unchanged; empty results hides pagination",
+    "Unknown game/speaker/entry/voice and q/chapter escaped and redisplayed; invalid form cannot generate request"
+  ],
+  "criteriaUnmet": [
+    "Whole class coverage not claimed from the new 2 template tests",
+    "Controller HTTP/security/wire/DB/CHR and P015-02 integration acceptance",
+    "Full module static/quality/formal ledger"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "PRE_FIX_REPRODUCTION",
+      "exit": 1,
+      "tests": 2,
+      "passed": 0,
+      "failed": 2
+    },
+    {
+      "attempt": 2,
+      "kind": "POST_FIX_LIMITED",
+      "exit": 0,
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    }
+  ],
+  "coverage": null,
+  "existingEvidenceReadOnly": [
+    "PT-WEB214..221 ScenarioSearchFormTest",
+    "PT-WEB222..229 ScenarioSearchViewModelTest"
+  ],
+  "changeReason": "SS313 required validation summary anchors absent; WD-BUG-003",
+  "lastCheckpoint": "P016-03-metrics.json"
+}
