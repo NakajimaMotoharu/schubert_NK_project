@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+SSC260：SSC259のwrongbasename pg1160はfile原byteと有効argvを分離し、start0/当native・原本・DB・Backup・全18実historyを保全する。固定失敗Java415524/child415553の現boot/PID/ticks/argv/親子/Bus/M-A/実peerと全値を私有二読→child/Java各一回pidfd TERM/耐久予約→全資源0/全原値post/旧actual143又はUNKNOWN保持→別fresh連続正常管理で固定誤fileだけtypedheldentry退役/dirsync・訂正reload一回→全scope正常/独立post→既Root0755/ACL0空同inode Unit.dにzz-pg1160正規new-onlyfile準備/有効argv・agent1・全終了後条件→新observer/一回予約/startへ進む。旧操作の再発行、別ownerへの介入、手unlink/原本再生成、成功推定をしない。
+
+全十ExecStart表示後半は元tuple又は同bootreloadでの全empty tupleのみ認めるが、全fieldを解析・元raw保全し、設定前三field/全他設定/全18実履歴・kernelを維持する。表示emptyを旧実失敗history消去や旧scope正常終了にしない。basename重複/順位逆転/未知override/部分empty/foreignargv/ignore変異/null・retirement/prepare IO故障と実samepending有効宣言/Root/nativeまで独立再試験する。設計公開・限定管理・正式品質を分ける。
+
 SSC259：cold一回用samepending runtimeの不在directoryはSS343有限profileに限定し、fresh連続M-A/実RW batch backend・exclusive advisory/十Refs/署名と全原値保持でのみnew-only作成する。Root0755/ACL0/tmpfs親・直下空・Unit.d不在→held mkdirat0700/同inode0755/dirsync→heldEXCL0644一回設定→reload一回→全十history/設定（Morning正規二fieldのみ差）/原本24表・Backup・startup・native全保全→全scope正常/独立資源0の順。既empty Unit.d再用はSSC198、不明file/owner/ACL/mode/RO/世代/DB/closeを空・不存在・合格へ置換しない。部分作成と旧143/UNKNOWNを保存し二重prepare/startを発行せず、当所有再認証から限定回収・別newscopeへ進む。
 
 当activeのresumeでは元run/cutoff/activation/beginを保持（343§6.15）、新Root/epoch/permitを別generationとして束縛する。管理文書の新activation表記から原本を退役/書換えしない。元二SUCCESS/manifest/handleを再用し、元30分以内の同Root/API/Web/Caddy・真正DONE/owned逆順停止/nativeを実証するまでは親成功・BUG544歴史解決・正式品質へ加算0。独立base/native literalと短write/force/mkdir/mode/open/close/reload/unknown/競合の全例外、原byte保持・foreign拒否・同source実post/新Root/nativeを別証跡で再試験する。設計公開を実装/PT受入として扱わない。
