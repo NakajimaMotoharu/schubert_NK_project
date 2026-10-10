@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC262 ordinary真正ISSUED-DONE後の署名code-only有限公開（2026-10-11）
+
+§11/SSC190の通常全停止code-onlyは、ordinary親の真正PID1 start/done・原本SUCCESS/10step・正常owned停止・全kernel資源0と、現boot/原run/cutoff/activationを先行認証する。startupに正規ISSUED epoch及び旧permit/owner/launchが保持される場合、SSC249のcold空startupを現在値として偽装しない。対象currentD5/PG1068/BOM0b61→unusedRO new769/PG1292/BOMecae/187/schema028は、既真正Root1240/9f651096/27accac0/cutoff2026-10-10T20:03:22.718197Z/DONE2026-10-10T20:22:34.439375Zと、正常stop1256/全post1303を実初期条件とする。これは固定PG/PT profileの詳細で、RD/UI/業務/DIF/権限/元30分及び品質を変えない。
+
+別fresh M→A・readonly batch/advisory71419602/実heartbeat・十Ref・真正原本Session・old/new全signed inventoryと保持directory/entry FDを連続所有する。新UUIDv4を選び同boot/元run/cutoff/activationのcanonicalINVALIDを既Production invalidateでforce/dirsync/再読→独立literal候補version/BOMのRoot0400 approval atomic置換/dirsync/再読→固定new-only sibling symlink/dirsync→同filesystem RENAME_EXCHANGE→newcurrentと旧同inode linked sibling全属性/target/ACL二読→旧linkを固定private SAVEへ一回atomic移動/両dirsync→全新gateと全未変更値を再読→DB rollback/close/server0→Ref/FD/bus/A/M正常帰還→new-only完了と独立post、の順。管理INVALIDをRoot起動許可にせず、新permit/owner/launch/Unit start-stop/reload/DB business write/DDL/Backup操作を追加しない。
+
+有限oracleはbefore/epoch/approval/link-staged/exchanged/old-linked-private/releaseを閉集合とする。startupではepoch.currentのみcanonical新byte/inodeへ替え、他全entry・byte/hash/target/ACL/9metadataを保持する。旧epoch/approval regular FDは原byteとdev/inode/uid/gid/mode/size/mtime/ACLを保持し、正規unlinkのnlink0と当operation内ctimeだけを別検査する。旧current symlinkは全区間nlink1・同inode・oldtarget・ACLを保持し、交換/移動の有限ctimeだけを許す。unlink-O_PATH xattr取得を推定したり属性検査を省略しない。各親dirの同inode/owner/mode/link・正規entry集合/size・mtime/ctimeの有限効果をphaseごとに限定し、他全field/集合/Root binding/全原24表・DONE/Backup/credential/oldrelease/native/Unit/config/runtimeは不変。atimeのみreadlinkによる読取時刻として9field外、mtime/ctimeは除外しない。
+
+独立oracleは候補の実current値から承認内容を導出しない。固定version/BOM/canonical schemaと事前保持値・当operation timeboundsから期待を作り、unknown/NULL/重複/不正順/別boot-run-act-source・外entry・全field変異・短IO/force/close/競合を負例で閉じる。新公開途中又はclose不明はそのowner/Ref/FD/DBを隔離保持し、同slot再公開・旧成功補完・旧permit/approval fallback・一般rollback/手修復0。真正oldlink移動済みなら再exchangeせず保存済みphaseから限定再認証する。設計公開/工具host PT/code-only成功と、newsource真正Root/defaultexport/native/CHR/全四counter100/451正式を別に受入する。
+
 ## SSC261 内部保持channel資源port（2026-10-11、SSC193 native採取の補足）
 
 固定native採取の観測IoはUID/cgroup/FS/inode/属性等のdata-only契約を維持する。別package-private資源portで承認済み保持entryのchannel READ/WRITE・size/read/write/force/closeだけを分離し、native adapterは既FileChannelの通常操作をそのまま使う。任意path/name/profile/configによる開放や権限付与を追加しない。固定profile/name/祖先・owner/gid/mode/link/ACL/FS/readonly、保持inode前後一致、新規file/partial保全、全byte SHA、全resource通常closeという成功条件は不変更。null port/channel、0進捗、不正長・short/long read、前後size不一致、force/close失敗は非成功、NPEをcatchして正常化しない。
