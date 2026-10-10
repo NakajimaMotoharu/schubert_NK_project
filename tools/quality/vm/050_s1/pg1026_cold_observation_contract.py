@@ -193,6 +193,37 @@ def fd_alias_records(lines):
     return result
 
 
+def free_flocks(lines, lock_metadata):
+    if (type(lines) is not list or any(type(line) is not str for line in lines)
+        or type(lock_metadata) is not dict
+        or set(lock_metadata) != {'maintenance.lock', 'startup-admission.lock'}):
+        raise ValueError('free lock contract refused')
+    identities = set()
+    for m in lock_metadata.values():
+        if (type(m) is not list or len(m) != 9 or any(type(x) is not int for x in m)
+            or m[2:7] != [0, 0, stat.S_IFREG | 0o600, 1, 0]):
+            raise ValueError('free lock metadata refused')
+        identity = (os.major(m[0]), os.minor(m[0]), m[1])
+        if identity in identities:
+            raise ValueError('free lock inode alias refused')
+        identities.add(identity)
+    for line in lines:
+        fields = line.split()
+        if len(fields) > 1 and fields[1] == '->':
+            fields = [fields[0], *fields[2:]]
+        if len(fields) < 2 or fields[1] != 'FLOCK':
+            continue
+        if len(fields) != 8:
+            raise ValueError('free lock record refused')
+        parts = fields[5].split(':')
+        if len(parts) != 3:
+            raise ValueError('free lock address refused')
+        identity = (int(parts[0], 16), int(parts[1], 16), int(parts[2]))
+        if identity in identities:
+            raise ValueError('lock still held or contended')
+    return True
+
+
 def timer_path_classification(raw, console):
     if type(raw) is not str:
         raise ValueError('timer/path listing refused')

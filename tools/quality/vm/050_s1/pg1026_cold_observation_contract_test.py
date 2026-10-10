@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records, timer_path_classification, canonical_sum_bytes
+from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records, timer_path_classification, canonical_sum_bytes, free_flocks
 
 
 class Contract(unittest.TestCase):
@@ -158,6 +158,18 @@ class Contract(unittest.TestCase):
             with self.assertRaises(ValueError): canonical_sum_bytes(records, digest)
         for name in ('SHA256SUMS', 'RELEASE-MANIFEST.json', '../payload', 'a b', 'é', '.'):
             with self.assertRaises(ValueError): canonical_sum_bytes([{**artifact, 'path': name}], manifest_hash)
+
+    def test_free_kernel_locks_both_inode_holder_or_waiter_refused(self):
+        import stat
+        fixed = {'maintenance.lock':[os.makedev(8,1),7,0,0,stat.S_IFREG|0o600,1,0,11,12],
+                 'startup-admission.lock':[os.makedev(8,1),8,0,0,stat.S_IFREG|0o600,1,0,13,14]}
+        self.assertIs(True, free_flocks([], fixed))
+        self.assertIs(True, free_flocks(['1: FLOCK ADVISORY WRITE 122 08:01:9 0 EOF'], fixed))
+        for inode in (7,8):
+            for mode in ('FLOCK', '-> FLOCK'):
+                with self.assertRaises(ValueError): free_flocks([f'1: {mode} ADVISORY WRITE 122 08:01:{inode} 0 EOF'], fixed)
+        for lines, meta in ((None,fixed),([None],fixed),([],None),(['1: FLOCK malformed'],fixed)):
+            with self.assertRaises(ValueError): free_flocks(lines, meta)
 
     def test_all_roles_sql_independent_literal_and_rows(self):
         self.assertEqual("select count(*)from pg_stat_activity where datname='schubert_nk'and backend_type='client backend'and pid<>pg_backend_pid()and pid<>121;", all_client_sql(121))
