@@ -50,5 +50,25 @@ class ColdCandidate(unittest.TestCase):
         for args in ((None,'x','Z'),('x',None,'Z'),('x','x',None),('x','','Z')):
             with self.assertRaises(ValueError):replace_once(*args)
 
+    def test_candidate_local_source_cannot_replace_current_scope(self):
+        tree=ast.parse(stage_body())
+        self.assertEqual(2,len(tree.body))
+        fn,call=tree.body
+        self.assertIsInstance(fn,ast.FunctionDef)
+        self.assertEqual('place_candidate',fn.name)
+        self.assertIsInstance(call,ast.Expr)
+        self.assertEqual('place_candidate',call.value.func.id)
+        self.assertFalse(any(isinstance(n,(ast.Global,ast.Nonlocal))for n in ast.walk(fn)))
+        source=[n for n in fn.body if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='SOURCE'for t in n.targets)]
+        self.assertEqual(1,len(source))
+        # Execute only assignments, no IO/VM/archive operations, in an independent
+        # minimal function. Literal current and candidate identities are separate.
+        mini=ast.FunctionDef(name='candidate_local',args=ast.arguments(posonlyargs=[],args=[],kwonlyargs=[],kw_defaults=[],defaults=[]),
+             body=source+[ast.Return(ast.Name(id='SOURCE',ctx=ast.Load()))],decorator_list=[])
+        env={'SOURCE':'40ef6e894573d2ffab1d1732124960f9c98d5f97'}
+        exec(compile(ast.fix_missing_locations(ast.Module(body=[mini],type_ignores=[])),'independent local source fixture','exec'),env)
+        self.assertEqual('d5b00104280028d9ea81b44c1d1c805f3c2861ed',env['candidate_local']())
+        self.assertEqual('40ef6e894573d2ffab1d1732124960f9c98d5f97',env['SOURCE'])
+
 
 if __name__=='__main__':unittest.main()

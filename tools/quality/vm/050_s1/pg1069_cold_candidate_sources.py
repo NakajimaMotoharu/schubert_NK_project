@@ -34,7 +34,8 @@ def stage_body():
     prefix+="bundle_data=json.loads(bundle_raw);require(set(bundle_data)=={'archiveSha256','signatureSha256'})\n"
     prefix+="TARHASH=bundle_data['archiveSha256'];SIGHASH=bundle_data['signatureSha256']\n"
     ast.parse(prefix+raw)
-    return prefix+raw
+    # No candidate assignment may escape into the existing-current observer.
+    return 'def place_candidate():\n'+''.join(' '+line+'\n'for line in (prefix+raw).splitlines())+'place_candidate()\n'
 
 
 def files():
