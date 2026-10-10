@@ -1,0 +1,52 @@
+{
+  "wbs": "WBS-P016-21",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "fb644c99f",
+  "beginJST": "2026-10-11T08:31:18.583798+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html",
+      "owner": "WBS-P016-21",
+      "baseSha256": "d367ae916c4ba0d21ebaf0050f8e34b2365c6d5c5ce1a38f26687977b04041e0"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationDetailDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html"
+  ],
+  "expectedAuthority": [
+    "UI222§5/8/9",
+    "UI224§5",
+    "SS313§6.2/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "productionBoundary": "Notification detail template only; owner/state/API/session enforcement not modified",
+  "expectations": {
+    "source": "UI224§5/SS313§6.2,10/UI222§5",
+    "states": [
+      "RECEIVED",
+      "PROCESSING",
+      "COMPLETED",
+      "ERROR",
+      "CANCELLED"
+    ],
+    "cancelVisibility": "RECEIVED only even if stale action fixture exists; all four other states hide cancel controls",
+    "confirm": "visible 必須, native required, id notification-cancel-confirm with explicit label",
+    "summary": "confirm issue -> confirm control; hidden/form/id/token issues -> notification-cancel-form",
+    "body": "escaped question/answer; deleted display replaces question body; explicit hidden synthetic CSRF/token and POST route unchanged",
+    "back": "/notifications"
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet using UI-derived closed synthetic page/action/CSRF maps; no MVC context, controller, token registry, real security/service/DB/JMS/network. Existing view-model semantic validation not rerun or replaced by this fixture."
+}
