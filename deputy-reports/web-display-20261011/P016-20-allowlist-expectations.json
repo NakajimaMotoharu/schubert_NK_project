@@ -1,0 +1,48 @@
+{
+  "wbs": "WBS-P016-20",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "51080fb2b",
+  "beginJST": "2026-10-11T08:39:56.966673+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/notifications/list.html",
+      "owner": "WBS-P016-20",
+      "baseSha256": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/NotificationListDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/NotificationSearchForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/notifications/list.html"
+  ],
+  "expectedAuthority": [
+    "UI222§6/9",
+    "UI224§4",
+    "SS313§6.1/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "summary": "fixed type/from/to -> notification-<field>, form/page -> notification-filters",
+    "unknownType": "escaped selected option",
+    "inputOrder": [
+      "type",
+      "from",
+      "to"
+    ],
+    "scope": "Neither USER nor ADMIN gets owner/username input; raw owner unknown field rejected, not reflected",
+    "navigation": "50 actual rows middle page51-100/101, shared nav twice, table header retained in focusable scroll region",
+    "empty": "approved empty message, no nav/table"
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet and own-source pure NotificationSearchForm/NotificationListViewModel/typed records. No controller/service/auth/session/DB/JMS/network. Shared fifty implementation/test costs not recharged."
+}
