@@ -241,9 +241,9 @@ public final class InspectorUnitProbe {
         matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
         justification =
             "SSC125: FutureTask wraps actual provider failures; preserve unknown RuntimeException/Error identity, never normalize as ordinary IO or success")
-    private static RuntimeException queryFailure(java.util.concurrent.ExecutionException failure) {
+    private static StopGateException queryFailure(java.util.concurrent.ExecutionException failure) {
       Throwable cause = failure.getCause();
-      if (cause instanceof RuntimeException unknown) return unknown;
+      if (cause instanceof RuntimeException unknown) throw unknown;
       if (cause instanceof Error unknown) throw unknown;
       return new StopGateException(StopGateFailure.COMMAND_FAILURE);
     }
