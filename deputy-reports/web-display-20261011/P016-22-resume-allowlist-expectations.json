@@ -1,0 +1,58 @@
+{
+  "wbs": "WBS-P016-22",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "384c39a7b",
+  "beginJST": "2026-10-11T08:38:53.639689+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/list.html",
+      "owner": "WBS-P016-22",
+      "baseSha256": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionListDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/questions/list.html"
+  ],
+  "expectedAuthority": [
+    "UI222§5/9",
+    "UI224§6",
+    "SS313§6.2/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "initialReadCheckpoint": {
+    "status": "CLEAR_UNMET_SAVED_NO_CHANGES_YET",
+    "findings": [
+      "summary lacks anchors",
+      "unknown state snapshot has no selected option",
+      "50-row pagination only single top previous/next, no range or bottom",
+      "table lacks retained-header scroll container"
+    ],
+    "next": "Common 50-row fragment/table scroll contract P015-07/P016-25.04 first; then resume screen-specific ids/unknown enum/fragment integration",
+    "productionChanges": [],
+    "testsRun": []
+  },
+  "initialReadBeginJST": "2026-10-11T08:34:58.179168+09:00",
+  "resumeReason": "shared fifty-row contract completed; resume same reserved screen only",
+  "expectations": {
+    "source": "UI222§6/9,UI224§6,SS313§6.2/10",
+    "summary": "all closed fields map to existing id; USER forbidden username and form/page errors target question-filters form",
+    "unknownState": "escaped selected option retained for invalid value",
+    "role": "USER username condition/column hidden, ADMIN shown; typed form still rejects USER username",
+    "pagination": "two actual common fifty fragments; middle page51-100/101, empty no nav",
+    "table": "retained thead in focusable scroll region, fixed input order unchanged"
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet and own-source pure QuestionSearchForm/QuestionListViewModel typed fixtures; no controller/context/DB/JMS/network; sequential private Java compile/run."
+}

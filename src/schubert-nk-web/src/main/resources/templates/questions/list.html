@@ -4,8 +4,10 @@
 <head th:replace="~{fragments/layout :: head('質問回答')}"></head>
 <body><main class="page question-list-page">
   <header class="topbar"><h1>質問回答</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
-  <div id="question-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}" th:text="${issue.value}"></li></ul></div>
-  <form method="get" th:action="@{/questions}">
+  <div id="question-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}">
+    <a th:href="${issue.key == 'form' or issue.key == 'page' or (issue.key == 'username' and !page.filters.admin) ? '#question-filters' : (issue.key == 'username' ? '#question-owner' : '#question-' + issue.key)}" th:text="${issue.value}"></a>
+  </li></ul></div>
+  <form id="question-filters" method="get" th:action="@{/questions}">
     <label for="question-keyword">Keyword</label><input id="question-keyword" name="keyword" th:value="${page.filters.values.keyword}" aria-describedby="question-errors">
     <label for="question-from">受付日From</label><input id="question-from" type="date" name="from" th:value="${page.filters.values.from}" aria-describedby="question-errors">
     <label for="question-to">受付日To</label><input id="question-to" type="date" name="to" th:value="${page.filters.values.to}" aria-describedby="question-errors">
@@ -15,13 +17,15 @@
       <option value="ANSWERED" th:selected="${page.filters.values.state == 'ANSWERED'}">回答済み</option>
       <option value="UNANSWERED" th:selected="${page.filters.values.state == 'UNANSWERED'}">未回答</option>
       <option value="ERROR" th:selected="${page.filters.values.state == 'ERROR'}">エラー</option>
+      <option th:if="${!page.filters.values.state.empty and !#lists.contains({'ANSWERED','UNANSWERED','ERROR'}, page.filters.values.state)}" th:value="${page.filters.values.state}" th:text="${page.filters.values.state}" selected></option>
     </select><button type="submit">検索</button>
   </form>
   <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' questions / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
-  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <nav th:replace="~{fragments/pagination :: fifty(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
-    <table th:if="${!page.rows.empty}"><thead><tr><th>受付日時</th><th class="owner-heading" th:if="${page.filters.admin}">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
-    <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a> <a class="delete" th:href="${question.deleteHref}">削除</a></td></tr></tbody></table>
+    <div class="table-scroll" role="region" aria-label="質問回答一覧" tabindex="0" th:if="${!page.rows.empty}"><table><thead><tr><th>受付日時</th><th class="owner-heading" th:if="${page.filters.admin}">利用者</th><th>質問</th><th>回答状態</th><th>回答日時</th><th>操作</th></tr></thead>
+    <tbody><tr class="question-row" th:each="question : ${page.rows}"><td class="submitted-at" th:text="${question.submittedAt}"></td><td class="owner" th:if="${page.filters.admin}" th:text="${question.username}"></td><td class="question-summary" th:text="${question.summary}"></td><td class="state" th:text="${question.stateLabel}"></td><td class="answered-at" th:text="${question.answeredAt}"></td><td><a class="detail" th:href="${question.detailHref}">明細</a> <a class="delete" th:href="${question.deleteHref}">削除</a></td></tr></tbody></table></div>
   </section>
+  <nav th:replace="~{fragments/pagination :: fifty(${page}, true)}"></nav>
 </main></body></html>
