@@ -12,6 +12,7 @@ class PublishedCaptureTest(unittest.TestCase):
         self.assertIn('businessFullOraclePending',code)
         self.assertTrue("summary['independentProgress']"not in code)
         self.assertNotIn('d5b00104280028d9ea81b44c1d1c805f3c2861ed',code)
+        self.assertTrue('343a5a1b-d064-47d5-88c2-31c36d7ba7a4'not in code)
         for value,end in [(None,74254946447),({},74254946447),(owned,None),(owned,75454946448),(owned,True)]:
             with self.assertRaises(ValueError):compose(value,end)
         for bad in [(None,'a'*32,7400000),('0','a'*32,7400000),('800001','wrong',7400000),('800001','a'*32,7365494)]:
