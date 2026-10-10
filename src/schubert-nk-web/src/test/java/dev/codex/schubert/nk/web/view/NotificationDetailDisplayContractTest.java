@@ -22,7 +22,7 @@ class NotificationDetailDisplayContractTest {
   private static Document render(String state, boolean deleted, Map<String, String> issues) {
     var values = new HashMap<String, Object>();
     values.put("id", 7);
-    values.put("receiptId", "01PUBLICFIXTURE0123456789AB");
+    values.put("receiptId", "01ARZ3NDEKTSV4RRFFQ69G5FAV");
     values.put("state", state);
     values.put("stateLabel", Map.of("RECEIVED", "受付中", "PROCESSING", "処理中", "COMPLETED", "処理完了", "ERROR", "エラー", "CANCELLED", "取消済み").get(state));
     values.put("submittedAt", "2026-10-11 08:00:00");
