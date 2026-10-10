@@ -1,0 +1,96 @@
+{
+  "wbs": "WBS-P016-15",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "060fef89b",
+  "changeCommitReference": "../commit-index.json maps the artifact commit after commit",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "sha256": "1eebf63ad23af43440eb0cf78522905e8061e1503624e288c70df9fc3be8a48c",
+      "owner": "WBS-P016-15"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListDisplayContractTest.java",
+      "sha256": "0ccb3ad1e33b2e62880bc6df071be94ce78963e37825c8eba6a8fe586129d3eb"
+    }
+  ],
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "beginJST": "2026-10-11T08:41:28.648905+09:00",
+  "endJST": "2026-10-11T08:43:11.191009+09:00",
+  "wallElapsedSeconds": 102.542104,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "userRevisedRemainingEstimatePp": null,
+  "groupStartEstimateD": null,
+  "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25",
+  "revisedResidualPredictionPp": null,
+  "residualReason": "Formal dependency/source/integration quality unverified; no guessed cost split",
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:43:10 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:43:11 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 26,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "sharedQuotaIsNotLeafActualCost": true,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "moduleQualityPassed": false,
+  "wholeLeafAccepted": false,
+  "criteriaSatisfied": [
+    "ADMIN User list fixed summary anchors/id/for, escaped unknown Role/state retained",
+    "Actual middle50 row display ordered/escaped with two common nav/range and focusable retained-header scroll wrapper",
+    "Empty message no nav/table; pure USER projection rejected"
+  ],
+  "criteriaUnmet": [
+    "Actual controller/security/DB/JMS, full model/class/module quality/formal acceptance",
+    "Actual browser layout/accessibility"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "FIXTURE_COMPILE_FAILURE",
+      "compileExit": 1,
+      "tests": 0,
+      "reason": "mandatory UserRecord version omitted, corrected to independent literal0"
+    },
+    {
+      "attempt": 2,
+      "kind": "PRE_FIX_REPRODUCTION",
+      "compileExit": 0,
+      "exit": 1,
+      "tests": 3,
+      "passed": 1,
+      "failed": 2
+    },
+    {
+      "attempt": 3,
+      "kind": "POST_FIX_LIMITED",
+      "exit": 0,
+      "tests": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    }
+  ],
+  "coverage": null,
+  "groupStartEstimateE": 17.25,
+  "commonImplementationTestCostRecharged": false,
+  "changeReason": "User list screen display wiring gaps, WD-BUG-013",
+  "lastCheckpoint": "P016-15-metrics.json"
+}

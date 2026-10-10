@@ -1,0 +1,44 @@
+{
+  "wbs": "WBS-P016-15",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "060fef89b",
+  "beginJST": "2026-10-11T08:41:28.648905+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html",
+      "owner": "WBS-P016-15",
+      "baseSha256": "75ff8f6521d9e48c852264d839e17f9d2224f17ad2d486b37750cdae612e7655"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserListDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserSearchForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserListViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-list.html"
+  ],
+  "expectedAuthority": [
+    "UI222§6/9",
+    "UI225§3",
+    "SS313§6.1/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "summary": "username/role/state fixed user-<field> control ids, form/page -> user-filters form",
+    "unknown": "role/state escaped selected snapshots; invalid cannot generate request",
+    "scope": "USER projection rejected, ADMIN rendered",
+    "navigation": "50 rows middle page51-100/101, two commonfifty fragments, focusable scroll retains thead",
+    "order": "C-byte username order/id tie behavior preserved; no arbitrary sort field",
+    "empty": "approved message, no nav/table"
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet and pure UserSearchForm/UserListViewModel/typed UserRecord compiled from dedicated source. No controller/session/auth/service/DB/JMS/network. Shared fragment costs not duplicated."
+}

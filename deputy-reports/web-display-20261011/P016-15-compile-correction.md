@@ -1,0 +1,1 @@
+Initial strict javac exit1: new synthetic UserRecord fixture omitted mandatory long version argument. No test executed. Constructor source requires unsigned version; add independent literal0 (valid new-user boundary) to fixture, keep gate -Xlint:all -Werror, no Production change. Retry after this specific cause is corrected, not repeated unchanged launch.

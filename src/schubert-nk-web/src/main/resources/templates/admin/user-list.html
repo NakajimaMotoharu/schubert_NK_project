@@ -5,27 +5,32 @@
 <body><main class="page user-page">
   <header class="topbar"><h1>Users</h1><div th:replace="~{fragments/layout :: userActions(${page.topBar})}"></div></header>
   <nav><a th:href="@{/admin/users/new}">User追加</a></nav>
-  <div id="user-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}" th:text="${issue.value}"></li></ul></div>
-  <form method="get" th:action="@{/admin/users}">
-    <label>Username<input name="username" th:value="${page.filters.username}" aria-describedby="user-errors"></label>
-    <label>Role<select name="role" aria-describedby="user-errors">
+  <div id="user-errors" role="alert" th:hidden="${page.filters.issues.empty}"><ul><li th:each="issue : ${page.filters.issues}" th:id="${'error-' + issue.key}">
+    <a th:href="${issue.key == 'form' or issue.key == 'page' ? '#user-filters' : '#user-' + issue.key}" th:text="${issue.value}"></a>
+  </li></ul></div>
+  <form id="user-filters" method="get" th:action="@{/admin/users}">
+    <label for="user-username">Username<input id="user-username" name="username" th:value="${page.filters.username}" aria-describedby="user-errors"></label>
+    <label for="user-role">Role<select id="user-role" name="role" aria-describedby="user-errors">
       <option value="" th:selected="${page.filters.role.empty}">すべて</option>
       <option th:each="role : ${ {'USER','ADMIN'} }" th:value="${role}" th:text="${role}" th:selected="${page.filters.role == role}"></option>
+      <option th:if="${!page.filters.role.empty and !#lists.contains({'USER','ADMIN'}, page.filters.role)}" th:value="${page.filters.role}" th:text="${page.filters.role}" selected></option>
     </select></label>
-    <label>状態<select name="state" aria-describedby="user-errors">
+    <label for="user-state">状態<select id="user-state" name="state" aria-describedby="user-errors">
       <option value="" th:selected="${page.filters.state.empty}">すべて</option>
       <option th:each="state : ${ {'ACTIVE','DISABLED','LOCKED'} }" th:value="${state}" th:text="${state}" th:selected="${page.filters.state == state}"></option>
+      <option th:if="${!page.filters.state.empty and !#lists.contains({'ACTIVE','DISABLED','LOCKED'}, page.filters.state)}" th:value="${page.filters.state}" th:text="${page.filters.state}" selected></option>
     </select></label><button type="submit">検索</button>
   </form>
   <p class="count" th:if="${page.page.present}" th:text="${page.page.orElseThrow().totalCount + ' users / page ' + page.page.orElseThrow().effectivePage + ' of ' + page.page.orElseThrow().totalPages}"></p>
-  <nav aria-label="ページ"><a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前へ</a><a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次へ</a></nav>
+  <nav th:replace="~{fragments/pagination :: fifty(${page}, false)}"></nav>
   <section th:if="${page.page.present}">
     <p class="empty-results" th:if="${page.rows.empty}">該当するデータはありません</p>
-    <table th:if="${!page.rows.empty}"><thead><tr><th>Username</th><th>Role</th><th>状態</th><th>Lock終了日時</th><th>最終Login日時</th><th>作成日時</th><th>更新日時</th><th>詳細</th></tr></thead>
+    <div class="table-scroll" role="region" aria-label="User一覧" tabindex="0" th:if="${!page.rows.empty}"><table><thead><tr><th>Username</th><th>Role</th><th>状態</th><th>Lock終了日時</th><th>最終Login日時</th><th>作成日時</th><th>更新日時</th><th>詳細</th></tr></thead>
     <tbody><tr class="user-row" th:each="user : ${page.rows}">
       <td class="username" th:text="${user.username}"></td><td class="role" th:text="${user.role}"></td><td class="state" th:text="${user.state}"></td>
       <td class="locked-until" th:text="${user.lockedUntil}"></td><td class="last-login" th:text="${user.lastLogin}"></td><td class="created-at" th:text="${user.createdAt}"></td><td class="updated-at" th:text="${user.updatedAt}"></td>
       <td><a class="detail" th:href="${user.detailHref}">詳細</a></td>
-    </tr></tbody></table>
+    </tr></tbody></table></div>
   </section>
+  <nav th:replace="~{fragments/pagination :: fifty(${page}, true)}"></nav>
 </main></body></html>
