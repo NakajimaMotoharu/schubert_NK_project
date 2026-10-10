@@ -1,0 +1,1 @@
+UI224§3 is a supplied first200-character preview, not full-question acceptance. The short literal fixture verifies preservation/escape only; the upstream 200-character projection and fresh API authorization are unexecuted. Earlier “full” wording in read checkpoint/spec/test method denotes the whole supplied short fixture, not the whole original question. No oracle was changed.

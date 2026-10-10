@@ -1,0 +1,40 @@
+{
+  "wbs": "WBS-P016-19",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "85bd39e60f18a0f123f79f8a9c809050ddf25d2f",
+  "beginJST": "2026-10-11T08:51:20.523814+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+      "owner": "WBS-P016-25",
+      "baseSha256": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/accepted.html",
+      "owner": "WBS-P016-19",
+      "baseSha256": "9c8ece6dc7ebc467ebeb53890a2bec12713cabcfb6e3bd804b6b4daf8b6caa9e"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionAcceptedDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [],
+  "expectedAuthority": [
+    "UI222§5/9",
+    "UI224§3"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "usedPercent": 27,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "navigation": "named nav, notification/continue/menu destinations",
+    "body": "full escaped question including leading space; white-space pre-wrap",
+    "receipt": "26 character public receipt literal; GET screen without form or resend"
+  },
+  "executionSafety": "Direct Thymeleaf with literal closed Map fixture, no controller/descriptor/wire/security context; CSS declaration inspection only (browser acceptance unmet)."
+}

@@ -1,0 +1,1 @@
+UI222§5/9 UI224§3: accepted nav has no aria-label; allowed leading question spaces collapse in normal dd whitespace without pre-wrap. Only template/CSS display fix; current API receipt authorization remains primary.
