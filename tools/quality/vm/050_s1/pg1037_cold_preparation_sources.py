@@ -112,7 +112,7 @@ PREPARED=False;held=[];directory_fds=[];refs=[];bus=None;phase='ENTRY';captured_
 def owned_peer_sql(backend):
  tag="usename='schubert_batch'and application_name='PG243-cold-empty'and backend_type='client backend'and state in('idle in transaction','active')"
  return (contract.all_client_sql(backend)+"select count(*)from pg_locks where locktype='advisory'and classid=0 and objid=71419602 and granted and pid<>"+str(backend)+";"
-  "select count(*)from pg_stat_activity a where datname='schubert_nk'and pid="+str(backend)+"and "+tag+
+  "select count(*)from pg_stat_activity a where datname='schubert_nk'and pid="+str(backend)+" and "+tag+
   "and exists(select 1 from pg_locks l where l.pid=a.pid and locktype='advisory'and classid=0 and objid=71419602 and objsubid=1 and mode='ExclusiveLock'and granted);")
 def parent():
  p=pathlib.Path('/proc')/str(OWNER_PID);s=p.joinpath('stat').read_text();ticks=int(s.rpartition(')')[2].split()[19])
