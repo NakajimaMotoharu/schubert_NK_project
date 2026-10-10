@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC247（2026-10-10）：completed-coldの未使用候補配置はSS343同項の限定deltaとfresh M/A/RODB/advisory/heartbeat/tenRef/原本Sessionを使う。兄弟release追加前のcurrent full verifier・全原値認証と、追加後のcurrent祖先FD保持を区別し、旧metadataを無断rebaseしない。current/approval/空epoch/全DB/原本Backup/Unit/有限準備dirを変更しない。partial/close不明では旧tool再実行・起動・current切替をせず、保持所有と現在値を保存する。候補配置完了は親起動/Inspector/native/正式品質完了ではない。
+
 SSC246（2026-10-10）：cold finite工具の既maintenance漏れはSS343§6.9を正に修正する。before root entriesはlocks2＋maintenance/links3、after5dir追加/links8、maintenanceRoot0:0700/nlink2/空・全metadataを維持。既directoryを消してoracleへ合わせない。現在7427/1860448/Source da73・child0/Ref-FD349 metadataobserverのみを、old5463/5489/readonlyDB/M-A保持下でSS343の全source/世代/held属性/独自bus/current原値二読→耐久一回予約/pidfd普通TERM→当actor/bus/FD0・oldtree/原値二読/new正常closeの限定退役にする。stdio3-only取消を349FD scopeへ流用0、旧normalclose/guestexit推定0。途中不明は隔離・再発行禁止。別fresh corrected preflightと旧親子fixedtree・cold準備・Root/正式は別段階、RD/UI/DIF/期限/品質不変更。
 
 SSC245（2026-10-10）：当1037 cold失敗はBEFOREの所有SQL数値AND連結欠落/42601で、原本SDK wrapperにIOExceptionが再包装された。新SQLは独立literalと実PG旧42601/新二読[0,0,1]で是正し、元guest/frozen/UNKNOWNをhotpatchしない。現在5463/1373880＋唯一Refs子5489・RODB/same-peer heartbeat/十Ref/189fileFDを固定treeとしてSS343の新profileで認証する。旧SSC244 noDB/child0 handoffを流用0。連続dispatch禁止・newobserverRefFD保持・両pidfd・耐久各一回予約→親普通TERM一回/DB-lock消失と原値二読→同世代子普通TERM一回/全資源postを順守、SIGKILL/直接DBterminate/再送/期限解除/別actor禁止。片側/unknownならobserver内隔離、正常close補完0。旧actualexitと新退役resultを分離し、全条件後だけ別fresh cold準備へ進む。新業務仕様承認は不要、当source実独立反例とactualhandoffは未受入。
