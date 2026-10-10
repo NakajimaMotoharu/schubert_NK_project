@@ -21,6 +21,12 @@ Program NK-OPS-001 / NK-DAT-001、Production40ef6e894573d2ffab1d1732124960f9c98d
 
 ## 実行・品質・費用境界
 
+12:37追補：1001管理boot0、QEMU19945/newcbca、original/backing不変更。1002-v1はactual1/2.207918s、既typed空ExecStop経路を省略したBUG1004を先行起票。1003-v2はactual1/1.723828s、metadata lifetimeを保持せずGC後GetUnit拒否のBUG1005を先行起票。旧script/log/終了を上書き0。純qualified963 captureと十Refの新1004-v3 actual0/3.440239s、全10冷18/kernel・24/594/Backup47/cred19/original59/oldproof28二読一致・187同pin署名/approval・client/advisory/flock0。newafterSHA1cbb10fa83df138d5f3fe6b40b8107e16475e280745797f6e9e5a58d030073a9。
+
+1005は成功済みDB/treeを再実行せず、上記data proofを再利用し狭い十Unit32fieldと宣言triple/cold execution tailだけを二読0/1.378268s。configSHA246a6673f16736fdd6af66d4e58d4f948bb35492d166d59c5dffe92e8572b2d8、全metadataRefs正常返却、warm履歴復元0。PT-DEP-1004001/002はRef順序・途中取得/Unref/close未知を拒否する二工具case、PT-DEP-1005001/002は独立literal宣言/foreign/null/旧warmとnewcold区別・不要全DB反復0を二case、actual0。1002二case/776typed拒否一caseも0。初回schemaキー/namespace大小文字/fixture広すぎrestore文字検索のTDD失敗は不合格保持・guest副作用0。Production PT/native追加0、formal不変更。
+
+public `evidence/provisional/PG996-1005-current-cold-v1/manifest.json` SHA37d6b9ef6486299896b5921aea6de4c8a41738b2cdc04a89ff66753b3b7c3047。全失敗とnewsafe proof hash・未達を別に記録。SSC243先行/SS343353設計onlysource8f1/main57108/PR80通常merge確認、foundationa836へ継承、empty冷準備/Inspector/newnative/正式未完。PMO PAUSED・共有枠個別費とN/Tnull、次は合法empty cold準備と独立残host契約、通常区切り停止0。
+
 11:59追補：997v1/v2の各compressed copyは5GiB上限でactual1。v1開始seal/convert code欠落をBUG1003/YKT772として起票、v2はbegin/convert/failureを永続保存し実convert1/source/backing stableを確認（v2の実行中に追加したexception handlerはそのrunで実行されたと主張しない、当時の非0receiptは存在）。未知returncodeを-25等へ補完0。失敗copyだけ各5GiBをhash/metadata/log/failure保持後除去、元disk/backing/旧snapshot/privateを保持。partialはどちらも合格ではない。
 
 新1000は元保存diskを不変更のread-only backingにする197248byteのCOW作業層を作成。独立qemu-img compare actual0、元disk/backing identityと開始hash一致、旧内部snapshot保持。standalone backupとは主張せず、以後のguest変更を新 `work/pgpt-vm/private/pg1000-cold-overlay-v1/active.qcow2` にのみ記録する。VM保存元instance.qcow2を直接起動しない。free6.9GiB回復。次1001はSS343既basic.target/ネット・SSH・PGのみ、timers/paths mask、canonical unit商用起動0の同flagsで一回予約先行起動、独立argv一case0。boot/current再認証は未実行。

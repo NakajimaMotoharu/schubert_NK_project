@@ -1,0 +1,122 @@
+{
+  "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+  "bootObservation": {
+    "actualExit": 0,
+    "businessAcceptance": false,
+    "oldRunRestored": false,
+    "originalDiskStable": true,
+    "run": "PG1001-isolated-boot-v1"
+  },
+  "coldObservation": {
+    "actualExit": 0,
+    "afterPrivateSha256": "1cbb10fa83df138d5f3fe6b40b8107e16475e280745797f6e9e5a58d030073a9",
+    "all24RowsUnchangedTwice": true,
+    "allTenColdKernelEmptyTwice": true,
+    "batchRows": 594,
+    "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+    "businessStartStopReloadMigrationWrites": 0,
+    "clientAdvisoryFlock0": true,
+    "configDifferenceFields": [],
+    "currentNativeAbsent": true,
+    "currentStartupAbsent": true,
+    "durableTreesUnchanged": {
+      "backup": 47,
+      "credentials": 19,
+      "oldProofs": 28,
+      "originals": 59
+    },
+    "elapsedSeconds": 3.440239,
+    "formalAccepted": false,
+    "full32ColdConfigurationAccepted": false,
+    "fullColdPreparationAccepted": false,
+    "oldCompletionMadeSuccessfulByColdBoot": false,
+    "oldNativeRestored": false,
+    "oldTmpfsSuccessfullyRetired": false,
+    "run": "PG1004-cold-readonly-v3",
+    "scriptSha256": "3419a3c9a39f66eed7d41527530a607c95a50287327278d092685fdff97d74e0",
+    "signatureVerifiedWithPinnedKey": true,
+    "signedArtifacts": 187,
+    "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+    "startedUTC": "2026-10-10T03:16:51.460889+00:00",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "configurationObservation": {
+    "actualExit": 0,
+    "allTenFull32ColdDeclarationsVerifiedTwice": true,
+    "boot": "cbca8738-3b24-4090-b77c-bf029677cdd6",
+    "businessActions": 0,
+    "configurationSha256": "246a6673f16736fdd6af66d4e58d4f948bb35492d166d59c5dffe92e8572b2d8",
+    "dataCheckpointSha256": "1cbb10fa83df138d5f3fe6b40b8107e16475e280745797f6e9e5a58d030073a9",
+    "elapsedSeconds": 1.378268,
+    "formalAccepted": false,
+    "metadataRefsClosed": true,
+    "run": "PG1005-cold-configuration-v1",
+    "scriptSha256": "f9d5c86927c8fd4b5c66e48a5b42ce083484fe53b8558a60d774d148547849d5",
+    "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+    "startedUTC": "2026-10-10T03:22:50.308178+00:00",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "v3DataProofReusedNotNewAchievement": true,
+    "warmExitHistoryNotRestored": true
+  },
+  "cow": {
+    "actualExit": 0,
+    "logicalCompareExit": 0,
+    "originalDiskUnchanged": true,
+    "originalInternalSnapshotPreserved": true,
+    "standaloneBackup": false,
+    "workingDiskBytes": 197248
+  },
+  "currentNativeRemaining": {
+    "BRANCH": 733,
+    "CLASS": 12,
+    "LINE": 903,
+    "METHOD": 176
+  },
+  "designMainMergeCommit": "57108ee17a23795cfb94edafb9191c7e8a5ae82e",
+  "designPr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/80",
+  "designSourceCommit": "8f1b5852c4ec481999b2c8de4112661adb576e83",
+  "failedAttempts": [
+    {
+      "actualExit": 1,
+      "convertCode": null,
+      "reason": "capacity refusal; code missing BUG1003",
+      "run": "PG997-v1"
+    },
+    {
+      "actualExit": 1,
+      "convertCode": 1,
+      "reason": "5GiB capacity refusal, durable failure receipt",
+      "run": "PG997-v2"
+    },
+    {
+      "actualExit": 1,
+      "reason": "BUG1004 typed-empty capture bypass",
+      "run": "PG1002-v1"
+    },
+    {
+      "actualExit": 1,
+      "reason": "BUG1005 UnitRef lifetime omitted",
+      "run": "PG1003-v2"
+    }
+  ],
+  "failureArtifactsPreserved": true,
+  "formal": "PT-WEB-20260925-24/1964PT/53scope",
+  "formalAccepted": false,
+  "nativeAdded": 0,
+  "productionPtAdded": 0,
+  "rawExported": false,
+  "run": "PG996-1005-current-cold-v1",
+  "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "sourceEvidenceSha256": {
+    "boot": "c6e1c5c27a9513ee6e541aa2f672f677d8b7b5b200d1fa49920b48c7da1da776",
+    "cold": "d7f47022209ba44f0d0c40d7916485422d2611176ff9a1713bd2fcd7b774f438",
+    "configuration": "b573af529083f169bd9957df8b9a82d77a957ed6b0fd31ef2b306fdacd136457",
+    "cow": "7e60748a8794f3e1c70f926f4da0e4aa32491144ad8a9c5ba77ff9f7028b99fa"
+  },
+  "unaccepted": [
+    "SSC243 empty cold namespace/hostRO preparation",
+    "Inspector current native/new-day lawful route",
+    "remaining PGPT/formal gates"
+  ],
+  "wholeWbsAcceptedDelta": 0
+}
