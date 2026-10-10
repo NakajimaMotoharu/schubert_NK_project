@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC261 内部保持channel資源port（2026-10-11、SSC193 native採取の補足）
+
+固定native採取の観測IoはUID/cgroup/FS/inode/属性等のdata-only契約を維持する。別package-private資源portで承認済み保持entryのchannel READ/WRITE・size/read/write/force/closeだけを分離し、native adapterは既FileChannelの通常操作をそのまま使う。任意path/name/profile/configによる開放や権限付与を追加しない。固定profile/name/祖先・owner/gid/mode/link/ACL/FS/readonly、保持inode前後一致、新規file/partial保全、全byte SHA、全resource通常closeという成功条件は不変更。null port/channel、0進捗、不正長・short/long read、前後size不一致、force/close失敗は非成功、NPEをcatchして正常化しない。
+
+agent pinのsize307843/readonly scalar検査を独立純検査へ分離しても、物理Root祖先/保持file/fullSHA検査を代替するauthorityにはしない。PTのresource fault fixtureは進捗/size/closeと原byte/全FD後条件を独立literalで照合し、native adapterの実filesystem正常系とモデルscalar/故障を区別する。モデル試験を本番Root/Unit/署名/pin成功に加点しない。coverage条件削除/到達不能除外/人工終了で100%を作らず、source変更後は必要fresh品質と当source nativeを別に閉じる。RD/UI/通常起動・画面・電文・DB・credential・承認DIF変更0。
+
 SSC260はSSC259の一回用basenameを`zz-pg1160-once-resume.conf`へ訂正する。既`pg477-native-coverage.conf`より後のmerged basename順を独立に確認し、当署名base/nativeから同run --resume二引数だけ追加した有効ExecStartとagent1を必須とする。file内の文字列が正しくても有効宣言へ現れなければ不合格・start0。旧誤順`pg1160-once-resume.conf`はRoot0644/singlelink/647byte/SHA d344cecf96e7a5219adf22b312420ff6e0a1b314834d230e476c507ade7903b0として私有原byte・全metadataを保全、固定失敗owner回収後の別fresh M-A/RWbatch/advisory/十Refsでのみheld typedentry退役/dirsync・訂正reload一回を実施し、新正常scope/全post後だけ空同inode Unit.dに正規fileをnew-only準備する。Unit.d/既nativeの修復・削除、旧prepare/reload再発行、旧close正常化はしない。
 
 reloadによるExecStart表示は全field parserで設定path/argv/ignoreと後半start/exit/pid/code/statusを分離する。前三fieldは各署名declと完全一致（Morning正規resumeのみ差）、他全設定不変、後半は元全tuple又は当sameboot正規reloadのempty(n/a,n/a,0,(null),0/0)だけ許可し、元rawを私有保持・全18実Unit history/kernelの独立不変照合を維持する。任意field除外・部分reset・未知type・旧history削除は禁止。独立basename-order反例/全field悪性変更・null/二重agent/foreignargv/部分historyと当source実有効宣言/全新scope/Root/nativeの証跡をSS353へ追跡する。
