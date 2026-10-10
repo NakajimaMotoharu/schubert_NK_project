@@ -10,6 +10,7 @@ class PublishedCaptureTest(unittest.TestCase):
         self.assertIn('proof.result[\'endMonotonicUs\']==74254946447',code)
         self.assertIn('complete_configuration',code)
         self.assertIn('businessFullOraclePending',code)
+        self.assertIn("summary['dailyInspectorSkip']=skip.qualify",code)
         self.assertTrue("summary['independentProgress']"not in code)
         self.assertNotIn('d5b00104280028d9ea81b44c1d1c805f3c2861ed',code)
         self.assertTrue('343a5a1b-d064-47d5-88c2-31c36d7ba7a4'not in code)

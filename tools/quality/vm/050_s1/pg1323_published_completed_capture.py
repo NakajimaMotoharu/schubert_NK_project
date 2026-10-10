@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import pg1245_fresh_completed_capture_v2 as previous
 import pg1222_completed_retirement_preflight as transport
+import pg1324_daily_inspector_skip_oracle as skip_oracle
 from pg1322_published_root_done_receipt import payload as receipt
 from pg1242_fresh_ordinary_done_receipt import payload as old_receipt
 from pg1293_completed_unused_stage_sources import SOURCE,DIGEST
@@ -44,6 +45,10 @@ def compose(owned,end):
         if old not in code:raise ValueError('fixed whole current capture boundary required')
         code=code.replace(old,new)
     code=code.replace("'businessFullOraclePending':True","'businessFullOraclePending':True,'dailyInspectorSkipNotNewNative':True")
+    marker="startup=tree(pathlib.Path('/run/schubert-nk/startup'));native=tree(pathlib.Path('/run/schubert-nk/pt-coverage'))"
+    if code.count(marker)!=1:raise ValueError('one independent native/progress join required')
+    code='DAILY_SKIP_ORACLE='+repr(inspect.getsource(skip_oracle))+'\n'+code
+    code=code.replace(marker,marker+"\n skip=types.ModuleType('independent_daily_skip');exec(DAILY_SKIP_ORACLE,skip.__dict__)\n summary['dailyInspectorSkip']=skip.qualify(sealed['rows'],rs,'d2e3a86f-27a4-4c2a-be21-b512eebf1216',data.instant('2026-10-10T23:30:23.481632Z'),datetime.datetime.now(datetime.timezone.utc),json.loads(fresh)['native'],native)")
     compile(code,'<actual new-source full32 captured cohort>','exec');return code
 
 
