@@ -26,12 +26,15 @@ def actual(phase):
     if phase!='before':
         v[S][S]['metadata'][6:]=[60,21,21]
         v[S][S+'/epoch.current']=row(28,7,stat.S_IFREG|0o600,len(E),hashlib.sha256(E).hexdigest(),time=21)
-    if phase in ('approval','after','release'):
+    if phase in ('approval','link-staged','after','release'):
         v[A][A]['metadata'][7:]=[22,22]
         v[A][A+'/current']=row(7,8,stat.S_IFREG|0o400,len(NEW),hashlib.sha256(NEW).hexdigest(),time=22)
     if phase in ('after','release'):
         v[C][C]['metadata'][7:]=[23,23]
         v[C][C+'/current']=row(7,9,stat.S_IFLNK|0o777,38,target='/opt/schubert-nk/releases/0.1.0-PG1068',time=23)
+    if phase=='link-staged':
+        v[C][C]['metadata'][7:]=[23,23]
+        v[C][C+'/pg1088-current.part']=row(7,9,stat.S_IFLNK|0o777,38,target='/opt/schubert-nk/releases/0.1.0-PG1068',time=23)
     return v
 
 
@@ -44,7 +47,7 @@ class Finite(unittest.TestCase):
             with self.assertRaises(ValueError):epoch_bytes(value)
 
     def test_all_fixed_publication_phases(self):
-        for phase in ('before','epoch','approval','after','release'):
+        for phase in ('before','epoch','approval','link-staged','after','release'):
             self.assertTrue(verify(fixture(),actual(phase),phase,E,20,30))
 
     def test_null_unknown_epoch_phase_and_incomplete_tree(self):
@@ -108,6 +111,17 @@ class Finite(unittest.TestCase):
             with self.assertRaises(ValueError):verify_retained(root,before[root][root],after[root][root],'after',None,20,30)
         old=before[C][C+'/releases'];bad=copy.deepcopy(old);bad['metadata'][8]+=1
         with self.assertRaises(ValueError):verify_retained(C+'/releases',old,bad,'after',after,20,30)
+
+    def test_staged_fixed_link_allowed_only_exact_exchange_phase(self):
+        value=actual('link-staged')
+        for phase in ('approval','after','release'):
+            with self.assertRaises(ValueError):verify(fixture(),value,phase,E,20,30)
+        for field,bad in [('target','/tmp/foreign'),('sha256','0'*64),('acl',['foreign'])]:
+            wrong=copy.deepcopy(value);wrong[C][C+'/pg1088-current.part'][field]=bad
+            with self.assertRaises(ValueError):verify(fixture(),wrong,'link-staged',E,20,30)
+        for index in (0,2,3,4,5,6,7,8):
+            wrong=copy.deepcopy(value);wrong[C][C+'/pg1088-current.part']['metadata'][index]+=100
+            with self.assertRaises(ValueError):verify(fixture(),wrong,'link-staged',E,20,30)
 
 
 if __name__=='__main__':unittest.main()

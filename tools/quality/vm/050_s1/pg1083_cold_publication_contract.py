@@ -49,7 +49,7 @@ def verify(before,actual,phase,epoch,begin_ns,end_ns):
     whole immutable releases/originals/DB/Units/dispatch inhibition and own leases.
     This oracle never derives approved content from the actual new pointer.
     """
-    if phase not in ('before','epoch','approval','after','release'):
+    if phase not in ('before','epoch','approval','link-staged','after','release'):
         raise ValueError('finite phase refused')
     if (type(before)is not dict or type(actual)is not dict or set(before)!={STARTUP,APPROVAL,CURRENT}
         or set(actual)!=set(before)or type(begin_ns)is not int or type(end_ns)is not int
@@ -79,18 +79,23 @@ def verify(before,actual,phase,epoch,begin_ns,end_ns):
         now=actual[root]
         if type(old)is not dict or type(now)is not dict:raise ValueError('finite tree refused')
         added={STARTUP+'/epoch.current'}if root==STARTUP and phase!='before'else set()
+        if root==CURRENT and phase=='link-staged':added={CURRENT+'/pg1088-current.part'}
         if set(now)!=set(old)|added or root not in old:raise ValueError('finite tree entries refused')
         for path,row in now.items():
             m=_row(row)
             if path in added:
+                if root==CURRENT:
+                    if m[0]!=_row(old[root])[0]or m[2:7]!=[0,0,stat.S_IFLNK|0o777,1,len(NEW_LINK)]or row['sha256']is not None or row['target']!=NEW_LINK:
+                        raise ValueError('finite staged link refused')
+                    _changed_time(m,begin_ns,end_ns);continue
                 if m[0]!=_row(old[root])[0]or m[2:7]!=[0,0,stat.S_IFREG|0o600,1,len(epoch)]or row['sha256']!=hashlib.sha256(epoch).hexdigest()or row['target']is not None:
                     raise ValueError('finite new epoch refused')
                 _changed_time(m,begin_ns,end_ns);continue
             previous=old[path];fixed=_row(previous)
             directory_changed=(path==STARTUP and phase!='before'
-              or path==APPROVAL and phase in ('approval','after','release')
-              or path==CURRENT and phase in ('after','release'))
-            approval_changed=path==APPROVAL+'/current'and phase in ('approval','after','release')
+              or path==APPROVAL and phase in ('approval','link-staged','after','release')
+              or path==CURRENT and phase in ('link-staged','after','release'))
+            approval_changed=path==APPROVAL+'/current'and phase in ('approval','link-staged','after','release')
             link_changed=path==CURRENT+'/current'and phase in ('after','release')
             if directory_changed:
                 size=fixed[6]+20 if path==STARTUP else fixed[6]
@@ -116,13 +121,13 @@ def verify_retained(path,fixed,observed,phase,after,begin_ns,end_ns):
     Linked new objects are independently checked by the whole finite-tree oracle.
     Unrelated old objects must retain all nine metadata fields/content/ACL.
     """
-    if type(path)is not str or phase not in ('before','epoch','approval','after','release'):
+    if type(path)is not str or phase not in ('before','epoch','approval','link-staged','after','release'):
         raise ValueError('retained phase/path refused')
     old=_row(fixed);now=_row(observed)
     changed_directory=(path==STARTUP and phase!='before'
-      or path==APPROVAL and phase in ('approval','after','release')
-      or path==CURRENT and phase in ('after','release'))
-    replaced=(path==APPROVAL+'/current'and phase in ('approval','after','release')
+      or path==APPROVAL and phase in ('approval','link-staged','after','release')
+      or path==CURRENT and phase in ('link-staged','after','release'))
+    replaced=(path==APPROVAL+'/current'and phase in ('approval','link-staged','after','release')
       or path==CURRENT+'/current'and phase in ('after','release'))
     if changed_directory:
         if type(after)is not dict or path not in after or path not in after[path]:
