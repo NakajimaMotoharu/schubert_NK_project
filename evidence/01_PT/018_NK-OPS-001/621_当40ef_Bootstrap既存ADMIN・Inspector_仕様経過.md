@@ -1,5 +1,9 @@
 # 621 当40ef：Bootstrap既存ADMIN・Inspector実native（未実行）
 
+09:25更新：986verify0/6.532423s→execute一回actual0/14.241175s、既存ADMIN正常終了20/PID1/元Unit30秒/全24不変/全新scope正常・synthetic二fixtureのNOREPLACE私有退役。989post-v3 actual全after0だがresult.runがbefore名を残したBUG1002/YKT771を修正前起票、05782ce64でmatcher＋必須結果検査・990独立二case、991 newreadonlypost-v4 actual0/3.518751s/runPG989-bootstrap-post-v4/全24-full32-187-tenkernel-actor-DB-advisory-flock0/native73安定・capturednormal20を先に検証。古いv3はtrace不合格保持、Unit起動/fixture生成/退役再実行0。
+
+992新nativeは当972-v2の八streamと当Bootstrap二dumpだけを資格化する（同一Bootstrap process/JVMの二dump、全体10stream/9distinct JVM execution、Root→ordinary execは同OS PIDを保つためOS process数を推定しない）。旧e01616/18/20nativeをimport0、当9263560host/JAR/source/time-window/hash/byte一致を維持。993独立生成case0、初回TDD F1はmulti-use prefixをcount1へ過剰拘束した工具未完成・VM作用0、非0presence＋最終literal pinsへ是正。実native未受入、次clean992。
+
 09:21更新：986stage actual0/00:19:24Zを保持。verify初回はhost guardが旧stage-v1を読みFileNotFound、guest/所有scope/Unit/fixture未発行（BUG1001/YKT770修正前起票）。Source main/frozen983/profile/private正常stageを変更せず、host read guardを実stage-v3へ訂正・987三phase生成/消費caseへ追加、既stage反復0。後続実verify/execute/post/nativeの成功を待ち、host拒否をUnit失敗に読み替えない。
 
 09:19内部補足：旧profileの「normal20」は20試験／20条件ではなく、SS343の既存ADMINを検出したUnit正常終了コード20。PG985 actualABI/Werror/独立Javaoracle0、operator8b0942f4c・newprofile983/frozen-v3/source40ef。新post989は真正captured終了20・PID1/30秒→同generation又は承認済みGC現在値を全tenLoad/Ref内で照合し、元成功をGCから推定しない。990独立生成一case0、実Unit未起動。
