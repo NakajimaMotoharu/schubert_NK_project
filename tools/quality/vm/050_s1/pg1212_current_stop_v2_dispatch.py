@@ -10,6 +10,9 @@ def source():
     s=s.replace('pg1199-frozen-v1','pg1209-frozen-v1').replace('pg1200-current-stop-preflight-v1','pg1211-current-stop-preflight-v2')
     s=s.replace('pg1201','pg1212').replace('PG1201','PG1212')
     s=s.replace("commands=[(SSH+[prefix+'Pg1208NativeArgumentTest'],None)", "commands=[(SSH+[prefix+'Pg1208StopLabelTest'],None),(SSH+[prefix+'Pg1208NativeArgumentTest'],None)")
+    marker="STAGE=inspect.getsource(archive_members)+'\\n'+STAGE"
+    if s.count(marker)!=1:raise ValueError('fixed archive source literal insertion refused')
+    s=s.replace(marker,'STAGE='+repr(previous.STAGE.replace('pg1201','pg1212').replace('PG1201','PG1212').replace('pg1198','pg1208')))
     ast.parse(s);return s
 
 
