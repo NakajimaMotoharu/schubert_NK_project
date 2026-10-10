@@ -1,4 +1,8 @@
 # 設定file・directory・初期data・migration・切戻し設計
+SSC247（2026-10-10、SSC190243のcompleted-cold未使用候補配置）：冷準備が全scope正常完了しstartup/requests/native空の場合、旧pending又はwarm baselineを現在値へ代用しない。今回current40ef/PG932・bootcbca・完全DONE原本eeae/091663・全24表594/Backup/credential/旧proof・十cold全宣言/資源を再認証し、新M/A・専用readonly batch/advisory71419602/実heartbeat・tenRef・原本Session内で正規署名d5/PG1068/BOM0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d/全187を未使用固定releaseへnew-only配置する。old currentのhostROとimmutable full verifier、全原値二読を維持する。
+
+許容deltaは当未使用release tree/私有detached signature/工具receipt、各親dirの有限追加効果だけ。閉archiveの全member/type/ancestor/alias、全payload size/hash/canonical sums、固定pin/Ed25519とowner/mode・file/directory syncを検査する。current/approval/epoch/DB/原本/Backup/Unit/config/start-stop/DDL/permit変更0。current祖先FDは兄弟候補追加後に新取得し、追加前認証と追加後保持を別scopeとして記録する（旧祖先metadataの無断rebase/除外0）。追加前current full verifier、両側のcurrent/全原値/資源二読、追加後から正常closeまでの保持全inventoryを省略しない。DB rollback/close/server0→tenRef/FD/bus→A/M正常帰還後のみnew-only完了receiptを作る。unknown/partial/close不明では所有を保持し、同slot再配置/旧成功補完/次起動0。候補配置だけをimmutable候補受入・current切替・真正親/Inspector/native/正式品質へ加算しない。
+
 
 SSC246（2026-10-10、BUG1020/YKT789）：cold finite layoutは既§6.9の`/run/schubert-nk/maintenance`を省略しない。before root:root0755のclosed entriesはmaintenance.lock/startup-admission.lock/maintenance、nlink3。maintenanceはroot:root0700・nlink2・ACL0・空を保持する。SSC243のstartup/backup-request/cleanup-request/expiry-request/pt-coverageだけ5dir追加後、rootnlink8、coverage711/六childrole等は既契約のまま。before/after双方でmaintenanceを厳密二読し、identity/全metadata/空が同じことをFDで証明する。unknown entry/非空/不明を修復や除外で通さず拒否する。
 
