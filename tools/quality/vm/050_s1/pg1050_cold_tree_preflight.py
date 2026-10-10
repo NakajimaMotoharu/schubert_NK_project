@@ -22,6 +22,7 @@ def payload():
     node = next(n for n in ast.parse(guest()).body if isinstance(n, ast.FunctionDef) and n.name == 'owned_peer_sql')
     prefix = 'SOURCE_SHA=' + repr(hashlib.sha256(old_child.read_bytes()).hexdigest()) + '\n'
     prefix += 'PINS=' + repr(frozen['fileHashes']) + '\nFIXED_FUNCTION=' + repr(ast.unparse(node)) + '\n'
+    prefix += 'SOCKET_SOURCE=' + repr(__import__('pathlib').Path(__file__).with_name('pg1054_cold_socket_contract.py').read_text()) + '\n'
     raw = prefix + head + '\n' + BODY
     ast.parse(raw)
     return raw
@@ -30,6 +31,7 @@ def payload():
 BODY = r'''
 import dbus,time,stat,re
 exec(FIXED_FUNCTION,env)
+socket_module=types.ModuleType('socket_contract');exec(SOCKET_SOURCE,socket_module.__dict__)
 save=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1037-cold-prepared-v1/tree-preflight-v1')
 assert not os.path.lexists(save);save.mkdir(mode=0o700)
 held=[];refs=[];bus=None;manager=None;phase='ENTRY'
@@ -80,10 +82,10 @@ def peer():
  sockets={s.st_ino for f in pathlib.Path('/proc/5463/fd').iterdir()if stat.S_ISSOCK((s:=f.stat()).st_mode)}
  tcp=[]
  assert v['clientAddress']in ('127.0.0.1','::1')
- for net,remote in [('tcp','0100007F:1538'),('tcp6','00000000000000000000000001000000:1538')]:
+ for net in ('tcp','tcp6'):
   for l in pathlib.Path('/proc/5463/net',net).read_text().splitlines()[1:]:
    f=l.split()
-   if int(f[9])in sockets and int(f[1].split(':')[1],16)==v['clientPort']and f[2]==remote and f[3]=='01':tcp.append(int(f[9]))
+   if int(f[9])in sockets and socket_module.match(net,f[1],f[2],f[3],v['clientAddress'],v['clientPort'],5432):tcp.append(int(f[9]))
  assert len(tcp)==1
  del v['state'];v['heartbeatVerifiedByFrozenSameConnection']=True;v['socketInode']=tcp[0]
  return v

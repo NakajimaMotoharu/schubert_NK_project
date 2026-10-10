@@ -16,13 +16,18 @@ def payload():
     return raw.replace(old, 'PG1051-cold-tree-preflight-v2').replace("/tree-preflight-v1'", "/tree-preflight-v2'")
 
 
-def main():
+def dispatch(run, name, script):
+    if (run, name) not in {
+        ('PG1051-cold-tree-preflight-v2', 'pg1051-cold-tree-preflight-v2'),
+        ('PG1055-cold-tree-preflight-v3', 'pg1055-cold-tree-preflight-v3'),
+    }:
+        raise ValueError('fixed preflight dispatch identity refused')
     os.umask(0o077)
-    out = W / 'pg1051-cold-tree-preflight-v2'
+    out = W / name
     out.mkdir(mode=0o700)
-    raw = payload().encode()
+    raw = script.encode()
     source = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-    begin = {'run':'PG1051-cold-tree-preflight-v2','operatorSource':source,
+    begin = {'run':run,'operatorSource':source,
              'startedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),
              'scriptSha256':hashlib.sha256(raw).hexdigest(),'formalAccepted':False}
     with (out/'guest-script.private.py').open('xb') as f:
@@ -47,6 +52,10 @@ def main():
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(result,f,sort_keys=True); f.flush(); os.fsync(f.fileno())
     print(json.dumps(result)); raise SystemExit(actual)
+
+
+def main():
+    dispatch('PG1051-cold-tree-preflight-v2','pg1051-cold-tree-preflight-v2',payload())
 
 
 if __name__=='__main__':
