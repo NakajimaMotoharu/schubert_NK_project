@@ -16,6 +16,8 @@ def once_tree(parent, child, tree, orphan, reserve, open_pidfd, send, wait, clos
     primary = None
     try:
         before = tree()
+        if type(before) is not dict:
+            raise ValueError('whole tree proof unavailable')
         for actor in (parent, child):
             if tree() != before:
                 raise ValueError('tree changed before binding')
@@ -29,8 +31,15 @@ def once_tree(parent, child, tree, orphan, reserve, open_pidfd, send, wait, clos
         if wait(descriptors[0]) is not True:
             raise ValueError('parent terminal not confirmed')
         after_parent = orphan()
+        if type(after_parent) is not dict:
+            raise ValueError('orphan proof unavailable')
         if orphan() != after_parent:
             raise ValueError('orphan or server changed')
+        # A child may already terminate with its supervisor. The caller must
+        # prove child pidfd/PID/bus disappearance and all postconditions; never
+        # send a signal to an already terminal generation or infer normal close.
+        if after_parent.get('childGone') is True:
+            return
         reserve(child, after_parent)
         if orphan() != after_parent:
             raise ValueError('orphan changed after reservation')

@@ -4,7 +4,7 @@ from pg1049_cold_tree_contract import once_tree
 
 
 class Tree(unittest.TestCase):
-    def run_case(self, fail=None, wait=False, mutate=None):
+    def run_case(self, fail=None, wait=False, mutate=None, child_gone=False):
         calls = []; signals = []; counts = {}
         def act(name, value=None):
             calls.append(name); counts[name] = counts.get(name, 0) + 1
@@ -18,7 +18,7 @@ class Tree(unittest.TestCase):
         try:
             once_tree((5463, 1373880), (5489, 1373951),
                       lambda: act('tree', {'generation': 'fixed'}),
-                      lambda: act('orphan', {'parentGone': True, 'server0': True, 'child': 'fixed'}),
+                      lambda: act('orphan', {'parentGone': True, 'server0': True, 'child': 'fixed', **({'childGone':True}if child_gone else {})}),
                       lambda actor, proof: act('reserve' + str(actor[0])),
                       lambda pid: act('open' + str(pid), pid), send,
                       lambda fd: act('wait' + str(fd), not wait),
@@ -73,6 +73,12 @@ class Tree(unittest.TestCase):
     def test_null_callback_is_rejected_before_any_action(self):
         with self.assertRaises(ValueError):
             once_tree((5463,1373880),(5489,1373951),*([None]*7))
+
+    def test_already_terminal_child_is_not_signalled_or_normally_closed(self):
+        calls,signals,failure=self.run_case(child_gone=True)
+        self.assertIsNone(failure);self.assertEqual([5463],signals)
+        self.assertNotIn('reserve5489',calls);self.assertNotIn('send5489',calls)
+        self.assertEqual(['close5489','close5463'],calls[-2:])
 
 
 if __name__ == '__main__':
