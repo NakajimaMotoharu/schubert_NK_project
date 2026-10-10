@@ -47,17 +47,19 @@ def show():
  return dict(row.split('=',1)for row in r.splitlines())
 if Path('/proc/sys/kernel/random/boot_id').read_text().strip().replace('-','')!=BINDING['boot']:raise ValueError('current boot refused')
 state=show()
-if not(state['ActiveState']=='active'and state['SubState']=='exited'and state['MainPID']=='0'and not state['Job']and state['Result']=='success'and state['ExecMainCode']=='1'and state['ExecMainStatus']=='0'and state['InvocationID']==BINDING['invocation']and int(state['ExecMainStartTimestampMonotonic'])==BINDING['start']):raise ValueError('current parent not terminal-success')
+if not(state['ActiveState']=='inactive'and state['SubState']=='dead'and state['MainPID']=='0'and not state['Job']and state['Result']=='success'and state['ExecMainCode']=='1'and state['ExecMainStatus']=='0'and state['InvocationID']==BINDING['invocation']and int(state['ExecMainStartTimestampMonotonic'])==BINDING['start']):raise ValueError('current parent not terminal-success')
 base=Path('/var/lib/schubert-nk/maintenance')
 expected=('NKACT1\n'+BINDING['run']+'\n'+BINDING['cutoff']+'\n'+BINDING['activation']+'\n').encode('ascii')
-active,a=read(base/'active');begin,b=read(base/'attempts'/(BINDING['activation']+'.begin'))
+expected_run=('NKRUN1\n'+BINDING['run']+'\n'+BINDING['cutoff']+'\n').encode('ascii')
+if os.path.lexists(base/'active'):raise ValueError('live original remains')
+anchor,a=read(base/'runs'/(BINDING['run']+'.run'));begin,b=read(base/'attempts'/(BINDING['activation']+'.begin'))
 done,c=read(base/'attempts'/(BINDING['activation']+'.done'))
-if active!=begin or active!=expected:raise ValueError('actual current original binding refused')
+if begin!=expected or anchor!=expected_run:raise ValueError('actual current original binding refused')
 cmd=['/usr/bin/journalctl','--boot='+BINDING['boot'],'_PID=1','UNIT='+UNIT,'INVOCATION_ID='+BINDING['invocation'],'-o','json','--no-pager']
 raw=subprocess.check_output(cmd,timeout=10);rows=[json.loads(x)for x in raw.splitlines()]
 result=qualify(BINDING,rows,done)
-if show()!=state or read(base/'active')!=(active,a)or read(base/'attempts'/(BINDING['activation']+'.begin'))!=(begin,b)or read(base/'attempts'/(BINDING['activation']+'.done'))!=(done,c)or subprocess.check_output(cmd,timeout=10)!=raw:raise ValueError('terminal receipt unstable')
-print(json.dumps({'receipt':result,'activeSha256':hashlib.sha256(active).hexdigest(),'doneSha256':hashlib.sha256(done).hexdigest(),'pid1JournalSha256':hashlib.sha256(raw).hexdigest(),'unit':state,'scope':'RECEIPT_ONLY','rawPrinted':False,'wholeAccepted':False}))
+if show()!=state or os.path.lexists(base/'active')or read(base/'runs'/(BINDING['run']+'.run'))!=(anchor,a)or read(base/'attempts'/(BINDING['activation']+'.begin'))!=(begin,b)or read(base/'attempts'/(BINDING['activation']+'.done'))!=(done,c)or subprocess.check_output(cmd,timeout=10)!=raw:raise ValueError('terminal receipt unstable')
+print(json.dumps({'receipt':result,'runAnchorSha256':hashlib.sha256(anchor).hexdigest(),'beginSha256':hashlib.sha256(begin).hexdigest(),'activeAbsent':True,'doneSha256':hashlib.sha256(done).hexdigest(),'pid1JournalSha256':hashlib.sha256(raw).hexdigest(),'unit':state,'scope':'RECEIPT_ONLY','rawPrinted':False,'wholeAccepted':False}))
 '''
 
 

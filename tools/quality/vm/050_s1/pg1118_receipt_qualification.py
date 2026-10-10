@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-OUT = ROOT / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG1116-1117-receipt-qualification'
+OUT = ROOT / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG1116-1117-receipt-qualification-v2'
 
 
 def main():
@@ -36,14 +36,15 @@ def main():
         branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip(),
         startedUTC=start.isoformat(), completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
         os=platform.platform(), python=platform.python_version(), command=command,
-        actualExit=run.returncode, expected='7 host tool tests, all OK; no VM operations',
-        passed=run.returncode==0 and b'Ran 7 tests' in log and log.rstrip().endswith(b'OK'),
+        actualExit=run.returncode, expected='8 host tool tests, all OK; no VM operations',
+        passed=run.returncode==0 and b'Ran 8 tests' in log and log.rstrip().endswith(b'OK'),
         oracle='literal byte/journal/current captured binding; pre-existing independent PID1 oracle unchanged',
         logSha256=hashlib.sha256(log).hexdigest(), toolSourceSha256=files,
         trace=['NK-OPS-001','SS343','SS353','SSC253','PT-DEP-1116001..004','PT-DEP-1117001..003'],
         coverage='NOT_APPLICABLE_TO_THIS_HOST_TOOL_QUALIFICATION; Production counters unchanged',
         failuresPreserved='Pre-qualification TDD fixture corrections: arbitrary cursor is valid; start binding key is not systemctl mutation',
         pending=['actual current receipt','whole originals/DB/source closure','same-source native','owned stop'],
+        bugs=['BUG-1028'], crossChecks=['YKT-797'],
         secretsIncluded=False)
     with (OUT / 'manifest.json').open('x') as f:
         json.dump(manifest, f, indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
