@@ -543,6 +543,53 @@ final class InspectorUnitProbeTest {
         "schubert-nk-inbox-inspector.service");
   }
 
+  /** PT-DEP-1007001: a streaming-query launch failure is sanitized before any child exists. */
+  @Test
+  void streamingStartIoFailureIsSanitizedWithoutRetry() {
+    var calls = new AtomicInteger();
+    var expected = List.of("literal-stream-query");
+    var reader =
+        new InspectorUnitProbe.NativeReader(
+            command -> {
+              assertEquals(expected, command);
+              calls.incrementAndGet();
+              throw new IOException("PUBLIC_STREAM_DIAGNOSTIC_CANARY");
+            });
+    failed(
+        StopGateFailure.COMMAND_FAILURE,
+        () -> reader.executeStreaming(expected, 4, TimeUnit.SECONDS.toNanos(5)));
+    assertEquals(1, calls.get());
+  }
+
+  /** PT-DEP-1007002: independent ASCII boundary; output N+1 rejects and closes the real child. */
+  @Test
+  void streamingLiteralByteLimitAndOverflowCloseActualProcess() throws Exception {
+    for (String literal : List.of("ABCD", "ABCDE")) {
+      var process = new ProcessBuilder("/usr/bin/printf", "%s", literal).start();
+      var reader = new InspectorUnitProbe.NativeReader(command -> process);
+      if (literal.length() == 4) {
+        byte[] actual =
+            reader.executeStreaming(
+                List.of("literal-stream-query"), 4, TimeUnit.SECONDS.toNanos(5));
+        try {
+          assertArrayEquals(new byte[] {65, 66, 67, 68}, actual);
+        } finally {
+          Arrays.fill(actual, (byte) 0);
+        }
+      } else {
+        failed(
+            StopGateFailure.MALFORMED_STATE,
+            () ->
+                reader.executeStreaming(
+                    List.of("literal-stream-query"), 4, TimeUnit.SECONDS.toNanos(5)));
+      }
+      assertFalse(process.isAlive());
+      assertEquals(0, process.exitValue());
+      assertThrows(IOException.class, () -> process.getInputStream().read());
+      assertThrows(IOException.class, () -> process.getOutputStream().write(65));
+    }
+  }
+
   private static List<String> processCommand() {
     return List.of(
         "/usr/bin/busctl",
