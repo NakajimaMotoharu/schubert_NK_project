@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "preservationToolRetest": {
+    "run": "PG995-quota-preservation-v1",
+    "actualExit": 0,
+    "subjects": 6,
+    "toolCases": 11,
+    "productionPtAdded": 0,
+    "privateManifestSha256": "447198fa4a4b53ae581f4524164a5f2495dda39405e767ae214f08ef586df813"
+  },
+  "source": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "run": "PG978-v2/983/985/986/989-v4/992",
+  "state": "CURRENT_BOOTSTRAP_EXIT20_POST_NATIVE10_QUALIFIED_NOT_GLOBAL",
+  "actualExit": 0,
+  "sameSourceHost": "PG926/927",
+  "tests": 3560,
+  "suites": 523,
+  "staticModules0": 6,
+  "bootstrapUnitSeconds": 1.52426,
+  "bootstrapExpectedExit": 20,
+  "bootstrapToolExecuteSeconds": 14.241175,
+  "currentNativeStreams": 10,
+  "distinctJvmExecutions": 9,
+  "distinctOsProcessCount": null,
+  "incrementalVsCurrentNative8": {
+    "BRANCH": 1,
+    "CLASS": 0,
+    "LINE": 27,
+    "METHOD": 2
+  },
+  "remaining": {
+    "BRANCH": 733,
+    "CLASS": 12,
+    "LINE": 903,
+    "METHOD": 176
+  },
+  "counters": {
+    "LINE": {
+      "missed": 903,
+      "covered": 42839,
+      "total": 43742,
+      "percent": 97.94
+    },
+    "METHOD": {
+      "missed": 176,
+      "covered": 7113,
+      "total": 7289,
+      "percent": 97.59
+    },
+    "CLASS": {
+      "missed": 12,
+      "covered": 1183,
+      "total": 1195,
+      "percent": 99.0
+    },
+    "BRANCH": {
+      "missed": 733,
+      "covered": 17500,
+      "total": 18233,
+      "percent": 95.98
+    }
+  },
+  "otherSourceNativeImported": 0,
+  "wholeAccepted": false,
+  "formalAcceptedDelta": 0,
+  "N": null,
+  "T": null,
+  "evidence": "evidence/01_PT/018_NK-OPS-001/621_当40ef_Bootstrap既存ADMIN・Inspector_仕様経過.md",
+  "recordedUTC": "2026-10-10T00:31:36.307642+00:00",
+  "branch": "dev-foundation",
+  "operatorSource": "ae119425e4e8517da9119af7fa7cc7051bf4082d",
+  "command": "python3 -B tools/quality/vm/050_s1/pg992_current_bootstrap_native_counter.py",
+  "jdk": "25.0.4",
+  "osVersion": null,
+  "osVersionNote": "not freshly measured in this operation",
+  "input": "Qualified current40ef8 only + two immutable Bootstrap dumps from one actual JVM; original full24/32 and existingADMIN",
+  "expected": "SS343 normal existingADMIN exit20 within30s; same source/byte/hashes/window/session; original credentials protected, synthetic fixtures retired, all24 unchanged and all scopes/resources closed",
+  "actual": "compile/oracle/verify/execute/post/native qualification0; global four100 incomplete",
+  "privateNativeManifestSha256": "fe04bb4ba6a7ece9c392aba17b24776a9c3c28e994f057745e6bf613bc2b470a",
+  "frozenHostManifestSha256": "4ae512d3b3a8e85d81fcd8e9ef04279fff58114c42e9b158adc61299d8211fdf",
+  "moduleCounters": {
+    "api": {
+      "BRANCH": {
+        "covered": 4018,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 306,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 10589,
+        "missed": 22
+      },
+      "METHOD": {
+        "covered": 1486,
+        "missed": 2
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    },
+    "batch": {
+      "BRANCH": {
+        "covered": 7280,
+        "missed": 723
+      },
+      "CLASS": {
+        "covered": 331,
+        "missed": 12
+      },
+      "LINE": {
+        "covered": 16381,
+        "missed": 878
+      },
+      "METHOD": {
+        "covered": 2580,
+        "missed": 173
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    },
+    "bootstrap": {
+      "BRANCH": {
+        "covered": 1593,
+        "missed": 10
+      },
+      "CLASS": {
+        "covered": 74,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2698,
+        "missed": 3
+      },
+      "METHOD": {
+        "covered": 504,
+        "missed": 1
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    },
+    "protocol": {
+      "BRANCH": {
+        "covered": 1010,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 157,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3464,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 741,
+        "missed": 0
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    },
+    "storage": {
+      "BRANCH": {
+        "covered": 505,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 36,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1135,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 249,
+        "missed": 0
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    },
+    "web": {
+      "BRANCH": {
+        "covered": 3094,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 279,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 8572,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1553,
+        "missed": 0
+      },
+      "classByteMismatch": 0,
+      "formal": false
+    }
+  },
+  "coverage100": false,
+  "formalAccepted": false,
+  "rawExported": false,
+  "relatedBug": [
+    "BUG-1000",
+    "BUG-1001",
+    "BUG-1002"
+  ],
+  "relatedYkt": [
+    "YKT-769",
+    "YKT-770",
+    "YKT-771"
+  ],
+  "previousFailuresPreserved": [
+    "978-v1 bad two-run row fixture actual1",
+    "986 verify first missing stage-v1 host preflight1; no guest replay",
+    "989-v3 actual post0 but wrong result.run, trace unqualified",
+    "initial TDD fixture/label multiplicity failures excluded"
+  ],
+  "proofHashes": {
+    "pg978-bootstrap-before-v2.safe.json": "7727bd3ab5f9290f986f2f2ef8701737f9eb0cc884da0440e2ee647331b59caf",
+    "pg983-frozen-v3.safe.json": "9dc6ebf808cd336357c5167cd51bf307378640ca7501d8031a30b5111dd55173",
+    "pg983-stage-v3.safe.json": "9ef217b464c73e9c5c8e2d88135c09e82fec97c3418025fb1bb64df9c5d44973",
+    "pg983-verify-v3.safe.json": "6bc72fa05416f24e2de04b78674f9d8a674550809aa863b6e31e7e0a4beff47c",
+    "pg983-execute-v3.safe.json": "154b3ff56370a6ccb438a1528401d3192af6a616da9c44bd20d8d0f1586cecee",
+    "pg989-bootstrap-post-v4.safe.json": "647092128e790d9b4de29e745e3c9d8ed75857c71f56360ead6a2733d64f40fd",
+    "pg988-bootstrap-fixtures-v1/manifest.safe.json": "06a0a9919bccc0e7015c69896e4d47cf3d11c111857ab5c63e15b48c39aee1e3"
+  }
+}
