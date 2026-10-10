@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records, timer_path_classification
+from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records, timer_path_classification, canonical_sum_bytes
 
 
 class Contract(unittest.TestCase):
@@ -148,6 +148,16 @@ class Contract(unittest.TestCase):
         for raw, props in ((None, console), (literal, None), (literal + literal, console),
                            ('unknown.path loaded active waiting Unknown\n', console), ('a.timer loaded failed failed Fault\n', console)):
             with self.assertRaises(ValueError): timer_path_classification(raw, props)
+
+    def test_checksum_independent_ascii_order_two_spaces_and_lf(self):
+        artifact = {'path': 'payload', 'size': 4, 'sha256': 'e12e115acf4552b2568b55e93cbd39394c4ef81c82447fafc997882a02d23677'}
+        manifest_hash = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+        expected = b'0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef  RELEASE-MANIFEST.json\ne12e115acf4552b2568b55e93cbd39394c4ef81c82447fafc997882a02d23677  payload\n'
+        self.assertEqual(expected, canonical_sum_bytes([artifact], manifest_hash))
+        for records, digest in ((None, manifest_hash), ([], manifest_hash), ([artifact, artifact], manifest_hash), ([artifact], None)):
+            with self.assertRaises(ValueError): canonical_sum_bytes(records, digest)
+        for name in ('SHA256SUMS', 'RELEASE-MANIFEST.json', '../payload', 'a b', 'é', '.'):
+            with self.assertRaises(ValueError): canonical_sum_bytes([{**artifact, 'path': name}], manifest_hash)
 
     def test_all_roles_sql_independent_literal_and_rows(self):
         self.assertEqual("select count(*)from pg_stat_activity where datname='schubert_nk'and backend_type='client backend'and pid<>pg_backend_pid()and pid<>121;", all_client_sql(121))

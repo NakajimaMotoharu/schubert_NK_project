@@ -218,6 +218,27 @@ def timer_path_classification(raw, console):
     return result
 
 
+def canonical_sum_bytes(records, manifest_hash):
+    if (type(records) is not list or not records or type(manifest_hash) is not str
+        or re.fullmatch('[0-9a-f]{64}', manifest_hash) is None):
+        raise ValueError('checksum contract refused')
+    hashes = {'RELEASE-MANIFEST.json': manifest_hash}
+    for item in records:
+        if type(item) is not dict or set(item) != {'path', 'size', 'sha256'}:
+            raise ValueError('checksum record refused')
+        name = item['path']
+        if (type(name) is not str or not name or name == '.' or not name.isascii()
+            or str(PurePosixPath(name)) != name or PurePosixPath(name).is_absolute()
+            or '..' in PurePosixPath(name).parts or '\\' in name
+            or any(ord(c) < 33 or ord(c) == 127 for c in name)
+            or name in hashes or name == 'SHA256SUMS'
+            or type(item['size']) is not int or item['size'] < 0
+            or type(item['sha256']) is not str or re.fullmatch('[0-9a-f]{64}', item['sha256']) is None):
+            raise ValueError('checksum path/hash refused')
+        hashes[name] = item['sha256']
+    return ''.join(hashes[name] + '  ' + name + '\n' for name in sorted(hashes)).encode('ascii')
+
+
 def durable_reservation(directory_fd, name, data):
     """New fixed private reservation only; partial writes remain non-replayable."""
     if (type(directory_fd) is not int or directory_fd < 0 or type(name) is not str
