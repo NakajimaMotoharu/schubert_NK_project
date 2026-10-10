@@ -54,7 +54,8 @@ def directory_test():
       Files.setAttribute(fixture.f.parent,"unix:mode",0711);
       for(String role:List.of("parent","backup","cleanup","expiry","root-api","inspector"))Files.createDirectory(fixture.f.parent.resolve(role));
       Files.writeString(fixture.f.parent.resolve("parent/old.exec"),"independent-held-old-exec");
-      var before=fixture.metadata(fixture.f.parent);Pg1148NativeRoleDirectory.prepareParent(fixture.held,fixture);parentPositions=fixture.f.position;
+      var before=fixture.metadata(fixture.f.parent);fixture.f.position=0;fixture.f.counts.clear();fixture.f.events.clear();
+      Pg1148NativeRoleDirectory.prepareParent(fixture.held,fixture);parentPositions=fixture.f.position;
       var after=fixture.metadata(fixture.f.parent);check(after.get("mode").equals(0040755));
       for(String k:List.of("dev","ino","uid","gid","nlink","size","lastModifiedTime"))check(before.get(k).equals(after.get(k)));
       check(Files.readString(fixture.f.parent.resolve("parent/old.exec")).equals("independent-held-old-exec"));
