@@ -1,0 +1,195 @@
+{
+  "purpose": "Concrete proposal for primary review; test sources were NOT changed, existing successes not recertified",
+  "authority": "UI222§2 QA045/UIC005; CommonLayoutContractTest verifies deputy head behavior",
+  "source": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java",
+      "sourceSha256": "04319f35c45c58a25f365a9a578fccf508cef245183dfbe28647ae4a219acfc6",
+      "currentAssertions": [
+        {
+          "line": 436,
+          "text": "assertEquals(\"Users\", dom.title());"
+        },
+        {
+          "line": 744,
+          "text": "assertEquals(\"User詳細\", dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LogControllerTest.java",
+      "sourceSha256": "9083e6bc256512810360e618f8b3adfcdef6915b0645bddac59aadffcc93c426",
+      "currentAssertions": [
+        {
+          "line": 370,
+          "text": "assertEquals(\"Logs\", Jsoup.parse(get.getResponse().getContentAsString()).title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java",
+      "sourceSha256": "bb3fe70248cac4e19f8f28fbad3882f273db913ffe3c491fad9b830870653b2a",
+      "currentAssertions": [
+        {
+          "line": 347,
+          "text": "assertEquals(\"User追加\", dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sourceSha256": "b6e66292787bced31100f69f6735c0bb30ea5dc4fc5cee5af2387c09869cafdc",
+      "currentAssertions": [
+        {
+          "line": 653,
+          "text": "assertEquals(\"質問回答\", dom.title());"
+        },
+        {
+          "line": 672,
+          "text": "assertEquals(\"質問回答明細\", detailDom.title());"
+        },
+        {
+          "line": 784,
+          "text": "path.equals(\"/questions\") ? \"質問回答\" : \"質問回答明細\", Jsoup.parse(page.body()).title());"
+        },
+        {
+          "line": 1301,
+          "text": "assertEquals(\"質問要求\", dom.title());"
+        },
+        {
+          "line": 1319,
+          "text": "assertEquals(\"質問受付完了\", page.title());"
+        },
+        {
+          "line": 1675,
+          "text": "assertEquals(\"質問受付完了\", Jsoup.parse(result.body()).title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java",
+      "sourceSha256": "d8b6827fe770218c41fa8e947efddeafb134366a8d2874ac96a0e461e1b410a8",
+      "currentAssertions": [
+        {
+          "line": 410,
+          "text": "dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+      "sourceSha256": "3ddc08f6e7b594e7acd108e188590d8af674848039f87ba6b806480d6d326253",
+      "currentAssertions": [
+        {
+          "line": 559,
+          "text": "assertEquals(path.equals(\"/music\") ? \"Music\" : \"BGM\", dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java",
+      "sourceSha256": "349c3539e9d84b809d7c380e94aeca449782c914f58e71d6bb1686640cab656b",
+      "currentAssertions": [
+        {
+          "line": 590,
+          "text": "assertEquals(\"通知\", dom.title());"
+        },
+        {
+          "line": 1030,
+          "text": "assertEquals(\"通知明細\", dom.title());"
+        },
+        {
+          "line": 1094,
+          "text": "assertEquals(\"通知明細\", Jsoup.parse(page.body()).title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+      "sourceSha256": "83c17547697aaf160787350ed157718d4be1ad325ef7214deb20cf34a1215c70",
+      "currentAssertions": [
+        {
+          "line": 97,
+          "text": "assertEquals(\"Animation\", dom.title());"
+        },
+        {
+          "line": 126,
+          "text": "assertEquals(\"メインパート一覧\", dom.title());"
+        },
+        {
+          "line": 168,
+          "text": "assertEquals(\"OVA一覧\", dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java",
+      "sourceSha256": "a976ce37d46c65508f7c6e4bb3d7de9b3c614bbf5a347ff0af539804b894fed4",
+      "currentAssertions": [
+        {
+          "line": 131,
+          "text": "assertEquals(\"章<script>\", dom.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+      "sourceSha256": "0fbd979b3959f32815cabd25eb3ff4a5947ea16c550a98d6fe68d80c904e70f8",
+      "currentAssertions": [
+        {
+          "line": 131,
+          "text": "assertEquals(\"Logs\", d.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+      "sourceSha256": "fc1823a1f548eb660bf2febcd5741f2e6910167e3a18cf949f4ade3e33f10d49",
+      "currentAssertions": [
+        {
+          "line": 87,
+          "text": "assertEquals(\"Music\", dom.title());"
+        },
+        {
+          "line": 119,
+          "text": "assertEquals(\"曲\", dom.title());"
+        },
+        {
+          "line": 197,
+          "text": "assertEquals(text, b.title());"
+        }
+      ],
+      "applied": false,
+      "executed": false
+    }
+  ],
+  "knownAdditionalImpact": [
+    "UI222 required label markers may change exact whole-label assertions in User/notification/question suites",
+    "50row pagination adds links/table wrapper; corresponding controller DOM suites need reviewed integration execution",
+    "No removal or weakening of business/auth/DB expectations proposed"
+  ],
+  "moduleAcceptance": false,
+  "scopeExclusions": [
+    "VideoDescriptorResponseData.title is metadata and unchanged; only HTML document title oracles proposed. No applied edits."
+  ]
+}

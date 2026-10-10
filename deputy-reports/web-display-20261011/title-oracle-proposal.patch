@@ -1,0 +1,231 @@
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserAdminControllerTest.java
+@@ -433,7 +433,7 @@
+               .andReturn();
+       assertEquals(200, result.getResponse().getStatus());
+       var dom = Jsoup.parse(result.getResponse().getContentAsString());
+-      assertEquals("Users", dom.title());
++      assertEquals("schubert NK - Users", dom.title());
+       assertEquals(1, dom.select(".user-row").size());
+       assertEquals("user000", dom.select(".user-row .username").text());
+       assertEquals("/admin/users/1", dom.select(".detail").attr("href"));
+@@ -741,7 +741,7 @@
+               .andReturn();
+       assertEquals(200, result.getResponse().getStatus());
+       var dom = Jsoup.parse(result.getResponse().getContentAsString());
+-      assertEquals("User詳細", dom.title());
++      assertEquals("schubert NK - User詳細", dom.title());
+       assertEquals(f.detailName, dom.select(".user-detail > dl .username").text());
+       assertTrue(dom.select("dl img,dl script").isEmpty());
+       assertEquals("LOCKED", dom.select(".state").text());
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LogControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LogControllerTest.java
+@@ -367,7 +367,7 @@
+       var principal = actor(UserRole.ADMIN);
+       var get = mvc.perform(pageRequest(principal)).andReturn();
+       assertEquals(200, get.getResponse().getStatus());
+-      assertEquals("Logs", Jsoup.parse(get.getResponse().getContentAsString()).title());
++      assertEquals("schubert NK - Logs", Jsoup.parse(get.getResponse().getContentAsString()).title());
+       assertEquals("logs", Objects.requireNonNull(get.getModelAndView()).getViewName());
+       int before = f.requests.size();
+       var head =
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java
+@@ -344,7 +344,7 @@
+               .andReturn();
+       assertEquals(200, result.getResponse().getStatus());
+       var dom = Jsoup.parse(result.getResponse().getContentAsString());
+-      assertEquals("User追加", dom.title());
++      assertEquals("schubert NK - User追加", dom.title());
+       assertEquals("USER", dom.select("select[name=role] option[selected]").attr("value"));
+       assertEquals("true", dom.select("select[name=enabled] option[selected]").attr("value"));
+       assertEquals(
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java
+@@ -650,7 +650,7 @@
+                   .getResponse();
+           assertEquals(200, list.getStatus());
+           var dom = Jsoup.parse(list.getContentAsString());
+-          assertEquals("質問回答", dom.title());
++          assertEquals("schubert NK - 質問回答", dom.title());
+           assertEquals(f.summary, dom.select(".question-summary").text());
+           assertEquals(
+               Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー")
+@@ -669,7 +669,7 @@
+                   .getResponse();
+           assertEquals(200, detail.getStatus());
+           var detailDom = Jsoup.parse(detail.getContentAsString());
+-          assertEquals("質問回答明細", detailDom.title());
++          assertEquals("schubert NK - 質問回答明細", detailDom.title());
+           assertEquals(f.summary, detailDom.select(".question-body").text());
+           assertEquals(
+               Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー")
+@@ -781,7 +781,7 @@
+           assertEquals(200, page.statusCode());
+           assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
+           assertEquals(
+-              path.equals("/questions") ? "質問回答" : "質問回答明細", Jsoup.parse(page.body()).title());
++              path.equals("/questions") ? "schubert NK - 質問回答" : "schubert NK - 質問回答明細", Jsoup.parse(page.body()).title());
+           var head = web.send("HEAD", path, cookie, null, true);
+           assertEquals(200, head.statusCode());
+           assertEquals("", head.body());
+@@ -1298,7 +1298,7 @@
+               .getResponse();
+       assertEquals(200, newForm.getStatus());
+       var dom = Jsoup.parse(newForm.getContentAsString());
+-      assertEquals("質問要求", dom.title());
++      assertEquals("schubert NK - 質問要求", dom.title());
+       assertEquals("/questions/new", dom.select("form.question-input").attr("action"));
+       assertEquals("post", dom.select("form.question-input").attr("method"));
+       assertEquals(new UUID(9, 1).toString(), dom.select("input[name=operation_token]").val());
+@@ -1316,7 +1316,7 @@
+               .getResponse();
+       assertEquals(200, accepted.getStatus());
+       var page = Jsoup.parse(accepted.getContentAsString());
+-      assertEquals("質問受付完了", page.title());
++      assertEquals("schubert NK - 質問受付完了", page.title());
+       assertEquals("質問を受け付けました。", page.select(".accepted-message").text());
+       assertEquals(
+           "<script>alert(1)</script>" + "😀".repeat(175), page.select(".question-body").text());
+@@ -1672,7 +1672,7 @@
+         for (int n = 0; n < 2; n++) {
+           var result = web.send("GET", "/questions/accepted/" + RECEIPT, cookie, null, true);
+           assertEquals(200, result.statusCode());
+-          assertEquals("質問受付完了", Jsoup.parse(result.body()).title());
++          assertEquals("schubert NK - 質問受付完了", Jsoup.parse(result.body()).title());
+           assertEquals("QSDREQ01", ascii(f.requests.get(n + 1), 11, 8));
+         }
+         int sent = f.requests.size();
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java
+@@ -405,8 +405,8 @@
+               dom.select("h1").text());
+           assertEquals(
+               type.equals("GAM")
+-                  ? "Scenario Games"
+-                  : type.equals("RTE") ? "NUKITASHI1 Routes" : "NUKITASHI1 01: 共通ルート",
++                  ? "schubert NK - Scenario Games"
++                  : type.equals("RTE") ? "schubert NK - NUKITASHI1 Routes" : "schubert NK - NUKITASHI1 01: 共通ルート",
+               dom.title());
+           assertEquals("reader", dom.select(".login-user").text());
+           assertEquals(role.wireValue(), dom.select(".login-role").text());
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java
+@@ -556,7 +556,7 @@
+                     .andReturn()
+                     .getResponse()
+                     .getContentAsString());
+-        assertEquals(path.equals("/music") ? "Music" : "BGM", dom.title());
++        assertEquals(path.equals("/music") ? "schubert NK - Music" : "schubert NK - BGM", dom.title());
+         assertEquals(List.of("name0", "name1"), dom.select(".menu-item strong").eachText());
+         assertEquals("3曲", dom.select(".subtitle").text());
+         assertEquals(
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java
+@@ -587,7 +587,7 @@
+               .andReturn();
+       assertEquals(200, result.getResponse().getStatus());
+       var dom = Jsoup.parse(result.getResponse().getContentAsString());
+-      assertEquals("通知", dom.title());
++      assertEquals("schubert NK - 通知", dom.title());
+       assertEquals(1, dom.select(".notification-row").size());
+       assertEquals("/notifications/1", dom.select(".detail").attr("href"));
+       assertEquals("2026-10-03 09:00:00", dom.select(".submitted-at").text());
+@@ -1027,7 +1027,7 @@
+                   .andReturn();
+           assertEquals(200, result.getResponse().getStatus());
+           var dom = Jsoup.parse(result.getResponse().getContentAsString());
+-          assertEquals("通知明細", dom.title());
++          assertEquals("schubert NK - 通知明細", dom.title());
+           assertEquals("2026-10-03 08:58:00", dom.select(".submitted-at").text());
+           assertTrue(dom.select(".question-body script,.answer-body script").isEmpty());
+           assertEquals(deleted ? "" : f.summary, dom.select(".question-body").text());
+@@ -1091,7 +1091,7 @@
+         var page = web.send("GET", "/notifications/1", cookie, null, true);
+         assertEquals(200, page.statusCode());
+         assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
+-        assertEquals("通知明細", Jsoup.parse(page.body()).title());
++        assertEquals("schubert NK - 通知明細", Jsoup.parse(page.body()).title());
+         var head = web.send("HEAD", "/notifications/1", cookie, null, true);
+         assertEquals(200, head.statusCode());
+         assertEquals("", head.body());
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java
+@@ -94,7 +94,7 @@
+                   new AnimationMenuResponseData(
+                       populated ? 15 : 0, populated ? 4 : 0, populated, populated ? 20 : 0));
+           var dom = render(c, "animation", page, "public-csrf");
+-          assertEquals("Animation", dom.title());
++          assertEquals("schubert NK - Animation", dom.title());
+           assertEquals("Animation", dom.select("h1").text());
+           assertEquals("ja", dom.select("html").attr("lang"));
+           assertEquals(
+@@ -123,7 +123,7 @@
+               "animation-list",
+               list("reader", AnimationListCategory.MAIN, main()),
+               "public-csrf");
+-      assertEquals("メインパート一覧", dom.title());
++      assertEquals("schubert NK - メインパート一覧", dom.title());
+       assertEquals("メインパート一覧", dom.select("h1").text());
+       assertEquals("5本", dom.select(".subtitle").text());
+       assertEquals(3, dom.select(".animation-row").size());
+@@ -165,7 +165,7 @@
+               "animation-list",
+               list("reader", AnimationListCategory.OVA, records),
+               "public-csrf");
+-      assertEquals("OVA一覧", dom.title());
++      assertEquals("schubert NK - OVA一覧", dom.title());
+       assertEquals("4本", dom.select(".subtitle").text());
+       assertEquals(
+           List.of("Title ova-hinami", "Title ova-humino", "Title ova-misaki", "Title ova-nanase"),
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioDetailTemplateTest.java
+@@ -128,7 +128,7 @@
+                       page("reader", role, game, false, false, entries()),
+                       "synthetic-csrf"));
+           assertEquals("ja", dom.select("html").attr("lang"));
+-          assertEquals("章<script>", dom.title());
++          assertEquals("schubert NK - 章<script>", dom.title());
+           assertEquals("章<script>", dom.select("h1").text());
+           assertEquals(
+               (game == GameCode.NUKITASHI_1 ? "NUKITASHI1" : "NUKITASHI2") + " / 文章/01.txt",
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java
+@@ -128,7 +128,7 @@
+               "to",
+               "2026-09-20T10:02:03.120");
+       var d = render(c, page(fields, 1, 1));
+-      assertEquals("Logs", d.title());
++      assertEquals("schubert NK - Logs", d.title());
+       assertEquals("Logs", d.selectFirst("h1").text());
+       assertEquals("ja", d.selectFirst("html").attr("lang"));
+       assertEquals(1, d.select("a[href=/]").size());
+--- a/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java
++++ b/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java
+@@ -84,7 +84,7 @@
+                     new MusicCategoryRecord("BGM", 99),
+                     new MusicCategoryRecord("その他", 1)));
+         var dom = render(c, "music", page, "public-csrf");
+-        assertEquals("Music", dom.title());
++        assertEquals("schubert NK - Music", dom.title());
+         assertEquals("Music", dom.select("h1").text());
+         assertEquals("129曲", dom.select(".subtitle").text());
+         assertEquals(List.of("曲", "BGM", "その他"), dom.select(".menu-item strong").eachText());
+@@ -116,7 +116,7 @@
+                     new MusicSectionRecord("アニメ", 15),
+                     new MusicSectionRecord("キャラクターソング", 4)));
+         var dom = render(c, "music-sections", page, "public-csrf");
+-        assertEquals("曲", dom.title());
++        assertEquals("schubert NK - 曲", dom.title());
+         assertEquals("曲", dom.select("h1").text());
+         assertEquals("29曲", dom.select(".subtitle").text());
+         assertEquals(
+@@ -194,7 +194,7 @@
+         assertTrue(dom.select("b,img,script,[onerror],[onclick],[style]").isEmpty());
+         assertFalse(dom.outerHtml().contains("a".repeat(64)));
+       }
+-      assertEquals(text, b.title());
++      assertEquals("schubert NK - " + text, b.title());
+       assertEquals(text, b.select("h1").text());
+       assertEquals("/music/%3Cb%3E%26", a.select(".menu-item").attr("href"));
+       assertEquals("/music/%3Cb%3E%26/%3Cb%3E%26", b.select(".menu-item").attr("href"));
