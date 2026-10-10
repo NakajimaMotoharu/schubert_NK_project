@@ -69,7 +69,7 @@ def main():
     # genuine DONE seal; new publication helper hashes are separately frozen.
     import json
     W=previous.transport.W
-    if(W/'pg1314-activate-v1.exit').read_bytes()!=b'0\n':raise ValueError('actual normal publication required')
+    if(W/'pg1316-activate-v1.exit').read_bytes()!=b'0\n':raise ValueError('actual normal publication required')
     frozen=json.loads((W/'pg1312-frozen-v1.safe.json').read_bytes())
     hashes={name:frozen['fileHashes'][name]for name in ['pg1304_ordinary_publication_contract.py','pg1305_ordinary_exchange_io.py','pg1083_cold_publication_contract.py','pg1088_cold_exchange_io.py','pg1090_cold_finite_capture.py']}
     env=dict(previous.__dict__);env['payload']=lambda:'PUBLICATION_HASHES='+repr(hashes)+'\n'+payload()

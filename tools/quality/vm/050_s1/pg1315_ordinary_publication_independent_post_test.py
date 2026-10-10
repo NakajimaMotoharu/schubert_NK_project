@@ -1,5 +1,7 @@
 import unittest
+import inspect
 from pg1315_ordinary_publication_independent_post import payload
+from pg1315_ordinary_publication_independent_post import main
 
 
 class IndependentPublicationPostTest(unittest.TestCase):
@@ -15,6 +17,7 @@ class IndependentPublicationPostTest(unittest.TestCase):
         self.assertIn("lines[-2:]==[b'0',b'0']",code)
         self.assertIn('manager.UnrefUnit',code)
         self.assertNotIn('invalidate(',code)
+        self.assertIn('pg1316-activate-v1.exit',inspect.getsource(main))
 
 
 if __name__=='__main__':unittest.main()
