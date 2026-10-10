@@ -2,7 +2,8 @@
 import datetime
 import uuid
 
-FIELDS={'id','run_id','business_date','step','attempt','started_at','ended_at','status','target_count','success_count','failure_count','byte_count','error_code','error_summary'}
+AUDIT={'expiry_cutoff_at','expiry_before_count','expiry_after_count'}
+FIELDS={'id','run_id','business_date','step','attempt','started_at','ended_at','status','target_count','success_count','failure_count','byte_count','error_code','error_summary'}|AUDIT
 
 
 def require(value):
@@ -29,6 +30,7 @@ def qualify(old,new,run,cutoff,upper,old_native,new_native):
     expected_attempt=max(r['attempt']for r in old[table]if r['business_date']==day and r['step']=='CLEAN_INBOX_OUTBOX')+1
     rows=[r for r in new[table]if r not in old[table]and r['run_id']==run and r['step']=='CLEAN_INBOX_OUTBOX']
     require(len(rows)==1);row=rows[0]
+    require(all(prior[k]is None and row[k]is None for k in AUDIT))
     require(row['business_date']==day and row['status']=='SKIPPED'and row['error_code']=='ALREADY_SUCCESSFUL'and row['error_summary']=='step already successful for business date')
     require(type(row['id'])is int and row['id']>prior['id']and type(row['attempt'])is int and row['attempt']==expected_attempt)
     require(row['started_at']==row['ended_at']and cutoff<=instant(row['started_at'])<=upper)

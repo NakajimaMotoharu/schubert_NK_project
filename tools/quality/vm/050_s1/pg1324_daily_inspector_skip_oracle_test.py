@@ -5,6 +5,7 @@ from pg1324_daily_inspector_skip_oracle import qualify
 
 def fixture():
     oldrow={'id':100,'run_id':'9f651096-aef9-4fba-90b0-a653e99f035a','business_date':'2026-10-11','step':'CLEAN_INBOX_OUTBOX','attempt':1,'started_at':'2026-10-10T20:00:00Z','ended_at':'2026-10-10T20:01:00Z','status':'SUCCESS','target_count':0,'success_count':0,'failure_count':0,'byte_count':0,'error_code':None,'error_summary':None}
+    oldrow.update(expiry_cutoff_at=None,expiry_before_count=None,expiry_after_count=None)
     row=dict(oldrow,id=101,run_id='d2e3a86f-27a4-4c2a-be21-b512eebf1216',attempt=2,started_at='2026-10-10T23:31:00Z',ended_at='2026-10-10T23:31:00Z',status='SKIPPED',error_code='ALREADY_SUCCESSFUL',error_summary='step already successful for business date')
     old={'schubert.batch_runs':[oldrow],'schubert.inbox_inspection_progress':[{'fixed':'old'}]};new=copy.deepcopy(old);new['schubert.batch_runs'].append(row)
     cut=datetime.datetime(2026,10,10,23,30,tzinfo=datetime.timezone.utc);end=cut+datetime.timedelta(minutes=5)
@@ -14,6 +15,18 @@ def fixture():
 class DailySkipOracleTest(unittest.TestCase):
     def test_independent_skip_not_fresh_inspector_success(self):
         result=qualify(*fixture());self.assertTrue(result['dailyInspectorSkipVerified']);self.assertFalse(result['newInspectorNativeAccepted'])
+
+    def test_physical_seventeen_columns_and_unrelated_expiry_audit(self):
+        args=list(fixture());expiry=dict(args[0]['schubert.batch_runs'][0],id=99,step='CLEAN_EXPIRY',expiry_cutoff_at='2026-10-03T20:00:00Z',expiry_before_count=0,expiry_after_count=0)
+        args[0]['schubert.batch_runs'].append(expiry);args[1]['schubert.batch_runs'].insert(0,expiry)
+        self.assertTrue(qualify(*args)['oldProgressAndNativePreserved'])
+        for field in ['expiry_cutoff_at','expiry_before_count','expiry_after_count']:
+            args=list(fixture());args[1]['schubert.batch_runs'][-1][field]=0
+            with self.assertRaises(ValueError):qualify(*args)
+            args=list(fixture());del args[1]['schubert.batch_runs'][-1][field]
+            with self.assertRaises(ValueError):qualify(*args)
+        args=list(fixture());args[1]['schubert.batch_runs'][-1]['unknown']=None
+        with self.assertRaises(ValueError):qualify(*args)
 
     def test_boundary_null_counts_reason_duplicated_changed_progress_and_native(self):
         for key,bad in [('id',100),('attempt',1),('status','SUCCESS'),('business_date','2026-10-10'),('error_code',None),('error_summary','raw'),('ended_at','2026-10-10T23:32:00Z'),('started_at','2026-10-10T23:29:00Z'),('target_count',1),('success_count',True),('failure_count',None),('byte_count',-1)]:
