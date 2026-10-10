@@ -1,5 +1,11 @@
 # SSC249250 cold-empty有限公開・linkedold
 
+## 20:43JST 固定回収の実結果・linked保存専用資格へ
+
+PG1098 operator308768f629216ab2271e2a2efc10baf014e292f3/実0/4.449772s、beforeSHAfe2c0e620503851ad7235327fae112a15d0a03db7d76e2f8d47fd336b16bfa2f。PG1099 operator5a355595918cbadaa333a1535ea4647d61c56065/実0/18.867048s、script44cbe74206236718f31e3220ec5967fca8f72cb06b4557a798a7590337cd6742/log3d4864ba9c5fd9bc5bd51f062890db1530d4d18ab8440a08136f1fe943d7624c/afterc86fcbe3050fc9d9b5286e9d128f94d19f452a20fa793159f549fd4f84f3231c。親子TERM2・資源0・旧Bus0/原値不変/newscope正常。旧1096実143/log93eef040af455e4844b3809f09a383a96e23c0d4955f052507d7b9b431fbfc33は別source/不合格維持、旧正常closeへ補完0。
+
+PT-DEP-1099001～002：qualifiedbefore/固定pid-start/pidfd/全partial post・旧Bus/DB/lock消失と一回reservation、9件の既once_tree independent fault/timeout/競合/close testも回帰0。PT-DEP-1100001～002：別newscopeのpreserve入口/class/slot・旧before原資料保持・元partial全graph→fixed oldpart private move一回/全9fields→全post、新INVALID/approval/current/交換なし、全global単一定義。現在host2合格、compile/VM未実行、期待は旧独立golden/固定元beforeと変更9field区間、Production期待生成0。
+
 ## 20:48JST 実部分交換BUG1025・SSC251回収へ
 
 PG1095/sourceb73a8bd2ce02d7f8d9072248c7cb51822dc7f3dbは11:25:42.321674～11:25:44.408570UTC/全7phase0/guest0。PG1096stage同source11:26:03.146418～11:26:03.504517UTC/実0/logSHAa0114bb4ae57ffd79253405d08dd23858198e4b7f30697edf3f667b6d85b084b。activateはcurrent1068/approval1068/newINVALID後、oldpart linked1/EXCHANGE ValueErrorで所有保持、実終了コード未知、完了/after/正常closeなし。refs74byte/SHA1b183218bcbef8ef17e7adba05b1a360c76ccd0956303c36ff32fdc0de109fa1、私有原byte/FD/旧結果を保全。
