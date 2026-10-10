@@ -26,21 +26,44 @@ def instant(value):
     return parsed
 
 
-def qualify(run,cutoff,old,current,rows,profile,recipient,owner,read):
+def qualify(run,cutoff,old,current,rows,profile,recipient,owner,read,retired=None):
     require(type(old)is dict and type(current)is dict and type(rows)is list and all(type(r)is dict for r in rows))
     require(type(owner)is tuple and len(owner)==2 and all(type(x)is int and x>0 for x in owner))
     require(type(profile)is dict and VERSION_KEYS<=set(profile)and type(recipient)is bytes)
     root='/srv/schubert-nk/backup'
+    removed=set(old)-set(current)
+    if retired is None:
+        require(not removed);retired_folder=None
+    else:
+        require(type(retired)is dict and set(retired)=={'folder','startedAt','files','privateProofSha256'})
+        retired_folder=retired['folder']
+        require(type(retired_folder)is str and retired_folder.startswith(root+'/'))
+        require(removed=={retired_folder}|{retired_folder+'/'+x for x in FILES})
+        require(set(retired['files'])==FILES)
+        require(type(retired['privateProofSha256'])is str and re.fullmatch('[0-9a-f]{64}',retired['privateProofSha256'])is not None)
+        for name,proof in retired['files'].items():
+            expected=old[retired_folder+'/'+name]
+            require(type(proof)is dict and set(proof)=={'size','sha256','originalMetadata'})
+            require(proof['size']==expected['metadata'][6]and
+                    proof['sha256']==expected['sha256']and proof['originalMetadata']==expected['metadata'])
+        old_complete={name[:-len('/MANIFEST.json')]for name in old if name.endswith('/MANIFEST.json')}
+        current_complete={name[:-len('/MANIFEST.json')]for name in current if name.endswith('/MANIFEST.json')}
+        require(len(old_complete)==len(current_complete)==7 and retired_folder in old_complete)
+        observed=[(instant(json.loads(read(folder+'/MANIFEST.json'))['startedAt']),folder)
+                  for folder in current_complete]
+        retired_stamp=(instant(retired['startedAt']),retired_folder)
+        require(retired_stamp==min([*observed,retired_stamp]))
     added=set(current)-set(old)
     directories=[name for name in added if '/'not in name[len(root)+1:]]
-    require(len(directories)==1 and set(old)<=set(current))
+    require(len(directories)==1 and set(old)-removed<=set(current))
     folder=directories[0];require(folder.startswith(root+'/'))
     require(added=={folder}|{folder+'/'+x for x in FILES})
     for name,value in old.items():
+        if name in removed:continue
         now=current[name]
         if name==root:
             require(now['sha256']==value['sha256']and now['metadata'][:5]==value['metadata'][:5])
-            require(now['metadata'][5]==value['metadata'][5]+1 and
+            require(now['metadata'][5]==value['metadata'][5]+1-(1 if retired_folder else 0) and
                     all(now['metadata'][k]>=value['metadata'][k]for k in [6,7,8]))
         else:require(now==value)
     directory=current[folder]['metadata']
@@ -68,7 +91,7 @@ def qualify(run,cutoff,old,current,rows,profile,recipient,owner,read):
     require(folder==root+'/'+jst.strftime('%Y%m%d-%H%M%S')+'-'+run)
     require(type(manifest['versions'])is dict and set(manifest['versions'])==VERSION_KEYS and
             manifest['versions']=={k:profile[k]for k in VERSION_KEYS})
-    require(manifest['recipientSha256']==hashlib.sha256(recipient.strip()).hexdigest())
+    require(manifest['recipientSha256']==hashlib.sha256(recipient).hexdigest())
     claims=manifest['files'];require(type(claims)is dict and set(claims)==FILES-{'MANIFEST.json'})
     for name,value in claims.items():
         actual=current[folder+'/'+name]
@@ -96,4 +119,6 @@ def qualify(run,cutoff,old,current,rows,profile,recipient,owner,read):
                 instant(cutoff)<=instant(r['started_at'])<=started<=finished<=instant(r['ended_at']))
     return {'freshBackupTwoSuccessVerified':True,'newBundleEntries':5,
             'oldBackupEntriesPreserved':len(old),'manifestSha256':hashlib.sha256(raw).hexdigest(),
+            'retiredEntriesPrivatelyPreserved':len(removed),
+            'retiredProofSha256':None if retired is None else retired['privateProofSha256'],
             'contentDigestDbCountersBound':True,'formalAccepted':False}

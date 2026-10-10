@@ -27,7 +27,7 @@ class BackupOracleTest(unittest.TestCase):
             startedAt='2026-10-10T12:40:33.000000Z',contentFinishedAt='2026-10-10T12:40:35.000000Z',
             databaseStep=dict(id=101,attempt=1,startedAt='2026-10-10T12:40:31.000000Z'),
             configurationStep=dict(id=102,attempt=1,startedAt='2026-10-10T12:40:32.000000Z'),
-            versions=copy.deepcopy(profile),recipientSha256=hashlib.sha256(b'age1-public-fixture').hexdigest(),
+            versions=copy.deepcopy(profile),recipientSha256=hashlib.sha256(b'age1-public-fixture\n').hexdigest(),
             files=claims)
         data[folder+'/MANIFEST.json']=(json.dumps(manifest,separators=(',',':'))+'\n').encode()
         old={root:dict(metadata=[1,10,992,977,stat.S_IFDIR|0o700,2,0,10,10],sha256=None)}
@@ -57,6 +57,8 @@ class BackupOracleTest(unittest.TestCase):
         old=copy.deepcopy(args[4]);old[0]['run_id']=old[1]['run_id']='old-run'
         args[4]=old+args[4]
         self.assertTrue(qualify(*args)['freshBackupTwoSuccessVerified'])
+        args[6]=args[6].strip()
+        with self.assertRaises(ValueError):qualify(*args)
 
     def test_manifest_binding_version_bytes_and_unknown_negative(self):
         for key,bad in [('format','WRONG'),('database','other'),('runId','old'),
@@ -102,6 +104,39 @@ class BackupOracleTest(unittest.TestCase):
         raw=(json.dumps(manifest,separators=(',',':'))+'\n').encode();data[folder+'/MANIFEST.json']=raw
         args[3][folder+'/MANIFEST.json']['sha256']=hashlib.sha256(raw).hexdigest()
         with self.assertRaises(ValueError):qualify(*args)
+
+    def test_seven_generations_oldest_retired_with_private_preservation(self):
+        args,data,_,new_folder=self.fixture()
+        root='/srv/schubert-nk/backup';old=args[2];now=args[3]
+        old[root]['metadata'][5:]=[9,4096,10,10]
+        now[root]['metadata'][5:]=[9,4096,20,20]
+        retired_folder=None
+        for index in range(7):
+            folder=root+'/old-'+str(index)
+            old[folder]=dict(metadata=[1,100+index,992,977,stat.S_IFDIR|0o700,2,4096,10,10],sha256=None)
+            for n,name in enumerate(['MANIFEST.json','schubert_nk.dump','config.tar','credentials.tar.age']):
+                raw=(json.dumps({'startedAt':'2026-10-08T12:00:0'+str(index)+'.000000Z'})+'\n').encode()if name=='MANIFEST.json'else b'old-byte'
+                old[folder+'/'+name]=dict(metadata=[1,200+index*10+n,0,0,stat.S_IFREG|0o600,1,len(raw),10,10],
+                                         sha256=hashlib.sha256(raw).hexdigest())
+                data[folder+'/'+name]=raw
+            if index==0:retired_folder=folder
+            else:
+                for path,value in old.items():
+                    if path==folder or path.startswith(folder+'/'):now[path]=copy.deepcopy(value)
+        proof={'folder':retired_folder,'startedAt':'2026-10-08T12:00:00.000000Z',
+               'privateProofSha256':'c'*64,
+               'files':{name:dict(size=old[retired_folder+'/'+name]['metadata'][6],
+                                 sha256=old[retired_folder+'/'+name]['sha256'],
+                                 originalMetadata=copy.deepcopy(old[retired_folder+'/'+name]['metadata']))
+                        for name in ['MANIFEST.json','schubert_nk.dump','config.tar','credentials.tar.age']}}
+        result=qualify(*args,retired=proof)
+        self.assertEqual(result['retiredEntriesPrivatelyPreserved'],5)
+        self.assertEqual(result['retiredProofSha256'],'c'*64)
+        with self.assertRaises(ValueError):qualify(*args)
+        bad=copy.deepcopy(proof);bad['startedAt']='2026-10-10T12:00:00.000000Z'
+        with self.assertRaises(ValueError):qualify(*args,retired=bad)
+        bad=copy.deepcopy(proof);bad['files']['config.tar']['sha256']='0'*64
+        with self.assertRaises(ValueError):qualify(*args,retired=bad)
 
 
 if __name__=='__main__':unittest.main()

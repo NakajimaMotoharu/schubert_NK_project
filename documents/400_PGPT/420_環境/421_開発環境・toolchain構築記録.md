@@ -361,3 +361,19 @@ PG164正式08のsourceを凍結したまま、後続FND-R004用にUbuntu配布ag
 - root/usr/bin/age-keygen: SHA256 0cadbef602a8849c9522869ff4007e66df1ec1cd00bc1e7c0b6ab2f08a95643d。
 - 後続PTは公開合成dataと一時生成鍵のみを使用し、秘密key/dump/plain archiveはGitへ保存しない。実recipient fingerprintは配備時の非秘密manifestへ記録し、この導入時に本番keyを生成していない。
 - root本番導入・更新時の再検証とrestore rehearsal、NAS適合/実子の終端確認は未実施。作業整理はwork/PGPT_R004_backup_artifact_design_draft.md。
+## 2026-10-10 PG1127/1128 退役Backupの非変更ディスクからの私有保全
+
+Production依存ではないoperator専用Python読取環境を `work/toolchain/dissect-backup-readonly-20261010/runtime` に隔離。公式PyPI wheelをversion/SHA256固定で取得し、全download314781byte。system/guest/package設定変更0、AGPLライセンスを含む工具をProductionへ組込み0。host Python3.14.4、導入再現は `python3 -B tools/quality/vm/050_s1/pg1127_prepare_disk_reader.py`（既配置には再導入しない）。manifest SHA256 `8b94e5b77a74ff9ea1402152815de92761f81a8b44fb723bd2320a9ae113fea3`。
+
+| package | version | wheel SHA256 |
+|---|---|---|
+| dissect.hypervisor | 3.21 | fd845a3e7bc20efca575d4cfbb49a21ca53e8d89efb8afeec180de8a6b62fd2f |
+| dissect.volume | 3.18 | f8f321adccacbd948c503cf14a14d4a6626d1b86ddcbe55c532b59caad833d79 |
+| dissect.extfs | 3.15 | 9c67e64552eedc58ecbbdda82287a6c8fbf8b29d99a7b55073d838233d6dfcab |
+| dissect.util | 3.24 | 031f91d7523818a3aced4d17594996bcc39bc4d93ffacc0b15a7b718c9b437cb |
+| dissect.cstruct | 4.7 | 0427621ce67baa3106df2dc63a320d0a7f5c2da88ba3faf2ef5886a1a6b458fd |
+| defusedxml | 0.7.1 | a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61 |
+
+参照はPyPI公式各version JSON/固定wheel URL、[hypervisor公式](https://github.com/fox-it/dissect.hypervisor)、[API公式](https://github.com/fox-it/dissect-docs/blob/main/docs/source/advanced/api.rst)。QCow2のabsolute backing自動解決を用いず、保持baseとcloud backingの各rb handleを明示結合→GPT root partition→ExtFS inode読取。新VM・mount・device attach・full raw disk copy・snapshot適用0。
+
+PG1128 commandは上記runtimeをPYTHONPATHへ指定して `python3 -B tools/quality/vm/050_s1/pg1128_preserve_retired_backup.py`。一回実施済み、再実行/上書き禁止。旧原本の5entry metadata/四file hashを保持beforeから独立照合、11420273byte/4fileを私有700/600へ保存。manifest SHA256 `511b28d0358d2573cbb1cbb145c04c8ccd3a3bd28d9fd189f91742ba5ff295e4`。元image/backing identityは前後同一、事前認証済みdisk全SHAを今回再測定したとは記録しない。現在VM/DB/Backup変更0、秘密内容/DB dump/暗号credential/file本体はGit外。PG1129はこのpin・file hash/size・link/modeと9field安定性を再照合、atimeを安定性へ混ぜない。PG/PT正式加点0。
