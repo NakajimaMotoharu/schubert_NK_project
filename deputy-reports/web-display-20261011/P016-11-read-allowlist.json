@@ -1,0 +1,86 @@
+{
+  "wbs": "WBS-P016-11",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "beginJST": "2026-10-11T08:49:49.224447+09:00",
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/music.html"
+  ],
+  "productionChangesPermittedThisUnit": [],
+  "testExecutionPermittedThisUnit": [],
+  "authority": [
+    "UI223/224/225 corresponding screen; SS313; reservation exact owner paths"
+  ],
+  "quotaBefore": {
+    "usedPercent": 27,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056,
+    "limitId": "codex",
+    "acquisitionUTC": "2026-10-10 23:49:48 UTC"
+  },
+  "groupStartEstimateE": 17.25,
+  "criteriaReviewed": [
+    "UI223§7 preserve supplied 曲/BGM/other category order; encoded hierarchy link and escaped name; sum track count",
+    "immutable<=20 categories, duplicate/count/null/invalid segment rejection; no filesystem scan"
+  ],
+  "independentExistingOracle": [
+    "PT-WEB246..253 literals曲/BGM/other counts29/99/1=129 and known URLs; boundaries/escape/null",
+    "PT-SCR066 source-only category DOM oracle"
+  ],
+  "result": "source/design concordance",
+  "unmet": [
+    "stored actual category order and129file manifest",
+    "old title oracle; HTTP/CHR/module quality/formal acceptance"
+  ],
+  "testsNotExecutedReason": "Existing independent coverage source present; no defect new test; MVC template context not executed",
+  "endJST": "2026-10-11T08:49:57.341125+09:00",
+  "wallElapsedSeconds": 8.116678,
+  "externalJobWaitSeconds": 0,
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "readFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java",
+      "sha256": "5431814e666e701490115dc4f7b657019eef39236417f5b6324d73f3a5d044e9"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music.html",
+      "sha256": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f"
+    }
+  ],
+  "originalEstimate": null,
+  "revisedRemainingPredictionPp": null,
+  "productionChanges": [],
+  "testsRun": [],
+  "attemptCount": 0,
+  "quotaAfter": {
+    "limitId": "codex",
+    "limitName": null,
+    "normalModelSlug": null,
+    "primary": {
+      "usedPercent": 27,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    },
+    "secondary": null,
+    "credits": {
+      "hasCredits": false,
+      "unlimited": false,
+      "balance": "0"
+    },
+    "individualLimit": null,
+    "spendControlReached": false,
+    "planType": "prolite",
+    "rateLimitReachedType": null,
+    "acquisitionUTC": "2026-10-10 23:49:57 UTC"
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "wholeLeafAccepted": false,
+  "moduleQualityPassed": false,
+  "checkpoint": "deputy-reports/web-display-20261011/P016-11-read-allowlist.json"
+}

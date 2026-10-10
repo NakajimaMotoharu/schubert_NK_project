@@ -1,0 +1,35 @@
+{
+  "wbs": "WBS-P016-13",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "095b55ac72c7cb93a85105e36edf5cc1708b3f8c",
+  "beginJST": "2026-10-11T08:50:36.170061+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/music-list.html",
+      "owner": "WBS-P016-13",
+      "baseSha256": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicTrackDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [],
+  "expectedAuthority": [
+    "UI222§9",
+    "UI223§7"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "usedPercent": 27,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "navigation": "every nav has a nonempty aria-label",
+    "track": "non-songs path/MB; songs missing-side placeholder and no path/MB",
+    "media": "audio controls preload none, fixed fixture media/DL; escape"
+  },
+  "executionSafety": "Direct Thymeleaf with literal closed Map fixture, no controller/descriptor/wire/security context; CSS declaration inspection only (browser acceptance unmet)."
+}
