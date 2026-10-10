@@ -1,0 +1,45 @@
+{
+  "wbs": "WBS-P016-23",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "ab5a0945c",
+  "beginJST": "2026-10-11T08:33:00.423843+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/questions/detail.html",
+      "owner": "WBS-P016-23",
+      "baseSha256": "6e41db2b0c0a7ade2814160ad3f91df880b9a7dd1a5790b29dae8f6e2e1899fb"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/QuestionDetailDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/questions/detail.html"
+  ],
+  "expectedAuthority": [
+    "UI222§5/8/9",
+    "UI224§7",
+    "SS313§6.2/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "source": "UI222§5/9,SS313§10,UI224§7/8",
+    "confirm": "visible 必須/native required/id question-delete-confirm/label for",
+    "summary": "confirm -> control, other hidden/form issues -> question-delete-form",
+    "body": "escape question/answer, leading space retained, empty answered body uses （空の回答）",
+    "role": "USER owner column hidden, ADMIN owner column shown; pure projection rejects wrong USER owner",
+    "delete": "only supplied action rendered; POST /questions/id plus hidden CSRF/token; back /questions",
+    "externalBoundary": "Actual delete API authorization/404/idempotence/registry not tested"
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet with own-source pure QuestionDetailViewModel typed DTO and closed action/CSRF fixture; semantic validator is pure protocol class compiled from this worktree. No controller/security service/DB/JMS/network."
+}

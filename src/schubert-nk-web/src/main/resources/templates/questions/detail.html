@@ -16,13 +16,15 @@
   <section id="delete-confirm" th:if="${action != null}">
     <h2>質問・回答の削除確認</h2>
     <p class="delete-summary" th:text="${page.values.summary}"></p>
-    <div class="operation-errors" role="alert"><p th:each="issue : ${action.issues}" th:text="${issue.value}"></p></div>
-    <form class="delete-form" method="post" th:action="${'/questions/' + page.values.id}">
+    <div class="operation-errors validation-summary" role="alert"><p th:each="issue : ${action.issues}">
+      <a th:href="${issue.key == 'confirm' ? '#question-delete-confirm' : '#question-delete-form'}" th:text="${issue.value}"></a>
+    </p></div>
+    <form id="question-delete-form" class="delete-form" method="post" th:action="${'/questions/' + page.values.id}">
       <input type="hidden" name="operation" value="DELETE">
       <input type="hidden" name="id" th:value="${action.fields.id}">
       <input type="hidden" name="operation_token" th:value="${action.fields.operation_token}">
       <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-      <label><input type="checkbox" name="confirm" value="true" th:checked="${action.fields.confirm}" required>質問・回答の削除を確認しました</label>
+      <label for="question-delete-confirm"><input id="question-delete-confirm" type="checkbox" name="confirm" value="true" th:checked="${action.fields.confirm}" required>質問・回答の削除を確認しました <span class="required-label">必須</span></label>
       <button type="submit">質問・回答を削除</button>
     </form>
   </section>
