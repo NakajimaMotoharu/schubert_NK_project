@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.bootstrap;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,8 +21,16 @@ public final class Pg1282PhysicalPinProbe {
       if (!readOnly) throw new AssertionError("read-write physical pin accepted");
     } catch (IOException refused) {
       if (readOnly) throw refused;
-      if (!refused.getMessage().equals("fixed PT native capture unavailable")) throw refused;
+      if (!acceptedReadWriteRefusal(refused)) throw refused;
     }
+  }
+
+  static boolean acceptedReadWriteRefusal(IOException failure) {
+    // SS333 exposes only this redacted resource-boundary type/reason; not inner messages.
+    return failure instanceof StorageIoException storage
+        && storage.reason() == StorageIoException.Reason.UNAVAILABLE
+        && storage.getCause() == null
+        && storage.getSuppressed().length == 0;
   }
 
   public static void main(String[] args) throws IOException {
