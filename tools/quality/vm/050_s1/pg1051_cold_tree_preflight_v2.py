@@ -26,6 +26,8 @@ def dispatch(run, name, script):
         ('PG1066-cold-prepared-post-v2', 'pg1066-cold-prepared-post-v2'),
         ('PG1072-cold-before-unused-placement-v1', 'pg1072-cold-before-unused-placement-v1'),
         ('PG1073-cold-after-unused-placement-v1', 'pg1073-cold-after-unused-placement-v1'),
+        ('PG1077-cold-candidate-tree-preflight-v1', 'pg1077-cold-candidate-tree-preflight-v1'),
+        ('PG1078-cold-candidate-tree-handoff-v1', 'pg1078-cold-candidate-tree-handoff-v1'),
     }:
         raise ValueError('fixed preflight dispatch identity refused')
     os.umask(0o077)

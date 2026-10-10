@@ -70,5 +70,15 @@ class ColdCandidate(unittest.TestCase):
         self.assertEqual('d5b00104280028d9ea81b44c1d1c805f3c2861ed',env['candidate_local']())
         self.assertEqual('40ef6e894573d2ffab1d1732124960f9c98d5f97',env['SOURCE'])
 
+    def test_parent_and_child_exact_operation_match_in_both_families(self):
+        from pg1062_cold_preparation_sources_v2 import files as cold
+        for generated,cls,operation in [(cold(),'Pg1062ColdOwnedPreparation','prepare'),
+                                       (files(),'Pg1069ColdCandidateStage','place')]:
+            java=generated[cls+'.java'];py=next(v for k,v in generated.items()if k.endswith('.py'))
+            self.assertIn('"'+operation+'".equals(args[0])',java)
+            self.assertIn("[b'"+cls+"',b'"+operation+"',b'']",py)
+            other='place'if operation=='prepare'else'prepare'
+            self.assertNotIn("[b'"+cls+"',b'"+other+"',b'']",py)
+
 
 if __name__=='__main__':unittest.main()

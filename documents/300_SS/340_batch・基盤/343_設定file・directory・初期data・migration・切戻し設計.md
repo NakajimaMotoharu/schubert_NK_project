@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC248（2026-10-10、BUG1024/YKT793）：当cold unused tool9e9b/1075のpre-Ref BYTE_AUTH失敗だけをSSC245の固定親子回収へ接続する。RootJava11678/2433710/argv3ea4939c…・唯一Python11704/2433776/argve80bc4b8…・bootcbca/current40ef-PG932、親M/A/専用RODB PG243 heartbeat/advisory/socket、子Ref0/stdio3を現在二読認証する。sudo11676は対象外。75byteerrorSHAb41b40a2…/SAVErefsだけ・candidate/signature不存在・全24/原本Backup/approval/空epoch/準備namespaceを保持、新observer独立tenRef/全current189/全tool/hash/全cold宣言/heldFDを取得する。
+
+子D-Bus/旧正常Ref解放を捏造せず、全authority/cgroup/task/exe/argv/generation/FD・実kernelM-A・同RODB heartbeat/socket・全原値を二読。二pidfd固定/耐久new-only各一回予約/予約後再読→親普通TERM→親/peer/advisory/M-A0と全原値再二読→同世代残子のPPID1/stdioFD/Ref無しを認証してのみ子普通TERM→全資源/全原値二読/new正常close。旧actual/rollback-close不明を分離、候補配置/epoch/current/DB/Unit変更0。SIGKILL/別actor/直接DBterminate/旧hotpatch/再送/旧成功補完0。不明は新Ref/FD内で隔離保持し、全後条件後だけ別newsource/slotで是正候補配置へ進む。
+
 SSC247（2026-10-10、SSC190243のcompleted-cold未使用候補配置）：冷準備が全scope正常完了しstartup/requests/native空の場合、旧pending又はwarm baselineを現在値へ代用しない。今回current40ef/PG932・bootcbca・完全DONE原本eeae/091663・全24表594/Backup/credential/旧proof・十cold全宣言/資源を再認証し、新M/A・専用readonly batch/advisory71419602/実heartbeat・tenRef・原本Session内で正規署名d5/PG1068/BOM0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d/全187を未使用固定releaseへnew-only配置する。old currentのhostROとimmutable full verifier、全原値二読を維持する。
 
 許容deltaは当未使用release tree/私有detached signature/工具receipt、各親dirの有限追加効果だけ。閉archiveの全member/type/ancestor/alias、全payload size/hash/canonical sums、固定pin/Ed25519とowner/mode・file/directory syncを検査する。current/approval/epoch/DB/原本/Backup/Unit/config/start-stop/DDL/permit変更0。current祖先FDは兄弟候補追加後に新取得し、追加前認証と追加後保持を別scopeとして記録する（旧祖先metadataの無断rebase/除外0）。追加前current full verifier、両側のcurrent/全原値/資源二読、追加後から正常closeまでの保持全inventoryを省略しない。DB rollback/close/server0→tenRef/FD/bus→A/M正常帰還後のみnew-only完了receiptを作る。unknown/partial/close不明では所有を保持し、同slot再配置/旧成功補完/次起動0。候補配置だけをimmutable候補受入・current切替・真正親/Inspector/native/正式品質へ加算しない。

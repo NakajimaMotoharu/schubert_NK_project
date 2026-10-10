@@ -60,6 +60,7 @@ def files():
             # Existing literal argument oracle now accepts place, rejects prepare.
             text=text.replace('"prepare"','"place"')
         else:
+            text=replace_once(text,"b'Pg1069ColdCandidateStage',b'prepare',b''", "b'Pg1069ColdCandidateStage',b'place',b''")
             text=replace_once(text,'PREPARED=False','PREPARED=True')
             text=replace_once(text,"  if str(path)!='/run/schubert-nk'or not PREPARED:require(m==fixed)\n  else:require(m[5]==fixed[5]+5)","  require(m==fixed)")
             text=replace_once(text,"phase='BYTE_AUTH';captured_parent=parent();controls();authenticate()", "phase='BYTE_AUTH';captured_parent=parent();controls()")
