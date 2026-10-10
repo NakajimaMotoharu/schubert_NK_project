@@ -1,5 +1,13 @@
 # SSC249250 cold-empty有限公開・linkedold
 
+## 20:51JST code-only独立post・再発防止閉鎖
+
+PG1103/operator fcd43d35589a26fc21c41c03d6e6a35953b65fcb/11:47:05.823773～11:47:11.700937UTC/実0/5.877164s、script373bb0ddabc508e51360e558e0761870a5acb9391f4a779ee27a1b63901c0259/log49d26ee74f4103ccfc9fb90fecfa5f2c7bf274491304794d3387c5f4805addef/afterae371bcdccc5a14bfa010458b4f7cf0259c803702349d90cdf72e0e00b06da2e。全新旧署名189閉集合/exactowner-group-mode/hostRO/schema-history/24原本Backup/runtime/正規INVALID/oldlinked9field-ACL/receipt/資源0/observer normalcloseを独立二読。
+
+PT-DEP-1105001：operator44bb7bba241741c1f4c7991f05a34c1b0203a568/11:49:00.444021～11:49:00.977914UTC/実0/0.533893s、script5871ade5373a02303dc5bc468e5cd792aa2cb6886a7b7c8793f4d41be73fdb58/loge6c3bd982a5ed9cb82b14c3404e25d4235d01f0f6f0fbc624f9cce2b06f9006a。guest privatefake linkのatime1を読取自身が更新、9fields/target/ACL不変・singlelinked/private保存/全FD正常を実証。realcurrent/epoch/DB/Unit変更0、同original/root起動0。
+
+public11scope [manifest](evidence/provisional/PG1092-1105-cold-code-only/manifest.json) SHA a9ff1d0de5058e15755d953bd3709b62a5d7d07805c4daeeaad3cad38dd5e9bb、旧compile1/activate143を別source不合格保持、全private raw未格納。BUG1025/YKT794原因範囲及びSSC251固定回収・保存完了、code-only限定閉鎖だけ。currentd5/PG1068、普通Root/newnative/正式counter100/正式run24-1964-53は未更新。
+
 ## 20:47JST linked保存専用実0・独立post未実行
 
 PG1101全9phase0/operator754e44c461f0fa7cea71686301adc0261ff93ed0/11:43:43.770774～11:43:46.161745UTC。PG1102stage実0/logSHA7fc055b1e717a1962f1f3752f6de0ed14dbcc68143213e241677942cbb0e0380、preserve同source11:44:23.075865～11:44:37.383947UTC/14.308082s/実0/logSHA40f3de6c50c67748b1aaf01397eaeedadd1bcbfbae87aaa2b4e37a104748c9da。full旧新署名/partial全原値→fixedoldpart一回private移動・ctime有限/9metadata-target-ACL→全原値/資源/newRefsFD-M/A-RODB正常。既INVALID/approval/current変更0、旧1096actual143保持。

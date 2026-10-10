@@ -1,0 +1,356 @@
+{
+  "program": "NK-OPS-001",
+  "branch": "dev-foundation",
+  "currentSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+  "preservedOriginalSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+  "release": "0.1.0-PG1068",
+  "manifestSha256": "0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d",
+  "expected": {
+    "artifacts": 187,
+    "schema": "028",
+    "history": 29,
+    "tablesUnchanged": 24,
+    "batchRowsUnchanged": 594,
+    "resourcesAfter": 0,
+    "newScopesNormal": true,
+    "oldFailedActivationAccepted": false,
+    "ordinaryRootNotYetAccepted": true
+  },
+  "environmentReference": [
+    "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md",
+    "documents/400_PGPT/420_環境/424_隔離Linux_PGPT環境構築記録.md"
+  ],
+  "environment": {
+    "hostKernel": "7.0.0-38-generic",
+    "guestKernel": "7.0.0-34-generic",
+    "jdk": "25.0.4",
+    "python": "3.14.4",
+    "maven": "3.9.12",
+    "postgresql": "18.6"
+  },
+  "scopes": [
+    {
+      "actualExit": 1,
+      "completedUTC": "2026-10-10T11:12:44.078543+00:00",
+      "formalAccepted": false,
+      "operatorSource": "4aaf68b91cb0d82712ca842b505d960c7f920eaf",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "run": "PG1092-cold-activation-compile-v1",
+      "startedUTC": "2026-10-10T11:12:42.479440+00:00",
+      "privateManifestSha256": "90a10acd2afe188f9a799fc4d397f60c209cde6b88e0bca3672d000d0b89bdf1",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1092-cold-activation-frozen-v1.safe.json",
+      "phaseResults": [
+        {
+          "phase": "finite-oracle",
+          "actualExit": 0,
+          "logSha256": "b7ffa5296566534a608b02cbd1929308f5b19eb86bcf6f090ff411608ce4e626"
+        },
+        {
+          "phase": "exchange-oracle",
+          "actualExit": 0,
+          "logSha256": "82683bc61d8105d729f12c585ffb48d04a3b95469f9a575e8d48e37a5c2f461f"
+        },
+        {
+          "phase": "capture-oracle",
+          "actualExit": 0,
+          "logSha256": "84591c6de6664eb701a0e77d5676ae49a82cdd7ac5dc2133c6c95302ff8c74b7"
+        },
+        {
+          "phase": "python-oracle",
+          "actualExit": 0,
+          "logSha256": "72a28438e614608bc32b25485b90368f3ed815bc99753fcf31388022d96bce43"
+        },
+        {
+          "phase": "compile",
+          "actualExit": 1,
+          "logSha256": "f593508885eb996044993977b4f92a589d6bbe69e64ade623c040dcd9d9afe30"
+        }
+      ]
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:25:44.408570+00:00",
+      "formalAccepted": false,
+      "operatorSource": "b73a8bd2ce02d7f8d9072248c7cb51822dc7f3db",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "run": "PG1095-cold-activation-compile-v2",
+      "startedUTC": "2026-10-10T11:25:42.321674+00:00",
+      "privateManifestSha256": "efc87f7f163834cd482834ff6aaa1a1845ec737959722ef1f1071d27fd8e5e25",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1095-cold-activation-frozen-v2.safe.json",
+      "phaseResults": [
+        {
+          "phase": "generated-observer-oracle",
+          "actualExit": 0,
+          "logSha256": "d995d294dcb003a2e3ccbafef100a766be47040d44df2917ca4b08361885e3bf"
+        },
+        {
+          "phase": "finite-oracle",
+          "actualExit": 0,
+          "logSha256": "b7ffa5296566534a608b02cbd1929308f5b19eb86bcf6f090ff411608ce4e626"
+        },
+        {
+          "phase": "exchange-oracle",
+          "actualExit": 0,
+          "logSha256": "82683bc61d8105d729f12c585ffb48d04a3b95469f9a575e8d48e37a5c2f461f"
+        },
+        {
+          "phase": "capture-oracle",
+          "actualExit": 0,
+          "logSha256": "84591c6de6664eb701a0e77d5676ae49a82cdd7ac5dc2133c6c95302ff8c74b7"
+        },
+        {
+          "phase": "python-oracle",
+          "actualExit": 0,
+          "logSha256": "ed252b6bbf3729b53e130810882ced55e56d62efd42eb5760568f4e6903a765a"
+        },
+        {
+          "phase": "compile",
+          "actualExit": 0,
+          "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "phase": "java-oracle",
+          "actualExit": 0,
+          "logSha256": "212dd6e0778f7e970ea6e801bea5985624644967259d6e0d640a8de1ae1a823f"
+        }
+      ]
+    },
+    {
+      "action": "stage",
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:26:03.504517+00:00",
+      "formalAccepted": false,
+      "operatorSource": "b73a8bd2ce02d7f8d9072248c7cb51822dc7f3db",
+      "privateLogSha256": "a0114bb4ae57ffd79253405d08dd23858198e4b7f30697edf3f667b6d85b084b",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T11:26:03.146418+00:00",
+      "privateManifestSha256": "cc9b6049e6da8b7acfca6009be9340d7a4170f0c33d5ec17666d7d8b889748af",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1096-stage-v1.safe.json"
+    },
+    {
+      "action": "activate",
+      "actualExit": 143,
+      "completedUTC": "2026-10-10T11:38:24.178936+00:00",
+      "formalAccepted": false,
+      "operatorSource": "b73a8bd2ce02d7f8d9072248c7cb51822dc7f3db",
+      "privateLogSha256": "93eef040af455e4844b3809f09a383a96e23c0d4955f052507d7b9b431fbfc33",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T11:26:09.687092+00:00",
+      "privateManifestSha256": "e8963bfb9a602976a532e7234f6e28ef18a5659fd7aaa2c5b2a4923959edc1d4",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1096-activate-v1.safe.json"
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:35:53.684861+00:00",
+      "formalAccepted": false,
+      "logSha256": "2020f75d32c2760c3d2bb84278c8a7df9ab05eb2e354770a4a93196326db1235",
+      "operatorSource": "308768f629216ab2271e2a2efc10baf014e292f3",
+      "run": "PG1098-partial-exchange-preflight-v1",
+      "scriptSha256": "ccc7aff6563204d9ba0737cf47dfba0a916c16f878899c51c42bbb922a2a0def",
+      "startedUTC": "2026-10-10T11:35:49.235089+00:00",
+      "privateManifestSha256": "1e84f95b0ff2ca9f0ef6f91c9f0bc8cc6a979b49d7827ba95a3460dcc37300da",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1098-partial-exchange-preflight-v1/manifest.safe.json",
+      "observed": {
+        "allOriginalsUnchangedTwice": true,
+        "beforePrivateSha256": "fe2c0e620503851ad7235327fae112a15d0a03db7d76e2f8d47fd336b16bfa2f",
+        "fullOldNewSigned": true,
+        "observerNormalClose": true,
+        "oldActorUntouched": true,
+        "oldNormalClose": false,
+        "partialPublicationVerified": true,
+        "sameReadOnlyPeerSocket": true,
+        "signalAttempted": false
+      }
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:38:30.922442+00:00",
+      "formalAccepted": false,
+      "logSha256": "3d4864ba9c5fd9bc5bd51f062890db1530d4d18ab8440a08136f1fe943d7624c",
+      "operatorSource": "5a355595918cbadaa333a1535ea4647d61c56065",
+      "run": "PG1099-partial-exchange-handoff-v1",
+      "scriptSha256": "44cbe74206236718f31e3220ec5967fca8f72cb06b4557a798a7590337cd6742",
+      "startedUTC": "2026-10-10T11:38:12.055394+00:00",
+      "privateManifestSha256": "2bb7cbce253e6296ff510c00d8eea286bd535d43ae7d3ac2d6897b3319eb9369",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1099-partial-exchange-handoff-v1/manifest.safe.json",
+      "observed": {
+        "afterPrivateSha256": "c86fcbe3050fc9d9b5286e9d128f94d19f452a20fa793159f549fd4f84f3231c",
+        "allOriginalsUnchangedTwice": true,
+        "beforePrivateSha256": "b79af5e9b1a9fcced506334baf5530af34f2244d3f7c5c7a360cb53f3c7d467f",
+        "observerNormalClose": true,
+        "oldBusGone": true,
+        "oldChildGone": true,
+        "oldClientsAdvisoryFlocks0": true,
+        "oldOperationNormalClose": false,
+        "oldParentGone": true,
+        "partialPublicationUnchanged": true,
+        "reservationDurable": true,
+        "signalsAttempted": 2
+      }
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:43:46.161745+00:00",
+      "formalAccepted": false,
+      "operatorSource": "754e44c461f0fa7cea71686301adc0261ff93ed0",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "run": "PG1101-linked-preservation-compile-v1",
+      "startedUTC": "2026-10-10T11:43:43.770774+00:00",
+      "privateManifestSha256": "799237096a69fad1179eef687d447e646188b7ce28a438c49dfa644c21bfbd40",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1101-linked-preservation-frozen-v1.safe.json",
+      "phaseResults": [
+        {
+          "phase": "linked-source-oracle",
+          "actualExit": 0,
+          "logSha256": "72635a698896955a09f8d215eda62c899641a6e1dd4d091e3c88bcf442a48725"
+        },
+        {
+          "phase": "partial-oracle",
+          "actualExit": 0,
+          "logSha256": "2920483e99bf0a680210dd77bbd4649fb6e2a6c465f7908ddce33a56e2f72156"
+        },
+        {
+          "phase": "generated-observer-oracle",
+          "actualExit": 0,
+          "logSha256": "1966b1e368f7fe98173b3cb3e23901b9c3a1dfc0dec10501874b741ba48d4d6d"
+        },
+        {
+          "phase": "finite-oracle",
+          "actualExit": 0,
+          "logSha256": "b7ffa5296566534a608b02cbd1929308f5b19eb86bcf6f090ff411608ce4e626"
+        },
+        {
+          "phase": "exchange-oracle",
+          "actualExit": 0,
+          "logSha256": "d2d63b9fd7a7548ecd6b1b9c1f2c6bb8786145125866398f2dbffbf8208bb94d"
+        },
+        {
+          "phase": "capture-oracle",
+          "actualExit": 0,
+          "logSha256": "84591c6de6664eb701a0e77d5676ae49a82cdd7ac5dc2133c6c95302ff8c74b7"
+        },
+        {
+          "phase": "python-oracle",
+          "actualExit": 0,
+          "logSha256": "7f9144060ed6c6a8ad72bb5fa9841689d611b7c056496d6c02e60ea932a12a17"
+        },
+        {
+          "phase": "compile",
+          "actualExit": 0,
+          "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "phase": "java-oracle",
+          "actualExit": 0,
+          "logSha256": "212dd6e0778f7e970ea6e801bea5985624644967259d6e0d640a8de1ae1a823f"
+        }
+      ]
+    },
+    {
+      "action": "stage",
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:44:16.885516+00:00",
+      "formalAccepted": false,
+      "operatorSource": "754e44c461f0fa7cea71686301adc0261ff93ed0",
+      "privateLogSha256": "7fc055b1e717a1962f1f3752f6de0ed14dbcc68143213e241677942cbb0e0380",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T11:44:16.516773+00:00",
+      "privateManifestSha256": "af7c4415204fd1f1aec49bf333a3c1ad875131c79776d25819f8a3314ab3ea62",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1102-stage-v1.safe.json"
+    },
+    {
+      "action": "preserve",
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:44:37.383947+00:00",
+      "formalAccepted": false,
+      "operatorSource": "754e44c461f0fa7cea71686301adc0261ff93ed0",
+      "privateLogSha256": "40f3de6c50c67748b1aaf01397eaeedadd1bcbfbae87aaa2b4e37a104748c9da",
+      "productionSource": "40ef6e894573d2ffab1d1732124960f9c98d5f97",
+      "startedUTC": "2026-10-10T11:44:23.075865+00:00",
+      "privateManifestSha256": "631b61fccb32e008aa2fd2adff90cb7c43eae572aa11de7ab4e9a504f2eb6bd6",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1102-preserve-v1.safe.json"
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:47:11.700937+00:00",
+      "formalAccepted": false,
+      "logSha256": "49d26ee74f4103ccfc9fb90fecfa5f2c7bf274491304794d3387c5f4805addef",
+      "operatorSource": "fcd43d35589a26fc21c41c03d6e6a35953b65fcb",
+      "run": "PG1103-linked-preservation-post-v1",
+      "scriptSha256": "373bb0ddabc508e51360e558e0761870a5acb9391f4a779ee27a1b63901c0259",
+      "startedUTC": "2026-10-10T11:47:05.823773+00:00",
+      "privateManifestSha256": "ce33a9fda78aca6972329c1e704048948c1d16b10e260e9c530e2a3b874ec7a7",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1103-linked-preservation-post-v1/manifest.safe.json",
+      "observed": {
+        "afterPrivateSha256": "ae371bcdccc5a14bfa010458b4f7cf0259c803702349d90cdf72e0e00b06da2e",
+        "allOriginalsUnchangedTwice": true,
+        "allResources0": true,
+        "current1068FullSigned": true,
+        "linkedOriginalNineFieldsAclVerified": true,
+        "observerNormalClose": true,
+        "old932FullPreserved": true,
+        "startupInvalidUnchanged": true
+      }
+    },
+    {
+      "actualExit": 0,
+      "completedUTC": "2026-10-10T11:49:00.977914+00:00",
+      "formalAccepted": false,
+      "logSha256": "e6c3bd982a5ed9cb82b14c3404e25d4235d01f0f6f0fbc624f9cce2b06f9006a",
+      "operatorSource": "44bb7bba241741c1f4c7991f05a34c1b0203a568",
+      "run": "PG1105-stale-atime-guest-fixture-v1",
+      "scriptSha256": "5871ade5373a02303dc5bc468e5cd792aa2cb6886a7b7c8793f4d41be73fdb58",
+      "startedUTC": "2026-10-10T11:49:00.444021+00:00",
+      "privateManifestSha256": "80951a85e4e2307b040f3fe7dcbea7e2032a71079793b00a5dc30bdf8230ad86",
+      "privateEvidenceReference": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1105-stale-atime-guest-fixture-v1/manifest.safe.json",
+      "observed": {
+        "allFixtureFdsNormalClosed": true,
+        "fixtureOnly": true,
+        "realCurrentEpochDbUnitsUnmodified": true,
+        "staleAtimeUpdatedWithoutChangingNineContractFields": true
+      }
+    }
+  ],
+  "bugs": [
+    "BUG-1025"
+  ],
+  "ykt": [
+    "YKT-794"
+  ],
+  "ssc": [
+    "SSC-249",
+    "SSC-250",
+    "SSC-251"
+  ],
+  "testIds": [
+    "PT-DEP-1088005",
+    "PT-DEP-1091003",
+    "PT-DEP-1094001..002",
+    "PT-DEP-1097001..003",
+    "PT-DEP-1098001..002",
+    "PT-DEP-1099001..002",
+    "PT-DEP-1100001..002",
+    "PT-DEP-1103001",
+    "PT-DEP-1105001"
+  ],
+  "commands": [
+    "python3 -B tools/quality/vm/050_s1/pg1095_cold_activation_compile_v2.py",
+    "python3 -B tools/quality/vm/050_s1/pg1096_cold_activation_native_v2.py stage",
+    "python3 -B tools/quality/vm/050_s1/pg1096_cold_activation_native_v2.py activate",
+    "python3 -B tools/quality/vm/050_s1/pg1098_partial_exchange_preflight.py",
+    "python3 -B tools/quality/vm/050_s1/pg1099_partial_exchange_handoff.py",
+    "python3 -B tools/quality/vm/050_s1/pg1101_linked_preservation_compile.py",
+    "python3 -B tools/quality/vm/050_s1/pg1102_linked_preservation_native.py stage",
+    "python3 -B tools/quality/vm/050_s1/pg1102_linked_preservation_native.py preserve",
+    "python3 -B tools/quality/vm/050_s1/pg1103_linked_preservation_post.py",
+    "python3 -B tools/quality/vm/050_s1/pg1105_stale_atime_guest_fixture.py"
+  ],
+  "rerunPolicy": "Completed fixed slots must not be replayed. Old failures retained; new current ordinary Root requires fresh source/run/owner.",
+  "acceptedScope": "SSC251 code-only finite publication recovery and linked preservation; no ordinary Root/native/formal acceptance",
+  "coverage": "Tooling and limited VM evidence; not new Production four-counter/formal certification",
+  "oldFailedResultNormalized": false,
+  "sourceRunScopesKeptSeparate": true,
+  "formalAccepted": false,
+  "wholeWbsAcceptedDelta": 0,
+  "secretsIncluded": false
+}
