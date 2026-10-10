@@ -1,5 +1,6 @@
 """Independent vectors, all real-FD faults, existing directory untouched."""
 import ast
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -18,7 +19,7 @@ class ExistingWriterTest(inherited.WriterTest):
         def mkdir(p,*args,**kwargs):
             result=original_mkdir(p,*args,**kwargs)
             if p.name=='system':
-                original_mkdir(p/m.UNIT,mode=0o755);admitted.append(p/m.UNIT)
+                original_mkdir(p/m.UNIT,mode=0o755);(p/m.UNIT).chmod(0o755);admitted.append(p/m.UNIT)
             return result
         # Existing fixture assertions inspect p/UNIT/NAME. Actual writer target is that
         # admitted child; override prepare dispatch while preserving the outer vector.
@@ -55,6 +56,15 @@ class ExistingWriterTest(inherited.WriterTest):
                 _,error=self.exercise(fault=point,owned=True);self.assertIsInstance(error,OSError)
         _,error=self.exercise(foreign=True,owned=True);self.assertIsInstance(error,ValueError)
         print('PG1172_EXISTING_ANCESTOR_ORACLE faultPositions='+str(len(events))+' realFD=true syntheticRoot=true VM0=true')
+
+    def test_exact_leaf_mode_independent_of_ambient_umask(self):
+        previous=os.umask(0o077)
+        try:
+            for mask in [0o022,0o077]:
+                os.umask(mask)
+                for owned in [False,True]:
+                    _,error=self.exercise(owned=owned);self.assertIsNone(error)
+        finally:os.umask(previous)
 
 
 if __name__=='__main__':unittest.main()
