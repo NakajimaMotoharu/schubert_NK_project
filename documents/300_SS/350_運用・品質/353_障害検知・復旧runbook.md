@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC252（2026-10-10）：BUG1026のRoot起動前工具20312だけを343同項のfixed/read-only/guard無し/全原値・privateBus・pidfd耐久TERM一回で回収し、旧不合格を正常化0。crossscope共有祖先の限定効果は位置/型/identity/security/全artifact原値と新scope9fieldを維持して分離する。次nestedonce/新watch/current1068/noargs/元30分/一回予約から進む。旧watch期限をRootbudgetへ転用・延長せず、同start/oldresume再発行0。
+
 SSC251（2026-10-10）：BUG1025のPG1096部分交換・current1068/INVALID/oldpart linked1は343同項の固定16222/16248認証・独立十Ref/全原値・pidfd耐久各一回TERM/全資源postで回収する。旧activate/再交換/oldfallback/DB修復/SIGKILL/oldtool改変0。別newscopeで固定旧partをprivateへ移動/dirsync/全9metadata-target-ACLを閉鎖、読取自身のatimeと9fieldを区別する。旧actual不明/失敗を新正常から補完せず、普通Root/Inspector/native/正式は別受入。
 
 SSC250（2026-10-10）：cold code-onlyのcurrent旧linkは属性検査できないunlink O_PATHへ正常値を補完せず、343同項の固定RENAME_EXCHANGE→linked旧inode/target/ACL再読→private linked保存/dirsyncを用いる。半交換/移動不明は隔離・再交換/再送/任意unlink/oldfallback0。approval正規nlink0とcurrent linked1を別oracleで検査、全値/資源/normalclose・freshRoot/native/正式は別受入。
