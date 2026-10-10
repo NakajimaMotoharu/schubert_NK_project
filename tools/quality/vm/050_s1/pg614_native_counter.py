@@ -73,25 +73,27 @@ def main():
     modules=('protocol','storage','bootstrap','api','web','batch')
     executions=[host/m/'jacoco.exec'for m in modules]
     assert all(sha(p)==host_record['moduleResults'][m]['execSha256']for m,p in zip(modules,executions))
-    counters={};hostOnly={};gain={}
+    counters={};hostOnly={};moduleLocal={};gain={}
     for m in modules:
         jar=host/m/('schubert-nk-'+m+'-0.1.0-SNAPSHOT.jar')
         assert sha(jar)==host_record['moduleResults'][m]['jarSha256']
-        for label,files in [('host',executions),('union',executions+streams)]:
+        for label,files in [('local',[executions[modules.index(m)]]),('host',executions),('union',executions+streams)]:
             q=subprocess.run([str(J/'java'),'-cp',':'.join(cp),'NativeCoverage',str(jar),*[str(p)for p in files]],capture_output=True,timeout=45)
             with(work/(m+'-'+label+'.private.log')).open('xb')as f:f.write(q.stdout+q.stderr)
             assert q.returncode==0 and not q.stderr
             v=json.loads(q.stdout);assert v['classByteMismatch']==0 and v['formal']is False
-            (hostOnly if label=='host'else counters)[m]=v
+            (moduleLocal if label=='local' else hostOnly if label=='host' else counters)[m]=v
         gain[m]={k:hostOnly[m][k]['missed']-counters[m][k]['missed']for k in ('LINE','METHOD','CLASS','BRANCH')}
         assert all(v>=0 for v in gain[m].values())
-        assert all(hostOnly[m][k]==host_record['moduleResults'][m]['hostCounters'][k]for k in ('LINE','METHOD','CLASS','BRANCH'))
+        # BUG999/YKT768: XML is module-local, not cross-module shared-class probes.
+        assert all(moduleLocal[m][k]==host_record['moduleResults'][m]['hostCounters'][k]for k in ('LINE','METHOD','CLASS','BRANCH'))
+        assert all(hostOnly[m][k]['missed']<=moduleLocal[m][k]['missed'] and sum(hostOnly[m][k].values())==sum(moduleLocal[m][k].values()) for k in ('LINE','METHOD','CLASS','BRANCH'))
     record={'run':'PG614-current-eight-native-v1','actualExit':0,'productionSource':SOURCE,
         'operatorSource':subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip(),
         'recordedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'frozenHostManifestSha256':sha(manifest),'hostExecHashes':{m:sha(p)for m,p in zip(modules,executions)},
         'currentNativeStreams':8,'historicalNativeNotImported':True,'selected':selected,'singleSessions':sessions,
-        'hostOnlyCounters':hostOnly,'moduleCounters':counters,'gain':gain,
+        'moduleLocalCounters':moduleLocal,'hostOnlyCounters':hostOnly,'moduleCounters':counters,'gain':gain,
         'coverage100':all(v[k]['missed']==0 for v in counters.values()for k in ('LINE','METHOD','CLASS','BRANCH')),
         'formalAccepted':False,'rawExported':False}
     with(work/'manifest.safe.json').open('x')as f:json.dump(record,f,sort_keys=True);f.flush();os.fsync(f.fileno())

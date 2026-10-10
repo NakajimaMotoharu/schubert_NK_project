@@ -1,5 +1,9 @@
 # 619 当source通常親：独立before・一回予約・経過（全体未受入）
 
+09:02JST更新：PG960 genuine actual0/3.393771s、親Root/PID1真正・同run/activation/cutoff、endMono202927375873・1547.000884s<1800、beforeSHA4e6f32d9…/complete899a4a76…。clean sourcecd16bb725のPG965 freeze0/ABI-Xlint-Werror/Java oracle0（旧immutable helperは工具だけ、実classPath PG932）。PG966 newstage0→owned逆順停止actual0/29.749215s、PG968独立全後条件0/2.663822s、全24二読不変・全ten kernel/actor/DB-advisory/flock0・187signedbyte・eight terminal receipts・native71physical安定。
+
+PG969 native v1は八stream/session/hash採取後bootstrap baseline比較でactual1（未完・不合格保持）。BUG999/YKT768修正前起票、module-local L56/M22missと全六host L55/M21missを混同した工具原因、native gainではない一行/一methodのcross-module probe差。共通614をmodule-local原XML厳密照合→全六host→native unionへ分離し、既全四counter/classByteMismatch0/session/hash/sourcegateを維持。PG973独立三fixture＋全継承binding合計十五caseをPG974へ実0/log/hash保存、730 transitiveもPG975二case0。新onlyPG972-v2へ固定して再試験、v1/元XML/親停止結果を変更しない。Production main/上位仕様/期待値不変更、正式1964/53未更新。
+
 08:57JST更新：observer956実終了0（23:30:57.587985Z～23:57:08.553576Z）、真正Root世代からAPI23:52:44Z/Web23:53:00Z ordinary ready・所有socket/info/同親、Caddy23:53:11Z TLS login200を保持。終端は親success/code0/exit0/Job無し・API/Web両生存。PG961 CHR-A01 actual0（23:55:11～14Z）、Current baseline SHA df68edf…不変、DIF001 title-only、rawCookie/token出力0・他case/fullgate未実行。新生成レポートはprogram/characterization/reports/nk/PG961-native-a01-v1/artifacts/CHR-A01.json。
 
 PG960初回はCHR新規レポートのuntrackedでclean-tree preflight停止（exit1、guestへの照合・変更前、親失敗ではない）。レポートをsanitize確認しcommit後、同親の独立genuine照合を実行する。既親start/observer/CHRを再実行せず、後続965freeze/966ownedstop/968post/969nativeへ。fresh08:57:23JST shared89/rem11、券未使用。
