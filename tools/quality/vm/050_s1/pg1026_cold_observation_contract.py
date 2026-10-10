@@ -193,6 +193,31 @@ def fd_alias_records(lines):
     return result
 
 
+def timer_path_classification(raw, console):
+    if type(raw) is not str:
+        raise ValueError('timer/path listing refused')
+    expected = {'Id': 'systemd-ask-password-console.path', 'LoadState': 'loaded',
+                'ActiveState': 'active', 'SubState': 'waiting', 'Job': '',
+                'Paths': '/run/systemd/ask-password (DirectoryNotEmpty)',
+                'Triggers': 'systemd-ask-password-console.service',
+                'FragmentPath': '/usr/lib/systemd/system/systemd-ask-password-console.path',
+                'DropInPaths': ''}
+    result = {}
+    for line in raw.splitlines():
+        fields = line.split()
+        if len(fields) < 4 or fields[0] in result or not fields[0].endswith(('.path', '.timer')):
+            raise ValueError('timer/path record refused')
+        if fields[0] == expected['Id'] and fields[1:4] == ['loaded', 'active', 'waiting']:
+            if type(console) is not dict or console != expected:
+                raise ValueError('nonbusiness password-console contract changed')
+            result[fields[0]] = 'FIXED_OS_PASSWORD_MONITOR_ONLY'
+        elif fields[1:4] == ['loaded', 'inactive', 'dead']:
+            result[fields[0]] = 'INACTIVE'
+        else:
+            raise ValueError('active/unknown timer/path refused')
+    return result
+
+
 def durable_reservation(directory_fd, name, data):
     """New fixed private reservation only; partial writes remain non-replayable."""
     if (type(directory_fd) is not int or directory_fd < 0 or type(name) is not str

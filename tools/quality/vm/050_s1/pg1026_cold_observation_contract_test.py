@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records
+from pg1026_cold_observation_contract import HeldInventory, all_client_sql, terminate_once, durable_reservation, fd_alias_records, timer_path_classification
 
 
 class Contract(unittest.TestCase):
@@ -134,6 +134,20 @@ class Contract(unittest.TestCase):
                          fd_alias_records(['2: FLOCK ADVISORY WRITE 121 08:01:7 0 EOF', '1: FLOCK ADVISORY WRITE 121 08:01:7 0 EOF', '3: FLOCK ADVISORY WRITE 122 08:01:7 0 EOF']))
         for lines in (None, [None], ['1: -> FLOCK ADVISORY WRITE 121 08:01:7 0 EOF'], ['1: FLOCK ADVISORY READ 121 08:01:7 0 EOF']):
             with self.assertRaises(ValueError): fd_alias_records(lines)
+
+    def test_os_password_monitor_exact_nonbusiness_classification(self):
+        console = {'Id': 'systemd-ask-password-console.path', 'LoadState': 'loaded', 'ActiveState': 'active',
+                   'SubState': 'waiting', 'Job': '', 'Paths': '/run/systemd/ask-password (DirectoryNotEmpty)',
+                   'Triggers': 'systemd-ask-password-console.service',
+                   'FragmentPath': '/usr/lib/systemd/system/systemd-ask-password-console.path', 'DropInPaths': ''}
+        literal = 'systemd-ask-password-console.path loaded active waiting Dispatch Password Requests\nsysstat-collect.timer loaded inactive dead Collect statistics\n'
+        self.assertEqual({'systemd-ask-password-console.path': 'FIXED_OS_PASSWORD_MONITOR_ONLY', 'sysstat-collect.timer': 'INACTIVE'}, timer_path_classification(literal, console))
+        for key in console:
+            with self.subTest(key=key):
+                with self.assertRaises(ValueError): timer_path_classification(literal, {**console, key: 'changed'})
+        for raw, props in ((None, console), (literal, None), (literal + literal, console),
+                           ('unknown.path loaded active waiting Unknown\n', console), ('a.timer loaded failed failed Fault\n', console)):
+            with self.assertRaises(ValueError): timer_path_classification(raw, props)
 
     def test_all_roles_sql_independent_literal_and_rows(self):
         self.assertEqual("select count(*)from pg_stat_activity where datname='schubert_nk'and backend_type='client backend'and pid<>pg_backend_pid()and pid<>121;", all_client_sql(121))
