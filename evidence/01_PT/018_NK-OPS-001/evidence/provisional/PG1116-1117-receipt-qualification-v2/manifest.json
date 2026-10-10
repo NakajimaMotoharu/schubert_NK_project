@@ -1,0 +1,62 @@
+{
+  "run": "PG1116-1117-receipt-qualification",
+  "scope": "HOST_TOOL_ONLY",
+  "formalAccepted": false,
+  "productionTestsAdded": 0,
+  "wholeWbsAcceptedDelta": 0,
+  "source": "68b1c3bc876fa05df8c1c884cb9463eed05f33e9",
+  "productionSource": "d5b00104280028d9ea81b44c1d1c805f3c2861ed",
+  "branch": "dev-foundation",
+  "startedUTC": "2026-10-10T13:00:28.220811+00:00",
+  "completedUTC": "2026-10-10T13:00:28.344904+00:00",
+  "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "python": "3.14.4",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/quality/vm/050_s1",
+    "-p",
+    "pg111[67]*test.py",
+    "-v"
+  ],
+  "actualExit": 0,
+  "expected": "8 host tool tests, all OK; no VM operations",
+  "passed": true,
+  "oracle": "literal byte/journal/current captured binding; pre-existing independent PID1 oracle unchanged",
+  "logSha256": "091630554b0e29915d8d7169ac1f372dd1e6fcfbf03f6f5d23b9699472a14c3f",
+  "toolSourceSha256": {
+    "tools/quality/vm/050_s1/pg609_parent_receipt.py": "29ea92cd6befc7fd26e1ed23b8785bc7ce616d0cc36247cdb0b2f30c83564676",
+    "tools/quality/vm/050_s1/pg1116_current_receipt.py": "56b3130c329ea2aec12efdd5769e9962c4b037423ccb46abee0ae82e75dbe395",
+    "tools/quality/vm/050_s1/pg1116_current_receipt_test.py": "35f9e3c4eb14e6442d6e6413599826875e9f90baf77c2373d73b11eb64b3fb46",
+    "tools/quality/vm/050_s1/pg1117_current_done_probe.py": "f08b982b462ea1ee067afd4707c67e8603ad204a04c3d65bb61fdd79039b82d9",
+    "tools/quality/vm/050_s1/pg1117_current_done_probe_test.py": "58996bea589c54d64e208bffb9bc8482e18e71b1e90520b1bf9992e8598509ff",
+    "tools/quality/vm/050_s1/pg1118_receipt_qualification.py": "2691f0fa97a6c32e97f5c719309936cb9ddc27b0a40a9236e0f261713e56325e"
+  },
+  "trace": [
+    "NK-OPS-001",
+    "SS343",
+    "SS353",
+    "SSC253",
+    "PT-DEP-1116001..004",
+    "PT-DEP-1117001..003"
+  ],
+  "coverage": "NOT_APPLICABLE_TO_THIS_HOST_TOOL_QUALIFICATION; Production counters unchanged",
+  "failuresPreserved": "Pre-qualification TDD fixture corrections: arbitrary cursor is valid; start binding key is not systemctl mutation",
+  "pending": [
+    "actual current receipt",
+    "whole originals/DB/source closure",
+    "same-source native",
+    "owned stop"
+  ],
+  "bugs": [
+    "BUG-1028"
+  ],
+  "crossChecks": [
+    "YKT-797"
+  ],
+  "secretsIncluded": false
+}
