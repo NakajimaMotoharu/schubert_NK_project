@@ -8,7 +8,7 @@ import subprocess
 from pg1041_cold_policy_diagnostic import P,W
 
 GUEST=r'''
-import pathlib,os,hashlib,json,ast,types,traceback,subprocess
+import pathlib,os,hashlib,json,ast,types,traceback,subprocess,dbus,time
 os.umask(0o077);assert os.geteuid()==0
 assert pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='cbca8738-3b24-4090-b77c-bf029677cdd6'
 raw=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1062-cold-tools-v1/pg1062_cold_refs.py').read_bytes()
@@ -26,6 +26,8 @@ env['old']=json.loads(pathlib.Path('/var/lib/pgpt-s1-preservation/pg989-bootstra
 save=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1062-cold-prepared-v1')
 before_raw=(save/'before.private.json').read_bytes();after_raw=(save/'after.private.json').read_bytes()
 before=json.loads(before_raw);after=json.loads(after_raw)
+bus=dbus.SystemBus(private=True);manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager');refs=[]
+for name in env['old']['units']:manager.LoadUnit(name);manager.RefUnit(name);refs.append(name)
 try:
  assert all(not pathlib.Path('/proc',str(pid)).exists()for pid in (5463,5489,7427))
  first=env['snapshot']();second=env['snapshot']();assert first==second==before==after['snapshot']
@@ -33,18 +35,20 @@ try:
  env['controls']()
  options=env['command'](['findmnt','--target',str(env['RELEASE']),'--noheadings','--output','VFS-OPTIONS'],4096).decode().strip().split(',')
  assert 'ro'in options and 'rw'not in options
- completion=(save/'complete.private.txt').read_bytes()
- assert b'allScopesReturnedNormally=true' in completion and b'originalRetiredOrAuthorityIssued=false' in completion
+ completion=(save/'complete.private').read_bytes()
+ assert completion==b'allScopesReturnedNormally=true\nfinitePreparation=true\nepochDbBusinessWrites=0\n'
+ for name in reversed(refs):manager.UnrefUnit(name)
+ bus.close()
  print(json.dumps({'run':'PG1065-cold-prepared-post-v1','actualExit':0,'source':env['SOURCE'],'boot':env['BOOT'],
   'sameAll24OriginalsTwice':True,'exactPreparedNamespaceTwice':True,'allClientsAdvisoryAndFlocks0':True,'oldActorsGone':True,
-  'payloadHostReadonly':True,'startupEpochAndRequestsEmpty':True,'javaCompletionReceiptNormal':True,
+  'payloadHostReadonly':True,'startupEpochAndRequestsEmpty':True,'javaCompletionReceiptNormal':True,'observerRefsNormalClose':True,
   'beforePrivateSha256':hashlib.sha256(before_raw).hexdigest(),'afterPrivateSha256':hashlib.sha256(after_raw).hexdigest(),
   'completedReceiptSha256':hashlib.sha256(completion).hexdigest(),'dataOnly':True,'formalAccepted':False}))
 except Exception as failure:
  print(json.dumps({'run':'PG1065-cold-prepared-post-v1','type':type(failure).__name__,
   'frames':[{'function':x.name,'line':x.lineno,'file':pathlib.Path(x.filename).name}for x in traceback.extract_tb(failure.__traceback__)][-5:],
   'dataOnly':True,'formalAccepted':False}))
- raise SystemExit(1)
+ while True:time.sleep(1)
 '''
 
 

@@ -23,6 +23,7 @@ def dispatch(run, name, script):
         ('PG1056-cold-metadata-handoff-v1', 'pg1056-cold-metadata-handoff-v1'),
         ('PG1059-cold-tree-preflight-v4', 'pg1059-cold-tree-preflight-v4'),
         ('PG1060-cold-owned-tree-handoff-v1', 'pg1060-cold-owned-tree-handoff-v1'),
+        ('PG1066-cold-prepared-post-v2', 'pg1066-cold-prepared-post-v2'),
     }:
         raise ValueError('fixed preflight dispatch identity refused')
     os.umask(0o077)
