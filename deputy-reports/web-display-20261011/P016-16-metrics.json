@@ -1,0 +1,89 @@
+{
+  "wbs": "WBS-P016-16",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "b114bd41e",
+  "changeCommitReference": "../commit-index.json maps the artifact commit after commit",
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+      "sha256": "79460ed6f02ab73165fcc744497caad322a0fcfb598bfac9ae6431e9e3361638",
+      "owner": "WBS-P016-16"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateDisplayContractTest.java",
+      "sha256": "d836a5f763d14c16b28390057c42aeb06e4708a862e31a6a807eedff4dad85d8"
+    }
+  ],
+  "role": "temporary-web-display-deputy",
+  "threadId": "01a12810-342a-75e1-a67b-a9d115b04bc2",
+  "responseId": null,
+  "beginJST": "2026-10-11T08:27:06.803555+09:00",
+  "endJST": "2026-10-11T08:28:36.646387+09:00",
+  "wallElapsedSeconds": 89.842832,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "userRevisedRemainingEstimatePp": null,
+  "groupStartEstimateD": null,
+  "estimateSourceHash": "3a64d9aa877866a67e5ee7ae98c784e019531dfa2735c4755de3763b24831b25",
+  "revisedResidualPredictionPp": null,
+  "residualReason": "Formal dependency/source/integration quality unverified; no guessed cost split",
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:28:36 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:28:36 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 25,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "sharedQuotaIsNotLeafActualCost": true,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "moduleQualityPassed": false,
+  "wholeLeafAccepted": false,
+  "criteriaSatisfied": [
+    "Five mandatory User create controls have visible indicator/native required/id/for",
+    "Summary fixed anchors existing controls or form",
+    "Default USER/enabled true, input order, POST/return route maintained",
+    "Both password fields blank on error/new display; raw unknown/owner not reflected"
+  ],
+  "criteriaUnmet": [
+    "UI222 operation POST client disabled after click needs external JS addition beyond allowed three files, leave primary",
+    "Real controller/CSRF/session/API/DB/JMS/action effects",
+    "Whole Java class/module quality and formal acceptance"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "PRE_FIX_REPRODUCTION",
+      "exit": 1,
+      "tests": 2,
+      "passed": 0,
+      "failed": 2
+    },
+    {
+      "attempt": 2,
+      "kind": "POST_FIX_LIMITED",
+      "exit": 0,
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    }
+  ],
+  "coverage": null,
+  "groupStartEstimateE": 17.25,
+  "changeReason": "Mandatory display/required and summary anchors missing, WD-BUG-006",
+  "lastCheckpoint": "P016-16-metrics.json"
+}

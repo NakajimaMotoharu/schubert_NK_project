@@ -6,15 +6,17 @@
   <header class="topbar"><h1>User追加</h1><div th:replace="~{fragments/layout :: userActions(${page.values.topBar})}"></div></header>
   <nav><a th:href="@{/admin/users}">User一覧</a></nav>
   <p role="alert" th:if="${!page.values.message.empty}" th:text="${page.values.message}"></p>
-  <ul class="validation-summary" th:if="${!page.values.issues.empty}"><li th:each="issue : ${page.values.issues}" th:text="${issue.value}"></li></ul>
-  <form method="post" th:action="@{/admin/users/new}">
+  <ul class="validation-summary" th:if="${!page.values.issues.empty}"><li th:each="issue : ${page.values.issues}">
+    <a th:href="${issue.key == 'form' or issue.key == 'operation_token' ? '#user-new-form' : '#user-new-' + issue.key}" th:text="${issue.value}"></a>
+  </li></ul>
+  <form id="user-new-form" method="post" th:action="@{/admin/users/new}">
     <input type="hidden" name="operation_token" th:value="${page.values.token}">
-    <label>Username<input name="username" required maxlength="64" th:value="${page.values.fields.username}"></label>
+    <label for="user-new-username">Username <span class="required-label">必須</span><input id="user-new-username" name="username" required maxlength="64" th:value="${page.values.fields.username}"></label>
     <p class="field-error username-error" th:if="${page.values.issues.containsKey('username')}" th:text="${page.values.issues.username}"></p>
-    <label>初期Password<input type="password" name="password" required autocomplete="new-password"></label>
-    <label>Password確認<input type="password" name="password_confirmation" required autocomplete="new-password"></label>
-    <label>Role<select name="role"><option value="USER" th:selected="${page.values.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${page.values.fields.role == 'ADMIN'}">ADMIN</option></select></label>
-    <label>有効<select name="enabled"><option value="true" th:selected="${page.values.fields.enabled}">有効</option><option value="false" th:selected="${!page.values.fields.enabled}">無効</option></select></label>
+    <label for="user-new-password">初期Password <span class="required-label">必須</span><input id="user-new-password" type="password" name="password" required autocomplete="new-password"></label>
+    <label for="user-new-password_confirmation">Password確認 <span class="required-label">必須</span><input id="user-new-password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"></label>
+    <label for="user-new-role">Role <span class="required-label">必須</span><select id="user-new-role" name="role" required><option value="USER" th:selected="${page.values.fields.role == 'USER'}">USER</option><option value="ADMIN" th:selected="${page.values.fields.role == 'ADMIN'}">ADMIN</option></select></label>
+    <label for="user-new-enabled">有効 <span class="required-label">必須</span><select id="user-new-enabled" name="enabled" required><option value="true" th:selected="${page.values.fields.enabled}">有効</option><option value="false" th:selected="${!page.values.fields.enabled}">無効</option></select></label>
     <button type="submit">作成</button>
   </form>
 </main></body></html>

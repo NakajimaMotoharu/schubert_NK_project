@@ -1,0 +1,61 @@
+{
+  "wbs": "WBS-P016-16",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "b114bd41e",
+  "beginJST": "2026-10-11T08:27:06.803555+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html",
+      "owner": "WBS-P016-16",
+      "baseSha256": "98583e3b92f93b2211884044a0ba5f26628f826c55d35fbfcad7b01b06de5bbd"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/UserCreateDisplayContractTest.java"
+  ],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserCreateViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/admin/user-new.html"
+  ],
+  "expectedAuthority": [
+    "UI222§5/8/9",
+    "UI225§4",
+    "SS313§5.2/7/10"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "productionBoundary": "No form/view change unless demonstrated pure defect; only reserved user-new template intended",
+  "expectations": {
+    "mandatoryControls": [
+      "username",
+      "password",
+      "password_confirmation",
+      "role",
+      "enabled"
+    ],
+    "visibleRequired": "All five labels contain 必須, HTML required on all five",
+    "fixedIds": "user-new-<field>, form user-new-form; summary operation_token/form -> form",
+    "passwordRedisplay": "Both password inputs always empty, never appear in page model/render output",
+    "defaults": {
+      "role": "USER",
+      "enabled": "true"
+    },
+    "controlOrder": [
+      "operation_token",
+      "username",
+      "password",
+      "password_confirmation",
+      "role",
+      "enabled"
+    ]
+  },
+  "executionSafety": "Direct Thymeleaf/MockServlet closed view; UserCreateForm pure NFC/byte/regex checks and UserCreateViewModel data map. No controller/application context/security service/DB/JMS/network. Private pinned dependencies/source/classes."
+}

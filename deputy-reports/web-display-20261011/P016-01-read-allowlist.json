@@ -1,0 +1,64 @@
+{
+  "wbs": "WBS-P016-01",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "beginJST": "2026-10-11T08:26:13.905732+09:00",
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/resources/templates/login.html"
+  ],
+  "prospectiveTestRead": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LoginControllerTest.java"
+  ],
+  "productionChangesPermittedThisUnit": [],
+  "testExecutionPermittedThisUnit": [],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "endJST": "2026-10-11T08:26:48.680562+09:00",
+  "actualTestRead": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
+  "readCriteriaSatisfied": [
+    "approved exact NK brand/title, UTF8/viewport/CSS",
+    "username autofocus/autocomplete, password empty/current-password, POST Login, id/labels",
+    "fixed error/locked/logout literals and unknown parameter inert expressions"
+  ],
+  "unresolved": [
+    {
+      "issue": "UI222 general visible required indicator vs Login compatibility-specific SS313/QA045 and existing scr106 exact label oracle",
+      "action": "No speculative Login label change. Primary to reconcile approved design/CHR trace; read evidence saved."
+    }
+  ],
+  "testsRun": [],
+  "existingEvidence": "PT-SCR105..108 independent literal oracle inspected, not executed; requires forbidden controller/MVC config path",
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:26:48 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:26:48 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 25,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sameWindowSharedDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "revisedResidualPredictionPp": null,
+  "publicTokenUsage": null,
+  "N": null,
+  "T": null,
+  "wholeLeafAccepted": false,
+  "readFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+      "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
+      "sha256": "55540d3e04ab4800b03361dc5913f9f0777aa6a21667e9c597d0aad58542b12e"
+    }
+  ]
+}

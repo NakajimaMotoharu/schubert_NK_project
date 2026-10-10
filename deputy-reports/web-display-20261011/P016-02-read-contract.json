@@ -1,0 +1,59 @@
+{
+  "wbs": "WBS-P016-02",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "b114bd41e",
+  "beginJST": "2026-10-11T08:25:49.432198+09:00",
+  "production": [],
+  "tests": [],
+  "readOnlyAllowlist": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java",
+    "src/schubert-nk-web/src/main/resources/templates/menu.html",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MenuMvcTest.java"
+  ],
+  "originalEstimate": null,
+  "userRevisedRemainingPp": null,
+  "groupStartE": 17.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "expectations": {
+    "authority": "UI223§2/SS313§6.2,7",
+    "USER": [
+      "/scenarios",
+      "/search",
+      "/animation",
+      "/music",
+      "/questions/new",
+      "/notifications",
+      "/questions"
+    ],
+    "ADMINAdditional": [
+      "/logs",
+      "/admin/users"
+    ],
+    "order": "USER first seven, ADMIN adds last two; 2-column menu desktop CSS, one-column <=900px"
+  },
+  "reasonNoNewTest": "Existing MenuMvcTest independent literal card/title/description/nav oracle already covers this; @BeforeAll and @BeforeEach initialize DB/session server, so entire suite forbidden in deputy; no new menu-specific defect found, no duplicate PT",
+  "readFiles": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java",
+      "sha256": "7fa6583a49c37dedd196d696a2c0d7c45f2e7b7097044d63aa2aef5ef2915ad3"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java",
+      "sha256": "892c36828ff005248b7d62b593124f9d853c583caf80a3e3e3bef142841057a3"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/menu.html",
+      "sha256": "8369f16fb8b330b1a073003fa0b8c74e68e65b6ca579d85ad82f6582b7ad626a"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MenuMvcTest.java",
+      "sha256": "3ce7ab8197b28641e6bb98178796211044ecf4ed2978f386c8379ccfaf0c59e6"
+    }
+  ]
+}
