@@ -210,6 +210,45 @@ final class NativeCoverageExportTest {
   }
 
   @Test
+  void nexport1276001ClosingCapableRolesStillRefuseUnknownAndRootOnlyNamesBeforeCreate()
+      throws Exception {
+    for (Role role : ROLES) {
+      if (role.terminal() == null) continue;
+      for (String suffix : List.of("unknown", "before-exec")) {
+        var f = fixture(role);
+        assertThrows(
+            IOException.class,
+            () ->
+                NativeCoveragePrivateFile.export(
+                    profile(role), INV + "." + suffix + ".exec", GOLDEN, f));
+        assertEquals(0, f.calls.creates);
+        assertTrue(f.calls.live.isEmpty());
+        try (var entries = Files.list(f.target)) {
+          assertEquals(0, entries.count(), "unknown phase cannot publish a file");
+        }
+      }
+    }
+  }
+
+  @Test
+  void nexport1276002SameInodeAndSameLengthTamperRejectsFirstAndReopenedDigest() throws Exception {
+    for (int observation : new int[] {2, 3}) {
+      var f = fixture(ROLES.get(0));
+      f.fault = "same-inode-byte-tamper#" + observation;
+      refused(f);
+      assertEquals(1, f.calls.creates);
+      assertEquals(observation, f.sizeReads);
+      assertEquals(observation == 2 ? 0 : 1, f.calls.syncs);
+      assertArrayEquals(
+          new byte[] {9, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+          Files.readAllBytes(f.output("terminal")));
+      assertArrayEquals(new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1}, GOLDEN);
+      assertEquals(0100600, Files.getAttribute(f.output("terminal"), "unix:mode"));
+      assertEquals(1, Files.getAttribute(f.output("terminal"), "unix:nlink"));
+    }
+  }
+
+  @Test
   void nexport617003EachHeldDirectoryAndFileObservationRejectsBeforeAcceptance() throws Exception {
     for (String part : List.of("run", "service", "parent", "target"))
       for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino", "acl", "null"))
@@ -608,6 +647,17 @@ final class NativeCoverageExportTest {
     public @Nullable Object size(Path held) throws IOException {
       fail("size");
       String prefix = "size#" + ++sizeReads + ":";
+      if (fault.equals("same-inode-byte-tamper#" + sizeReads)) {
+        // An adversarial writer changes the owned temporary inode at the exact
+        // observation boundary, not its returned metadata or expected digest.
+        var before = Files.readAttributes(held, "unix:dev,ino,size");
+        Files.write(
+            held,
+            new byte[] {9, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+            StandardOpenOption.WRITE,
+            StandardOpenOption.TRUNCATE_EXISTING);
+        assertEquals(before, Files.readAttributes(held, "unix:dev,ino,size"));
+      }
       if (fault.equals(prefix + "null")) return null;
       if (fault.equals(prefix + "unknown")) return "unknown";
       if (fault.equals(prefix + "negative")) return -1L;
