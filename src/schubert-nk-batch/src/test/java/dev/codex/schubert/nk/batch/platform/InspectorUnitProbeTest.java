@@ -605,7 +605,7 @@ final class InspectorUnitProbeTest {
       var stream =
           new FilterInputStream(actual.getInputStream()) {
             @Override
-            public byte[] readNBytes(int limit) throws IOException {
+            public int read(byte[] bytes, int offset, int length) throws IOException {
               if (fault instanceof IOException io) throw io;
               if (fault instanceof RuntimeException unknown) throw unknown;
               throw (Error) fault;
