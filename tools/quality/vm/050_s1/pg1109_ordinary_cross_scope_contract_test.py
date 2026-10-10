@@ -17,7 +17,7 @@ def baseline():
 
 def observed():
     v=baseline();v['heldWholeMetadata'][6][1][1][7:]=[21,21]
-    for i in (3,4):v['heldWholeMetadata'][i][3][1][5]=5;v['heldWholeMetadata'][i][3][1][7:]=[22,22]
+    for i in (3,4):v['heldWholeMetadata'][i][3][1][5]=7;v['heldWholeMetadata'][i][3][1][7:]=[22,22]
     return v
 
 

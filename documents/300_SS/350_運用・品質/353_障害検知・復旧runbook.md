@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC253（2026-10-10）：SSC252のprivate一件仮定を343同項の既知3dir完全閉集合/実stage/source/Rootmode証明へ修正し、固定位置+3だけ許す。新scope9field・原値/専用namespace/署名品質は不変更。起動前readonly134103だけfixed pidfd耐久TERM一回/全postで回収、旧actual別保存。live1112観測を維持し第3watch stage0、別nestedonceでRoot一回/元30分へ進む。
+
 SSC252（2026-10-10）：BUG1026のRoot起動前工具20312だけを343同項のfixed/read-only/guard無し/全原値・privateBus・pidfd耐久TERM一回で回収し、旧不合格を正常化0。crossscope共有祖先の限定効果は位置/型/identity/security/全artifact原値と新scope9fieldを維持して分離する。次nestedonce/新watch/current1068/noargs/元30分/一回予約から進む。旧watch期限をRootbudgetへ転用・延長せず、同start/oldresume再発行0。
 
 SSC251（2026-10-10）：BUG1025のPG1096部分交換・current1068/INVALID/oldpart linked1は343同項の固定16222/16248認証・独立十Ref/全原値・pidfd耐久各一回TERM/全資源postで回収する。旧activate/再交換/oldfallback/DB修復/SIGKILL/oldtool改変0。別newscopeで固定旧partをprivateへ移動/dirsync/全9metadata-target-ACLを閉鎖、読取自身のatimeと9fieldを区別する。旧actual不明/失敗を新正常から補完せず、普通Root/Inspector/native/正式は別受入。
