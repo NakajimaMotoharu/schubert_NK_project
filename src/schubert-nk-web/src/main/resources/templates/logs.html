@@ -10,24 +10,26 @@
            th:text="${page.results.orElseThrow().page.totalCount + ' logs / page ' + page.results.orElseThrow().page.effectivePage + ' of ' + page.results.orElseThrow().page.totalPages}"></div>
     </div></header>
     <div id="log-errors" class="error-panel" role="alert" th:hidden="${page.errors.empty}">
-      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}" th:text="${error.message}"></li></ul>
+      <ul><li th:each="error : ${page.errors}" th:id="${'error-' + error.name}">
+        <a th:href="${error.name == 'form' or error.name == 'page' ? '#log-filters' : '#log-' + error.name}" th:text="${error.message}"></a>
+      </li></ul>
     </div>
-    <form class="filters log-filters" method="get" th:action="@{/logs}">
-      <label><span>メッセージ</span><input name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="log-errors"></label>
-      <label><span>種別</span><select name="log_type" aria-describedby="log-errors">
+    <form id="log-filters" class="filters log-filters" method="get" th:action="@{/logs}">
+      <label><span>メッセージ</span><input id="log-q" name="q" th:value="${page.filters.q}" placeholder="キーワード" aria-describedby="log-errors"></label>
+      <label><span>種別</span><select id="log-log_type" name="log_type" aria-describedby="log-errors">
         <option value="" th:selected="${page.filters.logType.empty}">すべて</option>
         <option th:each="type : ${ {'ACTION','REQUEST','SECURITY','MQ','SYSTEM','BATCH'} }" th:value="${type}" th:text="${type}" th:selected="${page.filters.logType == type}"></option>
         <option th:if="${!page.filters.logType.empty and !#lists.contains({'ACTION','REQUEST','SECURITY','MQ','SYSTEM','BATCH'}, page.filters.logType)}" th:value="${page.filters.logType}" th:text="${page.filters.logType}" selected></option>
       </select></label>
-      <label><span>アクション</span><input name="action" th:value="${page.filters.action}" placeholder="search" aria-describedby="log-errors"></label>
-      <label><span>パス</span><input name="path" th:value="${page.filters.path}" placeholder="/search" aria-describedby="log-errors"></label>
-      <label><span>レベル</span><select name="level" aria-describedby="log-errors">
+      <label><span>アクション</span><input id="log-action" name="action" th:value="${page.filters.action}" placeholder="search" aria-describedby="log-errors"></label>
+      <label><span>パス</span><input id="log-path" name="path" th:value="${page.filters.path}" placeholder="/search" aria-describedby="log-errors"></label>
+      <label><span>レベル</span><select id="log-level" name="level" aria-describedby="log-errors">
         <option value="" th:selected="${page.filters.level.empty}">すべて</option>
         <option th:each="level : ${ {'INFO','WARN','ERROR'} }" th:value="${level}" th:text="${level}" th:selected="${page.filters.level == level}"></option>
         <option th:if="${!page.filters.level.empty and !#lists.contains({'INFO','WARN','ERROR'}, page.filters.level)}" th:value="${page.filters.level}" th:text="${page.filters.level}" selected></option>
       </select></label>
-      <label><span>From</span><input type="datetime-local" step="0.001" name="from" th:value="${page.filters.from}" aria-describedby="log-errors"></label>
-      <label><span>To</span><input type="datetime-local" step="0.001" name="to" th:value="${page.filters.to}" aria-describedby="log-errors"></label>
+      <label><span>From</span><input id="log-from" type="datetime-local" step="0.001" name="from" th:value="${page.filters.from}" aria-describedby="log-errors"></label>
+      <label><span>To</span><input id="log-to" type="datetime-local" step="0.001" name="to" th:value="${page.filters.to}" aria-describedby="log-errors"></label>
       <button type="submit">検索</button>
     </form>
     <nav th:replace="~{fragments/log-pagination :: logs(${page}, false)}"></nav>

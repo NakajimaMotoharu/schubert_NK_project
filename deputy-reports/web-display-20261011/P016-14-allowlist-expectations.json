@@ -1,0 +1,51 @@
+{
+  "wbs": "WBS-P016-14",
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "36f73a13e",
+  "beginJST": "2026-10-11T08:22:23.099570+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/logs.html",
+      "owner": "WBS-P016-14"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogDisplayContractTest.java"
+  ],
+  "executionSafety": "Direct Thymeleaf/MockServlet closed render, pure LogSearchForm/LogSearchViewModel/typed DTO; no controller/DB/JMS/service/security context. Copy fixed third-party jars only, private source/classes/output, single sequential Java launch.",
+  "expectations": {
+    "source": "SS313§10/SSC073; UI222§5/9,UI225§2",
+    "fieldIds": [
+      "log-q",
+      "log-log_type",
+      "log-action",
+      "log-path",
+      "log-level",
+      "log-from",
+      "log-to"
+    ],
+    "formId": "log-filters",
+    "errors": "form/q/log_type/action/path/level/from/to/page -> fixed anchor; form/page to form",
+    "unknownEnums": "escaped selected redisplay; invalid cannot produce request",
+    "inputOrder": [
+      "q",
+      "log_type",
+      "action",
+      "path",
+      "level",
+      "from",
+      "to"
+    ],
+    "empty": "no pagination, 該当するデータはありません"
+  },
+  "originalEstimate": null,
+  "userRevisedRemainingPp": 1.25,
+  "groupStartD": 3.25,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 25,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "formalAccepted": false
+}
