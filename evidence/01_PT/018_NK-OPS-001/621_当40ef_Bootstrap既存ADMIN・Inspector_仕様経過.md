@@ -1,5 +1,9 @@
 # 621 当40ef：Bootstrap既存ADMIN・Inspector実native（未実行）
 
+09:19内部補足：旧profileの「normal20」は20試験／20条件ではなく、SS343の既存ADMINを検出したUnit正常終了コード20。PG985 actualABI/Werror/独立Javaoracle0、operator8b0942f4c・newprofile983/frozen-v3/source40ef。新post989は真正captured終了20・PID1/30秒→同generation又は承認済みGC現在値を全tenLoad/Ref内で照合し、元成功をGCから推定しない。990独立生成一case0、実Unit未起動。
+
+既存ADMINが業務用user/passwordを追加しない契約を検証する。UnitのLoadCredential成立に必要な二個の明示synthetic test fixtureのみを正規profileでprivateに生成・Unit停止後NOREPLACE退役する（旧894/SS343既承認手順）。業務credential作成/変更は0、既存credentials全byteを保全、raw値をGit/通常logへ出さない。「credential作成0」はここまでのbefore操作に限る。全24不変・existingADMIN・二新dump同一process・全資源帰還を独立postで確認するまで受入しない。
+
 09:15更新：新before981-v2 actual0/3.279344s、be3ea723300b870ed2dce9477a5666bd9b59d7cc5fe7fc682e1cbbd26afec0cd、全24-594/full32/tenkernel-actor-clientDB-advisory-flock0/187署名・元原本Backup/ADMIN一件/no credential入力を再確認。共通978/979のfixtureも594へ修正（旧v1artifact/commitは保全、再実行しない）、981-v2はnewslotだけ追加。983新profileはsource40ef/PG932/eeae/091663ce/0bb4/PID1Job213904/START201380374989/DONE202927375873と実963 immutable receiptへ固定、旧helper ABIのコードだけを使用し旧native/proof合算0。
 
 979/982/984/987の四subject七工具caseを988へ独立再保存。初回TDD F1三種（982metadataをwrapperへ要求・984不在method名・987不在uppercase）を不合格として残す。初回982 F1後readonly-v2が実行されたが、VM mutation無し、fixture是正・最終全七成功まで受入しない。現段階はbefore/profileのみ、Bootstrap Unitstart/verify/execute/native未実行。次clean985 fullABI/Werror/Javaoracle→独立postを当sourceへ組立ててから986新stage/verify/execute一回→全post/nativeへ。
