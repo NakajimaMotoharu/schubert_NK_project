@@ -9,6 +9,17 @@ from pg1257_fresh_independent_terminal_post import SSH
 from pg1271_current_native_gap import J,R,COUNTERS
 
 
+def exec_read_payload(name,expected):
+    if name not in ('rw.exec','ro.exec')or type(expected)is not dict:
+        raise ValueError('closed component exec entry required')
+    size=expected.get('execBytes');digest=expected.get('execSha256')
+    if type(size)is not int or not 0<size<=1048576 or type(digest)is not str or len(digest)!=64 or set(digest)-set('0123456789abcdef'):
+        raise ValueError('closed component exec size and SHA required')
+    code="import pathlib,os,stat,hashlib,sys;p=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1286-physical-pin-v1/"+name+"');s=p.lstat();assert stat.S_ISREG(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode),s.st_nlink)==(0,0,0o600,1);raw=p.read_bytes();assert len(raw)=="+str(size)+" and hashlib.sha256(raw).hexdigest()=="+repr(digest)+";sys.stdout.buffer.write(raw)"
+    compile(code,'<closed actual component exec read>','exec')
+    return code
+
+
 def main():
     os.umask(0o077)
     if subprocess.check_output(['git','status','--porcelain']):raise ValueError('clean operator required')
@@ -22,8 +33,10 @@ def main():
     data=[host/'bootstrap/jacoco.exec'];require(sha(data[0])==qualified['moduleResults']['bootstrap']['execSha256'])
     for mode in ['RW','RO']:
         expected=actual['phases'][mode];name=mode.lower()+'.exec'
-        code="import pathlib,os,stat,hashlib,sys;p=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1286-physical-pin-v1/"+name+"');s=p.lstat();assert stat.S_ISREG(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode),s.st_nlink)==(0,0,0o600,1);raw=p.read_bytes();assert len(raw)=="+str(expected['execBytes'])+"and hashlib.sha256(raw).hexdigest()=="+repr(expected['execSha256'])+";sys.stdout.buffer.write(raw)"
+        code=exec_read_payload(name,expected)
         result=subprocess.run(SSH,input=code.encode(),capture_output=True,timeout=20)
+        with(target/(mode.lower()+'.read.private.log')).open('xb')as f:f.write(result.stderr);f.flush();os.fsync(f.fileno())
+        with(target/(mode.lower()+'.read.exit')).open('x')as f:f.write(str(result.returncode)+'\n')
         require(result.returncode==0 and not result.stderr)
         p=target/name
         with p.open('xb')as f:f.write(result.stdout);f.flush();os.fsync(f.fileno())
