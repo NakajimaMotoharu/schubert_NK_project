@@ -2,6 +2,7 @@
 
 SSC244（2026-10-10）：coldのbyte真正性と実hostRO/immutable検証を分離する。当PG1023 SIGNED_CURRENTのnoDB/noRef/no原本Session失敗はSS343固定handoffの唯一actor/source/generation/全payload・両flock・child/DB0・全原値二読→pidfd ordinaryTERM一回→143/UNKNOWN保持・全actor/flock消失と全元値二読/observer正常closeだけで退役する。別actor/旧UNKNOWN補完/Root開始/DB・epoch・namespace・mount変更を禁止、変異/timeoutは隔離し再発行しない。正規退役後だけ別fresh byte-auth/readbackへ戻り、実RO設定後のfull immutable verifier/準備/Root/native/正式条件を省略しない。
 
+追加再発防止：handoff全区間の管理者dispatch禁止/timer-path抑止、予約file/dirsyncと予約後再認証、全task子/全security/捕捉inode-FD、署名全ancestor/metadata/ACL/identity/hash、全DB client backend（自己観測だけ除外）、失敗時Ref/FD保持、実旧transportcode別採取は343同項どおり省略しない。冷読取のartifact hashだけ/5roleだけを全原値やDB0の証明に使用しない。
 
 SSC243（2026-10-10）：保存completed原本・active無しの新coldはSS343同項へ接続する。現source/新boot/作業COW layerと不変更元disk/backing chain、全cold18/full32/署名187/全24/原本Backup/既private/全所有を二読する。旧tmpfs消失は正常退役・旧UNKNOWN/BUG544解決ではない。pending用epochを偽造せず、正規M/A/専用RODB/tenRefs/FD内で空namespace/hostRO/PT-nativeの必要準備だけを行い、close未知・半完了は隔離/再発行禁止。new-only completeと全資源0後のみProduction fresh通常入口へ戻す。既同日ALREADYを履歴削除/時計改変で回避せず、Inspectorの合法cutoff/所有が未成立ならその経路を保留し独立作業を継続する。元30分/各Unit期限/逆順所有停止/正式同source品質は維持する。
 

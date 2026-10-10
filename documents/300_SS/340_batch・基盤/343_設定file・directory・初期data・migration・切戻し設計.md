@@ -6,6 +6,7 @@ SSC244（2026-10-10、BUG1009/YKT778）：coldのhostRO前は固定pinで署名�
 
 実actorと両flockの消失、全元値/Unit/資源の独立再二読、観測Ref-bus-FD正常closeが揃った限定退役だけを認定する。失敗工具actual143/旧callback close UNKNOWN/complete無しを保存し、正常close・旧試験成功・準備/Root成功へ補完しない。旧/run/permit/DONE復元、原本/DB/credential/Backup/config/mount/namespace変更0。全後条件後だけ別fresh readback/準備scopeを新onlyで実行する。RD/UI/DIF/親1800/Unit期限/要求coverage/正式source条件は不変更。
 
+SSC244の実施補足：SSC191の管理者起動/namespace禁止と既timer/path抑止をhandoff全区間で再認証し、M/A解放の間にも別dispatchを許さない。TERM前にnew-only O_EXCL/NOFOLLOW・file/dirsyncの一回予約を永続化し、pidfd束縛後と予約後にもactor/全原値を再読する。全taskのchildren・全UID/GID/groups/caps/NNP/cgroup・実exe/完全argv/generationと全凍結payload、両捕捉lock inodeと実actorFD/FLOCK（blocked/余分holder拒否）を照合する。全署名artifact/祖先・manifest/pin/signature/approvalのmetadata/ACL/identity/hashを保持NOFOLLOWで保存し、二読間の属性変化も拒否する。全application-DB client backend（migration/未知roleも含む、観測自身だけ除く）とadvisoryを確認する。観測body失敗はRef/FD内で隔離保持し、finallyで先に解放してnormalと推定しない。pidfd readinessと旧exit143は別に実証し、旧transport48449の実終端code/UNKNOWNを新handoff結果と分けて保存する。
 
 SSC243（2026-10-10、SSC165174のcompleted・active無しcold接続）：保存原本が完全DONEでactive/pending無しなら、旧pending専用cold工具のactivationを捏造しない。今回固定source40ef/PG932/BOMb75e/187/schema028、instancepgpt-r2、新bootcbca、24表594行/原本59/Backup47/credential19/旧proof28・旧991-v4原値、1004-v3全二読/署名と1005全10冷32宣言/metadata正常閉鎖を接続基点とする。元diskを不変更read-only backingにする私有new COW layerのlogical equalityと全backing chainを認証し、作業disk/現在QEMU/boot/jobを記録する。元disk直接起動・snapshot apply/reset、独立backup認定、旧/run/permit/owner/launch/intent/native復元0。
 
