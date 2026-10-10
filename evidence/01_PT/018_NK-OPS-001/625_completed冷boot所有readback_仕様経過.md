@@ -1,5 +1,9 @@
 # PG1023～1025 completed冷boot所有readback（準備の前段）
 
+## 2026-10-10 実失敗・所有保持
+
+compile1024/source5a8aacfc8/独立契約・JDK-Werror0、stage1025-v1実0。verify-v1/exec48449は署名確認後SIGNED_CURRENTでIOException、hostROfalseにimmutable verifierを呼んだBUG1009。RODB/Refs/原本Session前で未取得、M/A保持・complete無し・actualexit未確定。旧frozen0dd14…/source5a/原値は保全しhotpatch/再verify/stage/RO設定で正常化しない。SSC244設計main公開済。新preflight1033-v6/1034は627へ別source/runで記録し、旧工具退役・新coldreadback/準備は未受入、旧PT-DEP-1023003～005を成功へ加算0。
+
 Program NK-OPS-001 / WBS-N11、SSC243/SS343/353/451。Production current40ef/PG932/BOMb75e/187/schema028、新bootcbca、原本eeae/091663ce/cutoff2026-10-09T23:31:22.087768Z/DONE23:56:48.112404Z。完全completed・active無し、startup/PT-native無しを保持する。新candidate d5b001042は未配備で別管理、既signed sourceへ巻き戻す操作ではない。
 
 | Test ID | 入力・独立期待値 | 状態 |
