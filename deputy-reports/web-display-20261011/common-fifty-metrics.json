@@ -1,0 +1,87 @@
+{
+  "wbs": [
+    "WBS-P015-07",
+    "WBS-P016-25.04"
+  ],
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "changeCommitReference": "../commit-index.json",
+  "beginJST": "2026-10-11T08:36:48.529395+09:00",
+  "endJST": "2026-10-11T08:37:27.330052+09:00",
+  "wallElapsedSeconds": 38.800657,
+  "externalJobWaitSeconds": 0,
+  "originalEstimate": null,
+  "groupBudgetReference": "Existing C=1.25 and B=2.00 starting group estimates, shared phases not additive/recharged to screens",
+  "groupEstimateIsNotAdditionalCost": true,
+  "remainingPredictionPp": null,
+  "criteriaSatisfied": [
+    "Common fifty first/middle/last literal range/href/labels/top-bottom render",
+    "empty/unsearched no nav",
+    "CSS common responsive <=900px one-column navigation and retained-header overflow-x container read review"
+  ],
+  "criteriaUnmet": [
+    "per-screen fragment/table container connections pending",
+    "actual browser rendering/accessibility/visual comparison",
+    "module static/coverage/source integration/formal acceptance"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "exit": 1,
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "kind": "missing fragment expected reproduction"
+    },
+    {
+      "attempt": 2,
+      "exit": 0,
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+      "owner": "WBS-P016-25",
+      "sha256": "9457aa2632b0bb1d5f7c90bfc0f68ce81ec0da5755557d93383a596a5d051b9c"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+      "owner": "WBS-P015-07",
+      "sha256": "3c07bb745766cc11ce1f9adcb8fb91996f5141d0bb8df7a91e6c3c0b46615727"
+    }
+  ],
+  "testFiles": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/FiftyPaginationContractTest.java",
+      "sha256": "7b8712488a678c15592699ae2f768bd95033a3b37cf7d447dd0e1a627bf5d617"
+    }
+  ],
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "quotaAfter": {
+    "acquisitionStartUTC": "2026-10-10 23:37:26 UTC",
+    "acquisitionEndUTC": "2026-10-10 23:37:27 UTC",
+    "limitId": "codex",
+    "primary": {
+      "usedPercent": 26,
+      "windowDurationMins": 10080,
+      "resetsAt": 1792229056
+    }
+  },
+  "sharedSameWindowNonnegativeDeltaPp": 0,
+  "leafActualSpentPp": null,
+  "N": null,
+  "T": null,
+  "publicTokenUsage": null,
+  "wholeLeafAccepted": false,
+  "moduleQualityPassed": false,
+  "lastCheckpoint": "common-fifty-metrics.json"
+}

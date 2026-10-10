@@ -16,4 +16,20 @@
     <a th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次の100件</a>
     <span th:if="${!page.nextHref.present}">次の100件</span>
   </nav>
+  <!-- P015-07/UI222 section6: shared navigation for the approved fifty-row lists. -->
+  <nav th:fragment="fifty(page, bottom)" class="pagination fifty" th:classappend="${bottom} ? 'bottom-nav' : ''"
+       th:aria-label="${bottom} ? 'ページ下部' : 'ページ上部'"
+       th:if="${page.page.present and !page.page.orElseThrow().empty}">
+    <a class="previous" th:if="${page.previousHref.present}" th:href="${page.previousHref.orElseThrow()}">前の50件</a>
+    <span th:if="${!page.previousHref.present}">前の50件</span>
+    <div>
+      <span th:text="${page.page.orElseThrow().firstResult}"></span>
+      <span>-</span>
+      <span th:text="${page.page.orElseThrow().lastResult}"></span>
+      <span>/</span>
+      <span th:text="${page.page.orElseThrow().totalCount}"></span>
+    </div>
+    <a class="next" th:if="${page.nextHref.present}" th:href="${page.nextHref.orElseThrow()}">次の50件</a>
+    <span th:if="${!page.nextHref.present}">次の50件</span>
+  </nav>
 </body></html>

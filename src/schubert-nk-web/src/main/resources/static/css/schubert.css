@@ -163,3 +163,14 @@ button { font: inherit; cursor: pointer; }
 .notification-detail-page .question-body, .notification-detail-page .answer-body { white-space: pre-wrap; }
 .question-detail-page .question-body, .question-detail-page .answer-body { white-space: pre-wrap; }
 .question-input textarea { width: 100%; box-sizing: border-box; }
+/* P015-07/P016-25.04, UI222 sections 3/6/9: common fifty-row list navigation and retained table headers. */
+.pagination.fifty { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin: 12px 0; }
+.pagination.fifty > a, .pagination.fifty > span, .pagination.fifty > div { min-height: 40px; display: flex; align-items: center; padding: 0 12px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; }
+.pagination.fifty > a:last-child, .pagination.fifty > span:last-child { justify-content: flex-end; }
+.pagination.fifty > div { gap: 4px; color: #5f6368; font-size: 13px; }
+.pagination.fifty > a { color: #1f6feb; text-decoration: none; font-weight: 700; }
+.table-scroll { max-width: 100%; overflow-x: auto; }
+@media (max-width: 900px) {
+  .pagination.fifty { grid-template-columns: 1fr; }
+  .pagination.fifty > a:last-child, .pagination.fifty > span:last-child { justify-content: flex-start; }
+}

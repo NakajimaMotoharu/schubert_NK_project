@@ -1,0 +1,60 @@
+{
+  "contract": "common 50-row list navigation and retained-header responsive table container",
+  "wbs": [
+    "WBS-P015-07",
+    "WBS-P016-25.04"
+  ],
+  "baseCommit": "a39d95e172d417ae9ee6fe78a24ac29a2b8aaaa2",
+  "startSourceCommit": "fc831e060",
+  "beginJST": "2026-10-11T08:36:48.529395+09:00",
+  "production": [
+    {
+      "path": "src/schubert-nk-web/src/main/resources/static/css/schubert.css",
+      "owner": "WBS-P016-25",
+      "baseSha256": "1466825b3caeb2654a181cd88356e4b6599e0549bf527a81f5826fef6d34a11d"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/resources/templates/fragments/pagination.html",
+      "owner": "WBS-P015-07",
+      "baseSha256": "ddf3ccc9a1f88adf5bd61c8c9aa8928022f97c6e8f314c48941aad267bd5cb80"
+    }
+  ],
+  "tests": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/FiftyPaginationContractTest.java"
+  ],
+  "expectations": {
+    "authority": "UI222§3,6,9; SS313§6.1,10",
+    "first": [
+      1,
+      50,
+      101
+    ],
+    "middle": [
+      51,
+      100,
+      101
+    ],
+    "last": [
+      101,
+      101,
+      101
+    ],
+    "navigationLabels": [
+      "前の50件",
+      "次の50件"
+    ],
+    "emptyUnsearched": "no nav",
+    "topBottom": "two independently rendered fragments, bottom CSS class; exact href values retained",
+    "tableContainer": "overflow-x auto/max-width100%, table and thead retained; no column/card redesign"
+  },
+  "groupBudgetReference": "Existing C=1.25 and B=2.00 starting group estimates, shared phases not additive/recharged to screens",
+  "originalEstimate": null,
+  "remainingPredictionPp": null,
+  "quotaBefore": {
+    "limitId": "codex",
+    "usedPercent": 26,
+    "windowDurationMins": 10080,
+    "resetsAt": 1792229056
+  },
+  "executionSafety": "New common fragment with closed synthetic optional Map fixtures/MockServlet Thymeleaf only, no MVC/business context/network/DB/JMS; one Java job/private cache."
+}
