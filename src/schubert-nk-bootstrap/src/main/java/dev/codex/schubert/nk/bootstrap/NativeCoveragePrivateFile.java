@@ -31,6 +31,42 @@ final class NativeCoveragePrivateFile {
 
   private record FileState(Identity identity, long size) {}
 
+  /** SSC261: resources over the already held entry only; never path/profile authority. */
+  interface FileCalls {
+    @Nullable FileChannel read(Path held) throws IOException;
+
+    @Nullable FileChannel write(Path held) throws IOException;
+  }
+
+  static final FileCalls NATIVE_CHANNELS = new NativeFileCalls();
+
+  private static final class NativeFileCalls implements FileCalls {
+    public FileChannel read(Path held) throws IOException {
+      return FileChannel.open(held, StandardOpenOption.READ);
+    }
+
+    public FileChannel write(Path held) throws IOException {
+      return FileChannel.open(held, StandardOpenOption.WRITE);
+    }
+  }
+
+  @FunctionalInterface
+  interface ReadOnlyObservation {
+    boolean readOnly() throws IOException;
+  }
+
+  /** Scalar pin prerequisite only; real Root inode/full SHA remains caller-owned. */
+  static void verifyAgentShape(long size, @Nullable ReadOnlyObservation observation)
+      throws IOException {
+    if (observation == null) throw new IllegalArgumentException("private PT observation required");
+    require(size == 307843 && observation.readOnly());
+  }
+
+  private static FileChannel channel(@Nullable FileChannel acquired) {
+    if (acquired == null) throw new IllegalArgumentException("private PT channel required");
+    return acquired;
+  }
+
   /** PG-D399: data observations only; no startup evidence, configurable path or privilege grant. */
   interface Io {
     InodeSecurityCalls security();
@@ -116,7 +152,7 @@ final class NativeCoveragePrivateFile {
                         "jacoco-agent.jar",
                         held -> {
                           FileState state = file(held, security, 0, 0, 0100644);
-                          require(state.size() == 307843 && security.readOnlyFilesystem(held));
+                          verifyAgentShape(state.size(), () -> security.readOnlyFilesystem(held));
                           require(
                               FixedNativeCoverageProfile.AGENT_SHA256.equals(hash(held, 307843)));
                           require(state.equals(file(held, security, 0, 0, 0100644)));
@@ -147,7 +183,17 @@ final class NativeCoveragePrivateFile {
       byte @Nullable [] bytes,
       @Nullable Io io)
       throws IOException {
-    if (profile == null || name == null || bytes == null || io == null)
+    export(profile, name, bytes, io, NATIVE_CHANNELS);
+  }
+
+  static void export(
+      @Nullable FixedNativeCoverageProfile profile,
+      @Nullable String name,
+      byte @Nullable [] bytes,
+      @Nullable Io io,
+      @Nullable FileCalls channels)
+      throws IOException {
+    if (profile == null || name == null || bytes == null || io == null || channels == null)
       throw new IllegalArgumentException("private PT export dependencies required");
     // Name is admitted by the closed profile; a second path cannot be substituted by a caller.
     require(
@@ -200,7 +246,7 @@ final class NativeCoveragePrivateFile {
                                               && !security.readOnlyFilesystem(held));
                                       return Boolean.TRUE;
                                     });
-                                write(target, security, uid, gid, name, bytes, io);
+                                write(target, security, uid, gid, name, bytes, io, channels);
                                 require(
                                     original.equals(
                                         directory(target, security, uid, gid, 040700, io)));
@@ -263,7 +309,7 @@ final class NativeCoveragePrivateFile {
       String name,
       byte[] bytes)
       throws IOException {
-    write(directory, security, uid, gid, name, bytes, new NativeIo());
+    write(directory, security, uid, gid, name, bytes, new NativeIo(), NATIVE_CHANNELS);
   }
 
   private static void write(
@@ -273,7 +319,8 @@ final class NativeCoveragePrivateFile {
       long gid,
       String name,
       byte[] bytes,
-      Io io)
+      Io io,
+      FileCalls channels)
       throws IOException {
     if (directory == null || security == null || name == null || bytes == null)
       throw new IllegalArgumentException("private PT output dependencies required");
@@ -285,7 +332,7 @@ final class NativeCoveragePrivateFile {
             held -> {
               FileState original = file(held, security, uid, gid, 0100600, io);
               require(original.size() == 0);
-              try (var channel = FileChannel.open(held, StandardOpenOption.WRITE)) {
+              try (var channel = channel(channels.write(held))) {
                 var buffer = ByteBuffer.wrap(bytes);
                 while (buffer.hasRemaining()) require(channel.write(buffer) > 0);
                 channel.force(true);
@@ -293,7 +340,7 @@ final class NativeCoveragePrivateFile {
               }
               FileState after = file(held, security, uid, gid, 0100600, io);
               require(original.identity().equals(after.identity()) && after.size() == bytes.length);
-              require(hash(held, bytes.length).equals(digest(bytes)));
+              require(hash(held, bytes.length, channels).equals(digest(bytes)));
               return after;
             });
     // createPrivateEntry has normally closed its owned FD before sync/publication acceptance.
@@ -302,7 +349,7 @@ final class NativeCoveragePrivateFile {
         name,
         held -> {
           require(saved.equals(file(held, security, uid, gid, 0100600, io)));
-          require(hash(held, bytes.length).equals(digest(bytes)));
+          require(hash(held, bytes.length, channels).equals(digest(bytes)));
           return Boolean.TRUE;
         });
     require(before.equals(directory(directory, security, uid, gid, 040700, io)));
@@ -368,8 +415,13 @@ final class NativeCoveragePrivateFile {
   }
 
   private static String hash(Path held, int size) throws IOException, NoSuchAlgorithmException {
+    return hash(held, size, NATIVE_CHANNELS);
+  }
+
+  private static String hash(Path held, int size, FileCalls channels)
+      throws IOException, NoSuchAlgorithmException {
     var hash = MessageDigest.getInstance("SHA-256");
-    try (var channel = FileChannel.open(held, StandardOpenOption.READ)) {
+    try (var channel = channel(channels.read(held))) {
       require(channel.size() == size);
       var buffer = ByteBuffer.allocate(8192);
       long count = 0;

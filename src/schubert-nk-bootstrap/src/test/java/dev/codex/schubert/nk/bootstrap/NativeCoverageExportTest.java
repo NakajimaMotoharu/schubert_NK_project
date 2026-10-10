@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.storage.*;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.PosixFilePermissions;
@@ -474,6 +477,257 @@ final class NativeCoverageExportTest {
       assertEquals(Integer.valueOf(2), metadata.get("nlink"));
     }
     assertTrue(f.calls.live.isEmpty());
+  }
+
+  @Test
+  void nchannel1278001PinShapeDataPreservesShortCircuitNotPhysicalAuthority() throws Exception {
+    for (long size : new long[] {-1, 0, 307842, 307844}) {
+      int[] reads = {0};
+      assertThrows(
+          IOException.class,
+          () ->
+              NativeCoveragePrivateFile.verifyAgentShape(
+                  size,
+                  () -> {
+                    reads[0]++;
+                    return true;
+                  }));
+      assertEquals(0, reads[0]);
+    }
+    NativeCoveragePrivateFile.verifyAgentShape(307843, () -> true);
+    assertThrows(
+        IOException.class, () -> NativeCoveragePrivateFile.verifyAgentShape(307843, () -> false));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NativeCoveragePrivateFile.verifyAgentShape(307843, null));
+    assertThrows(
+        IOException.class,
+        () ->
+            NativeCoveragePrivateFile.verifyAgentShape(
+                307843,
+                () -> {
+                  throw new IOException("literal observation failure");
+                }));
+  }
+
+  @Test
+  void nchannel1278002NullResourcesRefuseAndReturnAllOwnedFileDescriptors() throws Exception {
+    var untouched = fixture(ROLES.get(0));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            NativeCoveragePrivateFile.export(
+                profile(untouched.role), INV + ".terminal.exec", GOLDEN, untouched, null));
+    assertEquals(0, untouched.calls.creates);
+    for (String fault : List.of("write-null", "read-null")) {
+      var f = fixture(ROLES.get(0));
+      var channels = new FaultChannels(f, fault);
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              NativeCoveragePrivateFile.export(
+                  profile(f.role), INV + ".terminal.exec", GOLDEN, f, channels));
+      assertTrue(f.calls.live.isEmpty());
+      assertTrue(channels.opened.stream().allMatch(c -> !c.isOpen() && !c.delegate.isOpen()));
+      assertEquals(1, f.calls.creates);
+      assertEquals(fault.equals("write-null") ? 0 : 7, Files.size(f.output("terminal")));
+    }
+  }
+
+  @Test
+  void nchannel1278003ActualHeldChannelZeroSizeShortLongForceCloseFailuresAreNonSuccess()
+      throws Exception {
+    for (String fault :
+        List.of(
+            "write-zero",
+            "write-size",
+            "write-error",
+            "force-error",
+            "write-close",
+            "read-size-begin",
+            "read-zero",
+            "read-long",
+            "read-short",
+            "read-size-end",
+            "read-close")) {
+      var f = fixture(ROLES.get(0));
+      var channels = new FaultChannels(f, fault);
+      assertThrows(
+          IOException.class,
+          () ->
+              NativeCoveragePrivateFile.export(
+                  profile(f.role), INV + ".terminal.exec", GOLDEN, f, channels),
+          fault);
+      assertTrue(f.calls.live.isEmpty(), fault);
+      assertTrue(
+          channels.opened.stream().allMatch(c -> !c.isOpen() && !c.delegate.isOpen()), fault);
+      assertEquals(1, f.calls.creates);
+      assertEquals(0, f.calls.syncs);
+      assertArrayEquals(
+          fault.equals("write-zero") || fault.equals("write-error")
+              ? new byte[0]
+              : new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
+          Files.readAllBytes(f.output("terminal")),
+          fault);
+      assertEquals(fault.startsWith("read-") ? 1 : 0, channels.readerCount);
+      assertEquals(fault.startsWith("read-") ? 2 : 1, channels.opened.size());
+      assertArrayEquals(new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1}, GOLDEN);
+    }
+  }
+
+  private static final class FaultChannels implements NativeCoveragePrivateFile.FileCalls {
+    final Fixture fixture;
+    final String fault;
+    final List<FaultChannel> opened = new ArrayList<>();
+    int readerCount;
+
+    FaultChannels(Fixture fixture, String fault) {
+      this.fixture = fixture;
+      this.fault = fault;
+    }
+
+    public @Nullable FileChannel read(Path held) throws IOException {
+      readerCount++;
+      return fault.equals("read-null") ? null : open(held, true);
+    }
+
+    public @Nullable FileChannel write(Path held) throws IOException {
+      return fault.equals("write-null") ? null : open(held, false);
+    }
+
+    private FileChannel open(Path held, boolean reading) throws IOException {
+      assertTrue(Files.isSameFile(held, fixture.output("terminal")));
+      var delegate =
+          Objects.requireNonNull(
+              reading
+                  ? NativeCoveragePrivateFile.NATIVE_CHANNELS.read(held)
+                  : NativeCoveragePrivateFile.NATIVE_CHANNELS.write(held));
+      var value =
+          new FaultChannel(delegate, reading ? fault : fault.startsWith("read-") ? "" : fault);
+      opened.add(value);
+      return value;
+    }
+  }
+
+  /** Resource fault provider around a real held Linux FileChannel, never namespace authority. */
+  private static final class FaultChannel extends FileChannel {
+    final FileChannel delegate;
+    final String fault;
+    int reads, sizes;
+
+    FaultChannel(FileChannel delegate, String fault) {
+      this.delegate = delegate;
+      this.fault = fault;
+    }
+
+    @Override
+    public int read(ByteBuffer target) throws IOException {
+      reads++;
+      if (fault.equals("read-zero")) return 0;
+      if (fault.equals("read-long")) {
+        target.put(new byte[8]);
+        return 8;
+      }
+      if (fault.equals("read-short")) {
+        if (reads > 1) return -1;
+        target.limit(3);
+      }
+      return delegate.read(target);
+    }
+
+    @Override
+    public int write(ByteBuffer input) throws IOException {
+      if (fault.equals("write-zero")) return 0;
+      if (fault.equals("write-error")) throw new IOException("literal provider refusal");
+      return delegate.write(input);
+    }
+
+    @Override
+    public long size() throws IOException {
+      sizes++;
+      return delegate.size()
+          + (fault.equals("write-size")
+                  || fault.equals("read-size-begin")
+                  || (fault.equals("read-size-end") && sizes > 1)
+              ? 1
+              : 0);
+    }
+
+    @Override
+    public void force(boolean metadata) throws IOException {
+      assertTrue(metadata);
+      if (fault.equals("force-error")) throw new IOException("literal force refusal");
+      delegate.force(metadata);
+    }
+
+    @Override
+    protected void implCloseChannel() throws IOException {
+      delegate.close();
+      if (fault.equals("write-close") || fault.equals("read-close"))
+        throw new IOException("literal close refusal");
+    }
+
+    @Override
+    public long read(ByteBuffer[] b, int o, int n) throws IOException {
+      return delegate.read(b, o, n);
+    }
+
+    @Override
+    public long write(ByteBuffer[] b, int o, int n) throws IOException {
+      return delegate.write(b, o, n);
+    }
+
+    @Override
+    public long position() throws IOException {
+      return delegate.position();
+    }
+
+    @Override
+    public FileChannel position(long p) throws IOException {
+      delegate.position(p);
+      return this;
+    }
+
+    @Override
+    public FileChannel truncate(long s) throws IOException {
+      delegate.truncate(s);
+      return this;
+    }
+
+    @Override
+    public long transferTo(long p, long n, WritableByteChannel c) throws IOException {
+      return delegate.transferTo(p, n, c);
+    }
+
+    @Override
+    public long transferFrom(ReadableByteChannel c, long p, long n) throws IOException {
+      return delegate.transferFrom(c, p, n);
+    }
+
+    @Override
+    public int read(ByteBuffer b, long p) throws IOException {
+      return delegate.read(b, p);
+    }
+
+    @Override
+    public int write(ByteBuffer b, long p) throws IOException {
+      return delegate.write(b, p);
+    }
+
+    @Override
+    public MappedByteBuffer map(MapMode m, long p, long s) throws IOException {
+      return delegate.map(m, p, s);
+    }
+
+    @Override
+    public FileLock lock(long p, long s, boolean shared) throws IOException {
+      return delegate.lock(p, s, shared);
+    }
+
+    @Override
+    public FileLock tryLock(long p, long s, boolean shared) throws IOException {
+      return delegate.tryLock(p, s, shared);
+    }
   }
 
   private static final class Fixture implements NativeCoveragePrivateFile.Io {
