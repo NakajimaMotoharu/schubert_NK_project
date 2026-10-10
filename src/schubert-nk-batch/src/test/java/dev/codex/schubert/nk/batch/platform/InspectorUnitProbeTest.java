@@ -593,6 +593,50 @@ final class InspectorUnitProbeTest {
   }
 
   /** Transparent actual-process delegation; closure is observed independently of EOF behavior. */
+  @Test
+  void streamingReadFaultPreservesUnknownFailureAndSanitizesIo() throws Exception {
+    // PT-DEP-1015001: independent provider faults, actual process exit, all resources closed.
+    for (Throwable fault :
+        List.of(
+            new IOException("public IO"),
+            new IllegalStateException("public unknown"),
+            new AssertionError("public fatal"))) {
+      Process actual = new ProcessBuilder("/usr/bin/printf", "%s", "ABCD").start();
+      var stream =
+          new FilterInputStream(actual.getInputStream()) {
+            @Override
+            public byte[] readNBytes(int limit) throws IOException {
+              if (fault instanceof IOException io) throw io;
+              if (fault instanceof RuntimeException unknown) throw unknown;
+              throw (Error) fault;
+            }
+          };
+      var process = new ObservedProcess(actual, stream);
+      var reader = new InspectorUnitProbe.NativeReader(command -> process);
+      if (fault instanceof IOException) {
+        failed(
+            StopGateFailure.COMMAND_FAILURE,
+            () ->
+                reader.executeStreaming(
+                    List.of("literal-read-fault"), 4, TimeUnit.SECONDS.toNanos(5)));
+      } else {
+        assertSame(
+            fault,
+            assertThrows(
+                fault.getClass(),
+                () ->
+                    reader.executeStreaming(
+                        List.of("literal-read-fault"), 4, TimeUnit.SECONDS.toNanos(5))));
+      }
+      assertFalse(process.isAlive());
+      assertEquals(0, process.exitValue());
+      assertEquals(1, process.stdoutCloses.get());
+      assertEquals(1, process.stdinCloses.get());
+      assertEquals(1, process.stderrCloses.get());
+    }
+  }
+
+  /** Transparent actual-process delegation; closure is observed independently of EOF behavior. */
   private static final class ObservedProcess extends Process {
     private final Process delegate;
     final AtomicInteger stdoutCloses = new AtomicInteger();
@@ -603,8 +647,12 @@ final class InspectorUnitProbeTest {
     private final InputStream error;
 
     ObservedProcess(Process delegate) {
+      this(delegate, delegate.getInputStream());
+    }
+
+    ObservedProcess(Process delegate, InputStream stdout) {
       this.delegate = delegate;
-      output = observed(delegate.getInputStream(), stdoutCloses);
+      output = observed(stdout, stdoutCloses);
       error = observed(delegate.getErrorStream(), stderrCloses);
       input =
           new FilterOutputStream(delegate.getOutputStream()) {
