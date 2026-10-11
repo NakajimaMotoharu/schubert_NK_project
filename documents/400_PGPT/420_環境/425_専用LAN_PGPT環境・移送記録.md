@@ -1,5 +1,15 @@
 # 425 専用LAN PGPT環境・移送記録
 
+## 現在の追加工具・再現・復元差分（2026-10-12 07:37JST）
+
+公式Ubuntu aptでACL2.3.2-2/setfacl-getfacl2.3.2を追加、root-private `/runs/PG1460-acl-package-v1` の導入前inventory/apt logを保持。既host抽出PostgreSQL18.6（Ubuntu18.6-0ubuntu0.26.04.1）のbin/lib/share/libpq627fileを同SHAで専用server `/tools/postgresql18/usr` へ配置、postgres/initdb/pg_ctl/psql/dump/restore六version/ldd欠落0。DB・credentialはコピー0、裸機PostgreSQL service導入/起動0。Node24.19.0、固定ShellCheck0.11.0は既資格hostの実byteを専用toolsへhash照合で配置し、server.info/host復旧署名秘密鍵転送0。QEMU10.2.1追加は既§5と同inventoryを復元対象にする。
+
+server fixtureはSCHUBERT_PG_ROOT/SCHUBERT_SHELLCHECK/明示private diagnostics dir、親umask0077/子Maven0027/heap768M/worker1/明示tmpを固定。JAVA_TOOL_OPTIONSを除き厳密子stdoutへ起動bannerを混入しない。systemd259.5のvendor xfs警告を捨てず、独立project Unit lookup＋三implicit target stub、project不正directiveの検出/positive stderr空を検証する。旧1459/1460/1461/1466/1467/1468失敗source/target/XML/private fixtureを保存し、是正後PG1471 selected21/1474 XML・static・Mainbyte資格を別証跡とする。新全6はtools/quality/pg1476_corrected_server_six.py（new-onlyで同slot再発行禁止）。
+
+PG1434独立転送closing0→1435新COW cold bootは実完了、現在QEMU13204/guestboot3d69・forward OS23837/tool24937。元三層disk/failed/native/stash7/原本Backupを保持、RAM/旧run/permit復元0。再起動はしていない。Root1456のtimeout143/partialは移送受入や旧tool正常closeへ変換しない。
+
+IT/ST復元時は専用job/VM/DB/forwardの現在所有と未回収保全を認証→正規停止/保存→追加apt package一覧と導入前inventoryの差だけ評価する。acl/QEMU依存の無条件autoremove、全専用領域削除、未知owner killはしない。専用tools/source/cache/runs/VMは保全してから別退避の判断へ、秘密DB/logとCurrent baselineのGit格納禁止を維持。netplan eno2.optional=true/実LAN正常を読取確認済み、ネットワーク/SSH設定変更及び確認目的reboot0。
+
 ## 1. 承認と境界（2026-10-12）
 
 QA052回答により専用server `192.168.1.131`をPG/PTへ使用する。後続IT/ST用へ戻せるよう、PGPT領域・工具・VM・port・設定・権限の差分を記録する。本記録はIT/ST合格や正式PGPT受入ではない。元tree・stash7・Current baseline・原本・Backup・旧失敗/heap/VM/nativeは保全する。

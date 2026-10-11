@@ -1,0 +1,11 @@
+# PG1471/1474 SSC267 選択実行結果
+
+2026-10-12 JST、dev-foundation、Main769/snapshot75a871723。design-only bc5165485/PR108→origin/main5f4c8b384aebdc11bcd29fbc6030a910fb976a66、未受入code/tools/evidence混入なし。app添付は100identity上限拒否、既添付削除なし。
+
+PG1471 actual0、認証8/静的13＝選択全21、全F/E/S/flaky/not-run0。新TIMEOUT-SSC267はrole1500/500確認/独立行lock/固定Infrastructure/rollback/全DB原値0/password消去PASS、CONCURRENT-SSC267は独立double・実SQLの12/20全後条件PASS。既6認証caseのJCA/realPBKDF2・境界・null・faultもPASS。認証8を21認証PTへ加算しない。
+
+PG1474 actual0、fresh XML3/time-window/Testcase count/staticXML issue0/入力全hash不変、API Main class401を資格済PG1279 JARと全byte比較一致。API JarSHA2d802246219b4429fe474fc4c353b60cb79be0951cd15c6b5ac2d6b1cd7c95ac、選択manifestSHAb05335db085dffa2402c1efbde6e76df5703079928fc950a0a5abde79e883e66、Auth XMLSHA04a37bb37e03990d38dbe22f23f9a824fbfff56f80925cf9b7e75ca597fd50a1。原XML/logは専用私有runに保存、safe manifestへhashを集約。
+
+PG1470は旧1467診断をuid/mode600/nlink1/size/九metadata fieldで資格・6074byte原本private保持、user FOR UPDATE statement timeout3、SHA954d05ef10f6a38f864d57dc349ef87d54f16474948fc8560afbf096c7c615ba。旧1468のatime誤比較errorは保全、別1470と独立2工具test/九field変異拒否でBUG1110/YKT878限定原因を是正した。実機期限を緩めず、旧認証失敗をPASSに変更しない。
+
+限定成功でありglobal四counter100%・当source全6・CHR・正式1964PT/53scope・wholeleaf受入の更新なし。BUG1108/YKT877の正式全source品質結合は未完、1107静的tool/scope限定原因は13PTと不正directive独立負例で確認済み。後続PG1476 fresh3578PT/523suite/1635class、同source native/451へ続行する。
