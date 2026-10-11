@@ -16,12 +16,19 @@ import org.junit.jupiter.api.io.TempDir;
 final class InspectorDeploymentTest {
   private static final Path REPO = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path DEPLOYMENT = REPO.resolve("src/deployment");
-  private static final Path SHELLCHECK =
-      Path.of("/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck");
+  private static final Path SHELLCHECK = shellCheck();
   private static final String UNIT = "schubert-nk-inbox-inspector.service";
   @TempDir Path root;
   private String method;
   private int sequence;
+
+  private static Path shellCheck() {
+    String configured = System.getenv("SCHUBERT_SHELLCHECK");
+    return configured == null || configured.isBlank()
+        ? Path.of(
+            "/home/mini/codex/project1/work/toolchain/shellcheck-0.11.0/root/usr/bin/shellcheck")
+        : Path.of(configured);
+  }
 
   @BeforeEach
   void evidenceMethod(TestInfo info) {
@@ -380,7 +387,7 @@ final class InspectorDeploymentTest {
                 "verify",
                 "--man=no",
                 directory.resolve(UNIT).toString()),
-            Map.of("SYSTEMD_UNIT_PATH", directory + ":", "LC_ALL", "C"));
+            UnitSyntaxFixture.environment(directory));
     assertEquals(new Result(0, "", ""), result);
   }
 

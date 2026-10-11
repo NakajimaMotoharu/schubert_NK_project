@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -116,7 +115,7 @@ final class ApplicationServiceUnitTest {
               "--man=no",
               directory.resolve(name + ".service").toString());
       process.environment().clear();
-      process.environment().putAll(Map.of("SYSTEMD_UNIT_PATH", directory + ":", "LC_ALL", "C"));
+      process.environment().putAll(UnitSyntaxFixture.environment(directory));
       process.redirectErrorStream(true);
       Process running = process.start();
       assertTrue(running.waitFor(Duration.ofSeconds(10)));
@@ -124,6 +123,29 @@ final class ApplicationServiceUnitTest {
       assertEquals(0, running.exitValue(), output);
       assertEquals("", output);
     }
+  }
+
+  @Test
+  void isolatedLookupStillReportsProjectSyntaxWarnings() throws Exception {
+    Path directory = Files.createDirectory(temporary.resolve("negative"));
+    Path unit = directory.resolve("negative.service");
+    Files.writeString(
+        unit,
+        "[Service]\nType=oneshot\nExecStart=/bin/true\nNKInvalidDirectiveForNegativeOracle=yes\n");
+    ProcessBuilder process =
+        new ProcessBuilder("/usr/bin/systemd-analyze", "verify", "--man=no", unit.toString());
+    process.environment().clear();
+    process.environment().putAll(UnitSyntaxFixture.environment(directory));
+    process.redirectErrorStream(true);
+    Process running = process.start();
+    assertTrue(running.waitFor(Duration.ofSeconds(10)));
+    String output = new String(running.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+    // systemd returns zero for unknown directives, so exit zero alone is never
+    // a successful syntax oracle. Positive cases above require empty output.
+    assertEquals(0, running.exitValue());
+    assertTrue(output.contains("Unknown key 'NKInvalidDirectiveForNegativeOracle'"));
+    assertTrue(output.contains("negative.service"));
+    assertFalse(output.contains("xfs_scrub_all.service"));
   }
 
   private static String read(String name) throws Exception {

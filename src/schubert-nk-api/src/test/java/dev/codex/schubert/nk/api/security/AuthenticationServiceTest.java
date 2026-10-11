@@ -29,11 +29,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-004-01..06: production PBKDF2/JDBC/session/audit, independent hash and SQL oracle. */
 final class AuthenticationServiceTest {
-  @TempDir static Path root;
+  // BUG1108/YKT877: retain only failed isolated synthetic fixtures for bounded
+  // SQLSTATE diagnosis. Never copy the private DB/log into public evidence.
+  @TempDir(cleanup = CleanupMode.ON_SUCCESS)
+  static Path root;
+
   private static ApiLogDatabaseFixture database;
   private static AuthContextCodec codec;
   private static AuthSessionService sessions;
