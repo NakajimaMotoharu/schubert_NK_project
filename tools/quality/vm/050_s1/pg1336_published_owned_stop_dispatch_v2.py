@@ -9,6 +9,7 @@ compile(STAGE,'<actual current stage corrected release join>', 'exec')
 
 def source():
     code=previous.source().replace('pg1331','pg1336').replace('Pg1328','Pg1334').replace('pg1328','pg1334').replace('pg1329','pg1335')
+    code=code.replace('pg1330-published-stop-preflight-v1.safe.json','pg1338-published-stop-preflight-v2.safe.json')
     compile(code,'<whole corrected current stop dispatcher>','exec');return code
 
 def main():
