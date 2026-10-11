@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+SSC263（BUG1088/YKT857）：cold native復旧の終了判定は固定profile全roleと十Unit effectiveagent/RW/NSS/実inodeのjoinで行う。通常Root8nativeやSSC254255五roleの成功だけではordinary-bootstrap196を準備済みとしない。当769/PG1292はBootstrap専用oneshotのagent/RW/API NSSが適合、当一directoryだけ欠落、全元11role/18execを保全する。事前native_treeの拒否を除外せず、当失敗親子/Bus/十Ref/二FLOCKを現値で認証→耐久一回child/Java回収1368/全原値資源0→旧143/UNKNOWN維持→別fresh正常M-A/RObatch/advisory/heartbeat/十Ref/保持FD内のSS343限定new-only一role準備→子親dirsync/全正常→独立全24-full32-187/原本BackupStartup/元native全9field・資源0→新baseline→既存ADMIN正常20/元30秒・同Invocation terminal/closing二exec資格、の順。既directory修復/親mode変更/元exec削除/Root再起動/permit発行/業務DBwrite0。
+
+全profile matrixの欠落/不正ID/type/NSS/agent/RW/role-owner-mode・unknown/null/外entry/短IO/mkdir/chown/open/dirsync/close/raceの独立oracleと再発防止、全元値維持と実正常postを要求する。部分prepare/所有close不明は当scopeを保持し同slotの再実行や後付け正常化をしない。準備後の親dirは同inode/owner/mode/ACL・entry一追加/nlink+1・有限size/時刻効果のみ、元子metadata/contentは完全一致とする。新beforeを元beforeへ書き換えず、普通Root/API-Web/停止成功を再製造しない。設計公開、限定設定、正常20/native、正式品質を分ける。
+
 SSC262：ordinary真正ISSUED-DONE後のnew signed source code-onlyはSS343の固定finite profileを使い、cold空startup/旧INVALIDへ現在値を代用しない。oldRoot PID1/原本DONEと正常ownedstop・全原24/full32/187/Backup/credential/native/Unit/runtime、unused candidate signed/hostROを新M/A/readonlybatch/advisory/実heartbeat/十Ref/保持FD内で再認証する。既Root/Backup/placement/freezeを繰り返さず、独立phase oracleのcanonicalINVALID→Root0400approval→new sibling/exchange→oldlinked private保全→全正常/独立postの順だけを行う。
 
 epoch/approvalはold regular FDの原byte・正規nlink0/有限ctime、oldcurrentは同inode/oldtarget/ACL/nlink1/有限ctimeをlinkedpathで二読する。未知/半公開/close不明はそのownerと全原値/各実phaseを私有保全して隔離し、旧正常close・旧成功・coldstartup・旧permit/fallbackを補作成しない。新交換又は旧link移動の耐久完了が既確認なら再発行せず、新scopeの正規限定再認証/回収へ進む。独立unknown/null/不正順/全field/外entry/foreignbinding/短IO/close/race testと当Source実postを要求する。code-only後もnewsource真正Root/元30分/API-Web-Caddy/逆順ownedstop/defaultexport/native/CHR/451は別fresh受入、PG/PT結果からIT/ST合格を宣言しない。
