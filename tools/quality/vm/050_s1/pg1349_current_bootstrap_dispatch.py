@@ -8,7 +8,7 @@ def source():
     raw = prior()
     for old, new in (
         ('Pg983', 'Pg1348'), ('pg983', 'pg1348'),
-        ('PG932', 'PG1292'), ('pg932', 'pg1292'),
+        ('PG932', 'PG1292'),
         ('cc9ed874-7f4f-450e-a188-8de1e42c8441', 'cbca8738-3b24-4090-b77c-bf029677cdd6'),
         ('pg963-stop-v1.exit', 'pg1336-stop-v1.exit'),
         ('pg968-terminal-final-v1.exit', 'pg1340-published-terminal-post-v4.exit'),
