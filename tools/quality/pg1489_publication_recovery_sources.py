@@ -13,6 +13,10 @@ ORDER=('schubert-nk-expiry-cleanup.service','artemis.service','schubert-nk-clean
 
 def java():
     raw=profile_java()
+    marker='import dev.codex.schubert.nk.batch.repository.*;'
+    assert raw.count(marker)==1
+    raw=raw.replace(marker,marker+'\nimport dev.codex.schubert.nk.storage.OwnedTransferDirectory;\nimport dev.codex.schubert.nk.storage.LinuxDirectoryCalls;\nimport dev.codex.schubert.nk.storage.LinuxInodeSecurity;')
+    raw=raw.replace('current pending original readonly profile under fresh M-A/RODB/tenRef; mutation0.','current pending original recovery under fresh M-A/RODB/tenRef; fixed reverse stops and typed publication intent only.')
     for old,new in [('Pg1478PartialOriginalProfile','Pg1489PublicationOnlyRecovery'),('pg1478-partial-original-tools-v1',TOOLS),('pg1481-partial-original-profile-v1',SAVE),('pg1478_partial_original_refs.py','pg1489_publication_recovery_refs.py'),('PG1481_','PG1492_'),('PG266-readonly-profile','PG266-publication-recover'),('"profile".equals(args[0])','"recover".equals(args[0])')]:
         if old not in raw:raise ValueError('one current profile binding required')
         raw=raw.replace(old,new)

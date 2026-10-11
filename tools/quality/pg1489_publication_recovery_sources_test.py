@@ -41,6 +41,8 @@ class RecoverySourceTest(unittest.TestCase):
         with self.assertRaises(ValueError):ns['validate_current'](self.fixture())
     def test_generated_bindings_and_mutation_scope(self):
         java=s.java();refs=s.refs();compile(refs,'<full candidate>','exec')
+        for name in ('OwnedTransferDirectory','LinuxDirectoryCalls','LinuxInodeSecurity'):
+            self.assertIn('import dev.codex.schubert.nk.storage.'+name+';',java)
         self.assertIn('"recover".equals(args[0])',java)
         self.assertIn('Pg1487PublicationOnlyIntent.retire(startup,invalid,ORIGINAL',java)
         self.assertNotIn('RootFailedStartRecovery',java);self.assertNotIn('.revoke(',java);self.assertNotIn('.invalidate(',java)
