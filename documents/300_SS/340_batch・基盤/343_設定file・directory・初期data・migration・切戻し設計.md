@@ -1,5 +1,19 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC266 failed publication-only current Rootの限定復旧（2026-10-12）
+
+QA047承認内、RD/UI/外部仕様不変更。Main769/PG1292/schema028/現boot3d69のRoot1456（INV1ee3b3…/Job13033/start5711141318us）が元1800秒timeout143、当run15700a87…/cut2026-10-11T21:18:59.040097Z/activation9e706936…のactive保持・DONE無しの場合を限定する。startupは同INVALID epoch・同公開permit・permit-start.intentの三entryのみで、owner/API-Web launch/service intentは無い。SS174/179/209/211のPair/API-child profileを仮構成して適用しない。
+
+現在1477の原観測bcfd08285abe448ebe28c2adffc39acca0346e25b1769c44d72f43290da38cd5をdata baselineとし、別fresh管理所有でM→A、同生成lock inode/本人FD・kernel、実batch readonly DB/同peer専用advisory/heartbeat、十metadata Ref・全full18/full32と実設定、固定署名187/実Unitfile/current/credential、全24DB/原本/Backup/旧proof/nativeを継続認証する。読取観測だけから操作権限を授与しない。期限143・元close UNKNOWNは保持し、当管理scopeが正常でも旧親の正常終了へ変換しない。
+
+Artemisは固定simple/現PID41805/ticks636663/INV47be234…/start6366634712us、真正PID1 done（Job13935）一記録をmanager start/kernel identity・argv/authority/cgroup/全FD/lock・元Root期間へ結合する。simpleに無いStarting記録を生成しない。Cleanup/Expiryは現active-exited0/同INV・start/done二記録（Job13492/14379）と元Root期間を要求する。未知peer/別cohort/設定差/原値差は隔離し操作0。
+
+同fresh所有の全proofが成立した後だけ、実起動順の逆順Expiry→Artemis→Cleanupを一回予約付きで通常owned停止し、Artemis真正vendor正常終端/PID1・全task/FD/lock消失、oneshotの真正停止後条件、固定十Unit/kernelと元全原値不変を検証する。元INVALIDを再revoke/invalidateせず、同permitの型付きbyte相関だけを検証する。readRevokedのformer-issued値は構文相関に限定し、実ISSUED履歴/許可/失効操作の証拠へ使わない。
+
+正常全terminal/current証明・元原値をgateとした同namespaceのBackupStartIntentFilesのtyped observeQuarantine→retire→dirsyncだけでpublication intentを退役する。任意unlink/owner生成/Pair生成/不存在intent生成は0。epoch/permit/active/DB/Backup/原nativeは保持する。不確実な退役は同現M-Aでstrict publication quarantineを保全し、正常scope返却・本人資源0・独立全postまで後続を止める。新epoch/permit/START/DONE/DB手修正・旧/run復元・既成功Root/ADMIN/Backup/配備/停止の再実行0。
+
+同所有下の原本whole graph/署名/metadata syscallのreadonly費用測定を許し、計測は権限や業務成功の加点にしない。原因是正は別固定source/独立tamper・race・null/全品質・実同条件再発防止へ結合し、security検査・元1800秒・coverageを緩和しない。有限復旧と全新scope正常返却/独立post後のみ、既SSの別fresh同run一回用resume又は必要code-only配備へ進む。実実装/PTは未完。
+
 ## SSC265 固定current cold子起動前失敗の父限定handoff（2026-10-12）
 
 SSC264のPG1447子がAST namespaceのKeyErrorでRef/保持inventory/finite write前に終了し、父だけがDATABASE_ADMISSIONでM/A・readonlybatch/advisoryを保全する当世代に限定する。current769/PG1292/boot3d69・source0fe8/frozen1444/stage1446・Java3323/ticks388541/全argvSHA6f8b48e1…・現exe/loaded tool hashes/authority/cgroup/全task-child集合・全FD/socket・現M/A inode/OFD-FLOCKを二読する。sudo wrapper3321を父Javaと混同せず、旧PIDを将来actorへ再利用しない。Source/partial/debug原値を私有保存し、子exit/父UNKNOWNを正常に補完しない。

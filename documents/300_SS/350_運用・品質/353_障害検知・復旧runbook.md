@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC266 publication-only partial Rootの復旧分類（2026-10-12）
+
+SS343 SSC266を適用し、現1477の同current署名/十full32/全24DB/原本・Backupと、Root1456 timeout143/DONE無し、startup三entry（INVALID/permit/publication intent、owner/launch無し）を別freshM-A/RODB/advisory/同peer/十Refの所有へ再認証する。simple Broker真正done一記録とoneshot二記録をType別に区別し、不在Starting/子owner/Pairを作らない。現同cohortだけ逆順Expiry→Artemis→Cleanupの一回正規停止/全原値・全kernel後条件、既INVALID不変、typed publication intentのみ退役/dirsync、全新scope正常返却と独立postを行う。旧143/UNKNOWNを成功化しない。
+
+BUG1106/YKT875のRoot全graph検証費用をreadonlyで測定し、安全な内部是正と独立再発防止へ進む。期限/security/DB/許可/業務期待値を緩和せず、部分・未知・全post不成立は隔離保全して独立host作業を続ける。BUG1111/YKT879のType誤適用は当simple/oneshotの独立記録数・時刻・INV・job拒否と実1477を根拠にする。署名/旧成功の確認だけでRoot/ADMIN/Backupを再実行せず、次の合法一回resumeは当限定復旧の全閉鎖後に別作業として受入する。
+
 ## SSC267 Login DB timeoutのPT原因分類（2026-10-12）
 
 SS314§5.1/332の承認済9000・rollback・counter不増を正とし、同ownerの全並列request成功を無条件期待値へ追加しない。PG1470はsameMain769/固定PG18.6のuser行FOR UPDATE中statement timeout3を私有ログで分類した。旧1461/1466/1467は不合格のまま保全する。並行DB invariant/実JCA crypto/別固定期限timeout負例を独立試験し、DB期限・work factor・lock順・外部再送・最大sessionを緩和しない。私有DB/logをGit・チャット・公開evidenceへ出さず、診断は認証済hash/既知categoryだけ。実装及びfresh同source再試験・全回帰は本設計反映だけから受入としない。
