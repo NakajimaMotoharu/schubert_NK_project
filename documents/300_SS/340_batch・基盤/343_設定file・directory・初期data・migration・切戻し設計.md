@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC264 current全native不存在のcompleted-cold有限準備（2026-10-12）
+
+QA052の専用LAN移送後もSSC165174/243246のcold隔離条件を維持する。current769/PG1292/BOMecae・新boot3d69、保持真正Root d2e3a86f-27a4-4c2a-be21-b512eebf1216/cutoff2026-10-10T23:30:23.481632Z/ACT841b507c-2713-4ffe-8882-68f5fb3f87f5/DONE2026-10-10T23:54:39.918039Z/原byteSHA59f3、全24DB/Backup/credential/完全原本・署名187/28SQL29history/十cold18-full32を新同sourceで二読してから処理する。旧startup/native tmpfsの消失を旧intent退役成功・旧close正常へ変換せず、hostに残した旧native/failed原byteを現/runへ復元しない。物理guest byteの移送比較だけでadmissionを授与しない。
+
+全profile物理親も不存在の場合に限り、別fresh新M→A/現lock同inode/専用readonlybatch/advisory71419602/実heartbeat/十Ref/完全原本Sessionと全必要FDを連続所有し、既承認current releaseの必要self-bindRO→full pin/Ed25519/187 verifier→固定startup/backup-request/cleanup-request/expiry-request/pt-coverageをnew-only有限作成する。既maintenance Root0700/空は元inode/全属性で保持、root Root0755/ACL0の許可deltaは追加五dirのentry/link/sizeとoperation内mtime/ctimeだけ。currentlink/approval/pin/署名/原本/DB/旧Backup/設定・runtime/Unit及び旧成功を変更しない。新epoch/INVALID/permit発行、start-stop/reload/DDL/business writeは本準備に含めない。
+
+coverage親は新Root:Root0755/ACL0、閉12childroleはbackup/cleanup/expiry/inspector/ordinary-api193/ordinary-bootstrap196/ordinary-inspector196/ordinary-web193/parent/root-api/root-api193/root-web193。全childはempty0700/ACL0/tmpfs-RW/nlink2。同current固定NSSでbackup=schubert-backup（992:977）、inspector・ordinary-inspector196=schubert-inbox-inspector（991:976）、ordinary-api193・ordinary-bootstrap196=schubert-api（999:981）、ordinary-web193=schubert-web（997:980）、他六Root0:0を独立固定profileと完全joinする。各actual effectiveagent/RW/User/Group/固定role名を設定・NSS・held inodeで認証し、任意role包括作成・既inodeへのchmod/chown・未知entry/ACLの修復・旧execの再作成をしない。完全に存在しない当fresh coverageに対する初期権限設定だけが対象で、SSC263既親への一role追加と混同しない。
+
+前認証→held mkdirat/O_EXCL/NOFOLLOW→新heldFDでowner/mode→empty/ACL/FS/同dev-inode二読→子/親dirsync→原24/32/187/原本/Backup/既lock-maintenance/runtimeの全不変・新閉集合→DB rollback/close/server0→全Ref/FD/bus/A/M正常返却→別独立post/新before、の順。primary/secondary close不明又は部分準備は私有保全し同slot再prepareしない。全対象source/run/独立oracle/故障・null・競合・正規元値後条件を残す。準備完了は起動権限・新Root/Inspector/native/CHR/四counter100/正式451又はIT/ST完了ではない。
+
 ## SSC263 cold固定native role matrixのordinary Bootstrap補足（2026-10-11）
 
 SSC193/195/196/234の固定PT native profileは、通常RootとAPI/Webだけでなくordinary Inspector/Bootstrap oneshotを含む。SSC254/255のcold有限五role整備を全profile整備済みとしない。固定profileのrole名、全十Unitのloaded/type/effective agent/RW宣言、現在NSS UID:primaryGID、実directory/inodeを完全joinする。ordinary-bootstrap196はschubert-nk-bootstrap-admin.serviceの専用oneshot/固定API identityに対応し、API起動やpermit発行の代用ではない。当current769/PG1292ではagentとRW宣言/NSSは適合し当roleだけ物理的に欠落、current全11role/18execは保全対象。native_treeのrole必須拒否を緩めず、正規準備後の新beforeを用いる。
