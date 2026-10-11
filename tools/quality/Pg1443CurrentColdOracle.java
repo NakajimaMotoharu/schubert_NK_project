@@ -4,7 +4,9 @@ import java.util.*;
 
 /** Independent SSC264 real FD oracle, dedicated temporary tree, no VM authority. */
 public final class Pg1443CurrentColdOracle {
+  static int checks;
   static void check(boolean value) {
+    checks++;
     if(!value)throw new AssertionError("current cold independent FD oracle refused");
   }
   static Map<String,Object> attrs(Path p)throws Exception {
@@ -33,7 +35,7 @@ public final class Pg1443CurrentColdOracle {
       for(String name:Arrays.asList("..","a/b",null)) {
         boolean invalid=false;
         try {Pg1441CurrentColdPreparation.initialChild(held,name,0,0,false);}
-        catch(IllegalArgumentException|NullPointerException rejected){invalid=true;}
+        catch(IllegalArgumentException|IllegalStateException rejected){invalid=true;}
         check(invalid);
       }
     }
@@ -41,6 +43,6 @@ public final class Pg1443CurrentColdOracle {
       check(entries.map(p->p.getFileName().toString()).collect(java.util.stream.Collectors.toSet())
           .equals(Set.of("root-private","public-parent","fixed-api")));
     }
-    System.out.println("PG1443_REAL_FD_ORACLE checks=12 unchangedDuplicate=true noVm=true");
+    System.out.println("PG1443_REAL_FD_ORACLE checks="+checks+" unchangedDuplicate=true noVm=true");
   }
 }

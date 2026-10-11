@@ -44,6 +44,8 @@ def java():
 ENVIRONMENT=r'''
   static void initialChild(dev.codex.schubert.nk.storage.OwnedTransferDirectory parent,
       String name,int uid,int gid,boolean publicParent)throws Exception {
+    require(parent!=null && name!=null && uid>=0 && gid>=0
+        && (!publicParent || (uid==0 && gid==0)));
     try(var child=parent.createPrivateChild(name)) {
       child.atDirectory(held->{
         try {
