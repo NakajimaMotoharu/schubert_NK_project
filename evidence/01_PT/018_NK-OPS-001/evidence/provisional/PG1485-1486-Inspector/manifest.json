@@ -1,0 +1,12 @@
+{
+  "programId":"NK-OPS-001","testIds":["PT-OPS-INS1485001","PT-OPS-INS1485002","PT-OPS-INS1485003","PT-OPS-INS1485004","PT-OPS-INS1486001","PT-OPS-INS1486002"],
+  "productionSource":"769ddb15cd735c25fef581b5f9850ef9d0053c0f","operatorStartCommit":"c3175cc952a6d6baade16e728d1cea74b1ddd913","operatorDiff":"The four PG1485/1486 tools committed with this manifest; no Production change",
+  "branch":"dev-foundation","os":"host Ubuntu/Linux, guest boot3d69 preserved","jdk":"25.0.4","jacoco":"0.8.15","asm":"9.10.1",
+  "commands":["python3 -B tools/quality/pg1485_inspector_closing_qualification_test.py","python3 -B tools/quality/pg1485_inspector_closing_qualification.py","python3 -B tools/quality/pg1486_inspector_latest_counter.py","python3 -B tools/quality/pg1486_inspector_latest_counter_test.py"],
+  "runs":[{"id":"PG1485","startUTC":"2026-10-11T23:20:26.934937+00:00","endUTC":"2026-10-11T23:20:29.095008+00:00","exit":0,"manifestSha256":"7756ec18f871d37a6fb63fbc7bc5c0402b56638a1eed32c7297561ffd80445a4"},{"id":"PG1486","startUTC":"2026-10-11T23:21:19.777284+00:00","endUTC":"2026-10-11T23:21:21.961628+00:00","exit":0,"manifestSha256":"6f01a12ddc7664b0121bf1a37eee90aaea7c15108789d8d8ecc1494858ae8551"}],
+  "expected":"Independent handwritten ownership/session/probe/negative oracle; fixed original hashes; class CRC0; latest-only20 graph; counters never regress; XML equality",
+  "actual":{"pythonToolTests":5,"javaOracleAssertions":20,"classByteMismatch":0,"execInputs":20,"sameSessionUnion0":true,"terminalRetainedNotSelected":true,"remaining":{"LINE":880,"METHOD":174,"CLASS":12,"BRANCH":715},"gainVs1428":{"LINE":12,"METHOD":2,"CLASS":0,"BRANCH":0}},
+  "relatedBug":["BUG-1106"],"relatedYkt":["YKT-875"],"relatedSsc":["SSC-266"],"privatePreservation":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1485-inspector-closing-qualification-v1 and pg1486-inspector-latest-counter-v1",
+  "rawSessionCredentialDbExported":false,"vmMutations":0,"formalAccepted":false,"wholeLeafAcceptedDelta":0,"coverage100":false,"freshWholeSameRunAccepted":false,
+  "formalRetained":"PT-WEB-20260925-24/1964PT/53scope","unaccepted":["Root1456 recovery/causal fix","global same-run source qualification","four100/CHR/trace/handover","QA051final"]
+}
