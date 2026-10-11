@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC265 固定current cold子起動前失敗の父限定handoff（2026-10-12）
+
+SSC264のPG1447子がAST namespaceのKeyErrorでRef/保持inventory/finite write前に終了し、父だけがDATABASE_ADMISSIONでM/A・readonlybatch/advisoryを保全する当世代に限定する。current769/PG1292/boot3d69・source0fe8/frozen1444/stage1446・Java3323/ticks388541/全argvSHA6f8b48e1…・現exe/loaded tool hashes/authority/cgroup/全task-child集合・全FD/socket・現M/A inode/OFD-FLOCKを二読する。sudo wrapper3321を父Javaと混同せず、旧PIDを将来actorへ再利用しない。Source/partial/debug原値を私有保存し、子exit/父UNKNOWNを正常に補完しない。
+
+全10 cold18/full32/kernel、全24DB/原本・Backup・credential/署名187/18Unit実file・current/approval/pin、root maintenance.lock/startup-admission.lock/maintenanceの閉3entry・namespace/epoch/active不在を同Source1440封印へ照合し、当父の実専用batch backend/application/loopback socket/peer/advisoryと全他client0を証明する。本人pidfd→全二読→NOFOLLOW/new-only一回TERM予約/force+dirsync→予約後全再読→当本人普通TERM一回→deadline内の本人/全子/task/DBpeer/advisory/FLOCK消失→全元値二読/正常metadata閉鎖の順。SIGKILL/別actor/DBterminate/再signal/prepare/ROOT起動/原本又はnamespace修復0。未知/変異/非終端なら新観測scopeで隔離し次操作へ進まない。
+
+この限定handoffは元Javaの正常close証拠ではなく、元143/UNKNOWNを保持する。全後条件後にだけ別freshM-A/current修正sourceからnew-onlycold準備を行う。旧tools/root/署名公開/Backup/ADMINの成功は再発行しない。実再発防止はnamespace exec先行oracleと同currentSource全guard/正常資源返却/独立postへ結び、handoff又は設計公開を正式PGPT/ITSTへ加算しない。
+
 ## SSC264 current全native不存在のcompleted-cold有限準備（2026-10-12）
 
 QA052の専用LAN移送後もSSC165174/243246のcold隔離条件を維持する。current769/PG1292/BOMecae・新boot3d69、保持真正Root d2e3a86f-27a4-4c2a-be21-b512eebf1216/cutoff2026-10-10T23:30:23.481632Z/ACT841b507c-2713-4ffe-8882-68f5fb3f87f5/DONE2026-10-10T23:54:39.918039Z/原byteSHA59f3、全24DB/Backup/credential/完全原本・署名187/28SQL29history/十cold18-full32を新同sourceで二読してから処理する。旧startup/native tmpfsの消失を旧intent退役成功・旧close正常へ変換せず、hostに残した旧native/failed原byteを現/runへ復元しない。物理guest byteの移送比較だけでadmissionを授与しない。
