@@ -211,6 +211,57 @@ final class MorningBackupRetentionTest {
   }
 
   @Test
+  void issret1420001UnexpectedGenerationFileSetRemainsProtected() throws Exception {
+    for (boolean extraDirectory : List.of(false, true)) {
+      try (var f = new BackupArtifactFixture(temporary);
+          var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
+        var names = generations(f, 7);
+        String foreign = names.getFirst();
+        Path foreignDirectory = f.parent.resolve(foreign);
+        Path extra = foreignDirectory.resolve("extra-public-entry");
+        if (extraDirectory) Files.createDirectory(extra);
+        else Files.writeString(extra, "public uncommitted member\n", StandardCharsets.US_ASCII);
+        var bytesBefore = new TreeMap<Path, byte[]>();
+        var metadataBefore = new TreeMap<Path, Map<String, Object>>();
+        try (var paths = Files.walk(foreignDirectory)) {
+          for (Path path : paths.toList()) {
+            metadataBefore.put(
+                path,
+                Files.readAttributes(
+                    path,
+                    "unix:dev,ino,uid,gid,mode,size,nlink,lastModifiedTime,ctime",
+                    LinkOption.NOFOLLOW_LINKS));
+            if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
+              bytesBefore.put(path, Files.readAllBytes(path));
+          }
+        }
+        var subject = subject(f, root, acceptsAll());
+        var result =
+            subject.collect(MorningBackupRetention.Mode.NEW_SUCCESS, Optional.of(f.expected));
+        assertEquals(Map.of(foreign, "UNEXPECTED_FILE_SET"), result.protectedNames);
+        assertEquals(List.of(), result.deleted);
+        assertEquals(result.before, result.after);
+        assertEquals(7, result.kept.size());
+        assertFalse(result.kept.containsKey(foreign));
+        assertEquals(8, result.after.size());
+        subject.recheck();
+        for (var entry : metadataBefore.entrySet())
+          assertEquals(
+              entry.getValue(),
+              Files.readAttributes(
+                  entry.getKey(),
+                  "unix:dev,ino,uid,gid,mode,size,nlink,lastModifiedTime,ctime",
+                  LinkOption.NOFOLLOW_LINKS));
+        for (var entry : bytesBefore.entrySet())
+          assertArrayEquals(entry.getValue(), Files.readAllBytes(entry.getKey()));
+        assertEquals(extraDirectory, Files.isDirectory(extra, LinkOption.NOFOLLOW_LINKS));
+        f.unchanged();
+        f.released();
+      }
+    }
+  }
+
+  @Test
   void issret004CurrentNotNewestOrMissingNeverDeletes() throws Exception {
     try (var f = new BackupArtifactFixture(temporary);
         var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
