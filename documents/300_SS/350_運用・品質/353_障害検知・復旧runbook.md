@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC264 current completed-coldの専用LAN再認証（2026-10-12）
+
+専用LANへ移送した既VMの新bootでも旧PID/boot/permit/RAM/run原値を起動に再利用しない。offline source-chain保持/論理compare/移送disk hashの資格と、current readonly全10 cold18/full32/全24DB/原本・Backup・credential/署名187の資格を先行する。旧failed/UNKNOWN/旧nativeはhost private証跡のまま保全し、旧tmpfs不在を退役・正常closeへ補完しない。
+
+SS343 SSC264のfreshM-A/現lock inode/readonlybatch advisory/十Ref/原本Sessionの連続正常scopeでだけ、当current必要self-bindROと全不存在の固定namespace/12native-roleを有限準備する。partial/unknownでは当owner/FD/Ref/DBとnew-only証跡を隔離、同prepareの再発行や別actor介入をしない。全元値・資源0の独立post後だけ新beforeを確定し、次の正規INVALID/issuer/新普通runを別契約で行う。保持済Root1320/DONE1322/stop1336/ADMIN1396/Backupの成功を再実行して進捗を補作成せず、新合法Inspector/nativeと残PG/PTを続ける。準備又はOS bootをBUG544歴史解決/正式PGPT/ITST成功へ変換しない。
+
 SSC263（BUG1088/YKT857）：cold native復旧の終了判定は固定profile全roleと十Unit effectiveagent/RW/NSS/実inodeのjoinで行う。通常Root8nativeやSSC254255五roleの成功だけではordinary-bootstrap196を準備済みとしない。当769/PG1292はBootstrap専用oneshotのagent/RW/API NSSが適合、当一directoryだけ欠落、全元11role/18execを保全する。事前native_treeの拒否を除外せず、当失敗親子/Bus/十Ref/二FLOCKを現値で認証→耐久一回child/Java回収1368/全原値資源0→旧143/UNKNOWN維持→別fresh正常M-A/RObatch/advisory/heartbeat/十Ref/保持FD内のSS343限定new-only一role準備→子親dirsync/全正常→独立全24-full32-187/原本BackupStartup/元native全9field・資源0→新baseline→既存ADMIN正常20/元30秒・同Invocation terminal/closing二exec資格、の順。既directory修復/親mode変更/元exec削除/Root再起動/permit発行/業務DBwrite0。
 
 全profile matrixの欠落/不正ID/type/NSS/agent/RW/role-owner-mode・unknown/null/外entry/短IO/mkdir/chown/open/dirsync/close/raceの独立oracleと再発防止、全元値維持と実正常postを要求する。部分prepare/所有close不明は当scopeを保持し同slotの再実行や後付け正常化をしない。準備後の親dirは同inode/owner/mode/ACL・entry一追加/nlink+1・有限size/時刻効果のみ、元子metadata/contentは完全一致とする。新beforeを元beforeへ書き換えず、普通Root/API-Web/停止成功を再製造しない。設計公開、限定設定、正常20/native、正式品質を分ける。
