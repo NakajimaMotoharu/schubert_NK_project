@@ -34,13 +34,14 @@ def main():
     assert sha(BASE/'transfer/source.tar')==ARCHIVE_SHA
     inputs={str(p.relative_to(SOURCE)):sha(p)for p in SOURCE.rglob('*')if p.is_file()}
     assert inputs
-    env={**os.environ,'JAVA_HOME':str(BASE/'tools/jdk-25.0.4'),'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],'MAVEN_OPTS':'-Xmx768m','JAVA_TOOL_OPTIONS':'-Djava.io.tmpdir='+str(OUT/'tmp')}
-    args=[str(BASE/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Dmaven.repo.local='+str(BASE/'m2/repository'),'-Dnk.pt.node='+str(BASE/'tools/node-v24.19.0/bin/node'),'-pl',','.join('src/schubert-nk-'+m for m in MODULES),'clean','spotless:check','test-compile','jar:test-jar','test','spotbugs:check','jacoco:report','jar:jar']
+    env={**os.environ,'JAVA_HOME':str(BASE/'tools/jdk-25.0.4'),'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],'MAVEN_OPTS':'-Xmx768m -Djava.io.tmpdir='+str(OUT/'tmp')}
+    env.pop('JAVA_TOOL_OPTIONS',None)
+    args=[str(BASE/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Djava.io.tmpdir='+str(OUT/'tmp'),'-Dmaven.repo.local='+str(BASE/'m2/repository'),'-Dnk.pt.node='+str(BASE/'tools/node-v24.19.0/bin/node'),'-pl',','.join('src/schubert-nk-'+m for m in MODULES),'clean','spotless:check','test-compile','jar:test-jar','test','spotbugs:check','jacoco:report','jar:jar']
     start=datetime.datetime.now(datetime.timezone.utc)
     begin={'run':'PG1459-six-v1','startUTC':start.isoformat(),'pid':os.getpid(),'ticks':int(Path('/proc/self/stat').read_text().rpartition(')')[2].split()[19]),'sourceSnapshotHead':'2c29d7a17a5eca2f61b24e99af13260a3c286a09','productionSource':'769ddb15cd735c25fef581b5f9850ef9d0053c0f','command':args,'workers':1,'formalAccepted':False,'sourceArchiveSha256':ARCHIVE_SHA,'inputs':inputs}
     with(OUT/'begin.safe.json').open('x')as f:json.dump(begin,f,sort_keys=True);f.flush();os.fsync(f.fileno())
     with(OUT/'maven.private.log').open('xb')as f:
-        r=subprocess.run(args,cwd=SOURCE,env=env,stdout=f,stderr=subprocess.STDOUT);f.flush();os.fsync(f.fileno())
+        r=subprocess.run(args,cwd=SOURCE,env=env,stdout=f,stderr=subprocess.STDOUT,umask=0o027);f.flush();os.fsync(f.fileno())
     end=datetime.datetime.now(datetime.timezone.utc);same=all(sha(SOURCE/p)==h for p,h in inputs.items())
     modules={};total=0;issues=[];classes={};end_ns=int(end.timestamp()*1e9);start_ns=int(start.timestamp()*1e9)
     for m in MODULES:
