@@ -5,12 +5,13 @@ import os
 from pathlib import Path
 import subprocess
 from pg1446_current_cold_stage import W,SSH
+from pg1480_partial_profile_stage import OUTNAME
 
 
 def main():
     os.umask(0o077);out=W/'pg1481-partial-original-profile-v1';out.mkdir(mode=0o700)
     compiled=json.loads((W/'pg1478-partial-profile-frozen-v1.safe.json').read_bytes())
-    stage=json.loads((W/'pg1480-current-cold-stage-v1/manifest.safe.json').read_bytes())
+    stage=json.loads((W/OUTNAME/'manifest.safe.json').read_bytes())
     assert compiled['actualExit']==stage['actualExit']==0
     assert compiled['productionSource']=='769ddb15cd735c25fef581b5f9850ef9d0053c0f'
     args=SSH+['sudo','-n','/opt/jdk-25.0.4/bin/java','--enable-native-access=ALL-UNNAMED',
