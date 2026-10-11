@@ -8,6 +8,13 @@ from pg1446_current_cold_stage import W,SSH
 from pg1480_partial_profile_stage import OUTNAME
 
 
+def valid_receipt(data):
+    return type(data)is bytes and data==(
+        b'PG1292 STAGE PINNED_SIGNATURE_VERIFIED\n'
+        b'PG1292 STAGE FULL_CANDIDATE_BOM_VERIFIED\n'
+        b'PG1481_DONE readonlyProfile=true allScopesReturnedNormally=true originalRetiredOrAuthorityIssued=false\n')
+
+
 def main():
     os.umask(0o077);out=W/'pg1481-partial-original-profile-v1';out.mkdir(mode=0o700)
     compiled=json.loads((W/'pg1478-partial-profile-frozen-v1.safe.json').read_bytes())
@@ -23,7 +30,7 @@ def main():
     with(out/'profile.private.log').open('xb')as f:
         result=subprocess.run(args,stdout=f,stderr=f);f.flush();os.fsync(f.fileno())
     log=(out/'profile.private.log').read_bytes()
-    success=result.returncode==0 and log==b'PG1481_DONE readonlyProfile=true allScopesReturnedNormally=true originalRetiredOrAuthorityIssued=false\n'
+    success=result.returncode==0 and valid_receipt(log)
     manifest={'run':'PG1481-partial-original-profile-v1','actualExit':0 if success else 1,
         'sshExit':result.returncode,'productionSource':compiled['productionSource'],
         'logSha256':hashlib.sha256(log).hexdigest(),'normalScopesAccepted':success,
