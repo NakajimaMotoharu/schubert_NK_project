@@ -25,6 +25,7 @@ def main():
          'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],
          'MAVEN_OPTS':'-Xmx768m -Djava.io.tmpdir='+str(OUT/'tmp'),
          'SCHUBERT_PG_ROOT':str(BASE/'tools/postgresql18/usr'),
+         'SCHUBERT_AUTH_DIAGNOSTICS':'true',
          'SCHUBERT_SHELLCHECK':str(BASE/'tools/shellcheck-0.11.0')}
     env.pop('JAVA_TOOL_OPTIONS',None)
     args=[str(BASE/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never',
@@ -49,7 +50,7 @@ def main():
     # Private log statements may contain synthetic passwords/SQL parameters.
     # Only counts of known diagnostic categories cross the evidence boundary.
     categories={}
-    for p in (OUT/'tmp').rglob('postgresql.log'):
+    for p in list((OUT/'tmp').rglob('postgresql.log'))+list((OUT/'tmp').glob('auth-diagnostic-*.private.log')):
         text=p.read_text(errors='replace')
         for category in ['canceling statement due to lock timeout',
                          'canceling statement due to statement timeout', 'deadlock detected']:

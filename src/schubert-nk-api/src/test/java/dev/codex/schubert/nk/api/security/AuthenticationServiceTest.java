@@ -79,6 +79,13 @@ final class AuthenticationServiceTest {
   static void stop() throws Exception {
     codec.close();
     database.stop();
+    if ("true".equals(System.getenv("SCHUBERT_AUTH_DIAGNOSTICS"))) {
+      // Explicit investigation only, before JUnit may remove its class-scoped
+      // fixture. Parent is the private run tmp; no SQL/log content is printed.
+      java.nio.file.Files.copy(
+          root.resolve("postgresql.log"),
+          root.getParent().resolve("auth-diagnostic-" + UUID.randomUUID() + ".private.log"));
+    }
   }
 
   @BeforeEach
