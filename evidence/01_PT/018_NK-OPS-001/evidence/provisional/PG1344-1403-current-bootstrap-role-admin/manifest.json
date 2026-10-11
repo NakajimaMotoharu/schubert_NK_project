@@ -1,0 +1,263 @@
+{
+  "run": "PG1344-1403-current-bootstrap-role-admin",
+  "recordedUTC": "2026-10-11T01:38:42.989631+00:00",
+  "productionSource": "769ddb15cd735c25fef581b5f9850ef9d0053c0f",
+  "operatorSource": "d4ac2465f457a4379bafbd031005b4e13c263d78",
+  "branch": "dev-foundation",
+  "actualExit": 0,
+  "selectedToolTestCount": 37,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "productionPtCredit": 0,
+  "command": "python3 -B tools/quality/vm/050_s1/pg1403_bootstrap_tool_evidence.py",
+  "startedUTC": "2026-10-11T01:38:41.629756+00:00",
+  "environment": {
+    "OS": "Ubuntu26.04",
+    "JDK": "25.0.4",
+    "Python": "3.14.4",
+    "PostgreSQL": "18.6",
+    "JaCoCo": "0.8.15"
+  },
+  "testSourceHashes": {
+    "pg1345_current_bootstrap_sources_test": "215be29acca79af38828679cc55c24220611c383f2808549375f859e1a5ea2eb",
+    "pg1348_current_bootstrap_sources_test": "b26aad1da872452cbf9b0da118c44b77aecd61c063fe005d6d1c648e8fca4797",
+    "pg1349_current_bootstrap_dispatch_test": "e5247432a1ec1a5c9787061d36ea1c7635a9cf29161b9112320ddcca4086e641",
+    "pg1351_bootstrap_failed_owner_proof_test": "b9fb595ae0a259b44d7211b15f45b64846f4886dccbad2ebf13380cbea127876",
+    "pg1355_bootstrap_fixed_handoff_test": "ad11f5f4d84d89315ddcc047f3d9ab31f83e2c477e97a3a2e07f5c2e44c13161",
+    "pg1356_current_bootstrap_sources_test": "40944af6592211581c8685aaa175eed12832eabb9d1d75044b622400877da327",
+    "pg1358_current_bootstrap_dispatch_test": "1a1f31039c0cff334a059f82dfadb292fefd38065cb7f15a7de578e9d857907b",
+    "pg1360_bootstrap_failed_pair_proof_test": "ea5d65f86ada40566319bda7f0946b56a1dfff820a1782e15fb3508e9f974c26",
+    "pg1361_bootstrap_fixed_pair_handoff_test": "1696a021c014b0b8d7c6758ea922d4c433a198739e8f76143ee7346db996579b",
+    "pg1362_current_bootstrap_sources_test": "e6f1902b05d0b69db023e46b0c2291f73dde7918fa45ea0082f8173445c73234",
+    "pg1367_bootstrap_failed_ref_pair_proof_test": "63fdf50f833ebe6d6ff5c8c38c5e07021e4a8054fd11ca6ade9005bc7de5c914",
+    "pg1368_bootstrap_fixed_ref_handoff_test": "1912bc61f0f310e17db52a97ec63ce31e59f28e0c765faf89581da1fe146f494",
+    "pg1369_bootstrap_role_policy_test": "713f6daaf85e5e5e9ee4babf7f70d426c28df2e11dd57b0bb3bfa0842e16c1a1",
+    "pg1371_bootstrap_role_host_test": "c4bd3ac97cc6e23a83ec1a545d71d80e59849147d7403963f94d1d65efbb939a",
+    "pg1374_bootstrap_role_sources_test": "f5d36c8b8a45fa01090ce7eb5743fd03c86505ca6c5f093177c39ea93929d404",
+    "pg1376_bootstrap_role_preflight_test": "b95fe761abbb23d589a42adbf9a796a5b454dfae7842e4951d4655984fff88da",
+    "pg1380_bootstrap_role_sql_test": "f17b148ef6b12ca4fa8df5a3e3850a09040571f2b7d80fa3144879d59a11b25a",
+    "pg1381_role_failed_ref_pair_proof_test": "3348d09066cad6f8bbea312a4fb6d06fe0f507f1350d626689fe788af42932fc",
+    "pg1382_role_fixed_ref_handoff_test": "4430a27b8b4524ad36f1fcf59181af4e0d16beb2dd1d37ecb21e862cbdfd88bd",
+    "pg1385_role_contract_test": "2578d9bbf6ff6c6ece63d3dd60e54199b986edb9e662a7250539df48bbc1c1fd",
+    "pg1387_role_dispatch_test": "7054c80b7f1d687f9c31a209b5db878d2de68fefdc16bd72a68b03adcb058ae8",
+    "pg1388_role_independent_post_test": "c7815e98a9dc94d2ead40383246f0f872c6f29f8d57344c23f86a059f658d32f",
+    "pg1389_role_prepared_failed_pair_proof_test": "d545b0fed37ecf7c38d500bfc800d74ec506214e2e98e595008f5d10eef7c74e",
+    "pg1390_prepared_role_fixed_pair_handoff_test": "32c20ef015a2002a38f68183a76417fc52ef2b9d5b6c867443ca85e8a0b486d9",
+    "pg1391_prepared_role_independent_baseline_test": "f0ed8521f63b6dd66181c4f1cfa302ca33265825ff42adb71647965a294abeb0",
+    "pg1392_existing_role_sources_test": "6853d1754551e4815cd0ead1653f963da9ff3811fddf60dd184da8d0b44bd2f9",
+    "pg1395_existing_role_normal_post_test": "93e8b314a569cefd6363913fb6d1c17deff3eed96513e68e9d2bb33ea9b30fd8",
+    "pg1396_existing_admin_sources_test": "009c5ce41c71f77d7152a15289c7429e90e83dfd4dd8c9742a5175cc01d8e725",
+    "pg1400_existing_admin_independent_post_test": "276f39fe2e934d8c9bada6b10525008f1e1710e33827dc3bb80a73569d34e68d",
+    "pg1401_current_bootstrap_ten_native_test": "20ae12ca760b37e594137e63fa32771325151b1e36e802dfddb9f11b584fc0a5",
+    "pg1402_current_admin_native_gap_test": "a5cc8b1b19112d8c3d4e23f2232573680d7879fd76e0cd510fb3923301943603"
+  },
+  "selectedTestLogSha256": "fbc3f913c77a14a34776b624ce7dd3de73627043073f2bf022a743ad6b1123be",
+  "evidenceRefs": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1381-role-failed-ref-pair-v1.safe.json",
+      "sha256": "8e2e9e3243178352ef3dba25f32a42d4aa6494e42db177b8fc5edc2d8fb084ff",
+      "bytes": 10087,
+      "actualExit": 0,
+      "run": "PG1381-role-failed-ref-pair-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1382-role-fixed-ref-handoff-v1.safe.json",
+      "sha256": "b0cb24c62c865ef494f8e31585b137052bc03b8e5983e3acbeaee08e3077dbfc",
+      "bytes": 643,
+      "actualExit": 0,
+      "run": "PG1382-role-fixed-ref-handoff-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1383-role-sql-parse-v1.safe.json",
+      "sha256": "c4f5d057d5b00a492705bb0b6d14925538d582650de9ca8037b1eeb3f29c7906",
+      "bytes": 513,
+      "actualExit": 0,
+      "run": "PG1383-role-sql-parse-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1385-frozen-v2.safe.json",
+      "sha256": "b8f4dce808e7e03722c904435005ba797d0ed5780e5cfa52930ac079071e8238",
+      "bytes": 13890,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1386-role-fresh-preflight-v1.safe.json",
+      "sha256": "6306c13a9d1001772acce908b5658d456a8f94ec645bedcf09d17982cfa4524b",
+      "bytes": 8872,
+      "actualExit": 0,
+      "run": "PG1386-role-fresh-preflight-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1387-prepare-v1.safe.json",
+      "sha256": "5e3479a0d40ac5c29c149d7230bf649b04ffb5172749d5941ef64d7fb74f1556",
+      "bytes": 453,
+      "actualExit": 143,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1389-role-prepared-failed-pair-v1.safe.json",
+      "sha256": "3ac67341cddbd8b94800c2c87652d86e95a5658b5563ca79a9245019400ed65a",
+      "bytes": 10622,
+      "actualExit": 0,
+      "run": "PG1389-role-prepared-failed-pair-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1390-prepared-role-fixed-pair-v1.safe.json",
+      "sha256": "a04128c7058012792c8718073b4d5d1e00442cdf117ef47069b3e1197e07251a",
+      "bytes": 645,
+      "actualExit": 0,
+      "run": "PG1390-prepared-role-fixed-pair-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1391-prepared-role-independent-baseline-v1.safe.json",
+      "sha256": "6cb9da22f2189ee4c96b959cd03eace73db9df0ddd9c267a43e04c9b2c2fe2c3",
+      "bytes": 9146,
+      "actualExit": 0,
+      "run": "PG1391-prepared-role-independent-baseline-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1393-frozen-v2.safe.json",
+      "sha256": "d1f6200c36e47d188b4067c245f2bda24bfcf1a51cef3ab064308c5236a51fbf",
+      "bytes": 13890,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1394-prepare-v1.safe.json",
+      "sha256": "db9b341a1affc6fdc6bd0caed0e03d06f54199d2afa4100f9832a6f90646ab82",
+      "bytes": 451,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1395-existing-role-normal-post-v1.safe.json",
+      "sha256": "7a52b6e36d09ea09fd7e6d708f8715ee0ca6847be7eeb8aa369465e381111589",
+      "bytes": 9182,
+      "actualExit": 0,
+      "run": "PG1395-existing-role-normal-post-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1396-frozen-v3.safe.json",
+      "sha256": "d87677b7dda433f4b42e1614205f920272f20eb7b1cb41e72025d9edc89bc694",
+      "bytes": 12801,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1396-verify-v3.safe.json",
+      "sha256": "9d8ec9844109d5992b2bdcab5fe375a4bd379dac64c635b0265f13cd4ecfcdea",
+      "bytes": 474,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1396-execute-v3.safe.json",
+      "sha256": "17c4f6d48bbe24b6f708f5b0e26cec2bd88d7c5ddc23721c67c563f746931748",
+      "bytes": 475,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1400-existing-admin-independent-post-v1.safe.json",
+      "sha256": "e8e9afc66324ecea5ab9fd46e0e20d601a5653767cf072abb7012bd3daa750c9",
+      "bytes": 10274,
+      "actualExit": 0,
+      "run": "PG1400-existing-admin-independent-post-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1401-current-bootstrap-ten-native-v1/manifest.safe.json",
+      "sha256": "c05911e9ddbf292c2375d155166fc8602bcc41345de47a15e8b7f723efdd1502",
+      "bytes": 2807,
+      "actualExit": 0,
+      "run": "PG1401-current-bootstrap-ten-native-v1",
+      "formalAccepted": false
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1402-current-admin-native-gap-v1/gap.safe.json",
+      "sha256": "a158b62ce3f6626d848eacbaa729c5af01f4582ef3639dbfcf296f5f33baa1e8",
+      "bytes": 654230,
+      "actualExit": 0,
+      "run": null,
+      "formalAccepted": false
+    }
+  ],
+  "failureIds": [
+    "BUG-1081",
+    "BUG-1082",
+    "BUG-1083",
+    "BUG-1084",
+    "BUG-1085",
+    "BUG-1086",
+    "BUG-1087",
+    "BUG-1088",
+    "BUG-1089",
+    "BUG-1090",
+    "BUG-1091"
+  ],
+  "horizontalIds": [
+    "YKT-850",
+    "YKT-851",
+    "YKT-852",
+    "YKT-853",
+    "YKT-854",
+    "YKT-855",
+    "YKT-856",
+    "YKT-857",
+    "YKT-858",
+    "YKT-859",
+    "YKT-860"
+  ],
+  "ssc": "SSC263",
+  "approvedDesignMain": "8ac7fdd1e300cb0478e43880d3c54ce5893dca12",
+  "currentNativeStreams": 10,
+  "newAdminDumps": 2,
+  "incrementalVs1341": {
+    "BRANCH": 1,
+    "CLASS": 0,
+    "LINE": 27,
+    "METHOD": 2
+  },
+  "remaining": {
+    "BRANCH": 723,
+    "CLASS": 12,
+    "LINE": 897,
+    "METHOD": 176
+  },
+  "classByteMismatch": 0,
+  "wholeLeafAcceptedDelta": 0,
+  "formalAccepted": false,
+  "itStComplete": false,
+  "rawExported": false,
+  "old143Normalized": false,
+  "oracleBasis": [
+    "independent UID-GID/mode/NOFOLLOW finite metadata matrix and held-I/O faults",
+    "complete SQL literal and backend matrix, real READ ONLY EXPLAIN",
+    "exact owner PID/ticks/argv hash/private bus and sealed originals",
+    "actual PID1 normal20 and fixed Unit deadline, terminal/closing same session",
+    "independent all24/full32/187/credential-retirement/full resource post",
+    "independent same-source JAR CRC/JaCoCo XML counters; exclusions0"
+  ],
+  "unaccepted": [
+    "whole native/451/CHR/fault matrix",
+    "QA051 final L01",
+    "remaining PG/PT and handoff"
+  ]
+}
