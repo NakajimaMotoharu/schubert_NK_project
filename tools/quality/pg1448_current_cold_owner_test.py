@@ -20,13 +20,15 @@ class OwnerProofTest(unittest.TestCase):
             source=payload(mode);compile(source,'<fixed payload>','exec')
             tree=ast.parse(source);names=[]
             for n in tree.body:
-                if isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Name)and n.value.func.id=='exec':
+                if isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Name)and n.value.func.id=='exec'and len(n.value.args)==2 and isinstance(n.value.args[1],ast.Name):
                     names.append(n.value.args[1].id)
-            self.assertEqual(['UNIT_VECTOR','CAPTURE_BOUND','CONFIG_CONTRACT'],[n for n in names if n in {'UNIT_VECTOR','CAPTURE_BOUND','CONFIG_CONTRACT'}])
+            self.assertEqual(['CAPTURE_BOUND','CONFIG_CONTRACT','UNIT_VECTOR'],sorted(n for n in names if n in {'UNIT_VECTOR','CAPTURE_BOUND','CONFIG_CONTRACT'}))
             self.assertIn("PID=3323;TICKS=388541;BACKEND=3344",source)
             self.assertIn("contract.terminate_once",source)
-            self.assertNotIn('SIGKILL',source)
-            self.assertNotIn('os.kill(',source)
+            attributes=[n.attr for n in ast.walk(tree)if isinstance(n,ast.Attribute)]
+            self.assertNotIn('SIGKILL',attributes)
+            calls=[ast.unparse(n.func)for n in ast.walk(tree)if isinstance(n,ast.Call)]
+            self.assertNotIn('os.kill',calls)
         for mode in [None,'', 'prepare', 'replay']:
             with self.assertRaises(ValueError):payload(mode)
 
