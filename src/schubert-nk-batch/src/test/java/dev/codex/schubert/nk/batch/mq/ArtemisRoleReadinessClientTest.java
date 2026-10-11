@@ -44,6 +44,20 @@ final class ArtemisRoleReadinessClientTest {
   @TempDir Path root;
 
   @Test
+  void opsMq1413002CorrectRoleCountWithNonObjectMembersIsRejected() {
+    // SS321 independent role table: correct cardinality must not mask an invalid projection.
+    String match = "nk.sync.request";
+    int required = TABLE.get(match).size();
+    assertEquals(3, required);
+    for (String member : new String[] {"null", "7", "true", "\"role\"", "[]"}) {
+      var changed = copy(golden());
+      changed.put(
+          match, "[" + String.join(",", java.util.Collections.nCopies(required, member)) + "]");
+      assertRedacted(() -> candidate(changed).verify(unusedSession()));
+    }
+  }
+
+  @Test
   void opsMq016LiveEffectiveSevenRoleMatchesAndApplicationDenial() throws Exception {
     try (var fixture = securedBroker()) {
       var reader = new ArtemisRoleReadinessClient();

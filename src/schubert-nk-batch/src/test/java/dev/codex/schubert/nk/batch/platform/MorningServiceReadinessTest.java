@@ -41,7 +41,7 @@ final class MorningServiceReadinessTest {
     Set<String> before = Set.of("12345"), after = Set.of("12345");
     int guards, statusReads, sockets, requests;
     int failGuard, failIo;
-    boolean driftStatus, nullStatus, nullCommand, nullSockets, nullResponse;
+    boolean driftStatus, nullStatus, nullCommand, nullSockets, nullResponse, rawHighBitStatus;
 
     void guard() throws IOException {
       if (++guards == failGuard) throw new IOException("generation drift");
@@ -54,6 +54,7 @@ final class MorningServiceReadinessTest {
     public byte[] status() throws IOException {
       check();
       statusReads++;
+      if (rawHighBitStatus) return new byte[] {(byte) 0xff};
       return nullStatus
           ? null
           : (driftStatus && statusReads > 1 ? STATUS.replace("999", "998") : status)
@@ -84,6 +85,17 @@ final class MorningServiceReadinessTest {
           MAIN,
           INFO);
     }
+  }
+
+  @Test
+  void ready1413001RawNonAsciiStatusRejectsBeforeCommandSocketsOrHttp() {
+    // SS341: test raw bytes, not String's US_ASCII replacement character.
+    var f = new Fixture();
+    f.rawHighBitStatus = true;
+    assertThrows(IOException.class, f.observer()::ready);
+    assertEquals(1, f.statusReads);
+    assertEquals(1, f.requests);
+    assertEquals(0, f.sockets);
   }
 
   @Test
