@@ -80,8 +80,7 @@ final class BatchRunRepositoryTest {
     // PT-BAT-RUN1405002 / SS331: skipped handles and end-before-start are not observations.
     try (var c = locked()) {
       var attempt = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
-      var skipped =
-          new BatchStepAttempt(attempt.id(), RUN, STEP, attempt.attempt(), NOW, true);
+      var skipped = new BatchStepAttempt(attempt.id(), RUN, STEP, attempt.attempt(), NOW, true);
       String before = snapshot(c);
       Probe probe = new Probe();
       var repository = new BatchRunRepository(probe.wrap(c));
