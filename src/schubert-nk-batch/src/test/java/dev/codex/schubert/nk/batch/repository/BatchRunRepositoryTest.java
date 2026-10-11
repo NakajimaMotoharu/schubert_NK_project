@@ -58,6 +58,47 @@ final class BatchRunRepositoryTest {
   }
 
   @Test
+  void ordinaryResumeWithoutPriorSuccessCreatesRunningAttempt() throws Exception {
+    // PT-BAT-RUN1405001 / SS331: morning-resume does not make an ordinary step a Backup.
+    try (var c = locked()) {
+      var repository = new BatchRunRepository(c);
+      var attempt = repository.beginMorningResume(RUN, STEP, NOW, false);
+      assertFalse(attempt.skipped());
+      assertEquals(1, attempt.attempt());
+      assertEquals("RUNNING|0|0|0|0|NULL|NULL", terminal(c, attempt.id()));
+      repository.finish(attempt, END, SUCCESS);
+      assertEquals("SUCCESS|5|3|0|9|NULL|NULL", terminal(c, attempt.id()));
+      String beforeReadback = snapshot(c);
+      repository.verifyFinished(attempt, END, SUCCESS);
+      assertEquals(beforeReadback, snapshot(c));
+      c.rollback();
+    }
+  }
+
+  @Test
+  void invalidFinishedObservationRejectsBeforeAnyJdbcReadOrWrite() throws Exception {
+    // PT-BAT-RUN1405002 / SS331: skipped handles and end-before-start are not observations.
+    try (var c = locked()) {
+      var attempt = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
+      var skipped =
+          new BatchStepAttempt(attempt.id(), RUN, STEP, attempt.attempt(), NOW, true);
+      String before = snapshot(c);
+      Probe probe = new Probe();
+      var repository = new BatchRunRepository(probe.wrap(c));
+      assertThrows(
+          IllegalArgumentException.class, () -> repository.verifyFinished(skipped, END, SUCCESS));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> repository.verifyFinished(attempt, NOW.minusSeconds(1), SUCCESS));
+      assertTrue(probe.kinds.isEmpty());
+      probe.closed();
+      assertEquals(before, snapshot(c));
+      assertEquals("RUNNING|0|0|0|0|NULL|NULL", terminal(c, attempt.id()));
+      c.rollback();
+    }
+  }
+
+  @Test
   void firstAttemptAndTerminalStates() throws Exception {
     StringBuilder trace = new StringBuilder();
     try (var c = locked()) {

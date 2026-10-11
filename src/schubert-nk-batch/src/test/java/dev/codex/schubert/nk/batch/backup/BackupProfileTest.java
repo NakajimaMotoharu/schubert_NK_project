@@ -16,6 +16,15 @@ final class BackupProfileTest {
       """;
 
   @Test
+  void positiveDelByteIsRejectedAndOwnedInputIsWiped() {
+    // PT-BAT-PROFILE1405003 / SS343: ASCII DEL 0x7f is outside printable 0x20..0x7e.
+    byte[] owned = GOLDEN.getBytes(StandardCharsets.US_ASCII);
+    owned[0] = 0x7f;
+    assertThrows(IllegalArgumentException.class, () -> BackupProfile.consume(owned));
+    assertArrayEquals(new byte[owned.length], owned);
+  }
+
+  @Test
   void literalGoldenAndImmutableNonsecretClaims() {
     byte[] owned = GOLDEN.getBytes(StandardCharsets.US_ASCII);
     var actual = BackupProfile.consume(owned);
