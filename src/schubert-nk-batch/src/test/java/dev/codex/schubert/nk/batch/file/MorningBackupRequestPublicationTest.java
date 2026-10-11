@@ -3,10 +3,12 @@ package dev.codex.schubert.nk.batch.file;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
+import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,43 @@ final class MorningBackupRequestPublicationTest {
   private static final UUID PART = UUID.fromString("33333333-3333-4333-8333-333333333333");
   private static final BackupWorkerRequest REQUEST =
       new BackupWorkerRequest(RUN, Instant.parse("2026-09-28T01:00:01.123456Z"));
+
+  @Test
+  void mbpub1425001NonMorningFactoryAndNullProofCannotOpenRequestRoot() {
+    var context = RootStartupContext.create();
+    for (var service :
+        List.of(
+            RootStartupContext.Service.API,
+            RootStartupContext.Service.WEB,
+            RootStartupContext.Service.CLEANUP,
+            RootStartupContext.Service.EXPIRY)) {
+      var wrong =
+          new RootStartupContext.Snapshot(
+              service, RUN.toString(), "1".repeat(32), 2, 1, 1, "/system.slice/" + service.unit());
+      assertEquals(
+          "Morning backup request unavailable",
+          assertThrows(
+                  IOException.class, () -> MorningBackupRequestPublication.create(context, wrong))
+              .getMessage());
+      assertEquals(
+          "Morning backup request unavailable",
+          assertThrows(
+                  IOException.class,
+                  () -> MorningBackupRequestPublication.create(context, wrong, Optional.empty()))
+              .getMessage());
+      assertThrows(
+          NullPointerException.class,
+          () -> MorningBackupRequestPublication.create(context, wrong, null));
+      assertThrows(
+          NullPointerException.class,
+          () -> MorningBackupRequestPublication.create(null, wrong, Optional.empty()));
+    }
+    assertThrows(
+        NullPointerException.class, () -> MorningBackupRequestPublication.create(context, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupRequestPublication.create(context, null, Optional.empty()));
+  }
 
   private static final class FakeOwner implements MorningBackupRequestPublication.Owner {
     final List<String> events;
