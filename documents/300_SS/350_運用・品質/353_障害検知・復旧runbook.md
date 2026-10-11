@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC265 当current cold child-before-ready失敗の限定回収（2026-10-12）
+
+BUG1102の子KeyError/Ref取得前終了と父DATABASE_ADMISSIONのUNKNOWNは元実値のまま保持する。SS343 SSC265の固定Java3323/ticks388541/Source/全argv・class・authority・FD/OFD-FLOCK・DB同peer・十cold/全原値を現在二読で証明した場合だけ、pidfdと一回耐久予約から普通TERMを一回発行する。sudo wrapperや過去PIDを選ばず、未知child/別generation/失われたpeer/原値変質は操作0で隔離する。
+
+期限内の本人/全子/全M-A/DBpeer/advisory消失と全元値二読を別結果で記録、元Javaclose正常を推定しない。再signal・SIGKILL・DBterminate・同prepare再試行・namespace/Root/permit修復は0。別new-sourceのnamespace exec先行oracle/現在guard/正常全scope/独立postへ進むまでBUG1102/YKT871/実装PTを未完とし、正式PGPT/ITSTへ加算しない。
+
 ## SSC264 current completed-coldの専用LAN再認証（2026-10-12）
 
 専用LANへ移送した既VMの新bootでも旧PID/boot/permit/RAM/run原値を起動に再利用しない。offline source-chain保持/論理compare/移送disk hashの資格と、current readonly全10 cold18/full32/全24DB/原本・Backup・credential/署名187の資格を先行する。旧failed/UNKNOWN/旧nativeはhost private証跡のまま保全し、旧tmpfs不在を退役・正常closeへ補完しない。

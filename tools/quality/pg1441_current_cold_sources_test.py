@@ -6,6 +6,21 @@ from pg1441_current_cold_refs import source
 
 
 class ColdSourceTest(unittest.TestCase):
+    def test_actual_static_namespace_prefix(self):
+        syntax=ast.parse(source()); selected=[]
+        names={'CAPTURE_BOUND','UNIT_VECTOR','CONFIG_CONTRACT','CONFIG_FIELDS'}
+        for n in syntax.body:
+            if isinstance(n,ast.Assign) and all(isinstance(t,ast.Name)and t.id in names for t in n.targets):
+                selected.append(n)
+            elif isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Name)and n.value.func.id=='exec' and len(n.value.args)==2 and isinstance(n.value.args[1],ast.Name)and n.value.args[1].id in names:
+                selected.append(n)
+        namespace={}
+        exec(compile(ast.Module(body=selected,type_ignores=[]),'<isolated static contract namespaces>','exec'),namespace)
+        self.assertEqual(32,len(namespace['CONFIG_FIELDS']))
+        self.assertTrue(namespace['CAPTURE_BOUND']['accepted'](0,36343264,67108864))
+        self.assertFalse(namespace['UNIT_VECTOR']['matches'](None,None,None))
+        self.assertTrue(callable(namespace['CONFIG_CONTRACT']['same']))
+
     def test_current_fixed_java_binding_and_no_authority(self):
         s=java()
         for literal in ['3d69f5af-6bac-46b1-a540-7591c4a79a0d','769ddb15cd735c25fef581b5f9850ef9d0053c0f',

@@ -23,6 +23,11 @@ def source():
             names={t.id for t in n.targets}
             if names<= {'CAPTURE_BOUND','UNIT_VECTOR','CONFIG_CONTRACT','CONFIG_FIELDS','BOOT','SOURCE','BOM','BASELINE','BASE','raw','old','UNITS','FIELDS'}:
                 nodes.append(n)
+        elif (isinstance(n,ast.Expr) and isinstance(n.value,ast.Call)
+              and isinstance(n.value.func,ast.Name) and n.value.func.id=='exec'
+              and len(n.value.args)==2 and isinstance(n.value.args[1],ast.Name)
+              and n.value.args[1].id in {'CAPTURE_BOUND','UNIT_VECTOR','CONFIG_CONTRACT'}):
+            nodes.append(n)
     raw=ast.unparse(ast.Module(body=nodes,type_ignores=[]))
     # Current SQL table guard remains read-only. The one dedicated authenticated
     # caller is admitted during this metadata observer, not other app clients.
