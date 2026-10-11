@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC263 cold固定native role matrixのordinary Bootstrap補足（2026-10-11）
+
+SSC193/195/196/234の固定PT native profileは、通常RootとAPI/Webだけでなくordinary Inspector/Bootstrap oneshotを含む。SSC254/255のcold有限五role整備を全profile整備済みとしない。固定profileのrole名、全十Unitのloaded/type/effective agent/RW宣言、現在NSS UID:primaryGID、実directory/inodeを完全joinする。ordinary-bootstrap196はschubert-nk-bootstrap-admin.serviceの専用oneshot/固定API identityに対応し、API起動やpermit発行の代用ではない。当current769/PG1292ではagentとRW宣言/NSSは適合し当roleだけ物理的に欠落、current全11role/18execは保全対象。native_treeのrole必須拒否を緩めず、正規準備後の新beforeを用いる。
+
+既真正Root1322の原本DONE/元1800秒、普通四所有停止1336・独立全post1340、署名187/28SQL29history、startup ISSUED/原run-cutoff-activation、全24DB/Backup/credential/全32設定/全元nativeを先行再認証する。失敗工具1362の親子/Ref/M-Aの限定回収1368・全資源0を先に閉じ、旧actual143/UNKNOWN/normalclosefalseを維持する。別fresh M→A/専用readonlybatch/advisory71419602/実heartbeat/十Ref/保持common directory FDでだけ、欠落ordinary-bootstrap196一件をNOFOLLOW/mkdirat0700/new-onlyで作成し、保持子FDへ固定API UID:primaryGID（当NSS999:981）を設定、empty/0700/ACL0/tmpfs-RW/dev-inode保持を二読して子と親をdirsyncする。既roleへのchmod/chown、任意role包括作成、coverage親0755の再変更、元exec削除/書換えをしない。
+
+親coverage inodeはRoot:Root0755/ACL0/元11role閉集合（backup/cleanup/expiry/inspector/parent/root-api/root-api193/root-web193/ordinary-api193/ordinary-web193/ordinary-inspector196）を保持し、追加一件だけを許す。全元子entryの9metadata/ACL/contentは完全一致、親のdev/inode/uid/gid/mode/ACLは同値、nlinkだけ+1、tmpfs directory sizeは当一entryの限定増分、mtime/ctimeは実mkdir/dirsync区間に限定する。未知inode/外entry/元子変化/FD又はDB所有喪失/close不明では隔離し、同slot再prepare・Root/Unit再起動・旧成功補作成をしない。全24/32/187/原本/Backup/startup・全新scope正常と資源0を独立postで再照合後に、新beforeと専用既存ADMIN正常20/元30秒・当同Invocation terminal/closing二native（SSC234）を受入する。設計反映・role準備・正常20/native・四counter100/正式451を別判定とし、PG/PTからIT/ST完了を宣言しない。
+
 ## SSC262 ordinary真正ISSUED-DONE後の署名code-only有限公開（2026-10-11）
 
 §11/SSC190の通常全停止code-onlyは、ordinary親の真正PID1 start/done・原本SUCCESS/10step・正常owned停止・全kernel資源0と、現boot/原run/cutoff/activationを先行認証する。startupに正規ISSUED epoch及び旧permit/owner/launchが保持される場合、SSC249のcold空startupを現在値として偽装しない。対象currentD5/PG1068/BOM0b61→unusedRO new769/PG1292/BOMecae/187/schema028は、既真正Root1240/9f651096/27accac0/cutoff2026-10-10T20:03:22.718197Z/DONE2026-10-10T20:22:34.439375Zと、正常stop1256/全post1303を実初期条件とする。これは固定PG/PT profileの詳細で、RD/UI/業務/DIF/権限/元30分及び品質を変えない。
