@@ -10,5 +10,8 @@ def files():
             old='str(backend)+"and datname='
             if raw.count(old)!=1:raise ValueError('one actual numeric SQL insertion required')
             raw=raw.replace(old,'str(backend)+" and datname=')
+            marker=' q="select count(*)from pg_stat_activity'
+            if raw.count(marker)!=1:raise ValueError('one actual backend contract required')
+            raw=raw.replace(marker,' require(type(backend)is int and 1<=backend<=2147483647)\n'+marker)
         result[name]=raw
     return result

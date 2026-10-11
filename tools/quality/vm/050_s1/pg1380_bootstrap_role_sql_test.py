@@ -4,6 +4,18 @@ import unittest
 import pg1380_bootstrap_role_sources_v3 as p
 
 class Test(unittest.TestCase):
+    def test_backend_contract_before_sql(self):
+        raw=p.files()['pg1380_bootstrap_role_refs.py'];tree=ast.parse(raw)
+        holder=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='holder')
+        guard=next(n for n in holder.body if isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and ast.unparse(n.value)=='require(type(backend) is int and 1 <= backend <= 2147483647)')
+        def require(value):
+            if not value:raise ValueError('invalid backend')
+        for backend in (1,2,2147483647):
+            exec(compile(ast.Module(body=[guard],type_ignores=[]),'<actual backend contract>','exec'),{'backend':backend,'require':require})
+        for backend in (None,True,False,0,-1,2147483648,'42',42.0):
+            with self.assertRaises(ValueError):
+                exec(compile(ast.Module(body=[guard],type_ignores=[]),'<actual backend contract>','exec'),{'backend':backend,'require':require})
+
     def test_whole_rendered_sql_matches_independent_literal(self):
         raw=p.files()['pg1380_bootstrap_role_refs.py'];tree=ast.parse(raw)
         holder=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='holder')
