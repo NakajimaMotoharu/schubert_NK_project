@@ -34,7 +34,7 @@ def main():
     assert sha(BASE/'transfer/source.tar')==ARCHIVE_SHA
     inputs={str(p.relative_to(SOURCE)):sha(p)for p in SOURCE.rglob('*')if p.is_file()}
     assert inputs
-    env={**os.environ,'JAVA_HOME':str(BASE/'tools/jdk-25.0.4'),'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],'MAVEN_OPTS':'-Xmx768m -Djava.io.tmpdir='+str(OUT/'tmp')}
+    env={**os.environ,'JAVA_HOME':str(BASE/'tools/jdk-25.0.4'),'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],'MAVEN_OPTS':'-Xmx768m -Djava.io.tmpdir='+str(OUT/'tmp'),'SCHUBERT_PG_ROOT':str(BASE/'tools/postgresql18/usr')}
     env.pop('JAVA_TOOL_OPTIONS',None)
     args=[str(BASE/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Djava.io.tmpdir='+str(OUT/'tmp'),'-Dmaven.repo.local='+str(BASE/'m2/repository'),'-Dnk.pt.node='+str(BASE/'tools/node-v24.19.0/bin/node'),'-pl',','.join('src/schubert-nk-'+m for m in MODULES),'clean','spotless:check','test-compile','jar:test-jar','test','spotbugs:check','jacoco:report','jar:jar']
     start=datetime.datetime.now(datetime.timezone.utc)

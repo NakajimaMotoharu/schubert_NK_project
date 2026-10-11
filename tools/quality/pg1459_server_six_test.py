@@ -14,6 +14,7 @@ class FullGateTest(unittest.TestCase):
         self.assertEqual('JAVA_TOOL_OPTIONS',ast.literal_eval(pop.args[0]))
         source=ast.unparse(tree)
         self.assertIn('-Djava.io.tmpdir=',source)
+        self.assertIn('SCHUBERT_PG_ROOT',source)
         parent=next(n for n in calls if ast.unparse(n.func)=='os.umask')
         self.assertEqual(0o077,ast.literal_eval(parent.args[0]))
 
