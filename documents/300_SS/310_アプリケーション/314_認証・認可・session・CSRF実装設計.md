@@ -1,5 +1,11 @@
 # 認証・認可・session・CSRF実装設計
 
+## SSC267 Login単体試験の独立境界（2026-10-12）
+
+§5.1のUser→IP lock順、locked時hash省略、PBKDF2-v1 310000 iteration、最大2session・最古revoke、DB/MQ timeout9000・失敗counter不増を維持する。承認roleのstatement1500ms/lock500msを、実機CPUや並列request数を理由に延長しない。同user8並列12requestが全件一度でcommitすることは外部保証ではない。
+
+PTでは実DBの同owner並行session/失敗窓/監査のSQL invariantと実cryptoを分割する。並行DB試験のpassword判定doubleは合成固定fixtureへ独立に限定し、全12成功・20失敗のDB事後条件を維持する。実PBKDF2は別JCA golden/正常/誤password/no-account/disabledの試験を維持する。別DB timeout負例では固定role設定を先に確認し、独立transactionでuser行を保持、Infrastructure境界/rollback後のsession・counter・audit不変とpassword消去を検証する。double試験を実crypto並行性能、timeoutをLogin成功、旧失敗をflaky/合格へ読み替えない。PG/PTは本条件の実装整合性のみ、性能p95及びIT/ST受入は後続実機で別確認する。関連BUG1108/YKT877/SS332353/PT-AUT-004。
+
 ## 1. 目的・追跡
 
 Login、Logout、password、失敗lock、HTTP/API session、認証context、CSRF、USER/ADMIN認可、owner検証と暗号key rotationを定める。

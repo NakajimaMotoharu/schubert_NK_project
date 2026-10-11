@@ -79,12 +79,14 @@ final class AuthenticationServiceTest {
   static void stop() throws Exception {
     codec.close();
     database.stop();
-    if ("true".equals(System.getenv("SCHUBERT_AUTH_DIAGNOSTICS"))) {
+    String privateDiagnostics = System.getenv("SCHUBERT_AUTH_DIAGNOSTICS_DIR");
+    if (privateDiagnostics != null) {
       // Explicit investigation only, before JUnit may remove its class-scoped
       // fixture. Parent is the private run tmp; no SQL/log content is printed.
       java.nio.file.Files.copy(
           root.resolve("postgresql.log"),
-          root.getParent().resolve("auth-diagnostic-" + UUID.randomUUID() + ".private.log"));
+          Path.of(privateDiagnostics)
+              .resolve("auth-diagnostic-" + UUID.randomUUID() + ".private.log"));
     }
   }
 
@@ -467,7 +469,15 @@ final class AuthenticationServiceTest {
 
   @Test
   void threeSuccessfulLoginsAndConcurrentAttemptsKeepDatabaseInvariants() throws Exception {
-    var service = realService();
+    // SSC267: isolate database state transitions from crypto CPU scheduling.
+    // Real PBKDF2 remains covered by the separate independent JCA golden tests.
+    // Keep all12 successful commits and20 failures, not weaker SQL counts.
+    var service =
+        checked(
+            (candidate, stored) -> {
+              assertEquals(fixtureHash, stored);
+              return java.util.Arrays.equals(candidate, "synthetic-password".toCharArray());
+            });
     var first =
         assertInstanceOf(LoginResult.Success.class, call(service, "login-user", password(), NOW));
     call(service, "login-user", password(), NOW.plusSeconds(1));
@@ -516,6 +526,52 @@ final class AuthenticationServiceTest {
     assertEquals(
         10, scalar("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
     assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
+  }
+
+  @Test
+  void databaseTimeoutRollsBackWithoutSessionCounterOrAuditAndConsumesPassword() throws Exception {
+    try (Connection connection = database.api();
+        var statement = connection.createStatement();
+        var settings =
+            statement.executeQuery(
+                "select current_setting('statement_timeout'),current_setting('lock_timeout')")) {
+      assertTrue(settings.next());
+      assertEquals("1500ms", settings.getString(1));
+      assertEquals("500ms", settings.getString(2));
+      assertFalse(settings.next());
+    }
+    try (Connection blocker = database.transaction();
+        var statement = blocker.createStatement();
+        var held =
+            statement.executeQuery("select id from schubert.app_users where id=7 for update")) {
+      assertTrue(held.next());
+      assertEquals(7L, held.getLong(1));
+      assertFalse(held.next());
+      char[] raw = password();
+      try (Connection attempted = database.transaction()) {
+        var failure =
+            assertThrows(
+                AuthenticationInfrastructureException.class,
+                () ->
+                    realService()
+                        .authenticate(
+                            attempted,
+                            "login-user",
+                            raw,
+                            client,
+                            UUID.randomUUID(),
+                            UUID.randomUUID(),
+                            NOW));
+        assertEquals("authentication storage is unavailable", failure.getMessage());
+        assertArrayEquals(new char[raw.length], raw);
+        attempted.rollback();
+      }
+      blocker.rollback();
+    }
+    assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(0, scalar("select count(*) from schubert.app_logs"));
+    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
   }
 
   @Test

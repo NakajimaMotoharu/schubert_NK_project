@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+## SSC267 Login DB timeoutのPT原因分類（2026-10-12）
+
+SS314§5.1/332の承認済9000・rollback・counter不増を正とし、同ownerの全並列request成功を無条件期待値へ追加しない。PG1470はsameMain769/固定PG18.6のuser行FOR UPDATE中statement timeout3を私有ログで分類した。旧1461/1466/1467は不合格のまま保全する。並行DB invariant/実JCA crypto/別固定期限timeout負例を独立試験し、DB期限・work factor・lock順・外部再送・最大sessionを緩和しない。私有DB/logをGit・チャット・公開evidenceへ出さず、診断は認証済hash/既知categoryだけ。実装及びfresh同source再試験・全回帰は本設計反映だけから受入としない。
+
 ## SSC265 当current cold child-before-ready失敗の限定回収（2026-10-12）
 
 BUG1102の子KeyError/Ref取得前終了と父DATABASE_ADMISSIONのUNKNOWNは元実値のまま保持する。SS343 SSC265の固定Java3323/ticks388541/Source/全argv・class・authority・FD/OFD-FLOCK・DB同peer・十cold/全原値を現在二読で証明した場合だけ、pidfdと一回耐久予約から普通TERMを一回発行する。sudo wrapperや過去PIDを選ばず、未知child/別generation/失われたpeer/原値変質は操作0で隔離する。

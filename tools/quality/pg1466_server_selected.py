@@ -25,7 +25,7 @@ def main():
          'PATH':str(BASE/'tools/jdk-25.0.4/bin')+':'+os.environ['PATH'],
          'MAVEN_OPTS':'-Xmx768m -Djava.io.tmpdir='+str(OUT/'tmp'),
          'SCHUBERT_PG_ROOT':str(BASE/'tools/postgresql18/usr'),
-         'SCHUBERT_AUTH_DIAGNOSTICS':'true',
+         'SCHUBERT_AUTH_DIAGNOSTICS_DIR':str(OUT/'tmp'),
          'SCHUBERT_SHELLCHECK':str(BASE/'tools/shellcheck-0.11.0')}
     env.pop('JAVA_TOOL_OPTIONS',None)
     args=[str(BASE/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never',

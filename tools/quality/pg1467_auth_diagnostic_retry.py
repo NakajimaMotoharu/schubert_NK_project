@@ -14,7 +14,7 @@ def main():
     raw=template.replace('PG1466','PG1467').replace(
         "SUITES = ['InspectorDeploymentTest','ApplicationServiceUnitTest','AuthenticationServiceTest']",
         "SUITES = ['AuthenticationServiceTest']")
-    assert "SUITES = ['AuthenticationServiceTest']" in raw and "'SCHUBERT_AUTH_DIAGNOSTICS':'true'" in raw
+    assert "SUITES = ['AuthenticationServiceTest']" in raw and "'SCHUBERT_AUTH_DIAGNOSTICS_DIR':str(OUT/'tmp')" in raw
     compile(raw,'<new auth diagnostic server>','exec')
     body=inspect.getsource(dispatch.main).replace('PG1466','PG1467').replace('pg1466','pg1467')
     body=body.replace("helper=ROOT/'tools/quality/pg1467_server_selected.py'",
