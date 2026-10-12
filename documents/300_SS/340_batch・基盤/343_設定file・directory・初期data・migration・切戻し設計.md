@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC278（2026-10-13、BUG1162/YKT930）：署名対象Morning親Unitは唯一SuccessExitStatus=10を宣言する（正常0はOS既定）。実Java完成出口/同原本0・10と一致させ、30/50/70/143やsignal/timeout/UNKNOWNの非成功を維持する。独立Unit golden/余剰code拒否、署名BOM/実Unit readback、fresh同Root PID1 job done/原本/元期限・全後条件を同sourceで確認する。Unit変更は停止・保全・正規code-only配備契約内で行い、live Unitのhotpatch/reset-failedや旧failed10の正常化は禁止。未受入実装・工具・証跡を設計main反映へ混ぜない。
+
 SSC277（BUG1157/YKT925）：SSC276の当Bootstrap全99FDの共有/runは実認証31/90（旧unused29/32ではない）。全FD数一致からlayout一致を推論せず、全argv/authority/cgroup/99FDset/全target/他97全metadata、31/90の同linked/run dev/inode/Root/type/mode/nlink/size/ACLを固定する。共有二時刻のみ過去像から非減少/current測定上限でfresh観測し、同fresh全像をpidfd/予約/TERM直前へ完全固定する。旧1724はfresh保存/予約/TERM前拒否、再送0。hostgate待機はTERM未発行の失敗なら旧owner保持を明記、正常一回TERM/reap後だけ同inode新gate取得完了を要求する。その他SSC276の全原値/DB0/一回正常TERM・有限reap/別post/UNKNOWN維持条件は不変更。
 
 SSC276（BUG1156/YKT924/QA047内部復旧）：BootstrapのDB監視Expected constructorが取得後に拒否してlease未代入・Ref前retainとなった場合、旧UNKNOWN/byte/slotを保持する。現在全99FD/argv/exe/Root権限/cgroup/全task子0、soleM-A/OFD・凍結111・署名current2741/PG1638・元24DB/32設定/187/原本Backup/native18を独立証明する。serverpeer/advisoryが期限で消失した場合もSQL0/当ESTABLISHED socket0をfresh二読し、正常closeへ換算しない。全proof3b84d06a…は当383695/7281859のみ、sudo383693/別PIDを対象にしない。失敗phase静止・Ref/Unit/credential前を実source/stackで資格した読取接続だけを許可し、fresh signal guard中のguestobserver禁止を維持する。

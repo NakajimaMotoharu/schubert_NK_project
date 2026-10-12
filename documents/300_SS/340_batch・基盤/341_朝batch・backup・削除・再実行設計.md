@@ -1,5 +1,7 @@
 # 朝batch・backup・削除・再実行設計
 
+SSC278（2026-10-13、BUG1162/YKT930）：親の全gate・原本・資源正常close後に得る既定SUCCESS0/WARNING10は、Morning controllerのType=oneshot/SuccessExitStatus=10でmanager正常終端へ対応させる。10を無視して0へ変換しない。真正同Root PID1 start job done・同activation NKDONE1の0/10・元30分・API/Web/Caddy・owned逆順停止及び全資源後条件は独立必須。30/50/70/143/signal/timeout/未知を許可しない。旧PG1759のDONE10とfailed10は保全し、新設定やGCから旧成功へ再解釈しない。未結線時の暫定「親SuccessExitStatus無し」だけを置換し、同日処理結果・Backup成功再用・再送契約は不変更。
+
 SSC230（2026-10-09、SSC198228229当completed profile）：同e492の新親真正DONE1697.279879s/当同Rootordinary API-Web-Caddy・新正常owned逆順停止/独立全十kernel・peer-lock0/全24-504不変の後、別fresh所有でpg635-once-resume.confだけを正規退役する。元anchor/cutoff/activation/DONE/ISSUED epoch・旧二BackupSUCCESS/全Backup・今回十SKIPを保持し、operatorによるpending/INVALID化や原本/DB修復をしない。新通常NEW_SUCCESSの保持期限試験は退役全後条件後に独立実行し、REUSED_SUCCESSの削除0から保持期限実削除の成功を作らない。元親30分の完成証拠・現在の全終端と旧失敗143/30/UNKNOWNを区別し、再STOP/start/旧permit再利用をしない。
 
 SSC203（2026-10-07、BUG799/YKT570）：親完了の各compound DB readはSS342の全peer/元graph/run整合をTX外の前後で確認し、TX内SQL境界は同保持原本namespace/owner-thread/Root/M/A/元budgetを継続認証する。元全row/progress seal・各typed intent退役前後の全証跡・DONE直前・同親30分を維持し、途中失効/変更/close不明は隔離する。業務再処理・同日SKIP/Backup契約変更0。
