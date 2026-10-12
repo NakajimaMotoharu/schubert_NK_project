@@ -20,6 +20,32 @@ final class LinuxFilesystemClassifierTest {
   @TempDir Path root;
 
   @Test
+  void fst005NativeUnknownFailurePreservesPrimaryAndClosesActualArena() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IllegalStateException("independent native failure"),
+          new AssertionError("independent native fatal failure")
+        }) {
+      java.lang.foreign.MemorySegment[] retained = {null};
+      var classifier =
+          new LinuxFilesystemClassifier(
+              (path, state) -> {
+                retained[0] = state;
+                assertTrue(state.scope().isAlive());
+                if (failure instanceof RuntimeException runtime) throw runtime;
+                throw (Error) failure;
+              });
+      assertSame(
+          failure,
+          assertThrows(
+              failure.getClass(), () -> classifier.filesystem(Path.of("/proc/self/fd/42"))));
+      assertNotNull(retained[0]);
+      assertFalse(retained[0].scope().isAlive());
+      assertThrows(IllegalStateException.class, () -> retained[0].get(ValueLayout.JAVA_LONG, 0));
+    }
+  }
+
+  @Test
   void fst001IndependentMagicAndAbiEveryCallIsFresh() throws Exception {
     long[] magic = {0xEF53L};
     var calls = new AtomicInteger();

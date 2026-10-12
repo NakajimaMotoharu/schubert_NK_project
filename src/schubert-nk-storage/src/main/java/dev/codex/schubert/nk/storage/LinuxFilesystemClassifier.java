@@ -69,16 +69,19 @@ public final class LinuxFilesystemClassifier {
     if (!path.matches("/proc/self/fd/(0|[1-9][0-9]{0,9})")
         || Long.parseLong(path.substring(14)) > Integer.MAX_VALUE)
       throw new IllegalArgumentException("invalid held inode capability");
-    try (Arena arena = Arena.ofConfined()) {
-      var state = arena.allocate(SIZE, 8);
-      if (statfs.call(arena.allocateFrom(path), state) != 0) throw unavailable();
-      long magic = state.get(ValueLayout.JAVA_LONG, 0);
-      if (magic == 0xEF53L) return "ext2/ext3/ext4";
-      if (magic == 0x58465342L) return "xfs";
-      if (magic == 0x9123683EL) return "btrfs";
-      if (magic == 0x01021994L) return "tmpfs";
-      throw unavailable();
-    }
+    var arena = Arena.ofConfined();
+    return ResourceScope.use(
+        arena::close,
+        () -> {
+          var state = arena.allocate(SIZE, 8);
+          if (statfs.call(arena.allocateFrom(path), state) != 0) throw unavailable();
+          long magic = state.get(ValueLayout.JAVA_LONG, 0);
+          if (magic == 0xEF53L) return "ext2/ext3/ext4";
+          if (magic == 0x58465342L) return "xfs";
+          if (magic == 0x9123683EL) return "btrfs";
+          if (magic == 0x01021994L) return "tmpfs";
+          throw unavailable();
+        });
   }
 
   private static StorageIoException unavailable() {

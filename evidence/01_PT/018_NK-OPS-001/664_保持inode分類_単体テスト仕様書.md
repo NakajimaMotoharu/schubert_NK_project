@@ -8,4 +8,6 @@ PT-OPS-FSTYPE-002（fst002）: syscall -1/1/int境界は有効magicを書いて�
 
 PT-OPS-FSTYPE-003（fst003）: 非Linux/非LP64指定/gnu欠落/statfs欠落はfail closed、暗黙fallback0。PT-OPS-FSTYPE-004（fst004）: 当実retained FDのfresh分類と独立JDK FileStore type→手書family対応、FD返却後拒否。実secret/bodyを読まない。
 
+PT-OPS-FSTYPE-005（fst005、BUG1124/YKT892）: native callbackが独立RuntimeException/Errorを発生しても同一primaryを返し、実allocated segmentのscopeが閉じること、終了後readが拒否されることを検証する。既ResourceScopeのprimary/secondary閉鎖8testとInodeSecurity9testも同sourceへ実行する。旧f877 TWR終端branch未網羅3は保持し、除外/到達不能扱いではなく共通lexical releaseへ統一した新sourceの四counter/影響PT/必要全回帰を実証する。分類・security・再検査数は不変更。
+
 影響PT: InspectorEnvironmentReaderTestの旧LOCAL全6＋family、StartupPermitFilesTestの実capability（単なるpathを認可にしない）・独立FileStore oracle、同delegate利用Publisher/Files/DurableRecordFiles/MaintenanceRunFiles/Backup等の既独立tamper/null/ACL/readonly/例外suite。元scan/全boundary/1800秒budget/Root/epoch検査不変更。固定glibc bits/statfs.h・Linux magic.h実版/hash、source/command/終了code/XML/四counter/静的結果は次結果へ保存、未実行をPASSにしない。既Main769成功全6は新sourceへ流用禁止。
