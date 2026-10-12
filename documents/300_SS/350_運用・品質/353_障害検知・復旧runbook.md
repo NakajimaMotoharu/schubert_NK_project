@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC273：1653の回収直前拒否はBUG1149/YKT917としてSIG0/oldowner保持を保存する。差が当FD29/32の共有/run時刻だけでも旧guardを無条件skipしない。SS343の旧identity全一致・linked祖先/guard/ACL/他95FD/全原値二読と非減少・current上限内のfresh時刻を、同一読取接続の新十Ref保持内で独立検査し私有保存する。その同fresh97FD像からのみpidfd前後/予約/TERM直前を再認証し、変動ならsignal0・隔離・旧slot再送0。旧時刻/proof/143/closeUNKNOWNを保持、一般ancestor緩和/Production変更/別holder回収0。SSC272の当Java一回通常TERM/有限reap/全資源0・全元値/新Ref正常を閉じてからnew-only修正署名tuple/unused配置へ進む。
+
 SSC272：PG1648のSIGNED_CURRENT LABEL不一致によるUNKNOWNはBUG1146/YKT914、当読取proofのFD単一仮定はBUG1147/YKT915として保全する。SS343の固定noDB/noRef/nochild Java289328/ticks5627480・proof6297a9d8…/全原値/current187/97FDとM-Aの属性FD・FLOCK・kcmp同OFD関係を二読した場合だけ、耐久予約/pidfd普通TERM一回/有限reap・独立全後条件へ進む。sudo親、旧成功/別holder/child/強制kill/直接DBterminate/業務操作を含めない。旧actual143/closeUNKNOWNを保存し、全旧資源0/全元値保持/新Ref正常の後、別fresh正常scopeと四tuple一致のnew-only unused候補配置を再試験する。新candidate未配置/全source3596限定合格と正式1964/53は区別し、QA047対策/四100/CHR/ITST別条件を維持する。
 
 SSC271：PG1562のcanonicalruntime後条件KeyErrorはBUG1129/YKT897として旧scope UNKNOWNを保存する。SS343の当固定父子/source/全原値・現在canonicalruntime/effective宣言を独立二読した新proofからだけ、Ref105232→Java105206へpidfd普通TERM一回/耐久予約/同ticks有限reap・別全postへ進む。真正既公開zz設定の再prepare/reload/delete、旧before/正常close/親成功の補完0。次の別fresh verify-onlyで全新正常scopeを閉じてから別observer/外部一回resumeへ接続し、元Root1800/原本handle/API所有Web-Caddy/真正DONE/ownedstop/native/451を維持する。
