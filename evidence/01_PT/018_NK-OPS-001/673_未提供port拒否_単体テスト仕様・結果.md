@@ -1,5 +1,15 @@
 # 未提供port拒否・所有不明保全 単体テスト仕様／結果
 
+## PG1628実結果（2026-10-12、限定8PT成功／counter差0）
+
+Source/tool b1a0cc363df57572b139ac8b86ef0ba9b990c023、Main4d6不変更。`pg1628_unsupported_ports_selected.py` actual0、exact8/新2＋影響6、FES/aborted/notrun0・Werror0/classCRC0/fixturebyte不変/全FD閉鎖、public単一・二子のnative default未認証拒否/proof0/全原byte/三marker保持・三不確実を確認。host safe `/PG379/pg1628-unsupported-ports-selected-v1/manifest.safe.json`、LAN `/runs/PG1628-selected-v1/manifest.safe.json` SHA19e45bebc6a91ae26655578e298dbd917b0af66277a0cd9a008035aea5ecacc6、generated14c6186740e55ee4c964852d4fd66cd9ba8f3858859f700bbd4f6704b1437386。残790/151/5/707は不変更、成功native recovery/工数率/全leafへの加点0。拒否契約の新証拠とcounter閉鎖は区別する。既正式1964/53は不変更。
+
+## 次API main専用4PT（PG1629、未実行）
+
+既Program NK-OPS-001/API、SYS002004/UI212243253/SS311342343/SSC083158161、ApiProcessMainTest OPS-API-MAIN001～004の独立four-suite sourceを使用し、過去の合格結果は流用しない。001はargv/env拒否前IO0及び注入assembly一回、002は50/未知sameobject/Error/null契約、003は固定redacted stderr・termination50/70・handler復元、004は二actual外部childCLI/終了70/固定stderr/全stream/有限reap。現在同Main1532 frozen six JAR/fixtureclass/既qualified dependency classpathを検査し新onlytarget/classes/XML/exec、API実起動/DB/JMS/VM変異0。
+
+子JVMは既試験通り普通agentを保持するが、専用selected.execをappend=trueで自然shutdownの別sessionごとに採取する（同session別point合成0）。全6成功Mavenを反復せず、四PTを選んだ理由は現API main default/rejection残枝・子/親採取条件の確認。新launcher exact4/独立XML/FES-aborted-notrun0、全MainCRC0・当parent/childの実sessionは後で資格、native本番受入を代替0。群0470 .25/.5/1.5pp着手前固定、sourceMain不変更、結果は実行後追記。command同PYTHONPATH `python3 -B tools/quality/pg1629_api_main_selected.py`、新 `/runs/PG1629-selected-v1`。
+
 ## PG1626及び独立PG1627実資格（限定6PT成功）
 
 PG1626 source12f3851bb847ce676a467b4f834edf817bd91f33、actual selected6/新3＋関連3、FES/aborted/notrun0・Werror0/CRC0/fixture不変、VM0。詳細manifest4e9ba7f7b181346cec46b1dc9c118de2cf5a36cc2015aa1c2ae1a7283ce33392、generated cfcbc421915ba1c1060ba103035b60ca1d4192c0e79a41d7f248e3bddaa02a17。compactstdout旧literal3はBUG1140/YKT908として保全、実試験を再発行せず新PG1627読取資格actual0でXML/private exact3及び6、全Main/library/fixture/testsource/exec/hash/独立XMLcounterを確認。資格manifest522019853eedf2056b48fcf76b11a2b81abcddaebfde351a6671d922a6fc0a14、scriptc2ba9025cbcb2fda70fbb71c21c8ca4dc5cba8055236c07d9ba95a6bd0813192。資格command `python3 -B tools/quality/pg1627_selected_contract_qualification.py`（同PYTHONPATH）、operator b514bfc45。safe host `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1627-selected-contract-qualification-v1/manifest.safe.json`。
