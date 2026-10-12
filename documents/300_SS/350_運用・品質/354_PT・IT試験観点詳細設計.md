@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC275（SS343/BUG1152/YKT920）：旧実payload/tracebackのreserve→before_parent例外→send未到達を独立照合し、予約だけをsignal receiptにしない。旧101から当childpipe100/101だけ消失、現99全field/argv/ticks/権限/子0・soleDBpeer/MA/原本nativeを再認証、/run29/32以外の差を拒否。newhostcritical排他gateは同scope別管理接続の二重取得を拒否、同job付着だけ許す独立反例を追加。sameconnectionfresh99の各段階race/extraFD/peer/新子/未知/null/bool/時刻不整合を拒否、実新一回TERM15秒終端30秒reap/別全post/全元値と資源0を確認。旧slot再送/失敗成功化/coverage除外/人工到達0、正式/CHR/ITST受入は別。
+
 SSC274（SS343/BUG1150/YKT918）：独立固定101FD親/4FDRef/soleDBpeer/全24-32-187/current原値proof、sameconnection fresh全像/耐久保存signals0を実証する。PID/ticks/argv/exe/UIDcap/cgroup/子集合/FD欠落余剰/再利用/ACL/OFD/foreignpeer・role/app/backendStart/双方向socket/advisory/busname/十kernel/原値差/旧noDBproofを各拒否。/runFD29/32二時刻だけ合法進行と全他field不変、fresh二読及びpidfd前後/予約/TERM前の単独変化は拒否する。子TERM後の当stdin/stdoutpipe消失以外のFD差・新子・bus残存を拒否、各一回TERM15秒終端30秒reap/別全post全資源0を独立検査し、旧143/UNKNOWN保持を確認する。次工具の依存閉包はarchive実basename/suffix/hash、bundle/署名、全helper/class/transitive importの欠落/余剰/foreign/null/bool/pathescape/hash差を取得前に拒否し、新only compile/stage/placeの実再試験で閉じる。形式coverage/CHR/工程/ITST受入へ合算0。
 
 SSC273（SS343/BUG1149/YKT917）：FD29/32 target/runの過去時刻とfresh二時刻を別fixtureにし、合法非減少でもfresh二読/予約/TERM前後が変わればsignal0を検査する。dev/inode/owner/mode/link/size/type/ACL/linkedpath/namespace、95他FD/97set、argv/cap/cgroup/nochild/source/class、M3FD/AdupOFD/kcmp、DB/原本/全32config/187/native14/十kernelの各単独差・欠落/余剰/foreign/null/bool/未知/未来時刻/clock後退を拒否する。new-only同一管理接続・新Ref保持→完全独立fresh proof/耐久保存→pidfd前後/一回予約/TERM直前の同fresh像→15秒終端30秒reap/全後条件を実証する。旧143UNKNOWN/旧proof/時刻を保持し、一般緩和・人工到達・Production期待値変更0、正式/四100/CHR/ITSTへ合算0。
