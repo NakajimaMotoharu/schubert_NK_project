@@ -11,4 +11,4 @@ WBS-N02（主）、P017-03/04/06（参照費0）、SS341/312/351/353、QA047。P
 
 実証：Source=同2741、全二readeractual0、dump-listは一覧のみでrestore0、rawBackupはguest/LAN privateだけ、server.info/host秘密keyの複製0、currentVM/DB/Backupへの変異0。新Native counter904/171/9/716は679実測を維持し、当読取でcoverage改善や正式受入を計上しない。PGPT/ITST完了、故障/競合/失敗/skip全matrix、正式451は別未完。
 
-私有証跡：WorkPG379/pg1711-new-source-backup-readonly-v1及びpg1712-new-source-retired-backup-v1、LAN `/home/mini/schubert-nk-pgpt/runs/PG1712-retired-backup-v1`（raw原本・manifestのみ私有、Git格納0）。公開SHA付きmanifestは次のsource固定時に結果参照として追加する。状態=当生成済みBackup byte・保持限定確認済、formalAccepted=false/wholeleafdelta0。
+私有証跡：WorkPG379/pg1711-new-source-backup-readonly-v1及びpg1712-new-source-retired-backup-v1、LAN `/home/mini/schubert-nk-pgpt/runs/PG1712-retired-backup-v1`（raw原本・manifestのみ私有、Git格納0）。公開[680_manifest.json](evidence/output/680_manifest.json)は三actual recordのpath/hash・safe件数だけ、SHA256621268f32c2967d7ded47b42feed6fc47232c786a8bfcb736bf54c0aec61d489。状態=当生成済みBackup byte・保持限定確認済、formalAccepted=false/wholeleafdelta0。
