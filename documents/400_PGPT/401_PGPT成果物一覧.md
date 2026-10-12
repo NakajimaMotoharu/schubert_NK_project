@@ -228,4 +228,6 @@ BUG-023/SSC-012でNK-PRO-002を一時保留した後、正式Run06（8fed52b）�
 PG-D369/016085086と安全016 PG454-graph-selected-v8を対応付けた。126PT18suite/FES0/静的6zero/対象9class全counter0、実32MVCと同pair/管理/terminal drain/JMS retryを確認。全native・同群fresh全6・正式は未受入、run24/1964/53scope/48.3%不変。次owned native/30秒停止/outer保持→全回帰→signed VM経路→実CHR/native正式、通常限定成功で停止0。現況は456、依存は460。
 # PG454 C3/C4限定更新（2026-10-04）
 
+2026-10-13追記：439_Root世代guard残分岐の構造調査（430_実装判断、未確定候補/除外なし）、018証跡681～685/017証跡683686と公開safe manifestを追加。Main2741維持、限定host/Bootstrap成果を正式1964PT/53scopeへ加算しない。最新現況456/依存460/WBS486。
+
 同native起動のowned partial HTTP/worker残budget/config honoring/lifetime/外側UNKNOWN保持を初回製造し、独立173PT26suite/FES0/静的6zero・12class全counter0へ接続した。17対象counter/未到達を016085086/安全PG454-native-selected-v4へ保存、NativeRuntime/ordinary mainは実VM未受入で正式run24/1964/53scope/48.3%不変。次同source共有群fresh全6→必要Caddy/同原本complete/intent退役→signed27/実親/APIWeb/CHR/native正式、通常単位で停止0。現況456/依存460。
