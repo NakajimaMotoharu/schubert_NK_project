@@ -1,0 +1,13 @@
+# WARNING正規publication・唯一Unit交換reload
+
+NK-OPS-001/SS343353/SSC283/BUG1162/YKT930。Program=Pg1877OrdinaryPublication/pg1877_native_refs/UnitExchange、各sources/main/transitionOriginal/exchange/verify/reload/close。正式1964/53不変更、製造未受入。前提718 actualhostRO/管理資源0/旧Root13真正WARNING-failed10/当全24row・32config・旧新各187署名/原本Backup/native保持、候補fresh1844/45=3618PT静的6zero/Mainclassbyte差0。旧成功full/sourceや旧fail/UNKNOWNは流用しない。
+
+PT-OPS-PG1877-EPOCH001：独立literalNKEPOCH1/INVALID/boot3d69/当run4148-f1772e/cutoff18:20:32.598894/activation9adbfを一byte一致。null/空/余剰LF/ISSUED/旧run拒否。新UUID4/variant/旧boot-run-activationとの非一致、epoch/approval/current七phaseと旧保持FDの全inode/byte/mtime/ctime範囲、未知entry/field/role拒否を検証。
+
+PT-OPS-PG1877-INPUT001：actualemitted printASTとJava実ASCII consumer双方を独立固定PG1877_INPUT_CLOSURE_READY＋LFへ照合。全actual25sourceのPython静的0/import全閉包、実producer取得前ゲート・一回slot・foreign/欠落/nullを検証。
+
+PT-OPS-PG1877-UNIT001：source全187とcandidate approval/currentの資格後、同owner/Ref/DB/M-A下のみunit→reload。唯一通常Morning file元SHA28e6e23ddcfeacac7dc1daf326a1a2b1bc91895bbd34b313fe89a1b04f499bd6、新署名内SHAe9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b・1947B。元FD/同filesystem/privateDirectory/root:root0644/nlink1/ACL無し、new-onlypart→fsync→RENAME_EXCHANGE→旧inodeprivateへのNOREPLACE移動・両directoryfsync。kernel独立tmpfixtureでold/new inodeと固定byte保持、destination既存・foreign/null/型/未知flagsはnative前又はNOREPLACEで拒否、検索だけでは合格にしない。
+
+PT-OPS-PG1877-RELOAD001：新Unit全byte資格後だけ、同ownerでprivate一回reservefsyncし正規systemctl daemon-reload timeout20s。old state18/同Rootinv failed10を保持、Typeoneshot/SuccessExitStatus10二読、全別config/18files/drop-in/runtime/DB/原本Backup/native不変更。terminal/releaseはunitreloaded後のみ、全新scope正常返却/管理資源0。途中拒否を再送/hotpatchせず保留しQA047現所有proof回復へ接続。
+
+PG1879全compile-Werror/argument/labelmount/original/identity/input/transitionの7phase、全Pythonstatic、source/run固定。実stage/所有前producer/正規activate/別独立fullpostは未実行、actualExit/日時/hashを後記へ記録する。coverageは工具限定試験でありProduction4counter100/正式451の代用0。secret/raw/DBdump/token/keyは通常証跡へ格納0。
