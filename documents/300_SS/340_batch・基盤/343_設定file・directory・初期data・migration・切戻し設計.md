@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC271：SSC270のPG1562でcanonicalzz作成/reload後のREADONLY_PREPARED/KeyErrorが残る場合は設定を再発行しない。当current4d6/1544/boot3d69/元pending15700-9e706、frozen72e34dbd8、Java105206/ticks3041121/Ref105232/ticks3041209の実父子/argv/helper/現署名187・M-A/同batchRWReadCommitted peer/advisory/十Ref/privatebus・全原値/旧Root143/DONE無しを二読する。現在公開runtimeはtmpfs Root0755→fixedUnit.d0755→canonicalzzRoot0644・singlelink/ACL0、独立署名base/native＋元run二引数と有効ExecStart/DropInPathsだけの正規差へ固定し、旧scopeのbefore-image又は正常closeを補作成しない。新proofの全現在値を耐久保持後に当Ref→Javaのpidfd普通TERM各一回・同ticks有限reap、旧中断143/closeUNKNOWN保持、別独立全post/資源0を閉じる。次の別fresh正常M-A/RWbatch/advisory/十Ref/原本Sessionは既公開設定のverify-onlyであり再prepare/reload/unlink0。全正常と別post後のみ新observer/耐久一回startへ進む。未知owner/差分/partialは隔離継続、一般復旧/旧成功化/手DB・epoch・permit/newstart0、品質/1800秒/RD/UI不変更。
+
 ## SSC270 当current pendingのcold一回用runtime接続
 
 PG1556/1558で正常code-only/別全postを閉じたsource4d6bcbddb417b76d27e52d5d9640752c300edccf/PG1544/BOMe36d39f470bedf445e182f03e926c4c22252ef37952fde5b9a12614e60b0f07c/boot3d69f5af-6bac-46b1-a540-7591c4a79a0dを、SSC198/259/260の一回用runtime契約へ接続する。元run15700a87-9117-4f63-a0ff-768dd604d0f1/cutoff2026-10-11T21:18:59.040097Z/activation9e706936-a3c9-4a09-bb66-e2b1e8bbef66とbegin、旧Root1456failed143/DONE無し、旧INVALID/permit・全原本/24表/Backup/nativeは保持する。旧D5 source/run/profileを現在値へ流用しない。
