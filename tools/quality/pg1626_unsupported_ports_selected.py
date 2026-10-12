@@ -86,7 +86,7 @@ for m,jar in zip(['protocol','storage','bootstrap','api','web','batch'],jars):
 require(all(sha(transfer/n)==h for n,h in INPUT['files'].items()))
 result={'actualExit':0,'tests':6,'failures':0,'errors':0,'skipped':0,'aborted':0,'notRun':0,'productionSource':INPUT['productionSource'],'testSource':INPUT['testSource'],'testFiles':INPUT['files'],'libraries':INPUT['libraries'],'mainJarHashes':full['jarHashes'],'fixtureClassHashes':fixture_hashes,'fixtureBytesUnchanged':True,'javacWarnings':0,'classByteMismatch':0,'commands':commands,'startUTC':started.isoformat(),'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'xmlSha256':sha(xml),'execSha256':sha(exec_path),'coverage':coverage,'coverageXmlHashes':xml_hashes,'injectedPortsNotNativeOwnerProof':True,'wholeRegressionNotRun':True,'formalAccepted':False,'vmMutation0':True}
 with(out/'manifest.safe.json').open('x')as f:json.dump(result,f,sort_keys=True);f.flush();os.fsync(f.fileno())
-print(json.dumps({'actualExit':0,'tests':3,'FESAbortedNotRun':0,'manifestSha256':sha(out/'manifest.safe.json'),'remaining':{k:sum(v[k]['missed']for v in coverage.values())for k in ['LINE','METHOD','CLASS','BRANCH']},'classByteMismatch':0,'javacWarnings':0,'formalAccepted':False,'vmMutation0':True}))
+print(json.dumps({'actualExit':0,'tests':result['tests'],'FESAbortedNotRun':0,'manifestSha256':sha(out/'manifest.safe.json'),'remaining':{k:sum(v[k]['missed']for v in coverage.values())for k in ['LINE','METHOD','CLASS','BRANCH']},'classByteMismatch':0,'javacWarnings':0,'formalAccepted':False,'vmMutation0':True}))
 '''
 
 def main():
