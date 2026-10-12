@@ -1,0 +1,86 @@
+{
+  "JDK": "25.0.4",
+  "branch": "dev-foundation",
+  "collectorCommit": "17796771438519e9d8c2a9774366ced6aace23cf",
+  "createdUTC": "2026-10-12T20:52:46.834225+00:00",
+  "formalAccepted": false,
+  "hostPython": "3.14.4",
+  "independentUniqueTests": 10,
+  "nativeCoverage": "NOT_QUALIFIED",
+  "observations": [
+    {
+      "TestID": "PT-OPS-PG1813-ONCE001",
+      "actualExit": 0,
+      "guest": {
+        "actualExit": 0,
+        "afterSha256": "b8ce2d5610f625bd6c2d27be466e843fc09fa239a7f779c8cb4711d718fb8ef9",
+        "all24Config32Signed187OriginalBackupNativeUnchanged": true,
+        "liveDaemonPeersPreserved": true,
+        "managementPeerAdvisoryMA0": true,
+        "newObserverReferencesReturnedNormally": true,
+        "normalRefThenJavaTermOnce": true,
+        "oldCloseUnknown": true,
+        "serviceStartsStops0": true
+      },
+      "manifestSha256": "3a6e7ac4c9cd58d9d73ed3a843a9f1838bb5e80f18c4e54b097d49841f7957de",
+      "payloadSha256": "93977f0d27e2e6644ee3eb6a9d6fd52901ee5753932eab8029d562c85dcddaaa",
+      "queuedSameHostGateAcquired": true,
+      "slot": "pg1813-current-warning-pair-once-handoff-v1"
+    },
+    {
+      "TestID": "PT-OPS-PG1814-POST001",
+      "actualExit": 0,
+      "guest": {
+        "actualExit": 0,
+        "allOriginalWholeSnapshotUnchanged": true,
+        "configurationFields": 32,
+        "currentFourOwnedLive": true,
+        "managementPeersAdvisoryMA0": true,
+        "normalMetadataReferences": true,
+        "privateBeforeSha256": "b8ce2d5610f625bd6c2d27be466e843fc09fa239a7f779c8cb4711d718fb8ef9",
+        "recoveredPairAbsent": true,
+        "signedArtifacts": 187,
+        "tables": 24
+      },
+      "manifestSha256": "0bc9360b3b3f1a9f0f4a7cee16b029d4368b68be5d2f953e5d48282acabd8d07",
+      "payloadSha256": "5319cd4249cfbcd80dec59b33442af8ef4f80ef821267347410fb4fba13a84c1",
+      "queuedSameHostGateAcquired": null,
+      "slot": "pg1814-current-pair-independent-full-post-v1"
+    }
+  ],
+  "oldStopSourceReconciliation": {
+    "actualExit": 143,
+    "actualStartedSource": "71d21e1a3fc649bd1b05b62cbf172d1a180de664",
+    "frozenSource": "71d21e1a3fc649bd1b05b62cbf172d1a180de664",
+    "manifests": {
+      "frozen": {
+        "path": "pg1801-frozen-v1.safe.json",
+        "sha256": "801313293d5c603f95289fb1022c890a5b0c5837b862e1ef3f11bd5df5d82324"
+      },
+      "requested": {
+        "path": "pg1802-stop-v1.requested",
+        "sha256": "1f11809b117e828aacba29ad05d61a14b22203f4af304e81ed20a949e4177b0c"
+      },
+      "result": {
+        "path": "pg1802-stop-v1.safe.json",
+        "sha256": "ded18cb976d86793584bcbd1ff553b41e565f0bb6fbdfadc0073077825b2a84f"
+      }
+    },
+    "mislabelledCompletionOperator": "17796771438519e9d8c2a9774366ced6aace23cf",
+    "oldNormalClose": "UNKNOWN",
+    "rawNotRewritten": true
+  },
+  "operatorCommit": "17796771438519e9d8c2a9774366ced6aace23cf",
+  "productionSource": "2741c4546afad6c1e8b6efbd53dfb58144edf7bb",
+  "relatedBUG": [
+    "BUG-1172",
+    "BUG-1173",
+    "BUG-1174",
+    "BUG-1175"
+  ],
+  "relatedSSC": [
+    "SSC-281"
+  ],
+  "secretsExported": false,
+  "wholeAccepted": false
+}
