@@ -18,7 +18,8 @@ def main():
     old='[NEXT,FROZEN,SIG,W/';new='[NEXT,SIG,W/'
     if raw.count(old)!=1:raise ValueError('new-only candidate reservation boundary refused')
     raw=raw.replace(old,new).replace('FROZEN.mkdir(mode=0o700);old_classes={};new_classes={};jars={}', 'old_classes={};new_classes={};jars={}').replace('p=receive(module);','p=cached_jars[module];')
-    ns={**prior.__dict__,'NEXT':prior.W/'pg1544-release-v1','SIG':prior.P/'pg1544-manifest-v1.sig','FROZEN':cache,'cached_jars':jars}
+    raw=raw.replace("'helperSha256':sha(Path(__file__))", "'helperSha256':sha(Path(__file__)),'engineSourceSha256':engine_sha")
+    ns={**prior.__dict__,'__file__':__file__,'NEXT':prior.W/'pg1544-release-v1','SIG':prior.P/'pg1544-manifest-v1.sig','FROZEN':cache,'cached_jars':jars,'engine_sha':prior.hashlib.sha256(raw.encode()).hexdigest()}
     exec(compile(raw,'<new-only independently sourced candidate>','exec'),ns)
     return ns['main']()
 
