@@ -13,7 +13,8 @@ import org.jspecify.annotations.Nullable;
 /** Shared read/write admission; NK-OPS-001; OPS-009/UI251/SS343 6.9/6.11; EFILE/PUB PT. */
 @NullMarked
 final class EnvironmentInodePolicy {
-  private static final Set<String> LOCAL = Set.of("ext2", "ext3", "ext4", "xfs", "btrfs", "tmpfs");
+  private static final Set<String> LOCAL =
+      Set.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", "tmpfs");
   private final InodeSecurityCalls security;
   private final Source source;
 

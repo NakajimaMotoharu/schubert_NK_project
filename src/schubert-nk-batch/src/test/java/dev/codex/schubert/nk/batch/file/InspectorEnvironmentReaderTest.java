@@ -130,7 +130,7 @@ final class InspectorEnvironmentReaderTest {
           reject(f);
         }
       }
-    for (String type : List.of("ext2", "ext3", "ext4", "xfs", "btrfs", "tmpfs")) {
+    for (String type : List.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", "tmpfs")) {
       try (var f = fixture(false)) {
         f.filesystem = type;
         f.readonly = true;

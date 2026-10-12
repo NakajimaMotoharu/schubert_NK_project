@@ -156,6 +156,9 @@ public final class InspectorEnvironmentReader {
   }
 
   static final class NioIo implements Io {
+    private final dev.codex.schubert.nk.storage.LinuxFilesystemClassifier filesystem =
+        dev.codex.schubert.nk.storage.LinuxFilesystemClassifier.create();
+
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
       return Files.readAttributes(
@@ -164,7 +167,7 @@ public final class InspectorEnvironmentReader {
 
     @Override
     public String filesystem(Path held) throws IOException {
-      return Files.getFileStore(held).type();
+      return filesystem.filesystem(held);
     }
 
     @Override

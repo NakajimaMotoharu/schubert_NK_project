@@ -601,7 +601,17 @@ final class StartupPermitFilesTest {
       var nativeIo = new StartupPermitFiles.NioIo();
       f.seed(INVALID);
       assertNotNull(nativeIo.attributes(f.current));
-      assertNotNull(nativeIo.filesystem(f.current));
+      String filesystem = java.nio.file.Files.getFileStore(f.current).type();
+      String expectedFilesystem =
+          java.util.Set.of("ext2", "ext3", "ext4").contains(filesystem)
+              ? "ext2/ext3/ext4"
+              : filesystem;
+      f.root.atExistingEntryHandle(
+          f.current.getFileName().toString(),
+          held -> {
+            assertEquals(expectedFilesystem, nativeIo.filesystem(held));
+            return true;
+          });
       try (var channel = nativeIo.open(f.current)) {
         assertEquals(INVALID.length(), channel.size());
       }
