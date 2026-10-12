@@ -1,5 +1,7 @@
 # 696 Morning正常WARNING10 単体テスト仕様・結果（host限定）
 
+2026-10-13計測追記訂正：systemd templateの485 owner/costOwnerはWBS-C02。Unit製造と共通Unit PT（PT-OPS-MUNIT001～004/SSC278-UNIT1790）はC02:contract/scope/qualityの限定証拠・主担当共通費一回へ帰属する。0523群開始0.5/1.5/4pp・原event/v3/予算は不変、実費N/T/allocatedPpは未分離null、P018-03.02への再計上0。下記旧P018表記は着手時の分類として保持するが現分類に使わない。Root/FD側の独立PT（PT-OPS-PG1800-PARENT001/002、Root世代host1743等）は各既群の責務を維持し、Unitへの参照費は0。候補0fdのhost4成功を実VM2741のUnit受入へ加算せず、同候補sourceの署名/実Unit/終了依存joinは未完。
+
 Program NK-OPS-001、MorningServiceUnitTest.munit001～004とsystemd親template、SS341/343/SSC278・BUG1162/YKT930、WBS-P018-03.02。Source候補0fd734195（実VM current2741/PG1638は不変更）。Unitの追加行は唯一SuccessExitStatus=10、Java MaintenanceCompletionの承認済みSUCCESS0/WARNING10に対応、他30/50/70/143/signal/timeoutを許可しない。親30min/60s/SendSIGKILL=no・credential/hardening・target子並列禁止は維持。
 
 Test ID=PT-OPS-MUNIT001～004/SSC278-UNIT1790。fixtureは実template byteをreadし、独立literal exact key/value/唯一行数を検証、値をProduction methodから生成しない。正常WARNING契約はTestを先に修正（2bfe600bc）し、旧templateで1 failure/他3成功を確認してから実装。これは既BUG1162の再現兼TDDでありredを合格へ算入しない。

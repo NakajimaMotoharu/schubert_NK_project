@@ -1,0 +1,9 @@
+# INITIAL_BEFORE保持pair・二源設定修正結果（限定成功）
+
+仕様703、SS343353/SSC282/BUG1177/YKT945、operatorfabcf1c20f44e0ec1aee20882b733ef367b1ff22、Main2741/PG1638/boot3d69。
+
+PG1823actual0/payloadSHAe6025c46a4e9d5cd23365a87494c88c08d8c16a6ef52d28782ef6d656decc043。元before hash/全FD・OFD/管理peer/全元像のfresh同接続guardから、Ref481540→Java481511の普通TERM各一回・有限reap、新Ref正常、同inodehostgatequeued取得・旧wrapper終端を確認。サービスstart-stop/Root再演/強制kill/DBterminate0、元四daemonと全原値保持。
+
+別PG1824actual0/payloadSHA27820f64cb250538a62ad35df7dae660ddd7a354cc2553cb262e83a6f0ccd59b。旧pair不存在・管理DB/advisory/M-A0・元四daemon/全24-32-187/原本Backup/native保持、全像b8ce同値。旧1816stopはactual143/UNKNOWN、operator開始c5e201保持・完了観測fabcfを別field、sourceQualified=false。旧成否を修復して合格0。
+
+現parent配置はfailed10のまま、二源configuration修正1821はhost2uniquePASSだけ、正常ownedstop/native未実行。次1825全15helperABI→1826immutable stage→1827実consumer state18/config2前後照合（M/A-DB-Ref0）→1828別全fresh像→新正常八所有停止→別post/native。正式1964/53・全leaf0、私有raw輸出0。公開704_manifestへ実manifest/hashをwhitelist収集予定。
