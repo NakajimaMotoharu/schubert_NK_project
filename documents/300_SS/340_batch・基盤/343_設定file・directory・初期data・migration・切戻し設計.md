@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC268 publication-only正常復旧後のUnit GC readback（2026-10-12）
+
+SSC266/QA047の正常同fresh所有によるExpiry→Artemis→Cleanup停止・真正PID1/vendor全証拠・全原値不変・canonical型付きpublication intentのみ退役・全管理scope正常返却を、当source/boot/BOMのimmutable warm receiptとして保持する。Ref返却後のsystemd Unit collectionによりcurrentを再Loadした際、同三Unitの補助INV/start/end/code/statusが空/0、ExecStart補助が閉じた未実行値へ戻る場合を別current lifecycleとして扱い、0表示をwarm停止や旧Root成功の証拠にしない。
+
+currentがwarm18/full32と一致する場合はそのまま照合する。GCの場合は固定同三Unitのfull18でinactive/dead/success・MainPID/ControlPID0・Job空、InvocationID空・ExecMainStart/ExitTimestampMonotonic/Code/Status各0だけを認め、Id/LoadState/Type/Restart/RemainAfterExit/KillMode/SendSIGKILLほか全残fieldを当warm宣言と一致させる。full32のhardening/Requires/After/Role/実Unitfile/source/署名/argv/固定pathを不変とし、ExecStartの宣言path/argv/ignore_errors tripleのみ同一、補助はexact n/a/n/a/0/(null)/0/0である。片側・未知・nonzero・別宣言は隔離し、GCへ正規化しない。
+
+真正warm PID1/vendor/当stop予約・同scope fullpostを先に検証し、当boot/BOM/current、全24DB/原本/Backup/credential/旧proof/epoch/permit/nativeと全task/FD/lock/peer/advisory/bus消失を独立二読、current metadata十Refを新しく通常返却する。warm/currentの相違は補助履歴だけに限定し、stop/reload/起動/epoch再失効/intent再退役/DBwriteは行わない。旧Root143/旧UNKNOWNは維持、限定GC readbackはRoot/DONE/全native/正式品質へ加点せず、正常post後のみ別fresh same-run一回resume候補へ進む。
+
 ## SSC266 failed publication-only current Rootの限定復旧（2026-10-12）
 
 QA047承認内、RD/UI/外部仕様不変更。Main769/PG1292/schema028/現boot3d69のRoot1456（INV1ee3b3…/Job13033/start5711141318us）が元1800秒timeout143、当run15700a87…/cut2026-10-11T21:18:59.040097Z/activation9e706936…のactive保持・DONE無しの場合を限定する。startupは同INVALID epoch・同公開permit・permit-start.intentの三entryのみで、owner/API-Web launch/service intentは無い。SS174/179/209/211のPair/API-child profileを仮構成して適用しない。
