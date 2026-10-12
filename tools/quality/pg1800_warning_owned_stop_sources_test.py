@@ -5,7 +5,7 @@ import json
 import unittest
 from unittest.mock import Mock
 from pg1800_warning_owned_stop_sources import sources
-from pg1799_warning_parent_projection_contract_test import Parent
+import pg1799_warning_parent_projection_contract_test as parent_fixture
 
 
 class Emitted(unittest.TestCase):
@@ -15,7 +15,7 @@ class Emitted(unittest.TestCase):
         cls.projection={}
         exec(cls.actual['pg1800_warning_parent_projection.py'],cls.projection)
 
-    def fixture(self):return Parent().fixture()
+    def fixture(self):return parent_fixture.Parent().fixture()
 
     def test_capture_actual_guard_all_fields(self):
         tree=ast.parse(self.actual['pg1800_native_refs.py'])

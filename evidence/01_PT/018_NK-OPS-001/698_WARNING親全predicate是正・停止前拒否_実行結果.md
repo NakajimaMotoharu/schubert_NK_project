@@ -1,0 +1,15 @@
+# WARNING親全predicate是正・停止前拒否（不合格を保持）
+
+仕様697、BUG1172/YKT940。operator71d21e1a3、Main2741/sourceUnit候補0fdは別。
+
+PG1801のjavac-Xlint:all-Werror/oracle/label/original全actual0、1802stage0、1803別全像b8ce/四owner/管理資源0は成功。実1802stopはREFERENCE_SCOPEでUNKNOWN、現在host282491/t9176109が同inodegateを保持、Java479190/t8906867/101FDとRef479219/t8907026/4FD、管理479217/PG998を保全。STOP命令/耐久stop予約前に拒否され、実サービスは元四世代のまま。
+
+別1807readonly structuredtraceはValueError、Refmain103→capture_data63→verify_pid1 20。parent_receipt.pyのRun UUID末尾f1772eを数字番号一括置換がf1800eへ変えていた。正規DONEに一致しないため拒否したのであり、原本/独立期待値は不変更。旧工具hotpatch/再送0。
+
+1808別factoryはnamespace prefixだけ変更・全UUID集合不変・実生成completedへの独立WARNING goldenと別Run/exit/Activation拒否を3unique tests0。1809初期proofのtyped string/bytes束縛漏れはBUG1173/YKT941、旧test/probe非0保持。1810型別fixture0後の実probeは普通pool2/1固定へ拒否（BUG1174/YKT942）。別1811 actual0=API2/Web2/batch1、同管理advisory1。SS343/API2～8/Web1～2・WebJdbcPool/APIJdbcPoolの既上限を変更しない。
+
+新1812現全proofactual0/SHA33d9262d4564192bd5045840ca5fd2ce2a5db8dde8a431f21784c2d72df4c813。全101/4FD/OFD、全5actualpeerのTCP両端、元24/32/187/原本Backup/元四daemon保持、停止予約0・観測Ref正常返却を確認。SSC281 designonly122b51b78/PR125→main cc284b2756650cd39258537fbde8f4cf2b37c54f確認済。appPR添付100件上限、URLを保持する。
+
+当回復1813・次正常ownedstop/nativeは未実行。正式1964/53・全leaf0維持、旧1802終了と正常closeを推論しない。次同排他queued後継の単一接続→子/親通常TERM各一回→別全post→UUID保持の別factory/ABI/正常停止。私有slot/manifest/hashはWorkPG379/各PG番号、raw DB/key/sessionは公開しない。
+
+計測訂正：以前の8呼出はParent fixture classを二moduleでunittest収集したため7unique。受入数へ合算0。後続fixture importはmodule経由で重複収集を防ぎ、現unique数を再実行で報告する。
