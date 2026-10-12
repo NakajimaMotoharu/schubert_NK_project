@@ -20,6 +20,16 @@ class ServerBoundaryTest(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     server.credentials()
 
+    def test_multiple_machine_sections_only_unique_approved_mini(self):
+        approved='addr: 192.168.1.131\nuser: mini\npass: fixture-approved\nuser: root\npass: fixture-never-root\n'
+        other='addr: 192.168.1.132\nuser: mini\npass: fixture-never-other\nuser: root\npass: fixture-never-other-root\n'
+        for fixture in [approved+other,other+approved,other+approved+other]:
+            with patch.object(server.Path,'read_text',return_value=fixture):
+                self.assertEqual(server.credentials(),'fixture-approved')
+        for fixture in [approved+approved,approved+'user: mini\npass: duplicate\n',approved+'user: mini\n',approved.replace('pass: fixture-approved','pass:'),approved.replace('pass: fixture-approved','pass: one\npass: two'),'addr: 192.168.1.131\npass: before-user\nuser: mini\npass: fixture\n',approved.replace('user: mini','user:')]:
+            with patch.object(server.Path,'read_text',return_value=fixture):
+                with self.assertRaises(RuntimeError):server.credentials()
+
     def test_unpinned_key_refused_before_credentials(self):
         scan = subprocess.CompletedProcess([],0,'192.168.1.131 ssh-ed25519 '+base64.b64encode(b'wrong-key').decode()+'\n','')
         with patch.object(server.subprocess,'run',return_value=scan), patch.object(server,'credentials') as secret:

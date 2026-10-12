@@ -21,21 +21,40 @@ INFO = Path("/home/mini/codex/project1/server.info")
 
 
 def credentials():
-    address = None
-    username = None
-    password = None
+    # server.info may hold other machines. Select the already-authorized host
+    # section first; never let a later machine overwrite its login identity.
+    sections = []
+    section = None
     for line in INFO.read_text().splitlines():
         item = re.match(r"^\s*(addr|user|pass)\s*(?:[:=]\s*|\s+)(.*?)\s*$", line)
         if not item:
             continue
         label, value = item.groups()
         if label == "addr":
-            address = value
-        elif label == "user":
+            section = (value, [])
+            sections.append(section)
+        elif section is not None:
+            section[1].append((label, value))
+    matching = [records for address, records in sections if address == HOST]
+    if len(matching) != 1:
+        raise RuntimeError("Unique authorized host credential section required")
+    username = None
+    password = None
+    mini_records = 0
+    for label, value in matching[0]:
+        if label == "user":
+            if not value:
+                raise RuntimeError("Authorized host username required")
             username = value
+            if username == "mini":
+                mini_records += 1
         elif username == "mini" and label == "pass":
+            if password is not None:
+                raise RuntimeError("Ambiguous authorized mini credential refused")
             password = value
-    if address != HOST or not password:
+        elif label == "pass" and username is None:
+            raise RuntimeError("Authorized host credential order refused")
+    if mini_records != 1 or not password:
         raise RuntimeError("Local mini credential/address contract mismatch")
     return password
 
