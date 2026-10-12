@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC283（2026-10-13）：BUG1162正常WARNING10を旧Unitがfailed扱いした事実は保持する。343の署名新source/停止所有/連続M-A-専用DB-十Ref/唯一通常Morning Unit原子交換・旧inode私有保全/有限一回reloadを適用し、旧状態18failed10と新設定2SuccessExitStatus10を分離して二読する。reset-failed/新start/stop/原本DONE更新による旧失敗正常化は禁止。途切れたstage/交換/reloadは当phaseとcurrent署名・Unitinode/hash・実所有を再認証し、旧slotを再送せずQA047の限定回復・別全postへ接続する。新Unitの実WARNING正常終了・native・正式451は次の合法経路で独立受入し、配備/設計公開だけで工程合格にしない。
+
 
 SSC282（2026-10-13）：状態18読取に含まれない設定SuccessExitStatusを消費した1816の拒否を保持する。343同項の当currenthost/Java/Ref/管理peer、初回before＋error二file固定hash・全101/4FD/OFD/元像をfresh二読し、SSC281と同一回収接続・同inodequeued/子→親普通TERM各一回/有限reap・全管理資源0/普通daemonと全TCP/全24-32-187・原本Backup/native保持/新Ref正常・別wholepostを閉じる。開始sourcec5e201の不合格UNKNOWNを合格に変更0、旧start/stop/Backup/Root再演0。次新versionは状態18＋別設定2の実emitted完全schema oracleを取得前に確認し、元同正常8逆順停止/全後条件/nativeへ戻る。設計main公開は実回復・実装・工程完了と区別する。
 
