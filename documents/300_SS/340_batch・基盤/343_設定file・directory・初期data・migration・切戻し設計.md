@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC283（2026-10-13）：SSC278の署名Morning Unit10配備はrelease/current交換だけで通常Unitへ反映済みとしない。十Unit/kernel/全actor/管理DB-advisory-FLOCK0・当Root真正WARNING/旧managerfailed10・全元像を再認証し、管理gate/連続M-A/専用DB/十Ref下で当source全回帰・独立MUNIT4・全Mainbyte/署名187/SQL28history29を資格したsiblingを正規hostRO・canonicalINVALID/approval/current交換へ進める。新signed current全187資格後だけ、唯一Morning通常Unitをnew-onlypart/root:root0644/nlink1/fsync→元SHA・oldFDを保持した同directory RENAME_EXCHANGE→旧inode私有保持/両directory fsyncで更新、一回期限付き正規daemon-reload。状態18は当旧failed10世代を保持、別設定2はTypeoneshot/SuccessExitStatus10二読を資格。他Unit/drop-in/secret/DB/原本Backup/native変更0、reset-failed/Root再演/旧UNKNOWN成功化0。全新scope正常返却と別全post/新署名byte/旧inode・byte保持後、次合法current/一回freshresumeの実WARNING正常終了を別受入する。拒否はphase/所有を保全しQA047限定現所有回復、旧slot再送0。
+
 
 SSC282（2026-10-13、BUG1177/QA047）：親の状態FIELDS18とType/SuccessExitStatus設定2を別strict読取にする。状態18に設定を仮想追加せず、設定二keysのduplicate/unknown/欠落/null/不正representationを拒否・Type一致・前後状態/設定不変を確認する。旧1816のinitial-before保存後UNKNOWNは當host288085/t9335833、Java481511/t9066715/101FD、Ref481540/t9066872/4FD、管理481538/PG998/sole71419602/同hostgateへ限定してSSC281のfreshproof/一回子→親TERM・有限reap/queued排他継承/全元値保持/別postを適用する。1822proof9b2f5c8f…は元全像b8ceと保存before全値を別照合、failureRootの既二fileは固定hash・原本として保持。sudoは対象外、旧slot再送/hotpatch/強制unlock/Root再演/正常close推論0。元普通pool上限/全TCP・全品質不変更。
 
