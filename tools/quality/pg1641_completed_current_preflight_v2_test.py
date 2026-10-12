@@ -7,7 +7,7 @@ import pg1641_completed_current_preflight_v2 as p
 class ActualSchemaTest(unittest.TestCase):
     def test_actual_schema_and_missing_foreign_null_rejected(self):
         keys = ['backup', 'configuration', 'extraDurable', 'originals', 'pid1', 'rows', 'runtime', 'startup', 'unitFilesActual', 'units']
-        value = {k: {} for k in keys}
+        value = {k: [] if k == 'pid1' else {} for k in keys}
         self.assertTrue(p.validate_schema(value))
         for k in keys:
             bad = dict(value)

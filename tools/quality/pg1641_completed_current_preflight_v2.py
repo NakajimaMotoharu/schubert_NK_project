@@ -15,7 +15,7 @@ KEYS = frozenset(['backup', 'configuration', 'extraDurable', 'originals', 'pid1'
 def validate_schema(value):
     if type(value) is not dict or set(value) != KEYS:
         raise ValueError('exact actual completed full schema required')
-    if any(type(value[k]) is not dict for k in KEYS):
+    if any(type(value[k]) is not (list if k == 'pid1' else dict) for k in KEYS):
         raise ValueError('actual full schema value types required')
     return True
 
