@@ -1,5 +1,11 @@
 # 683 NK-BAT-001 Morning成功Backup行projection（限定PT）
 
+## 最終sourceの追加fault・再資格（2026-10-13 02:06JST）
+
+MDB-PROJ-1737-007（method mdbProj1737007AllowedJdbcFailuresAndUnknownProviderIdentityCloseEveryResource）：JDBCが許すSQLException及び未知RuntimeException/Errorをquery/read/closeの六地点へ独立注入。SQL例外は固定IOException/redaction/cause無し・suppressed0、未知二種は元object identityを保持、connection/statement/rows全0・commit0を各確認する。.03:deliverable/qualityのJDBC例外・close・資源後条件に対応するが、実OS/DB lock所有の認定ではない。
+
+新Test source89a8ad0ac31e54038d5d598ead97d39c95f30a93、formatter1.36.1後にPG1739 exact7/FES-aborted-notrun0/Werror0/全MainCRC0、serverSHA535cf158e7955a50152c5d871f18deb9cdefb1de1038b170f8279d0d2bac8efd。別PG1740 exact unique7/source/library/JAR/fixture/exec/XML独立資格0、serverSHAa346f4429117583c9a9550e5c5a3c919259c2f276681c317a0b57fbb2e0eb27a。sourceが異なる初回6を最終source7へ加算せず、7だけを当限定合格とする。Main/VM/元fixture不変、faultを加えた追加counter改善0だが例外/close契約の反例証拠が増えた。残870/169/9/705は同値、fresh全3604は未実行、正式/子03 NOT_ACCEPTEDを維持。開始見積り0.5/1/3は不変、結果event0509、N/T・子別実費null。下記初回6は履歴。
+
 Program/class/method：MorningDatabaseSession.Session.successfulBackup/successfulHandle、ProbeはTest専用provider。関連OPS009/DAT009／UI251／SS331332343354、主leaf **WBS-P017-01.03**（原本/JDBC/lock例外・close・資源後条件）。初回event0507は親P017-01だけを記録したため、0508で子へのTestID/criteria対応を追記訂正。開始0.5/1/3pp・原見積り/v3を上書きせず、未分離個別実費はnull、親子/参照費を重複加算0。
 
 独立fixture：SQL resultの2行をliteral Mapに定義。run31100000…／cutoff2026-09-27T15:00:00Z、business_date2026-09-28（Asia/Tokyo）、id1737001/1737002、DB target/success1、config2、failure0、byte26/67、start02:00:00Z/end02:00:03Z、attempt1、error2列null。正常Expectedは固定id・step・start/attempt値を直接assertし、Production methodでExpected生成0。Scope/ROLE/lockのproviderは合成fixtureであり、実host runlock/DB所有権を与えない。共有Main JAR6と既fixture byteを前後pinし、専用classes/XML/exec/portなしのLAN実行を隔離する。
