@@ -1,9 +1,7 @@
 """Fresh owned readonly original IO timing; no proof caching or business mutation."""
 import ast
-import inspect
 from pg1478_partial_original_profile_sources import java as prior_java, BODY as prior_body
 from pg1505_publication_recovery_sources_v3 import refs as recovery_refs
-from pg1475_failed_publication_owner_observation import within_root_period
 
 TOOLS='pg1512-original-component-tools-v1'
 SAVE='pg1514-original-component-profile-v1'
@@ -28,8 +26,8 @@ def refs():
         prefix.append(node)
     raw=ast.unparse(ast.Module(body=prefix,type_ignores=[]))
     raw=raw.replace('Pg1505PublicationOnlyRecovery',CLASS).replace("b'recover'","b'profile'").replace('PG266-publication-recover','PG269-original-io-profile').replace('pg1505-publication-only-tools-v3',TOOLS).replace('pg1507-publication-only-recovery-v3',SAVE)
-    raw+='\n'+inspect.getsource(within_root_period)+'\n'+SETUP+'\n'+prior_body
-    raw=raw.replace('/var/lib/pgpt-s1-preservation/pg1477-failed-publication-owner-v1/observed.private.json','/var/lib/pgpt-s1-preservation/pg1511-publication-gc-closing-v1/observed.private.json').replace('bcfd08285abe448ebe28c2adffc39acca0346e25b1769c44d72f43290da38cd5','7cc53215980eadb5d6d788d1df0b997111b3f6beabc6eef4803f4506afb36ea5')
+    body=prior_body.replace('expected_current','profile_expected').replace('expected_raw','profile_expected_raw').replace('/var/lib/pgpt-s1-preservation/pg1477-failed-publication-owner-v1/observed.private.json','/var/lib/pgpt-s1-preservation/pg1511-publication-gc-closing-v1/observed.private.json').replace('bcfd08285abe448ebe28c2adffc39acca0346e25b1769c44d72f43290da38cd5','7cc53215980eadb5d6d788d1df0b997111b3f6beabc6eef4803f4506afb36ea5')
+    raw+='\n'+SETUP+'\n'+body
     raw=raw.replace('PG266-readonly-profile','PG269-original-io-profile')
     compile(raw,'<fresh complete current owned readonly IO profile>','exec')
     return raw
