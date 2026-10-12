@@ -122,6 +122,11 @@ def run(command, timeout=60, sudo=False):
 
 
 def copy(source, destination, timeout=1800):
+    if not isinstance(source,(str,os.PathLike)):
+        raise ValueError("Filesystem source path required")
+    source=os.fspath(source)
+    if type(source)is not str or not source or '\0'in source:
+        raise ValueError("Canonical string source argument required")
     # BUG1097/YKT866: reject lexical escapes before key scan/authentication.
     if (type(destination) is not str or any(ord(c) < 32 for c in destination)
             or not destination.startswith("/home/mini/schubert-nk-pgpt/")

@@ -2,6 +2,7 @@
 import base64
 import subprocess
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import lan_server as server
@@ -58,6 +59,16 @@ class ServerBoundaryTest(unittest.TestCase):
             self.assertEqual((0,''),server.copy('/fixture','/home/mini/schubert-nk-pgpt/tools/'))
             argv=transfer.call_args.args[0]
             self.assertEqual('mini@192.168.1.131:/home/mini/schubert-nk-pgpt/tools/',argv[-1])
+
+    def test_pathlike_source_actual_argv_and_invalid_source_before_auth(self):
+        with patch.object(server,'pinned_key',return_value='fixture public'),patch.object(server,'authenticated',return_value=(0,''))as transfer:
+            server.copy(Path('/fixture'),'/home/mini/schubert-nk-pgpt/tools/')
+            argv=transfer.call_args.args[0]
+            self.assertIn('/fixture',argv);self.assertTrue(all(type(v)is str for v in argv))
+        for source in [None,b'/fixture','', '/fixture\0bad']:
+            with patch.object(server,'pinned_key')as key:
+                with self.assertRaises(ValueError):server.copy(source,'/home/mini/schubert-nk-pgpt/tools/')
+                key.assert_not_called()
 
     def test_timeout_closes_only_owned_local_child(self):
         with patch.object(server.pexpect,'spawn') as spawn:
