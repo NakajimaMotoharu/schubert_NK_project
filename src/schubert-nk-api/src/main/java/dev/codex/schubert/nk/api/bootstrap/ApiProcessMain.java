@@ -9,9 +9,6 @@ import dev.codex.schubert.nk.api.logging.WebLogIngestService;
 import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
 import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
 import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
-import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageStopHold;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -34,6 +31,7 @@ public final class ApiProcessMain {
   private final Map<String, String> environment;
   private final NonSecretConfigSource source;
   private final IntConsumer termination;
+  private final ApiTerminalCapture.Factory captures;
 
   public ApiProcessMain() {
     this(System.getenv(), ServiceConfigFiles.production(), System::exit);
@@ -41,9 +39,18 @@ public final class ApiProcessMain {
 
   ApiProcessMain(
       Map<String, String> environment, NonSecretConfigSource source, IntConsumer termination) {
+    this(environment, source, termination, ApiTerminalCapture::currentJvm);
+  }
+
+  ApiProcessMain(
+      Map<String, String> environment,
+      NonSecretConfigSource source,
+      IntConsumer termination,
+      ApiTerminalCapture.Factory captures) {
     this.environment = Map.copyOf(Objects.requireNonNull(environment, "environment"));
     this.source = Objects.requireNonNull(source, "source");
     this.termination = Objects.requireNonNull(termination, "termination");
+    this.captures = Objects.requireNonNull(captures, "native PT captures");
   }
 
   @FunctionalInterface
@@ -53,18 +60,14 @@ public final class ApiProcessMain {
 
   public void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);
-    var coverage =
-        FixedNativeCoverageCheckpoint.fromCurrentJvm(
-            ServiceConfigFiles.Service.API,
-            FixedNativeCoverageProfile.Phase.ORDINARY,
-            environment.get("INVOCATION_ID"));
+    var coverage = captures.find(environment.get("INVOCATION_ID"));
     int status;
     if (coverage.isPresent()) {
-      try (var hold = FixedNativeCoverageStopHold.open()) {
+      try (var hold = coverage.orElseThrow().open()) {
         hold.verifyOwner();
         status = run(arguments, environment, source);
         System.err.println("API process stopped");
-        coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+        coverage.orElseThrow().capture();
         hold.verifyOwner();
         System.err.println("API fixed PT native capture complete");
       }
@@ -204,7 +207,7 @@ public final class ApiProcessMain {
                                             lifetime.guardEvent(new WebLogIngestService(pool)),
                                             lifetime.guardEvent(worker),
                                             clock,
-                                            failure -> lifetime.fail(),
+                                            lifetime.committedFailureHandler(),
                                             lifetime::fail)) {
                                       try {
                                         groupsReady.set(true);

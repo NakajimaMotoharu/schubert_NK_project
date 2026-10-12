@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
+import dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException;
 import dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadata;
 import dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor;
 import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestProcessor;
@@ -11,6 +12,7 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 
 /**
  * Stop notification only; outer main owns acquisition/drain/close. Hook never closes a provider
@@ -40,6 +42,11 @@ final class ApiProcessLifetime implements AutoCloseable {
   void fail() {
     failed.set(true);
     stop();
+  }
+
+  /** PG-D412: bind durable-fatal notification to this owner without reading/logging its payload. */
+  Consumer<CommittedFatalInboundException> committedFailureHandler() {
+    return ignored -> fail();
   }
 
   SyncRequestProcessor guardSync(SyncRequestProcessor delegate) {
