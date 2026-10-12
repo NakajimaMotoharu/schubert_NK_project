@@ -1,0 +1,11 @@
+# partial残reload専用・metadata9
+
+NK-OPS-001/SS343353/SSC283/QA047/BUG1187/YKT955。Program Pg1907PartialReload/ExistingUnit/native_refs、source factory1907/compiler1908。前提721の1904全partial閉鎖actual0：currentSource0fd/PG1846/署名187/INVALID/新approval・current・Unit交換済み、旧Root13真正WARNING-failed10/原本Backup/native保持、全管理資源0、PID1設定SuccessExitStatus空、reload未予約。保存wholeSHA16ec6b95e9de832eec5eaf90849a64e6a54c94600b3b6f3f7a09527b17515ad4。旧1904成果は新操作後の成功へ流用しない。
+
+PT-OPS-PG1907-ROLE001：新currentSource0fd/BOMee75/PG1846のみを署名資格、Root原本は旧Root13WARNINGのdataとして不変更・INVALID epochを既正規privateexpectedへ完全byte一致、genuine旧failed世代を保全。旧ISSUEDや旧current/foreign役割を拒否。actual全helpermoduleへの全consumer h属性存在/Type-Success parser、producer/Java consumer固定PG1907_INPUT_CLOSURE_READY＋LF、全Python static/importを独立検証。
+
+PT-OPS-PG1907-ONLY001：新管理hostgate/連続M-A/専用DB/全十Refを保持し、操作は唯一finish-reload。既Unit原本inode64769/3227/1836B/SHA28e6/mtime1790785949034979724を新ownerでも保持、現UnitSHAe9ce/1947B/新inodeと九field/time範囲・ACL無しをverify。新privateownerSAVE1911だけへ一回reloadreserve/fsync、正規systemctl daemon-reload timeout20s、同Rootstate18/設定2Typeoneshot-SuccessExitStatus10/全元値/署名187/全nativeを二読して返却。旧1895partial/frozen工具へwrite/hotpatch0。
+
+期待値はSSmetadata9の明示tuple、新旧署名manifest内UnitgoldenSHAと721実値、SSの単一reload/20s/元Root未再演条件から独立算出。actual ExistingUnit.exchangeはrename前必ず拒否、Javaはpermits.invalidate/current交換/Unit再交換を呼ばず、Refはreloadだけ。正規publisher/Root/Backup/ADMIN再演で到達を作らない。
+
+PT-OPS-PG1900-META001/1897：readatime更新だけを許し、dev/ino/uid/gid/mode/nlink/size/mtime/ctime全保持/新同inode・未来ctime・旧mtime拒否を実verify/realFSで試験、5uniquePASS（1907role-marker2＋metadata9exact2＋realFS1）/static0。正常後のみExistingUnitclose全4FD正常返却、null/欠落/foreign/例外/timeout/re送は保留・旧原本保持。新coldVM full6ABI・実immutable stage/owner前producer/reload/別独立fullpostは未実行、source・exit・coverage・hash・日時を後記する。工具限定fixtureをProduction PT/四counter100/正式1964-53の代用0。
