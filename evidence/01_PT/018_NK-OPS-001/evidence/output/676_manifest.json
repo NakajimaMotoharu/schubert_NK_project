@@ -1,0 +1,29 @@
+{
+  "programId":"NK-OPS-001",
+  "recordedJST":"2026-10-12T22:21:42.000+09:00",
+  "branch":"dev-foundation",
+  "productionCandidate":"2741c4546afad6c1e8b6efbd53dfb58144edf7bb",
+  "testSource":"1683dd9f6de00e71d2317d9af3cd50400a37bf4e",
+  "runtime":"4d6bcbddb417b76d27e52d5d9640752c300edccf/PG1544",
+  "os":"Ubuntu26.04.1/x86-64 isolated LAN VM",
+  "tools":{"jdk":"25.0.4","maven":"3.9.12","pyflakes":"3.4.0"},
+  "runs":[
+    {"testId":"PT-OPS-S274-PAIR-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1664-current-unused-pair-proof-v1/manifest.safe.json","sha256":"9226eafa4cfe36d664c3491539dd97573a7f0a6b9f46ed1d0858c570070133bc","exit":0,"operatorCommitAtLaunch":"f924758ec1af01e889a2b5e7476086b3fe410a05","operatorDirtyAtLaunch":true},
+    {"testId":"PT-OPS-S274-TERM-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1667-unused-pair-owned-handoff-v1/manifest.safe.json","sha256":"56f671a4058a6a4439e556fd4fc90ad9ad118064a1fe08b897294db49eb86c17","exit":1,"accepted":false},
+    {"testId":"PT-OPS-S275-SOLE-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1672-remaining-db-owner-proof-v1/manifest.safe.json","sha256":"eb58c158458f886ffa617387ae221d6e52a6a6f85dc19d7d3d50a03d392398ec","exit":0},
+    {"testId":"PT-OPS-S275-TERM-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1674-remaining-owner-handoff-v1/manifest.safe.json","sha256":"544586fdb46ca2768f04b4ec7dfe7524a8dc92f00118147c1f66a39d9ad6864b","exit":1,"accepted":false},
+    {"testId":"PT-OPS-S275-POST-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1675-remaining-owner-full-post-v1/manifest.safe.json","sha256":"7cec8f9243535c4d9867f480a0277c7c761b3e38da5a7e6b4bbfc430ebc231b4","exit":0},
+    {"testId":"PT-OPS-INPUT-002","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1682-frozen-v1.safe.json","sha256":"f3ce30a13b27dac38e3505c371ded107ef90bb5a7e26d35e7632acb14477b3b3","exit":0,"operatorSource":"1f886a0e6404e307e52a0464a20e8b5ea28ceace","files":141},
+    {"testId":"PT-OPS-INPUT-003","action":"stage","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1683-stage-v2.safe.json","sha256":"f7ec35891a3cf57f18b019c0b5cb5cf83d5fa72f1f01851df971a9795e52047f","exit":0},
+    {"testId":"PT-OPS-INPUT-003","action":"place","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1683-place-v2.safe.json","sha256":"67df41bbf0fd76b2e13d4f8778015c620b1f82936d9db6244b4f502f954c1c36","exit":0},
+    {"testId":"PT-OPS-INPUT-POST-001","path":"/home/mini/codex/project1/work/pgpt-runs/PG379/pg1685-unused-candidate-full-post-v1/manifest.safe.json","sha256":"1bc68f4ff883af23df10964026fd46d2c86fdc85846a668bf1c0f249d6b35e5c","exit":0,"operatorSource":"241b43808"}
+  ],
+  "relatedBugs":["BUG-1150","BUG-1151","BUG-1152","BUG-1153"],
+  "relatedSsc":["SSC-274","SSC-275"],
+  "oldFailedSlotsPreserved":true,
+  "inputExpectedActualOracle":"Independent fixed filename/hash/import vectors; signed187 artifact inventory and unchanged sealed24/32 data; fixed before-after SHA9f18; not Production-generated expected values",
+  "coverage":{"productionHostMissed":{"LINE":3772,"METHOD":626,"CLASS":37,"BRANCH":1085},"productionNative":"NOT_RUN","toolTestsNotAddedToProductionCoverage":true,"global100":false},
+  "wholeLeafAcceptedDelta":0,
+  "formalAcceptanceChanged":false,
+  "privateRawExported":false
+}
