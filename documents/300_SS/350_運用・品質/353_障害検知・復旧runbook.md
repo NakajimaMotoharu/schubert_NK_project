@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC280（2026-10-13）：当1788はold1782像の共有/run時刻・通常poolpeerとの差を信号前に拒否したもので、手修復/旧proof書換えをしない。1792独立deltaの当29/32だけをSS343の前7不変・時刻非減少へ限定し、管理476114/同socket/advisory/全他FD・子・原本は固定、普通API/Web peerは同service/sourceのfresh全TCP両端へ再結合して新proofを耐久保存する。fresh全guard→各一回予約/普通TERM/有限reap→全原値・普通daemon/peer保持・管理peer/locks0→新Ref/bus正常返却→別wholepostの順を維持する。旧1674/1774/1784/1786/1788を正常closeへ変換せず、Root再start/reset-failed/旧slot再送0。
+
 SSC279（2026-10-13、BUG1165/1166）：停止前REFERENCE_SCOPEの当WARNING pairをSS343のfresh全101/4FD・samepeer/OFD/全元値で認証、旧host排他をforce unlockせず単一回収接続だけへ限定する。独立metadata十Ref→現proof耐久保存/同fresh/pidfd/子一回TERM・有限reap/solebus消失→親の既知子pipe閉鎖だけ許容し他全FD/同DB/M-A保持再読→当Java一回普通TERM・有限reap→管理peer/advisory/M-A0と通常API/Web peer・四daemon・全元値保持→新Ref/bus正常返却→旧wrapper終了後同inodehostgate取得→別wholepostを固定する。全peer0や全十kernel空はlive daemon保持段の成功条件ではない。旧UNKNOWNを正常closeへ推論せず、実正常stop/nativeは回収後の別作業である。片側/不明は保全・再signal0、SIGKILL/DBterminate/oldslot hotpatch・Root再start/reset-failed0。
 
 SSC277：1724はBUG1157の旧unused共有FD番号誤用でsignal前拒否、oldverifyUNKNOWNを保持。新Bootstrap31/90の全fresh型付きguardへ限定訂正し、旧29/32proof/slotを流用しない。hostkernelqueueは失敗/TERM0ならoldowner保持・元guest拒否を保存し、正常TERM後だけ新gate取得完了を確認、force unlock0。SS343の当一回回収・別全postへ継続する。
