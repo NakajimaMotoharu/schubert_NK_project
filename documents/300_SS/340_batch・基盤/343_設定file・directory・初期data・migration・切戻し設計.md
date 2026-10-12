@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC270 当current pendingのcold一回用runtime接続
+
+PG1556/1558で正常code-only/別全postを閉じたsource4d6bcbddb417b76d27e52d5d9640752c300edccf/PG1544/BOMe36d39f470bedf445e182f03e926c4c22252ef37952fde5b9a12614e60b0f07c/boot3d69f5af-6bac-46b1-a540-7591c4a79a0dを、SSC198/259/260の一回用runtime契約へ接続する。元run15700a87-9117-4f63-a0ff-768dd604d0f1/cutoff2026-10-11T21:18:59.040097Z/activation9e706936-a3c9-4a09-bb66-e2b1e8bbef66とbegin、旧Root1456failed143/DONE無し、旧INVALID/permit・全原本/24表/Backup/nativeは保持する。旧D5 source/run/profileを現在値へ流用しない。
+
+別fresh M→A→実RW batch ReadCommitted/advisory71419602/heartbeat→private十Ref・全署名187保持FD下で、現在tmpfs Root:Root0755/ACL0の`/run/systemd/system`を祖先保持・直下空/Unit.d不在へ二読する。SSC259のmkdirat0700/同inode0755/dirsyncと全EXCL/NOFOLLOW/write/force/close契約を維持し、canonical `schubert-nk-morning-controller.service.d/zz-pg1160-once-resume.conf`だけをRoot0644/new-only作成する。固定署名Morning base＋既pg477 native literalから `--resume 15700a87-9117-4f63-a0ff-768dd604d0f1`二引数だけ追加し、一回reload後Morningの有効ExecStart/DropInPathsのみ正規差、agent1/旧native/他全設定と十Unit履歴/kernel/全原値不変を照合する。設定成功は起動authority又は親成功ではない。
+
+全DB/FD/十Ref/bus/A/M正常帰還と別全post後だけ、別fresh observer/耐久一回予約/外部Root通常resumeへ進む。Productionだけが新Root/epoch/permit世代を発行し、元1800秒/既Unit期限・元成功handle再用・API保持Web/Caddy/真正DONE/owned逆順停止/native/同source451を維持する。unknown/partialはownerと全原値を保全し、同slot再prepare/reload/start、old/run復元、手DB/epoch書込、旧143の成功化0。独立literal/全IO fault/null/foreign/effective順序/競合/原byte保持と当source実postへ追跡する。
+
 ## SSC269 保持inode filesystem fresh等価分類（2026-10-12）
 
 全原本graph二読/全外部boundary再検査を維持したまま、保持/proc/self/fd capabilityのfilesystem判定をLinux/glibc LP64公開statfs ABIへ置換できる。許可済ext2/ext3/ext4はmagic0xEF53の共通familyとして内部Snapshotへ記録、xfs0x58465342/btrfs0x9123683E/tmpfs0x01021994は別分類。LOCAL許可意味、runtime tmpfs必須/durable非tmpfsかつRW、readonly/ACL/metadata/owner/全原本/期限は不変更。未知magic/ABI/失敗/無効capability拒否、filesystem/graph/認可cache又はscan省略禁止。familyは内部判定だけでUI/電文/DB業務値不変更。実header/版・独立magic/ABI120byte-offset0/retainedFD/tamper/例外/当source影響PT/必要全回帰・当Root再発防止実証が揃うまでtimeout解決/正式にしない。

@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC270：PG1556 code-only正常/1558別全post後のcurrent4d6/PG1544/boot3d69・元pending15700a87/9e706をSS343有限cold runtimeへ接続する。SSC259/260の祖先FD保持/空Root0755/Unit.d不存在・canonical zz設定new-only/一回reloadを別fresh M-A/RWbatch ReadCommitted/advisory/十Refで行い、全原値とStartup INVALID/permit・他全宣言を維持する。設定正常と別postを閉じてから別observer/耐久予約/外部一回Rootへ進む。元run/cutoff/activation/begin/成功handle再用・1800秒/API保持WebCaddy/DONE/ownedstop/native/451を独立受入し、旧Root1456の143を解決へ読み替えない。partial/unknown/close不明は保存・再付着、旧slot再prepare/reload/start又はold/run復元0。QA047対策と実再発防止は真正親成功まで対応中。
+
 ## SSC269 原本再検証費用の原因別対策（2026-10-12）
 
 1519/1523 readonly component計測は現原本二読1回にfilesystem判定2912回/約0.36～0.40秒、全体約0.46～0.70秒。fresh statfs family分類は再検証数/security/親1800秒を緩めず、保持FDの同じ許可集合を低費用で判定する内部対策。原因寄与と親全体の解消は分ける。独立ABI/magic/null/異path/未知/失敗・実inode/tamper/RO、影響suite/必要全回帰、当source正規別一回resume/真正親DONE/ownedstop/nativeを確認するまでBUG1106/YKT875は対応中。旧Root143/UNKNOWNは成功化せず原本/DB/Backup/INVALID/permit/nativeを保持する。
