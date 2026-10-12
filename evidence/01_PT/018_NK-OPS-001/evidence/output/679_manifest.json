@@ -1,0 +1,126 @@
+{
+  "backupContentRetentionPending": true,
+  "bugRefs": [
+    "BUG-1155"
+  ],
+  "classByteMismatch": 0,
+  "classification": "PROVISIONAL_SAME_SOURCE_NATIVE_NOT_451_COMPLETE",
+  "commands": [
+    "pg1700 readonly",
+    "pg1701 readonly",
+    "pg1702 readonly",
+    "pg1704 Werror/oracles",
+    "pg1706 preflight",
+    "pg1705 stage once",
+    "pg1705 stop once under management_gate",
+    "pg1707 readonly",
+    "pg1708 readonly",
+    "pg1709 sameSource CRC/coverage"
+  ],
+  "coverage100": false,
+  "doneUtc": "2026-10-12T14:45:34.509749Z",
+  "effortCompletionRate": null,
+  "formalAccepted": false,
+  "fullSnapshot": "0044e7d8d1ce46040ec4e8092f63902bd7b32512",
+  "nativeStreams": 8,
+  "oldNativeFourteenPreservedNotImported": true,
+  "originalBudgetSeconds": 1800,
+  "ownedExplicitStops": 4,
+  "privateAfterSha256": "3d5c74e1cb01ffd8969c1e5d7b7054957bac64e5b6a07288c1508bc165490362",
+  "productionSource": "2741c4546afad6c1e8b6efbd53dfb58144edf7bb",
+  "program": "NK-OPS-001",
+  "rawCredentialTokenSessionMasterDumpIncluded": false,
+  "records": {
+    "catalog": {
+      "path": "pg1708-new-source-native-catalog-v1/manifest.safe.json",
+      "sha256": "156430aedd72a0f8b0ed7a134210cec5336e61ed616202166fa1685d3932b3d0"
+    },
+    "compiler": {
+      "path": "pg1704-frozen-v1.safe.json",
+      "sha256": "a5c20ae64cb32823b4e4c3984bd421094180fc696e1e2e9790f202e69307a9f9"
+    },
+    "done": {
+      "path": "pg1701-new-source-done-receipt-v1.safe.json",
+      "sha256": "756fc76e9883ed6f866c984c9ccf0ae964c5739429535fdde9e88c786801de61"
+    },
+    "live": {
+      "path": "pg1700-new-source-live-binding-v1.safe.json",
+      "sha256": "916ea4735aee16bd3eeb3dc34227cb1a09ae8725f8a8af6368532fca12e0d3c0"
+    },
+    "native": {
+      "path": "pg1709-new-source-native-qualified-v1/manifest.safe.json",
+      "sha256": "3121f2635feab24a42b8a4b5e74350f1f9b0637a6a5479792624f7ec7280e807"
+    },
+    "post": {
+      "path": "pg1707-new-source-terminal-post-v1.safe.json",
+      "sha256": "835743b5d5bba6ac37a523a66f476fd78232f3ab9d8f66445b5f00baac3d50a2"
+    },
+    "preflight": {
+      "path": "pg1706-new-source-stop-preflight-v1/manifest.safe.json",
+      "sha256": "a086e2dc9bd80d637f4cc5bc0ddf4f9f6ab8ae44b8abd17f00a58d690f85803d"
+    },
+    "seal": {
+      "path": "pg1702-new-source-completed-seal-v1/manifest.safe.json",
+      "sha256": "b315e648011a8a24865a02f2f06ca47f767fcbeeb66bd30aed6c7d2f083d9170"
+    },
+    "stage": {
+      "path": "pg1705-stage-v1.safe.json",
+      "sha256": "1512083a0e2d03dd995ccaa1bb0358fc26e10ddee83d693f3ff44c7c08993534"
+    },
+    "start": {
+      "path": "pg1699-new-current-ordinary-once-v1/manifest.safe.json",
+      "sha256": "29eeebd18d02114036465dc035153e94d6e3ff21e9c057f91828f47010c829c8"
+    },
+    "stop": {
+      "path": "pg1705-stop-v1.safe.json",
+      "sha256": "3a11e9999332235b471efde736c062a15580e19c6af83c2a8bccc40c3194567a"
+    }
+  },
+  "remainingMissed": {
+    "BRANCH": 716,
+    "CLASS": 9,
+    "LINE": 904,
+    "METHOD": 171
+  },
+  "resourcePostExit": 0,
+  "rootElapsedSeconds": 1601.536175,
+  "serverNativeManifestSha256": "74a6484b49d8c503a5e3454a62c85486af856d644cfcbf2a654e008f0014f728",
+  "sqlOracle": {
+    "backupBundleByteOraclePending": true,
+    "formalAccepted": false,
+    "freshBackupSuccessSteps": 2,
+    "logOutboxOneToOne": true,
+    "newAnonymousHttpLogs": 222,
+    "newAnonymousSessions": 222,
+    "newSentOutbox": 222,
+    "newSkippedSteps": 8,
+    "oldCompletedRunResumed": false,
+    "oldRowsRetained": true,
+    "productionGeneratedNewRun": true,
+    "rawIdsExported": false,
+    "sameDayAlreadySuccessfulNotNewInspectorExecution": true,
+    "tables": 24,
+    "wholeAccepted": false
+  },
+  "ssRefs": [
+    "SS341",
+    "SS343",
+    "SS353",
+    "SSC274",
+    "SSC275"
+  ],
+  "terminalReceipts": 8,
+  "testIds": [
+    "PT-OPS-LIVE-1700-001",
+    "PT-OPS-DONE-1701-001",
+    "PT-OPS-SQL-1702-001",
+    "PT-OPS-STOP-1705-001",
+    "PT-OPS-POST-1707-001",
+    "PT-OPS-NATIVE-1709-001"
+  ],
+  "testSource": "1683dd9f6de00e71d2317d9af3cd50400a37bf4e",
+  "wholeLeafAcceptedDelta": 0,
+  "yktRefs": [
+    "YKT-923"
+  ]
+}
