@@ -19,7 +19,7 @@ old_proof=json.loads(old_raw);require(old_proof['stopReservations0']is True and 
 first=snapshot();require(first==snapshot()==old_proof['current']);validate_current(first)
 owned=pair();require(owned==old_proof['pair']and owned==pair())
 def same_peer():
- sql="begin read only;select json_build_object('pid',pid,'port',client_port,'address',client_addr::text)from pg_stat_activity where pid="+str(BACKEND)+"and usename='schubert_batch'and application_name='PG266-publication-recover';commit;"
+ sql="begin read only;select json_build_object('pid',pid,'port',client_port,'address',client_addr::text)from pg_stat_activity where pid="+str(BACKEND)+" and usename='schubert_batch'and application_name='PG266-publication-recover';commit;"
  lines=command(['sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',sql],4096).splitlines();require(len(lines)==1)
  peer=json.loads(lines[0]);require(peer['pid']==BACKEND and peer['address']=='127.0.0.1'and type(peer['port'])is int and 1<=peer['port']<=65535)
  def socket_ids(pid):

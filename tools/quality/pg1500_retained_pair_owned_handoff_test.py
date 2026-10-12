@@ -3,6 +3,14 @@ import unittest
 from pg1500_retained_pair_owned_handoff_retry import payload
 
 class HandoffPrefixTest(unittest.TestCase):
+    def test_peer_sql_numeric_keyword_boundary(self):
+        from pg1501_retained_pair_owned_handoff_retry import payload as newest
+        f=next(n for n in ast.parse(newest()).body if isinstance(n,ast.FunctionDef)and n.name=='same_peer')
+        assign=f.body[0];self.assertIsInstance(assign,ast.Assign)
+        for pid in (2,2147483646):
+            sql=eval(compile(ast.Expression(body=assign.value),'<query expression>','eval'),{'BACKEND':pid})
+            self.assertIn('where pid='+str(pid)+" and usename='schubert_batch'",sql)
+            self.assertIn('begin read only;',sql);self.assertTrue(sql.endswith(';commit;'))
     def test_existing_input_new_output_and_callback_interface(self):
         s=payload();compile(s,'<handoff>','exec')
         self.assertIn('require(os.path.isdir(PAIR_SAVE))',s)
