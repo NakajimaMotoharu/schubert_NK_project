@@ -9,6 +9,7 @@ from pg1674_critical_management_gate import management_gate
 import pg1672_remaining_db_owner_readonly_proof as proof
 import pg1667_unused_pair_once_handoff as pair_handoff
 from pg782_owned_handoff import terminate
+from pg1680_proc_reap_contract import confirmed_absence
 
 SLOT = 'pg1674-remaining-owner-handoff-v1'
 PROOF_SHA = '537aaccf3ff3f98e17e71dbda28fa7bfe671e44699f9b7d59c6fde9241dd93aa'
@@ -63,7 +64,9 @@ try:
  deadline=time.monotonic()+30
  while pathlib.Path('/proc/291213').exists():
   try:require(int(pathlib.Path('/proc/291213/stat').read_text().rpartition(')')[2].split()[19])==5962776)
-  except FileNotFoundError:break
+  except OSError as error:
+   if confirmed_absence(error,pathlib.Path('/proc/291213').exists()):break
+   raise
   require(time.monotonic()<deadline);time.sleep(.05)
  require(not pathlib.Path('/proc/291213').exists()and not pathlib.Path('/proc/291242').exists())
  q="begin read only;select count(*)from pg_stat_activity where datname='schubert_nk'and backend_type='client backend'and pid<>pg_backend_pid();select count(*)from pg_locks where locktype='advisory'and classid=0 and objid=71419602 and objsubid=1 and granted;commit;"
@@ -86,7 +89,7 @@ finally:
 def payload():
     raw = proof.payload()
     raw = raw[:raw.index("private=base/'pg1667-unused-pair-owned-handoff-v1'")]
-    raw = 'PROOF_SHA=' + repr(PROOF_SHA) + '\n' + inspect.getsource(terminate) + '\n' + raw + BODY
+    raw = 'import errno\n' + inspect.getsource(confirmed_absence) + '\nPROOF_SHA=' + repr(PROOF_SHA) + '\n' + inspect.getsource(terminate) + '\n' + raw + BODY
     compile(raw, '<SSC275 same-connection sole DB owner handoff>', 'exec')
     return raw
 

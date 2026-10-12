@@ -11,6 +11,7 @@ from pg1446_current_cold_stage import SSH, W
 import pg1664_current_unused_pair_readonly_proof as proof
 from pg1665_unused_pair_contract import fresh_parent, parent_after_ref
 from pg782_owned_handoff import terminate
+from pg1680_proc_reap_contract import confirmed_absence
 from pg1657_same_connection_fresh_handoff import design_scope as previous_scope
 
 SLOT = 'pg1667-unused-pair-owned-handoff-v1'
@@ -68,7 +69,9 @@ try:
   deadline=time.monotonic()+30
   while pathlib.Path('/proc',str(pid)).exists():
    try:require(int(pathlib.Path('/proc',str(pid),'stat').read_text().rpartition(')')[2].split()[19])==ticks)
-   except FileNotFoundError:break
+   except OSError as error:
+    if confirmed_absence(error,pathlib.Path('/proc',str(pid)).exists()):break
+    raise
    require(time.monotonic()<deadline);time.sleep(.05)
  def before_parent(pid,ticks):
   require((pid,ticks)==(291213,5962776)and not pathlib.Path('/proc/291242').exists())
@@ -103,7 +106,7 @@ def payload():
     raw = proof.payload()
     raw = raw[:raw.index("save=base/'pg1664-current-unused-pair-proof-v1'")]
     raw = raw.replace('require(children=={291242})', 'require(children==(set()if REF_CLOSED else{291242}))')
-    raw = 'REF_CLOSED=False\nPROOF_SHA=' + repr(PROOF_SHA) + '\n' + inspect.getsource(fresh_parent) + '\n' + inspect.getsource(parent_after_ref) + '\n' + inspect.getsource(terminate) + '\n' + raw + BODY
+    raw = 'import errno\n' + inspect.getsource(confirmed_absence) + '\nREF_CLOSED=False\nPROOF_SHA=' + repr(PROOF_SHA) + '\n' + inspect.getsource(fresh_parent) + '\n' + inspect.getsource(parent_after_ref) + '\n' + inspect.getsource(terminate) + '\n' + raw + BODY
     compile(raw, '<SSC274 current once owned pair handoff>', 'exec')
     return raw
 
