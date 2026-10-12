@@ -42,6 +42,7 @@ class SingleTermTest(unittest.TestCase):
     def test_published_scope_not_unrelated_old_design_differences(self):
         text = '# example\n\nSSC272：exact authority\n\nolder unrelated text'
         self.assertEqual('SSC272：exact authority', p.design_scope(text, '343_design.md'))
+        self.assertEqual('SSC272（exact authority）', p.design_scope('# example\n\nSSC272（exact authority）\n\nolder', 'documents/354_design.md'))
         text = '# ledger\n\n## SSC-272（fixed）\n\nfixed actor\n\nproof\n\n## SSC-271（history）\nold'
         self.assertEqual('## SSC-272（fixed）\n\nfixed actor\n\nproof', p.design_scope(text, 'documents/914_ledger.md'))
         for bad in ['', 'SSC271：old', 'SSC272：one\n\nSSC272：two']:

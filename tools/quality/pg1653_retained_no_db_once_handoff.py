@@ -119,7 +119,7 @@ def main():
 
 
 def design_scope(text, path):
-    marker = '## SSC-272（' if '/914_' in path else 'SSC272：'
+    marker = '## SSC-272（' if '/914_' in path else 'SSC272（' if '/354_' in path else 'SSC272：'
     if text.count(marker) != 1:
         raise ValueError('one published current recovery authority required')
     tail = text[text.index(marker):]
