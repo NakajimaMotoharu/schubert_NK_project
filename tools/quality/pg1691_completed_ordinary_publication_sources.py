@@ -44,6 +44,8 @@ def sources():
         raw=raw.replace('pg1691-completed-candidate-ro-tools-v1',TOOLS).replace('pg1689-completed-candidate-host-ro-v1',SAVE)
         # Only the baseline still belongs to the completed hostRO slot.
         raw=raw.replace(SAVE+'/after.private.json','pg1689-completed-candidate-host-ro-v1/after.private.json')
+        if name==CLASS+'.java':
+            raw=raw.replace('startsStopsReloadsEpochWrites0=true','startsStopsReloadsSqlWrites0=true\\ncanonicalEpochApprovalCurrentChanged=true')
         if name=='pg1691_native_refs.py':raw=raw.replace('direct_tree,fd_record,path_record','direct_tree,fd_record')
         if name=='pg1691_input_preflight.py':
             raw=raw.replace('Pg1686CandidateRo','Pg1691OrdinaryPublication')
