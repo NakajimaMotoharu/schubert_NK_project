@@ -18,7 +18,9 @@ class ReceiptTest(unittest.TestCase):
         for key in env['BINDING']:
             with self.assertRaises((ValueError,TypeError)):env['qualify'](dict(env['BINDING'],**{key:None}),rows,done)
         for key in common.keys()|{'__CURSOR','JOB_ID','JOB_TYPE','JOB_RESULT','MESSAGE_ID'}:
-            bad=copy.deepcopy(rows);bad[0][key]='foreign'
+            # A fresh non-empty unique cursor is valid runtime journal data,
+            # not a fixed business value. Reject duplicate/empty cursor instead.
+            bad=copy.deepcopy(rows);bad[0][key]='independent-b'if key=='__CURSOR'else'foreign'
             with self.assertRaises(ValueError):env['qualify'](env['BINDING'],bad,done)
         for bad in [None,[],rows+[rows[0]],[dict(r,__MONOTONIC_TIMESTAMP='33843431271')for r in rows],[dict(r,JOB_RESULT='timeout')for r in rows]]:
             with self.assertRaises(ValueError):env['qualify'](env['BINDING'],bad,done)
