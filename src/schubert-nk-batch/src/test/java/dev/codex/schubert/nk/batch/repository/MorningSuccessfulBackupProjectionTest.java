@@ -179,4 +179,49 @@ final class MorningSuccessfulBackupProjectionTest {
     assertEquals(1737001L, result.get().database().id());
     probe.released();
   }
+
+  @Test
+  void mdbProj1737007AllowedJdbcFailuresAndUnknownProviderIdentityCloseEveryResource()
+      throws Exception {
+    for (String point :
+        List.of(
+            "HISTORY.statement.executeQuery",
+            "HISTORY.row.next",
+            "HISTORY.row.getString",
+            "HISTORY.row.getObject",
+            "HISTORY.row.close",
+            "HISTORY.statement.close")) {
+      for (int kind : new int[] {0, 1, 2}) {
+        var probe = new MorningDatabaseSessionTest.Probe();
+        probe.successfulRows = List.of(row("BACKUP_DB"), row("BACKUP_CONFIG"));
+        Throwable failure =
+            switch (kind) {
+              case 0 -> new java.sql.SQLException("PRIVATE_PROVIDER_DIAGNOSTIC");
+              case 1 -> new IllegalStateException("PUBLIC_UNKNOWN_IDENTITY");
+              default -> new AssertionError("PUBLIC_FATAL_IDENTITY");
+            };
+        probe.faults.put(point, failure);
+        org.junit.jupiter.api.function.Executable work =
+            () ->
+                probe
+                    .subject()
+                    .execute(
+                        MorningDatabaseSessionTest.credential(),
+                        session ->
+                            session.successfulBackup(MorningDatabaseSessionTest.RUN, OBSERVED));
+        if (kind == 0) {
+          var actual = assertThrows(IOException.class, work);
+          assertEquals("root batch database unavailable", actual.getMessage());
+          assertNull(actual.getCause());
+          assertEquals(0, actual.getSuppressed().length);
+        } else if (kind == 1) {
+          assertSame(failure, assertThrows(IllegalStateException.class, work));
+        } else {
+          assertSame(failure, assertThrows(AssertionError.class, work));
+        }
+        probe.released();
+        assertEquals(0, probe.counts.getOrDefault("connection.commit", 0));
+      }
+    }
+  }
 }
