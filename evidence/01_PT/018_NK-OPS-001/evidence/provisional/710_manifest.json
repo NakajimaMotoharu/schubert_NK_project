@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "testIds": [
+    "PT-OPS-PG1842-CAT001",
+    "PT-OPS-PG1843-NATIVE001"
+  ],
+  "inputOracle": "strict PID1 generation/window + perfile native SHA + independent full XML/Main/JAR/exec qualifier",
+  "expected": "full classification old20/current10, session/order, MainCRC0, exact measured counter union; not global100",
+  "actual": {
+    "productionSource": "2741c4546afad6c1e8b6efbd53dfb58144edf7bb",
+    "operatorSource": "126501d898c8c8940eea3c61e2cc77c616981029",
+    "fullTests": 3618,
+    "nativeRun": "PG1843",
+    "catalogExit": 0,
+    "qualificationExit": 0,
+    "streams": 10,
+    "distinctSessionIdsMeasured": 9,
+    "inspectorTwoPointsSameSessionAndOrdered": true,
+    "archivedTwentyUnchanged": true,
+    "excludedOldHistoryCount": 16,
+    "normalOwnedStopExit": 0,
+    "independentPostExit": 0,
+    "currentAllTenUnitsKernelEmpty": true,
+    "classByteMismatch": 0,
+    "remaining": {
+      "LINE": 849,
+      "METHOD": 159,
+      "CLASS": 9,
+      "BRANCH": 663
+    },
+    "serverManifestSha256": "72c0e7822e2fbac50fc83e3a36e779bfd6ff895a5c6877fc68f97885935be3f6",
+    "coverage100": false,
+    "formalAccepted": false,
+    "wholeLeafAcceptedDelta": 0,
+    "managerFailed10Preserved": true,
+    "candidateUnitNotDeployed": true,
+    "effortCompletionRate": null,
+    "actualAllocatedPp": null,
+    "evidence": "evidence/01_PT/018_NK-OPS-001/710_当Root13_native・CRC・全3618合成_実行結果.md"
+  },
+  "branch": "dev-foundation",
+  "OS": "Ubuntu26.04.1 LAN/isolatedVM",
+  "JDK": "25.0.4",
+  "Jacoco": "0.8.15",
+  "ASM": "9.10.1",
+  "startedUTC": "2026-10-12T21:40:59.875289+00:00",
+  "completedUTC": "2026-10-12T21:41:08.971023+00:00",
+  "relatedBUG": [
+    "BUG-1179",
+    "BUG-1180"
+  ],
+  "relatedSSC": [
+    "SSC-282"
+  ],
+  "rawExported": false
+}
