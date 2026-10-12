@@ -31,7 +31,7 @@ def current_owner(path):
     return True
 
 @contextmanager
-def queued_gate(path, validate_owner=current_owner):
+def queued_gate(path, validate_owner=current_owner, require_completion=lambda:True):
     fd=os.open(path,os.O_RDWR|os.O_NOFOLLOW|os.O_CLOEXEC)
     acquired=threading.Event();errors=[]
     try:
@@ -43,9 +43,10 @@ def queued_gate(path, validate_owner=current_owner):
         # Kernel queues the successor while the original retains exclusion.
         thread=threading.Thread(target=wait,daemon=True);thread.start()
         yield acquired
-        if not acquired.wait(30)or errors:raise ValueError('retained gate handoff not complete')
-        thread.join(1)
-        if thread.is_alive():raise ValueError('gate waiter must be terminal')
+        if require_completion():
+            if not acquired.wait(30)or errors:raise ValueError('retained gate handoff not complete')
+            thread.join(1)
+            if thread.is_alive():raise ValueError('gate waiter must be terminal')
         identity(fd,path)
     finally:
         os.close(fd)
