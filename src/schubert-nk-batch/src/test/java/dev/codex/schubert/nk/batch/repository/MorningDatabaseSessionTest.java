@@ -171,7 +171,9 @@ final class MorningDatabaseSessionTest {
               assertFalse(session.retainedBackupSuccessful(manifest, ended.plusSeconds(1)));
               try (var rows =
                   sql.executeQuery(
-                      "select count(*),coalesce(string_agg(status,',' order by step),'') from schubert.batch_runs where run_id='70700000-2222-4333-8444-555555555555'")) {
+                      "select count(*),coalesce(string_agg(status,',' order by step),'') from"
+                          + " schubert.batch_runs where"
+                          + " run_id='70700000-2222-4333-8444-555555555555'")) {
                 assertTrue(rows.next());
                 assertEquals(expectedRows, rows.getInt(1));
                 assertEquals(
@@ -183,7 +185,9 @@ final class MorningDatabaseSessionTest {
                 assertEquals(
                     1,
                     sql.executeUpdate(
-                        "delete from schubert.batch_runs where id=(select min(id) from schubert.batch_runs where run_id='70700000-2222-4333-8444-555555555555')"));
+                        "delete from schubert.batch_runs where id=(select min(id) from"
+                            + " schubert.batch_runs where"
+                            + " run_id='70700000-2222-4333-8444-555555555555')"));
             }
           } catch (SQLException failure) {
             throw new IOException("isolated retention fixture", failure);
@@ -204,7 +208,8 @@ final class MorningDatabaseSessionTest {
     }
     try (var statement =
         observer.prepareStatement(
-            "select coalesce(jsonb_agg(to_jsonb(t) order by id),'[]'::jsonb)::text from schubert.batch_runs t where run_id=?")) {
+            "select coalesce(jsonb_agg(to_jsonb(t) order by id),'[]'::jsonb)::text from"
+                + " schubert.batch_runs t where run_id=?")) {
       statement.setObject(1, run.id());
       try (var rows = statement.executeQuery()) {
         assertTrue(rows.next());
@@ -375,7 +380,9 @@ final class MorningDatabaseSessionTest {
                                 DriverManager.getConnection(actualUrl, "schubert_batch", "");
                             var sql =
                                 child.prepareStatement(
-                                    "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values(?,?,?,?,1,?,?,?,0,0,0,0,?,?)")) {
+                                    "insert into"
+                                        + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary)"
+                                        + " values(?,?,?,?,1,?,?,?,0,0,0,0,?,?)")) {
                           assertTrue(advisory(child));
                           child.setAutoCommit(false);
                           for (int step = 0; step < names.size(); step++) {
@@ -437,7 +444,9 @@ final class MorningDatabaseSessionTest {
                 long priorId = 595000000L + scenario;
                 try (var sql =
                     observer.prepareStatement(
-                        "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary,expiry_cutoff_at,expiry_before_count,expiry_after_count) values(?,?,?,'CLEAN_EXPIRY',1,?,?,'SUCCESS',1,1,0,17,null,null,?,2,1)")) {
+                        "insert into"
+                            + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary,expiry_cutoff_at,expiry_before_count,expiry_after_count)"
+                            + " values(?,?,?,'CLEAN_EXPIRY',1,?,?,'SUCCESS',1,1,0,17,null,null,?,2,1)")) {
                   sql.setLong(1, priorId);
                   sql.setObject(2, priorRun.id());
                   sql.setObject(3, fixtureDate);
@@ -548,7 +557,10 @@ final class MorningDatabaseSessionTest {
                                 DriverManager.getConnection(actualUrl, "schubert_batch", "");
                             var sql =
                                 child.prepareStatement(
-                                    "update schubert.batch_runs set status=?,ended_at=?,target_count=1,success_count=?,failure_count=?,byte_count=25,error_code=?,error_summary=?,expiry_cutoff_at=?,expiry_before_count=1,expiry_after_count=? where id=? and run_id=? and step='CLEAN_EXPIRY' and status='RUNNING'")) {
+                                    "update schubert.batch_runs set"
+                                        + " status=?,ended_at=?,target_count=1,success_count=?,failure_count=?,byte_count=25,error_code=?,error_summary=?,expiry_cutoff_at=?,expiry_before_count=1,expiry_after_count=?"
+                                        + " where id=? and run_id=? and step='CLEAN_EXPIRY' and"
+                                        + " status='RUNNING'")) {
                           assertTrue(advisory(child));
                           sql.setString(1, List.of("SUCCESS", "WARNING", "FAILED").get(terminal));
                           sql.setObject(2, began.plusSeconds(5).atOffset(java.time.ZoneOffset.UTC));
@@ -923,7 +935,11 @@ final class MorningDatabaseSessionTest {
                               DriverManager.getConnection(actualUrl, "schubert_batch", "");
                           var statement =
                               child.prepareStatement(
-                                  "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values (588201,?,'2026-10-07','CLEAN_NOTIFICATION',1,'2026-10-07T00:00:11Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-07','CLEAN_QUESTION',1,'2026-10-07T00:00:11Z','2026-10-07T00:00:12Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch command failed')")) {
+                                  "insert into"
+                                      + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary)"
+                                      + " values"
+                                      + " (588201,?,'2026-10-07','CLEAN_NOTIFICATION',1,'2026-10-07T00:00:11Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-07','CLEAN_QUESTION',1,'2026-10-07T00:00:11Z','2026-10-07T00:00:12Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch"
+                                      + " command failed')")) {
                         assertTrue(advisory(child));
                         statement.setObject(1, run.id());
                         statement.setObject(2, run.id());
@@ -1048,7 +1064,9 @@ final class MorningDatabaseSessionTest {
     try (var admin = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var s = admin.createStatement()) {
       s.execute(
-          "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count) values"
+          "insert into"
+              + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
+              + " values"
               + "(670001,'38700000-2222-4333-8444-555555555555','2026-11-28','BACKUP_DB',1,'2026-11-28T02:00:00Z','2026-11-28T02:00:03Z','SUCCESS',1,1,26),"
               + "(670002,'38700000-2222-4333-8444-555555555555','2026-11-28','BACKUP_CONFIG',1,'2026-11-28T02:00:00Z','2026-11-28T02:00:03Z','SUCCESS',2,2,67)");
     }
@@ -1137,7 +1155,10 @@ final class MorningDatabaseSessionTest {
       try (var s = connection.createStatement();
           var rows =
               s.executeQuery(
-                  "select string_agg(step||':'||attempt||':'||status||':'||target_count||':'||success_count||':'||failure_count||':'||byte_count,',' order by step,attempt) from schubert.batch_runs where run_id='38700000-2222-4333-8444-555555555555'")) {
+                  "select"
+                      + " string_agg(step||':'||attempt||':'||status||':'||target_count||':'||success_count||':'||failure_count||':'||byte_count,','"
+                      + " order by step,attempt) from schubert.batch_runs where"
+                      + " run_id='38700000-2222-4333-8444-555555555555'")) {
         assertTrue(rows.next());
         assertEquals(
             "BACKUP_CONFIG:1:SUCCESS:2:2:0:67,BACKUP_CONFIG:2:SKIPPED:0:0:0:0,BACKUP_DB:1:SUCCESS:1:1:0:26,BACKUP_DB:2:SKIPPED:0:0:0:0",
@@ -1271,7 +1292,9 @@ final class MorningDatabaseSessionTest {
     try (var admin = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var statement = admin.createStatement()) {
       String row =
-          "insert into schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count) values";
+          "insert into"
+              + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
+              + " values";
       statement.execute(
           row
               + "(670101,'38710000-2222-4333-8444-555555555555','2026-11-30','BACKUP_DB',1,'2026-11-30T02:00:00Z','2026-11-30T02:00:03Z','SUCCESS',1,1,26)");
@@ -1294,7 +1317,9 @@ final class MorningDatabaseSessionTest {
             IOException.class,
             () -> subject.execute(credential(), s -> s.successfulBackup(run, observed)));
         statement.execute(
-            "update schubert.batch_runs set started_at='2026-11-30T02:00:00Z',ended_at='2026-11-30T02:00:03Z',attempt=1,target_count=2,success_count=2,byte_count=67 where id=670102");
+            "update schubert.batch_runs set"
+                + " started_at='2026-11-30T02:00:00Z',ended_at='2026-11-30T02:00:03Z',attempt=1,target_count=2,success_count=2,byte_count=67"
+                + " where id=670102");
       }
       assertTrue(subject.execute(credential(), s -> s.successfulBackup(run, observed)).isPresent());
       assertThrows(
@@ -1314,7 +1339,8 @@ final class MorningDatabaseSessionTest {
           () -> subject.execute(credential(), s -> s.beginResumeBackup(null, observed)));
       try (var rows =
           statement.executeQuery(
-              "select count(*) from schubert.batch_runs where run_id='38710000-2222-4333-8444-555555555555' and status='SKIPPED'")) {
+              "select count(*) from schubert.batch_runs where"
+                  + " run_id='38710000-2222-4333-8444-555555555555' and status='SKIPPED'")) {
         assertTrue(rows.next());
         assertEquals(0, rows.getInt(1));
         assertFalse(rows.next());
@@ -1388,7 +1414,9 @@ final class MorningDatabaseSessionTest {
         var s = c.createStatement();
         var rows =
             s.executeQuery(
-                "select string_agg(step||':'||attempt||':'||status||':'||error_code,',' order by step,attempt) from schubert.batch_runs where run_id='38500000-2222-4333-8444-555555555555'")) {
+                "select string_agg(step||':'||attempt||':'||status||':'||error_code,',' order by"
+                    + " step,attempt) from schubert.batch_runs where"
+                    + " run_id='38500000-2222-4333-8444-555555555555'")) {
       assertTrue(rows.next());
       assertEquals(
           "BACKUP_CONFIG:1:FAILED:ABANDONED,BACKUP_CONFIG:2:FAILED:COMMAND_FAILURE,BACKUP_DB:1:FAILED:ABANDONED,BACKUP_DB:2:FAILED:COMMAND_FAILURE",
@@ -1429,6 +1457,8 @@ final class MorningDatabaseSessionTest {
         statements,
         rows;
     Properties retained;
+    // MDB-PROJ-1737: optional literal provider rows, never schema/root authority.
+    List<Map<String, Object>> successfulRows;
     String faultAt = "";
     Throwable failure = new SQLException("PRIVATE");
 
@@ -1545,7 +1575,13 @@ final class MorningDatabaseSessionTest {
             }
             if (m.equals("setObject") || m.equals("setString")) return null;
             if (!m.equals("executeQuery")) throw new AssertionError(m);
-            if (kind.equals("HISTORY")) throw new SQLException("PRIVATE");
+            if (kind.equals("HISTORY")) {
+              if (successfulRows == null) throw new SQLException("PRIVATE");
+              assertTrue(
+                  sql.startsWith(
+                      "select id,business_date,step,attempt,started_at,ended_at,target_count,"));
+              assertTrue(sql.endsWith("order by started_at desc,id desc limit 2 for update"));
+            }
             if (nullRows) return null;
             rows++;
             int[] index = {0};
@@ -1559,10 +1595,18 @@ final class MorningDatabaseSessionTest {
                   }
                   event(kind + ".row." + method);
                   return switch (method) {
-                    case "next" -> ++index[0] <= rowCounts.getOrDefault(kind, rowCount);
-                    case "getString" -> role.get((String) args[0]);
+                    case "next" ->
+                        ++index[0]
+                            <= (kind.equals("HISTORY")
+                                ? successfulRows.size()
+                                : rowCounts.getOrDefault(kind, rowCount));
+                    case "getString" ->
+                        kind.equals("HISTORY")
+                            ? successfulRows.get(index[0] - 1).get((String) args[0])
+                            : role.get((String) args[0]);
                     case "getObject" -> {
                       String name = (String) args[0];
+                      if (kind.equals("HISTORY")) yield successfulRows.get(index[0] - 1).get(name);
                       if (kind.equals("LOCK") && nullLock) yield null;
                       yield kind.equals("ROLE")
                           ? role.get(name)
@@ -2047,7 +2091,8 @@ final class MorningDatabaseSessionTest {
         var statement = connection.createStatement();
         var rows =
             statement.executeQuery(
-                "select count(*) from schubert.batch_runs where run_id='31400000-2222-4333-8444-555555555555'")) {
+                "select count(*) from schubert.batch_runs where"
+                    + " run_id='31400000-2222-4333-8444-555555555555'")) {
       assertTrue(rows.next());
       assertEquals(0, rows.getInt(1));
       assertFalse(rows.next());
@@ -2079,7 +2124,8 @@ final class MorningDatabaseSessionTest {
         var s = c.createStatement();
         var rows =
             s.executeQuery(
-                "select string_agg(step||':'||status||':'||attempt,',' order by step) from schubert.batch_runs where run_id='31100000-2222-4333-8444-555555555555'")) {
+                "select string_agg(step||':'||status||':'||attempt,',' order by step) from"
+                    + " schubert.batch_runs where run_id='31100000-2222-4333-8444-555555555555'")) {
       assertTrue(rows.next());
       assertEquals("BACKUP_CONFIG:RUNNING:1,BACKUP_DB:RUNNING:1", rows.getString(1));
       assertFalse(rows.next());
@@ -2132,7 +2178,8 @@ final class MorningDatabaseSessionTest {
           var s = c.createStatement();
           var rows =
               s.executeQuery(
-                  "select count(*) from schubert.batch_runs where run_id='31100001-2222-4333-8444-555555555555'")) {
+                  "select count(*) from schubert.batch_runs where"
+                      + " run_id='31100001-2222-4333-8444-555555555555'")) {
         assertTrue(rows.next());
         assertEquals(afterCommit ? 2 : 0, rows.getInt(1));
       }
@@ -2369,7 +2416,9 @@ final class MorningDatabaseSessionTest {
     try (var statement = connection.createStatement();
         var rows =
             statement.executeQuery(
-                "select exists(select 1 from pg_locks where locktype='advisory' and pid=pg_backend_pid() and classid=0 and objid=71419602 and objsubid=1 and granted)")) {
+                "select exists(select 1 from pg_locks where locktype='advisory' and"
+                    + " pid=pg_backend_pid() and classid=0 and objid=71419602 and objsubid=1 and"
+                    + " granted)")) {
       assertTrue(rows.next());
       boolean value = rows.getBoolean(1);
       assertFalse(rows.next());
