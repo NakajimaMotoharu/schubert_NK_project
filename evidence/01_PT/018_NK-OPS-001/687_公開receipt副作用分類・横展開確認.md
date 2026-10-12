@@ -1,0 +1,11 @@
+# 687 NK-OPS-001 公開receipt副作用分類（YKT922、host限定監査）
+
+関連SS343353354/SSC198262/QA047/BUG1154/YKT922、WBS-N13。新public operationの再実行ではない。開始費事前freeze無しをevent0519にnull/遅延として明記、N/T/個別実費null、原/v3見積不変更。
+
+当factory pg1691.sourcesの実生成Java completion literalをJSON互換escapeで独立decodeし、七unique propertyを照合：genuineParentDone/finiteOrdinaryPublication/allNewScopesReturnedNormally/originalBackupStartupRowsPreserved/startsStopsReloadsSqlWrites0/canonicalEpochApprovalCurrentChanged=true、oldUnknownNormalized=false。予防反例：epoch変更false、旧EpochWrites0 field、Unknown正常化true、重複、literal\\n混入、unknown fieldは全拒否。Java Stringと実出力の境界を照合し、substring検査だけで完了にしない。
+
+`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<fixed pyflakes> python3 -B -m unittest pg1760_publication_receipt_audit_test pg1696_completed_publication_independent_post_test`、3unittest/exit0、生成static0、VM/公開/配備/epoch操作0。Production PT数へ加算0。旧actual1695の誤receiptはprivate原byte/hashのまま、独立1696はactual0/all24/187/原本Backup・全資源/新canonicalEpoch/approval/current/oldLinkPrivateを七phaseで確認し、oldReceiptBug1154PreservedNotInferred=true（この歴史証拠を現在の新公開としない）。
+
+横展開：1691未来factoryは二副作用fieldへ訂正済み、1696別postと678は旧誤fieldを根拠から除外し全phaseを要求、1306系旧templateは歴史専用・未来ordinaryは1691変換を経由して当decode/unique oracleを必須とする。unused1683/RO1688はepoch非変更の別操作なのでEpochWrites0が正当、ordinaryへの生継承は不可。旧完成fileを書換え/再公開して解決しない。YKT921 proc-reap全context監査は別未完。
+
+状態=BUG1154限定分類/当横展開確認完了、PGPT正式1964PT/53scope/wholeleaf0不変、Main2741/当native9/残8661699669は別の限定測定。現在の全6PG1755はRUNNINGで途中合格化0。
