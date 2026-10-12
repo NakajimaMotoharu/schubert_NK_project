@@ -159,4 +159,108 @@ final class RootGenerationCounterexampleTest {
       assertEquals(2, f.probes);
     }
   }
+
+  @Test
+  void rootgen1741005AuthorityDriftAfterParentRecheckCannotAdmitChild() throws Exception {
+    for (String fault : List.of("uid", "fs", "exe", "boot", "init")) {
+      var f =
+          new RootStartupContextTest.LaunchFixture() {
+            boolean armed;
+            final java.util.Map<String, Integer> counts = new java.util.HashMap<>();
+
+            boolean drift(String name) {
+              // A parent recheck comprises two complete self observations. Only
+              // the next target observation changes the selected kernel fact.
+              return armed && counts.merge(name, 1, Integer::sum) == 3 && name.equals(fault);
+            }
+
+            @Override
+            public long effectiveUid() {
+              return drift("uid") ? 1000 : super.effectiveUid();
+            }
+
+            @Override
+            public String procFilesystem() throws IOException {
+              return drift("fs") ? "tmpfs" : super.procFilesystem();
+            }
+
+            @Override
+            public String initExecutable() throws IOException {
+              return drift("exe") ? "/usr/bin/foreign" : super.initExecutable();
+            }
+
+            @Override
+            public byte[] boot() throws IOException {
+              return drift("boot")
+                  ? RootStartupContextTest.bytes("22222222-2222-2222-2222-222222222222\n")
+                  : super.boot();
+            }
+
+            @Override
+            public byte[] stat(long pid) throws IOException {
+              return pid == 1 && drift("init")
+                  ? RootStartupContextTest.bytes(RootStartupContextTest.stat(1, "99999"))
+                  : super.stat(pid);
+            }
+          };
+      var root = f.context();
+      var morning = root.capture(RootStartupContext.Service.MORNING);
+      f.armed = true;
+      assertThrows(
+          IOException.class,
+          () -> root.captureServiceRoot(morning, RootStartupContext.Service.API));
+      assertEquals(3, f.counts.get(fault));
+      assertEquals(0, f.targetReads);
+    }
+  }
+
+  @Test
+  void rootgen1741006PidMinimumInvocationZeroAndChangingTicksReject() throws Exception {
+    for (String field : List.of("pid", "invocation")) {
+      var f = new RootStartupContextTest.LaunchFixture();
+      var root = f.context();
+      var morning = root.capture(RootStartupContext.Service.MORNING);
+      f.targetUnit =
+          field.equals("pid")
+              ? f.targetUnit.replace("MainPID=200", "MainPID=1")
+              : f.targetUnit.replace("2".repeat(32), "0".repeat(32));
+      assertThrows(
+          IOException.class,
+          () -> root.captureServiceRoot(morning, RootStartupContext.Service.API));
+    }
+    var f =
+        new RootStartupContextTest.LaunchFixture() {
+          int targetStats;
+
+          @Override
+          public byte[] stat(long pid) throws IOException {
+            if (pid == 200)
+              return RootStartupContextTest.bytes(
+                  RootStartupContextTest.stat(200, ++targetStats == 1 ? "999" : "1000"));
+            return super.stat(pid);
+          }
+        };
+    var root = f.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    assertThrows(
+        IOException.class, () -> root.captureServiceRoot(morning, RootStartupContext.Service.API));
+    assertEquals(2, f.targetStats);
+  }
+
+  @Test
+  void rootgen1741007WrongDeadlineRoleCannotBorrowOtherUnitBudget() throws Exception {
+    var f = new RootStartupContextTest.LaunchFixture();
+    var root = f.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    assertThrows(IOException.class, () -> root.maintenanceDeadline(child, Long.MAX_VALUE));
+    assertThrows(IOException.class, () -> root.serviceRootDeadline(morning, Long.MAX_VALUE));
+  }
+
+  @Test
+  void rootgen1741008KernelStatusDelIsNotAllowedAscii() {
+    var invalid = RootStartupContextTest.bytes("Uid: 0 0 0 0\nName: java" + ((char) 127) + "\n");
+    assertThrows(IOException.class, () -> RootStartupContext.rootUid(invalid));
+    assertEquals(127, invalid[invalid.length - 2]);
+  }
 }
