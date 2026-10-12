@@ -31,7 +31,9 @@ final class MorningServiceUnitTest {
     exact(content, "Requires", "postgresql.service");
     assertTrue(content.contains("dev.codex.schubert.nk.batch.file.MorningProcessMain"));
     assertFalse(content.contains("/bin/true"));
-    assertFalse(content.contains("SuccessExitStatus="));
+    // SSC278/BUG1162: only normal WARNING10 joins systemd's default SUCCESS0.
+    // Unit success alone never substitutes for same-root DONE/gates/owned close.
+    exact(content, "SuccessExitStatus", "10");
   }
 
   @Test
