@@ -13,12 +13,12 @@ def main():
     os.umask(0o077)
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('clean fixed operator required')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    candidate=json.loads((W/'pg1535-candidate-build-v1.safe.json').read_bytes())
+    candidate=json.loads((W/'pg1544-candidate-build-v1.safe.json').read_bytes())
     if candidate['actualExit']!=0 or not candidate['signatureVerified'] or candidate['candidateSource']!='4d6bcbddb417b76d27e52d5d9640752c300edccf' or not candidate['candidateNotDeployed']:
         raise ValueError('signed independently qualified candidate required')
     prior=json.loads((W/'pg1396-frozen-v3.safe.json').read_bytes())
     if prior['actualExit']!=0 or prior['productionSource']!='769ddb15cd735c25fef581b5f9850ef9d0053c0f':raise ValueError('current immutable helper qualification required')
-    source=W/'pg1535-release-v1';signature=P/'pg1535-manifest-v1.sig'
+    source=W/'pg1544-release-v1';signature=P/'pg1544-manifest-v1.sig'
     if sha(source/'RELEASE-MANIFEST.json')!=candidate['manifestSha256'] or sha(signature)!=candidate['signatureSha256']:raise ValueError('signed input changed')
     out=W/TOOLS;out.mkdir(mode=0o700);build=W/'pg1537-pending-unused-build-v1';build.mkdir(mode=0o700)
     archive=P/'pg1538-release-v1.tar'

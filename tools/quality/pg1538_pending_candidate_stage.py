@@ -17,12 +17,12 @@ def main():
     result=namespace['main']()
     if result not in [None,0]:raise ValueError('immutable tool stage failed')
     remote='/home/ubuntu/pg1538-candidate-input-v1'
-    archive=P/'pg1538-release-v1.tar';sig=P/'pg1535-manifest-v1.sig';bundle=W/TOOLS/'bundle.safe.json'
+    archive=P/'pg1538-release-v1.tar';sig=P/'pg1544-manifest-v1.sig';bundle=W/TOOLS/'bundle.safe.json'
     if hashlib.sha256(archive.read_bytes()).hexdigest()!=frozen['archiveSha256'] or hashlib.sha256(bundle.read_bytes()).hexdigest()!=frozen['bundleSha256']:
         raise ValueError('fixed input archive or bundle changed')
     log=W/'pg1538-candidate-input-stage-v1.private.log'
     with log.open('xb')as f:
-        r=subprocess.run(SSH+['test ! -e '+remote+' && sudo -n test ! -e /opt/schubert-nk/releases/0.1.0-PG1535 && sudo -n test ! -e /var/lib/pgpt-s1-preservation/pg1535-manifest.sig && mkdir -m700 '+remote],stdout=f,stderr=f,check=True)
+        r=subprocess.run(SSH+['test ! -e '+remote+' && sudo -n test ! -e /opt/schubert-nk/releases/0.1.0-PG1544 && sudo -n test ! -e /var/lib/pgpt-s1-preservation/pg1544-manifest.sig && mkdir -m700 '+remote],stdout=f,stderr=f,check=True)
         options=['-q','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile='+str(P/'known_hosts'),'-i',str(P/'vm-access'),'-P','22222']
         r=subprocess.run(['scp',*options,str(archive),str(sig),str(bundle),'ubuntu@127.0.0.1:'+remote+'/'],stdout=f,stderr=f,check=True)
         f.flush();os.fsync(f.fileno())

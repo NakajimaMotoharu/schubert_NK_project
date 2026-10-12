@@ -39,7 +39,7 @@ def refs(bom, bundle):
     acquire=raw[begin:end]
     acquire=once(acquire,' before_inventory=[h.capture()for h in held];fixed_parent=actor()', ' before_inventory=[h.capture()for h in held]')
     candidate=f'''
- release=pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG1535')
+ release=pathlib.Path('/opt/schubert-nk/releases/0.1.0-PG1544')
  manifest=(release/'RELEASE-MANIFEST.json').read_bytes();require(hashlib.sha256(manifest).hexdigest()=={bom!r})
  data=json.loads(manifest);require(data['source']['commit']=='4d6bcbddb417b76d27e52d5d9640752c300edccf'and len(data['artifacts'])==187 and data['versions']['schema']=='028')
  records=data['artifacts']+[{{'path':'RELEASE-MANIFEST.json','size':len(manifest),'sha256':{bom!r}}}]
@@ -48,16 +48,16 @@ def refs(bom, bundle):
  held.append(contract.HeldInventory(str(release),records,0).open())
  bundle_raw=pathlib.Path('/home/ubuntu/pg1538-candidate-input-v1/bundle.safe.json').read_bytes();require(hashlib.sha256(bundle_raw).hexdigest()==BUNDLE_HASH)
  signature_hash=json.loads(bundle_raw)['signatureSha256']
- held.append(contract.HeldInventory(str(BASE),[{{'path':'pg1535-manifest.sig','size':64,'sha256':signature_hash}}],0).open_file())
+ held.append(contract.HeldInventory(str(BASE),[{{'path':'pg1544-manifest.sig','size':64,'sha256':signature_hash}}],0).open_file())
  before_inventory=[h.capture()for h in held]
 '''
     acquire='def acquire_after_placement():\n global before_inventory\n'+acquire+candidate
     raw=raw[:begin]+' fixed_parent=actor();before_inventory=[];placed=False\n'+raw[end:]
-    stage=archive_placement().replace('d5b00104280028d9ea81b44c1d1c805f3c2861ed','4d6bcbddb417b76d27e52d5d9640752c300edccf').replace('0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',bom).replace('PG1068','PG1535').replace('pg1068','pg1535').replace('pg1071','pg1538')
+    stage=archive_placement().replace('d5b00104280028d9ea81b44c1d1c805f3c2861ed','4d6bcbddb417b76d27e52d5d9640752c300edccf').replace('0b617d455553f89cb15043ea9555c4d81ddf3e1dc27176af62e5f50ba8931b0d',bom).replace('PG1068','PG1544').replace('pg1068','pg1544').replace('pg1071','pg1538')
     stage=stage[:stage.rindex('place_candidate()')]
     idx=raw.index('try:\n phase=');raw=raw[:idx]+'BUNDLE_HASH='+repr(bundle)+'\n'+stage+'\n'+acquire+'\n'+PARENT_CONTRACT+'\n'+raw[idx:]
     raw=once(raw,"  if action=='run':PEER_CLOSED=True", "  if action in {'run','release'}:require(placed)\n  if action=='run':PEER_CLOSED=True")
-    raw=once(raw,"  if action=='release':\n   require(PEER_CLOSED)", "  if action=='prepared':\n   require(not placed and not held)\n   roots=[pathlib.Path('/opt/schubert-nk/releases'),BASE]\n   before_roots=[parent_state(p)for p in roots];begin_ns=time.time_ns()\n   place_candidate()\n   end_ns=time.time_ns()\n   for path,before,entry,links in zip(roots,before_roots,['0.1.0-PG1535','pg1535-manifest.sig'],[1,0],strict=True):\n    parent_delta(before,parent_state(path),entry,links,begin_ns,end_ns)\n   acquire_after_placement();placed=True\n   value=verify_current()\n  if action=='release':\n   require(PEER_CLOSED)")
+    raw=once(raw,"  if action=='release':\n   require(PEER_CLOSED)", "  if action=='prepared':\n   require(not placed and not held)\n   roots=[pathlib.Path('/opt/schubert-nk/releases'),BASE]\n   before_roots=[parent_state(p)for p in roots];begin_ns=time.time_ns()\n   place_candidate()\n   end_ns=time.time_ns()\n   for path,before,entry,links in zip(roots,before_roots,['0.1.0-PG1544','pg1544-manifest.sig'],[1,0],strict=True):\n    parent_delta(before,parent_state(path),entry,links,begin_ns,end_ns)\n   acquire_after_placement();placed=True\n   value=verify_current()\n  if action=='release':\n   require(PEER_CLOSED)")
     raw=raw.replace("'mutation0':True","'unusedCandidatePlaced':True,'currentApprovalEpochDbUnitsUnchanged':True")
     compile(raw,'<fixed partial-original unused placement>', 'exec')
     return raw
