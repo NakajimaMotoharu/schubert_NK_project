@@ -28,6 +28,10 @@ SIG=P/'pg1535-manifest-v1.sig'
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
+def independent_release(raw):
+    # Never share mutable candidate rows with the trusted before oracle.
+    return json.loads(raw), artifacts(json.loads(raw)['artifacts'])
+
 def validate_gate(outer):
     if type(outer) is not dict or type(outer.get('result')) is not dict:
         raise ValueError('independently qualified whole gate required')
@@ -69,7 +73,7 @@ def main():
     require(outer['qualificationSourceSha256']==hashlib.sha256(server_source().encode()).hexdigest())
     old_raw=(OLD/'RELEASE-MANIFEST.json').read_bytes()
     require(hashlib.sha256(old_raw).hexdigest()=='ecae1310716f356d763b346528988ccdbfad0eccf0b2b27b1f3e77ed546afc99')
-    data=json.loads(old_raw);baseline=artifacts(data['artifacts'])
+    data,baseline=independent_release(old_raw)
     require(data['source']['commit']==OLD_SOURCE and data['versions']['schema']=='028')
     require(not OLD.is_symlink() and all(not p.is_symlink()and(p.is_dir()or p.is_file())for p in OLD.rglob('*')))
     require({str(p.relative_to(OLD))for p in OLD.rglob('*')if p.is_file()}==set(baseline)|{'RELEASE-MANIFEST.json','SHA256SUMS'})

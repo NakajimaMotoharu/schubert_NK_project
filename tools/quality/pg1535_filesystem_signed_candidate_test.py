@@ -1,5 +1,6 @@
 """Independent candidate admission expectations and fixed receive-only transport."""
 import unittest
+import json
 from unittest.mock import patch
 import pg1535_filesystem_signed_candidate as target
 
@@ -46,5 +47,11 @@ class GateTest(unittest.TestCase):
             elif mode=='offset':d[name]['lineOffset']=2
             else:d[name]['nonLineBytesIdentical']=False
             with self.assertRaises(ValueError):target.validate_gate(v)
+
+    def test_before_oracle_never_aliases_updated_rows(self):
+        raw=json.dumps({'artifacts':[{'path':'fixture/'+str(i),'size':1,'sha256':'0'*64}for i in range(187)]}).encode()
+        data,before=target.independent_release(raw)
+        for row in data['artifacts']:row['size']=2;row['sha256']='1'*64
+        for i in range(187):self.assertEqual(before['fixture/'+str(i)],{'path':'fixture/'+str(i),'size':1,'sha256':'0'*64})
 
 if __name__=='__main__':unittest.main()
