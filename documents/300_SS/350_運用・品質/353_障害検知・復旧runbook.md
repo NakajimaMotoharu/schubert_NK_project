@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+## SSC268 publication-only復旧後のcurrent Unit collection（2026-10-12）
+
+SS343 SSC268の当warm停止/normal scope証拠とcurrent GC full18/full32を分離する。INV/実行履歴が空/0でも単独で停止・成功・正常close・旧Root DONEを推定しない。当source/boot/BOM/同宣言と真正PID1/vendor・一回停止・typed intent限定退役をimmutableで保持してから、current三Unitだけのstrict cold表示、全元DB/原本/Backup/epoch/permit/native、全本人/tasks/FD/lock/peer/advisory/bus0を独立二読し、新十Refの正常返却を要する。未知差分は隔離しroot再起動/再signal/reload/再失効/再退役を発行しない。旧1508拒否/旧metadata closeUNKNOWNはそのまま記録、新readonly資格0だけを後続fresh resumeの候補条件へ使用する。RD/UI/業務仕様・元Root1800秒・品質451不変更。
+
 ## SSC266 publication-only partial Rootの復旧分類（2026-10-12）
 
 SS343 SSC266を適用し、現1477の同current署名/十full32/全24DB/原本・Backupと、Root1456 timeout143/DONE無し、startup三entry（INVALID/permit/publication intent、owner/launch無し）を別freshM-A/RODB/advisory/同peer/十Refの所有へ再認証する。simple Broker真正done一記録とoneshot二記録をType別に区別し、不在Starting/子owner/Pairを作らない。現同cohortだけ逆順Expiry→Artemis→Cleanupの一回正規停止/全原値・全kernel後条件、既INVALID不変、typed publication intentのみ退役/dirsync、全新scope正常返却と独立postを行う。旧143/UNKNOWNを成功化しない。

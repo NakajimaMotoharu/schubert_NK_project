@@ -1,0 +1,64 @@
+{
+  "productionSource": "769ddb15cd735c25fef581b5f9850ef9d0053c0f",
+  "branch": "dev-foundation",
+  "operatorSource": "c43aa4a6bde90d27f97e8cb73cc578a2c3a73b23",
+  "testIds": [
+    "PT-OPS-PUB-RECOVER-003",
+    "PT-OPS-PUB-GC-001",
+    "PT-OPS-PUB-GC-002"
+  ],
+  "wbsLeafIds": [
+    "WBS-P018-03.03",
+    "WBS-N10",
+    "WBS-N17"
+  ],
+  "records": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1505-publication-recovery-frozen-v3.safe.json",
+      "sha256": "b65b4fc73be7bde44bd0d0df3db45563d8b841f7c1d57be641d7fc98f46ba066",
+      "actualExit": 0
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1506-publication-recovery-stage-v3/manifest.safe.json",
+      "sha256": "187c9bcefee7b1a3cab47acd2cdfd13c0ff429a2bdd4fb9d8608585f2a66530f",
+      "actualExit": 0
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1507-publication-recovery-once-v3/manifest.safe.json",
+      "sha256": "58f7065771ef733d4f14c555ec8d998a970bc832161714dd3ac56dae329edd62",
+      "actualExit": 0
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg1511-publication-gc-closing-v1/manifest.safe.json",
+      "sha256": "8d9d6910bdd499e994a3795d070074ab272f685f271b27f4788362bb576e9932",
+      "actualExit": 0
+    }
+  ],
+  "jdk": "25.0.4",
+  "os": "Ubuntu26.04.1",
+  "executionTime": null,
+  "timeMissingReason": "Original manifests omit wallclock timestamp; no inference",
+  "formalAccepted": false,
+  "wholeLeafAcceptedDelta": 0,
+  "productionCoverageGain": 0,
+  "bugs": [
+    "BUG1115",
+    "BUG1120"
+  ],
+  "ssc": [
+    "SSC266",
+    "SSC268"
+  ],
+  "specResultRefs": [
+    "evidence/01_PT/018_NK-OPS-001/661_Publication限定復旧・strictGC独立照合仕様.md",
+    "evidence/01_PT/018_NK-OPS-001/662_Publication限定復旧・strictGC独立照合結果.md"
+  ],
+  "commands": [
+    "python3 -B tools/quality/pg1505_publication_recovery_compile_v3.py",
+    "python3 -B tools/quality/pg1506_publication_recovery_stage_v3.py",
+    "python3 -B tools/quality/pg1507_publication_recovery_once_v3.py",
+    "python3 -B tools/quality/pg1511_publication_gc_closing.py"
+  ],
+  "replayForbidden": true,
+  "rawPrivateDataIncluded": false
+}
