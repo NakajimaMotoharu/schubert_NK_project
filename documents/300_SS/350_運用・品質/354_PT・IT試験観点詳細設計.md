@@ -1,4 +1,6 @@
 # PT・IT試験観点詳細設計
+SSC277：当Bootstrap31/90の共有/run同linked像と全他97FDを独立fixtureに固定し、旧29/32/別target/一方のみ差/chrono逆行未来/extra-missing/型不正を拒否する。hostqueueは正常引継ぎ/失敗保持を別oracleで確認し、元guest拒否を合格又は二次待機エラーへ置換0。全元値/DB0/一回TERM/有限reap/別wholepostはSSC276を維持、旧1724失敗の再送0。
+
 SSC276（SS343/BUG1156/YKT924）：current99FD/子0/全原値・serverpeer/advisory0・socket0/soleM-A/OFDを独立証明し、旧livepeer仮定失敗を成功化しない。hostgate旧owner/foreign/reuse/競合と引継ぎ期限、全fresh像のpidfd/予約/TERM前差、FD余剰欠落/role/Source/null/bool/共有祖先chronoを各拒否する。普通TERM一回/有限reap/旧UNKNOWN保存・別全post資源0を実証。actual Expected constructorの正規3/4桁、suffix1/32境界、非numeric/桁過不足/空/null、role/database/readOnly/advisory全契約を独立Javafixtureで取得前検査し、現label拒否時のロック/DB/Ref/Unit callback0を確認する。正常new-onlyverify/existingADMINexecute/全postと同source nativeを別資格、正式/CHR/ITST合格へ自動加算0。
 
 
