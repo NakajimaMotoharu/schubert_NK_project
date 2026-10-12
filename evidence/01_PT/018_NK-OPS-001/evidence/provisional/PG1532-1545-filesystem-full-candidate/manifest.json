@@ -1,0 +1,441 @@
+{
+  "programId": "NK-OPS-001",
+  "testIds": [
+    "PT-OPS-FSTYPE-REG-001",
+    "PT-OPS-FSTYPE-CAND-001",
+    "PT-OPS-FSTYPE-CAND-002"
+  ],
+  "branch": "dev-foundation",
+  "productionSource": "4d6bcbddb417b76d27e52d5d9640752c300edccf",
+  "snapshot": "308d144b6e51ee91f502795fb5730e004643c304",
+  "environment": "Dedicated LAN Ubuntu26.04.1/x86-64/JDK25.0.4/Maven3.9.12/PostgreSQL18.6/Node24.19.0/ShellCheck0.11.0/ACL2.3.2, fixed worker1; existing cold isolated VM boot3d69",
+  "full": {
+    "actualExit": 0,
+    "formalAccepted": false,
+    "qualificationSourceSha256": "732849f4f914b2369b301057754fe255b4073ebbb5f7aec6afdf60682140c8a7",
+    "result": {
+      "FESFlakyNotRun": 0,
+      "actualExit": 0,
+      "addedClasses": [
+        "storage:dev/codex/schubert/nk/storage/LinuxFilesystemClassifier$StatfsCall.class",
+        "storage:dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.class"
+      ],
+      "changedClasses": [
+        "batch:dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.class",
+        "batch:dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.class",
+        "batch:dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.class",
+        "batch:dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader$NioIo.class"
+      ],
+      "classifierCoverage": {
+        "BRANCH": {
+          "covered": 22,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 19,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 178,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 37,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "classifierFourCounters100": true,
+      "coverage": {
+        "api": {
+          "BRANCH": {
+            "covered": 4016,
+            "missed": 2
+          },
+          "CLASS": {
+            "covered": 306,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 3541,
+            "missed": 9
+          },
+          "INSTRUCTION": {
+            "covered": 48375,
+            "missed": 474
+          },
+          "LINE": {
+            "covered": 10488,
+            "missed": 123
+          },
+          "METHOD": {
+            "covered": 1481,
+            "missed": 7
+          }
+        },
+        "batch": {
+          "BRANCH": {
+            "covered": 6930,
+            "missed": 1073
+          },
+          "CLASS": {
+            "covered": 303,
+            "missed": 40
+          },
+          "COMPLEXITY": {
+            "covered": 5435,
+            "missed": 1333
+          },
+          "INSTRUCTION": {
+            "covered": 69639,
+            "missed": 14870
+          },
+          "LINE": {
+            "covered": 13750,
+            "missed": 3512
+          },
+          "METHOD": {
+            "covered": 2164,
+            "missed": 589
+          }
+        },
+        "bootstrap": {
+          "BRANCH": {
+            "covered": 1607,
+            "missed": 2
+          },
+          "CLASS": {
+            "covered": 75,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1292,
+            "missed": 26
+          },
+          "INSTRUCTION": {
+            "covered": 14259,
+            "missed": 271
+          },
+          "LINE": {
+            "covered": 2657,
+            "missed": 55
+          },
+          "METHOD": {
+            "covered": 489,
+            "missed": 24
+          }
+        },
+        "protocol": {
+          "BRANCH": {
+            "covered": 1010,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 157,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 1273,
+            "missed": 0
+          },
+          "INSTRUCTION": {
+            "covered": 17405,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 3464,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 741,
+            "missed": 0
+          }
+        },
+        "storage": {
+          "BRANCH": {
+            "covered": 527,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 37,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 521,
+            "missed": 0
+          },
+          "INSTRUCTION": {
+            "covered": 6118,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1172,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 257,
+            "missed": 0
+          }
+        },
+        "web": {
+          "BRANCH": {
+            "covered": 3085,
+            "missed": 9
+          },
+          "CLASS": {
+            "covered": 279,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 3099,
+            "missed": 20
+          },
+          "INSTRUCTION": {
+            "covered": 37953,
+            "missed": 494
+          },
+          "LINE": {
+            "covered": 8477,
+            "missed": 95
+          },
+          "METHOD": {
+            "covered": 1542,
+            "missed": 11
+          }
+        }
+      },
+      "debugLineQualification": {
+        "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.class": {
+          "lineEntries": 13,
+          "lineOffset": 1,
+          "nonLineBytesIdentical": true
+        },
+        "dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.class": {
+          "lineEntries": 19,
+          "lineOffset": 1,
+          "nonLineBytesIdentical": true
+        }
+      },
+      "debugOnlyChangedClasses": 2,
+      "elapsedSeconds": 1535.714834,
+      "endUTC": "2026-10-12T02:26:12.153440+00:00",
+      "formalAccepted": false,
+      "global100": false,
+      "jarHashes": {
+        "api": "1f85ec25de4847dc3212f85ed81bd4de0ef421b4bc7b4bace3ced11f4eb58905",
+        "batch": "3cc122e1bc7f2ebe18309b1b2cb74bf48a7edba6fcd87f3c5f9dfd057716d2dc",
+        "bootstrap": "e8ce3c71992d4bd487470b1745f9f396bbaa4275afa1fdf5e816b8b23f79b2e6",
+        "protocol": "420782783f139a9d2a42c387bacbf78b0ff88cff7441a1ef4f7bd6273f94d099",
+        "storage": "a3905e4beb7ccb555ab3b06c7758ad843626be36c4e5af5c879bfdb892a7bdf0",
+        "web": "d7a117f60a9b238758a1ac001f97082531df00a45a822576b91d522dc541b000"
+      },
+      "mainClasses": 1637,
+      "modules": {
+        "api": {
+          "mainClasses": 401,
+          "suites": 157,
+          "tests": 963
+        },
+        "batch": {
+          "mainClasses": 568,
+          "suites": 158,
+          "tests": 1192
+        },
+        "bootstrap": {
+          "mainClasses": 105,
+          "suites": 40,
+          "tests": 298
+        },
+        "protocol": {
+          "mainClasses": 174,
+          "suites": 17,
+          "tests": 81
+        },
+        "storage": {
+          "mainClasses": 74,
+          "suites": 23,
+          "tests": 163
+        },
+        "web": {
+          "mainClasses": 315,
+          "suites": 129,
+          "tests": 886
+        }
+      },
+      "productionSource": "4d6bcbddb417b76d27e52d5d9640752c300edccf",
+      "qualificationInputs": {
+        "api": {
+          "coverageXml": "7dcc86f52ae96430a28df1423496436f7fe51927253684e9da1e7c0a40c2f2a2",
+          "exec": "c653689ad4866585031bfb646265911ff31924aa00b2796f6773d299a49d0194",
+          "static": "3448630c74d6a362b1d1b9c3a05957403e7a040baf5a5d32d57d3f30dc17f710"
+        },
+        "batch": {
+          "coverageXml": "fd34308409816fe2a15d7f3a26d849c912045cc00c9eb570eca95c5f6bcec37e",
+          "exec": "5d2b9fd81d77d5328a8ffdc6c542ad309111f280d2f1d633ffe2f90d158d1ffd",
+          "static": "23722dee8b0ce43e1f468ff051320e970a8f5ed16688f27d57ac1942aafaf678"
+        },
+        "bootstrap": {
+          "coverageXml": "8d9da174cc297cf5e2a22092630572d5dba1b09b8ebf1119879bbf076f079484",
+          "exec": "82e8a106280f6e4696597e892b1d9432ec77caaa915002a44c5abcb9b661f61c",
+          "static": "c4d64cc1a21c7b878f99f15401baa0cee8dcf4ffefab72388eeaf9b195b27fe0"
+        },
+        "protocol": {
+          "coverageXml": "5b4a61533fff09dd5128fab834e8d545121b96bd97f8056045c1dc0841be3ab2",
+          "exec": "484f0297b95b417de2cecc8e5a8700c93cb9127a5549f33eab0d2b86065ed26c",
+          "static": "1ba5657d76c1d1ebed33ed51a10586dfab838c4fb789ad2e1341762733bba0a2"
+        },
+        "storage": {
+          "coverageXml": "e67224ea0fe766c0038074ed1fafd230b9c746f072294d21d16f6c610ff4a622",
+          "exec": "707b593a3b2c51d743515dc92dd21ae9a593980be1192071b36f4f5f39ba5c3e",
+          "static": "eccaacd415ca76a6b9fd2ba7f0aa0627f38ea61ef02db43023e3331b0f077017"
+        },
+        "web": {
+          "coverageXml": "33f012538b3310faf0c38ad52ac7a0de61b0852888161a3ca98b546f305bd233",
+          "exec": "fa31471871faede938551852f91f4c6412bc12ce8ce9a9db86036388be748df9",
+          "static": "29b28ff5419a8e09f9b443f9a32b8a2479c2fa61f42d1ceffc348b9e83af7b53"
+        }
+      },
+      "sameSourceNativePending": true,
+      "semanticChangedClasses": 2,
+      "serverManifestSha256": "48443c39a43cb6123c0e15a71e6322536c0e2978bbbbfa1e939e7257907857d4",
+      "sourceArchiveSha256": "90b3f98f9947137d547007d3aa8e6818dc33313f0d80989c9e2f8a24da550e36",
+      "sourceSnapshot": "308d144b6e51ee91f502795fb5730e004643c304",
+      "startUTC": "2026-10-12T02:00:36.438606+00:00",
+      "staticSixModules": 0,
+      "suites": 524,
+      "tests": 3583
+    }
+  },
+  "candidate": {
+    "actualExit": 0,
+    "addedClasses": 2,
+    "artifacts": 187,
+    "candidateNotDeployed": true,
+    "candidateSource": "4d6bcbddb417b76d27e52d5d9640752c300edccf",
+    "changedArtifactPaths": [
+      "VERSION",
+      "api/api.jar",
+      "api/lib/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "api/lib/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "api/lib/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "operations/batch.jar",
+      "operations/lib/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "operations/lib/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "web/lib/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "web/lib/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "web/lib/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "web/web.jar"
+    ],
+    "changedClasses": 4,
+    "completedUTC": "2026-10-12T02:40:21.509419+00:00",
+    "debugOnlyChangedClasses": 2,
+    "engineSourceSha256": "db473bb2e408398da81d463df25bfb2a5374e30a32c757fbfc5a3ac4f1721f80",
+    "formalAccepted": false,
+    "guestMutations0": true,
+    "helperSha256": "c09085861e74c2aab91c02a493be6a02ca9a8103a12f4eff76018d918d242c2a",
+    "history": 29,
+    "hostGateSha256": "671142cc70b6d5e2cc824d472b45c2ab5be6a59f2266d02203e3cae80bc36295",
+    "mainClasses": 1637,
+    "manifestSha256": "e36d39f470bedf445e182f03e926c4c22252ef37952fde5b9a12614e60b0f07c",
+    "operatorSource": "55329dd579aedc8809d6884520b7dd15d1942495",
+    "priorSource": "769ddb15cd735c25fef581b5f9850ef9d0053c0f",
+    "release": "0.1.0-PG1544",
+    "run": "PG1544-candidate-build-v1",
+    "schema": "028",
+    "semanticChangedClasses": 2,
+    "signatureSha256": "fed7f4c24a2356f095aed4310c5a826f9896452cc731971fbd3589f94ae6d232",
+    "signatureVerified": true,
+    "sql": 28,
+    "startedUTC": "2026-10-12T02:40:21.240789+00:00",
+    "suites": 524,
+    "tests": 3583
+  },
+  "unusedPlacement": {
+    "actualExit": 0,
+    "businessMutations0": true,
+    "formalAccepted": false,
+    "logSha256": "ae96e817e13c6e118b0a726b382b10fdfbb84c18f34ab445790f6c838197f6f9",
+    "normalScopesAccepted": true,
+    "ownedRecoveryAccepted": false,
+    "productionSource": "769ddb15cd735c25fef581b5f9850ef9d0053c0f",
+    "run": "PG1539-pending-unused-placement-v1",
+    "sshExit": 0,
+    "unusedPlacementIndependentClosingPending": true
+  },
+  "independentCurrentCandidateClosing": {
+    "actions0": true,
+    "actualExit": 0,
+    "formalAccepted": false,
+    "guest": {
+      "actions0": true,
+      "actualExit": 0,
+      "allNewMetadataRefsNormalClosed": true,
+      "allOriginalDbEpochPermitBackupCredentialNativeCurrentPreserved": true,
+      "candidateNotActivated": true,
+      "canonicalPublicationIntentOnlyRetired": true,
+      "formalAccepted": false,
+      "gcAloneNotStopProof": true,
+      "gcKinds": {
+        "artemis.service": "STRICT_GC",
+        "schubert-nk-cleanup.service": "STRICT_GC",
+        "schubert-nk-expiry-cleanup.service": "STRICT_GC"
+      },
+      "observedSha256": "7cc53215980eadb5d6d788d1df0b997111b3f6beabc6eef4803f4506afb36ea5",
+      "oldRoot1456StillFailed143": true,
+      "placementOwnerPeerAndLocksGone": true,
+      "resumeIssued": false,
+      "serviceThreeAndManagementResourcesGone": true,
+      "unusedCandidateSigned187Qualified": true,
+      "warmStopProofRetained": true
+    },
+    "payloadSha256": "45d4f9bb2ed8f28cbf87e334ea320fec66e14bd585d12c2edcc62c45d10c5f97"
+  },
+  "relatedBugs": [
+    "BUG1124",
+    "BUG1125",
+    "BUG1126",
+    "BUG1127"
+  ],
+  "relatedYkt": [
+    "YKT892",
+    "YKT893",
+    "YKT894",
+    "YKT895"
+  ],
+  "ssc": "SSC269",
+  "oldFailuresPreserved": [
+    "PG1525",
+    "PG1526",
+    "PG1527",
+    "PG1533",
+    "PG1535"
+  ],
+  "formalAccepted": false,
+  "wholeLeafAcceptedDelta": 0,
+  "candidateActivated": false,
+  "newRootIssued": false,
+  "rawSecretsOrLogsIncluded": false,
+  "actualCommands": [
+    "python3 -B tools/quality/pg1532_filesystem_closing_full_six.py",
+    "python3 -B tools/quality/pg1542_filesystem_full_qualification_v3.py",
+    "python3 -B tools/quality/pg1544_filesystem_signed_candidate_v2.py",
+    "python3 -B tools/quality/pg1537_pending_candidate_compile.py",
+    "python3 -B tools/quality/pg1538_pending_candidate_stage.py",
+    "python3 -B tools/quality/pg1539_pending_unused_once.py",
+    "python3 -B tools/quality/pg1545_pending_unused_independent_closing.py"
+  ],
+  "sourceEvidenceHashes": {
+    "pg1542-filesystem-full-qualified-v3/manifest.safe.json": "671142cc70b6d5e2cc824d472b45c2ab5be6a59f2266d02203e3cae80bc36295",
+    "pg1544-candidate-build-v1.safe.json": "b416563357ca4ce07258dd44c56ac15b4c30582baa01025d2497a6f87f019d45",
+    "pg1537-pending-unused-frozen-v1.safe.json": "84943e378cb2f21a0a74e98de76cb311ec569917b1386ebcf6511dcbc5c46b92",
+    "pg1539-pending-unused-placement-v1/manifest.safe.json": "eb5ff1ea5d69b0d8c7e46009b41927353a912d75604ac67314d370261ba1519f",
+    "pg1545-pending-unused-independent-closing-v1/manifest.safe.json": "d9373160f2136a41c552b9f497e22a4607ce00ef2293d288bdb6f513f629b42f"
+  }
+}
