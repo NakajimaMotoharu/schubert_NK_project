@@ -1,5 +1,7 @@
 # 当source親DONE・owned停止・native資格
 
+静的資格更新（2026-10-12）：BUG1132/YKT900として1586 generated未使用os/1587 injected require再定義を先行起票し、00b18a23cの新1588 catalog actual0/payload6e0fb241326467e839a2188ae6d78d459e9b5d5efe1c7a2c5b5ee5bc36a056cd、1590 exact生成pyflakes0入口・actual0/server431e89d4827d266bc9b4daa8de443ad1ab0b1b0f074116efbe5328c18fd64762で資格。旧工具/結果保全、same eight/current sixhost/sessionCRC/counter同値を再確認し追加成果へ重複加点0。新static独立負例1/全parent0。工数/正式差0。
+
 NK-OPS-001 / SS311/341/343/353、SSC190/191/198/268/269/270/271、QA047、BUG1106/1131、YKT875/899。Production4d6bcbddb417b76d27e52d5d9640752c300edccf、VM releasePG1544/BOMe36d39f470bedf445e182f03e926c4c22252ef37952fde5b9a12614e60b0f07c、boot3d69。Java25.0.4/Jacoco0.8.15/ASM9.10.1/Linux7.0.0-34/Python3.14、native分析は隔離LAN serverの同source PG1532固定target、通常PTを再実行せず既資格byteをSHA照合。
 
 | Test ID | 独立期待・事前条件 | 実操作・結果 |
