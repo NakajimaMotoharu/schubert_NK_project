@@ -1,5 +1,11 @@
 # API終端所有・fatal通知 単体テスト仕様／結果（PG-D412）
 
+## 限定build経過（PG1630/1631未実行PTを成功に数えない）
+
+PG1630 source2ff5/PG1631 ac38、Production2741、共にMaven1/actual1・API PT0/全static未完null。protocolのliteralfailIfNoTests=trueで空選択を拒否、BUG1141/YKT909として旧二slot保全。CLI propertyfalseでgate緩和したとは認定せず、正式POM/全6品質は不変更。
+
+新PG1634は依存protocol/storage/bootstrapのcompile/test-compile/test-jar/static/jarを実行（test-goal無し、PT合格非加算）、専用複製Maven repositoryへinstall後にAPIだけmandatory selected13。元cacheは全filehash照合、不変更、容量copyBytes＋10GiB保全余力を検査、追加version取得0/offline。四suite13/freshXML/FES0/static4zero/source不変が必要、empty/missing/skipped/stale/旧source/static未完を独立負例で拒否。後続1632は全JAR/Class scopeと元三依存Mainbyte同値/当API追加六・変更三を別照合する。新run未実行、保全済み失敗を合格にしない。
+
 Program NK-OPS-001/API、RD SYS002004/OPS009/MQ008010、UI212243251253、SS311312321342343/SSC158161193194。P018-05主担当、実native終了依存N15.01は参照費0。package-only capture/Owner境界、内部callbackの結線であり、admission/argv/env/定数診断/所有順序/元期限/固定TERMINAL点は変えない。
 
 | Test ID / class.method | 独立期待値・事前条件・操作・後条件 |
