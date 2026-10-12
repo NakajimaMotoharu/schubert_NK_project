@@ -6,9 +6,9 @@
 |---|---|
 | PT-ORIGINAL-PORT-001 / originalPort001DefaultResumeVerificationNeverProvesOriginalOrRetainedOwnership | SS343/SSC178、手書run/cutoff/activation、alive=trueのscoped OriginalProof。Files.verifyを未提供とし、verify/retainedともliteral IOException、二回のpre gateだけ、post gate0/resume発行0。alive=falseではIO前拒否。native owner受入ではない。 |
 | PT-ROOT-IDENTITY-PORT-001 / rootIdentityPort001AbsentUidProviderRejectsOtherwiseValidSamePeerService | SS343/SSC164、独立proc/Unit literal fixtureのMorning42/targetAPI200。Io.serviceRootUid未提供。captureServiceRootがsanitized IO、cause/suppressed0、target Unit初回読1/成功二読目0、Morning不変。 |
-| PT-TRANSFER-FAILURE-001 / transferFailure001OneUnlinkFailureRetainsBytesCountsWarningAndContinuesOtherFile | SS341/343/SSC118、実Linux retained FD/独立070? 実dir0750/file0640、cutoff09-30以前二file abc3B/二byte。一fileだけunlink port IO拒否。他fileは実削除。target2/success1/failure1/retained0/byte2、WARNING/IO_FAILURE、失敗原byte不変/非空dateとroot保持/全実FD一回閉鎖。 |
+| PT-TRANSFER-FAILURE-001 / transferFailure001OneUnlinkFailureRetainsBytesCountsWarningAndContinuesOtherFile | SS341/343/SSC118、実Linux retained FD/dir0750/file0640、cutoff09-30以前二fileの固定byte {1,2,3}/{4,5}。一fileだけunlink port IO拒否。他fileは実削除。target2/success1/failure1/retained0/byte2、WARNING/IO_FAILURE、失敗原byte不変/非空dateとroot保持/全実FD一回閉鎖。 |
 
-実dirは0750（表中070?は使用しない）、testfixtureは専用TempDirであり、業務原本を操作しない。request/原本/Backup/実VM変異0。actual selected6＝新3＋直前3の影響resource回帰、exactmethodとfound/started/succeeded6/FES-aborted-notrun0が条件。新target `/runs/PG1626-selected-v1`、`pg1626_unsupported_ports_selected.py`。Main変更0、全6Maven再回帰trigger無し、群0466 .25/.75/2pp凍結。対象commit/実結果は実行後追記。
+testfixtureは専用TempDirであり、業務原本を操作しない。request/原本/Backup/実VM変異0。actual selected6＝新3＋直前3の影響resource回帰、exactmethodとfound/started/succeeded6/FES-aborted-notrun0が条件。新target `/runs/PG1626-selected-v1`、`pg1626_unsupported_ports_selected.py`。Main変更0、全6Maven再回帰trigger無し、群0466 .25/.75/2pp凍結。対象commit/実結果は実行後追記。
 
 ## PG1625実結果（2026-10-12、限定3PT成功）
 
