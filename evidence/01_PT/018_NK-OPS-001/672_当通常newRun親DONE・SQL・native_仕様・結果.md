@@ -1,5 +1,11 @@
 # 当通常newRun親DONE・SQL・native 仕様・結果（暫定）
 
+## 現行distinct-session campaign（PG1624、2026-10-12 18時台）
+
+PT-DEP-1624001: 451に従い、同Main4d6の資格済みresume1590/ordinary1618八本ずつを各single-session・独立時刻窓・16異なるsession digest・固定host1532 byte/exec/XML/JARで照合。同session別採取点のunion、旧Source native、業務再演は0。actual0/classCRC0/独立XML一致、残L800/M157/C8/B707、coverage100=false。ordinary単独918/178/12/716及びresume単独1184/219/11/767は別履歴として維持し、gainの単純加算はしない。
+
+command `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg1624_same_source_native_campaign.py`、operator912f1ba84、終了0。scriptSHA eebf29b92faa3e9403785f887e8a2dcc986a9da904ba03c1b79f0f8f7d200540、server manifestSHA176b9b6d001fd239c1fea078f2ed8412380c530b55ca8b4f206b93694fc1d4ee。host safe manifest `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1624-same-source-native-campaign-v1/manifest.safe.json`、LAN `/home/mini/schubert-nk-pgpt/runs/PG1624-native-campaign-v1`。新VM操作0/同source全Maven再回帰0/正式1964PT-53scope/wholeleaf増分0。残current Inspector/Bootstrap/fault/host/CHR/global451/trace/引継ぎは未受入。
+
 Program NK-OPS-001/MorningProcessMain、SS341/343/353・QA047/048/050・451、Production `4d6bcbddb417b76d27e52d5d9640752c300edccf`。Java25.0.4/PG18.6/Artemis2.56、guest boot3d69、隔離LAN VM/current PG1544。IT/STではない。
 
 | Test ID | 独立期待値・操作 | 現結果 |
