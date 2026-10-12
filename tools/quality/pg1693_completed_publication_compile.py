@@ -16,6 +16,8 @@ def compiler():
     raw=inspect.getsource(previous.main)
     for a,b in [('pg1685-unused-candidate-full-post-v1','pg1690-completed-candidate-ro-post-v1'),('pg1682-frozen-v1.safe.json','pg1687-frozen-v1.safe.json'),('pg1681-completed-unused-tools-v4','pg1686-completed-candidate-ro-tools-v1'),("('Pg1640','Pg1660','Pg1681')","('Pg1686',)"),('Pg1686','Pg1691'),('pg1687-','pg1693-')]:raw=raw.replace(a,b)
     raw=raw.replace("('input','Pg1691InputBoundaryTest')", "('input','Pg1691InputBoundaryTest'),('transition','Pg1691TransitionTest')")
+    raw=raw.replace("name.startswith(('Pg1691',))","name.startswith(('Pg1686',))")
+    raw=raw.replace("prior=json.loads((engine.W/'pg1693-frozen-v1.safe.json').read_bytes())","prior=json.loads((engine.W/'pg1687-frozen-v1.safe.json').read_bytes())")
     compile(raw,'<new current ABI ordinary publication compiler>','exec')
     return raw
 

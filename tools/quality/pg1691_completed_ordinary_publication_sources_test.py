@@ -3,6 +3,7 @@ import ast
 import unittest
 from pyflakes.api import check
 import pg1691_completed_ordinary_publication_sources as p
+import pg1693_completed_publication_compile as compiler
 
 
 class OrdinarySourceTest(unittest.TestCase):
@@ -34,6 +35,11 @@ class OrdinarySourceTest(unittest.TestCase):
         self.assertIn('pg1691-completed-publication-tools-v1',s['pg1691_input_preflight.py'])
         self.assertIn('pg1694-completed-ordinary-publication-v1',s['Pg1691OrdinaryPublication.java'])
         self.assertNotIn('candidateReadOnly()',s['Pg1691OrdinaryPublication.java'])
+        raw=compiler.compiler()
+        self.assertIn("prior=json.loads((engine.W/'pg1687-frozen-v1.safe.json').read_bytes())",raw)
+        self.assertIn("name.startswith(('Pg1686',))",raw)
+        self.assertIn('pg1693-frozen-v1.safe.json',raw)
+        self.assertIn('Pg1691TransitionTest',raw)
 
 
 if __name__=='__main__':unittest.main()
