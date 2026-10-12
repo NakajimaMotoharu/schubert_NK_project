@@ -1,0 +1,135 @@
+{
+  "actualAllocatedPp": null,
+  "allResources0": true,
+  "branch": "dev-foundation",
+  "bugs": [
+    "BUG-1156",
+    "BUG-1157",
+    "BUG-1158"
+  ],
+  "capturedNormal20NotInferredFromGc": true,
+  "classByteMismatch": 0,
+  "command": "python3 -B tools/quality/<corresponding fixed tool>; pg1730 stage/verify/execute once each",
+  "coverage100": false,
+  "coverageRemaining": {
+    "BRANCH": 715,
+    "CLASS": 9,
+    "LINE": 873,
+    "METHOD": 169
+  },
+  "credentialSourcesRetiredOnlyPrivate": true,
+  "crossCheck": [
+    "YKT-924",
+    "YKT-925",
+    "YKT-926"
+  ],
+  "currentRelease": "PG1638",
+  "currentSelectedApiTests": 5,
+  "design": [
+    "SSC-276",
+    "SSC-277"
+  ],
+  "environment": {
+    "guest": "Ubuntu26.04/x86_64/pinnedLAN-KVM",
+    "host": "Ubuntu/x86_64",
+    "jacoco": "0.8.15",
+    "jdk": "25.0.4",
+    "postgresql": "18.6",
+    "pyflakes": "3.4.0"
+  },
+  "evidenceCollectorCommit": "b5d86eeaa110fb34802158d78189eedab5770790",
+  "formal": "PT-WEB-20260925-24",
+  "formalAccepted": false,
+  "formalPt": 1964,
+  "formalScopes": 53,
+  "freshAll3597": "NOT_RUN",
+  "frozenFiles": 120,
+  "genuinePid1Job": "120580",
+  "independentToolChecks": {
+    "actualExpectedAbi": 60,
+    "arguments": 8,
+    "databaseLivenessFaults": 307,
+    "input": 5
+  },
+  "mainHostQualifiedTests": 3596,
+  "nativeClosingOnly": true,
+  "nativeStreams": 9,
+  "oldSourceImported": false,
+  "oldVerify": {
+    "actualExit": 143,
+    "close": "UNKNOWN",
+    "notPassed": true,
+    "path": "pg1721-verify-v1.safe.json",
+    "sha256": "6af4c43a6a43ddcdbefbe055f665f275d134b6c0425cef62e08d87dc3f73eb2b"
+  },
+  "original24Config32Signed187BackupPreserved": true,
+  "productionSource": "2741c4546afad6c1e8b6efbd53dfb58144edf7bb",
+  "program": "NK-OPS-001",
+  "rawPrivateExported": false,
+  "records": {
+    "catalog": {
+      "actualExit": 0,
+      "path": "pg1734-current-bootstrap-native-catalog-v1/manifest.safe.json",
+      "sha256": "d7ccf336d8c33117f44456691a0a2705bda208717b4dda53211df74fc05d056e"
+    },
+    "compiler": {
+      "actualExit": 0,
+      "path": "pg1729-frozen-v1.safe.json",
+      "sha256": "b05e7c4a3f5f5541ab6da65fb46261c243ba42fab65181fdf0244543a87e520c"
+    },
+    "execute": {
+      "actualExit": 0,
+      "path": "pg1730-execute-v1.safe.json",
+      "sha256": "a246fec9e99e43c74a16083fed4acd52ca078da6f5ca848c4de0e2bf92b265a9"
+    },
+    "native": {
+      "actualExit": 0,
+      "path": "pg1735-current-bootstrap-native-qualified-v1/manifest.safe.json",
+      "sha256": "de3481dfffee2e316f29d37d9501d63376f57d5afc976dcfeda5a1bf3177cc14"
+    },
+    "onceRecovery": {
+      "actualExit": 0,
+      "path": "pg1726-bootstrap-current-fd-handoff-v1/manifest.safe.json",
+      "sha256": "84c3e1ba77bbcfca06e05007c346e42bc4291b214683d41361b4ef3f3ec93398"
+    },
+    "post": {
+      "actualExit": 0,
+      "path": "pg1731-current-bootstrap-full-post-v1/manifest.safe.json",
+      "sha256": "bc72e47e7c4c9c3b6104218a8792e21ffbb8fe6db4734b7b790e2a3e00ca942e"
+    },
+    "recoveryPost": {
+      "actualExit": 0,
+      "path": "pg1727-bootstrap-recovery-full-post-v1/manifest.safe.json",
+      "sha256": "db886a4ad6b9252dcd800b9fed036d819972d7736e7a87b106c0710457e34909"
+    },
+    "retainedProof": {
+      "actualExit": 0,
+      "path": "pg1723-bootstrap-expired-peer-proof-v1/manifest.safe.json",
+      "sha256": "cd5c45220e83aac772700e1d9a44dd48d351e368c7849fd5cac8b0bdb99e8bbc"
+    },
+    "stage": {
+      "actualExit": 0,
+      "path": "pg1730-stage-v1.safe.json",
+      "sha256": "65dc9b48e25ae76ee6c15c271d3f08bf059024cc80211517275a758e777cb5fc"
+    },
+    "verify": {
+      "actualExit": 0,
+      "path": "pg1730-verify-v1.safe.json",
+      "sha256": "b92a0d9d6076b0bcdc7e91ea4bdbc805172d72984b9a5c85cc93da5f23079a4c"
+    }
+  },
+  "testIds": [
+    "PT-OPS-BOOT-1721-VERIFY",
+    "PT-OPS-BOOT-1723-PROOF",
+    "PT-OPS-BOOT-1726-RECOVERY",
+    "PT-OPS-BOOT-1727-POST",
+    "PT-OPS-BOOT-1729-ABI",
+    "PT-OPS-BOOT-1730-VERIFY",
+    "PT-OPS-BOOT-1730-EXISTING",
+    "PT-OPS-BOOT-1731-POST",
+    "PT-OPS-BOOT-1734-NATIVE",
+    "PT-OPS-BOOT-1735-CRC"
+  ],
+  "unitElapsedSeconds": 1.759522,
+  "wholeLeafAcceptedDelta": 0
+}
