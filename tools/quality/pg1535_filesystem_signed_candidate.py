@@ -38,6 +38,10 @@ def validate_gate(outer):
     hashes=gate.get('jarHashes')
     if type(hashes)is not dict or set(hashes)!=set(MODULES) or any(type(h)is not str or len(h)!=64 or set(h)-set('0123456789abcdef')for h in hashes.values()):
         raise ValueError('exact six qualified artifact hashes required')
+    debug=gate.get('debugLineQualification')
+    expected_records={'dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.class','dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.class'}
+    if type(debug)is not dict or set(debug)!=expected_records or any(type(v)is not dict or set(v)!={'lineEntries','lineOffset','nonLineBytesIdentical'} or type(v['lineEntries'])is not int or v['lineEntries']<=0 or type(v['lineOffset'])is not int or v['lineOffset']!=1 or v['nonLineBytesIdentical']is not True for v in debug.values()):
+        raise ValueError('independent exact debug-only record proof required')
     return gate
 
 def receive(module):
@@ -60,7 +64,9 @@ def main():
     operator=subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip()
     require=lambda v:None if v else (_ for _ in ()).throw(ValueError('qualified signed candidate refused'))
     require(not any(os.path.lexists(p)for p in [NEXT,FROZEN,SIG,W/'pg1535-candidate-build-v1.safe.json']))
-    raw_gate=(W/'pg1533-filesystem-full-qualified-v1/manifest.safe.json').read_bytes();gate=validate_gate(json.loads(raw_gate))
+    raw_gate=(W/'pg1541-filesystem-full-qualified-v2/manifest.safe.json').read_bytes();outer=json.loads(raw_gate);gate=validate_gate(outer)
+    from pg1541_filesystem_full_qualification_v2 import server_source
+    require(outer['qualificationSourceSha256']==hashlib.sha256(server_source().encode()).hexdigest())
     old_raw=(OLD/'RELEASE-MANIFEST.json').read_bytes()
     require(hashlib.sha256(old_raw).hexdigest()=='ecae1310716f356d763b346528988ccdbfad0eccf0b2b27b1f3e77ed546afc99')
     data=json.loads(old_raw);baseline=artifacts(data['artifacts'])
@@ -106,7 +112,7 @@ def main():
             with p.open('rb')as f:os.fsync(f.fileno())
     for p in sorted([p for p in NEXT.rglob('*')if p.is_dir()]+[NEXT],key=lambda p:len(p.parts),reverse=True):
         fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);os.fsync(fd);os.close(fd)
-    result={'run':'PG1535-candidate-build-v1','actualExit':0,'candidateSource':SOURCE,'operatorSource':operator,'priorSource':OLD_SOURCE,'release':'0.1.0-PG1535','startedUTC':started,'completedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'hostGateSha256':hashlib.sha256(raw_gate).hexdigest(),'tests':3583,'suites':524,'mainClasses':1637,'changedClasses':2,'addedClasses':2,'manifestSha256':digest,'artifacts':187,'schema':'028','sql':28,'history':29,'changedArtifactPaths':sorted(changed),'signatureVerified':True,'signatureSha256':sha(SIG),'helperSha256':sha(Path(__file__)),'guestMutations0':True,'candidateNotDeployed':True,'formalAccepted':False}
+    result={'run':'PG1535-candidate-build-v1','actualExit':0,'candidateSource':SOURCE,'operatorSource':operator,'priorSource':OLD_SOURCE,'release':'0.1.0-PG1535','startedUTC':started,'completedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'hostGateSha256':hashlib.sha256(raw_gate).hexdigest(),'tests':3583,'suites':524,'mainClasses':1637,'changedClasses':4,'semanticChangedClasses':2,'debugOnlyChangedClasses':2,'addedClasses':2,'manifestSha256':digest,'artifacts':187,'schema':'028','sql':28,'history':29,'changedArtifactPaths':sorted(changed),'signatureVerified':True,'signatureSha256':sha(SIG),'helperSha256':sha(Path(__file__)),'guestMutations0':True,'candidateNotDeployed':True,'formalAccepted':False}
     with(W/'pg1535-candidate-build-v1.safe.json').open('x')as f:json.dump(result,f,sort_keys=True);f.flush();os.fsync(f.fileno())
     print(json.dumps(result))
     return 0

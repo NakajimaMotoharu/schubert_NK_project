@@ -8,7 +8,7 @@ from pg749_candidate_contract import MODULES, verify_delta as algorithm
 __all__ = ['MODULES', 'CHANGED', 'ADDED', 'verify_delta']
 
 CHANGED = {'batch': frozenset('dev/codex/schubert/nk/batch/file/' + n + '.class'
-                            for n in ['EnvironmentInodePolicy', 'InspectorEnvironmentReader$NioIo'])}
+                            for n in ['EnvironmentInodePolicy', 'EnvironmentInodePolicy$Metadata', 'EnvironmentInodePolicy$Snapshot', 'InspectorEnvironmentReader$NioIo'])}
 ADDED = {'storage': frozenset('dev/codex/schubert/nk/storage/LinuxFilesystemClassifier' + n + '.class'
                             for n in ['', '$StatfsCall'])}
 

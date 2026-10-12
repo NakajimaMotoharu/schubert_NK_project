@@ -14,7 +14,7 @@ class DeltaTest(unittest.TestCase):
 
     def test_fixed_delta(self):
         old, new = self.fixtures()
-        self.assertEqual(verify_delta(old, new), 10)
+        self.assertEqual(verify_delta(old, new), 12)
 
     def test_unknown_missing_removed_null_and_foreign(self):
         for kind in ['changeMissing', 'addMissing', 'extra', 'removed', 'null', 'foreign']:

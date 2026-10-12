@@ -10,7 +10,7 @@ Production source `4d6bcbddb417b76d27e52d5d9640752c300edccf`、実行snapshot `3
 
 独立期待値：旧3578PT/523suite/1635Mainの全対象を保持、新分類器5test/1suite/2Mainを追加して3583/524/1637。内訳はprotocol81/17/174、storage163/23/74、bootstrap298/40/105、API963/157/401、Web886/129/315、Batch1192/158/568（PT/suite/Main）。正常・境界・null・異常・例外・tamper/ACL/readonly・並行/再送を既全suiteへ回帰する。F/E/S/flaky/not-run0、静的6module0、全source input不変、Mavenとcollectorの両exit0を要求する。
 
-全回帰後 `python3 -B tools/quality/pg1533_filesystem_full_qualification.py` 一回。別の資格者処理がXML時刻/hash/case一意/結果、archiveのhost→server同値とGit Production差分0、全package1637Main byte、静的XML、coverage/exec/sessionを再照合する。旧同Main769全6から変更はBatchのEnvironmentInodePolicy/InspectorEnvironmentReader$NioIoの2class、追加はStorageのLinuxFilesystemClassifier/StatfsCallの2classだけ。独立手書許容集合以外の差分は拒否する。分類器line/method/class/branch各missed0を別資格するが、全体四100は別native/global gateであり、この全回帰だけから宣言しない。
+全回帰後1533一回はBUG1125として固定debug差分不足を拒否・actual1保全、新only `python3 -B tools/quality/pg1541_filesystem_full_qualification_v2.py` で資格する。別の資格者処理がXML時刻/hash/case一意/結果、archiveのhost→server同値とGit Production差分0、全package1637Main byte、静的XML、coverage/exec/sessionを再照合する。旧同Main769全6から変更byte4class：EnvironmentInodePolicy/InspectorEnvironmentReader$NioIoの2semanticと同policy Metadata/Snapshotの2debug-only。追加はStorage分類器/StatfsCallの2classだけ。2recordは定数pool・method Code・stack map・全属性・行offsetを含む非行番号全byteが同一で、LineNumberTableの固定+1だけ（13/19entry）を独立class parserで実証する。coverage/CRCの対象から除外せず実byte4として保持し、未知差分/別offset/Code変造は拒否する。分類器line/method/class/branch各missed0を別資格するが、全体四100は別native/global gateであり、この全回帰だけから宣言しない。
 
 工具の独立fabricated graph6試験は全3583case/524XML/1637byteの合成資格fixture、別source/skip/flaky/static/byte変造/case重複/分類器branch欠落を拒否する。これは工具検証で、Production PT3583へ加算しない。
 
