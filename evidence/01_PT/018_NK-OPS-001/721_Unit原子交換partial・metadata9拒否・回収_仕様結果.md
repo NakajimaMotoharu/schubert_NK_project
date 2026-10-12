@@ -1,0 +1,15 @@
+# Unit原子交換partial・metadata9拒否・回収
+
+NK-OPS-001/SS343353/SSC283/QA047/BUG1187/YKT955。旧正式1964PT/53scope/wholeleaf0不変更。1893実compile-Werror/argument/labelmount/original/identity/input/transition全7phase0、source263c23b1178730b3a2490b9042aef75dbea9e3eb、23:10:14.425443Z～23:10:15.842789Z。1894stage0/23:10:33.863058Z～23:10:36.593625Z/logSHA6db9cef499c3ce22a7034829749513286d641834982eafbb3ebce7df8d325446。1894actual取得前marker0、activateはREGULAR_MORNING_UNIT_EXCHANGE UNKNOWNretain、再送/hotpatchしない。
+
+現在newcurrentPG1846/candidate0fd/BOMee75、INVALID/approval/current正規交換・旧link保全とMorning通常Unit交換は実施済み、reload未予約/未発行、管理state18は旧Root13WARNING/failed10・Typeoneshot/設定SuccessExitStatus空のまま。oldUnitinode64769/3227/root:root0644/nlink1/1836B/SHA28e6e23ddcfeacac7dc1daf326a1a2b1bc91895bbd34b313fe89a1b04f499bd6/mtime1790785949034979724保持、移動ctime1791846691801000000。newUnitinode64769/3286/1947B/SHAe9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b、mtime1791846691795011406/ctime1791846691799000000、part不存在。oldUnit原本はpg1895私有に保持、Currentbaseline/DBdump/credential/原本BackupをGitへ複製0。
+
+PT-OPS-PG1897-ATIME001：realFS independent旧byte、atime1/mtime2ns→readでatimeだけ変化し、os.stat_result全比較は異なるがSS metadata9は完全不変。PASS。PT-OPS-PG1900-META001：actual全Unit.verifyのold==namedをmetadata9全9field一致へ是正した新source、actualverifyでatime-onlyを受入、各dev/inode/uid/gid/mode/nlink/size/mtime/ctime違い、新同inode/未来ctime/古mtimeを拒否。2uniquePASS/static0。旧凍結1891は不変更、当修正の実新pathは未検証。
+
+PT-OPS-PG1898-DIAG001 actual0：host318548-t10156497/argvSHA886acb4bada55989423e1cdf73f9e415b130facfb1e978ef6901a2d9d0b6b7fe/solegate66306-9337730、Java493115-t9883172/ppid493113/102FD、Ref493146-t9883367/18FD/DB493144、同boot3d69。Refmain209/Javapublish148、有限phase各private保存・before/expectedepoch/oldlink/oldUnit原本だけ、after/complete/reloadreserve無し。
+
+PT-OPS-PG1902-PROOF001 actual0/payloadSHAd08366d4dc6834d83a828073becdb1802777460283f56b72cab036727ff682ea、proofSHA1ccaea9fbec075251f656f79f5b72edebd93a2ed5a9aeb97f8551a90b6ebe9ed。独立canonical6phase（release未実行）/新署名全187/新current-approval/旧link/oldUnitinodeとbytes/新Unitbyte/未reload/設定2Blank/旧Root13原本・全24row・32config・元native26を資格、actual全102/18FD/UID-argv-exe-ticks/全追加readonlypathと旧unlinkFD12-13/soleDBsocket/advisory/両FLOCK-OFD/十kernelを二読。独立oracleで旧unlinkFDのnlink0/SHA/mtime/ctime範囲も全保持、partialをcomplete/oldcurrentへ正規化しない。
+
+PT-OPS-PG1903-REC001：上記proof同connectionでfresh全部再資格→new-onlyreserved/fsync→子Ref493146一回ownedTERM/有限reap→親493115の元102FDから既知pipe99-100だけ消失可・他追加startupFD129保持/両OFD/samepeer/全元値→親一回ownedTERM/正常hostgatequeue引継ぎ→全管理資源0。現shared/runFD31-90、独立literal102FD/onlypipe/null/foreign/extra/PID反例のactualemitted契約PASS、candidate/current/Unit再交換・daemonreload・Root/Backup再演0。実回収/別partial全postは未実行、source・終了コード・日時・hashを後記。旧1894closeはUNKNOWNのまま維持。
+
+command環境=同hostPython3.14.4/JDK25.0.4/pyflakes3.4.0/同隔離VMboot、PYTHONPATH tools/quality:tools/quality/vm/050_s1:toolchain pyflakes runtime、各同名driver/main。全private evidenceはPG379/当guest同名slot。個別N-T/allocated費null、既SSC283 group0539枠・v3不変更。coverageはProduction四counter100や新Unit実WARNING/CHR/451の代用0。
