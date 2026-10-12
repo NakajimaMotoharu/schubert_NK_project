@@ -7,6 +7,14 @@ import unittest
 from pg1559_pending_runtime_sources import java,refs,writer,RUN
 
 class RuntimeTest(unittest.TestCase):
+    def test_compiler_and_admission_exact_run_source_phases(self):
+        from pg1560_pending_runtime_compile import compiler_source,valid_frozen,SOURCE
+        s=compiler_source();self.assertIn("'run':'PG1560-pending-runtime-frozen-v2'",s);self.assertNotIn("'run':'PG1555",s)
+        good={'run':'PG1560-pending-runtime-frozen-v2','actualExit':0,'productionSource':SOURCE,'helperSource':'769ddb15cd735c25fef581b5f9850ef9d0053c0f','phases':[{'exit':0}for _ in range(8)]}
+        self.assertTrue(valid_frozen(good))
+        for key,v in [('run','PG1555-pending-publication-frozen-v1'),('productionSource','foreign'),('helperSource','foreign'),('actualExit',1),('phases',[{'exit':0}]),('phases',None)]:
+            bad=copy.deepcopy(good);bad[key]=v;self.assertFalse(valid_frozen(bad))
+        bad=copy.deepcopy(good);bad['phases'][3]['exit']=1;self.assertFalse(valid_frozen(bad))
     def test_writer_literal_and_all_real_fd_io_faults(self):
         module=types.ModuleType('fixed_current_writer');exec(writer(),module.__dict__)
         text=Path(__file__).parent.joinpath('vm/050_s1/pg1160_runtime_writer_test.py').read_text().replace('import pg1160_runtime_writer as writer','').replace('343a5a1b-d064-47d5-88c2-31c36d7ba7a4',RUN)

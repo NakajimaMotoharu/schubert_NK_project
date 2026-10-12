@@ -9,7 +9,7 @@ sys.path.insert(0,str(Path(__file__).parent/'vm/050_s1'))
 import pg1160_runtime_writer as old_writer
 
 CLASS='Pg1559PendingRuntime'
-TOOLS='pg1559-pending-runtime-tools-v1'
+TOOLS='pg1559-pending-runtime-tools-v2'
 SAVE='pg1562-pending-runtime-v1'
 SOURCE='4d6bcbddb417b76d27e52d5d9640752c300edccf'
 BOM='e36d39f470bedf445e182f03e926c4c22252ef37952fde5b9a12614e60b0f07c'
