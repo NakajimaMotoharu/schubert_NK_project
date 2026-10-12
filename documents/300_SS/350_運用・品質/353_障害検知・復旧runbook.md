@@ -1,4 +1,6 @@
 # 障害検知・復旧runbook
+SSC276：BUG1156のExpected constructor拒否・Ref前retainは旧UNKNOWNを保全する。livepeer前提の1722失敗/signals0と、fresh1723のserverpeer/advisory0・Java383695/7281859/99FD/soleM-A/全原値不変を区別する。DB期限消失から正常closeを推論0。SS343の固定owner限定手順で、旧hostgate soleownerの現在認証→単一回収接続のfresh全99耐久proof→同fresh/pidfd/一回予約/当Java普通TERM15秒終端30秒reap→旧wrapper終了後同inodehostgate取得→別全postを行う。force unlock/別guest診断/旧slot再送/他PID/強制kill/業務再演0。新versionのconstructor境界取得前資格後のみBootstrap正常再試験へ進む。
+
 
 SSC275：1667actual1を保存、子の正常回収と親のsend前guard拒否を分離する。別SSH診断による/run29/32二時刻変動をBUG1152/YKT920とし、1672全現在proof（親291213/5962776/99FD/child0/soleDB291240）からSS343のnew-only一回回収へ進む。旧parent予約slotを再送せず、criticalhostgate中はguest診断/observerを拒否してhost同job付着だけ行う。sameconnectionfresh99耐久proof→同fresh直前照合→新予約/親TERM15秒終端30秒reap→別全post、旧closeUNKNOWN/actual1を保持し元業務再演0。hostgateは実対象boot/current/owner/runを記録し、正常/失敗双方でrelease、PID reuse/別ownerは許可しない。
 
