@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC269 保持inode filesystem fresh等価分類（2026-10-12）
+
+全原本graph二読/全外部boundary再検査を維持したまま、保持/proc/self/fd capabilityのfilesystem判定をLinux/glibc LP64公開statfs ABIへ置換できる。許可済ext2/ext3/ext4はmagic0xEF53の共通familyとして内部Snapshotへ記録、xfs0x58465342/btrfs0x9123683E/tmpfs0x01021994は別分類。LOCAL許可意味、runtime tmpfs必須/durable非tmpfsかつRW、readonly/ACL/metadata/owner/全原本/期限は不変更。未知magic/ABI/失敗/無効capability拒否、filesystem/graph/認可cache又はscan省略禁止。familyは内部判定だけでUI/電文/DB業務値不変更。実header/版・独立magic/ABI120byte-offset0/retainedFD/tamper/例外/当source影響PT/必要全回帰・当Root再発防止実証が揃うまでtimeout解決/正式にしない。
+
 ## SSC268 publication-only正常復旧後のUnit GC readback（2026-10-12）
 
 SSC266/QA047の正常同fresh所有によるExpiry→Artemis→Cleanup停止・真正PID1/vendor全証拠・全原値不変・canonical型付きpublication intentのみ退役・全管理scope正常返却を、当source/boot/BOMのimmutable warm receiptとして保持する。Ref返却後のsystemd Unit collectionによりcurrentを再Loadした際、同三Unitの補助INV/start/end/code/statusが空/0、ExecStart補助が閉じた未実行値へ戻る場合を別current lifecycleとして扱い、0表示をwarm停止や旧Root成功の証拠にしない。
