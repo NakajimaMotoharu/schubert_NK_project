@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC271：PG1562のcanonicalruntime後条件KeyErrorはBUG1129/YKT897として旧scope UNKNOWNを保存する。SS343の当固定父子/source/全原値・現在canonicalruntime/effective宣言を独立二読した新proofからだけ、Ref105232→Java105206へpidfd普通TERM一回/耐久予約/同ticks有限reap・別全postへ進む。真正既公開zz設定の再prepare/reload/delete、旧before/正常close/親成功の補完0。次の別fresh verify-onlyで全新正常scopeを閉じてから別observer/外部一回resumeへ接続し、元Root1800/原本handle/API所有Web-Caddy/真正DONE/ownedstop/native/451を維持する。
+
 SSC270：PG1556 code-only正常/1558別全post後のcurrent4d6/PG1544/boot3d69・元pending15700a87/9e706をSS343有限cold runtimeへ接続する。SSC259/260の祖先FD保持/空Root0755/Unit.d不存在・canonical zz設定new-only/一回reloadを別fresh M-A/RWbatch ReadCommitted/advisory/十Refで行い、全原値とStartup INVALID/permit・他全宣言を維持する。設定正常と別postを閉じてから別observer/耐久予約/外部一回Rootへ進む。元run/cutoff/activation/begin/成功handle再用・1800秒/API保持WebCaddy/DONE/ownedstop/native/451を独立受入し、旧Root1456の143を解決へ読み替えない。partial/unknown/close不明は保存・再付着、旧slot再prepare/reload/start又はold/run復元0。QA047対策と実再発防止は真正親成功まで対応中。
 
 ## SSC269 原本再検証費用の原因別対策（2026-10-12）
