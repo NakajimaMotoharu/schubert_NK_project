@@ -6,6 +6,19 @@ import pg1703_new_source_owned_stop_sources as subject
 
 
 class StopSourceTest(unittest.TestCase):
+    def test_whole_generated_helpers_are_bound_to_fixture_roles(self):
+        seal,done=self.fixture()
+        with patch.object(subject,'context',return_value=(seal['privateBeforeSha256'],seal['observedOwned'],done['receipt'],seal['doneEndUtc'])):
+            generated=subject.sources()
+        self.assertEqual(14,len(generated))
+        combined='\n'.join(generated.values())
+        for v in ['02e941b9-1c52-4018-a193-63dd00b269af','fe43e94b1fbf4886bb4ab3922fd16f9c',
+                  'pg1702-new-source-completed-seal-v1','0.1.0-PG1638','66941284515','68741284515']:
+            self.assertIn(v,combined)
+        for v in ['pg1609','Pg1609','0.1.0-PG1544','38365395523','40165395523',
+                  '0be226b1-bbb7-43d3-aa9e-59d0bda70f9a']:
+            self.assertNotIn(v,combined)
+
     def fixture(self):
         owned={unit:[pid,inv,7700000,'a'*64]for unit,pid,inv in [
             ('caddy.service','303003','a'*32),('schubert-nk-web.service','303002','b'*32),
