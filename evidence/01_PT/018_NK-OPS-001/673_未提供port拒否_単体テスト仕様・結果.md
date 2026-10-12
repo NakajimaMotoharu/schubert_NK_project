@@ -1,5 +1,17 @@
 # 未提供port拒否・所有不明保全 単体テスト仕様／結果
 
+## PG1626及び独立PG1627実資格（限定6PT成功）
+
+PG1626 source12f3851bb847ce676a467b4f834edf817bd91f33、actual selected6/新3＋関連3、FES/aborted/notrun0・Werror0/CRC0/fixture不変、VM0。詳細manifest4e9ba7f7b181346cec46b1dc9c118de2cf5a36cc2015aa1c2ae1a7283ce33392、generated cfcbc421915ba1c1060ba103035b60ca1d4192c0e79a41d7f248e3bddaa02a17。compactstdout旧literal3はBUG1140/YKT908として保全、実試験を再発行せず新PG1627読取資格actual0でXML/private exact3及び6、全Main/library/fixture/testsource/exec/hash/独立XMLcounterを確認。資格manifest522019853eedf2056b48fcf76b11a2b81abcddaebfde351a6671d922a6fc0a14、scriptc2ba9025cbcb2fda70fbb71c21c8ca4dc5cba8055236c07d9ba95a6bd0813192。資格command `python3 -B tools/quality/pg1627_selected_contract_qualification.py`（同PYTHONPATH）、operator b514bfc45。safe host `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1627-selected-contract-qualification-v1/manifest.safe.json`。
+
+新Original/rootUID/Transfer unlink Test ID三件とも成功、独立literal/拒否前後gate/原byte不変/他file削除/実全FD消費を確認。残790/151/5/707、正式1964/53/wholeleaf増分0。環境version/OS/actual source/commands/全hashはLAN資格manifestにも保存。native所有資格とは区別する。
+
+## 次のpublic recovery拒否2PT（PG1628、未実行）
+
+PT-RECOVERY-NATIVE-001 / recoveryNative001SinglePublicDefaultsRejectUnprivilegedHostWithoutAnyOriginalMutation: SS343/SSC168/179、手書単一API INVALID/permit/owner/launch/intentsの実FD fixtureで先に注入IOの正規Evidenceを得る。public observe/retire/quarantineが実Nio（mini host、非root/非契約tmpfs）を使用すると拒否、証明callback0/全original名とbyte不変/全FD閉鎖。
+
+PT-RECOVERY-NATIVE-002 / recoveryNative002PairPublicDefaultsRejectBothChildrenAndPreservePublicationFirstQuarantine: 同独立API300/WEB301二子INV別literal。public pair3APIが拒否、quarantineがpublicationと二子三失敗をuncertainに保持、全原byte/三marker不変/proof0/全FD閉鎖。注入fixture正規読取も再確認し拒否原因を区別。原fixtureのsynthetic rootはnative受入ではない。新2＋関連6のexact8 selected、新onlytarget/exec/XML、Main不変更/VM変更0、群0468 .25/.75/2pp凍結、未実行を合格にしない。
+
 ## 次の独立3PT（PG1626、未実行）
 
 | Test ID / method | 独立期待値・事前条件・後条件 |
