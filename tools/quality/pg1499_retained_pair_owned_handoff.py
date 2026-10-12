@@ -19,7 +19,7 @@ old_proof=json.loads(old_raw);require(old_proof['stopReservations0']is True and 
 first=snapshot();require(first==snapshot()==old_proof['current']);validate_current(first)
 owned=pair();require(owned==old_proof['pair']and owned==pair())
 def same_peer():
- sql="begin read only;select json_build_object('pid',pid,'port',client_port,'address',client_addr::text)from pg_stat_activity where pid="+str(BACKEND)+" and usename='schubert_batch'and application_name='PG266-publication-recover';commit;"
+ sql="begin read only;select json_build_object('pid',pid,'port',client_port,'address',host(client_addr))from pg_stat_activity where pid="+str(BACKEND)+" and usename='schubert_batch'and application_name='PG266-publication-recover';commit;"
  lines=command(['sudo','-n','-u','postgres','psql','-X','-qAt','-v','ON_ERROR_STOP=1','-d','schubert_nk','-c',sql],4096).splitlines();require(len(lines)==1)
  peer=json.loads(lines[0]);require(peer['pid']==BACKEND and peer['address']=='127.0.0.1'and type(peer['port'])is int and 1<=peer['port']<=65535)
  def socket_ids(pid):
@@ -28,11 +28,20 @@ def same_peer():
    target=str(fd.readlink());m=re.fullmatch(r'socket:\[([0-9]+)\]',target)
    if m:found.append(m[1])
   return found
- client=socket_ids(92297);server=socket_ids(BACKEND);port='0100007F:'+format(peer['port'],'04X')
- records=[line.split()for line in pathlib.Path('/proc/net/tcp').read_text().splitlines()[1:]]
- require(sum(len(r)>=10 and r[1]==port and r[2]=='0100007F:1538'and r[3]=='01'and r[9]in client for r in records)==1)
- require(sum(len(r)>=10 and r[1]=='0100007F:1538'and r[2]==port and r[3]=='01'and r[9]in server for r in records)==1)
+ client=socket_ids(92297);server=socket_ids(BACKEND)
+ records=[line.split()for name in ['tcp','tcp6']for line in pathlib.Path('/proc/net',name).read_text().splitlines()[1:]]
+ local=('127.0.0.1',peer['port']);database=('127.0.0.1',5432)
+ require(sum(len(r)>=10 and r[3]=='01'and r[9]in client and endpoint(r[1])==local and endpoint(r[2])==database for r in records)==1)
+ require(sum(len(r)>=10 and r[3]=='01'and r[9]in server and endpoint(r[1])==database and endpoint(r[2])==local for r in records)==1)
  return peer
+def endpoint(value):
+ import ipaddress
+ require(type(value)is str and re.fullmatch(r'(?:[0-9A-F]{8}|[0-9A-F]{32}):[0-9A-F]{4}',value)is not None)
+ address,port=value.split(':');raw=bytes.fromhex(address);decoded=b''.join(raw[i:i+4][::-1]for i in range(0,len(raw),4));parsed=ipaddress.ip_address(decoded)
+ if isinstance(parsed,ipaddress.IPv6Address):
+  require(parsed.ipv4_mapped is not None);parsed=parsed.ipv4_mapped
+ require(str(parsed)=='127.0.0.1'and 1<=int(port,16)<=65535)
+ return(str(parsed),int(port,16))
 same_peer()
 bus=dbus.SystemBus(private=True);manager=dbus.Interface(bus.get_object('org.freedesktop.systemd1','/org/freedesktop/systemd1'),'org.freedesktop.systemd1.Manager');refs=[]
 for unit in UNITS:manager.LoadUnit(unit);manager.RefUnit(unit);refs.append(unit)
