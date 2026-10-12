@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+## SSC269 原本再検証費用の原因別対策（2026-10-12）
+
+1519/1523 readonly component計測は現原本二読1回にfilesystem判定2912回/約0.36～0.40秒、全体約0.46～0.70秒。fresh statfs family分類は再検証数/security/親1800秒を緩めず、保持FDの同じ許可集合を低費用で判定する内部対策。原因寄与と親全体の解消は分ける。独立ABI/magic/null/異path/未知/失敗・実inode/tamper/RO、影響suite/必要全回帰、当source正規別一回resume/真正親DONE/ownedstop/nativeを確認するまでBUG1106/YKT875は対応中。旧Root143/UNKNOWNは成功化せず原本/DB/Backup/INVALID/permit/nativeを保持する。
+
 ## SSC268 publication-only復旧後のcurrent Unit collection（2026-10-12）
 
 SS343 SSC268の当warm停止/normal scope証拠とcurrent GC full18/full32を分離する。INV/実行履歴が空/0でも単独で停止・成功・正常close・旧Root DONEを推定しない。当source/boot/BOM/同宣言と真正PID1/vendor・一回停止・typed intent限定退役をimmutableで保持してから、current三Unitだけのstrict cold表示、全元DB/原本/Backup/epoch/permit/native、全本人/tasks/FD/lock/peer/advisory/bus0を独立二読し、新十Refの正常返却を要する。未知差分は隔離しroot再起動/再signal/reload/再失効/再退役を発行しない。旧1508拒否/旧metadata closeUNKNOWNはそのまま記録、新readonly資格0だけを後続fresh resumeの候補条件へ使用する。RD/UI/業務仕様・元Root1800秒・品質451不変更。
