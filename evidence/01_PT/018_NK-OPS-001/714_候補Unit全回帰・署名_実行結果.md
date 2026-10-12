@@ -1,0 +1,11 @@
+# 候補Unit全回帰・署名
+
+NK-OPS-001/PT-OPS-PG1844-FULL001/PG1846-SIGN001～002、710/711/713仕様、SS343353355/SSC278/283/BUG1162。候補source0fd734195b4d5338f6b7e860e087cce561d49562、snapshot3a1b06f41c04e6c283868aaf27302843fb777b04、dev-foundation、LAN専用PG1844target/fixture/cacheからfresh実行。
+
+1844全6module終了0、1845独立XML/source/archive/static/JAR/全Mainbyte資格0。3618PT/536suite/1643physicalMain、F/E/S/flaky/not-run0・静的6module0、全Main変更/追加0。modulePT=81/163/298/969/886/1221。2026-10-12T21:43:57.059372Z～22:09:26.512898Z、1529.453526秒。server manifest SHA b5ddbb83fbf81172b0b28b704b61112503a15694831beddc5b212634777bdbeb、source archive SHA e73fd24d090461586248682f8822e35b670cfb30aabb4e779d60ca14a43f6c4f、独立qualifier SHA86058f20d3089bbbd4a7f678ae2145f6b12b845ccd158b7bdaaf3864878e5e2f。
+
+1846候補署名actual0、operator93813b9c009c1765a5edde2324488f76d5df2e7d、22:10:21.125971Z～22:10:21.363283Z。releasePG1846/BOM SHA ee75d0cd61457462eca59e67f5af2d8e677427071514940f3fb594ba93a026d7、公開signature SHA51987a404d2fac98d0f93b6ee606fed9bc40f2587b53b424b704df9204541ea5、Ed25519 verification0/187artifact/SQL28/history29。VERSION・freshqualified JAR（Main全同byte）・唯一Morning Unit10以外全byte不変。秘密signingkeyはhost私有のみ、guest変異0、candidateNotDeployed=true。署名は正常実起動/正式451の代替ではない。
+
+1850hostfreezeはnested shared classの親directory無しでexit1（BUG1181/YKT949、VM取得0/compile未開始）。oldTARGET1848/ARCHIVE1851をそのまま保全。新1855/1856/1857/1859はcanonicalrelative親mkdir0700/recursiveinventory/全actualimportgraph/全6ABI/独立postを適用し、writer・namespace独立2uniquePASS/static0。まだ新actualcompile/stage/placeは未実行、失敗をPASSへ加算0。
+
+全counter100/実candidateNative/CHR/正式451は未完。実VMはMain2741/PG1638/boot3d69/oldUnit/Root13WARNING-managerfailed10のまま、正式1964PT/53scope/全leaf増分0。次cleanfixedsource→1856全closurefreeze/6ABI→1857新stage/place各一回→1859別全post→正規hostRO/publication/唯一Unit交換/reload→合法実WARNING受入/残PGPT。
