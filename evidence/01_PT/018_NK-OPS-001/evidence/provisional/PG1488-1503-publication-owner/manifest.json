@@ -1,0 +1,136 @@
+{
+  "programId": "NK-OPS-001",
+  "specification": "659_PG1488_1503_Publication限定復旧・所有回収仕様.md",
+  "result": "660_PG1488_1503_Publication限定復旧・所有回収結果.md",
+  "source": "769ddb15cd735c25fef581b5f9850ef9d0053c0f",
+  "branch": "dev-foundation",
+  "snapshotHeadBeforeEvidence": "e6fd8e548436521906e0075cef8565d55de05a71",
+  "generatedUTC": "2026-10-12T00:18:26.209670+00:00",
+  "jdk": "25.0.4",
+  "os": "host/server Ubuntu; guest boot3d69",
+  "runs": [
+    {
+      "privateReference": "pg1488-publication-helper-frozen-v1/manifest.safe.json",
+      "manifestSha256": "abd39cd7aae8efef317a677e5f6d93b66685ef66179e16ce0aebf486ba0dad1f",
+      "exit": 0,
+      "executionStartUTC": "2026-10-11T23:26:56.956096+00:00",
+      "executionEndUTC": "2026-10-11T23:27:01.207693+00:00",
+      "missingTimeReason": null
+    },
+    {
+      "privateReference": "pg1493-publication-recovery-frozen-v2.safe.json",
+      "manifestSha256": "31347205d180093a0ccbca70c18c2a70479551145685c52eafd38c67f095bf9f",
+      "exit": 0,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1494-publication-recovery-stage-v2/manifest.safe.json",
+      "manifestSha256": "4f5fc043c50bb84d1ee066b5e9876bbb11e198c62798ea2fa4767e375736f623",
+      "exit": 0,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1495-publication-recovery-once-v2/manifest.safe.json",
+      "manifestSha256": "e410002bf9789b55c20c68aa077330833b9c0b3abc8ffcb5e1aeab90a927befb",
+      "exit": 1,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1498-retained-publication-pair-proof-v1/manifest.safe.json",
+      "manifestSha256": "ec2035b63d877a9b2fcf56a9fb610174beb03546aba8b95bcd73768bccf3906a",
+      "exit": 0,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1499-retained-publication-pair-handoff-v1/manifest.safe.json",
+      "manifestSha256": "3cc8081bc4659fcba3734c273e10c3ff5ef6dd4a62b175fb36d9e400492fce0f",
+      "exit": 1,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1500-retained-publication-pair-handoff-v2/manifest.safe.json",
+      "manifestSha256": "aa0c28f044a4ed463432e88a1d18777dea6182c30f1f4e52d97d6fb73601b748",
+      "exit": 1,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1501-retained-publication-pair-handoff-v3/manifest.safe.json",
+      "manifestSha256": "2c3ca40723bd8d53e3606adadaee81c2d49fd6534af520acd9083eaf4b5bc742",
+      "exit": 1,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1502-retained-publication-pair-handoff-v4/manifest.safe.json",
+      "manifestSha256": "5b7a6ed278e31a89759be36aa68ca511dba07309b52efaa14fdee9115f5e8a0d",
+      "exit": 1,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    },
+    {
+      "privateReference": "pg1503-retained-publication-pair-closing-v1/manifest.safe.json",
+      "manifestSha256": "3f9b36bbf889507636e268c07112032cc78802dbf0bf82b41779bbc8eece6295",
+      "exit": 0,
+      "executionStartUTC": null,
+      "executionEndUTC": null,
+      "missingTimeReason": "Original collector did not record start/end timestamps; no inferred execution time"
+    }
+  ],
+  "independentOracle": "Handwritten INVALID permit/epoch, realFD IO fault matrix, exact lifecycle/source proofs, typed localhost TCP word vectors, separately full immutable values and resources",
+  "actual": {
+    "primitiveAssertions": 27616,
+    "faultPositions": 928,
+    "managementTermSignals": 2,
+    "serviceStops": 0,
+    "intentRetired": false,
+    "independentFullPost": true,
+    "oldRoot1456": "failed143/DONE absent unchanged",
+    "old1495": "ssh143/actual1/normalclose UNKNOWN retained",
+    "old1502": "actual1/metadata closeUNKNOWN retained",
+    "technicalCounterMissed": {
+      "LINE": 880,
+      "METHOD": 174,
+      "CLASS": 12,
+      "BRANCH": 715
+    }
+  },
+  "relatedBUG": [
+    "BUG-1114",
+    "BUG-1115",
+    "BUG-1116",
+    "BUG-1117",
+    "BUG-1118",
+    "BUG-1119"
+  ],
+  "relatedYKT": [
+    "YKT-882",
+    "YKT-883",
+    "YKT-884",
+    "YKT-885",
+    "YKT-886",
+    "YKT-887"
+  ],
+  "relatedSSC": [
+    "SSC-266"
+  ],
+  "rawPrivateDbCredentialsSessionsExported": false,
+  "formalAccepted": false,
+  "wholeLeafAcceptedDelta": 0,
+  "productionPtDelta": 0,
+  "coverage100": false,
+  "formalRetained": "PT-WEB-20260925-24/1964PT/53scope"
+}
