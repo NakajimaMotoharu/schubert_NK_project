@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC275：1667actual1を保存、子の正常回収と親のsend前guard拒否を分離する。別SSH診断による/run29/32二時刻変動をBUG1152/YKT920とし、1672全現在proof（親291213/5962776/99FD/child0/soleDB291240）からSS343のnew-only一回回収へ進む。旧parent予約slotを再送せず、criticalhostgate中はguest診断/observerを拒否してhost同job付着だけ行う。sameconnectionfresh99耐久proof→同fresh直前照合→新予約/親TERM15秒終端30秒reap→別全post、旧closeUNKNOWN/actual1を保持し元業務再演0。hostgateは実対象boot/current/owner/runを記録し、正常/失敗双方でrelease、PID reuse/別ownerは許可しない。
+
 SSC274：PG1661配置前FileNotFoundErrorはBUG1150/YKT918、candidate無変異/旧scopeUNKNOWNで保持する。新独立1664proofで固定親291213/5962776-子291242/5962938-peer291240・101/4FD・M/A/OFD・双方向TCP/単一advisory/唯一busと全原値を現在証明し、SS343のsame-connection fresh全像からのみ当Ref→当Javaを各一回普通TERM/15秒終端30秒reapで限定回収する。子消失後の親pipe reaperは当子stdin/stdout対応FDの消失だけ許容、他FD/DB/MA/権限/祖先/current不変、新bus名無しを必須とする。旧noDB/nochild97FD許可は使わず、unknownは隔離/再送0、旧143UNKNOWN保全。別全postが元24/32/187/Backup/original/runtime/nativeと全資源0・新Ref正常を閉じた後だけ、実input閉包検査をM/A/DB/Ref前へ追加した別freshslotへ進む。
 
 SSC273：1653の回収直前拒否はBUG1149/YKT917としてSIG0/oldowner保持を保存する。差が当FD29/32の共有/run時刻だけでも旧guardを無条件skipしない。SS343の旧identity全一致・linked祖先/guard/ACL/他95FD/全原値二読と非減少・current上限内のfresh時刻を、同一読取接続の新十Ref保持内で独立検査し私有保存する。その同fresh97FD像からのみpidfd前後/予約/TERM直前を再認証し、変動ならsignal0・隔離・旧slot再送0。旧時刻/proof/143/closeUNKNOWNを保持、一般ancestor緩和/Production変更/別holder回収0。SSC272の当Java一回通常TERM/有限reap/全資源0・全元値/新Ref正常を閉じてからnew-only修正署名tuple/unused配置へ進む。
