@@ -1,5 +1,9 @@
 # API終端所有・fatal通知 単体テスト仕様／結果（PG-D412）
 
+## PG1634実13到達・oracle一件是正（全体合格0）
+
+依存compile/static三module終了0/空選択test-goal無し、privatecache397,968,209B/元cache全hash不変/Source不変を実証。API13実行F1/E0/S0、67.272236s、APIstatic未実行null。1件は新Test期待二行目のWEB残存（実Production APIは正しい）でBUG1142/YKT910。対象原本/log/XML/cache/slot保全、12成功を13全体PASSにしない。新1635ではSS独立literal API二行へ修正、WEB originalは正しいWEBを保持、同Main2741/新test-onlysourceでprivatecache二phaseを一回再試験する。1632の読取資格は1635成功へ限定し旧failedで実行しない。SourceMain変化0、再試験未実行。
+
 ## 限定build経過（PG1630/1631未実行PTを成功に数えない）
 
 PG1630 source2ff5/PG1631 ac38、Production2741、共にMaven1/actual1・API PT0/全static未完null。protocolのliteralfailIfNoTests=trueで空選択を拒否、BUG1141/YKT909として旧二slot保全。CLI propertyfalseでgate緩和したとは認定せず、正式POM/全6品質は不変更。

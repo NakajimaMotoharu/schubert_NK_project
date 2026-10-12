@@ -25,7 +25,7 @@ SERVER=r'''
 import datetime,hashlib,json,os,zipfile,xml.etree.ElementTree as ET
 from pathlib import Path
 os.umask(0o077)
-b=Path('/home/mini/schubert-nk-pgpt');root=b/'runs/PG1634-selected-v1';source=b/'source-selected-PG1634';out=b/'runs/PG1632-selected-qualification-v1'
+b=Path('/home/mini/schubert-nk-pgpt');root=b/'runs/PG1635-selected-v1';source=b/'source-selected-PG1635';out=b/'runs/PG1632-selected-qualification-v1'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def require(v):
  if not v:raise ValueError('actual selected contract qualification refused')

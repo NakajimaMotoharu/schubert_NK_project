@@ -142,7 +142,7 @@ final class ApiTerminalCaptureTest {
             assertEquals(failing == -1 ? List.of(70) : List.of(), exits);
             assertEquals(
                 failing < 0 || failing == 4
-                    ? "API process stopped\nWEB fixed PT native capture complete\n"
+                    ? "API process stopped\nAPI fixed PT native capture complete\n"
                     : failing >= 2 ? "API process stopped\n" : "",
                 bytes.toString(StandardCharsets.UTF_8));
           }
