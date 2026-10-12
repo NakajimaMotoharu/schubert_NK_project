@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PT-OPS-API-MAIN-001..004. Independent exit/diagnostic oracle; no actual NK success claim. */
+/** PT-OPS-API-MAIN-001..005. Independent exit/diagnostic oracle; no actual NK success claim. */
 final class ApiProcessMainTest {
   @TempDir Path root;
   private final ApiProcessMain main = new ApiProcessMain();
@@ -134,6 +134,25 @@ final class ApiProcessMainTest {
     assertThrows(NullPointerException.class, () -> main.run(new String[0], null, SOURCE));
     assertThrows(NullPointerException.class, () -> main.run(new String[0], ENV, null));
     assertThrows(NullPointerException.class, () -> main.run(new String[0], ENV, SOURCE, null));
+  }
+
+  @Test
+  void opsApiMain005ConfigurationLoadFailuresNeverEnterAssembly() {
+    var calls = new AtomicInteger();
+    NonSecretConfigSource invalid =
+        service -> {
+          assertEquals(ServiceConfigFiles.Service.API, service);
+          return new ServiceConfigFiles.Contents("", "\"nk.protocol.version\": \"INVALID\"\n");
+        };
+    NonSecretConfigSource unavailable =
+        service -> {
+          assertEquals(ServiceConfigFiles.Service.API, service);
+          throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+        };
+    assertEquals(70, main.run(new String[0], ENV, invalid, inputs -> calls.incrementAndGet()));
+    assertEquals(0, calls.get(), "invalid non-secret configuration cannot acquire runtime resources");
+    assertEquals(50, main.run(new String[0], ENV, unavailable, inputs -> calls.incrementAndGet()));
+    assertEquals(0, calls.get(), "configuration IO failure cannot enter assembly or report success");
   }
 
   @Test
