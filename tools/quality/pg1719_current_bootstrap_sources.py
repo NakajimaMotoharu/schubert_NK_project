@@ -62,9 +62,10 @@ def require(v):
  if not v:raise ValueError('current Bootstrap dependency preflight refused')
 require(os.geteuid()==0)
 root=pathlib.Path('/var/lib/pgpt-s1-preservation/pg1719-current-bootstrap-tools-v1')
+def metadata9(v):return(v.st_dev,v.st_ino,v.st_uid,v.st_gid,v.st_mode,v.st_nlink,v.st_size,v.st_mtime_ns,v.st_ctime_ns)
 def read(p):
  s=p.lstat();require(stat.S_ISREG(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode),s.st_nlink)==(0,0,0o400,1)and s.st_size<=2097152 and not os.listxattr(p))
- raw=p.read_bytes();t=p.lstat();require(s==t);return raw
+ raw=p.read_bytes();t=p.lstat();require(metadata9(s)==metadata9(t));return raw
 pins=json.loads(read(root/'payload-sha256.json'));require(type(pins)is dict and bool(pins))
 require({p.relative_to(root).as_posix()for p in root.rglob('*')if p.is_file()}==set(pins)|{'payload-sha256.json'})
 directories={str(p)for n in pins for p in pathlib.PurePosixPath(n).parents if str(p)!='.'}
