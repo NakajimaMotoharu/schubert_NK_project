@@ -64,7 +64,7 @@ def main():
     operator=subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip()
     require=lambda v:None if v else (_ for _ in ()).throw(ValueError('qualified signed candidate refused'))
     require(not any(os.path.lexists(p)for p in [NEXT,FROZEN,SIG,W/'pg1535-candidate-build-v1.safe.json']))
-    raw_gate=(W/'pg1541-filesystem-full-qualified-v2/manifest.safe.json').read_bytes();outer=json.loads(raw_gate);gate=validate_gate(outer)
+    raw_gate=(W/'pg1542-filesystem-full-qualified-v3/manifest.safe.json').read_bytes();outer=json.loads(raw_gate);gate=validate_gate(outer)
     from pg1541_filesystem_full_qualification_v2 import server_source
     require(outer['qualificationSourceSha256']==hashlib.sha256(server_source().encode()).hexdigest())
     old_raw=(OLD/'RELEASE-MANIFEST.json').read_bytes()

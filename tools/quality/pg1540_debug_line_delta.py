@@ -26,7 +26,6 @@ def positions(raw):
         else:raise ValueError('class constant tag')
         i+=1
     def attributes(n, code=False):
-        nonlocal p
         for _ in range(n):
             name=names.get(u2());size=u4();end=p+size
             if end>len(raw):raise ValueError('class attribute bounds')
