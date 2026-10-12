@@ -25,7 +25,9 @@ def payload():
         raw=(W/TOOLS/n).read_bytes()
         if hashlib.sha256(raw).hexdigest()!=fixed['fileHashes'][n]:raise ValueError('fixed current helper bytes required')
         return raw.decode()
-    prefix='CONTRACT={};exec('+repr(tool('pg1728_bootstrap_contract.py'))+',CONTRACT)\nCONFIG={};exec('+repr(tool('pg1728_configuration.py'))+',CONFIG)\n'+tool('pg1728_exec_record.py')+'\n'
+    # The full outer oracle already imports re; inline only the pinned helper's
+    # definitions so generated static analysis sees no unused redefinition.
+    prefix='CONTRACT={};exec('+repr(tool('pg1728_bootstrap_contract.py'))+',CONTRACT)\nCONFIG={};exec('+repr(tool('pg1728_configuration.py'))+',CONFIG)\n'+tool('pg1728_exec_record.py').replace('import re\n','')+'\n'
     extra=bind(current_bind(previous.base_namespace()['EXTRA']))
     extra=extra.replace('33554432','67108864')
     # Directory timestamps are a declared credential create/retire consequence;
