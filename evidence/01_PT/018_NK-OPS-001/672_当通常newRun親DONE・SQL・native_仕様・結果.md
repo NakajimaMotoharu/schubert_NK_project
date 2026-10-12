@@ -17,3 +17,15 @@ Program NK-OPS-001/MorningProcessMain、SS341/343/353・QA047/048/050・451、Pr
 新1605/1607の独立手書fixtureはBackupがSKIP、CleanupがSUCCESS、別run/day/attempt/count/error、batchがDONE後、HTTPが観測後、null/逆順日時を拒否。実生成payload static0、親工具static0。旧1602/1603/1606結果は現在正本資格に使用しない。Backup manifest/実archivehash/完全DB二handle/retention旧一世代5entry私有原byte保全は別pending、旧削除を保全済と推定しない。
 
 当source native counterはまだ未取得。前resume八streamの残1184/219/11/767を当newRun測定へ流用しない。Java四100/global451/CHR/QA051final/trace/正式は未閉鎖、正式PT-WEB-20260925-24/1964PT/53scope・全leaf増分0。
+
+## 当owned停止・native実結果追記（2026-10-12 17時台JST）
+
+上段「native未取得」は初回保存時の履歴。1610 operator992fa84b6 Werror/constructor全4phase0、1612別fullseal0/SHAa600同値、1611 immutable stage0→当四explicit正常stop/完了oneshot含む八receipt・全scope正常actual0（08:05:55.591913→08:07:27.351883UTC、91.759970s）。log SHA00c13146499c745a0d8cf5593e4ad09216b8511321141644e9b90a1542444f4a。元Root/DONEを保持し、API/Web TERM143と元Root成功0を混同しない。
+
+1613 operator131eb9df0、独立全postactual0（08:08:23.099849→08:08:29.605003UTC）、24DB三読/全32/187署名/原本Backup/startup/runtime/全十kernel空/actor消失/client-advisory-flock0/newmetadata正常、native physical14。safe path `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1613-current-ordinary-terminal-post-v1.safe.json`。
+
+1614旧catalogはsize-vs当bytes schemaでactual1（BUG1136/YKT904）、旧payload/slotを保全。1616新strict schema/原十native byte照合/static0/当BackupPID1 generation・八stream qualification0、旧API/Web四stream＋旧Inspector二streamは保全・当結果へ非採用。1617analysisは複数server.info区画parserで認証前拒否（BUG1137/YKT905）、新ee32080af/9独立test/static0/1618新slot実LAN分析0。
+
+1618同source host1532のexec/XML/JAR hashを再利用、current native8各single-session/時刻/CRC0・独立XML counter一致。server manifest63a6d3e05dda3d537187a5cf6f4050893118800cfd07b0ccb7c1fbd1b4271a12。host/native union追加L2866/M452/C28/B370、残L918/M178/C12/B716。module残はprotocol/storage/web各0、api46/2/0/1、bootstrap4/3/0/0、batch868/173/12/715。coverage100false/global未合格、前resume結果との単純gain加算0。旧Source769native/Current baseline変更0。
+
+新macro Test PT-DEP-1613001（全後条件）、PT-DEP-1616001（strict archive/Backup PID1/window/旧世代保全）、PT-DEP-1618001（同source/sessionCRC/XML/全counter）。実commandは同prefix＋pyflakes runtimeで各該当pyを一回実行、全終了0。host manifestは `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1618-current-ordinary-native-qualified-v3/manifest.safe.json`。原ログ/全private native/DB/Backupは非公開、秘密値保存0。Bootstrap/Inspector/故障枝/Backupmanifest-retention/CHR/正式451未完は継続する。
