@@ -1,5 +1,7 @@
 # 障害検知・復旧runbook
 
+SSC274：PG1661配置前FileNotFoundErrorはBUG1150/YKT918、candidate無変異/旧scopeUNKNOWNで保持する。新独立1664proofで固定親291213/5962776-子291242/5962938-peer291240・101/4FD・M/A/OFD・双方向TCP/単一advisory/唯一busと全原値を現在証明し、SS343のsame-connection fresh全像からのみ当Ref→当Javaを各一回普通TERM/15秒終端30秒reapで限定回収する。子消失後の親pipe reaperは当子stdin/stdout対応FDの消失だけ許容、他FD/DB/MA/権限/祖先/current不変、新bus名無しを必須とする。旧noDB/nochild97FD許可は使わず、unknownは隔離/再送0、旧143UNKNOWN保全。別全postが元24/32/187/Backup/original/runtime/nativeと全資源0・新Ref正常を閉じた後だけ、実input閉包検査をM/A/DB/Ref前へ追加した別freshslotへ進む。
+
 SSC273：1653の回収直前拒否はBUG1149/YKT917としてSIG0/oldowner保持を保存する。差が当FD29/32の共有/run時刻だけでも旧guardを無条件skipしない。SS343の旧identity全一致・linked祖先/guard/ACL/他95FD/全原値二読と非減少・current上限内のfresh時刻を、同一読取接続の新十Ref保持内で独立検査し私有保存する。その同fresh97FD像からのみpidfd前後/予約/TERM直前を再認証し、変動ならsignal0・隔離・旧slot再送0。旧時刻/proof/143/closeUNKNOWNを保持、一般ancestor緩和/Production変更/別holder回収0。SSC272の当Java一回通常TERM/有限reap/全資源0・全元値/新Ref正常を閉じてからnew-only修正署名tuple/unused配置へ進む。
 
 SSC272：PG1648のSIGNED_CURRENT LABEL不一致によるUNKNOWNはBUG1146/YKT914、当読取proofのFD単一仮定はBUG1147/YKT915として保全する。SS343の固定noDB/noRef/nochild Java289328/ticks5627480・proof6297a9d8…/全原値/current187/97FDとM-Aの属性FD・FLOCK・kcmp同OFD関係を二読した場合だけ、耐久予約/pidfd普通TERM一回/有限reap・独立全後条件へ進む。sudo親、旧成功/別holder/child/強制kill/直接DBterminate/業務操作を含めない。旧actual143/closeUNKNOWNを保存し、全旧資源0/全元値保持/新Ref正常の後、別fresh正常scopeと四tuple一致のnew-only unused候補配置を再試験する。新candidate未配置/全source3596限定合格と正式1964/53は区別し、QA047対策/四100/CHR/ITST別条件を維持する。
