@@ -150,9 +150,11 @@ final class ApiProcessMainTest {
           throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
         };
     assertEquals(70, main.run(new String[0], ENV, invalid, inputs -> calls.incrementAndGet()));
-    assertEquals(0, calls.get(), "invalid non-secret configuration cannot acquire runtime resources");
+    assertEquals(
+        0, calls.get(), "invalid non-secret configuration cannot acquire runtime resources");
     assertEquals(50, main.run(new String[0], ENV, unavailable, inputs -> calls.incrementAndGet()));
-    assertEquals(0, calls.get(), "configuration IO failure cannot enter assembly or report success");
+    assertEquals(
+        0, calls.get(), "configuration IO failure cannot enter assembly or report success");
   }
 
   @Test
@@ -180,7 +182,10 @@ final class ApiProcessMainTest {
         }
       }
       assertEquals(
-          "API startup entered ADMISSION\nAPI process stopped\nAPI process stopped\nAPI process failed\n",
+          "API startup entered ADMISSION\n"
+              + "API process stopped\n"
+              + "API process stopped\n"
+              + "API process failed\n",
           bytes.toString(StandardCharsets.UTF_8));
     }
   }
