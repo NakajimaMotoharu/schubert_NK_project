@@ -1,5 +1,13 @@
 # API終端所有・fatal通知 単体テスト仕様／結果（PG-D412）
 
+## PG1635/1632当Main限定13PT・静的4module資格（2026-10-12）
+
+Production2741c4546afad6c1e8b6efbd53dfb58144edf7bb/test-oracle及びsnapshot1683dd9f6de00e71d2317d9af3cd50400a37bf4e、新5＋既8＝13PT/FES0、三依存compile/static0/API mandatorytest/static0・null/format/compiler条件を限定範囲で実施。global cache不変更・397,968,209B privatecopy/install、SourceInput不変、依存PT合格加算0。上記TAIL005/006A/006B/FATALBIND001002の正常・全故障/不明/null/primary/secondary/固定診断/exit禁止が成功、fake ownerはnative許可を代替しない。
+
+別読取PG1632 actual0/13XML/fresh/全source/JAR/変更class三・追加六/三依存Mainbyte同値/静的4zeroを資格。command同PYTHONPATH `pg1635_api_terminal_two_phase_v2.py`及び`pg1632_api_terminal_qualification.py`各一回、operator1683dd9f6、qualified scriptSHA9ebd49ff37dbb4c85d057647de4f8ab6df285a9d79d2ed1264bac517e2096109/server manifestSHAf593b89d0662ad7d581ed9795eb664b4e4325a54104bf16dfc3051ff2dd54d57。host safe `/home/mini/codex/project1/work/pgpt-runs/PG379/pg1632-api-terminal-qualified-v1/manifest.safe.json`、LAN `/home/mini/schubert-nk-pgpt/runs/PG1632-selected-qualification-v1/manifest.safe.json`にactual command/source/suite/XML/JAR/Class/source/log/hash/時刻/coverageを保存。
+
+BUG1141/YKT909及びBUG1142/YKT910は当工具/限定PT範囲を実再試験で完了。旧1630/31 PT0及び1634 failed1は保持し合算0。新Source全6/native/CHR/正式は未完、次fixedsource全6 PG1633見積3596PT/532suite/1643Mainの実測・静的6module/所定451を一度実施。旧4d6 native残790/151/5/707を本sourcecoverageにしない。正式1964/53/wholeleaf増分0、IT/ST未実施。
+
 ## PG1634実13到達・oracle一件是正（全体合格0）
 
 依存compile/static三module終了0/空選択test-goal無し、privatecache397,968,209B/元cache全hash不変/Source不変を実証。API13実行F1/E0/S0、67.272236s、APIstatic未実行null。1件は新Test期待二行目のWEB残存（実Production APIは正しい）でBUG1142/YKT910。対象原本/log/XML/cache/slot保全、12成功を13全体PASSにしない。新1635ではSS独立literal API二行へ修正、WEB originalは正しいWEBを保持、同Main2741/新test-onlysourceでprivatecache二phaseを一回再試験する。1632の読取資格は1635成功へ限定し旧failedで実行しない。SourceMain変化0、再試験未実行。
