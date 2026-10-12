@@ -90,7 +90,9 @@ print(json.dumps({'actualExit':0,'refThenJavaOwnedTerm':True,'parentPeerAdvisory
 
 def payload():
     raw=proof.payload();start=raw.index('first=snapshot();require(first==snapshot());validate_current(first);a=pair();')
-    return raw[:start]+EXTRA
+    prefix=raw[:start];marker='require(not os.path.lexists(PAIR_SAVE))'
+    assert prefix.count(marker)==1
+    return prefix.replace(marker,'require(os.path.isdir(PAIR_SAVE))')+EXTRA
 
 def main():
     os.umask(0o077);out=W/'pg1499-retained-publication-pair-handoff-v1';out.mkdir(mode=0o700)
