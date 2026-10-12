@@ -1,8 +1,20 @@
 """Independent once-signal ordering and generation-race refusal vectors."""
+import ast
 import unittest
 from pyflakes.api import check
 from pg782_owned_handoff import terminate
 import pg1667_unused_pair_once_handoff as p
+
+
+def forbidden_signal(raw):
+    for node in ast.walk(ast.parse(raw)):
+        if isinstance(node, ast.Attribute) and node.attr == 'SIGKILL':
+            return True
+        if isinstance(node, ast.Name) and node.id == 'SIGKILL':
+            return True
+        if isinstance(node, ast.ImportFrom) and any(a.name == 'SIGKILL' for a in node.names):
+            return True
+    return False
 
 
 class OncePairHandoffTest(unittest.TestCase):
@@ -39,7 +51,11 @@ class OncePairHandoffTest(unittest.TestCase):
         self.assertLess(raw.index('terminate(291242,5962938'), raw.index('terminate(291213,5962776'))
         for text in ['p.poll(15000)', 'time.monotonic()+30', 'parent_after_ref(', 'daemon.NameHasOwner', 'oldCloseUnknown', 'fullIndependentPostPending']:
             self.assertIn(text, raw)
-        for text in ['SIGKILL', 'pg_terminate_backend', 'os.kill(']:
+        self.assertFalse(forbidden_signal(raw))
+        self.assertFalse(forbidden_signal("fields=['SendSIGKILL']; expected='no'"))
+        self.assertTrue(forbidden_signal('signal.pidfd_send_signal(fd,signal.SIGKILL)'))
+        self.assertTrue(forbidden_signal('from signal import SIGKILL as kill'))
+        for text in ['pg_terminate_backend', 'os.kill(']:
             self.assertNotIn(text, raw)
 
 
