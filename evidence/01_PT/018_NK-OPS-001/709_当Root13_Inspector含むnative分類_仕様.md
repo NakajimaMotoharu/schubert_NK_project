@@ -1,5 +1,11 @@
 # 当Root13 native分類
 
+## BUG1180是正後の実施仕様（2026-10-13）
+
+1840は同fileサイズから同byteと誤要求してactual1、原失敗保持。current10streamは基本8＋同Inspector terminal/closing2点、各独立SHA/metadata9、旧16＋archive20の完全保持を1842別slotで確認する。物理stream数からprocess数を推定しない（915の9process表記は未測定仮説で非認定）。1843は実vendorNativeSessions571のsessionId hash/start同一・terminal dump<=closing dump、両PID1windowと全MainclassCRC0、hostPG1755全3618/536suite同MainのqualificationInputs/JAR/exec/XML/hashとのunionを検査する。coverage合成で同probeを二重計上せず、distinctsession数は実測だけを記録する。
+
+当fullsnapshot後の差分は候補Unitと独立MUNIT testだけであることを厳密確認し、候補の未配備/未full/未受入を明示。旧成功3596/別sourceを流用しない。PT-OPS-PG1842-CAT001/PG1843-NATIVE001、独立工具2uniquePASS/static0、actualpayload静的検査とsource固定後、1842readonly一回→1843private捕捉/既LAN targetで独立資格を実施。正式100/受入加点0。
+
 Program NK-OPS-001、PT-OPS-PG1839-CAT001/PG1840-CAT001～002、SS353355/BUG1179/YKT947。1839actual1はexcluded archive guard拒否として保持。停止・業務再送0。
 
 独立oracle=元Root13 monotonic81404764713～83018953880、PID1 strictboot/root/uid1管理、Inspector固定Invocation6c5bf104…・startjob127856/stopjob128003、四イベント81623098577/81634285835/81635354035/81635354860。親WARNING原本とmanagerfailedは別保持。基本8＋Inspectorclosing1を当current9とし、同Inspector前point1はclosingとSHA/bytes同一を確認するが加算しない。旧archive20全byte保持、上書き4以外の旧16を現物完全集合で比較、unknown/filehash差を拒否。metadata9はatimeを含めない。
