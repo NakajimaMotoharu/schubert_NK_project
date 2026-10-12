@@ -1,6 +1,7 @@
 # NK-OPS-001; OPS009/UI251; SS341/342/343; SSC094/100-102/107; PG339/363/BUG316/322.
 # PGPT execution candidate with actual Backup mutation. Do not enable as the operational controller
 # until continuous M/A, fixed-eight stop, backup/Cleanup, journal, permit and exit contracts pass.
+# SSC278/BUG1162: completed WARNING10 is normal; all other nonzero exits remain failures.
 [Unit]
 Description=Schubert NK Morning root controller (fail-closed PGPT candidate)
 After=postgresql.service
@@ -16,6 +17,7 @@ LoadCredential=db-batch:/etc/schubert-nk/credentials/db-batch
 LoadCredential=mq-ops:/etc/schubert-nk/credentials/mq-ops
 ExecStart=/usr/bin/java --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8 -Duser.timezone=UTC -XX:+ExitOnOutOfMemoryError -Xms128m -Xmx512m -XX:MaxDirectMemorySize=64m -XX:MaxMetaspaceSize=192m -XX:ReservedCodeCacheSize=128m -cp /opt/schubert-nk/current/operations/batch.jar:/opt/schubert-nk/current/operations/lib/* dev.codex.schubert.nk.batch.file.MorningProcessMain
 Restart=no
+SuccessExitStatus=10
 TimeoutStartSec=30min
 TimeoutStopSec=60s
 KillMode=control-group
