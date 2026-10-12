@@ -1,6 +1,9 @@
 # 障害検知・復旧runbook
 
 
+SSC282（2026-10-13）：状態18読取に含まれない設定SuccessExitStatusを消費した1816の拒否を保持する。343同項の当currenthost/Java/Ref/管理peer、初回before＋error二file固定hash・全101/4FD/OFD/元像をfresh二読し、SSC281と同一回収接続・同inodequeued/子→親普通TERM各一回/有限reap・全管理資源0/普通daemonと全TCP/全24-32-187・原本Backup/native保持/新Ref正常・別wholepostを閉じる。開始sourcec5e201の不合格UNKNOWNを合格に変更0、旧start/stop/Backup/Root再演0。次新versionは状態18＋別設定2の実emitted完全schema oracleを取得前に確認し、元同正常8逆順停止/全後条件/nativeへ戻る。設計main公開は実回復・実装・工程完了と区別する。
+
+
 SSC281（2026-10-13）：1802停止前REFERENCE_SCOPEのUUID置換拒否は旧UNKNOWNを保持。343同項の当host/Java/Ref/管理peer・全101/4FD/OFD/qualified byte・元全像をfresh再認証し、旧host sole排他の同inodequeued後継→単一回収接続の耐久proof→子Ref一回普通TERM/有限reap/solebus消失→既知子pipeの閉鎖だけ許容・親他全FD/同管理DB/M-A再読→当Java一回普通TERM/有限reap→旧wrapper終端/同hostgate継承→管理peer/advisory/M-A0・元四daemon/全currentordinaryTCP・24/32/187/原本Backup/native保持→新Ref/bus正常返却→別wholepostの順を維持する。ordinary poolは承認済API2～8/Web1～2の全役割/app/同serviceTCP照合、管理1は固定、旧観測個数をcurrentへ転用しない。別guest診断の並行発行・強制unlock・SIGKILL/DBterminate/旧slot再送/hotpatch/元Root再演0。全emitted UUIDと実receipt独立oracleを取得前に検証してから別新正常owned stopへ進む。設計反映は実回収/PGPT正式受入と別である。
 
 SSC280（2026-10-13）：当1788はold1782像の共有/run時刻・通常poolpeerとの差を信号前に拒否したもので、手修復/旧proof書換えをしない。1792独立deltaの当29/32だけをSS343の前7不変・時刻非減少へ限定し、管理476114/同socket/advisory/全他FD・子・原本は固定、普通API/Web peerは同service/sourceのfresh全TCP両端へ再結合して新proofを耐久保存する。fresh全guard→各一回予約/普通TERM/有限reap→全原値・普通daemon/peer保持・管理peer/locks0→新Ref/bus正常返却→別wholepostの順を維持する。旧1674/1774/1784/1786/1788を正常closeへ変換せず、Root再start/reset-failed/旧slot再送0。
