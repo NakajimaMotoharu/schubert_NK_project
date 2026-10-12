@@ -1,4 +1,6 @@
 # 障害検知・復旧runbook
+
+SSC279（2026-10-13、BUG1165/1166）：停止前REFERENCE_SCOPEの当WARNING pairをSS343のfresh全101/4FD・samepeer/OFD/全元値で認証、旧host排他をforce unlockせず単一回収接続だけへ限定する。独立metadata十Ref→現proof耐久保存/同fresh/pidfd/子一回TERM・有限reap/solebus消失→親の既知子pipe閉鎖だけ許容し他全FD/同DB/M-A保持再読→当Java一回普通TERM・有限reap→管理peer/advisory/M-A0と通常API/Web peer・四daemon・全元値保持→新Ref/bus正常返却→旧wrapper終了後同inodehostgate取得→別wholepostを固定する。全peer0や全十kernel空はlive daemon保持段の成功条件ではない。旧UNKNOWNを正常closeへ推論せず、実正常stop/nativeは回収後の別作業である。片側/不明は保全・再signal0、SIGKILL/DBterminate/oldslot hotpatch・Root再start/reset-failed0。
 SSC277：1724はBUG1157の旧unused共有FD番号誤用でsignal前拒否、oldverifyUNKNOWNを保持。新Bootstrap31/90の全fresh型付きguardへ限定訂正し、旧29/32proof/slotを流用しない。hostkernelqueueは失敗/TERM0ならoldowner保持・元guest拒否を保存し、正常TERM後だけ新gate取得完了を確認、force unlock0。SS343の当一回回収・別全postへ継続する。
 
 SSC276：BUG1156のExpected constructor拒否・Ref前retainは旧UNKNOWNを保全する。livepeer前提の1722失敗/signals0と、fresh1723のserverpeer/advisory0・Java383695/7281859/99FD/soleM-A/全原値不変を区別する。DB期限消失から正常closeを推論0。SS343の固定owner限定手順で、旧hostgate soleownerの現在認証→単一回収接続のfresh全99耐久proof→同fresh/pidfd/一回予約/当Java普通TERM15秒終端30秒reap→旧wrapper終了後同inodehostgate取得→別全postを行う。force unlock/別guest診断/旧slot再送/他PID/強制kill/業務再演0。新versionのconstructor境界取得前資格後のみBootstrap正常再試験へ進む。
