@@ -31,6 +31,222 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2490-001: reverse original IDs remain ordered by role; claims never replace facts. */
+  @Test
+  void mdb2490001SkippedBackupRequiresOriginalManifestAndActualReverseOrderedPair()
+      throws Exception {
+    int n = 0;
+    for (String mode : List.of("VALID", "MISSING", "DRIFT", "ORIGINAL_EMPTY")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24900001-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2036-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2036-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      long id = 24900010L + n * 10;
+      mdb2480Seed(run, started, id, true);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      var retained = new AtomicReference<Connection>();
+      var armed = new AtomicBoolean();
+      var observed = started.plusSeconds(3600);
+      var subject = mdb2490Subject(mode, retained, armed);
+      MorningDatabaseSession.Operation<Boolean> operation =
+          session -> {
+            var current = session.beginResumeBackup(original, observed);
+            session.completeReusedBackup(current, original, observed);
+            armed.set(true);
+            var offered =
+                mode.equals("MISSING") ? Optional.<BackupManifest>empty() : Optional.of(original);
+            if (mode.equals("DRIFT"))
+              offered =
+                  Optional.of(
+                      new BackupManifest(
+                          original.databaseStep(),
+                          original.configurationStep(),
+                          original.startedAt(),
+                          original.contentFinishedAt(),
+                          original.versions(),
+                          "4".repeat(64),
+                          original.dump(),
+                          original.configuration(),
+                          original.credentials()));
+            var result = session.observeBackup(current, offered, observed, () -> 10_000_000_000L);
+            var physicalCurrent = mdb2490SqlRows(run, started, observed, id);
+            assertEquals(2, result.current().size());
+            assertEquals(2, result.prior().size());
+            for (int i = 0; i < 2; i++) {
+              String step = i == 0 ? "BACKUP_DB" : "BACKUP_CONFIG";
+              var fresh = result.current().get(i);
+              var prior = result.prior().get(i);
+              assertEquals(physicalCurrent.get(step).longValue(), fresh.attempt().id());
+              assertEquals(step, fresh.attempt().step().name());
+              assertTrue(fresh.attempt().skipped());
+              assertEquals(2, fresh.attempt().attempt());
+              assertEquals(observed, fresh.attempt().startedAt());
+              assertEquals(observed, fresh.ended());
+              assertEquals(BatchStepResult.Status.SKIPPED, fresh.result().status());
+              assertEquals(BatchStepResult.Reason.ALREADY_SUCCESSFUL, fresh.result().reason());
+              assertEquals(0, fresh.result().target());
+              assertEquals(0, fresh.result().bytes());
+              assertEquals(i == 0 ? id + 1 : id, prior.attempt().id());
+              assertEquals(step, prior.attempt().step().name());
+              assertFalse(prior.attempt().skipped());
+              assertEquals(started, prior.attempt().startedAt());
+              assertEquals(started.plusSeconds(3), prior.ended());
+              assertEquals(BatchStepResult.Status.SUCCESS, prior.result().status());
+              assertEquals(i + 1, prior.result().target());
+              assertEquals(i + 1, prior.result().success());
+              assertEquals(i == 0 ? 26 : 67, prior.result().bytes());
+            }
+            return Boolean.TRUE;
+          };
+      if (mode.equals("VALID")) assertTrue(subject.execute(credential(), operation));
+      else assertThrows(IOException.class, () -> subject.execute(credential(), operation));
+      assertTrue(retained.get().isClosed());
+      mdb2490SqlRows(run, started, observed, id);
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  /** PT-MDB2490-002: both rows and exact cardinality must be present at terminal readback. */
+  @Test
+  void mdb2490002TerminalPairRejectsMissingAndExtraDriverRows() throws Exception {
+    int n = 0;
+    for (String mode : List.of("FIRST_MISSING", "SECOND_MISSING", "EXTRA")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24900002-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2036-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2036-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      var retained = new AtomicReference<Connection>();
+      var armed = new AtomicBoolean();
+      assertThrows(
+          IOException.class,
+          () ->
+              mdb2490Subject(mode, retained, armed)
+                  .execute(
+                      credential(),
+                      session -> {
+                        var current = session.beginBackup(run, started, false);
+                        var failed =
+                            new BatchStepResult(
+                                BatchStepResult.Status.FAILED,
+                                1,
+                                0,
+                                1,
+                                0,
+                                BatchStepResult.Reason.COMMAND_FAILURE);
+                        session.failBackup(current, started.plusSeconds(3), failed, failed);
+                        armed.set(true);
+                        session.observeBackup(
+                            current,
+                            Optional.empty(),
+                            started.plusSeconds(5),
+                            () -> 10_000_000_000L);
+                        return Boolean.TRUE;
+                      }));
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(started.plusSeconds(3)));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  private static Map<String, Long> mdb2490SqlRows(
+      BatchRun run, Instant started, Instant observed, long id) throws SQLException {
+    var current = new HashMap<String, Long>();
+    try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s =
+            c.prepareStatement(
+                "select"
+                    + " id,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary"
+                    + " from schubert.batch_runs where run_id=? order by attempt,step")) {
+      s.setObject(1, run.id());
+      try (var r = s.executeQuery()) {
+        for (int attempt = 1; attempt <= 2; attempt++)
+          for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+            assertTrue(r.next());
+            assertEquals(step, r.getString("step"));
+            assertEquals(attempt, r.getInt("attempt"));
+            assertEquals(
+                attempt == 1 ? started : observed, r.getTimestamp("started_at").toInstant());
+            assertEquals(
+                attempt == 1 ? started.plusSeconds(3) : observed,
+                r.getTimestamp("ended_at").toInstant());
+            assertEquals(attempt == 1 ? "SUCCESS" : "SKIPPED", r.getString("status"));
+            long count = attempt == 2 ? 0 : step.equals("BACKUP_DB") ? 1 : 2;
+            assertEquals(count, r.getLong("target_count"));
+            assertEquals(count, r.getLong("success_count"));
+            assertEquals(0, r.getLong("failure_count"));
+            assertEquals(
+                attempt == 2 ? 0 : step.equals("BACKUP_DB") ? 26 : 67, r.getLong("byte_count"));
+            assertEquals(attempt == 1 ? null : "ALREADY_SUCCESSFUL", r.getString("error_code"));
+            assertEquals(
+                attempt == 1 ? null : "step already successful for business date",
+                r.getString("error_summary"));
+            if (attempt == 1) assertEquals(step.equals("BACKUP_DB") ? id + 1 : id, r.getLong("id"));
+            else current.put(step, r.getLong("id"));
+          }
+        assertFalse(r.next());
+      }
+    }
+    return current;
+  }
+
+  private static MorningDatabaseSession mdb2490Subject(
+      String mode, AtomicReference<Connection> retained, AtomicBoolean armed) {
+    var queries = new AtomicInteger();
+    return new MorningDatabaseSession(
+        actualUrl,
+        () -> {},
+        (url, properties) -> {
+          var c = DriverManager.getConnection(url, properties);
+          retained.set(c);
+          return (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (ignored, method, args) -> {
+                    Object result = mdb2292Invoke(method, c, args);
+                    if (!armed.get()
+                        || !method.getName().equals("prepareStatement")
+                        || !((String) args[0]).contains("order by id for update")
+                        || !((String) args[0]).contains("from schubert.batch_runs")) return result;
+                    var statement = (PreparedStatement) result;
+                    return Proxy.newProxyInstance(
+                        PreparedStatement.class.getClassLoader(),
+                        new Class<?>[] {PreparedStatement.class},
+                        (unused, called, input) -> {
+                          Object value = mdb2292Invoke(called, statement, input);
+                          if (!called.getName().equals("executeQuery")) return value;
+                          int query = queries.incrementAndGet();
+                          var rows = (ResultSet) value;
+                          var ordinal = new AtomicInteger();
+                          return Proxy.newProxyInstance(
+                              ResultSet.class.getClassLoader(),
+                              new Class<?>[] {ResultSet.class},
+                              (unusedRows, read, columns) -> {
+                                Object real = mdb2292Invoke(read, rows, columns);
+                                if (!read.getName().equals("next")) return real;
+                                int row = ordinal.incrementAndGet();
+                                if (mode.equals("ORIGINAL_EMPTY") && query == 2 && row == 1)
+                                  return false;
+                                if (query == 1) {
+                                  if (mode.equals("FIRST_MISSING") && row == 1
+                                      || mode.equals("SECOND_MISSING") && row == 2) return false;
+                                  if (mode.equals("EXTRA") && row == 3) return true;
+                                }
+                                return real;
+                              });
+                        });
+                  });
+        },
+        c -> {});
+  }
+
   /** PT-MDB2486-001: a lost final advisory observation rejects otherwise valid readback. */
   @Test
   void mdb2486001FinalAdvisoryObservationCannotReuseInitialAdmission() throws Exception {
@@ -460,6 +676,11 @@ final class MorningDatabaseSessionTest {
   }
 
   private static void mdb2480Seed(BatchRun run, Instant started, long id) throws SQLException {
+    mdb2480Seed(run, started, id, false);
+  }
+
+  private static void mdb2480Seed(BatchRun run, Instant started, long id, boolean reverse)
+      throws SQLException {
     try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var s =
             c.prepareStatement(
@@ -467,7 +688,7 @@ final class MorningDatabaseSessionTest {
                     + "(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
                     + " values(?,?,?, ?,1,?,?,'SUCCESS',?,?,?)")) {
       for (int n = 0; n < 2; n++) {
-        s.setLong(1, id + n);
+        s.setLong(1, id + (reverse ? 1 - n : n));
         s.setObject(2, run.id());
         s.setObject(3, started.atZone(java.time.ZoneOffset.UTC).toLocalDate());
         s.setString(4, n == 0 ? "BACKUP_DB" : "BACKUP_CONFIG");
