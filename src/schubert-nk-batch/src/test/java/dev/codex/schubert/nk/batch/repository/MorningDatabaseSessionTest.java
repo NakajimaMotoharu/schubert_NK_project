@@ -31,6 +31,242 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2480-001: actual DB rows remain unchanged when JDBC projections are invalid. */
+  @Test
+  void mdb2480001SuccessfulBackupRejectsUntrustedProjectionAndPreservesSqlRows() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("24800001-2222-4333-8444-555555555555"),
+            Instant.parse("2033-01-09T15:00:00Z"));
+    var started = Instant.parse("2033-01-10T02:00:00Z");
+    mdb2480Seed(run, started, 24800010);
+    for (String fault :
+        List.of(
+            "DATE",
+            "START",
+            "FUTURE",
+            "NANO",
+            "TARGET",
+            "SUCCESS",
+            "FAILURE",
+            "BYTE",
+            "ERROR_CODE",
+            "ERROR_SUMMARY",
+            "NULL_ID",
+            "NULL_STEP",
+            "NULL_END")) {
+      var retained = new AtomicReference<Connection>();
+      IOException failure =
+          assertThrows(
+              IOException.class,
+              () ->
+                  mdb2480Subject(fault, retained)
+                      .execute(
+                          credential(),
+                          session -> session.successfulBackup(run, started.plusSeconds(10))));
+      assertEquals("root batch database unavailable", failure.getMessage());
+      assertTrue(retained.get().isClosed());
+      mdb2480SqlRows(run, started, 24800010);
+      mdb2292NoOwnerResources();
+    }
+    mdb2480Positive(run, started, 24800010);
+  }
+
+  /** PT-MDB2480-002: incomplete/contradictory pairs or SQL failure cannot authorize reuse. */
+  @Test
+  void mdb2480002SuccessfulBackupRejectsPairDriftAndSqlFailureWithoutMutation() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("24800002-2222-4333-8444-555555555555"),
+            Instant.parse("2033-02-09T15:00:00Z"));
+    var started = Instant.parse("2033-02-10T02:00:00Z");
+    mdb2480Seed(run, started, 24800020);
+    for (String fault :
+        List.of(
+            "SECOND_MISSING",
+            "EXTRA",
+            "PAIR_STEP",
+            "PAIR_ATTEMPT",
+            "PAIR_START",
+            "PAIR_END",
+            "SQL")) {
+      var retained = new AtomicReference<Connection>();
+      assertThrows(
+          IOException.class,
+          () ->
+              mdb2480Subject(fault, retained)
+                  .execute(
+                      credential(),
+                      session -> session.successfulBackup(run, started.plusSeconds(10))));
+      assertTrue(retained.get().isClosed());
+      mdb2480SqlRows(run, started, 24800020);
+      mdb2292NoOwnerResources();
+    }
+    var retained = new AtomicReference<Connection>();
+    assertEquals(
+        Optional.empty(),
+        mdb2480Subject("FIRST_MISSING", retained)
+            .execute(
+                credential(), session -> session.successfulBackup(run, started.plusSeconds(10))));
+    assertTrue(retained.get().isClosed());
+    mdb2480SqlRows(run, started, 24800020);
+    mdb2292NoOwnerResources();
+    mdb2480Positive(run, started, 24800020);
+  }
+
+  private static void mdb2480Seed(BatchRun run, Instant started, long id) throws SQLException {
+    try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s =
+            c.prepareStatement(
+                "insert into schubert.batch_runs"
+                    + "(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
+                    + " values(?,?,?, ?,1,?,?,'SUCCESS',?,?,?)")) {
+      for (int n = 0; n < 2; n++) {
+        s.setLong(1, id + n);
+        s.setObject(2, run.id());
+        s.setObject(3, started.atZone(java.time.ZoneOffset.UTC).toLocalDate());
+        s.setString(4, n == 0 ? "BACKUP_DB" : "BACKUP_CONFIG");
+        s.setTimestamp(5, Timestamp.from(started));
+        s.setTimestamp(6, Timestamp.from(started.plusSeconds(3)));
+        s.setLong(7, n + 1);
+        s.setLong(8, n + 1);
+        s.setLong(9, n == 0 ? 26 : 67);
+        assertEquals(1, s.executeUpdate());
+      }
+    }
+  }
+
+  private static void mdb2480SqlRows(BatchRun run, Instant started, long id) throws SQLException {
+    try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s =
+            c.prepareStatement(
+                "select"
+                    + " id,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary"
+                    + " from schubert.batch_runs where run_id=? order by id")) {
+      s.setObject(1, run.id());
+      try (var r = s.executeQuery()) {
+        for (int n = 0; n < 2; n++) {
+          assertTrue(r.next());
+          assertEquals(id + n, r.getLong("id"));
+          assertEquals(n == 0 ? "BACKUP_DB" : "BACKUP_CONFIG", r.getString("step"));
+          assertEquals(1, r.getInt("attempt"));
+          assertEquals(started, r.getTimestamp("started_at").toInstant());
+          assertEquals(started.plusSeconds(3), r.getTimestamp("ended_at").toInstant());
+          assertEquals("SUCCESS", r.getString("status"));
+          assertEquals(n + 1, r.getLong("target_count"));
+          assertEquals(n + 1, r.getLong("success_count"));
+          assertEquals(0, r.getLong("failure_count"));
+          assertEquals(n == 0 ? 26 : 67, r.getLong("byte_count"));
+          assertNull(r.getString("error_code"));
+          assertNull(r.getString("error_summary"));
+        }
+        assertFalse(r.next());
+      }
+    }
+  }
+
+  private static void mdb2480Positive(BatchRun run, Instant started, long id) throws Exception {
+    var retained = new AtomicReference<Connection>();
+    var expected =
+        new MorningDatabaseSession.BackupBegins(
+            new BatchStepAttempt(id, run, BatchStep.BACKUP_DB, 1, started, false),
+            new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_CONFIG, 1, started, false));
+    assertEquals(
+        Optional.of(expected),
+        mdb2480Subject("", retained)
+            .execute(
+                credential(), session -> session.successfulBackup(run, started.plusSeconds(10))));
+    assertTrue(retained.get().isClosed());
+    mdb2480SqlRows(run, started, id);
+    mdb2292NoOwnerResources();
+  }
+
+  private static MorningDatabaseSession mdb2480Subject(
+      String fault, AtomicReference<Connection> retained) {
+    return new MorningDatabaseSession(
+        actualUrl,
+        () -> {},
+        (url, properties) -> {
+          var c = DriverManager.getConnection(url, properties);
+          retained.set(c);
+          return (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (proxy, method, args) -> {
+                    Object result = mdb2292Invoke(method, c, args);
+                    if (!method.getName().equals("prepareStatement")
+                        || !((String) args[0]).contains("status='SUCCESS'")) return result;
+                    var statement = (PreparedStatement) result;
+                    return Proxy.newProxyInstance(
+                        PreparedStatement.class.getClassLoader(),
+                        new Class<?>[] {PreparedStatement.class},
+                        (unused, called, input) -> {
+                          if (called.getName().equals("executeQuery") && fault.equals("SQL"))
+                            throw new SQLException(
+                                "public fixture projection unavailable", "08006");
+                          Object value = mdb2292Invoke(called, statement, input);
+                          if (!called.getName().equals("executeQuery")) return value;
+                          var rows = (ResultSet) value;
+                          var ordinal = new AtomicInteger();
+                          return Proxy.newProxyInstance(
+                              ResultSet.class.getClassLoader(),
+                              new Class<?>[] {ResultSet.class},
+                              (ignored, read, columns) -> {
+                                String name = read.getName();
+                                if (name.equals("next")) {
+                                  int n = ordinal.incrementAndGet();
+                                  boolean real = rows.next();
+                                  if (fault.equals("FIRST_MISSING") && n == 1
+                                      || fault.equals("SECOND_MISSING") && n == 2) return false;
+                                  if (fault.equals("EXTRA") && n == 3) return true;
+                                  return real;
+                                }
+                                Object real = mdb2292Invoke(read, rows, columns);
+                                if (!(name.equals("getObject") || name.equals("getString")))
+                                  return real;
+                                String key = (String) columns[0];
+                                if (ordinal.get() == 1) {
+                                  if (fault.equals("DATE") && key.equals("business_date"))
+                                    return ((java.time.LocalDate) real).plusDays(1);
+                                  if (fault.equals("START") && key.equals("started_at"))
+                                    return ((java.time.OffsetDateTime) real).plusSeconds(4);
+                                  if (fault.equals("FUTURE") && key.equals("ended_at"))
+                                    return ((java.time.OffsetDateTime) real).plusSeconds(100);
+                                  if (fault.equals("NANO") && key.equals("ended_at"))
+                                    return ((java.time.OffsetDateTime) real).plusNanos(1);
+                                  if ((fault.equals("TARGET") && key.equals("target_count"))
+                                      || (fault.equals("SUCCESS") && key.equals("success_count"))
+                                      || (fault.equals("BYTE") && key.equals("byte_count")))
+                                    return 0L;
+                                  if (fault.equals("FAILURE") && key.equals("failure_count"))
+                                    return 1L;
+                                  if (fault.equals("ERROR_CODE") && key.equals("error_code")
+                                      || fault.equals("ERROR_SUMMARY")
+                                          && key.equals("error_summary")) return "public fixture";
+                                  if (fault.equals("NULL_ID") && key.equals("id")
+                                      || fault.equals("NULL_STEP") && key.equals("step")
+                                      || fault.equals("NULL_END") && key.equals("ended_at"))
+                                    return null;
+                                }
+                                if (ordinal.get() == 2) {
+                                  if (fault.equals("PAIR_STEP") && key.equals("step"))
+                                    return "BACKUP_CONFIG";
+                                  if (fault.equals("PAIR_ATTEMPT") && key.equals("attempt"))
+                                    return 2;
+                                  if (fault.equals("PAIR_START") && key.equals("started_at"))
+                                    return ((java.time.OffsetDateTime) real).plusSeconds(1);
+                                  if (fault.equals("PAIR_END") && key.equals("ended_at"))
+                                    return ((java.time.OffsetDateTime) real).plusSeconds(1);
+                                }
+                                return real;
+                              });
+                        });
+                  });
+        },
+        connection -> {});
+  }
+
   /** PT-MDB2292-001: each completion guard rejects JDBC drift before business mutation. */
   @Test
   void mdb2292001AbandonedRequestRejectsEveryJdbcInvariantBeforeMutation() throws Exception {
