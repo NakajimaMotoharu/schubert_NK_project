@@ -1,0 +1,14 @@
+# NK-OPS-001 新Rootの正常WARNINGとowned停止
+
+OPS009/UI251/SS341343354/SSC283/QA047/BUG1200/YKT968。current0fd/PG1846/BOMee75/boot3d69、当source full3618/536/1643/static6zeroは既資格、tool-only再Maven0。旧Root13failed10・旧143UNKNOWNを保持。正式1964PT/53scope/全leaf0、GC0値を実exit0・親成功へ流用しない。
+
+|Test ID|対象・独立根拠・入力|期待|実結果・証跡|
+|---|---|---|---|
+|PT-OPS-PG2021-TERM001～004|新binding/真正PID1journal/新DONE/通常Unit・完全GC|独立正常0/10、同run/cutoff新activation、同boot-inv-job/mono30分内/同PID1成功2event、完全GCは履歴だけ・exit観測null、部分GC/foreign/null/timeout拒否|4PASS/static0、実2021actual0/source7a9cd28bc/UTC01:45:45.224794→46.509013/payloadca9f16e9f1587ba14134d9beeab22429397db8b36a5e4e1a62f1736f4fce7e71。newDONE10/PID1normaldone、elapsed1572.506988sec/GCtrue・観測exitnull|
+|PT-OPS-PG2023-ROWS001～003|SS341/V019/DDL全24after・独立10step/HTTP2fixture|全oldrow保持・9skip/1protectedwarning・sameRunprogress4不変・各newattempt旧max+1/0count、HTTPLog-SENToutbox1対1・匿名session/hash/ciphertext/null・時刻|3PASS/static0、実2023actual0/01:45:55.786487→01:46:04.190031/payload3bcd7dcc1df7ed5f35f2463740b1179a3f5b458e3e607beac0fcbc4b112168d1。旧全24保持、新HTTP/log/session/SENT各222、9skip/1warning、afterSHAcbfd82efbf253a4c6687cce6ce2b3cee3ab4c6f6fc95316f8fe95eb950d86274|
+|PT-OPS-PG2025-FULL001|current signature187/32config/3回全snapshot/ordinary4owner・独立2021/2023|同source/BOM/privatebefore/Root完成fact、各PID/Invocation/ticks/argvSHA/cgroup/NSS/caps/旧credential-proof/runtime/DB整合、十Ref正常返却。原本Backup内容は別終了依存|1PASS/static0、実2025actual0/01:46:15.888910→44.102138/payload3e8ac9921033c87f58bb21e6c96d35b9b90c1bf659b46004277076d42bcb712a/全before8a7d42b110a047d60a3b10d948cf51731dab4b37b59d85052332acaa42942788。fourlive/API556661-Web557699-Caddy559600-Artemis517340/ordinary同source、非秘密公開だけ|
+|PT-OPS-PG2027-FIELDS001|8a7d全封緘から親18field限定extract|現在managerを推定せず封緘sha/source/18field一致、権限・設定値/原本秘密公開0|readonlyactual0/payload619d87fc9440d76a00f85bb490d5389ce94ab16ee6bceaa3c21213dd3c48e5d2/sourceは当未commit工具hash・正式加算0、W/pg2027-fresh-sealed-parent-fields-v1.safe.json|
+|PT-OPS-PG2030-SOURCE001|15actualsource/全static+親18/config2 exact|新normalWarningRootproofだけ・完全GC固定18/Success10、全fieldforeign拒否、旧UUID1772不変/旧failedParentへfallback0|1PASS/static0、実ABI/VM未実行|
+|PT-OPS-PG2032-ENTRY001|actualimmutable stage/取得前prequal/flatmanifest/newprofile|新TOOLS archive/remote/root一意/全hash、Parentstate18とconfig2を別読、現whole8a7dを連続fresh照合して予約、8owned順逆停止・newScopes正常返却・旧failed保持|1PASS/static0、実stage/stop未実行|
+
+全actualW/PG379の上記各new-onlymanifest、guest各専用0700/原本journal/DBは私有root600、credential/session/token/dump公開0。commandは既PYTHONPATHで2021→2023→2025→2027、次固定clean source2031compile→2032stage/stop一回。compiler所定全phase/actualInputCtorABIは省略しない。既Root/Backup/ADMIN/通常reload/runtime準備/onlinegrowを再演しない。2032actualnewStop以外の旧停止をsourceへ流用0、同source別post/native/正規runtime退役/CHR/四100/正式451・残PGPTは未完。原本Backup内容・保持・意図退役はbusinessFullOraclePending/backupManifestRetentionOraclePendingを維持し、単に全snapshot一致で加点しない。
