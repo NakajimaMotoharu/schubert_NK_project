@@ -136,6 +136,112 @@ final class MorningDatabaseSessionTest {
     }
   }
 
+  /** PT-MDB2402-001: observation cannot relax an owned JDBC invariant or mutate failed rows. */
+  @Test
+  void mdb2402001ObservationRejectsJdbcDriftBeforeMutation() throws Exception {
+    int index = 0;
+    for (String fault : List.of("AUTO", "READONLY", "HELD")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24020001-2222-4333-8444-" + String.format("%012d", ++index)),
+              Instant.parse("2032-01-09T15:00:00Z").plusSeconds((index - 1L) * 86400));
+      var started = Instant.parse("2032-01-10T02:00:00Z").plusSeconds((index - 1L) * 86400);
+      var ended = started.plusSeconds(3);
+      var drift = new AtomicReference<String>("");
+      var retained = new AtomicReference<Connection>();
+      mdb2292Subject(drift, retained)
+          .execute(
+              credential(),
+              session -> {
+                var begins = session.beginBackup(run, started, false);
+                var failed =
+                    new BatchStepResult(
+                        BatchStepResult.Status.FAILED,
+                        1,
+                        0,
+                        1,
+                        0,
+                        BatchStepResult.Reason.COMMAND_FAILURE);
+                session.failBackup(begins, ended, failed, failed);
+                drift.set(fault);
+                try {
+                  assertThrows(
+                      IOException.class,
+                      () ->
+                          session.observeBackup(
+                              begins, Optional.empty(), ended, () -> 10_000_000_000L));
+                } finally {
+                  drift.set("");
+                }
+                var observed =
+                    session.observeBackup(begins, Optional.empty(), ended, () -> 10_000_000_000L);
+                assertTrue(observed.prior().isEmpty());
+                assertEquals(2, observed.current().size());
+                for (var row : observed.current()) {
+                  assertEquals(ended, row.ended());
+                  assertEquals(failed, row.result());
+                  assertEquals(Optional.of("COMMAND_FAILURE"), row.errorCode());
+                  assertEquals(Optional.of("batch command failed"), row.errorSummary());
+                }
+                mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+                return Boolean.TRUE;
+              });
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  /** PT-MDB2402-002: no terminal observation before completion or while a handoff is active. */
+  @Test
+  void mdb2402002ObservationRejectsUnfinishedAndActiveHandoff() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("24020002-2222-4333-8444-555555555555"),
+            Instant.parse("2032-02-09T15:00:00Z"));
+    var started = Instant.parse("2032-02-10T02:00:00Z");
+    var ended = started.plusSeconds(3);
+    var retained = new AtomicReference<Connection>();
+    mdb2292Subject(new AtomicReference<>(""), retained)
+        .execute(
+            credential(),
+            session -> {
+              var begins = session.beginBackup(run, started, false);
+              assertThrows(
+                  IOException.class,
+                  () ->
+                      session.observeBackup(
+                          begins, Optional.empty(), ended, () -> 10_000_000_000L));
+              mdb2292Rows(run, "RUNNING", started, Optional.empty());
+              var failed =
+                  new BatchStepResult(
+                      BatchStepResult.Status.FAILED,
+                      1,
+                      0,
+                      1,
+                      0,
+                      BatchStepResult.Reason.COMMAND_FAILURE);
+              session.failBackup(begins, ended, failed, failed);
+              assertEquals(
+                  30,
+                  session.handoffCleanup(
+                      () -> {
+                        assertThrows(
+                            IOException.class,
+                            () ->
+                                session.observeBackup(
+                                    begins, Optional.empty(), ended, () -> 10_000_000_000L));
+                        mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+                        return 30;
+                      }));
+              mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+              return Boolean.TRUE;
+            });
+    assertTrue(retained.get().isClosed());
+    mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+    mdb2292NoOwnerResources();
+  }
+
   private static MorningDatabaseSession mdb2292Subject(
       AtomicReference<String> drift, AtomicReference<Connection> retained) {
     return new MorningDatabaseSession(
