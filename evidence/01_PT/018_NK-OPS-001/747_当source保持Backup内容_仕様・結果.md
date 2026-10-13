@@ -1,0 +1,9 @@
+# PG2232 / PT-OPS-2232-001
+
+NK-OPS-001/SS3416.4・343/QA047052/451、Main3b7f/PG2126/BOM62213f、新bootb2d6。既newrun02bddddf/activation20b86040/cutoff2026-10-13T06:29:34.698736Zの保持Backupだけを検証、Backup/Root/ADMIN再発行0。
+
+独立oracle=SS canonicalManifest字段順/ASCII/UTC6/UUID/三archive名・物理size/hash・公開recipientfingerprint/profileversion、V003の二step handle/id-attempt-time/COUNT-BYTE/SUCCESS・SKIP履歴契約、八configurationallowlist/signedpayload又は外部hostenvの正規byte-owner-mode責任分離。root私有保持directory/NOFOLLOW相対FD/O_EXCL無変異/全metadata二読/一覧正常0を検証、秘密credential実体を復号・公開しない。古いproductionからexpected生成0、固定独立helperのbodyだけを当run/cutoff/PG2126へ役割限定束縛し、古い操作入口は実行しない。
+
+独立tool1PT/staticwhole0→actual0/payloadc0990fd01a088247d00472e444b83880879ee3847267575e016bf7ca376deee9、Backup三archive14,472,450B/二完全DBhandle/八config、MANIFEST9cef132e44cecbd1296b5f3ea0e5c40f74e51a87c7c3d2a75b0be9775a69ee51。dump14,410,810B、config20,480B、age暗号41,160B、実pg_restore-list0/hash21475b92d7900c0c7191f19b3441b9755e356213d06e2a4d609ce4ff2eeac6fc。全24DB/32設定/187署名/原本Backup/12空role/hostRO/元DONE/全管理資源0不変、aftere3119118は2218post像と一致。
+
+復元・世代保持・prune・intent退役は未受入、rawdump/credential/cipher実体はGitへ格納0、正式1964/53/全leaf0。W/PG379/pg2232-newsource-retained-backup-content-v1及びguest同私有slotに結果・時刻・command等を保全、実値入力と三hashは私有manifest参照。oldownedstop/nativeはOS停止で合格化しない。

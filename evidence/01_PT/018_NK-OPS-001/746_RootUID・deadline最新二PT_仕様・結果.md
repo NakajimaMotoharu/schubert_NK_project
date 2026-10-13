@@ -1,0 +1,7 @@
+# ROOTCTX010/011 / PG2222 最新二試験集合
+
+Main3b7f/SS342343SSC137164/451、testSourcea3ff9e68eeead54817271e2529b100ec41aed15b。ROOTCTX010は745の実PID/UID範囲拒否、ROOTCTX011はNativeIo.unitDeadlineの固定systemctl argv（Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic四項目/固定WEB名）・独立ASCII vector返却・IO例外同一性・null拒否。readiness七項目との取り違えを拒否する根拠はSS同generation/budget照合。実systemd/他processへの開始停止無し、callerfixtureのFakeProcess正常close、失敗は正常扱いにしない。
+
+独立期待=literal argv・literal四property bytes・固定IOException instance/nullでNPE、production methodからexpected生成0。JUnitselectorは二固定methodのみ、真正Started/Found/Succeeded各2/failed-skipped-aborted-containerfail0、正規testsXMLは二名を一意記録。全Mainは2125資格のJAR/hostexechashへ照合し、javac-Werrorで別test/helperだけcompile、既fixture前後同一/新単一hostexec、六jar AnalyzerNoMatch0。古い0fdnative合算0/Productioncompile0/VMaction0。
+
+actual0/最新2PT/FES-aborted-notrun0/javacWarnings0/CRC0、manifest861d9466b0bcb6b3fcdb6af44260190d5586a18293c5fadad39ac47f6017bfdc/payload84c535ae7896e7af72969e9a119c0ef787c9d460119035b30ad7f43c33cf862c。同Mainhost-only残3724/623/37/952・基点2125からΔ5/3/0/4、先行PG2220oneと足して3へ算入0。full2228/2229・native・四100・正式451は未受入、正式1964/53/全leaf0。LANruns/PG2222-selected-v1/tests.xml/selected.exec/六XML/manifest及びW/PG379/pg2222-root-host-selected-v1に安全hash・実command/input/versions・実時刻を保存。
