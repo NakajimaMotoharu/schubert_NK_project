@@ -29,6 +29,11 @@ def sources():
     require(command(['/usr/bin/findmnt','--target',str(runtime_root),'--output','FSTYPE','--noheadings']).strip()==b'tmpfs')"""
     refs=prior.one(refs,old,new)
     refs=prior.one(refs,'runtime.owned_prepare(runtime_before[str(runtime_directory)][\'metadata\'],dropin)','runtime.owned_prepare(runtime_before[str(runtime_root)][\'metadata\'],dropin)')
+    # BUG1232: Linux inode timestamps may use CLOCK_REALTIME_COARSE, not the
+    # finer userspace time.time_ns sampled just before mkdir. Preserve the
+    # actual clock's lower sample, not an invented tolerance/subtracted margin.
+    refs=prior.one(refs,'mutation_begin_ns=time.time_ns()','mutation_begin_ns=metadata_lower_ns()')
+    refs=prior.one(refs,'def main():',METADATA_CLOCK+'\ndef main():')
     result['pg2316_native_refs.py']=refs
     contract=result['pg2316_resume_contract.py']
     contract=contract[:contract.index('def runtime_tree(')]+COLD_TREE
@@ -38,6 +43,20 @@ def sources():
             if check(raw,'<current cold resume '+name+'>'):raise ValueError('whole cold source globals required')
             compile(raw,'<current cold resume>','exec')
     return result
+
+
+METADATA_CLOCK=r'''
+def metadata_lower_ns():
+    # Linux CLOCK_REALTIME_COARSE is clock ID 5. Failure is not a fallback.
+    resolution=time.clock_getres(5)
+    fine_before=time.time_ns()
+    lower=time.clock_gettime_ns(5)
+    fine_after=time.time_ns()
+    require(type(resolution)is float and 0<resolution<=1)
+    require(type(fine_before)is int and type(lower)is int and type(fine_after)is int)
+    require(0<fine_before<=fine_after and 0<lower<=fine_after)
+    return lower
+'''
 
 
 COLD_TREE=r'''
