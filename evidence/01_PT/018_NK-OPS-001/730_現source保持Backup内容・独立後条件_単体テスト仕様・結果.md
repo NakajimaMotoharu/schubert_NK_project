@@ -1,5 +1,11 @@
 # NK-OPS-001 現source保持Backup内容・独立後条件
 
+## PT-OPS-PG2068-BACKUP001 actual0（2026-10-13 12:06JST）
+
+新2068actual0/operator7d20765cc77ebcd709c23022059e65a601f058fb/UTC03:01:50.028997→03:01:58.426199/payloadSHAb9503473d8f5bcbdb97d5538efa503f7acaffced85a3937db6234966cac09b83。W/pg2068-retained-backup-replay-history-post-v1/manifest.safe.json。元Backup canonical/三物理file sizehash/二SUCCESS handleと合法後続SKIPPED/config allowlist8/recipient/pg_restore-list0を確認。総19,267,216B、config＋暗号credential61,640B、manifestSHAad99b7614fc2f5c9f8507d8be179942cfcb8ae90f697718ea17d8a1963de394f、dump-listSHA299144585f7a507a3470c7d7e7693447179040a282a78dae0cf968d6546e0fa7。DB全24/32設定/187署名/全kernel-actor-client-advisory-FLOCK0/native32は同scope内二読不変、Backup/start/restore/prune/SQLwrite0。復元・世代削除の全受入は別未完。
+
+2068entry独立PT初回失敗はBUG1206/YKT974、共有module.SLOTの波及をisolated function globalsへ修正、旧失敗commit076135b54を保持。7d20765ccの独立3PASS（歴史canonical1・retainedhandle1・actualentry1）/生成全static0→実post0、期待値を緩和せず終了。BUG1205/YKT973と1206/YKT974は当工具対象範囲完了、正式1964-53/全leaf増分0/coverage未完は不変更。
+
 ## 保持handle/後続skip是正（2026-10-13 12:02JST）
 
 2064readOnlyactual1/operatorc82db1019/UTC02:58:19.622110→25.170913：旧manifest oracleが同run-step単一行を要求し、合法resumeの後続SKIPPEDを拒否。BUG1205/YKT973へ先行起票、旧slotと失敗を保持。新2066独立oracleはmanifest id/attemptの元SUCCESS一件を厳密選択、後続rowは別id/attempt・同business date・ALREADY_SUCCESSFUL/SKIPPED/全4counter0・started=end・content完了後だけ許可、未知/重複/逆時刻を拒否する。元canonical/hash/owner/byte/SQL後条件を変更しない。歴史1259全negativeも保持、独立2PASS（旧1＋新1）、新2068はfullclosure/entry構成PTを追加した別readOnlyslot。Backup/restore/start/prune/SQL更新0、実2068未実行。command=`python3 -B tools/quality/pg2068_retained_backup_replay_history_post.py`、W同slot manifest。全品質/正式は未完。
