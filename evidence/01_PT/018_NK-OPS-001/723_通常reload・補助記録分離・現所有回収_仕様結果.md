@@ -1,5 +1,7 @@
 # NK-OPS-001 通常reload・限定回収の独立PT
 
+09:03JST結果追記：別1963全postactual0/operator007ec2d3b3e30bee6e2cd2f6a398c19b1b2029ae、UTC2026-10-13T00:01:13.383513→00:01:21.116926、payloadSHA4c08c0415e6afb71a61a7943d8faa32d699ccd2ac24d00100479b6acc8a0828e。全beforeSHAee13ec0b75e1320f4daba711ef90d24b2c05ae588c3b27fedb0224114896fc15、native26/SHAb9dce89b8ab71f077937a4eb2fd87141d5e7e3dcf300e3614080d42fd51a2683。全24/32/187/旧Unitinode/旧原本Backup/canonical6phase/十kernel/actor-client-advisory-FLOCK0、全新metadata正常帰還、旧Root13WARNINGfailed10と1938actual143UNKNOWNは保持。Test ID PT-OPS-PG1963-POST001=限定PASS、証跡PG379/pg1963-reload-ref-scoped-full-post-v1/manifest.safe.json。下記「次1963」は当実行前の履歴、現在次作業は合法fresh一回resume/新Unit実WARNING/native/四100/正式gate。
+
 関連OPS009/UI251/SS343・353/SSC283/QA047。Production候補source `0fd734195b4d5338f6b7e860e087cce561d49562`、releasePG1846/BOMee75。外部工具source開始c3999f79a、回収8f6bfb67d。正式1964PT/53scope・四100/native/実新UnitWARNING受入は未更新。環境Linux guest boot3d69/JDK25.0.4/Python3.14.4/systemd・DBは既PG1846署名設定を保持、raw情報は私有に保全する。
 
 | Test ID | class/method・操作 | 独立期待値・実結果 | 証跡 |
