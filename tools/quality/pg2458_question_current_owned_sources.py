@@ -44,7 +44,7 @@ def emit(ctx,live,state,fields):
 def sources():
     live=json.loads((W/'pg2450-question-current-live-binding-v1/manifest.safe.json').read_bytes())
     term=json.loads((W/'pg2452-question-current-terminal-v1/manifest.safe.json').read_bytes())
-    projection=json.loads((W/'pg2457-question-current-parent-projection-v1.safe.json').read_bytes());ctx=context()
+    projection=json.loads((W/'pg2472-question-current-parent-projection-v1.safe.json').read_bytes());ctx=context()
     if live['actualExit']!=0 or projection['actualExit']!=0 or projection['sealedBeforeSha256']!=ctx[0]or projection['source']!=SOURCE:
         raise ValueError('actual current binding/fullseal/parent18 required')
     return emit(ctx,live,term['parentState'],projection['parentState18'])
