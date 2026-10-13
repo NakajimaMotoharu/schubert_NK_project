@@ -1,4 +1,6 @@
-# 当完了runtime一fragment退役（実未実行）
+# 当完了runtime一fragment退役
+
+実績追補（2026-10-14 05:04JST）：2393全17source/四ABI actual0、2394一回正規退役actual0/sourceQualified（41.692582秒）、2398独立post actual0／全24二読・187署名・native16不変・全kernel/actor/client/advisory/FLOCK0。新retirement reloadは一回済み、旧finish/Root/Backup/ADMIN/stop再発行0。source5de41491f616941c6a4cbbce6448dbcb263a8f2b（2393/2394）／7b66a7dd106e498f2dcc61661c479465bc1132a8（2398）。証跡は764と安全manifest、以下実施前仕様を履歴として保全。保持内容最終・Java四100・CHR・451・traceは別未完。
 
 NK-OPS-001、RD OPS/AVL/BAK/BKO、UI251～253、SS343/353/354/SSC259/260/280/284。Main3b7f/PG2126・同e142真正DONE10/全24/whole/正規ownedstop/別2380post/当native資格が前提。正本before=pg2374-native-stop-v1/after.private.json、SHA3e53dda6fb86861684601f9d0c2a9473be90ca0832939dc22dee8dbbcc14cfe2。
 
