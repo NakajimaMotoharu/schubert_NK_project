@@ -1,5 +1,11 @@
 # NK-OPS-001 現source通常新run admission/native
 
+## PT-OPS-PG2110-BACKUP001 当新Backup内容の独立後条件（準備）
+
+Source0fd/PG1846/新run a31dd6da・cutoff03:08:18.452473Z、2096全資源post0を入力として全24/32/187/native38/十Refの同scope内で当Backupのmanifest/二完全SUCCESS handle（三attempt）・三fileのsizehash/八config/recipient/pg_restore --listを独立照合する。archiveのtemplate責務はPG1846へ明示束縛（旧4148 BackupのPG1638は旧証跡として保存）。SS331341独立oracleは2066のimmutable handle＋合法後続skip契約、期待値をProductionから生成しない。実entryglobalsを分離して既factory SLOTを変更しない。
+
+wholeactual静的0/独立1PASS、実2110未実行。command=`python3 -B tools/quality/pg2110_current_newrun_backup_content.py`、clean固定source/既PYTHONPATH。結果W/pg2110-current-newrun-backup-content-v1/manifest.safe.json、暗号credential/dump/list/raw IDは私有、公開はhash/サイズ/件数だけ。Backup/start/stop/reload/restore/prune/DB更新0。復元/世代削除・intent最終条件/全451は別未完、formal1964-53/全leaf0。
+
 ## 2026-10-13 13:10JST 当owned停止・全post・native資格閉鎖
 
 2091全4ABIactual0/operatordebfccb59/UTC03:50:14.504909→15.670949、15source immutablebyte保持。2092stage0/03:50:36.756130→39.398026・stopactual0/sourceQualifiedtrue/03:50:50.708431→03:52:51.989562・同HEAD不変更、logSHAf4b3fff85e34cab2780c7a1ee6012ed00ce1d51d3147b682553dadda55199c90。親18/config2/2094別freshwhole通過→全8owned正常返却・DB更新/start0。別2096全postactual0/operatorc8cd586cb/03:54:44.370257→52.138647/payloadSHAd938ab683c8e3cc9868dbf5516e684f1c834141698b0fa17c9c41b47d87341d4、全24二読不変/十kernel-actor-client-advisory-FLOCK0/187署名/native38二読安定・四明示stop、Root/observer/fourpid gone。publiclegacyrun=PG2040はテンプレート由来、実slotは2096、旧runを今回証明へ使わない。
