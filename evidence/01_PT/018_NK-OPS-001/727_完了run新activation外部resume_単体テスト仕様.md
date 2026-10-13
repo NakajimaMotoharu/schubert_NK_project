@@ -1,5 +1,11 @@
 # NK-OPS-001 完了runから新activationの外部resume
 
+## 外部一回start実結果（親終端未認定）
+
+operatora0918756ab15641fffbb292abfc4188d589b843f。2010immutable stage0/UTC01:15:13→15/SHA2a50daa73fafe591ebbd382c50c38c60d4feeff93266dae05ca2aaa7e4f29390。watch session84527継続、自動start-stop0、fresh quiescent firstframeを資格。2015externalstart0/sourceQualifiedtrue/UTC01:15:32.188849→01:15:43.705760、payload4e5c8fb97b7c26ddb807f3f6c86e17aa8d2e0b36faa9130e3e67faf37372d428。捕捉Job187092/Invocation1eb0d77ce4704e7481ecc07beddcdf0c/PID503613/start106318294326us。十Ref正常返却・元26native全byte保全・予約後start一回、親30分budget維持。次2017同generation/実active→同runcutoff新activationをreadonly捕捉し、旧activation不使用を確認する。client0は親全体受入ではない、親DONE/ordinaryready/owned停止/native未認定。証跡W/pg2015-completed-run-fresh-resume-once-v1/manifest.safe.json、2010privatewatch、guest2015耐久guard。公開rawcredential0。
+
+PT-OPS-PG2017-LIVE001：actualargvのNUL区切り・固定resume/runを独立byte vectorで確認し、元cutoff/別newactivationを固定literal条件で検査、1PASS。実captureはこれから、旧active/旧PID値の現在保証0。
+
 OPS009/UI251/SS343§6.13/SSC259260283/QA047/052、current0fd-PG1846/BOMee75/boot3d69。C02既runtime準備群0542内、N15.01接続は参照費0（担当native条件は別）。開始0.5/1.5/4pp/v3不変更、N-T/個別実費null。元completed run4148e3e8-f107-431a-ab27-d6e6d1f1772e/cutoffを選択、旧全activation完了・active不在、新activationはProductionが生成し旧DONEを新成功へ流用しない。
 
 |Test ID|対象/操作|独立期待・境界/異常|結果|
