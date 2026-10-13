@@ -1,5 +1,13 @@
 # NK-OPS-001 新Rootの正常WARNINGとowned停止
 
+## 別全post2040実0・native着手前
+
+2040actual0/operator878314b694c3631b2b703ca7a464a2c4ba97092e/UTC02:09:41.919312→50.451671/payload88329679a93496e60033807b14a4347a0fdba38a3280f0c20ab427557b32d140。全24二読不変/十kernel空/全actorgone/client-advisory-FLOCK0・187署名/Mainbyte、八terminal receipt/四explicitstop・新normalWARNINGcompletion/全newscope正常返却、native physical32/二metadata安定。親完全GCは実exit不明nullで新DONE10/PID1normaldoneを保持、旧failed13/旧UNKNOWN不変更。W/pg2040-fresh-normal-warning-terminal-post-v1/manifest.safe.json、旧groupSource815baはstopoperatorとして保存。
+
+PT-OPS-PG2042-NATIVE001：当Rootstart106318294326/end107890801314・Inspector新Invd6efa3f2/187550-187697/mono106418451508→106424517287を独立PID1固定windowで資格し、新normaldone枝から十採取pointを選択、同process/単一sessionのInspector2pointを別CRC/session規約で比較。元26全archivebyteを保持・旧履歴counterへ流用0。生成全static0/独立1PASS、実catalog未実行。
+
+PT-OPS-PG2044-CRC001：当fullPG1844/独立1845/source0fd・snapshot3a1b/Mainbyte差0と現在十pointだけを照合。Inspector二point同session/start/order、vendor JaCoCo読み・各classCRC/Mainjar・全6moduleSource同一を独立確認し、実残counterを測る（安易なunion/除外0）。transport/server独立1PASS・compile0、実nativequalify未実行。旧849/159/9/663を当source新結果へ推定移行しない。
+
 ## 正規停止実結果（別allresourcepostは未実行）
 
 2038newstage0/sourceQualifiedtrue/operator815ba5d304094a56baad7d718dbd1ccf6d8a8e4f/UTC02:01:19.796356→22.465204/logSHAedfea0114d598c18c1336e0f3ebdde531fe9dfda682faee03a1f18f6adb24493。2039取得前親18-config2と2034freshwholeを通過、当8ownedstop一回actual0/sourceQualifiedtrue/02:01:33.436178→02:03:29.398214/logSHA1e688dca4e750f95a03ae18dd2abf71434232ee0cfd9e80372c416f3db680144、正常全newscope帰還/新start0/DB更新0。actualOriginalTuple18/Label16/Argument6＋signature/fullcandidatePIN0。旧2032stage1は保全・成功化0。W/pg2038-{stage,stop}-v1.safe.json、guestpg2030-native-stop-v1/complete/before/after/8receiptは私有。
