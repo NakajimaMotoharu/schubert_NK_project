@@ -1,0 +1,11 @@
+# PG2145/2146/2150 是正normal未使用候補配置
+
+Program NK-OPS-001/SS343・353・354/451/QA047/BUG1213・YKT981。旧Current0fd/PG1846、候補Main3b7f3567b54f91f3a9dbeb859e8dd77e8353a2c8/PG2126、BOM62213f357c9dab3b00b557549426b091a03ace6557a62f4410999a02028a332c、187/schema028/history29。既Current/原本Backup/全DB/native38のbefore75669b01から独立expected、Productionへexpected生成委託0。
+
+PT-OPS-2145-001: 新normal親10literal、全生成namespace/static、realbundle二consumer注入、共有115classの実byte、JavaWerror＋全original18/label16/argument6/identity13/input5独立assert。actual0/operator5dacbb2cfa10289a6f10fc033711df3d70636575、UTC05:54:55.054382→56.462882、archive0189681e78971dd583bb7d8a3600bffce93c1acedf7f8ae204d6162b58fd66b3、VM変更0。
+
+PT-OPS-2146-001/002: new-only immutable stage0/payloadlog968405b9ad6cfb64c2cf7fbf5828ab62fb637b8b769cfb5f9bce4a2f978596d4、place0/UTC05:56:10.424434→50.266826/logc121304e17eede6cec725c9c858fb28ffe0a19461a4ff58e0535455779505435、operator90159de6d4a5bfbca75805999bb4012e9c3206fa同HEAD/sourceQualifiedtrue。未使用siblingのみ、current/承認epoch/Unit/SQLbusiness/startstopreload変更0、newscope全正常帰還。旧2134place143/UNKNOWN未認定を維持。
+
+PT-OPS-2150-001: 別独立reader＋旧tested whole候補byte oracleを新二sourceへ束縛。actual0/payload7ff725a80a116d4960ddd7cd54ec8bb71ad538617395811add6e6dc69151666f/post26b78ebd9254eca00538b72371aaaf52821775c4338e7070d5edb69fe6c50f23、全24-32-187/十kernel/原本Backup/native不変/全client-advisory-FLOCK0、新未使用187/manifest/SHA256SUMS/各owner-mode-link-size-byte/署名64とpinDER verify全成功。候補未公開、normal10不変。
+
+独立工具fixture=normal設定tuple1＋dispatchactualslot1＋post二source1、前739pair3と併せて範囲別6PASS（重複再実行を新PT増分に加算0）。outer/生成静的0、NPE/null/未知・旧empty期待拒否。Productioncoverage増分なし/正式451未完、当工具BUG/YKTのみ閉鎖。実commandは各python3 -B tools/quality/pg2145_normal_unused_fixed_compile.py、pg2146_normal_unused_fixed_dispatch.py stage/place、pg2150_normal_unused_independent_post.py、固定PYTHONPATH。各W/PG379 newslot manifest/private logは私有保持・秘密Git0。
