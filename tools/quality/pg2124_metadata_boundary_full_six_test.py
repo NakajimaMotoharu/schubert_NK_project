@@ -22,6 +22,8 @@ class WholeSourceContract(unittest.TestCase):
         self.assertIn('CaddyPublicConfiguration.class',raw)
         self.assertIn('RootStartupContext.class',raw)
         self.assertIn('MorningBackupArtifacts.class',raw)
+        self.assertIn('RootStartupContext$NativeIo.class',raw)
+        self.assertIn("debug['verify'](a,bnew,1)",raw)
         self.assertIn("B/'runs/PG1844-six-v1/manifest.safe.json'",raw)
 
 if __name__=='__main__':unittest.main()
