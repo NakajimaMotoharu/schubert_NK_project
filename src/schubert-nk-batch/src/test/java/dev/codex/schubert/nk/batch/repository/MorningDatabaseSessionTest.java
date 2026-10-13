@@ -39,8 +39,8 @@ final class MorningDatabaseSessionTest {
       var run =
           new BatchRun(
               UUID.fromString("22920001-2222-4333-8444-" + String.format("%012d", ++index)),
-              Instant.parse("2026-12-09T15:00:00Z"));
-      var started = Instant.parse("2026-12-10T02:00:00Z");
+              Instant.parse("2031-01-09T15:00:00Z").plusSeconds((index - 1L) * 86400));
+      var started = Instant.parse("2031-01-10T02:00:00Z").plusSeconds((index - 1L) * 86400);
       var drift = new AtomicReference<String>("");
       var retained = new AtomicReference<Connection>();
       var subject = mdb2292Subject(drift, retained);
@@ -78,8 +78,8 @@ final class MorningDatabaseSessionTest {
       var run =
           new BatchRun(
               UUID.fromString("22920002-2222-4333-8444-" + String.format("%012d", ++index)),
-              Instant.parse("2026-12-11T15:00:00Z"));
-      var started = Instant.parse("2026-12-12T02:00:00Z");
+              Instant.parse("2031-02-02T15:00:00Z").plusSeconds((index - 1L) * 86400));
+      var started = Instant.parse("2031-02-03T02:00:00Z").plusSeconds((index - 1L) * 86400);
       var ended = started.plusSeconds(3);
       var drift = new AtomicReference<String>("");
       var retained = new AtomicReference<Connection>();
@@ -204,7 +204,7 @@ final class MorningDatabaseSessionTest {
     } catch (InvocationTargetException failure) {
       if (failure.getCause() instanceof SQLException sql)
         System.err.println(
-            "PT-MDB2292_SQL method=" + method.getName() + " state=" + sql.getSQLState());
+            "PT-MDB2292_SQL method=" + method.getName() + " state=" + mdb2292State(sql));
       throw failure.getCause();
     }
   }
@@ -235,9 +235,14 @@ final class MorningDatabaseSessionTest {
         assertFalse(rows.next());
       }
     } catch (SQLException failure) {
-      System.err.println("PT-MDB2292_SQL method=independentRows state=" + failure.getSQLState());
+      System.err.println("PT-MDB2292_SQL method=independentRows state=" + mdb2292State(failure));
       throw new IOException("independent isolated SQL postcondition unavailable", failure);
     }
+  }
+
+  private static String mdb2292State(SQLException failure) {
+    String state = failure.getSQLState();
+    return state != null && state.matches("[0-9A-Z]{5}") ? state : "UNKNOWN";
   }
 
   private static void mdb2292NoOwnerResources() throws SQLException {
