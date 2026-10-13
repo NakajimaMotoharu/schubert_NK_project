@@ -9,3 +9,9 @@ PT-OPS-PG2470-002：Current CHR-A01 JSONからDIF001 titleだけを変更した�
 実fixture初期2成功。実captureはcleancommit/push→既host22222/VMアクセスに用途限定host SOCKS55169を新only接続（既port不存在確認、通常SSH認証不緩和、Unit/VM/jobの起動停止なし）→`python3 -B tools/quality/pg2470_question_current_a01.py`。既2446watch32004のready frameを待ち、当Root・四owner/CaddyTLS GET `/login`だけを実browser取得する。生cookie/token/passwordは出力しない。公開artifactは既ArtifactSink redaction/schemaに従い、baseline hashと独立postを保存。外部処理未readyや時間切れ/同owner不一致はnot-run/failureのまま、case PASSへ推定しない。
 
 A01限定受入であり全CHR・L01/QA051・Java四counter100・451・PGPT正式合格ではない。元all24後条件は後続2454/2456で独立検証、普通Rootの新規業務発行や再起動は追加しない。実command/source/time/exit/hashは取得後追記。
+
+## 実行結果（2026-10-14）
+
+PG2470/session93105 actual0、21:37:34.995252Z～21:37:37.305956Z（2.310704秒）、Production cdbc。sameCapturedParentApiWebCaddyBeforeAfter=true、harnessclass122dcc4c...不変、baselineSHA df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993不変、sharedCurrentDriver/DIF001-only/secretredaction確認。当新sourceの実CHR-A01限定PASSで、他case・fullgate・正式・全leaf合格ではない。
+
+公開artifact `program/characterization/reports/nk/PG2470-native-a01-v1/artifacts/CHR-A01.json`、SHA3f4ed53954d6c3652d8265adde23004d79dd51fec9e16eb1db79255abd059558。別pg876_public_artifact_checkのschema/DIF/秘密negative oracle actual0。現在Rootは同194154/Job61387でactivating、API252843/Invdcb3d33997504eb89b6d921822880b83、Web253897/Inveed099cbc4994c4f94c3b9d55976d7bb、Caddy255819/Inv94e0ce5e186f44629c1875f21e99dc15。真正終端/全24/whole/停止/nativeは後続、再起動0。
