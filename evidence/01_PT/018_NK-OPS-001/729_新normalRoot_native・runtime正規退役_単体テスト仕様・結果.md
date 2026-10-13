@@ -1,5 +1,9 @@
 # NK-OPS-001 新normalRoot nativeとruntime退役
 
+## PT-OPS-PG2062-POST001 actual0（11:55JST）
+
+旧2060actual1（readOnly/退役再送0）はBUG1204/YKT972で保持。元2030after全項目不変、2050beforeにはnative観測一件だけが追加されていた。独立literalで元field差/別extra/欠落/native型/空/native前後差を拒否、実entryのfactoryも確認した3PASS/static0。新2062actual0/operatorf030729da0232b0dd162b088e1437f3043159547/UTC02:53:42.792285→50.964542/payloadSHA92fff123cd98d31fe06fee5747c2a9f596bd115a29835c6b85539c9fcc07d48d、W/pg2062-native-augmented-runtime-retirement-post-v1/manifest.safe.json。全24不変二読/187署名/全十kernel・actor/client-advisory-FLOCK0/元OriginalBackup/currentnative32二読安定/唯一runtime退役・declaredsuffix差分を確認、start/stop/reload/SQLwrite0。legacy public run=PG2060はテンプレート由来、実slot/command/manifestはPG2062。正式1964-53/全leaf0・coverage100未達は別未完。
+
 ## 2026-10-13 11:51JST actual更新
 
 新2056retire actual0/sourceQualifiedtrue/operator93db10d9efe8411a82fda8f9edfd38ac4ba63919、UTC02:40:17.526580→02:41:00.317655、logSHA5fee9bd6612cf406f69b3227b909b0b22ffa3a1cc5b36148bf039c2c81e75d80。既2052stageの17資格byteを再配置せず固定4sealだけ投影、新予約で一回退役した。全newscope正常帰還/start0/DB更新0、元失敗を正常化しない。W/pg2056-retire-v1.safe.json、同private logは秘密保全領域。下段「2056未発行」は過去記録。
