@@ -3,12 +3,13 @@ import inspect
 import pg2252_newboot_owned_post as prior
 from pg2274_current_signed_owned_sources import TOOLS,SOURCE,BOM
 
-SLOT='pg2280-current-signed-owned-post-v1'
+SLOT='pg2281-current-signed-owned-post-v2'
 
 
 def payload(seals):
-    raw=prior.payload(seals)
+    raw=prior.payload(seals).replace(prior.TOOLS,TOOLS)
     for old,new in [('pg2246','pg2274'),('Pg2246','Pg2274'),('PG2246','PG2274'),(prior.TOOLS,TOOLS),(prior.SLOT,SLOT)]:raw=raw.replace(old,new)
+    raw=raw.replace('PG2252-newboot-owned-stop-post-v1','PG2281-current-signed-owned-post-v2')
     compile(raw,'<corrected current stopped post>','exec');return raw
 
 

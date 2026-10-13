@@ -36,12 +36,17 @@ class SignedCurrentGraph(unittest.TestCase):
         seals={k:'a'*64 for k in post.prior.prior.prior.previous.SEALS}
         raw=post.payload(seals);self.assertEqual(0,check('HASHES={}\nRECEIPT="fixture"\n'+raw,'<corrected full post>'))
         self.assertIn('pg2274-native-stop-v1',raw)
+        self.assertIn(graph.TOOLS,raw)
+        self.assertNotIn('pg2274-newboot-owned-stop-tools-v1',raw)
+        self.assertIn('PG2281-current-signed-owned-post-v2',raw)
         self.assertNotIn('pg2246',raw)
         live=json.loads((W/'pg2230-newboot-current-live-binding-v1/manifest.safe.json').read_bytes())
         end=json.loads((W/'pg2234-newboot-fresh-day-terminal-v1/manifest.safe.json').read_bytes())['endMonotonicUs']
         raw=catalog.catalog_source(graph.sources()['pg2274_parent_receipt.py'],live['binding'],end)
         self.assertEqual(0,check('SEALS={}\n'+raw,'<corrected catalog>'))
         self.assertIn('pg2274-native-stop-v1',raw)
+        self.assertEqual('pg2274-current-signed-owned-stop-tools-v1',catalog.TOOLS)
+        self.assertNotIn('pg2274-newboot-owned-stop-tools-v1',raw)
         self.assertNotIn('pg2246',raw)
         self.assertIn('streams=[p for i,p in enumerate(streams)if i!=early_index]',qualification.prior.server())
         self.assertIn("len(streams)==9",qualification.prior.server())
