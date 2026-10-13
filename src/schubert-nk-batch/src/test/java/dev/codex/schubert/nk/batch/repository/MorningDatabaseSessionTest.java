@@ -47,7 +47,9 @@ final class MorningDatabaseSessionTest {
       subject.execute(
           credential(),
           session -> {
+            System.err.println("PT-MDB2292-001 phase=ENTER");
             session.beginBackup(run, started, false);
+            System.err.println("PT-MDB2292-001 phase=BEGIN_OK");
             drift.set(fault);
             try {
               assertThrows(
@@ -85,7 +87,9 @@ final class MorningDatabaseSessionTest {
       subject.execute(
           credential(),
           session -> {
+            System.err.println("PT-MDB2292-002 phase=ENTER");
             var begins = session.beginBackup(run, started, false);
+            System.err.println("PT-MDB2292-002 phase=BEGIN_OK");
             var failed =
                 new BatchStepResult(
                     BatchStepResult.Status.FAILED,
@@ -140,6 +144,21 @@ final class MorningDatabaseSessionTest {
         (url, properties) -> {
           var actual = DriverManager.getConnection(url, properties);
           retained.set(actual);
+          assertTrue(actual.getAutoCommit());
+          assertFalse(actual.isReadOnly());
+          assertEquals(Connection.TRANSACTION_READ_COMMITTED, actual.getTransactionIsolation());
+          try (var check = actual.createStatement();
+              var values =
+                  check.executeQuery(
+                      "select session_user,current_user,current_database(),pg_is_in_recovery()")) {
+            assertTrue(values.next());
+            assertEquals("schubert_batch", values.getString(1));
+            assertEquals("schubert_batch", values.getString(2));
+            assertEquals("schubert_nk", values.getString(3));
+            assertFalse(values.getBoolean(4));
+            assertFalse(values.next());
+          }
+          System.err.println("PT-MDB2292 phase=RAW_CONNECTION_PRECONDITIONS_OK");
           return (Connection)
               Proxy.newProxyInstance(
                   Connection.class.getClassLoader(),
@@ -183,6 +202,9 @@ final class MorningDatabaseSessionTest {
     try {
       return method.invoke(target, arguments);
     } catch (InvocationTargetException failure) {
+      if (failure.getCause() instanceof SQLException sql)
+        System.err.println(
+            "PT-MDB2292_SQL method=" + method.getName() + " state=" + sql.getSQLState());
       throw failure.getCause();
     }
   }
@@ -213,6 +235,7 @@ final class MorningDatabaseSessionTest {
         assertFalse(rows.next());
       }
     } catch (SQLException failure) {
+      System.err.println("PT-MDB2292_SQL method=independentRows state=" + failure.getSQLState());
       throw new IOException("independent isolated SQL postcondition unavailable", failure);
     }
   }
