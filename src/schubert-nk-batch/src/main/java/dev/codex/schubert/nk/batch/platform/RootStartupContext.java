@@ -139,7 +139,8 @@ public final class RootStartupContext {
     boolean second = missingGeneration(captured);
     require(!first || second);
     recheck(morning);
-    return first && second;
+    // After the race guard, first=true implies second=true; both reads remain mandatory.
+    return first;
   }
 
   private boolean missingGeneration(Snapshot captured) throws IOException {
