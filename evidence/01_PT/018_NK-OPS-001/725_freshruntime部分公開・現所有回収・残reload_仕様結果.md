@@ -1,5 +1,11 @@
 # NK-OPS-001 freshruntime部分公開・残処理
 
+## PG2002/2003/2006 残reloadの実閉鎖
+
+operator750dd1e512e8a001d36297c5de4f19a2da64d054/current0fd-PG1846/boot3d69。PG2002六ABI0（UTC00:40:58.591184→00:40:59.901313）、2003新immutable stage0、finish-runtime0/sourceQualifiedtrue（00:41:51.279656→00:42:29.797836）。既644B/SHA78f148…/元inode28-15250をNOFOLLOW保持し再作成・書換え無し、残runtime reloadだけ一回。logSHAf042c8a24726a568f743a859c1ce0a59c0d202d6585498b01f873e5039caffa7、全scope正常返却。旧1983actual143/UNKNOWNはそのまま。
+
+別PG2006独立全post0（00:42:41.883192→00:42:50.752753）、payloadSHA4b43ebc56bf977b3dcb431ea16c0ab3a293727f882ba4819d8d91f86374a1be1、全beforefd6412f31de9af59219a0fe28f49ce0d073b074a7ff83ca3516a22e462568b83。全24DB/32config/187署名/旧原本Backup/旧Unitinode・全10kernel/管理0、native26/treeb9dc不変、cached同run明示resume/Success10を確認。新外部start/当source新activation真正DONE/owned停止/native/正式451は未実行。証跡はW/pg2002-frozen-v1.safe.json、pg2003-{stage,finish-runtime}-v1.safe.json、pg2006-existing-runtime-independent-post-v1/manifest.safe.json。限定成功だけで正式1964PT/53scopeや全leaf0を更新しない。
+
 関連OPS009/UI251/SS3436.13/SSC259260283/QA047/BUG1198/YKT966。現在Production0fd/PG1846/BOMee75、正式1964PT/53scope/全leaf増分0。親真正DONE・新Unit0or10・四100/native/CHR/正式451は未完。
 
 |Test ID|対象・独立期待/実結果|証跡|
