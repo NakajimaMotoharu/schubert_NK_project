@@ -15,6 +15,7 @@ function setup(value = "", missing = "", absent = false) {
     addEventListener(type, callback) { this.events[type] = callback; }
   };
   const remaining = { textContent: "not-yet-counted" };
+  const button = { disabled: false };
   const form = {
     events: {}, prevented: 0, reported: 0, submitted: 0,
     elements: { namedItem(name) {
@@ -22,6 +23,7 @@ function setup(value = "", missing = "", absent = false) {
       return missing === "question" ? null : question;
     } },
     querySelector(selector) {
+      if (selector === "button[type=submit]") return missing === "button" ? null : button;
       assert.equal(selector, "[data-question-remaining]");
       return missing === "remaining" ? null : remaining;
     },
@@ -42,7 +44,7 @@ function setup(value = "", missing = "", absent = false) {
   const keys = Object.keys(sandbox);
   vm.runInNewContext(source, sandbox, { filename: script });
   assert.deepEqual(Object.keys(sandbox), keys);
-  return { question, remaining, form };
+  return { question, remaining, button, form };
 }
 
 test("PT-QST-JS001-A absent form is inert", () => {
@@ -52,7 +54,7 @@ test("PT-QST-JS001-A absent form is inert", () => {
   assert.equal(remaining.textContent, "not-yet-counted");
 });
 test("PT-QST-JS001-B closed required structure", () => {
-  for (const missing of ["question", "remaining"])
+  for (const missing of ["question", "remaining", "button"])
     assert.throws(() => setup("", missing), { message: "invalid question form structure" });
   const { question, form } = setup("x");
   assert.deepEqual(Object.keys(question.events), ["input"]);
@@ -114,11 +116,12 @@ test("PT-QST-JS001-G no trimming and trailing ASCII only", () => {
   }
 });
 test("PT-QST-JS001-H fresh input/submit never auto resends", () => {
-  const { question, remaining, form } = setup("x");
+  const { question, remaining, button, form } = setup("x");
   form.submit();
   assert.equal(form.submitted, 1);
   assert.equal(form.prevented, 0);
   assert.equal(form.reported, 0);
+  assert.equal(button.disabled, true); // UI222 section 8: valid operation POST shows disabled.
   question.value = "";
   form.submit();
   assert.equal(remaining.textContent, "4096");
@@ -133,4 +136,14 @@ test("PT-QST-JS001-H fresh input/submit never auto resends", () => {
   assert.equal(form.submitted, 2);
   assert.equal(form.prevented, 1);
   assert.equal(form.reported, 1);
+  const correction = setup("");
+  correction.form.submit();
+  assert.equal(correction.button.disabled, false);
+  assert.equal(correction.form.prevented, 1);
+  correction.question.value = "x";
+  correction.form.submit(); // Submit must revalidate even without a preceding input event.
+  assert.equal(correction.button.disabled, true);
+  assert.equal(correction.remaining.textContent, "4095");
+  assert.equal(correction.form.submitted, 1);
+  assert.equal(correction.form.reported, 1);
 });

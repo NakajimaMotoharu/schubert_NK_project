@@ -5,7 +5,8 @@
   if (!form) return;
   const question = form.elements.namedItem("question");
   const remaining = form.querySelector("[data-question-remaining]");
-  if (!question || !remaining) throw new Error("invalid question form structure");
+  const button = form.querySelector("button[type=submit]");
+  if (!question || !remaining || !button) throw new Error("invalid question form structure");
   const encoder = new TextEncoder();
   const decoder = new TextDecoder("utf-8", { ignoreBOM: true });
   function validate() {
@@ -27,6 +28,8 @@
     if (!validate()) {
       event.preventDefault();
       form.reportValidity();
+    } else {
+      button.disabled = true;
     }
   });
 })();
