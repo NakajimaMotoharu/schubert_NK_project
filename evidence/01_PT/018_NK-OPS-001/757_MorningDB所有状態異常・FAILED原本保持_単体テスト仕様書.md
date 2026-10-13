@@ -1,5 +1,7 @@
 # PT-MDB2292-001/002（新追加、実未試験）
 
+2026-10-14 01:39補足：初回2292/source3634afb2f/payload2020bd04はtest callbackのunreported SQLException二箇所でcompile1、JUnit/隔離PG未開始。BUG1228/YKT994修正前起票、oracle/helperのみIOExceptionへcause保持で接続、期待値・Main不変更。旧枠は保全、是正実commandは新only`pg2293_morning_guard_selected_v2.py`。suite/TestIDはPT-MDB2292、実test合格・counterは依然未加算。
+
 NK-BAT-001/NK-OPS-001、MorningDatabaseSession.Session completionGuard/requireAbandonedRequest/retainedBackupSuccessful、RD OPS009/BAK、UI253、SS341343/SSC116/QA047/451。Main3b7f/PG2126/BOM62213f/全1643と既全2228-2236/当native2284へ固定する。新試験sourceは保存commitで確定、全3633旧成功を新試験の合格にしない。
 
 Fixtureは専用LAN内の新private tmp・PostgreSQL18动态loopback port/当Flyway28history29・roleを使用し、VMや業務DBへ接続しない。既BatchDatabaseFixture/全test-class hashを前後照合する。JDBC portの対象呼出し間だけ一つの観測値を変え、finallyで戻す（実DBのautocommit/readOnly/isolation/lockを解除・偽装運用しない）。Productionは拒否すべき異常として観測する。失敗期待はIOException、NPEを正常化しない。

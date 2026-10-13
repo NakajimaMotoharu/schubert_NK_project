@@ -188,7 +188,7 @@ final class MorningDatabaseSessionTest {
   }
 
   private static void mdb2292Rows(
-      BatchRun run, String status, Instant started, Optional<Instant> ended) throws SQLException {
+      BatchRun run, String status, Instant started, Optional<Instant> ended) throws IOException {
     try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var statement =
             observer.prepareStatement(
@@ -212,6 +212,8 @@ final class MorningDatabaseSessionTest {
         }
         assertFalse(rows.next());
       }
+    } catch (SQLException failure) {
+      throw new IOException("independent isolated SQL postcondition unavailable", failure);
     }
   }
 

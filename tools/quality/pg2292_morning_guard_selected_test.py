@@ -2,6 +2,7 @@
 import unittest
 from pyflakes.api import check
 from pg2292_morning_guard_selected import server,FILES,native_input
+import pg2293_morning_guard_selected_v2 as corrected
 
 
 class SelectedMorningGuard(unittest.TestCase):
@@ -15,6 +16,13 @@ class SelectedMorningGuard(unittest.TestCase):
         self.assertIn('*hosts,*native_streams,str(execfile)',raw)
         self.assertIn('remainingSameSourceWithNative',raw)
         self.assertEqual(9,len(native_input()['files']))
+
+    def test_corrected_attempt_new_namespace_same_explicit_test_suite(self):
+        raw=corrected.server();self.assertEqual(0,check('INPUT={}\n'+raw,'<new corrected selected server>'))
+        self.assertIn('PG2293-selected-v2',raw)
+        self.assertNotIn('PG2292-selected-v1',raw)
+        self.assertIn('PG2292 tests2 failures0',raw)
+        self.assertIn('Pg2292MorningGuardLauncher',raw)
 
 
 if __name__=='__main__':unittest.main()
