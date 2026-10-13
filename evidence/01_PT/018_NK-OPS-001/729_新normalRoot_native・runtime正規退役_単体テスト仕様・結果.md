@@ -1,5 +1,11 @@
 # NK-OPS-001 新normalRoot nativeとruntime退役
 
+## 2026-10-13 11:51JST actual更新
+
+新2056retire actual0/sourceQualifiedtrue/operator93db10d9efe8411a82fda8f9edfd38ac4ba63919、UTC02:40:17.526580→02:41:00.317655、logSHA5fee9bd6612cf406f69b3227b909b0b22ffa3a1cc5b36148bf039c2c81e75d80。既2052stageの17資格byteを再配置せず固定4sealだけ投影、新予約で一回退役した。全newscope正常帰還/start0/DB更新0、元失敗を正常化しない。W/pg2056-retire-v1.safe.json、同private logは秘密保全領域。下段「2056未発行」は過去記録。
+
+PT-OPS-PG2060-POST001：独立finite runtime/config oracleと元2030afterSHAc6d5の一致、全24/32/187/native32・十kernel/actor/client/advisory/FLOCK0を別読取で確認する。parserは独立contract testの明示export、期待値はproduction未使用。独立1PASS/生成actual全source静的0、実2060未実行。commandは固定clean sourceで`python3 -B tools/quality/pg2060_fresh_runtime_retirement_independent_post.py`、既PYTHONPATHを使用。退役/unlink/reloadの再発行はしない。
+
 2051全4ABIactual0/operator9bf0344ce/UTC02:35:26.044225→27.203475/beforec6d5/Source0fd。2052stageactual0/sourceQualifiedtrue/02:35:58.293842→02:36:00.920165/immutable17byte配置。旧dispatcher公開tag managerFailureRetainedは旧Root13履歴の意味で、新RootはnormalWARNING/GC・失敗ではない。2052retireは2053親state/config読取後、hostfreshpayloadが全proof約50→fixedSEALS4への入力不一致へ拒否し、VMowner/unlink/reload前0、hostrequestedのみ。旧2052枠保持、1203/971先行起票、currentruntime/元原本DB不変更。新2056はqualified2052stage17byteを再配置せず新retire予約だけ、fixed4projectionのactualfullpayload生成/全static0/独立1PASS・stage再送拒否、legacy公開tagをoldRoot13へ分離する。actual2056retireは未発行。
 
 OPS009/UI251/SS343354/SSC283/QA047/BUG1200～1202/YKT968～970。Source0fd-PG1846/BOMee75/boot3d69、新activatione31b/Rootwindow106318294326→107890801314、ParentDONE10/PID1normaldone・完全GCは実exit不明null、全8stop/別2040allresources0。正式1964PT/53scope/全leaf0、IT/ST未実施。
