@@ -13,3 +13,9 @@ PT-MDB2504-001／mdb2504001：fixture runUUID25040001、cutoff2037-01-09T15:00Z�
 上段の「Broker四counter100」はclass全体について選択hostだけで要求できる条件ではなかった。旧文を失敗仕様として保持し、新only v2は変更fields（L/M/B）及びcurrentRunReference/同lambda（L/M/B、factory自身はcondition0）を全網羅必須とする。全classのCLASS/L/M/B100、native inspect/inspectStopped、global451は同新sourceの全回帰・実native後の終了条件として一切緩和しない。
 
 v1 sourcea79/client73373：Maven0/依存compile0/指定八PT/FES0/静的batch0/入力不変だが、工具outer1。Broker全体L147/181 M11/13 B97/98・native二method/34line等未実行。これは新codeの外部仕様違反ではなく選択gate範囲の誤り、旧failednamespace/manifest/XML/logを保全し工具成功へ補完しない。新v2は変更method scopeの欠落/未知/missed/false/0covered/branch欠落/新branch隠し七反例を拒否し、nativeNotRun/wholeRegressionNotRun/wholeClassFour100Accepted=falseを常に明示する。関連915 BUG1242・916 YKT1008を先行起票、修正commit/actual新v2後記。
+
+## 実新v2結果（2026-10-14）
+
+修正9ffac375656875073df02c29c82e3060ed04fc1a、v2/client5463 actual0／同snapshot、candidate Maina79b45b5858a186fa82bec1ff36882271ab996a4。指定八PT/FES0、依存compile-only0/PT加点0、format/compile/batch静的0、入力hash不変、sharedcache書込0、VM操作0。変更fieldsはL17/17・M1/1・B10/10、factory L2/2 M1/1（condition0）、lambda L2/2 M1/1 B2/2。class全体/実native/全体回帰は未受入を明示する。
+
+manifest780f5c75370ed2769346237ea7e8c37961b5f91b305497799a380c8d338556d4、payload2e66d7c4e5108ea8a63436ec5830b940b73dc70e1bf8c01eeb61b5815dc30e9a、公開=`evidence/strict-current-reference/manifest-v2.json`（時刻/command/log/archive/source/全counter参照）。七negative＋実新v2・全関連consumer/歴史非該当を確認しBUG1242/YKT1008工具対象は是正済み。必要な新Source3650/540/1643の全回帰・新署名/正規runtime/native/451は別未完、配備cdbcと正式1964/53へ成果移植0。

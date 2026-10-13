@@ -1,0 +1,209 @@
+{
+  "actualExit": 0,
+  "sourceSnapshot": "9ffac375656875073df02c29c82e3060ed04fc1a",
+  "archiveSha256": "57d85df95a9754630f5f505a56fb4a9f6655fdb592c5bba48a5985a3a658691b",
+  "sourceInputsStable": true,
+  "tests": {
+    "dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 7
+    },
+    "dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 1
+    }
+  },
+  "staticIssues": {
+    "batch": 0
+  },
+  "classCounters": {
+    "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence": {
+      "BRANCH": {
+        "covered": 97,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 59,
+        "missed": 3
+      },
+      "INSTRUCTION": {
+        "covered": 794,
+        "missed": 123
+      },
+      "LINE": {
+        "covered": 147,
+        "missed": 34
+      },
+      "METHOD": {
+        "covered": 11,
+        "missed": 2
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession": {
+      "BRANCH": {
+        "covered": 2,
+        "missed": 58
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 5,
+        "missed": 50
+      },
+      "INSTRUCTION": {
+        "covered": 25,
+        "missed": 494
+      },
+      "LINE": {
+        "covered": 7,
+        "missed": 124
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 21
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Session": {
+      "BRANCH": {
+        "covered": 0,
+        "missed": 385
+      },
+      "CLASS": {
+        "covered": 0,
+        "missed": 1
+      },
+      "COMPLEXITY": {
+        "covered": 0,
+        "missed": 233
+      },
+      "INSTRUCTION": {
+        "covered": 0,
+        "missed": 2714
+      },
+      "LINE": {
+        "covered": 0,
+        "missed": 626
+      },
+      "METHOD": {
+        "covered": 0,
+        "missed": 40
+      }
+    }
+  },
+  "changedMethodScope": {
+    "dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence#fields": {
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 6,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 70,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 17,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession#currentRunReference": {
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 7,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MorningDatabaseSession#lambda$currentRunReference$0": {
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "wholeClassFour100Accepted": false,
+  "changedMethodScopeComplete": true,
+  "startedUTC": "2026-10-13T23:44:09.442486+00:00",
+  "completedUTC": "2026-10-13T23:45:43.566244+00:00",
+  "logSha256": "0497997f231ca08cf940a99a6658af0e2c4199a5ddb3788fe1c04a527dba27b0",
+  "formalAccepted": false,
+  "wholeRegressionNotRun": true,
+  "nativeNotRun": true,
+  "vmActions0": true,
+  "dependencyCompileOnlyExit": 0,
+  "dependencyCommand": [
+    "/home/mini/schubert-nk-pgpt/tools/maven/bin/mvn",
+    "-o",
+    "--no-transfer-progress",
+    "-Dstyle.color=never",
+    "-Djansi.force=false",
+    "-Dmaven.repo.local=/home/mini/schubert-nk-pgpt/runs/PG2504-selected-v2/repository",
+    "-Dnk.pt.node=/home/mini/schubert-nk-pgpt/tools/node-v24.19.0/bin/node",
+    "-pl",
+    "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web",
+    "spotless:check",
+    "test-compile",
+    "jar:test-jar",
+    "jar:jar",
+    "install:install"
+  ],
+  "dependencyPtCredit": false,
+  "sharedCacheWritten": false,
+  "changedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java": "75b76e4c7e2f469629a4234bff50cfc475ea5792270085224cbbd768b289113e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java": "32d586cfb543fb6ca056a89472c2d9553bde09d03244825603b8cb5955b23273",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java": "2dbb5b5320911dfd2e4d1e53b47cd9e4f79c72ceacc58514530b85782f8ad2d4"
+  },
+  "candidateProductionSource": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+  "deployedProductionSource": "cdbc07cdf77370d521e64de8b327da7f6752139b",
+  "manifestSha256": "780f5c75370ed2769346237ea7e8c37961b5f91b305497799a380c8d338556d4",
+  "payloadSha256": "2e66d7c4e5108ea8a63436ec5830b940b73dc70e1bf8c01eeb61b5815dc30e9a",
+  "relatedBug": "BUG-1242",
+  "relatedHorizontal": "YKT-1008",
+  "command": "python3 -B tools/quality/pg2504_strict_reference_selected.py",
+  "requiredFreshWholeAndNewSourceNative": true,
+  "oldSourceNativeImported": false
+}
