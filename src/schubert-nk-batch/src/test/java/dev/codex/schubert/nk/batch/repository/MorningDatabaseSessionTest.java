@@ -31,6 +31,206 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2292-001: each completion guard rejects JDBC drift before business mutation. */
+  @Test
+  void mdb2292001AbandonedRequestRejectsEveryJdbcInvariantBeforeMutation() throws Exception {
+    int index = 0;
+    for (String fault : List.of("AUTO", "READONLY", "ISOLATION", "HELD")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("22920001-2222-4333-8444-" + String.format("%012d", ++index)),
+              Instant.parse("2026-12-09T15:00:00Z"));
+      var started = Instant.parse("2026-12-10T02:00:00Z");
+      var drift = new AtomicReference<String>("");
+      var retained = new AtomicReference<Connection>();
+      var subject = mdb2292Subject(drift, retained);
+      subject.execute(
+          credential(),
+          session -> {
+            session.beginBackup(run, started, false);
+            drift.set(fault);
+            try {
+              assertThrows(
+                  IOException.class,
+                  () ->
+                      session.requireAbandonedRequest(
+                          new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                              run.id(), started)));
+            } finally {
+              drift.set("");
+            }
+            mdb2292Rows(run, "RUNNING", started, Optional.empty());
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "RUNNING", started, Optional.empty());
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  /** PT-MDB2292-002: completed FAILED rows never become eligible or change on JDBC refusal. */
+  @Test
+  void mdb2292002RetentionRejectsJdbcDriftAndPreservesBothFailedRows() throws Exception {
+    int index = 0;
+    for (String fault : List.of("AUTO", "READONLY", "HELD")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("22920002-2222-4333-8444-" + String.format("%012d", ++index)),
+              Instant.parse("2026-12-11T15:00:00Z"));
+      var started = Instant.parse("2026-12-12T02:00:00Z");
+      var ended = started.plusSeconds(3);
+      var drift = new AtomicReference<String>("");
+      var retained = new AtomicReference<Connection>();
+      var subject = mdb2292Subject(drift, retained);
+      subject.execute(
+          credential(),
+          session -> {
+            var begins = session.beginBackup(run, started, false);
+            var failed =
+                new BatchStepResult(
+                    BatchStepResult.Status.FAILED,
+                    1,
+                    0,
+                    1,
+                    0,
+                    BatchStepResult.Reason.COMMAND_FAILURE);
+            session.failBackup(begins, ended, failed, failed);
+            var manifest =
+                new BackupManifest(
+                    begins.database(),
+                    begins.configuration(),
+                    started,
+                    started.plusSeconds(2),
+                    new BackupVersions(
+                        "public-host",
+                        "1.0",
+                        "028",
+                        "ubuntu-26.04",
+                        "25.0.4",
+                        "18.6",
+                        "2.56.0",
+                        "1.2.1"),
+                    "0".repeat(64),
+                    new BackupFileDigest(26, "1".repeat(64)),
+                    new BackupFileDigest(35, "2".repeat(64)),
+                    new BackupFileDigest(32, "3".repeat(64)));
+            drift.set(fault);
+            try {
+              assertThrows(
+                  IOException.class,
+                  () -> session.retainedBackupSuccessful(manifest, ended.plusSeconds(1)));
+            } finally {
+              drift.set("");
+            }
+            assertFalse(session.retainedBackupSuccessful(manifest, ended.plusSeconds(1)));
+            mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  private static MorningDatabaseSession mdb2292Subject(
+      AtomicReference<String> drift, AtomicReference<Connection> retained) {
+    return new MorningDatabaseSession(
+        actualUrl,
+        () -> {},
+        (url, properties) -> {
+          var actual = DriverManager.getConnection(url, properties);
+          retained.set(actual);
+          return (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (proxy, method, arguments) -> {
+                    String name = method.getName();
+                    if (drift.get().equals("AUTO") && name.equals("getAutoCommit")) return false;
+                    if (drift.get().equals("READONLY") && name.equals("isReadOnly")) return true;
+                    if (drift.get().equals("ISOLATION") && name.equals("getTransactionIsolation"))
+                      return Connection.TRANSACTION_SERIALIZABLE;
+                    Object result = mdb2292Invoke(method, actual, arguments);
+                    if (drift.get().equals("HELD")
+                        && name.equals("prepareStatement")
+                        && ((String) arguments[0]).contains("pg_locks")) {
+                      var statement = (PreparedStatement) result;
+                      return Proxy.newProxyInstance(
+                          PreparedStatement.class.getClassLoader(),
+                          new Class<?>[] {PreparedStatement.class},
+                          (ignored, called, inputs) -> {
+                            Object returned = mdb2292Invoke(called, statement, inputs);
+                            if (!called.getName().equals("executeQuery")) return returned;
+                            var rows = (ResultSet) returned;
+                            return Proxy.newProxyInstance(
+                                ResultSet.class.getClassLoader(),
+                                new Class<?>[] {ResultSet.class},
+                                (unused, read, values) -> {
+                                  if (read.getName().equals("getObject")
+                                      || read.getName().equals("getBoolean")) return false;
+                                  return mdb2292Invoke(read, rows, values);
+                                });
+                          });
+                    }
+                    return result;
+                  });
+        },
+        connection -> {});
+  }
+
+  private static Object mdb2292Invoke(Method method, Object target, Object[] arguments)
+      throws Throwable {
+    try {
+      return method.invoke(target, arguments);
+    } catch (InvocationTargetException failure) {
+      throw failure.getCause();
+    }
+  }
+
+  private static void mdb2292Rows(
+      BatchRun run, String status, Instant started, Optional<Instant> ended) throws SQLException {
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement =
+            observer.prepareStatement(
+                "select"
+                    + " step,status,attempt,started_at,ended_at,target_count,success_count,failure_count,byte_count"
+                    + " from schubert.batch_runs where run_id=? order by step")) {
+      statement.setObject(1, run.id());
+      try (var rows = statement.executeQuery()) {
+        for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+          assertTrue(rows.next());
+          assertEquals(step, rows.getString("step"));
+          assertEquals(status, rows.getString("status"));
+          assertEquals(1, rows.getInt("attempt"));
+          assertEquals(started, rows.getTimestamp("started_at").toInstant());
+          assertEquals(
+              ended, Optional.ofNullable(rows.getTimestamp("ended_at")).map(Timestamp::toInstant));
+          assertEquals(status.equals("FAILED") ? 1 : 0, rows.getLong("target_count"));
+          assertEquals(0, rows.getLong("success_count"));
+          assertEquals(status.equals("FAILED") ? 1 : 0, rows.getLong("failure_count"));
+          assertEquals(0, rows.getLong("byte_count"));
+        }
+        assertFalse(rows.next());
+      }
+    }
+  }
+
+  private static void mdb2292NoOwnerResources() throws SQLException {
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement = observer.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select (select count(*) from pg_stat_activity where datname=current_database() and"
+                    + " application_name='schubert-nk-morning-controller'),(select count(*) from"
+                    + " pg_locks where locktype='advisory' and classid=0 and objid=71419602 and"
+                    + " granted)")) {
+      assertTrue(rows.next());
+      assertEquals(0, rows.getLong(1));
+      assertEquals(0, rows.getLong(2));
+      assertFalse(rows.next());
+    }
+  }
+
   @Test
   void mdb019VerificationOnlySchemaCannotMintPermitFactsAndDataCannotEscapeOwner()
       throws Exception {
