@@ -1,5 +1,13 @@
 # NK-OPS-001 現source通常新run admission/native
 
+## 2026-10-13 13:10JST 当owned停止・全post・native資格閉鎖
+
+2091全4ABIactual0/operatordebfccb59/UTC03:50:14.504909→15.670949、15source immutablebyte保持。2092stage0/03:50:36.756130→39.398026・stopactual0/sourceQualifiedtrue/03:50:50.708431→03:52:51.989562・同HEAD不変更、logSHAf4b3fff85e34cab2780c7a1ee6012ed00ce1d51d3147b682553dadda55199c90。親18/config2/2094別freshwhole通過→全8owned正常返却・DB更新/start0。別2096全postactual0/operatorc8cd586cb/03:54:44.370257→52.138647/payloadSHAd938ab683c8e3cc9868dbf5516e684f1c834141698b0fa17c9c41b47d87341d4、全24二読不変/十kernel-actor-client-advisory-FLOCK0/187署名/native38二読安定・四明示stop、Root/observer/fourpid gone。publiclegacyrun=PG2040はテンプレート由来、実slotは2096、旧runを今回証明へ使わない。
+
+2100catalogactual0/operatora5346d39c/03:58:30.832650→32.549446/payload769b0137759183e277d40325581c254597448214addb6148f45eea10371a177b、元32private nativebyte保持・十currentpoint/新Inspector2aae1ec0のPID1start205206-stop205353/window113189783801→113204808054を照合。2102actual1はserverCODEのPG2048旧outputslotで拒否（BUG1208/YKT976）、旧資格証跡不変更・VM操作0。新2104はtransport/serverCODE両方の同slot/static/entry独立1PT後、actual0/operator5b899af0f/servermanifestSHAf6ef65dd3a39c9517169e1a3a4065a71e720d70b1f165797738205a9648a246c・MainCRC0/10point9session/Inspector2点同一process順序・fullPG1844/1845同byte。技術残827/158/9/662で100未達。
+
+二つの当source限定経路は代替分岐なので単独でclass残が増えることを明記、732のPG2106同Main診断はInspector最新CLOSINGだけ・18distinct session/旧Source輸入0で残709/137/5/654。旧resume1066/197/8/712からΔ357/60/3/58、正式認定は別未変更。BUG1207/YKT975は当fullseal/ownedstop/postまで実0、BUG1208/YKT976は当資格実0で工具対象範囲完了（修正5afd14cd4、5b899af0f、完了日2026-10-13）。新Backup原本内容・保持/意図・残host/native・CHR/四100/451/trace/引継ぎを継続、Root/Backup/ADMIN/stop/退役/reload/grow再演0。
+
 ## 2026-10-13 12:46JST 新規run真正終端・全封緘actual0
 
 2070watch10932は03:36:20.726092に正常0で終了。2076真正DONE/PID1normaldone/WARNING10 actual0/operator757ff5301/03:37:56.813203→58.176144/payload1bf1f26fb0b37d00145a370b55cd421bf8e0b480a9b3f6d20b1f97f800217e47、endMonotonic114755353173us/elapsed1684.512459秒（28分4.512秒、30分以内）、DONE SHA2970c103b430f4a9348fef1e590d41bd9c3acfa3957ee9eaefc95058f0d94045。currentManagerGCを実exit0と推定せずnull保持。
