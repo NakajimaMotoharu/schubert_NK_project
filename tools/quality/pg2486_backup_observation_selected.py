@@ -24,6 +24,7 @@ def native_input():
 def server():
     raw = prior.server().replace('PG2292', 'PG2486').replace('Pg2292MorningGuardLauncher', 'Pg2486BackupObservationLauncher').replace('source-full-PG2228', 'source-full-PG2404').replace('PG2284-native-v1', 'PG2474-native-v1')
     raw = raw.replace('tests2 failures0', 'tests4 failures0').replace("'tests':'2'", "'tests':'4'").replace("len(x.findall('testcase'))==2", "len(x.findall('testcase'))==4").replace("'tests':2", "'tests':4")
+    raw = raw.replace('PG2486-selected-v1', 'PG2486-selected-v2')
     marker = "fixtures=source/'src/schubert-nk-batch/target/test-classes'"
     extra = """broker_selected=b/'runs/PG2478-selected-v4/selected.exec';require(sha(broker_selected)==INPUT['native']['brokerSelectedExecSha256'])
 """
@@ -40,7 +41,8 @@ def server():
 def main():
     raw = inspect.getsource(prior.prior.main).replace('PG2220', 'PG2486').replace('pg2220', 'pg2486').replace('pg2125-metadata-boundary-full-qualified-v1', 'pg2405-question-jdbc-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
-    namespace = {**prior.prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2486-backup-pair-selected-v1', 'SERVER': server(), 'native_input': native_input}
+    raw = raw.replace('PG2486-selected-v1', 'PG2486-selected-v2')
+    namespace = {**prior.prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2486-backup-pair-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<PG2486 isolated selected transport>', 'exec'), namespace)
     return namespace['main']()
 

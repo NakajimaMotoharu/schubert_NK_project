@@ -6,7 +6,7 @@ from pg2486_backup_observation_selected import FILES, native_input, server
 class Selected(unittest.TestCase):
     def test_actual_current_qualifications_and_four_methods(self):
         raw = server()
-        for marker in ['source-full-PG2404', 'PG2486-selected-v1', 'PG2474-native-v1',
+        for marker in ['source-full-PG2404', 'PG2486-selected-v2', 'PG2474-native-v1',
                        'PG2478-selected-v4', "'tests':'4'", 'len(native_streams)==9',
                        'SCHUBERT_PG_ROOT', 'fixture_xml_sha', 'classByteMismatch']:
             self.assertIn(marker, raw)

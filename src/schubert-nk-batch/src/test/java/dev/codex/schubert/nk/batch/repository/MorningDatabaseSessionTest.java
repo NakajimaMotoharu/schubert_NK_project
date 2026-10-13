@@ -181,8 +181,11 @@ final class MorningDatabaseSessionTest {
                               new Class<?>[] {ResultSet.class},
                               (unusedRows, read, columns) -> {
                                 Object real = mdb2292Invoke(read, rows, columns);
-                                if (held && observation == 2 && read.getName().equals("getBoolean"))
-                                  return false;
+                                if (held
+                                    && observation == 2
+                                    && (read.getName().equals("getBoolean")
+                                        || (read.getName().equals("getObject")
+                                            && columns[0].equals("value")))) return false;
                                 if (!terminal
                                     || !(read.getName().equals("getObject")
                                         || read.getName().equals("getString"))) return real;
