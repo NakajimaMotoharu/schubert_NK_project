@@ -36,7 +36,7 @@ def classify(binding,state,rows,done):
     require(not any(r.get('MESSAGE_ID')in forbidden for r in rows))
     job=jobs[0];stamp=job.get('__REALTIME_TIMESTAMP');require(type(stamp)is str and stamp.isdecimal())
     real=datetime.datetime.fromtimestamp(int(stamp)/1000000,datetime.timezone.utc);require(ended<=real and (real-ended).total_seconds()<=60 and int(end)<=int(job['__MONOTONIC_TIMESTAMP'])<=int(end)+60000000)
-    return {'genuineParentDone':True,'genuinePid1StartDone':True,'newActivationSameRunCutoff':True,'completionCode':int(fields[5]),'completionOutcome':'WARNING'if fields[5]=='10'else'SUCCESS','normalUnit0or10':True,'elapsedSeconds':(int(end)-binding['start'])/1000000,'wholeAccepted':False}
+    return {'genuineParentDone':True,'genuineRootDone':True,'genuinePid1StartDone':True,'newActivationSameRunCutoff':True,'completionCode':int(fields[5]),'completionOutcome':'WARNING'if fields[5]=='10'else'SUCCESS','normalUnit0or10':True,'endMonotonicUs':int(job['__MONOTONIC_TIMESTAMP']),'elapsedSeconds':(int(end)-binding['start'])/1000000,'wholeAccepted':False}
 
 
 GUEST=r'''

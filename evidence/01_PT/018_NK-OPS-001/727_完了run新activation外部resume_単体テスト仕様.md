@@ -1,5 +1,9 @@
 # NK-OPS-001 完了runから新activationの外部resume
 
+PT-OPS-PG2023-ROWS001～003：SS341/331/V019の独立full24post。前24全oldrowが保持され、同runの各step新attempt=max旧+1、9SKIPPED/1PROTECTED_RECORDS WARNING・各target/success/failure/byte0、既complete同runinspectionprogress/protected4不変。Web匿名HTTPログ/Outbox SENT/新匿名sessionは独立DDL構造/暗号長・固定field/null/時刻/1対1を照合し、個数をProductionでexpected生成しない。fixture独立literal10step/2request＋old削除/変更/progressreset/重複業務実行/wrongattempt/unsent反例3PASS、actualwholeglobals0。実新24post未実行。
+
+PT-OPS-PG2025-FULL001：同source187署名/Mainbyte/32config宣言・三度wholecapture一致、当Rootのnormal0or10新DONEと2023独立DB、4liveownedのPID/Invocation/ticks/argvSHA/cgroup/uid-gid-groups/caps/info、旧credentials/proofs/原本/Backup/runtimeを統合封緘する。旧slice原本は読取専用資格素材で新起動/親成功へ流用しない。生成全static0/独立composition1PASS、実whole封緘は未実行。2021-2023-2025合計7PASS、Main変更なし・重複全Maven0、正式451別未完。
+
 2019actualreadonly0/operator6386ce085/UTC01:19:38.877165→39.675867/payload9cfd9b6bf8f757b57c532677a94f2cd17474cc9fcf6654d574c8ab6c6556c802、元run/cutoff・新activatione31b627c-c0e2-4120-bd64-c0777479e800・同Job187092/Invocation1eb0d77c/Root503613-t10631829を資格。activeSHAa7c48013ef68ea2e25234e7cb487e892919b9d71c28fcdba4f87bf8ef0c969b9/argvSHAb268e1413de25f3d1aefed9f97a3b8868db53cde9ae288901b8cb569928274a9。2017actualentry1/unusedtime拒否はguest発行前、1199/967起票→新2019全static0/独立NULbyte1PASS→実0、外部start再演0。W/pg2019-fresh-resume-live-binding-complete-v1/manifest.safe.json。
 
 PT-OPS-PG2021-TERM001～003：承認Unitの正常0/10、旧runcutoffと新activation保持、Parent開始/終了のmonotonic30分budget、同boot/Invocation/jobの真正PID1startdone・DONE時間/同code・active不在を独立literalで検査。正常2code、各state/journal field欠落/foreign/null/duplicatecursor/oldactivation/timeout/不一致codeを含む3PASS/static全体0。旧cutoff+30分はresumeの実期限でないため、現ParentmonotonicとPID1終端時刻で検査し期限を緩和しない。実2021終端は未実行、parent全体受入へ合算0。
