@@ -1,5 +1,9 @@
 # NK-OPS-001 新Rootの正常WARNINGとowned停止
 
+## 2031 ABI0・2032 stage拒否・新2038再資格
+
+2031actual全4phasecompile/oracle/label/original0/operatorfe241143a/UTC01:56:41.984548→43.315342、before8a7d/source0fd、VM変異0。2032stageactual1/sourceQualifiedfalse/UTC01:57:29.487237→31.688508/logSHA7beee19b89c24c9aef7701670a68b24fd46c30e393ffe5bd85a7bdc5422d173c、STAGEcurrentreadlinkが旧PG1638のまま、archive読込/guestrootmkdir前。2032stopentryはstage0guardで拒否（hostrequestだけ・VMowner/stop0）、失敗と予約は保持し再送しない。BUG1201/YKT969へ修正前登録、new2038archive/remote/actionに分離、2030qualified15byte・2031ABIを変更せずreuse。STAGEactualboot/PG1846/BOMee75/source0fdとnewarchive、独立literal正常/foreignBOM/foreignSource1PASS・全static0、実新2038stage/stopは未発行。旧Root/Backup/ADMIN/runtime/reload/容量操作の再演0。
+
 OPS009/UI251/SS341343354/SSC283/QA047/BUG1200/YKT968。current0fd/PG1846/BOMee75/boot3d69、当source full3618/536/1643/static6zeroは既資格、tool-only再Maven0。旧Root13failed10・旧143UNKNOWNを保持。正式1964PT/53scope/全leaf0、GC0値を実exit0・親成功へ流用しない。
 
 |Test ID|対象・独立根拠・入力|期待|実結果・証跡|
