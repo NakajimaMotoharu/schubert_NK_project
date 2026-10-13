@@ -806,4 +806,23 @@ final class RootStartupContextTest {
                 StandardCharsets.US_ASCII)
             .contains("LoadState=not-found\n"));
   }
+
+  /** PT-OPS-ROOTCTX-010: genuine proc status boundary; no reflection or other PID action. */
+  @Test
+  void rootctx010NativeServiceUidRejectsInvalidPidAndOrdinaryCaller() {
+    var io = new RootStartupContext.NativeIo();
+    for (long pid :
+        new long[] {Long.MIN_VALUE, 0, 1, (long) Integer.MAX_VALUE + 1, Long.MAX_VALUE}) {
+      assertEquals(
+          "startup context unavailable",
+          assertThrows(IOException.class, () -> io.serviceRootUid(pid)).getMessage());
+    }
+    // The qualified host PT runs as its ordinary account. Reading our own proc status
+    // is allowed, but that identity must never qualify as a service Root identity.
+    assertNotEquals(0, io.effectiveUid());
+    assertEquals(
+        "startup context unavailable",
+        assertThrows(IOException.class, () -> io.serviceRootUid(ProcessHandle.current().pid()))
+            .getMessage());
+  }
 }
