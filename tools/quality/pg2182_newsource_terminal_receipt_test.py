@@ -9,6 +9,7 @@ class ReceiptTest(unittest.TestCase):
         for code in [0,10]:
             b,s,r,d=Receipt().fixture(code)
             raw=p.payload(dict(b,rootPid=685621));nodes=ast.parse(raw).body
+            self.assertIn('0.1.0-PG2126',raw);self.assertNotIn('0.1.0-PG1846',raw)
             ns={};funcs=[n for n in nodes if isinstance(n,ast.FunctionDef)and n.name in {'classify','_normal_classify'}]
             exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual pure receipt oracle>','exec'),ns)
             self.assertEqual(ns['classify'](b,s,r,d)['completionCode'],code)
