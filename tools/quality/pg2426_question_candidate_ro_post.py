@@ -14,7 +14,7 @@ def payload(candidate=None):
     if raw.count(marker)!=1:
         raise ValueError('one independent whole readonly post boundary required')
     extra="""require(pathlib.Path('/proc/self/ns/mnt').readlink()==pathlib.Path('/proc/1/ns/mnt').readlink())
-mounts=command(['findmnt','-n','-o','OPTIONS','--mountpoint','/opt/schubert-nk/releases/0.1.0-PG2406'],4096).decode('ascii').strip().split(',')
+mounts=command(['findmnt','-n','-o','OPTIONS','--mountpoint','/opt/schubert-nk/releases/0.1.0-PG2428'],4096).decode('ascii').strip().split(',')
 require(len(mounts)==len(set(mounts))and 'ro'in mounts and 'rw'not in mounts)
 """
     raw=raw.replace(marker,extra+marker).replace("'unusedCandidate187Verified':True",

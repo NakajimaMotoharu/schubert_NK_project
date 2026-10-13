@@ -15,7 +15,7 @@ class Readonly(unittest.TestCase):
             for v in ['pg2150-normal-unused-independent-post-v1','pg2144-current-normal-unused-tools-v1']:
                 self.assertNotIn(v,raw)
         self.assertIn('pg2421-',compiler())
-        self.assertIn('pg2406',compiler())
+        self.assertIn('pg2428',compiler())
         self.assertIn('0.1.0-PG2126',source())
         self.assertIn('pg2422-',source())
         self.assertIn('pg2422-fixed-stage-v1',STAGE)
@@ -25,7 +25,7 @@ class Readonly(unittest.TestCase):
                      'manifestSha256':'a'*64,'signatureSha256':'b'*64})
         self.assertEqual(0,check(raw,'<whole RO post>'))
         for v in ['pg2424-question-candidate-host-ro-v1','candidateHostReadonlyVerified',
-                  "'--mountpoint','/opt/schubert-nk/releases/0.1.0-PG2406'","'ro'in mounts and 'rw'not in mounts"]:
+                  "'--mountpoint','/opt/schubert-nk/releases/0.1.0-PG2428'","'ro'in mounts and 'rw'not in mounts"]:
             self.assertIn(v,raw)
         self.assertNotIn('mount --bind',raw)
         self.assertNotIn('StartUnit(',raw)

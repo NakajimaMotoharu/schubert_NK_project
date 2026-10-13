@@ -14,7 +14,7 @@ SLOT = 'pg2418-question-unused-independent-post-v1'
 
 def payload(candidate=None):
     if candidate is None:
-        candidate = json.loads((W/'pg2406-candidate-build-v1.safe.json').read_bytes())
+        candidate = json.loads((W/'pg2428-candidate-build-v1.safe.json').read_bytes())
     if candidate.get('actualExit') != 0 or candidate.get('candidateSource') != production() or candidate.get('signatureVerified') is not True:
         raise ValueError('actual new signed candidate required')
     for k in ['manifestSha256','signatureSha256']:
@@ -32,7 +32,7 @@ def payload(candidate=None):
     extra=EXTRA
     for a,b in [('pg1684-completed-unused-placement-v4',SAVE),
                 ('9f18ef24f4b236dddcf6c4de228e1c45ffb09c52d9229516a82829bfb6ce3b37',BEFORE),
-                ('PG1638','PG2406'),('pg1638','pg2406'),
+                ('PG1638','PG2428'),('pg1638','pg2428'),
                 ('2741c4546afad6c1e8b6efbd53dfb58144edf7bb',production()),
                 ('195e0668bc5a1fea2cbf2a93747e0cdcbf1bcb66c3f3f23a362fca7c89ae82e1',candidate['manifestSha256']),
                 ('5e32c12cc0231fd9ac307d3ffdfe6428aa53002e0398248cf32362d903d4aca5',candidate['signatureSha256'])]:

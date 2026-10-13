@@ -14,7 +14,7 @@ class Compiler(unittest.TestCase):
         # Undefined names are checked against the actual compiler imports, not a
         # shortened helper excerpt; full ABI execution is required after signing.
         compile(raw,'<all ABI source>','exec')
-        for v in ['pg2413-','Pg2412NativeArgumentTest','pg2375-frozen-v1','pg2406']:
+        for v in ['pg2413-','Pg2412NativeArgumentTest','pg2375-frozen-v1','pg2428']:
             self.assertIn(v,raw)
         self.assertNotIn('pg2133-frozen',raw)
         self.assertNotIn('pg2091-frozen',raw)

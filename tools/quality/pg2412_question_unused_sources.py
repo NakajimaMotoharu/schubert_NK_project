@@ -22,8 +22,8 @@ def bind(raw):
     raw = raw.replace(old_roles.production(), '__NEW_QUESTION_SOURCE__').replace(
         old_roles.CURRENT, CURRENT).replace('__NEW_QUESTION_SOURCE__', production())
     raw = raw.replace('PG2126','__NEW_QUESTION_RELEASE__').replace('pg2126','__NEW_QUESTION_RELEASE_LOWER__').replace(
-        'PG1846','PG2126').replace('pg1846','pg2126').replace('__NEW_QUESTION_RELEASE__','PG2406').replace(
-        '__NEW_QUESTION_RELEASE_LOWER__','pg2406')
+        'PG1846','PG2126').replace('pg1846','pg2126').replace('__NEW_QUESTION_RELEASE__','PG2428').replace(
+        '__NEW_QUESTION_RELEASE_LOWER__','pg2428')
     pairs = [(old_roles.CURRENT_BOM,CURRENT_BOM),(old_roles.BEFORE,BEFORE),
         ('pg2130-current-normal-before-v1','pg2410-retired-current-before-v1'),
         ('a31dd6da-cf4c-4d0f-ab7c-5c8bb59c0b75','91f5484b-9702-4c7c-97f3-dd5110a853f9'),

@@ -8,7 +8,7 @@ class Post(unittest.TestCase):
                    'manifestSha256':'a'*64,'signatureSha256':'b'*64}
         raw=payload(candidate)
         for v in ['pg2416-question-unused-placement-v1','pg2410-retired-current-before-v1',
-                  '0.1.0-PG2406',production(),'same_except_runtime','qualify_backup()',
+                  '0.1.0-PG2428',production(),'same_except_runtime','qualify_backup()',
                   'unusedCandidate187Verified','currentEpochApprovalUnchanged',
                   'genuineParentNormalWarningOriginal=true']:
             self.assertIn(v,raw)

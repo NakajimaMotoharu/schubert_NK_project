@@ -10,7 +10,7 @@ class UnusedRoles(unittest.TestCase):
                   'pg2410-retired-current-before-v1', "parent_config=={'Type':'oneshot','SuccessExitStatus':'10'}"]:
             self.assertIn(v, raw)
         whole = '\n'.join(values.values())
-        for v in [BEFORE,CURRENT,CURRENT_BOM,production(),'PG2406','PG2126']:
+        for v in [BEFORE,CURRENT,CURRENT_BOM,production(),'PG2428','PG2126']:
             self.assertIn(v,whole)
         for v in ['pg2130-current-normal-before-v1','pg2144-current-normal-unused-tools-v1',
                   'a31dd6da-cf4c-4d0f-ab7c-5c8bb59c0b75','__NEW_QUESTION']:

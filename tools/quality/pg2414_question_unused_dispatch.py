@@ -30,7 +30,7 @@ def runtime_namespace(candidate,before):
 def main():
     if sys.argv[1:] not in (['stage'],['place']):
         raise ValueError('immutable stage/place only')
-    candidate = json.loads((W/'pg2406-candidate-build-v1.safe.json').read_bytes())
+    candidate = json.loads((W/'pg2428-candidate-build-v1.safe.json').read_bytes())
     before = json.loads((W/'pg2410-retired-current-before-v1/manifest.safe.json').read_bytes())
     namespace = runtime_namespace(candidate,before)
     exec(compile(source(),'<direct fixed question new/current entry>','exec'),namespace)

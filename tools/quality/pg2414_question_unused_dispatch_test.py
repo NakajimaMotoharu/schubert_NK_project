@@ -8,7 +8,7 @@ class Dispatch(unittest.TestCase):
     def test_complete_new_immutable_slots_current_and_candidate(self):
         raw = source()
         for v in ['pg2413-frozen-v1.safe.json','pg2410-retired-current-before-v1',
-                  'pg2406-manifest-v1.sig','0.1.0-PG2406','0.1.0-PG2126',
+                  'pg2428-manifest-v1.sig','0.1.0-PG2428','0.1.0-PG2126',
                   'pg2414-stage-v1.exit','Pg2412UnusedStage']:
             self.assertIn(v,raw)
         for v in ['pg2134-','pg2133-frozen','daemon-reload','StartUnit(','StopUnit(']:
