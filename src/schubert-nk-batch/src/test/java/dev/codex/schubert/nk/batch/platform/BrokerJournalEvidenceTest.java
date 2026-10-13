@@ -6,11 +6,169 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.Security;
 import java.util.*;
 import org.junit.jupiter.api.Test;
 
 /** SSC125 BROKERSTART003: hand-written vendor2.56 message oracle + independent JSON/metadata. */
+@org.junit.jupiter.api.parallel.Isolated("PG2478 provider outage is confined to the test JVM")
 final class BrokerJournalEvidenceTest {
+  @Test
+  void bj2478001AnchorMetadataAndExactByteBoundariesRejectForeignOrMissingEvidence()
+      throws Exception {
+    String start =
+        row("AMQ221001: Apache Artemis Message Broker version 2.56.0 schubert-nk-broker", 3);
+    byte[] literal = start.getBytes(StandardCharsets.UTF_8);
+    var anchor = BrokerJournalEvidence.anchor(literal, BOOT, true);
+    assertEquals(INV, anchor.invocation());
+    assertEquals(BigInteger.valueOf(1234567), anchor.monotonic());
+    assertEquals("cursor-3", anchor.cursor());
+    assertEquals("BrokerJournalAnchor[redacted]", anchor.toString());
+    for (String invalid :
+        List.of(
+            start.replace(INV, "0".repeat(32)),
+            start.replace(INV, "Q".repeat(32)),
+            start.replace("1234567", "0"),
+            start.replace("1790780400000000", "0"),
+            start.replace("cursor-3", ""),
+            start.replace("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"3\""),
+            start.replace("schubert-nk-broker", "foreign"),
+            start.replace("2.56.0", "2.55.0"),
+            start.replace("AMQ221001", "AMQ224001"),
+            start.replace("schubert-nk-broker", "FATAL"),
+            start + start)) {
+      assertThrows(
+          IOException.class,
+          () -> BrokerJournalEvidence.anchor(invalid.getBytes(StandardCharsets.UTF_8), BOOT, true));
+    }
+    String padded =
+        start.replace(
+            "schubert-nk-broker", "schubert-nk-broker" + " ".repeat(65536 - literal.length));
+    assertEquals(65536, padded.getBytes(StandardCharsets.UTF_8).length);
+    assertEquals(
+        "cursor-3",
+        BrokerJournalEvidence.anchor(padded.getBytes(StandardCharsets.UTF_8), BOOT, true).cursor());
+    for (byte[] invalid : List.of(new byte[0], new byte[65537], new byte[] {(byte) 0xff, 10}))
+      assertThrows(IOException.class, () -> BrokerJournalEvidence.anchor(invalid, BOOT, false));
+    assertThrows(NullPointerException.class, () -> BrokerJournalEvidence.anchor(null, BOOT, false));
+    assertThrows(
+        NullPointerException.class, () -> BrokerJournalEvidence.anchor(literal, null, false));
+  }
+
+  @Test
+  void bj2478002CanonicalAndStrictJsonBoundariesDoNotNormalizeUnavailableEvidence()
+      throws Exception {
+    for (byte[] invalid :
+        List.of(
+            new byte[0],
+            new byte[4 * 1024 * 1024 + 1],
+            GOLDEN.stripTrailing().getBytes(StandardCharsets.UTF_8),
+            new byte[] {(byte) 0xff, 10},
+            "[]\n".getBytes(StandardCharsets.UTF_8),
+            row("literal\\ud800", 1).getBytes(StandardCharsets.UTF_8))) {
+      IOException failure =
+          assertThrows(IOException.class, () -> BrokerJournalEvidence.contentSha256(invalid));
+      assertFalse(String.valueOf(failure.getMessage()).contains("literal"));
+    }
+    for (String text : List.of("[]\n", "{\"MESSAGE\":null}\n", "{} {}\n"))
+      assertThrows(IOException.class, () -> read(text));
+    assertThrows(NullPointerException.class, () -> BrokerJournalEvidence.contentSha256(null));
+  }
+
+  @Test
+  void bj2478003ClosedHistoryRequiresIndependentCursorTimeAndCanonicalDigest() throws Exception {
+    String last =
+        row(
+            "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker,"
+                + " nodeID=public-fixture]",
+            3);
+    var fields = new TreeMap<String, String>();
+    fields.put(
+        "MESSAGE",
+        "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker,"
+            + " nodeID=public-fixture]");
+    fields.put("PRIORITY", "6");
+    fields.put("_SYSTEMD_INVOCATION_ID", INV);
+    fields.put("_BOOT_ID", "11111111111141118111111111111111");
+    fields.put("_SYSTEMD_UNIT", "artemis.service");
+    fields.put("__CURSOR", "cursor-3");
+    fields.put("__MONOTONIC_TIMESTAMP", "1234567");
+    fields.put("__REALTIME_TIMESTAMP", "1790780400000000");
+    var canonical = new StringBuilder("NKJOURNAL1\n");
+    fields.forEach(
+        (k, v) ->
+            canonical
+                .append("ROW|0|")
+                .append(k)
+                .append('|')
+                .append(HexFormat.of().formatHex(v.getBytes(StandardCharsets.UTF_8)))
+                .append('\n'));
+    String digest =
+        HexFormat.of()
+            .formatHex(
+                MessageDigest.getInstance("SHA-256")
+                    .digest(canonical.toString().getBytes(StandardCharsets.US_ASCII)));
+    var expectedAnchor =
+        new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "cursor-3", digest);
+    var actual =
+        BrokerJournalEvidence.consumeClosedHistory(
+            GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, expectedAnchor);
+    assertEquals(3, actual.entries());
+    assertEquals(
+        HexFormat.of()
+            .formatHex(
+                MessageDigest.getInstance("SHA-256")
+                    .digest(GOLDEN.getBytes(StandardCharsets.UTF_8))),
+        actual.sha256());
+    assertEquals(
+        digest, BrokerJournalEvidence.contentSha256(last.getBytes(StandardCharsets.UTF_8)));
+    for (var invalid :
+        List.of(
+            new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "foreign", digest),
+            new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234568), "cursor-3", digest),
+            new BrokerJournalEvidence.Anchor(
+                INV, BigInteger.valueOf(1234567), "cursor-3", "0".repeat(64))))
+      assertThrows(
+          IOException.class,
+          () ->
+              BrokerJournalEvidence.consumeClosedHistory(
+                  GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, invalid));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            BrokerJournalEvidence.consumeClosedHistory(
+                GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, null));
+  }
+
+  @Test
+  void bj2478004CryptoProviderOutageIsRedactedAndRegistryRestored() throws Exception {
+    var original = Security.getProviders();
+    try {
+      for (var provider : original) Security.removeProvider(provider.getName());
+      for (boolean canonical : List.of(false, true)) {
+        IOException failure =
+            assertThrows(
+                IOException.class,
+                () -> {
+                  if (canonical)
+                    BrokerJournalEvidence.contentSha256(GOLDEN.getBytes(StandardCharsets.UTF_8));
+                  else read(GOLDEN);
+                });
+        assertEquals("Broker journal evidence unavailable", failure.getMessage());
+      }
+    } finally {
+      for (int i = 0; i < original.length; i++) Security.insertProviderAt(original[i], i + 1);
+    }
+    assertArrayEquals(original, Security.getProviders());
+    assertEquals(
+        "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        HexFormat.of()
+            .formatHex(
+                MessageDigest.getInstance("SHA-256")
+                    .digest("abc".getBytes(StandardCharsets.US_ASCII))));
+    assertEquals(3, read(GOLDEN).entries());
+  }
+
   @Test
   void issbrokerstop001ActualStopEventNeedsSameBootInvocationWholeIntervalAndExactBytes()
       throws Exception {
