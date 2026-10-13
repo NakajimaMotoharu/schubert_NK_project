@@ -825,4 +825,45 @@ final class RootStartupContextTest {
         assertThrows(IOException.class, () -> io.serviceRootUid(ProcessHandle.current().pid()))
             .getMessage());
   }
+
+  /** PT-OPS-ROOTCTX-011: the deadline query cannot silently use the readiness property set. */
+  @Test
+  void rootctx011NativeDeadlineUsesFixedPropertiesAndPreservesIoFailure() {
+    byte[] vector =
+        bytes(
+            "Id=schubert-nk-web.service\n"
+                + "InvocationID=11111111111111111111111111111111\n"
+                + "MainPID=42\n"
+                + "ExecMainStartTimestampMonotonic=900001\n");
+    var process = new FakeProcess();
+    process.output = new ByteArrayInputStream(vector);
+    var io =
+        new RootStartupContext.NativeIo(
+            command -> {
+              assertEquals(
+                  List.of(
+                      "/usr/bin/systemctl",
+                      "--system",
+                      "--no-pager",
+                      "--no-ask-password",
+                      "show",
+                      "--property=Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic",
+                      "schubert-nk-web.service"),
+                  command);
+              return process;
+            });
+    assertArrayEquals(
+        vector, assertDoesNotThrow(() -> io.unitDeadline(RootStartupContext.Service.WEB)));
+    assertEquals(0, process.destroyed);
+    var failure = new IOException("PUBLIC_FIXTURE_QUERY_FAILURE");
+    var failed =
+        new RootStartupContext.NativeIo(
+            command -> {
+              throw failure;
+            });
+    assertSame(
+        failure,
+        assertThrows(IOException.class, () -> failed.unitDeadline(RootStartupContext.Service.API)));
+    assertThrows(NullPointerException.class, () -> io.unitDeadline(null));
+  }
 }
