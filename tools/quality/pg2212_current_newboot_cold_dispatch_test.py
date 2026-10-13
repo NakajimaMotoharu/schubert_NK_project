@@ -12,6 +12,8 @@ class CurrentDispatcher(unittest.TestCase):
             if text=='pg2209':continue # Frozen binding belongs to actual main namespace.
             self.assertIn(text,s)
         self.assertNotIn('/proc/3323',s)
+        self.assertNotIn('PG1452-current-cold-owned-prepare-v1',s)
+        self.assertIn('PG2212-current-newboot-cold-owned-prepare-v1',s)
         self.assertNotIn('0.1.0-PG1292',s)
         self.assertIn('frozenOperatorSource',s)
         self.assertIn("'-cp',cp,'Pg2208CurrentColdPreparation','prepare'",s)

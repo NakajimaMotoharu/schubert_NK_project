@@ -7,6 +7,7 @@ from pg2208_current_newboot_cold_sources import TOOLS,BOOT,qualify_before
 def source():
     raw=inspect.getsource(prior.prepare)
     raw=raw.replace('qualified_handoff()','qualify_before()')
+    raw=raw.replace('PG1452-current-cold-owned-prepare-v1','PG2212-current-newboot-cold-owned-prepare-v1')
     for old,new in [('pg1451-current-cold-stage-v1','pg2214-current-newboot-cold-stage-v2'),
       ('pg1452-current-cold-owned-prepare-v1','pg2212-current-newboot-cold-owned-prepare-v1'),
       ('pg1450-current-cold-tools-v1',TOOLS),('pg1452-current-cold-prepared-v1','pg2212-current-newboot-cold-prepared-v1'),
