@@ -17,6 +17,10 @@ def payload():
     publication="with(SAVE/'result.safe.json').open('x')as f:json.dump(result,f,sort_keys=True);f.flush();os.fsync(f.fileno())"
     if raw.count(marker)!=1 or raw.count(publication)!=1:raise ValueError('one current independent result boundary required')
     raw=raw.replace(publication,'').replace(marker,inspect.getsource(prior.ordinary_argv)+'\n'+bindings(prior.EXTRA))
+    raw=raw.replace('>=805306368','>=12884901888').replace("'requiredGuestWriteAndCloseBytes':805306368","'requiredGuestWriteAndCloseBytes':12884901888")
+    marker="value={'current':first,'runtime':runtime,"
+    if raw.count(marker)!=1:raise ValueError('one immutable fresh admission image required')
+    raw=raw.replace(marker,"systemd_runtime=tree(pathlib.Path('/run/systemd/system'));require(systemd_runtime==tree(pathlib.Path('/run/systemd/system')))\n"+marker.replace("'runtime':runtime,","'runtime':runtime,'systemdRuntime':systemd_runtime,"))
     if check(raw,'<newboot true fresh-day whole before>'):raise ValueError('whole actual exports required')
     compile(raw,'<newboot fresh-day before>','exec');return raw
 
