@@ -1,0 +1,13 @@
+# NK-OPS-001 完了runから新activationの外部resume
+
+OPS009/UI251/SS343§6.13/SSC259260283/QA047/052、current0fd-PG1846/BOMee75/boot3d69。C02既runtime準備群0542内、N15.01接続は参照費0（担当native条件は別）。開始0.5/1.5/4pp/v3不変更、N-T/個別実費null。元completed run4148e3e8-f107-431a-ab27-d6e6d1f1772e/cutoffを選択、旧全activation完了・active不在、新activationはProductionが生成し旧DONEを新成功へ流用しない。
+
+|Test ID|対象/操作|独立期待・境界/異常|結果|
+|---|---|---|---|
+|PT-OPS-PG2015-ONCE001|actualcomposedpayload/外部start|全current-24DB-32config-187署名-OriginalBackup-旧Unitinode/runtime-26nativeを連続十Ref中で再認証、同observer/rootfiles400ACL0、旧native26全byte私有保全、予約fsync後普通start1、finally逆Unref/close、期限1800/余力12GiB。reload/stop/resetfailed/設定書込0|独立1PASS/static0|
+|PT-OPS-PG2015-ARGV001|actualargv判定独立literal4vector|null/noargs/foreignrun拒否・明示承認runのみ許可。旧UUIDの1772部をprefix変換で変更しない|独立1PASS|
+|PT-OPS-PG2010-WATCH001|immutablecurrentobserver|新source/BOM/boot/PG1846、actualRoot startmonotonic→budget、Rootから普通API/Web generation/identity/socket/info/HTTPUP/TLSlogin200、自動startstop0|工具1PASS・実stage/watch未実行|
+|PT-OPS-PG2015-START001|externalstart一回|2013全post0/FD・lock0、観測者firstframequiescent、durableonceguard、普通systemctlstart--no-block一回、currentjob/Invocation/PID/monotonic。client0は親受入ではない|未実行|
+|PT-OPS-FRESH-ROOT-DONE001|当新activationProduction終端|真正ParentDONE/同runcutoff新activation/normalUnit0or10/元保護DB・Backup/意図退役・ordinaryAPIWebCaddy/owned停止全資源0/native同sourceを独立照合。過去failed10/143UNKNOWN正常化0|未実行|
+
+command=固定clean sourceで`python3 -B tools/quality/pg2010_fresh_completed_resume_observer.py stage`、`... watch`、`python3 -B tools/quality/pg2015_completed_run_fresh_resume_once.py`（既PYTHONPATH tools/quality:tools/quality/vm/050_s1:pyflakes3.4runtime）。新onlyW/pg2010-*とpg2015-completed-run-fresh-resume-once-v1、guest同名root。全observer/resume工具が不変であることをhash照合する。新startguardやjobが存在すれば二重startせず当実所有へ再付着。元30分budget/既Unit期限・逆順普通stop契約不変更。coverage/CHR/正式1964PT-53scopeは未更新、全leaf正式0。
