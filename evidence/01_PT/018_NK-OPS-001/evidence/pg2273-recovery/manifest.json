@@ -1,0 +1,58 @@
+{
+  "run": "PG2271/2273-RECOVERY",
+  "operatorSource": "4ad2701f80cb85b7f3e399b6f971666cf7736ca5",
+  "productionSource": "3b7f3567b54f91f3a9dbeb859e8dd77e8353a2c8",
+  "branch": "dev-foundation",
+  "observedJST": "2026-10-14T01:04:07+09:00",
+  "commands": [
+    "python3 -B -m unittest tools/quality/pg2270_current_no_db_recovery_test.py tools/quality/pg2274_current_signed_owned_sources_test.py -v",
+    "python3 -B tools/quality/pg2270_current_no_db_recovery.py proof",
+    "python3 -B tools/quality/pg2270_current_no_db_recovery.py handoff"
+  ],
+  "toolTests": 8,
+  "toolTestsExit": 0,
+  "staticIssues": 0,
+  "actualProofExit": 0,
+  "actualRecoveryExit": 0,
+  "originalStopExit": 143,
+  "originalCloseUnknown": true,
+  "newBusinessStopsIssued": 0,
+  "toolHashes": {
+    "tools/quality/pg2270_current_no_db_recovery.py": "ac04ebfd69316aeabeadbe340d29b56e5f5a41595aeafbdedf7086ef497ca757",
+    "tools/quality/pg2270_current_no_db_recovery_test.py": "429218bc19d4baafce2523adf82cef12675f758d8fd3fc3051134c126751bd71",
+    "tools/quality/pg2274_current_signed_owned_sources.py": "cb0bd9261fe925bdf61460f4ff8d2ea460be803bee1f737dac02e147e7555913",
+    "tools/quality/pg2274_current_signed_owned_sources_test.py": "d12b7dec55105db19a18af20522b633b710c55d2a5a8c2fc6c7c26da2225844c",
+    "tools/quality/pg2275_current_signed_owned_compile.py": "de864a2866797b221836d9af819764adebc078939ed914b626ef90f67f588c73",
+    "tools/quality/pg2276_current_signed_owned_dispatch.py": "edb0084be148dd649e8ed676f4000764f76c2a31547bb90330f3396147b1f0a9",
+    "tools/quality/pg2280_current_signed_owned_post.py": "279a353aa96b4503db3f32e3107102beef30323e8c669e85a12a462daaa2f369",
+    "tools/quality/pg2282_current_signed_native_catalog.py": "9d46f096b7ace81ace4cf315eb2b63ec44529b25a5a2a1a1f396aea259b64eac",
+    "tools/quality/pg2284_current_signed_native_qualification.py": "64922f42452e7e1af08eb42d7313be000a11deb7cc10ccdf1721b58e644a7eb9"
+  },
+  "coverageAccepted": false,
+  "formalAccepted": false,
+  "wholeLeafDelta": 0,
+  "bugs": [
+    "BUG1224",
+    "BUG1225",
+    "BUG1226"
+  ],
+  "rollouts": [
+    "YKT990",
+    "YKT991",
+    "YKT992"
+  ],
+  "evidenceRefs": [
+    "pg2271-current-no-db-proof-v2/manifest.safe.json",
+    "pg2273-current-no-db-handoff-v2/manifest.safe.json"
+  ],
+  "usageCursor": "e23aaec9c43b426ecfbffb704651f9ea558150c1c0a8495927582beea2ee16ba",
+  "actualTokens": null,
+  "actualAllocatedPp": null,
+  "quota": {
+    "sharedUsed": 9,
+    "sharedRemaining": 91
+  },
+  "expected": "Fixed full24/32/187/fourOwner sealed before and exact noDB39FD/OFD/pidfd oneTERM; no production oracle calls",
+  "actual": "Owned actor gone/FLOCK0/whole before unchanged; old stop143 not success",
+  "secretsIncluded": false
+}
