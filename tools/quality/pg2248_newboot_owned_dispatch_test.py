@@ -8,6 +8,8 @@ class CurrentOwnedEntry(unittest.TestCase):
         for text in ['0.1.0-PG2126',p.SOURCE,p.BOM,p.GUEST,p.ARCHIVE]:self.assertIn(text,p.STAGE)
         self.assertNotIn('pg2188',p.STAGE)
         self.assertNotIn('pg2190',p.STAGE)
+        self.assertIn('b2d6f605-61cf-425f-8fbd-12d606f6ee66',p.STAGE)
+        self.assertNotIn('3d69f5af',p.STAGE)
         raw=p.run_source()
         for text in ['pg2247','pg2248','pg2249','pg2250-newboot-pre-stop-full-v1','Pg2246','PG2126']:
             self.assertIn(text,raw)

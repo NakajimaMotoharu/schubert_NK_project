@@ -33,7 +33,7 @@ def payload(seals):
 
 def entry():
     raw=inspect.getsource(prior.prior.previous.main)
-    for old,new in [('pg2038-stop-v1','pg2248-stop-v1'),('pg2031-frozen-v1','pg2247-frozen-v1'),('pg2030_parent_receipt.py','pg2246_parent_receipt.py'),('pg2030-native-stop-v1','pg2246-native-stop-v1')]:raw=raw.replace(old,new)
+    for old,new in [('pg2038-stop-v1','pg2266-stop-v1'),('pg2031-frozen-v1','pg2247-frozen-v1'),('pg2030_parent_receipt.py','pg2246_parent_receipt.py'),('pg2030-native-stop-v1','pg2246-native-stop-v1')]:raw=raw.replace(old,new)
     ns={**prior.prior.previous.__dict__,'SLOT':SLOT,'TOOLS':TOOLS,'SOURCE':SOURCE,'BOM':BOM,'payload':payload}
     exec(compile(raw,'<current newboot independent stopped post entry>','exec'),ns);return ns['main']
 

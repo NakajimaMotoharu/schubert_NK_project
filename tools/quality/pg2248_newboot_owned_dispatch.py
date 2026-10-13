@@ -3,11 +3,13 @@ import types
 import pg2190_newsource_owned_stop_dispatch as prior
 from pg2246_newboot_owned_sources import sources,context,SOURCE,TOOLS,BOM
 from pg2242_newboot_fresh_day_full_seal import payload as full_payload,SLOT as POST_SLOT
+from pg2208_current_newboot_cold_sources import BOOT
 
 GUEST='/var/lib/pgpt-s1-preservation/'+TOOLS
 REMOTE='/home/ubuntu/pg2248-fixed-stage-v1'
 ARCHIVE='pg2248-'+TOOLS+'.tar'
 STAGE=prior.STAGE.replace(prior.ARCHIVE,ARCHIVE).replace(prior.TOOLS,TOOLS).replace('pg2190','pg2248').replace('PG2190','PG2248').replace('pg2188','pg2246').replace('Pg2188','Pg2246')
+STAGE=STAGE.replace('3d69f5af-6bac-46b1-a540-7591c4a79a0d',BOOT)
 PARENT_PREQUAL=prior.PARENT_PREQUAL.replace('pg2188','pg2246')
 
 
