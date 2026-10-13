@@ -1,5 +1,7 @@
 # Backup保持判定追加境界（PG2120、未実行）
 
+文書番号は既存075との重複を避け687へ確定。TestID/run/sourceの対応は不変更、旧試験資料を上書きしていない。
+
 Program NK-BAT-001/BackupArtifactVerifier.sameDirectoryInode・inspectRetention・retentionSizesAgree、BAK/BKO/UI251/SS341343、WBS-P017-05（485主担当、0558のP018-01表記は所属訂正/費用移転なし）。公開synthetic archiveの固定Golden manifest/サイズ/hashとPOSIX値の独立oracleで検証し、実Original/Backup/DBには書込0。
 
 PT-BAK-2120-001は固定五identity一項ずつdrift=false/内容size-times-links変化のみtrue/null invariant拒否。002は四fileそれぞれsize+1→Optional.empty/保全、003は四fileそれぞれ非regular→empty、raw負size/異device/ino0はUNAVAILABLE（削除許可としない）。004は三archive同長digest不一致→empty、前後全fixturebyte不変・FD回収を検証。期待値をProduction methodから生成0、反射/OS authority偽造/無意味assert/除外0。正常retainは既MorningBackupRetentionTest/VerifierTestと合わせて実施。

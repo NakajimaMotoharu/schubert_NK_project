@@ -412,12 +412,7 @@ final class MorningBackupArtifacts {
     return owned.atDirectory(
         held -> {
           var m = metadata(held);
-          require(
-              m.mode() == mode
-                  && m.uid() == uid
-                  && m.gid() == group
-                  && m.links() >= 2
-                  && m.size() >= 0);
+          requireDirectoryMetadata(m, group, mode, uid);
           acl(held);
           return m;
         });
@@ -426,6 +421,29 @@ final class MorningBackupArtifacts {
   private EnvironmentInodePolicy.Metadata file(Path held, long group, int mode, long maximum)
       throws IOException {
     var m = metadata(held);
+    requireFileMetadata(m, group, mode, maximum);
+    acl(held);
+    return m;
+  }
+
+  private EnvironmentInodePolicy.Metadata tool(Path held) throws IOException {
+    var m = metadata(held);
+    requireToolMetadata(m);
+    acl(held);
+    return m;
+  }
+
+  /** Pure internal value guards, no Root/FD admission and no filesystem repair. */
+  static void requireDirectoryMetadata(
+      EnvironmentInodePolicy.Metadata m, long group, int mode, long uid) throws IOException {
+    Objects.requireNonNull(m);
+    require(
+        m.mode() == mode && m.uid() == uid && m.gid() == group && m.links() >= 2 && m.size() >= 0);
+  }
+
+  static void requireFileMetadata(
+      EnvironmentInodePolicy.Metadata m, long group, int mode, long maximum) throws IOException {
+    Objects.requireNonNull(m);
     require(
         m.mode() == mode
             && m.uid() == 0
@@ -433,12 +451,10 @@ final class MorningBackupArtifacts {
             && m.links() == 1
             && m.size() >= 0
             && m.size() <= maximum);
-    acl(held);
-    return m;
   }
 
-  private EnvironmentInodePolicy.Metadata tool(Path held) throws IOException {
-    var m = metadata(held);
+  static void requireToolMetadata(EnvironmentInodePolicy.Metadata m) throws IOException {
+    Objects.requireNonNull(m);
     require(
         (m.mode() == 0100644 || m.mode() == 0100755)
             && m.uid() == 0
@@ -446,8 +462,6 @@ final class MorningBackupArtifacts {
             && m.links() == 1
             && m.size() > 0
             && m.size() <= 268435456L);
-    acl(held);
-    return m;
   }
 
   private EnvironmentInodePolicy.Metadata metadata(Path held) throws IOException {
@@ -458,8 +472,12 @@ final class MorningBackupArtifacts {
 
   private void acl(Path held) throws IOException {
     byte[] acl = security.accessAcl(held, 44);
-    require(acl != null && acl.length == 0);
+    requireNoAccessAcl(acl);
     check();
+  }
+
+  static void requireNoAccessAcl(@org.jspecify.annotations.Nullable byte[] acl) throws IOException {
+    require(acl != null && acl.length == 0);
   }
 
   private byte[] bytes(Path held, int size) throws IOException {
