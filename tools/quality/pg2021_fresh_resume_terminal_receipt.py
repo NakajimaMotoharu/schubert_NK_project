@@ -18,11 +18,13 @@ def classify(binding,state,rows,done):
         if not value:raise ValueError('current normal parent receipt refused')
     require(type(binding)is dict and type(state)is dict and type(rows)is list and type(done)is bytes)
     require(type(binding.get('start'))is int and binding['start']>0 and binding.get('activation')!='9adbf05a-61d0-408b-b51d-ab19c7e5b16a')
-    fixed={'ActiveState':'inactive','SubState':'dead','MainPID':'0','ControlPID':'0','Job':'','Result':'success','ExecMainCode':'1','InvocationID':binding['invocation'],'SuccessExitStatus':'10','ExecMainStartTimestampMonotonic':str(binding['start'])}
-    require(all(state.get(k)==v for k,v in fixed.items())and state.get('ExecMainStatus')in {'0','10'})
-    end=state.get('ExecMainExitTimestampMonotonic');require(type(end)is str and end.isdecimal()and binding['start']<=int(end)<=binding['start']+1800000000)
+    common_state={'ActiveState':'inactive','SubState':'dead','MainPID':'0','ControlPID':'0','Job':'','Result':'success','SuccessExitStatus':'10'}
+    gc={**common_state,'ExecMainCode':'0','InvocationID':'','ExecMainStartTimestampMonotonic':'0','ExecMainExitTimestampMonotonic':'0','ExecMainStatus':'0'}
+    current_gc=state==gc
+    fixed={**common_state,'ExecMainCode':'1','InvocationID':binding['invocation'],'ExecMainStartTimestampMonotonic':str(binding['start'])}
+    require(current_gc or (set(state)==set(gc)and all(state.get(k)==v for k,v in fixed.items())and state.get('ExecMainStatus')in {'0','10'}))
     require(0<len(done)<=512 and done.endswith(b'\n'))
-    fields=done.decode('ascii').splitlines();require(len(fields)==6 and fields[:4]==['NKDONE1',binding['run'],binding['cutoff'],binding['activation']]and fields[5]==state['ExecMainStatus'])
+    fields=done.decode('ascii').splitlines();require(len(fields)==6 and fields[:4]==['NKDONE1',binding['run'],binding['cutoff'],binding['activation']]and fields[5]in {'0','10'}and(current_gc or fields[5]==state['ExecMainStatus']))
     ended=datetime.datetime.fromisoformat(fields[4].replace('Z','+00:00'));cutoff=datetime.datetime.fromisoformat(binding['cutoff'].replace('Z','+00:00'));require(ended.tzinfo is not None and cutoff<=ended)
     require(rows and all(type(r)is dict for r in rows))
     cursors=[r.get('__CURSOR')for r in rows];require(all(type(c)is str and c for c in cursors)and len(set(cursors))==len(cursors))
@@ -32,11 +34,13 @@ def classify(binding,state,rows,done):
         mono=r.get('__MONOTONIC_TIMESTAMP');require(type(mono)is str and mono.isdecimal()and binding['start']<=int(mono)<=binding['start']+1800000000)
     jobs=[r for r in rows if r.get('MESSAGE_ID')=='39f53479d3a045ac8e11786248231fbf'and r.get('JOB_ID')==binding['job']and r.get('JOB_TYPE')=='start'and r.get('JOB_RESULT')=='done']
     require(len(jobs)==1)
+    successes=[r for r in rows if r.get('MESSAGE_ID')=='7ad2d189f7e94e70a38c781354912448'];require(len(successes)==1)
     forbidden={'be02cf6855d2428ba40df7e9d022f03d','98e322203f7a4ed290d09fe03c09fe15'}
     require(not any(r.get('MESSAGE_ID')in forbidden for r in rows))
     job=jobs[0];stamp=job.get('__REALTIME_TIMESTAMP');require(type(stamp)is str and stamp.isdecimal())
+    end=job['__MONOTONIC_TIMESTAMP']if current_gc else state.get('ExecMainExitTimestampMonotonic');require(type(end)is str and end.isdecimal()and binding['start']<=int(end)<=binding['start']+1800000000)
     real=datetime.datetime.fromtimestamp(int(stamp)/1000000,datetime.timezone.utc);require(ended<=real and (real-ended).total_seconds()<=60 and int(end)<=int(job['__MONOTONIC_TIMESTAMP'])<=int(end)+60000000)
-    return {'genuineParentDone':True,'genuineRootDone':True,'genuinePid1StartDone':True,'newActivationSameRunCutoff':True,'completionCode':int(fields[5]),'completionOutcome':'WARNING'if fields[5]=='10'else'SUCCESS','normalUnit0or10':True,'endMonotonicUs':int(job['__MONOTONIC_TIMESTAMP']),'elapsedSeconds':(int(end)-binding['start'])/1000000,'wholeAccepted':False}
+    return {'genuineParentDone':True,'genuineRootDone':True,'genuinePid1StartDone':True,'newActivationSameRunCutoff':True,'completionCode':int(fields[5]),'completionOutcome':'WARNING'if fields[5]=='10'else'SUCCESS','normalUnit0or10':True,'currentManagerGc':current_gc,'managerExitCodeObserved':None if current_gc else int(state['ExecMainStatus']),'endMonotonicUs':int(job['__MONOTONIC_TIMESTAMP']),'elapsedSeconds':(int(end)-binding['start'])/1000000,'wholeAccepted':False}
 
 
 GUEST=r'''

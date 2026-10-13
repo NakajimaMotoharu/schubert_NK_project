@@ -38,5 +38,12 @@ class Receipt(unittest.TestCase):
         with self.assertRaises(ValueError):classify(dict(binding,activation='9adbf05a-61d0-408b-b51d-ab19c7e5b16a'),state,rows,done)
         with self.assertRaises(ValueError):classify(binding,dict(state,ExecMainExitTimestampMonotonic='1900000001'),rows,done)
 
+    def test_complete_gc_not_exit_zero_and_partial_generation_rejected(self):
+        binding,state,rows,done=self.fixture(10)
+        gc={**state,'InvocationID':'','ExecMainCode':'0','ExecMainStatus':'0','ExecMainStartTimestampMonotonic':'0','ExecMainExitTimestampMonotonic':'0'}
+        result=classify(binding,gc,rows,done);self.assertTrue(result['currentManagerGc']);self.assertEqual(10,result['completionCode']);self.assertIsNone(result['managerExitCodeObserved'])
+        for key,value in [('InvocationID','fixedinvocation'),('ExecMainCode','1'),('ExecMainStatus','10'),('ExecMainExitTimestampMonotonic','700000000')]:
+            with self.assertRaises(ValueError):classify(binding,dict(gc,**{key:value}),rows,done)
+
 
 if __name__=='__main__':unittest.main()

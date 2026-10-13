@@ -1,5 +1,7 @@
 # NK-OPS-001 完了runから新activationの外部resume
 
+2026-10-13 10:44JST実終端：2010watchactual0/UTC01:15:22.202350→01:41:56.385956。newactivatione31b627cのDONE原本は01:41:18.555699Z/code10、PID1当Job187092startdoneは107890801314us/01:41:56.599492Z、同成功deactivated eventあり、start106318294326から1572.506988secで30分内。API01:34:20/Web01:34:34同Rootordinaryready、Caddy01:34:53TLSlogin200。現在通常Unitは完全GC（Invocation空/Code-Status-start-end0/Resultsuccess）で実exit0を観測したという意味ではない。SuccessExitStatus10を保持、GCと新DONE10/PID1normaldoneを分離するBUG1200/YKT968を修正前起票し、2021完全GC正vector/部分GCnegativeを追加、2021-2023-2025計8PASS/static0。新2021/2023/2025実独立資格はこれから、oldRoot13failed10/旧143UNKNOWNは不変更、owned停止/native/正式451は未完。
+
 PT-OPS-PG2023-ROWS001～003：SS341/331/V019の独立full24post。前24全oldrowが保持され、同runの各step新attempt=max旧+1、9SKIPPED/1PROTECTED_RECORDS WARNING・各target/success/failure/byte0、既complete同runinspectionprogress/protected4不変。Web匿名HTTPログ/Outbox SENT/新匿名sessionは独立DDL構造/暗号長・固定field/null/時刻/1対1を照合し、個数をProductionでexpected生成しない。fixture独立literal10step/2request＋old削除/変更/progressreset/重複業務実行/wrongattempt/unsent反例3PASS、actualwholeglobals0。実新24post未実行。
 
 PT-OPS-PG2025-FULL001：同source187署名/Mainbyte/32config宣言・三度wholecapture一致、当Rootのnormal0or10新DONEと2023独立DB、4liveownedのPID/Invocation/ticks/argvSHA/cgroup/uid-gid-groups/caps/info、旧credentials/proofs/原本/Backup/runtimeを統合封緘する。旧slice原本は読取専用資格素材で新起動/親成功へ流用しない。生成全static0/独立composition1PASS、実whole封緘は未実行。2021-2023-2025合計7PASS、Main変更なし・重複全Maven0、正式451別未完。
