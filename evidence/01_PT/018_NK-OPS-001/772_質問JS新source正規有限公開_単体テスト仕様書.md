@@ -19,3 +19,9 @@ Program NK-OPS-001／SS343（SSC283）、353、354／既承認正常完了WARNIN
 実行command：固定PYTHONPATH（tools/quality、tools/quality/vm/050_s1、pyflakes3.4.0/runtime）で `python3 -B -m unittest pg2440_question_normal_publication_sources_test pg2444_question_normal_publication_test`。続いてcleancommit/push後 `pg2441_question_normal_publication_compile.py`、`pg2442_question_normal_publication_dispatch.py stage`、同`activate`、`pg2444_question_normal_publication_post.py`。JDK25.0.4／既隔離VM／source固定を維持。
 
 初期独立4fixture成功・静的0。実ABI/公開/postは未実行。対象commit・実時間・exit・各manifest hashは実行後追記。失敗時は操作再発行せず新BUG/YKTを先行し現在owner/部分状態を認証する。証跡は私有PG379の2441/2442/2444、安全なmanifestのみ公開。正式1964/53・全leaf受入増分0、旧source native合算0、global100/CHR/451未完。
+
+## 2026-10-14 実行結果（上記初期未実行記録を更新）
+
+operator08d094156f6de7925d29ded537b7df54724bb20d、全ABI七phase actual0（compile/argument/labelmount/original/identity/input/transition）、2442stage actual0/21:11:31.701292Z～21:11:33.863933Z、activate actual0/21:11:43.715688Z～21:12:33.413235Z（49.697547秒）。log SHA536b178ec63a930b59b3166dce0d026cefac73cdb78578ab0b5f6a2873ac65a0。新current cdbc/PG2428/BOM6e06、Unit交換/reload=false、Root/Backup/ADMIN/SQLwrite0。
+
+2444別post actual0、payload1695691ae8d1fe5abdbc4bb6230848ff7cc71f7790958ec4185c7c86cf74eedd、post162f10ab8a5bba7034ed6a1b015dd2ef87e30386cf62f9efcf2b323563d275c2。七phase全観測・全24/32不変・全187署名byte・全十kernel空・client/advisory/FLOCK0・原本Backup/native16・Unitbyte/inode/設定不変。新source親の起動は未実施、旧native受入への合算なし。全leaf/正式工程受入増分0。actual source-safe manifestは `evidence/current-question-publication/manifest.json`。
