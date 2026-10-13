@@ -183,6 +183,17 @@ public final class CaddyPublicConfiguration {
     var after =
         current.atDirectory(
             p -> directory(p, security, ordinary ? fixed.uid() : 0, ordinary ? fixed.gid() : 0));
+    requireStableDirectory(before, after);
+    root.recheck(morning);
+    return bytes;
+  }
+
+  /** Internal value guard only; native held-directory capture and Root rechecks stay in walk. */
+  static void requireStableDirectory(
+      EnvironmentInodePolicy.Metadata before, EnvironmentInodePolicy.Metadata after)
+      throws IOException {
+    Objects.requireNonNull(before);
+    Objects.requireNonNull(after);
     require(
         before.mode() == after.mode()
             && before.uid() == after.uid()
@@ -190,19 +201,23 @@ public final class CaddyPublicConfiguration {
             && before.links() == after.links()
             && before.device() == after.device()
             && before.inode() == after.inode());
-    root.recheck(morning);
-    return bytes;
   }
 
   private static EnvironmentInodePolicy.Metadata directory(
       Path held, InodeSecurityCalls security, long uid, long gid) throws IOException {
     var m = metadata(held, security);
+    requireDirectoryMetadata(m, uid, gid);
+    return m;
+  }
+
+  static void requireDirectoryMetadata(EnvironmentInodePolicy.Metadata m, long uid, long gid)
+      throws IOException {
+    Objects.requireNonNull(m);
     require(
         m.uid() == uid
             && m.gid() == gid
             && m.links() >= 2
             && Set.of(040700, 040750, 040755).contains(m.mode()));
-    return m;
   }
 
   private static EnvironmentInodePolicy.Metadata file(
@@ -231,9 +246,18 @@ public final class CaddyPublicConfiguration {
         EnvironmentInodePolicy.metadata(
             Files.readAttributes(
                 held, "unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime"));
-    require(m.device() >= 0 && m.inode() > 0);
+    requireInodeIdentity(m);
     byte[] acl = security.accessAcl(held, 44);
-    require(acl != null && acl.length == 0);
+    requireNoAccessAcl(acl);
     return m;
+  }
+
+  static void requireInodeIdentity(EnvironmentInodePolicy.Metadata m) throws IOException {
+    Objects.requireNonNull(m);
+    require(m.device() >= 0 && m.inode() > 0);
+  }
+
+  static void requireNoAccessAcl(@org.jspecify.annotations.Nullable byte[] acl) throws IOException {
+    require(acl != null && acl.length == 0);
   }
 }
