@@ -1,5 +1,6 @@
 """New read-only current Backup slot, exact retained handle plus later skip oracle."""
 import ast
+import types
 from pyflakes.api import check
 import pg2064_current_retained_backup_content as previous
 import pg2060_fresh_runtime_retirement_independent_post as transport
@@ -17,9 +18,11 @@ def payload(seals):
     compile(raw,'<retained Backup skip post>','exec');return raw
 
 
-def main():
-    transport.payload=payload;transport.SLOT=SLOT
-    return transport.main()
+def entry():
+    return types.FunctionType(transport.main.__code__,{**transport.__dict__,'payload':payload,'SLOT':SLOT},'current_retained_backup_entry')
+
+
+def main():return entry()()
 
 
 if __name__=='__main__':raise SystemExit(main())
