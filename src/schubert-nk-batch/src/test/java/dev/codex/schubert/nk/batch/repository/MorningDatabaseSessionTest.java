@@ -156,7 +156,7 @@ final class MorningDatabaseSessionTest {
   }
 
   private static Map<String, Long> mdb2490SqlRows(
-      BatchRun run, Instant started, Instant observed, long id) throws SQLException {
+      BatchRun run, Instant started, Instant observed, long id) throws IOException {
     var current = new HashMap<String, Long>();
     try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var s =
@@ -192,6 +192,8 @@ final class MorningDatabaseSessionTest {
           }
         assertFalse(r.next());
       }
+    } catch (SQLException failure) {
+      throw new IOException("independent isolated SQL postcondition unavailable", failure);
     }
     return current;
   }

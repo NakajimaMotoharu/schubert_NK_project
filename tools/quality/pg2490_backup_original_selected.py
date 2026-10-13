@@ -2,12 +2,24 @@
 import hashlib
 import inspect
 import json
+import re
 from pathlib import Path
 import pg2292_morning_guard_selected as prior
 from pg2478_broker_journal_selected import SOURCE, native_input as current_native
 from pyflakes.api import check
 
 FILES = [prior.FILES[0], 'tools/quality/vm/050_s1/Pg2490BackupOriginalLauncher.java', *prior.FILES[2:]]
+
+
+def jdbc_authority(jdbc, full):
+    if type(jdbc.get('actualExit')) is not int or jdbc['actualExit'] != 0 or jdbc.get('source') != SOURCE or type(jdbc.get('tests')) is not int or jdbc['tests'] != 4 or type(jdbc.get('FESAbortedNotRun')) is not int or jdbc['FESAbortedNotRun'] != 0:
+        raise ValueError('actual same Main JDBC qualification required')
+    coverage = jdbc.get('coverage')
+    if type(coverage) is not dict or set(coverage) != {'protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'} or any(type(v.get('classByteMismatch')) is not int or v['classByteMismatch'] != 0 for v in coverage.values()):
+        raise ValueError('all six actual CRC measurements required')
+    if jdbc.get('inputAuthority', {}).get('jarHashes') != full['result']['jarHashes'] or not isinstance(jdbc.get('execSha256'), str) or not re.fullmatch('[0-9a-f]{64}', jdbc['execSha256']):
+        raise ValueError('identical immutable Main and execution digest required')
+    return jdbc['execSha256']
 
 
 def native_input():
@@ -18,6 +30,9 @@ def native_input():
     if broker['actualExit'] != 0 or broker['source'] != SOURCE or broker['tests'] != 4 or broker['classByteMismatch'] != 0 or actual_hash != broker['inputFiles']['BrokerJournalEvidenceTest.java']:
         raise ValueError('unchanged independently qualified Broker test source required')
     value['brokerSelectedExecSha256'] = broker['execSha256']
+    jdbc = json.loads(Path('evidence/01_PT/018_NK-OPS-001/evidence/current-jdbc-backup-boundaries/manifest-2486-v2.json').read_bytes())
+    full = json.loads((prior.prior.W / 'pg2405-question-jdbc-full-qualified-v1/manifest.safe.json').read_bytes())
+    value['jdbcPriorExecSha256'] = jdbc_authority(jdbc, full)
     return value
 
 
@@ -29,7 +44,11 @@ def server():
     if raw.count(marker) != 1:
         raise ValueError('one frozen fixture boundary required')
     raw = raw.replace(marker, extra + marker).replace('*hosts,*native_streams,str(execfile)', '*hosts,*native_streams,str(broker_selected),str(execfile)')
+    raw = raw.replace(marker, "jdbc_prior=b/'runs/PG2486-selected-v2/selected.exec';require(sha(jdbc_prior)==INPUT['native']['jdbcPriorExecSha256'])\n" + marker)
+    raw = raw.replace('str(broker_selected),str(execfile)', 'str(broker_selected),str(jdbc_prior),str(execfile)')
     raw = raw.replace("require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))", "require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))\nrequire(sha(broker_selected)==INPUT['native']['brokerSelectedExecSha256'])")
+    raw = raw.replace("require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))", "require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))\nrequire(sha(jdbc_prior)==INPUT['native']['jdbcPriorExecSha256'])")
+    raw = raw.replace('PG2490-selected-v1', 'PG2490-selected-v2')
     if check('INPUT={}\n' + raw, '<PG2490 independent current pair>'):
         raise ValueError('actual whole selected namespace required')
     compile(raw, '<PG2490 pair selected>', 'exec')
@@ -39,7 +58,8 @@ def server():
 def main():
     raw = inspect.getsource(prior.prior.main).replace('PG2220', 'PG2490').replace('pg2220', 'pg2490').replace('pg2125-metadata-boundary-full-qualified-v1', 'pg2405-question-jdbc-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
-    namespace = {**prior.prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2490-backup-pair-selected-v1', 'SERVER': server(), 'native_input': native_input}
+    raw = raw.replace('PG2490-selected-v1', 'PG2490-selected-v2')
+    namespace = {**prior.prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2490-backup-pair-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<PG2490 isolated selected transport>', 'exec'), namespace)
     return namespace['main']()
 
