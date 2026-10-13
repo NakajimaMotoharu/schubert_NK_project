@@ -6,7 +6,7 @@ from pg2478_broker_journal_selected import FILES, SOURCE, native_input, server
 class Selected(unittest.TestCase):
     def test_current_main_latest_nine_and_independent_isolated_methods(self):
         raw = server()
-        for marker in ['source-full-PG2404', 'PG2478-selected-v3', 'PG2474-native-v1',
+        for marker in ['source-full-PG2404', 'PG2478-selected-v4', 'PG2474-native-v1',
                        'len(native_streams)==9', "'tests':'4'", 'classByteMismatch',
                        'MainRecompiled', 'fixturesUnchanged', 'extra_library_hashes', 'fixture_xml_sha', 'com/google/code/gson/gson/']:
             self.assertIn(marker, raw)

@@ -36,6 +36,7 @@ final class BrokerJournalEvidenceTest {
             start.replace("2.56.0", "2.55.0"),
             start.replace("AMQ221001", "AMQ224001"),
             start.replace("schubert-nk-broker", "FATAL"),
+            start.stripTrailing(),
             start + start)) {
       assertThrows(
           IOException.class,
@@ -71,6 +72,12 @@ final class BrokerJournalEvidenceTest {
       assertFalse(String.valueOf(failure.getMessage()).contains("literal"));
     }
     for (String text : List.of("[]\n", "{\"MESSAGE\":null}\n", "{} {}\n"))
+      assertThrows(IOException.class, () -> read(text));
+    for (String text :
+        List.of(
+            GOLDEN.replace("cursor-1", ""),
+            GOLDEN.replace(
+                "\"__MONOTONIC_TIMESTAMP\":\"1234567\"", "\"__MONOTONIC_TIMESTAMP\":\"0\"")))
       assertThrows(IOException.class, () -> read(text));
     assertThrows(NullPointerException.class, () -> BrokerJournalEvidence.contentSha256(null));
   }
