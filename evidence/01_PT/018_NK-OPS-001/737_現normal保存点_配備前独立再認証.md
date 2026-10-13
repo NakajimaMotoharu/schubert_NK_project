@@ -1,5 +1,9 @@
 # 現normal保存点の配備前独立再認証（PG2130、未実行）
 
+## PG2130actual0
+
+operatorb2a49d73f5466d674fd2f0295451e6c2df3dcf25/UTC05:13:27.513224→05:13:36.504613、payloadSHA4b2a9e1c17ed2c4b831ab75de1fcab9eec94c0cb34a74f8e30967ff5fd179090。配備0fd/PG1846/boot3d69で全24二読/187署名/十kernel-actor-client-advisory-FLOCK0/native38保全・fresh scopes正常0、genuineParentDone/RootDone/PID1StartDone true/DONE10/managerGC（exit実観測null保持）。新privatebeforeSHA75669b01c69e4ecc2459e73dbd3e0a6abcac7cdfaf6ce4095561314d533b1eb4/native-beforeSHA3a7f0290b48c1e75cc741383ae5e27d867f7f76a495c7e474f7282e1b2c6e163。開始/停止/reload/SQL更新0、新candidate未配備・旧完成Root/Backup等の再演0。guest同slotとW/pg2130-current-normal-before-v1/manifest.safe.json保存。後続新署名candidateとの二source/byte/current持続一致を再確認してから配備へ進める。
+
 PT-OPS-PG2130-BEFORE001、OPS009/UI251/SS341343354、WBS-N13配備前保存点subset。対象は現在配備0fd/PG1846/BOMee75/boot3d69/当新run a31dd6daを保持する**読取**。新candidate3b7fの受入とは別。既2092停止/2096post/2110内容を再発行せず、別fresh十Ref/全24二読/187署名/32設定/native38/全kernel-actor-client-advisory-FLOCK0・真正normal親receiptを再認証し、before/native-beforeの新private0600単リンク/hashを保全する。
 
 独立入力は資格済現2090 receipt/六proofの固定SHAで結び、run UUIDを別inline期待値に重複複製しない。実wholepayloadの全exports/新SLOT/十資源0/元SLOT不変の独立testを実施。初回draft fixtureのinlineUUID前提は失敗・合格非加算、正規hashed receipt供給を検証する新fixtureへ是正。primitive capture/ResourceScope/Unref/連続ownerの元順序を変えず、after/native二読同一と元全asset保持を要求する。VM boot/start/stop/reload/DB mutation/restore/prune0。
