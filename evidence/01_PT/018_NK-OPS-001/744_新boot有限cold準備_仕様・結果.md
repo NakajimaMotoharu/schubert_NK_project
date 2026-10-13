@@ -1,0 +1,13 @@
+# PG2208～2218 現source・新boot有限準備
+
+NK-OPS-001/SS343SSC264/QA047052/451。Main3b7f/PG2126/BOM62213f、newbootb2d6。前提2206全cold/current/24DB/durable/187署名0、原本02bddddf/activation20b86040/cutoff06:29:34.698736Z/DONE10-06:56:23.969590Z。既WARNINGをSUCCESSへ変更しない。
+
+PT-OPS-2208-001: currentSource/release/BOM/boot/run/activation/end/署名の独立固定期待、12role独立UID:GID matrix、五namespace有限作成、同M→A→専用readonlybatch/advisory/heartbeat/十Ref/原本Session/hostRO/fullsignedverifier→new-onlymkdirat/保持inodeowner-mode/dirsync→全原値/正常DBclose・Refs/FD/A/M返却。tools2PT/wholeRefstatic0、Production/Main不変更。
+
+PT-OPS-2209-001: 実current bundle ABI javac-Xlint:all-Werror0/独立2PT0、frozenoperator2f001bdf670fa8e56267efc6154f7d9d6804d0ad。歴史helper107class inputは実bytehash資格で再利用するが、旧native/旧business結果は再利用しない。
+
+PT-OPS-2214-001: 旧2210hostAssertionError/旧769source残存はBUG1218で保全、VM操作前拒否。newwholestageSource-BOM-boot-tool-frozen-consumerを独立3PT/static0、actualimmutable stage0/file114/archiveSHA050e71719f6413e5f3bbdee47c3a5516610600a7744f8019e04970bf8cdc969c。
+
+PT-OPS-2212-001: 正規finiteprepare一回actual0/payload dbe0e06fd2476d89921f746468f485d74e92632bb706bffa630c9b5ebaffd6d8/logc321c05c8267945e657b145eeb2dd66790750c65e543bd21ccfa8614257c3470。元safe大文字run名PG1452はBUG1219、原safe保持/emitlabelだけ新2212へ是正・独立test、操作再送0。旧run名だけを実source/run/原本の認証として使用しない。
+
+PT-OPS-2218-001: 全scopecomplete.privateのliteral、全元原本DONEbyte25282/DB24/署名187/32設定、12roleempty0700/coverageRoot0755-nlink14、freeFLOCK/DB/advisory0・parentgone・hostROを別metadata十Ref内で二読し、後条件をproduction methodで生成しない。独立1PT/staticwhole0→actual0/payloadf014c6d7eb7ce7bf697a3e457e6e241c8a95637078701d45a32f290a762f155c/prepareafter1d0beef3e7da0e258426b3281f7367b2e3ca89f0e016d43796555fe5c6099f4f/aftere3119118ea8050c622b90a4e40a187b8a097d375ece615f4f26ae54aa9e01971。authority/permit/業務start-stop/DBwrite0、旧ownedstop受入0。W/PG379各manifestとguest新private結果、原raw/credentialはGitへ格納0。BUG1218/19/YKT985工具範囲と正式451は別判定。
