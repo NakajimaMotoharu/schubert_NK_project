@@ -28,6 +28,7 @@ def sources():
     java=values[CLASS+'.java']
     java=prior.one(java,'"finish".equals(name)','"verify".equals(name)')
     java=prior.one(java,'phase="ONLY_EXISTING_RUNTIME_RELOAD";refs.check("finish");','phase="VERIFICATION_ONLY_CURRENT_RUNTIME";refs.check("verify");')
+    java=prior.one(java,'freshResumeRuntimePrepared=true\\nnormalSingleRuntimeReload=true\\n','freshResumeRuntimePrepared=false\\nnormalSingleRuntimeReload=false\\nverificationOnlyNormalScope=true\\n')
     values[CLASS+'.java']=java
     for name,raw in values.items():
         if name.endswith('.py'):

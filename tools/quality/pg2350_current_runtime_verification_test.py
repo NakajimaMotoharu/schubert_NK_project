@@ -17,6 +17,9 @@ class VerificationOnly(unittest.TestCase):
         self.assertIn('same_value(now,first)',refs)
         self.assertIn(BEFORE,refs)
         self.assertIn('VERIFICATION_ONLY_CURRENT_RUNTIME',values[CLASS+'.java'])
+        self.assertIn('freshResumeRuntimePrepared=false\\nnormalSingleRuntimeReload=false\\nverificationOnlyNormalScope=true\\n',values[CLASS+'.java'])
+        self.assertNotIn('freshResumeRuntimePrepared=true',values[CLASS+'.java'])
+        self.assertNotIn('normalSingleRuntimeReload=true',values[CLASS+'.java'])
         forbidden={'mkdir','unlink','rename','replace','write','fchmod','chmod','utime'}
         self.assertFalse(any(isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr in forbidden for n in ast.walk(ast.parse(io))))
 
