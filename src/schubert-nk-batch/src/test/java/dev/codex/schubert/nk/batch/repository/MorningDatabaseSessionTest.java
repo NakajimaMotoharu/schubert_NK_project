@@ -31,6 +31,181 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2486-001: a lost final advisory observation rejects otherwise valid readback. */
+  @Test
+  void mdb2486001FinalAdvisoryObservationCannotReuseInitialAdmission() throws Exception {
+    int n = 0;
+    for (String operation : List.of("OBSERVE", "RETENTION")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24860001-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2035-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2035-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      var retained = new AtomicReference<Connection>();
+      var armed = new AtomicBoolean();
+      var observations = new AtomicInteger();
+      assertThrows(
+          IOException.class,
+          () ->
+              mdb2486Subject("HELD", retained, armed, observations)
+                  .execute(
+                      credential(),
+                      session -> {
+                        var begins = session.beginBackup(run, started, false);
+                        var failed =
+                            new BatchStepResult(
+                                BatchStepResult.Status.FAILED,
+                                1,
+                                0,
+                                1,
+                                0,
+                                BatchStepResult.Reason.COMMAND_FAILURE);
+                        session.failBackup(begins, started.plusSeconds(3), failed, failed);
+                        armed.set(true);
+                        if (operation.equals("OBSERVE"))
+                          session.observeBackup(
+                              begins,
+                              Optional.empty(),
+                              started.plusSeconds(5),
+                              () -> 10_000_000_000L);
+                        else
+                          session.retainedBackupSuccessful(
+                              mdb2482Manifest(begins, started), started.plusSeconds(5));
+                        return Boolean.TRUE;
+                      }));
+      assertEquals(2, observations.get());
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(started.plusSeconds(3)));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  /** PT-MDB2486-002: observed terminal contents must match the actual committed failure. */
+  @Test
+  void mdb2486002TerminalResultTimeAndFailureReasonCannotBeReinterpreted() throws Exception {
+    int n = 0;
+    for (String fault : List.of("SUCCESS", "END", "REASON")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24860002-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2035-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2035-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      var retained = new AtomicReference<Connection>();
+      var armed = new AtomicBoolean();
+      assertThrows(
+          IOException.class,
+          () ->
+              mdb2486Subject(fault, retained, armed, new AtomicInteger())
+                  .execute(
+                      credential(),
+                      session -> {
+                        var begins = session.beginBackup(run, started, false);
+                        var failed =
+                            new BatchStepResult(
+                                BatchStepResult.Status.FAILED,
+                                1,
+                                0,
+                                1,
+                                0,
+                                fault.equals("REASON")
+                                    ? BatchStepResult.Reason.IO_FAILURE
+                                    : BatchStepResult.Reason.COMMAND_FAILURE);
+                        session.failBackup(begins, started.plusSeconds(3), failed, failed);
+                        armed.set(true);
+                        session.observeBackup(
+                            begins,
+                            Optional.empty(),
+                            started.plusSeconds(5),
+                            () -> 10_000_000_000L);
+                        return Boolean.TRUE;
+                      }));
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(started.plusSeconds(3)));
+      try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+          var s =
+              c.prepareStatement(
+                  "select error_code,error_summary from schubert.batch_runs where run_id=? order by"
+                      + " id")) {
+        s.setObject(1, run.id());
+        try (var r = s.executeQuery()) {
+          for (int i = 0; i < 2; i++) {
+            assertTrue(r.next());
+            assertEquals(fault.equals("REASON") ? "IO_FAILURE" : "COMMAND_FAILURE", r.getString(1));
+            assertEquals(
+                fault.equals("REASON") ? "batch file operation failed" : "batch command failed",
+                r.getString(2));
+          }
+          assertFalse(r.next());
+        }
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  private static MorningDatabaseSession mdb2486Subject(
+      String fault,
+      AtomicReference<Connection> retained,
+      AtomicBoolean armed,
+      AtomicInteger observations) {
+    return new MorningDatabaseSession(
+        actualUrl,
+        () -> {},
+        (url, properties) -> {
+          var c = DriverManager.getConnection(url, properties);
+          retained.set(c);
+          return (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (ignored, method, args) -> {
+                    Object result = mdb2292Invoke(method, c, args);
+                    if (!armed.get() || !method.getName().equals("prepareStatement")) return result;
+                    String sql = (String) args[0];
+                    boolean held = fault.equals("HELD") && sql.contains("pg_locks");
+                    boolean terminal =
+                        !fault.equals("HELD")
+                            && sql.contains("order by id for update")
+                            && sql.contains("schubert.batch_runs");
+                    if (!held && !terminal) return result;
+                    var statement = (PreparedStatement) result;
+                    return Proxy.newProxyInstance(
+                        PreparedStatement.class.getClassLoader(),
+                        new Class<?>[] {PreparedStatement.class},
+                        (unused, called, input) -> {
+                          Object value = mdb2292Invoke(called, statement, input);
+                          if (!called.getName().equals("executeQuery")) return value;
+                          int observation = held ? observations.incrementAndGet() : 0;
+                          var rows = (ResultSet) value;
+                          return Proxy.newProxyInstance(
+                              ResultSet.class.getClassLoader(),
+                              new Class<?>[] {ResultSet.class},
+                              (unusedRows, read, columns) -> {
+                                Object real = mdb2292Invoke(read, rows, columns);
+                                if (held && observation == 2 && read.getName().equals("getBoolean"))
+                                  return false;
+                                if (!terminal
+                                    || !(read.getName().equals("getObject")
+                                        || read.getName().equals("getString"))) return real;
+                                String key = (String) columns[0];
+                                if (fault.equals("END") && key.equals("ended_at"))
+                                  return ((java.time.OffsetDateTime) real).plusSeconds(1);
+                                if (fault.equals("SUCCESS")) {
+                                  return switch (key) {
+                                    case "status" -> "SUCCESS";
+                                    case "success_count", "byte_count" -> 1L;
+                                    case "failure_count" -> 0L;
+                                    case "error_code", "error_summary" -> null;
+                                    default -> real;
+                                  };
+                                }
+                                return real;
+                              });
+                        });
+                  });
+        },
+        c -> {});
+  }
+
   /** PT-MDB2482-001: real committed rows survive SQL refusal and expired owner admission. */
   @Test
   void mdb2482001BackupSqlRefusalAndExpiredOwnerPreserveCommittedRows() throws Exception {
