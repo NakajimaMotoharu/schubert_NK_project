@@ -1,5 +1,7 @@
 # NK-OPS-001 新Rootの正常WARNINGとowned停止
 
+2042actual1/source5f5c81a4d/UTC02:17:27.645018→29.826033/payloadSHAe72573726dfb5d53690a6b9979d98590d9c632dc54830d15ce4a326ecd6aa1de、Rootreceipt.classifyのforeignnegative旧9adがpositive再bindで新e31へ変化し資格前拒否。DB/VM変異0・旧枠保持、1202/970先行起票。新2046はbodyだけbind後に元receiptを全byte保持してprefix、現newBinding/DONE10正常vector・旧activation拒否を独立literalで確認1PASS/static0、RootSource/運転/golden期待を変更しない。新2048は現2046catalog/当full1844-1845/source0fd/currentMainCRC・同sessionwindowへ接続、新slotsのみ、実2046/2048未実行。旧26Source保存をcurrentNativeunionへ輸入0。
+
 ## 別全post2040実0・native着手前
 
 2040actual0/operator878314b694c3631b2b703ca7a464a2c4ba97092e/UTC02:09:41.919312→50.451671/payload88329679a93496e60033807b14a4347a0fdba38a3280f0c20ab427557b32d140。全24二読不変/十kernel空/全actorgone/client-advisory-FLOCK0・187署名/Mainbyte、八terminal receipt/四explicitstop・新normalWARNINGcompletion/全newscope正常返却、native physical32/二metadata安定。親完全GCは実exit不明nullで新DONE10/PID1normaldoneを保持、旧failed13/旧UNKNOWN不変更。W/pg2040-fresh-normal-warning-terminal-post-v1/manifest.safe.json、旧groupSource815baはstopoperatorとして保存。
