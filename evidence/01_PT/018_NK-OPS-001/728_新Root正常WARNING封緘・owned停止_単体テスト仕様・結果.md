@@ -1,5 +1,11 @@
 # NK-OPS-001 新Rootの正常WARNINGとowned停止
 
+## 正規停止実結果（別allresourcepostは未実行）
+
+2038newstage0/sourceQualifiedtrue/operator815ba5d304094a56baad7d718dbd1ccf6d8a8e4f/UTC02:01:19.796356→22.465204/logSHAedfea0114d598c18c1336e0f3ebdde531fe9dfda682faee03a1f18f6adb24493。2039取得前親18-config2と2034freshwholeを通過、当8ownedstop一回actual0/sourceQualifiedtrue/02:01:33.436178→02:03:29.398214/logSHA1e688dca4e750f95a03ae18dd2abf71434232ee0cfd9e80372c416f3db680144、正常全newscope帰還/新start0/DB更新0。actualOriginalTuple18/Label16/Argument6＋signature/fullcandidatePIN0。旧2032stage1は保全・成功化0。W/pg2038-{stage,stop}-v1.safe.json、guestpg2030-native-stop-v1/complete/before/after/8receiptは私有。
+
+PT-OPS-PG2040-POST001：旧helper測定byte SHA0dd9…/選択7function2constantを独立namespaceで明示export（state18とconfig32を混同しない）、正常parentDONE/normalUnit0or10固定完成marker・newReceipt/8receipt/187署名/原本Backup-startup-全24DB/全10kernel/actor/advisory/FLOCK0/native二読を別qualify。生成全static0/独立literal1PASS、実post未実行。native・正規一回runtime退役・CHR/四100/正式451は後続、工程完了宣言0。
+
 ## 2031 ABI0・2032 stage拒否・新2038再資格
 
 2031actual全4phasecompile/oracle/label/original0/operatorfe241143a/UTC01:56:41.984548→43.315342、before8a7d/source0fd、VM変異0。2032stageactual1/sourceQualifiedfalse/UTC01:57:29.487237→31.688508/logSHA7beee19b89c24c9aef7701670a68b24fd46c30e393ffe5bd85a7bdc5422d173c、STAGEcurrentreadlinkが旧PG1638のまま、archive読込/guestrootmkdir前。2032stopentryはstage0guardで拒否（hostrequestだけ・VMowner/stop0）、失敗と予約は保持し再送しない。BUG1201/YKT969へ修正前登録、new2038archive/remote/actionに分離、2030qualified15byte・2031ABIを変更せずreuse。STAGEactualboot/PG1846/BOMee75/source0fdとnewarchive、独立literal正常/foreignBOM/foreignSource1PASS・全static0、実新2038stage/stopは未発行。旧Root/Backup/ADMIN/runtime/reload/容量操作の再演0。
