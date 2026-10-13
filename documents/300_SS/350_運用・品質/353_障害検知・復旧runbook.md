@@ -1,5 +1,19 @@
 # 障害検知・復旧runbook
 
+## SSC-284（PG/PT、2026-10-14、reload済み保持11FD・shared/runと宣言viewの具体化）
+
+実最終283をlocal及びorigin/mainで確認。BUG1232～1235/YKT998～1001/QA047既承認内、RD/UI・業務結果・Root1800秒/Unit期限不変更、新QA不要。current Main3b7f/PG2126/BOM62213f・bootb2d6の当管理Java101019/t1808679/101FD、唯一Ref101050/t1808864/11FD、sole管理DB101048/PG998-native-stage/idle-TX/71419602、親M-A/同peer双方向TCPを新fullproofへ束縛する。sudo101017/他actor/業務Unitはsignal対象外。独立2342 proof a8eb610cff840dc9be93eb83f59d369097ec145d743c92e62d1e5344a41147ff、全24row/187/原本Backup/native/状態18/署名decl tripleを保持、partial runtime inode4223/4224・644bytes/SHA888ee856を全9metadataとACL/linked path/readonly flagsで照合。旧2332のUNKNOWN/143を成功に補記しない。
+
+子FD0/1は親の対応pipe、2は固定refs log、3は当private systembus、4=/、5=/run、6=/run/systemd、7=/run/systemd/system、8=固定Morning Unit.d、9=同一zz-pg2316-once-resume.conf、10=当private SAVE。全11閉集合・Root権限/cap/cgroup/全task子0/唯一bus名とargv hashを二読する。4～10のO_RDONLY/O_NOFOLLOW/O_CLOEXEC及びdirectory flags、fd9 regular Root0644/nlink1/既byte・hashを検査、別FD/新file/未知差を拒否する。親31/90と子5は同じlinked /runの元dev/inode/type/Root owner/mode/nlink/size/ACLを持つ。過去proofからfreshへの差はこの三FDのmtime/ctimeだけ、旧時刻≦現在時刻≦当fresh測定上限として別保存し、子5のfresh全9値は親31/90と一致必須。他親99FD/子10FDは全9値・target・authority/bus/socket一致、時刻を0化・無視しない。
+
+新only同一接続/十Refの中で全元像・全pair/DB/socket/OFDを二読→独立fresh proofを耐久保存→各pidfd前後・耐久一回予約・TERM直前にそのfresh像を完全再照合する。Refだけ普通TERM一回/15秒終端・30秒同ticksreap→bus消失/親全task子0/失ってよいFDは当子stdin/out pipeだけ→親だけ普通TERM一回/同有限reap→旧actor/全FD/DB/advisory/M-A/bus0・全元像二読・新scope正常→別全post。SIGKILL/DBterminate/他PID/旧toolhotpatch/VMboot/原本補修/permit-epoch変更0。未知は隔離、同signal/reloadを再送しない。
+
+systemdの状態18と設定32を混同しない。partial file後のGC/LoadUnitでMorningのExecStart/DropInPathsが固定元UUID二引数/固定一fileを反映する場合、その既知deltaと全残30値を独立に検査する。正規daemon-reloadでは他UnitのExecStart宣言tripleは同値を維持し、末尾五実行metadataだけがexact CLOSED(n/a,n/a,0,(null),0/0)へ戻り得る。実状態18/Job/PID/invocation/bootと全他config・fileは不変更、余剰argv/unknown/状態変更を拒否する。このviewだけから正常reload・旧scopeclose・起動資格を推測しない。
+
+旧同inodefragmentを再write/削除/再配置しない。署名済み20工具・reservation/logのbyte、固定helperのcontrol-flow（reload return/empty stdout-stderr/verifyの後でpost guardが拒否）、独立PID1/readbackの宣言/状態を相互照合して既一回reloadの実施を分類する。old closeはUNKNOWNのまま、正規owned回収/別全post後に、新M-A/実専用DB/十Refのverification-only scopeで元原本/全24/宣言32/187/partial inode/currentを正常照合し全scopeを正常返却する。さらに別独立postで全資源0・fixed effective --resumeを閉じてからだけ、別observer/一回durable予約/明示resumeを開始できる。verification-onlyでreloadや業務startを追加しない。旧entryをactual0へ書換えない。
+
+PT工具のmkdir時刻にはLinux filesystemのcoarse clockが使われる場合がある。有限操作の下限は操作前に独立採取したkernel realtime-coarseと高精度realtimeの関係/分解能を検査し、既mtime/ctimeからの非減少・現在上限/全identity/content/唯一namespace deltaを維持する。壁時計を変更せずRoot cutoff・epoch・budget精度を緩めない。既partial原本に未採取の時刻を後付けしない。独立過去/未来/範囲逆転/型/null/unknown差の反例、全11FDとCLOSED宣言の再発防止PT、実正規回収/verification/newresume/各postが未完。設計公開はこれらやcoverage/PGPT完了の認定ではない。
+
 SSC283（2026-10-13）：BUG1162正常WARNING10を旧Unitがfailed扱いした事実は保持する。343の署名新source/停止所有/連続M-A-専用DB-十Ref/唯一通常Morning Unit原子交換・旧inode私有保全/有限一回reloadを適用し、旧状態18failed10と新設定2SuccessExitStatus10を分離して二読する。reset-failed/新start/stop/原本DONE更新による旧失敗正常化は禁止。途切れたstage/交換/reloadは当phaseとcurrent署名・Unitinode/hash・実所有を再認証し、旧slotを再送せずQA047の限定回復・別全postへ接続する。新Unitの実WARNING正常終了・native・正式451は次の合法経路で独立受入し、配備/設計公開だけで工程合格にしない。
 
 SSC282（2026-10-13）：状態18読取に含まれない設定SuccessExitStatusを消費した1816の拒否を保持する。343同項の当currenthost/Java/Ref/管理peer、初回before＋error二file固定hash・全101/4FD/OFD/元像をfresh二読し、SSC281と同一回収接続・同inodequeued/子→親普通TERM各一回/有限reap・全管理資源0/普通daemonと全TCP/全24-32-187・原本Backup/native保持/新Ref正常・別wholepostを閉じる。開始sourcec5e201の不合格UNKNOWNを合格に変更0、旧start/stop/Backup/Root再演0。次新versionは状態18＋別設定2の実emitted完全schema oracleを取得前に確認し、元同正常8逆順停止/全後条件/nativeへ戻る。設計main公開は実回復・実装・工程完了と区別する。
