@@ -8,6 +8,7 @@ from pg2176_newsource_normal_observer import SOURCE,BOM
 
 def compose(expected):
     raw=bindings(prior.compose(expected)).replace('3d69f5af6bac46b1a5407591c4a79a0d',BOOT.replace('-',''))
+    raw=raw.replace('stat,subprocess,time,uuid','stat,subprocess,uuid')
     if check(raw,'<actual current live Root binding>'):raise ValueError('whole actual binding exports required')
     compile(raw,'<actual current fresh-day Root binding>','exec');return raw
 
