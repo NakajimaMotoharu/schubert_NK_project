@@ -31,6 +31,40 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2504-001: default lookup binds only the supplied run, not time or authority claims. */
+  @Test
+  void mdb2504001CurrentRunReferencePreservesExactIdentityAndRejectsForeignUuid() throws Exception {
+    var expected =
+        new BatchRun(
+            UUID.fromString("25040001-2222-4333-8444-555555555555"),
+            Instant.parse("2037-01-09T15:00:00Z"));
+    var lookup = MorningDatabaseSession.currentRunReference(expected);
+    assertSame(
+        expected,
+        lookup.resolve(
+            UUID.fromString("25040001-2222-4333-8444-555555555555"),
+            Instant.parse("2037-01-10T02:00:00Z")));
+    assertSame(
+        expected,
+        lookup.resolve(
+            UUID.fromString("25040001-2222-4333-8444-555555555555"),
+            Instant.parse("2040-01-10T02:00:00Z")));
+    IOException rejected =
+        assertThrows(
+            IOException.class,
+            () ->
+                lookup.resolve(
+                    UUID.fromString("25040002-2222-4333-8444-555555555555"),
+                    Instant.parse("2037-01-10T02:00:00Z")));
+    assertEquals("root batch database unavailable", rejected.getMessage());
+    assertFalse(rejected.getMessage().contains("25040002"));
+    assertThrows(
+        NullPointerException.class, () -> MorningDatabaseSession.currentRunReference(null));
+    assertThrows(
+        NullPointerException.class,
+        () -> lookup.resolve(null, Instant.parse("2037-01-10T02:00:00Z")));
+  }
+
   /** PT-MDB2490-001: reverse original IDs remain ordered by role; claims never replace facts. */
   @Test
   void mdb2490001SkippedBackupRequiresOriginalManifestAndActualReverseOrderedPair()

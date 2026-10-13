@@ -1481,13 +1481,7 @@ public final class MorningDatabaseSession {
         throws IOException {
       Objects.requireNonNull(expected);
       var run = expected.entries().getFirst().attempt().run();
-      return cleanupReferences(
-          expected,
-          owner,
-          (id, observed) -> {
-            if (!id.equals(run.id())) throw unavailable();
-            return run;
-          });
+      return cleanupReferences(expected, owner, currentRunReference(run));
     }
 
     @Override
@@ -1594,5 +1588,14 @@ public final class MorningDatabaseSession {
         throw unavailable();
       }
     }
+  }
+
+  /** Data-only default reference; not an original-session capability or administrative lookup. */
+  static SuccessRunLookup currentRunReference(BatchRun run) {
+    Objects.requireNonNull(run, "current run reference");
+    return (id, observed) -> {
+      if (!id.equals(run.id())) throw unavailable();
+      return run;
+    };
   }
 }

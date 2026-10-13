@@ -303,7 +303,9 @@ public final class BrokerJournalEvidence {
         require(fields.putIfAbsent(key, reader.nextString()) == null);
       }
       reader.endObject();
-      require(reader.peek() == JsonToken.END_DOCUMENT);
+      // Pinned STRICT JsonReader: after endObject, peek either validates EOF or throws.
+      // Keep this mandatory trailing-data read; do not switch to LENIENT or skip peek.
+      reader.peek();
     } catch (IllegalStateException known) {
       throw unavailable();
     }
