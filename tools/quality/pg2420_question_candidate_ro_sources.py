@@ -1,7 +1,8 @@
 """New question candidate-only RO whole graph, retaining retired current normal proof."""
 from pyflakes.api import check
 import pg2164_normal_candidate_ro_fixed_sources as prior
-from pg2412_question_unused_sources import bind as roles, sources as current_graph, BEFORE, CURRENT_BOM
+from pg2412_question_unused_sources import bind as old_roles
+from pg2432_current_boot_question_sources import bind as current_boot_bind, sources as current_graph, BEFORE, CURRENT_BOM
 
 TOOLS = 'pg2420-question-candidate-ro-tools-v1'
 SAVE = 'pg2424-question-candidate-host-ro-v1'
@@ -9,7 +10,7 @@ CLASS = 'Pg2420CandidateRo'
 
 
 def bind(raw):
-    raw=roles(raw)
+    raw=current_boot_bind(old_roles(raw))
     for a,b in [(prior.TOOLS,TOOLS),(prior.SAVE,SAVE),
                 ('pg2164','pg2420'),('Pg2164','Pg2420'),('PG2164','PG2420'),
                 ('pg2167','pg2424'),('PG2167','PG2424')]:
@@ -25,7 +26,7 @@ def sources(bom,before=BEFORE):
     # The old normal-cohort classifier/projection is not an oracle for this
     # current Root. Keep the independent current receipt/properties intact.
     for suffix in ['parent_receipt.py','warning_parent_projection.py']:
-        values['pg2420_'+suffix]=normal['pg2412_'+suffix]
+        values['pg2420_'+suffix]=normal['pg2432_'+suffix]
     if CURRENT_BOM not in '\n'.join(values.values()):
         raise ValueError('old current BOM role must remain separate')
     for name,raw in values.items():

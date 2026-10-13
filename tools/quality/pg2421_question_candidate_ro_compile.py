@@ -9,8 +9,8 @@ TARGET=prior.prior.prior.W/TOOLS
 
 def compiler():
     raw=bind(prior.compiler())
-    for a,b in [('pg2165-','pg2421-'),('pg2150-normal-unused-independent-post-v1','pg2418-question-unused-independent-post-v1'),
-                ('pg2145-frozen','pg2413-frozen')]:
+    for a,b in [('pg2165-','pg2421-'),('pg2150-normal-unused-independent-post-v1','pg2438-current-boot-question-post-v1'),
+                ('pg2145-frozen','pg2433-frozen')]:
         raw=raw.replace(a,b)
     compile(raw,'<new question whole RO ABI>','exec')
     return raw

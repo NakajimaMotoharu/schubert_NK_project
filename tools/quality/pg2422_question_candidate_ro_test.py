@@ -10,7 +10,7 @@ class Readonly(unittest.TestCase):
     def test_full_operational_dependency_and_new_slots(self):
         for raw in [compiler(),source()]:
             compile(raw,'<actual candidateRO source>','exec')
-            for v in ['pg2418-question-unused-independent-post-v1','pg2420']:
+            for v in ['pg2438-current-boot-question-post-v1','pg2420']:
                 self.assertIn(v,raw)
             for v in ['pg2150-normal-unused-independent-post-v1','pg2144-current-normal-unused-tools-v1']:
                 self.assertNotIn(v,raw)
@@ -19,6 +19,8 @@ class Readonly(unittest.TestCase):
         self.assertIn('0.1.0-PG2126',source())
         self.assertIn('pg2422-',source())
         self.assertIn('pg2422-fixed-stage-v1',STAGE)
+        self.assertIn('b2d6f605-61cf-425f-8fbd-12d606f6ee66',STAGE)
+        self.assertNotIn('3d69f5af',STAGE)
 
     def test_exact_mount_readonly_not_current_and_all_post_globals(self):
         raw=payload({'actualExit':0,'candidateSource':production(),'signatureVerified':True,

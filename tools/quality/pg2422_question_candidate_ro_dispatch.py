@@ -11,7 +11,7 @@ STAGE=bind(prior.STAGE).replace('pg2166-fixed-stage-v1','pg2422-fixed-stage-v1')
 
 def source():
     raw=bind(prior.source()).replace('pg2165-frozen','pg2421-frozen').replace(
-        'pg2166-','pg2422-').replace('pg2150-normal-unused-independent-post-v1','pg2418-question-unused-independent-post-v1')
+        'pg2166-','pg2422-').replace('pg2150-normal-unused-independent-post-v1','pg2438-current-boot-question-post-v1')
     compile(raw,'<new current question candidate RO dispatch>','exec')
     return raw
 
