@@ -13,6 +13,7 @@ class PublicationDispatch(unittest.TestCase):
         self.assertNotIn('0.1.0-PG1638',raw)
         self.assertNotIn('REGULAR_MORNING_UNIT_EXCHANGE',raw)
         self.assertEqual(p.CLASS,'Pg2170OrdinaryPublication')
+        self.assertIn("'unitExchangeAndReload':False",raw)
         from pyflakes.api import check
         names=['sys','subprocess','CANDIDATE','json','W','OLD','sources','hashlib','TARGET','os','Path','datetime','management_gate','P','tarfile','TOOLS','SSH','REMOTE','GUEST','OPTIONS','STAGE','CLASS','BEFORE','BOM']
         self.assertEqual(check('\n'.join(n+'=None'for n in names)+'\n'+raw,'<actual normal publication namespace>'),0)

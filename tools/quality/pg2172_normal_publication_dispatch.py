@@ -13,6 +13,9 @@ STAGE=prior.STAGE.replace('pg1880-fixed-stage-v1','pg2172-fixed-stage-v1').repla
 def source():
     raw=inspect.getsource(prior.main)
     for old,new in [('pg1879-frozen','pg2171-frozen'),('pg1876-warning-candidate-ro-post-v1','pg2168-normal-candidate-ro-post-v1'),('pg1846-candidate-build','pg2126-candidate-build'),('pg1860-warning-unused-tools-v1','pg2144-current-normal-unused-tools-v1'),('pg1877','pg2170'),('Pg1877','Pg2170'),('PG1877','PG2170'),('pg1880-','pg2172-'),('0.1.0-PG1638','0.1.0-PG1846')]:raw=raw.replace(old,new)
+    old="'unitExchangeAndReload':changed"
+    if raw.count(old)!=1:raise ValueError('one explicit old unconditional Unit report required')
+    raw=raw.replace(old,"'unitExchangeAndReload':False")
     compile(raw,'<actual normal finite publication entry>','exec');return raw
 
 
