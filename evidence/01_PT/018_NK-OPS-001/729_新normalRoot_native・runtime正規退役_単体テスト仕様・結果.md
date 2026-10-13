@@ -1,5 +1,7 @@
 # NK-OPS-001 新normalRoot nativeとruntime退役
 
+2051全4ABIactual0/operator9bf0344ce/UTC02:35:26.044225→27.203475/beforec6d5/Source0fd。2052stageactual0/sourceQualifiedtrue/02:35:58.293842→02:36:00.920165/immutable17byte配置。旧dispatcher公開tag managerFailureRetainedは旧Root13履歴の意味で、新RootはnormalWARNING/GC・失敗ではない。2052retireは2053親state/config読取後、hostfreshpayloadが全proof約50→fixedSEALS4への入力不一致へ拒否し、VMowner/unlink/reload前0、hostrequestedのみ。旧2052枠保持、1203/971先行起票、currentruntime/元原本DB不変更。新2056はqualified2052stage17byteを再配置せず新retire予約だけ、fixed4projectionのactualfullpayload生成/全static0/独立1PASS・stage再送拒否、legacy公開tagをoldRoot13へ分離する。actual2056retireは未発行。
+
 OPS009/UI251/SS343354/SSC283/QA047/BUG1200～1202/YKT968～970。Source0fd-PG1846/BOMee75/boot3d69、新activatione31b/Rootwindow106318294326→107890801314、ParentDONE10/PID1normaldone・完全GCは実exit不明null、全8stop/別2040allresources0。正式1964PT/53scope/全leaf0、IT/ST未実施。
 
 |Test ID|対象・独立根拠|結果/証跡|
