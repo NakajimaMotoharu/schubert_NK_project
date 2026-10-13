@@ -10,6 +10,10 @@ class CurrentNativeQualification(unittest.TestCase):
         for v in ['source-full-PG2124','PG2198-native-v1','3631']:self.assertNotIn(v,s)
         self.assertEqual(s,p.entry().__globals__['CODE'])
         self.assertEqual(p.SOURCE,p.entry().__globals__['SOURCE'])
+        for v in ['NativePointDominance','len(streams)==9','if i!=early_index','inspectorLatestClosingOnly','validatedNativePoints']:
+            self.assertIn(v,s)
+        self.assertIn('NativePointDominance.java',t)
+        self.assertIn('NativePointDominanceTest.java',t)
 
 
 if __name__=='__main__':unittest.main()

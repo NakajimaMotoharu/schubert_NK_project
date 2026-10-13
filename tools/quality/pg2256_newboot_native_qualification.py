@@ -16,12 +16,33 @@ def qualify_snapshot():
 
 def server():
     raw=prior.server().replace('PG2198','PG2256').replace('PG2124','PG2228').replace('qualified2124Tests','qualified2228Tests').replace('3631','3633')
+    raw=helpers(raw)
+    marker="modules=['protocol','storage','bootstrap','api','web','batch'];executions=[];jars={}"
+    if raw.count(marker)!=1:raise ValueError('one actual latest-point selection boundary required')
+    selection="""closing_index=next(i for i,p in enumerate(v['selected'])if p is inspector[0][0])
+early_index=next(i for i,p in enumerate(v['selected'])if p is inspector[1][0])
+check_point=subprocess.run([str(J/'java'),'-cp',cp,'NativePointDominance',str(streams[early_index]),str(streams[closing_index])],capture_output=True,timeout=30)
+require(check_point.returncode==0 and not check_point.stderr and check_point.stdout==b'sameSessionProbeMonotonic=true;latestClosingOnly=true\\n')
+(O/'inspector-point-dominance.private.log').write_bytes(check_point.stdout)
+streams=[p for i,p in enumerate(streams)if i!=early_index];require(len(streams)==9)
+"""
+    raw=raw.replace(marker,selection+marker)
+    marker="cp=str(classes)+':'+cp;sessions=[];streams=[]"
+    raw=raw.replace(marker,"r=subprocess.run([str(J/'java'),'-cp',str(classes)+':'+cp,'NativePointDominanceTest'],capture_output=True,timeout=30);require(r.returncode==0 and not r.stderr and r.stdout==b'literalMonotonic10Vectors=true\\n')\n"+marker)
+    raw=raw.replace("'currentNativeStreams':10","'currentNativeStreams':9,'validatedNativePoints':10,'inspectorLatestClosingOnly':True,'inspectorProbeMonotonic':True")
     compile(raw,'<currentboot native3633 CRC/session server>','exec');return raw
+
+
+def helpers(raw):
+    old="['NativeCoverage.java','NativeSessions571.java','NativeSessions571Test.java','NativeCoverageXml471.java']"
+    if raw.count(old)!=1:raise ValueError('one immutable helper source list required')
+    return raw.replace(old,old[:-1]+",'NativePointDominance.java','NativePointDominanceTest.java']")
 
 
 def source():
     raw=prior.source()
     for old,new in [('pg2196-newsource-native-catalog-v1','pg2254-newboot-native-catalog-v1'),('pg2198-newsource-native-qualified-v1','pg2256-newboot-native-qualified-v1'),('PG2198','PG2256'),('pg2125-metadata-boundary-full-qualified-v1','pg2236-root-host-integration-full-qualified-v1')]:raw=raw.replace(old,new)
+    raw=helpers(raw).replace("'streams':10","'streams':9,'validatedPoints':10")
     compile(raw,'<currentboot matched transport>','exec');return raw
 
 
