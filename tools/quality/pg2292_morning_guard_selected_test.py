@@ -3,6 +3,7 @@ import unittest
 from pyflakes.api import check
 from pg2292_morning_guard_selected import server,FILES,native_input
 import pg2293_morning_guard_selected_v2 as corrected
+import pg2294_morning_guard_diagnostic_v3 as diagnostic
 
 
 class SelectedMorningGuard(unittest.TestCase):
@@ -23,6 +24,16 @@ class SelectedMorningGuard(unittest.TestCase):
         self.assertNotIn('PG2292-selected-v1',raw)
         self.assertIn('PG2292 tests2 failures0',raw)
         self.assertIn('Pg2292MorningGuardLauncher',raw)
+
+    def test_diagnostic_fresh_slot_and_no_provider_messages(self):
+        from pathlib import Path
+        raw=diagnostic.server();self.assertEqual(0,check('INPUT={}\n'+raw,'<redacted diagnostic selected server>'))
+        self.assertIn('PG2294-selected-v3',raw)
+        launcher=Path(FILES[1]).read_text()
+        for literal in ['PG2292_FAILED','PG2292_CONTAINER_FAILED','PG2292_FRAME','depth < 8','count++ < 8','getClass().getName()']:
+            self.assertIn(literal,launcher)
+        self.assertNotIn('getMessage()',launcher)
+        self.assertNotIn('printStackTrace(',launcher)
 
 
 if __name__=='__main__':unittest.main()

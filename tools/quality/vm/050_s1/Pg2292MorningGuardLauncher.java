@@ -34,12 +34,44 @@ public final class Pg2292MorningGuardLauncher {
         new TestExecutionListener() {
           @Override
           public void executionFinished(TestIdentifier t, TestExecutionResult r) {
-            if (!t.isTest()) return;
+            if (!t.isTest()) {
+              if (r.getStatus() != TestExecutionResult.Status.SUCCESSFUL)
+                System.err.println(
+                    "PG2292_CONTAINER_FAILED status="
+                        + r.getStatus()
+                        + " type="
+                        + r.getThrowable().map(f -> f.getClass().getName()).orElse("missing"));
+              return;
+            }
             var m = (MethodSource) t.getSource().orElseThrow();
             if (!type.equals(m.getClassName()))
               throw new IllegalStateException("foreign test scope");
             rows.add(m.getMethodName());
             statuses.add(r.getStatus());
+            if (r.getStatus() != TestExecutionResult.Status.SUCCESSFUL) {
+              Throwable failure = r.getThrowable().orElse(null);
+              for (int depth = 0; failure != null && depth < 8; depth++) {
+                System.err.println(
+                    "PG2292_FAILED test="
+                        + m.getMethodName()
+                        + " type="
+                        + failure.getClass().getName());
+                int count = 0;
+                for (var frame : failure.getStackTrace()) {
+                  if (frame.getClassName().startsWith("dev.codex.schubert.nk.") && count++ < 8)
+                    System.err.println(
+                        "PG2292_FRAME class="
+                            + frame.getClassName()
+                            + " method="
+                            + frame.getMethodName()
+                            + " line="
+                            + frame.getLineNumber());
+                }
+                Throwable next = failure.getCause();
+                if (next == failure) break;
+                failure = next;
+              }
+            }
           }
         });
     launcher.execute(
