@@ -34,11 +34,25 @@ native_streams=[]
 for n,h in INPUT['native']['files'].items():
  p=native_root/n;require(sha(p)==h);native_streams.append(str(p))
 require(len(native_streams)==9)
+fixture_xml=source/'src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.BrokerJournalEvidenceTest.xml'
+fixture_xml_sha=sha(fixture_xml);existing=ET.parse(fixture_xml).getroot();require(existing.get('failures')=='0'and existing.get('errors')=='0'and existing.get('skipped')=='0')
+properties=[n.get('value')for n in existing.findall('properties/property')if n.get('name')=='java.class.path'];require(len(properties)==1 and properties[0])
+extra_library_hashes={}
+for name in properties[0].split(':'):
+ p=Path(name)
+ if p.suffix=='.jar'and p.is_relative_to(repo):
+  require(p.is_file()and p.resolve().is_relative_to(repo.resolve()))
+  extra_library_hashes[str(p.relative_to(repo))]=sha(p)
+  if str(p)not in libraries:libraries.append(str(p))
+require(any('com/google/code/gson/gson/'in k for k in extra_library_hashes))
 """
     if raw.count(marker) != 1:
         raise ValueError('single immutable fixture boundary required')
     raw = raw.replace(marker, extra + marker).replace('*hosts,str(execfile)', '*hosts,*native_streams,str(execfile)').replace('remainingHostOnly', 'remainingSameSourceWithNative')
     raw = raw.replace("require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))", "require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))\nrequire(all(sha(native_root/n)==h for n,h in INPUT['native']['files'].items()))")
+    raw = raw.replace("require(all(sha(transfer/n)==h for n,h in INPUT['files'].items()))", "require(all(sha(transfer/n)==h for n,h in INPUT['files'].items()))\nrequire(sha(fixture_xml)==fixture_xml_sha and all(sha(repo/n)==h for n,h in extra_library_hashes.items()))")
+    raw = raw.replace("'fixturesUnchanged':True", "'fixturesUnchanged':True,'existingSuccessfulXmlSha256':fixture_xml_sha,'extraLibraryHashes':extra_library_hashes")
+    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v2')
     if check('INPUT={}\n' + raw, '<PG2478 isolated current journal>'):
         raise ValueError('actual namespace required')
     compile(raw, '<PG2478 selected>', 'exec')
@@ -48,7 +62,8 @@ require(len(native_streams)==9)
 def main():
     raw = inspect.getsource(prior.main).replace('PG2220', 'PG2478').replace('pg2220', 'pg2478').replace('pg2125-metadata-boundary-full-qualified-v1', 'pg2405-question-jdbc-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
-    namespace = {**prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2478-broker-journal-selected-v1', 'SERVER': server(), 'native_input': native_input}
+    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v2')
+    namespace = {**prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2478-broker-journal-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<PG2478 immutable transport>', 'exec'), namespace)
     return namespace['main']()
 
