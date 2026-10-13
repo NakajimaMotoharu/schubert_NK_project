@@ -7,3 +7,7 @@ PT-MDB2482-001／mdb2482001：実隔離DBでbegin、必要に応じてFAILED二�
 PT-MDB2482-002／mdb2482002：正規FAILED二行へ、database handle不一致、configuration handle不一致、正しい両handleだが実DBはFAILEDという三manifestを提示。期待=資格を拒否、実DB二行と全count/時刻/error不変更、Connection閉鎖・資源0。manifestは独立固定時刻・byte/countの手書きfixture、Production結果からexpectedを作成しない。
 
 実command=`python3 -B tools/quality/pg2482_backup_refusal_selected.py`（固定PYTHONPATH）。clean source・fresh PG2482-selected-v1・JDK25.0.4/PG18・Werror・二JUnit XML/FES0、PG2404全1643Main/成功fixture/依存byte不変、PG2474最新九nativeとPG2478v4の選択execだけを資格照合。VM/業務start/stop/Backup/ADMIN/reload0。全体回帰/正式451/100%認定は別未完。実結果・source/run/time・残counter・証跡hashは取得後に記録する。
+
+## 実結果
+
+PG2482-selected-v1/session80495 actual0、testSource1768e255a10e897eb613a0acba47659e90b80800、22:36:08.353663Z～22:36:21.556170Z。二PT・八case/FES/aborted/notRun0・warnings0・Main CRC不一致0、実SQL後条件・owner/advisory0。manifest157d40a043af63079d203be45fc09021bd592a592d486209045c6243211dd825、payloada91eb64037fc2106e1637e4cccb99b2e33c45aa09578e75df45b1205bdfc9042。技術残L807/M158/C9/B589、直前から7line/2branch追加。`evidence/current-jdbc-backup-boundaries/manifest-2482.json`参照。Main・VM・原本・Backup・current不変更、正式認定へ加点0。
