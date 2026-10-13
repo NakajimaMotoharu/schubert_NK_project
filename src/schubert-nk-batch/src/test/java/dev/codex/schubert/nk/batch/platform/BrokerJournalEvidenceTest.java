@@ -79,19 +79,20 @@ final class BrokerJournalEvidenceTest {
   void bj2478003ClosedHistoryRequiresIndependentCursorTimeAndCanonicalDigest() throws Exception {
     String last =
         row(
-            "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker,"
-                + " nodeID=public-fixture]",
-            3);
+            "AMQ221002: Apache Artemis Message Broker version 2.56.0 [public-fixture] stopped,"
+                + " uptime 2 hours",
+            4);
+    String history = GOLDEN + last;
     var fields = new TreeMap<String, String>();
     fields.put(
         "MESSAGE",
-        "AMQ221001: Apache Artemis Message Broker version 2.56.0 [schubert-nk-broker,"
-            + " nodeID=public-fixture]");
+        "AMQ221002: Apache Artemis Message Broker version 2.56.0 [public-fixture] stopped,"
+            + " uptime 2 hours");
     fields.put("PRIORITY", "6");
     fields.put("_SYSTEMD_INVOCATION_ID", INV);
     fields.put("_BOOT_ID", "11111111111141118111111111111111");
     fields.put("_SYSTEMD_UNIT", "artemis.service");
-    fields.put("__CURSOR", "cursor-3");
+    fields.put("__CURSOR", "cursor-4");
     fields.put("__MONOTONIC_TIMESTAMP", "1234567");
     fields.put("__REALTIME_TIMESTAMP", "1790780400000000");
     var canonical = new StringBuilder("NKJOURNAL1\n");
@@ -109,35 +110,35 @@ final class BrokerJournalEvidenceTest {
                 MessageDigest.getInstance("SHA-256")
                     .digest(canonical.toString().getBytes(StandardCharsets.US_ASCII)));
     var expectedAnchor =
-        new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "cursor-3", digest);
+        new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "cursor-4", digest);
     var actual =
         BrokerJournalEvidence.consumeClosedHistory(
-            GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, expectedAnchor);
-    assertEquals(3, actual.entries());
+            history.getBytes(StandardCharsets.UTF_8), BOOT, expectedAnchor);
+    assertEquals(4, actual.entries());
     assertEquals(
         HexFormat.of()
             .formatHex(
                 MessageDigest.getInstance("SHA-256")
-                    .digest(GOLDEN.getBytes(StandardCharsets.UTF_8))),
+                    .digest(history.getBytes(StandardCharsets.UTF_8))),
         actual.sha256());
     assertEquals(
         digest, BrokerJournalEvidence.contentSha256(last.getBytes(StandardCharsets.UTF_8)));
     for (var invalid :
         List.of(
             new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "foreign", digest),
-            new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234568), "cursor-3", digest),
+            new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234568), "cursor-4", digest),
             new BrokerJournalEvidence.Anchor(
-                INV, BigInteger.valueOf(1234567), "cursor-3", "0".repeat(64))))
+                INV, BigInteger.valueOf(1234567), "cursor-4", "0".repeat(64))))
       assertThrows(
           IOException.class,
           () ->
               BrokerJournalEvidence.consumeClosedHistory(
-                  GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, invalid));
+                  history.getBytes(StandardCharsets.UTF_8), BOOT, invalid));
     assertThrows(
         NullPointerException.class,
         () ->
             BrokerJournalEvidence.consumeClosedHistory(
-                GOLDEN.getBytes(StandardCharsets.UTF_8), BOOT, null));
+                history.getBytes(StandardCharsets.UTF_8), BOOT, null));
   }
 
   @Test

@@ -52,7 +52,7 @@ require(any('com/google/code/gson/gson/'in k for k in extra_library_hashes))
     raw = raw.replace("require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))", "require(all(sha(fixtures/n)==h for n,h in fixture_hashes.items()))\nrequire(all(sha(native_root/n)==h for n,h in INPUT['native']['files'].items()))")
     raw = raw.replace("require(all(sha(transfer/n)==h for n,h in INPUT['files'].items()))", "require(all(sha(transfer/n)==h for n,h in INPUT['files'].items()))\nrequire(sha(fixture_xml)==fixture_xml_sha and all(sha(repo/n)==h for n,h in extra_library_hashes.items()))")
     raw = raw.replace("'fixturesUnchanged':True", "'fixturesUnchanged':True,'existingSuccessfulXmlSha256':fixture_xml_sha,'extraLibraryHashes':extra_library_hashes")
-    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v2')
+    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v3')
     if check('INPUT={}\n' + raw, '<PG2478 isolated current journal>'):
         raise ValueError('actual namespace required')
     compile(raw, '<PG2478 selected>', 'exec')
@@ -62,8 +62,8 @@ require(any('com/google/code/gson/gson/'in k for k in extra_library_hashes))
 def main():
     raw = inspect.getsource(prior.main).replace('PG2220', 'PG2478').replace('pg2220', 'pg2478').replace('pg2125-metadata-boundary-full-qualified-v1', 'pg2405-question-jdbc-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
-    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v2')
-    namespace = {**prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2478-broker-journal-selected-v2', 'SERVER': server(), 'native_input': native_input}
+    raw = raw.replace('PG2478-selected-v1', 'PG2478-selected-v3')
+    namespace = {**prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES, 'SLOT': 'pg2478-broker-journal-selected-v3', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<PG2478 immutable transport>', 'exec'), namespace)
     return namespace['main']()
 
