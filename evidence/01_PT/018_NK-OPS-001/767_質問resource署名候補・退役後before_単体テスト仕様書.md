@@ -15,3 +15,5 @@ commands（所定PYTHONPATH）= `python3 -B tools/quality/pg2410_retired_current
 次接続の準備：PG2412全current/candidate二役graphは旧current3b7f/622BOM/実e142 Root104841・start20469616839/end22107644017/現before9a33を固定、新候補cdbc/PG2406は別役。親receipt/18property projectionはcurrent2374独立資格を採用、古いa31/0fd/2130起点を除く。固定SuccessExitStatus10／全factory namespace/不正before/BOMの2fixture0。PG2413全host ABI compilerのactualnamespace/current共有freeze/sourcegraph・新onlyslot検査1fixture0。PG2414 stage/place dispatcherは署名candidate＋真正retired currentを全field検査し、missing/wrong source/非正常を拒否、全closure/非reload入口2fixture0。PG2418独立whole old-current＋new signed187/postの1fixture0。実full資格・署名・全ABI・stage/place・postはまだ未実行、template成功だけでguest操作や正式を加点0。
 
 実依存順：既full56217 actual0→2405→2406 host署名→2413 actual全ABI→2414 stage/placeを各一回→2418独立post。配置はunused siblingだけ、current/approval/epoch/Unit/start/reload/Root/Backup/ADMIN変更0、SS343所定正常scope・閉鎖／全原値保持が必要。失敗・応答欠落はUNKNOWN保全、同操作再発行0。公表・Root新経路はunused/postが揃った後の別承認契約で実施。
+
+後段candidateのみRO接続は768参照。新2412/2413/2414/2418と2420/2421/2422/2426は同じ承認済み接続経路の必要内部依存であり、全回帰稼働中はhost-only準備だけ。currentを早期更新せず、各実先行受入/所有/固定byteを認証する。
