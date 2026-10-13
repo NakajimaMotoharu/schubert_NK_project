@@ -1,5 +1,7 @@
 # NK-OPS-001 fresh一回用resume準備
 
+09:17JST限定結果：1981独立3＋1983 actualentry1=4PASS/static0。1982全6ABIactual0/operator2f28b4a34cdc5fa76239a1e4ded753e1f5ad3b54、UTC00:12:51.936527→00:12:53.208466（compile/argument/labelmount/original/identity/input全0、frozen各hash）。1983stageactual0/同operator/sourceQualifiedtrue/UTC00:13:43.133190→00:13:46.148011、新archive/remote/root一意・oldfile上書き0。runtime prepare/Root外部startはまだ未実行。1986独立post oracle1PASS：producerのresume_contract/fixed_dropinを呼ばず、別literalheader/argv二引数・only2configfield・全元値・唯一runtime metadata/byte・十Ref内資格/全scope正常closeを確認する。Test ID PT-OPS-PG1986-ORACLE001、実postはprepare0後別実行必須。
+
 関連OPS009/UI251/SS343§6.13/SSC259・260・283/QA047。C02共通runtime一回用契約主担当、P018/N15.01は固有Root/所有参照、原v3へ追加費を加えない。群着手見積low0.5/base1.5/high4pp、PGPT-20261008-0542、実N/T・分離個別費null。現在source0fd/PG1846の必要full3618/536/1643・静的6zeroは受入済み、tool-onlyの全Maven再実行なし、正式1964/53・四100/native/新UnitWARNINGは別未完。
 
 前提：1963独立全post0、beforeSHAee13ec0b75e1320f4daba711ef90d24b2c05ae588c3b27fedb0224114896fc15。現在boot3d69/current0fd/BOMee75、全原本/Backup/24表/32設定/署名187/26native・全kernel管理資源0。selected run4148e3e8-f107-431a-ab27-d6e6d1f1772e、cutoff2026-10-12T18:20:32.598894Z/oldactivation9adbf…DONE WARNING、active不在。原本run/cutoffを変えず、旧activation全完了のためProduction resumeが新activationを生成する。旧DONEを新親成功証拠にしない。
