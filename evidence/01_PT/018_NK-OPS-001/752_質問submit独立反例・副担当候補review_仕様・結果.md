@@ -1,0 +1,13 @@
+# PG2264/2265 — BUG1222/YKT988、統合前DB-free表示review
+
+対象SCR018/question-input-validation.js/UI222§8・SS313/QA049。現在Main source3b7fと、先行候補44aa51e79fdcf8bb154f26a51a40d1d087babc32を別扱いにする。候補17Production/16test fileは基点a39d95eからの予約差分と照合し、現resource17は基点から不変更。全branch一括merge/副担当再開0、現在Root91f5484b/Main3b7f稼働中のsource変更0。
+
+独立期待値=UI222のinvalid時preventDefault/reportValidity/disabledfalse、valid時preventDefaultfalse/button.disabledtrue。公開固定質問文字と明示FakeDOM/Eventだけ、Production methodをexpected生成に使わない。hidden operation_tokenはbutton name/valueと独立（実templateのsubmitにname無し）、server token/DB冪等性をclient操作中表示の代用にしない。
+
+PG2265 receiptactual0とは二つの終了codeが[1,0]であることの記録成功であり、現在の試験合格ではない。現在scriptはvaliddisabled assertionがfalse≠trueでexit1、候補scriptは同一canaryでexit0。両sourceは実Git blobと完全同一、入力hash前後不変。Node24.19.0、operator722b1c3577c620e45954e21820036b6def5b0c08＋固定canary/WIP工具hash、開始2026-10-13T15:18:24.946580Z→15:18:25.016306Z。command=固定PYTHONPATHで`python3 -B tools/quality/pg2265_question_disabled_review_receipt.py`、canary `pg2264_question_submit_disabled_canary.cjs`、各command/source/log/exit/hash/時刻はW/PG379/pg2265-question-disabled-review-v1へ保存。
+
+BUG1222現在codeの障害は未修正、YKT988 User/取消等の追加対象も未確認で未完。候補の独立correctnessは限定観測であり、主sourceへ成功を移植0。次は現owned/native経路を閉じた後、当JS＋既Nodefixture差分を最小単位でreview/統合し、V8対象line/function/branch100/実DOM/HTTP・token再送/同source451/CHRを必要triggerで確認する。共通title/pagination/表示17fileの全部をこの二caseへ合算しない。未確定Login必須marker/視聴件数解釈は現承認設計の比較まで保留、必要なら正式台帳へ分類する。
+
+DB/VM/start-stop/JMS/原本/Backup/Currentbaseline操作0。Production PT加算0・coverage100認定0・正式1964/53/全leaf0維持。
+
+manifest SHA20c346fd5e09d2bf78b5dd98dfe3c3f2889027f429108c2f657f010e8575a8e0、現在JS SHAf181b9920dc95b580764a5266dcdc2294b678181dd20165b6cfde495d0a9709e、候補742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa、canary50496b1de4556a548fbc4889f0d60ee5d52968209b02cf5da417e6198215bb19。最初のreceipt CLIはpyflakes検索path不足でimport時拒否・実out未作成、完全固定PYTHONPATHの当実行で[1,0]を保存、初期拒否を現在JSの障害と混同しない。
