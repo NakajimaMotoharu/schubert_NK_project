@@ -31,6 +31,173 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2482-001: real committed rows survive SQL refusal and expired owner admission. */
+  @Test
+  void mdb2482001BackupSqlRefusalAndExpiredOwnerPreserveCommittedRows() throws Exception {
+    int n = 0;
+    for (String operation :
+        List.of("OBSERVE_SQL", "RETENTION_SQL", "FAIL_SQL", "ABANDON_SQL", "EXPIRED")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24820001-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2034-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2034-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      var ended = started.plusSeconds(3);
+      var fault = new AtomicReference<String>("");
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var c = DriverManager.getConnection(url, properties);
+                retained.set(c);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (ignored, method, args) -> {
+                          if (method.getName().equals("getAutoCommit")
+                              && fault.compareAndSet("SQL", ""))
+                            throw new SQLException("public fixture admission unavailable", "08006");
+                          return mdb2292Invoke(method, c, args);
+                        });
+              },
+              c -> {});
+      boolean unfinished = operation.equals("FAIL_SQL") || operation.equals("ABANDON_SQL");
+      assertThrows(
+          IOException.class,
+          () ->
+              subject.execute(
+                  credential(),
+                  session -> {
+                    var begins = session.beginBackup(run, started, false);
+                    var failed =
+                        new BatchStepResult(
+                            BatchStepResult.Status.FAILED,
+                            1,
+                            0,
+                            1,
+                            0,
+                            BatchStepResult.Reason.COMMAND_FAILURE);
+                    if (!unfinished) session.failBackup(begins, ended, failed, failed);
+                    fault.set(operation.equals("EXPIRED") ? "" : "SQL");
+                    switch (operation) {
+                      case "OBSERVE_SQL" ->
+                          session.observeBackup(
+                              begins, Optional.empty(), ended, () -> 10_000_000_000L);
+                      case "RETENTION_SQL" ->
+                          session.retainedBackupSuccessful(
+                              mdb2482Manifest(begins, started), ended.plusSeconds(1));
+                      case "FAIL_SQL" -> session.failBackup(begins, ended, failed, failed);
+                      case "ABANDON_SQL" ->
+                          session.requireAbandonedRequest(
+                              new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                                  run.id(), started.minusSeconds(1)));
+                      case "EXPIRED" ->
+                          session.observeBackup(
+                              begins,
+                              Optional.empty(),
+                              ended,
+                              () -> {
+                                throw new IOException("public fixture expired owner");
+                              });
+                      default -> throw new AssertionError("unregistered fixture operation");
+                    }
+                    return Boolean.TRUE;
+                  }));
+      assertEquals("", fault.get());
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(
+          run,
+          unfinished ? "RUNNING" : "FAILED",
+          started,
+          unfinished ? Optional.empty() : Optional.of(ended));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  /** PT-MDB2482-002: a supplied manifest cannot replace the current actual committed pair. */
+  @Test
+  void mdb2482002ActualBackupManifestMismatchRejectsEveryPairComponent() throws Exception {
+    int n = 0;
+    for (String fault : List.of("DATABASE", "CONFIGURATION", "FAILED_PAIR")) {
+      var run =
+          new BatchRun(
+              UUID.fromString("24820002-2222-4333-8444-" + String.format("%012d", ++n)),
+              Instant.parse("2034-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = Instant.parse("2034-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
+      var ended = started.plusSeconds(3);
+      var retained = new AtomicReference<Connection>();
+      assertThrows(
+          IOException.class,
+          () ->
+              mdb2292Subject(new AtomicReference<>(""), retained)
+                  .execute(
+                      credential(),
+                      session -> {
+                        var begins = session.beginBackup(run, started, false);
+                        var failed =
+                            new BatchStepResult(
+                                BatchStepResult.Status.FAILED,
+                                1,
+                                0,
+                                1,
+                                0,
+                                BatchStepResult.Reason.COMMAND_FAILURE);
+                        session.failBackup(begins, ended, failed, failed);
+                        var database = begins.database();
+                        var configuration = begins.configuration();
+                        if (fault.equals("DATABASE"))
+                          database =
+                              new BatchStepAttempt(
+                                  database.id() + 100000,
+                                  run,
+                                  BatchStep.BACKUP_DB,
+                                  1,
+                                  started,
+                                  false);
+                        if (fault.equals("CONFIGURATION"))
+                          configuration =
+                              new BatchStepAttempt(
+                                  configuration.id() + 100000,
+                                  run,
+                                  BatchStep.BACKUP_CONFIG,
+                                  1,
+                                  started,
+                                  false);
+                        session.observeBackup(
+                            begins,
+                            Optional.of(
+                                mdb2482Manifest(
+                                    new MorningDatabaseSession.BackupBegins(
+                                        database, configuration),
+                                    started)),
+                            ended,
+                            () -> 10_000_000_000L);
+                        return Boolean.TRUE;
+                      }));
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  private static BackupManifest mdb2482Manifest(
+      MorningDatabaseSession.BackupBegins begins, Instant started) {
+    return new BackupManifest(
+        begins.database(),
+        begins.configuration(),
+        started,
+        started.plusSeconds(2),
+        new BackupVersions(
+            "public-host", "1.0", "023", "ubuntu-26.04", "25.0.4", "18.6", "2.56.0", "1.2.1"),
+        "0".repeat(64),
+        new BackupFileDigest(26, "1".repeat(64)),
+        new BackupFileDigest(35, "2".repeat(64)),
+        new BackupFileDigest(32, "3".repeat(64)));
+  }
+
   /** PT-MDB2480-001: actual DB rows remain unchanged when JDBC projections are invalid. */
   @Test
   void mdb2480001SuccessfulBackupRejectsUntrustedProjectionAndPreservesSqlRows() throws Exception {
