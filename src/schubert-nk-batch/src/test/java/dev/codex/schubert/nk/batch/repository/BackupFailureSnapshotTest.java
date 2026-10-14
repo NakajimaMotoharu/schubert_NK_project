@@ -172,6 +172,35 @@ final class BackupFailureSnapshotTest {
     Object read(String sql, String column, Object observed);
   }
 
+  /** PT-CFDB-2936-001: an invalid provider's extra row cannot certify a failed pair. */
+  @Test
+  void cfdb2936001ProviderExtraRowRejectsWithoutCertifyingOrMutatingPair() throws Exception {
+    var next = new AtomicInteger();
+    try (var actual = CleanupStepFixture.locked(db, false)) {
+      var connection =
+          cfdb2916Proxy(
+              actual,
+              (sql, column, observed) -> {
+                assertEquals("__next__", column);
+                int call = next.incrementAndGet();
+                assertEquals(call == 1, observed);
+                // Literal malformed provider response: one real row then a phantom second row.
+                return Boolean.TRUE;
+              },
+              "EXTRA_ROW");
+      var failure =
+          assertThrows(
+              IOException.class, () -> snapshot().verifyLatest(connection, () -> 10_000_000_000L));
+      assertEquals("failed backup observation unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+      assertEquals(2, next.get());
+      assertFalse(actual.isClosed());
+      actual.rollback();
+    }
+    cfdb2916CommittedRows();
+  }
+
   private static Object cfdb2916Invoke(Method method, Object target, Object[] args)
       throws Throwable {
     try {
@@ -212,6 +241,12 @@ final class BackupFailureSnapshotTest {
                         new Class<?>[] {ResultSet.class},
                         (unusedRows, read, values) -> {
                           var cell = cfdb2916Invoke(read, rows, values);
+                          if (fault.equals("EXTRA_ROW")) {
+                            if (sql.startsWith("select id,run_id,")
+                                && read.getName().equals("next"))
+                              return projection.read(sql, "__next__", cell);
+                            return cell;
+                          }
                           return read.getName().equals("getObject") && values.length == 2
                               ? projection.read(sql, (String) values[0], cell)
                               : cell;
