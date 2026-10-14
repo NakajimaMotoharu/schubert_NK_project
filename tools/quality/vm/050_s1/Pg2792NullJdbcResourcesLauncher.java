@@ -49,7 +49,10 @@ public final class Pg2792NullJdbcResourcesLauncher {
             + (passed ? "" : "<failure message=\"null JDBC resource contract failed\"/>")
             + "</testcase></testsuite>\n";
     Files.writeString(Path.of(args[0]), xml, StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
-    if (!passed) throw new IllegalStateException("selected DB handoff case failed/not-run");
+    if (!passed) {
+      for (var failure : s.getFailures()) failure.getException().printStackTrace(System.err);
+      throw new IllegalStateException("selected null JDBC resource case failed/not-run");
+    }
     System.out.println("PG2792 tests1 failures0 errors0 skipped0 aborted0 notRun0");
   }
 }
