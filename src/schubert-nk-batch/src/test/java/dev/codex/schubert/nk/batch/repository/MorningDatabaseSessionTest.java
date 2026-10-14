@@ -31,6 +31,165 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2568-001: actual abandoned rows, independent per-component readback refusal. */
+  @Test
+  void mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation()
+      throws Exception {
+    int ordinal = 0;
+    for (String fault :
+        List.of(
+            "VALID",
+            "FIRST_MISSING",
+            "SECOND_MISSING",
+            "EXTRA",
+            "SQL",
+            "STEP",
+            "ATTEMPT",
+            "STATUS",
+            "ERROR",
+            "END_BEFORE",
+            "END_AFTER",
+            "DATE",
+            "NULL_END")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("25680001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2041-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var oldStart = run.cutoff().plusSeconds(11 * 3600);
+      var freshStart = oldStart.plusSeconds(10);
+      var previous =
+          new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(run.id(), oldStart);
+      var plain =
+          new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+      assertTrue(
+          plain.execute(
+              credential(),
+              s -> {
+                s.beginBackup(run, oldStart, false);
+                return true;
+              }));
+      var retained = new AtomicReference<Connection>();
+      var readCount = new AtomicInteger();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var connection = DriverManager.getConnection(url, properties);
+                retained.set(connection);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object value = mdb2292Invoke(method, connection, args);
+                          if (!method.getName().equals("prepareStatement")
+                              || !((String) args[0])
+                                  .contains(
+                                      "select step,attempt,status,error_code,ended_at,business_date"))
+                            return value;
+                          var statement = (PreparedStatement) value;
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (ignored, called, input) -> {
+                                if (called.getName().equals("executeQuery") && fault.equals("SQL"))
+                                  throw new SQLException(
+                                      "public abandoned fixture unavailable", "08006");
+                                Object actual = mdb2292Invoke(called, statement, input);
+                                if (!called.getName().equals("executeQuery")) return actual;
+                                var rows = (ResultSet) actual;
+                                var row = new AtomicInteger();
+                                return Proxy.newProxyInstance(
+                                    ResultSet.class.getClassLoader(),
+                                    new Class<?>[] {ResultSet.class},
+                                    (ignoredRow, read, columns) -> {
+                                      Object real = mdb2292Invoke(read, rows, columns);
+                                      readCount.incrementAndGet();
+                                      if (read.getName().equals("next")) {
+                                        int index = row.incrementAndGet();
+                                        if (fault.equals("FIRST_MISSING") && index == 1
+                                            || fault.equals("SECOND_MISSING") && index == 2)
+                                          return false;
+                                        if (fault.equals("EXTRA") && index == 3) return true;
+                                        return real;
+                                      }
+                                      if (row.get() != 1
+                                          || !(read.getName().equals("getObject")
+                                              || read.getName().equals("getString"))) return real;
+                                      String key = (String) columns[0];
+                                      if (fault.equals("STEP") && key.equals("step"))
+                                        return "BACKUP_DB";
+                                      if (fault.equals("ATTEMPT") && key.equals("attempt"))
+                                        return 2;
+                                      if (fault.equals("STATUS") && key.equals("status"))
+                                        return "SUCCESS";
+                                      if (fault.equals("ERROR") && key.equals("error_code"))
+                                        return "COMMAND_FAILURE";
+                                      if (fault.equals("END_BEFORE") && key.equals("ended_at"))
+                                        return oldStart
+                                            .minusSeconds(1)
+                                            .atOffset(java.time.ZoneOffset.UTC);
+                                      if (fault.equals("END_AFTER") && key.equals("ended_at"))
+                                        return freshStart
+                                            .plusSeconds(1)
+                                            .atOffset(java.time.ZoneOffset.UTC);
+                                      if (fault.equals("DATE") && key.equals("business_date"))
+                                        return run.cutoff()
+                                            .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                                            .toLocalDate()
+                                            .plusDays(1);
+                                      if (fault.equals("NULL_END") && key.equals("ended_at"))
+                                        return null;
+                                      return real;
+                                    });
+                              });
+                        });
+              },
+              c -> {});
+      MorningDatabaseSession.Operation<Boolean> operation =
+          s -> {
+            var begun = s.beginBackup(run, freshStart, true);
+            assertEquals(2, begun.database().attempt());
+            assertEquals(2, begun.configuration().attempt());
+            s.requireAbandonedRequest(previous);
+            return true;
+          };
+      if (fault.equals("VALID")) assertTrue(subject.execute(credential(), operation));
+      else assertThrows(IOException.class, () -> subject.execute(credential(), operation), fault);
+      assertTrue(retained.get().isClosed(), fault);
+      if (!fault.equals("SQL")) assertTrue(readCount.get() > 0, fault);
+      try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+          var statement =
+              connection.prepareStatement(
+                  "select step,attempt,status,error_code,started_at,ended_at from schubert.batch_runs where run_id=? order by step,attempt")) {
+        statement.setObject(1, run.id());
+        try (var rows = statement.executeQuery()) {
+          for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+            for (int attempt = 1; attempt <= 2; attempt++) {
+              assertTrue(rows.next(), fault);
+              assertEquals(step, rows.getString("step"));
+              assertEquals(attempt, rows.getInt("attempt"));
+              assertEquals(attempt == 1 ? "FAILED" : "RUNNING", rows.getString("status"));
+              assertEquals(attempt == 1 ? "ABANDONED" : null, rows.getString("error_code"));
+              assertEquals(
+                  attempt == 1 ? oldStart : freshStart,
+                  rows.getTimestamp("started_at").toInstant());
+              assertEquals(
+                  attempt == 1 ? freshStart : null,
+                  Optional.ofNullable(rows.getTimestamp("ended_at"))
+                      .map(Timestamp::toInstant)
+                      .orElse(null));
+            }
+          }
+          assertFalse(rows.next());
+        }
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB2504-001: default lookup binds only the supplied run, not time or authority claims. */
   @Test
   void mdb2504001CurrentRunReferencePreservesExactIdentityAndRejectsForeignUuid() throws Exception {

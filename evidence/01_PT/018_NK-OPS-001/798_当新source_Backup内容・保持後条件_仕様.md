@@ -1,5 +1,9 @@
 # PG2566 当runのBackup内容・保持後条件
 
+## 実行結果
+
+actual0/operator1efb439f3553713edb42a09ee0ecf33b0e782ce1・01:21:33.219006Z～01:21:42.783501Z。新当runの三archive14,449,709byte・二完全DBhandle・設定8/61,640byte・独立canonical manifest・archive hash・公開recipient指紋・pg_restore --list0を確認。全24/署名187/native/原本保持、全10Unit/kernel/actor/client/advisory/FLOCK0、Backup/restore/prune/Root/ADMIN/停止再演0。payload74bad4ad、manifest/hash・実値は evidence/strict-current-reference/backup-content-manifest.json、秘密実体/DB dump/rawsessionはprivateのみ。restore/prune全受入・正式/leaf受入は未認定。以下の「未実行」は準備履歴。
+
 NK-OPS-001、SS341/343/353/354、WBS-N05群0661のsubset（追加予算0）、P017/K01参照費0。当a79/PG2512/bootb2d6/runb29fb3e5/cutoff2026-10-14T00:36:06.976135Z/activationd021、実2544/2546/2548/2552/2555/2556/2560完了receiptを必須とする。旧世代の原値は保全のみ、期待値へ混入しない。
 
 PT-BACKUP-2566-001：全24・32設定・署名187・原本Backup/native・全資源のread-only後条件に、独立literal run/cutoff/設定fixtureと保持manifest/archive内容oracleを結合。完全DBhandle、tar byte/hash/ファイル名/metadata/config、普通pg_restore --list終了0を照合する。restore/Backup/Root/ADMIN/停止/reload/writeを発行しない。production codeから期待値を生成しない。
