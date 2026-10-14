@@ -31,6 +31,143 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2590-001: actual original-row drift defeats a stale successful eligibility view. */
+  @Test
+  void mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention() throws Exception {
+    int ordinal = 0;
+    for (String operation : List.of("COMPLETE", "RETENTION")) {
+      for (String drift : List.of("RUNNING", "BYTE")) {
+        int n = ++ordinal;
+        var run =
+            new BatchRun(
+                UUID.fromString("25900001-2222-4333-8444-" + String.format("%012d", n)),
+                Instant.parse("2045-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+        var started = run.cutoff().plusSeconds(11 * 3600);
+        var observed = started.plusSeconds(3600);
+        long id = 25900010L + n * 10;
+        mdb2480Seed(run, started, id, true);
+        var original =
+            mdb2482Manifest(
+                new MorningDatabaseSession.BackupBegins(
+                    new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                    new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+                started);
+        var armed = new AtomicBoolean();
+        var cachedReads = new AtomicInteger();
+        var retained = new AtomicReference<Connection>();
+        var subject =
+            new MorningDatabaseSession(
+                actualUrl,
+                () -> {},
+                (url, properties) -> {
+                  var connection = DriverManager.getConnection(url, properties);
+                  retained.set(connection);
+                  return (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (unused, method, args) -> {
+                            Object value = mdb2292Invoke(method, connection, args);
+                            if (!armed.get()
+                                || !method.getName().equals("prepareStatement")
+                                || !((String) args[0])
+                                    .startsWith("select id,status from schubert.batch_runs"))
+                              return value;
+                            var statement = (PreparedStatement) value;
+                            return Proxy.newProxyInstance(
+                                PreparedStatement.class.getClassLoader(),
+                                new Class<?>[] {PreparedStatement.class},
+                                (unusedStatement, called, input) -> {
+                                  Object actual = mdb2292Invoke(called, statement, input);
+                                  if (!called.getName().equals("executeQuery")) return actual;
+                                  var rows = (ResultSet) actual;
+                                  return Proxy.newProxyInstance(
+                                      ResultSet.class.getClassLoader(),
+                                      new Class<?>[] {ResultSet.class},
+                                      (unusedRow, read, columns) -> {
+                                        Object real = mdb2292Invoke(read, rows, columns);
+                                        if (read.getName().equals("getString")
+                                            && columns[0].equals("status")) {
+                                          cachedReads.incrementAndGet();
+                                          return "SUCCESS";
+                                        }
+                                        return real;
+                                      });
+                                });
+                          });
+                },
+                c -> {});
+        assertThrows(
+            IOException.class,
+            () ->
+                subject.execute(
+                    credential(),
+                    session -> {
+                      var current = session.beginResumeBackup(original, observed);
+                      if (operation.equals("RETENTION"))
+                        session.completeReusedBackup(current, original, observed);
+                      try (var connection =
+                              DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+                          var statement =
+                              connection.prepareStatement(
+                                  drift.equals("RUNNING")
+                                      ? "update schubert.batch_runs set status='RUNNING',ended_at=null,target_count=0,success_count=0,failure_count=0,byte_count=0 where run_id=? and attempt=1"
+                                      : "update schubert.batch_runs set byte_count=byte_count+1 where run_id=? and attempt=1")) {
+                        statement.setObject(1, run.id());
+                        assertEquals(2, statement.executeUpdate());
+                      }
+                      armed.set(true);
+                      if (operation.equals("COMPLETE"))
+                        session.completeReusedBackup(current, original, observed);
+                      else session.retainedBackupSuccessful(original, observed);
+                      return Boolean.TRUE;
+                    }),
+            operation + ":" + drift);
+        assertTrue(retained.get().isClosed());
+        if (operation.equals("RETENTION")) assertEquals(2, cachedReads.get());
+        else assertEquals(0, cachedReads.get());
+        try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+            var statement =
+                connection.prepareStatement(
+                    "select step,attempt,status,started_at,ended_at,target_count,success_count,failure_count,byte_count,error_code from schubert.batch_runs where run_id=? order by attempt,step")) {
+          statement.setObject(1, run.id());
+          try (var rows = statement.executeQuery()) {
+            for (int attempt = 1; attempt <= 2; attempt++) {
+              for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+                assertTrue(rows.next());
+                boolean skipped = attempt == 2;
+                boolean running = !skipped && drift.equals("RUNNING");
+                long count = skipped || running ? 0 : step.equals("BACKUP_DB") ? 1 : 2;
+                assertEquals(step, rows.getString("step"));
+                assertEquals(attempt, rows.getInt("attempt"));
+                assertEquals(
+                    skipped ? "SKIPPED" : running ? "RUNNING" : "SUCCESS",
+                    rows.getString("status"));
+                assertEquals(
+                    skipped ? observed : started, rows.getTimestamp("started_at").toInstant());
+                assertEquals(
+                    running ? null : skipped ? observed : started.plusSeconds(3),
+                    Optional.ofNullable(rows.getTimestamp("ended_at"))
+                        .map(Timestamp::toInstant)
+                        .orElse(null));
+                assertEquals(count, rows.getLong("target_count"));
+                assertEquals(count, rows.getLong("success_count"));
+                assertEquals(0, rows.getLong("failure_count"));
+                assertEquals(
+                    skipped || running ? 0 : step.equals("BACKUP_DB") ? 27 : 68,
+                    rows.getLong("byte_count"));
+                assertEquals(skipped ? "ALREADY_SUCCESSFUL" : null, rows.getString("error_code"));
+              }
+            }
+            assertFalse(rows.next());
+          }
+        }
+        mdb2292NoOwnerResources();
+      }
+    }
+    assertEquals(4, ordinal);
+  }
+
   /** PT-MDB2588-001: archive eligibility never trusts foreign/duplicate/null terminal claims. */
   @Test
   void mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses() throws Exception {
