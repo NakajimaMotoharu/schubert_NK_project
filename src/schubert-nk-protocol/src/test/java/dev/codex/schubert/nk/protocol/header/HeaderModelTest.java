@@ -45,10 +45,31 @@ class HeaderModelTest {
     assertThrows(IllegalArgumentException.class, () -> InteractionKind.fromWire("SS"));
     assertThrows(IllegalArgumentException.class, () -> InteractionKind.fromWire("X"));
 
-    for (ResultCode code : ResultCode.values()) {
-      assertEquals(code, ResultCode.fromWire(code.wireValue()));
-      assertEquals(code, ResultCode.valueOf(code.name()));
+    // BUG1244/YKT1010/PT-PRO-001-H01: UI232 section7 independent literal oracle.
+    // Production values/wireValue are actuals only, never the expected allowlist.
+    String[][] approved = {
+      {"SUCCESS", "0000", "true"},
+      {"VALIDATION_ERROR", "0100", "false"},
+      {"AUTHENTICATION_FAILED", "0101", "false"},
+      {"SESSION_INVALID", "0102", "false"},
+      {"FORBIDDEN", "0103", "false"},
+      {"NOT_FOUND", "0104", "false"},
+      {"CONFLICT", "0105", "false"},
+      {"LOCKED", "0106", "false"},
+      {"NOT_CANCELLABLE", "0107", "false"},
+      {"IDEMPOTENT_SUCCESS", "0200", "true"},
+      {"TEMPORARY_FAILURE", "9000", "false"},
+      {"RESOURCE_LIMIT", "9001", "false"}
+    };
+    assertEquals(12, ResultCode.values().length);
+    for (String[] row : approved) {
+      ResultCode actual = ResultCode.valueOf(row[0]);
+      assertEquals(row[1], actual.wireValue(), row[0]);
+      assertEquals(Boolean.parseBoolean(row[2]), actual.usesSuccessProfile(), row[0]);
+      assertEquals(row[0], ResultCode.fromWire(row[1]).name(), row[1]);
     }
+    for (String unknown : new String[] {"0199", "9900", "9999"})
+      assertThrows(IllegalArgumentException.class, () -> ResultCode.fromWire(unknown));
     assertTrue(ResultCode.SUCCESS.usesSuccessProfile());
     assertTrue(ResultCode.IDEMPOTENT_SUCCESS.usesSuccessProfile());
     assertFalse(ResultCode.VALIDATION_ERROR.usesSuccessProfile());
