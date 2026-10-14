@@ -17,6 +17,9 @@ def namespace(bom=None):
 def emit(seals,ctx,live,bom=None):return namespace(bom)['emit'](seals,ctx,live,bom)
 
 
+def payload(seals):return namespace()['payload'](seals)
+
+
 def entry():return namespace()['entry']()
 
 
