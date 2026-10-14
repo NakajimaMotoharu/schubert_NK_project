@@ -1,5 +1,7 @@
 # WireEnum消費側横展開と同source全六統合
 
+実結果（2026-10-14）：PG2640/session56826 actual0/Maven0、04:33:53.360644Z→05:00:03.030207Z/1569.669563秒。PG2641/session54760独立actual0/3664PT-540suite-1643Main/static六0/FES-flaky-rerun-notrun0、全20対象suite当XML/hash成功。PG2642/session56737 actual0/現十point/latest九/all1643Main/resourcebyte/CRC-session0/再採取0。source911b16e0e/Productiona79不変。BUG1244/YKT1010対象完了、実残788line/156method/9class/542branch・全100未達、正式1964/53不変更。以下の「実行中」「未完」は着手時履歴で、当対象終端は本段と公開wire-oracle-full-native-manifestを優先する。
+
 BUG1244/YKT1010、NK-PRO-001/PT-PRO-001-H01・T04。共通code許容集合・name/wire/profileの独立oracleはHeaderModelTestのUI232§7固定12行、18semantic型はProtocolSemanticTypeTestのUI234～236/SS333/351固定表。共通契約を消費側Production methodからexpectedへ逆算しない。共通表の反例は2632三件、2636全36件、通常Protocol2634v2の82件で再試験済み。
 
 消費側の`values()`は入力の網羅列挙としてのみ扱う。wireValue/usesSuccessProfileを使用するconsumer test単独で承認許容集合の保証を主張しない。共通独立表が同一sourceの全六runへ含まれることを必須とし、固有業務期待値は以下で別判定する。全体閉鎖は全対象のfresh XML/source資格が揃ってから。
