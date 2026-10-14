@@ -18,12 +18,21 @@ def server():
     compile(raw,'<Session checked IO primary/compound close>','exec');return raw
 
 
+def transport_body():
+    raw=inspect.getsource(prior.main).replace('pg2772-db-contract-full-qualified-v1','pg2800-jdbc-null-fixed-full-qualified-v1').replace('3673','3680').replace('pg2796-jdbc-candidate-contract-v1','pg2912-jdbc-compound-close-selected-v1')
+    old="(ROOT/FILES[1]).read_text().count('@Test\\n')"
+    if raw.count(old)!=1:raise ValueError('one explicit Test role required')
+    raw=raw.replace(old,"(ROOT/TEST).read_text().count('@Test\\n')")
+    raw=raw.replace('pg2912-jdbc-compound-close-selected-v1','pg2912-jdbc-compound-close-selected-v2')
+    compile(raw,'<Test role explicit independent transport>','exec');return raw
+
+
 def main():
     head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     changed=subprocess.check_output(['git','diff','--name-only',SOURCE,head,'--','src','pom.xml','.mvn','mvnw'],text=True).splitlines()
     if changed!=[TEST]:raise ValueError('exact Test-only Session change required')
-    raw=inspect.getsource(prior.main).replace('pg2772-db-contract-full-qualified-v1','pg2800-jdbc-null-fixed-full-qualified-v1').replace('3673','3680').replace('pg2796-jdbc-candidate-contract-v1','pg2912-jdbc-compound-close-selected-v1')
-    ns={**prior.__dict__,'FILES':FILES,'SLOT':'PG2912-candidate-v1','SERVER':server()}
+    ns={**prior.__dict__,'FILES':FILES,'TEST':TEST,'SLOT':'PG2912-candidate-v2','SERVER':server().replace('PG2912-candidate-v1','PG2912-candidate-v2')}
+    raw=transport_body()
     exec(compile(raw,'<current Test-only Session transport>','exec'),ns);return ns['main']()
 
 
