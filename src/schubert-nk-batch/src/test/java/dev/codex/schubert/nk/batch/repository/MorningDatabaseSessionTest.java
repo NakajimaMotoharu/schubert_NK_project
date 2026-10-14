@@ -185,8 +185,7 @@ final class MorningDatabaseSessionTest {
                               || !((String) args[0])
                                   .startsWith(
                                       "select step,attempt,status,error_code,ended_at,business_date"
-                                          + " from schubert.batch_runs"))
-                            return value;
+                                          + " from schubert.batch_runs")) return value;
                           var statement = (PreparedStatement) value;
                           if (fault.equals("ABANDONED_STATEMENT")) {
                             statement.close();
@@ -1231,10 +1230,10 @@ final class MorningDatabaseSessionTest {
                               connection.prepareStatement(
                                   drift.equals("RUNNING")
                                       ? "update schubert.batch_runs set"
-                                            + " status='RUNNING',ended_at=null,target_count=0,success_count=0,failure_count=0,byte_count=0"
-                                            + " where run_id=? and attempt=1"
+                                          + " status='RUNNING',ended_at=null,target_count=0,success_count=0,failure_count=0,byte_count=0"
+                                          + " where run_id=? and attempt=1"
                                       : "update schubert.batch_runs set byte_count=byte_count+1"
-                                            + " where run_id=? and attempt=1")) {
+                                          + " where run_id=? and attempt=1")) {
                         statement.setObject(1, run.id());
                         assertEquals(2, statement.executeUpdate());
                       } catch (SQLException failure) {
