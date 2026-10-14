@@ -31,6 +31,115 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2570-001: finished-pair proof still needs fresh JDBC and owner admission. */
+  @Test
+  void mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair()
+      throws Exception {
+    int ordinal = 0;
+    for (String operation : List.of("SNAPSHOT", "OBSERVE", "RECHECK")) {
+      for (String fault : List.of("AUTOCOMMIT", "READONLY", "ISOLATION", "SQL", "OWNER")) {
+        if (!operation.equals("SNAPSHOT") && fault.equals("ISOLATION")) continue;
+        if (operation.equals("RECHECK") && fault.equals("OWNER")) continue;
+        int n = ++ordinal;
+        var run =
+            new BatchRun(
+                UUID.fromString("25700001-2222-4333-8444-" + String.format("%012d", n)),
+                Instant.parse("2042-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+        var started = run.cutoff().plusSeconds(11 * 3600);
+        var ended = started.plusSeconds(3);
+        var armed = new AtomicBoolean();
+        var injected = new AtomicBoolean();
+        var retained = new AtomicReference<Connection>();
+        var subject =
+            new MorningDatabaseSession(
+                actualUrl,
+                () -> {},
+                (url, properties) -> {
+                  var connection = DriverManager.getConnection(url, properties);
+                  retained.set(connection);
+                  return (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (unused, method, args) -> {
+                            if (armed.get()) {
+                              String name = method.getName();
+                              if (fault.equals("AUTOCOMMIT") && name.equals("getAutoCommit")) {
+                                injected.set(true);
+                                return false;
+                              }
+                              if (fault.equals("READONLY") && name.equals("isReadOnly")) {
+                                injected.set(true);
+                                return true;
+                              }
+                              if (fault.equals("ISOLATION")
+                                  && name.equals("getTransactionIsolation")) {
+                                injected.set(true);
+                                return Connection.TRANSACTION_SERIALIZABLE;
+                              }
+                              if (fault.equals("SQL") && name.equals("getAutoCommit")) {
+                                injected.set(true);
+                                throw new SQLException("public final guard unavailable", "08006");
+                              }
+                            }
+                            return mdb2292Invoke(method, connection, args);
+                          });
+                },
+                c -> {});
+        subject.execute(
+            credential(),
+            session -> {
+              var begins = session.beginBackup(run, started, false);
+              var failure =
+                  new BatchStepResult(
+                      BatchStepResult.Status.FAILED,
+                      1,
+                      0,
+                      1,
+                      0,
+                      BatchStepResult.Reason.COMMAND_FAILURE);
+              session.failBackup(begins, ended, failure, failure);
+              armed.set(true);
+              dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner =
+                  () -> {
+                    if (fault.equals("OWNER")) {
+                      injected.set(true);
+                      throw new IOException("public owner deadline unavailable");
+                    }
+                    return 10_000_000_000L;
+                  };
+              try {
+                assertThrows(
+                    IOException.class,
+                    () -> {
+                      switch (operation) {
+                        case "SNAPSHOT" -> session.failedBackupSnapshot(begins, owner);
+                        case "OBSERVE" ->
+                            session.observeBackup(begins, Optional.empty(), ended, owner);
+                        default -> session.recheckConsistent(run);
+                      }
+                    },
+                    operation + ":" + fault);
+              } finally {
+                armed.set(false);
+              }
+              assertTrue(injected.get(), operation + ":" + fault);
+              // Independent actual SQL must still expose the same committed terminal pair.
+              mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+              var snapshot = session.failedBackupSnapshot(begins, () -> 10_000_000_000L);
+              assertEquals(begins.database(), snapshot.database());
+              assertEquals(begins.configuration(), snapshot.configuration());
+              assertEquals(ended, snapshot.endedAt());
+              return Boolean.TRUE;
+            });
+        assertTrue(retained.get().isClosed());
+        mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+        mdb2292NoOwnerResources();
+      }
+    }
+    assertEquals(12, ordinal);
+  }
+
   /** PT-MDB2568-001: actual abandoned rows, independent per-component readback refusal. */
   @Test
   void mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation()

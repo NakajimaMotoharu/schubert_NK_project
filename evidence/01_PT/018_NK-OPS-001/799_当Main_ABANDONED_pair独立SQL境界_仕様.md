@@ -1,5 +1,9 @@
 # PG2568 独立ABANDONED pair境界
 
+## v2実結果
+
+actual0/testSourcef1c5100272220ae2ff1470dfdf8dfa8c45a929a2/payload95f504e3/server manifest137494b1、限定1PT/13case/FES-aborted-notrun0・javac warnings0・全Main CRC不一致0・VM操作0。独立全4rowとConnection/client/advisory後条件が全case成功。当同source/nativeから1line/9branch追加、残L802/M156/C9/B564。公開abandoned-pair-manifest-v2.json。旧compile失敗は合格算入0、当新Testは全3650に件数合算せず、必要群統合回帰と正式/leaf依存は未受入。
+
 ## 初回構築失敗（未合格）
 
 v1/testSource5bac2b3d7 actual1、payload04043f21。javacがassertTrue overloadのBooleanSupplierとgeneric execute(Boolean)推論の不整合で拒否し、JUnit/DB fixture未実行。新試験の初回構築失敗でProduction障害ではない。明示Boolean type引数だけを是正しv2 new-only namespaceへ固定、旧v1/log/compile失敗保持・合格件数0。業務期待値/Production変更0、v2未実行。
