@@ -27,12 +27,12 @@ def qualify_snapshot():
 def server():
     raw=prior.server().replace('PG2722','PG2908').replace('PG2694','PG2798').replace('qualified2694Tests','qualified2798Tests').replace('3666','3680')
     raw=raw.replace(prior.SOURCE,SOURCE)
-    raw='import xml.etree.ElementTree as ET\nCOUNTERS=("LINE","METHOD","CLASS","BRANCH")\n'+raw
+    raw=raw.replace('PG2908-native-v1','PG2908-native-v2').replace('PG2908-native-input.tar','PG2908-native-input-v2.tar')
     from pyflakes.api import check
     # Transport supplies exact archive SHA and its independently qualified XML
     # coordinate extractor; validate that complete assembled server, not a stub.
     extractor=prior.previous.entry().__globals__['coordinates']
-    complete='ARCHIVE_SHA="'+('a'*64)+'"\n'+inspect.getsource(extractor)+'\n'+raw
+    complete='import xml.etree.ElementTree as ET\nCOUNTERS=("LINE","METHOD","CLASS","BRANCH")\nARCHIVE_SHA="'+('a'*64)+'"\n'+inspect.getsource(extractor)+'\n'+raw
     if check(complete,'<whole a9 1643 CRC actual streams server>'):raise ValueError('complete current native server namespace required')
     compile(raw,'<only current source native stream/CRC/session/dominance>','exec');return raw
 
@@ -40,8 +40,9 @@ def server():
 def source():
     raw=prior.source()
     for a,b in [('pg2718-operation-native-catalog-v1','pg2906-network-current-native-catalog-v1'),
-        ('pg2722-operation-native-qualified-v1','pg2908-network-current-native-qualified-v1'),('PG2722','PG2908'),
+        ('pg2722-operation-native-qualified-v1','pg2908-network-current-native-qualified-v2'),('PG2722','PG2908'),
         ('pg2695-expiry-fixed-full-qualified-v1','pg2800-jdbc-null-fixed-full-qualified-v1')]:raw=raw.replace(a,b)
+    raw=raw.replace('PG2908-native-v1','PG2908-native-v2').replace('PG2908-native-input.tar','PG2908-native-input-v2.tar')
     compile(raw,'<actual newa9 native transport>','exec');return raw
 
 
