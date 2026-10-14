@@ -19,6 +19,10 @@ def bind(raw):
         ('pg2710','pg2892'),('pg2712','pg2894'),('pg2713','pg2895'),('pg2714','pg2896'),
         ('PG2654','PG2802'),('pg2654','pg2802'),(prior.SOURCE,SOURCE),
         ('b2d6f605-61cf-425f-8fbd-12d606f6ee66',BOOT),('b2d6f60561cf425f8fbd12d606f6ee66',BOOT.replace('-',''))]:raw=raw.replace(a,b)
+    # Accepted CHR-A01 GET added legitimate anonymous HTTP rows. Owned stop must
+    # retain the refreshed independent same-run image, not ignore those changes.
+    raw=raw.replace('pg2886-network-newcurrent-full-seal-v1','pg2902-network-after-chr-full-seal-v1')
+    raw=raw.replace('pg2888-network-parent-projection-v1','pg2904-network-after-chr-parent-projection-v1')
     return raw
 
 

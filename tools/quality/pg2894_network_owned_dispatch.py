@@ -3,12 +3,12 @@ import inspect
 import pg2712_operation_owned_dispatch as prior
 from pg2890_network_owned_sources import sources,context,SOURCE,TOOLS,bind
 from pg2862_network_newcurrent_observer import BOM
-from pg2886_network_newcurrent_full_seal import payload as seal_payload
+from pg2902_network_after_chr_full_seal import payload as seal_payload
 
 GUEST='/var/lib/pgpt-s1-preservation/'+TOOLS
 REMOTE='/home/ubuntu/pg2894-network-owned-stage-v1'
 ARCHIVE='pg2894-'+TOOLS+'.tar'
-POST_SLOT='pg2886-network-newcurrent-full-seal-v1'
+POST_SLOT='pg2902-network-after-chr-full-seal-v1'
 
 
 def namespace():
