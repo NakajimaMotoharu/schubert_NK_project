@@ -1,5 +1,9 @@
 # PG2544/2546/2548 当fresh世代の独立受入
 
+## 実行結果（2026-10-14）
+
+当Source a79/同run b29fb3e5/activation d021で2544/2546/2548全actual0、operator85ebf0c8d。真正DONE10/WARNING・1715.202303秒/1800内、managerGCの見かけ0は終了0へ読み替えずmanagerExitCodeObserved=null。全24独立後条件はHTTP224/session223/SENT224のjoin、Backup2 SUCCESS/7 SKIP/保護WARN1、保護Inbox10/削除Outbox0を確認。wholeは四owner/署名187/設定32を封緘。commandは同名工具、日時・payload/receipt hashは evidence/strict-current-reference/terminal-owned-native-manifest.json。当全scope正式閉鎖・Backup内容oracleとは別。以下の「実未発行」は準備時履歴。
+
 NK-OPS-001、SS331/341/343/353/354、N05主費・P017/K01参照費0、0661群budget subset、追加費0。current a79/PG2512/BOM2f32/bootb2d6・新Root287080/Job74434/Invocationbab156・runb29fb3e5/activationd021/cutoff2026-10-14T00:36:06.976135Zとordinary before SHA d9b9567cを正とする。
 
 PT-TERMINAL-2544：PID1同Job/start/Invocation/boot/RootPid・当run/cutoff/activation/source/BOM・真正DONE/終了0又は承認済10/WARNING・1800budget・型/時間/managerGCを独立classify。oldcdbc/3b/0fd UUID/activation、UNKNOWN、client0、APIreadyは成功にしない。payloadは全oldgenerationを明示拒否する。

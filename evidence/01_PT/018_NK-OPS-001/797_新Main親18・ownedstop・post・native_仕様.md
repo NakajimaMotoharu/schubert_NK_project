@@ -1,5 +1,9 @@
 # PG2552～2564 当世代の終了依存・CRC/session資格
 
+## 実行結果（2026-10-14）
+
+2552親18/2555全15ABI/2556 stage・正規ownedstop各actual0、stopは01:07:53.115213Z～01:10:02.237322Zに一回だけ発行。応答欠落後は保存actual0 receiptを認証し再停止0。2560別post actual0（01:16:05～01:16:13Z）、全24保持・全10Unit/kernel/actor/client/advisory/FLOCK0・署名187・八terminal・native二回安定。2562 actual0/十point・旧22copy保持/輸入0。2564 actual0、fresh全3650/540/全1643・最新九stream/Inspector同session二点・CRC mismatch0、当source残L803/M156/C9/B573、四module四100・api/batch未達。oldnative輸入0、全100/451/正式/leaf受入0。commandは同名工具、時刻・source・payload/server/receipt hash・module counterは evidence/strict-current-reference/terminal-owned-native-manifest.json。public native UUID/session材料は出さずprivate保持。以下の「未発行」は準備履歴。
+
 NK-OPS-001、SS343/353/354/355、N05主費・N04/K01/P017参照費0、0661 Root群とそのsubset、追加予算0。当a79/PG2512/BOM2f32/bootb2d6・Root287080/Job74434/runb29fb3e5/activationd021を正とし、全2544terminal/2546全24/2548wholeがactual0になるまで終了操作へ進まない。
 
 PT-PARENT18-2552：sealed beforeのactual source/BOM/hashと当Root18fieldを型付き辞書・全文字列・Id/GC/宣言/実値で照合し、旧Source transport-only置換を許さない。独立一fixture/static0、実未発行。
