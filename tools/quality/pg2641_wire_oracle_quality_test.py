@@ -19,6 +19,11 @@ class OracleIntegrationQualification(unittest.TestCase):
         self.assertNotIn('SSH+', native.source())
         self.assertIn('pg2641-wire-oracle-full-qualified-v1', native.source())
 
+    def test_transport_whole_supplied_namespace(self):
+        entry = native.entry()
+        supplied = '\n'.join(name + '=None' for name in entry.__globals__ if name.isidentifier())
+        self.assertEqual(0, check(supplied + '\n' + native.source(), '<whole supplied transport>'))
+
 
 if __name__ == '__main__':
     unittest.main()

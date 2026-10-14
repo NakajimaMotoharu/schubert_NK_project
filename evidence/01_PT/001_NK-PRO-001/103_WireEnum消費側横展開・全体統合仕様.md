@@ -27,6 +27,8 @@ BUG1244/YKT1010、NK-PRO-001/PT-PRO-001-H01・T04。共通code許容集合・nam
 
 検索条件はResultCode.values/usesSuccessProfile/wireValue、semantic18型及びLayout/typed mapperのTSV入力。Production Main不変更。上表の非該当は共通型の未承認追加を許すという意味ではなく、共通独立oracleがその不適合を拒否し、個別testは消費契約に限定するという責務分割。
 
+PG2640実入力TSV hash: layouts-ui233=`c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711`（comment込み65行）、fields-ui234-236=`b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b`（394行）、named-types-ss323=`9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76`（65行）。三つとも001/evidence/inputの独立転記原本と全byte同値。payload-golden-ui234-236=`49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839`（68行）はtest/resourcesの独立golden、別のevidence/input同名原本は無いので同値と主張しない。各TSVが同凍結sourceに含まれることを2641で照合する。
+
 必要統合PG2640: snapshot911b16e0e7fabb2a3f7b2c11f6b25ca666ef60c6、Productiona79b45b5858a186fa82bec1ff36882271ab996a4。期待3664PT/540suite/1643Main/static六0、FES/flaky/rerun/not-run0。追加はsemantic一Testのみ、Header既methodのoracle変更は件数加点0。各module count=protocol82/storage163/bootstrap298/api969/web886/batch1266。旧3663と82を合算せず、当実全XMLを資格付けする。
 
 command=pg2640_wire_oracle_group_full_six.py一回→pg2641_wire_oracle_full_qualified.py→pg2642_wire_oracle_native_qualified.py。当sourceの全Main/resource/Jar member byte同値・現current十point/latest九CRC/session資格を再照合、旧0fd nativeの輸入0。Production/起動/停止/Backup/ADMIN/reload/公開再演0。API/batch coverage全100未達を維持し、本統合でPGPT/IT/ST完了を宣言しない。
