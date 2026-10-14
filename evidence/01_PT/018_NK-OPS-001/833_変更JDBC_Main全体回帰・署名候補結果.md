@@ -1,0 +1,13 @@
+# 変更JDBC Main全体回帰・署名候補結果
+
+候補a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25、snapshot30af88b28fe361a38254aa26336b2fec9c134d5a/archive91df6881b18f55cc2765c313506f881c5554a23d1d9479a6eb530820b80e610d。PG2798/session97599 actual0、実10:59:31.424234Z～11:25:43.555175Z/1572.130941秒。独立PG2800/session53842 actual0、全3680PT/542suite/1643Main/FES-flaky-notRun0/静的六module0、source全入力/全XML一意case・時刻/hash/coverageXML/exec/static/JAR-class byteを照合。qualificationpayload fc050ab356659983ca8b5ba7b84ed37a5d2c447f92a7e5138c977217993e9713、hostgate3f33eaf4919cd9bbbbf6369d5fab90ae7faa9cc9eca0e9104829e39f5f5b2252、server465516bdba7f2483e41e11e4b619e118be6da20616b931521858d897fea690be。
+
+原3673からSession五Testとowner二Test/一suiteを当固定snapshotで初めて全体へ統合した。私有選択/旧3673/native成果を新Mainへ加算しない。物理八=既七＋Rows、追加class0、NativeIoの70line entry+1だけ/nonLine同値を独立確認。semantic class数は未推定null。Source042署名原187との別比較では新三class（MorningDatabaseSession/Session/Rows）だけ、全resource/member/metadataは保持。
+
+当host-only残3658L/621M/37C/846B、global100false。旧042 combined残786/156/9/529は歴史のみで、同一sourceの比較値ではない。新a9 native/session/CRC・実ordinary・Browser/CHR/四100/451/終了依存は未閉鎖。元BUG1251 NPEの限定是正60成功は832、callback IO＋複合closeの新固有oracleは私有draft準備/未実行。
+
+PG2802/session72872 host候補署名actual0、operator272338bf1、11:29:11.801744Z～11:29:12.096041Z、release0.1.0-PG2802/BOM37bfe01a075449d36cc8b73408dd81fc6d6efc158910a437cbde21b6a0b7f863/signature93a6032cb7c3a15f010e521cea1da78ff6a975e2123462e70d808c59cfc10d11。全187artifact/schema028/SQL28/history29/三Main差分・resource差0・原本配置内容/六JAR完成containerの許可差分を検証、key/signatureは私有領域だけ、VM未変更/candidate未配備。包装timestamp差で他JAR hashも変わるがcompressed member/metadataの許可差だけでありsource差を隠さない。署名は正式認定/配備成功ではない。
+
+実command：`pg2798_jdbc_null_fixed_full_six.py` → `pg2800_jdbc_null_fixed_full_qualified.py` → `pg2802_jdbc_fixed_signed_candidate.py`（構築済PYTHONPATH）。JDK25.0.4/Maven他versionと全argsは421/私有begin及び各manifest。秘密/raw credential/session/DB dumpはGitへ輸出0。PG2798-controller1248446/t7944717の旧生存は終了履歴、再発行0。
+
+次：新only pg2806_current_042_before.pyで現Source042の封印済終了/全24/全187/原本Backup/native/全Unit/kernel/client-advisory/実BOMとfresh beforeを再認証→正規未使用配置・RO・有限公開と各独立post→新a9普通経路・当native/実Browser→残host契約/四100/451/trace/引継ぎ。旧Root/Backup/ADMIN/stop/reloadの再演でfreshを作らない。
