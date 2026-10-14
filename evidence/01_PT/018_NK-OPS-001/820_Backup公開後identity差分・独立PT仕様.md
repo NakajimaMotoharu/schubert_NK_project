@@ -29,3 +29,9 @@ BackupArtifactVerifier.observePending / BackupArtifactVerifierTest.backup2740001
 nonroot、child device差、file負size、raw→capture inode差、file device差、parent二読inode差、終了UID差の七種を三file roleごとに計21入力。各UNAVAILABLE/cause無し、全三file bytes不変、MANIFEST生成なし、全handle解放。inode raw→captureは正確に二読で拒否、parent差/終了UIDは正確に二読まで到達を確認。期待はSS343の所有/device/保持inode再認証、期待生成にProduction methodなし。既正常のliteral三hash/未知・欠落/null/例外試験を維持。fixtureの`.part` directory roleは実held FDの末尾名（DIR+.part）を使用し、final名roleのchildへ誤接続しない。
 
 command=pg2740_backup_pending_selected.py、初期未実行、Main変更/VM/DB/Backup操作なし。Testと工具を固定後、実XML/入力hash/coverageと静的を独立確認する。既group全体認定/人工native加点0。
+
+是正後PG2740/session96966 actual0/Test57209aa2c/一JUnit21入力/FESAbortedNotRun0/javac warning0、独立PG2742/session40910 actual0、一意XML40b4239d/execf27c0fd4/serverae925d22と全coverageXML hash一致。observePending L17/M1/B6はmiss0、host869→862の追加7branch。retentionの追加3とは未統合の別streamでありglobal残542→532を未検証のまま認定しない。関連BUG1247/YKT1013は工具だけ完了。
+
+## 必要な変更群統合
+
+新三method（独立十入力・保持四入力・pending21入力）を一回のfresh全六moduleへ統合する。期待3669PT/541suite/1643Main/static六0、同source入力/終了code/全XML-case/coverage/静的をPG2744/2745で照合。先行PG2694/3666は前Test sourceとして保持、新三methodへ後付けしない。Actual新A01一結果だけの変更を独立固定Current hash/DIFで許可、Production/資産はSource042のまま。全回帰成功後だけ保持当新native九streamを全Main/resource byte同値で再資格する。VM再起動/再採取/業務再発行なし。統合初期状態=未実行、K01.01主担当・P01705参照費0。
