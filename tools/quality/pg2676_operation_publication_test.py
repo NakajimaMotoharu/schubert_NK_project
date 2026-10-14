@@ -12,7 +12,7 @@ class FinitePublicationConnection(unittest.TestCase):
         abi=c.compiler('a'*64);body=d.source('a'*64);stage=d.stage('a'*64)
         for value in ['pg2672-operation-ro-post-v1','pg2659-frozen','pg2658-operation-unused-tools-v1','pg2675-frozen']:
             self.assertIn(value,abi+body)
-        for value in ['411abb597f15a221acd4c0da4a407a035fcbdd20','program/characterization','pg2676-']:
+        for value in ['2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0','program/characterization','pg2676-']:
             self.assertIn(value,body)
         self.assertIn('pg2674-operation-publication-tools-v1',stage)
         self.assertIn('pg2676-operation-publication-stage-v1',stage)

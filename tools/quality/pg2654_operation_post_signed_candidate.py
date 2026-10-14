@@ -7,7 +7,8 @@ import pg2126_metadata_signed_candidate as contract
 from pg2406_question_signed_candidate import verify_delta
 from pg2428_question_signed_candidate import verify_container
 from pg2652_operation_resource_container import verify as verify_added_web
-from pg2650_operation_post_full_six import SOURCE, SCOPE, validate
+from pg2650_operation_post_full_six import SCOPE
+from pg2694_expiry_fixed_full_six import SOURCE, validate
 
 W,P,T=prior.W,prior.P,prior.T
 OLD=W/'pg2512-release-v1';NEXT=W/'pg2654-release-v1';FROZEN=W/'pg2654-frozen-six-v1';SIG=P/'pg2654-manifest-v1.sig'
@@ -23,14 +24,14 @@ def validate_gate(outer,source):
 
 def qualify_source():
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=T,text=True).strip();validate(head)
-    selected='411abb597f15a221acd4c0da4a407a035fcbdd20'
+    selected='2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0'
     if subprocess.check_output(['git','diff','--name-only',selected,head,'--',*SCOPE],cwd=T):
         raise ValueError('whole accepted candidate input equality required')
     return b''
 
 
 def receive(module):
-    raw=inspect.getsource(prior.transfer.receive).replace('PG1532','PG2650').replace('pg1535','pg2654')
+    raw=inspect.getsource(prior.transfer.receive).replace('PG1532','PG2694').replace('pg1535','pg2654')
     ns={**prior.transfer.__dict__,'FROZEN':FROZEN}
     exec(compile(raw,'<fresh qualified six new resource Jar transfer>','exec'),ns);path=ns['receive'](module)
     old_path={'api':'api/api.jar','web':'web/web.jar','batch':'operations/batch.jar'}.get(module)
@@ -46,8 +47,8 @@ def main_source():
     raw=inspect.getsource(prior.main)
     for a,b in [('pg1638','pg2654'),('PG1638','PG2654'),('PG1544','PG2512'),
       ('1683dd9f6de00e71d2317d9af3cd50400a37bf4e',SOURCE),
-      ('pg1636-api-boundary-full-qualified-v1','pg2651-operation-post-full-qualified-v1'),
-      ('from pg1636_api_boundary_full_qualification import server','from pg2651_operation_post_full_qualified import server'),
+      ('pg1636-api-boundary-full-qualified-v1','pg2695-expiry-fixed-full-qualified-v1'),
+      ('from pg1636_api_boundary_full_qualification import server','from pg2695_expiry_fixed_full_qualified import server'),
       ("{'VERSION', 'api/api.jar'} <= changed","{'VERSION', 'web/web.jar'} <= changed"),
       ("'tests': 3596, 'suites': 532","'tests': 3666, 'suites': 541"),
       ("'changedClasses': 3, 'addedClasses': 6","'changedClasses': 0, 'addedClasses': 0, 'changedResources':4, 'addedResources':1")]:

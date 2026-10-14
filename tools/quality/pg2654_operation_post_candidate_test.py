@@ -10,7 +10,7 @@ class ResourceSignedCandidate(unittest.TestCase):
         ns={**candidate.prior.__dict__,'qualify_source':None}
         supplied='\n'.join(k+'=None'for k in ns if k.isidentifier()and k!='main')
         self.assertEqual(0,check(supplied+'\n'+raw,'<whole host signing namespace>'))
-        for marker in ['pg2651-operation-post-full-qualified-v1','PG2654','3666','541',"'addedResources':1",'qualify_source()']:
+        for marker in ['pg2695-expiry-fixed-full-qualified-v1','PG2654','3666','541',"'addedResources':1",'qualify_source()']:
             self.assertIn(marker,raw)
         self.assertNotIn('daemon-reload',raw)
         self.assertIn('verify_added_web',inspect.getsource(candidate.receive))

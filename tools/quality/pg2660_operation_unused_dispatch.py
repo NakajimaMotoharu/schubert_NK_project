@@ -15,7 +15,7 @@ STAGE=bind(previous.STAGE)
 def source():
     raw=bind(previous.source()).replace('pg2517-frozen','pg2659-frozen')
     old="['git','diff','--name-only','"+production()+"','--','src','pom.xml']"
-    new="['git','diff','--name-only','411abb597f15a221acd4c0da4a407a035fcbdd20','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']"
+    new="['git','diff','--name-only','2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']"
     if raw.count(old)!=1:raise ValueError('one complete selected candidate source boundary required')
     raw=raw.replace(old,new)
     compile(raw,'<new operation unused placement body>','exec');return raw

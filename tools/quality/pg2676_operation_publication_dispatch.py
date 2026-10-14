@@ -19,7 +19,7 @@ def source(bom):
       ('pg2516-current-strict-candidate-tools-v1','pg2658-operation-unused-tools-v1')]:raw=raw.replace(a,b)
     old="['git','diff','--name-only',CANDIDATE,'--','src','pom.xml']"
     if raw.count(old)!=1:raise ValueError('one complete selected source boundary required')
-    raw=raw.replace(old,"['git','diff','--name-only','411abb597f15a221acd4c0da4a407a035fcbdd20','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']")
+    raw=raw.replace(old,"['git','diff','--name-only','2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']")
     compile(raw,'<new operation finite publication dispatch>','exec');return raw
 
 

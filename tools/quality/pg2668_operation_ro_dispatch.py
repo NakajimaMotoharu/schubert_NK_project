@@ -12,7 +12,7 @@ def source():
     raw=bind(previous.source()).replace('pg2525-frozen','pg2667-frozen').replace('pg2526-','pg2668-').replace('pg2522-current-strict-candidate-post-v1','pg2664-operation-unused-post-v1')
     old="['git','diff','--name-only',CANDIDATE,'--','src','pom.xml']"
     if raw.count(old)!=1:raise ValueError('one complete selected source guard required')
-    raw=raw.replace(old,"['git','diff','--name-only','411abb597f15a221acd4c0da4a407a035fcbdd20','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']")
+    raw=raw.replace(old,"['git','diff','--name-only','2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0','HEAD','--','src','pom.xml','mvnw','.mvn','program/characterization']")
     compile(raw,'<new readonly direct body>','exec');return raw
 
 
