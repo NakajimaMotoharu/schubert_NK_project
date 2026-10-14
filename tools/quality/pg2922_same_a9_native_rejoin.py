@@ -7,6 +7,15 @@ import pg2908_network_current_native_qualification as prior
 from pg2918_db_failure_group_full_six import SOURCE,validate,prior as full_prior
 
 
+def member_counts(old,new):
+    if type(old)is not dict or type(new)is not dict or not old or old!=new:
+        raise ValueError('every Main/resource/META byte must match the same a9 source')
+    if any(type(k)is not str or type(v)is not bytes for k,v in old.items()):
+        raise ValueError('literal member byte maps required')
+    classes=sum(k.endswith('.class')for k in old)
+    return classes,len(old)-classes
+
+
 def qualify_snapshot():
     value=json.loads((prior.W/'pg2920-db-failure-group-full-qualified-v1/manifest.safe.json').read_bytes())
     full=value['result']
@@ -22,18 +31,20 @@ def server():
     raw=prior.server().replace('PG2798','PG2918').replace('qualified2798Tests','qualified2918Tests').replace('3680','3684').replace('PG2908','PG2922').replace('PG2922-native-v2','PG2922-native-v1').replace('PG2922-native-input-v2.tar','PG2922-native-input-v1.tar')
     marker="local={};host={};union={};gain={};xml_hashes={};gaps={};start="
     if raw.count(marker)!=1:raise ValueError('one whole-member qualification boundary required')
-    extra="""import zipfile
+    extra=inspect.getsource(member_counts)+"\n"+"""import zipfile
 baseline=v['nativeQualifiedFull'];identical_main=0;identical_resources=0
 require(baseline['productionSource']==v['productionSource']and baseline['mainClasses']==1643)
 for module in modules:
  oldjar=B/'source-full-PG2798/src'/('schubert-nk-'+module)/'target'/('schubert-nk-'+module+'-0.1.0-SNAPSHOT.jar')
  require(sha(oldjar)==baseline['jarHashes'][module])
  with zipfile.ZipFile(oldjar)as old,zipfile.ZipFile(jars[module])as new:
+  oldnames=[n for n in old.namelist()if not n.endswith('/')];newnames=[n for n in new.namelist()if not n.endswith('/')]
+  require(len(oldnames)==len(set(oldnames))and len(newnames)==len(set(newnames)))
   oldmembers={n:old.read(n)for n in old.namelist()if not n.endswith('/')}
   newmembers={n:new.read(n)for n in new.namelist()if not n.endswith('/')}
-  require(oldmembers==newmembers)
-  identical_main+=sum(n.endswith('.class')for n in newmembers)
-  identical_resources+=sum(not n.endswith('.class')for n in newmembers)
+  main_count,resource_count=member_counts(oldmembers,newmembers)
+  identical_main+=main_count
+  identical_resources+=resource_count
 require(identical_main==1643)
 """
     raw=raw.replace(marker,extra+marker)

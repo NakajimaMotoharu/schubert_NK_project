@@ -30,6 +30,7 @@ SSC193/195の固定pin公開agent/held新inode採取を二roleだけ拡張する
 
 Inspectorは既writeの正常帰還後に終端採取し、wrapperは従来どおりexact receipt＋JVM正常終端を判定する。Bootstrapは既runの全owned resource帰還と固定finished診断後・System.exit前に採取する。採取失敗は元正常0/10/20として受け入れず固定失敗診断/非成功終端とする。採取は実INV・Unit cgroup・NSS/groups/zeroCaps/NNP・pin・新private inode/正常close/dirsyncを前後照合し、データを起動権限/親成功へ使わない。新runでInspectorへ進む際はSS341のday＋step success/running/attempt条件と原本・旧Backup保護を先に独立照合し、成功済SKIPへ再検証operationを追加しない。Bootstrap既存20は別new-only合成2credentialだけを正規公開/退役し、退役済原本/activeaccount/全DB値不変を照合する。fresh全6→signed/current同source→各single/nativeNoMatch0・fulljournal/kernel/owned帰還・未網羅の独立記録を要する。正式/ITST合格の宣言ではない。
 
+
 SSC195（2026-10-06、BUG754/YKT534、SSC193親FD補足）：普通UIDのheld O_RDONLY directory FDに必要なread/traverseのため、固定4role名だけを持つ非秘密pt-coverage親はSS343のRoot:Root0755・ACLなしとする。各role0700/exec0600、agent pin/RO/UID/groups/NNP、元scope/security/budget/defaultは不変更。operatorは正常owned停止/M/A/DB・原本Backup/旧exec保全を確認した区間でのみ既存親0711の同inodeを一回0755へ変更、runtimeはmode照合のみ。親readは固定role名を読むためだけで、private child内容/exec/session/credentialへ権限を付与しない。真正普通UIDで711拒否755成功を独立確認し、Rootだけの成功を両ordinary/nativeの代用にしない。
 
 SSC194（2026-10-06、SSC193の普通TERM採取接続補足、BUG753/YKT533）：PT profile有効時だけ、既application Lifetimeの外側に固定main所有のstop holdを一つ設ける。追加hookはprovider操作/close/exitをせず、mainの採取完了又は非成功unwindまで待機する。元application hookのfinished解放だけでJVMがhaltしmainのdumpを切らない。mainは外側hold登録/owner照合→既runの全owned business scope帰還→既stopped診断→SSC193新terminal採取/全newfile及びdir正常返却→owner再照合/固定非秘密capture-complete診断→外側hold通常close→既終了要求の順。defaultは追加hook0、既停止・UNKNOWN保持・143を0へ補正しない意味・元Unit及び親期限・2FD/securityは不変更。Runtime.removeShutdownHookの正常true、not-owned false、不正null、及び公開APIが規定するshutdown-in-progressだけを分離し、thread.isAlive/GCから推定しない。失敗時は採取/marker/終端だけを完全成功へ流用せず、fatal/partial/不明及び全kernel後条件を含む独立native判定を要求する。host決定的並行及び実子JVM TERM143はcomponent証拠、実API/Web/native100/正式の代用ではない。
@@ -271,9 +272,9 @@ SSC-022の診断専用probeは333 §7.4へ従う。業務producer/HTTP開始前�
 
 SSC164（内部接続補足）：Morningのready判定は捕捉Rootと同一のboot/PID1/Invocation/MainPID/startTicks/cgroupを、ordinary移行後もmanager/kernel前後で照合する。UID0 Root認証を流用せず、固定NSS ordinary identity/全groups/五cap0/NNP1/固定mainを独立確認する。管理socketは本人FD inodeのexact127.0.0.1（IPv4及びIPv4-mapped IPv6）のみで、wildcard/::1/他inodeを拒否。HTTP200UPと発行permitのreleaseDigestに一致する保持manifest由来の5値を、同じsocket inode及び同親/API世代の前後検査で認定する。API ready→Web真正Root→Web全業務ready→Caddy/原本完了の既存順序は維持、ready単独を親成功にしない。同M/DB/原本/epoch・元30分budgetを維持、unknown/停止不確定は保全する。詳細PTと各scopeの採取不足は018/311及び456に記録する。
 
-SSC185（2026-10-05、内部TX/所有補足）：保持原本を完了する直前のBackup/Cleanup/Expiry evidenceは、同じ借用DBの短transactionで各後条件を再読する。そのtransaction内のowner callbackはRoot/M/A/原本capability・同ordinary API/Web/Caddy世代/identity/socket/ready・元残budgetの純粋な検査に限り、同ConnectionへのDB再読・commit/rollback・autoCommit変更を再入させない。DB全体のrun整合はevidence再読の前後及び各transactionの外側で独立検査し、transaction内のadvisory/timeout/role/SQL後条件は既存Repositoryで維持する。intent保持中と正規退役後のpeer条件を分け、各phaseのRoot/原本/peer検査をDB外側の整合検査の前後にも行う。別Connectionで旧ownerを代用・guard省略・権限緩和・UNKNOWN正常化は禁止。同DBのtransaction状態を保持する独立stateful試験と、元sourceの実失敗を保全したsame-source fresh回帰/実VM completionを必要とする。RD/UI/業務仕様・Current/DIFは変更しない。
-
 ### 5.2 Spring主要値
+
+SSC185（2026-10-05、内部TX/所有補足）：保持原本を完了する直前のBackup/Cleanup/Expiry evidenceは、同じ借用DBの短transactionで各後条件を再読する。そのtransaction内のowner callbackはRoot/M/A/原本capability・同ordinary API/Web/Caddy世代/identity/socket/ready・元残budgetの純粋な検査に限り、同ConnectionへのDB再読・commit/rollback・autoCommit変更を再入させない。DB全体のrun整合はevidence再読の前後及び各transactionの外側で独立検査し、transaction内のadvisory/timeout/role/SQL後条件は既存Repositoryで維持する。intent保持中と正規退役後のpeer条件を分け、各phaseのRoot/原本/peer検査をDB外側の整合検査の前後にも行う。別Connectionで旧ownerを代用・guard省略・権限緩和・UNKNOWN正常化は禁止。同DBのtransaction状態を保持する独立stateful試験と、元sourceの実失敗を保全したsame-source fresh回帰/実VM completionを必要とする。RD/UI/業務仕様・Current/DIFは変更しない。
 
 | Key | Web | API |
 |---|---|---|

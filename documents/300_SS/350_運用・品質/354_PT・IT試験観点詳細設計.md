@@ -13,10 +13,10 @@ systemdの状態18と設定32を混同しない。partial file後のGC/LoadUnit�
 旧同inodefragmentを再write/削除/再配置しない。署名済み20工具・reservation/logのbyte、固定helperのcontrol-flow（reload return/empty stdout-stderr/verifyの後でpost guardが拒否）、独立PID1/readbackの宣言/状態を相互照合して既一回reloadの実施を分類する。old closeはUNKNOWNのまま、正規owned回収/別全post後に、新M-A/実専用DB/十Refのverification-only scopeで元原本/全24/宣言32/187/partial inode/currentを正常照合し全scopeを正常返却する。さらに別独立postで全資源0・fixed effective --resumeを閉じてからだけ、別observer/一回durable予約/明示resumeを開始できる。verification-onlyでreloadや業務startを追加しない。旧entryをactual0へ書換えない。
 
 PT工具のmkdir時刻にはLinux filesystemのcoarse clockが使われる場合がある。有限操作の下限は操作前に独立採取したkernel realtime-coarseと高精度realtimeの関係/分解能を検査し、既mtime/ctimeからの非減少・現在上限/全identity/content/唯一namespace deltaを維持する。壁時計を変更せずRoot cutoff・epoch・budget精度を緩めない。既partial原本に未採取の時刻を後付けしない。独立過去/未来/範囲逆転/型/null/unknown差の反例、全11FDとCLOSED宣言の再発防止PT、実正規回収/verification/newresume/各postが未完。設計公開はこれらやcoverage/PGPT完了の認定ではない。
-
 SSC277：当Bootstrap31/90の共有/run同linked像と全他97FDを独立fixtureに固定し、旧29/32/別target/一方のみ差/chrono逆行未来/extra-missing/型不正を拒否する。hostqueueは正常引継ぎ/失敗保持を別oracleで確認し、元guest拒否を合格又は二次待機エラーへ置換0。全元値/DB0/一回TERM/有限reap/別wholepostはSSC276を維持、旧1724失敗の再送0。
 
 SSC276（SS343/BUG1156/YKT924）：current99FD/子0/全原値・serverpeer/advisory0・socket0/soleM-A/OFDを独立証明し、旧livepeer仮定失敗を成功化しない。hostgate旧owner/foreign/reuse/競合と引継ぎ期限、全fresh像のpidfd/予約/TERM前差、FD余剰欠落/role/Source/null/bool/共有祖先chronoを各拒否する。普通TERM一回/有限reap/旧UNKNOWN保存・別全post資源0を実証。actual Expected constructorの正規3/4桁、suffix1/32境界、非numeric/桁過不足/空/null、role/database/readOnly/advisory全契約を独立Javafixtureで取得前検査し、現label拒否時のロック/DB/Ref/Unit callback0を確認する。正常new-onlyverify/existingADMINexecute/全postと同source nativeを別資格、正式/CHR/ITST合格へ自動加算0。
+
 
 SSC275（SS343/BUG1152/YKT920）：旧実payload/tracebackのreserve→before_parent例外→send未到達を独立照合し、予約だけをsignal receiptにしない。旧101から当childpipe100/101だけ消失、現99全field/argv/ticks/権限/子0・soleDBpeer/MA/原本nativeを再認証、/run29/32以外の差を拒否。newhostcritical排他gateは同scope別管理接続の二重取得を拒否、同job付着だけ許す独立反例を追加。sameconnectionfresh99の各段階race/extraFD/peer/新子/未知/null/bool/時刻不整合を拒否、実新一回TERM15秒終端30秒reap/別全post/全元値と資源0を確認。旧slot再送/失敗成功化/coverage除外/人工到達0、正式/CHR/ITST受入は別。
 
