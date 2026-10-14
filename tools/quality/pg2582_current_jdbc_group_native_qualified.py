@@ -1,5 +1,4 @@
 """Current latest-nine CRC/session evidence joined to fresh full3653; no VM replay."""
-import inspect
 import json
 import subprocess
 import pg2564_strict_current_native_qualification as previous
