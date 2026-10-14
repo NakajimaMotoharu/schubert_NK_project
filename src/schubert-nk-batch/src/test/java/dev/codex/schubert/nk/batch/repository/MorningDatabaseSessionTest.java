@@ -31,6 +31,72 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2594-001: original identity/content and transaction commit are mandatory. */
+  @Test
+  void mdb2594001ResumeAdmissionRejectsForeignManifestContentAndCommitWithoutPublishing()
+      throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("ID", "CONTENT", "COMMIT")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("25940001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2047-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 25940010L + n * 10;
+      mdb2480Seed(run, started, id);
+      var begins =
+          new MorningDatabaseSession.BackupBegins(
+              new BatchStepAttempt(
+                  fault.equals("ID") ? id + 999 : id, run, BatchStep.BACKUP_DB, 1, started, false),
+              new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_CONFIG, 1, started, false));
+      var trustedShape = mdb2482Manifest(begins, started);
+      var original =
+          fault.equals("CONTENT")
+              ? new BackupManifest(
+                  begins.database(),
+                  begins.configuration(),
+                  started,
+                  started.plusSeconds(2),
+                  trustedShape.versions(),
+                  "0".repeat(64),
+                  new BackupFileDigest(27, "1".repeat(64)),
+                  new BackupFileDigest(35, "2".repeat(64)),
+                  new BackupFileDigest(32, "3".repeat(64)))
+              : trustedShape;
+      var retained = new AtomicReference<Connection>();
+      var commits = new AtomicInteger();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var connection = DriverManager.getConnection(url, properties);
+                retained.set(connection);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          if (fault.equals("COMMIT")
+                              && method.getName().equals("commit")
+                              && commits.incrementAndGet() == 1)
+                            throw new SQLException("isolated resume commit refusal", "08006");
+                          return mdb2292Invoke(method, connection, args);
+                        });
+              },
+              c -> {});
+      assertThrows(
+          IOException.class,
+          () -> subject.execute(credential(), s -> s.beginResumeBackup(original, observed)),
+          fault);
+      assertTrue(retained.get().isClosed());
+      mdb2480SqlRows(run, started, id);
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB2592-001: untrusted prior pair projections cannot mint resume authority. */
   @Test
   void mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation()
