@@ -7,3 +7,7 @@ PT-SIGN-2512-001：fresh2511真正0・3650/540/1643/静的六0とqualification s
 PT-CURRENT-2514-001：現在cdbcの既真正DONE10/WARNING/Root06236/切点21:16を独立receipt・全24DB後条件・Backup archive/config/list0・旧row保持・原本全hash・187署名・resource後条件で二回照合する。既2476の成功だけを推定再利用せず、同既stop seals/receiptを認証してfresh読取を行う。zz-pg2316/zz-pg1980退役済fragmentの不在を条件として保ち、存在/UNKNOWNなら副作用無しで拒否。before schema11fieldからnativeだけを別privateに保持し、そのSHAだけ公開。既runtime退役を再演せずcurrent生値を新candidate保守のbeforeとして使う。fixture二は全current namespaceとmissingseal拒否。SQLwrite/restore/prune/Root/Backup/ADMIN/停止0。
 
 commandは固定PYTHONPATHで`pg2512_strict_reference_signed_candidate.py`（全2511資格後）、`pg2514_current_cdbc_before.py`（読取独立）。実OS/boot/時刻/source/終了code/各hashは実後追記。初期工具三＋二fixture/pyflakes0、両実未実行・完了0、global/native/CHR/451/正式1964/53の合格加算0。
+
+## BUG1243/YKT1009 schema是正
+
+初期上段の「11fieldからnative抽出」は現snapshotに対して誤り。v1実actual1/client43118/Source6beba4249、原本保存前のschema guardで拒否。独立read-onlyで当afterは十keys・native別を確認した。旧失敗/private/logを保持し成功補完0。新onlyv2は原本十keysを無変換保存しnative別privateを保持、missing/unknown/native混入/非dict/nullの八negativeとactual factory namespaceを検査する。旧2410/3bの十一field歴史契約は変更しない。実v2の終了/hash/consumerは取得後記録する。
