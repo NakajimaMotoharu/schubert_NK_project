@@ -9,7 +9,7 @@ from pg1446_current_cold_stage import W
 
 ROOT=Path(__file__).resolve().parents[2]
 BASE='/home/mini/schubert-nk-pgpt'
-SERVER=r'''
+SERVER=r"""
 import datetime,hashlib,json,os,subprocess,tarfile,xml.etree.ElementTree as E
 from pathlib import Path
 os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2690-before-v1';source=b/'source-expiry-PG2690-before-v1';transfer=b/'transfer/PG2690-before-v1'
@@ -55,7 +55,7 @@ failure=cases[0].find('failure');require(failure is not None and failure.get('ty
 require(all(sha(source/p)==h for p,h in inputs.items()if p!=str(test.relative_to(source))))
 v={'actualExit':0,'diagnosticMavenExit':r.returncode,'diagnosticModifiedFixtureSha256':modified,'beforeFixtureSha256':inputs[str(test.relative_to(source))],'sourceSnapshot':INPUT['head'],'productionSource':INPUT['productionSource'],'startUTC':start,'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'expectedOriginalAssertionFailure':True,'failureType':failure.get('type'),'testId':'PT-OPS-MQ-026','xmlSha256':sha(xml),'logSha256':sha(out/'maven.private.log'),'sameMainUnchanged':True,'coverageCredit':0,'productionPtCredit':0,'vmActions':0,'formalAccepted':False}
 (out/'manifest.safe.json').write_text(json.dumps(v,sort_keys=True));print(json.dumps(v))
-'''
+"""
 
 
 def main():
