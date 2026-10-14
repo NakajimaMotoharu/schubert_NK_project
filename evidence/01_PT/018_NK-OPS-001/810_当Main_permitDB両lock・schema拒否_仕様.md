@@ -5,3 +5,5 @@ NK-OPS-001/MorningDatabaseSession.Session.inspectPermitDatabase、SS341/343/353/
 全十rowのstep/attempt/status/byteをliteral期待に照合し、全11SQL値を前後比較、Connection/client/advisory0を確認。固定schema callback以前・以後のHELD投影だけを変異、実PGの所有操作/transactionを保持し、VM/Root/Backup/ADMIN/stop再発行0。全Maina79/全3657/現在native九同byte/CRCを要求、旧source/native輸入0。
 
 command固定PYTHONPATHのpg2604_permit_database_selected_test.py→clean source固定→pg2604_permit_database_selected.py。工具二fixture/javac-Xlint-Werror0/限定1JUnit4case/FES-aborted-notrun0要求、実未発行。旧3657/正式1964-53へ件数加算0。Main変更無し、残技術794/156/9/551の対象を限定改善する。
+
+実session31933 actual0/TestSourcef71cf3a2dfd642b6d042657a8d3cda182d1621c7/1PT4case、payload a1a327b8/servermanifest58f25029/公開permit-database-manifest。javac0/MainCRC0/全十row前後不変・Connection/client/advisory0、VM操作0。残791/156/9/549で3line2branch追加。Schema literalはdata readback試験だけ、真正release/permit受入の代用0。新methodを旧全3657へ加算せず群統合待ち。

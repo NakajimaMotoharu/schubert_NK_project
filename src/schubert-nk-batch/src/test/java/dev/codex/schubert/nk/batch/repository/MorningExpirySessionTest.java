@@ -30,6 +30,72 @@ final class MorningExpirySessionTest {
   static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z");
   static final MaintenanceOwnerFrame.Guard OWNER = () -> 30_000_000_000L;
 
+  /** PT-MDB2606-001: no expiry row may be published from an incompatible parent DB state. */
+  @Test
+  void mdb2606001ExpiryAdmissionRejectsForeignRunAndTransactionDriftBeforePublishing()
+      throws Exception {
+    for (String fault : List.of("FOREIGN_RUN", "AUTOCOMMIT", "READONLY")) {
+      reset();
+      var armed = new java.util.concurrent.atomic.AtomicBoolean();
+      var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              url,
+              () -> {},
+              (address, properties) -> {
+                var connection = DriverManager.getConnection(address, properties);
+                retained.set(connection);
+                return (Connection)
+                    java.lang.reflect.Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          if (armed.get()
+                              && fault.equals("AUTOCOMMIT")
+                              && method.getName().equals("getAutoCommit")) return false;
+                          if (armed.get()
+                              && fault.equals("READONLY")
+                              && method.getName().equals("isReadOnly")) return true;
+                          return mdb2604Invoke(method, connection, args);
+                        });
+              },
+              c -> {});
+      subject.execute(
+          credential(),
+          session -> {
+            ready(session, 1);
+            var candidate =
+                fault.equals("FOREIGN_RUN")
+                    ? new BatchRun(
+                        UUID.fromString("26060000-2222-4333-8444-555555555555"), RUN.cutoff())
+                    : RUN;
+            armed.set(true);
+            assertThrows(
+                IOException.class,
+                () -> session.beginExpiry(candidate, NOW.plusSeconds(14), OWNER),
+                fault);
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+          var statement = observer.createStatement();
+          var rows =
+              statement.executeQuery(
+                  "select count(*),count(*) filter(where step='CLEAN_EXPIRY'),count(*) filter(where step like 'BACKUP_%' and status='FAILED'),count(*) filter(where step not like 'BACKUP_%' and step<>'CLEAN_TRANSFER' and status='SKIPPED'),count(*) filter(where step='CLEAN_TRANSFER' and status='SUCCESS'),sum(byte_count),(select count(*) from pg_stat_activity where application_name='schubert-nk-morning-controller' and datname=current_database()),(select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted) from schubert.batch_runs")) {
+        assertTrue(rows.next());
+        assertEquals(9, rows.getLong(1));
+        assertEquals(0, rows.getLong(2));
+        assertEquals(2, rows.getLong(3));
+        assertEquals(6, rows.getLong(4));
+        assertEquals(1, rows.getLong(5));
+        assertEquals(0, rows.getLong(6));
+        assertEquals(0, rows.getLong(7));
+        assertEquals(0, rows.getLong(8));
+        assertFalse(rows.next());
+      }
+    }
+  }
+
   /** PT-MDB2604-001: actual DB handoff guards; literal release facts grant no OS authority. */
   @Test
   void mdb2604001PermitReadbackRequiresBothLocksAndFreshSchemaWithoutChangingRows()
