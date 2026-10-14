@@ -1,5 +1,7 @@
 # 更新POST disabled横展開（BUG1222/YKT988）
 
+実結果v3/session33519 actual0/source411abb597、05:13:07.123431Z→05:14:35.608721Z、96PT/七suite/static0/FES-flaky-rerun0・独立全XML/hash/実case96。Node六case/三100、四template rendered DOM/defer外部script、認証asset GET body及び既CSRF拒否・再送DB後条件を同sourceで検証。依存四moduleはcompile-onlyでPT加点0。公開evidence/operation-post-selected-manifest.json参照。実Browser/新candidate全体/配備/native/CHRは未受入、BUG1222/YKT988全閉鎖0。資産候補04207efc3はMaina79の歴史証跡へ後付けしない。
+
 v2/session63079 actual1/source61ae1e5e4/payloade52e4e67は依存Protocolで選択class不在のNoTests拒否、全JUnit未実行。条件を緩和せず、v3は依存四子moduleをcompile/test-jar/installのみ（Production PT加点0）、Webだけ必須七classで試験する。実User/TargetBusinessControllerを追加して四更新formのrendered DOM marker/defer script、認証済asset GET bodyと既CSRF拒否/再送DB後条件を同sourceで確認する。未実行を合格化0、旧v1/v2を保持。
 
 初回PG2646v1/session46732 actual1/source04207efc3、payload2461ef1c：-amに含まれたaggregator parentにjar:test-jar目標を適用すると、parentで未固定のmaven-jar-plugin解決に失敗しJUnit未実行。旧slot/log/入力を保全。新v2は依存五子moduleを明示-pl、固定された子pluginだけを使用し、同五mandatory consumer/Node/static条件を維持する。製品仕様/期待値変更0。
