@@ -14,7 +14,7 @@ CLASSES = ['OperationPostScriptTest', 'UserAdminControllerTest', 'QuestionContro
 SERVER = r'''
 import datetime,hashlib,json,os,subprocess,tarfile,xml.etree.ElementTree as E
 from pathlib import Path
-os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2646-v1';source=b/'source-web-PG2646';transfer=b/'transfer/PG2646-v1'
+os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2646-v2';source=b/'source-web-PG2646-v2';transfer=b/'transfer/PG2646-v2'
 def require(v):
  if not v:raise ValueError('new-source selected Web update contract refused')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -22,7 +22,7 @@ out.mkdir(mode=0o700);source.mkdir(mode=0o700);archive=transfer/'source.tar';req
 with tarfile.open(archive)as t:t.extractall(source,filter='data')
 inputs={str(p.relative_to(source)):sha(p)for p in source.rglob('*')if p.is_file()}
 env={k:v for k,v in os.environ.items()if k not in('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS')};env['JAVA_HOME']=str(b/'tools/jdk-25.0.4');env['PATH']=env['JAVA_HOME']+'/bin:'+env['PATH'];env['SCHUBERT_PG_ROOT']=str(b/'tools/postgresql18/usr');env['SCHUBERT_SHELLCHECK']=str(b/'tools/shellcheck-0.11.0')
-args=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Dmaven.repo.local='+str(b/'m2/repository'),'-Dnk.pt.repository='+str(source),'-Dnk.pt.node='+str(b/'tools/node-v24.19.0/bin/node'),'-pl','src/schubert-nk-web','-am','-Dtest='+','.join(INPUT['classes']),'-Dsurefire.failIfNoSpecifiedTests=false','clean','spotless:check','test-compile','jar:test-jar','test','spotbugs:check','jacoco:report','jar:jar']
+args=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Dmaven.repo.local='+str(b/'m2/repository'),'-Dnk.pt.repository='+str(source),'-Dnk.pt.node='+str(b/'tools/node-v24.19.0/bin/node'),'-pl','src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web','-Dtest='+','.join(INPUT['classes']),'-Dsurefire.failIfNoSpecifiedTests=false','clean','spotless:check','test-compile','jar:test-jar','test','spotbugs:check','jacoco:report','jar:jar']
 started=datetime.datetime.now(datetime.timezone.utc).isoformat()
 with(out/'maven.private.log').open('xb')as f:r=subprocess.run(args,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=900)
 require(r.returncode==0);module=source/'src/schubert-nk-web';xmls=list((module/'target/surefire-reports').glob('TEST-*.xml'));observed=set();count=0;hashes={}
@@ -44,17 +44,17 @@ def main():
     for name in CLASSES:
         if len(list((ROOT / 'src/schubert-nk-web/src/test/java').rglob(name + '.java'))) != 1:
             raise ValueError('all mandatory selected classes must exist')
-    os.umask(0o077);out=W/'pg2646-operation-post-web-selected-v1';out.mkdir(mode=0o700)
+    os.umask(0o077);out=W/'pg2646-operation-post-web-selected-v2';out.mkdir(mode=0o700)
     head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip();archive=out/'source.tar'
     archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'pom.xml','mvnw','.mvn','src','program/characterization','documents/100_RD','documents/200_UI','documents/300_SS']))
     inputs={'head':head,'archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'classes':CLASSES}
     code='INPUT='+repr(inputs)+'\n'+SERVER;compile(code,'<selected Web update whole namespace>','exec');script=out/'selected.private.py';script.write_text(code)
-    c,_=run('test ! -e '+BASE+'/runs/PG2646-v1 && test ! -e '+BASE+'/source-web-PG2646 && test ! -e '+BASE+'/transfer/PG2646-v1 && mkdir -m700 '+BASE+'/transfer/PG2646-v1',30)
+    c,_=run('test ! -e '+BASE+'/runs/PG2646-v2 && test ! -e '+BASE+'/source-web-PG2646-v2 && test ! -e '+BASE+'/transfer/PG2646-v2 && mkdir -m700 '+BASE+'/transfer/PG2646-v2',30)
     if c:raise ValueError('fresh new-source namespace required')
     for p in (archive,script):
-        c,_=copy(p,BASE+'/transfer/PG2646-v1/',60)
+        c,_=copy(p,BASE+'/transfer/PG2646-v2/',60)
         if c:raise ValueError('immutable candidate source transfer required')
-    c,o=run('python3 -B '+BASE+'/transfer/PG2646-v1/selected.private.py',1000)
+    c,o=run('python3 -B '+BASE+'/transfer/PG2646-v2/selected.private.py',1000)
     (out/'server.private.log').write_text(o);value={'actualExit':c,'candidateSource':head,'payloadSha256':hashlib.sha256(code.encode()).hexdigest(),'formalAccepted':False}
     if not c:value['result']=json.loads(next(x for x in o.splitlines()if x.startswith('{')))
     (out/'manifest.safe.json').write_text(json.dumps(value,sort_keys=True));print(json.dumps(value));return c
