@@ -31,6 +31,90 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2780-001: both resume attempts must be SKIPPED, not a foreign history projection. */
+  @Test
+  void mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit() throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("BACKUP_DB", "BACKUP_CONFIG")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27800001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2051-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 27800010L + n * 10;
+      mdb2480Seed(run, started, id);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      var retained = new AtomicReference<Connection>();
+      var injected = new AtomicInteger();
+      var commits = new AtomicInteger();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var real = DriverManager.getConnection(url, properties);
+                retained.set(real);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          if (method.getName().equals("commit")) commits.incrementAndGet();
+                          Object value = mdb2292Invoke(method, real, args);
+                          if (!method.getName().equals("prepareStatement")
+                              || !((String) args[0])
+                                  .contains("where business_date=? and step=? order by attempt"))
+                            return value;
+                          var statement = (PreparedStatement) value;
+                          var step = new AtomicReference<String>();
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (unusedStatement, called, input) -> {
+                                if (called.getName().equals("setString")
+                                    && Integer.valueOf(2).equals(input[0]))
+                                  step.set((String) input[1]);
+                                Object actual = mdb2292Invoke(called, statement, input);
+                                if (!called.getName().equals("executeQuery")) return actual;
+                                var rows = (ResultSet) actual;
+                                return Proxy.newProxyInstance(
+                                    ResultSet.class.getClassLoader(),
+                                    new Class<?>[] {ResultSet.class},
+                                    (unusedRow, read, columns) -> {
+                                      Object observedValue = mdb2292Invoke(read, rows, columns);
+                                      if (read.getName().equals("getObject")
+                                          && columns[0].equals("run_id")
+                                          && fault.equals(step.get())) {
+                                        injected.incrementAndGet();
+                                        return UUID.fromString(
+                                            "27800002-2222-4333-8444-555555555555");
+                                      }
+                                      return observedValue;
+                                    });
+                              });
+                        });
+              },
+              c -> {});
+      var failure =
+          assertThrows(
+              IOException.class,
+              () -> subject.execute(credential(), s -> s.beginResumeBackup(original, observed)));
+      assertEquals("root batch database unavailable", failure.getMessage());
+      assertEquals(1, injected.get());
+      assertEquals(0, commits.get());
+      assertTrue(retained.get().isClosed());
+      mdb2480SqlRows(run, started, id);
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB-2762-001: original run identity is proved again from actual committed references. */
   @Test
   void mdb2762001PostBeginRejectsForeignRunAndActualLogCutoffDrift() throws Exception {
