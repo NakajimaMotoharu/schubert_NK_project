@@ -7,3 +7,5 @@ PT-MDB2592-001：5業務日の実PGPT隔離DBに既成功原本二rowをliteral 
 command：固定PYTHONPATHでpg2592_successful_pair_selected_test.py→clean source固定→pg2592_successful_pair_selected.py。工具2fixture/javac-Xlint-Werror0/1JUnit5case/FES-aborted-notrun0/MainCRC0/fixture/native不変を要求。実結果未観測、旧full3653/正式1964-53へ件数加算0。group0680着手前予算0.4/1/3pp不変更。
 
 v1/session38362 actual0/TestSourcedd79bec4f/5case・CRC0/javac0、servermanifestbcbf0ece/payloada43aaadb、限定残796/156/9/552。ただしSAME_STEPの粗変異は前段count不一致で拒否されpair同step条件へ未到達。分岐実測を根拠に、両rowをDB/count1へ投影して同step条件を独立確認するv2を追加する。v1を全条件合格へ拡大せず、旧結果と入力を保持し、同methodの重複件数加算0。Production/実DB不変。
+
+v2/session37474 actual0/TestSource00bd3d6eb348afc815db0ac429c04c6710584b54/1PT5case・CRC0/javac0/FES-aborted-notrun0/独立SQL二row不変・client/advisory0、公開successful-pair-manifest-v2。servermanifest5ce25184/payload8e45f71b。未網羅数796/156/9/552はv1と同数で、改善した入力の分岐加点0。初版の他前段拒否成功を同step証拠へ流用せず、最終入力を全回帰へ統合する。
