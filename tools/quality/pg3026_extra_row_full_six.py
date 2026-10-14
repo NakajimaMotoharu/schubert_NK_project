@@ -28,6 +28,8 @@ def server_source(head, digest):
 
 def main():
     raw = inspect.getsource(previous.prior.main).replace('PG2918', 'PG3026').replace('pg2918', 'pg3026').replace('3684', '3685')
+    raw = raw.replace('3680 retained plus one compound Session close and three failed-pair identity/null methods; Main unchanged;542suite1643', '3684 retained plus one independently selected extra-row failed-pair method; Main unchanged;542suite1643')
+    raw = raw.replace('Four independently real-DB methods require one fresh Test-input integration; same a9 Main must independently match actual PG2802 and its native9; no Root/VM replay', 'One independently selected extra-row method requires new3685 integration; same a9 Main must match PG2802 and qualified native; no Root/VM replay')
     ns = {**previous.prior.__dict__, 'validate': validate, 'server_source': server_source}
     exec(compile(raw, '<new seven failedPair integration full campaign>', 'exec'), ns)
     return ns['main']()
