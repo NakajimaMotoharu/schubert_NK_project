@@ -17,7 +17,7 @@
     <h2>質問・回答の削除確認</h2>
     <p class="delete-summary" th:text="${page.values.summary}"></p>
     <div class="operation-errors" role="alert"><p th:each="issue : ${action.issues}" th:text="${issue.value}"></p></div>
-    <form class="delete-form" method="post" th:action="${'/questions/' + page.values.id}">
+    <form class="delete-form" method="post" data-operation-submit th:action="${'/questions/' + page.values.id}">
       <input type="hidden" name="operation" value="DELETE">
       <input type="hidden" name="id" th:value="${action.fields.id}">
       <input type="hidden" name="operation_token" th:value="${action.fields.operation_token}">
@@ -27,4 +27,4 @@
     </form>
   </section>
   <a class="back" href="/questions">質問回答一覧</a>
-</main></body></html>
+</main><script src="/js/operation-post-submit.js" defer></script></body></html>

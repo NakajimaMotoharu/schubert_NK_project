@@ -7,7 +7,7 @@
   <nav><a th:href="@{/admin/users}">User一覧</a></nav>
   <p role="alert" th:if="${!page.values.message.empty}" th:text="${page.values.message}"></p>
   <ul class="validation-summary" th:if="${!page.values.issues.empty}"><li th:each="issue : ${page.values.issues}" th:text="${issue.value}"></li></ul>
-  <form method="post" th:action="@{/admin/users/new}">
+  <form method="post" data-operation-submit th:action="@{/admin/users/new}">
     <input type="hidden" name="operation_token" th:value="${page.values.token}">
     <label>Username<input name="username" required maxlength="64" th:value="${page.values.fields.username}"></label>
     <p class="field-error username-error" th:if="${page.values.issues.containsKey('username')}" th:text="${page.values.issues.username}"></p>
@@ -17,4 +17,4 @@
     <label>有効<select name="enabled"><option value="true" th:selected="${page.values.fields.enabled}">有効</option><option value="false" th:selected="${!page.values.fields.enabled}">無効</option></select></label>
     <button type="submit">作成</button>
   </form>
-</main></body></html>
+</main><script src="/js/operation-post-submit.js" defer></script></body></html>

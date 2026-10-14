@@ -21,7 +21,7 @@
   </dl>
   <p role="alert" th:if="${message != null and !message.empty}" th:text="${message}"></p>
   <section class="user-operations" th:if="${forms != null}">
-    <form th:each="form : ${forms}" method="post" th:action="@{/admin/users/{id}(id=${page.values.id})}" th:attr="data-operation=${form.operation}">
+    <form th:each="form : ${forms}" method="post" data-operation-submit th:action="@{/admin/users/{id}(id=${page.values.id})}" th:attr="data-operation=${form.operation}">
       <input type="hidden" name="operation" th:value="${form.operation}">
       <input type="hidden" name="id" th:value="${form.fields.id}">
       <input type="hidden" name="expected_version" th:value="${form.fields.expected_version}">
@@ -35,4 +35,4 @@
       <button type="submit">実行</button>
     </form>
   </section>
-</main></body></html>
+</main><script src="/js/operation-post-submit.js" defer></script></body></html>

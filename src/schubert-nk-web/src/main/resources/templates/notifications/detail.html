@@ -20,7 +20,7 @@
   <p class="operation-notice" role="alert" th:if="${notice != null and !notice.empty}" th:text="${notice}"></p>
   <section class="cancel-confirm" th:if="${action != null}">
     <div class="operation-errors" role="alert"><p th:each="issue : ${action.issues}" th:text="${issue.value}"></p></div>
-    <form class="cancel-form" method="post" th:action="${'/notifications/' + page.values.id}">
+    <form class="cancel-form" method="post" data-operation-submit th:action="${'/notifications/' + page.values.id}">
       <input type="hidden" name="operation" value="CANCEL">
       <input type="hidden" name="id" th:value="${action.fields.id}">
       <input type="hidden" name="operation_token" th:value="${action.fields.operation_token}">
@@ -30,4 +30,4 @@
     </form>
   </section>
   <a class="back" href="/notifications">通知一覧へ戻る</a>
-</main></body></html>
+</main><script src="/js/operation-post-submit.js" defer></script></body></html>
