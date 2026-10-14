@@ -11,6 +11,15 @@ import pg2642_wire_oracle_native_qualified as bridge
 
 
 class Factories(unittest.TestCase):
+    def test_historical_embedded_binding_would_shadow_explicit_new_input(self):
+        before=bridge.server()
+        names=[]
+        for node in ast.parse('OLD_JARS={}\n'+before).body:
+            if isinstance(node,ast.Assign):
+                names.extend(t.id for t in node.targets if isinstance(t,ast.Name))
+        self.assertEqual(2,names.count('OLD_JARS'))
+        # This is a namespace reproduction only, never old stream acceptance or a JVM run.
+
     def test_reason_is_current_group_before_any_dispatch(self):
         captured=[]
         def constants(code):

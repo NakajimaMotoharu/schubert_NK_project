@@ -35,3 +35,9 @@ command=pg2740_backup_pending_selected.py、初期未実行、Main変更/VM/DB/B
 ## 必要な変更群統合
 
 新三method（独立十入力・保持四入力・pending21入力）を一回のfresh全六moduleへ統合する。期待3669PT/541suite/1643Main/static六0、同source入力/終了code/全XML-case/coverage/静的をPG2744/2745で照合。先行PG2694/3666は前Test sourceとして保持、新三methodへ後付けしない。Actual新A01一結果だけの変更を独立固定Current hash/DIFで許可、Production/資産はSource042のまま。全回帰成功後だけ保持当新native九streamを全Main/resource byte同値で再資格する。VM再起動/再採取/業務再発行なし。統合初期状態=未実行、K01.01主担当・P01705参照費0。
+
+実統合完了：frozen94cb6139a/archivef84cf488、PG2744/session12367 actual0/08:00:19.047169Z～08:26:36.996724Z/1577.949555秒、独立2745/session22720 actual0、3669PT/541suite/1643Main/FESflaky0/静的六module0。Batch1269/172、他五件数保持。物理七差（意味六・NativeIo debug一）と全三Test wholefile hash/固定A01結果を照合。sourceSnapshotは新三Testを含む94cb、Productionは042のまま。
+
+新native v1は祖先OLD_JARS shadowでactual1、BUG1249/YKT1015を修正前起票・全log保持。是正e6621abef/完成namespace六single binding/三pure fixture/static0、別PG2746-native-v2/session58634 actual0、全1643Main/resource全member同値（META除外0）、当九stream十point CRC-session0・旧native輸入0/VM再採取0。fresh fullへ接続した実残L788/M156/C9/B532、B542→追加10。full server6ebffe6b/native servercb4a15c2、公開 `evidence/provisional/PG2744-backup-admission-full-native/manifest.json`。三追加Testは全freshXMLの各methodへ一意joinして保存、35入力の通常/境界/異常/owner-drift/資源後条件を保持。whole class/global四100は別未達。
+
+BUG1248/YKT1014の旧begin stale explanationは元begin SHA caa1747eを改変せず、発行前event0723と当全終端/XMLへ訂正sidecarを付与。数値/入力/処理は不変、説明だけの全回帰反復0。工具障害は完了、全leaf/正式/QA051 finalL01/実BrowserYKT988は別未完。次の残件はPG2748の当gaps100class-entry/18主担当・method/line対応から選ぶ。PG2748初回は呼出しPYTHONPATHのpyflakes runtime欠落で未dispatch拒否、正規runtime付き再実行actual0、新scope/成果加点0。
