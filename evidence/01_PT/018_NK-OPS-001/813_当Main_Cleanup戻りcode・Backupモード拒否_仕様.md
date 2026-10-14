@@ -5,3 +5,5 @@ NK-OPS-001/MorningDatabaseSession.Session.observeCleanup/observeCleanupRejected�
 工具共通IsolatedJdbcSelectedLauncherはPGPT工具のみ、今回のclass/methodを固定payload literalに持ち、許容class・method文字を検査し、1JUnit/FES-aborted-notrun0/新XMLに固定。Production source/argv/起動・permit portを追加せず、同名launcherの反復作成費を削減する。全既source/工具は歴史保存、除外設定変更0。
 
 command固定PYTHONPATH pg2610_cleanup_readback_selected_test.py→clean固定→pg2610_cleanup_readback_selected.py。二工具fixture/javac-Xlint-Werror0/MainCRC0/現3657/native九/選択2604-2606-2608 exec/hash同資格、旧source/native輸入0。実未発行、旧全3657/正式1964-53へ加算0、VM/Root/Backup/ADMIN/stop再演0。
+
+実session85248 actual0/TestSource97a3a8f546b3a7fa1668b58ed8ac24cc82af89fc/1PT5case、payload56def7fb/servermanifest6afcbcca、公開permit-expiry-cleanup-selected-manifest参照。MainCRC0/javac0/独立九row・Expiry0・Connection/client/advisory0。残788/156/9/545、前789/156/9/547から1line2branch追加。group0686は現unique四method15case/6line6branch追加、旧full3657へ件数加算0。追加境界をまとめ必要群統合を行う。
