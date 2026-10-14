@@ -1,6 +1,24 @@
 {
   "source": "a79b45b5858a186fa82bec1ff36882271ab996a4",
   "qualifiedFullBase": "PG2600/2601/2602;3657PT/540suite/1643Main",
+  "programId": "NK-OPS-001",
+  "branch": "dev-foundation",
+  "environment": {
+    "os": "Linux 7.0.0-38-generic x86_64 GNU/Linux",
+    "jdk": "OpenJDK 25.0.4+7-1-26.04-Ubuntu",
+    "node": "v24.19.0",
+    "versionEvidence": "pinned LAN read-only uname/java --version/node --version exit0; post-run unchanged toolchain, not original per-run version capture"
+  },
+  "testClass": "dev.codex.schubert.nk.batch.repository.MorningExpirySessionTest",
+  "executionMetadata": [
+    {"run":"PG2604","testId":"PT-MDB2604-001","method":"mdb2604001PermitReadbackRequiresBothLocksAndFreshSchemaWithoutChangingRows","startUTC":"2026-10-14T03:20:32.792373+00:00","endUTC":"2026-10-14T03:20:45.768903+00:00","xmlSha256":"d358bde32a857d356932179e219af80d8d766d322c80b340b3a0a0c8b5fc7c0e","execSha256":"f4a937eca10db8d1099e6c6952f88dc54cbac0dc5060f412a2a58318a2fc2ba0","commandsSha256":"52f831034349e5abba07de8aca48528cffade8482e74b881018a4de04d2501c2"},
+    {"run":"PG2606","testId":"PT-MDB2606-001","method":"mdb2606001ExpiryAdmissionRejectsForeignRunAndTransactionDriftBeforePublishing","startUTC":"2026-10-14T03:23:06.072341+00:00","endUTC":"2026-10-14T03:23:18.493558+00:00","xmlSha256":"6a30502a7ea577457a4755e22114489007483f29e484d2aff3b8c684a90c7fc9","execSha256":"e70a34053446b5a20eced244cf432df30c4c3cee81892be1c011088dca4c0ade","commandsSha256":"de39706a92a0a6fabe51507f22343f20e3ae535dde533a2d27feba9d757a560d"},
+    {"run":"PG2608","testId":"PT-MDB2608-001","method":"mdb2608001ExpiryHandoffRejectsTransactionUnlockAndReacquireFailure","startUTC":"2026-10-14T03:26:19.651018+00:00","endUTC":"2026-10-14T03:26:33.155441+00:00","xmlSha256":"9bdee2e828b4b757bc4081042ac6d69a9c557a3aaa264bd16dd2a53131f0753b","execSha256":"2cfe37755de85a1780d25c5c465809eeb46dfe022fd2a377c7db8e40f1ee166d","commandsSha256":"3e0fb45821fef441c416e4d9d348e81fe634f50b6bdf218199a323f11c18f6d1"},
+    {"run":"PG2610","testId":"PT-MDB2610-001","method":"mdb2610001CleanupReadbackRejectsDbDriftReceiptAndBackupModeWithoutMutation","startUTC":"2026-10-14T03:29:07.707010+00:00","endUTC":"2026-10-14T03:29:20.542549+00:00","xmlSha256":"d5cb43eb6bf5094e8644f1b050ef2a7cea3204596cbf1b3d91eb7c929750f318","execSha256":"181027bb281836c6cbd5caf75bc11753de17a2925f922b9f78ae16d77416897b","commandsSha256":"b5afab44ec79b3bf377051f8d62c6b52df38d7bbb0b61b4a52bc4778ac973248"},
+    {"run":"PG2612","testId":"PT-MDB2612-001","method":"mdb2612001CleanupReferencesRejectDriftAndForgedSnapshotWithoutChangingRows","startUTC":"2026-10-14T03:33:28.555584+00:00","endUTC":"2026-10-14T03:33:42.135164+00:00","xmlSha256":"26c9f52255c5c16b5bd376f8e1a12a7baed72c580d116e23c3dbf2c89e68148f","execSha256":"9749ad4ed80d315da979754789da848a0fe0b24d0f4ee4303f283abeec97245b","commandsSha256":"07729e32a014dc09ac2f7a14bedb6d392595773259cb144ce3062a54f435bcec"},
+    {"run":"PG2614","testId":"PT-MDB2614-001","method":"mdb2614001ExpiryReadbackRejectsRunningWrongTargetAndDbDriftWithoutMutation","startUTC":"2026-10-14T03:35:17.269527+00:00","endUTC":"2026-10-14T03:35:30.562085+00:00","xmlSha256":"d86d592528ad389b3ebc59384d9cf686a1ae3788e6458619f60dac1008b1895c","execSha256":"509616b50fac4047c43b76fbb52f91e1d886ce40ac7a01238195173512338f09","commandsSha256":"939a52fa689dc469cd66534f69f9cb5380cb4609bae654c728b975afaae81dfb"}
+  ],
+  "commandReproduction": "PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/<run-specific selected script>.py; specs810..815 bind exact script/input/oracle; actual commands hashes from retained server manifests",
   "actualExit": 0,
   "newUniqueMethods": 6,
   "uniqueCases": 25,
