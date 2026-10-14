@@ -32,6 +32,10 @@ class GroupedFull(unittest.TestCase):
             self.assertIn(marker, raw)
         self.assertIn('pg2562-strict-current-native-catalog-v1', native.source())
         self.assertIn('pg2579-current-jdbc-group-full-qualified-v1', native.source())
+        self.assertNotIn('SSH+', native.source())
+        self.assertIn('pg2564-strict-current-native-qualified-v1', native.source())
+        self.assertIn('all1643MainMembersIdentical', raw)
+        self.assertIn('images[0]==images[1]', raw)
 
 
 if __name__ == '__main__':
