@@ -1,5 +1,7 @@
 # Backup再観測・空状態拒否の独立PT仕様
 
+実PG2784/Test3e3f5260b/session13716 actual0、一JUnit/三入力/FES-aborted-notRun0/javac0、2786/session74407独立XML-case/hash/全coverage/Main mismatch0 actual0。observeBackup B31covered/1missed/L41M1全0、beginResumeBackup B6covered/2missed/L23全0、追加3branch/1line、限定union残785/156/9/526。残inHandoff重複guardは既先行guard拒否実証のまま除外/人工到達0。XML0bfd6436989580f5388cac542e1b4a0427ea15a59e04284c6d203616bfc0d717、execa eccは空白なしの `aecc8d5a51f3ed01c6ed8fdc3ac81d56ce282109a737914da37957ade2b8ad96`、server manifest49364ed2098a83981a617870d539a1f78df63ba5be2c6efd74222b5ac19dc5b7。未統合結果を正式/他selectedへ手計算加算0。
+
 PT-MDB-2784-001、NK-BAT-001、Session.beginResumeBackup968/observeBackup680及び689、MorningDatabaseSessionTest.mdb2784001EmptyBackupReinspectionCannotAuthorizeResumeOrObservation / mdb2784Subject。主担当WBS-P017-01、RD BAK/OPS009/DAT009、UI251/253、SS331/332/341/343/SSC116/134/451。開始.5/1.5/4ppはevent0737。
 
 隔離実PG/DDLs、三入力BEGIN_RESUME/SKIPPED_OBSERVE/FAILED_OBSERVE。固定run27840001/2051-03-09T15Z＋日差。最初二modeは逆順原SUCCESS二行(target/success1/2、26/67bytes、終了+3秒)を保持、SKIPPED modeでは当SKIPPED二行を実commit＋completeReusedBackup。FAILED modeは実begin＋COMMAND_FAILURE二FAILED(target1-success0-failure1-byte0)をcommit。

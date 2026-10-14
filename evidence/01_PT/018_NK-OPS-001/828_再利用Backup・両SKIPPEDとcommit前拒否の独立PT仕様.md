@@ -1,5 +1,7 @@
 # 再利用Backup・両SKIPPEDとcommit前拒否の独立PT仕様
 
+実PG2780/Test7503293ca/session17120 actual0、一JUnit/二入力/FES-aborted-notRun0/javac0、2782独立XML-case/hash/全coverage/Main mismatch0 actual0。beginResumeBackup B7covered/1missed/L22covered/1missed/M1covered、追加2branch・限定union残786/156/9/527。後段empty inspectionは別2784で試す。XML e890ed17188ccf8fafbe126e1b7826c3aa67386b380f86825cc15631d36c3472、execbb4200e6a93d8540e4103b8d6ae4cc5017ad5c2e2f2be385269c28784c07f4d4、server manifestc5ed9e6f8a49ee89d5192e728628af88c5e9bf919d561b346ea7f81f2ba38d0f。未統合結果を正式/他selectedへ手計算加算0。
+
 PT-MDB-2780-001、NK-BAT-001、MorningDatabaseSession.Session.beginResumeBackup/mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit。主担当WBS-P017-01、RD BAK/OPS009/DAT009、UI251/253、SS331/332/341/343/SSC116/134/451。実method974のDB/CONFIG skipped=false二条件・throw line969以降の別原因を着手前照合。開始.25/.75/2ppはevent0736固定。
 
 隔離実PG/DDLs、二入力BACKUP_DB/BACKUP_CONFIG。固定run27800001/2051-02-09T15Z＋日差、原SUCCESS二行のtarget/success1/2・26/67bytes・終了+3秒を実SQLでseedし、literal manifestを構築。親同接続のsuccessfulBackup/manifest inspectは実原本を通し、Repo HISTORYの対象stepだけrun_idを別UUIDへ投影する（他値/原DB事実は変更なし）。これにより選ばれたstepの新attemptはRUNNING、他stepはSKIPPEDとして実transaction内にINSERTされるが、両SKIPPEDでないためRootはIOException/公開固定文言でcommit前に拒否。注入回数1/commit呼出0、親のrollback/close後に独立SQLが原二SUCCESS全列だけを確認し、新attempt0/client-advisory解放を確認。
