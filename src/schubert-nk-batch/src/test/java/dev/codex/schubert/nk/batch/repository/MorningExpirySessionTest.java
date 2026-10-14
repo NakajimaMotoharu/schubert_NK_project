@@ -30,6 +30,170 @@ final class MorningExpirySessionTest {
   static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z");
   static final MaintenanceOwnerFrame.Guard OWNER = () -> 30_000_000_000L;
 
+  /** PT-MDB2604-001: actual DB handoff guards; literal release facts grant no OS authority. */
+  @Test
+  void mdb2604001PermitReadbackRequiresBothLocksAndFreshSchemaWithoutChangingRows()
+      throws Exception {
+    for (String fault : List.of("VALID", "INITIAL_HELD", "FINAL_HELD", "SCHEMA_SQL")) {
+      reset();
+      var armed = new java.util.concurrent.atomic.AtomicBoolean();
+      var heldReads = new java.util.concurrent.atomic.AtomicInteger();
+      var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
+      var facts =
+          new dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.DatabaseInspection(
+              new dev.codex.schubert.nk.bootstrap.StartupReleaseManifest.Contents(
+                  "PUBLIC", "a".repeat(64), List.of(), Map.of(), Map.of()),
+              List.of(),
+              Map.of());
+      MorningDatabaseSession.Schema schema =
+          new MorningDatabaseSession.Schema() {
+            public void verify(Connection connection) {}
+
+            public dev.codex.schubert.nk.batch.platform.RootReleaseAdmission.DatabaseInspection
+                inspect(Connection connection) throws SQLException {
+              if (fault.equals("SCHEMA_SQL"))
+                throw new SQLException("isolated schema refusal", "08006");
+              return facts;
+            }
+          };
+      var subject =
+          new MorningDatabaseSession(
+              url,
+              () -> {},
+              (address, properties) -> {
+                var connection = DriverManager.getConnection(address, properties);
+                retained.set(connection);
+                return (Connection)
+                    java.lang.reflect.Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object result = mdb2604Invoke(method, connection, args);
+                          if (!armed.get()
+                              || !method.getName().equals("prepareStatement")
+                              || !((String) args[0]).contains("pg_locks")) return result;
+                          var statement = (PreparedStatement) result;
+                          return java.lang.reflect.Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (unusedStatement, called, inputs) -> {
+                                Object value = mdb2604Invoke(called, statement, inputs);
+                                if (!called.getName().equals("executeQuery")) return value;
+                                var rows = (ResultSet) value;
+                                return java.lang.reflect.Proxy.newProxyInstance(
+                                    ResultSet.class.getClassLoader(),
+                                    new Class<?>[] {ResultSet.class},
+                                    (unusedRows, read, columns) -> {
+                                      if (read.getName().equals("getObject")
+                                          && columns[0].equals("value")) {
+                                        int n = heldReads.incrementAndGet();
+                                        if ((fault.equals("INITIAL_HELD") && n == 1)
+                                            || (fault.equals("FINAL_HELD") && n == 2)) return false;
+                                      }
+                                      return mdb2604Invoke(read, rows, columns);
+                                    });
+                              });
+                        });
+              },
+              schema);
+      subject.execute(
+          credential(),
+          session -> {
+            ready(session, 1);
+            session.beginExpiry(RUN, NOW.plusSeconds(14), OWNER);
+            session.handoffExpiry(() -> Boolean.TRUE);
+            String before;
+            try {
+              before = mdb2604Rows();
+            } catch (SQLException failure) {
+              throw new IOException("isolated SQL precondition unavailable", failure);
+            }
+            armed.set(true);
+            if (fault.equals("VALID")) {
+              var value = session.inspectPermitDatabase(OWNER);
+              assertEquals("schubert_batch", value.loginRole());
+              assertEquals("schubert_batch", value.effectiveRole());
+              assertEquals("schubert_nk", value.database());
+              assertTrue(value.autoCommit());
+              assertFalse(value.jdbcReadOnly());
+              assertEquals(Connection.TRANSACTION_READ_COMMITTED, value.isolation());
+              assertFalse(value.recovery());
+              assertTrue(value.advisoryHeld());
+              assertSame(facts, value.release());
+              assertEquals(2, heldReads.get());
+            } else
+              assertThrows(IOException.class, () -> session.inspectPermitDatabase(OWNER), fault);
+            try {
+              assertEquals(before, mdb2604Rows());
+            } catch (SQLException failure) {
+              throw new IOException("isolated SQL postcondition unavailable", failure);
+            }
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+          var statement = observer.createStatement();
+          var rows =
+              statement.executeQuery(
+                  "select (select count(*) from pg_stat_activity where application_name='schubert-nk-morning-controller' and datname=current_database()),(select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted)")) {
+        assertTrue(rows.next());
+        assertEquals(0, rows.getLong(1));
+        assertEquals(0, rows.getLong(2));
+        assertFalse(rows.next());
+      }
+    }
+  }
+
+  private static Object mdb2604Invoke(java.lang.reflect.Method method, Object target, Object[] args)
+      throws Throwable {
+    try {
+      return method.invoke(target, args);
+    } catch (java.lang.reflect.InvocationTargetException failure) {
+      throw failure.getCause();
+    }
+  }
+
+  private static String mdb2604Rows() throws SQLException {
+    try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+        var statement =
+            observer.prepareStatement(
+                "select step,attempt,status,started_at,ended_at,target_count,success_count,failure_count,byte_count,error_code,error_summary from schubert.batch_runs where run_id=? order by step")) {
+      statement.setObject(1, RUN.id());
+      try (var rows = statement.executeQuery()) {
+        var actual = new ArrayList<String>();
+        for (String step :
+            List.of(
+                "BACKUP_CONFIG",
+                "BACKUP_DB",
+                "CLEAN_BATCH_RUN",
+                "CLEAN_EXPIRY",
+                "CLEAN_INBOX_OUTBOX",
+                "CLEAN_LOG",
+                "CLEAN_NOTIFICATION",
+                "CLEAN_QUESTION",
+                "CLEAN_SESSION",
+                "CLEAN_TRANSFER")) {
+          assertTrue(rows.next());
+          assertEquals(step, rows.getString("step"));
+          assertEquals(1, rows.getInt("attempt"));
+          assertEquals(
+              step.startsWith("BACKUP_")
+                  ? "FAILED"
+                  : step.equals("CLEAN_EXPIRY")
+                      ? "RUNNING"
+                      : step.equals("CLEAN_TRANSFER") ? "SUCCESS" : "SKIPPED",
+              rows.getString("status"));
+          assertEquals(0, rows.getLong("byte_count"));
+          var fields = new ArrayList<String>();
+          for (int i = 1; i <= 11; i++) fields.add(rows.getString(i));
+          actual.add(fields.toString());
+        }
+        assertFalse(rows.next());
+        return actual.toString();
+      }
+    }
+  }
+
   @BeforeAll
   static void start() throws Exception {
     db = new BatchDatabaseFixture(root);
