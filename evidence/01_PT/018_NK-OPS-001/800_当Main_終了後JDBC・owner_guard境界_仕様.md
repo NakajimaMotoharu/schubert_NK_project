@@ -1,5 +1,9 @@
 # PG2570 終了後JDBC/owner再認証
 
+## 初回新oracle構築失敗
+
+v1/testSource8a46a6569 actual1、payloada87320ad、JUnit失敗IOException/execute497を保持。新oracleが拒否後に同callbackでsnapshot再取得まで要求したが、owner例外後の未完transactionはouter closeで回収する契約であり再授権を仮定しない。正常snapshotを注入前に独立値確認し、拒否後はliteral SQL不変とouter close/client/advisory0だけを確認するv2へ是正。Production/業務期待値の変更0、旧v1を合格0、v2未実行。
+
 NK-OPS-001/MorningDatabaseSession.Session.failedBackupSnapshot/observeBackup/recheckConsistent、SS341/343/353/354、WBS-P017-01.03・0670群subset/追加予算0。既2568同Main入力・独立実結果digestから資格されたselected execだけを参照し、当fullPG2510/最新9native/hashと六Jar全等価を要求する。
 
 PT-MDB2570-001：実隔離PostgreSQLに12独立業務日/runを作り、実FAILED/COMMAND_FAILURE pairを完成。各guardにautocommit=false、readOnly=true、isolation=SERIALIZABLE（snapshotのみ）、SQLException、owner IOException（owner契約有り二操作のみ）を注入。全12caseでIOExceptionと注入実行を確認。armed解除後は実snapshotのid/run/start/endとliteral SQL pair全値、Connection閉鎖・全client/advisory0を確認。異常を成功読替え0、production expected生成0、DB書換えで期待を合わせない。

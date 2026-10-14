@@ -99,6 +99,10 @@ final class MorningDatabaseSessionTest {
                       0,
                       BatchStepResult.Reason.COMMAND_FAILURE);
               session.failBackup(begins, ended, failure, failure);
+              var baseline = session.failedBackupSnapshot(begins, () -> 10_000_000_000L);
+              assertEquals(begins.database(), baseline.database());
+              assertEquals(begins.configuration(), baseline.configuration());
+              assertEquals(ended, baseline.endedAt());
               armed.set(true);
               dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard owner =
                   () -> {
@@ -126,10 +130,8 @@ final class MorningDatabaseSessionTest {
               assertTrue(injected.get(), operation + ":" + fault);
               // Independent actual SQL must still expose the same committed terminal pair.
               mdb2292Rows(run, "FAILED", started, Optional.of(ended));
-              var snapshot = session.failedBackupSnapshot(begins, () -> 10_000_000_000L);
-              assertEquals(begins.database(), snapshot.database());
-              assertEquals(begins.configuration(), snapshot.configuration());
-              assertEquals(ended, snapshot.endedAt());
+              // Failed callbacks may leave a transaction pending; do not mint renewed authority.
+              // The outer execute closes it, and independent SQL/resource post is mandatory.
               return Boolean.TRUE;
             });
         assertTrue(retained.get().isClosed());

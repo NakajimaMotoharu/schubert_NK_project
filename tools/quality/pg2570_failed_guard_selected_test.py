@@ -13,7 +13,7 @@ class FinalGuardSelection(unittest.TestCase):
     def test_fresh_one_test_and_prior_exec_have_exact_full_jar_authority(self):
         raw = server()
         ast.parse(raw)
-        for marker in ['PG2570-selected-v1', 'Pg2570FailedGuardLauncher', 'PG2568-selected-v2',
+        for marker in ['PG2570-selected-v2', 'Pg2570FailedGuardLauncher', 'PG2568-selected-v2',
                        "prior['input']['full']['jarHashes']==INPUT['full']['jarHashes']",
                        "sha(prior_exec)==prior['execSha256']", '*hosts,*native_streams,str(prior_exec),str(execfile)',
                        "'tests':'1'", 'freshIsolatedPostgres', 'source-full-PG2510']:
