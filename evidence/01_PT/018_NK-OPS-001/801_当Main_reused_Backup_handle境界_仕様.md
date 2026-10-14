@@ -1,5 +1,9 @@
 # PG2572 reused Backup handle整合性
 
+## v3実結果
+
+actual0/testSource3ff47d1b43783511dff44209679c2d45491998c0/payload06b5e19c/server2dac6dd0、限定1PT/5case/FES-aborted-notrun0/javac warnings0/全Main CRC0/VM操作0。全4row/原本/Connection/client/advisory後条件成功、当2branch追加・残L799/M156/C9/B559。公開reused-pair-manifest-v3.json。旧v1/v2失敗は保持合格0、全体/正式/leafは未完。
+
 v2/testSourcec251e8580 actual1/payload623876d0は異なる例外ClassのconditionalとJUnit generic assertThrows型推論がjavac拒否、PT未実行。v3はThrowable捕捉後にliteral例外型を必須assertInstanceOf、STALEの固定messageも検証し、型の範囲を緩めない。v1/v2失敗・logを保持、合格0。新試験構築だけの是正、Production/上位資料変更0。
 
 ## 初回新期待例外の構築失敗

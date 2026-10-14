@@ -140,9 +140,11 @@ final class MorningDatabaseSessionTest {
       throws Exception {
     int ordinal = 0;
     for (String operation : List.of("SNAPSHOT", "OBSERVE", "RECHECK")) {
-      for (String fault : List.of("AUTOCOMMIT", "READONLY", "ISOLATION", "SQL", "OWNER")) {
+      for (String fault :
+          List.of("AUTOCOMMIT", "READONLY", "ISOLATION", "SQL", "OWNER", "HELD", "FINAL_HELD")) {
         if (!operation.equals("SNAPSHOT") && fault.equals("ISOLATION")) continue;
         if (operation.equals("RECHECK") && fault.equals("OWNER")) continue;
+        if (operation.equals("RECHECK") && fault.equals("FINAL_HELD")) continue;
         int n = ++ordinal;
         var run =
             new BatchRun(
@@ -152,6 +154,7 @@ final class MorningDatabaseSessionTest {
         var ended = started.plusSeconds(3);
         var armed = new AtomicBoolean();
         var injected = new AtomicBoolean();
+        var heldReads = new AtomicInteger();
         var retained = new AtomicReference<Connection>();
         var subject =
             new MorningDatabaseSession(
@@ -185,7 +188,37 @@ final class MorningDatabaseSessionTest {
                                 throw new SQLException("public final guard unavailable", "08006");
                               }
                             }
-                            return mdb2292Invoke(method, connection, args);
+                            Object actual = mdb2292Invoke(method, connection, args);
+                            if (!armed.get()
+                                || !(fault.equals("HELD") || fault.equals("FINAL_HELD"))
+                                || !method.getName().equals("prepareStatement")
+                                || !((String) args[0])
+                                    .contains("select exists(select 1 from pg_catalog.pg_locks"))
+                              return actual;
+                            var statement = (PreparedStatement) actual;
+                            return Proxy.newProxyInstance(
+                                PreparedStatement.class.getClassLoader(),
+                                new Class<?>[] {PreparedStatement.class},
+                                (unusedStatement, called, input) -> {
+                                  Object real = mdb2292Invoke(called, statement, input);
+                                  if (!called.getName().equals("executeQuery")) return real;
+                                  var rows = (ResultSet) real;
+                                  return Proxy.newProxyInstance(
+                                      ResultSet.class.getClassLoader(),
+                                      new Class<?>[] {ResultSet.class},
+                                      (unusedRow, read, columns) -> {
+                                        Object observed = mdb2292Invoke(read, rows, columns);
+                                        if (read.getName().equals("getObject")
+                                            && columns[0].equals("value")) {
+                                          int index = heldReads.incrementAndGet();
+                                          if (fault.equals("HELD") || index == 2) {
+                                            injected.set(true);
+                                            return false;
+                                          }
+                                        }
+                                        return observed;
+                                      });
+                                });
                           });
                 },
                 c -> {});
@@ -242,7 +275,7 @@ final class MorningDatabaseSessionTest {
         mdb2292NoOwnerResources();
       }
     }
-    assertEquals(12, ordinal);
+    assertEquals(17, ordinal);
   }
 
   /** PT-MDB2568-001: actual abandoned rows, independent per-component readback refusal. */
