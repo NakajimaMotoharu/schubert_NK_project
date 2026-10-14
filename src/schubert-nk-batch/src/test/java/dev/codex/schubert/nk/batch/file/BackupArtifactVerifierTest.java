@@ -19,6 +19,66 @@ import org.junit.jupiter.api.io.TempDir;
 final class BackupArtifactVerifierTest {
   @TempDir Path temporary;
 
+  /** PT-BAK-2740-001: pending163/171/182/188/229, independent inode/UID races. */
+  @Test
+  void backup2740001PendingRejectsEveryAdmissionDriftAndKeepsAllPublicBytes() throws Exception {
+    var request =
+        new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+            UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
+            java.time.Instant.parse("2026-09-12T15:00:02Z"));
+    for (String bad :
+        List.of(
+            "nonroot",
+            "childDevice",
+            "negativeSize",
+            "captureDrift",
+            "fileDevice",
+            "parentDrift",
+            "lateNonroot")) {
+      for (String selected : List.of("schubert_nk.dump", "config.tar", "credentials.tar.age")) {
+        try (var f = fixture()) {
+          Files.delete(f.child.resolve("MANIFEST.json"));
+          Path pending = f.parent.resolve(DIR + ".part");
+          Files.move(f.child, pending);
+          Map<String, byte[]> before = new HashMap<>();
+          for (String name : List.of("schubert_nk.dump", "config.tar", "credentials.tar.age"))
+            before.put(name, Files.readAllBytes(pending.resolve(name)));
+          var parentReads = new AtomicInteger();
+          var fileReads = new AtomicInteger();
+          if (bad.equals("nonroot")) f.effective = 1;
+          f.metadata =
+              (role, values) -> {
+                if (role.equals("parent") && parentReads.incrementAndGet() == 2) {
+                  if (bad.equals("parentDrift")) values.put("ino", (Long) values.get("ino") + 1);
+                  if (bad.equals("lateNonroot")) f.effective = 1;
+                }
+                if (bad.equals("childDevice") && role.equals(DIR + ".part"))
+                  values.put("dev", (Long) values.get("dev") + 1);
+                if (role.equals(selected)) {
+                  int count = fileReads.incrementAndGet();
+                  if (bad.equals("negativeSize")) values.put("size", -1L);
+                  if (bad.equals("fileDevice")) values.put("dev", (Long) values.get("dev") + 1);
+                  if (bad.equals("captureDrift") && count == 2)
+                    values.put("ino", (Long) values.get("ino") + 1);
+                }
+              };
+          var error =
+              assertThrows(StorageIoException.class, () -> f.verifier().observePending(request));
+          assertEquals(StorageIoException.Reason.UNAVAILABLE, error.reason(), bad + selected);
+          assertNull(error.getCause());
+          for (var value : before.entrySet())
+            assertArrayEquals(
+                value.getValue(), Files.readAllBytes(pending.resolve(value.getKey())));
+          assertFalse(Files.exists(pending.resolve("MANIFEST.json")));
+          if (bad.equals("captureDrift")) assertEquals(2, fileReads.get());
+          if (bad.equals("parentDrift") || bad.equals("lateNonroot"))
+            assertEquals(2, parentReads.get());
+          f.released();
+        }
+      }
+    }
+  }
+
   @Test
   void pendingContentUsesIndependentLiteralHashesWithoutGrantingSuccess() throws Exception {
     var request =

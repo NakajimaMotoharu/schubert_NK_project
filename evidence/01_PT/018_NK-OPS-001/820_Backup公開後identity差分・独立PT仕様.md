@@ -19,3 +19,13 @@ BackupArtifactVerifier.retentionSizesAgree、BackupRetentionBoundaryTest.backup2
 初回v1/session73077、Test source296259737、actual0/一JUnit/三入力/FES0/javac warning0、server manifest b083b306b565abcc1db95fee361bdd1a1c82ef5437a00437e5f33997501d76e2、host-only残branch869→867/増加2・Main不変更。parent inode差分は既網羅済みの補強。行314の未網羅はparent一致ではなく、その次の終了時effectiveUID検査と訂正する（元event0720は保持）。
 
 v2はlateNonrootを追加：二回目parent metadata読取時だけeffectiveUIDを1へ変え、正常metadataなのに終了時UID再認証でUNAVAILABLEを期待、parent二読を確認、bytes不変/handle解放。四入力/一JUnit、別new-only PG2736-selected-v2、初期状態=未実行。v1の成功をv2へ流用0。method/line単位と一意XML/hashを確認し、class/global100は別判定。新障害なし。
+
+v2/session65821 actual0、Test4cfa1aa15、PG2738/session9733独立actual0、XML8c9bbb24/execadf44285/server49e34b79、retentionSizesAgree L20/M1/B4 miss0・host869→866/追加3branch。v1増加2とv2増加3を合計5へ加算しない。native unionは未統合、全PGPT/formalは別未完。
+
+## PT-BAK-2740-001 pending bundle admission
+
+BackupArtifactVerifier.observePending / BackupArtifactVerifierTest.backup2740001PendingRejectsEveryAdmissionDriftAndKeepsAllPublicBytes。当source gap163/171/182/188/229と実sourceを着手前照合。固定run/開始日時から既公開fixtureを`.part`へ配置、MANIFEST無し・三archive bytesを独立事前保存。
+
+nonroot、child device差、file負size、raw→capture inode差、file device差、parent二読inode差、終了UID差の七種を三file roleごとに計21入力。各UNAVAILABLE/cause無し、全三file bytes不変、MANIFEST生成なし、全handle解放。inode raw→captureは正確に二読で拒否、parent差/終了UIDは正確に二読まで到達を確認。期待はSS343の所有/device/保持inode再認証、期待生成にProduction methodなし。既正常のliteral三hash/未知・欠落/null/例外試験を維持。fixtureの`.part` directory roleは実held FDの末尾名（DIR+.part）を使用し、final名roleのchildへ誤接続しない。
+
+command=pg2740_backup_pending_selected.py、初期未実行、Main変更/VM/DB/Backup操作なし。Testと工具を固定後、実XML/入力hash/coverageと静的を独立確認する。既group全体認定/人工native加点0。
