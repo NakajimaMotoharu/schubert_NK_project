@@ -31,6 +31,90 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2750-001: same callback cannot observe a pair during advisory handoff. */
+  @Test
+  void mdb2750001BackupObservationRejectsInHandoffBeforeJdbcAndPreservesFailedPair()
+      throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("27500001-2222-4333-8444-555555555555"),
+            Instant.parse("2050-01-09T15:00:00Z"));
+    var started = Instant.parse("2050-01-10T02:00:00Z");
+    var ended = started.plusSeconds(3);
+    var failed =
+        new BatchStepResult(
+            BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+    var retained = new AtomicReference<Connection>();
+    var prepared = new AtomicInteger();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            (url, properties) -> {
+              var real = DriverManager.getConnection(url, properties);
+              retained.set(real);
+              return (Connection)
+                  Proxy.newProxyInstance(
+                      Connection.class.getClassLoader(),
+                      new Class<?>[] {Connection.class},
+                      (unused, method, args) -> {
+                        if (method.getName().equals("prepareStatement")) prepared.incrementAndGet();
+                        return mdb2292Invoke(method, real, args);
+                      });
+            },
+            c -> {});
+    subject.execute(
+        credential(),
+        session -> {
+          var begins = session.beginBackup(run, started, false);
+          session.failBackup(begins, ended, failed, failed);
+          var observed =
+              session.observeBackup(begins, Optional.empty(), ended, () -> 10_000_000_000L);
+          assertEquals(2, observed.current().size());
+          assertTrue(observed.prior().isEmpty());
+          for (var row : observed.current()) {
+            assertEquals(failed, row.result());
+            assertEquals(ended, row.ended());
+          }
+          assertEquals(
+              Boolean.TRUE,
+              session.handoffCleanup(
+                  () -> {
+                    int before = prepared.get();
+                    assertThrows(
+                        IOException.class,
+                        () ->
+                            session.observeBackup(
+                                begins, Optional.empty(), ended, () -> 10_000_000_000L));
+                    assertEquals(before, prepared.get());
+                    return Boolean.TRUE;
+                  }));
+          return Boolean.TRUE;
+        });
+    assertTrue(retained.get().isClosed());
+    try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var s =
+            c.prepareStatement(
+                "select step,status,target_count,success_count,failure_count,byte_count,ended_at"
+                    + " from schubert.batch_runs where run_id=? order by step")) {
+      s.setObject(1, run.id());
+      try (var rows = s.executeQuery()) {
+        for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+          assertTrue(rows.next());
+          assertEquals(step, rows.getString(1));
+          assertEquals("FAILED", rows.getString(2));
+          assertEquals(1, rows.getLong(3));
+          assertEquals(0, rows.getLong(4));
+          assertEquals(1, rows.getLong(5));
+          assertEquals(0, rows.getLong(6));
+          assertEquals(ended, rows.getTimestamp(7).toInstant());
+        }
+        assertFalse(rows.next());
+      }
+    }
+    mdb2292NoOwnerResources();
+  }
+
   /** PT-MDB2594-001: original identity/content and transaction commit are mandatory. */
   @Test
   void mdb2594001ResumeAdmissionRejectsForeignManifestContentAndCommitWithoutPublishing()
