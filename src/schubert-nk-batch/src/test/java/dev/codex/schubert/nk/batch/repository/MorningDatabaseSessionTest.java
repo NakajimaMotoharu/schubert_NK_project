@@ -31,6 +31,136 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2588-001: archive eligibility never trusts foreign/duplicate/null terminal claims. */
+  @Test
+  void mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses() throws Exception {
+    int ordinal = 0;
+    for (String fault :
+        List.of(
+            "VALID",
+            "MISSING",
+            "ONE_ROW",
+            "FOREIGN_ID",
+            "DUPLICATE_ID",
+            "NULL_ID",
+            "NULL_STATUS",
+            "UNKNOWN_STATUS",
+            "RUNNING",
+            "FAILED",
+            "WARNING",
+            "SKIPPED")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("25880001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2044-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 25880010L + n * 10;
+      mdb2480Seed(run, started, id, true);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      var armed = new AtomicBoolean();
+      var observedRows = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var connection = DriverManager.getConnection(url, properties);
+                retained.set(connection);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object actual = mdb2292Invoke(method, connection, args);
+                          if (!armed.get()
+                              || !method.getName().equals("prepareStatement")
+                              || !((String) args[0])
+                                  .startsWith("select id,status from schubert.batch_runs"))
+                            return actual;
+                          var statement = (PreparedStatement) actual;
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (unusedStatement, called, input) -> {
+                                Object real = mdb2292Invoke(called, statement, input);
+                                if (!called.getName().equals("executeQuery")) return real;
+                                var rows = (ResultSet) real;
+                                var row = new AtomicInteger();
+                                return Proxy.newProxyInstance(
+                                    ResultSet.class.getClassLoader(),
+                                    new Class<?>[] {ResultSet.class},
+                                    (unusedRow, read, columns) -> {
+                                      Object value = mdb2292Invoke(read, rows, columns);
+                                      observedRows.incrementAndGet();
+                                      if (read.getName().equals("next")) {
+                                        int index = row.incrementAndGet();
+                                        if (fault.equals("MISSING") && index == 1
+                                            || fault.equals("ONE_ROW") && index == 2) return false;
+                                        return value;
+                                      }
+                                      if (read.getName().equals("getObject")
+                                          && columns[0].equals("id")) {
+                                        if (fault.equals("NULL_ID") && row.get() == 1) return null;
+                                        if (fault.equals("FOREIGN_ID") && row.get() == 1)
+                                          return id + 100000L;
+                                        if (fault.equals("DUPLICATE_ID") && row.get() == 2)
+                                          return id;
+                                      }
+                                      if (read.getName().equals("getString")
+                                          && columns[0].equals("status")
+                                          && row.get() == 1) {
+                                        if (fault.equals("NULL_STATUS")) return null;
+                                        if (fault.equals("UNKNOWN_STATUS")) return "UNKNOWN";
+                                        if (Set.of("RUNNING", "FAILED", "WARNING", "SKIPPED")
+                                            .contains(fault)) return fault;
+                                      }
+                                      return value;
+                                    });
+                              });
+                        });
+              },
+              c -> {});
+      Boolean result =
+          subject.execute(
+              credential(),
+              session -> {
+                var current = session.beginResumeBackup(original, observed);
+                session.completeReusedBackup(current, original, observed);
+                mdb2490SqlRows(run, started, observed, id);
+                armed.set(true);
+                if (Set.of("FOREIGN_ID", "DUPLICATE_ID", "NULL_ID", "NULL_STATUS", "UNKNOWN_STATUS")
+                    .contains(fault)) {
+                  assertThrows(
+                      IOException.class,
+                      () -> session.retainedBackupSuccessful(original, observed),
+                      fault);
+                } else {
+                  assertEquals(
+                      fault.equals("VALID"),
+                      session.retainedBackupSuccessful(original, observed),
+                      fault);
+                }
+                armed.set(false);
+                mdb2490SqlRows(run, started, observed, id);
+                return Boolean.TRUE;
+              });
+      assertEquals(Boolean.TRUE, result);
+      assertTrue(observedRows.get() > 0, fault);
+      assertTrue(retained.get().isClosed());
+      mdb2490SqlRows(run, started, observed, id);
+      mdb2292NoOwnerResources();
+    }
+    assertEquals(12, ordinal);
+  }
+
   /** PT-MDB2572-001: a forged data-only pair cannot consume the held original proof. */
   @Test
   void mdb2572001ReusedBackupRequiresExactManifestSkippedPairAndFreshTime() throws Exception {
