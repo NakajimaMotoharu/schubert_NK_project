@@ -43,6 +43,81 @@ final class BackupBundlePublisherTest {
           Map.entry("publish", 1));
   private static final int CLOCKS = 514;
 
+  /** PT-BAT-2732-001: SS341 6.10/343 5.3, independently fixed publication identity. */
+  @Test
+  void bat2732001PublishedBundleRejectsEveryIdentityOrContentDrift() {
+    var modified = java.nio.file.attribute.FileTime.fromMillis(1000);
+    var changed = java.nio.file.attribute.FileTime.fromMillis(2000);
+    var directory =
+        new EnvironmentInodePolicy.Metadata(040700, 41, 42, 2, 4096, 11, 22, modified, changed);
+    var manifest = new dev.codex.schubert.nk.batch.backup.BackupFileDigest(5, "1".repeat(64));
+    var content = new dev.codex.schubert.nk.batch.backup.BackupFileDigest(3, "2".repeat(64));
+    var dump =
+        new EnvironmentInodePolicy.Metadata(0100600, 41, 42, 1, 3, 11, 23, modified, changed);
+    var rootFile =
+        new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 24, modified, changed);
+    var files =
+        Map.of(
+            "MANIFEST.json",
+            rootFile,
+            "schubert_nk.dump",
+            dump,
+            "config.tar",
+            new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 26, modified, changed),
+            "credentials.tar.age",
+            new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 27, modified, changed));
+    var contents =
+        Map.of(
+            "MANIFEST.json", manifest,
+            "schubert_nk.dump", content,
+            "config.tar", manifest,
+            "credentials.tar.age", manifest);
+    var original = new BackupArtifactVerifier.BundleSnapshot(manifest, directory, files, contents);
+    assertTrue(
+        original.samePublished(
+            new BackupArtifactVerifier.BundleSnapshot(manifest, directory, files, contents)));
+    // Publishing by rename may change directory ctime, but not these six retained identity fields.
+    var changedCtime = java.nio.file.attribute.FileTime.fromMillis(3000);
+    assertTrue(
+        original.samePublished(
+            new BackupArtifactVerifier.BundleSnapshot(
+                manifest,
+                new EnvironmentInodePolicy.Metadata(
+                    040700, 41, 42, 2, 4096, 11, 22, modified, changedCtime),
+                files,
+                contents)));
+    assertFalse(
+        original.samePublished(
+            new BackupArtifactVerifier.BundleSnapshot(content, directory, files, contents)));
+    for (var drift :
+        List.of(
+            new EnvironmentInodePolicy.Metadata(040700, 41, 42, 2, 4096, 12, 22, modified, changed),
+            new EnvironmentInodePolicy.Metadata(040700, 41, 42, 2, 4096, 11, 23, modified, changed),
+            new EnvironmentInodePolicy.Metadata(040700, 41, 42, 3, 4096, 11, 22, modified, changed),
+            new EnvironmentInodePolicy.Metadata(040700, 41, 42, 2, 4097, 11, 22, modified, changed),
+            new EnvironmentInodePolicy.Metadata(
+                040700, 41, 42, 2, 4096, 11, 22, changed, changed))) {
+      assertFalse(
+          original.samePublished(
+              new BackupArtifactVerifier.BundleSnapshot(manifest, drift, files, contents)),
+          drift.toString());
+    }
+    var changedFiles = new HashMap<>(files);
+    changedFiles.put(
+        "schubert_nk.dump",
+        new EnvironmentInodePolicy.Metadata(0100600, 41, 42, 1, 3, 11, 25, modified, changed));
+    assertFalse(
+        original.samePublished(
+            new BackupArtifactVerifier.BundleSnapshot(
+                manifest, directory, changedFiles, contents)));
+    var changedContents = new HashMap<>(contents);
+    changedContents.put("schubert_nk.dump", manifest);
+    assertFalse(
+        original.samePublished(
+            new BackupArtifactVerifier.BundleSnapshot(
+                manifest, directory, files, changedContents)));
+  }
+
   @Test
   void verifiedDurablePublication() throws Exception {
     try (var f = fixture()) {
