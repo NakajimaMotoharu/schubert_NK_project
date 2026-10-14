@@ -43,6 +43,10 @@ def server_source(head,digest):
 
 def main():
     raw=inspect.getsource(previous.previous.main).replace('PG2650','PG2744').replace('pg2650','pg2744').replace('3666','3669')
+    raw=raw.replace('3664 retained plus two mandatory OperationPostScript tests; new JS/fourtemplate resources;541suite1643Main',
+        '3666 retained plus three independently qualified Backup admission methods; unchanged Main/resources;541suite1643Main')
+    raw=raw.replace('BUG1222/YKT988 new update resources plus independent Node/HTTP DOM tests require one all-source integration; olda79 native resources not portable',
+        'Three independent Backup publication/retention/pending methods require one grouped full3669 integration; actual ownsource PG2722 native retained without recapture')
     ns={**previous.previous.__dict__,'SOURCE':SOURCE,'validate':validate,'server_source':server_source}
     exec(compile(raw,'<necessary one grouped Backup whole regression>','exec'),ns);return ns['main']()
 
