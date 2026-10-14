@@ -1,5 +1,7 @@
 # 保持Backup参照・当完了境界の独立PT仕様
 
+実v3/Test630c1bea0/session58629 actual0、一JUnit/FES-aborted-notRun0/javac0。2756独立XML-case/hash資格actual0、retainedBackupSuccessful L19/M1/B16全miss0、追加branch1、限定union残788/156/9/531（まだ群統合でない）。XML e78f5c2f6424cc8ae62fce5581e99fd867b09e43f2ebca267701d20c37feae38、exec75c4d44b99919656cc6134f12aa194744c910ee2a7727e42f9d4058d1e8813ff、server manifest75c343442e521e0870061fba1519ab0394ab4c030d16fe3af0bfefd2c41d08f6。BUG1250/YKT1016の完成namespace是正08357b379/新-only v3固定630c1bea0、旧失敗・未実行は保全、Production不変更。
+
 v1/Test194ab1825/session96473 actual1・新Test generic executeをassertTrueへ渡した際のBooleanSupplier型推論compile拒否、JUnit/SQL fixture未実行。原v1 payload49fe27ed/compile log保持、合格加点0。明示Boolean.TRUE equalityへ是正。v2/session10766は工具BUG1250でLAN dispatch前拒否、host v2 private directory作成済み。是正後のv2再発行もhost new-only mkdirで拒否されたため、全旧namespaceを保全し別v3に固定する。各失敗/未実行を加点0。Production既実装違反でなく新Test初回compile failureと工具不具合を区別してevent/BUGへ記録。
 
 PT-MDB-2754-001、NK-BAT-001、MorningDatabaseSession.Session.retainedBackupSuccessful / MorningDatabaseSessionTest.mdb2754001RetainedBackupRequiresCurrentCompletionAndPreservesOriginalRows。主担当WBS-P017-01、RD BAK/OPS/AVL、UI251/253、SS341§3～7/343/SSC134/451。2748実method756 backupFinished=falseを着手前照合、開始予算.25/.75/2ppはevent0728で固定。
