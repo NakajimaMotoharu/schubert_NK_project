@@ -91,7 +91,12 @@ final class MorningDatabaseSessionTest {
                                       if (pair
                                           && fault.equals("SAME_STEP")
                                           && read.getName().equals("getString")
-                                          && columns[0].equals("step")) return "BACKUP_CONFIG";
+                                          && columns[0].equals("step")) return "BACKUP_DB";
+                                      if (pair
+                                          && fault.equals("SAME_STEP")
+                                          && read.getName().equals("getObject")
+                                          && (columns[0].equals("target_count")
+                                              || columns[0].equals("success_count"))) return 1L;
                                       if (identity
                                           && fault.equals("IDENTITY")
                                           && read.getName().equals("getObject")

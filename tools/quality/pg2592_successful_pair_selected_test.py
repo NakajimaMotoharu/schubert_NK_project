@@ -13,7 +13,7 @@ class SuccessfulPair(unittest.TestCase):
     def test_whole_server_isolated_and_exact_bytes(self):
         raw = server()
         ast.parse(raw)
-        for marker in ['PG2592-selected-v1', 'PG2590-selected-v3', 'PG2588-selected-v1',
+        for marker in ['PG2592-selected-v2', 'PG2590-selected-v3', 'PG2588-selected-v1',
                        'Pg2592SuccessfulPairLauncher', "sha(original_exec)==original['execSha256']",
                        '*hosts,*native_streams,str(prior_exec),str(original_exec),str(execfile)']:
             self.assertIn(marker, raw)

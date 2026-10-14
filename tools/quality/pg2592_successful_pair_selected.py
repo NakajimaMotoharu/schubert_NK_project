@@ -20,7 +20,7 @@ def native_input():
 
 
 def server():
-    raw = previous.server().replace('PG2590-selected-v3', 'PG2592-selected-v1').replace(
+    raw = previous.server().replace('PG2590-selected-v3', 'PG2592-selected-v2').replace(
         'Pg2590OriginalReinspectionLauncher', 'Pg2592SuccessfulPairLauncher').replace(
         'PG2590', 'PG2592')
     marker = "fixtures=source/'src/schubert-nk-batch/target/test-classes'"
@@ -46,8 +46,9 @@ def main():
         'pg2220', 'pg2592').replace('pg2125-metadata-boundary-full-qualified-v1',
                                    'pg2579-current-jdbc-group-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
+    raw = raw.replace('PG2592-selected-v1', 'PG2592-selected-v2')
     ns = {**transport.__dict__, 'SOURCE': previous.previous.SOURCE, 'FILES': FILES,
-          'SLOT': 'pg2592-successful-pair-selected-v1', 'SERVER': server(), 'native_input': native_input}
+          'SLOT': 'pg2592-successful-pair-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<fixed successful pair transport>', 'exec'), ns)
     return ns['main']()
 

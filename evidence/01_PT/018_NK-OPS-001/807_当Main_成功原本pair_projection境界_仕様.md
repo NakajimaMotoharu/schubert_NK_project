@@ -5,3 +5,5 @@ NK-OPS-001/MorningDatabaseSession.Session.successfulBackup、SS341/343/353/354�
 PT-MDB2592-001：5業務日の実PGPT隔離DBに既成功原本二rowをliteral fixture生成。VALIDは逆id順を正DB/configへ戻し、IDENTITYはrun referenceのfalse、EXTRAは三row目、SAME_STEPは二同step、SQLはpair prepareStatementのSQLExceptionを注入し、後四者はIOException拒否。独立SQLで全二row/id/step/attempt/status/start/end/count/byteは元値のまま、新SKIP生成0、Connection/client/advisory0。SQL projectionだけを変異し、DB/VM原本/Backup/Root/ADMIN/restore/prune操作0。expectedにProduction methodを使わない。
 
 command：固定PYTHONPATHでpg2592_successful_pair_selected_test.py→clean source固定→pg2592_successful_pair_selected.py。工具2fixture/javac-Xlint-Werror0/1JUnit5case/FES-aborted-notrun0/MainCRC0/fixture/native不変を要求。実結果未観測、旧full3653/正式1964-53へ件数加算0。group0680着手前予算0.4/1/3pp不変更。
+
+v1/session38362 actual0/TestSourcedd79bec4f/5case・CRC0/javac0、servermanifestbcbf0ece/payloada43aaadb、限定残796/156/9/552。ただしSAME_STEPの粗変異は前段count不一致で拒否されpair同step条件へ未到達。分岐実測を根拠に、両rowをDB/count1へ投影して同step条件を独立確認するv2を追加する。v1を全条件合格へ拡大せず、旧結果と入力を保持し、同methodの重複件数加算0。Production/実DB不変。
