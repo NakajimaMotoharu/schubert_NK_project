@@ -18,6 +18,7 @@ import dev.codex.schubert.nk.web.messaging.*;
 import dev.codex.schubert.nk.web.view.*;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.time.Duration;
@@ -345,6 +346,10 @@ class UserBusinessControllerTest {
       assertEquals(200, result.getResponse().getStatus());
       var dom = Jsoup.parse(result.getResponse().getContentAsString());
       assertEquals("User追加", dom.title());
+      assertEquals(1, dom.select("form[data-operation-submit]").size());
+      assertEquals(
+          List.of("/js/operation-post-submit.js"),
+          dom.select("script[src][defer]").eachAttr("src"));
       assertEquals("USER", dom.select("select[name=role] option[selected]").attr("value"));
       assertEquals("true", dom.select("select[name=enabled] option[selected]").attr("value"));
       assertEquals(
@@ -365,6 +370,10 @@ class UserBusinessControllerTest {
           List.of("STATUS", "ROLE", "PASSWORD", "UNLOCK"),
           dom.select("form[data-operation]").eachAttr("data-operation"));
       assertEquals(4, dom.select("form[data-operation] input[name=_csrf]").size());
+      assertEquals(4, dom.select("form[data-operation-submit]").size());
+      assertEquals(
+          List.of("/js/operation-post-submit.js"),
+          dom.select("script[src][defer]").eachAttr("src"));
       assertEquals(
           4, dom.select("form[data-operation] input[name=expected_version][value='0']").size());
       assertTrue(dom.select("input[type=password][value]").isEmpty());
@@ -1004,6 +1013,15 @@ class UserBusinessControllerTest {
         assertEquals(200, page.statusCode());
         var dom = Jsoup.parse(page.body());
         String token = dom.select("input[name=operation_token]").attr("value");
+        assertEquals(1, dom.select("form[data-operation-submit]").size());
+        assertEquals(
+            List.of("/js/operation-post-submit.js"),
+            dom.select("script[src][defer]").eachAttr("src"));
+        var asset = server.send("GET", "/js/operation-post-submit.js", cookie, null, true);
+        assertEquals(200, asset.statusCode());
+        assertEquals(
+            Files.readString(Path.of("src/main/resources/static/js/operation-post-submit.js")),
+            asset.body());
         csrf = dom.select("form[action='/admin/users/new'] input[name=_csrf]").attr("value");
         String body =
             "username=new-user&password=longpassword1&password_confirmation=longpassword1&role=USER&enabled=true&operation_token="

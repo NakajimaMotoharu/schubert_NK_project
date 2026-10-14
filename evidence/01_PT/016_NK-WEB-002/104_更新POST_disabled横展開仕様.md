@@ -1,5 +1,7 @@
 # 更新POST disabled横展開（BUG1222/YKT988）
 
+v2/session63079 actual1/source61ae1e5e4/payloade52e4e67は依存Protocolで選択class不在のNoTests拒否、全JUnit未実行。条件を緩和せず、v3は依存四子moduleをcompile/test-jar/installのみ（Production PT加点0）、Webだけ必須七classで試験する。実User/TargetBusinessControllerを追加して四更新formのrendered DOM marker/defer script、認証済asset GET bodyと既CSRF拒否/再送DB後条件を同sourceで確認する。未実行を合格化0、旧v1/v2を保持。
+
 初回PG2646v1/session46732 actual1/source04207efc3、payload2461ef1c：-amに含まれたaggregator parentにjar:test-jar目標を適用すると、parentで未固定のmaven-jar-plugin解決に失敗しJUnit未実行。旧slot/log/入力を保全。新v2は依存五子moduleを明示-pl、固定された子pluginだけを使用し、同五mandatory consumer/Node/static条件を維持する。製品仕様/期待値変更0。
 
 Program NK-WEB-002/SCR015～017/021/023、RD FUN009～013/AUT/SEC・UI222§8/224/225/SS313314352、PT-WEB-OPSJS2646-A..F。既質問JSのvalidationは保持し、User追加/User明細各operation/通知取消/質問回答削除の四templateだけを外部scriptへ接続する。Login/Logout/GET検索は対象外、既CSRF/operation token/server Message ID冪等性は変更しない。scriptは認証済みresource既policy、CSP inline緩和無し。

@@ -622,6 +622,10 @@ class TargetBusinessControllerTest {
           }
           var form = dom.select(cancel ? "form.cancel-form" : "form.delete-form");
           assertEquals(1, form.size());
+          assertTrue(form.hasAttr("data-operation-submit"));
+          assertEquals(
+              List.of("/js/operation-post-submit.js"),
+              dom.select("script[src][defer]").eachAttr("src"));
           String token = form.select("input[name=operation_token]").attr("value");
           String csrf = form.select("input[name=_csrf]").attr("value");
           String body =
