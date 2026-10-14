@@ -30,6 +30,101 @@ final class MorningExpirySessionTest {
   static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z");
   static final MaintenanceOwnerFrame.Guard OWNER = () -> 30_000_000_000L;
 
+  /** PT-MDB2612-001: retained cleanup references must match the current complete SQL readback. */
+  @Test
+  void mdb2612001CleanupReferencesRejectDriftAndForgedSnapshotWithoutChangingRows()
+      throws Exception {
+    for (String fault : List.of("VALID", "AUTOCOMMIT", "READONLY", "MISMATCH", "SQL")) {
+      reset();
+      var armed = new java.util.concurrent.atomic.AtomicBoolean();
+      var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              url,
+              () -> {},
+              (address, properties) -> {
+                var connection = DriverManager.getConnection(address, properties);
+                retained.set(connection);
+                return (Connection)
+                    java.lang.reflect.Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          if (armed.get()) {
+                            if (fault.equals("AUTOCOMMIT")
+                                && method.getName().equals("getAutoCommit")) return false;
+                            if (fault.equals("READONLY") && method.getName().equals("isReadOnly"))
+                              return true;
+                            if (fault.equals("SQL")
+                                && method.getName().equals("prepareStatement")
+                                && ((String) args[0]).startsWith("select distinct on(step)"))
+                              throw new SQLException("isolated reference read refusal", "08006");
+                          }
+                          return mdb2604Invoke(method, connection, args);
+                        });
+              },
+              c -> {});
+      subject.execute(
+          credential(),
+          session -> {
+            ready(session, 1);
+            var actualInput = session.observeCleanupBackupUnavailable(RUN, 0, OWNER);
+            var entries = new ArrayList<>(actualInput.entries());
+            if (fault.equals("MISMATCH")) {
+              var first = entries.getFirst();
+              var handle = first.attempt();
+              entries.set(
+                  0,
+                  new CleanupTerminalRepository.Entry(
+                      new BatchStepAttempt(
+                          handle.id() + 1_000_000,
+                          handle.run(),
+                          handle.step(),
+                          handle.attempt(),
+                          handle.startedAt(),
+                          handle.skipped()),
+                      first.endedAt(),
+                      first.result(),
+                      first.progressSeal()));
+            }
+            var expectedInput = new CleanupTerminalRepository.Snapshot(entries);
+            armed.set(true);
+            if (fault.equals("VALID"))
+              assertEquals(
+                  List.of(
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty(),
+                      Optional.empty()),
+                  session.cleanupReferences(expectedInput, OWNER));
+            else
+              assertThrows(
+                  IOException.class, () -> session.cleanupReferences(expectedInput, OWNER), fault);
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+          var statement = observer.createStatement();
+          var rows =
+              statement.executeQuery(
+                  "select count(*),count(*) filter(where step='CLEAN_EXPIRY'),count(*) filter(where step like 'BACKUP_%' and status='FAILED'),count(*) filter(where step not like 'BACKUP_%' and step<>'CLEAN_TRANSFER' and status='SKIPPED'),count(*) filter(where step='CLEAN_TRANSFER' and status='SUCCESS'),sum(byte_count),(select count(*) from pg_stat_activity where application_name='schubert-nk-morning-controller' and datname=current_database()),(select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted) from schubert.batch_runs")) {
+        assertTrue(rows.next());
+        assertEquals(9, rows.getLong(1));
+        assertEquals(0, rows.getLong(2));
+        assertEquals(2, rows.getLong(3));
+        assertEquals(6, rows.getLong(4));
+        assertEquals(1, rows.getLong(5));
+        assertEquals(0, rows.getLong(6));
+        assertEquals(0, rows.getLong(7));
+        assertEquals(0, rows.getLong(8));
+        assertFalse(rows.next());
+      }
+    }
+  }
+
   /** PT-MDB2610-001: cleanup receipt and failed-backup mode cannot bypass DB readback guards. */
   @Test
   void mdb2610001CleanupReadbackRejectsDbDriftReceiptAndBackupModeWithoutMutation()
