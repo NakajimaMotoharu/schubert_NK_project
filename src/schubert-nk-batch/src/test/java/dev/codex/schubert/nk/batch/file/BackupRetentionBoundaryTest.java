@@ -21,6 +21,35 @@ final class BackupRetentionBoundaryTest {
         mode, uid, gid, 2, 128, device, number, FileTime.fromMillis(0), FileTime.fromMillis(0));
   }
 
+  /** PT-BAK-2736-001: current missed admission predicates264/282/314; real held FD. */
+  @Test
+  void backup2736001RetentionRejectsNonrootCrossDeviceAndParentDrift() throws Exception {
+    for (String bad : List.of("nonroot", "crossDevice", "parentDrift")) {
+      try (var f = new BackupArtifactFixture(temporary)) {
+        var parentReads = new java.util.concurrent.atomic.AtomicInteger();
+        if (bad.equals("nonroot")) f.effective = 1;
+        f.metadata =
+            (role, values) -> {
+              if (bad.equals("crossDevice") && role.equals("child"))
+                values.put("dev", (Long) values.get("dev") + 1);
+              if (bad.equals("parentDrift")
+                  && role.equals("parent")
+                  && parentReads.incrementAndGet() == 2)
+                values.put("ino", (Long) values.get("ino") + 1);
+            };
+        var error =
+            assertThrows(
+                StorageIoException.class, () -> f.verifier().inspectRetention(f.expected, 100));
+        assertEquals(StorageIoException.Reason.UNAVAILABLE, error.reason(), bad);
+        assertNull(error.getCause(), bad);
+        if (bad.equals("nonroot")) assertEquals(0, f.counts.getOrDefault("openEntry", 0));
+        if (bad.equals("parentDrift")) assertEquals(2, parentReads.get());
+        f.unchanged();
+        f.released();
+      }
+    }
+  }
+
   @Test
   void backup2120001FiveIdentityFieldsAndContentOnlyChange() {
     var before = inode(040700, 2000, 2001, 7, 101);
