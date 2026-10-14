@@ -11,6 +11,9 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ActiveMQClient;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
@@ -61,22 +64,54 @@ final class ArtemisExpiryPurgeClientTest {
         var maintenance =
             factory.createSession(
                 "pt_maintenance", maintenancePassword, false, true, true, false, 0)) {
-      var message = web.createMessage(true);
-      message.setExpiration(System.currentTimeMillis() + 10_000);
-      message.getBodyBuffer().writeString("sanitized PT payload");
-      web.createProducer("nk.sync.request").send(message);
       var requestQueue =
           broker.getActiveMQServer().locateQueue(SimpleString.of("nk.sync.request.q"));
+      // BUG1245/YKT1011: durable send confirmation is not iterator-visible delivery.
+      // Hold this real queue's executor to make the original race deterministic.
+      var entered = new CountDownLatch(1);
+      var release = new CountDownLatch(1);
+      var completed = new CompletableFuture<Void>();
+      requestQueue
+          .getExecutor()
+          .execute(
+              () -> {
+                entered.countDown();
+                try {
+                  if (release.await(10, TimeUnit.SECONDS)) completed.complete(null);
+                  else completed.completeExceptionally(new AssertionError("fixture gate deadline"));
+                } catch (InterruptedException interrupted) {
+                  Thread.currentThread().interrupt();
+                  completed.completeExceptionally(interrupted);
+                }
+              });
+      try {
+        assertTrue(entered.await(5, TimeUnit.SECONDS));
+        var message = web.createMessage(true);
+        // Explicit force-expiry below creates the broker's actual timestamp.
+        // No automatic short TTL may race that fixture-only transition.
+        message.setExpiration(Long.MAX_VALUE);
+        message.getBodyBuffer().writeString("sanitized PT payload");
+        web.createProducer("nk.sync.request").send(message);
+        assertEquals(
+            0,
+            requestQueue.expireReferences((org.apache.activemq.artemis.core.filter.Filter) null));
+      } finally {
+        release.countDown();
+      }
+      completed.get(5, TimeUnit.SECONDS);
+      assertTrue(requestQueue.flushExecutor());
+      assertEquals(1, requestQueue.getMessageCount());
       assertEquals(
           1, requestQueue.expireReferences((org.apache.activemq.artemis.core.filter.Filter) null));
+      var expiryQueue = broker.getActiveMQServer().locateQueue(SimpleString.of("nk.expiry.q"));
+      assertTrue(expiryQueue.flushExecutor());
       long expiryCount =
           ArtemisExpiryPurgeClient.integer(
               ArtemisManagementReadinessClient.queueMetric(
                   maintenance, "nk.expiry.q", "messageCount"));
       assertEquals(1, expiryCount);
       long actualExpiry;
-      try (var messages =
-          broker.getActiveMQServer().locateQueue(SimpleString.of("nk.expiry.q")).iterator()) {
+      try (var messages = expiryQueue.iterator()) {
         assertTrue(messages.hasNext());
         actualExpiry = messages.next().getMessage().getLongProperty("_AMQ_ACTUAL_EXPIRY");
         assertFalse(messages.hasNext());
