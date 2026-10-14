@@ -20,7 +20,7 @@ def native_input():
 
 
 def server():
-    raw = previous.server().replace('PG2570-selected-v2', 'PG2572-selected-v2').replace(
+    raw = previous.server().replace('PG2570-selected-v2', 'PG2572-selected-v3').replace(
         'PG2570', 'PG2572').replace('Pg2570FailedGuardLauncher', 'Pg2572ReusePairLauncher')
     marker = "fixtures=source/'src/schubert-nk-batch/target/test-classes'"
     if raw.count(marker) != 1:
@@ -45,9 +45,9 @@ def main():
         'pg2220', 'pg2572').replace('pg2125-metadata-boundary-full-qualified-v1',
                                    'pg2511-strict-reference-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
-    raw = raw.replace('PG2572-selected-v1', 'PG2572-selected-v2')
+    raw = raw.replace('PG2572-selected-v1', 'PG2572-selected-v3')
     ns = {**previous.previous.previous.prior.__dict__, 'SOURCE': previous.previous.SOURCE,
-          'FILES': FILES, 'SLOT': 'pg2572-reuse-pair-selected-v2', 'SERVER': server(), 'native_input': native_input}
+          'FILES': FILES, 'SLOT': 'pg2572-reuse-pair-selected-v3', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<fresh reuse pair immutable transport>', 'exec'), ns)
     return ns['main']()
 

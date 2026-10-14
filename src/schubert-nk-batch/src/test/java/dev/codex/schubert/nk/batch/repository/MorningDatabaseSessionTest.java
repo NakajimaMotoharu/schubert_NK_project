@@ -108,14 +108,21 @@ final class MorningDatabaseSessionTest {
                       .prior()
                       .size());
             } else {
-              assertThrows(
-                  fault.equals("STALE_TIME") ? IllegalArgumentException.class : IOException.class,
-                  () ->
-                      session.completeReusedBackup(
-                          offered,
-                          offeredManifest,
-                          fault.equals("STALE_TIME") ? started.minusSeconds(1) : observed),
-                  fault);
+              Throwable rejected =
+                  assertThrows(
+                      Throwable.class,
+                      () ->
+                          session.completeReusedBackup(
+                              offered,
+                              offeredManifest,
+                              fault.equals("STALE_TIME") ? started.minusSeconds(1) : observed),
+                      fault);
+              if (fault.equals("STALE_TIME")) {
+                assertInstanceOf(IllegalArgumentException.class, rejected);
+                assertEquals("invalid backup observation time", rejected.getMessage());
+              } else {
+                assertInstanceOf(IOException.class, rejected);
+              }
             }
             mdb2490SqlRows(run, started, observed, id);
             return Boolean.TRUE;

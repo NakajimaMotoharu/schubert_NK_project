@@ -1,5 +1,7 @@
 # PG2572 reused Backup handle整合性
 
+v2/testSourcec251e8580 actual1/payload623876d0は異なる例外ClassのconditionalとJUnit generic assertThrows型推論がjavac拒否、PT未実行。v3はThrowable捕捉後にliteral例外型を必須assertInstanceOf、STALEの固定messageも検証し、型の範囲を緩めない。v1/v2失敗・logを保持、合格0。新試験構築だけの是正、Production/上位資料変更0。
+
 ## 初回新期待例外の構築失敗
 
 v1/testSource626ab4ea3 actual1/payloadba6b8830。STALE_TIMEの型/範囲不正は既BackupStepRepository.validTime/既独立BackupStepRepositoryTestのIllegalArgumentException契約だが、新試験はIOExceptionを誤期待した。MANIFEST/非SKIP二はIOExceptionのまま、時刻範囲不正だけ固定IllegalArgumentException（message invalid backup observation time）と既契約へ合わせる。Production/上位仕様/業務期待値は変更0、旧FAILEDとlogを保持・合格0、v2 fresh namespace未実行。
