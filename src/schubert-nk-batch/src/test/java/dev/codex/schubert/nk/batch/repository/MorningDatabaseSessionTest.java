@@ -31,6 +31,167 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2784-001: reinspection of a complete bundle must never silently become RUNNING. */
+  @Test
+  void mdb2784001EmptyBackupReinspectionCannotAuthorizeResumeOrObservation() throws Exception {
+    int ordinal = 0;
+    for (String mode : List.of("BEGIN_RESUME", "SKIPPED_OBSERVE", "FAILED_OBSERVE")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27840001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2051-03-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 27840010L + n * 10;
+      var armed = new AtomicBoolean();
+      var pairReads = new AtomicInteger();
+      var statuses = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      var commits = new AtomicInteger();
+      int projectAt = mode.equals("BEGIN_RESUME") ? 1 : 2;
+      var subject = mdb2784Subject(armed, pairReads, statuses, retained, commits, projectAt);
+      if (!mode.equals("FAILED_OBSERVE")) mdb2480Seed(run, started, id, true);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      assertThrows(
+          IOException.class,
+          () ->
+              subject.execute(
+                  credential(),
+                  session -> {
+                    if (mode.equals("BEGIN_RESUME")) {
+                      armed.set(true);
+                      session.beginResumeBackup(original, observed);
+                    } else if (mode.equals("SKIPPED_OBSERVE")) {
+                      var current = session.beginResumeBackup(original, observed);
+                      session.completeReusedBackup(current, original, observed);
+                      armed.set(true);
+                      session.observeBackup(
+                          current, Optional.of(original), observed, () -> 10_000_000_000L);
+                    } else {
+                      var current = session.beginBackup(run, started, false);
+                      var failed =
+                          new BatchStepResult(
+                              BatchStepResult.Status.FAILED,
+                              1,
+                              0,
+                              1,
+                              0,
+                              BatchStepResult.Reason.COMMAND_FAILURE);
+                      session.failBackup(current, started.plusSeconds(3), failed, failed);
+                      armed.set(true);
+                      session.observeBackup(
+                          current,
+                          Optional.of(mdb2482Manifest(current, started)),
+                          observed,
+                          () -> 10_000_000_000L);
+                    }
+                    fail("empty independent reinspection must never authorize this operation");
+                    return Boolean.TRUE;
+                  }));
+      assertTrue(retained.get().isClosed());
+      assertEquals(projectAt, pairReads.get());
+      assertEquals(2, statuses.get());
+      assertEquals(
+          mode.equals("BEGIN_RESUME") ? 0 : mode.equals("SKIPPED_OBSERVE") ? 1 : 2, commits.get());
+      if (mode.equals("BEGIN_RESUME")) {
+        // Independent reverse-ID oracle; no current attempt was committed.
+        try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+            var s =
+                c.prepareStatement(
+                    "select id,step,status,target_count,success_count,failure_count,byte_count"
+                        + " from schubert.batch_runs where run_id=? order by id")) {
+          s.setObject(1, run.id());
+          try (var rows = s.executeQuery()) {
+            for (int index = 0; index < 2; index++) {
+              assertTrue(rows.next());
+              assertEquals(id + index, rows.getLong(1));
+              assertEquals(index == 0 ? "BACKUP_CONFIG" : "BACKUP_DB", rows.getString(2));
+              assertEquals("SUCCESS", rows.getString(3));
+              assertEquals(index == 0 ? 2 : 1, rows.getLong(4));
+              assertEquals(index == 0 ? 2 : 1, rows.getLong(5));
+              assertEquals(0, rows.getLong(6));
+              assertEquals(index == 0 ? 67 : 26, rows.getLong(7));
+            }
+            assertFalse(rows.next());
+          }
+        }
+      } else if (mode.equals("SKIPPED_OBSERVE")) {
+        mdb2490SqlRows(run, started, observed, id);
+      } else {
+        mdb2292Rows(run, "FAILED", started, Optional.of(started.plusSeconds(3)));
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
+  private static MorningDatabaseSession mdb2784Subject(
+      AtomicBoolean armed,
+      AtomicInteger reads,
+      AtomicInteger statuses,
+      AtomicReference<Connection> retained,
+      AtomicInteger commits,
+      int projectAt) {
+    return new MorningDatabaseSession(
+        actualUrl,
+        () -> {},
+        (url, properties) -> {
+          var real = DriverManager.getConnection(url, properties);
+          retained.set(real);
+          return (Connection)
+              Proxy.newProxyInstance(
+                  Connection.class.getClassLoader(),
+                  new Class<?>[] {Connection.class},
+                  (unused, method, args) -> {
+                    if (method.getName().equals("commit")) commits.incrementAndGet();
+                    Object value = mdb2292Invoke(method, real, args);
+                    if (!method.getName().equals("prepareStatement")
+                        || !((String) args[0]).contains("where id in (?,?) order by id for update"))
+                      return value;
+                    var statement = (PreparedStatement) value;
+                    return Proxy.newProxyInstance(
+                        PreparedStatement.class.getClassLoader(),
+                        new Class<?>[] {PreparedStatement.class},
+                        (unusedStatement, called, input) -> {
+                          Object actual = mdb2292Invoke(called, statement, input);
+                          if (!called.getName().equals("executeQuery")) return actual;
+                          boolean project = armed.get() && reads.incrementAndGet() == projectAt;
+                          var rows = (ResultSet) actual;
+                          return Proxy.newProxyInstance(
+                              ResultSet.class.getClassLoader(),
+                              new Class<?>[] {ResultSet.class},
+                              (unusedRow, read, columns) -> {
+                                Object observedValue = mdb2292Invoke(read, rows, columns);
+                                if (!project
+                                    || !(read.getName().equals("getObject")
+                                        || read.getName().equals("getString")))
+                                  return observedValue;
+                                String field = (String) columns[0];
+                                if (field.equals("status")) {
+                                  statuses.incrementAndGet();
+                                  return "RUNNING";
+                                }
+                                if (Set.of("ended_at", "error_code", "error_summary")
+                                    .contains(field)) return null;
+                                if (Set.of(
+                                        "target_count",
+                                        "success_count",
+                                        "failure_count",
+                                        "byte_count")
+                                    .contains(field)) return 0L;
+                                return observedValue;
+                              });
+                        });
+                  });
+        },
+        c -> {});
+  }
+
   /** PT-MDB-2780-001: both resume attempts must be SKIPPED, not a foreign history projection. */
   @Test
   void mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit() throws Exception {
