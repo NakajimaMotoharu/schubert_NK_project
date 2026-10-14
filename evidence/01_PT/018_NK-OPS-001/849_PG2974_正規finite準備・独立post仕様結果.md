@@ -16,6 +16,10 @@ daa558bd012b1c2d4a293e89a93ee75adcb458c0固定、2972/session4993 actual0/source
 
 ## PT-OPS-2978-001（是正post仕様・実行待ち）
 
+実結果追補: 48d6b9a34/session61266 actual1、22:55:57.143968～22:56:06.305068Z/payload d5e60362。exportは是正されたが挿入ORACLEがroot Pathをstrへ上書きし、末尾proof集計でAttributeError。BUG1262/YKT1028修正前起票、途中照合を合格へ算入しない。
+
+PT-OPS-2980-001: e0dc90e40/session41822 actual0、22:57:14.303898～22:57:23.672176Z、payload ee4b8ea3f49f76294921420a6267ebd52c9dc778da0b61c2db870edcf2ad514b。oracle全体を関数localへ隔離、三exportだけを明示、whole namespace/既root一binding/global-nonlocal無しの独立検査PASS。実全24/187/十Unit-kernel空/全actor-client-advisory-flock0/原本Backup/native10二読・runtime-only/clock5/no fallback/正常Refs一回reloadを完走。preparedAfter d10735e678e5053c0c96c55a42f65f2302132cfae902edd81dffbc2275c4c4ac、native canonical96757f38127024e527c5356308e1d6337fb1bb50b2e258283bf2d2fc00376423。BUG1259～1262/YKT1025～1028工具範囲完了。次の別fresh Rootはまだ未起動で、PGPT全体/正式への加点0。
+
 独立期待値: 既封印raw before3dddと準備beforeの全値一致、afterはconfiguration/runtimeだけが承認resume literalとcold inode/clock5境界に一致。他24表/署名187/原本Backup/native/Unit/kernel/全client-advisory-flockは元値維持。正常完了receipt・空Refs log・reload一回receipt・gap<30sを別検査。
 
 configurationは実export `same`、declaration parserは固定b198cecd883e9a2f8cf2406dd2c92b0dca369ebd9ce3701c087205ef19311ca4のpg477 parserをAST抽出。期待literalをProduction methodから生成しない。実helper export・独立正常declaration/空/unknown拒否の工具二試験PASS。成功していないpostを加算しない。
