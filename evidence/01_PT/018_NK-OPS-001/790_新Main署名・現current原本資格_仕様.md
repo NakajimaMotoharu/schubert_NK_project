@@ -11,3 +11,5 @@ commandは固定PYTHONPATHで`pg2512_strict_reference_signed_candidate.py`（全
 ## BUG1243/YKT1009 schema是正
 
 初期上段の「11fieldからnative抽出」は現snapshotに対して誤り。v1実actual1/client43118/Source6beba4249、原本保存前のschema guardで拒否。独立read-onlyで当afterは十keys・native別を確認した。旧失敗/private/logを保持し成功補完0。新onlyv2は原本十keysを無変換保存しnative別privateを保持、missing/unknown/native混入/非dict/nullの八negativeとactual factory namespaceを検査する。旧2410/3bの十一field歴史契約は変更しない。実v2の終了/hash/consumerは取得後記録する。
+
+実v2 actual0/client93874／修正1487503fe、00:00:48.792096Z～00:00:57.777067Z、before df3bdffd（既保存値同一）・native別36de9800/22file、payload274e2d59/manifest65635ced。全24/原本/署名187/Backup三archive/二完全DBhandle/config61640byte/総14666117byte/list0/資源後条件と既退役fragment不在を確認、業務mutation0。公開current-before-v2.json参照。新candidate consumer実ABI・配置/post/nativeは未実行、全leaf/正式へ加算0。
