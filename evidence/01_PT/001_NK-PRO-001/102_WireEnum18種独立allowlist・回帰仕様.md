@@ -1,5 +1,7 @@
 # WireEnum18種独立allowlist・Protocol回帰（YKT1010）
 
+2026-10-14実結果：PG2634v2 actual0、82PT/17suite/174Main/static0/四counter100。独立読取で全17XMLのhash、実testcase82、failure/error/skipped/flaky/rerun欠落を確認。PG2636v1 actual0、ORIGINAL実一JUnit成功、全18typeそれぞれADDED/WIREの36mutationは各一JUnitのAssertionFailedErrorで拒否。compile拒否・NoTestsを反例成功へ算入していない。javaagent/exec無し、Main/Jar/library不変、合成PT/coverage加点0。公開`evidence/output/wire-enum-oracle-qualified-manifest.json`にsource/run/時刻/hash/commandを保存。全六consumer統合は別未完、正式1964/53不変更。
+
 NK-PRO-001/ProtocolSemanticTypeTest.approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables/PT-PRO-001-T04、485主担当WBS-P002-01、共通headerのP001-01は別主担当・参照費重複0。UI234（Game/Entry/Voice/Delivery）、UI235（Disposition/Pair/Animation/Video）、UI236（Role/LogType/LogLevel/User/Question/Notification）、SS333§8（MIME六値）、SS351§5（通知error五値）を独立literal name=wire tableへ転記した。
 
 各enumの宣言件数/name/wire、required/optional decode、FieldValue encodeはliteral expectedを使用。未知UNAPPROVED_CANARYはrequired/optional共にLayoutValidationExceptionを要求。Java nameは承認wire意味に対応する内部型名を固定し、wire許容集合はUI/SSを正本にする。元generic enumValue往復は補助converter契約のみで承認集合oracleへ加点0、既source/Main変更無し。18type合計のliteral数はtest inputから集計し実結果へ記録する。
