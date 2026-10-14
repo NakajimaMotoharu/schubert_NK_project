@@ -11,10 +11,19 @@ def server():
     compile(raw,'<isolated retained Backup pre-completion>','exec');return raw
 
 
+def transport_body():
+    raw=inspect.getsource(previous.transport.main).replace('PG2220','PG2754').replace('pg2220','pg2754').replace('PG2754-selected-v1','PG2754-selected-v2').replace(
+        'pg2125-metadata-boundary-full-qualified-v1','pg2745-backup-admission-full-qualified-v1')
+    raw=raw.replace(",'libraries':libs}",",'libraries':libs,'native':native_input()}")
+    if 'PG2754-selected-v1' in raw or raw.count('PG2754-selected-v2')!=5:
+        raise ValueError('completed selected transport must use one new v2 namespace')
+    compile(raw,'<current retained Backup completed transport>','exec');return raw
+
+
 def main():
-    raw=inspect.getsource(previous.main).replace('PG2750','PG2754').replace('pg2750','pg2754').replace('PG2754-selected-v1','PG2754-selected-v2').replace('pg2754-db-backup-handoff-selected-v1','pg2754-retained-backup-selected-v2')
-    ns={**previous.__dict__,'FILES':FILES,'server':server}
-    exec(compile(raw,'<current retained Backup selected source>','exec'),ns);return ns['main']()
+    ns={**previous.transport.__dict__,'SOURCE':SOURCE,'FILES':FILES,'SLOT':'pg2754-retained-backup-selected-v2',
+        'SERVER':server(),'native_input':previous.native_input}
+    exec(compile(transport_body(),'<current retained Backup selected source>','exec'),ns);return ns['main']()
 
 
 if __name__=='__main__':raise SystemExit(main())

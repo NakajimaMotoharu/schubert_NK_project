@@ -31,6 +31,77 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2758-001: JDBC completion failure never authorizes retained-backup continuation. */
+  @Test
+  void mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows()
+      throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("ROLLBACK", "AUTOCOMMIT")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27580001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2050-03-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 27580010L + n * 10;
+      mdb2480Seed(run, started, id, true);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      var armed = new AtomicBoolean();
+      var intercepted = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var real = DriverManager.getConnection(url, properties);
+                retained.set(real);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          boolean boundary =
+                              fault.equals("ROLLBACK")
+                                  ? method.getName().equals("rollback")
+                                  : method.getName().equals("setAutoCommit")
+                                      && Boolean.TRUE.equals(args[0]);
+                          if (boundary && armed.compareAndSet(true, false)) {
+                            intercepted.incrementAndGet();
+                            throw new SQLException("isolated completion boundary");
+                          }
+                          return mdb2292Invoke(method, real, args);
+                        });
+              },
+              c -> {});
+      IOException failure =
+          assertThrows(
+              IOException.class,
+              () ->
+                  subject.execute(
+                      credential(),
+                      session -> {
+                        var current = session.beginResumeBackup(original, observed);
+                        mdb2490SqlRows(run, started, observed, id);
+                        armed.set(true);
+                        session.completeReusedBackup(current, original, observed);
+                        fail("JDBC failure must prevent completion");
+                        return Boolean.TRUE;
+                      }));
+      assertEquals("root batch database unavailable", failure.getMessage());
+      assertEquals(1, intercepted.get());
+      assertTrue(retained.get().isClosed());
+      mdb2490SqlRows(run, started, observed, id);
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB-2754-001: retained SUCCESS cannot authorize observation before current completion. */
   @Test
   void mdb2754001RetainedBackupRequiresCurrentCompletionAndPreservesOriginalRows()
