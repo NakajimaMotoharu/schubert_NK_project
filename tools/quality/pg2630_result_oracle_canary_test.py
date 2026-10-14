@@ -9,6 +9,8 @@ class OracleCanary(unittest.TestCase):
         for marker in ['UNAPPROVED_CANARY', '0199', '0101", true', 'coverageCredit',
                        "require(not list(out.rglob('*.exec')))", "result.returncode==0"]:
             self.assertIn(marker, SERVER)
+        self.assertIn("engine_version=engines[0].parent.name", SERVER)
+        self.assertNotIn('6.0.3', SERVER)
         self.assertNotIn('-javaagent', SERVER)
 
 

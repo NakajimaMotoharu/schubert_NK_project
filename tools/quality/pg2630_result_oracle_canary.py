@@ -10,14 +10,14 @@ from pg2600_retention_group_full_six import SOURCE
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = '/home/mini/schubert-nk-pgpt'
-SLOT = 'pg2630-result-oracle-canary-v1'
+SLOT = 'pg2630-result-oracle-canary-v2'
 FILES = ['src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java',
          'src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java',
          'tools/quality/vm/050_s1/ResultCodeOracleCanaryLauncher.java']
 SERVER = r'''
 import datetime,hashlib,json,os,subprocess,xml.etree.ElementTree as ET
 from pathlib import Path
-os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2630-canary-v1';transfer=b/'transfer/PG2630-canary-v1';source=b/'source-full-PG2600'
+os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2630-canary-v2';transfer=b/'transfer/PG2630-canary-v2';source=b/'source-full-PG2600'
 def require(v):
  if not v:raise ValueError('isolated original oracle canary refused')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -32,9 +32,9 @@ for entry in properties[0].split(':'):
  p=Path(entry)
  if p.suffix=='.jar' and p.is_relative_to(repo):
   require(p.is_file() and p.resolve().is_relative_to(repo.resolve()));libs.append(p)
-launcher=repo/'org/junit/platform/junit-platform-launcher/6.0.3/junit-platform-launcher-6.0.3.jar'
-if not launcher.exists():
- choices=list((repo/'org/junit/platform/junit-platform-launcher').glob('*/*.jar'));require(len(choices)==1);launcher=choices[0]
+engines=[p for p in libs if p.name.startswith('junit-platform-engine-')];require(len(engines)==1)
+engine_version=engines[0].parent.name
+launcher=repo/'org/junit/platform/junit-platform-launcher'/engine_version/('junit-platform-launcher-'+engine_version+'.jar');require(launcher.is_file())
 if launcher not in libs:libs.append(launcher)
 library_hashes={str(p.relative_to(repo)):sha(p)for p in libs};require(any('junit-platform-launcher/'in k for k in library_hashes))
 cp=':'.join(map(str,[jar,*libs]));jdk=b/'tools/jdk-25.0.4/bin';env={k:v for k,v in os.environ.items()if k not in('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS')}
@@ -69,12 +69,12 @@ def main():
     compile(code, '<isolated false negative canary>', 'exec')
     os.umask(0o077);out = W / SLOT;out.mkdir(mode=0o700)
     script = out / 'canary.private.py';script.write_text(code)
-    c, _ = run('test ! -e ' + BASE + '/runs/PG2630-canary-v1 && test ! -e ' + BASE + '/transfer/PG2630-canary-v1 && mkdir -m700 ' + BASE + '/transfer/PG2630-canary-v1', 30)
+    c, _ = run('test ! -e ' + BASE + '/runs/PG2630-canary-v2 && test ! -e ' + BASE + '/transfer/PG2630-canary-v2 && mkdir -m700 ' + BASE + '/transfer/PG2630-canary-v2', 30)
     if c:raise ValueError('fresh synthetic namespace required')
     for p in [*(ROOT / n for n in FILES), script]:
-        c, _ = copy(p, BASE + '/transfer/PG2630-canary-v1/', 60)
+        c, _ = copy(p, BASE + '/transfer/PG2630-canary-v2/', 60)
         if c:raise ValueError('immutable canary transfer required')
-    c, output = run('python3 -B ' + BASE + '/transfer/PG2630-canary-v1/canary.private.py', 180)
+    c, output = run('python3 -B ' + BASE + '/transfer/PG2630-canary-v2/canary.private.py', 180)
     (out / 'server.private.log').write_text(output)
     value = {'actualExit': c, 'source': SOURCE, 'payloadSha256': hashlib.sha256(code.encode()).hexdigest(), 'formalAccepted': False}
     if not c:value['result'] = json.loads(next(x for x in output.splitlines() if x.startswith('{')))
