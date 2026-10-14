@@ -12,7 +12,7 @@ CLASSES={'ArtemisExpiryPurgeClientTest':6,'ArtemisExpiryManagementAuthorizationT
 SERVER=r'''
 import datetime,hashlib,json,os,subprocess,tarfile,xml.etree.ElementTree as E
 from pathlib import Path
-os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2692-selected-v1';source=b/'source-expiry-PG2692-selected-v1';transfer=b/'transfer/PG2692-selected-v1'
+os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2692-selected-v2';source=b/'source-expiry-PG2692-selected-v2';transfer=b/'transfer/PG2692-selected-v2'
 def require(v):
  if not v:raise ValueError('complete selected expiry fixture qualification required')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -41,17 +41,17 @@ v={'actualExit':0,'sourceSnapshot':INPUT['head'],'productionSource':INPUT['produ
 
 def main():
     if subprocess.check_output(['git','status','--porcelain']):raise ValueError('clean fixed selected operator required')
-    os.umask(0o077);out=W/'pg2692-expiry-selected-v1';out.mkdir(mode=0o700)
+    os.umask(0o077);out=W/'pg2692-expiry-selected-v2';out.mkdir(mode=0o700)
     head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip();archive=out/'source.tar'
     archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'pom.xml','mvnw','.mvn','src','program/characterization','documents/100_RD','documents/200_UI','documents/300_SS']))
     inputs={'head':head,'productionSource':'04207efc3ad78bca75942153a90c70985064c988','archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'classes':CLASSES}
     code='INPUT='+repr(inputs)+'\n'+SERVER;compile(code,'<complete expiry selected run>','exec');script=out/'selected.private.py';script.write_text(code)
-    c,_=run('test ! -e '+BASE+'/runs/PG2692-selected-v1 && test ! -e '+BASE+'/source-expiry-PG2692-selected-v1 && test ! -e '+BASE+'/transfer/PG2692-selected-v1 && mkdir -m700 '+BASE+'/transfer/PG2692-selected-v1',30)
+    c,_=run('test ! -e '+BASE+'/runs/PG2692-selected-v2 && test ! -e '+BASE+'/source-expiry-PG2692-selected-v2 && test ! -e '+BASE+'/transfer/PG2692-selected-v2 && mkdir -m700 '+BASE+'/transfer/PG2692-selected-v2',30)
     if c:raise ValueError('fresh selected namespace required')
     for p in (archive,script):
-        c,_=copy(p,BASE+'/transfer/PG2692-selected-v1/',60)
+        c,_=copy(p,BASE+'/transfer/PG2692-selected-v2/',60)
         if c:raise ValueError('immutable selected transfer required')
-    c,o=run('python3 -B '+BASE+'/transfer/PG2692-selected-v1/selected.private.py',1200)
+    c,o=run('python3 -B '+BASE+'/transfer/PG2692-selected-v2/selected.private.py',1200)
     (out/'server.private.log').write_text(o);v={'actualExit':c,'payloadSha256':hashlib.sha256(code.encode()).hexdigest(),'formalAccepted':False}
     if not c:v['result']=json.loads(next(x for x in o.splitlines()if x.startswith('{')))
     (out/'manifest.safe.json').write_text(json.dumps(v,sort_keys=True));print(json.dumps(v));return c

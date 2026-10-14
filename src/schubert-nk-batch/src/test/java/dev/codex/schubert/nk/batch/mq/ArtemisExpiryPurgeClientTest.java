@@ -99,6 +99,15 @@ final class ArtemisExpiryPurgeClientTest {
         release.countDown();
       }
       completed.get(5, TimeUnit.SECONDS);
+      long deliveryStart = System.nanoTime();
+      while (requestQueue.getMessageCount() != 1
+          && System.nanoTime() - deliveryStart < TimeUnit.SECONDS.toNanos(5)) {
+        Thread.sleep(1);
+      }
+      assertEquals(1, requestQueue.getMessageCount());
+      var delivered = new CountDownLatch(1);
+      requestQueue.flushOnIntermediate(delivered::countDown);
+      assertTrue(delivered.await(5, TimeUnit.SECONDS));
       assertTrue(requestQueue.flushExecutor());
       assertEquals(1, requestQueue.getMessageCount());
       assertEquals(
