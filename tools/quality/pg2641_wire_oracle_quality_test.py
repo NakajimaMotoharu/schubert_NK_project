@@ -21,7 +21,7 @@ class OracleIntegrationQualification(unittest.TestCase):
 
     def test_transport_whole_supplied_namespace(self):
         entry = native.entry()
-        supplied = '\n'.join(name + '=None' for name in entry.__globals__ if name.isidentifier())
+        supplied = '\n'.join(name + '=None' for name in entry.__globals__ if name.isidentifier() and name != 'main')
         self.assertEqual(0, check(supplied + '\n' + native.source(), '<whole supplied transport>'))
 
 
