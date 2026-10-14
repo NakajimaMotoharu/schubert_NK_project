@@ -1,0 +1,7 @@
+# JDBC資源null横展開・変更Main独立PT仕様
+
+PT-MDB-2796-001、NK-BAT-001、Session.successfulBackup/recheckConsistent/requireAbandonedRequest・query/Rows/JdbcResourceFailures。RD OPS009/DAT009、UI251/253、SS332/341/343/SSC063/451、BUG1251/YKT1017、WBS-P017-01.03。開始見積りevent0740の.5/1.5/4pp内subset、追加二重費なし。
+
+新mdb2796001はREADONLY_STATEMENT/ABANDONED_STATEMENT/ABANDONED_ROWSの三入力。実PGの旧RUNNING二件→新試行開始で旧FAILED/ABANDONED二件＋新RUNNING二件をcommitしてから、対象queryの実資源を閉じてnullへ置換。期待IOException/固定redacted文言/cause-suppressed0、注入一回/connection閉鎖、全四rowのstep/attempt/status/error/end/count及びclient/advisory0は独立SQLで照合。2792のstatement/result二負例も変更Mainで再試験。
+
+command `python3 -B tools/quality/pg2796_jdbc_candidate_contract.py`（既構築PYTHONPATH）。当clean HEADの変更Main/Test/launcherをJDK25.0.4/Xlint-Werrorでcompile、3673資格済依存JAR/既fixture/DDLをhash固定。新classをclasspath先頭に置きSession全methodを隔離実PGで実行、実XML一意method/FES-aborted-notRun0を照合。旧Main/full/nativeを新candidateへ合格流用しない。coverage/全scope/static/native/正式451は未認定。秘密/DBdump/rawsessionは公開せずprivate log/XML保全、新source必要fresh全体・署名runtime/native資格は別終了依存。初期未実行、対象commit/実日時/OS/JDK/command/exit/入力hashはmanifest保存。

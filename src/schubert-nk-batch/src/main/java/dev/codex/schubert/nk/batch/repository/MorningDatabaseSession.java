@@ -81,7 +81,7 @@ public final class MorningDatabaseSession {
 
   @FunctionalInterface
   private interface Rows<T> {
-    T read(ResultSet rows) throws SQLException;
+    T read(ResultSet rows) throws SQLException, IOException;
   }
 
   public record BackupBegins(BatchStepAttempt database, BatchStepAttempt configuration) {
@@ -538,11 +538,12 @@ public final class MorningDatabaseSession {
       int isolation,
       boolean recovery) {}
 
-  private static void admit(Connection connection) throws SQLException {
+  private static void admit(Connection connection) throws SQLException, IOException {
     admitObservation(connection);
   }
 
-  private static RoleObservation admitObservation(Connection connection) throws SQLException {
+  private static RoleObservation admitObservation(Connection connection)
+      throws SQLException, IOException {
     boolean autoCommit = connection.getAutoCommit();
     boolean readOnly = connection.isReadOnly();
     int isolation = connection.getTransactionIsolation();
@@ -567,7 +568,8 @@ public final class MorningDatabaseSession {
         });
   }
 
-  private static boolean scalar(Connection connection, String sql) throws SQLException {
+  private static boolean scalar(Connection connection, String sql)
+      throws SQLException, IOException {
     return query(
         connection,
         sql,
@@ -585,12 +587,12 @@ public final class MorningDatabaseSession {
   }
 
   private static <T> T query(Connection connection, String sql, Rows<T> operation)
-      throws SQLException {
+      throws SQLException, IOException {
     return query(connection, sql, statement -> {}, operation);
   }
 
   private static <T> T query(Connection connection, String sql, Bind bind, Rows<T> operation)
-      throws SQLException {
+      throws SQLException, IOException {
     var statement = connection.prepareStatement(sql);
     @Nullable Throwable failure = null;
     try {
@@ -601,7 +603,7 @@ public final class MorningDatabaseSession {
       @Nullable Throwable rowFailure = null;
       try {
         return operation.read(present(rows));
-      } catch (SQLException | RuntimeException | Error primary) {
+      } catch (SQLException | IOException | RuntimeException | Error primary) {
         rowFailure = primary;
         throw primary;
       } finally {
@@ -612,7 +614,7 @@ public final class MorningDatabaseSession {
             if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
           }
       }
-    } catch (SQLException | RuntimeException | Error primary) {
+    } catch (SQLException | IOException | RuntimeException | Error primary) {
       failure = primary;
       throw primary;
     } finally {
@@ -717,7 +719,7 @@ public final class MorningDatabaseSession {
     }
 
     private List<BackupStepRepository.Terminal> observeBackupPair(
-        BackupBegins expected, Instant now) throws SQLException {
+        BackupBegins expected, Instant now) throws SQLException, IOException {
       require(expected.database().id() != expected.configuration().id());
       boolean databaseFirst = expected.database().id() < expected.configuration().id();
       return query(
@@ -899,33 +901,38 @@ public final class MorningDatabaseSession {
                 + "success_count,failure_count,byte_count,error_code,error_summary from schubert.batch_runs "
                 + "where run_id=? and step in ('BACKUP_DB','BACKUP_CONFIG') and status='SUCCESS' "
                 + "order by started_at desc,id desc limit 2 for update";
-        try (var statement = connection.prepareStatement(sql)) {
-          statement.setQueryTimeout(5);
-          statement.setObject(1, run.id());
-          try (var rows = statement.executeQuery()) {
-            if (!rows.next()) {
-              guard();
-              return Optional.empty();
-            }
-            var first = successfulHandle(rows, run, now);
-            var ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
-            if (!rows.next()) throw unavailable();
-            var second = successfulHandle(rows, run, now);
-            var secondEnd = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
-            if (rows.next()
-                || first.step() == second.step()
-                || first.attempt() != second.attempt()
-                || !first.startedAt().equals(second.startedAt())
-                || !ended.equals(secondEnd)) throw unavailable();
-            guard();
-            var pair =
-                first.step() == BatchStep.BACKUP_DB
-                    ? new BackupBegins(first, second)
-                    : new BackupBegins(second, first);
-            guard();
-            return Optional.of(pair);
-          }
-        }
+        // BUG1251/YKT1017: provider resource null is SQL unavailable, never a leaked NPE.
+        Optional<BackupBegins> observed =
+            query(
+                connection,
+                sql,
+                statement -> statement.setObject(1, run.id()),
+                rows -> {
+                  if (!rows.next()) {
+                    guard();
+                    return Optional.empty();
+                  }
+                  var first = successfulHandle(rows, run, now);
+                  var ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+                  if (!rows.next()) throw unavailable();
+                  var second = successfulHandle(rows, run, now);
+                  var secondEnd =
+                      present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+                  if (rows.next()
+                      || first.step() == second.step()
+                      || first.attempt() != second.attempt()
+                      || !first.startedAt().equals(second.startedAt())
+                      || !ended.equals(secondEnd)) throw unavailable();
+                  guard();
+                  var pair =
+                      first.step() == BatchStep.BACKUP_DB
+                          ? new BackupBegins(first, second)
+                          : new BackupBegins(second, first);
+                  guard();
+                  return Optional.of(pair);
+                });
+        guard(); // Close every JDBC resource before allowing an observed pair to escape.
+        return observed;
       } catch (SQLException failure) {
         throw unavailable();
       }
@@ -1040,8 +1047,21 @@ public final class MorningDatabaseSession {
         connection.setAutoCommit(false);
         // The repository requires a borrowed RW-configured connection. The server transaction
         // itself is explicitly READ ONLY; no JDBC configured-readOnly flag is lied about/reset.
-        try (var statement = connection.createStatement()) {
-          statement.execute("SET TRANSACTION READ ONLY");
+        var statement = connection.createStatement();
+        @Nullable Throwable failure = null;
+        try {
+          present(statement).execute("SET TRANSACTION READ ONLY");
+        } catch (SQLException | RuntimeException | Error primary) {
+          failure = primary;
+          throw primary;
+        } finally {
+          if (statement != null) {
+            try {
+              statement.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(failure, secondary)) throw secondary;
+            }
+          }
         }
         boolean consistent = new RunReferenceRepository(connection).read(run).identityConsistent();
         connection.rollback();
@@ -1072,30 +1092,36 @@ public final class MorningDatabaseSession {
         String sql =
             "select step,attempt,status,error_code,ended_at,business_date from schubert.batch_runs "
                 + "where run_id=? and started_at=? and step in ('BACKUP_DB','BACKUP_CONFIG') order by step";
-        try (var statement = connection.prepareStatement(sql)) {
-          statement.setObject(1, previous.run());
-          statement.setObject(
-              2, java.time.OffsetDateTime.ofInstant(previous.started(), java.time.ZoneOffset.UTC));
-          try (var rows = statement.executeQuery()) {
-            for (var current : java.util.List.of(expected.configuration(), expected.database())) {
-              if (!rows.next()) throw unavailable();
-              var ended =
-                  present(rows.getObject("ended_at", java.time.OffsetDateTime.class)).toInstant();
-              if (!current.step().name().equals(present(rows.getString("step")))
-                  || present(rows.getObject("attempt", Integer.class)) >= current.attempt()
-                  || !"FAILED".equals(present(rows.getString("status")))
-                  || !"ABANDONED".equals(present(rows.getString("error_code")))
-                  || ended.isBefore(previous.started())
-                  || ended.isAfter(current.startedAt())
-                  || !run.cutoff()
-                      .atZone(java.time.ZoneId.of("Asia/Tokyo"))
-                      .toLocalDate()
-                      .equals(present(rows.getObject("business_date", java.time.LocalDate.class))))
-                throw unavailable();
-            }
-            if (rows.next()) throw unavailable();
-          }
-        }
+        query(
+            connection,
+            sql,
+            statement -> {
+              statement.setObject(1, previous.run());
+              statement.setObject(
+                  2,
+                  java.time.OffsetDateTime.ofInstant(previous.started(), java.time.ZoneOffset.UTC));
+            },
+            rows -> {
+              for (var current : java.util.List.of(expected.configuration(), expected.database())) {
+                if (!rows.next()) throw unavailable();
+                var ended =
+                    present(rows.getObject("ended_at", java.time.OffsetDateTime.class)).toInstant();
+                if (!current.step().name().equals(present(rows.getString("step")))
+                    || present(rows.getObject("attempt", Integer.class)) >= current.attempt()
+                    || !"FAILED".equals(present(rows.getString("status")))
+                    || !"ABANDONED".equals(present(rows.getString("error_code")))
+                    || ended.isBefore(previous.started())
+                    || ended.isAfter(current.startedAt())
+                    || !run.cutoff()
+                        .atZone(java.time.ZoneId.of("Asia/Tokyo"))
+                        .toLocalDate()
+                        .equals(
+                            present(rows.getObject("business_date", java.time.LocalDate.class))))
+                  throw unavailable();
+              }
+              if (rows.next()) throw unavailable();
+              return Boolean.TRUE;
+            });
         connection.rollback();
         connection.setAutoCommit(true);
         connection.setReadOnly(false);

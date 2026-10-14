@@ -31,6 +31,127 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2796-001: all remaining same-class Statement/ResultSet boundaries reject null. */
+  @Test
+  void mdb2796001ReadOnlyAndAbandonedNullResourcesPreserveAllCommittedRows() throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("READONLY_STATEMENT", "ABANDONED_STATEMENT", "ABANDONED_ROWS")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27960001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2052-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var currentStart = started.plusSeconds(10);
+      var armed = new AtomicBoolean();
+      var injected = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var real = DriverManager.getConnection(url, properties);
+                retained.set(real);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object value = mdb2292Invoke(method, real, args);
+                          if (armed.get()
+                              && fault.equals("READONLY_STATEMENT")
+                              && method.getName().equals("createStatement")) {
+                            ((Statement) value).close();
+                            injected.incrementAndGet();
+                            return null;
+                          }
+                          if (!armed.get()
+                              || !method.getName().equals("prepareStatement")
+                              || !((String) args[0])
+                                  .startsWith(
+                                      "select step,attempt,status,error_code,ended_at,business_date from schubert.batch_runs"))
+                            return value;
+                          var statement = (PreparedStatement) value;
+                          if (fault.equals("ABANDONED_STATEMENT")) {
+                            statement.close();
+                            injected.incrementAndGet();
+                            return null;
+                          }
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (unusedStatement, called, input) -> {
+                                Object actual = mdb2292Invoke(called, statement, input);
+                                if (called.getName().equals("executeQuery")) {
+                                  ((ResultSet) actual).close();
+                                  injected.incrementAndGet();
+                                  return null;
+                                }
+                                return actual;
+                              });
+                        });
+              },
+              c -> {});
+      assertEquals(
+          Boolean.TRUE,
+          subject.execute(
+              credential(),
+              s -> {
+                s.beginBackup(run, started, false);
+                return Boolean.TRUE;
+              }));
+      try {
+        var failure =
+            assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        s -> {
+                          s.beginBackup(run, currentStart, true);
+                          armed.set(true);
+                          if (fault.equals("READONLY_STATEMENT")) s.recheckConsistent(run);
+                          else
+                            s.requireAbandonedRequest(
+                                new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                                    run.id(), started));
+                          fail("null JDBC boundary must not return authority");
+                          return Boolean.TRUE;
+                        }));
+        assertEquals("root batch database unavailable", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+      } finally {
+        assertEquals(1, injected.get());
+        assertTrue(retained.get().isClosed());
+        try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+            var s =
+                c.prepareStatement(
+                    "select step,attempt,status,started_at,ended_at,target_count,success_count,failure_count,byte_count,error_code from schubert.batch_runs where run_id=? order by step,attempt")) {
+          s.setObject(1, run.id());
+          try (var rows = s.executeQuery()) {
+            for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB"))
+              for (int attempt = 1; attempt <= 2; attempt++) {
+                assertTrue(rows.next());
+                assertEquals(step, rows.getString(1));
+                assertEquals(attempt, rows.getInt(2));
+                assertEquals(attempt == 1 ? "FAILED" : "RUNNING", rows.getString(3));
+                assertEquals(
+                    attempt == 1 ? started : currentStart, rows.getTimestamp(4).toInstant());
+                if (attempt == 1) assertEquals(currentStart, rows.getTimestamp(5).toInstant());
+                else assertNull(rows.getTimestamp(5));
+                for (int column = 6; column <= 9; column++) assertEquals(0, rows.getLong(column));
+                assertEquals(attempt == 1 ? "ABANDONED" : null, rows.getString(10));
+              }
+            assertFalse(rows.next());
+          }
+        }
+        mdb2292NoOwnerResources();
+      }
+    }
+  }
+
   /** PT-MDB-2792-001: null JDBC resources are known unavailable data, never leaked NPE. */
   @Test
   void mdb2792001SuccessfulBackupRejectsNullJdbcResourcesWithoutNpe() throws Exception {
