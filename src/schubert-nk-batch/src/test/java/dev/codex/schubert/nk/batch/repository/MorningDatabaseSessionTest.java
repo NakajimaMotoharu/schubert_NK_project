@@ -68,7 +68,8 @@ final class MorningDatabaseSessionTest {
                       });
             },
             c -> {});
-    assertTrue(
+    assertEquals(
+        Boolean.TRUE,
         subject.execute(
             credential(),
             session -> {

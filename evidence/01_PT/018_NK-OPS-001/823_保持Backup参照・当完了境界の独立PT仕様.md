@@ -1,5 +1,7 @@
 # 保持Backup参照・当完了境界の独立PT仕様
 
+v1/Test194ab1825/session96473 actual1・新Test generic executeをassertTrueへ渡した際のBooleanSupplier型推論compile拒否、JUnit/SQL fixture未実行。原v1 payload49fe27ed/compile log保持、合格加点0。明示Boolean.TRUE equalityへ是正し、別v2 namespaceでのみ再試験する。Production既実装違反でなく新Test初回compile failureとしてeventへ記録。
+
 PT-MDB-2754-001、NK-BAT-001、MorningDatabaseSession.Session.retainedBackupSuccessful / MorningDatabaseSessionTest.mdb2754001RetainedBackupRequiresCurrentCompletionAndPreservesOriginalRows。主担当WBS-P017-01、RD BAK/OPS/AVL、UI251/253、SS341§3～7/343/SSC134/451。2748実method756 backupFinished=falseを着手前照合、開始予算.25/.75/2ppはevent0728で固定。
 
 隔離実PostgreSQL/DDLs、固定run27540001・2050-02-09T15Z/開始翌02Z、逆順ID原本DB27540011/CONFIG27540010、独立literal SQLのSUCCESS二行・target1/2-success1/2-bytes26/67・終了+3秒、fixture manifest content終了+2秒。開始直後及びbeginResumeBackup後（当SKIPPED未完了）に参照してもIOException/JDBC prepare追加0。completeReusedBackup後だけtrue。各段階とsession閉鎖後、独立SQLが原SUCCESS二行・当SKIPPED二行の全列/件数を確認し、connection/client/advisory解放を確認。
