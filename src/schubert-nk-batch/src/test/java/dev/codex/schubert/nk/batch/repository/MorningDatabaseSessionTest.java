@@ -115,6 +115,8 @@ final class MorningDatabaseSessionTest {
                                       : "update schubert.batch_runs set byte_count=byte_count+1 where run_id=? and attempt=1")) {
                         statement.setObject(1, run.id());
                         assertEquals(2, statement.executeUpdate());
+                      } catch (SQLException failure) {
+                        throw new IOException("isolated original-row mutation failed", failure);
                       }
                       armed.set(true);
                       if (operation.equals("COMPLETE"))

@@ -31,6 +31,7 @@ prior=json.loads((prior_root/'manifest.safe.json').read_bytes())
 require(prior['actualExit']==0 and prior['source']==INPUT['source'] and prior['input']['full']['jarHashes']==INPUT['full']['jarHashes'])
 prior_exec=prior_root/'selected.exec';require(sha(prior_exec)==prior['execSha256'])
 """
+    raw = raw.replace('PG2590-selected-v1', 'PG2590-selected-v2')
     raw = raw.replace(marker, extra + marker).replace('*hosts,*native_streams,str(execfile)',
         '*hosts,*native_streams,str(prior_exec),str(execfile)')
     if check('INPUT={}\n' + raw, '<current original reinspect namespace>'):
@@ -46,7 +47,7 @@ def main():
                                    'pg2579-current-jdbc-group-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
     ns = {**transport.__dict__, 'SOURCE': previous.SOURCE, 'FILES': FILES,
-          'SLOT': 'pg2590-original-reinspection-selected-v1', 'SERVER': server(), 'native_input': native_input}
+          'SLOT': 'pg2590-original-reinspection-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<fixed original reinspection transport>', 'exec'), ns)
     return ns['main']()
 

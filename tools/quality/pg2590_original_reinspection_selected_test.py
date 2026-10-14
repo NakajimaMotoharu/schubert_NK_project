@@ -13,7 +13,7 @@ class OriginalReinspection(unittest.TestCase):
     def test_whole_selected_prior_bytes_same_jar_and_isolated_db(self):
         raw = server()
         ast.parse(raw)
-        for marker in ['PG2590-selected-v1', 'Pg2590OriginalReinspectionLauncher', 'PG2588-selected-v1',
+        for marker in ['PG2590-selected-v2', 'Pg2590OriginalReinspectionLauncher', 'PG2588-selected-v1',
                        "sha(prior_exec)==prior['execSha256']", 'source-full-PG2578',
                        'PG2582-native-v1', '*hosts,*native_streams,str(prior_exec),str(execfile)']:
             self.assertIn(marker, raw)
