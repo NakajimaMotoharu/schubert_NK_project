@@ -16,6 +16,92 @@ import java.util.function.LongFunction;
 import org.junit.jupiter.api.Test;
 
 class ProtocolSemanticTypeTest {
+  /** YKT1010/PT-PRO-001-T04: independent UI234..236/SS333/351 enum tables. */
+  @Test
+  void approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables() {
+    // UI234: SRC voice/type, SCN delivery; UI235: disposition/category/pair;
+    // UI236: user/log/question/notification; SS333 section8: MIME;
+    // SS351 public notification failure-code projection table (PROCESS_FAILED..PROTOCOL_ERROR).
+    assertApprovedEnum(ContentDisposition.class, "INLINE=I", "ATTACHMENT=A");
+    assertApprovedEnum(DeliveryMode.class, "INLINE=I", "FILE=F");
+    assertApprovedEnum(PairRole.class, "MAIN=M", "INSTRUMENTAL=I", "NONE=N");
+    assertApprovedEnum(VoiceCondition.class, "PRESENT=1", "ABSENT=0");
+    assertApprovedEnum(UserRole.class, "USER=USER", "ADMIN=ADMIN");
+    assertApprovedEnum(LogLevel.class, "INFO=INFO", "WARN=WARN", "ERROR=ERROR");
+    assertApprovedEnum(
+        LogType.class,
+        "ACTION=ACTION",
+        "REQUEST=REQUEST",
+        "SECURITY=SECURITY",
+        "MQ=MQ",
+        "SYSTEM=SYSTEM",
+        "BATCH=BATCH");
+    assertApprovedEnum(UserState.class, "ACTIVE=ACTIVE", "DISABLED=DISABLED", "LOCKED=LOCKED");
+    assertApprovedEnum(
+        NotificationState.class,
+        "RECEIVED=RECEIVED",
+        "PROCESSING=PROCESSING",
+        "COMPLETED=COMPLETED",
+        "ERROR=ERROR",
+        "CANCELLED=CANCELLED");
+    assertApprovedEnum(
+        AnswerState.class, "ANSWERED=ANSWERED", "UNANSWERED=UNANSWERED", "ERROR=ERROR");
+    assertApprovedEnum(
+        NotificationType.class, "ACCEPTED=ACCEPTED", "COMPLETED=COMPLETED", "ERROR=ERROR");
+    assertApprovedEnum(EntryType.class, "DIALOGUE=dialogue", "NARRATION=narration");
+    assertApprovedEnum(GameCode.class, "NUKITASHI_1=NUKITASHI1", "NUKITASHI_2=NUKITASHI2");
+    assertApprovedEnum(
+        MediaMimeType.class,
+        "AUDIO_MP4=audio/mp4",
+        "AUDIO_MPEG=audio/mpeg",
+        "AUDIO_OGG=audio/ogg",
+        "AUDIO_WAV=audio/wav",
+        "AUDIO_FLAC=audio/flac",
+        "VIDEO_MP4=video/mp4");
+    assertApprovedEnum(
+        NotificationErrorCode.class,
+        "PROCESS_FAILED=PROCESS_FAILED",
+        "SYSTEM_UNAVAILABLE=SYSTEM_UNAVAIL",
+        "RESOURCE_LIMIT=RESOURCE_LIMIT",
+        "DATA_INTEGRITY=DATA_INTEGRITY",
+        "PROTOCOL_ERROR=PROTOCOL_ERROR");
+    assertApprovedEnum(AnimationListCategory.class, "MAIN=MAIN", "OVA=OVA");
+    assertApprovedEnum(AnimationCategory.class, "MAIN=MAIN", "SUBTRACK=SUBTRACK", "OVA=OVA");
+    assertApprovedEnum(
+        VideoCategory.class, "MAIN=MAIN", "SUBTRACK=SUBTRACK", "OVA=OVA", "OPENING=OPENING");
+  }
+
+  private static <E extends Enum<E> & WireEnum> void assertApprovedEnum(
+      Class<E> type, String... rows) {
+    assertEquals(rows.length, type.getEnumConstants().length, type.getSimpleName());
+    for (String row : rows) {
+      String[] expected = row.split("=", -1);
+      assertEquals(2, expected.length);
+      E actual = Enum.valueOf(type, expected[0]);
+      assertEquals(expected[1], actual.wireValue(), type.getSimpleName() + ":" + expected[0]);
+      assertEquals(new FieldValue.Text(expected[1]), TypedFieldValues.enumValue(actual));
+      assertEquals(
+          expected[0],
+          TypedFieldValues.requiredEnum(values(new FieldValue.Text(expected[1])), "value", type)
+              .name());
+      assertEquals(
+          expected[0],
+          TypedFieldValues.optionalEnum(values(new FieldValue.Text(expected[1])), "value", type)
+              .orElseThrow()
+              .name());
+    }
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            TypedFieldValues.requiredEnum(
+                values(new FieldValue.Text("UNAPPROVED_CANARY")), "value", type));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            TypedFieldValues.optionalEnum(
+                values(new FieldValue.Text("UNAPPROVED_CANARY")), "value", type));
+  }
+
   @Test
   void allN12IdentifierTypesEnforceTheSharedPositiveRange() {
     List<LongFunction<? extends ProtocolId>> factories =
