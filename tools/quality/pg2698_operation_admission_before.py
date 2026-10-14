@@ -13,11 +13,13 @@ import hashlib,json,os,pathlib,stat
 p=pathlib.Path('/var/lib/pgpt-s1-preservation/pg2684-operation-current-noargs-once-v1/before.private.json')
 def require(v):
  if not v:raise ValueError('immutable new admission original required')
+def identity(s):
+ return (s.st_dev,s.st_ino,s.st_uid,s.st_gid,s.st_mode,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
 s=p.lstat();require(stat.S_ISREG(s.st_mode)and(s.st_uid,s.st_gid,stat.S_IMODE(s.st_mode),s.st_nlink)==(0,0,0o600,1)and not os.listxattr(p))
 fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
 try:raw=os.pread(fd,s.st_size+1,0);require(len(raw)==s.st_size)
 finally:os.close(fd)
-require(p.lstat()==s and p.read_bytes()==raw)
+require(identity(p.lstat())==identity(s)and p.read_bytes()==raw and identity(p.lstat())==identity(s))
 v=json.loads(raw);require(set(v)=={'backup','configuration','extraDurable','native','originals','pid1','rows','runtime','startup','unitFilesActual','units'})
 require(len(v['native'])==41 and sum(pathlib.Path(k).suffix=='.exec'for k in v['native'])==28)
 print(json.dumps({'actualExit':0,'privateBeforeSha256':hashlib.sha256(raw).hexdigest(),'nativeEntries':41,'execEntries':28,'rawExported':False}))

@@ -3,6 +3,7 @@ import ast
 import inspect
 import json
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 from pyflakes.api import check
 from pg1446_current_cold_stage import W
@@ -18,6 +19,15 @@ class WholeAcceptancePreparation(unittest.TestCase):
         self.assertEqual(0,check(BODY,'<actual immutable hash reader>'))
         for m in ['pg2684-operation-current-noargs-once-v1','execEntries','28','41','O_NOFOLLOW','rawExported']:
             self.assertIn(m,BODY)
+
+    def test_read_atime_is_not_content_or_ownership_change(self):
+        tree=ast.parse(BODY);node=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='identity')
+        ns={};exec(compile(ast.Module(body=[node],type_ignores=[]),'<independent file identity>','exec'),ns)
+        expected=dict(st_dev=1,st_ino=2,st_uid=0,st_gid=0,st_mode=0o100600,st_nlink=1,st_size=100,st_mtime_ns=11,st_ctime_ns=12,st_atime_ns=13)
+        identity=ns['identity'];base=identity(SimpleNamespace(**expected))
+        self.assertEqual(base,identity(SimpleNamespace(**{**expected,'st_atime_ns':100})))
+        for key in ['st_dev','st_ino','st_uid','st_gid','st_mode','st_nlink','st_size','st_mtime_ns','st_ctime_ns']:
+            with self.subTest(key=key):self.assertNotEqual(base,identity(SimpleNamespace(**{**expected,key:expected[key]+1})))
 
     def test_terminal_seal_and_parent_are_new_source_only(self):
         actual=json.loads((W/'pg2542-strict-current-live-binding-v1/manifest.safe.json').read_bytes())
