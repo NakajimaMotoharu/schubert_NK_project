@@ -10,11 +10,11 @@ from pg2600_retention_group_full_six import SOURCE
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = '/home/mini/schubert-nk-pgpt'
-SLOT = 'pg2634-protocol-oracle-regression-v1'
+SLOT = 'pg2634-protocol-oracle-regression-v2'
 SERVER = r'''
 import datetime,hashlib,json,os,subprocess,tarfile,xml.etree.ElementTree as ET,zipfile
 from pathlib import Path
-os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2634-v1';source=b/'source-protocol-PG2634';transfer=b/'transfer/PG2634-v1'
+os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2634-v2';source=b/'source-protocol-PG2634-v2';transfer=b/'transfer/PG2634-v2'
 def require(v):
  if not v:raise ValueError('exact current Protocol oracle regression refused')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -22,7 +22,7 @@ out.mkdir(mode=0o700);source.mkdir(mode=0o700);archive=transfer/'source.tar';req
 with tarfile.open(archive)as t:t.extractall(source,filter='data')
 module=source/'src/schubert-nk-protocol';inputs={str(p.relative_to(source)):sha(p)for p in source.rglob('*')if p.is_file()}
 env={k:v for k,v in os.environ.items()if k not in('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS')};env['JAVA_HOME']=str(b/'tools/jdk-25.0.4');env['PATH']=env['JAVA_HOME']+'/bin:'+env['PATH']
-args=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Dmaven.repo.local='+str(b/'m2/repository'),'-pl','src/schubert-nk-protocol','clean','spotless:check','test-compile','test','spotbugs:check','jacoco:report','jar:jar']
+args=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=never','-Djansi.force=false','-Dmaven.repo.local='+str(b/'m2/repository'),'-Dnk.pt.repository='+str(source),'-pl','src/schubert-nk-protocol','clean','spotless:check','test-compile','test','spotbugs:check','jacoco:report','jar:jar']
 started=datetime.datetime.now(datetime.timezone.utc).isoformat()
 with(out/'maven.private.log').open('xb')as f:r=subprocess.run(args,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=240)
 require(r.returncode==0);xmls=list((module/'target/surefire-reports').glob('TEST-*.xml'));require(len(xmls)==17);tests=0
@@ -54,16 +54,16 @@ def main():
         raise ValueError('actual current Main full required')
     os.umask(0o077);out=W/SLOT;out.mkdir(mode=0o700)
     head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-    archive=out/'source.tar';archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'pom.xml','src/schubert-nk-protocol']))
+    archive=out/'source.tar';archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'pom.xml','mvnw','.mvn','src','program/characterization','documents/100_RD','documents/200_UI','documents/300_SS']))
     inputs={'source':SOURCE,'head':head,'archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'priorJarSha256':full['result']['jarHashes']['protocol']}
     code='INPUT='+repr(inputs)+'\n'+SERVER;compile(code,'<current Protocol independent oracle regression>','exec')
     script=out/'regression.private.py';script.write_text(code)
-    c,_=run('test ! -e '+BASE+'/runs/PG2634-v1 && test ! -e '+BASE+'/source-protocol-PG2634 && test ! -e '+BASE+'/transfer/PG2634-v1 && mkdir -m700 '+BASE+'/transfer/PG2634-v1',30)
+    c,_=run('test ! -e '+BASE+'/runs/PG2634-v2 && test ! -e '+BASE+'/source-protocol-PG2634-v2 && test ! -e '+BASE+'/transfer/PG2634-v2 && mkdir -m700 '+BASE+'/transfer/PG2634-v2',30)
     if c:raise ValueError('fresh Protocol regression namespace required')
     for p in(archive,script):
-        c,_=copy(p,BASE+'/transfer/PG2634-v1/',60)
+        c,_=copy(p,BASE+'/transfer/PG2634-v2/',60)
         if c:raise ValueError('immutable Protocol input transfer required')
-    c,o=run('python3 -B '+BASE+'/transfer/PG2634-v1/regression.private.py',300)
+    c,o=run('python3 -B '+BASE+'/transfer/PG2634-v2/regression.private.py',300)
     (out/'server.private.log').write_text(o)
     value={'actualExit':c,'source':SOURCE,'testSource':head,'payloadSha256':hashlib.sha256(code.encode()).hexdigest(),'formalAccepted':False}
     if not c:value['result']=json.loads(next(x for x in o.splitlines()if x.startswith('{')))
