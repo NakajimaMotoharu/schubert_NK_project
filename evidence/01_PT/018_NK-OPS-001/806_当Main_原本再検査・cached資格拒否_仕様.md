@@ -11,3 +11,5 @@ command：固定PYTHONPATHでpg2590_original_reinspection_selected_test.py→cle
 v1/session54989 actual1：新test内Operation callbackの隔離管理SQLがchecked SQLExceptionを処理しておらずjavacで拒否、JUnit未実行。private compile logを保持し合格へ加算0。既承認期待値とProductionは変更せず、fixture SQL失敗を固定IOExceptionへ伝搬するcatchを追加。v2は新namespaceで実行しv1を上書きしない。v2実結果は未観測。
 
 v2はtransport内旧v1保存先を事前freshチェックが拒否し、remote compile/JUnit未発行。既存v1証跡は不変。transportとserver両方を新v3へ固定し、v2私有準備物も保持して再試験する。
+
+v3/session69145 actual0/TestSource5cc760729ee7fb6871bb9c5c4e62548a78ca2009/1PT4case成功。公開original-reinspection-manifest-v3.json、payload21828167・servermanifest31be524c、javac0/全Main CRC0/VM操作0。独立全4row・client/advisory/connection後条件合格。残L797/M156/C9/B553、2588に対し2line2branch追加。二newmethod/16caseは限定受入のみで全3653・正式1964/53へ加算しない。既v1 compile失敗/v2事前拒否を保持。
