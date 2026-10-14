@@ -1,5 +1,7 @@
 # PG2532～2536 新候補有限公開
 
+実2026-10-14／f6b1f87c5：2533全七phase ABI0→2534stage0/activate0（48.380022秒、00:29:50.790969Z～00:30:39.170991Z）→2536別post0/payload2fde8b0e/postd2e78446。currenta79/PG2512/BOM2f3275b0へ有限公開、七phase唯一時刻/順/各後条件・canonical INVALID/epoch/approval/current/保持旧link・全24/32/187/原本Backup/native22/資源/Unit byte-inode-config不変更を実認証。Unit交換/reload/Root/Backup/ADMIN/業務write/start/stop0、新Source親未起動・oldnative非適用。公開publication-manifest.json13actualreceipt/YKT1009全consumer是正、全PGPT/正式/四100は別未完。以下初期未実行は履歴。
+
 NK-OPS-001、SS343/353/354、N13主費・N05/K01参照費0、791/792依存、0656群予算subset・追加予算0。candidate a79/PG2512のBOMは実host署名actual receiptから取得し、current cdbc/PG2428/BOM6e06とはplaceholderで分離する。fixtureの仮BOMは実発行・合格に使わない。
 
 PT-PUBLICATION-GRAPH-2532：全current/candidate graphの型付きSource/release/BOM/原本v2/真正旧親06236/boot・各basename/canonical path/complete namespaceを独立fixture三で確認する。currentとcandidateの同値BOMの役割取り違えを拒否、既保持原本を変更しない。全RO実post2530を終了依存とする。

@@ -1,5 +1,7 @@
 # PG2524～2530 候補host-RO独立資格
 
+実2026-10-14／f6b1f87c5：2525全ROABI0→2526stage0/prepare-ro0（41.171501秒）→2530別mountpost0/payload5cddab7c/post5085cf6e、a79/PG2512だけをhost-RO資格、全24/32/187/原本Backup/native/資源/current-epoch-approval不変。公開publication-manifest.json13receipt参照。初期未実行は以下履歴、Root/Backup/ADMIN/Unit/reload/業務start/stop0・正式/newnative/global未受入。
+
 NK-OPS-001、SS343/353/354、N13主費・N05参照費0、791依存。現cdbc/PG2428/当原本df3bdffd/親06236を保持して、新a79/PG2512だけをhost namespace read-onlyへ配置する。候補を現在業務sourceやold3b原本と混同しない。
 
 PT-CANDIDATE-RO-2524：全Python/Java namespace、現current親receipt/18field/START29104365495/END30827355356は数値ASTで独立照合。初期新fixtureはast.unparseによる整形差を文字列一致要求して失敗、数値不変をASTで確認するfixtureへ修正し履歴を保持。missing/bad BOMやbeforeを拒否。工具三fixture/static0、実RO未実行。
