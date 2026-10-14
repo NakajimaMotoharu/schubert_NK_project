@@ -1,7 +1,7 @@
 """Independent literal pending identity test against frozen current Main; no VM action."""
 import inspect
 import pg2220_root_uid_host_selected as previous
-from pg2674_operation_pending_sources import production
+from pg2674_operation_publication_sources import production
 
 SOURCE = production()
 FILES = [
