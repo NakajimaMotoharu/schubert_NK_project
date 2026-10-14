@@ -1,5 +1,6 @@
 """Requalify retained own-source streams against new full; no VM recapture or byte exclusions."""
 import hashlib
+import ast
 import json
 import os
 import shlex
@@ -15,6 +16,14 @@ def server():
     raw=bridge.server().replace('PG2642','PG2746').replace('PG2640','PG2744').replace('3664','3669').replace(
         'source-full-PG2510','source-full-PG2694').replace(bridge.SOURCE,SOURCE)
     raw=raw.replace("transfer/PG2746-native-input.tar","transfer/PG2722-native-input.tar")
+    assignments=[n for n in ast.parse(raw).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name)and t.id=='OLD_JARS'for t in n.targets)]
+    if len(assignments)!=1:raise ValueError('one historical embedded Jar binding required')
+    assigned=assignments[0]
+    hashes=ast.literal_eval(assigned.value)
+    if set(hashes)!={'protocol','storage','bootstrap','api','web','batch'}or any(type(h)is not str or len(h)!=64 for h in hashes.values()):raise ValueError('typed historical binding boundary required')
+    lines=raw.splitlines(keepends=True)
+    raw=''.join(lines[:assigned.lineno-1]+lines[assigned.end_lineno:])
+    raw=raw.replace('PG2746-native-v1','PG2746-native-v2').replace('qualified2640Tests','qualified2744Tests')
     marker="full=json.loads((B/'runs/PG2744-six-v1/manifest.safe.json').read_bytes());qualified=v['qualifiedFull']"
     if raw.count(marker)!=1:raise ValueError('one exact retained native/full boundary required')
     proof="""require(sha(B/'runs/PG2722-native-v1/manifest.safe.json')==OLD_NATIVE_SHA)
@@ -46,7 +55,14 @@ def main():
     import inspect
     raw='import xml.etree.ElementTree as ET\nCOUNTERS=("LINE","METHOD","CLASS","BRANCH")\n'+'\n'.join(k+'='+repr(v)for k,v in definitions.items())+'\n'+inspect.getsource(coordinates)+'\n'+server()
     if check(raw,'<complete actual retained qualification>'):raise ValueError('whole namespace required')
-    os.umask(0o077);out=W/'pg2746-backup-admission-native-qualified-v1';out.mkdir(mode=0o700)
+    authorities=set(definitions)
+    counts={name:0 for name in authorities}
+    for node in ast.parse(raw).body:
+        if isinstance(node,ast.Assign):
+            for target in node.targets:
+                if isinstance(target,ast.Name)and target.id in counts:counts[target.id]+=1
+    if any(count!=1 for count in counts.values()):raise ValueError('single authority binding in complete namespace required')
+    os.umask(0o077);out=W/'pg2746-backup-admission-native-qualified-v2';out.mkdir(mode=0o700)
     (out/'payload.private.py').write_text(raw)
     code,log=run('python3 -B -c '+shlex.quote(raw),180)
     (out/'server.private.log').write_text(log)

@@ -8,7 +8,7 @@ from pg2674_operation_publication_sources import production
 
 def main():
     root=Path(__file__).resolve().parents[2]
-    receipt=W/'pg2746-backup-admission-native-qualified-v1/manifest.safe.json'
+    receipt=W/'pg2746-backup-admission-native-qualified-v2/manifest.safe.json'
     value=json.loads(receipt.read_bytes())
     if type(value.get('actualExit'))is not int or value['actualExit']!=0 or value.get('productionSource')!=production():
         raise ValueError('actual current full/native receipt required')

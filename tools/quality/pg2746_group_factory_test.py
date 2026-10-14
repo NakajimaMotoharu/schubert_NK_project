@@ -1,6 +1,7 @@
 """Full/native factory literal guards only; no run/deploy/start authority."""
 import inspect
 import types
+import ast
 import unittest
 from unittest.mock import patch
 from pyflakes.api import check
@@ -27,7 +28,7 @@ class Factories(unittest.TestCase):
 
     def test_complete_retained_native_namespace_no_excluded_members(self):
         raw=native.server()
-        for literal in ['transfer/PG2722-native-input.tar','runs/PG2746-native-v1','source-full-PG2694','source-full-PG2744',
+        for literal in ['transfer/PG2722-native-input.tar','runs/PG2746-native-v2','source-full-PG2694','source-full-PG2744',
                         'require(images[0]==images[1])','require(identical_main==1643)',"v['qualifiedFull']=QUALIFIED"]:
             self.assertIn(literal,raw)
         self.assertNotIn('SSH+',raw)
@@ -35,6 +36,9 @@ class Factories(unittest.TestCase):
         code='import xml.etree.ElementTree as ET\nCOUNTERS=("LINE","METHOD","CLASS","BRANCH")\nARCHIVE_SHA=""\nOLD_JARS={}\nOLD_FULL={}\nOLD_NATIVE_SHA=""\nQUALIFIED={}\nSOURCE=""\n'+inspect.getsource(bridge.entry().__globals__['coordinates'])+'\n'+raw
         self.assertEqual(0,check(code,'<whole ownsource native>'))
         compile(code,'<whole retained native>','exec')
+        self.assertEqual([], [n for n in ast.parse(raw).body if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='OLD_JARS'for t in n.targets)])
+        self.assertIn('qualified2744Tests',raw)
+        self.assertNotIn('qualified2640Tests',raw)
 
 
 if __name__=='__main__':unittest.main()
