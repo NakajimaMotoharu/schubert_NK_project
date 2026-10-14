@@ -11,15 +11,15 @@ from pg2862_network_newcurrent_observer import SOURCE
 from pg478_cleanup_oracle import instant,older,candidates
 from pg1766_next_day_independent_candidates import classify_inbox
 
-SLOT='pg2876-network-admission-original-v1'
+SLOT='pg2876-network-admission-original-v2'
 
 
 def payload():
     live=json.loads((W/'pg2874-network-newcurrent-live-binding-v1/manifest.safe.json').read_bytes())
     if live.get('actualExit')!=0 or live.get('productionSource')!=SOURCE:raise ValueError('actual same new run binding required')
     binding=live['binding']
-    raw='import datetime,hashlib,json,os,pathlib,stat\n'+''.join(inspect.getsource(f)+'\n'for f in [instant,older,candidates,classify_inbox])
-    raw+='BINDING='+repr(binding)+'\n'+BODY
+    raw='import datetime,hashlib,json,os,pathlib,stat\nUTC=datetime.timezone.utc\n'+''.join(inspect.getsource(f)+'\n'for f in [instant,older,candidates,classify_inbox])
+    raw+='BINDING='+repr(binding)+'\n'+BODY.replace('pg2876-network-admission-original-v1',SLOT)
     from pyflakes.api import check
     if check(raw,'<immutable original and independent day selectors>'):raise ValueError('complete immutable original oracle namespace required')
     compile(raw,'<before selectors, no actual DB oracle>','exec');return raw
@@ -57,7 +57,8 @@ print(json.dumps({'actualExit':0,'source':'a9cb0ac9a3a0f9bc37d0952943a98016c7a25
 
 def main():
     if subprocess.check_output(['git','status','--porcelain']):raise ValueError('clean fixed original capture required')
-    os.umask(0o077);out=W/SLOT;out.mkdir(mode=0o700);raw=payload().encode()
+    raw=payload().encode()
+    os.umask(0o077);out=W/SLOT;out.mkdir(mode=0o700)
     with(out/'payload.private.py').open('xb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
     started=datetime.datetime.now(datetime.timezone.utc).isoformat()
     with management_gate(P/'current-management-critical.lock'):
