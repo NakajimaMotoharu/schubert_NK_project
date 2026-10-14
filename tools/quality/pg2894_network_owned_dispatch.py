@@ -6,8 +6,8 @@ from pg2862_network_newcurrent_observer import BOM
 from pg2902_network_after_chr_full_seal import payload as seal_payload
 
 GUEST='/var/lib/pgpt-s1-preservation/'+TOOLS
-REMOTE='/home/ubuntu/pg2894-network-owned-stage-v1'
-ARCHIVE='pg2894-'+TOOLS+'.tar'
+REMOTE='/home/ubuntu/pg2894-network-owned-stage-v2'
+ARCHIVE='pg2894-v2-'+TOOLS+'.tar'
 POST_SLOT='pg2902-network-after-chr-full-seal-v1'
 
 
@@ -16,6 +16,14 @@ def namespace():
         'sources':sources,'context':context,'SOURCE':SOURCE,'TOOLS':TOOLS,'candidate_bom':lambda:BOM,'payload':seal_payload}
     for fn in [prior.previous.stage,prior.previous.post_payload,prior.previous.run_source,prior.previous.run_action,prior.previous.main]:
         exec(compile(bind(inspect.getsource(fn)),'<closed actual a9 once owned dispatch>','exec'),ns)
+    original_stage=ns['stage'];original_run=ns['run_source']
+    ns['stage']=lambda:bind(original_stage())
+    def final_run():
+        raw=bind(original_run())
+        raw=raw.replace("('pg2894-' + action + '-v1')","('pg2894-' + action + '-v2')")
+        raw=raw.replace('pg2894-stage-v1.exit','pg2894-stage-v2.exit')
+        return raw
+    ns['run_source']=final_run
     return ns
 
 
