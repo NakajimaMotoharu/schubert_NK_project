@@ -31,6 +31,116 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2592-001: untrusted prior pair projections cannot mint resume authority. */
+  @Test
+  void mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation()
+      throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("VALID", "IDENTITY", "EXTRA", "SAME_STEP", "SQL")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("25920001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2046-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 25920010L + n * 10;
+      mdb2480Seed(run, started, id, true);
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var connection = DriverManager.getConnection(url, properties);
+                retained.set(connection);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          boolean pair =
+                              method.getName().equals("prepareStatement")
+                                  && ((String) args[0])
+                                      .startsWith(
+                                          "select id,business_date,step,attempt,started_at,ended_at,target_count,");
+                          boolean identity =
+                              method.getName().equals("prepareStatement")
+                                  && ((String) args[0]).contains("maintenance_read_run_references");
+                          if (pair && fault.equals("SQL"))
+                            throw new SQLException("isolated selected pair refusal", "08006");
+                          Object value = mdb2292Invoke(method, connection, args);
+                          if (!pair && !identity) return value;
+                          var statement = (PreparedStatement) value;
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (ignored, called, input) -> {
+                                Object actual = mdb2292Invoke(called, statement, input);
+                                if (!called.getName().equals("executeQuery")) return actual;
+                                var rows = (ResultSet) actual;
+                                var nextCalls = new AtomicInteger();
+                                return Proxy.newProxyInstance(
+                                    ResultSet.class.getClassLoader(),
+                                    new Class<?>[] {ResultSet.class},
+                                    (ignoredRow, read, columns) -> {
+                                      if (pair
+                                          && fault.equals("EXTRA")
+                                          && read.getName().equals("next")
+                                          && nextCalls.incrementAndGet() == 3) return true;
+                                      if (pair
+                                          && fault.equals("SAME_STEP")
+                                          && read.getName().equals("getString")
+                                          && columns[0].equals("step")) return "BACKUP_CONFIG";
+                                      if (identity
+                                          && fault.equals("IDENTITY")
+                                          && read.getName().equals("getObject")
+                                          && columns[0].equals("identity_consistent")) return false;
+                                      return mdb2292Invoke(read, rows, columns);
+                                    });
+                              });
+                        });
+              },
+              c -> {});
+      if (fault.equals("VALID")) {
+        var pair =
+            subject.execute(credential(), s -> s.successfulBackup(run, observed)).orElseThrow();
+        assertEquals(id + 1, pair.database().id());
+        assertEquals(id, pair.configuration().id());
+        assertEquals(1, pair.database().attempt());
+        assertEquals(1, pair.configuration().attempt());
+      } else
+        assertThrows(
+            IOException.class,
+            () -> subject.execute(credential(), s -> s.successfulBackup(run, observed)),
+            fault);
+      assertTrue(retained.get().isClosed());
+      try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+          var statement =
+              observer.prepareStatement(
+                  "select id,step,attempt,status,started_at,ended_at,target_count,success_count,failure_count,byte_count from schubert.batch_runs where run_id=? order by id")) {
+        statement.setObject(1, run.id());
+        try (var rows = statement.executeQuery()) {
+          for (int i = 0; i < 2; i++) {
+            assertTrue(rows.next());
+            assertEquals(id + i, rows.getLong("id"));
+            assertEquals(i == 0 ? "BACKUP_CONFIG" : "BACKUP_DB", rows.getString("step"));
+            assertEquals(1, rows.getInt("attempt"));
+            assertEquals("SUCCESS", rows.getString("status"));
+            assertEquals(started, rows.getTimestamp("started_at").toInstant());
+            assertEquals(started.plusSeconds(3), rows.getTimestamp("ended_at").toInstant());
+            assertEquals(i == 0 ? 2 : 1, rows.getLong("target_count"));
+            assertEquals(i == 0 ? 2 : 1, rows.getLong("success_count"));
+            assertEquals(0, rows.getLong("failure_count"));
+            assertEquals(i == 0 ? 67 : 26, rows.getLong("byte_count"));
+          }
+          assertFalse(rows.next());
+        }
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB2590-001: actual original-row drift defeats a stale successful eligibility view. */
   @Test
   void mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention() throws Exception {
