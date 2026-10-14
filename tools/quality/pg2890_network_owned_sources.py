@@ -34,5 +34,5 @@ def namespace():
 
 
 def context():return namespace()['context']()
-def sources():return namespace()['sources']()
-def emit(ctx,live,state,fields):return namespace()['emit'](ctx,live,state,fields,BOM)
+def sources():return {bind(name):bind(raw)for name,raw in namespace()['sources']().items()}
+def emit(ctx,live,state,fields):return {bind(name):bind(raw)for name,raw in namespace()['emit'](ctx,live,state,fields,BOM).items()}
