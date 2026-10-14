@@ -31,6 +31,79 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2792-001: null JDBC resources are known unavailable data, never leaked NPE. */
+  @Test
+  void mdb2792001SuccessfulBackupRejectsNullJdbcResourcesWithoutNpe() throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("STATEMENT", "ROWS")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27920001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2052-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      long id = 27920010L + n * 10;
+      mdb2480Seed(run, started, id);
+      var retained = new AtomicReference<Connection>();
+      var injected = new AtomicInteger();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var real = DriverManager.getConnection(url, properties);
+                retained.set(real);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object value = mdb2292Invoke(method, real, args);
+                          if (!method.getName().equals("prepareStatement")
+                              || !((String) args[0])
+                                  .startsWith(
+                                      "select id,business_date,step,attempt,started_at,ended_at,target_count,"))
+                            return value;
+                          var statement = (PreparedStatement) value;
+                          if (fault.equals("STATEMENT")) {
+                            statement.close();
+                            injected.incrementAndGet();
+                            return null;
+                          }
+                          return Proxy.newProxyInstance(
+                              PreparedStatement.class.getClassLoader(),
+                              new Class<?>[] {PreparedStatement.class},
+                              (unusedStatement, called, input) -> {
+                                Object actual = mdb2292Invoke(called, statement, input);
+                                if (called.getName().equals("executeQuery")) {
+                                  ((ResultSet) actual).close();
+                                  injected.incrementAndGet();
+                                  return null;
+                                }
+                                return actual;
+                              });
+                        });
+              },
+              c -> {});
+      try {
+        var failure =
+            assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(), s -> s.successfulBackup(run, started.plusSeconds(3600))));
+        assertEquals("root batch database unavailable", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+      } finally {
+        assertEquals(1, injected.get());
+        assertTrue(retained.get().isClosed());
+        mdb2480SqlRows(run, started, id);
+        mdb2292NoOwnerResources();
+      }
+    }
+  }
+
   /** PT-MDB-2788-001: individually valid timestamps must still describe one complete pair. */
   @Test
   void mdb2788001SuccessfulPairRejectsDifferentStartAndEndWithinValidBounds() throws Exception {
