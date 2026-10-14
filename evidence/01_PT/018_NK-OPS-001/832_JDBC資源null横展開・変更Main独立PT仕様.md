@@ -1,5 +1,7 @@
 # JDBC資源null横展開・変更Main独立PT仕様
 
+PG2796/session31162 actual0、candidatea9cb0ac9a3a0f9bc37d0952943a98016c7a25f25。実10:56:02.268600Z～10:56:36.682831Z、javac Xlint-Werror0/Session全60PT/FES-aborted-notRun0、XML663c8c51383330436db90c0fc144b0ba7e12bbf2ae30f3b59b8580113afdf7d3。別read-onlyで実XML全60一意case/二null method名/新17compiled Main hashを確認。server manifest1ab34751fb56b4a9eaaaaff29a75f92c90787ccc43d5137dbca8b8f8fa49806a、payload04432305af22f79a63377fb01819e0d157069fb726d6533120b702006474533e。両null method内五mode及び独立SQL後条件成功。旧v1/v2失敗は歴史保全、coverageclaim/native輸入/VM変更/正式受入0。新全体PG2798の3680PT/542suite/1643Main/静的六0は次工程、未実行。
+
 PT-MDB-2796-001、NK-BAT-001、Session.successfulBackup/recheckConsistent/requireAbandonedRequest・query/Rows/JdbcResourceFailures。RD OPS009/DAT009、UI251/253、SS332/341/343/SSC063/451、BUG1251/YKT1017、WBS-P017-01.03。開始見積りevent0740の.5/1.5/4pp内subset、追加二重費なし。
 
 新mdb2796001はREADONLY_STATEMENT/ABANDONED_STATEMENT/ABANDONED_ROWSの三入力。実PGの旧RUNNING二件→新試行開始で旧FAILED/ABANDONED二件＋新RUNNING二件をcommitしてから、対象queryの実資源を閉じてnullへ置換。期待IOException/固定redacted文言/cause-suppressed0、注入一回/connection閉鎖、全四rowのstep/attempt/status/error/end/count及びclient/advisory0は独立SQLで照合。2792のstatement/result二負例も変更Mainで再試験。
