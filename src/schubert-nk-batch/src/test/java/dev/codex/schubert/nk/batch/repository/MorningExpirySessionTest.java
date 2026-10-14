@@ -30,6 +30,83 @@ final class MorningExpirySessionTest {
   static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z");
   static final MaintenanceOwnerFrame.Guard OWNER = () -> 30_000_000_000L;
 
+  /** PT-MDB2608-001: failed expiry handoff is not a worker success or renewed authority. */
+  @Test
+  void mdb2608001ExpiryHandoffRejectsTransactionUnlockAndReacquireFailure() throws Exception {
+    for (String fault : List.of("AUTOCOMMIT", "UNLOCK", "RELOCK")) {
+      reset();
+      var armed = new java.util.concurrent.atomic.AtomicBoolean();
+      var callbacks = new java.util.concurrent.atomic.AtomicInteger();
+      var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              url,
+              () -> {},
+              (address, properties) -> {
+                var connection = DriverManager.getConnection(address, properties);
+                retained.set(connection);
+                return (Connection)
+                    java.lang.reflect.Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          if (armed.get()) {
+                            if (fault.equals("AUTOCOMMIT")
+                                && method.getName().equals("getAutoCommit")) return false;
+                            if (method.getName().equals("prepareStatement")
+                                && ((fault.equals("UNLOCK")
+                                        && ((String) args[0]).contains("pg_advisory_unlock"))
+                                    || (fault.equals("RELOCK")
+                                        && ((String) args[0]).contains("pg_try_advisory_lock"))))
+                              throw new SQLException("isolated handoff SQL refusal", "08006");
+                          }
+                          return mdb2604Invoke(method, connection, args);
+                        });
+              },
+              c -> {});
+      subject.execute(
+          credential(),
+          session -> {
+            ready(session, 1);
+            session.beginExpiry(RUN, NOW.plusSeconds(14), OWNER);
+            String before;
+            try {
+              before = mdb2604Rows();
+            } catch (SQLException failure) {
+              throw new IOException("isolated SQL precondition unavailable", failure);
+            }
+            armed.set(true);
+            assertThrows(
+                IOException.class,
+                () ->
+                    session.handoffExpiry(
+                        () -> {
+                          callbacks.incrementAndGet();
+                          return Boolean.TRUE;
+                        }),
+                fault);
+            assertEquals(fault.equals("RELOCK") ? 1 : 0, callbacks.get());
+            try {
+              assertEquals(before, mdb2604Rows());
+            } catch (SQLException failure) {
+              throw new IOException("isolated SQL postcondition unavailable", failure);
+            }
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+          var statement = observer.createStatement();
+          var rows =
+              statement.executeQuery(
+                  "select (select count(*) from pg_stat_activity where application_name='schubert-nk-morning-controller' and datname=current_database()),(select count(*) from pg_locks where locktype='advisory' and classid=0 and objid=71419602 and granted)")) {
+        assertTrue(rows.next());
+        assertEquals(0, rows.getLong(1));
+        assertEquals(0, rows.getLong(2));
+        assertFalse(rows.next());
+      }
+    }
+  }
+
   /** PT-MDB2606-001: no expiry row may be published from an incompatible parent DB state. */
   @Test
   void mdb2606001ExpiryAdmissionRejectsForeignRunAndTransactionDriftBeforePublishing()
