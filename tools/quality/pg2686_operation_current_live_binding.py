@@ -2,6 +2,8 @@
 import inspect
 import pg2542_strict_current_live_binding as previous
 from pg2674_operation_publication_sources import candidate_bom,production
+from pg1446_current_cold_stage import P
+from pg1674_critical_management_gate import management_gate
 
 SLOT='pg2686-operation-current-live-binding-v1'
 
@@ -17,4 +19,5 @@ def entry():
     exec(compile(raw,'<new candidate readonly live job authentication>','exec'),ns);return ns['main']
 
 
-if __name__=='__main__':raise SystemExit(entry()())
+if __name__=='__main__':
+    with management_gate(P/'current-management-critical.lock'):raise SystemExit(entry()())
