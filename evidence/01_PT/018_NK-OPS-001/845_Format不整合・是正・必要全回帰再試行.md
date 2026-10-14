@@ -10,7 +10,7 @@ PG2918/session32747、snapshotbd882a07788cd441d70fa69fe07795b069b6372b、actual1
 
 CLI standaloneとPOM/Maven coreはすべてGoogle1.36.1。版差という初期仮説は実version/hashで棄却。Spotless3.10.2/lib4.10.2 installed primaryのjavapでdefaultReflowLongStrings=false/iconst0を確認。Maven正規apply後、CLI default dryrun1・skip-reflow-long-strings dryrun0という同version差を再現。CLI既定のlong-string wrapping後の結果をMavenと同じと仮定したのが原因。
 
-Maven正規applyは347file中Session一file三hunkだけ、Main差0/Oracle値差0。Maven全六module spotless:check終了0を独立に確認。411/421へ正規設定と再現手順を追加しPOMは緩和0。完成2930 serverは、PT開始前に全六moduleのSpotless gateが非0なら拒否する純fixture/static0を先行。Source2486の想像値/除外/版変更で合格を作らない。
+Maven正規applyは347file中Session一file三hunkだけ、Main差0/Oracle値差0。Maven全六module spotless:check終了0を独立に確認。411/421へ正規設定と再現手順を追加しPOMは緩和0。完成2930 serverは、PT開始前に全六moduleのSpotless gateが非0なら拒否する純fixture/static0を先行。推定値/除外/版変更で合格を作らない。
 
 ## 正しいTest入力と再試行
 
