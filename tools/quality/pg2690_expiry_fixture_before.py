@@ -12,7 +12,7 @@ BASE='/home/mini/schubert-nk-pgpt'
 SERVER=r"""
 import datetime,hashlib,json,os,subprocess,tarfile,xml.etree.ElementTree as E
 from pathlib import Path
-os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2690-before-v1';source=b/'source-expiry-PG2690-before-v1';transfer=b/'transfer/PG2690-before-v1'
+os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG2690-before-v2';source=b/'source-expiry-PG2690-before-v2';transfer=b/'transfer/PG2690-before-v2'
 def require(v):
  if not v:raise ValueError('one deterministic expiry fixture contract required')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -47,6 +47,8 @@ base=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=
 deps=base+['-pl','src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap','test-compile','jar:test-jar','jar:jar','install:install']
 with(out/'dependency.private.log').open('xb')as f:d=subprocess.run(deps,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=300)
 require(d.returncode==0)
+with(out/'diagnostic-format.private.log').open('xb')as f:formatted=subprocess.run(base+['-pl','src/schubert-nk-batch','spotless:apply'],cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=120)
+require(formatted.returncode==0);modified=sha(test)
 args=base+['-pl','src/schubert-nk-batch','-Dtest=ArtemisExpiryPurgeClientTest#opsMq026RealBrokerRemovesOnlyActualExpiredMessage','test-compile','test']
 start=datetime.datetime.now(datetime.timezone.utc).isoformat()
 with(out/'maven.private.log').open('xb')as f:r=subprocess.run(args,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=300)
@@ -60,17 +62,17 @@ v={'actualExit':0,'diagnosticMavenExit':r.returncode,'diagnosticModifiedFixtureS
 
 def main():
     if subprocess.check_output(['git','status','--porcelain']):raise ValueError('clean frozen diagnostic operator required')
-    os.umask(0o077);out=W/'pg2690-expiry-before-v1';out.mkdir(mode=0o700)
+    os.umask(0o077);out=W/'pg2690-expiry-before-v2';out.mkdir(mode=0o700)
     head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip();archive=out/'source.tar'
     archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'pom.xml','mvnw','.mvn','src','program/characterization','documents/100_RD','documents/200_UI','documents/300_SS']))
     inputs={'head':head,'productionSource':'04207efc3ad78bca75942153a90c70985064c988','archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest()}
     code='INPUT='+repr(inputs)+'\n'+SERVER;compile(code,'<deterministic expiry vendor diagnostic>','exec');script=out/'diagnostic.private.py';script.write_text(code)
-    c,_=run('test ! -e '+BASE+'/runs/PG2690-before-v1 && test ! -e '+BASE+'/source-expiry-PG2690-before-v1 && test ! -e '+BASE+'/transfer/PG2690-before-v1 && mkdir -m700 '+BASE+'/transfer/PG2690-before-v1',30)
+    c,_=run('test ! -e '+BASE+'/runs/PG2690-before-v2 && test ! -e '+BASE+'/source-expiry-PG2690-before-v2 && test ! -e '+BASE+'/transfer/PG2690-before-v2 && mkdir -m700 '+BASE+'/transfer/PG2690-before-v2',30)
     if c:raise ValueError('fresh diagnostic namespace required')
     for p in (archive,script):
-        c,_=copy(p,BASE+'/transfer/PG2690-before-v1/',60)
+        c,_=copy(p,BASE+'/transfer/PG2690-before-v2/',60)
         if c:raise ValueError('immutable diagnostic transfer required')
-    c,o=run('python3 -B '+BASE+'/transfer/PG2690-before-v1/diagnostic.private.py',700)
+    c,o=run('python3 -B '+BASE+'/transfer/PG2690-before-v2/diagnostic.private.py',700)
     (out/'server.private.log').write_text(o);v={'actualExit':c,'payloadSha256':hashlib.sha256(code.encode()).hexdigest(),'formalAccepted':False}
     if not c:v['result']=json.loads(next(x for x in o.splitlines()if x.startswith('{')))
     (out/'manifest.safe.json').write_text(json.dumps(v,sort_keys=True));print(json.dumps(v));return c
