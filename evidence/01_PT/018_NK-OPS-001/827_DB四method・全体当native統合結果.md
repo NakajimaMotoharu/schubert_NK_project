@@ -1,0 +1,9 @@
+# DB四method・全体当native統合結果
+
+PG2770/session21023 actual0、独立2772/session68824 actual0、当native2774/session40410 actual0。snapshot200a92c6b7941be4627bab2b949b78b6d45c3e85/archive86b5acfcc26e32d35a37d20544203b0d49e626137c5340d6c9562e577f668a37、Production042/PG2654/BOM552不変更。09:26:17.826550Z～09:52:24.332481Z/1566.505931秒。全3673PT/541suite/1643Main/FES-flaky-notRun0/静的六module0。822～825の当四caseは全freshMorningDatabaseSessionTest XML e90a07c8/個別case hashへ一意join、当whole Test hash4e2231ca32df1a563c536409056b9b9c9589825756937a8020901cadfe1d647eを各selected元全file及びmethod byteへ照合。
+
+物理七差=semantic六＋RootStartupContext.NativeIoのdebug一（line70entry/offset+1/nonLineBytes同値）を独立照合。保持Source042九stream/十point、latest Inspector CLOSINGのみ、全1643Mainとresource/METAを含む全Jar member byte同値、CRC-session mismatch0/除外0/旧0fd等native輸入0/VM再採取0。当union残786L/156M/9C/529B、直前788/156/9/532から追加2line/3branchを実測。予測や個別selected結果の手計算加算ではない。
+
+新四JUnit/六fixture modeと方法・入力・独立SQL後条件は822～825、実環境/JDK25.0.4/JaCoCo0.8.15/JDBC/PostgreSQL18及びMavenの固定版は既構築記録及びfull/source-qualified manifest参照。Maven版を推測補完しない。実commands pg2770_db_contract_group_full_six.py、pg2772_db_contract_full_qualified.py、pg2774_db_contract_native_qualified.py（構築済PYTHONPATH）。公開provisional/PG2770-db-contract-full-native/manifest.jsonに全結果/hash/時刻/四case対応を保存、private元log/XML/exec/beginは保全。
+
+BUG1250/YKT1016は工具の完成namespace是正とactual selected/独立再発防止で閉鎖、初期compilefail/未dispatch/保全host slot拒否は非合格のまま保持。global100/全WBS/正式1964PT-53scope/PGPT完了は未認定。669等の内部invariant重複guardは人工到達・除外・未実行合格化しない。旧ordinary親/Backup/ADMIN/ownedstop/配備/reloadの再演0、QA051 finalL01は別保留。次は826準備のowner入口をsrcへ固定し独立二PT、その後未網羅実契約/Browser/CHR/四100/451/trace/引継ぎを継続。
