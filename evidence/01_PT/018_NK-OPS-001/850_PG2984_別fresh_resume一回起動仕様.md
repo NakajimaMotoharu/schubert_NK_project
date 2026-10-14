@@ -11,8 +11,8 @@ PT-OPS-2982-001/2984-001、SS343/353/354/451。a9/PG2802/BOM37bf/newboot79a、�
 独立工具3試験=wholenamespace/三fileexport・単一start/他start-stop-reload禁止・durable予約が起動前・literal resume正常とnoargs/foreign/余剰拒否・current helper旧tuple拒否保持。実起動は未実行。全24/真正terminal/同ownerAPI-Web-Caddy/Browser業務/ownedstop/nativeは後続未受入。
 
 ```sh
-PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B tools/quality/pg2982_current_resume_observer.py stage
-PYTHONPATH=tools/quality:tools/quality/vm/050_s1 python3 -B tools/quality/pg2982_current_resume_observer.py watch
+PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg2982_current_resume_observer.py stage
+PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg2982_current_resume_observer.py watch
 PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg2984_current_resume_once.py
 ```
 
