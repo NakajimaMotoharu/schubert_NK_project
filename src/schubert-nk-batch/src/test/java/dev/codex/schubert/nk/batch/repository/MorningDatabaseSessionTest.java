@@ -109,7 +109,7 @@ final class MorningDatabaseSessionTest {
                       .size());
             } else {
               assertThrows(
-                  IOException.class,
+                  fault.equals("STALE_TIME") ? IllegalArgumentException.class : IOException.class,
                   () ->
                       session.completeReusedBackup(
                           offered,

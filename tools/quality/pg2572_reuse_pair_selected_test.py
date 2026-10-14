@@ -13,7 +13,7 @@ class ReuseSelection(unittest.TestCase):
     def test_whole_server_exact_prior_bytes_no_old_native(self):
         raw = server()
         ast.parse(raw)
-        for marker in ['PG2572-selected-v1', 'Pg2572ReusePairLauncher', 'PG2570-selected-v2',
+        for marker in ['PG2572-selected-v2', 'Pg2572ReusePairLauncher', 'PG2570-selected-v2',
                        'PG2568-selected-v2', 'PG2564-native-v1', 'source-full-PG2510',
                        "sha(guard_exec)==guard['execSha256']", 'str(prior_exec),str(guard_exec),str(execfile)']:
             self.assertIn(marker, raw)
