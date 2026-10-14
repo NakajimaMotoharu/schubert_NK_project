@@ -1,0 +1,185 @@
+{
+  "productionSource": "04207efc3ad78bca75942153a90c70985064c988",
+  "branch": "dev-foundation",
+  "costOwner": "WBS-P017-05",
+  "relatedSpecs": [
+    "820_Backup公開後identity差分・独立PT仕様.md",
+    "SS341",
+    "SS343",
+    "SSC066"
+  ],
+  "executionDateUTC": "2026-10-14",
+  "environment": {
+    "os": "Linux LAN; existing environment record",
+    "jdk": "25.0.4",
+    "javacWarnings": 0,
+    "mainRecompiled": false,
+    "vmActions": 0
+  },
+  "uniqueTests": 3,
+  "independentInputs": 35,
+  "allFailedErrorsSkippedAbortedNotRun": 0,
+  "cases": [
+    {
+      "case": "PT-BAT-2732-001",
+      "productionSource": "04207efc3ad78bca75942153a90c70985064c988",
+      "testSource": "ea670ff9514d681b03c41baf5858a336567ad4ad",
+      "actualExit": 0,
+      "selectedTests": 1,
+      "xmlSha256": "0947799ab997d9beab6e3ee916da2c3f18e8f4ea963fadd04377a363fa1b0cf3",
+      "execSha256": "a4033e460d07280d1ddf166464f5f6dc5db26231111435e852b640584a5d10f3",
+      "serverManifestSha256": "fd0f977c098ca31fd2622d2b3884b58449ca9a162792cc6591c87628ab0b85c6",
+      "inputFiles": {
+        "BackupBundlePublisherTest.java": "11aefdeec128d5124cfea66035620b1942a4fd260bd64e820f8cbd237939ac31",
+        "NativeCoverage.java": "5685404757c2092202c6b1cc78984ed91a600641b1b345be7e863070c04cc862",
+        "NativeCoverageXml471.java": "e3da3a21f72f6de398b03c291fd7efde967deb6a93a039f0657614a05ee6199a",
+        "Pg2732BackupPublishedLauncher.java": "b610af654acd4082c02dbec5c154c2ab348d87ececb58f21756ea28427cfe68b"
+      },
+      "methodCounters": {
+        "BRANCH": {
+          "covered": 16,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 9,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 61,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 8,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "exactXmlCaseVerified": true,
+      "formalAccepted": false,
+      "independentQualifierManifestSha256": "f2e3740c96912311646c5867fe839aa2a59c8f001338f0e8c4e53ef695e3cd64",
+      "inputCount": 10,
+      "program": "pg2732_backup_published_selected.py",
+      "command": "PYTHONPATH=<401toolchain quality/runtime> python3 -B tools/quality/pg2732_backup_published_selected.py",
+      "scope": "method counters with oldfull host; not class/global acceptance",
+      "hostBranchGain": 0
+    },
+    {
+      "case": "PT-BAK-2736-001",
+      "productionSource": "04207efc3ad78bca75942153a90c70985064c988",
+      "testSource": "4cfa1aa150dfb966e9219ae7691de017370e3ee3",
+      "actualExit": 0,
+      "selectedTests": 1,
+      "xmlSha256": "8c9bbb24b407f9193043bcd14c3960a7f4ec0d9cb87a70ac2b9e379f4322077c",
+      "execSha256": "adf4428540ffb11c24ab66eb755c44282e37d3e7b575279d489515713dea1d04",
+      "serverManifestSha256": "49e34b79599e9300774b95ef6687edc2dcf08d3ca741e08db9b8780d283eac37",
+      "inputFiles": {
+        "BackupRetentionBoundaryTest.java": "3f5be3eaa9e6e0fec4e6574fde40a37117cbd4aeebf77dd2dacaef14f862248f",
+        "NativeCoverage.java": "5685404757c2092202c6b1cc78984ed91a600641b1b345be7e863070c04cc862",
+        "NativeCoverageXml471.java": "e3da3a21f72f6de398b03c291fd7efde967deb6a93a039f0657614a05ee6199a",
+        "Pg2736BackupRetentionLauncher.java": "3f2588e562d77c4652d9cf0e692a95e4c09d7f794a117255c79325763461ed79"
+      },
+      "methodCounters": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 93,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 20,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "exactXmlCaseVerified": true,
+      "formalAccepted": false,
+      "independentQualifierManifestSha256": "75a49b0f69e29a7d0e951092d00a27d6f96f1db3a10702c7f3d7a410dbe6c410",
+      "inputCount": 4,
+      "program": "pg2736_backup_retention_selected.py",
+      "command": "PYTHONPATH=<401toolchain quality/runtime> python3 -B tools/quality/pg2736_backup_retention_selected.py",
+      "scope": "method counters with oldfull host; not class/global acceptance",
+      "hostBranchGain": 3
+    },
+    {
+      "case": "PT-BAK-2740-001",
+      "productionSource": "04207efc3ad78bca75942153a90c70985064c988",
+      "testSource": "57209aa2c3e1ae7794ebecb5edd11cff3ad697b2",
+      "actualExit": 0,
+      "selectedTests": 1,
+      "xmlSha256": "40b4239d305af99b73ccaf12b4f013140c347540fc3fe3e82673de99da7ce3f4",
+      "execSha256": "f27c0fd4e201e6952188b7a09832336e35d2243205788e50a26e1d8a473da7de",
+      "serverManifestSha256": "ae925d22cf9d86775d7b69767c5880ed90f45b03245015e73f468a6c00a1001e",
+      "inputFiles": {
+        "BackupArtifactVerifierTest.java": "07cbc6be5dd0e011493dece2ebfe0cc90ecb5ef2d55bc7e225756cb07903543b",
+        "NativeCoverage.java": "5685404757c2092202c6b1cc78984ed91a600641b1b345be7e863070c04cc862",
+        "NativeCoverageXml471.java": "e3da3a21f72f6de398b03c291fd7efde967deb6a93a039f0657614a05ee6199a",
+        "Pg2740BackupPendingLauncher.java": "3adb73ffbd0618f2daefa49a622b95d98effadbbe8b0e08c4b7fb74283458d42"
+      },
+      "methodCounters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 4,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 93,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "exactXmlCaseVerified": true,
+      "formalAccepted": false,
+      "independentQualifierManifestSha256": "d0aeee7a20d4fafcda08bd100e92a66f70f52b534f1b666451ecbc426471cc20",
+      "inputCount": 21,
+      "program": "pg2740_backup_pending_selected.py",
+      "command": "PYTHONPATH=<401toolchain quality/runtime> python3 -B tools/quality/pg2740_backup_pending_selected.py",
+      "scope": "method counters with oldfull host; not class/global acceptance",
+      "hostBranchGain": 7
+    }
+  ],
+  "totalHostBranchGain": 10,
+  "nativeUnionGainQualified": false,
+  "formalAccepted": false,
+  "acceptedLeafDelta": 0,
+  "actualAllocatedPp": null,
+  "relatedBugs": [
+    "BUG-1247"
+  ],
+  "relatedYkt": [
+    "YKT-1013"
+  ],
+  "preservedFailures": [
+    "PG2740 import error before any dispatch",
+    "dirty-source guard rejection before dispatch",
+    "PG2736v1 success separate from v2 final result; gain2+3 not added"
+  ],
+  "pending": [
+    "new source/full3669 integration",
+    "current native union recomputation",
+    "P01705 all criteria/end dependencies",
+    "451 formal quality"
+  ],
+  "rawSecretsExported": false
+}
