@@ -18,4 +18,4 @@ PG2692v2 actual0、05:54:23.711177Z～05:55:09.813698Z、11PT/三suite/FES-flaky
 
 YKT全対象：期限入力setExpiration/expireReferencesはsrc Test全検索でこの一classのみ。ExpiryManagementAuthorizationTest一PTは空queueで権限判定、message生成/force-expiry0のため配送競合非該当、実再試験0。UnknownBoundaryTest四PTはproxyで型/例外identityを検証、実配送0のため非該当、実再試験0。ReadinessClientTestはqueue存在だけ・配送/expiry0。他JMS fixtureはconsumer receive/待機を使い、当force-expiry/iteratorの対は存在しない（全検索結果に基づく）。検索だけの完了0、当再発防止＋RBAC/unknownの実11と必要fresh全体で閉鎖する。
 
-全2650は3666/541/F1/exit1・Batch静的未実行で保存。次PG2694固定全3666/541/1643と独立2695全source/static/native依存へ接続後にBUG/YKT対象閉鎖。旧回帰/旧nativeを新Test sourceへ加算0、global100/正式1964-53/全leaf/IT-ST完了の宣言0。
+全2650は3666/541/F1/exit1・Batch静的未実行で保存。PG2694/2695はactual0/全3666-541-1643/static六0/FES-flaky-rerun0、05:58:07.745377Z～06:24:19.516336Z/1571.770959秒。当11caseをfresh全XMLへ独立join/hash照合しBUG1245/YKT1011当fixture対象閉鎖。full-qualified-manifestの全三XML/hashとqualification/source/archive/hashを参照。新candidate native/実Browser/global100/正式1964-53/全leaf/IT-STは別未完、旧回帰/旧nativeを新Test sourceへ加算0。
