@@ -1,0 +1,9 @@
+# PG2584 factory呼出し読み取り調査（PT認定ではない）
+
+NK-OPS-001/P017/N05、SS341/343。進行中PG2578と別の固定資格済PG2510全六Jarを読み取るだけでMain/Test/VM/DB変更0。JDK25.0.4・ASM9.10.1/SHAed825d10、全Main1643のMethodInsnとinvokedynamic Handleをexact owner/name/descriptorで走査、三classの52method/80callerをprivate保存。javac -Xlint:all -Werror/actual0、helperSHAfddca402/private result9118d4d0。command=固定PYTHONPATHでpg2584_factory_reference_audit.py、公開factory-reference-audit.json。全参照rawは秘密を含まないmethod表でも長大なので公開はhash/12対象に限定する。
+
+Main参照0の12methodには既UnitTestが使う純scope helperも含む。参照0だけで未使用/到達不能/不要/coverage除外と認定しない。Source/全Test/工具/SS/反射の照合が別に必要でMain変更・方法削除・上位契約変更・coverage加点0。既snapshotには追加しない。
+
+Source限定調査ではMorningProcessMainの実stage接続はcompletedEpoch(budget,runId,work)。MorningBackupStageのfresh/freshEpoch/freshVerifiedEpoch/resume/resumeVerifiedEpoch factoryにMain直接/Handle callerが見つからず、完成前protocolが現nativeの欠測を説明する候補。MorningControlScope.executeResumeには旧null境界Test二が実在し、これを無視して削除しない。SSの具体factory名が今回検索で見つからない事実をSS論理要件不要と解釈しない。
+
+次は当必要全六とbyte/current native資格を先に閉じ、残factory/例外/DB観測を個別契約として整理する。内部testability/代替候補には判断根拠を残し、外部仕様・期待値・条件除外を変更しない。今回調査は新Test/正式/leaf受入/工数率へ加点0。独立群着手前見積りは未保存（欠測）、過去予算を後付け作成/個別費へ推測配賦しない。N/T/費用null。
