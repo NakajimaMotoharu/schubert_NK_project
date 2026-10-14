@@ -8,7 +8,7 @@ SOURCE=production();SLOT='pg2702-operation-current-rows-v1'
 
 
 def payload():
-    raw=inspect.getsource(previous.payload).replace('pg2542-strict-current-live-binding-v1','pg2686-operation-current-live-binding-v1').replace('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v1')
+    raw=inspect.getsource(previous.payload).replace('pg2542-strict-current-live-binding-v1','pg2686-operation-current-live-binding-v1').replace('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v2')
     ns={**previous.__dict__,'BEFORE':before(),'SLOT':SLOT,'SOURCE':SOURCE}
     exec(compile(raw,'<actual new admission DB factory>','exec'),ns);return ns['payload']()
 

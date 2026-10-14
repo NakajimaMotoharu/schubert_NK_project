@@ -12,7 +12,7 @@ SOURCE=production();SLOT='pg2704-operation-current-full-seal-v1'
 def payload(binding,bom=None):
     if bom is None:bom=candidate_bom()
     raw=previous.payload(binding,bom)
-    for a,b in [(previous.SLOT,SLOT),('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v1'),
+    for a,b in [(previous.SLOT,SLOT),('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v2'),
       (previous.BEFORE,before()),(previous.SOURCE,SOURCE),('PG2512','PG2654'),('pg2512-manifest.sig','pg2654-manifest.sig')]:raw=raw.replace(a,b)
     guard=terminal(binding,bom);marker="out=pathlib.Path('/var/lib/pgpt-s1-preservation/"+TERM+"')"
     if guard.count(marker)!=1:raise ValueError('one actual new terminal scope required')

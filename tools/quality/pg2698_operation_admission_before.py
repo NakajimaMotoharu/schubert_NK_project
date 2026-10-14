@@ -10,7 +10,7 @@ from pg2674_operation_publication_sources import production
 SLOT='pg2698-operation-admission-before-v1'
 BODY=r'''
 import hashlib,json,os,pathlib,stat
-p=pathlib.Path('/var/lib/pgpt-s1-preservation/pg2684-operation-current-noargs-once-v1/before.private.json')
+p=pathlib.Path('/var/lib/pgpt-s1-preservation/pg2684-operation-current-noargs-once-v2/before.private.json')
 def require(v):
  if not v:raise ValueError('immutable new admission original required')
 def identity(s):
@@ -36,7 +36,7 @@ def before():
 
 def main():
     if subprocess.check_output(['git','status','--porcelain']):raise ValueError('clean read-only operator required')
-    start=json.loads((W/'pg2684-operation-current-noargs-once-v1/manifest.safe.json').read_bytes())
+    start=json.loads((W/'pg2684-operation-current-noargs-once-v2/manifest.safe.json').read_bytes())
     live=json.loads((W/'pg2686-operation-current-live-binding-v1/manifest.safe.json').read_bytes())
     for v in [start,live]:
         if type(v.get('actualExit'))is not int or v['actualExit']!=0 or v.get('productionSource')!=production():raise ValueError('actual new source single start and independent live binding required')

@@ -5,10 +5,11 @@ from pg2682_operation_current_observer import namespace,SOURCE
 from pg2674_operation_publication_sources import candidate_bom
 from pg2680_operation_publication_post import payload as full_post
 
-SLOT='pg2684-operation-current-noargs-once-v1'
+SLOT='pg2684-operation-current-noargs-once-v2'
 
 
 def body(bom=None):
+    if bom is None:bom=candidate_bom()
     raw=previous.body(bom)
     for a,b in [('pg2538','pg2682'),(previous.SLOT,SLOT),(previous.SOURCE,SOURCE),
       ('PG2512','PG2654'),('require(len(records)==22)','require(len(records)==28)')]:

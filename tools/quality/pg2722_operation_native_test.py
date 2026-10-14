@@ -15,7 +15,7 @@ class NewNativePreparation(unittest.TestCase):
         live=json.loads((W/'pg2542-strict-current-live-binding-v1/manifest.safe.json').read_bytes())
         with patch.object(catalog,'before',return_value='a'*64):raw=catalog.catalog_source("def completed(*args):raise ValueError('fixture only')",live['binding'],live['binding']['start']+1800000000)
         ast.parse(raw)
-        for m in ['require(len(old)==28)','priorOldSourceTwentyEightCopiesPreserved','priorOldSourcePointsImported','pg2684-operation-current-noargs-once-v1','pg2708-native-stop-v1',native.SOURCE]:self.assertIn(m,raw)
+        for m in ['require(len(old)==28)','priorOldSourceTwentyEightCopiesPreserved','priorOldSourcePointsImported','pg2684-operation-current-noargs-once-v2','pg2708-native-stop-v1',native.SOURCE]:self.assertIn(m,raw)
         self.assertNotIn('require(len(old)==22)',raw)
 
     def test_newfull3666_all1643_no_old_resource_bridge(self):
@@ -33,7 +33,7 @@ class NewNativePreparation(unittest.TestCase):
             return original(path)
         with patch.object(Path,'read_bytes',read),patch.object(a01,'candidate_bom',return_value='a'*64):raw=a01.code()
         ast.parse(raw)
-        for m in [native.SOURCE,'a'*64,'PG2654',"issued['MainPID']=='1234'",'pg2682-parent-watch-v1.private.jsonl','pg2684-operation-current-noargs-once-v1','pg2680-operation-publication-post-v1','1800000000','122dcc4c1be482ac3239325de6fb3d4bec12747d05adce3929c319ab5bdfd71d']:self.assertIn(m,raw)
+        for m in [native.SOURCE,'a'*64,'PG2654',"issued['MainPID']=='1234'",'pg2682-parent-watch-v1.private.jsonl','pg2684-operation-current-noargs-once-v2','pg2680-operation-publication-post-v1','1800000000','122dcc4c1be482ac3239325de6fb3d4bec12747d05adce3929c319ab5bdfd71d']:self.assertIn(m,raw)
         self.assertNotIn('systemctl start',raw)
 
 

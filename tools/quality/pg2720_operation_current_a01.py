@@ -10,7 +10,7 @@ def code():
     raw=inspect.getsource(previous.code)
     for a,b in [('pg2542-strict-current-live-binding-v1','pg2686-operation-current-live-binding-v1'),
       ('PG2550','PG2720'),('pg2550','pg2720'),('pg2538','pg2682'),
-      ('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v1'),
+      ('pg2540-strict-current-noargs-once-v1','pg2684-operation-current-noargs-once-v2'),
       ('pg2536-strict-normal-publication-post-v1','pg2680-operation-publication-post-v1'),('PG2512','PG2654')]:raw=raw.replace(a,b)
     ns={**previous.__dict__,'SOURCE':SOURCE,'candidate_bom':candidate_bom}
     exec(compile(raw,'<sameactualroot new A01 driver producer>','exec'),ns);return ns['code']()

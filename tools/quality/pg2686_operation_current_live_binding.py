@@ -14,7 +14,7 @@ def body():
 
 
 def entry():
-    raw=inspect.getsource(previous.previous.prior.prior.transport.main).replace('pg2015-completed-run-fresh-resume-once-v1','pg2684-operation-current-noargs-once-v1')
+    raw=inspect.getsource(previous.previous.prior.prior.transport.main).replace('pg2015-completed-run-fresh-resume-once-v1','pg2684-operation-current-noargs-once-v2')
     ns={**previous.previous.prior.prior.transport.__dict__,'SOURCE':production(),'BOM':candidate_bom(),'SLOT':SLOT,'body':body}
     exec(compile(raw,'<new candidate readonly live job authentication>','exec'),ns);return ns['main']
 

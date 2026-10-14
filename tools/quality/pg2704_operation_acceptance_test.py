@@ -17,7 +17,7 @@ import pg2706_operation_current_parent_projection as p
 class WholeAcceptancePreparation(unittest.TestCase):
     def test_complete_current_original_readonly_namespace(self):
         self.assertEqual(0,check(BODY,'<actual immutable hash reader>'))
-        for m in ['pg2684-operation-current-noargs-once-v1','execEntries','28','41','O_NOFOLLOW','rawExported']:
+        for m in ['pg2684-operation-current-noargs-once-v2','execEntries','28','41','O_NOFOLLOW','rawExported']:
             self.assertIn(m,BODY)
 
     def test_read_atime_is_not_content_or_ownership_change(self):
@@ -37,13 +37,13 @@ class WholeAcceptancePreparation(unittest.TestCase):
         fixture={**historical,'run':'00000000-0000-0000-0000-000000000001','activation':'00000000-0000-0000-0000-000000000002'}
         with patch.object(s,'before',return_value='b'*64):raw=s.payload(fixture,'a'*64)
         ast.parse(raw);self.assertEqual(0,check(raw,'<whole fixture new seal>'))
-        for m in [s.SOURCE,s.SLOT,'pg2684-operation-current-noargs-once-v1','pg2654-manifest.sig','b'*64,fixture['run']]:self.assertIn(m,raw)
+        for m in [s.SOURCE,s.SLOT,'pg2684-operation-current-noargs-once-v2','pg2654-manifest.sig','b'*64,fixture['run']]:self.assertIn(m,raw)
         parent=p.payload('b'*64,'a'*64);ast.parse(parent)
         for m in [p.SOURCE,'pg2704-operation-current-full-seal-v1','len(fields)==18']:self.assertIn(m,parent)
 
     def test_transport_and_rows_dependencies_no_old_receipt(self):
         raw=inspect.getsource(r.payload)
-        for m in ['pg2686-operation-current-live-binding-v1','pg2684-operation-current-noargs-once-v1','before()']:
+        for m in ['pg2686-operation-current-live-binding-v1','pg2684-operation-current-noargs-once-v2','before()']:
             self.assertIn(m,raw)
         for fn in [t.entry,r.entry,s.entry,p.main]:
             ast.parse(inspect.getsource(fn))
