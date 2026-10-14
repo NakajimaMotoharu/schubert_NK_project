@@ -31,6 +31,67 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2754-001: retained SUCCESS cannot authorize observation before current completion. */
+  @Test
+  void mdb2754001RetainedBackupRequiresCurrentCompletionAndPreservesOriginalRows()
+      throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("27540001-2222-4333-8444-555555555555"),
+            Instant.parse("2050-02-09T15:00:00Z"));
+    var started = Instant.parse("2050-02-10T02:00:00Z");
+    var observed = started.plusSeconds(3600);
+    long id = 27540010;
+    mdb2480Seed(run, started, id, true);
+    var original =
+        mdb2482Manifest(
+            new MorningDatabaseSession.BackupBegins(
+                new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+            started);
+    var retained = new AtomicReference<Connection>();
+    var prepared = new AtomicInteger();
+    var subject =
+        new MorningDatabaseSession(
+            actualUrl,
+            () -> {},
+            (url, properties) -> {
+              var real = DriverManager.getConnection(url, properties);
+              retained.set(real);
+              return (Connection)
+                  Proxy.newProxyInstance(
+                      Connection.class.getClassLoader(),
+                      new Class<?>[] {Connection.class},
+                      (unused, method, args) -> {
+                        if (method.getName().equals("prepareStatement")) prepared.incrementAndGet();
+                        return mdb2292Invoke(method, real, args);
+                      });
+            },
+            c -> {});
+    assertTrue(
+        subject.execute(
+            credential(),
+            session -> {
+              int before = prepared.get();
+              assertThrows(
+                  IOException.class, () -> session.retainedBackupSuccessful(original, observed));
+              assertEquals(before, prepared.get());
+              var current = session.beginResumeBackup(original, observed);
+              before = prepared.get();
+              assertThrows(
+                  IOException.class, () -> session.retainedBackupSuccessful(original, observed));
+              assertEquals(before, prepared.get());
+              mdb2490SqlRows(run, started, observed, id);
+              session.completeReusedBackup(current, original, observed);
+              assertTrue(session.retainedBackupSuccessful(original, observed));
+              mdb2490SqlRows(run, started, observed, id);
+              return Boolean.TRUE;
+            }));
+    assertTrue(retained.get().isClosed());
+    mdb2490SqlRows(run, started, observed, id);
+    mdb2292NoOwnerResources();
+  }
+
   /** PT-MDB-2750-001: same callback cannot observe a pair during advisory handoff. */
   @Test
   void mdb2750001BackupObservationRejectsInHandoffBeforeJdbcAndPreservesFailedPair()
