@@ -67,7 +67,8 @@ def verify(before, after, changed=None, added=None):
         require(a[name]['sha'] == old and b[name]['sha'] == new)
     for name, expected in added.items():
         require(b[name]['sha'] == expected and not name.endswith('.class'))
-        require(b[name]['metadata'] == a[next(n for n in old_names if not n.endswith('/'))]['metadata'])
+        peer = 'static/js/question-input-validation.js' if name == 'static/js/operation-post-submit.js' else next(n for n in old_names if not n.endswith('/'))
+        require(peer in a and b[name]['metadata'] == a[peer]['metadata'])
     for name in a:
         x, y = a[name], b[name]; require(x['metadata'] == y['metadata'])
         require(masked(x['local'], [(10,14)]+([(14,26)] if name in changed else [])) == masked(y['local'], [(10,14)]+([(14,26)] if name in changed else [])))
