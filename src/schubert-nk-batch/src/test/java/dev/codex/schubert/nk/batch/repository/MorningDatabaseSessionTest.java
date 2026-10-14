@@ -31,6 +31,102 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB2572-001: a forged data-only pair cannot consume the held original proof. */
+  @Test
+  void mdb2572001ReusedBackupRequiresExactManifestSkippedPairAndFreshTime() throws Exception {
+    int ordinal = 0;
+    for (String fault :
+        List.of("VALID", "MANIFEST", "DATABASE_NOT_SKIPPED", "CONFIG_NOT_SKIPPED", "STALE_TIME")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("25720001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2043-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var observed = started.plusSeconds(3600);
+      long id = 25720010L + n * 10;
+      mdb2480Seed(run, started, id, true);
+      var original =
+          mdb2482Manifest(
+              new MorningDatabaseSession.BackupBegins(
+                  new BatchStepAttempt(id + 1, run, BatchStep.BACKUP_DB, 1, started, false),
+                  new BatchStepAttempt(id, run, BatchStep.BACKUP_CONFIG, 1, started, false)),
+              started);
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var connection = DriverManager.getConnection(url, properties);
+                retained.set(connection);
+                return connection;
+              },
+              c -> {});
+      subject.execute(
+          credential(),
+          session -> {
+            var current = session.beginResumeBackup(original, observed);
+            mdb2490SqlRows(run, started, observed, id);
+            var offeredManifest =
+                fault.equals("MANIFEST")
+                    ? new BackupManifest(
+                        original.databaseStep(),
+                        original.configurationStep(),
+                        original.startedAt(),
+                        original.contentFinishedAt(),
+                        original.versions(),
+                        "4".repeat(64),
+                        original.dump(),
+                        original.configuration(),
+                        original.credentials())
+                    : original;
+            var offeredDatabase =
+                fault.equals("DATABASE_NOT_SKIPPED")
+                    ? new BatchStepAttempt(
+                        current.database().id(), run, BatchStep.BACKUP_DB, 2, observed, false)
+                    : current.database();
+            var offeredConfiguration =
+                fault.equals("CONFIG_NOT_SKIPPED")
+                    ? new BatchStepAttempt(
+                        current.configuration().id(),
+                        run,
+                        BatchStep.BACKUP_CONFIG,
+                        2,
+                        observed,
+                        false)
+                    : current.configuration();
+            var offered =
+                new MorningDatabaseSession.BackupBegins(offeredDatabase, offeredConfiguration);
+            if (fault.equals("VALID")) {
+              session.completeReusedBackup(offered, offeredManifest, observed);
+              assertEquals(
+                  2,
+                  session
+                      .observeBackup(
+                          current, Optional.of(original), observed, () -> 10_000_000_000L)
+                      .prior()
+                      .size());
+            } else {
+              assertThrows(
+                  IOException.class,
+                  () ->
+                      session.completeReusedBackup(
+                          offered,
+                          offeredManifest,
+                          fault.equals("STALE_TIME") ? started.minusSeconds(1) : observed),
+                  fault);
+            }
+            mdb2490SqlRows(run, started, observed, id);
+            return Boolean.TRUE;
+          });
+      assertTrue(retained.get().isClosed());
+      mdb2490SqlRows(run, started, observed, id);
+      mdb2292NoOwnerResources();
+    }
+    assertEquals(5, ordinal);
+  }
+
   /** PT-MDB2570-001: finished-pair proof still needs fresh JDBC and owner admission. */
   @Test
   void mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair()
