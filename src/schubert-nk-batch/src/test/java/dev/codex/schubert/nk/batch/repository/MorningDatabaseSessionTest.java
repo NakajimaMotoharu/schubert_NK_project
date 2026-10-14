@@ -31,6 +31,87 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-2762-001: original run identity is proved again from actual committed references. */
+  @Test
+  void mdb2762001PostBeginRejectsForeignRunAndActualLogCutoffDrift() throws Exception {
+    int ordinal = 0;
+    for (String fault : List.of("FOREIGN_RUN", "LOG_CUTOFF")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("27620001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2050-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      var started = run.cutoff().plusSeconds(11 * 3600);
+      var ended = started.plusSeconds(3);
+      var failed =
+          new BatchStepResult(
+              BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+      var retained = new AtomicReference<Connection>();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var c = DriverManager.getConnection(url, properties);
+                retained.set(c);
+                return c;
+              },
+              c -> {});
+      assertEquals(
+          Boolean.TRUE,
+          subject.execute(
+              credential(),
+              session -> {
+                var begins = session.beginBackup(run, started, false);
+                session.failBackup(begins, ended, failed, failed);
+                session.recheckConsistent(run);
+                var offered =
+                    fault.equals("FOREIGN_RUN")
+                        ? new BatchRun(
+                            UUID.fromString("27620002-2222-4333-8444-555555555555"), run.cutoff())
+                        : run;
+                if (fault.equals("LOG_CUTOFF")) {
+                  try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+                      var s =
+                          c.prepareStatement(
+                              "insert into schubert.log_cleanup_progress(run_id,cutoff)"
+                                  + " values(?,?)")) {
+                    s.setObject(1, run.id());
+                    s.setObject(2, run.cutoff().plusSeconds(1).atOffset(java.time.ZoneOffset.UTC));
+                    assertEquals(1, s.executeUpdate());
+                  } catch (SQLException failure) {
+                    throw new IOException("isolated reference fixture", failure);
+                  }
+                }
+                var refusal =
+                    assertThrows(IOException.class, () -> session.recheckConsistent(offered));
+                assertEquals("root batch database unavailable", refusal.getMessage());
+                mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+                return Boolean.TRUE;
+              }));
+      assertTrue(retained.get().isClosed());
+      mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+      try (var c = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+          var s =
+              c.prepareStatement(
+                  "select cutoff,target_count,deleted_count,completed_at"
+                      + " from schubert.log_cleanup_progress where run_id=?")) {
+        s.setObject(1, run.id());
+        try (var rows = s.executeQuery()) {
+          if (fault.equals("LOG_CUTOFF")) {
+            assertTrue(rows.next());
+            assertEquals(run.cutoff().plusSeconds(1), rows.getTimestamp(1).toInstant());
+            assertEquals(0, rows.getLong(2));
+            assertEquals(0, rows.getLong(3));
+            assertNull(rows.getTimestamp(4));
+          }
+          assertFalse(rows.next());
+        }
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
   /** PT-MDB-2758-001: JDBC completion failure never authorizes retained-backup continuation. */
   @Test
   void mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows()
