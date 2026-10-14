@@ -1,5 +1,7 @@
 # 850 別fresh resume一回外部起動
 
+実結果追補: 811756054固定2982 stage actual0/23:00:08～10Z、watch/session27866の初期quiescent→2984/session45433 actual0/23:00:40～51Z、payload a4162632/sourceQualifiedtrue。一回予約後Root122976/Job35795/INV65ad6798d497474685fa32d6750cea1f/startMono18100986959を捕捉。0112b327d固定2990/session46972 read-only actual0/23:01:23～24Z、parent ticks1810098/argv56023186、新activation0ac69fb7-3cb7-4d33-b2d9-4733fba5a4cf・run0dc/cutoff元値/新boot79aを独立二読。Root開始成功のみ、真正DONE/ordinary三役/新nativeは未受入。既start再発行禁止。
+
 PT-OPS-2982-001/2984-001、SS343/353/354/451。a9/PG2802/BOM37bf/newboot79a、現completed run0dcの別fresh activation、既Job11471/旧activation747を再発行する工具ではない。品質緩和/失敗Root再演/旧source native合算0。
 
 事前条件=2974有限準備正常/2980独立post0、最新Git Mainがa9 byte不変更、全十Unit-kernel空/全原値187-24-Backup/native10、正規new runtime --resume0dcだけ変更。new-only2982三file observerをstageし、実quiescentframeと現observer PID/ticks/argv/metadata/hashを二読する。
