@@ -1,0 +1,484 @@
+{
+  "records": [
+    {
+      "actualExit": 0,
+      "formalAccepted": false,
+      "productionSource": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+      "run": "PG2578-server-six-v1",
+      "snapshot": "97353f8f1c9217cc33d9e52ed85e45df5399b606",
+      "xmlSourceQualificationPending": true,
+      "relativePrivateReceipt": "pg2578-server-six-v1/manifest.safe.json",
+      "receiptSha256": "29765bacef1f2082947fbdfb46227e293ed6f5dfc780af358580fd400c2ea277"
+    },
+    {
+      "actualExit": 0,
+      "formalAccepted": false,
+      "qualificationSourceSha256": "7af60d98ad65f0a9bdc12a6c52beb77f96aa098c2448c4ca05a259084bb9e971",
+      "relativePrivateReceipt": "pg2579-current-jdbc-group-full-qualified-v1/manifest.safe.json",
+      "receiptSha256": "4227c32d40dd3292071f9049b97ec99f8cc3798da14137b5540978dab523c931",
+      "result": {
+        "actualExit": 0,
+        "sourceSnapshot": "97353f8f1c9217cc33d9e52ed85e45df5399b606",
+        "productionSource": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+        "tests": 3653,
+        "suites": 540,
+        "mainClasses": 1643,
+        "FESFlakyNotRun": 0,
+        "staticSixModules": 0,
+        "modules": {
+          "api": {
+            "mainClasses": 407,
+            "suites": 159,
+            "tests": 969
+          },
+          "batch": {
+            "mainClasses": 568,
+            "suites": 172,
+            "tests": 1256
+          },
+          "bootstrap": {
+            "mainClasses": 105,
+            "suites": 40,
+            "tests": 298
+          },
+          "protocol": {
+            "mainClasses": 174,
+            "suites": 17,
+            "tests": 81
+          },
+          "storage": {
+            "mainClasses": 74,
+            "suites": 23,
+            "tests": 163
+          },
+          "web": {
+            "mainClasses": 315,
+            "suites": 129,
+            "tests": 886
+          }
+        },
+        "debugLineQualification": {
+          "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo.class": {
+            "lineEntries": 70,
+            "lineOffset": 1,
+            "nonLineBytesIdentical": true
+          }
+        },
+        "semanticChangedClasses": 6,
+        "debugOnlyChangedClasses": 1,
+        "changedClasses": [
+          "batch:dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.class",
+          "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.class",
+          "batch:dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.class",
+          "batch:dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo.class",
+          "batch:dev/codex/schubert/nk/batch/platform/RootStartupContext.class",
+          "batch:dev/codex/schubert/nk/batch/repository/MorningDatabaseSession$Session.class",
+          "batch:dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.class"
+        ],
+        "addedClasses": [],
+        "jarHashes": {
+          "api": "0ab454906ea1f0207c74444efa7e1886990c88b5df1696cf11cdb94efdae5375",
+          "batch": "8486753c5af24164f9cad56ba600a83ff0ae34a8b8d985f72d2671311d3bace5",
+          "bootstrap": "ed7748169fb35d13b3aa1ef221051a9c3304fedd5d4965fddde4f7d45c896b1d",
+          "protocol": "d6afdbc1bb95da9543ec47416028a38dd3afc024884a37c5ed6b26118c117f4d",
+          "storage": "a0f7fee0dd7e5920f01f3fae53c307c208638dd64224a29321e9ad0805b202b5",
+          "web": "c5c5669a4d0e823a5dc2a7360a7c425de7ba7661502839268423db346bf3e544"
+        },
+        "qualificationInputs": {
+          "api": {
+            "coverageXml": "cc72b8adb6d75886f417da27bd3c04b062a40940cdc958ad5cd3c787c5b0cf12",
+            "exec": "23dc9b653b49d833a2cd0da146de71ac1c210d13d8ff41f2359b96c49e6e2dd1",
+            "static": "aeda2c36bd8b519daaadf8ecc8ba9a3a892813191a30c7062614294550ec001a"
+          },
+          "batch": {
+            "coverageXml": "73b588687ecca914b3e83671e5f59cf15cd43989a1799bb4208f100ec87d6dbc",
+            "exec": "85fe272e0b4229940c63e2aad94b4e1bfbdb227a0a1056c643d0d897576b0196",
+            "static": "2b6829e300ca920ed5696a16415c6216b55b578b7a161210133b1cd34dc240fd"
+          },
+          "bootstrap": {
+            "coverageXml": "5269e351536f9ff53cd038bba44d1a5d199e11c539c8fc94df8584dc991e8303",
+            "exec": "ccf305969f459e3c35c8b7f2318412b940ed4df240adc5c597f9bc0ebc4f8875",
+            "static": "c4a5d46ed44bbd56783d6060076f37aed00ff3008d260a6fde6c3614987b3f0e"
+          },
+          "protocol": {
+            "coverageXml": "7b5c0e39dbdcee54a5d8a245fb81f4f66f7e70830b0159dec9390d6626c3eee7",
+            "exec": "65c183a845bf09df6d19d13f45e2a44f53d714baf33f2717c5e4d88f236d8dc2",
+            "static": "d6db66266f915ef67ef4bad4fe8e738631e305d0fe9eebea63be544d352b5204"
+          },
+          "storage": {
+            "coverageXml": "3caa108ba093bbe70eda9e42915b3479e5e7247712db4d06e30c462a15ab3042",
+            "exec": "adb3d641181a10e7a89960af55d140a534ffe849c79de4461a670d7e5eee3ff0",
+            "static": "ce14fa241b8a198b73a96400e00937fb5dcac4adb5eb71f6c2bf0ccb36d57b68"
+          },
+          "web": {
+            "coverageXml": "a8e65b91fc095be6204a00d135a7f4e71c5f0e5f171f7f93b27c0b2f94c5498d",
+            "exec": "4f9d3aa2e53b306e5a0d6db3e9b7e2dd04f5cad27049149992dddfe318f8443d",
+            "static": "c984a2c9ba233ba5fba4cc23f3c6b6f08a4cd50169db7a335c3dc5850fe2fe08"
+          }
+        },
+        "coverage": {
+          "api": {
+            "BRANCH": {
+              "covered": 4017,
+              "missed": 1
+            },
+            "CLASS": {
+              "covered": 308,
+              "missed": 0
+            },
+            "COMPLEXITY": {
+              "covered": 3552,
+              "missed": 9
+            },
+            "INSTRUCTION": {
+              "covered": 48494,
+              "missed": 458
+            },
+            "LINE": {
+              "covered": 10519,
+              "missed": 116
+            },
+            "METHOD": {
+              "covered": 1491,
+              "missed": 8
+            }
+          },
+          "batch": {
+            "BRANCH": {
+              "covered": 7118,
+              "missed": 879
+            },
+            "CLASS": {
+              "covered": 306,
+              "missed": 37
+            },
+            "COMPLEXITY": {
+              "covered": 5605,
+              "missed": 1169
+            },
+            "INSTRUCTION": {
+              "covered": 70086,
+              "missed": 14473
+            },
+            "LINE": {
+              "covered": 13849,
+              "missed": 3434
+            },
+            "METHOD": {
+              "covered": 2183,
+              "missed": 579
+            }
+          },
+          "bootstrap": {
+            "BRANCH": {
+              "covered": 1607,
+              "missed": 2
+            },
+            "CLASS": {
+              "covered": 75,
+              "missed": 0
+            },
+            "COMPLEXITY": {
+              "covered": 1292,
+              "missed": 26
+            },
+            "INSTRUCTION": {
+              "covered": 14259,
+              "missed": 271
+            },
+            "LINE": {
+              "covered": 2657,
+              "missed": 55
+            },
+            "METHOD": {
+              "covered": 489,
+              "missed": 24
+            }
+          },
+          "protocol": {
+            "BRANCH": {
+              "covered": 1010,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 157,
+              "missed": 0
+            },
+            "COMPLEXITY": {
+              "covered": 1273,
+              "missed": 0
+            },
+            "INSTRUCTION": {
+              "covered": 17405,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 3464,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 741,
+              "missed": 0
+            }
+          },
+          "storage": {
+            "BRANCH": {
+              "covered": 527,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 37,
+              "missed": 0
+            },
+            "COMPLEXITY": {
+              "covered": 521,
+              "missed": 0
+            },
+            "INSTRUCTION": {
+              "covered": 6118,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 1172,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 257,
+              "missed": 0
+            }
+          },
+          "web": {
+            "BRANCH": {
+              "covered": 3085,
+              "missed": 9
+            },
+            "CLASS": {
+              "covered": 279,
+              "missed": 0
+            },
+            "COMPLEXITY": {
+              "covered": 3099,
+              "missed": 20
+            },
+            "INSTRUCTION": {
+              "covered": 37953,
+              "missed": 494
+            },
+            "LINE": {
+              "covered": 8477,
+              "missed": 95
+            },
+            "METHOD": {
+              "covered": 1542,
+              "missed": 11
+            }
+          }
+        },
+        "serverManifestSha256": "11d67a2c394a127f24e850b5665fa82bdf476fd43e9c0b82da00292ef7a2e07a",
+        "sourceArchiveSha256": "9f1821323f02840a8a8af9e5ab57cb4e56b292a2486a31c2b73ebc0c87872893",
+        "elapsedSeconds": 1556.75653,
+        "startUTC": "2026-10-14T01:43:43.667477+00:00",
+        "endUTC": "2026-10-14T02:09:40.424007+00:00"
+      }
+    },
+    {
+      "actualExit": 0,
+      "formalAccepted": false,
+      "manifestSha256": "cd2ca7b69f134e0275e18c33a2a443b8c7eef8e8923d54fb5a6564a3b35eb9d9",
+      "operatorSource": "d0b2e09c5d4a3185404266b59f821c73a8ceb974",
+      "payloadSha256": "20e9f14061124cdca07f063854082f25136dc4d7651a65f78b0428d34bf884b9",
+      "productionSource": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+      "relativePrivateReceipt": "pg2582-current-jdbc-group-native-qualified-v1/manifest.safe.json",
+      "receiptSha256": "577e3d1ef410431efd5870da9bcc07405f40347942a3852555b9d4c8db3da839",
+      "result": {
+        "actualExit": 0,
+        "productionSource": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+        "currentNativeStreams": 9,
+        "validatedNativePoints": 10,
+        "classByteMismatch": 0,
+        "gain": {
+          "api": {
+            "BRANCH": 0,
+            "CLASS": 0,
+            "LINE": 89,
+            "METHOD": 8
+          },
+          "batch": {
+            "BRANCH": 323,
+            "CLASS": 28,
+            "LINE": 2662,
+            "METHOD": 423
+          },
+          "bootstrap": {
+            "BRANCH": 2,
+            "CLASS": 0,
+            "LINE": 54,
+            "METHOD": 23
+          },
+          "protocol": {
+            "BRANCH": 0,
+            "CLASS": 0,
+            "LINE": 0,
+            "METHOD": 0
+          },
+          "storage": {
+            "BRANCH": 0,
+            "CLASS": 0,
+            "LINE": 0,
+            "METHOD": 0
+          },
+          "web": {
+            "BRANCH": 9,
+            "CLASS": 0,
+            "LINE": 95,
+            "METHOD": 11
+          }
+        },
+        "coverage100": false,
+        "all1643MainMembersIdentical": 1643,
+        "allProductionResourceMembersIdentical": true,
+        "retainedQualifiedNativeReused": true,
+        "inspectorLatestClosingOnly": true,
+        "inspectorProbeMonotonic": true,
+        "oldNativeImported": false,
+        "moduleCounters": {
+          "api": {
+            "BRANCH": {
+              "covered": 4017,
+              "missed": 1
+            },
+            "CLASS": {
+              "covered": 308,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 10608,
+              "missed": 27
+            },
+            "METHOD": {
+              "covered": 1499,
+              "missed": 0
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          },
+          "batch": {
+            "BRANCH": {
+              "covered": 7441,
+              "missed": 556
+            },
+            "CLASS": {
+              "covered": 334,
+              "missed": 9
+            },
+            "LINE": {
+              "covered": 16511,
+              "missed": 772
+            },
+            "METHOD": {
+              "covered": 2606,
+              "missed": 156
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          },
+          "bootstrap": {
+            "BRANCH": {
+              "covered": 1609,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 75,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 2712,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 513,
+              "missed": 0
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          },
+          "protocol": {
+            "BRANCH": {
+              "covered": 1010,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 157,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 3464,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 741,
+              "missed": 0
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          },
+          "storage": {
+            "BRANCH": {
+              "covered": 527,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 37,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 1172,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 257,
+              "missed": 0
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          },
+          "web": {
+            "BRANCH": {
+              "covered": 3094,
+              "missed": 0
+            },
+            "CLASS": {
+              "covered": 279,
+              "missed": 0
+            },
+            "LINE": {
+              "covered": 8572,
+              "missed": 0
+            },
+            "METHOD": {
+              "covered": 1553,
+              "missed": 0
+            },
+            "classByteMismatch": 0,
+            "formal": false
+          }
+        }
+      }
+    }
+  ],
+  "source": "a79b45b5858a186fa82bec1ff36882271ab996a4",
+  "remaining": {
+    "LINE": 799,
+    "METHOD": 156,
+    "CLASS": 9,
+    "BRANCH": 557
+  },
+  "coverage100": false,
+  "formalAccepted": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "acceptedLeafDelta": 0,
+  "N": null,
+  "T": null
+}
+
