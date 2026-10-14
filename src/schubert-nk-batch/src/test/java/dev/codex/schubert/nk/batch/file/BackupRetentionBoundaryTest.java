@@ -24,7 +24,7 @@ final class BackupRetentionBoundaryTest {
   /** PT-BAK-2736-001: current missed admission predicates264/282/314; real held FD. */
   @Test
   void backup2736001RetentionRejectsNonrootCrossDeviceAndParentDrift() throws Exception {
-    for (String bad : List.of("nonroot", "crossDevice", "parentDrift")) {
+    for (String bad : List.of("nonroot", "crossDevice", "parentDrift", "lateNonroot")) {
       try (var f = new BackupArtifactFixture(temporary)) {
         var parentReads = new java.util.concurrent.atomic.AtomicInteger();
         if (bad.equals("nonroot")) f.effective = 1;
@@ -32,10 +32,10 @@ final class BackupRetentionBoundaryTest {
             (role, values) -> {
               if (bad.equals("crossDevice") && role.equals("child"))
                 values.put("dev", (Long) values.get("dev") + 1);
-              if (bad.equals("parentDrift")
-                  && role.equals("parent")
-                  && parentReads.incrementAndGet() == 2)
-                values.put("ino", (Long) values.get("ino") + 1);
+              if (role.equals("parent") && parentReads.incrementAndGet() == 2) {
+                if (bad.equals("parentDrift")) values.put("ino", (Long) values.get("ino") + 1);
+                if (bad.equals("lateNonroot")) f.effective = 1;
+              }
             };
         var error =
             assertThrows(
@@ -43,7 +43,8 @@ final class BackupRetentionBoundaryTest {
         assertEquals(StorageIoException.Reason.UNAVAILABLE, error.reason(), bad);
         assertNull(error.getCause(), bad);
         if (bad.equals("nonroot")) assertEquals(0, f.counts.getOrDefault("openEntry", 0));
-        if (bad.equals("parentDrift")) assertEquals(2, parentReads.get());
+        if (bad.equals("parentDrift") || bad.equals("lateNonroot"))
+          assertEquals(2, parentReads.get());
         f.unchanged();
         f.released();
       }

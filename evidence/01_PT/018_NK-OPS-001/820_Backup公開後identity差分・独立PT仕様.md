@@ -14,4 +14,8 @@ Program NK-BAT-001、BackupArtifactVerifier.BundleSnapshot.samePublished / Backu
 
 BackupArtifactVerifier.retentionSizesAgree、BackupRetentionBoundaryTest.backup2736001RetentionRejectsNonrootCrossDeviceAndParentDrift。PG2722当source gap/XMLにある264 effectiveUID、282 child device、314 parent二読の三false条件を着手前に確認。固定開始clock100、公開人工三archive＋MANIFESTを持つ既BackupArtifactFixtureの実Linux FD/IOを使用し、root権限/metadataだけを試験portへ注入する。実Master/DB/Backupは使わない。
 
-入力はnonroot UID1、childだけdevice+1、parent二読目だけinode+1の三独立ケース。各StorageIoException.UNAVAILABLE、cause無し、削除証明を返さず、全file bytes不変・全handle解放を期待。nonrootはentry open0、parentDriftは正確に二回読んだことも確認。期待値はSSのowner/device/inode再認証から独立固定。通常/欠落/hash不一致/null/例外の既2120四PTは維持。commandはpg2736_backup_retention_selected.py、初期状態=未実行、関連新BUGなし。method/line単位の測定と一意XML/hashを確認してから成果を追加、class/global100は別判定。
+入力はnonroot UID1、childだけdevice+1、parent二読目だけinode+1の三独立ケース。各StorageIoException.UNAVAILABLE、cause無し、削除証明を返さず、全file bytes不変・全handle解放を期待。nonrootはentry open0、parentDriftは正確に二回読んだことも確認。期待値はSSのowner/device/inode再認証から独立固定。通常/欠落/hash不一致/null/例外の既2120四PTは維持。
+
+初回v1/session73077、Test source296259737、actual0/一JUnit/三入力/FES0/javac warning0、server manifest b083b306b565abcc1db95fee361bdd1a1c82ef5437a00437e5f33997501d76e2、host-only残branch869→867/増加2・Main不変更。parent inode差分は既網羅済みの補強。行314の未網羅はparent一致ではなく、その次の終了時effectiveUID検査と訂正する（元event0720は保持）。
+
+v2はlateNonrootを追加：二回目parent metadata読取時だけeffectiveUIDを1へ変え、正常metadataなのに終了時UID再認証でUNAVAILABLEを期待、parent二読を確認、bytes不変/handle解放。四入力/一JUnit、別new-only PG2736-selected-v2、初期状態=未実行。v1の成功をv2へ流用0。method/line単位と一意XML/hashを確認し、class/global100は別判定。新障害なし。
