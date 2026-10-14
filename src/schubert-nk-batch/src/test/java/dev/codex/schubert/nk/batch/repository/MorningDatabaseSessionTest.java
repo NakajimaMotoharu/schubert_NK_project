@@ -63,7 +63,7 @@ final class MorningDatabaseSessionTest {
       var plain =
           new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
       assertTrue(
-          plain.execute(
+          plain.<Boolean>execute(
               credential(),
               s -> {
                 s.beginBackup(run, oldStart, false);

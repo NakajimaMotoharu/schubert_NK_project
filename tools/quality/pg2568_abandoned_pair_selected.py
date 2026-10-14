@@ -34,6 +34,7 @@ def server():
                           ("len(x.findall('testcase'))==2", "len(x.findall('testcase'))==1"),
                           ("'tests':2", "'tests':1")]:
         raw = raw.replace(before, after)
+    raw = raw.replace('PG2568-selected-v1', 'PG2568-selected-v2')
     if check('INPUT={}\n' + raw, '<isolated actual abandoned pair matrix>'):
         raise ValueError('complete selected server namespace required')
     compile(raw, '<fresh isolated pair readback>', 'exec')
@@ -45,8 +46,9 @@ def main():
         'pg2220', 'pg2568').replace('pg2125-metadata-boundary-full-qualified-v1',
                                    'pg2511-strict-reference-full-qualified-v1')
     raw = raw.replace(",'libraries':libs}", ",'libraries':libs,'native':native_input()}")
+    raw = raw.replace('PG2568-selected-v1', 'PG2568-selected-v2')
     ns = {**previous.prior.__dict__, 'SOURCE': SOURCE, 'FILES': FILES,
-          'SLOT': 'pg2568-abandoned-pair-selected-v1', 'SERVER': server(), 'native_input': native_input}
+          'SLOT': 'pg2568-abandoned-pair-selected-v2', 'SERVER': server(), 'native_input': native_input}
     exec(compile(raw, '<fresh immutable current selected transport>', 'exec'), ns)
     return ns['main']()
 

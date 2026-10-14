@@ -13,7 +13,7 @@ class SelectedMatrix(unittest.TestCase):
     def test_one_selected_test_immutable_main_and_isolated_db(self):
         raw = server()
         ast.parse(raw)
-        for marker in ['source-full-PG2510', 'PG2564-native-v1', 'PG2568-selected-v1',
+        for marker in ['source-full-PG2510', 'PG2564-native-v1', 'PG2568-selected-v2',
                        'Pg2568AbandonedPairLauncher', "'tests':'1'", 'freshIsolatedPostgres',
                        'classByteMismatch', 'fixturesUnchanged', 'SCHUBERT_PG_ROOT']:
             self.assertIn(marker, raw)
