@@ -37,3 +37,15 @@ event0820で開始見積 .75/2.5/6週次共有pp（P017-01.03=.65/2/5、P017-06=
 208acafec/3210stage207b1a92、preserve42456/boot36105全actual0。fixtureQEMU445092/t3906100/argvf67196ed、new bootdd710ec8、全十Unit/Job/Main/Control0、別ownedforward64142/SSH171602-t3913396/local22224を実認証。Primary4599/boot79a/22222は不変更。JDK25.0.4/busctl、旧filesystem currentPG2654とapproval0400root0/hash7c22aaffをRO確認。これはLoaded a9を置いた正常配備ではなく、継承したforeign dataに対する独立negative fixture。旧042のexec/nativeは一切合算しない。
 
 追加予定Test ID=PT-OPS-LFACT001～007。001 fresh owned、002 fresh owned epoch、003 resume owned、004 resume owned epoch、005 backup resume、006 fresh外側alias、007 resume外側alias。全て元仕様の厳密release拒否を検査し、業務callbackは呼ばれた時点でFAIL。各caseで独立inotify read witnessとD-Bus Manager GetUnitの監視barrier/no StartUnit-StopUnit等・DB/lock/permit不変を結合する。単なるIOExceptionやcoverage hitだけでは合格にしない。現caseコードはformatter済み未compile/未実行、環境成功をPT合格へ加算しない。
+
+## 実発行ABIと是正（2026-10-15 13:57JST、未閉鎖）
+
+3214 helper compile actual0（c65e26536、archive b2eb19ed6faa2d553998645a777a7a31dc372103008596e03d7eb2e53afef2bd）。既3694/542/1643/79の六Main jarと第三者libraryだけを封印、m2の旧internal NK jarを除去。Main再compile0、helper三class、Java25.0.4 javac全warning0。fixture固有boot dd710ec8/22224とPrimary所有を各phaseで認証し、RootStartupContextの実PID1/proc/root/INV/cgroupが必要な既default factoryを呼ぶ。
+
+実観測器はSO_PEERCRED/root caller=当Morning MainPID/同INV/ticks/cgroupを各BEGIN/ENDで照合。inotifyを不正approval公開vector `PGPT_INVALID_APPROVAL\n` と二credentialに設定、observerの前読をARMED前にdrain、ENDでは自身の次読より先にIN_ACCESS到達・変更0・credential read0を検査。D-Bus Manager monitorは毎case、固有不存在Unit名のGetUnit barrierを実捕捉し、読み取り系以外のmethod0を確認。DB=24業務表＋Flyway historyの全行をSQL row_to_jsonの安定sortでhash/count比較、appclient/advisory0。M/A・原本・Backup全treeのinode/metadata/hash不変、callback後の保護対象FD/lock0を確認。raw値/承認元byteはprivateだけ。
+
+BUG1273/YKT1039: 3216旧v1受領先root0700のscp拒否はactual1/設定未発行を保全。0213fa4f0のv2明示ubuntu0700→closed二file hash→root0400/dir0700封印stage/setupは実actual0。受領先の異UID・既存・非0700・非空、foreign bootの拒否を独立fixtureで再現済み。
+
+BUG1274/YKT1040: 3216v2/exec72417は七caseと七OS witness/complete0まで通過したが、inactive後にUnit補助履歴が回収されcode0/INV空へ戻り、終端oracleでwhole actual1。失敗nativeは資格・合成へ入れず、七部分PASSも新cohortへ加算しない。3218は同じloaded Main/JARを再hashし、**別case-cohort-v2/別native/session/別observer証跡**を新-only作成。旧承認vector/原本DBBackup/全失敗証跡を保持。Unitの追加dropinだけRemainAfterExit=yesと新helper出力先へ切替、通常MorningMain/新Root/Backup/ADMINは発行しない。
+
+新cohort終端はactive/exited/Main0/Control0/Job空/ExecMainCode1/status0/Resultsuccess/同INVを要求し、元PID消失/空cgroup/ExecStop・ExecStopPost空を再認証してから、このfixture Unitだけ一回stopしinactive/dead/全actor-job0を確認する。回収code0、別INV、exit10、livePID、余剰Jobは反例として拒否。新七case全体成功・別post・当source CRC/session資格が完了するまでcoverage/PT加点0。原VM/既native27/全3694を反復しない。

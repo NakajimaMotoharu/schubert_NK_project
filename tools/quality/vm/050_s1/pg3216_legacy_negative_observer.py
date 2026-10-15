@@ -32,6 +32,10 @@ UNIT = 'schubert-nk-morning-controller.service'
 DROP = Path('/etc/systemd/system') / (UNIT + '.d/zz-pg3216-negative-fixture.conf')
 IDS = ['PT-OPS-LFACT' + str(i).zfill(3) for i in range(1, 8)]
 PROTECTED = [Path('/run/schubert-nk'), Path('/var/lib/schubert-nk/maintenance'), Path('/srv/schubert-nk/backup')]
+RESULTS = BASE
+CASE = BASE / 'case-cohort-v1'
+NATIVE = BASE / 'cohort-native.exec'
+RETAINED_TERMINAL = False
 
 
 def require(value):
@@ -52,7 +56,7 @@ def sha(path):
 
 
 def save(name, value):
-    with (BASE / name).open('x') as file:
+    with (RESULTS / name).open('x') as file:
         json.dump(value, file, sort_keys=True); file.flush(); os.fsync(file.fileno())
 
 
@@ -184,8 +188,8 @@ class Watch:
 class Bus:
     def __init__(self):
         self.events = queue.Queue(); self.serial = 0
-        self.out = (BASE / 'bus.private.jsonl').open('x', buffering=1)
-        self.err = (BASE / 'bus.private.err').open('x')
+        self.out = (RESULTS / 'bus.private.jsonl').open('x', buffering=1)
+        self.err = (RESULTS / 'bus.private.err').open('x')
         self.process = subprocess.Popen(['busctl', '--system', '--json=short', "--match=type='method_call',interface='org.freedesktop.systemd1.Manager'", 'monitor'], stdout=subprocess.PIPE, stderr=self.err, text=True, bufsize=1)
         self.thread = threading.Thread(target=self.collect, daemon=True); self.thread.start()
 
@@ -236,8 +240,8 @@ def resource_closed(pid, before):
 
 
 def execute():
-    guard(); require(json.loads((BASE / 'setup.safe.json').read_text())['actualExit'] == 0)
-    require(not (BASE / 'run-reservation.safe.json').exists() and not (BASE / 'cohort-native.exec').exists())
+    guard(); require(json.loads((RESULTS / 'setup.safe.json').read_text())['actualExit'] == 0)
+    require(not (RESULTS / 'run-reservation.safe.json').exists() and not NATIVE.exists())
     initial_unit = unit(); require(initial_unit['MainPID'] == '0' and initial_unit['Job'] == '' and initial_unit['ActiveState'] == 'inactive')
     before = {'tree': tree(), 'database': database(), 'bad': stable_bad()}; save('before.private.json', before)
     save('run-reservation.safe.json', {'issuedOnce': True, 'boot': BOOT, 'expectedCases': IDS, 'businessEntry': False})
@@ -288,22 +292,42 @@ def execute():
             terminal = unit()
             if terminal['MainPID'] == '0' and terminal['ControlPID'] == '0' and terminal['Job'] == '': break
             time.sleep(.1)
-        require(terminal['ActiveState'] == 'inactive' and terminal['SubState'] == 'dead' and terminal['Result'] == 'success'
-                and terminal['ExecMainCode'] == '1' and terminal['ExecMainStatus'] == '0')
+        require_terminal(terminal, invocation, RETAINED_TERMINAL)
         require(not Path('/proc', str(pid)).exists())
+        if RETAINED_TERMINAL:
+            # No live JVM remains. This is a finite stop of this exact fixture
+            # invocation, not Production Morning or a second business operation.
+            group = Path('/sys/fs/cgroup/system.slice') / UNIT
+            require(not group.exists() or not (group / 'cgroup.procs').read_text().strip())
+            actual = command(['systemctl', 'show', UNIT, '-p', 'ExecStop', '-p', 'ExecStopPost', '-p', 'RemainAfterExit']).stdout
+            require(dict(line.split('=', 1) for line in actual.splitlines()) == {'ExecStop': '', 'ExecStopPost': '', 'RemainAfterExit': 'yes'})
+            require(unit() == terminal)
+            save('owned-stop-reservation.safe.json', {'issuedOnce': True, 'invocation': invocation, 'pidGone': pid, 'unit': UNIT})
+            command(['systemctl', 'stop', UNIT], timeout=15)
+            stopped = unit()
+            require(stopped['ActiveState'] == 'inactive' and stopped['SubState'] == 'dead' and stopped['MainPID'] == stopped['ControlPID'] == '0' and stopped['Job'] == '')
+            require(not group.exists() or not (group / 'cgroup.procs').read_text().strip())
+            save('owned-stop.safe.json', {'actualExit': 0, 'invocation': invocation, 'actorAndJobEmpty': True})
         require(tree() == before['tree'] and database() == before['database'] and stable_bad() == before['bad'])
-        require(json.loads((BASE / 'case-cohort-v1/complete.safe.json').read_text())['actualExit'] == 0)
-        require((BASE / 'cohort-native.exec').stat().st_size > 0)
+        require(json.loads((CASE / 'complete.safe.json').read_text())['actualExit'] == 0)
+        require(NATIVE.stat().st_size > 0)
         save('manifest.safe.json', {'actualExit': 0, 'cases': 7, 'boot': BOOT, 'source': SOURCE, 'pid': pid, 'ticks': int(ticks),
                                    'invocation': invocation, 'naturalUnitExit': 0, 'all24AndHistoryUnchanged': True,
-                                   'protectedTreeUnchanged': True, 'nativeSha256': sha(BASE / 'cohort-native.exec'),
+                                   'protectedTreeUnchanged': True, 'nativeSha256': sha(NATIVE),
                                    'normalBusinessEntryCount': 0, 'formalAccepted': False})
         print('PG3216_NEGATIVE actual0=true cases7=true independentWitness=true nativeNotYetQualified=true', flush=True)
     except Exception as failure:
-        save('failed.safe.json', {'actualExit': 1, 'type': type(failure).__name__, 'casesPassed': len(list(BASE.glob('*.observer.safe.json'))), 'nativeAccepted': False})
+        save('failed.safe.json', {'actualExit': 1, 'type': type(failure).__name__, 'casesPassed': len(list(RESULTS.glob('*.observer.safe.json'))), 'nativeAccepted': False})
         raise
     finally:
         server.close(); watch.close(); bus.close()
+
+
+def require_terminal(terminal, invocation, retained):
+    require(terminal['Result'] == 'success' and terminal['ExecMainCode'] == '1' and terminal['ExecMainStatus'] == '0'
+            and terminal['MainPID'] == terminal['ControlPID'] == '0' and terminal['Job'] == '')
+    require((terminal['ActiveState'], terminal['SubState']) == (('active', 'exited') if retained else ('inactive', 'dead')))
+    if retained: require(terminal['InvocationID'] == invocation)
 
 
 def main():

@@ -51,6 +51,14 @@ class IndependentWitness(unittest.TestCase):
         for forbidden in ['MorningProcessMain\n', 'signal.SIGKILL', 'systemctl restart', 'getDeclaredMethod', 'setAccessible']:
             self.assertNotIn(forbidden, raw)
 
+    def test_retained_terminal_is_exact_generation_and_zero_status(self):
+        invocation = 'a' * 32
+        good = {'Result': 'success', 'ExecMainCode': '1', 'ExecMainStatus': '0', 'MainPID': '0', 'ControlPID': '0', 'Job': '',
+                'ActiveState': 'active', 'SubState': 'exited', 'InvocationID': invocation}
+        observer.require_terminal(good, invocation, True)
+        for key, bad in [('Result', 'exit-code'), ('ExecMainCode', '0'), ('ExecMainStatus', '10'), ('MainPID', '42'), ('ControlPID', '43'), ('Job', '1'), ('ActiveState', 'inactive'), ('SubState', 'dead'), ('InvocationID', 'b' * 32)]:
+            with self.assertRaises(ValueError, msg=key): observer.require_terminal({**good, key: bad}, invocation, True)
+
     def test_receiver_is_non_root_until_closed_transfer_then_sealed(self):
         from pg3216_legacy_negative_dispatch import RECEIVER_PREP, OUT, STAGE
         self.assertTrue(str(OUT).endswith('-v2'))
