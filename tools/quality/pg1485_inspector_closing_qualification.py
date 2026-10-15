@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import subprocess
 from pg1446_current_cold_stage import SSH, W
+from git_source_contract import MAIN_PATHSPEC,POM_PATHSPEC
 
 SOURCE='769ddb15cd735c25fef581b5f9850ef9d0053c0f'
 FIXED={'terminal.exec':(17315,'6283aef1d747a9ab83b70e84e274f3dce1fb65ed931063ad09e1c4106f603ef6'),
@@ -61,7 +62,7 @@ print(json.dumps(out,sort_keys=True))
 
 def main():
     os.umask(0o077);out=W/'pg1485-inspector-closing-qualification-v1';out.mkdir(mode=0o700)
-    require(not subprocess.check_output(['git','diff',SOURCE,'--','src/*/src/main','pom.xml','src/*/pom.xml']))
+    require(not subprocess.check_output(['git','diff',SOURCE,'--',MAIN_PATHSPEC,'pom.xml',POM_PATHSPEC]))
     prior=W/'pg1462-current-day-inspector-v1/manifest.safe.json';v=json.loads(prior.read_bytes())
     require(v['actualExit']==0 and v['guest']['productionSource']==SOURCE and v['guest']['genuinePid1StartDoneStop']is True)
     raw=payload().encode();(out/'payload.private.py').write_bytes(raw)

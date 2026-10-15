@@ -7,6 +7,7 @@ import shlex
 import subprocess
 from pg3688_import_candidate_stage import ROOT,W,BASE,require
 from lan_server import copy,run
+from git_source_contract import last_main_source
 
 
 def server(data):
@@ -41,7 +42,7 @@ def server(data):
 def main():
     require(not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT),'clean applied source and fixed operator')
     applied=json.loads((W/'pg3694-hygiene-candidate-material-v1/apply.safe.json').read_bytes());require(applied['actualExit']==0 and applied['applied'],'actual214 mechanical apply')
-    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();source=subprocess.check_output(['git','log','-1','--format=%H','--','src/*/src/main'],cwd=ROOT,text=True).strip()
+    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();source=last_main_source(ROOT)
     staged=json.loads((W/'pg3692-hygiene-candidate-stage-v1/manifest.safe.json').read_bytes());old=W/'pg3422-candidate-static-v1/manifest.safe.json'
     data={'head':head,'source':source,'candidateManifestSha256':staged['result']['serverManifestSha256'],'originalStaticManifestSha256':hashlib.sha256(old.read_bytes()).hexdigest(),'sourceSha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in sorted(ROOT.glob('src/*/src/main/java/**/*.java'))}}
     os.umask(0o077);out=W/'pg3696-hygiene-pmd-diagnosis-v1';out.mkdir();payload='\n'.join(inspect.getsource(x)for x in [require,server])+'\nINPUT='+repr(data)+'\nserver(INPUT)\n';compile(payload,'<exact candidate all849 fixed PMD>','exec');script=out/'pmd.private.py';script.write_text(payload)

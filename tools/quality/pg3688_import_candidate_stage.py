@@ -8,6 +8,7 @@ import shlex
 import subprocess
 from lan_server import copy,run
 from source_import_expansion_test import parse,replace_imports
+from git_source_contract import MAIN_PATHSPEC
 
 ROOT=Path(__file__).resolve().parents[2]
 W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
@@ -115,7 +116,7 @@ def main():
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     full=json.loads((W/'pg3414-outbox-full-qualified-v1/manifest.safe.json').read_bytes());f=full['result']
     require(full['actualExit']==0 and f['tests']==3712 and f['productionSource']==SOURCE,'actual fixed baseline')
-    require(not subprocess.check_output(['git','diff',f['sourceSnapshot'],head,'--','src/*/src/main'],cwd=ROOT),'all Main unchanged before staging')
+    require(not subprocess.check_output(['git','diff',f['sourceSnapshot'],head,'--',MAIN_PATHSPEC],cwd=ROOT),'all Main unchanged before staging')
     failed=json.loads((W/'pg3688-import-candidate-stage-v1/manifest.safe.json').read_bytes());require(failed['actualExit']==1,'original failed stage remains distinct')
     os.umask(0o077);out=W/'pg3690-import-candidate-stage-v1';out.mkdir()
     archive=out/'source.tar';archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'src'],cwd=ROOT))
