@@ -17,6 +17,12 @@ from pg3409_related_qualification import positions, verify_switch_debug, require
 SOURCE = '4856b3fcaeb4cae983d77757a38dc0bf56a693e2'
 EXPECTED = {'protocol': (86, 17, 174), 'storage': (163, 23, 74), 'bootstrap': (298, 40, 105),
             'api': (973, 160, 407), 'web': (889, 131, 315), 'batch': (1303, 174, 568)}
+NEW_CASES = [
+    ('dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest', 'cause3404TypedGraphTerminatesCyclesAndVisitsBothProviderEdges'),
+    ('dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest', 'cause3404UnconfirmedCommitAlwaysRollsBackClosesAndPreservesOriginalGraph'),
+    ('dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest', 'cause3404ReachableTypedDuplicateConfirmsOnlyAfterRollbackAndStillCloses'),
+    ('dev.codex.schubert.nk.api.security.AuthenticationFailureGraphTest', 'suppressedCyclesTerminateAndReachableFatalRetainsIdentity'),
+    ('dev.codex.schubert.nk.web.session.SessionFailureGraphTest', 'mixedCauseAndSuppressedCyclesTerminateAndReachableFatalRetainsIdentity')]
 
 
 def validate(snapshot):
@@ -75,7 +81,9 @@ def independent(data):
     require(v['sourceSnapshotHead'] == begin['sourceSnapshotHead'], 'same original snapshot')
     require(sha(b / 'transfer/PG3412-source.tar') == begin['sourceArchiveSha256'], 'fixed actual archive')
     require(all(sha(source / p) == h for p, h in begin['inputs'].items()), 'every original source unchanged')
-    modules = {}; coverage = {}; jar_hashes = {}; all_cases = set(); changed = []
+    modules = {}; coverage = {}; jar_hashes = {}; all_cases = set(); changed = []; old_cases = set()
+    old_manifest = b / 'runs/PG3398-six-v1/manifest.safe.json'
+    require(sha(old_manifest) == data['priorManifestSha256'], 'actual immutable original3707 identity authority')
     for module, (nt, ns, nc) in data['expected'].items():
         target = source / ('src/schubert-nk-' + module + '/target')
         xmls = sorted((target / 'surefire-reports').glob('TEST-*.xml'))
@@ -83,6 +91,8 @@ def independent(data):
         require(len(xmls) == ns and sum(len(r.findall('testcase')) for r in roots) == nt, 'exact independent module cardinality')
         expected_cases = {r.get('name'): len(r.findall('testcase')) for r in roots}
         cases = classify(roots, expected_cases); all_cases.update(cases)
+        old_roots = [E.parse(p).getroot() for p in (b / 'runs/PG3398-six-v1' / module / 'surefire-reports').glob('TEST-*.xml')]
+        old_cases.update(classify(old_roots, {r.get('name'): len(r.findall('testcase')) for r in old_roots}))
         start = datetime.datetime.fromisoformat(begin['startUTC']).timestamp()
         require(all(p.stat().st_mtime >= start and sha(p) == sha(out / module / 'surefire-reports' / p.name) for p in xmls), 'fresh original/saved XML bytes')
         static = target / 'spotbugsXml.xml'; require(not E.parse(static).findall('.//BugInstance'), 'static0')
@@ -110,10 +120,14 @@ def independent(data):
                             for c in E.parse(cov).getroot().findall('counter')}
         modules[module]['coverageXmlSha256'] = sha(cov); jar_hashes[module] = sha(jar)
     require(len(all_cases) == 3712 and sum(m['suites'] for m in modules.values()) == 545, 'genuine full3712/545')
+    added_cases = {tuple(v) for v in data['newCases']}
+    require(len(old_cases) == 3707 and len(added_cases) == 5 and not (old_cases & added_cases)
+            and all_cases == old_cases | added_cases, 'all3707 original actual identities retained plus exactly five declared regressions')
     print(json.dumps({'actualExit': 0, 'productionSource': data['candidateSource'], 'sourceSnapshot': begin['sourceSnapshotHead'],
                       'sourceArchiveSha256': begin['sourceArchiveSha256'], 'tests': 3712, 'suites': 545, 'mainClasses': 1643,
                       'FESFlakyNotRun': 0, 'staticSixModules': 0, 'modules': modules, 'coverage': coverage,
                       'jarHashes': jar_hashes, 'changedClasses': changed, 'semanticChangedClasses': 1,
+                      'allOriginalCaseIdentitiesRetained': True, 'newCases': data['newCases'],
                       'debugOnlyChangedClasses': 1, 'generatedSwitchDebug': debug, 'oldNativeImported': False,
                       'candidateNativePending': True, 'formalAccepted': False, 'global100': False,
                       'serverManifestSha256': sha(out / 'manifest.safe.json')}))
@@ -124,6 +138,8 @@ def qualify():
     value = json.loads(local.read_bytes()); require(value['actualExit'] == 0, 'original full wrapper0')
     validate(value['snapshot'])
     data = {'candidateSource': SOURCE, 'expected': EXPECTED,
+            'newCases': NEW_CASES,
+            'priorManifestSha256': json.loads((W / 'pg3400-oracle-boundary-full-qualified-v1/manifest.safe.json').read_bytes())['result']['serverManifestSha256'],
             'priorJarHashes': json.loads((W / 'pg3400-oracle-boundary-full-qualified-v1/manifest.safe.json').read_bytes())['result']['jarHashes']}
     raw = '\n'.join(inspect.getsource(f) for f in [positions, verify_switch_debug, require, classify, independent]) + '\nindependent(' + repr(data) + ')\n'
     os.umask(0o077); out = W / 'pg3414-outbox-full-qualified-v1'; out.mkdir()

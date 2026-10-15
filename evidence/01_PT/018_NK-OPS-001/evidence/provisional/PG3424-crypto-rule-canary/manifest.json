@@ -1,0 +1,33 @@
+{
+  "actualExit": 0,
+  "run": "PG3424-crypto-rule-canary-v1",
+  "compileExit": 0,
+  "dynamicRuntimeExit": 0,
+  "dynamicIndependentValues": 2,
+  "callerMutationIsolated": true,
+  "pmdExit": 4,
+  "sameFrozenRules": true,
+  "sourceSha256": {
+    "DynamicKeyRuleCanary.java": "b4426a8c4500a245fdba2e612fd05fa7e181c3914db342d1e2c28ac95333a376",
+    "UnsafeKeyRuleCanary.java": "2b60b815d66e2a80e287449766a2ad688f1dd52c9f5f158ecb879aca629e3c79"
+  },
+  "findings": [
+    {
+      "source": "DynamicKeyRuleCanary.java",
+      "line": 10,
+      "sourceLine": "currentKey = validateKey(supplied, \"currentKey\");"
+    },
+    {
+      "source": "UnsafeKeyRuleCanary.java",
+      "line": 8,
+      "sourceLine": "return new SecretKeySpec(new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, \"AES\");"
+    }
+  ],
+  "trueUnsafeCounterexampleStillDetected": true,
+  "dynamicValidationLabelFalsePositiveReproduced": true,
+  "pmdReportSha256": "b951e76e92ac52438f56222b64aa5a884b9a2708a202d7e8043318bad4fd845f",
+  "newProductionPtCredit": 0,
+  "productionChanged": false,
+  "suppressionAdded": false,
+  "F03Accepted": false
+}

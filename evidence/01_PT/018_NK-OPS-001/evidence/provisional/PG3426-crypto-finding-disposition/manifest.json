@@ -1,0 +1,38 @@
+{
+  "dispositionId": "STATIC-FP-001",
+  "candidateSource": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
+  "finding": {
+    "file": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java",
+    "rule": "HardCodedCryptoKey",
+    "beginline": 57,
+    "begincolumn": 47,
+    "message": "Do not use hard coded encryption keys"
+  },
+  "sourceSha256": "ab3621a0c02431aef17ee277565326d0cf34e9d564f2cf27538c52a5e11cbcfc",
+  "reportSha256": "8975dac16b55628dc08eb40bd5149af12644bb09493ed6f4f3785cd8e3254662",
+  "classification": "FALSE_POSITIVE_VALIDATION_LABEL_NOT_KEY",
+  "basis": "Caller-provided byte array is length-checked and cloned; the currentKey literal names the argument for validation errors, never supplies cryptographic material. Exact unchanged source/component with original independent JCE/compression/AAD vector witness; same-rule dynamic-label canary and genuine unsafe array sensitivity both confirmed.",
+  "sameRuleCanaryManifestSha256": "8d5acb60a1c833af4c9485394b74f2fa31c6b11ee5516d951108db1e1bf7f089",
+  "existingActualWitness": {
+    "run": "PG3398-six-v1",
+    "method": "fixedNonceCiphertextMatchesIndependentCompressionAndAadVector",
+    "found": 1,
+    "FESFlaky": 0,
+    "xmlSha256": "d5b8ba14e7db5786ec591c158706cfa8c34e9b175f7bb88aa7d2f8a0f5640ab9",
+    "sourceSnapshot": "497fdb37f99529c7f233f5ef86030ab8590a902d"
+  },
+  "testSourceSha256": "47184b6dd98b93f6fea6b42837d20ae6460fbbe9dac8d285eafe776e4095cd8f",
+  "sourceComponentUnchangedSinceOriginalTest": true,
+  "testReplayed": false,
+  "officialRuleSource": "https://raw.githubusercontent.com/pmd/pmd/pmd_releases/7.28.0/pmd-java/src/main/java/net/sourceforge/pmd/lang/java/rule/security/AbstractHardCodedConstructorArgsVisitor.java",
+  "rawPmdFindings": 2217,
+  "classifiedNonDefect": 1,
+  "unclassifiedPmdFindings": 2216,
+  "applicableDefectsRemaining": null,
+  "rawCheckstyleFindings": 645,
+  "findingRemovedOrSuppressed": false,
+  "rulesChanged": false,
+  "F03Accepted": false,
+  "newProductionPtCredit": 0,
+  "formalUpdated": false
+}

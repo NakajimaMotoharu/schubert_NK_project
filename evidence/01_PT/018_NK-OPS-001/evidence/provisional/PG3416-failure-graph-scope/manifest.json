@@ -1,0 +1,453 @@
+{
+  "actualExit": 0,
+  "run": "PG3416-failure-graph-scope",
+  "candidateSource": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
+  "bug": "BUG1299",
+  "ykt": "YKT1065",
+  "mainFilesWithAccesses": 32,
+  "accesses": 48,
+  "graphHandlers": 5,
+  "unclassified": 0,
+  "targets": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java": {
+      "sha256": "c0d3aeed86c887c028a6f5970b7429ccc96170c2c886b53bbe6034d54345d7cd",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 109,
+          "code": "if (!\"2200H\".equals(failure.getSQLState()) || failure.getSuppressed().length != 0)"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java": {
+      "sha256": "645104f92ad8e39b106f5a9c71a630f260278c503204bf64a0d5e2edfe54d39e",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 163,
+          "code": "if (failure.getSuppressed().length != 0) throw failure;"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java": {
+      "sha256": "39a2c00962d2be3d901626fc2e4f0fc57d4f56f0852df7bba1753bcaa6bd4198",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 234,
+          "code": "return failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java": {
+      "sha256": "3ff50cff4c5c1ca15768f8540a8f181d7296a402acf37913d261d54560201c28",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 227,
+          "code": "return failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java": {
+      "sha256": "4a8880fdfff1f0fbc6391843fa486855500394ee2b9ec4306382b1687b058fca",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 228,
+          "code": "if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        },
+        {
+          "line": 231,
+          "code": "if (failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java": {
+      "sha256": "e2bcaf6a3bb7e90c361063b0545d55ba6e7e97d60dbf39785f2faaa84819b263",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 160,
+          "code": "if (conflict.getSuppressed().length != 0) throw conflict;"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java": {
+      "sha256": "dc42f4368a82de3cc473a5e1d902b73fa905e3eb4d9b6b442bc28d02a2389238",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 253,
+          "code": "return failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java": {
+      "sha256": "2e3b99790bceee51184d4c99b3dc4ef1feb0e1fb281aa40e97f4f1c8e76fd4c9",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 89,
+          "code": "if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        },
+        {
+          "line": 113,
+          "code": "if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        },
+        {
+          "line": 128,
+          "code": "if (elapsed.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        },
+        {
+          "line": 208,
+          "code": "if (conflict.getSuppressed().length != 0) throw conflict;"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java": {
+      "sha256": "53e1c006fb7b814c1a056710d2f82709a69f110cdb1e43a1259f7baf63f623fd",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 114,
+          "code": "if (invalid.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java": {
+      "sha256": "fedf4aa2a94ea6ead082db7e3e2617565faa97d6a3d1a150f1e66fe2e05856e4",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 302,
+          "code": "if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        },
+        {
+          "line": 306,
+          "code": "if (failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java": {
+      "sha256": "8bebd1972e38b02a8c69cdd1647b8880366cca662851f0f03d7fbd351df6345f",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 54,
+          "code": "if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java": {
+      "sha256": "f39e495aa23f8ca480fea680231c62a34e9ec3e5b6a495b8ddcbf2f9a45f9a70",
+      "disposition": "Single owned fixed closeGroups wrapper unwrap; no cause iteration",
+      "accesses": [
+        {
+          "line": 131,
+          "code": "closing instanceof Error ? closing : Objects.requireNonNull(closing.getCause());"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java": {
+      "sha256": "c0ccbd5a23dd91d187f10dc627e9956b7dd20e9fa53a22a365e46a1d36f1d5a3",
+      "disposition": "FIXED_CAUSE_LINK_IDENTITY_GRAPH",
+      "accesses": [
+        {
+          "line": 85,
+          "code": "&& !(primary instanceof OutboxSendException typed && closing == typed.getCause())) {"
+        },
+        {
+          "line": 189,
+          "code": "Throwable cause = candidate.getCause();"
+        },
+        {
+          "line": 193,
+          "code": "if (candidate instanceof JMSException jms && jms.getLinkedException() != null) {"
+        },
+        {
+          "line": 194,
+          "code": "pending.add(jms.getLinkedException());"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java": {
+      "sha256": "1626c2b5bc517137e51c7ca928266d4e48e9e5de724cfa182b1a42c66b50a00e",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 145,
+          "code": "throw new LogQueryException(failure.getSuppressed().length == 0);"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java": {
+      "sha256": "0d715f108c7053d230123c26bad73e8017ed688dadc09747d8768eff1d001b02",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 318,
+          "code": "failure.resultCode() == ResultCode.RESOURCE_LIMIT && failure.getSuppressed().length == 0);"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java": {
+      "sha256": "f9ccb979e41e11a2d65853aec90877f7e1370bf2e4c57497e65b924e5ce76a4e",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 278,
+          "code": "if (failure.getSuppressed().length == 0) throw failure;"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java": {
+      "sha256": "17fbe7e96f23dcdea829ff4740136b16e98f419bd57a8610c83520c1f88a44e9",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 242,
+          "code": "throw new ScenarioQueryException(failure.getSuppressed().length == 0);"
+        },
+        {
+          "line": 350,
+          "code": "throw new ScenarioQueryException(failure.getSuppressed().length == 0);"
+        },
+        {
+          "line": 403,
+          "code": "throw new ScenarioQueryException(failure.getSuppressed().length == 0);"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java": {
+      "sha256": "d8211b9e00f07efc8687bd003a6dbe76b525a2c380de6451963bc5c5e7adfc56",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 136,
+          "code": "throw new UserQueryException(failure.getSuppressed().length == 0);"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java": {
+      "sha256": "8b91f57f37b99faccc394751ab7c9b5e15fdfa1b7a8a0e947832d7b672252ee7",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 89,
+          "code": "if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java": {
+      "sha256": "6c64c3155c77f4bab9f7c215a72bf851544b700074740356e7509c29e00f2d15",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 145,
+          "code": "if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();"
+        },
+        {
+          "line": 209,
+          "code": "if (failure.getSuppressed().length != 0) throw new AuthenticationInfrastructureException();"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": {
+      "sha256": "d6d33c6d0c6590a930a63bd6a340eac9deadfe6f9f7912633c5688b743601a05",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 149,
+          "code": "if (failure.getSuppressed().length != 0) {"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java": {
+      "sha256": "a2a8430f1fa8097cc9f714dfc7211a70c6eb6bfbcd3295532bedff2ec3f323d8",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 74,
+          "code": "if (failure.getSuppressed().length != 0) {"
+        },
+        {
+          "line": 102,
+          "code": "if (failure.getSuppressed().length != 0) {"
+        }
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": {
+      "sha256": "6fc02e77f05659febf62e3c1955b3cf5c62fd4a6a69e4bfe221be23ea959dc68",
+      "disposition": "EXISTING_SUPPRESSED_IDENTITY_JDBC_FATAL_GRAPH",
+      "accesses": [
+        {
+          "line": 23,
+          "code": "for (Throwable closing : current.getSuppressed()) pending.addLast(closing);"
+        }
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java": {
+      "sha256": "59d4f80f67d2d19c51668c39c529c6879a0e0bce040a447c8e6ab909a60615e6",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 216,
+          "code": "if (failure.getSuppressed().length != 0) throw failure;"
+        }
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java": {
+      "sha256": "dccd92f17bb5ff12fdd7617b4ea10f9c57b87042dc8d07d390d5a04a43e78662",
+      "disposition": "Future ExecutionException single unwrap into fixed I/O/runtime or exact fatal; no graph traversal",
+      "accesses": [
+        {
+          "line": 133,
+          "code": "Throwable cause = Objects.requireNonNull(failure.getCause(), \"reader failure\");"
+        }
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": {
+      "sha256": "aa7f90f3d2545ecd834fda8de62b755ae20a54c4630b1f6f81dfe3058c14dc67",
+      "disposition": "Future ExecutionException single unwrap and typed rethrow; no graph traversal",
+      "accesses": [
+        {
+          "line": 245,
+          "code": "Throwable cause = failure.getCause();"
+        }
+      ]
+    },
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": {
+      "sha256": "b8057a7567719839ee9ece3ec8f327c78ad8309d49873bd68a97f868e6d2089c",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 45,
+          "code": "failure instanceof StorageIoException storage && failure.getSuppressed().length == 0"
+        }
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java": {
+      "sha256": "e33e8fa95a59034b50ca019d508466653e8eb99cb59c4dfc5358545b5a06ecad",
+      "disposition": "EXISTING_CAUSE_LINK_IDENTITY_GRAPH",
+      "accesses": [
+        {
+          "line": 100,
+          "code": "Throwable cause = candidate.getCause();"
+        },
+        {
+          "line": 104,
+          "code": "if (candidate instanceof JMSException jms && jms.getLinkedException() != null) {"
+        },
+        {
+          "line": 105,
+          "code": "pending.add(jms.getLinkedException());"
+        }
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": {
+      "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+      "disposition": "ExecutionException single unwrap; never follows another cause; registry cancellation in finally",
+      "accesses": [
+        {
+          "line": 89,
+          "code": "exception.getCause());"
+        }
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java": {
+      "sha256": "9cb1405725592ba08c9da8b97242b01a701e88ada75804418c0fb9bdc45e589b",
+      "disposition": "EXISTING_CAUSE_SUPPRESSED_IDENTITY_FATAL_GRAPH",
+      "accesses": [
+        {
+          "line": 152,
+          "code": "Throwable cause = candidate.getCause();"
+        },
+        {
+          "line": 154,
+          "code": "pending.addAll(Arrays.asList(candidate.getSuppressed()));"
+        }
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java": {
+      "sha256": "a4ed2911cd3551dbe8a6ddf15223e0910d2efd1ea90b0aa81cd2c3a524c0d145",
+      "disposition": "BOUNDED_SUPPRESSED_ARRAY_LENGTH_ONLY; no node traversal, recursive call or replacement candidate",
+      "accesses": [
+        {
+          "line": 54,
+          "code": "if (failure.getSuppressed().length != 0) throw new SessionStoreException();"
+        }
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": {
+      "sha256": "795366bf10eda5e4a60d79d0777c8375e4798981403fd9e2449fed2a38d03f34",
+      "disposition": "EXISTING_CAUSE_SUPPRESSED_IDENTITY_FATAL_GRAPH",
+      "accesses": [
+        {
+          "line": 26,
+          "code": "Throwable cause = candidate.getCause();"
+        },
+        {
+          "line": 28,
+          "code": "pending.addAll(java.util.Arrays.asList(candidate.getSuppressed()));"
+        }
+      ]
+    }
+  },
+  "actualWitnesses": {
+    "witnesses": [
+      {
+        "key": "api/messaging/outbound/OutboxJmsSender",
+        "module": "api",
+        "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "method": "cause3404TypedGraphTerminatesCyclesAndVisitsBothProviderEdges",
+        "actualFound": 1,
+        "nonSuccess": 0,
+        "xmlSha256": "924a66ebb4649f19df7e8f1e13b0e37a08e3e1e1564e90eeb43b54406d1893da"
+      },
+      {
+        "key": "web/logging/WebLogMessageSender",
+        "module": "web",
+        "class": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "method": "duplicateDetectionUsesTypedCauseAndLinkedGraphNotTextAndTerminatesCycles",
+        "actualFound": 1,
+        "nonSuccess": 0,
+        "xmlSha256": "ee4dbe83e6ab0dcc7ec26519d84c59fae3074e647b1c8f22eeca55a189ab4b22"
+      },
+      {
+        "key": "web/revocation/RevocationRetryCoordinator",
+        "module": "web",
+        "class": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "method": "rerun005gFatalIdentityNestedCyclicFailuresAndResourceAfterconditions",
+        "actualFound": 1,
+        "nonSuccess": 0,
+        "xmlSha256": "6d2e0c4c920aa84604dcffa2ddce950b44ba8f29bb1049aeabdb164bc2590f75"
+      },
+      {
+        "key": "web/session/SessionStoreException",
+        "module": "web",
+        "class": "dev.codex.schubert.nk.web.session.SessionFailureGraphTest",
+        "method": "mixedCauseAndSuppressedCyclesTerminateAndReachableFatalRetainsIdentity",
+        "actualFound": 1,
+        "nonSuccess": 0,
+        "xmlSha256": "59837e0485666747da1f8aca6a49334cf9d63134cbb7ffee58b3ce4d26e8c6f9"
+      },
+      {
+        "key": "api/security/AuthenticationInfrastructureException",
+        "module": "api",
+        "class": "dev.codex.schubert.nk.api.security.AuthenticationFailureGraphTest",
+        "method": "suppressedCyclesTerminateAndReachableFatalRetainsIdentity",
+        "actualFound": 1,
+        "nonSuccess": 0,
+        "xmlSha256": "aa5a3556e4e44fe7b24a3f87257dc6bde396e9753a9b9e370d788b3ca6cccf08"
+      }
+    ],
+    "relatedManifestSha256": "81ae4fb37436897a73d03b08f966cc7c88757e1a8596ec7f677eca6af064c272"
+  },
+  "newProductionPtCredit": 0,
+  "testReplay": false,
+  "vmActions": 0,
+  "scopeBoundary": "Finite graph traversal and actual five handler cycle/fatal witnesses only; whole candidate/native and final YKT closure pending",
+  "formalUpdated": false,
+  "pgptAllComplete": false
+}
