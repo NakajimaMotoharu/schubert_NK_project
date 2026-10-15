@@ -1,0 +1,11 @@
+--- a/NonThreadSafeSingletonRule.java
++++ b/NonThreadSafeSingletonRule.java
+@@ -30 +30 @@
+-public class NonThreadSafeSingletonRule extends AbstractJavaRulechainRule {
++public final class NonThreadSafeSingletonRule extends AbstractJavaRulechainRule {
+@@ -61,2 +61,3 @@
+-        ASTFieldDeclaration fieldDeclaration = varId.ancestors(ASTFieldDeclaration.class).firstOrThrow();
+-        return checkNonStaticFields || fieldDeclaration.hasModifiers(JModifier.STATIC);
++        // BUG1298: record components have no ASTFieldDeclaration ancestor.
++        // The public symbol-backed modifier query preserves ordinary field semantics.
++        return checkNonStaticFields || varId.isStatic();
