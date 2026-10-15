@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -84,6 +85,74 @@ class MediaDescriptorValidatorTest {
     assertEquals(ContentDisposition.ATTACHMENT, ContentDisposition.valueOf("ATTACHMENT"));
     assertThrows(NullPointerException.class, () -> ContentDisposition.fromWire(null));
     assertThrows(IllegalArgumentException.class, () -> ContentDisposition.fromWire("inline"));
+  }
+
+  /** PT-PRO-003-M04: SS333/UI235 literal byte bounds, not Production limit constants. */
+  @Test
+  void utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries() {
+    String[][] pairs = {
+      {"AUDIO", "scenario/", ".ogg", "audio/ogg"},
+      {"VIDEO", "video/", ".mp4", "video/mp4"},
+      {"MUSIC", "music/", ".m4a", "audio/mp4"},
+      {"MUSIC", "music/", ".mp3", "audio/mpeg"},
+      {"MUSIC", "music/", ".ogg", "audio/ogg"},
+      {"MUSIC", "music/", ".wav", "audio/wav"},
+      {"MUSIC", "music/", ".flac", "audio/flac"}
+    };
+    for (String[] pair : pairs) {
+      var type = MediaType.valueOf(pair[0]);
+      String logicalId = "あ".repeat(21) + "a";
+      String child = "あ".repeat(83) + "a"; // 250 UTF-8 bytes, below the OS segment limit.
+      String path =
+          pair[1] + child + "/" + utf8TextAtByteLimit(512 - pair[1].length() - 251, pair[2]);
+      String name = utf8TextAtByteLimit(256, pair[2]); // Display metadata, not the storage name.
+      assertEquals(64, logicalId.getBytes(StandardCharsets.UTF_8).length);
+      assertEquals(512, path.getBytes(StandardCharsets.UTF_8).length);
+      assertEquals(256, name.getBytes(StandardCharsets.UTF_8).length);
+      var descriptor =
+          new MediaDescriptor(
+              type,
+              logicalId,
+              path,
+              name,
+              999_999_999_999L,
+              HASH,
+              pair[3],
+              ContentDisposition.INLINE);
+      assertEquals(type, descriptor.mediaType());
+      assertEquals(logicalId, descriptor.logicalId());
+      assertEquals(path, descriptor.storageRelativePath());
+      assertEquals(name, descriptor.fileName());
+      assertEquals(999_999_999_999L, descriptor.byteLength());
+      assertEquals(HASH, descriptor.sha256());
+      assertEquals(pair[3], descriptor.mimeType());
+      assertEquals(ContentDisposition.INLINE, descriptor.disposition());
+      assertInvalid(logicalId + "a", path, name, 1, HASH, pair[3], type, ContentDisposition.INLINE);
+      assertInvalid(
+          logicalId,
+          pair[1] + "a" + path.substring(pair[1].length()),
+          name,
+          1,
+          HASH,
+          pair[3],
+          type,
+          ContentDisposition.INLINE);
+      assertInvalid(logicalId, path, "a" + name, 1, HASH, pair[3], type, ContentDisposition.INLINE);
+      assertInvalid(
+          logicalId,
+          path,
+          name,
+          1_000_000_000_000L,
+          HASH,
+          pair[3],
+          type,
+          ContentDisposition.INLINE);
+    }
+  }
+
+  private static String utf8TextAtByteLimit(int bytes, String asciiSuffix) {
+    int contentBytes = bytes - asciiSuffix.length();
+    return "あ".repeat(contentBytes / 3) + "a".repeat(contentBytes % 3) + asciiSuffix;
   }
 
   /** PT-PRO-003-M03; independent SS333 §8 allowlist; BUG-040/YKT-036. */

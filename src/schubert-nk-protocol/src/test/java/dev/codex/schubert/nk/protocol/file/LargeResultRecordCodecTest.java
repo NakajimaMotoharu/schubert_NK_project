@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.protocol.file;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -146,28 +147,29 @@ class LargeResultRecordCodecTest {
 
   @Test
   void acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum() {
-    byte[] zeroRecord = new byte[LargeResultDescriptor.RECORD_LENGTH];
-    String expectedHash = repeatedHash(zeroRecord, LargeResultDescriptor.MAXIMUM_RECORD_COUNT);
+    // UI237/SS333: independent fixed 4,800 * 10,000 = 48,000,000 byte contract (BUG1292).
+    assertEquals(4_800, LargeResultDescriptor.RECORD_LENGTH);
+    assertEquals(10_000, LargeResultDescriptor.MAXIMUM_RECORD_COUNT);
+    assertEquals(48_000_000L, LargeResultDescriptor.MAXIMUM_BYTE_LENGTH);
+    byte[] zeroRecord = new byte[4_800];
+    String expectedHash = repeatedHash(zeroRecord, 10_000);
     CountingOutputStream output = new CountingOutputStream();
     LargeResultContent content =
-        LargeResultRecordCodec.write(
-            output,
-            java.util.Collections.nCopies(LargeResultDescriptor.MAXIMUM_RECORD_COUNT, zeroRecord));
-    assertEquals(LargeResultDescriptor.MAXIMUM_BYTE_LENGTH, output.count);
-    assertEquals(LargeResultDescriptor.MAXIMUM_BYTE_LENGTH, content.byteLength());
+        assertDoesNotThrow(
+            () ->
+                LargeResultRecordCodec.write(
+                    output, java.util.Collections.nCopies(10_000, zeroRecord)));
+    assertEquals(48_000_000L, output.count);
+    assertEquals(48_000_000L, content.byteLength());
     assertEquals(expectedHash, content.sha256());
 
     LargeResultDescriptor descriptor =
-        new LargeResultDescriptor(
-            FILE_ID,
-            PATH,
-            LargeResultDescriptor.MAXIMUM_BYTE_LENGTH,
-            expectedHash,
-            LargeResultDescriptor.MAXIMUM_RECORD_COUNT);
+        assertDoesNotThrow(
+            () -> new LargeResultDescriptor(FILE_ID, PATH, 48_000_000L, expectedHash, 10_000));
     List<byte[]> decoded =
-        LargeResultRecordCodec.decode(
-            new ZeroInputStream(LargeResultDescriptor.MAXIMUM_BYTE_LENGTH), descriptor);
-    assertEquals(LargeResultDescriptor.MAXIMUM_RECORD_COUNT, decoded.size());
+        assertDoesNotThrow(
+            () -> LargeResultRecordCodec.decode(new ZeroInputStream(48_000_000L), descriptor));
+    assertEquals(10_000, decoded.size());
     assertArrayEquals(zeroRecord, decoded.getFirst());
     assertArrayEquals(zeroRecord, decoded.getLast());
   }

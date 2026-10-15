@@ -205,10 +205,14 @@ final class LinuxProcessExecTest {
   @Test
   void opsExec007ConcurrentInputsRemainIndependent() throws Exception {
     var calls = new AtomicInteger();
+    var expectedInput = new ThreadLocal<String>();
     var replacement =
         new LinuxProcessExec(
             (p, a, e) -> {
-              assertEquals(strings(a).getFirst(), strings(e).getFirst().substring(2));
+              String expected = expectedInput.get();
+              assertNotNull(expected, "independent task fixture must be bound");
+              assertEquals(List.of(expected), strings(a));
+              assertEquals(List.of("X=" + expected), strings(e));
               calls.incrementAndGet();
               return -1;
             });
@@ -218,11 +222,16 @@ final class LinuxProcessExecTest {
         String value = "fixture" + i;
         work.add(
             () -> {
-              unavailable(
-                  assertThrows(
-                      StorageIoException.class,
-                      () -> replacement.replace(HELD, List.of(value), Map.of("X", value))));
-              return true;
+              expectedInput.set(value);
+              try {
+                unavailable(
+                    assertThrows(
+                        StorageIoException.class,
+                        () -> replacement.replace(HELD, List.of(value), Map.of("X", value))));
+                return true;
+              } finally {
+                expectedInput.remove();
+              }
             });
       }
       for (var result : executor.invokeAll(work)) assertTrue(result.get(5, TimeUnit.SECONDS));

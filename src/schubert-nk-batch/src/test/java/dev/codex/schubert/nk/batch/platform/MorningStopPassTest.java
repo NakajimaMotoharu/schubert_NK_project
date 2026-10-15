@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG338; PT-OPS-MPASS001-009. */
@@ -306,6 +307,78 @@ final class MorningStopPassTest {
         assertThrows(IOException.class, () -> MorningStopPass.create(context, api));
     assertEquals("Morning stop pass unavailable", refusal.getMessage());
     assertNull(refusal.getCause());
+  }
+
+  /** PT-OPS-MPASS010: new interrupt during UNKNOWN never releases the caller's stop pass. */
+  @Test
+  void mpass010NewInterruptDuringUnknownPreservesFlagAndAllTerminalObservations() throws Exception {
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var thread = new AtomicReference<Thread>();
+    var awaited = new AtomicInteger();
+    var stopped = new ArrayList<MaintenanceUnit>();
+    var observed = new ArrayList<MaintenanceUnit>();
+    try (var worker = Executors.newSingleThreadExecutor()) {
+      var result =
+          worker.submit(
+              () -> {
+                thread.set(Thread.currentThread());
+                new MorningStopPass(
+                        () -> {},
+                        new MorningStopPass.Stop() {
+                          public void preflight() {}
+
+                          public MorningStopPass.Attempt stop(MaintenanceUnit unit) {
+                            stopped.add(unit);
+                            if (unit != MaintenanceUnit.CADDY)
+                              return finished(MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO);
+                            return new MorningStopPass.Attempt() {
+                              public MaintenanceUnitStopClient.Status status() {
+                                entered.countDown();
+                                return MaintenanceUnitStopClient.Status.UNKNOWN;
+                              }
+
+                              public MaintenanceUnitStopClient.Status awaitClient() {
+                                awaited.incrementAndGet();
+                                return release.getCount() == 0
+                                    ? MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO
+                                    : MaintenanceUnitStopClient.Status.UNKNOWN;
+                              }
+                            };
+                          }
+                        },
+                        new MorningStopPass.Terminals() {
+                          public void require(MaintenanceUnit unit) {
+                            observed.add(unit);
+                          }
+
+                          public void requireAll() {
+                            assertEquals(ORDER, observed);
+                          }
+                        })
+                    .execute();
+                return Thread.currentThread().isInterrupted();
+              });
+      try {
+        assertTrue(entered.await(5, TimeUnit.SECONDS));
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+        Thread.State state;
+        do {
+          state = thread.get().getState();
+          if (state == Thread.State.TIMED_WAITING) break;
+          Thread.onSpinWait();
+        } while (System.nanoTime() < deadline);
+        assertEquals(Thread.State.TIMED_WAITING, state);
+        assertFalse(result.isDone());
+        thread.get().interrupt();
+      } finally {
+        release.countDown();
+      }
+      assertTrue(result.get(5, TimeUnit.SECONDS));
+      assertEquals(ORDER, stopped);
+      assertEquals(ORDER, observed);
+      assertTrue(awaited.get() >= 1);
+    }
   }
 
   @Test
