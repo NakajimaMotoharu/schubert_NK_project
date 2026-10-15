@@ -12,6 +12,9 @@ class SavedSuiteProjectionTest(unittest.TestCase):
         self.assertIn("case.split('(',1)[0]in methods", raw)
         self.assertIn(r"r'\bvoid\s+", raw)
         self.assertNotIn('\b', raw)
+        self.assertIn("INPUT.get('completeModuleCounts'", raw)
+        self.assertIn("suite['caseNameHashes']", raw)
+        self.assertIn('argument values not exported', raw)
         for forbidden in ['subprocess', 'systemctl', 'mvn', 'write_bytes', 'write_text']:
             self.assertNotIn(forbidden, raw)
         compile(raw, '<same3702 original selected suite>', 'exec')

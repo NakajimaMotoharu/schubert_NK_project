@@ -1,4 +1,5 @@
 """Selected original XML/source witnesses after qualified whole3702; no test rerun."""
+import argparse
 import hashlib
 import inspect
 import json
@@ -25,8 +26,14 @@ for module,names in INPUT['classes'].items():
   require(sha(S/java)==INPUT['testHashes'][java],'actual fixed Test source hash required')
   methods=set(re.findall(r'\bvoid\s+([A-Za-z][A-Za-z0-9_]*)\s*\(', (S/java).read_text()))
   require(all(case.split('(',1)[0]in methods for case in suite['tests']),'only actual static Java Test method names exported')
+  if INPUT.get('hashCaseArguments'):
+   suite['caseNameHashes']=[hashlib.sha256(n.encode()).hexdigest()for n in suite['tests']]
+   suite['tests']=[n.split('(',1)[0]for n in suite['tests']]
+   suite['uniqueIdentity']='class plus original ordinal plus name SHA256; argument values not exported'
   suites.append(suite);source_hashes[java]=sha(S/java)
  result[module]=suites
+for module,counts in INPUT.get('completeModuleCounts',{}).items():
+ require(len(result[module])==counts['suites']and sum(s['counts']['tests']for s in result[module])==counts['tests'],'exact complete module XML set required')
 require(len(result['protocol'])==17 and sum(s['counts']['tests']for s in result['protocol'])==85,'original Protocol85/17 required')
 require(sha(M)==INPUT['wholeSha256'],'whole authority stable')
 print(json.dumps({'actualExit':0,'productionSource':INPUT['source'],'sourceSnapshot':INPUT['snapshot'],'wholeManifestSha256':INPUT['wholeSha256'],'modules':result,'testSourceHashes':source_hashes,'xmlPropertiesExported':False,'newPtCredit':0,'vmActions':0,'formalUpdated':False}))
@@ -39,11 +46,13 @@ def server_source(data):
     return raw
 
 
-def main():
+def main(include_storage=False):
     receipt = json.loads((W / 'pg3304-directional-group-full-qualified-v1/manifest.safe.json').read_bytes()); full = receipt['result']
     require(receipt['actualExit'] == full['actualExit'] == full['FESFlakyNotRun'] == 0
             and full['productionSource'] == SOURCE and full['tests'] == 3702 and full['staticSixModules'] == 0, 'completed independent whole3702 required')
     classes = {'protocol': None, 'web': ['dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest', 'dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest']}
+    if include_storage:
+        classes['storage'] = None
     tests = {}
     for module, names in classes.items():
         paths = (ROOT / f'src/schubert-nk-{module}/src/test/java').rglob('*Test.java') if names is None else [ROOT / ('src/schubert-nk-' + module + '/src/test/java/' + name.replace('.', '/') + '.java') for name in names]
@@ -51,15 +60,18 @@ def main():
             relative = str(path.relative_to(ROOT)); fixed = subprocess.check_output(['git', 'show', full['sourceSnapshot'] + ':' + relative], cwd=ROOT)
             require(hashlib.sha256(fixed).digest() == hashlib.sha256(path.read_bytes()).digest(), 'current selected Test must equal actual full snapshot')
             tests[relative] = hashlib.sha256(fixed).hexdigest()
-    data = {'source': SOURCE, 'snapshot': full['sourceSnapshot'], 'wholeSha256': full['serverManifestSha256'], 'classes': classes, 'testHashes': tests}
+    data = {'source': SOURCE, 'snapshot': full['sourceSnapshot'], 'wholeSha256': full['serverManifestSha256'], 'classes': classes, 'testHashes': tests,
+            'completeModuleCounts': {m: full['modules'][m] for m, names in classes.items() if names is None}, 'hashCaseArguments': include_storage}
     raw = server_source(data)
-    os.umask(0o077); private = W / 'pg3312-whole-suite-witness-v1'; private.mkdir(mode=0o700)
+    slot = 'pg3316-whole-storage-suite-witness-v1' if include_storage else 'pg3312-whole-suite-witness-v1'
+    os.umask(0o077); private = W / slot; private.mkdir(mode=0o700)
     (private / 'witness.private.py').write_text(raw)
     rc, output = run('python3 -c ' + shlex.quote(raw), timeout=90)
     (private / 'observer.private.log').write_text(output)
     require(rc == 0, 'original selected XML witness must succeed')
     value = json.loads(next(line for line in output.splitlines() if line.startswith('{')))
-    public = ROOT / 'evidence/01_PT/001_NK-PRO-001/evidence/provisional/PG3312-whole-suite-witness'
+    public = ROOT / ('evidence/01_PT/003_NK-PRO-003/evidence/provisional/PG3316-whole-storage-suite-witness'
+                     if include_storage else 'evidence/01_PT/001_NK-PRO-001/evidence/provisional/PG3312-whole-suite-witness')
     public.mkdir(parents=True, exist_ok=False)
     with (public / 'manifest.json').open('x') as stream:
         json.dump(value, stream, ensure_ascii=False, indent=2); stream.write('\n')
@@ -68,4 +80,6 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--include-storage', action='store_true')
+    raise SystemExit(main(parser.parse_args().include_storage))
