@@ -1,6 +1,6 @@
 # 855 Expiry要求の原本時刻・固定grammar境界PT
 
-Program NK-OPS-001、WBS-P017-07、CleanupWorkerRequest.Expiry/PriorExpiry/consume、OPS009/BAK001/UI251/SS341・342・343/SSC104111117、451。Mainはa9/PG2802から変更しない。Testだけの新群、開始見積り0.3/1/3週次共有枠pp（events0792）を固定、他費不明のため実費null。
+Program NK-OPS-001、主担当WBS-P017-07/費用leaf P017-07.02（.01/.03へ二重計上0）、CleanupWorkerRequest.Expiry/PriorExpiry/consume、OPS009/BAK001/UI251/SS341・342・343/SSC104111117、451。Mainはa9/PG2802から変更しない。Testだけの新群、開始見積り0.3/1/3週次共有枠pp（events0792）を固定、他費不明のため実費null。
 
 PT-OPS-EREQ3042-001: literal run/cutoff/startで独立構成し、終端=start/1microsecond後/9999年末microsecond上限を許可、開始前/1nanosecond過剰/10000年/開始nanosecond過剰を拒否。四nullable原本identity fieldはconstructor契約で拒否。redaction文字列が固定で、時刻・UUIDを診断へ含めない。所定例外をassertしcatch正常化しない。これはclaimの形状契約で、削除権限の獲得ではない。
 
