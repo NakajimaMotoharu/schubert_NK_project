@@ -1,4 +1,10 @@
-# 853 当completed runtime正規退役（準備）
+# 853 当completed runtime正規退役（仕様・実結果）
+
+## 実結果（2026-10-15 09:19JST）
+
+3036/session74002のcompile/oracle/label/original四phase actual0後、3030当native資格0/3032同a9二activation統合0を満たし、6341699f1固定で3038 stage/session46885 actual0、retire/session29399 actual0・00:17:52.894018～00:18:37.006196Z。一回unlink/dirsync/reload、原directory保持、starts0、sourceQualifiedtrue。退役log SHA256=0f973ca1d89083576930864b061fdae2655fbb51e49458f893ba7ac6dcb98a。
+
+3040初回は未追跡文書一件によるclean-source前条件をhostで拒否（guest実行0/slot作成0）。文書をaa2484644へ固定後だけ、同未発行postをexec56001で実行しactual0・00:18:49.918085～58.481502Z、payload SHA256=00c5d91faa3667065aa5bede1f1b7d11a04a9eb1ae45db17c921d974c3e6f0ca。exactRuntimeEntryRetired/normalCurrentRetirementScopesSealed、全24原値二読/署名187/Backup/native16安定、全十Unit-kernel空・全actor-client-advisory-flock0を実証。postでstart/stop/reload/SQLwrite0。真正Root1648.555241秒/DONE10-WARNINGは歴史のまま、GC0への正常化0。PG379/pg3038-retire-v1.safe.json・pg3040-current-runtime-retirement-post-v1/manifest.safe.jsonを私有証跡とする。このruntime退役criteriaのみ完了、残coverage/CHR/451/trace/全leaf閉鎖は未完。
 
 PT-OPS-3033-001/3034-001/3036-001/3038-001/3040-001、WBS-N14、SS343 SSC230/259260・353・354・451。a9/PG2802/BOM37bf/boot79a・当fresh Root0ac69真正DONE10/同run0dc・正規ownedstop/3012全post0を保持する。原Parent30分/業務/試験品質は変更しない。
 
