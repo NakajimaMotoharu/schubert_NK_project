@@ -7,3 +7,5 @@ NK-OPS-001、主担当/費用leaf WBS-P018-01、PT-OPS-CADDY3050-001、SS342/343
 既正常IPv4/IPv6・整形・null・独立deployment template照合を同時実行。template基点は既module directoryとしfixtureを改変しない。javac -Xlint:all -Werror/全3JUnit/FES0/JaCoCo対象counter、src Main jar/fixture/依存hash不変・原XML/logを保存する。全体回帰3689（新methodは先の四件のみ）・native/四100/正式451へ未実行結果を加算しない。独立null/未知/境界は本群、TLSネイティブreadは既実経路と後続未網羅へ分ける。
 
 実結果は実行後追記、秘密/CA秘密鍵・session・DB原本はGit非格納。
+
+実結果: edf2f8931固定/exec14416 actual0、全三/FES-aborted-notRun0、server manifest9bc8b6cb915a2a7471bb334abc00aaf121a1d22e3773481c8a60d3e7dcf2cbe5/XML688272057c495c746dbb768698fd209206c4f681e99faac8dd43c6cfdf94ff2d/execb9a90e9b/coverageXMLd1d86d99。host-only class78L/13M/32B missed、四100=false（当nativeとこの限定execの統合はここでは未実行）。原template・依存・Main jar不変、VM操作/native輸入0。PG379/pg3050-caddy-grammar-selected-v1・aru PG3050-candidate-v1へ原証跡保全。

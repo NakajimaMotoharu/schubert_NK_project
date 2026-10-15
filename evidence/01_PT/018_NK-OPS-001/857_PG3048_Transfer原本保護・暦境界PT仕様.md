@@ -7,3 +7,5 @@ NK-OPS-001/WBS-P017-07.02、UI251/SS333§12・341・343/SSC118/451、PT-OPS-TRAN
 002: date directory `00000101` は保持（year0非許可）、`00010101`/`99991231` は正規空directoryとして非再帰削除。固定期待target0/success0/failure0/retained1/bytes0、WARNING/PROTECTED_RECORDS、元root保持。表記が8桁でも業務日付範囲を自動承認しないことを独立確認する。
 
 実行予定=既存四と新二の全六Test method、FES/aborted/notRun0、exact3026六jarとfixture/依存を固定。pg3048_transfer_security_selected.py、全完成payload/Javaformatの静的検査後だけnew-only実行。既acceptedScope/global四100/正式1964-53を変更せず、Test-only新whole3689への統合は未実行。開始時刻/終了code/XML/exec/全classcounterは実行後追記。
+
+実結果: 66804409f固定/exec95158 actual0、実六/FES-aborted-notRun0、server manifeste61372e5aa39bd8c252f440de7e1eb53716c2450714a04a15b877b561d5c9423/XML5087a265e72305c55083fbbfe725fc2604237d200cc5efc6beef6d17ead6acf0/exec97a774c2/coverageXML76ab1aba。TransferCleanupは124L/21M/1C covered、4L/10B missed・branch54covered、旧host基準6L/16B missedから二行六分岐を実追加網羅、四100=false。PG379/pg3048-transfer-security-selected-v1とaru PG3048-candidate-v1へ原証跡保全、VM/native操作0・同source全体加算0。

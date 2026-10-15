@@ -391,6 +391,87 @@ final class MorningCaddyReadinessTest {
         f.events);
   }
 
+  /** PT-OPS-CADDY3052-001: readiness is continuous identity, not a prior HTTP200. */
+  @Test
+  void caddy3052001ConstructorAndPostTlsGenerationDriftAlwaysRejects() throws Exception {
+    for (String drift : List.of("pidBefore", "actorAfterTls", "managerAfterTls")) {
+      var f = new Fixture();
+      var observer =
+          new MorningCaddyReadiness(
+              () -> {
+                f.guard();
+                if (f.guards == 4) {
+                  if (drift.equals("actorAfterTls"))
+                    f.actor =
+                        new ChildStartupContext.Observed(
+                            ACTOR.boot(),
+                            43,
+                            12346,
+                            200,
+                            201,
+                            List.of(201L),
+                            ACTOR.cgroup(),
+                            true,
+                            true);
+                  if (drift.equals("managerAfterTls")) {
+                    f.manager = values();
+                    f.manager.put("InvocationID", "8".repeat(32));
+                  }
+                }
+              },
+              f);
+      if (drift.equals("pidBefore")) {
+        f.manager = values();
+        f.manager.put("MainPID", "44");
+        f.manager.put("ExecStart", f.manager.get("ExecStart").replace("pid=43", "pid=44"));
+      }
+      assertThrows(IOException.class, observer::ready, drift);
+      assertEquals(!drift.equals("pidBefore"), f.events.contains("TLS-login"), drift);
+    }
+    var f = new Fixture();
+    var reads = new java.util.concurrent.atomic.AtomicInteger();
+    MorningCaddyReadiness.Io changed =
+        new MorningCaddyReadiness.Io() {
+          public Map<String, String> manager() throws IOException {
+            var copy = new HashMap<>(f.manager());
+            if (reads.incrementAndGet() == 2) copy.put("InvocationID", "8".repeat(32));
+            return copy;
+          }
+
+          public ChildStartupContext.Observed actor(String invocation) throws IOException {
+            return f.actor(invocation);
+          }
+
+          public Set<String> sockets(long pid) {
+            fail("constructor must not inspect readiness socket");
+            return Set.of();
+          }
+
+          public int login() {
+            fail("constructor must not call HTTP");
+            return 200;
+          }
+        };
+    assertThrows(IOException.class, () -> new MorningCaddyReadiness(() -> {}, changed));
+    assertEquals(2, reads.get());
+    assertThrows(NullPointerException.class, () -> MorningCaddyReadiness.create(null, null, null));
+  }
+
+  /** PT-OPS-CADDY3052-002: valid command prefix cannot hide malformed or extra execution data. */
+  @Test
+  void caddy3052002EmbeddedBraceAndLiveNonzeroStartNeverBecomeReady() {
+    for (String key : List.of("ExecStartPre", "ExecStart")) {
+      var changed = values();
+      changed.put(
+          key,
+          changed.get(key).replace(" ; ignore_errors=no ;", " ; ignore_errors=no ; extra={} ;"));
+      assertThrows(IOException.class, () -> MorningCaddyReadiness.configuration(changed), key);
+    }
+    var changed = values();
+    changed.put("ExecStart", changed.get("ExecStart").replace("status=0/0", "status=1/FAILURE"));
+    assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(changed));
+  }
+
   @Test
   void caddy455002AllFixedProfileFieldsMissingOrChangedReject() throws Exception {
     MorningCaddyReadiness.profile(values());
