@@ -13,7 +13,8 @@ public final class ExecOracleCanaryLauncher {
         || arguments.length != 1
         || !Set.of(
                 "opsExec001LiteralVectorsAndArenaLifetime",
-                "opsExec007ConcurrentInputsRemainIndependent")
+                "opsExec007ConcurrentInputsRemainIndependent",
+                "largeResultMaximum")
             .contains(arguments[0]))
       throw new IllegalArgumentException("fixed exec oracle selector");
     var listener = new SummaryGeneratingListener();
@@ -23,7 +24,12 @@ public final class ExecOracleCanaryLauncher {
         LauncherDiscoveryRequestBuilder.request()
             .selectors(
                 DiscoverySelectors.selectMethod(
-                    "dev.codex.schubert.nk.storage.LinuxProcessExecTest", arguments[0]))
+                    arguments[0].equals("largeResultMaximum")
+                        ? "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest"
+                        : "dev.codex.schubert.nk.storage.LinuxProcessExecTest",
+                    arguments[0].equals("largeResultMaximum")
+                        ? "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum"
+                        : arguments[0]))
             .configurationParameter("junit.jupiter.execution.parallel.enabled", "false")
             .build());
     var result = listener.getSummary();
