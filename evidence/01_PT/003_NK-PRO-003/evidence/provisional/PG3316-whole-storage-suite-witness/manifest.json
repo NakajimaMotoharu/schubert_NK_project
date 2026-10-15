@@ -1,0 +1,1216 @@
+{
+  "actualExit": 0,
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "sourceSnapshot": "25e571bd1a26dbe25433a33e0a0e6c10a607f7b5",
+  "wholeManifestSha256": "bb31fe08c3f166b6ac8d6fe687332229f4968058e7dfc466afefe44c2314da3d",
+  "modules": {
+    "protocol": [
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+        "tests": [
+          "malformedLoginErrorBoundariesAndTypesAreRejected",
+          "allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+          "loginLockAndFailurePreserveOnlyApprovedErrorFields"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "3fa2894a7e7398c745c4f58edcd57a31b7212a3171fbccab6465618b8ca5918c",
+        "caseNameHashes": [
+          "27a2db12d0c76c678e637edc59ebe1d513fbccbdb76999bc22e6aa2ed467dd86",
+          "82f30fb3dc979ca0c17173da0a6b74733bb61e85cd9098732fa2c03bc9933104",
+          "8516f3d3a5a419b40fedca2a8171e07a31014fe934a86797adb08f33718b8375"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "tests": [
+          "numericErrorFillerDoesNotBecomeBusinessZero",
+          "booleanAndReservedFieldsRejectUnknownBytes",
+          "textDecodeIsStrictCanonicalAndOptionalAware",
+          "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+          "numericCodecChecksDigitsRangeAndOverflow"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "2e910f4b9081ba37a48556772ae4b4f9bb19c08958d60bba34029af7576c4fa4",
+        "caseNameHashes": [
+          "3cb983d564ca70416f8a43c55cc0a5a808c13614bb47e4020f027ff40a9c405b",
+          "606db6b86fed7e52203bd0627dfc974c34d8a3658519e832d8b955f89b2c7f2b",
+          "3e84b5efd747b56aafbf95957536a9fa76767232f02fbb4e2194053e8229f372",
+          "b39c2767ed879eecb2a9695d6597821ccc6e7a83b6e28b51a539b74adcf22cd3",
+          "d8a431571483b79ee93d0705b3801c0c75813b2baf227a8f8787aeadfed5f3c4"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "tests": [
+          "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+          "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+          "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+          "headerEncodingMatchesIndependentUi232GoldenVector",
+          "responseAndEventHeadersRoundTripWithoutLeakingContext",
+          "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+          "transportAndRouteContractsRejectEveryMismatch"
+        ],
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "ec56b6589852fc129beee88ec717346cf4adafc3f1e781aec1d321703f50bc95",
+        "caseNameHashes": [
+          "d428c6e36bb23f67a2829ca780a8a87884bd0a5c039c9d13527dc45f3e1b62d1",
+          "77f3415f6ac8637bd8e88e91d94e2f380ac2439b2178911e3b20fea2930ddfca",
+          "2e953bb8dc30c9406d95402d8617693fae854f7a4b503e0f9deaf65064dc4581",
+          "ae93fffc438469330c2be756717b3cca7d15059fab651fbf1ffd64a9cf79d548",
+          "d294121669fd6e218dc4b535f8619c01596ca0b62e54234862b8f0a742eceff6",
+          "a8a4430c8ee4a2735db52327feed46785c830f71b1ca48ed44f44102375e3023",
+          "14a2dfc60fcd7717e97abde9e8a86bd616e507a0a9347951c68fbacff434eb1d"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "tests": [
+          "encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+          "valuesAreImmutableNullSafeAndRedacted",
+          "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+          "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+          "everyResponseLayoutUsesExactErrorFillersAndNoRecords",
+          "allSixtyFourLayoutsRoundTripMinimumSuccessValues",
+          "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets",
+          "numericDigitLimitIsCheckedWithoutOverflow"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "a683afaee63489ec54e2164fa26f4cd62923e94f827a7b54aca56a56b3b31a1a",
+        "caseNameHashes": [
+          "7baeb9ec6b60c0e95eb9fd0766a2ad2041c569d6ed5fc9327ac0f5647d32d418",
+          "237f196648045c4bfd269b36cb272b8dbe33570ea2c3d4e2687551602f01fc8a",
+          "112e86c96bf38bbb5260ff0b0b3810d5fd0dcd7b73b78c79609f483a1a243c17",
+          "36ba6b248e79d224b736e87d2e5ea72f62911f8b974cd47379df75fb401e53a7",
+          "dd12f3b01d069905e559ea6dafdcb16fe658f5e9c777b2456f5a0aed6895adc3",
+          "42fdbc718d16bcc9bdfd73b9d655fffd59c00f30ae1fe14b7fd13cf57f752cac",
+          "4e55335eb016d832b11208ee3e67caeb256a868874aa47f7ef85364ee7ceb4a7",
+          "4a32c2d998b7004c1d272b2be31ad4fa1153fc71051a3383858f36eb4504a523"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "tests": [
+          "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+          "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+          "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "8b6ace7784a80f63357ce124c9dad84d2fb5bfc8c7d6d1a054ae00adc0cb9965",
+        "caseNameHashes": [
+          "ff87a9041a8fd7502199b3e00c08271f2bc25eff559dd0df9056d55dbcc82390",
+          "1d2e3fb1a96f12805a88895ef336fbf5754e08db14407279ecd62acbfb9c5975",
+          "af3f145850aff994bd655fb7ece401cd128a8b8f35af69f9653daa956a02d1f5"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+        "tests": [
+          "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+          "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts",
+          "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "a465c7e373c450ef3834305e0207449eb5d9652ec9c884cf2a426e28ba5a7cf9",
+        "caseNameHashes": [
+          "884dc3bc66569bd469bda861c327b5040315da2148147c96e8cd1ab9a2e5125d",
+          "eccc8108866f96237f8b041cf8879ea3609c2c6d1aadf46e79334ae77754210a",
+          "957df979a18a8d7ab302e2f0c045d8b78d45844bd37e731ec862df5eb604828e"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "tests": [
+          "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+          "decodeRejectsTruncationExtraHashAndIoFailure",
+          "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+          "writeRejectsNullCountLengthAndIoFailure",
+          "verificationRejectsAllThirtyTwoDigestBytePositions",
+          "writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+          "contentMetadataRejectsInvalidValues"
+        ],
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "046d688401f1fda29b9005ce9fbaa01e5d63b188d2f9d74200359284262c5601",
+        "caseNameHashes": [
+          "ab391426db87472a86e35526cab26f4c28e508712fe3aeb0587601e9328ce222",
+          "72f54310139a4f61116dfbd85b5cb9e7e3d34ed607f298463d77868715d54ead",
+          "3b04a6ab12dd801fcded794f787eeb19f83267b8c12587dbd4faf5a1287466b0",
+          "98eeeaf33386a0418d8404c8e30c695b9a66ea770d0f677c66801b9788a14f8e",
+          "b0275a11b870facb7dea27a360a30f47ba6f176dd39d6eac707683e4d8efcf11",
+          "33be0735f4dda6172f678dcafbc1d50352a4761aa8ccb22af084571faf72a607",
+          "3bff689d93f54334f231e100dbb415e0309285bd3a2f9e62651eb4dd083ba9a7"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "tests": [
+          "rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+          "constructorRejectsNullComponents",
+          "acceptsExactlySevenSsc004ExtensionMimePairs",
+          "bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+          "dispositionMapsOnlyIAndA",
+          "rejectsEveryMimeCrossProductAndVideoAttachment"
+        ],
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "045ae364cda5b4a21f62f242385d0f41a460a6dec72a87d9090a9b0c4806a759",
+        "caseNameHashes": [
+          "d70cbf0ae1caacac9e4457403a3ab2f1255be8f7a9f93f91411c2f17dd9787b5",
+          "2f9a06412660ee62669be0328b98c837ed51580c33f0847bbeca8baf6f1b578d",
+          "f9a9ac7e429fecb02350d599f06f3553716560245ece6d913ebec56d517850b1",
+          "b48529b1d366cff3cc5879e038d3738084bc79f9a85c70c83ce5f2d808c41134",
+          "30e1a54bb9a61277af6312e546b777484176d243e686711aa91eb26e7a9bb899",
+          "3ac078ce654db12a810c55a6d83b9caa8463f3b3f6a3a7ca2cec2d845b13c459"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "tests": [
+          "headerReferencesRejectNullAtTheNamedInvariantBoundary",
+          "authenticationContextValidatesAndRedacts",
+          "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+          "headerValidateAgainstRejectsEachMetadataMismatch",
+          "validHeadersCoverRequestResponseErrorAndEventProfiles",
+          "enumsMapOnlyApprovedWireValues",
+          "headerConstructorRejectsEveryStructuralViolation"
+        ],
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "4b257b9c6d142af1464e06a1fc6c4102687289deddb7c9bd3f9ebfed12121ec5",
+        "caseNameHashes": [
+          "7111728b20e7957c28989e96a11bae8c860b18120030fc35ee643404ed6859f1",
+          "c075e1ded0d1251225e3d88a50d64b6712b764f51f7709b0cfcbe350fa0f995b",
+          "5f01ecd4ca1b78dfc1833df2dcdad94f861e2c11c38eb9e68282fbe321b43081",
+          "bb4a580c7f071f1a81bfcd9de2e608d8759c5f17206c3cb338048b3735c4428c",
+          "b77d7217b462119eac59ac2aea246ad61337b9f33fa7c76db5a71703cd6ec4df",
+          "4cdf5d228a75f81b3e3ed14d100a26f8c0857260a40ad0853d1eca8b5d00acd2",
+          "69bdd4bc716fef0bba99e3adf466da65d37a4bf10caa753484ff1c3bb69e4463"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+        "tests": [
+          "catalogMatchesIndependentUi234To236Fixture",
+          "layoutFieldsRejectWrongAreaGapLengthAndNull",
+          "parserRejectsMalformedUnknownAndDuplicateRows"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "1bd3818d487dcab0d6935aab362fb6380ba86e798d9ad822b1ab6567ec6e72cf",
+        "caseNameHashes": [
+          "df0667838cf5000c0c6519d67459aaac2e86a1a5bfd0561b7094c42cd94aa27e",
+          "661cf9d7141d0e3683e97721be21bc0c5321c16d4e1121dfb3ba67d994126467",
+          "21e44b99e5606ab575d9a5a569d1ef6bce754afc7c59da2e70a5e0ef5967bbe3"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "tests": [
+          "registryMatchesIndependentUi233Catalog",
+          "registryRejectsEmptyNullDuplicateAndKindMismatches",
+          "layoutIdAndFieldDefinitionAreStrictAndOneBased",
+          "layoutDefinitionChecksEveryLengthAndKindInvariant"
+        ],
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "2bb00cc3c1a5502f012b3908054e2ab59435ad4c962bacc8b3ace413506196a7",
+        "caseNameHashes": [
+          "0cc2259576f1b455a6dbf1d0a4e7dd9cd3757f4c0e75481c040d03fdac12acf3",
+          "c7a0e3d8fc7df2b487f20a9b1919d80834a2334edd98b97e31de92048d30d0be",
+          "2327151ebf1ffef265506c4f65e93be95ffdf30fba37ad7dc07a8e3b1e419f94",
+          "1da5869d0a18abd25f1ecc179a2f361d95a23f305afcc225e83681e23f4f6afb"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "tests": [
+          "pageConstantsCountsAndArithmeticAreEnforced",
+          "receiptWebAndDefensiveContractsAreEnforced",
+          "listRecordConditionsAndOrderingAreEnforced",
+          "mediaAnimationAndMusicConditionsAreEnforced",
+          "deletedNotificationNeverContainsAnswer",
+          "notificationCancellationAndQuestionStateConditionsAreEnforced",
+          "scenarioInlineAndLargeFileConditionsAreEnforced",
+          "loginUserPasswordDateAndSessionRulesAreEnforced"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "f8605a013a5706916610ebfa184a3a2443e156163afb3126967416632be35fc4",
+        "caseNameHashes": [
+          "dc73ccf1e5901fd4211b0e1215ab30335efca9ca312e28eb4b11edd6233b450d",
+          "62245f464f246accd74aaff3ffc7c2af32c1be4f0331259462beab4d78d642fc",
+          "92b4dc54ae0a1a92cef26b8ab303414566f48bdd04ef77d9d0d130fd16060fbf",
+          "2a6811c30f1c448e0fedf8586b385f2463a3aa3027d7ba489332077583c68053",
+          "b61738fb5d1d811ab5fc410a806c440cfd9d52e56751fe5015cb874b9152047a",
+          "d5864d5589534cc37994a5882cf6de213a351933d2ba4ad05ab4ef6b3829fc6e",
+          "1e91bf8c3b56181bb206c64260ef7381baa53262ec34b6d7f31fcf1d26e84da2",
+          "562138c0dc6eb2f0f615b9925e9281bd4993270ef0ed463d0b6bbf125f890ad8"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "tests": [
+          "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+          "typedModelsAndHelpersRejectNullMissingAndWrongKinds",
+          "allNamedTypesHaveIndependentDirectionalFieldMeaning",
+          "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes",
+          "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+          "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames"
+        ],
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "8253120460023056f455db0d82c5594ec6d3731574fff56db756acb5b3daad0e",
+        "caseNameHashes": [
+          "bc4720c13dd0bb3d1fa457cecbfa20f8e27311d5bec2eb6e2c01df36af1dfa75",
+          "18b218f2215d285681926320c66e52df9c92a3d0f574e3b0d7f4f95d00fa50ab",
+          "67107ebe282b4a4b0a08aa50d6052bf448892accedb6f0cfd89dc80e8213bbd7",
+          "d6a086ea17886061fc9f5e63bb37591fdb888560d2ef59f2f9e523b9cb7e4d99",
+          "acdeef906de57de2c66a0cb6eed8986eebdae06c8b79fffe321b7a82ab67b08f",
+          "e1f76bc78ec90f383717e4d38b260290ae074c30cc83fb438dd3a54a6c117d63"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "tests": [
+          "semanticHelpersDecodeAndEncodeEverySupportedShape",
+          "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects",
+          "semanticEncodingHelpersRejectNullReferences",
+          "semanticValueObjectsNormalizeValidateCompareAndRedact"
+        ],
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "f8719e8f614924be14fca794b1a7d3e31f431f9ad417ce430f7a1b4a51e62272",
+        "caseNameHashes": [
+          "5fbab5d312229ca9cacc55a12a133c87992b7dfce402f6cff821331c1f9b0edc",
+          "5c8174d43070388a375dd8042dbff369c3a0afd3b7550e5d8daa771525c519b1",
+          "f594e5fdd1bf1c27759d9975d648f62adb1ac19338b9b0966ef5305e364d5c87",
+          "943aa567adf8131ac5b5f99f580a4298a135f594777360dea5c9410f10aa3918"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "tests": [
+          "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion",
+          "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+          "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+          "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds",
+          "allN12IdentifierTypesEnforceTheSharedPositiveRange"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "5383f8a88d83d7219194b853a6c24a7b37ce90fd75ecb41d7fbb45e37fe7efe3",
+        "caseNameHashes": [
+          "080e6a8461dd0747ae27f2bfca075f4eb6ce389e60d5b4a4f685b01feeb3a0c8",
+          "f2f55fb265ecd85c937041cc9ceb8b71f15db78167cc81a4607a951ee2bdd298",
+          "d6638a1fce0d5fbd648219f49f382dbdc9ab57671b46bc6761369815112dcbef",
+          "7aea84cad7c15af9b090ed186e6736764144b51537bd2d738bf817a47513e873",
+          "2dc42c0f7e6c824ee5aa15d880ae97b5a24489ea57feff4cd3a2d5f5f1f0e87c"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "tests": [
+          "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+          "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+          "bug037RequiredAndOptionalDataSendersRejectBadTime",
+          "formatsAndParsesStrictJstMilliseconds"
+        ],
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "150f1947df8f7291a57cfe9a9c5d2a4586e4025414ecb4d1cbb0679d17f69672",
+        "caseNameHashes": [
+          "36d4175dc184e28f49b5d3c204d541288ef52d3602ba7df3311da5ca269febee",
+          "bd87e38061ab54260f3fc7b5d9b355309aa11069a014cef607c36e464b0c8a4a",
+          "e4e5f613680e2d0c1b66ce824b889e5ca4304a961927dc9603bca63079f15c67",
+          "3ea7da5e063d4a39505bad9acb3def4a783eff0ffa39574801d40109833b76ce"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "tests": [
+          "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+          "nullUnknownAndNearMatchAddressesAreDenied"
+        ],
+        "counts": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "6fd9961191cf7e160e7d8bde434ef477afca6e77db30ddc0cba162c537bd784f",
+        "caseNameHashes": [
+          "d8b1508486d08e85782be1fb4276f264cd2b561a3e0fb0e7196e26612f512bd1",
+          "da7ad487beeb223bb167704bb19cbacf7bff730b86b4f0cf66a4cc820009194d"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      }
+    ],
+    "web": [
+      {
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "tests": [
+          "jms020aSameFailureReplayedByRollbackCannotMaskPrimary",
+          "jms020dDistinctSecondaryFailuresRemainVisible",
+          "sendsOneValidatedPersistentRequestAndCommits",
+          "nullWireIdentityLengthKindAndSessionModeFailBeforeCommit",
+          "jms020bSameFailureReplayedByCloseCannotMaskPrimary",
+          "questionAcceptanceSendUsesSameApprovedQueue",
+          "checkedAndRuntimeProviderFailuresRollbackAndPreserveThePrimaryFailure",
+          "jms020cCloseOnlyFailureRemainsVisible"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "59dfe80a16548ed9a5433ec133d03c7730750ddbadbbc53d3738d2d16806b071",
+        "caseNameHashes": [
+          "02ff7cb4a90145f4c15da53e59d003ac8ec736965e06ce8a9fbff59592e11fc2",
+          "756d5e709c53ad5c642bd47725207776f5c62ec532c65b89181b0833a2299771",
+          "2d7099cfda9fbc3cba3c5a14ad2b7f124d140e02ec70b8c52542ab39d5c9015d",
+          "617d439cbc0813dac576b4b3108960c82c0fb1f4f3c734cb4559aa861e9746fe",
+          "c138ded63900974f379f4c6d542fe0de973aaf742d7198e20387aa905a7418d9",
+          "dfaa2d687aaa92958f72f489613b57edf5cd728cbfb802a13569f0ae4556bf93",
+          "fc70fc21ec6f1bbced98bd230afed570de2df60b34998d3e48926e5a186d2206",
+          "c5312bae56ebbcb317de49e5ea0133569acf7e3e394d709cae0c629b2841a69a"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+        "tests": [
+          "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "validReplyProducesAnImmutableRedactedResult"
+        ],
+        "counts": {
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "2c1549e53cda7e3b72a0c9d08522bf512833b4561eceba644c7f99592b637b55",
+        "caseNameHashes": [
+          "b5273ec560d8cc88da727d250ef4e71e164be2638f7e60aaecd713e25f4d9523",
+          "27bad0378d8db6993772076cb3821f6eebe287b5d9a2817e567216bc4c0983c7",
+          "64415800bb276785b48779c3662a99bafa2cbd551f997d85a2f5b29319104914",
+          "4678479e26482bfe72bf6a36bebc693f381da25b720139adc59f8ea78fbdd294",
+          "3d3e814050897e5687189334e453c5d4ee651bd7a2ad0a4abb9db8ced3272ee8",
+          "8ab2f49b5cfe80010947f6eaff020b0b61cf450ea40f8d081520a03b949c7d21"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      }
+    ],
+    "storage": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ChildDirectoryPublicationTest",
+        "tests": [
+          "nativeDirectoryPublication",
+          "retainedParentCapability",
+          "nameNullAndClosed",
+          "concurrentNoReplace",
+          "uncertainPublication",
+          "compoundFailures",
+          "noReplaceAndSourceType",
+          "everyNativeFailure"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "f52d0964ac53f32609444793018659ed2eef108376bd9867d2167ec227a59663",
+        "caseNameHashes": [
+          "62e4c64b3cd0f35b51927cc5767020a751c50c3960a8814beb7a72bacb20d59c",
+          "fcdfa123f01844351b636d9a7c9dfd5a5f2a2a2ce8493b8918bf7f3a3c4cd76c",
+          "30a503120a535bc444217e623f97d2677ba78623d9fc07918a63aef335ba33bc",
+          "108d15cdae79a3233a814b406a4c04b1c45d2d879aae87eb475f73ede284dfe1",
+          "92098a0ee66acc157eb05b611325b9a74bc1e956ad4cf33d346676bbeaf6e4a4",
+          "456bf84463aa89d7695bf3b1cfc4f9869f456db0ebb40aa2e3500fd63a3a5c7c",
+          "5d871200272873534a4871f0b41b27fc1ee0530afc9bbfe1a84d152ad5ffe3fb",
+          "5ee10f82ae595b25b8dcd5672c2d9d63a8976a389396cd3f13ed0e536abec151"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ExistingFileAccessTest",
+        "tests": [
+          "med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned",
+          "med025ConcurrentAndReplacedNamesRetainIndependentInodes",
+          "med022NullSizeAndSegmentContractsFailBeforeContentRead",
+          "med021NestedAndLargeAssetsReadExactBytesAndCloseChannels",
+          "med023LinksMissingAndWrongUnixAttributesNeverExposeContent"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "d07c96d10068ad978f08a69605bfc6401af0a50705678a688ea2d9690c0fad03",
+        "caseNameHashes": [
+          "cb9d0b2a72a07d2fdb742a7c908b543b5d80a9d7200e0bebed0a9616108ddda4",
+          "178ffc382a85eaa37b5380302d0aba9bbcf1bba9fad11499ec273fb945c00791",
+          "28b51d957d6b5e2a5dc3f8d8d059094dea813b9f555fc258eb29ce8de2f8e880",
+          "10b2affd0ca1051d437545e0db699577c2006e2d434efa23b13bec7e18bce038",
+          "6e4de6948b0f5877e14b491156ba4f79569cfe47c6740727487a443ce027f6c5"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxDirectoryCallsTest",
+        "tests": [
+          "transfer003EmptyDirectoryOnlyNeverRecursesOrFollowsSymlink",
+          "w01CreateNewHasOneWinnerAndPreservesExistingFileAndSymlinkTargets",
+          "f01NativeOperationsPreserveExistingTargetsAndBoundAllErrors",
+          "f01RejectsNullNamesTraversalUnknownAbiAndMissingSymbols",
+          "f03OneOf100ConcurrentPublishersWinsWithoutReplacingWinner"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "fe63b39a18c193292725f27e2c9492264c6c0d01a474e1b8c27444bb954f8af4",
+        "caseNameHashes": [
+          "017de5924b09582e02b699fc44d8e096f935db313575a0b6c2ea7cab8fa13d86",
+          "91a5fb07cd67f1a33c4024c05c43671fce354989935d09f6c2652b17aeb4ed44",
+          "172ea80b4b7545be1596cf3cea26ee3e08d452b11ff9bd6718f36eca1f174e8d",
+          "0e0c3d8ccd34b57d8584df6f9968c612ec55cdd09129122bb14f3d9fa0bc5b95",
+          "23761162942c6c1606dfcb67dba48d2407fbdaec4ba198e5d5a91b40a391edee"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxExecDescriptorsTest",
+        "tests": [
+          "opsXfd007ConcurrentDisjointCapabilities",
+          "opsXfd006PlatformAndSymbolContracts",
+          "opsXfd003IoAndUnknownBodyPreserveOwnership",
+          "opsXfd008RealExecInheritsSameFlockUntilProcessExit",
+          "opsXfd005NullDescriptorAndBoundaryContracts",
+          "opsXfd002EveryNativeFailureAndPartialTransition",
+          "opsXfd004CompoundCleanupUnknownPriority",
+          "opsXfd001ExactlyTwoFlagsRestoredInReverseOrder"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "f1c07c1e2c9747e6212c7207bf06d408a4ece26a0c5aa2fd17aa20fa554b07c0",
+        "caseNameHashes": [
+          "0cbd11b68498b6c75b474e366f28e88ea9c25e9078cbef59f6221764f18a6da0",
+          "e0a9f3987f8c811aa55ff5b1f2ddb792dec94b3bcf539fbb9aa198a086db269f",
+          "a69c44116539b90509c144db7e750ee49014050a52def8840b484de9a62d3cb6",
+          "987dd2ef9df4095c9e314d605f78aeb06cbe082f480ebb720f615ba19374f627",
+          "0c4781a16b16d2b4d7efc1e252b8b6912b8babd6aac9507a298596a3cd5db4ff",
+          "12ab3795819f725befe83bb834378269ff64015fb73fb57726579f131062e1c3",
+          "92e8be9125040fcec5fbad3c293aa3cc90f9bf1d00786210494fda573c67d447",
+          "f223fc9debaa5b6a5ba549c2326061bae9005344aaad5496afdf4c8855b06a50"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxFileLockTest",
+        "tests": [
+          "fcntlIsNotFlock",
+          "externalFlockInteroperability",
+          "callbackFailureAndClose",
+          "concurrentSingleWinner",
+          "nativeRoundTrip",
+          "inputAndPlatformContracts",
+          "retainedInodeAndDescriptorLifetime",
+          "nativeErrorsAndFlags"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "b967d5242d3bf9f661f47a5c5251d8334e9d30262e9c745a5c87172609f8a336",
+        "caseNameHashes": [
+          "cb2db014d620f6761855cca12dd55eccf65e4fabe5d02fbb3982c58384ecb1d1",
+          "79fb414f256370ec45c4d67ddc1c886212e84f67b21f890181f543524b06af12",
+          "91d0225e869db7c43062a099fdcc3cd97c0702867e662f67873fe35aac84d822",
+          "03e1423ea63f291e6ee92a36e8cb96f4f5ac8fbaf3b24e190ea6baba0d19d522",
+          "08e100ff48527b2160cad63daf7d8a747c169260118245e2341b1e0922cb4d62",
+          "ba4fc5b62d953b3d132860fae1b2ef63e9a5f5cb97250f1185c6039bd0e9afe1",
+          "bf090acbb854acf141bbe4a4b7fdffdf9ea02ab0f7d268fc42b602add881c37d",
+          "2274bfaeaf28dbc54c9148d8f9793f1d0fb90c33e87a23b04a4974556aff1b07"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxFilesystemClassifierTest",
+        "tests": [
+          "fst002FailedSyscallNullAndInvalidCapabilityNeverBecomeSuccess",
+          "fst005NativeUnknownFailurePreservesPrimaryAndClosesActualArena",
+          "fst004RealRetainedFdIndependentJdkTypeAndReleasedFd",
+          "fst003UnsupportedPlatformAndMissingSymbolsFailClosed",
+          "fst001IndependentMagicAndAbiEveryCallIsFresh"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "39fdff3d4522df08fb1184df42bf73c2e5803a622b43a34c97263446d4965780",
+        "caseNameHashes": [
+          "05f5482c4546dbbe422169883dd97832f54957c0944d68b589c1f66f4dbc4aec",
+          "8f1089abfa3573cf227144bd85dee7209b746c76d0f96eaee0a6d638b8341041",
+          "5b15c35994ffeb1b6174ea2914764e8fa3f89eb10ca037fdb24f8ac2aa8ea0df",
+          "e5c792ea6a1900178da479666c669888141ae903701f6dce7bc73e2177d69ca4",
+          "ea46ccb2fe5c6d94b30fa2952747501089d02bf47e0a4a5cae45c5c147b1adf8"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxHostDirectoryCallsTest",
+        "tests": [
+          "opsHost001FixedKernelAnchorAndNativeFlags",
+          "opsHost008ConcurrentScopesKeepOnlyOwnPointers",
+          "opsHost006NullPlatformAndSymbolContracts",
+          "opsHost003EveryMutationRefusedWithoutDelegation",
+          "opsHost002NoFollowChildrenAndOwnedCloseForwardOnly",
+          "opsHost005UnknownFailuresKeepIdentityAndArenaClosed",
+          "opsHost007ActualOrdinaryUidCannotOpenHostAnchor",
+          "opsHost004UidGateAndNativeFailureNeverFallBack"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "38cb566b5b8023dcdaebee06adfe26eebb5bf05fe737d7c0ddb36671559a1d39",
+        "caseNameHashes": [
+          "4537b5510bb0c3a73938d563b883308ea6a4ca3077ac135843b5b092f8f5d64a",
+          "2fb26f5f9235cf40b1ea5d74be8dc12a6159ad0d337e1c3f6eda3ab6452764a3",
+          "91e18650dc0f55b0b7ae4491590ccaa89d515b3c68f763dde26389f753da3496",
+          "62f3ae7faed77f00b4bb8d3e9d99ab06fc0aff00310ab71c5ca675cc90a60165",
+          "d4ad145ef8c31b645d951db18937350ddc53b42c76629c151446b18d436e7eba",
+          "2464b7b12b0e28ac649ed00e47f11c39bb874469514057aae48fe7f3643396bb",
+          "88456d221ff0026ff60bf1e443498fed3fc782ea230019f8885973c92f2a5165",
+          "2fb69b7ae3a2e6daac322e4f42c06c59ffb64e2d3075502613229c6b665b6a17"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxInodeSecurityTest",
+        "tests": [
+          "filesystemFlagsAndFailures",
+          "platformAndSymbolAdmission",
+          "heldInodeSurvivesReplacement",
+          "concurrentReadsStayIndependent",
+          "interfacesAndRedaction",
+          "actualAclAndUid",
+          "aclReturnAndErrnoBoundaries",
+          "heldElfCapabilityAbsenceRequiresExactEnodataAndNativeHeldFile",
+          "canonicalCapabilityAndBounds"
+        ],
+        "counts": {
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "457f867564543a2bf7a4edd747ec9946e16e767c3d8ab040530a23239ca0bdcc",
+        "caseNameHashes": [
+          "7bc935323ffee8a2d30e8354fa4b7dffcc7960e857d07ce982b6d30d84315bbf",
+          "85383cbbf74eafdd9f9656537c6cdab920ba257ae8e3c431403c2cee4c54bbc2",
+          "d5d07fcdefb869fea0de1175bd1e0f3fb0ead57be7180958d93a5f7d28326374",
+          "a288752405fff9ca6cd6a15282834b876b286a5ee095fce111f56ad9ccea3579",
+          "4e0282c3b2afa9cee017b0c6d8b8b9f0b58fd09c985407edcab1cd709ed73a8a",
+          "fbe101ad9c0e7fcdeae6f189f9181c38b4ef8e102630e8c545e629b2cd2e278b",
+          "9a35b4d7585130c3b17ccae26894f6f2656fcefbe7557f8b5281de26158c7cfa",
+          "c7295450e16a2a76cd3116962b072ddeb0f8f503c0cf9b5d0585277604d5b743",
+          "6cb61ded7aea2be167cda15162e4bf7f718ead619cf0df8ddad38127ecbc34a8"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxMonotonicClockTest",
+        "tests": [
+          "negativeAndOverflowNeverWrapOrUseAnotherClock",
+          "fixedAbiPlatformAndSymbolFailures",
+          "literalTimespecAndExactSignedLongBoundary"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "505c13c5b570dcbb5033d50e5ecbdd2baa51183251cbd07f5701f62bbba4c417",
+        "caseNameHashes": [
+          "fe7aafaac66f99307091bc412ed4a3ea3a98411c948ef2471b84dc0d2d364f7f",
+          "cda11eb5ea42b55edc72b40e8c1afa4791591ef8b79ff49de95bc58208c82e4f",
+          "71e5d2153bb1281675819c6a4407de2161ba8f55a68d38790331732c05942576"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxProcessExecTest",
+        "tests": [
+          "opsExec001LiteralVectorsAndArenaLifetime",
+          "opsExec003InputNullAndPathContracts",
+          "opsExec004VectorAndStringBoundaries",
+          "opsExec007ConcurrentInputsRemainIndependent",
+          "opsExec005PlatformAndSymbolContracts",
+          "opsExec008ActualReplacementKeepsPidAndOnlyPreparedEnvironment",
+          "opsExec002EveryNativeReturnIsRedactedFailure",
+          "opsExec006UnknownFailureIdentityAndArenaClose"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "dc5efe43a39193ab287433d24611c7cb93e1c7066ee258f846d54bc0017b7826",
+        "caseNameHashes": [
+          "74a5eee23d0eae1d6c8c3793e61a511a9e67a4beb1fd9199b2c618112d01c244",
+          "097c4f0ae810e5232acd8d3d7bc3d98336934f6395a2f98a0f5f6f1aa4a21e2a",
+          "38dad03af95bb40093bc7fd607da10b63045a9c3d1acc9a9b5e582ddb717ad19",
+          "40c20b76937e02c5a59301c37d82c101ae3f0bbe6d28633bb72a3eb20943cf2f",
+          "96b40985629ba82333bed2d05e741d2ed29dc53a2e7dd81df71fc3f09e634543",
+          "6a65134161020de4d5fd1a02bfffb5d35315d240426fe220f8aebe68a65efe52",
+          "a1cb2b0c64ddb511bee2df7ea822b97166dc3f533901958cefe41c8483fbee57",
+          "a8da0acb9ca5163f64585e73694cd15690efb7a54fb1d9adf239e7dc8e48f6b3"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxSealedProofTest",
+        "tests": [
+          "opsSeal001LiteralBytesFlagsOrderAndScopedClose",
+          "opsSeal008NativeConcurrentProofsNeverMix",
+          "opsSeal006UnknownCompoundAndAllOwnedClose",
+          "opsSeal005NullAndPlatformContracts",
+          "opsSeal003ReadSealEmptyOversizeAndNativeErrors",
+          "opsSeal002AllCreationSyscallFailuresAndCleanup",
+          "opsSeal004BoundaryAndPartialIoIndependentVector",
+          "opsSeal007RealMemfdModeSealsAndMutationRefusal"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "5821bf46bca3354cbf5d4199c1c8f533d4754be74286f4695a683d5a5789f8c1",
+        "caseNameHashes": [
+          "2b52ee9ce1c530f4cd0592867c786d549acd3ff07869c17983b7825e41a77749",
+          "a75c8a82ae62b1b01514e2c765bc224b696644ec55de0c86301f01048c341f5f",
+          "4912342f52cef9e72b5621da45ef24ac47ff46f2c3c8dc6a78f8cd391894c7d5",
+          "16b32e7d9c082e9a950c9ce82a07a45ce3762853237f4b4e7fa9e8e3f1b9831c",
+          "dbb4ed9b14cde37553ba4e502399e71ffdf8f36bf2a4b93b6d4088a01456c9b2",
+          "f25740f0d15c4b12b0d31a9c9eec399416eb7cc4753fc5ebada069e9431d7dd1",
+          "253852becd8ac24efffbb44268815207d9993af2da8b9f44ae302d8912a95de6",
+          "11729bbf9e560130b261909f9015101a95175654eb6afd13303694cc4a939887"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxStartupAdmissionTest",
+        "tests": [
+          "childfd002EveryDescriptorInputAndNullContractBeforeOwnership",
+          "childfd006UnknownAndCompoundFailurePriorityAndOneClose",
+          "childfd008NativeFactoryBindingsAndOrdinaryUidCannotForgeRootMetadata",
+          "childfd001RootSealsImmediateCloexecAndEarlyProofClose",
+          "childfd007ConcurrentReadyAndOuterCleanupConsumeAExactlyOnce",
+          "childfd005PayloadNullSizeIoAndProofCloseBeforeCallback",
+          "childfd003BothFdInitialFlagsAllSyscallsAndReadonlyAccess",
+          "childfd004EveryTypedAttributeRootModeLinkSizeAndUnsignedIdentity"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "62e7da84075c01587a0ce6bfcc83a6c4b155b06ebc0a064d81355207142b5237",
+        "caseNameHashes": [
+          "5475997d38e674ae72c7102db42627417e9aaf09d31ce971f1db7d01847fbf6b",
+          "b60bbc9b69470e6c8f69fe540602231db2bb31d121f53e86ae6f03c92bd05be7",
+          "0a8fb95c586845252114b43f0356426d3645d3cdc8460edadddccfdea94ffb04",
+          "dbb9c85f872e24932dbfdfbe67cfaeb30530b07cc25c5ebbd006a9f39b46f422",
+          "6e5bcf627d1afda4a8ca8e6e6e232931bc29ef1d9e2ecc3f1287cc73ee872fa6",
+          "e2991f6bf5d4cff871781112fbbc69f61773dbb37c47df16cf250ba0056740cd",
+          "133c704d3425b4ee0abd77d227b8b58b7c8f646b4bc29dcac33e9d993ea8b594",
+          "7f0b09c998aea0cb984bc186ab3d69a807d3391e51d6ec49b3fdae5016d6f296"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.LinuxStartupFileLockTest",
+        "tests": [
+          "opsAfd007ConcurrentOnlyOneCallbackOwnsA",
+          "opsAfd003EveryPartialAcquisitionClosesOnlyOwnedDescriptors",
+          "opsAfd008ExistingOrdinaryMaintenanceScopeNeverExportsFd",
+          "opsAfd004UnknownAndCompoundFailurePriority",
+          "opsAfd002ContentionAndOtherNativeErrors",
+          "opsAfd001ReservedSameOfdScopeAndReverseClose",
+          "opsAfd006RealNativeFlockAndSeparateImmutableProof",
+          "opsAfd005InputNullMissingPortAndBindingContracts"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "5d93fa67754a0ebe4701989a8867e34263d3c0b494194452d5be1ae54b4c360b",
+        "caseNameHashes": [
+          "eda0c8afbd662fe14a508c7a38d545590f71654ebf156c5d2e06925aeeb9d4f0",
+          "4e3306e29b0e4c9dbc5d91dc689fbd05cb147a8296688b809b78500243aaff72",
+          "e526359c21eb486ad5d48fbbb227dbb888162e4a7f193dc57675aab9d519b1ff",
+          "3175081f2eff287420031566454c248f8b620c9510449981ca22e099cec8ba8e",
+          "cf67ac4e3b7b95e36880d41cb044f3d503a688a91d61094157833b217fc0b7f3",
+          "d536230c2a216dbc59e165e083d222bd50e9f8682a65129fe98182d57f8068cb",
+          "451b16f555bcaf0f9e35548abcca09ef8cafabf641e44664ea8a3349eb8c5ead",
+          "661acb925ecac74e6943b083334a495712a338d06901eef57deef5eeb9df9ba0"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.OwnedTransferDirectoryTest",
+        "tests": [
+          "f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup",
+          "a04HeldPartAndReadyInodesSurviveNameReplacementWithDifferentBytes",
+          "f02CloseFailureIsNotRetriedAndSyncFailureKeepsPublishedReady",
+          "bug036CallerMonitorCannotBlockAnyDirectoryOperation",
+          "f02ExistingDateIndependentChildLifetimeAndSafeIoFailures",
+          "med018ExistingAssetChildrenAndEntriesRetainReadOnlyInodes",
+          "rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation",
+          "med019AssetNameNullOpenAndCloseFaultsNeverEscapeOwnership",
+          "a04SymlinkAndHardLinkAreRejectedBeforeOpeningAReadChannel",
+          "w02NullCallbackAndCloseFaultsReleaseFdButNeverDeletePartImplicitly",
+          "f02RejectsNullRelativeRootDotSegmentsAndInvalidDates",
+          "a04MissingNullCloseAndCompoundFailuresLeaveNoEntryFdOrExceptionPaths",
+          "w02CreateOwnsInodeBeforeCallbackAndNameReplacementCannotRedirectWrite",
+          "rd01MissingNullInvalidAndNonDirectoryDatesNeverCreateOrRepairAnything",
+          "f02CloseCannotReuseDescriptorWhileFileCallbackIsInFlight",
+          "f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd"
+        ],
+        "counts": {
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "3dc225ca88eee3727767dfb03ffe629a8f9f1364f991629707603ef0cefb8d48",
+        "caseNameHashes": [
+          "88890db65c259fb7a64eecbc7af232a98f3c8548e74c6cc57ff2330c15d87994",
+          "78262b8e55ee896783648f5569c5caa190aaf90e2431b9bea638011289492074",
+          "cd53b987cfaf21df46546b3b5a850587d82a69ca233bfe356bdd3427e03d88a3",
+          "80c80004c752f71981c93b5a96599e8bc210582dfe40c9043f3d3084709f7ce6",
+          "ae8502643fc4dd709e2ed67e62ff20e9db582b8c62a6f5e382f7e7ede0e4de00",
+          "138d52f28f289032f0a5528fedcf7d25e09c1dfe14e326a9a27ee00b2cd95373",
+          "5120050aea7f490eeb76bb9a6abeea022fd41ef70c8aa2c4462e4bb644aa6d54",
+          "3734e082e3e0e0dfbbf67c9d50a13c59b42052781d32d7e6df86098f78ca0215",
+          "f7166abf3b8cb13ac79a9a9b591fd0c0cfa983bcc74a38250a58f21a5315f9c2",
+          "a687d3ad90f99037fe3e6e59e0ef355dde507c5b96516c4d73697a10f85b7102",
+          "59b9a9772021a4898f17ad35610b2a19ad4d71d4c0a0f0aece6fee7b4edecd5d",
+          "8893c5f7095d5348669e5cedfcb1b2fdf345ed3849fdcaa13743c28599c4d60b",
+          "a4060ea659eff809611f0323bcbbcb488dd9373b923cb5bd72e1aeb91542836d",
+          "79b371f233857a608b52d55ed46cddb826fb30cc14c02c35210377abc1c8a41e",
+          "f2344fdca4dfae8a30442d6354bb42d91ccf53572cc7f69a4cd4cf7742d23eb6",
+          "79d8d4bd7dc821a23be5229a0072f5314dfa5eeb36da8df39726545cf9412175"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.PrivateChildDirectoryTest",
+        "tests": [
+          "unsupportedAdapter",
+          "concurrentNewOnly",
+          "retainedParentCapability",
+          "nameNullAndClosed",
+          "existingEntriesPreserved",
+          "compoundFailures",
+          "everyNativeFailure",
+          "nativePrivateCreation"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "5b1e07933cdadc851c89b1e6d9bd63e839bf6c54bd3afcf0d82fc422b58eac49",
+        "caseNameHashes": [
+          "d02857563b5ccbf333509d4d3cffa09c94af4d8b80fdb4cdd1bcf65030fbcb51",
+          "f38af65b49321b0f4e91a32e6cc7123b9f2e0af1f52029be52b06bcb14e45065",
+          "fcdfa123f01844351b636d9a7c9dfd5a5f2a2a2ce8493b8918bf7f3a3c4cd76c",
+          "30a503120a535bc444217e623f97d2677ba78623d9fc07918a63aef335ba33bc",
+          "89fe0a07d4fd0ac4ac6880b2afaaeac4a0799facc172b03f8fd9a7f619c4db93",
+          "456bf84463aa89d7695bf3b1cfc4f9869f456db0ebb40aa2e3500fd63a3a5c7c",
+          "5ee10f82ae595b25b8dcd5672c2d9d63a8976a389396cd3f13ed0e536abec151",
+          "953e267ade4dc0c7c71b783e7751761e53757955cd7efdda58059e9318e44e07"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.PrivateDirectoryEntryTest",
+        "tests": [
+          "nameAndNullContracts",
+          "nfile193001NamedEntryHasHeldPrivateInodeAndNeverReopensReplacement",
+          "nfile193002MissingNullAndUnsafeNameDoNotMutate",
+          "nfile193004ConcurrentNamedEntryHasExactlyOneWriter",
+          "faultAndUncertainOutcomes",
+          "scopedOwnership",
+          "nativePrivateCreation",
+          "retainedNamespace",
+          "nfile193003CreateWriteAndCloseFailuresRetainPartialAndConsumeFd",
+          "unsupportedAndNativeArguments",
+          "concurrentSinglePublication",
+          "atomicNoReplace"
+        ],
+        "counts": {
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "94e31750fc6ba6e85229e18a426f274d51ddeb73ead71ac632fed2e9f0cca811",
+        "caseNameHashes": [
+          "467b4816907c2f30ba54208238f09b8458a5988df604dd9fa55cd8689bad96ae",
+          "522fe59cedb4aff09e8076997cb1b0318076aab2bd6c7e589e1af25daf85d140",
+          "2397d23382e70f7645ede27017c08424987a3b137d1d9d4b03c3969240d76938",
+          "fdbaf0d36fb9ab930209dd58f82428a86df1582229a4bb20a90ae37cbb758361",
+          "029b72f8de87513cf3d4f4d2cb31aeddc24ef386ca7cb61965dbc2161cf0d350",
+          "779448128d4d3c8766c8ad29c4f3ff058e98ff5eee1a5f98a6e08be0a1aece80",
+          "953e267ade4dc0c7c71b783e7751761e53757955cd7efdda58059e9318e44e07",
+          "a402f4b49862f77c3cae3578450f0182b79229515aca8bd47f0e1176c03ab8ea",
+          "194e5afa07de91ca63510a4366cbfe1447f4d029fd86989a34558362b63beb02",
+          "d19c222c359996535ed71c00488fd26846d146f3c5579d9fa122b6791193122d",
+          "131eae979be016c0d8982f2bd6ba27fd48aed07ea79381df1087ec57a5299bd3",
+          "b0ee5c45e07c8cfbb9085a0342df67b703fd9227e3731adda92bb46f66ad5a4f"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "tests": [
+          "unknownCompoundFailures",
+          "knownIoFailures",
+          "unknownBodyFailures",
+          "concurrentScopes",
+          "nullAndNullableContracts",
+          "nestedScopes",
+          "knownBodyUnknownCleanup",
+          "successfulOwnership"
+        ],
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "e6b2ce8d2988cbd67700c26963d0288c3da67d2b712f73b95d863cf979cc7823",
+        "caseNameHashes": [
+          "16375927cd2dc26d1b60278ea9d94f975118fcf9c05d3054b37fc26ade905b27",
+          "81fc29c04db2084a2db58052ecd204ce351e46a9544c0130065b2ce3602e5fee",
+          "b261a7de56c61669830e87c11338aa056b27fba6c0c32860cca204fa68690781",
+          "1babd18f530341fe4efc8ec57092ecacf6fff81cfaf5a765133416ae6980f394",
+          "a1586c27a12c49c06f5eca101dac8fd7231391c89493f4255da5ffbfa0046cee",
+          "df955e083ea8c591815d475cf47caa83914aed4ce7275eee3918a7c2257481cb",
+          "250a1aab0b55449a8dc8aba2c0f44c617d17795a3aacc746148d9d4b81fbc189",
+          "4d74329b37e5950cd57a31eb6936666eea69f71341933201753701ea3afa1607"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ServiceConfigFilesTest",
+        "tests": [
+          "opsCfgfile004RootAndFileIdentityPolicy",
+          "opsCfgfile002MissingSymlinkAndNonRegularAreRejected",
+          "opsCfgfile007MidReadFaultsAndInodeDrift",
+          "opsCfgfile006NullConcurrentAndOwnedCloseFailure",
+          "opsCfgfile003LengthEncodingAndModeBoundaries",
+          "opsCfgfile001FixedNamesAndIndependentBytes",
+          "opsCfgfile005IndependentAttributeMutationMatrix"
+        ],
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "3f697ae54942331d35a40fdd680e74e51260c58ba2f42a50e8abcd8fd451c46d",
+        "caseNameHashes": [
+          "e40719b285d9e5fbb020001863e490b836f1591934f86eaeb62d9b4d1857c619",
+          "f0cbe21f37f8d644d6055478f6b1ea374abb03e608fa537bffd2156420fe486c",
+          "bdcafe806410057858cfa2b24830d7032605bd3da740a8068903afe20152df18",
+          "a00fa69369132067469b3cc6cfe69120da2a4895254213ca92aa826f4eb9142f",
+          "b0877fc25bfac83e916eb39bef0d490707668af86941d38328385fdb83ab27da",
+          "8ab54ee31c167c7ad15b54a35872cc0b13091934742653f3c8d96710b4b84407",
+          "91738e69c3f7e4884baa9465f6d65868cb9daa31663ee5668b0f709bc2ed1b14"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ServiceCredentialIdTest",
+        "tests": [
+          "opsCredid003ServicesAreDisjointAndImmutable",
+          "opsCredid002WebExactlyFiveRequiredIds",
+          "opsCredid001ApiExactlyFiveRequiredIds",
+          "opsCredid004NullServiceRejected"
+        ],
+        "counts": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "9f7be8a5c541a2fbe4af8821a19666ea068851d14dcc8a8847e4752b27cf36ec",
+        "caseNameHashes": [
+          "e48aff4931b1b123c4fd268c3b84017322818f00dabd835407fff03c67a6a000",
+          "8b86f70b384aef03a182ccfd7161d214a76fab629ec844cfe41cf538004f53d7",
+          "b9920376e25ac85029217c9d494c678f02f780f35359392e407f43fc2b68712a",
+          "29f0a1b6b72f76056749a5f2a2e129f638bffc9c44806df1c9118e064eb598a1"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+        "tests": [
+          "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot",
+          "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention",
+          "opsCredloc002RejectsMissingEmptyRelativeAndRoot",
+          "opsCredloc003RejectsAliasTraversalAndControlBytes",
+          "opsCredloc004BoundsAndNullContracts"
+        ],
+        "counts": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "09cb7e312cf31346423ca25c00ca4b2508fdc386eb4ab653231185053b219fed",
+        "caseNameHashes": [
+          "4668e26af6597d616f03f58365c5e76c6ea06e7ef710ba683777656ad6b8b639",
+          "04216b8ac870df298357c1a94426a247dc254dd7a408e4ec8985d5898a95eb29",
+          "4f5144cb01864010f2766752374259fc1d8bb8dbf87b80d4dba097fcdbcdb6be",
+          "4e88b134efe0b2e7477c0281a32a06e0c52b0dbbd7b89cfc751a3450af035293",
+          "694c7c498b973e6fdf2f1465d7a1e6a19ede0e121bdca61c17280cdcf6560c42"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+        "tests": [
+          "a02FileRequiresOneLinkExactBytesAnd0640WithoutSpecialBits",
+          "u02AccountingRejectsUnknownSizeBoundsAndInvalidOwnershipOrLinkAttributes",
+          "med020LargeAssetSizesKeepTransferLimitAndUnixGuards",
+          "u01SizeAccountingIncludesEmptyPartialPartsButReadyRequiresWholeRecords",
+          "a03ActualFileSymlinkHardLinkWrongPermissionAndOwnerRemainUntouched",
+          "a01NullInvalidAndBoundaryOsIdentityNamesAreExplicit",
+          "a02DirectoryTypePermissionsOwnershipAndMissingAttributesFailClosed"
+        ],
+        "counts": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "8c19739244ac5530b0edce9f1736e63e64528a1a33b4a8789b1094819cd22e9d",
+        "caseNameHashes": [
+          "192d9c3fb4ea93f4844f7989e1eecffb477618e85659678748c4e917c44305bf",
+          "d19651f4e5c78736ad3664a6409422d83042be4987b2320a4cf1b1ff10ebf05e",
+          "a41a244625c936a42ae46d9446bd2b8bdcbf4faf8e58c57303acd6636d823062",
+          "bbe24e3ad34f8b2b6d9b40c4a96bf9c890fdad9c0c69e02f981dd16a7fa27d7b",
+          "ff592444abee7d8ccd617344310bf24d55374aa9dbfecd7ae5810ab0998e3827",
+          "a0a32dd8af3b61a3f04db92dc65796f4ed6728c743a96e3a9fd1ad7373a29a16",
+          "b78788e3ebe2164dd703661fe8aac82c5b479ec10971eb9bc3adb799f36c73a3"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.StorageRootInspectionTest",
+        "tests": [
+          "a07AcceptsSixExistingRootsAndRejectsUnsafeExistingRoots",
+          "a07MetadataAndProviderNegativeMatrix",
+          "a08DeviceAndInodeBothDefinePhysicalRootIdentity"
+        ],
+        "counts": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "5df678526b70b5e4425202081b612437efd877dc5bd8e46455f766e8242a9166",
+        "caseNameHashes": [
+          "b46836bb888fe369dd0dc29e0bfec5f1fc5a5bf42df0b42856cdb6d53446de37",
+          "c2ce3dc1629b17610a929f7772eddd0b75833f0e1811cee89db9d558a64ec6fa",
+          "42af9e5c244a0a0fd2896dd1316d1bf78c050a841aa7e55a4914fdeea5d6a526"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.StorageRootLayoutTest",
+        "tests": [
+          "a05EveryPairRejectsEqualAndBothAncestorDirectionsWithoutStringPrefixConfusion",
+          "a05AllSixPathsRemainDistinctAndNeverLeakInDisplay"
+        ],
+        "counts": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "xmlSha256": "2d079b47837fee7359a424cc2f577fd4230707d21d24d37f7bc8ff967002f71d",
+        "caseNameHashes": [
+          "348ed0d75cd26ef6b8cde9767b464c8394c22a94c8df8f4afcc4fca7f46e039b",
+          "d2a75c70679a7b5d3f68cb9600fd67d23db24071f53a10314178321f6eae9f38"
+        ],
+        "uniqueIdentity": "class plus original ordinal plus name SHA256; argument values not exported"
+      }
+    ]
+  },
+  "testSourceHashes": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java": "65e8891e29ed70ac3325d06e0d58f4be02f6322f2836e2919245a7f2654d64d4",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": "3d0429f446ab0c655dddb4a71bb3a887d5ae3b34dd4411b699079a92896ec917",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java": "b987c9e4ef9e782ce272d4297ff4e0523abf353b9c409f640d4f0ca3bc367567",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": "344fe608de90ca52520cd9c7026c2a5ce03461f6877ff24f82a792629d86506e",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java": "24f4f0fa67d1e37fb5f02ec49af253ec5e7ce61451ed50b86aa599371dcf34c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java": "85fbad77a631bb5bf5ff94779be75c708c82861794c9998ac24c268816ec9b9c",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java": "ab53fbfa93497e8258eb1797d9f80bb7daae48315ee225bb1906c6289dc0de31",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": "6a29064559dd7b27dfc56fc5384d1539bbbb0155ec522e7dd14b7c55a519b238",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": "07fc5676b09e783d736829799ef58127eb9a6e464da20c948e1cbdceea8ca877",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": "fd8d2a40a6e267bdd8e0c018a4ae3ec929c99b742316f79f1e2183c3cf441192",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java": "6a736c2fb5a1c09f440846ce0a5ac82c19f1f657776b5cc7a289e4e07c61f0de",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java": "aef8ab3f5a2958b63af8cd6bc30d90e05bb65a2452f528e8e68a0f2547043e7b",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticFieldValueTest.java": "1ac9c7b07f64163d4c8b88b39652f7c20896d79df6091b1d1cb2f8f5852caa1b",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java": "69fa7ca47c745e98428046e49ebc018d09c8076a6b18b49a094f3c3d8d3f90af",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java": "e6cdaac5d220ab74332bdf15a160a21d3f0eb3c0cffb077304c5a2f8cc82022c",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSenderTest.java": "96a95bdf995ac37b1524296c99b782c3c439e07e6e0c5ca05a9209dadbbb6533",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java": "582db19f044eaa794609903751c13b361f52cd21c0f442894dcae57a5f221bd2",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ChildDirectoryPublicationTest.java": "9ab1dc51d5be70d0a1fd0578159f89a9491db78013f1fc474f6f7f98b5569dfd",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ExistingFileAccessTest.java": "6efdbb95e27b6ea68ee094f723d333fa415e425e8442f9c0497f6872a9bca30f",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java": "c54691f3643d2f815605507e13f8dba945bd5ec201ee57c95e4be076194564d7",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java": "d78bc28db7147df843fcfe0463ccc344f9cda78e76e85a73e67ed403ccaa667c",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java": "9992445892cfd6d2188f7a534d9eea5020096be38405fa87c03214d9f5abea88",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifierTest.java": "be528e28ff8aa2a53fa67142da7f57da02111e37d963c6a434f7dae481071ecd",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java": "0c6c0ac4dd75b53c76cd858291fa161eed8f4a4cb2081b092247f2583e318de9",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java": "35788e1863fa9c6a0f702ff5c1277327592b4c59ca666fbaf2f17387fa4f3eb4",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxMonotonicClockTest.java": "9b527b57e76c21235eb79d6728a9fa648a5be7e4f2e14b82a5f1123713198059",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java": "5889a18160061854db1122951916511c42764d6e7a4821f779bfe79dfe67d2f9",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java": "44109094cbf81ff4c176d397be243a4725a8c382daa1c253ed1db8f462e2cd62",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupAdmissionTest.java": "55b5cb039cedee456f7040e1f2ab231357f3cbeb063834e42c0b20625ca0e0ea",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java": "fe33fbf1f340970873f77c90f1a6d0a2cd84252f2a07bb2a257e674f5d2ecbae",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/OwnedTransferDirectoryTest.java": "415f7921668cadaee27aef095434fe035b12988fe47895416b497bbf5671a373",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateChildDirectoryTest.java": "f21fa6cace37b45276d5bef279f9083fc485bdbb74c1e99a9bc53dc9ceed4d8e",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/PrivateDirectoryEntryTest.java": "db64fd6f077d7b9126ce136c685a7d3d0d902f75ee7959802c08dc2684a3dcc3",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java": "de437bda96b6e5654ceb6611b12fe4bec0e8bf8d5bcde060a8eea5715002d6d4",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java": "ebf36599038fda91f5c4949cd86879bbeef70d6821df51b743178efccafc652f",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialIdTest.java": "3e57341d9cc9427e366ea1e91ac5f2d808f87d0f0cc3dc0679e6470776438461",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java": "6472a6b7dac5ced42d2e590c13d276799cb6002ceeb1c15fa8d1d489fb103129",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java": "36e17342fe17571ed21131737bb0d76cc2747d89d9be299a45234f4341c5c726",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootInspectionTest.java": "b7c6d151c841645fde929516716838c9959abcb316e77ad4e370aa819a646986",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java": "5dad5f95160a93dbfb91c321fe4876062773c5a2fef52aa1b0cd59a0e5e931a0"
+  },
+  "xmlPropertiesExported": false,
+  "newPtCredit": 0,
+  "vmActions": 0,
+  "formalUpdated": false
+}
