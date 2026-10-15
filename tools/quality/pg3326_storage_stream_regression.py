@@ -65,10 +65,10 @@ args=[str(b/'tools/maven/bin/mvn'),'-o','--no-transfer-progress','-Dstyle.color=
 if INPUT['before']:args.insert(1,'-Dtest=StorageRootInspectionTest')
 else:args+=['spotbugs:check','jacoco:report','jar:jar']
 started=datetime.datetime.now(datetime.timezone.utc).isoformat()
-with(out/'maven.private.log').open('xb')as f:r=subprocess.run(args,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=300)
+with(out/'maven.private.log').open('xb')as f:r=subprocess.run(args,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,timeout=300,umask=0o027)
 xmls=sorted((module/'target/surefire-reports').glob('TEST-*.xml'));counts=classify([ET.parse(p).getroot()for p in xmls],INPUT['before'])
 require(r.returncode==(1 if INPUT['before']else 0),'genuine Maven exit required')
-value={'actualExit':0,'mavenExit':r.returncode,'counts':counts,'source':INPUT['source'],'testSource':INPUT['head'],'startUTC':started,'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'testSha256':sha(source/INPUT['testPath']),'xmlHashes':{p.name:sha(p)for p in xmls},'command':args,'logSha256':sha(out/'maven.private.log'),'before':INPUT['before'],'vmActions':0,'newPtCredit':0,'formalUpdated':False,'fullSixIntegrationPending':True}
+value={'actualExit':0,'mavenExit':r.returncode,'counts':counts,'source':INPUT['source'],'testSource':INPUT['head'],'startUTC':started,'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'testSha256':sha(source/INPUT['testPath']),'xmlHashes':{p.name:sha(p)for p in xmls},'command':args,'logSha256':sha(out/'maven.private.log'),'before':INPUT['before'],'childUmask':'0027','privateObserverUmask':'0077','vmActions':0,'newPtCredit':0,'formalUpdated':False,'fullSixIntegrationPending':True}
 if not INPUT['before']:
  cxml=module/'target/site/jacoco/jacoco.xml';coverage=ET.parse(cxml).getroot();counters={x.get('type'):{'missed':int(x.get('missed')),'covered':int(x.get('covered'))}for x in coverage.findall('counter')};require(all(counters[k]['missed']==0 and counters[k]['covered']>0 for k in('LINE','METHOD','CLASS','BRANCH')),'Storage four100 required')
  spots=module/'target/spotbugsXml.xml';require(not ET.parse(spots).getroot().findall('.//BugInstance'),'static0 required')
@@ -83,13 +83,18 @@ value['input']=INPUT;(out/'manifest.safe.json').write_text(json.dumps(value,sort
 '''
 
 
-def main(before):
+def main(before, retry_after_v2=False):
     require(not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT), 'fixed clean source required')
     require(not subprocess.check_output(['git', 'diff', SOURCE, 'HEAD', '--', 'src/schubert-nk-storage/src/main', 'src/schubert-nk-storage/pom.xml', 'pom.xml'], cwd=ROOT), 'qualified Main/build unchanged required')
     full = json.loads((W / 'pg3304-directional-group-full-qualified-v1/manifest.safe.json').read_bytes())
     require(full['actualExit'] == 0 and full['result']['productionSource'] == SOURCE, 'qualified current-source whole required')
     stage = 'before' if before else 'after'
-    slot = 'PG3326-storage-stream-' + stage + '-v1'
+    if retry_after_v2:
+        require(not before, 'only after failed environment may retry')
+        old = json.loads((W / 'pg3326-storage-stream-after-v1/manifest.safe.json').read_bytes())
+        require(old['actualExit'] == 1 and old['productionSource'] == SOURCE, 'preserved failed after-v1 required')
+        require(subprocess.check_output(['git', 'show', old['testSource'] + ':' + TEST], cwd=ROOT) == (ROOT / TEST).read_bytes(), 'same corrected Test byte for environment-only retry')
+    slot = 'PG3326-storage-stream-' + stage + ('-v2' if retry_after_v2 else '-v1')
     os.umask(0o077); out = W / slot.lower(); out.mkdir(mode=0o700)
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     archive = out / 'source.tar'
@@ -120,4 +125,6 @@ def main(before):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--before', action='store_true')
-    raise SystemExit(main(parser.parse_args().before))
+    parser.add_argument('--retry-after-v2', action='store_true')
+    options = parser.parse_args()
+    raise SystemExit(main(options.before, options.retry_after_v2))

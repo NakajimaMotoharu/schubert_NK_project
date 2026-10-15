@@ -48,6 +48,15 @@ class ClassificationTest(unittest.TestCase):
         self.assertEqual('-Dtest=StorageRootInspectionTest', ast.literal_eval(insert[0].args[1]))
         compile('INPUT={}\n' + target.SERVER, '<test server namespace>', 'exec')
 
+    def test_private_observer_and_fixture_child_umask_are_distinct(self):
+        calls = [n for n in ast.walk(ast.parse(target.SERVER)) if isinstance(n, ast.Call)]
+        runs = [n for n in calls if isinstance(n.func, ast.Attribute) and isinstance(n.func.value, ast.Name) and n.func.value.id == 'subprocess' and n.func.attr == 'run']
+        self.assertEqual(1, len(runs))
+        umask = [k.value for k in runs[0].keywords if k.arg == 'umask']
+        self.assertEqual([0o027], [ast.literal_eval(n) for n in umask])
+        observer = [n for n in calls if isinstance(n.func, ast.Attribute) and n.func.attr == 'umask']
+        self.assertEqual([0o077], [ast.literal_eval(n.args[0]) for n in observer])
+
 
 if __name__ == '__main__':
     unittest.main()
