@@ -17,3 +17,9 @@ BUG1267/YKT1033、SS343/353/451、関連864・WBS-N05/N14。05d8302caの3122（e
 ## 次の実再試験
 
 clean commit→3138 v2全六phase（Java warning0/pure独立/三Python suite/当credential RO）→同3120 observer現在frame/所有をfresh確認→3122工具の新3144 slotを一回だけ実行→3124新tuple→真正terminal/全24/seal→普通owner維持の全Browser十二case/全24→最後にownedstop/native。新Rootは現時点未発行。BUG/YKT完了日はactual new consumer成功と関連全対象の確認後に記入する。
+
+## 実再試験（起動前consumer範囲）
+
+9ff4c091f固定、3138v2/exec73287全六phase実0/sourceQualifiedtrue。既3120 immutable observer/exec80095の現在quiescenceを再確認し、新3144/exec49861は01:47:40.765076～52.092912Z、actual0/sourceQualifiedtrue、payload7743dbf49a281f61d912df319c338209bd85bed7b15e2a7505f28736a1d41f5f。全187/全24/原本/Backup/native16/11項目/直前genuineの束縛を通過し、当新slotへdurable予約・native16保全後に唯一start発行。新Job60559/INV2449cff7ecf946e882f23e6bde8c41d0/Root225062/start28121423183。
+
+3124/exec06d34f実0、01:48:14Z、activation323bc9ad-1528-449a-8067-19228ee1e046/run0dc/cutoff元値・Root225062/t2812142/argv56023186をfresh実捕捉。元1800秒不変更。BUG1267/YKT1033の有限consumer/header範囲は修正9ff4c091fと本actualで完了2026-10-15。新親処理はRUNNINGで、真正DONE/ordinary/Browser/全24終端/native/正式受入へは加算しない。旧3122の1は保持し、成功へ置換しない。
