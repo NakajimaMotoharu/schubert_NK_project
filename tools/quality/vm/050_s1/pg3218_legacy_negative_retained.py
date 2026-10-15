@@ -15,6 +15,9 @@ import pg3216_legacy_negative_observer as observer
 BASE = observer.BASE
 OUT = BASE / 'observer-cohort-v2'
 DROP = Path('/etc/systemd/system/schubert-nk-morning-controller.service.d/zz-pg3218-negative-fixture.conf')
+CASE_NAME = 'case-cohort-v2'
+NATIVE_NAME = 'cohort-native-v2.exec'
+SESSION_ID = 'PG3218-LFACT-v2'
 
 
 def runtime_fixed():
@@ -56,12 +59,13 @@ def prepare():
     # RemainAfterExit differ; no new Production artifact or source compilation.
     text = old_drop.read_text()
     require(text.count('case-cohort-v1') == text.count('cohort-native.exec') == text.count('sessionid=PG3216-LFACT-v1') == 1)
-    text = text.replace('case-cohort-v1', 'case-cohort-v2').replace('cohort-native.exec', 'cohort-native-v2.exec').replace('sessionid=PG3216-LFACT-v1', 'sessionid=PG3218-LFACT-v2')
+    text = text.replace('case-cohort-v1', CASE_NAME).replace('cohort-native.exec', NATIVE_NAME).replace('sessionid=PG3216-LFACT-v1', 'sessionid=' + SESSION_ID)
     text += 'RemainAfterExit=yes\n'
     with DROP.open('x') as file:
         file.write(text); file.flush(); os.fsync(file.fileno())
     DROP.chmod(0o644)
     observer.command(['systemctl', 'daemon-reload'])
+    observer.no_exit_hooks()  # Prove the live ABI before a case/Unit start is issued.
     proof = {'actualExit': 0, 'boot': observer.BOOT, 'source': observer.SOURCE, 'oldFailedWhole': 1, 'oldFailedNativeImported': False,
              'unitDropinSha256': hashlib.sha256(text.encode()).hexdigest(), 'originalRuntime': original, 'newCasesRun': 0, 'formalAccepted': False}
     with (OUT / 'setup.safe.json').open('x') as file:
@@ -73,15 +77,40 @@ def execute():
     runtime_fixed()
     proof = json.loads((OUT / 'setup.safe.json').read_text())
     observer.require(proof['actualExit'] == 0 and observer.sha(DROP) == proof['unitDropinSha256'])
-    observer.RESULTS = OUT; observer.CASE = BASE / 'case-cohort-v2'
-    observer.NATIVE = BASE / 'cohort-native-v2.exec'; observer.RETAINED_TERMINAL = True
+    observer.RESULTS = OUT; observer.CASE = BASE / CASE_NAME
+    observer.NATIVE = BASE / NATIVE_NAME; observer.RETAINED_TERMINAL = True
     observer.execute()
+
+
+def retire_failed():
+    observer.guard(); runtime_fixed(); require = observer.require
+    proof = json.loads((OUT / 'setup.safe.json').read_text())
+    require(observer.sha(DROP) == proof['unitDropinSha256'])
+    require(json.loads((OUT / 'failed.safe.json').read_text()) == {'actualExit': 1, 'casesPassed': 7, 'nativeAccepted': False, 'type': 'ValueError'})
+    before = json.loads((OUT / 'before.private.json').read_text())
+    require(observer.tree() == before['tree'] and observer.database() == before['database'] and observer.stable_bad() == before['bad'])
+    terminal = observer.unit(); observer.require_terminal(terminal, terminal['InvocationID'], True)
+    require(len(terminal['InvocationID']) == 32)
+    observer.no_exit_hooks()
+    pid_text = observer.typed_service_property('ExecMainPID').split()
+    require(len(pid_text) == 2 and pid_text[0] == 'u' and pid_text[1].isdigit() and int(pid_text[1]) > 1 and not Path('/proc', pid_text[1]).exists())
+    group = Path('/sys/fs/cgroup/system.slice') / observer.UNIT
+    require(not group.exists() or not (group / 'cgroup.procs').read_text().strip())
+    observer.RESULTS = OUT
+    observer.save('failed-owned-stop-reservation.safe.json', {'issuedOnce': True, 'invocation': terminal['InvocationID'], 'terminal': terminal, 'nativeAccepted': False})
+    require(observer.unit() == terminal)
+    observer.command(['systemctl', 'stop', observer.UNIT])
+    post = observer.unit()
+    require(post['ActiveState'] == 'inactive' and post['SubState'] == 'dead' and post['MainPID'] == post['ControlPID'] == '0' and post['Job'] == '')
+    require(not group.exists() or not (group / 'cgroup.procs').read_text().strip())
+    require(observer.tree() == before['tree'] and observer.database() == before['database'])
+    observer.save('failed-owned-stop.safe.json', {'actualExit': 0, 'nativeAccepted': False, 'oldWholeActualExit': 1})
 
 
 def main():
     os.umask(0o077)
-    parser = argparse.ArgumentParser(); parser.add_argument('phase', choices=['prepare', 'execute']); phase = parser.parse_args().phase
-    (prepare if phase == 'prepare' else execute)()
+    parser = argparse.ArgumentParser(); parser.add_argument('phase', choices=['prepare', 'execute', 'retire-failed']); phase = parser.parse_args().phase
+    {'prepare': prepare, 'execute': execute, 'retire-failed': retire_failed}[phase]()
 
 
 if __name__ == '__main__':

@@ -12,11 +12,12 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = W / 'pg3218-legacy-negative-v1'
 STAGE = '/home/ubuntu/pg3218-legacy-negative-v1'
 FILES = ['pg3216_legacy_negative_observer.py', 'pg3218_legacy_negative_retained.py']
+ENTRY = 'pg3218_legacy_negative_retained.py'
 
 
 def main():
     os.umask(0o077)
-    parser = argparse.ArgumentParser(); parser.add_argument('phase', choices=['stage', 'prepare', 'execute']); phase = parser.parse_args().phase
+    parser = argparse.ArgumentParser(); parser.add_argument('phase', choices=['stage', 'prepare', 'execute', 'retire-failed']); phase = parser.parse_args().phase
     transport.owners(); transport.OUT = OUT
     require = transport.require
     if phase == 'stage':
@@ -36,7 +37,7 @@ def main():
         proof = json.loads((OUT / 'stage.safe.json').read_text()); require(proof['actualExit'] == 0 and proof['boot'] == transport.BOOT)
         code = 'import hashlib\np=Path(' + repr(STAGE) + ')\nhashes=' + repr(proof['hashes']) + '\n'
         code += 'for name,digest in hashes.items():assert hashlib.sha256((p/name).read_bytes()).hexdigest()==digest\n'
-        code += 'os.execv("/usr/bin/python3",' + repr(['python3', '-B', STAGE + '/pg3218_legacy_negative_retained.py', phase]) + ')\n'
+        code += 'os.execv("/usr/bin/python3",' + repr(['python3', '-B', STAGE + '/' + ENTRY, phase]) + ')\n'
         actual = transport.guest(code, phase + '.private.log', timeout=180)
         transport.save(phase + '.safe.json', {'actualExit': actual, 'formalAccepted': False}); require(actual == 0)
     print('PG3218_' + phase.upper() + ' actual0=true formal=false', flush=True)

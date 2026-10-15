@@ -85,6 +85,15 @@ class IndependentWitness(unittest.TestCase):
                 else:
                     with self.assertRaises(AssertionError, msg=fault): exec(RECEIVER_PREP, values)
 
+    def test_typed_empty_hooks_not_omitted_cli_fields(self):
+        good = {'ExecStop': 'a(sasbttttuii) 0\n', 'ExecStopPost': 'a(sasbttttuii) 0\n', 'RemainAfterExit': 'b true\n'}
+        with patch.object(observer, 'typed_service_property', side_effect=lambda key: good[key]): observer.no_exit_hooks()
+        for key in good:
+            for bad in ['', 'a(sasbttttuii) 1\n', 'b false\n', 'otherType 0\n']:
+                altered = {**good, key: bad}
+                with patch.object(observer, 'typed_service_property', side_effect=lambda name: altered[name]):
+                    with self.assertRaises(ValueError, msg=(key, bad)): observer.no_exit_hooks()
+
 
 if __name__ == '__main__':
     unittest.main()

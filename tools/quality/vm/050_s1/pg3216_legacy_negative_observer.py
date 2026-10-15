@@ -12,6 +12,7 @@ from pathlib import Path, PurePosixPath
 import queue
 import re
 import select
+import shlex
 import socket
 import stat
 import struct
@@ -299,8 +300,7 @@ def execute():
             # invocation, not Production Morning or a second business operation.
             group = Path('/sys/fs/cgroup/system.slice') / UNIT
             require(not group.exists() or not (group / 'cgroup.procs').read_text().strip())
-            actual = command(['systemctl', 'show', UNIT, '-p', 'ExecStop', '-p', 'ExecStopPost', '-p', 'RemainAfterExit']).stdout
-            require(dict(line.split('=', 1) for line in actual.splitlines()) == {'ExecStop': '', 'ExecStopPost': '', 'RemainAfterExit': 'yes'})
+            no_exit_hooks()
             require(unit() == terminal)
             save('owned-stop-reservation.safe.json', {'issuedOnce': True, 'invocation': invocation, 'pidGone': pid, 'unit': UNIT})
             command(['systemctl', 'stop', UNIT], timeout=15)
@@ -328,6 +328,18 @@ def require_terminal(terminal, invocation, retained):
             and terminal['MainPID'] == terminal['ControlPID'] == '0' and terminal['Job'] == '')
     require((terminal['ActiveState'], terminal['SubState']) == (('active', 'exited') if retained else ('inactive', 'dead')))
     if retained: require(terminal['InvocationID'] == invocation)
+
+
+def typed_service_property(name):
+    row = shlex.split(command(['busctl', '--system', '--timeout=3', 'call', 'org.freedesktop.systemd1', '/org/freedesktop/systemd1', 'org.freedesktop.systemd1.Manager', 'GetUnit', 's', UNIT]).stdout)
+    require(len(row) == 2 and row[0] == 'o' and row[1] == '/org/freedesktop/systemd1/unit/schubert_2dnk_2dmorning_2dcontroller_2eservice')
+    return command(['busctl', '--system', '--timeout=3', 'get-property', 'org.freedesktop.systemd1', row[1], 'org.freedesktop.systemd1.Service', name]).stdout
+
+
+def no_exit_hooks():
+    require(typed_service_property('ExecStop') == 'a(sasbttttuii) 0\n'
+            and typed_service_property('ExecStopPost') == 'a(sasbttttuii) 0\n'
+            and typed_service_property('RemainAfterExit') == 'b true\n')
 
 
 def main():
