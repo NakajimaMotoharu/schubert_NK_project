@@ -7,6 +7,17 @@ import pg3472_outbox_acceptance as current
 
 
 class CurrentIndependentPhases(unittest.TestCase):
+    def test_actual_day16_immutable_oracle_not_old_same_day_factory(self):
+        raw = current.rows_payload()
+        ast.parse(raw)
+        self.assertEqual(0, check(raw, '<actual day16 independent full24>'))
+        for marker in ["r['business_date']=='2026-10-16'", current.ONCE, current.ROWS,
+                       'pg3470-outbox-admission-before-v1/oracle.private.json',
+                       '095a73c7a6d7511accbdf7eb169aa3e70050e8c4cce4dfe144857c0cbd9e7ae9',
+                       '4f9084e09129be6e80bc0bca51c469cf5a5a6b616ece463e660a24de45806ebb']:
+            self.assertTrue(marker in raw, marker)
+        self.assertNotIn('ALREADY_SUCCESSFUL', raw)
+
     def test_actual_admission_image_and_old_native_preservation_only(self):
         ast.parse(before.BODY)
         for marker in [current.ONCE, '745b9c300446e11bd4230df34617f0bbf8ed738c8ea457ed2d107cd515aa717e',
