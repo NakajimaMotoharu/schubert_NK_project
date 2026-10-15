@@ -66,35 +66,35 @@ final class RootServiceExecutableAdmission {
     ResourceScope.use(
         () -> calls.close(top),
         () -> {
-          checked(Path.of("/proc/self/fd/" + top), 040755, security);
+          checked(Path.of("/proc/self/fd/" + top), 0x41ed, security);
           return Boolean.TRUE;
         });
     var usr = OwnedTransferDirectory.open(calls, Path.of("/usr"));
     ResourceScope.use(
         usr::close,
         () -> {
-          var beforeUsr = usr.atDirectory(p -> checked(p, 040755, security));
+          var beforeUsr = usr.atDirectory(p -> checked(p, 0x41ed, security));
           var bin = usr.openExistingChild("bin");
           ResourceScope.use(
               bin::close,
               () -> {
-                var beforeBin = bin.atDirectory(p -> checked(p, 040755, security));
+                var beforeBin = bin.atDirectory(p -> checked(p, 0x41ed, security));
                 bin.atExistingEntryHandle(
                     "setpriv",
                     held -> {
                       var admitted =
                           admit(held, SETPRIV, security, security::requireNoFileCapabilities);
                       verifyJava(bin, security);
-                      require(admitted.equals(checked(held, 0100755, security)));
+                      require(admitted.equals(checked(held, 0x81ed, security)));
                       bin.atExistingEntryHandle(
                           "setpriv",
                           fresh -> {
-                            require(admitted.equals(checked(fresh, 0100755, security)));
+                            require(admitted.equals(checked(fresh, 0x81ed, security)));
                             security.requireNoFileCapabilities(fresh);
                             return Boolean.TRUE;
                           });
-                      require(beforeBin.equals(bin.atDirectory(p -> checked(p, 040755, security))));
-                      require(beforeUsr.equals(usr.atDirectory(p -> checked(p, 040755, security))));
+                      require(beforeBin.equals(bin.atDirectory(p -> checked(p, 0x41ed, security))));
+                      require(beforeUsr.equals(usr.atDirectory(p -> checked(p, 0x41ed, security))));
                       // Every observer must close normally before the kernel can replace this JVM.
                       bin.close();
                       usr.close();
@@ -121,23 +121,23 @@ final class RootServiceExecutableAdmission {
     bin.atExistingEntryHandle(
         "java",
         link -> {
-          var before = checked(link, 0120777, security);
+          var before = checked(link, 0xa1ff, security);
           requireSelector(bin, before, firstTarget, security);
           var etc = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), etcPath);
           ResourceScope.use(
               etc::close,
               () -> {
-                var etcBefore = etc.atDirectory(p -> checked(p, 040755, security));
+                var etcBefore = etc.atDirectory(p -> checked(p, 0x41ed, security));
                 var alternatives = etc.openExistingChild("alternatives");
                 ResourceScope.use(
                     alternatives::close,
                     () -> {
                       var alternativesBefore =
-                          alternatives.atDirectory(p -> checked(p, 040755, security));
+                          alternatives.atDirectory(p -> checked(p, 0x41ed, security));
                       alternatives.atExistingEntryHandle(
                           "java",
                           alternative -> {
-                            var alternateBefore = checked(alternative, 0120777, security);
+                            var alternateBefore = checked(alternative, 0xa1ff, security);
                             requireSelector(alternatives, alternateBefore, target, security);
                             var opt =
                                 OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath);
@@ -145,20 +145,20 @@ final class RootServiceExecutableAdmission {
                                 opt::close,
                                 () -> {
                                   var optBefore =
-                                      opt.atDirectory(p -> checked(p, 040755, security));
+                                      opt.atDirectory(p -> checked(p, 0x41ed, security));
                                   var jdk = opt.openExistingChild("jdk-25.0.4");
                                   ResourceScope.use(
                                       jdk::close,
                                       () -> {
                                         var jdkBefore =
-                                            jdk.atDirectory(p -> checked(p, 040755, security));
+                                            jdk.atDirectory(p -> checked(p, 0x41ed, security));
                                         var javaBin = jdk.openExistingChild("bin");
                                         ResourceScope.use(
                                             javaBin::close,
                                             () -> {
                                               var binBefore =
                                                   javaBin.atDirectory(
-                                                      p -> checked(p, 040755, security));
+                                                      p -> checked(p, 0x41ed, security));
                                               javaBin.atExistingEntryHandle(
                                                   "java",
                                                   held -> {
@@ -174,8 +174,7 @@ final class RootServiceExecutableAdmission {
                                                           require(
                                                               admitted.equals(
                                                                   checked(
-                                                                      reopened, 0100755,
-                                                                      security)));
+                                                                      reopened, 0x81ed, security)));
                                                           return Boolean.TRUE;
                                                         });
                                                     return Boolean.TRUE;
@@ -183,46 +182,45 @@ final class RootServiceExecutableAdmission {
                                               require(
                                                   binBefore.equals(
                                                       javaBin.atDirectory(
-                                                          p -> checked(p, 040755, security))));
+                                                          p -> checked(p, 0x41ed, security))));
                                               return Boolean.TRUE;
                                             });
                                         require(
                                             jdkBefore.equals(
                                                 jdk.atDirectory(
-                                                    p -> checked(p, 040755, security))));
+                                                    p -> checked(p, 0x41ed, security))));
                                         return Boolean.TRUE;
                                       });
                                   require(
                                       optBefore.equals(
-                                          opt.atDirectory(p -> checked(p, 040755, security))));
+                                          opt.atDirectory(p -> checked(p, 0x41ed, security))));
                                   return Boolean.TRUE;
                                 });
-                            require(
-                                alternateBefore.equals(checked(alternative, 0120777, security)));
+                            require(alternateBefore.equals(checked(alternative, 0xa1ff, security)));
                             requireSelector(alternatives, alternateBefore, target, security);
                             alternatives.atExistingEntryHandle(
                                 "java",
                                 reopened -> {
                                   require(
-                                      alternateBefore.equals(checked(reopened, 0120777, security)));
+                                      alternateBefore.equals(checked(reopened, 0xa1ff, security)));
                                   return Boolean.TRUE;
                                 });
                             return Boolean.TRUE;
                           });
                       require(
                           alternativesBefore.equals(
-                              alternatives.atDirectory(p -> checked(p, 040755, security))));
+                              alternatives.atDirectory(p -> checked(p, 0x41ed, security))));
                       return Boolean.TRUE;
                     });
-                require(etcBefore.equals(etc.atDirectory(p -> checked(p, 040755, security))));
+                require(etcBefore.equals(etc.atDirectory(p -> checked(p, 0x41ed, security))));
                 return Boolean.TRUE;
               });
-          require(before.equals(checked(link, 0120777, security)));
+          require(before.equals(checked(link, 0xa1ff, security)));
           requireSelector(bin, before, firstTarget, security);
           bin.atExistingEntryHandle(
               "java",
               reopened -> {
-                require(before.equals(checked(reopened, 0120777, security)));
+                require(before.equals(checked(reopened, 0xa1ff, security)));
                 return Boolean.TRUE;
               });
           return Boolean.TRUE;
@@ -244,7 +242,7 @@ final class RootServiceExecutableAdmission {
                   name,
                   "unix:uid,gid,mode,nlink,dev,ino,size,lastModifiedTime,ctime",
                   LinkOption.NOFOLLOW_LINKS);
-          require(held.equals(checkedAttributes(name, 0120777, named, security)));
+          require(held.equals(checkedAttributes(name, 0xa1ff, named, security)));
           requireSelectorTarget(expected, Files.readSymbolicLink(name));
           return Boolean.TRUE;
         });
@@ -275,7 +273,7 @@ final class RootServiceExecutableAdmission {
             && gid == 0
             && a.get("mode") instanceof Integer actualMode
             && actualMode == mode);
-    require(a.get("nlink") instanceof Integer links && (mode == 040755 ? links >= 2 : links == 1));
+    require(a.get("nlink") instanceof Integer links && (mode == 0x41ed ? links >= 2 : links == 1));
     require(
         a.get("dev") instanceof Long dev
             && dev != 0
@@ -284,10 +282,10 @@ final class RootServiceExecutableAdmission {
     require(
         a.get("size") instanceof Long size
             && size >= 0
-            && (mode != 0100755 || size > 0 && size <= MAXIMUM));
+            && (mode != 0x81ed || size > 0 && size <= MAXIMUM));
     require(a.get("lastModifiedTime") instanceof FileTime && a.get("ctime") instanceof FileTime);
     // On a retained symlink getxattr would follow its target; check its typed metadata instead.
-    if (mode != 0120777) require(security.accessAcl(held, 44).length == 0);
+    if (mode != 0xa1ff) require(security.accessAcl(held, 44).length == 0);
     return Map.copyOf(a);
   }
 
@@ -298,7 +296,7 @@ final class RootServiceExecutableAdmission {
     Objects.requireNonNull(expected);
     Objects.requireNonNull(security);
     Objects.requireNonNull(capabilities);
-    var before = checked(held, 0100755, security);
+    var before = checked(held, 0x81ed, security);
     capabilities.requireAbsent(held);
     var input = Files.newByteChannel(held, Set.of(StandardOpenOption.READ));
     String actual =
@@ -309,7 +307,7 @@ final class RootServiceExecutableAdmission {
               require(Long.valueOf(input.size()).equals(before.get("size")));
               return result;
             });
-    require(expected.equals(actual) && before.equals(checked(held, 0100755, security)));
+    require(expected.equals(actual) && before.equals(checked(held, 0x81ed, security)));
     capabilities.requireAbsent(held);
     return before;
   }

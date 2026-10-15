@@ -153,7 +153,7 @@ public final class LinuxSealedProof {
 
   private <T> T prepare(Arena arena, int descriptor, byte[] bytes, Operation<T> operation)
       throws IOException {
-    if (mode.call(descriptor, 0600) != 0) throw unavailable();
+    if (mode.call(descriptor, 0x180) != 0) throw unavailable();
     MemorySegment buffer = arena.allocateFrom(ValueLayout.JAVA_BYTE, bytes);
     int offset = 0;
     while (offset < bytes.length) {

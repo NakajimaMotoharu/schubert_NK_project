@@ -100,24 +100,24 @@ public final class RootReleaseApprovalReader {
         ResourceScope.use(
             root::close,
             () -> {
-              var rootBefore = directory(root, 0, 040755);
+              var rootBefore = directory(root, 0, 0x41ed);
               var app = root.openExistingChild("schubert-nk");
               return ResourceScope.use(
                   app::close,
                   () -> {
-                    var appBefore = directory(app, group, 040750);
+                    var appBefore = directory(app, group, 0x41e8);
                     var approvals = app.openExistingChild("release-approval");
                     T value =
                         ResourceScope.use(
                             approvals::close,
                             () -> {
-                              var before = directory(approvals, 0, 040700);
+                              var before = directory(approvals, 0, 0x41c0);
                               require(before.device() == appBefore.device());
                               T answer =
                                   approvals.atExistingEntryHandle(
                                       "current",
                                       held -> {
-                                        var fileBefore = inspect(held, false, 0, 0100400);
+                                        var fileBefore = inspect(held, false, 0, 0x8100);
                                         require(fileBefore.device() == before.device());
                                         ReleaseApproval approval = content(held, fileBefore);
                                         check();
@@ -125,30 +125,29 @@ public final class RootReleaseApprovalReader {
                                             Objects.requireNonNull(
                                                 operation.execute(approval), "approval result");
                                         check();
-                                        require(
-                                            fileBefore.equals(inspect(held, false, 0, 0100400)));
+                                        require(fileBefore.equals(inspect(held, false, 0, 0x8100)));
                                         approvals.atExistingEntryHandle(
                                             "current",
                                             again -> {
                                               require(
                                                   fileBefore.equals(
-                                                      inspect(again, false, 0, 0100400)));
+                                                      inspect(again, false, 0, 0x8100)));
                                               return Boolean.TRUE;
                                             });
                                         return returned;
                                       });
-                              require(before.equals(directory(approvals, 0, 040700)));
-                              recheck(app, "release-approval", before, 0, 040700);
+                              require(before.equals(directory(approvals, 0, 0x41c0)));
+                              recheck(app, "release-approval", before, 0, 0x41c0);
                               return answer;
                             });
-                    require(appBefore.equals(directory(app, group, 040750)));
-                    recheck(root, "schubert-nk", appBefore, group, 040750);
-                    require(rootBefore.equals(directory(root, 0, 040755)));
+                    require(appBefore.equals(directory(app, group, 0x41e8)));
+                    recheck(root, "schubert-nk", appBefore, group, 0x41e8);
+                    require(rootBefore.equals(directory(root, 0, 0x41ed)));
                     var again = OwnedTransferDirectory.open(calls, etc);
                     ResourceScope.use(
                         again::close,
                         () -> {
-                          require(rootBefore.equals(directory(again, 0, 040755)));
+                          require(rootBefore.equals(directory(again, 0, 0x41ed)));
                           return Boolean.TRUE;
                         });
                     return value;
@@ -195,7 +194,7 @@ public final class RootReleaseApprovalReader {
                 require(buffer.position() == before.size() && channel.size() == before.size());
                 return buffer.position();
               });
-      require(before.equals(inspect(held, false, 0, 0100400)));
+      require(before.equals(inspect(held, false, 0, 0x8100)));
       try {
         return ReleaseApproval.parse(Arrays.copyOf(material, length));
       } catch (IllegalArgumentException malformed) {

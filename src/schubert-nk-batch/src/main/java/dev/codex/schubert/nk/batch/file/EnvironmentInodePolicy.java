@@ -33,19 +33,18 @@ final class EnvironmentInodePolicy {
   Snapshot snapshot(
       Path held, boolean runtime, boolean directory, int maximum, int minimum, long configGroup)
       throws IOException {
-    int mode = directory ? (runtime ? 040700 : 040750) : (runtime ? 0100600 : 0100640);
+    int mode = directory ? (runtime ? 0x41c0 : 0x41e8) : (runtime ? 0x8180 : 0x81a0);
     return inspect(held, runtime, directory, mode, runtime ? 0 : configGroup, minimum, maximum);
   }
 
   /** Fixed /etc, /run and shared runtime ancestor: root:root0755, never created or repaired. */
   Snapshot ancestor(Path held, boolean runtime) throws IOException {
-    return inspect(held, runtime, true, 040755, 0, 0, 0);
+    return inspect(held, runtime, true, 0x41ed, 0, 0, 0);
   }
 
   /** NK-BAT-001; SS343 6.14; PT-BAT-046..057. Never admit volatile or readonly records. */
   Snapshot durable(Path held, boolean directory, int minimum) throws IOException {
-    Snapshot result =
-        inspect(held, false, directory, directory ? 040700 : 0100600, 0, minimum, 204);
+    Snapshot result = inspect(held, false, directory, directory ? 0x41c0 : 0x8180, 0, minimum, 204);
     require(!result.filesystem().equals("tmpfs") && !result.readonly());
     return result;
   }
@@ -57,7 +56,7 @@ final class EnvironmentInodePolicy {
 
   /** SSC109: only paired native host admission may allow a private shared ancestor RO. */
   Snapshot durableAncestor(Path held, boolean allowPrivateReadonly) throws IOException {
-    Snapshot result = inspect(held, false, true, 040755, 0, 0, 0);
+    Snapshot result = inspect(held, false, true, 0x41ed, 0, 0, 0);
     require(!result.filesystem().equals("tmpfs"));
     if (!allowPrivateReadonly) require(!result.readonly());
     return result;
@@ -72,7 +71,7 @@ final class EnvironmentInodePolicy {
   /** SSC126: read-only six-root inspection; never creates or repairs an admitted inode. */
   Snapshot roleDirectory(Path held, long uid, long gid, int permissions, boolean host)
       throws IOException {
-    Snapshot result = inspect(held, false, true, 040000 | permissions, uid, gid, 0, 0);
+    Snapshot result = inspect(held, false, true, 0x4000 | permissions, uid, gid, 0, 0);
     require(result.metadata().device() >= 0 && result.metadata().inode() > 0);
     if (host) require(!result.readonly());
     return result;
@@ -85,7 +84,7 @@ final class EnvironmentInodePolicy {
             held,
             false,
             directory,
-            directory ? 040700 : 0100600,
+            directory ? 0x41c0 : 0x8180,
             0,
             directory ? 0 : group,
             directory ? 0 : 1,

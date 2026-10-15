@@ -370,7 +370,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
       Objects.requireNonNull(attributes);
       if (!Integer.valueOf(0).equals(attributes.get("uid"))
           || !(attributes.get("mode") instanceof Integer mode)
-          || (mode & 0022) != 0) throw LinuxSystemdQuery.unavailable();
+          || (mode & 0x12) != 0) throw LinuxSystemdQuery.unavailable();
     }
 
     @SuppressWarnings("restricted")

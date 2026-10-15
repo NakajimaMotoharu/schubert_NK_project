@@ -124,13 +124,13 @@ final class MorningBackupArtifacts {
     ResourceScope.use(
         config::close,
         () -> {
-          var configBefore = directory(config, identities.configurationGroup(), 040750);
+          var configBefore = directory(config, identities.configurationGroup(), 0x41e8);
           Boolean result =
               config.atExistingEntryHandle(
                   "backup-profile.json",
                   profilePath -> {
                     var profileBefore =
-                        file(profilePath, identities.configurationGroup(), 0100640, 4096);
+                        file(profilePath, identities.configurationGroup(), 0x81a0, 4096);
                     var profile =
                         BackupProfile.consume(bytes(profilePath, (int) profileBefore.size()));
                     String profileHash = sha(profilePath);
@@ -138,7 +138,7 @@ final class MorningBackupArtifacts {
                     require(profile.versions().jdk().equals(System.getProperty("java.version")));
                     require(
                         profileBefore.equals(
-                            file(profilePath, identities.configurationGroup(), 0100640, 4096)));
+                            file(profilePath, identities.configurationGroup(), 0x81a0, 4096)));
                     require(
                         profileHash.equals(
                             release.artifactHashes().get("config/effective/backup-profile.json")));
@@ -161,7 +161,7 @@ final class MorningBackupArtifacts {
                                 config.atExistingEntryHandle(
                                     "backup-age-recipient",
                                     recipient -> {
-                                      var recipientBefore = file(recipient, 0, 0100600, 1024);
+                                      var recipientBefore = file(recipient, 0, 0x8180, 1024);
                                       byte[] publicRecipient =
                                           bytes(recipient, (int) recipientBefore.size());
                                       try {
@@ -193,7 +193,7 @@ final class MorningBackupArtifacts {
                                                     credentials::close,
                                                     () -> {
                                                       var credentialsBefore =
-                                                          directory(credentials, 0, 040700);
+                                                          directory(credentials, 0, 0x41c0);
                                                       return withInputs(
                                                           credentials,
                                                           CREDENTIALS,
@@ -216,7 +216,7 @@ final class MorningBackupArtifacts {
                                                                         directory(
                                                                             pending,
                                                                             identity.gid(),
-                                                                            040700,
+                                                                            0x41c0,
                                                                             identity.uid());
                                                                         var processes =
                                                                             new BackupArchiveProcess(
@@ -287,23 +287,22 @@ final class MorningBackupArtifacts {
                                                                           directory(
                                                                               credentials,
                                                                               0,
-                                                                              040700)));
+                                                                              0x41c0)));
                                                                   return Boolean.TRUE;
                                                                 });
                                                           });
                                                     });
                                               });
                                       require(
-                                          recipientBefore.equals(
-                                              file(recipient, 0, 0100600, 1024)));
+                                          recipientBefore.equals(file(recipient, 0, 0x8180, 1024)));
                                       return archives;
                                     }));
                     require(
                         profileBefore.equals(
-                            file(profilePath, identities.configurationGroup(), 0100640, 4096)));
+                            file(profilePath, identities.configurationGroup(), 0x81a0, 4096)));
                     return completed;
                   });
-          require(configBefore.equals(directory(config, identities.configurationGroup(), 040750)));
+          require(configBefore.equals(directory(config, identities.configurationGroup(), 0x41e8)));
           return result;
         });
     check();
@@ -399,7 +398,7 @@ final class MorningBackupArtifacts {
     Objects.requireNonNull(name, "fixed backup input name");
     if (!(credential ? CREDENTIALS : CONFIG).contains(name))
       throw new IllegalArgumentException("backup input name outside fixed catalog");
-    return credential || name.equals("api.env") || name.equals("web.env") ? 0100600 : 0100640;
+    return credential || name.equals("api.env") || name.equals("web.env") ? 0x8180 : 0x81a0;
   }
 
   private void write(OwnedTransferDirectory pending, String name, Writer writer)
@@ -408,7 +407,7 @@ final class MorningBackupArtifacts {
     pending.createPrivatePart(
         temporary,
         held -> {
-          file(held, 0, 0100600, 0);
+          file(held, 0, 0x8180, 0);
           writer.write(held);
           check();
           try (var channel = FileChannel.open(held, StandardOpenOption.WRITE)) {
@@ -475,7 +474,7 @@ final class MorningBackupArtifacts {
   static void requireToolMetadata(EnvironmentInodePolicy.Metadata m) throws IOException {
     Objects.requireNonNull(m);
     require(
-        (m.mode() == 0100644 || m.mode() == 0100755)
+        (m.mode() == 0x81a4 || m.mode() == 0x81ed)
             && m.uid() == 0
             && m.gid() == 0
             && m.links() == 1
@@ -560,23 +559,23 @@ final class MorningBackupArtifacts {
     return ResourceScope.use(
         etc::close,
         () -> {
-          var before = directory(etc, 0, 040755);
+          var before = directory(etc, 0, 0x41ed);
           String value =
               etc.atExistingEntryHandle(
                   "hostname",
                   held -> {
-                    var first = file(held, 0, 0100644, 129);
+                    var first = file(held, 0, 0x81a4, 129);
                     byte[] owned = bytes(held, (int) first.size());
                     try {
                       String text = new String(owned, java.nio.charset.StandardCharsets.US_ASCII);
                       require(text.matches("[A-Za-z0-9][A-Za-z0-9._+\\-]{0,127}\\n"));
-                      require(first.equals(file(held, 0, 0100644, 129)));
+                      require(first.equals(file(held, 0, 0x81a4, 129)));
                       return text.substring(0, text.length() - 1);
                     } finally {
                       Arrays.fill(owned, (byte) 0);
                     }
                   });
-          require(before.equals(directory(etc, 0, 040755)));
+          require(before.equals(directory(etc, 0, 0x41ed)));
           return value;
         });
   }

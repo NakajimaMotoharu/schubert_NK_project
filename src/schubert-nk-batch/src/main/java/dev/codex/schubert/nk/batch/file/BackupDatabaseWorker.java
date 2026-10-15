@@ -285,7 +285,7 @@ public final class BackupDatabaseWorker {
       throws IOException {
     Metadata m = EnvironmentInodePolicy.metadata(ports.io().attributes(p));
     require(
-        m.mode() == (directory ? 040700 : 0100600)
+        m.mode() == (directory ? 0x41c0 : 0x8180)
             && m.uid() == fixed.uid()
             && m.gid() == fixed.gid());
     require(m.size() >= 0);

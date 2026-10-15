@@ -229,7 +229,7 @@ public final class CaddyPublicConfiguration {
         m.uid() == uid
             && m.gid() == gid
             && m.links() >= 2
-            && Set.of(040700, 040750, 040755).contains(m.mode()));
+            && Set.of(0x41c0, 0x41e8, 0x41ed).contains(m.mode()));
   }
 
   private static EnvironmentInodePolicy.Metadata file(
@@ -249,7 +249,7 @@ public final class CaddyPublicConfiguration {
             && m.links() == 1
             && m.size() > 0
             && m.size() <= 65536
-            && (m.mode() == 0100640 || (ca && (m.mode() == 0100600 || m.mode() == 0100644))));
+            && (m.mode() == 0x81a0 || (ca && (m.mode() == 0x8180 || m.mode() == 0x81a4))));
   }
 
   private static EnvironmentInodePolicy.Metadata metadata(Path held, InodeSecurityCalls security)

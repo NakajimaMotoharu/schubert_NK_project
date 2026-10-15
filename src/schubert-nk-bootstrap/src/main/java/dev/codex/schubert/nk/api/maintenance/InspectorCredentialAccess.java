@@ -27,21 +27,21 @@ public final class InspectorCredentialAccess {
   /** Directory capability admission; not an assertion about ancestors or contained files. */
   public void requireDirectory(
       int mode, long ownerUid, int links, boolean readOnlyFilesystem, byte[] accessAcl) {
-    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 040000, 5, directoryAcl);
+    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0x4000, 5, directoryAcl);
     require(links >= 1);
   }
 
   /** Requires a single-linked regular AES credential with the SS343 6.1 encoded size bounds. */
   public void requireAesFile(
       int mode, long ownerUid, int links, long size, boolean readOnlyFilesystem, byte[] accessAcl) {
-    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0100000, 4, fileAcl);
+    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0x8000, 4, fileAcl);
     require(links == 1 && size >= 54 && size <= 69);
   }
 
   /** Same runtime access contract, with SS343 6.6 password bounds; PT-DB-INBOX-197..201. */
   public void requireDatabaseFile(
       int mode, long ownerUid, int links, long size, boolean readOnlyFilesystem, byte[] accessAcl) {
-    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0100000, 4, fileAcl);
+    requireAccess(mode, ownerUid, readOnlyFilesystem, accessAcl, 0x8000, 4, fileAcl);
     require(links == 1 && size >= 1 && size <= 65536);
   }
 

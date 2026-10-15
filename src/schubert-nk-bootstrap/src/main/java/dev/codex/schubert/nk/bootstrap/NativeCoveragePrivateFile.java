@@ -147,33 +147,33 @@ final class NativeCoveragePrivateFile {
     ResourceScope.use(
         opt::close,
         () -> {
-          Identity first = directory(opt, security, 0, 0, 040755);
+          Identity first = directory(opt, security, 0, 0, 0x41ed);
           var tools = opt.openExistingChild("pgpt-tools-pg390");
           ResourceScope.use(
               tools::close,
               () -> {
-                Identity before = directory(tools, security, 0, 0, 040755);
+                Identity before = directory(tools, security, 0, 0, 0x41ed);
                 FileState file =
                     tools.atExistingEntryHandle(
                         "jacoco-agent.jar",
                         held -> {
-                          FileState state = file(held, security, 0, 0, 0100644);
+                          FileState state = file(held, security, 0, 0, 0x81a4);
                           verifyAgentShape(state.size(), () -> security.readOnlyFilesystem(held));
                           require(
                               FixedNativeCoverageProfile.AGENT_SHA256.equals(hash(held, 307843)));
-                          require(state.equals(file(held, security, 0, 0, 0100644)));
+                          require(state.equals(file(held, security, 0, 0, 0x81a4)));
                           return state;
                         });
                 tools.atExistingEntryHandle(
                     "jacoco-agent.jar",
                     held -> {
-                      require(file.equals(file(held, security, 0, 0, 0100644)));
+                      require(file.equals(file(held, security, 0, 0, 0x81a4)));
                       return Boolean.TRUE;
                     });
-                require(before.equals(directory(tools, security, 0, 0, 040755)));
+                require(before.equals(directory(tools, security, 0, 0, 0x41ed)));
                 return Boolean.TRUE;
               });
-          require(first.equals(directory(opt, security, 0, 0, 040755)));
+          require(first.equals(directory(opt, security, 0, 0, 0x41ed)));
           return Boolean.TRUE;
         });
   }
@@ -226,17 +226,17 @@ final class NativeCoveragePrivateFile {
     ResourceScope.use(
         run::close,
         () -> {
-          Identity top = directory(run, security, 0, 0, 040755, io);
+          Identity top = directory(run, security, 0, 0, 0x41ed, io);
           var service = run.openExistingChild("schubert-nk");
           ResourceScope.use(
               service::close,
               () -> {
-                Identity serviceBefore = directory(service, security, 0, 0, 040755, io);
+                Identity serviceBefore = directory(service, security, 0, 0, 0x41ed, io);
                 var parent = service.openExistingChild("pt-coverage");
                 ResourceScope.use(
                     parent::close,
                     () -> {
-                      Identity parentBefore = directory(parent, security, 0, 0, 040755, io);
+                      Identity parentBefore = directory(parent, security, 0, 0, 0x41ed, io);
                       String role = profile.directory();
                       var target = parent.openExistingChild(role);
                       Identity saved =
@@ -244,7 +244,7 @@ final class NativeCoveragePrivateFile {
                               target::close,
                               () -> {
                                 Identity original =
-                                    directory(target, security, uid, gid, 040700, io);
+                                    directory(target, security, uid, gid, 0x41c0, io);
                                 target.atDirectory(
                                     held -> {
                                       require(
@@ -255,7 +255,7 @@ final class NativeCoveragePrivateFile {
                                 write(target, security, uid, gid, name, bytes, io, channels);
                                 require(
                                     original.equals(
-                                        directory(target, security, uid, gid, 040700, io)));
+                                        directory(target, security, uid, gid, 0x41c0, io)));
                                 return original;
                               });
                       var reopened = parent.openExistingChild(role);
@@ -263,16 +263,16 @@ final class NativeCoveragePrivateFile {
                           reopened::close,
                           () -> {
                             require(
-                                saved.equals(directory(reopened, security, uid, gid, 040700, io)));
+                                saved.equals(directory(reopened, security, uid, gid, 0x41c0, io)));
                             return Boolean.TRUE;
                           });
-                      require(parentBefore.equals(directory(parent, security, 0, 0, 040755, io)));
+                      require(parentBefore.equals(directory(parent, security, 0, 0, 0x41ed, io)));
                       return Boolean.TRUE;
                     });
-                require(serviceBefore.equals(directory(service, security, 0, 0, 040755, io)));
+                require(serviceBefore.equals(directory(service, security, 0, 0, 0x41ed, io)));
                 return Boolean.TRUE;
               });
-          require(top.equals(directory(run, security, 0, 0, 040755, io)));
+          require(top.equals(directory(run, security, 0, 0, 0x41ed, io)));
           return Boolean.TRUE;
         });
     require(
@@ -331,12 +331,12 @@ final class NativeCoveragePrivateFile {
     if (directory == null || security == null || name == null || bytes == null)
       throw new IllegalArgumentException("private PT output dependencies required");
     require(bytes.length >= 5 && bytes.length <= FixedNativeCoverageCheckpoint.MAX_BYTES);
-    Identity before = directory(directory, security, uid, gid, 040700, io);
+    Identity before = directory(directory, security, uid, gid, 0x41c0, io);
     FileState saved =
         directory.createPrivateEntry(
             name,
             held -> {
-              FileState original = file(held, security, uid, gid, 0100600, io);
+              FileState original = file(held, security, uid, gid, 0x8180, io);
               require(original.size() == 0);
               try (var channel = channel(channels.write(held))) {
                 var buffer = ByteBuffer.wrap(bytes);
@@ -344,7 +344,7 @@ final class NativeCoveragePrivateFile {
                 channel.force(true);
                 require(channel.size() == bytes.length);
               }
-              FileState after = file(held, security, uid, gid, 0100600, io);
+              FileState after = file(held, security, uid, gid, 0x8180, io);
               require(original.identity().equals(after.identity()) && after.size() == bytes.length);
               require(hash(held, bytes.length, channels).equals(digest(bytes)));
               return after;
@@ -354,11 +354,11 @@ final class NativeCoveragePrivateFile {
     directory.atExistingEntryHandle(
         name,
         held -> {
-          require(saved.equals(file(held, security, uid, gid, 0100600, io)));
+          require(saved.equals(file(held, security, uid, gid, 0x8180, io)));
           require(hash(held, bytes.length, channels).equals(digest(bytes)));
           return Boolean.TRUE;
         });
-    require(before.equals(directory(directory, security, uid, gid, 040700, io)));
+    require(before.equals(directory(directory, security, uid, gid, 0x41c0, io)));
   }
 
   private static Identity directory(
@@ -413,9 +413,7 @@ final class NativeCoveragePrivateFile {
             && Integer.toUnsignedLong(group) == gid
             && permissions == mode);
     require(
-        device != 0
-            && inode != 0
-            && (mode == 0100600 || mode == 0100644 ? links == 1 : links >= 2));
+        device != 0 && inode != 0 && (mode == 0x8180 || mode == 0x81a4 ? links == 1 : links >= 2));
     require(acl.length == 0);
     return new Identity(uid, gid, mode, links, device, inode);
   }

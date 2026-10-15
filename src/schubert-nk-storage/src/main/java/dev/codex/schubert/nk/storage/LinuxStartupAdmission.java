@@ -172,7 +172,7 @@ public final class LinuxStartupAdmission {
         || !(m.get("size") instanceof Long size)
         || !(m.get("dev") instanceof Long device)
         || !(m.get("ino") instanceof Long inode)) throw unavailable();
-    require(mode == 0100600 && uid == 0 && gid == 0 && device != 0 && inode != 0);
+    require(mode == 0x8180 && uid == 0 && gid == 0 && device != 0 && inode != 0);
     return new Attributes(links, size, device, inode);
   }
 

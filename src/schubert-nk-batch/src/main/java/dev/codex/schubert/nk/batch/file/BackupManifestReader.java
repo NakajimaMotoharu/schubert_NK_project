@@ -194,7 +194,7 @@ public final class BackupManifestReader {
           guard(started);
           require(before.equals(metadata(io.attributes(held))));
           guard(started);
-          return (before.mode() & 0170000) == 040000;
+          return (before.mode() & 0xf000) == 0x4000;
         });
   }
 
@@ -344,7 +344,7 @@ public final class BackupManifestReader {
     Metadata value = metadata(io.attributes(held));
     guard(started);
     require(
-        value.mode() == (directory ? 040700 : 0100600)
+        value.mode() == (directory ? 0x41c0 : 0x8180)
             && value.uid() == (directory ? uid : 0)
             && value.gid() == (directory ? gid : 0));
     if (directory) require(value.links() >= 2 && value.size() >= 0);

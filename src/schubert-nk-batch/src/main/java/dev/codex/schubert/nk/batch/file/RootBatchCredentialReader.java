@@ -152,7 +152,7 @@ public final class RootBatchCredentialReader {
   private Metadata inspect(Path held, boolean directory, int maximum) throws IOException {
     Metadata m = EnvironmentInodePolicy.metadata(io.attributes(held));
     require(m.device() >= 0 && m.inode() > 0);
-    require(m.mode() == (directory ? 040500 : 0100400) && m.uid() == 0 && m.gid() == 0);
+    require(m.mode() == (directory ? 0x4140 : 0x8100) && m.uid() == 0 && m.gid() == 0);
     require(
         directory
             ? m.links() >= 2 && m.size() >= 0

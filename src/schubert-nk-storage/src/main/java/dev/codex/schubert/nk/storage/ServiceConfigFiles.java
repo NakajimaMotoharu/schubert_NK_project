@@ -175,7 +175,7 @@ public final class ServiceConfigFiles implements NonSecretConfigSource {
         || !(attributes.get("ctime") instanceof FileTime changed)
         || !identity.owner().equals(owner.getName())
         || !identity.group().equals(group.getName())
-        || !Integer.valueOf(directory ? 040750 : 0100640).equals(mode)
+        || !Integer.valueOf(directory ? 0x41e8 : 0x81a0).equals(mode)
         || links < 1
         || (!directory && links != 1)
         || device < 0

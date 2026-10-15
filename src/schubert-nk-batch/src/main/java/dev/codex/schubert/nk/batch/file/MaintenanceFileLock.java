@@ -179,14 +179,14 @@ public final class MaintenanceFileLock {
 
   private Identity directory(Path held, boolean requireWritable) throws IOException {
     Metadata m = metadata(io.attributes(held));
-    require(m.mode() == 040755 && m.links() >= 2 && m.size() >= 0);
+    require(m.mode() == 0x41ed && m.links() >= 2 && m.size() >= 0);
     return identity(held, m, requireWritable);
   }
 
   private Identity file(Path held) throws IOException {
     Metadata m = metadata(io.attributes(held));
     // Validate retained inode's exact type before any path-following FS or xattr operation.
-    require(m.mode() == 0100600 && m.links() == 1 && m.size() == 0);
+    require(m.mode() == 0x8180 && m.links() == 1 && m.size() == 0);
     return identity(held, m, true);
   }
 

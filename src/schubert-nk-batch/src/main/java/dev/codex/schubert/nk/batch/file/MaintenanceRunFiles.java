@@ -632,7 +632,7 @@ public final class MaintenanceRunFiles {
               p ->
                   index < 3
                       ? policy.durableAncestor(p, true)
-                      : policy.roleDirectory(p, 0, 0, 0700, false));
+                      : policy.roleDirectory(p, 0, 0, 0x1c0, false));
       var actual = expectedRoots.get(index);
       require(
           !observed.filesystem().equals("tmpfs")
@@ -656,7 +656,7 @@ public final class MaintenanceRunFiles {
                   p ->
                       index < 3
                           ? policy.durableAncestor(p, true)
-                          : policy.roleDirectory(p, 0, 0, 0700, false))));
+                          : policy.roleDirectory(p, 0, 0, 0x1c0, false))));
       return Boolean.TRUE;
     }
 

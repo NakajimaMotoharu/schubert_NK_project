@@ -292,7 +292,7 @@ public final class BackupArtifactVerifier {
                                 raw.size() >= 0
                                     && raw.device() == initial.device()
                                     && raw.inode() > 0);
-                            if ((raw.mode() & 0170000) != 0100000) {
+                            if ((raw.mode() & 0xf000) != 0x8000) {
                               require(raw.equals(metadata(io.attributes(held))));
                               guard(started);
                               return false;
@@ -562,7 +562,7 @@ public final class BackupArtifactVerifier {
     Metadata value = metadata(io.attributes(held));
     guard(started);
     require(
-        value.mode() == (directory ? 040700 : 0100600)
+        value.mode() == (directory ? 0x41c0 : 0x8180)
             && value.uid() == owner
             && value.gid() == group);
     if (directory) require(value.links() >= 2 && value.size() >= 0);

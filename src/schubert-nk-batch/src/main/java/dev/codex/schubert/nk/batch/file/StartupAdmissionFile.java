@@ -181,8 +181,8 @@ public final class StartupAdmissionFile {
         || !(values.get("size") instanceof Long size)
         || !(values.get("dev") instanceof Long device)
         || !(values.get("ino") instanceof Long inode)) throw unavailable();
-    if (directory) require(mode == 040755 && links >= 2 && size >= 0);
-    else require(mode == 0100600 && links == 1 && size == 0);
+    if (directory) require(mode == 0x41ed && links >= 2 && size >= 0);
+    else require(mode == 0x8180 && links == 1 && size == 0);
     require(uid == 0 && gid == 0);
     require("tmpfs".equals(io.filesystemType(held)));
     // Current retained host flags, never Java canonical FileStore.isReadOnly(). Private A may be

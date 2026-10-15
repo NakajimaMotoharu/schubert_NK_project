@@ -54,7 +54,7 @@ final class MorningStartupRoots {
           || uid > 4294967294L
           || gid < 1
           || gid > 4294967294L
-          || (mode != 0750 && mode != 0700))
+          || (mode != 0x1e8 && mode != 0x1c0))
         throw new IllegalArgumentException("fixed root profile");
     }
   }
@@ -245,7 +245,7 @@ final class MorningStartupRoots {
               admitted.metadata().inode(),
               admitted.metadata().uid(),
               admitted.metadata().gid(),
-              admitted.metadata().mode() & 07777,
+              admitted.metadata().mode() & 0xfff,
               admitted.filesystem()));
       gate.check();
     }
@@ -311,11 +311,11 @@ final class MorningStartupRoots {
     var artemis = fixed.resolveArtemis();
     var migration = fixed.resolveMigration();
     return List.of(
-        new Profile(data.uid(), fixed.dataReadGroup(), 0750),
-        new Profile(api.uid(), web.gid(), 0750),
-        new Profile(backup.uid(), backup.gid(), 0700),
-        new Profile(0, fixed.configurationGroup(), 0750),
-        new Profile(artemis.uid(), artemis.gid(), 0700),
-        new Profile(migration.uid(), migration.gid(), 0700));
+        new Profile(data.uid(), fixed.dataReadGroup(), 0x1e8),
+        new Profile(api.uid(), web.gid(), 0x1e8),
+        new Profile(backup.uid(), backup.gid(), 0x1c0),
+        new Profile(0, fixed.configurationGroup(), 0x1e8),
+        new Profile(artemis.uid(), artemis.gid(), 0x1c0),
+        new Profile(migration.uid(), migration.gid(), 0x1c0));
   }
 }

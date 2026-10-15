@@ -194,7 +194,7 @@ final class TransferCleanup {
   private Metadata inspect(Path held, boolean directory, long device) throws IOException {
     Metadata m = EnvironmentInodePolicy.metadata(Files.readAttributes(held, "unix:*"));
     require(
-        m.mode() == (directory ? 040750 : 0100640)
+        m.mode() == (directory ? 0x41e8 : 0x81a0)
             && m.uid() == uid
             && m.gid() == gid
             && m.size() >= 0

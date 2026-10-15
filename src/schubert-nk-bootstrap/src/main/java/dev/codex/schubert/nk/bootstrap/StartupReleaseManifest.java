@@ -222,27 +222,27 @@ public final class StartupReleaseManifest {
       return ResourceScope.use(
           root::close,
           () -> {
-            Snapshot top = directory(root, 0, 040755);
+            Snapshot top = directory(root, 0, 0x41ed);
             var app = root.openExistingChild("schubert-nk");
             return ResourceScope.use(
                 app::close,
                 () -> {
-                  Snapshot appBefore = directory(app, group, 040750);
+                  Snapshot appBefore = directory(app, group, 0x41e8);
                   T digest = operation.read(app);
-                  require(appBefore.equals(directory(app, group, 040750)));
+                  require(appBefore.equals(directory(app, group, 0x41e8)));
                   var reopened = root.openExistingChild("schubert-nk");
                   ResourceScope.use(
                       reopened::close,
                       () -> {
-                        require(appBefore.equals(directory(reopened, group, 040750)));
+                        require(appBefore.equals(directory(reopened, group, 0x41e8)));
                         return Boolean.TRUE;
                       });
-                  require(top.equals(directory(root, 0, 040755)));
+                  require(top.equals(directory(root, 0, 0x41ed)));
                   var reopenedTop = OwnedTransferDirectory.open(calls, opt);
                   ResourceScope.use(
                       reopenedTop::close,
                       () -> {
-                        require(top.equals(directory(reopenedTop, 0, 040755)));
+                        require(top.equals(directory(reopenedTop, 0, 0x41ed)));
                         return Boolean.TRUE;
                       });
                   return digest;
@@ -258,15 +258,15 @@ public final class StartupReleaseManifest {
     return app.atExistingEntryHandle(
         "current",
         link -> {
-          Snapshot before = checked(link, 0, 0120777, 1, -1);
+          Snapshot before = checked(link, 0, 0xa1ff, 1, -1);
           String version = version(app.atDirectory(io::selector), opt);
           T result = released(app, version, operation);
-          require(before.equals(checked(link, 0, 0120777, 1, -1)));
+          require(before.equals(checked(link, 0, 0xa1ff, 1, -1)));
           require(version.equals(version(app.atDirectory(io::selector), opt)));
           app.atExistingEntryHandle(
               "current",
               reopened -> {
-                require(before.equals(checked(reopened, 0, 0120777, 1, -1)));
+                require(before.equals(checked(reopened, 0, 0xa1ff, 1, -1)));
                 return Boolean.TRUE;
               });
           return result;
@@ -279,27 +279,27 @@ public final class StartupReleaseManifest {
     return ResourceScope.use(
         releases::close,
         () -> {
-          Snapshot releasesBefore = directory(releases, group, 040750);
+          Snapshot releasesBefore = directory(releases, group, 0x41e8);
           var release = releases.openExistingChild(version);
           return ResourceScope.use(
               release::close,
               () -> {
-                Snapshot releaseBefore = directory(release, group, 040750);
+                Snapshot releaseBefore = directory(release, group, 0x41e8);
                 T result = operation.read(release, version);
-                require(releaseBefore.equals(directory(release, group, 040750)));
+                require(releaseBefore.equals(directory(release, group, 0x41e8)));
                 var reopened = releases.openExistingChild(version);
                 ResourceScope.use(
                     reopened::close,
                     () -> {
-                      require(releaseBefore.equals(directory(reopened, group, 040750)));
+                      require(releaseBefore.equals(directory(reopened, group, 0x41e8)));
                       return Boolean.TRUE;
                     });
-                require(releasesBefore.equals(directory(releases, group, 040750)));
+                require(releasesBefore.equals(directory(releases, group, 0x41e8)));
                 var reopenedReleases = app.openExistingChild("releases");
                 ResourceScope.use(
                     reopenedReleases::close,
                     () -> {
-                      require(releasesBefore.equals(directory(reopenedReleases, group, 040750)));
+                      require(releasesBefore.equals(directory(reopenedReleases, group, 0x41e8)));
                       return Boolean.TRUE;
                     });
                 return result;
@@ -313,7 +313,7 @@ public final class StartupReleaseManifest {
     return release.atExistingEntryHandle(
         "RELEASE-MANIFEST.json",
         held -> {
-          Snapshot before = checked(held, group, 0100640, 1, MAX_BYTES);
+          Snapshot before = checked(held, group, 0x81a0, 1, MAX_BYTES);
           MessageDigest hash = MessageDigest.getInstance("SHA-256");
           var material = new ByteArrayOutputStream();
           var channel = Objects.requireNonNull(io.open(held), "manifest channel");
@@ -336,14 +336,14 @@ public final class StartupReleaseManifest {
                       buffer.clear();
                     }
                     require(total == before.size() && channel.size() == before.size());
-                    require(before.equals(checked(held, group, 0100640, 1, MAX_BYTES)));
+                    require(before.equals(checked(held, group, 0x81a0, 1, MAX_BYTES)));
                     return new ManifestValue(
                         HexFormat.of().formatHex(hash.digest()), material.toByteArray());
                   });
           release.atExistingEntryHandle(
               "RELEASE-MANIFEST.json",
               reopened -> {
-                require(before.equals(checked(reopened, group, 0100640, 1, MAX_BYTES)));
+                require(before.equals(checked(reopened, group, 0x81a0, 1, MAX_BYTES)));
                 return Boolean.TRUE;
               });
           return digest;

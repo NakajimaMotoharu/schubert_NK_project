@@ -226,7 +226,7 @@ public final class BackupManifestPublisher {
     Metadata value = metadata(io.attributes(held));
     guard(started);
     require(
-        value.mode() == (directory ? 040700 : 0100600)
+        value.mode() == (directory ? 0x41c0 : 0x8180)
             && value.uid() == (directory ? uid : 0)
             && value.gid() == (directory ? gid : 0));
     if (directory) require(value.links() >= 2 && value.size() >= 0);

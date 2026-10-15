@@ -101,14 +101,14 @@ public final class StorageRootInspection {
         || !identity.owner().equals(user.getName())
         || !(group instanceof GroupPrincipal principal)
         || !identity.group().equals(principal.getName())
-        || !Integer.valueOf(040700).equals(attributes.get("mode"))) throw unavailable();
+        || !Integer.valueOf(0x41c0).equals(attributes.get("mode"))) throw unavailable();
   }
 
   static void requireDirectory(Map<String, Object> attributes) throws StorageIoException {
     Object mode = attributes.get("mode");
     Object links = attributes.get("nlink");
     if (!(mode instanceof Integer bits)
-        || (bits & 0170000) != 040000
+        || (bits & 0xf000) != 0x4000
         || !(links instanceof Integer count)
         || count < 1) throw unavailable();
   }

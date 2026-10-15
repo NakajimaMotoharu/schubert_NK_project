@@ -388,7 +388,7 @@ public final class RootReleaseAdmission {
     require(
         Integer.valueOf(0).equals(m.get("uid"))
             && Integer.valueOf(0).equals(m.get("gid"))
-            && Integer.valueOf(directory ? 040755 : 0100644).equals(m.get("mode")));
+            && Integer.valueOf(directory ? 0x41ed : 0x81a4).equals(m.get("mode")));
     require(m.get("nlink") instanceof Integer links && (directory ? links >= 2 : links == 1));
     require(
         m.get("size") instanceof Long size && (directory ? size >= 0 : size > 0 && size <= 8192));

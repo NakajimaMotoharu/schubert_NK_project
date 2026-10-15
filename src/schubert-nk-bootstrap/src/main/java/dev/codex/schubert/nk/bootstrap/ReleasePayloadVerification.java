@@ -67,7 +67,7 @@ final class ReleasePayloadVerification {
         "RELEASE-MANIFEST.json",
         held -> {
           require(version.equals(approval.version()));
-          var original = checked(held, 0100640);
+          var original = checked(held, 0x81a0);
           require(original.size() > 0 && original.size() <= 1_048_576);
           own(original);
           FileValue value = read(held, original, true);
@@ -91,7 +91,7 @@ final class ReleasePayloadVerification {
               (path, hash) -> canonical.append(hash).append("  ").append(path).append('\n'));
           byte[] sumBytes = canonical.toString().getBytes(StandardCharsets.US_ASCII);
           walk(release, "", tree, expected, original, sumBytes, inventory);
-          require(original.equals(checked(held, 0100640)));
+          require(original.equals(checked(held, 0x81a0)));
           agreement(inventory, expected);
           return new StartupReleaseManifest.Contents(
               version,
@@ -147,7 +147,7 @@ final class ReleasePayloadVerification {
       byte[] sumBytes,
       ReleaseInventory inventory)
       throws StorageIoException {
-    var before = directory.atDirectory(p -> checked(p, 040750));
+    var before = directory.atDirectory(p -> checked(p, 0x41e8));
     require(before.device() == original.device());
     own(before);
     Set<String> children = Objects.requireNonNull(tree.get(path), "declared directory children");
@@ -159,13 +159,13 @@ final class ReleasePayloadVerification {
         ResourceScope.use(
             nested::close,
             () -> {
-              var first = nested.atDirectory(p -> checked(p, 040750));
+              var first = nested.atDirectory(p -> checked(p, 0x41e8));
               walk(nested, child, tree, expected, original, sumBytes, inventory);
               var reopened = directory.openExistingChild(name);
               ResourceScope.use(
                   reopened::close,
                   () -> {
-                    require(first.equals(reopened.atDirectory(p -> checked(p, 040750))));
+                    require(first.equals(reopened.atDirectory(p -> checked(p, 0x41e8))));
                     return Boolean.TRUE;
                   });
               return Boolean.TRUE;
@@ -174,7 +174,7 @@ final class ReleasePayloadVerification {
         directory.atExistingEntryHandle(
             name,
             held -> {
-              int mode = executable(child) ? 0100750 : 0100640;
+              int mode = executable(child) ? 0x81e8 : 0x81a0;
               var first = checked(held, mode);
               require(first.device() == original.device());
               if (child.equals("RELEASE-MANIFEST.json")) require(first.equals(original));
@@ -211,12 +211,12 @@ final class ReleasePayloadVerification {
       }
     }
     names(directory, children);
-    require(before.equals(directory.atDirectory(p -> checked(p, 040750))));
+    require(before.equals(directory.atDirectory(p -> checked(p, 0x41e8))));
   }
 
   private StartupReleaseManifest.Snapshot checked(Path held, int mode) throws IOException {
     require(!Thread.currentThread().isInterrupted());
-    var value = reader.checked(held, group, mode, mode == 040750 ? 2 : 1, -1);
+    var value = reader.checked(held, group, mode, mode == 0x41e8 ? 2 : 1, -1);
     require(security.readOnlyFilesystem(held));
     return value;
   }

@@ -179,13 +179,13 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
 
   @Override
   public int createFile(int parent, String name) throws StorageIoException {
-    return open(parent, segment(name), CREATE_FLAGS, 0640);
+    return open(parent, segment(name), CREATE_FLAGS, 0x1a0);
   }
 
   /** NK-OPS-001; OPS-009/UI251/SS343 §6.10; PG-D-153; PT-OPS-PFILE-001/008. */
   @Override
   public int createPrivateFile(int parent, String name) throws StorageIoException {
-    return open(parent, segment(name), CREATE_FLAGS, 0600);
+    return open(parent, segment(name), CREATE_FLAGS, 0x180);
   }
 
   private int open(int parent, String name, int flags) throws StorageIoException {
@@ -204,7 +204,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
     segment(name);
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      check(mkdir.call(state, parent, arena.allocateFrom(name), 0750), state);
+      check(mkdir.call(state, parent, arena.allocateFrom(name), 0x1e8), state);
     }
   }
 
@@ -213,7 +213,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
     segment(name);
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      check(mkdir.call(state, parent, arena.allocateFrom(name), 0700), state);
+      check(mkdir.call(state, parent, arena.allocateFrom(name), 0x1c0), state);
     }
   }
 

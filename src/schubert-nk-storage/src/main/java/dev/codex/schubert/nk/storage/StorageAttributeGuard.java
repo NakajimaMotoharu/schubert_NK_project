@@ -16,7 +16,7 @@ public final class StorageAttributeGuard {
   public static void directory(Map<String, Object> attributes, StorageIdentity identity)
       throws StorageIoException {
     requireOwnership(attributes, identity);
-    require(integer(attributes, "mode") == 040750);
+    require(integer(attributes, "mode") == 0x41e8);
     require(integer(attributes, "nlink") >= 1);
   }
 
@@ -69,7 +69,7 @@ public final class StorageAttributeGuard {
   private static void requireRegularFile(Map<String, Object> attributes, StorageIdentity identity)
       throws StorageIoException {
     requireOwnership(attributes, identity);
-    require(integer(attributes, "mode") == 0100640);
+    require(integer(attributes, "mode") == 0x81a0);
     require(integer(attributes, "nlink") == 1);
   }
 

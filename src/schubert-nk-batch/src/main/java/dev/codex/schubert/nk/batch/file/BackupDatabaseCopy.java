@@ -114,7 +114,7 @@ public final class BackupDatabaseCopy {
   private Metadata capture(Path held, boolean directory) throws IOException {
     guard();
     Metadata m = EnvironmentInodePolicy.metadata(io.attributes(held));
-    require(m.mode() == (directory ? 040700 : 0100600) && m.uid() == uid && m.gid() == gid);
+    require(m.mode() == (directory ? 0x41c0 : 0x8180) && m.uid() == uid && m.gid() == gid);
     if (directory) require(m.links() >= 2 && m.size() >= 0);
     else require(m.links() == 1 && m.size() >= 0 && m.size() <= 65536);
     byte[] acl = security.accessAcl(held, 44);

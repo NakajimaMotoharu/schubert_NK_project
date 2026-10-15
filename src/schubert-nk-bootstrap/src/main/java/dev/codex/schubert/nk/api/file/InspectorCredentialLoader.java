@@ -215,7 +215,7 @@ public final class InspectorCredentialLoader {
 
   private Snapshot directory(Path held) throws IOException {
     Metadata metadata = metadata(io.attributes(held));
-    require((metadata.mode() & 0170000) == 040000);
+    require((metadata.mode() & 0xf000) == 0x4000);
     boolean readonly = security.readOnlyFilesystem(held);
     policy.requireDirectory(
         metadata.mode(), metadata.uid(), metadata.links(), readonly, security.accessAcl(held, 44));
@@ -225,7 +225,7 @@ public final class InspectorCredentialLoader {
   private Snapshot file(Path held, boolean database) throws IOException {
     Metadata metadata = metadata(io.attributes(held));
     // Must precede native path-following getxattr/statvfs and any content open on O_PATH symlinks.
-    require((metadata.mode() & 0170000) == 0100000);
+    require((metadata.mode() & 0xf000) == 0x8000);
     boolean readonly = security.readOnlyFilesystem(held);
     if (database)
       policy.requireDatabaseFile(

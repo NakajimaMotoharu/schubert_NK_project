@@ -104,7 +104,7 @@ final class FixedUnitCgroupNamespace {
         || !(values.get("dev") instanceof Long device)
         || !(values.get("ino") instanceof Long inode))
       throw new IOException("maintenance cgroup namespace unavailable");
-    require((mode == 040555 || mode == 040755) && uid == 0 && gid == 0 && links >= 2 && size >= 0);
+    require((mode == 0x416d || mode == 0x41ed) && uid == 0 && gid == 0 && links >= 2 && size >= 0);
     require(device >= 0 && inode > 0);
     if (position > 0) require((position < 3 ? "sysfs" : "cgroup2").equals(io.filesystem(held)));
     require(security.accessAcl(held, 44).length == 0);
