@@ -203,12 +203,19 @@ final class RootServiceExecutableAdmissionTest {
     }
     for (String key : List.of("uid", "gid", "mode", "nlink", "dev", "ino", "size")) {
       var a = metadata(0100755);
-      a.put(
-          key,
-          Set.of("uid", "gid", "mode", "nlink").contains(key)
-              ? Integer.valueOf(1)
-              : Long.valueOf(0));
+      // BUG1312: a numeric conditional promotes Integer/Long to boxed Long before put.
+      Object invalid;
+      Class<?> expectedType;
+      if (Set.of("uid", "gid", "mode", "nlink").contains(key)) {
+        invalid = Integer.valueOf(1);
+        expectedType = Integer.class;
+      } else {
+        invalid = Long.valueOf(0);
+        expectedType = Long.class;
+      }
+      a.put(key, invalid);
       if (key.equals("nlink")) a.put(key, 2);
+      assertEquals(expectedType, a.get(key).getClass(), key);
       assertThrows(
           IOException.class,
           () ->
@@ -226,5 +233,108 @@ final class RootServiceExecutableAdmissionTest {
         () ->
             RootServiceExecutableAdmission.checkedAttributes(
                 HELD, 0100755, null, security(new byte[0])));
+  }
+
+  /** PT-ROOTELF-3678-002: Unix literals, not values computed by the subject. */
+  @Test
+  void typedValueBoundariesAreRejectedBeforeAclAndCorrectLimitsRemainAdmitted() throws Exception {
+    for (int mode : new int[] {040755, 0100755, 0120777}) {
+      for (var fault :
+          Map.<String, Object>of(
+                  "uid", 1, "gid", 1, "mode", 0100644, "dev", 0L, "ino", 0L, "size", -1L)
+              .entrySet()) {
+        var a = metadata(mode);
+        a.put(fault.getKey(), fault.getValue());
+        Class<?> expectedType =
+            Set.of("uid", "gid", "mode").contains(fault.getKey()) ? Integer.class : Long.class;
+        assertEquals(expectedType, a.get(fault.getKey()).getClass(), fault.getKey());
+        var calls = new java.util.concurrent.atomic.AtomicInteger();
+        assertThrows(
+            IOException.class,
+            () ->
+                RootServiceExecutableAdmission.checkedAttributes(
+                    HELD, mode, a, countingSecurity(calls, null)),
+            fault.getKey());
+        assertEquals(0, calls.get(), fault.getKey());
+      }
+      var links = metadata(mode);
+      links.put("nlink", mode == 040755 ? 1 : 2);
+      var calls = new java.util.concurrent.atomic.AtomicInteger();
+      assertThrows(
+          IOException.class,
+          () ->
+              RootServiceExecutableAdmission.checkedAttributes(
+                  HELD, mode, links, countingSecurity(calls, null)));
+      assertEquals(0, calls.get());
+      for (long size : mode == 0100755 ? new long[] {1, 8_388_608} : new long[] {0, 8_388_609}) {
+        var a = metadata(mode);
+        a.put("size", size);
+        if (mode == 040755) a.put("nlink", Integer.MAX_VALUE);
+        assertEquals(
+            a,
+            RootServiceExecutableAdmission.checkedAttributes(
+                HELD, mode, a, countingSecurity(calls, null)));
+      }
+      assertEquals(mode == 0120777 ? 0 : 2, calls.get());
+    }
+    for (long size : new long[] {0, 8_388_609, Long.MAX_VALUE}) {
+      var a = metadata(0100755);
+      a.put("size", size);
+      var calls = new java.util.concurrent.atomic.AtomicInteger();
+      assertThrows(
+          IOException.class,
+          () ->
+              RootServiceExecutableAdmission.checkedAttributes(
+                  HELD, 0100755, a, countingSecurity(calls, null)));
+      assertEquals(0, calls.get());
+    }
+  }
+
+  /** PT-ROOTELF-3678-003: IO identity and null boundary cannot produce admission. */
+  @Test
+  void aclFailureIdentityAndRequiredBoundaryValuesCannotBeAccepted() {
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var failure = new IOException("PUBLIC_ACL_UNAVAILABLE");
+    assertSame(
+        failure,
+        assertThrows(
+            IOException.class,
+            () ->
+                RootServiceExecutableAdmission.checkedAttributes(
+                    HELD, 0100755, metadata(0100755), countingSecurity(calls, failure))));
+    assertEquals(1, calls.get());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            RootServiceExecutableAdmission.checkedAttributes(
+                null, 0100755, metadata(0100755), countingSecurity(calls, null)));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            RootServiceExecutableAdmission.checkedAttributes(
+                HELD, 0100755, metadata(0100755), null));
+    assertEquals(1, calls.get());
+  }
+
+  private static InodeSecurityCalls countingSecurity(
+      java.util.concurrent.atomic.AtomicInteger calls,
+      @org.jspecify.annotations.Nullable IOException failure) {
+    return new InodeSecurityCalls() {
+      public byte[] accessAcl(Path path, int maximum) throws IOException {
+        assertEquals(HELD, path);
+        assertEquals(44, maximum);
+        calls.incrementAndGet();
+        if (failure != null) throw failure;
+        return new byte[0];
+      }
+
+      public boolean readOnlyFilesystem(Path path) {
+        throw new AssertionError("not an executable inode fact");
+      }
+
+      public long effectiveUid() {
+        throw new AssertionError("not used by the typed metadata boundary");
+      }
+    };
   }
 }
