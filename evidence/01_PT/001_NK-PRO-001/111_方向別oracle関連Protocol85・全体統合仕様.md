@@ -1,0 +1,21 @@
+# 方向別oracle関連Protocol85・全体統合仕様
+
+2026-10-15、109/110、BUG1285/1288・YKT1051/1054。
+
+## 実関連85の結果
+
+PG3298/exec68304 actual0、snapshot3c2ec4ce5e399ea534407950453a9e7ecea6676c、09:11:26.000752～09:11:47.855574Z。Protocol85PT/17suite/174Main/format・compile・static0/FES-flaky-notrun0、全Main/resource member同byte。実Maven command/環境/原XML/hashは私有pg3298-directional-protocol-regression-v1へ保存。
+
+PG3300/exec79646 actual0、独立原manifest SHA40bd42a69628e5f134e2d7db17df411424db2f25c49ae534a52d8f01c2ac82ea、server独立SHA14c580bba801eebb3fc38ff3e028738c49bde4356914d1885ed96fa6ef4b8bf3。元Maven0/元wrapper0・全17XMLの85unique case・新all69 Test存在・固定archive全input・元static/coverage/XML hash・全Jar memberを別RO照合。Module四counterはLINE3464/METHOD741/CLASS157/BRANCH1010すべてmiss0、physicalMain174とは別単位。全69方向別caseはJUnit一methodとして数え、内部295項目・79任意・null subcaseを試験数へ水増し0。
+
+原log SHA38e30c2ca42934f641b87f1fd47acbd22cb55a411e95c22d7668e49ee71d3672、coverageXML09442eae2d1fff8b85d446dd0ded8d766ac7e234bce8870c3145148daa3cd248、staticXMLadd0f8f10d3f9127fdb94bcb7e85ddbd09dc7c0ccd70087046119d4286569bea。外Jar SHA761c3bf6…はbuild timestamp等で異なり得るが全memberは実同値検査済み。元全3701/native28は旧Test集合のまま保持し、新85の全体結果へ加算しない。
+
+## 必要一全体統合（開始前仕様）
+
+- PG3302一回：既全3701固定010f631baとの差は、P09 oracle一file・PayloadTypeCatalogTest新一method・独立helper一file・手書きaccessor fixture一fileのexact四path。全Main/設定/Production resource/他Test不変更を固定sourceで検査する。新四pathは当実85のsnapshotと完全byte一致を要求する。
+- 新全体期待3702PT/542suite/1643Main。Protocol85、Storage163、Bootstrap298、API969、Web888、Batch1299。全六format first/静的0/FES-flaky-notrun0。関連85と旧3701を算術加算した認定ではなく、fresh全XMLを数える。
+- PG3302真正終端/source/exit後だけPG3304独立全source/XML/hash/static/全class-debug差分を検証、その後PG3306は保存済みsealed28 streamの全Main1643/resource79/debug物理同byte・CRC/session資格を新hostへ再認証。旧negative compile3694のprovenanceは改名せず保存し、異source/外国stream/不正summaryを拒否する。
+- SHA literalに旧数字3701が含まれてもhead/archiveを変換しないAST literal rebase・正常namespace・Protocol85/Batch1299・native28旧compile provenanceを純三で検査。reserved c/d placeholderをそのまま実headへ渡す内部TDDは発行前guardで拒否されたので、異なる有効hexで試験した。remote/full発行なしの初期工具診断であり実Production障害ではない。
+- 全native再資格は読取・既stream検証であり、新採取/VM/署名/配備/Root/Browser/ownedstop/runtime退役を発行0。旧集計603L115M0C470Bを新runの実結果が出る前に変更しない。新oracleはcounter閉鎖済みprotocolの検出力改善であり、counter減少は推定しない。
+
+実command=`python3 -B tools/quality/pg3302_directional_group_full_six.py`→`pg3304_directional_group_full_qualified.py`→`pg3306_directional_group_native_rejoin.py`、各PYTHONPATHは110と同じ。K01.01着手前見積りevent0850 .25/.75/2pp、是正群0847/0848と別で二重計上0。全三stageの実終端までBUG1285/1288/YKT1051/1054及びP001-03/P002-02は未認定。正式1964/53・工数null/QA051final保留不変。
