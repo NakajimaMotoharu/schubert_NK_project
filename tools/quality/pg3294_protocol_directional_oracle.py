@@ -57,6 +57,14 @@ def fixed_jdk(homes, base):
     return expected
 
 
+def launcher_path(engines, repo):
+    require(len(engines) == 1, 'one actual JUnit platform engine required')
+    engine = Path(engines[0]); version = engine.parent.name
+    require(engine.is_relative_to(repo) and version
+            and engine.name == 'junit-platform-engine-' + version + '.jar', 'exact repo engine version required')
+    return Path(repo) / 'org/junit/platform/junit-platform-launcher' / version / ('junit-platform-launcher-' + version + '.jar')
+
+
 SERVER = r'''
 import datetime,hashlib,json,os,subprocess,xml.etree.ElementTree as ET
 from pathlib import Path
@@ -69,7 +77,14 @@ require(sha(jar)==INPUT['jarSha256'],'immutable qualified protocol jar required'
 for name,digest in INPUT['files'].items():require(sha(I/name)==digest,'fixed transferred source required')
 x=ET.parse(T/'surefire-reports/TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml').getroot()
 props=[p.get('value')for p in x.findall('properties/property')if p.get('name')=='java.class.path'];require(len(props)==1,'exact existing actual classpath required')
-libs=[Path(p)for p in props[0].split(os.pathsep)if p.endswith('.jar')and Path(p).is_file()and Path(p)!=jar]
+repo=B/'m2/repository';libs=[]
+for entry in props[0].split(os.pathsep):
+ p=Path(entry)
+ if p.suffix=='.jar'and p!=jar:
+  require(p.is_file()and p.resolve().is_relative_to(repo.resolve()),'qualified repo library file required');libs.append(p)
+launcher=launcher_path([p for p in libs if p.name.startswith('junit-platform-engine-')],repo)
+require(launcher.is_file()and launcher.resolve().is_relative_to(repo.resolve()),'same-version qualified standalone launcher required')
+if launcher not in libs:libs.append(launcher)
 hashes={str(p):sha(p)for p in libs};require(libs,'real qualified libraries required')
 cp=os.pathsep.join([str(jar),str(T/'test-classes'),*map(str,libs)])
 homes=[p.get('value')for p in x.findall('properties/property')if p.get('name')=='java.home'];jdk=fixed_jdk(homes,B)
@@ -109,11 +124,11 @@ def main(phase):
     require(not subprocess.check_output(['git', 'diff', SOURCE, 'HEAD', '--', *FILES[2:4]], cwd=ROOT), 'real Production unchanged required')
     full = json.loads((W / 'pg3276-header-group-full-qualified-v1/manifest.safe.json').read_bytes())
     require(full['actualExit'] == 0 and full['result']['productionSource'] == SOURCE and full['result']['tests'] == 3701, 'completed actual3701 required')
-    slot = 'PG3294-directional-oracle-' + phase + '-v2'
+    slot = 'PG3294-directional-oracle-' + phase + '-v3'
     data = {'source': SOURCE, 'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
             'slot': slot, 'phase': phase, 'jarSha256': full['result']['jarHashes']['protocol'],
             'files': {Path(p).name: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in FILES}}
-    raw = 'INPUT=' + repr(data) + '\n' + '\n'.join(inspect.getsource(f) for f in [require, swap_once, mutate_dto, mutate_bytes, fixed_jdk]) + '\n' + SERVER
+    raw = 'INPUT=' + repr(data) + '\n' + '\n'.join(inspect.getsource(f) for f in [require, swap_once, mutate_dto, mutate_bytes, fixed_jdk, launcher_path]) + '\n' + SERVER
     compile(raw, '<private protocol oracle counterexamples>', 'exec')
     os.umask(0o077); out = W / slot.lower(); out.mkdir(mode=0o700)
     script = out / 'oracle.private.py'; script.write_text(raw)

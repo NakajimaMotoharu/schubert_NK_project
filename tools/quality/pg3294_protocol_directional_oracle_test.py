@@ -21,7 +21,7 @@ class DirectionalOracleToolTest(unittest.TestCase):
         self.assertEqual(original, path.read_text())
         with self.assertRaises(ValueError):
             subject.mutate_bytes('missing anchor')
-        code = 'INPUT={}\n' + '\n'.join(inspect.getsource(f) for f in [subject.require, subject.swap_once, subject.mutate_dto, subject.mutate_bytes, subject.fixed_jdk]) + '\n' + subject.SERVER
+        code = 'INPUT={}\n' + '\n'.join(inspect.getsource(f) for f in [subject.require, subject.swap_once, subject.mutate_dto, subject.mutate_bytes, subject.fixed_jdk, subject.launcher_path]) + '\n' + subject.SERVER
         compile(code, '<fixed two independent oracles>', 'exec')
         self.assertNotIn('javaagent', code)
 
@@ -34,6 +34,14 @@ class DirectionalOracleToolTest(unittest.TestCase):
                 subject.fixed_jdk(homes, base)
         for name in ['JAVA_TOOL_OPTIONS', 'JDK_JAVA_OPTIONS', '_JAVA_OPTIONS']:
             self.assertIn(name, subject.SERVER)
+
+    def test_exact_same_engine_version_launcher_not_application_classpath_guess(self):
+        repo = subject.Path('/qualified/m2')
+        engine = repo / 'org/junit/platform/junit-platform-engine/1.2.3/junit-platform-engine-1.2.3.jar'
+        self.assertEqual(repo / 'org/junit/platform/junit-platform-launcher/1.2.3/junit-platform-launcher-1.2.3.jar', subject.launcher_path([engine], repo))
+        for engines in [[], [engine, engine], [subject.Path('/foreign/1.2.3/junit-platform-engine-1.2.3.jar')], [engine.with_name('junit-platform-engine-9.9.jar')]]:
+            with self.subTest(engines=engines), self.assertRaises(ValueError):
+                subject.launcher_path(engines, repo)
 
 
 if __name__ == '__main__':
