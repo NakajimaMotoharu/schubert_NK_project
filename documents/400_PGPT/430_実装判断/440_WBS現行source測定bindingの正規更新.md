@@ -18,4 +18,6 @@ Main/外部仕様/RD/UI/SS/DIF/QA051/正式1964-53/品質/モデルは変更し�
 
 PG3280工具は準備/適用を分離し、原input/manifest/hash・旧485/486 byteを私有保全、公開証拠とsource binding更新を意味ある単位でcommit/pushする。新生成証拠を固定してからsource更新を適用し、既存dirty/他の更新があればhash不一致で拒否する。Bulk JSON更新では対象root field/190rowだけを機械更新し、他current observation/旧比較/費用を保持する。公開pathはrepo相対をROOT基準で解決して再現可能にし、旧private絶対path bindingも履歴検証に維持する。
 
-状態=設計・着手見積り保存済み、実source binding更新/受入は未実施。stage見積.25/.75/2ppは既G13.07 .72/2/4.5の内数で追加leaf/予算加算ではない。共有枠/実token/PGPTとPMOの配賦は不明値nullのまま、元/v3予測を消さない。
+実施=018/881、PG3280/3282で元hash付き六XMLのtechnical IDだけを秘匿化し、仮候補/実適用の前後audit全PASSでglobal測定sourceをa9へ更新した。受入0→0、全941artifact差0、scope/原-v3/工数null/正式不変更。元969d8/PG540 binding/190row分類/overrideはhistoryと私有原byteで保持。Runtimeは当a9八項目の原source/flags/hashを個別再接続し現在live権限0、未接続N13と旧CHR-A01は履歴再照合へ分離。詳細な分類差は881、各leafの受入は別監査として継続。
+
+BUG1282/YKT1048は、native要約の四counter＋資格metadataと元XML六counterの違いを分離する修正を先行起票後に実施、純22/実六/候補・適用後auditで有限scope完了。counter等の改変・除外・条件緩和0、旧失敗/partialは同hash再利用し盲目的再発行0。stage見積.25/.75/2ppは既G13.07 .72/2/4.5の内数で追加leaf/予算加算ではない。共有枠/実token/PGPTとPMOの配賦は不明値nullのまま、元/v3予測を消さない。
