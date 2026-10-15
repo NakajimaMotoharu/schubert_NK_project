@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.PosixFilePermission;
@@ -106,7 +107,9 @@ class StorageRootInspectionTest {
     Path[] roots = roots();
     StorageIdentity identity = identity(roots[0]);
     inspect(roots, identity, identity, identity);
+    int directoryDescriptorsBefore = directoryDescriptors(temporary);
     assertEquals(6, Files.list(temporary).count());
+    assertEquals(directoryDescriptorsBefore, directoryDescriptors(temporary));
 
     Files.setPosixFilePermissions(roots[0], permissions("rwxrwx---"));
     unavailable(roots, identity, identity, identity);
@@ -153,6 +156,21 @@ class StorageRootInspectionTest {
           roots[index], permissions(index == 2 ? "rwx------" : "rwxr-x---"));
     }
     return roots;
+  }
+
+  // BUG1289: procfs observes the test fixture's OS handles independently of the list stream.
+  private static int directoryDescriptors(Path directory) throws Exception {
+    int count = 0;
+    try (DirectoryStream<Path> descriptors = Files.newDirectoryStream(Path.of("/proc/self/fd"))) {
+      for (Path descriptor : descriptors) {
+        try {
+          if (Files.readSymbolicLink(descriptor).equals(directory)) count++;
+        } catch (NoSuchFileException gone) {
+          // Another unrelated descriptor may close during the snapshot; it is not this inode.
+        }
+      }
+    }
+    return count;
   }
 
   private static StorageIdentity identity(Path root) throws Exception {
