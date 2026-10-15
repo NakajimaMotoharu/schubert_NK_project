@@ -14,7 +14,7 @@ Checkstyle14.3.0/原Jar SHA754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd9
 
 PG3694 stage/applyは214fileのorig/new hash、regular sourceだけのarchive、git apply --check、intent/fsync、適用後全849のexact matchでactual0。Main commit5224dd641、Currentbaseline/fixture/70再現生成artifact/上位設計/規則/generatorは非変更。元raw失敗/成功/原本を保持し、VM配備・起動・DB更新なし。
 
-PMD7.28.0は同固定全category/priority・Java25 record修正overlayを維持して新candidate実849byteを一回解析、PG3696 PMDexit4/raw2217/processingErrors0、全23rule件数は元3422と同一。旧current3856のtyped auxは全binding同一の**限定静的解析用**で、新Main build/nativeの代用ではない。
+PMD7.28.0は同固定全category/priority・Java25 record修正overlayを維持して新candidate実849byteを一回解析、PG3696 PMDexit4/raw2217/processingErrors0、全23rule件数は元3422と同一。旧current4856のtyped auxは全binding同一の**限定静的解析用**で、新Main build/nativeの代用ではない。
 
 BUG1315：Git誤pathspecで元3696のsource欄空、診断内容を消さず資格未完とした。先行62ca3978c→修正1c236cf9e、三Git箇所/独立temp repoで管理・Testの新HEADとMain identityを区別、空scope拒否。PG3700別read-only actual0で元payload/全849実入力/元snapshot1dc31941b/候補5224 Git全blob/現在byte/report ecd378617cdef6513246b475ee5f343c1f97a26e132731832490445b86123515を結合、元空sourceは保持。PMDを再実行していない。回収manifest fcb7c465e7a21fdb5ea83cc6e916e4b43c668d0753f4414eaf2d176e03a8d169。
 
