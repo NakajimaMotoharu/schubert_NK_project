@@ -1,0 +1,38 @@
+{
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "run": "pg3346-large-result-oracle-after-v1",
+  "actualDiagnosticExit": 0,
+  "payloadSha256": "df42e73dc07d472101fd752aea49254da681d85109b4c3a3dbf95fd1aa6a18fc",
+  "testSource": "6bb4473fc7a9a862250932e6b4ae35a553d155d5",
+  "startUTC": "2026-10-15T11:18:14.982972+00:00",
+  "endUTC": "2026-10-15T11:18:18.566361+00:00",
+  "vectors": {
+    "LOWERED_MAXIMUM": {
+      "actualExit": 1,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": true,
+      "selector": "largeResultMaximum",
+      "testLogSha256": "99eff4d656d66dd3aa9bd1da16c9066a557a3ac8839827dbafe07c2be92bdbef"
+    },
+    "NORMAL_MAXIMUM": {
+      "actualExit": 0,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": false,
+      "selector": "largeResultMaximum",
+      "testLogSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad"
+    }
+  },
+  "falseNegatives": 0,
+  "mutationsRejected": 1,
+  "fixedInputs": {
+    "LargeResultRecordCodecTest.java": "2b91af4850a098efa6f74466655a702fd750b8bd1cff30e2001aacae981bdcf1",
+    "LargeResultDescriptor.java": "53fd3e59f2044003e86758bce74972798fb375fdb9755defc4feaa9a2b796891",
+    "ExecOracleCanaryLauncher.java": "8c547336c1133a7515f981b941f45c733e7704f8cd6b2d8d63a5b316f9b1d083"
+  },
+  "productionChanged": false,
+  "vmActions": 0,
+  "newPtCredit": 0,
+  "coverageCredit": 0,
+  "formalUpdated": false,
+  "relatedAndWholeQualificationPending": true
+}

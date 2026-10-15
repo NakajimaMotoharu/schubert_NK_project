@@ -1,0 +1,45 @@
+{
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "run": "pg3340-exec-oracle-after-v1",
+  "actualDiagnosticExit": 0,
+  "payloadSha256": "0c02b2e30531cc8f06530b09a4df1f0a6c0a67d0f9a8930290e018be5bb63a25",
+  "testSource": "6bb4473fc7a9a862250932e6b4ae35a553d155d5",
+  "startUTC": "2026-10-15T11:18:14.981068+00:00",
+  "endUTC": "2026-10-15T11:18:19.819041+00:00",
+  "vectors": {
+    "COMMON_WRONG_CONCURRENT": {
+      "actualExit": 1,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": true,
+      "selector": "opsExec007ConcurrentInputsRemainIndependent",
+      "testLogSha256": "783efe20cb479efa41d917204415a58d0255072cfb15d5a80e99606f30e59b24"
+    },
+    "NORMAL_CONCURRENT": {
+      "actualExit": 0,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": false,
+      "selector": "opsExec007ConcurrentInputsRemainIndependent",
+      "testLogSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad"
+    },
+    "NORMAL_LITERAL": {
+      "actualExit": 0,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": false,
+      "selector": "opsExec001LiteralVectorsAndArenaLifetime",
+      "testLogSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad"
+    }
+  },
+  "falseNegatives": 0,
+  "mutationsRejected": 1,
+  "fixedInputs": {
+    "LinuxProcessExecTest.java": "04f0673b9d95f7c125d2ee46d798f51d2956d15cab02c5432e328f0e61f181a2",
+    "LinuxProcessExec.java": "8ce39858d2cf718545dc16ded069bfe71ff82f193c19137b7d512c157600bc62",
+    "ExecOracleCanaryLauncher.java": "8c547336c1133a7515f981b941f45c733e7704f8cd6b2d8d63a5b316f9b1d083"
+  },
+  "productionChanged": false,
+  "vmActions": 0,
+  "newPtCredit": 0,
+  "coverageCredit": 0,
+  "formalUpdated": false,
+  "relatedAndWholeQualificationPending": true
+}
