@@ -294,7 +294,7 @@ final class RootServiceExecutableAdmissionTest {
   @Test
   void aclFailureIdentityAndRequiredBoundaryValuesCannotBeAccepted() {
     var calls = new java.util.concurrent.atomic.AtomicInteger();
-    var failure = new IOException("PUBLIC_ACL_UNAVAILABLE");
+    var failure = new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     assertSame(
         failure,
         assertThrows(
@@ -318,9 +318,9 @@ final class RootServiceExecutableAdmissionTest {
 
   private static InodeSecurityCalls countingSecurity(
       java.util.concurrent.atomic.AtomicInteger calls,
-      @org.jspecify.annotations.Nullable IOException failure) {
+      @org.jspecify.annotations.Nullable StorageIoException failure) {
     return new InodeSecurityCalls() {
-      public byte[] accessAcl(Path path, int maximum) throws IOException {
+      public byte[] accessAcl(Path path, int maximum) throws StorageIoException {
         assertEquals(HELD, path);
         assertEquals(44, maximum);
         calls.incrementAndGet();

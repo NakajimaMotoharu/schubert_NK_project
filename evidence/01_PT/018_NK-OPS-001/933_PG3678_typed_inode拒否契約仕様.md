@@ -6,4 +6,4 @@ Program NK-OPS-001、RootServiceExecutableAdmission.checkedAttributes・RootServ
 
 型・値不正はACL取得前拒否、symlinkはACL呼出し0、正当file/directoryは一回/引数44を別counterで確認。元型不正反例も残す。関連固定snapshot Mavenで実Test ID/XML/FES0/format/lint/NullAway/SpotBugsと当method branchを評価する。coverage未達は未達で記録し、人工reflection/除外なし。残5匿名classは実Root/nativeが必要な旧entryであり、coverage目的だけの新業務起動は行わない。まず意味あるhost boundary群を進め、必要な同Main全回帰とnative再資格は群をまとめて実施する。
 
-費用は487 group開始値を参照、今回群subset低0.3/標準1/高3共有pp、主担当N15.02（Root admission）、参照F03/関連N費0。accepted加点未定/自動0、工数率null。実command/対象snapshot/終了code/coverage/証跡hashは結果934へ追記。
+費用は487 group開始値を参照、今回群subset低0.3/標準1/高3共有pp。485でRootServiceExecutableAdmissionの主担当は**P018-03**であり、初期group event0937のN15.02表記はnative採取責務との混同だった。後続eventで担当だけを訂正し、同群費用を二重計上しない。N15.02/F03は参照費0、実配賦null。accepted加点未定/自動0、工数率null。実command/対象snapshot/終了code/coverage/証跡hashは結果934へ追記。
