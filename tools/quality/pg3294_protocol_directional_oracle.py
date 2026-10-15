@@ -50,6 +50,13 @@ def mutate_bytes(raw):
     return raw.replace(anchor, "if (data.length > 0) data[0] = (byte) 'X';\n    " + anchor)
 
 
+def fixed_jdk(homes, base):
+    require(len(homes) == 1 and isinstance(homes[0], str), 'one original java.home required')
+    expected = Path(base) / 'tools/jdk-25.0.4/bin'
+    require(Path(homes[0]) / 'bin' == expected, 'exact previously qualified server JDK required')
+    return expected
+
+
 SERVER = r'''
 import datetime,hashlib,json,os,subprocess,xml.etree.ElementTree as ET
 from pathlib import Path
@@ -65,7 +72,11 @@ props=[p.get('value')for p in x.findall('properties/property')if p.get('name')==
 libs=[Path(p)for p in props[0].split(os.pathsep)if p.endswith('.jar')and Path(p).is_file()and Path(p)!=jar]
 hashes={str(p):sha(p)for p in libs};require(libs,'real qualified libraries required')
 cp=os.pathsep.join([str(jar),str(T/'test-classes'),*map(str,libs)])
-jdk=B/'toolchain/jdk-25.0.4/bin';env=os.environ.copy();env['JAVA_HOME']=str(jdk.parent);env['TZ']='Asia/Tokyo';env.pop('JAVA_TOOL_OPTIONS',None);env.pop('JDK_JAVA_OPTIONS',None)
+homes=[p.get('value')for p in x.findall('properties/property')if p.get('name')=='java.home'];jdk=fixed_jdk(homes,B)
+require((jdk/'javac').is_file()and(jdk/'java').is_file(),'real compiler/runtime files required')
+env={k:v for k,v in os.environ.items()if k not in ['JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS']};env['JAVA_HOME']=str(jdk.parent);env['TZ']='Asia/Tokyo'
+version=subprocess.run([str(jdk/'java'),'--version'],env=env,capture_output=True,timeout=20)
+require(version.returncode==0 and b'25.0.4'in version.stdout,'actual qualified Java25.0.4 required')
 type_selector='layout.PayloadTypeCatalogTest#'+('allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes'if INPUT['phase']=='before'else'namedLoginFieldsHaveIndependentDirectionalMeaning')
 parallel='codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse'
 vectors=[('NORMAL_TYPE',type_selector,None,None),('DTO_RECIPROCAL_SWAP',type_selector,'LoginRequestData',mutate_dto),('NORMAL_CONCURRENT',parallel,None,None),('STABLE_WRONG_BYTES',parallel,'PayloadCodec',mutate_bytes)]
@@ -98,11 +109,11 @@ def main(phase):
     require(not subprocess.check_output(['git', 'diff', SOURCE, 'HEAD', '--', *FILES[2:4]], cwd=ROOT), 'real Production unchanged required')
     full = json.loads((W / 'pg3276-header-group-full-qualified-v1/manifest.safe.json').read_bytes())
     require(full['actualExit'] == 0 and full['result']['productionSource'] == SOURCE and full['result']['tests'] == 3701, 'completed actual3701 required')
-    slot = 'PG3294-directional-oracle-' + phase + '-v1'
+    slot = 'PG3294-directional-oracle-' + phase + '-v2'
     data = {'source': SOURCE, 'head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
             'slot': slot, 'phase': phase, 'jarSha256': full['result']['jarHashes']['protocol'],
             'files': {Path(p).name: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in FILES}}
-    raw = 'INPUT=' + repr(data) + '\n' + '\n'.join(inspect.getsource(f) for f in [require, swap_once, mutate_dto, mutate_bytes]) + '\n' + SERVER
+    raw = 'INPUT=' + repr(data) + '\n' + '\n'.join(inspect.getsource(f) for f in [require, swap_once, mutate_dto, mutate_bytes, fixed_jdk]) + '\n' + SERVER
     compile(raw, '<private protocol oracle counterexamples>', 'exec')
     os.umask(0o077); out = W / slot.lower(); out.mkdir(mode=0o700)
     script = out / 'oracle.private.py'; script.write_text(raw)

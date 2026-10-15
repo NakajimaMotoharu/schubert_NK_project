@@ -21,9 +21,19 @@ class DirectionalOracleToolTest(unittest.TestCase):
         self.assertEqual(original, path.read_text())
         with self.assertRaises(ValueError):
             subject.mutate_bytes('missing anchor')
-        code = 'INPUT={}\n' + '\n'.join(inspect.getsource(f) for f in [subject.require, subject.swap_once, subject.mutate_dto, subject.mutate_bytes]) + '\n' + subject.SERVER
+        code = 'INPUT={}\n' + '\n'.join(inspect.getsource(f) for f in [subject.require, subject.swap_once, subject.mutate_dto, subject.mutate_bytes, subject.fixed_jdk]) + '\n' + subject.SERVER
         compile(code, '<fixed two independent oracles>', 'exec')
         self.assertNotIn('javaagent', code)
+
+    def test_server_jdk_is_bound_to_original_actual_java_home(self):
+        base = subject.Path('/home/mini/schubert-nk-pgpt')
+        home = str(base / 'tools/jdk-25.0.4')
+        self.assertEqual(base / 'tools/jdk-25.0.4/bin', subject.fixed_jdk([home], base))
+        for homes in [[], [home, home], [str(base / 'toolchain/jdk-25.0.4')], ['/foreign/jdk'], [None]]:
+            with self.subTest(homes=homes), self.assertRaises(ValueError):
+                subject.fixed_jdk(homes, base)
+        for name in ['JAVA_TOOL_OPTIONS', 'JDK_JAVA_OPTIONS', '_JAVA_OPTIONS']:
+            self.assertIn(name, subject.SERVER)
 
 
 if __name__ == '__main__':
