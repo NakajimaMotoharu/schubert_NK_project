@@ -22,6 +22,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class PayloadTypeCatalogTest {
+  @Test
+  void allNamedTypesHaveIndependentDirectionalFieldMeaning() throws Exception {
+    IndependentNamedFieldOracle.verifyAll();
+  }
+
   private static final Set<String> N12_ID_FIELDS =
       Set.of(
           "Async job ID",

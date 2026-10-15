@@ -129,7 +129,13 @@ class PayloadGoldenVectorTest {
     LayoutFields layout = LayoutFieldCatalog.standard().require("LGNREQ01");
     PayloadValues values =
         new PayloadValues(layout.id(), boundaryValues(layout.dataFields(), false), List.of());
-    byte[] expected = codec.encode(values, false).copyData();
+    // BUG1285/YKT1051: UI234 LGNREQ01: Username 1/64, Password 65/256,
+    // Client address 321/45, Reserved 366/19. Never encode expected with codec.
+    byte[] expected = new byte[384];
+    java.util.Arrays.fill(expected, (byte) ' ');
+    expected[0] = 'A';
+    expected[64] = 'A';
+    expected[320] = 'A';
     CountDownLatch ready = new CountDownLatch(8);
     CountDownLatch start = new CountDownLatch(1);
     try (var executor = Executors.newFixedThreadPool(8)) {

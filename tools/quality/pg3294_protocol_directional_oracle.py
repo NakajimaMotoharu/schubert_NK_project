@@ -18,7 +18,9 @@ FILES = [PREFIX + 'test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCa
          PREFIX + 'test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java',
          PREFIX + 'main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java',
          PREFIX + 'main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java',
-         'tools/quality/vm/050_s1/ProtocolOracleCanaryLauncher.java']
+         'tools/quality/vm/050_s1/ProtocolOracleCanaryLauncher.java',
+         PREFIX + 'test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java',
+         PREFIX + 'test/resources/protocol/named-accessors-independent.tsv']
 
 
 def require(condition, message):
@@ -66,7 +68,7 @@ def launcher_path(engines, repo):
 
 
 SERVER = r'''
-import datetime,hashlib,json,os,subprocess,xml.etree.ElementTree as ET
+import datetime,hashlib,json,os,shutil,subprocess,xml.etree.ElementTree as ET
 from pathlib import Path
 os.umask(0o077)
 B=Path('/home/mini/schubert-nk-pgpt');S=B/'source-full-PG3274';T=S/'src/schubert-nk-protocol/target';I=B/'transfer'/INPUT['slot'];O=B/'runs'/INPUT['slot']
@@ -92,18 +94,19 @@ require((jdk/'javac').is_file()and(jdk/'java').is_file(),'real compiler/runtime 
 env={k:v for k,v in os.environ.items()if k not in ['JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS']};env['JAVA_HOME']=str(jdk.parent);env['TZ']='Asia/Tokyo'
 version=subprocess.run([str(jdk/'java'),'--version'],env=env,capture_output=True,timeout=20)
 require(version.returncode==0 and b'25.0.4'in version.stdout,'actual qualified Java25.0.4 required')
-type_selector='layout.PayloadTypeCatalogTest#'+('allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes'if INPUT['phase']=='before'else'namedLoginFieldsHaveIndependentDirectionalMeaning')
+type_selector='layout.PayloadTypeCatalogTest#'+('allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes'if INPUT['phase']=='before'else'allNamedTypesHaveIndependentDirectionalFieldMeaning')
 parallel='codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse'
 vectors=[('NORMAL_TYPE',type_selector,None,None),('DTO_RECIPROCAL_SWAP',type_selector,'LoginRequestData',mutate_dto),('NORMAL_CONCURRENT',parallel,None,None),('STABLE_WRONG_BYTES',parallel,'PayloadCodec',mutate_bytes)]
 results={}
 for label,selector,name,mutator in vectors:
  case=O/label;case.mkdir(mode=0o700);classes=case/'classes';classes.mkdir(mode=0o700)
- files=[I/'PayloadTypeCatalogTest.java',I/'PayloadGoldenVectorTest.java',I/'ProtocolOracleCanaryLauncher.java']
+ resources=case/'resources/protocol';resources.mkdir(parents=True,mode=0o700);shutil.copyfile(I/'named-accessors-independent.tsv',resources/'named-accessors-independent.tsv')
+ files=[I/'PayloadTypeCatalogTest.java',I/'PayloadGoldenVectorTest.java',I/'ProtocolOracleCanaryLauncher.java',I/'IndependentNamedFieldOracle.java']
  if name:
   shadow=case/(name+'.java');shadow.write_text(mutator((I/(name+'.java')).read_text()));files.insert(0,shadow)
  c=subprocess.run([str(jdk/'javac'),'-Xlint:all','-Werror','-cp',cp,'-d',str(classes),*map(str,files)],env=env,capture_output=True,timeout=45)
  (case/'compile.private.log').write_bytes(c.stdout+c.stderr);require(c.returncode==0 and not c.stderr,'clean actual compiler required')
- r=subprocess.run([str(jdk/'java'),'-cp',str(classes)+os.pathsep+cp,'ProtocolOracleCanaryLauncher',selector],env=env,capture_output=True,timeout=45)
+ r=subprocess.run([str(jdk/'java'),'-cp',os.pathsep.join([str(classes),str(resources.parent),cp]),'ProtocolOracleCanaryLauncher',selector],env=env,capture_output=True,timeout=45)
  (case/'test.private.log').write_bytes(r.stdout+r.stderr)
  reject=INPUT['phase']=='after'and name is not None
  require(r.returncode==(1 if reject else 0),'actual JUnit counterexample result required')

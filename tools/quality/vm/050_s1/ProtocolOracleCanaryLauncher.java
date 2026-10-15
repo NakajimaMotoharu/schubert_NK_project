@@ -13,7 +13,7 @@ public final class ProtocolOracleCanaryLauncher {
         || arguments.length != 1
         || !Set.of(
                 "layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
-                "layout.PayloadTypeCatalogTest#namedLoginFieldsHaveIndependentDirectionalMeaning",
+                "layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning",
                 "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse")
             .contains(arguments[0]))
       throw new IllegalArgumentException("fixed protocol oracle selector required");
