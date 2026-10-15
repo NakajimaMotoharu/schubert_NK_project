@@ -224,12 +224,14 @@ class Bus:
 def traced_calls(raw):
     """Independent OS command oracle, including systemctl's PRIVATE bus path."""
     require('sa_family=AF_INET' not in raw)
+    require('sun_path="/run/systemd/private"' not in raw)
+    public_reads = raw.count('sun_path="/run/dbus/system_bus_socket"')
+    require(public_reads > 0)
     calls = [line for line in raw.splitlines() if 'execve("/usr/bin/systemctl"' in line]
-    require(bool(calls))
     for line in calls:
         require('"--system", "--no-pager", "--no-ask-password", "show", ' in line)
         require(not any('"' + verb + '"' in line for verb in ['start', 'stop', 'restart', 'try-restart', 'reload', 'kill', 'set-property']))
-    return len(calls)
+    return {'publicNativeReadConnects': public_reads, 'systemctlShowExecs': len(calls)}
 
 
 class Syscalls:
@@ -333,12 +335,13 @@ def execute():
                 require(all(path == str(APPROVAL) and not mask & (2 | 4 | 8 | 64 | 128 | 256 | 512 | 1024 | 2048) for path, mask in events))
                 methods = bus.barrier()
                 require(all(item['member'] in ['GetUnit', 'GetUnitByPID', 'Subscribe', 'Unsubscribe'] for item in methods))
-                systemctl_reads = tracer.verify()
+                syscall_reads = tracer.verify()
                 require(same_peer()['InvocationID'] == invocation and stable_bad() == before['bad'])
                 resource_closed(pid, before['tree']); require(tree() == before['tree'] and database() == before['database'])
                 item = {'testId': test_id, 'actualExit': 0, 'approvalAccessObserved': True, 'credentialReadEvents': 0,
                         'unsafeManagerCalls': 0, 'protectedFileDescriptorOrLock': 0, 'all24AndHistoryUnchanged': True,
-                        'publicBusOnly': True, 'actualSystemctlShowExecs': systemctl_reads, 'unsafeSystemctlExecs': 0,
+                        'publicBusOnly': True, 'actualSystemctlShowExecs': syscall_reads['systemctlShowExecs'], 'unsafeSystemctlExecs': 0,
+                        'actualPublicNativeReadConnects': syscall_reads['publicNativeReadConnects'], 'privateManagerConnects': 0,
                         'helperAllThreadAndDescendantSyscallTrace': True, 'inetConnects': 0,
                         'noAppDbClientOrAdvisory': True, 'samePeerInvocation': True, 'formalAccepted': False}
                 save(test_id + '.observer.safe.json', item); results.append(item); send('ACCESSED|' + test_id)

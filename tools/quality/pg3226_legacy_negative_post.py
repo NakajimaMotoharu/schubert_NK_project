@@ -13,6 +13,7 @@ import pg3216_legacy_negative_dispatch as transport
 from pg1446_current_cold_stage import W
 
 OUT = W / 'pg3226-legacy-negative-post-v1'
+EXECUTION_SLOT = 'pg3224-legacy-negative-v1'
 CODE = r'''
 import hashlib,io,json,os,stat,sys,tarfile,time
 from pathlib import Path
@@ -66,9 +67,9 @@ with tarfile.open(fileobj=sys.stdout.buffer,mode='w|')as tar:
 
 def main():
     os.umask(0o077); transport.owners()
-    proof = json.loads((W / 'pg3224-legacy-negative-v1/execute.safe.json').read_text())
+    proof = json.loads((W / EXECUTION_SLOT / 'execute.safe.json').read_text())
     if proof['actualExit'] != 0: raise ValueError('successful v3 observer terminal required')
-    stage = json.loads((W / 'pg3224-legacy-negative-v1/stage.safe.json').read_text())
+    stage = json.loads((W / EXECUTION_SLOT / 'stage.safe.json').read_text())
     raw = 'HASHES=' + repr(stage['hashes']) + '\n' + CODE
     if check(raw, '<complete independent v3 post and capsule>'): raise ValueError('complete post namespace required')
     OUT.mkdir(mode=0o700); (OUT / 'command.private.py').write_text(raw)
