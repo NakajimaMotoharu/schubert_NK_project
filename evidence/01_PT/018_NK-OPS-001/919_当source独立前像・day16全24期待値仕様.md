@@ -1,5 +1,7 @@
 # PG3470/3472/3474/3476 independent acceptance
 
+順序補足（920）：実A01は同Rootのlive ready窓に必要なため、terminal前から3482が同observer待機し、ready時だけ実行する。terminal後のrows/sealはA01の実HTTP/DB側作用を含め独立照合する。Rootを再起動してA01の窓を作らない。
+
 SS331/324/341/343/355・451/N15、当source4856/PG3420/DCBOM。真正live binding3466はrun e1ee096d/cutoff2026-10-15T16:49:02.160964Z/activation225691a3/親321930-t8219040/job92576/boot79aを認証。旧a9親は原本保存だけ。当日付JST2026-10-16は新日付、旧same-day SKIPPED oracleを適用しない。
 
 3470/90921 actual0：一回起動前に保存したimmutable before11fieldをprivate/noリンク/metadata安定で読取り、独立公開3458after capsule745b9c30の十field＋native完全一致を確認。前像SHA **4f9084e09129be6e80bc0bca51c469cf5a5a6b616ece463e660a24de45806ebb**、native35entry/22execは保存だけ、DB現在値から期待値生成0/Production method呼出0。元source/PT変更0。
