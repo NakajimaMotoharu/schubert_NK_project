@@ -4,6 +4,8 @@ import pg3496_outbox_owned_post as template
 import pg3600_current_browser_owned_sources as role
 
 SLOT='pg3606-current-browser-owned-post-v1'
+TOOLS=role.TOOLS
+SOURCE=role.SOURCE
 
 
 def namespace():
@@ -12,6 +14,9 @@ def namespace():
 
 
 def main():return namespace()['entry']()()
+
+
+def payload(seals):return namespace()['payload'](seals)
 
 
 if __name__=='__main__':raise SystemExit(main())
