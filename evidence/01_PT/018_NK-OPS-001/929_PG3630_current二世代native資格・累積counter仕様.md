@@ -1,0 +1,15 @@
+# Current Source 二世代native資格（未実行）
+
+対象Production4856/PG3420、当3712/545/1643・静的六module0、Main/Test/設定byte不変更。SS354/451、PT-NATIVE-3630/3632。旧a9/0fdのnativeは歴史保全だけ、新currentへ加算0。currentの初回Root3464と今回completed-resume3574は同sourceだが異なるactivation/実世代である。
+
+## 独立条件
+
+3630は当新Root真正terminal、正常ownedstop3604、独立全post3606の実0を前提とし、当boot/Job/start/end/Inspector実journal四event・全native metadata/byte/署名/実所有を照合する。3574前に全28execをprivate複写済み。前像全11の厳密SHA47ece6dcで全directory/leafを束縛し、旧35entries/22physicalの定数を今回へ流用しない。freshCompletedRunResume/newActivationByProduction/selectedRun=e1を確認し、普通noargs新runと混同しない。新世代だけのeligible10pointを採取し、未適格・歴史ファイルの存在だけでcreditを作らない。
+
+3632は既に同3712にCRC/session資格済み3532-v3の10pointを**元cached byte/hashで保全再利用**し、3630新10pointと共に20pointの実CRC/各session窓を独立再検証する。旧currentの正常batch branchesを新resumeのSKIPPED branchesで置換して失わず、別sourceの結果を結合しない。実VM/業務の再演ではなく保存済み同byteの品質集計である。
+
+Inspectorは二つのgenerationごとにclosing/terminalの同sessionIdSHA/startMs・dump順序を必須とし、実NativePointDominanceでprobe単調性を確認してearly二streamだけを除く。他点除外0、latest18streamを全1643Main/host3712固定exec/Jarとunionする。同session値をRoot間で共有する反例・欠落/重複/世代違い/逆順/19/21pointを拒否。CLASS/METHOD/LINE/BRANCHを独立XMLでも再計測し、実残gapsを出す。100%を先取りしない。
+
+純3（二pairのliteral、欠落・重複・foreign session/start/時刻逆順・件数/型、最終server/transport namespace）は成功。初回工具TDDでPython chained inequalityの件数誤りをself-reviewし、19/21の明示負系を追加して是正。実catalog/採取/server集計はRoot→Browser→正常stop/post後の未実施。
+
+公開はsession識別子をSHA256化しsemantic counter/hash/coverage座標だけを保存する。私有exec/DB/credential/token/session原値をGitへ出さない。formal1964/53・17/190・工数null・QA051final保留を維持する。
