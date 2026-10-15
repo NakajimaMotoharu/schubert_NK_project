@@ -1,5 +1,6 @@
 """Pure counterexamples for immutable Root -> Browser -> current SQL composition."""
 import ast
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -47,6 +48,20 @@ class BrowserChain(unittest.TestCase):
             ns['ROOT_SHA'] = 'b' * 64
             with self.assertRaises(ValueError):
                 ns['qualify']({'independentPrefix': True}, after, 'cutoff', 'done', '2026-10-15T02:03:00Z')
+            # Exercise the multi-prefix composition itself, isolated from each
+            # separately tested complete SQL algorithm (never an actual acceptance).
+            root['rows']={'phase':1};path.write_text(json.dumps(root));ns['ROOT_SHA']=hashlib.sha256(path.read_bytes()).hexdigest()
+            ns['ROOT_ORACLE']="def qualify(old,new,cutoff,done,upper):\n assert new=={'phase':1} and upper=='2026-10-15T02:00:00Z'\n return {'rootPrefixQualified':True}\n"
+            ns['PARTIAL_CHAIN']=[{'kind':'LOGIN_ONLY','before':{'phase':1},'after':{'phase':2},'context':{'owner':1,'lower':'2026-10-15T02:00:00Z','upper':'2026-10-15T02:02:00Z'}},{'kind':'AUTH_ADMIN_READ','before':{'phase':2},'after':{'phase':3},'context':{'owner':1,'lower':'2026-10-15T02:03:00Z','upper':'2026-10-15T02:05:00Z'}}]
+            ns['PARTIAL_ORACLES']={kind:"def qualify(old,new,owner,lower,upper):\n assert old=={'phase':"+str(index)+"} and new=={'phase':"+str(index+1)+"}\n return {'all24PartialQualified':True,'oldBrowserActualExit':1,'failedCaseNormalized':False}\n"for kind,index in [('LOGIN_ONLY',1),('AUTH_ADMIN_READ',2)]}
+            ns['BROWSER_ORACLE']="def qualify(old,new,owner,lower,upper):\n assert old=={'phase':3} and new=={'phase':4}\n return {'all24Qualified':True,'newQuestions':1,'freshAuthSessions':3}\n"
+            ns['CHAIN']={'before':{'phase':3},'after':{'phase':4},'context':{'owner':1,'lower':'2026-10-15T02:06:00Z','upper':'2026-10-15T02:08:00Z'}}
+            self.assertTrue(ns['qualify']({}, {'phase':4},'cutoff','done','2026-10-15T02:09:00Z')['exactRootBrowserCurrentChain'])
+            valid=copy.deepcopy(ns['PARTIAL_CHAIN'])
+            for field,bad in [('before',{'phase':99}),('kind','FOREIGN'),('context',{'owner':2,'lower':'2026-10-15T02:03:00Z','upper':'2026-10-15T02:05:00Z'}),('context',{'owner':1,'lower':'2026-10-15T02:01:00Z','upper':'2026-10-15T02:05:00Z'})]:
+                ns['PARTIAL_CHAIN']=copy.deepcopy(valid);ns['PARTIAL_CHAIN'][1][field]=bad
+                with self.assertRaises((ValueError,AssertionError)):
+                    ns['qualify']({}, {'phase':4},'cutoff','done','2026-10-15T02:09:00Z')
 
 
 if __name__ == '__main__':

@@ -6,6 +6,7 @@ coverage acceptance. Input is private consistent SQL snapshots; output has count
 import collections
 import datetime
 import json
+import uuid
 from pathlib import Path
 from pg543_retirement_contract import TABLES
 
@@ -122,7 +123,21 @@ def qualify(old, new, owner, lower, upper):
             require(row['result_ref_type'] == 'NONE' and row['result_ref_id'] is row['result_ref_uuid'] is None and row['response_layout_id'] == row['request_layout_id'].replace('REQ', 'RSP') and row['request_version'] == row['response_version'] == '001', 'query NONE reference and exact response profile')
         bounded(row['created_at']); bounded(row['completed_at'])
     mq = added['schubert.mq_outbox']
-    require(len(mq) == 1 and mq[0]['destination'] == 'nk.async.work' and mq[0]['layout_id'] == 'QWKREQ01' and mq[0]['message_id'] == job['message_id'] and mq[0]['correlation_id'] == job['correlation_id'] and mq[0]['status'] == 'SENT' and mq[0]['lease_owner'] is mq[0]['lease_until'] is None, 'one actually sent internal job event')
+    source = next(row for row in inbox if row['request_layout_id'] == 'QSBREQ01')
+    require(job['message_id'] == job['correlation_id'] == source['message_id'], 'SS312 original acceptance M0 bound to job')
+    require(len(mq) == 1 and mq[0]['destination'] == 'nk.async.work' and mq[0]['layout_id'] == 'QWKREQ01' and mq[0]['message_id'] != job['message_id'] and mq[0]['correlation_id'] == job['message_id'] and mq[0]['status'] == 'SENT' and mq[0]['lease_owner'] is mq[0]['lease_until'] is None, 'one distinct actually sent internal work W correlated to M0')
+    work = mq[0]
+    for identity in [work['message_id'], job['message_id']]:
+        require(type(identity) is str and len(identity) == 36 and str(uuid.UUID(identity)) == identity, 'canonical M0/W identities')
+    raw = work['body']; require(type(raw) is str and raw.startswith('\\x'), 'private bytea work vector')
+    wire = bytes.fromhex(raw[2:])
+    # UI232/236 byte offsets, independently encoded without a Production codec.
+    require(len(wire) == 320 and wire[:24] == b'SCHBNK01001QWKREQ01001EI' and wire[24:60] == work['message_id'].encode('ascii') and wire[60:96] == job['message_id'].encode('ascii'), 'independent work header IDs and layout')
+    require(wire[96:113].isdigit(), 'work timestamp digits')
+    stamp = datetime.datetime.strptime(wire[96:113].decode('ascii'), '%Y%m%d%H%M%S%f').replace(tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
+    require(start <= stamp <= end, 'work timestamp within actual window')
+    require(wire[113:177] == b' ' * 64 and wire[177:208] == b'0256000064000000000000000000320' and wire[208:256] == b' ' * 48, 'internal context/length/result/reserved golden slices')
+    require(wire[256:282] == question['receipt_id'].encode('ascii') and wire[282:294] == f'{qid:012d}'.encode('ascii') and wire[294:306] == f'{job["id"]:012d}'.encode('ascii') and wire[306:] == b' ' * 14, 'independent work data golden slices')
     web = added['schubert_web_session.web_http_sessions']
     require(len(web) == 3 and all(row['max_inactive_seconds'] == 28800 for row in web), 'three post-logout anonymous sessions, eight-hour idle')
     for row in web:

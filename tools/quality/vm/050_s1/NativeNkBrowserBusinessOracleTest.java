@@ -47,6 +47,9 @@ public final class NativeNkBrowserBusinessOracleTest {
     check(!NativeNkBrowserBusinessCohort.validMenu(null));
     check(!NativeNkBrowserBusinessCohort.validMenu(NativeNkBrowserBusinessCohort.MENU.reversed()));
     var duplicateMenu = new java.util.ArrayList<>(NativeNkBrowserBusinessCohort.MENU); duplicateMenu.add("User管理"); check(!NativeNkBrowserBusinessCohort.validMenu(duplicateMenu));
-    System.out.println("PG3128_PURE_ORACLE_PASS typedInfoVectors=20 protectedAccount=4 sessionNegative=3 menuCurrentBaselineAndNegative=6 sqlEscape=true networkReads=0");
+    check(NativeNkBrowserBusinessCohort.validSelfForms(List.of("PASSWORD")));
+    for (Object invalid : List.of(List.of("STATUS", "ROLE", "PASSWORD", "UNLOCK"), List.of("PASSWORD", "UNLOCK"), List.of("ROLE"), List.of("PASSWORD", "PASSWORD"))) check(!NativeNkBrowserBusinessCohort.validSelfForms(invalid));
+    check(!NativeNkBrowserBusinessCohort.validSelfForms(null));
+    System.out.println("PG3128_PURE_ORACLE_PASS typedInfoVectors=20 protectedAccount=4 sessionNegative=3 menuCurrentBaselineAndNegative=6 selfNonlockedForms=6 sqlEscape=true networkReads=0");
   }
 }

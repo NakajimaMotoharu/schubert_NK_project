@@ -11,15 +11,20 @@ def fixture():
     old['schubert.app_users'] = [{'id': 1, 'role': 'ADMIN', 'status': 'ACTIVE', 'password_hash': 'synthetic-not-secret', 'version': 7, 'last_login_at': None, 'failed_count': 0, 'failure_window_started_at': None, 'locked_until': None}]
     new = copy.deepcopy(old)
     new['schubert.app_users'][0]['last_login_at'] = T
-    new['schubert.questions'] = [{'id': 9, 'owner_user_id': 1, 'body': 'PG3128 native 質問 <b>独立oracle</b>', 'operation_token': 'synthetic', 'receipt_id': 'synthetic', 'submitted_at': T, 'is_deleted': False, 'deleted_at': None, 'deleted_by': None, 'version': 0}]
-    new['schubert.async_jobs'] = [{'id': 10, 'question_id': 9, 'owner_user_id': 1, 'state': 'RECEIVED', 'retry_count': 0, 'message_id': 'job-event', 'correlation_id': 'job-correlation'}]
+    new['schubert.questions'] = [{'id': 9, 'owner_user_id': 1, 'body': 'PG3128 native 質問 <b>独立oracle</b>', 'operation_token': 'synthetic', 'receipt_id': '0'*26, 'submitted_at': T, 'is_deleted': False, 'deleted_at': None, 'deleted_by': None, 'version': 0}]
+    original = '11111111-1111-4111-8111-111111111111'
+    internal = '22222222-2222-4222-8222-222222222222'
+    new['schubert.async_jobs'] = [{'id': 10, 'question_id': 9, 'owner_user_id': 1, 'state': 'RECEIVED', 'retry_count': 0, 'message_id': original, 'correlation_id': original}]
     new['schubert.notifications'] = [{'id': 11, 'job_id': 10, 'question_id': 9, 'owner_user_id': 1, 'state': 'RECEIVED'}]
-    new['schubert_web_session.web_receipt_references'] = [{'receipt_id': 'synthetic', 'question_id': 9, 'submitted_at': T}]
+    new['schubert_web_session.web_receipt_references'] = [{'receipt_id': '0'*26, 'question_id': 9, 'submitted_at': T}]
     new['schubert.auth_sessions'] = [{'id': i, 'user_id': 1, 'revoked': True, 'revoke_reason': reason, 'issued_at': T, 'last_accessed_at': T, 'revoked_at': T, 'client_address': '192.0.2.1'} for i, reason in [(1, 'REPLACED'), (2, 'LOGOUT'), (3, 'LOGOUT')]]
     new['schubert.login_ip_attempts'] = [{'client_address': '192.0.2.1', 'failed_count': 0, 'locked_until': None}]
     layouts = ['LGNREQ01'] * 3 + ['LOGREQ01'] * 2 + ['QSBREQ01', 'UDTREQ01', 'QSDREQ01', 'QSDREQ01', 'NTSREQ01']
     new['schubert.request_inbox'] = [{'message_id': i, 'request_layout_id': layout, 'processing_state': 'COMPLETED', 'completed_at': T, 'response_body_encrypted': 'synthetic', 'owner_user_id': None if layout == 'LGNREQ01' else 1, 'operation_token': 'synthetic' if layout == 'QSBREQ01' else None, 'created_at': T, 'result_ref_type': 'NONE', 'result_ref_id': None, 'result_ref_uuid': None, 'response_layout_id': layout.replace('REQ', 'RSP'), 'request_version': '001', 'response_version': '001'} for i, layout in enumerate(layouts)]
-    new['schubert.mq_outbox'] = [{'id': 1, 'destination': 'nk.async.work', 'layout_id': 'QWKREQ01', 'message_id': 'job-event', 'correlation_id': 'job-correlation', 'status': 'SENT', 'lease_owner': None, 'lease_until': None}]
+    new['schubert.request_inbox'][5]['message_id'] = original
+    vector = b'SCHBNK01001QWKREQ01001EI' + internal.encode() + original.encode() + b'20261015110100000' + b' '*64 + b'0256' + b'000064' + b'000000' + b'000000' + b'000000320' + b' '*48 + b'0'*26 + b'000000000009' + b'000000000010' + b' '*14
+    assert len(vector) == 320
+    new['schubert.mq_outbox'] = [{'id': 1, 'destination': 'nk.async.work', 'layout_id': 'QWKREQ01', 'message_id': internal, 'correlation_id': original, 'body': '\\x'+vector.hex(), 'status': 'SENT', 'lease_owner': None, 'lease_until': None}]
     new['schubert_web_session.web_http_sessions'] = [{'id': i, 'max_inactive_seconds': 28800, 'created_at': T, 'last_accessed_at': T} for i in range(3)]
     new['schubert_web_session.web_log_outbox'] = [{'id': 1, 'message_id': 'log-event', 'correlation_id': 'log-event', 'layout_id': 'WLGEVT01', 'layout_version': '001', 'status': 'SENT', 'lease_owner': None, 'lease_until': None, 'last_error_code': None, 'created_at': T, 'sent_at': T}]
     new['schubert.app_logs'] = [{'id': 1, 'service': 'WEB', 'category': 'REQUEST', 'level': 'INFO', 'actor_user_id': 1, 'logged_at': T, 'message_id': 'log-event', 'correlation_id': 'log-event', 'source_message_id': 'log-event'}]
@@ -60,6 +65,15 @@ class BrowserRows(unittest.TestCase):
             changed = copy.deepcopy(new); extra = {**selected, 'message_id': 21}; changed['schubert.request_inbox'].append(extra)
             with self.assertRaises(ValueError):
                 self.qualify(old, changed)
+
+    def test_original_acceptance_and_internal_work_are_distinct_golden_roles(self):
+        old, new = fixture(); self.assertTrue(self.qualify(old, new)['all24Qualified'])
+        for field, bad in [('message_id', '11111111-1111-4111-8111-111111111111'), ('correlation_id', '33333333-3333-4333-8333-333333333333')]:
+            changed = copy.deepcopy(new); changed['schubert.mq_outbox'][0][field] = bad
+            with self.assertRaises(ValueError):self.qualify(old, changed)
+        for offset in [0, 24, 60, 113, 177, 199, 208, 256, 282, 294, 306]:
+            changed = copy.deepcopy(new); wire = bytearray.fromhex(changed['schubert.mq_outbox'][0]['body'][2:]); wire[offset] ^= 1; changed['schubert.mq_outbox'][0]['body'] = '\\x'+wire.hex()
+            with self.assertRaises(ValueError):self.qualify(old, changed)
 
     def test_each_forbidden_delta_is_independently_rejected(self):
         changes = [

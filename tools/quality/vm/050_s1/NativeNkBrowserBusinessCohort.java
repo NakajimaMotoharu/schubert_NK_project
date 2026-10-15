@@ -148,6 +148,7 @@ public final class NativeNkBrowserBusinessCohort {
   }
 
   static boolean validMenu(List<String> titles) { return MENU.equals(titles); }
+  static boolean validSelfForms(Object operations) { return List.of("PASSWORD").equals(operations); }
 
   static FormData questionForm(String csrf, String token, String body) {
     return FormData.create().set("_csrf", csrf).set("operation_token", token).set("question", body);
@@ -192,7 +193,7 @@ public final class NativeNkBrowserBusinessCohort {
       record("PT-NBR-003", Map.of("maximumActive", 2, "oldestFreshRevokedReplaced", true, "revokedBrowserDenied", true));
       Page page = pages.get(2);
       stage = "ADMIN-READ"; Response response = page.navigate(BASE + "/admin/users/" + owner); require(response != null && response.status() == 200);
-      require(page.locator("dd.username").innerText().equals(username) && page.locator("dd.role").innerText().equals("ADMIN") && page.locator("form[data-operation]").count() == 4);
+      require(page.locator("dd.username").innerText().equals(username) && page.locator("dd.role").innerText().equals("ADMIN") && validSelfForms(page.locator("form[data-operation]").evaluateAll("forms => forms.map(f => f.dataset.operation)")));
       require(protectedUser(beforeUser).equals(protectedUser(user(username)))); record("PT-NBR-004", Map.of("adminRead200", true, "noAccountMutation", true));
       stage = "CSRF";
       APIResponse denied = third.request().post(BASE + "/questions/new", RequestOptions.create().setForm(FormData.create().set("question", BODY)));

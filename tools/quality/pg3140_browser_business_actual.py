@@ -12,7 +12,7 @@ from pg2900_network_completed_owner_a01 import GUARD
 from pg3138_browser_cohort_ready import require_ready, classpath, JAVA, SLOT as READY
 from pg3120_prepared_browser_observer import SOURCE
 
-SLOT = 'pg3164-browser-business-actual-v2'
+SLOT = 'pg3184-browser-business-actual-v3'
 
 TLS_WITNESS = r'''
 def independent_tls_peer():
@@ -68,6 +68,9 @@ def main():
     prefix = json.loads((W / 'pg3162-failed-menu-partial-login-post-v1/manifest.safe.json').read_bytes())
     if not (prefix['actualExit'] == 0 and prefix['sourceQualified'] and prefix['result']['all24PartialQualified'] and prefix['sameFourOwners'] and prefix['sameSocks']):
         raise ValueError('failed first Menu cohort side effects must be independently qualified before a new cohort')
+    prefix2 = json.loads((W / 'pg3172-failed-admin-auth-read-post-v1/manifest.safe.json').read_bytes())
+    if not (prefix2['actualExit'] == 0 and prefix2['sourceQualified'] and prefix2['result']['all24PartialQualified'] and prefix2['sameFourOwners'] and prefix2['sameSocks']):
+        raise ValueError('failed ADMIN cohort side effects must be independently qualified before a new cohort')
     seal = json.loads((W / 'pg3134-browser-resume-full-seal-v1/manifest.safe.json').read_bytes())
     terminal = json.loads((W / 'pg3130-browser-resume-terminal-v1/manifest.safe.json').read_bytes())
     live = json.loads((W / 'pg3124-browser-resume-live-binding-v1/manifest.safe.json').read_bytes())
