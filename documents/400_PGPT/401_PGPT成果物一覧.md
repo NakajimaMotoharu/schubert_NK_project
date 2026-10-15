@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-15 PG3184実Browser十二/独立全24→3146失敗二prefix込み全seal→3148親18→3152 ABI→3154正規四owned停止→3156別全postを全actual0で保存。[870実行結果](../../evidence/01_PT/018_NK-OPS-001/870_PG3184_実Browser十二case・全24複合seal・正規停止実行結果.md)。質問一/重複0、全十Unit-kernel/全client-advisory-flock0、native22物理はCRC/session資格前。正式1964/53・工数null・QA051final保留・四100未完を維持。
+
 2026-10-08実行/計測版：477/478を最新PG499再試験待ちへ更新。計測規約[487](470_PMO/487_WBS実行計測規約.json)と増分usage collectorを適用し、PGPT eventとPMO毎時観測を分離する。WBS残費用269.80pp/受入条件/Production/正式認定は不変更。資料作成で製造開始・進捗加点・reset券消費なし。
 
 ## PMO WBS修正（2026-10-07 23:57 JST）
