@@ -22,7 +22,7 @@ class Subject {
 }
 '''
             (original/'Subject.java').write_text(source)
-            tools=[ROOT/'tools/quality/SourceImportExpansion.java',ROOT/'tools/quality/SourceDeclarationExpansion.java']
+            tools=[ROOT/'tools/quality/SourceImportExpansion.java',ROOT/'tools/quality/SourceDeclarationExpansion.java',ROOT/'tools/quality/IsolatedSourceOutput.java']
             subprocess.run([str(JDK/'javac'),'-Xlint:all','-Werror','-d',str(classes),*map(str,tools)],capture_output=True,check=True,timeout=30)
             def probe(root):
                 p=subprocess.run([str(JDK/'java'),'-cp',str(classes),'SourceImportExpansion',str(root),''],capture_output=True,text=True,timeout=30)
@@ -38,6 +38,9 @@ class Subject {
             self.assertEqual(source,(original/'Subject.java').read_text())
             repeated=subprocess.run([str(JDK/'java'),'-cp',str(classes),'SourceDeclarationExpansion',str(original),str(candidate)],capture_output=True,text=True,timeout=30)
             self.assertNotEqual(0,repeated.returncode);self.assertEqual(value,(candidate/'Subject.java').read_text())
+            alias=base/'alias';alias.symlink_to(original,target_is_directory=True)
+            refused=subprocess.run([str(JDK/'java'),'-cp',str(classes),'SourceDeclarationExpansion',str(original),str(alias/'generated')],capture_output=True,text=True,timeout=30)
+            self.assertNotEqual(0,refused.returncode);self.assertFalse((original/'generated').exists());self.assertEqual(source,(original/'Subject.java').read_text())
 
 
 if __name__=='__main__':unittest.main()

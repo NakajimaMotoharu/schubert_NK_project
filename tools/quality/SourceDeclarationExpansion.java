@@ -7,6 +7,7 @@ import com.sun.source.util.Trees;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.LinkOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -24,15 +25,15 @@ final class SourceDeclarationExpansion {
     if (args.length != 2 || Runtime.version().feature() != 25)
       throw new IllegalArgumentException("JDK25 and distinct input/new output required");
     Path input = Path.of(args[0]).toRealPath();
-    Path output = Path.of(args[1]).toAbsolutePath().normalize();
-    if (output.startsWith(input) || input.startsWith(output))
-      throw new IllegalArgumentException("separate new-only namespace required");
+    Path output = IsolatedSourceOutput.candidate(input, Path.of(args[1]), true);
     Files.createDirectory(output);
     List<Path> paths;
     try (var files = Files.walk(input)) {
       paths = files.filter(p -> p.toString().endsWith(".java")).sorted().toList();
     }
     if (paths.isEmpty()) throw new IllegalArgumentException("empty source scope");
+    if (!paths.stream().allMatch(p -> Files.isRegularFile(p, LinkOption.NOFOLLOW_LINKS)))
+      throw new IllegalArgumentException("regular source files only");
     var compiler = ToolProvider.getSystemJavaCompiler();
     var diagnostics = new DiagnosticCollector<JavaFileObject>();
     try (var manager = compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {

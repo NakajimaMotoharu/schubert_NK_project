@@ -6,4 +6,4 @@ Program NK-OPS-001、RootServiceExecutableAdmission.checkedAttributes・RootServ
 
 型・値不正はACL取得前拒否、symlinkはACL呼出し0、正当file/directoryは一回/引数44を別counterで確認。元型不正反例も残す。関連固定snapshot Mavenで実Test ID/XML/FES0/format/lint/NullAway/SpotBugsと当method branchを評価する。coverage未達は未達で記録し、人工reflection/除外なし。残5匿名classは実Root/nativeが必要な旧entryであり、coverage目的だけの新業務起動は行わない。まず意味あるhost boundary群を進め、必要な同Main全回帰とnative再資格は群をまとめて実施する。
 
-費用は487 group開始値を参照、今回群subset低0.3/標準1/高3共有pp。485でRootServiceExecutableAdmissionの主担当は**P018-03**であり、初期group event0937のN15.02表記はnative採取責務との混同だった。後続eventで担当だけを訂正し、同群費用を二重計上しない。N15.02/F03は参照費0、実配賦null。accepted加点未定/自動0、工数率null。実command/対象snapshot/終了code/coverage/証跡hashは結果934へ追記。
+費用は487 group開始値を参照、今回群subset低0.3/標準1/高3共有ppを一段階・一回だけ保持。485の主担当親P018-03のうち、484の実作業leaf **P018-03.02（欠落/破損/失効/異owner・FD例外の未網羅限定PT）**へ対応する。初期0937のN15.02、次0938の親のみ表記は追補event0949で子criteria/TestID/source/hashまで訂正した。対象はRoot executableのtyped inode/ACL拒否に限り、.02全artifact・依存.01・全体品質を満たした認定ではない。親rollup/.01対象参照/.03終了trace/N15.02/F03は追加費0、個別実費null。元event/見積/compile失敗1と成功27→未実行6の限定成功を不変更、再確認に新製造成果加点0。実証Source4856/Test snapshote72911c2c・XMLa7cdc45b/公開f3a337e4を結果934へ結合。候補5224は未全体検証、旧sourceの関連成功を輸入しない。

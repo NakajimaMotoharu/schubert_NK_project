@@ -31,7 +31,7 @@ def server(data):
         rel=str(p.relative_to(original));expected=old['changed'].get(rel,{}).get('candidate',data['sourceSha256'][rel]);require(sha(imported/rel)==expected,'exact imported candidate inputs')
     out.mkdir();(out/'tool-classes').mkdir();java=b/'tools/jdk-25.0.4/bin/java';javac=b/'tools/jdk-25.0.4/bin/javac';candidate=out/'candidate'
     for name,digest in data['toolSha256'].items():require(sha(transfer/name)==digest,'fixed source tooling '+name)
-    r=subprocess.run([str(javac),'-Xlint:all','-Werror','-d',str(out/'tool-classes'),str(transfer/'SourceImportExpansion.java'),str(transfer/'SourceDeclarationExpansion.java')],capture_output=True,timeout=30)
+    r=subprocess.run([str(javac),'-Xlint:all','-Werror','-d',str(out/'tool-classes'),str(transfer/'SourceImportExpansion.java'),str(transfer/'SourceDeclarationExpansion.java'),str(transfer/'IsolatedSourceOutput.java')],capture_output=True,timeout=30)
     (out/'compile.private.log').write_bytes(r.stdout+r.stderr);require(r.returncode==0,'both compiler tools lint0')
     start=datetime.datetime.now(datetime.timezone.utc).isoformat();(out/'begin.safe.json').write_text(json.dumps({'startUTC':start,'productionSource':data['source'],'sourceSnapshot':data['head'],'pid':os.getpid(),'ticks':int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]),'MainApplied':False,'vmActions':0}))
     argv=[str(java),'-Xmx1536m','-cp',str(out/'tool-classes'),'SourceDeclarationExpansion',str(imported),str(candidate)]
@@ -80,7 +80,7 @@ def main():
     require(not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT),'clean fixed operator')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();prior=json.loads((W/'pg3690-import-candidate-stage-v1/manifest.safe.json').read_bytes());require(prior['actualExit']==0,'actual original import stage0')
     static=json.loads((W/'pg3422-candidate-static-v1/manifest.safe.json').read_bytes());rule=ROOT/'tools/quality/static/checkstyle.xml'
-    tools=[ROOT/'tools/quality/SourceImportExpansion.java',ROOT/'tools/quality/SourceDeclarationExpansion.java',Path('/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar'),rule]
+    tools=[ROOT/'tools/quality/SourceImportExpansion.java',ROOT/'tools/quality/SourceDeclarationExpansion.java',ROOT/'tools/quality/IsolatedSourceOutput.java',Path('/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar'),rule]
     require(hashlib.sha256(rule.read_bytes()).hexdigest()==static['ruleSha256']['checkstyle.xml'],'all existing fixed rules unchanged')
     data={'head':head,'source':SOURCE,'priorManifestSha256':prior['result']['serverManifestSha256'],'sourceSha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in sorted(ROOT.glob('src/*/src/main/java/**/*.java'))},'toolSha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest()for p in tools},'checkstyleJarSha256':static['pinnedToolSha256']['checkstyle-14.3.0-all.jar'],'checkstyleRuleSha256':static['ruleSha256']['checkstyle.xml']}
     os.umask(0o077);out=W/'pg3692-hygiene-candidate-stage-v1';out.mkdir();payload='\n'.join(inspect.getsource(x)for x in [require,parse,server])+'\nINPUT='+repr(data)+'\nserver(INPUT)\n';compile(payload,'<staged syntax-preserving hygiene>','exec');script=out/'hygiene.private.py';script.write_text(payload)
