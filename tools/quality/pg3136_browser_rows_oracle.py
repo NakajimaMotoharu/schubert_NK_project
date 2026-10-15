@@ -109,11 +109,17 @@ def qualify(old, new, owner, lower, upper):
             require(row['failed_count'] == 0 and row['locked_until'] is None, 'successful client IP counters')
     inbox = added['schubert.request_inbox']
     counts = collections.Counter(row['request_layout_id'] for row in inbox)
-    require(counts['LGNREQ01'] == 3 and counts['QSBREQ01'] == 1 and counts['LOGREQ01'] in {2, 3} and set(counts) <= {'LGNREQ01', 'QSBREQ01', 'LOGREQ01'}, 'only explicit update Inbox layouts; invalid-session revoke optional coordination')
+    # SS324 section6: protected reads retain NONE/snapshot Inbox rows as well.
+    # UI236 + twelve fixed Browser steps: ADMIN detail once, accepted GET twice,
+    # notifications once. Local 403/400/menu/form display issue no business read.
+    require(counts['LGNREQ01'] == 3 and counts['QSBREQ01'] == 1 and counts['LOGREQ01'] in {2, 3} and counts['UDTREQ01'] == 1 and counts['QSDREQ01'] == 2 and counts['NTSREQ01'] == 1 and set(counts) == {'LGNREQ01', 'QSBREQ01', 'LOGREQ01', 'UDTREQ01', 'QSDREQ01', 'NTSREQ01'}, 'exact planned update and read Inbox layouts/counts')
+    read_layouts = {'UDTREQ01', 'QSDREQ01', 'NTSREQ01'}
     for row in inbox:
         require(row['processing_state'] == 'COMPLETED' and row['completed_at'] is not None and row['response_body_encrypted'] is not None, 'committed bounded Inbox')
         require(row['owner_user_id'] == (None if row['request_layout_id'] == 'LGNREQ01' else owner), 'Inbox owner')
         require(row['operation_token'] == (token if row['request_layout_id'] == 'QSBREQ01' else None), 'one retained operation')
+        if row['request_layout_id'] in read_layouts:
+            require(row['result_ref_type'] == 'NONE' and row['result_ref_id'] is row['result_ref_uuid'] is None and row['response_layout_id'] == row['request_layout_id'].replace('REQ', 'RSP') and row['request_version'] == row['response_version'] == '001', 'query NONE reference and exact response profile')
         bounded(row['created_at']); bounded(row['completed_at'])
     mq = added['schubert.mq_outbox']
     require(len(mq) == 1 and mq[0]['destination'] == 'nk.async.work' and mq[0]['layout_id'] == 'QWKREQ01' and mq[0]['message_id'] == job['message_id'] and mq[0]['correlation_id'] == job['correlation_id'] and mq[0]['status'] == 'SENT' and mq[0]['lease_owner'] is mq[0]['lease_until'] is None, 'one actually sent internal job event')
