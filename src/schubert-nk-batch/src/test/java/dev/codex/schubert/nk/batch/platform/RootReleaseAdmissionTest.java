@@ -215,7 +215,23 @@ public final class RootReleaseAdmissionTest {
 
   public static CleanupInputs syntheticCleanup(List<SchemaHistoryAdmission.Row> migrations)
       throws IOException {
-    var fixture = new Fixture(RootStartupContext.Service.CLEANUP);
+    return syntheticChild(RootStartupContext.Service.CLEANUP, migrations);
+  }
+
+  /** Test-only Expiry actor; production Root/Unit/source admission is never bypassed. */
+  public static CleanupInputs syntheticExpiry() throws IOException {
+    return syntheticExpiry(literal().migrations());
+  }
+
+  public static CleanupInputs syntheticExpiry(List<SchemaHistoryAdmission.Row> migrations)
+      throws IOException {
+    return syntheticChild(RootStartupContext.Service.EXPIRY, migrations);
+  }
+
+  private static CleanupInputs syntheticChild(
+      RootStartupContext.Service service, List<SchemaHistoryAdmission.Row> migrations)
+      throws IOException {
+    var fixture = new Fixture(service);
     var reads = new AtomicInteger();
     var admission =
         RootReleaseAdmission.create(

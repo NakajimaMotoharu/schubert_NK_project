@@ -48,6 +48,82 @@ final class ExpiryAuditRepositoryTest {
   }
 
   @Test
+  void exp3202001EmptyAndSameRunSuccessUseLiteralAuditWithoutMutation() throws Exception {
+    var owner = (dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard) () -> 10_000_000_000L;
+    try (var connection = locked()) {
+      assertTrue(new ExpiryAuditRepository(connection).successful(RUN, END, owner).isEmpty());
+      assertFalse(connection.isClosed());
+      assertFalse(connection.getAutoCommit());
+    }
+    retainedSuccess();
+    try (var connection = locked()) {
+      var before = terminal(connection, 42);
+      var prior = new ExpiryAuditRepository(connection).successful(RUN, END, owner).orElseThrow();
+      assertEquals(
+          new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), prior.handle());
+      assertEquals(
+          new ExpiryAuditRepository.Snapshot(
+              "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+          prior.audit());
+      assertEquals("SUCCESS|2|0|NULL", before);
+      assertEquals(before, terminal(connection, 42));
+      assertFalse(connection.getAutoCommit());
+      assertFalse(connection.isClosed());
+      connection.rollback();
+    }
+  }
+
+  @Test
+  void exp3202002SuccessRefusesForeignDayFutureEndNullAndSqlBeforeAnyRewrite() throws Exception {
+    retainedSuccess();
+    var owner = (dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard) () -> 10_000_000_000L;
+    try (var connection = locked()) {
+      var subject = new ExpiryAuditRepository(connection);
+      var wrongDay =
+          new BatchRun(RUN.id(), RUN.cutoff().plus(1, java.time.temporal.ChronoUnit.DAYS));
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.successful(RUN, END, owner, (id, time) -> wrongDay));
+      assertThrows(
+          BatchRepositoryException.class,
+          () -> subject.successful(RUN, END.minusNanos(1000), owner));
+      assertThrows(NullPointerException.class, () -> subject.successful(null, END, owner));
+      assertThrows(NullPointerException.class, () -> subject.successful(RUN, null, owner));
+      assertThrows(NullPointerException.class, () -> subject.successful(RUN, END, null));
+      assertThrows(
+          NullPointerException.class,
+          () -> subject.successful(RUN, END, owner, (id, time) -> null));
+      for (String failure : new String[] {"successSelect", "successNullStatement"}) {
+        var fault = new ExpiryAuditRepository(failingConnection(connection, failure));
+        var actual =
+            assertThrows(BatchRepositoryException.class, () -> fault.successful(RUN, END, owner));
+        assertNull(actual.getCause());
+        assertFalse(actual.toString().contains("SQL_SECRET_SENTINEL"));
+      }
+      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertFalse(connection.isClosed());
+      assertFalse(connection.getAutoCommit());
+      connection.rollback();
+    }
+  }
+
+  private static void retainedSuccess() throws Exception {
+    try (var admin = db.admin()) {
+      execute(
+          admin,
+          """
+          insert into schubert.batch_runs
+          (id,run_id,business_date,step,attempt,started_at,ended_at,status,
+           target_count,success_count,failure_count,byte_count,error_code,error_summary,
+           expiry_cutoff_at,expiry_before_count,expiry_after_count)
+          values (42,'12345678-9abc-def0-8123-456789abcdef','2026-09-13',
+           'CLEAN_EXPIRY',1,'2026-09-12T15:00:01Z','2026-09-12T15:00:02Z',
+           'SUCCESS',2,2,0,200,null,null,'2026-09-05T15:00:00.000500Z',3,1)
+          """);
+    }
+  }
+
+  @Test
   void exp200001SameDayForeignSuccessUsesRetainedCutoffAndDoesNotRewriteAudit() throws Exception {
     try (var admin = db.admin()) {
       execute(
@@ -380,6 +456,8 @@ final class ExpiryAuditRepositoryTest {
                 String sql = (String) args[0];
                 boolean selected =
                     switch (operation) {
+                      case "successSelect", "successNullStatement" ->
+                          sql.startsWith("select id,run_id,attempt,started_at");
                       case "stage", "stageNull", "stageRuntime" ->
                           sql.startsWith("update schubert.batch_runs set expiry_cutoff_at");
                       case "finish", "finishNull", "finishRuntime" ->
@@ -389,7 +467,8 @@ final class ExpiryAuditRepositoryTest {
                 if (selected) {
                   if (operation.equals("stageNull")
                       || operation.equals("finishNull")
-                      || operation.equals("readNullStatement")) return null;
+                      || operation.equals("readNullStatement")
+                      || operation.equals("successNullStatement")) return null;
                   if (operation.endsWith("Runtime"))
                     throw new IllegalStateException("SQL_SECRET_SENTINEL");
                   if (operation.equals("readExecute")

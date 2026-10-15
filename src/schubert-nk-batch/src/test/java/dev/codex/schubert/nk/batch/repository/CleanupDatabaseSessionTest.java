@@ -468,6 +468,88 @@ final class CleanupDatabaseSessionTest {
 
   @Test
   void cdb009PublicChildAdmissionSucceedsOnlyWithFreshMatchingRelease() throws Exception {
+    var rows = migrationRows();
+    var child = RootReleaseAdmissionTest.syntheticCleanup(rows);
+    assertEquals(1, child.reads().get());
+    var subject =
+        new CleanupDatabaseSession(actualUrl, child.context(), child.snapshot(), child.release());
+    assertEquals(1, child.reads().get());
+    assertEquals("ACCEPTED", subject.execute(credential(), connection -> "ACCEPTED"));
+    assertEquals(2, child.reads().get()); // New read during the child's borrowed DB session.
+  }
+
+  /** PT-OPS-CDB3200001 / SS343 child role and fresh schema, before deletion authority. */
+  @Test
+  void cdb3200001ExpiryFactoryRetainsRoleFreshSchemaAndClosesEveryOwner() throws Exception {
+    var wrong = RootReleaseAdmissionTest.syntheticExpiry();
+    var owner = credential();
+    var calls = new AtomicInteger();
+    var refused =
+        CleanupDatabaseSession.forExpiry(
+            actualUrl, wrong.context(), wrong.snapshot(), wrong.release());
+    assertEquals(1, wrong.reads().get());
+    assertEquals(
+        "root cleanup database unavailable",
+        assertThrows(
+                IOException.class,
+                () -> refused.execute(owner, connection -> calls.incrementAndGet()))
+            .getMessage());
+    assertEquals(0, calls.get());
+    assertEquals(2, wrong.reads().get());
+    assertThrows(IllegalStateException.class, owner::copyPassword);
+
+    var child = RootReleaseAdmissionTest.syntheticExpiry(migrationRows());
+    assertEquals(RootStartupContext.Service.EXPIRY, child.snapshot().service());
+    var subject =
+        CleanupDatabaseSession.forExpiry(
+            actualUrl, child.context(), child.snapshot(), child.release());
+    assertEquals(1, child.reads().get());
+    var borrowed = new ArrayList<Connection>();
+    var validOwner = credential();
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+      assertEquals(
+          "EXPIRY-OWNED",
+          subject.execute(
+              validOwner,
+              connection -> {
+                borrowed.add(connection);
+                try (var statement = connection.createStatement();
+                    var rows = statement.executeQuery("select current_user::text")) {
+                  assertTrue(rows.next());
+                  assertEquals("schubert_batch", rows.getString(1));
+                  assertFalse(rows.next());
+                  assertTrue(connection.getAutoCommit());
+                  assertFalse(connection.isReadOnly());
+                  assertFalse(advisory(observer));
+                } catch (SQLException failure) {
+                  throw new IOException("test Expiry role/lock observation unavailable");
+                }
+                return "EXPIRY-OWNED";
+              }));
+      assertEquals(1, borrowed.size());
+      assertTrue(borrowed.getFirst().isClosed());
+      assertTrue(advisory(observer));
+    }
+    assertEquals(2, child.reads().get());
+    assertThrows(IllegalStateException.class, validOwner::copyPassword);
+    var cleanup = RootReleaseAdmissionTest.syntheticCleanup();
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            CleanupDatabaseSession.forExpiry(
+                actualUrl, cleanup.context(), cleanup.snapshot(), child.release()));
+    assertThrows(
+        NullPointerException.class,
+        () -> CleanupDatabaseSession.forExpiry(actualUrl, child.context(), child.snapshot(), null));
+    assertThrows(
+        NullPointerException.class,
+        () -> CleanupDatabaseSession.forExpiry(actualUrl, null, child.snapshot(), child.release()));
+    assertThrows(
+        NullPointerException.class,
+        () -> CleanupDatabaseSession.forExpiry(actualUrl, child.context(), null, child.release()));
+  }
+
+  private static List<SchemaHistoryAdmission.Row> migrationRows() throws Exception {
     List<SchemaHistoryAdmission.Row> rows = new ArrayList<>();
     try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
         var statement =
@@ -487,13 +569,7 @@ final class CleanupDatabaseSessionTest {
     }
     assertEquals(29, rows.size()); // SCHEMA + independently approved V001..V028 (SSC201).
     assertEquals("028", rows.getLast().version());
-    var child = RootReleaseAdmissionTest.syntheticCleanup(rows);
-    assertEquals(1, child.reads().get());
-    var subject =
-        new CleanupDatabaseSession(actualUrl, child.context(), child.snapshot(), child.release());
-    assertEquals(1, child.reads().get());
-    assertEquals("ACCEPTED", subject.execute(credential(), connection -> "ACCEPTED"));
-    assertEquals(2, child.reads().get()); // New read during the child's borrowed DB session.
+    return rows;
   }
 
   private static boolean advisory(Connection connection) throws SQLException {
