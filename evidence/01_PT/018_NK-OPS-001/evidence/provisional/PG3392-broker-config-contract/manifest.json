@@ -1,0 +1,83 @@
+{
+  "actualExit": 0,
+  "run": "PG3392-broker-config-contract",
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "ownedArtifact": "src/deployment/artemis/etc/broker.xml",
+  "artifactSha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+  "wholeActualOriginal": {
+    "xmlSha256": "87fe6cf1c81bf9a1623ca3f290cc5f135031f3533b69ece4bf695460c8506370",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "cases": [
+      {
+        "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+        "name": "globalBrokerAndJournalSettingsMatchTheIndependentOracle",
+        "nonSuccessElements": []
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+        "name": "addressPoliciesMatchTheIndependentCapacityMatrix",
+        "nonSuccessElements": []
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+        "name": "securityRolesMatchTheIndependentAclMatrix",
+        "nonSuccessElements": []
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.messaging.config.ArtemisBrokerConfigurationTest",
+        "name": "topologyAndTransportAreClosedToTheApprovedSet",
+        "nonSuccessElements": []
+      }
+    ],
+    "brokerInputSha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+    "brokerActualSha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+    "testSourceSha256": "d99195050123a9fc713ce433dd81e1bfcd57dc1e131b9da5c4edef90e65fd447",
+    "artemisServerJarSha256": "4bc0bb2d74e340fbb54d84121f2c52708e00bdad0a84751b9bd4f4b21e03c358",
+    "javaVersion": "25.0.4",
+    "os": "Linux 7.0.0-38-generic",
+    "wholeManifestSha256": "18fff60bb3476464160e1fe181bc281e96f5297172ac5b68e871460e9354e8fe"
+  },
+  "schemaCanary": {
+    "compileExit": 0,
+    "actualExit": 0,
+    "originalAcceptedBeforeAndAfter": true,
+    "independentInvalidFourRejected": true,
+    "officialSchemaSha256": {
+      "artemis-configuration.xsd": "472e5b68b10b5b75b32e14c968612d8c05ed9f4c1c99b02aa65acce51a9a6732",
+      "xml.xsd": "a20d46f47bc925931ec19e4bcbedfbe4233a39b42bfa45a81077978442d21ccc"
+    },
+    "sourceSha256": "76cce855d522101037bad6917b5f1758591716cac49761a03ce5d16430b163d2",
+    "runLogSha256": "26928e06493f3140a8cb62bd947dc527be8a9e52ed9d5c8522147ec08922ae64"
+  },
+  "independentPolicy": {
+    "globalFields": 24,
+    "addresses": 6,
+    "policyFieldsEach": 26,
+    "aclMatches": 13,
+    "independentSemanticNegatives": 3,
+    "allRefused": true
+  },
+  "documentSha256": {
+    "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md": "cb199e109fdf34f788a182625d873e1085bc976b0db018cb1e34e9448a2db9cb",
+    "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1"
+  },
+  "requirementIds": [
+    "MQ-011",
+    "MQ-012",
+    "MQ-013"
+  ],
+  "coverageApplicability": "NON_JAVA_CONFIGURATION_ARTIFACT; Java counters not excluded or changed",
+  "C04Accepted": false,
+  "formalUpdated": false,
+  "effortCompletionRate": null,
+  "runtimeBrokerStarted": false,
+  "vmActions": 0,
+  "newProductionPtCredit": 0,
+  "scopeBoundary": "Physical Broker template only. MQ011 application BytesMessage guards, client connection credentials/timeouts, console/Unit and runtime readiness remain separate owners; not whole MQ requirement acceptance.",
+  "remaining": [
+    "Explicit C04 individual review/strict audit and requirement-scope ownership joins not yet complete"
+  ]
+}
