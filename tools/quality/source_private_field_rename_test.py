@@ -79,5 +79,44 @@ class Subject {private static final int VALUE=3; private byte[] value=null;
         self.assertIn('private int retainedValueState=1',(output/'Subject.java').read_text())
         self.assertEqual('package fixture; class Parent {public int retainedValue=17;}',(output/'Parent.java').read_text())
 
+    def test_captured_wildcard_bounds_and_independent_capture_aliases(self):
+        raw='''package fixture;
+class Subject {private int value=1; int value(){return value;}
+ static Number read(java.util.Optional<? extends Number> input){return input.orElse(null);}
+ static CharSequence text(java.util.Optional<? extends CharSequence> input){return input.orElse(null);}
+ java.util.Map<? extends Number,? extends Number> pairs;
+}
+'''
+        source,request,output=self.fixture('capture',raw)
+        result=self.run_tool('propose',source,request,output);self.assertEqual(0,result.returncode,result.stderr)
+        expected=raw.replace('int value=1','int retainedValue=1').replace('return value;','return retainedValue;')
+        self.assertEqual(expected,(output/'Subject.java').read_text())
+        self.assertEqual(0,self.run_tool('verify',source,request,output).returncode)
+        (output/'Subject.java').write_text(expected.replace('Optional<? extends Number>','Optional<? extends Integer>'))
+        self.assertNotEqual(0,self.run_tool('verify',source,request,output).returncode)
+        witness=source.parent/'CaptureWitness.java'
+        witness.write_text('''import java.nio.file.Path;
+import java.util.Map;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+class CaptureWitness {
+ public static void main(String[] args) throws Exception {
+  try(var model=SourcePrivateFieldRename.load(Path.of(args[0]),"")) {
+   TypeElement owner=model.task().getElements().getTypeElement("fixture.Subject");
+   var field=owner.getEnclosedElements().stream().filter(e->e.getSimpleName().contentEquals("pairs")).findFirst().orElseThrow();
+   var captured=(DeclaredType)model.task().getTypes().capture(field.asType());
+   var a=captured.getTypeArguments().get(0); var b=captured.getTypeArguments().get(1);
+   var f=new SourcePrivateFieldRename.TypeFingerprint();
+   String zero="capture(0,declared(java.lang.Number,NONE:none,[]),NULL:<nulltype>)";
+   String one="capture(1,declared(java.lang.Number,NONE:none,[]),NULL:<nulltype>)";
+   String actualZero=f.type(a),actualOne=f.type(b),againZero=f.type(a),againOne=f.type(b);
+   if(!actualZero.equals(zero)||!actualOne.equals(one)||!againZero.equals("capture-ref(0)")||!againOne.equals("capture-ref(1)")) throw new AssertionError("capture bounds/alias identity lost: " + actualZero + ";" + actualOne + ";" + againZero + ";" + againOne);
+  }
+ }
+}''')
+        r=subprocess.run([str(JDK/'javac'),'-Xlint:all','-Werror','-cp',str(self.classes),'-d',str(self.classes),str(witness)],capture_output=True,text=True,timeout=30);self.assertEqual(0,r.returncode,r.stderr)
+        for _ in range(2):
+            r=subprocess.run([str(JDK/'java'),'-cp',str(self.classes),'CaptureWitness',str(source)],capture_output=True,text=True,timeout=30);self.assertEqual(0,r.returncode,r.stderr)
+
 
 if __name__=='__main__':unittest.main()

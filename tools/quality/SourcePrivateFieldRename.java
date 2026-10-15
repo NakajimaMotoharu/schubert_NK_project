@@ -38,6 +38,14 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.ArrayType;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.ExecutableType;
+import javax.lang.model.type.IntersectionType;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.TypeVariable;
+import javax.lang.model.type.UnionType;
+import javax.lang.model.type.WildcardType;
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaFileObject;
@@ -85,18 +93,56 @@ final class SourcePrivateFieldRename {
     return element.getKind() == ElementKind.FIELD ? normalized.getOrDefault(owner(element) + "#" + actual, actual) : actual;
   }
 
-  static String binding(Element element, Map<String, String> normalized) {
+  /** Public TypeMirror structure, including capture alias identity and exact bounds, not javac's per-task capture number. */
+  static final class TypeFingerprint {
+    private final IdentityHashMap<Element, Integer> captures = new IdentityHashMap<>();
+    String type(TypeMirror t) {
+      return switch (t.getKind()) {
+        case ARRAY -> "array(" + type(((ArrayType) t).getComponentType()) + ")";
+        case DECLARED -> {
+          var d = (DeclaredType) t;
+          yield "declared(" + ((TypeElement) d.asElement()).getQualifiedName() + "," + type(d.getEnclosingType()) + "," + d.getTypeArguments().stream().map(this::type).toList() + ")";
+        }
+        case TYPEVAR -> {
+          var v = (TypeVariable) t; var e = v.asElement();
+          if (e.getSimpleName().contentEquals("<captured wildcard>")) {
+            require(e.getEnclosingElement().getKind() == ElementKind.OTHER);
+            Integer prior = captures.get(e);
+            if (prior != null) yield "capture-ref(" + prior + ")";
+            int id = captures.size(); captures.put(e, id);
+            yield "capture(" + id + "," + type(v.getUpperBound()) + "," + type(v.getLowerBound()) + ")";
+          }
+          yield "variable(" + e.getEnclosingElement() + "," + e.getSimpleName() + ")";
+        }
+        case WILDCARD -> {
+          var w = (WildcardType) t;
+          yield "wildcard(" + (w.getExtendsBound() == null ? "none" : type(w.getExtendsBound())) + "," + (w.getSuperBound() == null ? "none" : type(w.getSuperBound())) + ")";
+        }
+        case EXECUTABLE -> {
+          var x = (ExecutableType) t;
+          yield "executable(" + x.getTypeVariables().stream().map(this::type).toList() + "," + x.getParameterTypes().stream().map(this::type).toList() + "," + type(x.getReturnType()) + "," + type(x.getReceiverType()) + "," + x.getThrownTypes().stream().map(this::type).toList() + ")";
+        }
+        case INTERSECTION -> "intersection" + ((IntersectionType) t).getBounds().stream().map(this::type).toList();
+        case UNION -> "union" + ((UnionType) t).getAlternatives().stream().map(this::type).toList();
+        case ERROR -> throw new IllegalArgumentException("unresolved type in semantic proof");
+        default -> t.getKind() + ":" + t;
+      };
+    }
+  }
+
+  static String binding(Element element, Map<String, String> normalized, TypeFingerprint types) {
     if (element == null) return "<none>";
     var parent = element.getEnclosingElement();
     String scope;
     if (parent instanceof TypeElement t) scope = t.getQualifiedName().toString();
     else if (parent != null && parent.getKind() == ElementKind.FIELD) scope = owner(parent) + "#" + name(parent, normalized);
     else scope = parent == null ? "<root>" : parent.getKind() + ":" + parent.toString();
-    return element.getKind() + ":" + scope + ":" + name(element, normalized) + ":" + element.asType();
+    return element.getKind() + ":" + scope + ":" + name(element, normalized) + ":" + types.type(element.asType());
   }
 
   static String digest(Model model, CompilationUnitTree unit, Map<String, String> normalized) throws Exception {
     var result = new StringBuilder();
+    var types = new TypeFingerprint();
     new TreePathScanner<Void, Void>() {
       void add(Object value) { result.append(value).append('\u0000'); }
       Element element() { return model.trees().getElement(getCurrentPath()); }
@@ -105,22 +151,22 @@ final class SourcePrivateFieldRename {
         add(tree.getKind()); var r = super.scan(tree, v); add("end"); return r;
       }
       @Override public Void visitIdentifier(IdentifierTree tree, Void v) {
-        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getName()); add(binding(e, normalized));
+        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getName()); add(binding(e, normalized, types));
         return super.visitIdentifier(tree, v);
       }
       @Override public Void visitMemberSelect(MemberSelectTree tree, Void v) {
-        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getIdentifier()); add(binding(e, normalized));
+        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getIdentifier()); add(binding(e, normalized, types));
         return super.visitMemberSelect(tree, v);
       }
       @Override public Void visitVariable(VariableTree tree, Void v) {
-        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getName()); add(binding(e, normalized));
+        Element e = element(); add(e != null && e.getKind() == ElementKind.FIELD ? name(e, normalized) : tree.getName()); add(binding(e, normalized, types));
         return super.visitVariable(tree, v);
       }
-      @Override public Void visitMethod(MethodTree tree, Void v) { add(tree.getName()); add(binding(element(), normalized)); return super.visitMethod(tree, v); }
+      @Override public Void visitMethod(MethodTree tree, Void v) { add(tree.getName()); add(binding(element(), normalized, types)); return super.visitMethod(tree, v); }
       @Override public Void visitClass(ClassTree tree, Void v) {
-        add(tree.getSimpleName()); Element e = element(); add(binding(e, normalized));
+        add(tree.getSimpleName()); Element e = element(); add(binding(e, normalized, types));
         if (e instanceof TypeElement t) {
-          var members = t.getEnclosedElements().stream().map(x -> binding(x, normalized) + ":" + x.getModifiers()).sorted().toList(); add(members);
+          var members = t.getEnclosedElements().stream().map(x -> binding(x, normalized, types) + ":" + x.getModifiers()).sorted().toList(); add(members);
         }
         return super.visitClass(tree, v);
       }
@@ -131,8 +177,8 @@ final class SourcePrivateFieldRename {
       @Override public Void visitLabeledStatement(LabeledStatementTree tree, Void v) { add(tree.getLabel()); return super.visitLabeledStatement(tree, v); }
       @Override public Void visitBreak(BreakTree tree, Void v) { add(tree.getLabel()); return super.visitBreak(tree, v); }
       @Override public Void visitContinue(ContinueTree tree, Void v) { add(tree.getLabel()); return super.visitContinue(tree, v); }
-      @Override public Void visitMemberReference(MemberReferenceTree tree, Void v) { add(tree.getName()); add(tree.getMode()); add(binding(element(), normalized)); return super.visitMemberReference(tree, v); }
-      @Override public Void visitNewClass(NewClassTree tree, Void v) { add(binding(element(), normalized)); return super.visitNewClass(tree, v); }
+      @Override public Void visitMemberReference(MemberReferenceTree tree, Void v) { add(tree.getName()); add(tree.getMode()); add(binding(element(), normalized, types)); return super.visitMemberReference(tree, v); }
+      @Override public Void visitNewClass(NewClassTree tree, Void v) { add(binding(element(), normalized, types)); return super.visitNewClass(tree, v); }
     }.scan(unit, null);
     return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(result.toString().getBytes(StandardCharsets.UTF_8)));
   }
