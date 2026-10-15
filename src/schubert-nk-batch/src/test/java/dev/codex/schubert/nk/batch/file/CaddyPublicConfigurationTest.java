@@ -73,6 +73,8 @@ final class CaddyPublicConfigurationTest {
         List.of(
             "",
             "x",
+            // PT-OPS-CADDY3050-001: global block without a site-body separator is incomplete.
+            "{\nadmin off\nauto_https disable_redirects\nskip_install_trust\n}\nhttps://127.0.0.1:55160 {",
             GOLDEN.replace("admin off", "admin localhost:2019"),
             GOLDEN.replace("tls internal", "tls /tmp/cert /tmp/key"),
             GOLDEN + "file_server\n",
@@ -91,6 +93,11 @@ final class CaddyPublicConfigurationTest {
             "127.0.0.1@evil",
             "[localhost]",
             "[::1%lo]",
+            // Bracket halves, colon-free hex and IPv4-mapped IPv6 are not the fixed IPv6 profile.
+            "[::1",
+            "::1]",
+            "[11]",
+            "[::ffff:7f00:1]",
             "[:::]",
             "[2001:db8]")) {
       String text = GOLDEN.replace("https://127.0.0.1", "https://" + ip);
