@@ -11,3 +11,7 @@ NK-OPS-001/WBS-N14、SS343/353/SSC230259260・451、PT-OPS-3060-001/3062-001/306
 3066独立postで全24/署名187/原Backup/native/所有・全資源0とruntime-only差、CLOCK5予約・元parent inode不変・新file metadataの厳密範囲を確認する。独立post完了と業務Browser全case/fixture/許可HTTP-DOM-SQL差分oracleの準備が揃うまで外部Rootは起動しない。新3691 host jobは同Mainの別品質groupとして継続し、旧3685結果を新Test合格にしない。
 
 この仕様は準備だけ。compile/finite action/post/source/実日時/終了/hash/次commandは実行後追記。旧UNKNOWN143や旧失败、stash七/Scenario3/Currentbaseline/原DBBackup鍵/nativeは保全し、私有原文はGit非格納。
+
+3062実結果: c50ab88c6固定/exec97128 actual0/sourceQualifiedtrue、00:40:02.346368～03.557423Z、compile/argument/labelmount/original/identity/input全六phase0・guestMutations0。after92c953ea原postをpinし、20source/共有ABI/署名JAR/BEFORE/SOURCE/BOM一致。stage/prepareはまだ未実行。
+
+3066既存parent型の独立oracleを準備: 初期runtimeはroot＋元parent、完了は同二inode＋新一fileだけ。root全metadata/sha不変、parent dev/inode/uid/gid/mode/nlink不変・size非減少・mtime/ctimeは実coarseCLOCK5 lower～durable upper内、new file別inode/Root0644/link1/byte長/同時刻範囲。旧postの「parent新規作成」型へすり替えない。21metadata fault＋欠落/余分二shapeを独立fixtureで拒否し、下限/上限を含む正常を許可。完成observerは前retirement有限差の検証後だけ新prepare有限差を投影し、全24/原値/署名/Backup/native/資源の読取oracleへ接続。host純二試験actual0、実新postは未実行。
