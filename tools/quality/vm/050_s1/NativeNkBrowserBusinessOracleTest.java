@@ -40,6 +40,13 @@ public final class NativeNkBrowserBusinessOracleTest {
     var duplicate = json.createArrayNode().add(rows.get(0)).add(rows.get(0)); rejects(() -> NativeNkBrowserBusinessCohort.ids(duplicate));
     check("'a''b'".equals(NativeNkBrowserBusinessCohort.literal("a'b")));
     check("PG3128 native 質問 <b>独立oracle</b>".equals(NativeNkBrowserBusinessCohort.BODY));
-    System.out.println("PG3128_PURE_ORACLE_PASS typedInfoVectors=20 protectedAccount=4 sessionNegative=3 sqlEscape=true networkReads=0");
+    var baseline = json.readTree(java.nio.file.Path.of("program/characterization/baseline/current/artifacts/CHR-U01.json").toFile());
+    check(baseline.path("cards").equals(json.valueToTree(List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "ログ照会"))));
+    check(NativeNkBrowserBusinessCohort.validMenu(List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "質問する", "通知", "質問回答", "ログ照会", "User管理")));
+    check(!NativeNkBrowserBusinessCohort.validMenu(List.of("Scenario閲覧", "検索", "Animation視聴", "Music", "質問する", "通知", "質問回答", "Log照会", "User管理")));
+    check(!NativeNkBrowserBusinessCohort.validMenu(null));
+    check(!NativeNkBrowserBusinessCohort.validMenu(NativeNkBrowserBusinessCohort.MENU.reversed()));
+    var duplicateMenu = new java.util.ArrayList<>(NativeNkBrowserBusinessCohort.MENU); duplicateMenu.add("User管理"); check(!NativeNkBrowserBusinessCohort.validMenu(duplicateMenu));
+    System.out.println("PG3128_PURE_ORACLE_PASS typedInfoVectors=20 protectedAccount=4 sessionNegative=3 menuCurrentBaselineAndNegative=6 sqlEscape=true networkReads=0");
   }
 }

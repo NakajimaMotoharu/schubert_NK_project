@@ -14,7 +14,7 @@ NK-OPS-001/NK-WEB-001/002、WBS-N14/N05/N06/N07/N08、CHR-A02参照。RD AUT/FUN
 
 ## 実Browserの固定ケースと独立期待値
 
-工具 `NativeNkBrowserBusinessCohort.java`。新cohortで一度だけ実施し、Root真正DONE/全24/全seal後も同ordinary API/Web/Caddy所有を保持。3つの独立Chromium contextはCurrentのdesktop/login driver、TLS検証有効・owned loopback SOCKSだけを使用する。Current lifecycle/reset/restartは呼ばない。
+工具 `NativeNkBrowserBusinessCohort.java`。新cohortで一度だけ実施し、Root真正DONE/全24/全seal後も同ordinary API/Web/Caddy所有を保持。3つの独立Chromium contextはCurrentのdesktop/login driver・owned loopback SOCKSだけを使用する。Current lifecycle/reset/restartは呼ばない。BUG1270是正：共有desktop helperはCurrent比較用ignoreHTTPSErrors=trueであり、Browser自体の標準trust検証を実施したとはしない。SS342の通常CA chain/IP SAN/TLS1.2以上はRootに加え、当Caddy所有listenerと元CAをfreshに照合するBrowser前後の独立handshake-only witnessで別に必須検証する。TLS/CA/システムtruststore/Current driverを変更しない。
 
 | Test ID | 入力/操作 | 独立期待値・根拠 |
 |---|---|---|

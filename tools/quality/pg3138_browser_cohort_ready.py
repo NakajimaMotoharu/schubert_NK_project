@@ -9,7 +9,7 @@ from pg1446_current_cold_stage import W, P
 from pg1674_critical_management_gate import management_gate
 
 ROOT = Path(__file__).resolve().parents[2]
-SLOT = 'pg3138-browser-cohort-ready-v3'
+SLOT = 'pg3138-browser-cohort-ready-v4'
 JAVA = Path('/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin')
 SHARED = [
     'program/characterization/tests/java/dev/codex/schubert/characterization/CurrentCharacterizationTest.java',
@@ -19,14 +19,16 @@ SOURCES = SHARED + [
     'tools/quality/vm/050_s1/NativeNkBrowserBusinessCohort.java',
     'tools/quality/vm/050_s1/NativeNkBrowserBusinessOracleTest.java',
 ]
-ORACLES = ['tools/quality/pg3122_prepared_browser_resume_contract_test.py', 'tools/quality/pg3134_browser_resume_contract_test.py', 'tools/quality/pg3136_browser_rows_oracle_test.py']
+ORACLES = ['tools/quality/pg3122_prepared_browser_resume_contract_test.py', 'tools/quality/pg3134_browser_resume_contract_test.py', 'tools/quality/pg3136_browser_rows_oracle_test.py', 'tools/quality/pg3160_partial_login_rows_oracle_test.py', 'tools/quality/pg3166_browser_tls_witness_test.py']
 PINNED = SOURCES + ORACLES + [
+    'program/characterization/baseline/current/artifacts/CHR-U01.json',
     'tools/quality/pg3120_prepared_browser_observer.py', 'tools/quality/pg3122_prepared_browser_resume_once.py',
     'tools/quality/pg3124_browser_resume_live_binding.py', 'tools/quality/pg3130_browser_resume_terminal.py',
     'tools/quality/pg3126_browser_business_socks.py',
     'tools/quality/pg3132_browser_resume_rows.py', 'tools/quality/pg3134_browser_resume_full_seal.py',
     'tools/quality/pg3136_browser_rows_oracle.py', 'tools/quality/pg3140_browser_business_actual.py',
     'tools/quality/pg3138_browser_cohort_ready.py',
+    'tools/quality/pg3160_partial_login_rows_oracle.py',
 ]
 
 

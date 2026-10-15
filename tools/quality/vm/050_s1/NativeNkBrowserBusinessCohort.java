@@ -22,6 +22,7 @@ public final class NativeNkBrowserBusinessCohort {
   static final String BASE = "https://10.0.2.15:55160";
   static final String SOURCE = "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25";
   static final String BODY = "PG3128 native 質問 <b>独立oracle</b>";
+  static final List<String> MENU = List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "質問する", "通知", "質問回答", "ログ照会", "User管理");
   static String stage = "ARGUMENT";
   static Path output;
 
@@ -142,8 +143,11 @@ public final class NativeNkBrowserBusinessCohort {
   static void menu(Page page, String username) {
     require(page.url().equals(BASE + "/") && page.locator("h1").innerText().equals("schubert NK"));
     require(page.locator(".login-user").innerText().equals(username) && page.locator(".login-role").innerText().equals("ADMIN"));
-    require(page.locator("nav.menu-grid a.menu-item strong").allInnerTexts().equals(List.of("Scenario閲覧", "検索", "Animation視聴", "Music", "質問する", "通知", "質問回答", "Log照会", "User管理")));
+    // SS313/UI264 + immutable Current CHR-U01 display labels, not UI223's logical names.
+    require(validMenu(page.locator("nav.menu-grid a.menu-item strong").allInnerTexts()));
   }
+
+  static boolean validMenu(List<String> titles) { return MENU.equals(titles); }
 
   static FormData questionForm(String csrf, String token, String body) {
     return FormData.create().set("_csrf", csrf).set("operation_token", token).set("question", body);
