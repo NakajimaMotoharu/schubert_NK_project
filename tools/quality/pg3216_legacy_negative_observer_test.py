@@ -51,6 +51,32 @@ class IndependentWitness(unittest.TestCase):
         for forbidden in ['MorningProcessMain\n', 'signal.SIGKILL', 'systemctl restart', 'getDeclaredMethod', 'setAccessible']:
             self.assertNotIn(forbidden, raw)
 
+    def test_receiver_is_non_root_until_closed_transfer_then_sealed(self):
+        from pg3216_legacy_negative_dispatch import RECEIVER_PREP, OUT, STAGE
+        self.assertTrue(str(OUT).endswith('-v2'))
+        self.assertTrue(STAGE.endswith('-v2'))
+        compile(RECEIVER_PREP, '<explicit fixture receiver owner>', 'exec')
+        for text in ['user.pw_uid>0', 'not os.path.lexists(p)', 'os.chown(p,user.pw_uid,user.pw_gid)', 'stat.S_IMODE(s.st_mode)==0o700', 'not list(p.iterdir())']:
+            self.assertIn(text, RECEIVER_PREP)
+        # Independent fake filesystem: wrong home owner, preexisting receiver,
+        # wrong resulting owner, non-0700 or unexpected content must all refuse.
+        from types import SimpleNamespace
+        from unittest.mock import MagicMock
+        import stat
+        import pwd
+        for fault in ['none', 'homeOwner', 'exists', 'leafOwner', 'mode', 'nonempty']:
+            home = SimpleNamespace(st_mode=stat.S_IFDIR | 0o700, st_uid=1001 if fault == 'homeOwner' else 1000, st_gid=1000)
+            leaf = SimpleNamespace(st_uid=0 if fault == 'leafOwner' else 1000, st_gid=1000, st_mode=stat.S_IFDIR | (0o755 if fault == 'mode' else 0o700))
+            parent = MagicMock(); parent.lstat.return_value = home; parent.is_symlink.return_value = False
+            receiver = MagicMock(); receiver.parent = parent; receiver.lstat.return_value = leaf; receiver.iterdir.return_value = [object()] if fault == 'nonempty' else []
+            fake_os = MagicMock(); fake_os.path.lexists.return_value = fault == 'exists'
+            values = {'Path': lambda name: parent if name == '/home/ubuntu' else receiver, 'STAGE': STAGE, 'os': fake_os}
+            with patch.object(pwd, 'getpwnam', return_value=SimpleNamespace(pw_uid=1000, pw_gid=1000)):
+                if fault == 'none':
+                    exec(RECEIVER_PREP, values); fake_os.chown.assert_called_once_with(receiver, 1000, 1000)
+                else:
+                    with self.assertRaises(AssertionError, msg=fault): exec(RECEIVER_PREP, values)
+
 
 if __name__ == '__main__':
     unittest.main()

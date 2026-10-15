@@ -16,10 +16,18 @@ from pg3214_legacy_fixture_compile import OUT as COMPILED
 
 ROOT = Path(__file__).resolve().parents[2]
 OBSERVER = ROOT / 'tools/quality/vm/050_s1/pg3216_legacy_negative_observer.py'
-OUT = W / 'pg3216-legacy-negative-v1'
-STAGE = '/home/ubuntu/pg3216-legacy-negative-v1'
+OUT = W / 'pg3216-legacy-negative-v2'
+STAGE = '/home/ubuntu/pg3216-legacy-negative-v2'
 BOOT = 'dd710ec8-bfdf-4157-b445-8073895110d2'
 FIXTURE = {'pid': 445092, 'ticks': 3906100, 'argvSha256': 'f67196ed972d7fe199fb4e9089a45c98b1f9ae619ee6ffbf989af14234ef5f3e', 'exe': '/usr/bin/qemu-system-x86_64'}
+
+RECEIVER_PREP = '''import pwd,stat
+user=pwd.getpwnam('ubuntu');parent=Path('/home/ubuntu');home=parent.lstat()
+assert stat.S_ISDIR(home.st_mode)and not parent.is_symlink()and home.st_uid==user.pw_uid and home.st_gid==user.pw_gid and user.pw_uid>0
+p=Path(STAGE);assert p.parent==parent and not os.path.lexists(p)
+p.mkdir(mode=0o700);os.chown(p,user.pw_uid,user.pw_gid)
+s=p.lstat();assert s.st_uid==user.pw_uid and s.st_gid==user.pw_gid and stat.S_IMODE(s.st_mode)==0o700 and not list(p.iterdir())
+'''
 
 
 def require(value):
@@ -68,7 +76,7 @@ def stage():
     archive = COMPILED / 'runtime.private.tar'
     require(hashlib.sha256(archive.read_bytes()).hexdigest() == proof['archiveSha256'])
     OUT.mkdir(mode=0o700)
-    code = 'p=Path(' + repr(STAGE) + ');assert not p.exists();p.mkdir(mode=0o700)\n'
+    code = 'STAGE=' + repr(STAGE) + '\n' + RECEIVER_PREP
     require(guest(code, 'stage-reservation.private.log') == 0)
     args = ['scp', '-q', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(P / 'known_hosts'),
             '-o', 'HostKeyAlias=[127.0.0.1]:22222', '-i', str(P / 'vm-access'), '-P', '22224', str(archive), str(OBSERVER), 'ubuntu@127.0.0.1:' + STAGE + '/']
@@ -80,7 +88,7 @@ def stage():
     code += 'assert {x.name for x in p.iterdir()}=={"runtime.private.tar","pg3216_legacy_negative_observer.py"}\n'
     code += 'assert hashlib.sha256((p/"runtime.private.tar").read_bytes()).hexdigest()==' + repr(proof['archiveSha256']) + '\n'
     code += 'assert hashlib.sha256((p/"pg3216_legacy_negative_observer.py").read_bytes()).hexdigest()==' + repr(digest) + '\n'
-    code += 'for x in p.iterdir():os.chown(x,0,0);x.chmod(0o400)\n'
+    code += 'for x in p.iterdir():os.chown(x,0,0);x.chmod(0o400)\nos.chown(p,0,0);p.chmod(0o700)\n'
     require(guest(code, 'stage-verify.private.log') == 0)
     save('stage.safe.json', {'actualExit': 0, 'observerSha256': digest, 'compiled': proof, 'boot': BOOT, 'operatorSource': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()})
 
