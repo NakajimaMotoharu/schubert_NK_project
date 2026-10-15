@@ -31,3 +31,11 @@ PT-PRO-HDR3266-001：CommonHeaderの九参照を一つずつnullとし、protoco
 PT-PRO-HDR3266-002：UI232総長式から独立算出`1,000,000-256=999,744`。data999744/recordなしとdataなし/record1×999744の両方で総長1000000を受理し、各次一byteを拒否。999999×999999はint overflowとして型付きvalidation例外とArithmeticException原因を要求する。layout固有の狭い長さ上限は別validateAgainstであり、constructorの百万byte上限と混同しない。
 
 通常command=`python3 -B tools/quality/pg3266_header_protocol_regression.py`。期待=Protocol実84PT/17suite/174Main、全四counter100/静的0/FES-flaky-notrun0、既PG3248から全Jar member同byte（外Jar timestamp差は許可）、Header全七Test。Main/VM/署名/配備0。全六への新Test集合統合と他WBS固有受入は別未完、今回の旧3699を本新84の統合成功へ流用しない。
+
+## 必要一全体統合（PG3274/3276/3278、発行前）
+
+既実3699の固定snapshotとの差はHeader Test一file/新二methodのみ、独立3270の実84とTest byte完全一致を要求。新全体期待3701PT/542suite/1643Main（Protocol84、Batch1299、他module件数不変）、全六format first/静的0/FES-flaky-notrun0。3274一回→真正exit/source/XML後だけ3276別独立→3278 sealednative28/allMain1643-resource79/debug同byte/CRC/異session資格。新VM/署名/配備/Root/既whole3699再実行0。旧negative compile3694のprovenanceは改名せず保持する。
+
+BUG1281再発予防：native summaryは原qualifiedFullTestsから生成して3701を厳密検証。Python payloadの派生はASTの数値/意味文字列だけを変換し、40/64桁SHA literalを変更しない。既長い歴史templateには数値置換を受けないhex形式placeholderを渡し、最後にだけ実source/archiveへ束縛する。純試験は実head/digestに旧件数文字列3699が含まれても不変であること、Protocol84/Batch1299、全namespace、original3694/native28 provenance、旧件数・外国stream拒否を確認する。最初の未実装工具試験では非hex sentinelが既SHA形式guardで拒否され、remote操作前にhex placeholderへ補足したTDD記録を保持する（実装済みProduction障害ではない）。
+
+K01.01群開始予算は実発行前eventへ別記し、Header監査/是正費と二重計上しない。全体後は105の全契約matrix/要求・artifact・TestID・独立期待値・終了依存を個別に監査し、WBS受入は全criteriaが揃う対象だけ変更する。
