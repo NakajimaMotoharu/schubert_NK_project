@@ -1,4 +1,4 @@
-"""Exact qualified Main, independent seven expiry request tests, no guest operation."""
+"""Exact qualified Main, independent six expiry request tests, no guest operation."""
 import pg2938_extra_row_selected as previous
 
 TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ExpiryWorkerRequestTest.java'
@@ -13,7 +13,7 @@ def server():
     raw = raw.replace('dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot', 'dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest$Expiry$PriorExpiry')
     raw = raw.replace("require(all(counters[k]['missed']==0 for k in ['LINE','METHOD','CLASS','BRANCH']))", '# Measure without converting remaining branches to PASS.')
     raw = raw.replace("'targetClassFour100':True", "'targetClassFour100':all(counters[k]['missed']==0 for k in ['LINE','METHOD','CLASS','BRANCH'])")
-    compile(raw, '<exact seven expiry tests and measured counter>', 'exec')
+    compile(raw, '<exact six expiry tests and measured counter>', 'exec')
     return raw
 
 

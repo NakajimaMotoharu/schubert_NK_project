@@ -142,7 +142,14 @@ final class TransferCleanupTest {
     }
     for (long[] bad :
         new long[][] {
-          {-1, 0, 0, 0, 0}, {1, 2, 0, 0, 0}, {1, 0, 0, 0, 0}, {1, 0, 1, -1, 0}, {1, 0, 1, 0, -1}
+          // PT-OPS-TRANSFER3046-001: each signed counter must independently reject negatives.
+          {-1, 0, 0, 0, 0},
+          {1, -1, 2, 0, 0},
+          {1, 1, -1, 0, 0},
+          {1, 2, 0, 0, 0},
+          {1, 0, 0, 0, 0},
+          {1, 0, 1, -1, 0},
+          {1, 0, 1, 0, -1}
         })
       assertThrows(
           IllegalArgumentException.class,
