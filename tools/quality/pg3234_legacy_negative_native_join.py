@@ -6,8 +6,6 @@ All failed and prior unqualified fixture streams are excluded, not normalized.
 import hashlib
 import json
 import os
-import subprocess
-from pathlib import Path
 from pyflakes.api import check
 from lan_server import run, copy
 from pg1446_current_cold_stage import W
