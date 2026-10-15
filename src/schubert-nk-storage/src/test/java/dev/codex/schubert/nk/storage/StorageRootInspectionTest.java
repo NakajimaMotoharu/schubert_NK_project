@@ -108,7 +108,9 @@ class StorageRootInspectionTest {
     StorageIdentity identity = identity(roots[0]);
     inspect(roots, identity, identity, identity);
     int directoryDescriptorsBefore = directoryDescriptors(temporary);
-    assertEquals(6, Files.list(temporary).count());
+    try (var entries = Files.list(temporary)) {
+      assertEquals(6, entries.count());
+    }
     assertEquals(directoryDescriptorsBefore, directoryDescriptors(temporary));
 
     Files.setPosixFilePermissions(roots[0], permissions("rwxrwx---"));
