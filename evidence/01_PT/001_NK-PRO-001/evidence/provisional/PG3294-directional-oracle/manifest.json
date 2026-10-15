@@ -1,0 +1,120 @@
+{
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "actualExit": 0,
+  "newPtCredit": 0,
+  "coverageCredit": 0,
+  "formalUpdated": false,
+  "fullIntegrationPending": true,
+  "phases": {
+    "before": {
+      "privateReceiptSha256": "038971876640cb9184023d646f08163e55fa9c3588842b7ff634672b905e355a",
+      "actualExit": 0,
+      "formalUpdated": false,
+      "payloadSha256": "a476e3435e6b854fdb28052c07444ef48d05bca51528f4cd9ae8cdf4067f7e22",
+      "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+      "result": {
+        "actualExit": 0,
+        "coverageCredit": 0,
+        "endUTC": "2026-10-15T08:54:56.241874+00:00",
+        "falseNegatives": 2,
+        "formalUpdated": false,
+        "mutationsRejected": 0,
+        "newPtCredit": 0,
+        "phase": "before",
+        "productionChanged": false,
+        "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+        "startUTC": "2026-10-15T08:54:49.720264+00:00",
+        "testSource": "285b40e2153842316ad2c6489090fc3a02ffa3c0",
+        "vectors": {
+          "DTO_RECIPROCAL_SWAP": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes"
+          },
+          "NORMAL_CONCURRENT": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+          },
+          "NORMAL_TYPE": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "layout.PayloadTypeCatalogTest#allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes"
+          },
+          "STABLE_WRONG_BYTES": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+          }
+        },
+        "vmActions": 0
+      }
+    },
+    "after": {
+      "privateReceiptSha256": "b0440b4dc7e52c32c07a9d4f839803946ff9220dc6c78ae07d35376cfbec8de9",
+      "actualExit": 0,
+      "formalUpdated": false,
+      "payloadSha256": "59ccf442032b2a90c40a56629acff71f4c42df3b6f4eb06ea5dbfd6445f4367c",
+      "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+      "result": {
+        "actualExit": 0,
+        "coverageCredit": 0,
+        "endUTC": "2026-10-15T09:06:29.178603+00:00",
+        "falseNegatives": 0,
+        "formalUpdated": false,
+        "mutationsRejected": 2,
+        "newPtCredit": 0,
+        "phase": "after",
+        "productionChanged": false,
+        "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+        "startUTC": "2026-10-15T09:06:21.435730+00:00",
+        "testSource": "d45aec8f135f864030b5ca916f7ee973ada1c106",
+        "vectors": {
+          "DTO_RECIPROCAL_SWAP": {
+            "actualExit": 1,
+            "logSha256": "1b7d59911ec5bf93bda58c8bc1f7736426034ab71c32c9baaaf60617a1c28161",
+            "rejected": true,
+            "selector": "layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+          },
+          "NORMAL_CONCURRENT": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+          },
+          "NORMAL_TYPE": {
+            "actualExit": 0,
+            "logSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad",
+            "rejected": false,
+            "selector": "layout.PayloadTypeCatalogTest#allNamedTypesHaveIndependentDirectionalFieldMeaning"
+          },
+          "STABLE_WRONG_BYTES": {
+            "actualExit": 1,
+            "logSha256": "1b7d59911ec5bf93bda58c8bc1f7736426034ab71c32c9baaaf60617a1c28161",
+            "rejected": true,
+            "selector": "codec.PayloadGoldenVectorTest#sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+          }
+        },
+        "vmActions": 0
+      }
+    }
+  },
+  "historicalFailures": [
+    {
+      "run": "before-v1",
+      "actualExit": 1,
+      "javaTestStarted": false,
+      "bug": "BUG1286"
+    },
+    {
+      "run": "before-v2",
+      "actualExit": 1,
+      "javaTestStarted": false,
+      "bug": "BUG1287"
+    }
+  ]
+}
