@@ -37,14 +37,14 @@ import java.util.UUID;
  * SSC-032/PG-D-084; PT-ADM-024..027. Caller closes request and each returned canonical separately.
  */
 public final class UserMutationRequest implements AutoCloseable {
-  private final CommonHeader header;
-  private final Mutation mutation;
+  private final CommonHeader retainedHeader;
+  private final Mutation retainedMutation;
   private final Optional<String> username;
   private final Optional<UserId> target;
   private final Optional<UserRole> creationRole;
   private final boolean creationEnabled;
-  private final long expectedVersion;
-  private final UUID operationToken;
+  private final long retainedExpectedVersion;
+  private final UUID retainedOperationToken;
   private final char[] password;
   private boolean closed;
 
@@ -58,14 +58,14 @@ public final class UserMutationRequest implements AutoCloseable {
       long expectedVersion,
       UUID operationToken,
       String password) {
-    this.header = header;
-    this.mutation = mutation;
+    this.retainedHeader = header;
+    this.retainedMutation = mutation;
     this.username = username;
     this.target = target;
     this.creationRole = creationRole;
     this.creationEnabled = creationEnabled;
-    this.expectedVersion = expectedVersion;
-    this.operationToken = operationToken;
+    this.retainedExpectedVersion = expectedVersion;
+    this.retainedOperationToken = operationToken;
     this.password = password.toCharArray();
   }
 
@@ -158,13 +158,13 @@ public final class UserMutationRequest implements AutoCloseable {
   /** Trace metadata only, not proof of current authentication. PT-ADM-024/026. */
   public CommonHeader header() {
     ensureOpen();
-    return header;
+    return retainedHeader;
   }
 
   /** Prelude uses this exact decoded operation. PT-ADM-024/025/026. */
   public Mutation mutation() {
     ensureOpen();
-    return mutation;
+    return retainedMutation;
   }
 
   /** CREATE has no target before INSERT. PT-ADM-024/025/026. */
@@ -176,19 +176,19 @@ public final class UserMutationRequest implements AutoCloseable {
   /** Separate Inbox key; excluded from canonical bytes. PT-ADM-024/026. */
   public UUID operationToken() {
     ensureOpen();
-    return operationToken;
+    return retainedOperationToken;
   }
 
   /** Frozen result verification only; not a current DB version. PG-D-086/PT-ADM-028/031. */
   long expectedVersion() {
     ensureOpen();
-    return expectedVersion;
+    return retainedExpectedVersion;
   }
 
   /** Response layout mapping is fixed by the approved request layout. PT-ADM-024/026. */
   public LayoutId responseLayoutId() {
     ensureOpen();
-    return new LayoutId(header.layoutId().value().replace("REQ", "RSP"));
+    return new LayoutId(retainedHeader.layoutId().value().replace("REQ", "RSP"));
   }
 
   /** Caller owns returned field buffers until all current/previous-key comparisons finish. */
@@ -196,11 +196,11 @@ public final class UserMutationRequest implements AutoCloseable {
     ensureOpen();
     Objects.requireNonNull(actor, "actor");
     String scope =
-        mutation == Mutation.CREATE
+        retainedMutation == Mutation.CREATE
             ? "NEW_USER:" + new LoginUsername(username.orElseThrow()).key()
             : "USER:" + target.orElseThrow().value();
     List<CanonicalField> fields =
-        switch (mutation) {
+        switch (retainedMutation) {
           case CREATE ->
               List.of(
                   text("username", username.orElseThrow()),
@@ -210,19 +210,20 @@ public final class UserMutationRequest implements AutoCloseable {
                   flag(creationEnabled));
           case ENABLE, DISABLE ->
               List.of(
-                  flag(mutation == Mutation.ENABLE), number("expectedVersion", expectedVersion));
+                  flag(retainedMutation == Mutation.ENABLE),
+                  number("expectedVersion", retainedExpectedVersion));
           case PROMOTE, DEMOTE ->
               List.of(
-                  text("role", mutation == Mutation.PROMOTE ? "ADMIN" : "USER"),
-                  number("expectedVersion", expectedVersion));
+                  text("role", retainedMutation == Mutation.PROMOTE ? "ADMIN" : "USER"),
+                  number("expectedVersion", retainedExpectedVersion));
           case RESET_PASSWORD ->
               List.of(
                   text("password", new String(password)),
-                  number("expectedVersion", expectedVersion));
-          case UNLOCK -> List.of(number("expectedVersion", expectedVersion));
+                  number("expectedVersion", retainedExpectedVersion));
+          case UNLOCK -> List.of(number("expectedVersion", retainedExpectedVersion));
         };
     return new CanonicalRequest(
-        Long.toString(actor.userId()), header.layoutId().value(), "001", scope, fields);
+        Long.toString(actor.userId()), retainedHeader.layoutId().value(), "001", scope, fields);
   }
 
   /** Current ADMIN/prelude and Inbox NEW must precede this caller-owned write transaction. */
@@ -236,7 +237,7 @@ public final class UserMutationRequest implements AutoCloseable {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(metadata, "metadata");
-    return switch (mutation) {
+    return switch (retainedMutation) {
       case CREATE ->
           commands.create(
               connection,
@@ -251,22 +252,28 @@ public final class UserMutationRequest implements AutoCloseable {
               connection,
               actor,
               target.orElseThrow(),
-              mutation == Mutation.ENABLE,
-              expectedVersion,
+              retainedMutation == Mutation.ENABLE,
+              retainedExpectedVersion,
               metadata);
       case PROMOTE, DEMOTE ->
           commands.changeRole(
               connection,
               actor,
               target.orElseThrow(),
-              mutation == Mutation.PROMOTE ? UserRole.ADMIN : UserRole.USER,
-              expectedVersion,
+              retainedMutation == Mutation.PROMOTE ? UserRole.ADMIN : UserRole.USER,
+              retainedExpectedVersion,
               metadata);
       case RESET_PASSWORD ->
           commands.resetPassword(
-              connection, actor, target.orElseThrow(), password.clone(), expectedVersion, metadata);
+              connection,
+              actor,
+              target.orElseThrow(),
+              password.clone(),
+              retainedExpectedVersion,
+              metadata);
       case UNLOCK ->
-          commands.unlock(connection, actor, target.orElseThrow(), expectedVersion, metadata);
+          commands.unlock(
+              connection, actor, target.orElseThrow(), retainedExpectedVersion, metadata);
     };
   }
 

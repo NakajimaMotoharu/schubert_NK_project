@@ -15,11 +15,11 @@ import org.springframework.security.web.csrf.DefaultCsrfToken;
  */
 public final class WebDisplayContext {
   private static final String ATTRIBUTE = WebDisplayContext.class.getName();
-  private final TopBarViewModel topBar;
+  private final TopBarViewModel retainedTopBar;
   private final WebCsrfToken csrf;
 
   private WebDisplayContext(TopBarViewModel topBar, WebCsrfToken csrf) {
-    this.topBar = topBar;
+    this.retainedTopBar = topBar;
     this.csrf = csrf;
   }
 
@@ -79,7 +79,7 @@ public final class WebDisplayContext {
   }
 
   public TopBarViewModel topBar() {
-    return topBar;
+    return retainedTopBar;
   }
 
   @Override

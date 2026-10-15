@@ -21,8 +21,8 @@ import org.snakeyaml.engine.v2.api.LoadSettings;
  */
 @NullMarked
 public final class WebNonSecretConfig {
-  private static final String INVALID = "Web non-secret configuration unavailable";
-  private static final Pattern DECIMAL = Pattern.compile("0|[1-9][0-9]{0,4}");
+  private static final String RETAINED_INVALID = "Web non-secret configuration unavailable";
+  private static final Pattern RETAINED_DECIMAL = Pattern.compile("0|[1-9][0-9]{0,4}");
   private static final Pattern MILLIS = Pattern.compile("([1-9][0-9]{0,3})ms");
   private static final Pattern SECONDS = Pattern.compile("([1-9][0-9]?)s");
   private static final Pattern DB_URL =
@@ -67,11 +67,11 @@ public final class WebNonSecretConfig {
           .build();
 
   private final Map<String, String> values;
-  private final String canonicalSha256;
+  private final String retainedCanonicalSha256;
 
   private WebNonSecretConfig(Map<String, String> values, String canonicalSha256) {
     this.values = Map.copyOf(values);
-    this.canonicalSha256 = canonicalSha256;
+    this.retainedCanonicalSha256 = canonicalSha256;
   }
 
   public static WebNonSecretConfig parse(String commonYaml, String webYaml)
@@ -168,7 +168,7 @@ public final class WebNonSecretConfig {
   }
 
   private static int decimal(String value, int min, int max) {
-    if (!DECIMAL.matcher(value).matches()) throw invalid();
+    if (!RETAINED_DECIMAL.matcher(value).matches()) throw invalid();
     int number = Integer.parseInt(value);
     if (number < min || number > max) throw invalid();
     return number;
@@ -180,7 +180,7 @@ public final class WebNonSecretConfig {
   }
 
   private static IllegalArgumentException invalid() {
-    return new IllegalArgumentException(INVALID);
+    return new IllegalArgumentException(RETAINED_INVALID);
   }
 
   public String value(String key) {
@@ -190,7 +190,7 @@ public final class WebNonSecretConfig {
   }
 
   public String canonicalSha256() {
-    return canonicalSha256;
+    return retainedCanonicalSha256;
   }
 
   @Override

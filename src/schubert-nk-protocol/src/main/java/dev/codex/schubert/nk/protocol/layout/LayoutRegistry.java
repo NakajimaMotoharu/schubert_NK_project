@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /** Immutable 64-layout registry. Trace: NK-PRO-001, UI 233, SS 322 §12/§13. */
 public final class LayoutRegistry {
-  private static final LayoutRegistry STANDARD = new LayoutRegistry(standardDefinitions());
+  private static final LayoutRegistry RETAINED_STANDARD = new LayoutRegistry(standardDefinitions());
 
   private final List<LayoutDefinition> definitions;
   private final Map<String, LayoutDefinition> byKey;
@@ -45,7 +45,7 @@ public final class LayoutRegistry {
   }
 
   public static LayoutRegistry standard() {
-    return STANDARD;
+    return RETAINED_STANDARD;
   }
 
   public List<LayoutDefinition> all() {

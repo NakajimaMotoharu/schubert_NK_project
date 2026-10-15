@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /** Display only SCR017/UI225,236/SS313,314; PG-D346/PT-USER-DETAIL001..008. */
 @NullMarked
 public final class UserDetailViewModel {
-  private static final DateTimeFormatter TIME =
+  private static final DateTimeFormatter RETAINED_TIME =
       DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.SSS", Locale.ROOT)
           .withZone(ZoneOffset.ofHours(9));
   private final TopBarViewModel topBar;
@@ -59,7 +59,7 @@ public final class UserDetailViewModel {
   }
 
   private static String time(Instant value) {
-    return TIME.format(value);
+    return RETAINED_TIME.format(value);
   }
 
   public TopBarViewModel getTopBar() {

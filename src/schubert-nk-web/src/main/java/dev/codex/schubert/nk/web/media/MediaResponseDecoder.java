@@ -39,7 +39,7 @@ public final class MediaResponseDecoder {
   /** Validated projection only; error responses contain neither descriptor nor video metadata. */
   public static final class Result {
     private final ResultCode code;
-    private final Optional<MediaDescriptor> descriptor;
+    private final Optional<MediaDescriptor> retainedDescriptor;
     private final Optional<VideoDescriptorResponseData> video;
 
     private Result(
@@ -47,7 +47,7 @@ public final class MediaResponseDecoder {
         Optional<MediaDescriptor> descriptor,
         Optional<VideoDescriptorResponseData> video) {
       this.code = code;
-      this.descriptor = descriptor;
+      this.retainedDescriptor = descriptor;
       this.video = video;
     }
 
@@ -56,7 +56,7 @@ public final class MediaResponseDecoder {
     }
 
     public Optional<MediaDescriptor> descriptor() {
-      return descriptor;
+      return retainedDescriptor;
     }
 
     public Optional<VideoDescriptorResponseData> videoMetadata() {

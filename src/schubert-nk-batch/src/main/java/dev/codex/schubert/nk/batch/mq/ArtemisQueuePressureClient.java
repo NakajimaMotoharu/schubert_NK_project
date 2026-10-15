@@ -27,7 +27,7 @@ public final class ArtemisQueuePressureClient {
   }
 
   private static final long MIB = 1024L * 1024L;
-  private static final Map<String, Limits> LIMITS = limits();
+  private static final Map<String, Limits> RETAINED_LIMITS = limits();
   private final Reader reader;
 
   public ArtemisQueuePressureClient() {
@@ -58,7 +58,7 @@ public final class ArtemisQueuePressureClient {
     Objects.requireNonNull(session, "ops session");
     {
       var states = new LinkedHashMap<String, Value>();
-      for (var entry : LIMITS.entrySet()) {
+      for (var entry : RETAINED_LIMITS.entrySet()) {
         String queue = entry.getKey() + ".q";
         long count = nonNegative(reader.read(session, queue, "messageCount"));
         long bytes = nonNegative(reader.read(session, queue, "persistentSize"));

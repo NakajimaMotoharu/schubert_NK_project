@@ -28,12 +28,12 @@ import javax.sql.DataSource;
  */
 public final class ApiLogPathApplicationRuntime implements AutoCloseable {
   private final ApiMessagingRuntime messaging;
-  private final SyncRequestProcessor processor;
+  private final SyncRequestProcessor retainedProcessor;
 
   private ApiLogPathApplicationRuntime(
       ApiMessagingRuntime messaging, SyncRequestProcessor processor) {
     this.messaging = messaging;
-    this.processor = processor;
+    this.retainedProcessor = processor;
   }
 
   /**
@@ -136,7 +136,7 @@ public final class ApiLogPathApplicationRuntime implements AutoCloseable {
   }
 
   SyncRequestProcessor processor() {
-    return processor;
+    return retainedProcessor;
   }
 
   @Override

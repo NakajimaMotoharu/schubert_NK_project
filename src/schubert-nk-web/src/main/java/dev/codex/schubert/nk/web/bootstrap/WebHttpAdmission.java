@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 public final class WebHttpAdmission {
   private final Object lock = new Object();
   private final BooleanSupplier ownerStopping;
-  private boolean accepting;
+  private boolean retainedAccepting;
   private boolean stopping;
   private int active;
 
@@ -30,21 +30,21 @@ public final class WebHttpAdmission {
 
   public void admit() throws IOException {
     synchronized (lock) {
-      if (stopping || accepting || ownerStopping.getAsBoolean())
+      if (stopping || retainedAccepting || ownerStopping.getAsBoolean())
         throw new IOException("Web HTTP admission unavailable");
-      accepting = true;
+      retainedAccepting = true;
     }
   }
 
   public boolean accepting() {
     synchronized (lock) {
-      return accepting && !ownerStopping.getAsBoolean();
+      return retainedAccepting && !ownerStopping.getAsBoolean();
     }
   }
 
   boolean acquire() {
     synchronized (lock) {
-      if (!accepting || ownerStopping.getAsBoolean()) return false;
+      if (!retainedAccepting || ownerStopping.getAsBoolean()) return false;
       active++;
       return true;
     }
@@ -61,7 +61,7 @@ public final class WebHttpAdmission {
   public void refuse() {
     synchronized (lock) {
       stopping = true;
-      accepting = false;
+      retainedAccepting = false;
     }
   }
 
@@ -72,7 +72,7 @@ public final class WebHttpAdmission {
     long deadline = System.nanoTime() + remaining.toNanos();
     synchronized (lock) {
       stopping = true;
-      accepting = false;
+      retainedAccepting = false;
       while (active != 0) {
         long left = deadline - System.nanoTime();
         if (left <= 0) throw new IOException("Web HTTP drain unconfirmed");

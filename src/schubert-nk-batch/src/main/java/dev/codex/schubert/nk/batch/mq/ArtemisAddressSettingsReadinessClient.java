@@ -23,7 +23,7 @@ public final class ArtemisAddressSettingsReadinessClient {
   }
 
   private static final long MIB = 1024L * 1024L;
-  private static final Map<String, Capacity> CAPACITIES = capacities();
+  private static final Map<String, Capacity> RETAINED_CAPACITIES = capacities();
   private static final Map<String, String> COMMON =
       Map.ofEntries(
           Map.entry("deadLetterAddress", "\"nk.dead.letter\""),
@@ -68,7 +68,7 @@ public final class ArtemisAddressSettingsReadinessClient {
   public Map<String, Map<String, String>> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
     var actual = new LinkedHashMap<String, Map<String, String>>();
-    for (var entry : CAPACITIES.entrySet()) {
+    for (var entry : RETAINED_CAPACITIES.entrySet()) {
       Object response = reader.read(session, entry.getKey());
       if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
       actual.put(entry.getKey(), verifyResponse(json, entry.getValue()));

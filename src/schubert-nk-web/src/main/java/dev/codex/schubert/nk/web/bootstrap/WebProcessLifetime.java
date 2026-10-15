@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class WebProcessLifetime implements AutoCloseable {
-  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final AtomicBoolean retainedStopping = new AtomicBoolean();
   private final AtomicBoolean failed = new AtomicBoolean();
   private final CountDownLatch finished = new CountDownLatch(1);
   private final Thread owner = Thread.currentThread();
@@ -28,11 +28,11 @@ final class WebProcessLifetime implements AutoCloseable {
   }
 
   boolean stopping() {
-    return stopping.get();
+    return retainedStopping.get();
   }
 
   void stop() {
-    stopping.set(true);
+    retainedStopping.set(true);
   }
 
   void fail() {

@@ -163,7 +163,7 @@ public final class ServiceStartupAdmission {
 
   private static final class ReadyOnce implements Ready {
     private final Ready delegate;
-    private final Information information;
+    private final Information retainedInformation;
     private boolean active = true;
     private boolean attempted;
     private boolean released;
@@ -171,7 +171,7 @@ public final class ServiceStartupAdmission {
 
     private ReadyOnce(Ready delegate, Information information) {
       this.delegate = delegate;
-      this.information = information;
+      this.retainedInformation = information;
     }
 
     public synchronized void release() throws IOException {
@@ -191,7 +191,7 @@ public final class ServiceStartupAdmission {
 
     public synchronized Map<String, String> information() throws IOException {
       if (!active || attempted) throw new IOException("release information unavailable");
-      return Map.copyOf(information.read());
+      return Map.copyOf(retainedInformation.read());
     }
 
     private synchronized void complete() throws IOException {

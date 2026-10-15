@@ -402,7 +402,8 @@ public final class LayoutFieldCatalog {
         WLGEVT01\tDATA\tReserved\t2068\t13\tX\tF\t全space
       """;
 
-  private static final LayoutFieldCatalog STANDARD = parse(CATALOG_TSV, LayoutRegistry.standard());
+  private static final LayoutFieldCatalog RETAINED_STANDARD =
+      parse(CATALOG_TSV, LayoutRegistry.standard());
 
   private final List<LayoutFields> layouts;
   private final Map<String, LayoutFields> byId;
@@ -417,7 +418,7 @@ public final class LayoutFieldCatalog {
   }
 
   public static LayoutFieldCatalog standard() {
-    return STANDARD;
+    return RETAINED_STANDARD;
   }
 
   public List<LayoutFields> all() {

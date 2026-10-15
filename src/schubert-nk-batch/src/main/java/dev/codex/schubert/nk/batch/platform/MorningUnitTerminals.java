@@ -29,21 +29,21 @@ public final class MorningUnitTerminals {
 
   /** Actual A-after-stop observations, carried only by the verified native parent continuation. */
   public static final class Snapshot {
-    private final RootStartupContext.Snapshot parent;
-    private final List<MaintenanceUnitTermination.Observation> units;
+    private final RootStartupContext.Snapshot retainedParent;
+    private final List<MaintenanceUnitTermination.Observation> retainedUnits;
 
     private Snapshot(
         RootStartupContext.Snapshot parent, List<MaintenanceUnitTermination.Observation> units) {
-      this.parent = parent;
-      this.units = List.copyOf(units);
+      this.retainedParent = parent;
+      this.retainedUnits = List.copyOf(units);
     }
 
     public RootStartupContext.Snapshot parent() {
-      return parent;
+      return retainedParent;
     }
 
     public List<MaintenanceUnitTermination.Observation> units() {
-      return units;
+      return retainedUnits;
     }
 
     @Override

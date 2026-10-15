@@ -43,9 +43,9 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class BackupArtifactVerifier {
   private static final String MANIFEST = "MANIFEST.json";
-  private static final List<String> NAMES =
+  private static final List<String> RETAINED_NAMES =
       List.of(MANIFEST, "schubert_nk.dump", "config.tar", "credentials.tar.age");
-  private static final Set<String> REQUIRED = Set.copyOf(NAMES);
+  private static final Set<String> REQUIRED = Set.copyOf(RETAINED_NAMES);
   private static final long DEADLINE = 1_800_000_000_000L;
   private final Object lock = new Object();
   private final OwnedTransferDirectory root;
@@ -281,7 +281,7 @@ public final class BackupArtifactVerifier {
                 Metadata initial = directory(child, started);
                 require(initial.device() == parent.device());
                 boolean matching = true;
-                for (String name : NAMES) {
+                for (String name : RETAINED_NAMES) {
                   boolean actual =
                       child.atExistingEntryHandle(
                           name,
@@ -462,7 +462,7 @@ public final class BackupArtifactVerifier {
                               0));
                   Map<String, Metadata> snapshots = new HashMap<>();
                   Map<String, BackupFileDigest> observed = new HashMap<>();
-                  for (String name : NAMES) {
+                  for (String name : RETAINED_NAMES) {
                     FileClaim claim = Objects.requireNonNull(claims.get(name));
                     guard(started);
                     child.atExistingEntryHandle(
@@ -493,7 +493,7 @@ public final class BackupArtifactVerifier {
                         });
                     guard(started);
                   }
-                  for (String name : NAMES) {
+                  for (String name : RETAINED_NAMES) {
                     FileClaim claim = Objects.requireNonNull(claims.get(name));
                     guard(started);
                     child.atExistingEntryHandle(

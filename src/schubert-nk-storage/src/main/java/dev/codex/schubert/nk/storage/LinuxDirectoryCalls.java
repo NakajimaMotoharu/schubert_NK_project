@@ -26,12 +26,12 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO_OFFSET =
       STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
-  private final OpenCall open;
+  private final OpenCall retainedOpen;
   private final MkdirCall mkdir;
   private final RenameCall rename;
-  private final UnlinkCall unlink;
-  private final FdCall sync;
-  private final FdCall close;
+  private final UnlinkCall retainedUnlink;
+  private final FdCall retainedSync;
+  private final FdCall retainedClose;
 
   // Public SAM signatures allow the JDK's checked MethodHandle adapter, avoiding broad Throwable
   // catches. Construction/binding remain controlled by the factory. No user-supplied native symbol
@@ -80,7 +80,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
   }
 
   private LinuxDirectoryCalls(SymbolLookup symbols) {
-    open =
+    retainedOpen =
         bind(
             symbols,
             "openat",
@@ -117,7 +117,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT),
             Linker.Option.captureCallState("errno"));
-    unlink =
+    retainedUnlink =
         bind(
             symbols,
             "unlinkat",
@@ -128,14 +128,14 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT),
             Linker.Option.captureCallState("errno"));
-    sync =
+    retainedSync =
         bind(
             symbols,
             "fsync",
             FdCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
             Linker.Option.captureCallState("errno"));
-    close =
+    retainedClose =
         bind(
             symbols,
             "close",
@@ -195,7 +195,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
   private int open(int parent, String name, int flags, int mode) throws StorageIoException {
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      return check(open.call(state, parent, arena.allocateFrom(name), flags, mode), state);
+      return check(retainedOpen.call(state, parent, arena.allocateFrom(name), flags, mode), state);
     }
   }
 
@@ -244,18 +244,18 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
     segment(name);
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment state = arena.allocate(STATE);
-      check(unlink.call(state, directory, arena.allocateFrom(name), flags), state);
+      check(retainedUnlink.call(state, directory, arena.allocateFrom(name), flags), state);
     }
   }
 
   @Override
   public void sync(int directory) throws StorageIoException {
-    call(sync, directory);
+    call(retainedSync, directory);
   }
 
   @Override
   public void close(int directory) throws StorageIoException {
-    call(close, directory);
+    call(retainedClose, directory);
   }
 
   private static void call(FdCall function, int directory) throws StorageIoException {

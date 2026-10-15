@@ -57,7 +57,7 @@ public final class MorningBrokerUnitCycle {
     private final MorningBrokerUnitCycle owner;
     private final Observation actual;
     private final InspectorUnitSnapshot previous;
-    private final Optional<BrokerJournalEvidence.Summary> stoppedJournal;
+    private final Optional<BrokerJournalEvidence.Summary> retainedStoppedJournal;
 
     private Live(
         MorningBrokerUnitCycle owner,
@@ -67,7 +67,7 @@ public final class MorningBrokerUnitCycle {
       this.owner = owner;
       this.actual = actual;
       this.previous = previous;
-      this.stoppedJournal = stoppedJournal;
+      this.retainedStoppedJournal = stoppedJournal;
     }
 
     public InspectorUnitSnapshot previousObservation() throws IOException {
@@ -77,7 +77,7 @@ public final class MorningBrokerUnitCycle {
 
     public Optional<BrokerJournalEvidence.Summary> stoppedJournal() throws IOException {
       owner.check();
-      return stoppedJournal;
+      return retainedStoppedJournal;
     }
 
     public String invocation() {

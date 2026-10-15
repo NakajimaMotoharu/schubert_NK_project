@@ -70,8 +70,8 @@ final class CleanupMaintenanceWork {
   private final MaintenanceOwnerFrame owner;
   private final MaintenanceOwnerFrame.Guard guard;
   private final MaintenanceMutationGuard mutation;
-  private final Inbox inbox;
-  private final Transfer transfer;
+  private final Inbox retainedInbox;
+  private final Transfer retainedTransfer;
 
   CleanupMaintenanceWork(
       RootStartupContext context,
@@ -84,8 +84,8 @@ final class CleanupMaintenanceWork {
     this.guard = Objects.requireNonNull(guard, "same owner mutation guard");
     requireProfile();
     mutation = new MaintenanceMutationGuard(guard);
-    inbox = this::inspect;
-    transfer = this::transfer;
+    retainedInbox = this::inspect;
+    retainedTransfer = this::transfer;
   }
 
   CleanupMaintenanceWork(
@@ -101,8 +101,8 @@ final class CleanupMaintenanceWork {
     this.guard = Objects.requireNonNull(guard, "same owner mutation guard");
     requireProfile();
     mutation = new MaintenanceMutationGuard(guard);
-    this.inbox = Objects.requireNonNull(inbox, "synchronous Inspector operation");
-    this.transfer = Objects.requireNonNull(transfer, "actual Transfer operation");
+    this.retainedInbox = Objects.requireNonNull(inbox, "synchronous Inspector operation");
+    this.retainedTransfer = Objects.requireNonNull(transfer, "actual Transfer operation");
   }
 
   private void requireProfile() {
@@ -176,7 +176,7 @@ final class CleanupMaintenanceWork {
     var files = begin(borrowed, BatchStep.CLEAN_TRANSFER);
     if (!files.skipped()) {
       guard.check();
-      var result = Objects.requireNonNull(transfer.execute(), "actual Transfer counters");
+      var result = Objects.requireNonNull(retainedTransfer.execute(), "actual Transfer counters");
       require(
           result.status() == BatchStepResult.Status.SUCCESS
               || result.status() == BatchStepResult.Status.WARNING);
@@ -201,7 +201,7 @@ final class CleanupMaintenanceWork {
     if (attempt.skipped()) return false;
     var completed = new AtomicBoolean();
     var warning = new AtomicBoolean();
-    inbox.execute(
+    retainedInbox.execute(
         c,
         inspected -> {
           Objects.requireNonNull(inspected, "actual same-run inspection");

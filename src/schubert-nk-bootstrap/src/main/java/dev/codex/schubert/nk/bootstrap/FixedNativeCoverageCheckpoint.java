@@ -172,8 +172,8 @@ public final class FixedNativeCoverageCheckpoint {
     }
 
     private final Object agent;
-    private final Method version;
-    private final Method session;
+    private final Method retainedVersion;
+    private final Method retainedSession;
     private final Method data;
     private final Invocation invocation;
 
@@ -198,8 +198,8 @@ public final class FixedNativeCoverageCheckpoint {
         Object actual = invocation.invoke(rt.getMethod("getAgent"), null, new Object[0]);
         if (actual == null || !type.isInstance(actual)) throw unavailable();
         agent = actual;
-        version = type.getMethod("getVersion");
-        session = type.getMethod("getSessionId");
+        retainedVersion = type.getMethod("getVersion");
+        retainedSession = type.getMethod("getSessionId");
         data = type.getMethod("getExecutionData", boolean.class);
       } catch (ReflectiveOperationException | java.net.URISyntaxException | IOException failure) {
         throw unavailable();
@@ -221,12 +221,12 @@ public final class FixedNativeCoverageCheckpoint {
 
     @Override
     public String version() throws IOException {
-      return string(version);
+      return string(retainedVersion);
     }
 
     @Override
     public String session() throws IOException {
-      return string(session);
+      return string(retainedSession);
     }
 
     private String string(Method method) throws IOException {

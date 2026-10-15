@@ -61,8 +61,8 @@ final class MorningBrokerExecution {
 
   /** Same callback owner; Live remains the OS guard, never a recursive DB guard. SSC128/130. */
   static final class Completion {
-    private final MorningBrokerUnitCycle.Live live;
-    private final Observations initial;
+    private final MorningBrokerUnitCycle.Live retainedLive;
+    private final Observations retainedInitial;
     private final MaintenanceOwnerFrame.Guard parent;
     private final MorningBrokerUnitCycle.ParentProof databaseProof;
     private final Path credentialPath;
@@ -75,8 +75,8 @@ final class MorningBrokerExecution {
         MorningBrokerUnitCycle.ParentProof databaseProof,
         Path credentialPath,
         UUID boot) {
-      this.live = Objects.requireNonNull(live);
-      this.initial = Objects.requireNonNull(initial);
+      this.retainedLive = Objects.requireNonNull(live);
+      this.retainedInitial = Objects.requireNonNull(initial);
       this.parent = Objects.requireNonNull(parent);
       this.databaseProof = Objects.requireNonNull(databaseProof);
       this.credentialPath = Objects.requireNonNull(credentialPath);
@@ -84,27 +84,27 @@ final class MorningBrokerExecution {
     }
 
     MorningBrokerUnitCycle.Live live() throws IOException {
-      live.recheck();
-      return live;
+      retainedLive.recheck();
+      return retainedLive;
     }
 
     String invocation() throws IOException {
-      live.recheck();
-      return live.invocation();
+      retainedLive.recheck();
+      return retainedLive.invocation();
     }
 
     void recheck() throws IOException {
-      live.recheck();
+      retainedLive.recheck();
     }
 
     Observations initial() throws IOException {
-      live.recheck();
-      return initial;
+      retainedLive.recheck();
+      return retainedInitial;
     }
 
     Observations observe() throws IOException {
       parent.check();
-      live.recheck();
+      retainedLive.recheck();
       databaseProof.verify();
       var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), credentialPath);
       return ResourceScope.use(
@@ -113,7 +113,7 @@ final class MorningBrokerExecution {
               readObservations(
                   new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create()),
                   parent,
-                  live,
+                  retainedLive,
                   databaseProof,
                   boot));
     }

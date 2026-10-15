@@ -8,7 +8,7 @@ import java.util.Objects;
 /** Defensive exact-width payload bytes; its textual form never exposes field content. */
 public final class FixedPayload implements LayoutPayload {
   private final byte[] data;
-  private final int recordLength;
+  private final int retainedRecordLength;
   private final List<byte[]> records;
 
   public FixedPayload(byte[] data, int recordLength, List<byte[]> records) {
@@ -18,7 +18,7 @@ public final class FixedPayload implements LayoutPayload {
       throw new LayoutValidationException("record length must not be negative");
     }
     this.data = data.clone();
-    this.recordLength = recordLength;
+    this.retainedRecordLength = recordLength;
     ArrayList<byte[]> copies = new ArrayList<>(records.size());
     for (byte[] record : records) {
       Objects.requireNonNull(record, "record");
@@ -37,7 +37,7 @@ public final class FixedPayload implements LayoutPayload {
 
   @Override
   public int recordLength() {
-    return recordLength;
+    return retainedRecordLength;
   }
 
   @Override
@@ -64,7 +64,7 @@ public final class FixedPayload implements LayoutPayload {
     return "FixedPayload[dataLength="
         + data.length
         + ", recordLength="
-        + recordLength
+        + retainedRecordLength
         + ", recordCount="
         + records.size()
         + ']';

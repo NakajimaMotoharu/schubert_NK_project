@@ -23,11 +23,11 @@ public final class MaintenanceStopSnapshot {
   private static final Set<String> KEYS = Set.copyOf(List.of(PROPERTIES.split(",")));
   private static final BigInteger U32 = new BigInteger("4294967295");
   private static final BigInteger U64 = new BigInteger("18446744073709551615");
-  private final MaintenanceUnit unit;
+  private final MaintenanceUnit retainedUnit;
   private final Map<String, String> fields;
 
   private MaintenanceStopSnapshot(MaintenanceUnit unit, Map<String, String> fields) {
-    this.unit = unit;
+    this.retainedUnit = unit;
     this.fields = Map.copyOf(fields);
   }
 
@@ -73,7 +73,7 @@ public final class MaintenanceStopSnapshot {
   }
 
   public MaintenanceUnit unit() {
-    return unit;
+    return retainedUnit;
   }
 
   public String controlGroup() {
@@ -98,7 +98,7 @@ public final class MaintenanceStopSnapshot {
 
   public boolean matches(MaintenanceStopSnapshot other) {
     Objects.requireNonNull(other, "terminal observation");
-    return unit == other.unit && fields.equals(other.fields);
+    return retainedUnit == other.retainedUnit && fields.equals(other.fields);
   }
 
   @Override

@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class BatchRunRepository {
-  private static final String HISTORY =
+  private static final String RETAINED_HISTORY =
       "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
           + "target_count,success_count,failure_count,byte_count from schubert.batch_runs"
           + " where business_date=? and step=? order by attempt limit 100 for update";
@@ -229,7 +229,7 @@ public final class BatchRunRepository {
     List<History> result = new ArrayList<>();
     Set<Long> ids = new HashSet<>();
     int previous = 0;
-    var statement = connection.prepareStatement(HISTORY);
+    var statement = connection.prepareStatement(RETAINED_HISTORY);
     @Nullable Throwable statementFailure = null;
     try {
       var query = present(statement);

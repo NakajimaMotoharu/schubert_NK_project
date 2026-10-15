@@ -14,20 +14,20 @@ import java.util.function.Supplier;
 public final class WebRequestContext {
   static final String ATTRIBUTE = WebRequestContext.class.getName();
   private static final String ID_ATTRIBUTE = WebRequestContext.class.getName() + ".requestId";
-  private final UUID requestId;
-  private final LoginClientAddress clientAddress;
+  private final UUID retainedRequestId;
+  private final LoginClientAddress retainedClientAddress;
 
   WebRequestContext(UUID requestId, LoginClientAddress clientAddress) {
-    this.requestId = Objects.requireNonNull(requestId, "requestId");
-    this.clientAddress = Objects.requireNonNull(clientAddress, "clientAddress");
+    this.retainedRequestId = Objects.requireNonNull(requestId, "requestId");
+    this.retainedClientAddress = Objects.requireNonNull(clientAddress, "clientAddress");
   }
 
   public UUID requestId() {
-    return requestId;
+    return retainedRequestId;
   }
 
   public LoginClientAddress clientAddress() {
-    return clientAddress;
+    return retainedClientAddress;
   }
 
   /** Missing/mistyped server context is a wiring failure, never an untrusted fallback. */

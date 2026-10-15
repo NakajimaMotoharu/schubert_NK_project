@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
 public final class ServiceConfigFiles implements NonSecretConfigSource {
   private static final Path PRODUCTION_ROOT = Path.of("/etc/schubert-nk");
   private static final int MAX_BYTES = 16_384;
-  private static final ServiceConfigFiles PRODUCTION =
+  private static final ServiceConfigFiles RETAINED_PRODUCTION =
       new ServiceConfigFiles(
           PRODUCTION_ROOT,
           new StorageIdentity("root", "schubert"),
@@ -82,7 +82,7 @@ public final class ServiceConfigFiles implements NonSecretConfigSource {
   }
 
   public static ServiceConfigFiles production() {
-    return PRODUCTION;
+    return RETAINED_PRODUCTION;
   }
 
   static Contents read(Path root, StorageIdentity identity, DirectoryCalls calls, Service service)

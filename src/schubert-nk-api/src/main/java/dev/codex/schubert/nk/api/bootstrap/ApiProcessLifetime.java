@@ -19,7 +19,7 @@ import java.util.function.Consumer;
  * context or calls System.exit. SS312321342/SSC158/PG-D334/PT-OPS-API-READY001..008.
  */
 final class ApiProcessLifetime implements AutoCloseable {
-  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final AtomicBoolean retainedStopping = new AtomicBoolean();
   private final AtomicBoolean failed = new AtomicBoolean();
   private final CountDownLatch finished = new CountDownLatch(1);
   private final Thread owner = Thread.currentThread();
@@ -32,11 +32,11 @@ final class ApiProcessLifetime implements AutoCloseable {
   }
 
   boolean stopping() {
-    return stopping.get();
+    return retainedStopping.get();
   }
 
   void stop() {
-    stopping.set(true);
+    retainedStopping.set(true);
   }
 
   void fail() {

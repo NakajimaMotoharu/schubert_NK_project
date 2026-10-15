@@ -44,18 +44,18 @@ public final class ScenarioWireClient {
   }
 
   public static final class Result {
-    private final ProtectedReadWireClient.Result result;
+    private final ProtectedReadWireClient.Result retainedResult;
 
     private Result(ProtectedReadWireClient.Result result) {
-      this.result = result;
+      this.retainedResult = result;
     }
 
     public ResultCode resultCode() {
-      return result.resultCode();
+      return retainedResult.resultCode();
     }
 
     public Optional<TypedPayloadValues> payload() {
-      return result.payload();
+      return retainedResult.payload();
     }
 
     @Override

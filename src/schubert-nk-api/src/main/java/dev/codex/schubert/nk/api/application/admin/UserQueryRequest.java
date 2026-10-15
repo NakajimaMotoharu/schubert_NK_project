@@ -34,11 +34,11 @@ import java.util.Optional;
  * SSC-035/PG-D-088/PT-ADM-040..043. Caller closes each independent canonical buffer.
  */
 public final class UserQueryRequest {
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
   private final TypedPayloadValues values;
 
   private UserQueryRequest(CommonHeader header, TypedPayloadValues values) {
-    this.header = header;
+    this.retainedHeader = header;
     this.values = values;
   }
 
@@ -63,11 +63,11 @@ public final class UserQueryRequest {
   }
 
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   public boolean detailRequest() {
-    return header.layoutId().value().equals("UDTREQ01");
+    return retainedHeader.layoutId().value().equals("UDTREQ01");
   }
 
   public LayoutId responseLayoutId() {
@@ -91,9 +91,9 @@ public final class UserQueryRequest {
     }
     return new CanonicalRequest(
         Long.toString(actor.userId()),
-        header.layoutId().value(),
+        retainedHeader.layoutId().value(),
         "001",
-        "REQUEST:" + header.layoutId().value(),
+        "REQUEST:" + retainedHeader.layoutId().value(),
         fields);
   }
 

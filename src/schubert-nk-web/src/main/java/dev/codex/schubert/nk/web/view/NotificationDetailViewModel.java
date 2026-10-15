@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class NotificationDetailViewModel {
-  private static final DateTimeFormatter TIME =
+  private static final DateTimeFormatter RETAINED_TIME =
       DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss", Locale.ROOT)
           .withZone(ZoneOffset.ofHours(9));
   private final TopBarViewModel topBar;
@@ -84,7 +84,7 @@ public final class NotificationDetailViewModel {
   }
 
   private static String time(Instant at) {
-    return TIME.format(at);
+    return RETAINED_TIME.format(at);
   }
 
   public TopBarViewModel getTopBar() {

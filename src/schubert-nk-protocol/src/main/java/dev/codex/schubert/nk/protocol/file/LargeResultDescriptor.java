@@ -22,17 +22,17 @@ public final class LargeResultDescriptor {
   private static final DateTimeFormatter DATE =
       DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(ResolverStyle.STRICT);
 
-  private final UUID fileId;
-  private final String relativePath;
-  private final long byteLength;
-  private final String sha256;
-  private final int recordCount;
+  private final UUID retainedFileId;
+  private final String retainedRelativePath;
+  private final long retainedByteLength;
+  private final String retainedSha256;
+  private final int retainedRecordCount;
 
   public LargeResultDescriptor(
       UUID fileId, String relativePath, long byteLength, String sha256, int recordCount) {
-    this.fileId = Objects.requireNonNull(fileId, "fileId");
-    this.relativePath = Objects.requireNonNull(relativePath, "relativePath");
-    this.sha256 = Objects.requireNonNull(sha256, "sha256");
+    this.retainedFileId = Objects.requireNonNull(fileId, "fileId");
+    this.retainedRelativePath = Objects.requireNonNull(relativePath, "relativePath");
+    this.retainedSha256 = Objects.requireNonNull(sha256, "sha256");
     if (recordCount < 1 || recordCount > MAXIMUM_RECORD_COUNT) {
       throw new IllegalArgumentException("large-result record count is outside 1..10000");
     }
@@ -45,25 +45,25 @@ public final class LargeResultDescriptor {
       throw new IllegalArgumentException("large-result SHA-256 must be lowercase hexadecimal");
     }
     validatePath(fileId, relativePath);
-    this.byteLength = byteLength;
-    this.recordCount = recordCount;
+    this.retainedByteLength = byteLength;
+    this.retainedRecordCount = recordCount;
   }
 
   public UUID fileId() {
-    return fileId;
+    return retainedFileId;
   }
 
   /** Validated wire value; do not log it. */
   public String relativePath() {
-    return relativePath;
+    return retainedRelativePath;
   }
 
   public long byteLength() {
-    return byteLength;
+    return retainedByteLength;
   }
 
   public String sha256() {
-    return sha256;
+    return retainedSha256;
   }
 
   public int recordLength() {
@@ -71,19 +71,19 @@ public final class LargeResultDescriptor {
   }
 
   public int recordCount() {
-    return recordCount;
+    return retainedRecordCount;
   }
 
   @Override
   public String toString() {
     return "LargeResultDescriptor[fileId="
-        + fileId
+        + retainedFileId
         + ", relativePath=REDACTED, byteLength="
-        + byteLength
+        + retainedByteLength
         + ", sha256=REDACTED, recordLength="
         + RECORD_LENGTH
         + ", recordCount="
-        + recordCount
+        + retainedRecordCount
         + ']';
   }
 

@@ -21,9 +21,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class LinuxSealedProof {
-  private final CreateCall create;
+  private final CreateCall retainedCreate;
   private final WriteCall write;
-  private final ReadCall read;
+  private final ReadCall retainedRead;
   private final FcntlCall fcntl;
   private final ModeCall mode;
   private final CloseCall close;
@@ -125,9 +125,9 @@ public final class LinuxSealedProof {
       FcntlCall fcntl,
       ModeCall mode,
       CloseCall close) {
-    this.create = Objects.requireNonNull(create, "create");
+    this.retainedCreate = Objects.requireNonNull(create, "create");
     this.write = Objects.requireNonNull(write, "write");
-    this.read = Objects.requireNonNull(read, "read");
+    this.retainedRead = Objects.requireNonNull(read, "read");
     this.fcntl = Objects.requireNonNull(fcntl, "fcntl");
     this.mode = Objects.requireNonNull(mode, "mode");
     this.close = Objects.requireNonNull(close, "close");
@@ -141,7 +141,8 @@ public final class LinuxSealedProof {
     byte[] copy = publicBytes.clone();
     try (Arena arena = Arena.ofConfined()) {
       int descriptor =
-          create.call(arena.allocateFrom("schubert-startup-proof"), 3); // CLOEXEC|ALLOW_SEALING
+          retainedCreate.call(
+              arena.allocateFrom("schubert-startup-proof"), 3); // CLOEXEC|ALLOW_SEALING
       if (descriptor < 0) throw unavailable();
       return ResourceScope.use(
           () -> closeOwned(descriptor), () -> prepare(arena, descriptor, copy, operation));
@@ -182,7 +183,8 @@ public final class LinuxSealedProof {
       MemorySegment buffer = arena.allocate(8193);
       int offset = 0;
       while (offset < 8193) {
-        long count = read.call(admittedDescriptor, buffer.asSlice(offset), 8193 - offset, offset);
+        long count =
+            retainedRead.call(admittedDescriptor, buffer.asSlice(offset), 8193 - offset, offset);
         if (count < 0 || count > 8193 - offset) throw unavailable();
         if (count == 0) {
           if (offset == 0) throw unavailable();

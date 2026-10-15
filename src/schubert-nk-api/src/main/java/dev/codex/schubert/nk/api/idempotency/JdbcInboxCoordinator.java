@@ -35,12 +35,12 @@ public final class JdbcInboxCoordinator {
       "select "
           + SELECT_COLUMNS
           + " from schubert.request_inbox where owner_user_id=? and operation_token=? for update";
-  private static final String INSERT =
+  private static final String RETAINED_INSERT =
       "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,"
           + "request_version,owner_user_id,operation_token,request_fingerprint_hmac,"
           + "fingerprint_key_version,processing_state,created_at,expires_at) "
           + "values(?,?,?,?,?,?,?,?, 'PROCESSING',?,?)";
-  private static final String COMPLETE =
+  private static final String RETAINED_COMPLETE =
       "update schubert.request_inbox set processing_state=?,result_ref_type=?,result_ref_id=?,"
           + "result_ref_uuid=?,response_layout_id=?,response_version=?,response_body_encrypted=?,"
           + "response_key_version=?,completed_at=?,"
@@ -331,7 +331,7 @@ public final class JdbcInboxCoordinator {
 
   private static void insert(Connection connection, InboxRequest request, Fingerprint fingerprint)
       throws SQLException {
-    try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
+    try (PreparedStatement statement = connection.prepareStatement(RETAINED_INSERT)) {
       statement.setObject(1, request.messageId());
       statement.setObject(2, request.correlationId());
       statement.setString(3, request.canonicalRequest().layoutId());
@@ -348,7 +348,7 @@ public final class JdbcInboxCoordinator {
 
   private static void complete(Connection connection, UUID messageId, InboxCompletion completion)
       throws SQLException {
-    try (PreparedStatement statement = connection.prepareStatement(COMPLETE)) {
+    try (PreparedStatement statement = connection.prepareStatement(RETAINED_COMPLETE)) {
       statement.setString(1, completion.state().name());
       InboxResultReference reference = completion.resultReference();
       statement.setString(2, reference.type().name());

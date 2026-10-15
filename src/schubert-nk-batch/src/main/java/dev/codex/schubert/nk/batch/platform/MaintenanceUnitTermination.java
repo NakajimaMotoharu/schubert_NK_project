@@ -85,13 +85,13 @@ public final class MaintenanceUnitTermination {
   public record KernelDirectory(int mode, int uid, int gid, long device, long inode) {}
 
   public static final class Observation {
-    private final MaintenanceStopSnapshot manager;
-    private final List<KernelDirectory> directories;
+    private final MaintenanceStopSnapshot retainedManager;
+    private final List<KernelDirectory> retainedDirectories;
     private final boolean present;
 
     private Observation(MaintenanceStopSnapshot manager, FixedUnitCgroupNamespace.Snapshot kernel) {
-      this.manager = manager;
-      directories =
+      this.retainedManager = manager;
+      retainedDirectories =
           List.copyOf(
               kernel.identities().stream()
                   .map(i -> new KernelDirectory(i.mode(), i.uid(), i.gid(), i.device(), i.inode()))
@@ -100,11 +100,11 @@ public final class MaintenanceUnitTermination {
     }
 
     public MaintenanceStopSnapshot manager() {
-      return manager;
+      return retainedManager;
     }
 
     public List<KernelDirectory> directories() {
-      return directories;
+      return retainedDirectories;
     }
 
     public boolean leafPresent() {

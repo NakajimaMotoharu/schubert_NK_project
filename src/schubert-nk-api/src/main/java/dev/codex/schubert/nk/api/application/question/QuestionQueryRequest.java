@@ -38,11 +38,11 @@ import java.util.Set;
  * SS323/324/332/SSC157/PG-D-330; PT-QRY009..012/NTF009. Caller closes canonical buffers.
  */
 public final class QuestionQueryRequest {
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
   private final TypedPayloadValues values;
 
   private QuestionQueryRequest(CommonHeader header, TypedPayloadValues values) {
-    this.header = header;
+    this.retainedHeader = header;
     this.values = values;
   }
 
@@ -67,11 +67,11 @@ public final class QuestionQueryRequest {
   }
 
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   public boolean questionScope() {
-    return header.layoutId().value().startsWith("QS");
+    return retainedHeader.layoutId().value().startsWith("QS");
   }
 
   public boolean detailRequest() {
@@ -84,7 +84,7 @@ public final class QuestionQueryRequest {
   }
 
   public LayoutId responseLayoutId() {
-    return new LayoutId(header.layoutId().value().substring(0, 3) + "RSP01");
+    return new LayoutId(retainedHeader.layoutId().value().substring(0, 3) + "RSP01");
   }
 
   public CanonicalRequest canonical(AuthenticatedActor actor) {
@@ -124,9 +124,9 @@ public final class QuestionQueryRequest {
     }
     return new CanonicalRequest(
         Long.toString(actor.userId()),
-        header.layoutId().value(),
+        retainedHeader.layoutId().value(),
         "001",
-        "REQUEST:" + header.layoutId().value(),
+        "REQUEST:" + retainedHeader.layoutId().value(),
         fields);
   }
 

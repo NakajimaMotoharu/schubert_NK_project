@@ -187,11 +187,11 @@ public final class ProtectedReadWireClient {
   /** Safe internal value projection, not an HTML model and not a session grant. */
   public static final class Result {
     private final ResultCode code;
-    private final Optional<TypedPayloadValues> payload;
+    private final Optional<TypedPayloadValues> retainedPayload;
 
     private Result(ResultCode code, Optional<TypedPayloadValues> payload) {
       this.code = code;
-      this.payload = payload;
+      this.retainedPayload = payload;
     }
 
     public ResultCode resultCode() {
@@ -199,7 +199,7 @@ public final class ProtectedReadWireClient {
     }
 
     public Optional<TypedPayloadValues> payload() {
-      return payload;
+      return retainedPayload;
     }
 
     @Override

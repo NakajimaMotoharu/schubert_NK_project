@@ -22,7 +22,7 @@ import org.snakeyaml.engine.v2.api.LoadSettings;
  */
 @NullMarked
 public final class ApiNonSecretConfig {
-  private static final String INVALID = "API non-secret configuration unavailable";
+  private static final String RETAINED_INVALID = "API non-secret configuration unavailable";
   private static final Pattern DB_URL =
       Pattern.compile(
           "jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/([a-z_][a-z0-9_]{0,62})");
@@ -68,11 +68,11 @@ public final class ApiNonSecretConfig {
           .build();
 
   private final Map<String, String> values;
-  private final String canonicalSha256;
+  private final String retainedCanonicalSha256;
 
   private ApiNonSecretConfig(Map<String, String> values, String canonicalSha256) {
     this.values = Map.copyOf(values);
-    this.canonicalSha256 = canonicalSha256;
+    this.retainedCanonicalSha256 = canonicalSha256;
   }
 
   /**
@@ -178,7 +178,7 @@ public final class ApiNonSecretConfig {
   }
 
   private static IllegalArgumentException invalid() {
-    return new IllegalArgumentException(INVALID);
+    return new IllegalArgumentException(RETAINED_INVALID);
   }
 
   /** Approved non-secret scalar only. Unknown keys are not available to callers. */
@@ -189,7 +189,7 @@ public final class ApiNonSecretConfig {
   }
 
   public String canonicalSha256() {
-    return canonicalSha256;
+    return retainedCanonicalSha256;
   }
 
   @Override

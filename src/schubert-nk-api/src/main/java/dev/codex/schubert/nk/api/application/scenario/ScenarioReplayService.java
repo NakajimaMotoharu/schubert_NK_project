@@ -53,8 +53,8 @@ public final class ScenarioReplayService {
     private final CommonHeader header;
     private final PayloadValues values;
     private final ResultCode code;
-    private final Optional<ScenarioDetailResponseData> detail;
-    private final Optional<LargeResultDescriptor> descriptor;
+    private final Optional<ScenarioDetailResponseData> retainedDetail;
+    private final Optional<LargeResultDescriptor> retainedDescriptor;
 
     private Snapshot(
         ResponseSnapshotIdentity identity,
@@ -67,8 +67,8 @@ public final class ScenarioReplayService {
       this.header = header;
       this.values = values;
       this.code = code;
-      this.detail = detail;
-      this.descriptor = descriptor;
+      this.retainedDetail = detail;
+      this.retainedDescriptor = descriptor;
     }
 
     public ResultCode resultCode() {
@@ -76,12 +76,12 @@ public final class ScenarioReplayService {
     }
 
     public Optional<ScenarioDetailResponseData> detail() {
-      return detail;
+      return retainedDetail;
     }
 
     /** Metadata validation only; caller must verify the physical file outside DB transaction. */
     public Optional<LargeResultDescriptor> descriptor() {
-      return descriptor;
+      return retainedDescriptor;
     }
 
     @Override
@@ -224,10 +224,10 @@ public final class ScenarioReplayService {
       Snapshot saved = read(request, actor, original);
       require(
           ScenarioFileRegenerator.sameContent(
-              saved.descriptor.orElseThrow(IllegalArgumentException::new), replacement));
+              saved.retainedDescriptor.orElseThrow(IllegalArgumentException::new), replacement));
       TypedPayloadValues typed =
           ScenarioDetailDelivery.fileResponse(
-              saved.detail.orElseThrow(IllegalArgumentException::new), replacement);
+              saved.retainedDetail.orElseThrow(IllegalArgumentException::new), replacement);
       FixedPayload payload =
           PayloadCodec.standard().encode(PayloadTypeCatalog.encode(typed), ResultCode.SUCCESS);
       byte[] body = FixedWidthEncoder.standard().encode(new WireMessage<>(saved.header, payload));

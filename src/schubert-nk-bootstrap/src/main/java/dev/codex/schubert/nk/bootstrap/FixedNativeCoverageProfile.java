@@ -31,9 +31,9 @@ public final class FixedNativeCoverageProfile {
   public static final String AGENT_SHA256 =
       "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d";
   private static final String RESERVED_PREFIX = "-javaagent:/opt/pgpt-tools-pg390/";
-  private final ServiceConfigFiles.Service service;
-  private final Phase phase;
-  private final String invocation;
+  private final ServiceConfigFiles.Service retainedService;
+  private final Phase retainedPhase;
+  private final String retainedInvocation;
   private final @Nullable TerminalRole terminalRole;
 
   private FixedNativeCoverageProfile(
@@ -46,9 +46,9 @@ public final class FixedNativeCoverageProfile {
       Phase phase,
       String invocation,
       @Nullable TerminalRole terminalRole) {
-    this.service = service;
-    this.phase = phase;
-    this.invocation = invocation;
+    this.retainedService = service;
+    this.retainedPhase = phase;
+    this.retainedInvocation = invocation;
     this.terminalRole = terminalRole;
   }
 
@@ -98,11 +98,11 @@ public final class FixedNativeCoverageProfile {
   public ServiceConfigFiles.Service service() {
     if (terminalRole != null)
       throw new IllegalStateException("terminal role is not startup service");
-    return service;
+    return retainedService;
   }
 
   public Phase phase() {
-    return phase;
+    return retainedPhase;
   }
 
   /** SSC234: only the two fixed ordinary oneshot roles support a closing measurement. */
@@ -111,18 +111,18 @@ public final class FixedNativeCoverageProfile {
   }
 
   public String invocation() {
-    return invocation;
+    return retainedInvocation;
   }
 
   public String sessionId() {
-    String label = terminalRole == null ? service.name() : terminalRole.name();
-    return label + "-" + invocation + "-" + phase.name().toLowerCase(Locale.ROOT);
+    String label = terminalRole == null ? retainedService.name() : terminalRole.name();
+    return label + "-" + retainedInvocation + "-" + retainedPhase.name().toLowerCase(Locale.ROOT);
   }
 
   String cgroup() {
     String unit =
         terminalRole == null
-            ? "schubert-nk-" + service.name().toLowerCase(Locale.ROOT) + ".service"
+            ? "schubert-nk-" + retainedService.name().toLowerCase(Locale.ROOT) + ".service"
             : terminalRole == TerminalRole.INSPECTOR
                 ? "schubert-nk-inbox-inspector.service"
                 : "schubert-nk-bootstrap-admin.service";
@@ -134,15 +134,15 @@ public final class FixedNativeCoverageProfile {
       return terminalRole == TerminalRole.INSPECTOR
           ? "ordinary-inspector196"
           : "ordinary-bootstrap196";
-    return (phase == Phase.ROOT ? "root-" : "ordinary-")
-        + service.name().toLowerCase(Locale.ROOT)
+    return (retainedPhase == Phase.ROOT ? "root-" : "ordinary-")
+        + retainedService.name().toLowerCase(Locale.ROOT)
         + "193";
   }
 
   FixedServiceIdentity.Value identity(FixedServiceIdentity resolver) throws java.io.IOException {
     return terminalRole == TerminalRole.INSPECTOR
         ? resolver.resolveInspector()
-        : resolver.resolve(service);
+        : resolver.resolve(retainedService);
   }
 
   /** output=none: no vendor pathname reopen/truncation; held new-only export is separate. */
@@ -156,6 +156,6 @@ public final class FixedNativeCoverageProfile {
   public FixedNativeCoverageProfile forOrdinary() {
     if (terminalRole != null)
       throw new IllegalStateException("terminal role cannot forward startup");
-    return new FixedNativeCoverageProfile(service, Phase.ORDINARY, invocation);
+    return new FixedNativeCoverageProfile(retainedService, Phase.ORDINARY, retainedInvocation);
   }
 }

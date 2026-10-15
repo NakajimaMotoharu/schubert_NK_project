@@ -247,11 +247,11 @@ final class TransferCleanup {
     private long target;
     private long success;
     private long failure;
-    private long retained;
+    private long retainedRetained;
     private long bytes;
 
     void retained() {
-      retained = Math.addExact(retained, 1);
+      retainedRetained = Math.addExact(retainedRetained, 1);
     }
 
     void failed() {
@@ -266,7 +266,7 @@ final class TransferCleanup {
     }
 
     Outcome outcome() {
-      return new Outcome(target, success, failure, retained, bytes);
+      return new Outcome(target, success, failure, retainedRetained, bytes);
     }
   }
 }

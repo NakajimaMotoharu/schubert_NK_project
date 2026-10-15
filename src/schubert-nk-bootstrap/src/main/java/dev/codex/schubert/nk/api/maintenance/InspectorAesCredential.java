@@ -16,12 +16,12 @@ import org.jspecify.annotations.Nullable;
 public final class InspectorAesCredential implements AutoCloseable {
   private static final byte[] MAGIC = "NKKEY1\n".getBytes(StandardCharsets.US_ASCII);
   private final Object stateLock = new Object();
-  private final String version;
+  private final String retainedVersion;
   private final byte[] key;
   private boolean closed;
 
   private InspectorAesCredential(String version, byte[] ownedKey) {
-    this.version = version;
+    this.retainedVersion = version;
     this.key = ownedKey;
   }
 
@@ -67,7 +67,7 @@ public final class InspectorAesCredential implements AutoCloseable {
 
   /** Version is non-secret metadata, available after destruction as well. */
   public String version() {
-    return version;
+    return retainedVersion;
   }
 
   /** Caller owns and must clear this copy after initializing the existing cipher codec. */
@@ -92,7 +92,7 @@ public final class InspectorAesCredential implements AutoCloseable {
   public String toString() {
     synchronized (stateLock) {
       return "InspectorAesCredential[version="
-          + version
+          + retainedVersion
           + ", key=<redacted>, closed="
           + closed
           + "]";

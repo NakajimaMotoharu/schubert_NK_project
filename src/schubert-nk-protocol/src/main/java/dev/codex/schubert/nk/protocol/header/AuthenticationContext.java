@@ -7,10 +7,10 @@ import org.jspecify.annotations.Nullable;
 /** Redacted 64-byte authentication context. Trace: NK-PRO-001, UI 232 §3, SS 323 §2. */
 public final class AuthenticationContext {
   private static final Pattern FORMAT = Pattern.compile("[0-9a-f]{64}");
-  private final String wireValue;
+  private final String retainedWireValue;
 
   private AuthenticationContext(String wireValue) {
-    this.wireValue = wireValue;
+    this.retainedWireValue = wireValue;
   }
 
   public static AuthenticationContext of(String wireValue) {
@@ -24,17 +24,18 @@ public final class AuthenticationContext {
 
   /** Intended only for wire encoding; never log or persist this value. */
   public String wireValue() {
-    return wireValue;
+    return retainedWireValue;
   }
 
   @Override
   public boolean equals(@Nullable Object other) {
-    return other instanceof AuthenticationContext context && wireValue.equals(context.wireValue);
+    return other instanceof AuthenticationContext context
+        && retainedWireValue.equals(context.retainedWireValue);
   }
 
   @Override
   public int hashCode() {
-    return wireValue.hashCode();
+    return retainedWireValue.hashCode();
   }
 
   @Override

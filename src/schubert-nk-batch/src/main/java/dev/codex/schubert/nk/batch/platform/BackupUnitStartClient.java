@@ -144,7 +144,7 @@ public final class BackupUnitStartClient {
 
   private final Context context;
   private final Policy policy;
-  private final Start start;
+  private final Start retainedStart;
   private final Intent intent;
   private final MaintenanceUnit unit;
   private final Optional<MorningParentBudget> budget;
@@ -284,7 +284,7 @@ public final class BackupUnitStartClient {
       Optional<MorningParentBudget> budget) {
     this.context = Objects.requireNonNull(context, "Morning root context");
     this.policy = Objects.requireNonNull(policy, "fixed Backup policy");
-    this.start = Objects.requireNonNull(start, "fixed start port");
+    this.retainedStart = Objects.requireNonNull(start, "fixed start port");
     this.intent = Objects.requireNonNull(intent, "same-boot start intent");
     this.unit = Objects.requireNonNull(unit, "closed Unit");
     this.budget = Objects.requireNonNull(budget, "parent budget binding");
@@ -367,7 +367,7 @@ public final class BackupUnitStartClient {
     try {
       var command = new java.util.ArrayList<>(COMMAND);
       command.set(command.size() - 1, unit.serviceName());
-      process = start.execute(List.copyOf(command));
+      process = retainedStart.execute(List.copyOf(command));
     } catch (IOException | RuntimeException | Error uncertainStart) {
       return new Attempt(context, null, marker, budget, unit);
     }
@@ -516,7 +516,7 @@ public final class BackupUnitStartClient {
     private final MarkerLease marker;
     private final Optional<MorningParentBudget> budget;
     private final MaintenanceUnit unit;
-    private Status status = Status.UNKNOWN;
+    private Status retainedStatus = Status.UNKNOWN;
     private boolean retired;
     private boolean retiring;
     private boolean retireUncertain;
@@ -538,14 +538,14 @@ public final class BackupUnitStartClient {
     }
 
     public synchronized Status status() {
-      return status;
+      return retainedStatus;
     }
 
     /** Same inode owners and confirmed client release; neither ready nor retirement authority. */
     public synchronized void requireRetained(RetirementGate gate) throws IOException {
       Objects.requireNonNull(gate);
       if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
-          || status != Status.CLIENT_EXITED_ZERO
+          || retainedStatus != Status.CLIENT_EXITED_ZERO
           || !stdinClosed
           || !streamsClosed
           || retired
@@ -594,7 +594,7 @@ public final class BackupUnitStartClient {
      */
     synchronized void retireAfter(RetirementGate gate) throws IOException {
       Objects.requireNonNull(gate, "parent completion proof");
-      if (status != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
+      if (retainedStatus != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
         throw new IOException("backup intent retirement unavailable");
       retiring = true;
       try {
@@ -611,7 +611,7 @@ public final class BackupUnitStartClient {
 
     /** Reap under still-held parent owners; UNKNOWN is never a worker or unlock receipt. */
     public synchronized Status awaitClient() {
-      if (status != Status.UNKNOWN || streamsClosed || poisoned) return status;
+      if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
       if (process == null) return Status.UNKNOWN;
       try {
         context.recheck();
@@ -640,9 +640,9 @@ public final class BackupUnitStartClient {
         streamsClosed = true;
         if (!closed) return Status.UNKNOWN;
         context.recheck();
-        status =
+        retainedStatus =
             process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
-        return status;
+        return retainedStatus;
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
         return Status.UNKNOWN;

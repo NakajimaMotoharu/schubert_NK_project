@@ -41,7 +41,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   private final Arena arena;
   private final long thread = Thread.currentThread().threadId();
   private MemorySegment bus = MemorySegment.NULL;
-  private boolean closed;
+  private boolean retainedClosed;
   private boolean uncertain;
   private @Nullable String peer;
   private LinuxSystemdQuery.@Nullable Budget budget;
@@ -62,7 +62,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   }
 
   private void check() throws IOException {
-    if (closed || uncertain || thread != Thread.currentThread().threadId())
+    if (retainedClosed || uncertain || thread != Thread.currentThread().threadId())
       throw LinuxSystemdQuery.unavailable();
   }
 
@@ -320,12 +320,12 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     check();
     release("sd_bus_close_unref", bus);
     arena.close();
-    closed = true;
+    retainedClosed = true;
   }
 
   @Override
   public boolean closed() {
-    return closed;
+    return retainedClosed;
   }
 
   static final class Native {

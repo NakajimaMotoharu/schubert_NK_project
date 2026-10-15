@@ -50,7 +50,7 @@ public final class MediaReplayService {
     private final ResponseSnapshotIdentity identity;
     private final PayloadValues values;
     private final ResultCode code;
-    private final Optional<MediaDescriptor> descriptor;
+    private final Optional<MediaDescriptor> retainedDescriptor;
 
     private Snapshot(
         ResponseSnapshotIdentity identity,
@@ -60,7 +60,7 @@ public final class MediaReplayService {
       this.identity = identity;
       this.values = values;
       this.code = code;
-      this.descriptor = descriptor;
+      this.retainedDescriptor = descriptor;
     }
 
     public ResultCode resultCode() {
@@ -68,7 +68,7 @@ public final class MediaReplayService {
     }
 
     public Optional<MediaDescriptor> descriptor() {
-      return descriptor;
+      return retainedDescriptor;
     }
 
     @Override

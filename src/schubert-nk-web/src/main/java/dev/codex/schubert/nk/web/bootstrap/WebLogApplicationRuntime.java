@@ -46,7 +46,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
   private final AutoCloseable http;
   private final AutoCloseable replay;
   private final AutoCloseable replies;
-  private final IntSupplier port;
+  private final IntSupplier retainedPort;
   private final BooleanSupplier replyReady;
   private final BooleanSupplier replayRunning;
   private final AtomicBoolean terminal;
@@ -67,7 +67,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
     this.http = Objects.requireNonNull(http, "http");
     this.replay = Objects.requireNonNull(replay, "replay");
     this.replies = Objects.requireNonNull(replies, "replies");
-    this.port = Objects.requireNonNull(port, "port");
+    this.retainedPort = Objects.requireNonNull(port, "port");
     this.replyReady = Objects.requireNonNull(replyReady, "replyReady");
     this.replayRunning = Objects.requireNonNull(replayRunning, "replayRunning");
     this.terminal = Objects.requireNonNull(terminal, "terminal");
@@ -227,7 +227,7 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
     if (closed.get() || stopping.get()) {
       throw new IllegalStateException("Web Log runtime is closed");
     }
-    return port.getAsInt();
+    return retainedPort.getAsInt();
   }
 
   /** Local ownership health, not full deployment or API readiness. */

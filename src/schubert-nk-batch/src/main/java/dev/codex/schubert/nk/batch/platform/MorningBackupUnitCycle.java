@@ -134,7 +134,7 @@ public final class MorningBackupUnitCycle {
   private final Stop stop;
   private final Terminal terminal;
   private final Wait wait;
-  private final Retain retain;
+  private final Retain retainedRetain;
   private final MorningParentBudget budget;
   private final BackupUnitStartClient.Target target;
   private Optional<StartAttempt> outstanding = Optional.empty();
@@ -286,7 +286,7 @@ public final class MorningBackupUnitCycle {
     this.stop = Objects.requireNonNull(stop, "fixed Backup stop");
     this.terminal = Objects.requireNonNull(terminal, "whole Backup terminal");
     this.wait = Objects.requireNonNull(wait, "bounded observation wait");
-    this.retain = Objects.requireNonNull(retain, "unresolved parent retention");
+    this.retainedRetain = Objects.requireNonNull(retain, "unresolved parent retention");
     this.budget = Objects.requireNonNull(budget, "existing parent budget");
     this.target = Objects.requireNonNull(target, "closed phase");
   }
@@ -567,7 +567,7 @@ public final class MorningBackupUnitCycle {
   }
 
   private <T> T retain() {
-    retain.indefinitely();
+    retainedRetain.indefinitely();
     throw new AssertionError("unresolved Backup retention returned");
   }
 

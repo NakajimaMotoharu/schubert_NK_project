@@ -9,29 +9,29 @@ import java.util.Objects;
  * Nonnull values with cookie/hash identity correspondence.
  */
 public final class WebSessionSnapshot {
-  private final WebSessionId sessionId;
-  private final WebSessionRow row;
-  private final SessionAttributes attributes;
+  private final WebSessionId retainedSessionId;
+  private final WebSessionRow retainedRow;
+  private final SessionAttributes retainedAttributes;
 
   public WebSessionSnapshot(WebSessionId sessionId, WebSessionRow row, SessionAttributes attributes)
       throws NoSuchAlgorithmException {
-    this.sessionId = Objects.requireNonNull(sessionId, "sessionId");
-    this.row = Objects.requireNonNull(row, "row");
-    this.attributes = Objects.requireNonNull(attributes, "attributes");
+    this.retainedSessionId = Objects.requireNonNull(sessionId, "sessionId");
+    this.retainedRow = Objects.requireNonNull(row, "row");
+    this.retainedAttributes = Objects.requireNonNull(attributes, "attributes");
     if (!sessionId.lookupHash().equals(row.identity().sessionIdHash()))
       throw new IllegalArgumentException("session snapshot identity is inconsistent");
   }
 
   public WebSessionId sessionId() {
-    return sessionId;
+    return retainedSessionId;
   }
 
   public WebSessionRow row() {
-    return row;
+    return retainedRow;
   }
 
   public SessionAttributes attributes() {
-    return attributes;
+    return retainedAttributes;
   }
 
   @Override

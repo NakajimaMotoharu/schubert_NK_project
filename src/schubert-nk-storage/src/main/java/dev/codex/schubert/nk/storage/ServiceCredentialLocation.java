@@ -13,11 +13,11 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class ServiceCredentialLocation {
   private static final String KEY = "CREDENTIALS_DIRECTORY";
-  private static final String INVALID = "service credential location unavailable";
-  private final Path directory;
+  private static final String RETAINED_INVALID = "service credential location unavailable";
+  private final Path retainedDirectory;
 
   private ServiceCredentialLocation(Path directory) {
-    this.directory = directory;
+    this.retainedDirectory = directory;
   }
 
   /**
@@ -43,7 +43,7 @@ public final class ServiceCredentialLocation {
 
   /** The caller must still open and authenticate this exact directory as a held inode. */
   public Path directory() {
-    return directory;
+    return retainedDirectory;
   }
 
   @Override
@@ -52,6 +52,6 @@ public final class ServiceCredentialLocation {
   }
 
   private static IllegalArgumentException invalid() {
-    return new IllegalArgumentException(INVALID);
+    return new IllegalArgumentException(RETAINED_INVALID);
   }
 }

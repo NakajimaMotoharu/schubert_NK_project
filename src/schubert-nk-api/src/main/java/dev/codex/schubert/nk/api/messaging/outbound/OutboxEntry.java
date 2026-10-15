@@ -9,19 +9,19 @@ import java.util.UUID;
 public final class OutboxEntry {
   private static final long MAXIMUM_ID = 999_999_999_999L;
 
-  private final long id;
-  private final UUID messageId;
-  private final UUID correlationId;
-  private final OutboxDestination destination;
-  private final String layoutId;
-  private final String layoutVersion;
-  private final byte[] body;
-  private final int attemptCount;
-  private final Instant nextAttemptAt;
-  private final Instant createdAt;
-  private final String leaseOwner;
-  private final Instant leaseUntil;
-  private final Optional<OutboxDlqMetadata> dlqMetadata;
+  private final long retainedId;
+  private final UUID retainedMessageId;
+  private final UUID retainedCorrelationId;
+  private final OutboxDestination retainedDestination;
+  private final String retainedLayoutId;
+  private final String retainedLayoutVersion;
+  private final byte[] retainedBody;
+  private final int retainedAttemptCount;
+  private final Instant retainedNextAttemptAt;
+  private final Instant retainedCreatedAt;
+  private final String retainedLeaseOwner;
+  private final Instant retainedLeaseUntil;
+  private final Optional<OutboxDlqMetadata> retainedDlqMetadata;
 
   public OutboxEntry(
       long id,
@@ -72,86 +72,90 @@ public final class OutboxEntry {
     if (attemptCount < 0 || attemptCount > 100) {
       throw new IllegalArgumentException("attemptCount must be between 0 and 100");
     }
-    this.id = id;
-    this.messageId = Objects.requireNonNull(messageId, "messageId");
-    this.correlationId = Objects.requireNonNull(correlationId, "correlationId");
-    this.destination = Objects.requireNonNull(destination, "destination");
-    this.layoutId = requireLayoutId(layoutId);
-    this.layoutVersion = requireLayoutVersion(layoutVersion);
-    this.body = Objects.requireNonNull(body, "body").clone();
+    this.retainedId = id;
+    this.retainedMessageId = Objects.requireNonNull(messageId, "messageId");
+    this.retainedCorrelationId = Objects.requireNonNull(correlationId, "correlationId");
+    this.retainedDestination = Objects.requireNonNull(destination, "destination");
+    this.retainedLayoutId = requireLayoutId(layoutId);
+    this.retainedLayoutVersion = requireLayoutVersion(layoutVersion);
+    this.retainedBody = Objects.requireNonNull(body, "body").clone();
     if (body.length == 0) {
       throw new IllegalArgumentException("outbox body must not be empty");
     }
-    this.attemptCount = attemptCount;
-    this.nextAttemptAt = Objects.requireNonNull(nextAttemptAt, "nextAttemptAt");
-    this.createdAt = Objects.requireNonNull(createdAt, "createdAt");
-    this.leaseOwner = requireLeaseOwner(leaseOwner);
-    this.leaseUntil = Objects.requireNonNull(leaseUntil, "leaseUntil");
-    this.dlqMetadata =
+    this.retainedAttemptCount = attemptCount;
+    this.retainedNextAttemptAt = Objects.requireNonNull(nextAttemptAt, "nextAttemptAt");
+    this.retainedCreatedAt = Objects.requireNonNull(createdAt, "createdAt");
+    this.retainedLeaseOwner = requireLeaseOwner(leaseOwner);
+    this.retainedLeaseUntil = Objects.requireNonNull(leaseUntil, "leaseUntil");
+    this.retainedDlqMetadata =
         OutboxDlqMetadata.requireProfile(
-            this.messageId,
-            this.destination,
-            this.layoutId,
-            this.layoutVersion,
-            this.body.length,
+            this.retainedMessageId,
+            this.retainedDestination,
+            this.retainedLayoutId,
+            this.retainedLayoutVersion,
+            this.retainedBody.length,
             dlqMetadata);
   }
 
   public long id() {
-    return id;
+    return retainedId;
   }
 
   public UUID messageId() {
-    return messageId;
+    return retainedMessageId;
   }
 
   public UUID correlationId() {
-    return correlationId;
+    return retainedCorrelationId;
   }
 
   public OutboxDestination destination() {
-    return destination;
+    return retainedDestination;
   }
 
   public String layoutId() {
-    return layoutId;
+    return retainedLayoutId;
   }
 
   public String layoutVersion() {
-    return layoutVersion;
+    return retainedLayoutVersion;
   }
 
   public byte[] body() {
-    return body.clone();
+    return retainedBody.clone();
   }
 
   public int attemptCount() {
-    return attemptCount;
+    return retainedAttemptCount;
   }
 
   public Instant nextAttemptAt() {
-    return nextAttemptAt;
+    return retainedNextAttemptAt;
   }
 
   public Instant createdAt() {
-    return createdAt;
+    return retainedCreatedAt;
   }
 
   public String leaseOwner() {
-    return leaseOwner;
+    return retainedLeaseOwner;
   }
 
   public Instant leaseUntil() {
-    return leaseUntil;
+    return retainedLeaseUntil;
   }
 
   public Optional<OutboxDlqMetadata> dlqMetadata() {
-    return dlqMetadata;
+    return retainedDlqMetadata;
   }
 
   @Override
   public String toString() {
-    return "OutboxEntry[id=" + id + ", destination=" + destination + ", body=<redacted>]";
+    return "OutboxEntry[id="
+        + retainedId
+        + ", destination="
+        + retainedDestination
+        + ", body=<redacted>]";
   }
 
   static String requireLayoutId(String value) {

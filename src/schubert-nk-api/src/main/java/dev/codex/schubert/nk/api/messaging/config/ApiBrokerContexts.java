@@ -26,9 +26,9 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private static final String UNAVAILABLE = "API broker context unavailable";
   private final Object stateLock = new Object();
   private final Supplier<char[]> passwords;
-  private final ConnectionFactory sync;
-  private final ConnectionFactory webLog;
-  private final @Nullable ConnectionFactory async;
+  private final ConnectionFactory retainedSync;
+  private final ConnectionFactory retainedWebLog;
+  private final @Nullable ConnectionFactory retainedAsync;
   private final List<AutoCloseable> owners;
   private boolean closed;
 
@@ -109,23 +109,23 @@ public final class ApiBrokerContexts implements AutoCloseable {
       @Nullable ConnectionFactory async,
       List<AutoCloseable> owners) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
-    this.sync = Objects.requireNonNull(sync, "sync factory");
-    this.webLog = Objects.requireNonNull(webLog, "Web Log factory");
-    this.async = async;
+    this.retainedSync = Objects.requireNonNull(sync, "sync factory");
+    this.retainedWebLog = Objects.requireNonNull(webLog, "Web Log factory");
+    this.retainedAsync = async;
     this.owners = owners;
   }
 
   public Supplier<JMSContext> sync() {
-    return () -> open(sync);
+    return () -> open(retainedSync);
   }
 
   public Supplier<JMSContext> webLog() {
-    return () -> open(webLog);
+    return () -> open(retainedWebLog);
   }
 
   /** Ordinary runtime must use the complete create() profile, never legacy package-local PT. */
   public Supplier<JMSContext> async() {
-    var factory = Objects.requireNonNull(async, "async profile unavailable");
+    var factory = Objects.requireNonNull(retainedAsync, "async profile unavailable");
     return () -> open(factory);
   }
 

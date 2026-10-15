@@ -133,7 +133,7 @@ public final class UserListViewModel {
   }
 
   public static final class Row {
-    private static final DateTimeFormatter TIME =
+    private static final DateTimeFormatter RETAINED_TIME =
         DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.SSS", Locale.ROOT)
             .withZone(ZoneOffset.ofHours(9));
     private final long id;
@@ -157,7 +157,7 @@ public final class UserListViewModel {
     }
 
     private static String time(Instant value) {
-      return TIME.format(value);
+      return RETAINED_TIME.format(value);
     }
 
     public long getId() {

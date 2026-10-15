@@ -16,10 +16,10 @@ public final class SavedRequestTarget {
       Pattern.compile("%(?:2e|2f|5c)", Pattern.CASE_INSENSITIVE);
   // BUG-059/YKT-054/PT-WEB-006/045: URI.normalize retains leading parent segments.
   private static final Pattern DOT_SEGMENT = Pattern.compile("(?:^|/)\\.{1,2}(?:/|$)");
-  private final String location;
+  private final String retainedLocation;
 
   private SavedRequestTarget(String location) {
-    this.location = location;
+    this.retainedLocation = location;
   }
 
   public static SavedRequestTarget fromGet(String method, String target) {
@@ -49,7 +49,7 @@ public final class SavedRequestTarget {
 
   /** Only for validated redirect/session persistence; never concatenate into HTML or logs. */
   public String location() {
-    return location;
+    return retainedLocation;
   }
 
   private static void require(boolean valid) {

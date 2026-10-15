@@ -33,10 +33,10 @@ public final class SavedScreenTarget {
           "schubert_nk_session");
   // BUG-065/PT077/080: servlet path-parameter session IDs are not approved screen identifiers.
   private static final Pattern PATH_PARAMETER = Pattern.compile(";|%3b", Pattern.CASE_INSENSITIVE);
-  private final String location;
+  private final String retainedLocation;
 
   private SavedScreenTarget(String location) {
-    this.location = location;
+    this.retainedLocation = location;
   }
 
   /** Preserves the approved relative URL; invalid methods/URLs throw a fixed value-free error. */
@@ -67,7 +67,7 @@ public final class SavedScreenTarget {
 
   /** For redirect/session persistence only; never interpolate into HTML or diagnostics. */
   public String location() {
-    return location;
+    return retainedLocation;
   }
 
   private static IllegalArgumentException invalid() {

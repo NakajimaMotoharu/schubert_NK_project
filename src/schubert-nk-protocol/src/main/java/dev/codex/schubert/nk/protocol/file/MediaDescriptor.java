@@ -4,14 +4,14 @@ import java.util.Objects;
 
 /** Root-independent MEDIA1024 values. Textual output redacts path/name/hash. */
 public final class MediaDescriptor {
-  private final MediaType mediaType;
-  private final String logicalId;
-  private final String storageRelativePath;
-  private final String fileName;
-  private final long byteLength;
-  private final String sha256;
-  private final String mimeType;
-  private final ContentDisposition disposition;
+  private final MediaType retainedMediaType;
+  private final String retainedLogicalId;
+  private final String retainedStorageRelativePath;
+  private final String retainedFileName;
+  private final long retainedByteLength;
+  private final String retainedSha256;
+  private final String retainedMimeType;
+  private final ContentDisposition retainedDisposition;
 
   public MediaDescriptor(
       MediaType mediaType,
@@ -22,61 +22,62 @@ public final class MediaDescriptor {
       String sha256,
       String mimeType,
       ContentDisposition disposition) {
-    this.mediaType = Objects.requireNonNull(mediaType, "mediaType");
-    this.logicalId = Objects.requireNonNull(logicalId, "logicalId");
-    this.storageRelativePath = Objects.requireNonNull(storageRelativePath, "storageRelativePath");
-    this.fileName = Objects.requireNonNull(fileName, "fileName");
-    this.byteLength = byteLength;
-    this.sha256 = Objects.requireNonNull(sha256, "sha256");
-    this.mimeType = Objects.requireNonNull(mimeType, "mimeType");
-    this.disposition = Objects.requireNonNull(disposition, "disposition");
+    this.retainedMediaType = Objects.requireNonNull(mediaType, "mediaType");
+    this.retainedLogicalId = Objects.requireNonNull(logicalId, "logicalId");
+    this.retainedStorageRelativePath =
+        Objects.requireNonNull(storageRelativePath, "storageRelativePath");
+    this.retainedFileName = Objects.requireNonNull(fileName, "fileName");
+    this.retainedByteLength = byteLength;
+    this.retainedSha256 = Objects.requireNonNull(sha256, "sha256");
+    this.retainedMimeType = Objects.requireNonNull(mimeType, "mimeType");
+    this.retainedDisposition = Objects.requireNonNull(disposition, "disposition");
     MediaDescriptorValidator.validate(this);
   }
 
   public MediaType mediaType() {
-    return mediaType;
+    return retainedMediaType;
   }
 
   public String logicalId() {
-    return logicalId;
+    return retainedLogicalId;
   }
 
   /** Validated wire value; never expose it to Browser, HTML, HTTP header, metric, or log. */
   public String storageRelativePath() {
-    return storageRelativePath;
+    return retainedStorageRelativePath;
   }
 
   /** Validated metadata for a later RFC 5987 encoder; never concatenate it into a header. */
   public String fileName() {
-    return fileName;
+    return retainedFileName;
   }
 
   public long byteLength() {
-    return byteLength;
+    return retainedByteLength;
   }
 
   public String sha256() {
-    return sha256;
+    return retainedSha256;
   }
 
   public String mimeType() {
-    return mimeType;
+    return retainedMimeType;
   }
 
   public ContentDisposition disposition() {
-    return disposition;
+    return retainedDisposition;
   }
 
   @Override
   public String toString() {
     return "MediaDescriptor[mediaType="
-        + mediaType
+        + retainedMediaType
         + ", logicalId=REDACTED, storageRelativePath=REDACTED, fileName=REDACTED, byteLength="
-        + byteLength
+        + retainedByteLength
         + ", sha256=REDACTED, mimeType="
-        + mimeType
+        + retainedMimeType
         + ", disposition="
-        + disposition
+        + retainedDisposition
         + ']';
   }
 }

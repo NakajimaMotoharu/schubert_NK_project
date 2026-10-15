@@ -23,16 +23,16 @@ public final class ApiNativeCodecs implements AutoCloseable {
   }
 
   private final Object lock = new Object();
-  private final AuthContextCodec contexts;
-  private final ResponseSnapshotCodec snapshots;
-  private final FingerprintKeyRing fingerprints;
+  private final AuthContextCodec retainedContexts;
+  private final ResponseSnapshotCodec retainedSnapshots;
+  private final FingerprintKeyRing retainedFingerprints;
   private boolean closed;
 
   private ApiNativeCodecs(
       AuthContextCodec contexts, ResponseSnapshotCodec snapshots, FingerprintKeyRing fingerprints) {
-    this.contexts = contexts;
-    this.snapshots = snapshots;
-    this.fingerprints = fingerprints;
+    this.retainedContexts = contexts;
+    this.retainedSnapshots = snapshots;
+    this.retainedFingerprints = fingerprints;
   }
 
   public static ApiNativeCodecs create(ServiceCredentialSet credentials) {
@@ -97,21 +97,21 @@ public final class ApiNativeCodecs implements AutoCloseable {
   public AuthContextCodec contexts() {
     synchronized (lock) {
       requireOpen();
-      return contexts;
+      return retainedContexts;
     }
   }
 
   public ResponseSnapshotCodec snapshots() {
     synchronized (lock) {
       requireOpen();
-      return snapshots;
+      return retainedSnapshots;
     }
   }
 
   public FingerprintKeyRing fingerprints() {
     synchronized (lock) {
       requireOpen();
-      return fingerprints;
+      return retainedFingerprints;
     }
   }
 
@@ -123,9 +123,9 @@ public final class ApiNativeCodecs implements AutoCloseable {
     synchronized (lock) {
       if (closed) return;
       closed = true;
-      fingerprints.close();
-      snapshots.close();
-      contexts.close();
+      retainedFingerprints.close();
+      retainedSnapshots.close();
+      retainedContexts.close();
     }
   }
 }

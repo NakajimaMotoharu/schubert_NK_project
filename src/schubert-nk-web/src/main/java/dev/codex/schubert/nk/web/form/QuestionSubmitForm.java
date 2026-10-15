@@ -18,13 +18,13 @@ public final class QuestionSubmitForm implements AutoCloseable {
   private static final Set<String> FIELDS = Set.of("question", "operation_token");
   private static final String INVALID = "入力項目を確認してください。";
   private final char[] question;
-  private final UUID operationToken;
+  private final UUID retainedOperationToken;
   private final Map<String, String> issues;
   private boolean closed;
 
   private QuestionSubmitForm(String question, UUID token, Map<String, String> issues) {
     this.question = question.toCharArray();
-    operationToken = token;
+    retainedOperationToken = token;
     this.issues = Map.copyOf(issues);
   }
 
@@ -87,7 +87,7 @@ public final class QuestionSubmitForm implements AutoCloseable {
   /** Request-scoped hidden field, not an authorization or API result proof. */
   public UUID operationToken() {
     ensureOpen();
-    return operationToken;
+    return retainedOperationToken;
   }
 
   /** Only the caller's request/template receives this body copy; never put it in session/flash. */
@@ -100,7 +100,7 @@ public final class QuestionSubmitForm implements AutoCloseable {
   public QuestionSubmitRequestData toRequest() {
     ensureOpen();
     if (!isValid()) throw new IllegalArgumentException("invalid question submit form");
-    return new QuestionSubmitRequestData(new String(question), operationToken);
+    return new QuestionSubmitRequestData(new String(question), retainedOperationToken);
   }
 
   private void ensureOpen() {

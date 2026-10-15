@@ -137,7 +137,7 @@ final class MorningStartupLaunchOwner {
     private final java.util.function.LongSupplier clock;
     private final java.util.function.Consumer<String> sink;
     private final long started;
-    private CompletionPhase phase = CompletionPhase.CADDY_BEFORE;
+    private CompletionPhase retainedPhase = CompletionPhase.CADDY_BEFORE;
 
     CompletionProgress(
         java.util.function.LongSupplier clock, java.util.function.Consumer<String> sink) {
@@ -147,7 +147,7 @@ final class MorningStartupLaunchOwner {
     }
 
     void phase(CompletionPhase next) {
-      phase = Objects.requireNonNull(next);
+      retainedPhase = Objects.requireNonNull(next);
       emit("VERIFY");
     }
 
@@ -159,7 +159,7 @@ final class MorningStartupLaunchOwner {
     private void emit(String classification) {
       sink.accept(
           "event=morning.completion phase="
-              + phase
+              + retainedPhase
               + " classification="
               + classification
               + " elapsedNanos="

@@ -33,7 +33,7 @@ public final class MorningPreviousBroker {
 
   /** SSC166: actual current-boot absence, never an invented old clean-stop Summary. */
   public static final class NoPrior implements Evidence {
-    private final UUID boot;
+    private final UUID retainedBoot;
     private final InspectorUnitSnapshot baseline;
     private final Query query;
     private final MaintenanceOwnerFrame.Guard parent;
@@ -44,14 +44,14 @@ public final class MorningPreviousBroker {
         InspectorUnitSnapshot baseline,
         Query query,
         MaintenanceOwnerFrame.Guard parent) {
-      this.boot = boot;
+      this.retainedBoot = boot;
       this.baseline = baseline;
       this.query = query;
       this.parent = parent;
     }
 
     public UUID boot() {
-      return boot;
+      return retainedBoot;
     }
 
     public void recheck(MorningBrokerUnitCycle.Live fresh) throws IOException {
@@ -60,10 +60,10 @@ public final class MorningPreviousBroker {
       parent.check();
       fresh.recheck();
       require(baseline.matches(fresh.previousObservation()));
-      byte[] bytes = read(query, base(boot), MAX, parent);
+      byte[] bytes = read(query, base(retainedBoot), MAX, parent);
       try {
         BrokerJournalEvidence.consume(
-            bytes, boot, fresh.invocation(), fresh.startedMonotonicMicros());
+            bytes, retainedBoot, fresh.invocation(), fresh.startedMonotonicMicros());
         BrokerJournalEvidence.contentSha256(bytes);
         fresh.recheck();
         parent.check();
@@ -79,14 +79,14 @@ public final class MorningPreviousBroker {
   }
 
   public static final class Closed implements Evidence {
-    private final UUID boot;
-    private final String source;
-    private final String invocation;
-    private final Optional<BigInteger> nativeStart;
-    private final Optional<BigInteger> nativeEnd;
-    private final BigInteger upper;
-    private final BrokerJournalEvidence.Summary journal;
-    private final String contentSha256;
+    private final UUID retainedBootState;
+    private final String retainedSource;
+    private final String retainedInvocation;
+    private final Optional<BigInteger> retainedNativeStart;
+    private final Optional<BigInteger> retainedNativeEnd;
+    private final BigInteger retainedUpper;
+    private final BrokerJournalEvidence.Summary retainedJournal;
+    private final String retainedContentSha256;
     private final Query query;
     private final MaintenanceOwnerFrame.Guard parent;
     private final long thread = Thread.currentThread().threadId();
@@ -102,48 +102,48 @@ public final class MorningPreviousBroker {
         String contentSha256,
         Query query,
         MaintenanceOwnerFrame.Guard parent) {
-      this.boot = boot;
-      this.source = source;
-      this.invocation = invocation;
-      this.nativeStart = nativeStart;
-      this.nativeEnd = nativeEnd;
-      this.upper = upper;
-      this.journal = journal;
-      this.contentSha256 = contentSha256;
+      this.retainedBootState = boot;
+      this.retainedSource = source;
+      this.retainedInvocation = invocation;
+      this.retainedNativeStart = nativeStart;
+      this.retainedNativeEnd = nativeEnd;
+      this.retainedUpper = upper;
+      this.retainedJournal = journal;
+      this.retainedContentSha256 = contentSha256;
       this.query = query;
       this.parent = parent;
     }
 
     public UUID boot() {
-      return boot;
+      return retainedBootState;
     }
 
     public String source() {
-      return source;
+      return retainedSource;
     }
 
     public String invocation() {
-      return invocation;
+      return retainedInvocation;
     }
 
     public Optional<BigInteger> nativeStart() {
-      return nativeStart;
+      return retainedNativeStart;
     }
 
     public Optional<BigInteger> nativeEnd() {
-      return nativeEnd;
+      return retainedNativeEnd;
     }
 
     public BigInteger upper() {
-      return upper;
+      return retainedUpper;
     }
 
     public BrokerJournalEvidence.Summary journal() {
-      return journal;
+      return retainedJournal;
     }
 
     public String contentSha256() {
-      return contentSha256;
+      return retainedContentSha256;
     }
 
     public void recheck(MorningBrokerUnitCycle.Live fresh) throws IOException {
@@ -157,16 +157,21 @@ public final class MorningPreviousBroker {
     public void recheck() throws IOException {
       require(thread == Thread.currentThread().threadId());
       parent.check();
-      byte[] bytes = read(query, full(boot, invocation), MAX, parent);
+      byte[] bytes = read(query, full(retainedBootState, retainedInvocation), MAX, parent);
       try {
         var actual =
             BrokerJournalEvidence.consumeStopped(
-                bytes, boot, invocation, nativeStart.orElse(BigInteger.ONE), upper);
-        if (nativeStart.isEmpty())
-          BrokerJournalEvidence.consume(bytes, boot, invocation, BigInteger.ONE);
+                bytes,
+                retainedBootState,
+                retainedInvocation,
+                retainedNativeStart.orElse(BigInteger.ONE),
+                retainedUpper);
+        if (retainedNativeStart.isEmpty())
+          BrokerJournalEvidence.consume(
+              bytes, retainedBootState, retainedInvocation, BigInteger.ONE);
         require(
-            journal.entries() == actual.entries()
-                && contentSha256.equals(BrokerJournalEvidence.contentSha256(bytes)));
+            retainedJournal.entries() == actual.entries()
+                && retainedContentSha256.equals(BrokerJournalEvidence.contentSha256(bytes)));
         parent.check();
       } finally {
         Arrays.fill(bytes, (byte) 0);

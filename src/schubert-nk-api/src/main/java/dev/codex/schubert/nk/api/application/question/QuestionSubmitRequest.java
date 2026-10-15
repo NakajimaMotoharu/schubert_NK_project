@@ -22,14 +22,14 @@ import java.util.UUID;
  */
 public final class QuestionSubmitRequest implements AutoCloseable {
   private final Object stateLock = new Object();
-  private final CommonHeader header;
-  private final UUID operationToken;
+  private final CommonHeader retainedHeader;
+  private final UUID retainedOperationToken;
   private final char[] question;
   private boolean closed;
 
   private QuestionSubmitRequest(CommonHeader header, QuestionSubmitRequestData data) {
-    this.header = header;
-    operationToken = data.operationToken();
+    this.retainedHeader = header;
+    retainedOperationToken = data.operationToken();
     question = data.questionText().toCharArray();
   }
 
@@ -62,7 +62,7 @@ public final class QuestionSubmitRequest implements AutoCloseable {
   public CommonHeader header() {
     synchronized (stateLock) {
       ensureOpen();
-      return header;
+      return retainedHeader;
     }
   }
 
@@ -70,7 +70,7 @@ public final class QuestionSubmitRequest implements AutoCloseable {
   public UUID operationToken() {
     synchronized (stateLock) {
       ensureOpen();
-      return operationToken;
+      return retainedOperationToken;
     }
   }
 

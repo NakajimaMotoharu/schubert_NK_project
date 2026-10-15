@@ -43,12 +43,12 @@ public final class ScenarioRequest {
 
   private final Kind kind;
   private final TypedPayloadValues values;
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
 
   private ScenarioRequest(Kind kind, TypedPayloadValues values, CommonHeader header) {
     this.kind = kind;
     this.values = values;
-    this.header = header;
+    this.retainedHeader = header;
   }
 
   /**
@@ -87,7 +87,7 @@ public final class ScenarioRequest {
 
   /** Validated immutable header; never log its context. SS324 §6.3, PT-SCN-009-S01..S05. */
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   /** The six allowlisted request IDs all use the corresponding RSP01 suffix. */

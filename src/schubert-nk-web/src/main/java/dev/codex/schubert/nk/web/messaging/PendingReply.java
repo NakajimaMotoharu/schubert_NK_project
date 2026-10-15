@@ -8,21 +8,21 @@ import java.util.concurrent.CompletionStage;
 
 /** One redacted in-flight response promise owned by {@link ReplyCorrelationRegistry}. */
 public final class PendingReply {
-  private final UUID correlationId;
-  private final Instant deadline;
+  private final UUID retainedCorrelationId;
+  private final Instant retainedDeadline;
   private final CompletableFuture<byte[]> future = new CompletableFuture<>();
 
   PendingReply(UUID correlationId, Instant deadline) {
-    this.correlationId = Objects.requireNonNull(correlationId, "correlationId");
-    this.deadline = Objects.requireNonNull(deadline, "deadline");
+    this.retainedCorrelationId = Objects.requireNonNull(correlationId, "correlationId");
+    this.retainedDeadline = Objects.requireNonNull(deadline, "deadline");
   }
 
   public UUID correlationId() {
-    return correlationId;
+    return retainedCorrelationId;
   }
 
   public Instant deadline() {
-    return deadline;
+    return retainedDeadline;
   }
 
   /** Returns a view that defensively copies the response body for each caller. */
@@ -41,9 +41,9 @@ public final class PendingReply {
   @Override
   public String toString() {
     return "PendingReply[correlationId="
-        + correlationId
+        + retainedCorrelationId
         + ", deadline="
-        + deadline
+        + retainedDeadline
         + ", body=<redacted>]";
   }
 }

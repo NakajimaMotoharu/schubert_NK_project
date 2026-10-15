@@ -56,16 +56,16 @@ public final class WebRequestTrace {
           "/notifications/{id:[0-9]{1,12}}",
           "/css/**",
           "/js/**");
-  private final UUID requestId;
-  private final UUID eventId;
+  private final UUID retainedRequestId;
+  private final UUID retainedEventId;
   private final AtomicReference<Optional<UUID>> messageId = new AtomicReference<>(Optional.empty());
-  private final AtomicReference<String> route = new AtomicReference<>(UNKNOWN_ROUTE);
-  private volatile Optional<TopBarViewModel> actor = Optional.empty();
+  private final AtomicReference<String> retainedRoute = new AtomicReference<>(UNKNOWN_ROUTE);
+  private volatile Optional<TopBarViewModel> retainedActor = Optional.empty();
   private final AtomicBoolean completed = new AtomicBoolean();
 
   private WebRequestTrace(UUID requestId, UUID eventId) {
-    this.requestId = requestId;
-    this.eventId = eventId;
+    this.retainedRequestId = requestId;
+    this.retainedEventId = eventId;
   }
 
   public static WebRequestTrace ensure(HttpServletRequest request, Supplier<UUID> identifiers) {
@@ -74,7 +74,7 @@ public final class WebRequestTrace {
     UUID requestId = WebRequestContext.identify(request, identifiers);
     var old = existing(request);
     if (old.isPresent()) {
-      if (!old.orElseThrow().requestId.equals(requestId))
+      if (!old.orElseThrow().retainedRequestId.equals(requestId))
         throw new IllegalStateException("request audit identity mismatch");
       return old.orElseThrow();
     }
@@ -104,13 +104,13 @@ public final class WebRequestTrace {
   /** Only a previously authenticated closed principal is projected; never retained. */
   public static void captureActor(HttpServletRequest request, Optional<SessionPrincipal> actor) {
     Objects.requireNonNull(actor, "actor");
-    existing(request).ifPresent(trace -> trace.actor = actor.map(TopBarViewModel::from));
+    existing(request).ifPresent(trace -> trace.retainedActor = actor.map(TopBarViewModel::from));
   }
 
   /** Called by actual MVC mapping, never a raw URI/header or arbitrary pattern formatter. */
   public void captureRoute(String pattern) {
     Objects.requireNonNull(pattern, "pattern");
-    if (ROUTES.contains(pattern)) route.compareAndSet(UNKNOWN_ROUTE, pattern);
+    if (ROUTES.contains(pattern)) retainedRoute.compareAndSet(UNKNOWN_ROUTE, pattern);
   }
 
   /** Business-only supplier: event/request UUID generators must not use this wrapper. */
@@ -129,23 +129,23 @@ public final class WebRequestTrace {
   }
 
   public UUID requestId() {
-    return requestId;
+    return retainedRequestId;
   }
 
   public UUID eventId() {
-    return eventId;
+    return retainedEventId;
   }
 
   public UUID correlationId() {
-    return messageId.get().orElse(eventId);
+    return messageId.get().orElse(retainedEventId);
   }
 
   public String route() {
-    return route.get();
+    return retainedRoute.get();
   }
 
   public Optional<TopBarViewModel> actor() {
-    return actor;
+    return retainedActor;
   }
 
   /** One terminal REQUEST observation even if container dispatch completion is repeated. */

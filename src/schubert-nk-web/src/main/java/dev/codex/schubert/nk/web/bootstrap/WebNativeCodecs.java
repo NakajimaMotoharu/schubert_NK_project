@@ -26,16 +26,16 @@ public final class WebNativeCodecs implements AutoCloseable {
   }
 
   private final Object stateLock = new Object();
-  private final SessionPayloadCodec session;
-  private final WebLogPayloadCodec log;
-  private final RevocationPayloadCodec revoke;
+  private final SessionPayloadCodec retainedSession;
+  private final WebLogPayloadCodec retainedLog;
+  private final RevocationPayloadCodec retainedRevoke;
   private boolean closed;
 
   private WebNativeCodecs(
       SessionPayloadCodec session, WebLogPayloadCodec log, RevocationPayloadCodec revoke) {
-    this.session = session;
-    this.log = log;
-    this.revoke = revoke;
+    this.retainedSession = session;
+    this.retainedLog = log;
+    this.retainedRevoke = revoke;
   }
 
   public static WebNativeCodecs create(ServiceCredentialSet credentials) {
@@ -96,7 +96,7 @@ public final class WebNativeCodecs implements AutoCloseable {
   public SessionPayloadCodec session() {
     synchronized (stateLock) {
       requireOpen();
-      return session;
+      return retainedSession;
     }
   }
 
@@ -104,7 +104,7 @@ public final class WebNativeCodecs implements AutoCloseable {
   public WebLogPayloadCodec log() {
     synchronized (stateLock) {
       requireOpen();
-      return log;
+      return retainedLog;
     }
   }
 
@@ -112,7 +112,7 @@ public final class WebNativeCodecs implements AutoCloseable {
   public RevocationPayloadCodec revoke() {
     synchronized (stateLock) {
       requireOpen();
-      return revoke;
+      return retainedRevoke;
     }
   }
 
@@ -126,12 +126,12 @@ public final class WebNativeCodecs implements AutoCloseable {
       if (closed) return;
       closed = true;
       try {
-        revoke.close();
+        retainedRevoke.close();
       } finally {
         try {
-          log.close();
+          retainedLog.close();
         } finally {
-          session.close();
+          retainedSession.close();
         }
       }
     }

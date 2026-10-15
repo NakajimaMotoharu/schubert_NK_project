@@ -51,7 +51,7 @@ public final class QuestionMutationReplayService {
     private final QuestionMutationRequest request;
     private final long owner;
     private final QuestionMutationRequest.Result result;
-    private final boolean replay;
+    private final boolean retainedReplay;
 
     private Snapshot(
         QuestionMutationRequest request,
@@ -61,7 +61,7 @@ public final class QuestionMutationReplayService {
       this.request = request;
       this.owner = owner;
       this.result = result;
-      this.replay = replay;
+      this.retainedReplay = replay;
     }
 
     public ResultCode resultCode() {
@@ -73,7 +73,7 @@ public final class QuestionMutationReplayService {
     }
 
     public boolean replay() {
-      return replay;
+      return retainedReplay;
     }
 
     @Override
@@ -196,7 +196,7 @@ public final class QuestionMutationReplayService {
       require(saved.request == request && saved.owner == actor.userId());
       request.validate(saved.result);
       var code =
-          saved.replay && saved.result.code().usesSuccessProfile()
+          saved.retainedReplay && saved.result.code().usesSuccessProfile()
               ? ResultCode.IDEMPOTENT_SUCCESS
               : saved.result.code();
       return wire(request, saved.result.payload(), code, responseId, sentAt);

@@ -53,7 +53,7 @@ public final class WebRequestLogProducer {
   private final WebLogOutboxRepository repository;
   private final Logger logger;
   private final Clock clock;
-  private final Supplier<UUID> identifiers;
+  private final Supplier<UUID> retainedIdentifiers;
   private final String appVersion;
   private final String configVersion;
   private final Runnable onTerminal;
@@ -74,14 +74,14 @@ public final class WebRequestLogProducer {
     this.repository = Objects.requireNonNull(repository, "repository");
     this.logger = Objects.requireNonNull(logger, "logger");
     this.clock = Objects.requireNonNull(clock, "clock");
-    this.identifiers = Objects.requireNonNull(identifiers, "identifiers");
+    this.retainedIdentifiers = Objects.requireNonNull(identifiers, "identifiers");
     this.appVersion = version(appVersion);
     this.configVersion = version(configVersion);
     this.onTerminal = Objects.requireNonNull(onTerminal, "onTerminal");
   }
 
   Supplier<UUID> identifiers() {
-    return identifiers;
+    return retainedIdentifiers;
   }
 
   private static String version(String value) {

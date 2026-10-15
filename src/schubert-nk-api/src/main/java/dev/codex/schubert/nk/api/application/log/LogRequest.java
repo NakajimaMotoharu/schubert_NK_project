@@ -32,11 +32,11 @@ import java.util.Optional;
  * SSC-037/PG-D-091/PT-ADM-061..063. Public arguments are nonnull; caller closes canonical buffers.
  */
 public final class LogRequest {
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
   private final LogSearchRequestData data;
 
   private LogRequest(CommonHeader header, LogSearchRequestData data) {
-    this.header = header;
+    this.retainedHeader = header;
     this.data = data;
   }
 
@@ -59,7 +59,7 @@ public final class LogRequest {
   }
 
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   public LayoutId responseLayoutId() {

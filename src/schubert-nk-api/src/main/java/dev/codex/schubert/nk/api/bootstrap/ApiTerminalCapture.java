@@ -37,32 +37,32 @@ final class ApiTerminalCapture {
   }
 
   static final class Owner<T> implements AutoCloseable {
-    private final T owner;
+    private final T retainedOwner;
     private final Operation<T> verify;
-    private final Operation<T> close;
+    private final Operation<T> retainedClose;
 
     Owner(T owner, Operation<T> verify, Operation<T> close) {
-      this.owner = Objects.requireNonNull(owner, "native PT stop owner");
+      this.retainedOwner = Objects.requireNonNull(owner, "native PT stop owner");
       this.verify = Objects.requireNonNull(verify, "native PT owner verification");
-      this.close = Objects.requireNonNull(close, "native PT owner close");
+      this.retainedClose = Objects.requireNonNull(close, "native PT owner close");
     }
 
     void verifyOwner() throws IOException {
-      verify.run(owner);
+      verify.run(retainedOwner);
     }
 
     @Override
     public void close() throws IOException {
-      close.run(owner);
+      retainedClose.run(retainedOwner);
     }
   }
 
-  private final Open open;
-  private final Capture capture;
+  private final Open retainedOpen;
+  private final Capture retainedCapture;
 
   ApiTerminalCapture(Open open, Capture capture) {
-    this.open = Objects.requireNonNull(open, "native PT open");
-    this.capture = Objects.requireNonNull(capture, "native PT capture");
+    this.retainedOpen = Objects.requireNonNull(open, "native PT open");
+    this.retainedCapture = Objects.requireNonNull(capture, "native PT capture");
   }
 
   static Optional<ApiTerminalCapture> currentJvm(@Nullable String invocation) throws IOException {
@@ -82,10 +82,10 @@ final class ApiTerminalCapture {
   }
 
   Owner<?> open() throws IOException {
-    return Objects.requireNonNull(open.get(), "native PT owner");
+    return Objects.requireNonNull(retainedOpen.get(), "native PT owner");
   }
 
   void capture() throws IOException {
-    capture.run(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    retainedCapture.run(FixedNativeCoverageCheckpoint.Point.TERMINAL);
   }
 }

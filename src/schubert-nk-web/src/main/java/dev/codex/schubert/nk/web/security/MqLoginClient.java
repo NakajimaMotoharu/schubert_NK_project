@@ -212,20 +212,20 @@ public final class MqLoginClient {
    * session. Never expose its context to HTML or logs. BUG-061/YKT-056/PT-WEB-054/057.
    */
   public static final class Reply {
-    private final ResultCode code;
-    private final LoginResponseData data;
+    private final ResultCode retainedCode;
+    private final LoginResponseData retainedData;
 
     private Reply(ResultCode code, LoginResponseData data) {
-      this.code = code;
-      this.data = data;
+      this.retainedCode = code;
+      this.retainedData = data;
     }
 
     public ResultCode code() {
-      return code;
+      return retainedCode;
     }
 
     public LoginResponseData data() {
-      return data;
+      return retainedData;
     }
 
     @Override

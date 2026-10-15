@@ -21,7 +21,8 @@ import java.util.Optional;
 
 /** Catalog-driven X/N/B payload codec. Trace: NK-PRO-002, UI 234-236, SS 322 §4-§6. */
 public final class PayloadCodec {
-  private static final PayloadCodec STANDARD = new PayloadCodec(LayoutFieldCatalog.standard());
+  private static final PayloadCodec RETAINED_STANDARD =
+      new PayloadCodec(LayoutFieldCatalog.standard());
 
   private final LayoutFieldCatalog catalog;
 
@@ -30,7 +31,7 @@ public final class PayloadCodec {
   }
 
   public static PayloadCodec standard() {
-    return STANDARD;
+    return RETAINED_STANDARD;
   }
 
   public FixedPayload encode(PayloadValues values, boolean errorProfile) {

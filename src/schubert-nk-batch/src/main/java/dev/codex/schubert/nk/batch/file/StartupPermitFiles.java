@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class StartupPermitFiles {
-  private static final String CURRENT = "epoch.current";
+  private static final String RETAINED_CURRENT = "epoch.current";
   private final Object stateLock = new Object();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
@@ -297,7 +297,7 @@ public final class StartupPermitFiles {
     boolean[] entered = {false};
     try {
       root.atExistingEntryHandle(
-          CURRENT,
+          RETAINED_CURRENT,
           p -> {
             entered[0] = true;
             return file(p, 1, directory);
@@ -311,7 +311,7 @@ public final class StartupPermitFiles {
   }
 
   private Epoch current(Snapshot directory) throws IOException {
-    byte[] content = read(CURRENT, directory);
+    byte[] content = read(RETAINED_CURRENT, directory);
     try {
       return StartupPermitRecords.readEpoch(content);
     } finally {
@@ -326,14 +326,14 @@ public final class StartupPermitFiles {
       Snapshot original = writePart(id, content, directory);
       root.atDirectory(
           p -> {
-            io.replace(p, id + ".part", CURRENT);
+            io.replace(p, id + ".part", RETAINED_CURRENT);
             return Boolean.TRUE;
           });
       root.sync();
       require(
           original.samePublishedFile(
-              root.atExistingEntryHandle(CURRENT, p -> file(p, 1, directory))));
-      checkBytes(CURRENT, content, directory);
+              root.atExistingEntryHandle(RETAINED_CURRENT, p -> file(p, 1, directory))));
+      checkBytes(RETAINED_CURRENT, content, directory);
     } finally {
       Arrays.fill(content, (byte) 0);
     }

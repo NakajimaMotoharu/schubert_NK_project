@@ -37,8 +37,8 @@ public final class ArtemisRoleReadinessClient {
           "deleteAddress",
           "view",
           "edit");
-  private static final Set<String> FIELDS = fields();
-  private static final Map<String, Map<String, Set<String>>> APPROVED = approved();
+  private static final Set<String> RETAINED_FIELDS = fields();
+  private static final Map<String, Map<String, Set<String>>> RETAINED_APPROVED = approved();
 
   private static Map<String, Map<String, Set<String>>> approved() {
     var roles =
@@ -135,7 +135,7 @@ public final class ArtemisRoleReadinessClient {
   public Map<String, Map<String, Map<String, Boolean>>> inspect(ClientSession session) {
     Objects.requireNonNull(session, "ops session");
     var actual = new HashMap<String, Map<String, Map<String, Boolean>>>();
-    for (var entry : APPROVED.entrySet()) {
+    for (var entry : RETAINED_APPROVED.entrySet()) {
       Object response = reader.read(session, entry.getKey());
       if (!(response instanceof String json)) throw new ArtemisManagementReadinessException();
       actual.put(entry.getKey(), verifyResponse(json, entry.getValue()));
@@ -153,7 +153,7 @@ public final class ArtemisRoleReadinessClient {
       for (int index = 0; index < roles.size(); index++) {
         if (!(roles.get(index) instanceof org.apache.activemq.artemis.json.JsonObject role))
           throw new ArtemisManagementReadinessException();
-        if (!FIELDS.equals(role.keySet())) throw new ArtemisManagementReadinessException();
+        if (!RETAINED_FIELDS.equals(role.keySet())) throw new ArtemisManagementReadinessException();
         String name = role.getString("name");
         Set<String> allowed = expected.get(name);
         if (allowed == null || !seen.add(name)) throw new ArtemisManagementReadinessException();

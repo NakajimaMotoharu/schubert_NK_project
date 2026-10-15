@@ -245,18 +245,18 @@ public final class LinuxFileLock {
 
   private static final class OwnedDescriptor implements AutoCloseable {
     private final int descriptor;
-    private final CloseCall close;
+    private final CloseCall retainedClose;
 
     private OwnedDescriptor(int descriptor, CloseCall close) {
       this.descriptor = descriptor;
-      this.close = close;
+      this.retainedClose = close;
     }
 
     @Override
     public void close() throws StorageIoException {
       try (Arena arena = Arena.ofConfined()) {
         // A single lexical close consumes ownership even if the OS reports failure; never retry.
-        if (close.call(arena.allocate(STATE), descriptor) != 0) throw unavailable();
+        if (retainedClose.call(arena.allocate(STATE), descriptor) != 0) throw unavailable();
       }
     }
   }

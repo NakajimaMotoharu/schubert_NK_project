@@ -59,14 +59,14 @@ final class ReleaseInventory {
     }
   }
 
-  private final String release;
-  private final Map<String, String> versions;
-  private final Map<String, String> source;
-  private final Map<String, String> build;
-  private final Map<String, String> platform;
-  private final List<Artifact> artifacts;
-  private final List<Dependency> dependencies;
-  private final List<SchemaHistoryAdmission.Row> migrations;
+  private final String retainedRelease;
+  private final Map<String, String> retainedVersions;
+  private final Map<String, String> retainedSource;
+  private final Map<String, String> retainedBuild;
+  private final Map<String, String> retainedPlatform;
+  private final List<Artifact> retainedArtifacts;
+  private final List<Dependency> retainedDependencies;
+  private final List<SchemaHistoryAdmission.Row> retainedMigrations;
 
   private ReleaseInventory(
       String release,
@@ -78,23 +78,23 @@ final class ReleaseInventory {
       List<Dependency> dependencies,
       List<SchemaHistoryAdmission.Row> migrations) {
     requireToken(release);
-    this.release = release;
-    this.versions = Map.copyOf(versions);
-    this.source = Map.copyOf(source);
-    this.build = Map.copyOf(build);
-    this.platform = Map.copyOf(platform);
-    this.artifacts = List.copyOf(artifacts);
-    this.dependencies = List.copyOf(dependencies);
-    this.migrations = List.copyOf(migrations);
+    this.retainedRelease = release;
+    this.retainedVersions = Map.copyOf(versions);
+    this.retainedSource = Map.copyOf(source);
+    this.retainedBuild = Map.copyOf(build);
+    this.retainedPlatform = Map.copyOf(platform);
+    this.retainedArtifacts = List.copyOf(artifacts);
+    this.retainedDependencies = List.copyOf(dependencies);
+    this.retainedMigrations = List.copyOf(migrations);
     versions.values().forEach(ReleaseInventory::requireToken);
     require(Objects.requireNonNull(source.get("commit")).matches("[0-9a-f]{40}"));
     for (String value : source.values()) requireText(value);
     build.values().forEach(ReleaseInventory::requireText);
     platform.values().forEach(ReleaseInventory::requireText);
     require("25".equals(platform.get("javaFeature")));
-    new SchemaHistoryAdmission(this.migrations);
-    require(this.migrations.size() > 1);
-    require(Objects.equals(versions.get("schema"), this.migrations.getLast().version()));
+    new SchemaHistoryAdmission(this.retainedMigrations);
+    require(this.retainedMigrations.size() > 1);
+    require(Objects.equals(versions.get("schema"), this.retainedMigrations.getLast().version()));
     inventory();
   }
 
@@ -276,7 +276,7 @@ final class ReleaseInventory {
 
   private void inventory() {
     var byPath = new HashMap<String, Artifact>();
-    for (var a : artifacts) byPath.put(a.path(), a);
+    for (var a : retainedArtifacts) byPath.put(a.path(), a);
     require(
         byPath
             .keySet()
@@ -291,7 +291,7 @@ final class ReleaseInventory {
     }
     var registered = new HashSet<String>();
     var coordinates = new HashSet<String>();
-    for (var dep : dependencies) {
+    for (var dep : retainedDependencies) {
       // BUG291/YKT224: one group/artifact has exactly one version in every runtime role.
       String ga = dep.coordinate().substring(0, dep.coordinate().lastIndexOf(':'));
       require(coordinates.add(ga));
@@ -316,8 +316,9 @@ final class ReleaseInventory {
           "dev.codex.schubert:schubert-nk-"
               + shared
               + ":"
-              + Objects.requireNonNull(versions.get(shared));
-      var match = dependencies.stream().filter(d -> d.coordinate().equals(coordinate)).toList();
+              + Objects.requireNonNull(retainedVersions.get(shared));
+      var match =
+          retainedDependencies.stream().filter(d -> d.coordinate().equals(coordinate)).toList();
       require(match.size() == 1);
       var roles = new HashSet<String>();
       for (String path : match.getFirst().paths())
@@ -329,8 +330,8 @@ final class ReleaseInventory {
                   : Set.of("api", "web", "operations")));
     }
     var sqlNames = new HashSet<String>();
-    for (int i = 1; i < migrations.size(); i++)
-      sqlNames.add("db/migration/" + migrations.get(i).script());
+    for (int i = 1; i < retainedMigrations.size(); i++)
+      sqlNames.add("db/migration/" + retainedMigrations.get(i).script());
     var actualSql = new HashSet<String>();
     for (String path : byPath.keySet()) if (path.startsWith("db/migration/")) actualSql.add(path);
     require(sqlNames.equals(actualSql));
@@ -355,34 +356,34 @@ final class ReleaseInventory {
   }
 
   String release() {
-    return release;
+    return retainedRelease;
   }
 
   Map<String, String> versions() {
-    return Map.copyOf(versions);
+    return Map.copyOf(retainedVersions);
   }
 
   Map<String, String> source() {
-    return Map.copyOf(source);
+    return Map.copyOf(retainedSource);
   }
 
   Map<String, String> build() {
-    return Map.copyOf(build);
+    return Map.copyOf(retainedBuild);
   }
 
   Map<String, String> platform() {
-    return Map.copyOf(platform);
+    return Map.copyOf(retainedPlatform);
   }
 
   List<Artifact> artifacts() {
-    return List.copyOf(artifacts);
+    return List.copyOf(retainedArtifacts);
   }
 
   List<Dependency> dependencies() {
-    return List.copyOf(dependencies);
+    return List.copyOf(retainedDependencies);
   }
 
   List<SchemaHistoryAdmission.Row> migrations() {
-    return List.copyOf(migrations);
+    return List.copyOf(retainedMigrations);
   }
 }

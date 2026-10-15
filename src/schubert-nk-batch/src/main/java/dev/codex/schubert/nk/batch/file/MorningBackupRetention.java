@@ -88,7 +88,7 @@ final class MorningBackupRetention {
   private final MaintenanceOwnerFrame.Guard owner;
   private final long started;
   private final long thread = Thread.currentThread().threadId();
-  private Optional<Result> result = Optional.empty();
+  private Optional<Result> retainedResult = Optional.empty();
 
   MorningBackupRetention(
       BackupManifestReader reader,
@@ -150,14 +150,14 @@ final class MorningBackupRetention {
 
   Result result() throws IOException {
     guard();
-    return result.orElseThrow(EnvironmentInodePolicy::unavailable);
+    return retainedResult.orElseThrow(EnvironmentInodePolicy::unavailable);
   }
 
   Result collect(Mode mode, Optional<BackupManifest> current) throws IOException {
     Objects.requireNonNull(mode);
     Objects.requireNonNull(current);
     guard();
-    require(result.isEmpty() && ((mode == Mode.FAILED) == current.isEmpty()));
+    require(retainedResult.isEmpty() && ((mode == Mode.FAILED) == current.isEmpty()));
     var root = reader.retentionRoot(started);
     require(root.device() >= 0 && root.inode() > 0);
     List<String> before = reader.retentionNames(started);
@@ -260,7 +260,7 @@ final class MorningBackupRetention {
     require(remaining.equals(after));
     var finalRoot = reader.retentionRoot(started);
     require(BackupArtifactVerifier.sameDirectoryInode(root, finalRoot));
-    result =
+    retainedResult =
         Optional.of(
             new Result(
                 mode,
@@ -280,7 +280,7 @@ final class MorningBackupRetention {
 
   void recheck() throws IOException {
     guard();
-    Result fixed = result.orElseThrow(EnvironmentInodePolicy::unavailable);
+    Result fixed = retainedResult.orElseThrow(EnvironmentInodePolicy::unavailable);
     require(fixed.root.equals(reader.retentionRoot(started)));
     require(fixed.after.equals(reader.retentionNames(started)));
     for (var entry : fixed.kept.entrySet()) {

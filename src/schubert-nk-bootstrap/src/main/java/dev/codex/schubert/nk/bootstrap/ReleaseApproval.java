@@ -15,18 +15,22 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class ReleaseApproval {
   public static final int MAX_BYTES = 192;
-  private static final String VERSION = "[A-Za-z0-9][A-Za-z0-9._-]{0,63}";
+  private static final String RETAINED_VERSION = "[A-Za-z0-9][A-Za-z0-9._-]{0,63}";
   private static final String SHA = "[0-9a-f]{64}";
   private static final Pattern FRAME =
       Pattern.compile(
-          "NKRELEASEAPPROVAL1\\nversion=(" + VERSION + ")\\nmanifest_sha256=(" + SHA + ")\\n");
-  private final String version;
-  private final String manifestSha256;
+          "NKRELEASEAPPROVAL1\\nversion=("
+              + RETAINED_VERSION
+              + ")\\nmanifest_sha256=("
+              + SHA
+              + ")\\n");
+  private final String retainedVersion;
+  private final String retainedManifestSha256;
 
   public ReleaseApproval(String version, String manifestSha256) {
-    this.version = Objects.requireNonNull(version, "release version");
-    this.manifestSha256 = Objects.requireNonNull(manifestSha256, "manifest digest");
-    require(version.matches(VERSION) && manifestSha256.matches(SHA));
+    this.retainedVersion = Objects.requireNonNull(version, "release version");
+    this.retainedManifestSha256 = Objects.requireNonNull(manifestSha256, "manifest digest");
+    require(version.matches(RETAINED_VERSION) && manifestSha256.matches(SHA));
   }
 
   public static ReleaseApproval parse(byte[] input) {
@@ -44,16 +48,20 @@ public final class ReleaseApproval {
   }
 
   public byte[] encode() {
-    return ("NKRELEASEAPPROVAL1\nversion=" + version + "\nmanifest_sha256=" + manifestSha256 + "\n")
+    return ("NKRELEASEAPPROVAL1\nversion="
+            + retainedVersion
+            + "\nmanifest_sha256="
+            + retainedManifestSha256
+            + "\n")
         .getBytes(StandardCharsets.US_ASCII);
   }
 
   public String version() {
-    return version;
+    return retainedVersion;
   }
 
   public String manifestSha256() {
-    return manifestSha256;
+    return retainedManifestSha256;
   }
 
   private static void require(boolean valid) {

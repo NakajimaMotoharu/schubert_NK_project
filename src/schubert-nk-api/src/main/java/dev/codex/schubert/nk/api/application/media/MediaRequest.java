@@ -50,12 +50,12 @@ public final class MediaRequest {
   }
 
   private final Kind kind;
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
   private final TypedPayloadValues values;
 
   private MediaRequest(Kind kind, CommonHeader header, TypedPayloadValues values) {
     this.kind = kind;
-    this.header = header;
+    this.retainedHeader = header;
     this.values = values;
   }
 
@@ -93,7 +93,7 @@ public final class MediaRequest {
   }
 
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   public LayoutId responseLayoutId() {

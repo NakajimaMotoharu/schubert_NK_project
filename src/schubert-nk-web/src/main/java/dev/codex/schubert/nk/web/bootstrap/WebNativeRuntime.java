@@ -60,7 +60,7 @@ final class WebNativeRuntime implements AutoCloseable {
   private final DataSource database;
   private final ServiceCredentialSet credentials;
   private final WebNonSecretConfig config;
-  private final ServiceStartupAdmission.Ready ready;
+  private final ServiceStartupAdmission.Ready retainedReady;
   private final Map<String, String> information;
   private final WebHttpAdmission admission;
   private final BooleanSupplier ownerStopping;
@@ -91,7 +91,7 @@ final class WebNativeRuntime implements AutoCloseable {
     this.database = Objects.requireNonNull(database, "Web database");
     this.credentials = Objects.requireNonNull(credentials, "Web credentials");
     this.config = Objects.requireNonNull(config, "Web config");
-    this.ready = Objects.requireNonNull(ready, "Root admission ready");
+    this.retainedReady = Objects.requireNonNull(ready, "Root admission ready");
     this.information = Map.copyOf(ready.information());
     this.ownerStopping = Objects.requireNonNull(ownerStopping, "Web stop notification");
     this.admission = new WebHttpAdmission(ownerStopping);
@@ -211,7 +211,7 @@ final class WebNativeRuntime implements AutoCloseable {
       control.start();
       control.promote(
           () -> {
-            ready.release();
+            retainedReady.release();
             admission.admit();
           });
     }

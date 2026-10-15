@@ -33,7 +33,7 @@ final class UserMutationInput implements AutoCloseable {
   final UUID token;
   final boolean enabled;
   final String role;
-  private final char[] password;
+  private final char[] retainedPassword;
   final Map<String, String> issues;
   private boolean closed;
 
@@ -50,7 +50,7 @@ final class UserMutationInput implements AutoCloseable {
     this.token = token;
     this.enabled = enabled;
     this.role = role;
-    this.password = password.clone();
+    this.retainedPassword = password.clone();
     this.issues = Map.copyOf(issues);
   }
 
@@ -149,7 +149,7 @@ final class UserMutationInput implements AutoCloseable {
 
   String password() {
     requireUsable();
-    return new String(password);
+    return new String(retainedPassword);
   }
 
   Map<String, Object> displayValues() {
@@ -163,7 +163,7 @@ final class UserMutationInput implements AutoCloseable {
 
   @Override
   public void close() {
-    Arrays.fill(password, '\0');
+    Arrays.fill(retainedPassword, '\0');
     closed = true;
   }
 

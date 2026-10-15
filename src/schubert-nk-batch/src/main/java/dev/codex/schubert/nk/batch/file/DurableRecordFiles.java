@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class DurableRecordFiles {
-  private static final Pattern NAME =
+  private static final Pattern RETAINED_NAME =
       Pattern.compile(
           "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.(run|begin|done|plan|retire)");
   private final Object stateLock = new Object();
@@ -166,7 +166,7 @@ final class DurableRecordFiles {
 
   private static void name(String name) {
     Objects.requireNonNull(name, "record name");
-    if (!name.equals("active") && !NAME.matcher(name).matches())
+    if (!name.equals("active") && !RETAINED_NAME.matcher(name).matches())
       throw new IllegalArgumentException("record name is invalid");
   }
 

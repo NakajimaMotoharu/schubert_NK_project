@@ -71,10 +71,10 @@ final class MorningPermitPublication {
   private final OpenStore stores;
   private final OpenIntent recoveryIntents;
   private final Gate gate;
-  private final Retain retain;
+  private final Retain retainedRetain;
   private final long thread = Thread.currentThread().threadId();
   private Optional<Epoch> invalid = Optional.empty();
-  private Optional<Epoch> expected = Optional.empty();
+  private Optional<Epoch> retainedExpected = Optional.empty();
   private Optional<Permit> attempted = Optional.empty();
   private boolean started;
   private boolean issued;
@@ -87,7 +87,7 @@ final class MorningPermitPublication {
     this.stores = Objects.requireNonNull(stores);
     this.recoveryIntents = Objects.requireNonNull(recoveryIntents);
     this.gate = Objects.requireNonNull(gate);
-    this.retain = Objects.requireNonNull(retain);
+    this.retainedRetain = Objects.requireNonNull(retain);
   }
 
   static MorningPermitPublication create(
@@ -125,12 +125,12 @@ final class MorningPermitPublication {
     owner();
     require(invalid.isEmpty() && epoch.state() == State.INVALID);
     invalid = Optional.of(epoch);
-    expected = Optional.of(epoch);
+    retainedExpected = Optional.of(epoch);
   }
 
   Epoch expected() throws IOException {
     owner();
-    return expected.orElseThrow(() -> new IOException("publication epoch unavailable"));
+    return retainedExpected.orElseThrow(() -> new IOException("publication epoch unavailable"));
   }
 
   Epoch issue(Permit permit, StartupPermitFiles.IssueProof proof) throws IOException {
@@ -159,7 +159,7 @@ final class MorningPermitPublication {
                           if (boundary == StartupPermitFiles.IssuePhase.AFTER_READBACK) {
                             require(current.state() == State.ISSUED);
                             store.files().verifyPublication(current, permit);
-                            expected =
+                            retainedExpected =
                                 Optional.of(current); // only after actual exact issued readback
                           } else require(current.equals(invalid.orElseThrow()));
                           intents.verify();
@@ -168,7 +168,7 @@ final class MorningPermitPublication {
                           gate.verify();
                           intents.verify();
                         }));
-    require(phase[0] == 3 && result.equals(expected.orElseThrow()));
+    require(phase[0] == 3 && result.equals(retainedExpected.orElseThrow()));
     issued = true;
     gate.verify();
     return result;
@@ -184,7 +184,7 @@ final class MorningPermitPublication {
     ResourceScope.use(
         store::close,
         () -> {
-          store.files().verifyPublication(expected.orElseThrow(), attempted.orElseThrow());
+          store.files().verifyPublication(retainedExpected.orElseThrow(), attempted.orElseThrow());
           return true;
         });
     gate.verify();
@@ -226,7 +226,7 @@ final class MorningPermitPublication {
                 revoked.equals(invalid.orElseThrow()) && store.files().current().equals(revoked));
             return true;
           });
-      expected = invalid;
+      retainedExpected = invalid;
       intents.close();
       aborted = true;
     } catch (IOException | RuntimeException | Error unknown) {
@@ -239,7 +239,7 @@ final class MorningPermitPublication {
   }
 
   private void retain() {
-    retain.indefinitely();
+    retainedRetain.indefinitely();
     throw new IllegalStateException("publication owner retention returned");
   }
 

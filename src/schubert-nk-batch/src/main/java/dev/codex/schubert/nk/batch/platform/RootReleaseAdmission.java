@@ -60,7 +60,7 @@ public final class RootReleaseAdmission {
   private final RootStartupContext context;
   private final RootStartupContext.Snapshot expected;
   private final Loader loader;
-  private final Platform platform;
+  private final Platform retainedPlatform;
 
   private RootReleaseAdmission(
       RootStartupContext context,
@@ -70,7 +70,7 @@ public final class RootReleaseAdmission {
     this.context = context;
     this.expected = expected;
     this.loader = loader;
-    this.platform = platform;
+    this.retainedPlatform = platform;
   }
 
   /** No arbitrary expected digest, approval, reader, path, key or permission flag is accepted. */
@@ -273,7 +273,8 @@ public final class RootReleaseAdmission {
     require(expected.equals(caller) && caller.service() == service);
     context.recheck(expected);
     var current = Objects.requireNonNull(loader.read(), "closed current release result");
-    var actualRuntime = Objects.requireNonNull(platform.observe(), "runtime platform result");
+    var actualRuntime =
+        Objects.requireNonNull(retainedPlatform.observe(), "runtime platform result");
     verifyPlatform(current, actualRuntime);
     var actualRows = new SchemaHistoryAdmission(current.migrations()).inspect(connection);
     context.recheck(expected);

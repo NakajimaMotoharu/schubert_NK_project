@@ -302,12 +302,13 @@ public final class BackupDatabaseWorker {
   }
 
   static final class NativePorts implements Ports {
-    private final InodeSecurityCalls security = LinuxInodeSecurity.create();
+    private final InodeSecurityCalls retainedSecurity = LinuxInodeSecurity.create();
     private final DirectoryCalls calls = LinuxDirectoryCalls.create();
-    private final InspectorEnvironmentPublisher.Io io = new InspectorEnvironmentPublisher.NioIo();
+    private final InspectorEnvironmentPublisher.Io retainedIo =
+        new InspectorEnvironmentPublisher.NioIo();
     private final FixedServiceIdentity nss = new FixedServiceIdentity();
     private final ChildStartupContext kernel = new ChildStartupContext();
-    private final InspectorUnitProbe unit =
+    private final InspectorUnitProbe retainedUnit =
         InspectorUnitProbe.forTarget(InspectorUnitSnapshot.Target.BACKUP);
 
     public FixedServiceIdentity.Value identity() throws IOException {
@@ -319,7 +320,7 @@ public final class BackupDatabaseWorker {
     }
 
     public InspectorUnitSnapshot unit() {
-      return unit.read();
+      return retainedUnit.read();
     }
 
     public String invocation() {
@@ -356,27 +357,27 @@ public final class BackupDatabaseWorker {
     }
 
     public byte[] request(OwnedTransferDirectory root) throws IOException {
-      return new InspectorCredentialLoader(root, security).readBackupRequest();
+      return new InspectorCredentialLoader(root, retainedSecurity).readBackupRequest();
     }
 
     public byte[] pgpass(OwnedTransferDirectory root) throws IOException {
-      return new InspectorCredentialLoader(root, security).readBackupPgpass();
+      return new InspectorCredentialLoader(root, retainedSecurity).readBackupPgpass();
     }
 
     public void dump(Path out, Path pass, long uid) throws IOException {
-      new BackupArchiveProcess(security).dump(out, pass, uid);
+      new BackupArchiveProcess(retainedSecurity).dump(out, pass, uid);
     }
 
     public void verifyDump(Path out, long uid) throws IOException {
-      new BackupArchiveProcess(security).verifyDump(out, uid);
+      new BackupArchiveProcess(retainedSecurity).verifyDump(out, uid);
     }
 
     public InspectorEnvironmentPublisher.Io io() {
-      return io;
+      return retainedIo;
     }
 
     public InodeSecurityCalls security() {
-      return security;
+      return retainedSecurity;
     }
   }
 }

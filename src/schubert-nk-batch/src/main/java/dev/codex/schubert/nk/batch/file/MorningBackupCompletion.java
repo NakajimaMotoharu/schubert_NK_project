@@ -23,9 +23,9 @@ final class MorningBackupCompletion {
   private final Optional<BackupManifest> manifest;
   private final MaintenanceOwnerFrame.Guard owner;
   private final Clock clock;
-  private final String morning;
-  private final BackupUnitReceiptGate.TerminalReceipt receipt;
-  private final MorningDatabaseSession.BackupObservation rows;
+  private final String retainedMorning;
+  private final BackupUnitReceiptGate.TerminalReceipt retainedReceipt;
+  private final MorningDatabaseSession.BackupObservation retainedRows;
 
   private MorningBackupCompletion(
       MorningDatabaseSession.Access database,
@@ -41,9 +41,9 @@ final class MorningBackupCompletion {
     this.manifest = manifest;
     this.owner = owner;
     this.clock = clock;
-    this.morning = morning;
-    this.receipt = receipt;
-    this.rows = rows;
+    this.retainedMorning = morning;
+    this.retainedReceipt = receipt;
+    this.retainedRows = rows;
   }
 
   static MorningBackupCompletion complete(
@@ -88,21 +88,21 @@ final class MorningBackupCompletion {
     if (Thread.currentThread().threadId() != thread)
       throw new IOException("parent completion owner unavailable");
     owner.check();
-    if (!rows.equals(database.observeBackup(begins, manifest, now(clock), owner)))
+    if (!retainedRows.equals(database.observeBackup(begins, manifest, now(clock), owner)))
       throw new IOException("parent completion content changed");
     owner.check();
   }
 
   MorningDatabaseSession.BackupObservation rows() {
-    return rows;
+    return retainedRows;
   }
 
   BackupUnitReceiptGate.TerminalReceipt receipt() {
-    return receipt;
+    return retainedReceipt;
   }
 
   String morning() {
-    return morning;
+    return retainedMorning;
   }
 
   /**

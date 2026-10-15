@@ -143,31 +143,31 @@ public final class MaintenanceUnitStopClient {
 
   /** Opaque owner for a possibly live stop client. Never auto-destroys it. */
   public static final class Attempt {
-    private final MaintenanceUnit unit;
+    private final MaintenanceUnit retainedUnit;
     private final Context context;
     private final @Nullable Process process;
-    private Status status = Status.UNKNOWN;
+    private Status retainedStatus = Status.UNKNOWN;
     private boolean stdinClosed;
     private boolean streamsClosed;
     private boolean poisoned;
 
     private Attempt(MaintenanceUnit unit, Context context, @Nullable Process process) {
-      this.unit = unit;
+      this.retainedUnit = unit;
       this.context = context;
       this.process = process;
     }
 
     public MaintenanceUnit unit() {
-      return unit;
+      return retainedUnit;
     }
 
     public synchronized Status status() {
-      return status;
+      return retainedStatus;
     }
 
     /** Reap under the still-held parent locks; UNKNOWN never grants an unlock or stop success. */
     public synchronized Status awaitClient() {
-      if (status != Status.UNKNOWN || streamsClosed || poisoned) return status;
+      if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
       if (process == null) return Status.UNKNOWN; // No handle means no reaping proof.
       try {
         context.recheck();
@@ -190,9 +190,9 @@ public final class MaintenanceUnitStopClient {
         streamsClosed = true;
         if (!closed) return Status.UNKNOWN;
         context.recheck();
-        status =
+        retainedStatus =
             process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
-        return status;
+        return retainedStatus;
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
         return Status.UNKNOWN;

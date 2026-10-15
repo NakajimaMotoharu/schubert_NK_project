@@ -25,8 +25,8 @@ import java.util.Optional;
  * use result-aware codec (BUG-023/SSC-012), not success typed semantics.
  */
 public final class AuthenticationResponseMapper {
-  private static final LayoutId LOGIN = new LayoutId("LGNRSP01");
-  private static final LayoutId LOGOUT = new LayoutId("LOGRSP01");
+  private static final LayoutId RETAINED_LOGIN = new LayoutId("LGNRSP01");
+  private static final LayoutId RETAINED_LOGOUT = new LayoutId("LOGRSP01");
 
   public FixedPayload login(LoginResult result) {
     Objects.requireNonNull(result, "result");
@@ -43,7 +43,7 @@ public final class AuthenticationResponseMapper {
               Optional.empty());
       return PayloadCodec.standard()
           .encode(
-              PayloadTypeCatalog.encode(new TypedPayloadValues(LOGIN, data, List.of())),
+              PayloadTypeCatalog.encode(new TypedPayloadValues(RETAINED_LOGIN, data, List.of())),
               result.resultCode());
     }
     return loginError(
@@ -64,7 +64,7 @@ public final class AuthenticationResponseMapper {
         .encode(
             PayloadTypeCatalog.encode(
                 new TypedPayloadValues(
-                    LOGOUT,
+                    RETAINED_LOGOUT,
                     new LogoutResponseData(result.revokedAt().truncatedTo(ChronoUnit.MILLIS)),
                     List.of())),
             result.resultCode());
@@ -74,7 +74,7 @@ public final class AuthenticationResponseMapper {
     return PayloadCodec.standard()
         .encode(
             new PayloadValues(
-                LOGIN,
+                RETAINED_LOGIN,
                 new FieldValueSet(
                     Map.of(
                         "Retry after秒", new FieldValue.Numeric(retry),

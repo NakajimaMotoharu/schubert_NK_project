@@ -38,16 +38,16 @@ public final class LinuxStartupAdmission {
 
   /** Trusted child releases A once only after readiness or after all failed business cleanup. */
   public static final class Lease implements AutoCloseable {
-    private final Identity identity;
+    private final Identity retainedIdentity;
     private final FdOwner owner;
 
     private Lease(Identity identity, FdOwner owner) {
-      this.identity = identity;
+      this.retainedIdentity = identity;
       this.owner = owner;
     }
 
     public Identity identity() {
-      return identity;
+      return retainedIdentity;
     }
 
     @Override
@@ -202,25 +202,25 @@ public final class LinuxStartupAdmission {
   }
 
   static final class NativeIo implements Io {
-    private final LinuxExecDescriptors.FcntlCall fcntl;
-    private final LinuxSealedProof.CloseCall close;
+    private final LinuxExecDescriptors.FcntlCall retainedFcntl;
+    private final LinuxSealedProof.CloseCall retainedClose;
     private final LinuxSealedProof reader;
 
     NativeIo(
         LinuxExecDescriptors.FcntlCall fcntl,
         LinuxSealedProof.CloseCall close,
         LinuxSealedProof reader) {
-      this.fcntl = Objects.requireNonNull(fcntl);
-      this.close = Objects.requireNonNull(close);
+      this.retainedFcntl = Objects.requireNonNull(fcntl);
+      this.retainedClose = Objects.requireNonNull(close);
       this.reader = Objects.requireNonNull(reader);
     }
 
     public int fcntl(int fd, int command, int argument) {
-      return fcntl.call(fd, command, argument);
+      return retainedFcntl.call(fd, command, argument);
     }
 
     public int close(int fd) {
-      return close.call(fd);
+      return retainedClose.call(fd);
     }
 
     public Map<String, Object> attributes(int fd) throws IOException {

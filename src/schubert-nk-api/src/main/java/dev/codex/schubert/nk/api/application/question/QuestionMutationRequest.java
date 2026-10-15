@@ -36,13 +36,13 @@ import java.util.UUID;
  * UI236§10/13; NK-NTF-001/NK-QRY-001; PG-D331; PT-NTF016/QRY033.
  */
 public final class QuestionMutationRequest {
-  private final CommonHeader header;
+  private final CommonHeader retainedHeader;
   private final long target;
   private final UUID token;
   private final boolean cancel;
 
   private QuestionMutationRequest(CommonHeader header, long target, UUID token, boolean cancel) {
-    this.header = header;
+    this.retainedHeader = header;
     this.target = target;
     this.token = token;
     this.cancel = cancel;
@@ -73,7 +73,7 @@ public final class QuestionMutationRequest {
   }
 
   public CommonHeader header() {
-    return header;
+    return retainedHeader;
   }
 
   public long targetId() {
@@ -97,7 +97,7 @@ public final class QuestionMutationRequest {
     Objects.requireNonNull(actor, "actor");
     return new CanonicalRequest(
         Long.toString(actor.userId()),
-        header.layoutId().value(),
+        retainedHeader.layoutId().value(),
         "001",
         (cancel ? "NOTIFICATION:" : "QUESTION:") + target,
         List.of(number(cancel ? "notificationId" : "questionId", target)));

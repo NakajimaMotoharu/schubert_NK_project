@@ -7,15 +7,15 @@ import java.util.UUID;
 
 /** Application-outbox INSERT request; identity is validated again before JMS send. */
 public final class OutboxRequest {
-  private final UUID messageId;
-  private final UUID correlationId;
-  private final OutboxDestination destination;
-  private final String layoutId;
-  private final String layoutVersion;
-  private final byte[] body;
-  private final Instant nextAttemptAt;
-  private final Instant createdAt;
-  private final Optional<OutboxDlqMetadata> dlqMetadata;
+  private final UUID retainedMessageId;
+  private final UUID retainedCorrelationId;
+  private final OutboxDestination retainedDestination;
+  private final String retainedLayoutId;
+  private final String retainedLayoutVersion;
+  private final byte[] retainedBody;
+  private final Instant retainedNextAttemptAt;
+  private final Instant retainedCreatedAt;
+  private final Optional<OutboxDlqMetadata> retainedDlqMetadata;
 
   public OutboxRequest(
       UUID messageId,
@@ -48,65 +48,65 @@ public final class OutboxRequest {
       Instant nextAttemptAt,
       Instant createdAt,
       Optional<OutboxDlqMetadata> dlqMetadata) {
-    this.messageId = Objects.requireNonNull(messageId, "messageId");
-    this.correlationId = Objects.requireNonNull(correlationId, "correlationId");
-    this.destination = Objects.requireNonNull(destination, "destination");
-    this.layoutId = OutboxEntry.requireLayoutId(layoutId);
-    this.layoutVersion = OutboxEntry.requireLayoutVersion(layoutVersion);
-    this.body = Objects.requireNonNull(body, "body").clone();
+    this.retainedMessageId = Objects.requireNonNull(messageId, "messageId");
+    this.retainedCorrelationId = Objects.requireNonNull(correlationId, "correlationId");
+    this.retainedDestination = Objects.requireNonNull(destination, "destination");
+    this.retainedLayoutId = OutboxEntry.requireLayoutId(layoutId);
+    this.retainedLayoutVersion = OutboxEntry.requireLayoutVersion(layoutVersion);
+    this.retainedBody = Objects.requireNonNull(body, "body").clone();
     if (body.length == 0) {
       throw new IllegalArgumentException("outbox body must not be empty");
     }
-    this.nextAttemptAt = Objects.requireNonNull(nextAttemptAt, "nextAttemptAt");
-    this.createdAt = Objects.requireNonNull(createdAt, "createdAt");
-    this.dlqMetadata =
+    this.retainedNextAttemptAt = Objects.requireNonNull(nextAttemptAt, "nextAttemptAt");
+    this.retainedCreatedAt = Objects.requireNonNull(createdAt, "createdAt");
+    this.retainedDlqMetadata =
         OutboxDlqMetadata.requireProfile(
-            this.messageId,
-            this.destination,
-            this.layoutId,
-            this.layoutVersion,
-            this.body.length,
+            this.retainedMessageId,
+            this.retainedDestination,
+            this.retainedLayoutId,
+            this.retainedLayoutVersion,
+            this.retainedBody.length,
             dlqMetadata);
   }
 
   public UUID messageId() {
-    return messageId;
+    return retainedMessageId;
   }
 
   public UUID correlationId() {
-    return correlationId;
+    return retainedCorrelationId;
   }
 
   public OutboxDestination destination() {
-    return destination;
+    return retainedDestination;
   }
 
   public String layoutId() {
-    return layoutId;
+    return retainedLayoutId;
   }
 
   public String layoutVersion() {
-    return layoutVersion;
+    return retainedLayoutVersion;
   }
 
   public byte[] body() {
-    return body.clone();
+    return retainedBody.clone();
   }
 
   public Instant nextAttemptAt() {
-    return nextAttemptAt;
+    return retainedNextAttemptAt;
   }
 
   public Instant createdAt() {
-    return createdAt;
+    return retainedCreatedAt;
   }
 
   public Optional<OutboxDlqMetadata> dlqMetadata() {
-    return dlqMetadata;
+    return retainedDlqMetadata;
   }
 
   @Override
   public String toString() {
-    return "OutboxRequest[destination=" + destination + ", body=<redacted>]";
+    return "OutboxRequest[destination=" + retainedDestination + ", body=<redacted>]";
   }
 }
