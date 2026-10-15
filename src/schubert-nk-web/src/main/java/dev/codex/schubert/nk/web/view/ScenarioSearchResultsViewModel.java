@@ -4,7 +4,9 @@ import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -52,9 +54,15 @@ public final class ScenarioSearchResultsViewModel {
   }
 
   public static final class Row {
-    private final long entryId, scriptFileId;
+    private final long entryId;
+    private final long scriptFileId;
     private final int lineNumber;
-    private final String game, chapterTitle, entryTypeLabel, speaker, body, scriptDisplayPath;
+    private final String game;
+    private final String chapterTitle;
+    private final String entryTypeLabel;
+    private final String speaker;
+    private final String body;
+    private final String scriptDisplayPath;
     private final Optional<Audio> audio;
 
     private Row(ScenarioSearchRecord record) {

@@ -42,8 +42,10 @@ public record InspectorLaunchConfiguration(InspectorSettings settings, Inspectio
       if ((key.regionMatches(true, 0, "NK_INSPECTOR", 0, 12) || key.equalsIgnoreCase(ROOT))
           && !KEYS.contains(key)) throw new Invalid();
     }
-    String root = value(environment, ROOT, 4096), url = value(environment, URL, 256);
-    String id = value(environment, RUN, 36), cutoff = value(environment, CUTOFF, 32);
+    String root = value(environment, ROOT, 4096);
+    String url = value(environment, URL, 256);
+    String id = value(environment, RUN, 36);
+    String cutoff = value(environment, CUTOFF, 32);
     String names = value(environment, VERSIONS, 65536);
     try {
       UUID runId = UUID.fromString(id);

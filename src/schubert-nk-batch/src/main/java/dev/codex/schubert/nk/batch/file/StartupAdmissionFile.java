@@ -1,12 +1,25 @@
 package dev.codex.schubert.nk.batch.file;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxFileLock;
+import dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
-import org.jspecify.annotations.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Root-only, read-only A admission in host and service mount views; never maintenance M.
@@ -26,11 +39,9 @@ public final class StartupAdmissionFile {
   private final Io io;
 
   interface Io {
-    @Nullable
-    Map<String, Object> attributes(Path held) throws IOException;
+    @Nullable Map<String, Object> attributes(Path held) throws IOException;
 
-    @Nullable
-    String filesystemType(Path held) throws IOException;
+    @Nullable String filesystemType(Path held) throws IOException;
   }
 
   // Fixed /run, exact portability review only. No security/null/coverage exclusion.

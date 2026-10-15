@@ -1,12 +1,20 @@
 package dev.codex.schubert.nk.storage;
 
 import java.io.IOException;
-import java.lang.foreign.*;
+import java.lang.foreign.FunctionDescriptor;
+import java.lang.foreign.Linker;
+import java.lang.foreign.SymbolLookup;
+import java.lang.foreign.ValueLayout;
 import java.lang.invoke.MethodHandleProxies;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Child-only admission/ownership of the two inherited A/public-proof descriptors. Native root
@@ -21,8 +29,7 @@ public final class LinuxStartupAdmission {
 
     int close(int fd);
 
-    @Nullable
-    Map<String, Object> attributes(int fd) throws IOException;
+    @Nullable Map<String, Object> attributes(int fd) throws IOException;
 
     byte[] proof(int fd) throws IOException;
   }

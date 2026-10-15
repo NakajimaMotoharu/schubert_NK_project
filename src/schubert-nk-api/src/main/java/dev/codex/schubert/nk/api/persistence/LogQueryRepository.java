@@ -7,16 +7,28 @@ import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.api.security.AuthorizationService;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.log.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
+import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogId;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * One-statement ADMIN Log projection from caller-owned read-only transaction.
@@ -115,8 +127,8 @@ public final class LogQueryRepository {
           require(rows.next());
           long total = number(rows, "total");
           if (total > 99999900) throw new LogQueryException(true);
-          int pages = Math.toIntExact(number(rows, "pages")),
-              effective = Math.toIntExact(number(rows, "effective"));
+          int pages = Math.toIntExact(number(rows, "pages"));
+          int effective = Math.toIntExact(number(rows, "effective"));
           require(
               total >= 0
                   && pages == Math.max(1, (total + 99) / 100)
@@ -129,8 +141,8 @@ public final class LogQueryRepository {
                     && effective == number(rows, "effective"));
             if (rows.getObject("id") != null) records.add(record(rows));
           } while (rows.next());
-          long first = total == 0 ? 0 : (effective - 1L) * 100 + 1,
-              last = Math.min(effective * 100L, total);
+          long first = total == 0 ? 0 : (effective - 1L) * 100 + 1;
+          long last = Math.min(effective * 100L, total);
           require(records.size() == (total == 0 ? 0 : last - first + 1));
           response =
               validate(

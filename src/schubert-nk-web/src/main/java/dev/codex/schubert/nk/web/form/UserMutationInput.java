@@ -2,7 +2,14 @@ package dev.codex.schubert.nk.web.form;
 
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /** Closed SCR017 binding only; FUN009/AUT002003/UI225236/SS313314; PG-D353/016069. */
@@ -21,7 +28,8 @@ final class UserMutationInput implements AutoCloseable {
           Set.of("password", "password_confirmation"),
           "UNLOCK",
           Set.of());
-  final long id, version;
+  final long id;
+  final long version;
   final UUID token;
   final boolean enabled;
   final String role;

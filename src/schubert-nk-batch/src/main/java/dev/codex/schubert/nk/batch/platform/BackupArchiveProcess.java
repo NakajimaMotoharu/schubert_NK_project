@@ -7,12 +7,20 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.LockSupport;
 import java.util.function.LongSupplier;
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * NK-OPS-001; BAK/BKO/OPS009/UI251/SS341 6/343; PG304; PT-OPS-ARCHPROC001..008. Actual fixed tool
@@ -63,7 +71,8 @@ public final class BackupArchiveProcess {
   public void dump(Path dump, Path pgpass, long backupUid) throws IOException {
     if (backupUid < 1 || backupUid > 0xffff_ffffL || security.effectiveUid() != backupUid)
       throw invalid();
-    String destination = childPath(dump), passwordFile = childPath(pgpass);
+    String destination = childPath(dump);
+    String passwordFile = childPath(pgpass);
     long began = clock.getAsLong();
     var environment = new HashMap<>(environment());
     environment.putAll(

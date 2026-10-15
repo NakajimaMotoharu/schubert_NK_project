@@ -1,7 +1,8 @@
 package dev.codex.schubert.nk.web.controller;
 
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
@@ -10,20 +11,35 @@ import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.form.CancelForm;
 import dev.codex.schubert.nk.web.form.NotificationSearchForm;
-import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.messaging.NotificationWireClient;
+import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
+import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
-import dev.codex.schubert.nk.web.session.*;
+import dev.codex.schubert.nk.web.session.OperationTokenConflictException;
+import dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycle;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import dev.codex.schubert.nk.web.session.WebSessionId;
 import dev.codex.schubert.nk.web.view.NotificationDetailViewModel;
 import dev.codex.schubert.nk.web.view.NotificationListViewModel;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.*;
-import org.jspecify.annotations.*;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /** SCR020021/UI224236/SS313314; PG-D347368/PT-NTF-HTTP,NTC-BIZ; API context owns scope. */
 @Controller

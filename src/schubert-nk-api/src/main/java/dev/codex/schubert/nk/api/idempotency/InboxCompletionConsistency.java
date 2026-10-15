@@ -24,7 +24,8 @@ public final class InboxCompletionConsistency {
     var a = expected.responseSnapshot().orElseThrow(TemporaryInfrastructureException::new);
     var b = current.responseSnapshot().orElseThrow(TemporaryInfrastructureException::new);
     if (!a.keyVersion().equals(b.keyVersion())) return false;
-    byte[] left = a.ciphertext(), right = b.ciphertext();
+    byte[] left = a.ciphertext();
+    byte[] right = b.ciphertext();
     try {
       return MessageDigest.isEqual(left, right);
     } finally {

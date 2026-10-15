@@ -1,10 +1,15 @@
 package dev.codex.schubert.nk.web.view;
 
 import dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 
 /** Display-only verified scenario projection. FUN004/UI223,234/SS313,333/PG195/PT-WEB194..205. */
@@ -12,8 +17,11 @@ import org.jspecify.annotations.NullMarked;
 public final class ScenarioDetailViewModel {
   private final TopBarViewModel topBar;
   private final long id;
-  private final String game, title, displayPath;
-  private final Optional<Navigation> previous, next;
+  private final String game;
+  private final String title;
+  private final String displayPath;
+  private final Optional<Navigation> previous;
+  private final Optional<Navigation> next;
   private final List<Entry> entries;
 
   private ScenarioDetailViewModel(
@@ -136,9 +144,11 @@ public final class ScenarioDetailViewModel {
 
   public static final class Entry {
     private final long id;
-    private final int sequence, lineNumber;
+    private final int sequence;
+    private final int lineNumber;
     private final boolean dialogue;
-    private final String speaker, body;
+    private final String speaker;
+    private final String body;
     private final List<Audio> audio;
 
     private Entry(ScenarioEntryRecord first, List<ScenarioEntryRecord> records) {

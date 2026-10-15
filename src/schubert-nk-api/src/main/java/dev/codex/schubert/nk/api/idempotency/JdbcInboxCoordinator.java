@@ -234,7 +234,8 @@ public final class JdbcInboxCoordinator {
   private static boolean sameCiphertext(
       EncryptedResponseSnapshot left, EncryptedResponseSnapshot right) {
     if (!left.keyVersion().equals(right.keyVersion())) return false;
-    byte[] a = left.ciphertext(), b = right.ciphertext();
+    byte[] a = left.ciphertext();
+    byte[] b = right.ciphertext();
     try {
       return MessageDigest.isEqual(a, b);
     } finally {

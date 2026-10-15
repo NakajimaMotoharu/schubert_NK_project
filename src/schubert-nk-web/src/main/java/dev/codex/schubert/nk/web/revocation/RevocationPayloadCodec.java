@@ -63,8 +63,10 @@ public final class RevocationPayloadCodec implements AutoCloseable {
       Objects.requireNonNull(identity, "revocation identity");
       Objects.requireNonNull(context, "revocation context");
       byte[] plaintext = context.wireValue().getBytes(StandardCharsets.US_ASCII);
-      byte[] nonce = new byte[12], aad = identity.aad(currentVersion);
-      byte[] encrypted = new byte[0], envelope = new byte[0];
+      byte[] nonce = new byte[12];
+      byte[] aad = identity.aad(currentVersion);
+      byte[] encrypted = new byte[0];
+      byte[] envelope = new byte[0];
       try {
         random.nextBytes(nonce);
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
@@ -103,10 +105,10 @@ public final class RevocationPayloadCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "revocation identity");
       Objects.requireNonNull(payload, "revocation payload");
-      byte[] stored = payload.ciphertext(),
-          nonce = new byte[0],
-          aad = new byte[0],
-          plaintext = new byte[0];
+      byte[] stored = payload.ciphertext();
+      byte[] nonce = new byte[0];
+      byte[] aad = new byte[0];
+      byte[] plaintext = new byte[0];
       try {
         if (stored.length < 101 || !Arrays.equals(stored, 0, 6, MAGIC, 0, 6)) throw invalid();
         if (stored[6] != 1) throw invalid();

@@ -3,9 +3,19 @@ package dev.codex.schubert.nk.web.form;
 import dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
 import java.text.Normalizer;
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
+import java.time.DateTimeException;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR020/NTF/UI224,236/SS313,314; PG-D347/PT-NTF-HTTP001..010. No owner input. */
@@ -13,9 +23,11 @@ import org.jspecify.annotations.NullMarked;
 public final class NotificationSearchForm {
   private static final Set<String> FIELDS = Set.of("type", "from", "to", "page");
   private static final String INVALID = "入力項目を確認してください。";
-  private final Map<String, String> values, issues;
+  private final Map<String, String> values;
+  private final Map<String, String> issues;
   private final int page;
-  private final Optional<Instant> from, to;
+  private final Optional<Instant> from;
+  private final Optional<Instant> to;
 
   private NotificationSearchForm(
       Map<String, String> values,

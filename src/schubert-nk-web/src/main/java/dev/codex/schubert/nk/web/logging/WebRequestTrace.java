@@ -56,7 +56,8 @@ public final class WebRequestTrace {
           "/notifications/{id:[0-9]{1,12}}",
           "/css/**",
           "/js/**");
-  private final UUID requestId, eventId;
+  private final UUID requestId;
+  private final UUID eventId;
   private final AtomicReference<Optional<UUID>> messageId = new AtomicReference<>(Optional.empty());
   private final AtomicReference<String> route = new AtomicReference<>(UNKNOWN_ROUTE);
   private volatile Optional<TopBarViewModel> actor = Optional.empty();

@@ -100,7 +100,8 @@ public final class MediaRangeService {
     headers.put("X-Content-Type-Options", "nosniff");
     headers.put("Cache-Control", "private, no-store");
     int status;
-    long start = 0, length;
+    long start = 0;
+    long length;
     switch (selection) {
       case HttpByteRangeParser.Full full -> {
         status = 200;

@@ -4,10 +4,16 @@ import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.form.LogSearchForm;
-import dev.codex.schubert.nk.web.form.LogSearchForm.*;
+import dev.codex.schubert.nk.web.form.LogSearchForm.Code;
+import dev.codex.schubert.nk.web.form.LogSearchForm.Field;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalInt;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
@@ -18,7 +24,8 @@ public final class LogSearchViewModel {
   private final Filters filters;
   private final List<FieldError> errors;
   private final Optional<LogSearchResultsViewModel> results;
-  private final Optional<String> previousHref, nextHref;
+  private final Optional<String> previousHref;
+  private final Optional<String> nextHref;
 
   private LogSearchViewModel(
       SessionPrincipal actor, LogSearchForm form, Optional<LogSearchResultsViewModel> results) {
@@ -112,7 +119,13 @@ public final class LogSearchViewModel {
   }
 
   public static final class Filters {
-    private final String q, logType, action, path, level, from, to;
+    private final String q;
+    private final String logType;
+    private final String action;
+    private final String path;
+    private final String level;
+    private final String from;
+    private final String to;
 
     private Filters(LogSearchForm form) {
       var values = form.getValues();
@@ -191,7 +204,8 @@ public final class LogSearchViewModel {
             Field.Q, "メッセージはUTF-8で256 byte以内にしてください。",
             Field.ACTION, "アクションはUTF-8で64 byte以内にしてください。",
             Field.PATH, "パスはUTF-8で256 byte以内にしてください。");
-    private final String name, message;
+    private final String name;
+    private final String message;
 
     private FieldError(Field field, Code code) {
       name = Objects.requireNonNull(NAMES.get(field));

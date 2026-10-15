@@ -72,7 +72,8 @@ final class TransferCleanup {
       DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(ResolverStyle.STRICT);
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
-  private final long uid, gid;
+  private final long uid;
+  private final long gid;
   private final Guard guard;
 
   TransferCleanup(
@@ -243,7 +244,11 @@ final class TransferCleanup {
   }
 
   private static final class Counts {
-    private long target, success, failure, retained, bytes;
+    private long target;
+    private long success;
+    private long failure;
+    private long retained;
+    private long bytes;
 
     void retained() {
       retained = Math.addExact(retained, 1);

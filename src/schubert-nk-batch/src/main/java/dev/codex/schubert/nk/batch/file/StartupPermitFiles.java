@@ -8,15 +8,25 @@ import dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch;
 import dev.codex.schubert.nk.batch.file.StartupPermitRecords.Permit;
 import dev.codex.schubert.nk.batch.file.StartupPermitRecords.State;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import org.jspecify.annotations.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * NK-OPS-001; OPS009/UI251/SS343 SSC089; PG303; PT-OPS-PERMITFILE001..008. Borrowed authenticated
@@ -343,9 +353,9 @@ public final class StartupPermitFiles {
                 require(writer.size() == 0);
                 ByteBuffer buffer = ByteBuffer.wrap(content);
                 while (buffer.hasRemaining()) {
-                  int position = buffer.position(),
-                      remaining = buffer.remaining(),
-                      count = writer.write(buffer);
+                  int position = buffer.position();
+                  int remaining = buffer.remaining();
+                  int count = writer.write(buffer);
                   require(count > 0 && count <= remaining && buffer.position() == position + count);
                 }
                 require(writer.size() == content.length);
@@ -384,9 +394,9 @@ public final class StartupPermitFiles {
                       require(reader.size() == before.metadata().size());
                       ByteBuffer bytes = ByteBuffer.wrap(buffer);
                       while (bytes.hasRemaining()) {
-                        int position = bytes.position(),
-                            remaining = bytes.remaining(),
-                            count = reader.read(bytes);
+                        int position = bytes.position();
+                        int remaining = bytes.remaining();
+                        int count = reader.read(bytes);
                         if (count == -1) break;
                         require(
                             count > 0

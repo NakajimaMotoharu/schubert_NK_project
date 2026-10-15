@@ -6,7 +6,12 @@ import dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory;
 import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
@@ -14,7 +19,8 @@ import org.springframework.web.util.UriUtils;
 @NullMarked
 public final class AnimationListViewModel {
   private final TopBarViewModel topBar;
-  private final String title, section;
+  private final String title;
+  private final String section;
   private final int totalCount;
   private final List<Video> videos;
   private final List<Row> rows;
@@ -101,7 +107,10 @@ public final class AnimationListViewModel {
   }
 
   public static final class Video {
-    private final String title, category, displayPath, href;
+    private final String title;
+    private final String category;
+    private final String displayPath;
+    private final String href;
     private final long byteSize;
 
     private Video(AnimationRecord record) {

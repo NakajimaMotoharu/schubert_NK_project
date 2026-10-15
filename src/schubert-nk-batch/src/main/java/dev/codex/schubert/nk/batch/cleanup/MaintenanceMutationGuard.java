@@ -2,7 +2,9 @@ package dev.codex.schubert.nk.batch.cleanup;
 
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 import org.jspecify.annotations.NullMarked;

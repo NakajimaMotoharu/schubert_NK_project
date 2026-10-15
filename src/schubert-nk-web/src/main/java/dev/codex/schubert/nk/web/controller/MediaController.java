@@ -1,26 +1,42 @@
 package dev.codex.schubert.nk.web.controller;
 
-import dev.codex.schubert.nk.protocol.file.*;
+import dev.codex.schubert.nk.protocol.file.ContentDisposition;
+import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
+import dev.codex.schubert.nk.protocol.file.MediaType;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.logging.WebMediaAudit;
 import dev.codex.schubert.nk.web.logging.WebMediaAudit.Failure;
-import dev.codex.schubert.nk.web.media.*;
-import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.media.MediaDeliveryException;
+import dev.codex.schubert.nk.web.media.MediaRangeService;
+import dev.codex.schubert.nk.web.media.MediaResponseDecoder;
+import dev.codex.schubert.nk.web.messaging.MediaDescriptorWireClient;
+import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.security.WebRequestContext;
-import dev.codex.schubert.nk.web.session.*;
-import jakarta.servlet.http.*;
-import java.io.*;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /** Fixed SS313/333 media routes, fresh API authentication on GET and HEAD; PG-D-343/PT-MED-HTTP. */
 @Controller

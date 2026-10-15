@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.form;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /** Closed SCR021/023 input only; UI224/236; SS313/314/323; PG-D368/PT-TARGET001..008. */

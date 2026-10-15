@@ -51,7 +51,9 @@ public final class ApiNativeCodecs implements AutoCloseable {
 
   static ApiNativeCodecs create(KeySource source) {
     Objects.requireNonNull(source, "API key source");
-    byte @Nullable [] context = null, response = null, fingerprint = null;
+    byte @Nullable [] context = null;
+    byte @Nullable [] response = null;
+    byte @Nullable [] fingerprint = null;
     @Nullable AuthContextCodec contexts = null;
     @Nullable ResponseSnapshotCodec snapshots = null;
     try {

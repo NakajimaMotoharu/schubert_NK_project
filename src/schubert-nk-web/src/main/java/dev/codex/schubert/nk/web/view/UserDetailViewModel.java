@@ -1,11 +1,16 @@
 package dev.codex.schubert.nk.web.view;
 
 import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
-import java.time.*;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /** Display only SCR017/UI225,236/SS313,314; PG-D346/PT-USER-DETAIL001..008. */

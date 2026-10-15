@@ -11,395 +11,395 @@ import java.util.Objects;
 public final class LayoutFieldCatalog {
   private static final String CATALOG_TSV =
       """
-        LGNREQ01	DATA	Username	1	64	X	M	NFC・trim後1～64 byte
-        LGNREQ01	DATA	Password	65	256	X	M	NFC後1～256 byte。右spaceは値の一部と区別できないため末尾space passwordは禁止
-        LGNREQ01	DATA	Client address	321	45	X	M	IPv4/IPv6 text。Caddy検証済み
-        LGNREQ01	DATA	Reserved	366	19	X	F	全space
-        LGNRSP01	DATA	Username	1	64	X	C	成功時必須
-        LGNRSP01	DATA	Role	65	5	X	C	`USER`/`ADMIN`、成功時必須
-        LGNRSP01	DATA	認証context ID	70	64	X	C	成功時lowercase hex 64文字。header側は全space
-        LGNRSP01	DATA	発行日時	134	17	X	C	成功時17桁JST日時、失敗時全space
-        LGNRSP01	DATA	期限日時	151	17	X	C	成功時17桁JST日時、失敗時全space
-        LGNRSP01	DATA	Retry after秒	168	6	N	M	Lock以外は0
-        LGNRSP01	DATA	残り試行回数	174	3	N	M	成功・非表示時0
-        LGNRSP01	DATA	利用者message	177	256	X	O	Error/lock時。成功時全space
-        LOGRSP01	DATA	Session失効日時	1	17	N	M	JST日時
-        LOGRSP01	DATA	Reserved	18	7	X	F	全space
-        GAMRSP01	DATA	Total count	1	9	N	M	Record件数と一致
-        GAMRSP01	RECORD	Game code	1	12	X	M	`NUKITASHI1`/`NUKITASHI2`
-        GAMRSP01	RECORD	Title	13	256	X	M	表示title
-        GAMRSP01	RECORD	Display order	269	3	N	M	昇順
-        GAMRSP01	RECORD	Reserved	272	1	X	F	Space
-        SPKREQ01	DATA	Game code	1	12	X	O	全space/`NUKITASHI1`/`NUKITASHI2`
-        SPKRSP01	DATA	Total count	1	9	N	M	Record件数と一致
-        SPKRSP01	RECORD	Speaker ID	1	12	N	M	内部ID
-        SPKRSP01	RECORD	Speaker名	13	128	X	M	表示・検索値
-        SPKRSP01	RECORD	出現件数	141	9	N	M	対象game内entry件数
-        SPKRSP01	RECORD	Reserved	150	3	X	F	全space
-        SRCREQ01	DATA	本文keyword	1	256	X	O	部分一致
-        SRCREQ01	DATA	Game code	257	12	X	O	全space/定義game
-        SRCREQ01	DATA	Speaker名	269	128	X	O	完全一致
-        SRCREQ01	DATA	章title	397	256	X	O	部分一致
-        SRCREQ01	DATA	Entry type	653	10	X	O	全space/`dialogue`/`narration`
-        SRCREQ01	DATA	Voice条件	663	1	X	O	Space/`1`あり/`0`なし
-        SRCREQ01	DATA	Page	664	6	N	M	1～999999
-        SRCREQ01	DATA	Page size	670	3	N	M	固定100
-        SRCRSP01	DATA	Effective page	1	6	N	M	1～999999
-        SRCRSP01	DATA	Page size	7	3	N	M	Interface固定値
-        SRCRSP01	DATA	Total count	10	9	N	M	Page size 50は0～49,999,950、100は0～99,999,900
-        SRCRSP01	DATA	Total pages	19	6	N	M	0件でも1
-        SRCRSP01	DATA	First result	25	9	N	M	0件は0
-        SRCRSP01	DATA	Last result	34	9	N	M	0件は0
-        SRCRSP01	DATA	Reserved	43	6	X	F	全space
-        SRCRSP01	RECORD	Entry ID	1	12	N	M	Scenario anchor ID
-        SRCRSP01	RECORD	Script file ID	13	12	N	M	明細遷移ID
-        SRCRSP01	RECORD	Game code	25	12	X	M	定義game
-        SRCRSP01	RECORD	章title	37	256	X	O	未設定はspace
-        SRCRSP01	RECORD	Line番号	293	8	N	M	1以上
-        SRCRSP01	RECORD	Entry type	301	10	X	M	`dialogue`/`narration`
-        SRCRSP01	RECORD	Speaker名	311	128	X	O	Narrationはspace可
-        SRCRSP01	RECORD	本文	439	4096	X	M	CR/LF/TAB/NULなし
-        SRCRSP01	RECORD	Audio有無	4535	1	B	M	`0`/`1`
-        SRCRSP01	RECORD	Audio ID	4536	12	X	C	Audio有無1時ASCII数字、0時space
-        SRCRSP01	RECORD	Script display path	4548	512	X	M	Sanitized表示専用。File解決には使用しない
-        SRCRSP01	RECORD	Audio display path	5060	512	X	C	Audio有無1時。Sanitized表示専用
-        SRCRSP01	RECORD	Reserved	5572	13	X	F	全space
-        RTEREQ01	DATA	Game code	1	12	X	M	定義game
-        RTERSP01	DATA	Total count	1	9	N	M	Record件数と一致
-        RTERSP01	RECORD	Prefix	1	2	N	M	2桁section prefix
-        RTERSP01	RECORD	Route名	3	64	X	M	固定mapまたは`未分類`
-        RTERSP01	RECORD	File件数	67	6	N	M	1以上
-        SCFREQ01	DATA	Game code	1	12	X	M	定義game
-        SCFREQ01	DATA	Prefix	13	2	N	M	2桁
-        SCFRSP01	DATA	Game code	1	12	X	M	要求値
-        SCFRSP01	DATA	Prefix	13	2	N	M	要求値
-        SCFRSP01	DATA	Route名	15	64	X	M	表示名
-        SCFRSP01	DATA	Total count	79	9	N	M	Record件数と一致
-        SCFRSP01	DATA	Reserved	88	1	X	F	Space
-        SCFRSP01	RECORD	Script file ID	1	12	N	M	明細遷移ID
-        SCFRSP01	RECORD	Display title	13	256	X	M	章title、section code、file名の最初の非空値
-        SCFRSP01	RECORD	Display path	269	512	X	M	Sanitized表示専用
-        SCFRSP01	RECORD	Entry件数	781	6	N	M	0以上
-        SCFRSP01	RECORD	Reserved	787	14	X	F	全space
-        SCNREQ01	DATA	Script file ID	1	12	N	M	対象ID
-        SCNRSP01	DATA	Script file ID	1	12	N	M	現在ID
-        SCNRSP01	DATA	Game code	13	12	X	M	定義game
-        SCNRSP01	DATA	Display title	25	256	X	M	現在title
-        SCNRSP01	DATA	Display path	281	512	X	M	Sanitized表示専用
-        SCNRSP01	DATA	Previous file ID	793	12	X	O	ASCII数字/space
-        SCNRSP01	DATA	Previous title	805	256	X	C	Previous ID設定時
-        SCNRSP01	DATA	Next file ID	1061	12	X	O	ASCII数字/space
-        SCNRSP01	DATA	Next title	1073	256	X	C	Next ID設定時
-        SCNRSP01	DATA	Delivery mode	1329	1	X	M	`I` inline/`F` large-result file
-        SCNRSP01	DATA	File ID	1330	36	X	C	F時UUID
-        SCNRSP01	DATA	File relative path	1366	256	X	C	F時transfer root基準
-        SCNRSP01	DATA	File byte長	1622	12	N	M	I時0、F時実長
-        SCNRSP01	DATA	File SHA-256	1634	64	X	C	F時lowercase hex
-        SCNRSP01	DATA	File record長	1698	6	N	M	I時0、F時`004800`
-        SCNRSP01	DATA	File record件数	1704	9	N	M	I時0、F時1～10000
-        SCNRSP01	DATA	Reserved	1713	16	X	F	全space
-        SCNRSP01	RECORD	Entry ID	1	12	N	M	同じentryの複数audio recordで同値
-        SCNRSP01	RECORD	Entry sequence	13	6	N	M	1開始表示順
-        SCNRSP01	RECORD	Line番号	19	8	N	M	1以上
-        SCNRSP01	RECORD	Entry type	27	10	X	M	`dialogue`/`narration`
-        SCNRSP01	RECORD	Speaker名	37	128	X	O	Narrationはspace可
-        SCNRSP01	RECORD	本文	165	4096	X	M	同じentryでは同値
-        SCNRSP01	RECORD	Audio sequence	4261	3	N	M	Audioなし0、あり1～999
-        SCNRSP01	RECORD	Audio ID	4264	12	X	C	Audioあり時ASCII数字
-        SCNRSP01	RECORD	Audio display path	4276	512	X	C	Audioあり時、sanitized表示専用
-        SCNRSP01	RECORD	Reserved	4788	13	X	F	全space
-        AUDREQ01	DATA	Audio ID	1	12	N	M	DB logical ID
-        AUDREQ01	DATA	Disposition	13	1	X	M	`I`再生/`A`download
-        AUDREQ01	DATA	Reserved	14	3	X	F	全space
-        AUDRSP01	DATA	Media logical ID	1	64	X	M	要求IDのcanonical値
-        AUDRSP01	DATA	Storage relative path	65	512	X	M	Business asset root基準。絶対path禁止、Browser非表示
-        AUDRSP01	DATA	File name	577	256	X	M	表示/download名
-        AUDRSP01	DATA	File byte長	833	12	N	M	1以上
-        AUDRSP01	DATA	SHA-256	845	64	X	M	Lowercase hex
-        AUDRSP01	DATA	MIME type	909	64	X	M	許可list内
-        AUDRSP01	DATA	Content disposition	973	1	X	M	`I` inline、`A` attachment
-        AUDRSP01	DATA	Reserved	974	51	X	F	全space
-        ANMRSP01	DATA	Main/SUBTRACK件数	1	3	N	M	現行15
-        ANMRSP01	DATA	OVA件数	4	3	N	M	現行4
-        ANMRSP01	DATA	Opening有無	7	1	B	M	現行1
-        ANMRSP01	DATA	総file件数	8	3	N	M	現行20
-        ANMRSP01	DATA	Reserved	11	6	X	F	全space
-        ANLREQ01	DATA	Category	1	16	X	M	`MAIN`/`OVA`
-        ANLRSP01	DATA	Total count	1	6	N	M	Record件数
-        ANLRSP01	DATA	Reserved	7	2	X	F	全space
-        ANLRSP01	RECORD	Video ID	1	64	X	M	Stable logical ID
-        ANLRSP01	RECORD	Title	65	256	X	M	表示title
-        ANLRSP01	RECORD	Category	321	16	X	M	`MAIN`/`SUBTRACK`/`OVA`
-        ANLRSP01	RECORD	Display path	337	512	X	M	Sanitized表示専用。File解決には使用しない
-        ANLRSP01	RECORD	File byte長	849	12	N	M	1以上
-        ANLRSP01	RECORD	Parent main ID	861	64	X	C	SUBTRACK時対応main ID。他はspace
-        ANLRSP01	RECORD	Display order	925	4	N	M	Category内順
-        VIDREQ01	DATA	Video ID	1	64	X	M	Stable logical ID
-        VIDRSP01	DATA	Media logical ID	1	64	X	M	要求IDのcanonical値
-        VIDRSP01	DATA	Storage relative path	65	512	X	M	Business asset root基準。絶対path禁止、Browser非表示
-        VIDRSP01	DATA	File name	577	256	X	M	表示/download名
-        VIDRSP01	DATA	File byte長	833	12	N	M	1以上
-        VIDRSP01	DATA	SHA-256	845	64	X	M	Lowercase hex
-        VIDRSP01	DATA	MIME type	909	64	X	M	許可list内
-        VIDRSP01	DATA	Content disposition	973	1	X	M	`I` inline、`A` attachment
-        VIDRSP01	DATA	Reserved	974	51	X	F	全space
-        VIDRSP01	DATA	Title	1025	256	X	M	表示title
-        VIDRSP01	DATA	Category	1281	16	X	M	`MAIN`/`SUBTRACK`/`OVA`/`OPENING`
-        VIDRSP01	DATA	Display path	1297	512	X	M	Sanitized表示専用。File解決には使用しない
-        MCTRSP01	DATA	Total count	1	6	N	M	Record件数
-        MCTRSP01	DATA	Reserved	7	2	X	F	全space
-        MCTRSP01	RECORD	Category	1	64	X	M	表示/要求値
-        MCTRSP01	RECORD	Track件数	65	6	N	M	Category配下総数
-        MCTRSP01	RECORD	Reserved	71	2	X	F	全space
-        MCSREQ01	DATA	Category	1	64	X	M	IF-013返却値
-        MCSRSP01	DATA	Total count	1	6	N	M	Record件数
-        MCSRSP01	DATA	Reserved	7	2	X	F	全space
-        MCSRSP01	RECORD	Section	1	128	X	M	表示/要求値
-        MCSRSP01	RECORD	Track件数	129	6	N	M	Section配下総数
-        MCSRSP01	RECORD	Reserved	135	2	X	F	全space
-        MTRREQ01	DATA	Category	1	64	X	M	IF-013返却値
-        MTRREQ01	DATA	Section	65	128	X	M	IF-014返却値
-        MTRRSP01	DATA	Total count	1	9	N	M	Record件数
-        MTRRSP01	DATA	Reserved	10	7	X	F	全space
-        MTRRSP01	RECORD	Track ID	1	64	X	M	Stable logical ID
-        MTRRSP01	RECORD	Title	65	256	X	M	表示title
-        MTRRSP01	RECORD	Category	321	64	X	M	Category
-        MTRRSP01	RECORD	Section	385	128	X	M	Section
-        MTRRSP01	RECORD	Display path	513	512	X	M	Sanitized表示専用
-        MTRRSP01	RECORD	File byte長	1025	12	N	M	1以上
-        MTRRSP01	RECORD	Pair key	1037	256	X	O	`曲`のmain/instrumental grouping key
-        MTRRSP01	RECORD	Pair role	1293	1	X	M	`M` main、`I` instrumental、`N` pair対象外
-        MTRRSP01	RECORD	Display order	1294	4	N	M	一覧順
-        MTRRSP01	RECORD	Reserved	1298	15	X	F	全space
-        MEDREQ01	DATA	Track ID	1	64	X	M	Stable logical ID
-        MEDREQ01	DATA	Disposition	65	1	X	M	`I`再生/`A`download
-        MEDREQ01	DATA	Reserved	66	7	X	F	全space
-        MEDRSP01	DATA	Media logical ID	1	64	X	M	要求IDのcanonical値
-        MEDRSP01	DATA	Storage relative path	65	512	X	M	Business asset root基準。絶対path禁止、Browser非表示
-        MEDRSP01	DATA	File name	577	256	X	M	表示/download名
-        MEDRSP01	DATA	File byte長	833	12	N	M	1以上
-        MEDRSP01	DATA	SHA-256	845	64	X	M	Lowercase hex
-        MEDRSP01	DATA	MIME type	909	64	X	M	許可list内
-        MEDRSP01	DATA	Content disposition	973	1	X	M	`I` inline、`A` attachment
-        MEDRSP01	DATA	Reserved	974	51	X	F	全space
-        LGSREQ01	DATA	Keyword	1	256	X	O	Message/details部分一致
-        LGSREQ01	DATA	Log type	257	16	X	O	ACTION/REQUEST/SECURITY/MQ/SYSTEM/BATCH
-        LGSREQ01	DATA	Action	273	64	X	O	完全一致
-        LGSREQ01	DATA	Path	337	256	X	O	部分一致
-        LGSREQ01	DATA	Level	593	8	X	O	INFO/WARN/ERROR
-        LGSREQ01	DATA	From日時	601	17	X	O	JST日時、全space可
-        LGSREQ01	DATA	To日時	618	17	X	O	JST日時、From≦To、最大31日
-        LGSREQ01	DATA	Page	635	6	N	M	1以上
-        LGSREQ01	DATA	Page size	641	3	N	M	固定100
-        LGSREQ01	DATA	Reserved	644	13	X	F	全space
-        LGSRSP01	DATA	Effective page	1	6	N	M	1～999999
-        LGSRSP01	DATA	Page size	7	3	N	M	Interface固定値
-        LGSRSP01	DATA	Total count	10	9	N	M	Page size 50は0～49,999,950、100は0～99,999,900
-        LGSRSP01	DATA	Total pages	19	6	N	M	0件でも1
-        LGSRSP01	DATA	First result	25	9	N	M	0件は0
-        LGSRSP01	DATA	Last result	34	9	N	M	0件は0
-        LGSRSP01	DATA	Reserved	43	6	X	F	全space
-        LGSRSP01	RECORD	Log ID	1	12	N	M	ID
-        LGSRSP01	RECORD	発生日時	13	17	N	M	JST
-        LGSRSP01	RECORD	Log type	30	16	X	M	定義値
-        LGSRSP01	RECORD	Level	46	8	X	M	INFO/WARN/ERROR
-        LGSRSP01	RECORD	Action	54	64	X	O	Action code
-        LGSRSP01	RECORD	Message	118	512	X	M	機微情報除外済み
-        LGSRSP01	RECORD	HTTP request ID	630	36	X	O	UUID
-        LGSRSP01	RECORD	業務Message ID	666	36	X	O	UUID
-        LGSRSP01	RECORD	Correlation ID	702	36	X	O	UUID
-        LGSRSP01	RECORD	HTTP method	738	8	X	O	GET/POST等
-        LGSRSP01	RECORD	Path	746	256	X	O	URI path
-        LGSRSP01	RECORD	HTTP status	1002	3	X	O	ASCII数字/space
-        LGSRSP01	RECORD	Elapsed ms	1005	9	X	O	ASCII数字/space
-        LGSRSP01	RECORD	Remote address	1014	45	X	O	IPv4/IPv6
-        LGSRSP01	RECORD	Details	1059	1024	X	O	表示用JSON text、本文・秘密値なし
-        LGSRSP01	RECORD	Reserved	2083	6	X	F	全space
-        USRREQ01	DATA	Username prefix	1	64	X	O	前方一致
-        USRREQ01	DATA	Role	65	5	X	O	Space/USER/ADMIN
-        USRREQ01	DATA	State	70	8	X	O	Space/ACTIVE/DISABLED/LOCKED
-        USRREQ01	DATA	Page	78	6	N	M	1以上
-        USRREQ01	DATA	Page size	84	3	N	M	固定50
-        USRREQ01	DATA	Reserved	87	10	X	F	全space
-        USRRSP01	DATA	Effective page	1	6	N	M	1～999999
-        USRRSP01	DATA	Page size	7	3	N	M	Interface固定値
-        USRRSP01	DATA	Total count	10	9	N	M	Page size 50は0～49,999,950、100は0～99,999,900
-        USRRSP01	DATA	Total pages	19	6	N	M	0件でも1
-        USRRSP01	DATA	First result	25	9	N	M	0件は0
-        USRRSP01	DATA	Last result	34	9	N	M	0件は0
-        USRRSP01	DATA	Reserved	43	6	X	F	全space
-        USRRSP01	RECORD	User ID	1	12	N	M	ID
-        USRRSP01	RECORD	Username	13	64	X	M	表示名
-        USRRSP01	RECORD	Role	77	5	X	M	USER/ADMIN
-        USRRSP01	RECORD	State	82	8	X	M	ACTIVE/DISABLED/LOCKED
-        USRRSP01	RECORD	Locked until	90	17	X	O	JST日時/space
-        USRRSP01	RECORD	Last Login	107	17	X	O	JST日時/space
-        USRRSP01	RECORD	Created at	124	17	N	M	JST日時
-        USRRSP01	RECORD	Updated at	141	17	N	M	JST日時
-        USRRSP01	RECORD	Version	158	9	N	M	Optimistic lock
-        USRRSP01	RECORD	Reserved	167	2	X	F	全space
-        UCRREQ01	DATA	Username	1	64	X	M	`A-Z a-z 0-9 . _ -`、比較はcase-insensitive
-        UCRREQ01	DATA	Initial Password	65	256	X	M	NFC、12～128文字、256 byte以下、末尾space禁止
-        UCRREQ01	DATA	Role	321	5	X	M	USER/ADMIN
-        UCRREQ01	DATA	Enabled	326	1	B	M	0/1
-        UCRREQ01	DATA	Operation token	327	36	X	M	Web採番UUID。二重更新防止
-        UCRREQ01	DATA	Reserved	363	10	X	F	全space
-        UCRRSP01	DATA	User ID	1	12	N	M	成功時のTarget ID
-        UCRRSP01	DATA	更新後version	13	9	N	M	成功時のOptimistic lock version
-        UCRRSP01	DATA	Reserved	22	3	X	F	全space
-        UDTREQ01	DATA	User ID	1	12	N	M	Target ID
-        UDTRSP01	DATA	User ID	1	12	N	M	ID
-        UDTRSP01	DATA	Username	13	64	X	M	表示名
-        UDTRSP01	DATA	Role	77	5	X	M	USER/ADMIN
-        UDTRSP01	DATA	State	82	8	X	M	ACTIVE/DISABLED/LOCKED
-        UDTRSP01	DATA	Locked until	90	17	X	O	JST/space
-        UDTRSP01	DATA	Last Login	107	17	X	O	JST/space
-        UDTRSP01	DATA	Password changed at	124	17	N	M	JST
-        UDTRSP01	DATA	Created at	141	17	N	M	JST
-        UDTRSP01	DATA	Updated at	158	17	N	M	JST
-        UDTRSP01	DATA	Active session数	175	3	N	M	0～2
-        UDTRSP01	DATA	Version	178	9	N	M	Optimistic lock
-        UDTRSP01	DATA	Created by	187	64	X	M	Actor username。BootstrapのDB NULLは`SYSTEM`
-        UDTRSP01	DATA	Updated by	251	64	X	M	Actor username。BootstrapのDB NULLは`SYSTEM`
-        UDTRSP01	DATA	Reserved	315	6	X	F	全space
-        USTREQ01	DATA	User ID	1	12	N	M	Target
-        USTREQ01	DATA	Enabled	13	1	B	M	0無効/1有効
-        USTREQ01	DATA	Expected version	14	9	N	M	画面表示version
-        USTREQ01	DATA	Operation token	23	36	X	M	Web採番UUID
-        USTREQ01	DATA	Reserved	59	2	X	F	全space
-        USTRSP01	DATA	User ID	1	12	N	M	成功時のTarget ID
-        USTRSP01	DATA	更新後version	13	9	N	M	成功時のOptimistic lock version
-        USTRSP01	DATA	Reserved	22	3	X	F	全space
-        URLREQ01	DATA	User ID	1	12	N	M	Target
-        URLREQ01	DATA	New role	13	5	X	M	USER/ADMIN
-        URLREQ01	DATA	Expected version	18	9	N	M	画面表示version
-        URLREQ01	DATA	Operation token	27	36	X	M	Web採番UUID
-        URLREQ01	DATA	Reserved	63	6	X	F	全space
-        URLRSP01	DATA	User ID	1	12	N	M	成功時のTarget ID
-        URLRSP01	DATA	更新後version	13	9	N	M	成功時のOptimistic lock version
-        URLRSP01	DATA	Reserved	22	3	X	F	全space
-        UPWREQ01	DATA	User ID	1	12	N	M	Target
-        UPWREQ01	DATA	New Password	13	256	X	M	User作成と同じpolicy
-        UPWREQ01	DATA	Expected version	269	9	N	M	画面表示version
-        UPWREQ01	DATA	Operation token	278	36	X	M	Web採番UUID
-        UPWREQ01	DATA	Reserved	314	11	X	F	全space
-        UPWRSP01	DATA	User ID	1	12	N	M	成功時のTarget ID
-        UPWRSP01	DATA	更新後version	13	9	N	M	成功時のOptimistic lock version
-        UPWRSP01	DATA	Reserved	22	3	X	F	全space
-        ULKREQ01	DATA	User ID	1	12	N	M	Target
-        ULKREQ01	DATA	Expected version	13	9	N	M	画面表示version
-        ULKREQ01	DATA	Operation token	22	36	X	M	Web採番UUID
-        ULKREQ01	DATA	Reserved	58	3	X	F	全space
-        ULKRSP01	DATA	User ID	1	12	N	M	成功時のTarget ID
-        ULKRSP01	DATA	更新後version	13	9	N	M	成功時のOptimistic lock version
-        ULKRSP01	DATA	Reserved	22	3	X	F	全space
-        QSBREQ01	DATA	質問本文	1	4096	X	M	NFC後1～4096 byte、CR/LF/TAB/NULと末尾ASCII spaceなし
-        QSBREQ01	DATA	Operation token	4097	36	X	M	Web採番UUID、利用者session内で一意
-        QSBREQ01	DATA	Reserved	4133	12	X	F	全space
-        QSBRSP01	DATA	受付ID	1	26	X	M	Random public ID
-        QSBRSP01	DATA	Question ID	27	12	N	M	内部ID
-        QSBRSP01	DATA	受付日時	39	17	N	M	JST
-        QSBRSP01	DATA	Reserved	56	9	X	F	全space
-        NTSREQ01	DATA	通知区分	1	12	X	O	ACCEPTED/COMPLETED/ERROR/space
-        NTSREQ01	DATA	受付日時From	13	17	X	O	JST/space
-        NTSREQ01	DATA	受付日時To	30	17	X	O	JST/space、最大366日
-        NTSREQ01	DATA	Page	47	6	N	M	1以上
-        NTSREQ01	DATA	Page size	53	3	N	M	固定50
-        NTSREQ01	DATA	Reserved	56	9	X	F	全space
-        NTSRSP01	DATA	Effective page	1	6	N	M	1～999999
-        NTSRSP01	DATA	Page size	7	3	N	M	Interface固定値
-        NTSRSP01	DATA	Total count	10	9	N	M	Page size 50は0～49,999,950、100は0～99,999,900
-        NTSRSP01	DATA	Total pages	19	6	N	M	0件でも1
-        NTSRSP01	DATA	First result	25	9	N	M	0件は0
-        NTSRSP01	DATA	Last result	34	9	N	M	0件は0
-        NTSRSP01	DATA	Reserved	43	6	X	F	全space
-        NTSRSP01	RECORD	Notification ID	1	12	N	M	明細ID
-        NTSRSP01	RECORD	受付ID	13	26	X	M	Public ID
-        NTSRSP01	RECORD	通知区分	39	12	X	M	ACCEPTED/COMPLETED/ERROR
-        NTSRSP01	RECORD	内部状態	51	12	X	M	RECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLED
-        NTSRSP01	RECORD	受付日時	63	17	N	M	JST
-        NTSRSP01	RECORD	最終更新日時	80	17	N	M	JST
-        NTSRSP01	RECORD	質問概要	97	512	X	M	先頭100文字相当または`削除済み`
-        NTSRSP01	RECORD	質問削除済み	609	1	B	M	0/1
-        NTSRSP01	RECORD	Reserved	610	15	X	F	全space
-        NTDREQ01	DATA	Notification ID	1	12	N	M	Target
-        NTDRSP01	DATA	Notification ID	1	12	N	M	ID
-        NTDRSP01	DATA	受付ID	13	26	X	M	Public ID
-        NTDRSP01	DATA	通知区分	39	12	X	M	定義値
-        NTDRSP01	DATA	内部状態	51	12	X	M	定義状態
-        NTDRSP01	DATA	受付日時	63	17	N	M	JST
-        NTDRSP01	DATA	処理開始日時	80	17	X	C	PROCESSING/COMPLETED/ERROR時JST、他はspace
-        NTDRSP01	DATA	処理完了日時	97	17	X	C	COMPLETED時JST、他はspace
-        NTDRSP01	DATA	Error日時	114	17	X	C	ERROR時JST、他はspace
-        NTDRSP01	DATA	取消日時	131	17	X	C	CANCELLED時JST、他はspace
-        NTDRSP01	DATA	質問削除済み	148	1	B	M	0/1
-        NTDRSP01	DATA	質問本文	149	4096	X	C	未削除時。削除済みはspace
-        NTDRSP01	DATA	回答本文	4245	4096	X	O	COMPLETED時。空回答は全spaceと区別するため状態で判定
-        NTDRSP01	DATA	Error code	8341	16	X	C	ERROR時必須、他はspace
-        NTDRSP01	DATA	利用者向けerror	8357	512	X	C	ERROR時必須、他はspace
-        NTDRSP01	DATA	Question ID	8869	12	X	C	未削除時ASCII数字、削除済みはspace
-        NTDRSP01	DATA	Reserved	8881	16	X	F	全space
-        NTCREQ01	DATA	Notification ID	1	12	N	M	Target
-        NTCREQ01	DATA	Operation token	13	36	X	M	UUID
-        NTCRSP01	DATA	更新後状態	1	12	X	C	`0000`/`0200`はCANCELLED、`0107`は競合時最新状態
-        NTCRSP01	DATA	取消日時	13	17	X	C	`0000`/`0200`時JST、`0107`時space
-        NTCRSP01	DATA	Reserved	30	3	X	F	全space
-        QSSREQ01	DATA	Keyword	1	256	X	O	質問/回答部分一致
-        QSSREQ01	DATA	Username	257	64	X	O	ADMINのみ完全一致。USERはspace必須
-        QSSREQ01	DATA	回答状態	321	12	X	O	ANSWERED/UNANSWERED/ERROR/space
-        QSSREQ01	DATA	受付日時From	333	17	X	O	JST/space
-        QSSREQ01	DATA	受付日時To	350	17	X	O	JST/space、最大366日
-        QSSREQ01	DATA	Page	367	6	N	M	1以上
-        QSSREQ01	DATA	Page size	373	3	N	M	固定50
-        QSSREQ01	DATA	Reserved	376	9	X	F	全space
-        QSSRSP01	DATA	Effective page	1	6	N	M	1～999999
-        QSSRSP01	DATA	Page size	7	3	N	M	Interface固定値
-        QSSRSP01	DATA	Total count	10	9	N	M	Page size 50は0～49,999,950、100は0～99,999,900
-        QSSRSP01	DATA	Total pages	19	6	N	M	0件でも1
-        QSSRSP01	DATA	First result	25	9	N	M	0件は0
-        QSSRSP01	DATA	Last result	34	9	N	M	0件は0
-        QSSRSP01	DATA	Reserved	43	6	X	F	全space
-        QSSRSP01	RECORD	Question ID	1	12	N	M	明細ID
-        QSSRSP01	RECORD	受付ID	13	26	X	M	Public ID
-        QSSRSP01	RECORD	Username	39	64	X	M	ADMIN表示用。USER responseにも設定
-        QSSRSP01	RECORD	質問概要	103	512	X	M	先頭100文字相当
-        QSSRSP01	RECORD	回答状態	615	12	X	M	ANSWERED/UNANSWERED/ERROR
-        QSSRSP01	RECORD	受付日時	627	17	N	M	JST
-        QSSRSP01	RECORD	回答日時	644	17	X	C	ANSWERED時JST、他はspace
-        QSSRSP01	RECORD	Reserved	661	12	X	F	全space
-        QSDREQ01	DATA	Question ID	1	12	N	M	Target
-        QSDRSP01	DATA	Question ID	1	12	N	M	ID
-        QSDRSP01	DATA	受付ID	13	26	X	M	Public ID
-        QSDRSP01	DATA	Username	39	64	X	M	Owner
-        QSDRSP01	DATA	回答状態	103	12	X	M	ANSWERED/UNANSWERED/ERROR
-        QSDRSP01	DATA	質問本文	115	4096	X	M	本文
-        QSDRSP01	DATA	回答本文	4211	4096	X	O	空回答可
-        QSDRSP01	DATA	受付日時	8307	17	N	M	JST
-        QSDRSP01	DATA	回答日時	8324	17	X	C	ANSWERED時JST、他はspace
-        QSDRSP01	DATA	Reserved	8341	12	X	F	全space
-        QDLREQ01	DATA	Question ID	1	12	N	M	Target
-        QDLREQ01	DATA	Operation token	13	36	X	M	UUID
-        QDLRSP01	DATA	削除日時	1	17	N	M	論理削除JST日時
-        QDLRSP01	DATA	Reserved	18	7	X	F	全space
-        QWKREQ01	DATA	受付ID	1	26	X	M	Public ID
-        QWKREQ01	DATA	Question ID	27	12	N	M	DB ID
-        QWKREQ01	DATA	Async job ID	39	12	N	M	Job ID
-        QWKREQ01	DATA	Reserved	51	14	X	F	全space
-        WLGEVT01	DATA	発生日時	1	17	N	M	HTTP response確定時のJST
-        WLGEVT01	DATA	Log type	18	16	X	F	固定`REQUEST`
-        WLGEVT01	DATA	Level	34	8	X	M	INFO/WARN/ERROR
-        WLGEVT01	DATA	Action	42	64	X	O	Bounded action code
-        WLGEVT01	DATA	Message	106	512	X	M	本文・secretを含まない定型要約
-        WLGEVT01	DATA	HTTP request ID	618	36	X	M	UUID
-        WLGEVT01	DATA	HTTP method	654	8	X	M	GET/POST等
-        WLGEVT01	DATA	Path	662	256	X	M	Queryを除くURI path。制御文字なし
-        WLGEVT01	DATA	HTTP status	918	3	X	M	ASCII 3桁
-        WLGEVT01	DATA	Elapsed ms	921	9	X	M	ASCII数字、0～999999999
-        WLGEVT01	DATA	Remote address	930	45	X	M	検証済みIPv4/IPv6 text
-        WLGEVT01	DATA	Username	975	64	X	O	未認証はspace
-        WLGEVT01	DATA	Role	1039	5	X	O	USER/ADMIN/space
-        WLGEVT01	DATA	Details	1044	1024	X	O	表示用bounded JSON。本文、query値、cookie、tokenなし
-        WLGEVT01	DATA	Reserved	2068	13	X	F	全space
+        LGNREQ01\tDATA\tUsername\t1\t64\tX\tM\tNFC・trim後1～64 byte
+        LGNREQ01\tDATA\tPassword\t65\t256\tX\tM\tNFC後1～256 byte。右spaceは値の一部と区別できないため末尾space passwordは禁止
+        LGNREQ01\tDATA\tClient address\t321\t45\tX\tM\tIPv4/IPv6 text。Caddy検証済み
+        LGNREQ01\tDATA\tReserved\t366\t19\tX\tF\t全space
+        LGNRSP01\tDATA\tUsername\t1\t64\tX\tC\t成功時必須
+        LGNRSP01\tDATA\tRole\t65\t5\tX\tC\t`USER`/`ADMIN`、成功時必須
+        LGNRSP01\tDATA\t認証context ID\t70\t64\tX\tC\t成功時lowercase hex 64文字。header側は全space
+        LGNRSP01\tDATA\t発行日時\t134\t17\tX\tC\t成功時17桁JST日時、失敗時全space
+        LGNRSP01\tDATA\t期限日時\t151\t17\tX\tC\t成功時17桁JST日時、失敗時全space
+        LGNRSP01\tDATA\tRetry after秒\t168\t6\tN\tM\tLock以外は0
+        LGNRSP01\tDATA\t残り試行回数\t174\t3\tN\tM\t成功・非表示時0
+        LGNRSP01\tDATA\t利用者message\t177\t256\tX\tO\tError/lock時。成功時全space
+        LOGRSP01\tDATA\tSession失効日時\t1\t17\tN\tM\tJST日時
+        LOGRSP01\tDATA\tReserved\t18\t7\tX\tF\t全space
+        GAMRSP01\tDATA\tTotal count\t1\t9\tN\tM\tRecord件数と一致
+        GAMRSP01\tRECORD\tGame code\t1\t12\tX\tM\t`NUKITASHI1`/`NUKITASHI2`
+        GAMRSP01\tRECORD\tTitle\t13\t256\tX\tM\t表示title
+        GAMRSP01\tRECORD\tDisplay order\t269\t3\tN\tM\t昇順
+        GAMRSP01\tRECORD\tReserved\t272\t1\tX\tF\tSpace
+        SPKREQ01\tDATA\tGame code\t1\t12\tX\tO\t全space/`NUKITASHI1`/`NUKITASHI2`
+        SPKRSP01\tDATA\tTotal count\t1\t9\tN\tM\tRecord件数と一致
+        SPKRSP01\tRECORD\tSpeaker ID\t1\t12\tN\tM\t内部ID
+        SPKRSP01\tRECORD\tSpeaker名\t13\t128\tX\tM\t表示・検索値
+        SPKRSP01\tRECORD\t出現件数\t141\t9\tN\tM\t対象game内entry件数
+        SPKRSP01\tRECORD\tReserved\t150\t3\tX\tF\t全space
+        SRCREQ01\tDATA\t本文keyword\t1\t256\tX\tO\t部分一致
+        SRCREQ01\tDATA\tGame code\t257\t12\tX\tO\t全space/定義game
+        SRCREQ01\tDATA\tSpeaker名\t269\t128\tX\tO\t完全一致
+        SRCREQ01\tDATA\t章title\t397\t256\tX\tO\t部分一致
+        SRCREQ01\tDATA\tEntry type\t653\t10\tX\tO\t全space/`dialogue`/`narration`
+        SRCREQ01\tDATA\tVoice条件\t663\t1\tX\tO\tSpace/`1`あり/`0`なし
+        SRCREQ01\tDATA\tPage\t664\t6\tN\tM\t1～999999
+        SRCREQ01\tDATA\tPage size\t670\t3\tN\tM\t固定100
+        SRCRSP01\tDATA\tEffective page\t1\t6\tN\tM\t1～999999
+        SRCRSP01\tDATA\tPage size\t7\t3\tN\tM\tInterface固定値
+        SRCRSP01\tDATA\tTotal count\t10\t9\tN\tM\tPage size 50は0～49,999,950、100は0～99,999,900
+        SRCRSP01\tDATA\tTotal pages\t19\t6\tN\tM\t0件でも1
+        SRCRSP01\tDATA\tFirst result\t25\t9\tN\tM\t0件は0
+        SRCRSP01\tDATA\tLast result\t34\t9\tN\tM\t0件は0
+        SRCRSP01\tDATA\tReserved\t43\t6\tX\tF\t全space
+        SRCRSP01\tRECORD\tEntry ID\t1\t12\tN\tM\tScenario anchor ID
+        SRCRSP01\tRECORD\tScript file ID\t13\t12\tN\tM\t明細遷移ID
+        SRCRSP01\tRECORD\tGame code\t25\t12\tX\tM\t定義game
+        SRCRSP01\tRECORD\t章title\t37\t256\tX\tO\t未設定はspace
+        SRCRSP01\tRECORD\tLine番号\t293\t8\tN\tM\t1以上
+        SRCRSP01\tRECORD\tEntry type\t301\t10\tX\tM\t`dialogue`/`narration`
+        SRCRSP01\tRECORD\tSpeaker名\t311\t128\tX\tO\tNarrationはspace可
+        SRCRSP01\tRECORD\t本文\t439\t4096\tX\tM\tCR/LF/TAB/NULなし
+        SRCRSP01\tRECORD\tAudio有無\t4535\t1\tB\tM\t`0`/`1`
+        SRCRSP01\tRECORD\tAudio ID\t4536\t12\tX\tC\tAudio有無1時ASCII数字、0時space
+        SRCRSP01\tRECORD\tScript display path\t4548\t512\tX\tM\tSanitized表示専用。File解決には使用しない
+        SRCRSP01\tRECORD\tAudio display path\t5060\t512\tX\tC\tAudio有無1時。Sanitized表示専用
+        SRCRSP01\tRECORD\tReserved\t5572\t13\tX\tF\t全space
+        RTEREQ01\tDATA\tGame code\t1\t12\tX\tM\t定義game
+        RTERSP01\tDATA\tTotal count\t1\t9\tN\tM\tRecord件数と一致
+        RTERSP01\tRECORD\tPrefix\t1\t2\tN\tM\t2桁section prefix
+        RTERSP01\tRECORD\tRoute名\t3\t64\tX\tM\t固定mapまたは`未分類`
+        RTERSP01\tRECORD\tFile件数\t67\t6\tN\tM\t1以上
+        SCFREQ01\tDATA\tGame code\t1\t12\tX\tM\t定義game
+        SCFREQ01\tDATA\tPrefix\t13\t2\tN\tM\t2桁
+        SCFRSP01\tDATA\tGame code\t1\t12\tX\tM\t要求値
+        SCFRSP01\tDATA\tPrefix\t13\t2\tN\tM\t要求値
+        SCFRSP01\tDATA\tRoute名\t15\t64\tX\tM\t表示名
+        SCFRSP01\tDATA\tTotal count\t79\t9\tN\tM\tRecord件数と一致
+        SCFRSP01\tDATA\tReserved\t88\t1\tX\tF\tSpace
+        SCFRSP01\tRECORD\tScript file ID\t1\t12\tN\tM\t明細遷移ID
+        SCFRSP01\tRECORD\tDisplay title\t13\t256\tX\tM\t章title、section code、file名の最初の非空値
+        SCFRSP01\tRECORD\tDisplay path\t269\t512\tX\tM\tSanitized表示専用
+        SCFRSP01\tRECORD\tEntry件数\t781\t6\tN\tM\t0以上
+        SCFRSP01\tRECORD\tReserved\t787\t14\tX\tF\t全space
+        SCNREQ01\tDATA\tScript file ID\t1\t12\tN\tM\t対象ID
+        SCNRSP01\tDATA\tScript file ID\t1\t12\tN\tM\t現在ID
+        SCNRSP01\tDATA\tGame code\t13\t12\tX\tM\t定義game
+        SCNRSP01\tDATA\tDisplay title\t25\t256\tX\tM\t現在title
+        SCNRSP01\tDATA\tDisplay path\t281\t512\tX\tM\tSanitized表示専用
+        SCNRSP01\tDATA\tPrevious file ID\t793\t12\tX\tO\tASCII数字/space
+        SCNRSP01\tDATA\tPrevious title\t805\t256\tX\tC\tPrevious ID設定時
+        SCNRSP01\tDATA\tNext file ID\t1061\t12\tX\tO\tASCII数字/space
+        SCNRSP01\tDATA\tNext title\t1073\t256\tX\tC\tNext ID設定時
+        SCNRSP01\tDATA\tDelivery mode\t1329\t1\tX\tM\t`I` inline/`F` large-result file
+        SCNRSP01\tDATA\tFile ID\t1330\t36\tX\tC\tF時UUID
+        SCNRSP01\tDATA\tFile relative path\t1366\t256\tX\tC\tF時transfer root基準
+        SCNRSP01\tDATA\tFile byte長\t1622\t12\tN\tM\tI時0、F時実長
+        SCNRSP01\tDATA\tFile SHA-256\t1634\t64\tX\tC\tF時lowercase hex
+        SCNRSP01\tDATA\tFile record長\t1698\t6\tN\tM\tI時0、F時`004800`
+        SCNRSP01\tDATA\tFile record件数\t1704\t9\tN\tM\tI時0、F時1～10000
+        SCNRSP01\tDATA\tReserved\t1713\t16\tX\tF\t全space
+        SCNRSP01\tRECORD\tEntry ID\t1\t12\tN\tM\t同じentryの複数audio recordで同値
+        SCNRSP01\tRECORD\tEntry sequence\t13\t6\tN\tM\t1開始表示順
+        SCNRSP01\tRECORD\tLine番号\t19\t8\tN\tM\t1以上
+        SCNRSP01\tRECORD\tEntry type\t27\t10\tX\tM\t`dialogue`/`narration`
+        SCNRSP01\tRECORD\tSpeaker名\t37\t128\tX\tO\tNarrationはspace可
+        SCNRSP01\tRECORD\t本文\t165\t4096\tX\tM\t同じentryでは同値
+        SCNRSP01\tRECORD\tAudio sequence\t4261\t3\tN\tM\tAudioなし0、あり1～999
+        SCNRSP01\tRECORD\tAudio ID\t4264\t12\tX\tC\tAudioあり時ASCII数字
+        SCNRSP01\tRECORD\tAudio display path\t4276\t512\tX\tC\tAudioあり時、sanitized表示専用
+        SCNRSP01\tRECORD\tReserved\t4788\t13\tX\tF\t全space
+        AUDREQ01\tDATA\tAudio ID\t1\t12\tN\tM\tDB logical ID
+        AUDREQ01\tDATA\tDisposition\t13\t1\tX\tM\t`I`再生/`A`download
+        AUDREQ01\tDATA\tReserved\t14\t3\tX\tF\t全space
+        AUDRSP01\tDATA\tMedia logical ID\t1\t64\tX\tM\t要求IDのcanonical値
+        AUDRSP01\tDATA\tStorage relative path\t65\t512\tX\tM\tBusiness asset root基準。絶対path禁止、Browser非表示
+        AUDRSP01\tDATA\tFile name\t577\t256\tX\tM\t表示/download名
+        AUDRSP01\tDATA\tFile byte長\t833\t12\tN\tM\t1以上
+        AUDRSP01\tDATA\tSHA-256\t845\t64\tX\tM\tLowercase hex
+        AUDRSP01\tDATA\tMIME type\t909\t64\tX\tM\t許可list内
+        AUDRSP01\tDATA\tContent disposition\t973\t1\tX\tM\t`I` inline、`A` attachment
+        AUDRSP01\tDATA\tReserved\t974\t51\tX\tF\t全space
+        ANMRSP01\tDATA\tMain/SUBTRACK件数\t1\t3\tN\tM\t現行15
+        ANMRSP01\tDATA\tOVA件数\t4\t3\tN\tM\t現行4
+        ANMRSP01\tDATA\tOpening有無\t7\t1\tB\tM\t現行1
+        ANMRSP01\tDATA\t総file件数\t8\t3\tN\tM\t現行20
+        ANMRSP01\tDATA\tReserved\t11\t6\tX\tF\t全space
+        ANLREQ01\tDATA\tCategory\t1\t16\tX\tM\t`MAIN`/`OVA`
+        ANLRSP01\tDATA\tTotal count\t1\t6\tN\tM\tRecord件数
+        ANLRSP01\tDATA\tReserved\t7\t2\tX\tF\t全space
+        ANLRSP01\tRECORD\tVideo ID\t1\t64\tX\tM\tStable logical ID
+        ANLRSP01\tRECORD\tTitle\t65\t256\tX\tM\t表示title
+        ANLRSP01\tRECORD\tCategory\t321\t16\tX\tM\t`MAIN`/`SUBTRACK`/`OVA`
+        ANLRSP01\tRECORD\tDisplay path\t337\t512\tX\tM\tSanitized表示専用。File解決には使用しない
+        ANLRSP01\tRECORD\tFile byte長\t849\t12\tN\tM\t1以上
+        ANLRSP01\tRECORD\tParent main ID\t861\t64\tX\tC\tSUBTRACK時対応main ID。他はspace
+        ANLRSP01\tRECORD\tDisplay order\t925\t4\tN\tM\tCategory内順
+        VIDREQ01\tDATA\tVideo ID\t1\t64\tX\tM\tStable logical ID
+        VIDRSP01\tDATA\tMedia logical ID\t1\t64\tX\tM\t要求IDのcanonical値
+        VIDRSP01\tDATA\tStorage relative path\t65\t512\tX\tM\tBusiness asset root基準。絶対path禁止、Browser非表示
+        VIDRSP01\tDATA\tFile name\t577\t256\tX\tM\t表示/download名
+        VIDRSP01\tDATA\tFile byte長\t833\t12\tN\tM\t1以上
+        VIDRSP01\tDATA\tSHA-256\t845\t64\tX\tM\tLowercase hex
+        VIDRSP01\tDATA\tMIME type\t909\t64\tX\tM\t許可list内
+        VIDRSP01\tDATA\tContent disposition\t973\t1\tX\tM\t`I` inline、`A` attachment
+        VIDRSP01\tDATA\tReserved\t974\t51\tX\tF\t全space
+        VIDRSP01\tDATA\tTitle\t1025\t256\tX\tM\t表示title
+        VIDRSP01\tDATA\tCategory\t1281\t16\tX\tM\t`MAIN`/`SUBTRACK`/`OVA`/`OPENING`
+        VIDRSP01\tDATA\tDisplay path\t1297\t512\tX\tM\tSanitized表示専用。File解決には使用しない
+        MCTRSP01\tDATA\tTotal count\t1\t6\tN\tM\tRecord件数
+        MCTRSP01\tDATA\tReserved\t7\t2\tX\tF\t全space
+        MCTRSP01\tRECORD\tCategory\t1\t64\tX\tM\t表示/要求値
+        MCTRSP01\tRECORD\tTrack件数\t65\t6\tN\tM\tCategory配下総数
+        MCTRSP01\tRECORD\tReserved\t71\t2\tX\tF\t全space
+        MCSREQ01\tDATA\tCategory\t1\t64\tX\tM\tIF-013返却値
+        MCSRSP01\tDATA\tTotal count\t1\t6\tN\tM\tRecord件数
+        MCSRSP01\tDATA\tReserved\t7\t2\tX\tF\t全space
+        MCSRSP01\tRECORD\tSection\t1\t128\tX\tM\t表示/要求値
+        MCSRSP01\tRECORD\tTrack件数\t129\t6\tN\tM\tSection配下総数
+        MCSRSP01\tRECORD\tReserved\t135\t2\tX\tF\t全space
+        MTRREQ01\tDATA\tCategory\t1\t64\tX\tM\tIF-013返却値
+        MTRREQ01\tDATA\tSection\t65\t128\tX\tM\tIF-014返却値
+        MTRRSP01\tDATA\tTotal count\t1\t9\tN\tM\tRecord件数
+        MTRRSP01\tDATA\tReserved\t10\t7\tX\tF\t全space
+        MTRRSP01\tRECORD\tTrack ID\t1\t64\tX\tM\tStable logical ID
+        MTRRSP01\tRECORD\tTitle\t65\t256\tX\tM\t表示title
+        MTRRSP01\tRECORD\tCategory\t321\t64\tX\tM\tCategory
+        MTRRSP01\tRECORD\tSection\t385\t128\tX\tM\tSection
+        MTRRSP01\tRECORD\tDisplay path\t513\t512\tX\tM\tSanitized表示専用
+        MTRRSP01\tRECORD\tFile byte長\t1025\t12\tN\tM\t1以上
+        MTRRSP01\tRECORD\tPair key\t1037\t256\tX\tO\t`曲`のmain/instrumental grouping key
+        MTRRSP01\tRECORD\tPair role\t1293\t1\tX\tM\t`M` main、`I` instrumental、`N` pair対象外
+        MTRRSP01\tRECORD\tDisplay order\t1294\t4\tN\tM\t一覧順
+        MTRRSP01\tRECORD\tReserved\t1298\t15\tX\tF\t全space
+        MEDREQ01\tDATA\tTrack ID\t1\t64\tX\tM\tStable logical ID
+        MEDREQ01\tDATA\tDisposition\t65\t1\tX\tM\t`I`再生/`A`download
+        MEDREQ01\tDATA\tReserved\t66\t7\tX\tF\t全space
+        MEDRSP01\tDATA\tMedia logical ID\t1\t64\tX\tM\t要求IDのcanonical値
+        MEDRSP01\tDATA\tStorage relative path\t65\t512\tX\tM\tBusiness asset root基準。絶対path禁止、Browser非表示
+        MEDRSP01\tDATA\tFile name\t577\t256\tX\tM\t表示/download名
+        MEDRSP01\tDATA\tFile byte長\t833\t12\tN\tM\t1以上
+        MEDRSP01\tDATA\tSHA-256\t845\t64\tX\tM\tLowercase hex
+        MEDRSP01\tDATA\tMIME type\t909\t64\tX\tM\t許可list内
+        MEDRSP01\tDATA\tContent disposition\t973\t1\tX\tM\t`I` inline、`A` attachment
+        MEDRSP01\tDATA\tReserved\t974\t51\tX\tF\t全space
+        LGSREQ01\tDATA\tKeyword\t1\t256\tX\tO\tMessage/details部分一致
+        LGSREQ01\tDATA\tLog type\t257\t16\tX\tO\tACTION/REQUEST/SECURITY/MQ/SYSTEM/BATCH
+        LGSREQ01\tDATA\tAction\t273\t64\tX\tO\t完全一致
+        LGSREQ01\tDATA\tPath\t337\t256\tX\tO\t部分一致
+        LGSREQ01\tDATA\tLevel\t593\t8\tX\tO\tINFO/WARN/ERROR
+        LGSREQ01\tDATA\tFrom日時\t601\t17\tX\tO\tJST日時、全space可
+        LGSREQ01\tDATA\tTo日時\t618\t17\tX\tO\tJST日時、From≦To、最大31日
+        LGSREQ01\tDATA\tPage\t635\t6\tN\tM\t1以上
+        LGSREQ01\tDATA\tPage size\t641\t3\tN\tM\t固定100
+        LGSREQ01\tDATA\tReserved\t644\t13\tX\tF\t全space
+        LGSRSP01\tDATA\tEffective page\t1\t6\tN\tM\t1～999999
+        LGSRSP01\tDATA\tPage size\t7\t3\tN\tM\tInterface固定値
+        LGSRSP01\tDATA\tTotal count\t10\t9\tN\tM\tPage size 50は0～49,999,950、100は0～99,999,900
+        LGSRSP01\tDATA\tTotal pages\t19\t6\tN\tM\t0件でも1
+        LGSRSP01\tDATA\tFirst result\t25\t9\tN\tM\t0件は0
+        LGSRSP01\tDATA\tLast result\t34\t9\tN\tM\t0件は0
+        LGSRSP01\tDATA\tReserved\t43\t6\tX\tF\t全space
+        LGSRSP01\tRECORD\tLog ID\t1\t12\tN\tM\tID
+        LGSRSP01\tRECORD\t発生日時\t13\t17\tN\tM\tJST
+        LGSRSP01\tRECORD\tLog type\t30\t16\tX\tM\t定義値
+        LGSRSP01\tRECORD\tLevel\t46\t8\tX\tM\tINFO/WARN/ERROR
+        LGSRSP01\tRECORD\tAction\t54\t64\tX\tO\tAction code
+        LGSRSP01\tRECORD\tMessage\t118\t512\tX\tM\t機微情報除外済み
+        LGSRSP01\tRECORD\tHTTP request ID\t630\t36\tX\tO\tUUID
+        LGSRSP01\tRECORD\t業務Message ID\t666\t36\tX\tO\tUUID
+        LGSRSP01\tRECORD\tCorrelation ID\t702\t36\tX\tO\tUUID
+        LGSRSP01\tRECORD\tHTTP method\t738\t8\tX\tO\tGET/POST等
+        LGSRSP01\tRECORD\tPath\t746\t256\tX\tO\tURI path
+        LGSRSP01\tRECORD\tHTTP status\t1002\t3\tX\tO\tASCII数字/space
+        LGSRSP01\tRECORD\tElapsed ms\t1005\t9\tX\tO\tASCII数字/space
+        LGSRSP01\tRECORD\tRemote address\t1014\t45\tX\tO\tIPv4/IPv6
+        LGSRSP01\tRECORD\tDetails\t1059\t1024\tX\tO\t表示用JSON text、本文・秘密値なし
+        LGSRSP01\tRECORD\tReserved\t2083\t6\tX\tF\t全space
+        USRREQ01\tDATA\tUsername prefix\t1\t64\tX\tO\t前方一致
+        USRREQ01\tDATA\tRole\t65\t5\tX\tO\tSpace/USER/ADMIN
+        USRREQ01\tDATA\tState\t70\t8\tX\tO\tSpace/ACTIVE/DISABLED/LOCKED
+        USRREQ01\tDATA\tPage\t78\t6\tN\tM\t1以上
+        USRREQ01\tDATA\tPage size\t84\t3\tN\tM\t固定50
+        USRREQ01\tDATA\tReserved\t87\t10\tX\tF\t全space
+        USRRSP01\tDATA\tEffective page\t1\t6\tN\tM\t1～999999
+        USRRSP01\tDATA\tPage size\t7\t3\tN\tM\tInterface固定値
+        USRRSP01\tDATA\tTotal count\t10\t9\tN\tM\tPage size 50は0～49,999,950、100は0～99,999,900
+        USRRSP01\tDATA\tTotal pages\t19\t6\tN\tM\t0件でも1
+        USRRSP01\tDATA\tFirst result\t25\t9\tN\tM\t0件は0
+        USRRSP01\tDATA\tLast result\t34\t9\tN\tM\t0件は0
+        USRRSP01\tDATA\tReserved\t43\t6\tX\tF\t全space
+        USRRSP01\tRECORD\tUser ID\t1\t12\tN\tM\tID
+        USRRSP01\tRECORD\tUsername\t13\t64\tX\tM\t表示名
+        USRRSP01\tRECORD\tRole\t77\t5\tX\tM\tUSER/ADMIN
+        USRRSP01\tRECORD\tState\t82\t8\tX\tM\tACTIVE/DISABLED/LOCKED
+        USRRSP01\tRECORD\tLocked until\t90\t17\tX\tO\tJST日時/space
+        USRRSP01\tRECORD\tLast Login\t107\t17\tX\tO\tJST日時/space
+        USRRSP01\tRECORD\tCreated at\t124\t17\tN\tM\tJST日時
+        USRRSP01\tRECORD\tUpdated at\t141\t17\tN\tM\tJST日時
+        USRRSP01\tRECORD\tVersion\t158\t9\tN\tM\tOptimistic lock
+        USRRSP01\tRECORD\tReserved\t167\t2\tX\tF\t全space
+        UCRREQ01\tDATA\tUsername\t1\t64\tX\tM\t`A-Z a-z 0-9 . _ -`、比較はcase-insensitive
+        UCRREQ01\tDATA\tInitial Password\t65\t256\tX\tM\tNFC、12～128文字、256 byte以下、末尾space禁止
+        UCRREQ01\tDATA\tRole\t321\t5\tX\tM\tUSER/ADMIN
+        UCRREQ01\tDATA\tEnabled\t326\t1\tB\tM\t0/1
+        UCRREQ01\tDATA\tOperation token\t327\t36\tX\tM\tWeb採番UUID。二重更新防止
+        UCRREQ01\tDATA\tReserved\t363\t10\tX\tF\t全space
+        UCRRSP01\tDATA\tUser ID\t1\t12\tN\tM\t成功時のTarget ID
+        UCRRSP01\tDATA\t更新後version\t13\t9\tN\tM\t成功時のOptimistic lock version
+        UCRRSP01\tDATA\tReserved\t22\t3\tX\tF\t全space
+        UDTREQ01\tDATA\tUser ID\t1\t12\tN\tM\tTarget ID
+        UDTRSP01\tDATA\tUser ID\t1\t12\tN\tM\tID
+        UDTRSP01\tDATA\tUsername\t13\t64\tX\tM\t表示名
+        UDTRSP01\tDATA\tRole\t77\t5\tX\tM\tUSER/ADMIN
+        UDTRSP01\tDATA\tState\t82\t8\tX\tM\tACTIVE/DISABLED/LOCKED
+        UDTRSP01\tDATA\tLocked until\t90\t17\tX\tO\tJST/space
+        UDTRSP01\tDATA\tLast Login\t107\t17\tX\tO\tJST/space
+        UDTRSP01\tDATA\tPassword changed at\t124\t17\tN\tM\tJST
+        UDTRSP01\tDATA\tCreated at\t141\t17\tN\tM\tJST
+        UDTRSP01\tDATA\tUpdated at\t158\t17\tN\tM\tJST
+        UDTRSP01\tDATA\tActive session数\t175\t3\tN\tM\t0～2
+        UDTRSP01\tDATA\tVersion\t178\t9\tN\tM\tOptimistic lock
+        UDTRSP01\tDATA\tCreated by\t187\t64\tX\tM\tActor username。BootstrapのDB NULLは`SYSTEM`
+        UDTRSP01\tDATA\tUpdated by\t251\t64\tX\tM\tActor username。BootstrapのDB NULLは`SYSTEM`
+        UDTRSP01\tDATA\tReserved\t315\t6\tX\tF\t全space
+        USTREQ01\tDATA\tUser ID\t1\t12\tN\tM\tTarget
+        USTREQ01\tDATA\tEnabled\t13\t1\tB\tM\t0無効/1有効
+        USTREQ01\tDATA\tExpected version\t14\t9\tN\tM\t画面表示version
+        USTREQ01\tDATA\tOperation token\t23\t36\tX\tM\tWeb採番UUID
+        USTREQ01\tDATA\tReserved\t59\t2\tX\tF\t全space
+        USTRSP01\tDATA\tUser ID\t1\t12\tN\tM\t成功時のTarget ID
+        USTRSP01\tDATA\t更新後version\t13\t9\tN\tM\t成功時のOptimistic lock version
+        USTRSP01\tDATA\tReserved\t22\t3\tX\tF\t全space
+        URLREQ01\tDATA\tUser ID\t1\t12\tN\tM\tTarget
+        URLREQ01\tDATA\tNew role\t13\t5\tX\tM\tUSER/ADMIN
+        URLREQ01\tDATA\tExpected version\t18\t9\tN\tM\t画面表示version
+        URLREQ01\tDATA\tOperation token\t27\t36\tX\tM\tWeb採番UUID
+        URLREQ01\tDATA\tReserved\t63\t6\tX\tF\t全space
+        URLRSP01\tDATA\tUser ID\t1\t12\tN\tM\t成功時のTarget ID
+        URLRSP01\tDATA\t更新後version\t13\t9\tN\tM\t成功時のOptimistic lock version
+        URLRSP01\tDATA\tReserved\t22\t3\tX\tF\t全space
+        UPWREQ01\tDATA\tUser ID\t1\t12\tN\tM\tTarget
+        UPWREQ01\tDATA\tNew Password\t13\t256\tX\tM\tUser作成と同じpolicy
+        UPWREQ01\tDATA\tExpected version\t269\t9\tN\tM\t画面表示version
+        UPWREQ01\tDATA\tOperation token\t278\t36\tX\tM\tWeb採番UUID
+        UPWREQ01\tDATA\tReserved\t314\t11\tX\tF\t全space
+        UPWRSP01\tDATA\tUser ID\t1\t12\tN\tM\t成功時のTarget ID
+        UPWRSP01\tDATA\t更新後version\t13\t9\tN\tM\t成功時のOptimistic lock version
+        UPWRSP01\tDATA\tReserved\t22\t3\tX\tF\t全space
+        ULKREQ01\tDATA\tUser ID\t1\t12\tN\tM\tTarget
+        ULKREQ01\tDATA\tExpected version\t13\t9\tN\tM\t画面表示version
+        ULKREQ01\tDATA\tOperation token\t22\t36\tX\tM\tWeb採番UUID
+        ULKREQ01\tDATA\tReserved\t58\t3\tX\tF\t全space
+        ULKRSP01\tDATA\tUser ID\t1\t12\tN\tM\t成功時のTarget ID
+        ULKRSP01\tDATA\t更新後version\t13\t9\tN\tM\t成功時のOptimistic lock version
+        ULKRSP01\tDATA\tReserved\t22\t3\tX\tF\t全space
+        QSBREQ01\tDATA\t質問本文\t1\t4096\tX\tM\tNFC後1～4096 byte、CR/LF/TAB/NULと末尾ASCII spaceなし
+        QSBREQ01\tDATA\tOperation token\t4097\t36\tX\tM\tWeb採番UUID、利用者session内で一意
+        QSBREQ01\tDATA\tReserved\t4133\t12\tX\tF\t全space
+        QSBRSP01\tDATA\t受付ID\t1\t26\tX\tM\tRandom public ID
+        QSBRSP01\tDATA\tQuestion ID\t27\t12\tN\tM\t内部ID
+        QSBRSP01\tDATA\t受付日時\t39\t17\tN\tM\tJST
+        QSBRSP01\tDATA\tReserved\t56\t9\tX\tF\t全space
+        NTSREQ01\tDATA\t通知区分\t1\t12\tX\tO\tACCEPTED/COMPLETED/ERROR/space
+        NTSREQ01\tDATA\t受付日時From\t13\t17\tX\tO\tJST/space
+        NTSREQ01\tDATA\t受付日時To\t30\t17\tX\tO\tJST/space、最大366日
+        NTSREQ01\tDATA\tPage\t47\t6\tN\tM\t1以上
+        NTSREQ01\tDATA\tPage size\t53\t3\tN\tM\t固定50
+        NTSREQ01\tDATA\tReserved\t56\t9\tX\tF\t全space
+        NTSRSP01\tDATA\tEffective page\t1\t6\tN\tM\t1～999999
+        NTSRSP01\tDATA\tPage size\t7\t3\tN\tM\tInterface固定値
+        NTSRSP01\tDATA\tTotal count\t10\t9\tN\tM\tPage size 50は0～49,999,950、100は0～99,999,900
+        NTSRSP01\tDATA\tTotal pages\t19\t6\tN\tM\t0件でも1
+        NTSRSP01\tDATA\tFirst result\t25\t9\tN\tM\t0件は0
+        NTSRSP01\tDATA\tLast result\t34\t9\tN\tM\t0件は0
+        NTSRSP01\tDATA\tReserved\t43\t6\tX\tF\t全space
+        NTSRSP01\tRECORD\tNotification ID\t1\t12\tN\tM\t明細ID
+        NTSRSP01\tRECORD\t受付ID\t13\t26\tX\tM\tPublic ID
+        NTSRSP01\tRECORD\t通知区分\t39\t12\tX\tM\tACCEPTED/COMPLETED/ERROR
+        NTSRSP01\tRECORD\t内部状態\t51\t12\tX\tM\tRECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLED
+        NTSRSP01\tRECORD\t受付日時\t63\t17\tN\tM\tJST
+        NTSRSP01\tRECORD\t最終更新日時\t80\t17\tN\tM\tJST
+        NTSRSP01\tRECORD\t質問概要\t97\t512\tX\tM\t先頭100文字相当または`削除済み`
+        NTSRSP01\tRECORD\t質問削除済み\t609\t1\tB\tM\t0/1
+        NTSRSP01\tRECORD\tReserved\t610\t15\tX\tF\t全space
+        NTDREQ01\tDATA\tNotification ID\t1\t12\tN\tM\tTarget
+        NTDRSP01\tDATA\tNotification ID\t1\t12\tN\tM\tID
+        NTDRSP01\tDATA\t受付ID\t13\t26\tX\tM\tPublic ID
+        NTDRSP01\tDATA\t通知区分\t39\t12\tX\tM\t定義値
+        NTDRSP01\tDATA\t内部状態\t51\t12\tX\tM\t定義状態
+        NTDRSP01\tDATA\t受付日時\t63\t17\tN\tM\tJST
+        NTDRSP01\tDATA\t処理開始日時\t80\t17\tX\tC\tPROCESSING/COMPLETED/ERROR時JST、他はspace
+        NTDRSP01\tDATA\t処理完了日時\t97\t17\tX\tC\tCOMPLETED時JST、他はspace
+        NTDRSP01\tDATA\tError日時\t114\t17\tX\tC\tERROR時JST、他はspace
+        NTDRSP01\tDATA\t取消日時\t131\t17\tX\tC\tCANCELLED時JST、他はspace
+        NTDRSP01\tDATA\t質問削除済み\t148\t1\tB\tM\t0/1
+        NTDRSP01\tDATA\t質問本文\t149\t4096\tX\tC\t未削除時。削除済みはspace
+        NTDRSP01\tDATA\t回答本文\t4245\t4096\tX\tO\tCOMPLETED時。空回答は全spaceと区別するため状態で判定
+        NTDRSP01\tDATA\tError code\t8341\t16\tX\tC\tERROR時必須、他はspace
+        NTDRSP01\tDATA\t利用者向けerror\t8357\t512\tX\tC\tERROR時必須、他はspace
+        NTDRSP01\tDATA\tQuestion ID\t8869\t12\tX\tC\t未削除時ASCII数字、削除済みはspace
+        NTDRSP01\tDATA\tReserved\t8881\t16\tX\tF\t全space
+        NTCREQ01\tDATA\tNotification ID\t1\t12\tN\tM\tTarget
+        NTCREQ01\tDATA\tOperation token\t13\t36\tX\tM\tUUID
+        NTCRSP01\tDATA\t更新後状態\t1\t12\tX\tC\t`0000`/`0200`はCANCELLED、`0107`は競合時最新状態
+        NTCRSP01\tDATA\t取消日時\t13\t17\tX\tC\t`0000`/`0200`時JST、`0107`時space
+        NTCRSP01\tDATA\tReserved\t30\t3\tX\tF\t全space
+        QSSREQ01\tDATA\tKeyword\t1\t256\tX\tO\t質問/回答部分一致
+        QSSREQ01\tDATA\tUsername\t257\t64\tX\tO\tADMINのみ完全一致。USERはspace必須
+        QSSREQ01\tDATA\t回答状態\t321\t12\tX\tO\tANSWERED/UNANSWERED/ERROR/space
+        QSSREQ01\tDATA\t受付日時From\t333\t17\tX\tO\tJST/space
+        QSSREQ01\tDATA\t受付日時To\t350\t17\tX\tO\tJST/space、最大366日
+        QSSREQ01\tDATA\tPage\t367\t6\tN\tM\t1以上
+        QSSREQ01\tDATA\tPage size\t373\t3\tN\tM\t固定50
+        QSSREQ01\tDATA\tReserved\t376\t9\tX\tF\t全space
+        QSSRSP01\tDATA\tEffective page\t1\t6\tN\tM\t1～999999
+        QSSRSP01\tDATA\tPage size\t7\t3\tN\tM\tInterface固定値
+        QSSRSP01\tDATA\tTotal count\t10\t9\tN\tM\tPage size 50は0～49,999,950、100は0～99,999,900
+        QSSRSP01\tDATA\tTotal pages\t19\t6\tN\tM\t0件でも1
+        QSSRSP01\tDATA\tFirst result\t25\t9\tN\tM\t0件は0
+        QSSRSP01\tDATA\tLast result\t34\t9\tN\tM\t0件は0
+        QSSRSP01\tDATA\tReserved\t43\t6\tX\tF\t全space
+        QSSRSP01\tRECORD\tQuestion ID\t1\t12\tN\tM\t明細ID
+        QSSRSP01\tRECORD\t受付ID\t13\t26\tX\tM\tPublic ID
+        QSSRSP01\tRECORD\tUsername\t39\t64\tX\tM\tADMIN表示用。USER responseにも設定
+        QSSRSP01\tRECORD\t質問概要\t103\t512\tX\tM\t先頭100文字相当
+        QSSRSP01\tRECORD\t回答状態\t615\t12\tX\tM\tANSWERED/UNANSWERED/ERROR
+        QSSRSP01\tRECORD\t受付日時\t627\t17\tN\tM\tJST
+        QSSRSP01\tRECORD\t回答日時\t644\t17\tX\tC\tANSWERED時JST、他はspace
+        QSSRSP01\tRECORD\tReserved\t661\t12\tX\tF\t全space
+        QSDREQ01\tDATA\tQuestion ID\t1\t12\tN\tM\tTarget
+        QSDRSP01\tDATA\tQuestion ID\t1\t12\tN\tM\tID
+        QSDRSP01\tDATA\t受付ID\t13\t26\tX\tM\tPublic ID
+        QSDRSP01\tDATA\tUsername\t39\t64\tX\tM\tOwner
+        QSDRSP01\tDATA\t回答状態\t103\t12\tX\tM\tANSWERED/UNANSWERED/ERROR
+        QSDRSP01\tDATA\t質問本文\t115\t4096\tX\tM\t本文
+        QSDRSP01\tDATA\t回答本文\t4211\t4096\tX\tO\t空回答可
+        QSDRSP01\tDATA\t受付日時\t8307\t17\tN\tM\tJST
+        QSDRSP01\tDATA\t回答日時\t8324\t17\tX\tC\tANSWERED時JST、他はspace
+        QSDRSP01\tDATA\tReserved\t8341\t12\tX\tF\t全space
+        QDLREQ01\tDATA\tQuestion ID\t1\t12\tN\tM\tTarget
+        QDLREQ01\tDATA\tOperation token\t13\t36\tX\tM\tUUID
+        QDLRSP01\tDATA\t削除日時\t1\t17\tN\tM\t論理削除JST日時
+        QDLRSP01\tDATA\tReserved\t18\t7\tX\tF\t全space
+        QWKREQ01\tDATA\t受付ID\t1\t26\tX\tM\tPublic ID
+        QWKREQ01\tDATA\tQuestion ID\t27\t12\tN\tM\tDB ID
+        QWKREQ01\tDATA\tAsync job ID\t39\t12\tN\tM\tJob ID
+        QWKREQ01\tDATA\tReserved\t51\t14\tX\tF\t全space
+        WLGEVT01\tDATA\t発生日時\t1\t17\tN\tM\tHTTP response確定時のJST
+        WLGEVT01\tDATA\tLog type\t18\t16\tX\tF\t固定`REQUEST`
+        WLGEVT01\tDATA\tLevel\t34\t8\tX\tM\tINFO/WARN/ERROR
+        WLGEVT01\tDATA\tAction\t42\t64\tX\tO\tBounded action code
+        WLGEVT01\tDATA\tMessage\t106\t512\tX\tM\t本文・secretを含まない定型要約
+        WLGEVT01\tDATA\tHTTP request ID\t618\t36\tX\tM\tUUID
+        WLGEVT01\tDATA\tHTTP method\t654\t8\tX\tM\tGET/POST等
+        WLGEVT01\tDATA\tPath\t662\t256\tX\tM\tQueryを除くURI path。制御文字なし
+        WLGEVT01\tDATA\tHTTP status\t918\t3\tX\tM\tASCII 3桁
+        WLGEVT01\tDATA\tElapsed ms\t921\t9\tX\tM\tASCII数字、0～999999999
+        WLGEVT01\tDATA\tRemote address\t930\t45\tX\tM\t検証済みIPv4/IPv6 text
+        WLGEVT01\tDATA\tUsername\t975\t64\tX\tO\t未認証はspace
+        WLGEVT01\tDATA\tRole\t1039\t5\tX\tO\tUSER/ADMIN/space
+        WLGEVT01\tDATA\tDetails\t1044\t1024\tX\tO\t表示用bounded JSON。本文、query値、cookie、tokenなし
+        WLGEVT01\tDATA\tReserved\t2068\t13\tX\tF\t全space
       """;
 
   private static final LayoutFieldCatalog STANDARD = parse(CATALOG_TSV, LayoutRegistry.standard());

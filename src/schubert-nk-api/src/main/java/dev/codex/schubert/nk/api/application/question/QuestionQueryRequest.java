@@ -2,18 +2,35 @@ package dev.codex.schubert.nk.api.application.question;
 
 import static dev.codex.schubert.nk.api.idempotency.CanonicalField.number;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.CanonicalField;
+import dev.codex.schubert.nk.api.idempotency.CanonicalRequest;
 import dev.codex.schubert.nk.api.persistence.QuestionQueryRepository;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.LayoutRegistry;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.question.*;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Strict four-query decode and original-field HMAC, not a current authorization grant.

@@ -4,7 +4,11 @@ import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
 
@@ -90,7 +94,8 @@ public final class FixedServiceIdentity {
       String account = service == ServiceConfigFiles.Service.API ? "schubert-api" : "schubert-web";
       String[] passwd =
           fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
-      long uid = id(passwd[2]), gid = id(passwd[3]);
+      long uid = id(passwd[2]);
+      long gid = id(passwd[3]);
       var names = new ArrayList<>(List.of(account, "schubert", "schubert-read"));
       if (service == ServiceConfigFiles.Service.API) names.add("schubert-web");
       var groups = new TreeSet<Long>();
@@ -142,7 +147,8 @@ public final class FixedServiceIdentity {
     try {
       String[] passwd =
           fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
-      long uid = id(passwd[2]), gid = id(passwd[3]);
+      long uid = id(passwd[2]);
+      long gid = id(passwd[3]);
       var groups = new TreeSet<Long>();
       for (String name : names) {
         long value = id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);

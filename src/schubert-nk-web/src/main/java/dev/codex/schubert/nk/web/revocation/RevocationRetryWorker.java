@@ -17,8 +17,10 @@ public final class RevocationRetryWorker implements AutoCloseable {
   private final long intervalNanos;
   private final Duration closeTimeout;
   private final Thread thread;
-  private final AtomicBoolean active = new AtomicBoolean(true), terminal = new AtomicBoolean();
-  private final AtomicLong completed = new AtomicLong(), failed = new AtomicLong();
+  private final AtomicBoolean active = new AtomicBoolean(true);
+  private final AtomicBoolean terminal = new AtomicBoolean();
+  private final AtomicLong completed = new AtomicLong();
+  private final AtomicLong failed = new AtomicLong();
 
   private RevocationRetryWorker(DispatchAction action, Duration interval, Duration closeTimeout) {
     this.action = Objects.requireNonNull(action, "revocation dispatch");

@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static dev.codex.schubert.nk.api.file.AesCredentialFile.*;
+import static dev.codex.schubert.nk.api.file.AesCredentialFile.CONTEXT_CURRENT;
+import static dev.codex.schubert.nk.api.file.AesCredentialFile.CONTEXT_PREVIOUS;
+import static dev.codex.schubert.nk.api.file.AesCredentialFile.RESPONSE_CURRENT;
+import static dev.codex.schubert.nk.api.file.AesCredentialFile.RESPONSE_PREVIOUS;
 
 import dev.codex.schubert.nk.api.file.AesCredentialFile;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;

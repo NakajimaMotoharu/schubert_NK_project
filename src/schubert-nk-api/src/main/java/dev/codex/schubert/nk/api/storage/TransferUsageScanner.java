@@ -65,7 +65,8 @@ final class TransferUsageScanner {
 
   private Usage scanDates(OwnedTransferDirectory root, StorageIdentity identity, Path handle)
       throws IOException {
-    long bytes = 0, files = 0;
+    long bytes = 0;
+    long files = 0;
     try (var dates = entries.open(handle)) {
       for (Path candidate : dates) {
         String name = Objects.requireNonNull(candidate.getFileName(), "date name").toString();
@@ -88,7 +89,8 @@ final class TransferUsageScanner {
       throws IOException {
     StorageAttributeGuard.directory(
         Files.readAttributes(handle, "unix:owner,group,mode,nlink"), identity);
-    long bytes = 0, files = 0;
+    long bytes = 0;
+    long files = 0;
     try (var candidates = entries.open(handle)) {
       for (Path candidate : candidates) {
         String name = Objects.requireNonNull(candidate.getFileName(), "entry name").toString();

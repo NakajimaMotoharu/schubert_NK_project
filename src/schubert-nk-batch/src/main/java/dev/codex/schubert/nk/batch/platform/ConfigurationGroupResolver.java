@@ -168,7 +168,9 @@ public final class ConfigurationGroupResolver {
       }
     }
     require(count == 3);
-    int begin = separators[1] + 1, end = separators[2], digits = end - begin;
+    int begin = separators[1] + 1;
+    int end = separators[2];
+    int digits = end - begin;
     require(digits >= 1 && digits <= 10);
     require(bytes[begin] != '0');
     long group = 0;

@@ -1,7 +1,11 @@
 package dev.codex.schubert.nk.web.session;
 
 import dev.codex.schubert.nk.web.security.SavedRequestTarget;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Immutable allowlist; absent principal is anonymous, not partially authenticated.

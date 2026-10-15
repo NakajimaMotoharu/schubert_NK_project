@@ -1,10 +1,17 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
-import org.jspecify.annotations.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Package-only genuine host cgroup namespace projection, not whole-process emptiness or authority.
@@ -21,11 +28,9 @@ final class FixedUnitCgroupNamespace {
   }
 
   interface Io {
-    @Nullable
-    Map<String, Object> attributes(Path held) throws IOException;
+    @Nullable Map<String, Object> attributes(Path held) throws IOException;
 
-    @Nullable
-    String filesystem(Path held) throws IOException;
+    @Nullable String filesystem(Path held) throws IOException;
   }
 
   private final Context context;

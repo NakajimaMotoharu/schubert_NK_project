@@ -64,10 +64,11 @@ public final class SessionPayloadCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(attributes, "attributes");
-      byte[] plaintext = json.encode(attributes),
-          nonce = new byte[12],
-          aad = identity.aad(currentVersion);
-      byte[] encrypted = new byte[0], envelope = new byte[0];
+      byte[] plaintext = json.encode(attributes);
+      byte[] nonce = new byte[12];
+      byte[] aad = identity.aad(currentVersion);
+      byte[] encrypted = new byte[0];
+      byte[] envelope = new byte[0];
       try {
         random.nextBytes(nonce);
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
@@ -109,15 +110,16 @@ public final class SessionPayloadCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(payload, "payload");
-      byte[] stored = payload.ciphertext(),
-          nonce = new byte[0],
-          aad = new byte[0],
-          plaintext = new byte[0];
+      byte[] stored = payload.ciphertext();
+      byte[] nonce = new byte[0];
+      byte[] aad = new byte[0];
+      byte[] plaintext = new byte[0];
       try {
         if (stored.length < 37 || !Arrays.equals(stored, 0, 6, MAGIC, 0, 6)) throw invalid();
         if (stored[6] != 1) throw invalid();
         int keyLength = Byte.toUnsignedInt(stored[7]);
-        int nonceOffset = 8 + keyLength, cipherOffset = nonceOffset + 12;
+        int nonceOffset = 8 + keyLength;
+        int cipherOffset = nonceOffset + 12;
         if (keyLength < 1 || keyLength > 16 || stored.length < cipherOffset + 16) throw invalid();
         String version = new String(stored, 8, keyLength, StandardCharsets.US_ASCII);
         if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")

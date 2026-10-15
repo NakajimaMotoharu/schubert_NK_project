@@ -5,11 +5,16 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailabl
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -202,7 +207,8 @@ public final class BackupWorkerRequestFiles {
           ByteBuffer buffer = ByteBuffer.wrap(content);
           while (buffer.hasRemaining()) {
             guard();
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int n = writer.write(buffer);
             require(n > 0 && n <= remaining && buffer.position() == position + n);
           }
@@ -239,7 +245,8 @@ public final class BackupWorkerRequestFiles {
           buffer.limit((int) length);
           while (buffer.hasRemaining()) {
             guard();
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int n = channel.read(buffer);
             require(n > 0 && n <= remaining && buffer.position() == position + n);
           }

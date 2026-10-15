@@ -49,8 +49,10 @@ public final class HttpByteRangeParser {
     int dash = spec.indexOf('-');
     if (dash < 0 || dash != spec.lastIndexOf('-')) return Unsatisfiable.INSTANCE;
     try {
-      String left = spec.substring(0, dash), right = spec.substring(dash + 1);
-      long start, requestedLast;
+      String left = spec.substring(0, dash);
+      String right = spec.substring(dash + 1);
+      long start;
+      long requestedLast;
       if (left.isEmpty()) {
         long suffix = decimal(right);
         if (suffix == 0) return Unsatisfiable.INSTANCE;

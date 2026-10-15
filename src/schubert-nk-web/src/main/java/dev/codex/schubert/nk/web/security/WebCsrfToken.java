@@ -52,7 +52,8 @@ public final class WebCsrfToken {
   /** Missing/malformed is false; all valid representations compare in fixed129-byte buffers. */
   public boolean matches(@Nullable String submitted) {
     if (submitted == null || !ALPHABET.matcher(submitted).matches()) return false;
-    byte[] expected = padded(value), actual = padded(submitted);
+    byte[] expected = padded(value);
+    byte[] actual = padded(submitted);
     try {
       return MessageDigest.isEqual(expected, actual);
     } finally {

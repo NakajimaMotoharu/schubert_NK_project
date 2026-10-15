@@ -41,7 +41,9 @@ public final class GameListViewModel {
   }
 
   public static final class Card {
-    private final String code, title, href;
+    private final String code;
+    private final String title;
+    private final String href;
 
     private Card(GameRecord record) {
       code = record.gameCode().wireValue();

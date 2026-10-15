@@ -5,7 +5,12 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -174,7 +179,8 @@ final class RootServiceCredentialSource {
                           require(
                               security.effectiveUid() == 0
                                   && !Thread.currentThread().isInterrupted());
-                          int position = buffer.position(), remaining = buffer.remaining();
+                          int position = buffer.position();
+                          int remaining = buffer.remaining();
                           int n = channel.read(buffer);
                           if (n == -1) {
                             require(buffer.position() == position);

@@ -1,12 +1,20 @@
 package dev.codex.schubert.nk.web.view;
 
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
+import dev.codex.schubert.nk.protocol.layout.scenario.GameRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord;
 import dev.codex.schubert.nk.web.form.ScenarioSearchForm;
-import dev.codex.schubert.nk.web.form.ScenarioSearchForm.*;
+import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Code;
+import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Field;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalInt;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
@@ -15,10 +23,12 @@ import org.springframework.web.util.UriUtils;
 public final class ScenarioSearchViewModel {
   private final TopBarViewModel topBar;
   private final Filters filters;
-  private final List<String> games, speakers;
+  private final List<String> games;
+  private final List<String> speakers;
   private final List<FieldError> errors;
   private final Optional<ScenarioSearchResultsViewModel> results;
-  private final Optional<String> previousHref, nextHref;
+  private final Optional<String> previousHref;
+  private final Optional<String> nextHref;
 
   private ScenarioSearchViewModel(
       SessionPrincipal actor,
@@ -144,7 +154,12 @@ public final class ScenarioSearchViewModel {
   }
 
   public static final class Filters {
-    private final String q, game, speaker, chapter, entryType, voice;
+    private final String q;
+    private final String game;
+    private final String speaker;
+    private final String chapter;
+    private final String entryType;
+    private final String voice;
 
     private Filters(ScenarioSearchForm form) {
       var values = form.getValues();
@@ -215,7 +230,8 @@ public final class ScenarioSearchViewModel {
             Field.Q, "本文はUTF-8で256 byte以内にしてください。",
             Field.SPEAKER, "話者はUTF-8で128 byte以内にしてください。",
             Field.CHAPTER, "章タイトルはUTF-8で256 byte以内にしてください。");
-    private final String name, message;
+    private final String name;
+    private final String message;
 
     private FieldError(Field field, Code code) {
       name = Objects.requireNonNull(NAMES.get(field));

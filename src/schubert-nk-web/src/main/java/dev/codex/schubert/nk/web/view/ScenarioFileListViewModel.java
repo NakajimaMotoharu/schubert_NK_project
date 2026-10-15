@@ -15,7 +15,9 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class ScenarioFileListViewModel {
   private final TopBarViewModel topBar;
-  private final String game, prefix, routeName;
+  private final String game;
+  private final String prefix;
+  private final String routeName;
   private final List<Card> files;
 
   private ScenarioFileListViewModel(
@@ -81,7 +83,9 @@ public final class ScenarioFileListViewModel {
 
   public static final class Card {
     private final long id;
-    private final String displayTitle, displayPath, href;
+    private final String displayTitle;
+    private final String displayPath;
+    private final String href;
     private final int entryCount;
 
     private Card(ScenarioFileRecord record) {

@@ -130,7 +130,8 @@ public final class InspectorEnvironmentReader {
         () -> {
           require(channel.size() == expected);
           while (buffer.hasRemaining()) {
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int count = channel.read(buffer);
             if (count == -1) break;
             require(count > 0 && count <= remaining && buffer.position() == position + count);

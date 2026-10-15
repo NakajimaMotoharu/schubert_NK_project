@@ -5,12 +5,18 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -118,7 +124,8 @@ public final class RootBatchCredentialReader {
                           require(channel.size() == before.size());
                           ByteBuffer buffer = ByteBuffer.wrap(material);
                           while (buffer.hasRemaining()) {
-                            int position = buffer.position(), remaining = buffer.remaining();
+                            int position = buffer.position();
+                            int remaining = buffer.remaining();
                             int read = channel.read(buffer);
                             if (read == -1) break;
                             require(

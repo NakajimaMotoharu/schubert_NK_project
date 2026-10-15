@@ -1,15 +1,32 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.security.*;
-import java.util.*;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.jar.Manifest;
-import java.util.zip.*;
+import java.util.zip.CRC32;
+import java.util.zip.ZipFile;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -271,7 +288,8 @@ final class ReleasePayloadVerification {
         zip::close,
         () -> {
           require(zip.size() > 0 && zip.size() <= 131072);
-          Set<String> entries = new HashSet<>(), classes = new HashSet<>();
+          Set<String> entries = new HashSet<>();
+          Set<String> classes = new HashSet<>();
           Map<String, String> sql = new HashMap<>();
           var iterator = zip.entries();
           while (iterator.hasMoreElements()) {
@@ -319,7 +337,8 @@ final class ReleasePayloadVerification {
   private void agreement(
       ReleaseInventory inventory, Map<String, ReleaseInventory.Artifact> expected)
       throws StorageIoException {
-    Set<String> sharedPaths = new HashSet<>(), sharedClasses = new HashSet<>();
+    Set<String> sharedPaths = new HashSet<>();
+    Set<String> sharedClasses = new HashSet<>();
     for (var dep : inventory.dependencies()) {
       if (dep.coordinate()
           .matches("dev\\.codex\\.schubert:schubert-nk-(?:protocol|storage|bootstrap):.+")) {

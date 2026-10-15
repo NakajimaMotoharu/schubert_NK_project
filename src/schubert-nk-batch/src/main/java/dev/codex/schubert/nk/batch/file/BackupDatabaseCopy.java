@@ -4,11 +4,16 @@ import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.unavailable;
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -28,7 +33,8 @@ public final class BackupDatabaseCopy {
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final InspectorEnvironmentPublisher.Io io;
-  private final long uid, gid;
+  private final long uid;
+  private final long gid;
 
   public BackupDatabaseCopy(
       OwnedTransferDirectory root, InodeSecurityCalls security, long uid, long gid) {
@@ -136,7 +142,8 @@ public final class BackupDatabaseCopy {
           ByteBuffer buffer = ByteBuffer.wrap(bytes);
           while (buffer.hasRemaining()) {
             guard();
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int count = writer.write(buffer);
             require(count > 0 && count <= remaining && buffer.position() == position + count);
           }
@@ -161,7 +168,8 @@ public final class BackupDatabaseCopy {
             buffer.limit(bytes.length);
             while (buffer.hasRemaining()) {
               guard();
-              int position = buffer.position(), remaining = buffer.remaining();
+              int position = buffer.position();
+              int remaining = buffer.remaining();
               int count = channel.read(buffer);
               require(count > 0 && count <= remaining && buffer.position() == position + count);
             }

@@ -3,12 +3,21 @@ package dev.codex.schubert.nk.api.application.admin;
 // PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.security.*;
 import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator.Mutation;
+import dev.codex.schubert.nk.api.security.AuthSessionRevocationService;
+import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.api.security.AuthorizationService;
+import dev.codex.schubert.nk.api.security.LoginUsername;
+import dev.codex.schubert.nk.api.security.PasswordHasher;
+import dev.codex.schubert.nk.api.security.PasswordPolicy;
+import dev.codex.schubert.nk.api.security.SessionRevocationReason;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Objects;
@@ -351,7 +360,8 @@ public final class UserCommandService {
         if (r.next()) {
           String status = text(r, "status");
           require(status.equals("ACTIVE") || status.equals("DISABLED"));
-          long version = number(r, "version"), failed = number(r, "failed_count");
+          long version = number(r, "version");
+          long failed = number(r, "failed_count");
           require(version >= 0 && version <= 999_999_999 && failed >= 0 && failed <= 5);
           java.time.OffsetDateTime locked =
               r.getObject("locked_until", java.time.OffsetDateTime.class);

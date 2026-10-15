@@ -2,7 +2,9 @@ package dev.codex.schubert.nk.api.application.question;
 
 import com.google.gson.JsonObject;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.text.Normalizer;
 import java.time.Instant;
 import java.time.ZoneOffset;

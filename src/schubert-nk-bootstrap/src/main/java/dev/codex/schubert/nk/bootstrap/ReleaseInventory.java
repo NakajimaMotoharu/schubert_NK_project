@@ -8,7 +8,15 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -52,7 +60,10 @@ final class ReleaseInventory {
   }
 
   private final String release;
-  private final Map<String, String> versions, source, build, platform;
+  private final Map<String, String> versions;
+  private final Map<String, String> source;
+  private final Map<String, String> build;
+  private final Map<String, String> platform;
   private final List<Artifact> artifacts;
   private final List<Dependency> dependencies;
   private final List<SchemaHistoryAdmission.Row> migrations;

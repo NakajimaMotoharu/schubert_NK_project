@@ -48,7 +48,8 @@ public final class BackupUnitStartClient {
         "broker-start.intent");
     private final MaintenanceUnit unit;
     private final InspectorUnitSnapshot.Target observation;
-    private final String requestDirectory, marker;
+    private final String requestDirectory;
+    private final String marker;
 
     Target(
         MaintenanceUnit unit,

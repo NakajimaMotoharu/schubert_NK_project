@@ -252,7 +252,8 @@ final class DurableRecordFiles {
         () -> {
           require(channel.size() == expected);
           while (buffer.hasRemaining()) {
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int count = channel.read(buffer);
             if (count == -1) break;
             require(count > 0 && count <= remaining && buffer.position() == position + count);
@@ -273,7 +274,8 @@ final class DurableRecordFiles {
         () -> {
           require(writer.size() == 0);
           while (buffer.hasRemaining()) {
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int count = writer.write(buffer);
             require(count > 0 && count <= remaining && buffer.position() == position + count);
           }

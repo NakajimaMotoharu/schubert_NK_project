@@ -2,7 +2,12 @@ package dev.codex.schubert.nk.batch.platform;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /**

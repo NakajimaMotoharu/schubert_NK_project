@@ -9,7 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
@@ -132,7 +137,13 @@ public final class UserListViewModel {
         DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.SSS", Locale.ROOT)
             .withZone(ZoneOffset.ofHours(9));
     private final long id;
-    private final String username, role, state, lockedUntil, lastLogin, createdAt, updatedAt;
+    private final String username;
+    private final String role;
+    private final String state;
+    private final String lockedUntil;
+    private final String lastLogin;
+    private final String createdAt;
+    private final String updatedAt;
 
     private Row(UserRecord value) {
       id = value.userId().value();

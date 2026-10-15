@@ -1,13 +1,24 @@
 package dev.codex.schubert.nk.web.form;
 
 import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.time.*;
+import java.time.DateTimeException;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR014/FUN008/AUT/UI222,225,235/SS313,352/SSC073/PG214/PT-WEB278..285. */
@@ -62,7 +73,8 @@ public final class LogSearchForm {
   private final Map<Field, String> values;
   private final Map<Field, Code> issues;
   private final int page;
-  private final Optional<Instant> fromAt, toAt;
+  private final Optional<Instant> fromAt;
+  private final Optional<Instant> toAt;
 
   private LogSearchForm(
       Map<Field, String> values,

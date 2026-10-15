@@ -5,10 +5,18 @@ package dev.codex.schubert.nk.api.persistence;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.api.security.AuthorizationService;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.admin.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserRecord;
+import dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +63,8 @@ public final class UserQueryRepository {
             request.page(),
             request.pageSize());
     validate(new TypedPayloadValues(new LayoutId("USRREQ01"), request, List.of()));
-    List<String> filters = new ArrayList<>(), parameters = new ArrayList<>();
+    List<String> filters = new ArrayList<>();
+    List<String> parameters = new ArrayList<>();
     request
         .usernamePrefix()
         .ifPresent(

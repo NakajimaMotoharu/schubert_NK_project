@@ -5,7 +5,11 @@ import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -69,19 +73,20 @@ public final class LogSearchResultsViewModel {
 
   public static final class Row {
     private final long id;
-    private final String loggedAt,
-        logType,
-        level,
-        action,
-        message,
-        requestId,
-        messageId,
-        correlationId,
-        method,
-        path,
-        remoteAddr,
-        details;
-    private final Optional<Integer> status, elapsedMs;
+    private final String loggedAt;
+    private final String logType;
+    private final String level;
+    private final String action;
+    private final String message;
+    private final String requestId;
+    private final String messageId;
+    private final String correlationId;
+    private final String method;
+    private final String path;
+    private final String remoteAddr;
+    private final String details;
+    private final Optional<Integer> status;
+    private final Optional<Integer> elapsedMs;
 
     private Row(LogRecord record) {
       id = record.logId().value();

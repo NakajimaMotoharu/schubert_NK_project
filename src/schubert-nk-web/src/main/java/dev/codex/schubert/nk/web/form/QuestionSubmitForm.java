@@ -3,7 +3,13 @@ package dev.codex.schubert.nk.web.form;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR018/QST001/UI224,236/SS313,323; PG-D351/PT-QST-FORM001..008. Request scope only. */

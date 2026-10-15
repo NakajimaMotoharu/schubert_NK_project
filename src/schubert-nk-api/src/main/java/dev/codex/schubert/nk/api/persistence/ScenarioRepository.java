@@ -2,16 +2,48 @@ package dev.codex.schubert.nk.api.persistence;
 
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.GameRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteListRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
+import dev.codex.schubert.nk.protocol.layout.semantic.SpeakerId;
+import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.IntFunction;
 
 /**
@@ -166,7 +198,8 @@ public final class ScenarioRepository {
     // Validate the request wire contract before any database access. Web page normalization is
     // separate.
     validate(new TypedPayloadValues(new LayoutId("SRCREQ01"), request, List.of()));
-    List<String> filters = new ArrayList<>(), parameters = new ArrayList<>();
+    List<String> filters = new ArrayList<>();
+    List<String> parameters = new ArrayList<>();
     add(
         filters,
         parameters,
@@ -223,7 +256,8 @@ public final class ScenarioRepository {
           if (!result.next()) throw new SQLException("missing page aggregate");
           long total = number(result, "total");
           if (total > 99_999_900) throw new ScenarioQueryException(true);
-          int effective = integer(result, "effective"), pages = integer(result, "pages");
+          int effective = integer(result, "effective");
+          int pages = integer(result, "pages");
           List<PayloadRecord> records = new ArrayList<>();
           do {
             if (result.getObject("id") != null) records.add(searchRecord(result));

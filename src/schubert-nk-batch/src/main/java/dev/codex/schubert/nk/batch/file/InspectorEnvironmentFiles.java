@@ -32,11 +32,12 @@ import org.jspecify.annotations.NullMarked;
 // PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class InspectorEnvironmentFiles {
-  private static final String CONFIG = "schubert-nk",
-      MAINTENANCE = "maintenance",
-      NAME = "inbox-inspector.env";
+  private static final String CONFIG = "schubert-nk";
+  private static final String MAINTENANCE = "maintenance";
+  private static final String NAME = "inbox-inspector.env";
   private final Object lifecycleLock = new Object();
-  private final Path etcPath, runPath;
+  private final Path etcPath;
+  private final Path runPath;
   private final DirectoryCalls directories;
   private final InodeSecurityCalls security;
   private final GroupLookup groups;
@@ -176,7 +177,8 @@ public final class InspectorEnvironmentFiles {
                                                 expectedFile,
                                                 reference[0],
                                                 run);
-                                            boolean[] active = {true}, retired = {false};
+                                            boolean[] active = {true};
+                                            boolean[] retired = {false};
                                             Thread ownerThread = Thread.currentThread();
                                             try {
                                               T completed =

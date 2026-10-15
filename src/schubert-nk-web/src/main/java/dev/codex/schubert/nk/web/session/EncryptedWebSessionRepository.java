@@ -152,7 +152,8 @@ public final class EncryptedWebSessionRepository {
           if (loaded.isEmpty()) return Optional.empty();
           var current = loaded.orElseThrow();
           var newId = WebSessionId.generate(random);
-          String newHash = newId.lookupHash(), newCsrf = csrf();
+          String newHash = newId.lookupHash();
+          String newCsrf = csrf();
           UUID uuid = required(ids.get());
           require(!newHash.equals(hash) && !uuid.equals(current.row().identity().id()));
           require(

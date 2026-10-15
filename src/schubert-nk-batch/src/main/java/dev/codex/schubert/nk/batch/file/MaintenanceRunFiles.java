@@ -404,7 +404,9 @@ public final class MaintenanceRunFiles {
     private final Object stateLock = new Object();
     private final List<OwnedTransferDirectory> roots;
     private final List<Snapshot> expectedRoots;
-    private final DurableRecordFiles maintenanceFiles, runFiles, attemptFiles;
+    private final DurableRecordFiles maintenanceFiles;
+    private final DurableRecordFiles runFiles;
+    private final DurableRecordFiles attemptFiles;
     private boolean open = true;
 
     private Session(List<OwnedTransferDirectory> roots, List<Snapshot> expectedRoots) {
@@ -992,7 +994,8 @@ public final class MaintenanceRunFiles {
       require(rootNames.containsAll(Set.of("runs", "attempts")));
       Map<UUID, BatchRun> runs = new HashMap<>();
       Map<UUID, MaintenanceActivation> begins = new HashMap<>();
-      Map<UUID, MaintenanceCompletion> done = new HashMap<>(), plans = new HashMap<>();
+      Map<UUID, MaintenanceCompletion> done = new HashMap<>();
+      Map<UUID, MaintenanceCompletion> plans = new HashMap<>();
       List<CapturedFile> files = new ArrayList<>();
       Optional<MaintenanceRetirement> marker = Optional.empty();
       Optional<MaintenanceActivation> active = Optional.empty();

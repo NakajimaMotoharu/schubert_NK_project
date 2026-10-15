@@ -1,12 +1,23 @@
 package dev.codex.schubert.nk.web.form;
 
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
+import java.time.DateTimeException;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR022/UI224236/SS313314; PG-D350/PT-QRY-HTTP001..003,012. No HTTP role/context. */
@@ -15,10 +26,12 @@ public final class QuestionSearchForm {
   private static final Set<String> FIELDS =
       Set.of("keyword", "username", "state", "from", "to", "page");
   private static final String INVALID = "入力項目を確認してください。";
-  private final Map<String, String> values, issues;
+  private final Map<String, String> values;
+  private final Map<String, String> issues;
   private final boolean admin;
   private final int page;
-  private final Optional<Instant> from, to;
+  private final Optional<Instant> from;
+  private final Optional<Instant> to;
 
   private QuestionSearchForm(
       Map<String, String> values,

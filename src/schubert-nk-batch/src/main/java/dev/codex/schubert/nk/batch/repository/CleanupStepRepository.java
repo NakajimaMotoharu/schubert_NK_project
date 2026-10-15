@@ -1,8 +1,11 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -52,8 +55,8 @@ public final class CleanupStepRepository {
                   present(row.getObject("deleted_count", Long.class)),
                   present(row.getObject("skipped_count", Long.class)));
           require(counts.target() <= limit);
-          Long target = row.getObject("step_target_count", Long.class),
-              deleted = row.getObject("step_success_count", Long.class);
+          Long target = row.getObject("step_target_count", Long.class);
+          Long deleted = row.getObject("step_success_count", Long.class);
           require((target == null) == (deleted == null));
           Optional<CleanupCounts> total =
               target == null ? Optional.empty() : Optional.of(counts(target, present(deleted), 0));

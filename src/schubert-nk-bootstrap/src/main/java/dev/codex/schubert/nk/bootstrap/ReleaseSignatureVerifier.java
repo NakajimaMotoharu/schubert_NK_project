@@ -1,9 +1,13 @@
 package dev.codex.schubert.nk.bootstrap;
 
 import java.io.IOException;
-import java.security.*;
+import java.security.GeneralSecurityException;
+import java.security.KeyFactory;
+import java.security.Signature;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -39,9 +43,9 @@ public final class ReleaseSignatureVerifier {
     Objects.requireNonNull(originalManifest, "original manifest");
     Objects.requireNonNull(detachedSignature, "detached signature");
     require(originalManifest.length <= 1_048_576 && detachedSignature.length == 64);
-    byte[] key = pinned.clone(),
-        message = originalManifest.clone(),
-        signature = detachedSignature.clone();
+    byte[] key = pinned.clone();
+    byte[] message = originalManifest.clone();
+    byte[] signature = detachedSignature.clone();
     try {
       if (!crypto.verify(key, message, signature)) throw unavailable();
     } catch (GeneralSecurityException invalid) {

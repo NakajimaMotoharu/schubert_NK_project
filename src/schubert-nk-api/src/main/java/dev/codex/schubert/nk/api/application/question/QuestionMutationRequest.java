@@ -2,16 +2,34 @@ package dev.codex.schubert.nk.api.application.question;
 
 import static dev.codex.schubert.nk.api.idempotency.CanonicalField.number;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.CanonicalRequest;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.question.*;
+import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.LayoutRegistry;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
 import java.sql.Connection;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Strict NTC/QDL decoding, canonical original target; no auth/Inbox grant. SS323§9/324,

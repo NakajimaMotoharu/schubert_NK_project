@@ -1,9 +1,13 @@
 package dev.codex.schubert.nk.web.view;
 
-import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicCategoryResponseData;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.web.util.UriUtils;
 
@@ -65,7 +69,8 @@ public final class MusicCategoryViewModel {
   }
 
   public static final class Card {
-    private final String name, href;
+    private final String name;
+    private final String href;
     private final int trackCount;
 
     private Card(String name, int trackCount) {

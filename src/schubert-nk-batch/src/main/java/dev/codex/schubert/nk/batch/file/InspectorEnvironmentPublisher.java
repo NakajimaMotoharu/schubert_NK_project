@@ -230,7 +230,8 @@ public final class InspectorEnvironmentPublisher {
         () -> {
           require(writer.size() == 0);
           while (buffer.hasRemaining()) {
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             int count = writer.write(buffer);
             require(count > 0 && count <= remaining && buffer.position() == position + count);
           }

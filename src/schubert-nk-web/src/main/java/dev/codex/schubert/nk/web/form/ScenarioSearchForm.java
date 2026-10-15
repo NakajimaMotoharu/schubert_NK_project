@@ -1,10 +1,19 @@
 package dev.codex.schubert.nk.web.form;
 
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /** Search input boundary. FUN003/UI222,223,234/SS313,352/SSC072/PG199/PT-WEB214..221. */

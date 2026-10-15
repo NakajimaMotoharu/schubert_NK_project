@@ -1,10 +1,18 @@
 package dev.codex.schubert.nk.web.view;
 
-import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import org.springframework.web.util.UriUtils;
 
 /** Stored pair/order projection, no matching/filesystem inference. UI223235/SS313/PG-D365. */

@@ -1,15 +1,37 @@
 package dev.codex.schubert.nk.api.application.question;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.BoundInboxExecution;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxExecutionStatus;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotException;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
+import dev.codex.schubert.nk.api.idempotency.ResultBoundResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.question.*;
+import dev.codex.schubert.nk.protocol.codec.FixedWidthEncoder;
+import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
+import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Frozen NTC/QDL wire plus authenticated NKREF1 success binding. No live authorization or DB/JMS

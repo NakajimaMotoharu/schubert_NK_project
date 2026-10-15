@@ -1,13 +1,18 @@
 package dev.codex.schubert.nk.web.view;
 
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
 import dev.codex.schubert.nk.web.receipt.ReceiptReference;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR019 fresh API projection only; UI224/236; SS313/331§9.4; QA048; PG-D357/RCPT006E,F. */

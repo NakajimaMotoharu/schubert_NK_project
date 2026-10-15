@@ -55,7 +55,9 @@ public final class RouteListViewModel {
   }
 
   public static final class Card {
-    private final String prefix, routeName, href;
+    private final String prefix;
+    private final String routeName;
+    private final String href;
     private final int fileCount;
 
     private Card(String game, RouteRecord record) {

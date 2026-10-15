@@ -200,7 +200,8 @@ public final class InspectorCredentialLoader {
     try (var channel = io.openReadOnly(held)) {
       require(channel.size() == expectedSize);
       while (buffer.hasRemaining()) {
-        int position = buffer.position(), remaining = buffer.remaining();
+        int position = buffer.position();
+        int remaining = buffer.remaining();
         int count = channel.read(buffer);
         if (count == -1) break;
         require(count > 0 && count <= remaining && buffer.position() == position + count);

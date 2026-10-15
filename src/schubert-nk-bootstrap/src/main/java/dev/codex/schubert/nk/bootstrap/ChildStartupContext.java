@@ -1,12 +1,25 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.LinuxStartupAdmission;
+import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -119,8 +132,8 @@ public final class ChildStartupContext {
       if (key.toUpperCase(Locale.ROOT).startsWith("SCHUBERT_NK_STARTUP_"))
         require(key.equals(A_KEY) || key.equals(P_KEY));
     }
-    int a = descriptor(environment.getOrDefault(A_KEY, "")),
-        proof = descriptor(environment.getOrDefault(P_KEY, ""));
+    int a = descriptor(environment.getOrDefault(A_KEY, ""));
+    int proof = descriptor(environment.getOrDefault(P_KEY, ""));
     require(a != proof);
     String invocation = environment.getOrDefault("INVOCATION_ID", "");
     require(invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
@@ -159,7 +172,8 @@ public final class ChildStartupContext {
     Objects.requireNonNull(boot, "same maintenance boot");
     Objects.requireNonNull(invocation, "manager Invocation");
     Objects.requireNonNull(fixed, "dedicated Inspector NSS");
-    byte[] first = new byte[0], second = new byte[0];
+    byte[] first = new byte[0];
+    byte[] second = new byte[0];
     try {
       require(!Thread.currentThread().isInterrupted());
       require(invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
@@ -243,7 +257,8 @@ public final class ChildStartupContext {
     Objects.requireNonNull(invocation, "fresh broker Invocation");
     Objects.requireNonNull(fixed, "fixed broker NSS identity");
     require(io.uid() == 0 && invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
-    byte[] first = new byte[0], second = new byte[0];
+    byte[] first = new byte[0];
+    byte[] second = new byte[0];
     try {
       require(!Thread.currentThread().isInterrupted());
       first =
@@ -387,7 +402,8 @@ public final class ChildStartupContext {
       require(columns[0].matches("[RSIDTWtKP]"));
       long ticks = positive(columns[19], Long.MAX_VALUE, 19);
       Map<String, String> status = status(io.status(pid));
-      long uid, gid;
+      long uid;
+      long gid;
       if (maintenanceParent) {
         require(required(status, "Uid").matches("0\\s+0\\s+0\\s+0"));
         require(required(status, "Gid").matches("0\\s+0\\s+0\\s+0"));

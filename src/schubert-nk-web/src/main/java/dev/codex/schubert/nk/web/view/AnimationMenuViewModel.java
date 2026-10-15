@@ -9,7 +9,9 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class AnimationMenuViewModel {
   private final TopBarViewModel topBar;
-  private final int mainCount, ovaCount, totalCount;
+  private final int mainCount;
+  private final int ovaCount;
+  private final int totalCount;
   private final boolean openingPresent;
 
   private AnimationMenuViewModel(SessionPrincipal actor, AnimationMenuResponseData data) {

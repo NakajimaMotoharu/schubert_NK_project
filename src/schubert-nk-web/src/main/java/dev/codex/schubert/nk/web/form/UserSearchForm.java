@@ -5,7 +5,12 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR015/FUN009/AUT002/UI222,225,236/SS313,332; PG-D344/PT-USER-HTTP001..010. */
@@ -13,7 +18,8 @@ import org.jspecify.annotations.NullMarked;
 public final class UserSearchForm {
   private static final Set<String> FIELDS = Set.of("username", "role", "state", "page");
   private static final String INVALID = "入力項目を確認してください。";
-  private final Map<String, String> values, issues;
+  private final Map<String, String> values;
+  private final Map<String, String> issues;
   private final int page;
 
   private UserSearchForm(Map<String, String> values, Map<String, String> issues, int page) {

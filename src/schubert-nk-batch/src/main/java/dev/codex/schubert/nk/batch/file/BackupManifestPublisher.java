@@ -33,7 +33,8 @@ public final class BackupManifestPublisher {
   private final Object lock = new Object();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
-  private final long uid, gid;
+  private final long uid;
+  private final long gid;
   private final InspectorEnvironmentPublisher.Io io;
   private final LongSupplier clock;
 
@@ -147,7 +148,8 @@ public final class BackupManifestPublisher {
           guard(started);
           ByteBuffer buffer = ByteBuffer.wrap(content);
           while (buffer.hasRemaining()) {
-            int position = buffer.position(), remaining = buffer.remaining();
+            int position = buffer.position();
+            int remaining = buffer.remaining();
             guard(started);
             int count = writer.write(buffer);
             guard(started);
@@ -189,7 +191,8 @@ public final class BackupManifestPublisher {
                 ByteBuffer buffer = ByteBuffer.wrap(readback);
                 buffer.limit(content.length);
                 while (buffer.hasRemaining()) {
-                  int position = buffer.position(), remaining = buffer.remaining();
+                  int position = buffer.position();
+                  int remaining = buffer.remaining();
                   guard(started);
                   int count = channel.read(buffer);
                   guard(started);

@@ -3,17 +3,25 @@ package dev.codex.schubert.nk.batch.file;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
-import dev.codex.schubert.nk.batch.platform.*;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import org.jspecify.annotations.NullMarked;
 
 /** NK-OPS-001/BAK001/OPS009/UI251; SS341§6.3/343§6.17/SSC133; ISSRET001..008. */
@@ -34,7 +42,9 @@ final class MorningBackupRetention {
     final Mode mode;
     final Optional<BackupManifest> current;
     final Optional<String> currentSha256;
-    final List<String> before, after, deleted;
+    final List<String> before;
+    final List<String> after;
+    final List<String> deleted;
     final SortedMap<String, String> deletedSha256;
     final SortedMap<String, String> protectedNames;
     final SortedMap<String, BackupManifest> kept;
@@ -76,7 +86,8 @@ final class MorningBackupRetention {
   private final BackupArtifactVerifier verifier;
   private final MorningDatabaseSession.Access database;
   private final MaintenanceOwnerFrame.Guard owner;
-  private final long started, thread = Thread.currentThread().threadId();
+  private final long started;
+  private final long thread = Thread.currentThread().threadId();
   private Optional<Result> result = Optional.empty();
 
   MorningBackupRetention(

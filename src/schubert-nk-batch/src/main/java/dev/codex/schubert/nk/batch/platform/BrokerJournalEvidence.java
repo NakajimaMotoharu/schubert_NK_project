@@ -1,13 +1,28 @@
 package dev.codex.schubert.nk.batch.platform;
 
 import com.google.gson.Strictness;
-import com.google.gson.stream.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
-import java.io.*;
+import java.io.IOException;
+import java.io.StringReader;
 import java.math.BigInteger;
-import java.nio.charset.*;
-import java.security.*;
-import java.util.*;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -233,7 +248,10 @@ public final class BrokerJournalEvidence {
     Objects.requireNonNull(began);
     require(bytes.length > 0 && bytes.length <= MAX && bytes[bytes.length - 1] == '\n');
     String text = decode(bytes);
-    boolean nio = false, active = false, started = false, stopped = false;
+    boolean nio = false;
+    boolean active = false;
+    boolean started = false;
+    boolean stopped = false;
     int count = 0;
     var cursors = new HashSet<String>();
     for (String line : text.substring(0, text.length() - 1).split("\n", -1)) {

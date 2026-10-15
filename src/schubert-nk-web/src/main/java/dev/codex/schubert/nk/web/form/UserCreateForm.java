@@ -4,7 +4,13 @@ import dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
 
 /** SCR016/FUN009/AUT002/UI225,236/SS313,314; PG-D345/PT-USER-CREATE001..008. */
@@ -13,7 +19,8 @@ public final class UserCreateForm implements AutoCloseable {
   private static final Set<String> FIELDS =
       Set.of("username", "password", "password_confirmation", "role", "enabled", "operation_token");
   private static final String INVALID = "入力項目を確認してください。";
-  private final String username, role;
+  private final String username;
+  private final String role;
   private final boolean enabled;
   private final UUID operationToken;
   private final char[] password;

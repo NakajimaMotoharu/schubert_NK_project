@@ -6,14 +6,38 @@ import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.question.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import java.sql.*;
-import java.time.*;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationErrorCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Four bounded query projections in a borrowed read-only transaction; no auth grant, commit or JMS.
@@ -250,8 +274,8 @@ public final class QuestionQueryRepository {
           require(r.next());
           long total = number(r, "total");
           if (total > 49_999_950) throw new QuestionQueryException(ResultCode.RESOURCE_LIMIT);
-          int pages = Math.toIntExact(number(r, "pages")),
-              effective = Math.toIntExact(number(r, "effective"));
+          int pages = Math.toIntExact(number(r, "pages"));
+          int effective = Math.toIntExact(number(r, "effective"));
           require(
               total >= 0
                   && pages == Math.max(1, (total + 49) / 50)
@@ -264,8 +288,8 @@ public final class QuestionQueryRepository {
                     && effective == number(r, "effective"));
             if (r.getObject("id") != null) records.add(mapper.read(r));
           } while (r.next());
-          long first = total == 0 ? 0 : (effective - 1L) * 50 + 1,
-              last = Math.min(effective * 50L, total);
+          long first = total == 0 ? 0 : (effective - 1L) * 50 + 1;
+          long last = Math.min(effective * 50L, total);
           require(records.size() == (total == 0 ? 0 : last - first + 1));
           return validate(
               new TypedPayloadValues(
