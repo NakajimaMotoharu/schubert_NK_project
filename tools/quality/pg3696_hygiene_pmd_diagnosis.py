@@ -20,7 +20,7 @@ def server(data):
     import subprocess
     import xml.etree.ElementTree as E
 
-    os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG3696-hygiene-pmd-v1';candidate=b/'runs/PG3692-hygiene-candidate-v1/candidate';out.mkdir();sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+    os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/('runs/'+data.get('staticJob','PG3696-hygiene-pmd-v1'));candidate=b/('runs/'+data.get('candidateJob','PG3692-hygiene-candidate-v1')+'/candidate');out.mkdir();sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
     stage=candidate.parent/'manifest.safe.json';require(sha(stage)==data['candidateManifestSha256'],'actual all849 Checkstyle0/binding proof')
     files=sorted(candidate.glob('src/*/src/main/java/**/*.java'));actual={str(p.relative_to(candidate)):sha(p)for p in files};require(len(actual)==849 and actual==data['sourceSha256'],'exact applied current source bytes, not relabelled old inputs')
     fixed=json.loads((b/'runs/PG3382-static-gate-v1/result/manifest.safe.json').read_bytes());old_path=b/'runs/PG3422-candidate-static-v1/manifest.safe.json';require(sha(old_path)==data['originalStaticManifestSha256'],'actual original fixed diagnostic')
@@ -36,6 +36,14 @@ def server(data):
     counts=dict(Counter(v.get('rule')for v in findings));oldcounts=old['results']['pmd']['ruleCounts'];rule_delta={k:counts.get(k,0)-oldcounts.get(k,0)for k in set(counts)|set(oldcounts)if counts.get(k,0)!=oldcounts.get(k,0)}
     require(actual=={str(p.relative_to(candidate)):sha(p)for p in files}and all(sha(Path(p))==h for p,h in old['auxJarSha256'].items()),'all source and typed auxiliary inputs stable')
     value={'actualExit':0,'productionCandidateSource':data['source'],'sourceSnapshot':data['head'],'sourceFiles':849,'candidateManifestSha256':data['candidateManifestSha256'],'pmd':{'actualExit':r.returncode,'processingErrors':len(errors),'rawFindings':len(findings),'ruleCounts':counts,'ruleCountDeltaFrom3422':rule_delta,'reportSha256':sha(out/'pmd.xml'),'logSha256':sha(out/'pmd.private.log')},'ruleSha256':old['ruleSha256'],'pinnedToolSha256':old['pinnedToolSha256'],'all849AppliedSourceExact':True,'wholeTypedBindingEquivalenceRef':'PG3690/3692 all six actual compiler proofs','auxMeaning':'Original current4856 typed auxiliaries only for semantic-equivalent static diagnostic; NOT new source Main build/native/coverage acceptance','inputsUnchanged':True,'rulesSuppressed':False,'F03Accepted':False,'staticGatePassed':not findings,'formalAccepted':False,'vmActions':0,'startUTC':start,'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    if data.get('includeCheckstyle'):
+        proof=json.loads(stage.read_bytes());require(proof['actualExit']==0 and proof['renamedPrivateSymbols']==190 and proof['changedFiles']==90 and proof['serializedFindingsUnchanged']==63 and proof['normalizedFullSemanticBindingsTreeLiteralsAndPublicAbiIdentical']and proof['allNewFieldsPresentOldFieldsAbsent']and all(m['verifyExit']==0 for m in proof['modules'].values()),'actual full6 private-only positive semantic proof')
+        rule=rules/'checkstyle.xml';jar=b/'runs/PG3382-static-gate-v1/checkstyle-14.3.0-all.jar';require(sha(rule)==old['ruleSha256']['checkstyle.xml']and sha(jar)==old['pinnedToolSha256']['checkstyle-14.3.0-all.jar'],'same exact fixed Checkstyle rule/tool')
+        cmd=list(fixed['checkstyle']['argv']);cmd[cmd.index('-c')+1]=str(rule);cmd[cmd.index('-o')+1]=str(out/'checkstyle.xml');cmd[-1]='@'+str(listing)
+        c=subprocess.run(cmd,capture_output=True,timeout=90);(out/'checkstyle.private.log').write_bytes(c.stdout+c.stderr);cs=E.parse(out/'checkstyle.xml').getroot().findall('.//error');require(c.returncode==len(cs)%256,'genuine fixed Checkstyle exit')
+        value['checkstyle']={'actualExit':c.returncode,'findings':len(cs),'reportSha256':sha(out/'checkstyle.xml')};value['mainApplied']=False;value['all849AppliedSourceExact']=False;value['all849IsolatedCandidateExact']=True;value['wholeTypedBindingEquivalenceRef']=data['candidateJob']+' all6 final normalized actual declarations/type/bounds/capture-identity/tree/literal/public ABI'
+        value['privateRenameDelta']={'actualRawReduction':old['results']['pmd']['violations']-len(findings),'onlyExpectedNamingRulesChanged':set(rule_delta)<={'AvoidFieldNameMatchingMethodName','AvoidFieldNameMatchingTypeName'},'allSourceSha256':actual,'candidateManifestSha256':sha(stage)}
+        require(all(sha(p)==actual[str(p.relative_to(candidate))]for p in files),'all849 byte unchanged through both analyzers')
     (out/'manifest.safe.json').write_text(json.dumps(value,sort_keys=True));value['serverManifestSha256']=sha(out/'manifest.safe.json');print(json.dumps(value))
 
 
