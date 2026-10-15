@@ -1,4 +1,6 @@
 """One reserved new activation; consume full PG3106 post and preserve native16."""
+import ast
+import hashlib
 import inspect
 import json
 import pg2984_current_resume_once as previous
@@ -7,7 +9,7 @@ from pg3120_prepared_browser_observer import namespace, SOURCE, BOM
 from pg1446_current_cold_stage import W
 from pg2360_current_completed_resume_once import body as proven_body
 
-SLOT = 'pg3122-prepared-browser-resume-once-v1'
+SLOT = 'pg3144-current-parent-receipt-resume-once-v1'
 
 
 def body():
@@ -36,7 +38,13 @@ def body():
 def payload(hashes):
     ns = {**previous.__dict__, 'post': post, 'body': body}
     exec(compile(inspect.getsource(previous.payload), '<complete all11 native16 Root-before>', 'exec'), ns)
-    return ns['payload'](hashes)
+    raw = ns['payload'](hashes)
+    proof = json.loads((W / post.SLOT / 'manifest.safe.json').read_bytes())
+    receipt = (W / 'pg3034-current-runtime-retirement-tools-v1/pg3034_parent_receipt.py').read_text()
+    if hashlib.sha256(receipt.encode()).hexdigest() != proof['toolHashes']['pg3034_parent_receipt.py']:
+        raise ValueError('exact receipt used by actual all11 post required')
+    assignment = next(node for node in ast.parse(raw).body if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == 'RECEIPT' for target in node.targets))
+    return raw.replace(ast.get_source_segment(raw, assignment), 'RECEIPT=' + repr(receipt), 1)
 
 
 def main():

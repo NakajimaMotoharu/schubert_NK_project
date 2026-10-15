@@ -9,7 +9,7 @@ from pg1446_current_cold_stage import W, P, SSH
 from pg1674_critical_management_gate import management_gate
 import pg1191_chr_socks_owner as socks_owner
 from pg2900_network_completed_owner_a01 import GUARD
-from pg3138_browser_cohort_ready import require_ready, classpath, JAVA
+from pg3138_browser_cohort_ready import require_ready, classpath, JAVA, SLOT as READY
 from pg3120_prepared_browser_observer import SOURCE
 
 SLOT = 'pg3140-browser-business-actual-v1'
@@ -46,7 +46,7 @@ def main():
     with management_gate(P / 'current-management-critical.lock'):
         before = subprocess.check_output(SSH + ['sudo', '-n', 'python3', '-B', '-'], input=raw.encode(), timeout=25)
         env = {**os.environ, 'PLAYWRIGHT_BROWSERS_PATH': '/home/mini/codex/project1/work/characterization-tools/playwright-browsers', 'PLAYWRIGHT_HOST_PLATFORM_OVERRIDE': 'ubuntu24.04-x64', 'LD_LIBRARY_PATH': '/home/mini/codex/project1/work/characterization-tools/root/usr/lib/x86_64-linux-gnu'}
-        command = [str(JAVA / 'java'), '-cp', classpath(W / 'pg3138-browser-cohort-ready-v1/classes'), 'dev.codex.schubert.characterization.NativeNkBrowserBusinessCohort', 'run', str(out / 'cases')]
+        command = [str(JAVA / 'java'), '-cp', classpath(W / READY / 'classes'), 'dev.codex.schubert.characterization.NativeNkBrowserBusinessCohort', 'run', str(out / 'cases')]
         with (out / 'browser.private.log').open('xb') as log:
             result = subprocess.run(command, stdout=log, stderr=log, env=env, timeout=600)
         after = subprocess.check_output(SSH + ['sudo', '-n', 'python3', '-B', '-'], input=raw.encode(), timeout=25)

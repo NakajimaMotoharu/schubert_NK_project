@@ -16,7 +16,7 @@ def body():
 
 
 def main():
-    raw = inspect.getsource(previous.main).replace('pg2984-current-fresh-resume-once-v1', 'pg3122-prepared-browser-resume-once-v1')
+    raw = inspect.getsource(previous.main).replace('pg2984-current-fresh-resume-once-v1', 'pg3144-current-parent-receipt-resume-once-v1')
     ns = {**previous.__dict__, 'SLOT': SLOT, 'body': body}
     exec(compile(raw, '<fresh actual browser-cohort Root binding>', 'exec'), ns)
     return ns['main']()

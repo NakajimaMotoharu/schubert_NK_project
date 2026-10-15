@@ -9,7 +9,7 @@ from pg1446_current_cold_stage import W, P
 from pg1674_critical_management_gate import management_gate
 
 ROOT = Path(__file__).resolve().parents[2]
-SLOT = 'pg3138-browser-cohort-ready-v1'
+SLOT = 'pg3138-browser-cohort-ready-v2'
 JAVA = Path('/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin')
 SHARED = [
     'program/characterization/tests/java/dev/codex/schubert/characterization/CurrentCharacterizationTest.java',

@@ -11,7 +11,7 @@ SLOT = 'pg3132-browser-resume-rows-v1'
 def rebind(raw, activation, started):
     old_once = json.loads((W / 'pg2984-current-fresh-resume-once-v1/manifest.safe.json').read_bytes())
     for old, new in [
-        (previous.SLOT, SLOT), ('pg2984-current-fresh-resume-once-v1', 'pg3122-prepared-browser-resume-once-v1'),
+        (previous.SLOT, SLOT), ('pg2984-current-fresh-resume-once-v1', 'pg3144-current-parent-receipt-resume-once-v1'),
         ('d10735e678e5053c0c96c55a42f65f2302132cfae902edd81dffbc2275c4c4ac', 'f041e0b3318db88e7b94cd40a23d28ba7e630d405e1b13f9ae397f03a1312f24'),
         ('0ac69fb7-3cb7-4d33-b2d9-4733fba5a4cf', activation), (old_once['startedUTC'], started),
     ]:
@@ -26,7 +26,7 @@ def rebind(raw, activation, started):
 
 def payload():
     live = json.loads((W / 'pg3124-browser-resume-live-binding-v1/manifest.safe.json').read_bytes())
-    once = json.loads((W / 'pg3122-prepared-browser-resume-once-v1/manifest.safe.json').read_bytes())
+    once = json.loads((W / 'pg3144-current-parent-receipt-resume-once-v1/manifest.safe.json').read_bytes())
     if live['actualExit'] != 0 or once['actualExit'] != 0 or live['productionSource'] != previous.SOURCE:
         raise ValueError('actual new reserved Root identity required')
     return rebind(previous.payload(), live['binding']['activation'], once['startedUTC'])

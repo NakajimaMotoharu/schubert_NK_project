@@ -46,7 +46,7 @@ class WholeBrowserRoot(unittest.TestCase):
             for old_value in ['pg2984-current-fresh-resume-once-v1', 'd10735e678e5053c0c96c55a42f65f2302132cfae902edd81dffbc2275c4c4ac']:
                 self.assertFalse(old_value in raw, old_value)
             self.assertTrue('f041e0b3318db88e7b94cd40a23d28ba7e630d405e1b13f9ae397f03a1312f24' in raw)
-        for literal in ['len(manifest_copy)==16', "'native'", 'ab3fcad3e4f842562c7cd4cd77c5966b81ffba6534cf153c549cc1a5588aa4e2', binding['activation'], 'pg3122-prepared-browser-resume-once-v1', start]:
+        for literal in ['len(manifest_copy)==16', "'native'", 'ab3fcad3e4f842562c7cd4cd77c5966b81ffba6534cf153c549cc1a5588aa4e2', binding['activation'], 'pg3144-current-parent-receipt-resume-once-v1', start]:
             self.assertTrue(literal in full, literal)
         for obsolete in ['native_before_anchor', 'pg2964-retained-full-pair-proof-v1', 'len(manifest)==10']:
             self.assertFalse(obsolete in full, obsolete)

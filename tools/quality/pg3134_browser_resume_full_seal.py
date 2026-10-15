@@ -12,7 +12,7 @@ SLOT = 'pg3134-browser-resume-full-seal-v1'
 NATIVE = r'''
 require(type(before)is dict and set(before)=={'backup','configuration','extraDurable','originals','pid1','rows','runtime','startup','unitFilesActual','units','native'})
 require(hashlib.sha256(json.dumps(before['native'],sort_keys=True).encode()).hexdigest()=='ab3fcad3e4f842562c7cd4cd77c5966b81ffba6534cf153c549cc1a5588aa4e2')
-copied=BASE/'pg3122-prepared-browser-resume-once-v1/native-before-private'
+copied=BASE/'pg3144-current-parent-receipt-resume-once-v1/native-before-private'
 manifest_copy=json.loads((copied.parent/'native-before-manifest.private.json').read_bytes())
 expected_copy={str(pathlib.Path(k).relative_to('/run/schubert-nk/pt-coverage')):{'sha256':v['sha256'],'bytes':v['metadata'][6]}for k,v in before['native'].items()if k.endswith('.exec')}
 require(manifest_copy==expected_copy and len(manifest_copy)==16)
@@ -26,7 +26,7 @@ def rebind(raw, binding, started):
     raw = constant(raw, 'GUARD', 'NEW_TERMINAL_GUARD')
     raw = constant(raw, 'ORACLE', 'NEW_ALL24_ORACLE')
     old_once = json.loads((W / 'pg2984-current-fresh-resume-once-v1/manifest.safe.json').read_bytes())
-    for old, new in [(previous.SLOT, SLOT), ('pg2984-current-fresh-resume-once-v1', 'pg3122-prepared-browser-resume-once-v1'), ('d10735e678e5053c0c96c55a42f65f2302132cfae902edd81dffbc2275c4c4ac', 'f041e0b3318db88e7b94cd40a23d28ba7e630d405e1b13f9ae397f03a1312f24')]:
+    for old, new in [(previous.SLOT, SLOT), ('pg2984-current-fresh-resume-once-v1', 'pg3144-current-parent-receipt-resume-once-v1'), ('d10735e678e5053c0c96c55a42f65f2302132cfae902edd81dffbc2275c4c4ac', 'f041e0b3318db88e7b94cd40a23d28ba7e630d405e1b13f9ae397f03a1312f24')]:
         raw = raw.replace(old, new)
     begin = "require(type(before)is dict and set(before)=={'backup','configuration','extraDurable','originals','pid1','rows','runtime','startup','unitFilesActual','units'})"
     start = raw.index(begin)
@@ -49,7 +49,7 @@ def rebind(raw, binding, started):
 
 
 def payload(binding):
-    once = json.loads((W / 'pg3122-prepared-browser-resume-once-v1/manifest.safe.json').read_bytes())
+    once = json.loads((W / 'pg3144-current-parent-receipt-resume-once-v1/manifest.safe.json').read_bytes())
     if once['actualExit'] != 0 or once['sourceQualified'] is not True:
         raise ValueError('actual new reserved Root required')
     return rebind(previous.payload(binding), binding, once['startedUTC'])
