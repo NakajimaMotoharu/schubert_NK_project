@@ -13,6 +13,14 @@ from pg3258_statement_group_full_six import ROOT, SOURCE
 import pg3266_header_protocol_regression as target
 
 
+def public_result_summary(result):
+    # The server deliberately withholds detailed coverage from stdout. Its
+    # original manifest/XML, not this projection, is the independent authority.
+    return {k: result[k] for k in ['tests', 'suites', 'mainClasses', 'staticIssues',
+                                 'FESFlakyNotRun', 'startUTC', 'endUTC',
+                                 'allProtocolMainAndResourcesSameBytes']}
+
+
 def main():
     os.umask(0o077)
     out = W / 'pg3266-header-protocol-regression-v1'
@@ -54,7 +62,7 @@ def main():
         json.dump(value, stream, sort_keys=True)
     print(json.dumps({k: v for k, v in value.items() if k != 'result'}))
     if code == 0:
-        print(json.dumps({k: value['result'][k] for k in ['tests', 'suites', 'mainClasses', 'coverage', 'staticIssues', 'FESFlakyNotRun', 'startUTC', 'endUTC', 'allProtocolMainAndResourcesSameBytes']}))
+        print(json.dumps(public_result_summary(value['result'])))
     return code
 
 
