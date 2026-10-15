@@ -41,7 +41,10 @@ def main():
             '-L', '127.0.0.1:22224:127.0.0.1:22224', f'mini@{HOST}']
     save('reservation.safe.json', {'parent': fingerprint(os.getpid()), 'purpose': 'NEW_ONLY_FIXTURE_MANAGEMENT_FORWARD', 'port': 22224, 'argvSha256': hashlib.sha256(b'\0'.join(v.encode() for v in ['ssh', *args]) + b'\0').hexdigest(), 'guestOperations': 0})
     child = pexpect.spawn('ssh', args, encoding='utf-8', timeout=20, echo=False)
-    save('spawned.safe.json', {'observedChild': fingerprint(child.pid), 'authenticationCompleted': False, 'guestOperations': 0})
+    # exec may still be changing argv immediately after pexpect.spawn. Record
+    # allocation provenance, not an unearned authenticated SSH fingerprint.
+    allocated = (Path('/proc') / str(child.pid) / 'stat').read_text().rpartition(')')[2].split()
+    save('spawned.safe.json', {'pid': child.pid, 'ticks': int(allocated[19]), 'ppid': int(allocated[1]), 'authenticationCompleted': False, 'guestOperations': 0})
     stopping = False
     def stop(_signal, _frame):
         nonlocal stopping

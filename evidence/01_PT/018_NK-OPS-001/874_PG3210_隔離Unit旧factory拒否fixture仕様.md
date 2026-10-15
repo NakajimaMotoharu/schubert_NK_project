@@ -31,3 +31,9 @@ fixture内の業務Unitはbasic隔離の停止を維持する。負例Unit名が
 純3210二試験で全Primary field変異/全backing writable・bool/extra QEMUを拒否、新COW path/port/2CPU4GiB/basic mask/無RAMrestoreを固定。全Python static0。実preserve/bootは別資格、起動だけでPGPTを加点しない。全予定negative case/独立witness/同Main-member CRC-session/原本DBBackupの全24限定不変/全Unit-kernel/全actor-client-advisory-flock/forward/fixture owned poweroff・disk解放までの安全終端を記録して閉じる。原VMは保持する。
 
 event0820で開始見積 .75/2.5/6週次共有pp（P017-01.03=.65/2/5、P017-06=.1/.5/1）を固定、環境費込み。過去N11移設/既full成功/原-v3へ二重計上しない。実費/実N-Tは不明ならnull。実現不能な候補はその範囲だけ保留し独立host作業へ進む。正式1964/53・工数null・QA051final保留、残>1継続/<=3保全/<=1停止・追加reset/課金0・副担当起動0を維持。
+
+## 環境実績（2026-10-15 13:38JST）
+
+208acafec/3210stage207b1a92、preserve42456/boot36105全actual0。fixtureQEMU445092/t3906100/argvf67196ed、new bootdd710ec8、全十Unit/Job/Main/Control0、別ownedforward64142/SSH171602-t3913396/local22224を実認証。Primary4599/boot79a/22222は不変更。JDK25.0.4/busctl、旧filesystem currentPG2654とapproval0400root0/hash7c22aaffをRO確認。これはLoaded a9を置いた正常配備ではなく、継承したforeign dataに対する独立negative fixture。旧042のexec/nativeは一切合算しない。
+
+追加予定Test ID=PT-OPS-LFACT001～007。001 fresh owned、002 fresh owned epoch、003 resume owned、004 resume owned epoch、005 backup resume、006 fresh外側alias、007 resume外側alias。全て元仕様の厳密release拒否を検査し、業務callbackは呼ばれた時点でFAIL。各caseで独立inotify read witnessとD-Bus Manager GetUnitの監視barrier/no StartUnit-StopUnit等・DB/lock/permit不変を結合する。単なるIOExceptionやcoverage hitだけでは合格にしない。現caseコードはformatter済み未compile/未実行、環境成功をPT合格へ加算しない。
