@@ -1,5 +1,13 @@
 # PT・IT試験観点詳細設計
 
+## SSC-285：署名拒否前39FDと最終emit閉包
+
+QA047/BUG1305/YKT1071：最終Java/Python/fixture実出力のboot/source/BOM/signature stem/全Rootbindingを独立oracleで確認する。composer本文だけの成功・同じ旧値を持つfixtureの相互一致を資格にせず、旧b2d6/pg2654・未知/欠落/null/余剰/誤署名をM/A/DB/Ref取得前に拒否する。正常ABI/署名/実scopeに加え、この署名拒否がDB/Ref/サービス停止へ進まないことを独立に確認する。
+
+回収PTは343の0～36/43/128閉集合39FD・全target/全9metadata/flags/linked path/ACL/OFD・子0/DB0/唯一M-Aと当host solegateを具体的fixtureにする。29/32共有/runの二時刻非減少だけを旧→freshへ限定し、逆行/上限超/他FD変異/未知socket/新child/DB・peer不整合を拒否する。fresh二読/耐久保存/各pidfdとTERM直前再照合・一回予約/15秒終端30秒reap・queued同inode取得の順序を正常/拒否/中断で確認、signal未発行の拒否と発行後未回収を分離する。
+
+実後条件はJava/全FD/管理DB-advisory-MA/bus0・四ordinary/全TCP/全24/設定32/状態18/187/原本Backup/runtime/startup/native保持・新Ref正常返却・別wholepost。旧UNKNOWN/143を正常closeへ合算0。既に成立した当source親DONE10/全24/A01は再演せず証跡参照、未実施の正常ownedstop/nativeだけを新only版で閉じる。PG/PT結果をIT/ST完了にしない。
+
 ## SSC-284（PG/PT、2026-10-14、reload済み保持11FD・shared/runと宣言viewの具体化）
 
 実最終283をlocal及びorigin/mainで確認。BUG1232～1235/YKT998～1001/QA047既承認内、RD/UI・業務結果・Root1800秒/Unit期限不変更、新QA不要。current Main3b7f/PG2126/BOM62213f・bootb2d6の当管理Java101019/t1808679/101FD、唯一Ref101050/t1808864/11FD、sole管理DB101048/PG998-native-stage/idle-TX/71419602、親M-A/同peer双方向TCPを新fullproofへ束縛する。sudo101017/他actor/業務Unitはsignal対象外。独立2342 proof a8eb610cff840dc9be93eb83f59d369097ec145d743c92e62d1e5344a41147ff、全24row/187/原本Backup/native/状態18/署名decl tripleを保持、partial runtime inode4223/4224・644bytes/SHA888ee856を全9metadataとACL/linked path/readonly flagsで照合。旧2332のUNKNOWN/143を成功に補記しない。
