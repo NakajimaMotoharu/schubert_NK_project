@@ -1,7 +1,7 @@
 """Actual current composite seal parent eighteen fields, no fabricated receipt."""
 import inspect
 import pg3478_outbox_parent_projection as template
-import pg3592_current_browser_composite_seal as composite
+import pg3650_current_browser_composite_seal_v2 as composite
 from pg3564_current_browser_resume_sources import SOURCE
 
 SLOT='pg3594-current-browser-parent-projection-v1'

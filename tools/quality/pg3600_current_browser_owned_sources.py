@@ -3,7 +3,7 @@ import inspect
 import pg3490_outbox_owned_sources as original
 import pg3520_outbox_owned_sources_v2 as successful
 import pg3582_current_browser_acceptance as acceptance
-import pg3592_current_browser_composite_seal as composite
+import pg3650_current_browser_composite_seal_v2 as composite
 
 SOURCE=acceptance.SOURCE
 BOM=acceptance.BOM

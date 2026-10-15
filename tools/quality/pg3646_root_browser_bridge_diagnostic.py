@@ -1,6 +1,5 @@
 """BUG1310: strict canonical row hashes, no mapping values interpreted as counts."""
 import collections
-import datetime
 import hashlib
 import inspect
 import json
