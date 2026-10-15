@@ -13,3 +13,7 @@ Inspectorは二つのgenerationごとにclosing/terminalの同sessionIdSHA/start
 純3（二pairのliteral、欠落・重複・foreign session/start/時刻逆順・件数/型、最終server/transport namespace）は成功。初回工具TDDでPython chained inequalityの件数誤りをself-reviewし、19/21の明示負系を追加して是正。実catalog/採取/server集計はRoot→Browser→正常stop/post後の未実施。
 
 公開はsession識別子をSHA256化しsemantic counter/hash/coverage座標だけを保存する。私有exec/DB/credential/token/session原値をGitへ出さない。formal1964/53・17/190・工数null・QA051final保留を維持する。
+
+## 実catalog/停止後条件
+
+3604stage/stop・3606独立全postは420763902固定で全0、全24二読/全資源0/native物理34、after e12ce6ad。3630/60484は20:54:59～20:55:00Z actual0、新10point、before28copy・同Root元budget・Inspector/Backup実PID1窓を確認。3632は次の未実行。新catalogのexcludedHistorical24は新世代10だけからの除外で、前current同source cohortの10を累積再資格することとは別である。結果へexclusionScope=SECOND_COHORT_ONLY/eligibleCurrentSourceCohorts=2/historicalSourceNativeImported=falseを明示する。

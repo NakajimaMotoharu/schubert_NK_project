@@ -41,6 +41,7 @@ def server():
     replacement=inspect.getsource(inspector_pairs)+"\npairs=inspector_pairs(v['selected'],sessions);early_indices=set()\nfor number,(closing_index,early_index)in enumerate(pairs):\n check_point=subprocess.run([str(J/'java'),'-cp',cp,'NativePointDominance',str(streams[early_index]),str(streams[closing_index])],capture_output=True,timeout=30)\n require(check_point.returncode==0 and not check_point.stderr and check_point.stdout==b'sameSessionProbeMonotonic=true;latestClosingOnly=true\\n')\n (O/('inspector-point-dominance-'+str(number)+'.private.log')).write_bytes(check_point.stdout);early_indices.add(early_index)\nstreams=[p for i,p in enumerate(streams)if i not in early_indices];require(len(streams)==18)\n"
     raw=raw[:start]+replacement+raw[end:]
     raw=raw.replace("'currentNativeStreams':9","'currentNativeStreams':18").replace("'validatedNativePoints':10","'validatedNativePoints':20")
+    raw=raw.replace("'excludedHistorical':v['excludedHistorical']","'excludedHistorical':v['excludedHistorical'],'exclusionScope':'SECOND_COHORT_ONLY','eligibleCurrentSourceCohorts':2,'previousSameSourceNativeRequalified':True,'historicalSourceNativeImported':False")
     extractor=transport.prior.previous.entry().__globals__['coordinates']
     complete='import xml.etree.ElementTree as ET\nCOUNTERS=("LINE","METHOD","CLASS","BRANCH")\nARCHIVE_SHA="'+('a'*64)+'"\n'+inspect.getsource(extractor)+'\n'+raw
     if check(complete,'<two current cohorts full native qualification>'):raise ValueError('complete server globals required')
