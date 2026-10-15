@@ -72,7 +72,42 @@ def independent_server():
 
 
 def native_build(*args):
-    return adapted(template.native_build, {})(*args)
+    full, original, capsule, *digests = args
+    if any(full.get(k) != v for k, v in {
+            'productionSource': SOURCE, 'tests': 3707, 'suites': 543, 'mainClasses': 1643,
+            'FESFlakyNotRun': 0, 'staticSixModules': 0}.items()):
+        raise ValueError('actual independent3707/543 full required')
+    # BUG1300: transform template code only, never nested actual input dictionaries.
+    old = json.loads((W / 'pg3374-oracle-boundary-full-qualified-v1/manifest.safe.json').read_bytes())
+    related.base.require(old['actualExit'] == 0 and old['result']['tests'] == 3706
+                         and old['result']['suites'] == 542, 'genuine old template authority')
+    seed = previous.native_build(old['result'], original, capsule, *digests)
+    tree = ast.parse(seed)
+    bindings = {}
+    body = []
+    for node in tree.body:
+        if (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+                and node.targets[0].id in ['FULL', 'ORIGINAL_FULL', 'CAPSULE_FULL']):
+            bindings[node.targets[0].id] = ast.literal_eval(node.value)
+        else:
+            body.append(node)
+    related.base.require(bindings == {'FULL': old['result'], 'ORIGINAL_FULL': original,
+                                      'CAPSULE_FULL': capsule}, 'exact three removable data bindings')
+    tree.body = body
+    raw = rebase(ast.unparse(tree), 'PG3372', 'PG3398', 3706, 3707)
+    raw = raw.replace('PG3376', 'PG3402').replace('PG3402-native-join-v1', 'PG3402-native-join-v2')
+    tree = ast.parse(raw)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Constant) and type(node.value) is int and node.value == 542:
+            node.value = 543
+    raw = ast.unparse(ast.fix_missing_locations(tree))
+    raw = ('FULL=' + repr(full) + '\nORIGINAL_FULL=' + repr(original)
+           + '\nCAPSULE_FULL=' + repr(capsule) + '\n' + raw)
+    related.base.require(check(raw, '<native3707/543 exact data after template>') == 0,
+                         'complete native namespace')
+    compile(raw, '<native3707/543 unchanged actual metadata>', 'exec')
+    return raw
 
 
 def native_summary(value):
@@ -88,7 +123,14 @@ def qualify():
 
 
 def native():
-    return adapted(template.native, {'validate': validate, 'native_build': native_build, 'native_summary': native_summary})()
+    raw = inspect.getsource(template.native)
+    for old, new in RENAMES:
+        raw = raw.replace(old, new)
+    raw = raw.replace('pg3402-oracle-boundary-native-qualified-v1', 'pg3402-oracle-boundary-native-qualified-v2')
+    namespace = {**template.__dict__, 'validate': validate, 'native_build': native_build,
+                 'native_summary': native_summary}
+    exec(compile(raw, '<native3707 new-only v2 transport>', 'exec'), namespace)
+    return namespace['native']()
 
 
 if __name__ == '__main__':

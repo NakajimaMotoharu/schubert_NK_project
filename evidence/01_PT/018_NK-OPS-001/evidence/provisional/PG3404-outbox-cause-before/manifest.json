@@ -1,0 +1,101 @@
+{
+  "run": "PG3404-outbox-cause-before-v2",
+  "actualExit": 0,
+  "interpretation": "DEFECT_REPRODUCED_NOT_PRODUCTION_PASS",
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "testId": "PT-OPS-CAUSE3404-001",
+  "bug": "BUG1299",
+  "ykt": "YKT1065",
+  "originalWholeManifestSha256": "18fff60bb3476464160e1fe181bc281e96f5297172ac5b68e871460e9354e8fe",
+  "originalApiJarSha256": "4ba76204e2bbd2a30402daff0a316d07973b5646fc78af029086005bb169dda6",
+  "originalClassSha256": "6426e7d700427301885980bab9e77f38543c81b8144bd381678d95eb53f5bb1c",
+  "canarySourceSha256": "a7d95e63d150ca6b950ac377cdb1604e4a08c8a668f94783fe52e3139c950a20",
+  "compileExit": 0,
+  "cases": [
+    {
+      "case": "acyclic",
+      "expected": false,
+      "actual": false,
+      "timedOut": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "seconds": 0.11629607999930158,
+      "stdoutSha256": "240414454f255d6a942e53043e9fb76058aa3fdf35575050331e97d51e0a015d"
+    },
+    {
+      "case": "direct",
+      "expected": true,
+      "actual": true,
+      "timedOut": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "seconds": 0.11681102799775545,
+      "stdoutSha256": "e8b4820165409e32506f246c956d5ef9636ef3b0a9cbfae7ea73265b5134817f"
+    },
+    {
+      "case": "cause-cycle",
+      "expected": false,
+      "actual": null,
+      "timedOut": true,
+      "exit": 143,
+      "ownedChildReaped": true,
+      "seconds": 3.078741606994299,
+      "stdoutSha256": "6d900af6fae3968c99925d3a575e75385b27298ccc762deb4cd215ca638de11a"
+    },
+    {
+      "case": "mixed-cycle",
+      "expected": false,
+      "actual": null,
+      "timedOut": true,
+      "exit": 143,
+      "ownedChildReaped": true,
+      "seconds": 3.0890597489924403,
+      "stdoutSha256": "6f29e38efb1c14e5f81f3cb99ea7f099a76f38a7c1c48156bc88df8727248e17"
+    },
+    {
+      "case": "alternate-edge",
+      "expected": true,
+      "actual": false,
+      "timedOut": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "seconds": 0.1110420460026944,
+      "stdoutSha256": "a8d13b133e3a68cacfeafa808aa541bf83203957c474907fa62546530f33f60c"
+    },
+    {
+      "case": "reachable-through-cycle",
+      "expected": true,
+      "actual": null,
+      "timedOut": true,
+      "exit": 143,
+      "ownedChildReaped": true,
+      "seconds": 3.0816686039906926,
+      "stdoutSha256": "374c0416f21a4dacb5ea3d1ba67c6d5163b4f784a38d0a9abdfb5a69c393a63d"
+    },
+    {
+      "case": "suppressed-only",
+      "expected": false,
+      "actual": false,
+      "timedOut": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "seconds": 0.11786387999018189,
+      "stdoutSha256": "4611c2580a84a75ca54b8340d8aee65e0226fae4a3e6dec8d5ab441369e32ad1"
+    },
+    {
+      "case": "message-only",
+      "expected": false,
+      "actual": false,
+      "timedOut": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "seconds": 0.11834757898759563,
+      "stdoutSha256": "13de7c245645cdba45e9a678519f9b83fcae0dbf8f35de1bbb32eb98f33e669d"
+    }
+  ],
+  "newProductionPtCredit": 0,
+  "vmActions": 0,
+  "brokerActions": 0,
+  "dbActions": 0,
+  "formalUpdated": false
+}
