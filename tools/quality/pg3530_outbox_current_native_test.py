@@ -1,5 +1,6 @@
 import copy
 import json
+import re
 import unittest
 import pg3530_outbox_current_native_catalog as catalog
 import pg3532_outbox_current_native_qualified as qualified
@@ -44,8 +45,19 @@ class CurrentNativeBoundaries(unittest.TestCase):
         for value in ['PG2798','PG2908','nativeQualifiedFull','qualificationInputs']:
             self.assertNotIn(value,raw)
         for value in ['pg3530-outbox-current-native-catalog-v1','pg3414-outbox-full-qualified-v1',
-                      'PG3532-native-input-v1.tar',"len(catalog['selected'])!=10"]:
+                      'PG3532-native-input-v3.tar',"len(catalog['selected'])!=10"]:
             self.assertIn(value,source)
+
+    def test_final_server_transport_tuple_and_saved_input_not_renamed(self):
+        server=qualified.server();transport=qualified.source()
+        pattern=r'PG3532-native-input-v[0-9]+\.tar'
+        self.assertEqual({'PG3532-native-input-v3.tar'},set(re.findall(pattern,server)))
+        self.assertEqual(set(re.findall(pattern,server)),set(re.findall(pattern,transport)))
+        self.assertIn("original=W/'pg3532-outbox-current-native-qualified-v1'",transport)
+        self.assertIn("out=W/'pg3532-outbox-current-native-qualified-v3'",transport)
+        self.assertNotIn("r=subprocess.run(SSH+['sudo','-n','cat'",transport)
+        for value in ['PG3532-native-input-v1.tar','PG3532-native-input-v2.tar','PG3532-native-v1','PG3532-native-v2']:
+            self.assertNotIn(value,server+transport)
 
 
 if __name__=='__main__':unittest.main()
