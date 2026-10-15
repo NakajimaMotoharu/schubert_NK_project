@@ -3,6 +3,7 @@ import ast
 import datetime
 import hashlib
 import json
+import inspect
 import os
 from pathlib import Path
 import subprocess
@@ -12,8 +13,9 @@ import pg3428_vm_candidate_preflight_readonly as identity
 from pg1446_current_cold_stage import W,P,SSH
 from pg1674_critical_management_gate import management_gate
 from pg3520_outbox_owned_sources_v2 import SOURCE,BOM
+import pg3559_preservation_schema_contract as schema
 
-SLOT='pg3556-current-stopped-readonly-v1'
+SLOT='pg3556-current-stopped-readonly-v2'
 
 
 def payload():
@@ -27,7 +29,7 @@ def payload():
     require=post['actualExit']==0 and post['productionSource']==SOURCE and post['allActorGone']and post['allClientAdvisoryFlock0']
     if not require:raise ValueError('actual current normal stop whole post required')
     catalog=json.loads((W/'pg3530-outbox-current-native-catalog-v1/manifest.safe.json').read_bytes())
-    header='import stat\nAFTER_SHA='+repr(post['proofHashes']['after.private.json']['sha256'])+'\nCATALOG='+repr(catalog)+'\n'
+    header='import stat,re\nfrom pathlib import PurePosixPath\nCOUNTS='+repr(schema.COUNTS)+'\n'+inspect.getsource(schema.preservation_trees)+'\nAFTER_SHA='+repr(post['proofHashes']['after.private.json']['sha256'])+'\nCATALOG='+repr(catalog)+'\n'
     raw=header+initial+'\n'+helpers+'\n'+BODY
     if check(raw,'<fresh current stopped read-only>'):raise ValueError('complete emitted readonly exports required')
     compile(raw,'<fresh existing current stopped VM>','exec');return raw
@@ -37,7 +39,7 @@ BODY=r'''
 os.umask(0o077)
 def require(value):
  if not value:raise ValueError('fresh current stopped preservation refused')
-base=Path('/var/lib/pgpt-s1-preservation');save=base/'pg3556-current-stopped-readonly-v1';require(not os.path.lexists(save))
+base=Path('/var/lib/pgpt-s1-preservation');save=base/'pg3556-current-stopped-readonly-v2';require(not os.path.lexists(save))
 after_raw=(base/'pg3520-native-stop-v1/after.private.json').read_bytes();require(hashlib.sha256(after_raw).hexdigest()==AFTER_SHA)
 expected=json.loads(after_raw);require(len(expected['rows'])==24 and len(expected['units'])==10)
 units={}
@@ -66,8 +68,8 @@ for line in r.stdout.splitlines():
 require(tables==expected['rows']and meta['clients']==meta['advisory']==0)
 runtime=tree(Path('/run/systemd/system'));startup=tree(Path('/run/schubert-nk/startup'))
 require(runtime==expected['runtime']and startup==expected['startup'])
-for key in ['backup','originals','extraDurable']:
- for path,item in expected[key].items():
+for category,items in preservation_trees(expected):
+ for path,item in items.items():
   p=Path(path);require(metadata(p)==item['metadata'])
   if item.get('sha256')is not None:require(hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'])
 native=tree(Path('/run/schubert-nk/pt-coverage'));selected={v['relative']:v for v in CATALOG['selected']}
