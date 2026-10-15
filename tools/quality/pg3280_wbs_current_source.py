@@ -102,12 +102,48 @@ def fetch_fixed(name, target):
     target.chmod(0o600)
 
 
+def runtime_stage_proofs():
+    # Historical executions on THIS source, not current live capabilities. Do
+    # not replay them to fill a management binding, or transfer old-source A01.
+    definitions = {
+        'parent': ('pg3130-browser-resume-terminal-v1', ['genuineParentDone', 'genuinePid1StartDone', 'genuineRootDone', 'newActivationSameRunCutoff', 'normalUnit0or10']),
+        'full': ('pg3134-browser-resume-full-seal-v1', ['currentFourOwnedLive', 'sqlOracleQualified']),
+        'browser': ('pg3184-browser-business-actual-v3', ['sameFourOrdinaryOwnersBeforeAfter', 'all24IndependentPost']),
+        'stop': ('pg3156-browser-business-owned-post-v1', ['all24UnchangedTwice', 'allActorGone', 'allClientAdvisoryFlock0', 'allTenUnitsKernelEmpty', 'whole187SignedArtifactBytesVerified', 'normalCurrentOwnedStopScopesSealed']),
+        'retired': ('pg3198-browser-runtime-retirement-post-v1', ['all24UnchangedTwice', 'allActorGone', 'allClientAdvisoryFlock0', 'allTenUnitsKernelEmpty', 'whole187SignedArtifactBytesVerified', 'normalCurrentRetirementScopesSealed', 'exactRuntimeEntryRetired'])}
+    records = {}
+    for label, (slot, flags) in definitions.items():
+        path = W / slot / 'manifest.safe.json'; data = read(path)
+        require(type(data['actualExit']) is int and data['actualExit'] == 0 and data['productionSource'] == SOURCE,
+                'actual same-source runtime stage authority required')
+        require(all(data[k] is True for k in flags), 'complete exact runtime stage flags required')
+        record = {'source': SOURCE, 'run': slot, 'receiptSha256': sha(path.read_bytes()),
+                  'actualExit': 0, 'verifiedFlags': flags, 'currentLiveAuthority': False}
+        if label == 'parent':
+            require(data['completionCode'] == 10 and data['completionOutcome'] == 'WARNING'
+                    and 0 < data['elapsedSeconds'] < 1800, 'actual genuine parent10 inside original budget required')
+            record.update(completionCode=10, completionOutcome='WARNING', elapsedSeconds=data['elapsedSeconds'],
+                          managerExitCodeObserved=data['managerExitCodeObserved'])
+        elif label == 'full':
+            require(data['signedArtifacts'] == 187, 'actual all187 signed artifacts required')
+            record['signedArtifacts'] = 187
+        elif label == 'browser':
+            tls = data['independentNormalTlsBeforeAfter']
+            require(data['plannedCases'] == data['passedCases'] == 12
+                    and tls['normalChainAndIpSanValidated'] is True and tls['sameOwnedCaddyListener'] is True,
+                    'actual finite12 and independent owned TLS required')
+            record.update(finiteBrowserCases=12, independentOwnedTls=True, fullChrA01=False)
+        records[label] = record
+    return records
+
+
 def prepare():
     os.umask(0o077)
     require(not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT), 'fixed clean source required')
     full = read(W / 'pg3276-header-group-full-qualified-v1/manifest.safe.json')
     native = read(W / 'pg3278-header-group-native-qualified-v1/manifest.safe.json')
     f, n = authorities(full, native)
+    runtime = runtime_stage_proofs()
     before = verify()  # Strict old-source binding must still be valid; no bypass.
     inventory = read(PMO / '485_WBS網羅性・受入対応.json')
     paths = [a['path'] for a in inventory['artifacts']]
@@ -143,6 +179,9 @@ def prepare():
              'originalNativeManifestSha256': native['manifestSha256'], 'nativeStreams': 28,
              'beforeFileHashes': old_hashes, 'beforeSource': inventory['source'], 'beforeBinding': inventory['measurementBindings'],
              'all941ArtifactChanges': 0, 'semanticCoverageContentChanged': False,
+             'runtimeStageProofs': runtime,
+             'runtimeVerifiedRows': ['WBS-N05', 'WBS-N06', 'WBS-N07', 'WBS-N08', 'WBS-N09', 'WBS-N10', 'WBS-N12', 'WBS-N14'],
+             'unmappedHistoricalRuntimeRequiresRecheck': ['WBS-N13', 'WBS-CHR-A01'],
              'scopeChanged': False, 'acceptedLeafDelta': 0, 'formalAccepted': False,
              'effortPercent': None, 'secretsSaved': False, 'vmActions': 0, 'mavenReissued': False,
              'stagedUTC': datetime.datetime.now(datetime.timezone.utc).isoformat()}
