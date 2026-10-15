@@ -11,6 +11,41 @@ import org.junit.jupiter.api.Test;
  * SSC119/018-289 CINSPECT: stop/reap before reacquire, env/owner before intent, real typed gate.
  */
 final class InspectorUnitCycleTest {
+  /** PT-OPS-IUC3246001/SS343: unknown client is not a worker receipt or advisory return. */
+  @Test
+  void iuc3246001UnknownStartAndStopMustReapBeforeParentReacquire() throws Exception {
+    for (int code : List.of(0, 10)) {
+      for (String fault : List.of("startUnknown", "stopUnknown", "stopUnknownFailed")) {
+        var f = new Fixture(code, fault);
+        if (fault.equals("stopUnknownFailed")) {
+          assertThrows(Retained.class, f::run);
+          assertFalse(f.events.contains("reacquire"));
+          assertFalse(f.events.contains("DB-END"));
+          assertFalse(f.events.contains("env-owner-retire"));
+          assertFalse(f.events.contains("intent-retire"));
+          assertTrue(f.events.contains("retain"));
+          assertThrows(IOException.class, f.cycle::completedReceipt);
+        } else {
+          var receipt = f.run();
+          assertEquals(code, receipt.exitCode());
+          assertSame(receipt, f.cycle.completedReceipt());
+          assertEquals(1, Collections.frequency(f.events, "intent-retire"));
+          assertFalse(f.events.contains("retain"));
+          if (fault.equals("startUnknown"))
+            assertTrue(f.events.indexOf("start-reaped") < f.events.indexOf("stop"));
+          else assertTrue(f.events.indexOf("stop-reaped") < f.events.indexOf("reacquire"));
+        }
+        assertEquals(1, Collections.frequency(f.events, "start"));
+        assertEquals(1, Collections.frequency(f.events, "stop"));
+        assertEquals(1, Collections.frequency(f.events, "wait"));
+        assertEquals(
+            1,
+            Collections.frequency(
+                f.events, fault.equals("startUnknown") ? "start-reaped" : "stop-reaped"));
+      }
+    }
+  }
+
   private static final String BASE =
       """
       Id=schubert-nk-inbox-inspector.service
@@ -172,12 +207,17 @@ final class InspectorUnitCycleTest {
                                 "ExecMainExitTimestampMonotonic=23456"));
                 return new MorningBackupUnitCycle.StartAttempt() {
                   public BackupUnitStartClient.Status status() {
-                    return BackupUnitStartClient.Status.CLIENT_EXITED_ZERO;
+                    return fault.equals("startUnknown")
+                        ? BackupUnitStartClient.Status.UNKNOWN
+                        : BackupUnitStartClient.Status.CLIENT_EXITED_ZERO;
                   }
 
                   public BackupUnitStartClient.Status awaitClient() {
-                    fail("client already reaped");
-                    return BackupUnitStartClient.Status.UNKNOWN;
+                    assertEquals("startUnknown", fault);
+                    assertFalse(events.contains("stop"));
+                    assertFalse(events.contains("reacquire"));
+                    events.add("start-reaped");
+                    return BackupUnitStartClient.Status.CLIENT_EXITED_ZERO;
                   }
 
                   public void retireAfter(MorningBackupUnitCycle.ParentProof proof)
@@ -192,14 +232,21 @@ final class InspectorUnitCycleTest {
                 state = parse(BASE); // Genuine receipt may be GC'd after the explicit stop.
                 return new MorningBackupUnitCycle.StopAttempt() {
                   public MaintenanceUnitStopClient.Status status() {
+                    if (fault.equals("stopUnknown") || fault.equals("stopUnknownFailed"))
+                      return MaintenanceUnitStopClient.Status.UNKNOWN;
                     return fault.equals("stop")
                         ? MaintenanceUnitStopClient.Status.CLIENT_EXITED_NONZERO
                         : MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO;
                   }
 
                   public MaintenanceUnitStopClient.Status awaitClient() {
-                    fail("client already reaped");
-                    return MaintenanceUnitStopClient.Status.UNKNOWN;
+                    assertTrue(fault.equals("stopUnknown") || fault.equals("stopUnknownFailed"));
+                    assertFalse(events.contains("reacquire"));
+                    assertFalse(events.contains("DB-END"));
+                    events.add("stop-reaped");
+                    return fault.equals("stopUnknownFailed")
+                        ? MaintenanceUnitStopClient.Status.CLIENT_EXITED_NONZERO
+                        : MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO;
                   }
                 };
               },
@@ -207,7 +254,12 @@ final class InspectorUnitCycleTest {
                 events.add("terminal");
                 return !fault.equals("terminal");
               },
-              () -> fail("no observation wait expected"),
+              () -> {
+                assertTrue(
+                    List.of("startUnknown", "stopUnknown", "stopUnknownFailed").contains(fault));
+                assertFalse(events.contains("reacquire"));
+                events.add("wait");
+              },
               () -> {
                 events.add("retain");
                 throw new Retained();
