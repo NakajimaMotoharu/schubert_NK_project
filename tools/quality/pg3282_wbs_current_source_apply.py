@@ -8,12 +8,19 @@ from pathlib import Path
 import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
+from zoneinfo import ZoneInfo
 import pg3280_wbs_current_source as staged
 import wbs_progress_audit as audit
 
 ROOT, PMO, SOURCE, OUT = staged.ROOT, staged.PMO, staged.SOURCE, staged.OUT
 INVENTORY = '485_WBS網羅性・受入対応.json'
 SNAPSHOT = '486_WBS現行実績.json'
+
+
+def metadata_descriptions(source, run, tests, suites, classes):
+    return {
+        'artifactHashMeaning': f'sha256 identifies current physical artifact bytes. source={source} is the current qualified production measurement source; assessmentHead is the management Git HEAD at binding assembly. measurementBindings selects {run}. Frozen prior sources, descriptions and candidate provenance remain historical in measurementBindingHistory/baselineSha256/candidateProvenance. Inventory hash is not code, runtime authority, formal or WBS acceptance.',
+        'measurementMode': f'Current same-byte all-six host/native measurement {run}, production source {source}, actual {tests}PT/{suites}suite/{classes}Main. Prior measurement bindings/classifications are historical, not current source claims. Technical counters and individually bound runtime stages do not grant live authority, global100, formal or individual WBS acceptance.'}
 
 
 def render_value(key, value):
@@ -144,15 +151,22 @@ def main():
     staged.require(len(rows) == 190 and len({r['id'] for r in rows}) == 190, 'same190 unique rows required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     history = {'source': inventory['source'], 'binding': inventory['measurementBindings'],
+               'artifactHashMeaningAtPreviousBinding': inventory.get('artifactHashMeaning'),
+               'snapshotMeasurementModeAtPreviousBinding': snapshot.get('measurementMode'),
+               'snapshotAsOfAtPreviousBinding': snapshot.get('asOf'),
                'inventorySha256': manifest['beforeFileHashes'][INVENTORY], 'snapshotSha256': manifest['beforeFileHashes'][SNAPSHOT],
                'preservedGitHead': head, 'newMeasurementManifestSha256': receipt['publicManifestSha256']}
     binding = {'source': SOURCE, 'run': manifest['run'], 'coverageRoot': manifest['coverageRoot'], 'manifest': str(staged.PUBLIC / 'manifest.json')}
+    descriptions = metadata_descriptions(SOURCE, manifest['run'], manifest['tests'], manifest['suites'], manifest['mainClasses'])
     inventory_text = rewrite_root(texts[INVENTORY], {'source': SOURCE, 'assessmentHead': head,
+                         'artifactHashMeaning': descriptions['artifactHashMeaning'],
                          'measurementBindings': binding, 'measurementBindingHistory': [*inventory.get('measurementBindingHistory', []), history]})
     record = {'source': SOURCE, 'run': manifest['run'], 'oldSource': snapshot['source'],
               'scopeChanged': False, 'acceptedLeafDelta': 0, 'effortPercent': None,
               'technicalReclassificationIsNotNewManufacture': True, 'runtimeHistoricalClaimsRequalifiedIndividually': True}
     snapshot_text = rewrite_root(texts[SNAPSHOT], {'source': SOURCE, 'measurementRun': manifest['run'],
+                         'measurementMode': descriptions['measurementMode'],
+                         'asOf': datetime.datetime.now(ZoneInfo('Asia/Tokyo')).isoformat(),
                          'inventorySha256': staged.sha(inventory_text.encode()), 'rows': rows,
                          'counts': dict(collections.Counter(r['measurementStatus'] for r in rows)),
                          'currentSourceMeasurementRebase20261015': record})

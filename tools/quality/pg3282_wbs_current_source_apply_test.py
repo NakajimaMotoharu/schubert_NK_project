@@ -7,6 +7,17 @@ import pg3280_wbs_current_source as staged
 
 
 class WbsMechanicalRebaseTest(unittest.TestCase):
+    def test_descriptions_follow_actual_source_run_counts_not_old_baseline(self):
+        d = subject.metadata_descriptions('NEW_SOURCE', 'NEW_RUN', 3701, 542, 1643)
+        self.assertIn('source=NEW_SOURCE', d['artifactHashMeaning'])
+        self.assertIn('selects NEW_RUN', d['artifactHashMeaning'])
+        self.assertIn('3701PT/542suite/1643Main', d['measurementMode'])
+        self.assertIn('NEW_SOURCE', d['measurementMode'])
+        self.assertIn('NEW_RUN', d['measurementMode'])
+        self.assertNotIn('retain frozen', d['artifactHashMeaning'])
+        self.assertNotIn('PG599', d['measurementMode'])
+        self.assertIn('not current source claims', d['measurementMode'])
+
     def test_root_updates_preserve_other_text_nested_source_and_no_acceptance_change(self):
         text = '{\n  "source":"old",\n  "nested":{"source":"nested-must-stay"},\n  "keep":[1,2],\n  "rows":[{"id":"A","acceptance":{"status":"NOT_ACCEPTED"}}]\n}\n'
         updates = {'source': staged.SOURCE, 'rows': [{'id': 'A', 'acceptance': {'status': 'NOT_ACCEPTED'}, 'missed': 0}], 'newObservation': {'acceptanceGranted': False}}

@@ -31,3 +31,7 @@ N05/06/07/08/09/10/N12/N14は当a9の3130真正親、3134全seal、3184実Browse
 純22checkは旧schema誤同一の実fixtureを含む四/六counter差・欠落/誤counter・byte差分非zero/formaltrue/未知schema、ID秘匿化、source/失敗/欠落module拒否、ROOT相対pathと旧絶対path、JSON他field保持/acceptance不変更/未確認欠落・QA保留/未根拠runtime拒否を確認。実六moduleと候補/適用後監査まで揃い、BUG1282/YKT1048の有限工具scope完了。G13全終了/PGPT/ITST合格ではない。
 
 0840開始stage.25/.75/2ppは既G13.07 .72/2/4.5の内数、0841失敗/是正/再利用記録。共有窓2→3pp等はHeader群とも重なるため個別実費/N/Tnull、原-v3/費用leaf不変更。Root/原VM/DBBackup/原Scenario3/Currentbaseline/鍵/stash七/全成功失敗を保全。
+
+## BUG1283/YKT1049 管理説明補正
+
+source/assessmentHead/binding更新に対し、artifactHashMeaning/measurementMode/asOfが旧969/PG540/PG599/10月8日の説明を残していた。68a2ea41bで修正前起票、実source/run/3701-542-1643から説明を生成する処理と純checkを3282へ追加。元説明・日時はmeasurementBindingHistoryの旧binding内へ明示保存し、元原byteを私有BUG1283-before二fileへ保全した。前/仮候補/適用後の厳密audit全PASS、全190row/測定binding/件数/費用/criteria/source一致/受入0を完全保持。補正後485 SHA283a04ef40f6506dbfd024fa613941c1a87b5f42f6ad7caeeedc7754699819bf、486 SHA703e0fc14790daa3a7ff50b391e4d88f3eaaf375ec41ae0e68c7f9a985a3a95aは当補正直後値。純23check成功、Whole/VM/再公開0。歴史asOf/旧比較は一括変更せず、現metadataの観測日時だけを更新した。
