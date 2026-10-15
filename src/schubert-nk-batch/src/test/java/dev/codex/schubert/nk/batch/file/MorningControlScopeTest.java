@@ -25,6 +25,63 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/106/108; PT-OPS-MCTRL001-018. */
 final class MorningControlScopeTest {
+
+  /** PT-OPS-MCTRL019: no null may select a new run or reach native ownership work. */
+  @Test
+  void mctrl019NativeEntryNullContractsNeverReachTrustedWork() throws Exception {
+    var called = new java.util.concurrent.atomic.AtomicInteger();
+    MorningNewRunAdmission.Continuation<String> work =
+        state -> {
+          called.incrementAndGet();
+          throw new AssertionError("trusted work must not execute");
+        };
+    MorningNewRunAdmission.OwnedContinuation<String> owned =
+        (state, database) -> {
+          called.incrementAndGet();
+          throw new AssertionError("owned work must not execute");
+        };
+    MorningControlScope.OwnedEpochWork<String> epoch =
+        (state, database, generation) -> {
+          called.incrementAndGet();
+          throw new AssertionError("epoch work must not execute");
+        };
+    MorningControlScope.VerifiedEpochWork<String> verified =
+        (state, database, generation, original, stop, publication) -> {
+          called.incrementAndGet();
+          throw new AssertionError("verified work must not execute");
+        };
+    MorningControlScope.VerifiedEpochWork<MorningCompletionEvidence> complete =
+        (state, database, generation, original, stop, publication) -> {
+          called.incrementAndGet();
+          throw new AssertionError("completion work must not execute");
+        };
+    var budget = dev.codex.schubert.nk.batch.platform.MorningParentBudget.create();
+    UUID run = UUID.fromString("00000000-0000-4000-8000-000000003366");
+    List<org.junit.jupiter.api.function.Executable> rejected =
+        List.of(
+            () -> MorningControlScope.execute(null),
+            () -> MorningControlScope.executeOwned(null),
+            () -> MorningControlScope.executeOwnedEpoch(null),
+            () -> MorningControlScope.executeResume(null, work),
+            () -> MorningControlScope.executeResume(run, null),
+            () -> MorningControlScope.executeResumeOwned(null, owned),
+            () -> MorningControlScope.executeResumeOwned(run, null),
+            () -> MorningControlScope.executeResumeOwnedEpoch(null, epoch),
+            () -> MorningControlScope.executeResumeOwnedEpoch(run, null),
+            () -> MorningControlScope.executeVerifiedEpoch(null, verified),
+            () -> MorningControlScope.executeVerifiedEpoch(budget, null),
+            () -> MorningControlScope.executeResumeVerifiedEpoch(null, run, verified),
+            () -> MorningControlScope.executeResumeVerifiedEpoch(budget, null, verified),
+            () -> MorningControlScope.executeResumeVerifiedEpoch(budget, run, null),
+            () -> MorningControlScope.executeCompletedEpoch(null, Optional.empty(), complete),
+            () -> MorningControlScope.executeCompletedEpoch(budget, null, complete),
+            () -> MorningControlScope.executeCompletedEpoch(budget, Optional.empty(), null));
+    for (var action : rejected) {
+      assertThrows(NullPointerException.class, action);
+      assertEquals(0, called.get());
+    }
+  }
+
   private static final class HeldM implements MorningControlScope.Exclusive {
     final List<String> events;
     final AtomicBoolean held = new AtomicBoolean();

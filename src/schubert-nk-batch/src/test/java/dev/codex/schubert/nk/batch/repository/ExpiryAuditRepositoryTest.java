@@ -73,6 +73,163 @@ final class ExpiryAuditRepositoryTest {
     }
   }
 
+  /** PT-BAT-EXP3366-001: untrusted readback cannot turn a stale selection into success. */
+  @Test
+  void exp3366001PriorSuccessRevalidatesEveryReadbackWithoutMutation() throws Exception {
+    retainedSuccess();
+    var owner = (dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame.Guard) () -> 10_000_000_000L;
+    try (var connection = locked()) {
+      for (String fault :
+          java.util.List.of(
+              "duplicate",
+              "missing",
+              "nullRows",
+              "status",
+              "futureEnd",
+              "missingEnd",
+              "errorCode",
+              "errorSummary")) {
+        var injected = new java.util.concurrent.atomic.AtomicInteger();
+        var live = new java.util.concurrent.atomic.AtomicInteger();
+        var subject = new ExpiryAuditRepository(priorReadback(connection, fault, injected, live));
+        var denied =
+            assertThrows(
+                BatchRepositoryException.class,
+                () -> subject.successful(RUN, END, owner, (id, time) -> RUN),
+                fault);
+        assertNull(denied.getCause());
+        assertEquals(0, denied.getSuppressed().length);
+        assertFalse(denied.toString().contains("INDEPENDENT_ERROR"));
+        assertEquals(1, injected.get(), fault);
+        assertEquals(0, live.get(), fault);
+        assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+        assertEquals("2026-09-05 15:00:00.000500|3|1|2|2|0|200", audit(connection, 42));
+        var valid =
+            new ExpiryAuditRepository(connection)
+                .successful(RUN, END, owner, (id, time) -> RUN)
+                .orElseThrow();
+        assertEquals(
+            new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), valid.handle());
+        assertEquals(
+            new ExpiryAuditRepository.Snapshot(
+                "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+            valid.audit());
+        assertFalse(connection.isClosed());
+        assertFalse(connection.getAutoCommit());
+      }
+      connection.rollback();
+    }
+  }
+
+  private static Connection priorReadback(
+      Connection delegate,
+      String fault,
+      java.util.concurrent.atomic.AtomicInteger injected,
+      java.util.concurrent.atomic.AtomicInteger live) {
+    return (Connection)
+        Proxy.newProxyInstance(
+            Connection.class.getClassLoader(),
+            new Class<?>[] {Connection.class},
+            (proxy, method, args) -> {
+              Object result = invokePublicJdbc(method, delegate, args);
+              if (!method.getName().equals("prepareStatement") || args == null) return result;
+              String sql = (String) args[0];
+              boolean selected = sql.startsWith("select id,run_id,attempt,started_at");
+              boolean audit = sql.startsWith("select status,expiry_cutoff_at");
+              if (!selected && !audit) return result;
+              var statement = (java.sql.PreparedStatement) result;
+              live.incrementAndGet();
+              var statementClosed = new java.util.concurrent.atomic.AtomicBoolean();
+              return Proxy.newProxyInstance(
+                  java.sql.PreparedStatement.class.getClassLoader(),
+                  new Class<?>[] {java.sql.PreparedStatement.class},
+                  (sp, sm, sa) -> {
+                    if (sm.getName().equals("close")) {
+                      assertTrue(statementClosed.compareAndSet(false, true));
+                      try {
+                        return invokePublicJdbc(sm, statement, sa);
+                      } finally {
+                        live.decrementAndGet();
+                      }
+                    }
+                    Object answer = invokePublicJdbc(sm, statement, sa);
+                    if (!sm.getName().equals("executeQuery")) return answer;
+                    var rows = (java.sql.ResultSet) answer;
+                    if (selected && fault.equals("nullRows")) {
+                      rows.close();
+                      injected.incrementAndGet();
+                      return null;
+                    }
+                    live.incrementAndGet();
+                    var rowsClosed = new java.util.concurrent.atomic.AtomicBoolean();
+                    var advances = new java.util.concurrent.atomic.AtomicInteger();
+                    return Proxy.newProxyInstance(
+                        java.sql.ResultSet.class.getClassLoader(),
+                        new Class<?>[] {java.sql.ResultSet.class},
+                        (rp, rm, ra) -> {
+                          if (rm.getName().equals("close")) {
+                            assertTrue(rowsClosed.compareAndSet(false, true));
+                            try {
+                              return invokePublicJdbc(rm, rows, ra);
+                            } finally {
+                              live.decrementAndGet();
+                            }
+                          }
+                          if (rm.getName().equals("next")) {
+                            int call = advances.incrementAndGet();
+                            if (selected && fault.equals("duplicate") && call == 2) {
+                              injected.incrementAndGet();
+                              return true;
+                            }
+                            if (audit && fault.equals("missing")) {
+                              injected.incrementAndGet();
+                              return false;
+                            }
+                          }
+                          if (audit && ra != null) {
+                            Object value = null;
+                            boolean changed = false;
+                            if (rm.getName().equals("getString")) {
+                              if (fault.equals("status") && ra[0].equals("status")) {
+                                value = "WARNING";
+                                changed = true;
+                              }
+                              if (fault.equals("errorCode") && ra[0].equals("error_code")) {
+                                value = "INDEPENDENT_ERROR";
+                                changed = true;
+                              }
+                              if (fault.equals("errorSummary") && ra[0].equals("error_summary")) {
+                                value = "INDEPENDENT_ERROR";
+                                changed = true;
+                              }
+                            }
+                            if (rm.getName().equals("getObject") && ra[0].equals("ended_at")) {
+                              if (fault.equals("futureEnd")) {
+                                value = END.plusSeconds(1).atOffset(java.time.ZoneOffset.UTC);
+                                changed = true;
+                              }
+                              if (fault.equals("missingEnd")) changed = true;
+                            }
+                            if (changed) {
+                              injected.incrementAndGet();
+                              return value;
+                            }
+                          }
+                          return invokePublicJdbc(rm, rows, ra);
+                        });
+                  });
+            });
+  }
+
+  private static Object invokePublicJdbc(
+      java.lang.reflect.Method method, Object target, Object[] args) throws Throwable {
+    try {
+      return method.invoke(target, args);
+    } catch (InvocationTargetException failure) {
+      throw failure.getCause();
+    }
+  }
+
   @Test
   void exp3202002SuccessRefusesForeignDayFutureEndNullAndSqlBeforeAnyRewrite() throws Exception {
     retainedSuccess();
