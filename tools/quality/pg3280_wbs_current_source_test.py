@@ -48,16 +48,28 @@ class CurrentSourceMeasurementTest(unittest.TestCase):
             subject.authorities(full, native)
 
     def test_session_redaction_preserves_every_other_counter_and_node(self):
-        raw = b'<report name="synthetic"><sessioninfo id="RAW_TECHNICAL_ID" start="1" dump="2"/><package name="p"><class name="p/C"><method name="work" desc="()V" line="1"/></class><sourcefile name="C.java"><line nr="1" mi="0" ci="2" mb="0" cb="1"/></sourcefile></package><counter type="LINE" missed="0" covered="1"/></report>'
-        expected = {'LINE': {'missed': 0, 'covered': 1}}
+        raw = b'<report name="synthetic"><sessioninfo id="RAW_TECHNICAL_ID" start="1" dump="2"/><package name="p"><class name="p/C"><method name="work" desc="()V" line="1"/></class><sourcefile name="C.java"><line nr="1" mi="0" ci="2" mb="0" cb="1"/></sourcefile></package><counter type="INSTRUCTION" missed="0" covered="9"/><counter type="COMPLEXITY" missed="0" covered="2"/><counter type="LINE" missed="0" covered="1"/><counter type="METHOD" missed="0" covered="1"/><counter type="CLASS" missed="0" covered="1"/><counter type="BRANCH" missed="0" covered="2"/></report>'
+        expected = {'LINE': {'missed': 0, 'covered': 1}, 'METHOD': {'missed': 0, 'covered': 1},
+                    'CLASS': {'missed': 0, 'covered': 1}, 'BRANCH': {'missed': 0, 'covered': 2},
+                    'classByteMismatch': 0, 'formal': False}
         public, proof = subject.redact_report(raw, expected)
         self.assertNotIn(b'RAW_TECHNICAL_ID', public)
         self.assertIn(b'SHA256:', public)
         self.assertEqual(subject.semantic_report(ET.fromstring(raw)), subject.semantic_report(ET.fromstring(public)))
         self.assertEqual(1, proof['redactedSessionRecords'])
         self.assertNotEqual(proof['rawSha256'], proof['publicSha256'])
+        for key in subject.COUNTERS:
+            wrong = copy.deepcopy(expected); wrong[key]['missed'] = 1
+            with self.assertRaises(ValueError):
+                subject.redact_report(raw, wrong)
+            missing = copy.deepcopy(expected); del missing[key]
+            with self.assertRaises(ValueError):
+                subject.redact_report(raw, missing)
+        for key, value in [('classByteMismatch', 1), ('formal', True)]:
+            with self.assertRaises(ValueError):
+                subject.redact_report(raw, {**expected, key: value})
         with self.assertRaises(ValueError):
-            subject.redact_report(raw, {'LINE': {'missed': 1, 'covered': 0}})
+            subject.redact_report(raw.replace(b'INSTRUCTION', b'UNKNOWN'), expected)
 
     def test_download_outside_seven_fixed_leaves_rejected_before_authentication(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(subject.lan_server, 'pinned_key', side_effect=AssertionError('must not authenticate')):

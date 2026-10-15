@@ -3,6 +3,7 @@
 Only seven fixed read-only files from approved aru. Raw XML stays private;
 public session IDs are hashed, all semantic counter content must be unchanged.
 """
+import argparse
 import copy
 import datetime
 import hashlib
@@ -72,7 +73,16 @@ def semantic_report(root):
 
 def redact_report(raw, expected):
     root = ET.fromstring(raw)
-    require(root.tag == 'report' and report_counters(root) == expected, 'exact original native report counters required')
+    # Native qualification exposes four required counters + two qualification
+    # fields, whereas the immutable JaCoCo XML contains all six counter kinds.
+    # Keep every XML counter; do not compare these different schemas as a dict.
+    require(set(expected) == {*COUNTERS, 'classByteMismatch', 'formal'}
+            and type(expected['classByteMismatch']) is int and expected['classByteMismatch'] == 0
+            and expected['formal'] is False, 'exact four-counter/nonformal zero-mismatch qualification required')
+    values = report_counters(root)
+    require(root.tag == 'report' and len(root.findall('counter')) == 6
+            and set(values) == {*COUNTERS, 'INSTRUCTION', 'COMPLEXITY'}
+            and all(values[k] == expected[k] for k in COUNTERS), 'exact original native four counters and complete six-kind report required')
     before = semantic_report(root); ids = []
     for session in root.findall('sessioninfo'):
         value = session.get('id')
@@ -137,7 +147,7 @@ def runtime_stage_proofs():
     return records
 
 
-def prepare():
+def prepare(resume=False):
     os.umask(0o077)
     require(not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT), 'fixed clean source required')
     full = read(W / 'pg3276-header-group-full-qualified-v1/manifest.safe.json')
@@ -149,17 +159,35 @@ def prepare():
     paths = [a['path'] for a in inventory['artifacts']]
     require(len(paths) == 941 and not subprocess.check_output(['git', 'diff', SOURCE, 'HEAD', '--', *paths], cwd=ROOT), 'all941 artifacts byte-identical to production source required')
     require(not (ROOT / PUBLIC).exists(), 'new-only public measurement evidence required')
-    OUT.mkdir(mode=0o700); rawdir = OUT / 'raw'; rawdir.mkdir(mode=0o700)
+    rawdir = OUT / 'raw'
+    if resume:
+        require(OUT.is_dir() and not OUT.is_symlink() and rawdir.is_dir() and not rawdir.is_symlink()
+                and not (OUT / 'manifest.safe.json').exists() and not (OUT / 'apply-intent.safe.json').exists(),
+                'only known incomplete private preparation may resume')
+    else:
+        OUT.mkdir(mode=0o700); rawdir.mkdir(mode=0o700)
     old_hashes = {}
     for name in ['485_WBS網羅性・受入対応.json', '486_WBS現行実績.json']:
         data = (PMO / name).read_bytes(); old_hashes[name] = sha(data)
-        (OUT / ('before-' + name)).write_bytes(data)
-    fetch_fixed('manifest.safe.json', rawdir / 'manifest.safe.json')
+        saved = OUT / ('before-' + name)
+        if resume:
+            require(saved.is_file() and sha(saved.read_bytes()) == sha(data), 'unchanged saved-before source binding required')
+        else:
+            with saved.open('xb') as stream:
+                stream.write(data)
+    original_manifest = rawdir / 'manifest.safe.json'
+    if not original_manifest.exists():
+        require(not resume, 'original immutable native authority must already exist on partial resume')
+        fetch_fixed('manifest.safe.json', original_manifest)
     require(sha((rawdir / 'manifest.safe.json').read_bytes()) == native['manifestSha256']
             and read(rawdir / 'manifest.safe.json') == n, 'exact original native authority hash/result required')
     projections = {}
     for module in MODULES:
-        target = rawdir / (module + '-union.xml'); fetch_fixed(target.name, target)
+        target = rawdir / (module + '-union.xml')
+        if not target.exists():
+            fetch_fixed(target.name, target)
+        else:
+            require(resume and not target.is_symlink(), 'existing raw XML may only be hash-reused on explicit partial resume')
         data = target.read_bytes(); require(sha(data) == n['xmlHashes'][module], 'exact raw XML hash required')
         projections[module] = redact_report(data, n['moduleCounters'][module])
     public_root = ROOT / PUBLIC; public_root.mkdir(parents=True, mode=0o700)
@@ -184,6 +212,8 @@ def prepare():
              'unmappedHistoricalRuntimeRequiresRecheck': ['WBS-N13', 'WBS-CHR-A01'],
              'scopeChanged': False, 'acceptedLeafDelta': 0, 'formalAccepted': False,
              'effortPercent': None, 'secretsSaved': False, 'vmActions': 0, 'mavenReissued': False,
+             'partialPreparationResumed': resume,
+             'originalSchemaFailurePreserved': resume,
              'stagedUTC': datetime.datetime.now(datetime.timezone.utc).isoformat()}
     public_manifest = public_root / 'manifest.json'
     with public_manifest.open('x') as stream:
@@ -198,4 +228,6 @@ def prepare():
 
 
 if __name__ == '__main__':
-    raise SystemExit(prepare())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--resume', action='store_true', help='reuse only immutable hash-matching files from the known failed partial stage')
+    raise SystemExit(prepare(parser.parse_args().resume))
