@@ -5,6 +5,7 @@ from pathlib import Path
 import shlex
 import subprocess
 from lan_server import run
+from source_utf16 import source_slice
 
 ROOT=Path(__file__).resolve().parents[2];W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -46,7 +47,7 @@ print(json.dumps((b/'literals.safe.tsv').read_text().splitlines()))
         kind,path,start,end,old,new,width,value=line.split('\t');assert kind=='LITERAL'and width in {'INT','LONG'}
         bits=64 if width=='LONG'else 32;number=int(old.lower().removesuffix('l').replace('_',''),8);explicit=int(new.lower().removesuffix('l'),16);signed=number if number<2**(bits-1)else number-2**bits
         assert number==explicit and 0<=number<2**bits and signed==int(value)
-        original=subprocess.check_output(['git','show',r['baseCandidateSource']+':'+path],cwd=ROOT).decode();assert original[int(start):int(end)]==old
+        original=subprocess.check_output(['git','show',r['baseCandidateSource']+':'+path],cwd=ROOT).decode();assert source_slice(original,int(start),int(end))==old
         rows.append({'path':path,'oldUtf16Start':int(start),'oldUtf16End':int(end),'oldOctal':old,'explicitHex':new,'javaType':width,'signedValue':signed,'independentBase8HexValueAgrees':True})
     assert len(rows)==187
     out=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG3736-octal-hygiene-v1';out.mkdir();values={'all-187-integer-vectors.json':rows,'all-main-source-sha256.json':files,'exact-30-changes.json':r['changes'],'all-six-compiler-proofs.json':r['modules'],'fixed-static.json':{k:s[k]for k in ['pmd','checkstyle','ruleSha256','pinnedToolSha256','auxMeaning','wholeTypedBindingEquivalenceRef']}}
