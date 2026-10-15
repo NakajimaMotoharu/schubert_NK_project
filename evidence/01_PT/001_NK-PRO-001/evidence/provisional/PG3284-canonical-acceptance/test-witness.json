@@ -1,0 +1,330 @@
+{
+  "actualExit": 0,
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "run": "PG3274-six-v1",
+  "sourceSnapshot": "010f631bac8438f10dd4a0f63b502950f43f6084",
+  "originalWholeManifestSha256": "119eb400bf230c791ba997b0888179ae21846fca738656f0d491ffffe990084c",
+  "staticXmlSha256": "ae4db31e6b3125ad48d96f266640ce6be44cff234525e5338b51bd3f76e57ac4",
+  "staticIssues": 0,
+  "suites": [
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "tests": [
+        "malformedLoginErrorBoundariesAndTypesAreRejected",
+        "allOtherResponseErrorProfilesRetainTheirIndividualContracts",
+        "loginLockAndFailurePreserveOnlyApprovedErrorFields"
+      ],
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "c27b457a2c08b606368fea79c6007317a8b5be1d019d8dc2d3350d9ae6568926"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "tests": [
+        "numericErrorFillerDoesNotBecomeBusinessZero",
+        "booleanAndReservedFieldsRejectUnknownBytes",
+        "textDecodeIsStrictCanonicalAndOptionalAware",
+        "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+        "numericCodecChecksDigitsRangeAndOverflow"
+      ],
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "0824f8bb0af6be1f0ac778c898f55c9a95b31e532fbf88326aa424f55ead3140"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "tests": [
+        "headerDecoderRejectsEveryFixedFieldAndProfileCorruption",
+        "metadataAndExpectedRouteEstablishNullAndRangeContracts",
+        "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes",
+        "headerEncodingMatchesIndependentUi232GoldenVector",
+        "responseAndEventHeadersRoundTripWithoutLeakingContext",
+        "fixedPayloadIsDefensiveAndWireMessageChecksLengths",
+        "transportAndRouteContractsRejectEveryMismatch"
+      ],
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "92e2410848f3cd367ef177f831ed5d44e85282f529e301972cbfecc518e84254"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "tests": [
+        "encodeRejectsUnknownMissingWrongTypeAndRecordViolations",
+        "valuesAreImmutableNullSafeAndRedacted",
+        "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers",
+        "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState",
+        "everyResponseLayoutUsesExactErrorFillersAndNoRecords",
+        "allSixtyFourLayoutsRoundTripMinimumSuccessValues",
+        "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets",
+        "numericDigitLimitIsCheckedWithoutOverflow"
+      ],
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "65f3269b8e528b5c0d9d95f11d3a1c99df1d47c279cf1c06ef6f56133c7cff6b"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "tests": [
+        "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+        "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+        "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+      ],
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "0abc2f84aac4630ff47cc7d09b90115133984ab3e8670ccb389fdabf2910e1da"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "tests": [
+        "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues",
+        "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts",
+        "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes"
+      ],
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "40f59e13e7a9f256416b50aaf6ca549ba0387d8a73335628dc1b0d3519cd60cc"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "tests": [
+        "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation",
+        "decodeRejectsTruncationExtraHashAndIoFailure",
+        "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum",
+        "writeRejectsNullCountLengthAndIoFailure",
+        "verificationRejectsAllThirtyTwoDigestBytePositions",
+        "writesAndReadsHeaderlessExactRecordsWithIndependentHash",
+        "contentMetadataRejectsInvalidValues"
+      ],
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "996398155f21c8b98830b801e9ba08383c9f2bd1d8fe6c78be617b756b39dd02"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "tests": [
+        "rejectsNonCanonicalTextPathsNamesSizesAndHashes",
+        "constructorRejectsNullComponents",
+        "acceptsExactlySevenSsc004ExtensionMimePairs",
+        "bug040StorageExtensionCannotBeHiddenByDisplayMetadata",
+        "dispositionMapsOnlyIAndA",
+        "rejectsEveryMimeCrossProductAndVideoAttachment"
+      ],
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "4f6e59334a73ac43d3db2b63610208071250266f51e3ceab7003db13bc6ebda3"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "tests": [
+        "headerReferencesRejectNullAtTheNamedInvariantBoundary",
+        "authenticationContextValidatesAndRedacts",
+        "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow",
+        "headerValidateAgainstRejectsEachMetadataMismatch",
+        "validHeadersCoverRequestResponseErrorAndEventProfiles",
+        "enumsMapOnlyApprovedWireValues",
+        "headerConstructorRejectsEveryStructuralViolation"
+      ],
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "2e59d9c063a6470ab2c1eaa6545aaa817a9834610d59fd1a22150dacf0f7786c"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "tests": [
+        "catalogMatchesIndependentUi234To236Fixture",
+        "layoutFieldsRejectWrongAreaGapLengthAndNull",
+        "parserRejectsMalformedUnknownAndDuplicateRows"
+      ],
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "2b9ef040b37c72ee4d2107dfbf631b6806beb5002c75b6b00b33cf089aa4c158"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "tests": [
+        "registryMatchesIndependentUi233Catalog",
+        "registryRejectsEmptyNullDuplicateAndKindMismatches",
+        "layoutIdAndFieldDefinitionAreStrictAndOneBased",
+        "layoutDefinitionChecksEveryLengthAndKindInvariant"
+      ],
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "8954880be13dabd924a6129487651bc2003172ce18745bcaeaf4bb04eaa1efa2"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "tests": [
+        "pageConstantsCountsAndArithmeticAreEnforced",
+        "receiptWebAndDefensiveContractsAreEnforced",
+        "listRecordConditionsAndOrderingAreEnforced",
+        "mediaAnimationAndMusicConditionsAreEnforced",
+        "deletedNotificationNeverContainsAnswer",
+        "notificationCancellationAndQuestionStateConditionsAreEnforced",
+        "scenarioInlineAndLargeFileConditionsAreEnforced",
+        "loginUserPasswordDateAndSessionRulesAreEnforced"
+      ],
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "5862efadd35385625451132cbf7442b8ba7b84e9eb67fb5142319a52c40b5f84"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "tests": [
+        "explicitCatalogMatchesIndependentSs323NamedTypeFixture",
+        "typedModelsAndHelpersRejectNullMissingAndWrongKinds",
+        "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes",
+        "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes",
+        "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames"
+      ],
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "184a8524d957defd4f1eaad143e231a7593ccf5c6ebbb2a828d486718ff973b5"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "tests": [
+        "semanticHelpersDecodeAndEncodeEverySupportedShape",
+        "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects",
+        "semanticEncodingHelpersRejectNullReferences",
+        "semanticValueObjectsNormalizeValidateCompareAndRedact"
+      ],
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "ab37f1a023bcbdbe63cef671aa282bc685c3e3310bda361cb3dfd4dec80cd445"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "tests": [
+        "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion",
+        "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues",
+        "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+        "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds",
+        "allN12IdentifierTypesEnforceTheSharedPositiveRange"
+      ],
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "69d075ef077c21cb54fa57e783fda6a3ed8aae5d3171639d20d5f7b9876176b0"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "tests": [
+        "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected",
+        "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext",
+        "bug037RequiredAndOptionalDataSendersRejectBadTime",
+        "formatsAndParsesStrictJstMilliseconds"
+      ],
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "2651371e70186eb89c55ada6bb47ab11f045a317b90dbac783017432f3ffb47e"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "tests": [
+        "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle",
+        "nullUnknownAndNearMatchAddressesAreDenied"
+      ],
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xmlSha256": "19ae4163f007a42e9928da7264411353a9e428a906426533a65c4d51dea0bfa7"
+    }
+  ],
+  "testSourceHashes": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java": "65e8891e29ed70ac3325d06e0d58f4be02f6322f2836e2919245a7f2654d64d4",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": "3d0429f446ab0c655dddb4a71bb3a887d5ae3b34dd4411b699079a92896ec917",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java": "b987c9e4ef9e782ce272d4297ff4e0523abf353b9c409f640d4f0ca3bc367567",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": "bfc039df051c34122a4868b1e93a00c3dcfa13138d01defac7f8a9c6fa0b00fb",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java": "24f4f0fa67d1e37fb5f02ec49af253ec5e7ce61451ed50b86aa599371dcf34c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java": "85fbad77a631bb5bf5ff94779be75c708c82861794c9998ac24c268816ec9b9c",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java": "ab53fbfa93497e8258eb1797d9f80bb7daae48315ee225bb1906c6289dc0de31",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": "6a29064559dd7b27dfc56fc5384d1539bbbb0155ec522e7dd14b7c55a519b238",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": "07fc5676b09e783d736829799ef58127eb9a6e464da20c948e1cbdceea8ca877",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": "fd8d2a40a6e267bdd8e0c018a4ae3ec929c99b742316f79f1e2183c3cf441192",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java": "6a736c2fb5a1c09f440846ce0a5ac82c19f1f657776b5cc7a289e4e07c61f0de",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java": "472f08557ee0d359990b1949a1d24fda9c92062a7bbe1bd9e61e12146634bf32",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticFieldValueTest.java": "1ac9c7b07f64163d4c8b88b39652f7c20896d79df6091b1d1cb2f8f5852caa1b",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java": "69fa7ca47c745e98428046e49ebc018d09c8076a6b18b49a094f3c3d8d3f90af",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java": "e6cdaac5d220ab74332bdf15a160a21d3f0eb3c0cffb077304c5a2f8cc82022c",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+    "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv": "b07bd90705a4761ebcc97b859bd495dadaf26501fcee3b60c4edd72474a4811b",
+    "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+    "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76",
+    "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839"
+  },
+  "propertiesExported": false,
+  "testsReissued": 0,
+  "vmActions": 0,
+  "fullPrivateReceiptSha256": "d627e7cf1d3829430c0a46e5e1919d7fb1c578a19304edb41a8d09a27b1320d8",
+  "toolSha256": "e3223e9d319bbc58cd088c3b050eb5a6fee5a15b59f35671df205333527f2b35",
+  "formalAccepted": false,
+  "acceptedLeafDelta": 0,
+  "independentCanonicalManifestSha256": "b10b638178415a78d4efbcbec8f85754e3dc3bf23759b9974566c52758e4bcf3"
+}
