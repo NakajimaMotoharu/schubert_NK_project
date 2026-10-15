@@ -94,6 +94,19 @@ class IndependentWitness(unittest.TestCase):
                 with patch.object(observer, 'typed_service_property', side_effect=lambda name: altered[name]):
                     with self.assertRaises(ValueError, msg=(key, bad)): observer.no_exit_hooks()
 
+    def test_typed_property_loads_definition_without_start_and_refuses_foreign_path(self):
+        from types import SimpleNamespace
+        path = '/org/freedesktop/systemd1/unit/schubert_2dnk_2dmorning_2dcontroller_2eservice'
+        calls = []
+        def fake(args):
+            calls.append(args)
+            return SimpleNamespace(stdout='o "' + path + '"\n' if len(calls) == 1 else 'a(sasbttttuii) 0\n')
+        with patch.object(observer, 'command', side_effect=fake): self.assertEqual('a(sasbttttuii) 0\n', observer.typed_service_property('ExecStop'))
+        self.assertIn('LoadUnit', calls[0]); self.assertNotIn('StartUnit', calls[0])
+        for wrong in ['o "/foreign"\n', '', 's "' + path + '"\n']:
+            with patch.object(observer, 'command', return_value=SimpleNamespace(stdout=wrong)):
+                with self.assertRaises(ValueError): observer.typed_service_property('ExecStop')
+
 
 if __name__ == '__main__':
     unittest.main()

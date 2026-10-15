@@ -331,7 +331,9 @@ def require_terminal(terminal, invocation, retained):
 
 
 def typed_service_property(name):
-    row = shlex.split(command(['busctl', '--system', '--timeout=3', 'call', 'org.freedesktop.systemd1', '/org/freedesktop/systemd1', 'org.freedesktop.systemd1.Manager', 'GetUnit', 's', UNIT]).stdout)
+    # LoadUnit only reads the definition; it does NOT activate/start a Unit.
+    # GetUnit alone may fail after inactive Unit metadata garbage collection.
+    row = shlex.split(command(['busctl', '--system', '--timeout=3', 'call', 'org.freedesktop.systemd1', '/org/freedesktop/systemd1', 'org.freedesktop.systemd1.Manager', 'LoadUnit', 's', UNIT]).stdout)
     require(len(row) == 2 and row[0] == 'o' and row[1] == '/org/freedesktop/systemd1/unit/schubert_2dnk_2dmorning_2dcontroller_2eservice')
     return command(['busctl', '--system', '--timeout=3', 'get-property', 'org.freedesktop.systemd1', row[1], 'org.freedesktop.systemd1.Service', name]).stdout
 
