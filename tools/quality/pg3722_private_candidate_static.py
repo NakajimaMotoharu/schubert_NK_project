@@ -14,14 +14,17 @@ W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 
 
 def main():
+    import sys
+    require(sys.argv[1:]in [[],['--octal187']],'only qualified semantic stages');octal=bool(sys.argv[1:]);candidate_job='PG3726-octal-candidate-v1'if octal else 'PG3720-private-field-candidate-v2';static_job='PG3730-octal-candidate-static-v1'if octal else 'PG3722-private-candidate-static-v1'
     require(not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT),'clean operator before fixed analyzers')
-    prior=json.loads((W/'pg3720-private-field-candidate-v2/manifest.safe.json').read_bytes());require(prior['actualExit']==0,'actual full6 candidate finished')
+    prior=json.loads((W/candidate_job.lower()/'manifest.safe.json').read_bytes());require(prior['actualExit']==0,'actual full6 candidate finished')
     original=W/'pg3422-candidate-static-v1/manifest.safe.json'
     # The exact complete candidate hash map is materialized from its proven base plus90 deltas.
     files={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in ROOT.glob('src/*/src/main/java/**/*.java')}
     for name,item in prior['result']['changes'].items():require(files[name]==item['before'],'base source not changed');files[name]=item['candidate']
     source=last_main_source(ROOT);require(source==prior['baseCandidateSource'],'same immutable base Main')
-    data={'source':source,'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'candidateJob':'PG3720-private-field-candidate-v2','staticJob':'PG3722-private-candidate-static-v1','includeCheckstyle':True,'candidateManifestSha256':prior['result']['serverManifestSha256'],'originalStaticManifestSha256':hashlib.sha256(original.read_bytes()).hexdigest(),'sourceSha256':files}
+    data={'source':source,'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'candidateJob':candidate_job,'staticJob':static_job,'includeCheckstyle':True,'candidateManifestSha256':prior['result']['serverManifestSha256'],'originalStaticManifestSha256':hashlib.sha256(original.read_bytes()).hexdigest(),'sourceSha256':files}
+    if octal:data.update(semanticKind='OCTAL_EXPLICIT_BASE',baseStaticManifestSha256=json.loads((W/'pg3722-private-candidate-static-v1/manifest.safe.json').read_bytes())['result']['serverManifestSha256'])
     os.umask(0o077);out=W/data['staticJob'].lower();out.mkdir();script=out/'static.private.py';script.write_text(inspect.getsource(require)+'\n'+inspect.getsource(server)+'\nserver('+repr(data)+')\n')
     dest='/home/mini/schubert-nk-pgpt/transfer/'+data['staticJob'];rc,_=run('test ! -e /home/mini/schubert-nk-pgpt/runs/'+data['staticJob']+' && mkdir -m700 '+dest,timeout=30);require(rc==0,'new-only fixed analysis')
     rc,_=copy(script,dest+'/',timeout=60);require(rc==0,'fixed operator copied')
