@@ -43,6 +43,13 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def coverage_root(value):
+    require(isinstance(value, str) and value and '\\' not in value
+            and not any(part in {'.', '..'} for part in value.split('/')), 'canonical coverage path required')
+    path = pathlib.Path(value)
+    return path if path.is_absolute() else ROOT / path
+
+
 def cost_sum(items):
     return {k: sum((Decimal(str(x['cost'][k])) for x in items), Decimal(0))
             for k in COST_KEYS}
@@ -206,7 +213,7 @@ def check_measurement(snapshot, inventory):
     types = ('LINE', 'METHOD', 'CLASS', 'BRANCH')
     data = {}
     for module in manifest['modules']:
-        path = pathlib.Path(binding['coverageRoot']) / module['module'] / 'site/jacoco/jacoco.xml'
+        path = coverage_root(binding['coverageRoot']) / module['module'] / 'site/jacoco/jacoco.xml'
         require(path.is_file() and digest(path) == module['coverageXmlSha256'], 'measurement XML hash')
         grouped = {}
         for node in ET.parse(path).getroot().findall('./package/class'):
