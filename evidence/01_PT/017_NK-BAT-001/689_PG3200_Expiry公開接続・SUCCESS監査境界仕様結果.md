@@ -19,3 +19,11 @@ WBS group event0816で着手前低0.5/標準1.5/高4週次共有pp（P017-07.02=
 Java25.0.4/GoogleJavaFormat1.36.1 skip-reflow-long-strings、PG18/JaCoCo0.8.15/ASM9.10.1、既server aruの隔離PG fixture。工具純一/完成server namespace0、source-format実apply済み。実行commandは既PYTHONPATHで `python3 -B tools/quality/pg3200_expiry_boundary_selected.py cleanup` と `... audit`。新-only PG3200/3202保存先、全入力Test/fixture/launcher/coverage hashと旧Main jar/fixture不変を照合、全十/七TestのXML/終了code/FES-aborted-notrun0と対象class counterを保存する。
 
 現時点=実選択未実行、coverage増加/合格加点0。結果/source/日時/manifest hash/BUGは実行後追記する。選択後は必要な一全回帰（新Test集合3694予定/Root helper suite含む）と当native27の全Main/member同byte再資格を行う。工数null/正式1964-53/QA051final保留不変。
+
+## 実選択結果（2026-10-15 12:38JST、上記は開始前履歴）
+
+候補source6d7d7f77075fe8ec19beed5939e2440915e1bfb4 clean。PG3200/exec80363 actual0/全十Test/FES-aborted-notRun0、server manifest13a24858cd1cbfcfa771f5a242a55529c525cba1513b7b3a0a3c2239c7371d02、XMLf967ca149e4592572aacdf7048eeb7046ff0e0cffd7c3775a4a49ea0240b2838。実Expirygate/role/lock/credential/借用後closeを確認、全旧scope非回帰。host＋本限定だけのCDB残6L2M3Bで全四100とはしない。
+
+PG3202/exec76698 actual0/全七Test/FES-aborted-notRun0、manifest6e393703ea77f4d9b4d9150795058fc88a4547f8412eb51c333754d4d5a8afe8、XMLc3f1fb7024de7e408e2b668153aae28c2190d88da107de60f48b726a1e89d8c4。空/同run成功・原監査不変/異日/未来終了/明示null/SQLとborrowed transaction保持を実確認。host＋本限定の監査残0L0M0C7B、branch未完を保持。両群ともMain再compile0/既fixture全byte保持/native輸入0/VM操作0、Production障害発見なし。rawは私有PG379各immutable slot、秘密/DB実体Git0。
+
+event0817へ限定実績、0818へ新Test三method/三fileの必要全体統合triggerを固定。3204は全六format先行→新集合3694/542/1643/static六0、3206独立XML/全scope/source、3208封印native27/当Main-resource全member一致を順に検査する。工具純二/完成namespace/旧whole件数拒否・旧native provenanceを新hostと混同しない検査0。現時点whole3694は未実行、全体へ加算しない。全回帰費はK01.01既予算内subset .25/.75/2pp（実費null）、N10費二重計上なし。
