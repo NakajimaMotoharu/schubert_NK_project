@@ -44,6 +44,96 @@ final class ExpiryWorkerRequestTest {
       prior_ended=2026-09-30T00:00:02Z
       """;
 
+  /** PT-OPS-EREQ3042-001: original end-time precision/range and all nullable identity fields. */
+  @Test
+  void ereq3042001PriorBoundaryAndNullContractNeverAuthorizeCleanup() {
+    UUID run = UUID.fromString("38100000-2222-4333-8444-555555555555");
+    Instant cutoff = Instant.parse("2026-09-30T00:00:00Z");
+    Instant start = Instant.parse("2026-09-30T00:00:01Z");
+    for (Instant ended :
+        List.of(start, start.plusNanos(1000), Instant.parse("9999-12-31T23:59:59.999999Z"))) {
+      var value = new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, 42, 1, start, ended);
+      assertEquals(ended, value.ended());
+      assertEquals(start, value.started());
+      assertEquals(42, value.id());
+      assertEquals("PriorExpiry[identity/time=<redacted>]", value.toString());
+    }
+    for (Instant ended :
+        List.of(
+            start.minusNanos(1000), start.plusNanos(1), Instant.parse("+10000-01-01T00:00:00Z"))) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, 42, 1, start, ended));
+    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new CleanupWorkerRequest.Expiry.PriorExpiry(
+                run, cutoff, 42, 1, start.plusNanos(1), start.plusSeconds(1)));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(null, cutoff, 42, 1, start, start));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(run, null, 42, 1, start, start));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, 42, 1, null, start));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, 42, 1, start, null));
+  }
+
+  /** PT-OPS-EREQ3042-002: fixed literal field grammar and consumed bytes on every rejection. */
+  @Test
+  void ereq3042002EveryRequiredFieldAndPriorPrecisionRejectsWithErasure() {
+    for (String field :
+        List.of(
+            "run",
+            "activation",
+            "cutoff",
+            "boot",
+            "epoch",
+            "broker",
+            "step_id",
+            "attempt",
+            "started",
+            "skipped",
+            "prior_run_id",
+            "prior_cutoff_utc",
+            "prior_step_id",
+            "prior_attempt",
+            "prior_started",
+            "prior_ended")) {
+      String changed = SKIP_GOLDEN.replace("\n" + field + "=", "\nunknown=");
+      assertNotEquals(SKIP_GOLDEN, changed, field);
+      byte[] owned = changed.getBytes(StandardCharsets.US_ASCII);
+      assertEquals(
+          "cleanup request invalid",
+          assertThrows(
+                  IllegalArgumentException.class, () -> CleanupWorkerRequest.Expiry.consume(owned))
+              .getMessage(),
+          field);
+      assertArrayEquals(new byte[owned.length], owned, field);
+    }
+    for (String bad :
+        List.of(
+            SKIP_GOLDEN.replace(
+                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:02.000000001Z"),
+            SKIP_GOLDEN.replace(
+                "prior_started=2026-09-30T00:00:01Z",
+                "prior_started=2026-09-30T00:00:01.000000001Z"),
+            SKIP_GOLDEN.replace(
+                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=+10000-01-01T00:00:00Z"),
+            SKIP_GOLDEN.replace("prior_step_id=42", "prior_step_id=1000000000000"),
+            SKIP_GOLDEN.replace("prior_attempt=1", "prior_attempt=100"))) {
+      byte[] owned = bad.getBytes(StandardCharsets.US_ASCII);
+      assertThrows(
+          IllegalArgumentException.class, () -> CleanupWorkerRequest.Expiry.consume(owned));
+      assertArrayEquals(new byte[owned.length], owned);
+    }
+  }
+
   @Test
   void wire200001ForeignAnchorCutoffIsExplicitAndOldGrammarIsNotReinterpreted() {
     String vector =
