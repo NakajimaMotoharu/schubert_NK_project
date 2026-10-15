@@ -54,11 +54,18 @@ def server(data):
     qualified=b/'runs/PG3738-hygiene-whole-qualified-v1';qualified.mkdir();(qualified/'manifest.safe.json').write_text(json.dumps(result,sort_keys=True));result['qualificationManifestSha256']=sha(qualified/'manifest.safe.json');print(json.dumps(result))
 
 
+def qualification_inputs(original):
+    prior=json.loads((W/'pg3414-outbox-full-qualified-v1/manifest.safe.json').read_bytes())['result'];changed=subprocess.check_output(['git','diff','--name-only',prior['sourceSnapshot'],original['snapshot'],'--',':(glob)src/*/src/main/java/**/*.java'],cwd=ROOT,text=True).splitlines()
+    return {'source':SOURCE,'snapshot':original['snapshot'],'expected':EXPECTED,'newCases':NEW_CASES,'priorManifestSha256':prior['serverManifestSha256'],'priorJarHashes':prior['jarHashes'],'approvedChangedSources':changed}
+
+
+def qualification_payload(original):
+    return '\n'.join(inspect.getsource(x)for x in [require,source_file,classify,server])+'\nserver('+repr(qualification_inputs(original))+')\n'
+
+
 def main():
     original=json.loads((W/'pg3734-server-six-v1/manifest.safe.json').read_bytes());require(original['actualExit']==0 and original['productionSource']==SOURCE,'genuine original whole wrapper0, not duplicate run')
-    prior=json.loads((W/'pg3414-outbox-full-qualified-v1/manifest.safe.json').read_bytes())['result'];changed=subprocess.check_output(['git','diff','--name-only',prior['sourceSnapshot'],original['snapshot'],'--',':(glob)src/*/src/main/java/**/*.java'],cwd=ROOT,text=True).splitlines()
-    data={'source':SOURCE,'snapshot':original['snapshot'],'expected':EXPECTED,'newCases':NEW_CASES,'priorManifestSha256':prior['serverManifestSha256'],'priorJarHashes':prior['jarHashes'],'approvedChangedSources':changed}
-    os.umask(0o077);out=W/'pg3738-hygiene-whole-qualified-v1';out.mkdir();script=out/'qualify.private.py';script.write_text('\n'.join(inspect.getsource(x)for x in [require,source_file,classify,server])+'\nserver('+repr(data)+')\n');dest='/home/mini/schubert-nk-pgpt/transfer/PG3738-hygiene-whole-qualified-v1';rc,_=run('test ! -e /home/mini/schubert-nk-pgpt/runs/PG3738-hygiene-whole-qualified-v1 && mkdir -m700 '+dest,timeout=30);require(rc==0,'new-only independent qualification');rc,_=copy(script,dest+'/',timeout=60);require(rc==0,'complete independent namespace')
+    os.umask(0o077);out=W/'pg3738-hygiene-whole-qualified-v1';out.mkdir();script=out/'qualify.private.py';script.write_text(qualification_payload(original));dest='/home/mini/schubert-nk-pgpt/transfer/PG3738-hygiene-whole-qualified-v1';rc,_=run('test ! -e /home/mini/schubert-nk-pgpt/runs/PG3738-hygiene-whole-qualified-v1 && mkdir -m700 '+dest,timeout=30);require(rc==0,'new-only independent qualification');rc,_=copy(script,dest+'/',timeout=60);require(rc==0,'complete independent namespace')
     rc,text=run('python3 -B '+dest+'/qualify.private.py',timeout=180);(out/'observer.private.log').write_text(text);value={'actualExit':rc,'source':SOURCE,'payloadSha256':hashlib.sha256(script.read_bytes()).hexdigest(),'formalAccepted':False}
     if rc==0:value['result']=json.loads(next(x for x in reversed(text.splitlines())if x.startswith('{')))
     (out/'manifest.safe.json').write_text(json.dumps(value,sort_keys=True));print(json.dumps({k:v for k,v in value.items()if k!='result'}))
