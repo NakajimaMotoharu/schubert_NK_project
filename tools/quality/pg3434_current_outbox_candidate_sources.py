@@ -4,6 +4,7 @@ Historical factories render code only. New current data/boot/Root witness and
 candidate roles are separately authenticated before any generated operation.
 """
 import ast
+from functools import lru_cache
 import json
 import re
 import uuid
@@ -50,11 +51,11 @@ def qualify():
         raise ValueError('separate genuine current data and signed candidate roles required')
 
 
-def sources(bom=BOM, before=BEFORE):
-    qualify()
-    if bom != BOM or before != BEFORE:
-        raise ValueError('one actual signed candidate and authenticated current data view')
-    values = old.sources(bom)  # Render old code, not a new admission or old authority.
+@lru_cache(maxsize=1)
+def _binding_context():
+    # Cache immutable completed-Root template data only, never live authority.
+    # Every sources()/operation still performs its own fresh qualification.
+    values = old.sources(BOM)
     latest = owner.sources(); current_binding = binding(latest['pg3150_parent_receipt.py'])
     previous_binding = binding(values['pg2658_parent_receipt.py'])
     _, _, summary, ended = owner.context()
@@ -72,16 +73,29 @@ def sources(bom=BOM, before=BEFORE):
              ('pg2659', 'pg3436'), ('PG2659', 'PG3436'),
              ('pg2660', 'pg3438'), ('PG2660', 'PG3438'), ('pg2662', 'pg3438'), ('PG2662', 'PG3438'),
              ('2026-10-14T01:04:03.525607Z', ended)]
-    for key in ['activation', 'run', 'cutoff', 'invocation', 'job']:
+    for key in ['activation', 'run', 'cutoff', 'invocation']:
         pairs.append((str(previous_binding[key]), str(current_binding[key])))
     def bind(raw):
         for a, b in pairs:
             raw = raw.replace(a, b)
-        for a, b in [('41101204300', str(current_binding['start'])),
+        for a, b in [(str(previous_binding['job']), str(current_binding['job'])),
+                     ('41101204300', str(current_binding['start'])),
                      ('42816406603', str(summary['endMonotonicUs'])), ('287080', str(live['rootPid']))]:
             raw = re.sub(r'\b' + a + r'\b', b, raw)
         return raw
-    result = {bind(name): bind(raw) for name, raw in values.items()}
+    return bind, latest, current_binding, values
+
+
+def bind(raw):
+    return _binding_context()[0](raw)
+
+
+def sources(bom=BOM, before=BEFORE):
+    qualify()
+    if bom != BOM or before != BEFORE:
+        raise ValueError('one actual signed candidate and authenticated current data view')
+    binder, latest, current_binding, values = _binding_context()
+    result = {binder(name): binder(raw) for name, raw in values.items()}
     # Latest current Root proof is historical data only; the new actor is acquired
     # independently by M/A/backend/peer checks in the operation protocol.
     result['pg3434_parent_receipt.py'] = latest['pg3150_parent_receipt.py']

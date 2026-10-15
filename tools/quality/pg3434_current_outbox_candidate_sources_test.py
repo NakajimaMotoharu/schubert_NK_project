@@ -6,6 +6,13 @@ import pg3436_current_outbox_candidate_compile as compiler
 
 
 class CurrentCandidateRoles(unittest.TestCase):
+    def test_numeric_job_binding_never_rewrites_a_digest_fragment(self):
+        original = 'a' * 30 + '74434' + 'b' * 29
+        self.assertEqual(64, len(original))
+        self.assertEqual("digest='" + original + "'", current.bind("digest='" + original + "'"))
+        self.assertEqual('job=60559; other=x74434y; count=174434',
+                         current.bind('job=74434; other=x74434y; count=174434'))
+
     def test_all_eighteen_namespaces_exact_current_and_candidate_roles(self):
         values = current.sources(); self.assertEqual(18, len(values))
         raw = '\n'.join(values.values())
