@@ -19,3 +19,9 @@ NK-OPS-001/WBS-N14、SS343/353/451/SSC230259260274276277、BUG1266/YKT1032（126
 純二試験actual0: 修正前10keyにnativeなしを独立再現。明示11key oracle、独立4root tree fixtureから正規返却を照合し、native実getter呼出しを確認、file SHA変化の拒否相当（厳密不一致）とnative読取例外の非正常化を確認。全20source/dispatch/post namespace・全24/metadata/source/current/byte条件を完成graphで確認。検査途中のfixture共有参照はdeep-copyに是正し、新工具未完成の失敗を合格へ算入しない。
 
 原証跡はPG379/対応private manifest/guest保全域、rawDB/native exec/session/cookie/token/鍵はGit非格納。新六ABI/有限prepare/独立postとBrowser全case準備は未実行。Rootはまだ起動しない。新3691/3056/3058は別groupとして正常完了し、残659L133M5C483B・四100未達を維持する。
+
+## 是正後actual（2026-10-15 10:13JST）
+
+c41bb82fa固定3102/exec69725 compile/argument/labelmount/original/identity/input六phase actual0/sourceQualifiedtrue、01:09:08.110710～09.391301Z・guest mutation0。3104stage/exec56895 actual0→prepare/exec82975一回actual0（01:11:22.968983～01:12:05.058034Z、42.089051s）/sourceQualifiedtrue/freshResumeRuntimePreparedtrue/normalSingleRuntimeReloadtrue。Root/停止/epoch/SQLwrite0、元parentのまま当`zz-pg3100-once-resume.conf`一entryのみ作成。
+
+3106/exec25429独立actual0（01:12:38.302643～47.901427Z）、payload956b671a65bf7469740a9b98a58d39ebb1d982c7689add3cae17c4d9601d5117。原24全値二読/署名187/Backup/native16不変、全十Unit/kernel・actor/client/advisory/flock0、正規retirement原proof不変＋新runtime-only差・実CLOCK5/元parent inode保持を実証。preparedAfter f041e0b3318db88e7b94cd40a23d28ba7e630d405e1b13f9ae397f03a1312f24、native canonical ab3fcad3e4f842562c7cd4cd77c5966b81ffba6534cf153c549cc1a5588aa4e2、Root-before consumerへ渡す出力。初期/最終とも全11項目・native実読取を保ち、旧missing-native inputを加工して期待値へしない。旧3084/3064のUNKNOWN143保持。Bug1265/1266の有限処理再試験PASSだが、Root-before consumer連鎖の独立純検査/後続実接続は残件として明示し、PGPT全体受入には加算しない。
