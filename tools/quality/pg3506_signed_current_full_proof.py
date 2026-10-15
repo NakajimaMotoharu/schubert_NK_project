@@ -9,10 +9,11 @@ import subprocess
 from pyflakes.api import check
 import pg3502_signed_current_retained_readonly as diagnostic
 import pg3504_signed_current_profile_contract as contract
+import pg3509_tcp_pair_contract as tcp_contract
 from pg1446_current_cold_stage import W, P, SSH
 from pg1724_retained_host_gate import queued_gate
 
-SLOT = 'pg3506-signed-current-full-proof-v1'
+SLOT = 'pg3506-signed-current-full-proof-v2'
 
 
 def helpers(slot=SLOT):
@@ -31,6 +32,7 @@ def helpers(slot=SLOT):
             raw += '\n' + ast.get_source_segment(source, node) + '\n'
     module = W.parent.parent / 'toolchain/jdk-25.0.4/lib/modules'
     raw += '\nEXPECTED_MODULE_SHA=' + repr(hashlib.sha256(module.read_bytes()).hexdigest()) + '\n'
+    raw += '\nimport ipaddress\n' + inspect.getsource(tcp_contract.endpoint) + '\n' + inspect.getsource(tcp_contract.tcp_pair)
     return raw + HELPERS
 
 
@@ -56,16 +58,14 @@ def sockets(pid):
 def tcp_peers(peers):
  expected={'schubert_app':('schubert-nk-api','schubert-nk-api.service',2,8),'schubert_web_session':('schubert-nk-web','schubert-nk-web.service',1,2)}
  require(all(p['role']in expected and p['application']==expected[p['role']][0]and p['address']=='127.0.0.1'and p['state']in {'idle','idle in transaction','active'}for p in peers))
- table=[line.split()for line in pathlib.Path('/proc/net/tcp').read_text().splitlines()[1:]]
+ table=[line.split()for family in ['tcp','tcp6']for line in pathlib.Path('/proc/net',family).read_text().splitlines()[1:]]
  result={}
  for role,(app,unit,lo,hi)in expected.items():
   rows=[p for p in peers if p['role']==role];require(lo<=len(rows)<=hi)
   client=sockets(seal['units'][unit]['MainPID']);matches=[]
   for p in rows:
-   endpoint='0100007F:'+format(p['port'],'04X')
-   a=[r for r in table if len(r)>=10 and r[1]==endpoint and r[2]=='0100007F:1538'and r[3]=='01'and r[9]in client]
-   b=[r for r in table if len(r)>=10 and r[2]==endpoint and r[1]=='0100007F:1538'and r[3]=='01'and r[9]in sockets(p['pid'])]
-   require(len(a)==len(b)==1);matches.append({'activity':p,'clientInode':a[0][9],'serverInode':b[0][9]})
+   outbound,inbound=tcp_pair(table,p['port'],client,sockets(p['pid']))
+   matches.append({'activity':p,'clientInode':outbound,'serverInode':inbound})
   result[unit]=matches
  return result
 def snapshot():
