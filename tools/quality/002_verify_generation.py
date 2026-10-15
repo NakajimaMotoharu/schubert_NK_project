@@ -54,7 +54,8 @@ def main():
         subprocess.run(command, cwd=repo, check=True, capture_output=True, timeout=60)
         commands.append(command)
         files = sorted(generated.rglob("*.java"))
-        command = [str(java), "-jar", str(args.formatter.resolve()), "--replace",
+        command = [str(java), "-jar", str(args.formatter.resolve()),
+                   "--skip-reflowing-long-strings", "--replace",
                    *[str(path) for path in files]]
         subprocess.run(command, cwd=repo, check=True, capture_output=True, timeout=60)
         commands.append(command[:5] + ["<70 isolated generated Java paths>"])
