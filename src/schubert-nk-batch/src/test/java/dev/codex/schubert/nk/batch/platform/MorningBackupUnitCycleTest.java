@@ -13,6 +13,265 @@ import org.junit.jupiter.api.Test;
  * admission.
  */
 final class MorningBackupUnitCycleTest {
+  /** SS343/SSC136/PT-OPS-BUCYCLE3244001: completed proof is read-only, never a new start. */
+  @Test
+  void bucycle3244001CompletedBackupRequiresSameBaselineReceiptAndQuiescentTerminal()
+      throws Exception {
+    for (String fault :
+        List.of("NONE", "OTHER_INVOCATION", "NOT_QUIESCENT", "MISSING_BASELINE", "MISSING_TYPED")) {
+      var actual = ExpiryReceiptFixture.backupReceipt(0);
+      var fixture = new Cycle3244(BackupUnitStartClient.Target.BACKUP, actual, false);
+      var cycle = fixture.subject();
+      assertThrows(IOException.class, cycle::completedReceipt);
+      assertThrows(IOException.class, cycle::recheckCompletedBackup);
+      assertEquals(0, fixture.starts);
+      assertEquals(0, fixture.stops);
+      assertEquals(0, fixture.start.retire);
+      if (fault.equals("MISSING_TYPED")) {
+        fixture.delivered = Optional.empty();
+        assertThrows(
+            Retained.class,
+            () -> cycle.executeObserved(fixture::originalProof, fixture::completed));
+        assertEquals(1, fixture.starts);
+        assertEquals(1, fixture.stops);
+        assertEquals(0, fixture.completions);
+        assertEquals(0, fixture.proofs);
+        assertEquals(0, fixture.start.retire);
+        assertTrue(fixture.retains > 0);
+        continue;
+      }
+      if (fault.equals("MISSING_BASELINE")) {
+        assertEquals(
+            MorningBackupUnitCycle.Outcome.SUCCESS,
+            cycle.execute(
+                fixture::originalProof,
+                result -> {
+                  assertEquals(MorningBackupUnitCycle.Outcome.SUCCESS, result);
+                  fixture.completions++;
+                }));
+      } else {
+        assertEquals(
+            MorningBackupUnitCycle.Outcome.SUCCESS,
+            cycle.executeObserved(fixture::originalProof, fixture::completed));
+      }
+      assertSame(actual, cycle.completedReceipt());
+      if (fault.equals("OTHER_INVOCATION"))
+        fixture.stopped = ExpiryReceiptFixture.backupReceipt(0, "8".repeat(32));
+      if (fault.equals("NOT_QUIESCENT")) fixture.quiet = false;
+      if (fault.equals("NONE")) {
+        cycle.recheckCompletedBackup();
+        cycle.recheckCompletedBackup();
+        assertThrows(Retained.class, cycle::retainUnresolvedOwner);
+        assertEquals(1, fixture.retains);
+      } else {
+        var refused = assertThrows(IOException.class, cycle::recheckCompletedBackup);
+        assertNull(refused.getCause());
+        assertEquals(0, fixture.retains);
+      }
+      assertEquals(1, fixture.captures);
+      assertEquals(1, fixture.starts);
+      assertEquals(1, fixture.stops);
+      assertEquals(1, fixture.completions);
+      assertEquals(1, fixture.proofs);
+      assertEquals(1, fixture.start.retire);
+    }
+  }
+
+  /** SS343/PT-OPS-BUCYCLE3244002: a retained child cannot mint a successful parent proof. */
+  @Test
+  void bucycle3244002ClosedPhaseAndTypedFailedHandoffKeepCompletionAfterReacquire()
+      throws Exception {
+    for (var target : BackupUnitStartClient.Target.values()) {
+      var fixture = new Cycle3244(target, ExpiryReceiptFixture.backupReceipt(0), false);
+      var cycle = fixture.subject();
+      if (target != BackupUnitStartClient.Target.BACKUP)
+        assertThrows(IOException.class, () -> cycle.execute(fixture::originalProof));
+      if (target != BackupUnitStartClient.Target.INSPECTOR)
+        assertThrows(
+            IOException.class,
+            () ->
+                cycle.executeInspectorHandoff(
+                    work -> fail("wrong phase cannot borrow"),
+                    receipt -> fail("wrong phase cannot complete"),
+                    fixture::originalProof));
+      if (target == BackupUnitStartClient.Target.BACKUP
+          || target == BackupUnitStartClient.Target.INSPECTOR
+          || target == BackupUnitStartClient.Target.BROKER)
+        assertThrows(
+            IOException.class,
+            () ->
+                cycle.executeHandoff(
+                    work -> fail("wrong phase cannot start"),
+                    receipt -> fail("wrong phase cannot complete"),
+                    fixture::originalProof));
+      assertEquals(0, fixture.starts);
+      assertEquals(0, fixture.captures);
+      assertEquals(0, fixture.proofs);
+      assertEquals(0, fixture.start.retire);
+    }
+    for (var target :
+        List.of(BackupUnitStartClient.Target.CLEANUP, BackupUnitStartClient.Target.EXPIRY)) {
+      for (String fault : List.of("NONE", "NULL", "FOREIGN", "DOUBLE", "WRONG_PHASE_RECEIPT")) {
+        var actual =
+            target == BackupUnitStartClient.Target.CLEANUP
+                ? ExpiryReceiptFixture.cleanupReceipt(30)
+                : ExpiryReceiptFixture.receipt(30);
+        var fixture = new Cycle3244(target, actual, true);
+        var cycle = fixture.subject();
+        if (fault.equals("WRONG_PHASE_RECEIPT"))
+          fixture.delivered = Optional.of(ExpiryReceiptFixture.backupReceipt(0));
+        MorningBackupUnitCycle.Handoff handoff =
+            work -> {
+              fixture.borrowed = true;
+              fixture.events.add("borrow");
+              try {
+                var result = work.execute();
+                if (fault.equals("DOUBLE")) return work.execute();
+                if (fault.equals("NULL")) return null;
+                if (fault.equals("FOREIGN")) return ExpiryReceiptFixture.backupReceipt(0);
+                return result;
+              } catch (IOException | RuntimeException | Error failed) {
+                throw failed;
+              } catch (Exception invalidFixture) {
+                throw new AssertionError(invalidFixture);
+              } finally {
+                fixture.borrowed = false;
+                fixture.events.add("reacquire");
+              }
+            };
+        MorningBackupUnitCycle.ObservedCompletion complete =
+            observed -> {
+              assertFalse(fixture.borrowed);
+              assertSame(actual, observed);
+              assertEquals(30, observed.exitCode());
+              fixture.completions++;
+              fixture.events.add("completion");
+            };
+        if (fault.equals("NONE")) {
+          assertSame(actual, cycle.executeHandoff(handoff, complete, fixture::originalProof));
+          assertSame(actual, cycle.completedReceipt());
+          assertEquals(1, fixture.completions);
+          assertEquals(1, fixture.proofs);
+          assertEquals(1, fixture.start.retire);
+          assertEquals(
+              List.of("borrow", "start", "reacquire", "completion", "original"), fixture.events);
+        } else {
+          assertThrows(
+              Retained.class,
+              () -> cycle.executeHandoff(handoff, complete, fixture::originalProof));
+          assertEquals(0, fixture.completions);
+          assertEquals(0, fixture.proofs);
+          assertEquals(0, fixture.start.retire);
+          assertTrue(fixture.retains > 0);
+        }
+        assertEquals(1, fixture.starts);
+        assertEquals(0, fixture.stops);
+      }
+    }
+  }
+
+  /** Independent finite port/counter oracle; no native authority or expected-from-subject. */
+  private static final class Cycle3244 {
+    final BackupUnitStartClient.Target target;
+    final BackupUnitReceiptGate.TerminalReceipt actual;
+    final boolean failed;
+    final Object baseline = new Object();
+    final StartAttempt start = new StartAttempt();
+    final List<String> events = new ArrayList<>();
+    BackupUnitReceiptGate.TerminalReceipt stopped;
+    Optional<BackupUnitReceiptGate.TerminalReceipt> delivered;
+    boolean quiet = true;
+    boolean borrowed;
+    int captures;
+    int starts;
+    int stops;
+    int completions;
+    int proofs;
+    int retains;
+
+    Cycle3244(
+        BackupUnitStartClient.Target target,
+        BackupUnitReceiptGate.TerminalReceipt actual,
+        boolean failed) {
+      this.target = target;
+      this.actual = actual;
+      this.stopped = actual;
+      this.delivered = Optional.of(actual);
+      this.failed = failed;
+    }
+
+    void originalProof() {
+      assertFalse(borrowed);
+      proofs++;
+      events.add("original");
+    }
+
+    void completed(
+        MorningBackupUnitCycle.Outcome outcome, BackupUnitReceiptGate.TerminalReceipt observed) {
+      assertEquals(MorningBackupUnitCycle.Outcome.SUCCESS, outcome);
+      assertSame(actual, observed);
+      completions++;
+    }
+
+    MorningBackupUnitCycle subject() {
+      return new MorningBackupUnitCycle(
+          () -> {},
+          new MorningBackupUnitCycle.Receipt() {
+            public Object capture() {
+              captures++;
+              return baseline;
+            }
+
+            public boolean freshZero(Object observed) {
+              assertSame(baseline, observed);
+              return !failed;
+            }
+
+            public Optional<MorningBackupUnitCycle.Outcome> terminal(Object observed) {
+              assertSame(baseline, observed);
+              return Optional.of(
+                  failed
+                      ? MorningBackupUnitCycle.Outcome.FAILED
+                      : MorningBackupUnitCycle.Outcome.SUCCESS);
+            }
+
+            public Optional<BackupUnitReceiptGate.TerminalReceipt> observed(Object observed) {
+              assertSame(baseline, observed);
+              return delivered;
+            }
+
+            public BackupUnitReceiptGate.TerminalReceipt stopped(
+                Object observed, BackupUnitReceiptGate.TerminalReceipt before) {
+              assertSame(baseline, observed);
+              assertSame(actual, before);
+              return stopped;
+            }
+
+            public void requirePresent(BackupUnitReceiptGate.TerminalReceipt observed)
+                throws IOException {
+              if (observed != actual) throw new IOException("fixture typed identity changed");
+            }
+          },
+          () -> {
+            starts++;
+            events.add("start");
+            return start;
+          },
+          () -> {
+            stops++;
+            return new StopAttempt();
+          },
+          () -> quiet,
+          () -> fail("finite fixture must not wait"),
+          () -> {
+            retains++;
+            throw new Retained();
+          },
+          budget(),
+          target);
+    }
+  }
+
   @Test
   void isscomp010ChangedStoppedProofBeforeRetirementRetainsOwnership() throws Exception {
     var actual = ExpiryReceiptFixture.backupReceipt(0);
