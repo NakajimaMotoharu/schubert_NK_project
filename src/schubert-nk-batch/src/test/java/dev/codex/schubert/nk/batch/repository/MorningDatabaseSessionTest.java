@@ -31,6 +31,164 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-3254-001/SS332 SSC063: real read-only statement, independent fixed priority table. */
+  @Test
+  void mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner() throws Exception {
+    // Primary / close / public winner / sanitized secondary count / optional SAME.
+    // Literal SS priority oracle; never call JdbcResourceFailures for expected.
+    String[][] vectors = {
+      {"NONE", "SQL", "IO", "0"},
+      {"NONE", "IAE", "CLOSE", "0"},
+      {"NONE", "STATE", "CLOSE", "0"},
+      {"NONE", "ERROR", "CLOSE", "0"},
+      {"SQL", "NONE", "IO", "0"},
+      {"SQL", "SQL", "IO", "0"},
+      {"SQL", "IAE", "CLOSE", "0"},
+      {"SQL", "STATE", "CLOSE", "0"},
+      {"SQL", "ERROR", "CLOSE", "0"},
+      {"IAE", "NONE", "PRIMARY", "0"},
+      {"IAE", "SQL", "PRIMARY", "1"},
+      {"IAE", "IAE", "PRIMARY", "1"},
+      {"IAE", "STATE", "PRIMARY", "1"},
+      {"IAE", "ERROR", "PRIMARY", "1"},
+      {"STATE", "NONE", "PRIMARY", "0"},
+      {"STATE", "SQL", "PRIMARY", "1"},
+      {"STATE", "IAE", "PRIMARY", "1"},
+      {"STATE", "STATE", "PRIMARY", "1"},
+      {"STATE", "ERROR", "PRIMARY", "1"},
+      {"ERROR", "NONE", "PRIMARY", "0"},
+      {"ERROR", "SQL", "PRIMARY", "1"},
+      {"ERROR", "IAE", "PRIMARY", "1"},
+      {"ERROR", "STATE", "PRIMARY", "1"},
+      {"ERROR", "ERROR", "PRIMARY", "1"},
+      {"SQL", "SQL", "IO", "0", "SAME"},
+      {"STATE", "STATE", "PRIMARY", "1", "SAME"},
+      {"ERROR", "ERROR", "PRIMARY", "1", "SAME"}
+    };
+    assertEquals(27, vectors.length);
+    int ordinal = 0;
+    for (String[] vector : vectors) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("32540001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2057-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      Instant started = run.cutoff().plusSeconds(11 * 3600);
+      Instant ended = started.plusSeconds(2);
+      var failed =
+          new BatchStepResult(
+              BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+      var primary = mdb3254Fault(vector[0]);
+      var closing = vector.length == 5 ? primary : mdb3254Fault(vector[1]);
+      var expected = vector[2].equals("PRIMARY") ? primary : closing;
+      Class<? extends Throwable> expectedType =
+          vector[2].equals("IO") ? IOException.class : expected.orElseThrow().getClass();
+      var armed = new AtomicBoolean();
+      var retained = new AtomicReference<Connection>();
+      var borrowed = new AtomicReference<MorningDatabaseSession.Access>();
+      var executes = new AtomicInteger();
+      var readOnlyProofs = new AtomicInteger();
+      var statementCloses = new AtomicInteger();
+      var subject =
+          new MorningDatabaseSession(
+              actualUrl,
+              () -> {},
+              (url, properties) -> {
+                var actual = DriverManager.getConnection(url, properties);
+                retained.set(actual);
+                return (Connection)
+                    Proxy.newProxyInstance(
+                        Connection.class.getClassLoader(),
+                        new Class<?>[] {Connection.class},
+                        (unused, method, args) -> {
+                          Object result = mdb2292Invoke(method, actual, args);
+                          if (!armed.get() || !method.getName().equals("createStatement"))
+                            return result;
+                          var statement = (Statement) result;
+                          return Proxy.newProxyInstance(
+                              Statement.class.getClassLoader(),
+                              new Class<?>[] {Statement.class},
+                              (unusedStatement, called, values) -> {
+                                Object value = mdb2292Invoke(called, statement, values);
+                                if (called.getName().equals("execute")) {
+                                  assertEquals("SET TRANSACTION READ ONLY", values[0]);
+                                  executes.incrementAndGet();
+                                  // A separate real-driver observer proves the server flag;
+                                  // JDBC configured-readOnly remains false by design.
+                                  try (var observer = actual.createStatement();
+                                      var rows =
+                                          observer.executeQuery("SHOW transaction_read_only")) {
+                                    assertTrue(rows.next());
+                                    assertEquals("on", rows.getString(1));
+                                    assertFalse(rows.next());
+                                  }
+                                  readOnlyProofs.incrementAndGet();
+                                  if (primary.isPresent()) throw primary.orElseThrow();
+                                }
+                                if (called.getName().equals("close")) {
+                                  assertTrue(statement.isClosed());
+                                  statementCloses.incrementAndGet();
+                                  if (closing.isPresent()) throw closing.orElseThrow();
+                                }
+                                return value;
+                              });
+                        });
+              },
+              connection -> {});
+      try {
+        var actual =
+            assertThrows(
+                expectedType,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          borrowed.set(session);
+                          var begins = session.beginBackup(run, started, false);
+                          session.failBackup(begins, ended, failed, failed);
+                          mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+                          armed.set(true);
+                          session.recheckConsistent(run);
+                          fail("execute/close fault must never return a consistent proof");
+                          return Boolean.TRUE;
+                        }));
+        assertEquals(expectedType, actual.getClass());
+        if (vector[2].equals("IO")) {
+          assertEquals("root batch database unavailable", actual.getMessage());
+          assertNull(actual.getCause());
+        } else assertSame(expected.orElseThrow(), actual);
+        assertEquals(Integer.parseInt(vector[3]), actual.getSuppressed().length);
+        for (Throwable safe : actual.getSuppressed()) {
+          assertEquals(BatchRepositoryException.class, safe.getClass());
+          assertEquals("batch repository operation failed", safe.getMessage());
+          assertNull(safe.getCause());
+          assertEquals(0, safe.getSuppressed().length);
+        }
+      } finally {
+        assertEquals(1, executes.get());
+        assertEquals(1, readOnlyProofs.get());
+        assertEquals(1, statementCloses.get());
+        assertNotNull(retained.get());
+        assertTrue(retained.get().isClosed());
+        assertNotNull(borrowed.get());
+        assertThrows(IOException.class, () -> borrowed.get().recheckConsistent(run));
+        mdb2292Rows(run, "FAILED", started, Optional.of(ended));
+        mdb2292NoOwnerResources();
+      }
+    }
+  }
+
+  private static Optional<Throwable> mdb3254Fault(String kind) {
+    return switch (kind) {
+      case "NONE" -> Optional.empty();
+      case "SQL" -> Optional.of(new SQLException("PT3254_SQL_DRIVER", "XX000"));
+      case "IAE" -> Optional.of(new IllegalArgumentException("PT3254_IAE_DRIVER"));
+      case "STATE" -> Optional.of(new IllegalStateException("PT3254_STATE_DRIVER"));
+      case "ERROR" -> Optional.of(new AssertionError("PT3254_ERROR_DRIVER"));
+      default -> throw new AssertionError("fixed independent fault kind required");
+    };
+  }
+
   /** PT-MDB-2804-001: checked IO owns precedence; SQL close details never escape. */
   @Test
   void mdb2804001CheckedCallbackAndCompoundJdbcClosePreserveRowsAndRedactSecondary()
