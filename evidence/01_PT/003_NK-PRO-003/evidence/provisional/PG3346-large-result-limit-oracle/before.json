@@ -1,0 +1,45 @@
+{
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "run": "PG3346-before-v1",
+  "actualDiagnosticExit": 0,
+  "payloadSha256": "4eeb3406cf4eeb8516d3397b042fa2257ad6f9d8ca9d43b6775a1408acc35476",
+  "testSource": "efbd1f9925f3e21f4ea03970787150d48c8b4e34",
+  "startUTC": "2026-10-15T10:59:42.411140+00:00",
+  "endUTC": "2026-10-15T10:59:46.197266+00:00",
+  "vectors": {
+    "LOWERED_MAXIMUM": {
+      "actualExit": 0,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": false,
+      "selector": "largeResultMaximum",
+      "testLogSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad"
+    },
+    "NORMAL_MAXIMUM": {
+      "actualExit": 0,
+      "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rejected": false,
+      "selector": "largeResultMaximum",
+      "testLogSha256": "63c86035ac8c580cac8527775ede7dbbce92be98e68614e644b331c9d50507ad"
+    }
+  },
+  "falseNegatives": 1,
+  "mutationsRejected": 0,
+  "fixedInputs": {
+    "LargeResultRecordCodecTest.java": "85fbad77a631bb5bf5ff94779be75c708c82861794c9998ac24c268816ec9b9c",
+    "LargeResultDescriptor.java": "53fd3e59f2044003e86758bce74972798fb375fdb9755defc4feaa9a2b796891",
+    "ExecOracleCanaryLauncher.java": "8c547336c1133a7515f981b941f45c733e7704f8cd6b2d8d63a5b316f9b1d083"
+  },
+  "shadowMaximumRecords": 9999,
+  "shadowMaximumBytes": 47995200,
+  "expectedCanonicalRecords": 10000,
+  "expectedCanonicalRecordLength": 4800,
+  "expectedCanonicalBytes": 48000000,
+  "productionChanged": false,
+  "vmActions": 0,
+  "newPtCredit": 0,
+  "coverageCredit": 0,
+  "formalUpdated": false,
+  "correctionStatus": "NOT_IMPLEMENTED; running3330 Test collection kept fixed",
+  "BUG": "BUG-1292",
+  "YKT": "YKT-1058"
+}

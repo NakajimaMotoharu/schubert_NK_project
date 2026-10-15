@@ -1,0 +1,23 @@
+# 大容量codec全scope・独立最大値是正仕様（未受入）
+
+WBS-P003-01、2026-10-15、Production a9/PG2802。全専有五path＝LargeResultContent、LargeResultDescriptor、LargeResultIoException、LargeResultRecordCodec、file/package-info。四実行family＋package、全accessor/constructor/validation/digest/readExact/helperを含む。正本UI237 §4～6/SS333 §4～7、RD MQ037～041/MSG-F03/F04。依存P002-02は受入済み、全当family四counter miss0はPG3278同a9の測定であり個別受入とは別。
+
+## 全scopeと実Test ID
+
+既LargeResultRecordCodecTest七methodはPG3316の原Protocol85内。D01/D02 descriptorAcceptsOnlyCanonicalPathHashAndLengthEquationはUUID同一・JST日付正規形/suffix/相対path/ASCII/256byte/size式/小文字SHA64、全null・不正日付・絶対/余分文字/UUID違いをliteralで検査。Content metadataの七条件はcontentMetadataRejectsInvalidValuesで1/0/10001・4800/4799・null/不正hashを検査する。
+
+L01 writesAndReadsHeaderlessExactRecordsWithIndependentHashは各4800byteの入力1/2の連結9600byteをtest自身で配列構築しwrite実byte/count/hashを確認。hash expectedはJCAで独立計算する。decode descriptorへwrite actual hashを渡すが、先に独立hashとの一致をassert済みで、同Production methodをexpectedに使わない。37/53byte short-read/一度zero進捗と戻り一覧immutableを確認。
+
+L02/L03 writeRejectsNullCountLengthAndIoFailure、decodeRejectsTruncationExtraHashAndIoFailureは0/10001件、null collection/要素/stream/descriptor、4799byte/4801byte、hash不一致、read0→EOF、read/write IOException、未知digest algorithmを分類。write/readはcaller streamを閉じず、内部IO例外はLargeResultIoException、wire/終端/hashはPermanentProtocolException。上位delivery境界で外部へ固定診断に変換する契約を維持し、この内部wrapperをそのままHTTP/logへ出す承認ではない。H01 verificationRejectsAllThirtyTwoDigestBytePositionsは独立JCA32byte各位置のbit改変をすべて拒否し、時間差のflaky計測を使わない。
+
+## BUG1292/YKT1058：最大値oracle不足と是正条件
+
+既最大methodは4800/10000/48000000の入力・expectedを同Production定数へ依存する9箇所を持つ。先行a4063531e、PG3346-before/66527 fixedefbd1f992、10:59:42.411140～10:59:46.197266Z actual診断0。元正常maximumのactual一JUnit成功、私有LargeResultDescriptorだけのMAXIMUM_RECORD_COUNTを9999・MAXIMUM_BYTE_LENGTHを47995200へ整合縮小したshadowでもactual同一JUnit成功。**falseNegative1/拒否0**、Production/MainJar変更なし、PT/coverage新加点0。公開PG3346 before.jsonにsource/payload/全入力・各実log SHA、旧raw/成功失敗はprivate保全。
+
+修正は既methodを正本literal 4800byte・10000件・48000000byteへ固定する。JCA repeatedHash、write count/metadata、descriptor equation、zero InputStreamの全長・decode件数・先頭/末尾byteを独立に検査する。最大成功の各Production callはassertDoesNotThrowで明示し、許可上限の縮小を意味のあるAssertionFailedErrorとして検出する。元Production定数でexpectedを生成しない。正常維持＋同shadow拒否→関連Protocol→必要一全体/native同byte資格まで未完。稼働3330のTestには混入せず、真正終端後に1291と次の必要Test群へまとめる。
+
+## 横断RD・残受入条件
+
+MQ037/038はP001-02の全64layout/反復最大数/1領域とP002-02 semantic/goldenを参照し、本streamはSCN4800一種類のrecordだけを扱う。MQ039/MSG-F04はAPI Scenario file writerとWeb file readerの実Test/descriptor限定MQを別joinする必要がある。MSG-F03はcanonical relative pathと受入済P003-04保持NOFOLLOW能力に加え、Web resolverの許可root選択/実読取後条件を照合する。MQ040はJMS一時三再配送/恒久DLQ、MQ041はno ACK/日中保持/朝削除の実consumer・batch証拠が必要で、codec七件だけで完了へ加算しない。
+
+現状＝全scopeのunit契約は上記、最大oracle不足のBUG1292と横断RD joinが未完のためNOT_ACCEPTED。Main/TX/JMS/削除・共有製造費の新規加点0。全3702/28の旧成功を未来の是正Testへ改名せず、正式1964/53・工数null・QA051final保留・全PGPT/ITST未完を維持する。
