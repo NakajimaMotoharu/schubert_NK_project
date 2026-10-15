@@ -16,6 +16,7 @@ W=Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 OUT=W/'pg3694-hygiene-candidate-material-v1'
 REMOTE='/home/mini/schubert-nk-pgpt/runs/PG3692-hygiene-candidate-v1'
 PRIVATE=False
+OCTAL=False
 
 
 def require(value,reason):
@@ -35,15 +36,21 @@ def verify_generated(names,changes,original):
 
 def stage():
     require(not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT),'clean fixed source before stage')
-    proof=json.loads((W/('pg3720-private-field-candidate-v2/manifest.safe.json'if PRIVATE else 'pg3692-hygiene-candidate-stage-v1/manifest.safe.json')).read_bytes());r=proof['result']
+    proof=json.loads((W/('pg3726-octal-candidate-v1/manifest.safe.json'if OCTAL else 'pg3720-private-field-candidate-v2/manifest.safe.json'if PRIVATE else 'pg3692-hygiene-candidate-stage-v1/manifest.safe.json')).read_bytes());r=proof['result']
+    if OCTAL:
+        fixed=json.loads((W/'pg3730-octal-candidate-static-v1/manifest.safe.json').read_bytes());s=fixed['result']
+        require(proof['actualExit']==r['actualExit']==fixed['actualExit']==0 and r['changedFiles']==30 and r['octalIntegerTokens']==187 and r['normalizedFullSemanticBindingsTreeLiteralsAndPublicAbiIdentical'],'actual187 exact integer/type semantic proof')
+        require(len(r['modules'])==6 and all(m['actualExit']==0 for m in r['modules'].values()),'all6 complete original/candidate literal/binding/ABI proofs')
+        require(s['candidateManifestSha256']==r['serverManifestSha256']and s['octalDelta']['actualRawReduction']==187 and s['octalDelta']['onlyOctalRuleChanged']and s['pmd']['processingErrors']==0 and s['pmd']['rawFindings']==1840,'actual187 octal decrease and all other rule counts unchanged')
+        r={**r,'checkstyle':s['checkstyle'],'candidateChanges':{p:{'original':v['before'],'candidate':v['candidate']}for p,v in r['changes'].items()},'productionSource':r['baseCandidateSource']}
     if PRIVATE:
         fixed=json.loads((W/'pg3722-private-candidate-static-v1/manifest.safe.json').read_bytes());s=fixed['result']
         require(proof['actualExit']==r['actualExit']==fixed['actualExit']==0 and r['changedFiles']==90 and r['renamedPrivateSymbols']==190 and r['serializedFindingsUnchanged']==63 and r['normalizedFullSemanticBindingsTreeLiteralsAndPublicAbiIdentical']and r['allNewFieldsPresentOldFieldsAbsent'],'actual190 private semantic proof')
         require(len(r['modules'])==6 and all(m['verifyExit']==0 for m in r['modules'].values()),'all6 complete final compiler proofs')
         require(s['candidateManifestSha256']==r['serverManifestSha256']and s['privateRenameDelta']['actualRawReduction']==190 and s['privateRenameDelta']['onlyExpectedNamingRulesChanged']and s['pmd']['processingErrors']==0 and s['pmd']['rawFindings']==2027,'exact actual190 decrease without other rule changes')
         r={**r,'checkstyle':s['checkstyle'],'candidateChanges':{p:{'original':v['before'],'candidate':v['candidate']}for p,v in r['changes'].items()},'productionSource':r['baseCandidateSource']}
-    require(proof['actualExit']==r['actualExit']==r['checkstyle']['actualExit']==r['checkstyle']['findings']==0 and r['sourceFiles']==849 and r['changedFiles']==(90 if PRIVATE else 214) and not r['mainApplied'],'actual whole candidate semantic/Checkstyle proof')
-    if not PRIVATE:require(all(x['actualExit']==0 and x['allBindingsAndDeclarationsIdentical']for x in r['modules'].values())and len(r['modules'])==6,'all six semantic source proofs')
+    require(proof['actualExit']==r['actualExit']==r['checkstyle']['actualExit']==r['checkstyle']['findings']==0 and r['sourceFiles']==849 and r['changedFiles']==(30 if OCTAL else 90 if PRIVATE else 214) and not r['mainApplied'],'actual whole candidate semantic/Checkstyle proof')
+    if not(PRIVATE or OCTAL):require(all(x['actualExit']==0 and x['allBindingsAndDeclarationsIdentical']for x in r['modules'].values())and len(r['modules'])==6,'all six semantic source proofs')
     os.umask(0o077);OUT.mkdir();original=main_map();require(len(original)==849,'every Main input')
     changes=r['candidateChanges']
     for name,v in changes.items():require(original.get(name)==v['original']and str(Path(name))==name and '..'not in Path(name).parts and name.startswith('src/schubert-nk-')and '/src/main/java/'in name and name.endswith('.java'),'exact unchanged approved Main path')
@@ -60,7 +67,7 @@ with tarfile.open(archive,'x:gz')as t:
 print(json.dumps({'actualExit':0,'archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'bytes':archive.stat().st_size,'files':len(v['changes'if PRIVATE else 'candidateChanges'])}))
 '''
     archive_name='candidate-'+str(len(changes))+'-source.tar.gz'
-    payload='EXPECTED='+repr(r['serverManifestSha256'])+'\nREMOTE='+repr(REMOTE)+'\nPRIVATE='+repr(PRIVATE)+'\nARCHIVE='+repr(archive_name)+'\n'+code
+    payload='EXPECTED='+repr(r['serverManifestSha256'])+'\nREMOTE='+repr(REMOTE)+'\nPRIVATE='+repr(PRIVATE or OCTAL)+'\nARCHIVE='+repr(archive_name)+'\n'+code
     # Only a derived source archive is written in the existing isolated candidate directory.
     command='python3 -c '+shlex.quote(payload)
     rc,output=lan_server.run(command,timeout=45);(OUT/'archive.safe.log').write_text(output);require(rc==0,'new exact derived candidate archive')
@@ -93,7 +100,7 @@ def apply():
     require(v['originalAll849Sha256']==main_map()and sha(OUT/'candidate.patch')==v['patchSha256'],'all current source and patch still exact')
     for p,x in v['changes'].items():require(sha(OUT/'candidate'/p)==x['candidate'],'all214 new proven bytes')
     subprocess.run(['git','apply','--check',str(OUT/'candidate.patch')],cwd=ROOT,check=True)
-    count=len(v['changes']);require(count==(90 if PRIVATE else 214),'exact configured delta count')
+    count=len(v['changes']);require(count==(30 if OCTAL else 90 if PRIVATE else 214),'exact configured delta count')
     with(OUT/'apply-intent.safe.json').open('x')as f:json.dump({'patchSha256':v['patchSha256'],'files':count,'originalHead':v['operatorHead'],'vmOperations':0},f,sort_keys=True);f.flush();os.fsync(f.fileno())
     fd=os.open(OUT,os.O_RDONLY|os.O_DIRECTORY)
     try:os.fsync(fd)
@@ -108,7 +115,9 @@ def apply():
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['stage','apply']);p.add_argument('--private190',action='store_true');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['stage','apply']);group=p.add_mutually_exclusive_group();group.add_argument('--private190',action='store_true');group.add_argument('--octal187',action='store_true');args=p.parse_args()
     if args.private190:
         PRIVATE=True;OUT=W/'pg3724-private-candidate-material-v1';REMOTE='/home/mini/schubert-nk-pgpt/runs/PG3720-private-field-candidate-v2'
+    if args.octal187:
+        OCTAL=True;OUT=W/'pg3732-octal-candidate-material-v1';REMOTE='/home/mini/schubert-nk-pgpt/runs/PG3726-octal-candidate-v1'
     raise SystemExit({'stage':stage,'apply':apply}[args.action]())
