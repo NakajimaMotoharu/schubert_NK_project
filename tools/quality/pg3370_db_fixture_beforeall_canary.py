@@ -15,9 +15,22 @@ from pg3294_protocol_directional_oracle import fixed_jdk, launcher_path, require
 ROOT = Path(__file__).resolve().parents[2]
 W = Path('/home/mini/codex/project1/work/pgpt-runs/PG379')
 SOURCE = 'a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25'
-SLOT = 'PG3370-db-beforeall-canary-v1'
+SLOT = 'PG3370-db-beforeall-canary-v2'
 JAVA = 'tools/quality/vm/050_s1/DbFixtureBeforeAllFailureLauncher.java'
 TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepositoryTest.java'
+
+
+def resolve_classpath_entry(entry, user_dir, source_root, repository):
+    cwd = Path(user_dir)
+    require(cwd.is_absolute() and cwd.is_dir() and cwd.resolve().is_relative_to(Path(source_root).resolve()),
+            'original actual Java user.dir inside current source required')
+    path = Path(entry) if entry else cwd
+    if not path.is_absolute():
+        path = cwd / path
+    require(path.exists() and (path.resolve().is_relative_to(Path(source_root).resolve())
+                              or path.resolve().is_relative_to(Path(repository).resolve())),
+            'only resolved actual source/repo classpath')
+    return path
 
 SERVER = r'''
 import hashlib,json,os,subprocess,xml.etree.ElementTree as ET
@@ -32,7 +45,7 @@ source=I/'DbFixtureBeforeAllFailureLauncher.java';require(sha(source)==INPUT['la
 xml=T/'surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest.xml';require(sha(xml)==INPUT['batchXmlSha256'],'actual same-source original XML classpath')
 node=ET.parse(xml).getroot();props={p.get('name'):p.get('value')for p in node.findall('properties/property')};repo=B/'m2/repository';cp=[];libraries=[]
 for entry in props['java.class.path'].split(os.pathsep):
- p=Path(entry);require(p.exists()and(p.resolve().is_relative_to(S.resolve())or p.resolve().is_relative_to(repo.resolve())),'only actual current project/repo classpath')
+ p=resolve_classpath_entry(entry,props['user.dir'],S,repo)
  cp.append(p)
  if p.suffix=='.jar':libraries.append(p)
 launcher=launcher_path([p for p in libraries if p.name.startswith('junit-platform-engine-')],repo)
@@ -50,14 +63,14 @@ with(O/'junit.private.log').open('xb')as log:actual=subprocess.run(args,cwd=S,en
 require(actual.returncode==0,'actual BeforeAll failure must retain IO without secondary NPE')
 text=(O/'junit.private.log').read_text();require('DBLIFE_FOUND=1 STARTED=0 CONTAINER_FAILED=1 BEFOREALL_IO=true SECONDARY_NPE=false PT_CREDIT=0'in text,'exact independent JUnit lifecycle postcondition')
 require(sha(test_class)==before and sha(manifest)==INPUT['relatedManifestSha256']and sha(S/INPUT['test'])==INPUT['testSha256']and all(sha(Path(p))==h for p,h in hashes.items()),'all actual Test/Jar/source/library authorities unchanged')
-value={'actualExit':0,'productionSource':INPUT['source'],'sourceSnapshot':INPUT['snapshot'],'run':INPUT['slot'],'found':1,'started':0,'containerFailed':1,'beforeAllIoPreserved':True,'secondaryNpe':False,'dbExecutableAbsent':True,'newPtCredit':0,'vmActions':0,'formalUpdated':False,'originalXmlSha256':sha(xml),'actualTestClassSha256':before,'libraryHashes':hashes,'compileLogSha256':sha(O/'compile.private.log'),'junitLogSha256':sha(O/'junit.private.log'),'exitManifestSha256':sha(O/'exit.safe.json')}
+value={'actualExit':0,'productionSource':INPUT['source'],'sourceSnapshot':INPUT['snapshot'],'run':INPUT['slot'],'found':1,'started':0,'containerFailed':1,'beforeAllIoPreserved':True,'secondaryNpe':False,'dbExecutableAbsent':True,'newPtCredit':0,'vmActions':0,'formalUpdated':False,'originalXmlSha256':sha(xml),'originalUserDir':props['user.dir'],'originalEmptyClasspathResolved':True,'actualTestClassSha256':before,'libraryHashes':hashes,'compileLogSha256':sha(O/'compile.private.log'),'junitLogSha256':sha(O/'junit.private.log'),'exitManifestSha256':sha(O/'exit.safe.json')}
 (O/'manifest.safe.json').write_text(json.dumps(value,sort_keys=True));value['serverManifestSha256']=sha(O/'manifest.safe.json');print(json.dumps(value))
 '''
 
 
 def server_source(data):
     raw = ('INPUT=' + repr(data) + '\n'
-           + '\n'.join(inspect.getsource(f) for f in [require, fixed_jdk, launcher_path]) + '\n' + SERVER)
+           + '\n'.join(inspect.getsource(f) for f in [require, fixed_jdk, launcher_path, resolve_classpath_entry]) + '\n' + SERVER)
     compile(raw, '<actual BeforeAll cleanup regression>', 'exec')
     require(check(raw, '<actual BeforeAll final namespace>') == 0, 'complete namespace')
     return raw

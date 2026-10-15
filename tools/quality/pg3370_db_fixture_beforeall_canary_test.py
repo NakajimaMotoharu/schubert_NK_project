@@ -1,5 +1,7 @@
 """Pure diagnostic boundaries, separate from actual failing JUnit container proof."""
 import ast
+from pathlib import Path
+import tempfile
 import unittest
 
 import pg3370_db_fixture_beforeall_canary as target
@@ -25,6 +27,23 @@ class BeforeAllCanaryGates(unittest.TestCase):
                        'Files.notExists', 'exp3366001PriorSuccessRevalidatesEveryReadbackWithoutMutation']:
             self.assertIn(clause, raw)
         self.assertNotIn('setAccessible', raw)
+
+    def test_empty_relative_absolute_and_escape_resolve_only_against_original_cwd(self):
+        with tempfile.TemporaryDirectory(prefix='db-lifecycle-path-') as directory:
+            base = Path(directory); source = base / 'source'; source.mkdir()
+            cwd = source / 'module'; cwd.mkdir(); repository = base / 'repo'; repository.mkdir()
+            target.resolve_classpath_entry('', str(cwd), source, repository)
+            self.assertEqual(cwd, target.resolve_classpath_entry('', str(cwd), source, repository))
+            self.assertEqual(cwd / '..', target.resolve_classpath_entry('..', str(cwd), source, repository))
+            self.assertEqual(repository, target.resolve_classpath_entry(str(repository), str(cwd), source, repository))
+            for entry in ['../..', str(base), 'missing']:
+                with self.assertRaises(ValueError):
+                    target.resolve_classpath_entry(entry, str(cwd), source, repository)
+            link = cwd / 'escape'; link.symlink_to(base, target_is_directory=True)
+            with self.assertRaises(ValueError):
+                target.resolve_classpath_entry('escape', str(cwd), source, repository)
+            with self.assertRaises(ValueError):
+                target.resolve_classpath_entry('', str(base), source, repository)
 
 
 if __name__ == '__main__':
