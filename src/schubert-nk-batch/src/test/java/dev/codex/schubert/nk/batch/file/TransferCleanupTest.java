@@ -159,6 +159,70 @@ final class TransferCleanupTest {
     assertEquals(BatchStepResult.Reason.IO_FAILURE, failed.reason());
   }
 
+  /** PT-OPS-TRANSFER3048-001: untrusted ownership/ACL/filesystem cannot begin deletion. */
+  @Test
+  void transfer3048001RootIdentityAclAndReadOnlyRefuseBeforeDeletingAnyByte() throws Exception {
+    for (String fault : new String[] {"uid", "gid", "nullAcl", "acl", "readonly"}) {
+      Path root = directory(fixture.resolve("transfer-" + fault));
+      Path date = directory(root.resolve("20260929"));
+      Path original = file(date.resolve(A), new byte[] {17, 23, 41}, CUTOFF.minusSeconds(1));
+      long uid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid"));
+      long gid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:gid"));
+      InodeSecurityCalls security =
+          new InodeSecurityCalls() {
+            @Override
+            public byte[] accessAcl(Path held, int maximumBytes) {
+              assertEquals(44, maximumBytes);
+              return fault.equals("nullAcl")
+                  ? null
+                  : fault.equals("acl") ? new byte[] {1} : new byte[0];
+            }
+
+            @Override
+            public boolean readOnlyFilesystem(Path held) {
+              return fault.equals("readonly");
+            }
+
+            @Override
+            public long effectiveUid() {
+              throw new AssertionError("not an ownership substitute");
+            }
+          };
+      try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
+        var subject =
+            new TransferCleanup(
+                held,
+                security,
+                fault.equals("uid") ? uid + 1 : uid,
+                fault.equals("gid") ? gid + 1 : gid,
+                () -> {});
+        assertThrows(IOException.class, () -> subject.execute(CUTOFF), fault);
+      }
+      assertArrayEquals(new byte[] {17, 23, 41}, Files.readAllBytes(original), fault);
+      assertTrue(Files.isDirectory(date), fault);
+      assertTrue(Files.isDirectory(root), fault);
+    }
+  }
+
+  /** PT-OPS-TRANSFER3048-002: eight-digit grammar does not make year zero a valid date. */
+  @Test
+  void transfer3048002CalendarLowerUpperBoundaryAndYearZeroAreIndependent() throws Exception {
+    Path root = directory(fixture.resolve("calendar"));
+    Path zero = directory(root.resolve("00000101"));
+    Path lower = directory(root.resolve("00010101"));
+    Path upper = directory(root.resolve("99991231"));
+    try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
+      var actual = service(held, root, () -> {}).execute(CUTOFF);
+      assertEquals(new TransferCleanup.Outcome(0, 0, 0, 1, 0), actual);
+      assertEquals(BatchStepResult.Status.WARNING, actual.result().status());
+      assertEquals(BatchStepResult.Reason.PROTECTED_RECORDS, actual.result().reason());
+    }
+    assertTrue(Files.isDirectory(root));
+    assertTrue(Files.isDirectory(zero));
+    assertFalse(Files.exists(lower));
+    assertFalse(Files.exists(upper));
+  }
+
   private TransferCleanup service(
       OwnedTransferDirectory held, Path root, TransferCleanup.Guard guard) throws IOException {
     return new TransferCleanup(
