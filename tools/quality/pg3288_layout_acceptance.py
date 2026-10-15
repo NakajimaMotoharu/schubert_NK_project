@@ -3,6 +3,7 @@
 Immutable successful source/run witnesses, canonical oracle, all owned artifacts,
 four counters, and explicit review107 are prerequisites. No runtime action.
 """
+import argparse
 import copy
 import hashlib
 import json
@@ -27,8 +28,11 @@ def require(value, message):
 def one_line_task(text, id, changed):
     lines = text.splitlines(keepends=True); hits = 0
     for index, line in enumerate(lines):
-        if line.lstrip().startswith('{"id": "' + id + '"'):
+        try:
             old = json.loads(line.strip().removesuffix(','))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(old, dict) and old.get('id') == id:
             require(old['id'] == id and set(old) == set(changed), 'same exact task schema required')
             lines[index] = line[:len(line) - len(line.lstrip())] + json.dumps(changed, ensure_ascii=False) + (',' if line.rstrip().endswith(',') else '') + '\n'; hits += 1
     require(hits == 1, 'one task line required')
@@ -59,7 +63,7 @@ def check_inputs(canonical, witness, task, row):
         require(names <= methods.get('dev.codex.schubert.nk.protocol.' + short, set()), 'every explicitly reviewed method must actually have passed')
 
 
-def main():
+def main(resume=False):
     require(not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT), 'fixed clean reviewed tool/doc/proof required')
     before = audit.verify()
     require(before['acceptedTasks'] == 0, 'first individually reviewed acceptance, not repeated operation')
@@ -85,7 +89,18 @@ def main():
         if item['kind'] == 'JAVA':
             node = classes[item['class']]
             require(all(int(c.get('missed')) == 0 for c in node.findall('counter') if c.get('type') in ('LINE', 'METHOD', 'CLASS', 'BRANCH')), 'every owned family four100 required')
-    out = W / 'pg3288-layout-acceptance-v1'; out.mkdir(mode=0o700)
+    old_out = W / 'pg3288-layout-acceptance-v1'
+    old_matrix = ROOT / PUBLIC / 'layout-acceptance.json'
+    if resume:
+        # First failure wrote only an intention and private before-images. It
+        # never applied acceptance; prove this, do not overwrite that attempt.
+        for path in (master_path, snapshot_path):
+            require(path.read_bytes() == (old_out / ('before-' + path.name)).read_bytes(), 'original failed attempt must not have applied WBS')
+        intent = audit.read_json(old_matrix)
+        require(intent['productionSource'] == SOURCE and intent['wbs'] == ID
+                and intent['operatorSource'] == 'bb5be0a9296782c8eb2e952cda14e3b8fcc612e4'
+                and audit.digest(old_matrix) == 'e6b36c991fd697110be9a43ebe641ab0ccb9d893e3cf5d15907f4b219c76ace2', 'exact preserved original un-applied intent required')
+    out = W / ('pg3288-layout-acceptance-v2' if resume else 'pg3288-layout-acceptance-v1'); out.mkdir(mode=0o700)
     for path in (master_path, snapshot_path):
         with (out / ('before-' + path.name)).open('xb') as stream:
             stream.write(path.read_bytes())
@@ -98,7 +113,10 @@ def main():
               'dependencies': [], 'actualExit': 0, 'acceptedLeafDelta': 1, 'formalAccepted': False,
               'wholeEffortCompletionRate': None, 'coverageCredit': 0, 'newPtCredit': 0, 'vmActions': 0,
               'operatorSource': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()}
-    matrix_path = ROOT / PUBLIC / 'layout-acceptance.json'
+    if resume:
+        matrix.update(originalAttemptExit=1, originalAttemptApplied=False,
+                      originalIntentSha256=audit.digest(old_matrix), resumedAfterBug='BUG1284/YKT1050')
+    matrix_path = ROOT / PUBLIC / ('layout-acceptance-v2.json' if resume else 'layout-acceptance.json')
     with matrix_path.open('x') as stream:
         json.dump(matrix, stream, ensure_ascii=False, indent=2); stream.write('\n')
     acceptance = {'status': 'ACCEPTED', 'source': SOURCE,
@@ -123,4 +141,6 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--resume-bug1284', action='store_true')
+    raise SystemExit(main(parser.parse_args().resume_bug1284))

@@ -12,10 +12,24 @@ class IndividualAcceptanceTest(unittest.TestCase):
         value = subject.one_line_task(text, subject.ID, changed)
         self.assertEqual(changed, json.loads(value)['tasks'][0])
         self.assertIn('    {"id": "other", "keep":"original bytes"}', value)
+        compact = text.replace('"id": "', '"id":"')
+        self.assertEqual(json.loads(value), json.loads(subject.one_line_task(compact, subject.ID, changed)))
         with self.assertRaises(ValueError):
             subject.one_line_task(text, 'missing', changed)
         with self.assertRaises(ValueError):
             subject.one_line_task(text, subject.ID, {**changed, 'newKey': True})
+
+    def test_actual_compact_master_line_and_duplicate_reject(self):
+        text = (subject.audit.PMO / '481_PGPT詳細WBS.json').read_text()
+        original = next(t for t in json.loads(text)['tasks'] if t['id'] == subject.ID)
+        changed = copy.deepcopy(original); changed['acceptance']['status'] = 'IN_PROGRESS'
+        result = json.loads(subject.one_line_task(text, subject.ID, changed))
+        expected = json.loads(text)
+        next(t for t in expected['tasks'] if t['id'] == subject.ID)['acceptance']['status'] = 'IN_PROGRESS'
+        self.assertEqual(expected, result)
+        repeated = json.dumps(original) + ',\n' + json.dumps(original) + '\n'
+        with self.assertRaises(ValueError):
+            subject.one_line_task(repeated, subject.ID, changed)
 
     def fixture(self):
         canonical = {'actualExit': 0, 'productionSource': subject.SOURCE, 'layoutTuples': 64, 'fieldRows': 389, 'nonemptyAreas': 74, 'namedMappings': 64, 'expectedGeneratedFromProduction': False}

@@ -41,3 +41,7 @@ PG3284工具71a953543、純4件成功。`pg3284_protocol_canonical_fixtures.py`�
 P001-02の終了依存は空。全三criteriaと同source/hashの厳格監査成功後だけ当leafをACCEPTEDへ変更する。正式1964PT/53scope、工数完成率null、QA051final保留、他189項目・252実行leafの範囲及び原/改訂予算は維持する。1/190という件数は工数百分率ではない。
 
 再現：`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes-runtime> python3 -B tools/quality/wbs_progress_audit.py`。既終了全回帰やnativeを監査のため反復しない。関連BUG1279～1283/YKT1045～1049は有限工具/oracle是正完了で、本票の全工程認定を意味しない。
+
+## BUG1284/YKT1050補足
+
+3288初回は実compact原本の行認識不足でactual1、候補/481/486適用前に拒否。元`layout-acceptance.json`は未適用のintentとして保全し、そのacceptedLeafDelta=1は計画値であって実績ではない。実受入のproofは是正後の別`layout-acceptance-v2.json`のみとする。旧before二file同byteと元intent SHAe6b36c99を照合してから、`pg3288_layout_acceptance.py --resume-bug1284`で新-only v2へ進む。元失敗・原byte・intentは上書き0。独立再発防止は実481 compact/spaced/重複/別schema/他行不変を含む。
