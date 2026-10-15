@@ -1,5 +1,6 @@
 """Independent two-generation Inspector pairs; reject missing/duplicate/cross-session/reversed."""
 import copy
+import ast
 import unittest
 import pg3632_current_browser_native_qualified as p
 
@@ -37,6 +38,16 @@ class Inspector(unittest.TestCase):
         self.assertNotIn('PG3532-native-v3',raw)
         source=p.source();self.assertIn('old_input[\'selected\']+catalog[\'selected\']',source)
         self.assertIn('pg3632-current-browser-native-qualified-v1',source)
+
+    def test_console_uses_actual_saved_result_counts(self):
+        tree=ast.parse(p.source())
+        dictionaries=[n for n in ast.walk(tree)if isinstance(n,ast.Dict)]
+        summary=next(n for n in dictionaries if any(isinstance(k,ast.Constant)and k.value=='streams'for k in n.keys))
+        fields={k.value:v for k,v in zip(summary.keys,summary.values,strict=True)if isinstance(k,ast.Constant)}
+        for streams,points in [(9,10),(18,20)]:
+            result={'currentNativeStreams':streams,'validatedNativePoints':points}
+            for key,wanted in [('streams',streams),('validatedPoints',points)]:
+                self.assertEqual(wanted,eval(compile(ast.Expression(fields[key]),'<actual console count expression>','eval'),{'result':result}))
 
 
 if __name__=='__main__':unittest.main()

@@ -72,6 +72,9 @@ def source():
     # Capacity covers both preserved first cohort and the newly read cohort;
     # this is not a relaxation of native/input validation or coverage scope.
     raw=raw.replace('require_bytes=10*16777216+805306368','require_bytes=20*16777216+805306368')
+    old="'streams':9,'validatedPoints':10"
+    if raw.count(old)!=1:raise ValueError('one inherited console-only cohort count boundary required')
+    raw=raw.replace(old,"'streams':result['currentNativeStreams'],'validatedPoints':result['validatedNativePoints']",1)
     compile(raw,'<actual same-current two-cohort transport>','exec');return raw
 
 
