@@ -57,7 +57,7 @@ final class AuthSessionRevocationServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    database.stop();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

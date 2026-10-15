@@ -77,8 +77,8 @@ final class AuthenticationServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    codec.close();
-    database.stop();
+    if (codec != null) codec.close();
+    if (database != null) database.stop();
     String privateDiagnostics = System.getenv("SCHUBERT_AUTH_DIAGNOSTICS_DIR");
     if (privateDiagnostics != null) {
       // Explicit investigation only, before JUnit may remove its class-scoped

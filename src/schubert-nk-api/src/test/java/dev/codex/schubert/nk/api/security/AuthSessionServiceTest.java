@@ -59,8 +59,8 @@ final class AuthSessionServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    codec.close();
-    database.stop();
+    if (codec != null) codec.close();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

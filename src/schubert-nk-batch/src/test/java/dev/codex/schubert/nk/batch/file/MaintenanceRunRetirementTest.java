@@ -63,7 +63,7 @@ final class MaintenanceRunRetirementTest {
 
   @AfterAll
   static void stopDatabase() throws Exception {
-    db.stop();
+    if (db != null) db.stop();
   }
 
   @BeforeEach

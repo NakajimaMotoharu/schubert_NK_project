@@ -59,7 +59,7 @@ final class BoundInboxExecutionTest {
 
   @AfterAll
   static void stop() throws Exception {
-    database.stop();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

@@ -56,9 +56,9 @@ final class LogoutInboxServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    snapshots.close();
-    keys.close();
-    database.stop();
+    if (snapshots != null) snapshots.close();
+    if (keys != null) keys.close();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

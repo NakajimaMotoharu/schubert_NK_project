@@ -56,9 +56,9 @@ final class LoginReplayServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    contexts.close();
-    snapshots.close();
-    database.stop();
+    if (contexts != null) contexts.close();
+    if (snapshots != null) snapshots.close();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

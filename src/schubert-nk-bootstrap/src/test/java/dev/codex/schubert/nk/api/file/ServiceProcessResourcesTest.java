@@ -46,7 +46,7 @@ final class ServiceProcessResourcesTest {
 
   @AfterAll
   static void stop() throws Exception {
-    database.stop();
+    if (database != null) database.stop();
   }
 
   private static ServiceProcessResources.Inputs inputs(Path root) {

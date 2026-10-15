@@ -110,10 +110,10 @@ final class LoginInboxServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    contexts.close();
-    snapshots.close();
-    keys.close();
-    database.stop();
+    if (contexts != null) contexts.close();
+    if (snapshots != null) snapshots.close();
+    if (keys != null) keys.close();
+    if (database != null) database.stop();
   }
 
   @BeforeEach

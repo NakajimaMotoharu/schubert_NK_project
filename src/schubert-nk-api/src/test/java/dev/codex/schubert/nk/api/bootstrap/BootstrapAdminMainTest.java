@@ -41,7 +41,7 @@ class BootstrapAdminMainTest {
 
   @AfterAll
   static void stop() throws Exception {
-    db.stop();
+    if (db != null) db.stop();
   }
 
   /** PT-ADM-BOOT707001: actual public entry, fixed70 without credentials/OS admission. */

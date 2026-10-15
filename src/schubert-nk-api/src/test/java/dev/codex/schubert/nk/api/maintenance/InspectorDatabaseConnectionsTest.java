@@ -68,9 +68,9 @@ final class InspectorDatabaseConnectionsTest {
   @AfterAll
   static void stop() throws Exception {
     try {
-      db.stop();
+      if (db != null) db.stop();
     } finally {
-      Arrays.fill(password, (byte) 0);
+      if (password != null) Arrays.fill(password, (byte) 0);
     }
   }
 

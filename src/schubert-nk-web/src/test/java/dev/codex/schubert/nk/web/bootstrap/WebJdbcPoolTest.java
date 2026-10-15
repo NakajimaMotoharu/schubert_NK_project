@@ -34,7 +34,7 @@ final class WebJdbcPoolTest {
 
   @AfterAll
   static void stopDatabase() throws Exception {
-    database.stop();
+    if (database != null) database.stop();
   }
 
   private static PGSimpleDataSource source(String jdbcUrl) {

@@ -26,6 +26,11 @@ class RelatedGuards(unittest.TestCase):
         for missing in ['skipTests', 'failIfNoSpecifiedTests', 'pausePreservingInterrupt', 'mpass010NewInterrupt']:
             self.assertNotIn(missing, raw)
         self.assertTrue(all(method in raw for _, method in target.METHODS))
+        self.assertIn("env['SCHUBERT_PG_ROOT'] = str(pg)", raw)
+        self.assertIn("'postgresToolchain': pg_meta", raw)
+        self.assertIn("'runs/PG3366-related-v2'", raw)
+        self.assertLess(raw.index("env['SCHUBERT_PG_ROOT']"), raw.index("'-Dnk.pt.repository='"))
+        self.assertNotIn('PG3366-related-v1', raw)
 
     def test_genuine_classifier_rejects_skip_even_when_counts_are_correct(self):
         node = ET.fromstring('<testsuite name="X" tests="1" failures="0" errors="0" skipped="1"><testcase classname="X" name="one"><skipped/></testcase></testsuite>')

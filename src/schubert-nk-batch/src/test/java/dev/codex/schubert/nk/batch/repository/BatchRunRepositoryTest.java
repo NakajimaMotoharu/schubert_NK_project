@@ -45,7 +45,7 @@ final class BatchRunRepositoryTest {
 
   @AfterAll
   static void stop() throws Exception {
-    db.stop();
+    if (db != null) db.stop();
   }
 
   @BeforeEach

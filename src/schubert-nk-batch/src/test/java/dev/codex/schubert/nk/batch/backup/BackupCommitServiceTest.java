@@ -24,7 +24,7 @@ final class BackupCommitServiceTest {
 
   @AfterAll
   static void stop() throws Exception {
-    db.stop();
+    if (db != null) db.stop();
   }
 
   // BUG193/YKT152: declared, unknown and same-object cleanup failures.
