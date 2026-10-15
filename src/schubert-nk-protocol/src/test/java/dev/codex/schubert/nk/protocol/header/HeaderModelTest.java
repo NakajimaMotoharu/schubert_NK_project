@@ -45,6 +45,19 @@ class HeaderModelTest {
     assertThrows(IllegalArgumentException.class, () -> InteractionKind.fromWire("SS"));
     assertThrows(IllegalArgumentException.class, () -> InteractionKind.fromWire("X"));
 
+    // BUG1279/YKT1045: decode uses a fixed switch, so roundtrip/name/count alone
+    // cannot prove each encode wire value. These literals come from UI232 §3.
+    String[][] kinds = {{"REQUEST", "Q"}, {"RESPONSE", "S"}, {"EVENT", "E"}};
+    for (String[] row : kinds) {
+      assertEquals(row[1].charAt(0), MessageKind.valueOf(row[0]).wireValue(), row[0]);
+      assertEquals(row[0], MessageKind.fromWire(row[1]).name(), row[1]);
+    }
+    String[][] interactions = {{"SYNCHRONOUS", "S"}, {"ASYNC_ACCEPTANCE", "A"}, {"INTERNAL", "I"}};
+    for (String[] row : interactions) {
+      assertEquals(row[1].charAt(0), InteractionKind.valueOf(row[0]).wireValue(), row[0]);
+      assertEquals(row[0], InteractionKind.fromWire(row[1]).name(), row[1]);
+    }
+
     // BUG1244/YKT1010/PT-PRO-001-H01: UI232 section7 independent literal oracle.
     // Production values/wireValue are actuals only, never the expected allowlist.
     String[][] approved = {
@@ -303,8 +316,74 @@ class HeaderModelTest {
     assertThrows(LayoutValidationException.class, () -> header.validateAgainst(definition));
   }
 
+  /** PT-PRO-HDR3266-001: immediate Java preconditions, not a wire success/error response. */
+  @Test
+  void headerReferencesRejectNullAtTheNamedInvariantBoundary() {
+    String[] fields = {
+      "protocolIdentifier",
+      "layoutId",
+      "messageKind",
+      "interactionKind",
+      "messageId",
+      "correlationId",
+      "sentAt",
+      "authenticationContext",
+      "resultCode"
+    };
+    for (int position = 0; position < fields.length; position++) {
+      final int missing = position;
+      var failure =
+          assertThrows(NullPointerException.class, () -> headerWithMissingReference(missing));
+      assertEquals(fields[position], failure.getMessage());
+    }
+    CommonHeader valid = headerWithMissingReference(-1);
+    assertEquals("LOGREQ01", valid.layoutId().value());
+    assertEquals(256, valid.totalLength());
+    assertEquals(MESSAGE_ID, valid.correlationId());
+  }
+
+  /** PT-PRO-HDR3266-002: UI232 constructor limits, independently of a layout's narrower cap. */
+  @Test
+  void headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow() {
+    CommonHeader dataBoundary = base().dataLength(999_744).totalLength(1_000_000).build();
+    assertEquals(999_744, dataBoundary.dataLength());
+    assertEquals(1_000_000, dataBoundary.totalLength());
+    CommonHeader recordBoundary =
+        base().recordLength(1).recordCount(999_744).totalLength(1_000_000).build();
+    assertEquals(999_744, recordBoundary.recordCount());
+    assertEquals(1_000_000, recordBoundary.totalLength());
+    assertInvalid(base().dataLength(999_745).totalLength(1_000_001));
+    assertInvalid(base().recordLength(1).recordCount(999_745).totalLength(1_000_001));
+    LayoutValidationException overflow =
+        assertThrows(
+            LayoutValidationException.class,
+            () -> base().recordLength(999_999).recordCount(999_999).totalLength(256).build());
+    assertTrue(overflow.getCause() instanceof ArithmeticException);
+    assertEquals("header length calculation overflow", overflow.getMessage());
+  }
+
+  private static CommonHeader headerWithMissingReference(int missing) {
+    return new CommonHeader(
+        missing == 0 ? null : "SCHBNK01",
+        1,
+        missing == 1 ? null : new LayoutId("LOGREQ01"),
+        1,
+        missing == 2 ? null : MessageKind.REQUEST,
+        missing == 3 ? null : InteractionKind.SYNCHRONOUS,
+        missing == 4 ? null : MESSAGE_ID,
+        missing == 5 ? null : MESSAGE_ID,
+        missing == 6 ? null : SENT_AT,
+        missing == 7 ? null : Optional.of(CONTEXT),
+        256,
+        0,
+        0,
+        0,
+        256,
+        missing == 8 ? null : Optional.empty());
+  }
+
   private static void assertInvalid(HeaderBuilder builder) {
-    assertThrows(RuntimeException.class, builder::build);
+    assertThrows(LayoutValidationException.class, builder::build);
   }
 
   private static HeaderBuilder base() {
