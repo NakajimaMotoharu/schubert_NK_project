@@ -1,7 +1,10 @@
 """Related33/eight suites for one new retain contract; all Main byte-preserving."""
 import ast
+import argparse
+import hashlib
 import inspect
 import json
+import os
 import subprocess
 
 from pyflakes.api import check
@@ -78,5 +81,31 @@ def main():
     return namespace['main']()
 
 
+def collect():
+    os.umask(0o077)
+    directory = W / 'pg3396-retain-owner-related-v1'
+    value = json.loads((directory / 'manifest.safe.json').read_bytes()); r = value['result']
+    base.require(value['actualExit'] == r['actualExit'] == r['mavenExit'] == 0 and r['tests'] == 33 and r['suites'] == 8,
+                 'genuine complete related33 only')
+    base.require(hashlib.sha256((directory / 'related.private.py').read_bytes()).hexdigest() == value['payloadSha256'], 'original payload unchanged')
+    base.require(hashlib.sha256((directory / 'source.tar').read_bytes()).hexdigest() == r['sourceArchiveSha256'], 'actual source archive')
+    source = subprocess.check_output(['git', 'show', r['sourceSnapshot'] + ':' + TEST], cwd=ROOT)
+    base.require(source == (ROOT / TEST).read_bytes(), 'current test identical to actually executed')
+    out = ROOT / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG3396-retain-owner-related'
+    out.mkdir()
+    proof = {k: v for k, v in r.items() if k != 'input'}
+    proof.update(originalObserverActualExit=value['actualExit'], payloadSha256=value['payloadSha256'],
+                 testPath=TEST, testSha256=hashlib.sha256(source).hexdigest(),
+                 processExitMeaning='143 is expected owned isolated child TERM after live-lock checks, never Production Root success',
+                 wholeIntegrationPending=True, nativeRequalificationPending=True, acceptedLeafDelta=0,
+                 F03Accepted=False, existingStaticSixScope='Compiler/NullAway/SpotBugs/format, not unresolved PMD/Checkstyle')
+    with (out / 'manifest.json').open('x') as f:
+        json.dump(proof, f, ensure_ascii=False, indent=2)
+    print(json.dumps({'actualExit': 0, 'manifestSha256': hashlib.sha256((out / 'manifest.json').read_bytes()).hexdigest(),
+                      'retainMethodCounters': r['modules']['batch']['retainMethodCounters']}))
+    return 0
+
+
 if __name__ == '__main__':
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser(description=__doc__); parser.add_argument('action', nargs='?', choices=['run', 'collect'], default='run')
+    raise SystemExit(collect() if parser.parse_args().action == 'collect' else main())
