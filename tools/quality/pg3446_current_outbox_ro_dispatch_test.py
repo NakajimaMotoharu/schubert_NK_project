@@ -1,4 +1,5 @@
 import ast
+import inspect
 import unittest
 
 import pg3446_current_outbox_ro_dispatch as current
@@ -23,6 +24,11 @@ class FullRoDispatchBoundary(unittest.TestCase):
         for marker in ['2f7ca23be804567a5d9a61636cf4c1d4ec96fcd0',
                        'pg2667-frozen', 'pg2668-stage']:
             self.assertNotIn(marker, raw)
+
+    def test_complete_entry_alone_owns_non_reentrant_management_gate(self):
+        raw = current.source()
+        self.assertEqual(1, raw.count('with management_gate('))
+        self.assertNotIn('with management_gate(', inspect.getsource(current.main))
 
 
 if __name__ == '__main__':

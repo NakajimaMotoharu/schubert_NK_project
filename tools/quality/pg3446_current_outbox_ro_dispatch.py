@@ -4,8 +4,6 @@ import sys
 import pg2668_operation_ro_dispatch as old
 import pg3442_current_outbox_ro_sources as role
 from pg3444_current_outbox_ro_compile import TARGET
-from pg1446_current_cold_stage import P
-from pg1674_critical_management_gate import management_gate
 
 GUEST = '/var/lib/pgpt-s1-preservation/' + role.TOOLS
 REMOTE = '/home/ubuntu/pg3446-fixed-stage-v1'
@@ -33,8 +31,8 @@ def main():
                  'STAGE': STAGE, 'sources': role.sources, 'CANDIDATE': role.role.SOURCE,
                  'OLD': role.role.CURRENT, 'BEFORE': role.role.BEFORE}
     exec(compile(source(), '<currenta9 unused4856 RO entry>', 'exec'), namespace)
-    with management_gate(P / 'current-management-critical.lock'):
-        return namespace['main']()
+    # The complete composed entry owns the single non-reentrant management gate.
+    return namespace['main']()
 
 
 if __name__ == '__main__':
