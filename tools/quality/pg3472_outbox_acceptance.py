@@ -1,5 +1,6 @@
 """New-source terminal/all24/seal independent readers, no business mutation authority."""
 import inspect
+import ast
 import json
 import sys
 import types
@@ -15,6 +16,7 @@ from pg3470_outbox_admission_before import before
 from pg3434_current_outbox_candidate_sources import BOOT
 from pg1446_current_cold_stage import W
 import pg1769_next_day_rows_oracle as newday
+import pg2886_network_newcurrent_full_seal as prior_newday_seal
 
 TERM = 'pg3472-outbox-current-terminal-v1'
 ROWS = 'pg3474-outbox-current-rows-v1'
@@ -66,6 +68,20 @@ def seal_payload(binding):
                             {**old_seal.__dict__, 'SOURCE': SOURCE, 'SLOT': SEAL, 'TERM': TERM,
                              'before': before, 'terminal': lambda b, bom: terminal_payload(b)})
     raw = bind(fn(binding, BOM))
+    # Whole-seal independently re-evaluates the same SS before selectors. Never
+    # leave the historical same-day/ALREADY_SUCCESSFUL oracle embedded here.
+    oracle = prior_newday_seal.oracle(binding)
+    for name in ['r', 'row']:
+        old = name + "['business_date']=='2026-10-15'"
+        if oracle.count(old) != 1:
+            raise ValueError('one exact newday predicate required: ' + name)
+        oracle = oracle.replace(old, name + "['business_date']=='2026-10-16'")
+    nodes = [n for n in ast.parse(raw).body if isinstance(n, ast.Assign)
+             and any(isinstance(t, ast.Name) and t.id == 'ORACLE' for t in n.targets)]
+    if len(nodes) != 1:
+        raise ValueError('one complete independent whole-seal oracle required')
+    segment = ast.get_source_segment(raw, nodes[0])
+    raw = raw.replace(segment, 'ORACLE=' + repr(oracle), 1)
     if check(raw, '<whole current4856 seal>'):
         raise ValueError('all actual source/run seal exports required')
     return raw

@@ -42,6 +42,14 @@ class CurrentIndependentPhases(unittest.TestCase):
             self.assertNotIn('b2d6f605', raw)
         self.assertTrue(current.ONCE in values[-1])
         self.assertTrue(current.SEAL in values[-1])
+        node = next(n for n in ast.parse(values[-1]).body if isinstance(n, ast.Assign)
+                    and any(isinstance(t, ast.Name) and t.id == 'ORACLE' for t in n.targets))
+        oracle = ast.literal_eval(node.value)
+        self.assertEqual(0, check(oracle, '<actual whole-seal independent day16 oracle>'))
+        for marker in ["r['business_date']=='2026-10-16'", "row['business_date']=='2026-10-16'",
+                       binding['cutoff'], binding['run']]:
+            self.assertTrue(marker in oracle, marker)
+        self.assertNotIn('ALREADY_SUCCESSFUL', oracle)
         with self.assertRaises(ValueError):
             current.entry('start')
 
