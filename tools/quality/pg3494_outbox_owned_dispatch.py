@@ -3,8 +3,6 @@ import inspect
 import sys
 import pg2712_operation_owned_dispatch as old
 import pg3490_outbox_owned_sources as role
-from pg1446_current_cold_stage import P
-from pg1674_critical_management_gate import management_gate
 
 GUEST = '/var/lib/pgpt-s1-preservation/' + role.TOOLS
 REMOTE = '/home/ubuntu/pg3494-outbox-owned-stage-v1'
@@ -36,8 +34,8 @@ def run_source():
 def main():
     if sys.argv[1:] not in (['stage'], ['stop']):
         raise ValueError('separate exact new-only stage or owned stop required')
-    with management_gate(P / 'current-management-critical.lock'):
-        return namespace()['main']()
+    # Delegated2092.main owns the one non-reentrant gate, not run_source().
+    return namespace()['main']()
 
 
 if __name__ == '__main__':

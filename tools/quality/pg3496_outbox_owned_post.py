@@ -2,8 +2,6 @@
 import inspect
 import pg2716_operation_owned_post as old
 import pg3490_outbox_owned_sources as role
-from pg1446_current_cold_stage import P
-from pg1674_critical_management_gate import management_gate
 
 SLOT = 'pg3496-outbox-owned-post-v1'
 
@@ -24,5 +22,5 @@ def entry():
 
 
 if __name__ == '__main__':
-    with management_gate(P / 'current-management-critical.lock'):
-        raise SystemExit(entry()())
+    # Delegated2040.main encloses both seal capture and post in one gate.
+    raise SystemExit(entry()())
