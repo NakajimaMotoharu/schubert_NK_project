@@ -12,7 +12,7 @@ from pg3274_header_group_full_six import ROOT, SOURCE
 
 SCOPES = ('documents', 'src', 'pom.xml', 'mvnw', '.mvn', 'README.md', 'AGENTS.md', '.gitattributes')
 TEXT_SUFFIXES = {'.md', '.java', '.xml', '.sql', '.json', '.yaml', '.yml', '.sh', '.properties', '.service',
-                 '.timer', '.conf', '.template', '.tsv', '.html', '.js', '.css', '.txt'}
+                 '.timer', '.conf', '.template', '.tsv', '.html', '.js', '.css', '.txt', '.py', '.cjs', '.jsonl'}
 
 
 def selected(path):
@@ -46,11 +46,11 @@ def main():
     failures = [f['path'] for f in files if f['result'] != 'PASS']
     value = {'actualExit': 1 if failures else 0, 'productionSource': SOURCE,
              'operatorSource': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-             'run': 'PG3310-managed-text-lf-v1', 'scope': list(SCOPES), 'files': files,
+             'run': 'PG3310-managed-text-lf-v2', 'scope': list(SCOPES), 'files': files,
              'excludedUnknownOrBinarySuffixes': excluded, 'normalizedFiles': 0,
              'currentBaselineOrEvidenceOutsideScopeClaimed': False, 'secretScanClaimed': False,
              'formalUpdated': False, 'newPtCredit': 0, 'vmActions': 0}
-    target = ROOT / 'evidence/01_PT/002_NK-PRO-002/evidence/provisional/PG3310-managed-text-lf'
+    target = ROOT / 'evidence/01_PT/002_NK-PRO-002/evidence/provisional/PG3310-managed-text-lf-v2'
     target.mkdir(parents=True, exist_ok=False)
     with (target / 'manifest.json').open('x') as stream:
         json.dump(value, stream, ensure_ascii=False); stream.write('\n')

@@ -12,7 +12,7 @@ class ManagedTextLfTest(unittest.TestCase):
             self.assertEqual(expected, inspect_text(value))
 
     def test_deployment_templates_maven_and_document_types_are_explicit(self):
-        for name in ['src/deployment/caddy/Caddyfile.template', 'api.env.template', 'Caddyfile', 'mvnw', '.gitattributes', 'doc.md', 'query.sql']:
+        for name in ['src/deployment/caddy/Caddyfile.template', 'api.env.template', 'Caddyfile', 'mvnw', '.gitattributes', 'doc.md', 'query.sql', 'issuer-stop-journal.jsonl', 'generator.py', 'browser.test.cjs']:
             self.assertTrue(selected(name), name)
         for name in ['wire.bin', 'image.png', 'driver.jar', 'original.docx']:
             self.assertFalse(selected(name), name)
