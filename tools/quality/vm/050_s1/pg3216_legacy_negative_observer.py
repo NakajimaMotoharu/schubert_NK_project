@@ -221,6 +221,55 @@ class Bus:
         require(not self.thread.is_alive()); self.process.stdout.close(); self.out.close(); self.err.close()
 
 
+def traced_calls(raw):
+    """Independent OS command oracle, including systemctl's PRIVATE bus path."""
+    require('sa_family=AF_INET' not in raw)
+    calls = [line for line in raw.splitlines() if 'execve("/usr/bin/systemctl"' in line]
+    require(bool(calls))
+    for line in calls:
+        require('"--system", "--no-pager", "--no-ask-password", "show", ' in line)
+        require(not any('"' + verb + '"' in line for verb in ['start', 'stop', 'restart', 'try-restart', 'reload', 'kill', 'set-property']))
+    return len(calls)
+
+
+class Syscalls:
+    def __init__(self, pid):
+        self.pid = pid; self.path = RESULTS / 'syscall.private.log'
+        self.err = (RESULTS / 'syscall.private.err').open('x')
+        require(not self.path.exists())
+        self.process = subprocess.Popen(['/usr/bin/strace', '-f', '-qq', '-s', '4096', '-e', 'trace=execve,connect', '-o', str(self.path), '-p', str(pid)], stdout=subprocess.DEVNULL, stderr=self.err)
+        until = time.monotonic() + 5
+        while time.monotonic() < until:
+            require(self.process.poll() is None)
+            tasks = list((Path('/proc') / str(pid) / 'task').iterdir())
+            try:
+                values = [int(re.search(r'^TracerPid:\s+(\d+)$', (p / 'status').read_text(), re.M).group(1)) for p in tasks]
+            except FileNotFoundError: continue
+            if values and all(v == self.process.pid for v in values): break
+            time.sleep(.02)
+        else: raise ValueError('exact helper all-thread syscall trace not attached')
+        self.offset = 0
+
+    def arm(self):
+        require(self.process.poll() is None)
+        self.offset = self.path.stat().st_size
+
+    def verify(self):
+        require(self.process.poll() is None)
+        raw = self.path.read_bytes()[self.offset:].decode('utf-8')
+        return traced_calls(raw)
+
+    def completed(self):
+        require(self.process.wait(timeout=10) == 0)
+        return sha(self.path)
+
+    def close(self):
+        if self.process.poll() is None:
+            # Popen owns this tracer, never signals the service or its tracees.
+            self.process.terminate(); self.process.wait(timeout=10)
+        self.err.close()
+
+
 def stable_bad():
     s = APPROVAL.lstat()
     require(stat.S_ISREG(s.st_mode) and s.st_uid == s.st_gid == 0 and stat.S_IMODE(s.st_mode) == 0o400 and s.st_nlink == 1 and APPROVAL.read_bytes() == BAD)
@@ -249,6 +298,7 @@ def execute():
     watch = Watch([APPROVAL, Path('/etc/schubert-nk/credentials/db-batch'), Path('/etc/schubert-nk/credentials/mq-ops')])
     bus = Bus(); server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM); server.settimeout(30)
     server.bind(str(RUN / 'watch.sock')); os.chmod(RUN / 'watch.sock', 0o600); server.listen(1)
+    tracer = None
     try:
         bus.barrier()
         command(['systemctl', 'start', '--no-block', UNIT])  # Sole isolated harness start, never a business main.
@@ -268,12 +318,14 @@ def execute():
             wire = conn.makefile('rw', encoding='ascii', buffering=1)
             def receive(expected): require(wire.readline(512).rstrip('\n') == expected)
             def send(value): wire.write(value + '\n'); wire.flush()
-            receive('HELLO|' + str(pid) + '|' + BOOT); send('READY')
+            receive('HELLO|' + str(pid) + '|' + BOOT)
+            tracer = Syscalls(pid); send('READY')
             results = []
             for test_id in IDS:
                 receive('BEGIN|' + test_id); require(same_peer()['InvocationID'] == invocation)
                 require(stable_bad() == before['bad'] and tree() == before['tree'])
                 bus.barrier(); watch.read()  # Discard observer's own pre-case reads BEFORE arming.
+                tracer.arm()
                 send('ARMED|' + test_id)
                 receive('END|' + test_id)
                 events = watch.read()  # Inspect actual case events BEFORE our next hash/read.
@@ -281,10 +333,13 @@ def execute():
                 require(all(path == str(APPROVAL) and not mask & (2 | 4 | 8 | 64 | 128 | 256 | 512 | 1024 | 2048) for path, mask in events))
                 methods = bus.barrier()
                 require(all(item['member'] in ['GetUnit', 'GetUnitByPID', 'Subscribe', 'Unsubscribe'] for item in methods))
+                systemctl_reads = tracer.verify()
                 require(same_peer()['InvocationID'] == invocation and stable_bad() == before['bad'])
                 resource_closed(pid, before['tree']); require(tree() == before['tree'] and database() == before['database'])
                 item = {'testId': test_id, 'actualExit': 0, 'approvalAccessObserved': True, 'credentialReadEvents': 0,
                         'unsafeManagerCalls': 0, 'protectedFileDescriptorOrLock': 0, 'all24AndHistoryUnchanged': True,
+                        'publicBusOnly': True, 'actualSystemctlShowExecs': systemctl_reads, 'unsafeSystemctlExecs': 0,
+                        'helperAllThreadAndDescendantSyscallTrace': True, 'inetConnects': 0,
                         'noAppDbClientOrAdvisory': True, 'samePeerInvocation': True, 'formalAccepted': False}
                 save(test_id + '.observer.safe.json', item); results.append(item); send('ACCESSED|' + test_id)
             receive('COMPLETE|7'); require(len(results) == 7); send('SEALED|7'); wire.close()
@@ -295,6 +350,7 @@ def execute():
             time.sleep(.1)
         require_terminal(terminal, invocation, RETAINED_TERMINAL)
         require(not Path('/proc', str(pid)).exists())
+        syscall_sha = tracer.completed()
         if RETAINED_TERMINAL:
             # No live JVM remains. This is a finite stop of this exact fixture
             # invocation, not Production Morning or a second business operation.
@@ -314,12 +370,14 @@ def execute():
         save('manifest.safe.json', {'actualExit': 0, 'cases': 7, 'boot': BOOT, 'source': SOURCE, 'pid': pid, 'ticks': int(ticks),
                                    'invocation': invocation, 'naturalUnitExit': 0, 'all24AndHistoryUnchanged': True,
                                    'protectedTreeUnchanged': True, 'nativeSha256': sha(NATIVE),
+                                   'syscallSha256': syscall_sha, 'publicBusScopeLimited': True, 'privateSystemctlExecVerified': True,
                                    'normalBusinessEntryCount': 0, 'formalAccepted': False})
         print('PG3216_NEGATIVE actual0=true cases7=true independentWitness=true nativeNotYetQualified=true', flush=True)
     except Exception as failure:
         save('failed.safe.json', {'actualExit': 1, 'type': type(failure).__name__, 'casesPassed': len(list(RESULTS.glob('*.observer.safe.json'))), 'nativeAccepted': False})
         raise
     finally:
+        if tracer is not None: tracer.close()
         server.close(); watch.close(); bus.close()
 
 

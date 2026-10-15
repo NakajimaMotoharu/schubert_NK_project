@@ -107,6 +107,15 @@ class IndependentWitness(unittest.TestCase):
             with patch.object(observer, 'command', return_value=SimpleNamespace(stdout=wrong)):
                 with self.assertRaises(ValueError): observer.typed_service_property('ExecStop')
 
+    def test_private_systemctl_path_real_show_and_forbidden_actions(self):
+        good = '123 execve("/usr/bin/systemctl", ["/usr/bin/systemctl", "--system", "--no-pager", "--no-ask-password", "show", "--property=Id", "schubert-nk-morning-controller.service"], 0x1234) = 0\n'
+        self.assertEqual(1, observer.traced_calls(good))
+        self.assertEqual(2, observer.traced_calls(good + good))
+        for bad in ['', 'connect(1, {sa_family=AF_INET, sin_port=htons(5432)}, 16) = 0\n' + good,
+                    good.replace('"show"', '"start"'), good.replace('"show"', '"stop"'), good.replace('"show"', '"restart"'),
+                    good + good.replace('"show"', '"kill"'), good.replace('"--no-ask-password", ', '')]:
+            with self.assertRaises(ValueError): observer.traced_calls(bad)
+
 
 if __name__ == '__main__':
     unittest.main()
