@@ -15,6 +15,16 @@ SOURCE='4856b3fcaeb4cae983d77757a38dc0bf56a693e2'
 BASE='/home/mini/schubert-nk-pgpt'
 
 
+def qualified_classpath(text,cwd,expected):
+    from pathlib import Path
+    if type(text)is not str or not text or type(cwd)is not str or cwd!=str(expected)or not expected.is_dir():raise ValueError('exact recorded module cwd required')
+    parts=text.split(':')
+    if parts.count('')>1 or(''in parts and parts[-1]!=''):raise ValueError('only recorded single trailing cwd element')
+    paths=[expected if not p else Path(p)for p in parts]
+    if any(not p.is_absolute()or not p.exists()for p in paths):raise ValueError('all qualified classpath inputs exist and are absolute')
+    return ':'.join(map(str,paths))
+
+
 def require(value,reason):
     if not value:raise ValueError(reason)
 
@@ -29,12 +39,13 @@ def server(data):
     import subprocess
     import tarfile
     import xml.etree.ElementTree as E
+    import zipfile
 
-    os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG3688-import-candidate-v1';original=out/'original';candidate=out/'candidate'
+    os.umask(0o077);b=Path('/home/mini/schubert-nk-pgpt');out=b/'runs/PG3690-import-candidate-v1';original=out/'original';candidate=out/'candidate'
     require(shutil.disk_usage(b).free>12*1024**3,'capacity before isolated compiler copies')
     out.mkdir();original.mkdir();candidate.mkdir();(out/'tool-classes').mkdir()
     sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-    transfer=b/'transfer/PG3688-import-candidate-v1';archive=transfer/'source.tar'
+    transfer=b/'transfer/PG3690-import-candidate-v1';archive=transfer/'source.tar'
     require(sha(archive)==data['archiveSha256'],'actual fixed archive')
     with tarfile.open(archive)as t:t.extractall(original,filter='data')
     files=sorted(original.glob('src/*/src/main/java/**/*.java'));require(len(files)==849,'all Production Java')
@@ -51,13 +62,23 @@ def server(data):
     for module,item in data['modules'].items():
         xml_name=sorted(item['xmlHashes'])[0];xml=b/('source-full-PG3412/src/schubert-nk-'+module+'/target/surefire-reports')/xml_name
         require(sha(xml)==item['xmlHashes'][xml_name],'genuine qualified module classpath XML')
-        cp=E.parse(xml).getroot().find("./properties/property[@name='java.class.path']").get('value')
+        properties={p.get('name'):p.get('value')for p in E.parse(xml).getroot().findall('./properties/property')}
+        expected_cwd=b/('source-full-PG3412/src/schubert-nk-'+module)
+        require(properties['basedir']==properties['user.dir']==str(expected_cwd),'recorded actual module cwd and basedir')
+        require(properties['java.class.path']==properties['surefire.test.class.path'],'independent actual test classpath property agrees')
+        cp=qualified_classpath(properties['java.class.path'],properties['user.dir'],expected_cwd)
         def classpath_hashes():
             result={}
             for raw_path in cp.split(os.pathsep):
                 path=Path(raw_path);require(path.is_absolute()and path.exists(),'qualified classpath path')
-                if path.is_dir():result[str(path)]={str(p.relative_to(path)):sha(p)for p in path.rglob('*')if p.is_file()}
+                if path.is_dir():result[str(path)]={str(p.relative_to(path)):sha(p)for p in path.rglob('*')if p.is_file()and p.suffix in {'.class','.java'}}
                 else:result[str(path)]=sha(path)
+                if path.name=='classes'and path.parent.name=='target':
+                    dependency=path.parent.parent.name.removeprefix('schubert-nk-')
+                    require(path==b/('source-full-PG3412/src/schubert-nk-'+dependency+'/target/classes'),'exact original compiled Main directory')
+                    jar=path.parent/('schubert-nk-'+dependency+'-0.1.0-SNAPSHOT.jar')
+                    require(sha(jar)==data['jarHashes'][dependency],'qualified original Main Jar hash')
+                    with zipfile.ZipFile(jar)as z:require({n:hashlib.sha256(z.read(n)).hexdigest()for n in z.namelist()if n.endswith('.class')}=={n:h for n,h in result[str(path)].items()if n.endswith('.class')},'every directory Main class matches qualified Jar byte')
             return result
         cp_before=classpath_hashes();phase={};parsed={}
         for name,root in [('before',original),('after',candidate)]:
@@ -82,6 +103,7 @@ def server(data):
             require(before['binding']==after['binding']and before['declarations']==after['declarations']and not after['imports'],'every resolved binding and non-import declaration/literal unchanged')
         require(cp_before==classpath_hashes(),'every qualified classpath input stable')
         modules[module]={'phases':phase,'sourceFiles':len(parsed['before']),'qualifiedClasspathXmlSha256':item['xmlHashes'][xml_name],'classpathInputsSha256':hashlib.sha256(json.dumps(cp_before,sort_keys=True).encode()).hexdigest(),'allBindingsAndDeclarationsIdentical':True}
+        (out/'progress.safe.json').write_text(json.dumps({'modulesCompleted':list(modules),'wildcardsExpanded':all_replacements,'changedFiles':len(all_changed),'mainApplied':False}))
     require(all_replacements==531 and len(all_changed)>0,'all original531 wildcard declarations handled')
     require({str(p.relative_to(original)):sha(p)for p in files}==data['sourceSha256'],'original immutable after all compiler analysis')
     value={'actualExit':0,'productionSource':data['source'],'sourceSnapshot':data['head'],'sourceArchiveSha256':data['archiveSha256'],'startUTC':start,'endUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'sourceFiles':849,'wildcardImportsExpanded':all_replacements,'changedFiles':len(all_changed),'changed':all_changed,'modules':modules,'originalsUnchanged':True,'candidateOnly':True,'mainApplied':False,'newAuthority':False,'vmActions':0,'formalAccepted':False,'fixedCheckstylePending':True,'multipleDeclarationsPending':True,'literalTabPending':True,'wholeRegressionPending':True}
@@ -94,16 +116,17 @@ def main():
     full=json.loads((W/'pg3414-outbox-full-qualified-v1/manifest.safe.json').read_bytes());f=full['result']
     require(full['actualExit']==0 and f['tests']==3712 and f['productionSource']==SOURCE,'actual fixed baseline')
     require(not subprocess.check_output(['git','diff',f['sourceSnapshot'],head,'--','src/*/src/main'],cwd=ROOT),'all Main unchanged before staging')
-    os.umask(0o077);out=W/'pg3688-import-candidate-stage-v1';out.mkdir()
+    failed=json.loads((W/'pg3688-import-candidate-stage-v1/manifest.safe.json').read_bytes());require(failed['actualExit']==1,'original failed stage remains distinct')
+    os.umask(0o077);out=W/'pg3690-import-candidate-stage-v1';out.mkdir()
     archive=out/'source.tar';archive.write_bytes(subprocess.check_output(['git','archive','--format=tar',head,'src'],cwd=ROOT))
     tool=ROOT/'tools/quality/SourceImportExpansion.java'
-    data={'head':head,'source':SOURCE,'archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'toolSha256':hashlib.sha256(tool.read_bytes()).hexdigest(),'sourceSha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in sorted(ROOT.glob('src/*/src/main/java/**/*.java'))},'fullManifestSha256':f['serverManifestSha256'],'modules':f['modules']}
-    payload='\n'.join(inspect.getsource(x)for x in [require,parse,replace_imports,server])+'\nserver('+repr(data)+')\n';compile(payload,'<new-only import candidates>','exec')
+    data={'head':head,'source':SOURCE,'archiveSha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'toolSha256':hashlib.sha256(tool.read_bytes()).hexdigest(),'sourceSha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in sorted(ROOT.glob('src/*/src/main/java/**/*.java'))},'fullManifestSha256':f['serverManifestSha256'],'modules':f['modules'],'jarHashes':f['jarHashes']}
+    payload='\n'.join(inspect.getsource(x)for x in [require,parse,replace_imports,qualified_classpath,server])+'\nINPUT='+repr(data)+'\nserver(INPUT)\n';compile(payload,'<new-only import candidates>','exec')
     script=out/'candidate.private.py';script.write_text(payload)
-    rc,_=run('test ! -e '+BASE+'/runs/PG3688-import-candidate-v1 && mkdir -m700 '+BASE+'/transfer/PG3688-import-candidate-v1',timeout=30);require(rc==0,'unique finite stage namespace')
+    rc,_=run('test ! -e '+BASE+'/runs/PG3690-import-candidate-v1 && mkdir -m700 '+BASE+'/transfer/PG3690-import-candidate-v1',timeout=30);require(rc==0,'unique finite stage namespace')
     for p in [archive,script,tool]:
-        rc,_=copy(p,BASE+'/transfer/PG3688-import-candidate-v1/',timeout=60);require(rc==0,'fixed candidate tool/source transfer')
-    rc,output=run('python3 -B '+shlex.quote(BASE+'/transfer/PG3688-import-candidate-v1/candidate.private.py'),timeout=1200)
+        rc,_=copy(p,BASE+'/transfer/PG3690-import-candidate-v1/',timeout=60);require(rc==0,'fixed candidate tool/source transfer')
+    rc,output=run('python3 -B '+shlex.quote(BASE+'/transfer/PG3690-import-candidate-v1/candidate.private.py'),timeout=1200)
     (out/'observer.private.log').write_text(output)
     value={'actualExit':rc,'productionSource':SOURCE,'sourceSnapshot':head,'payloadSha256':hashlib.sha256(payload.encode()).hexdigest(),'formalUpdated':False}
     if rc==0:value['result']=json.loads(next(line for line in reversed(output.splitlines())if line.startswith('{')))
