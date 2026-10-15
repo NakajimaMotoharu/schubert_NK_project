@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "run": "PG3410-outbox-cause-after-v1",
+  "candidateSource": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
+  "tests": 8,
+  "newJUnitCredit": 0,
+  "cases": [
+    {
+      "case": "acyclic",
+      "expected": false,
+      "actual": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "240414454f255d6a942e53043e9fb76058aa3fdf35575050331e97d51e0a015d"
+    },
+    {
+      "case": "direct",
+      "expected": true,
+      "actual": true,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "e8b4820165409e32506f246c956d5ef9636ef3b0a9cbfae7ea73265b5134817f"
+    },
+    {
+      "case": "cause-cycle",
+      "expected": false,
+      "actual": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "a2f9a16cff605f719eb78728afa1bcf1a07517a631a0fdde6413e557bf62645e"
+    },
+    {
+      "case": "mixed-cycle",
+      "expected": false,
+      "actual": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "6be6ad85bea29486396831ec4be688abb03c3c3b3a944b24a65fa7835fd294c3"
+    },
+    {
+      "case": "alternate-edge",
+      "expected": true,
+      "actual": true,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "12b5514539b7e4b43c422dac549ef900b1ba3cbb4be69e1f9db550ff70f1299a"
+    },
+    {
+      "case": "reachable-through-cycle",
+      "expected": true,
+      "actual": true,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "e56d2f641ce6898214843df1cbad7b82973b16914276680090fabe618b3964c2"
+    },
+    {
+      "case": "suppressed-only",
+      "expected": false,
+      "actual": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "4611c2580a84a75ca54b8340d8aee65e0226fae4a3e6dec8d5ab441369e32ad1"
+    },
+    {
+      "case": "message-only",
+      "expected": false,
+      "actual": false,
+      "exit": 0,
+      "ownedChildReaped": true,
+      "stdoutSha256": "13de7c245645cdba45e9a678519f9b83fcae0dbf8f35de1bbb32eb98f33e669d"
+    }
+  ],
+  "compileExit": 0,
+  "sourceSnapshot": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
+  "relatedManifestSha256": "81ae4fb37436897a73d03b08f966cc7c88757e1a8596ec7f677eca6af064c272",
+  "beforePublicManifestSha256": "19e87e1c5054abe5e68fff3bdced72b8d4cfd0cc8c0713ce5b550f48aa47c98b",
+  "sameCanarySha256": "a7d95e63d150ca6b950ac377cdb1604e4a08c8a668f94783fe52e3139c950a20",
+  "beforeApiClassSha256": "6426e7d700427301885980bab9e77f38543c81b8144bd381678d95eb53f5bb1c",
+  "afterApiClassSha256": "5fae87eb472fac42732788c8491b489f5dcb2379d4caa9649adab9d045223a39",
+  "afterApiJarSha256": "48b1e0a9cb1c4f23eea4fcd80904dd492db9934e696f3d9cf4a14ce7fb992d84",
+  "javaVersion": "25.0.4",
+  "os": "Linux 7.0.0-38-generic",
+  "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "vmActions": 0,
+  "oldNativeImported": false,
+  "formalUpdated": false
+}
