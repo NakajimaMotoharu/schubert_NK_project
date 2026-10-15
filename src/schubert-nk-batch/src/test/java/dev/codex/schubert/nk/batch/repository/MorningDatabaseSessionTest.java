@@ -31,6 +31,81 @@ final class MorningDatabaseSessionTest {
   static BatchDatabaseFixture db;
   static String actualUrl;
 
+  /** PT-MDB-3256-001: a failed DB completion guard cannot reach any backup-file work. */
+  @Test
+  void mdb3256001CompletionGuardSqlFailurePreservesCommittedBeginsAndEmptyBackupRoot()
+      throws Exception {
+    int ordinal = 0;
+    for (String methodFault : List.of("getAutoCommit", "getTransactionIsolation")) {
+      int n = ++ordinal;
+      var run =
+          new BatchRun(
+              UUID.fromString("32560001-2222-4333-8444-" + String.format("%012d", n)),
+              Instant.parse("2058-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
+      Instant started = run.cutoff().plusSeconds(11 * 3600);
+      var armed = new AtomicBoolean();
+      var injected = new AtomicInteger();
+      var retained = new AtomicReference<Connection>();
+      Path empty = java.nio.file.Files.createDirectory(directory.resolve("mdb3256-empty-" + n));
+      long uid = ((Number) java.nio.file.Files.getAttribute(empty, "unix:uid")).longValue();
+      long gid = ((Number) java.nio.file.Files.getAttribute(empty, "unix:gid")).longValue();
+      assertTrue(
+          uid > 0 && gid > 0); // Existing isolated nonroot PT toolchain, never root authority.
+      try (var root =
+          dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+              dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(), empty)) {
+        var completion =
+            new dev.codex.schubert.nk.batch.file.BackupBundleCompletion(
+                root, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create(), uid, gid);
+        var subject =
+            new MorningDatabaseSession(
+                actualUrl,
+                () -> {},
+                (url, properties) -> {
+                  var actual = DriverManager.getConnection(url, properties);
+                  retained.set(actual);
+                  return (Connection)
+                      Proxy.newProxyInstance(
+                          Connection.class.getClassLoader(),
+                          new Class<?>[] {Connection.class},
+                          (unused, method, args) -> {
+                            if (armed.get() && method.getName().equals(methodFault)) {
+                              injected.incrementAndGet();
+                              throw new SQLException("PT3256_COMPLETION_GUARD", "XX000");
+                            }
+                            return mdb2292Invoke(method, actual, args);
+                          });
+                },
+                connection -> {});
+        var failure =
+            assertThrows(
+                IOException.class,
+                () ->
+                    subject.execute(
+                        credential(),
+                        session -> {
+                          var begins = session.beginBackup(run, started, false);
+                          mdb2292Rows(run, "RUNNING", started, Optional.empty());
+                          armed.set(true);
+                          session.completeBackup(begins, completion, "no-file-work-authorized");
+                          fail("failed DB guard cannot authorize completion or file lookup");
+                          return Boolean.TRUE;
+                        }));
+        assertEquals("root batch database unavailable", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+        assertEquals(1, injected.get());
+        assertNotNull(retained.get());
+        assertTrue(retained.get().isClosed());
+        try (var entries = java.nio.file.Files.list(empty)) {
+          assertEquals(0, entries.count());
+        }
+        mdb2292Rows(run, "RUNNING", started, Optional.empty());
+        mdb2292NoOwnerResources();
+      }
+    }
+  }
+
   /** PT-MDB-3254-001/SS332 SSC063: real read-only statement, independent fixed priority table. */
   @Test
   void mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner() throws Exception {
