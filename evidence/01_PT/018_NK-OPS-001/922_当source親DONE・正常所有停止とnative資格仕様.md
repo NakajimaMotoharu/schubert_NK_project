@@ -19,3 +19,11 @@
 | PT-OPS-3532-001 | 当3712/545/1643の元saved/source exec同byte・独立XML・全Jar hash、current native CRC/session/Inspector dominance、union四counter測定。旧NativeIo+1と今回semantic一/debug一を別契約で維持 | 着手前、未実行。100%先取り/旧a9合算0 |
 
 再現commandは各`python3 -B tools/quality/pg35xx_*.py`の明示action、PYTHONPATHはtools/quality、tools/quality/vm/050_s1、work/toolchain/pyflakes-3.4.0/runtime。終了済みactionはnew-only予約を持つため再実行しない。raw DB/native/FD/key/署名/セッション情報はPG379 privateのみ、公開物は安全manifest/hash/明示redact済A01をcollectorで検査する。native未資格、F03/四100/正式1964・個別17/190/工数null/QA051final保留は不変更。
+
+## 実行結果追記（2026-10-16 03:32JST）
+
+3530 actual0、payc4ccd1c9、保存22旧source copy全byte保持・旧native取込0。3532-v1はCRC前の版path不一致でactual1を保持し、BUG1307/YKT1073先行0c68f9cbb→29fe165f2で最終tupleをv3へ是正。純4成功、元host-v1の同current10 input/hashを再利用しguest再取得0。3532-v3 actual0、remote manifest **a639cac3e4342f0082f3df7adff346370a7f60bf5c289d98a7a888d85c6698a3**。当全3712/545/1643、最新9stream/10pointのCRC/session・Inspector同session順序/dominance・全六Jar hash/元saved/source exec同byte・独立XMLを照合しclassByteMismatch0。旧NativeIo専用debug補正を変更0、当semantic一/debug一は3414/3420全物理class inventoryと実3526署名187の同Jarで束縛した。
+
+hostからの追加coverage=2839LINE/460METHOD/28CLASS/323BRANCH。残=784LINE/150METHOD/9CLASS/477BRANCH、coverage100=false。旧a9/native28を合算しないため旧測定値との単純増減比較はしない。正式1964/53・17/190の履歴受入source a9と新4856技術測定を分離し、個別criteriaを再認証する前にWBSのsource/hashだけを更新しない。
+
+公開receiptセット=PG3534-current-root-owned-native-v1/manifest.json **05800013216d18b074e3fd3f34bbcd215de97d356bd97102fd1099e692867ac2**（Test ID対応13、safe file12、A01原artifactはCurrentとtitle以外全一致）。公開全六coverage XML=PG3532-current-native-measurement-v3/manifest.json **773c4296b6bbc951b5efa3df1f0d26a964eec2e92bb6b6330fd29cf64f97ebf8**。技術session IDだけSHA256へredactし、counter/class/method/line/timestampのsemantic不変更を機械確認、raw DB/FD/native/key/auth保存0。新source native資格は成立したが、global100/F03/全CHR/451/trace/正式完了は未完。
