@@ -15,6 +15,7 @@ import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +59,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PostgreSQL 18 and Artemis component PT for PT-IDEM-009..011. */
@@ -141,6 +143,150 @@ final class OutboxDispatcherTest {
   @BeforeEach
   void resetDatabase() throws SQLException {
     executeApp("delete from schubert.mq_outbox");
+  }
+
+  @Test
+  @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+  void cause3404TypedGraphTerminatesCyclesAndVisitsBothProviderEdges() {
+    assertThrows(NullPointerException.class, () -> OutboxJmsSender.isDuplicateConfirmation(null));
+    RuntimeException first = new RuntimeException("synthetic first");
+    RuntimeException second = new RuntimeException("synthetic second", first);
+    first.initCause(second);
+    assertFalse(OutboxJmsSender.isDuplicateConfirmation(first));
+    JMSException mixed = new JMSException("synthetic mixed");
+    RuntimeException peer = new RuntimeException("synthetic peer", mixed);
+    mixed.setLinkedException(peer);
+    assertFalse(OutboxJmsSender.isDuplicateConfirmation(mixed));
+    var duplicate = new ActiveMQDuplicateIdException("synthetic duplicate");
+    mixed.initCause(duplicate);
+    assertTrue(OutboxJmsSender.isDuplicateConfirmation(mixed));
+    JMSException alternate = new JMSException("synthetic alternate");
+    alternate.initCause(duplicate);
+    alternate.setLinkedException(new RuntimeException("synthetic ordinary"));
+    assertTrue(OutboxJmsSender.isDuplicateConfirmation(alternate));
+    JMSException shared = new JMSException("synthetic shared");
+    shared.initCause(first);
+    shared.setLinkedException(first);
+    assertFalse(OutboxJmsSender.isDuplicateConfirmation(shared));
+    RuntimeException suppressed = new RuntimeException("AMQ229035 duplicate id synthetic");
+    suppressed.addSuppressed(duplicate);
+    assertFalse(OutboxJmsSender.isDuplicateConfirmation(suppressed));
+    var equalRoot = new IdentityOnlyFailure();
+    equalRoot.initCause(new IdentityOnlyFailure());
+    assertFalse(OutboxJmsSender.isDuplicateConfirmation(equalRoot));
+  }
+
+  @Test
+  @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+  void cause3404UnconfirmedCommitAlwaysRollsBackClosesAndPreservesOriginalGraph() {
+    for (boolean mixed : List.of(false, true)) {
+      RuntimeException failure = new RuntimeException("synthetic commit");
+      if (mixed) {
+        JMSException checked = new JMSException("synthetic checked");
+        failure.initCause(checked);
+        checked.setLinkedException(failure);
+      } else {
+        RuntimeException peer = new RuntimeException("synthetic peer", failure);
+        failure.initCause(peer);
+      }
+      // A secondary rollback duplicate is never confirmation of the original commit.
+      var rollback = new jakarta.jms.JMSRuntimeException("synthetic rollback");
+      rollback.initCause(new ActiveMQDuplicateIdException("synthetic secondary duplicate"));
+      var closing = new jakarta.jms.JMSRuntimeException("synthetic close");
+      List<String> order = new ArrayList<>();
+      OutboxSendException result =
+          assertThrows(
+              OutboxSendException.class,
+              () ->
+                  new OutboxJmsSender()
+                      .send(() -> graphContext(failure, rollback, closing, order), sample()));
+      assertEquals("outbox JMS commit was not confirmed", result.getMessage());
+      assertSame(failure, result.getCause());
+      assertArrayEquals(new Throwable[] {rollback}, failure.getSuppressed());
+      assertArrayEquals(new Throwable[] {closing}, result.getSuppressed());
+      assertEquals(List.of("commit", "rollback", "close"), order);
+    }
+  }
+
+  @Test
+  @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+  void cause3404ReachableTypedDuplicateConfirmsOnlyAfterRollbackAndStillCloses() throws Exception {
+    JMSException branched = new JMSException("synthetic branched");
+    branched.setLinkedException(new RuntimeException("synthetic peer", branched));
+    branched.initCause(new ActiveMQDuplicateIdException("synthetic confirmed duplicate"));
+    var failure = new jakarta.jms.JMSRuntimeException("synthetic commit", null, branched);
+    List<String> order = new ArrayList<>();
+    new OutboxJmsSender().send(() -> graphContext(failure, null, null, order), sample());
+    assertEquals(List.of("commit", "rollback", "close"), order);
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  private static JMSContext graphContext(
+      RuntimeException failure,
+      RuntimeException rollback,
+      RuntimeException closing,
+      List<String> order) {
+    BytesMessage message =
+        (BytesMessage)
+            Proxy.newProxyInstance(
+                BytesMessage.class.getClassLoader(),
+                new Class<?>[] {BytesMessage.class},
+                (proxy, method, arguments) -> {
+                  if (method.getName().equals("writeBytes") || method.getName().startsWith("set"))
+                    return null;
+                  throw new AssertionError("unexpected message call " + method.getName());
+                });
+    JMSProducer producer =
+        (JMSProducer)
+            Proxy.newProxyInstance(
+                JMSProducer.class.getClassLoader(),
+                new Class<?>[] {JMSProducer.class},
+                (proxy, method, arguments) -> {
+                  if (Set.of("setDeliveryMode", "setTimeToLive", "send").contains(method.getName()))
+                    return proxy;
+                  throw new AssertionError("unexpected producer call " + method.getName());
+                });
+    return (JMSContext)
+        Proxy.newProxyInstance(
+            JMSContext.class.getClassLoader(),
+            new Class<?>[] {JMSContext.class},
+            (proxy, method, arguments) -> {
+              switch (method.getName()) {
+                case "getSessionMode":
+                  return JMSContext.SESSION_TRANSACTED;
+                case "createBytesMessage":
+                  return message;
+                case "createProducer":
+                  return producer;
+                case "commit":
+                  order.add("commit");
+                  throw failure;
+                case "rollback":
+                  order.add("rollback");
+                  if (rollback != null) throw rollback;
+                  return null;
+                case "close":
+                  order.add("close");
+                  if (closing != null) throw closing;
+                  return null;
+                default:
+                  throw new AssertionError("unexpected context call " + method.getName());
+              }
+            });
+  }
+
+  private static final class IdentityOnlyFailure extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object other) {
+      throw new AssertionError("value equality must not run");
+    }
+
+    @Override
+    public int hashCode() {
+      throw new AssertionError("value hash must not run");
+    }
   }
 
   @Test

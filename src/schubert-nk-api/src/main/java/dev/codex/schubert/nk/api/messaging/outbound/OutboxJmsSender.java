@@ -10,10 +10,14 @@ import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 import org.jspecify.annotations.Nullable;
@@ -168,19 +172,26 @@ public final class OutboxJmsSender {
   }
 
   static boolean isDuplicateConfirmation(Throwable failure) {
-    Throwable candidate = failure;
-    while (candidate != null) {
+    Objects.requireNonNull(failure, "failure");
+    // BUG1299/YKT1065: provider cause/linked edges form a graph, not a single chain.
+    // Suppressed rollback/close failures are not evidence that commit was confirmed.
+    ArrayDeque<Throwable> pending = new ArrayDeque<>();
+    Set<Throwable> seen = Collections.newSetFromMap(new IdentityHashMap<>());
+    pending.add(failure);
+    while (!pending.isEmpty()) {
+      Throwable candidate = pending.remove();
+      if (!seen.add(candidate)) {
+        continue;
+      }
       if (candidate instanceof ActiveMQDuplicateIdException) {
         return true;
       }
-      if (candidate instanceof JMSException jmsException
-          && jmsException.getLinkedException() != null
-          && jmsException.getLinkedException() != candidate) {
-        candidate = jmsException.getLinkedException();
-      } else if (candidate.getCause() != candidate) {
-        candidate = candidate.getCause();
-      } else {
-        candidate = null;
+      Throwable cause = candidate.getCause();
+      if (cause != null) {
+        pending.add(cause);
+      }
+      if (candidate instanceof JMSException jms && jms.getLinkedException() != null) {
+        pending.add(jms.getLinkedException());
       }
     }
     return false;
