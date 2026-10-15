@@ -1,0 +1,161 @@
+{
+  "actualExit": 0,
+  "productionSource": "4856b3fcaeb4cae983d77757a38dc0bf56a693e2",
+  "run": "PG3550-current-toolchain-contract",
+  "versions": {
+    "java": {
+      "output": "openjdk 25.0.4 2026-07-21\nOpenJDK Runtime Environment (build 25.0.4+7-1-26.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 25.0.4+7-1-26.04-Ubuntu, mixed mode, sharing)\n",
+      "executableSha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+      "path": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java"
+    },
+    "maven": {
+      "output": "Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)\nMaven home: /home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197\nJava version: 25.0.4, vendor: Ubuntu, runtime: /home/mini/codex/project1/work/toolchain/jdk-25.0.4\nDefault locale: en, platform encoding: UTF-8\nOS name: \"linux\", version: \"7.0.0-38-generic\", arch: \"amd64\", family: \"unix\"\n",
+      "executableSha256": "f9381d0cb98abaaf9592dae421eddc497e84ed9bfb723b84c111d1350863c3a2",
+      "path": "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn"
+    }
+  },
+  "commands": {
+    "java": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "--version"
+      ],
+      "actualExit": 0,
+      "outputSha256": "7224dc3bd7f44fbbcbfafde5d12b32d81d6dd7eb2ca324eb58d361697fd4739f"
+    },
+    "maven": {
+      "argv": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "--version"
+      ],
+      "actualExit": 0,
+      "outputSha256": "2556edf4cfd358f9fb68f99182ea19ec9286343d5fd631227ee954d8688a6f33"
+    }
+  },
+  "pomSha256": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "src/schubert-nk-api/pom.xml": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "src/schubert-nk-web/pom.xml": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "src/schubert-nk-batch/pom.xml": "d61df303d71a6f62c9c16f45ed7cf34c56fca65c44a195a17a595b247308db6d"
+  },
+  "wrapperSha256": {
+    "mvnw": "cae96cef89ebea3531221f4ae17c23cf8edf67d00eae8306d4186ae1bbed4d02",
+    ".mvn/wrapper/maven-wrapper.properties": "e67de487071199117b7c9808dca5f56c73a44b656c925140ec68761947bdd384"
+  },
+  "documentSha256": {
+    "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md": "a82a15f008135fda6b9515c8bf6e1d594f4b0b0cd970b825d79ae53d347951cd",
+    "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6",
+    "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md": "467d0af6503b7d90e32d649c39c05580c943ba35f72b06cf892139c0130b78dd"
+  },
+  "reactorModules": [
+    "program/characterization",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-api",
+    "src/schubert-nk-web",
+    "src/schubert-nk-batch"
+  ],
+  "runtimeGraph": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [
+      "storage"
+    ],
+    "api": [
+      "bootstrap",
+      "protocol",
+      "storage"
+    ],
+    "web": [
+      "bootstrap",
+      "protocol",
+      "storage"
+    ],
+    "batch": [
+      "bootstrap",
+      "storage"
+    ]
+  },
+  "testOnlyEdges": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [],
+    "api": [
+      {
+        "module": "bootstrap",
+        "type": "test-jar"
+      }
+    ],
+    "web": [
+      {
+        "module": "bootstrap",
+        "type": "test-jar"
+      },
+      {
+        "module": "api",
+        "type": "jar"
+      }
+    ],
+    "batch": []
+  },
+  "relocatedApiBinaryNamesOwnedByBootstrap": {
+    "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfig": "bootstrap",
+    "dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission": "bootstrap",
+    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource": "bootstrap",
+    "dev.codex.schubert.nk.api.maintenance.InspectorDbCredential": "bootstrap",
+    "dev.codex.schubert.nk.api.file.InspectorCredentialLoader": "bootstrap"
+  },
+  "actualQualifiedBuild": {
+    "sourceSnapshot": "c2d5927354f27d608fd47a5758435e7e81ee52ea",
+    "tests": 3712,
+    "suites": 545,
+    "mainClasses": 1643,
+    "FESFlakyNotRun": 0,
+    "staticSixModules": 0,
+    "serverManifestSha256": "1e98df80505242ba8e4d860d4538764b9b04fa9d1095400b4ff5996562f8a086",
+    "jarHashes": {
+      "api": "cd3e522527de5f94cfa771906a8f677a82a979c41aa0c5c0603cc370ef155741",
+      "batch": "ab8ac9e6ebde09de41b45cb09757f05f5a1a45cad3b66fb48c4211a9d7ca2fa4",
+      "bootstrap": "02ccffd91eff55ac96b5ec8a69b1e39defaa34b908402833773374c68e58e0b7",
+      "protocol": "1fcfb992954e5fb752550eec7553cd44f94e385685ba403bda4c56ee29b91ad0",
+      "storage": "38db1ac6923c4ddca6eb7d26c5af632c1896f31386f31f0f475eb0732e2f6857",
+      "web": "7cd309428c688fbd8dd633ede8ec7aaecc2674fd9807b3394f9db9b0ac0dc67b"
+    }
+  },
+  "coverageApplicability": "F02 toolchain contract has no owned Java artifact; this is not global four100/F03 acceptance",
+  "verifiedSubset": [
+    "Java25 Ubuntu distribution and reproducible Maven3.9.12 wrapper",
+    "actual six Production module build/source/package",
+    "explicit acyclic compile/runtime and separate test dependency boundary",
+    "characterization framework kept outside Production src"
+  ],
+  "crossSysRequirementsStillNeedEvidence": [
+    "SYS-001",
+    "SYS-003",
+    "SYS-004",
+    "SYS-005",
+    "SYS-006",
+    "SYS-007",
+    "SYS-008",
+    "SYS-009",
+    "SYS-010",
+    "SYS-012",
+    "SYS-013",
+    "SYS-014"
+  ],
+  "remainingReason": "F02 owns13 SYS requirements, including all business MQ communication, all-screen compatibility, local storage and entry/certificate configuration. Toolchain alone is insufficient; keep the leaf NOT_ACCEPTED until individual cross-scope proofs/exit criteria are joined.",
+  "initialReadOnlyPathProbe127NotBuildFailure": "Assumed standalone apache-maven directory was absent; located existing wrapper cache before real Maven execution. No installation or full build was issued.",
+  "newPtCredit": 0,
+  "acceptedWbsDelta": 0,
+  "F02Accepted": false,
+  "F03Accepted": false,
+  "formalUpdated": false,
+  "fullMavenReissued": false,
+  "vmActions": 0,
+  "installedNewTools": false,
+  "recordedUTC": "2026-10-15T19:16:58.813046+00:00"
+}
