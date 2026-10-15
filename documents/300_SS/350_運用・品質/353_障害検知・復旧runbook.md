@@ -1,5 +1,13 @@
 # 障害検知・復旧runbook
 
+## SSC-285：SIGNED_CURRENT・取得前39FDの限定回収
+
+BUG1305/YKT1071は停止工具の旧signature stemを正規guardが拒否し、当Java410196/全39FD・子0/M-A保持、DB/Ref/SAVE/サービス停止前で保持したもの。3502 proof16145fbc…・当current4856/PG3420/boot79aを基点に、343の**39FD固有**閉集合/OFD/全原値をfresh再認証する。99/101FD・旧DB peer・古bootの許可を使わない。
+
+旧host soleFLOCK/同inode/失敗phase未終端を認証→SSC276の単一接続・queued gate、forceunlock0→新十Ref下の全39/linked祖先/ACL/OFD/管理DB-advisory0/普通peer全TCP/全24・32・18・187/原本Backup/native二読・耐久fresh proof→同fresh/pidfd/一回予約/本人Javaのみ普通TERM15秒終端30秒reap→全管理資源0・四ordinaryと原値保持/新Ref正常→旧wrapper終了と同gate継承→別wholepost。29/32の共有/run二時刻以外の差は拒否し、fresh二読間は全値同一を要求する。旧UNKNOWN/143を正常closeへ補記しない。
+
+Root/Backup/ADMIN/Unitstop-start/reload・DBterminate・SIGKILL・別PID・旧slot再送/hotpatchを行わない。正常回収後にのみ最終emit全source/boot79a/PG3420+pg3420・source/BOM/Rootbinding/独立fixtureを取得前資格したnew-only版の未実施owned stop/別post/nativeへ進む。SS285のmain公開はその実作業や正式品質の合格ではない。
+
 ## SSC-284（PG/PT、2026-10-14、reload済み保持11FD・shared/runと宣言viewの具体化）
 
 実最終283をlocal及びorigin/mainで確認。BUG1232～1235/YKT998～1001/QA047既承認内、RD/UI・業務結果・Root1800秒/Unit期限不変更、新QA不要。current Main3b7f/PG2126/BOM62213f・bootb2d6の当管理Java101019/t1808679/101FD、唯一Ref101050/t1808864/11FD、sole管理DB101048/PG998-native-stage/idle-TX/71419602、親M-A/同peer双方向TCPを新fullproofへ束縛する。sudo101017/他actor/業務Unitはsignal対象外。独立2342 proof a8eb610cff840dc9be93eb83f59d369097ec145d743c92e62d1e5344a41147ff、全24row/187/原本Backup/native/状態18/署名decl tripleを保持、partial runtime inode4223/4224・644bytes/SHA888ee856を全9metadataとACL/linked path/readonly flagsで照合。旧2332のUNKNOWN/143を成功に補記しない。

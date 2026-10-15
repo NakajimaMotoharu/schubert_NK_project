@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC-285：署名拒否・DB/Ref取得前の保持39FD profile
+
+QA047内の内部限定回収を具体化する。対象はBUG1305/YKT1071のcurrent4856/PG3420/BOMdc535a48、boot79a、SIGNED_CURRENTで旧signature stemを拒否した当Java410196/t8469964/ppid410194/argvSHA7da390fcだけ。3502読取proof16145fbc…は全39FD/全task子0・管理DB/advisory0・M/A各一・全24/187/四ordinary/原本Backup/runtime/startup/native不変を二読した。これを旧99/101FD/Ref/DB保持profileの許可へ代入せず、別の取得前profileとして扱う。source署名拒否や旧UNKNOWNを正常closeへ読み替えない。
+
+FD閉集合は0～36、43、128の39件。0/1/2は当SSHの対応stdin/stdout/stderr pipe、3は固定JDK25.0.4/lib/modules、4は署名済PG3420 operations/batch.jar、5～27は当実classpathの固定23 Jar。各regular target/Root所有・group/mode/nlink/全9metadata・file hashと署名187内の対応を固定し、JDK moduleは既toolchain pinへ結ぶ。flagsは3～27/35/36=0100000、0=00、1/2=01。28/31はlinked /run/schubert-nk、29/32はそのlinked /run、Root0755/同dev-inode/type/ACL・flags02700000を検査する。30/33はmaintenance.lockのO_PATH属性descriptor（flags012400000、別OFD）、34は同Root0600/nlink1/size0の唯一FLOCK holder（02100000）。43/128はstartup-admission.lockの同Root0600/nlink1/size0・同一OFDdup/唯一FLOCK（02100000）。35/36はRoot所有の/dev/random・/dev/urandomの固定character deviceであり内容を読まない。socket/Ref/bus/DB/新child・余剰FD/未知targetを許可しない。
+
+過去3502像からfreshへ許す差は29/32の共有/run mtime/ctimeの非減少だけ、旧時刻≦fresh≦その測定上限を保持し、fresh二descriptorの全9値はlinked pathと一致必須。他37FDはtarget/全metadata/flags/同OFD関係/権限・root/exe/argv/cgroup・全task子0を完全一致にする。全fieldを一度でも省略/0化して成立させない。現在の普通API/Web peerはSSC280同様に各role/app・当service/source/cgroup/FDと両端TCPをfresh再認証し、管理peer/advisoryは0を固定する。
+
+host347505/t8560863/ppid4249/argvSHA6db8bae1・同inodegate66306-9337730/fd4のsoleFLOCK、凍結SIGNED_CURRENT failure/log hash・未終端を先に認証する。SSC276のfailed-phase単一read-only接続と取得後の一般critical診断禁止を維持、force unlockしない。同inodequeued後継を用意した一つの回収接続内で、新十Refを保持して当全39/OFD/DB0・全24/設定32/Unit状態18/187/原本Backup/native等をfresh二読・耐久proof保存→そのfresh像からpidfd前後/一回予約/TERM直前再照合→当Javaだけ普通TERM一回（15秒終端・30秒同ticksreap）→子/全FD/管理DB/advisory/M-A/bus消失・四ordinary/全原値保存・新Ref正常返却→旧wrapper終了後同hostgate取得→別wholepostを閉じる。sudo410194/業務Unit/別PIDをsignal対象にしない。変動/unknownではsignal0・隔離・再送0、SIGKILL/DBterminate/VM/Root/Backup/ADMIN/current/epoch/原本変更0。旧stop結果は143/UNKNOWNのまま保全する。
+
+回収後だけ、別new-only工具で同sourceの未実施owned stopへ進む。composer関数の検査だけでなく、最終emitの全Java/Python/実fixtureとsignature stem/boot/source/BOM/全Rootbindingを独立固定値へjoinし、旧boot/stem・誤署名・null/欠落・余剰を取得前に拒否する。旧稼働classやfrozenをhotpatchせず、newABI→正常新scope→別post/nativeで再試験する。この設計公開だけでは実回収・PGPT受入を宣言しない。
+
 ## SSC-284（PG/PT、2026-10-14、reload済み保持11FD・shared/runと宣言viewの具体化）
 
 実最終283をlocal及びorigin/mainで確認。BUG1232～1235/YKT998～1001/QA047既承認内、RD/UI・業務結果・Root1800秒/Unit期限不変更、新QA不要。current Main3b7f/PG2126/BOM62213f・bootb2d6の当管理Java101019/t1808679/101FD、唯一Ref101050/t1808864/11FD、sole管理DB101048/PG998-native-stage/idle-TX/71419602、親M-A/同peer双方向TCPを新fullproofへ束縛する。sudo101017/他actor/業務Unitはsignal対象外。独立2342 proof a8eb610cff840dc9be93eb83f59d369097ec145d743c92e62d1e5344a41147ff、全24row/187/原本Backup/native/状態18/署名decl tripleを保持、partial runtime inode4223/4224・644bytes/SHA888ee856を全9metadataとACL/linked path/readonly flagsで照合。旧2332のUNKNOWN/143を成功に補記しない。
