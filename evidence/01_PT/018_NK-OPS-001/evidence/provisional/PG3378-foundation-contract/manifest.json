@@ -1,0 +1,116 @@
+{
+  "run": "PG3378-foundation-contract-audit",
+  "productionSource": "a9cb0ac9a3a0f9bc37d0952943a98016c7a25f25",
+  "actualExit": 0,
+  "canonicalMain": "756a891d9ca88643eeb3ff69f888b00fb368130d",
+  "canonicalDocumentSha256": {
+    "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6",
+    "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md": "0531aa42a7bfc3e305c93bbfc53e61a5d14a2b277bb2a96f4fb09f673b302e39"
+  },
+  "policySections": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14"
+  ],
+  "productionModules": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "api",
+    "web",
+    "batch"
+  ],
+  "separateCompatibilityModule": "program/characterization",
+  "actualReactorChildModules": [
+    "program/characterization",
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-api",
+    "src/schubert-nk-web",
+    "src/schubert-nk-batch"
+  ],
+  "internalCompileRuntimeDependencies": {
+    "protocol": [],
+    "storage": [],
+    "bootstrap": [
+      "storage"
+    ],
+    "api": [
+      "bootstrap",
+      "protocol",
+      "storage"
+    ],
+    "web": [
+      "bootstrap",
+      "protocol",
+      "storage"
+    ],
+    "batch": [
+      "bootstrap",
+      "storage"
+    ]
+  },
+  "allSevenPomHashesEqualA9": true,
+  "pomSha256": {
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "src/schubert-nk-api/pom.xml": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "src/schubert-nk-web/pom.xml": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "src/schubert-nk-batch/pom.xml": "d61df303d71a6f62c9c16f45ed7cf34c56fca65c44a195a17a595b247308db6d",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38"
+  },
+  "documentSha256": {
+    "documents/400_PGPT/410_工程標準/411_コーディング規約.md": "4cf1dbd88f7775e58d83a762e468e025be474ef26177385d6a8108dcbc22856f",
+    "documents/400_PGPT/430_構成・追跡/431_Module・Program一覧.md": "3a05c3d1755ae6540e1b87136d3da95cc0ce503c30eaccebd09dacd5c114a6d3",
+    "documents/400_PGPT/401_PGPT成果物一覧.md": "88fbea53cb24cc4c73e104c479168fbb153e6f2cb773230af8e6309c9f08ecac",
+    "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md": "a82a15f008135fda6b9515c8bf6e1d594f4b0b0cd970b825d79ae53d347951cd",
+    "documents/400_PGPT/440_判断/441_実装判断記録.md": "8c9b157721dc1c1f5545aef5451ada753ee5df13267f50e476fdc7d51c085279",
+    "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md": "48f868bf28a4f1b95b480d72c2d2eb6a1d6c034d4a34b20eb47e407cb86eb715",
+    "README.md": "4556d890c87b2570fb3ebe2ab6e0d7c8a860be41eb16e6daf931d4d59075a972",
+    "evidence/01_PT/018_NK-OPS-001/892_基盤規約・解析gate個別照合仕様.md": "50732449038376316d3068e9c7d4491c28c3bdff3cc94180facecdee91fbd935"
+  },
+  "crossCatalogReasons": {
+    "401": "SSC084 current supplement already present; older five-module results historical",
+    "411": "Current six-module policy and allowed isolated fixture scope corrected to approved SS",
+    "421": "Actual six-module commands and fixed18.6 installation trace present; histories unchanged",
+    "431": "Current table corrected to six; existing older five-module run histories not edited",
+    "441": "Individual implementation decision history, no conflicting current artifact catalog",
+    "451": "WholeProduction scope policy, no five-only exclusion; PMD/Checkstyle not executed and F03 held",
+    "README": "Canonical main/source separation policy; no conflicting module catalog"
+  },
+  "reviewedMandatoryTopics": [
+    "Java25",
+    "package/class/method naming",
+    "module boundaries",
+    "null/invariants",
+    "exception/transaction/lock",
+    "logging/redaction",
+    "security",
+    "SQL/DDL",
+    "fixed-length/NFC/byte/padding",
+    "concurrency/JMS/file",
+    "testability/independent oracles",
+    "format/static analysis",
+    "prohibitions/review"
+  ],
+  "coverageApplicability": "NON_EXECUTABLE_POLICY_DOCUMENT",
+  "javaCoverageExcluded": false,
+  "F03Accepted": false,
+  "PMDCheckstyleExecuted": false,
+  "formalUpdated": false,
+  "wholeEffortCompletionRate": null,
+  "newPtCredit": 0
+}
