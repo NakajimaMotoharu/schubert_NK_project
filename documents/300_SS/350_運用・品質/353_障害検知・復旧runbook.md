@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC293 pool動態とfresh fullFD二読を分離する限定再開
+
+343 SSC293を適用する。元4348/6609はsignal前拒否1、元4366v1/proof75569も無操作拒否1であり、元58917 UNKNOWN/Caddy既停止を再送しない。API旧fd93のTCPは未採取のまま、歴史差を旧正常・旧pool所有へ補完しない。新現在両端証明済みpoolと固定非pool/authorityを別に検証し、keeper/partialの各操作境界はcaptured client及び同backend全FD・両端endpoint/state/inodeを含む現在二読完全一致を維持する。未知/片端/重複/非pool/権限差は拒否。生TCP timer/queueは全private保存とauthority比較を区別する。
+
+snapshot/bind拒否は既取得raw/TCP/serverを含め、上限64MiBを守る各全像別file＋最終hash indexへdurable保存する。保存失敗・元失敗時pair未取得を合格へ読み替えず隔離を継続する。独立正常/各FD/各authority/pool上下限/両端差/server-only/partial witness差/二回目bind失敗/二file目保存失敗と、同固定artifactの実無操作proof・全新十Ref正常を操作前条件とする。設計main後に別new-only手順で正規pair TERM→元実非0/guest終端別証拠→自然gate→partial inspect/必要五→typed revoke/独立postへ進み、旧scope正常化/Root・Backup・Admin・VM・配備/reload/force操作をしない。
+
 ## SSC292 元58917 UNKNOWNの現pair回収・Caddy再送禁止
 
 343 SSC292と同一instance・全保存基点に限る。BUG1349/YKT1115の失敗pairは未取得、4336現在四sample同値は過去の不一致原因を証明しない。元58917/固定87ef52を変更・再実行せず、Caddy同INV25aa7706の既一回停止は真正terminal/kernel空を観測するだけにする。新metadata十Ref・元hostgate/Java815726/Python815643全FDとauthorityのfresh二読・全189/32/24原値・37/56保全→同pair各一回pidfd TERM/元observer真正非0の回収→自然hostgate継承→別partial同artifact inspect/全新scope正常→必要五停止/typed revoke→別fresh独立post・新scope正常まで段階別保存する。
