@@ -39,6 +39,12 @@ import java.util.UUID;
  * PT-MED-050..054. Caller owns keys, final auth/Inbox HMAC and physical verification.
  */
 public final class MediaReplayService {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
+  private static final java.lang.String LITERAL_ACTOR = "actor";
+
+  private static final java.lang.String LITERAL_RESPONSEID = "responseId";
+
   private final ResponseSnapshotCodec snapshots;
 
   public MediaReplayService(ResponseSnapshotCodec snapshots) {
@@ -83,10 +89,10 @@ public final class MediaReplayService {
       TypedPayloadValues response,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(response, "response");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       PayloadValues values = PayloadTypeCatalog.encode(response);
@@ -107,10 +113,10 @@ public final class MediaReplayService {
       ResultCode code,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       require(persistentError(request, code));
@@ -124,8 +130,8 @@ public final class MediaReplayService {
   }
 
   public Snapshot read(MediaRequest request, AuthenticatedActor actor, InboxCompletion completion) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(completion, "completion");
     try {
       require(completion.responseLayoutId().equals(request.responseLayoutId().value()));
@@ -187,9 +193,9 @@ public final class MediaReplayService {
       Instant sentAt,
       boolean replay) {
     Objects.requireNonNull(saved, "saved");
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(saved.identity.equals(identity(request, actor)));
@@ -207,9 +213,9 @@ public final class MediaReplayService {
 
   /** Nonpersistent auth/temporary response, or a definite failure; never a success profile. */
   public byte[] failure(MediaRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(

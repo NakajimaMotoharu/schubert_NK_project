@@ -25,6 +25,8 @@ import java.util.OptionalLong;
  * 323/324/332§8..10/351; PG-D-331; PT-QRY028..032/NTF012..016.
  */
 public final class QuestionCommandService {
+  private static final java.lang.String LITERAL_STATE = "state";
+
   private static final String QUESTION_ADMIN =
       "select id,owner_user_id,is_deleted,deleted_at,deleted_by,version from schubert.questions where id=? for update";
   private static final String QUESTION_USER =
@@ -43,7 +45,7 @@ public final class QuestionCommandService {
     public CancelResult {
       Objects.requireNonNull(code, "code");
       Objects.requireNonNull(jobId, "jobId");
-      Objects.requireNonNull(state, "state");
+      Objects.requireNonNull(state, LITERAL_STATE);
       Objects.requireNonNull(cancelledAt, "cancelledAt");
       if (jobId.isPresent() && (jobId.getAsLong() < 1 || jobId.getAsLong() > 999_999_999_999L))
         throw new IllegalArgumentException("cancel result job is outside N12");
@@ -130,7 +132,7 @@ public final class QuestionCommandService {
         try (var r = s.executeQuery()) {
           require(r.next());
           question = number(r, "question_id");
-          state = NotificationState.valueOf(requireValue(r.getString("state")));
+          state = NotificationState.valueOf(requireValue(r.getString(LITERAL_STATE)));
           cancelled = timestamp(r, "cancelled_at");
           changed = timestamp(r, "state_changed_at").orElseThrow();
           version = requireValue(r.getObject("version", Long.class));
@@ -147,7 +149,7 @@ public final class QuestionCommandService {
               r.next()
                   && number(r, "job_id") == job
                   && number(r, "question_id") == question
-                  && state.name().equals(r.getString("state"))
+                  && state.name().equals(r.getString(LITERAL_STATE))
                   && timestamp(r, "state_changed_at").equals(Optional.of(changed)));
           require(!r.next());
         }
@@ -339,7 +341,7 @@ public final class QuestionCommandService {
     details.addProperty("questionId", question);
     job.ifPresent(value -> details.addProperty("jobId", value));
     details.addProperty("actorRole", actor.role().name());
-    details.addProperty("state", state);
+    details.addProperty(LITERAL_STATE, state);
     details.addProperty("resultCode", "0000");
     try (var s =
         c.prepareStatement(

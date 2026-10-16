@@ -42,7 +42,9 @@ import java.util.UUID;
  * PT-AUT-REPLAY-001..005. The caller owns Inbox/HMAC validation and the entire DB transaction.
  */
 public final class LoginReplayService {
-  private static final LayoutId LOGIN = new LayoutId("LGNRSP01");
+  private static final java.lang.String LITERAL_LGNRSP01 = "LGNRSP01";
+
+  private static final LayoutId LOGIN = new LayoutId(LITERAL_LGNRSP01);
   private static final String READ_SESSION =
       "select user_id,created_message_id,context_hash,context_ciphertext,key_version,issued_at"
           + " from schubert.auth_sessions where id=?";
@@ -97,7 +99,7 @@ public final class LoginReplayService {
       return new InboxCompletion(
           state,
           reference,
-          "LGNRSP01",
+          LITERAL_LGNRSP01,
           "001",
           Optional.of(snapshots.encrypt(identity(requestId), body)),
           completedAt.truncatedTo(ChronoUnit.MICROS));
@@ -127,7 +129,7 @@ public final class LoginReplayService {
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(!connection.getAutoCommit());
-      require(completion.responseLayoutId().equals("LGNRSP01"));
+      require(completion.responseLayoutId().equals(LITERAL_LGNRSP01));
       require(completion.responseVersion().equals("001"));
       var snapshot = completion.responseSnapshot().orElseThrow(SQLException::new);
       byte[] body = snapshots.decrypt(identity(requestId), snapshot);
@@ -206,7 +208,7 @@ public final class LoginReplayService {
   }
 
   private static ResponseSnapshotIdentity identity(UUID requestId) {
-    return ResponseSnapshotIdentity.anonymous(requestId, "LGNRSP01", "001");
+    return ResponseSnapshotIdentity.anonymous(requestId, LITERAL_LGNRSP01, "001");
   }
 
   private static byte[] wire(

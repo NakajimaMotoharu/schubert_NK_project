@@ -16,6 +16,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class MaintenanceUnitTermination {
+  private static final java.lang.String LITERAL_FIXED_UNIT = "fixed Unit";
+
   interface Observations {
     MaintenanceStopSnapshot read() throws IOException;
 
@@ -33,7 +35,7 @@ public final class MaintenanceUnitTermination {
       throws IOException {
     Objects.requireNonNull(context, "root context");
     Objects.requireNonNull(expected, "root identity");
-    Objects.requireNonNull(unit, "fixed Unit");
+    Objects.requireNonNull(unit, LITERAL_FIXED_UNIT);
     require(expected.service() == RootStartupContext.Service.MORNING);
     context.recheck(expected);
     return nativeObserver(context, expected, unit);
@@ -45,7 +47,7 @@ public final class MaintenanceUnitTermination {
       throws IOException {
     Objects.requireNonNull(context, "root context");
     Objects.requireNonNull(expected, "root identity");
-    Objects.requireNonNull(unit, "fixed Unit");
+    Objects.requireNonNull(unit, LITERAL_FIXED_UNIT);
     require(
         expected.service() == RootStartupContext.Service.CLEANUP
             && (unit == MaintenanceUnit.WEB || unit == MaintenanceUnit.API));
@@ -72,7 +74,7 @@ public final class MaintenanceUnitTermination {
       Observations observations,
       FixedUnitCgroupNamespace namespace) {
     this.context = Objects.requireNonNull(context, "root context");
-    this.unit = Objects.requireNonNull(unit, "fixed Unit");
+    this.unit = Objects.requireNonNull(unit, LITERAL_FIXED_UNIT);
     this.observations = Objects.requireNonNull(observations, "fixed observations");
     this.namespace = Objects.requireNonNull(namespace, "host namespace");
   }
@@ -180,7 +182,7 @@ public final class MaintenanceUnitTermination {
     private final InspectorUnitProbe.NativeReader query;
 
     NativeObservations(MaintenanceUnit unit, InspectorUnitProbe.NativeReader query) {
-      this.unit = Objects.requireNonNull(unit, "fixed Unit");
+      this.unit = Objects.requireNonNull(unit, LITERAL_FIXED_UNIT);
       this.query = Objects.requireNonNull(query, "fixed reader");
     }
 

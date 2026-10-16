@@ -16,7 +16,16 @@ import org.jspecify.annotations.NullMarked;
 /** SCR015/FUN009/AUT002/UI222,225,236/SS313,332; PG-D344/PT-USER-HTTP001..010. */
 @NullMarked
 public final class UserSearchForm {
-  private static final Set<String> FIELDS = Set.of("username", "role", "state", "page");
+  private static final java.lang.String LITERAL_USERNAME = "username";
+
+  private static final java.lang.String LITERAL_ROLE = "role";
+
+  private static final java.lang.String LITERAL_STATE = "state";
+
+  private static final java.lang.String LITERAL_PAGE = "page";
+
+  private static final Set<String> FIELDS =
+      Set.of(LITERAL_USERNAME, LITERAL_ROLE, LITERAL_STATE, LITERAL_PAGE);
   private static final String INVALID = "入力項目を確認してください。";
   private final Map<String, String> values;
   private final Map<String, String> issues;
@@ -47,23 +56,24 @@ public final class UserSearchForm {
       }
       values.put(name, value);
     }
-    String username = Objects.requireNonNull(values.get("username"));
+    String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));
     if (username.getBytes(StandardCharsets.UTF_8).length > 64)
-      issues.put("username", "UsernameはUTF-8で64 byte以内にしてください。");
-    if (!Set.of("", "USER", "ADMIN").contains(values.get("role"))) issues.put("role", INVALID);
-    if (!Set.of("", "ACTIVE", "DISABLED", "LOCKED").contains(values.get("state")))
-      issues.put("state", INVALID);
-    String text = Objects.requireNonNull(values.get("page"));
+      issues.put(LITERAL_USERNAME, "UsernameはUTF-8で64 byte以内にしてください。");
+    if (!Set.of("", "USER", "ADMIN").contains(values.get(LITERAL_ROLE)))
+      issues.put(LITERAL_ROLE, INVALID);
+    if (!Set.of("", "ACTIVE", "DISABLED", "LOCKED").contains(values.get(LITERAL_STATE)))
+      issues.put(LITERAL_STATE, INVALID);
+    String text = Objects.requireNonNull(values.get(LITERAL_PAGE));
     int page = 1;
     if (!text.isEmpty()) {
-      if (!text.matches("-?[0-9]+")) issues.put("page", INVALID);
+      if (!text.matches("-?[0-9]+")) issues.put(LITERAL_PAGE, INVALID);
       else {
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put("page", INVALID);
+          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
-          issues.put("page", INVALID);
+          issues.put(LITERAL_PAGE, INVALID);
         }
       }
     }
@@ -80,15 +90,15 @@ public final class UserSearchForm {
   }
 
   public String getUsername() {
-    return Objects.requireNonNull(values.get("username"));
+    return Objects.requireNonNull(values.get(LITERAL_USERNAME));
   }
 
   public String getRole() {
-    return Objects.requireNonNull(values.get("role"));
+    return Objects.requireNonNull(values.get(LITERAL_ROLE));
   }
 
   public String getState() {
-    return Objects.requireNonNull(values.get("state"));
+    return Objects.requireNonNull(values.get(LITERAL_STATE));
   }
 
   public int getPage() {

@@ -24,6 +24,23 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class RootStartupContext {
+  private static final java.lang.String LITERAL_PROC = "proc";
+
+  private static final java.lang.String LITERAL_LOADSTATE = "LoadState";
+
+  private static final java.lang.String LITERAL_ACTIVESTATE = "ActiveState";
+
+  private static final java.lang.String LITERAL_SUBSTATE = "SubState";
+
+  private static final java.lang.String LITERAL_MAINPID = "MainPID";
+
+  private static final java.lang.String LITERAL_INVOCATIONID = "InvocationID";
+
+  private static final java.lang.String LITERAL_CONTROLGROUP = "ControlGroup";
+
+  private static final java.lang.String LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME =
+      "DMI_HARDCODED_ABSOLUTE_FILENAME";
+
   public enum Service {
     API("schubert-nk-api.service"),
     WEB("schubert-nk-web.service"),
@@ -186,7 +203,7 @@ public final class RootStartupContext {
       throws IOException {
     require(io.effectiveUid() == 0);
     require(
-        "proc".equals(io.procFilesystem())
+        LITERAL_PROC.equals(io.procFilesystem())
             && "/usr/lib/systemd/systemd".equals(io.initExecutable()));
     require(ascii(io.boot(), 37).equals(morning.boot() + "\n"));
     require(start(io.stat(1), 1) == morning.initStartTicks());
@@ -198,21 +215,21 @@ public final class RootStartupContext {
               .equals(
                   Set.of(
                       "Id",
-                      "LoadState",
-                      "ActiveState",
-                      "SubState",
-                      "MainPID",
-                      "InvocationID",
-                      "ControlGroup")));
+                      LITERAL_LOADSTATE,
+                      LITERAL_ACTIVESTATE,
+                      LITERAL_SUBSTATE,
+                      LITERAL_MAINPID,
+                      LITERAL_INVOCATIONID,
+                      LITERAL_CONTROLGROUP)));
       String group = "/system.slice/" + target.unit();
       require(
           target.unit().equals(unit.get("Id"))
-              && "loaded".equals(unit.get("LoadState"))
-              && Set.of("activating", "active").contains(unit.get("ActiveState"))
-              && Set.of("start", "running").contains(unit.get("SubState"))
-              && group.equals(unit.get("ControlGroup")));
-      String pidText = Objects.requireNonNull(unit.get("MainPID"));
-      String invocation = Objects.requireNonNull(unit.get("InvocationID"));
+              && "loaded".equals(unit.get(LITERAL_LOADSTATE))
+              && Set.of("activating", "active").contains(unit.get(LITERAL_ACTIVESTATE))
+              && Set.of("start", "running").contains(unit.get(LITERAL_SUBSTATE))
+              && group.equals(unit.get(LITERAL_CONTROLGROUP)));
+      String pidText = Objects.requireNonNull(unit.get(LITERAL_MAINPID));
+      String invocation = Objects.requireNonNull(unit.get(LITERAL_INVOCATIONID));
       require(pidText.matches("[1-9][0-9]{0,9}") && invocation.matches("(?!0{32}$)[0-9a-f]{32}"));
       long pid = Long.parseLong(pidText); // The preceding 1..10 decimal digits always fit a long.
       require(
@@ -283,10 +300,15 @@ public final class RootStartupContext {
       require(
           values
               .keySet()
-              .equals(Set.of("Id", "InvocationID", "MainPID", "ExecMainStartTimestampMonotonic")));
+              .equals(
+                  Set.of(
+                      "Id",
+                      LITERAL_INVOCATIONID,
+                      LITERAL_MAINPID,
+                      "ExecMainStartTimestampMonotonic")));
       require(morning.service().unit().equals(values.get("Id")));
-      require(morning.invocation().equals(values.get("InvocationID")));
-      require(Long.toString(morning.pid()).equals(values.get("MainPID")));
+      require(morning.invocation().equals(values.get(LITERAL_INVOCATIONID)));
+      require(Long.toString(morning.pid()).equals(values.get(LITERAL_MAINPID)));
       String start = Objects.requireNonNull(values.get("ExecMainStartTimestampMonotonic"));
       require(start.matches("[1-9][0-9]{0,19}"));
       long started = Math.multiplyExact(Long.parseLong(start), 1000L);
@@ -307,7 +329,7 @@ public final class RootStartupContext {
 
   private Snapshot observe(Service service) throws IOException {
     require(io.effectiveUid() == 0);
-    require("proc".equals(io.procFilesystem()));
+    require(LITERAL_PROC.equals(io.procFilesystem()));
     require("/usr/lib/systemd/systemd".equals(io.initExecutable()));
     String boot = ascii(io.boot(), 37);
     require(
@@ -328,17 +350,19 @@ public final class RootStartupContext {
             .equals(
                 Set.of(
                     "Id",
-                    "LoadState",
-                    "ActiveState",
-                    "SubState",
-                    "MainPID",
-                    "InvocationID",
-                    "ControlGroup")));
-    require(service.unit().equals(unit.get("Id")) && "loaded".equals(unit.get("LoadState")));
-    require(Set.of("activating", "active").contains(unit.get("ActiveState")));
-    require(Set.of("start", "running").contains(unit.get("SubState")));
-    require(Long.toString(pid).equals(unit.get("MainPID")));
-    require(invocation.equals(unit.get("InvocationID")) && group.equals(unit.get("ControlGroup")));
+                    LITERAL_LOADSTATE,
+                    LITERAL_ACTIVESTATE,
+                    LITERAL_SUBSTATE,
+                    LITERAL_MAINPID,
+                    LITERAL_INVOCATIONID,
+                    LITERAL_CONTROLGROUP)));
+    require(service.unit().equals(unit.get("Id")) && "loaded".equals(unit.get(LITERAL_LOADSTATE)));
+    require(Set.of("activating", "active").contains(unit.get(LITERAL_ACTIVESTATE)));
+    require(Set.of("start", "running").contains(unit.get(LITERAL_SUBSTATE)));
+    require(Long.toString(pid).equals(unit.get(LITERAL_MAINPID)));
+    require(
+        invocation.equals(unit.get(LITERAL_INVOCATIONID))
+            && group.equals(unit.get(LITERAL_CONTROLGROUP)));
     return new Snapshot(
         service, boot.substring(0, 36), invocation, pid, ownStart, initStart, group);
   }
@@ -455,64 +479,64 @@ public final class RootStartupContext {
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification = "SSC086/087 fixed kernel proc root; ROOTCTX008/native014")
     public String procFilesystem() throws IOException {
-      return Files.getFileStore(Path.of("/", "proc")).type();
+      return Files.getFileStore(Path.of("/", LITERAL_PROC)).type();
     }
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification =
             "SSC086/087 fixed kernel PID1 exe exception, no user path; ROOTCTX002/008/native014")
     public String initExecutable() throws IOException {
       return Objects.requireNonNull(
-              link.read(Path.of("/", "proc", "1", "exe")), "kernel executable")
+              link.read(Path.of("/", LITERAL_PROC, "1", "exe")), "kernel executable")
           .toString();
     }
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification = "SSC086/087 fixed kernel boot_id, NOFOLLOW leaf; ROOTCTX002/008/native014")
     public byte[] boot() throws IOException {
-      return read(Path.of("/", "proc", "sys", "kernel", "random", "boot_id"), 38);
+      return read(Path.of("/", LITERAL_PROC, "sys", "kernel", "random", "boot_id"), 38);
     }
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification =
             "SSC086/087 fixed kernel proc stat, validated PID and NOFOLLOW leaf;"
                 + " ROOTCTX003/008/native014")
     public byte[] stat(long pid) throws IOException {
-      return read(Path.of("/", "proc", Long.toString(pid), "stat"), 4097);
+      return read(Path.of("/", LITERAL_PROC, Long.toString(pid), "stat"), 4097);
     }
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification =
             "SSC086/087 fixed kernel proc cgroup, validated PID and NOFOLLOW leaf;"
                 + " ROOTCTX004/008/native014")
     public byte[] cgroup(long pid) throws IOException {
-      return read(Path.of("/", "proc", Long.toString(pid), "cgroup"), 4097);
+      return read(Path.of("/", LITERAL_PROC, Long.toString(pid), "cgroup"), 4097);
     }
 
     @Override
     @SuppressFBWarnings(
-        value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+        value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
         matchType = SuppressMatchType.EXACT,
         justification = "SSC137 fixed service Root kernel status, positive validated PID only")
     public long serviceRootUid(long pid) throws IOException {
       require(pid >= 2 && pid <= Integer.MAX_VALUE);
-      byte[] bytes = read(Path.of("/", "proc", Long.toString(pid), "status"), 16385);
+      byte[] bytes = read(Path.of("/", LITERAL_PROC, Long.toString(pid), "status"), 16385);
       try {
         return rootUid(bytes);
       } finally {

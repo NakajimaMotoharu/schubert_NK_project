@@ -21,7 +21,11 @@ import org.jspecify.annotations.NullMarked;
 /** SCR020/NTF/UI224,236/SS313,314; PG-D347/PT-NTF-HTTP001..010. No owner input. */
 @NullMarked
 public final class NotificationSearchForm {
-  private static final Set<String> FIELDS = Set.of("type", "from", "to", "page");
+  private static final java.lang.String LITERAL_TYPE = "type";
+
+  private static final java.lang.String LITERAL_PAGE = "page";
+
+  private static final Set<String> FIELDS = Set.of(LITERAL_TYPE, "from", "to", LITERAL_PAGE);
   private static final String INVALID = "入力項目を確認してください。";
   private final Map<String, String> values;
   private final Map<String, String> issues;
@@ -62,19 +66,19 @@ public final class NotificationSearchForm {
       }
       values.put(name, value);
     }
-    if (!Set.of("", "ACCEPTED", "COMPLETED", "ERROR").contains(values.get("type")))
-      issues.put("type", INVALID);
-    String text = Objects.requireNonNull(values.get("page"));
+    if (!Set.of("", "ACCEPTED", "COMPLETED", "ERROR").contains(values.get(LITERAL_TYPE)))
+      issues.put(LITERAL_TYPE, INVALID);
+    String text = Objects.requireNonNull(values.get(LITERAL_PAGE));
     int page = 1;
     if (!text.isEmpty()) {
-      if (!text.matches("-?[0-9]+")) issues.put("page", INVALID);
+      if (!text.matches("-?[0-9]+")) issues.put(LITERAL_PAGE, INVALID);
       else
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put("page", INVALID);
+          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
-          issues.put("page", INVALID);
+          issues.put(LITERAL_PAGE, INVALID);
         }
     }
     var from = date("from", values, issues);
@@ -131,7 +135,7 @@ public final class NotificationSearchForm {
 
   public NotificationSearchRequestData toRequest() {
     if (!isValid()) throw new IllegalArgumentException("invalid notification search form");
-    String type = Objects.requireNonNull(values.get("type"));
+    String type = Objects.requireNonNull(values.get(LITERAL_TYPE));
     return new NotificationSearchRequestData(
         type.isEmpty() ? Optional.empty() : Optional.of(NotificationType.valueOf(type)),
         from,

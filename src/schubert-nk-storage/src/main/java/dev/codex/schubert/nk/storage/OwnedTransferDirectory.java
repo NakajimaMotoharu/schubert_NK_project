@@ -18,6 +18,10 @@ import java.util.UUID;
  * gate.
  */
 public final class OwnedTransferDirectory implements AutoCloseable {
+  private static final java.lang.String LITERAL_OPERATION = "operation";
+
+  private static final java.lang.String LITERAL_PART = ".part";
+
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
   private final Object stateLock = new Object();
   private final DirectoryCalls calls;
@@ -90,7 +94,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       throws StorageIoException {
     synchronized (stateLock) {
       requireSegment(name);
-      Objects.requireNonNull(operation, "operation");
+      Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return withEntry(calls.openEntry(descriptor, name), operation);
     }
@@ -177,7 +181,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   /** Inspect this held directory, not its replaceable configured path; never export the path. */
   public <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
-      Objects.requireNonNull(operation, "operation");
+      Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return execute(Path.of("/proc/self/fd", Integer.toString(descriptor)), operation);
     }
@@ -185,7 +189,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
 
   public <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
-      return atFile(id, ".part", operation);
+      return atFile(id, LITERAL_PART, operation);
     }
   }
 
@@ -198,7 +202,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   private <T> T atFile(UUID id, String suffix, FileOperation<T> operation)
       throws StorageIoException {
     Objects.requireNonNull(id, "id");
-    Objects.requireNonNull(operation, "operation");
+    Objects.requireNonNull(operation, LITERAL_OPERATION);
     requireOpen();
     Path capability = Path.of("/proc/self/fd", Integer.toString(descriptor), id + suffix);
     return execute(capability, operation);
@@ -207,7 +211,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   /** Hold the part inode; caller must validate its Unix attributes before any read. */
   public <T> T atPartHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
-      return atHandle(id, ".part", operation);
+      return atHandle(id, LITERAL_PART, operation);
     }
   }
 
@@ -221,7 +225,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   private <T> T atHandle(UUID id, String suffix, FileOperation<T> operation)
       throws StorageIoException {
     Objects.requireNonNull(id, "id");
-    Objects.requireNonNull(operation, "operation");
+    Objects.requireNonNull(operation, LITERAL_OPERATION);
     requireOpen();
     return withEntry(calls.openEntry(descriptor, id + suffix), operation);
   }
@@ -230,9 +234,9 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   public <T> T createPart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
-      Objects.requireNonNull(operation, "operation");
+      Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
-      return withEntry(calls.createFile(descriptor, id + ".part"), operation);
+      return withEntry(calls.createFile(descriptor, id + LITERAL_PART), operation);
     }
   }
 
@@ -243,9 +247,9 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   public <T> T createPrivatePart(UUID id, FileOperation<T> operation) throws StorageIoException {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
-      Objects.requireNonNull(operation, "operation");
+      Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
-      return withEntry(calls.createPrivateFile(descriptor, id + ".part"), operation);
+      return withEntry(calls.createPrivateFile(descriptor, id + LITERAL_PART), operation);
     }
   }
 
@@ -309,7 +313,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       requireOpen();
-      calls.publish(descriptor, id + ".part", id + ".ready");
+      calls.publish(descriptor, id + LITERAL_PART, id + ".ready");
       calls.sync(descriptor);
     }
   }
@@ -322,7 +326,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     synchronized (stateLock) {
       Objects.requireNonNull(id, "id");
       requireOpen();
-      calls.unlink(descriptor, id + ".part");
+      calls.unlink(descriptor, id + LITERAL_PART);
     }
   }
 
@@ -336,7 +340,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       Objects.requireNonNull(id, "id");
       requireSegment(name);
       requireOpen();
-      calls.publish(descriptor, id + ".part", name);
+      calls.publish(descriptor, id + LITERAL_PART, name);
       calls.sync(descriptor);
     }
   }

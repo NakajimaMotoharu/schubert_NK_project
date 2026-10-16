@@ -18,6 +18,18 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ArtemisAcceptorReadinessClient {
+  private static final java.lang.String LITERAL_NAME = "name";
+
+  private static final java.lang.String LITERAL_FACTORYCLASSNAME = "factoryClassName";
+
+  private static final java.lang.String LITERAL_SCHEME = "scheme";
+
+  private static final java.lang.String LITERAL_HOST = "host";
+
+  private static final java.lang.String LITERAL_PORT = "port";
+
+  private static final java.lang.String LITERAL_PROTOCOLS = "protocols";
+
   @FunctionalInterface
   interface Reader {
     @Nullable Object read(ClientSession session);
@@ -26,8 +38,9 @@ public final class ArtemisAcceptorReadinessClient {
   private static final String NETTY_FACTORY =
       "org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory";
   private static final Set<String> ACCEPTOR_FIELDS =
-      Set.of("name", "factoryClassName", "params", "extraProps");
-  private static final Set<String> PARAM_FIELDS = Set.of("scheme", "host", "port", "protocols");
+      Set.of(LITERAL_NAME, LITERAL_FACTORYCLASSNAME, "params", "extraProps");
+  private static final Set<String> PARAM_FIELDS =
+      Set.of(LITERAL_SCHEME, LITERAL_HOST, LITERAL_PORT, LITERAL_PROTOCOLS);
 
   private final Reader acceptors;
   private final Reader started;
@@ -68,31 +81,31 @@ public final class ArtemisAcceptorReadinessClient {
       if (!(values.get(0) instanceof JsonObject acceptor))
         throw new ArtemisManagementReadinessException();
       if (!ACCEPTOR_FIELDS.equals(acceptor.keySet())
-          || !"core".equals(acceptor.getString("name"))
-          || !NETTY_FACTORY.equals(acceptor.getString("factoryClassName"))
+          || !"core".equals(acceptor.getString(LITERAL_NAME))
+          || !NETTY_FACTORY.equals(acceptor.getString(LITERAL_FACTORYCLASSNAME))
           || !(acceptor.get("extraProps") instanceof JsonObject extra)
           || !extra.isEmpty()) throw new ArtemisManagementReadinessException();
       if (!(acceptor.get("params") instanceof JsonObject params))
         throw new ArtemisManagementReadinessException();
       if (!PARAM_FIELDS.equals(params.keySet())
-          || !"tcp".equals(params.getString("scheme"))
-          || !"127.0.0.1".equals(params.getString("host"))
-          || !"61616".equals(params.getString("port"))
-          || !"CORE".equals(params.getString("protocols")))
+          || !"tcp".equals(params.getString(LITERAL_SCHEME))
+          || !"127.0.0.1".equals(params.getString(LITERAL_HOST))
+          || !"61616".equals(params.getString(LITERAL_PORT))
+          || !"CORE".equals(params.getString(LITERAL_PROTOCOLS)))
         throw new ArtemisManagementReadinessException();
       return Map.of(
-          "name",
-          acceptor.getString("name"),
-          "factoryClassName",
-          acceptor.getString("factoryClassName"),
-          "scheme",
-          params.getString("scheme"),
-          "host",
-          params.getString("host"),
-          "port",
-          params.getString("port"),
-          "protocols",
-          params.getString("protocols"));
+          LITERAL_NAME,
+          acceptor.getString(LITERAL_NAME),
+          LITERAL_FACTORYCLASSNAME,
+          acceptor.getString(LITERAL_FACTORYCLASSNAME),
+          LITERAL_SCHEME,
+          params.getString(LITERAL_SCHEME),
+          LITERAL_HOST,
+          params.getString(LITERAL_HOST),
+          LITERAL_PORT,
+          params.getString(LITERAL_PORT),
+          LITERAL_PROTOCOLS,
+          params.getString(LITERAL_PROTOCOLS));
     } catch (org.apache.activemq.artemis.commons.shaded.json.JsonException
         | ClassCastException
         | IllegalStateException malformed) {

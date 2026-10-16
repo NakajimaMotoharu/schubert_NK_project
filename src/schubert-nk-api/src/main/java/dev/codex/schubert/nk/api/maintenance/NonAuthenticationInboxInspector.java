@@ -38,9 +38,18 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class NonAuthenticationInboxInspector {
-  private static final Set<String> QUERY = Set.of("0000", "9001");
-  private static final Set<String> DESCRIPTOR = Set.of("0000", "0104", "9001");
-  private static final Set<String> UPDATE = Set.of("0000", "0104", "0105", "9001");
+  private static final java.lang.String LITERAL_0000 = "0000";
+
+  private static final java.lang.String LITERAL_9001 = "9001";
+
+  private static final java.lang.String LITERAL_0104 = "0104";
+
+  private static final java.lang.String LITERAL_0105 = "0105";
+
+  private static final Set<String> QUERY = Set.of(LITERAL_0000, LITERAL_9001);
+  private static final Set<String> DESCRIPTOR = Set.of(LITERAL_0000, LITERAL_0104, LITERAL_9001);
+  private static final Set<String> UPDATE =
+      Set.of(LITERAL_0000, LITERAL_0104, LITERAL_0105, LITERAL_9001);
   private static final Set<String> MUTATIONS =
       Set.of("UCRRSP01", "USTRSP01", "URLRSP01", "UPWRSP01", "ULKRSP01");
   private static final Map<String, Set<String>> STORED_CODES =
@@ -60,17 +69,19 @@ public final class NonAuthenticationInboxInspector {
           Map.entry("MTRRSP01", QUERY),
           Map.entry("MEDRSP01", DESCRIPTOR),
           Map.entry("USRRSP01", QUERY),
-          Map.entry("UDTRSP01", Set.of("0000", "0104")),
+          Map.entry("UDTRSP01", Set.of(LITERAL_0000, LITERAL_0104)),
           Map.entry("LGSRSP01", QUERY),
           Map.entry("NTSRSP01", QUERY),
-          Map.entry("NTDRSP01", Set.of("0000", "0104")),
+          Map.entry("NTDRSP01", Set.of(LITERAL_0000, LITERAL_0104)),
           Map.entry("QSSRSP01", QUERY),
-          Map.entry("QSDRSP01", Set.of("0000", "0104")),
-          Map.entry("UCRRSP01", Set.of("0000", "0100", "0105", "9001")),
+          Map.entry("QSDRSP01", Set.of(LITERAL_0000, LITERAL_0104)),
+          Map.entry("UCRRSP01", Set.of(LITERAL_0000, "0100", LITERAL_0105, LITERAL_9001)),
           Map.entry("USTRSP01", UPDATE),
           Map.entry("URLRSP01", UPDATE),
-          Map.entry("UPWRSP01", Set.of("0000", "0100", "0104", "0105", "9001")),
-          Map.entry("ULKRSP01", Set.of("0000", "0200", "0104", "0105", "9001")));
+          Map.entry(
+              "UPWRSP01", Set.of(LITERAL_0000, "0100", LITERAL_0104, LITERAL_0105, LITERAL_9001)),
+          Map.entry(
+              "ULKRSP01", Set.of(LITERAL_0000, "0200", LITERAL_0104, LITERAL_0105, LITERAL_9001)));
   private final ResponseSnapshotCodec snapshots;
   private final InboxResponseInspector structure;
   private final QuestionMutationInboxInspector questionMutations;
@@ -116,7 +127,7 @@ public final class NonAuthenticationInboxInspector {
             long version = data.updatedVersion();
             if (layout.equals("UCRRSP01")) {
               if (version != 0) return false;
-            } else if (code.wireValue().equals("0000") && version == 0) return false;
+            } else if (code.wireValue().equals(LITERAL_0000) && version == 0) return false;
             return reference.equals(
                     InboxResultReference.numeric(
                         InboxResultReferenceType.USER, data.userId().value()))

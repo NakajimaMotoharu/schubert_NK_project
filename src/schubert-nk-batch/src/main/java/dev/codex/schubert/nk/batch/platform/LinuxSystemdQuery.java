@@ -15,13 +15,15 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class LinuxSystemdQuery {
+  private static final java.lang.String LITERAL_UNIT = "Unit";
+
   enum Property {
-    ID("Id", "Unit", 's'),
-    LOAD("LoadState", "Unit", 's'),
-    ACTIVE("ActiveState", "Unit", 's'),
-    SUB("SubState", "Unit", 's'),
+    ID("Id", LITERAL_UNIT, 's'),
+    LOAD("LoadState", LITERAL_UNIT, 's'),
+    ACTIVE("ActiveState", LITERAL_UNIT, 's'),
+    SUB("SubState", LITERAL_UNIT, 's'),
     PID("MainPID", "Service", 'u'),
-    INVOCATION("InvocationID", "Unit", 'a'),
+    INVOCATION("InvocationID", LITERAL_UNIT, 'a'),
     GROUP("ControlGroup", "Service", 's'),
     START("ExecMainStartTimestampMonotonic", "Service", 't');
 

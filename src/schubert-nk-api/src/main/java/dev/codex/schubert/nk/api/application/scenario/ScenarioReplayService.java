@@ -41,6 +41,12 @@ import java.util.UUID;
  * SSC-026/PT-SCN-009-S01..S05. Caller owns final authentication/Inbox/TX.
  */
 public final class ScenarioReplayService {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
+  private static final java.lang.String LITERAL_ACTOR = "actor";
+
+  private static final java.lang.String LITERAL_RESPONSEID = "responseId";
+
   private final ResponseSnapshotCodec snapshots;
 
   public ScenarioReplayService(ResponseSnapshotCodec snapshots) {
@@ -96,10 +102,10 @@ public final class ScenarioReplayService {
       TypedPayloadValues response,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(response, "response");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       require(response.layoutId().equals(request.responseLayoutId()));
@@ -124,10 +130,10 @@ public final class ScenarioReplayService {
       ResultCode code,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       require(persistentError(request, code));
@@ -152,8 +158,8 @@ public final class ScenarioReplayService {
    */
   public Snapshot read(
       ScenarioRequest request, AuthenticatedActor actor, InboxCompletion completion) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(completion, "completion");
     try {
       require(completion.responseLayoutId().equals(request.responseLayoutId().value()));
@@ -216,8 +222,8 @@ public final class ScenarioReplayService {
       AuthenticatedActor actor,
       InboxCompletion original,
       LargeResultDescriptor replacement) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(original, "original");
     Objects.requireNonNull(replacement, "replacement");
     try {
@@ -259,9 +265,9 @@ public final class ScenarioReplayService {
       Instant sentAt,
       boolean replay) {
     Objects.requireNonNull(saved, "saved");
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(saved.identity.equals(identity(request, actor)));
@@ -277,9 +283,9 @@ public final class ScenarioReplayService {
 
   /** Non-persisted rejection/error response; never synthesizes a success profile. */
   public byte[] failure(ScenarioRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(

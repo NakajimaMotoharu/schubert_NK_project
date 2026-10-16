@@ -37,6 +37,8 @@ import java.util.UUID;
  * SSC-032/PG-D-084; PT-ADM-024..027. Caller closes request and each returned canonical separately.
  */
 public final class UserMutationRequest implements AutoCloseable {
+  private static final java.lang.String LITERAL_EXPECTEDVERSION = "expectedVersion";
+
   private final CommonHeader retainedHeader;
   private final Mutation retainedMutation;
   private final Optional<String> username;
@@ -211,16 +213,16 @@ public final class UserMutationRequest implements AutoCloseable {
           case ENABLE, DISABLE ->
               List.of(
                   flag(retainedMutation == Mutation.ENABLE),
-                  number("expectedVersion", retainedExpectedVersion));
+                  number(LITERAL_EXPECTEDVERSION, retainedExpectedVersion));
           case PROMOTE, DEMOTE ->
               List.of(
                   text("role", retainedMutation == Mutation.PROMOTE ? "ADMIN" : "USER"),
-                  number("expectedVersion", retainedExpectedVersion));
+                  number(LITERAL_EXPECTEDVERSION, retainedExpectedVersion));
           case RESET_PASSWORD ->
               List.of(
                   text("password", new String(password)),
-                  number("expectedVersion", retainedExpectedVersion));
-          case UNLOCK -> List.of(number("expectedVersion", retainedExpectedVersion));
+                  number(LITERAL_EXPECTEDVERSION, retainedExpectedVersion));
+          case UNLOCK -> List.of(number(LITERAL_EXPECTEDVERSION, retainedExpectedVersion));
         };
     return new CanonicalRequest(
         Long.toString(actor.userId()), retainedHeader.layoutId().value(), "001", scope, fields);

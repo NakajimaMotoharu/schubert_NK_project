@@ -32,6 +32,12 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class BrokerJournalEvidence {
+  private static final java.lang.String LITERAL_CURSOR = "__CURSOR";
+
+  private static final java.lang.String LITERAL_MONOTONIC_TIMESTAMP = "__MONOTONIC_TIMESTAMP";
+
+  private static final java.lang.String LITERAL_1_9_0_9_0_19 = "[1-9][0-9]{0,19}";
+
   private static final int MAX = 4 * 1024 * 1024;
   private static final Set<String> REQUIRED =
       Set.of(
@@ -40,8 +46,8 @@ public final class BrokerJournalEvidence {
           "_SYSTEMD_INVOCATION_ID",
           "_BOOT_ID",
           "_SYSTEMD_UNIT",
-          "__CURSOR",
-          "__MONOTONIC_TIMESTAMP",
+          LITERAL_CURSOR,
+          LITERAL_MONOTONIC_TIMESTAMP,
           "__REALTIME_TIMESTAMP");
   private static final Set<String> OPTIONAL = Set.of("__SEQNUM", "__SEQNUM_ID");
 
@@ -120,10 +126,11 @@ public final class BrokerJournalEvidence {
     require("artemis.service".equals(fields.get("_SYSTEMD_UNIT")));
     String invocation = Objects.requireNonNull(fields.get("_SYSTEMD_INVOCATION_ID"));
     require(invocation.matches("[0-9a-f]{32}") && !invocation.equals("0".repeat(32)));
-    String mono = Objects.requireNonNull(fields.get("__MONOTONIC_TIMESTAMP"));
-    require(mono.matches("[1-9][0-9]{0,19}"));
-    require(Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches("[1-9][0-9]{0,19}"));
-    String cursor = Objects.requireNonNull(fields.get("__CURSOR"));
+    String mono = Objects.requireNonNull(fields.get(LITERAL_MONOTONIC_TIMESTAMP));
+    require(mono.matches(LITERAL_1_9_0_9_0_19));
+    require(
+        Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches(LITERAL_1_9_0_9_0_19));
+    String cursor = Objects.requireNonNull(fields.get(LITERAL_CURSOR));
     require(!cursor.isEmpty());
     String message = Objects.requireNonNull(fields.get("MESSAGE"));
     require(Objects.requireNonNull(fields.get("PRIORITY")).matches("[4-7]"));
@@ -146,8 +153,8 @@ public final class BrokerJournalEvidence {
     String lastLine = text.substring(0, text.length() - 1).split("\n", -1)[result.entries() - 1];
     var last = fields(lastLine);
     require(
-        latest.cursor().equals(last.get("__CURSOR"))
-            && latest.monotonic().toString().equals(last.get("__MONOTONIC_TIMESTAMP")));
+        latest.cursor().equals(last.get(LITERAL_CURSOR))
+            && latest.monotonic().toString().equals(last.get(LITERAL_MONOTONIC_TIMESTAMP)));
     byte[] lastBytes = (lastLine + "\n").getBytes(StandardCharsets.UTF_8);
     try {
       require(latest.contentSha256().equals(contentSha256(lastBytes)));
@@ -261,15 +268,16 @@ public final class BrokerJournalEvidence {
               && invocation.equals(fields.get("_SYSTEMD_INVOCATION_ID"))
               && "artemis.service".equals(fields.get("_SYSTEMD_UNIT")));
       require(Objects.requireNonNull(fields.get("PRIORITY")).matches("[4-7]"));
-      String cursor = Objects.requireNonNull(fields.get("__CURSOR"));
+      String cursor = Objects.requireNonNull(fields.get(LITERAL_CURSOR));
       require(!cursor.isEmpty() && cursors.add(cursor));
-      String monotonic = Objects.requireNonNull(fields.get("__MONOTONIC_TIMESTAMP"));
+      String monotonic = Objects.requireNonNull(fields.get(LITERAL_MONOTONIC_TIMESTAMP));
       require(
-          monotonic.matches("[1-9][0-9]{0,19}") && new BigInteger(monotonic).compareTo(began) >= 0);
+          monotonic.matches(LITERAL_1_9_0_9_0_19)
+              && new BigInteger(monotonic).compareTo(began) >= 0);
       if (stopEnd.isPresent())
         require(new BigInteger(monotonic).compareTo(stopEnd.orElseThrow()) <= 0);
       require(
-          Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches("[1-9][0-9]{0,19}"));
+          Objects.requireNonNull(fields.get("__REALTIME_TIMESTAMP")).matches(LITERAL_1_9_0_9_0_19));
       String message = Objects.requireNonNull(fields.get("MESSAGE"));
       require(!message.contains("AMQ224") && !message.matches("(?s).*\\b(ERROR|FATAL)\\b.*"));
       nio |= message.contains("AMQ221013: Using NIO Journal");

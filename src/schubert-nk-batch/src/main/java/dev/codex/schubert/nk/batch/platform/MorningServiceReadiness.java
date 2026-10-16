@@ -30,6 +30,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class MorningServiceReadiness {
+  private static final java.lang.String LITERAL_SERVICE_OBSERVATION_UNAVAILABLE =
+      "service observation unavailable";
+
   @FunctionalInterface
   interface Guard {
     void check() throws IOException;
@@ -165,9 +168,9 @@ public final class MorningServiceReadiness {
   }
 
   private static String ascii(byte[] bytes, int maximum) throws IOException {
-    if (bytes.length > maximum) throw new IOException("service observation unavailable");
+    if (bytes.length > maximum) throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
     for (byte value : bytes)
-      if (value < 0 || value == 0) throw new IOException("service observation unavailable");
+      if (value < 0 || value == 0) throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
     return new String(bytes, StandardCharsets.US_ASCII);
   }
 
@@ -214,7 +217,8 @@ public final class MorningServiceReadiness {
           input::close,
           () -> {
             byte[] bytes = input.readNBytes(limit + 1);
-            if (bytes.length > limit) throw new IOException("service observation unavailable");
+            if (bytes.length > limit)
+              throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
             return bytes;
           });
     }
@@ -224,7 +228,7 @@ public final class MorningServiceReadiness {
       try (var entries = Files.newDirectoryStream(proc.resolve("fd"))) {
         int count = 0;
         for (Path entry : entries) {
-          if (++count > 65536) throw new IOException("service observation unavailable");
+          if (++count > 65536) throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
           try {
             String target = Files.readSymbolicLink(entry).toString();
             if (target.matches("socket:\\[[1-9][0-9]{0,19}\\]"))

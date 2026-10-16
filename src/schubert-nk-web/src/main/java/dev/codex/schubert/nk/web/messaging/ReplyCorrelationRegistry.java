@@ -18,6 +18,8 @@ import java.util.concurrent.atomic.LongAdder;
  * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005; UI 231; SS 312 §3.2 and 321 §9.
  */
 public final class ReplyCorrelationRegistry {
+  private static final java.lang.String LITERAL_CORRELATIONID = "correlationId";
+
   public static final int STANDARD_CAPACITY = 20;
 
   private final ConcurrentMap<UUID, PendingReply> pending = new ConcurrentHashMap<>();
@@ -37,7 +39,7 @@ public final class ReplyCorrelationRegistry {
 
   /** Registers before send. Empty means the bounded registry is full. */
   public Optional<PendingReply> register(UUID correlationId, Instant deadline, Instant now) {
-    Objects.requireNonNull(correlationId, "correlationId");
+    Objects.requireNonNull(correlationId, LITERAL_CORRELATIONID);
     Objects.requireNonNull(deadline, "deadline");
     Objects.requireNonNull(now, "now");
     if (!now.isBefore(deadline)) {
@@ -60,7 +62,7 @@ public final class ReplyCorrelationRegistry {
 
   /** Completes at most one waiter; late and unknown responses are counted and ignored. */
   public boolean complete(UUID correlationId, byte[] body, Instant now) {
-    Objects.requireNonNull(correlationId, "correlationId");
+    Objects.requireNonNull(correlationId, LITERAL_CORRELATIONID);
     Objects.requireNonNull(body, "body");
     Objects.requireNonNull(now, "now");
     PendingReply registration = pending.remove(correlationId);
@@ -82,7 +84,7 @@ public final class ReplyCorrelationRegistry {
    * Removes a due waiter. Calling before its deadline or after another terminal action is a no-op.
    */
   public boolean expire(UUID correlationId, Instant now) {
-    Objects.requireNonNull(correlationId, "correlationId");
+    Objects.requireNonNull(correlationId, LITERAL_CORRELATIONID);
     Objects.requireNonNull(now, "now");
     AtomicReference<PendingReply> expired = new AtomicReference<>();
     pending.computeIfPresent(
@@ -105,7 +107,7 @@ public final class ReplyCorrelationRegistry {
 
   /** Removes a waiter after send failure or request cancellation. */
   public boolean cancel(UUID correlationId) {
-    Objects.requireNonNull(correlationId, "correlationId");
+    Objects.requireNonNull(correlationId, LITERAL_CORRELATIONID);
     PendingReply registration = pending.remove(correlationId);
     if (registration == null) {
       return false;

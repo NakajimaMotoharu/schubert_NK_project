@@ -25,9 +25,11 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class LinuxFileLock {
+  private static final java.lang.String LITERAL_ERRNO = "errno";
+
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO =
-      STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
+      STATE.byteOffset(MemoryLayout.PathElement.groupElement(LITERAL_ERRNO));
   private final OpenCall open;
   private final LockCall flock;
   private final CloseCall close;
@@ -80,20 +82,20 @@ public final class LinuxFileLock {
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT,
                 ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"),
+            Linker.Option.captureCallState(LITERAL_ERRNO),
             Linker.Option.firstVariadicArg(2)),
         bind(
             symbols,
             "flock",
             LockCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno")),
+            Linker.Option.captureCallState(LITERAL_ERRNO)),
         bind(
             symbols,
             "close",
             CloseCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno")),
+            Linker.Option.captureCallState(LITERAL_ERRNO)),
         bind(
             symbols,
             "fcntl",

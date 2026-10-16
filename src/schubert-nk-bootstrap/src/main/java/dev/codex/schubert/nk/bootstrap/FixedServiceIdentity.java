@@ -19,6 +19,12 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class FixedServiceIdentity {
+  private static final java.lang.String LITERAL_SCHUBERT = "schubert";
+
+  private static final java.lang.String LITERAL_SCHUBERT_READ = "schubert-read";
+
+  private static final java.lang.String LITERAL_USR_BIN_GETENT = "/usr/bin/getent";
+
   public record Value(long uid, long gid, List<Long> groups) {
     public Value {
       groups = List.copyOf(groups);
@@ -72,17 +78,17 @@ public final class FixedServiceIdentity {
 
   /** SS343/SSC089: the named config group, not the smallest/any service group. */
   public long configurationGroup() throws IOException {
-    return namedGroup("schubert");
+    return namedGroup(LITERAL_SCHUBERT);
   }
 
   /** SSC126/ISSROOT001: exact shared asset reader group, never an arbitrary NSS membership. */
   public long dataReadGroup() throws IOException {
-    return namedGroup("schubert-read");
+    return namedGroup(LITERAL_SCHUBERT_READ);
   }
 
   private long namedGroup(String name) throws IOException {
     try {
-      return id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);
+      return id(fields(query.read(List.of(LITERAL_USR_BIN_GETENT, "group", name)), 4, name)[2]);
     } catch (IOException failure) {
       throw unavailable();
     }
@@ -93,14 +99,15 @@ public final class FixedServiceIdentity {
     try {
       String account = service == ServiceConfigFiles.Service.API ? "schubert-api" : "schubert-web";
       String[] passwd =
-          fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
+          fields(query.read(List.of(LITERAL_USR_BIN_GETENT, "passwd", account)), 7, account);
       long uid = id(passwd[2]);
       long gid = id(passwd[3]);
-      var names = new ArrayList<>(List.of(account, "schubert", "schubert-read"));
+      var names = new ArrayList<>(List.of(account, LITERAL_SCHUBERT, LITERAL_SCHUBERT_READ));
       if (service == ServiceConfigFiles.Service.API) names.add("schubert-web");
       var groups = new TreeSet<Long>();
       for (String name : names) {
-        String[] group = fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name);
+        String[] group =
+            fields(query.read(List.of(LITERAL_USR_BIN_GETENT, "group", name)), 4, name);
         long value = id(group[2]);
         if (name.equals(account)) require(value == gid);
         require(groups.add(value));
@@ -113,14 +120,14 @@ public final class FixedServiceIdentity {
 
   /** Backup-only fixed entry; does not extend the API/Web enum or inherit application groups. */
   public Value resolveBackup() throws IOException {
-    return resolveMaintenance("schubert-backup", List.of("schubert-backup", "schubert"));
+    return resolveMaintenance("schubert-backup", List.of("schubert-backup", LITERAL_SCHUBERT));
   }
 
   /** SSC119: dedicated Inspector, no API/Web supplementary membership inheritance. */
   public Value resolveInspector() throws IOException {
     return resolveMaintenance(
         "schubert-inbox-inspector",
-        List.of("schubert-inbox-inspector", "schubert", "schubert-read"));
+        List.of("schubert-inbox-inspector", LITERAL_SCHUBERT, LITERAL_SCHUBERT_READ));
   }
 
   /** SSC125: vendor daemon has its fixed primary group only, no application groups. */
@@ -135,7 +142,7 @@ public final class FixedServiceIdentity {
 
   /** SSC126: fixed asset owner, not an application service or an issuer capability. */
   public Value resolveDataOwner() throws IOException {
-    return resolveMaintenance("schubert-data", List.of("schubert-data", "schubert-read"));
+    return resolveMaintenance("schubert-data", List.of("schubert-data", LITERAL_SCHUBERT_READ));
   }
 
   /** SSC126: fixed staging owner with its primary group only. */
@@ -146,12 +153,13 @@ public final class FixedServiceIdentity {
   private Value resolveMaintenance(String account, List<String> names) throws IOException {
     try {
       String[] passwd =
-          fields(query.read(List.of("/usr/bin/getent", "passwd", account)), 7, account);
+          fields(query.read(List.of(LITERAL_USR_BIN_GETENT, "passwd", account)), 7, account);
       long uid = id(passwd[2]);
       long gid = id(passwd[3]);
       var groups = new TreeSet<Long>();
       for (String name : names) {
-        long value = id(fields(query.read(List.of("/usr/bin/getent", "group", name)), 4, name)[2]);
+        long value =
+            id(fields(query.read(List.of(LITERAL_USR_BIN_GETENT, "group", name)), 4, name)[2]);
         if (name.equals(account)) require(value == gid);
         require(groups.add(value));
       }

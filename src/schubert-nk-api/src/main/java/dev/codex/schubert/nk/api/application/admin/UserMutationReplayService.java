@@ -40,6 +40,8 @@ import java.util.UUID;
  * SSC-033/PG-D-086; PT-ADM-028..032. Caller must authenticate current ADMIN and verify HMAC.
  */
 public final class UserMutationReplayService {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
   private final ResponseSnapshotCodec snapshots;
 
   public UserMutationReplayService(ResponseSnapshotCodec snapshots) {
@@ -74,7 +76,7 @@ public final class UserMutationReplayService {
       UserMutationResult result,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(result, "result");
     Objects.requireNonNull(responseId, "responseId");
@@ -108,7 +110,7 @@ public final class UserMutationReplayService {
   /** Saved Message PK controls AAD; current retry Message controls the later response header. */
   public Snapshot read(
       UserMutationRequest request, AuthenticatedActor actor, BoundInboxExecution bound) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(bound, "bound");
     try {
@@ -174,7 +176,7 @@ public final class UserMutationReplayService {
       UUID responseId,
       Instant sentAt) {
     Objects.requireNonNull(saved, "saved");
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(responseId, "responseId");
     Objects.requireNonNull(sentAt, "sentAt");
@@ -198,7 +200,7 @@ public final class UserMutationReplayService {
   /** Only an error response; auth/temporary failures are never durable Inbox completions here. */
   public byte[] failure(
       UserMutationRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
     Objects.requireNonNull(responseId, "responseId");
     Objects.requireNonNull(sentAt, "sentAt");

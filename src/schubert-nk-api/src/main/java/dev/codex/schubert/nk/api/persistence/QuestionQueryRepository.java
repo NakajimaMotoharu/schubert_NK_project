@@ -46,6 +46,10 @@ import java.util.Optional;
  * ADMIN. Deleted notification text is SQL NULL.
  */
 public final class QuestionQueryRepository {
+  private static final java.lang.String LITERAL_WITH_PROJECTED_AS = "with projected as (";
+
+  private static final java.lang.String LITERAL_QUESTION_BODY = "question_body";
+
   private static final String QUESTION_COLUMNS =
       "id,receipt_id,owner_user_id,username,question_body,answer_body,submitted_at,answered_at,"
           + "question_deleted,answer_state";
@@ -86,7 +90,7 @@ public final class QuestionQueryRepository {
       ",totals as (select count(*) as total from filtered),page as (select total,"
           + "greatest(1,(total+49)/50) as pages,least(cast(? as bigint),greatest(1,(total+49)/50)) as effective from totals)";
   private static final String QUESTION_START =
-      "with projected as ("
+      LITERAL_WITH_PROJECTED_AS
           + QUESTION
           + "),filtered as materialized (select "
           + QUESTION_COLUMNS
@@ -109,7 +113,7 @@ public final class QuestionQueryRepository {
       QUESTION_START + " and owner_user_id=?" + QUESTION_FILTER;
   private static final String QUESTION_ADMIN_PAGE = QUESTION_START + QUESTION_FILTER;
   private static final String NOTICE_PAGE =
-      "with projected as ("
+      LITERAL_WITH_PROJECTED_AS
           + NOTICE
           + "),filtered as materialized (select "
           + NOTICE_COLUMNS
@@ -126,14 +130,14 @@ public final class QuestionQueryRepository {
           + " from filtered order by updated_at desc,id desc limit 50 offset (p.effective-1)*50) x"
           + " on true order by x.updated_at desc,x.id desc";
   private static final String QUESTION_ADMIN_DETAIL =
-      "with projected as ("
+      LITERAL_WITH_PROJECTED_AS
           + QUESTION
           + ") select "
           + QUESTION_COLUMNS
           + " from projected where id=? and not question_deleted";
   private static final String QUESTION_USER_DETAIL = QUESTION_ADMIN_DETAIL + " and owner_user_id=?";
   private static final String NOTICE_DETAIL =
-      "with projected as ("
+      LITERAL_WITH_PROJECTED_AS
           + NOTICE
           + ") select "
           + NOTICE_COLUMNS
@@ -204,7 +208,7 @@ public final class QuestionQueryRepository {
               record.receiptId(),
               record.username(),
               record.answerState(),
-              text(r, "question_body"),
+              text(r, LITERAL_QUESTION_BODY),
               optionalText(r, "answer_body"),
               record.submittedAt(),
               record.answeredAt());
@@ -244,7 +248,7 @@ public final class QuestionQueryRepository {
               optionalTime(r, "error_at"),
               optionalTime(r, "cancelled_at"),
               record.questionDeleted(),
-              optionalText(r, "question_body"),
+              optionalText(r, LITERAL_QUESTION_BODY),
               optionalText(r, "answer_body"),
               error,
               optionalText(r, "error_message"),
@@ -344,7 +348,7 @@ public final class QuestionQueryRepository {
         new QuestionId(number(r, "id")),
         text(r, "receipt_id"),
         text(r, "username"),
-        summary(text(r, "question_body")),
+        summary(text(r, LITERAL_QUESTION_BODY)),
         AnswerState.valueOf(text(r, "answer_state")),
         time(r, "submitted_at"),
         optionalTime(r, "answered_at"));
@@ -359,7 +363,7 @@ public final class QuestionQueryRepository {
         NotificationState.valueOf(text(r, "state")),
         time(r, "submitted_at"),
         time(r, "updated_at"),
-        deleted ? "削除済み" : summary(text(r, "question_body")),
+        deleted ? "削除済み" : summary(text(r, LITERAL_QUESTION_BODY)),
         deleted);
   }
 

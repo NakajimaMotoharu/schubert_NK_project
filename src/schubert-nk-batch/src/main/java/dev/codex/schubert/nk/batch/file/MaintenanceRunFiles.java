@@ -57,6 +57,31 @@ import org.jspecify.annotations.Nullable;
 // PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class MaintenanceRunFiles {
+  private static final java.lang.String LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME =
+      "DMI_HARDCODED_ABSOLUTE_FILENAME";
+
+  private static final java.lang.String LITERAL_VAR = "/var";
+
+  private static final java.lang.String LITERAL_SHA_256 = "SHA-256";
+
+  private static final java.lang.String LITERAL_LIB = "lib";
+
+  private static final java.lang.String LITERAL_SCHUBERT_NK = "schubert-nk";
+
+  private static final java.lang.String LITERAL_RUNS = "runs";
+
+  private static final java.lang.String LITERAL_ATTEMPTS = "attempts";
+
+  private static final java.lang.String LITERAL_RUN = ".run";
+
+  private static final java.lang.String LITERAL_BEGIN = ".begin";
+
+  private static final java.lang.String LITERAL_ACTIVE = "active";
+
+  private static final java.lang.String LITERAL_DONE = ".done";
+
+  private static final java.lang.String LITERAL_RETIRE = ".retire";
+
   private final Object scopeLock = new Object();
   private final Path varPath;
   private final DirectoryCalls directories;
@@ -102,23 +127,23 @@ public final class MaintenanceRunFiles {
   // Fixed Linux namespace is deliberate. Re-review at PG gate or OS/path/SS change.
   // Owner NK-BAT-001; no coverage/null/security exclusion; PT-BAT-081.
   @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
       matchType = SuppressMatchType.EXACT,
       justification = "UI251/SS343 require fixed Linux /var; PG-D-158/PT-BAT-081")
   public static MaintenanceRunFiles create() {
     return new MaintenanceRunFiles(
-        Path.of("/var"),
+        Path.of(LITERAL_VAR),
         LinuxDirectoryCalls.create(),
         LinuxInodeSecurity.create(),
         new NioIo(),
         UUID::randomUUID,
-        () -> MessageDigest.getInstance("SHA-256"),
+        () -> MessageDigest.getInstance(LITERAL_SHA_256),
         Optional.of(LinuxHostDirectoryCalls.create()));
   }
 
   /** Fixed child observer only. Host RW is policy, not a child mutation capability. SSC109/111. */
   @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 fixed authoritative host /var, readonly child observation")
   static MaintenanceActivation observeHost(
@@ -135,12 +160,12 @@ public final class MaintenanceRunFiles {
     context.recheck(expected);
     var files =
         new MaintenanceRunFiles(
-            Path.of("/var"),
+            Path.of(LITERAL_VAR),
             LinuxHostDirectoryCalls.create(),
             LinuxInodeSecurity.create(),
             new NioIo(),
             UUID::randomUUID,
-            () -> MessageDigest.getInstance("SHA-256"));
+            () -> MessageDigest.getInstance(LITERAL_SHA_256));
     MaintenanceActivation observed = files.execute(session -> session.observe(activation));
     context.recheck(expected);
     return observed;
@@ -148,7 +173,7 @@ public final class MaintenanceRunFiles {
 
   /** SSC137: fixed service Root reads the whole original graph; never resumes or mutates it. */
   @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
       matchType = SuppressMatchType.EXACT,
       justification = "SSC200 fixed authoritative /var readonly Expiry original lookup")
   static BatchRun observeSuccessReferenceHost(
@@ -167,12 +192,12 @@ public final class MaintenanceRunFiles {
     context.recheck(expected);
     var files =
         new MaintenanceRunFiles(
-            Path.of("/var"),
+            Path.of(LITERAL_VAR),
             LinuxHostDirectoryCalls.create(),
             LinuxInodeSecurity.create(),
             new NioIo(),
             UUID::randomUUID,
-            () -> MessageDigest.getInstance("SHA-256"));
+            () -> MessageDigest.getInstance(LITERAL_SHA_256));
     var prior = files.execute(session -> session.successReferenceRun(current, priorId, observed));
     context.recheck(expected);
     return prior;
@@ -180,7 +205,7 @@ public final class MaintenanceRunFiles {
 
   /** SSC137: fixed service Root reads the whole original graph; never resumes or mutates it. */
   @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      value = LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME,
       matchType = SuppressMatchType.EXACT,
       justification =
           "SSC137 fixed host/private /var original observation, no caller path or M capability")
@@ -198,7 +223,7 @@ public final class MaintenanceRunFiles {
     context.recheck(self);
     var files =
         new MaintenanceRunFiles(
-            Path.of("/var"),
+            Path.of(LITERAL_VAR),
             LinuxHostDirectoryCalls.create(),
             LinuxInodeSecurity.create(),
             new NioIo(),
@@ -237,7 +262,13 @@ public final class MaintenanceRunFiles {
       InodeSecurityCalls security,
       Io io,
       Supplier<UUID> parts) {
-    this(varPath, directories, security, io, parts, () -> MessageDigest.getInstance("SHA-256"));
+    this(
+        varPath,
+        directories,
+        security,
+        io,
+        parts,
+        () -> MessageDigest.getInstance(LITERAL_SHA_256));
   }
 
   MaintenanceRunFiles(
@@ -285,11 +316,11 @@ public final class MaintenanceRunFiles {
               ResourceScope.use(
                   var::close,
                   () -> {
-                    var lib = var.openExistingChild("lib");
+                    var lib = var.openExistingChild(LITERAL_LIB);
                     return ResourceScope.use(
                         lib::close,
                         () -> {
-                          var app = lib.openExistingChild("schubert-nk");
+                          var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
                           return ResourceScope.use(
                               app::close,
                               () -> {
@@ -297,12 +328,12 @@ public final class MaintenanceRunFiles {
                                 return ResourceScope.use(
                                     maintenance::close,
                                     () -> {
-                                      var runs = maintenance.openExistingChild("runs");
+                                      var runs = maintenance.openExistingChild(LITERAL_RUNS);
                                       return ResourceScope.use(
                                           runs::close,
                                           () -> {
                                             var attempts =
-                                                maintenance.openExistingChild("attempts");
+                                                maintenance.openExistingChild(LITERAL_ATTEMPTS);
                                             return ResourceScope.use(
                                                 attempts::close,
                                                 () -> {
@@ -370,11 +401,11 @@ public final class MaintenanceRunFiles {
     ResourceScope.use(
         var::close,
         () -> {
-          var lib = var.openExistingChild("lib");
+          var lib = var.openExistingChild(LITERAL_LIB);
           return ResourceScope.use(
               lib::close,
               () -> {
-                var app = lib.openExistingChild("schubert-nk");
+                var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
                 return ResourceScope.use(
                     app::close,
                     () -> {
@@ -436,10 +467,12 @@ public final class MaintenanceRunFiles {
             require(!before.runs().containsKey(run.id()));
             require(!before.begins().containsKey(activationId));
             var activation = new MaintenanceActivation(run, activationId);
-            publish(runFiles, run.id() + ".run", MaintenanceRecords.anchor(run));
+            publish(runFiles, run.id() + LITERAL_RUN, MaintenanceRecords.anchor(run));
             publish(
-                attemptFiles, activationId + ".begin", MaintenanceRecords.activation(activation));
-            publish(maintenanceFiles, "active", MaintenanceRecords.activation(activation));
+                attemptFiles,
+                activationId + LITERAL_BEGIN,
+                MaintenanceRecords.activation(activation));
+            publish(maintenanceFiles, LITERAL_ACTIVE, MaintenanceRecords.activation(activation));
             var runs = new HashMap<>(before.runs());
             runs.put(run.id(), run);
             var begins = new HashMap<>(before.begins());
@@ -464,8 +497,10 @@ public final class MaintenanceRunFiles {
               MaintenanceCompletion previous = before.done().get(active.id());
               if (previous != null)
                 publish(
-                    attemptFiles, active.id() + ".done", MaintenanceRecords.completion(previous));
-              publish(maintenanceFiles, "active", MaintenanceRecords.activation(active));
+                    attemptFiles,
+                    active.id() + LITERAL_DONE,
+                    MaintenanceRecords.completion(previous));
+              publish(maintenanceFiles, LITERAL_ACTIVE, MaintenanceRecords.activation(active));
               require(before.equals(scan()));
               return new MaintenanceRunState(
                   active, Optional.ofNullable(before.done().get(active.id())));
@@ -483,7 +518,7 @@ public final class MaintenanceRunFiles {
             // The validated single pending graph and selected run above already bind this
             // activation.
             sealIdentity(activation);
-            publish(maintenanceFiles, "active", MaintenanceRecords.activation(activation));
+            publish(maintenanceFiles, LITERAL_ACTIVE, MaintenanceRecords.activation(activation));
             require(
                 graph(before.runs(), begins, before.done(), Optional.of(activation))
                     .equals(scan()));
@@ -639,7 +674,9 @@ public final class MaintenanceRunFiles {
               && observed.metadata().equals(actual.metadata())
               && observed.filesystem().equals(actual.filesystem()));
       if (index < 5) {
-        String[] names = {"lib", "schubert-nk", "maintenance", "runs", "attempts"};
+        String[] names = {
+          LITERAL_LIB, LITERAL_SCHUBERT_NK, "maintenance", LITERAL_RUNS, LITERAL_ATTEMPTS
+        };
         var parent = index == 4 ? views.get(3) : current;
         var next = parent.openExistingChild(names[index]);
         ResourceScope.use(
@@ -675,10 +712,12 @@ public final class MaintenanceRunFiles {
             else require(previous != null);
             sealIdentity(activation);
             if (before.active().isPresent())
-              publish(maintenanceFiles, "active", MaintenanceRecords.activation(activation));
+              publish(maintenanceFiles, LITERAL_ACTIVE, MaintenanceRecords.activation(activation));
             publish(
-                attemptFiles, activation.id() + ".done", MaintenanceRecords.completion(completion));
-            maintenanceFiles.remove("active", MaintenanceRecords.activation(activation));
+                attemptFiles,
+                activation.id() + LITERAL_DONE,
+                MaintenanceRecords.completion(completion));
+            maintenanceFiles.remove(LITERAL_ACTIVE, MaintenanceRecords.activation(activation));
             verifyNamespace();
             var done = new HashMap<>(before.done());
             done.put(activation.id(), completion);
@@ -772,7 +811,7 @@ public final class MaintenanceRunFiles {
                       () ->
                           publish(
                               maintenanceFiles,
-                              run.id() + ".retire",
+                              run.id() + LITERAL_RETIRE,
                               MaintenanceRecords.retirement(marker)));
             } else {
               // A visible marker may be the residue of publication followed by a failed fsync.
@@ -786,7 +825,7 @@ public final class MaintenanceRunFiles {
                       () ->
                           publish(
                               maintenanceFiles,
-                              run.id() + ".retire",
+                              run.id() + LITERAL_RETIRE,
                               MaintenanceRecords.retirement(marker)));
             }
             MaintenanceRetirement marker = state.marker().orElseThrow();
@@ -807,7 +846,7 @@ public final class MaintenanceRunFiles {
                         () ->
                             remove(
                                 attemptFiles,
-                                id + ".done",
+                                id + LITERAL_DONE,
                                 MaintenanceRecords.completion(completion)));
                 var begins = new HashMap<>(state.begins());
                 begins.remove(id);
@@ -821,7 +860,7 @@ public final class MaintenanceRunFiles {
                         () ->
                             remove(
                                 attemptFiles,
-                                id + ".begin",
+                                id + LITERAL_BEGIN,
                                 MaintenanceRecords.activation(completion.activation())));
               }
               var runs = new HashMap<>(state.runs());
@@ -833,7 +872,8 @@ public final class MaintenanceRunFiles {
                       expected,
                       references,
                       run,
-                      () -> remove(runFiles, run.id() + ".run", MaintenanceRecords.anchor(run)));
+                      () ->
+                          remove(runFiles, run.id() + LITERAL_RUN, MaintenanceRecords.anchor(run)));
             }
             // BUG172/YKT133: visible absence after a prior failed unlink barrier is not durable.
             // Seal ALL original directories before discarding any recovery plan, even on retry.
@@ -872,7 +912,7 @@ public final class MaintenanceRunFiles {
                     () ->
                         remove(
                             maintenanceFiles,
-                            run.id() + ".retire",
+                            run.id() + LITERAL_RETIRE,
                             MaintenanceRecords.retirement(marker)));
             // Also re-establish barriers for initially absent originals/plans after a previous
             // crash.
@@ -991,7 +1031,7 @@ public final class MaintenanceRunFiles {
       verifyNamespace();
       List<Snapshot> before = capture(roots);
       Set<String> rootNames = names(roots.get(3));
-      require(rootNames.containsAll(Set.of("runs", "attempts")));
+      require(rootNames.containsAll(Set.of(LITERAL_RUNS, LITERAL_ATTEMPTS)));
       Map<UUID, BatchRun> runs = new HashMap<>();
       Map<UUID, MaintenanceActivation> begins = new HashMap<>();
       Map<UUID, MaintenanceCompletion> done = new HashMap<>();
@@ -1000,13 +1040,13 @@ public final class MaintenanceRunFiles {
       Optional<MaintenanceRetirement> marker = Optional.empty();
       Optional<MaintenanceActivation> active = Optional.empty();
       for (String name : rootNames) {
-        if (name.equals("runs") || name.equals("attempts")) continue;
-        if (name.equals("active"))
+        if (name.equals(LITERAL_RUNS) || name.equals(LITERAL_ATTEMPTS)) continue;
+        if (name.equals(LITERAL_ACTIVE))
           active =
               Optional.of(
                   read(3, maintenanceFiles, name, MaintenanceRecords::readActivation, files));
         else {
-          identity(name, ".retire");
+          identity(name, LITERAL_RETIRE);
           require(marker.isEmpty());
           marker =
               Optional.of(
@@ -1014,15 +1054,15 @@ public final class MaintenanceRunFiles {
         }
       }
       for (String name : names(roots.get(4))) {
-        UUID id = identity(name, ".run");
+        UUID id = identity(name, LITERAL_RUN);
         runs.put(id, read(4, runFiles, name, MaintenanceRecords::readAnchor, files));
       }
       for (String name : names(roots.get(5))) {
-        if (name.endsWith(".begin")) {
-          UUID id = identity(name, ".begin");
+        if (name.endsWith(LITERAL_BEGIN)) {
+          UUID id = identity(name, LITERAL_BEGIN);
           begins.put(id, read(5, attemptFiles, name, MaintenanceRecords::readActivation, files));
-        } else if (name.endsWith(".done")) {
-          UUID id = identity(name, ".done");
+        } else if (name.endsWith(LITERAL_DONE)) {
+          UUID id = identity(name, LITERAL_DONE);
           done.put(id, read(5, attemptFiles, name, MaintenanceRecords::readCompletion, files));
         } else {
           UUID id = identity(name, ".plan");
@@ -1043,8 +1083,11 @@ public final class MaintenanceRunFiles {
     /** Re-establish durability of the selected identity before publishing or reusing its state. */
     private void sealIdentity(MaintenanceActivation activation) throws IOException {
       publish(
-          runFiles, activation.run().id() + ".run", MaintenanceRecords.anchor(activation.run()));
-      publish(attemptFiles, activation.id() + ".begin", MaintenanceRecords.activation(activation));
+          runFiles,
+          activation.run().id() + LITERAL_RUN,
+          MaintenanceRecords.anchor(activation.run()));
+      publish(
+          attemptFiles, activation.id() + LITERAL_BEGIN, MaintenanceRecords.activation(activation));
     }
 
     private <T> T perform(Work<T> operation) throws StorageIoException {
@@ -1076,35 +1119,40 @@ public final class MaintenanceRunFiles {
       List<Snapshot> before = capture(roots);
       Set<String> rootNames = names(roots.get(3));
       require(
-          rootNames.equals(Set.of("runs", "attempts"))
-              || rootNames.equals(Set.of("runs", "attempts", "active")));
+          rootNames.equals(Set.of(LITERAL_RUNS, LITERAL_ATTEMPTS))
+              || rootNames.equals(Set.of(LITERAL_RUNS, LITERAL_ATTEMPTS, LITERAL_ACTIVE)));
       Map<UUID, BatchRun> runs = new HashMap<>();
       Map<UUID, MaintenanceActivation> begins = new HashMap<>();
       Map<UUID, MaintenanceCompletion> done = new HashMap<>();
       List<CapturedFile> files = new ArrayList<>();
       for (String name : names(roots.get(4))) {
-        UUID id = identity(name, ".run");
+        UUID id = identity(name, LITERAL_RUN);
         BatchRun run = read(4, runFiles, name, MaintenanceRecords::readAnchor, files);
         // DurableRecordFiles already binds the canonical filename to the decoded record ID.
         runs.put(id, run);
       }
       for (String name : names(roots.get(5))) {
-        if (name.endsWith(".begin")) {
-          UUID id = identity(name, ".begin");
+        if (name.endsWith(LITERAL_BEGIN)) {
+          UUID id = identity(name, LITERAL_BEGIN);
           MaintenanceActivation activation =
               read(5, attemptFiles, name, MaintenanceRecords::readActivation, files);
           begins.put(id, activation);
         } else {
-          UUID id = identity(name, ".done");
+          UUID id = identity(name, LITERAL_DONE);
           MaintenanceCompletion completion =
               read(5, attemptFiles, name, MaintenanceRecords::readCompletion, files);
           done.put(id, completion);
         }
       }
       Optional<MaintenanceActivation> active =
-          rootNames.contains("active")
+          rootNames.contains(LITERAL_ACTIVE)
               ? Optional.of(
-                  read(3, maintenanceFiles, "active", MaintenanceRecords::readActivation, files))
+                  read(
+                      3,
+                      maintenanceFiles,
+                      LITERAL_ACTIVE,
+                      MaintenanceRecords::readActivation,
+                      files))
               : Optional.empty();
       // A per-file reader's own stability does not prove stability through the whole graph scan.
       for (CapturedFile file : files)
@@ -1146,11 +1194,11 @@ public final class MaintenanceRunFiles {
         ResourceScope.use(
             var::close,
             () -> {
-              var lib = var.openExistingChild("lib");
+              var lib = var.openExistingChild(LITERAL_LIB);
               return ResourceScope.use(
                   lib::close,
                   () -> {
-                    var app = lib.openExistingChild("schubert-nk");
+                    var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
                     return ResourceScope.use(
                         app::close,
                         () -> {
@@ -1158,11 +1206,12 @@ public final class MaintenanceRunFiles {
                           return ResourceScope.use(
                               maintenance::close,
                               () -> {
-                                var runs = maintenance.openExistingChild("runs");
+                                var runs = maintenance.openExistingChild(LITERAL_RUNS);
                                 return ResourceScope.use(
                                     runs::close,
                                     () -> {
-                                      var attempts = maintenance.openExistingChild("attempts");
+                                      var attempts =
+                                          maintenance.openExistingChild(LITERAL_ATTEMPTS);
                                       return ResourceScope.use(
                                           attempts::close,
                                           () -> {

@@ -12,6 +12,9 @@ import java.util.function.Supplier;
  * attribute is internal, not an HTTP header or form field.
  */
 public final class WebRequestContext {
+  private static final java.lang.String LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE =
+      "web request context is unavailable";
+
   static final String ATTRIBUTE = WebRequestContext.class.getName();
   private static final String ID_ATTRIBUTE = WebRequestContext.class.getName() + ".requestId";
   private final UUID retainedRequestId;
@@ -33,7 +36,7 @@ public final class WebRequestContext {
   /** Missing/mistyped server context is a wiring failure, never an untrusted fallback. */
   public static WebRequestContext require(HttpServletRequest request) {
     return existing(request)
-        .orElseThrow(() -> new IllegalStateException("web request context is unavailable"));
+        .orElseThrow(() -> new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE));
   }
 
   public static Optional<WebRequestContext> existing(HttpServletRequest request) {
@@ -42,9 +45,9 @@ public final class WebRequestContext {
       Object value = request.getAttribute(ATTRIBUTE);
       if (value == null) return Optional.empty();
       if (value instanceof WebRequestContext context) return Optional.of(context);
-      throw new IllegalStateException("web request context is unavailable");
+      throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     } catch (IllegalArgumentException | IllegalStateException failure) {
-      throw new IllegalStateException("web request context is unavailable");
+      throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     }
   }
 
@@ -57,7 +60,7 @@ public final class WebRequestContext {
     try {
       value = request.getAttribute(ID_ATTRIBUTE);
     } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
-      throw new IllegalStateException("web request context is unavailable");
+      throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     }
     UUID id;
     if (value == null) {
@@ -68,7 +71,7 @@ public final class WebRequestContext {
       try {
         request.setAttribute(ID_ATTRIBUTE, id);
       } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
-        throw new IllegalStateException("web request context is unavailable");
+        throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
       }
     } else if (value instanceof UUID typed) id = typed;
     else throw new IllegalStateException("web request identity is unavailable");

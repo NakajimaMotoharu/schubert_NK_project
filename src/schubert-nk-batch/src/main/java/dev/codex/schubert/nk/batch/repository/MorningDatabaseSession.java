@@ -38,6 +38,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class MorningDatabaseSession {
+  private static final java.lang.String LITERAL_ENDED_AT = "ended_at";
+
   @FunctionalInterface
   public interface Operation<T> {
     T execute(Session session) throws IOException;
@@ -927,11 +929,12 @@ public final class MorningDatabaseSession {
                     return Optional.empty();
                   }
                   var first = successfulHandle(rows, run, now);
-                  var ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+                  var ended =
+                      present(rows.getObject(LITERAL_ENDED_AT, OffsetDateTime.class)).toInstant();
                   if (!rows.next()) throw unavailable();
                   var second = successfulHandle(rows, run, now);
                   var secondEnd =
-                      present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+                      present(rows.getObject(LITERAL_ENDED_AT, OffsetDateTime.class)).toInstant();
                   if (rows.next()
                       || first.step() == second.step()
                       || first.attempt() != second.attempt()
@@ -957,7 +960,7 @@ public final class MorningDatabaseSession {
       var step = BatchStep.valueOf(present(rows.getString("step")));
       if (!step.backup()) throw unavailable();
       Instant started = present(rows.getObject("started_at", OffsetDateTime.class)).toInstant();
-      Instant ended = present(rows.getObject("ended_at", OffsetDateTime.class)).toInstant();
+      Instant ended = present(rows.getObject(LITERAL_ENDED_AT, OffsetDateTime.class)).toInstant();
       long count = step == BatchStep.BACKUP_DB ? 1 : 2;
       if (!present(rows.getObject("business_date", LocalDate.class))
               .equals(run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate())
@@ -1119,7 +1122,8 @@ public final class MorningDatabaseSession {
               for (var current : java.util.List.of(expected.configuration(), expected.database())) {
                 if (!rows.next()) throw unavailable();
                 var ended =
-                    present(rows.getObject("ended_at", java.time.OffsetDateTime.class)).toInstant();
+                    present(rows.getObject(LITERAL_ENDED_AT, java.time.OffsetDateTime.class))
+                        .toInstant();
                 if (!current.step().name().equals(present(rows.getString("step")))
                     || present(rows.getObject("attempt", Integer.class)) >= current.attempt()
                     || !"FAILED".equals(present(rows.getString("status")))

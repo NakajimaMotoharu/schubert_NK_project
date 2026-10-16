@@ -32,9 +32,23 @@ import java.util.UUID;
  * erases encoded plaintext after encryption; completion metadata grants no business success.
  */
 public final class SessionAttributeCodec {
+  private static final java.lang.String LITERAL_USERNAME = "username";
+
+  private static final java.lang.String LITERAL_ROLE = "role";
+
+  private static final java.lang.String LITERAL_AUTHENTICATIONCONTEXT = "authenticationContext";
+
+  private static final java.lang.String LITERAL_LOGINAT = "loginAt";
+
+  private static final java.lang.String LITERAL_PURPOSE = "purpose";
+
+  private static final java.lang.String LITERAL_TOKEN = "token";
+
+  private static final java.lang.String LITERAL_ISSUEDAT = "issuedAt";
+
   public static final int MAXIMUM_PLAINTEXT_BYTES = 16384;
   private static final Set<String> AUTH_FIELDS =
-      Set.of("username", "role", "authenticationContext", "loginAt");
+      Set.of(LITERAL_USERNAME, LITERAL_ROLE, LITERAL_AUTHENTICATIONCONTEXT, LITERAL_LOGINAT);
 
   /** Explicit fields only; immutable input invariants bound output below the decode byte limit. */
   public byte[] encode(SessionAttributes attributes) {
@@ -45,11 +59,11 @@ public final class SessionAttributeCodec {
         .principal()
         .ifPresent(
             principal -> {
-              json.addProperty("username", principal.username());
-              json.addProperty("role", principal.role().wireValue());
+              json.addProperty(LITERAL_USERNAME, principal.username());
+              json.addProperty(LITERAL_ROLE, principal.role().wireValue());
               json.addProperty(
-                  "authenticationContext", principal.authenticationContext().wireValue());
-              json.addProperty("loginAt", principal.loginAt().toString());
+                  LITERAL_AUTHENTICATIONCONTEXT, principal.authenticationContext().wireValue());
+              json.addProperty(LITERAL_LOGINAT, principal.loginAt().toString());
             });
     attributes.csrfToken().ifPresent(value -> json.addProperty("csrfToken", value));
     attributes
@@ -58,9 +72,9 @@ public final class SessionAttributeCodec {
     var tokens = new JsonArray();
     for (var token : attributes.operationTokens()) {
       var item = new JsonObject();
-      item.addProperty("purpose", token.purpose());
-      item.addProperty("token", token.token().toString());
-      item.addProperty("issuedAt", token.issuedAt().toString());
+      item.addProperty(LITERAL_PURPOSE, token.purpose());
+      item.addProperty(LITERAL_TOKEN, token.token().toString());
+      item.addProperty(LITERAL_ISSUEDAT, token.issuedAt().toString());
       token.completedAt().ifPresent(value -> item.addProperty("completedAt", value.toString()));
       tokens.add(item);
     }
@@ -95,10 +109,10 @@ public final class SessionAttributeCodec {
               require(rawVersion.equals("1") || rawVersion.equals("2"));
               version = rawVersion.equals("1") ? 1 : 2;
             }
-            case "username",
-                "role",
-                "authenticationContext",
-                "loginAt",
+            case LITERAL_USERNAME,
+                LITERAL_ROLE,
+                LITERAL_AUTHENTICATIONCONTEXT,
+                LITERAL_LOGINAT,
                 "csrfToken",
                 "savedRequest" ->
                 fields.put(key, string(reader));
@@ -120,10 +134,10 @@ public final class SessionAttributeCodec {
           principal =
               Optional.of(
                   new SessionPrincipal(
-                      required(fields, "username"),
-                      UserRole.valueOf(required(fields, "role")),
-                      AuthenticationContext.of(required(fields, "authenticationContext")),
-                      instant(required(fields, "loginAt"))));
+                      required(fields, LITERAL_USERNAME),
+                      UserRole.valueOf(required(fields, LITERAL_ROLE)),
+                      AuthenticationContext.of(required(fields, LITERAL_AUTHENTICATIONCONTEXT)),
+                      instant(required(fields, LITERAL_LOGINAT))));
         }
         return new SessionAttributes(
             principal,
@@ -152,19 +166,21 @@ public final class SessionAttributeCodec {
       while (reader.hasNext()) {
         String key = reader.nextName();
         require(!fields.containsKey(key));
-        require(Set.of("purpose", "token", "issuedAt", "completedAt").contains(key));
+        require(
+            Set.of(LITERAL_PURPOSE, LITERAL_TOKEN, LITERAL_ISSUEDAT, "completedAt").contains(key));
         fields.put(key, string(reader));
       }
       reader.endObject();
-      require(fields.keySet().containsAll(Set.of("purpose", "token", "issuedAt")));
-      String raw = required(fields, "token");
+      require(
+          fields.keySet().containsAll(Set.of(LITERAL_PURPOSE, LITERAL_TOKEN, LITERAL_ISSUEDAT)));
+      String raw = required(fields, LITERAL_TOKEN);
       UUID token = UUID.fromString(raw);
       require(token.toString().equals(raw));
       tokens.add(
           new SessionOperationToken(
-              required(fields, "purpose"),
+              required(fields, LITERAL_PURPOSE),
               token,
-              instant(required(fields, "issuedAt")),
+              instant(required(fields, LITERAL_ISSUEDAT)),
               Optional.ofNullable(fields.get("completedAt")).map(SessionAttributeCodec::instant)));
     }
     reader.endArray();

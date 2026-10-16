@@ -32,6 +32,8 @@ import java.util.OptionalLong;
  * SSC-025/PT-SCN-009-Q01..Q04. Caller owns authentication, canonical cleanup, TX and file/JMS I/O.
  */
 public final class ScenarioRequest {
+  private static final java.lang.String LITERAL_GAMECODE = "gameCode";
+
   private enum Kind {
     GAMES,
     SPEAKERS,
@@ -111,19 +113,19 @@ public final class ScenarioRequest {
           case SPEAKERS ->
               List.of(
                   text(
-                      "gameCode",
+                      LITERAL_GAMECODE,
                       ((SpeakerListRequestData) values.data())
                           .gameCode()
                           .map(WireEnum::wireValue)));
           case ROUTES ->
               List.of(
                   text(
-                      "gameCode",
+                      LITERAL_GAMECODE,
                       Optional.of(((RouteListRequestData) values.data()).gameCode().wireValue())));
           case FILES -> {
             var data = (ScenarioFileListRequestData) values.data();
             yield List.of(
-                text("gameCode", Optional.of(data.gameCode().wireValue())),
+                text(LITERAL_GAMECODE, Optional.of(data.gameCode().wireValue())),
                 number("prefix", data.prefix()));
           }
           case DETAIL ->
@@ -135,7 +137,7 @@ public final class ScenarioRequest {
             var data = (ScenarioSearchRequestData) values.data();
             yield List.of(
                 text("bodyKeyword", data.bodyKeyword()),
-                text("gameCode", data.gameCode().map(WireEnum::wireValue)),
+                text(LITERAL_GAMECODE, data.gameCode().map(WireEnum::wireValue)),
                 text("speakerName", data.speakerName()),
                 text("chapterTitle", data.chapterTitle()),
                 text("entryType", data.entryType().map(WireEnum::wireValue)),

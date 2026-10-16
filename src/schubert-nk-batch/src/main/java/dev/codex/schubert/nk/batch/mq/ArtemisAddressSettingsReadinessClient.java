@@ -17,6 +17,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ArtemisAddressSettingsReadinessClient {
+  private static final java.lang.String LITERAL_FALSE = "false";
+
   @FunctionalInterface
   interface Reader {
     @Nullable Object read(ClientSession session, String address);
@@ -28,13 +30,13 @@ public final class ArtemisAddressSettingsReadinessClient {
       Map.ofEntries(
           Map.entry("deadLetterAddress", "\"nk.dead.letter\""),
           Map.entry("expiryAddress", "\"nk.expiry\""),
-          Map.entry("autoCreateDeadLetterResources", "false"),
-          Map.entry("autoCreateExpiryResources", "false"),
-          Map.entry("autoCreateAddresses", "false"),
-          Map.entry("autoCreateQueues", "false"),
-          Map.entry("autoDeleteAddresses", "false"),
-          Map.entry("autoDeleteQueues", "false"),
-          Map.entry("autoDeleteCreatedQueues", "false"),
+          Map.entry("autoCreateDeadLetterResources", LITERAL_FALSE),
+          Map.entry("autoCreateExpiryResources", LITERAL_FALSE),
+          Map.entry("autoCreateAddresses", LITERAL_FALSE),
+          Map.entry("autoCreateQueues", LITERAL_FALSE),
+          Map.entry("autoDeleteAddresses", LITERAL_FALSE),
+          Map.entry("autoDeleteQueues", LITERAL_FALSE),
+          Map.entry("autoDeleteCreatedQueues", LITERAL_FALSE),
           Map.entry("addressFullMessagePolicy", "\"PAGE\""),
           Map.entry("pageFullMessagePolicy", "\"FAIL\""),
           Map.entry("diskFullMessagePolicy", "\"BLOCK\""),

@@ -17,6 +17,14 @@ import java.util.regex.Pattern;
  * NK-PRO-002, UI 234-236, SS 322 sections 5 and 9.
  */
 public final class PayloadSemanticValidator {
+  private static final java.lang.String LITERAL_ID = "受付ID";
+
+  private static final java.lang.String LITERAL_FILE_BYTE = "File byte長";
+
+  private static final java.lang.String LITERAL_COMPLETED = "COMPLETED";
+
+  private static final java.lang.String LITERAL_ERROR = "ERROR";
+
   private static final Pattern USERNAME = Pattern.compile("[A-Za-z0-9._-]+");
   private static final Pattern RECEIPT_ID = Pattern.compile("[0-9A-HJKMNP-TV-Z]{26}");
   private static final Pattern HTTP_METHOD = Pattern.compile("[A-Z]{3,8}");
@@ -99,8 +107,8 @@ public final class PayloadSemanticValidator {
       case "QSSRSP01" -> records.forEach(PayloadSemanticValidator::validateQuestionSummary);
       case "QSDRSP01" -> validateQuestionDetail(data);
       case "QSBREQ01" -> validateQuestionSubmission(data);
-      case "QSBRSP01", "QWKREQ01" -> validateReceipt(text(data, "受付ID"));
-      case "NTSRSP01" -> records.forEach(record -> validateReceipt(text(record, "受付ID")));
+      case "QSBRSP01", "QWKREQ01" -> validateReceipt(text(data, LITERAL_ID));
+      case "NTSRSP01" -> records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));
       case "WLGEVT01" -> validateWebLog(data);
       default -> {
         // All remaining layouts have only invariants already established by their named types.
@@ -176,7 +184,7 @@ public final class PayloadSemanticValidator {
       requireAbsent(data, "File ID");
       requireAbsent(data, "File relative path");
       requireAbsent(data, "File SHA-256");
-      requireEqual(numeric(data, "File byte長"), 0, "inline scenario has a file byte length");
+      requireEqual(numeric(data, LITERAL_FILE_BYTE), 0, "inline scenario has a file byte length");
       requireEqual(numeric(data, "File record長"), 0, "inline scenario has a file record length");
       requireEqual(numeric(data, "File record件数"), 0, "inline scenario has a file record count");
       validateScenarioSequence(records);
@@ -187,12 +195,12 @@ public final class PayloadSemanticValidator {
     requirePresent(data, "File ID");
     requirePresent(data, "File relative path");
     requirePresent(data, "File SHA-256");
-    requirePositive(data, "File byte長");
+    requirePositive(data, LITERAL_FILE_BYTE);
     requireEqual(numeric(data, "File record長"), 4_800, "large-result record length is not 4800");
     long count = numeric(data, "File record件数");
     requireRange(count, 1, 10_000, "large-result record count is outside 1..10000");
     requireEqual(
-        numeric(data, "File byte長"),
+        numeric(data, LITERAL_FILE_BYTE),
         Math.multiplyExact(4_800, count),
         "large-result byte length differs from record length times count");
   }
@@ -240,7 +248,7 @@ public final class PayloadSemanticValidator {
   }
 
   private static void validateMediaDescriptor(FieldValueSet data) {
-    requirePositive(data, "File byte長");
+    requirePositive(data, LITERAL_FILE_BYTE);
   }
 
   private static void validateAnimationMenu(FieldValueSet data) {
@@ -253,7 +261,7 @@ public final class PayloadSemanticValidator {
 
   private static void validateAnimationRecords(List<FieldValueSet> records) {
     for (FieldValueSet record : records) {
-      requirePositive(record, "File byte長");
+      requirePositive(record, LITERAL_FILE_BYTE);
       boolean subtrack = text(record, "Category").equals("SUBTRACK");
       require(
           present(record, "Parent main ID") == subtrack,
@@ -264,7 +272,7 @@ public final class PayloadSemanticValidator {
 
   private static void validateMusicRecords(List<FieldValueSet> records) {
     for (FieldValueSet record : records) {
-      requirePositive(record, "File byte長");
+      requirePositive(record, LITERAL_FILE_BYTE);
       boolean paired = !text(record, "Pair role").equals("N");
       require(present(record, "Pair key") == paired, "music pair key disagrees with pair role");
     }
@@ -303,14 +311,14 @@ public final class PayloadSemanticValidator {
     String state = text(data, "内部状態");
     String expectedType =
         switch (state) {
-          case "COMPLETED" -> "COMPLETED";
-          case "ERROR" -> "ERROR";
+          case LITERAL_COMPLETED -> LITERAL_COMPLETED;
+          case LITERAL_ERROR -> LITERAL_ERROR;
           default -> "ACCEPTED";
         };
     require(
         text(data, "通知区分").equals(expectedType),
         "notification type disagrees with its internal state");
-    validateReceipt(text(data, "受付ID"));
+    validateReceipt(text(data, LITERAL_ID));
     boolean started = present(data, "処理開始日時");
     boolean completed = present(data, "処理完了日時");
     boolean failed = present(data, "Error日時");
@@ -322,18 +330,18 @@ public final class PayloadSemanticValidator {
         switch (state) {
           case "RECEIVED" -> 0;
           case "PROCESSING" -> 8;
-          case "COMPLETED" -> 12;
-          case "ERROR" -> 10;
+          case LITERAL_COMPLETED -> 12;
+          case LITERAL_ERROR -> 10;
           case "CANCELLED" -> 1;
           default ->
               throw new LayoutValidationException(
                   "layout semantic violation: unknown notification state");
         };
     require(timestampMask == expectedTimestampMask, state + " timestamps are inconsistent");
-    if (state.equals("ERROR")) {
+    if (state.equals(LITERAL_ERROR)) {
       require(errorFields, "ERROR notification does not contain both error fields");
     }
-    if (!state.equals("ERROR")) {
+    if (!state.equals(LITERAL_ERROR)) {
       require(
           !present(data, "Error code") && !present(data, "利用者向けerror"),
           "non-error notification contains error fields");
@@ -343,7 +351,7 @@ public final class PayloadSemanticValidator {
         present(data, "質問本文") != deleted && present(data, "Question ID") != deleted,
         "question deletion flag disagrees with question fields");
     // BUG562/UI224/SS323: a deleted question also retires its answer, even when completed.
-    if (deleted || !state.equals("COMPLETED")) {
+    if (deleted || !state.equals(LITERAL_COMPLETED)) {
       requireAbsent(data, "回答本文");
     }
   }
@@ -359,7 +367,7 @@ public final class PayloadSemanticValidator {
     require(
         present(record, "回答日時") == state.equals("ANSWERED"),
         "question summary answer timestamp disagrees with state");
-    validateReceipt(text(record, "受付ID"));
+    validateReceipt(text(record, LITERAL_ID));
   }
 
   private static void validateQuestionDetail(FieldValueSet data) {
@@ -369,7 +377,7 @@ public final class PayloadSemanticValidator {
     if (!answered) {
       requireAbsent(data, "回答本文");
     }
-    validateReceipt(text(data, "受付ID"));
+    validateReceipt(text(data, LITERAL_ID));
   }
 
   private static void validateQuestionSubmission(FieldValueSet data) {

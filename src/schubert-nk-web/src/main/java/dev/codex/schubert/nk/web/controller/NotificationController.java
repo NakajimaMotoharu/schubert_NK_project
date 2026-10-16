@@ -45,6 +45,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class NotificationController {
+  private static final java.lang.String LITERAL_NTCREQ01 = "NTCREQ01";
+
   private final NotificationWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -196,7 +198,7 @@ public final class NotificationController {
             "action", Map.of("fields", form.displayValues(), "issues", form.getIssues()));
       } else {
         try {
-          var token = tokens.orElseThrow().issue(session(request), "NTCREQ01");
+          var token = tokens.orElseThrow().issue(session(request), LITERAL_NTCREQ01);
           model.addAttribute(
               "action",
               Map.of(
@@ -261,7 +263,7 @@ public final class NotificationController {
     final WebSessionId session;
     try {
       session = session(request);
-      tokens.orElseThrow().require(session, "NTCREQ01", input.operationToken());
+      tokens.orElseThrow().require(session, LITERAL_NTCREQ01, input.operationToken());
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
       return null;
@@ -272,7 +274,7 @@ public final class NotificationController {
     try {
       result =
           client.exchange(
-              new TypedPayloadValues(new LayoutId("NTCREQ01"), input, List.of()),
+              new TypedPayloadValues(new LayoutId(LITERAL_NTCREQ01), input, List.of()),
               actor.authenticationContext());
     } catch (ProtectedReadWireException failure) {
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
@@ -300,7 +302,7 @@ public final class NotificationController {
     try {
       tokens
           .orElseThrow()
-          .completeVerified(session, "NTCREQ01", input.operationToken(), result.resultCode());
+          .completeVerified(session, LITERAL_NTCREQ01, input.operationToken(), result.resultCode());
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
       return null;

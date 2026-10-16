@@ -38,6 +38,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InboxCleanup {
+  private static final java.lang.String LITERAL_001 = "001";
+
   private static final Set<String> REQUESTS =
       Set.of(
           "LGNREQ01",
@@ -359,8 +361,8 @@ public final class InboxCleanup {
     UUID token = row.getObject("operation_token", UUID.class);
     if (!REQUESTS.contains(request)
         || !response.equals(request.substring(0, 3) + "RSP01")
-        || !requireValue(row.getString("request_version")).equals("001")
-        || !requireValue(row.getString("response_version")).equals("001")
+        || !requireValue(row.getString("request_version")).equals(LITERAL_001)
+        || !requireValue(row.getString("response_version")).equals(LITERAL_001)
         || (token != null) != TOKEN_REQUESTS.contains(request)
         || !requireValue(row.getString("request_fingerprint_hmac")).matches("[0-9a-f]{64}")
         || !fingerprintVersions.contains(requireValue(row.getString("fingerprint_key_version")))) {
@@ -387,7 +389,7 @@ public final class InboxCleanup {
             new ResponseSnapshotIdentity(
                 message,
                 response,
-                "001",
+                LITERAL_001,
                 owner == null ? OptionalLong.empty() : OptionalLong.of(owner));
         var reference =
             new InboxResultReference(
@@ -399,7 +401,7 @@ public final class InboxCleanup {
                 InboxCompletionState.valueOf(completionState),
                 reference,
                 response,
-                "001",
+                LITERAL_001,
                 Optional.of(new EncryptedResponseSnapshot(responseKeyVersion, body)),
                 completed);
         return Optional.of(

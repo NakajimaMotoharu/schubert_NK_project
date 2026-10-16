@@ -23,6 +23,8 @@ import java.util.regex.Pattern;
  * NK-PRO-001, SS 323 sections 2/10, PT-PRO-001-T02/T03.
  */
 public final class TypedFieldValues {
+  private static final java.lang.String LITERAL_VALUE = "value";
+
   private static final Pattern OPTIONAL_ID = Pattern.compile("[0-9]{1,12}");
 
   private TypedFieldValues() {}
@@ -195,12 +197,12 @@ public final class TypedFieldValues {
   }
 
   public static FieldValue orUnset(Optional<FieldValue.Text> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value.<FieldValue>map(text -> text).orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue text(String value) {
-    return new FieldValue.Text(Objects.requireNonNull(value, "value"));
+    return new FieldValue.Text(Objects.requireNonNull(value, LITERAL_VALUE));
   }
 
   public static FieldValue numeric(long value) {
@@ -212,72 +214,72 @@ public final class TypedFieldValues {
   }
 
   public static FieldValue id(ProtocolId value) {
-    return numeric(Objects.requireNonNull(value, "value").value());
+    return numeric(Objects.requireNonNull(value, LITERAL_VALUE).value());
   }
 
   public static FieldValue optionalIdValue(Optional<? extends ProtocolId> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(identifier -> new FieldValue.Text(Long.toString(identifier.value())))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue enumValue(WireEnum value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalEnumValue(Optional<? extends WireEnum> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(item -> new FieldValue.Text(item.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue httpStatusCode(HttpStatusCode value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalHttpStatusCodeValue(Optional<HttpStatusCode> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(status -> new FieldValue.Text(status.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue elapsedMilliseconds(ElapsedMilliseconds value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalElapsedMillisecondsValue(Optional<ElapsedMilliseconds> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(elapsed -> new FieldValue.Text(elapsed.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue optionalStringValue(Optional<String> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value.<FieldValue>map(FieldValue.Text::new).orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue instant(Instant value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return new FieldValue.Numeric(Long.parseLong(JstWireTimestamp.format(value)));
   }
 
   public static FieldValue optionalInstantValue(Optional<Instant> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(instant -> new FieldValue.Text(JstWireTimestamp.format(instant)))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue uuid(UUID value) {
-    return text(Objects.requireNonNull(value, "value").toString());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).toString());
   }
 
   public static FieldValue optionalUuidValue(Optional<UUID> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(uuid -> new FieldValue.Text(uuid.toString()))
         .orElse(FieldValue.Unset.INSTANCE);
@@ -285,40 +287,40 @@ public final class TypedFieldValues {
 
   public static FieldValue optionalAuthenticationContextValue(
       Optional<AuthenticationContext> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(context -> new FieldValue.Text(context.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue sha256(Sha256Hex value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalSha256Value(Optional<Sha256Hex> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(sha -> new FieldValue.Text(sha.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue relativePath(RelativePath value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalRelativePathValue(Optional<RelativePath> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(path -> new FieldValue.Text(path.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);
   }
 
   public static FieldValue displayPath(DisplayPath value) {
-    return text(Objects.requireNonNull(value, "value").wireValue());
+    return text(Objects.requireNonNull(value, LITERAL_VALUE).wireValue());
   }
 
   public static FieldValue optionalDisplayPathValue(Optional<DisplayPath> value) {
-    Objects.requireNonNull(value, "value");
+    Objects.requireNonNull(value, LITERAL_VALUE);
     return value
         .<FieldValue>map(path -> new FieldValue.Text(path.wireValue()))
         .orElse(FieldValue.Unset.INSTANCE);

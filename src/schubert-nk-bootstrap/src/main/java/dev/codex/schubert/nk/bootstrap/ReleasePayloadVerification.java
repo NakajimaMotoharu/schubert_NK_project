@@ -36,6 +36,10 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class ReleasePayloadVerification {
+  private static final java.lang.String LITERAL_RELEASE_MANIFEST_JSON = "RELEASE-MANIFEST.json";
+
+  private static final java.lang.String LITERAL_DB_MIGRATION = "db/migration/";
+
   private static final int MAX_MATERIAL = 67_108_864;
   private final StartupReleaseManifest reader;
   private final long group;
@@ -64,7 +68,7 @@ final class ReleasePayloadVerification {
       OwnedTransferDirectory release, String version, ReleaseApproval approval)
       throws StorageIoException {
     return release.atExistingEntryHandle(
-        "RELEASE-MANIFEST.json",
+        LITERAL_RELEASE_MANIFEST_JSON,
         held -> {
           require(version.equals(approval.version()));
           var original = checked(held, 0x81a0);
@@ -81,11 +85,11 @@ final class ReleasePayloadVerification {
           }
           var tree = new TreeMap<String, Set<String>>();
           for (String path : expected.keySet()) add(tree, path);
-          add(tree, "RELEASE-MANIFEST.json");
+          add(tree, LITERAL_RELEASE_MANIFEST_JSON);
           add(tree, "SHA256SUMS");
           var sums = new TreeMap<String, String>();
           for (var a : expected.values()) sums.put(a.path(), a.sha256());
-          sums.put("RELEASE-MANIFEST.json", value.hash());
+          sums.put(LITERAL_RELEASE_MANIFEST_JSON, value.hash());
           StringBuilder canonical = new StringBuilder();
           sums.forEach(
               (path, hash) -> canonical.append(hash).append("  ").append(path).append('\n'));
@@ -177,13 +181,13 @@ final class ReleasePayloadVerification {
               int mode = executable(child) ? 0x81e8 : 0x81a0;
               var first = checked(held, mode);
               require(first.device() == original.device());
-              if (child.equals("RELEASE-MANIFEST.json")) require(first.equals(original));
+              if (child.equals(LITERAL_RELEASE_MANIFEST_JSON)) require(first.equals(original));
               else {
                 own(first);
                 boolean material =
                     child.equals("VERSION")
                         || child.equals("SHA256SUMS")
-                        || child.startsWith("db/migration/");
+                        || child.startsWith(LITERAL_DB_MIGRATION);
                 FileValue value = read(held, first, material);
                 if (child.equals("SHA256SUMS")) require(Arrays.equals(sumBytes, value.material()));
                 else {
@@ -194,7 +198,7 @@ final class ReleasePayloadVerification {
                         Arrays.equals(
                             (inventory.release() + "\n").getBytes(StandardCharsets.US_ASCII),
                             value.material()));
-                  else if (child.startsWith("db/migration/"))
+                  else if (child.startsWith(LITERAL_DB_MIGRATION))
                     checksums.put(child, sqlChecksum(value.material()));
                   else if (child.endsWith(".jar")) jars.put(child, archive(held, child, expected));
                 }
@@ -303,7 +307,7 @@ final class ReleasePayloadVerification {
             require(!name.endsWith(".jar"));
             if (name.endsWith(".class") && !name.endsWith("module-info.class")) classes.add(name);
             if (entry.isDirectory()) continue;
-            if (name.startsWith("db/migration/") || name.equals("META-INF/MANIFEST.MF")) {
+            if (name.startsWith(LITERAL_DB_MIGRATION) || name.equals("META-INF/MANIFEST.MF")) {
               require(entry.getSize() >= 0 && entry.getSize() <= MAX_MATERIAL);
               var stream =
                   Objects.requireNonNull(zip.getInputStream(entry), "archive entry stream");
@@ -355,7 +359,7 @@ final class ReleasePayloadVerification {
     require(sql.keySet().equals(checksums.keySet()));
     for (int i = 1; i < inventory.migrations().size(); i++) {
       var row = inventory.migrations().get(i);
-      String path = "db/migration/" + row.script();
+      String path = LITERAL_DB_MIGRATION + row.script();
       require(
           Objects.requireNonNull(expected.get(path), "declared SQL artifact")
               .sha256()

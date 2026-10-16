@@ -59,13 +59,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class UserAdminController {
+  private static final java.lang.String LITERAL_PASSWORD = "PASSWORD";
+
+  private static final java.lang.String LITERAL_UCRREQ01 = "UCRREQ01";
+
+  private static final java.lang.String LITERAL_PAGE = "page";
+
   private final UserAdministrationWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
   private final Optional<SessionOperationTokenLifecycle> tokens;
   private static final Map<String, String> PURPOSES =
       Map.of(
-          "STATUS", "USTREQ01", "ROLE", "URLREQ01", "PASSWORD", "UPWREQ01", "UNLOCK", "ULKREQ01");
+          "STATUS",
+          "USTREQ01",
+          "ROLE",
+          "URLREQ01",
+          LITERAL_PASSWORD,
+          "UPWREQ01",
+          "UNLOCK",
+          "ULKREQ01");
   private static final String RETRY = "処理結果を確認できません。同じ内容で再操作してください。";
 
   public UserAdminController(
@@ -92,8 +105,8 @@ public final class UserAdminController {
     var actor = administrator(principal, model, request, response);
     if (actor == null || !assembled(response)) return null;
     try {
-      var token = tokens.orElseThrow().issue(session(request), "UCRREQ01");
-      model.addAttribute("page", UserCreateViewModel.newForm(actor, token.token()));
+      var token = tokens.orElseThrow().issue(session(request), LITERAL_UCRREQ01);
+      model.addAttribute(LITERAL_PAGE, UserCreateViewModel.newForm(actor, token.token()));
       return "admin/user-new";
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
@@ -115,7 +128,7 @@ public final class UserAdminController {
     var actor = administrator(principal, model, request, response);
     Objects.requireNonNull(parameters, "parameters");
     if (actor == null || !assembled(response)) return null;
-    var token = retained(parameters, "UCRREQ01", request, response);
+    var token = retained(parameters, LITERAL_UCRREQ01, request, response);
     if (token == null) return null;
     final var form = UserCreateForm.bind(parameters);
     try {
@@ -125,7 +138,7 @@ public final class UserAdminController {
       try {
         result =
             client.exchange(
-                new TypedPayloadValues(new LayoutId("UCRREQ01"), form.toRequest(), List.of()),
+                new TypedPayloadValues(new LayoutId(LITERAL_UCRREQ01), form.toRequest(), List.of()),
                 actor.authenticationContext());
       } catch (ProtectedReadWireException failure) {
         return showCreate(actor, form, token, model, response, 503, RETRY);
@@ -153,7 +166,7 @@ public final class UserAdminController {
         if (data.updatedVersion() != 0) throw new IllegalArgumentException();
         tokens
             .orElseThrow()
-            .completeVerified(session(request), "UCRREQ01", token, result.resultCode());
+            .completeVerified(session(request), LITERAL_UCRREQ01, token, result.resultCode());
         response.setHeader("Location", "/admin/users/" + data.userId().value());
         response.setStatus(302);
         return null;
@@ -198,7 +211,7 @@ public final class UserAdminController {
     if (token == null) return null;
     @Nullable UserDetailViewModel before = null;
     String username = "";
-    if (operation.equals("PASSWORD")) {
+    if (operation.equals(LITERAL_PASSWORD)) {
       before = lookup(id, actor, request, response);
       if (before == null) return null;
       username = (String) Objects.requireNonNull(before.getValues().get("username"));
@@ -207,7 +220,7 @@ public final class UserAdminController {
         switch (operation) {
           case "STATUS" -> UserStatusForm.bind(id, parameters);
           case "ROLE" -> UserRoleForm.bind(id, parameters);
-          case "PASSWORD" -> PasswordResetForm.bind(id, username, parameters);
+          case LITERAL_PASSWORD -> PasswordResetForm.bind(id, username, parameters);
           default -> UserUnlockForm.bind(id, parameters);
         };
     try {
@@ -299,7 +312,7 @@ public final class UserAdminController {
         operations.add("STATUS");
         operations.add("ROLE");
       }
-      operations.add("PASSWORD");
+      operations.add(LITERAL_PASSWORD);
       if ("LOCKED".equals(page.getValues().get("state"))) operations.add("UNLOCK");
       try {
         var issued =
@@ -329,7 +342,7 @@ public final class UserAdminController {
         return null;
       }
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     model.addAttribute("message", "");
     return "admin/user-detail";
   }
@@ -404,7 +417,7 @@ public final class UserAdminController {
       String message) {
     response.setStatus(status);
     model.addAttribute(
-        "page", UserCreateViewModel.redisplay(actor, form, token, message, status == 409));
+        LITERAL_PAGE, UserCreateViewModel.redisplay(actor, form, token, message, status == 409));
     return "admin/user-new";
   }
 
@@ -423,7 +436,7 @@ public final class UserAdminController {
     var page = lookup(id, actor, request, response);
     if (page == null) return null;
     response.setStatus(status);
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     model.addAttribute("message", message);
     model.addAttribute(
         "forms", List.of(displayForm(operation, form.displayValues(), form.getIssues(), token)));
@@ -506,7 +519,7 @@ public final class UserAdminController {
     var form = UserSearchForm.bind(parameters);
     if (!form.isValid()) {
       response.setStatus(400);
-      model.addAttribute("page", UserListViewModel.invalid(actor, form));
+      model.addAttribute(LITERAL_PAGE, UserListViewModel.invalid(actor, form));
       return "admin/user-list";
     }
     final ProtectedReadWireClient.Result result;
@@ -541,7 +554,7 @@ public final class UserAdminController {
       response.sendError(503);
       return null;
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     return "admin/user-list";
   }
 }

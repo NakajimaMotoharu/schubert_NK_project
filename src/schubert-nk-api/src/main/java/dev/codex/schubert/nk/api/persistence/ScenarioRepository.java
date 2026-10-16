@@ -54,6 +54,8 @@ import java.util.function.IntFunction;
  * later.
  */
 public final class ScenarioRepository {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
   private static final String FROM =
       """
        from schubert.script_entries e
@@ -100,7 +102,7 @@ public final class ScenarioRepository {
   /** PT-SCN-002: same-name aggregation across the selected games, not per-ID duplicates. */
   public TypedPayloadValues speakers(
       Connection connection, AuthenticatedActor actor, SpeakerListRequestData request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     List<String> parameters = request.gameCode().map(g -> List.of(g.wireValue())).orElse(List.of());
     String filter = parameters.isEmpty() ? "" : " where g.code=?";
     return rows(
@@ -125,7 +127,7 @@ public final class ScenarioRepository {
   /** PT-SCN-003: two-digit prefix; no synthetic prefix for missing/invalid master metadata. */
   public TypedPayloadValues routes(
       Connection connection, AuthenticatedActor actor, RouteListRequestData request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     return rows(
         connection,
         actor,
@@ -149,7 +151,7 @@ public final class ScenarioRepository {
   /** PT-SCN-004: display order and first nonempty title, count entries before any audio join. */
   public TypedPayloadValues files(
       Connection connection, AuthenticatedActor actor, ScenarioFileListRequestData request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     return rows(
         connection,
         actor,
@@ -183,7 +185,7 @@ public final class ScenarioRepository {
       Connection connection, AuthenticatedActor actor, ScenarioSearchRequestData request) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     // BUG-032: UI223 normalization precedes wire-size/padding checks; receiver codec stays strict.
     request =
         new ScenarioSearchRequestData(
@@ -291,7 +293,7 @@ public final class ScenarioRepository {
       Connection connection, AuthenticatedActor actor, ScenarioDetailRequestData request) {
     Objects.requireNonNull(connection, "connection");
     Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     String sql =
         """
         with files as (

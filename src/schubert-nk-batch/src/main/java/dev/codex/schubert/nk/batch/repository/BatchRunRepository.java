@@ -25,6 +25,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class BatchRunRepository {
+  private static final java.lang.String LITERAL_RUNNING = "RUNNING";
+
   private static final String RETAINED_HISTORY =
       "select id,run_id,business_date,step,attempt,started_at,ended_at,status,"
           + "target_count,success_count,failure_count,byte_count from schubert.batch_runs"
@@ -82,7 +84,8 @@ public final class BatchRunRepository {
       List<History> history = history(run, step, day, now);
       int maximum = history.isEmpty() ? 0 : history.getLast().attempt();
       require(maximum < 99);
-      List<History> running = history.stream().filter(h -> h.status().equals("RUNNING")).toList();
+      List<History> running =
+          history.stream().filter(h -> h.status().equals(LITERAL_RUNNING)).toList();
       require(running.isEmpty() || recoverAbandoned);
       for (History row : running) require(row.runId().equals(run.id()));
       long successes = history.stream().filter(h -> h.status().equals("SUCCESS")).count();
@@ -258,11 +261,12 @@ public final class BatchRunRepository {
           require(id >= 1 && id <= 999999999999L && ids.add(id));
           require(date.equals(day) && rowStep.equals(step.name()));
           require(number > previous && number <= 99);
-          require(Set.of("RUNNING", "SUCCESS", "WARNING", "FAILED", "SKIPPED").contains(status));
+          require(
+              Set.of(LITERAL_RUNNING, "SUCCESS", "WARNING", "FAILED", "SKIPPED").contains(status));
           require(target >= 0 && success >= 0 && failure >= 0 && bytes >= 0);
           validStoredTime(start, now);
           if (runId.equals(run.id())) require(!start.isBefore(run.cutoff()));
-          if (status.equals("RUNNING")) {
+          if (status.equals(LITERAL_RUNNING)) {
             require(end == null);
           } else {
             require(end != null);
@@ -355,7 +359,7 @@ public final class BatchRunRepository {
       query.setInt(4, attempt);
       query.setObject(5, now.atOffset(ZoneOffset.UTC));
       query.setObject(6, skipped ? now.atOffset(ZoneOffset.UTC) : null);
-      query.setString(7, skipped ? "SKIPPED" : "RUNNING");
+      query.setString(7, skipped ? "SKIPPED" : LITERAL_RUNNING);
       query.setString(8, reason.code());
       query.setString(9, reason.summary());
       var rows = query.executeQuery();

@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  * SSC-040/PG-D-096/PT-WEB-024..031. Public arguments nonnull; no connection lifecycle ownership.
  */
 public final class JdbcWebSessionStore {
+  private static final java.lang.String LITERAL_CONNECTION = "connection";
+
   private static final String COLUMNS =
       "id,session_id_hash,attributes_ciphertext,key_version,created_at,last_accessed_at,expires_at,max_inactive_seconds,version";
 
@@ -25,7 +27,7 @@ public final class JdbcWebSessionStore {
    * Locks by hash, including expired rows for outer lifecycle handling; absence is not creation.
    */
   public Optional<WebSessionRow> findLocked(Connection connection, String hash) {
-    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(connection, LITERAL_CONNECTION);
     requireHash(hash);
     try {
       transaction(connection);
@@ -61,7 +63,7 @@ public final class JdbcWebSessionStore {
 
   /** Inserts only an explicitly new version0 row; failure never degrades into an update. */
   public void insert(Connection connection, WebSessionRow row) {
-    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(connection, LITERAL_CONNECTION);
     Objects.requireNonNull(row, "row");
     if (row.version() != 0) throw new IllegalArgumentException("new session version must be zero");
     try {
@@ -96,7 +98,7 @@ public final class JdbcWebSessionStore {
    * Identity must stay equal and version increment exactly once; stale/deleted rows return false.
    */
   public boolean replace(Connection connection, WebSessionRow original, WebSessionRow replacement) {
-    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(connection, LITERAL_CONNECTION);
     Objects.requireNonNull(original, "original");
     Objects.requireNonNull(replacement, "replacement");
     if (!original.identity().equals(replacement.identity())
@@ -131,7 +133,7 @@ public final class JdbcWebSessionStore {
 
   /** Deletes only the observed identity/version, permitting atomic fixation in the caller TX. */
   public boolean delete(Connection connection, SessionPayloadIdentity identity, long version) {
-    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(connection, LITERAL_CONNECTION);
     Objects.requireNonNull(identity, "identity");
     WebSessionRow.requireVersion(version);
     try {
@@ -180,7 +182,7 @@ public final class JdbcWebSessionStore {
 
   /** SSC-041/PT-WEB-037/041: invalidates even an unreadable row, using only the validated hash. */
   public boolean deleteByHash(Connection connection, String hash) {
-    Objects.requireNonNull(connection, "connection");
+    Objects.requireNonNull(connection, LITERAL_CONNECTION);
     requireHash(hash);
     try {
       transaction(connection);

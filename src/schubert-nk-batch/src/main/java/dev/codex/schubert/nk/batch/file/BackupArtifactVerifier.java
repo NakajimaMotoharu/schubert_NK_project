@@ -42,9 +42,15 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class BackupArtifactVerifier {
+  private static final java.lang.String LITERAL_SCHUBERT_NK_DUMP = "schubert_nk.dump";
+
+  private static final java.lang.String LITERAL_CONFIG_TAR = "config.tar";
+
+  private static final java.lang.String LITERAL_CREDENTIALS_TAR_AGE = "credentials.tar.age";
+
   private static final String MANIFEST = "MANIFEST.json";
   private static final List<String> RETAINED_NAMES =
-      List.of(MANIFEST, "schubert_nk.dump", "config.tar", "credentials.tar.age");
+      List.of(MANIFEST, LITERAL_SCHUBERT_NK_DUMP, LITERAL_CONFIG_TAR, LITERAL_CREDENTIALS_TAR_AGE);
   private static final Set<String> REQUIRED = Set.copyOf(RETAINED_NAMES);
   private static final long DEADLINE = 1_800_000_000_000L;
   private final Object lock = new Object();
@@ -158,7 +164,8 @@ public final class BackupArtifactVerifier {
     synchronized (lock) {
       long started = clock.getAsLong();
       byte[] buffer = new byte[65536];
-      var pendingNames = List.of("schubert_nk.dump", "config.tar", "credentials.tar.age");
+      var pendingNames =
+          List.of(LITERAL_SCHUBERT_NK_DUMP, LITERAL_CONFIG_TAR, LITERAL_CREDENTIALS_TAR_AGE);
       try {
         require(security.effectiveUid() == 0);
         Metadata parent = directory(root, started);
@@ -180,8 +187,8 @@ public final class BackupArtifactVerifier {
                           guard(started);
                           Metadata value = metadata(io.attributes(held));
                           require(value.size() >= 0);
-                          long owner = name.equals("schubert_nk.dump") ? uid : 0;
-                          long group = name.equals("schubert_nk.dump") ? gid : 0;
+                          long owner = name.equals(LITERAL_SCHUBERT_NK_DUMP) ? uid : 0;
+                          long group = name.equals(LITERAL_SCHUBERT_NK_DUMP) ? gid : 0;
                           var claim = new FileClaim(value.size(), "", owner, group);
                           Metadata before =
                               capture(held, false, owner, group, value.size(), started);
@@ -222,9 +229,9 @@ public final class BackupArtifactVerifier {
                         return Boolean.TRUE;
                       });
                   return new PendingDigests(
-                      Objects.requireNonNull(observed.get("schubert_nk.dump")),
-                      Objects.requireNonNull(observed.get("config.tar")),
-                      Objects.requireNonNull(observed.get("credentials.tar.age")));
+                      Objects.requireNonNull(observed.get(LITERAL_SCHUBERT_NK_DUMP)),
+                      Objects.requireNonNull(observed.get(LITERAL_CONFIG_TAR)),
+                      Objects.requireNonNull(observed.get(LITERAL_CREDENTIALS_TAR_AGE)));
                 });
         require(parent.equals(directory(root, started)) && security.effectiveUid() == 0);
         guard(started);
@@ -248,10 +255,11 @@ public final class BackupArtifactVerifier {
     Objects.requireNonNull(expected);
     if (!retentionSizesAgree(expected, started)) return Optional.empty();
     BundleSnapshot actual = verifyAt(expected, expected.directoryName(), null, started, false);
-    return Objects.requireNonNull(actual.contents().get("schubert_nk.dump")).equals(expected.dump())
-            && Objects.requireNonNull(actual.contents().get("config.tar"))
+    return Objects.requireNonNull(actual.contents().get(LITERAL_SCHUBERT_NK_DUMP))
+                .equals(expected.dump())
+            && Objects.requireNonNull(actual.contents().get(LITERAL_CONFIG_TAR))
                 .equals(expected.configuration())
-            && Objects.requireNonNull(actual.contents().get("credentials.tar.age"))
+            && Objects.requireNonNull(actual.contents().get(LITERAL_CREDENTIALS_TAR_AGE))
                 .equals(expected.credentials())
         ? Optional.of(actual)
         : Optional.empty();
@@ -267,11 +275,11 @@ public final class BackupArtifactVerifier {
           Map.of(
               MANIFEST,
               (long) canonical.length,
-              "schubert_nk.dump",
+              LITERAL_SCHUBERT_NK_DUMP,
               expected.dump().size(),
-              "config.tar",
+              LITERAL_CONFIG_TAR,
               expected.configuration().size(),
-              "credentials.tar.age",
+              LITERAL_CREDENTIALS_TAR_AGE,
               expected.credentials().size());
       var child = root.openExistingChild(expected.directoryName());
       boolean same =
@@ -297,8 +305,8 @@ public final class BackupArtifactVerifier {
                               guard(started);
                               return false;
                             }
-                            long fileUid = name.equals("schubert_nk.dump") ? uid : 0;
-                            long fileGid = name.equals("schubert_nk.dump") ? gid : 0;
+                            long fileUid = name.equals(LITERAL_SCHUBERT_NK_DUMP) ? uid : 0;
+                            long fileGid = name.equals(LITERAL_SCHUBERT_NK_DUMP) ? gid : 0;
                             require(
                                 raw.equals(
                                     capture(held, false, fileUid, fileGid, raw.size(), started)));
@@ -340,7 +348,11 @@ public final class BackupArtifactVerifier {
           () -> {
             require(admitted.directory().equals(directory(child, started)));
             for (String name :
-                List.of("schubert_nk.dump", "config.tar", "credentials.tar.age", MANIFEST)) {
+                List.of(
+                    LITERAL_SCHUBERT_NK_DUMP,
+                    LITERAL_CONFIG_TAR,
+                    LITERAL_CREDENTIALS_TAR_AGE,
+                    MANIFEST)) {
               owner.check();
               guard(started);
               Metadata original = Objects.requireNonNull(admitted.files().get(name));
@@ -446,15 +458,15 @@ public final class BackupArtifactVerifier {
                       Map.of(
                           MANIFEST,
                           new FileClaim(canonical.length, "", 0, 0),
-                          "schubert_nk.dump",
+                          LITERAL_SCHUBERT_NK_DUMP,
                           new FileClaim(expected.dump().size(), expected.dump().sha256(), uid, gid),
-                          "config.tar",
+                          LITERAL_CONFIG_TAR,
                           new FileClaim(
                               expected.configuration().size(),
                               expected.configuration().sha256(),
                               0,
                               0),
-                          "credentials.tar.age",
+                          LITERAL_CREDENTIALS_TAR_AGE,
                           new FileClaim(
                               expected.credentials().size(),
                               expected.credentials().sha256(),

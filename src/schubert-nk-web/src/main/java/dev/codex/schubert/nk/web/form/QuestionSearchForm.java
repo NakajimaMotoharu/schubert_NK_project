@@ -23,8 +23,16 @@ import org.jspecify.annotations.NullMarked;
 /** SCR022/UI224236/SS313314; PG-D350/PT-QRY-HTTP001..003,012. No HTTP role/context. */
 @NullMarked
 public final class QuestionSearchForm {
+  private static final java.lang.String LITERAL_KEYWORD = "keyword";
+
+  private static final java.lang.String LITERAL_USERNAME = "username";
+
+  private static final java.lang.String LITERAL_STATE = "state";
+
+  private static final java.lang.String LITERAL_PAGE = "page";
+
   private static final Set<String> FIELDS =
-      Set.of("keyword", "username", "state", "from", "to", "page");
+      Set.of(LITERAL_KEYWORD, LITERAL_USERNAME, LITERAL_STATE, "from", "to", LITERAL_PAGE);
   private static final String INVALID = "入力項目を確認してください。";
   private final Map<String, String> values;
   private final Map<String, String> issues;
@@ -57,7 +65,7 @@ public final class QuestionSearchForm {
     var values = new HashMap<String, String>();
     var issues = new HashMap<String, String>();
     if (!FIELDS.containsAll(snapshot.keySet())) issues.put("form", INVALID);
-    if (!admin && snapshot.containsKey("username")) issues.put("username", INVALID);
+    if (!admin && snapshot.containsKey(LITERAL_USERNAME)) issues.put(LITERAL_USERNAME, INVALID);
     for (String name : FIELDS) {
       var input = snapshot.getOrDefault(name, List.of(""));
       String value = "";
@@ -70,24 +78,24 @@ public final class QuestionSearchForm {
       }
       values.put(name, value);
     }
-    if (!admin) values.put("username", "");
-    if (Objects.requireNonNull(values.get("keyword")).getBytes(StandardCharsets.UTF_8).length > 256)
-      issues.put("keyword", INVALID);
-    if (Objects.requireNonNull(values.get("username")).getBytes(StandardCharsets.UTF_8).length > 64)
-      issues.put("username", INVALID);
-    if (!Set.of("", "ANSWERED", "UNANSWERED", "ERROR").contains(values.get("state")))
-      issues.put("state", INVALID);
+    if (!admin) values.put(LITERAL_USERNAME, "");
+    if (Objects.requireNonNull(values.get(LITERAL_KEYWORD)).getBytes(StandardCharsets.UTF_8).length
+        > 256) issues.put(LITERAL_KEYWORD, INVALID);
+    if (Objects.requireNonNull(values.get(LITERAL_USERNAME)).getBytes(StandardCharsets.UTF_8).length
+        > 64) issues.put(LITERAL_USERNAME, INVALID);
+    if (!Set.of("", "ANSWERED", "UNANSWERED", "ERROR").contains(values.get(LITERAL_STATE)))
+      issues.put(LITERAL_STATE, INVALID);
     int page = 1;
-    String text = Objects.requireNonNull(values.get("page"));
+    String text = Objects.requireNonNull(values.get(LITERAL_PAGE));
     if (!text.isEmpty()) {
-      if (!text.matches("-?[0-9]+")) issues.put("page", INVALID);
+      if (!text.matches("-?[0-9]+")) issues.put(LITERAL_PAGE, INVALID);
       else
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put("page", INVALID);
+          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
-          issues.put("page", INVALID);
+          issues.put(LITERAL_PAGE, INVALID);
         }
     }
     var from = date("from", values, issues);
@@ -148,9 +156,9 @@ public final class QuestionSearchForm {
 
   public QuestionSearchRequestData toRequest() {
     if (!isValid()) throw new IllegalArgumentException("invalid question search form");
-    String keyword = Objects.requireNonNull(values.get("keyword"));
-    String username = Objects.requireNonNull(values.get("username"));
-    String state = Objects.requireNonNull(values.get("state"));
+    String keyword = Objects.requireNonNull(values.get(LITERAL_KEYWORD));
+    String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));
+    String state = Objects.requireNonNull(values.get(LITERAL_STATE));
     return new QuestionSearchRequestData(
         keyword.isEmpty() ? Optional.empty() : Optional.of(keyword),
         username.isEmpty() ? Optional.empty() : Optional.of(username),

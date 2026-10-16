@@ -13,8 +13,10 @@ import org.jspecify.annotations.Nullable;
 /** Shared read/write admission; NK-OPS-001; OPS-009/UI251/SS343 6.9/6.11; EFILE/PUB PT. */
 @NullMarked
 final class EnvironmentInodePolicy {
+  private static final java.lang.String LITERAL_TMPFS = "tmpfs";
+
   private static final Set<String> LOCAL =
-      Set.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", "tmpfs");
+      Set.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", LITERAL_TMPFS);
   private final InodeSecurityCalls security;
   private final Source source;
 
@@ -45,7 +47,7 @@ final class EnvironmentInodePolicy {
   /** NK-BAT-001; SS343 6.14; PT-BAT-046..057. Never admit volatile or readonly records. */
   Snapshot durable(Path held, boolean directory, int minimum) throws IOException {
     Snapshot result = inspect(held, false, directory, directory ? 0x41c0 : 0x8180, 0, minimum, 204);
-    require(!result.filesystem().equals("tmpfs") && !result.readonly());
+    require(!result.filesystem().equals(LITERAL_TMPFS) && !result.readonly());
     return result;
   }
 
@@ -57,7 +59,7 @@ final class EnvironmentInodePolicy {
   /** SSC109: only paired native host admission may allow a private shared ancestor RO. */
   Snapshot durableAncestor(Path held, boolean allowPrivateReadonly) throws IOException {
     Snapshot result = inspect(held, false, true, 0x41ed, 0, 0, 0);
-    require(!result.filesystem().equals("tmpfs"));
+    require(!result.filesystem().equals(LITERAL_TMPFS));
     if (!allowPrivateReadonly) require(!result.readonly());
     return result;
   }
@@ -112,7 +114,7 @@ final class EnvironmentInodePolicy {
     String filesystem = source.filesystem(held);
     if (filesystem == null) throw unavailable();
     boolean readonly = security.readOnlyFilesystem(held);
-    if (runtime) require(filesystem.equals("tmpfs") && !readonly);
+    if (runtime) require(filesystem.equals(LITERAL_TMPFS) && !readonly);
     else require(LOCAL.contains(filesystem));
     return new Snapshot(m, filesystem, readonly);
   }

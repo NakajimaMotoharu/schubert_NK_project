@@ -39,6 +39,12 @@ import java.util.UUID;
  * HMAC.
  */
 public final class QuestionQueryReplayService {
+  private static final java.lang.String LITERAL_ACTOR = "actor";
+
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
+  private static final java.lang.String LITERAL_RESPONSEID = "responseId";
+
   private final ResponseSnapshotCodec snapshots;
 
   public QuestionQueryReplayService(ResponseSnapshotCodec snapshots) {
@@ -67,7 +73,7 @@ public final class QuestionQueryReplayService {
 
     /** SSC157: captured USER remains narrow; captured ADMIN cannot be returned to current USER. */
     public boolean scopeAllowed(AuthenticatedActor actor) {
-      Objects.requireNonNull(actor, "actor");
+      Objects.requireNonNull(actor, LITERAL_ACTOR);
       return owner == actor.userId()
           && (!request.questionScope() || capturedScope == Role.USER || actor.role() == Role.ADMIN);
     }
@@ -84,10 +90,10 @@ public final class QuestionQueryReplayService {
       TypedPayloadValues response,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(response, "response");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       request.validateResponse(response);
@@ -112,10 +118,10 @@ public final class QuestionQueryReplayService {
       ResultCode code,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       require(persistentError(request, code));
@@ -130,8 +136,8 @@ public final class QuestionQueryReplayService {
 
   public Snapshot read(
       QuestionQueryRequest request, AuthenticatedActor actor, InboxCompletion completion) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(completion, "completion");
     try {
       require(completion.responseLayoutId().equals(request.responseLayoutId().value()));
@@ -201,9 +207,9 @@ public final class QuestionQueryReplayService {
       Instant sentAt,
       boolean replay) {
     Objects.requireNonNull(saved, "saved");
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(saved.request == request);
@@ -223,9 +229,9 @@ public final class QuestionQueryReplayService {
 
   public byte[] failure(
       QuestionQueryRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(

@@ -19,6 +19,38 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorUnitSnapshot {
+  private static final java.lang.String LITERAL_YES = "yes";
+
+  private static final java.lang.String LITERAL_REMAINAFTEREXIT = "RemainAfterExit";
+
+  private static final java.lang.String LITERAL_ACTIVESTATE = "ActiveState";
+
+  private static final java.lang.String LITERAL_SUBSTATE = "SubState";
+
+  private static final java.lang.String LITERAL_RESULT = "Result";
+
+  private static final java.lang.String LITERAL_MAINPID = "MainPID";
+
+  private static final java.lang.String LITERAL_CONTROLPID = "ControlPID";
+
+  private static final java.lang.String LITERAL_EXECMAINCODE = "ExecMainCode";
+
+  private static final java.lang.String LITERAL_EXECMAINSTATUS = "ExecMainStatus";
+
+  private static final java.lang.String LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC =
+      "ExecMainStartTimestampMonotonic";
+
+  private static final java.lang.String LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC =
+      "ExecMainExitTimestampMonotonic";
+
+  private static final java.lang.String LITERAL_INVOCATIONID = "InvocationID";
+
+  private static final java.lang.String LITERAL_FAILED = "failed";
+
+  private static final java.lang.String LITERAL_SUCCESS = "success";
+
+  private static final java.lang.String LITERAL_EXIT_CODE = "exit-code";
+
   /** Fixed maintenance targets only; no arbitrary Unit string. */
   public enum Target {
     INSPECTOR("schubert-nk-inbox-inspector.service"),
@@ -96,24 +128,24 @@ public final class InspectorUnitSnapshot {
                   "SendSIGKILL",
                   "no")
               .entrySet()) require(result.value(fixed.getKey()).equals(fixed.getValue()));
-      require(Set.of("yes", "no").contains(result.value("RemainAfterExit")));
+      require(Set.of(LITERAL_YES, "no").contains(result.value(LITERAL_REMAINAFTEREXIT)));
       if (target == Target.ARTEMIS
           || target == Target.MORNING
           || target == Target.API
-          || target == Target.WEB) require(result.value("RemainAfterExit").equals("no"));
+          || target == Target.WEB) require(result.value(LITERAL_REMAINAFTEREXIT).equals("no"));
       if (target == Target.BACKUP || target == Target.CLEANUP)
-        require(result.value("RemainAfterExit").equals("yes"));
-      for (String token : List.of("ActiveState", "SubState", "Result"))
+        require(result.value(LITERAL_REMAINAFTEREXIT).equals(LITERAL_YES));
+      for (String token : List.of(LITERAL_ACTIVESTATE, LITERAL_SUBSTATE, LITERAL_RESULT))
         require(result.value(token).matches("[a-z][a-z0-9-]{0,63}"));
       String job = result.value("Job");
       if (!job.isEmpty()) require(number(job, U32).signum() > 0);
-      number(result.value("MainPID"), U32);
-      number(result.value("ControlPID"), U32);
-      number(result.value("ExecMainCode"), BigInteger.valueOf(6));
-      number(result.value("ExecMainStatus"), BigInteger.valueOf(255));
-      number(result.value("ExecMainStartTimestampMonotonic"), U64);
-      number(result.value("ExecMainExitTimestampMonotonic"), U64);
-      String id = result.value("InvocationID");
+      number(result.value(LITERAL_MAINPID), U32);
+      number(result.value(LITERAL_CONTROLPID), U32);
+      number(result.value(LITERAL_EXECMAINCODE), BigInteger.valueOf(6));
+      number(result.value(LITERAL_EXECMAINSTATUS), BigInteger.valueOf(255));
+      number(result.value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC), U64);
+      number(result.value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC), U64);
+      String id = result.value(LITERAL_INVOCATIONID);
       if (!id.isEmpty()) require(id.matches("[0-9a-f]{32}") && !id.equals("0".repeat(32)));
       return result;
     } finally {
@@ -122,7 +154,7 @@ public final class InspectorUnitSnapshot {
   }
 
   public Optional<UUID> invocationId() {
-    String id = value("InvocationID");
+    String id = value(LITERAL_INVOCATIONID);
     if (id.isEmpty()) return Optional.empty();
     return Optional.of(
         new UUID(
@@ -135,10 +167,10 @@ public final class InspectorUnitSnapshot {
    */
   public boolean quiescent() {
     return value("Job").isEmpty()
-        && value("MainPID").equals("0")
-        && value("ControlPID").equals("0")
+        && value(LITERAL_MAINPID).equals("0")
+        && value(LITERAL_CONTROLPID).equals("0")
         && Set.of("inactive/dead", "active/exited", "failed/failed")
-            .contains(value("ActiveState") + "/" + value("SubState"));
+            .contains(value(LITERAL_ACTIVESTATE) + "/" + value(LITERAL_SUBSTATE));
   }
 
   /** Values alone never certify that startup was requested by the current parent/run. */
@@ -153,13 +185,13 @@ public final class InspectorUnitSnapshot {
     if (!quiescent()
         || current.isEmpty()
         || current.equals(previous)
-        || value("ActiveState").equals("failed")
-        || !value("Result").equals("success")
-        || !value("ExecMainCode").equals("1")) return OptionalInt.empty();
-    BigInteger start = new BigInteger(value("ExecMainStartTimestampMonotonic"));
-    BigInteger end = new BigInteger(value("ExecMainExitTimestampMonotonic"));
+        || value(LITERAL_ACTIVESTATE).equals(LITERAL_FAILED)
+        || !value(LITERAL_RESULT).equals(LITERAL_SUCCESS)
+        || !value(LITERAL_EXECMAINCODE).equals("1")) return OptionalInt.empty();
+    BigInteger start = new BigInteger(value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC));
+    BigInteger end = new BigInteger(value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC));
     if (start.signum() == 0 || end.compareTo(start) < 0) return OptionalInt.empty();
-    String status = value("ExecMainStatus");
+    String status = value(LITERAL_EXECMAINSTATUS);
     return status.equals("0")
         ? OptionalInt.of(0)
         : status.equals("10")
@@ -175,11 +207,11 @@ public final class InspectorUnitSnapshot {
     Objects.requireNonNull(invocation);
     return (target == Target.MORNING || target == Target.API || target == Target.WEB)
         && quiescent()
-        && value("InvocationID").equals(invocation)
+        && value(LITERAL_INVOCATIONID).equals(invocation)
         && invocationId().isPresent()
-        && value("Result").equals("exit-code")
-        && value("ExecMainCode").equals("1")
-        && value("ExecMainStatus").equals("30")
+        && value(LITERAL_RESULT).equals(LITERAL_EXIT_CODE)
+        && value(LITERAL_EXECMAINCODE).equals("1")
+        && value(LITERAL_EXECMAINSTATUS).equals("30")
         && executionStart().signum() > 0
         && executionEnd().compareTo(executionStart()) >= 0;
   }
@@ -188,7 +220,7 @@ public final class InspectorUnitSnapshot {
   public boolean failedRootStillStoppedAfter(InspectorUnitSnapshot before) {
     Objects.requireNonNull(before);
     return target == before.target
-        && before.failedRootGeneration(before.value("InvocationID"))
+        && before.failedRootGeneration(before.value(LITERAL_INVOCATIONID))
         && quiescent()
         && (sameStoppedExecution(before) || coldStopped());
   }
@@ -200,15 +232,15 @@ public final class InspectorUnitSnapshot {
         || !quiescent()
         || invocationId().isEmpty()
         || invocationId().equals(previous)
-        || !value("ExecMainCode").equals("1")) return Optional.empty();
-    BigInteger start = new BigInteger(value("ExecMainStartTimestampMonotonic"));
-    BigInteger end = new BigInteger(value("ExecMainExitTimestampMonotonic"));
+        || !value(LITERAL_EXECMAINCODE).equals("1")) return Optional.empty();
+    BigInteger start = new BigInteger(value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC));
+    BigInteger end = new BigInteger(value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC));
     if (start.signum() == 0 || end.compareTo(start) < 0) return Optional.empty();
     if (receiptAfter(previous).orElse(-1) == 0)
       return Optional.of(MorningBackupUnitCycle.Outcome.SUCCESS);
-    if (value("ActiveState").equals("failed")
-        && value("Result").equals("exit-code")
-        && !value("ExecMainStatus").equals("0"))
+    if (value(LITERAL_ACTIVESTATE).equals(LITERAL_FAILED)
+        && value(LITERAL_RESULT).equals(LITERAL_EXIT_CODE)
+        && !value(LITERAL_EXECMAINSTATUS).equals("0"))
       return Optional.of(MorningBackupUnitCycle.Outcome.FAILED);
     return Optional.empty();
   }
@@ -225,14 +257,14 @@ public final class InspectorUnitSnapshot {
   private boolean normalRejectedAfter(Target expected, Optional<UUID> previous) {
     Objects.requireNonNull(previous, "previous invocation");
     return target == expected
-        && value("RemainAfterExit").equals("yes")
+        && value(LITERAL_REMAINAFTEREXIT).equals(LITERAL_YES)
         && quiescent()
         && invocationId().isPresent()
         && !invocationId().equals(previous)
-        && value("ActiveState").equals("failed")
-        && value("Result").equals("exit-code")
-        && value("ExecMainCode").equals("1")
-        && value("ExecMainStatus").equals("30")
+        && value(LITERAL_ACTIVESTATE).equals(LITERAL_FAILED)
+        && value(LITERAL_RESULT).equals(LITERAL_EXIT_CODE)
+        && value(LITERAL_EXECMAINCODE).equals("1")
+        && value(LITERAL_EXECMAINSTATUS).equals("30")
         && executionStart().signum() > 0
         && executionEnd().compareTo(executionStart()) >= 0;
   }
@@ -241,39 +273,41 @@ public final class InspectorUnitSnapshot {
   public boolean running(long pid, String invocation) {
     Objects.requireNonNull(invocation, "manager invocation");
     if (target == Target.ARTEMIS)
-      return value("MainPID").equals(Long.toString(pid)) && brokerRunningInvocation(invocation);
+      return value(LITERAL_MAINPID).equals(Long.toString(pid))
+          && brokerRunningInvocation(invocation);
     return pid >= 2
         && pid <= Integer.MAX_VALUE
-        && value("MainPID").equals(Long.toString(pid))
-        && value("ControlPID").equals("0")
-        && value("InvocationID").equals(invocation)
-        && new BigInteger(value("ExecMainStartTimestampMonotonic")).signum() > 0
-        && value("ActiveState").equals("activating")
-        && value("SubState").equals("start");
+        && value(LITERAL_MAINPID).equals(Long.toString(pid))
+        && value(LITERAL_CONTROLPID).equals("0")
+        && value(LITERAL_INVOCATIONID).equals(invocation)
+        && new BigInteger(value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC)).signum() > 0
+        && value(LITERAL_ACTIVESTATE).equals("activating")
+        && value(LITERAL_SUBSTATE).equals("start");
   }
 
   public boolean runningInvocation(String invocation) {
     Objects.requireNonNull(invocation, "expected manager Invocation");
-    return running(Long.parseLong(value("MainPID")), invocation);
+    return running(Long.parseLong(value(LITERAL_MAINPID)), invocation);
   }
 
   /** SSC125/BROKERLIVE001..004: data only, never Ops/journal/root/permit authority. */
   public boolean brokerRunningInvocation(String invocation) {
     Objects.requireNonNull(invocation, "same actual broker invocation");
     return target == Target.ARTEMIS
-        && value("ActiveState").equals("active")
-        && value("SubState").equals("running")
+        && value(LITERAL_ACTIVESTATE).equals("active")
+        && value(LITERAL_SUBSTATE).equals("running")
         && value("Job").isEmpty()
-        && new BigInteger(value("MainPID")).compareTo(BigInteger.valueOf(2)) >= 0
-        && new BigInteger(value("MainPID")).compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0
-        && value("ControlPID").equals("0")
+        && new BigInteger(value(LITERAL_MAINPID)).compareTo(BigInteger.valueOf(2)) >= 0
+        && new BigInteger(value(LITERAL_MAINPID)).compareTo(BigInteger.valueOf(Integer.MAX_VALUE))
+            <= 0
+        && value(LITERAL_CONTROLPID).equals("0")
         && invocationId().isPresent()
-        && value("InvocationID").equals(invocation)
+        && value(LITERAL_INVOCATIONID).equals(invocation)
         && executionStart().signum() > 0
         && executionEnd().signum() == 0
-        && value("ExecMainCode").equals("0")
-        && value("ExecMainStatus").equals("0")
-        && value("Result").equals("success");
+        && value(LITERAL_EXECMAINCODE).equals("0")
+        && value(LITERAL_EXECMAINSTATUS).equals("0")
+        && value(LITERAL_RESULT).equals(LITERAL_SUCCESS);
   }
 
   public boolean matches(InspectorUnitSnapshot other) {
@@ -291,47 +325,47 @@ public final class InspectorUnitSnapshot {
 
   /** Package claims only; genuine gate/owner/freshness remain mandatory. */
   int normalExitCode() {
-    require(value("ExecMainCode").equals("1"));
-    return Integer.parseInt(value("ExecMainStatus"));
+    require(value(LITERAL_EXECMAINCODE).equals("1"));
+    return Integer.parseInt(value(LITERAL_EXECMAINSTATUS));
   }
 
   BigInteger executionStart() {
-    return new BigInteger(value("ExecMainStartTimestampMonotonic"));
+    return new BigInteger(value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC));
   }
 
   BigInteger executionEnd() {
-    return new BigInteger(value("ExecMainExitTimestampMonotonic"));
+    return new BigInteger(value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC));
   }
 
   /** SSC135: complete manager GC only, never an execution result or receipt zero. */
   boolean coldStopped() {
     return inactiveBaseline()
-        && value("InvocationID").isEmpty()
-        && value("ExecMainCode").equals("0")
-        && value("ExecMainStatus").equals("0")
-        && value("ExecMainStartTimestampMonotonic").equals("0")
-        && value("ExecMainExitTimestampMonotonic").equals("0")
-        && value("Result").equals("success");
+        && value(LITERAL_INVOCATIONID).isEmpty()
+        && value(LITERAL_EXECMAINCODE).equals("0")
+        && value(LITERAL_EXECMAINSTATUS).equals("0")
+        && value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC).equals("0")
+        && value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC).equals("0")
+        && value(LITERAL_RESULT).equals(LITERAL_SUCCESS);
   }
 
   /** Same five real execution values despite the legitimate stop state transition. */
   boolean sameStoppedExecution(InspectorUnitSnapshot before) {
     return Set.of("inactive/dead", "failed/failed")
-            .contains(value("ActiveState") + "/" + value("SubState"))
-        && Set.of("success", "exit-code").contains(value("Result"))
-        && value("ExecMainCode").equals("1")
-        && value("InvocationID").equals(before.value("InvocationID"))
-        && value("ExecMainStatus").equals(before.value("ExecMainStatus"))
-        && value("ExecMainStartTimestampMonotonic")
-            .equals(before.value("ExecMainStartTimestampMonotonic"))
-        && value("ExecMainExitTimestampMonotonic")
-            .equals(before.value("ExecMainExitTimestampMonotonic"));
+            .contains(value(LITERAL_ACTIVESTATE) + "/" + value(LITERAL_SUBSTATE))
+        && Set.of(LITERAL_SUCCESS, LITERAL_EXIT_CODE).contains(value(LITERAL_RESULT))
+        && value(LITERAL_EXECMAINCODE).equals("1")
+        && value(LITERAL_INVOCATIONID).equals(before.value(LITERAL_INVOCATIONID))
+        && value(LITERAL_EXECMAINSTATUS).equals(before.value(LITERAL_EXECMAINSTATUS))
+        && value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC)
+            .equals(before.value(LITERAL_EXECMAINSTARTTIMESTAMPMONOTONIC))
+        && value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC)
+            .equals(before.value(LITERAL_EXECMAINEXITTIMESTAMPMONOTONIC));
   }
 
   boolean inactiveBaseline() {
-    return value("ActiveState").equals("inactive")
-        && value("SubState").equals("dead")
-        && (target != Target.INSPECTOR || value("RemainAfterExit").equals("yes"))
+    return value(LITERAL_ACTIVESTATE).equals("inactive")
+        && value(LITERAL_SUBSTATE).equals("dead")
+        && (target != Target.INSPECTOR || value(LITERAL_REMAINAFTEREXIT).equals(LITERAL_YES))
         && quiescent();
   }
 
@@ -340,26 +374,28 @@ public final class InspectorUnitSnapshot {
     return target == Target.ARTEMIS
         && quiescent()
         && invocationId().isPresent()
-        && value("ExecMainCode").equals("1")
-        && value("ExecMainStatus").equals("143")
+        && value(LITERAL_EXECMAINCODE).equals("1")
+        && value(LITERAL_EXECMAINSTATUS).equals("143")
         && executionStart().signum() > 0
         && executionEnd().compareTo(executionStart()) >= 0
-        && ((value("ActiveState").equals("failed") && value("Result").equals("exit-code"))
-            || (value("ActiveState").equals("inactive") && value("Result").equals("success")));
+        && ((value(LITERAL_ACTIVESTATE).equals(LITERAL_FAILED)
+                && value(LITERAL_RESULT).equals(LITERAL_EXIT_CODE))
+            || (value(LITERAL_ACTIVESTATE).equals("inactive")
+                && value(LITERAL_RESULT).equals(LITERAL_SUCCESS)));
   }
 
   boolean heldCleanup() {
     return target == Target.CLEANUP
-        && value("ActiveState").equals("active")
-        && value("SubState").equals("exited")
+        && value(LITERAL_ACTIVESTATE).equals("active")
+        && value(LITERAL_SUBSTATE).equals("exited")
         && quiescent();
   }
 
   boolean heldMaintenance() {
     return (target == Target.CLEANUP || target == Target.INSPECTOR || target == Target.EXPIRY)
-        && value("RemainAfterExit").equals("yes")
-        && value("ActiveState").equals("active")
-        && value("SubState").equals("exited")
+        && value(LITERAL_REMAINAFTEREXIT).equals(LITERAL_YES)
+        && value(LITERAL_ACTIVESTATE).equals("active")
+        && value(LITERAL_SUBSTATE).equals("exited")
         && quiescent();
   }
 

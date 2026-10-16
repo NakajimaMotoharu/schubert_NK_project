@@ -45,11 +45,17 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class QuestionMutationInboxInspector {
+  private static final java.lang.String LITERAL_0000 = "0000";
+
+  private static final java.lang.String LITERAL_OWNER_USER_ID = "owner_user_id";
+
+  private static final java.lang.String LITERAL_QUESTION_ID = "question_id";
+
   private static final Map<String, Set<String>> CODES =
       Map.of(
-          "QSBRSP01", Set.of("0000", "0200", "0100", "9001"),
-          "NTCRSP01", Set.of("0000", "0200", "0104", "0107", "9001"),
-          "QDLRSP01", Set.of("0000", "0200", "0104", "9001"));
+          "QSBRSP01", Set.of(LITERAL_0000, "0200", "0100", "9001"),
+          "NTCRSP01", Set.of(LITERAL_0000, "0200", "0104", "0107", "9001"),
+          "QDLRSP01", Set.of(LITERAL_0000, "0200", "0104", "9001"));
   private static final String QUESTION =
       "select id,owner_user_id,operation_token,receipt_id,"
           + "submitted_at,is_deleted,deleted_at,deleted_by,version from schubert.questions where id=?";
@@ -156,7 +162,7 @@ public final class QuestionMutationInboxInspector {
         q -> {
           Instant submitted = time(q, "submitted_at");
           if (number(q, "id") != id
-              || number(q, "owner_user_id") != owner
+              || number(q, LITERAL_OWNER_USER_ID) != owner
               || !token.equals(requireValue(q.getObject("operation_token", UUID.class)))
               || !data.receiptId().equals(requireValue(q.getString("receipt_id")))
               || !data.submittedAt().equals(submitted.truncatedTo(ChronoUnit.MILLIS))
@@ -167,8 +173,8 @@ public final class QuestionMutationInboxInspector {
               id,
               j -> {
                 long job = number(j, "id");
-                if (number(j, "question_id") != id
-                    || number(j, "owner_user_id") != owner
+                if (number(j, LITERAL_QUESTION_ID) != id
+                    || number(j, LITERAL_OWNER_USER_ID) != owner
                     || !identity
                         .requestMessageId()
                         .equals(requireValue(j.getObject("message_id", UUID.class)))
@@ -224,9 +230,9 @@ public final class QuestionMutationInboxInspector {
         id,
         j -> {
           Instant cancelled = time(j, "cancelled_at");
-          long question = number(j, "question_id");
+          long question = number(j, LITERAL_QUESTION_ID);
           if (number(j, "id") != id
-              || number(j, "owner_user_id") != owner
+              || number(j, LITERAL_OWNER_USER_ID) != owner
               || !requireValue(j.getString("state")).equals("CANCELLED")
               || !version(j)
               || !cancelled.equals(time(j, "state_changed_at"))
@@ -244,8 +250,8 @@ public final class QuestionMutationInboxInspector {
               valid =
                   !n.next()
                       || (number(n, "job_id") == id
-                          && number(n, "question_id") == question
-                          && number(n, "owner_user_id") == owner
+                          && number(n, LITERAL_QUESTION_ID) == question
+                          && number(n, LITERAL_OWNER_USER_ID) == owner
                           && requireValue(n.getString("state")).equals("CANCELLED")
                           && cancelled.equals(time(n, "state_changed_at"))
                           && !n.next());
@@ -273,7 +279,7 @@ public final class QuestionMutationInboxInspector {
           if (number(q, "id") != id
               || !requireValue(q.getObject("is_deleted", Boolean.class))
               || !version(q)
-              || (code.equals("0000") && actor != owner)
+              || (code.equals(LITERAL_0000) && actor != owner)
               || deleted.isAfter(completed)
               || !data.deletedAt().equals(deleted.truncatedTo(ChronoUnit.MILLIS))) return false;
           boolean valid;
@@ -285,7 +291,7 @@ public final class QuestionMutationInboxInspector {
             try (var a = s.executeQuery()) {
               valid =
                   !a.next()
-                      || (number(a, "question_id") == id
+                      || (number(a, LITERAL_QUESTION_ID) == id
                           && requireValue(a.getObject("is_deleted", Boolean.class))
                           && actor == number(a, "deleted_by")
                           && deleted.equals(time(a, "deleted_at"))

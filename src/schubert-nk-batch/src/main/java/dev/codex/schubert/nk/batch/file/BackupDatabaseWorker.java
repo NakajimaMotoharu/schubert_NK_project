@@ -35,6 +35,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class BackupDatabaseWorker {
+  private static final java.lang.String LITERAL_SCHUBERT_NK_DUMP = "schubert_nk.dump";
+
   interface Ports {
     FixedServiceIdentity.Value identity() throws IOException;
 
@@ -124,9 +126,9 @@ public final class BackupDatabaseWorker {
                                   require(file(p, fixed).size() == 0);
                                   return true;
                                 });
-                            child.publishAs(file, "schubert_nk.dump");
+                            child.publishAs(file, LITERAL_SCHUBERT_NK_DUMP);
                             child.atExistingEntryHandle(
-                                "schubert_nk.dump",
+                                LITERAL_SCHUBERT_NK_DUMP,
                                 output -> {
                                   Metadata empty = file(output, fixed);
                                   require(empty.device() == original.device() && empty.size() == 0);
@@ -158,7 +160,7 @@ public final class BackupDatabaseWorker {
                                   require(
                                       completed.equals(
                                           child.atExistingEntryHandle(
-                                              "schubert_nk.dump", p -> file(p, fixed))));
+                                              LITERAL_SCHUBERT_NK_DUMP, p -> file(p, fixed))));
                                   return true;
                                 });
                             require(identity(original, directory(child, fixed, false)));
@@ -192,7 +194,7 @@ public final class BackupDatabaseWorker {
                 require(original.device() == parent.device());
                 var captured =
                     child.atExistingEntryHandle(
-                        "schubert_nk.dump",
+                        LITERAL_SCHUBERT_NK_DUMP,
                         output -> {
                           Metadata initial = file(output, fixed);
                           require(
@@ -235,7 +237,8 @@ public final class BackupDatabaseWorker {
                         });
                 require(
                     captured.equals(
-                        child.atExistingEntryHandle("schubert_nk.dump", p -> file(p, fixed))));
+                        child.atExistingEntryHandle(
+                            LITERAL_SCHUBERT_NK_DUMP, p -> file(p, fixed))));
                 require(original.equals(directory(child, fixed, false)));
                 require(parent.equals(directory(backup, fixed, false)));
                 require(fixed.equals(ports.identity()) && before.equals(ports.self()));

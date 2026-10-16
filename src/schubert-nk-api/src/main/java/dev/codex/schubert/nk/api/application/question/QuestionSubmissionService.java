@@ -71,6 +71,10 @@ import org.postgresql.util.PSQLException;
  * SSC151..155; PT-QST-ASUB-001..007. Caller owns pool, keys and dispatcher lifetime.
  */
 public final class QuestionSubmissionService implements SyncRequestProcessor {
+  private static final java.lang.String LITERAL_001 = "001";
+
+  private static final java.lang.String LITERAL_QSBRSP01 = "QSBRSP01";
+
   private final DataSource database;
   private final AuthenticationContextVerifier authentication;
   private final JdbcInboxCoordinator inbox;
@@ -330,7 +334,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
                 request.header().messageId(),
                 OutboxDestination.ASYNC_WORK,
                 "QWKREQ01",
-                "001",
+                LITERAL_001,
                 wire,
                 at,
                 at));
@@ -359,8 +363,8 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
         return new InboxCompletion(
             InboxCompletionState.COMPLETED,
             reference,
-            "QSBRSP01",
-            "001",
+            LITERAL_QSBRSP01,
+            LITERAL_001,
             Optional.of(
                 snapshots.encrypt(
                     identity(request.header().messageId(), actor),
@@ -421,8 +425,8 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
     require(execution.status() != InboxExecutionStatus.IN_PROGRESS);
     var completion = execution.completion().orElseThrow();
     require(completion.state() == InboxCompletionState.COMPLETED);
-    require(completion.responseLayoutId().equals("QSBRSP01"));
-    require(completion.responseVersion().equals("001"));
+    require(completion.responseLayoutId().equals(LITERAL_QSBRSP01));
+    require(completion.responseVersion().equals(LITERAL_001));
     byte[] body =
         snapshots.decrypt(
             identity(bound.sourceMessageId(), actor),
@@ -431,7 +435,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
             completion.responseSnapshot().orElseThrow());
     try {
       var header = HeaderCodec.standard().peek(body);
-      require(header.layoutId().value().equals("QSBRSP01"));
+      require(header.layoutId().value().equals(LITERAL_QSBRSP01));
       require(header.correlationId().equals(bound.sourceMessageId()));
       require(header.resultCode().orElseThrow() == ResultCode.SUCCESS);
       require(header.sentAt().equals(completion.completedAt().truncatedTo(ChronoUnit.MILLIS)));
@@ -592,7 +596,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
       Optional<QuestionSubmitResponseData> data,
       ResultCode code,
       Instant at) {
-    var layout = new LayoutId("QSBRSP01");
+    var layout = new LayoutId(LITERAL_QSBRSP01);
     var payload =
         PayloadCodec.standard()
             .encode(
@@ -654,7 +658,8 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
   }
 
   private static ResponseSnapshotIdentity identity(UUID source, AuthenticatedActor actor) {
-    return ResponseSnapshotIdentity.authenticated(source, "QSBRSP01", "001", actor.userId());
+    return ResponseSnapshotIdentity.authenticated(
+        source, LITERAL_QSBRSP01, LITERAL_001, actor.userId());
   }
 
   private static long oneId(PreparedStatement statement) throws SQLException {

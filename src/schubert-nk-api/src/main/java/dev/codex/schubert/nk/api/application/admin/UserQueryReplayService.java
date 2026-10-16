@@ -37,6 +37,12 @@ import java.util.UUID;
  * SSC-035/PG-D-088/PT-ADM-044..047. Caller verifies current ADMIN and Inbox HMAC separately.
  */
 public final class UserQueryReplayService {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
+  private static final java.lang.String LITERAL_ACTOR = "actor";
+
+  private static final java.lang.String LITERAL_RESPONSEID = "responseId";
+
   private final ResponseSnapshotCodec snapshots;
 
   public UserQueryReplayService(ResponseSnapshotCodec snapshots) {
@@ -68,10 +74,10 @@ public final class UserQueryReplayService {
       TypedPayloadValues response,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(response, "response");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       requireAdmin(actor);
@@ -97,10 +103,10 @@ public final class UserQueryReplayService {
       ResultCode code,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(completedAt, "completedAt");
     try {
       requireAdmin(actor);
@@ -116,8 +122,8 @@ public final class UserQueryReplayService {
 
   public Snapshot read(
       UserQueryRequest request, AuthenticatedActor actor, InboxCompletion completion) {
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
     Objects.requireNonNull(completion, "completion");
     try {
       requireAdmin(actor);
@@ -176,9 +182,9 @@ public final class UserQueryReplayService {
       Instant sentAt,
       boolean replay) {
     Objects.requireNonNull(saved, "saved");
-    Objects.requireNonNull(request, "request");
-    Objects.requireNonNull(actor, "actor");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
+    Objects.requireNonNull(actor, LITERAL_ACTOR);
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       requireAdmin(actor);
@@ -199,9 +205,9 @@ public final class UserQueryReplayService {
 
   public byte[] failure(
       UserQueryRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
-    Objects.requireNonNull(responseId, "responseId");
+    Objects.requireNonNull(responseId, LITERAL_RESPONSEID);
     Objects.requireNonNull(sentAt, "sentAt");
     try {
       require(

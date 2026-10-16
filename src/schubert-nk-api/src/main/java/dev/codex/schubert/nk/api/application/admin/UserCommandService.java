@@ -30,6 +30,8 @@ import java.util.Optional;
  * PG-D-083; PT-ADM-014..023.
  */
 public final class UserCommandService {
+  private static final java.lang.String LITERAL_ACTIVE = "ACTIVE";
+
   @FunctionalInterface
   interface PasswordEncoding {
     String encode(char[] password);
@@ -104,7 +106,7 @@ public final class UserCommandService {
                 s.setString(2, name.key());
                 s.setString(3, hash);
                 s.setString(4, role.wireValue());
-                s.setString(5, enabled ? "ACTIVE" : "DISABLED");
+                s.setString(5, enabled ? LITERAL_ACTIVE : "DISABLED");
                 for (int index = 6; index <= 8; index++)
                   s.setObject(index, metadata.at().atOffset(java.time.ZoneOffset.UTC));
                 s.setLong(9, actor.userId());
@@ -278,7 +280,8 @@ public final class UserCommandService {
               }) {
             int p = 1;
             switch (kind) {
-              case ENABLE, DISABLE -> s.setString(p++, next.enabled() ? "ACTIVE" : "DISABLED");
+              case ENABLE, DISABLE ->
+                  s.setString(p++, next.enabled() ? LITERAL_ACTIVE : "DISABLED");
               case PROMOTE, DEMOTE -> s.setString(p++, next.role().wireValue());
               case RESET_PASSWORD -> {
                 s.setString(p++, next.hash().orElseThrow());
@@ -359,7 +362,7 @@ public final class UserCommandService {
         Optional<State> value = Optional.empty();
         if (r.next()) {
           String status = text(r, "status");
-          require(status.equals("ACTIVE") || status.equals("DISABLED"));
+          require(status.equals(LITERAL_ACTIVE) || status.equals("DISABLED"));
           long version = number(r, "version");
           long failed = number(r, "failed_count");
           require(version >= 0 && version <= 999_999_999 && failed >= 0 && failed <= 5);
@@ -371,7 +374,7 @@ public final class UserCommandService {
                       new UserId(number(r, "id")),
                       text(r, "username"),
                       UserRole.valueOf(text(r, "role")),
-                      status.equals("ACTIVE"),
+                      status.equals(LITERAL_ACTIVE),
                       version,
                       locked == null ? Optional.empty() : Optional.of(locked.toInstant()),
                       Math.toIntExact(failed)));

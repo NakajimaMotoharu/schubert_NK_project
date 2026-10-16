@@ -30,6 +30,10 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
+  private static final java.lang.String LITERAL_SD_BUS_MESSAGE_UNREF = "sd_bus_message_unref";
+
+  private static final java.lang.String LITERAL_RESTRICTED = "restricted";
+
   private static final String DESTINATION = "org.freedesktop.systemd1";
 
   @FunctionalInterface
@@ -161,7 +165,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
             text(member));
     MemorySegment request = result.get(ValueLayout.ADDRESS, 0);
     return ResourceScope.use(
-        () -> release("sd_bus_message_unref", request),
+        () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, request),
         () -> {
           if (!(status instanceof Integer code) || code < 0 || request.address() == 0)
             throw LinuxSystemdQuery.unavailable();
@@ -174,7 +178,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
               call("sd_bus_call", bus, request, remaining(micros), MemorySegment.NULL, output);
           MemorySegment reply = output.get(ValueLayout.ADDRESS, 0);
           return ResourceScope.use(
-              () -> release("sd_bus_message_unref", reply),
+              () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, reply),
               () -> {
                 if (!(called instanceof Integer ok) || ok < 0 || reply.address() == 0)
                   throw LinuxSystemdQuery.unavailable();
@@ -190,7 +194,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   }
 
   @Override
-  @SuppressWarnings("restricted")
+  @SuppressWarnings(LITERAL_RESTRICTED)
   public String read(
       RootStartupContext.Service service, LinuxSystemdQuery.Property property, long micros)
       throws IOException {
@@ -265,7 +269,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
             signature);
     MemorySegment message = result.get(ValueLayout.ADDRESS, 0);
     return ResourceScope.use(
-        () -> release("sd_bus_message_unref", message),
+        () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, message),
         () -> {
           if (!(status instanceof Integer code) || code < 0 || message.address() == 0)
             throw LinuxSystemdQuery.unavailable();
@@ -280,7 +284,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
         });
   }
 
-  @SuppressWarnings("restricted")
+  @SuppressWarnings(LITERAL_RESTRICTED)
   private static String string(MemorySegment value) throws IOException {
     if (value.address() == 0) throw LinuxSystemdQuery.unavailable();
     MemorySegment memory = value.reinterpret(4097);
@@ -331,7 +335,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   static final class Native {
     private Native() {}
 
-    @SuppressWarnings("restricted")
+    @SuppressWarnings(LITERAL_RESTRICTED)
     static Calls calls() throws IOException {
       Path path =
           library(
@@ -373,7 +377,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
           || (mode & 0x12) != 0) throw LinuxSystemdQuery.unavailable();
     }
 
-    @SuppressWarnings("restricted")
+    @SuppressWarnings(LITERAL_RESTRICTED)
     static Calls bind(SymbolLookup systemd, SymbolLookup libc) throws IOException {
       var handles = new HashMap<String, MethodHandle>();
       var pointer = ValueLayout.ADDRESS;
@@ -412,7 +416,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
                   "sd_bus_message_read_basic",
                   FunctionDescriptor.of(integer, pointer, octet, pointer)),
               Map.entry("sd_bus_close_unref", FunctionDescriptor.of(pointer, pointer)),
-              Map.entry("sd_bus_message_unref", FunctionDescriptor.of(pointer, pointer)),
+              Map.entry(LITERAL_SD_BUS_MESSAGE_UNREF, FunctionDescriptor.of(pointer, pointer)),
               Map.entry(
                   "sd_bus_get_property_string",
                   FunctionDescriptor.of(

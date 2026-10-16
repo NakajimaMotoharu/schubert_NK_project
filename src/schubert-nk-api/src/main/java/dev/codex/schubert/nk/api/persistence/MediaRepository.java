@@ -56,6 +56,8 @@ import java.util.function.IntFunction;
  * projections alone must never authorize a file response.
  */
 public final class MediaRepository {
+  private static final java.lang.String LITERAL_CATEGORY = "category";
+
   /** PT-MED-015/017: canonical N12 identity and SS333 Audio OGG mapping, not file admission. */
   public Optional<TypedPayloadValues> audioMetadata(
       Connection connection, AuthenticatedActor actor, AudioDescriptorRequestData request) {
@@ -113,7 +115,7 @@ public final class MediaRepository {
               base.mimeType(),
               base.contentDisposition(),
               text(r, "title"),
-              VideoCategory.valueOf(text(r, "category")),
+              VideoCategory.valueOf(text(r, LITERAL_CATEGORY)),
               DisplayPath.of(text(r, "display_path")));
         });
   }
@@ -215,7 +217,7 @@ public final class MediaRepository {
         50,
         AnimationListResponseData::new,
         r -> {
-          var kind = AnimationCategory.valueOf(text(r, "category"));
+          var kind = AnimationCategory.valueOf(text(r, LITERAL_CATEGORY));
           if (kind == AnimationCategory.SUBTRACK && r.getString("verified_parent") == null)
             throw new SQLException("invalid animation parent metadata");
           return new AnimationRecord(
@@ -244,7 +246,7 @@ public final class MediaRepository {
         "MCTRSP01",
         20,
         MusicCategoryResponseData::new,
-        r -> new MusicCategoryRecord(text(r, "category"), bounded(r, "track_count", 999999)));
+        r -> new MusicCategoryRecord(text(r, LITERAL_CATEGORY), bounded(r, "track_count", 999999)));
   }
 
   /** PT-MED-010: exact category bind; no SQL interpolation, normalization or filesystem scan. */
@@ -287,7 +289,7 @@ public final class MediaRepository {
             new MusicTrackRecord(
                 text(r, "logical_id"),
                 text(r, "title"),
-                text(r, "category"),
+                text(r, LITERAL_CATEGORY),
                 text(r, "section"),
                 DisplayPath.of(text(r, "display_path")),
                 number(r, "byte_size"),

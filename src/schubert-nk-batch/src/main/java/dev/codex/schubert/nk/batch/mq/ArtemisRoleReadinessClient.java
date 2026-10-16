@@ -18,6 +18,26 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ArtemisRoleReadinessClient {
+  private static final java.lang.String LITERAL_SEND = "send";
+
+  private static final java.lang.String LITERAL_CONSUME = "consume";
+
+  private static final java.lang.String LITERAL_MANAGE = "manage";
+
+  private static final java.lang.String LITERAL_BROWSE = "browse";
+
+  private static final java.lang.String LITERAL_VIEW = "view";
+
+  private static final java.lang.String LITERAL_EDIT = "edit";
+
+  private static final java.lang.String LITERAL_NK_WEB = "nk_web";
+
+  private static final java.lang.String LITERAL_NK_API = "nk_api";
+
+  private static final java.lang.String LITERAL_NK_OPS = "nk_ops";
+
+  private static final java.lang.String LITERAL_NK_MQ_MAINTENANCE = "nk_mq_maintenance";
+
   @FunctionalInterface
   interface Reader {
     @Nullable Object read(ClientSession session, String addressMatch);
@@ -25,18 +45,18 @@ public final class ArtemisRoleReadinessClient {
 
   private static final Set<String> PERMISSIONS =
       Set.of(
-          "send",
-          "consume",
+          LITERAL_SEND,
+          LITERAL_CONSUME,
           "createDurableQueue",
           "deleteDurableQueue",
           "createNonDurableQueue",
           "deleteNonDurableQueue",
-          "manage",
-          "browse",
+          LITERAL_MANAGE,
+          LITERAL_BROWSE,
           "createAddress",
           "deleteAddress",
-          "view",
-          "edit");
+          LITERAL_VIEW,
+          LITERAL_EDIT);
   private static final Set<String> RETAINED_FIELDS = fields();
   private static final Map<String, Map<String, Set<String>>> RETAINED_APPROVED = approved();
 
@@ -46,73 +66,85 @@ public final class ArtemisRoleReadinessClient {
             Map.of(
                 "nk.sync.request",
                     Map.of(
-                        "nk_web",
-                        Set.of("send"),
-                        "nk_api",
-                        Set.of("consume"),
-                        "nk_ops",
-                        Set.of("browse")),
+                        LITERAL_NK_WEB,
+                        Set.of(LITERAL_SEND),
+                        LITERAL_NK_API,
+                        Set.of(LITERAL_CONSUME),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_BROWSE)),
                 "nk.sync.reply.web",
                     Map.of(
-                        "nk_web",
-                        Set.of("consume"),
-                        "nk_api",
-                        Set.of("send"),
-                        "nk_ops",
-                        Set.of("browse")),
+                        LITERAL_NK_WEB,
+                        Set.of(LITERAL_CONSUME),
+                        LITERAL_NK_API,
+                        Set.of(LITERAL_SEND),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_BROWSE)),
                 "nk.async.work",
-                    Map.of("nk_api", Set.of("send", "consume"), "nk_ops", Set.of("send", "browse")),
+                    Map.of(
+                        LITERAL_NK_API,
+                        Set.of(LITERAL_SEND, LITERAL_CONSUME),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_SEND, LITERAL_BROWSE)),
                 "nk.web.log",
                     Map.of(
-                        "nk_web",
-                        Set.of("send"),
-                        "nk_api",
-                        Set.of("consume"),
-                        "nk_ops",
-                        Set.of("browse")),
+                        LITERAL_NK_WEB,
+                        Set.of(LITERAL_SEND),
+                        LITERAL_NK_API,
+                        Set.of(LITERAL_CONSUME),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_BROWSE)),
                 "nk.dead.letter",
                     Map.of(
-                        "nk_web",
-                        Set.of("send"),
-                        "nk_api",
-                        Set.of("send"),
-                        "nk_ops",
-                        Set.of("consume", "browse", "manage")),
+                        LITERAL_NK_WEB,
+                        Set.of(LITERAL_SEND),
+                        LITERAL_NK_API,
+                        Set.of(LITERAL_SEND),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_CONSUME, LITERAL_BROWSE, LITERAL_MANAGE)),
                 "nk.expiry",
                     Map.of(
-                        "nk_mq_maintenance",
-                        Set.of("consume", "browse"),
-                        "nk_ops",
-                        Set.of("consume", "browse", "manage")),
+                        LITERAL_NK_MQ_MAINTENANCE,
+                        Set.of(LITERAL_CONSUME, LITERAL_BROWSE),
+                        LITERAL_NK_OPS,
+                        Set.of(LITERAL_CONSUME, LITERAL_BROWSE, LITERAL_MANAGE)),
                 "activemq.management.#",
                     Map.of(
-                        "nk_ops",
+                        LITERAL_NK_OPS,
                         Set.of(
-                            "send",
-                            "consume",
-                            "manage",
+                            LITERAL_SEND,
+                            LITERAL_CONSUME,
+                            LITERAL_MANAGE,
                             "createAddress",
                             "deleteAddress",
                             "createNonDurableQueue",
                             "deleteNonDurableQueue"),
-                        "nk_mq_maintenance",
+                        LITERAL_NK_MQ_MAINTENANCE,
                         Set.of(
-                            "send",
-                            "consume",
-                            "manage",
+                            LITERAL_SEND,
+                            LITERAL_CONSUME,
+                            LITERAL_MANAGE,
                             "createAddress",
                             "deleteAddress",
                             "createNonDurableQueue",
                             "deleteNonDurableQueue"))));
-    roles.put("mops.#", Map.of("nk_ops", Set.of("manage", "view", "edit")));
+    roles.put("mops.#", Map.of(LITERAL_NK_OPS, Set.of(LITERAL_MANAGE, LITERAL_VIEW, LITERAL_EDIT)));
     var view =
-        Map.of("nk_ops", Set.of("manage", "view"), "nk_mq_maintenance", Set.of("manage", "view"));
+        Map.of(
+            LITERAL_NK_OPS,
+            Set.of(LITERAL_MANAGE, LITERAL_VIEW),
+            LITERAL_NK_MQ_MAINTENANCE,
+            Set.of(LITERAL_MANAGE, LITERAL_VIEW));
     roles.put("mops.queue.nk.expiry.q.countMessages", view);
     roles.put("mops.queue.nk.expiry.q.getMessageCount", view);
     roles.put("mops.queue.nk.expiry.q.getPersistentSize", view);
     roles.put(
         "mops.queue.nk.expiry.q.removeMessages",
-        Map.of("nk_ops", Set.of("manage", "edit"), "nk_mq_maintenance", Set.of("manage", "edit")));
+        Map.of(
+            LITERAL_NK_OPS,
+            Set.of(LITERAL_MANAGE, LITERAL_EDIT),
+            LITERAL_NK_MQ_MAINTENANCE,
+            Set.of(LITERAL_MANAGE, LITERAL_EDIT)));
     return Map.copyOf(roles);
   }
 

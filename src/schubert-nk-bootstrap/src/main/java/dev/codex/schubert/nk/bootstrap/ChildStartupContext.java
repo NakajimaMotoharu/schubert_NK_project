@@ -30,6 +30,18 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ChildStartupContext {
+  private static final java.lang.String LITERAL_LOADSTATE = "LoadState";
+
+  private static final java.lang.String LITERAL_ACTIVESTATE = "ActiveState";
+
+  private static final java.lang.String LITERAL_SUBSTATE = "SubState";
+
+  private static final java.lang.String LITERAL_MAINPID = "MainPID";
+
+  private static final java.lang.String LITERAL_INVOCATIONID = "InvocationID";
+
+  private static final java.lang.String LITERAL_CONTROLGROUP = "ControlGroup";
+
   /** Maintenance parents only. It grants neither ordinary startup proof nor caller-selected PID. */
   public enum MaintenanceParent {
     MORNING("schubert-nk-morning-controller.service"),
@@ -196,21 +208,23 @@ public final class ChildStartupContext {
               .equals(
                   Set.of(
                       "Id",
-                      "LoadState",
-                      "ActiveState",
-                      "SubState",
-                      "MainPID",
-                      "InvocationID",
-                      "ControlGroup")));
+                      LITERAL_LOADSTATE,
+                      LITERAL_ACTIVESTATE,
+                      LITERAL_SUBSTATE,
+                      LITERAL_MAINPID,
+                      LITERAL_INVOCATIONID,
+                      LITERAL_CONTROLGROUP)));
       require("schubert-nk-inbox-inspector.service".equals(values.get("Id")));
       require(
-          "loaded".equals(values.get("LoadState"))
-              && "activating".equals(values.get("ActiveState"))
-              && "start".equals(values.get("SubState")));
-      require(invocation.equals(values.get("InvocationID")));
+          "loaded".equals(values.get(LITERAL_LOADSTATE))
+              && "activating".equals(values.get(LITERAL_ACTIVESTATE))
+              && "start".equals(values.get(LITERAL_SUBSTATE)));
+      require(invocation.equals(values.get(LITERAL_INVOCATIONID)));
       require(
-          "/system.slice/schubert-nk-inbox-inspector.service".equals(values.get("ControlGroup")));
-      long main = positive(Objects.requireNonNull(values.get("MainPID")), Integer.MAX_VALUE, 10);
+          "/system.slice/schubert-nk-inbox-inspector.service"
+              .equals(values.get(LITERAL_CONTROLGROUP)));
+      long main =
+          positive(Objects.requireNonNull(values.get(LITERAL_MAINPID)), Integer.MAX_VALUE, 10);
       require(main >= 2 && main != child.pid());
       var wrapper = capture(main, false);
       requireInspectorActor(wrapper, boot, fixed);
@@ -279,21 +293,22 @@ public final class ChildStartupContext {
               .equals(
                   Set.of(
                       "Id",
-                      "LoadState",
-                      "ActiveState",
-                      "SubState",
-                      "MainPID",
-                      "InvocationID",
-                      "ControlGroup")));
+                      LITERAL_LOADSTATE,
+                      LITERAL_ACTIVESTATE,
+                      LITERAL_SUBSTATE,
+                      LITERAL_MAINPID,
+                      LITERAL_INVOCATIONID,
+                      LITERAL_CONTROLGROUP)));
       require(
           (caddy ? "caddy.service" : "artemis.service").equals(values.get("Id"))
-              && "loaded".equals(values.get("LoadState"))
-              && "active".equals(values.get("ActiveState"))
-              && "running".equals(values.get("SubState"))
-              && invocation.equals(values.get("InvocationID"))
+              && "loaded".equals(values.get(LITERAL_LOADSTATE))
+              && "active".equals(values.get(LITERAL_ACTIVESTATE))
+              && "running".equals(values.get(LITERAL_SUBSTATE))
+              && invocation.equals(values.get(LITERAL_INVOCATIONID))
               && (caddy ? "/system.slice/caddy.service" : "/system.slice/artemis.service")
-                  .equals(values.get("ControlGroup")));
-      long pid = positive(Objects.requireNonNull(values.get("MainPID")), Integer.MAX_VALUE, 10);
+                  .equals(values.get(LITERAL_CONTROLGROUP)));
+      long pid =
+          positive(Objects.requireNonNull(values.get(LITERAL_MAINPID)), Integer.MAX_VALUE, 10);
       require(pid >= 2);
       var actual = capture(pid, false, fixed.uid());
       require(
@@ -351,19 +366,20 @@ public final class ChildStartupContext {
               .equals(
                   Set.of(
                       "Id",
-                      "LoadState",
-                      "ActiveState",
-                      "SubState",
-                      "MainPID",
-                      "InvocationID",
-                      "ControlGroup")));
-      require(kind.unit.equals(values.get("Id")) && "loaded".equals(values.get("LoadState")));
+                      LITERAL_LOADSTATE,
+                      LITERAL_ACTIVESTATE,
+                      LITERAL_SUBSTATE,
+                      LITERAL_MAINPID,
+                      LITERAL_INVOCATIONID,
+                      LITERAL_CONTROLGROUP)));
+      require(kind.unit.equals(values.get("Id")) && "loaded".equals(values.get(LITERAL_LOADSTATE)));
       require(
-          "activating".equals(values.get("ActiveState")) && "start".equals(values.get("SubState")));
-      require(Long.toString(claimed.pid()).equals(values.get("MainPID")));
-      require(claimed.invocation().equals(values.get("InvocationID")));
+          "activating".equals(values.get(LITERAL_ACTIVESTATE))
+              && "start".equals(values.get(LITERAL_SUBSTATE)));
+      require(Long.toString(claimed.pid()).equals(values.get(LITERAL_MAINPID)));
+      require(claimed.invocation().equals(values.get(LITERAL_INVOCATIONID)));
       String group = "/system.slice/" + kind.unit;
-      require(group.equals(values.get("ControlGroup")));
+      require(group.equals(values.get(LITERAL_CONTROLGROUP)));
       var observed = capture(claimed.pid(), true);
       require(owner.boot().toString().equals(observed.boot()));
       require(claimed.startTicks() == observed.startTicks());

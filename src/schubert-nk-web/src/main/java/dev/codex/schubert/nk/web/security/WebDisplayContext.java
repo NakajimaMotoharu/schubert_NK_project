@@ -14,6 +14,10 @@ import org.springframework.security.web.csrf.DefaultCsrfToken;
  * UI222/226; SS313/314/352; SSC-047/PG-D-116/PT-WEB-148..157.
  */
 public final class WebDisplayContext {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
+  private static final java.lang.String LITERAL_CSRF = "_csrf";
+
   private static final String ATTRIBUTE = WebDisplayContext.class.getName();
   private final TopBarViewModel retainedTopBar;
   private final WebCsrfToken csrf;
@@ -24,7 +28,7 @@ public final class WebDisplayContext {
   }
 
   static void capture(HttpServletRequest request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     var principal = request.getUserPrincipal();
     if (principal == null) {
       request.removeAttribute(ATTRIBUTE);
@@ -35,7 +39,7 @@ public final class WebDisplayContext {
   }
 
   static void captureDenied(HttpServletRequest request, Optional<SessionPrincipal> actor) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     request.removeAttribute(ATTRIBUTE);
     if (actor.isPresent() && request.getAttribute(CsrfToken.class.getName()) != null)
@@ -44,14 +48,14 @@ public final class WebDisplayContext {
 
   private static void capture(HttpServletRequest request, SessionPrincipal closed) {
     Object token = request.getAttribute(CsrfToken.class.getName());
-    if (!(token instanceof CsrfToken supplied) || !"_csrf".equals(supplied.getParameterName()))
+    if (!(token instanceof CsrfToken supplied) || !LITERAL_CSRF.equals(supplied.getParameterName()))
       throw new SessionStoreException();
     var csrf = WebCsrfToken.parse(Objects.requireNonNull(supplied.getToken(), "csrf"));
     request.setAttribute(ATTRIBUTE, new WebDisplayContext(TopBarViewModel.from(closed), csrf));
   }
 
   public static Optional<WebDisplayContext> existing(HttpServletRequest request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Object value = request.getAttribute(ATTRIBUTE);
     if (value == null) return Optional.empty();
     if (value instanceof WebDisplayContext context) return Optional.of(context);
@@ -60,21 +64,22 @@ public final class WebDisplayContext {
 
   /** Mandatory after API0102/local identity invalidation, before rendering or redirecting. */
   public static void clear(HttpServletRequest request) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     request.removeAttribute(ATTRIBUTE);
     request.removeAttribute(CsrfToken.class.getName());
-    request.removeAttribute("_csrf");
+    request.removeAttribute(LITERAL_CSRF);
   }
 
   static void restore(HttpServletRequest request) {
     var snapshot = existing(request);
     request.removeAttribute(CsrfToken.class.getName());
-    request.removeAttribute("_csrf");
+    request.removeAttribute(LITERAL_CSRF);
     if (snapshot.isPresent()) {
       var token =
-          new DefaultCsrfToken("X-CSRF-TOKEN", "_csrf", snapshot.orElseThrow().csrf.formValue());
+          new DefaultCsrfToken(
+              "X-CSRF-TOKEN", LITERAL_CSRF, snapshot.orElseThrow().csrf.formValue());
       request.setAttribute(CsrfToken.class.getName(), token);
-      request.setAttribute("_csrf", token);
+      request.setAttribute(LITERAL_CSRF, token);
     }
   }
 

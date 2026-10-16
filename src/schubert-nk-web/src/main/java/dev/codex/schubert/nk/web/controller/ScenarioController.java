@@ -50,6 +50,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class ScenarioController {
+  private static final java.lang.String LITERAL_PAGE = "page";
+
   private final ScenarioWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -72,7 +74,7 @@ public final class ScenarioController {
     var form = ScenarioSearchForm.bind(parameters);
     if (!form.isValid()) {
       response.setStatus(400);
-      model.addAttribute("page", ScenarioSearchViewModel.invalid(actor, form));
+      model.addAttribute(LITERAL_PAGE, ScenarioSearchViewModel.invalid(actor, form));
       return "search";
     }
     var query = form.toRequest();
@@ -116,7 +118,7 @@ public final class ScenarioController {
       response.sendError(503);
       return null;
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     return "search";
   }
 
@@ -134,7 +136,7 @@ public final class ScenarioController {
     if (result.isEmpty()) return null;
     var records =
         result.orElseThrow().records().stream().map(record -> (GameRecord) record).toList();
-    model.addAttribute("page", GameListViewModel.from(actor, records));
+    model.addAttribute(LITERAL_PAGE, GameListViewModel.from(actor, records));
     return "scenarios";
   }
 
@@ -162,7 +164,7 @@ public final class ScenarioController {
       response.sendError(404);
       return null;
     }
-    model.addAttribute("page", RouteListViewModel.from(actor, selected, records));
+    model.addAttribute(LITERAL_PAGE, RouteListViewModel.from(actor, selected, records));
     return "scenario-routes";
   }
 
@@ -202,7 +204,8 @@ public final class ScenarioController {
       return null;
     }
     model.addAttribute(
-        "page", ScenarioFileListViewModel.from(actor, selected, number, data.routeName(), records));
+        LITERAL_PAGE,
+        ScenarioFileListViewModel.from(actor, selected, number, data.routeName(), records));
     return "scenario-files";
   }
 

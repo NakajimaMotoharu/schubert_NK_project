@@ -45,7 +45,9 @@ import java.util.UUID;
  * PT-AUT-LOGOUT-INBOX-001..006. Caller owns the transaction and rolls back any failure.
  */
 public final class LogoutReplayService {
-  private static final LayoutId LOGOUT = new LayoutId("LOGRSP01");
+  private static final java.lang.String LITERAL_LOGRSP01 = "LOGRSP01";
+
+  private static final LayoutId LOGOUT = new LayoutId(LITERAL_LOGRSP01);
   private final ResponseSnapshotCodec snapshots;
   private final ContextHash hashes;
 
@@ -108,7 +110,7 @@ public final class LogoutReplayService {
       return new InboxCompletion(
           state,
           reference,
-          "LOGRSP01",
+          LITERAL_LOGRSP01,
           "001",
           Optional.of(snapshots.encrypt(identity(request, owner), body)),
           at.truncatedTo(ChronoUnit.MICROS));
@@ -137,7 +139,7 @@ public final class LogoutReplayService {
     Objects.requireNonNull(at, "at");
     try {
       require(!connection.getAutoCommit());
-      require(saved.responseLayoutId().equals("LOGRSP01"));
+      require(saved.responseLayoutId().equals(LITERAL_LOGRSP01));
       require(saved.responseVersion().equals("001"));
       var encrypted = saved.responseSnapshot().orElseThrow(SQLException::new);
       byte[] body = snapshots.decrypt(identity(request, owner), encrypted);
@@ -222,7 +224,7 @@ public final class LogoutReplayService {
   }
 
   private static ResponseSnapshotIdentity identity(UUID request, long owner) {
-    return ResponseSnapshotIdentity.authenticated(request, "LOGRSP01", "001", owner);
+    return ResponseSnapshotIdentity.authenticated(request, LITERAL_LOGRSP01, "001", owner);
   }
 
   private static byte[] wire(

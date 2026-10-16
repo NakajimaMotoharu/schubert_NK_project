@@ -25,6 +25,12 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class MorningControlScope {
+  private static final java.lang.String LITERAL_FIXED_EIGHT_STOP_PASS = "fixed eight stop pass";
+
+  private static final java.lang.String LITERAL_FIXED_A_LOCK = "fixed A lock";
+
+  private static final java.lang.String LITERAL_FRESH_EIGHT_TERMINALS = "fresh eight terminals";
+
   @FunctionalInterface
   interface Gate {
     void verify() throws IOException;
@@ -431,9 +437,9 @@ final class MorningControlScope {
       OwnedEpochWork<T> trustedWork)
       throws IOException {
     Objects.requireNonNull(original, "owned original");
-    Objects.requireNonNull(stop, "fixed eight stop pass");
-    Objects.requireNonNull(startup, "fixed A lock");
-    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(stop, LITERAL_FIXED_EIGHT_STOP_PASS);
+    Objects.requireNonNull(startup, LITERAL_FIXED_A_LOCK);
+    Objects.requireNonNull(terminals, LITERAL_FRESH_EIGHT_TERMINALS);
     Objects.requireNonNull(invalidation, "durable current invalidation");
     Objects.requireNonNull(trustedWork, "owned current-generation work");
     return executeStopAndStartup(
@@ -553,9 +559,9 @@ final class MorningControlScope {
       MorningNewRunAdmission.OwnedContinuation<T> trustedWork)
       throws IOException {
     Objects.requireNonNull(original, "owned original");
-    Objects.requireNonNull(stop, "fixed eight stop pass");
-    Objects.requireNonNull(startup, "fixed A lock");
-    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(stop, LITERAL_FIXED_EIGHT_STOP_PASS);
+    Objects.requireNonNull(startup, LITERAL_FIXED_A_LOCK);
+    Objects.requireNonNull(terminals, LITERAL_FRESH_EIGHT_TERMINALS);
     Objects.requireNonNull(invalidation, "durable current invalidation");
     Objects.requireNonNull(trustedWork, "owned trusted work");
     return executeStopAndStartup(
@@ -625,9 +631,9 @@ final class MorningControlScope {
       MorningNewRunAdmission.Continuation<T> trustedWork)
       throws IOException {
     Objects.requireNonNull(original, "dedicated DB and durable original");
-    Objects.requireNonNull(stop, "fixed eight stop pass");
-    Objects.requireNonNull(startup, "fixed A lock");
-    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(stop, LITERAL_FIXED_EIGHT_STOP_PASS);
+    Objects.requireNonNull(startup, LITERAL_FIXED_A_LOCK);
+    Objects.requireNonNull(terminals, LITERAL_FRESH_EIGHT_TERMINALS);
     Objects.requireNonNull(trustedWork, "same-run Morning work");
     return executeStopAndStartup(
         root,
@@ -651,9 +657,9 @@ final class MorningControlScope {
       throws IOException {
     // Isolated PT port for the PG341 stop/A boundary. The native factory above always uses the
     // original-owning overload; this overload alone is never a Production Morning entry.
-    Objects.requireNonNull(stop, "fixed eight stop pass");
-    Objects.requireNonNull(startup, "fixed A lock");
-    Objects.requireNonNull(terminals, "fresh eight terminals");
+    Objects.requireNonNull(stop, LITERAL_FIXED_EIGHT_STOP_PASS);
+    Objects.requireNonNull(startup, LITERAL_FIXED_A_LOCK);
+    Objects.requireNonNull(terminals, LITERAL_FRESH_EIGHT_TERMINALS);
     Objects.requireNonNull(trustedWork, "trusted Morning work");
     return executeStopAndStartup(
         root, maintenance, () -> afterOriginal(root, stop, startup, terminals, trustedWork));

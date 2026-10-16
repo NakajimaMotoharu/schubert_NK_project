@@ -17,6 +17,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class MorningParentBudget {
+  private static final java.lang.String LITERAL_MORNING_PARENT_BUDGET_UNAVAILABLE =
+      "Morning parent budget unavailable";
+
   private static final long LIMIT_NANOS = TimeUnit.MINUTES.toNanos(30);
 
   @FunctionalInterface
@@ -38,7 +41,7 @@ public final class MorningParentBudget {
 
   /** Same absolute Linux domain; the caller must independently authenticate the owner claim. */
   public static MorningParentBudget borrow(long deadline) throws IOException {
-    if (deadline <= 0) throw new IOException("Morning parent budget unavailable");
+    if (deadline <= 0) throw new IOException(LITERAL_MORNING_PARENT_BUDGET_UNAVAILABLE);
     return new MorningParentBudget(LinuxMonotonicClock.create(), OptionalLong.of(deadline));
   }
 
@@ -66,11 +69,11 @@ public final class MorningParentBudget {
     long now = monotonic.read();
     long elapsed = now - began;
     if (elapsed < 0 || elapsed >= LIMIT_NANOS)
-      throw new IOException("Morning parent budget unavailable");
+      throw new IOException(LITERAL_MORNING_PARENT_BUDGET_UNAVAILABLE);
     if (borrowedDeadline.isPresent()) {
       long remaining = borrowedDeadline.getAsLong() - now;
       if (remaining <= 0 || remaining > LIMIT_NANOS)
-        throw new IOException("Morning parent budget unavailable");
+        throw new IOException(LITERAL_MORNING_PARENT_BUDGET_UNAVAILABLE);
       return Math.min(LIMIT_NANOS - elapsed, remaining);
     }
     return LIMIT_NANOS - elapsed;
@@ -83,7 +86,7 @@ public final class MorningParentBudget {
     try {
       return Math.addExact(began, LIMIT_NANOS);
     } catch (ArithmeticException overflow) {
-      throw new IOException("Morning parent budget unavailable");
+      throw new IOException(LITERAL_MORNING_PARENT_BUDGET_UNAVAILABLE);
     }
   }
 }

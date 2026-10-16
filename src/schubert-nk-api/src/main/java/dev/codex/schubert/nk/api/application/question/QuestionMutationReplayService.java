@@ -39,6 +39,8 @@ import java.util.UUID;
  * SS324§6/12.9,352§11.2.1/UI232236; QA046; PG-D331; PT-QRY033/NTF016.
  */
 public final class QuestionMutationReplayService {
+  private static final java.lang.String LITERAL_REQUEST = "request";
+
   private final ResponseSnapshotCodec snapshots;
   private final ResultBoundResponseSnapshotCodec bound;
 
@@ -88,7 +90,7 @@ public final class QuestionMutationReplayService {
       QuestionMutationRequest.Result result,
       UUID responseId,
       Instant completedAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(result, "result");
     Objects.requireNonNull(responseId, "responseId");
@@ -125,7 +127,7 @@ public final class QuestionMutationReplayService {
 
   public Snapshot read(
       QuestionMutationRequest request, AuthenticatedActor actor, BoundInboxExecution execution) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(execution, "execution");
     try {
@@ -188,7 +190,7 @@ public final class QuestionMutationReplayService {
       UUID responseId,
       Instant sentAt) {
     Objects.requireNonNull(saved, "snapshot");
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(actor, "actor");
     Objects.requireNonNull(responseId, "responseId");
     Objects.requireNonNull(sentAt, "sentAt");
@@ -210,7 +212,7 @@ public final class QuestionMutationReplayService {
   /** Nonstored authentication/scope/identity denial only; definite stored errors use capture. */
   public byte[] failure(
       QuestionMutationRequest request, ResultCode code, UUID responseId, Instant sentAt) {
-    Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request, LITERAL_REQUEST);
     Objects.requireNonNull(code, "code");
     Objects.requireNonNull(responseId, "responseId");
     Objects.requireNonNull(sentAt, "sentAt");

@@ -28,6 +28,16 @@ import org.jspecify.annotations.Nullable;
 /** Same-parent fixed Caddy daemon/validate/owned TLS login proof. SS342/SSC178/CADDY455. */
 @NullMarked
 public final class MorningCaddyReadiness {
+  private static final java.lang.String LITERAL_INVOCATIONID = "InvocationID";
+
+  private static final java.lang.String LITERAL_MAINPID = "MainPID";
+
+  private static final java.lang.String LITERAL_EXECMAINCODE = "ExecMainCode";
+
+  private static final java.lang.String LITERAL_EXECSTARTPRE = "ExecStartPre";
+
+  private static final java.lang.String LITERAL_EXECSTART = "ExecStart";
+
   @FunctionalInterface
   interface Guard {
     void check() throws IOException;
@@ -87,9 +97,9 @@ public final class MorningCaddyReadiness {
     guard.check();
     var manager = Objects.requireNonNull(io.manager());
     profile(manager);
-    invocation = Objects.requireNonNull(manager.get("InvocationID"));
+    invocation = Objects.requireNonNull(manager.get(LITERAL_INVOCATIONID));
     if (invocation.equals(previousInvocation)) throw unavailable();
-    pid = Long.parseLong(Objects.requireNonNull(manager.get("MainPID")));
+    pid = Long.parseLong(Objects.requireNonNull(manager.get(LITERAL_MAINPID)));
     captured = Objects.requireNonNull(io.actor(invocation));
     if (captured.pid() != pid) throw unavailable();
     guard.check();
@@ -101,8 +111,8 @@ public final class MorningCaddyReadiness {
     guard.check();
     var before = Objects.requireNonNull(io.manager());
     profile(before);
-    if (!invocation.equals(before.get("InvocationID"))
-        || !Long.toString(pid).equals(before.get("MainPID"))
+    if (!invocation.equals(before.get(LITERAL_INVOCATIONID))
+        || !Long.toString(pid).equals(before.get(LITERAL_MAINPID))
         || !captured.equals(io.actor(invocation))) throw unavailable();
     var sockets = Set.copyOf(Objects.requireNonNull(io.sockets(pid)));
     if (sockets.isEmpty()) return false;
@@ -119,21 +129,21 @@ public final class MorningCaddyReadiness {
     if (!"active".equals(values.get("ActiveState")) || !"running".equals(values.get("SubState")))
       throw unavailable();
     if (!"success".equals(values.get("Result"))
-        || !"0".equals(values.get("ExecMainCode"))
+        || !"0".equals(values.get(LITERAL_EXECMAINCODE))
         || !"0".equals(values.get("ExecMainStatus"))
         || number(values.get("ExecMainStartTimestampMonotonic")).signum() == 0
         || number(values.get("ExecMainExitTimestampMonotonic")).signum() != 0) throw unavailable();
-    String pidText = Objects.requireNonNull(values.get("MainPID"));
+    String pidText = Objects.requireNonNull(values.get(LITERAL_MAINPID));
     if (!pidText.matches("[1-9][0-9]{0,9}")
         || Long.parseLong(pidText) < 2
         || Long.parseLong(pidText) > Integer.MAX_VALUE
-        || !Objects.requireNonNull(values.get("InvocationID")).matches("(?!0{32}$)[0-9a-f]{32}"))
-      throw unavailable();
-    String pre = Objects.requireNonNull(values.get("ExecStartPre"));
+        || !Objects.requireNonNull(values.get(LITERAL_INVOCATIONID))
+            .matches("(?!0{32}$)[0-9a-f]{32}")) throw unavailable();
+    String pre = Objects.requireNonNull(values.get(LITERAL_EXECSTARTPRE));
     if (!pre.matches(
             "\\{ path=/usr/bin/caddy ; argv\\[\\]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=\\[[^\\]\\n]+\\] ; stop_time=\\[[^\\]\\n]+\\] ; pid=[1-9][0-9]{0,9} ; code=exited ; status=0(?:/0)? \\}")
         || pre.contains("[n/a]")) throw unavailable();
-    String start = Objects.requireNonNull(values.get("ExecStart"));
+    String start = Objects.requireNonNull(values.get(LITERAL_EXECSTART));
     if (!start.matches(
         "\\{ path=/usr/bin/caddy ; argv\\[\\]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=\\[[^\\]\\n]+\\] ; stop_time=\\[n/a\\] ; pid="
             + pidText
@@ -163,25 +173,25 @@ public final class MorningCaddyReadiness {
     var keys = new HashSet<>(fixed.keySet());
     keys.addAll(
         List.of(
-            "MainPID",
-            "InvocationID",
-            "ExecStartPre",
-            "ExecStart",
+            LITERAL_MAINPID,
+            LITERAL_INVOCATIONID,
+            LITERAL_EXECSTARTPRE,
+            LITERAL_EXECSTART,
             "ActiveState",
             "SubState",
             "Result",
-            "ExecMainCode",
+            LITERAL_EXECMAINCODE,
             "ExecMainStatus",
             "ExecMainStartTimestampMonotonic",
             "ExecMainExitTimestampMonotonic"));
     if (!values.keySet().equals(keys)) throw unavailable();
     for (var entry : fixed.entrySet())
       if (!entry.getValue().equals(values.get(entry.getKey()))) throw unavailable();
-    String pre = Objects.requireNonNull(values.get("ExecStartPre"));
+    String pre = Objects.requireNonNull(values.get(LITERAL_EXECSTARTPRE));
     if (!pre.startsWith(
             "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; ")
         || pre.indexOf('}') != pre.length() - 1) throw unavailable();
-    String start = Objects.requireNonNull(values.get("ExecStart"));
+    String start = Objects.requireNonNull(values.get(LITERAL_EXECSTART));
     if (!start.startsWith(
             "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; ")
         || start.indexOf('}') != start.length() - 1) throw unavailable();
@@ -217,22 +227,22 @@ public final class MorningCaddyReadiness {
     configuration(before);
     if (!"inactive".equals(before.get("ActiveState"))
         || !"dead".equals(before.get("SubState"))
-        || !"0".equals(before.get("MainPID"))
+        || !"0".equals(before.get(LITERAL_MAINPID))
         || !"success".equals(before.get("Result"))
         || !"0".equals(before.get("ExecMainStatus"))) throw unavailable();
-    String invocation = Objects.requireNonNull(before.get("InvocationID"));
+    String invocation = Objects.requireNonNull(before.get(LITERAL_INVOCATIONID));
     var start = number(before.get("ExecMainStartTimestampMonotonic"));
     var ended = number(before.get("ExecMainExitTimestampMonotonic"));
-    String pre = Objects.requireNonNull(before.get("ExecStartPre"));
-    String run = Objects.requireNonNull(before.get("ExecStart"));
+    String pre = Objects.requireNonNull(before.get(LITERAL_EXECSTARTPRE));
+    String run = Objects.requireNonNull(before.get(LITERAL_EXECSTART));
     if (invocation.isEmpty()) {
-      if (!"0".equals(before.get("ExecMainCode"))
+      if (!"0".equals(before.get(LITERAL_EXECMAINCODE))
           || start.signum() != 0
           || ended.signum() != 0
           || !unused(pre, "validate")
           || !unused(run, "run")) throw unavailable();
     } else if (!generation(invocation)
-        || !"1".equals(before.get("ExecMainCode"))
+        || !"1".equals(before.get(LITERAL_EXECMAINCODE))
         || start.signum() == 0
         || ended.compareTo(start) < 0
         || !((normal(pre, "validate") && normal(run, "run"))

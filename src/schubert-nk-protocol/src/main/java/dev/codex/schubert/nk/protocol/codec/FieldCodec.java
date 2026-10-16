@@ -13,6 +13,8 @@ import org.jspecify.annotations.Nullable;
 
 /** Strict X/N/B field codec. Trace: NK-PRO-002, UI 232 §4, SS 322 §4～§6. */
 public final class FieldCodec {
+  private static final java.lang.String LITERAL_FIELD = "field";
+
   private static final byte ASCII_SPACE = 0x20;
   private static final byte ASCII_ZERO = 0x30;
 
@@ -50,7 +52,7 @@ public final class FieldCodec {
   }
 
   public static Optional<String> decodeText(byte[] field, boolean mandatory) {
-    Objects.requireNonNull(field, "field");
+    Objects.requireNonNull(field, LITERAL_FIELD);
     requireNonEmptyField(field);
     int valueEnd = field.length;
     while (valueEnd > 0 && field[valueEnd - 1] == ASCII_SPACE) {
@@ -97,7 +99,7 @@ public final class FieldCodec {
   }
 
   public static long decodeNumeric(byte[] field, long minimum, long maximum) {
-    Objects.requireNonNull(field, "field");
+    Objects.requireNonNull(field, LITERAL_FIELD);
     requireNonEmptyField(field);
     if (minimum < 0 || maximum < minimum) {
       throw new IllegalArgumentException("invalid numeric semantic range");
@@ -121,7 +123,7 @@ public final class FieldCodec {
 
   public static OptionalLong decodeNumericOrErrorFiller(
       byte[] field, long minimum, long maximum, boolean errorProfile) {
-    Objects.requireNonNull(field, "field");
+    Objects.requireNonNull(field, LITERAL_FIELD);
     requireNonEmptyField(field);
     if (errorProfile && allBytes(field, ASCII_ZERO)) {
       return OptionalLong.empty();
@@ -140,7 +142,7 @@ public final class FieldCodec {
   }
 
   public static Optional<Boolean> decodeBoolean(byte[] field, boolean allowUnset) {
-    Objects.requireNonNull(field, "field");
+    Objects.requireNonNull(field, LITERAL_FIELD);
     if (field.length != 1) {
       throw new PermanentProtocolException("boolean field must be exactly one byte");
     }
@@ -158,7 +160,7 @@ public final class FieldCodec {
   }
 
   public static void requireSpaces(byte[] field) {
-    Objects.requireNonNull(field, "field");
+    Objects.requireNonNull(field, LITERAL_FIELD);
     requireNonEmptyField(field);
     if (!allBytes(field, ASCII_SPACE)) {
       throw new PermanentProtocolException("reserved field is not ASCII-space filled");

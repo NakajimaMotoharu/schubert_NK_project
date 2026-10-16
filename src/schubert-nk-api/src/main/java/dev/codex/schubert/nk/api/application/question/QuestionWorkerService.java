@@ -50,6 +50,18 @@ import javax.sql.DataSource;
  * SS312§8/9,324,331,332§8,351,353§7.2; SSC153..156; AWORK001..013.
  */
 public final class QuestionWorkerService implements InternalEventProcessor {
+  private static final java.lang.String LITERAL_QWKREQ01 = "QWKREQ01";
+
+  private static final java.lang.String LITERAL_COMPLETED = "COMPLETED";
+
+  private static final java.lang.String LITERAL_ERROR = "ERROR";
+
+  private static final java.lang.String LITERAL_PROCESSING = "PROCESSING";
+
+  private static final java.lang.String LITERAL_BODY = "body";
+
+  private static final java.lang.String LITERAL_CORRELATION_ID = "correlation_id";
+
   private static final Instant MIN = Instant.parse("0001-01-01T00:00:00Z");
   private static final Instant MAX = Instant.parse("9999-12-31T23:59:59.999999Z");
   private final DataSource database;
@@ -142,7 +154,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
   private static byte[] decodeWire(WireMessage<FixedPayload> event) {
     try {
       CommonHeader h = event.header();
-      require(h.layoutId().value().equals("QWKREQ01"));
+      require(h.layoutId().value().equals(LITERAL_QWKREQ01));
       h.validateAgainst(LayoutRegistry.standard().require(h.layoutId(), 1));
       return FixedWidthEncoder.standard().encode(event);
     } catch (IllegalArgumentException invalid) {
@@ -155,11 +167,11 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       throws SQLException {
     Job job = job(c, h, work, wire);
     if (job.state.equals("CANCELLED")) return Terminal.INSTANCE;
-    if (job.state.equals("COMPLETED")) {
+    if (job.state.equals(LITERAL_COMPLETED)) {
       verifyCompleted(c, job);
       return Terminal.INSTANCE;
     }
-    if (job.state.equals("ERROR")) return errorStage(c, h, wire, job);
+    if (job.state.equals(LITERAL_ERROR)) return errorStage(c, h, wire, job);
     Instant at = now();
     if (at.isBefore(job.received)) throw new TemporaryInfrastructureException();
     if (job.state.equals("RECEIVED")) {
@@ -177,10 +189,10 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         s.setLong(5, job.id);
         one(s.executeUpdate());
       }
-      notification(c, job, "PROCESSING", "ACCEPTED", at, Optional.empty());
-      audit(c, h, job, "QUESTION_PROCESSING_STARTED", "PROCESSING", at);
+      notification(c, job, LITERAL_PROCESSING, "ACCEPTED", at, Optional.empty());
+      audit(c, h, job, "QUESTION_PROCESSING_STARTED", LITERAL_PROCESSING, at);
     } else {
-      require(job.state.equals("PROCESSING"));
+      require(job.state.equals(LITERAL_PROCESSING));
       require(job.processing.orElseThrow().equals(h.messageId()));
       try (var s = c.prepareStatement("update schubert.async_jobs set retry_count=? where id=?")) {
         s.setInt(1, Math.min(delivery.deliveryCount() - 1, 3));
@@ -195,11 +207,11 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       Connection c, CommonHeader h, QuestionWorkData work, byte[] wire, AnswerResult answer)
       throws SQLException {
     Job job = job(c, h, work, wire);
-    if (job.state.equals("COMPLETED")) {
+    if (job.state.equals(LITERAL_COMPLETED)) {
       verifyCompleted(c, job);
       return Terminal.INSTANCE;
     }
-    require(job.state.equals("PROCESSING"));
+    require(job.state.equals(LITERAL_PROCESSING));
     require(job.processing.orElseThrow().equals(h.messageId()));
     Instant at = answer.answeredAt().truncatedTo(ChronoUnit.MICROS);
     String body = Normalizer.normalize(answer.body(), Normalizer.Form.NFC);
@@ -217,7 +229,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         if (r.next()) {
           existing = true;
           valid &=
-              requireValue(r.getString("body")).equals(body)
+              requireValue(r.getString(LITERAL_BODY)).equals(body)
                   && requireValue(r.getString("provider_type")).equals("STUB")
                   && time(r, "answered_at").equals(at)
                   && deletion(r).equals(deleted);
@@ -256,8 +268,8 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       s.setObject(4, h.messageId());
       one(s.executeUpdate());
     }
-    notification(c, job, "COMPLETED", "COMPLETED", at, Optional.empty());
-    audit(c, h, job, "QUESTION_COMPLETED", "COMPLETED", at);
+    notification(c, job, LITERAL_COMPLETED, LITERAL_COMPLETED, at, Optional.empty());
+    audit(c, h, job, "QUESTION_COMPLETED", LITERAL_COMPLETED, at);
     return Terminal.INSTANCE;
   }
 
@@ -271,8 +283,8 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       boolean dlq)
       throws SQLException {
     Job job = job(c, h, work, wire);
-    if (job.state.equals("ERROR")) return errorStage(c, h, wire, job);
-    require(job.state.equals("PROCESSING"));
+    if (job.state.equals(LITERAL_ERROR)) return errorStage(c, h, wire, job);
+    require(job.state.equals(LITERAL_PROCESSING));
     require(job.processing.orElseThrow().equals(h.messageId()));
     Instant at = now();
     businessError(c, h, job, code, at);
@@ -291,7 +303,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
             dispatch,
             h.correlationId(),
             OutboxDestination.DLQ,
-            "QWKREQ01",
+            LITERAL_QWKREQ01,
             "001",
             wire,
             at,
@@ -317,7 +329,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       s.setObject(5, h.messageId());
       one(s.executeUpdate());
     }
-    notification(c, job, "ERROR", "ERROR", at, Optional.of(code));
+    notification(c, job, LITERAL_ERROR, LITERAL_ERROR, at, Optional.of(code));
     audit(c, h, job, "QUESTION_FAILED", code, at);
     return Terminal.INSTANCE;
   }
@@ -342,8 +354,9 @@ public final class QuestionWorkerService implements InternalEventProcessor {
           UUID dispatch = requireValue(r.getObject("message_id", UUID.class));
           require(!dispatch.equals(h.messageId()));
           require(
-              requireValue(r.getObject("correlation_id", UUID.class)).equals(h.correlationId()));
-          require(Arrays.equals(requireValue(r.getBytes("body")), wire));
+              requireValue(r.getObject(LITERAL_CORRELATION_ID, UUID.class))
+                  .equals(h.correlationId()));
+          require(Arrays.equals(requireValue(r.getBytes(LITERAL_BODY)), wire));
           var metadata =
               new OutboxDlqMetadata(
                   h.messageId(),
@@ -389,11 +402,13 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       s.setObject(1, pending.dispatch());
       try (var r = s.executeQuery()) {
         require(r.next());
-        require(requireValue(r.getObject("correlation_id", UUID.class)).equals(h.correlationId()));
+        require(
+            requireValue(r.getObject(LITERAL_CORRELATION_ID, UUID.class))
+                .equals(h.correlationId()));
         require(requireValue(r.getString("destination")).equals("nk.dead.letter"));
-        require(requireValue(r.getString("layout_id")).equals("QWKREQ01"));
+        require(requireValue(r.getString("layout_id")).equals(LITERAL_QWKREQ01));
         require(requireValue(r.getString("layout_version")).equals("001"));
-        require(Arrays.equals(requireValue(r.getBytes("body")), wire));
+        require(Arrays.equals(requireValue(r.getBytes(LITERAL_BODY)), wire));
         var metadata =
             new OutboxDlqMetadata(
                 requireValue(r.getObject("dlq_original_message_id", UUID.class)),
@@ -405,7 +420,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         require(time(r, "created_at").equals(metadata.detectedAt()));
         String status = requireValue(r.getString("status"));
         boolean sent = status.equals("SENT");
-        require(sent || status.equals("PENDING") || status.equals("ERROR"));
+        require(sent || status.equals("PENDING") || status.equals(LITERAL_ERROR));
         if (sent) {
           require(!time(r, "sent_at").isBefore(metadata.detectedAt()));
           require(r.getObject("lease_owner") == null && r.getObject("lease_until") == null);
@@ -441,7 +456,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         require(question == work.questionId().value() && receipt.equals(work.receiptId()));
         require(owner == requireValue(r.getObject("question_owner", Long.class)));
         require(original.equals(h.correlationId()) && !original.equals(h.messageId()));
-        require(requireValue(r.getObject("correlation_id", UUID.class)).equals(original));
+        require(requireValue(r.getObject(LITERAL_CORRELATION_ID, UUID.class)).equals(original));
         require(received.truncatedTo(ChronoUnit.MILLIS).equals(h.sentAt()));
         job =
             new Job(
@@ -450,7 +465,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
                 owner,
                 receipt,
                 requireValue(r.getString("username")),
-                requireValue(r.getString("body")),
+                requireValue(r.getString(LITERAL_BODY)),
                 requireValue(r.getString("state")),
                 received,
                 Optional.ofNullable(r.getObject("processing_message_id", UUID.class)),
@@ -471,10 +486,12 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       s.setObject(1, h.messageId());
       try (var r = s.executeQuery()) {
         require(r.next());
-        require(requireValue(r.getObject("correlation_id", UUID.class)).equals(h.correlationId()));
-        require(requireValue(r.getString("layout_id")).equals("QWKREQ01"));
+        require(
+            requireValue(r.getObject(LITERAL_CORRELATION_ID, UUID.class))
+                .equals(h.correlationId()));
+        require(requireValue(r.getString("layout_id")).equals(LITERAL_QWKREQ01));
         require(requireValue(r.getString("layout_version")).equals("001"));
-        require(Arrays.equals(requireValue(r.getBytes("body")), wire));
+        require(Arrays.equals(requireValue(r.getBytes(LITERAL_BODY)), wire));
         require(time(r, "created_at").equals(job.received));
         for (String name :
             List.of(
@@ -613,7 +630,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
               + ",\"questionId\":"
               + job.questionId
               + ",\"state\":\""
-              + (action.equals("QUESTION_FAILED") ? "ERROR" : state)
+              + (action.equals("QUESTION_FAILED") ? LITERAL_ERROR : state)
               + "\""
               + (action.equals("QUESTION_FAILED") ? ",\"errorCode\":\"" + state + "\"" : "")
               + "}");

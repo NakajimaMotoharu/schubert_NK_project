@@ -17,6 +17,8 @@ import org.springframework.web.util.UriUtils;
 
 /** Stored pair/order projection, no matching/filesystem inference. UI223235/SS313/PG-D365. */
 public final class MusicTrackViewModel {
+  private static final java.lang.String LITERAL_TITLE = "title";
+
   private final Map<String, Object> values;
 
   private MusicTrackViewModel(
@@ -42,7 +44,7 @@ public final class MusicTrackViewModel {
       previousOrder = record.displayOrder();
       var track =
           Map.<String, Object>of(
-              "title",
+              LITERAL_TITLE,
               record.title(),
               "displayPath",
               record.displayPath().wireValue(),
@@ -63,7 +65,7 @@ public final class MusicTrackViewModel {
                 key,
                 ignored -> {
                   var result = new HashMap<String, Object>();
-                  result.put("title", displayTitle(record.title()));
+                  result.put(LITERAL_TITLE, displayTitle(record.title()));
                   result.put("main", Optional.empty());
                   result.put("instrumental", Optional.empty());
                   return result;
@@ -73,7 +75,7 @@ public final class MusicTrackViewModel {
           throw new IllegalArgumentException("duplicate music pair role");
         pair.put(slot, Optional.of(track));
         if (record.pairRole() != PairRole.INSTRUMENTAL)
-          pair.put("title", displayTitle(record.title()));
+          pair.put(LITERAL_TITLE, displayTitle(record.title()));
       }
     }
     values =
@@ -84,7 +86,7 @@ public final class MusicTrackViewModel {
             category,
             "section",
             section,
-            "title",
+            LITERAL_TITLE,
             category + " / " + section,
             "trackCount",
             records.size(),

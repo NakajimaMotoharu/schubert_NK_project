@@ -18,6 +18,8 @@ import java.util.Set;
  * SPI: only owned capabilities may expose filesystem operations to services.
  */
 public final class LinuxDirectoryCalls implements DirectoryCalls {
+  private static final java.lang.String LITERAL_ERRNO = "errno";
+
   // Linux x86-64/AArch64 ABI constants, not portable POSIX guesses. See PG-D-055.
   private static final int AT_FDCWD = -100;
   private static final int DIRECTORY_FLAGS = 0x10000 | 0x20000 | 0x80000;
@@ -25,7 +27,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
   private static final int CREATE_FLAGS = 0x1 | 0x40 | 0x80 | 0x20000 | 0x80000;
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO_OFFSET =
-      STATE.byteOffset(MemoryLayout.PathElement.groupElement("errno"));
+      STATE.byteOffset(MemoryLayout.PathElement.groupElement(LITERAL_ERRNO));
   private final OpenCall retainedOpen;
   private final MkdirCall mkdir;
   private final RenameCall rename;
@@ -91,7 +93,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT,
                 ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"),
+            Linker.Option.captureCallState(LITERAL_ERRNO),
             Linker.Option.firstVariadicArg(3));
     mkdir =
         bind(
@@ -103,7 +105,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"));
+            Linker.Option.captureCallState(LITERAL_ERRNO));
     rename =
         bind(
             symbols,
@@ -116,7 +118,7 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"));
+            Linker.Option.captureCallState(LITERAL_ERRNO));
     retainedUnlink =
         bind(
             symbols,
@@ -127,21 +129,21 @@ public final class LinuxDirectoryCalls implements DirectoryCalls {
                 ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"));
+            Linker.Option.captureCallState(LITERAL_ERRNO));
     retainedSync =
         bind(
             symbols,
             "fsync",
             FdCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"));
+            Linker.Option.captureCallState(LITERAL_ERRNO));
     retainedClose =
         bind(
             symbols,
             "close",
             FdCall.class,
             FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT),
-            Linker.Option.captureCallState("errno"));
+            Linker.Option.captureCallState(LITERAL_ERRNO));
   }
 
   // PG-D-055/SSC-019: this single audited native boundary intentionally invokes restricted FFM.

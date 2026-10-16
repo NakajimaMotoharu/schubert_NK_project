@@ -52,6 +52,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class QuestionController {
+  private static final java.lang.String LITERAL_QSBREQ01 = "QSBREQ01";
+
+  private static final java.lang.String LITERAL_PAGE = "page";
+
+  private static final java.lang.String LITERAL_QDLREQ01 = "QDLREQ01";
+
   private final QuestionWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -89,8 +95,8 @@ public final class QuestionController {
       return null;
     }
     try {
-      var token = tokens.orElseThrow().issue(session(request), "QSBREQ01");
-      model.addAttribute("page", QuestionSubmitViewModel.newForm(actor, token));
+      var token = tokens.orElseThrow().issue(session(request), LITERAL_QSBREQ01);
+      model.addAttribute(LITERAL_PAGE, QuestionSubmitViewModel.newForm(actor, token));
       return "questions/new";
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
@@ -127,7 +133,7 @@ public final class QuestionController {
       final WebSessionId session;
       try {
         session = session(request);
-        tokens.orElseThrow().require(session, "QSBREQ01", form.operationToken());
+        tokens.orElseThrow().require(session, LITERAL_QSBREQ01, form.operationToken());
       } catch (OperationTokenConflictException conflict) {
         response.sendError(409);
         return null;
@@ -138,7 +144,7 @@ public final class QuestionController {
       try {
         result =
             client.exchange(
-                new TypedPayloadValues(new LayoutId("QSBREQ01"), form.toRequest(), List.of()),
+                new TypedPayloadValues(new LayoutId(LITERAL_QSBREQ01), form.toRequest(), List.of()),
                 actor.authenticationContext());
       } catch (ProtectedReadWireException failure) {
         return redisplay(actor, model, response, form, 503, RETRY);
@@ -163,7 +169,8 @@ public final class QuestionController {
             new ReceiptReference(data.receiptId(), data.questionId().value(), data.submittedAt());
         tokens
             .orElseThrow()
-            .completeVerified(session, "QSBREQ01", form.operationToken(), result.resultCode());
+            .completeVerified(
+                session, LITERAL_QSBREQ01, form.operationToken(), result.resultCode());
         receipts.orElseThrow().register(reference);
         // Closed view resolution is intentional. Match the security handlers' fixed relative
         // redirect, and never encode a session identifier or accept a caller-selected URL.
@@ -245,7 +252,7 @@ public final class QuestionController {
       response.sendError(503);
       return null;
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     return "questions/accepted";
   }
 
@@ -277,7 +284,7 @@ public final class QuestionController {
       int status,
       String notice) {
     response.setStatus(status);
-    model.addAttribute("page", QuestionSubmitViewModel.redisplay(actor, form, notice));
+    model.addAttribute(LITERAL_PAGE, QuestionSubmitViewModel.redisplay(actor, form, notice));
     return "questions/new";
   }
 
@@ -298,7 +305,7 @@ public final class QuestionController {
     var form = QuestionSearchForm.bind(parameters, actor.role());
     if (!form.isValid()) {
       response.setStatus(400);
-      model.addAttribute("page", QuestionListViewModel.invalid(actor, form));
+      model.addAttribute(LITERAL_PAGE, QuestionListViewModel.invalid(actor, form));
       return "questions/list";
     }
     final ProtectedReadWireClient.Result result;
@@ -333,7 +340,7 @@ public final class QuestionController {
       response.sendError(503);
       return null;
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     return "questions/list";
   }
 
@@ -400,7 +407,7 @@ public final class QuestionController {
       response.sendError(503);
       return null;
     }
-    model.addAttribute("page", page);
+    model.addAttribute(LITERAL_PAGE, page);
     model.addAttribute("notice", notice);
     if (tokens.isPresent()) {
       if (redisplay.isPresent()) {
@@ -409,7 +416,7 @@ public final class QuestionController {
             "action", Map.of("fields", form.displayValues(), "issues", form.getIssues()));
       } else {
         try {
-          var token = tokens.orElseThrow().issue(session(request), "QDLREQ01");
+          var token = tokens.orElseThrow().issue(session(request), LITERAL_QDLREQ01);
           model.addAttribute(
               "action",
               Map.of(
@@ -470,7 +477,7 @@ public final class QuestionController {
     final WebSessionId session;
     try {
       session = session(request);
-      tokens.orElseThrow().require(session, "QDLREQ01", input.operationToken());
+      tokens.orElseThrow().require(session, LITERAL_QDLREQ01, input.operationToken());
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
       return null;
@@ -481,7 +488,7 @@ public final class QuestionController {
     try {
       result =
           client.exchange(
-              new TypedPayloadValues(new LayoutId("QDLREQ01"), input, List.of()),
+              new TypedPayloadValues(new LayoutId(LITERAL_QDLREQ01), input, List.of()),
               actor.authenticationContext());
     } catch (ProtectedReadWireException failure) {
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
@@ -501,7 +508,7 @@ public final class QuestionController {
     try {
       tokens
           .orElseThrow()
-          .completeVerified(session, "QDLREQ01", input.operationToken(), result.resultCode());
+          .completeVerified(session, LITERAL_QDLREQ01, input.operationToken(), result.resultCode());
     } catch (OperationTokenConflictException conflict) {
       response.sendError(409);
       return null;

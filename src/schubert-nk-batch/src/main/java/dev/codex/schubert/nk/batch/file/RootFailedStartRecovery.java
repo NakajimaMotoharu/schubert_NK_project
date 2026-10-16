@@ -23,6 +23,10 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class RootFailedStartRecovery {
+  private static final java.lang.String LITERAL_API_START_INTENT = ".API.start.intent";
+
+  private static final java.lang.String LITERAL_PERMIT_START_INTENT = "permit-start.intent";
+
   public record Evidence(
       StartupPermitRecords.Epoch invalid,
       StartupPermitRecords.Permit permit,
@@ -119,7 +123,8 @@ public final class RootFailedStartRecovery {
 
   private static List<String> pairNames(PairEvidence expected) {
     String epoch = expected.api().invalid().epoch().toString();
-    return List.of(epoch + ".WEB.start.intent", epoch + ".API.start.intent", "permit-start.intent");
+    return List.of(
+        epoch + ".WEB.start.intent", epoch + LITERAL_API_START_INTENT, LITERAL_PERMIT_START_INTENT);
   }
 
   /** All three inodes captured before unlink; fixed reverse start order under trusted proof. */
@@ -190,8 +195,8 @@ public final class RootFailedStartRecovery {
     var failure = new IOException("failed startup pair quarantine uncertain");
     for (String name :
         List.of(
-            "permit-start.intent",
-            expected.api().invalid().epoch() + ".API.start.intent",
+            LITERAL_PERMIT_START_INTENT,
+            expected.api().invalid().epoch() + LITERAL_API_START_INTENT,
             expected.api().invalid().epoch() + ".WEB.start.intent")) {
       try {
         var marker =
@@ -201,11 +206,11 @@ public final class RootFailedStartRecovery {
                 io,
                 () -> require(expected.equals(readPair(root, security, io))),
                 name);
-        if (name.equals("permit-start.intent")) marker.quarantinePublication();
+        if (name.equals(LITERAL_PERMIT_START_INTENT)) marker.quarantinePublication();
         else
           marker.quarantineService(
               expected.api().invalid(),
-              name.endsWith(".API.start.intent")
+              name.endsWith(LITERAL_API_START_INTENT)
                   ? ServiceConfigFiles.Service.API
                   : ServiceConfigFiles.Service.WEB);
         root.sync();
@@ -240,9 +245,9 @@ public final class RootFailedStartRecovery {
           }
           return Boolean.TRUE;
         });
-    boolean api = names.contains(invalid.epoch() + ".API.start.intent");
+    boolean api = names.contains(invalid.epoch() + LITERAL_API_START_INTENT);
     boolean web = names.contains(invalid.epoch() + ".WEB.start.intent");
-    require(api != web && names.contains("permit-start.intent"));
+    require(api != web && names.contains(LITERAL_PERMIT_START_INTENT));
     return read(
         root, security, io, api ? ServiceConfigFiles.Service.API : ServiceConfigFiles.Service.WEB);
   }
@@ -298,7 +303,8 @@ public final class RootFailedStartRecovery {
             io,
             gate,
             expected.invalid().epoch() + "." + expected.service().name() + ".start.intent");
-    var publication = new BackupStartIntentFiles(root, security, io, gate, "permit-start.intent");
+    var publication =
+        new BackupStartIntentFiles(root, security, io, gate, LITERAL_PERMIT_START_INTENT);
     var serviceIntent = service.observeQuarantine();
     var publicationIntent = publication.observeQuarantine();
     try {
@@ -339,7 +345,7 @@ public final class RootFailedStartRecovery {
             security,
             io,
             () -> require(expected.equals(read(root, security, io, expected.service()))),
-            "permit-start.intent");
+            LITERAL_PERMIT_START_INTENT);
     marker.quarantinePublication();
     root.sync();
   }

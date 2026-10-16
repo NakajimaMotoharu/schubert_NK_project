@@ -23,6 +23,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ExpiryAuditRepository {
+  private static final java.lang.String LITERAL_SUCCESS = "SUCCESS";
+
   private static final String HANDLE =
       "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and started_at=?";
 
@@ -136,7 +138,7 @@ public final class ExpiryAuditRepository {
         if (rows.next()) throw new BatchRepositoryException();
         var audit = read(handle).orElseThrow(BatchRepositoryException::new);
         @Nullable Instant ended = audit.ended();
-        if (!"SUCCESS".equals(audit.status())
+        if (!LITERAL_SUCCESS.equals(audit.status())
             || ended == null
             || ended.isAfter(observed)
             || audit.errorCode() != null
@@ -294,7 +296,7 @@ public final class ExpiryAuditRepository {
     @Nullable Instant cutoff = value.cutoff();
     @Nullable Long beforeValue = value.before();
     if (!running
-        && !value.status().equals("SUCCESS")
+        && !value.status().equals(LITERAL_SUCCESS)
         && !value.status().equals("WARNING")
         && !value.status().equals("FAILED")) return false;
     if (running != (value.ended() == null)
@@ -303,17 +305,18 @@ public final class ExpiryAuditRepository {
         || value.failure() < 0
         || value.estimatedBytes() < 0
         || (cutoff == null) != (beforeValue == null)) return false;
-    if (cutoff == null) return value.after() == null && !value.status().equals("SUCCESS");
+    if (cutoff == null) return value.after() == null && !value.status().equals(LITERAL_SUCCESS);
     long before = required(beforeValue);
     if (!cutoff.equals(attempt.run().cutoff().minus(7, ChronoUnit.DAYS))
         || before < 0
         || value.target() > before) return false;
-    if (value.after() == null) return !value.status().equals("SUCCESS") && value.success() == 0;
+    if (value.after() == null)
+      return !value.status().equals(LITERAL_SUCCESS) && value.success() == 0;
     long after = required(value.after());
     return after >= 0
         && after <= before
         && before - after == value.success()
-        && (!value.status().equals("SUCCESS")
+        && (!value.status().equals(LITERAL_SUCCESS)
             || (value.success() == value.target() && value.failure() == 0));
   }
 

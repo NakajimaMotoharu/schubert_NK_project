@@ -15,7 +15,9 @@ import org.jspecify.annotations.NullMarked;
 /** SCR018/QST001/UI224,236/SS313,323; PG-D351/PT-QST-FORM001..008. Request scope only. */
 @NullMarked
 public final class QuestionSubmitForm implements AutoCloseable {
-  private static final Set<String> FIELDS = Set.of("question", "operation_token");
+  private static final java.lang.String LITERAL_QUESTION = "question";
+
+  private static final Set<String> FIELDS = Set.of(LITERAL_QUESTION, "operation_token");
   private static final String INVALID = "入力項目を確認してください。";
   private final char[] question;
   private final UUID retainedOperationToken;
@@ -50,16 +52,17 @@ public final class QuestionSubmitForm implements AutoCloseable {
       }
     }
     String question =
-        Normalizer.normalize(Objects.requireNonNull(values.get("question")), Normalizer.Form.NFC);
+        Normalizer.normalize(
+            Objects.requireNonNull(values.get(LITERAL_QUESTION)), Normalizer.Form.NFC);
     // Invalid Unicode/control is not redisplayed; do not trim it into an accepted question.
     if (question.codePoints().anyMatch(QuestionSubmitForm::invalidCharacter)) {
-      issues.put("question", INVALID);
+      issues.put(LITERAL_QUESTION, INVALID);
       question = "";
     }
     byte[] encoded = question.getBytes(StandardCharsets.UTF_8);
     try {
       if (encoded.length < 1 || encoded.length > 4096 || question.endsWith(" "))
-        issues.put("question", INVALID);
+        issues.put(LITERAL_QUESTION, INVALID);
     } finally {
       Arrays.fill(encoded, (byte) 0);
     }
@@ -93,7 +96,7 @@ public final class QuestionSubmitForm implements AutoCloseable {
   /** Only the caller's request/template receives this body copy; never put it in session/flash. */
   public Map<String, Object> displayValues() {
     ensureOpen();
-    return Map.of("question", new String(question));
+    return Map.of(LITERAL_QUESTION, new String(question));
   }
 
   /** The returned DTO has its own lifetime; this form is not an authorization grant. */

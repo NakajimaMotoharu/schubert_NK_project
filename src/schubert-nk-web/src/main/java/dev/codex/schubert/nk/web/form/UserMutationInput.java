@@ -15,9 +15,13 @@ import org.jspecify.annotations.NullMarked;
 /** Closed SCR017 binding only; FUN009/AUT002003/UI225236/SS313314; PG-D353/016069. */
 @NullMarked
 final class UserMutationInput implements AutoCloseable {
+  private static final java.lang.String LITERAL_OPERATION = "operation";
+
+  private static final java.lang.String LITERAL_EXPECTED_VERSION = "expected_version";
+
   private static final String INVALID = "入力項目を確認してください。";
   private static final Set<String> COMMON =
-      Set.of("operation", "id", "expected_version", "confirm", "operation_token");
+      Set.of(LITERAL_OPERATION, "id", LITERAL_EXPECTED_VERSION, "confirm", "operation_token");
   private static final Map<String, Set<String>> EXTRA =
       Map.of(
           "STATUS",
@@ -56,7 +60,7 @@ final class UserMutationInput implements AutoCloseable {
 
   static UserMutationInput bind(
       String operation, long pathId, String targetUsername, Map<String, List<String>> parameters) {
-    Objects.requireNonNull(operation, "operation");
+    Objects.requireNonNull(operation, LITERAL_OPERATION);
     Objects.requireNonNull(targetUsername, "targetUsername");
     Objects.requireNonNull(parameters, "parameters");
     Set<String> extra = EXTRA.get(operation);
@@ -83,13 +87,13 @@ final class UserMutationInput implements AutoCloseable {
         issues.put(name, INVALID);
       }
     }
-    if (!operation.equals(values.get("operation"))) issues.put("operation", INVALID);
+    if (!operation.equals(values.get(LITERAL_OPERATION))) issues.put(LITERAL_OPERATION, INVALID);
     String identifier = Objects.requireNonNull(values.get("id"));
     if (!identifier.matches("[0-9]{1,12}") || Long.parseLong(identifier) != pathId)
       issues.put("id", INVALID);
-    String expected = Objects.requireNonNull(values.get("expected_version"));
+    String expected = Objects.requireNonNull(values.get(LITERAL_EXPECTED_VERSION));
     long version = 0;
-    if (!expected.matches("[0-9]{1,9}")) issues.put("expected_version", INVALID);
+    if (!expected.matches("[0-9]{1,9}")) issues.put(LITERAL_EXPECTED_VERSION, INVALID);
     else version = Long.parseLong(expected);
     if (!"true".equals(values.get("confirm"))) issues.put("confirm", INVALID);
     UUID token = new UUID(0, 0);
@@ -154,7 +158,7 @@ final class UserMutationInput implements AutoCloseable {
 
   Map<String, Object> displayValues() {
     requireOpen();
-    return Map.of("id", id, "expected_version", version);
+    return Map.of("id", id, LITERAL_EXPECTED_VERSION, version);
   }
 
   private void requireOpen() {

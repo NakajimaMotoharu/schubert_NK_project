@@ -16,8 +16,20 @@ import org.jspecify.annotations.NullMarked;
 /** SCR016/FUN009/AUT002/UI225,236/SS313,314; PG-D345/PT-USER-CREATE001..008. */
 @NullMarked
 public final class UserCreateForm implements AutoCloseable {
+  private static final java.lang.String LITERAL_USERNAME = "username";
+
+  private static final java.lang.String LITERAL_ROLE = "role";
+
+  private static final java.lang.String LITERAL_ENABLED = "enabled";
+
   private static final Set<String> FIELDS =
-      Set.of("username", "password", "password_confirmation", "role", "enabled", "operation_token");
+      Set.of(
+          LITERAL_USERNAME,
+          "password",
+          "password_confirmation",
+          LITERAL_ROLE,
+          LITERAL_ENABLED,
+          "operation_token");
   private static final String INVALID = "入力項目を確認してください。";
   private final String username;
   private final String role;
@@ -64,20 +76,21 @@ public final class UserCreateForm implements AutoCloseable {
       }
     }
     String username =
-        Normalizer.normalize(Objects.requireNonNull(values.get("username")), Normalizer.Form.NFC)
+        Normalizer.normalize(
+                Objects.requireNonNull(values.get(LITERAL_USERNAME)), Normalizer.Form.NFC)
             .trim();
     if (!username.matches("[A-Za-z0-9._-]+")
         || username.getBytes(StandardCharsets.UTF_8).length > 64) {
-      issues.put("username", INVALID);
+      issues.put(LITERAL_USERNAME, INVALID);
       username = "";
     }
-    String role = Objects.requireNonNull(values.get("role"));
+    String role = Objects.requireNonNull(values.get(LITERAL_ROLE));
     if (!Set.of("USER", "ADMIN").contains(role)) {
-      issues.put("role", INVALID);
+      issues.put(LITERAL_ROLE, INVALID);
       role = "USER";
     }
-    String flag = Objects.requireNonNull(values.get("enabled"));
-    if (!Set.of("true", "false").contains(flag)) issues.put("enabled", INVALID);
+    String flag = Objects.requireNonNull(values.get(LITERAL_ENABLED));
+    if (!Set.of("true", "false").contains(flag)) issues.put(LITERAL_ENABLED, INVALID);
     UUID token = new UUID(0, 0);
     String text = Objects.requireNonNull(values.get("operation_token"));
     if (!text.matches("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"))
@@ -118,7 +131,7 @@ public final class UserCreateForm implements AutoCloseable {
 
   /** This is the complete redisplay projection; passwords, CSRF and operation token are absent. */
   public Map<String, Object> displayValues() {
-    return Map.of("username", username, "role", role, "enabled", enabled);
+    return Map.of(LITERAL_USERNAME, username, LITERAL_ROLE, role, LITERAL_ENABLED, enabled);
   }
 
   public Map<String, String> getIssues() {

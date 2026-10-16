@@ -30,6 +30,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class CleanupTerminalRepository {
+  private static final java.lang.String LITERAL_ASIA_TOKYO = "Asia/Tokyo";
+
   public static final List<BatchStep> STEPS =
       List.of(
           BatchStep.CLEAN_NOTIFICATION,
@@ -181,7 +183,7 @@ public final class CleanupTerminalRepository {
         var query = present(statement);
         query.setQueryTimeout(seconds());
         query.setObject(1, run.id());
-        query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+        query.setObject(2, run.cutoff().atZone(ZoneId.of(LITERAL_ASIA_TOKYO)).toLocalDate());
         @Nullable ResultSet rows = query.executeQuery();
         @Nullable Throwable rowsFailure = null;
         try {
@@ -278,7 +280,7 @@ public final class CleanupTerminalRepository {
         try {
           var query = present(statement);
           query.setQueryTimeout(seconds());
-          query.setObject(1, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+          query.setObject(1, run.cutoff().atZone(ZoneId.of(LITERAL_ASIA_TOKYO)).toLocalDate());
           query.setString(2, handle.step().name());
           query.setInt(3, handle.attempt());
           @Nullable ResultSet rows = query.executeQuery();
@@ -294,7 +296,7 @@ public final class CleanupTerminalRepository {
                 priorRun.id().equals(projected.runId())
                     && priorRun
                         .cutoff()
-                        .atZone(ZoneId.of("Asia/Tokyo"))
+                        .atZone(ZoneId.of(LITERAL_ASIA_TOKYO))
                         .toLocalDate()
                         .equals(handle.businessDate()));
             check(priorRun);
@@ -446,7 +448,10 @@ public final class CleanupTerminalRepository {
       require(
           !ended.isAfter(observedAt)
               && run.id().equals(row.runId())
-              && run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate().equals(row.date()));
+              && run.cutoff()
+                  .atZone(ZoneId.of(LITERAL_ASIA_TOKYO))
+                  .toLocalDate()
+                  .equals(row.date()));
       var status = BatchStepResult.Status.valueOf(row.status());
       var result = terminal(row, status);
       return new Entry(
@@ -499,7 +504,7 @@ public final class CleanupTerminalRepository {
         var query = present(statement);
         query.setQueryTimeout(seconds());
         query.setObject(1, run.id());
-        query.setObject(2, run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate());
+        query.setObject(2, run.cutoff().atZone(ZoneId.of(LITERAL_ASIA_TOKYO)).toLocalDate());
         @Nullable ResultSet rows = query.executeQuery();
         @Nullable Throwable rowsFailure = null;
         try {
@@ -550,7 +555,10 @@ public final class CleanupTerminalRepository {
       require(
           !row.started().isAfter(observedAt)
               && run.id().equals(row.runId())
-              && run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate().equals(row.date()));
+              && run.cutoff()
+                  .atZone(ZoneId.of(LITERAL_ASIA_TOKYO))
+                  .toLocalDate()
+                  .equals(row.date()));
       Optional<BatchStepResult> result;
       if (row.status().equals("RUNNING")) {
         require(

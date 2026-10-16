@@ -30,6 +30,8 @@ import org.jspecify.annotations.NullMarked;
 /** Fixed Ubuntu amd64 trusted payloads; held ELF is not a third inherited FD. SSC137/PT297. */
 @NullMarked
 final class RootServiceExecutableAdmission {
+  private static final java.lang.String LITERAL_JAVA = "java";
+
   static final String SETPRIV = "86965a019d37dc11d176ce8cbe9f5f5f8f37027c95e03cb4a8cad4c73d940993";
   static final String JAVA = "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1";
   static final String TARGET = "/opt/jdk-25.0.4/bin/java";
@@ -119,7 +121,7 @@ final class RootServiceExecutableAdmission {
     Path etcPath = Path.of("/etc");
     Path optPath = Path.of("/opt");
     bin.atExistingEntryHandle(
-        "java",
+        LITERAL_JAVA,
         link -> {
           var before = checked(link, 0xa1ff, security);
           requireSelector(bin, before, firstTarget, security);
@@ -135,7 +137,7 @@ final class RootServiceExecutableAdmission {
                       var alternativesBefore =
                           alternatives.atDirectory(p -> checked(p, 0x41ed, security));
                       alternatives.atExistingEntryHandle(
-                          "java",
+                          LITERAL_JAVA,
                           alternative -> {
                             var alternateBefore = checked(alternative, 0xa1ff, security);
                             requireSelector(alternatives, alternateBefore, target, security);
@@ -160,7 +162,7 @@ final class RootServiceExecutableAdmission {
                                                   javaBin.atDirectory(
                                                       p -> checked(p, 0x41ed, security));
                                               javaBin.atExistingEntryHandle(
-                                                  "java",
+                                                  LITERAL_JAVA,
                                                   held -> {
                                                     var admitted =
                                                         admit(
@@ -169,7 +171,7 @@ final class RootServiceExecutableAdmission {
                                                             security,
                                                             security::requireNoFileCapabilities);
                                                     javaBin.atExistingEntryHandle(
-                                                        "java",
+                                                        LITERAL_JAVA,
                                                         reopened -> {
                                                           require(
                                                               admitted.equals(
@@ -199,7 +201,7 @@ final class RootServiceExecutableAdmission {
                             require(alternateBefore.equals(checked(alternative, 0xa1ff, security)));
                             requireSelector(alternatives, alternateBefore, target, security);
                             alternatives.atExistingEntryHandle(
-                                "java",
+                                LITERAL_JAVA,
                                 reopened -> {
                                   require(
                                       alternateBefore.equals(checked(reopened, 0xa1ff, security)));
@@ -218,7 +220,7 @@ final class RootServiceExecutableAdmission {
           require(before.equals(checked(link, 0xa1ff, security)));
           requireSelector(bin, before, firstTarget, security);
           bin.atExistingEntryHandle(
-              "java",
+              LITERAL_JAVA,
               reopened -> {
                 require(before.equals(checked(reopened, 0xa1ff, security)));
                 return Boolean.TRUE;
@@ -236,7 +238,7 @@ final class RootServiceExecutableAdmission {
       throws IOException {
     parent.atDirectory(
         p -> {
-          Path name = p.resolve("java");
+          Path name = p.resolve(LITERAL_JAVA);
           var named =
               Files.readAttributes(
                   name,
