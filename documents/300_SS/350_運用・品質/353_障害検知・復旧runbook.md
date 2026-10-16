@@ -1,5 +1,12 @@
 # 障害検知・復旧runbook
 
+## SSC298 post済みmetadata-only scopeの限定回収
+
+SS343 SSC298に従い、元4494/26012 UNKNOWNを再実行しない。4504で固定metadata828676/4FD・子829193のZ/rawWaitStatus0とpost manifest7ab5cdc6/全新post scope正常を認証し、旧parent未waitを正常化しない。新only同artifact proof/全新十Ref正常・独立反例・設計only main公開後、当metadataだけ通常pidfd TERM一回、子は自然reapでsignal0、元hostgate自然継承/元transport実値とguest終端を別保存する。旧二pid/Root/Unit/VM/DBserver等への操作0。
+
+元post成功を再発行せず参照し、metadata所有変更後の別fresh postで新M/A/RODB/十Ref正常・全24/189/32/19Unit/原本Backup鍵/58/37/資源0を確認し、外側Refも正常返却する。新childは開始payload/親/予約/新PID/元waitへ結合し、起動直後のfullFD記録競合を避ける。UNKNOWNなら隔離保持、元失敗byte/証跡を変更せず、正常/正式へ補完しない。
+
+
 ## SSC297 配置前inspect UNKNOWNからの限定回収
 
 BUG1365のv1拒否を保全し、新v2で343所定の同一/run FD31/90の歴史mtime/ctime範囲だけを認証する。全境界内二読・他全属性は完全一致、未来/逆行/別inode等は拒否する。後日の同値を元v1成功へ書き戻さない。
