@@ -24,6 +24,9 @@ def namespace():
 def terminal_payload(binding): return namespace()['terminal_payload'](binding)
 
 
+def bind(raw): return namespace()['bind'](raw)
+
+
 def rows_payload(): return namespace()['rows_payload']()
 
 
