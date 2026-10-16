@@ -4,8 +4,8 @@ from pyflakes.api import check
 import pg4444_failed_current_unused_sources as previous
 
 W, CURRENT, CURRENT_BOM, SOURCE, BOM, BEFORE, BOOT = previous.W, previous.CURRENT, previous.CURRENT_BOM, previous.SOURCE, previous.BOM, previous.BEFORE, previous.BOOT
-TOOLS = 'pg4444-failed-current-unused-tools-v3'; SAVE = 'pg4448-failed-current-unused-placement-v3'
-ARCHIVE = 'pg4448-shared-manager-release-v3.tar'; REMOTE = '/home/ubuntu/pg4448-shared-manager-input-v3'
+TOOLS = 'pg4444-failed-current-unused-tools-v4'; SAVE = 'pg4448-failed-current-unused-placement-v4'
+ARCHIVE = 'pg4448-shared-manager-release-v4.tar'; REMOTE = '/home/ubuntu/pg4448-shared-manager-input-v4'
 PROOF_SAVE = SAVE + '-inspect'
 qualify, candidate_bom, production, pinned = previous.qualify, previous.candidate_bom, previous.production, previous.pinned
 
@@ -32,6 +32,8 @@ def sources(bom=None, before=None):
     raw = once(raw, marker, '    inspectOnly=inspection(args);if(inspectOnly)SAVE=Path.of(' + repr('/var/lib/pgpt-s1-preservation/' + PROOF_SAVE).replace("'", '"') + ');\n    require(!Files.exists(SAVE,LinkOption.NOFOLLOW_LINKS));')
     raw = once(raw, 'phase="SIGNED_UNUSED_PLACEMENT";', 'phase=inspectOnly?"SIGNED_UNUSED_INSPECTION":"SIGNED_UNUSED_PLACEMENT";')
     raw = once(raw, 'unusedCandidatePlaced=true\\nallNewScopesReturnedNormally=true', 'unusedCandidatePlaced="+(!inspectOnly)+"\\ncandidateInspectOnly="+inspectOnly+"\\nallNewScopesReturnedNormally=true')
+    raw = once(raw, 'privateWrite(SAVE.resolve("complete.private"),"', 'privateWrite(SAVE.resolve("complete.private"),("')
+    raw = once(raw, 'oldUnknownNormalized=false\\n".getBytes(StandardCharsets.US_ASCII)', 'oldUnknownNormalized=false\\n").getBytes(StandardCharsets.US_ASCII)')
     values[name] = raw
     name = 'pg4444_native_refs.py'; raw = values[name]
     raw = once(raw, "SAVE = pathlib.Path('/var/lib/pgpt-s1-preservation/" + SAVE + "')",
