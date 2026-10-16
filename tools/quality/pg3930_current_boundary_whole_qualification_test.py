@@ -7,6 +7,13 @@ import pg3930_current_boundary_whole_qualification as qualify
 
 
 class FixedIntegration(unittest.TestCase):
+    def test_operator_describes_actual_test_group_not_old_hygiene(self):
+        raw = whole.operator_source()
+        self.assertIn(whole.BASIS, raw)
+        self.assertIn(whole.TRIGGER, raw)
+        self.assertNotIn('BUG1313', raw)
+        self.assertNotIn('Root inode value/ACL boundary cases', raw)
+
     def test_whole_keeps_real_hashes_and_exact_expected_count(self):
         head = '0123456789abcdef0123456789abcdef01234567'
         digest = '3714' + 'a' * 60

@@ -12,6 +12,8 @@ NEW_CASES = [('dev.codex.schubert.nk.batch.repository.MorningDatabaseSessionTest
     'mdb3920001RetainedRequestTimeBoundariesPreserveActualRowsAndOwnedLock',
     'mdb3924001DifferentFailureMetricsCannotMintCanonicalFailedPairSnapshot']]
 require = previous.require
+BASIS = '3714 retained plus independent Session retained-request boundary and failed-pair authority tests;545suite1643Main; Test-only group'
+TRIGGER = 'PT-MDB-3920-001/PT-MDB-3924-001 completed independent boundary group; required one fresh Test-only integration; no Main/VM/duplicate run'
 
 
 def validate(snapshot):
@@ -31,8 +33,19 @@ def server_source(head, digest):
     return rebase(previous.server_source(h, d), 'PG3734', 'PG3928', 3714, 3716, {h: head, d: digest})
 
 
-def main():
+def operator_source():
     raw = inspect.getsource(previous.main).replace('PG3734', 'PG3928').replace('pg3734', 'pg3928').replace('3714', '3716')
+    for old, new in [
+        ('3712 retained plus exact two independent Root inode value/ACL boundary cases;545suite1643Main; batched semantic-proof source hygiene', BASIS),
+        ('BUG1312 Test boundary plus BUG1313/1317/1320 batched cross-module Main hygiene; required one fresh whole, old4856 native not candidate credit', TRIGGER)]:
+        require(raw.count(old) == 1, 'exact human-readable trigger boundary required')
+        raw = raw.replace(old, new)
+    compile(raw, '<whole operator with actual two-boundary trigger>', 'exec')
+    return raw
+
+
+def main():
+    raw = operator_source()
     namespace = {**previous.__dict__, 'validate': validate, 'server_source': server_source}
     exec(compile(raw, '<one necessary Test-group3716 integration>', 'exec'), namespace)
     return namespace['main']()
