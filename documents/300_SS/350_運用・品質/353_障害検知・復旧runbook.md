@@ -480,3 +480,9 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC286 failed-DONE現cohortのreadonly診断境界（2026-10-16）
+
+343 SSC286を正とする。Root155272/Inv820851b8の1800秒timeout143は、.doneWARNING10/observer0/原本整合があっても非合格。4052で同四ordinary/全24/署名187/原本Backup/nativeを保全した後、新M→A・実batch RO専用DB/advisory・十Refと普通poolのfresh socket照合で原本whole graph費用だけを測る。前後全原値/本人所有・全scope正常返却/独立postを必要とし、技術測定を操作権へ昇格しない。
+
+この段階はsignal/停止・intent退役・新Root・epoch/permit・DB更新・配備/reloadを許可しない。正常専用ownedstopへ143を代入しない。旧失敗・原本/Backup/keys/全nativeを保持し、未知owner/close不明は隔離を維持する。必要な停止回収profileは当全fresh実物と元PID1/実起動順を根拠として別途具体化し、既成功を再演しない。RD/UI/品質/元1800秒は不変更。
+
