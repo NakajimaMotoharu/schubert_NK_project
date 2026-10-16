@@ -5,7 +5,7 @@ import sys
 import types
 import pg4022_literal_invariant_acceptance as previous
 import pg2079_current_same_day_rows_capture as row_template
-import pg4250_current_admission_image as admission
+import pg4260_stable_admission_image as admission
 from pg4060_original_profile_dual_stack import once
 from pg1446_current_cold_stage import W
 
