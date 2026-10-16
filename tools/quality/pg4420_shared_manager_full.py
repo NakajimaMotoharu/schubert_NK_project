@@ -1,7 +1,6 @@
 """One required new-source whole six, preserving literal NoTests and all quality checks."""
 import ast
 import hashlib
-import inspect
 import json
 import os
 from pathlib import Path
