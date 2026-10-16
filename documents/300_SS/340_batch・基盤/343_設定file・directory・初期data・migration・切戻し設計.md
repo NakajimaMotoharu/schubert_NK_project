@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC292 新current UNKNOWN管理pairの限定handoffと残五停止
+
+SSC291の元recover（Root167140/INVbbcdb699/run b1ba37cb/activation8314450e、source7bb/PG3976、boot79a）のCaddy一回停止後UNKNOWNを対象に、旧SSC288/289の別instanceとして扱う。元driver/予約/failed pair未取得の事実を保全し、Caddyの再stop又は元recoverの再実行をしない。原本DB/Backup/鍵・署名187とmanifest/materials・全32宣言・起動37entry・既native56を保持する。主因未確定のsnapshot不一致をfield除外/再試行で成功化しない。不一致の前後全snapshotはroot私有new-only fileへwrite/fsync/dirsyncし、rawを公開しない。
+
+新only scopeのmetadata十Refを保持したまま、元host634760/t15505417/argv・SSH634870/t15505594、管理Java815726/t15409721/argv5312514a・Python815643/t15408795/argvc8c952de、session970のauthority/cgroup/98・7全FD/子関係・同open-description・M/A flockを直前二読認証する。記録された専用backend815747/advisoryの期限後不存在は旧正常closeではない。実batch DB結果と全ordinary clientの固定role/SS342 pool範囲/両端TCPも照合し、不明ownerへsignalしない。Java→Pythonの各一回pidfd TERMと真正終端/全旧PID・lock消失を記録し、元observer/SSHの実transport終了値と分離する。SSH終了を一律143と仮定せず、真正非0をそのまま失敗保存する。旧scope正常close/Root正常を主張しない。hostgateをunlink/forceせず元ownerの自然返却後だけ継承する。
+
+同artifact新partial controllerのinspect・全新scope正常を先行し、Caddyは保存した停止前世代と現在のnormal terminal/kernel空/旧PID不存在を再認証する観測だけである。必要Web→API→Expiry→Artemis→Cleanupの五停止だけを各一回予約/verify/真正terminal/資源後条件へ結ぶ。全fresh二読・全FD/署名/原値/ordinary pool・native固定出力条件を落とさず、六終端後の現ISSUED typed revoke/全37保持→全新M/A/RODB/十Ref正常→別fresh独立postまで回収受入れしない。UNKNOWN/未取得pairの過去値を後日の同値で補完せず、再失敗時も隔離・元job保全。新Root/Backup/Admin/配備/reload/VM/force操作0、1800秒/業務RD/UI/451/QA051は不変更。
+
 ## SSC291 同source新failed-DONE instanceの正規逆順回収
 
 SSC287～289の権限/終了条件を変更せず、Production7bb/PG3976/BOM0a409301/boot79aの別instanceだけを新only工具へ固定する。Root167140/INVbbcdb699/start149622262076μs/exit151422334917μsは1800.072841秒timeout143、runb1ba37cb-9b2b-469b-a5f2-b0e6d8c97cd1/cutoff2026-10-16T11:32:53.943173Z/act8314450e-0dd5-4986-875c-81f73e1b50b2。原本done10/SHA654073a05ac1101060b235c8dc1e058efb94f0884e4eb87613b7f182b199644aはdata-onlyで、正常Receipt・旧親の期限・停止権限ではない。PID1同boot/INV/job starting→failedの6record、現在Unit failed/143/全PID-job0・cgroup空と当原本byteを独立照合する。
