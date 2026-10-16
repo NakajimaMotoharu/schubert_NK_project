@@ -8,7 +8,7 @@ import pg4498_set_typed_unused_sources as unused
 from pg4438_failed_current_canonical_view import PARENT_FIELDS
 
 W,CURRENT,SOURCE,BOM,BEFORE=(unused.W,unused.CURRENT,unused.SOURCE,unused.BOM,unused.BEFORE)
-TOOLS='pg4522-failed-current-ro-tools-v1';SAVE='pg4526-failed-current-ro-completed-v1';CLASS='Pg4522CandidateRo'
+TOOLS='pg4522-failed-current-ro-tools-v2';SAVE='pg4526-failed-current-ro-completed-v2';CLASS='Pg4522CandidateRo'
 BASE=historical.BASE
 
 
@@ -34,7 +34,7 @@ def qualify():
 
 def bind(raw):
     raw=unused.previous.previous.role_text(raw)
-    return raw.replace(historical.TOOLS,TOOLS).replace(historical.SAVE,SAVE).replace('pg3994','pg4522').replace('Pg3994','Pg4522').replace('PG3994','PG4522').replace('pg3996','pg4524').replace('PG3996','PG4524').replace('pg3998','pg4526').replace('PG3998','PG4526')
+    return raw.replace(historical.TOOLS,TOOLS).replace(historical.SAVE,SAVE).replace('pg3994','pg4522').replace('Pg3994','Pg4522').replace('PG3994','PG4522').replace('pg3996','pg4530').replace('PG3996','PG4530').replace('pg3998','pg4532').replace('PG3998','PG4532')
 
 
 def alias(raw):
@@ -55,6 +55,8 @@ def build_sources():
     raw=raw.replace('COMPLETED_ORIGINAL','FAILED_PARENT_DATA')
     raw=once(raw,'genuineParentNormalWarningOriginal=true\\ncurrentManagerGc=true','genuineParentNormalWarningOriginal=false\\ncurrentManagerGc=false\\nfailedParent143DataOnly=true')
     values[name]=raw
+    name='pg4522_input_preflight.py'
+    values[name]=once(values[name],"'traceback'))","'traceback', 'uuid'))")
     name='pg4522_native_refs.py';raw=values[name]
     raw=raw.replace('qualify_warning_parent','qualify_failed_parent')
     raw=once(raw,'from pg4522_parent_receipt import completed','from pg4522_parent_receipt import failed_completed')
