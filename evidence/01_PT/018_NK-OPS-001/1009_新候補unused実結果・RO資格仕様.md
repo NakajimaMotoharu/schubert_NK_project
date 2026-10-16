@@ -1,0 +1,27 @@
+# 新候補unused実結果・RO資格仕様
+
+NK-OPS-001 / SS343353354355 / SSC299 / BUG1382/YKT1148、1005～1008。現964e/PG4432/BOM9380・候補825e/PG4702/BOMf1f6743f・guest boot79aを区別する。
+
+## 初回guest stage/place・独立post
+
+operator **9bf6ddfdaf542635d4ac353c72be84e5f08caf63**、Linux/JDK25.0.4/Python3.14.4。実commandは既PYTHONPATHで`pg4710_ssc299_unused_dispatch.py stage`→元0回収後`place`→元0後`pg4712_ssc299_unused_post.py`。元75828の入口拒否1は保持、新guest発行は各一回。stage/place各前にfresh host/QEMU/forwardとcurrent正常全資源・別候補authorityを照合した。
+
+| 元job | 実結果・時刻UTC | 証跡・hash |
+|---|---|---|
+| stage50796 | actual0、21:17:56.074712～59.617385Z、sourceQualified/同operator | pg4710-stage-v1.safe.json SHA5dd15666dafe41c129a717bfad12120b24888392415b9d4316718aedfbb54cf6、log a04ab66bfbab3fadd9edc5ef0d805b35935fac186f557fda778c0a8131a09a01 |
+| place75258 | actual0、21:18:45.672609～21:19:35.895063Z、unusedPlacementOnly/epoch変更false・Unit/SQLwrite0 | pg4710-place-v1.safe.json SHA b047382e4cc4d1bcfcf693be2f2e3c990581b64dbb0f0e6a0677a404d03afc9f、log4a542d486589a8f436809a0220d17dbc51ddf0d05b80a4b4836aac8e628e7501 |
+| 独立post14833 | actual0、21:21:12.393527Z、全metadata正常返却後durable成功 | pg4712-ssc299-unused-post-v1/manifest.safe.json SHA71f7350f76d249014b57c56be98998e937751a8a6e67b2ef3228779c9a8517fe、payload1fb1f128ff537fac78bcad0b06830217dc6d74aaae576fa01f9a20cfc46a93ad |
+
+独立oracleは元sealed before612beec0、host署名BOMf1f6743f/187artifactサイズ・SHA、現リンクPG4432/元187署名、全24表二度不変、全32config/Unit file metadata-byte・全原本Backup/既proof/native64・runtime/startup/approval epoch不変。actualは全一致、ten kernel/全actor/client-advisory-M-A/lock0・十metadataRef正常返却。候補だけunused配置、current未交換/新Root・ADMIN・業務発行0/旧source native輸入0。三私有evidencefileを作るためguestFilesWritten=3、dbWrites=0/rawExported=false。before10/native付11のhashは1006と同612beec0/5f4800ac。DB原像・鍵・session等はGitへ輸出しない。
+
+BUG1382の当入口は実是正・stage/place/post0で限定再試験済み。YKT1148は後続RO/有限公開入口の明示selector・実受入まで未完。
+
+## 次のRO資格仕様（未実施）
+
+PT-OPS-SSC299-RO001～002。新4714はactual4712独立postのactual0/別current-candidate/BOM/全原値/native64/正常十Refを必須とし、欠落・異source・bool・Ref不明を拒否。全18生成source/immutable parent/projection capsuleを保持、native_refsに既実bundle SHA一個だけを束縛する。ROは既設置candidateのmodeだけを変更し、新archiveを展開しないのでinput_preflightに不要なBUNDLE再定義を加えない。
+
+4716はcurrent PG4432のAPI/batch/Jar/libとactual4708-frozenの全shared hashを使用し、全18 compile/Werror＋argument/labelmount/original/identity/input五phaseを実行する。candidate Jarをcurrent ABI代用にしない。期待値は固定全18/各元SHA・literal拒否matrix、production codeをexpected生成へ使用しない。
+
+hostcommand=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes3.4.0/runtime> python3 -B -m unittest pg4714_ssc299_ro_sources_test -v`。**2工具試験/FES0**、全実generated Python static0・source-bound foreign/missing/bool拒否・whole capsule一致・単一bundle・current四classpath固定。初期TDDはRO input_preflightもarchive bundleが必要とした誤った仮説と、compiler文字列の整形依存assertで拒否し、ROの既仕様/四classpathの独立literalへ修正して完走。実guest/Production失敗として扱わず、初期拒否履歴は保持する。
+
+次=工具/本書/現況clean固定push→同PYTHONPATH `pg4716_ssc299_ro_compile.py` 一回→元全phase0後だけ明示RO stage/prepare/独立postへ。新Root/有限公開/CHR/native/四100/F03/451/正式1964/53更新/QA051finalは未完、工数nullを維持する。
