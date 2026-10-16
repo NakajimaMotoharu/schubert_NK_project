@@ -13,7 +13,7 @@ def compiler():
     for a,b in [('pg3152-frozen-v1','pg3602-frozen-v1'),('pg3150-browser-business-owned-stop-tools-v1','pg3600-current-browser-owned-stop-tools-v1'),('Pg3150','Pg3600')]:raw=raw.replace(a,b)
     marker="current = json.loads((W / 'pg3754-current-4856-before-view-v1/manifest.safe.json').read_bytes())"
     if raw.count(marker)!=1:raise ValueError('exact new data-only view role required')
-    raw=raw.replace(marker,marker+"['result']")
+    raw=raw.replace(marker,"current = json.loads((W / "+repr(str(role.VIEW_LOCAL.relative_to(role.W)))+").read_bytes())['result']")
     compile(raw,'<complete new unused host ABI>','exec');return raw
 
 

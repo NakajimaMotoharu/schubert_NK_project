@@ -18,6 +18,7 @@ BOOT='79a3260a-e16d-42bf-942a-b914ed144c28'
 TOOLS='pg3756-hygiene-unused-tools-v1';SAVE='pg3760-hygiene-unused-placement-v1'
 ARCHIVE='pg3760-hygiene-release-v1.tar';REMOTE='/home/ubuntu/pg3760-hygiene-input-v1'
 BASE=W/previous.TOOLS;LATEST=W/completed.TOOLS
+VIEW_LOCAL=W/'pg3754-current-before-view-v1/manifest.safe.json'
 
 
 def pinned(folder,name):
@@ -38,7 +39,7 @@ def role_text(raw):
 
 
 def qualify():
-    ro=json.loads((W/'pg3752-current-preservation-readonly-v1/manifest.safe.json').read_bytes());view=json.loads((W/'pg3754-current-before-view-v1/manifest.safe.json').read_bytes());signed=json.loads((W/'pg3748-candidate-build-v1.safe.json').read_bytes())
+    ro=json.loads((W/'pg3752-current-preservation-readonly-v1/manifest.safe.json').read_bytes());view=json.loads(VIEW_LOCAL.read_bytes());signed=json.loads((W/'pg3748-candidate-build-v1.safe.json').read_bytes())
     if not(ro['actualExit']==view['actualExit']==signed['actualExit']==0 and ro['result']['deployedSource']==view['result']['productionSource']==CURRENT and ro['result']['BOM']==CURRENT_BOM and view['result']['privateBeforeSha256']==BEFORE and view['result']['dataOnlyNotRuntimeAuthority']and view['result']['nativeCandidateCredit']is False and view['result']['nativePhysicalFilesPreserved']==34 and signed['candidateSource']==SOURCE and signed['manifestSha256']==BOM and signed['signatureVerified']and signed['candidateNotDeployed']):raise ValueError('separate fresh current-data and signed candidate authorities required')
 
 

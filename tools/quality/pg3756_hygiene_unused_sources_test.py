@@ -1,4 +1,5 @@
 import ast
+import json
 import unittest
 import pg3756_hygiene_unused_sources as c
 import pg3758_hygiene_unused_compile as compiler
@@ -26,9 +27,11 @@ class Roles(unittest.TestCase):
 
     def test_emitted_host_abi_is_new_only_and_current_shared_contract(self):
         raw=compiler.compiler();ast.parse(raw)
-        for value in ['pg3748-candidate-build-v1','pg3748-release-v1','pg3748-manifest-v1.sig','pg3754-current-4856-before-view-v1',"['result']",'pg3602-frozen-v1','pg3600-current-browser-owned-stop-tools-v1','pg3420-release-v1','Pg3756OriginalTupleTest','pg3758-frozen-v1']:
+        for value in ['pg3748-candidate-build-v1','pg3748-release-v1','pg3748-manifest-v1.sig','pg3754-current-before-view-v1',"['result']",'pg3602-frozen-v1','pg3600-current-browser-owned-stop-tools-v1','pg3420-release-v1','Pg3756OriginalTupleTest','pg3758-frozen-v1']:
             self.assertIn(value,raw)
         for value in ['pg3152-frozen','pg2802-release-v1','systemctl','daemon-reload']:self.assertNotIn(value,raw)
+        self.assertTrue(c.VIEW_LOCAL.is_file());view=json.loads(c.VIEW_LOCAL.read_bytes());self.assertEqual(0,view['actualExit']);self.assertEqual(c.CURRENT,view['result']['productionSource']);self.assertEqual(c.BEFORE,view['result']['privateBeforeSha256']);self.assertIn('pg3754-current-4856-before-view-v1',view['result']['guestBeforePath'])
+        current_line=next(x for x in raw.splitlines()if x.strip().startswith('current = '));self.assertNotIn('current-4856-before-view',current_line)
 
 
 if __name__=='__main__':unittest.main()
