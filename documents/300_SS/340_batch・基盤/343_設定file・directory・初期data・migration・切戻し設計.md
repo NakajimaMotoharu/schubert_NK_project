@@ -1327,4 +1327,3 @@ BUG1332/YKT1098・QA047既承認内の内部診断補足。対象はsource7bb25a
 新管理profileはM→AをProductionの固定inode/host-private契約で保持し、実batch専用RO transaction/71419602 advisory/本人backend・TCP両端・heartbeatを認証する。独立observerは十Unitのmetadata Ref、全状態/32設定/Unitfile bytes、署名187/current、全24表/原本Backup/credential/旧proof/nativeを前後二読する。普通API app二接続/Web web一接続は同ordinary PID/start/argv/Unit世代とclient/server各socket inodeへfresh再結合し、DB総client0や古いbackend番号を要求しない。未知/余剰peer、原値不一致、lock競合、期限/close不明では測定を受入れない。
 
 当固定Javaはcaller入力を取らず、保持M/A・RODB内のMaintenanceRunFiles.Session.observeStartup二回（全graph同値・固定activationとWARNING10）とverifyRetainedの費用・実metadata呼出数のみ計測する。設定/原本/DBの書込、permit/epoch/intent操作、サービスsignal/Root再start/reload/配備は0。所有返却はDB rollback/close→M/A正常返却、observerによる本人DB/advisory/flock消失・同四actor/全原値不変→十Ref正常返却を確認する。UNKNOWNをnormalへ補わず、実close不明は隔離する。数値は診断だけで、親正常完了・業務受入・native coverage・回収許可ではない。30分budget/全fresh proof/451/RD/UIは変更しない。実装/PT・新停止profileは別の未完事項である。
-

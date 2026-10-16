@@ -485,4 +485,3 @@ SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り�
 343 SSC286を正とする。Root155272/Inv820851b8の1800秒timeout143は、.doneWARNING10/observer0/原本整合があっても非合格。4052で同四ordinary/全24/署名187/原本Backup/nativeを保全した後、新M→A・実batch RO専用DB/advisory・十Refと普通poolのfresh socket照合で原本whole graph費用だけを測る。前後全原値/本人所有・全scope正常返却/独立postを必要とし、技術測定を操作権へ昇格しない。
 
 この段階はsignal/停止・intent退役・新Root・epoch/permit・DB更新・配備/reloadを許可しない。正常専用ownedstopへ143を代入しない。旧失敗・原本/Backup/keys/全nativeを保持し、未知owner/close不明は隔離を維持する。必要な停止回収profileは当全fresh実物と元PID1/実起動順を根拠として別途具体化し、既成功を再演しない。RD/UI/品質/元1800秒は不変更。
-
