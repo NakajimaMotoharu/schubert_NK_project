@@ -12,8 +12,8 @@ from pg4432_shared_manager_signed_candidate import SOURCE, OLD_SOURCE as CURRENT
 BOM = '93807abdd4db24ad300b93d95d844ea21e64487dc5cf24b815c15db34305d3de'
 BEFORE = '66ee6f865210b07ae18e503f21e19abec54c514523bc5ac44cdc736536336e17'
 BOOT = '79a3260a-e16d-42bf-942a-b914ed144c28'
-TOOLS = 'pg4444-failed-current-unused-tools-v1'; SAVE = 'pg4448-failed-current-unused-placement-v1'
-ARCHIVE = 'pg4448-shared-manager-release-v1.tar'; REMOTE = '/home/ubuntu/pg4448-shared-manager-input-v1'
+TOOLS = 'pg4444-failed-current-unused-tools-v2'; SAVE = 'pg4448-failed-current-unused-placement-v2'
+ARCHIVE = 'pg4448-shared-manager-release-v2.tar'; REMOTE = '/home/ubuntu/pg4448-shared-manager-input-v2'
 BASE = W / previous.TOOLS
 CURRENT_RUN = 'b1ba37cb-9b2b-469b-a5f2-b0e6d8c97cd1'
 CURRENT_ACT = '8314450e-0dd5-4986-875c-81f73e1b50b2'
@@ -101,6 +101,8 @@ def sources(bom=None, before=None):
     qualify(); require(bom is None or bom == BOM); require(before is None or before == BEFORE)
     values = {role_text(name): role_text(raw) for name, raw in previous.sources().items()}
     require(len(values) == 18)
+    name = 'pg4444_input_preflight.py'
+    values[name] = once(values[name], "'traceback'))", "'traceback', 'uuid'))")
     values['pg4444_parent_receipt.py'] = parent_source()
     values['pg4444_warning_parent_projection.py'] = 'from pg4444_parent_receipt import qualify_failed_parent\n__all__=["qualify_failed_parent"]\n'
     name = 'pg4444_native_refs.py'; raw = values[name]

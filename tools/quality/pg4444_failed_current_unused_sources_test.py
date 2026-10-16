@@ -41,8 +41,29 @@ class FailedCurrentEntry(unittest.TestCase):
         raw = compiler.compiler(); compile(raw, '<host current ABI>', 'exec')
         self.assertIn('pg4432-release-v1', raw); self.assertIn("old = W / 'pg3976-release-v1'", raw)
         self.assertIn('currentCompileJarSource', raw)
-        self.assertIn('pg4444-failed-current-unused-tools-v1', str(compiler.TARGET))
-        self.assertIn('pg4448-shared-manager-release-v1.tar', str(compiler.ARCHIVE))
+        self.assertIn('pg4444-failed-current-unused-tools-v2', str(compiler.TARGET))
+        self.assertIn('pg4448-shared-manager-release-v2.tar', str(compiler.ARCHIVE))
+
+    def test_actual_emitted_graph_allows_only_declared_uuid_and_closed_dependencies(self):
+        from pathlib import PurePosixPath
+        import re
+        values = role.sources(); preflight = values['pg4444_input_preflight.py']
+        nodes = [n for n in ast.parse(preflight).body if isinstance(n, ast.FunctionDef) and n.name in {'canonical','validate_graph'}
+                 or isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'STANDARD' for t in n.targets)]
+        self.assertEqual(3, len(nodes))
+        namespace = {'ast':ast,'re':re,'PurePosixPath':PurePosixPath}
+        exec(compile(ast.Module(body=nodes,type_ignores=[]), '<actual closed18 import graph>', 'exec'), namespace)
+        bodies = {name:raw for name,raw in values.items() if name.endswith('.py')}
+        pins = {name:hashlib.sha256(raw.encode()).hexdigest() for name,raw in bodies.items()}
+        pins.update({'Pg4444UnusedStage.class':'a'*64,'Pg4444UnusedStage$References.class':'b'*64})
+        inputs = {role.ARCHIVE,'pg4432-manifest-v1.sig','bundle.safe.json'}
+        self.assertTrue(namespace['validate_graph'](pins,bodies,role.ARCHIVE,inputs))
+        for module in ['socket','foreign_package','pg4444_unknown']:
+            bad = dict(bodies); bad['pg4444_parent_receipt.py'] += '\nimport ' + module + '\n'
+            with self.subTest(module=module):
+                with self.assertRaises(ValueError): namespace['validate_graph'](pins,bad,role.ARCHIVE,inputs)
+        bad = dict(pins); bad.pop('Pg4444UnusedStage.class')
+        with self.assertRaises(ValueError): namespace['validate_graph'](bad,bodies,role.ARCHIVE,inputs)
 
 
 if __name__ == '__main__':
