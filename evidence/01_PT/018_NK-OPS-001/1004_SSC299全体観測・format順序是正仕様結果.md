@@ -19,4 +19,4 @@ BUG1381はreactor各moduleのformat→PTが、規約の全六format完走→い�
 | PT-OPS-WHOLE-XML | 18case・6変更/2追加/1638不変の固定期待、failed/skipped/flaky/rerun/hash/未知class反例 | 既3工具試験合格 |
 | PT-OPS-STATIC-ABI | 新全六Jarだけ4694へ束縛、第三者Jar不変、欠落六集合拒否。実emitted全global/static0、固定規則・F03未受入保持 | 2工具試験合格 |
 
-7工具試験・F/E/S0（5と2の二commandで実行済み、後に同commandまとめ確認）。新Main/業務試験数やcoverageへ加算0。future `whole_format_preflight.compose`は停止中の元payloadへ適用せず、次に正当なfresh全体を要する際の工具へ接続する。実先行gateの適合証拠はまだないためBUG1381/YKT1147は未完。PG4700診断は元4694/4696資格後だけ発行し、未分類PMD・F03を0扱いしない。
+7工具試験・F/E/S0（後に同commandまとめ実0確認）。新Main/業務試験数やcoverageへ加算0。future `whole_format_preflight.compose`を共通PG1476 factoryへ接続し、その派生PG4694の今後生成されるstandaloneにも全六gateが入ることを実関数/AST・全静的0で確認した。元稼働payload525ff8a0とarchive74d97051は一切変更・再発行せず、旧factory版はGitと元payloadに保全する。実先行gateの新適合証拠はまだないためBUG1381/YKT1147は未完。PG4700診断は元4694/4696資格後だけ発行し、未分類PMD・F03を0扱いしない。

@@ -14,7 +14,7 @@ from whole_format_preflight import compose, format_preflight
 
 class Preflight(unittest.TestCase):
     def test_real_six_module_factory_has_preflight_before_only_pt_site(self):
-        original = frozen.server_source(frozen.SOURCE, 'a' * 64)
+        original = (frozen.W / 'pg4694-ssc299-six-v1/full.private.py').read_text()
         raw = compose(original)
         main = next(n for n in ast.parse(raw).body if isinstance(n, ast.FunctionDef) and n.name == 'main')
         order = [ast.unparse(n) for n in main.body]
@@ -23,6 +23,10 @@ class Preflight(unittest.TestCase):
         self.assertNotIn('format_preflight', original)
         self.assertEqual(0, check(raw, '<future whole preflight actual standalone>'))
         with self.assertRaises(ValueError): compose(raw)
+        # The shared live factory, not only an unused helper, enforces the future order.
+        future = frozen.server_source(frozen.SOURCE, 'a' * 64)
+        self.assertIn('format_preflight(args, SOURCE, OUT, env, inputs)', future)
+        self.assertEqual(0, check(future, '<connected future six whole>'))
 
     def test_zero_only_unchanged_six_format_can_return_to_caller(self):
         modules = ['protocol', 'storage', 'bootstrap', 'api', 'web', 'batch']

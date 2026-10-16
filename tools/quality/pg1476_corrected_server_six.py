@@ -22,6 +22,10 @@ def server_source(head,archive_sha):
     old="'SCHUBERT_PG_ROOT':str(BASE/'tools/postgresql18/usr')}"
     assert raw.count(old)==1
     raw=raw.replace(old,"'SCHUBERT_PG_ROOT':str(BASE/'tools/postgresql18/usr'),'SCHUBERT_SHELLCHECK':str(BASE/'tools/shellcheck-0.11.0')}")
+    # BUG1381/YKT1147: all descendants must finish all-six format before any PT.
+    # Already-issued jobs use their preserved standalone bytes, never this factory again.
+    from whole_format_preflight import compose
+    raw=compose(raw)
     compile(raw,'<new corrected full six>','exec');return raw
 
 
