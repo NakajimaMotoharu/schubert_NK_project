@@ -1,6 +1,5 @@
 """Distinct published964e ordinary Root once, fresh INVALID/no permit; preserve old143."""
 import hashlib
-import inspect
 import json
 import os
 import subprocess
@@ -17,7 +16,7 @@ from pg4188_exact_partial_recover import process
 
 SLOT='pg4576-current-fresh-noargs-once-v1'
 SOURCE,BOM=observer.SOURCE,observer.BOM
-QUALIFICATION='pg4580-current-fresh-qualification-v1'
+QUALIFICATION='pg4582-current-fresh-qualification-v1'
 
 
 def action():
