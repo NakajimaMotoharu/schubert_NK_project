@@ -1,5 +1,7 @@
 # 新source全体・独立資格・host署名結果
 
+費用/criteria追補（event0966）：この一campaignの主担当は484の**WBS-K01.01**（共有起動/所有契約変更群の必要fresh全回帰・freeze）。Root executable boundary二追加＋共通六module hygieneがtriggerで、:deliverableは同source3734/3738/3750全3714/545/1643・全old3712ID保持＋new2・524class/260unique Main sourceの結合、:qualityは同reset1792649711/元0953/55/56/command/source/hash/真正terminalを対応。元着手前.3/1/3ppと元eventは保全、一campaign一回、親rollup/.02/.03/F03等参照追加費0、個別実費/N/Tnull。ここだけでK01.01全範囲又はfinal/nativeをACCEPTEDにしない。対応付けによる全回帰/署名/配備/VM再演0。
+
 NK-OPS-001/K01/P018-02、PT-HYGIENE-WHOLE-3734/QUAL-3738/SIGN-3748、SS311/343/354・451。source7fffab57a567914956b66452e5e54388642efdec、snapshot e63f01649caff0b0548ea43faaa37dc4645e0e89、dev-foundation。JDK25.0.4/Maven3.9.12 offline/Node24.19.0、Linux専用aru、worker1。
 
 triggerは先行214/90/30 source是正（重複を除く260file）とRoot typed boundary独立Test2追加。各小変更ごとに全体を再演せず一回のPG3734へまとめた。元PID1307487/t10646427/observer97653、23:16:41Z開始、元job終了code0を回収。途中ログ/算術加算/旧3712の流用ではない。
