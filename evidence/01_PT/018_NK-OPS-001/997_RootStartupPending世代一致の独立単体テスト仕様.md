@@ -15,3 +15,7 @@ fixtureは公開literalのboot46600001…/epoch46600002…、INV1234567890abcdef
 実行: clean固定後 `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes-runtime> python3 -B tools/quality/pg4666_root_identity_selected.py`。runnerはgit archiveの独立snapshotへMaven選択build、全compile/null解析、JaCoCo reportを実行し、事前にsourceから抽出した正確なclass/method一覧とXMLの全F/E/S0・重複なしを照合する。private反射/期待値Production算出/除外なし。未実行はnot-runとして残し、旧3721/nativeへ算術加算しない。
 
 証跡はPG379/pg4666-root-self-identity-selected-v1のbegin/owner/manifest.safe.json、固定全入力SHA、Maven log SHA、XML SHA、RootStartupPending counter。実日時/対象commit/結果/coverageは実行後に別998へ追記する。class全体はawaitLaunch/observeの他native負分岐が残るため、当method成功だけでclass coverage100や全工程完了にしない。関連障害=追加PT段階で発見があれば修正前起票。現時点Production障害なし、初回TDD未実行。
+
+## BUG1377/YKT1143による選択是正（2026-10-17）
+
+元4666は上流storage NoTestsでMaven1・試験0、未実行として保全。failIfNoTests=trueを緩和せず、新PG4670は上記batch三suiteに加えprotocol LayoutMetadataTest/storage ResourceScopeTest/bootstrap MaintenanceOwnerFrameTest/API ApiStartupInputsTest/Web WebStartupInputsTestを明示選択する。各suiteは固定layout・Resource正常/異常close・親owner・実config→startup入力という関連上流契約を検査し、空moduleの穴埋めassertではない。八suite全method名を実source inventoryで固定し、XMLの全一致/FES0とverifySelfのLINE/METHOD/BRANCH missed0を資格する。実commandは**pg4670_root_identity_reactor_selection.py**、別private `pg4670-root-self-identity-selected-v1`へ全入力/owner/XML/log/manifestを保存する。元NoTestsを成功化しない。
