@@ -24,6 +24,7 @@ class DirectJdbcClose(unittest.TestCase):
     def test_exact_shape_and_independent_nonmatching_sources(self):
         template = 'void NAME(java.sql.Statement s, java.sql.Statement other) throws java.sql.SQLException { Throwable primary=null; try {work();} catch(java.sql.SQLException|RuntimeException|Error original){primary=original;throw original;} finally { if(s!=null){try{s.close();}catch(java.sql.SQLException|RuntimeException|Error secondary){if(JdbcResourceFailures.replace(primary,secondary))throw secondary;}}}}'
         samples = [('good', template), ('direct', template.replace('if(s!=null){try', 'try').replace('throw secondary;}}}}', 'throw secondary;}}}')),
+                   ('annotated', template.replace('Throwable primary', '@MaybeNull Throwable primary')),
                    ('wrongArgument', template.replace('replace(primary,secondary)', 'replace(primary,new Error())')),
                    ('wrongThrow', template.replace('throw secondary;', 'throw new Error();')),
                    ('wrongHelper', template.replace('JdbcResourceFailures.replace', 'Other.replace')),
@@ -31,7 +32,7 @@ class DirectJdbcClose(unittest.TestCase):
                    ('reversedCondition', template.replace('if(JdbcResourceFailures', 'if(!JdbcResourceFailures')),
                    ('wrongResourceGuard', template.replace('if(s!=null)', 'if(other!=null)')),
                    ('wrongCaughtTypes', template.replace('java.sql.SQLException|RuntimeException|Error secondary', 'java.sql.SQLException|RuntimeException secondary'))]
-        fixture = 'package dev.codex.schubert.nk.batch.repository;\nclass Fixture { static void work() throws java.sql.SQLException {}\n' + '\n'.join(text.replace('NAME', name) for name, text in samples) + '\n}\nclass JdbcResourceFailures {static boolean replace(Throwable p,Throwable s){return p==null;}}\nclass Other {static boolean replace(Throwable p,Throwable s){return p==null;}}\n'
+        fixture = 'package dev.codex.schubert.nk.batch.repository;\nclass Fixture { static void work() throws java.sql.SQLException {}\n' + '\n'.join(text.replace('NAME', name) for name, text in samples) + '\n}\nclass JdbcResourceFailures {static boolean replace(@MaybeNull Throwable p,Throwable s){return p==null;}}\nclass Other {static boolean replace(Throwable p,Throwable s){return p==null;}}\n@java.lang.annotation.Target(java.lang.annotation.ElementType.TYPE_USE) @interface MaybeNull {}\n'
         with tempfile.TemporaryDirectory(prefix='pgpt-jdbc-finally-') as folder:
             base = pathlib.Path(folder); classes = base / 'classes'; classes.mkdir(); source = base / 'source'; source.mkdir()
             (source / 'Fixture.java').write_text(fixture)
@@ -40,8 +41,8 @@ class DirectJdbcClose(unittest.TestCase):
             result = subprocess.run([str(JDK / 'java'), '-cp', str(classes), 'SourceJdbcClosePrecedenceInventory', str(source), ''], capture_output=True, text=True, timeout=30)
             self.assertEqual(0, result.returncode, result.stderr)
             rows = facts(result.stdout)
-            self.assertEqual(2, len(rows))
-            self.assertEqual({'3', '4'}, {r['firstLine'] for r in rows})
+            self.assertEqual(3, len(rows))
+            self.assertEqual({'3', '4', '5'}, {r['firstLine'] for r in rows})
             self.assertTrue(all(r['primary'] == 'primary' and r['secondary'] == 'secondary' for r in rows))
 
     def test_malformed_extent_kind_or_resource_type_refused(self):

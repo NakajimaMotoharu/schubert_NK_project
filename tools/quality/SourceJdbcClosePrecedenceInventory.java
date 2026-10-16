@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 import javax.lang.model.element.*;
+import javax.lang.model.type.DeclaredType;
 import javax.tools.*;
 
 /** Exact typed SSC063/199 direct-close shape only; no quality-gate exemption. */
@@ -23,6 +24,12 @@ final class SourceJdbcClosePrecedenceInventory {
 
   private static StatementTree only(BlockTree b) {
     return b != null && b.getStatements().size() == 1 ? b.getStatements().getFirst() : null;
+  }
+
+  private static boolean throwableType(VariableElement variable) {
+    return variable.asType() instanceof DeclaredType declared
+        && declared.asElement() instanceof TypeElement type
+        && type.getQualifiedName().contentEquals("java.lang.Throwable");
   }
 
   private static boolean caught(Trees trees, CompilationUnitTree unit, CatchTree c) {
@@ -74,7 +81,7 @@ final class SourceJdbcClosePrecedenceInventory {
         || !helper.getEnclosingElement().toString().equals("dev.codex.schubert.nk.batch.repository.JdbcResourceFailures")
         || !helper.getSimpleName().contentEquals("replace") || !helper.getModifiers().contains(Modifier.STATIC)
         || !helper.getReturnType().toString().equals("boolean")
-        || !helper.getParameters().stream().allMatch(p -> p.asType().toString().equals("java.lang.Throwable"))) return null;
+        || !helper.getParameters().stream().allMatch(SourceJdbcClosePrecedenceInventory::throwableType)) return null;
     StatementTree then = decision.getThenStatement();
     if (then instanceof BlockTree block) then = only(block);
     if (!(then instanceof ThrowTree thrown)
@@ -82,7 +89,7 @@ final class SourceJdbcClosePrecedenceInventory {
         || !secondaryParameter.equals(element(trees, unit, call.getArguments().get(1)))) return null;
     Element primary = element(trees, unit, call.getArguments().getFirst());
     if (!(primary instanceof VariableElement variable) || primary.getKind() != ElementKind.LOCAL_VARIABLE
-        || !variable.asType().toString().equals("java.lang.Throwable")) return null;
+        || !throwableType(variable)) return null;
     Tree declaration = trees.getTree(variable);
     if (!(declaration instanceof VariableTree local) || local.getInitializer() == null
         || local.getInitializer().getKind() != Tree.Kind.NULL_LITERAL) return null;
