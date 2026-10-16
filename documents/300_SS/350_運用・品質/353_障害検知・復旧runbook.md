@@ -480,6 +480,12 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC288 Caddy既終端・二管理retainerの部分回収（2026-10-16）
+
+343 SSC288の現cohortに限定する。元4152 UNKNOWNを再実行せず、全98/7FD二読/親子/同OFD/原値・全189署名・普通pool両端と新十metadata Refを認証する。sole host gateのqueued継承を準備し、固定Java→固定Pythonへ耐久一回予約/pidfd通常TERM各15秒だけを行う。子の同世代zombie/FD0/lock0は親TERM前だけ許し、親後30秒以内に両PID消失。元observerからactual143を回収し、旧close正常化なし。異世代/未知FD/不明終端では隔離保持、sudo/host observer/VMへのsignal・force操作はしない。
+
+新metadata Refを保持したまま同inode gateの自然継承→別fresh M/A/RODB/十Refのinspect正常→既Caddy同INV normal terminalを観測のみ→残Web/API/Expiry/Artemis/Cleanupの必要逆順5stop→正規native二file/INVALID revoke・全33保持→全新scope正常→別fresh独立post→keeper Ref正常返却とする。Caddy/Root/Backup/ADMIN/配備/reloadの再演0。宣言32fieldは動的ExecStart記録と分離し、poolはSS342範囲と全peer本人TCP両端を併用する。各phase原値/全189署名/世代を省略せず、失敗時は予約/元exit/UNKNOWNを保全して再送しない。実回収・native資格・正式品質の完了は別管理する。
+
 ## SSC287 failed-DONE現cohortの限定正規回収（2026-10-16）
 
 343 SSC287の固定7bb/PG3976/boot79a・Root155272/cohortだけに適用する。旧PID1 failed/親143・原本WARNING10は独立dataとして保存し、normal親Receiptへ代入しない。fresh新M→A・実batch RO/71419602/heartbeat・DB両端・十Ref/全署名187/24表/全設定/原本Backup/keys/nativeと四ordinary全identityを認証し、最終同一artifact/全ABI資格後だけCaddy→Web→API→Expiry→Artemis→Cleanupの必要逆順一回停止へ進む。各予約と真正終端は耐久保存し、終了済み/不明を再送しない。Backup/Inspector/Admin/Rootへの不要操作0、各Unit期限を延ばさない。
