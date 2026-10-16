@@ -1320,3 +1320,10 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC286 failed-DONE・普通四actor保持時のreadonly費用測定（2026-10-16）
+
+BUG1332/YKT1098・QA047既承認内の内部診断補足。対象はsource7bb25aa9c8a1d1af04525ec51beb1c4b7268aa9e/PG3976/BOM0a409301、boot79a3260a、Root155272/Inv820851b8/run dc0cb75f/actd9d58371のtimeout143と、真正原本.doneWARNING10が共存する現cohortに限定する。4052 private732bec2c…c6da6はdata baselineであり権限ではない。SSC266の旧DONE無し/soleArtemis、正常親専用4042の条件へ当状態を仮構成しない。
+
+新管理profileはM→AをProductionの固定inode/host-private契約で保持し、実batch専用RO transaction/71419602 advisory/本人backend・TCP両端・heartbeatを認証する。独立observerは十Unitのmetadata Ref、全状態/32設定/Unitfile bytes、署名187/current、全24表/原本Backup/credential/旧proof/nativeを前後二読する。普通API app二接続/Web web一接続は同ordinary PID/start/argv/Unit世代とclient/server各socket inodeへfresh再結合し、DB総client0や古いbackend番号を要求しない。未知/余剰peer、原値不一致、lock競合、期限/close不明では測定を受入れない。
+
+当固定Javaはcaller入力を取らず、保持M/A・RODB内のMaintenanceRunFiles.Session.observeStartup二回（全graph同値・固定activationとWARNING10）とverifyRetainedの費用・実metadata呼出数のみ計測する。設定/原本/DBの書込、permit/epoch/intent操作、サービスsignal/Root再start/reload/配備は0。所有返却はDB rollback/close→M/A正常返却、observerによる本人DB/advisory/flock消失・同四actor/全原値不変→十Ref正常返却を確認する。UNKNOWNをnormalへ補わず、実close不明は隔離する。数値は診断だけで、親正常完了・業務受入・native coverage・回収許可ではない。30分budget/全fresh proof/451/RD/UIは変更しない。実装/PT・新停止profileは別の未完事項である。
