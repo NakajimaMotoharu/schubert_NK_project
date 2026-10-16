@@ -18,6 +18,8 @@ SPECS = {
     'RunReferenceRepository': 'interruptionAndRuntime'}
 DOC = 'documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md'
 TOOL = 'tools/quality/SourceJdbcClosePrecedenceInventory.java'
+LABEL = 'PG3940-jdbc-finally-review-v1'
+SLOT = 'pg3940-jdbc-finally-review-v1'
 
 
 def server(data):
@@ -29,7 +31,7 @@ def server(data):
     import subprocess
     import xml.etree.ElementTree as E
     from collections import Counter
-    os.umask(0o077); b = Path('/home/mini/schubert-nk-pgpt'); out = b / 'runs/PG3940-jdbc-finally-review-v1'; out.mkdir(); (out / 'classes').mkdir()
+    os.umask(0o077); b = Path('/home/mini/schubert-nk-pgpt'); out = b / 'runs' / data['runLabel']; out.mkdir(); (out / 'classes').mkdir()
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
     source = b / 'source-full-PG3734'; prior = b / 'runs/PG3864-suppression-identity-review-v1'
     require(sha(prior / 'manifest.safe.json') == data['priorManifestSha256'], 'immutable current1840/278 source report')
@@ -49,7 +51,7 @@ def server(data):
             values[str(p)] = {str(x.relative_to(p)): sha(x) for x in p.rglob('*') if x.is_file() and x.suffix in {'.java', '.class'}} if p.is_dir() else sha(p)
         return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()
     require(cp_hash() == item['classpathInputsSha256'], 'all exact type inputs')
-    tool = b / 'transfer/PG3940-jdbc-finally-review-v1/SourceJdbcClosePrecedenceInventory.java'; require(sha(tool) == data['toolSha256'], 'fixed independent typed extractor')
+    tool = b / 'transfer' / data['runLabel'] / 'SourceJdbcClosePrecedenceInventory.java'; require(sha(tool) == data['toolSha256'], 'fixed independent typed extractor')
     jdk = b / 'tools/jdk-25.0.4/bin'
     compiled = subprocess.run([str(jdk / 'javac'), '-Xlint:all', '-Werror', '-d', str(out / 'classes'), str(tool)], capture_output=True, timeout=30)
     (out / 'compile.private.log').write_bytes(compiled.stdout + compiled.stderr); require(compiled.returncode == 0 and not compiled.stderr, 'inventory compiler lint0')
@@ -94,17 +96,17 @@ def main():
     shared = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceCases.java'
     require(not subprocess.check_output(['git', 'diff', old['result']['sourceSnapshot'], 'HEAD', '--', *tests.values(), shared], cwd=ROOT), 'same independent68-vector oracle and owning Tests, not new expected values')
     helper = 'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java'
-    data = {'source': SOURCE, 'specs': SPECS, 'testSha256': {n: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for n, p in tests.items()},
+    data = {'runLabel': LABEL, 'source': SOURCE, 'specs': SPECS, 'testSha256': {n: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for n, p in tests.items()},
             'sourceSha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in ROOT.glob('src/*/src/main/java/**/*.java')},
             'priorManifestSha256': prior['result']['serverManifestSha256'], 'qualificationSha256': old['result']['qualificationManifestSha256'],
             'classpathAuthoritySha256': cp['result']['serverManifestSha256'], 'toolSha256': hashlib.sha256((ROOT / TOOL).read_bytes()).hexdigest(),
             'helperSha256': hashlib.sha256((ROOT / helper).read_bytes()).hexdigest(), 'design': {'path': DOC, 'sha256': hashlib.sha256((ROOT / DOC).read_bytes()).hexdigest(), 'basis': 'SSC063/SSC199'},
             'independent68VectorOracleSha256': hashlib.sha256((ROOT / shared).read_bytes()).hexdigest()}
-    os.umask(0o077); out = W / 'pg3940-jdbc-finally-review-v1'; out.mkdir()
+    os.umask(0o077); out = W / SLOT; out.mkdir()
     script = out / 'review.private.py'; script.write_text('\n'.join(inspect.getsource(f) for f in [require, facts, server]) + '\nserver(' + repr(data) + ')\n')
     compile(script.read_text(), '<read-only JDBC finally assessment>', 'exec')
-    destination = '/home/mini/schubert-nk-pgpt/transfer/PG3940-jdbc-finally-review-v1'
-    status, _ = run('test ! -e /home/mini/schubert-nk-pgpt/runs/PG3940-jdbc-finally-review-v1 && mkdir -m700 ' + destination, timeout=30); require(status == 0, 'new-only host assessment')
+    destination = '/home/mini/schubert-nk-pgpt/transfer/' + LABEL
+    status, _ = run('test ! -e /home/mini/schubert-nk-pgpt/runs/' + LABEL + ' && mkdir -m700 ' + destination, timeout=30); require(status == 0, 'new-only host assessment')
     for p in [script, ROOT / TOOL]:
         status, _ = copy(p, destination + '/', timeout=60); require(status == 0, 'fixed tool and proof inputs')
     status, output = run('python3 -B ' + destination + '/review.private.py', timeout=240); (out / 'observer.private.log').write_text(output)
