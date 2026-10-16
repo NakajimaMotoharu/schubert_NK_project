@@ -4,6 +4,7 @@ import pg4220_same_peer_current_observer as previous
 import pg4540_failed_current_publication_sources as role
 from pg1674_critical_management_gate import management_gate
 from pg1446_current_cold_stage import P
+from pg4434_current_candidate_admission_read import authenticate_host
 
 SOURCE,BOM=role.SOURCE,role.BOM
 PREFIX='pg4560'
@@ -30,6 +31,7 @@ def namespace():
 
 def main():
     import sys
+    authenticate_host()
     if sys.argv[1:]==['stage']:
         with management_gate(P/'current-management-critical.lock'):return namespace()['main']()
     return namespace()['main']()
