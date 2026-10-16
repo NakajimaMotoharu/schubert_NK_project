@@ -4711,6 +4711,77 @@ final class MorningDatabaseSessionTest {
     mdb2292NoOwnerResources();
   }
 
+  /** PT-MDB-3924-001: different failure metrics are auditable but never a canonical pair proof. */
+  @Test
+  void mdb3924001DifferentFailureMetricsCannotMintCanonicalFailedPairSnapshot() throws Exception {
+    for (int vector = 0; vector < 2; vector++) {
+      var run =
+          new BatchRun(
+              UUID.fromString("3924000" + (vector + 1) + "-2222-4333-8444-555555555555"),
+              Instant.parse("2059-05-09T15:00:00Z").plusSeconds(vector * 86400L));
+      Instant started = run.cutoff().plusSeconds(60);
+      Instant ended = started.plusSeconds(1);
+      var canonical =
+          new BatchStepResult(
+              BatchStepResult.Status.FAILED, 1, 0, 1, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+      var different =
+          new BatchStepResult(
+              BatchStepResult.Status.FAILED, 2, 0, 2, 0, BatchStepResult.Reason.COMMAND_FAILURE);
+      var database = vector == 0 ? canonical : different;
+      var configuration = vector == 0 ? different : canonical;
+      var subject =
+          new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+      subject.execute(
+          credential(),
+          session -> {
+            var begins = session.beginBackup(run, started, false);
+            session.failBackup(begins, ended, database, configuration);
+            var observed =
+                session.observeBackup(begins, Optional.empty(), ended, () -> 10_000_000_000L);
+            assertEquals(database, observed.current().get(0).result());
+            assertEquals(configuration, observed.current().get(1).result());
+            assertTrue(observed.prior().isEmpty());
+            try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+              String before = mdb588Audit(observer, run);
+              IOException failure =
+                  assertThrows(
+                      IOException.class,
+                      () -> session.failedBackupSnapshot(begins, () -> 10_000_000_000L));
+              assertEquals("root batch database unavailable", failure.getMessage());
+              assertNull(failure.getCause());
+              assertEquals(before, mdb588Audit(observer, run));
+              assertFalse(advisory(observer));
+              session.recheckConsistent(run);
+            } catch (SQLException failure) {
+              throw new IOException("isolated failed-pair row oracle unavailable", failure);
+            }
+            return true;
+          });
+      try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+          var query =
+              observer.prepareStatement(
+                  "select step,status,target_count,success_count,failure_count,byte_count,error_code"
+                      + " from schubert.batch_runs where run_id=? order by step")) {
+        query.setObject(1, run.id());
+        try (var rows = query.executeQuery()) {
+          for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+            assertTrue(rows.next());
+            long count = (step.equals("BACKUP_DB") ? vector == 1 : vector == 0) ? 2 : 1;
+            assertEquals(step, rows.getString(1));
+            assertEquals("FAILED", rows.getString(2));
+            assertEquals(count, rows.getLong(3));
+            assertEquals(0, rows.getLong(4));
+            assertEquals(count, rows.getLong(5));
+            assertEquals(0, rows.getLong(6));
+            assertEquals("COMMAND_FAILURE", rows.getString(7));
+          }
+          assertFalse(rows.next());
+        }
+      }
+      mdb2292NoOwnerResources();
+    }
+  }
+
   static final class Probe {
     final List<String> events = new ArrayList<>();
     final Map<String, Integer> counts = new HashMap<>();

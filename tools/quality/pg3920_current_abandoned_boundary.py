@@ -17,6 +17,8 @@ BASE = '/home/mini/schubert-nk-pgpt'
 OUT = W / 'pg3920-current-abandoned-boundary-v1'
 SLOT = 'PG3920-candidate-v1'
 LABEL = 'PG3920'
+EXPECTED_TESTS = 64
+EXTRA_METHODS = []
 FILES = previous.FILES
 METHOD = 'mdb3920001RetainedRequestTimeBoundariesPreserveActualRowsAndOwnedLock'
 LAUNCHER = 'org/junit/platform/junit-platform-launcher/1.13.4/junit-platform-launcher-1.13.4.jar'
@@ -47,7 +49,7 @@ def server():
     raw = raw[:before] + 'hosts=[]\n' + raw[after:]
     old = "'mdb3256001CompletionGuardSqlFailurePreservesCommittedBeginsAndEmptyBackupRoot'"
     require(raw.count(old) == 1, 'existing guard method retained exactly once')
-    raw = raw.replace(old, old + ',' + repr(METHOD))
+    raw = raw.replace(old, old + ',' + ','.join(repr(n) for n in [METHOD, *EXTRA_METHODS]))
     marker = "require(all(sha(fixtures/n)==h for n,h in fixturehashes.items())"
     require(raw.count(marker) == 1, 'fixed-input postcondition boundary')
     raw = raw.replace(marker, "require(all(sha(Path(p))==INPUT['baseFull']['jarHashes'][m] for m,p in zip(['protocol','storage','bootstrap','api','web','batch'],jars)))\n" + marker)
@@ -68,7 +70,7 @@ def main():
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     files = {n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in FILES}
     tests = (ROOT / FILES[0]).read_text().count('@Test\n')
-    require(tests == 64 and METHOD in (ROOT / FILES[0]).read_text(), 'exact current64 including new boundary')
+    require(tests == EXPECTED_TESTS and all(n in (ROOT / FILES[0]).read_text() for n in [METHOD, *EXTRA_METHODS]), 'exact current count including every new boundary')
     tree = ast.parse((W / 'pg3256-completion-guard-selected-v1/selected.private.py').read_bytes())
     assignment = next(n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'INPUT' for t in n.targets))
     historical = ast.literal_eval(assignment.value)
