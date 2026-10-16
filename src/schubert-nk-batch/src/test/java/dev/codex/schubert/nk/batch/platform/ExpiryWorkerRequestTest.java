@@ -44,6 +44,63 @@ final class ExpiryWorkerRequestTest {
       prior_ended=2026-09-30T00:00:02Z
       """;
 
+  /** PT-OPS-EREQ3962-001: immutable step admission retains exact identity/start boundaries. */
+  @Test
+  void ereq3962001ImmutableStepAdmissionDefinesIdentityAndStartBounds() {
+    UUID run = UUID.fromString("39620001-2222-4333-8444-555555555555");
+    Instant cutoff = Instant.parse("2026-09-30T00:00:00Z");
+    Instant started = cutoff.plusSeconds(1);
+    for (long id : new long[] {-1, 0, 1_000_000_000_000L, Long.MAX_VALUE}) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  new CleanupWorkerRequest.Expiry.PriorExpiry(
+                      run, cutoff, id, 1, started, started));
+      assertEquals("invalid batch step identity", failure.getMessage());
+      assertNull(failure.getCause());
+    }
+    for (int attempt : new int[] {-1, 0, 100, Integer.MAX_VALUE}) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  new CleanupWorkerRequest.Expiry.PriorExpiry(
+                      run, cutoff, 42, attempt, started, started));
+      assertEquals("invalid batch step identity", failure.getMessage());
+      assertNull(failure.getCause());
+    }
+    for (Instant invalid :
+        List.of(
+            cutoff.minusNanos(1000),
+            started.plusNanos(1),
+            Instant.parse("+10000-01-01T00:00:00Z"))) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  new CleanupWorkerRequest.Expiry.PriorExpiry(
+                      run, cutoff, 42, 1, invalid, invalid));
+      assertEquals("invalid batch step time", failure.getMessage());
+      assertNull(failure.getCause());
+    }
+    for (long id : new long[] {1, 999_999_999_999L})
+      for (int attempt : new int[] {1, 99})
+        for (Instant start : List.of(cutoff, cutoff.plusNanos(1000))) {
+          var value =
+              new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, id, attempt, start, start);
+          assertEquals(run, value.run());
+          assertEquals(cutoff, value.cutoff());
+          assertEquals(id, value.id());
+          assertEquals(attempt, value.attempt());
+          assertEquals(start, value.started());
+          assertEquals(start, value.ended());
+        }
+    assertThrows(
+        NullPointerException.class,
+        () -> new CleanupWorkerRequest.Expiry.PriorExpiry(run, cutoff, 0, 1, started, null));
+  }
+
   /** PT-OPS-EREQ3042-001: original end-time precision/range and all nullable identity fields. */
   @Test
   void ereq3042001PriorBoundaryAndNullContractNeverAuthorizeCleanup() {
