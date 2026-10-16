@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC301 API認可内の非秘密設定取得・失敗分類data port
+
+ApiProcessMain.startNativeがServiceStartupAdmission.executeへ渡す既CONFIGURATION callbackの本体だけを、package内`admittedConfiguration(ConfigurationLoad, int[])`へ抽出する。ConfigurationLoadはApiStartupInputs.Valuesを返しIOException/NoSuchAlgorithmExceptionを伝える内部data-only portで、通常本番は既loader::loadを同じ認可内・同順序で一回だけ呼ぶ。外部FQCN/noargs/argv/ENV/固定file/UID/署名・DB/JMS/permit/親1800秒/Unit期限を変えず、任意loader/constructor/fixture/測定modeをCLIやENVへ公開しない。認可前に設定fileを読まない。
+
+正常では取得した同一Valuesとその既canonicalSha256をConfigurationへ返し、callerの一slot failureCodeを変更しない。IllegalArgumentException又はNoSuchAlgorithmExceptionだけ既どおりfailureCode=70にし、秘密を含まない固定`IOException("non-secret configuration unavailable")`をcause/suppressedなしで送出する。IOExceptionは同一objectを伝搬し既50を保持、他RuntimeException/Errorも正規成功へ変換しない。port・slot・戻りValuesのnullは契約違反で即拒否、slot長は1だけ。null/不正slot検査はcallback実行前とし、NPEをcatchして正常扱いしない。各実行のslotはcallerに属し共有可変staticを導入しない。
+
+独立PTは正常同一Values/固定canonical golden、実invalid loader及び型別失敗、固定診断/cause非出力、IO/未知同一object、null・slot0/2・並行独立slotとcallback回数を検査する。内部境界試験はOS認可/起動/readiness/DB接続成功ではない。変更Mainは旧source nativeで補完せず、必要変更群のfresh全回帰・same-source native/451を別に資格する。RD/UI/既正常・異常終了値と承認済DIF、QA051 final保留は不変更。SSC300のcurrent825e正常20/12point実測は原sourceの限定成果として保全する。
+
 ## SSC300 current825eの既存ADMIN正常20・新一回native資格
 
 SSC188/189/225/231/234/263の専用Bootstrap契約を変更せず、current Source825e463334c43a5bc96f50db964df22e11758d1b/release0.1.0-PG4702/BOMf1f6743f8ebe099a8804623f5efef263fa046ca66c46004ade5d469f755fbd80/schema028/boot79a3260a-e16d-42bf-942a-b914ed144c28の未実施正常20経路へ限定再束縛する。根拠は同source Root fff841d9-2554-4680-b17d-9548bfa79cbb/cutoff2026-10-16T22:12:38.570783Z/activation7ab6c953-b2fc-47ae-be96-26a3196ca76d、真正WARNING10/1652.392895秒、実Browser12/正規ownedstop/4778独立全24二読・十kernel/actor/client/advisory/flock0・署名187・native70安定。元after10field私有SHA b4f07e80538b7eab36e1ba87523097891252e5f14f9f1d86ad8106c753c740c3は観測比較基点だけで起動権限ではない。初回guest readで全原値/Source-BOM-current/同signature/全24・32設定とUnit宣言・NSS/credentials/原本Backup・runtime/startup/旧70native/既tool-scope終端を再認証し、ADMINが現存することをDB内だけで確認する。実体行や秘密を輸出しない。

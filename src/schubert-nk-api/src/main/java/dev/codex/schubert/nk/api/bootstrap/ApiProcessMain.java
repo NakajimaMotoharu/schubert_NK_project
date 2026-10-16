@@ -58,6 +58,28 @@ public final class ApiProcessMain {
     void execute(ApiStartupInputs.Values inputs) throws IOException;
   }
 
+  /** SSC301: non-secret data only; never a startup admission or resource capability. */
+  @FunctionalInterface
+  interface ConfigurationLoad {
+    ApiStartupInputs.Values load() throws IOException, NoSuchAlgorithmException;
+  }
+
+  /** PT-OPS-API-CONFIG-SSC301001..008; called only inside the admitted configuration callback. */
+  static ServiceStartupAdmission.Configuration<ApiStartupInputs.Values> admittedConfiguration(
+      ConfigurationLoad input, int[] failureCode) throws IOException {
+    Objects.requireNonNull(input, "configuration input");
+    Objects.requireNonNull(failureCode, "configuration failure status");
+    if (failureCode.length != 1)
+      throw new IllegalArgumentException("one configuration failure status required");
+    try {
+      var inputs = Objects.requireNonNull(input.load(), "startup inputs");
+      return new ServiceStartupAdmission.Configuration<>(inputs, inputs.config().canonicalSha256());
+    } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      failureCode[0] = 70;
+      throw new IOException("non-secret configuration unavailable");
+    }
+  }
+
   public void main(String[] arguments) throws IOException {
     Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);
     var coverage = captures.find(environment.get("INVOCATION_ID"));
@@ -134,15 +156,8 @@ public final class ApiProcessMain {
       ServiceStartupAdmission.create(ServiceConfigFiles.Service.API, environment)
           .execute(
               () -> {
-                try {
-                  System.err.println("API startup entered CONFIGURATION");
-                  var inputs = loader.load();
-                  return new ServiceStartupAdmission.Configuration<>(
-                      inputs, inputs.config().canonicalSha256());
-                } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
-                  failureCode[0] = 70;
-                  throw new IOException("non-secret configuration unavailable");
-                }
+                System.err.println("API startup entered CONFIGURATION");
+                return admittedConfiguration(loader::load, failureCode);
               },
               (inputs, ready) -> {
                 System.err.println("API startup entered PROCESS_RESOURCES");
