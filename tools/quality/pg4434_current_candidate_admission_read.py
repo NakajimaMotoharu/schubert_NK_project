@@ -35,7 +35,7 @@ value.update(freshCandidateAdmissionDataOnly=True, priorRecoveryNotReplayed=True
     return raw
 
 
-def main():
+def authenticate_host():
     from pg4152_exact_failed_done_recover import process
     from pg3428_vm_candidate_preflight_readonly import HOST
     from lan_server import run
@@ -44,6 +44,10 @@ def main():
     status, output = run(HOST, timeout=30)
     if status != 0 or json.loads(output)['boot'] != 'c7964823-c628-4ef2-99b5-07b0f0b62bba':
         raise ValueError('same current QEMU/chain/host required; no duplicate VM')
+
+
+def main():
+    authenticate_host()
     return execute(SLOT, payload(), 200)
 
 
