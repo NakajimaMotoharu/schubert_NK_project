@@ -6,7 +6,7 @@ from pyflakes.api import check
 import pg3802_hygiene_current_noargs_once as previous
 import pg4008_literal_invariant_publication_post as post
 from pg4012_literal_invariant_current_observer import SOURCE, BOM, namespace
-from pg4014_literal_invariant_browser_ready import require_ready
+from pg4029_literal_invariant_browser_ready_serial import require_ready
 from pg1446_current_cold_stage import W
 
 SLOT = 'pg4016-literal-invariant-current-noargs-once-v1'
