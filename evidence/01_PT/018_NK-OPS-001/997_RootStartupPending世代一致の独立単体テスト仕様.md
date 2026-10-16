@@ -19,3 +19,5 @@ fixtureは公開literalのboot46600001…/epoch46600002…、INV1234567890abcdef
 ## BUG1377/YKT1143による選択是正（2026-10-17）
 
 元4666は上流storage NoTestsでMaven1・試験0、未実行として保全。failIfNoTests=trueを緩和せず、新PG4670は上記batch三suiteに加えprotocol LayoutMetadataTest/storage ResourceScopeTest/bootstrap MaintenanceOwnerFrameTest/API ApiStartupInputsTest/Web WebStartupInputsTestを明示選択する。各suiteは固定layout・Resource正常/異常close・親owner・実config→startup入力という関連上流契約を検査し、空moduleの穴埋めassertではない。八suite全method名を実source inventoryで固定し、XMLの全一致/FES0とverifySelfのLINE/METHOD/BRANCH missed0を資格する。実commandは**pg4670_root_identity_reactor_selection.py**、別private `pg4670-root-self-identity-selected-v1`へ全入力/owner/XML/log/manifestを保存する。元NoTestsを成功化しない。
+
+元4670はMaven0/五suite21PT FES0・当verifySelf 11line/14branch/1method全網羅だが、実-plがbatchだけで宣言三suiteがreactor外not-runとなりqualification1（BUG1378/YKT1144）。期待八suiteを削らず、新**pg4674_root_identity_complete_selection.py**は全六projectを明示-plに固定して同八suiteを限定再試験する。実生成commandのASTからmodule集合を独立抽出し期待inventoryと一致を確認。元4670のpartial成功/三not-run/qualification1は履歴保持、対象外三suiteを成功に加算しない。
