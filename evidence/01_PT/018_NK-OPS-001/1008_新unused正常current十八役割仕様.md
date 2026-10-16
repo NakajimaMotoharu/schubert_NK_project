@@ -21,3 +21,9 @@ PG4694の全回帰は必要campaign費をWBS-K01.01へ結び、元0.3/0.8/2pp見
 新4712は元4704全read検査に候補187/署名/全非対象fileとcurrentリンク不変を追加。候補/全32config/旧before完全一致検査は既ten metadataRefのtry内、finally全Ref返却/bus正常close**後だけ**durable成功を保存する。新evidence namespaceへbefore/native/resultの三私有fileを作成するため、旧工具のguestFilesWritten0を継承せず実3と記録する（業務・Unit・SQL write0）。初期TDDは同一configuration readerの二重定義を静的検査で拒否、AST全同一を検証して既関数だけ使用へ是正。実guest未発行・失敗上書き0。
 
 関連 **6工具試験/FES0・全emitted静的0**、4710不正action/非data-only/未閉鎖/lock不明拒否、4712の候補検査がRef内/成功がclose後・同reader変異拒否・新namespace/全固定roleを独立確認。actual署名候補BOMf1f6743fへ束縛した実role生成/static0も確認済み。次commandは同PYTHONPATHで`pg4710_ssc299_unused_dispatch.py stage`→元actual0回収後だけ`place`→元actual0後だけ`pg4712_ssc299_unused_post.py`。いずれもnew-only一回、元jobがあれば再発行せず回収する。RO/有限公開・Root・新native・正式品質は未完。
+
+## BUG1382/YKT1148：actual入口の旧selector拒否と是正
+
+元4710 `stage`/75828/47e5e72e2 **actual1**。二重template main内の旧pg3748 candidate selectorがcurrent pg4432へ変換され、runtime_namespaceの最初のcandidate拒否で停止。直接部品へ新candidateを渡す試験だけではactual入口のselectorを検査していなかった。stage transport/dispatcher main実行前でguest発行なし。元失敗は`PG379/pg4710-entry-rejected-v1/manifest.safe.json`へ保全し、915/916へ修正前起票。
+
+是正は当pg4702 receipt一回取得→actual runtime admission→固定source→単一management gateを短いmainへ明示接続。**actual main入口のspy試験**で渡すcandidateSource825e/BOMf1とcurrent964eが別であることを独立確認し、関連**7工具試験/FES0・静的0**。4712は新place literalを明示/元0前条件・normal-close後newTenReferencesReturnedNormallyを実算出する。後続RO/publicationもactual入口selectorを必ず検査する（未実装対象は未完）。guestの新stage input/tools/placement三path不存在、local stage receiptなしをread actual0で確認しており、これからのstageが最初のguest発行である。旧actual1を0に書換えず、実stage/place/post完走までBUG/YKTは未完。

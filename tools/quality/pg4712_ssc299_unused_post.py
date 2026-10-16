@@ -41,7 +41,7 @@ def payload():
         if isinstance(key,ast.Constant)and key.value=='guestFilesWritten':value.value=3
     point="with (save / 'result.safe.json').open('x') as f:"
     if raw.count(point)!=1:raise ValueError('one after-normal-close durable summary boundary')
-    raw=raw.replace(point,'result.update('+ast.unparse(summary)+')\n'+point,1)
+    raw=raw.replace(point,'result.update('+ast.unparse(summary)+')\nresult["newTenReferencesReturnedNormally"]=len(refs)==10\n'+point,1)
     result='CANDIDATE='+repr(candidate)+'\nBEFORE='+repr(role.BEFORE)+'\nfrom pathlib import Path\n'+raw
     if check(result,'<full current and unused candidate independent verifier>'):
         raise ValueError('entire emitted namespace required')
