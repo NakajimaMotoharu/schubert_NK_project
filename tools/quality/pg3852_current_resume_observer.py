@@ -11,6 +11,7 @@ def source():
     marker=" assert json.loads((W/'pg3794-hygiene-publication-independent-post-v1/manifest.safe.json').read_bytes())['actualExit']==0"
     if raw.count(marker)!=1:raise ValueError('one immutable observer admission boundary')
     raw=raw.replace(marker," post=json.loads((W/'pg3850-current-resume-independent-post-v1/manifest.safe.json').read_bytes());assert post['actualExit']==0 and post['source']==SOURCE and post['result']['independentResumeOnlyDeltaVerified'] and post['result']['newTenRefsReturnedNormally'] and post['result']['snapshotKeys']==11")
+    if SOURCE not in raw or BOM not in raw:raise ValueError('exact current immutable observer identity required')
     compile(raw,'<current prepared resume immutable observer>','exec');return raw
 
 
