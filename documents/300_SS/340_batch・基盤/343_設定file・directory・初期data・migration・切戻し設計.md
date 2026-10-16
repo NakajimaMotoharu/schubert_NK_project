@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC299 三外部entryの終了要求data/control-flow port
+
+既SSC083/234のJava25標準instance-mainをMorningProcessMain/RootServiceLauncher/CleanupProcessMainへ限定適用する。公開noarg constructorは固定本番operation・既measurement source・既System::exitをbindするだけで、起動権限/代替path/fixtureを選択しない。package内constructorのcallbackは同じmainの引数判定・実行順序・終了要求の回数/値・未知例外を独立検証するdata/control-flow portであり、OS Unit/UID/原本/DB/permit/readinessのcapabilityではない。CLI/ENVから任意callback/測定profile/終了方法を選択する機能を追加しない。
+
+FQCN/既argv/終了0・10・30・70/固定診断/親1800秒/各Unit期限/全保持owner・認可・失敗逆順回収は不変更。Morningは既runCompletedの真正typed completion/既例外分類をそのまま終了要求へ渡し、未知business failureは終了要求へ正規化しない。Rootは元の引数によるmeasurement選択→同Optionalを保持したnative admission→必要TERMINAL capture→終了要求の順序と、capture不明/失敗時に終了要求を発行しない挙動を保持する。Cleanupは元mainのuncaught handler設定、--expiryの固定選択、既runNative/runExpiryの終了値/未知例外を保持する。native default constructorで代替operationを取得・選択する公開APIは作らない。
+
+独立port試験は正常/境界/異常/null/未知例外・同一callback identity・終了要求前後順序を手書きoracleで確認する。架空completion/測定fixtureを真正Root/Backup/OS成功やnative資格へ加算しない。実JDK25の同FQCN launcher/終了値・必要fresh全回帰/当source native/四counter・451を別に受け入れる。System.exit非帰還をcoverage除外/到達不能宣言、JVM終了抑止、private反射/bytecode改変で合格化しない。
+
 ## SSC298 正常postの未reap子を持つmetadata-only retainer
 
 SSC297回収の旧Java/Python/本人DBとlock消失・元inspect143を維持する。独立post829193/t16712075はZ/FD0/cmdline空/PPid828676/rawWaitStatus0と保存manifest7ab5cdc6の全新post scope正常/全原値148a8d8aを認証し、親が未waitの事実と区別する。当metadata-only828676/t16705476/argv51c27aa6/4FD/root/caps/PPid828674/cgroup-session1042/同exe-root-cwdだけを対象とする。新十Refを先に重複保持し、全FD target/9metadata/fdinfo/全authority/children=[829193]・Z全stat identity、全19/32/24/189/原本Backup鍵/native58/37/全ordinary・DB/advisory/M-A0を各操作境界で全二読し比較前に完全保存する。

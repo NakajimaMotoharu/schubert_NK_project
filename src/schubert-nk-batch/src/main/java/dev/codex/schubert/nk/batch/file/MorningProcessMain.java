@@ -38,7 +38,20 @@ public final class MorningProcessMain {
     void verify(MorningParentBudget budget, UUID runId) throws IOException;
   }
 
-  private MorningProcessMain() {}
+  private final CompletedAdmission nativeAdmission;
+  private final java.util.function.IntConsumer termination;
+
+  /** SSC299: the standard Java25 launcher always binds the native operation and OS exit. */
+  public MorningProcessMain() {
+    this(MorningProcessMain::executeCompletedBackup, System::exit);
+  }
+
+  /** Data/control-flow test ports only, never a configurable startup capability. */
+  MorningProcessMain(
+      CompletedAdmission nativeAdmission, java.util.function.IntConsumer termination) {
+    this.nativeAdmission = Objects.requireNonNull(nativeAdmission, "native Morning operation");
+    this.termination = Objects.requireNonNull(termination, "OS exit request");
+  }
 
   @FunctionalInterface
   interface CompletedAdmission {
@@ -46,8 +59,8 @@ public final class MorningProcessMain {
         MorningParentBudget budget, Optional<UUID> runId) throws IOException;
   }
 
-  public static void main(String[] args) {
-    System.exit(runCompleted(args, MorningProcessMain::executeCompletedBackup));
+  public void main(String[] args) {
+    termination.accept(runCompleted(args, nativeAdmission));
   }
 
   private static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion

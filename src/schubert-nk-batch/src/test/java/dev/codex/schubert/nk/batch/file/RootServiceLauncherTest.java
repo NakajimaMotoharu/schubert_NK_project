@@ -72,9 +72,14 @@ final class RootServiceLauncherTest {
   @Test
   void rmain006OnlyPublicMainNoPublicConstructor() throws Exception {
     var constructor = RootServiceLauncher.class.getDeclaredConstructor();
-    assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+    // Historical RMAIN006 ID retained; SSC299 allows only standard native Java25 noarg.
+    assertTrue(Modifier.isPublic(constructor.getModifiers()));
+    assertEquals(1, RootServiceLauncher.class.getConstructors().length);
     assertTrue(
         Modifier.isPublic(
+            RootServiceLauncher.class.getMethod("main", String[].class).getModifiers()));
+    assertFalse(
+        Modifier.isStatic(
             RootServiceLauncher.class.getMethod("main", String[].class).getModifiers()));
   }
 }

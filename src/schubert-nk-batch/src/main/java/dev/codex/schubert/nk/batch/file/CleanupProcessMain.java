@@ -24,14 +24,30 @@ public final class CleanupProcessMain {
     int execute() throws IOException;
   }
 
-  private CleanupProcessMain() {}
+  private final ExpiryWork nativeCleanup;
+  private final ExpiryWork nativeExpiry;
+  private final java.util.function.IntConsumer termination;
 
-  public static void main(String[] arguments) {
+  /** SSC299: standard Java25 noarg entry binds only the fixed native operations. */
+  public CleanupProcessMain() {
+    this(CleanupNativeExecution::execute, CleanupExpiryExecution::execute, System::exit);
+  }
+
+  CleanupProcessMain(
+      ExpiryWork nativeCleanup,
+      ExpiryWork nativeExpiry,
+      java.util.function.IntConsumer termination) {
+    this.nativeCleanup = Objects.requireNonNull(nativeCleanup, "native Cleanup operation");
+    this.nativeExpiry = Objects.requireNonNull(nativeExpiry, "native Expiry operation");
+    this.termination = Objects.requireNonNull(termination, "OS exit request");
+  }
+
+  public void main(String[] arguments) {
     Thread.currentThread().setUncaughtExceptionHandler(CleanupProcessMain::fatal);
-    System.exit(
+    termination.accept(
         arguments.length == 1 && "--expiry".equals(arguments[0])
-            ? runExpiry(arguments, CleanupExpiryExecution::execute)
-            : runNative(arguments, CleanupNativeExecution::execute));
+            ? runExpiry(arguments, nativeExpiry)
+            : runNative(arguments, nativeCleanup));
   }
 
   static int runExpiry(String[] arguments, ExpiryWork work) {

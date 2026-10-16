@@ -301,9 +301,14 @@ final class MorningProcessMainTest {
   @Test
   void mmain005NoPublicConstructorForAlternativeLauncher() throws Exception {
     Constructor<MorningProcessMain> constructor = MorningProcessMain.class.getDeclaredConstructor();
-    assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+    // SSC299: only the standard native noarg is public, never alternative data/control ports.
+    assertTrue(Modifier.isPublic(constructor.getModifiers()));
+    assertEquals(1, MorningProcessMain.class.getConstructors().length);
     assertTrue(
         Modifier.isPublic(
+            MorningProcessMain.class.getMethod("main", String[].class).getModifiers()));
+    assertFalse(
+        Modifier.isStatic(
             MorningProcessMain.class.getMethod("main", String[].class).getModifiers()));
   }
 

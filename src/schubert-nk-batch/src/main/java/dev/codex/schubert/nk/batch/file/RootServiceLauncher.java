@@ -32,21 +32,54 @@ public final class RootServiceLauncher {
     void verify(ServiceConfigFiles.Service service) throws IOException;
   }
 
-  private RootServiceLauncher() {}
+  @FunctionalInterface
+  interface Measurement {
+    Optional<FixedNativeCoverageCheckpoint> open(ServiceConfigFiles.Service service)
+        throws IOException;
+  }
 
-  public static void main(String[] args) throws IOException {
+  @FunctionalInterface
+  interface NativeAdmission {
+    void verify(
+        ServiceConfigFiles.Service service, Optional<FixedNativeCoverageCheckpoint> measurement)
+        throws IOException;
+  }
+
+  private final Measurement measurement;
+  private final NativeAdmission nativeAdmission;
+  private final java.util.function.IntConsumer termination;
+
+  /** SSC299: fixed native callbacks, no CLI or environment selection of test ports. */
+  public RootServiceLauncher() {
+    this(
+        service ->
+            FixedNativeCoverageCheckpoint.fromCurrentJvm(
+                service, FixedNativeCoverageProfile.Phase.ROOT, System.getenv("INVOCATION_ID")),
+        RootServiceLauncher::preflight,
+        System::exit);
+  }
+
+  RootServiceLauncher(
+      Measurement measurement,
+      NativeAdmission nativeAdmission,
+      java.util.function.IntConsumer termination) {
+    this.measurement = Objects.requireNonNull(measurement, "fixed native measurement");
+    this.nativeAdmission = Objects.requireNonNull(nativeAdmission, "native Root admission");
+    this.termination = Objects.requireNonNull(termination, "OS exit request");
+  }
+
+  public void main(String[] args) throws IOException {
     Optional<FixedNativeCoverageCheckpoint> coverage = Optional.empty();
     if (args.length == 1 && ("API".equals(args[0]) || "WEB".equals(args[0])))
       coverage =
-          FixedNativeCoverageCheckpoint.fromCurrentJvm(
-              ServiceConfigFiles.Service.valueOf(args[0]),
-              FixedNativeCoverageProfile.Phase.ROOT,
-              System.getenv("INVOCATION_ID"));
+          Objects.requireNonNull(
+              measurement.open(ServiceConfigFiles.Service.valueOf(args[0])),
+              "fixed native measurement result");
     var admittedCoverage = coverage;
-    int status = run(args, service -> preflight(service, admittedCoverage));
+    int status = run(args, service -> nativeAdmission.verify(service, admittedCoverage));
     if (coverage.isPresent())
       coverage.orElseThrow().capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
-    System.exit(status);
+    termination.accept(status);
   }
 
   static int run(String[] args, Admission admission) {
