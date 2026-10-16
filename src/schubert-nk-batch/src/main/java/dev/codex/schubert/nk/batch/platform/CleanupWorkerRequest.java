@@ -140,14 +140,11 @@ public record CleanupWorkerRequest(UUID run, UUID activation, Instant cutoff, St
         Objects.requireNonNull(cutoff, "prior cutoff");
         Objects.requireNonNull(started, "prior start");
         Objects.requireNonNull(ended, "prior end");
+        // Immutable step admission establishes id/attempt/start bounds and microsecond precision.
+        // Keep one validation authority; only the additional end constraints belong here.
         new BatchStepAttempt(
             id, new BatchRun(run, cutoff), BatchStep.CLEAN_EXPIRY, attempt, started, false);
-        if (id < 1
-            || id > 999999999999L
-            || attempt < 1
-            || attempt > 99
-            || ended.isBefore(started)
-            || started.getNano() % 1000 != 0
+        if (ended.isBefore(started)
             || ended.getNano() % 1000 != 0
             || ended.isAfter(Instant.parse("9999-12-31T23:59:59.999999Z"))) throw invalid();
       }
