@@ -1320,6 +1320,20 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC290 限定回収後の別fresh通常起動・同peer独立観測（2026-10-16）
+
+QA047/BUG1332/YKT1098内の原因計測・新通常経路。対象7bb/PG3976/BOM0a409301/boot79aはSSC289回収で必要5stop/INVALID全33保全・別fresh独立post/全新scope正常が実0、元Root143/4152 actual255/4188 actual1は失敗のまま保全する。新通常起動は旧Rootの再送/旧run resumeではなく、別new-only予約と新run/cutoff/activation/epochによるordinary noargs一回である。元Root1800秒/既Unit期限・失敗逆順回収/全資源後条件を変更しない。現runtimeにはdirectory二だけで一回設定fileが不存在のため、不要な退役/Unit交換/reload/再配備をしない。
+
+操作前に新十metadata Refと既host同inode排他を取得し、fresh current/source/BOM/全189署名/material/全32宣言/全24・原本Backup/鍵/native52/起動33・全Unit process/Job/kernel・DBpeer/advisory/flock0を既正常postと現在値へ束縛する。歴史原本WARNING10はdata-onlyで旧親正常authorityへ変換しない。新observerの実liveness/固定hash/同boot-sourceとquiescent frame、native52の私有copy/hash/容量、旧active不存在/INVALIDを確認し、同new-only一回予約/fsync/dirsync→再確認→正規systemctl start --no-block一回とする。既存予約・所有/応答不明では再発行しない。新INV/PID/元Unit deadlineから当親を捕捉し、Root→ordinary/同owner API-Web-Caddy/真正terminal/全24/全体seal・正規owned停止/native/別postを完了するまで通常受入れにしない。Main/業務期待値/署名済sourceを変えず、既3717/545/1643Main・署名/公開を理由なく反復しない。
+
+独立observerのmanager transportは固定local system-busだけを使用できる。各読取は5秒の同一残budget、PID1/euid0/正規unique nameを前後認証し、そのunique peerの固定Unit object path/Unit＋Service interfaceから既18fieldを型検証・正規文字列投影する。可変state/ownerのcache・fallback・別endpoint・manager状態だけのreadiness認定はしない。全十Load/Refを保持し、元のkernel/argv/権限二読・manager sandwich・Root→ordinary捕捉・同parent/INFO/HTTP/owned socket/CA・hostname検証HTTPS200を全て維持する。元50ms観測周期/親deadlineを延長しない。逆順Unref/private bus正常返却後だけobserver正常閉鎖を記録する。
+
+同transportの操作前資格は独立型/欠落/null/Job/path/owner変更/deadline/未知Unit反例、既oracle/loop AST同一性、PG4218の4 Unit×20回の全1440値が旧systemctlと完全一致・全原値/32宣言不変・両bus/十Ref正常である。測定は旧wall1.986779060s/CPU self＋child1.079296221s、新wall1.064313154s/CPU0.378011450sだが、旧Root timeoutの原因確定/新親成功を意味しない。設定を無断に緩和せず、具体的な原因は新同親の計測へ残す。
+
+同source/boot/Unit INV/PID/start/argv/executable/Root UIDとpidfd生存を前後認証した新親だけに、既pg734/888型のJDK25 `jcmd Thread.print -l`を最大12個のnew-only sampleとして実行できる。親の元開始+1770秒未満に限定し、各jcmd20秒/host35秒の有限待機、親終了/異世代/不明なら不発行又は不受入れにする。heap/JFR/environment/VMflags/credential dump、signal/start/stop/Root偽装・延長を行わない。rawは私有0600、公開はbounded class/method frame/hash/所要時間だけ、内容値や秘密情報を出さない。sampleは診断のみで業務/PT成功やcoverageへ加算せず、失敗・未取得・欠測も保全する。
+
+新工具の全emitted ABI/独立反例/静的0と同artifact固定、設計only main公開を新ordinary起動前に満たす。451/RD/UI/DIF/QA051finalは不変更で、品質・CHR・native CRC/session資格/正式PGPT/IT-ST完了とは別管理する。
+
 ## SSC289 旧SSH255・metadata-only retainerからの限定継続（2026-10-16）
 
 SSC288の現cohortについて、元4152のSSH/host observerの真正終了はactual255であり143ではなかった。旧guest二管理者への一回pidfd TERM/terminalと旧PID・lock消失/全原値不変は別証拠として保存する。255を143又は成功/正常closeへ変換せず、255だけでguest停止成功と推定しない。元4188 actual1・Caddy既停止data・旧Root143も独立に維持し、未実施残5/独立postを補完しない。この段階以降はSSC288中の旧observer143固定要求を「真正actual255と別のguest二terminal/消失証拠」へ置換するが、通常Root/ordinary Unit/全新scopeの正常終了条件は変更しない。
