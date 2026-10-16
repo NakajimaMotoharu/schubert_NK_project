@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC295 固定manager読取のbootstrap共通化
+
+SSC239のin-process固定local manager readerをbootstrapへ所属変更し、Root NativeIoとChild NativeIoの固定Unit照会が同実装を使う。固定enumはAPI/Web/Morning/Cleanup/Expiry/InboxInspector/Artemis/Caddyの八Unitだけ、field組は既存7fieldとdeadline4fieldだけである。返却は非秘密観測dataで、Root/子の認可・起動/停止権限ではない。bootstrapからbatchへの依存、任意Unit/field/path、公開Factory注入、代替CLIへのfallbackを作らない。
+
+各readは新busとarenaを所有し、固定system socket・非対話/非autostart・同PID1/euid0/unique ownerの前後認証、全指定fieldの型/長さ/ASCII、元5秒絶対残時間と全RPC/handshake期限、正常close又はUNKNOWN保持/次read拒否を維持する。共有してよいのは既Factoryのimmutable ABI bindingだけで、観測/認可/graph結果cacheを行わない。Childの前後Unit・boot/PID/ticks/cgroup/status/NSS/zero capability/NNP照合、Root全graph二読と各境界の検査回数・鮮度、元1800及び各Unit期限を減らさない。
+
+移動した試験の独立literal/異常・null・owner/thread/close/期限の全観点、新classpath実ABBA、変更module静的・必要fresh同source全回帰/新正規経路を別々に受け入れる。既7bb署名/native/3717全体を新sourceの成功へ流用しない。限定速度改善だけでBUG1332/Root/PGPTを完了させない。
+
 ## SSC294 Java終端後の残Python・metadata holderだけのowned handoff
 
 SSC293の元4368v3/66056はJava815726一TERM・pidfd終端/FD0 zombie/M-A0まで実施済みで、Python TERM直前の現在API93/DB両端入替を二読で正規拒否した。各全像とindexを保全し、Java又はCaddyへの再signal/stopをしない。残る元Python815643/t15408795/argvc8c952de/session970/7FDと、UNKNOWN metadata holder817783/t15666115/argva9deeaa1/session986/5FDだけを別new-only scopeの許可targetへ固定する。4376のowners627510df/current078c7f92は参照証拠で、直前全FD/authority/source/原値のfresh証明を代替しない。
