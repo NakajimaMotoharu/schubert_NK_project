@@ -352,6 +352,15 @@ final class CleanupExpiryExecution {
             .read(request.priorHandle())
             .orElseThrow(BatchRepositoryException::new);
     var reference = request.prior().orElseThrow();
+    verifyPriorAudit(reference, existing);
+  }
+
+  /** SSC302/PT-OPS-EXPIRY-AUDIT-SSC302001..014: data comparison, never DB authority. */
+  static void verifyPriorAudit(
+      CleanupWorkerRequest.Expiry.PriorExpiry reference, ExpiryAuditRepository.Snapshot existing)
+      throws IOException {
+    Objects.requireNonNull(reference, "retained Expiry reference");
+    Objects.requireNonNull(existing, "retained Expiry audit");
     @Nullable Long before = existing.before();
     @Nullable Long after = existing.after();
     require(
