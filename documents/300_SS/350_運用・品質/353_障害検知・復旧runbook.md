@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC294 JavaZ再操作なし・残る二metadata ownerの限定回収
+
+343 SSC294の同current instanceのみ。元Java815726は一TERM済/FD0 zombie、元Python815643とmetadata817783だけを対象にする。別scopeの十Ref→全現在source/BOM/全189/32/24原値・37/56・全client/server FD二読と両本人全FD/権限→Python通常一TERM/Java自然reap→元58917真正非0とguest消失別保存/hostgate自然継承→metadata通常一TERM/旧transport欠測nullと旧closeUNKNOWN保持→既同artifact partial inspect/必要五/Caddy再stop0/typed revoke/別post→新十Ref正常へ進む。旧4358/4368の境界拒否を再試行で消さず、元namespace/Java/Caddy/Root/Backup/Admin/VM/配備/reload/force操作を再発行しない。
+
+独立正常/残二target以外拒否/各FD・authority・型/欠落・source・partial/post未完拒否、全生成静的、同artifact実無操作proof・全新十Ref正常、設計only main確認を実操作前に満たす。未知/保存失敗/後条件未証明は隔離と元job保全、通常commitや小受入をPG/PT完了へ置き換えない。旧keeper SSHの未回収exitを推測せず、現在guest真正終端・原本保全・新scope正常を別々に認定する。
+
 ## SSC293 pool動態とfresh fullFD二読を分離する限定再開
 
 343 SSC293を適用する。元4348/6609はsignal前拒否1、元4366v1/proof75569も無操作拒否1であり、元58917 UNKNOWN/Caddy既停止を再送しない。API旧fd93のTCPは未採取のまま、歴史差を旧正常・旧pool所有へ補完しない。新現在両端証明済みpoolと固定非pool/authorityを別に検証し、keeper/partialの各操作境界はcaptured client及び同backend全FD・両端endpoint/state/inodeを含む現在二読完全一致を維持する。未知/片端/重複/非pool/権限差は拒否。生TCP timer/queueは全private保存とauthority比較を区別する。

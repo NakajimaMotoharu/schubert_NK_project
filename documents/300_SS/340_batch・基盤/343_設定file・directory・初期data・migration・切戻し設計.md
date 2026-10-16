@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC294 Java終端後の残Python・metadata holderだけのowned handoff
+
+SSC293の元4368v3/66056はJava815726一TERM・pidfd終端/FD0 zombie/M-A0まで実施済みで、Python TERM直前の現在API93/DB両端入替を二読で正規拒否した。各全像とindexを保全し、Java又はCaddyへの再signal/stopをしない。残る元Python815643/t15408795/argvc8c952de/session970/7FDと、UNKNOWN metadata holder817783/t15666115/argva9deeaa1/session986/5FDだけを別new-only scopeの許可targetへ固定する。4376のowners627510df/current078c7f92は参照証拠で、直前全FD/authority/source/原値のfresh証明を代替しない。
+
+新controllerは操作前から十metadata Refを保持し、元hostgate本人・両targetの全FD/argv/ticks/uid-gid/caps/NNP/cgroup/子、既JavaZ/FD0・M/A/advisory0、全189/32宣言/24原値/37・56/同三ordinaryとclient/server全FD二読を認証する。targetごとに通常pidfd TERMの一回耐久予約→再verify→TERM→真正terminal/消失を行う。元Python終了に伴うJavaZの自然reapを確認し、Javaへ追加signalしない。元58917の真正transport非0とguest両PID消失を別保存し、hostgateをforce/unlinkせず自然返却後だけ継承する。
+
+次にmetadata holderだけを通常TERMし新旧管理資源消失を証明する。元4368 observerのactual1と、既にobserverが終了して回収不能な旧keeper SSHの実exit欠測/null、旧UNKNOWN closeを分離保存し、未知を0/正常へ読み替えない。新十Refが両旧holderの継承期間を覆い、各段階失敗時は現在のscope/予約/全拒否像を保全して再発行しない。
+
+既固定4366v3 partial213f3a1eの実inspect/全新scope正常を先行、必要五停止（Caddy既真正終端は観測だけ）・typed revoke全37保持→既postd64b8c58の別fresh独立post→外側新十Ref正常まで回収受入れとしない。全新scopeの成功は旧Root143/元58917/元66056/旧keeper closeの正常化ではない。独立target拒否/全FD差/型・欠落・source違い/保存失敗/同artifact無操作実proofと設計only main公開を先行条件とし、新Root/Backup/Admin/配備/reload/VM/force0、RD/UI/1800/451/QA051は不変更。
+
 ## SSC293 ordinary pool履歴差・現在両端所有・境界内全FD二読
 
 SSC292の同current UNKNOWN instance限定。元4336→4356の歴史差はAPI fd93のtarget/metadataだけで、旧TCP表は未採取のため旧pool所有・旧UNKNOWN正常closeを認定しない。全source/BOM/署名/Unit世代・actor identity/authority/NSS/children・非pool全FD（target/全9metadata/flags/mountId）は歴史継続を照合する。新現在基点4356のAPI93/96・Web110は実captured FDのinodeから固定role/app・当ordinary PID/ticks/INV・SS342 pool範囲・loopback ESTABLISHED→5432・PostgreSQL本人backendと逆向きTCPへ一対一結合済みであり、番号/socket型だけを許可条件にしない。旧fd93未分類はそのまま保全する。
