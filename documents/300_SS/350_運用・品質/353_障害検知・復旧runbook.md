@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC292 元58917 UNKNOWNの現pair回収・Caddy再送禁止
+
+343 SSC292と同一instance・全保存基点に限る。BUG1349/YKT1115の失敗pairは未取得、4336現在四sample同値は過去の不一致原因を証明しない。元58917/固定87ef52を変更・再実行せず、Caddy同INV25aa7706の既一回停止は真正terminal/kernel空を観測するだけにする。新metadata十Ref・元hostgate/Java815726/Python815643全FDとauthorityのfresh二読・全189/32/24原値・37/56保全→同pair各一回pidfd TERM/元observer真正非0の回収→自然hostgate継承→別partial同artifact inspect/全新scope正常→必要五停止/typed revoke→別fresh独立post・新scope正常まで段階別保存する。
+
+専用backend/advisory期限切れ、元transport非0、guest PID終端、旧UNKNOWN close、新scope正常を別事実として扱う。固定143要求や0読み替えを禁止。新partialでも全snapshot二読が異なれば前後全値をroot私有へdurable保存して拒否し、操作再発行や比較field除外をしない。Caddy再stop・元Root/Backup/Admin/VM/配備/reload・forceunlock/DBterminate/SIGKILLは発行しない。設計only main公開、独立正常/各FD/各authority/各snapshotkey異常、同artifact無操作の全pair実proofを操作前条件とする。回収の成功はRoot timeout原因解決/native/全体PGPT完了ではなく、旧失敗/未回答QA051/正式1964PT・53scopeは保全する。
+
 ## SSC291 新167140 failed-DONEの正規回収（旧instanceと分離）
 
 343同項のSource7bb/PG3976/boot79a・新Root167140/INVbbcdb699/runb1ba37cb/act8314450eを適用する。1800.072841秒timeout143とdoneWARNING10は別事実で、observer0/TLS200/done保存を正常Rootへ変換しない。元Root/start/observer/旧4152・retainer回収を再演せず、全24/原本Backup/鍵/native56/startup37/全189・32/四ordinaryの現所有を新freshに認証する。
