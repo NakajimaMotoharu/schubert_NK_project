@@ -52,8 +52,8 @@ final class SourceJdbcClosePrecedenceInventory {
       if (!(condition instanceof BinaryTree b) || b.getKind() != Tree.Kind.NOT_EQUAL_TO) return null;
       if (strip(b.getRightOperand()).getKind() != Tree.Kind.NULL_LITERAL) return null;
       guarded = element(trees, unit, b.getLeftOperand());
-      if (!(guard.getThenStatement() instanceof BlockTree block)) return null;
-      inner = only(block);
+      inner = guard.getThenStatement();
+      if (inner instanceof BlockTree block) inner = only(block);
     }
     if (!(inner instanceof TryTree close) || !close.getResources().isEmpty()
         || close.getFinallyBlock() != null || close.getCatches().size() != 1) return null;

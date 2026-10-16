@@ -25,6 +25,7 @@ class DirectJdbcClose(unittest.TestCase):
         template = 'void NAME(java.sql.Statement s, java.sql.Statement other) throws java.sql.SQLException { Throwable primary=null; try {work();} catch(java.sql.SQLException|RuntimeException|Error original){primary=original;throw original;} finally { if(s!=null){try{s.close();}catch(java.sql.SQLException|RuntimeException|Error secondary){if(JdbcResourceFailures.replace(primary,secondary))throw secondary;}}}}'
         samples = [('good', template), ('direct', template.replace('if(s!=null){try', 'try').replace('throw secondary;}}}}', 'throw secondary;}}}')),
                    ('annotated', template.replace('Throwable primary', '@MaybeNull Throwable primary')),
+                   ('unbraced', template.replace('if(s!=null){try', 'if(s!=null)try').replace('throw secondary;}}}}', 'throw secondary;}}}')),
                    ('wrongArgument', template.replace('replace(primary,secondary)', 'replace(primary,new Error())')),
                    ('wrongThrow', template.replace('throw secondary;', 'throw new Error();')),
                    ('wrongHelper', template.replace('JdbcResourceFailures.replace', 'Other.replace')),
@@ -41,8 +42,8 @@ class DirectJdbcClose(unittest.TestCase):
             result = subprocess.run([str(JDK / 'java'), '-cp', str(classes), 'SourceJdbcClosePrecedenceInventory', str(source), ''], capture_output=True, text=True, timeout=30)
             self.assertEqual(0, result.returncode, result.stderr)
             rows = facts(result.stdout)
-            self.assertEqual(3, len(rows))
-            self.assertEqual({'3', '4', '5'}, {r['firstLine'] for r in rows})
+            self.assertEqual(4, len(rows))
+            self.assertEqual({'3', '4', '5', '6'}, {r['firstLine'] for r in rows})
             self.assertTrue(all(r['primary'] == 'primary' and r['secondary'] == 'secondary' for r in rows))
 
     def test_malformed_extent_kind_or_resource_type_refused(self):

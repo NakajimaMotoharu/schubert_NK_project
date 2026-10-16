@@ -65,6 +65,9 @@ def server(data):
         require(row['disposition'] == 'UNCLASSIFIED' and row['sourceSha256'] == sha(source / row['path']), 'only exact unresolved coordinates')
         relative = str(Path(row['path']).relative_to('src/schubert-nk-batch/src/main/java'))
         matching = [f for f in resolved if f['path'] == relative and int(f['firstLine']) == row['coordinates']['beginline']]
+        if not matching:
+            require(row['id'] in {'PMD-7fff-1162', 'PMD-7fff-1167'}, 'only explicitly retained IOException-primary shapes may remain unassessed')
+            continue
         require(len(matching) == 1, 'exact finally start and required same-symbol capture/close/priority/rethrow shape')
         cls = 'dev.codex.schubert.nk.batch.repository.' + name + 'Test'; method = data['specs'][name]
         xml = b / 'runs/PG3734-six-v1/batch/surefire-reports' / ('TEST-' + cls + '.xml')
@@ -76,10 +79,10 @@ def server(data):
                    scope='EXACT_APPROVED_CONTRACT_TECHNICAL_ASSESSMENT_NOT_GATE', qualityGatePass=False, rawWarningRemoved=False,
                    typedFact=matching[0], owningTestId=cls + '#' + method, owningXmlSha256=sha(xml), design=data['design'], helperSha256=data['helperSha256'])
         assessed.append(row)
-    require(len(assessed) == 28, 'exact manually reviewed seven repository/28scope partition, other24 finally warnings unresolved')
+    require(len(assessed) == 26, 'exact manually reviewed seven repository/26scope partition; other26 finally warnings unresolved including two IOException-primary scopes')
     require(cp_hash() == item['classpathInputsSha256'] and {str(p.relative_to(source)): sha(p) for p in source.glob('src/*/src/main/java/**/*.java')} == data['sourceSha256'], 'all Main/type inputs unchanged')
     (out / 'all1840-dispositions.safe.json').write_text(json.dumps(rows, sort_keys=True)); (out / 'assessed28.safe.json').write_text(json.dumps(assessed, sort_keys=True))
-    value = {'actualExit': 0, 'productionSource': data['source'], 'rawFindings': 1840, 'newTechnicalAssessments': 28, 'technicalDispositions': 306, 'unclassified': 1534, 'applicableViolationCount': None,
+    value = {'actualExit': 0, 'productionSource': data['source'], 'rawFindings': 1840, 'newTechnicalAssessments': 26, 'technicalDispositions': 304, 'unclassified': 1536, 'applicableViolationCount': None,
              'dispositions': dict(Counter(r['disposition'] for r in rows)), 'assessedSha256': sha(out / 'assessed28.safe.json'), 'allDispositionsSha256': sha(out / 'all1840-dispositions.safe.json'),
              'typedFactsSha256': sha(out / 'facts.safe.tsv'), 'owningSuiteHashes': suite_hashes, 'MainChanged': False, 'pmdReissued': False, 'regressionReissued': False, 'vmActions': 0,
              'suppressionAdded': False, 'ruleChanged': False, 'F03Accepted': False, 'formalAccepted': False, 'recordedUTC': datetime.datetime.now(datetime.timezone.utc).isoformat()}
