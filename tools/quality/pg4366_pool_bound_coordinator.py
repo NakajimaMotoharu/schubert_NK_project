@@ -4,7 +4,7 @@ import pg4176_partial_coordinator as predecessor
 from pg4346_current_partial_coordinator import owner
 import pg4360_pool_bound_partial_sources as sources
 
-SLOT = 'pg4366-pool-bound-tools-v1'
+SLOT = 'pg4366-pool-bound-tools-v3'
 GUEST = '/var/lib/pgpt-s1-preservation/' + SLOT
 
 

@@ -21,8 +21,9 @@ def captured_inodes(fds):
     return result
 
 
-def bind(value, table, server_inodes, tcp_pair, endpoint, completed=frozenset(), owned_backend=None):
-    require(type(value) is dict and type(table) is list and type(server_inodes) is dict)
+def bind(value, table, servers, tcp_pair, endpoint, completed=frozenset(), owned_backend=None, postgres=None):
+    require(type(value) is dict and type(table) is list and type(servers) is dict
+            and type(postgres) is tuple and len(postgres) == 2 and all(type(n) is int and n > 0 for n in postgres))
     result = {}; counts = {role: 0 for role in ROLES}; used_inodes = set(); management = 0
     for peer in value['database']['peers']:
         if peer['user'] not in ROLES:
@@ -33,12 +34,21 @@ def bind(value, table, server_inodes, tcp_pair, endpoint, completed=frozenset(),
         unit, application, unused_low, unused_high = ROLES[peer['user']]
         require(unit not in completed and peer['application'] == application and peer['address'] == '127.0.0.1')
         actor = value['actors'][unit]; detail = value['detailedActors'][unit]
-        require(detail['identity'] == actor and peer['pid'] in server_inodes)
+        require(detail['identity'] == actor and peer['pid'] in servers)
+        backend = servers[peer['pid']]
+        require(backend['pid'] == peer['pid'] and type(backend['ticks']) is int and backend['ticks'] > 0
+                and re.fullmatch('[0-9a-f]{64}', backend['argvSha256']) is not None
+                and backend['authority']['Uid'].split() == [str(postgres[0])] * 4
+                and backend['authority']['Gid'].split() == [str(postgres[1])] * 4)
         fds = detail['fds']; client_inodes = captured_inodes(fds)
-        tcp_pair(table, peer['port'], client_inodes, server_inodes[peer['pid']])
+        server_inodes = captured_inodes(backend['fds'])
+        tcp_pair(table, peer['port'], client_inodes, server_inodes)
         matches = [r for r in table if endpoint(r[1]) == ('127.0.0.1', peer['port'])
                    and endpoint(r[2]) == ('127.0.0.1', 5432) and r[3] == '01' and r[9] in client_inodes]
         require(len(matches) == 1)
+        reverse = [r for r in table if endpoint(r[1]) == ('127.0.0.1', 5432)
+                   and endpoint(r[2]) == ('127.0.0.1', peer['port']) and r[3] == '01' and r[9] in server_inodes]
+        require(len(reverse) == 1)
         inode = matches[0][9]; require(inode not in used_inodes); used_inodes.add(inode)
         aliases = [fd for fd, record in fds.items() if record['target'] == 'socket:[' + inode + ']']
         require(len(aliases) == 1)
@@ -48,7 +58,16 @@ def bind(value, table, server_inodes, tcp_pair, endpoint, completed=frozenset(),
                 and metadata[4:7] == [stat.S_IFSOCK | 0o777, 1, 0]
                 and record['flags'] == '04002' and record['mountId'] == '12')
         require(fd not in result.setdefault(unit, {}))
-        result[unit][fd] = {'peer': peer, 'client': matches[0]}; counts[peer['user']] += 1
+        server_fds = [n for n, record in backend['fds'].items() if record['target'] == 'socket:[' + reverse[0][9] + ']']
+        require(len(server_fds) == 1)
+        # Timer/queue counters are saved in raw evidence, not socket authority.
+        # Retain BOTH endpoint/state/inode identities and the full backend FD capture.
+        def projection(row):
+            return {'local': endpoint(row[1]), 'remote': endpoint(row[2]), 'state': row[3], 'inode': row[9]}
+        result[unit][fd] = {'peer': {k: v for k, v in peer.items() if k != 'state'},
+                            'client': projection(matches[0]), 'server': projection(reverse[0]),
+                            'serverFd': server_fds[0], 'serverCapability': backend}
+        counts[peer['user']] += 1
     for role, (unit, unused_application, low, high) in ROLES.items():
         require(counts[role] == 0 if unit in completed else low <= counts[role] <= high)
     require(management == (1 if owned_backend is not None else 0))

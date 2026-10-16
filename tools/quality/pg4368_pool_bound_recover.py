@@ -5,8 +5,8 @@ import pg4348_current_partial_recover as previous
 import pg4366_pool_bound_coordinator as staged
 import pg4360_pool_bound_partial_sources as sources
 
-OUT = transport.W / 'pg4368-pool-bound-recover-v1'
-DESIGN_MAIN = 'PENDING_SSC293_MAIN'
+OUT = transport.W / 'pg4368-pool-bound-recover-v3'
+DESIGN_MAIN = '6eae971276832c6d0cc9e29fbc18c5090d3cf6ad'
 original_receipt = previous.original_receipt
 
 

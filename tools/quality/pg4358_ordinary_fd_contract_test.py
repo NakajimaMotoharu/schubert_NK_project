@@ -26,7 +26,9 @@ class OrdinaryDescriptors(unittest.TestCase):
                                                    'address': '127.0.0.1', 'port': port})
                 table.extend([['n', '127.0.0.1:' + str(port), '127.0.0.1:5432', '01', '', '', '', '', '', client],
                               ['n', '127.0.0.1:5432', '127.0.0.1:' + str(port), '01', '', '', '', '', '', server]])
-                servers[number + 5000] = {server}
+                servers[number + 5000] = {'pid': number + 5000, 'ticks': 1234, 'argvSha256': 'b' * 64,
+                                         'authority': {'Uid': '108 108 108 108', 'Gid': '112 112 112 112'},
+                                         'fds': {'8': {'target': 'socket:[' + server + ']', 'metadata': [9, number + 1000, 108, 112, stat.S_IFSOCK | 0o777, 1, 0, 0, 0], 'flags': '02', 'mountId': '12'}}}
             value['detailedActors'][unit] = detail
         return value, table, servers
 
@@ -43,7 +45,20 @@ class OrdinaryDescriptors(unittest.TestCase):
             raise ValueError('independent two-ended fixture rejected')
 
     def bind(self, value, table, servers):
-        return subject.bind(value, table, servers, self.pair, self.endpoint)
+        return subject.bind(value, table, servers, self.pair, self.endpoint, postgres=(108, 112))
+
+    def test_server_only_identity_or_fd_change_cannot_disappear(self):
+        value, table, servers = self.fixture(); before = self.bind(value, table, servers)
+        changed_table = copy.deepcopy(table); changed_servers = copy.deepcopy(servers)
+        changed_table[1][9] = '99999'
+        changed_servers[5101]['fds']['8']['target'] = 'socket:[99999]'
+        changed_servers[5101]['fds']['8']['metadata'][1] = 99999
+        after = self.bind(value, changed_table, changed_servers)
+        self.assertNotEqual(before, after)
+        self.assertNotEqual(before['schubert-nk-api.service']['90']['server'], after['schubert-nk-api.service']['90']['server'])
+        for key, wrong in [('pid', 1), ('ticks', 0), ('argvSha256', 'foreign'), ('authority', {'Uid': '0 0 0 0', 'Gid': '0 0 0 0'})]:
+            bad = copy.deepcopy(servers); bad[5101][key] = wrong
+            with self.subTest(key=key), self.assertRaises(ValueError): self.bind(value, table, bad)
 
     def test_positive_complete_current_and_nonpool_continuity(self):
         value, table, servers = self.fixture()
