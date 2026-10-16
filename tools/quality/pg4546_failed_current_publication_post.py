@@ -1,10 +1,12 @@
 """Independent seven finite phases/new187 and all11 preserved data; never a Root start."""
 import ast
+import builtins
 import hashlib
 import inspect
 import json
 import os
 import subprocess
+import symtable
 from pyflakes.api import check
 import pg3794_hygiene_publication_post as legacy
 import pg4540_failed_current_publication_sources as role
@@ -13,7 +15,22 @@ from pg4434_current_candidate_admission_read import authenticate_host
 from pg1674_critical_management_gate import management_gate
 from pg4442_failed_current_view_qualification import strict_equal,journal_rows
 
-SLOT='pg4546-failed-current-publication-post-v1'
+SLOT='pg4552-failed-current-publication-post-v1'
+
+
+def check_embedded_namespace(block,outer):
+    def defined(table):
+        return {s.get_name()for s in table.get_symbols()if s.is_assigned()or s.is_imported()or s.is_namespace()}
+    table=symtable.symtable(block,'<actual embedded finite verifier>','exec')
+    available=defined(symtable.symtable(outer,'<actual full post>','exec'))|defined(table)|set(dir(builtins))
+    referenced=set()
+    def visit(t):
+        for s in t.get_symbols():
+            if s.is_global()and s.is_referenced():referenced.add(s.get_name())
+        for child in t.get_children():visit(child)
+    visit(table);missing=referenced-available
+    if missing:raise ValueError('undefined embedded globals: '+','.join(sorted(missing)))
+    return True
 
 
 def publication_checks():
@@ -44,8 +61,8 @@ def reader_prefix():
 
 
 BODY=r'''
-import dbus
-os.umask(0o077);save=base/'pg4546-failed-current-publication-post-v1';require(not os.path.lexists(save));save.mkdir(mode=0o700)
+import dbus,pathlib
+os.umask(0o077);save=base/'pg4552-failed-current-publication-post-v1';require(not os.path.lexists(save));save.mkdir(mode=0o700)
 def save_private(name,value):
  encoded=json.dumps(value,sort_keys=True).encode();require(len(encoded)<=67108864)
  with(save/name).open('xb')as f:os.fchmod(f.fileno(),0o600);f.write(encoded);f.flush();os.fsync(f.fileno())
@@ -105,7 +122,13 @@ def payload():
     if fixed['actualExit']!=0:raise ValueError('actual all24 current-JAR host compile0')
     sources=role.sources()
     result='PUBLICATION_FILES='+repr(fixed['fileHashes'])+'\nPUBLICATION_CHECKS='+repr(publication_checks())+'\nJOURNAL_SOURCE='+repr(sources['pg4540_stable_journal.py'])+'\n'+inspect.getsource(strict_equal)+'\n'+inspect.getsource(journal_rows)+'\n'+reader_prefix()+'\n'+BODY
+    # Inline the actual verifier in the retained metadata scope. This exposes
+    # its real globals to the ordinary whole-payload static check as well.
+    marker=' exec(PUBLICATION_CHECKS)\n'
+    if result.count(marker)!=1:raise ValueError('one retained-scope finite verifier boundary')
+    result=result.replace(marker,''.join(' '+line+'\n'for line in publication_checks().splitlines()),1)
     if check(result,'<new187 full11 all seven phase independent post>'):raise ValueError('all emitted static0')
+    check_embedded_namespace(publication_checks(),result)
     ast.parse(result);return result
 
 

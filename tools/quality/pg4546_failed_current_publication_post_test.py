@@ -8,6 +8,11 @@ import pg4546_failed_current_publication_post as p
 
 
 class FinitePost(unittest.TestCase):
+    def test_actual_embedded_namespace_requires_explicit_pathlib_and_function_globals(self):
+        raw=p.payload();self.assertTrue(p.check_embedded_namespace(p.publication_checks(),raw))
+        with self.assertRaises(ValueError):p.check_embedded_namespace(p.publication_checks(),raw.replace('import dbus,pathlib','import dbus'))
+        with self.assertRaises(ValueError):p.check_embedded_namespace('def nested():\n return foreign\n',raw)
+        with self.assertRaises(ValueError):p.check_embedded_namespace('foreign()\n',raw)
     def test_actual_seven_phase_loop_and_failed_receipt_are_independent(self):
         raw=p.publication_checks()
         self.assertIn("tuple(dict.fromkeys(phase for stamp,phase,observed in phases))==oracle['PHASES']",raw)
