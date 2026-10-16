@@ -13,7 +13,7 @@ class HandoffBoundary(unittest.TestCase):
         raw=source.payload();compile(raw,'<actual handoff>','exec')
         self.assertEqual(0,check(raw,'<actual handoff>',Reporter(io.StringIO(),io.StringIO())))
         self.assertEqual(0,check(stage.stage_payload(),'<actual stage>',Reporter(io.StringIO(),io.StringIO())))
-        self.assertEqual(source.post.files()['post.py'],source.independent_post().replace('pg4490-inspect-pair-handoff-v1-independent-post','pg4362-pool-bound-post-v3'))
+        self.assertEqual(source.post.files()['post.py'],source.independent_post().replace('pg4490-inspect-pair-handoff-v2-independent-post','pg4362-pool-bound-post-v3'))
 
     def test_actual_invariant_captures_both_complete_images_before_comparing(self):
         tree=ast.parse(source.payload());fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='invariant')

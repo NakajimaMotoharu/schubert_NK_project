@@ -8,7 +8,7 @@ import pg4360_pool_bound_partial_sources as post
 from pg1446_current_cold_stage import W
 from pg782_owned_handoff import terminate
 
-SLOT='pg4490-inspect-pair-handoff-v1'
+SLOT='pg4490-inspect-pair-handoff-v2'
 
 
 def independent_post():
@@ -16,7 +16,7 @@ def independent_post():
     if hashlib.sha256(raw.encode()).hexdigest()!='d64b8c588d337609a9b788f7540df50de2fb61dd69e9351ef2745d536bf7835b':raise ValueError('pinned old complete post')
     marker="save=base/'pg4362-pool-bound-post-v3'"
     if raw.count(marker)!=1:raise ValueError('one new-only post boundary')
-    return raw.replace(marker,"save=base/'pg4490-inspect-pair-handoff-v1-independent-post'",1)
+    return raw.replace(marker,"save=base/'pg4490-inspect-pair-handoff-v2-independent-post'",1)
 
 
 def payload():
@@ -34,7 +34,7 @@ def payload():
 BODY=r'''
 import sys,time,signal,select,dbus,traceback
 MODE=sys.argv[1];require(MODE in ['proof','recover']);os.umask(0o077)
-save=base/('pg4490-inspect-pair-handoff-v1-'+MODE);save.mkdir(mode=0o700)
+save=base/('pg4490-inspect-pair-handoff-v2-'+MODE);save.mkdir(mode=0o700)
 contract={};exec(CONTRACT_SOURCE,contract)
 def fixed(path,digest):
  b=(base/path).read_bytes();require(hashlib.sha256(b).hexdigest()==digest);return json.loads(b)
@@ -71,7 +71,7 @@ def check_one(value):
  pair=value['pair'];contract['peers'](reference,value['data'],java_gone);require(value['config']==configuration)
  for label in ['java','python']:
   if label=='java'and java_gone or label=='python'and python_gone:continue
-  contract['stable'](label,owners[label],pair[label],java_gone);identity(label)
+  contract['stable'](label,owners[label],pair[label],java_gone,time.time_ns());identity(label)
  if not java_gone:
   for key in ['pid','ticks','argvSha256','authority','cgroup','children']:require(pair['backend'][key]==owners['backend'][key])
   contract['database_socket'](pair)
@@ -84,7 +84,7 @@ def invariant(label):
  return private(label+'-boundary.private.json',{'first':a['hashes'],'second':b['hashes']})
 def verify(pid,ticks):
  label='java'if pid==827198 else'python'if pid==827230 else'';require(label!=''and ticks==identities[label]['ticks'])
- invariant('verify-'+str(sequence));value=proc(pid);contract['stable'](label,owners[label],value,java_gone);identity(label);return value
+ invariant('verify-'+str(sequence));value=proc(pid);contract['stable'](label,owners[label],value,java_gone,time.time_ns());identity(label);return value
 def reserve(pid,value):
  private(str(pid)+'.term-reserved.private.json',{'pid':pid,'ticks':value['ticks'],'actor':value,'signal':'TERM','replayAllowed':False})
  require(verify(pid,value['ticks'])==value)

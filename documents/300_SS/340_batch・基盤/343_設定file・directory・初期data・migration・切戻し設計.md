@@ -2,6 +2,8 @@
 
 ## SSC297 配置前UNKNOWN管理pairの限定handoff
 
+歴史差の唯一の限定例外：当JavaのFD31/90が保持する同一/run directoryのmtime/ctimeだけは、old<=current<=fresh観測UTC nsの範囲で単調増加を許す。target/inode/uid/gid/type/mode/nlink/sizeとfdinfo、他全FD/authorityは固定し、各操作境界内の全proc二読ではこの時刻も含め完全同値を必要とする。BUG1365保存像の四時刻差だけが根拠であり、未知FD/他directory/逆行/未来/境界不安定の一般許容ではない。
+
 SSC296の配置前inspectが失敗して保持した管理pairに限定する。current7bb/PG3976/BOM0a409301/boot79a・候補964e/PG4432/BOM93807abdは変更しない。当Java827198/t16494387/argv72e6609e（101FD）→子Python827230/t16494598/argv8c039420（4FD）だけを対象とし、root/caps/cgroup/session1025/exe/root/cwd/agent変数名不在・全FD target/9metadata/fdinfo/children/全argv hashを固定私有像と完全比較する。DB827228/専用batch ROのsocket両端・advisory71419602とM/Aも本人へ結合し、各操作前の全像二読と全19Unit/32設定/24表/原本Backup鍵/署名189/native58/startup37の不変を必要とする。全像は比較前にnew-only root私有0600へfsyncし、拒否時も省略しない。
 
 新十Refを旧十Refへ重複保持し、同artifact無操作proofの全新scope正常返却・独立反例・確定設計main公開後だけpidfd通常TERMをJava→Pythonへ各最大一回行う。各15秒terminal/30秒以内消失、Java後のPython PPid1だけを明示した世代遷移として認証する。自然終了済みなら再signalしない。元host677797/t16590755の同inode sole flockをqueued自然継承し、実transport終了値は実値のまま保存する。sudo/DBserver/Unit/Root/Backup/Admin/配備/reload/revoke/force/SIGKILL/DBterminate0。旧scope close UNKNOWNと旧Root143は不変更。

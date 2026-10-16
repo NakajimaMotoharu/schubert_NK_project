@@ -52,6 +52,21 @@ class ExactInspectPair(unittest.TestCase):
         v=copy.deepcopy(self.pair);v['tcp6']+='\n'.join(l for l in v['tcp6'].splitlines()if '14177460'in l)+'\n'
         with self.assertRaises(ValueError):contract.database_socket(v)
 
+    def test_only_two_directory_historical_times_can_advance_not_future_or_identity(self):
+        old=self.pair['java'];v=copy.deepcopy(old)
+        for fd in ['31','90']:
+            for i in [7,8]:v['fds'][fd]['metadata'][i]+=100
+        upper=max(v['fds']['31']['metadata'][7:])+100
+        self.assertTrue(contract.stable('java',old,v,upper_ns=upper))
+        with self.assertRaises(ValueError):contract.stable('java',old,v)
+        with self.assertRaises(ValueError):contract.stable('java',old,v,upper_ns=0)
+        for fd,index in [('31',1),('31',4),('90',6),('89',7)]:
+            bad=copy.deepcopy(v);bad['fds'][fd]['metadata'][index]+=1
+            with self.subTest(fd=fd,index=index),self.assertRaises(ValueError):contract.stable('java',old,bad,upper_ns=upper)
+        for index in [7,8]:
+            bad=copy.deepcopy(v);bad['fds']['31']['metadata'][index]=old['fds']['31']['metadata'][index]-1
+            with self.assertRaises(ValueError):contract.stable('java',old,bad,upper_ns=upper)
+
     def test_every_data_section_and_management_resource_checked(self):
         for key in self.data:
             v=copy.deepcopy(self.data);v[key]=None

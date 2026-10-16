@@ -13,8 +13,8 @@ from pg4152_exact_failed_done_recover import process,durable
 from pg1724_retained_host_gate import queued_gate
 import pg4492_inspect_pair_stage as stage
 
-DESIGN_MAIN='PENDING_SSC297_MAIN'
-OUT=W/'pg4494-inspect-pair-recover-v1'
+DESIGN_MAIN='3a7f50158b05227cb274e9c98951181a99c4e557'
+OUT=W/'pg4494-inspect-pair-recover-v2'
 
 
 def original_receipt():
@@ -37,7 +37,9 @@ def complete(v):
     if type(v)is not dict or any(type(v.get(k))is not type(x)or v[k]!=x for k,x in expected.items()):raise ValueError('complete current recovery receipt required')
     if type(v.get('signalsIssued'))is not int or v['signalsIssued']not in [1,2]:raise ValueError('only owned Java/Python TERM once')
     post=v.get('independentPost')
-    if type(post)is not dict or post.get('actualExit')!=0 or post.get('newMARDDBTenRefNormalClose')is not True or post.get('all24OriginalBackupNativeUnitConfigUnchanged')is not True or post.get('oldParentNormal')is not False:raise ValueError('fresh independent post required')
+    post_expected={'actualExit':0,'source':expected['source'],'BOM':expected['BOM'],'newMARDDBTenRefNormalClose':True,'all24OriginalBackupNativeUnitConfigUnchanged':True,
+        'oldParentNormal':False,'parent143StillFailed':True,'independentFailedDoneRecoveryPost':True,'signalStartStopReloadDbWrites':0,'formalAccepted':False}
+    if type(post)is not dict or any(type(post.get(k))is not type(x)or post[k]!=x for k,x in post_expected.items()):raise ValueError('fresh independent post required')
     return v
 
 
@@ -56,7 +58,6 @@ def main():
     durable(OUT/'start.safe.json',{'owner':process(os.getpid()),'designMain':DESIGN_MAIN,'files':hashes,'replayAllowed':False})
     with queued_gate(P/'current-management-critical.lock',validate_owner=stage.owner)as acquired:
         with(OUT/'stderr.private.log').open('xb')as error:
-            bootstrap="from pathlib import Path;import hashlib,os,stat;"+repr(None)
             # File bytes/envelope are checked in this new SSH before exec. No
             # long raw payload is passed through argv and no file is rewritten.
             bootstrap="""from pathlib import Path

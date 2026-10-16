@@ -10,7 +10,7 @@ def require(value):
     if value is not True:raise ValueError('exact pre-operation retained pair refused')
 
 
-def stable(label,old,now,java_gone=False):
+def stable(label,old,now,java_gone=False,upper_ns=None):
     require(label in ['java','python']and type(old)is dict and type(now)is dict and type(java_gone)is bool)
     identity=JAVA if label=='java'else PYTHON
     for v in [old,now]:
@@ -24,8 +24,19 @@ def stable(label,old,now,java_gone=False):
     expected={**old,'authority':dict(old['authority'])}
     if label=='python'and java_gone:expected['authority']['PPid']='1'
     require(old['authority']['PPid']==('827196'if label=='java'else'827198'))
-    # Every descriptor target, inode/type/ownership/size/timestamp/fdinfo and
-    # every authority field are exact. No filtering or count-only acceptance.
+    expected['fds']={k:{**v,'metadata':list(v['metadata'])}for k,v in old['fds'].items()}
+    if label=='java':
+        for fd in ['31','90']:
+            before=old['fds'][fd];after=now['fds'][fd]
+            require(before['target']==after.get('target')=='/run')
+            bm=before['metadata'];am=after.get('metadata')
+            require(type(am)is list and len(am)==9 and bm[:7]==am[:7]and bm[2:5]==[0,0,16877])
+            if bm[7:]!=am[7:]:
+                require(type(upper_ns)is int and upper_ns>=0 and all(type(am[i])is int and bm[i]<=am[i]<=upper_ns for i in [7,8]))
+            expected['fds'][fd]['metadata'][7:]=am[7:]
+    # Only /run's two historical directory timestamps may advance within the
+    # authenticated current clock. All other full fields remain exact; the
+    # controller separately requires complete equality inside every two-read.
     require(now==expected)
     return True
 

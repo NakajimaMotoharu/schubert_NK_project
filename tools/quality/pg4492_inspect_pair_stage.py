@@ -3,7 +3,7 @@ import inspect
 import pg4176_partial_coordinator as previous
 import pg4490_inspect_pair_handoff_sources as current
 
-SLOT='pg4492-inspect-pair-tools-v1'
+SLOT='pg4492-inspect-pair-tools-v2'
 GUEST='/var/lib/pgpt-s1-preservation/'+SLOT
 
 
