@@ -41,14 +41,14 @@ assert {m['name']for m in argument['members']}=={'device','node-name','size'}
 stream.close();sock.close();space=os.statvfs(root)
 layers=[];item=image
 while item:
- file=Path(item.get('full-backing-filename',item['filename']))if not layers and False else Path(item['filename'])
+ file=Path(item['filename'])
  if not file.is_absolute():file=root/file
  st=file.stat();layers.append({'filename':str(file.resolve()),'virtualSize':item['virtual-size'],'metadata':[st.st_dev,st.st_ino,st.st_uid,st.st_gid,st.st_mode,st.st_nlink,st.st_size,st.st_mtime_ns,st.st_ctime_ns]})
  item=item.get('backing-image')
 assert len(layers)==3
 value={'actualExit':0,'observedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'greeting':greeting,'peer':peer,'status':status,'jobs':jobs,'disk':disk,
  'blockResizeSchema':[operation,argument],'layers':layers,'hostAvailableBytes':space.f_bavail*space.f_frsize,'events':events,'resizeCommandsIssued':0,'bootChanged':False}
-out=Path('/home/mini/schubert-nk-pgpt/runs/PG4564-capacity-preflight-v1');out.mkdir(mode=0o700)
+out=Path('/home/mini/schubert-nk-pgpt/runs/PG4566-capacity-preflight-v1');out.mkdir(mode=0o700)
 raw=json.dumps(value,sort_keys=True).encode()
 with(out/'host.safe.json').open('xb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
 print(json.dumps(value))
@@ -76,7 +76,7 @@ tools={n:shutil.which(n)for n in ['growpart','resize2fs','sfdisk','blockdev','fi
 v=os.statvfs('/var/lib/pgpt-s1-preservation');value={'actualExit':0,'observedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':results,'tools':tools,
  'availableBytes':v.f_bavail*v.f_frsize,'ordinaryStartMinimum':12884901888,'minimumMet':v.f_bavail*v.f_frsize>=12884901888,'rootPartition':rootpart,
  'source':'964e96e45bb588e7e75798b5adf425cbd9985427','BOM':hashlib.sha256(raw).hexdigest(),'operationsIssued':0}
-os.umask(0o077);out=Path('/var/lib/pgpt-s1-preservation/pg4564-capacity-preflight-v1');out.mkdir(mode=0o700)
+os.umask(0o077);out=Path('/var/lib/pgpt-s1-preservation/pg4566-capacity-preflight-v1');out.mkdir(mode=0o700)
 with(out/'guest.safe.json').open('x')as f:json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
 print(json.dumps(value))
 '''
@@ -84,9 +84,9 @@ print(json.dumps(value))
 
 def main():
     if check(HOST,'<exact readonly QMP>')or check(GUEST,'<exact readonly guest geometry>'):raise ValueError('all emitted static0')
-    authenticate_host();os.umask(0o077);out=W/'pg4564-capacity-preflight-v1';out.mkdir(mode=0o700)
+    authenticate_host();os.umask(0o077);out=W/'pg4566-capacity-preflight-v1';out.mkdir(mode=0o700)
     (out/'host-payload.private.py').write_text(HOST);(out/'guest-payload.private.py').write_text(GUEST)
-    status,output=run(shlex.join(['python3','-B','-c',HOST]),timeout=60)
+    status,output=run(shlex.join(['python3','-B','-c',HOST]),timeout=60,sudo=True)
     (out/'host-observer.private.log').write_text(output)
     if status!=0:raise ValueError('original QMP read result failed; preserve')
     value=json.loads(output.strip());(out/'host.safe.json').write_text(json.dumps(value,sort_keys=True))
