@@ -37,7 +37,7 @@ def seal_payload(observed,before_hash):
     fn=types.FunctionType(ns['seal_payload'].__code__,{**ns,'SOURCE':admission.SOURCE,'BOM':admission.BOM,'before':lambda:before_hash})
     raw=bind(fn(observed))
     start=raw.index('def before_shape(before):');end=raw.index('\nOWNED={}',start)
-    project_source=inspect.getsource(admission.previous.project).replace('!=52','!=58').replace('all52','all58')
+    project_source=inspect.getsource(admission.project)
     view=project_source+'\n'
     view+="publication_raw=(BASE/"+repr(admission.PUBLICATION_PATH)+").read_bytes();require(hashlib.sha256(publication_raw).hexdigest()=="+repr(admission.PUBLICATION)+")\n"
     view+="before=project(before,json.loads(publication_raw))\nold['unitFilesActual']=before['unitFilesActual']\n"

@@ -8,28 +8,35 @@ import pg4586_current_independent_acceptance as acceptance
 
 
 def fixture():
-    return {'units':{},'actors':{},'database':{'rows':{str(i):[]for i in range(24)},'peers':[],'locks':[]},'flocks':[],
+    names=['caddy.service','schubert-nk-web.service','schubert-nk-api.service','schubert-nk-cleanup.service','schubert-nk-inbox-inspector.service','schubert-nk-expiry-cleanup.service','schubert-nk-backup.service','artemis.service','schubert-nk-morning-controller.service','schubert-nk-bootstrap-admin.service']
+    row={'Id':'fixture','LoadState':'loaded','ActiveState':'inactive','SubState':'dead','MainPID':'0','ControlPID':'0','Job':'','InvocationID':'1'*32,'ControlGroup':'/fixture','Result':'success','ExecMainCode':'1','ExecMainStatus':'0','ExecMainStartTimestampMonotonic':'1','ExecMainExitTimestampMonotonic':'2','Type':'notify','KillMode':'control-group','SendSIGKILL':'no','RemainAfterExit':'no','Restart':'no'}
+    return {'units':{name:dict(row,Id=name)for name in names},'actors':{},'database':{'rows':{str(i):[]for i in range(24)},'peers':[],'locks':[]},'flocks':[],
       'durable':{'backup':{'fixture':'literal'}},'native':{str(i)+'.exec':{'sha256':'a'*64}for i in range(58)},
-      'startup':{},'runtime':{},'detailedActors':{},'configuration':{}}
+      'startup':{},'runtime':{},'configuration':{name:{'fixture':'literal'}for name in names}}
 
 
 class CurrentAcceptance(unittest.TestCase):
     def test_field_only_actual_before_projection(self):
         value=fixture();original=copy.deepcopy(value);pub={'unitFilesActual':{'fixture-unit':[1,2]}}
         got=admission.project(value,pub)
-        self.assertEqual({'rows':{str(i):[]for i in range(24)},'durable':{'backup':{'fixture':'literal'}},'oneTimeRuntime':{},'configuration':{},'unitFilesActual':{'fixture-unit':[1,2]},'native':{str(i)+'.exec':{'sha256':'a'*64}for i in range(58)}},got)
+        self.assertEqual({'rows':{str(i):[]for i in range(24)},'durable':{'backup':{'fixture':'literal'}},'oneTimeRuntime':{},'configuration':value['configuration'],'unitFilesActual':{'fixture-unit':[1,2]},'native':{str(i)+'.exec':{'sha256':'a'*64}for i in range(58)}},got)
         self.assertEqual(original,value)
 
     def test_null_missing_extra_and_old_native_count_refused(self):
         for value in [None,{},dict(fixture(),invented=True)]:
             with self.subTest(kind=type(value)),self.assertRaises(ValueError):admission.project(value,{})
-        for key in ['actors','detailedActors','flocks','peers','locks','rows','native']:
+        for key in ['actors','flocks','peers','locks','rows','native']:
             v=fixture()
             if key in ['peers','locks']:v['database'][key]=[{'foreign':True}]
             elif key=='rows':v['database']['rows'].pop('0')
             elif key=='native':v['native'].pop('0.exec')
             else:v[key]=['foreign']
             with self.subTest(key=key),self.assertRaises(ValueError):admission.project(v,{})
+
+    def test_missing_extra_and_live_actual_unit_refused(self):
+        for name,change in [('missing',lambda v:v['units'].pop('caddy.service')),('pid',lambda v:v['units']['caddy.service'].update(MainPID='12')),('control',lambda v:v['units']['caddy.service'].update(ControlPID='12')),('job',lambda v:v['units']['caddy.service'].update(Job='10')),('fields',lambda v:v['units']['caddy.service'].pop('Id')),('uncaptured',lambda v:v.update(detailedActors={})),('same-count-foreign',lambda v:(v['units']['caddy.service'].pop('LoadState'),v['units']['caddy.service'].update(foreign='loaded'))),('wrong-type',lambda v:v['units']['caddy.service'].update(MainPID=0)),('config-missing',lambda v:v['configuration'].pop('caddy.service'))]:
+            value=fixture();change(value)
+            with self.subTest(name=name),self.assertRaises(ValueError):admission.project(value,{})
 
     def test_complete_actual_factories_no_lifecycle_and_correct_source(self):
         observed={'boot':'79a3260ae16d42bf942ab914ed144c28','invocation':'1'*32,'job':'1','start':1,'rootPid':123,
