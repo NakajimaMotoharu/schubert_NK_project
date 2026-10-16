@@ -1320,6 +1320,20 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC288 Caddy既終端・二管理retainerからの限定部分回収（2026-10-16）
+
+QA047/BUG1341・1342/YKT1107・1108内の内部補足。SSC287の7bb/PG3976/BOM0a409301・boot79a・Root155272 timeout143 cohortだけに適用し、旧Root/旧工具4152の失敗を正常化しない。Caddyは旧INV a0c7fb91のinactive/dead/success/code1/status0・Main/ControlPID0/Job空・旧PID/kernel空を独立確認した既終端であり、観測だけを行い再stopしない。残順はWeb→API→Expiry→Artemis→Cleanupの必要5対象とする。
+
+管理Java790010/t14181503/argvSHA ed8889ef439ebe28100f5a4d4cee289004c55e9bfb108a7a314c37d25aaf7af2、親Python789928/t14180650/argvSHA c8c952de1cf05574e3fdcf5effc076e4aac73748367f49aac23f6cb6300e9fb6だけを旧retainer対象とする。fresh二読の全98/7FD・UID/GID/groups/cap/NNP・cgroup/session921・親子/全task・同source/executable/class/lib/全189署名entry/material・原本/全24表/Backup/keys/native/startup33・普通actor/TCP両端を照合する。JavaのM/A sole二FLOCKと各lock FDの同OFDをkcmpで認証し、未認証/余剰/不一致は操作しない。期限切れDBbackend/advisory0は旧close正常ではない。
+
+新十metadata Refと同inode host gateのqueued successorを保持する。元host observer595379/t14277246/argvSHA7bfafc9766fc7469583dd5e760d92c745ef1e14708f53706bfce601b0c003248のsole gate所有を認証した上で、既pidfd verify→耐久一回予約/fsync/dirsync→verify→通常TERM→15秒terminal待機をJava→Pythonの二対象だけに適用する。Javaが未reapなら同start/旧PPidのzombie・FD0/lock0だけを許し、生存/異世代は不可。親TERM後30秒以内に両PID消失、全旧管理lock/advisory0、全原値不変を確認する。sudo/host observer/業務Unit/VMへsignalせず、SIGKILL/forceunlock/DBterminate/resetfailedなし。元4152の実143を元observer/manifestから回収し、正常終了へ置換しない。
+
+metadata Refを切らず元host gateの自然返却・同inode継承を認証し、別new-only controllerのfresh M/A・batch RO/同peer・十Refによるinspect正常返却を先行する。Ref keeperは別post完了まで保持し、5対象の正規一回停止・真正terminal/普通native二file・canonical INVALID revoke/既全33保全・全新scope正常・別fresh独立post後に正常Unrefする。未知/ack欠落/終端不明なら新所有/証跡を隔離保持し、同操作を再送しない。実行中4152/frozen5fdbはhotpatchしない。
+
+全32設定宣言の照合は既契約のExecStart/ExecStop path・argv・ignore_errorsおよび他全fieldを保持し、systemdが変えるstart/stop時刻・code/status/PIDを宣言同値比較へ混入しない。動的値は別の同世代真正terminal条件で省略なく照合する。普通poolはSS342のAPI最小2/最大8、Web最小1/最大2の範囲とし、各peerの固定role/app/本人両端socketを認証、停止済みroleは0とする。固定総数3・現在値だけの一般化・未知peer許容をしない。全署名189/原値/Unit世代を各phaseで再確認し、当source native CRC/session・coverageは後続独立資格であり回収だけでは受入れない。
+
+実証前提：PG4160全原値/宣言/98・7FD二読、PG4182同固定3artifactの実proof actual0・signals0・十Ref正常返却、独立14工具試験/静的0。これらは実TERM/5stop/postの成功ではない。設計only main公開を実操作の先行条件とし、RD/UI/業務仕様/Root1800秒/各Unit期限/451/QA051finalを変更しない。
+
 ## SSC287 failed-DONE現cohortの新所有による限定正規回収（2026-10-16）
 
 QA047/BUG1332/YKT1098の内部復旧補足。SSC286と同じsource7bb/PG3976/BOM0a409301・boot79a・Root155272/Inv820851b8/run dc0cb75f/actd9d58371に限定する。元PID1 Starting→JobFailed、Unit timeout143・1800.068969秒、原本.doneWARNING10/ca7829dbを独立に照合し、旧Rootの正常terminal/真正DONE/closeや停止権限を合成しない。元Root/Backup/ADMIN/配備/公開/reload/VMを再演せず、元Root30分・各Unit期限・451は不変更である。
