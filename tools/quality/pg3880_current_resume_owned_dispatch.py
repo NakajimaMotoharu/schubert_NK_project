@@ -7,6 +7,8 @@ import pg3876_current_resume_owned_sources as role
 GUEST='/var/lib/pgpt-s1-preservation/'+role.TOOLS
 REMOTE='/home/ubuntu/pg3880-current-resume-owned-stage-v1'
 ARCHIVE='pg3880-'+role.TOOLS+'.tar'
+TOOLS=role.TOOLS
+BOM=role.BOM
 
 
 def namespace():

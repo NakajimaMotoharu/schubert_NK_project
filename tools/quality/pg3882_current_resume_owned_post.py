@@ -4,6 +4,7 @@ import pg3496_outbox_owned_post as template
 import pg3876_current_resume_owned_sources as role
 
 SLOT='pg3882-current-resume-owned-post-v1'
+TOOLS=role.TOOLS
 
 
 def namespace():
@@ -13,6 +14,9 @@ def namespace():
 
 
 def main():return namespace()['entry']()()
+
+
+def payload(seals):return namespace()['payload'](seals)
 
 
 if __name__=='__main__':raise SystemExit(main())
