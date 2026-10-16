@@ -1,6 +1,5 @@
 """Independent seven-phase publication and all original-data/resource post, no Root start."""
 import ast
-import hashlib
 import inspect
 import json
 from pyflakes.api import check
