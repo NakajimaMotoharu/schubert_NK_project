@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC296 回収済みfailed-DONEをdata-only基点とする新source配備
+
+SSC291～294でRoot143の必要逆順回収・typed revoke・別fresh postが真正完了した現7bb/PG3976/BOM0a409301/boot79aを、新候補964e/PG4432/BOM93807abdへ接続する。旧7fff正常Root用のISSUED/正常GC/成功receiptを移植しない。現RootはINVbbcdb699/job167140/runb1ba37cb/activation8314450e、timeout143・done10/SHA654073a0は失敗親のdataであり、正常Root/停止権限ではない。旧scope UNKNOWNも保持する。
+
+基点はfreshの全24表、全32設定・実Unitfile、原本/Backup/鍵・全189署名材料、全37startup（現INVALID）・native58・runtime・全10Unit/19field・全PID1 journal field/cursor/イベント順を完全11fieldへ保存したものとし、非native before10=66ee6f86/完全11=8e000cbaへ固定する。JSON object key順だけは非意味的だが、全値の型・list/イベント順・cursor/fieldを削除しない。raw双方を比較前に別root私有fileへdurable保存し、未採取の過去拒否を後日の同値で補完しない。実epochのINVALID・permitDigest無しと同run/cutoff/activation/done全byteを型付き前後二読する。現在failed/timeout143/全PID-job0・kernel空、active/pending/intent・全DB/client/advisory/flock0も再照合する。
+
+新only閉鎖18roleは同artifactで`inspect`と`place`の二modeだけを受け、固定Java/同class/同modeの親子argv、各別SAVE、全file SHA/stdlib依存（UUID検証の標準uuidを明示）/bundleを認証する。M→A→実batch RO DB/advisory/heartbeat→十metadata Refを保持して各境界の全現在値を二読する。`inspect`は187artifact/全tar member/サイズ/hash/署名・固定source/BOM/schemaを検査し、private SAVEへmanifest証拠を保存して配置前にreturnする。candidate release/署名destination/current/approval/epoch/Unitは書かない。DB rollback/close・lease確認→十Refとbus/子の正常終了→A/M返却後にだけinspect completeを発行する。
+
+同artifactの実inspect0・全新資源正常返却・設計main公開後、別freshの`place`一回で未使用releaseと新署名fileだけをnew-only作成する。旧原本/37/native58/全非対象byteを保全し、独立postが全現在値・新候補187署名・全資源0を確認してからcandidate ROへ進む。RO→別post→既承認の有限code-only公開→別postも個別new-only予約・source/hash・同所有へ結合し、UNKNOWNや途中fileを再発行せず保全する。公開許可差以外のUnit/原本/DB変更を追加しない。失敗親証明はdataだけで、旧親の期限や操作許可を発行しない。
+
+新通常Rootは公開後の別fresh新run/cutoff/activation/epochによる一回であり、1800秒・各Unit期限・全境界鮮度/全graph・失敗逆順回収/資源後条件を維持する。旧source nativeの合算0、真正terminal/全24/seal/同owner Browser/ownedstop/新source native CRC-session/CHR/F03/四100/451は別受入。RD/UI/業務差分・QA051 final保留・正式1964/53を変更しない。
+
+
 ## SSC295 固定manager読取のbootstrap共通化
 
 SSC239のin-process固定local manager readerをbootstrapへ所属変更し、Root NativeIoとChild NativeIoの固定Unit照会が同実装を使う。固定enumはAPI/Web/Morning/Cleanup/Expiry/InboxInspector/Artemis/Caddyの八Unitだけ、field組は既存7fieldとdeadline4fieldだけである。返却は非秘密観測dataで、Root/子の認可・起動/停止権限ではない。bootstrapからbatchへの依存、任意Unit/field/path、公開Factory注入、代替CLIへのfallbackを作らない。

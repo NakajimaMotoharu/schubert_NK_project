@@ -1,5 +1,14 @@
 # 障害検知・復旧runbook
 
+## SSC296 回収済み失敗親から新署名sourceへ進む手順
+
+SS343 SSC296に従う。4384回収0と4434fresh0・4440全raw/全像保存0・4442独立全値資格0は現7bbの失敗親データ基点であり、旧Root143/旧UNKNOWNは正常化しない。全19field/PID1/原本done・現INVALID/全37・native58・全24/原本Backup鍵/189/32をfresh再認証する。後日の同値で未採取4438時点の差を補完しない。rawを保持し、JSON key順だけと全field/type/cursor/event順の違いを区別する。
+
+Production候補964e/PG4432/BOM93807abdは全3721/545/1644・独立資格・host署名187を個別照合する。既全回帰/署名/回収/成功試験は通信や応答欠落だけで再演しない。閉鎖18roleの全host/emitted static・current7bb JAR compile・独立UUID/失敗親/INVALID/全tuple/二mode境界を先行する。compile/fixture非0は一次exit/loghashを保存し、未生成classの二次例外で失敗を隠さない。
+
+固定stage一回→同artifact inspect一回（別private SAVEのみ・新release/署名/current/approval/epoch/Unit書込0）→全DB/M-A/十Ref/子の正常返却→別fresh unused place一回→独立post→candidate RO/別post→有限公開/別postの順に進む。各予約/source/hash/元jobが存在すれば元結果を回収し、新ownerや別sourceへ成功を流用しない。body/close不明は隔離と原証拠を保持し、強制解放/再操作をしない。新普通Rootの1800秒/真正終端・全24/seal/ownedstop/native/Browser/CHR/四100/451・QA051は後続の独立受入とする。
+
+
 ## SSC295 固定manager共通読取の性能是正
 
 343 SSC295を適用する。Childの反復process生成を、既SSC239と同じfresh in-process固定読取へ置換する。全Unit/field・owner前後/新bus/元deadline・unknown close保持・全kernel/NSS/graph/境界検査を残す。限定計測、選択試験、同source全体、正規候補/新一回通常Root、真正terminal/同owner停止/独立post・nativeを別の受入条件とし、速い一回やread-only測定をRoot正常へ代入しない。
