@@ -1,6 +1,6 @@
 # 997 RootStartupPending.verifySelf 独立PT仕様
 
-Program NK-OPS-001、class/method `batch.file.RootStartupPending.verifySelf`、RD OPS009/SYS002/004、UI251、SS343/SSC137（固定API/Web Root child launch同世代照合）。PG4662の残差のうち当methodの欠測条件を対象とする。Production/Main不変更、root/native scopeを取得しない純粋な相関検査であり、起動許可全体の受入とはしない。
+Program NK-OPS-001、class/method `batch.file.RootStartupPending.verifySelf`、RD OPS009/SYS002/004、UI251、SS343/SSC137（固定API/Web Root child launch同世代照合）。BUG1379訂正：当初class残差から当methodも欠測と判断したが、PG4662合成時点で当methodの四counterは既0だった。追加は両serviceの否定入力を独立強化する契約回帰であり、coverage増分0とする。Production/Main不変更、root/native scopeを取得しない純粋な相関検査であり、起動許可全体の受入とはしない。
 
 fixtureは公開literalのboot46600001…/epoch46600002…、INV1234567890abcdef…、PID300/startTicks700、固定SHA a×64/b×64。期待値はSSのservice/boot/INV/PID/ticks全一致条件から独立に列挙し、Productionを呼んでexpectedを作らない。
 

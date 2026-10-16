@@ -1,5 +1,7 @@
 # 998 Root self世代一致 独立PT結果
 
+**BUG1379/YKT1145訂正：当methodはPG4662時点で既LINE/METHOD/BRANCH全0。新試験によるcounter増分は0。** 新入力は両service負条件の独立契約強化として記録する。当初の「method欠測」仮説と着手見積/再試行コストを履歴から削除せず、最新456/4680保存資格で明示訂正する。
+
 997仕様の最終限定run **PG4674 / 元35401 actualMaven0・qualification0**。Test snapshot `4be01b8963dee1a2b79b0d2d52bae6d4430f4fa9`、Production Main964e不変更、2026-10-16 19:52:44.536470～19:54:02.228443Z（77.691973秒）。JDK25.0.4/Maven3.9.12/Python3.14.4/Linux、dev-foundation。実commandは997の4674 runner、全六project・八宣言suiteの全methodをsource inventoryと実XMLへjoinし **33PT/8suite、F/E/S0、not-run0**。tool終了0だけでなくXML一覧一致・固定全入力SHA不変を確認した。
 
 当`RootStartupPending.verifySelf`は **LINE 11covered/0missed、METHOD 1/0、BRANCH14/0、INSTRUCTION55/0**。API/WEBそれぞれの完全一致、service/boot/INV/PID/ticks各不一致、全非対象service、nullの独立期待値を検証。Production expected生成0/反射によるprivate実行0/除外0。class全体は他nativeメソッドを含み63line/4method/22branch未網羅、この純粋methodの網羅をclass全体100%へ拡大しない。
