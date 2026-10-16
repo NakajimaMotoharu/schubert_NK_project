@@ -1,5 +1,16 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC300 current825eの既存ADMIN正常20・新一回native資格
+
+SSC188/189/225/231/234/263の専用Bootstrap契約を変更せず、current Source825e463334c43a5bc96f50db964df22e11758d1b/release0.1.0-PG4702/BOMf1f6743f8ebe099a8804623f5efef263fa046ca66c46004ade5d469f755fbd80/schema028/boot79a3260a-e16d-42bf-942a-b914ed144c28の未実施正常20経路へ限定再束縛する。根拠は同source Root fff841d9-2554-4680-b17d-9548bfa79cbb/cutoff2026-10-16T22:12:38.570783Z/activation7ab6c953-b2fc-47ae-be96-26a3196ca76d、真正WARNING10/1652.392895秒、実Browser12/正規ownedstop/4778独立全24二読・十kernel/actor/client/advisory/flock0・署名187・native70安定。元after10field私有SHA b4f07e80538b7eab36e1ba87523097891252e5f14f9f1d86ad8106c753c740c3は観測比較基点だけで起動権限ではない。初回guest readで全原値/Source-BOM-current/同signature/全24・32設定とUnit宣言・NSS/credentials/原本Backup・runtime/startup/旧70native/既tool-scope終端を再認証し、ADMINが現存することをDB内だけで確認する。実体行や秘密を輸出しない。
+
+ordinary-bootstrap196は既閉12role中の既owned roleとして検証し、roleを再prepare/mkdir/chmod/chown・旧execを復元しない。欠落/未知entry/owner又はagent/RW宣言不一致なら資格せず、当該範囲の新準備を別分類する。固定二bootstrap credential sourceが不存在である場合に限り、新M→A/現current・保持namespace/全必要FD・readonly batch DB/advisory71419602/十Refの各所定scopeと完全入力closureを保持して、ADMIN既存/全前値を再検査し、新CSPRNGの非運用試験username/passwordをO_EXCL/NOFOLLOW/root0400/link1/ACL0で一回発行する。旧秘密/旧permitを復元・Login利用せず、DB_API sourceを変更しない。DB/advisory正常帰還・全peer0を確認後、durable一回予約から署名専用Unitを一回だけstartし、当Invocation/PID/start/job・普通API identity/group/cap0/NNP/cgroup、元30秒と真正正常20、作成/更新/監査追加0・全24不変、同Invocation terminal→closing二pointを独立照合する。読取、準備、start、終了、scope closeを別判定する。
+
+全体後条件後だけ新二sourceを同inode-byte/NOFOLLOW/RENAME_NOREPLACEで私有退役・両directorysyncし、元DB/全24/署名187/原本Backup/他九Unit/設定・依存/runtime・旧nativeの不変と新M/A・DB/client/advisory/Ref/FD/bus正常帰還を独立postで確認する。新Bootstrap20だけからRoot/API/Web/Backup又は全品質成功を推定しない。新slot/実handlerの全依存及びactual entry selector・保存schema・型/null/欠落/余剰/別Source/既予約・旧二source再利用拒否を先行PTにする。未知/部分発行/close不明では所有/証跡を保全し、同slot再start・別入力再試行・補作成・force回収・DB手更新をしない。運用秘密はGit/公開logへ保存しない。
+
+本補足は既存ADMIN20の承認済み動作を当sourceへ適用する内部具体化で、通常disabled/argv0・exit0/20/50/70・署名/既認可/DB維持・元期限・451・RD/UI/QA051は不変更、新QA不要。Production Mainは変更しない。825e Root9 streamsと新Bootstrap closingだけを、各actualsource/同1646Main完全SHA/CRC/個別session-point/invocation時間で資格してから同source測定へ統合する。別Sourceの旧Bootstrap成功/nativeを輸入しない。設計main公開・当試験normal20/新scope後条件・native・四counter100/正式PGPT/ITSTは別受入である。
+
+
 ## SSC299 三外部entryの終了要求data/control-flow port
 
 既SSC083/234のJava25標準instance-mainをMorningProcessMain/RootServiceLauncher/CleanupProcessMainへ限定適用する。公開noarg constructorは固定本番operation・既measurement source・既System::exitをbindするだけで、起動権限/代替path/fixtureを選択しない。package内constructorのcallbackは同じmainの引数判定・実行順序・終了要求の回数/値・未知例外を独立検証するdata/control-flow portであり、OS Unit/UID/原本/DB/permit/readinessのcapabilityではない。CLI/ENVから任意callback/測定profile/終了方法を選択する機能を追加しない。
