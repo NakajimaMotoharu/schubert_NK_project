@@ -9,8 +9,10 @@ from pg1446_current_cold_stage import W
 SLOT='pg4634-current-all24-qualified-v1'
 
 
-def payload():
-    return 'SOURCE='+repr(admission.SOURCE)+'\nBOM='+repr(admission.BOM)+'\nBINDING='+repr(admission.live())+'\n'+oracle.source()+'\n'+inspect.getsource(strict_equal)+r'''
+def payload(observed=None,before_hash=None):
+    observed=admission.live()if observed is None else observed
+    before_hash=admission.before()if before_hash is None else before_hash
+    return 'SOURCE='+repr(admission.SOURCE)+'\nBOM='+repr(admission.BOM)+'\nBINDING='+repr(observed)+'\nBEFORE_SHA='+repr(before_hash)+'\n'+oracle.source()+'\n'+inspect.getsource(strict_equal)+r'''
 import hashlib,os,pathlib,stat
 require(os.geteuid()==0 and pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()=='79a3260a-e16d-42bf-942a-b914ed144c28')
 base=pathlib.Path('/var/lib/pgpt-s1-preservation');saved=base/'pg4628-current-raw24-capture-v1';out=base/'pg4634-current-all24-qualified-v1';require(not os.path.lexists(out));os.umask(0o077);out.mkdir(mode=0o700)
@@ -21,7 +23,7 @@ def read(name,digest):
  try:raw=os.pread(fd,s.st_size+1,0);require(len(raw)==s.st_size and metadata(os.fstat(fd))==metadata(s)and metadata(p.lstat())==metadata(s))
  finally:os.close(fd)
  require(hashlib.sha256(raw).hexdigest()==digest);return raw
-br=read('before.private.json','21c86465bd24d2a8358472b0dc1cfcaee93c80bb8b113295da577c4e981385fe')
+br=read('before.private.json',BEFORE_SHA)
 ar=read('after.private.json','d6d3a6fe639feb3e898d18b7c5ac6281efe8ef5d4767a7eaf597f3254bbc52f3')
 sr=read('sql-stdout.private.jsonl','a2c3238a0b5b50fac2bd556bea696a5bc72805c6655c424106abe592f3c26ad4')
 before=json.loads(br)['database']['rows'];after=json.loads(ar);rebuilt={}

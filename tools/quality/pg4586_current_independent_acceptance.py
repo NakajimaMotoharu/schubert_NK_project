@@ -8,8 +8,8 @@ import pg4584_current_admission_image as admission
 from pg1446_current_cold_stage import W
 
 TERM='pg4586-current-genuine-terminal-v1'
-ROWS='pg4588-current-all24-rows-v1'
-SEAL='pg4590-current-whole-seal-v1'
+ROWS='pg4634-current-all24-qualified-v1'
+SEAL='pg4636-current-whole-seal-v1'
 
 
 def bind(raw):
@@ -26,8 +26,8 @@ def terminal_payload(observed):return bind(previous.previous.terminal_payload(ob
 
 
 def rows_payload(observed,before_hash):
-    fn=types.FunctionType(previous.rows_payload.__code__,{**vars(previous),'admission':admission,'ROWS':ROWS})
-    return bind(fn(observed,before_hash))
+    from pg4634_current_saved24_qualification import payload as saved_payload
+    return saved_payload(observed,before_hash)
 
 
 def seal_payload(observed,before_hash):
@@ -41,7 +41,8 @@ def seal_payload(observed,before_hash):
     view=project_source+'\n'
     view+="publication_raw=(BASE/"+repr(admission.PUBLICATION_PATH)+").read_bytes();require(hashlib.sha256(publication_raw).hexdigest()=="+repr(admission.PUBLICATION)+")\n"
     view+="before=project(before,json.loads(publication_raw))\nold['unitFilesActual']=before['unitFilesActual']\n"
-    return raw[:start]+view+raw[end:]
+    from pg4636_current_new_day_whole_seal import patch
+    return patch(raw[:start]+view+raw[end:],observed)
 
 
 def payload(phase):
@@ -59,6 +60,9 @@ def main(phase):
     if phase=='seal':
         rows=json.loads((W/ROWS/'manifest.safe.json').read_bytes())
         if rows['actualExit']!=0 or rows['source']!=admission.SOURCE:raise ValueError('same-cohort all24 actual0 first')
+    if phase=='rows':
+        from pg4634_current_saved24_qualification import main as saved_qualification
+        return saved_qualification()
     slot,raw=payload(phase);return admission.execute(slot,raw,90)
 
 
