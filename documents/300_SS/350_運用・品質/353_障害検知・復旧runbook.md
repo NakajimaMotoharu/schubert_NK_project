@@ -1,5 +1,13 @@
 # 障害検知・復旧runbook
 
+## SSC291 新167140 failed-DONEの正規回収（旧instanceと分離）
+
+343同項のSource7bb/PG3976/boot79a・新Root167140/INVbbcdb699/runb1ba37cb/act8314450eを適用する。1800.072841秒timeout143とdoneWARNING10は別事実で、observer0/TLS200/done保存を正常Rootへ変換しない。元Root/start/observer/旧4152・retainer回収を再演せず、全24/原本Backup/鍵/native56/startup37/全189・32/四ordinaryの現所有を新freshに認証する。
+
+新Java/helperのliteralを現kernel/独立原本に結合して再compile・全closure/独立反例と同artifact read-only実inspect/全新scope正常を先行する。Root expiredをlive資格とせず、typed ISSUED/owner/launchのdata-only読取とPID1 failed証拠を分離する。別fresh M-A/実RODB/heartbeat/十Ref下でCaddy→Web→API→Expiry→Artemis→Cleanupの必要6逆順を一回予約/真正停止、普通pool0・PID1/vendor/native/kernelを閉鎖した後だけcanonical typed revoke/全37保持/全新scope正常、さらに別fresh独立postへ進む。設定の実行補助値と宣言を分離し全32意味を不変、poolはSS342範囲/本人両端を確認して観測時4件へ固定しない。
+
+未知は新所有を隔離し、残るactor/予約と元exit/失敗/全原値・private logを保存する。権限/終了不明を0へ補完せず、stop/revoke/VM操作の再送・force解除をしない。保全/設計公開/回収完了はRoot性能問題の解決・新native/正式品質・IT/ST完了ではない。詳細なinstance定数と禁止事項は343、実証跡は983以降と456/460で管理する。
+
 ## SSC-285：SIGNED_CURRENT・取得前39FDの限定回収
 
 BUG1305/YKT1071は停止工具の旧signature stemを正規guardが拒否し、当Java410196/全39FD・子0/M-A保持、DB/Ref/SAVE/サービス停止前で保持したもの。3502 proof16145fbc…・当current4856/PG3420/boot79aを基点に、343の**39FD固有**閉集合/OFD/全原値をfresh再認証する。99/101FD・旧DB peer・古bootの許可を使わない。
