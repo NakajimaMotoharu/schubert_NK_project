@@ -1,5 +1,7 @@
 # 同sourceBrowser・正規所有停止・native資格仕様
 
+実準備追記07:43JST：**4762元69738 actual0**、当sourceQualified=true・planned12・compile/Java oracle/Python rows/Python TLS/credential readonlyの全5phase0。Source/BOM/既12assertion identity-onlyをfreeze、Root/Browser業務start0。先行4754/56/60実0は1013。次4764のreal12は未実施、準備成功を実ケース成功にしない。
+
 NK-OPS-001/PT-OPS-SSC299-CHAIN003、SS341343354355/SS324352/UI236・全承認DIF、451品質不変更。対象Source825e/PG4702/BOMf1・新runfff841d9/activation7ab6c953、元1800budget。旧964e native9/物理64は私有保全dataのみ、当sourceへ加算しない。
 
 4762は元の12実Browser oracle/driverのpositive source literal一箇所だけを変え、assertionとbaselineを不変更でfreeze。真正4754 DONE後だけcredential readonly preflight、4760 Root seal後だけ4764実Browser、前後同四owner/標準TLS独立witness/同SOCKS/全24独立後条件を要求する。Browser ignoreHttpsErrors=trueと標準trust store未資格は元仕様の限定として明記し、標準TLS成功をBrowser trust-store成功へ置換しない。

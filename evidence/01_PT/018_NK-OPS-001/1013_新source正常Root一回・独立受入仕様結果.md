@@ -1,5 +1,15 @@
 # 新source正常Root一回・独立受入仕様結果
 
+## 実独立受入（2026-10-17 07:43JST）
+
+元watch29013 actual0、22:40:12.167935Z、親10/Result success・API/Web ready/TLS200/observer十Ref正常closeを確認。**4754元80987 actual0**、22:40:19.384679Z、payload`48b7d363426b930e52853fb4ff0e6908a9dbb5cf229da9450e8730215cc52d67`。当run/activation・真正PID1 start/DONE・end189659374308us、**elapsed1652.392895秒（27分32秒）/1800内、WARNING10**。Unit GC後の現0を過去exit0としない、genuine start/terminal journal二読とdoneSHA `dba4d874e74ded3f878c11935f96698fee9452a6d02593b8595330a20a9e6c6a`を独立検証。activeAbsent=true、旧run再演0。
+
+**4756元37740 actual0**、22:40:56.251435Z、payload`0dbbbc68c823a588d13305d489b57680f25f8bed660b99166d3ba33c8f80e798`、beforef8d/after`012ddfdd433d2c60c3ff50a1b88a5aecb143aebf999d1ee3d80a7cbc06e2fd7d`/rawSQL`1807bc72bf0b0a494814a5159ef13db08f5e2522f18bbeeaa88ca3ccfac7f94b`。全24独立後条件、Backup2/同日skip7/保護WARNING1、Inbox削除4・保護10/Outbox448削除・通知候補1保持、匿名HTTP log/session/SENT outbox各222の1対1対応を確認。rawは解析前私有fsync保全。
+
+**4760元5680 actual0**、22:42:20.309958Z、payload`91d35233d4a00f13ff117595a64df2b80ad0a688340a8ca7baab6d6922f03c1f`、全seal画像SHA **`ee7bc297eaea3226ee6fc66607ea0b637c5909aca856c03fd0475f937b63262b`**。当run/source/BOM/真正doneEnd22:39:38.673291Z/全24・32config・187/正常Ref・旧原本/private保全と四ownerを独立再検査。Artemis863792/INV72ff、API867590/INVe48e、Web867899/INV1bee、Caddy868252/INVd2f9、完全ticks/argvは元manifest。currentFourOwnedLive=true/sqlOracleQualified=true、**businessFullOraclePending/backupManifestRetentionOraclePending/formalは未完**、seal0だけで全工程を完了へ加算しない。
+
+BUG1384/YKT1150のfull11 reader→all24直接rows→seal同mapper全対象は実0まで限定閉鎖。旧4752 actual1・その他歴史UNKNOWNを保持。次は新source実Browser→exact composite/parent18→正規ownedstop/全post→当source native。
+
 NK-OPS-001/PT-OPS-SSC299-ADMISSION002、SS341343354355/SSC299、BUG1384/YKT1150。Source825e463334c43a5bc96f50db964df22e11758d1b/PG4702/BOMf1f6743f、operator ab7422b67、branch dev-foundation。Root source/payloadは4740資格済み完全byte、全3739/549/1646の再実行0。
 
 4734 stage元10306 actual0、22:12:19.908351～21.674136Z/log SHA bb144b3df3b4783403f8e88202c4f3d8060eb877e3676eeb0081177333149685。watch元29013継続観測、private W/pg4734-parent-watch-v1.private.jsonl/.started、同一observerへ再起動0。
