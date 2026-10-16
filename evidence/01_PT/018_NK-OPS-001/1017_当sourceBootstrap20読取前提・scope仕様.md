@@ -1,5 +1,13 @@
 # 当sourceBootstrap20読取前提・scope仕様
 
+## 2026-10-17 08:43JST 全十二point/CRC・二組closing優越実0
+
+4830元44761 actual0、23:39:05.695837Z/payload **f10dfb461f52d3cdb160b39587b478850d4b55551e162569910879b700f32f97**。旧当source10point全metadata9/SHA不変＋新二pointで全12、guest operations0。**4832元27978 actual0**、server manifest **c9d2652dd05837f556d1539dbf04630380f3b09f8d1496b1c1be84685f8fd893**、当3739PT/549suite/全1646Main・JarSHA/CRC/session不一致0、Inspector/Bootstrapの二組それぞれsame-session/start/time/probe-monotonicを実認証し、closing優越の10streamだけunion。旧source輸入0・元whole/署名/Root再発行0。
+
+当source先行4782 union743/146/9/453→**719/146/9/452**（LINE/METHOD/CLASS/BRANCH miss）、新Bootstrap分は実差 **24/0/0/1**。module別はAPI **3/0/0/0**、batch716/146/9/452、protocol/storage/bootstrap/web各四0。Host→native累計gain2863/453/28/315とは別で二重計上しない。これはtechnicalのみ、正式1964/53・受入leaf+0/工数null・F03/CHR/451/trace未完。
+
+4834新projectionは原server manifest/6XML完全SHAを照合し全technical sessionをhash-redact、counter/class/method/line semantic不変で公開する（独立3工具0・host静的0、実未発行）。成功保存後だけ公開path/hashを追記。source/publicMain変更0、次はAPI未測定例外3lineとbatch未網羅条件を独立oracleで必要製造・PTへ継続する。
+
 ## 2026-10-17 08:40JST 独立post実0・Bootstrap native資格へ
 
 4828元50827 actual0、観測23:37:06.339540Z/payload **0fb2a34db9866f3fc2986f921e7c19716e5b3d78ae75f1f1a14469db8beed824**、新完全画像 **40fa4c1cf84ae43c7727ffad8aa10f698b79133cfe3e06cdc1539c9fe0811bd2**。既存20真正PID1 job221485/実Unit **1.700792秒**（30秒内）、INV hash2dd7a786。全24二読不変/32設定/187署名/旧70と新2native/原本Backup・旧proof/二入力source退役/全client-advisory-flock0・十kernel空・新Ref正常帰還を独立確認。captured normal20先行→現在GC別検証0、GCから過去成功推定0。全private proof SHAはW/pg4828... manifest（before032b5c2c/after5e2841d1/pid18525e204/complete8ea827c8）。三phase/post再実行しない。
