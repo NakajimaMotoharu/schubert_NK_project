@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.batch.platform;
+package dev.codex.schubert.nk.bootstrap;
 
 import dev.codex.schubert.nk.storage.ResourceScope;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
  * process/shell, fallback, mutable state cache or remote endpoint.
  */
 @NullMarked
-final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
+final class LinuxSystemdSession implements SystemManagerObservation.Session {
   private static final java.lang.String LITERAL_SD_BUS_MESSAGE_UNREF = "sd_bus_message_unref";
 
   private static final java.lang.String LITERAL_RESTRICTED = "restricted";
@@ -48,7 +48,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   private boolean retainedClosed;
   private boolean uncertain;
   private @Nullable String peer;
-  private LinuxSystemdQuery.@Nullable Budget budget;
+  private SystemManagerObservation.@Nullable Budget budget;
 
   LinuxSystemdSession(Calls calls, Arena arena) {
     this.calls = Objects.requireNonNull(calls);
@@ -67,7 +67,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
 
   private void check() throws IOException {
     if (retainedClosed || uncertain || thread != Thread.currentThread().threadId())
-      throw LinuxSystemdQuery.unavailable();
+      throw SystemManagerObservation.unavailable();
   }
 
   private MemorySegment text(String value) {
@@ -76,7 +76,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
 
   private int integer(String symbol, Object... args) throws IOException {
     Object value = call(symbol, args);
-    if (!(value instanceof Integer code) || code < 0) throw LinuxSystemdQuery.unavailable();
+    if (!(value instanceof Integer code) || code < 0) throw SystemManagerObservation.unavailable();
     return code;
   }
 
@@ -98,30 +98,30 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     check();
     var current = budget;
     if (current == null || bus.address() == 0 || micros < 1 || micros > 5_000_000)
-      throw LinuxSystemdQuery.unavailable();
+      throw SystemManagerObservation.unavailable();
     long left = current.remainingMicros();
-    if (left < 1 || left > 5_000_000) throw LinuxSystemdQuery.unavailable();
+    if (left < 1 || left > 5_000_000) throw SystemManagerObservation.unavailable();
     return Math.min(micros, left);
   }
 
   private void timeout(long micros) throws IOException {
     long left = remaining(micros);
-    if (integer("sd_bus_is_ready", bus) != 1) throw LinuxSystemdQuery.unavailable();
+    if (integer("sd_bus_is_ready", bus) != 1) throw SystemManagerObservation.unavailable();
     integer("sd_bus_set_method_call_timeout", bus, left);
     remaining(micros); // Setter/ready work must not cross the original deadline before sending.
   }
 
   @Override
-  public void start(LinuxSystemdQuery.Budget source) throws IOException {
+  public void start(SystemManagerObservation.Budget source) throws IOException {
     check();
     Objects.requireNonNull(source);
-    if (bus.address() != 0) throw LinuxSystemdQuery.unavailable();
+    if (bus.address() != 0) throw SystemManagerObservation.unavailable();
     budget = source;
     MemorySegment result = pointer();
     Object status = call("sd_bus_new", result);
     bus = result.get(ValueLayout.ADDRESS, 0); // Capture ownership even if the status is a failure.
     if (!(status instanceof Integer code) || code < 0 || bus.address() == 0)
-      throw LinuxSystemdQuery.unavailable();
+      throw SystemManagerObservation.unavailable();
     integer("sd_bus_set_method_call_timeout", bus, remaining(5_000_000));
     integer("sd_bus_set_address", bus, text("unix:path=/run/dbus/system_bus_socket"));
     integer("sd_bus_set_bus_client", bus, 1);
@@ -138,14 +138,14 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   }
 
   @Override
-  public LinuxSystemdQuery.Owner owner(long micros) throws IOException {
+  public SystemManagerObservation.Owner owner(long micros) throws IOException {
     String unique = ownerValue("GetNameOwner", DESTINATION, 's', micros);
     if (unique.length() > 64 || !unique.matches(":[0-9]+\\.[0-9]+"))
-      throw LinuxSystemdQuery.unavailable();
+      throw SystemManagerObservation.unavailable();
     int pid =
         Integer.parseUnsignedInt(ownerValue("GetConnectionUnixProcessID", unique, 'u', micros));
     int euid = Integer.parseUnsignedInt(ownerValue("GetConnectionUnixUser", unique, 'u', micros));
-    var owner = new LinuxSystemdQuery.Owner(pid, euid, unique);
+    var owner = new SystemManagerObservation.Owner(pid, euid, unique);
     peer = unique;
     return owner;
   }
@@ -168,7 +168,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
         () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, request),
         () -> {
           if (!(status instanceof Integer code) || code < 0 || request.address() == 0)
-            throw LinuxSystemdQuery.unavailable();
+            throw SystemManagerObservation.unavailable();
           integer("sd_bus_message_set_auto_start", request, 0);
           integer("sd_bus_message_append_basic", request, (byte) 's', text(argument));
           var output = pointer();
@@ -181,10 +181,10 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
               () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, reply),
               () -> {
                 if (!(called instanceof Integer ok) || ok < 0 || reply.address() == 0)
-                  throw LinuxSystemdQuery.unavailable();
+                  throw SystemManagerObservation.unavailable();
                 var value = kind == 's' ? pointer() : arena.allocate(ValueLayout.JAVA_INT);
                 if (integer("sd_bus_message_read_basic", reply, (byte) kind, value) != 1)
-                  throw LinuxSystemdQuery.unavailable();
+                  throw SystemManagerObservation.unavailable();
                 remaining(micros);
                 return kind == 's'
                     ? string(value.get(ValueLayout.ADDRESS, 0))
@@ -196,7 +196,9 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
   @Override
   @SuppressWarnings(LITERAL_RESTRICTED)
   public String read(
-      RootStartupContext.Service service, LinuxSystemdQuery.Property property, long micros)
+      SystemManagerObservation.Service service,
+      SystemManagerObservation.Property property,
+      long micros)
       throws IOException {
     Objects.requireNonNull(service);
     Objects.requireNonNull(property);
@@ -206,7 +208,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
             "/org/freedesktop/systemd1/unit/"
                 + service.unit().replace("_", "_5f").replace("-", "_2d").replace(".", "_2e"));
     String unique = peer;
-    if (unique == null) throw LinuxSystemdQuery.unavailable();
+    if (unique == null) throw SystemManagerObservation.unavailable();
     // peer is established only by owner(), after its strict unique-name validation.
     // A unique bus name cannot auto-activate a service if its captured owner disappears.
     MemorySegment destination = text(unique);
@@ -232,7 +234,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
           },
           () -> {
             if (!(status instanceof Integer code) || code < 0)
-              throw LinuxSystemdQuery.unavailable();
+              throw SystemManagerObservation.unavailable();
             return string(value);
           });
     }
@@ -272,21 +274,21 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
         () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, message),
         () -> {
           if (!(status instanceof Integer code) || code < 0 || message.address() == 0)
-            throw LinuxSystemdQuery.unavailable();
+            throw SystemManagerObservation.unavailable();
           var data = pointer();
           var size = arena.allocate(ValueLayout.JAVA_LONG);
           integer("sd_bus_message_read_array", message, (byte) 'y', data, size);
           long length = size.get(ValueLayout.JAVA_LONG, 0);
           if (length == 0) return "";
           MemorySegment value = data.get(ValueLayout.ADDRESS, 0);
-          if (length != 16 || value.address() == 0) throw LinuxSystemdQuery.unavailable();
+          if (length != 16 || value.address() == 0) throw SystemManagerObservation.unavailable();
           return HexFormat.of().formatHex(value.reinterpret(16).toArray(ValueLayout.JAVA_BYTE));
         });
   }
 
   @SuppressWarnings(LITERAL_RESTRICTED)
   private static String string(MemorySegment value) throws IOException {
-    if (value.address() == 0) throw LinuxSystemdQuery.unavailable();
+    if (value.address() == 0) throw SystemManagerObservation.unavailable();
     MemorySegment memory = value.reinterpret(4097);
     return decode(index -> memory.get(ValueLayout.JAVA_BYTE, index));
   }
@@ -306,7 +308,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
       if (octet == 0) break;
       bytes[end++] = octet;
     }
-    if (end > 4096) throw LinuxSystemdQuery.unavailable();
+    if (end > 4096) throw SystemManagerObservation.unavailable();
     return new String(bytes, 0, end, java.nio.charset.StandardCharsets.UTF_8);
   }
 
@@ -315,7 +317,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
     Object after = call(symbol, value);
     if (!(after instanceof MemorySegment pointer) || pointer.address() != 0) {
       uncertain = true;
-      throw LinuxSystemdQuery.unavailable();
+      throw SystemManagerObservation.unavailable();
     }
   }
 
@@ -363,7 +365,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
           || addressBytes != 8
           || arch == null
           || !Set.of("amd64", "x86_64", "aarch64").contains(arch))
-        throw LinuxSystemdQuery.unavailable();
+        throw SystemManagerObservation.unavailable();
       return Path.of(
           "/usr/lib",
           arch.equals("aarch64") ? "aarch64-linux-gnu" : "x86_64-linux-gnu",
@@ -374,7 +376,7 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
       Objects.requireNonNull(attributes);
       if (!Integer.valueOf(0).equals(attributes.get("uid"))
           || !(attributes.get("mode") instanceof Integer mode)
-          || (mode & 0x12) != 0) throw LinuxSystemdQuery.unavailable();
+          || (mode & 0x12) != 0) throw SystemManagerObservation.unavailable();
     }
 
     @SuppressWarnings(LITERAL_RESTRICTED)
@@ -437,7 +439,8 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
               Map.entry("free", FunctionDescriptor.ofVoid(pointer)));
       for (var entry : descriptors.entrySet()) {
         SymbolLookup lookup = entry.getKey().equals("free") ? libc : systemd;
-        var address = lookup.find(entry.getKey()).orElseThrow(LinuxSystemdQuery::unavailable);
+        var address =
+            lookup.find(entry.getKey()).orElseThrow(SystemManagerObservation::unavailable);
         handles.put(
             entry.getKey(), Linker.nativeLinker().downcallHandle(address, entry.getValue()));
       }
@@ -446,13 +449,13 @@ final class LinuxSystemdSession implements LinuxSystemdQuery.Session {
 
     static Object invoke(@Nullable MethodHandle handle, Object[] arguments) throws IOException {
       try {
-        if (handle == null) throw LinuxSystemdQuery.unavailable();
+        if (handle == null) throw SystemManagerObservation.unavailable();
         Object value = handle.invokeWithArguments(arguments);
         return value == null ? MemorySegment.NULL : value;
       } catch (RuntimeException | Error failure) {
         throw failure;
       } catch (Throwable failure) {
-        throw LinuxSystemdQuery.unavailable();
+        throw SystemManagerObservation.unavailable();
       }
     }
   }

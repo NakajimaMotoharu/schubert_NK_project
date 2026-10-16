@@ -567,6 +567,15 @@ public final class ChildStartupContext {
 
   static final class NativeIo implements Io {
     private final LinuxInodeSecurity security = LinuxInodeSecurity.create();
+    private final SystemManagerObservation manager;
+
+    NativeIo() {
+      this(SystemManagerObservation.create());
+    }
+
+    NativeIo(SystemManagerObservation manager) {
+      this.manager = Objects.requireNonNull(manager, "fixed system manager reader");
+    }
 
     public long pid() {
       return ProcessHandle.current().pid();
@@ -597,32 +606,24 @@ public final class ChildStartupContext {
     }
 
     public byte[] maintenanceUnit(MaintenanceParent parent) throws IOException {
-      return unit(parent.unit);
+      return unit(SystemManagerObservation.Service.valueOf(parent.name()));
     }
 
     public byte[] inspectorUnit() throws IOException {
-      return unit("schubert-nk-inbox-inspector.service");
+      return unit(SystemManagerObservation.Service.INSPECTOR);
     }
 
     public byte[] brokerUnit() throws IOException {
-      return unit("artemis.service");
+      return unit(SystemManagerObservation.Service.BROKER);
     }
 
     public byte[] caddyUnit() throws IOException {
-      return unit("caddy.service");
+      return unit(SystemManagerObservation.Service.CADDY);
     }
 
-    private byte[] unit(String fixedUnit) throws IOException {
-      return new FixedServiceIdentity.NativeQuery()
-          .read(
-              List.of(
-                  "/usr/bin/systemctl",
-                  "--system",
-                  "--no-pager",
-                  "--no-ask-password",
-                  "show",
-                  "--property=Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup",
-                  fixedUnit));
+    private byte[] unit(SystemManagerObservation.Service fixedUnit) throws IOException {
+      return manager.read(
+          fixedUnit, "Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup");
     }
 
     @SuppressFBWarnings(

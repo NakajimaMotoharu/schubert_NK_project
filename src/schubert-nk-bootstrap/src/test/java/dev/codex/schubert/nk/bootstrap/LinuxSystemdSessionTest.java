@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.batch.platform;
+package dev.codex.schubert.nk.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -172,23 +172,37 @@ final class LinuxSystemdSessionTest {
       var calls = new Calls(data);
       var session = new LinuxSystemdSession(calls, Arena.ofConfined());
       session.start(() -> 5000000);
-      assertEquals(new LinuxSystemdQuery.Owner(1, 0, ":1.7"), session.owner(4999999));
+      assertEquals(new SystemManagerObservation.Owner(1, 0, ":1.7"), session.owner(4999999));
       assertEquals(
           "loaded",
-          session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.LOAD, 4999998));
+          session.read(
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.LOAD,
+              4999998));
       assertEquals(
           "loaded",
-          session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.GROUP, 4999998));
+          session.read(
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.GROUP,
+              4999998));
       assertEquals(
           "4294967295",
-          session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997));
+          session.read(
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.PID,
+              4999997));
       assertEquals(
           "18446744073709551615",
-          session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.START, 4999996));
+          session.read(
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.START,
+              4999996));
       assertEquals(
           "00112233445566778899aabbccddeeff",
           session.read(
-              RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 4999995));
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.INVOCATION,
+              4999995));
       session.close();
       assertTrue(session.closed());
       assertTrue(
@@ -230,10 +244,18 @@ final class LinuxSystemdSessionTest {
             () -> {
               session.start(() -> 5000000);
               session.owner(4999999);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997);
               session.read(
-                  RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 4999996);
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.ID,
+                  4999998);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.PID,
+                  4999997);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.INVOCATION,
+                  4999996);
               session.close();
             });
         assertFalse(session.closed());
@@ -263,9 +285,14 @@ final class LinuxSystemdSessionTest {
             () -> {
               session.start(() -> 5000000);
               session.owner(4999999);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
               session.read(
-                  RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 4999997);
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.ID,
+                  4999998);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.INVOCATION,
+                  4999997);
             });
       }
     }
@@ -281,8 +308,8 @@ final class LinuxSystemdSessionTest {
             IOException.class,
             () ->
                 session.read(
-                    RootStartupContext.Service.API,
-                    LinuxSystemdQuery.Property.INVOCATION,
+                    SystemManagerObservation.Service.API,
+                    SystemManagerObservation.Property.INVOCATION,
                     4999998));
       }
     try (var data = Arena.ofConfined();
@@ -295,7 +322,9 @@ final class LinuxSystemdSessionTest {
       assertEquals(
           "",
           session.read(
-              RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 4999998));
+              SystemManagerObservation.Service.API,
+              SystemManagerObservation.Property.INVOCATION,
+              4999998));
     }
     for (String bad :
         List.of(
@@ -316,10 +345,18 @@ final class LinuxSystemdSessionTest {
             () -> {
               session.start(() -> 5000000);
               session.owner(4999999);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 4999998);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.PID, 4999997);
               session.read(
-                  RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 4999996);
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.ID,
+                  4999998);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.PID,
+                  4999997);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.INVOCATION,
+                  4999996);
             });
       }
   }
@@ -362,7 +399,11 @@ final class LinuxSystemdSessionTest {
       assertThrows(IOException.class, () -> s.start(() -> 5000000));
       assertThrows(
           IOException.class,
-          () -> s.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 5000000));
+          () ->
+              s.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.ID,
+                  5000000));
       for (long micros : new long[] {0, -1, 5000001})
         assertThrows(IOException.class, () -> s.owner(micros));
       var error = new AtomicReference<Throwable>();
@@ -404,7 +445,7 @@ final class LinuxSystemdSessionTest {
         calls.waitDelayMicros = authentication ? 2000000 : 500000;
         calls.rpcDelayMicros = authentication ? 0 : 2000000;
         var session = new LinuxSystemdSession(calls, owned);
-        LinuxSystemdQuery.Budget budget =
+        SystemManagerObservation.Budget budget =
             () -> {
               long left = 5000000 - calls.elapsedMicros;
               if (left < 1) throw new IOException("literal whole deadline");
@@ -480,7 +521,7 @@ final class LinuxSystemdSessionTest {
 
   @Test
   void everyPropertyRejectsExpiredSetterBeforeRpc() throws Exception {
-    for (var property : LinuxSystemdQuery.Property.values()) {
+    for (var property : SystemManagerObservation.Property.values()) {
       try (var data = Arena.ofConfined();
           var owned = Arena.ofConfined()) {
         var calls = new Calls(data);
@@ -492,7 +533,7 @@ final class LinuxSystemdSessionTest {
         calls.expireAtSetter = true;
         assertThrows(
             IOException.class,
-            () -> session.read(RootStartupContext.Service.API, property, 5000000));
+            () -> session.read(SystemManagerObservation.Service.API, property, 5000000));
         assertEquals(5000000, calls.elapsedMicros);
         assertEquals(
             before, calls.events.stream().filter(n -> n.startsWith("sd_bus_get_property")).count());
@@ -589,9 +630,14 @@ final class LinuxSystemdSessionTest {
             () -> {
               session.start(() -> 5000000);
               session.owner(5000000);
-              session.read(RootStartupContext.Service.API, LinuxSystemdQuery.Property.ID, 5000000);
               session.read(
-                  RootStartupContext.Service.API, LinuxSystemdQuery.Property.INVOCATION, 5000000);
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.ID,
+                  5000000);
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.INVOCATION,
+                  5000000);
             });
         assertFalse(session.closed());
       }

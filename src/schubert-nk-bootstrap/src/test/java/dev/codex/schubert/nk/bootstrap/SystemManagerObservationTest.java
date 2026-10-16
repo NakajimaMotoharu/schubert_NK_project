@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.batch.platform;
+package dev.codex.schubert.nk.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,12 +9,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
 /** Independent fixed bytes/stateful owner and clock oracle; MANAGER817001..006. */
-final class LinuxSystemdQueryTest {
+final class SystemManagerObservationTest {
   static final String FIELDS =
       "Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup";
   static final String DEADLINE = "Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic";
 
-  static final class Session implements LinuxSystemdQuery.Session {
+  static final class Session implements SystemManagerObservation.Session {
     final List<String> events = new ArrayList<>();
     final Map<String, String> values =
         new HashMap<>(
@@ -35,8 +35,10 @@ final class LinuxSystemdQueryTest {
                 "/system.slice/schubert-nk-api.service",
                 "ExecMainStartTimestampMonotonic",
                 "3000000"));
-    LinuxSystemdQuery.Owner first = new LinuxSystemdQuery.Owner(1, 0, ":1.7"), second = first;
+    SystemManagerObservation.Owner first = new SystemManagerObservation.Owner(1, 0, ":1.7"),
+        second = first;
     int ownerReads;
+    SystemManagerObservation.Service expectedService = SystemManagerObservation.Service.API;
     boolean closed, failClose;
     String fault = "";
     boolean fatal, runtime;
@@ -50,21 +52,21 @@ final class LinuxSystemdQueryTest {
       }
     }
 
-    public void start(LinuxSystemdQuery.Budget budget) throws IOException {
+    public void start(SystemManagerObservation.Budget budget) throws IOException {
       long micros = budget.remainingMicros();
       assertTrue(micros > 0 && micros <= 5000000);
       at("start");
     }
 
-    public LinuxSystemdQuery.Owner owner(long micros) throws IOException {
+    public SystemManagerObservation.Owner owner(long micros) throws IOException {
       at("owner" + (++ownerReads));
       return ownerReads == 1 ? first : second;
     }
 
     public String read(
-        RootStartupContext.Service service, LinuxSystemdQuery.Property p, long micros)
+        SystemManagerObservation.Service service, SystemManagerObservation.Property p, long micros)
         throws IOException {
-      assertEquals(RootStartupContext.Service.API, service);
+      assertEquals(expectedService, service);
       at(p.member);
       return values.get(p.member);
     }
@@ -80,11 +82,104 @@ final class LinuxSystemdQueryTest {
     }
   }
 
+  /** PT-OPS-MANAGER4404-001: literal targets, fresh sessions and unchanged complete fields. */
+  @Test
+  void everyFixedTargetKeepsFreshOwnerAndAllSevenFields() throws Exception {
+    var targets = SystemManagerObservation.Service.values();
+    String[] units = {
+      "schubert-nk-api.service", "schubert-nk-web.service",
+      "schubert-nk-morning-controller.service", "schubert-nk-cleanup.service",
+      "schubert-nk-expiry-cleanup.service", "schubert-nk-inbox-inspector.service",
+      "artemis.service", "caddy.service"
+    };
+    assertEquals(8, targets.length);
+    for (int index = 0; index < units.length; index++) {
+      var target = targets[index];
+      String unit = units[index];
+      assertEquals(unit, target.unit());
+      var created = new ArrayList<Session>();
+      var query =
+          new SystemManagerObservation(
+              () -> {
+                var session = new Session();
+                session.expectedService = target;
+                session.values.put("Id", unit);
+                session.values.put("ControlGroup", "/system.slice/" + unit);
+                created.add(session);
+                return session;
+              },
+              () -> 0);
+      byte[] golden =
+          ("Id="
+                  + unit
+                  + "\nLoadState=loaded\nActiveState=active\nSubState=running\n"
+                  + "MainPID=200\nInvocationID=00112233445566778899aabbccddeeff\nControlGroup=/system.slice/"
+                  + unit
+                  + "\n")
+              .getBytes(StandardCharsets.US_ASCII);
+      assertArrayEquals(golden, query.read(target, FIELDS));
+      assertArrayEquals(golden, query.read(target, FIELDS));
+      assertEquals(2, created.size());
+      assertNotSame(created.getFirst(), created.getLast());
+      for (var session : created) {
+        assertEquals(
+            List.of(
+                "start",
+                "owner1",
+                "Id",
+                "LoadState",
+                "ActiveState",
+                "SubState",
+                "MainPID",
+                "InvocationID",
+                "ControlGroup",
+                "owner2",
+                "close"),
+            session.events);
+        assertTrue(session.closed);
+      }
+    }
+  }
+
+  /** PT-OPS-MANAGER4404-002: all Child observers route through the same strict reader. */
+  @Test
+  void childFixedObserversKeepFreshReadsAndNeverSelectAnArbitraryUnit() throws Exception {
+    var expected =
+        new ArrayDeque<>(
+            List.of(
+                SystemManagerObservation.Service.MORNING,
+                SystemManagerObservation.Service.CLEANUP,
+                SystemManagerObservation.Service.INSPECTOR,
+                SystemManagerObservation.Service.BROKER,
+                SystemManagerObservation.Service.CADDY));
+    var created = new ArrayList<Session>();
+    var query =
+        new SystemManagerObservation(
+            () -> {
+              var session = new Session();
+              session.expectedService = expected.removeFirst();
+              created.add(session);
+              return session;
+            },
+            () -> 0);
+    var io = new ChildStartupContext.NativeIo(query);
+    assertThrows(NullPointerException.class, () -> new ChildStartupContext.NativeIo(null));
+    assertThrows(NullPointerException.class, () -> io.maintenanceUnit(null));
+    for (var parent : ChildStartupContext.MaintenanceParent.values())
+      assertTrue(io.maintenanceUnit(parent).length > 0);
+    assertTrue(io.inspectorUnit().length > 0);
+    assertTrue(io.brokerUnit().length > 0);
+    assertTrue(io.caddyUnit().length > 0);
+    assertTrue(expected.isEmpty());
+    assertEquals(5, created.size());
+    assertTrue(created.stream().allMatch(s -> s.closed && s.ownerReads == 2));
+  }
+
   @Test
   void exactFreshFullAndDeadlineGoldenBytes() throws Exception {
     List<Session> created = new ArrayList<>();
     var query =
-        new LinuxSystemdQuery(
+        new SystemManagerObservation(
             () -> {
               var s = new Session();
               created.add(s);
@@ -100,14 +195,14 @@ final class LinuxSystemdQueryTest {
                 + "InvocationID=00112233445566778899aabbccddeeff\n"
                 + "ControlGroup=/system.slice/schubert-nk-api.service\n")
             .getBytes(StandardCharsets.US_ASCII),
-        query.read(RootStartupContext.Service.API, FIELDS));
+        query.read(SystemManagerObservation.Service.API, FIELDS));
     assertArrayEquals(
         ("Id=schubert-nk-api.service\n"
                 + "InvocationID=00112233445566778899aabbccddeeff\n"
                 + "MainPID=200\n"
                 + "ExecMainStartTimestampMonotonic=3000000\n")
             .getBytes(StandardCharsets.US_ASCII),
-        query.read(RootStartupContext.Service.API, DEADLINE));
+        query.read(SystemManagerObservation.Service.API, DEADLINE));
     assertEquals(2, created.size());
     assertNotSame(created.get(0), created.get(1));
     assertEquals(
@@ -130,22 +225,23 @@ final class LinuxSystemdQueryTest {
   @Test
   void noCachedOwnerOrMutableProperty() throws Exception {
     var session = new Session();
-    var query = new LinuxSystemdQuery(() -> session, () -> 0);
-    session.second = new LinuxSystemdQuery.Owner(1, 0, ":1.8");
-    assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+    var query = new SystemManagerObservation(() -> session, () -> 0);
+    session.second = new SystemManagerObservation.Owner(1, 0, ":1.8");
+    assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
     assertTrue(session.closed);
     for (var owner :
         List.of(
-            new LinuxSystemdQuery.Owner(2, 0, ":1.7"),
-            new LinuxSystemdQuery.Owner(1, 2, ":1.7"),
-            new LinuxSystemdQuery.Owner(1, 0, "foreign"),
-            new LinuxSystemdQuery.Owner(1, 0, ":" + "7".repeat(64) + ".1"))) {
+            new SystemManagerObservation.Owner(2, 0, ":1.7"),
+            new SystemManagerObservation.Owner(1, 2, ":1.7"),
+            new SystemManagerObservation.Owner(1, 0, "foreign"),
+            new SystemManagerObservation.Owner(1, 0, ":" + "7".repeat(64) + ".1"))) {
       var s = new Session();
       s.first = owner;
       assertThrows(
           IOException.class,
           () ->
-              new LinuxSystemdQuery(() -> s, () -> 0).read(RootStartupContext.Service.API, FIELDS));
+              new SystemManagerObservation(() -> s, () -> 0)
+                  .read(SystemManagerObservation.Service.API, FIELDS));
       assertEquals(List.of("start", "owner1", "close"), s.events);
     }
     assertEquals("SystemManagerOwner[REDACTED]", session.first.toString());
@@ -156,7 +252,8 @@ final class LinuxSystemdQueryTest {
       assertThrows(
           IOException.class,
           () ->
-              new LinuxSystemdQuery(() -> s, () -> 0).read(RootStartupContext.Service.API, FIELDS));
+              new SystemManagerObservation(() -> s, () -> 0)
+                  .read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(s.closed);
     }
   }
@@ -180,14 +277,14 @@ final class LinuxSystemdQueryTest {
         s.fault = fault;
         s.runtime = kind == 1;
         s.fatal = kind == 2;
-        var query = new LinuxSystemdQuery(() -> s, () -> 0);
+        var query = new SystemManagerObservation(() -> s, () -> 0);
         Class<? extends Throwable> expected =
             switch (kind) {
               case 0 -> IOException.class;
               case 1 -> IllegalStateException.class;
               default -> AssertionError.class;
             };
-        assertThrows(expected, () -> query.read(RootStartupContext.Service.API, FIELDS));
+        assertThrows(expected, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
         assertTrue(s.closed);
         assertEquals("close", s.events.getLast());
       }
@@ -195,15 +292,15 @@ final class LinuxSystemdQueryTest {
     s.failClose = true;
     int[] creates = {0};
     var query =
-        new LinuxSystemdQuery(
+        new SystemManagerObservation(
             () -> {
               creates[0]++;
               return s;
             },
             () -> 0);
-    assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+    assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
     assertFalse(s.closed);
-    assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+    assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
     assertEquals(1, creates[0]);
     var combined = new Session();
     combined.fault = "Id";
@@ -211,8 +308,8 @@ final class LinuxSystemdQueryTest {
     assertThrows(
         IOException.class,
         () ->
-            new LinuxSystemdQuery(() -> combined, () -> 0)
-                .read(RootStartupContext.Service.API, FIELDS));
+            new SystemManagerObservation(() -> combined, () -> 0)
+                .read(SystemManagerObservation.Service.API, FIELDS));
     assertFalse(combined.closed);
   }
 
@@ -221,7 +318,7 @@ final class LinuxSystemdQueryTest {
     int[] interruptedReads = {0};
     var interruptedSession = new Session();
     var interruptedQuery =
-        new LinuxSystemdQuery(
+        new SystemManagerObservation(
             () -> interruptedSession,
             () -> {
               if (interruptedReads[0]++ > 0) Thread.currentThread().interrupt();
@@ -229,7 +326,8 @@ final class LinuxSystemdQueryTest {
             });
     try {
       assertThrows(
-          IOException.class, () -> interruptedQuery.read(RootStartupContext.Service.API, FIELDS));
+          IOException.class,
+          () -> interruptedQuery.read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(interruptedSession.closed);
       assertEquals(List.of("close"), interruptedSession.events);
     } finally {
@@ -238,15 +336,16 @@ final class LinuxSystemdQueryTest {
     for (long elapsed : new long[] {-1, 4_999_999_001L, 5_000_000_000L, Long.MAX_VALUE}) {
       var s = new Session();
       int[] reads = {0};
-      var query = new LinuxSystemdQuery(() -> s, () -> reads[0]++ == 0 ? 0 : elapsed);
-      assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+      var query = new SystemManagerObservation(() -> s, () -> reads[0]++ == 0 ? 0 : elapsed);
+      assertThrows(
+          IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(s.closed);
       assertEquals(List.of("close"), s.events);
     }
     var s = new Session();
     int[] reads = {0};
-    var query = new LinuxSystemdQuery(() -> s, () -> reads[0]++ < 5 ? 0 : 5_000_000_000L);
-    assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+    var query = new SystemManagerObservation(() -> s, () -> reads[0]++ < 5 ? 0 : 5_000_000_000L);
+    assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
     assertFalse(s.events.contains("owner2"));
     assertTrue(s.closed);
   }
@@ -255,24 +354,26 @@ final class LinuxSystemdQueryTest {
   void rejectedInputsForeignThreadAndInterruptDoNotCreateCapability() throws Exception {
     int[] creates = {0};
     var query =
-        new LinuxSystemdQuery(
+        new SystemManagerObservation(
             () -> {
               creates[0]++;
               return new Session();
             },
             () -> 0);
-    assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, "MainPID"));
+    assertThrows(
+        IOException.class, () -> query.read(SystemManagerObservation.Service.API, "MainPID"));
     assertThrows(NullPointerException.class, () -> query.read(null, FIELDS));
     assertThrows(
-        NullPointerException.class, () -> query.read(RootStartupContext.Service.API, null));
-    assertThrows(NullPointerException.class, () -> new LinuxSystemdQuery(null, () -> 0));
-    assertThrows(NullPointerException.class, () -> new LinuxSystemdQuery(Session::new, null));
+        NullPointerException.class, () -> query.read(SystemManagerObservation.Service.API, null));
+    assertThrows(NullPointerException.class, () -> new SystemManagerObservation(null, () -> 0));
+    assertThrows(
+        NullPointerException.class, () -> new SystemManagerObservation(Session::new, null));
     var error = new AtomicReference<Throwable>();
     var thread =
         new Thread(
             () -> {
               try {
-                query.read(RootStartupContext.Service.API, FIELDS);
+                query.read(SystemManagerObservation.Service.API, FIELDS);
               } catch (Throwable failure) {
                 error.set(failure);
               }
@@ -282,7 +383,8 @@ final class LinuxSystemdQueryTest {
     assertInstanceOf(IOException.class, error.get());
     Thread.currentThread().interrupt();
     try {
-      assertThrows(IOException.class, () -> query.read(RootStartupContext.Service.API, FIELDS));
+      assertThrows(
+          IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
       Thread.interrupted();
@@ -291,8 +393,8 @@ final class LinuxSystemdQueryTest {
     assertThrows(
         NullPointerException.class,
         () ->
-            new LinuxSystemdQuery(() -> null, () -> 0)
-                .read(RootStartupContext.Service.API, FIELDS));
-    assertThrows(NullPointerException.class, () -> new LinuxSystemdQuery.Owner(1, 0, null));
+            new SystemManagerObservation(() -> null, () -> 0)
+                .read(SystemManagerObservation.Service.API, FIELDS));
+    assertThrows(NullPointerException.class, () -> new SystemManagerObservation.Owner(1, 0, null));
   }
 }

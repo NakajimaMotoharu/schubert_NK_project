@@ -444,7 +444,17 @@ public final class RootStartupContext {
     }
 
     NativeIo() {
-      this(LinuxSystemdQuery.create()::read, Files::readSymbolicLink);
+      this(dev.codex.schubert.nk.bootstrap.SystemManagerObservation.create());
+    }
+
+    private NativeIo(dev.codex.schubert.nk.bootstrap.SystemManagerObservation query) {
+      this(
+          (service, fields) ->
+              query.read(
+                  dev.codex.schubert.nk.bootstrap.SystemManagerObservation.Service.valueOf(
+                      service.name()),
+                  fields),
+          Files::readSymbolicLink);
     }
 
     NativeIo(SystemctlStateSource.Start start) {

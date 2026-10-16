@@ -12,6 +12,35 @@ import org.junit.jupiter.api.Test;
 class ChildMaintenanceParentTest {
   private static final UUID BOOT = UUID.fromString("11111111-1111-4111-8111-111111111111");
 
+  /** PT-OPS-MANAGER4404-003: internal key order is not an external wire oracle. */
+  @Test
+  void eitherStablePropertyOrderKeepsAllParentValuesAndBothFreshReads() throws Exception {
+    for (var kind : ChildStartupContext.MaintenanceParent.values()) {
+      for (boolean swapped : List.of(false, true)) {
+        var fixture = new Fixture();
+        fixture.swappedOrder = swapped;
+        new ChildStartupContext(fixture).verifyMaintenanceParent(kind, owner());
+        assertEquals(2, fixture.units);
+        assertEquals(2, fixture.owned.size());
+        for (byte[] value : fixture.owned) assertArrayEquals(new byte[value.length], value);
+      }
+    }
+  }
+
+  /** PT-OPS-MANAGER4404-004: canonical cross-implementation comparison never hides live drift. */
+  @Test
+  void orderingDriftBetweenTheTwoLiveReadsStillFailsClosed() {
+    for (var kind : ChildStartupContext.MaintenanceParent.values()) {
+      var fixture = new Fixture();
+      fixture.orderDrift = true;
+      assertThrows(
+          IOException.class,
+          () -> new ChildStartupContext(fixture).verifyMaintenanceParent(kind, owner()));
+      assertEquals(2, fixture.units);
+      for (byte[] value : fixture.owned) assertArrayEquals(new byte[value.length], value);
+    }
+  }
+
   @Test
   void existingEmptySupplementaryRootGroupsAreNotMissingOrInventedPrimaryGroup() throws Exception {
     for (var kind : ChildStartupContext.MaintenanceParent.values()) {
@@ -176,6 +205,7 @@ class ChildMaintenanceParentTest {
     String fault = "";
     String groups = "0";
     boolean missingGroups;
+    boolean swappedOrder, orderDrift;
     final IllegalStateException unknown = new IllegalStateException("PRIVATE unknown");
     final List<byte[]> owned = new ArrayList<>();
     int units, stats;
@@ -268,6 +298,11 @@ class ChildMaintenanceParentTest {
             case "managerDrift" -> units > 1 ? text.replace("5".repeat(32), "7".repeat(32)) : text;
             default -> text;
           };
+      if (swappedOrder || (orderDrift && units > 1)) {
+        var lines = new ArrayList<>(List.of(text.split("\n", -1)));
+        Collections.swap(lines, 4, 5);
+        text = String.join("\n", lines);
+      }
       byte[] result = bytes(text);
       owned.add(result);
       if (fault.equals("terminalInterrupt") && units == 2) Thread.currentThread().interrupt();

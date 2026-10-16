@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.batch.platform;
+package dev.codex.schubert.nk.bootstrap;
 
 import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.IOException;
@@ -9,12 +9,34 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * SSC239 fresh fixed system-manager read, never a service action or cached authorization.
- * NK-OPS-001/OPS009/SYS002/UI251/SS343354; PT-OPS-MANAGER817001..006. One owned connection per
- * read; uncertain close retains the capability and refuses a next read.
+ * SSC239/295 shared fresh fixed system-manager read, never a service action or cached
+ * authorization. NK-OPS-001/OPS009/SYS002/UI251/SS343354; PT-OPS-MANAGER817001..006. One owned
+ * connection per read; uncertain close retains the capability and refuses a next read.
  */
 @NullMarked
-final class LinuxSystemdQuery {
+public final class SystemManagerObservation {
+  /** Fixed observations only; no caller-supplied Unit or service action. SSC295. */
+  public enum Service {
+    API("schubert-nk-api.service"),
+    WEB("schubert-nk-web.service"),
+    MORNING("schubert-nk-morning-controller.service"),
+    CLEANUP("schubert-nk-cleanup.service"),
+    EXPIRY("schubert-nk-expiry-cleanup.service"),
+    INSPECTOR("schubert-nk-inbox-inspector.service"),
+    BROKER("artemis.service"),
+    CADDY("caddy.service");
+
+    private final String unit;
+
+    Service(String unit) {
+      this.unit = unit;
+    }
+
+    public String unit() {
+      return unit;
+    }
+  }
+
   private static final java.lang.String LITERAL_UNIT = "Unit";
 
   enum Property {
@@ -59,7 +81,7 @@ final class LinuxSystemdQuery {
 
     Owner owner(long remainingMicros) throws IOException;
 
-    String read(RootStartupContext.Service service, Property property, long remainingMicros)
+    String read(SystemManagerObservation.Service service, Property property, long remainingMicros)
         throws IOException;
 
     void close() throws IOException;
@@ -77,17 +99,18 @@ final class LinuxSystemdQuery {
   private final long ownerThread;
   private @Nullable Session pending;
 
-  LinuxSystemdQuery(Factory factory, LongSupplier clock) {
+  SystemManagerObservation(Factory factory, LongSupplier clock) {
     this.factory = Objects.requireNonNull(factory);
     this.clock = Objects.requireNonNull(clock);
     ownerThread = Thread.currentThread().threadId();
   }
 
-  static LinuxSystemdQuery create() {
-    return new LinuxSystemdQuery(new LinuxSystemdSession.Factory()::create, System::nanoTime);
+  public static SystemManagerObservation create() {
+    return new SystemManagerObservation(
+        new LinuxSystemdSession.Factory()::create, System::nanoTime);
   }
 
-  byte[] read(RootStartupContext.Service service, String fields) throws IOException {
+  public byte[] read(SystemManagerObservation.Service service, String fields) throws IOException {
     Objects.requireNonNull(service);
     Objects.requireNonNull(fields);
     if (ownerThread != Thread.currentThread().threadId()
