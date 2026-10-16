@@ -10,6 +10,7 @@ from bundle_hash_contract import unbind
 from pg3976_literal_invariant_signed_candidate import SOURCE, OLD_SOURCE as CURRENT, OLD_BOM as CURRENT_BOM
 
 W = previous.W
+BOM = '0a409301e552d8019440edcbf096ad9b20c15b35c0ee6472cd9c4cef65bd8dab'
 BEFORE = '60b53f6b877e979f2931a03ab55eb15892f1aeb9450ee6a6d39007adc9ea8b88'
 BOOT = previous.BOOT
 TOOLS = 'pg3982-literal-invariant-unused-tools-v1'
@@ -24,7 +25,7 @@ pinned = previous.pinned
 
 def candidate_bom():
     value = json.loads((W / 'pg3976-candidate-build-v1.safe.json').read_bytes())
-    if not (value['actualExit'] == 0 and value['candidateSource'] == SOURCE and value['signatureVerified'] and value['candidateNotDeployed'] and re.fullmatch('[a-f0-9]{64}', value['manifestSha256'])):
+    if not (value['actualExit'] == 0 and value['candidateSource'] == SOURCE and value['signatureVerified'] and value['candidateNotDeployed'] and value['manifestSha256'] == BOM):
         raise ValueError('one actual new-source host signature receipt required')
     return value['manifestSha256']
 
