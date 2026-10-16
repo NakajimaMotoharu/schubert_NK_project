@@ -1,5 +1,11 @@
 # 当sourceBootstrap20読取前提・scope仕様
 
+## 2026-10-17 08:34JST current ABI実5phase0・新transport
+
+4824元85283 actual0、operator d251232a4/Production825e、23:32:22.715988～23:32:24.087700Z。compile/oracle/input/expected/liveness全0・Werror0、log SHA順に e3b0c442/b9a47eb2/c1d1953c/0c21334e/7a220f40（完全SHAはW/pg4824-frozen-v1.safe.json）。実shared current graph・新6Javaの資格であり、Production試験数や正式coverageへ加点0。full hash・5phase明細・before d8fbをmanifestへ保存、元4822partial v1維持。
+
+新4826transportは各phase durable once requested・clean/operator/headと全frozen graphを先に検査し、host/QEMU/forward fresh認証＋管理排他を維持。新stage private tarの全階層・file/dir集合・canonical name・no link/余剰/重複/欠落拒否・ROOT0700/0400・全hash/dirsyncを資格。stage/verify0がそれぞれ次の必要条件、verifyとexecuteも別scope。VMでargument/Expectedを先に実行し、専用Mainは新only実行namespaceへ一回だけ。Root/Backup/ADMIN業務再演/通常Unit再起動/DDL/reloadなし。独立関連6工具0・host静的0、guestの三phaseは未発行。
+
 ## 2026-10-17 08:35JST 現在値読取実0・current ABI資格準備
 
 4822は階層化済み共有classのcopy親directory不足でJava前に終了1。BUG1387/YKT1153修正前起票、partial v1を保全し、new-only v2/4824でcanonical relative path・nested copy/recursive inventory/dir0700を是正、独立全4工具0。stageの同階層対応は未実装・未確認、検索だけ完了0。次は4824当Jar5phase一回、元4822再実行しない。実新Bootstrap起動は引き続き0。
