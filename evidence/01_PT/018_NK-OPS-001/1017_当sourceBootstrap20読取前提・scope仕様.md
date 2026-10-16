@@ -1,5 +1,13 @@
 # 当sourceBootstrap20読取前提・scope仕様
 
+## 2026-10-17 08:35JST 現在値読取実0・current ABI資格準備
+
+PG4818元session31944終了0、観測2026-10-16T23:25:34.999560Z、payload SHA256 `6e15bee78dd0f9d92868002fb05318746eec70295d6858fdb4ced6682413628b`、完全enriched before SHA256 **d8fbc2f16e781ae7dcaa3b90a4f41768ac2aeb8d086c9318e1e5e56741c2a9b8**。現825e/BOMf1・全24/32/187/単一ADMIN/70native/二source不存在/四empty要求/十Ref正常close実0、batchRows874。入力作成・Unit起動0。guest private=`pg4818-new-current-bootstrap-before-v1/after.private.json`、host manifest=W同名。過去の未発行記述を本結果で更新し、再読取再発行しない。
+
+PG4820は旧1719/1728の工具構築部分だけをtemplateとして利用し、旧before/recovery eligibilityは明示的に除き**actual4818を唯一の新前提**へ置換する。歴史成功receiptを作成・偽装・新権限へ転用しない。元新Rootのboot79a/runfff841d9/activation7ab6c953/INVb414/終端189659374308us/真正WARNINGを束縛。parent parserは既4772の正確なbyteを保つ。full24上限64MiB/新二point/既70保全/30秒/DB0・scope正常帰還の契約を不変更。独立2工具FES0、旧source/run/role混入negative検査、host静的0。
+
+PG4822はactual4774で当source資格済みの共有classを全hash照合しcopy、現署名PG4702 Jar/BOMへ新6Java sourceをWerror compile、argument/input/Expected-null/livenessの5phaseを個別exit/log SHAで記録する。実guest/credential/Unit操作なし。clean固定後に一回実行し、各actual phaseが0の場合だけfreezeする。失敗・未実行は加算せず、工具PTをProduction PTへ加点しない。新stage/verify/execute/独立post/nativeはまだ未発行。
+
 NK-OPS-001/PT-ADM-BOOT-SSC300001、SS343§8.2・SSC188/189/225/231/234/263/300、SS342/451、WBS-N15（N11参照0）・event1075・着手.5/1.5/4共有pp。SS300はdesign-only b6d17e03b→main df3d48e2c/PR146へ正常反映・remote確認済み、当実試験は未着手。新QA不要・Productionコード不変更、Root/Backup/ADMINを通信復旧理由で再演しない。
 
 先行Source825e/PG4702/BOMf1/boot79a/runfff841d9・Root真正WARNING10/元1800/real12/正規ownedstop/独立post・全1646CRC/native9は1016。新Bootstrap20は同sourceで未測定の実経路であり、旧20/旧nativeを輸入しない。Userが現存し専用Mainが20を返す場合のDB作成・更新・監査追加0/全24不変を独立検査する。初期ADMIN作成や通常Loginの再試験と混同しない。
