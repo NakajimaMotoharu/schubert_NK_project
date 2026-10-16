@@ -117,5 +117,25 @@ class CandidateTest(unittest.TestCase):
             if name.endswith('.py'):
                 with self.subTest(file=name):self.assertEqual(0,check(text,name))
 
+    def test_actual_source_fixed_runs_full_signed_verifier_each_phase_and_propagates_refusal(self):
+        def require(v):
+            if not v:raise ValueError('fixture')
+        records=[{'path':'file'+str(i),'size':1,'sha256':'a'*64}for i in range(187)]
+        for valid in [True,False,None,1]:
+            calls=[]
+            def verify(root,rows,manifest,materials):
+                self.assertEqual(('/release',records,b'fixed manifest',['pin','signature']),(root,rows,manifest,materials))
+                calls.append('signed187');return valid
+            ns=self.definitions({'source_fixed'},{'require':require,'manifest':types.SimpleNamespace(read_bytes=lambda:b'fixed manifest'),
+                'raw':b'fixed manifest','current':types.SimpleNamespace(resolve=lambda strict:'/release'),'root':'/release',
+                'Path':lambda unused:types.SimpleNamespace(read_text=lambda:'fixed boot'),'boot':'fixed boot',
+                'signed_contract':{'verify':verify},'data':{'artifacts':records},'fixed_materials':['pin','signature'],
+                'old':{'unitFilesActual':{}},'config':lambda:calls.append('config')or {'fixed':1},'fixed_config':{'fixed':1}})
+            if valid is True:
+                ns['source_fixed']();ns['source_fixed']();self.assertEqual(['signed187','config']*2,calls)
+            else:
+                with self.assertRaises(ValueError):ns['source_fixed']()
+                self.assertEqual(['signed187'],calls)
+
 
 if __name__=='__main__':unittest.main()

@@ -8,9 +8,10 @@ import pg4112_canonical_epoch_owned_stage as stage
 import pg4074_failed_done_parent_contract as parent
 import pg4102_failed_done_recovery_protocol as protocol
 import pg4122_fixed_terminal_native_contract as native
+import pg4132_signed_phase_invariant as signed
 from pg4060_original_profile_dual_stack import once
 
-SLOT = 'pg4126-fixed-native-owned-recovery-v1'
+SLOT = 'pg4146-complete-signed-owned-recovery-v1'
 
 
 def payload():
@@ -26,7 +27,7 @@ def payload():
     p = inspect.getsource(protocol).replace('from pg4086_failed_done_recovery_contract import ORDER, Plan, require',
                                           'from recovery_plan import ORDER, Plan, require')
     native_source=inspect.getsource(native).replace('from pg4086_failed_done_recovery_contract import require','from recovery_plan import require')
-    raw += '\nPARENT_SOURCE=' + repr(inspect.getsource(parent)) + '\nPROTOCOL_SOURCE=' + repr(p) + '\nNATIVE_SOURCE='+repr(native_source)+'\n' + BODY
+    raw += '\nPARENT_SOURCE=' + repr(inspect.getsource(parent)) + '\nPROTOCOL_SOURCE=' + repr(p) + '\nNATIVE_SOURCE='+repr(native_source)+'\nSIGNED_SOURCE='+repr(signed.source())+'\n' + BODY
     compile(raw, '<candidate failed-DONE owned recovery>', 'exec')
     return raw
 
@@ -39,6 +40,8 @@ from pg526_term_witness import FIELDS as TERMINAL_FIELDS,unique
 parent_contract={};exec(PARENT_SOURCE,parent_contract)
 protocol={};exec(PROTOCOL_SOURCE,protocol)
 native_contract={};exec(NATIVE_SOURCE,native_contract)
+signed_contract={};exec(SIGNED_SOURCE,signed_contract)
+fixed_materials=[{'path':str(p),'size':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}for p in [pin,signature]]
 ORDER=protocol['ORDER'];preserved_tree=protocol['preserved_tree']
 completed_units={};baseline=None;owned=None;child=None;refs=[];error=None
 native_mutable={};native_identities={};holder_ticks=None;holder_args=None
@@ -106,6 +109,7 @@ def fail_parent(value):
  terminal_contract.kernel_empty(parent_contract['UNIT']);require(not Path('/proc/696557').exists())
 def source_fixed():
  require(manifest.read_bytes()==raw and current.resolve(strict=True)==root and Path('/proc/sys/kernel/random/boot_id').read_text().strip()==boot)
+ require(signed_contract['verify'](str(root),data['artifacts'],raw,fixed_materials)is True)
  for filename,expected in old['unitFilesActual'].items():
   p=Path(filename);require(metadata(p)+[hashlib.sha256(p.read_bytes()).hexdigest()]==expected)
  require(config()==fixed_config)
