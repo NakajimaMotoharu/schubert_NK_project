@@ -4632,6 +4632,85 @@ final class MorningDatabaseSessionTest {
     }
   }
 
+  /** PT-MDB-3920-001: cutoff-inclusive, current-start-exclusive retained request binding. */
+  @Test
+  void mdb3920001RetainedRequestTimeBoundariesPreserveActualRowsAndOwnedLock() throws Exception {
+    var run =
+        new BatchRun(
+            UUID.fromString("39200001-2222-4333-8444-555555555555"),
+            Instant.parse("2059-04-09T15:00:00Z"));
+    Instant priorStart = run.cutoff();
+    Instant currentStart = priorStart.plusNanos(1000);
+    var previous =
+        new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(run.id(), priorStart);
+    var subject =
+        new MorningDatabaseSession(actualUrl, () -> {}, DriverManager::getConnection, c -> {});
+    subject.execute(
+        credential(),
+        session -> {
+          session.beginBackup(run, priorStart, false);
+          return true;
+        });
+    subject.execute(
+        credential(),
+        session -> {
+          var begins = session.beginBackup(run, currentStart, true);
+          assertEquals(2, begins.database().attempt());
+          assertEquals(2, begins.configuration().attempt());
+          try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+            String before = mdb588Audit(observer, run);
+            for (var refused :
+                List.of(
+                    new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                        run.id(), priorStart.minusNanos(1000)),
+                    new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                        run.id(), currentStart),
+                    new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                        run.id(), currentStart.plusNanos(1000)),
+                    new dev.codex.schubert.nk.batch.platform.BackupWorkerRequest(
+                        UUID.fromString("39200002-2222-4333-8444-555555555555"), priorStart))) {
+              IOException failure =
+                  assertThrows(IOException.class, () -> session.requireAbandonedRequest(refused));
+              assertEquals("root batch database unavailable", failure.getMessage());
+              assertNull(failure.getCause());
+              assertEquals(before, mdb588Audit(observer, run));
+              assertFalse(advisory(observer));
+              session.recheckConsistent(run);
+            }
+            // The actual original is exactly at cutoff, one database microsecond before current.
+            session.requireAbandonedRequest(previous);
+            assertEquals(before, mdb588Audit(observer, run));
+            assertFalse(advisory(observer));
+            session.recheckConsistent(run);
+          } catch (SQLException failure) {
+            throw new IOException("isolated retained-request row oracle unavailable", failure);
+          }
+          return true;
+        });
+    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+        var statement = observer.createStatement();
+        var rows =
+            statement.executeQuery(
+                "select step,attempt,status,error_code,started_at,ended_at from schubert.batch_runs"
+                    + " where run_id='39200001-2222-4333-8444-555555555555' order by step,attempt")) {
+      for (String step : List.of("BACKUP_CONFIG", "BACKUP_DB")) {
+        for (int attempt = 1; attempt <= 2; attempt++) {
+          assertTrue(rows.next());
+          assertEquals(step, rows.getString(1));
+          assertEquals(attempt, rows.getInt(2));
+          assertEquals(attempt == 1 ? "FAILED" : "RUNNING", rows.getString(3));
+          assertEquals(attempt == 1 ? "ABANDONED" : null, rows.getString(4));
+          assertEquals(attempt == 1 ? priorStart : currentStart, rows.getTimestamp(5).toInstant());
+          assertEquals(
+              attempt == 1 ? Optional.of(currentStart) : Optional.empty(),
+              Optional.ofNullable(rows.getTimestamp(6)).map(Timestamp::toInstant));
+        }
+      }
+      assertFalse(rows.next());
+    }
+    mdb2292NoOwnerResources();
+  }
+
   static final class Probe {
     final List<String> events = new ArrayList<>();
     final Map<String, Integer> counts = new HashMap<>();
