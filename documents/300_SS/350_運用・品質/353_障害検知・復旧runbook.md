@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC295 固定manager共通読取の性能是正
+
+343 SSC295を適用する。Childの反復process生成を、既SSC239と同じfresh in-process固定読取へ置換する。全Unit/field・owner前後/新bus/元deadline・unknown close保持・全kernel/NSS/graph/境界検査を残す。限定計測、選択試験、同source全体、正規候補/新一回通常Root、真正terminal/同owner停止/独立post・nativeを別の受入条件とし、速い一回やread-only測定をRoot正常へ代入しない。
+
+既回収4384actual0/同partial・postは再演しない。旧Root143/未知transport/全DB・原本Backup・鍵/native58/37startup・旧成功失敗を保持し、新配備/通常Rootの前に現在source/BOM/所有を再認証する。固定source変更前の実jobを二重起動せず、全189/32・元1800・451・QA051finalを維持する。設計だけmainへ公開し、未受入code/工具/証跡を混在させない。
+
 ## SSC294 JavaZ再操作なし・残る二metadata ownerの限定回収
 
 343 SSC294の同current instanceのみ。元Java815726は一TERM済/FD0 zombie、元Python815643とmetadata817783だけを対象にする。別scopeの十Ref→全現在source/BOM/全189/32/24原値・37/56・全client/server FD二読と両本人全FD/権限→Python通常一TERM/Java自然reap→元58917真正非0とguest消失別保存/hostgate自然継承→metadata通常一TERM/旧transport欠測nullと旧closeUNKNOWN保持→既同artifact partial inspect/必要五/Caddy再stop0/typed revoke/別post→新十Ref正常へ進む。旧4358/4368の境界拒否を再試行で消さず、元namespace/Java/Caddy/Root/Backup/Admin/VM/配備/reload/force操作を再発行しない。
