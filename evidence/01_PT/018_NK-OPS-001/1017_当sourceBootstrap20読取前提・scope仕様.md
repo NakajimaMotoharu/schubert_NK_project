@@ -2,6 +2,8 @@
 
 ## 2026-10-17 08:35JST 現在値読取実0・current ABI資格準備
 
+4822は階層化済み共有classのcopy親directory不足でJava前に終了1。BUG1387/YKT1153修正前起票、partial v1を保全し、new-only v2/4824でcanonical relative path・nested copy/recursive inventory/dir0700を是正、独立全4工具0。stageの同階層対応は未実装・未確認、検索だけ完了0。次は4824当Jar5phase一回、元4822再実行しない。実新Bootstrap起動は引き続き0。
+
 PG4818元session31944終了0、観測2026-10-16T23:25:34.999560Z、payload SHA256 `6e15bee78dd0f9d92868002fb05318746eec70295d6858fdb4ced6682413628b`、完全enriched before SHA256 **d8fbc2f16e781ae7dcaa3b90a4f41768ac2aeb8d086c9318e1e5e56741c2a9b8**。現825e/BOMf1・全24/32/187/単一ADMIN/70native/二source不存在/四empty要求/十Ref正常close実0、batchRows874。入力作成・Unit起動0。guest private=`pg4818-new-current-bootstrap-before-v1/after.private.json`、host manifest=W同名。過去の未発行記述を本結果で更新し、再読取再発行しない。
 
 PG4820は旧1719/1728の工具構築部分だけをtemplateとして利用し、旧before/recovery eligibilityは明示的に除き**actual4818を唯一の新前提**へ置換する。歴史成功receiptを作成・偽装・新権限へ転用しない。元新Rootのboot79a/runfff841d9/activation7ab6c953/INVb414/終端189659374308us/真正WARNINGを束縛。parent parserは既4772の正確なbyteを保つ。full24上限64MiB/新二point/既70保全/30秒/DB0・scope正常帰還の契約を不変更。独立2工具FES0、旧source/run/role混入negative検査、host静的0。
