@@ -125,6 +125,52 @@ final class RootServiceProofTest {
   }
 
   @Test
+  void eachIndependentEpochBootAndActivationContradictionNeverEmitsProof() throws Exception {
+    var observed = issued();
+    var current = observed.current();
+    var permit = observed.permit();
+    var wrongBoot = UUID.fromString("31100027-7777-4333-8444-555555555555");
+    var wrongEpoch = UUID.fromString("31100027-8888-4333-8444-555555555555");
+    var wrongActivation =
+        new dev.codex.schubert.nk.batch.repository.MaintenanceActivation(
+            permit.activation().run(), UUID.fromString("31100027-9999-4333-8444-555555555555"));
+    var actual = self(RootStartupContext.Service.API);
+    var foreignSelf =
+        new RootStartupContext.Snapshot(
+            actual.service(),
+            wrongBoot.toString(),
+            actual.invocation(),
+            actual.pid(),
+            actual.startTicks(),
+            actual.initStartTicks(),
+            actual.controlGroup());
+    assertThrows(
+        IOException.class,
+        () ->
+            RootServiceLauncher.proof(
+                ServiceConfigFiles.Service.API, foreignSelf, A, ID, observed, "e".repeat(64)));
+    for (int field = 0; field < 3; field++) {
+      var contradicted =
+          new StartupPermitRecords.Permit(
+              field == 0 ? wrongBoot : permit.boot(),
+              field == 1 ? wrongEpoch : permit.epoch(),
+              field == 2 ? wrongActivation : permit.activation(),
+              permit.brokerInvocation(),
+              permit.releaseDigest(),
+              permit.apiConfigDigest(),
+              permit.webConfigDigest(),
+              permit.rootsDigest(),
+              permit.prestartStepsDigest());
+      var wrong = new RootCurrentPermitPreflight.Observed(current, contradicted);
+      assertThrows(
+          IOException.class,
+          () ->
+              RootServiceLauncher.proof(
+                  ServiceConfigFiles.Service.API, actual, A, ID, wrong, "e".repeat(64)));
+    }
+  }
+
+  @Test
   void ticketMustMatchActualServiceBootInvocationPidAndStart() throws Exception {
     var actual = self(RootStartupContext.Service.API);
     var launch =
