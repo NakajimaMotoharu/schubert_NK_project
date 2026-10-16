@@ -13,3 +13,9 @@ Program NK-OPS-001 / current_after_native_schema.expand、pg3842.payload、pg384
 実行環境Linux/JDK25.0.4/Python3、PYTHONPATH=tools/quality:tools/quality/vm/050_s1:toolchain/pyflakes-3.4.0/runtime。命令 `python3 -B tools/quality/pg3848_current_resume_dispatch_test.py`、2tests/0failure/error/skip、2管理試験でProduction3714へ加算0。3842 payloadSHA f417aa08758d1cf8fc950ae51acb2a9520e6f50dbec038e7a14b864b54b8a619。元manifest/時刻/command/exit/version/sourceは私有PG379の各runへ保全。native・DB全値・鍵・認証/session等のGit格納0。
 
 独立期待値は承認済みsingle-drop-in literal、元24表・metadata/hash・selected/excluded閉集合及び固定negative fixture。Production methodからexpected生成0。coverage100/F03/CHR/451/工程完了は未認定。新resumeはまだ未実施、同run/cutoffでも新activation/新一回用権限を必要とし旧ownerを移植しない。
+
+## 実consumer追補（2026-10-16）
+
+3848stage0/prepare0、operator7ffda5586、01:59:44～02:00:43Z。一normal runtime reload、SQL/start/stop0。3850独立post0（02:01:03～13Z）全11/実native40/全24二読/Unit18/config32/元journal/187・原本Backup鍵旧proof・資源0/全十Ref返却。preparedAfter2324d231f50b81cebef61434ffeec56e00db3f9a9ac2c26538ab07ff8642925d、payload47a5955d49a52b61f814a3617c563c0bc067d7ea51d808d6d07a4523c8fca7ac。BUG1326/YKT1092有限consumer完了。
+
+PT-CURRENT-RESUME-ADMISSION-3854：新observer/one durable guard→start順序、全40生native先行コピー、新runではなく同run/cutoff・別activation、Browser readiness入力/class hash不変、独立pure4成功。新Root発行/真正終端/後続nativeは未実施なので未合格。管理pureをProduction件数へ加算しない。
