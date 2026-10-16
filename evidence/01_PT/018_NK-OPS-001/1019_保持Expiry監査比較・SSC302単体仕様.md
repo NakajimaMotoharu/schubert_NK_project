@@ -1,5 +1,11 @@
 # 保持Expiry監査比較・SSC302単体仕様
 
+## 2026-10-17 08:59JST 4842はhost initdb不存在・新14PT自体0/combined未合格
+
+4842元64850/source0e93e7b76184275b4fe010582d99d504bce7f637、23:54:33.636074～23:55:41.419246Z、actualMaven1/資格1・59PT/10suite・既DB試験に1Error（新14件はFES0）。log **d5fc0e39d5ce6c3af0c65bd45ed099ccdc163e44e694a32f0ad50448fdfec196**。旧selectorのhost環境path `toolchain/postgresql18/usr`にinitdbが存在せず、Productionや判定本体の失敗ではない。batch coverage未生成のまま非0判定、合格加算0。
+
+BUG1389/YKT1155先行、現host既存実物 `work/characterization-tools/root/usr`へnew-only4848をbind。実initdb/postgres/pg_ctlは18.6（Ubuntu18.6-0ubuntu0.26.04.1）、initdb SHA b2b8d645e0947409f04744ac075d92511f9400c3b200a67f351bb4970129f9aa・pg_ctl SHA d515ae2903b94700993fed2979319ec9c5ad5f9083b10cae5e274a6071ca4104、Fixture既LDは同root lib/x86_64-linux-gnu＋lib/postgresql/18/libを使う。新install/業務DB/VM/DDL変更0。起動前3program存在/実version/実hashをbeginへ保存、missing root拒否・strict suite/全case gate独立2工具0/static0。次clean固定→4848の未実行分だけ一回。全回帰4844は準備中/未発行、先行資格guardは旧failed4842のままのため発行不可、actual新selected0を確認してから改版する。
+
 Program NK-BAT-001/NK-OPS-001、CleanupExpiryExecution.verifyPriorAudit/verifyPriorExpiry。RD DAT-009/OPS-009、UI251、SS331/341/343 SSC117/125/200/302・451。設計main ef0c73b4b/PR148（design-only093234a97）済み。元11比較は同じ順序/固定IOExceptionのまま抽出し、Repository guard/strong snapshot validation/borrowedConnection/transaction/SQL/Unit/permit/期限を不変更。新data-only helperの成功はDB/原本/OS認可の証拠ではない。
 
 ## PT-OPS-EXPIRY-AUDIT-SSC302001..014
