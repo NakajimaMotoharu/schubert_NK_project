@@ -1,5 +1,14 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC298 正常postの未reap子を持つmetadata-only retainer
+
+SSC297回収の旧Java/Python/本人DBとlock消失・元inspect143を維持する。独立post829193/t16712075はZ/FD0/cmdline空/PPid828676/rawWaitStatus0と保存manifest7ab5cdc6の全新post scope正常/全原値148a8d8aを認証し、親が未waitの事実と区別する。当metadata-only828676/t16705476/argv51c27aa6/4FD/root/caps/PPid828674/cgroup-session1042/同exe-root-cwdだけを対象とする。新十Refを先に重複保持し、全FD target/9metadata/fdinfo/全authority/children=[829193]・Z全stat identity、全19/32/24/189/原本Backup鍵/native58/37/全ordinary・DB/advisory/M-A0を各操作境界で全二読し比較前に完全保存する。
+
+同artifact proof正常/独立反例/確定main公開後に当metadataへ通常pidfd TERMを一回だけ、15秒terminal/30秒本人・Z子の自然reapを確認する。Z子/旧Java/Python/DBserver/Unit/hostにsignal0、force操作0。元host684367/t16801848の同inode sole flockをqueued自然継承し、元4494実transport非0/旧UNKNOWNとguest終端/旧成功postを別々に保存する。元postを再実行せず、所有変更後の別fresh新namespaceで同current postの新M/A/RODB/十Ref正常・全原値を確認して外側Ref正常返却まで新回収未受入。
+
+新post開始の固定payload/親/予約を先行保存、新PIDを記録して元Popen.wait/真正exit/XMLで終端を結合する。起動直後の変動FDを終了回収前の必須記録にしない。既保持ownerの全FD/権限/世代検査は省略しない。取得/close不明時はmetadata・証跡・元jobを保持し再送0、Root1800/451/品質/外部仕様/QA051は不変更。
+
+
 ## SSC297 配置前UNKNOWN管理pairの限定handoff
 
 歴史差の唯一の限定例外：当JavaのFD31/90が保持する同一/run directoryのmtime/ctimeだけは、old<=current<=fresh観測UTC nsの範囲で単調増加を許す。target/inode/uid/gid/type/mode/nlink/sizeとfdinfo、他全FD/authorityは固定し、各操作境界内の全proc二読ではこの時刻も含め完全同値を必要とする。BUG1365保存像の四時刻差だけが根拠であり、未知FD/他directory/逆行/未来/境界不安定の一般許容ではない。
