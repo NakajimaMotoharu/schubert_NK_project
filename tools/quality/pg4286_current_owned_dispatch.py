@@ -12,9 +12,29 @@ REMOTE='/home/ubuntu/pg4286-current-owned-stage-v1'
 ARCHIVE='pg4286-'+role.TOOLS+'.tar'
 
 
+def rename_output(raw,expected,slot):
+    import ast
+    from collections import Counter
+    from immutable_payload_binding import PROTECTED
+    def capsules(value):
+        return Counter(ast.get_source_segment(value,n)for n in ast.walk(ast.parse(value))if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id in PROTECTED for t in n.targets))
+    nodes=[n for n in ast.parse(raw).body if isinstance(n,ast.Assign)and len(n.targets)==1 and isinstance(n.targets[0],ast.Name)and n.targets[0].id=='SAVE']
+    if not nodes:raise ValueError('one final fixed output assignment required')
+    node=nodes[-1];value=node.value
+    if not(isinstance(value,ast.BinOp)and isinstance(value.op,ast.Div)and isinstance(value.left,ast.Name)and value.left.id=='BASE'and isinstance(value.right,ast.Constant)and value.right.value==expected and node.lineno==node.end_lineno):raise ValueError('exact final output role required')
+    lines=raw.splitlines(keepends=True);line=lines[node.lineno-1]
+    if not line.isascii():raise ValueError('canonical output definition required')
+    lines[node.lineno-1]=line[:node.col_offset]+'SAVE = BASE / '+repr(slot)+line[node.end_col_offset:]
+    result=''.join(lines)
+    if capsules(result)!=capsules(raw):raise ValueError('every immutable capsule must remain exact')
+    return result
+
+
 def unwrap_post(raw):
     marker="post = json.loads((W / POST_SLOT / 'manifest.safe.json').read_bytes())"
-    return once(raw,marker,marker+"\n    post = {**post['result'], 'actualExit':post['actualExit'], 'productionSource':post['source']}")
+    raw=once(raw,marker,marker+"\n    post = {**post['result'], 'actualExit':post['actualExit'], 'productionSource':post['source']}")
+    raw=once(raw,"fresh = post_payload().replace(POST_SLOT, 'pg4289-newboot-pre-stop-full-v1')","fresh = rename_output(post_payload(), POST_SLOT, 'pg4289-newboot-pre-stop-full-v1')")
+    return inspect.getsource(rename_output)+'\n'+raw
 
 
 def namespace():

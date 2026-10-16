@@ -28,6 +28,15 @@ def capsules(raw):
 
 
 class CurrentOwned(unittest.TestCase):
+    def test_output_rename_never_changes_protected_history(self):
+        raw="SAVE=BASE/'old-helper'\nCHAIN={'history':'"+role.composite.SLOT+"'}\nORACLE='literal '+"+repr(role.composite.SLOT)+"\nSAVE=BASE/"+repr(role.composite.SLOT)+";require(not exists(SAVE))\n"
+        fixed=dispatch.rename_output(raw,role.composite.SLOT,'new-only-output')
+        self.assertEqual(capsules(raw),capsules(fixed));self.assertIn("SAVE = BASE / 'new-only-output';require(not exists(SAVE))",fixed)
+        self.assertNotEqual(capsules(raw),capsules(raw.replace(role.composite.SLOT,'new-only-output')))
+        for bad in ['CHAIN={}\n','SAVE=OTHER/'+repr(role.composite.SLOT),"SAVE=BASE/'foreign'",'SAVE=call()']:
+            with self.subTest(bad=bad):
+                with self.assertRaises(ValueError):dispatch.rename_output(bad,role.composite.SLOT,'new-only-output')
+
     def test_independent_post_full_namespace_and_complete_seals_required(self):
         import pg1257_fresh_independent_terminal_post as old
         ctx,live,_,_=fixture();ns=post.namespace()
@@ -67,7 +76,8 @@ class CurrentOwned(unittest.TestCase):
         ast.fix_missing_locations(tree);local={**ns['run_action'].__globals__}
         exec(compile(tree,'<pure actual namespace constructor>','exec'),local)
         runtime=local['run_action']('NO_OPERATION')
-        function=symtable.symtable(raw,'<actual dispatch>','exec').get_children()[0]
+        exec(compile(raw,'<define complete dispatch without entry>','exec'),runtime)
+        function=next(c for c in symtable.symtable(raw,'<actual dispatch>','exec').get_children()if c.get_name()=='run_action')
         missing=[s.get_name()for s in function.get_symbols()if s.is_global()and s.is_referenced()and s.get_name()not in runtime and not hasattr(builtins,s.get_name())]
         self.assertEqual(missing,[])
         self.assertIn("post = {**post['result'], 'actualExit':post['actualExit'], 'productionSource':post['source']}",raw)
