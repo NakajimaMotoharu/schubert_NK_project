@@ -13,6 +13,13 @@ def verify_maps(expected, actual):
     require(len(expected) == 849 and expected == actual, 'exact complete current849 Main bytes')
 
 
+def pmd(data):
+    """Explicit local binding; the emitted payload contains this fixed phase directly."""
+    namespace = {'require': require}
+    exec(compile(pmd_source(), '<fixed pinned PMD phase>', 'exec'), namespace)
+    return namespace['pmd'](data)
+
+
 def prepare(data):
     import hashlib
     import json

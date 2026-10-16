@@ -1,5 +1,4 @@
 """Fresh old-deployment full11/native46 authentication; data only, no new runtime authority."""
-import hashlib
 import inspect
 import json
 import pg3752_current_preservation_readonly as previous

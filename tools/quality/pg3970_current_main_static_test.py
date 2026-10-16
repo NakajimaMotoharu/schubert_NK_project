@@ -9,7 +9,7 @@ class FixedCurrentMainStatic(unittest.TestCase):
         expected = {str(n): 'a' * 64 for n in range(849)}
         static.verify_maps(expected, dict(expected))
         for candidate in [{**expected, '0': 'b' * 64}, {**expected, 'extra': 'a' * 64}, {k: v for k, v in expected.items() if k != '0'}]:
-            with self.assertRaises(Exception): static.verify_maps(expected, candidate)
+            with self.assertRaises(ValueError): static.verify_maps(expected, candidate)
 
     def test_entire_payload_compiles_and_has_no_intermediate_receipt(self):
         source = static.payload({})
