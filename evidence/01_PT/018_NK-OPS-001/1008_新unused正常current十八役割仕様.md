@@ -11,3 +11,13 @@ host独立command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes3.4
 初期TDDで元wrapperに既にあるBUNDLE unbindを二重適用して拒否したため、追加の二重処理だけ除去。guest action未発行、失敗をProduction障害や受入済みへ読み替え0。実current Jar ABIの全graph compile/Java negative試験/署名bundle・stage/place/独立187・全原値postは未実行。資格後に別new-only名前空間で一回ずつ実施し、既予約/元jobがあれば観測へ移る。
 
 PG4694の全回帰は必要campaign費をWBS-K01.01へ結び、元0.3/0.8/2pp見積を保持する。N10参照0、親K01/他の子へ二重計上0。全体品質/正式認定・工数完成率は更新しない。
+
+## 当current ABIの実資格と配置後条件準備
+
+**PG4708元68528 actual0**、operator aad521d669818a5936acad698b1eabfcc5fd654b、21:10:58.209475～21:10:59.782304Z。全18発行source/current PG4432 Jar・4654 frozen shared class、javac `-Xlint:all -Werror`＋argument/label/original/identity/inputの全六phase0。142 tool artifactを完全hash固定、元manifest `PG379/pg4708-frozen-v1.safe.json` SHA **c98462ba522f0b888d56b608a35bc67a17dbf27d87bb95108c04fa78de97625e**、候補archive SHA **808a106ba024b27a32d9a17a42a61f755e605b7bf1ec6144e78f8c04a70500d8**。loghashは各phase manifestに保存、compile logは空/終了0、guest変更0。将来candidate825e Jarでcurrent964e ABIを代用した検査ではない。
+
+新4710はstage/placeだけの明示action、各action前にfresh host/QEMU/forward認証、元unused実runtime admissionを再利用して同normal current/DB-lock/Unitkernel/真正元WARNING10・別候補署名/未配備を強制する。runtimeAlreadyRetiredは「退役設定fileが残らない」という状態predicateのみ、存在しない旧退役actionの成功とはしない。
+
+新4712は元4704全read検査に候補187/署名/全非対象fileとcurrentリンク不変を追加。候補/全32config/旧before完全一致検査は既ten metadataRefのtry内、finally全Ref返却/bus正常close**後だけ**durable成功を保存する。新evidence namespaceへbefore/native/resultの三私有fileを作成するため、旧工具のguestFilesWritten0を継承せず実3と記録する（業務・Unit・SQL write0）。初期TDDは同一configuration readerの二重定義を静的検査で拒否、AST全同一を検証して既関数だけ使用へ是正。実guest未発行・失敗上書き0。
+
+関連 **6工具試験/FES0・全emitted静的0**、4710不正action/非data-only/未閉鎖/lock不明拒否、4712の候補検査がRef内/成功がclose後・同reader変異拒否・新namespace/全固定roleを独立確認。actual署名候補BOMf1f6743fへ束縛した実role生成/static0も確認済み。次commandは同PYTHONPATHで`pg4710_ssc299_unused_dispatch.py stage`→元actual0回収後だけ`place`→元actual0後だけ`pg4712_ssc299_unused_post.py`。いずれもnew-only一回、元jobがあれば再発行せず回収する。RO/有限公開・Root・新native・正式品質は未完。
