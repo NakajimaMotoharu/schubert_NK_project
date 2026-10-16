@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC291 同source新failed-DONE instanceの正規逆順回収
+
+SSC287～289の権限/終了条件を変更せず、Production7bb/PG3976/BOM0a409301/boot79aの別instanceだけを新only工具へ固定する。Root167140/INVbbcdb699/start149622262076μs/exit151422334917μsは1800.072841秒timeout143、runb1ba37cb-9b2b-469b-a5f2-b0e6d8c97cd1/cutoff2026-10-16T11:32:53.943173Z/act8314450e-0dd5-4986-875c-81f73e1b50b2。原本done10/SHA654073a05ac1101060b235c8dc1e058efb94f0884e4eb87613b7f182b199644aはdata-onlyで、正常Receipt・旧親の期限・停止権限ではない。PID1同boot/INV/job starting→failedの6record、現在Unit failed/143/全PID-job0・cgroup空と当原本byteを独立照合する。
+
+同API807944/t15096765/INVa2854d41、Web808319/t15098199/2a74a4ca、Caddy808868/t15101177/25aa7706、Artemis801335/t14991135/251daea1の四ordinaryは、新freshのUnit/実kernel/全NSS/caps/FD/argv/INFO/socket/原値から認証する。4306私有63269de9…は当初の基点で、次操作のlivenessへ流用しない。全187署名＋pin/signatureの189保持file・全32宣言/実Unitfile・DB全24/原本Backup/鍵・native56の各既byteを保持する。startupは現37entry（permit9/owner9/launch18/epoch1）で、permit-start/service-start intent無し。旧33等へ正規化せず、全37と履歴を保持する。
+
+旧4112のJava literal/class byteを新cohortへ再認定せず、独立kernel/原本基点から新Java/hash/helperを固定・JDK25で再compileする。固定artifactのread-only inspectは、新M→A→実batch RO DB/advisory71419602/heartbeat＋十metadata Ref・同source/全原値/typed ISSUED/owner/launch/完了原本を確認し、全新scope正常返却まで完了してから回収へ進む。親expiredのparentsGuardを呼ばず、失敗データの型付きreadをliveRoot資格へ変換しない。
+
+回収は別fresh同契約でCaddy→Web→API→Expiry→Artemis→Cleanupの必要6Unitを一回ずつ予約/直前再照合/通常stop/真正同世代terminalへ進める。既SS288の設定宣言tripleと実行補助値の分離、SS342/API2..8/Web1..2＋本人DBの両端socket/role、全189/全24/原値の各phase不変を維持する。普通API/Webは独立PID1/native終端、Artemisはvendor witness、残Unitは設定通りの正常terminal/kernel空を検証し、普通poolも0へ縮退する。6正常後だけ現在ISSUEDをProductionの型付きrevokeでINVALIDへ移し、全37のうちcanonical epoch一fileと親directoryの許可metadata差以外を変更しない。全DB/holder/M-A/Ref/busが正常closeし、さらに別fresh独立postが全24/原本Backup/鍵/全189/32/native旧56＋同INV API/Webの正当な二終端stream/全37と全資源0を実証するまで未完とする。
+
+旧8208/旧4152/metadata retainer・既Caddy停止履歴はこのinstanceの回収対象ではない。Root/start/Backup/Admin/配備/reload/VM操作、raw復元・原本削除・失敗正常化・強制解放・再stopは禁止。UNKNOWN/部分完了は元source/予約/所有を保全し二重発行しない。正常用Root/Browser/ownedstopの未実行を補完せず、性能対策・新通常経路/native/451は後続の別受入とする。
+
 ## SSC-285：署名拒否・DB/Ref取得前の保持39FD profile
 
 QA047内の内部限定回収を具体化する。対象はBUG1305/YKT1071のcurrent4856/PG3420/BOMdc535a48、boot79a、SIGNED_CURRENTで旧signature stemを拒否した当Java410196/t8469964/ppid410194/argvSHA7da390fcだけ。3502読取proof16145fbc…は全39FD/全task子0・管理DB/advisory0・M/A各一・全24/187/四ordinary/原本Backup/runtime/startup/native不変を二読した。これを旧99/101FD/Ref/DB保持profileの許可へ代入せず、別の取得前profileとして扱う。source署名拒否や旧UNKNOWNを正常closeへ読み替えない。
