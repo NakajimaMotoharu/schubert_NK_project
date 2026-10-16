@@ -70,7 +70,7 @@ try:
   value=snapshot();save_private(label+'-raw8.private.json',value)
   cfg=config();save_private(label+'-config.private.json',cfg)
   journal_raw=command(['/usr/bin/journalctl','--boot='+boot.replace('-',''),'_PID=1','UNIT=schubert-nk-morning-controller.service','INVOCATION_ID=bbcdb69957764d489a9c757b441542fd','-o','json','--no-pager'],4194304)
-  save_private(label+'-journal-raw.private.json',{'hex':journal_raw.hex()});journal=journal_rows(journal_raw);require(strict_equal(json.loads(journal_contract['project'](journal_raw)),journal))
+  save_private(label+'-journal-raw.private.json',{'hex':journal_raw.hex()});journal=journal_rows(journal_raw)
   files={}
   for name in expected['unitFilesActual']:
    p=Path(name);files[name]=metadata(p)+[hashlib.sha256(p.read_bytes()).hexdigest()]
@@ -79,6 +79,7 @@ try:
    'originals':durable['originals'],'backup':durable['backup'],'extraDurable':{k:durable[k]for k in expected['extraDurable']},
    'unitFilesActual':files,'runtime':value['runtime'],'native':value['native']}
   digest=save_private(label+'-full11.private.json',full)
+  require(strict_equal(json.loads(journal_contract['project'](journal_raw)),journal))
   require(not value['actors']and not value['database']['peers']and not value['database']['locks']and not value['flocks'])
   require(strict_equal(full,expected)and len(full['rows'])==24 and sum(v.get('sha256')is not None for v in full['native'].values())==58)
   return full,digest
