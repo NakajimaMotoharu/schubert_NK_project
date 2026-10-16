@@ -1320,6 +1320,20 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC287 failed-DONE現cohortの新所有による限定正規回収（2026-10-16）
+
+QA047/BUG1332/YKT1098の内部復旧補足。SSC286と同じsource7bb/PG3976/BOM0a409301・boot79a・Root155272/Inv820851b8/run dc0cb75f/actd9d58371に限定する。元PID1 Starting→JobFailed、Unit timeout143・1800.068969秒、原本.doneWARNING10/ca7829dbを独立に照合し、旧Rootの正常terminal/真正DONE/closeや停止権限を合成しない。元Root/Backup/ADMIN/配備/公開/reload/VMを再演せず、元Root30分・各Unit期限・451は不変更である。
+
+新管理者の固定工具はM→A・専用batch RO transaction/71419602/heartbeatを実際に保持し、同DB peer/両端socket・本人PID/start/argv・両実lock FDを認証する。十metadata Refを保持し、fresh boot/current/BOM/全187署名・全32設定/Unitfile・全24表・原本Backup/credential/旧proof/nativeと、現API758821/t13004447/Inv c9444dbf、Web759868/t13005817/Inv af0eb750、Caddy761848/t13009050/Inv a0c7fb91、Artemis714533/t12903932/Inv9cb091b8の完全な元certificateを二読再認証する。NSS/UID-GID-groups/全cap0/NNP1/cgroup/task/FDとDB普通app二・web一を新管理接続と区別する。固定署名/source/所有・全原値/Unit宣言は各phaseでも再照合する。UNKNOWN/余剰owner・peer/旧Root再生存/異世代は操作しない。
+
+実start順Cleanup→Artemis→Expiry→API→Web→Caddyに対し、必要な逆順を **Caddy→Web→API→Expiry→Artemis→Cleanup** に固定する。各対象は実現在世代と新所有のverify→root私有new-only予約/全write/fsync/dirsync→verify→通常systemctl stop一回→同世代真正terminal/kernel全空・旧PID消失/所有再確認→耐久結果を必要とする。既inactive正常Backup、未実行Inspector/Adminへ不要stopを送らない。既終端/予約済み/途中不明の操作を無条件再発行しない。Caddy/oneshotの既正常terminal条件、ordinary API/Webのcleanup完了→process stopped→native完了journal/同PID-UID-boot-inv・普通143の停止data条件、Artemisの同世代/vendor AMQ221002 stop条件を再利用する。API/Web普通143は旧Root143の正常化を意味しない。
+
+native profileはSSC193/194・354の既契約のまま。固定agent **output=none,append=false,dumponexit=false** と同ordinary role/Invocationを照合し、vendor destfile/appendへ変えない。停止前には不存在の `ordinary-api193/<同INV>.terminal.exec` と `ordinary-web193/<同INV>.terminal.exec` の固定new-only二fileだけを当該Unitの真正停止後に許す。旧全nativeのmetadata/全byte/hashは不変、親directoryのinode/owner/mode/link等は不変、entry追加によるsize/mtime/ctimeだけ有限差分。新fileは実NSS uid/gid・0600/link1/noACL・同device/上限/実byte hashを照合する。header/native完了journalだけでCRC/session/source資格やcoverageを受入れず、別の独立資格を後続へ残す。
+
+六対象の全正常停止、全24/原値、普通DB pool0・本人RODBだけ、同scope所有が成立した後だけ、Production typed StartupPermitFilesを使い当current ISSUEDをcanonical INVALIDへrevokeする。epoch.currentの固定keyは既SSC089どおり **cutoff_utc**、独立oracleはstateとpermit_sha256=-以外の全byteを保持する。既33entry（permit8/owner8/launch16/epoch.current）は保持、epoch fileの正規atomic replacementと親directory有限metadata差だけを許す。当cohortにはpermit-start.intent/service start.intentが存在しないので、生成・退役・owner/launch/permitの任意削除はしない。
+
+新scopeのDB rollback/close・M/A・十Refを正常返却し、別fresh新M/A/RODB/十Refの独立postで同source/全187/32設定・全24/原本Backup/keys/旧native＋限定new二file/全33/INVALID・全業務Unit/kernel/process/DBpeer/lock・scope返却を再確認するまで回収受入れとしない。未知・close失敗は隔離/新所有保持、SIGKILL/DBterminate/forceunlock/resetfailed/期限延長・原本書換・旧成功の補完はしない。回収は旧失敗の正常化でも次のRoot起動許可でもない。最終全emitted ABI/独立反例/同artifact readonly実資格を操作前に満たし、操作/別post/実装PTの完了は台帳で別管理する。RD/UI/業務仕様は不変更で新QA不要。
+
 ## SSC286 failed-DONE・普通四actor保持時のreadonly費用測定（2026-10-16）
 
 BUG1332/YKT1098・QA047既承認内の内部診断補足。対象はsource7bb25aa9c8a1d1af04525ec51beb1c4b7268aa9e/PG3976/BOM0a409301、boot79a3260a、Root155272/Inv820851b8/run dc0cb75f/actd9d58371のtimeout143と、真正原本.doneWARNING10が共存する現cohortに限定する。4052 private732bec2c…c6da6はdata baselineであり権限ではない。SSC266の旧DONE無し/soleArtemis、正常親専用4042の条件へ当状態を仮構成しない。

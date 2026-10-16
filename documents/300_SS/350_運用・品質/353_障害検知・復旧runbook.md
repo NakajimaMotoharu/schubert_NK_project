@@ -480,6 +480,14 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC287 failed-DONE現cohortの限定正規回収（2026-10-16）
+
+343 SSC287の固定7bb/PG3976/boot79a・Root155272/cohortだけに適用する。旧PID1 failed/親143・原本WARNING10は独立dataとして保存し、normal親Receiptへ代入しない。fresh新M→A・実batch RO/71419602/heartbeat・DB両端・十Ref/全署名187/24表/全設定/原本Backup/keys/nativeと四ordinary全identityを認証し、最終同一artifact/全ABI資格後だけCaddy→Web→API→Expiry→Artemis→Cleanupの必要逆順一回停止へ進む。各予約と真正終端は耐久保存し、終了済み/不明を再送しない。Backup/Inspector/Admin/Rootへの不要操作0、各Unit期限を延ばさない。
+
+普通API/Web143は同世代cleanup/nativeの停止dataとしてのみ確認し、vendor output=fileへ変更せず固定held terminal export二fileだけを追加許容する。全六正常・普通DBpool0/本人専用ROだけを確認してから、当ISSUEDのtyped canonical revokeと独立cutoff_utc oracleを照合する。全33entryを保全し、不存在intentの生成/退役や元原本/owner/launch/permitの削除は行わない。全新scope正常返却と別fresh全postまで回収未受入。新nativeのCRC/session/source・正常親・四100・451は後続別条件であり旧Root失敗を覆さない。
+
+実行失敗・未知owner/peer・原値差/close不明では隔離し、新scope保持の現況/予約/進行phase/元jobを保存する。停止/起動/配備/VM再送、forceunlock/SIGKILL/DBterminate/resetfailed/旧失敗の正常化をしない。post実装と再開手順を事前に準備する。QA047の復旧範囲内のSS具体化でRD/UI/品質/業務仕様は不変更。設計公開と実回収・障害原因対策の完了は別管理とする。
+
 ## SSC286 failed-DONE現cohortのreadonly診断境界（2026-10-16）
 
 343 SSC286を正とする。Root155272/Inv820851b8の1800秒timeout143は、.doneWARNING10/observer0/原本整合があっても非合格。4052で同四ordinary/全24/署名187/原本Backup/nativeを保全した後、新M→A・実batch RO専用DB/advisory・十Refと普通poolのfresh socket照合で原本whole graph費用だけを測る。前後全原値/本人所有・全scope正常返却/独立postを必要とし、技術測定を操作権へ昇格しない。
