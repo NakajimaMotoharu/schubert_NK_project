@@ -4736,11 +4736,6 @@ final class MorningDatabaseSessionTest {
           session -> {
             var begins = session.beginBackup(run, started, false);
             session.failBackup(begins, ended, database, configuration);
-            var observed =
-                session.observeBackup(begins, Optional.empty(), ended, () -> 10_000_000_000L);
-            assertEquals(database, observed.current().get(0).result());
-            assertEquals(configuration, observed.current().get(1).result());
-            assertTrue(observed.prior().isEmpty());
             try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
               String before = mdb588Audit(observer, run);
               IOException failure =
@@ -4755,6 +4750,16 @@ final class MorningDatabaseSessionTest {
             } catch (SQLException failure) {
               throw new IOException("isolated failed-pair row oracle unavailable", failure);
             }
+            // SS343/SSC124 admits only FAILED,1,0,1,0 for the public failed-pair projection.
+            // Noncanonical committed metrics are audit data, not an observation capability.
+            IOException observation =
+                assertThrows(
+                    IOException.class,
+                    () ->
+                        session.observeBackup(
+                            begins, Optional.empty(), ended, () -> 10_000_000_000L));
+            assertEquals("root batch database unavailable", observation.getMessage());
+            assertNull(observation.getCause());
             return true;
           });
       try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
