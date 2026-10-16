@@ -71,7 +71,8 @@ def main():
     value = {'actualExit': status, 'baseProductionSource': SOURCE, 'payloadSha256': hashlib.sha256(script.read_bytes()).hexdigest(), 'MainApplied': False, 'F03Accepted': False}
     if status == 0: value['result'] = json.loads(next(line for line in reversed(output.splitlines()) if line.startswith('{')))
     (out / 'manifest.safe.json').write_text(json.dumps(value, sort_keys=True)); print(json.dumps({k: v for k, v in value.items() if k != 'result'}))
-    if status == 0: print(json.dumps({k: value['result'][k] for k in ['pmd', 'checkstyle', 'literalDelta', 'serverManifestSha256']}))
+    if status == 0:
+        r = value['result']; print(json.dumps({'pmd': r['pmd'], 'checkstyle': r['checkstyle'], 'literalDelta': {k: r['literalDelta'][k] for k in ['actualRawReduction', 'ruleCountDeltaFromBase']}, 'serverManifestSha256': r['serverManifestSha256']}))
     return status
 
 
