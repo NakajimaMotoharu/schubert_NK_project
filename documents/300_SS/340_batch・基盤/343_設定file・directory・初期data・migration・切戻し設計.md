@@ -1320,6 +1320,18 @@ pending_context_revocations.expires_atのNN解除は旧migration不変・実末�
 ## SSC202 pending原本を保持した027→028限定移行（2026-10-06）
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC289 旧SSH255・metadata-only retainerからの限定継続（2026-10-16）
+
+SSC288の現cohortについて、元4152のSSH/host observerの真正終了はactual255であり143ではなかった。旧guest二管理者への一回pidfd TERM/terminalと旧PID・lock消失/全原値不変は別証拠として保存する。255を143又は成功/正常closeへ変換せず、255だけでguest停止成功と推定しない。元4188 actual1・Caddy既停止data・旧Root143も独立に維持し、未実施残5/独立postを補完しない。この段階以降はSSC288中の旧observer143固定要求を「真正actual255と別のguest二terminal/消失証拠」へ置換するが、通常Root/ordinary Unit/全新scopeの正常終了条件は変更しない。
+
+4196 private6758d930bc6fb6b295274a05d4b58aba7b535909af8f263afe05f0ff43eecef6で認証したmetadata-only Python791348/t14602179/argvSHA172536db0a293878cb1780e85aa687b825c625a75a9d95fec914ecdf608d1520、PPid791346/session930、子0・単task、UID/GID/group0/元cap・NNP0、固定全5FDだけを回収対象とする。FD0..2は旧固定pipe12618427/28/29、3はlibffi.so.8.2.0、4はsystem-bus socket12616611で、各fdinfo/全9metadata/全byteと元値の同一性をfresh二読する。旧metadata Refの正常返却は不明、M/A/backend/advisoryは保持していない。元4152/4188/keeperをhotpatch・再起動しない。
+
+新管理hostが既存同inodeの正規exclusive gateを取得し、別new-only root工具が新十metadata Refを保持して全189署名/material/32宣言/原本Backup/keys/native50/全24/33/runtime/残3ordinary本人DB両端・Caddy真正既終端を再照合する。固定retainerに限り既pidfd verify→耐久一回予約/fsync/dirsync→verify→通常TERM15秒→30秒以内PID消失を適用し、全旧lock/PID/原値を再確認する。sudo/host observer/VM/業務UnitへこのTERMを拡張せず、SIGKILL/forceunlock/DBterminate/resetfailedなし。
+
+新十Refとhost排他を継続したまま、既資格4182の同byte partial6ae32eab/postc2acd4d2を別processで順次inspect→必要5stop/revoke→独立postへ実行し、各子のPID/source/hash/元終了値/ログ/一回予約を保存する。Caddy再stop0、既Unit期限と全189/全原値の各phase確認は不変。子の失敗・不明は自動再実行せず、外側の新metadata Ref/所有をUNKNOWN隔離保持する。stdout欠落/EPIPEでUNKNOWN保持を解除しない。全子の真正0/全新M/A・RODB・十Ref正常返却/全postを確認後だけ外側Refを正常Unrefする。旧metadata retainerのTERMを正常Unrefと報告しない。
+
+操作前資格は同新artifact545bb84f5c6d58b9305ac4499a0f8afa916e2baee7dcba3c61547e1d30727cdbのPG4200 proof actual0/10:38:50Z/signals0/十Ref正常と独立3試験/全emitted静的0。設計only main公開後に一回recoverを許可し、証拠未回収だけで再演しない。QA047内の内部補足でありRD/UI/451/業務仕様/元Root1800秒/QA051finalは不変更。実残5停止/回収/独立post/native資格/正式品質は未受入である。
+
 ## SSC288 Caddy既終端・二管理retainerからの限定部分回収（2026-10-16）
 
 QA047/BUG1341・1342/YKT1107・1108内の内部補足。SSC287の7bb/PG3976/BOM0a409301・boot79a・Root155272 timeout143 cohortだけに適用し、旧Root/旧工具4152の失敗を正常化しない。Caddyは旧INV a0c7fb91のinactive/dead/success/code1/status0・Main/ControlPID0/Job空・旧PID/kernel空を独立確認した既終端であり、観測だけを行い再stopしない。残順はWeb→API→Expiry→Artemis→Cleanupの必要5対象とする。
