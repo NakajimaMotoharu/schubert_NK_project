@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC302 retained Expiry監査比較の純data検証境界
+
+SS331/341・SSC117/125/200のCleanupExpiryExecution.verifyPriorExpiryは、借用Connectionとrequestのnull契約→SKIPPEDかつselectedCount0→BatchRunRepository.verifyAlreadySuccessful→ExpiryAuditRepository.read(priorHandle)→元PriorExpiry取得という順序・所有・DAO内strong validationを保持する。最後の既監査比較だけpackage内`verifyPriorAudit(PriorExpiry, ExpiryAuditRepository.Snapshot)`へ分離し、同11条件を同じ短絡順で検査する。成功status、終了時刻、cutoff-7days、before/after非null、before>=after、before-after=success、success=target、failure0、errorCode/errorSummaryなしの全条件を残し、失敗は従来の固定IOExceptionとする。新helperのreference/snapshot nullは即契約拒否とし、NPE catch正常化0。外部呼出し順、SQL/transaction、ログ/電文/データ互換性、権限・期限を変更しない。
+
+内部helperは取得データの比較だけでConnection/署名/UID/permit/Unit等を生成・確証しない。独立literal Snapshot負試験で各短絡条件を個別検査しても、その反例が実DDL/DAOを通ると主張しない。DAOとhelperの二重防御は削除せず、実PostgreSQL＋現DDLでのSKIP成功・全24原値不変の既単体試験も併用する。正常0/Long.MAX_VALUE等の演算、時刻/cutoff、status、null、誤差/カウンタ/診断・callback以前のskip/選択数拒否を独立期待値で検査する。対象除外/到達不能免除や旧source exec合算でcoverageを作らず、変更群fresh全回帰・同source native/451を別受入する。RD/UI/QA051 final/ITST条件は不変更。
+
 ## SSC301 API認可内の非秘密設定取得・失敗分類data port
 
 ApiProcessMain.startNativeがServiceStartupAdmission.executeへ渡す既CONFIGURATION callbackの本体だけを、package内`admittedConfiguration(ConfigurationLoad, int[])`へ抽出する。ConfigurationLoadはApiStartupInputs.Valuesを返しIOException/NoSuchAlgorithmExceptionを伝える内部data-only portで、通常本番は既loader::loadを同じ認可内・同順序で一回だけ呼ぶ。外部FQCN/noargs/argv/ENV/固定file/UID/署名・DB/JMS/permit/親1800秒/Unit期限を変えず、任意loader/constructor/fixture/測定modeをCLIやENVへ公開しない。認可前に設定fileを読まない。
