@@ -480,6 +480,12 @@ SSC174補足（保存VMの明示OS停止後）：旧bootの3intentが消失し�
 SSC202（2026-10-06）：SSC200201の同日別run元SUCCESS修正をpending原本へ適用する順序は、fresh同source451全回帰→署名候補→SS343所定027→028限定移行とprofile→別正常pending code-only→別正常runtime resume束縛→durable予約/observer/一回start→Production通常same-run resume→真正API/Web/Caddy/原本DONE/ownedTERM/native→一回引数退役である。各段の旧失敗・未知・partial・閉鎖不能は保全/再付着し、後段へ成功を補完しない。古いPID/boot/session/permit・旧/runを復元しない。元成功Backupは027の真正原値で再用、手DB/日次再処理/既原本退役/未知自動再発行0。全scope正常と実証が不足する範囲は隔離し、独立host作業を継続する。
 SSC202工具起動前失敗限定回収（BUG797）：参照子missing filenameの実exit2、SAVE/Ref/設定変更/start0を実証し、当管理Javaのboot/PID/ticks/Root/子0/専用DB/locksを現在値固定した場合に限りowned PIDへTERMし、消失・全peer/lock0・十Unit/kernel/全原値不変更を確認して別新scopeへ進める。回収は異常終了であり旧close正常化/一般UNKNOWN補修/業務Unit強制終了の根拠にしない。
 SSC202同範囲起動前失敗（BUG798）：既知の署名base security取り違えが十Ref取得前に失敗しSAVE空/runtime空・全原値不変更の場合、固定child/parentのboot/PID/ticks/Root/argv/全task-childを認証して当child→parentのowned TERMだけで回収する。既DBidle TX期限後peer0は正常closeでなく、前後全原値・全peer/lock0と独立拒否再現を保存、新scopeへ別所有で進む。一般UNKNOWN・業務Unit強制終了・旧close正常化へ拡張しない。release原本Root:schubert0640と/etc配備Unit Root:Root0644は既署名profileのまま別検査し、権限を変更しない。
+## SSC290 回収後の別fresh通常起動と原因計測（2026-10-16）
+
+343 SSC290の現7bb/boot79a・SSC289回収0/INVALID/全新scope正常からだけ進む。元Root143/4152 actual255/4188 actual1を保全し、新十Ref・同inode host排他のfresh全189/32/全24/原本Backup/鍵/native52/起動33・全Unit/Job/kernelとpeer/lock0、新observer本人/全hash/quiescent frame、native私有copyを確認する。別new-only予約/再確認→ordinary noargs一回、旧run/activation/permitを再利用せず元1800秒で真正親/全24/seal/owned停止/native/別postまで閉じる。既不存在runtime一回fileの不要退役/reload/配備と元Root再送はしない。
+
+observerは既18fieldと全kernel/Root→ordinary/INFO/socket/HTTPS oracle・周期・期限を維持した固定local same-PID1/root/unique前後認証transportを用い、全十metadata Refを保持して正常返却を別記録する。各propertyの型/完全性/pathを検証し、owner/state cacheやfallbackなし。旧方式との実全1440値一致/費用測定をRoot原因証明や新通常成功にしない。新同親だけへの有限read-only Thread.printは343の世代/argv/pidfd sandwich・1770秒内/最大12/sample一回・私有raw/公開method-onlyに限定し、heap/環境/credential/制御操作なし。未確定・異世代・元job応答欠落は成功補完・再送せず保全する。
+
 ## SSC289 旧SSH失敗255・metadata-only retainerの限定継続（2026-10-16）
 
 343 SSC289の固定7bb/boot79a cohortだけ。元4152 actual255とguest二pidfd terminal/全PID・lock消失を別々に認証し、255を成功/guest143/旧close正常へ補完しない。元4188 actual1の未実施5stopを再送扱いにせず、予約と現状態で未発行を確認する。正規host gate/新十Refの下で固定metadata-only791348の全5FD/権限/単task/世代を二読し、一回pidfd通常TERM15秒・30秒以内消失/全原値不変を確認する。未知や別世代は操作しない。
