@@ -1,5 +1,15 @@
 # 425 専用LAN PGPT環境・移送記録
 
+## 2026-10-17 同一VM online容量拡張（QA052、追加install/再起動/削除0）
+
+既QEMU10.2.1の正規Unix QMP口をmini経由sudoで利用し、同QEMU4599/t101242/argvf765c39c/hostbootc796・guestboot79aのままactive childだけ56→72GiB（60129542144→77309411328）へ一回拡張した。SO_PEERCRED4599/0/0、exact node-name `#block113`、既host空き約134.6GB・16GiB拡張＋10GiB保全guardを認証。active一個とreadonly backing三個を区別し、全三backingのQEMU FD O_RDONLY/九metadata before=afterを要求する。稼働imageへのqemu-img resize/copy、旧backingの変更、shrink、root直接SSH、socket権限緩和は実施しない。
+
+手順は既2012/2868の同bootオンライン契約を継承した新工具 `pg4570_capacity_current_post.py before`→`pg4572_capacity_online_grow.py`→`pg4570_capacity_current_post.py after`。既growpart `/dev/vda 1` とresize2fs `/dev/vda1`を各一回、M→A/十metadataRef保持・全十Unit/kernel空の境界で実行。新namespace/一回QMP予約・partition/resize予約をfsyncしてから発行し、応答欠落時は元予約/実disk状態から回収する。**この手順は実行済みなので再発行禁止**。既cloud-guest-utils/e2fsprogs/util-linuxの利用で追加導入0、既version/出所の環境契約を継承する。
+
+実run=4570before38462actual0→4572grow58870actual0（18:02:21～25Z、operator2383c30b3）→4574独立post92632actual0（18:02:41Z）。root開始sector2324480/partitionUUID F8A5DEDF-C7D3-42EA-96AA-30C2DB90705C/filesystemUUID92978eec-7925-481e-8629-5b963d59ced1/他三partitionは不変。root size/lastlbaだけ33554432sector増加、空き24334848000byte/12GiB guard維持。source964e/PG4432/署名187/全24/32設定/19Unit/原本Backup鍵/native58/startup37・全11二読SHAf14b97d2・全資源を独立再照合0。元read権限/層数/ローカルsudoPTY解析の拒否とremote0回収は別保存、過去欠測を補完0。
+
+公開証跡=018_NK-OPS-001/993・PG4592 manifest SHA c61bdb7499253af8d6a6293eb438d388bc7ead17440e96d0be1f9344f9e6a0b8。完全QMP/geometry/DB/鍵/前後像はW/PG379とLAN/guest root-private namespaceにのみ保全。後続IT/STへの復元では現job/owner・VM停止/保全を認証し、容量を元へshrinkせず新保全ディスクを確保してから個別判断する。容量確保をPGPT正式品質/ITST合格とはしない。
+
 ## 現在の追加工具・再現・復元差分（2026-10-12 07:37JST）
 
 公式Ubuntu aptでACL2.3.2-2/setfacl-getfacl2.3.2を追加、root-private `/runs/PG1460-acl-package-v1` の導入前inventory/apt logを保持。既host抽出PostgreSQL18.6（Ubuntu18.6-0ubuntu0.26.04.1）のbin/lib/share/libpq627fileを同SHAで専用server `/tools/postgresql18/usr` へ配置、postgres/initdb/pg_ctl/psql/dump/restore六version/ldd欠落0。DB・credentialはコピー0、裸機PostgreSQL service導入/起動0。Node24.19.0、固定ShellCheck0.11.0は既資格hostの実byteを専用toolsへhash照合で配置し、server.info/host復旧署名秘密鍵転送0。QEMU10.2.1追加は既§5と同inventoryを復元対象にする。
