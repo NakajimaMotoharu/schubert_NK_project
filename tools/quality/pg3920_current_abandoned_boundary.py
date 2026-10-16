@@ -1,5 +1,6 @@
 """New-only isolated DB suite against the exact current six qualified Main jars."""
 import hashlib
+import ast
 import json
 import os
 import shlex
@@ -15,8 +16,18 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = '/home/mini/schubert-nk-pgpt'
 OUT = W / 'pg3920-current-abandoned-boundary-v1'
 SLOT = 'PG3920-candidate-v1'
+LABEL = 'PG3920'
 FILES = previous.FILES
 METHOD = 'mdb3920001RetainedRequestTimeBoundariesPreserveActualRowsAndOwnedLock'
+LAUNCHER = 'org/junit/platform/junit-platform-launcher/1.13.4/junit-platform-launcher-1.13.4.jar'
+LAUNCHER_SHA = '0b0beaeb6880a31149641d2d848b863712885469670c12099586d7f798522564'
+
+
+def runtime_libraries(coverage, historical):
+    require(historical.get(LAUNCHER) == LAUNCHER_SHA, 'independently successful fixed launcher binding')
+    launchers = {n: h for n, h in coverage.items() if '/junit-platform-launcher/' in n}
+    require(not launchers or launchers == {LAUNCHER: LAUNCHER_SHA}, 'no alternate launcher/version/hash')
+    return {**coverage, LAUNCHER: LAUNCHER_SHA}
 
 
 def require(value, reason):
@@ -26,7 +37,7 @@ def require(value, reason):
 
 def server():
     raw = previous.server('statement')
-    for old, new in [('PG3256', 'PG3920'), ('source-full-PG3248', 'source-full-PG3734')]:
+    for old, new in [('PG3256', LABEL), ('source-full-PG3248', 'source-full-PG3734')]:
         require(old in raw, 'exact fixed server boundary')
         raw = raw.replace(old, new)
     before = raw.index('hosts=[]\n')
@@ -58,7 +69,11 @@ def main():
     files = {n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in FILES}
     tests = (ROOT / FILES[0]).read_text().count('@Test\n')
     require(tests == 64 and METHOD in (ROOT / FILES[0]).read_text(), 'exact current64 including new boundary')
-    inputs = {'source': SOURCE, 'head': head, 'baseFull': q, 'libraries': native['libraries'], 'files': files, 'tests': tests}
+    tree = ast.parse((W / 'pg3256-completion-guard-selected-v1/selected.private.py').read_bytes())
+    assignment = next(n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'INPUT' for t in n.targets))
+    historical = ast.literal_eval(assignment.value)
+    libraries = runtime_libraries(native['libraries'], historical['libraries'])
+    inputs = {'source': SOURCE, 'head': head, 'baseFull': q, 'libraries': libraries, 'files': files, 'tests': tests}
     raw = 'INPUT=' + repr(inputs) + '\n' + server()
     os.umask(0o077)
     OUT.mkdir(mode=0o700)
