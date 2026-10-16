@@ -21,6 +21,9 @@ BASE=W/previous.TOOLS;LATEST=W/completed.TOOLS
 VIEW_LOCAL=W/'pg3754-current-before-view-v1/manifest.safe.json'
 
 
+def production():return SOURCE
+
+
 def pinned(folder,name):
     expected=json.loads((folder/'payload-sha256.json').read_bytes());raw=(folder/name).read_bytes()
     if hashlib.sha256(raw).hexdigest()!=expected[name]:raise ValueError('original successful frozen source changed')
