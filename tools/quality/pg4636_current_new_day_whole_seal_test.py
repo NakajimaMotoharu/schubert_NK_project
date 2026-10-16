@@ -42,8 +42,44 @@ class RawWholeSeal(unittest.TestCase):
         self.assertIn("targets={'CLEAN_NOTIFICATION':len(expected['notifications'])",oracle)
         self.assertNotIn('require(all(history.values()))',oracle)
         self.assertIn('genuineRootDone',values['GUARD'])
-        self.assertIn("RAW_SAVE=BASE/'pg4636-current-whole-seal-v1-raw'",source)
+        self.assertIn("RAW_SAVE=BASE/'pg4642-current-whole-seal-v1-raw'",source)
+        qualified=acceptance.terminal_payload(admission.live());marker="out=pathlib.Path('/var/lib/pgpt-s1-preservation/"+acceptance.TERM+"')"
+        self.assertEqual(qualified[:qualified.index(marker)],values['GUARD'])
+        for literal in ['964e96e45bb588e7e75798b5adf425cbd9985427','93807abdd4db24ad300b93d95d844ea21e64487dc5cf24b815c15db34305d3de','0.1.0-PG4432']:
+            self.assertIn(literal,values['GUARD'])
+        self.assertNotIn('0.1.0-PG3976',values['GUARD'])
         self.assertLess(source.index("preserve_raw('captured-'"),source.index(" business=types.ModuleType('independent_sql')"))
+
+    def test_actual_genuine_guard_rejects_old_release_source_and_bom(self):
+        guard=constants(self.raw())['GUARD'];nodes=ast.parse(guard).body
+        index=next(i for i,n in enumerate(nodes)if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='release'for t in n.targets))
+        block=ast.Module(body=nodes[index:index+3],type_ignores=[])
+        for link,source,digest,accepted in [
+          ('/opt/schubert-nk/releases/0.1.0-PG4432','964e96e45bb588e7e75798b5adf425cbd9985427','93807abdd4db24ad300b93d95d844ea21e64487dc5cf24b815c15db34305d3de',True),
+          ('/opt/schubert-nk/releases/0.1.0-PG3976','964e96e45bb588e7e75798b5adf425cbd9985427','93807abdd4db24ad300b93d95d844ea21e64487dc5cf24b815c15db34305d3de',False),
+          ('/opt/schubert-nk/releases/0.1.0-PG4432','7bb25aa9c8a1d1af04525ec51beb1c4b7268aa9e','93807abdd4db24ad300b93d95d844ea21e64487dc5cf24b815c15db34305d3de',False),
+          ('/opt/schubert-nk/releases/0.1.0-PG4432','964e96e45bb588e7e75798b5adf425cbd9985427','0a409301e552d8019440edcbf096ad9b20c15b35c0ee6472cd9c4cef65bd8dab',False)]:
+            blob=json.dumps({'source':{'commit':source}}).encode()
+            class File:
+                def __truediv__(self,name):return self
+                def read_bytes(self):return blob
+                def readlink(self):return link
+            def require(ok):
+                if not ok:raise ValueError('independent source tuple refused')
+            # Hash is a port here: this tests tuple selection, not SHA. Actual
+            # signature/manifest SHA is independently exercised by the live post.
+            ns={'pathlib':types.SimpleNamespace(Path=lambda path:File()),'json':json,'hashlib':types.SimpleNamespace(sha256=lambda value:types.SimpleNamespace(hexdigest=lambda:digest)),'require':require}
+            with self.subTest(link=link,source=source,digest=digest):
+                if accepted:exec(compile(block,'<actual source guard tuple barrier>','exec'),ns)
+                else:
+                    with self.assertRaises(ValueError):exec(compile(block,'<actual source guard tuple barrier>','exec'),ns)
+
+    def test_actual_complete_image_comparator_rejects_bool_as_int(self):
+        tree=ast.parse(self.raw());helper=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='strict_equal');ns={}
+        exec(compile(ast.Module(body=[helper],type_ignores=[]),'<actual strict whole image type comparator>','exec'),ns)
+        self.assertFalse(ns['strict_equal']({'counter':True},{'counter':1}))
+        self.assertFalse(ns['strict_equal']({'counter':None},{'counter':0}))
+        self.assertTrue(ns['strict_equal']({'rows':[{'counter':1}]},{'rows':[{'counter':1}]}))
 
 
 if __name__=='__main__':unittest.main()

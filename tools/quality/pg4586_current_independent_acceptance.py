@@ -9,7 +9,7 @@ from pg1446_current_cold_stage import W
 
 TERM='pg4586-current-genuine-terminal-v1'
 ROWS='pg4634-current-all24-qualified-v1'
-SEAL='pg4636-current-whole-seal-v1'
+SEAL='pg4642-current-whole-seal-v1'
 
 
 def bind(raw):
@@ -42,7 +42,10 @@ def seal_payload(observed,before_hash):
     view+="publication_raw=(BASE/"+repr(admission.PUBLICATION_PATH)+").read_bytes();require(hashlib.sha256(publication_raw).hexdigest()=="+repr(admission.PUBLICATION)+")\n"
     view+="before=project(before,json.loads(publication_raw))\nold['unitFilesActual']=before['unitFilesActual']\n"
     from pg4636_current_new_day_whole_seal import patch
-    return patch(raw[:start]+view+raw[end:],observed)
+    terminal=terminal_payload(observed)
+    marker="out=pathlib.Path('/var/lib/pgpt-s1-preservation/"+TERM+"')"
+    if terminal.count(marker)!=1:raise ValueError('one actual qualified terminal output boundary')
+    return patch(raw[:start]+view+raw[end:],observed,terminal[:terminal.index(marker)])
 
 
 def payload(phase):
