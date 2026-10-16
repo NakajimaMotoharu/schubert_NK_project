@@ -16,3 +16,9 @@ NK-OPS-001、SS343/353/451、BUG1327/YKT1093、Production7fff/PG3748。新3900�
 3908postの役割変換入力も現時点のprotected assignment無しを確認し、追加された場合はVM操作前に拒否するguard/negativeを追加。RECEIPT等は変換**後**に固定値を注入。新3902/3906/3908の実consumer・正常scope/全原値/native保持が未実施なので、BUG1327/YKT1093全体は未完。
 
 Linux/JDK25.0.4/Python3、完全PYTHONPATHで各`python3 -B tools/quality/<対応test>.py`。全command/exit/hash/時刻/対象sourceをPG379の元manifest/再現JSON/frozenへ保存。FD fixtureは独立一時directory内だけを作成・回収し、実runtime退役を代用しない。生DB/鍵/原本Backup/token/session/native/歴史private snapshotsのGit輸出0。管理pure・工具ABIをProduction3714や正式1964/53へ加算0、coverage100/F03/PGPT/IT/ST完了0。
+
+## 実consumer追補（全完了ではなく退役有限scope完了）
+
+3906stage0/retire0、operatorbc5d9b8b8、03:02:54～04:22Z。新M/A/専用DB/十Refの正常scopeで対象644byteだけを正規退役/dirsync/reload、Root/業務start/旧stop再演/SQL更新0。3908別独立post0（03:04:52～05:00Z）、全24二読・十Unit/kernel空・actor消失・client/advisory/flock0・187・原本Backup/鍵旧proof/native46安定、所定一runtime/config差分だけ。beforefull11 **45fd6c5b9c55a7893ac4861d2fee4294ab513c736efe8f73af6c7cfb8bcc84e2**、afterfull11 **45487171cb66fd63543092c276247684833e1d334eb58d8e701ecec67cd2a2a2**、41,885,613byte。旧stoppedafterはnative無しexact10/d655のまま保存、schema差を理由に原本を書換えない。
+
+公開3910はmetadata5file、manifest **0127243101abf7cc140ce9d6022671ddd03fd67a88d976302f50aa0c2e4bce5e**。BUG1327/YKT1093有限consumer完了、元反例/旧frozen非該当を保持。元644byteはguestroot pg3848のnew-runtime.private等に保全、再適用は新規正規許可が必要で旧/run復元を許可しない。追加Production PT/native credit0、正式/全四100/F03/CHR/451は未受入のまま。
