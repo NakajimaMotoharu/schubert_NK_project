@@ -15,6 +15,7 @@ class ExplicitFiniteActions(unittest.TestCase):
         self.assertIn('pg4460-frozen-v1.safe.json', literals)
         self.assertIn('pg4442-failed-current-view-qualified-v1/manifest.safe.json', literals)
         self.assertIn('pg4462-inspect-v1.exit', literals)
+        self.assertIn('pg4468-existing-input-stage-v1/manifest.safe.json', literals)
         self.assertIn(tool.role.SOURCE, literals)
         self.assertIn(tool.role.ARCHIVE, literals)
         self.assertIn("frozen['completeGraphQualified']is not True", raw)
@@ -35,6 +36,13 @@ class ExplicitFiniteActions(unittest.TestCase):
         self.assertEqual(tool.role.REMOTE, namespace['REMOTE'])
         bad = dict(candidate); bad['candidateSource'] = tool.role.CURRENT
         with self.assertRaises(ValueError): tool.runtime_namespace(bad)
+
+    def test_original_failed_stage_is_not_rewritten_and_only_exact_consumer0_qualifies(self):
+        actual = json.loads((tool.role.W/'pg4468-existing-input-stage-v1/manifest.safe.json').read_bytes())
+        self.assertTrue(tool.stage_qualified(actual))
+        for key,value in [('actualExit',False),('frozenFiles',141),('originalStageActualExit',0),('filesRetransferred',True),('candidatePlaced',True),('candidateSource',tool.role.CURRENT),('payloadSha256','0'*64)]:
+            changed = dict(actual);changed[key] = value
+            with self.subTest(key=key):self.assertFalse(tool.stage_qualified(changed))
 
 
 if __name__ == '__main__':

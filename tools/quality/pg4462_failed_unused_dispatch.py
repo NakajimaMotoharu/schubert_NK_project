@@ -21,6 +21,13 @@ def stage_source():
     return bind(previous.stage_source()).replace('/home/ubuntu/pg4448-fixed-stage-v1/', '/home/ubuntu/pg4462-fixed-stage-v1/')
 
 
+def stage_qualified(value):
+    expected = {'actualExit':0,'payloadSha256':'aef4fcbdd91c2193e8db3dfb95dbfa252f3043aa5fd155255402dcbdc5e39614',
+        'frozenFiles':142,'originalStageActualExit':1,'originalStageReplayed':False,'filesRetransferred':False,
+        'candidateSource':role.SOURCE,'currentSource':role.CURRENT,'guestTools':GUEST,'candidatePlaced':False,'formalAccepted':False}
+    return type(value) is dict and all(type(value.get(k)) is type(v) and value[k] == v for k,v in expected.items())
+
+
 def source():
     raw = bind(previous.source())
     once = role.previous.once
@@ -36,6 +43,8 @@ def source():
     raw = raw.replace('pg4462-shared-manager-release-v4.tar', role.ARCHIVE)
     raw = raw.replace('pg4462-shared-manager-input-v4', 'pg4448-shared-manager-input-v4')
     raw = once(raw, "'Pg4444UnusedStage place'", "'Pg4444UnusedStage '+action")
+    raw = once(raw, "if(W/'pg4462-stage-v1.exit').read_bytes()!=b'0\\n':raise ValueError('actual immutable tool/input stage required')",
+        "if not stage_qualified(json.loads((W/'pg4468-existing-input-stage-v1/manifest.safe.json').read_bytes())):raise ValueError('actual same142 existing-input consumer required; original stage1 preserved')")
     marker = "    action=sys.argv[1];frozen="
     raw = once(raw, marker, "    action=sys.argv[1]\n    if action=='place' and (W/'pg4462-inspect-v1.exit').read_bytes()!=b'0\\n':raise ValueError('genuine same-artifact inspect0 required before placement')\n    frozen=")
     compile(raw, '<new explicit failed-current unused operator>', 'exec')
@@ -49,7 +58,7 @@ def runtime_namespace(candidate):
     engine = previous.previous.previous.old.previous.engine
     namespace = {**engine.base.__dict__, '__file__':__file__, 'TARGET':TARGET, 'GUEST':GUEST, 'REMOTE':role.REMOTE,
         'STAGE':stage_source(), 'SOURCE':role.SOURCE, 'DIGEST':candidate['manifestSha256'],
-        'BASELINE_SHA':role.BEFORE, 'sources':role.sources}
+        'BASELINE_SHA':role.BEFORE, 'sources':role.sources, 'stage_qualified':stage_qualified}
     role.previous.require(candidate['actualExit'] == 0 and candidate['candidateSource'] == role.SOURCE
         and candidate['manifestSha256'] == role.BOM and candidate['signatureVerified'] is True)
     return namespace
