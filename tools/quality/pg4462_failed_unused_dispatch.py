@@ -18,7 +18,7 @@ def bind(raw):
 
 
 def stage_source():
-    return bind(previous.stage_source())
+    return bind(previous.stage_source()).replace('/home/ubuntu/pg4448-fixed-stage-v1/', '/home/ubuntu/pg4462-fixed-stage-v1/')
 
 
 def source():

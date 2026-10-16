@@ -22,6 +22,9 @@ class ExplicitFiniteActions(unittest.TestCase):
         self.assertNotIn('genuineCompletion', raw)
         self.assertIn("['inspect']", raw)
         self.assertEqual(0, check("DIGEST='literal'\nFILES={}\n"+tool.stage_source(), '<actual complete stage>', Reporter(io.StringIO(),io.StringIO())))
+        self.assertIn('/home/ubuntu/pg4462-fixed-stage-v1/', tool.stage_source())
+        self.assertNotIn('/home/ubuntu/pg4448-fixed-stage-v1/', tool.stage_source())
+        self.assertIn('/home/ubuntu/pg4462-fixed-stage-v1', literals)
 
     def test_runtime_namespace_keeps_failed_data_and_real_candidate_distinct(self):
         candidate = json.loads((tool.role.W/'pg4432-candidate-build-v1.safe.json').read_bytes())
