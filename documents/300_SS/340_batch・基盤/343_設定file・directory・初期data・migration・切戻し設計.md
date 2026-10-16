@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC293 ordinary pool履歴差・現在両端所有・境界内全FD二読
+
+SSC292の同current UNKNOWN instance限定。元4336→4356の歴史差はAPI fd93のtarget/metadataだけで、旧TCP表は未採取のため旧pool所有・旧UNKNOWN正常closeを認定しない。全source/BOM/署名/Unit世代・actor identity/authority/NSS/children・非pool全FD（target/全9metadata/flags/mountId）は歴史継続を照合する。新現在基点4356のAPI93/96・Web110は実captured FDのinodeから固定role/app・当ordinary PID/ticks/INV・SS342 pool範囲・loopback ESTABLISHED→5432・PostgreSQL本人backendと逆向きTCPへ一対一結合済みであり、番号/socket型だけを許可条件にしない。旧fd93未分類はそのまま保全する。
+
+操作境界の現在pool分類は、captured client fullFD像とclient TCP・同backendのPID/ticks/argv/OS postgres UID/GID・全FD capture・対応server FD/inode/逆向きTCPを証拠へ残す。未知/余剰peer・app/role/port/片端/owner差・重複inode/FD alias・pool上下限外・非pool変更を拒否する。歴史比較で許すのはこの本人両端証明済みpool動態だけで、固定authority/非pool FDは緩めない。各pidfd・予約後・TERM直前の現在全snapshotはkeeper/partial双方で明示的二読、全FD（server含む）と双方endpoint/state/inodeのauthority像完全一致必須。二読不一致を自動再採取で合格化しない。
+
+TCPのqueue/timer/counter生値はprivate raw証拠へ保存し、authority比較はlocal/remote endpoint・ESTABLISHED state・inodeとfullFD/identityへ分ける。非authorityの時刻進行を不正FD変化とも権限とも扱わない。server側だけの差もkeeper/partial双方で拒否する。二回目bind又は取得途中の拒否でも既取得snapshot/TCP/server像を保全する。全before/after/referenceを単一fileへ詰めず、既一file64MiB上限を維持して各像を別root私有new-only fileへwrite/fsync/dirsyncし、全part SHAの小さなindexを最後に保存する。片方/証跡/dirsync失敗は未完・隔離のままで、rawの切捨て/部分indexの完了扱いをしない。
+
+元58917/元4348/旧各失敗・未採取値を保存し、既Caddy再stop/元recover再発行は禁止。新同artifact全FD/pool・拒否証拠/保存失敗の独立反例と無操作実proof・設計only main公開後にだけ、SSC292の正規owned pair handoff→自然gate継承→同partial inspect/必要五停止/typed revoke全37保全→別freshpost/全新scope正常へ進む。1800秒/全fresh/451/業務RD/UI/QA051/旧正式認定を不変更とする。
+
 ## SSC292 新current UNKNOWN管理pairの限定handoffと残五停止
 
 SSC291の元recover（Root167140/INVbbcdb699/run b1ba37cb/activation8314450e、source7bb/PG3976、boot79a）のCaddy一回停止後UNKNOWNを対象に、旧SSC288/289の別instanceとして扱う。元driver/予約/failed pair未取得の事実を保全し、Caddyの再stop又は元recoverの再実行をしない。原本DB/Backup/鍵・署名187とmanifest/materials・全32宣言・起動37entry・既native56を保持する。主因未確定のsnapshot不一致をfield除外/再試行で成功化しない。不一致の前後全snapshotはroot私有new-only fileへwrite/fsync/dirsyncし、rawを公開しない。
