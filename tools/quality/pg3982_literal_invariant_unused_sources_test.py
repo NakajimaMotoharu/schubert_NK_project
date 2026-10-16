@@ -8,6 +8,7 @@ import pg3984_literal_invariant_unused_compile as compiler
 import pg3986_literal_invariant_unused_dispatch as dispatch
 import pg3988_literal_invariant_unused_post as post
 from immutable_payload_binding import PROTECTED
+from bundle_hash_contract import assignments, require_bound
 
 
 def protected(raw):
@@ -30,6 +31,10 @@ class NewUnusedRoles(unittest.TestCase):
     def test_complete18_current_root_data_and_protected_oracles_unchanged(self):
         with patch.object(role, 'candidate_bom', return_value='a' * 64), patch.object(role, 'qualify'):
             values = role.sources(); self.assertEqual(18, len(values))
+            for name in ['pg3982_native_refs.py', 'pg3982_input_preflight.py']:
+                raw = values[name]; self.assertEqual([], assignments(raw)[1])
+                self.assertTrue(require_bound("BUNDLE_HASH='" + 'b' * 64 + "'\n" + raw, 'b' * 64))
+                with self.assertRaises(ValueError): require_bound("BUNDLE_HASH='" + 'b' * 64 + "'\nBUNDLE_HASH='" + 'a' * 64 + "'\n" + raw, 'b' * 64)
             self.assertEqual(role.current_tuple()[0], role.previous.previous.binding(values['pg3982_parent_receipt.py']))
             for suffix in ['parent_receipt', 'warning_parent_projection']:
                 old = role.pinned(role.LATEST, 'pg3876_' + suffix + '.py')

@@ -6,6 +6,7 @@ from pyflakes.api import check
 import pg3762_hygiene_unused_post as previous
 import pg3978_current_preservation_readonly as readonly
 import pg3982_literal_invariant_unused_sources as role
+from unit_metadata_reference_source import scope
 
 W = role.W
 
@@ -23,6 +24,9 @@ def payload():
     capture = role.pinned(W / role.TOOLS, 'pg3982_configuration_capture.py')
     candidate = json.loads((W / 'pg3976-candidate-build-v1.safe.json').read_bytes())
     result = 'CANDIDATE=' + repr(candidate) + '\nBEFORE=' + repr(role.BEFORE) + '\n' + raw + '\n' + capture + '\n' + extra_source()
+    start = result.index('units={}'); end = result.rindex('print(json.dumps(')
+    result = result[:start] + scope(result[start:end]) + result[end:]
+    result = result.replace("'configuration32EveryFieldUnchanged':True", "'configuration32EveryFieldUnchanged':True,'newTenReferencesReturnedNormally':len(refs)==10")
     if check(result, '<new candidate full independent preservation post>'): raise ValueError('complete new current/candidate independent namespace')
     compile(result, '<current full11/native46/new187 unused post>', 'exec')
     return result

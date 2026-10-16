@@ -6,6 +6,7 @@ from functools import lru_cache
 import pg3756_hygiene_unused_sources as previous
 import pg3876_current_resume_owned_sources as completed
 from immutable_payload_binding import bind_preserving_payloads
+from bundle_hash_contract import unbind
 from pg3976_literal_invariant_signed_candidate import SOURCE, OLD_SOURCE as CURRENT, OLD_BOM as CURRENT_BOM
 
 W = previous.W
@@ -94,7 +95,10 @@ def sources(bom=None, before=None):
     if raw.count(marker) != 1: raise ValueError('one protected latest receipt namespace boundary')
     raw = raw.replace(marker, "latest_alias(pinned(LATEST,'pg3876_'+suffix+'.py'))")
     exec(compile(raw, '<all eighteen new unused source roles>', 'exec'), namespace)
-    return namespace['sources']()
+    values = namespace['sources']()
+    for name in ['pg3982_native_refs.py', 'pg3982_input_preflight.py']:
+        values[name] = unbind(values[name])
+    return values
 
 
 if __name__ == '__main__': raise SystemExit('factory only; no VM operation')

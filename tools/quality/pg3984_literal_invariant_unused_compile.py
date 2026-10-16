@@ -1,8 +1,10 @@
 """All eighteen new emitted roles and fixed current originals; host-only ABI, no guest action."""
 import inspect
 import types
+import hashlib
 import pg3758_hygiene_unused_compile as previous
 import pg3982_literal_invariant_unused_sources as role
+from bundle_hash_contract import require_bound
 
 TARGET = role.W / role.TOOLS
 ARCHIVE = previous.previous.old.previous.graph.engine.P / role.ARCHIVE
@@ -19,6 +21,9 @@ def compiler():
 
 
 def validate_actual_graph(target, hashes):
+    expected = hashlib.sha256((target / 'bundle.safe.json').read_bytes()).hexdigest()
+    for name in ['pg3982_native_refs.py', 'pg3982_input_preflight.py']:
+        require_bound((target / name).read_text(), expected)
     graph = previous.previous.old.previous.graph
     raw = inspect.getsource(graph.validate_actual_graph).replace('pg2132', 'pg3982').replace('pg2126-manifest-v1.sig', 'pg3976-manifest-v1.sig')
     values = {**graph.__dict__, 'ARCHIVE': ARCHIVE}
