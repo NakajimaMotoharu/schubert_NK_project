@@ -32,6 +32,8 @@ class FiniteFailedData(unittest.TestCase):
     def test_all24_full_failed_parent_and_java_transition_fixtures_are_explicit(self):
         v=p.sources();self.assertEqual(24,len(v));java=v[p.CLASS+'.java'];self.assertIn('StartupPermitRecords.State.INVALID && epoch.permitDigest().isEmpty()',java)
         self.assertIn('!fresh.equals(old.epoch())',java);self.assertIn('failedParent143DataOnly=true',java)
+        self.assertNotIn('startsStopsReloadsEpochWrites0=true',java)
+        self.assertIn('startsStopsReloadsBusinessWrites0=true\\ncanonicalInvalidEpochWritten=true',java)
         transition=v['Pg4540TransitionTest.java'];self.assertIn('invalidExpected=null;Pg4540OrdinaryPublication.transitionOriginal(e(StartupPermitRecords.State.INVALID',transition)
         self.assertIn('reject(e(StartupPermitRecords.State.ISSUED,BOOT,FRESH,ACTIVATION),done)',transition);self.assertIn('checks!=14',transition)
         native=v['pg4540_native_refs.py'];self.assertIn('failed_completed(rows, done)',native);self.assertNotIn('qualify_warning_parent',native)

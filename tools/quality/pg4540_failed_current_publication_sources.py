@@ -8,7 +8,7 @@ import pg4522_failed_current_ro_sources as ro
 
 W,CURRENT,SOURCE,BOM,BEFORE,BOOT=(ro.W,ro.CURRENT,ro.SOURCE,ro.BOM,ro.BEFORE,ro.unused.BOOT)
 CURRENT_BOM=ro.unused.CURRENT_BOM
-TOOLS='pg4540-failed-current-publication-tools-v1';SAVE='pg4544-failed-current-publication-v1';CLASS='Pg4540OrdinaryPublication'
+TOOLS='pg4540-failed-current-publication-tools-v2';SAVE='pg4544-failed-current-publication-v2';CLASS='Pg4540OrdinaryPublication'
 BASE=historical.BASE
 
 
@@ -40,7 +40,9 @@ def build_sources():
     a=new.index('  static void verifyOriginalValues(');b=new.index('\n  static void verifyOriginal()',a)
     raw=old[:start]+new[a:b]+old[end:]
     raw=raw.replace('COMPLETED_ORIGINAL','FAILED_PARENT_DATA')
-    values[name]=once(raw,'genuineParentNormalWarningOriginal=true\\ncurrentManagerGc=true','genuineParentNormalWarningOriginal=false\\ncurrentManagerGc=false\\nfailedParent143DataOnly=true')
+    raw=once(raw,'genuineParentNormalWarningOriginal=true\\ncurrentManagerGc=true','genuineParentNormalWarningOriginal=false\\ncurrentManagerGc=false\\nfailedParent143DataOnly=true')
+    raw=once(raw,'startsStopsReloadsEpochWrites0=true\\noldUnknownNormalized=false','startsStopsReloadsBusinessWrites0=true\\ncanonicalInvalidEpochWritten=true\\noldUnknownNormalized=false')
+    values[name]=raw.replace('startsStopsReloadsEpochWrites0=true databaseUpdates0=true','startsStopsReloadsBusinessWrites0=true canonicalInvalidEpochWritten=true databaseUpdates0=true')
     name='Pg4540TransitionTest.java';raw=values[name]
     raw=once(raw,'invalidExpected=null;Pg4540OrdinaryPublication.transitionOriginal(e(StartupPermitRecords.State.ISSUED,BOOT,FRESH,ACTIVATION),done);checks++;','invalidExpected=null;Pg4540OrdinaryPublication.transitionOriginal(e(StartupPermitRecords.State.INVALID,BOOT,FRESH,ACTIVATION),done);checks++;')
     values[name]=once(raw,'  reject(e(StartupPermitRecords.State.INVALID,BOOT,FRESH,ACTIVATION),done);','  reject(e(StartupPermitRecords.State.ISSUED,BOOT,FRESH,ACTIVATION),done);')
