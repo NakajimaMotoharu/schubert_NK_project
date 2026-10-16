@@ -1,5 +1,11 @@
 # 障害検知・復旧runbook
 
+## SSC297 配置前inspect UNKNOWNからの限定回収
+
+SS343 SSC297の固定Java827198/子Python827230だけに適用する。元4462/20650を再送せず、4482の完全19/32/24・全101/4FD二読と4484/4486の固定私有像を根拠として、new-only同artifact proof/全新十Ref正常・独立反例・設計only main公開を先行する。旧hostgateの同inode/sole ownerをfresh認証しqueued自然継承を準備、新十Ref連続下の通常pidfd TERMを各最大一回だけ行う。元transport実値とguest終端/全旧lock消失は別証拠として保存し、UNKNOWN/旧Root143を正常化しない。
+
+全旧pair消失後の別fresh同7bb postで新M/A/RODB/十Ref正常、全24/原本Backup鍵/署名189/32/全19Unit/kernel/native58/startup37を確認し、外側十Ref正常返却まで新回収未受入。不明/close故障は隔離保持、元v4/142fileや既失敗証跡を変更しない。候補配置/公開/Root/Unit/Backup/Admin/reload/revoke/force操作0。回収後に別v5のset型caller・実sealed show oracleを資格確認してSSC296へ戻り、unused/RO/有限公開/別post/新Root1800/当source native/残正式品質へ継続する。
+
 ## SSC296 回収済み失敗親から新署名sourceへ進む手順
 
 SS343 SSC296に従う。4384回収0と4434fresh0・4440全raw/全像保存0・4442独立全値資格0は現7bbの失敗親データ基点であり、旧Root143/旧UNKNOWNは正常化しない。全19field/PID1/原本done・現INVALID/全37・native58・全24/原本Backup鍵/189/32をfresh再認証する。後日の同値で未採取4438時点の差を補完しない。rawを保持し、JSON key順だけと全field/type/cursor/event順の違いを区別する。

@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC297 配置前UNKNOWN管理pairの限定handoff
+
+SSC296の配置前inspectが失敗して保持した管理pairに限定する。current7bb/PG3976/BOM0a409301/boot79a・候補964e/PG4432/BOM93807abdは変更しない。当Java827198/t16494387/argv72e6609e（101FD）→子Python827230/t16494598/argv8c039420（4FD）だけを対象とし、root/caps/cgroup/session1025/exe/root/cwd/agent変数名不在・全FD target/9metadata/fdinfo/children/全argv hashを固定私有像と完全比較する。DB827228/専用batch ROのsocket両端・advisory71419602とM/Aも本人へ結合し、各操作前の全像二読と全19Unit/32設定/24表/原本Backup鍵/署名189/native58/startup37の不変を必要とする。全像は比較前にnew-only root私有0600へfsyncし、拒否時も省略しない。
+
+新十Refを旧十Refへ重複保持し、同artifact無操作proofの全新scope正常返却・独立反例・確定設計main公開後だけpidfd通常TERMをJava→Pythonへ各最大一回行う。各15秒terminal/30秒以内消失、Java後のPython PPid1だけを明示した世代遷移として認証する。自然終了済みなら再signalしない。元host677797/t16590755の同inode sole flockをqueued自然継承し、実transport終了値は実値のまま保存する。sudo/DBserver/Unit/Root/Backup/Admin/配備/reload/revoke/force/SIGKILL/DBterminate0。旧scope close UNKNOWNと旧Root143は不変更。
+
+全旧pair/本人peer/lockの消失後、外側新十Refとhostgateを保持し別freshの同current独立postで新M/A/RODB/71419602/heartbeat/十Ref・全原値と全Unit/kernel空を検証し正常返却する。最後に外側Refも正常返却してのみ新回収0とする。未知時は新scope/証跡/予約を隔離保持し再実行しない。元frozen142/v4のhotpatchは禁止し、後続set型caller修正は別new-only v5と実sealed show独立vectorで行う。RD/UI/既1800/451/QA051条件は変えない。
+
 ## SSC296 回収済みfailed-DONEをdata-only基点とする新source配備
 
 SSC291～294でRoot143の必要逆順回収・typed revoke・別fresh postが真正完了した現7bb/PG3976/BOM0a409301/boot79aを、新候補964e/PG4432/BOM93807abdへ接続する。旧7fff正常Root用のISSUED/正常GC/成功receiptを移植しない。現RootはINVbbcdb699/job167140/runb1ba37cb/activation8314450e、timeout143・done10/SHA654073a0は失敗親のdataであり、正常Root/停止権限ではない。旧scope UNKNOWNも保持する。
