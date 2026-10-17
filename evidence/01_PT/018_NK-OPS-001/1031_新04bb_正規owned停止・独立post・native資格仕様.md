@@ -1,5 +1,13 @@
 # 新04bb 正規owned停止・独立post・native資格仕様
 
+## 10:54JST 正規owned停止・独立全post実0
+
+Source04bb/BOM083/currentPG4860/同run4e22、operatorb4e67aa5c。4910v2元25543実12/全24/同四owner+socks0→4912元97647 exactRootBrowserCurrentChain0/payload68a980e0/beforecc6991bf→4914元7000 typed18実0。4918元95868四phase（compile/oracle/label/original）0/01:49:40.285942Z、4920stage元35373 actual0/01:49:51.398041～53.509635Z/logedfea011、stop元51287 actual0/01:50:02.238467～01:53:43.862907Z/log465550359f1a934f1ef5645856f5c87852eb539f76816066ebc02d8b8eada4cf。全入力/HEAD不変、normalUnit0or10/currentGC true・旧failed正常化0・start0。
+
+4922元22345 actual0/01:53:52.551352～01:54:01.412300Z/payloadac9e1191616224b5420450af6b9aabe5d5514be3806c60e4b6ca8ff6c396fa8e、all24UnchangedTwice/allTenUnitsKernelEmpty/allActorGone/allClientAdvisoryFlock0/whole187SignedArtifactBytesVerified/normalCurrentOwnedStopScopesSealed/currentNormalWarningParentProof/normalNewMetadataScopes/eightTerminalReceipts/nativeMetadataStableTwiceすべてtrue、ownedExplicitStops4/nativePhysicalFiles78、独立post自身のstart-stop-reload-SQLwrite0/rawExportedfalse。旧72は保全のみ、新Source native資格は未実行。全元成功再演0、VMはpoweredで保持する。
+
+続く4924/4926/4928はN15.06限定current join（着手前subset低.2/標準.6/高1.5pp、全N15予算追加0/N14やK01再請求0）。全1647Main/3761PT/551suiteの実4844/4846を再buildせず、当Sourceだけのstream/CRC/session/counterを算出して公開する。新Source native未資格・正式/個別加点0・工数nullを維持。
+
 ## PG4928 公開projection準備（実未発行）
 
 当4926実資格後だけ、原六XML/manifest/hash/counterに一致するものをコピーし、technical session IDだけhash-redact、全class/method/lineと六counter semanticは不変で公開する。全3761/551/1647・PMDraw1655/Checkstyle0は現在診断に対応しF03合格ではない。canonical17は**最後の個別資格Source7fff/PG3954**と元4856起点を分けて歴史表示し、current04bbへ再資格しない。受入leaf増加0/effortnull/formalfalse/QA051finalを維持。独立2工具0：Source/count/原物hash/歴史Source・counter変異拒否/全non-session semantics不変。new-only公開PG4926-current-native-measurement-v1、command=`... python3 -B tools/quality/pg4928_current_native_public.py`は4926 actual0後一回のみ、未発行。
