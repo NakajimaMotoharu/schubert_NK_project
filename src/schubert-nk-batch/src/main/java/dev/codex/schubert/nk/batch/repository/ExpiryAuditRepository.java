@@ -409,7 +409,7 @@ public final class ExpiryAuditRepository {
 
   /** SSC304: lexical ownership of admitted nonnull JDBC resources; exact Java TWR semantics. */
   static <T> Optional<Prior> usingJdbc(
-      @edu.umd.cs.findbugs.annotations.WillClose T resource, JdbcRelease<T> release, JdbcRead read)
+      @javax.annotation.WillClose T resource, JdbcRelease<T> release, JdbcRead read)
       throws SQLException, IOException {
     Objects.requireNonNull(resource, "owned JDBC resource");
     Objects.requireNonNull(release, "owned JDBC close");

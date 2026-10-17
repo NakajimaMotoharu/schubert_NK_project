@@ -2,12 +2,22 @@
 import inspect
 import re
 import unittest
+import zipfile
 from unittest.mock import patch
 from pyflakes.api import check,checkPath
 import pg4956_expiry_success_selected as role
 
 
 class ExpirySelection(unittest.TestCase):
+    def test_actual_annotation_jar_and_unambiguous_resultset_target(self):
+        jar=role.ROOT.parent/'toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar'
+        with zipfile.ZipFile(jar)as z:self.assertIn('javax/annotation/WillClose.class',z.namelist())
+        text=(role.ROOT/role.MAIN_PATH).read_text()
+        self.assertIn('@javax.annotation.WillClose T resource',text)
+        self.assertNotIn('@edu.umd.cs.findbugs.annotations.WillClose',text)
+        self.assertIn("'lambda$successful$2'",role.source())
+        self.assertIn("startswith('(Ljava/sql/ResultSet;')",role.source())
+
     def test_real_git_main_scope_and_foreign_or_absent_diff_rejection(self):
         role.validate_selection()
         for changed in ('',role.MAIN_PATH+'\nsrc/schubert-nk-batch/src/main/java/Foreign.java\n'):

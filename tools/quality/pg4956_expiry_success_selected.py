@@ -42,7 +42,7 @@ def verify_main_bytes(snapshot):
     if changed!={'batch:'+REPO+'.class'}or removed or added!={
         'batch:'+REPO+'$JdbcRelease.class','batch:'+REPO+'$JdbcRead.class'}:
         raise ValueError('exact one changed outer and two declared internal interfaces; no other Main drift')
-    return {'deployedSource':DEPLOYED,'candidateSource':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+    return {'deployedSource':DEPLOYED,'candidateSource':json.loads((snapshot.parent/'begin.safe.json').read_bytes())['sourceSnapshot'],
         'selectedPhysicalMain':len(actual),'unchangedPhysicalMain':len(expected)-len(changed),
         'changedPhysicalMain':sorted(changed),'addedPhysicalMain':sorted(added),'removedPhysicalMain':[],
         'deployedSourceUnchanged':True,'oldNativeImported':False}
