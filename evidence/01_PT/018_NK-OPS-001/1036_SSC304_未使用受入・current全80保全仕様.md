@@ -17,3 +17,7 @@ command=`PYTHONPATH=<既環境> python3 -B tools/quality/pg4988_ssc304_unused_co
 `pg4990_ssc304_unused_dispatch.py stage`→実0後`... place`。操作前にhost/QEMU/forwardをfresh認証し、単一management gate内で実source/現在所有/全beforeを再照合。旧成功がある同namespaceへ再発行しない。候補の未使用bundle配置だけを行い、active/current/source epoch/業務DB/起動・停止/reload0を保持する。genuineCompletionは実4916 tupleと4922正常終了の完全一致によるhistory alias、runtimeAlreadyRetired/0は旧4862/4868と同じactive/start.intent不在・runtime/originals不変・全資源0という実readerのschema aliasで、任意fileへの削除許可や未知状態の成功化ではない。
 
 配置後は新独立4992相当でcurrent全24/187/原本Backup・80nativeと候補187byte/署名・全新scope/tenRef返却を照合してからRO/有限公開へ進む。新Root/ADMIN/noargs/Source配備・通常業務起動は別前提、未使用配置やcompilerだけで成功化しない。全実command/source/operator/開始終了/終了code・input/期待値/actual・hash・関連障害は実回収後追記。全rawをprivate保持、公開は許可列だけ。現5%残/477override、<=3先行保全・<=1新規停止・追加券/課金0を維持。
+
+## 2026-10-17停止時の現行結果・停止条件訂正
+
+上記末尾の3/1%は当時の履歴。利用者訂正で失効し、**通常残10%以下で新規停止**へ復帰、今回残5%のため保全停止。受信前発行済commandのhostPG4988元8614 actual0、operator2c4f27f76ba4c69885839e63e5fcc7af562dafe7、04:05:05.104317～04:05:06.331720Z、guestMutations0/全18currentABI完了。bundle91bb7f22bc099877c148c64be3a92248b75d199dc6afd7e8fc7b8105a760663b、frozen e8af9f02068fb8948b9966fce3727852e79ecbe98dc19d19c1dad5b6b2316043。4990stage/placeは未発行、独立4992も未作成。これらを未完繰越し、コンパイル結果を再演しない。停止時のfresh所有/Source/全十Unit空・API/Web既failed保持/hostMaven0・保存場所/次commandは最新456とpg4994停止checkpointへ保存した。PGPT/ITST完了ではない。
