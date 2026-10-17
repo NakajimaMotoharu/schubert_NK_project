@@ -1,5 +1,9 @@
 # 保持Expiry監査比較・SSC302単体仕様
 
+## 公開selected証跡
+
+新4852は元4848の全input/manifest/10XML SHAと独立case inventoryを照合し、59実caseと明示TestIDの新22件（既37件参照）/三methodcounter・環境・実command/exit/時刻/原hashだけを公開する。XMLのproperties/system-out/error/raw DB/session/credentialは転記しない。raw propertiesのsynthetic marker非出力・失敗/skip/誤件数拒否のpure1工具0、実未発行。全体回帰/当Source native/個別leaf・正式受入とは別の限定証跡、重複件数加算0。
+
 ## 2026-10-17 09:01JST 新4848 actual59PT/10suite合格・三method全条件0
 
 4848元68863、sourceSnapshot **04bbdb73b532537e3546191d72dee913b17629a0**、23:57:51.646427～23:58:59.998382Z、actualMaven0/資格0・**59PT/10suite・全case完全一致/FES0**。元実PostgreSQL試験も完走、新14PT XML SHA **16ebd0868382d0a52be37405dfc2c7d519823e0f148e67cdacc72a450f2d42e6**、原SQL XML **d2cc639ff7623fe282fe862d52d42c9a06d38d0533edd422b394b620e5f05674**。Maven log **cb025f0f1fd18e097174aa390608fa1fcaa797b6888657b273d0ba530d0cc1ad**。環境三binary全hash/versionはbegin receipt、全10XML/command/時刻/exitはmanifestに保存。
