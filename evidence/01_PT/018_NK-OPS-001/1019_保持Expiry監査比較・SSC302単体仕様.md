@@ -1,5 +1,13 @@
 # 保持Expiry監査比較・SSC302単体仕様
 
+## 2026-10-17 09:01JST 新4848 actual59PT/10suite合格・三method全条件0
+
+4848元68863、sourceSnapshot **04bbdb73b532537e3546191d72dee913b17629a0**、23:57:51.646427～23:58:59.998382Z、actualMaven0/資格0・**59PT/10suite・全case完全一致/FES0**。元実PostgreSQL試験も完走、新14PT XML SHA **16ebd0868382d0a52be37405dfc2c7d519823e0f148e67cdacc72a450f2d42e6**、原SQL XML **d2cc639ff7623fe282fe862d52d42c9a06d38d0533edd422b394b620e5f05674**。Maven log **cb025f0f1fd18e097174aa390608fa1fcaa797b6888657b273d0ba530d0cc1ad**。環境三binary全hash/versionはbegin receipt、全10XML/command/時刻/exitはmanifestに保存。
+
+実method各miss0：API admittedConfiguration=9line/1method/2branch、batch verifyPriorAudit=15line/1method/**22branch**、batch verifyPriorExpiry=10line/1method/**4branch**。実fixture全DB不変/rollback/normal停止を含む。BUG1389/YKT1155当host工具限定閉鎖、原1Errorを成功化しない。新helperは宣言data boundaryであり認可/本番DB成功を示さず、旧825e nativeへ追加しない。
+
+全compiled Mainの前置測定は旧1646→候補1647、変更 **ApiProcessMain.class / CleanupExpiryExecution.classの2**、追加 **ApiProcessMain$ConfigurationLoad.classの宣言interface1**、その他1644 byte同一/削除0。宣言interfaceは実class byte inventoryに含め、実行命令なしの0/0を除外設定へ転用せず、構成/呼出し契約を新8PTで検証する。所定wholeで再度物理全SHA・Jar/22新caseを独立照合するまで全体へ繰上げない。
+
 ## 2026-10-17 08:59JST 4842はhost initdb不存在・新14PT自体0/combined未合格
 
 4842元64850/source0e93e7b76184275b4fe010582d99d504bce7f637、23:54:33.636074～23:55:41.419246Z、actualMaven1/資格1・59PT/10suite・既DB試験に1Error（新14件はFES0）。log **d5fc0e39d5ce6c3af0c65bd45ed099ccdc163e44e694a32f0ad50448fdfec196**。旧selectorのhost環境path `toolchain/postgresql18/usr`にinitdbが存在せず、Productionや判定本体の失敗ではない。batch coverage未生成のまま非0判定、合格加算0。

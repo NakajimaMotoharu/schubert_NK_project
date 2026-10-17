@@ -4,7 +4,7 @@ import inspect
 import json
 import pg4694_ssc299_full as previous
 
-SOURCE='0e93e7b76184275b4fe010582d99d504bce7f637'
+SOURCE='04bbdb73b532537e3546191d72dee913b17629a0'
 LABEL='PG4844'
 ROOT,W=previous.ROOT,previous.W
 
@@ -33,8 +33,9 @@ def server_source(head,digest):
 
 
 def main():
-    selected=json.loads((W/'pg4842-expiry-audit-selected-v1/manifest.safe.json').read_bytes())
-    if not(selected['actualExit']==selected['actualMavenExit']==0 and selected['sourceSnapshot']==SOURCE and selected['suites']==10):raise ValueError('actual combined ten-suite helpers/original DB first')
+    selected=json.loads((W/'pg4848-expiry-host-tools-selected-v1/manifest.safe.json').read_bytes())
+    if not(selected['actualExit']==selected['actualMavenExit']==0 and selected['sourceSnapshot']==SOURCE and selected['suites']==10 and selected['tests']==59):raise ValueError('actual combined59 ten-suite helpers/original DB first')
+    if set(selected['coverage'])!={'api.admittedConfiguration','batch.verifyPriorAudit','batch.verifyPriorExpiry'}or any(v.get(k,{'missed':0})['missed']!=0 for v in selected['coverage'].values()for k in ('LINE','METHOD','BRANCH')):raise ValueError('three actual methods all conditions first')
     raw=inspect.getsource(previous.previous.main)
     raw=raw.replace('pg4420','pg4844').replace('shared-manager','ssc301-302')
     raw=raw.replace("'tests': 3721, 'suites': 545, 'mainClasses': 1644","'tests': 3761, 'suites': 551, 'mainClasses': 1647")
