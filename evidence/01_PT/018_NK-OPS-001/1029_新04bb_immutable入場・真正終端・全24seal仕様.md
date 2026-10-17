@@ -1,5 +1,9 @@
 # 新04bb immutable入場・真正終端・全24seal仕様
 
+## 10:13JST immutable入場実0・元Root終端待ち
+
+4900元9186 actual0/01:08:29.084409Z/payloadd75525d88b57e800e42a24d0235c4b750d7d887afe0322b16cca7f72998d5946、当source04bb/BOM083/run4e220f3b/activation7bae6042/INV7fe303/Job229624/PID882496/start198237760299と発行record一致。privateBeforeSHA **4a9ba30a0e6457d7fc15b21d2feb4453837c67d4a78a1df134427894421f5eb0**、全24/native72/公開全11/原Unitfile同一、DB live読取0/変更0。4902/4904/4906はまだ未発行、元Rootの真正終端前に呼ばない。元watch28529/state-changeを継続観測、Root/observer/startの再発行0。
+
 Program NK-OPS-001/WBS-N14同群/SS341343355/451、現Source04bb/PG4860/BOM08300d49、host3761/551/1647。実Rootは1028のrun4e220f3b/activation7bae6042/cutoff01:03:09.221494Z・PID882496/t19823776/INV7fe303/Job229624、元observer28529。新Root/client0は未完であり通常報告で停止しない・Root/observerを再発行しない。qualified起動ファイルは不変更。
 
 4900は4894実livebind0の同source/同cohortを要求し、Root開始時に保持scope内で保存した**immutable before全11**をroot-only/strict metadata/hash/同run issued UnitINV/job/start・当signed187と公開後原UnitfileSHA4a9ba30aへ独立接続する。rows24/config/tenUnit/credentials・原本Backup/native72の各schemaをlossless project、旧nativeは保全データだけ。現在GCを過去成功の根拠にせず、Root再発行/DB読取・変更0。4900の実privateBeforeSHAは後記し、この値をrows/sealへ一貫して渡す。
