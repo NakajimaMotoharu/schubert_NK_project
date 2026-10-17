@@ -1,5 +1,13 @@
 # 694 PG4956/4958 Expiry既成功監査・JDBC所有scope実行結果
 
+## PG4972 修正後の限定再試験（2026-10-17）
+
+source **a2ecc77ca312c383246c94ea692c4db7487112cd**、元session83504 actualMaven0/資格0、03:18:54.220534～03:20:05.574394Z、log **d07b8979334de919f500b15b52bcf3a9fb64832a2df3c3e96e157630778e4e81**。全59PT7suite（新24/関連35）/FES-flaky-notrun0、format0→PT→fresh coverage/static、三module SpotBugs指摘0・NullAway/Werror成功。内部pure監査8line/1method/10branch、factory所有scope14line/1method（BRANCH非適用）、実rowbody lambda$successful$3 20line/1method/8branchは全miss0。実DB/borrowed Connection・read強検査、取得前構築Error/取得失敗/nullports/同resource/逆順・nested self/重複secondaryを再実証。
+
+全選択Main753＝旧749byte完全不変＋ExpiryAuditRepository外側1変更＋新Acquire/Read/Release三内部interface。record三byteは旧に完全一致、除外/抑制なし。旧4964の53PT成功/static2、旧compile/preflight/partial14を合算0。BUG1396～1401/YKT1162～1165は当family/工具範囲の限定再試験完了、PGPT全体や新source native/正式は別未完。
+
+許可列公開：`evidence/provisional/PG4972-expiry-success-selected-v1/manifest.json`、SHA **648f94d742c537d2b21625415d40b6db364f504aadc94fcfa78134d8518e2d22**（PG4966公開工具actual0）。全TestID/実case/XML/input/command/時刻/coverage/static/Main差・原manifest/loghashを含み、raw properties/log/SQL/秘密/session値は出力0。公開はselected限定、当sourceのwhole3791/553/1650は予定で未実行、旧04bb native80を輸入しない。
+
 仕様693/SSC304、BUG1396/YKT1162。PG4956元session97981 actual1はpreflightだけで終了。source c5e68f542、Main pathspecが子孫を含まず空列、strict差分検査で拒否。WORK/source/archive/Maven/PT未生成・未起動、当候補の新16PTはnot-run。format/static/coverage結果なし、全体合格へ加算0。終了は枠不足/PGPT完了ではない。
 
 修正は明示再帰glob/actualGit独立試験を追加し、元拒否は正常化せずnew-onlyPG4958へ。実Git正一件/空・余剰拒否/namespace検査を経てclean corrected commitを固定する。PG4958 actual終了code/XML/時刻/command/coverage/Mainbyte・static/結果hashは取得後追記。Production配備04bb/PG4860・旧全3761/551/native80は不変更で歴史資格、候補へ加算0。秘密/rawSQL/credentialを保存しない。

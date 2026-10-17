@@ -13,9 +13,9 @@ class WholeSource(unittest.TestCase):
         raw=role.server_source(role.SOURCE,'b'*64);ns={'__name__':'pure_inspection_no_io'}
         self.assertEqual(0,check(raw,'<complete SSC304 full namespace>'))
         exec(compile(raw,'<pure definitions only>','exec'),ns)
-        good=[0,True,[],3785,553,1649]
+        good=[0,True,[],3791,553,1650]
         self.assertTrue(ns['complete_result'](*good))
-        for index,values in {0:[1,143,True,None],1:[False,None],2:[['error'],None],3:[3761,3784,3786],4:[551,552,554],5:[1647,1648,1650]}.items():
+        for index,values in {0:[1,143,True,None],1:[False,None],2:[['error'],None],3:[3761,3790,3792],4:[551,552,554],5:[1647,1649,1651]}.items():
             for value in values:
                 args=good.copy();args[index]=value;self.assertFalse(ns['complete_result'](*args))
         self.assertLess(raw.index('    format_preflight(args,'),raw.index("with (OUT / 'maven.private.log')"))

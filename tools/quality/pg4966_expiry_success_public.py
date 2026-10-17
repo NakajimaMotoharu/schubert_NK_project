@@ -7,8 +7,9 @@ import pg4852_selected_public_evidence as template
 import pg4956_expiry_success_selected as selection
 
 ROOT=selection.ROOT
-RUN=ROOT.parent/'pgpt-runs/PG379/pg4964-expiry-success-selected-v1'
-PUBLIC=ROOT/'evidence/01_PT/017_NK-BAT-001/evidence/provisional/PG4964-expiry-success-selected-v1'
+RUN=ROOT.parent/'pgpt-runs/PG379/pg4972-expiry-success-selected-v1'
+PUBLIC=ROOT/'evidence/01_PT/017_NK-BAT-001/evidence/provisional/PG4972-expiry-success-selected-v1'
+SOURCE='a2ecc77ca312c383246c94ea692c4db7487112cd'
 sha=template.sha
 
 
@@ -24,17 +25,15 @@ def cases(raw,name):
 
 
 def main():
-    raise ValueError('DRAFT: actual factory-owned PG4972 qualification required before publication activation')
-    # Historical layout retained while the corrected original run is pending.
     result=json.loads((RUN/'manifest.safe.json').read_bytes());begin=json.loads((RUN/'begin.safe.json').read_bytes())
     if not(type(result['actualExit'])is int and result['actualExit']==result['actualMavenExit']==0
-           and result['productionSource']==result['sourceSnapshot']==result['testSourceSnapshot']==begin['sourceSnapshot']
-           and result['tests']==53 and result['suites']==7 and not result['reasons']):raise ValueError('actual original53/7/all quality gates first')
+           and result['productionSource']==result['sourceSnapshot']==result['testSourceSnapshot']==begin['sourceSnapshot']==SOURCE
+           and result['tests']==59 and result['suites']==7 and not result['reasons']):raise ValueError('actual original59/7/all quality gates first')
     for name,digest in begin['inputs'].items():
         if sha((RUN/'source'/name).read_bytes())!=digest:raise ValueError('original immutable input bytes')
     delta=selection.verify_main_bytes(RUN/'source')
-    if delta!=result['coverage']['mainDelta']or delta['selectedPhysicalMain']!=752 or delta['unchangedPhysicalMain']!=749:
-        raise ValueError('actual Main one modified two declarations/749 unchanged')
+    if delta!=result['coverage']['mainDelta']or delta['selectedPhysicalMain']!=753 or delta['unchangedPhysicalMain']!=749:
+        raise ValueError('actual Main one modified three declarations/749 unchanged')
     if result['coverage']['freshStaticModules']!={'batch':0,'storage':0,'bootstrap':0}or result['coverage']['formatExit']!=0:
         raise ValueError('actual format/static gates')
     records=[];proofs=[]
@@ -44,11 +43,11 @@ def main():
         rows=cases(raw,name)
         if sorted(r['method']for r in rows)!=begin['expectedMethods'][name]:raise ValueError('exact actual method identity')
         records+=rows;proofs.append({'class':name,'module':module,'tests':len(rows),'originalXmlSha256':digest})
-    expected={'PT-EXP-4956-'+str(i).zfill(3)for i in range(1,19)}
-    if len(records)!=53 or {r['testId']for r in records if r['newIndependentCase']}!=expected:raise ValueError('eighteen exact new and35 related cases')
+    expected={'PT-EXP-4956-'+str(i).zfill(3)for i in range(1,25)}
+    if len(records)!=59 or {r['testId']for r in records if r['newIndependentCase']}!=expected:raise ValueError('twenty-four exact new and35 related cases')
     value={'kind':'LIMITED_SELECTED_EVIDENCE_NOT_FORMAL_ACCEPTANCE','actualExit':0,'actualMavenExit':0,
-           'productionSource':result['productionSource'],'deployedSource':selection.DEPLOYED,'run':'PG4964',
-           'tests':53,'suites':7,'newIndependentCases':18,'relatedCases':35,'FESFlakyNotRun':0,
+           'productionSource':result['productionSource'],'deployedSource':selection.DEPLOYED,'run':'PG4972',
+           'tests':59,'suites':7,'newIndependentCases':24,'relatedCases':35,'FESFlakyNotRun':0,
            'cases':records,'suiteProofs':proofs,'actualMethodCounters':result['coverage'],'mainDelta':delta,
            'wholeProgramCoverage100':False,'formalAccepted':False,'acceptedLeafDelta':0,'effortPercent':None,
            'wholeRegression':False,'newSourceNativePending':True,'oldNativeImported':False,
@@ -57,13 +56,13 @@ def main():
            'originalMavenLogSha256':result['mavenLogSha256'],'command':result['command'],'startedUTC':result['startUTC'],'completedUTC':result['endUTC'],
            'configuredToolVersions':{'jdk':'25.0.4','maven':'3.9.12','jacoco':'0.8.15','spotbugs':'4.10.4.0','formatter':'1.36.1'},
            'hostOS':platform.platform(),'spec':'693_SSC304_Expiry既成功監査・JDBC所有scope単体テスト仕様.md',
-           'linkedBugs':['BUG-1396','BUG-1397','BUG-1398','BUG-1399','BUG-1400','YKT-1162','YKT-1163','YKT-1164'],
+           'linkedBugs':['BUG-1396','BUG-1397','BUG-1398','BUG-1399','BUG-1400','BUG-1401','YKT-1162','YKT-1163','YKT-1164','YKT-1165'],
            'oldFailedOrPartialImported':False,'rawPropertiesLogsDatabaseSessionExported':False,
            'vmActions':0,'mavenReissued':False,'recordedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat()}
     os.umask(0o077);PUBLIC.mkdir(parents=True)
     with(PUBLIC/'manifest.json').open('x')as f:json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     print(json.dumps({'actualExit':0,'publicManifest':str((PUBLIC/'manifest.json').relative_to(ROOT)),
-        'sha256':sha((PUBLIC/'manifest.json').read_bytes()),'tests':53,'newIndependentCases':18,'formalAccepted':False}));return 0
+        'sha256':sha((PUBLIC/'manifest.json').read_bytes()),'tests':59,'newIndependentCases':24,'formalAccepted':False}));return 0
 
 
 if __name__=='__main__':raise SystemExit(main())
