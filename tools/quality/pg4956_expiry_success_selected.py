@@ -13,7 +13,7 @@ MODULES={
  **{'dev.codex.schubert.nk.batch.repository.'+name:'batch'for name in (
      'ExpirySuccessfulScopeTest','ExpiryAuditRepositoryTest','MorningExpiryObservationInvariantTest','MorningExpirySessionTest')},
  'dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest':'batch'}
-METHODS={REPO:('verifySuccessfulAudit','usingJdbc','lambda$successful$1')}
+METHODS={REPO:('verifySuccessfulAudit','usingJdbc','lambda$successful$2')}
 MAIN_PATH='src/schubert-nk-batch/src/main/java/'+REPO+'.java'
 
 
@@ -58,6 +58,9 @@ def source():
     new="                needed={'LINE','METHOD'}|({'BRANCH'}if name!='usingJdbc'or 'BRANCH'in count else set())\n                if not needed<=set(count)or any(count[k]['missed']for k in needed):"
     if raw.count(old)!=1:raise ValueError('one actual method-counter applicability boundary')
     raw=raw.replace(old,new)
+    marker="                count={c.get('type'):{'missed':int(c.get('missed')),'covered':int(c.get('covered'))}for c in matches[0].findall('counter')}"
+    if raw.count(marker)!=1:raise ValueError('one actual lambda signature boundary')
+    raw=raw.replace(marker,marker+"\n                if name=='lambda$successful$2'and (not matches[0].get('desc','').startswith('(Ljava/sql/ResultSet;')or count.get('BRANCH',{}).get('covered')!=8):reasons.append('actual eight-condition ResultSet body required')")
     return raw
 
 

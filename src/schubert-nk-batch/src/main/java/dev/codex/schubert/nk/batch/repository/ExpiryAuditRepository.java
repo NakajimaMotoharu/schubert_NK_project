@@ -117,14 +117,16 @@ public final class ExpiryAuditRepository {
                       + " business_date=? and step='CLEAN_EXPIRY' and status='SUCCESS' order by"
                       + " attempt desc limit 2"));
       return usingJdbc(
-          statement::close,
+          statement,
+          PreparedStatement::close,
           () -> {
             statement.setQueryTimeout(owner.queryTimeoutSeconds());
             var day = run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
             statement.setObject(1, day);
             var rows = required(statement.executeQuery());
             return usingJdbc(
-                rows::close,
+                rows,
+                ResultSet::close,
                 () -> {
                   if (!rows.next()) {
                     owner.check();
@@ -396,8 +398,8 @@ public final class ExpiryAuditRepository {
   }
 
   @FunctionalInterface
-  interface JdbcRelease {
-    void close() throws SQLException;
+  interface JdbcRelease<T> {
+    void close(T resource) throws SQLException;
   }
 
   @FunctionalInterface
@@ -406,8 +408,10 @@ public final class ExpiryAuditRepository {
   }
 
   /** SSC304: lexical ownership of admitted nonnull JDBC resources; exact Java TWR semantics. */
-  static Optional<Prior> usingJdbc(JdbcRelease release, JdbcRead read)
+  static <T> Optional<Prior> usingJdbc(
+      @edu.umd.cs.findbugs.annotations.WillClose T resource, JdbcRelease<T> release, JdbcRead read)
       throws SQLException, IOException {
+    Objects.requireNonNull(resource, "owned JDBC resource");
     Objects.requireNonNull(release, "owned JDBC close");
     Objects.requireNonNull(read, "owned JDBC body");
     final Optional<Prior> value;
@@ -415,13 +419,13 @@ public final class ExpiryAuditRepository {
       value = read.read();
     } catch (Throwable primary) {
       try {
-        release.close();
+        release.close(resource);
       } catch (Throwable secondary) {
         primary.addSuppressed(secondary);
       }
       throw primary;
     }
-    release.close();
+    release.close(resource);
     return value;
   }
 }

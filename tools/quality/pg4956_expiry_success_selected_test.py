@@ -24,7 +24,7 @@ class ExpirySelection(unittest.TestCase):
             self.assertEqual(text.count('@Test'),len(methods));self.assertEqual(len(methods),len(set(methods)))
             count+=len(methods)
             if name.endswith('ExpirySuccessfulScopeTest'):
-                self.assertEqual(16,len(methods));self.assertTrue(all(m.startswith('exp4956')for m in methods))
+                self.assertEqual(18,len(methods));self.assertTrue(all(m.startswith('exp4956')for m in methods))
                 self.assertIn('try (JdbcClose owned = release::close)',text)
         self.assertGreater(count,30)
 

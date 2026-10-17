@@ -17,6 +17,8 @@ Program NK-BAT-001 / WBS-P017-11、ExpiryAuditRepository.successful/verifySucces
 |013|nested rows/statement＋body IO/close SQL・Error|body→rows→statement、元IOのsuppressed=[rowsSQL,statementError]|
 |014～015|null release/read|body/close未実行で拒否|
 |016|body/closeが同じSQLException object|Java TWR同様IllegalArgumentException/cause元同一・自己suppressed追加0|
+|017|release port null|body未実行で拒否（014はowned resource null）|
+|018|実admitted resourceをreleaseへ引渡す|同一objectだけを一度close、別資源に置換しない|
 
 Fixtureは公開合成時刻/例外だけ。既ExpiryAuditRepositoryTest・MorningExpirySession/ObservationInvariant・CleanupExpiryExecutionTestは専用PostgreSQL18.6/現DDL/borrowed Connection/実SQL・rollback/整合を独立確認する。storage/bootstrapの実suiteも選択しstrict NoTestsを保持。通常Mainにtest authority/CLI/ENV/permissionを追加しない。並行/再送は既同日元run参照・session/owner試験を併用し、pure helperがDB/OS成功を確証したとは扱わない。
 
@@ -25,3 +27,5 @@ command: `PYTHONPATH=tools/quality python3 -B tools/quality/pg4956_expiry_succes
 全選択Main byteを旧04bb全体の実PG4846と比較し、ExpiryAuditRepository外側1class変更＋同class宣言二interface追加だけを許容。他749Main不変を要求。旧native/3761を候補へ加算せず、Main変更群をまとめてfresh全回帰と新source正規配備/nativeを後続受入する。PG4952 test-only109は独立保存し算術3767等を作らない。Failed/flaky/skipped/not-runは合格へ算入しない。実結果/関連障害は694へ追記。
 
 counter適用性：usingJdbcは明示条件分岐のないcatch/rethrow scopeで、JaCoCoにBRANCH counterが存在しない場合は非適用（0実測と捏造しない）。LINE/METHODは必須0miss、BRANCHが存在すれば別途miss0を検査する。verifySuccessfulAudit/元successful内部lambdaは実BRANCH counterの存在と0missを必須とする。全プログラムの例外・条件網羅や四counter要求を免除しない。
+
+BUG1397/1398後の追加前提：owned resourceをgeneric scopeへ明示し、`WillClose`は実装どおりの所有契約（抑制annotationではない）。同一resourceを型付きreleaseへ渡してcloseする。実DB/zero-liveFDと例外matrixを再試験しfresh SpotBugs0を要求する。条件bodyはJava25実`lambda$successful$2`/ResultSet先頭signature/8BRANCH、外側$1は無条件設定bodyなので誤指定しない。修正後commandは`PYTHONPATH=tools/quality python3 -B tools/quality/pg4960_expiry_success_selected.py`、全53PT/7suite予定（旧35＋新18）。Main/Testsourceは新commit、旧4958は51PT成功部分だがstatic2/Maven1・資格1のまま保全。

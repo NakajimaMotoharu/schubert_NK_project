@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** NK-BAT-001/P017-11; SS331/341/343/SSC304; PT-EXP-4956-001..016. */
+/** NK-BAT-001/P017-11; SS331/341/343/SSC304; PT-EXP-4956-001..018. */
 final class ExpirySuccessfulScopeTest {
   private static final Instant OBSERVED = Instant.parse("2026-10-17T00:00:02Z");
 
@@ -82,7 +82,7 @@ final class ExpirySuccessfulScopeTest {
     var events = new ArrayList<String>();
     Optional<ExpiryAuditRepository.Prior> expected = Optional.empty();
     var actual =
-        ExpiryAuditRepository.usingJdbc(
+        using(
             () -> events.add("close"),
             () -> {
               events.add("body");
@@ -100,10 +100,7 @@ final class ExpirySuccessfulScopeTest {
       assertSame(
           primary,
           assertThrows(
-              Throwable.class,
-              () ->
-                  ExpiryAuditRepository.usingJdbc(
-                      closes::incrementAndGet, () -> failBody(primary))));
+              Throwable.class, () -> using(closes::incrementAndGet, () -> failBody(primary))));
       assertEquals(1, closes.get());
       assertEquals(0, primary.getSuppressed().length);
     }
@@ -119,7 +116,7 @@ final class ExpirySuccessfulScopeTest {
           assertThrows(
               Throwable.class,
               () ->
-                  ExpiryAuditRepository.usingJdbc(
+                  using(
                       () -> failClose(secondary),
                       () -> {
                         bodies.incrementAndGet();
@@ -138,10 +135,7 @@ final class ExpirySuccessfulScopeTest {
         assertSame(
             primary,
             assertThrows(
-                Throwable.class,
-                () ->
-                    ExpiryAuditRepository.usingJdbc(
-                        () -> failClose(secondary), () -> failBody(primary))));
+                Throwable.class, () -> using(() -> failClose(secondary), () -> failBody(primary))));
         assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
         Throwable referencePrimary = failure(body), referenceSecondary = failure(close);
         assertSame(
@@ -169,13 +163,13 @@ final class ExpirySuccessfulScopeTest {
         assertThrows(
             IOException.class,
             () ->
-                ExpiryAuditRepository.usingJdbc(
+                using(
                     () -> {
                       events.add("statement");
                       throw statementClose;
                     },
                     () ->
-                        ExpiryAuditRepository.usingJdbc(
+                        using(
                             () -> {
                               events.add("rows");
                               throw rowClose;
@@ -205,12 +199,12 @@ final class ExpirySuccessfulScopeTest {
   }
 
   @Test
-  void exp4956014NullReleaseRejectsBeforeBody() {
+  void exp4956014NullResourceRejectsBeforeBody() {
     var count = new AtomicInteger();
     assertThrows(
         NullPointerException.class,
         () ->
-            ExpiryAuditRepository.usingJdbc(
+            using(
                 null,
                 () -> {
                   count.incrementAndGet();
@@ -222,9 +216,7 @@ final class ExpirySuccessfulScopeTest {
   @Test
   void exp4956015NullBodyRejectsBeforeOwnershipAcceptance() {
     var closes = new AtomicInteger();
-    assertThrows(
-        NullPointerException.class,
-        () -> ExpiryAuditRepository.usingJdbc(closes::incrementAndGet, null));
+    assertThrows(NullPointerException.class, () -> using(closes::incrementAndGet, null));
     assertEquals(0, closes.get());
   }
 
@@ -235,7 +227,7 @@ final class ExpirySuccessfulScopeTest {
         assertThrows(
             IllegalArgumentException.class,
             () ->
-                ExpiryAuditRepository.usingJdbc(
+                using(
                     () -> {
                       throw same;
                     },
@@ -297,8 +289,7 @@ final class ExpirySuccessfulScopeTest {
 
   /** Independent compiler-generated reference, not the production helper. */
   private static Optional<ExpiryAuditRepository.Prior> javaTwr(
-      ExpiryAuditRepository.JdbcRelease release, ExpiryAuditRepository.JdbcRead body)
-      throws SQLException, IOException {
+      JdbcClose release, ExpiryAuditRepository.JdbcRead body) throws SQLException, IOException {
     try (JdbcClose owned = release::close) {
       assertNotNull(owned, "independent TWR reference owns a nonnull resource");
       return body.read();
@@ -308,5 +299,43 @@ final class ExpirySuccessfulScopeTest {
   private interface JdbcClose extends AutoCloseable {
     @Override
     void close() throws SQLException;
+  }
+
+  private static Optional<ExpiryAuditRepository.Prior> using(
+      @Nullable JdbcClose release, @Nullable ExpiryAuditRepository.JdbcRead body)
+      throws SQLException, IOException {
+    return ExpiryAuditRepository.usingJdbc(release, JdbcClose::close, body);
+  }
+
+  @Test
+  void exp4956017NullReleasePortRejectsBeforeBodyAndResourceOwnership() {
+    var bodies = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ExpiryAuditRepository.usingJdbc(
+                new Object(),
+                null,
+                () -> {
+                  bodies.incrementAndGet();
+                  return Optional.empty();
+                }));
+    assertEquals(0, bodies.get());
+  }
+
+  @Test
+  void exp4956018ReleaseReceivesExactlyTheAdmittedResource() throws Exception {
+    var resource = new Object();
+    var closes = new AtomicInteger();
+    assertEquals(
+        Optional.empty(),
+        ExpiryAuditRepository.usingJdbc(
+            resource,
+            actual -> {
+              assertSame(resource, actual);
+              closes.incrementAndGet();
+            },
+            Optional::empty));
+    assertEquals(1, closes.get());
   }
 }

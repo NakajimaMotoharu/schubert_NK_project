@@ -3,3 +3,5 @@
 仕様693/SSC304、BUG1396/YKT1162。PG4956元session97981 actual1はpreflightだけで終了。source c5e68f542、Main pathspecが子孫を含まず空列、strict差分検査で拒否。WORK/source/archive/Maven/PT未生成・未起動、当候補の新16PTはnot-run。format/static/coverage結果なし、全体合格へ加算0。終了は枠不足/PGPT完了ではない。
 
 修正は明示再帰glob/actualGit独立試験を追加し、元拒否は正常化せずnew-onlyPG4958へ。実Git正一件/空・余剰拒否/namespace検査を経てclean corrected commitを固定する。PG4958 actual終了code/XML/時刻/command/coverage/Mainbyte・static/結果hashは取得後追記。Production配備04bb/PG4860・旧全3761/551/native80は不変更で歴史資格、候補へ加算0。秘密/rawSQL/credentialを保存しない。
+
+PG4958実結果：元39781 actualMaven1/資格1、source9cf56bdff5cf44ef8d067721a37c8bd59a1d574b、03:02:46.788380～03:03:56.807314Z。51PT/7suite・FES/flaky/notrun0、format0、storage/bootstrap static0、batch OBL二件、log82092d47482040f37c3814771a032a59df3c799b7f4763fb43aa59ea2bca1735。新16PT成功、verifySuccessfulAudit8line/1method/10branch・usingJdbc12line/1methodは全miss0（後者BRANCH非適用）。元条件body$2は20line/1method/8branch全miss0だが工具が無条件$1へBRANCHを要求し拒否。BUG1397/1398/YKT1163先行後に明示ownership/type＋actualbodyへ是正、新PG4960へ。旧51成功部分をgate合格へ変換せずMain差資格も当runでは未実施。
