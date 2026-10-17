@@ -2,11 +2,18 @@
 import inspect
 import re
 import unittest
+from unittest.mock import patch
 from pyflakes.api import check,checkPath
 import pg4956_expiry_success_selected as role
 
 
 class ExpirySelection(unittest.TestCase):
+    def test_real_git_main_scope_and_foreign_or_absent_diff_rejection(self):
+        role.validate_selection()
+        for changed in ('',role.MAIN_PATH+'\nsrc/schubert-nk-batch/src/main/java/Foreign.java\n'):
+            with patch.object(role.subprocess,'check_output',return_value=changed):
+                with self.assertRaisesRegex(ValueError,'only SSC304 Main'):role.validate_selection()
+
     def test_actual_scope_and_new_literal_oracles(self):
         self.assertEqual({'storage','bootstrap','batch'},set(role.MODULES.values()))
         self.assertEqual(7,len(role.MODULES))

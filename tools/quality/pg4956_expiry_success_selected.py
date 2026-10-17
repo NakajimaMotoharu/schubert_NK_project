@@ -21,7 +21,7 @@ def validate_selection():
     if len(MODULES)!=7 or set(MODULES.values())!={'storage','bootstrap','batch'}:
         raise ValueError('exact actual required selection')
     changed=subprocess.check_output(['git','diff','--name-only',DEPLOYED,'HEAD','--',
-        'src/*/src/main'],cwd=ROOT,text=True).splitlines()
+        ':(glob)src/*/src/main/**'],cwd=ROOT,text=True).splitlines()
     if changed!=[MAIN_PATH]:raise ValueError('only SSC304 Main source may differ from deployed')
     for name,module in MODULES.items():
         path=ROOT/('src/schubert-nk-'+module+'/src/test/java/'+name.replace('.','/')+'.java')
