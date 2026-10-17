@@ -1,5 +1,9 @@
 # 新04bb 正規owned停止・独立post・native資格仕様
 
+## PG4928 公開projection準備（実未発行）
+
+当4926実資格後だけ、原六XML/manifest/hash/counterに一致するものをコピーし、technical session IDだけhash-redact、全class/method/lineと六counter semanticは不変で公開する。全3761/551/1647・PMDraw1655/Checkstyle0は現在診断に対応しF03合格ではない。canonical17は**最後の個別資格Source7fff/PG3954**と元4856起点を分けて歴史表示し、current04bbへ再資格しない。受入leaf増加0/effortnull/formalfalse/QA051finalを維持。独立2工具0：Source/count/原物hash/歴史Source・counter変異拒否/全non-session semantics不変。new-only公開PG4926-current-native-measurement-v1、command=`... python3 -B tools/quality/pg4928_current_native_public.py`は4926 actual0後一回のみ、未発行。
+
 NK-OPS-001/WBS-N14/N15.06（共通費は主担当のみ）、SS343/354/355/451。現04bb/PG4860/BOM083・Rootrun4e220f3b/activation7bae6042・元observer28529。新Root/Browser/正規owned停止が揃うまで新Source nativeを合格にしない。Root/配備/旧成功試験を再発行しない。
 
 ## PG4915 現在owner実確認（10:14JST）
