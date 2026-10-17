@@ -14,6 +14,16 @@ ApiProcessMain.startNativeがServiceStartupAdmission.executeへ渡す既CONFIGUR
 
 独立PTは正常同一Values/固定canonical golden、実invalid loader及び型別失敗、固定診断/cause非出力、IO/未知同一object、null・slot0/2・並行独立slotとcallback回数を検査する。内部境界試験はOS認可/起動/readiness/DB接続成功ではない。変更Mainは旧source nativeで補完せず、必要変更群のfresh全回帰・same-source native/451を別に資格する。RD/UI/既正常・異常終了値と承認済DIF、QA051 final保留は不変更。SSC300のcurrent825e正常20/12point実測は原sourceの限定成果として保全する。
 
+## SSC303 current04bbの既存ADMIN正常20・同source native資格
+
+SSC300以下の全resource/credential/起動/正常20/独立post契約を変更せず、現Source04bbdb73b532537e3546191d72dee913b17629a0/release0.1.0-PG4860/BOM08300d492e9eb5ba6e31eb646c21e51fc3eb4d30680e205c2adcd35c92d298b2/schema028/boot79a3260a-e16d-42bf-942a-b914ed144c28へnew-only再束縛する。元825e限定の記録・成功・失敗・保全物は改変せず、本追補の資格や起動権限へ移植しない。
+
+同source Rootrun4e220f3b-fbb4-411c-b5c4-7ca1371daa20/cutoff2026-10-17T01:03:09.221494Z/activation7bae6042-b79f-4fb2-9d9f-edf47b428cbe/INV7fe303d625de4a83b23d23fca4eca2bb/終端monotonic199849150395us、真正WARNING10/1611.390096秒と実Browser12、4920正規owned停止/4922独立全24二読・十kernel/actor/client/advisory/flock0・187署名を前提にする。4930fresh read実baseline28c6679e2bd13f84e33c21ea9dbcb2a5baa1e8efda7b2780471f80e74a6f6a63、884batch行/native78・既単一ADMIN/二credential不在・全24/32/187・全資源0は観測比較基点だけで権限ではない。操作前に現current/署名/Unit/NSS/原本Backup/全78/既scope終端を再認証する。
+
+existing ordinary-bootstrap196 roleを再prepareせず、所定のfresh M/A→DB/advisory/十Ref/FD・全input closure、非運用二input一回発行・durable予約・専用Unit一回start、元30秒・captured正常20/DB作成更新監査0・全24不変・同Invocation terminal/closing二point、正常close後の同inode-byte/NOFOLLOW/RENAME_NOREPLACE私有退役・両dirsyncと全独立postをSSC300どおり要求する。旧run/secret/permit再利用、通常Root/別Login/未知owner操作/再start/部分補作成は認めない。Production/CLI/ENV/通常業務・451/RD/UI/QA051は不変更、新QA不要。
+
+現04bb/4926の9stream10pointと当新Bootstrap pairだけを、全1647physicalMain SHA/CRC・個別session/point/INV/時間・closing優越で資格して同source host3761PT/551suiteへ結合する。旧825e/1646のnativeや合成coverageを輸入しない。設計main反映、当正常20/資源後条件/native、四counter100、正式PGPT/ITSTは別受入である。
+
 ## SSC300 current825eの既存ADMIN正常20・新一回native資格
 
 SSC188/189/225/231/234/263の専用Bootstrap契約を変更せず、current Source825e463334c43a5bc96f50db964df22e11758d1b/release0.1.0-PG4702/BOMf1f6743f8ebe099a8804623f5efef263fa046ca66c46004ade5d469f755fbd80/schema028/boot79a3260a-e16d-42bf-942a-b914ed144c28の未実施正常20経路へ限定再束縛する。根拠は同source Root fff841d9-2554-4680-b17d-9548bfa79cbb/cutoff2026-10-16T22:12:38.570783Z/activation7ab6c953-b2fc-47ae-be96-26a3196ca76d、真正WARNING10/1652.392895秒、実Browser12/正規ownedstop/4778独立全24二読・十kernel/actor/client/advisory/flock0・署名187・native70安定。元after10field私有SHA b4f07e80538b7eab36e1ba87523097891252e5f14f9f1d86ad8106c753c740c3は観測比較基点だけで起動権限ではない。初回guest readで全原値/Source-BOM-current/同signature/全24・32設定とUnit宣言・NSS/credentials/原本Backup・runtime/startup/旧70native/既tool-scope終端を再認証し、ADMINが現存することをDB内だけで確認する。実体行や秘密を輸出しない。
@@ -41,6 +51,7 @@ SSC297回収の旧Java/Python/本人DBとlock消失・元inspect143を維持す�
 
 新post開始の固定payload/親/予約を先行保存、新PIDを記録して元Popen.wait/真正exit/XMLで終端を結合する。起動直後の変動FDを終了回収前の必須記録にしない。既保持ownerの全FD/権限/世代検査は省略しない。取得/close不明時はmetadata・証跡・元jobを保持し再送0、Root1800/451/品質/外部仕様/QA051は不変更。
 
+
 ## SSC297 配置前UNKNOWN管理pairの限定handoff
 
 歴史差の唯一の限定例外：当JavaのFD31/90が保持する同一/run directoryのmtime/ctimeだけは、old<=current<=fresh観測UTC nsの範囲で単調増加を許す。target/inode/uid/gid/type/mode/nlink/sizeとfdinfo、他全FD/authorityは固定し、各操作境界内の全proc二読ではこの時刻も含め完全同値を必要とする。BUG1365保存像の四時刻差だけが根拠であり、未知FD/他directory/逆行/未来/境界不安定の一般許容ではない。
@@ -50,6 +61,7 @@ SSC296の配置前inspectが失敗して保持した管理pairに限定する。
 新十Refを旧十Refへ重複保持し、同artifact無操作proofの全新scope正常返却・独立反例・確定設計main公開後だけpidfd通常TERMをJava→Pythonへ各最大一回行う。各15秒terminal/30秒以内消失、Java後のPython PPid1だけを明示した世代遷移として認証する。自然終了済みなら再signalしない。元host677797/t16590755の同inode sole flockをqueued自然継承し、実transport終了値は実値のまま保存する。sudo/DBserver/Unit/Root/Backup/Admin/配備/reload/revoke/force/SIGKILL/DBterminate0。旧scope close UNKNOWNと旧Root143は不変更。
 
 全旧pair/本人peer/lockの消失後、外側新十Refとhostgateを保持し別freshの同current独立postで新M/A/RODB/71419602/heartbeat/十Ref・全原値と全Unit/kernel空を検証し正常返却する。最後に外側Refも正常返却してのみ新回収0とする。未知時は新scope/証跡/予約を隔離保持し再実行しない。元frozen142/v4のhotpatchは禁止し、後続set型caller修正は別new-only v5と実sealed show独立vectorで行う。RD/UI/既1800/451/QA051条件は変えない。
+
 
 ## SSC296 回収済みfailed-DONEをdata-only基点とする新source配備
 
@@ -62,6 +74,7 @@ SSC291～294でRoot143の必要逆順回収・typed revoke・別fresh postが真
 同artifactの実inspect0・全新資源正常返却・設計main公開後、別freshの`place`一回で未使用releaseと新署名fileだけをnew-only作成する。旧原本/37/native58/全非対象byteを保全し、独立postが全現在値・新候補187署名・全資源0を確認してからcandidate ROへ進む。RO→別post→既承認の有限code-only公開→別postも個別new-only予約・source/hash・同所有へ結合し、UNKNOWNや途中fileを再発行せず保全する。公開許可差以外のUnit/原本/DB変更を追加しない。失敗親証明はdataだけで、旧親の期限や操作許可を発行しない。
 
 新通常Rootは公開後の別fresh新run/cutoff/activation/epochによる一回であり、1800秒・各Unit期限・全境界鮮度/全graph・失敗逆順回収/資源後条件を維持する。旧source nativeの合算0、真正terminal/全24/seal/同owner Browser/ownedstop/新source native CRC-session/CHR/F03/四100/451は別受入。RD/UI/業務差分・QA051 final保留・正式1964/53を変更しない。
+
 
 ## SSC295 固定manager読取のbootstrap共通化
 
