@@ -41,7 +41,7 @@ def server(data):
     from pathlib import Path
     import xml.etree.ElementTree as E
     b=Path('/home/mini/schubert-nk-pgpt');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-    static_root=b/'runs/PG4850-ssc301-302-static-v1';s=json.loads((static_root/'manifest.safe.json').read_bytes())
+    static_root=b/'runs/PG4856-static-completion-v1';s=json.loads((static_root/'manifest.safe.json').read_bytes())
     require(sha(static_root/'manifest.safe.json')==data['staticSha256']and s['mainGitSource']==data['source']and s['sameCurrentSixJarAbi']is True and s['rulesSuppressed']is False,'actual exact current static report/source/unchanged rules')
     require(sha(static_root/'pmd.xml')==s['pmd']['reportSha256']and s['pmd']['processingErrors']==0,'actual full raw PMD rows, no errors')
     # The independently qualified manifest is saved in the transfer tool result,
@@ -105,7 +105,7 @@ def server(data):
 def main():
     sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
     qualified=json.loads((W/'pg4846-ssc301-302-whole-qualified-v1/manifest.safe.json').read_bytes())
-    static=json.loads((W/'pg4850-ssc301-302-static-v1/manifest.safe.json').read_bytes())
+    static=json.loads((W/'pg4856-static-completion-v1/manifest.safe.json').read_bytes())
     require(qualified['actualExit']==static['actualExit']==0 and qualified['source']==static['productionSource']==SOURCE,'same actual full and static first')
     require(not subprocess.check_output(['git','diff',SOURCE,'--','src','pom.xml','.mvn','mvnw'],cwd=ROOT),'unchanged fixed source')
     prior=json.loads((PUBLIC/'manifest.json').read_bytes())

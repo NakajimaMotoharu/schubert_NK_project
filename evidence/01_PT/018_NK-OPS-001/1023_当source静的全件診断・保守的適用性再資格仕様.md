@@ -1,5 +1,13 @@
 # 当source静的全件診断・保守的適用性再資格仕様
 
+## 2026-10-17 09:37JST 元4850工具失敗・missing-only4856準備
+
+元4850/68939終了1、payload86dbaf607fbee20cf410ae12466fccb8aee61d17030fecb5f521ad34cf520886。PMD実行/全入力安定検査後、legacy includeCheckstyle分岐が旧rename proofを要求してKeyError（BUG1391/YKT1157先行）。PMD XML/log/元begin/候補849/auxは既存、Checkstyle未実行/最終結果未保存。原PMD数値exitは別receiptがなくnullとし、XMLや工具1を数値exitの観測へ変換しない。
+
+新4856は原payloadSHA/例外到達点/全849byte/原六Jar＋第三者全aux/rule/tool/hash/全listing/元XMLを再照合し、**PMD再発行せず**元結果をhash同一copy保全、未実行の固定Checkstyleだけ一回発行、前後入力・actual exit/XMLを照合する。原4850 actual1維持、new4856のactual0は回収＋補完の成功だけ。pmd.actualExit=null/理由と元制御経路上のexit/入力検査到達を明記。各raw行・未知分類/F03未受入は維持。
+
+独立2工具0：実serverの849入力/固定aux/ruleとCheckstyleのみ一回、旧失敗1/PMD数値null/全warning保持、source変化時はtool前拒否。元関数呼出し・余剰literal/異source/誤flag拒否、完全emitted静的0。4854はactual4856の新manifest/保存XMLへ依存するよう是正、元4850への成功上書き0。実command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes3.4.0/runtime> python3 -B tools/quality/pg4856_static_completion.py`、元0後4854。一回new-only PG4856-static-completion-v1、VM/DB/Production変更0。原F03開始見積.5/1.5/4に含み追加加算0、失敗/欠測をeventへ追記する。
+
 WBS-F03、Source04bb/SS311/324/332/342/343/354/451、PT-F03-ABI4850/PT-F03-NARROW4854。PG4844全体回帰は元87748/固定sourceで実行中、actual4846資格前に診断/適用性を発行しない。原規則/全849Main/例外/record-overlay/Checkstyleを維持し、raw warningの抑制/入力除外/優先度cutoff/期待値弱化0、applicableViolationCountは全分類前null・F03未受入。
 
 ## 既成果の保全と新source前提
