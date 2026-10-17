@@ -27,7 +27,8 @@ class Candidate(unittest.TestCase):
         prior,candidate=role.qualified.candidate_main();gate=copy.deepcopy(prior)
         rows,same=role.qualified.physical_difference(prior['allPhysicalMainSha256'],candidate,candidate)
         gate.update(productionSource=role.SOURCE,tests=3791,suites=553,mainClasses=1650,
-            newCases=[list(v)for v in role.qualified.added_cases()],allPhysicalMainSha256=candidate,changedClasses=rows)
+            newCases=[list(v)for v in role.qualified.added_cases()],allPhysicalMainSha256=candidate,changedClasses=rows,
+            unchangedPhysicalClasses=1646)
         gate['modules']['batch']['tests']+=30;gate['modules']['batch']['suites']+=2;gate['modules']['batch']['mainClasses']+=3
         outer={'actualExit':0,'result':gate};role.validate_gate(outer,role.SOURCE)
         self.assertEqual(1646,same)
@@ -39,7 +40,8 @@ class Candidate(unittest.TestCase):
             with self.assertRaises(ValueError):role.verify_delta(role.grouped(prior['allPhysicalMainSha256']),role.grouped(bad))
         finally:role.GATE=previous
         for key,value in(('tests',3761),('suites',551),('mainClasses',1647),('FESFlakyNotRun',False),
-                        ('allSixFormatBeforeAnyPt',False),('productionSource',role.OLD_SOURCE),('formalAccepted',True)):
+                        ('allSixFormatBeforeAnyPt',False),('productionSource',role.OLD_SOURCE),('formalAccepted',True),
+                        ('unchangedPhysicalClasses',1644),('unchangedPhysicalClasses',True)):
             bad=copy.deepcopy(outer);bad['result'][key]=value
             with self.assertRaises(ValueError):role.validate_gate(bad,role.SOURCE)
         self.assertNotIn('payloadSha256',outer);self.assertNotIn('signature',json.dumps(outer))

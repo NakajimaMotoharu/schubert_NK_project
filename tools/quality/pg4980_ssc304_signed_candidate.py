@@ -29,6 +29,8 @@ def validate_gate(outer,source):
     require(gate['newCases']==[list(v)for v in qualified.added_cases()]and gate['testClassAliases']=={})
     require(set(gate['jarHashes'])==set(prior.MODULES)and all(re.fullmatch('[a-f0-9]{64}',h)for h in gate['jarHashes'].values()))
     actual=grouped(gate['allPhysicalMainSha256'])
+    require(set(gate['modules'])==set(prior.MODULES)and type(gate.get('unchangedPhysicalClasses'))is int
+        and gate['unchangedPhysicalClasses']==1646)
     require(sum(map(len,actual.values()))==1650 and sum(v['tests']for v in gate['modules'].values())==3791
         and sum(v['suites']for v in gate['modules'].values())==553
         and all(gate['modules'][m]['mainClasses']==len(actual[m])for m in prior.MODULES))
