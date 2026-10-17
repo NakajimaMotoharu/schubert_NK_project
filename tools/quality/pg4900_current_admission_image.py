@@ -17,6 +17,9 @@ PUBLICATION_PATH='pg4886-ssc301-302-publication-independent-post-v1/after.privat
 
 
 def bind(raw):
+    # Raw shared seal starts at the older4584 boundary, unlike the already-bound
+    # admission/terminal. Resolve that exact prior layer before the current one.
+    raw=previous.bind(raw)
     for a,b in [(previous.SOURCE,SOURCE),(previous.BOM,BOM),(previous.ONCE,ONCE),(previous.LIVE,LIVE),
                 (previous.PUBLICATION,PUBLICATION),(previous.PUBLICATION_PATH,PUBLICATION_PATH)]:raw=raw.replace(a,b)
     return raw

@@ -1,5 +1,13 @@
 # 新04bb immutable入場・真正終端・全24seal仕様
 
+## 10:34JST 真正終端/全24実0・whole v1拒否保全→v2
+
+元watch28529 actual0/01:30:01.902763Z・十Ref正常、4902元78444 actual0/01:30:10.782137Z/payload2bcdc9744db9ea55183e9486ea94c3b8c236e17254508d9b775d2cad6a078a52、真正PID1/RootDone/NormalWARNING10・elapsed **1611.390096秒**/1800内・active/RootPID消失、currentGCと旧成功推定を区別。4904元76369 actual0/01:31:29.971461Z/payloadddc1a876、全24独立後条件/2Backup/7skip/保護warning1/Inbox保護10・削除0/Outbox削除224/通知保護1・新匿名log/session/sentOutbox各222、一対一true。rawSQL97e8180444b7fb54b9735a3126c25cef55e020f89fc4e4f19e0c3605c8a7fc79/after80cfb972ee744240c63d62e4ff4ab7e45189cb27e0edb38f3d25edba510fcc1e、元成功を再実行0。
+
+4906元15513 **actual1**/01:31:56.744539Z/payload0557340a、旧pg4576 before／pg4552 publication参照がraw4586 sealに残りline436のhashで拒否、whole未受入。RAW_SAVE新empty v1は保持、DB/Unit/signal/start/stop/配備変更0、業務四owner保持。BUG1392/YKT1158修正前起票→admission.bindで元4752の旧→825e層を先行してから04bb層へ変換、全positive ONCE/LIVE/PUB path/hashと旧参照排除を追加検査。新slot **pg4906-current-whole-seal-v2**、既v1やRoot/全24を再発行しない。
+
+独立19工具0/static0（admission6/Browser4/owned5/native2/public2）、既actual4900/4902のemitted payloadは全byte同一・再検証消費不要、19は管理工具試験でProduction PT加算0。全11/72・原Root GUARD/SQL ORACLE/Browser chain・both output移設・direct4920 stop/post条件も維持。依存factoryはmodule.SLOT v2を直接参照、旧before/publicationはcurrent authorityに使わない。clean/push後 **pg4906_current_whole_seal.py（v2初回）**→実0後Browser以降を続行、v2未発行/actual完了後記。
+
 ## 10:13JST immutable入場実0・元Root終端待ち
 
 4900元9186 actual0/01:08:29.084409Z/payloadd75525d88b57e800e42a24d0235c4b750d7d887afe0322b16cca7f72998d5946、当source04bb/BOM083/run4e220f3b/activation7bae6042/INV7fe303/Job229624/PID882496/start198237760299と発行record一致。privateBeforeSHA **4a9ba30a0e6457d7fc15b21d2feb4453837c67d4a78a1df134427894421f5eb0**、全24/native72/公開全11/原Unitfile同一、DB live読取0/変更0。4902/4904/4906はまだ未発行、元Rootの真正終端前に呼ばない。元watch28529/state-changeを継続観測、Root/observer/startの再発行0。

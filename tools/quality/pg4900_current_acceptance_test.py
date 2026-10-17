@@ -1,5 +1,6 @@
 import ast
 import copy
+import hashlib
 import unittest
 from pyflakes.api import check,checkPath
 import pg4900_current_admission_image as admission
@@ -52,7 +53,16 @@ class Acceptance(unittest.TestCase):
         self.assertIn('all72 old native',raw);self.assertNotIn(admission.previous.SOURCE,raw)
         self.assertIn('genuineRootDone',constants['GUARD']);self.assertIn('1800',constants['GUARD'])
         self.assertIn(seal.SLOT,raw);self.assertNotIn('pg4760-new-current-whole-seal-v1',raw)
+        for text in ('pg4576-current-fresh-noargs-once-v1','pg4578-current-live-binding','pg4552-failed-current-publication-post-v1','f14b97d22963b2ad3eeea7dbcb5087fcb6885047d965256ffca444fbf1f306b5'):
+            self.assertNotIn(text,raw)
+        self.assertIn(admission.ONCE+'/before.private.json',raw)
+        self.assertIn(admission.PUBLICATION_PATH,raw);self.assertIn(admission.PUBLICATION,raw)
         for path in (admission.__file__,terminal.__file__,rows.__file__,seal.__file__,__file__):self.assertEqual(0,checkPath(path))
+
+    def test_prior_successful_admission_and_terminal_emissions_remain_byte_identical(self):
+        for slot,raw in ((admission.SLOT,admission.payload(admission.live())),(terminal.TERM,terminal.payload(admission.live()))):
+            actual=(admission.W/slot/'payload.private.py').read_bytes()
+            self.assertEqual(actual,raw.encode());self.assertEqual(hashlib.sha256(actual).hexdigest(),hashlib.sha256(raw.encode()).hexdigest())
 
 
 if __name__=='__main__':unittest.main()
