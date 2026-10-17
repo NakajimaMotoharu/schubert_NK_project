@@ -2,6 +2,8 @@
 
 ## 公開selected証跡
 
+4852 actual0、公開 `evidence/provisional/PG4848-ssc301302-selected-v1/manifest.json` SHA **d25eb3fa6926e0af3885d811968b5e39ae5fae22677e3a48f8253c9abe579d3d**。全59case/10suite・新22TestID/既37参照、元全input/10XML SHA照合0・明示3methodcounter/実command・環境/exit/時刻/原hashを保存。許可列以外（XML properties/system-out/raw log/DB/session/credential）は公開0、pure negative1工具0。原Maven再発行0/VM操作0/新受入加点0。全体の真正終端は1020の別未完として維持する。
+
 新4852は元4848の全input/manifest/10XML SHAと独立case inventoryを照合し、59実caseと明示TestIDの新22件（既37件参照）/三methodcounter・環境・実command/exit/時刻/原hashだけを公開する。XMLのproperties/system-out/error/raw DB/session/credentialは転記しない。raw propertiesのsynthetic marker非出力・失敗/skip/誤件数拒否のpure1工具0、実未発行。全体回帰/当Source native/個別leaf・正式受入とは別の限定証跡、重複件数加算0。
 
 ## 2026-10-17 09:01JST 新4848 actual59PT/10suite合格・三method全条件0
