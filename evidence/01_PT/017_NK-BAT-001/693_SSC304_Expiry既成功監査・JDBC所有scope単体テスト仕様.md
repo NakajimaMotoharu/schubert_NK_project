@@ -29,3 +29,13 @@ command: `PYTHONPATH=tools/quality python3 -B tools/quality/pg4956_expiry_succes
 counter適用性：usingJdbcは明示条件分岐のないcatch/rethrow scopeで、JaCoCoにBRANCH counterが存在しない場合は非適用（0実測と捏造しない）。LINE/METHODは必須0miss、BRANCHが存在すれば別途miss0を検査する。verifySuccessfulAudit/元successful内部lambdaは実BRANCH counterの存在と0missを必須とする。全プログラムの例外・条件網羅や四counter要求を免除しない。
 
 BUG1397/1398後の追加前提：owned resourceをgeneric scopeへ明示し、`WillClose`は実装どおりの所有契約（抑制annotationではない）。同一resourceを型付きreleaseへ渡してcloseする。実DB/zero-liveFDと例外matrixを再試験しfresh SpotBugs0を要求する。条件bodyはJava25実`lambda$successful$2`/ResultSet先頭signature/8BRANCH、外側$1は無条件設定bodyなので誤指定しない。修正後commandは`PYTHONPATH=tools/quality python3 -B tools/quality/pg4960_expiry_success_selected.py`、全53PT/7suite予定（旧35＋新18）。Main/Testsourceは新commit、旧4958は51PT成功部分だがstatic2/Maven1・資格1のまま保全。
+
+## SSC304取得scope追補後の現行仕様（旧試行は上記の履歴として保存）
+
+design-only main8a02a6eb20d1fafc5a63b60c888ea3bb732cfc68/PR151。限定read-onlyレビューは実bytecode/SpotBugs4.10.4 detectorを確認し、取得後のcallback構築中Errorが旧helperのtry外にある実gapを特定した。全acquire/release/read port構築とnull検査を先行し、helper内で取得→既required→直ちにtry/readへ入る。nested row port構築はouter Statementの所有scope内。WillCloseはもはや資源引数がないため除去、ルール抑制0。null取得戻りは元BatchRepositoryException（014期待をこの既契約へ一致）、port nullは取得前NPE契約拒否。SQL/read/owner/期限とJava TWRの未知identity/self-suppressionは不変更。
+
+現行新24件＋関連35件=**59PT/7suite**予定。019:null acquire port→body/close0。020:acquire SQL/Runtime/Error→同一throwable/body-close0。021:全port構築→acquire→body→closeのliteral順と両portへの同一resource。022:inner self-suppression→IAE(cause元P)にもouter失敗Sをsuppressedしrows→statement各一回。023:同一secondary Q二回を[Pのsuppressed Q,Q]として保持・dedup0。024:body-port構築のsentinel Errorでacquire/close0（JVM OOMを起こさず実言語評価順の反例）。既001～018/実DB全suiteを同一snapshotで再実行する。
+
+現行command=`PYTHONPATH=tools/quality python3 -B tools/quality/pg4972_expiry_success_selected.py`。Main宣言は内部Acquire/Release/Read三件、全六Main予定1650、当選択三module753。strict byte比較は旧750の749不変＋外側一class変更＋新三interfaceのみ、全941ソースartifactの差は当一fileのみ。BUG1401のformatter HANDLE再flowを旧一行へ戻し、CLI --skip-reflowing-long-stringsでSpotless規約自体を変えない。record三件をdebug差として受入/除外せず再生成byte一致を要求。
+
+測定対象の条件bodyはsynthetic ordinalを推測せず、実lambda名prefix＋末尾明示ResultSet引数/Optional戻りdescriptorで一意に選び、実8BRANCHと0missを必須にする。実compiled name/descも証跡へ記録。helperのcatch-only BRANCH非適用は維持、例外matrixは全24に含む。fresh三module static0・format0・59/7全成功後だけ限定公開する。whole/新source native/全program四counter100/正式は別未受入。

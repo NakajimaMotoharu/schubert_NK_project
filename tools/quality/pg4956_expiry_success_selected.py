@@ -13,7 +13,7 @@ MODULES={
  **{'dev.codex.schubert.nk.batch.repository.'+name:'batch'for name in (
      'ExpirySuccessfulScopeTest','ExpiryAuditRepositoryTest','MorningExpiryObservationInvariantTest','MorningExpirySessionTest')},
  'dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest':'batch'}
-METHODS={REPO:('verifySuccessfulAudit','usingJdbc','lambda$successful$2')}
+METHODS={REPO:('verifySuccessfulAudit','usingJdbc','RESULTSET_READ_BODY')}
 MAIN_PATH='src/schubert-nk-batch/src/main/java/'+REPO+'.java'
 
 
@@ -40,12 +40,18 @@ def verify_main_bytes(snapshot):
     changed={k for k in expected.keys()&actual.keys()if expected[k]!=actual[k]}
     added=set(actual)-set(expected);removed=set(expected)-set(actual)
     if changed!={'batch:'+REPO+'.class'}or removed or added!={
-        'batch:'+REPO+'$JdbcRelease.class','batch:'+REPO+'$JdbcRead.class'}:
-        raise ValueError('exact one changed outer and two declared internal interfaces; no other Main drift')
+        'batch:'+REPO+'$JdbcAcquire.class','batch:'+REPO+'$JdbcRelease.class','batch:'+REPO+'$JdbcRead.class'}:
+        raise ValueError('exact one changed outer and three declared internal interfaces; no other Main drift')
     return {'deployedSource':DEPLOYED,'candidateSource':json.loads((snapshot.parent/'begin.safe.json').read_bytes())['sourceSnapshot'],
         'selectedPhysicalMain':len(actual),'unchangedPhysicalMain':len(expected)-len(changed),
         'changedPhysicalMain':sorted(changed),'addedPhysicalMain':sorted(added),'removedPhysicalMain':[],
         'deployedSourceUnchanged':True,'oldNativeImported':False}
+
+
+def target_match(method,slot):
+    if slot=='RESULTSET_READ_BODY':
+        return method.get('name','').startswith('lambda$successful$')and method.get('desc','').endswith('Ljava/sql/ResultSet;)Ljava/util/Optional;')
+    return method.get('name')==slot
 
 
 def source():
@@ -58,9 +64,12 @@ def source():
     new="                needed={'LINE','METHOD'}|({'BRANCH'}if name!='usingJdbc'or 'BRANCH'in count else set())\n                if not needed<=set(count)or any(count[k]['missed']for k in needed):"
     if raw.count(old)!=1:raise ValueError('one actual method-counter applicability boundary')
     raw=raw.replace(old,new)
+    old="if m.get('name')==name]"
+    if raw.count(old)!=1:raise ValueError('one actual semantic method identity boundary')
+    raw=raw.replace(old,'if target_match(m,name)]')
     marker="                count={c.get('type'):{'missed':int(c.get('missed')),'covered':int(c.get('covered'))}for c in matches[0].findall('counter')}"
     if raw.count(marker)!=1:raise ValueError('one actual lambda signature boundary')
-    raw=raw.replace(marker,marker+"\n                if name=='lambda$successful$2'and (not matches[0].get('desc','').startswith('(Ljava/sql/ResultSet;')or count.get('BRANCH',{}).get('covered')!=8):reasons.append('actual eight-condition ResultSet body required')")
+    raw=raw.replace(marker,marker+"\n                if name=='RESULTSET_READ_BODY'and count.get('BRANCH',{}).get('covered')!=8:reasons.append('actual eight-condition ResultSet body required')\n                count['actualCompiledMethod']={'name':matches[0].get('name'),'descriptor':matches[0].get('desc')}")
     return raw
 
 
@@ -69,7 +78,7 @@ def main():
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('clean frozen SSC304 source first')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     ns={**vars(previous.base),'SOURCE':head,'WORK':WORK,'TESTS':list(MODULES),'MODULES':MODULES,
-        'MAIN_SOURCE':head,'METHODS':METHODS,'verify_main_bytes':verify_main_bytes}
+        'MAIN_SOURCE':head,'METHODS':METHODS,'verify_main_bytes':verify_main_bytes,'target_match':target_match}
     exec(compile(source(),'<SSC304 independent late audit and exact lexical JDBC>','exec'),ns)
     return ns['main']()
 

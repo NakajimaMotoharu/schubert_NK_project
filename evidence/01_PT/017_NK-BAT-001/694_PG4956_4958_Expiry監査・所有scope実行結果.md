@@ -9,3 +9,7 @@ PG4958実結果：元39781 actualMaven1/資格1、source9cf56bdff5cf44ef8d067721
 PG4960元91540はactualMaven1/資格1、sourcefece2e8a49bb55cee22a3c5127de1c164696d1b0、03:06:30.035993～03:07:07.933893Z。誤WillClose packageでcompile拒否、14PT2suiteのみ、新18not-run・batchcoverage/static未実行、format0/log9a466a24。BUG1399先行後actual JARのjavax.annotation.WillCloseへ一箇所是正し新PG4962へ。旧失敗は原snapshot/log/XMLと保全、合格へ加算0。依存追加/ルール抑制0。仕様693の最終commandはpg4962_expiry_success_selected.py（53PT7suite予定）。
 
 PG4962元10176/source8ffe6876e、actualMaven1/資格1、03:08:25.696804～03:09:14.257434Z。Main compile成功、test helperのnested nullable位置でtestCompile拒否（BUG1400/YKT1164）、14PT2suite/新18not-run・batchcoverage/staticなし、format0/log66464809。javac実診断からtest型表記一箇所だけ是正しnew-onlyPG4964へ。Main bytes/期待値/検査要求を変更しない。最終command=`PYTHONPATH=tools/quality python3 -B tools/quality/pg4964_expiry_success_selected.py`、実結果追記待ち。
+
+PG4964元61751/sourcea8a09d7f88268131107c3b75705ba528efeb3041、actualMaven1/資格1、03:10:37.645376～03:11:51.354427Z、53PT/7suite/FES0・format0、batch static二件はOBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE、log87583063ea26edb950b680f7e41757d49a732d108a0ce753ab3bff3173cfffe5。実helper13line/1method、pure8line/1method/10branch、rowbody20line/1method/8branchは全miss0。qualityは不合格、raw元全保存。読み取りbyte診断も厳密guardで拒否：外側＋record三class変更/新二宣言、後三件はformatter起因の非debug disassembly全同一（BUG1401）。event1122の749不変という誤記は訂正1123を追記し、成功へ読み替えない。
+
+477の限定ultraレビュー一名/read-only（追加spawn/VM操作0）でcallback構築gapを確認、SSC304追補をmainPR151へ反映。factory所有/新24PTへ是正後newPG4972へ。既成功51/53やpartial14を新sourceへ合算0、旧04bb/native80不変更、当候補のwhole/native/正式は未完。

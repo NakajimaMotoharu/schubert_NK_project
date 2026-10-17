@@ -3,20 +3,25 @@ import inspect
 import re
 import unittest
 import zipfile
+import xml.etree.ElementTree as ET
 from unittest.mock import patch
 from pyflakes.api import check,checkPath
 import pg4956_expiry_success_selected as role
 
 
 class ExpirySelection(unittest.TestCase):
-    def test_actual_annotation_jar_and_unambiguous_resultset_target(self):
+    def test_actual_scope_does_not_use_ownership_suppression_and_semantic_target(self):
         jar=role.ROOT.parent/'toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar'
         with zipfile.ZipFile(jar)as z:self.assertIn('javax/annotation/WillClose.class',z.namelist())
         text=(role.ROOT/role.MAIN_PATH).read_text()
-        self.assertIn('@javax.annotation.WillClose T resource',text)
+        self.assertIn('T resource = required(acquire.open());',text)
+        self.assertNotIn('@javax.annotation.WillClose',text)
         self.assertNotIn('@edu.umd.cs.findbugs.annotations.WillClose',text)
-        self.assertIn("'lambda$successful$2'",role.source())
-        self.assertIn("startswith('(Ljava/sql/ResultSet;')",role.source())
+        self.assertIn("'RESULTSET_READ_BODY'",role.source())
+        good=ET.Element('method',name='lambda$successful$3',desc='(Ljava/time/Instant;Ljava/sql/ResultSet;)Ljava/util/Optional;')
+        self.assertTrue(role.target_match(good,'RESULTSET_READ_BODY'))
+        for desc in ('(Ljava/sql/PreparedStatement;)Ljava/util/Optional;','(Ljava/sql/ResultSet;)V'):
+            self.assertFalse(role.target_match(ET.Element('method',name='lambda$successful$3',desc=desc),'RESULTSET_READ_BODY'))
 
     def test_real_git_main_scope_and_foreign_or_absent_diff_rejection(self):
         role.validate_selection()
@@ -34,13 +39,14 @@ class ExpirySelection(unittest.TestCase):
             self.assertEqual(text.count('@Test'),len(methods));self.assertEqual(len(methods),len(set(methods)))
             count+=len(methods)
             if name.endswith('ExpirySuccessfulScopeTest'):
-                self.assertEqual(18,len(methods));self.assertTrue(all(m.startswith('exp4956')for m in methods))
+                self.assertEqual(24,len(methods));self.assertTrue(all(m.startswith('exp4956')for m in methods))
                 self.assertIn('try (JdbcClose owned = release::close)',text)
         self.assertGreater(count,30)
 
     def test_strict_complete_namespace_and_results(self):
         raw=role.source();header=inspect.getsource(role.previous.base).split('\ndef main():',1)[0]
         header+='\nMODULES={}\nMAIN_SOURCE="candidate"\nMETHODS={}\ndef verify_main_bytes(snapshot):raise ValueError("not a receipt")\n'
+        header+=inspect.getsource(role.target_match)
         self.assertEqual(0,check(header+'\n'+raw,'<complete SSC304 selection namespace>'))
         self.assertLess(raw.index('format_command='),raw.index('child = subprocess.Popen'))
         for literal in ('actual != expected','flakyFailure','ptNotRun','freshStaticModules',

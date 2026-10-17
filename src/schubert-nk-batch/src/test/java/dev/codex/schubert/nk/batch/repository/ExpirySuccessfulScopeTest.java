@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** NK-BAT-001/P017-11; SS331/341/343/SSC304; PT-EXP-4956-001..018. */
+/** NK-BAT-001/P017-11; SS331/341/343/SSC304; PT-EXP-4956-001..024. */
 final class ExpirySuccessfulScopeTest {
   private static final Instant OBSERVED = Instant.parse("2026-10-17T00:00:02Z");
 
@@ -199,10 +199,10 @@ final class ExpirySuccessfulScopeTest {
   }
 
   @Test
-  void exp4956014NullResourceRejectsBeforeBody() {
+  void exp4956014NullAcquisitionResultKeepsOriginalAdmissionFailure() {
     var count = new AtomicInteger();
     assertThrows(
-        NullPointerException.class,
+        BatchRepositoryException.class,
         () ->
             using(
                 null,
@@ -288,8 +288,8 @@ final class ExpirySuccessfulScopeTest {
   }
 
   /** Independent compiler-generated reference, not the production helper. */
-  private static Optional<ExpiryAuditRepository.Prior> javaTwr(
-      JdbcClose release, ExpiryAuditRepository.JdbcRead body) throws SQLException, IOException {
+  private static Optional<ExpiryAuditRepository.Prior> javaTwr(JdbcClose release, Read body)
+      throws SQLException, IOException {
     try (JdbcClose owned = release::close) {
       assertNotNull(owned, "independent TWR reference owns a nonnull resource");
       return body.read();
@@ -302,25 +302,35 @@ final class ExpirySuccessfulScopeTest {
   }
 
   private static Optional<ExpiryAuditRepository.Prior> using(
-      @Nullable JdbcClose release, ExpiryAuditRepository.@Nullable JdbcRead body)
-      throws SQLException, IOException {
-    return ExpiryAuditRepository.usingJdbc(release, JdbcClose::close, body);
+      @Nullable JdbcClose release, @Nullable Read body) throws SQLException, IOException {
+    ExpiryAuditRepository.@Nullable JdbcRead<JdbcClose> read =
+        body == null ? null : resource -> body.read();
+    return ExpiryAuditRepository.usingJdbc(() -> release, JdbcClose::close, read);
+  }
+
+  private interface Read {
+    Optional<ExpiryAuditRepository.Prior> read() throws SQLException, IOException;
   }
 
   @Test
   void exp4956017NullReleasePortRejectsBeforeBodyAndResourceOwnership() {
     var bodies = new AtomicInteger();
+    var opens = new AtomicInteger();
     assertThrows(
         NullPointerException.class,
         () ->
             ExpiryAuditRepository.usingJdbc(
-                new Object(),
-                null,
                 () -> {
+                  opens.incrementAndGet();
+                  return new Object();
+                },
+                null,
+                resource -> {
                   bodies.incrementAndGet();
                   return Optional.empty();
                 }));
     assertEquals(0, bodies.get());
+    assertEquals(0, opens.get());
   }
 
   @Test
@@ -330,12 +340,186 @@ final class ExpirySuccessfulScopeTest {
     assertEquals(
         Optional.empty(),
         ExpiryAuditRepository.usingJdbc(
-            resource,
+            () -> resource,
             actual -> {
               assertSame(resource, actual);
               closes.incrementAndGet();
             },
-            Optional::empty));
+            actual -> {
+              assertSame(resource, actual);
+              return Optional.empty();
+            }));
     assertEquals(1, closes.get());
+  }
+
+  @Test
+  void exp4956019NullAcquirePortFailsBeforeBodyOrClose() {
+    var calls = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ExpiryAuditRepository.usingJdbc(
+                null,
+                resource -> calls.incrementAndGet(),
+                resource -> {
+                  calls.incrementAndGet();
+                  return Optional.empty();
+                }));
+    assertEquals(0, calls.get());
+  }
+
+  @Test
+  void exp4956020AcquireSqlRuntimeAndErrorCannotRunBodyOrClose() {
+    for (int kind : new int[] {0, 2, 3}) {
+      Throwable primary = failure(kind);
+      var events = new ArrayList<String>();
+      assertSame(
+          primary,
+          assertThrows(
+              Throwable.class,
+              () ->
+                  ExpiryAuditRepository.usingJdbc(
+                      () -> {
+                        events.add("acquire");
+                        failClose(primary);
+                        return new Object();
+                      },
+                      resource -> events.add("close"),
+                      resource -> {
+                        events.add("body");
+                        return Optional.empty();
+                      })));
+      assertEquals(List.of("acquire"), events);
+      assertEquals(0, primary.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void exp4956021AllPortsConstructedBeforeAcquisitionThenExactOrder() throws Exception {
+    var events = new ArrayList<String>();
+    var resource = new Object();
+    events.add("make-acquire");
+    ExpiryAuditRepository.JdbcAcquire<Object> acquire =
+        () -> {
+          events.add("acquire");
+          return resource;
+        };
+    events.add("make-close");
+    ExpiryAuditRepository.JdbcRelease<Object> release =
+        actual -> {
+          assertSame(resource, actual);
+          events.add("close");
+        };
+    events.add("make-read");
+    ExpiryAuditRepository.JdbcRead<Object> read =
+        actual -> {
+          assertSame(resource, actual);
+          events.add("body");
+          return Optional.empty();
+        };
+    assertEquals(Optional.empty(), ExpiryAuditRepository.usingJdbc(acquire, release, read));
+    assertEquals(
+        List.of("make-acquire", "make-close", "make-read", "acquire", "body", "close"), events);
+  }
+
+  @Test
+  void exp4956022InnerSelfSuppressionStillClosesOuterAndSuppressesItsFailure() {
+    var primary = new SQLException("PUBLIC_INNER_SAME");
+    var outer = new AssertionError("PUBLIC_OUTER");
+    var events = new ArrayList<String>();
+    var result =
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                using(
+                    () -> {
+                      events.add("statement");
+                      throw outer;
+                    },
+                    () ->
+                        using(
+                            () -> {
+                              events.add("rows");
+                              throw primary;
+                            },
+                            () -> {
+                              throw primary;
+                            })));
+    assertSame(primary, result.getCause());
+    assertArrayEquals(new Throwable[] {outer}, result.getSuppressed());
+    assertEquals(List.of("rows", "statement"), events);
+    var referencePrimary = new SQLException("PUBLIC_REFERENCE");
+    var referenceOuter = new AssertionError("PUBLIC_REFERENCE_OUTER");
+    var reference =
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                javaTwr(
+                    () -> {
+                      throw referenceOuter;
+                    },
+                    () ->
+                        javaTwr(
+                            () -> {
+                              throw referencePrimary;
+                            },
+                            () -> {
+                              throw referencePrimary;
+                            })));
+    assertSame(referencePrimary, reference.getCause());
+    assertArrayEquals(new Throwable[] {referenceOuter}, reference.getSuppressed());
+  }
+
+  @Test
+  void exp4956023DuplicateSecondaryIdentityIsNotDeduplicated() {
+    var primary = new IOException("PUBLIC_BODY");
+    var secondary = new SQLException("PUBLIC_REPEATED");
+    var closes = new AtomicInteger();
+    assertSame(
+        primary,
+        assertThrows(
+            IOException.class,
+            () ->
+                using(
+                    () -> {
+                      closes.incrementAndGet();
+                      throw secondary;
+                    },
+                    () ->
+                        using(
+                            () -> {
+                              closes.incrementAndGet();
+                              throw secondary;
+                            },
+                            () -> {
+                              throw primary;
+                            }))));
+    assertEquals(2, closes.get());
+    assertArrayEquals(new Throwable[] {secondary, secondary}, primary.getSuppressed());
+  }
+
+  @Test
+  void exp4956024CallbackConstructionErrorHappensBeforeAnyAcquisition() {
+    var primary = new AssertionError("PUBLIC_LINKAGE_CONSTRUCTION");
+    var opens = new AtomicInteger();
+    var closes = new AtomicInteger();
+    assertSame(
+        primary,
+        assertThrows(
+            AssertionError.class,
+            () ->
+                ExpiryAuditRepository.usingJdbc(
+                    () -> {
+                      opens.incrementAndGet();
+                      return new Object();
+                    },
+                    resource -> closes.incrementAndGet(),
+                    unavailableRead(primary))));
+    assertEquals(0, opens.get());
+    assertEquals(0, closes.get());
+  }
+
+  private static ExpiryAuditRepository.JdbcRead<Object> unavailableRead(AssertionError primary) {
+    throw primary;
   }
 }

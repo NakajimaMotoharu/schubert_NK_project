@@ -26,8 +26,7 @@ public final class ExpiryAuditRepository {
   private static final java.lang.String LITERAL_SUCCESS = "SUCCESS";
 
   private static final String HANDLE =
-      "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and"
-          + " started_at=?";
+      "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and started_at=?";
 
   public record Stage(Instant cutoff, long before, long target, long estimatedBytes) {
     public Stage {
@@ -110,24 +109,21 @@ public final class ExpiryAuditRepository {
     owner.check();
     guarded(run);
     try {
-      var statement =
-          required(
+      return usingJdbc(
+          () ->
               connection.prepareStatement(
                   "select id,run_id,attempt,started_at from schubert.batch_runs where"
                       + " business_date=? and step='CLEAN_EXPIRY' and status='SUCCESS' order by"
-                      + " attempt desc limit 2"));
-      return usingJdbc(
-          statement,
+                      + " attempt desc limit 2"),
           PreparedStatement::close,
-          () -> {
+          statement -> {
             statement.setQueryTimeout(owner.queryTimeoutSeconds());
             var day = run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
             statement.setObject(1, day);
-            var rows = required(statement.executeQuery());
             return usingJdbc(
-                rows,
+                statement::executeQuery,
                 ResultSet::close,
-                () -> {
+                rows -> {
                   if (!rows.next()) {
                     owner.check();
                     return Optional.empty();
@@ -398,25 +394,31 @@ public final class ExpiryAuditRepository {
   }
 
   @FunctionalInterface
+  interface JdbcAcquire<T> {
+    @Nullable T open() throws SQLException;
+  }
+
+  @FunctionalInterface
   interface JdbcRelease<T> {
     void close(T resource) throws SQLException;
   }
 
   @FunctionalInterface
-  interface JdbcRead {
-    Optional<Prior> read() throws SQLException, IOException;
+  interface JdbcRead<T> {
+    Optional<Prior> read(T resource) throws SQLException, IOException;
   }
 
   /** SSC304: lexical ownership of admitted nonnull JDBC resources; exact Java TWR semantics. */
   static <T> Optional<Prior> usingJdbc(
-      @javax.annotation.WillClose T resource, JdbcRelease<T> release, JdbcRead read)
+      JdbcAcquire<T> acquire, JdbcRelease<T> release, JdbcRead<T> read)
       throws SQLException, IOException {
-    Objects.requireNonNull(resource, "owned JDBC resource");
+    Objects.requireNonNull(acquire, "owned JDBC acquisition");
     Objects.requireNonNull(release, "owned JDBC close");
     Objects.requireNonNull(read, "owned JDBC body");
+    T resource = required(acquire.open());
     final Optional<Prior> value;
     try {
-      value = read.read();
+      value = read.read(resource);
     } catch (Throwable primary) {
       try {
         release.close(resource);
