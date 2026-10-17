@@ -302,7 +302,7 @@ final class ExpirySuccessfulScopeTest {
   }
 
   private static Optional<ExpiryAuditRepository.Prior> using(
-      @Nullable JdbcClose release, @Nullable ExpiryAuditRepository.JdbcRead body)
+      @Nullable JdbcClose release, ExpiryAuditRepository.@Nullable JdbcRead body)
       throws SQLException, IOException {
     return ExpiryAuditRepository.usingJdbc(release, JdbcClose::close, body);
   }
