@@ -1,12 +1,28 @@
 """Synthetic gate mutations only; not an original whole/static receipt or signature authority."""
 import copy
+import builtins
+import dis
 import json
+import types
 import unittest
 from pyflakes.api import checkPath
 import pg4980_ssc304_signed_candidate as role
 
 
 class Candidate(unittest.TestCase):
+    def test_generated_main_globals_complete_without_executing_signer(self):
+        ns={**vars(role.prior),'__name__':'pure_generated_definition','__file__':role.__file__,
+            'PRODUCTION':role.SOURCE,'OLD_SOURCE':role.OLD_SOURCE,'OLD_BOM':role.OLD_BOM,
+            'OLD':role.OLD,'NEXT':role.NEXT,'FROZEN':role.FROZEN,'SIG':role.SIG,
+            'validate_gate':role.validate_gate,'verify_delta':role.verify_delta,'receive':role.receive,
+            'qualification_matches':role.qualification_matches}
+        exec(compile(role.main_source(),'<definitions only, no signing>','exec'),ns)
+        pending=[ns['main'].__code__];globals_used=set()
+        while pending:
+            code=pending.pop();globals_used.update(i.argval for i in dis.get_instructions(code)if i.opname=='LOAD_GLOBAL')
+            pending.extend(v for v in code.co_consts if isinstance(v,types.CodeType))
+        self.assertFalse(globals_used-set(ns)-set(vars(builtins)))
+
     def test_synthetic_shape_and_independent_main_bytes(self):
         prior,candidate=role.qualified.candidate_main();gate=copy.deepcopy(prior)
         rows,same=role.qualified.physical_difference(prior['allPhysicalMainSha256'],candidate,candidate)
