@@ -1,12 +1,16 @@
 """Exact17 only, all historical records/budget preserved and malformed source bridge refused."""
 import copy
 import json
+import subprocess
 import unittest
 import pg3918_current_wbs_source_switch as switch
 
 
 class ExistingSourceBridge(unittest.TestCase):
-    def inputs(self):return {n:(switch.PMO/n).read_text()for n in switch.NAMES},switch.review.read(switch.PROOF)
+    def inputs(self):
+        # BUG1394: all four original bytes match the actual criterion beforehashes.
+        ref='189da545d0b938c7e2a0a09d5602284e6b4de6fb:documents/400_PGPT/470_PMO/'
+        return {n:subprocess.check_output(['git','show',ref+n],cwd=switch.ROOT,text=True)for n in switch.NAMES},switch.review.read(switch.PROOF)
 
     def test_scope_budget_history_and_current_native_runtime(self):
         texts,proof=self.inputs();new=switch.candidates(texts,proof)

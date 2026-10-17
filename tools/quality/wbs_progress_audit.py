@@ -13,6 +13,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
 from decimal import Decimal
+import wbs_candidate_trace as candidate_trace
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PMO = ROOT / 'documents/400_PGPT/470_PMO'
@@ -244,7 +245,8 @@ def check_measurement(snapshot, inventory):
                         'interface gained executable counters')
                 short = artifact['class'].rsplit('/', 1)[-1]
                 require(re.search(r'\binterface\s+' + re.escape(short) + r'\b',
-                                  (ROOT / artifact['path']).read_text()), 'non-interface counter omission')
+                                  (candidate_trace.git_artifacts(snapshot['source'],[artifact['path']])[artifact['path']].decode()
+                                   if 'currentPhysicalCandidate' in inventory else (ROOT / artifact['path']).read_text())), 'non-interface counter omission')
                 declaration_only += 1
             else:
                 counters.append(counter)
@@ -353,14 +355,19 @@ def verify(master_path=None, snapshot_path=None, budget_path=None, inventory_pat
     require(check_quota_window(window['points'], window['intervals'], window['resetEpochSeconds']) == window['totalObservedPp'], 'observed quota total')
     artifacts = inventory['artifacts']
     require(len({x['path'] for x in artifacts}) == len(artifacts), 'duplicate artifact ownership')
+    historical = candidate_trace.git_artifacts(inventory['source'],[x['path']for x in artifacts]) if 'currentPhysicalCandidate' in inventory else None
     for x in artifacts:
         require(x['owner'] in by and by[x['owner']]['executionRole'] != 'REFERENCE_ONLY', 'artifact alias/unknown owner')
-        require((ROOT / x['path']).is_file() and digest(ROOT / x['path']) == x['sha256'], 'artifact missing/changed: ' + x['path'])
+        require((hashlib.sha256(historical[x['path']]).hexdigest()==x['sha256']) if historical is not None
+                else ((ROOT / x['path']).is_file() and digest(ROOT / x['path']) == x['sha256']), 'artifact missing/changed: ' + x['path'])
         require(x['costOwner'] == x['owner'], 'common manufacture cost owner mismatch')
-    tracked = subprocess.check_output(['git', 'ls-files', 'src', 'program/characterization'], cwd=ROOT, text=True).splitlines()
+    tracked = candidate_trace.git_files(inventory['source']) if historical is not None else subprocess.check_output(['git', 'ls-files', 'src', 'program/characterization'], cwd=ROOT, text=True).splitlines()
     expected = {p for p in tracked if ('/src/main/java/' in p and p.endswith('.java'))
                 or '/src/main/resources/' in p or p.startswith('src/deployment/')}
     require(expected == {x['path'] for x in artifacts}, 'physical inventory scope missing/extra')
+    current_candidate = candidate_trace.verify_candidate(inventory) if historical is not None else None
+    if current_candidate is not None:
+        require(snapshot.get('currentPhysicalCandidateMeasurement')==current_candidate,'current candidate technical snapshot drift')
     required = []
     for f in (ROOT / 'documents/100_RD').rglob('*.md'):
         for line in f.read_text().splitlines():
@@ -409,6 +416,7 @@ def verify(master_path=None, snapshot_path=None, budget_path=None, inventory_pat
         value = ' / '.join(f"{t['remainingCost'][k]:.2f}" for k in COST_KEYS)
         require(len(rows) == 1 and rows[0].endswith(' ' + value + ' |'), 'human cost table drift')
     return {'revision': master['revision'], 'wbsItems': len(tasks), 'executionLeaves': len(leaves),
+            'currentPhysicalCandidate':current_candidate,'canonicalAcceptanceSource':snapshot['source'],
             'inventory': inventory['counts'], 'currentMeasurementCounts': snapshot['counts'],
             'remainingCost': budget['totals']['remaining'], 'acceptedTasks': sum(t['acceptance']['status'] == 'ACCEPTED' for t in tasks),
             'historicalV1Preserved': True, 'formalAcceptanceChangedByAudit': False}

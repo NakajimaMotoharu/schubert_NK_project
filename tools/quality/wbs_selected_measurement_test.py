@@ -95,9 +95,12 @@ class SelectedMeasurementTest(unittest.TestCase):
             self.assertFalse(any(a.get('counterApplicability') == 'NO_EXECUTABLE_INTERFACE'
                                  for a in inventory['artifacts'] if a['owner'] == owner and a['kind'] == 'JAVA'))
 
-    def test_current_fresh_six_and_later_selected_result_keep_their_own_bindings(self):
-        snapshot = audit.read_json(audit.PMO / '486_WBS現行実績.json')
-        inventory = audit.read_json(audit.PMO / '485_WBS網羅性・受入対応.json')
+    def test_historical_fresh_six_and_later_selected_result_keep_their_own_bindings(self):
+        # BUG1394: retain the exact969/PG541 oracle at its immutable fixture,
+        # never apply old source expectations to a newer live acceptance snapshot.
+        ref = '5121fc1ad580d19afdf01bc60c10185f03c1c0bb:documents/400_PGPT/470_PMO/'
+        snapshot = json.loads(subprocess.check_output(['git','show',ref+'486_WBS現行実績.json'],cwd=audit.ROOT))
+        inventory = json.loads(subprocess.check_output(['git','show',ref+'485_WBS網羅性・受入対応.json'],cwd=audit.ROOT))
         self.assertEqual('969d8ded10c0bf5841d9e3a5c531e922caf4a24a', snapshot['source'])
         self.assertEqual(snapshot['source'], inventory['source'])
         self.assertEqual(inventory['measurementBindings']['run'], snapshot['measurementRun'])
