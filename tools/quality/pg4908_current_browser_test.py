@@ -28,6 +28,20 @@ class Browser(unittest.TestCase):
         self.assertLess(body.index('ready.require_ready()'),body.index('subprocess.run(command,'))
         self.assertIn('before_socks==previous.previous.owned_socks()',body)
 
+    def test_actual_guard_changes_only_one_current_release_authority(self):
+        original=(admission.W/'pg4910-current-same-owner-browser-v1/guard.private.py').read_text()
+        expected=original.replace('/opt/schubert-nk/releases/0.1.0-PG3976','/opt/schubert-nk/releases/0.1.0-PG4860',1)
+        current=actual.guard()
+        self.assertEqual(expected,current)
+        self.assertEqual(0,check(current,'<actual complete Browser guard>'))
+        self.assertIn(admission.SOURCE,current);self.assertIn(admission.BOM,current)
+        self.assertNotIn('PG3976',current)
+        for bad in (current,original+original,original.replace('PG3976','PG4432')):
+            with self.assertRaisesRegex(ValueError,'one exact prior'):actual.current_guard(bad)
+        old=admission.W/'pg4910-current-same-owner-browser-v1'
+        for path in ('cases','browser.private.log','manifest.safe.json'):
+            self.assertFalse((old/path).exists(),path+' must not represent a completed Browser run')
+
     def test_composite_preserves_independent_root_capsules_and_entire_chain(self):
         original=root.payload(admission.live(),'a'*64)
         chain={'before':{'history':'old-source-is-data-not-authority'},'after':{},'context':{}}

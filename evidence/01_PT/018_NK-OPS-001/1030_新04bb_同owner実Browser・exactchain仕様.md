@@ -1,5 +1,9 @@
 # 新04bb 同owner実Browser・exactchain仕様
 
+## 10:46JST readiness実0・Browser前guard是正
+
+4908元48874 actual0/全5phase0/12planned/credentialRO true、全oracle/sourcebyte固定。4910v1元56354 actual1は前guard line21の旧PG3976比較で拒否、Browser本体・cases/DB業務操作未発行、最終manifest未生成をそのまま記録する。保存guard原byteを保全し、BUG1393/YKT1159先行後exactrelease一箇所だけPG4860へ接続、source/BOM/全owner/DONE_SHA/TLS他全byte不変・未知/重複/変換済拒否を独立検証。関連全20工具0/static0、slot **pg4910-current-same-owner-browser-v2未発行**。clean/push後v2だけ初回→actual12/全24/同四owner/socks→4912/4914へ、成功ready/Root/wholeは反復0。後続receiptはmodule.SLOT v2を参照、独立Browser truststoreは未資格のまま。
+
 NK-OPS-001/WBS-N14同群（N15参照0）/SS343355/451、現04bb/PG4860/BOM083・run4e220f3b/activation7bae6042。元Root/observer28529を保持し、正常真正終端/全24seal前にはBrowser/業務操作を発行しない。
 
 4908は同source真正RootDone後だけ既独立Browser oracleのliteral source identityを今回04bbへ束縛し、fixture/rawgolden・固定12case/全byte検証は維持、Java25 actualcurrent ABIで必要五phaseをcompile/実行してfreezeする。旧sourceのBrowser成功やDOM期待値を流用0、new-only W/pg4908-current-browser-ready-v1。
