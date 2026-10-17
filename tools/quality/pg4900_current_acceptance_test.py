@@ -57,6 +57,9 @@ class Acceptance(unittest.TestCase):
             self.assertNotIn(text,raw)
         self.assertIn(admission.ONCE+'/before.private.json',raw)
         self.assertIn(admission.PUBLICATION_PATH,raw);self.assertIn(admission.PUBLICATION,raw)
+        self.assertNotIn('0.1.0-PG4432',raw);self.assertNotIn('pg4432-manifest.sig',raw)
+        self.assertNotIn('0.1.0-PG4702',raw);self.assertNotIn('pg4702-manifest.sig',raw)
+        self.assertIn('/opt/schubert-nk/releases/0.1.0-PG4860',raw);self.assertIn('pg4860-manifest.sig',raw)
         for path in (admission.__file__,terminal.__file__,rows.__file__,seal.__file__,__file__):self.assertEqual(0,checkPath(path))
 
     def test_prior_successful_admission_and_terminal_emissions_remain_byte_identical(self):

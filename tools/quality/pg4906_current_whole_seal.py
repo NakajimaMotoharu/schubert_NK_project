@@ -5,7 +5,7 @@ import pg4900_current_admission_image as admission
 import pg4902_current_genuine_terminal as terminal
 import pg4904_current_same_day_rows as rows
 
-SLOT='pg4906-current-whole-seal-v2'
+SLOT='pg4906-current-whole-seal-v3'
 replace_constant=previous.replace_constant
 
 

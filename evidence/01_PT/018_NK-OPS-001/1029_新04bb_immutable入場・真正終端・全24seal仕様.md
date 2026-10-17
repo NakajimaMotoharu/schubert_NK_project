@@ -1,5 +1,11 @@
 # 新04bb immutable入場・真正終端・全24seal仕様
 
+## 10:42JST whole v2同原因拒否・v3是正
+
+v2元6568 actual1/01:36:42.672834Z/payload705b2c7963d0d705df0162a64af6628d7a0160e927c5f05179092580d7a2d187。before4892/PUB4886/4a9と全24独立SQL/oracleは通過、capture line495の旧PG4432 current authorityで拒否。v2原log/raw/SQLを私有保存、DB/Unit/signal変更0・Root/4902/4904成功を再実行0。BUG1392/YKT1158へ同原因再発を追記後、全AST参照監査で旧release3/sig2を特定し、元4754 bindを元4752→04bbより先行して適用。既低層helper由来とcurrent authorityを区別し、無差別renameしない。
+
+独立19工具0/static0、現PG4860正参照・旧PG4432/4702 release/sig不在、actual4900/4902 payload全byte原本同一を実証。新 **pg4906-current-whole-seal-v3** だけ未発行。clean/push後一回実行しactual0を確認後のみBrowser/ownedstop/nativeへ進む。v1/v2拒否は不変、正式/工数/個別受入への加点0。
+
 ## 10:34JST 真正終端/全24実0・whole v1拒否保全→v2
 
 元watch28529 actual0/01:30:01.902763Z・十Ref正常、4902元78444 actual0/01:30:10.782137Z/payload2bcdc9744db9ea55183e9486ea94c3b8c236e17254508d9b775d2cad6a078a52、真正PID1/RootDone/NormalWARNING10・elapsed **1611.390096秒**/1800内・active/RootPID消失、currentGCと旧成功推定を区別。4904元76369 actual0/01:31:29.971461Z/payloadddc1a876、全24独立後条件/2Backup/7skip/保護warning1/Inbox保護10・削除0/Outbox削除224/通知保護1・新匿名log/session/sentOutbox各222、一対一true。rawSQL97e8180444b7fb54b9735a3126c25cef55e020f89fc4e4f19e0c3605c8a7fc79/after80cfb972ee744240c63d62e4ff4ab7e45189cb27e0edb38f3d25edba510fcc1e、元成功を再実行0。

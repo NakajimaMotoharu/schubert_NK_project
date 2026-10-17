@@ -6,6 +6,7 @@ TERM='pg4902-current-genuine-terminal-v1'
 
 
 def bind(raw):
+    raw=previous.bind(raw)
     raw=admission.bind(raw)
     for a,b in [(previous.TERM,TERM),('pg4734-parent-watch-v1','pg4890-parent-watch-v1'),
                 ('PG4702','PG4860'),('pg4702-manifest.sig','pg4860-manifest.sig')]:raw=raw.replace(a,b)
