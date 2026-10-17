@@ -16,6 +16,10 @@ class BackupSelected(unittest.TestCase):
         methods=re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(',path.read_text())
         self.assertEqual(6,len(methods));self.assertEqual(6,len(set(methods)))
         self.assertTrue(all(name.startswith('backup495000')for name in methods))
+        guard=role.ROOT/'src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java'
+        self.assertIn('long remainingNanos() throws IOException;',guard.read_text())
+        self.assertIn('return 1_000_000L;',path.read_text());self.assertIn('assertEquals(10, ownerDeadlineChecks.get());',path.read_text())
+        self.assertNotIn('100, () -> {}',path.read_text())
 
     def test_complete_namespace_no_unexecuted_success_or_main_relabel(self):
         raw=role.source();header=inspect.getsource(role.base).split('\ndef main():',1)[0]

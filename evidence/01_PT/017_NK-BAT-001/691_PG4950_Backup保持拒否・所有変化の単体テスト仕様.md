@@ -1,5 +1,11 @@
 # PG4950 Backup保持拒否・所有変化の単体テスト仕様
 
+## 2026-10-17 11:38JST fixture ABI是正・new-onlyPG4952
+
+元PG4950 actualMaven1/qualification1を結果692へ保存、batch testCompileのGuard void lambda型誤り（BUG1395/YKT1161）。Production Main/設計は正しく変更しない。Guardの実abstract契約は`long remainingNanos()`、default`check()`が正の時間を検査するので、合成残1,000,000nsを返し実checkを通すfixtureへ是正、初期1＋四member各2＋post前1＝10観測を独立にassertする。Io三methodのNullable契約も明示し、nullstreamをNPEへ読み替えない。既期待4unlink順/未知byte/empty-only除去0/FD帰還は不変更。
+
+新`tools/quality/pg4952_backup_retention_selected.py`/W`pg4952-backup-retention-selected-v1`へ固定Testsourceをnew-only保存し、全109/10suite・format-before-PT・実static・五methodcounter・三module全Mainbyteを同条件で再資格する。元PG4950の14部分を新109へ加算0、旧slot上書き/手動`-rf`/古いsource継続0。新harnessの実Guard宣言/long返却/10観測も独立3工具0、実PG4952はまだ未発行。
+
 ## 対象・正本・範囲
 
 Program NK-BAT-001、WBS-P017-05（manifest/hash/commit/7世代prune）、BAK/BKO/OPS-009・UI251・SS341§6.3/343/SSC133/451、既仕様001/687/082と対応。対象MainはBackupManifestReader.retentionNames/retentionRoot/retentionDirectory、BackupArtifactVerifier.removeRetainedのpost-delete二callback。Production Source04bbdb73b532537e3546191d72dee913b17629a0/PG4860/BOM083・全3761/551/1647/当native10streams12pointは既資格の履歴として保存し、今回のTest追加を算術加算して全体合格にしない。

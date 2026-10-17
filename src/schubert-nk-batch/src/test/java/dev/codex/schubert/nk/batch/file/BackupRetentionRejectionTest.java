@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -109,6 +110,7 @@ final class BackupRetentionRejectionTest {
       var removed = new ArrayList<String>();
       var directoryRemovals = new AtomicInteger();
       var postDeleteCalls = new AtomicInteger();
+      var ownerDeadlineChecks = new AtomicInteger();
       var nativeCalls = LinuxDirectoryCalls.create();
       var calls =
           (DirectoryCalls)
@@ -130,17 +132,17 @@ final class BackupRetentionRejectionTest {
       var io =
           new BackupArtifactVerifier.Io() {
             @Override
-            public Map<String, Object> attributes(Path held) throws IOException {
+            public @Nullable Map<String, Object> attributes(Path held) throws IOException {
               return fixture.attributes(held);
             }
 
             @Override
-            public SeekableByteChannel open(Path held) throws IOException {
+            public @Nullable SeekableByteChannel open(Path held) throws IOException {
               return fixture.open(held);
             }
 
             @Override
-            public DirectoryStream<Path> openNames(Path held) throws IOException {
+            public @Nullable DirectoryStream<Path> openNames(Path held) throws IOException {
               if (removed.size() == 4) {
                 assertEquals(1, postDeleteCalls.incrementAndGet());
                 if (!introduceForeignMember) return null;
@@ -154,11 +156,22 @@ final class BackupRetentionRejectionTest {
         var verifier = new BackupArtifactVerifier(root, fixture, UID, GID, io, fixture::clock);
         var admitted = verifier.verifyWithin(fixture.expected, 100);
         assertEquals(MANIFEST_HASH, admitted.manifest().sha256());
-        unavailable(() -> verifier.removeRetained(fixture.expected, admitted, 100, () -> {}));
+        unavailable(
+            () ->
+                verifier.removeRetained(
+                    fixture.expected,
+                    admitted,
+                    100,
+                    () -> {
+                      ownerDeadlineChecks.incrementAndGet();
+                      return 1_000_000L;
+                    }));
         assertEquals(
             List.of("schubert_nk.dump", "config.tar", "credentials.tar.age", "MANIFEST.json"),
             removed);
         assertEquals(1, postDeleteCalls.get());
+        // One initial check, two per fixed member, one before the post-delete observation.
+        assertEquals(10, ownerDeadlineChecks.get());
         assertEquals(0, directoryRemovals.get());
         assertTrue(Files.isDirectory(fixture.child, LinkOption.NOFOLLOW_LINKS));
         for (String name : NAMES)
