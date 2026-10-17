@@ -1,5 +1,15 @@
 # 新04bb 通常Root・同peer資格仕様
 
+## 10:04JST 実起動一回・元observer継続中
+
+4888元88960 actual0/01:00:37.292298Z/payloada05ea861、全24/32/187/旧native72/全資源0/十Ref正常・新Root未起動、容量19281666048byte。4898元61437 actual0/01:01:20.587433Z/payload9bfd106f、当before4a9ba30a/二cutoff01:01:17～03:01:17 UTC・businessDate2026-10-17/独立該当true、skip7/保護Inbox10・Outbox削除224等を独立算出、clock/DB/start/鍵出力変更0。
+
+4896元89831 actual0、**独立14工具0**/全host＋standalone静的0、01:01:53.900696～01:02:00.922122Z、Root payloadSHA **704a1d50705c002584054f4f85c054a51ed0f0c3ebd2a66a3937dbeca3709ae0**、全4observer/12host pathを固定、Production PT加算0。4890 stage元59930 actual0/01:02:27.503623～29.296056Z/log9ed119db、watch元**28529**継続中、重複watch/stage禁止。
+
+**4892元58292 client0**・正規Root一回発行、01:03:07.564458Z、Job229624/INV7fe303d625de4a83b23d23fca4eca2bb/PID882496/start198237760299。client0は親成功でない。4894元69695 actual0/01:03:43.186432Z/payloadd676b80f、boot79a3260a/同job/INV/PID/ticks19823776/argv868a34629788c1c3958e6f8fa6e46024efe30e89ae4ae89616f905e144fa7542・新run **4e220f3b-fbb4-411c-b5c4-7ca1371daa20**/activation **7bae6042-b79f-4fb2-9d9f-edf47b428cbe**/cutoff **2026-10-17T01:03:09.221494Z**を独立同定。正常Root/全24/post/ownedstop/nativeはまだ未認定。
+
+元watchファイルW/pg4890-parent-watch-v1.private.jsonl、元onceW/pg4892-new-normal-root-once-v1・liveW/pg4894-new-normal-live-binding-v1。最新state-change frame01:03:07はMorning activating/start・同PID/job、API/Webはまだ0PID/job0の既閉terminal状態（それだけで今回起動失敗としない）、Caddy inactive。次も現在所有を同定して元watchを観測し、Root/配備/Backup/ADMINを重複発行しない。親1800s/observer1900s・現在cohortの真正終端後だけ同source独立terminal/all24/seal/Browser/ownedstop/nativeを閉じる。
+
 Program NK-OPS-001/WBS-N14（N15.02参照0）、SS341/342/343/355/451。現配備04bb/PG4860/BOM08300d49、host全体PG4844/4846実3761/551/1647、有限公開4886実0/全24/32/187/原本Backup/旧native72全保全・private full11SHA4a9ba30a。旧825e/72streamは保全だけ・新source native合算0。今回もRoot30分、same-run/activation/ownerのordinary API→Web/Caddy→真正DONE・逆順ownedstop/全後条件まで一経路で受け入れ、API readyだけで終わらない。
 
 ## 起動前の独立readとoracle（PG4888/4898）
