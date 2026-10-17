@@ -26,7 +26,8 @@ public final class ExpiryAuditRepository {
   private static final java.lang.String LITERAL_SUCCESS = "SUCCESS";
 
   private static final String HANDLE =
-      "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and started_at=?";
+      "id=? and run_id=? and business_date=? and step='CLEAN_EXPIRY' and attempt=? and"
+          + " started_at=?";
 
   public record Stage(Instant cutoff, long before, long target, long estimatedBytes) {
     public Stage {
@@ -108,45 +109,50 @@ public final class ExpiryAuditRepository {
     BatchStepAttempt.time(run, observed);
     owner.check();
     guarded(run);
-    try (var statement =
-        required(
-            connection.prepareStatement(
-                "select id,run_id,attempt,started_at from schubert.batch_runs where business_date=?"
-                    + " and step='CLEAN_EXPIRY' and status='SUCCESS' order by attempt desc limit 2"))) {
-      statement.setQueryTimeout(owner.queryTimeoutSeconds());
-      var day = run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
-      statement.setObject(1, day);
-      try (var rows = required(statement.executeQuery())) {
-        if (!rows.next()) {
-          owner.check();
-          return Optional.empty();
-        }
-        var priorId = required(rows.getObject("run_id", java.util.UUID.class));
-        var priorRun = Objects.requireNonNull(originals.resolve(priorId, observed));
-        if (!priorId.equals(priorRun.id())
-            || !day.equals(priorRun.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate()))
-          throw new BatchRepositoryException();
-        guarded(priorRun);
-        var handle =
-            new BatchStepAttempt(
-                required(rows.getObject("id", Long.class)),
-                priorRun,
-                BatchStep.CLEAN_EXPIRY,
-                required(rows.getObject("attempt", Integer.class)),
-                required(rows.getObject("started_at", OffsetDateTime.class)).toInstant(),
-                false);
-        if (rows.next()) throw new BatchRepositoryException();
-        var audit = read(handle).orElseThrow(BatchRepositoryException::new);
-        @Nullable Instant ended = audit.ended();
-        if (!LITERAL_SUCCESS.equals(audit.status())
-            || ended == null
-            || ended.isAfter(observed)
-            || audit.errorCode() != null
-            || audit.errorSummary() != null) throw new BatchRepositoryException();
-        owner.check();
-        guarded(run);
-        return Optional.of(new Prior(handle, audit));
-      }
+    try {
+      var statement =
+          required(
+              connection.prepareStatement(
+                  "select id,run_id,attempt,started_at from schubert.batch_runs where"
+                      + " business_date=? and step='CLEAN_EXPIRY' and status='SUCCESS' order by"
+                      + " attempt desc limit 2"));
+      return usingJdbc(
+          statement::close,
+          () -> {
+            statement.setQueryTimeout(owner.queryTimeoutSeconds());
+            var day = run.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();
+            statement.setObject(1, day);
+            var rows = required(statement.executeQuery());
+            return usingJdbc(
+                rows::close,
+                () -> {
+                  if (!rows.next()) {
+                    owner.check();
+                    return Optional.empty();
+                  }
+                  var priorId = required(rows.getObject("run_id", java.util.UUID.class));
+                  var priorRun = Objects.requireNonNull(originals.resolve(priorId, observed));
+                  if (!priorId.equals(priorRun.id())
+                      || !day.equals(
+                          priorRun.cutoff().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate()))
+                    throw new BatchRepositoryException();
+                  guarded(priorRun);
+                  var handle =
+                      new BatchStepAttempt(
+                          required(rows.getObject("id", Long.class)),
+                          priorRun,
+                          BatchStep.CLEAN_EXPIRY,
+                          required(rows.getObject("attempt", Integer.class)),
+                          required(rows.getObject("started_at", OffsetDateTime.class)).toInstant(),
+                          false);
+                  if (rows.next()) throw new BatchRepositoryException();
+                  var audit = read(handle).orElseThrow(BatchRepositoryException::new);
+                  verifySuccessfulAudit(audit, observed);
+                  owner.check();
+                  guarded(run);
+                  return Optional.of(new Prior(handle, audit));
+                });
+          });
     } catch (SQLException known) {
       throw new BatchRepositoryException();
     }
@@ -212,8 +218,9 @@ public final class ExpiryAuditRepository {
     try (PreparedStatement statement =
         required(
             connection.prepareStatement(
-                "update schubert.batch_runs set ended_at=?,status=?,success_count=?,failure_count=?,"
-                    + "error_code=?,error_summary=?,expiry_after_count=? where "
+                "update schubert.batch_runs set"
+                    + " ended_at=?,status=?,success_count=?,failure_count=?,error_code=?,error_summary=?,expiry_after_count=?"
+                    + " where "
                     + HANDLE
                     + " and status='RUNNING' and ended_at is null"
                     + " and expiry_cutoff_at=? and expiry_before_count=?"
@@ -373,6 +380,48 @@ public final class ExpiryAuditRepository {
 
   static <T> T required(@Nullable T value) {
     if (value == null) throw new BatchRepositoryException();
+    return value;
+  }
+
+  /** SSC304: the same late predicate, independently testable without weakening read/DDL. */
+  static void verifySuccessfulAudit(Snapshot audit, Instant observed) {
+    Objects.requireNonNull(audit, "retained audit");
+    Objects.requireNonNull(observed, "observation time");
+    @Nullable Instant ended = audit.ended();
+    if (!LITERAL_SUCCESS.equals(audit.status())
+        || ended == null
+        || ended.isAfter(observed)
+        || audit.errorCode() != null
+        || audit.errorSummary() != null) throw new BatchRepositoryException();
+  }
+
+  @FunctionalInterface
+  interface JdbcRelease {
+    void close() throws SQLException;
+  }
+
+  @FunctionalInterface
+  interface JdbcRead {
+    Optional<Prior> read() throws SQLException, IOException;
+  }
+
+  /** SSC304: lexical ownership of admitted nonnull JDBC resources; exact Java TWR semantics. */
+  static Optional<Prior> usingJdbc(JdbcRelease release, JdbcRead read)
+      throws SQLException, IOException {
+    Objects.requireNonNull(release, "owned JDBC close");
+    Objects.requireNonNull(read, "owned JDBC body");
+    final Optional<Prior> value;
+    try {
+      value = read.read();
+    } catch (Throwable primary) {
+      try {
+        release.close();
+      } catch (Throwable secondary) {
+        primary.addSuppressed(secondary);
+      }
+      throw primary;
+    }
+    release.close();
     return value;
   }
 }

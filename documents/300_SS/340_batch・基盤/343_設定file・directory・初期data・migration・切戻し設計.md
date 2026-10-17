@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC304 Expiry既成功読取の監査比較・nonnull JDBC所有scope
+
+SS331/341・SSC117/125/200の`ExpiryAuditRepository.successful`は、引数/時刻/owner/元run検証、固定SQL・同日・元run照合、既`read`のstrong validation、末尾owner/元run再確認の順序を保持する。末尾のSUCCESS、ended非nullかつobserved以下、errorCode/errorSummaryなしの既5条件だけpackage内`verifySuccessfulAudit(Snapshot, Instant)`へ分離し、同じ短絡順と固定BatchRepositoryExceptionを保持する。helperのnull引数は契約拒否、NPEを正常化しない。直接Snapshot負試験は内部predicateの検証であり、不正DB行がDDL/readを通る証明ではない。
+
+`required`済みのStatement/ResultSetは取得直後から同class内package境界の狭いlexical JDBC scopeで一度だけcloseする。既Java25 TWRと同じくbodyが正常ならclose成功後に値を返し、bodyが失敗ならcloseを実行してから同一primaryを再送出する。closeも失敗した場合は同一secondaryをprimaryへaddSuppressedし、同一Throwableのself-suppressionを含めJava TWRの挙動と一致させる。ResultSet→Statementの逆順を保ち、inner primaryとsuppressed順序・checked IOException/SQLException・未知Runtime/Errorのidentityを変更しない。SQLExceptionだけ既外側で固定BatchRepositoryExceptionへ変換し、cause/raw診断を公開しない。既ResourceScope/JdbcResourceFailuresの別契約へ置換しない。この範囲は既TWR契約の維持であり、他Repositoryの失敗優先順位や将来の設計変更へ拡大しない。
+
+release/read portは内部の既取得資源だけを扱い、null portを実行前拒否、nullable資源を受理しない。借用Connectionのclose/commit/rollback、SQL・lock・期限・所有・DB変更・OS/permit/CLI/ENV権限は追加しない。独立literal監査反例と実Java TWR参照によるbody/close複合・逆順・self-suppression比較、実PostgreSQL既適合試験を併用する。compiler null-closeを人工null資源で通したり除外して100%を作らず、変更群のfresh全回帰・同source native/451を別に資格する。RD/UI/QA051 final/Current/DIF/ITST条件不変更、利用者QA不要。
+
 ## SSC302 retained Expiry監査比較の純data検証境界
 
 SS331/341・SSC117/125/200のCleanupExpiryExecution.verifyPriorExpiryは、借用Connectionとrequestのnull契約→SKIPPEDかつselectedCount0→BatchRunRepository.verifyAlreadySuccessful→ExpiryAuditRepository.read(priorHandle)→元PriorExpiry取得という順序・所有・DAO内strong validationを保持する。最後の既監査比較だけpackage内`verifyPriorAudit(PriorExpiry, ExpiryAuditRepository.Snapshot)`へ分離し、同11条件を同じ短絡順で検査する。成功status、終了時刻、cutoff-7days、before/after非null、before>=after、before-after=success、success=target、failure0、errorCode/errorSummaryなしの全条件を残し、失敗は従来の固定IOExceptionとする。新helperのreference/snapshot nullは即契約拒否とし、NPE catch正常化0。外部呼出し順、SQL/transaction、ログ/電文/データ互換性、権限・期限を変更しない。
