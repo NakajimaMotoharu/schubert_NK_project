@@ -1,5 +1,11 @@
 # 新04bb 正規owned停止・独立post・native資格仕様
 
+## 10:58JST 新Source native・redacted公開実0
+
+4924元21419 actual0/payload22e54539/全72保全・新sourceだけ選択。4926元26548 actual0/原servermanifest29565d17682c255f62f6c11bf747aab6636866958e3fb566d3036ae767a321de、current9streams/10points/全1647 physical Main CRC/byte不一致0、全3761/551の同Source hostcounterへunion。新被覆2838line/453method/28class/314branch、未網羅739/146/9/443（API24/0/0/1、batch715/146/9/442、bootstrap/protocol/storage/web各四counter miss0）。source不変・VM変更0・oldNativeImportedfalse、global100未達を保持。
+
+4928元12861 actual0、公開`evidence/provisional/PG4926-current-native-measurement-v1/manifest.json` SHA294496c2e59b3ab031c10a94523ec216740c5f6e24864325c3b81a459d899dbb、全六XML元hash検証/非session全semantic不変・technicalsessionhashのみ。historical17 Source7fff/PG3954と元4856起点、正式1964/53/工数null/QA051final/F03未分類を保持し、currentへ受入を貼替えない。次=当Source既ADMIN20（SS300）でAPI残24line/1branchを実経路確認、旧Source20の成功を転用0。
+
 ## 10:54JST 正規owned停止・独立全post実0
 
 Source04bb/BOM083/currentPG4860/同run4e22、operatorb4e67aa5c。4910v2元25543実12/全24/同四owner+socks0→4912元97647 exactRootBrowserCurrentChain0/payload68a980e0/beforecc6991bf→4914元7000 typed18実0。4918元95868四phase（compile/oracle/label/original）0/01:49:40.285942Z、4920stage元35373 actual0/01:49:51.398041～53.509635Z/logedfea011、stop元51287 actual0/01:50:02.238467～01:53:43.862907Z/log465550359f1a934f1ef5645856f5c87852eb539f76816066ebc02d8b8eada4cf。全入力/HEAD不変、normalUnit0or10/currentGC true・旧failed正常化0・start0。
