@@ -1,5 +1,6 @@
 """Service resource ports before acquisition, retaining UNKNOWN and source password erasure."""
 import pg5322_cgroup_owner_selected as previous
+import pg5156_native_coverage_selected as bootstrap
 
 selected=previous.selected
 aliases=previous.aliases
@@ -13,6 +14,7 @@ RELATED={'dev.codex.schubert.nk.api.file.ServiceOwnedReleaseTest':'bootstrap'}
 
 def configure():
     previous.configure()
+    bootstrap.EXTRA_BOOTSTRAP_SUITES=set(RELATED)
     selected.EXTRA_CHANGED|={PREFIX+n+'.class' for n in OUTERS}
 
 

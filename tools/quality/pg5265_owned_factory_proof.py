@@ -9,7 +9,14 @@ import pg5150_native_fd_bytecode as native
 import pg5122_root_elf_public as public
 
 
-def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,out_name,qualification_path=None):
+def validate_module(entry,module):
+    if module not in ('storage','bootstrap','batch') or not entry.PREFIX.startswith(module+':'):
+        raise ValueError('explicit compiled module and matching physical class namespace required')
+    return module
+
+
+def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,out_name,qualification_path=None,module='batch'):
+    validate_module(entry,module)
     if re.fullmatch(r'[0-9a-f]{40}',source) is None:
         raise ValueError('source pin must be a full40hex commit')
     selected=entry.selected;work=selected.ROOT.parent/'pgpt-runs/PG379'
@@ -36,7 +43,7 @@ def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,o
         raise ValueError('declared semantic outers and bounded nested candidates only')
     proofs={}
     for name,expected in scopes.items():
-        methods,hashed=bytecode.decode(run/'source','batch',package+name)
+        methods,hashed=bytecode.decode(run/'source',module,package+name)
         actual=caller.callers(methods)
         if len(actual)!=expected:raise ValueError('exact caller count '+name)
         factories=[]
@@ -49,11 +56,11 @@ def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,o
     debug=[]
     for key in sorted(changed-required):
         name=key.split(':',1)[1][:-6].replace('/','.')
-        old,old_hash=bytecode.decode(prior_run/'source','batch',name)
-        current,current_hash=bytecode.decode(run/'source','batch',name)
+        old,old_hash=bytecode.decode(prior_run/'source',module,name)
+        current,current_hash=bytecode.decode(run/'source',module,name)
         native.require_reference(before,key,old_hash['classSha256']);native.same_methods(old,current)
         debug.append({'class':name,'old':old_hash,'current':current_hash,'allOpcodeHandlerSemanticsEqual':True})
-    report=ET.parse(run/'source/src/schubert-nk-batch/target/site/jacoco/jacoco.xml').getroot()
+    report=ET.parse(run/('source/src/schubert-nk-'+module+'/target/site/jacoco/jacoco.xml')).getroot()
     targets={c.get('name'):{v.get('type'):{'missed':int(v.get('missed')),'covered':int(v.get('covered'))}
         for v in c.findall('counter') if v.get('type') in ('LINE','METHOD','CLASS','BRANCH')}
         for c in report.findall('package/class') if c.get('name') in {package.replace('.','/')+n for n in scopes}}
