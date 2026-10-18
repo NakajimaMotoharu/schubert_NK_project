@@ -23,6 +23,22 @@ def fresh_source():
     return raw
 
 
+def native_reference(raw, expected_hash, source, bom):
+    if (type(raw) is not bytes or type(expected_hash) is not str
+            or hashlib.sha256(raw).hexdigest() != expected_hash):
+        raise ValueError('exact immutable enriched bytes required')
+    value = json.loads(raw)
+    if (type(value) is not dict or value.get('source') != source or value.get('manifestSha256') != bom
+            or type(value.get('rows')) is not dict or len(value['rows']) != 24
+            or type(value.get('native')) is not dict
+            or sum(type(p) is str and p.endswith('.exec') for p in value['native']) != 86
+            or any(type(p) is not str or (p != '/run/schubert-nk/pt-coverage'
+                       and not p.startswith('/run/schubert-nk/pt-coverage/'))
+                   for p in value['native'])):
+        raise ValueError('actual current enriched24/native86 contract required')
+    return value['native']
+
+
 CHILD = r'''
 def normalized(v):return json.loads(json.dumps(v))
 def refs_actor():
@@ -60,7 +76,8 @@ require(json.loads((tool/'payload-sha256.json').read_bytes())==TOOL_HASHES)
 failure=base/'pg5082-bootstrap-verify-v3';require({p.name for p in failure.iterdir()}=={'refs-prepare.private.log'})
 require(hashlib.sha256((failure/'refs-prepare.private.log').read_bytes()).hexdigest()=='1c6a71bbcae6f487217e5d9b92dafbf4bb461f226d7544edb62e174bfd7f7ab9')
 require(not any(os.path.lexists('/etc/schubert-nk/credentials/'+n)for n in ('bootstrap-admin-username','bootstrap-admin-password')))
-require(native==after['native'] and len([p for p in native if p.endswith('.exec')])==86)
+reference_raw=strict(base/'pg5080-current-bootstrap-before-v1/after.private.json',0o600,67108864)
+require(native==native_reference(reference_raw,ENRICHED_SHA,SOURCE,BOM))
 a=pair();require(a==pair());locks=normalized([owned_lock(n)for n in ['maintenance.lock','startup-admission.lock']])
 require(a==pair()and native==snapshot())
 save=base/SLOT;require(not os.path.lexists(save));save.mkdir(mode=0o700)
@@ -95,7 +112,7 @@ def payload():
     for old, new in [('383695', '927504'), ('7281859', '31055084'), ('383693', '927502'),
                      ('require(not children)', 'require(children=={927536})'), ('len(fds)==99', 'len(fds)==100')]:
         helpers = helpers.replace(old, new)
-    helpers += PEER.replace('/proc/383695', '/proc/927504') + '\n' + fresh_source() + '\n' + CHILD
+    helpers += PEER.replace('/proc/383695', '/proc/927504') + '\n' + fresh_source() + '\n' + inspect.getsource(native_reference) + '\n' + CHILD
     tree = ast.parse(before.payload())
     scope = next(n for n in tree.body if isinstance(n, ast.Try) and n.finalbody
                  and any(isinstance(v, ast.FunctionDef) and v.name == 'snapshot' for v in n.body))
@@ -114,7 +131,8 @@ def payload():
     header = ('EXPECTED_ARGV=' + repr(b'\0'.join(v.encode() for v in argv) + b'\0')
               + '\nEXPECTED_PARENT=' + repr(parent) + '\nEXPECTED_CHILD=' + repr(child)
               + '\nEXPECTED_BUS=' + repr(names) + '\nTOOL_HASHES=' + repr(fixed['fileHashes'])
-              + '\nTOOL_NAME=' + repr(role.TOOLS) + '\nSLOT=' + repr(SLOT) + '\n')
+              + '\nTOOL_NAME=' + repr(role.TOOLS) + '\nSLOT=' + repr(SLOT)
+              + '\nENRICHED_SHA=' + repr(role.BASELINE) + '\n')
     raw = header + ast.unparse(ast.fix_missing_locations(tree)) + '\n'
     if check(raw, '<current held100/7 full independent witness>'):
         raise ValueError('complete independent witness globals required')
