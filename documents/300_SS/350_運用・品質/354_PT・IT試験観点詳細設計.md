@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+StartupAdmissionFile primitive ViewOwner補足：N+3予定容量（root/runtime/app/entry）、FD319以上、負FD、duplicate既保持FD、満杯/closedの取得前拒否、各openのIO/Runtime/Errorと未登録FD無し、host/private同一性・exec前service→host消費を独立に検証する。逆順3FDのclose正常/IO/Runtime/Errorの64組を固定goldenのprimary型/identity/Reason/秘匿suppressed数・全FD試行順/回数で照合し、複合故障でも途中drainを省略しない。既suppressed/同一例外/idempotent/独立ownerも含め、expectedにproduction merger/useを使わない。全wrapper/scratch/portが初回native前、容量checkが各open前、有効FD後primitiveのみ、drain中callback/new/suppressed操作0を実Java25 bytecodeで証明する。実heapOOME/本物authority/未知close成功を捏造せず、新sourceの限定PT・全体/native/451とYKT全体は別受入のまま。
+
 2026-10-18限定資格更新：source1c45f4ec6の537PT/73suite・六format先行0/三compile static0、共通storage四counter全miss0、immutable release16scopeは全port取得前構築とfactory直返却を実bytecodeで確認（1055/1056、PG5170 f97a2352・公開0769e9ea）。直前Source50bcのreadonly agent metadata新1を同大選択へ含め、checkedは15行/1method/36branch全miss0、NativeCoveragePrivateFile全classのbranch150/150を実測した。ただし同classの29行/12methodは未実行で四100ではなく、全new source/native/CHR/451は別受入。原237候補は52限定是正/1借用非該当/184未判定、追加prebuilt release1の非該当根拠も保存し、全体YKTを閉じない。既全体/別source/別scopeのcoverageや成功を合算しない。
 
 native横展開PT補足：FileLock/SealedProofの有効primitive取得直後wrapper格納/返却、負値・dup自己同一・close一度/未知/compoundを独立literal/identityとJava25で検査する。Startup二owner集合はP→A、proof早期close後の集合closeはAだけ、並行早期消費・全IO/unknown/compound・未adoptのinput拒否close0を独立確認し、port全構築がadopt前であることを実bytecodeで証明する。既storage全suite/全四counter/静的と必要全体/nativeを別受入、実heapOOMEや未実行成功を捏造しない（003020、WBS-P003-06、群1186開始費固定）。
