@@ -5,6 +5,7 @@ import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.Proxy;
 import java.net.URI;
@@ -28,6 +29,20 @@ import org.jspecify.annotations.Nullable;
 /** Same-parent fixed Caddy daemon/validate/owned TLS login proof. SS342/SSC178/CADDY455. */
 @NullMarked
 public final class MorningCaddyReadiness {
+  /** SSC308/PT-CADDYSTREAM001-006: nullable HTTP body, never nullable common ownership. */
+  static void closeLoginInput(ResourceScope.Acquire<InputStream, IOException> open)
+      throws IOException {
+    Objects.requireNonNull(open, "Caddy response stream source");
+    InputStream absent = InputStream.nullInputStream();
+    ResourceScope.<InputStream, Boolean, IOException>acquire(
+        () -> {
+          InputStream input = open.open();
+          return input == null ? absent : input;
+        },
+        InputStream::close,
+        ignored -> Boolean.TRUE);
+  }
+
   private static final java.lang.String LITERAL_INVOCATIONID = "InvocationID";
 
   private static final java.lang.String LITERAL_MAINPID = "MainPID";
@@ -425,8 +440,8 @@ public final class MorningCaddyReadiness {
       connection.setRequestMethod("GET");
       try {
         int status = connection.getResponseCode();
-        var input = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
-        if (input != null) ResourceScope.use(input::close, () -> Boolean.TRUE);
+        closeLoginInput(
+            () -> status >= 400 ? connection.getErrorStream() : connection.getInputStream());
         return status;
       } finally {
         connection.disconnect();

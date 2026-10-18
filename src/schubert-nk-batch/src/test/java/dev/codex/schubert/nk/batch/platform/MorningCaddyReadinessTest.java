@@ -4,11 +4,162 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** SS342/SSC178/CADDY455: literal manager/kernel/HTTP values, no native authority. */
 final class MorningCaddyReadinessTest {
+  @Test
+  void caddyStream001SameInputIsClosedOnceWithoutReading() throws Exception {
+    var closes = new AtomicInteger();
+    var input = stream(closes, null);
+    MorningCaddyReadiness.closeLoginInput(() -> input);
+    assertEquals(1, closes.get());
+  }
+
+  @Test
+  void caddyStream002AbsentBodyKeepsOldNoResourceContract() throws Exception {
+    var opens = new AtomicInteger();
+    for (int call = 0; call < 2; call++) {
+      MorningCaddyReadiness.closeLoginInput(
+          () -> {
+            opens.incrementAndGet();
+            return null;
+          });
+    }
+    assertEquals(2, opens.get());
+  }
+
+  @Test
+  void caddyStream003GetterFailuresKeepOriginalIdentity() {
+    for (Throwable failure :
+        List.of(
+            new IOException("PUBLIC_GETTER"),
+            new IllegalStateException("PUBLIC_GETTER"),
+            new AssertionError("PUBLIC_GETTER"))) {
+      assertSame(
+          failure,
+          assertThrows(
+              Throwable.class,
+              () ->
+                  MorningCaddyReadiness.closeLoginInput(
+                      () -> {
+                        streamFailure(failure);
+                        return null;
+                      })));
+      assertEquals(0, failure.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void caddyStream004CloseFailureKeepsFixedIoAndUnknownPriority() {
+    for (Throwable failure :
+        List.of(
+            new IOException("PUBLIC_CLOSE"),
+            new dev.codex.schubert.nk.storage.StorageIoException(
+                dev.codex.schubert.nk.storage.StorageIoException.Reason.MISSING),
+            new IllegalStateException("PUBLIC_CLOSE"),
+            new AssertionError("PUBLIC_CLOSE"))) {
+      var closes = new AtomicInteger();
+      var input = stream(closes, failure);
+      Throwable actual =
+          assertThrows(Throwable.class, () -> MorningCaddyReadiness.closeLoginInput(() -> input));
+      if (failure instanceof IOException) {
+        var fixed =
+            assertInstanceOf(dev.codex.schubert.nk.storage.StorageIoException.class, actual);
+        assertEquals(
+            failure instanceof dev.codex.schubert.nk.storage.StorageIoException
+                ? dev.codex.schubert.nk.storage.StorageIoException.Reason.MISSING
+                : dev.codex.schubert.nk.storage.StorageIoException.Reason.UNAVAILABLE,
+            fixed.reason());
+        assertEquals("transfer storage operation failed", fixed.getMessage());
+        assertNull(fixed.getCause());
+        assertEquals(0, fixed.getSuppressed().length);
+      } else assertSame(failure, actual);
+      assertEquals(1, closes.get());
+    }
+  }
+
+  @Test
+  void caddyStream005NullSourceIsRejectedBeforeAcquisition() {
+    assertThrows(NullPointerException.class, () -> MorningCaddyReadiness.closeLoginInput(null));
+  }
+
+  @Test
+  void caddyStream006ParallelStreamsKeepSeparateOwnership() throws Exception {
+    var ready = new CountDownLatch(2);
+    var closedA = new AtomicInteger();
+    var closedB = new AtomicInteger();
+    var a = stream(closedA, null);
+    var b = stream(closedB, null);
+    try (var executor = Executors.newFixedThreadPool(2)) {
+      var first =
+          executor.submit(
+              () -> {
+                MorningCaddyReadiness.closeLoginInput(
+                    () -> {
+                      streamBarrier(ready);
+                      return a;
+                    });
+                return true;
+              });
+      var second =
+          executor.submit(
+              () -> {
+                MorningCaddyReadiness.closeLoginInput(
+                    () -> {
+                      streamBarrier(ready);
+                      return b;
+                    });
+                return true;
+              });
+      assertTrue(first.get());
+      assertTrue(second.get());
+      assertNotSame(a, b);
+      assertEquals(1, closedA.get());
+      assertEquals(1, closedB.get());
+    }
+  }
+
+  private static void streamBarrier(CountDownLatch ready) throws IOException {
+    ready.countDown();
+    try {
+      assertTrue(ready.await(10, TimeUnit.SECONDS));
+    } catch (InterruptedException interrupted) {
+      Thread.currentThread().interrupt();
+      throw new IOException("fixture interrupted");
+    }
+  }
+
+  private static InputStream stream(
+      AtomicInteger closed, @org.jspecify.annotations.Nullable Throwable failure) {
+    return new InputStream() {
+      @Override
+      public int read() {
+        throw new AssertionError("login response must not be read");
+      }
+
+      @Override
+      public void close() throws IOException {
+        closed.incrementAndGet();
+        streamFailure(failure);
+      }
+    };
+  }
+
+  private static void streamFailure(@org.jspecify.annotations.Nullable Throwable failure)
+      throws IOException {
+    if (failure instanceof IOException io) throw io;
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    if (failure instanceof Error error) throw error;
+    assertNull(failure);
+  }
+
   static final String INV = "7".repeat(32);
   static final ChildStartupContext.Observed ACTOR =
       new ChildStartupContext.Observed(

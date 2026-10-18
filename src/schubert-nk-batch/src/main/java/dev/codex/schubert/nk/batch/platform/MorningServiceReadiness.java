@@ -212,10 +212,10 @@ public final class MorningServiceReadiness {
     }
 
     static byte[] read(Path path, int limit) throws IOException {
-      var input = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS);
-      return ResourceScope.use(
-          input::close,
-          () -> {
+      return ResourceScope.acquire(
+          () -> Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS),
+          java.io.InputStream::close,
+          input -> {
             byte[] bytes = input.readNBytes(limit + 1);
             if (bytes.length > limit)
               throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
@@ -266,9 +266,10 @@ public final class MorningServiceReadiness {
         connection.setReadTimeout(500);
         int status = connection.getResponseCode();
         if (status != 200) return new Response(status, "");
-        var input = connection.getInputStream();
-        return ResourceScope.use(
-            input::close, () -> new Response(status, ascii(input.readNBytes(4097), 4096)));
+        return ResourceScope.acquire(
+            connection::getInputStream,
+            java.io.InputStream::close,
+            input -> new Response(status, ascii(input.readNBytes(4097), 4096)));
       } finally {
         connection.disconnect();
       }
