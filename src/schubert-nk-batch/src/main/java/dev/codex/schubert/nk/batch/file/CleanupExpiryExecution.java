@@ -60,10 +60,11 @@ final class CleanupExpiryExecution {
     var release = RootReleaseAdmission.create(context, expected);
     Path fixed = Path.of("/run/credentials/schubert-nk-expiry-cleanup.service");
     require(ServiceCredentialLocation.read(System.getenv()).directory().equals(fixed));
-    var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixed);
-    return ResourceScope.use(
-        credentials::close,
-        () -> {
+    var credentialCalls = LinuxDirectoryCalls.create();
+    return ResourceScope.<OwnedTransferDirectory, Integer, IOException>acquire(
+        () -> OwnedTransferDirectory.open(credentialCalls, fixed),
+        OwnedTransferDirectory::close,
+        credentials -> {
           var reader = new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
           var owner = reader.readMaintenanceOwner();
           var request = reader.readExpiryRequest();
@@ -400,12 +401,12 @@ final class CleanupExpiryExecution {
               Instant.now().truncatedTo(ChronoUnit.MICROS));
       require(anchor.equals(request.priorHandle().run()));
     }
-    var startup =
-        OwnedTransferDirectory.open(
-            LinuxHostDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    ResourceScope.use(
-        startup::close,
-        () -> {
+    var startupCalls = LinuxHostDirectoryCalls.create();
+    Path startupPath = Path.of("/run/schubert-nk/startup");
+    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(startupCalls, startupPath),
+        OwnedTransferDirectory::close,
+        startup -> {
           var current = new StartupPermitFiles(startup, LinuxInodeSecurity.create()).current();
           require(
               current.state() == StartupPermitRecords.State.INVALID

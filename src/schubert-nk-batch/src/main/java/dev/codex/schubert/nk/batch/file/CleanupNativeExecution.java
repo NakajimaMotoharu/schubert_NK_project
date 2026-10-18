@@ -51,10 +51,11 @@ final class CleanupNativeExecution {
     Path backupPath = Path.of("/srv/schubert-nk/backup");
     require(ServiceCredentialLocation.read(System.getenv()).directory().equals(fixed));
     var security = LinuxInodeSecurity.create();
-    var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixed);
-    return ResourceScope.use(
-        credentials::close,
-        () -> {
+    var credentialCalls = LinuxDirectoryCalls.create();
+    return ResourceScope.<OwnedTransferDirectory, Integer, IOException>acquire(
+        () -> OwnedTransferDirectory.open(credentialCalls, fixed),
+        OwnedTransferDirectory::close,
+        credentials -> {
           var reader = new RootBatchCredentialReader(credentials, security);
           var owner = reader.readMaintenanceOwner();
           require(
@@ -119,10 +120,11 @@ final class CleanupNativeExecution {
           }
           var request = (CleanupWorkerRequest) profile;
           var identity = new FixedServiceIdentity().resolveBackup();
-          var backup = OwnedTransferDirectory.open(LinuxHostDirectoryCalls.create(), backupPath);
-          return ResourceScope.use(
-              backup::close,
-              () -> {
+          var backupCalls = LinuxHostDirectoryCalls.create();
+          return ResourceScope.<OwnedTransferDirectory, Integer, IOException>acquire(
+              () -> OwnedTransferDirectory.open(backupCalls, backupPath),
+              OwnedTransferDirectory::close,
+              backup -> {
                 var manifests =
                     new BackupManifestReader(backup, security, identity.uid(), identity.gid());
                 var artifacts =
@@ -194,12 +196,12 @@ final class CleanupNativeExecution {
     var activation =
         new MaintenanceActivation(new BatchRun(owner.run(), owner.cutoff()), owner.activation());
     require(MaintenanceRunFiles.observeHost(context, expected, activation).equals(activation));
-    var startup =
-        OwnedTransferDirectory.open(
-            LinuxHostDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    ResourceScope.use(
-        startup::close,
-        () -> {
+    var startupCalls = LinuxHostDirectoryCalls.create();
+    Path startupPath = Path.of("/run/schubert-nk/startup");
+    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(startupCalls, startupPath),
+        OwnedTransferDirectory::close,
+        startup -> {
           var current = new StartupPermitFiles(startup, LinuxInodeSecurity.create()).current();
           require(
               current.state() == StartupPermitRecords.State.INVALID

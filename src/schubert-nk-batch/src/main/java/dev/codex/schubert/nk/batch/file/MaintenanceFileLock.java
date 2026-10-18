@@ -134,16 +134,16 @@ public final class MaintenanceFileLock {
 
   private <T> T withView(DirectoryCalls calls, boolean hostView, ViewOperation<T> operation)
       throws IOException {
-    var run = OwnedTransferDirectory.open(calls, runtime);
-    return ResourceScope.use(
-        run::close,
-        () -> {
+    return ResourceScope.<OwnedTransferDirectory, T, IOException>acquire(
+        () -> OwnedTransferDirectory.open(calls, runtime),
+        OwnedTransferDirectory::close,
+        run -> {
           Identity runIdentity = run.atDirectory(p -> directory(p, hostView || host.isEmpty()));
           {
-            var app = run.openExistingChild("schubert-nk");
-            return ResourceScope.use(
-                app::close,
-                () -> {
+            return ResourceScope.<OwnedTransferDirectory, T, IOException>acquire(
+                () -> run.openExistingChild("schubert-nk"),
+                OwnedTransferDirectory::close,
+                app -> {
                   Identity appIdentity = app.atDirectory(p -> directory(p, true));
                   require(runIdentity.device() == appIdentity.device());
                   return app.atExistingEntryHandle(

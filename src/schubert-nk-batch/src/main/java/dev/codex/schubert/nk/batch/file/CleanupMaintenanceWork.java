@@ -311,12 +311,12 @@ final class CleanupMaintenanceWork {
         owner.forInspector(
             new MaintenanceOwnerFrame.Parent(
                 expected.invocation(), expected.pid(), expected.startTicks()));
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/cleanup-request"));
-    ResourceScope.use(
-        root::close,
-        () -> {
+    var requestCalls = LinuxDirectoryCalls.create();
+    Path requestPath = Path.of("/run/schubert-nk/cleanup-request");
+    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(requestCalls, requestPath),
+        OwnedTransferDirectory::close,
+        root -> {
           var files =
               CleanupWorkerRequestFiles.forOwner(
                   root,
@@ -369,12 +369,12 @@ final class CleanupMaintenanceWork {
     var identities = new FixedServiceIdentity();
     var api = identities.resolve(ServiceConfigFiles.Service.API);
     var web = identities.resolve(ServiceConfigFiles.Service.WEB);
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/srv/schubert-nk/data/transfer"));
-    return ResourceScope.use(
-        root::close,
-        () ->
+    var transferCalls = LinuxDirectoryCalls.create();
+    Path transferPath = Path.of("/srv/schubert-nk/data/transfer");
+    return ResourceScope.<OwnedTransferDirectory, BatchStepResult, IOException>acquire(
+        () -> OwnedTransferDirectory.open(transferCalls, transferPath),
+        OwnedTransferDirectory::close,
+        root ->
             new TransferCleanup(
                     root, LinuxInodeSecurity.create(), api.uid(), web.gid(), guard::check)
                 .execute(owner.cutoff())

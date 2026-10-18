@@ -55,17 +55,17 @@ final class CleanupNativePreflight {
 
     var calls = LinuxDirectoryCalls.create();
     var security = LinuxInodeSecurity.create();
-    var credentials = OwnedTransferDirectory.open(calls, credentialPath);
     BackupManifest result =
-        ResourceScope.use(
-            credentials::close,
-            () -> {
+        ResourceScope.<OwnedTransferDirectory, BackupManifest, IOException>acquire(
+            () -> OwnedTransferDirectory.open(calls, credentialPath),
+            OwnedTransferDirectory::close,
+            credentials -> {
               var reader = new RootBatchCredentialReader(credentials, security);
               var identity = new FixedServiceIdentity().resolveBackup();
-              var backup = openBackup(calls);
-              return ResourceScope.use(
-                  backup::close,
-                  () -> {
+              return ResourceScope.<OwnedTransferDirectory, BackupManifest, IOException>acquire(
+                  () -> openBackup(calls),
+                  OwnedTransferDirectory::close,
+                  backup -> {
                     var admission =
                         new CleanupBackupAdmission(
                             new BackupManifestReader(

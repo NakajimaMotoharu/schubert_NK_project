@@ -117,10 +117,10 @@ final class TransferCleanup {
         continue;
       }
       guard.verify();
-      var child = root.openExistingDate(date);
-      ResourceScope.use(
-          child::close,
-          () -> {
+      ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+          () -> root.openExistingDate(date),
+          OwnedTransferDirectory::close,
+          child -> {
             require(
                 sameDirectory(
                     before, child.atDirectory(path -> inspect(path, true, admitted.device()))));
