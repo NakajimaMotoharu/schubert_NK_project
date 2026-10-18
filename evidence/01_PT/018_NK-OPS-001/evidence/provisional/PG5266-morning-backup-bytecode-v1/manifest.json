@@ -1,0 +1,249 @@
+{
+  "source": "4661101cae269ae709343282f029c5894d97fb95",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "MorningBackupArtifacts": {
+      "scopes": [
+        {
+          "method": "dev.codex.schubert.nk.batch.backup.BackupManifest complete(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, java.util.UUID, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access) throws java.io.IOException;",
+          "acquirePc": 78,
+          "portPcs": [
+            56,
+            61,
+            73
+          ]
+        },
+        {
+          "method": "dev.codex.schubert.nk.batch.backup.BackupManifest complete(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, java.util.UUID, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access) throws java.io.IOException;",
+          "acquirePc": 183,
+          "portPcs": [
+            159,
+            164,
+            178
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean withTools(dev.codex.schubert.nk.batch.backup.BackupProfile, int, dev.codex.schubert.nk.batch.file.MorningBackupArtifacts$Work) throws java.io.IOException;",
+          "acquirePc": 102,
+          "portPcs": [
+            79,
+            84,
+            97
+          ]
+        },
+        {
+          "method": "private java.lang.String hostname() throws java.io.IOException;",
+          "acquirePc": 29,
+          "portPcs": [
+            13,
+            18,
+            24
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$complete$6(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, java.nio.file.Path, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, dev.codex.schubert.nk.batch.backup.BackupProfile, java.lang.String, java.util.concurrent.atomic.AtomicReference) throws java.io.IOException;",
+          "acquirePc": 28,
+          "portPcs": [
+            1,
+            6,
+            23
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$complete$9(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.nio.file.Path, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, dev.codex.schubert.nk.batch.backup.BackupProfile, java.lang.String, java.util.concurrent.atomic.AtomicReference, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata) throws java.io.IOException;",
+          "acquirePc": 42,
+          "portPcs": [
+            9,
+            14,
+            37
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$complete$10(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.nio.file.Path, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, dev.codex.schubert.nk.batch.backup.BackupProfile, java.lang.String, java.util.concurrent.atomic.AtomicReference, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 25,
+          "portPcs": [
+            3,
+            8,
+            20
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory openBackup() throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            15
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$hostname$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            8
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$withTools$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            8
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$complete$18(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$complete$1(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            8
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$complete$11(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "rawReturnPcs": [
+            13
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$complete$7(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "rawReturnPcs": [
+            7
+          ]
+        }
+      ],
+      "classSha256": "a721de044988925499acdaf57443c680737835a73d334e2ed363c10d66f9e210",
+      "javapSha256": "61de31224dbf1f5d530490ad3d1c7b2547f658e497a4151b68b3368fdd49ee25"
+    },
+    "MorningBackupRetention": {
+      "scopes": [
+        {
+          "method": "static <T> T use(dev.codex.schubert.nk.batch.file.MorningBackupRetention$Mode, java.util.Optional<dev.codex.schubert.nk.batch.backup.BackupManifest>, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard, dev.codex.schubert.nk.batch.file.MorningBackupRetention$Work<T>) throws java.io.IOException;",
+          "acquirePc": 87,
+          "portPcs": [
+            64,
+            69,
+            82
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$use$0(dev.codex.schubert.nk.storage.DirectoryCalls, java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            5
+          ]
+        }
+      ],
+      "classSha256": "97991a25d8b4b3dce1f65458a80fd2a853293b3a8e510753a7805061121b94a4",
+      "javapSha256": "7f959df04407bded2d4cacb3ed156d7ec3c021606816aa04dfa47ee53fead546"
+    },
+    "MorningBackupReuse": {
+      "scopes": [
+        {
+          "method": "static <T> T execute(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.MorningParentBudget, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins, dev.codex.schubert.nk.batch.file.MorningBackupReuse$Continuation<T>) throws java.io.IOException;",
+          "acquirePc": 98,
+          "portPcs": [
+            73,
+            78,
+            93
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$0(dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls, java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            5
+          ]
+        }
+      ],
+      "classSha256": "1b590c92dd9b2c05b472f70121af48ddce93e1aa9cf906a8954cfb6af709c6c9",
+      "javapSha256": "4374e587ed3e34fdd7c4781fd6469935eb7e0fc475ea22f1237f896551f2f117"
+    }
+  },
+  "selectedManifestSha256": "80acf307acc67ecb4a715afd0954f4bbbd0ba47f55b6b51b3b55b6142e7bd027",
+  "semanticClasses": 3,
+  "nestedDebugEquivalent": [],
+  "otherPhysicalClassesUnchanged": 761,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/file/MorningBackupArtifacts": {
+      "BRANCH": {
+        "missed": 36,
+        "covered": 50
+      },
+      "LINE": {
+        "missed": 253,
+        "covered": 34
+      },
+      "METHOD": {
+        "missed": 45,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/MorningBackupReuse": {
+      "LINE": {
+        "missed": 49,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 0
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/MorningBackupRetention": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 46
+      },
+      "LINE": {
+        "missed": 20,
+        "covered": 132
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "rawDirectoryFactories": 9,
+  "directHelperFactories": 1,
+  "nativeOwnerExecutionQualified": false
+}
