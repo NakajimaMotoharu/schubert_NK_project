@@ -638,8 +638,10 @@ public final class ChildStartupContext {
     }
 
     private static byte[] read(Path path, int limit) throws IOException {
-      var input = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS);
-      return ResourceScope.use(input::close, () -> input.readNBytes(limit));
+      return ResourceScope.acquire(
+          () -> Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS),
+          java.io.InputStream::close,
+          input -> input.readNBytes(limit));
     }
   }
 }

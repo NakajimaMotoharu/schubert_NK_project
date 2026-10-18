@@ -133,12 +133,12 @@ public final class CaddyPublicConfiguration {
     Objects.requireNonNull(morning);
     require(morning.service() == RootStartupContext.Service.MORNING);
     root.recheck(morning);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxHostDirectoryCalls.create(), Path.of(ca ? "/var" : "/etc"));
-    return ResourceScope.use(
-        directory::close,
-        () ->
+    var calls = LinuxHostDirectoryCalls.create();
+    Path path = Path.of(ca ? "/var" : "/etc");
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, path),
+        OwnedTransferDirectory::close,
+        directory ->
             walk(
                 root,
                 morning,
@@ -170,11 +170,11 @@ public final class CaddyPublicConfiguration {
             p -> directory(p, security, ordinary ? fixed.uid() : 0, ordinary ? fixed.gid() : 0));
     byte[] bytes;
     if (index < segments.size()) {
-      var child = current.openExistingChild(segments.get(index));
       bytes =
-          ResourceScope.use(
-              child::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> current.openExistingChild(segments.get(index)),
+              OwnedTransferDirectory::close,
+              child -> {
                 var next = new ArrayList<>(held);
                 next.add(child);
                 return walk(root, morning, fixed, ca, List.copyOf(next), segments, index + 1);
@@ -185,8 +185,11 @@ public final class CaddyPublicConfiguration {
               ca ? "root.crt" : "Caddyfile",
               p -> {
                 var metadata = file(p, security, ca ? fixed.uid() : 0, fixed.gid(), ca);
-                var input = Files.newInputStream(p);
-                byte[] actual = ResourceScope.use(input::close, () -> input.readNBytes(65537));
+                byte[] actual =
+                    ResourceScope.acquire(
+                        () -> Files.newInputStream(p),
+                        java.io.InputStream::close,
+                        input -> input.readNBytes(65537));
                 require(actual.length == metadata.size());
                 require(metadata.equals(file(p, security, ca ? fixed.uid() : 0, fixed.gid(), ca)));
                 return actual;
