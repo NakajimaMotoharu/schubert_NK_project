@@ -75,24 +75,47 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
   static Owner openNative(java.util.Optional<BackupWorkerRequestFiles.ResumeProof> resumeProof)
       throws IOException {
     Objects.requireNonNull(resumeProof, "explicit resume proof selection");
-    OwnedTransferDirectory directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/backup-request"));
-    BackupWorkerRequestFiles files =
-        new BackupWorkerRequestFiles(directory, LinuxInodeSecurity.create());
-    return new Owner() {
-      @Override
-      public void prepare(BackupWorkerRequest request, UUID part) throws IOException {
-        if (resumeProof.isPresent())
-          files.prepareResumeReplacement(request, part, resumeProof.orElseThrow());
-        else files.prepare(request, part);
-      }
+    var calls = LinuxDirectoryCalls.create();
+    Path path = Path.of("/run/schubert-nk/backup-request");
+    var security = LinuxInodeSecurity.create();
+    return openOwned(
+        () -> OwnedTransferDirectory.open(calls, path),
+        directory -> {
+          BackupWorkerRequestFiles files = new BackupWorkerRequestFiles(directory, security);
+          return new Owner() {
+            @Override
+            public void prepare(BackupWorkerRequest request, UUID part) throws IOException {
+              if (resumeProof.isPresent())
+                files.prepareResumeReplacement(request, part, resumeProof.orElseThrow());
+              else files.prepare(request, part);
+            }
 
-      @Override
-      public void close() throws IOException {
-        directory.close();
-      }
-    };
+            @Override
+            public void close() throws IOException {
+              directory.close();
+            }
+          };
+        });
+  }
+
+  /** SSC308/MBPUB007-010: all assembly work stays protected until the complete Owner takes over. */
+  static Owner openOwned(
+      ResourceScope.Acquire<OwnedTransferDirectory, IOException> open,
+      ResourceScope.OwnedAction<OwnedTransferDirectory, Owner> assemble)
+      throws IOException {
+    Objects.requireNonNull(open, "owned directory factory");
+    Objects.requireNonNull(assemble, "complete owner assembly");
+    boolean[] transferred = new boolean[1];
+    return ResourceScope.acquire(
+        open,
+        directory -> {
+          if (!transferred[0]) directory.close();
+        },
+        directory -> {
+          Owner owner = Objects.requireNonNull(assemble.run(directory), "assembled request owner");
+          transferred[0] = true;
+          return owner;
+        });
   }
 
   @Override

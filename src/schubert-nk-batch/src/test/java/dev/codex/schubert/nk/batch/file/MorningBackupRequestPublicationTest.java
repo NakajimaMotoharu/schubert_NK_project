@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/OPS009/BAK001/UI251/SS341/343/SSC092/094/104; PT-OPS-MBPUB001-006. */
 final class MorningBackupRequestPublicationTest {
@@ -19,6 +22,175 @@ final class MorningBackupRequestPublicationTest {
   private static final UUID PART = UUID.fromString("33333333-3333-4333-8333-333333333333");
   private static final BackupWorkerRequest REQUEST =
       new BackupWorkerRequest(RUN, Instant.parse("2026-09-28T01:00:01.123456Z"));
+
+  @Test
+  void mbpub007FactoryAndNullPortsRefuseBeforeAssembly() {
+    var opens = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningBackupRequestPublication.openOwned(null, directory -> fail("no assembly")));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningBackupRequestPublication.openOwned(
+                () -> {
+                  opens.incrementAndGet();
+                  return null;
+                },
+                null));
+    assertEquals(0, opens.get());
+    IOException original = new IOException("synthetic open failure");
+    assertSame(
+        original,
+        assertThrows(
+            IOException.class,
+            () ->
+                MorningBackupRequestPublication.openOwned(
+                    () -> {
+                      throw original;
+                    },
+                    directory -> fail("no assembly"))));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            MorningBackupRequestPublication.openOwned(
+                () -> null, directory -> fail("no assembly")));
+  }
+
+  @Test
+  void mbpub008CompleteOwnerTakesOverDirectoryExactlyOnce(@TempDir Path temporary)
+      throws Exception {
+    var events = new ArrayList<String>();
+    try (var fixture = new BackupPublicationFixture(temporary)) {
+      var owner =
+          MorningBackupRequestPublication.openOwned(
+              () -> {
+                events.add("open");
+                return fixture.root;
+              },
+              directory -> {
+                assertSame(fixture.root, directory);
+                events.add("assemble");
+                return new MorningBackupRequestPublication.Owner() {
+                  @Override
+                  public void prepare(BackupWorkerRequest request, UUID part) {
+                    assertSame(REQUEST, request);
+                    assertEquals(PART, part);
+                    events.add("prepare");
+                  }
+
+                  @Override
+                  public void close() throws IOException {
+                    events.add("owned-close");
+                    directory.close();
+                  }
+                };
+              });
+      assertEquals(List.of("open", "assemble"), events);
+      assertEquals(0, fixture.counts.getOrDefault("close", 0));
+      assertFalse(fixture.descriptors.isEmpty());
+      try (owner) {
+        owner.prepare(REQUEST, PART);
+      }
+      assertEquals(List.of("open", "assemble", "prepare", "owned-close"), events);
+      assertEquals(1, fixture.counts.get("close"));
+      assertTrue(fixture.descriptors.isEmpty());
+    }
+  }
+
+  @Test
+  void mbpub009IncompleteAssemblyAlwaysReleasesDirectory(@TempDir Path temporary) throws Exception {
+    Throwable[] failures = {
+      new IOException("synthetic IO"),
+      new IllegalStateException("synthetic runtime"),
+      new AssertionError("synthetic error"),
+      null
+    };
+    for (var failure : failures) {
+      try (var fixture = new BackupPublicationFixture(temporary)) {
+        var actual =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    MorningBackupRequestPublication.openOwned(
+                        () -> fixture.root,
+                        directory -> {
+                          assertSame(fixture.root, directory);
+                          if (failure instanceof IOException value) throw value;
+                          if (failure instanceof RuntimeException value) throw value;
+                          if (failure instanceof Error value) throw value;
+                          return null;
+                        }));
+        if (failure instanceof IOException) {
+          assertInstanceOf(StorageIoException.class, actual);
+          assertEquals(
+              StorageIoException.Reason.UNAVAILABLE, ((StorageIoException) actual).reason());
+        } else if (failure != null) assertSame(failure, actual);
+        else assertInstanceOf(NullPointerException.class, actual);
+        assertEquals(1, fixture.counts.get("close"));
+        assertTrue(fixture.descriptors.isEmpty());
+      }
+    }
+  }
+
+  @Test
+  void mbpub010AssemblyCloseMatrixPreservesIndependentFailurePriority(@TempDir Path temporary)
+      throws Exception {
+    String[][] expected = {
+      {"IO", "CLOSE", "CLOSE"}, {"PRIMARY", "PRIMARY", "PRIMARY"}, {"PRIMARY", "PRIMARY", "PRIMARY"}
+    };
+    for (int p = 0; p < 3; p++) {
+      for (int c = 0; c < 3; c++) {
+        Throwable[] primary = {
+          new IOException("primary IO"),
+          new IllegalStateException("primary runtime"),
+          new AssertionError("primary error")
+        };
+        Throwable[] closing = {
+          new IOException("close IO"),
+          new IllegalArgumentException("close runtime"),
+          new AssertionError("close error")
+        };
+        Throwable before = primary[p], after = closing[c];
+        try (var fixture = new BackupPublicationFixture(temporary)) {
+          fixture.faults.put("close#1", after);
+          var actual =
+              assertThrows(
+                  Throwable.class,
+                  () ->
+                      MorningBackupRequestPublication.openOwned(
+                          () -> fixture.root,
+                          directory -> {
+                            if (before instanceof IOException value) throw value;
+                            if (before instanceof RuntimeException value) throw value;
+                            throw (Error) before;
+                          }));
+          switch (expected[p][c]) {
+            case "IO" -> {
+              assertInstanceOf(StorageIoException.class, actual);
+              assertEquals(
+                  StorageIoException.Reason.UNAVAILABLE, ((StorageIoException) actual).reason());
+              assertNotSame(before, actual);
+              assertNotSame(after, actual);
+            }
+            case "CLOSE" -> {
+              assertSame(after, actual);
+              assertEquals(0, actual.getSuppressed().length);
+            }
+            case "PRIMARY" -> {
+              assertSame(before, actual);
+              assertEquals(1, actual.getSuppressed().length);
+              assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
+              assertNotSame(after, actual.getSuppressed()[0]);
+            }
+            default -> fail("literal matrix only");
+          }
+          assertEquals(1, fixture.counts.get("close"));
+          assertTrue(fixture.descriptors.isEmpty());
+        }
+      }
+    }
+  }
 
   @Test
   void mbpub1425001NonMorningFactoryAndNullProofCannotOpenRequestRoot() {
