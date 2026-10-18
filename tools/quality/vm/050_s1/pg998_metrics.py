@@ -10,8 +10,20 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[4]
 EVENTS=Path('/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/events.jsonl')
 V3=Path('/home/mini/codex/project1/work/PMO/hourly-monitor/wbs-reestimate-v3-PGPT-20261008-PG500.json')
+V4=Path('/home/mini/codex/project1/work/PMO/hourly-monitor/wbs-reestimate-v4-PGPT-20261018.json')
+
+
+def estimate_identity(values):
+    revision=values.get('costRevision','PMO-remaining-v3-20261010')
+    paths={'PMO-remaining-v3-20261010':V3,'PMO-remaining-v4-20261018':V4}
+    if revision not in paths:raise ValueError('known frozen estimate revision required')
+    digest=hashlib.sha256(paths[revision].read_bytes()).hexdigest()
+    if values.get('estimateRevisionSha256',digest)!=digest:
+        raise ValueError('estimate revision and explicit hash mismatch')
+    return revision,digest
 
 def append(group,event_type,values):
+    revision,digest=estimate_identity(values)
     template=json.loads((ROOT/'documents/400_PGPT/470_PMO/487_WBS実行計測規約.json').read_bytes())['eventTemplate']
     with EVENTS.open('a+b') as f:
         fcntl.flock(f,fcntl.LOCK_EX);f.seek(0)
@@ -22,8 +34,8 @@ def append(group,event_type,values):
           executionId='PGPT-20261008-PG500',groupId=group,eventType=event_type,
           timeJST=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(),
           gitHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-          source='40ef6e894573d2ffab1d1732124960f9c98d5f97',costRevision='PMO-remaining-v3-20261010',
-          estimateRevisionSha256=hashlib.sha256(V3.read_bytes()).hexdigest(),
+          source='40ef6e894573d2ffab1d1732124960f9c98d5f97',costRevision=revision,
+          estimateRevisionSha256=digest,
           attribution='UNKNOWN_SHARED_ACCOUNT',actualAllocatedPp=None,
           tokenCoverageNote='Explicit numeric response usage not available; no quota-to-token conversion; existing cursor retained',
           modelRequested='gpt-6.1-sol',reasoningRequested='high',modelObserved=None,reasoningObserved=None,
