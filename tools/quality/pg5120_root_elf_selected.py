@@ -109,7 +109,7 @@ def main():
     stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards',
             'factory': 'pg5136-factory-io'}[args.group]
     if args.group != 'elf': version = 'v1'
-    if args.group == 'factory': version = 'v2'
+    if args.group == 'factory': version = 'v3'
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)

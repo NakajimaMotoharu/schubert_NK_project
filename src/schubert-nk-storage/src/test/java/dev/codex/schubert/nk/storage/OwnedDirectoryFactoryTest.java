@@ -11,7 +11,8 @@ final class OwnedDirectoryFactoryTest {
   @Test
   void dirfactory001RootWrapperIsSameKernelInodeAndClosesOnce() throws Exception {
     var calls = new Calls();
-    try (var root = OwnedTransferDirectory.openRoot(calls)) {
+    var root = OwnedTransferDirectory.openRoot(calls);
+    try {
       assertEquals(1, calls.opens);
       assertEquals(0, calls.closes);
       boolean sameInode = root.atDirectory(held -> Files.isSameFile(held, Path.of("/")));
@@ -23,6 +24,8 @@ final class OwnedDirectoryFactoryTest {
       var failure =
           assertThrows(StorageIoException.class, () -> root.atDirectory(held -> Boolean.TRUE));
       assertEquals(StorageIoException.Reason.UNAVAILABLE, failure.reason());
+    } finally {
+      root.close();
     }
     assertEquals(1, calls.closes);
   }

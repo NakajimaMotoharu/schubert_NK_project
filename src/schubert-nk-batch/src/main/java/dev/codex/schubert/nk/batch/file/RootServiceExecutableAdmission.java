@@ -63,7 +63,7 @@ final class RootServiceExecutableAdmission {
     RootDescriptor(DirectoryCalls calls) throws StorageIoException {
       this.calls = Objects.requireNonNull(calls);
       int held = this.calls.openRoot();
-      require(held >= 0);
+      if (held < 0) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       descriptor = held;
     }
 

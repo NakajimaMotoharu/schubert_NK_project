@@ -23,7 +23,7 @@ public final class ResourceScope {
   /** SSC308/PT-IOFACT-001..005: all ports exist before this acquisition is invoked. */
   @FunctionalInterface
   public interface Acquire<R, E extends IOException> {
-    R open() throws E;
+    @Nullable R open() throws E;
   }
 
   @FunctionalInterface
@@ -46,7 +46,8 @@ public final class ResourceScope {
     Objects.requireNonNull(acquire, "resource acquire");
     Objects.requireNonNull(release, "resource release");
     Objects.requireNonNull(action, "resource action");
-    R resource = Objects.requireNonNull(acquire.open(), "acquired resource");
+    @Nullable R resource = acquire.open();
+    if (resource == null) throw new NullPointerException("acquired resource");
     try {
       T result;
       try {
