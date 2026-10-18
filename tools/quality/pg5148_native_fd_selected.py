@@ -10,6 +10,7 @@ import subprocess
 import tarfile
 import xml.etree.ElementTree as ET
 import pg5311_repeated_inventory as repetitions
+import pg5330_fixture_database_metadata as fixture_database
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = 'a2ecc77ca312c383246c94ea692c4db7487112cd'
@@ -188,6 +189,7 @@ def main(*, stem_override=None, version_override=None, extra_suites=None, case_n
              'commands': commands, 'parentUmask': '0077', 'childMavenUmask': '0027',
              'invocationAliases':case_name_aliases or {},
              'invocationRepetitions':case_repetitions or {},
+             'fixtureDatabase': fixture_database.capture(env['SCHUBERT_PG_ROOT'], suites),
              'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
     (work / 'begin.safe.json').write_text(json.dumps(begin, sort_keys=True))
     codes = []; logs = {}

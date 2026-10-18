@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-19 隔離DB観測の明確化（BUG1440/YKT1204）
+
+018/1091を環境区分訂正の正本追補とする。共通選択は一時PostgreSQL18実clusterでDDL/Flyway/Hikari接続を実行するが、原本/VM業務DBへの操作ではない。現在probeは18.6（Ubuntu18.6-0ubuntu0.26.04.1）、postgres SHA30a38e0516ec1bde4b8ca710cf28ba51ee78bd004cabbf3107e7a52d5414a64a。旧run開始時binary identity欠測はnullのまま保ち、遡及認定しない。pg5148の将来開始manifestへ設定binary version/SHAを追加、独立管理二件/九tool lint0、既成功Maven再演/導入/原本DB操作0。
+
 ## 2026-10-18再開時のhost再観測（導入変更なし）
 
 host kernel `Linux 7.0.0-38-generic`、Python `3.14.4`、既存JDK path `/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java` はOpenJDK25.0.4（2026-07-21、build25.0.4+7-1-26.04-Ubuntu）。commandは`uname -sr`/`python3 --version`/同`java -version`。これは現在hostの読取結果で、旧全回帰のOS/JDK証跡を置換せず、guest/source/VM再認証を代替しない。今回toolの新導入・version変更0、既3791 full/独立/署名/18ABIの再実行0。

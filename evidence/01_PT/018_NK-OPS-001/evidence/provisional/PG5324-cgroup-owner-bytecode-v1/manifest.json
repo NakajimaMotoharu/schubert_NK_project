@@ -1,0 +1,224 @@
+{
+  "source": "82426a6b20b83855da4a46f134d8f15981914669",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "FixedUnitCgroupNamespace": {
+      "scopes": [
+        {
+          "method": "dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Snapshot observe(dev.codex.schubert.nk.batch.platform.MaintenanceUnit) throws java.io.IOException;",
+          "acquirePc": 29,
+          "portPcs": [
+            12,
+            17,
+            24
+          ]
+        }
+      ],
+      "factories": [],
+      "classSha256": "52799b16e7781216b27dc51a4c03844b4449a5a3a5da8bae3c9ad3d671dac3f3",
+      "javapSha256": "bb557c786095a12edc7c123d783f4051b15daf927603d6f2ec93055a5739c1e3"
+    },
+    "FixedUnitCgroupNamespace$Owner": {
+      "scopes": [],
+      "factories": [],
+      "classSha256": "6c8ecee857eac3cf66961667f2197444f5032950963b915b99ac85ce34b8a656",
+      "javapSha256": "761d4d078eb54e861b7666a7a9bb6dc83e550d45849d6c5b2facb1c2ce0558ae"
+    }
+  },
+  "selectedManifestSha256": "47eeb512a96db2ffeec5fc253da02af952eff3b5f2d55d5449686351c9d9120b",
+  "semanticClasses": 2,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Identity",
+      "old": {
+        "classSha256": "964014935461687f15659b4700dda39518653a06a16808924c612ab44c871553",
+        "javapSha256": "f6b8ee400d774748e5a3c2d774bcab02ef33a530955e5ad4bad2831f80f740f9"
+      },
+      "current": {
+        "classSha256": "69f45563a9fc51ceca096c56973dee7b0fb667cd9fd8daa00f326f3f4ddfc3c4",
+        "javapSha256": "f6b8ee400d774748e5a3c2d774bcab02ef33a530955e5ad4bad2831f80f740f9"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Snapshot",
+      "old": {
+        "classSha256": "88e3ba00172955ba3fa0165ecd47652efac7ccc9386116d0cf04a69bc4f48ed9",
+        "javapSha256": "f1562e5385f31d0a966591e93f8a8847a6318527dc62e14d84a70b9b76446e49"
+      },
+      "current": {
+        "classSha256": "455b65f6203596fd0b2baa342d419945b3e1a7b5dae9e26294ccf8030a7b3c8e",
+        "javapSha256": "f1562e5385f31d0a966591e93f8a8847a6318527dc62e14d84a70b9b76446e49"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 760,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace$Owner": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 38
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 62
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace": {
+      "BRANCH": {
+        "missed": 19,
+        "covered": 41
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 56
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "ownerClass": {
+    "classSha256": "6c8ecee857eac3cf66961667f2197444f5032950963b915b99ac85ce34b8a656",
+    "javapSha256": "761d4d078eb54e861b7666a7a9bb6dc83e550d45849d6c5b2facb1c2ce0558ae"
+  },
+  "primitiveAcquisitions": {
+    "openRoot": {
+      "method": "int openRoot() throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "guardPc": 1,
+      "openPc": 8,
+      "primitiveStorePc": 68,
+      "successfulPostOpenNoAllocations": true,
+      "invalidOnlyCallsTerminateByThrow": true
+    },
+    "openDirectory": {
+      "method": "int openDirectory(int, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "guardPc": 8,
+      "openPc": 58,
+      "primitiveStorePc": 125,
+      "successfulPostOpenNoAllocations": true,
+      "invalidOnlyCallsTerminateByThrow": true
+    }
+  },
+  "drainPhases": {
+    "close": {
+      "method": "void close() throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "nativeClosePc": 33,
+      "loopBackPc": 69,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": [
+        "appendSecondary",
+        "closeAfterKnown",
+        "drain"
+      ],
+      "direction": 1
+    },
+    "known": {
+      "method": "private dev.codex.schubert.nk.storage.StorageIoException closeAfterKnown(int, dev.codex.schubert.nk.storage.StorageIoException);",
+      "nativeClosePc": 25,
+      "loopBackPc": 62,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": [
+        "appendSecondary",
+        "drain"
+      ],
+      "direction": 1
+    },
+    "drain": {
+      "method": "private void drain(int);",
+      "nativeClosePc": 20,
+      "loopBackPc": 39,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": [],
+      "direction": 1
+    }
+  },
+  "ownerFourCounters": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 38
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 62
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 10
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "capacity": 6,
+  "nativeCloseOrder": "ACQUISITION_ORDER_0_TO_COUNT_MINUS1_PRESERVED",
+  "originalScopeSites": 2,
+  "typedNativeCatchPrimaryPreserved": true,
+  "logicalConsumedNotKernelCloseAck": true,
+  "newJavaCases": 8,
+  "nativeOwnerExecutionQualified": false,
+  "storageFourCounters": {
+    "BRANCH": {
+      "covered": 533,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 39,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 1222,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 294,
+      "missed": 0
+    }
+  }
+}

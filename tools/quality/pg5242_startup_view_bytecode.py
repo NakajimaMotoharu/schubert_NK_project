@@ -12,7 +12,7 @@ RUN=selected.ROOT.parent/'pgpt-runs/PG379/pg5240-startup-view-owner-green-v1'
 CLASS='dev.codex.schubert.nk.batch.file.StartupAdmissionFile'
 
 
-def registration(method,needle):
+def registration(method,needle,unavailable='StartupAdmissionFile.unavailable:'):
     opened=bytecode.index_of(method,needle)
     guard=bytecode.index_of(method,'guard:()V')
     if guard>=opened:raise ValueError('capacity/closed guard must predate native acquisition')
@@ -20,7 +20,7 @@ def registration(method,needle):
     for index,op in enumerate(post):
         if op[1] in ('new','newarray','anewarray','multianewarray','invokedynamic','ldc','ldc_w'):
             raise ValueError('FD registration may not allocate or resolve constants')
-        if op[1].startswith('invoke') and not (op[1]=='invokestatic' and 'StartupAdmissionFile.unavailable:' in op[2]
+        if op[1].startswith('invoke') and not (op[1]=='invokestatic' and unavailable in op[2]
                                                and index+1<len(post) and post[index+1][1]=='athrow'):
             raise ValueError('post-FD calls only on immediately throwing invalid-value branches')
     store=bytecode.one([i for i,op in enumerate(post) if op[1]=='iastore'],'one primitive owned-slot store')

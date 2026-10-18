@@ -16,11 +16,15 @@ ENTRY=entry.previous
 HEAP={'new','newarray','anewarray','multianewarray','invokedynamic','ldc','ldc_w'}
 
 
-def native_loop(method,delegates):
+def native_loop(method,delegates,direction=-1):
+    if type(direction) is not int or direction not in (-1,1):raise ValueError('explicit unit native-close direction')
     ops=method['ops'];at=bytecode.index_of(method,'DirectoryCalls.close:');pc=ops[at][0]
     back=bytecode.one([i for i,op in enumerate(ops) if op[1]=='goto' and i>at and int(op[2].split()[0])<=pc],
                       'one finite reverse native-close loop per phase')
     if any(op[1] in HEAP for op in ops[:back+1]):raise ValueError('phase may not allocate during native drain')
+    steps=[op for op in ops[:back+1] if op[1]=='iinc']
+    if len(steps)!=1 or int(steps[0][2].split(',')[1].strip())!=direction:
+        raise ValueError('native loop must preserve its explicit unit close order')
     for op in ops[:back+1]:
         if op[1].startswith('invoke') and 'DirectoryCalls.close:' not in op[2] and not any(
                 name+':' in op[2] for name in delegates):
@@ -31,11 +35,12 @@ def native_loop(method,delegates):
     if 'appendSecondary' in delegates:
         drained=bytecode.index_of(method,'drain:(I)V');appended=bytecode.index_of(method,'appendSecondary:')
         if drained>=appended:raise ValueError('secondary aggregation only after delegated full remaining drain')
-        if [op[1] for op in ops[drained-3:drained]]!=['iload_1','iconst_1','isub'] and not (
-                ops[drained-3][1].startswith('iload') and [op[1] for op in ops[drained-2:drained]]==['iconst_1','isub']):
-            raise ValueError('remaining drain starts strictly below already-consumed current FD')
+        arithmetic='isub' if direction==-1 else 'iadd'
+        if not (ops[drained-3][1].startswith('iload') and
+                [op[1] for op in ops[drained-2:drained]]==['iconst_1',arithmetic]):
+            raise ValueError('remaining drain must start one slot past consumed FD in its explicit direction')
     return {'method':method['header'],'nativeClosePc':pc,'loopBackPc':ops[back][0],
-        'handlerTypes':sorted(handlers),'heapFreeBeforeLoopExit':True,'delegates':sorted(delegates)}
+        'handlerTypes':sorted(handlers),'heapFreeBeforeLoopExit':True,'delegates':sorted(delegates),'direction':direction}
 
 
 def main():
