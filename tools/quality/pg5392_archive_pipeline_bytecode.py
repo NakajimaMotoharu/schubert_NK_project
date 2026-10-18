@@ -13,11 +13,11 @@ OUT='PG5392-archive-pipeline-bytecode-v1'
 CLASS='dev.codex.schubert.nk.batch.platform.BackupArchiveProcess'
 
 
-def main():
-    work=entry.selected.ROOT.parent/'pgpt-runs/PG379';run=work/RUN;prior_run=work/'pg5380-nss-root-query-green-v1'
+def main(*,source=SOURCE,run_name=RUN,out_name=OUT,require_all=False):
+    work=entry.selected.ROOT.parent/'pgpt-runs/PG379';run=work/run_name;prior_run=work/'pg5380-nss-root-query-green-v1'
     result=json.loads((run/'manifest.safe.json').read_bytes());prior=json.loads((prior_run/'manifest.safe.json').read_bytes())
     if type(result['actualExit']) is not int or result['actualExit']!=0 or result['phaseExits']!=[0,0] or (
-        result['sourceSnapshot'],result['tests'],result['suites'])!=(SOURCE,1138,134):
+        result['sourceSnapshot'],result['tests'],result['suites'])!=(source,1138,134):
         raise ValueError('current original terminal/source/complete inventory first')
     if prior['actualExit']!=0 or prior['sourceSnapshot']!='d3f618962cc3a0297c818cd4890698c2269a0f5f':
         raise ValueError('exact previous qualification, never imported counters')
@@ -78,7 +78,9 @@ def main():
         for v in c.findall('counter') if v.get('type') in ('LINE','METHOD','CLASS','BRANCH')}
         for c in report.findall('package/class') if c.get('name') in {CLASS.replace('.','/')+s for s in ('','$TerminalPlan','$StdIoOwner')}}
     if len(targets)!=3:raise ValueError('every current target, no removed-class coverage import')
-    value={'source':SOURCE,'actualExit':0,'physicalMain':765,'semanticClasses':3,'proofs':{
+    if require_all and any(v['missed'] for counters in targets.values() for v in counters.values()):
+        raise ValueError('entire Archive/TerminalPlan/StdIoOwner four100 required')
+    value={'source':source,'actualExit':0,'physicalMain':765,'semanticClasses':3,'proofs':{
         CLASS:{'scopes':sites,'rawFactoryTail':tail,**outer_hash},
         CLASS+'$StdIoOwner':{'scopes':[],**io_hash},CLASS+'$TerminalPlan':{'scopes':[{'prebuiltFields':fields}],**plan_hash}},
         'nestedDebugEquivalent':debug,'otherPhysicalClassesUnchanged':len(after)-len(changed)-len(entry.ADDED),
@@ -88,7 +90,7 @@ def main():
         'originalScopeSites':7,'currentOwnedScopes':4,'currentPrebuiltBorrowedCleanupScope':1,
         'implementationDecision':'PG-D431','bugs':['BUG1414'],'ykt':['YKT1178'],'ssc':['SSC091','SSC308'],
         'wholeHorizontalComplete':False,'formalAccepted':False,'nativeImported':False,'vmActions':0,'testReplays':0}
-    publish.publish(entry,value,OUT)
+    publish.publish(entry,value,out_name)
 
 
 if __name__=='__main__':main()

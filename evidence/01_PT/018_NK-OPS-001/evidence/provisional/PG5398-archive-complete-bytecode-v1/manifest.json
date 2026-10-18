@@ -1,0 +1,201 @@
+{
+  "source": "60bc8f54b154e82c16ad3a32a71143d7ca80affe",
+  "actualExit": 0,
+  "physicalMain": 765,
+  "semanticClasses": 3,
+  "proofs": {
+    "dev.codex.schubert.nk.batch.platform.BackupArchiveProcess": {
+      "scopes": [
+        {
+          "method": "private void execute(java.util.List<java.util.List<java.lang.String>>, java.util.Map<java.lang.String, java.lang.String>, java.util.Optional<java.nio.file.Path>, byte[], long) throws java.io.IOException;",
+          "acquirePc": 61,
+          "portPcs": [
+            33,
+            45,
+            56
+          ]
+        },
+        {
+          "method": "private static java.lang.Boolean streams(java.util.List<java.lang.Process>, int, java.util.List<dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner>, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$Work) throws java.io.IOException;",
+          "acquirePc": 61,
+          "portPcs": [
+            40,
+            45,
+            56
+          ]
+        },
+        {
+          "method": "private static java.lang.Boolean lambda$streams$1(java.lang.Process, java.util.List, java.util.List, int, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$Work, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner) throws java.io.IOException;",
+          "acquirePc": 24,
+          "portPcs": [
+            1,
+            6,
+            19
+          ]
+        },
+        {
+          "method": "private static java.lang.Boolean lambda$streams$3(java.lang.Process, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner, java.util.List, java.util.List, int, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$Work, dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner) throws java.io.IOException;",
+          "acquirePc": 25,
+          "portPcs": [
+            1,
+            6,
+            20
+          ]
+        }
+      ],
+      "rawFactoryTail": [
+        12
+      ],
+      "classSha256": "bd1edd2608a83f0289a19f8f80a4ff9a87fcfd3d5cbaef0edf0e68b1f17cc017",
+      "javapSha256": "5770a7e7d90ff43fbb9df679ac9f592ee648a9eaec238a0225a8df0cc8f33941"
+    },
+    "dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner": {
+      "scopes": [],
+      "classSha256": "733ce7b23358a20b75ed5dafa1a91e3b1d2c35588da46723cd9590b6d6c206f0",
+      "javapSha256": "4c57a19f504ced7dc206e47aa362ede9cd6b974893cfb64d39380d189946449b"
+    },
+    "dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$TerminalPlan": {
+      "scopes": [
+        {
+          "prebuiltFields": [
+            "#36                 // Field acquire:Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;",
+            "#44                 // Field hold:Ldev/codex/schubert/nk/storage/ResourceScope$Release;",
+            "#52                 // Field stop:Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;"
+          ]
+        }
+      ],
+      "classSha256": "c1ef29d58815f033af6aa3c64991b4ae3f794272785e3c1633c696aeff13d6f1",
+      "javapSha256": "ff9bff45b649bc7a90df06314b1c92ee1b9ea338fe04b459039dc316d4325e0d"
+    }
+  },
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart$PendingHold",
+      "old": {
+        "classSha256": "f005767dd7e53c11eb4cb9ceb789332c1de1ff050c928e2d26b1a01398f6ce88",
+        "javapSha256": "65cd4f0092891b06bac0ff7669dc506652a55daf18627205d410f1dca8dcf490"
+      },
+      "current": {
+        "classSha256": "cc583b32ed6d94e942940aaf884e3fa00ac51ece4f11c18f4cd954f1db42bbbc",
+        "javapSha256": "65cd4f0092891b06bac0ff7669dc506652a55daf18627205d410f1dca8dcf490"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart",
+      "old": {
+        "classSha256": "338373708bae5b1dd3950bae462d56f5180e2c5c79e1b9448c1d01a7c08f4065",
+        "javapSha256": "3faa456f56820874000c7450e24300fdcf3dc3a9d3e45542eb39ecf922d60d93"
+      },
+      "current": {
+        "classSha256": "24956cb2d9a5c87b054fcc7e96d77b6bf01e32edebc9fc00bd802531e34ca28f",
+        "javapSha256": "3faa456f56820874000c7450e24300fdcf3dc3a9d3e45542eb39ecf922d60d93"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 760,
+  "addedMain": [
+    "batch:dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdIoOwner.class",
+    "batch:dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$TerminalPlan.class"
+  ],
+  "removedMain": [
+    "batch:dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdinOwner.class"
+  ],
+  "netMainGrowth": 1,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 70
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 143
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 32
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$TerminalPlan": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 78
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/BackupArchiveProcess$StdIoOwner": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 12
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "selectedManifestSha256": "4732cd90e31cebf6d890162cf71f2023162b4487bf89d39051b97aa964a7a8a5",
+  "terminalDrains": {
+    "stopAll": {
+      "method": "private void stopAll() throws java.io.IOException;",
+      "nonRecursiveNoHeap": true
+    },
+    "stopAfterKnown": {
+      "method": "private void stopAfterKnown(int, java.io.IOException) throws java.io.IOException;",
+      "nonRecursiveNoHeap": true
+    },
+    "stopRest": {
+      "method": "private int stopRest(int);",
+      "nonRecursiveNoHeap": true
+    },
+    "holdAll": {
+      "method": "private void holdAll();",
+      "nonRecursiveNoHeap": true
+    }
+  },
+  "oldQuarantineOpcodesHandlersUnchanged": true,
+  "originalScopeSites": 7,
+  "currentOwnedScopes": 4,
+  "currentPrebuiltBorrowedCleanupScope": 1,
+  "implementationDecision": "PG-D431",
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC091",
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "vmActions": 0,
+  "testReplays": 0
+}

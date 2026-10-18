@@ -1,0 +1,13 @@
+# Archive全terminal・三class四100 限定結果
+
+1101/PG-D431/SSC091308、Main/Test **60bc8f54b154e82c16ad3a32a71143d7ca80affe**/dev-foundation。PG5390-v2元8992真正0/[0,0]/**1138invocation134suite/FES・flaky・skip・not-run0**、1129論理method/反復一method10回。六format先行0/NullAway・ErrorProne0/三compiled static0/全storage四miss0、新独立6＋既92＝98/関連1040。旧Archive10追加選択はwholeへ二重加算0。
+
+PG5398実0、`evidence/provisional/PG5398-archive-complete-bytecode-v1/manifest.json` SHA **ea357207df89052895188fa8911e52523c3b029db15facfc22272a4871a4c573**。outer **143line/32method/1class/70branch**、TerminalPlan **78line/12method/1class/26branch**、StdIoOwner **12line/4method/1class/4branch**各miss0。四owned acquisition三port、stdio constructorはgetter前・結果は宣言型cast/参照格納/returnだけ。terminal三port/scratchはStart前、stop first/known/drain・holdは非再帰/無callback構築、元quarantine三関数の全opcode/handler不変、UNKNOWN collectionは先行pendingへ保持し正常化0。旧cleanup三を新Plan一保護と非再帰phaseへ置換し、原7を単なるuse検索で完了にしない。
+
+全physical Main **765**＝旧764＋TerminalPlan/StdIoOwner二追加－旧StdinOwner一削除。outer変更1+nested2全method同義・他760同byte、意味現行3class/旧一class削除を明示registry、coverage除外0。新sourceと初回2d9711a97は全765Main byteが同一だが、当source全1138を新規資格して旧counterを合算0。初回v1元52474は1138/134成功・TerminalPlan一branch未網羅を原post **bc384f60**に保持し、未実装null-rest negativeをARCHOWN004へ追加した新source/v2で26branchを閉じた。新TestID・独立件数の重複追加0。
+
+独立64 stop/27 hold固定golden・全TERM→全confirm順/partial unknown・nullable三getter/idle-null子/interrupt再設定/既suppressed同一object/二並行plan、旧十fixtureの全command/env/path/UID/30分親budget/Stream故障/partial pipeline pendingを当snapshotで確認。固定表はProduction merger以外の管理数学でも全64/27を照合した。管理3/関連十tool pyflakes0、製品試験/静的/工具失敗0・元job再演0。実OOM/本物Archive・DB dump作成/本物authority成功を捏造しない。
+
+公開PG5400 `--group factory` 実0、`evidence/provisional/pg5390-archive-pipeline-green-v2-metadata-v2/manifest.json` SHA **d7103d4104b6a9cf36334be1d24b793d0a375522eb045e4574af7c3b1faeb07a**。全1138のTestID/class/method/fixture・独立期待/実際/実日時・OS/JDK/tool/開始PG binary/command/exit/source/XML/static/coverage/hashをallowlist公開。PG5402分類実0 **ae607bad53d148184b7a92f4161b76a05c4259959e6e93e0f748fe09817fed28**、原237 **224限定/1借用/12UNKNOWN**＋原外4factory別母数限定/正式0・readonly四未確定。全体BUG1414/YKT1178 OPEN。
+
+群1240開始1/3/8共有pp固定・P01703.03主/P01704構成非加算、原7限定/新6・初回未実装negative追加/765Main再資格を分離。487標準欄/元開始凍結参照/既結果refを用い、新予算/成果二重計上0、共有21→22表示は窓の開始取得identity欠測/他chat不明のため専有費・N-Tへ換算0。正式1964PT53scope・歴史17/190/leafdelta0/工数null/v4未較正597.25不変。whole予定3889PT561suite1662Mainは未実行/currentnative/全体四100/F03/CHR/451/QA051final/trace/引継ぎ未完、署名配備0。次Systemctl4/Inspector8の既Interrupted/StopGate優先と全getter後null admission→readonly四→必要freshwhole/同source実経路/nativeへ。原本DB/Backup/鍵/stash7/Currentbaseline/native/成功失敗保持・VM操作0、隔離一時実PGは原本/VM業務DB操作0と分離。
