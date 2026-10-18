@@ -61,8 +61,17 @@ def coverage_hashes(paths, root, hash_file=selected.sha):
     return result
 
 
+def suite_map(base,extra):
+    result=dict(base)
+    for name,module in (extra or {}).items():
+        if module not in selected.BUILT or name in result and result[name]!=module:
+            raise ValueError('same suite has one known compiled source module')
+        result[name]=module
+    return result
+
+
 def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None,
-         required_counts=None, case_overrides=None):
+         required_counts=None, case_overrides=None, extra_suites=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
@@ -78,6 +87,7 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
     suite_modules = selected.SUITES if args.group == 'elf' else {**selected.SUITES, **selected.PENDING_SUITES}
     if args.group in ('guards', 'factory'): suite_modules = {**suite_modules, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     if args.group == 'factory': suite_modules = {**suite_modules, **selected.storage_suites()}
+    suite_modules=suite_map(suite_modules,extra_suites)
     result = json.loads((run / 'manifest.safe.json').read_bytes())
     begin = json.loads((run / 'begin.safe.json').read_bytes())
     if not (type(result['actualExit']) is int and result['actualExit'] == 0
@@ -136,6 +146,7 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
         static_hashes[module] = selected.sha(path)
     if result['freshStatic'] != {'storage': 0, 'bootstrap': 0, 'batch': 0}:
         raise ValueError('exact actual three-module static declaration')
+    if set(suite_modules)!=set(result['xmlSha256']):raise ValueError('complete actual suite/source module inventory')
     records = []; suites = []
     for name, digest in result['xmlSha256'].items():
         module = suite_modules[name]

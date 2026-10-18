@@ -13,13 +13,13 @@ ROOT_FIXED={'RootServiceExecutableAdmission.java','RootStartupPending.java','Own
 CALLER_FIXED={'StorageRootInspection.java','ExistingFileAccess.java','ServiceConfigFiles.java','LinuxFilesystemClassifier.java'}
 
 
-def classify(rows,load,*,native=False,evidence_ref=QUALIFIED):
+def classify(rows,load,*,native=False,evidence_ref=QUALIFIED,extra_fixed=frozenset()):
     counts={'FIXED_LIMITED':0,'NON_APPLICABLE_BORROWED':0,'UNKNOWN':0}
     seen=set()
     native_fixed={'LinuxFileLock.java','LinuxSealedProof.java','LinuxStartupAdmission.java'} if native else set()
     for row in rows:
         name=row['path'].rpartition('/')[2];content=load(row['path'])
-        if name in ROOT_FIXED|CALLER_FIXED|native_fixed:
+        if name in ROOT_FIXED|CALLER_FIXED|native_fixed|extra_fixed:
             seen.add(name)
             prebuilt=native and name=='LinuxStartupAdmission.java' and content.count(b'ResourceScope.use(')==1 and b'ResourceScope.use(admissionRelease, proofRelease);' in content
             if b'ResourceScope.use(' in content and not prebuilt:raise ValueError('claimed fixed file still has original scope candidates')
@@ -38,7 +38,7 @@ def classify(rows,load,*,native=False,evidence_ref=QUALIFIED):
                         fixed=False,nonApplicableReason=reason if classification=='NON_APPLICABLE_BORROWED' else None,
                         reviewReason=reason,retestEvidence=evidence_ref if classification!='UNKNOWN' else None)
             counts[classification]+=1
-    if seen!=ROOT_FIXED|CALLER_FIXED|native_fixed|{'LinuxExecDescriptors.java'}:raise ValueError('all explicitly reviewed original files')
+    if seen!=ROOT_FIXED|CALLER_FIXED|native_fixed|extra_fixed|{'LinuxExecDescriptors.java'}:raise ValueError('all explicitly reviewed original files')
     return counts
 
 
