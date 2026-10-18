@@ -83,11 +83,10 @@ public final class ExistingFileAccess {
           name,
           handle -> {
             StorageAttributeGuard.existingFile(io.attributes(handle), identity, expectedSize);
-            SeekableByteChannel channel =
-                Objects.requireNonNull(io.openReadOnly(handle), "file channel");
-            return ResourceScope.use(
-                channel::close,
-                () -> {
+            return ResourceScope.acquire(
+                () -> Objects.requireNonNull(io.openReadOnly(handle), "file channel"),
+                SeekableByteChannel::close,
+                channel -> {
                   requireSize(channel, expectedSize);
                   T result = operation.execute(channel);
                   requireSize(channel, expectedSize);
@@ -96,9 +95,10 @@ public final class ExistingFileAccess {
                 });
           });
     }
-    OwnedTransferDirectory child = directory.openExistingChild(name);
-    return ResourceScope.use(
-        child::close, () -> walk(child, names, index + 1, expectedSize, operation));
+    return ResourceScope.acquire(
+        () -> directory.openExistingChild(name),
+        OwnedTransferDirectory::close,
+        child -> walk(child, names, index + 1, expectedSize, operation));
   }
 
   private static void requireSize(SeekableByteChannel channel, long expectedSize)

@@ -52,10 +52,10 @@ public final class StorageRootInspection {
   private static Inode inspectOne(
       Path root, int index, StorageIdentity asset, StorageIdentity transfer, StorageIdentity backup)
       throws StorageIoException {
-    OwnedTransferDirectory held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
-    return ResourceScope.use(
-        held::close,
-        () ->
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root),
+        OwnedTransferDirectory::close,
+        held ->
             held.atDirectory(
                 path -> {
                   try {

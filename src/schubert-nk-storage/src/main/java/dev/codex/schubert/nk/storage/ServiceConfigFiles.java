@@ -100,10 +100,10 @@ public final class ServiceConfigFiles implements NonSecretConfigSource {
   public Contents read(Service service) throws StorageIoException {
     Objects.requireNonNull(service, "service");
     try {
-      OwnedTransferDirectory held = OwnedTransferDirectory.open(calls, root);
-      return ResourceScope.use(
-          held::close,
-          () -> {
+      return ResourceScope.acquire(
+          () -> OwnedTransferDirectory.open(calls, root),
+          OwnedTransferDirectory::close,
+          held -> {
             Snapshot before = inspect(held, identity, io);
             String common = readOne(held, "common.yml", identity, before.device(), io);
             String specific = readOne(held, service.fileName, identity, before.device(), io);
@@ -127,10 +127,10 @@ public final class ServiceConfigFiles implements NonSecretConfigSource {
         fileName,
         path -> {
           Snapshot before = checked(io.attributes(path), identity, false, device);
-          SeekableByteChannel channel = io.openReadOnly(path);
-          return ResourceScope.use(
-              channel::close,
-              () -> {
+          return ResourceScope.acquire(
+              () -> io.openReadOnly(path),
+              SeekableByteChannel::close,
+              channel -> {
                 if (channel.size() != before.size()) throw unavailable();
                 ByteBuffer bytes = ByteBuffer.allocate(MAX_BYTES + 1);
                 while (true) {

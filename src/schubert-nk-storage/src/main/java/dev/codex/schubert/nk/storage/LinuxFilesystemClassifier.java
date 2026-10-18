@@ -69,10 +69,10 @@ public final class LinuxFilesystemClassifier {
     if (!path.matches("/proc/self/fd/(0|[1-9][0-9]{0,9})")
         || Long.parseLong(path.substring(14)) > Integer.MAX_VALUE)
       throw new IllegalArgumentException("invalid held inode capability");
-    var arena = Arena.ofConfined();
-    return ResourceScope.use(
-        arena::close,
-        () -> {
+    return ResourceScope.acquire(
+        Arena::ofConfined,
+        Arena::close,
+        arena -> {
           var state = arena.allocate(SIZE, 8);
           if (statfs.call(arena.allocateFrom(path), state) != 0) throw unavailable();
           long magic = state.get(ValueLayout.JAVA_LONG, 0);

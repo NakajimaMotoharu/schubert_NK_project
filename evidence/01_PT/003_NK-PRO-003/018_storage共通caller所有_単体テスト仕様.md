@@ -1,0 +1,9 @@
+# SSC308/YKT1178 共通caller 所有順序の横展開
+
+主費P003-08/共同P003-04、群1180の範囲内（開始.8/3/8固定、別群費の加算なし）。RD FIL001009/OPS009・UI237243251/SS333343354/仕様016、開始source6d7a54a01。今回対象はStorageRootInspection.inspectOne(1)、ExistingFileAccess.walk(2)、ServiceConfigFiles.read/readOne(2)、LinuxFilesystemClassifier.filesystem(1)の6site。いずれも資源生成後・useの引数callback構築中に未知Errorを処理する外側同資源ownerが無く、factory入口へ移す。既path/mode/属性二読/長さ/暗号UTF8/IOReason/redaction/例外優先順位は変更しない。
+
+LinuxExecDescriptors.inheritの1siteは非該当：借用FDを取得/closeする入口ではなく、変更前F_GETFDのみ実行、F_SETFD(0)は既use保護下。port構築前にflags変更もnative資源取得も無いため旧use保持。opsXfd001～004等の逆順flags復元・partial/unknown/compound試験と実bytecodeのset位置を再確認する。検索だけで完了としない。
+
+独立oracle：既StorageRootInspectionTest全根/属性/重複inode、ExistingFileAccessTest全境界・compound、ServiceConfigFilesTest固定literal内容/mode/mutation/null/並行/close・midread fault、LinuxFilesystemClassifierTest literal magic/ABI・実Arena Scope失効/unknown同一性、LinuxExecDescriptorsTest固定呼出列/flagsを保持し当sourceで全storage25suiteを実行。新factory自体の12matrix/Directory3/Root004も同runで再試験、別run加算0。新追加Java case無し（既222の同source回帰）で予定3830/558は変更しない。
+
+Java25 bytecodeを個別に検査し、6siteすべてfactory/action/releaseの構築がResourceScope.acquire前、取得はそのAcquire内部、旧use候補が当4fileから消失していることを確認する。型/checked失敗・null/IO規則を既fixtureで確認、storage四counter100/format6/static3/762Main実deltaを必要条件とする。新Main4変更・追加class無しを実確認、全体/native/残横展開は別受入。fixture期待値をproduction呼出しで作らず、試験/source/inputhash/exit/XML・counter・BUG/YKT・日時/toolchainを別slotmanifestへ保存する。
