@@ -33,6 +33,8 @@ def source():
 
 def main():
     if sys.argv[1:]not in(['stage'],['activate']):raise ValueError('one finite explicit stage/activate only')
+    from pg5460_ownership_publication_post import payload
+    payload()  # Actual frozen24 source hashes must compose the independent post before mutation.
     authenticate_host()
     ns={**vars(previous.previous.previous.previous.previous),'__file__':__file__,'role':role,'TARGET':TARGET,
         'generated':generated,'GUEST':GUEST,'REMOTE':REMOTE,'STAGE':STAGE,'qualify_fixed':qualify_fixed}

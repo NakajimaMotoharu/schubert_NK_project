@@ -50,6 +50,8 @@ class Publication(unittest.TestCase):
         for old in('0.1.0-PG4860','pg5008','pg5012','pg5000'):self.assertNotIn(old,dispatch.STAGE)
         with patch.object(dispatch.sys,'argv',['tool','start']),patch.object(dispatch,'authenticate_host')as auth,self.assertRaises(ValueError):dispatch.main()
         auth.assert_not_called()
+        with patch.object(dispatch.sys,'argv',['tool','stage']),patch.object(post,'payload',side_effect=ValueError('independent actual post unavailable')),patch.object(dispatch,'authenticate_host')as auth,self.assertRaises(ValueError):dispatch.main()
+        auth.assert_not_called()
 
     def test_independent_allphase_fixture_sql_durable_before_parse_and_true_refs(self):
         original=Path.read_bytes;target=role.W/'pg5456-frozen-v1.safe.json'
