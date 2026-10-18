@@ -2,6 +2,10 @@
 
 ## SSC308 Root IO所有の取得後callback構築gap是正
 
+FFM返却先の継続補足（2026-10-19、BUG1414/YKT1178）：LinuxSystemdSessionのbus/message/malloc文字列は、C呼出後にMemorySegment wrapperやscope callbackを構築してから所有登録しない。Arena→完成Sessionは既handoffで保護し、初回native前にSession私有の三out slot（bus、request/property、reply）とprimitive状態を確保する。元の同期・同thread経路の同時最大三所有だけであり、追加RPC/権限/再送/新公開入口ではない。各呼出の全引数準備後、C呼出直前にslotをPENDING、正常復帰直後にprimitiveでRETURNEDへする。pointer decodeに失敗してもslotと状態はSessionに残す。scopeはout slotからC呼出/返却の検査・変換全体までを先行保護する。
+
+nativeが正常復帰したslotは、旧と同じreply→request・property free・最後busの順で一度解放する。NULL/負statusの既分類を変えず、返却pointerが既知の場合は旧どおり対象解放する。呼出自体がIO/Runtime/Errorで不明なら当out pointerを「未取得」と推定してfreeせず、slot/arenaを保持しSessionをUNKNOWNにする。別の既知requestのcleanup試行は旧順で行い、不明な対象自身の再closeはしない。解放開始前にslotをUNCONFIRMEDへ進め、正常確認後だけ空きへ戻す。decode/close不明も元slotとarenaを保持し次照会0、Session.closeの既UNKNOWN拒否を維持する。物理native解放をprimitive消費だけで証明せず、正常ABI結果・資源後条件は同source実経路/nativeで別受入する。
+
 完成owner移管の追加適用（2026-10-19）：MorningPermitPublicationのnativeStore/nativeIntent/create、BackupStartIntentFiles.create/createPublicationはSS333のhandoff契約でDirectory→Files/Store/Intents→Publicationの各完全組立まで保護する。返却するownerがnonnullで完成した最後だけ移管し、失敗時は同一資源を一度解放、旧IO/unknown優先/UNKNOWN・保持/親期限・current/epoch/原本/DB/Backup/intent開始・退役を変更しない。既取得順と役割・固定namespace/metadataを保ち、初期化/lock/policy/残callbackの取得後確保を保護域外へ残さない。BackupStartIntentFiles.createServiceの既manual tryは別既契約として失敗/close優先まで比較し、理由なしに共通補助へ置換しない。原237候補と追加直接open/TWR対象の母数・是正/非該当・残証拠を分離する。内部詳細のためRD/UI/業務仕様変更・新QA不要、製造/PT/native/全体未完。
 
 StartupAdmissionFileのhost/private observation ownerはSS333追加詳細のN+3 primitive容量を取得前に確保し、native FDをboxing/List grow前に取り落とさず追跡する。各native open前のclosed/容量拒否、取得後の非負/既FD重複拒否とprimitive保持、逆順全close試行の後だけIO/unknown合成を行う。serviceOwner→hostOwnerの既exec前消費・A lockだけをtrusted callbackへ借用する順序、正規原本/同PID/current世代/Unit/期限/metadata照合は不変。close例外/論理消費済みをkernel正常解放又は未知tool成功と認定せず、同FD再試行/権限拡張をしない。関連BUG1414/YKT1178・SSC308は全体未完、RD/UI/外部仕様の変更不要・新QA不要。
