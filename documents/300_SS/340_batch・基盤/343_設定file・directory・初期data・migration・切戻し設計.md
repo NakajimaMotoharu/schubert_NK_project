@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC306 Root ELF固定SHA-256の内部port・同値read-count検査
+
+SS343/SSC137/143/354・411のtestability内部具体化。対象RootServiceExecutableAdmission.digestのみ、RD/UI/353運用/外部CLI/ENV/権限・固定setpriv/Java link/hash・所有/期限・ELF条件・8MiB上限は変更しない。package内のnon-nullなDigestFactoryを追加し、既entryは固定`MessageDigest.getInstance("SHA-256")`のfresh instanceだけを渡す。caller入力からalgorithm/provider/pathを選択できず、global providerや共有mutable hookを変更しない。port/入力はresource読取り前にnonnull資格、factoryのnull返却も内部不変条件違反として拒否する。
+
+provider生成時のNoSuchAlgorithmExceptionだけ既固定IOException("root executable unavailable")へcause/秘密値無しで変換し、未知RuntimeException/Errorは同一instanceで伝播する。factory失敗前はELF byteのread/hashを開始しない。digestは借用channelをcloseしない契約を維持、admitの既ResourceScopeが同一channelを逆順一度だけcloseし、成功/失敗時のmaterial配列zeroize・例外優先順位を変えない。新内部overload/port以外の公開入口/借用能力/DB/JMS/credential能力を追加しない。
+
+readの既predicate`n>0 && n==bytes.position() && n<=material.length`は、同じ8192byte配列から作るByteBufferの`0<=position<=capacity=material.length`不変条件により、`n>0 && n==bytes.position()`と全入力で同値である。これを同値整理し、正当最大size/読取chunk/EOF-position/過大申告/負・零・size変化・IOExceptionの拒否を独立試験で保持する。無視する入力やcoverage除外を追加せず、非準拠channelのn=8193・position=8192も既一致検査で拒否する。元64byte公開ELF golden SHA256 caa6f4f58ad3ed35afa011abfdb3ef06a7799b5545082b32685f75cc9c454fe8と固定header各offset/上限は不変。到達不能宣言や無意味assertで100%を作らない。
+
+独立literal/fixed hash・provider失敗/未知例外identity/null/借用寿命/zeroizeと既ROOTELF全case、当scopeのformat/NullAway/Werror/SpotBugs/選択PT・物理Main一outer変更/一内部SAM追加を資格する。これは部分製造/PTであり、変更群のfresh whole・同source runtime/native/全四100/F03/CHR/451/QA051finalは別未完。現a2ecc/PG4980/native10成功は保持するが、新sourceへ自動転用しない。QA不要のSS内部補足、設計only main反映を実装前に完了する。
+
 ## SSC305 当a2ecc既存ADMINの親終端比較・保持Ref pairの限定回収
 
 当限定契約の実績（2026-10-18、製造/限定PT完了・全PGPT未完）：初回設計only9b9967b1f→main fb96f60f0/PR152を先行し、元verify143/旧closeUNKNOWNを保持したまま5098全原値proof→5096一回子親回収/同hostgate継承→5100別全post0、是正新5102/04/06/08で親end独立反例・当ABI五phase/新stage/verify/実20/独立全postを各0で閉鎖した。Unit実1.77017秒/元30秒以内、既単一ADMIN/全24・32・187/原本Backup・二credential私有退役/全資源0を検証。当具体PID/slotは終了・退役済で再実行を許可しない。5112全1650CRC/session/二pair独立単調・最新closing10stream12point/旧source輸入0、5114元六XMLを秘匿公開。BUG1405/YKT1169および付随1406～08/1170～72を全対象再試験付き限定close。実施/証跡はdev-foundation 9ce065ff7・1042/1043・公開PG5112 manifest SHA60dadc92cf4fa7ff66427348675d0b9ad2f9e1d9b3f34e29d19d95868f105773に保存、実装/設定/工具/証跡はこの設計only反映へ混入しない。batch残739line/147method/9class/434branch、F03/CHR/451/QA051final/正式1964PT・53scope/17・190/工数nullは未更新・別未完。

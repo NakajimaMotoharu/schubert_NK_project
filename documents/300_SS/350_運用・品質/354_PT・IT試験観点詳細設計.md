@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC306 Root ELF provider失敗・read-count同値の独立PT
+
+SS343 SSC306。default SHA256/固定64byteELF caa6f4f5…fe8は元期待値のまま、package内factory faultでNoSuch→固定IO/no cause/no inputread、未知Runtime/Error同一identity、null/欠落はI/O前拒否を確認する。global Security providerを変更せず、Reflection/private呼出しや架空coverage除外を使わない。n>0・n==positionの同値整理は過大申告8193/position8192・負/零/count違い/EOF-position/size違い/上限正当値・超過を独立fixtureで確認し、拒否を弱めない。借用channelをdigestがcloseしない/呼出側ResourceScopeが同一資源を回収/作業buffer wipeの正常・例外を検証する。新source選択PT/静的/byte差を限定資格し、旧3791/10nativeを新source合格へ合算せず、必要変更群が揃ったfresh全体/同source実経路/四100・F03/正式は別に閉鎖する。
+
 ## SSC305 親start/endの独立比較と当保持pairの否定試験
 
 実績追補2026-10-18：5102 end/start/旧end/null/bool/foreign/欠落の独立負例＋完全graph5件、5108全関数/三前像/実終端前提3件、5116全1650/two-pair/public4件が成功。5098/5096/5100の全原値/所有/各一回TERM/元143UNKNOWN/別post、是正5104五ABI・5106三phase・5108captured20/1.77017秒・5112 CRC/session/二単調・5114公開が全actual0。失敗byte/slot/中間fixture失敗も保存し、元3791/署名/Root/完了ABI再演0。dev-foundation9ce065ff7/1042・1043で追跡し、この限定是正の完了を四coverage全100/F03/CHR/正式/ITSTへ拡大しない。
