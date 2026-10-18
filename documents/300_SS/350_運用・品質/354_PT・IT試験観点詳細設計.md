@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+native横展開PT補足：FileLock/SealedProofの有効primitive取得直後wrapper格納/返却、負値・dup自己同一・close一度/未知/compoundを独立literal/identityとJava25で検査する。Startup二owner集合はP→A、proof早期close後の集合closeはAだけ、並行早期消費・全IO/unknown/compound・未adoptのinput拒否close0を独立確認し、port全構築がadopt前であることを実bytecodeで証明する。既storage全suite/全四counter/静的と必要全体/nativeを別受入、実heapOOMEや未実行成功を捏造しない（003020、WBS-P003-06、群1186開始費固定）。
+
 限定検証追補（2026-10-18）：source6d7a54a01・独立新16を含む222PT/32suite、全storage四counter1200行/269method/37class/537branch各miss0、六format/実compile三static0、取得直後保護域と旧use56opcode/handler同義の実bytecodeを確認（003016/017、PG5138 5ce05224・訂正公開e3024935）。Root11/共通Directory5だけの結果であり、残候補/新source全体/native/全正式品質は未完。失敗v1～v5/metadata384aは保持、既全体/旧nativeを転用しない。共通caller等の残候補は同規則と既独立oracleで個別修正又は非該当根拠・再発防止確認を続ける。
 
 Root top補足：専用RootDescriptorの有効FD319（Integer cache範囲外）・負FD・open失敗・null callsと一度closeを独立literalで検証し、primitive保持で取得後boxing無しを実bytecodeで確認する。Root checkedにOwnedDirectory由来のIO Reason変換を加えず、同FD・同型・同一失敗と既close優先順位を保持する。fake DirectoryCallsが他native操作を呼ばれた場合はfailし、Root authority/本物起動の代用にしない。
