@@ -36,16 +36,22 @@ PENDING_NAMES = (
     'pending011OnlyMissingLaunchBecomesEmpty',
     'pending012ReadIdentityAndNullContractsStayFailures',
 )
+GUARD_NAMES = ('guard001SetprivRejectsEveryNonServiceRoleBeforeAnyIo',
+               'guard002ObserveRejectsEveryNonServiceRoleBeforeAnyIo',
+               'guard003AllNativeEntryNullContractsPrecedeIoAndCallbacks')
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--group', choices=('elf', 'pending'), default='elf')
+    parser.add_argument('--group', choices=('elf', 'pending', 'guards'), default='elf')
     args = parser.parse_args()
     run = RUN if args.group == 'elf' else W / 'pg5124-root-pending-green-v1'
+    if args.group == 'guards': run = W / 'pg5126-root-guards-green-v1'
     public = PUBLIC if args.group == 'elf' else PUBLIC.parent / run.name
     required = (28, 4, 8) if args.group == 'elf' else (47, 7, 20)
+    if args.group == 'guards': required = (50, 8, 23)
     suite_modules = selected.SUITES if args.group == 'elf' else {**selected.SUITES, **selected.PENDING_SUITES}
+    if args.group == 'guards': suite_modules = {**suite_modules, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     result = json.loads((run / 'manifest.safe.json').read_bytes())
     begin = json.loads((run / 'begin.safe.json').read_bytes())
     if not (type(result['actualExit']) is int and result['actualExit'] == 0
@@ -57,14 +63,14 @@ def main():
     for name, digest in begin['inputs'].items():
         if selected.sha(run / 'source' / name) != digest:
             raise ValueError('original fixed snapshot input changed')
-    if selected.main_delta(run / 'source', args.group) != result['mainDelta']:
+    if selected.main_delta(run / 'source', 'elf' if args.group == 'elf' else 'pending') != result['mainDelta']:
         raise ValueError('actual compiled Main delta changed')
     # Independent actual XML counter/static re-read, not merely a runner exit-code assertion.
     wanted = {
         'digest(Ljava/nio/channels/SeekableByteChannel;)Ljava/lang/String;',
         'digest(Ljava/nio/channels/SeekableByteChannel;Ldev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission$DigestFactory;)Ljava/lang/String;',
         'lambda$digest$0()Ljava/security/MessageDigest;'}
-    if args.group == 'pending':
+    if args.group != 'elf':
         wanted |= {
             'awaitLaunch(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;JLdev/codex/schubert/nk/batch/file/RootStartupPending$WaitIo;)V',
             'readLaunch(Ldev/codex/schubert/nk/batch/file/RootStartupPending$LaunchRead;)Ljava/util/Optional;'}
@@ -108,6 +114,10 @@ def main():
                 if case['method'] not in PENDING_NAMES: raise ValueError('unknown wait case')
                 case.update(testId='PT-ROOTWAIT-SSC307-' + str(PENDING_NAMES.index(case['method']) + 1).zfill(3),
                             newIndependentCase=True)
+            elif name.endswith('.RootEntryRejectionTest'):
+                if case['method'] not in GUARD_NAMES: raise ValueError('unknown guard case')
+                case.update(testId='PT-ROOTGUARD-' + str(GUARD_NAMES.index(case['method']) + 1).zfill(3),
+                            newIndependentCase=True)
         records += cases; suites.append({'class': name, 'module': module, 'originalXmlSha256': digest, 'tests': len(cases)})
     if len(records) != required[0] or sum(r['newIndependentCase'] for r in records) != required[2]:
         raise ValueError('exact literal required cases')
@@ -126,8 +136,8 @@ def main():
                          'logSha256': old['logSha256'], 'successImported': False})
     value = {'kind': 'LIMITED_SELECTED_NOT_FORMAL', 'actualExit': 0, 'tests': required[0], 'suites': required[1],
              'productionCandidateSource': result['sourceSnapshot'], 'deployedProductionSource': selected.BASE,
-             'FESFlakyNotRun': 0, 'newIndependentCases': 8 if args.group == 'elf' else 12,
-             'cumulativeIndependentCasesInRun': required[2], 'priorIndependentCasesRevalidated': 0 if args.group == 'elf' else 8,
+             'FESFlakyNotRun': 0, 'newIndependentCases': {'elf':8, 'pending':12, 'guards':3}[args.group],
+             'cumulativeIndependentCasesInRun': required[2], 'priorIndependentCasesRevalidated': {'elf':0, 'pending':8, 'guards':20}[args.group],
              'relatedCases': required[0] - required[2],
              'cases': records, 'suiteProofs': suites, 'targetMethodCounters': measured,
              'independentCoverageXmlSha256': selected.sha(coverage_path), 'independentStaticXmlSha256': static_hashes,
@@ -139,7 +149,9 @@ def main():
              'logSha256': result['logSha256'], 'sourceInputsSha256': evidence.sha(json.dumps(begin['inputs'], sort_keys=True).encode()),
              'configuredToolchain': {'jdk': '25.0.4', 'maven': '3.9.12', 'jacoco': '0.8.15', 'spotbugs': '4.10.4.0', 'formatter': '1.36.1'},
              'hostOsMeasuredAtPublication': platform.platform(), 'failuresPreserved': failures,
-             'spec': '1045_Root_ELF固定digest内部port・独立PT仕様.md' if args.group == 'elf' else '1047_Root待機・同owner期限・欠落例外の独立PT仕様.md',
+             'spec': {'elf':'1045_Root_ELF固定digest内部port・独立PT仕様.md',
+                      'pending':'1047_Root待機・同owner期限・欠落例外の独立PT仕様.md',
+                      'guards':'1049_Root入口の不許可role・null・I_Oゼロ独立PT仕様.md'}[args.group],
              'bugs': ['BUG1411', 'BUG1412'], 'ykt': ['YKT1175', 'YKT1176'],
              'wholeRegression': False, 'formalAccepted': False, 'acceptedLeafDelta': 0,
              'effortPercent': None, 'oldNativeImported': False, 'newSourceNativeQualified': False,
