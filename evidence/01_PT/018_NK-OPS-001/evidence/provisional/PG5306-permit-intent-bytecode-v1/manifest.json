@@ -1,0 +1,308 @@
+{
+  "source": "c29752dbe4de7b24ee92bfa4fb71f2e164c16515",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "MorningPermitPublication": {
+      "scopes": [
+        {
+          "method": "dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch issue(dev.codex.schubert.nk.batch.file.StartupPermitRecords$Permit, dev.codex.schubert.nk.batch.file.StartupPermitFiles$IssueProof) throws java.io.IOException;",
+          "acquirePc": 120,
+          "portPcs": [
+            101,
+            106,
+            115
+          ]
+        },
+        {
+          "method": "void commit() throws java.io.IOException;",
+          "acquirePc": 69,
+          "portPcs": [
+            53,
+            58,
+            64
+          ]
+        },
+        {
+          "method": "void abort();",
+          "acquirePc": 66,
+          "portPcs": [
+            51,
+            56,
+            61
+          ]
+        },
+        {
+          "method": "void abort();",
+          "acquirePc": 95,
+          "portPcs": [
+            79,
+            84,
+            90
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$nativeStore$0(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles lambda$nativeIntent$0(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;",
+          "acquisition": "BackupStartIntentFiles.createPublication:",
+          "rawReturnPcs": [
+            5
+          ]
+        }
+      ],
+      "classSha256": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77",
+      "javapSha256": "859631f7f927e9f35503b0fb81d0ecfd4826008d3a53e6a5402968b9902ae5a2"
+    },
+    "BackupStartIntentFiles": {
+      "scopes": [],
+      "factories": [],
+      "classSha256": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00",
+      "javapSha256": "4ab12a9add9e0392444f9bfc0264f5bbe8d2d6273f581695487ec10b95d234b5"
+    }
+  },
+  "selectedManifestSha256": "93214f3a8f68e2789e1018c9080baa7581354465cf7c8c108a23218392a7a096",
+  "semanticClasses": 2,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent",
+      "old": {
+        "classSha256": "fb91cabb1640d0933c8f2d62aea6418aaf30879555ad65558ea70f80a463a7a3",
+        "javapSha256": "5413a25b1240052d46a06d97d58b99d49a78d1d44c0bf1da32fa3e15a24e07e8"
+      },
+      "current": {
+        "classSha256": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+        "javapSha256": "5413a25b1240052d46a06d97d58b99d49a78d1d44c0bf1da32fa3e15a24e07e8"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "enclosingMethodBefore": [],
+      "enclosingMethodAfter": [],
+      "enclosingMethodEqual": true,
+      "pureDebugDifferenceNotAsserted": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningPermitPublication$1",
+      "old": {
+        "classSha256": "abeb58278d288e98fd951ba77df7a2d91bd374cd379028d9eb5ae647945ae87c",
+        "javapSha256": "6a4adbdae6ddbb5b97f0cda92638fcf81cde24e529347cc513a5d468b094fc7d"
+      },
+      "current": {
+        "classSha256": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+        "javapSha256": "6a4adbdae6ddbb5b97f0cda92638fcf81cde24e529347cc513a5d468b094fc7d"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "enclosingMethodBefore": [
+        "dev.codex.schubert.nk.batch.file.MorningPermitPublication.nativeIntent"
+      ],
+      "enclosingMethodAfter": [
+        "dev.codex.schubert.nk.batch.file.MorningPermitPublication.nativeIntent"
+      ],
+      "enclosingMethodEqual": true,
+      "pureDebugDifferenceNotAsserted": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.MorningPermitPublication$2",
+      "old": {
+        "classSha256": "cd075eeafe2fa883966042dd5e0b77f0e5542e95fad39b747d16cc795277bf88",
+        "javapSha256": "c168992f7dec7ed278d161bffabb781039a41f65fb9c3be191a1d9ca934bb049"
+      },
+      "current": {
+        "classSha256": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+        "javapSha256": "c168992f7dec7ed278d161bffabb781039a41f65fb9c3be191a1d9ca934bb049"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "enclosingMethodBefore": [
+        "dev.codex.schubert.nk.batch.file.MorningPermitPublication.nativeStore"
+      ],
+      "enclosingMethodAfter": [
+        "dev.codex.schubert.nk.batch.file.MorningPermitPublication.nativeStore"
+      ],
+      "enclosingMethodEqual": true,
+      "pureDebugDifferenceNotAsserted": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 759,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/file/MorningPermitPublication": {
+      "BRANCH": {
+        "missed": 10,
+        "covered": 26
+      },
+      "LINE": {
+        "missed": 34,
+        "covered": 91
+      },
+      "METHOD": {
+        "missed": 12,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/BackupStartIntentFiles": {
+      "BRANCH": {
+        "missed": 21,
+        "covered": 21
+      },
+      "LINE": {
+        "missed": 63,
+        "covered": 107
+      },
+      "METHOD": {
+        "missed": 13,
+        "covered": 21
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "originalRunnerActualExit": 1,
+  "selectedQualificationSha256": "7ad38df3b9dab3376970f7fcf55d8a4b5699c8d042dac38d6f438b0001cb4b7f",
+  "qualificationKind": "READ_ONLY_ORIGINAL_1038_LITERAL_REPEAT10_NO_REPLAY",
+  "completeAssemblyProofs": {
+    "MorningPermitPublication": {
+      "handoffs": [
+        {
+          "method": "static dev.codex.schubert.nk.batch.file.MorningPermitPublication create(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.MorningParentBudget, dev.codex.schubert.nk.batch.repository.MaintenanceRunState, dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access, dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$OriginalProof) throws java.io.IOException;",
+          "handoffPc": 88,
+          "portPcs": [
+            65,
+            70,
+            83
+          ],
+          "declaredReturnType": "dev.codex.schubert.nk.batch.file.MorningPermitPublication",
+          "checkcastPc": 91,
+          "returnPc": 94
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.batch.file.MorningPermitPublication$Intents nativeIntent(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;",
+          "handoffPc": 17,
+          "portPcs": [
+            2,
+            7,
+            12
+          ],
+          "declaredReturnType": "dev.codex.schubert.nk.batch.file.MorningPermitPublication$Intents",
+          "checkcastPc": 20,
+          "returnPc": 23
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.batch.file.MorningPermitPublication$Store nativeStore() throws java.io.IOException;",
+          "handoffPc": 31,
+          "portPcs": [
+            16,
+            21,
+            26
+          ],
+          "declaredReturnType": "dev.codex.schubert.nk.batch.file.MorningPermitPublication$Store",
+          "checkcastPc": 34,
+          "returnPc": 37
+        }
+      ],
+      "class": {
+        "classSha256": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77",
+        "javapSha256": "859631f7f927e9f35503b0fb81d0ecfd4826008d3a53e6a5402968b9902ae5a2"
+      },
+      "PublicationAssemblyMethod": "private static dev.codex.schubert.nk.batch.file.MorningPermitPublication lambda$create$2(dev.codex.schubert.nk.batch.file.MorningPermitPublication$OpenStore, dev.codex.schubert.nk.batch.file.MorningPermitPublication$OpenIntent, dev.codex.schubert.nk.batch.file.MorningPermitPublication$Gate, dev.codex.schubert.nk.batch.file.MorningPermitPublication$Retain, dev.codex.schubert.nk.batch.file.MorningPermitPublication$Intents) throws java.io.IOException;",
+      "IntentsAssemblyMethod": "private static dev.codex.schubert.nk.batch.file.MorningPermitPublication$1 lambda$nativeIntent$1(dev.codex.schubert.nk.batch.file.BackupStartIntentFiles) throws java.io.IOException;",
+      "StoreAssemblyMethod": "private static dev.codex.schubert.nk.batch.file.MorningPermitPublication$2 lambda$nativeStore$1(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;"
+    },
+    "BackupStartIntentFiles": {
+      "handoffs": [
+        {
+          "method": "public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles create(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Target) throws java.io.IOException;",
+          "handoffPc": 79,
+          "portPcs": [
+            61,
+            66,
+            74
+          ],
+          "declaredReturnType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+          "checkcastPc": 82,
+          "returnPc": 85
+        },
+        {
+          "method": "public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles createPublication(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;",
+          "handoffPc": 70,
+          "portPcs": [
+            53,
+            58,
+            65
+          ],
+          "declaredReturnType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+          "checkcastPc": 73,
+          "returnPc": 76
+        }
+      ],
+      "class": {
+        "classSha256": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00",
+        "javapSha256": "4ab12a9add9e0392444f9bfc0264f5bbe8d2d6273f581695487ec10b95d234b5"
+      },
+      "rawDirectoryTails": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$createPublication$0(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "returnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$create$0(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "returnPcs": [
+            5
+          ]
+        }
+      ],
+      "manualCreateServiceOpcodesAndHandlersUnchanged": true
+    }
+  },
+  "originalScopeSites": 4,
+  "internalAssemblyHandoffs": 3,
+  "extraDirectoryOwnerFactories": 2,
+  "protectedAcquisitionBoundaries": 9,
+  "physicalDirectoryFactorySites": 3,
+  "nativeOwnerExecutionQualified": false,
+  "storageFourCounters": {
+    "BRANCH": {
+      "covered": 533,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 39,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 1222,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 294,
+      "missed": 0
+    }
+  }
+}

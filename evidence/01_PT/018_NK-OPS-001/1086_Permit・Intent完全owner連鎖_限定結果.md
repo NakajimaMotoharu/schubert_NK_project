@@ -1,0 +1,13 @@
+# Permit・Intent 完全owner連鎖 限定結果
+
+1085仕様、source **c29752dbe4de7b24ee92bfa4fb71f2e164c16515**/dev-foundation。PG5304元76722は終了**1**を不変保持（両Maven0/1038PT126suite/FES/flaky/skipped/notrun0/六format0/NullAway・ErrorProne0/三compiled static0/全storage四miss0）。工具の@Testだけの開始一覧が、既BackupStartIntentFilesTestの固定@RepeatedTest(10)を落としていた（BUG1438/YKT1202）。通常6＋同一並行methodの10invocation＝当suite16、追加二suiteはRootFailedPair11と合わせ27実行/論理18method。原予定1028を1038実行へ訂正、**論理method1029・反復method1/10invocation**、新Java/独立case0、whole予定3851を10増やさない。
+
+PG5312別read-only資格0、private qualification SHA **7ad38df3b9dab3376970f7fcf55d8a4b5699c8d042dac38d6f438b0001cb4b7f**。原開始/manifest1/source archive/全input/log/XML/static/四counter/全764CRCを再読し、原partial期待を不変保持した別full期待を固定source宣言から構築。126suite全通常宣言と唯一の無引数10回を番号1～10まで照合、他125に未宣言Repeated/Parameterized/TestTemplate無し。欠落/重複/未知/回数・署名変異/alias衝突拒否の独立管理、元成功試験を再実行せず原失敗を0化しない。
+
+PG5306最終元72036実0、`evidence/provisional/PG5306-permit-intent-bytecode-v1/manifest.json` SHA **cd4c094d992e82df9caf6e86ced35e946a8fd9bcd36e9a3f96f5ccfd4854713d**。原4scope、内部3handoff＋原237外二Directory factoryの**9保護境界**を全port先行/生factory直返却/保護assembly/完成型返却まで検証。実physicalDirectory3（nativeStore1＋Intent2）、既createServiceの全methodopcode/handler・別close優先は不変。全764Main＝意味outer2/3nested全method同義/他759同byte、nestedのEnclosingMethodも実同一だが純debugだけと無根拠に断定しない。Scope/全storageは当sourceでも52・5・1・20/1222・294・39・533各miss0。対象未実行はPublication34行12method10branch、Intent63行13method21branch、全体/native100ではない。
+
+初byteproofはgeneric消去後の宣言型checkcastを余分なworkと誤判定し1/manifest未生成（BUG1439/YKT1203）。五宣言class/interface一致のcheckcast→areturnだけを検証、異型/new/invoke/field書込を拒否する独立fixtureと実五tailで是正、Object直返却の旧5298/既5138型扱いは非該当・再演0。原post二拒否は出力のみ/rawfile欠測、原Maven/資格/sourceを改変しない。管理9（Repeated3/selected2/typedTail1/finish3）、関連14tool pyflakes0・最終post/公開で1438/1439工具範囲のみclose、修正commit本追補参照。
+
+PG5308公開0、`evidence/provisional/pg5304-permit-intent-green-v1-metadata-v2/manifest.json` SHA **a02ab457940d96ada4bdb6c85d96f5b08be88ef9cea380571a4be72ba123c92a**。全1038実行のTestID/class/method/観測invocation/fixture/独立期待/実際/実日時・OS/JDK25.0.4/Maven3.9.12/command/exit/source/XML/coverage/static/hashのallowlist、反復10はdeclaredMethod/番号/回数と一意PT-OPS-ISS006-R01～10を保持、既独立60/関連978・新独立0、raw秘密0。PG5310実0 **ddf630179ef6714a69ad795a4c3f6e7414ccd8f8e0780a1fb0453aed33fe5e49**、原237=**194限定/1借用/42UNKNOWN**、追加二factoryは別母数2限定/正式0、原外四readonly候補と全体YKTは未完。
+
+群1226 .6/1.8/5固定、P01712.03主費/P0180302構成/分割null/親非加算。前計画原4＋内部3＋追加2の限定成果/新発見0/工具二手戻り/source資格/既反復の件数見積訂正を分離。正式1964・53/歴史17・190/leafdelta0/工数null/元・v3・v4未較正597.25不変。fresh共有18/残82/短期null/券0、17→18表示は専有費/N-Tではない。whole3851・559・1661/currentnative/全四100/F03/CHR/451/QA051final/trace/引継ぎ/BUG1414全体未完・署名配備0。原本DB/Backup/鍵/stash7/Currentbaseline/native/全成功失敗保持・実業務/VM操作0、通常小区切り停止0。

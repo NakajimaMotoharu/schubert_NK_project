@@ -4,6 +4,12 @@ import pg5281_factory_finish as role
 
 
 class StrictPublication(unittest.TestCase):
+    def test_independent_count_cannot_be_negative_or_boolean(self):
+        for number in (-1,False):
+            with self.assertRaisesRegex(ValueError,'independent case count'):
+                role.publish_current(entry=None,run_name=None,proof_name=None,counts=None,
+                    spec=None,proof_key=None,extra=None,independent_cases=number)
+
     def test_proof_rejects_boolean_unknown_wrong_source_or_main(self):
         good={'actualExit':0,'source':'a'*40,'physicalMain':764}
         result={'sourceSnapshot':'a'*40};role.validate_proof(good,result,764)

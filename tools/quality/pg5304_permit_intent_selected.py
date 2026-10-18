@@ -14,6 +14,11 @@ RELATED={f'dev.codex.schubert.nk.batch.file.{name}Test':'batch' for name in
     ('BackupStartIntentFiles','RootFailedStartPairRecovery','StartupPermitFiles','MorningCompletedMain')}
 
 
+def repetitions():
+    return {'dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest':
+        {'concurrentDistinctOwnersCannotPublishTwoIntents':10}}
+
+
 def configure():
     previous.configure()
     selected.EXTRA_CHANGED|={PREFIX+n+'.class' for n in OUTERS}
@@ -27,7 +32,7 @@ def extra_suites():
 def main():
     configure()
     return selected.main(stem_override='pg5304-permit-intent',version_override='v1',
-        extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases())
+        extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases(),case_repetitions=repetitions())
 
 
 if __name__=='__main__':raise SystemExit(main())

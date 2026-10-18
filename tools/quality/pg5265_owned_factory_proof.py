@@ -6,14 +6,19 @@ import xml.etree.ElementTree as ET
 import pg5138_factory_bytecode as bytecode
 import pg5142_storage_callers_bytecode as caller
 import pg5150_native_fd_bytecode as native
+import pg5122_root_elf_public as public
 
 
-def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,out_name):
+def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,out_name,qualification_path=None):
     if re.fullmatch(r'[0-9a-f]{40}',source) is None:
         raise ValueError('source pin must be a full40hex commit')
     selected=entry.selected;work=selected.ROOT.parent/'pgpt-runs/PG379'
     run=work/run_name;prior_run=work/prior_name
-    result=json.loads((run/'manifest.safe.json').read_bytes())
+    original_path=run/'manifest.safe.json'
+    result=json.loads((qualification_path or original_path).read_bytes())
+    if qualification_path is not None:
+        if qualification_path!=run/'qualification.safe.json':raise ValueError('fixed original job qualification only')
+        public.validate_separate_qualification(result,json.loads(original_path.read_bytes()),selected.sha(original_path))
     if result['actualExit']!=0 or result['phaseExits']!=[0,0] or result['tests']!=tests or result['suites']!=suites or result['sourceSnapshot']!=source:
         raise ValueError('exact original selected source, terminal and all current counts required')
     prior=json.loads((prior_run/'manifest.safe.json').read_bytes())
@@ -51,6 +56,9 @@ def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,o
         'nestedDebugEquivalent':debug,'otherPhysicalClassesUnchanged':len(after)-len(changed),'targetClassCounters':targets,
         'bugs':['BUG1414'],'ykt':['YKT1178'],'ssc':['SSC308'],'wholeHorizontalComplete':False,
         'formalAccepted':False,'nativeImported':False,'actualHeapOomReproduced':False,'vmActions':0,'testReplays':0}
+    if qualification_path is not None:
+        value.update(originalRunnerActualExit=1,selectedQualificationSha256=selected.sha(qualification_path),
+            qualificationKind=result['qualificationKind'])
     return run,value
 
 

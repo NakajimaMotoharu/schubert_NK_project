@@ -9,6 +9,7 @@ import re
 import subprocess
 import tarfile
 import xml.etree.ElementTree as ET
+import pg5311_repeated_inventory as repetitions
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = 'a2ecc77ca312c383246c94ea692c4db7487112cd'
@@ -123,7 +124,7 @@ def expected_invocations(methods,aliases,source):
     return sorted(result)
 
 
-def main(*, stem_override=None, version_override=None, extra_suites=None, case_name_aliases=None):
+def main(*, stem_override=None, version_override=None, extra_suites=None, case_name_aliases=None,case_repetitions=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
@@ -171,6 +172,10 @@ def main(*, stem_override=None, version_override=None, extra_suites=None, case_n
         if name not in suites:raise ValueError('invocation alias outside selected suite')
         text=(snapshot/('src/schubert-nk-'+suites[name]+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
         expected[name]=expected_invocations(expected[name],aliases,text)
+    if set(case_repetitions or {})-set(suites):raise ValueError('repetition outside selected suite')
+    for name,module in suites.items():
+        source=(snapshot/('src/schubert-nk-'+module+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
+        expected[name]=repetitions.expected(expected[name],(case_repetitions or {}).get(name,{}),source)
     env = {k: v for k, v in os.environ.items() if k not in ('JAVA_TOOL_OPTIONS', 'JDK_JAVA_OPTIONS', '_JAVA_OPTIONS', 'CLASSPATH')}
     env.update(JAVA_HOME=str(TC / 'jdk-25.0.4'), PATH=str(TC / 'jdk-25.0.4/bin') + ':' + os.environ['PATH'],
                MAVEN_OPTS='-Xmx768m -Djava.io.tmpdir=' + str(work),
@@ -182,6 +187,7 @@ def main(*, stem_override=None, version_override=None, extra_suites=None, case_n
              'archiveSha256': sha(archive), 'inputs': inputs, 'expectedMethods': expected,
              'commands': commands, 'parentUmask': '0077', 'childMavenUmask': '0027',
              'invocationAliases':case_name_aliases or {},
+             'invocationRepetitions':case_repetitions or {},
              'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
     (work / 'begin.safe.json').write_text(json.dumps(begin, sort_keys=True))
     codes = []; logs = {}

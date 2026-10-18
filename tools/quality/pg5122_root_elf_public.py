@@ -8,6 +8,7 @@ import re
 import xml.etree.ElementTree as ET
 import pg4852_selected_public_evidence as evidence
 import pg5120_root_elf_selected as selected
+import pg5311_repeated_inventory as repetitions
 
 ROOT = selected.ROOT
 W = ROOT.parent / 'pgpt-runs/PG379'
@@ -80,7 +81,7 @@ def suite_map(base,extra):
 def validate_separate_qualification(result,original,original_sha):
     reasons=original.get('reasons')
     known=reasons==['declared semantic changes plus explicitly bounded nested debug candidates only'] or (
-        reasons==['exact selected case inventory incomplete'] and bool(result.get('qualifiedInvocationAliases')))
+        reasons==['exact selected case inventory incomplete'] and bool(result.get('qualifiedInvocationAliases') or result.get('qualifiedInvocationRepetitions')))
     if original.get('actualExit')!=1 or original.get('phaseExits')!=[0,0] or not known:
         raise ValueError('only explicit post-inventory failure may be separately qualified')
     if result.get('originalRunnerActualExit')!=1 or result.get('originalManifestSha256')!=original_sha:
@@ -91,7 +92,8 @@ def validate_separate_qualification(result,original,original_sha):
 
 
 def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None,
-         required_counts=None, case_overrides=None, extra_suites=None, qualification_path=None, case_name_aliases=None):
+         required_counts=None, case_overrides=None, extra_suites=None, qualification_path=None, case_name_aliases=None,
+         case_repetitions=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
@@ -178,6 +180,13 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
         raw = path.read_bytes()
         if evidence.sha(raw) != digest: raise ValueError('original XML hash')
         cases = evidence.cases(raw, name)
+        source=(run/'source'/('src/schubert-nk-'+module+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
+        repeat=(case_repetitions or {}).get(name,{})
+        saved_repetitions=result.get('qualifiedInvocationRepetitions',begin.get('invocationRepetitions',{}))
+        if saved_repetitions.get(name,{})!=repeat:raise ValueError('same explicit source repetition contract')
+        normal=re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(',source)
+        declared_methods=repetitions.expected(normal,repeat,source)
+        for case in cases:case.update(repetitions.detail(case['method'],repeat))
         aliases=(case_name_aliases or {}).get(name,{})
         if aliases:
             if result.get('qualifiedInvocationAliases',result.get('invocationAliases',{})).get(name)!=aliases:
@@ -190,7 +199,9 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
                 matching=[case for case in cases if case['method']==observed]
                 if len(matching)!=1:raise ValueError('exactly one original observed invocation')
                 matching[0]['observedInvocation']=observed;matching[0]['method']=canonical
-        expected_methods=sorted(aliases.get(method,method) for method in begin['expectedMethods'][name])
+        expected_methods=sorted(aliases.get(method,method) for method in result.get('qualifiedExpectedMethods',begin['expectedMethods'])[name])
+        if sorted(c['method'] for c in cases)!=declared_methods:
+            raise ValueError('all normal and repeated cases must match immutable source declarations')
         if sorted(c['method'] for c in cases) != expected_methods:
             raise ValueError('literal original case inventory')
         for case in cases:

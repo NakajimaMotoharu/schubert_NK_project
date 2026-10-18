@@ -22,28 +22,34 @@ def new_files(entry):
     return {n+'.java' for n in names}
 
 
-def publish_current(*,entry,run_name,proof_name,counts,spec,proof_key,extra):
+def publish_current(*,entry,run_name,proof_name,counts,spec,proof_key,extra,
+                    independent_cases=54,case_overrides=None,qualification_path=None,case_repetitions=None):
+    if type(independent_cases) is not int or independent_cases<0:
+        raise ValueError('explicit nonnegative independent case count required')
     run=public.W/run_name;result=json.loads((run/'manifest.safe.json').read_bytes())
     path=entry.selected.ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/proof_name/'manifest.json'
     proof=json.loads(path.read_bytes());validate_proof(proof,result,764)
-    fields={'newIndependentCases':0,'priorIndependentCasesRevalidated':54,'newJavaCasesInThisGroup':0,
+    fields={'newIndependentCases':0,'priorIndependentCasesRevalidated':independent_cases,'newJavaCasesInThisGroup':0,
         'spec':spec,'ssc':['SSC308'],'bugs':['BUG1414'],'ykt':['YKT1178'],
         proof_key:entry.selected.sha(path),'storageFourCounters':result['storageFourCounters'],
         'semanticClasses':proof['semanticClasses'],'nestedDebugEquivalent':proof['nestedDebugEquivalent'],
         'otherPhysicalClassesUnchanged':proof['otherPhysicalClassesUnchanged'],'targetClassCounters':proof['targetClassCounters'],
         'nativeOwnerExecutionQualified':False,'wholeHorizontalComplete':False}
     fields.update(extra);entry.configure()
-    return public.main(factory_run_name=run_name,measurement_module=entry.selected,required_counts=(*counts,54),
-        case_overrides=ids.revalidated_case_ids(),extra_suites=entry.extra_suites(),case_name_aliases=entry.aliases.invocation_aliases(),
+    return public.main(factory_run_name=run_name,measurement_module=entry.selected,required_counts=(*counts,independent_cases),
+        case_overrides=ids.revalidated_case_ids() if case_overrides is None else case_overrides,
+        extra_suites=entry.extra_suites(),case_name_aliases=entry.aliases.invocation_aliases(),
+        qualification_path=qualification_path,case_repetitions=case_repetitions,
         extra_fields=fields)
 
 
-def classify_current(*,entry,source,previous_ref,previous_sha,previous_source,qualified_ref,tests,suites,counts,out_name):
+def classify_current(*,entry,source,previous_ref,previous_sha,previous_source,qualified_ref,tests,suites,counts,out_name,extra=None):
     value,proof=carry.continue_current(root=entry.selected.ROOT,sha=entry.selected.sha,
         previous_ref=previous_ref,previous_sha=previous_sha,previous_source=previous_source,
         source=source,qualified_ref=qualified_ref,tests=tests,suites=suites,new_files=new_files(entry),expected_counts=counts)
     value.update(semanticClasses=proof['semanticClasses'],nestedDebugEquivalent=proof['nestedDebugEquivalent'],
         otherPhysicalClassesUnchanged=proof['otherPhysicalClassesUnchanged'],nativeOwnerExecutionQualified=False)
+    if extra is not None:value.update(extra)
     out=entry.selected.ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/out_name
     os.umask(0o077);out.mkdir(parents=True)
     with(out/'manifest.json').open('x') as f:
