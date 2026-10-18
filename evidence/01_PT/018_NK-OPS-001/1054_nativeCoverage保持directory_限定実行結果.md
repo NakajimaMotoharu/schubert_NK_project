@@ -1,5 +1,7 @@
 # NK-OPS-001 native coverage directory所有 限定結果
 
+費用leaf結合訂正（event1194、元1188/1189・source/run/開始.3/1/3は不変）：481の親P018-08は非加算rollup、484/v4の実費主担当は **P018-08.01**（公開入口/所有/host driver）、同じ共有群内のsource/byte照合部分は **P018-08.03**へ結ぶ。子内訳はnull/共同群一回だけ、分割や均等配賦/追加再計上0。P018-08.02の既正常/例外/中断/非再用関連再試験・親P01808・共通P00304/P00308は参照追加見積0（実費0ではない）。.01のF02/F03と全451、.01→.02→.03終了依存/当source noMatch・欠落stream・CRC/session/実VM・全子/親criteriaは未照合を維持し、どの子も受入/工数加点0。PG5156/5158/5164等の成功再実行0、元/v3/v4/未較正597.25・旧記述/証拠を保持する。
+
 readonly metadata追補：Test source **50bc4cd2e7b4d96e0f8b6d3f0668eaa304f99a1f**、Production全764classは178と同byte。PG5164元61546終了0/240PT33suite/六format0/三static0、新PT-NEXPORT193-META001のreadonly mode0100644・単一link/不正0,2を独立literalで確認、公開PG5166 **4a36eae33387e2b55b3debf71e17896ad9b8ae2628bfe11133e0d2dcf23af7c6**。当小選択のcheckedは15行1method全covered/28branch covered・8missで、他suiteを含む旧536の35covered/1missと範囲が異なり加減算0。新caseが未網羅側readonly agent metadataを検証したが、class四100や新全537の合格とは呼ばない。次の必要変更群で全bootstrapを再実行し当branch全量を測定する。開始時新Java0→測定発見による追加1を分離、元全3832予定は新Test追加後3833予定へ（未実行のまま）。
 
 仕様1053/SSC308/BUG1414/YKT1178、source **178b8d6d9d17bd610953ba1f2122e970af2d174b**・dev-foundation。PG5156-v2元93972真正exit0、`python3 tools/quality/pg5156_native_coverage_selected.py green --group factory`、**536PT/73suite/FES/flaky/notrun0**。bootstrap全42suite319PT（Java file47の他5はfixture/probe）、storage全25suite180PT、Root関連6suite37PTを当snapshotで実行、別run成功の合成0。新Java case0、既独立41・関連495、六format先行0/NullAway・ErrorProne0/三compile module SpotBugs0。
