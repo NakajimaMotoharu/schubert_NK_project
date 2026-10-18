@@ -1,5 +1,13 @@
 # 1038 当a2ecc通常Root・samepeer接続仕様
 
+## 実whole・Browser・連続性結果（2026-10-18 UTC）
+
+5042元61156実0/07:45:30Z/payloade0dd6a4ebce0582d29afd8eca99bdb26725e4ac2535b57d89e321e1dfe562dae、before0fae7ea172b59fce6e7188f73c12dbf39f8583e8fae3f66188b86550536849a1。24/32/187/当真正10/四ownedlive/正常Ref/SQL新day oracle0、保持したfull-business/backupretention pending flagsは未解決のままで正式へ加算しない。
+
+5046元28134実0/全五phase0/credentialRO/元12case identity-only。5048元4474実0/12case＋独立24差分、07:49:02～26Z/operator6e8720160/guardSHA c3afbdfa0da73bb866d82948f40361f0de69d0660bb59639cfe9bac9b17901e9。四owner/SOCKS全前後一致、通常TLSchain/IP-SAN/Caddylistenerを別portで確認。Browser自身のignoreHttpsErrors=trueと標準truststore未認定を保持、TLS検証済と誇張しない。
+
+5050元97152実0/07:52:32Z/payload a98b28aa2b3b3bf80d1e290b56f33f25914be36849141d2cdd8fa61c1b94d4e8、現在beforeSHA cb3e2cfe8446ced0d87de0d6dee48c4a90b68c03069410bca5c407e7e7d219a2。独立Root新dayORACLEを全byte保持し、Browser前後/owner/contextを全24で接続、exactRootBrowserCurrentChain=true/newQuestion1/newAuthSession3/answerProviderAcceptance=false。5052元27301実0/07:53:32Z/payload3dc5547c4a2ed6feed2b1e34d0645356d0ce2b231c278f57770ac818eb8e0116、同cb3e typed18の正常GC値をread-only確認。以後のownedstopは1039、実native/全四100/正式はまだ未完。
+
 ## 実真正終端・全24新営業日後条件（2026-10-18 UTC）
 
 watch80748終了0/07:41:11Z、同owner APIready07:35:50/Web07:36:04・CaddyTLSlogin20007:36:19/同socket・0cap・publicCA/全十Ref正常返却。5038元50463独立0/07:42:25Z、当PID1 startjobdone/NKACT1/NKDONE1/source/BOM/原本二読一致、WARNING10/1565.854589秒<1800/currentGC/active不在、payload ec0b939f0138bcb0fdfc104c1521135e2612df3b506d15afc5d2b6c1898477d4。doneSHAc5929b84b35b6ec25a57f1cf6eb650626609b629dc5ac1518788ddc1d9b2709d。client0やGCだけで成功を推定せず真正終端を独立実証、wholeAccepted/正式はfalse。
