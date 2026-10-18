@@ -223,11 +223,14 @@ public final class InspectorEnvironmentPublisher {
 
   private void writeNew(Path held, byte[] content) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(content);
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        Writer::close,
+        writer -> {
           require(writer.size() == 0);
           while (buffer.hasRemaining()) {
             int position = buffer.position();
@@ -243,11 +246,14 @@ public final class InspectorEnvironmentPublisher {
   }
 
   private void forceExisting(Path held, int expected) throws IOException {
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        Writer::close,
+        writer -> {
           require(writer.size() == expected);
           writer.force();
           require(writer.size() == expected);

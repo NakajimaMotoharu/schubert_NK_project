@@ -131,27 +131,27 @@ public final class InspectorEnvironmentFiles {
         require(group >= 1 && group <= 0xffff_ffffL);
         T result;
         {
-          var etc = OwnedTransferDirectory.open(directories, etcPath);
           result =
-              ResourceScope.use(
-                  etc::close,
-                  () -> {
-                    var config = etc.openExistingChild(CONFIG);
-                    return ResourceScope.use(
-                        config::close,
-                        () -> {
-                          var runtime = OwnedTransferDirectory.open(directories, runPath);
-                          return ResourceScope.use(
-                              runtime::close,
-                              () -> {
-                                var app = runtime.openExistingChild(CONFIG);
-                                return ResourceScope.use(
-                                    app::close,
-                                    () -> {
-                                      var maintenance = app.openExistingChild(MAINTENANCE);
-                                      return ResourceScope.use(
-                                          maintenance::close,
-                                          () -> {
+              ResourceScope.acquire(
+                  () -> OwnedTransferDirectory.open(directories, etcPath),
+                  OwnedTransferDirectory::close,
+                  etc -> {
+                    return ResourceScope.acquire(
+                        () -> etc.openExistingChild(CONFIG),
+                        OwnedTransferDirectory::close,
+                        config -> {
+                          return ResourceScope.acquire(
+                              () -> OwnedTransferDirectory.open(directories, runPath),
+                              OwnedTransferDirectory::close,
+                              runtime -> {
+                                return ResourceScope.acquire(
+                                    () -> runtime.openExistingChild(CONFIG),
+                                    OwnedTransferDirectory::close,
+                                    app -> {
+                                      return ResourceScope.acquire(
+                                          () -> app.openExistingChild(MAINTENANCE),
+                                          OwnedTransferDirectory::close,
+                                          maintenance -> {
                                             var roots =
                                                 new Roots(etc, config, runtime, app, maintenance);
                                             List<Snapshot> expectedRoots = capture(roots, group);
@@ -261,26 +261,26 @@ public final class InspectorEnvironmentFiles {
       throws IOException {
     require(groups.resolve() == group);
     {
-      var etc = OwnedTransferDirectory.open(directories, etcPath);
-      ResourceScope.use(
-          etc::close,
-          () -> {
-            var config = etc.openExistingChild(CONFIG);
-            return ResourceScope.use(
-                config::close,
-                () -> {
-                  var runtime = OwnedTransferDirectory.open(directories, runPath);
-                  return ResourceScope.use(
-                      runtime::close,
-                      () -> {
-                        var app = runtime.openExistingChild(CONFIG);
-                        return ResourceScope.use(
-                            app::close,
-                            () -> {
-                              var maintenance = app.openExistingChild(MAINTENANCE);
-                              return ResourceScope.use(
-                                  maintenance::close,
-                                  () -> {
+      ResourceScope.acquire(
+          () -> OwnedTransferDirectory.open(directories, etcPath),
+          OwnedTransferDirectory::close,
+          etc -> {
+            return ResourceScope.acquire(
+                () -> etc.openExistingChild(CONFIG),
+                OwnedTransferDirectory::close,
+                config -> {
+                  return ResourceScope.acquire(
+                      () -> OwnedTransferDirectory.open(directories, runPath),
+                      OwnedTransferDirectory::close,
+                      runtime -> {
+                        return ResourceScope.acquire(
+                            () -> runtime.openExistingChild(CONFIG),
+                            OwnedTransferDirectory::close,
+                            app -> {
+                              return ResourceScope.acquire(
+                                  () -> app.openExistingChild(MAINTENANCE),
+                                  OwnedTransferDirectory::close,
+                                  maintenance -> {
                                     List<Snapshot> actual =
                                         capture(
                                             new Roots(etc, config, runtime, app, maintenance),

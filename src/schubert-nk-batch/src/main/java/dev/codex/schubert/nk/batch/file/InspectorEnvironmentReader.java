@@ -123,11 +123,14 @@ public final class InspectorEnvironmentReader {
 
   private void readFile(Path held, long expected, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    var channel = io.open(held);
-    if (channel == null) throw unavailable();
-    ResourceScope.use(
-        channel::close,
+    ResourceScope.acquire(
         () -> {
+          var channel = io.open(held);
+          if (channel == null) throw unavailable();
+          return channel;
+        },
+        SeekableByteChannel::close,
+        channel -> {
           require(channel.size() == expected);
           while (buffer.hasRemaining()) {
             int position = buffer.position();
