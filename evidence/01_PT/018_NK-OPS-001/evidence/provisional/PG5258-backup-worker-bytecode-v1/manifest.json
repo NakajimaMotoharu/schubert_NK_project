@@ -1,0 +1,306 @@
+{
+  "source": "33df84270ffec0d6660a6665f68dd2eecb65c5a5",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "BackupDatabaseWorker": {
+      "scopes": [
+        {
+          "method": "public void execute() throws java.io.IOException;",
+          "acquirePc": 69,
+          "portPcs": [
+            51,
+            56,
+            64
+          ]
+        },
+        {
+          "method": "private void verifyExisting(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed) throws java.io.IOException;",
+          "acquirePc": 42,
+          "portPcs": [
+            21,
+            26,
+            37
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$verifyExisting$0(dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest$Verification, dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 37,
+          "portPcs": [
+            13,
+            18,
+            32
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata lambda$verifyExisting$3(dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest$Verification, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 78,
+          "portPcs": [
+            58,
+            63,
+            73
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$execute$0(dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 68,
+          "portPcs": [
+            47,
+            52,
+            63
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$execute$1(dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 44,
+          "portPcs": [
+            19,
+            24,
+            39
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$execute$2(dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.ChildStartupContext$Observed, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 87,
+          "portPcs": [
+            59,
+            64,
+            82
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$3(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.createPrivateChild:",
+          "checkedNullIo": false,
+          "nonnullReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$verifyExisting$1(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.batch.platform.BackupWorkerRequest) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "checkedNullIo": false,
+          "nonnullReturnPcs": [
+            8
+          ]
+        },
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$verifyExisting$4(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "checkedNullIo": false,
+          "nonnullReturnPcs": [
+            15
+          ]
+        }
+      ],
+      "classSha256": "d9effbad11fa005b52d3b15a53be2366282d47a456b31607cbbc220896ea8cb3",
+      "javapSha256": "ff0a29113d84a05cb919a8df8979f0f0342d713edf174912924c6d5032516578"
+    },
+    "BackupDatabaseCopy": {
+      "scopes": [
+        {
+          "method": "private void write(java.nio.file.Path, byte[], int) throws java.io.IOException;",
+          "acquirePc": 24,
+          "portPcs": [
+            6,
+            11,
+            19
+          ]
+        },
+        {
+          "method": "private void verify(java.nio.file.Path, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, byte[]) throws java.io.IOException;",
+          "acquirePc": 29,
+          "portPcs": [
+            10,
+            15,
+            24
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$write$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$verify$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        }
+      ],
+      "classSha256": "982497f43506ee6b1d5d8539f14ee5442284680306c805e484f3127b953e4518",
+      "javapSha256": "91fbcff0e204e3307437441a221e41cc581b57fcd855683e06fdb30c6ff9e794"
+    },
+    "BackupBundlePublisher": {
+      "scopes": [
+        {
+          "method": "private void force(java.nio.file.Path, long, long) throws java.io.IOException;",
+          "acquirePc": 27,
+          "portPcs": [
+            8,
+            13,
+            22
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$force$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        }
+      ],
+      "classSha256": "3ef2f3a70e11e782ffe960c8f7089d171c6cde21fbd249676708c3a00b4b7f0e",
+      "javapSha256": "93ff2b0128ba5b79f1ae811c5740c73619699165079a729647087ad05ae647ef"
+    }
+  },
+  "directPortFactories": 4,
+  "nativePortReturnTails": {
+    "credentials": {
+      "method": "public dev.codex.schubert.nk.storage.OwnedTransferDirectory credentials() throws java.io.IOException;",
+      "rawDirectoryReturnPcs": [
+        36
+      ]
+    },
+    "runtime": {
+      "method": "public dev.codex.schubert.nk.storage.OwnedTransferDirectory runtime() throws java.io.IOException;",
+      "rawDirectoryReturnPcs": [
+        16
+      ]
+    },
+    "backup": {
+      "method": "public dev.codex.schubert.nk.storage.OwnedTransferDirectory backup() throws java.io.IOException;",
+      "rawDirectoryReturnPcs": [
+        16
+      ]
+    }
+  },
+  "nativePortClass": {
+    "classSha256": "b076e4fc0d5a768913311cde7c3a23d1cddcaa8b0172e28bccd7f2cf813bcf95",
+    "javapSha256": "29c8ec0aa2af6b5896a8b67ff1c80223ca477cb4fe84024e49b8f154ef937fa3"
+  },
+  "selectedManifestSha256": "6c9ceffe133acb0fed6dff410869076a5e0403b2630ad55b6d81020803a79306",
+  "semanticClasses": 3,
+  "checkedNullIoFactories": 3,
+  "rawDirectoryFactories": 2,
+  "rawChannelFactories": 1,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.file.BackupBundlePublisher$NioIo",
+      "old": {
+        "classSha256": "f489430719e21d1980ba3327a5d60fdfec435b77d323bb2411551a4ff9f105d4",
+        "javapSha256": "27d665befc331b8e11c0dbd18548f50f33207dab39bdfcfd6f2383c11a40944a"
+      },
+      "current": {
+        "classSha256": "5f92aa4691f1db0a4f6a1072cd29eb0d81be21199df4f36587600896c067dce1",
+        "javapSha256": "27d665befc331b8e11c0dbd18548f50f33207dab39bdfcfd6f2383c11a40944a"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.BackupDatabaseWorker$NativePorts",
+      "old": {
+        "classSha256": "e47237bc02632434ac181a70e5b4350c1f9b02ddefa67e06c6422250ba9a67f8",
+        "javapSha256": "29c8ec0aa2af6b5896a8b67ff1c80223ca477cb4fe84024e49b8f154ef937fa3"
+      },
+      "current": {
+        "classSha256": "b076e4fc0d5a768913311cde7c3a23d1cddcaa8b0172e28bccd7f2cf813bcf95",
+        "javapSha256": "29c8ec0aa2af6b5896a8b67ff1c80223ca477cb4fe84024e49b8f154ef937fa3"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 759,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/file/BackupBundlePublisher": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 53
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/BackupDatabaseCopy": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 94
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 107
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 17
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/BackupDatabaseWorker": {
+      "BRANCH": {
+        "missed": 7,
+        "covered": 77
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 147
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 29
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0
+}

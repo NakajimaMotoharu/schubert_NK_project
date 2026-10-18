@@ -24,7 +24,7 @@ def classify(rows,load,*,native=False,evidence_ref=QUALIFIED,extra_fixed=frozens
             prebuilt=native and name=='LinuxStartupAdmission.java' and content.count(b'ResourceScope.use(')==1 and b'ResourceScope.use(admissionRelease, proofRelease);' in content
             if b'ResourceScope.use(' in content and not prebuilt:raise ValueError('claimed fixed file still has original scope candidates')
             classification='FIXED_LIMITED'
-            reason='Acquire/release/action before ownership; wrapper preallocation and protected helper; exact current222/bytecode'
+            reason='Acquire/release/action before ownership; wrapper preallocation and protected helper; current source/run qualification is identified by retestEvidence'
         elif name=='LinuxExecDescriptors.java':
             seen.add(name);classification='NON_APPLICABLE_BORROWED'
             reason='Borrowed descriptor flags remain unchanged before scope; no resource acquisition; set under protection'
