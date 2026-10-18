@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
-/** PT-IOFACT-001..012 / SS333 SSC308: literal ownership/exception table, no old use oracle. */
+/** PT-IOFACT-001..018 / SS333 SSC308: literal ownership/exception table, no old use oracle. */
 final class FactoryResourceScopeTest {
   @Test
   void factory001SuccessAndNullableBodyUseSameResourceOnce() throws Exception {
@@ -305,6 +307,280 @@ final class FactoryResourceScopeTest {
       a.closed();
       b.closed();
       assertNotSame(a.token, b.token);
+    }
+  }
+
+  @Test
+  void factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType() throws Exception {
+    var token = new Token();
+    var opened = new AtomicInteger();
+    var assembled = new AtomicInteger();
+    Token actual =
+        ResourceScope.<Token, Token, StorageIoException>handoff(
+            () -> {
+              opened.incrementAndGet();
+              token.live = true;
+              return token;
+            },
+            owned -> {
+              throw new AssertionError("completed owner must own the resource");
+            },
+            owned -> {
+              assembled.incrementAndGet();
+              assertSame(token, owned);
+              return owned;
+            });
+    assertSame(token, actual);
+    assertEquals(1, opened.get());
+    assertEquals(1, assembled.get());
+    assertTrue(actual.live);
+    actual.live = false;
+    assertFalse(token.live);
+  }
+
+  @Test
+  void factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner() {
+    var opened = new AtomicInteger();
+    var assembled = new AtomicInteger();
+    var closed = new AtomicInteger();
+    ResourceScope.Acquire<Token, IOException> open =
+        () -> {
+          opened.incrementAndGet();
+          return new Token();
+        };
+    ResourceScope.Release<Token> release = owned -> closed.incrementAndGet();
+    ResourceScope.OwnedAction<Token, Token> assemble =
+        owned -> {
+          assembled.incrementAndGet();
+          return owned;
+        };
+    for (int absent = 0; absent < 3; absent++) {
+      int mode = absent;
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              ResourceScope.handoff(
+                  mode == 0 ? null : open,
+                  mode == 1 ? null : release,
+                  mode == 2 ? null : assemble));
+    }
+    assertEquals(0, opened.get());
+    for (Throwable failure :
+        List.of(
+            new IOException("PUBLIC_FACTORY"),
+            new IllegalStateException("PUBLIC_FACTORY"),
+            new AssertionError("PUBLIC_FACTORY"))) {
+      Throwable actual =
+          assertThrows(
+              Throwable.class,
+              () ->
+                  ResourceScope.handoff(
+                      () -> {
+                        opened.incrementAndGet();
+                        raise(failure);
+                        return new Token();
+                      },
+                      release,
+                      assemble));
+      assertSame(failure, actual);
+    }
+    assertThrows(
+        NullPointerException.class, () -> ResourceScope.handoff(() -> null, release, assemble));
+    assertEquals(3, opened.get());
+    assertEquals(0, assembled.get());
+    assertEquals(0, closed.get());
+  }
+
+  @Test
+  void factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden() {
+    String[] winners = {"SSRE", "RRRR", "EEEE"};
+    String[] suppressed = {"0000", "0111", "0111"};
+    for (int body = 0; body < 3; body++)
+      for (int close = 0; close < 4; close++) {
+        Throwable primary =
+            switch (body) {
+              case 0 -> new StorageIoException(StorageIoException.Reason.MISSING);
+              case 1 -> new IllegalStateException("PUBLIC_ASSEMBLY");
+              default -> new AssertionError("PUBLIC_ASSEMBLY");
+            };
+        Throwable secondary =
+            switch (close) {
+              case 0 -> null;
+              case 1 -> new IOException("PUBLIC_CLOSE");
+              case 2 -> new IllegalArgumentException("PUBLIC_CLOSE");
+              default -> new LinkageError("PUBLIC_CLOSE");
+            };
+        var token = new Token();
+        var order = new ArrayList<String>();
+        Throwable actual =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    ResourceScope.handoff(
+                        () -> {
+                          order.add("open");
+                          token.live = true;
+                          return token;
+                        },
+                        owned -> {
+                          assertSame(token, owned);
+                          order.add("close");
+                          token.live = false;
+                          raise(secondary);
+                        },
+                        owned -> {
+                          assertSame(token, owned);
+                          order.add("assemble");
+                          raise(primary);
+                          return owned;
+                        }));
+        char expected = winners[body].charAt(close);
+        if (expected == 'S')
+          fixed(
+              assertInstanceOf(StorageIoException.class, actual),
+              close == 0
+                  ? StorageIoException.Reason.MISSING
+                  : StorageIoException.Reason.UNAVAILABLE);
+        else assertSame(body == 0 ? secondary : primary, actual);
+        assertEquals(suppressed[body].charAt(close) - '0', actual.getSuppressed().length);
+        if (actual.getSuppressed().length == 1)
+          fixed(
+              assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]),
+              StorageIoException.Reason.UNAVAILABLE);
+        assertEquals(List.of("open", "assemble", "close"), order);
+        assertFalse(token.live);
+      }
+  }
+
+  @Test
+  void factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure() {
+    for (int close = 0; close < 4; close++) {
+      int mode = close;
+      var token = new Token();
+      token.live = true;
+      var closed = new AtomicInteger();
+      var actual =
+          assertThrows(
+              NullPointerException.class,
+              () ->
+                  ResourceScope.handoff(
+                      () -> token,
+                      owned -> {
+                        assertSame(token, owned);
+                        closed.incrementAndGet();
+                        owned.live = false;
+                        if (mode == 1) throw new IOException("PUBLIC_CLOSE");
+                        if (mode == 2) throw new IllegalStateException("PUBLIC_CLOSE");
+                        if (mode == 3) throw new AssertionError("PUBLIC_CLOSE");
+                      },
+                      owned -> null));
+      assertEquals("complete resource owner", actual.getMessage());
+      assertEquals(1, closed.get());
+      assertFalse(token.live);
+      assertEquals(close == 0 ? 0 : 1, actual.getSuppressed().length);
+      if (close != 0)
+        fixed(
+            assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]),
+            StorageIoException.Reason.UNAVAILABLE);
+    }
+  }
+
+  @Test
+  void factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority() {
+    var token = new Token();
+    var primary = new IllegalStateException("PUBLIC_PRIMARY");
+    var prior = new IOException("PUBLIC_PRIOR");
+    primary.addSuppressed(prior);
+    var closed = new AtomicInteger();
+    assertSame(
+        primary,
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                ResourceScope.handoff(
+                    () -> token,
+                    owned -> {
+                      closed.incrementAndGet();
+                      throw primary;
+                    },
+                    owned -> {
+                      throw primary;
+                    })));
+    assertEquals(1, closed.get());
+    assertEquals(2, primary.getSuppressed().length);
+    assertSame(prior, primary.getSuppressed()[0]);
+    fixed(
+        assertInstanceOf(StorageIoException.class, primary.getSuppressed()[1]),
+        StorageIoException.Reason.UNAVAILABLE);
+    var io = new StorageIoException(StorageIoException.Reason.MISSING);
+    io.addSuppressed(new IOException("PUBLIC_PRIOR"));
+    fixed(
+        assertThrows(
+            StorageIoException.class,
+            () ->
+                ResourceScope.handoff(
+                    () -> token,
+                    owned -> closed.incrementAndGet(),
+                    owned -> {
+                      throw io;
+                    })),
+        StorageIoException.Reason.UNAVAILABLE);
+    assertEquals(2, closed.get());
+  }
+
+  @Test
+  void factory018ParallelCompleteOwnersNeverShareTransferState() throws Exception {
+    var ready = new CountDownLatch(2);
+    var a = new Token();
+    var b = new Token();
+    var opened = new AtomicInteger();
+    var closed = new AtomicInteger();
+    ResourceScope.OwnedAction<Token, Token> assembly =
+        owned -> {
+          ready.countDown();
+          try {
+            assertTrue(ready.await(10, TimeUnit.SECONDS));
+          } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            throw new IOException("fixture interrupted");
+          }
+          assertTrue(owned.live);
+          return owned;
+        };
+    try (var executor = Executors.newFixedThreadPool(2)) {
+      var first =
+          executor.submit(
+              () ->
+                  ResourceScope.<Token, Token, IOException>handoff(
+                      () -> {
+                        opened.incrementAndGet();
+                        a.live = true;
+                        return a;
+                      },
+                      owned -> closed.incrementAndGet(),
+                      assembly));
+      var second =
+          executor.submit(
+              () ->
+                  ResourceScope.<Token, Token, IOException>handoff(
+                      () -> {
+                        opened.incrementAndGet();
+                        b.live = true;
+                        return b;
+                      },
+                      owned -> closed.incrementAndGet(),
+                      assembly));
+      assertSame(a, first.get());
+      assertSame(b, second.get());
+      assertNotSame(a, b);
+      assertTrue(a.live);
+      assertTrue(b.live);
+      assertEquals(2, opened.get());
+      assertEquals(0, closed.get());
+      a.live = false;
+      b.live = false;
+      assertFalse(a.live);
+      assertFalse(b.live);
     }
   }
 

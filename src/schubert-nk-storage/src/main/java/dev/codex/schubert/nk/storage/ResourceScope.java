@@ -37,6 +37,32 @@ public final class ResourceScope {
   }
 
   /**
+   * Builds a complete, nonnull owner before transferring responsibility for R
+   * (SSC308/IOFACT013-018). All state and callbacks precede acquisition. Factory failures preserve
+   * E; incomplete assembly releases R once with acquire's existing compound precedence. A returned
+   * owner, not this helper, then owns R. A nullable T bound permits testing rejected null assembly,
+   * never a null owner result.
+   */
+  public static <R, T extends @Nullable Object, E extends IOException> T handoff(
+      Acquire<R, E> acquire, Release<R> release, OwnedAction<R, T> assemble)
+      throws E, StorageIoException {
+    Objects.requireNonNull(acquire, "resource acquire");
+    Objects.requireNonNull(release, "resource release");
+    Objects.requireNonNull(assemble, "complete owner assembly");
+    boolean[] transferred = new boolean[1];
+    return ResourceScope.<R, T, E>acquire(
+        acquire,
+        resource -> {
+          if (!transferred[0]) release.close(resource);
+        },
+        resource -> {
+          T complete = Objects.requireNonNull(assemble.run(resource), "complete resource owner");
+          transferred[0] = true;
+          return complete;
+        });
+  }
+
+  /**
    * SSC308/PT-IOFACT-001..012: factory failures retain E/identity; owned failures follow use's
    * explicit IO precedence. No callback or wrapper is allocated after ownership starts.
    */
