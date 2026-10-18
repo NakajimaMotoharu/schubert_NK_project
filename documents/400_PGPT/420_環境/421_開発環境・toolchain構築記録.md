@@ -1,5 +1,11 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-18再開時のhost再観測（導入変更なし）
+
+host kernel `Linux 7.0.0-38-generic`、Python `3.14.4`、既存JDK path `/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java` はOpenJDK25.0.4（2026-07-21、build25.0.4+7-1-26.04-Ubuntu）。commandは`uname -sr`/`python3 --version`/同`java -version`。これは現在hostの読取結果で、旧全回帰のOS/JDK証跡を置換せず、guest/source/VM再認証を代替しない。今回toolの新導入・version変更0、既3791 full/独立/署名/18ABIの再実行0。
+
+localbootは変わり旧forward/SOCKSが消失したため、元aru QEMU/boot/diskをpinnedSSHで確認後、4996新ownedforwardと5045新loopback SOCKSだけをnew-only private receipt（boot/parent-child ticks/argv/UID-GID/正確socket）へ束縛した。VM二重起動/鍵転送/旧PIDの権限再利用0。実値/receipt・再開方法は最新456、秘密key/credentialをGitへ格納しない。
+
 2026-10-15 BUG1258/YKT1024：既CLI all-deps Google1.36.1 SHA25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4、Maven core1.36.1 SHA57f9b550a662dcbbdf344073e3f5812b837a0e6e430548d8a0a3c9090cada65dとPOM指定1.36.1を実照合。差は版でなくlong-string reflow。installed primary Spotless3.10.2/lib4.10.2のjavap `GoogleJavaFormat.newFormatterStep`→`GoogleJavaFormatStep.defaultReflowLongStrings`はfalse/iconst0を確認。Maven正規整形後、CLI既定dry-runはexit1/当Sessionのみ差を検出、`--skip-reflowing-long-strings`ならexit0。同1.36.1でこの差を独立再現した。正本Spotless設定を変更せず、既JDK25.0.4/Maven3.9.12でbatch spotless:apply actual0/347中1変更・346既clean、全六module spotless:check actual0。新取得/install/OS/global変更0。再現commandは411補足、raw actual失敗2918と新formatted61資格2926は保全、新whole2930は全六format first。既Main全byte/source差0を確認、formatter-onlyでも旧失敗全体を新成功へ加算しない。
 
 2026-10-08 PG519/BUG821/YKT590：host専用Python undefined-scope検査へPyflakes3.4.0を固定導入。host Python3.14.4/Linux、pip/pyflakes moduleは未導入だったためsystemへの変更0、PyPI primary JSON `https://pypi.org/pypi/pyflakes/3.4.0/json`が指定するwheel `https://files.pythonhosted.org/packages/c2/2f/81d580a0fb83baeb066698975cb14a618bdbed7720678566f1b046a95fe8/pyflakes-3.4.0-py2.py3-none-any.whl`をwork/toolchain/pyflakes-3.4.0へnew-only保存、SHA256 f742a7dbd0d9cb9ea41e9a24a918996e8170c799fa528688d40dd582c8265f4f確認後unzipでruntimeへ展開。再現=固定URLをcurl --failで取得→sha256sum比較→unzip -q wheel -d runtime→`PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -m pyflakes --version`、出力3.4.0 Python3.14.4 on Linux。全wheel/展開packageはGit外、global pip/reset/課金0。

@@ -1,5 +1,11 @@
 # 1038 当a2ecc通常Root・samepeer接続仕様
 
+## 実真正終端・全24新営業日後条件（2026-10-18 UTC）
+
+watch80748終了0/07:41:11Z、同owner APIready07:35:50/Web07:36:04・CaddyTLSlogin20007:36:19/同socket・0cap・publicCA/全十Ref正常返却。5038元50463独立0/07:42:25Z、当PID1 startjobdone/NKACT1/NKDONE1/source/BOM/原本二読一致、WARNING10/1565.854589秒<1800/currentGC/active不在、payload ec0b939f0138bcb0fdfc104c1521135e2612df3b506d15afc5d2b6c1898477d4。doneSHAc5929b84b35b6ec25a57f1cf6eb650626609b629dc5ac1518788ddc1d9b2709d。client0やGCだけで成功を推定せず真正終端を独立実証、wholeAccepted/正式はfalse。
+
+5040元23698独立0/07:43:30Z、payload f472d72aa46ddcce99ef04ea0d19da70b4ba7de19ac650a0fbe83e51d017cc0a、全24のraw stdout/stderr/exitをfsync後parse・after保存後にbefore-only oracle照合。新10step/attempt1、Session915・Outbox669・Inbox20・通知6削除/保護10、匿名HTTPログ222/新session222/SENToutbox222の一対一整合。実cutoff/同run/開始終了窓/DB全列・進捗を確認、operatorSQL書込0/実後像からexpected生成0。afterSHA69f0f17af55ec419d1721ac9e288ee30edee43f41e4e8919eb012a58ae48aec1、rawSQLSHA9ef488a086f910b04376f17e69b8a407e363e627ebb5e68c3947df58aace4fab。5042wholeは同元61156を回収してから実受入、Browser/ownedstop/native/正式は別未完。
+
 ## 実immutable before結果
 
 5036元90769 actual0/2026-10-18 07:21:34Z/payload691f6f8cd8d3e25cca23af9c65147dbc54d530854052c9cf907a3e96fc02f3d3。全11原像のbeforeSHA=03d3cd12a41861fa7c495949aebe5ac12cf3a638f66b13f3ef9e0ef96a059d8f、24表/旧native80/当公開Unit bytesとfresh live tuple一致、DB読取0/raw非公開。Rootの真正終端/全24post/新native資格とは別の限定証拠。
