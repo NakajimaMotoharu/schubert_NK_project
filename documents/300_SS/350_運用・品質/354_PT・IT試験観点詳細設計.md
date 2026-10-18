@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+Root top補足：専用RootDescriptorの有効FD319（Integer cache範囲外）・負FD・open失敗・null callsと一度closeを独立literalで検証し、primitive保持で取得後boxing無しを実bytecodeで確認する。Root checkedにOwnedDirectory由来のIO Reason変換を加えず、同FD・同型・同一失敗と既close優先順位を保持する。fake DirectoryCallsが他native操作を呼ばれた場合はfailし、Root authority/本物起動の代用にしない。
+
 SS333/343 SSC308。全port null/構築Errorがacquire前、factory IO/Runtime/Error/null時のbody/release0、正常nullable結果と同一resource一度close、body/close全IO reason・unknown型・同一object・既suppressedの独立matrixを固定literal順序/identity/秘匿messageで検証する。期待値を製造use/acquireで生成せず、SS333表のルールを直接assertする。既ResourceScope全PT・全Directory能力PTを同source再実行し、公開API既正常/境界/失敗/NOFOLLOW/transfer/close/並行の契約を保持。wrapper/stateLock/EntryHandle確保がnativeopen前、取得直後保護域前にnew/invokedynamic/boxing無しをJava25実bytecodeで確認し、実OOME発生や任意native成功を捏造しない。Root固定metadata/pin/世代/owner/期限/借用能力と新source実経路は別に資格、68file237siteの残判定と追加予防testまでYKT未完。旧成功/別sourcecounterの合算/coverage除外/安易なsuppressionは禁止。
 
 ## SSC307 Root待機の順序・期限・MISSING限定と割込み独立PT

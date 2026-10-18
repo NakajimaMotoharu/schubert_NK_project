@@ -2,7 +2,7 @@
 
 ## SSC308 Root IO所有の取得後callback構築gap是正
 
-SS333 SSC308・BUG1414/YKT1178、SSC137/143/304/306307。RootServiceExecutableAdmissionのtop Root FD・usr/bin/etc/alternatives/opt/JDK/java-bin/channel、RootStartupPendingのlaunch/observe directoryは同一取得順/metadata/pin/SELinux外部設定/ACL/能力・世代/borrowed contextを保持し、取得前port構築→factory内取得→同一資源scopeへ接続する。topは既DirectoryCalls.openRootをOwnedTransferDirectory.openRootの同FD wrapperで扱い、追加open/close再試行/任意pathを導入しない。exec直前の既bin/usr明示close・その後のidempotent owner解放、全observer正常close先行、親30分/既Unit期限/同一世代・所有の条件は変えない。close・factory例外のidentity/redaction/優先順位はSS333どおりで、JDBC TWR契約へ混同しない。
+SS333 SSC308・BUG1414/YKT1178、SSC137/143/304/306307。RootServiceExecutableAdmissionのtop Root FD・usr/bin/etc/alternatives/opt/JDK/java-bin/channel、RootStartupPendingのlaunch/observe directoryは同一取得順/metadata/pin/SELinux外部設定/ACL/能力・世代/borrowed contextを保持し、取得前port構築→factory内取得→同一資源scopeへ接続する。topは既DirectoryCalls.openRootをpackage内専用RootDescriptorで保持する。wrapper本体をprimitive FD取得前に確保し、constructorはnonnull calls→openRoot→非負FD検証→primitive slot格納のみ、成功FD取得後の追加heap確保/boxingをしない。負FDは所有無しとして固定storage拒否、factory失敗は同一exception。保持型のcloseはscopeから一度だけ同FDを消費、既直接checkedのIO/Reasonを保つためOwnedDirectory.atDirectoryの追加正規化を挟まない。共通directoryのopenRootはSS333の保持directory用途に限定し、新しいRoot top検査の例外変換に使わない。追加open/close再試行/任意pathを導入しない。exec直前の既bin/usr明示close・その後のidempotent owner解放、全observer正常close先行、親30分/既Unit期限/同一世代・所有の条件は変えない。close・factory例外のidentity/redaction/優先順位はSS333どおりで、JDBC TWR契約へ混同しない。
 
 既e8ecのPG5128は別固定sourceとして全体/独立資格を回収するが、当gap是正前には署名/配備しない。新共通helper/Directory/Root変更群の所定fresh whole/同source実経路/native・全四100/F03/451を別に閉鎖し、旧3791/10nativeや途中3814成功を新source成功へ合算しない。
 
