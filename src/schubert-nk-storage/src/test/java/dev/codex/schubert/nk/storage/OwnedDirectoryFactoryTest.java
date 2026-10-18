@@ -14,7 +14,8 @@ final class OwnedDirectoryFactoryTest {
     try (var root = OwnedTransferDirectory.openRoot(calls)) {
       assertEquals(1, calls.opens);
       assertEquals(0, calls.closes);
-      assertTrue(root.atDirectory(held -> Files.isSameFile(held, Path.of("/"))));
+      boolean sameInode = root.atDirectory(held -> Files.isSameFile(held, Path.of("/")));
+      assertTrue(sameInode);
       root.close();
       assertEquals(1, calls.closes);
       root.close();
