@@ -1,0 +1,199 @@
+{
+  "source": "86968fd6f6edb54511a1db02959f5bfe3c3b92fb",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "outer": {
+    "classSha256": "c2aa4d740c1fde6a6f484a0191f1d2db10192990f303c3c95d2f8ed513314bda",
+    "javapSha256": "7ea03a910fe72c9c9628e2e117f12e30408b228b8feb82160de2359cbacc8ede"
+  },
+  "owner": {
+    "classSha256": "cf4c05292450a40f2ed20e3a7abeb8e9ab8178ac28e666146d89c24703b0f866",
+    "javapSha256": "ae33a62a50ae22ef838357866e8d5f9eea55e1601dfac8bb4e6768a3df1f2c43"
+  },
+  "acquisitionProof": {
+    "openRoot": {
+      "method": "int openRoot() throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "guardPc": 1,
+      "openPc": 8,
+      "primitiveStorePc": 68,
+      "successfulPostOpenNoAllocations": true,
+      "invalidOnlyCallsTerminateByThrow": true
+    },
+    "openDirectory": {
+      "method": "int openDirectory(int, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "guardPc": 8,
+      "openPc": 22,
+      "primitiveStorePc": 85,
+      "successfulPostOpenNoAllocations": true,
+      "invalidOnlyCallsTerminateByThrow": true
+    },
+    "openEntry": {
+      "method": "int openEntry(int, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "guardPc": 8,
+      "openPc": 22,
+      "primitiveStorePc": 85,
+      "successfulPostOpenNoAllocations": true,
+      "invalidOnlyCallsTerminateByThrow": true
+    }
+  },
+  "drainPhases": {
+    "close": {
+      "method": "void close() throws dev.codex.schubert.nk.storage.StorageIoException;",
+      "nativeClosePc": 34,
+      "loopBackPc": 70,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": [
+        "appendSecondary",
+        "closeAfterKnown",
+        "drain"
+      ]
+    },
+    "known": {
+      "method": "private dev.codex.schubert.nk.storage.StorageIoException closeAfterKnown(int, dev.codex.schubert.nk.storage.StorageIoException);",
+      "nativeClosePc": 21,
+      "loopBackPc": 58,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": [
+        "appendSecondary",
+        "drain"
+      ]
+    },
+    "drain": {
+      "method": "private void drain(int);",
+      "nativeClosePc": 16,
+      "loopBackPc": 35,
+      "handlerTypes": [
+        "Class dev/codex/schubert/nk/storage/StorageIoException",
+        "Class java/lang/Error",
+        "Class java/lang/RuntimeException"
+      ],
+      "heapFreeBeforeLoopExit": true,
+      "delegates": []
+    }
+  },
+  "ownerFourCounters": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 44
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 70
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 10
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "capacityExtraRootAppEntry": 3,
+  "typedNativeCatchPrimaryPreserved": true,
+  "secondaryPrimitiveBitmap": true,
+  "noSyntheticThrowEscape": true,
+  "selectedManifestSha256": "c9587d290dd7c30554ac4d02a82877aab4b026f4d4a61e284f6fecc6b61b74c2",
+  "semanticClasses": 2,
+  "nestedMethodEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Admission",
+      "old": {
+        "classSha256": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+        "javapSha256": "46266601afe531e58a93851113a06f421e4ba2c14fad3f5391fd0c6d3f168921"
+      },
+      "current": {
+        "classSha256": "e48d24b3e054cf602fe578208b360bd438e8ff5e78dc5c9d8fc285070169475c",
+        "javapSha256": "46266601afe531e58a93851113a06f421e4ba2c14fad3f5391fd0c6d3f168921"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "ownerPackageAccessReference": false,
+      "notClaimedPureDebugOnly": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Identity",
+      "old": {
+        "classSha256": "58a984d50fb03ad0694c09dd43325c77725bff0c2cd1f5554b448b695647a5d7",
+        "javapSha256": "7a175430c11b257b31be3cb8354da81fc862dedb695879a59ebf112e72b37226"
+      },
+      "current": {
+        "classSha256": "4969a7e6b8e59e2d6bb31590bb5990636ab43cd1cb9eb440b69823cc517208eb",
+        "javapSha256": "7a175430c11b257b31be3cb8354da81fc862dedb695879a59ebf112e72b37226"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "ownerPackageAccessReference": false,
+      "notClaimedPureDebugOnly": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFile$NioIo",
+      "old": {
+        "classSha256": "b8b8ef56705a5c37a3096a8c5d5f82d4cde188c99fed4a9da7b7faaf79c1daec",
+        "javapSha256": "e342442766dab150304c18dcfcabfedcdbd6b78c9cc7f4847404cb9f75e9af8c"
+      },
+      "current": {
+        "classSha256": "15afc5546eda81875fbd45754934cc2ee1614a6a541708c43fc10c086554d71c",
+        "javapSha256": "e342442766dab150304c18dcfcabfedcdbd6b78c9cc7f4847404cb9f75e9af8c"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "ownerPackageAccessReference": false,
+      "notClaimedPureDebugOnly": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Snapshot",
+      "old": {
+        "classSha256": "d75fc57c0a507bb0c78b57b301768831b3e722247ff3c7a5cf1c6d121cdaf98e",
+        "javapSha256": "af5d5955ad60e5846e99402058e89a60a58e446f36e72e35ba38f0ff8fed6579"
+      },
+      "current": {
+        "classSha256": "9b27a2c9d68fbca07f858046aab9a98dea5000a1d039df63f5be6ad345b33183",
+        "javapSha256": "af5d5955ad60e5846e99402058e89a60a58e446f36e72e35ba38f0ff8fed6579"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "ownerPackageAccessReference": false,
+      "notClaimedPureDebugOnly": false
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.StartupAdmissionFile$ViewOperation",
+      "old": {
+        "classSha256": "0a71c9f11e8d91c83c27a79520442758db24abfef61abc201140551735894a17",
+        "javapSha256": "ba148f14373128cc62cb747d6099fa80d21c3789e6f14853037f886a1cfbb9d3"
+      },
+      "current": {
+        "classSha256": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+        "javapSha256": "ba148f14373128cc62cb747d6099fa80d21c3789e6f14853037f886a1cfbb9d3"
+      },
+      "allOpcodeHandlerSemanticsEqual": true,
+      "ownerPackageAccessReference": true,
+      "notClaimedPureDebugOnly": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 757,
+  "failedSource673Imported": false,
+  "bugs": [
+    "BUG1414",
+    "BUG1432"
+  ],
+  "ykt": [
+    "YKT1178",
+    "YKT1196"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0
+}

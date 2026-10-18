@@ -1,0 +1,17 @@
+# Startup ViewOwner primitive登録・全逆順drainの限定結果
+
+修正source **86968fd6f6edb54511a1db02959f5bfe3c3b92fb**/dev-foundation、`python3 -B tools/quality/pg5248_startup_view_selected.py green --group factory` 元88704真正終了**0**/Maven両0/六format先行0/**829PT98suite/FES/flaky/skipped/notrun0**・NullAway/ErrorProne0/三compiled static0。全storage1212line291method39class531branch各miss0。新独立8＋既46独立＋関連775を当snapshot一回実行、新8内64組をJUnit64件へ水増ししない。全8試験/goldenは旧673と全byte同一で期待値変更0、corrected codeに旧成功を転用0。
+
+原source **673888c95/PG5240-v1/元46112**は829試験成功・Owner60line8method1class50branch100でも**終了1/[0,1]/batch SpotBugs1**で不合格保持。BUG1432/YKT1196を修正前起票、診断PG5247 **6ffac7087421417ac9cd189a7c4fdf671fa2b3b7a3835793844190f1af9462db**はlocked4.10.4 detector jar/実Javap SHAとATHROW型条件・原counter/XML/log hashを非受入で保存。generic Runtime castをnative catchの元Runtime/Error unionへ型を保つ非再帰三phaseとprimitive secondary bitmapへ是正、whole/runtime/coverageや指摘を抑制する変更・synthetic移動/sneaky throw/identity wrapping0。
+
+PG5250最終元56249真正終了0、SHA **049e1269c7cd59daae664cc5705cc222338405cc21315e1c5e7c437570e1f462**。容量N+3と全wrapper/int slots/bitmap/全portのnative前構築、各open前closed/容量/内部parent-name、有効FD後primitive登録/返却・boxing/grow/heap helper0、負/duplicateは新所有無し、first/known/drainの全native逆順一度attempt後だけnormalization/suppressedを実Java25で証明した。unknownは元typed catch内で同identityを再throw、各phaseに再帰/heap確保無し、Owner内synthetic method0。DirectoryCalls.close失敗時も消費の契約を維持し、論理消費をkernel正常解放/UNKNOWN業務成功へ読み替えず再試行0。
+
+当Ownerは**70line/10method/1class/44branch各miss0**。新8ケースはFD319以上/0/負/重複・容量/closed/null/parent拒否/三open×IO・Runtime・Error/全64close golden・既suppressed/同一例外・body-release9/独立owner並行を意味ある原値/順序/identity/Reason/資源後条件でassert。全764Main＝outer/ViewOwner意味2、Admission/Identity/Snapshot/NioIo/ViewOperationの5nestedは旧実classSHA/全opcode-handler同義、他757同byte・追加削除0。ViewOperationはOwnerの意図したpackage内部testability access参照に追随するmetadata差で純debug差扱いしない。既exec前service→host消費/A借用/原本/current/Unit/Role/metadataは不変、実heapOOMEの再現主張0。
+
+post工具失敗も保持：最初pg5250はpackage-private `int`を前置空白付きで探しValueError終了1、次はCode無しViewOperation methodのcanonicalでIndexError終了1。BUG1425/YKT1189追加範囲を再開し共通member名parser、BUG1434/YKT1198へabstract/native空Code＋空handler正規化/不整合拒否を修正前起票して是正。原失敗はtool出力のみ/rawfile欠測、公開manifest生成前拒否、Maven/元869の再演・変更0。独立管理8（inventory2/同oracle2/header・emptyCode4）と全関連11tool pyflakes0、当二追加工具範囲も最終実postで限定closeする。BUG1433/YKT1197の診断unused import1は元出力欠測を保持し、importだけ修正・projection再演0で限定close。
+
+`python3 -B tools/quality/pg5252_startup_view_public.py --group factory` 0、`evidence/provisional/pg5248-startup-view-owner-green-v1-metadata-v2/manifest.json` SHA **4fae71d119aa09efab7652ae09ce6dab617013283c2cf4a97e29ac2c8e7a2b98**。全829TestID/class/method/観測invocation/fixture・独立期待/source/input/XML/command/OS・実日時/JDK25.0.4/Maven3.9.12/JaCoCo0.8.15/SpotBugs4.10.4.0/coverage/全hashを一意joinしrawXMLproperty/秘密実体は公開しない。
+
+`python3 -B tools/quality/pg5254_scope_classification_startup_view.py` 0、SHA **b237cf2d0d583d1fd4f2fa5daa3318ff8ad24b47dca38a925d92d175b45a70c0**、原237=135限定是正/1借用非該当/101UNKNOWN。別prebuilt release1非該当/Morning内部移管の限定根拠を保持、原2siteを当source/実proof後だけ限定是正計上。BUG1414/YKT1178全体/新whole3845・559・1661/current native/全四100/F03/CHR/451/QA051final/trace/引継ぎは未完、formal1964/53・歴史17/190・工数null不変。
+
+SSC308設計onlyabf662cd3→main19e591804/PR161・実施33dfb24a1/1073へ追跡、未受入code/tool/evidenceのmain混入0、添付100上限拒否保持。群1211開始.8/3/8は固定、旧source failure/新8/型表現手戻り/metadata工具是正/同source再認証を分離し、元/v3/v4未較正597.25/実費N-Tnullは不変。fresh共有15/残85・短期null/券0、usage増分cursor **b15ef619**/23:48:03JST/明示record0、共有差14→15は専有費や消化率ではない。原本DB/Backup/鍵/stash7/Currentbaseline/native/全成功失敗証跡保持・VM操作0、通常小区切りで停止せず残101候補へ継続する。

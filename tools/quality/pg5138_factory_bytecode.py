@@ -30,6 +30,11 @@ def one(values, why):
     return values[0]
 
 
+def named(method,name):
+    declaration=method['header'].split('(',1)[0].split()
+    return bool(declaration) and declaration[-1]==name
+
+
 def index_of(method, needle):
     return one([i for i, row in enumerate(method['ops']) if needle in row[2]], 'one actual '+needle)
 
@@ -69,6 +74,9 @@ def scope_prefix(method):
 
 
 def canonical(method):
+    if not method['ops']:
+        if method['handlers']:raise ValueError('Code-free method cannot own exception handlers')
+        return {'ops':[],'handlers':[]}
     labels = {row[0]:i for i,row in enumerate(method['ops'])}
     end = method['ops'][-1][0] + 1
     labels[end] = len(method['ops'])

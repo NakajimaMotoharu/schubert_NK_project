@@ -80,9 +80,9 @@ def main():
         raise ValueError('primitive owner must not box descriptors or grow a list')
     acquisition={}
     for name in ('openRoot','openDirectory','openEntry'):
-        method=bytecode.one([m for m in owner if ' int '+name+'(' in m['header']],'one primitive '+name)
+        method=bytecode.one([m for m in owner if bytecode.named(m,name)],'one primitive '+name)
         acquisition[name]=registration(method,'DirectoryCalls.'+name+':')
-    closing=bytecode.one([m for m in owner if ' void close(' in m['header']],'one all-drain close')
+    closing=bytecode.one([m for m in owner if bytecode.named(m,'close')],'one all-drain close')
     drain_proof=drain(closing);nested=[]
     for key in sorted(changed-required):
         name=key.split(':',1)[1][:-6].replace('/','.')
