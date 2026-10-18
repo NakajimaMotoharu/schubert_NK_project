@@ -11,8 +11,9 @@ def code_with_receipt(code):
 
 
 def namespace():
-    # Bind the guest emitter's SAVE as well as the host entry's directory before
-    # building either factory. A host-only SLOT override would split the receipt.
+    # Bind the complete emitter namespace as well as the host directory before
+    # building either factory. Its read-only result retains the canonical PG5502
+    # reader label; execution identity is this new slot, source and payload hash.
     result=types.FunctionType(previous.namespace.__code__,{**vars(previous),'SLOT':SLOT})();original=result['entry']()
     if original.__code__.co_consts.count('pg5500-stop-v1.safe.json')!=1:
         raise ValueError('one exact original genuine-stop selector')
