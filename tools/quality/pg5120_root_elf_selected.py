@@ -23,12 +23,18 @@ SUITES = {
 }
 BUILT = ('storage', 'bootstrap', 'batch')
 SIX = ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch')
+PENDING = 'dev/codex/schubert/nk/batch/file/RootStartupPending'
+PENDING_SUITES = {
+    'dev.codex.schubert.nk.batch.file.RootPendingWaitTest': 'batch',
+    'dev.codex.schubert.nk.batch.file.RootStartupPendingTest': 'batch',
+    'dev.codex.schubert.nk.batch.file.StartupLaunchFilesTest': 'batch',
+}
 
 
-def commands_for(base):
+def commands_for(base, suites=SUITES):
     return [base + ['-pl', ','.join('src/schubert-nk-' + m for m in SIX), 'spotless:check'],
             base + ['-pl', 'src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch', '-am',
-                    '-Dtest=' + ','.join(SUITES), '-Dsurefire.failIfNoSpecifiedTests=false', 'test',
+                    '-Dtest=' + ','.join(suites), '-Dsurefire.failIfNoSpecifiedTests=false', 'test',
                     'org.jacoco:jacoco-maven-plugin:0.8.15:report',
                     'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']]
 
@@ -41,7 +47,7 @@ def utc():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
-def main_delta(snapshot):
+def main_delta(snapshot, group='elf'):
     reference = json.loads(FULL.read_bytes())
     q = reference['result']
     if not (reference['actualExit'] == 0 and q['productionSource'] == BASE
@@ -56,8 +62,13 @@ def main_delta(snapshot):
     changed = sorted(k for k in actual.keys() & expected.keys() if actual[k] != expected[k])
     added = sorted(actual.keys() - expected.keys())
     removed = sorted(expected.keys() - actual.keys())
-    if changed != ['batch:' + CLASS + '.class'] or added != ['batch:' + CLASS + '$DigestFactory.class'] or removed:
-        raise ValueError('only Root ELF outer and one declared DigestFactory may differ')
+    allowed_changed = {'batch:' + CLASS + '.class'}
+    allowed_added = {'batch:' + CLASS + '$DigestFactory.class'}
+    if group == 'pending':
+        allowed_changed.add('batch:' + PENDING + '.class')
+        allowed_added |= {'batch:' + PENDING + suffix + '.class' for suffix in ('$WaitIo', '$LaunchRead', '$1')}
+    if set(changed) != allowed_changed or set(added) != allowed_added or removed:
+        raise ValueError('only cumulative SSC306/307 declared Main delta may differ')
     return {'referenceSource': BASE, 'originalPhysicalMain': 1650, 'selectedPhysicalMain': len(actual),
             'changed': changed, 'added': added, 'removed': removed, 'oldNativeImported': False,
             'physicalSha256': actual}
@@ -66,12 +77,15 @@ def main_delta(snapshot):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
+    parser.add_argument('--group', choices=('elf', 'pending'), default='elf')
     args = parser.parse_args()
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed source required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     version = 'v2' if args.phase == 'red' else 'v3'
-    work = ROOT.parent / ('pgpt-runs/PG379/pg5120-root-elf-' + args.phase + '-' + version)
+    stem = 'pg5120-root-elf' if args.group == 'elf' else 'pg5124-root-pending'
+    if args.group == 'pending': version = 'v1'
+    work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)
     archive = work / 'source.tar'
@@ -84,7 +98,8 @@ def main():
         saved.extractall(snapshot, filter='data')
     inputs = {str(p.relative_to(snapshot)): sha(p) for p in snapshot.rglob('*') if p.is_file()}
     expected = {}
-    for name, module in SUITES.items():
+    suites = SUITES if args.group == 'elf' else {**SUITES, **PENDING_SUITES}
+    for name, module in suites.items():
         text = (snapshot / ('src/schubert-nk-' + module + '/src/test/java/' + name.replace('.', '/') + '.java')).read_text()
         methods = re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(', text)
         if len(methods) != text.count('@Test') or len(set(methods)) != len(methods):
@@ -96,8 +111,8 @@ def main():
                SCHUBERT_PG_ROOT=str(ROOT.parent / 'characterization-tools/root/usr'))
     base = [str(TC / 'm2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'), '-B', '-o',
             '-Dmaven.repo.local=' + str(TC / 'm2/repository')]
-    commands = commands_for(base)
-    begin = {'sourceSnapshot': head, 'deployedSource': BASE, 'phase': args.phase, 'startUTC': utc(),
+    commands = commands_for(base, suites)
+    begin = {'sourceSnapshot': head, 'deployedSource': BASE, 'phase': args.phase, 'group': args.group, 'startUTC': utc(),
              'archiveSha256': sha(archive), 'inputs': inputs, 'expectedMethods': expected,
              'commands': commands, 'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
     (work / 'begin.safe.json').write_text(json.dumps(begin, sort_keys=True))
@@ -130,21 +145,23 @@ def main():
         cov = target / 'site/jacoco/jacoco.xml'
         if cov.is_file() and module == 'batch':
             for c in ET.parse(cov).getroot().findall('package/class'):
-                if c.get('name') == CLASS:
+                if c.get('name') in ({CLASS, PENDING} if args.group == 'pending' else {CLASS}):
                     for method in c.findall('method'):
-                        if method.get('name') == 'digest' or method.get('name', '').startswith('lambda$digest$'):
+                        digest_target = c.get('name') == CLASS and (method.get('name') == 'digest' or method.get('name', '').startswith('lambda$digest$'))
+                        pending_target = c.get('name') == PENDING and (method.get('name') == 'readLaunch' or (method.get('name') == 'awaitLaunch' and '$WaitIo;' in method.get('desc', '')))
+                        if digest_target or pending_target:
                             key = method.get('name') + method.get('desc')
                             counters[key] = {v.get('type'): {'missed': int(v.get('missed')), 'covered': int(v.get('covered'))}
                                              for v in method.findall('counter')}
     if actual != expected: reasons.append('exact selected case inventory incomplete')
     if not all(sha(snapshot / path) == digest for path, digest in inputs.items()): reasons.append('frozen input changed')
     if set(static) != set(BUILT) or any(static.values()): reasons.append('required three compiled-module fresh static incomplete/nonzero')
-    if len(counters) != 3 or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
+    if len(counters) != (5 if args.group == 'pending' else 3) or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
                                    if kind in ('LINE', 'METHOD', 'BRANCH')):
         reasons.append('all digest overload/default-factory line/method/branch required')
     delta = None
     if codes == [0, 0]:
-        try: delta = main_delta(snapshot)
+        try: delta = main_delta(snapshot, args.group)
         except ValueError as failure: reasons.append(str(failure))
     result = {**{k: v for k, v in begin.items() if k != 'inputs'}, 'endUTC': utc(), 'phaseExits': codes,
               'actualExit': 0 if codes == [0, 0] and not reasons else 1, 'tests': sum(map(len, actual.values())),

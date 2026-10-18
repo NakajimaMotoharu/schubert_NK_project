@@ -25,6 +25,17 @@ class SelectedCommandsTest(unittest.TestCase):
             'dev.codex.schubert.nk.batch.file.RootElfDigestPortTest': 'batch'})
         self.assertEqual(role.BUILT, ('storage', 'bootstrap', 'batch'))
 
+    def test_pending_scope_keeps_all_elf_cases_and_adds_real_wait_and_file_suites(self):
+        self.assertEqual(role.PENDING_SUITES, {
+            'dev.codex.schubert.nk.batch.file.RootPendingWaitTest': 'batch',
+            'dev.codex.schubert.nk.batch.file.RootStartupPendingTest': 'batch',
+            'dev.codex.schubert.nk.batch.file.StartupLaunchFilesTest': 'batch'})
+        suites = {**role.SUITES, **role.PENDING_SUITES}
+        command = role.commands_for(['MAVEN'], suites)
+        self.assertEqual(len(suites), 7)
+        self.assertEqual(command[0], role.commands_for(['MAVEN'])[0])
+        self.assertIn('-Dtest=' + ','.join(suites), command[1])
+
 
 if __name__ == '__main__':
     unittest.main()
