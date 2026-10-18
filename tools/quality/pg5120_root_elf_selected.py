@@ -33,6 +33,7 @@ FACTORY_REFERENCE = 'e8ecff1bec1d7ddd51cdfbf803acda07c2f6cdb9'
 FACTORY_FULL = ROOT.parent / 'pgpt-runs/PG379/pg5130-root-whole-qualified-v1/manifest.safe.json'
 SCOPE = 'dev/codex/schubert/nk/storage/ResourceScope'
 DIRECTORY = 'dev/codex/schubert/nk/storage/OwnedTransferDirectory'
+TEST_UMASK = 0o027
 
 
 def storage_suites():
@@ -109,7 +110,7 @@ def main():
     stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards',
             'factory': 'pg5136-factory-io'}[args.group]
     if args.group != 'elf': version = 'v1'
-    if args.group == 'factory': version = 'v3'
+    if args.group == 'factory': version = 'v4'
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)
@@ -141,13 +142,14 @@ def main():
     commands = commands_for(base, suites)
     begin = {'sourceSnapshot': head, 'deployedSource': BASE, 'phase': args.phase, 'group': args.group, 'startUTC': utc(),
              'archiveSha256': sha(archive), 'inputs': inputs, 'expectedMethods': expected,
-             'commands': commands, 'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
+             'commands': commands, 'parentUmask': '0077', 'childMavenUmask': '0027',
+             'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
     (work / 'begin.safe.json').write_text(json.dumps(begin, sort_keys=True))
     codes = []; logs = {}
     for index, command in enumerate(commands):
         path = work / ('phase-' + str(index) + '.private.log')
         with path.open('xb') as log:
-            child = subprocess.Popen(command, cwd=snapshot, env=env, stdout=log, stderr=log)
+            child = subprocess.Popen(command, cwd=snapshot, env=env, stdout=log, stderr=log, umask=TEST_UMASK)
             proc = Path('/proc') / str(child.pid)
             owner = {'pid': child.pid, 'ticks': int((proc / 'stat').read_text().rsplit(')', 1)[1].split()[19]),
                      'argvSha256': hashlib.sha256((proc / 'cmdline').read_bytes()).hexdigest(), 'phase': index}

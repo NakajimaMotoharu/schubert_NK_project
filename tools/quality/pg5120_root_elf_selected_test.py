@@ -1,9 +1,17 @@
 """Independent literal reactor/order expectations; no Maven or VM invocation."""
+import inspect
 import unittest
 import pg5120_root_elf_selected as role
 
 
 class SelectedCommandsTest(unittest.TestCase):
+    def test_private_parent_and_native_fixture_child_umasks_are_separate(self):
+        self.assertEqual(role.TEST_UMASK, 0o027)
+        raw = inspect.getsource(role.main)
+        self.assertIn('os.umask(0o077)', raw)
+        self.assertIn('umask=TEST_UMASK', raw)
+        self.assertIn("'parentUmask': '0077', 'childMavenUmask': '0027'", raw)
+
     def test_all_six_production_format_only_precedes_selected_pt(self):
         commands = role.commands_for(['MAVEN'])
         self.assertEqual(commands[0], ['MAVEN', '-pl',
