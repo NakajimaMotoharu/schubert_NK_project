@@ -2,6 +2,8 @@
 
 ## SSC308 Root IO所有の取得後callback構築gap是正
 
+完成owner移管の追加適用（2026-10-19）：MorningPermitPublicationのnativeStore/nativeIntent/create、BackupStartIntentFiles.create/createPublicationはSS333のhandoff契約でDirectory→Files/Store/Intents→Publicationの各完全組立まで保護する。返却するownerがnonnullで完成した最後だけ移管し、失敗時は同一資源を一度解放、旧IO/unknown優先/UNKNOWN・保持/親期限・current/epoch/原本/DB/Backup/intent開始・退役を変更しない。既取得順と役割・固定namespace/metadataを保ち、初期化/lock/policy/残callbackの取得後確保を保護域外へ残さない。BackupStartIntentFiles.createServiceの既manual tryは別既契約として失敗/close優先まで比較し、理由なしに共通補助へ置換しない。原237候補と追加直接open/TWR対象の母数・是正/非該当・残証拠を分離する。内部詳細のためRD/UI/業務仕様変更・新QA不要、製造/PT/native/全体未完。
+
 StartupAdmissionFileのhost/private observation ownerはSS333追加詳細のN+3 primitive容量を取得前に確保し、native FDをboxing/List grow前に取り落とさず追跡する。各native open前のclosed/容量拒否、取得後の非負/既FD重複拒否とprimitive保持、逆順全close試行の後だけIO/unknown合成を行う。serviceOwner→hostOwnerの既exec前消費・A lockだけをtrusted callbackへ借用する順序、正規原本/同PID/current世代/Unit/期限/metadata照合は不変。close例外/論理消費済みをkernel正常解放又は未知tool成功と認定せず、同FD再試行/権限拡張をしない。関連BUG1414/YKT1178・SSC308は全体未完、RD/UI/外部仕様の変更不要・新QA不要。
 
 継承二FDの詳細補足：LinuxStartupAdmissionは従来のnull/input/distinct/range検証前を引継ぎ前（close0）として維持し、二owner/全close portの構築完了後にadmission/proofを集合ownerとして同時にadoptする。proofの正常消費は業務callbackより前、admissionは最外終端又は既Leaseの早期消費で一度だけ、各AtomicBooleanの再close防止を保持する。proof内scope入場前のbody確保故障でも集合releaseでP→Aの逆順回収を試み、全portをadopt前に構築して元ResourceScopeのIO/unknown/複合close優先順位を適用する。既CLOEXEC/同PID/readonly/権限/署名/原本/親budget・外部操作の条件は変えず、集合ownerだけでready/成功を認定しない。

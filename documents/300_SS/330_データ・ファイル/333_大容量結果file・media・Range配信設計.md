@@ -2,6 +2,10 @@
 
 ## SSC308 取得前port構築・factory内IO所有とdescriptor wrapper先行確保
 
+完成ownerへの内部移管補足（BUG1414/YKT1178、2026-10-19）：`ResourceScope.handoff(Acquire<R,E>,Release<R>,OwnedAction<R,T>)`は既acquireと同じ取得/失敗優先規則の上で、Rの完全なowner Tを組み立てて渡す内部補助とする。全portのnonnull検証・primitive移管状態・条件付release/assembly callbackはR取得前に構築する。組立/検証中はRを保護し、完成Tのnonnull確認が成功した最後だけprimitive状態を移管済みにして即返却する。移管後の補助releaseは事前構築したno-opであり、Rを閉じる責任は返却済み完成ownerだけにある。未完成/null T、組立IO/Runtime/Errorでは同一Rを一度解放し既Reason/unknown identity/秘匿suppressed/複合優先規則を適用する。factory失敗/null Rは既acquire同様body/release0、成功移管を業務完了やkernel close成功へ読み替えない。
+
+この補助はfactory内部のDirectory→Files/匿名wrapper→上位ownerの連鎖でも各完全組立境界で適用し、取得後かつ保護外でnew/lock/policy/残callbackを作らない。失敗時の未確定ownerを再利用せず、返却後の元所有者による二重close/権限拡張・外部success入口は追加しない。原237use候補外の直接open/TWR/手動tryも別母数で照合し、検索だけで全体完了にしない。
+
 StartupAdmissionFile.ViewOwner追加詳細（BUG1414/YKT1178、2026-10-18）：private readonly viewの全取得予定数はroot1＋runtimeのN segment＋app1＋entry1＝N+3。owner/primitive int slot/failure scratch/全portを最初のnative open前に有限確保する。各openRoot/openDirectory/openEntryはclosed/容量を取得前に検査、有効かつ既保持FDと異なる返却値の後はprimitive比較/格納/返却だけとし、Integer boxing・List grow・callback/new・追加Java helper呼出しを挟まない。負値は新所有なし、既保持FD自身の返却も新所有とせず拒否し元FDを一度だけ消費する。runtime/固定名/権限/NOFOLLOW/host-private照合と外部能力は変更しない。
 
 同ViewOwnerのcloseは既消費flagを先に確定し全保持FDへ逆順に一度ずつnative closeを試みる。drain中はcallback/配列/例外/suppressed等を新規確保せず、事前scratchへ失敗を記録し全試行後だけ既ResourceScopeと同じIO Reason/unknown identity/複合優先順位・秘匿suppressedを組み立てる。消費済みは再close/再openへ使わず、native closeが例外を返した事実をkernel解放成功へ読み替えない。失敗FD数値の再試行や別authorityによるcloseは禁止。単なる検索/use置換や実heapOOME未再現を完了根拠にせず、独立fault matrix/実bytecodeと必要同source全体/nativeで別資格する。
