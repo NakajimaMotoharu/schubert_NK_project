@@ -12,6 +12,9 @@ def matrix():
     for old,new in(('pg4916','pg5496'),('Pg4916','Pg5496'),('pg4918','pg5498'),
         ('pg4920','pg5500'),('pg4923','pg5501'),('04bbdb73b532537e3546191d72dee913b17629a0',role.SOURCE)):
         raw=raw.replace(old,new)
+    old="role.composite.compose(original,{'before':{},'after':{},'context':{'fixtureOnly':True}},'b'*64)"
+    if raw.count(old)!=1:raise ValueError('one pure-emission prefix argument fixture')
+    raw=raw.replace(old,old[:-1]+",{'kind':'FAILED_HOST_CLOCK_BROWSER','fixtureOnly':True})",1)
     ns={**vars(reference),'__file__':__file__,'role':role,'dispatch':dispatch,'post':post}
     exec(compile(raw,'<new296 independent normal owned fixture matrix>','exec'),ns)
     return ns['Owned']

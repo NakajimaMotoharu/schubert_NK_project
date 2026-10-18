@@ -50,6 +50,11 @@ public final class NativeNkBrowserBusinessOracleTest {
     check(NativeNkBrowserBusinessCohort.validSelfForms(List.of("PASSWORD")));
     for (Object invalid : List.of(List.of("STATUS", "ROLE", "PASSWORD", "UNLOCK"), List.of("PASSWORD", "UNLOCK"), List.of("ROLE"), List.of("PASSWORD", "PASSWORD"))) check(!NativeNkBrowserBusinessCohort.validSelfForms(invalid));
     check(!NativeNkBrowserBusinessCohort.validSelfForms(null));
+    check("2026-10-19T01:02:03.123456Z".equals(NativeNkBrowserBusinessCohort.clockInstant(json.getNodeFactory().textNode("2026-10-19T10:02:03.123456+09:00"))));
+    rejects(() -> NativeNkBrowserBusinessCohort.clockInstant(null));
+    rejects(() -> NativeNkBrowserBusinessCohort.clockInstant(json.getNodeFactory().numberNode(123)));
+    rejects(() -> NativeNkBrowserBusinessCohort.clockInstant(json.getNodeFactory().textNode("2026-10-19T01:02:03")));
+    rejects(() -> NativeNkBrowserBusinessCohort.clockInstant(json.getNodeFactory().textNode("invalid")));
     System.out.println("PG3128_PURE_ORACLE_PASS typedInfoVectors=20 protectedAccount=4 sessionNegative=3 menuCurrentBaselineAndNegative=6 selfNonlockedForms=6 sqlEscape=true networkReads=0");
   }
 }

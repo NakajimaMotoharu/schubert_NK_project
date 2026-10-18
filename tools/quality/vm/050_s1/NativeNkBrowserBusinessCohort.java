@@ -103,6 +103,27 @@ public final class NativeNkBrowserBusinessCohort {
     require(value.isObject() && value.size() == 24); return value;
   }
 
+  static String clockInstant(JsonNode value) {
+    require(value != null && value.isTextual());
+    try {
+      return java.time.OffsetDateTime.parse(value.textValue()).toInstant().toString();
+    } catch (java.time.DateTimeException invalid) {
+      throw new IllegalStateException("invalid guest clock witness", invalid);
+    }
+  }
+
+  static Map<String, Object> guestClock() throws Exception {
+    long started = System.nanoTime();
+    String hostBefore = java.time.Instant.now().toString();
+    String instant = clockInstant(query("select to_json(clock_timestamp())"));
+    String hostAfter = java.time.Instant.now().toString();
+    long ended = System.nanoTime();
+    require(ended - started >= 0 && ended - started <= TimeUnit.SECONDS.toNanos(30));
+    return Map.of("clockSource", "guest-postgresql.clock_timestamp", "instant", instant,
+        "hostStartNanos", started, "hostEndNanos", ended,
+        "hostBeforeUtc", hostBefore, "hostAfterUtc", hostAfter);
+  }
+
   static void privateValue(String name, Object value) throws Exception {
     require(name.matches("[a-z-]+\\.private\\.json"));
     byte[] bytes = JSON.writeValueAsBytes(value);
@@ -169,8 +190,11 @@ public final class NativeNkBrowserBusinessCohort {
     NativeNkBootstrapAuthentication.independentPassword(beforeUser.path("password_hash").textValue(), password);
     record("PT-NBR-001", Map.of("readOnlyJcaCredentialQualified", true, "passwordResetIssued", false));
     if (args[0].equals("preflight")) return;
+    // BUG1454: audit/DB timestamps originate in the guest, not the Browser host.
+    // Capture independently before any source HTTP probe; never derive a bound from rows.
+    Map<String, Object> lowerClock = guestClock();
+    String lower = (String) lowerClock.get("instant");
     stage = "SOURCE"; source();
-    String lower = java.time.Instant.now().toString();
     privateValue("before-rows.private.json", allRows());
     JsonNode oldBusiness = business(-1); Set<String> initialIds = ids(sessions(owner)); List<String> fresh = new ArrayList<>();
     try (Playwright pw = Playwright.create(); Browser browser = pw.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
@@ -241,7 +265,10 @@ public final class NativeNkBrowserBusinessCohort {
       require(System.nanoTime() < deadline); Thread.sleep(2000);
     }
     privateValue("after-rows.private.json", allRows());
-    privateValue("context.private.json", Map.of("owner", owner, "lower", lower, "upper", java.time.Instant.now().toString()));
+    Map<String, Object> upperClock = guestClock();
+    privateValue("context.private.json", Map.of("owner", owner, "lower", lower,
+        "upper", upperClock.get("instant"), "clockDomain", "guest-postgresql-realtime",
+        "lowerClock", lowerClock, "upperClock", upperClock));
   }
 
   public static void main(String[] args) {

@@ -4,9 +4,9 @@ import json
 import pg5060_current_owned_sources as previous
 import pg5476_current_admission_image as admission
 import pg5478_current_genuine_terminal as acceptance
-import pg5488_current_same_owner_browser as actual
-import pg5490_current_browser_composite as composite
-import pg5492_current_parent_projection as projection
+import pg5524_guest_clock_same_owner_browser as actual
+import pg5526_guest_clock_browser_composite as composite
+import pg5528_guest_clock_parent_projection as projection
 from immutable_payload_binding import bind_preserving_payloads
 
 SOURCE,BOM=admission.SOURCE,admission.BOM
