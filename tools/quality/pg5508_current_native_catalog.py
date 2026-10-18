@@ -24,7 +24,7 @@ def prerequisites(post,terminal):
 
 
 def main():
-    raw=inspect.getsource(TEMPLATE.main).replace('pg4658-current-owned-post-v1','pg5502-current-owned-post-v1')
+    raw=inspect.getsource(TEMPLATE.main).replace('pg4658-current-owned-post-v1','pg5534-current-owned-post-v1')
     raw=raw.replace('pg4652_parent_receipt.py','pg5496_parent_receipt.py')
     ns={**vars(TEMPLATE),'SLOT':SLOT,'role':role,'catalog_source':catalog_source,'prerequisites':prerequisites}
     exec(compile(raw,'<same296 source-only catalog after actual stop>','exec'),ns)
