@@ -47,7 +47,7 @@ public final class ResourceScope {
     Objects.requireNonNull(release, "resource release");
     Objects.requireNonNull(action, "resource action");
     @Nullable R resource = acquire.open();
-    if (resource == null) throw new NullPointerException("acquired resource");
+    if (resource == null) Objects.requireNonNull(resource, "acquired resource");
     try {
       T result;
       try {
