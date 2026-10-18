@@ -50,5 +50,14 @@ class Residual(unittest.TestCase):
         for bad in (raw.replace(b'ci="3"',b'ci="0"'),raw.replace(b'</sourcefile>',b'<line nr="10" mi="0" ci="1"/></sourcefile>')):
             with self.assertRaises(ValueError):target.parse_report(bad)
 
+    def test_literal_sixfield_native_metadata_is_qualified_not_discarded(self):
+        four={k:{'missed':v,'covered':0}for k,v in zip(target.COUNTERS,[2,1,1,2],strict=True)}
+        native={**four,'classByteMismatch':0,'formal':False}
+        self.assertEqual(four,target.measurement_counters(native))
+        for change in ({'classByteMismatch':1},{'classByteMismatch':False},{'formal':True},{'unknown':0},{'LINE':{'missed':False,'covered':0}}):
+            with self.subTest(change=change),self.assertRaises(ValueError):target.measurement_counters({**native,**change})
+        del native['formal']
+        with self.assertRaises(ValueError):target.measurement_counters(native)
+
 
 if __name__=='__main__':unittest.main()

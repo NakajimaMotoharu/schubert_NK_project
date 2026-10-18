@@ -9,3 +9,5 @@ PT-OPS-MAP-5118-001～003管理3成功：手作り一class/一methodの独立XML
 元DB/Backup/鍵/native88/全成功失敗/stash7保全。実行結果のaffected class/method数はcounter miss件数と区別し、指標重複加算0。正式1964PT/53scope・17/190/工数率null、F03/QA051final/四全100/CHR/451/意味的trace/引継ぎは別未完。原/v3/v4/各開始見積固定、当調査開始見積低.05/標準.2/高.7週次共有ppは実費・完成率でなく、個別専有費/N/T不明はnull。
 
 初回実inventoryは集約照合でexit1/出力作成前拒否（operator4a33e2bbd）。root LINEcovered16356とclass occurrences16368（重複12）を混同したBUG1409/YKT1173を修正前起票。元coverage/root/正式の値変更0・全3791/署名/VM操作再演0、初回raw logファイルは未保存で欠測を0/成功へ補填しない。是正後PT-OPS-MAP-5118-004は二class同source同一行のliteral oracle、partial ci/miとcovered扱い・宣言不一致・重複line拒否を追加し管理4件0。未実行の再試験を合格とせず、固定/push後の当host reportだけ再実行する。
+
+再試験operatorcd0a446c8も出力前exit1、四counter数値は一致していたがnative dictの資格metadata二field（classByteMismatch/formal）も全dict比較したBUG1410/YKT1174を先行起票。counter四種を明示projectionし、metadataは型/0/false/余剰を別に強資格する。PT-OPS-MAP-5118-005の独立六field fixture/不正metadata/bool/欠落/余剰/counter型を追加し管理5件0。現原値から90class/360影響methodと全90source対応をread-only診断確認、まだ正式report未作成・意味的trace未完/branchoutcome不明のまま。Main/Test/元Jacoco/3791/署名/VMに変更無し。

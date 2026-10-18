@@ -28,6 +28,19 @@ def counters(element):
     return result
 
 
+def measurement_counters(value):
+    if (type(value)is not dict or set(value)!=set(COUNTERS)|{'classByteMismatch','formal'}
+            or type(value['classByteMismatch'])is not int or value['classByteMismatch']!=0
+            or value['formal']is not False):
+        raise ValueError('actual class mismatch0 and formalfalse metadata required')
+    for k in COUNTERS:
+        row=value[k]
+        if (type(row)is not dict or set(row)!={'missed','covered'}
+                or any(type(v)is not int or v<0 for v in row.values())):
+            raise ValueError('typed four actual counter values required')
+    return {k:value[k]for k in COUNTERS}
+
+
 def parse_report(raw):
     root=ET.fromstring(raw)
     if root.tag!='report':raise ValueError('one JaCoCo report required')
@@ -112,7 +125,7 @@ def main():
     if hashlib.sha256(raw).hexdigest()!=module['coverageXmlSha256']:
         raise ValueError('hash-qualified public current XML required')
     report=parse_report(raw)
-    if report['counters']!=manifest['moduleCounters']['batch']:
+    if report['counters']!=measurement_counters(manifest['moduleCounters']['batch']):
         raise ValueError('root matches actual native measurement counters')
     tests={p.relative_to(ROOT).as_posix():p.read_text()for p in(ROOT/'src/schubert-nk-batch/src/test/java').rglob('*.java')}
     for row in report['classes']:row.update(source_hints(row,tests))
