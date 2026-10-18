@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+2026-10-18限定資格更新：source1c45f4ec6の537PT/73suite・六format先行0/三compile static0、共通storage四counter全miss0、immutable release16scopeは全port取得前構築とfactory直返却を実bytecodeで確認（1055/1056、PG5170 f97a2352・公開0769e9ea）。直前Source50bcのreadonly agent metadata新1を同大選択へ含め、checkedは15行/1method/36branch全miss0、NativeCoveragePrivateFile全classのbranch150/150を実測した。ただし同classの29行/12methodは未実行で四100ではなく、全new source/native/CHR/451は別受入。原237候補は52限定是正/1借用非該当/184未判定、追加prebuilt release1の非該当根拠も保存し、全体YKTを閉じない。既全体/別source/別scopeのcoverageや成功を合算しない。
+
 native横展開PT補足：FileLock/SealedProofの有効primitive取得直後wrapper格納/返却、負値・dup自己同一・close一度/未知/compoundを独立literal/identityとJava25で検査する。Startup二owner集合はP→A、proof早期close後の集合closeはAだけ、並行早期消費・全IO/unknown/compound・未adoptのinput拒否close0を独立確認し、port全構築がadopt前であることを実bytecodeで証明する。既storage全suite/全四counter/静的と必要全体/nativeを別受入、実heapOOMEや未実行成功を捏造しない（003020、WBS-P003-06、群1186開始費固定）。
 
 限定検証追補（2026-10-18）：source6d7a54a01・独立新16を含む222PT/32suite、全storage四counter1200行/269method/37class/537branch各miss0、六format/実compile三static0、取得直後保護域と旧use56opcode/handler同義の実bytecodeを確認（003016/017、PG5138 5ce05224・訂正公開e3024935）。Root11/共通Directory5だけの結果であり、残候補/新source全体/native/全正式品質は未完。失敗v1～v5/metadata384aは保持、既全体/旧nativeを転用しない。共通caller等の残候補は同規則と既独立oracleで個別修正又は非該当根拠・再発防止確認を続ける。
