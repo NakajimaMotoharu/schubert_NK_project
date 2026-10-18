@@ -22,6 +22,15 @@ SUITES = {
     'dev.codex.schubert.nk.batch.file.RootElfDigestPortTest': 'batch',
 }
 BUILT = ('protocol', 'storage', 'bootstrap', 'batch')
+SIX = ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch')
+
+
+def commands_for(base):
+    return [base + ['-pl', ','.join('src/schubert-nk-' + m for m in SIX), 'spotless:check'],
+            base + ['-pl', 'src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch', '-am',
+                    '-Dtest=' + ','.join(SUITES), '-Dsurefire.failIfNoSpecifiedTests=false', 'test',
+                    'org.jacoco:jacoco-maven-plugin:0.8.15:report',
+                    'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']]
 
 
 def sha(path):
@@ -61,7 +70,7 @@ def main():
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed source required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    work = ROOT.parent / ('pgpt-runs/PG379/pg5120-root-elf-' + args.phase + '-v1')
+    work = ROOT.parent / ('pgpt-runs/PG379/pg5120-root-elf-' + args.phase + '-v2')
     os.umask(0o077)
     work.mkdir(mode=0o700)
     archive = work / 'source.tar'
@@ -86,11 +95,7 @@ def main():
                SCHUBERT_PG_ROOT=str(ROOT.parent / 'characterization-tools/root/usr'))
     base = [str(TC / 'm2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'), '-B', '-o',
             '-Dmaven.repo.local=' + str(TC / 'm2/repository')]
-    commands = [base + ['spotless:check'],
-                base + ['-pl', 'src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch', '-am',
-                        '-Dtest=' + ','.join(SUITES), '-Dsurefire.failIfNoSpecifiedTests=false', 'test',
-                        'org.jacoco:jacoco-maven-plugin:0.8.15:report',
-                        'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']]
+    commands = commands_for(base)
     begin = {'sourceSnapshot': head, 'deployedSource': BASE, 'phase': args.phase, 'startUTC': utc(),
              'archiveSha256': sha(archive), 'inputs': inputs, 'expectedMethods': expected,
              'commands': commands, 'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
