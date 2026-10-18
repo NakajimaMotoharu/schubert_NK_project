@@ -1,0 +1,296 @@
+{
+  "source": "c98f1cbad596d361ce5b51bad4a92d8c9c538fb7",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "RootReleaseApprovalReader": {
+      "scopes": [
+        {
+          "method": "public <T> T execute(dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Operation<T>) throws java.io.IOException;",
+          "acquirePc": 29,
+          "portPcs": [
+            12,
+            17,
+            24
+          ]
+        },
+        {
+          "method": "private void recheck(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, long, int) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            2,
+            7,
+            18
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.bootstrap.ReleaseApproval content(java.nio.file.Path, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata) throws java.io.IOException;",
+          "acquirePc": 25,
+          "portPcs": [
+            8,
+            13,
+            20
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$execute$1(dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Operation, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 30,
+          "portPcs": [
+            11,
+            16,
+            25
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$execute$3(dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Operation, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 38,
+          "portPcs": [
+            17,
+            22,
+            33
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$execute$3(dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Operation, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 115,
+          "portPcs": [
+            98,
+            103,
+            110
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$8() throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            11
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$0() throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            11
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$recheck$0(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$4(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$2(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$content$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "directReturnPcs": [
+            10
+          ]
+        }
+      ],
+      "classSha256": "0f212d4850eef9185146d30cd4e7cefcb930af8183398911dc28aa9b782cbc69",
+      "javapSha256": "224025bbcbf1a16ac84db9c839c7a70cf9f825a395524e87438ec6508283bca0"
+    },
+    "RootServiceCredentialSource": {
+      "scopes": [
+        {
+          "method": "private static byte[] readSource(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, java.lang.String, long, long, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io) throws java.io.IOException;",
+          "acquirePc": 78,
+          "portPcs": [
+            51,
+            56,
+            73
+          ]
+        },
+        {
+          "method": "private static java.lang.Integer lambda$readFixed$2(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy, long, dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io, byte[], dev.codex.schubert.nk.storage.InodeSecurityCalls, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 39,
+          "portPcs": [
+            19,
+            24,
+            34
+          ]
+        },
+        {
+          "method": "private static java.lang.Integer lambda$readSource$1(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy, long, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io, java.lang.String, long, byte[], dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 60,
+          "portPcs": [
+            34,
+            39,
+            55
+          ]
+        },
+        {
+          "method": "private static java.lang.Integer lambda$readSource$4(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy, long, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io, java.lang.String, long, byte[], dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 60,
+          "portPcs": [
+            35,
+            40,
+            55
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$readSource$0(dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$readSource$6(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$readSource$3(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static java.nio.channels.SeekableByteChannel lambda$readFixed$3(dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io, java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "directReturnPcs": [
+            7
+          ]
+        }
+      ],
+      "classSha256": "c5b29ffd4dc2a5a1e9d61659bc516acf2067ab86dbb13711bc3aaeff665e2037",
+      "javapSha256": "2a843651d72119196088ade791feea6e9d17ff9000ef63eb9f1178147ad313a3"
+    },
+    "RootBatchCredentialReader": {
+      "scopes": [
+        {
+          "method": "private java.lang.Integer lambda$readBytes$1(int, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata, byte[], java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 52,
+          "portPcs": [
+            34,
+            39,
+            47
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$readBytes$2(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "directReturnPcs": [
+            10
+          ]
+        }
+      ],
+      "classSha256": "f8e0d5f00a94dd239eb6aaa9438ca404c54420488a3b2e438f62c672f104edad",
+      "javapSha256": "eb01139b1a8c1593fb97d738431b6060cdcb4b5a4775bdd96f82d095047de513"
+    }
+  },
+  "selectedManifestSha256": "73ff9b596189185abd8850277cd2163cfb50ff797d514c2b5cb297b106093640",
+  "semanticClasses": 3,
+  "directoryFactories": 8,
+  "rawChannelFactories": 3,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.file.RootServiceCredentialSource$1",
+      "old": {
+        "classSha256": "fc1f9679538adc4b43f0f737c32d6b0301a7b0079b954966eceb75861adcf432",
+        "javapSha256": "132be0af622d0485055bac5db5ddd904a9b2b4700a954151f18022cce8961ba5"
+      },
+      "current": {
+        "classSha256": "3342970d23b69b12f5e0ef3ba48316bdc035efcce99577a4ac433da97880797d",
+        "javapSha256": "132be0af622d0485055bac5db5ddd904a9b2b4700a954151f18022cce8961ba5"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 760,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 60
+      },
+      "LINE": {
+        "missed": 7,
+        "covered": 97
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 25
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/RootServiceCredentialSource": {
+      "BRANCH": {
+        "missed": 17,
+        "covered": 27
+      },
+      "LINE": {
+        "missed": 56,
+        "covered": 46
+      },
+      "METHOD": {
+        "missed": 12,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/file/RootBatchCredentialReader": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 56
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 61
+      },
+      "METHOD": {
+        "missed": 3,
+        "covered": 13
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "vmActions": 0,
+  "testReplays": 0
+}
