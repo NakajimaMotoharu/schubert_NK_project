@@ -1,5 +1,15 @@
 # 1038 当a2ecc通常Root・samepeer接続仕様
 
+## 実起動受理・同世代live（真正終端ではない）
+
+operator2926038a2、5034元34347実0/07:14:04Z、5032元12373実0/07:14:12Z/payload d6a14e724498427b02e99de10c4f83cd72aa13c4986f2a052ae3247b05884b4f、候補query20/保護10/Outbox669/通知6（before限定・raw非公開）。5022元20780 client0/07:15:01Z/payload af21f495d643365d89659cf15726a9b8558f1cc4fdd8de40aebafd5acf1aa3aa、元1800秒・一start・正常metadataRef返却。5024元10425fresh実0/07:15:58Z/payload99db781574e9804d738eb7d331058a5fee92611e8eb8e3fec70a230c12b1a465、同boot/source/BOM/run/cutoff/activation/Invocation/Job/Root生成を一致確認。全識別子は私有manifest、成功は親真正終端と独立に判定する。watch80748は同元だけ継続。
+
+## PT-OPS-ACCEPT-5044-001～008
+
+5036は実beforeのlossless全11/80native/全24と当公開Unit原値を照合、schema欠落/null/外国値/非静止を拒否。5038はobserver出力から成功を推定せず、独立PID1の同start-job-done/Invocation/実1800秒と同activationのNKDONE1・BEGIN全列、source/BOM/署名/現在Unit/原本不在を前後二読。5040はSQL stdout/stderr/exitをfsync後parse・全24のafterをexpected照合前保存し、新day5030のattempt1/予定通知・session・認証query削除/保護/全進捗・HTTPを実cutoffで判定する。
+
+5042は既raw-first transformを一度だけ保持し、独立ORACLEと当5038真正GUARDを再構成する（歴史成功capsule貼替え0）。各SQL rawと三つの全captureを比較前に保存、型厳密比較でbool/intやnull/0の同一化を拒否。KEYは各captureの独立module内でゼロ化。8管理試験成功、実VMの5038/40/42は真正terminal成立後だけ発行する。初期TDDで二重transformと誤observer依存assertを是正したが実VM試行0、除外/品質緩和0。command=`python3 -B -m unittest pg5044_current_acceptance_test`、Production PT加点0。
+
 ## 新営業日追加依存（2026-10-18）
 
 5016fresh全読取0/07:09:13Z、容量16582156288byte・現a2ecc/78a6/全80保全、5018stage0/07:09:31Z、初期5026qualification0/07:09:50Z（af21f495 Rootpayload）。5020同日限定preflightは当日履歴不足で実1/07:09:58Z、Root未発行・DB/時計不変更。正常な適用性拒否をProduction障害としない。別fresh5032/5034を使い、旧失敗/資格/同peer watch80748を保持する。
