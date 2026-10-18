@@ -98,7 +98,10 @@ final class ServiceNativeReleaseTest {
       ResourceScope.use(
           downstream::incrementAndGet,
           () -> {
-            ServiceProcessResources.release(unknown, true).close();
+            if (arguments.length == 2 && arguments[1].equals("owned"))
+              ServiceProcessResources.<Closeable>ownedRelease(Closeable::close, true)
+                  .close(unknown);
+            else ServiceProcessResources.release(unknown, true).close();
             throw new AssertionError("UNKNOWN unexpectedly returned");
           });
     }

@@ -120,15 +120,15 @@ public final class ServiceProcessResources {
 
   private void execute(Operation operation, boolean retainUnknown) throws StorageIoException {
     Objects.requireNonNull(operation, "startup operation");
-    var root = OwnedTransferDirectory.open(directories, inputs.credentials().directory());
-    ResourceScope.use(
-        release(root::close, retainUnknown),
-        () -> {
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(directories, inputs.credentials().directory()),
+        ownedRelease(OwnedTransferDirectory::close, retainUnknown),
+        root -> {
           var reader = new ServiceCredentialReader(root, security, inputs.service(), io);
-          var credentials = ServiceCredentialSet.load(reader, inputs.service());
-          return ResourceScope.use(
-              release(credentials::close, retainUnknown),
-              () -> withDatabase(credentials, operation, retainUnknown));
+          return ResourceScope.acquire(
+              () -> ServiceCredentialSet.load(reader, inputs.service()),
+              ownedRelease(ServiceCredentialSet::close, retainUnknown),
+              credentials -> withDatabase(credentials, operation, retainUnknown));
         });
   }
 
@@ -137,24 +137,39 @@ public final class ServiceProcessResources {
       throws StorageIoException {
     char[] password =
         credentials.copyPassword(ServiceCredentialId.forService(inputs.service()).getFirst());
-    ServiceDatabaseSource source;
     try {
-      source =
-          Objects.requireNonNull(sources.open(inputs.databaseUrl(), password), "database source");
+      return ResourceScope.<ServiceDatabaseSource, Boolean, StorageIoException>acquire(
+          () -> sources.open(inputs.databaseUrl(), password),
+          ownedRelease(ServiceDatabaseSource::close, retainUnknown),
+          source -> {
+            // Clear before any pool operation/release can retain an UNKNOWN outer frame.
+            Arrays.fill(password, '\0');
+            return ResourceScope.<HikariDataSource, Boolean, StorageIoException>acquire(
+                () -> pools.open(source),
+                ownedRelease(HikariDataSource::close, retainUnknown),
+                pool -> {
+                  operation.run(pool, credentials);
+                  return Boolean.TRUE;
+                });
+          });
     } finally {
+      // Includes factory failure/null and callback construction failure before acquisition.
       Arrays.fill(password, '\0');
     }
-    return ResourceScope.use(
-        release(source::close, retainUnknown),
-        () -> {
-          HikariDataSource pool = Objects.requireNonNull(pools.open(source), "database pool");
-          return ResourceScope.use(
-              release(pool::close, retainUnknown),
-              () -> {
-                operation.run(pool, credentials);
-                return Boolean.TRUE;
-              });
-        });
+  }
+
+  /** SSC308: this resource-independent port is completely constructed before acquisition. */
+  static <R> ResourceScope.Release<R> ownedRelease(
+      ResourceScope.Release<R> release, boolean retainUnknown) {
+    Objects.requireNonNull(release, "service resource release");
+    if (!retainUnknown) return release;
+    return resource -> {
+      try {
+        release.close(resource);
+      } catch (IOException | RuntimeException | Error unconfirmed) {
+        retainUnconfirmed();
+      }
+    };
   }
 
   // The native owner holds this exact release frame, including the original failure graph.
@@ -166,16 +181,20 @@ public final class ServiceProcessResources {
       try {
         resource.close();
       } catch (IOException | RuntimeException | Error unconfirmed) {
-        System.err.println("service resource release unconfirmed");
-        while (true) {
-          try {
-            // Periodic observation wakeup, never a release/automatic retry/termination proof.
-            Thread.sleep(1000);
-          } catch (InterruptedException notification) {
-            /* UNKNOWN still owns the full outer frame. */
-          }
-        }
+        retainUnconfirmed();
       }
     };
+  }
+
+  private static void retainUnconfirmed() {
+    System.err.println("service resource release unconfirmed");
+    while (true) {
+      try {
+        // Periodic observation wakeup, never a release/automatic retry/termination proof.
+        Thread.sleep(1000);
+      } catch (InterruptedException notification) {
+        /* UNKNOWN still owns the full outer frame. */
+      }
+    }
   }
 }
