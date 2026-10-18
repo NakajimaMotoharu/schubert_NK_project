@@ -143,8 +143,9 @@ final class NativeCoveragePrivateFile {
           "SSC193/PG-D375 fixed Root-managed Linux opt agent pin only; NEXPORT193/native metadata/RO; no arbitrary path or coverage exclusion")
   static void verifyPinnedAgent() throws IOException {
     var security = LinuxInodeSecurity.create();
+    Path optPath = Path.of("/opt");
     ResourceScope.acquire(
-        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/opt")),
+        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath),
         OwnedTransferDirectory::close,
         opt -> {
           Identity first = directory(opt, security, 0, 0, 0x41ed);

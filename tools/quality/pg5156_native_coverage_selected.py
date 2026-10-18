@@ -15,7 +15,7 @@ def bootstrap_suites():
 
 def main():
     selected.EXTRA_CHANGED={'bootstrap:dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.class'}
-    return selected.main(stem_override='pg5156-native-coverage',version_override='v1',
+    return selected.main(stem_override='pg5156-native-coverage',version_override='v2',
                          extra_suites=bootstrap_suites())
 
 
