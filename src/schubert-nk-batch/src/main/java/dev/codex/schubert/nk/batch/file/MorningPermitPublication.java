@@ -113,12 +113,12 @@ final class MorningPermitPublication {
     original.verify();
     budget.requireWithin();
     OpenIntent intents = () -> nativeIntent(root, snapshot);
-    return new MorningPermitPublication(
-        intents.open(),
-        MorningPermitPublication::nativeStore,
-        intents,
-        gate,
-        MorningPermitPublication::retainNative);
+    OpenStore stores = MorningPermitPublication::nativeStore;
+    Retain retain = MorningPermitPublication::retainNative;
+    return ResourceScope.handoff(
+        intents::open,
+        Intents::close,
+        opened -> new MorningPermitPublication(opened, stores, intents, gate, retain));
   }
 
   void bind(Epoch epoch) throws IOException {
@@ -143,11 +143,11 @@ final class MorningPermitPublication {
     intents.begin();
     gate.verify();
     int[] phase = {0};
-    var store = stores.open();
     Epoch result =
-        ResourceScope.use(
-            store::close,
-            () ->
+        ResourceScope.acquire(
+            stores::open,
+            Store::close,
+            store ->
                 store
                     .files()
                     .issue(
@@ -180,10 +180,10 @@ final class MorningPermitPublication {
     require(issued && !committed);
     gate.verify();
     intents.verify();
-    var store = stores.open();
-    ResourceScope.use(
-        store::close,
-        () -> {
+    ResourceScope.acquire(
+        stores::open,
+        Store::close,
+        store -> {
           store.files().verifyPublication(retainedExpected.orElseThrow(), attempted.orElseThrow());
           return true;
         });
@@ -210,17 +210,17 @@ final class MorningPermitPublication {
     try {
       owner();
       // Fresh fixed handles; consumed close descriptors are never reused.
-      var quarantine = recoveryIntents.open();
-      ResourceScope.use(
-          quarantine::close,
-          () -> {
+      ResourceScope.acquire(
+          recoveryIntents::open,
+          Intents::close,
+          quarantine -> {
             quarantine.quarantine();
             return true;
           });
-      var store = stores.open();
-      ResourceScope.use(
-          store::close,
-          () -> {
+      ResourceScope.acquire(
+          stores::open,
+          Store::close,
+          store -> {
             var revoked = store.files().revoke(invalid.orElseThrow(), attempted.orElseThrow());
             require(
                 revoked.equals(invalid.orElseThrow()) && store.files().current().equals(revoked));
@@ -245,30 +245,33 @@ final class MorningPermitPublication {
 
   private static Intents nativeIntent(RootStartupContext root, RootStartupContext.Snapshot snapshot)
       throws IOException {
-    var files = BackupStartIntentFiles.createPublication(root, snapshot);
-    return new Intents() {
-      private Optional<BackupStartIntentFiles.Intent> token = Optional.empty();
+    return ResourceScope.handoff(
+        () -> BackupStartIntentFiles.createPublication(root, snapshot),
+        BackupStartIntentFiles::close,
+        files ->
+            new Intents() {
+              private Optional<BackupStartIntentFiles.Intent> token = Optional.empty();
 
-      public void begin() throws IOException {
-        token = Optional.of(files.begin());
-      }
+              public void begin() throws IOException {
+                token = Optional.of(files.begin());
+              }
 
-      public void verify() throws IOException {
-        files.requirePresent(token.orElseThrow());
-      }
+              public void verify() throws IOException {
+                files.requirePresent(token.orElseThrow());
+              }
 
-      public void retire() throws IOException {
-        files.retire(token.orElseThrow());
-      }
+              public void retire() throws IOException {
+                files.retire(token.orElseThrow());
+              }
 
-      public void quarantine() throws IOException {
-        files.quarantinePublication();
-      }
+              public void quarantine() throws IOException {
+                files.quarantinePublication();
+              }
 
-      public void close() throws IOException {
-        files.close();
-      }
-    };
+              public void close() throws IOException {
+                files.close();
+              }
+            });
   }
 
   @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
@@ -276,19 +279,23 @@ final class MorningPermitPublication {
       matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,
       justification = "SS343 SSC136 fixed startup root, no caller-selected path")
   private static Store nativeStore() throws IOException {
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    var files = new StartupPermitFiles(root, LinuxInodeSecurity.create());
-    return new Store() {
-      public StartupPermitFiles files() {
-        return files;
-      }
+    var calls = LinuxDirectoryCalls.create();
+    Path path = Path.of("/run/schubert-nk/startup");
+    return ResourceScope.handoff(
+        () -> OwnedTransferDirectory.open(calls, path),
+        OwnedTransferDirectory::close,
+        root -> {
+          var files = new StartupPermitFiles(root, LinuxInodeSecurity.create());
+          return new Store() {
+            public StartupPermitFiles files() {
+              return files;
+            }
 
-      public void close() throws IOException {
-        root.close();
-      }
-    };
+            public void close() throws IOException {
+              root.close();
+            }
+          };
+        });
   }
 
   private static void retainNative() {

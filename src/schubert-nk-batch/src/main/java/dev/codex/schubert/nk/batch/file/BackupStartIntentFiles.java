@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
@@ -71,15 +72,18 @@ public final class BackupStartIntentFiles implements AutoCloseable {
     Objects.requireNonNull(target, "closed phase");
     if (!target.ownedBy(expected.service())) throw unavailable();
     context.recheck(expected);
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of(target.requestDirectory()));
-    return new BackupStartIntentFiles(
-        root,
-        LinuxInodeSecurity.create(),
-        new InspectorEnvironmentPublisher.NioIo(),
-        () -> context.recheck(expected),
-        target);
+    var calls = LinuxDirectoryCalls.create();
+    Path path = Path.of(target.requestDirectory());
+    return ResourceScope.handoff(
+        () -> OwnedTransferDirectory.open(calls, path),
+        OwnedTransferDirectory::close,
+        root ->
+            new BackupStartIntentFiles(
+                root,
+                LinuxInodeSecurity.create(),
+                new InspectorEnvironmentPublisher.NioIo(),
+                () -> context.recheck(expected),
+                target));
   }
 
   /** SSC136: the same strict marker primitive, fixed publication namespace, not a Unit selector. */
@@ -94,15 +98,18 @@ public final class BackupStartIntentFiles implements AutoCloseable {
     Objects.requireNonNull(expected, "Morning publication identity");
     require(expected.service() == RootStartupContext.Service.MORNING);
     context.recheck(expected);
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    return new BackupStartIntentFiles(
-        root,
-        LinuxInodeSecurity.create(),
-        new InspectorEnvironmentPublisher.NioIo(),
-        () -> context.recheck(expected),
-        "permit-start.intent");
+    var calls = LinuxDirectoryCalls.create();
+    Path path = Path.of("/run/schubert-nk/startup");
+    return ResourceScope.handoff(
+        () -> OwnedTransferDirectory.open(calls, path),
+        OwnedTransferDirectory::close,
+        root ->
+            new BackupStartIntentFiles(
+                root,
+                LinuxInodeSecurity.create(),
+                new InspectorEnvironmentPublisher.NioIo(),
+                () -> context.recheck(expected),
+                "permit-start.intent"));
   }
 
   BackupStartIntentFiles(OwnedTransferDirectory root, InodeSecurityCalls security, Gate gate) {
