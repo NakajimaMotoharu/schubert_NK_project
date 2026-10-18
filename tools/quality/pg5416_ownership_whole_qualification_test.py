@@ -7,6 +7,16 @@ import pg5416_ownership_whole_qualification as entry
 
 
 class WholeQualification(unittest.TestCase):
+    def test_only_three_source_verified_tempdir_invocations_differ(self):
+        declared,actual,aliases=entry.qualified_added_cases()
+        self.assertEqual(len(declared),82);self.assertEqual(len(actual),82)
+        self.assertEqual(sum(a!=b for a,b in zip(declared,actual,strict=True)),3)
+        self.assertEqual(sum(map(len,aliases.values())),3)
+        with patch.object(entry.entry.selected.aliases,'invocation_aliases',return_value={'foreign':{'case(Path)':'case'}}):
+            with self.assertRaises(ValueError):entry.qualified_added_cases()
+        with patch.object(entry,'added_cases',return_value=declared):
+            with patch.object(entry.subprocess,'check_output',return_value='@Test void mbpub008CompleteOwnerTakesOverDirectoryExactlyOnce(Path temporary) {}'):
+                with self.assertRaises(ValueError):entry.qualified_added_cases()
     def test_all_original_cases_and_exact_eighty_two_source_additions(self):
         additions=entry.added_cases()
         self.assertEqual(len(additions),82);self.assertEqual(len(set(additions)),82)

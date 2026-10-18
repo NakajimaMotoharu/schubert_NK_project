@@ -1,5 +1,7 @@
 # 所有保護全回帰・原外四bytecode PT仕様
 
+PG5416 post-v1是正追補（BUG1450/YKT1214）: 元PG5414全3896/562/1664は真正0/入力不変のまま。元post-v1はcase集合照合で1、旧3814欠落0・新82のうちmbpub008009010三methodの@TempDir Pathだけ実XMLに`(Path)`が付く。既PG5200/選択基盤の明示三aliasと当Sourceの注釈を照合して全体へ継承し、三以外の79新名/3814旧名は変更しない。広いsuffix除去・期待値緩和無し、post-v2別new-only namespaceで元XML/全Mainを読取再資格し、全回帰は再起動しない。PG5420新82TestID traceも同明示表記へ対応、元post1/元全回帰0は保存する。
+
 BUG1448/初回依存失敗追補: 実commandは `PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg5414_ownership_whole.py`。初回は依存importより先にlocal source.tarのみ作成して停止1、remote転送/Maven0。是正後は依存/standalone staticを新出力より先に確認、同専用outにsource.tarだけ・byte hashが改めて生成した同source git archiveと完全一致する場合のみ、未作成helper/begin/未発行remoteを続行する。begin/helper等が既存なら再開を拒否し元job照合へ戻る。旧archive/失敗を消去・上書きせず、回帰の二回発行にしない。
 
 source29612b2a484a5ab7418e02a491c4360af7444626固定、原baselinee8ecff1bec1d7ddd51cdfbf803acda07c2f6cdb9/PG5130全3814を保持。PG5404-v3の1164/137・六target四100・三static0とPG5406/5410を前提に、**必要な新sourceの全六3896PT/562suite/1664Mainを一度**実行する。旧3791/3814成功の確認再演ではない。git diffから原@Test名削除0・新82、旧RepeatedTest十回は既存で新加算0、suite純増六を独立source inventoryで照合する。実数・元終了code/XMLが期待を満たさなければ全合格にしない。

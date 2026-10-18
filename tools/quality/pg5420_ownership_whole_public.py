@@ -25,7 +25,7 @@ def export_source():
 
 def main_source():
     raw=previous.main_source()
-    raw=raw.replace('pg5130-root-whole-qualified-v1','pg5416-ownership-whole-qualified-v1')
+    raw=raw.replace('pg5130-root-whole-qualified-v1','pg5416-ownership-whole-qualified-v2')
     raw=raw.replace('pg5132-root-case-projection-v1','pg5420-ownership-case-projection-v1')
     raw=raw.replace('PG5128','PG5414').replace('PG5130','PG5416').replace('PG5132_READ_ONLY','PG5420_READ_ONLY')
     return counts(raw)
@@ -47,7 +47,13 @@ def new_case_trace(cases,selected,new):
     for cls,method in new:
         human=by_method[(cls,method)]
         if human['newIndependentCase'] is not True:raise ValueError('explicit independently specified new case label')
-        actual=physical[(cls,hashlib.sha256(method.encode()).hexdigest())]
+        observed=human.get('observedInvocation',method)
+        if observed!=method:
+            from pg5416_ownership_whole_qualification import qualified_added_cases
+            aliases=qualified_added_cases()[2]
+            if aliases.get(cls,{}).get(observed)!=method:
+                raise ValueError('only source-verified explicit TempDir signature labels')
+        actual=physical[(cls,hashlib.sha256(observed.encode()).hexdigest())]
         if actual['result']!='PASS_ORIGINAL_XML':raise ValueError('new full result must come from original whole XML')
         trace.append({'testId':human['testId'],'wholeTestId':actual['testId'],'class':cls,
             'caseNameSha256':actual['caseNameSha256'],'sourceXml':actual['sourceXml'],
@@ -57,7 +63,7 @@ def new_case_trace(cases,selected,new):
 
 
 def publish_qualification():
-    qualification=W/'pg5416-ownership-whole-qualified-v1/manifest.safe.json'
+    qualification=W/'pg5416-ownership-whole-qualified-v2/manifest.safe.json'
     raw=qualification.read_bytes();proof=json.loads(raw);value=proof['result']
     out=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/SLOT
     projected=json.loads((out/'manifest.json').read_bytes())

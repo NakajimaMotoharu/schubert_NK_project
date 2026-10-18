@@ -11,7 +11,7 @@ class WholePublication(unittest.TestCase):
         self.assertIn('len(all_cases) != 3896',raw);self.assertIn('source-full-PG5414',raw)
         main=entry.main_source()
         for literal in ("r['tests'] == 3896","r['suites'] == 562","r['mainClasses'] == 1664",
-            'pg5416-ownership-whole-qualified-v1','pg5420-ownership-case-projection-v1'):
+            'pg5416-ownership-whole-qualified-v2','pg5420-ownership-case-projection-v1'):
             self.assertIn(literal,main)
         self.assertNotIn('mvn',main)
         raw=('import hashlib,json,re\nfrom pathlib import Path\nimport xml.etree.ElementTree as ET\n'+
@@ -32,6 +32,15 @@ class WholePublication(unittest.TestCase):
         with self.assertRaises(ValueError):entry.new_case_trace(wrong,labels,new)
         with self.assertRaises(ValueError):entry.new_case_trace(cases[:-1],labels,new)
         with self.assertRaises(ValueError):entry.new_case_trace(cases,labels,new[:-1])
+        wrong=dict(labels,cases=[dict(row) for row in labels['cases']]);wrong['cases'][0]['observedInvocation']='0(Path)'
+        with self.assertRaises(ValueError):entry.new_case_trace(cases,wrong,new)
+        cls='dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest'
+        name='mbpub008CompleteOwnerTakesOverDirectoryExactlyOnce'
+        aliascases=[dict(row) for row in cases];aliaslabels=dict(labels,cases=[dict(row) for row in labels['cases']]);aliasnew=list(new)
+        aliascases[0].update({'class':cls,'caseNameSha256':hashlib.sha256((name+'(Path)').encode()).hexdigest()})
+        aliaslabels['cases'][0].update({'class':cls,'method':name,'observedInvocation':name+'(Path)'})
+        aliasnew[0]=(cls,name)
+        self.assertEqual(len(entry.new_case_trace(aliascases,aliaslabels,aliasnew)),82)
         for path in (entry.__file__,__file__):self.assertEqual(checkPath(path),0)
 
 

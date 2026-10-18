@@ -11,7 +11,7 @@ import pg5130_root_whole_qualification as previous
 import pg5414_ownership_whole as entry
 
 SOURCE,ROOT,W=entry.SOURCE,entry.ROOT,entry.W
-SLOT='pg5416-ownership-whole-qualified-v1'
+SLOT='pg5416-ownership-whole-qualified-v2'
 # Standalone payload replaces these with the independently checked named expected delta.
 MODIFIED=set()
 ADDED=set()
@@ -46,7 +46,12 @@ def qualifier_source():
             if type(node.value) is int and node.value in {3791,3814,556,1654,23}:
                 return ast.copy_location(ast.Constant({3791:3814,3814:3896,556:562,1654:1664,23:82}[node.value]),node)
             return node
-    return ast.unparse(ast.fix_missing_locations(Counts().visit(ast.parse(raw))))
+    raw=ast.unparse(ast.fix_missing_locations(Counts().visit(ast.parse(raw))))
+    marker="'newCases': data['newCases']"
+    if raw.count(marker)!=1:raise ValueError('one new invocation inventory result')
+    raw=raw.replace(marker,marker+", 'declaredNewCases': data['declaredNewCases'], 'newCaseInvocationAliases': data['invocationAliases']",1)
+    return raw.replace('all3791 original identities retained plus exact23 independently specified methods',
+        'all3814 original identities retained plus exact82 invocations with only three source-verified TempDir Path aliases')
 
 
 def added_cases():
@@ -82,6 +87,24 @@ def candidate_main():
     return prior,candidate,difference
 
 
+def qualified_added_cases():
+    declared=added_cases();aliases=entry.selected.aliases.invocation_aliases()
+    cls='dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest'
+    names=('mbpub008CompleteOwnerTakesOverDirectoryExactlyOnce','mbpub009IncompleteAssemblyAlwaysReleasesDirectory',
+        'mbpub010AssemblyCloseMatrixPreservesIndependentFailurePriority')
+    if aliases!={cls:{name+'(Path)':name for name in names}}:
+        raise ValueError('only actual preexisting three explicit TempDir aliases')
+    path='src/schubert-nk-batch/src/test/java/'+cls.replace('.','/')+'.java'
+    source=subprocess.check_output(['git','show',SOURCE+':'+path],cwd=ROOT,text=True)
+    methods=re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(',source)
+    entry.selected.selected.expected_invocations(methods,aliases[cls],source)
+    reverse={(owner,canonical):observed for owner,rows in aliases.items() for observed,canonical in rows.items()}
+    actual=[(owner,reverse.get((owner,method),method)) for owner,method in declared]
+    if len(set(actual))!=82 or sum(a!=b for a,b in zip(actual,declared,strict=True))!=3:
+        raise ValueError('only three exact declared signature adaptations, all82 unique')
+    return declared,actual,aliases
+
+
 def main():
     from pyflakes.api import check
     original=json.loads((W/'pg5414-ownership-query-six-v1/manifest.safe.json').read_bytes())
@@ -91,8 +114,9 @@ def main():
         raise ValueError('same current immutable Main/Test/config source')
     prior,candidate,difference=candidate_main()
     before=json.loads((W/'pg5414-ownership-query-six-v1/begin.safe.json').read_bytes())
+    declared,actual,aliases=qualified_added_cases()
     data={'source':SOURCE,'priorManifestSha256':prior['serverManifestSha256'],'priorJarHashes':prior['jarHashes'],
-        'archiveSha256':before['archiveSha256'],'aliases':{},'newCases':added_cases(),'candidateMain':candidate,
+        'archiveSha256':before['archiveSha256'],'aliases':{},'newCases':actual,'declaredNewCases':declared,'invocationAliases':aliases,'candidateMain':candidate,
         'allMainSourceSha256':{path.relative_to(ROOT).as_posix():hashlib.sha256(path.read_bytes()).hexdigest() for path in ROOT.glob('src/*/src/main/java/**/*.java')}}
     raw='import json\n'+''.join(name+'=set('+repr(sorted(difference[key]))+')\n' for name,key in (
         ('MODIFIED','modified'),('ADDED','added'),('REMOVED','removed')))+inspect.getsource(physical_difference)+'\n'+qualifier_source()+"\nprint(json.dumps(qualify("+repr(data)+")))\n"
@@ -100,7 +124,7 @@ def main():
     os.umask(0o077);out=W/SLOT;out.mkdir(mode=0o700)
     path=out/'qualify.private.py'
     with path.open('x') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
-    digest=hashlib.sha256(raw.encode()).hexdigest();remote='/home/mini/schubert-nk-pgpt/transfer/PG5416-whole-qualified-v1'
+    digest=hashlib.sha256(raw.encode()).hexdigest();remote='/home/mini/schubert-nk-pgpt/transfer/PG5416-whole-qualified-v2'
     code,_=run('mkdir -m700 '+remote,timeout=30)
     if code:raise ValueError('new-only original qualifier namespace; inspect existing job instead of replay')
     code,_=copy(path,remote+'/',timeout=60)
