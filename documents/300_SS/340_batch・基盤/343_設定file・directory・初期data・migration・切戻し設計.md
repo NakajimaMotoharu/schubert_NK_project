@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC305 当a2ecc既存ADMINの親終端比較・保持Ref pairの限定回収
+
+BUG1405/YKT1169、SS343/353/354・SSC274/276/277/279/300～304の内部具体化。RD/UI・業務仕様・CLI/ENV・原30分Root/30秒ADMIN期限・451/QA051 finalは変更しない。現a2ecc/PG4980/BOM78a6/187/schema028/boot79aの既存ADMIN20に対し、元親run15322936・activationb683・Invocationabe95の**start306951851178usとend308517705767usを別値で検証**する。end照合へstartを代入した工具5082は誤りであり原byte/失敗/未終端を保持する。独立の真正親receiptを使い、同じ誤値を持つfixture同士の一致で資格しない。Root/Browser/ownedstop/全3791/署名/host ABIの既成功を再演しない。
+
+当verifyの保持Java927504/t31055084/argvSHA8bfbbbf082fadbc9569bbc0f2d21980d9eb02a03f1215594f983b5b79e6dc0bc/100FD、唯一Ref子927536/t31055311/argvSHAf8a143d4a170fe7cfe34b17bc0cafebd4150523c2dbcf1e0e0a3c521e11e4656/7FDを**観測基点のみ**とする。sudo927502は対象外。新しく原argv/exe/全authority/cgroup/全task親子、全FD set/target/inode/type/mode/権限・実M-A sole FLOCK/OFD、子唯一private systembus名と実PID/UIDを二読して束縛する。共有/run directoryの二時刻だけはSSC277の非減少・current上限でfresh資格し、同fresh像を以降固定する。他のFD不一致、第三子、foreign owner、元helper/hash/失敗phase不一致ならsignal0・保持とする。
+
+failed-phase読取は、5084全frozen149工具hash/5080独立beforeaf59/全24・32設定・187artifact・原本Backup/native86・元真正親/同boot/currentと、Ref子がsnapshotの終了比較で拒否しprepare/credential/Unit開始前である実source/stack、失敗log1c6a71bb…を認証する。旧DBのidle期限後はfresh SQL peer/advisory全0と当actorのDB ESTABLISHED socket0を照合し、旧正常closeを推論しない。新十Refを保持する一つの回収接続で全原値/所有のfresh耐久proofを保存後、pidfd前後・一回予約・TERM直前を再照合して**当Ref子→当Javaの順に普通TERM各一回**、各15秒終端/30秒同ticks reapを要求する。新unit/DBserver/VM/他PIDへのsignal、SIGKILL、DB terminate、force unlock、再発行を禁止する。全bus/FD/peer/advisory/M-A消失・全24/原本native不変を確認し新Refを正常返却、旧wrapperが同hostgateを自然解放してから新後継が同inodeを取得する。失敗なら隔離とUNKNOWNを維持し、独立読取以外を先行しない。
+
+回収成功も旧verifyの正常完了ではない。元実exitと旧close UNKNOWNを保持し、別接続の独立全post・正常新Refs/全資源0を満たして初めて別new-only baseline/工具で再試験する。旧slot/class/原本/credential不存在/署名/nativeを上書きしない。新20のcaptured terminal/credential私有退役/同source CRC/session/四counter/正式はそれぞれ別依存とする。設計only main公開を実回収より先行し、製造・PT・正式未完を維持する。
+
 ## SSC304 Expiry既成功読取の監査比較・nonnull JDBC所有scope
 
 取得scope追補（PG4964の例外経路反例後）：内部`JdbcAcquire<T>`を加え、acquire/release/readの全port object構築・nonnull検査を**資源取得より前**に完了する。helper内で既固定JDBC取得→required非null確認→直ちにtry/read(resource)へ入り、body/closeの同一例外・suppressed順を下記どおり保持する。nested ResultSetのport構築は既Statement scope内、ResultSet取得はそのinner helper内とする。これにより取得後・scope入場前のcallback linkage/allocation失敗による未解放を防ぐ。acquire失敗時はbody/close未実行、acquire null戻りは既requiredの固定BatchRepositoryException、port nullは取得前契約拒否。resourceを受けないためWillClose annotationは付さず、解析抑制や例外edge除外をしない。release/readは同一取得資源だけを受取り、借用Connection/SQL/期限/権限を変えない。actual24独立PTと実DB/static0・Main宣言数増加を正確に照合する。
