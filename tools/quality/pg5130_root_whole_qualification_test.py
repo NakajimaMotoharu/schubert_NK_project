@@ -39,7 +39,8 @@ class RootWholeQualification(unittest.TestCase):
         self.assertIn("'mainClasses': 1654", raw)
         self.assertIn("old = base / 'runs/PG4968-six-v1'", raw)
         self.assertIn("out = base / 'runs/PG5128-six-v1'", raw)
-        complete = ('import json\nMODIFIED=set()\nADDITIONS=set()\n' + inspect.getsource(role.physical_difference) + '\n' + raw)
+        complete = ('import json\nMODIFIED=set()\nADDITIONS=set()\n' + inspect.getsource(role.physical_difference)
+                    + '\n' + raw + '\nprint(json.dumps(qualify({})))\n')
         self.assertEqual(0, check(complete, '<complete definitions only>'))
         for path in (role.__file__, __file__): self.assertEqual(0, checkPath(path))
 
