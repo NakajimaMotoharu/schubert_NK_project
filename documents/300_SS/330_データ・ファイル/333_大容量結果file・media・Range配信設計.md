@@ -2,6 +2,8 @@
 
 ## SSC308 取得前port構築・factory内IO所有とdescriptor wrapper先行確保
 
+実装詳細の確定補足：factoryの戻りをslotへ格納した直後からIO/Runtime/Error保護域へ入り、標準nonnull検査もその保護域内で行う。null返却はNPEを伝播しbody/release0、非null資源の失敗時だけreleaseする。成功資源を保護域外のliteral解決/明示例外確保/boxingへ露出させない。これは既null拒否/例外優先順位を変えず、静的解析の抑制も追加しない。
+
 BUG1414/YKT1178、FIL001009/OPS009・UI237251、WBS-P003-08（共通scope）/P003-04（保持directory）。RD/UI/外部file/HTTP/権限契約変更不要。既ResourceScope.useの引数検証・IO正規化/既Reason・unknown例外優先順位はそのまま保持する。追加factory所有入口ではAcquire<R,E extends IOException>/Release<R>/OwnedAction<R,T>を全て取得前に構築・nonnull検証し、helper内で同一Rを取得した直後から保護域に入れ、releaseへ当同一objectを一度だけ渡す。factoryのchecked E・Runtime/Error失敗はbody/release無しで元identityを伝播、null返却はfail-fast。bodyのnullable結果契約は既use同様に明示して許容する。
 
 取得後のbody/close規則：成功はbody結果→release、IOはStorageIoExceptionの既path-free固定messageへ変換し、既storage reasonはsuppressed無しの場合だけ保持する。primary IOにsecondary Runtime/Errorならsecondaryを優先、その他はprimaryを保持しsecondaryを固定StorageIoExceptionで秘匿suppressedへ追加、同一object/self-suppressionを新規導入しない。Java TWRの別優先順位へ置換しない。Acquire以後・保護域前のcallback/new/boxingをなくし、実Java25 bytecodeと独立matrixで確認する。新公開Java helperは内部adapterの所有補助でありHTTP/CLI/ENVから資源能力を追加しない。
