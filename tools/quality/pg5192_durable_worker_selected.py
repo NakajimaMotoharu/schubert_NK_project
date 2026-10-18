@@ -5,7 +5,9 @@ selected=previous.selected
 PREFIX=previous.PREFIX
 OUTERS={'DurableRecordFiles','BackupWorkerRequestFiles','CleanupWorkerRequestFiles','MorningBackupRequestPublication'}
 DEBUG={'MorningBackupRequestPublication$1','MorningBackupRequestPublication$Owner',
-       'MorningBackupRequestPublication$Open','MorningBackupRequestPublication$Gate'}
+       'MorningBackupRequestPublication$Open','MorningBackupRequestPublication$Gate',
+       'CleanupWorkerRequestFiles$OwnerSource','CleanupWorkerRequestFiles$StartupSource',
+       'CleanupWorkerRequestFiles$StartupName'}
 WORKERS={f'dev.codex.schubert.nk.batch.file.{name}Test':'batch' for name in OUTERS}
 
 

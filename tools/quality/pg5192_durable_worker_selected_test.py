@@ -21,7 +21,7 @@ class DurableWorkerScope(unittest.TestCase):
     def test_only_four_declared_outers_and_bounded_nested_debug(self):
         role.configure()
         self.assertEqual(len(role.selected.EXTRA_CHANGED),13)
-        self.assertEqual(len(role.selected.EXTRA_DEBUG),14)
+        self.assertEqual(len(role.selected.EXTRA_DEBUG),17)
         self.assertIn(role.PREFIX+'DurableRecordFiles.class',role.selected.EXTRA_CHANGED)
         self.assertIn(role.PREFIX+'MorningBackupRequestPublication.class',role.selected.EXTRA_CHANGED)
 

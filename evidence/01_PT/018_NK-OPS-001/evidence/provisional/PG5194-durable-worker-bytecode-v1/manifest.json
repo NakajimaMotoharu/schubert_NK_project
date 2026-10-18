@@ -1,0 +1,248 @@
+{
+  "source": "805c166c2868e2cc5997aa73cd33ef125cb873a2",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "DurableRecordFiles": {
+      "scopes": [
+        {
+          "method": "private void readFile(java.nio.file.Path, long, byte[]) throws java.io.IOException;",
+          "acquirePc": 27,
+          "portPcs": [
+            9,
+            14,
+            22
+          ]
+        },
+        {
+          "method": "private void write(java.nio.file.Path, byte[]) throws java.io.IOException;",
+          "acquirePc": 24,
+          "portPcs": [
+            7,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private void force(java.nio.file.Path, int) throws java.io.IOException;",
+          "acquirePc": 18,
+          "portPcs": [
+            2,
+            7,
+            13
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$readFile$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$force$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$write$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        }
+      ],
+      "classSha256": "265a7bbd0f08d84b4789d0767a59cd137ef698790d6af8962325b9c0aeeab8a6",
+      "javapSha256": "d5ab4b4256e40e7d155d0615ca34f98a3fab9f52eb0e77ed0256bb61cbc308db"
+    },
+    "BackupWorkerRequestFiles": {
+      "scopes": [
+        {
+          "method": "private void write(java.nio.file.Path, byte[]) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        },
+        {
+          "method": "private void read(java.nio.file.Path, long, byte[]) throws java.io.IOException;",
+          "acquirePc": 25,
+          "portPcs": [
+            6,
+            11,
+            20
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$read$2(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$write$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        }
+      ],
+      "classSha256": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22",
+      "javapSha256": "11631072e840a73308143a9f5beeaf2d0e35b18bcb094cfcad397c609fe4e341"
+    },
+    "CleanupWorkerRequestFiles": {
+      "scopes": [
+        {
+          "method": "private void write(java.nio.file.Path, byte[]) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        },
+        {
+          "method": "private void read(java.nio.file.Path, long, byte[]) throws java.io.IOException;",
+          "acquirePc": 25,
+          "portPcs": [
+            6,
+            11,
+            20
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$read$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.open:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer lambda$write$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "$Io.openWriter:",
+          "checkedNullIo": true,
+          "nonnullReturnPcs": [
+            10,
+            11,
+            12,
+            19
+          ]
+        }
+      ],
+      "classSha256": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c",
+      "javapSha256": "794afa1e9681f18794028b94820e8c78f46a4bbd3a3a97c8bf5f6aa719eeaa19"
+    },
+    "MorningBackupRequestPublication": {
+      "scopes": [
+        {
+          "method": "public void publish(dev.codex.schubert.nk.batch.platform.BackupWorkerRequest, java.util.UUID) throws java.io.IOException;",
+          "acquirePc": 45,
+          "portPcs": [
+            27,
+            32,
+            40
+          ]
+        }
+      ],
+      "openDirectMethodReference": true,
+      "nativeFactoryStillUnprotected": true,
+      "classSha256": "ddb04b90a3b1122fd418299d908e307cc0c8a0ff8049ea8751f269d4f8df0cf1",
+      "javapSha256": "a5435592173b51083e9326a9a725f2abee77e5d393f6b619fe2815ac5f412f89"
+    }
+  },
+  "selectedManifestSha256": "ace0dd50a157ec90efb805e16271855b05bcd25105263fd5fce4f3788b4ce55b",
+  "originalJobActualExit": 1,
+  "newOuterChanges": 4,
+  "checkedNullIoFactories": 7,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$OwnerSource",
+      "old": {
+        "classSha256": "508dde1e1e7596a9b5f47ad8f382c5fb2c589493ebbfeb7e02eb985c4ea64253",
+        "javapSha256": "77739b505cdc4d6ee967ef1f81469ce1276c70efacd3b448d2a3ac41b08fd724"
+      },
+      "current": {
+        "classSha256": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+        "javapSha256": "77739b505cdc4d6ee967ef1f81469ce1276c70efacd3b448d2a3ac41b08fd724"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$StartupName",
+      "old": {
+        "classSha256": "b14d7ecae43e0d9e9392515d277407931b8e2fe5cb7f77bd1522066070a31c71",
+        "javapSha256": "16a4a3d883f79f53a0b77c1815e987632b9ace56475df011fad3add5ba7fd7e7"
+      },
+      "current": {
+        "classSha256": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+        "javapSha256": "16a4a3d883f79f53a0b77c1815e987632b9ace56475df011fad3add5ba7fd7e7"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$StartupSource",
+      "old": {
+        "classSha256": "ad3599081031a287a0b20f78942bd890032330a2878ea7a15a01e898af470fda",
+        "javapSha256": "12b26cd0a5b6a546d8be9e6d2e3c7b439d37f9064c9d4fef7c497f89cdbe81f0"
+      },
+      "current": {
+        "classSha256": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+        "javapSha256": "12b26cd0a5b6a546d8be9e6d2e3c7b439d37f9064c9d4fef7c497f89cdbe81f0"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 757,
+  "limitedClosedOriginalSites": 7,
+  "morningPublishPartialOnly": true,
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0
+}

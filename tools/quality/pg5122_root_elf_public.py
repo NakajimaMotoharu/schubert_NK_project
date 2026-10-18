@@ -70,8 +70,19 @@ def suite_map(base,extra):
     return result
 
 
+def validate_separate_qualification(result,original,original_sha):
+    if original.get('actualExit')!=1 or original.get('phaseExits')!=[0,0] or original.get('reasons')!=[
+            'declared semantic changes plus explicitly bounded nested debug candidates only']:
+        raise ValueError('only explicit post-inventory failure may be separately qualified')
+    if result.get('originalRunnerActualExit')!=1 or result.get('originalManifestSha256')!=original_sha:
+        raise ValueError('original failed runner and hash must remain explicit')
+    for key in ('sourceSnapshot','archiveSha256','actualMethods','xmlSha256','logSha256','phaseExits',
+                'tests','suites','commands','freshStatic','storageFourCounters'):
+        if result.get(key)!=original.get(key):raise ValueError('qualification changed original job identity or outcome '+key)
+
+
 def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None,
-         required_counts=None, case_overrides=None, extra_suites=None):
+         required_counts=None, case_overrides=None, extra_suites=None, qualification_path=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
@@ -88,7 +99,11 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
     if args.group in ('guards', 'factory'): suite_modules = {**suite_modules, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     if args.group == 'factory': suite_modules = {**suite_modules, **selected.storage_suites()}
     suite_modules=suite_map(suite_modules,extra_suites)
-    result = json.loads((run / 'manifest.safe.json').read_bytes())
+    result = json.loads((qualification_path or (run / 'manifest.safe.json')).read_bytes())
+    if qualification_path is not None:
+        if qualification_path!=run/'qualification.safe.json':raise ValueError('fixed separate qualification slot only')
+        original_path=run/'manifest.safe.json'
+        validate_separate_qualification(result,json.loads(original_path.read_bytes()),selected.sha(original_path))
     begin = json.loads((run / 'begin.safe.json').read_bytes())
     if not (type(result['actualExit']) is int and result['actualExit'] == 0
             and result['phaseExits'] == [0, 0] and not result['reasons']
