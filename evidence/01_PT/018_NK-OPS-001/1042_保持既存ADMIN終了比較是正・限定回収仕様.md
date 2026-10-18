@@ -13,3 +13,7 @@ PT-OPS-RETAIN-5092-001～004管理4件0：当full factory静的0、元全top関�
 5094元35827 guestactual1/08:32:06Z、raw stderr94byte/KeyError/306行のnative基準schema不一致を保存、BUG1407/YKT1171修正前起票。全proofは未合格、signal0/元verify保持。元sealed5066にはnativeキーが無いため、実enriched5080 raw/SHAaf59/source/BOM/全24/86を不可分資格するpure native_referenceへ是正。root directory自身も含む実tree形の独立fixture、欠落/foreign/hash/count/null負例を追加。新5098別slotで完全entry/bodyの管理10件0（元5092四件＋新schema二件＋新entry四件）、通常gate・原関数/SQL/署名/元rootend不変。同失敗slotを再送せず、当fixed候補だけ実読取へ進める。
 
 管理試験追補：53a7d0571直前の最終再試験は、fixture先頭へrootを追加した後のcount負例がrootをpopしていたため1失敗（10件中9成功）。同commit内の「10管理0」はその再試験時点では誤記であり、この追補で訂正、実VM未発行。root自体必須を明示し、root欠落とexec85件を別反例へ分離した後の再実行結果だけで新候補を判定する。過去の失敗を削除/成功へ読み替えず、53a7はそのまま履歴保全。
+
+実5098元8937 actual0/08:36:01Z、operator42f5eac46、payload8bac8ff5ff2c6554e32a76e3ef33cd095a21b60d8693135fa84cc44f8ed7298e、proof f0496ff80babbe6aa7a1926193739436a8170c3d22c835dd205cc749e85cc1db。全24/32/187/原本native86・当100/7FD/全M-A OFD・子一bus/SQL0・正常新Ref/信号0を資格。BUG1406/1407・YKT1170/1171当工具範囲のみclose、元verify67671/親子保持/旧closeUNKNOWNは継続。
+
+PT-OPS-RETAIN-5096-001～005管理5件0：同actual全proof前提・foreign/失敗/null/bool/信号あり拒否、完全source/static0・元snapshot/CRC/親end関数不変、fresh耐久proof→子→親→postの順序、pidfd世代変化/既予約はsend0・FD返却、Ref後は既知二pipeだけFD消失許可/新FD又は他inode消失拒否。新回収の実行は固定/push→同元host queued gate（force unlock無し）→当子親普通TERM各一回/15秒終端・30秒reap→全原値/正常新Refs→同hostgate自然継承、別独立全postは後続。元verifyactual143等は元実値を回収するまで予測で確定しない。command=`python3 -B -m unittest pg5096_retained_pair_recovery_test`。

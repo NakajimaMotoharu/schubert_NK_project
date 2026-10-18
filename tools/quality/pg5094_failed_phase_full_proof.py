@@ -87,4 +87,4 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    raise SystemExit('retired failed5094 slot; template main is used only through the new-only current reader')

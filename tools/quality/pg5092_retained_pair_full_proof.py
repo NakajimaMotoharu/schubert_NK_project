@@ -141,4 +141,4 @@ def payload():
 
 
 if __name__ == '__main__':
-    raise SystemExit(before.admission.execute(SLOT, payload(), 180))
+    raise SystemExit('retired local-refused slot; use the current new-only SSC305 reader, never replay5092')
