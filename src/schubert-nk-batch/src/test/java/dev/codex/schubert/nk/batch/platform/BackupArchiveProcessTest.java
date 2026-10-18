@@ -244,6 +244,16 @@ final class BackupArchiveProcessTest {
     } finally {
       Thread.interrupted();
     }
+    var primary = new IllegalStateException("synthetic first hold");
+    var retainedEvents = new ArrayList<String>();
+    var first = new TerminalVector(0, 'N', 'R', primary, retainedEvents, null);
+    var last = new TerminalVector(2, 'N', 'N', vectorFailure('N'), retainedEvents, null);
+    assertSame(
+        primary,
+        assertThrows(
+            IllegalStateException.class,
+            () -> new BackupArchiveProcess.TerminalPlan().close(Arrays.asList(first, null, last))));
+    assertEquals(List.of("term0", "term2", "confirm0", "confirm2"), retainedEvents);
   }
 
   /**

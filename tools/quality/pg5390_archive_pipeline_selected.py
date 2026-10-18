@@ -29,5 +29,5 @@ def extra_suites():
 
 if __name__=='__main__':
     configure()
-    raise SystemExit(selected.main(stem_override='pg5390-archive-pipeline',version_override='v1',
+    raise SystemExit(selected.main(stem_override='pg5390-archive-pipeline',version_override='v2',
         extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases(),case_repetitions=repetitions()))

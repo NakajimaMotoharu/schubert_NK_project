@@ -1,5 +1,7 @@
 # Archive取得・全terminal保全 PT仕様
 
+追補：初回2d9711a97/PG5390-v1元52474は1138/134・三static0、outer/StdIoOwner四100、TerminalPlanは全line/method/class covered/branch25/26で原postbc384f60に保存。未実装だった「最初のhold unknown後、restにnullがある」negativeをARCHOWN004内へ追加し、既正常null/idleと別のloop枝を固定列term0/term2/confirm0/confirm2・元unknownで確認する。Main byteを変更せず新TestID加算0、PG5390-v2の新sourceで全1138を再資格し旧counterを合算しない。
+
 NK-OPS-001/BackupArchiveProcess.execute/streams/StdIoOwner/TerminalPlan、BAK/BKO/OPS009/UI251/SS341343354/SSC091308・BUG1414/YKT1178/PG-D431。原7=所有四＋cleanup三を、各factory先行保護四/全port・interrupt scratchをStart前構築する非再帰TerminalPlanへ再構成する。nullable streamのwrapper本体/全stateはgetter前、返却後は参照格納だけ・getter三つ後admission、同一stdinの早期write/close・最終再close防止を維持する。
 
 全子に旧順TERM/5秒観測を一度試みてから全子terminalを保持確認する。first/known/drain phaseで全stopを試みる前にcallback/new suppressedを構築せず、後続既知IOより最初のRuntime/Errorを優先し未知identity/固定sanitized secondaryを旧ResourceScopeと一致させる。stop後mergeでErrorが起きても、取得前のhold portが全terminalを確認するまで借用FDを返さない。holdは元interruptをその時点で保存/clearし最後に再設定、未確認collectionは既PendingHoldへ保持し正常化しない。元30分/親期限/UID/FD path/command/env/output/NativeStart partial-pipeline UNKNOWN契約・原本/DB/Backupは変更しない。
