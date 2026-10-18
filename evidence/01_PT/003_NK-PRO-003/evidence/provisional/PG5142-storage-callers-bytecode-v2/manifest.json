@@ -1,0 +1,75 @@
+{
+  "source": "6fef03d494c3e73dccbe6f804cd80b8b0a181a18",
+  "selectedManifestSha256": "969c092b69458d71ae75775bdc97e17b81eb72d77abcd5475dcf62275a4f818e",
+  "actualExit": 1,
+  "failures": [
+    "ExistingFileAccess: factory must directly return owned result: ExistingFileAccess$Io.openReadOnly:",
+    "ServiceConfigFiles: factory must directly return owned result: OwnedTransferDirectory.open:"
+  ],
+  "classes": {
+    "StorageRootInspection": {
+      "sites": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.StorageRootInspection$Inode inspectOne(java.nio.file.Path, int, dev.codex.schubert.nk.storage.StorageIdentity, dev.codex.schubert.nk.storage.StorageIdentity, dev.codex.schubert.nk.storage.StorageIdentity) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 21,
+          "portPcs": [
+            1,
+            6,
+            16
+          ]
+        }
+      ],
+      "factoryReturnPcs": {
+        "OwnedTransferDirectory.open:": [
+          7
+        ]
+      },
+      "classSha256": "bb9fc0519f7d48f327cfdbf75349d965e1cf8b6ee99903656e4ecb29cccf2142",
+      "javapSha256": "e89fb179cd24e992f5008711d7252d7138399d28df0dee10724cf6c1e96b4e51"
+    },
+    "ExistingFileAccess": {
+      "classSha256": "b5a5dbb572f99df4a9daddcdd7665cc08acbe4b86c768d43fd063bb0678f4baa",
+      "javapSha256": "7e47a7d2354ba6f6ac68c28a9ac2c17323d69016df6c57c80280bb2779167ae8"
+    },
+    "ServiceConfigFiles": {
+      "classSha256": "c9d8c5d44008e0b9d0694b67bd5e2d8e6d7cc65e44090d07c275af0f0e459e6f",
+      "javapSha256": "ff8e4d5c6655367751c89d7bc13e03342ef699876c9ec796ceb76710a62c8dbb"
+    },
+    "LinuxFilesystemClassifier": {
+      "sites": [
+        {
+          "method": "public java.lang.String filesystem(java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 73,
+          "portPcs": [
+            56,
+            61,
+            68
+          ]
+        }
+      ],
+      "factoryReturnPcs": {},
+      "classSha256": "355887884ec2d9f6302ee1cb25f7e17e7a75d3262f0f3d1182e0b45c37330f70",
+      "javapSha256": "d6fc4e974e451344d9e2fc7ff46a5e57501c1a157aa998af07ee2193791bd201"
+    }
+  },
+  "borrowedNonApplicable": {
+    "class": "LinuxExecDescriptors",
+    "reason": "No acquired resource or changed flags before existing use; mutations under protection",
+    "classSha256": "76cd66cc5b0ce0ae9d4489cf5321d243b6117c91365b4a195848764bbdbac9df",
+    "javapSha256": "2f4610dc689458aa45c72843e6725f6e36be3f73839e5dd1298a31973182f384"
+  },
+  "wholeHorizontalComplete": false,
+  "actualHeapOomReproduced": false,
+  "formalAccepted": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ]
+}

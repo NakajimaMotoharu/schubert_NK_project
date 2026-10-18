@@ -84,7 +84,7 @@ public final class ExistingFileAccess {
           handle -> {
             StorageAttributeGuard.existingFile(io.attributes(handle), identity, expectedSize);
             return ResourceScope.acquire(
-                () -> Objects.requireNonNull(io.openReadOnly(handle), "file channel"),
+                () -> io.openReadOnly(handle),
                 SeekableByteChannel::close,
                 channel -> {
                   requireSize(channel, expectedSize);

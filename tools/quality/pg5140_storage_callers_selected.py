@@ -112,7 +112,7 @@ def main():
     stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards',
             'factory': 'pg5136-factory-io'}[args.group]
     if args.group != 'elf': version = 'v1'
-    if args.group == 'factory': version = 'v2'
+    if args.group == 'factory': version = 'v3'
     if args.group != 'factory' or args.phase != 'green': raise ValueError('this new run accepts factory green only')
     stem = 'pg5140-storage-callers'
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
