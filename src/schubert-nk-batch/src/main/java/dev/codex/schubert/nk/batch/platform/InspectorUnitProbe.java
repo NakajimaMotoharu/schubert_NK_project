@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.OptionalInt;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed read-only systemd observations. Caller owns OS/run/config lifetime and startup correlation.
@@ -169,64 +171,67 @@ public final class InspectorUnitProbe {
       long began = System.nanoTime();
       long timeout = Math.min(TimeUnit.SECONDS.toNanos(5), remainingNanos);
       try {
-        var owned =
-            new QueryProcess(
-                Objects.requireNonNull(start.execute(command), "journal query process"));
-        ProcessResourceScope.use(
-            owned::close,
-            () -> {
-              var output = new SafeStream<>(owned.process.getInputStream());
-              ProcessResourceScope.use(
-                  output::finish,
-                  () -> {
-                    var input = new SafeStream<>(owned.process.getOutputStream());
-                    ProcessResourceScope.use(
-                        input::finish,
-                        () -> {
-                          var error = new SafeStream<>(owned.process.getErrorStream());
-                          ProcessResourceScope.use(
-                              error::finish,
-                              () -> {
-                                input.finish();
-                                error.finish();
-                                var drain =
-                                    new java.util.concurrent.FutureTask<byte[]>(
-                                        () -> {
-                                          bytes[0] =
-                                              Objects.requireNonNull(
-                                                  output.resource.readNBytes(limit + 1),
-                                                  "journal bytes");
-                                          return bytes[0];
-                                        });
-                                var reader = Thread.startVirtualThread(drain);
-                                try {
-                                  long left = timeout - (System.nanoTime() - began);
-                                  if (left <= 0
-                                      || !owned.process.waitFor(left, TimeUnit.NANOSECONDS))
-                                    throw new StopGateException(StopGateFailure.TIMEOUT);
-                                  interrupted();
-                                  if (owned.process.exitValue() != 0)
-                                    throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-                                  left = timeout - (System.nanoTime() - began);
-                                  if (left <= 0)
-                                    throw new StopGateException(StopGateFailure.TIMEOUT);
-                                  try {
-                                    drain.get(left, TimeUnit.NANOSECONDS);
-                                  } catch (java.util.concurrent.TimeoutException timeoutFailure) {
-                                    throw new StopGateException(StopGateFailure.TIMEOUT);
-                                  } catch (java.util.concurrent.ExecutionException readFailure) {
-                                    throw queryFailure(readFailure);
-                                  }
-                                  if (bytes[0].length > limit)
-                                    throw new StopGateException(StopGateFailure.MALFORMED_STATE);
-                                } finally {
-                                  drain.cancel(true);
-                                  reader.interrupt();
-                                }
-                              });
-                        });
-                  });
-            });
+        ProcessResourceScope.acquire(
+            () -> new QueryProcess(() -> start.execute(command)),
+            QueryProcess::close,
+            owned ->
+                ProcessResourceScope.acquire(
+                    () -> new SafeStream<java.io.InputStream>(owned.process::getInputStream),
+                    SafeStream::finish,
+                    output ->
+                        ProcessResourceScope.acquire(
+                            () ->
+                                new SafeStream<java.io.OutputStream>(
+                                    owned.process::getOutputStream),
+                            SafeStream::finish,
+                            input ->
+                                ProcessResourceScope.acquire(
+                                    () ->
+                                        new SafeStream<java.io.InputStream>(
+                                            owned.process::getErrorStream),
+                                    SafeStream::finish,
+                                    error -> {
+                                      input.finish();
+                                      error.finish();
+                                      var drain =
+                                          new java.util.concurrent.FutureTask<byte[]>(
+                                              () -> {
+                                                bytes[0] =
+                                                    Objects.requireNonNull(
+                                                        output.resource.readNBytes(limit + 1),
+                                                        "journal bytes");
+                                                return bytes[0];
+                                              });
+                                      var reader = Thread.startVirtualThread(drain);
+                                      try {
+                                        long left = timeout - (System.nanoTime() - began);
+                                        if (left <= 0
+                                            || !owned.process.waitFor(left, TimeUnit.NANOSECONDS))
+                                          throw new StopGateException(StopGateFailure.TIMEOUT);
+                                        interrupted();
+                                        if (owned.process.exitValue() != 0)
+                                          throw new StopGateException(
+                                              StopGateFailure.COMMAND_FAILURE);
+                                        left = timeout - (System.nanoTime() - began);
+                                        if (left <= 0)
+                                          throw new StopGateException(StopGateFailure.TIMEOUT);
+                                        try {
+                                          drain.get(left, TimeUnit.NANOSECONDS);
+                                        } catch (
+                                            java.util.concurrent.TimeoutException timeoutFailure) {
+                                          throw new StopGateException(StopGateFailure.TIMEOUT);
+                                        } catch (
+                                            java.util.concurrent.ExecutionException readFailure) {
+                                          throw queryFailure(readFailure);
+                                        }
+                                        if (bytes[0].length > limit)
+                                          throw new StopGateException(
+                                              StopGateFailure.MALFORMED_STATE);
+                                      } finally {
+                                        drain.cancel(true);
+                                        reader.interrupt();
+                                      }
+                                    }))));
         interrupted();
         return bytes[0];
       } catch (InterruptedException interruptedFailure) {
@@ -259,41 +264,44 @@ public final class InspectorUnitProbe {
       // Keep the delivered array reachable even when a later scope close fails.
       byte[][] bytes = {new byte[0]};
       try {
-        var owned =
-            new QueryProcess(Objects.requireNonNull(start.execute(command), "query process"));
-        ProcessResourceScope.use(
-            owned::close,
-            () -> {
-              var output = new SafeStream<>(owned.process.getInputStream());
-              ProcessResourceScope.use(
-                  output::finish,
-                  () -> {
-                    var input = new SafeStream<>(owned.process.getOutputStream());
-                    ProcessResourceScope.use(
-                        input::finish,
-                        () -> {
-                          var error = new SafeStream<>(owned.process.getErrorStream());
-                          ProcessResourceScope.use(
-                              error::finish,
-                              () -> {
-                                // Neither query accepts stdin. Signal EOF and close discarded
-                                // stderr before waiting.
-                                input.finish();
-                                error.finish();
-                                if (!owned.process.waitFor(5, TimeUnit.SECONDS))
-                                  throw new StopGateException(StopGateFailure.TIMEOUT);
-                                interrupted();
-                                if (owned.process.exitValue() != 0)
-                                  throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-                                bytes[0] =
-                                    Objects.requireNonNull(
-                                        output.resource.readNBytes(limit + 1), "query output");
-                                if (bytes[0].length > limit)
-                                  throw new StopGateException(StopGateFailure.MALFORMED_STATE);
-                              });
-                        });
-                  });
-            });
+        ProcessResourceScope.acquire(
+            () -> new QueryProcess(() -> start.execute(command)),
+            QueryProcess::close,
+            owned ->
+                ProcessResourceScope.acquire(
+                    () -> new SafeStream<java.io.InputStream>(owned.process::getInputStream),
+                    SafeStream::finish,
+                    output ->
+                        ProcessResourceScope.acquire(
+                            () ->
+                                new SafeStream<java.io.OutputStream>(
+                                    owned.process::getOutputStream),
+                            SafeStream::finish,
+                            input ->
+                                ProcessResourceScope.acquire(
+                                    () ->
+                                        new SafeStream<java.io.InputStream>(
+                                            owned.process::getErrorStream),
+                                    SafeStream::finish,
+                                    error -> {
+                                      // Neither query accepts stdin. Signal EOF and close discarded
+                                      // stderr before waiting.
+                                      input.finish();
+                                      error.finish();
+                                      if (!owned.process.waitFor(5, TimeUnit.SECONDS))
+                                        throw new StopGateException(StopGateFailure.TIMEOUT);
+                                      interrupted();
+                                      if (owned.process.exitValue() != 0)
+                                        throw new StopGateException(
+                                            StopGateFailure.COMMAND_FAILURE);
+                                      bytes[0] =
+                                          Objects.requireNonNull(
+                                              output.resource.readNBytes(limit + 1),
+                                              "query output");
+                                      if (bytes[0].length > limit)
+                                        throw new StopGateException(
+                                            StopGateFailure.MALFORMED_STATE);
+                                    }))));
         interrupted();
         return bytes[0];
       } catch (StopGateException failure) {
@@ -317,8 +325,10 @@ public final class InspectorUnitProbe {
     private final T resource;
     private boolean closed;
 
-    SafeStream(T resource) {
-      this.resource = Objects.requireNonNull(resource, "query stream");
+    SafeStream(ResourceScope.Acquire<T, IOException> acquire) throws IOException {
+      @Nullable T returned = Objects.requireNonNull(acquire, "query stream acquire").open();
+      if (returned == null) throw new NullPointerException("query stream");
+      resource = returned;
     }
 
     // BUG187/YKT147: explicit early EOF/discard; scope fallback shares the one-close state.
@@ -336,8 +346,10 @@ public final class InspectorUnitProbe {
   private static final class QueryProcess implements AutoCloseable {
     private final Process process;
 
-    QueryProcess(Process process) {
-      this.process = process;
+    QueryProcess(ResourceScope.Acquire<Process, IOException> acquire) throws IOException {
+      @Nullable Process returned = Objects.requireNonNull(acquire, "query process acquire").open();
+      if (returned == null) throw new NullPointerException("query process");
+      process = returned;
     }
 
     @Override

@@ -35,10 +35,10 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
   @Override
   public byte[] read(ApplicationUnit unit) {
     Objects.requireNonNull(unit, "unit");
-    Process process;
+    byte[][] bytes = {new byte[0]};
     try {
-      process =
-          Objects.requireNonNull(
+      ProcessResourceScope.acquire(
+          () ->
               start.execute(
                   List.of(
                       "/usr/bin/systemctl",
@@ -48,45 +48,36 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
                       "show",
                       "--property=Id,LoadState,ActiveState,SubState,Job,MainPID,ControlPID",
                       unit.serviceName())),
-              "systemctl process");
-    } catch (IOException failure) {
-      throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-    }
-    byte[][] bytes = {new byte[0]};
-    try {
-      ProcessResourceScope.use(
-          () -> {
+          process -> {
             if (process.isAlive()) process.destroy();
           },
-          () -> {
+          process -> {
             // Preserve all-getters-before-null admission and each already-owned stream.
-            var output = process.getInputStream();
-            ProcessResourceScope.use(
-                () -> finish(output),
-                () -> {
-                  var input = process.getOutputStream();
-                  ProcessResourceScope.use(
-                      () -> finish(input),
-                      () -> {
-                        var error = process.getErrorStream();
-                        ProcessResourceScope.use(
-                            () -> finish(error),
-                            () -> {
-                              Objects.requireNonNull(output, "systemctl stdout");
-                              Objects.requireNonNull(input, "systemctl stdin");
-                              Objects.requireNonNull(error, "systemctl stderr");
-                              if (!process.waitFor(5, TimeUnit.SECONDS))
-                                throw new StopGateException(StopGateFailure.TIMEOUT);
-                              if (process.exitValue() != 0)
-                                throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
-                              bytes[0] =
-                                  Objects.requireNonNull(
-                                      output.readNBytes(1025), "systemctl output");
-                              if (bytes[0].length > 1024)
-                                throw new StopGateException(StopGateFailure.MALFORMED_STATE);
-                            });
-                      });
-                });
+            ProcessResourceScope.acquire(
+                () -> new StdIo<java.io.InputStream>(process::getInputStream),
+                StdIo::finish,
+                output ->
+                    ProcessResourceScope.acquire(
+                        () -> new StdIo<java.io.OutputStream>(process::getOutputStream),
+                        StdIo::finish,
+                        input ->
+                            ProcessResourceScope.acquire(
+                                () -> new StdIo<java.io.InputStream>(process::getErrorStream),
+                                StdIo::finish,
+                                error -> {
+                                  var stdout = output.required("systemctl stdout");
+                                  input.required("systemctl stdin");
+                                  error.required("systemctl stderr");
+                                  if (!process.waitFor(5, TimeUnit.SECONDS))
+                                    throw new StopGateException(StopGateFailure.TIMEOUT);
+                                  if (process.exitValue() != 0)
+                                    throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+                                  bytes[0] =
+                                      Objects.requireNonNull(
+                                          stdout.readNBytes(1025), "systemctl output");
+                                  if (bytes[0].length > 1024)
+                                    throw new StopGateException(StopGateFailure.MALFORMED_STATE);
+                                })));
           });
       return bytes[0];
     } catch (StopGateException failure) {
@@ -112,6 +103,24 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
       resource.close();
     } catch (IOException failure) {
       throw new StopGateException(StopGateFailure.COMMAND_FAILURE);
+    }
+  }
+
+  /** Nullable getter admission belongs to the body after all three resources are protected. */
+  private static final class StdIo<T extends Closeable> {
+    private final @Nullable T resource;
+
+    StdIo(dev.codex.schubert.nk.storage.ResourceScope.Acquire<T, IOException> acquire)
+        throws IOException {
+      resource = Objects.requireNonNull(acquire, "query stdio acquire").open();
+    }
+
+    T required(String name) {
+      return Objects.requireNonNull(resource, name);
+    }
+
+    void finish() {
+      SystemctlStateSource.finish(resource);
     }
   }
 
