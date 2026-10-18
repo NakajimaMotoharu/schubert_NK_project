@@ -116,11 +116,11 @@ public final class RootBatchCredentialReader {
               p -> {
                 Metadata before = inspect(p, false, maximum);
                 require(before.device() == directory.device());
-                var channel = Objects.requireNonNull(io.open(p), "root credential channel");
                 int count =
-                    ResourceScope.use(
-                        channel::close,
-                        () -> {
+                    ResourceScope.acquire(
+                        () -> io.open(p),
+                        SeekableByteChannel::close,
+                        channel -> {
                           require(channel.size() == before.size());
                           ByteBuffer buffer = ByteBuffer.wrap(material);
                           while (buffer.hasRemaining()) {

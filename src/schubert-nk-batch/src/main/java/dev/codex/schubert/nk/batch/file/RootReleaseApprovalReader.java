@@ -95,22 +95,22 @@ public final class RootReleaseApprovalReader {
   public <T> T execute(Operation<T> operation) throws IOException {
     Objects.requireNonNull(operation, "approval operation");
     check();
-    var root = OwnedTransferDirectory.open(calls, etc);
     T result =
-        ResourceScope.use(
-            root::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> OwnedTransferDirectory.open(calls, etc),
+            OwnedTransferDirectory::close,
+            root -> {
               var rootBefore = directory(root, 0, 0x41ed);
-              var app = root.openExistingChild("schubert-nk");
-              return ResourceScope.use(
-                  app::close,
-                  () -> {
+              return ResourceScope.acquire(
+                  () -> root.openExistingChild("schubert-nk"),
+                  OwnedTransferDirectory::close,
+                  app -> {
                     var appBefore = directory(app, group, 0x41e8);
-                    var approvals = app.openExistingChild("release-approval");
                     T value =
-                        ResourceScope.use(
-                            approvals::close,
-                            () -> {
+                        ResourceScope.acquire(
+                            () -> app.openExistingChild("release-approval"),
+                            OwnedTransferDirectory::close,
+                            approvals -> {
                               var before = directory(approvals, 0, 0x41c0);
                               require(before.device() == appBefore.device());
                               T answer =
@@ -143,10 +143,10 @@ public final class RootReleaseApprovalReader {
                     require(appBefore.equals(directory(app, group, 0x41e8)));
                     recheck(root, "schubert-nk", appBefore, group, 0x41e8);
                     require(rootBefore.equals(directory(root, 0, 0x41ed)));
-                    var again = OwnedTransferDirectory.open(calls, etc);
-                    ResourceScope.use(
-                        again::close,
-                        () -> {
+                    ResourceScope.acquire(
+                        () -> OwnedTransferDirectory.open(calls, etc),
+                        OwnedTransferDirectory::close,
+                        again -> {
                           require(rootBefore.equals(directory(again, 0, 0x41ed)));
                           return Boolean.TRUE;
                         });
@@ -164,10 +164,10 @@ public final class RootReleaseApprovalReader {
       long gid,
       int mode)
       throws IOException {
-    var reopened = parent.openExistingChild(name);
-    ResourceScope.use(
-        reopened::close,
-        () -> {
+    ResourceScope.acquire(
+        () -> parent.openExistingChild(name),
+        OwnedTransferDirectory::close,
+        reopened -> {
           require(expected.equals(directory(reopened, gid, mode)));
           return Boolean.TRUE;
         });
@@ -177,11 +177,11 @@ public final class RootReleaseApprovalReader {
       throws IOException {
     byte[] material = new byte[ReleaseApproval.MAX_BYTES + 1];
     try {
-      var channel = Objects.requireNonNull(io.open(held), "approval channel");
       int length =
-          ResourceScope.use(
-              channel::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> io.open(held),
+              SeekableByteChannel::close,
+              channel -> {
                 require(channel.size() == before.size());
                 var buffer = ByteBuffer.wrap(material);
                 while (buffer.hasRemaining()) {

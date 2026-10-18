@@ -15,6 +15,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
@@ -96,27 +97,29 @@ final class RootServiceCredentialSource {
             });
     byte[] material = new byte[65537];
     try {
-      var etc = OwnedTransferDirectory.open(LinuxHostDirectoryCalls.create(), Path.of("/etc"));
+      var calls = LinuxHostDirectoryCalls.create();
+      Path path = Path.of("/etc");
       int count =
-          ResourceScope.use(
-              etc::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(calls, path),
+              OwnedTransferDirectory::close,
+              etc -> {
                 var beforeEtc = etc.atDirectory(p -> policy.ancestor(p, false));
                 require(!beforeEtc.readonly());
-                var app = etc.openExistingChild("schubert-nk");
                 int result =
-                    ResourceScope.use(
-                        app::close,
-                        () -> {
+                    ResourceScope.acquire(
+                        () -> etc.openExistingChild("schubert-nk"),
+                        OwnedTransferDirectory::close,
+                        app -> {
                           var beforeApp =
                               app.atDirectory(
                                   p -> policy.snapshot(p, false, true, 0, 0, configGroup));
                           require(!beforeApp.readonly());
-                          var credentials = app.openExistingChild("credentials");
                           int length =
-                              ResourceScope.use(
-                                  credentials::close,
-                                  () ->
+                              ResourceScope.acquire(
+                                  () -> app.openExistingChild("credentials"),
+                                  OwnedTransferDirectory::close,
+                                  credentials ->
                                       readFixed(
                                           credentials,
                                           security,
@@ -167,11 +170,11 @@ final class RootServiceCredentialSource {
             fixedName,
             p -> {
               require(before.equals(policy.hostCredentialSource(p, false, group)));
-              var channel = Objects.requireNonNull(io.open(p));
               int length =
-                  ResourceScope.use(
-                      channel::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> io.open(p),
+                      SeekableByteChannel::close,
+                      channel -> {
                         require(channel.size() == before.metadata().size());
                         ByteBuffer buffer = ByteBuffer.wrap(material);
                         boolean eof = false;
