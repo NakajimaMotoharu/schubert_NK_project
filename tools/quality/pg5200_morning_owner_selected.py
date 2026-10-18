@@ -6,6 +6,14 @@ configure=previous.configure
 extra_suites=previous.extra_suites
 
 
+def invocation_aliases():
+    names=('mbpub008CompleteOwnerTakesOverDirectoryExactlyOnce',
+           'mbpub009IncompleteAssemblyAlwaysReleasesDirectory',
+           'mbpub010AssemblyCloseMatrixPreservesIndependentFailurePriority')
+    return {'dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest':
+            {name+'(Path)':name for name in names}}
+
+
 def main():
     configure()
     return selected.main(stem_override='pg5200-morning-owner',version_override='v1',extra_suites=extra_suites())

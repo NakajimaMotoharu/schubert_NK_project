@@ -4,6 +4,7 @@ import datetime
 import json
 import os
 import platform
+import re
 import xml.etree.ElementTree as ET
 import pg4852_selected_public_evidence as evidence
 import pg5120_root_elf_selected as selected
@@ -71,8 +72,10 @@ def suite_map(base,extra):
 
 
 def validate_separate_qualification(result,original,original_sha):
-    if original.get('actualExit')!=1 or original.get('phaseExits')!=[0,0] or original.get('reasons')!=[
-            'declared semantic changes plus explicitly bounded nested debug candidates only']:
+    reasons=original.get('reasons')
+    known=reasons==['declared semantic changes plus explicitly bounded nested debug candidates only'] or (
+        reasons==['exact selected case inventory incomplete'] and bool(result.get('qualifiedInvocationAliases')))
+    if original.get('actualExit')!=1 or original.get('phaseExits')!=[0,0] or not known:
         raise ValueError('only explicit post-inventory failure may be separately qualified')
     if result.get('originalRunnerActualExit')!=1 or result.get('originalManifestSha256')!=original_sha:
         raise ValueError('original failed runner and hash must remain explicit')
@@ -82,7 +85,7 @@ def validate_separate_qualification(result,original,original_sha):
 
 
 def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None,
-         required_counts=None, case_overrides=None, extra_suites=None, qualification_path=None):
+         required_counts=None, case_overrides=None, extra_suites=None, qualification_path=None, case_name_aliases=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
@@ -169,6 +172,18 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
         raw = path.read_bytes()
         if evidence.sha(raw) != digest: raise ValueError('original XML hash')
         cases = evidence.cases(raw, name)
+        aliases=(case_name_aliases or {}).get(name,{})
+        if aliases:
+            if result.get('qualifiedInvocationAliases',{}).get(name)!=aliases:
+                raise ValueError('same explicit independently-qualified invocation aliases')
+            source=(run/'source'/('src/schubert-nk-'+module+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
+            if len(set(aliases.values()))!=len(aliases):raise ValueError('invocation aliases must be one-to-one')
+            for observed,canonical in aliases.items():
+                if observed!=canonical+'(Path)' or not re.search(r'void\s+'+re.escape(canonical)+r'\(\s*@TempDir\s+Path\s+temporary\s*\)',source):
+                    raise ValueError('exact declared TempDir Path signature only')
+                matching=[case for case in cases if case['method']==observed]
+                if len(matching)!=1:raise ValueError('exactly one original observed invocation')
+                matching[0]['observedInvocation']=observed;matching[0]['method']=canonical
         if sorted(c['method'] for c in cases) != begin['expectedMethods'][name]:
             raise ValueError('literal original case inventory')
         for case in cases:
