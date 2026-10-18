@@ -1,5 +1,13 @@
 # 1036 SSC304 未使用受入・現配備全80保全仕様
 
+## 2026-10-18再開・PT-OPS-UNUSED-4992-001～004 / CONNECTION-4996-001
+
+利用者明示再開、開始fresh残100%。通常残10%停止・券/課金0を適用し、以下旧overrideは履歴だけ。PG4992独立postはcurrent04bbの実readerを保持し、CANDIDATE scalarの識別子だけ別名へ変更（文字列/PROTECTED capsule不変）。unused187署名/全byte・原full11/all80・全24/32設定/原本Backup・runtime/approval不変の確認はtenRef保持中、正常全返却後にだけterminalを出す。current正常Rootは履歴証拠であり新起動許可にしない。候補native加点0。
+
+独立管理試験：actual18roleと完全configuration定義同一・全チェック位置/正常close後summary・三private証跡file数・current/candidate分離・PROTECTED capsule不変・不正configuration拒否・placementのbool/int/欠落/失敗拒否。接続はローカル再起動で消失した旧forwardを流用せず、new-only4996のlocalboot・parent/child ticks/argv・正確socket PID・元remote QEMU契約を照合し、旧boot/別ticks/別argv/部分PID一致を拒否。VM二重起動0。
+
+command: `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes3.4.0/runtime> python3 -B -m unittest tools/quality/pg4992_ssc304_unused_post_test.py tools/quality/pg4996_resume_connection_test.py`、5管理試験成功・Production PTへ加算0。実stage/place/postの結果は真正receipt回収後だけ追記する。既PG4988成功の全file hash再照合だけを行いcompilerを再実行しない。
+
 NK-OPS-001/N15、SS343/451、Main/Testsourcea2ecc/PG4980/BOM78a6f863、配備current04bb/PG4860/BOM083。1034/1035の真正3791/553/1650・六static0/同source診断処理0/Checkstyle0・host署名187は完了済み。F03 raw1657未分類、当source native/四100/正式は未完。
 
 PG4982元74204 actual0、観測03:55:58.685613Z、payload **6484a28755039da0716d44424c4a52e7c16cca6dcd2bb06d79c5223059a4fea0**。全24/32/署名187/原本Backup・existing ADMIN一件/credential二input退役・四namespace空・新正常tenRef返却、batch884行/native80/全資源0をfresh確認。new private full11 beforeSHA **5ba8f91bcade64a8eedb1bfe51b1e0f99b7d9bd1636b8b9adef131c6ca47436e**、enriched afterSHA aa990c9c7a0b55bc3a06ab8ed4450af2bffa00e35a6d7e19b1a1422fda50f6d1。旧Root/既ADMIN20の正常結果を再演せず、保持証跡を先行確認して現在GCと区別。active/start.intentなしと全runtime/originals保存は同実行payload hashへ束縛。privateJSON/DB/session/秘密はGitへ出力しない。

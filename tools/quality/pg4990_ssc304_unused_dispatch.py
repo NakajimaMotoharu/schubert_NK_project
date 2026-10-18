@@ -5,7 +5,7 @@ import types
 import pg4868_ssc301_302_unused_dispatch as previous
 import pg4986_ssc304_unused_sources as role
 import pg4988_ssc304_unused_compile as compiler
-from pg4434_current_candidate_admission_read import authenticate_host
+from pg4996_resume_connection import authenticate_host
 from pg1446_current_cold_stage import P
 from pg1674_critical_management_gate import management_gate
 
