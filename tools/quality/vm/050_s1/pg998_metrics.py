@@ -13,6 +13,35 @@ V3=Path('/home/mini/codex/project1/work/PMO/hourly-monitor/wbs-reestimate-v3-PGP
 V4=Path('/home/mini/codex/project1/work/PMO/hourly-monitor/wbs-reestimate-v4-PGPT-20261018.json')
 
 
+def canonical_fields(values,event_type):
+    result=dict(values)
+    primary=values.get('primaryWbs')
+    if primary:
+        leaves=list(dict.fromkeys([primary]+list(values.get('componentWbs') or [])))
+        if any(not isinstance(item,str) or not item.startswith('WBS-') for item in leaves):
+            raise ValueError('explicit WBS ids required')
+        if 'wbsLeafIds' in values and values['wbsLeafIds']!=leaves:
+            raise ValueError('canonical and extension WBS mapping conflict')
+        result['wbsLeafIds']=leaves
+        result.setdefault('componentAdditionalBudgetPp',0)
+        result.setdefault('componentActualAllocationPp',None)
+        result.setdefault('groupBudgetAdditive',False)
+    frozen=values.get('groupStartEstimatePp')
+    if frozen is not None:
+        if set(frozen)!={'low','base','high'} or any(type(v) not in (int,float) or v<0 for v in frozen.values()):
+            raise ValueError('explicit nonnegative frozen group estimate, never quota-to-token conversion')
+        if not frozen['low']<=frozen['base']<=frozen['high']:
+            raise ValueError('ordered original frozen estimate required')
+        if 'estimateAtGroupStartPp' in values and values['estimateAtGroupStartPp']!=frozen:
+            raise ValueError('canonical and extension frozen estimate conflict')
+        result['estimateAtGroupStartPp']=dict(frozen)
+    if event_type=='GROUP_END':
+        result.setdefault('requestedLegacyEventType',event_type)
+        result.setdefault('groupBoundary','END')
+        event_type='CHECKPOINT'
+    return result,event_type
+
+
 def estimate_identity(values):
     revision=values.get('costRevision','PMO-remaining-v3-20261010')
     paths={'PMO-remaining-v3-20261010':V3,'PMO-remaining-v4-20261018':V4}
@@ -23,8 +52,25 @@ def estimate_identity(values):
     return revision,digest
 
 def append(group,event_type,values):
+    if set(values)&{'eventId','previousEventId','timeJST','executionId','groupId','eventType'}:
+        raise ValueError('append identity/time are current writer observations, never caller backdates')
+    values,event_type=canonical_fields(values,event_type)
     revision,digest=estimate_identity(values)
-    template=json.loads((ROOT/'documents/400_PGPT/470_PMO/487_WBS実行計測規約.json').read_bytes())['eventTemplate']
+    specification=json.loads((ROOT/'documents/400_PGPT/470_PMO/487_WBS実行計測規約.json').read_bytes())
+    if event_type not in specification['eventTypes']:raise ValueError('registered 487 event type required')
+    template=specification['eventTemplate']
+    if values.get('wbsLeafIds'):
+        nodes={}
+        def collect(item):
+            if isinstance(item,dict):
+                if isinstance(item.get('id'),str):nodes[item['id']]=item
+                for child in item.values():collect(child)
+            elif isinstance(item,list):
+                for child in item:collect(child)
+        for name in ('481_PGPT詳細WBS.json','484_WBSコスト枠・細分化.json'):
+            collect(json.loads((ROOT/'documents/400_PGPT/470_PMO'/name).read_bytes()))
+        if any(leaf not in nodes or nodes[leaf].get('children') or ':' in leaf for leaf in values['wbsLeafIds']):
+            raise ValueError('actual 481/484 leaf ids only; split parents cannot add a second cost')
     with EVENTS.open('a+b') as f:
         fcntl.flock(f,fcntl.LOCK_EX);f.seek(0)
         lines=f.read().splitlines();last=json.loads(lines[-1])
@@ -34,7 +80,7 @@ def append(group,event_type,values):
           executionId='PGPT-20261008-PG500',groupId=group,eventType=event_type,
           timeJST=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(),
           gitHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-          source='40ef6e894573d2ffab1d1732124960f9c98d5f97',costRevision=revision,
+          source=None,costRevision=revision,
           estimateRevisionSha256=digest,
           attribution='UNKNOWN_SHARED_ACCOUNT',actualAllocatedPp=None,
           tokenCoverageNote='Explicit numeric response usage not available; no quota-to-token conversion; existing cursor retained',
