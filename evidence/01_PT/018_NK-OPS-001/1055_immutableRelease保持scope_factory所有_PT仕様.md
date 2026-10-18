@@ -1,0 +1,11 @@
+# NK-OPS-001 immutable release読取 所有scope
+
+主WBS-P018-02、群1190開始.4/1.2/3共有pp固定、起点Main/Test50bc4cd2e（Main全764は178と同byte）。RD SYS002004/OPS009/DAT009・UI212251253/SS333343354/SSC308/BUG1414/YKT1178、既FULLBOM001～008とstartupmanifest試験へ対応。対象ReleasePayloadVerification7site/StartupReleaseManifest9siteの16候補を同IO factory所有規則へ接続する。
+
+変更は全port構築→factory内取得→即保護域/同資源一度closeだけ。署名/BOM187/全inventory・パス/role/readonly・二時刻同inode・全class/JAR/SQL/Flyway CRC32の期待・byte上限/UTF8/BOM処理・未確定UNKNOWN保全・固定外部operation0を保持。取得後のObjects/null文字列解決も避け、生Directory/DirectoryStream/channel/ZipFile/entry streamを直接返し、共通保護域内null拒否へ集約する。BufferedReader(StringReader)も同規則へ揃えるが、native資源障害が実発生した証拠と呼ばず、237候補を全障害数へ変換しない。
+
+独立oracleは既StartupReleaseManifestTest/ReleasePayloadVerification関連のliteral署名/BOM/出力・安全names/Zip/CRC/Flyway互換golden/各fault/close優先順位/null/境界/並行を変更しない。新Java case予定0、全bootstrap42（readonly metadata新1を含む320case）/storage25・Root6を同snapshotで実行し、予定537/73を真正XMLで回収する。旧536や別240を合成しない。
+
+Java25実bytecodeで各16siteのAcquire/Release/OwnedAction事前構築、factoryの直接返却/reader先行確保、既helperの直後保護域・同一IO規則を検証する。物理Mainは原764を全量照合し、新outer2の意味変更とStartupReleaseManifestのManifestValue/Snapshot/NioIoの行debug変化候補だけを許し、当nestedが変化した場合は全opcode/handler同義を独立比較する。他のMain/source不変を要求し、除外や静的注釈拡大で通さない。
+
+六Production format先行0/NullAway・ErrorProne0/実三module static0、全storage四counter100、NativeCoverage.checkedの全条件とclass側branchの当大選択値も測定する。未実行Root production portや当source whole/native・CHR/451を限定試験で代用せず、DB/原本/鍵/Backup/署名/VMの操作を行わない。実command/環境/日時/source/exit/全input/XML/coverage/物理SHA/BUGを新manifest/1056へ保存、200未判定YKTを本群だけでcloseしない。

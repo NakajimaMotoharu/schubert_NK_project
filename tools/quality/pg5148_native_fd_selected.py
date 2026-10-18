@@ -35,6 +35,7 @@ SCOPE = 'dev/codex/schubert/nk/storage/ResourceScope'
 DIRECTORY = 'dev/codex/schubert/nk/storage/OwnedTransferDirectory'
 TEST_UMASK = 0o027
 EXTRA_CHANGED = set()
+EXTRA_DEBUG = set()
 
 
 def storage_suites():
@@ -100,7 +101,7 @@ def main_delta(snapshot, group='elf'):
         allowed_changed |= {native+n+'.class' for n in native_names} | {native+'LinuxFileLock$OwnedDescriptor.class'}
         allowed_added |= {native+'LinuxSealedProof$Descriptor.class',native+'LinuxStartupAdmission$FdOwners.class'}
         allowed_changed |= EXTRA_CHANGED
-        optional_debug = {key for key in expected if any(key.startswith(native+n+'$') for n in native_names)} - allowed_changed
+        optional_debug = ({key for key in expected if any(key.startswith(native+n+'$') for n in native_names)} | EXTRA_DEBUG) - allowed_changed
     else:
         optional_debug = set()
     if not allowed_changed <= set(changed) or not set(changed) <= allowed_changed | optional_debug or set(added) != allowed_added or removed:

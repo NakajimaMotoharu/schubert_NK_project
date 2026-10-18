@@ -218,30 +218,30 @@ public final class StartupReleaseManifest {
 
   private <T> T inspectApplication(ApplicationOperation<T> operation) throws IOException {
     try {
-      var root = OwnedTransferDirectory.open(calls, opt);
-      return ResourceScope.use(
-          root::close,
-          () -> {
+      return ResourceScope.acquire(
+          () -> OwnedTransferDirectory.open(calls, opt),
+          OwnedTransferDirectory::close,
+          root -> {
             Snapshot top = directory(root, 0, 0x41ed);
-            var app = root.openExistingChild("schubert-nk");
-            return ResourceScope.use(
-                app::close,
-                () -> {
+            return ResourceScope.acquire(
+                () -> root.openExistingChild("schubert-nk"),
+                OwnedTransferDirectory::close,
+                app -> {
                   Snapshot appBefore = directory(app, group, 0x41e8);
                   T digest = operation.read(app);
                   require(appBefore.equals(directory(app, group, 0x41e8)));
-                  var reopened = root.openExistingChild("schubert-nk");
-                  ResourceScope.use(
-                      reopened::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> root.openExistingChild("schubert-nk"),
+                      OwnedTransferDirectory::close,
+                      reopened -> {
                         require(appBefore.equals(directory(reopened, group, 0x41e8)));
                         return Boolean.TRUE;
                       });
                   require(top.equals(directory(root, 0, 0x41ed)));
-                  var reopenedTop = OwnedTransferDirectory.open(calls, opt);
-                  ResourceScope.use(
-                      reopenedTop::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> OwnedTransferDirectory.open(calls, opt),
+                      OwnedTransferDirectory::close,
+                      reopenedTop -> {
                         require(top.equals(directory(reopenedTop, 0, 0x41ed)));
                         return Boolean.TRUE;
                       });
@@ -275,30 +275,30 @@ public final class StartupReleaseManifest {
 
   private <T> T released(OwnedTransferDirectory app, String version, ReleaseOperation<T> operation)
       throws StorageIoException {
-    var releases = app.openExistingChild("releases");
-    return ResourceScope.use(
-        releases::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> app.openExistingChild("releases"),
+        OwnedTransferDirectory::close,
+        releases -> {
           Snapshot releasesBefore = directory(releases, group, 0x41e8);
-          var release = releases.openExistingChild(version);
-          return ResourceScope.use(
-              release::close,
-              () -> {
+          return ResourceScope.acquire(
+              () -> releases.openExistingChild(version),
+              OwnedTransferDirectory::close,
+              release -> {
                 Snapshot releaseBefore = directory(release, group, 0x41e8);
                 T result = operation.read(release, version);
                 require(releaseBefore.equals(directory(release, group, 0x41e8)));
-                var reopened = releases.openExistingChild(version);
-                ResourceScope.use(
-                    reopened::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> releases.openExistingChild(version),
+                    OwnedTransferDirectory::close,
+                    reopened -> {
                       require(releaseBefore.equals(directory(reopened, group, 0x41e8)));
                       return Boolean.TRUE;
                     });
                 require(releasesBefore.equals(directory(releases, group, 0x41e8)));
-                var reopenedReleases = app.openExistingChild("releases");
-                ResourceScope.use(
-                    reopenedReleases::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> app.openExistingChild("releases"),
+                    OwnedTransferDirectory::close,
+                    reopenedReleases -> {
                       require(releasesBefore.equals(directory(reopenedReleases, group, 0x41e8)));
                       return Boolean.TRUE;
                     });
@@ -316,11 +316,11 @@ public final class StartupReleaseManifest {
           Snapshot before = checked(held, group, 0x81a0, 1, MAX_BYTES);
           MessageDigest hash = MessageDigest.getInstance("SHA-256");
           var material = new ByteArrayOutputStream();
-          var channel = Objects.requireNonNull(io.open(held), "manifest channel");
           ManifestValue digest =
-              ResourceScope.use(
-                  channel::close,
-                  () -> {
+              ResourceScope.acquire(
+                  () -> io.open(held),
+                  java.nio.channels.SeekableByteChannel::close,
+                  channel -> {
                     require(channel.size() == before.size());
                     ByteBuffer buffer = ByteBuffer.allocate(8192);
                     long total = 0;

@@ -159,16 +159,16 @@ final class ReleasePayloadVerification {
     for (String name : children) {
       String child = path.isEmpty() ? name : path + "/" + name;
       if (tree.containsKey(child)) {
-        var nested = directory.openExistingChild(name);
-        ResourceScope.use(
-            nested::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> directory.openExistingChild(name),
+            OwnedTransferDirectory::close,
+            nested -> {
               var first = nested.atDirectory(p -> checked(p, 0x41e8));
               walk(nested, child, tree, expected, original, sumBytes, inventory);
-              var reopened = directory.openExistingChild(name);
-              ResourceScope.use(
-                  reopened::close,
-                  () -> {
+              ResourceScope.acquire(
+                  () -> directory.openExistingChild(name),
+                  OwnedTransferDirectory::close,
+                  reopened -> {
                     require(first.equals(reopened.atDirectory(p -> checked(p, 0x41e8))));
                     return Boolean.TRUE;
                   });
@@ -233,10 +233,10 @@ final class ReleasePayloadVerification {
       throws StorageIoException {
     directory.atDirectory(
         held -> {
-          var names = Objects.requireNonNull(io.names(held), "release directory stream");
-          return ResourceScope.use(
-              names::close,
-              () -> {
+          return ResourceScope.acquire(
+              () -> io.names(held),
+              java.nio.file.DirectoryStream::close,
+              names -> {
                 var actual = new HashSet<String>();
                 for (Path entry : names) {
                   require(entry != null && held.equals(entry.getParent()));
@@ -257,10 +257,10 @@ final class ReleasePayloadVerification {
     require(!material || before.size() <= MAX_MATERIAL);
     byte[] bytes = material ? new byte[(int) before.size()] : new byte[0];
     MessageDigest hash = MessageDigest.getInstance("SHA-256");
-    SeekableByteChannel channel = Objects.requireNonNull(io.open(held), "payload channel");
-    return ResourceScope.use(
-        channel::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> io.open(held),
+        SeekableByteChannel::close,
+        channel -> {
           require(channel.size() == before.size() && channel.position() == 0);
           ByteBuffer buffer = ByteBuffer.allocate(8192);
           long total = 0;
@@ -287,10 +287,10 @@ final class ReleasePayloadVerification {
   private JarValue archive(Path held, String path, Map<String, ReleaseInventory.Artifact> expected)
       throws IOException, NoSuchAlgorithmException {
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    ZipFile zip = Objects.requireNonNull(io.archive(held), "payload archive");
-    return ResourceScope.use(
-        zip::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> io.archive(held),
+        ZipFile::close,
+        zip -> {
           require(zip.size() > 0 && zip.size() <= 131072);
           Set<String> entries = new HashSet<>();
           Set<String> classes = new HashSet<>();
@@ -309,11 +309,11 @@ final class ReleasePayloadVerification {
             if (entry.isDirectory()) continue;
             if (name.startsWith(LITERAL_DB_MIGRATION) || name.equals("META-INF/MANIFEST.MF")) {
               require(entry.getSize() >= 0 && entry.getSize() <= MAX_MATERIAL);
-              var stream =
-                  Objects.requireNonNull(zip.getInputStream(entry), "archive entry stream");
               byte[] bytes =
-                  ResourceScope.use(
-                      stream::close, () -> stream.readNBytes((int) entry.getSize() + 1));
+                  ResourceScope.acquire(
+                      () -> zip.getInputStream(entry),
+                      java.io.InputStream::close,
+                      stream -> stream.readNBytes((int) entry.getSize() + 1));
               require(bytes.length == entry.getSize());
               if (name.equals("META-INF/MANIFEST.MF")) {
                 var manifest = new Manifest(new ByteArrayInputStream(bytes));
@@ -371,10 +371,10 @@ final class ReleasePayloadVerification {
   /** Flyway13.4: UTF8, line endings ignored, first line BOM only; signed CRC32. */
   static int sqlChecksum(byte[] original) throws IOException {
     String text = StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(original)).toString();
-    var reader = new BufferedReader(new StringReader(text), 4096);
-    return ResourceScope.use(
-        reader::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> new BufferedReader(new StringReader(text), 4096),
+        BufferedReader::close,
+        reader -> {
           var crc = new CRC32();
           boolean first = true;
           String line;
