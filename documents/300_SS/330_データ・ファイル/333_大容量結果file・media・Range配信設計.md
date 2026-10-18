@@ -2,6 +2,8 @@
 
 ## SSC308 取得前port構築・factory内IO所有とdescriptor wrapper先行確保
 
+native FD横展開の確定詳細：LinuxFileLockのopen/dup及びLinuxSealedProofのmemfd/reserved取得では、全portとprimitive保持wrapperを取得前に確保し、有効FD取得後は非負確認/primitive格納/返却だけとする。dupが元FD自身を返す異常は新所有ではなく元FDの二重closeをしない。factory後にInteger boxingやObjects/literal解決を挟まない。元flock/flags/seal/mode/write/範囲/close優先順位と消費回数を保持する。
+
 実装詳細の確定補足：factoryの戻りをslotへ格納した直後からIO/Runtime/Error保護域へ入り、標準nonnull検査もその保護域内で行う。null返却はNPEを伝播しbody/release0、非null資源の失敗時だけreleaseする。成功資源を保護域外のliteral解決/明示例外確保/boxingへ露出させない。これは既null拒否/例外優先順位を変えず、静的解析の抑制も追加しない。
 
 BUG1414/YKT1178、FIL001009/OPS009・UI237251、WBS-P003-08（共通scope）/P003-04（保持directory）。RD/UI/外部file/HTTP/権限契約変更不要。既ResourceScope.useの引数検証・IO正規化/既Reason・unknown例外優先順位はそのまま保持する。追加factory所有入口ではAcquire<R,E extends IOException>/Release<R>/OwnedAction<R,T>を全て取得前に構築・nonnull検証し、helper内で同一Rを取得した直後から保護域に入れ、releaseへ当同一objectを一度だけ渡す。factoryのchecked E・Runtime/Error失敗はbody/release無しで元identityを伝播、null返却はfail-fast。bodyのnullable結果契約は既use同様に明示して許容する。
