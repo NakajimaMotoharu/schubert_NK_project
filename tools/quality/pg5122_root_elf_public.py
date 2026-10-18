@@ -47,7 +47,13 @@ FACTORY_NAMES = (
     'factory005PortConstructionErrorsPrecedeAcquisition', 'factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported',
     'factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression', 'factory008UnknownCloseTakesPriorityOverBodyIo',
     'factory009UnknownBodyKeepsIdentityAfterSuccessfulClose', 'factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression',
-    'factory011SuccessfulBodyCannotHideAnyCloseFailure', 'factory012NestedAndParallelScopesKeepIndependentOwnership')
+    'factory011SuccessfulBodyCannotHideAnyCloseFailure', 'factory012NestedAndParallelScopesKeepIndependentOwnership',
+    'factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType',
+    'factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner',
+    'factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden',
+    'factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure',
+    'factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority',
+    'factory018ParallelCompleteOwnersNeverShareTransferState')
 DIRECTORY_NAMES = ('dirfactory001RootWrapperIsSameKernelInodeAndClosesOnce',
                    'dirfactory002NullAndFailedOpenHaveNoOwnedDescriptorToRelease',
                    'dirfactory003CloseFailureConsumesDescriptorAndConfiguredRootStillRefusesSlash')

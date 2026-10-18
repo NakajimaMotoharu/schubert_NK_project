@@ -1,0 +1,309 @@
+{
+  "source": "5eb1d4c44650b79aa8983f044531b3e3e22e214e",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "semanticClasses": 1,
+  "otherPhysicalClassesUnchanged": 763,
+  "class": {
+    "classSha256": "0e538ce9c35a6b9eeae6d0326270f99e6fa57c561ebae3140122fb9baeee2115",
+    "javapSha256": "a263527aeefd66a0a6348c500d1a8689cfce3e3a259fa7db073fb8f1bfcc395d"
+  },
+  "priorClass": {
+    "classSha256": "4f91337a0d2db95cc0f85bc41192ddd47f11fb359c36fe153859648b8a842be9",
+    "javapSha256": "bc62bfb167a896ff63b643c6e917e78ff867ee213a0ba54604e61e12182b4806"
+  },
+  "allPriorScopeMethodOpcodesAndHandlersUnchanged": true,
+  "handoff": {
+    "header": "public static <R, T, E extends java.io.IOException> T handoff(dev.codex.schubert.nk.storage.ResourceScope$Acquire<R, E>, dev.codex.schubert.nk.storage.ResourceScope$Release<R>, dev.codex.schubert.nk.storage.ResourceScope$OwnedAction<R, T>) throws E, dev.codex.schubert.nk.storage.StorageIoException;",
+    "ops": [
+      [
+        0,
+        "aload_0",
+        ""
+      ],
+      [
+        1,
+        "ldc",
+        "#7                  // String resource acquire"
+      ],
+      [
+        3,
+        "invokestatic",
+        "#9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;"
+      ],
+      [
+        6,
+        "pop",
+        ""
+      ],
+      [
+        7,
+        "aload_1",
+        ""
+      ],
+      [
+        8,
+        "ldc",
+        "#15                 // String resource release"
+      ],
+      [
+        10,
+        "invokestatic",
+        "#9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;"
+      ],
+      [
+        13,
+        "pop",
+        ""
+      ],
+      [
+        14,
+        "aload_2",
+        ""
+      ],
+      [
+        15,
+        "ldc",
+        "#17                 // String complete owner assembly"
+      ],
+      [
+        17,
+        "invokestatic",
+        "#9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;"
+      ],
+      [
+        20,
+        "pop",
+        ""
+      ],
+      [
+        21,
+        "iconst_1",
+        ""
+      ],
+      [
+        22,
+        "newarray",
+        "boolean"
+      ],
+      [
+        24,
+        "astore_3",
+        ""
+      ],
+      [
+        25,
+        "aload_0",
+        ""
+      ],
+      [
+        26,
+        "aload_3",
+        ""
+      ],
+      [
+        27,
+        "aload_1",
+        ""
+      ],
+      [
+        28,
+        "invokedynamic",
+        "#19,  0             // InvokeDynamic #0:close:([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;)Ldev/codex/schubert/nk/storage/ResourceScope$Release;"
+      ],
+      [
+        33,
+        "aload_2",
+        ""
+      ],
+      [
+        34,
+        "aload_3",
+        ""
+      ],
+      [
+        35,
+        "invokedynamic",
+        "#23,  0             // InvokeDynamic #1:run:(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[Z)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;"
+      ],
+      [
+        40,
+        "invokestatic",
+        "#27                 // Method acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;"
+      ],
+      [
+        43,
+        "areturn",
+        ""
+      ]
+    ],
+    "handlers": []
+  },
+  "assembly": {
+    "header": "private static java.lang.Object lambda$handoff$1(dev.codex.schubert.nk.storage.ResourceScope$OwnedAction, boolean[], java.lang.Object) throws java.io.IOException;",
+    "ops": [
+      [
+        0,
+        "aload_0",
+        ""
+      ],
+      [
+        1,
+        "aload_2",
+        ""
+      ],
+      [
+        2,
+        "invokeinterface",
+        "#43,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.run:(Ljava/lang/Object;)Ljava/lang/Object;"
+      ],
+      [
+        7,
+        "ldc",
+        "#92                 // String complete resource owner"
+      ],
+      [
+        9,
+        "invokestatic",
+        "#9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;"
+      ],
+      [
+        12,
+        "astore_3",
+        ""
+      ],
+      [
+        13,
+        "aload_1",
+        ""
+      ],
+      [
+        14,
+        "iconst_0",
+        ""
+      ],
+      [
+        15,
+        "iconst_1",
+        ""
+      ],
+      [
+        16,
+        "bastore",
+        ""
+      ],
+      [
+        17,
+        "aload_3",
+        ""
+      ],
+      [
+        18,
+        "areturn",
+        ""
+      ]
+    ],
+    "handlers": []
+  },
+  "conditionalRelease": {
+    "header": "private static void lambda$handoff$0(boolean[], dev.codex.schubert.nk.storage.ResourceScope$Release, java.lang.Object) throws java.io.IOException;",
+    "ops": [
+      [
+        0,
+        "aload_0",
+        ""
+      ],
+      [
+        1,
+        "iconst_0",
+        ""
+      ],
+      [
+        2,
+        "baload",
+        ""
+      ],
+      [
+        3,
+        "ifne",
+        "13"
+      ],
+      [
+        6,
+        "aload_1",
+        ""
+      ],
+      [
+        7,
+        "aload_2",
+        ""
+      ],
+      [
+        8,
+        "invokeinterface",
+        "#54,  2           // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope$Release.close:(Ljava/lang/Object;)V"
+      ],
+      [
+        13,
+        "return",
+        ""
+      ]
+    ],
+    "handlers": []
+  },
+  "scopeFourCounters": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 52
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 5
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "storageFourCounters": {
+    "BRANCH": {
+      "covered": 533,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 39,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 1222,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 294,
+      "missed": 0
+    }
+  },
+  "selectedManifestSha256": "d629f422479cd48544eadbdee65e7d1830fb903115f6a1965daa3c7e2ffc5c9a",
+  "newCases": 6,
+  "oldTwelveTestOraclesChanged": false,
+  "original237ClosedDelta": 0,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "wholeHorizontalComplete": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ]
+}
