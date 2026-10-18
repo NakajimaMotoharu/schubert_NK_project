@@ -151,10 +151,10 @@ final class MorningNewRunAdmission {
           @Override
           public <T> T execute(DatabaseWork<T> work) throws IOException {
             Objects.requireNonNull(work, "dedicated DB work");
-            var credentials = openCredentials();
-            return ResourceScope.use(
-                credentials::close,
-                () -> {
+            return ResourceScope.acquire(
+                MorningNewRunAdmission::openCredentials,
+                OwnedTransferDirectory::close,
+                credentials -> {
                   var reader =
                       new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
                   return session.execute(reader.read(), work::execute);

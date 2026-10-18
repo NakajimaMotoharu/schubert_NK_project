@@ -76,12 +76,12 @@ final class MorningStartupLaunchOwner {
                 morning.invocation(), morning.pid(), morning.startTicks()),
             Optional.empty(),
             budget.deadlineNanos());
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    ResourceScope.use(
-        directory::close,
-        () -> {
+    var calls = LinuxDirectoryCalls.create();
+    Path startupPath = Path.of("/run/schubert-nk/startup");
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, startupPath),
+        OwnedTransferDirectory::close,
+        directory -> {
           var permits = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
           require(issued.equals(permits.current()));
           permits.readIssued();
@@ -561,14 +561,14 @@ final class MorningStartupLaunchOwner {
           pause();
         }
       }
-      var directory =
-          OwnedTransferDirectory.open(
-              LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+      var calls = LinuxDirectoryCalls.create();
+      Path startupPath = Path.of("/run/schubert-nk/startup");
       var observedChild = child;
       var information =
-          ResourceScope.use(
-              directory::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(calls, startupPath),
+              OwnedTransferDirectory::close,
+              directory -> {
                 var security = LinuxInodeSecurity.create();
                 var permits = new StartupPermitFiles(directory, security);
                 require(issued.equals(permits.current()));
@@ -705,12 +705,12 @@ final class MorningStartupLaunchOwner {
       boolean pending)
       throws IOException {
     root.recheckServiceGeneration(morning, captured);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    ResourceScope.use(
-        directory::close,
-        () -> {
+    var calls = LinuxDirectoryCalls.create();
+    Path startupPath = Path.of("/run/schubert-nk/startup");
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, startupPath),
+        OwnedTransferDirectory::close,
+        directory -> {
           var security = LinuxInodeSecurity.create();
           var permits = new StartupPermitFiles(directory, security);
           require(issued.equals(permits.current()));

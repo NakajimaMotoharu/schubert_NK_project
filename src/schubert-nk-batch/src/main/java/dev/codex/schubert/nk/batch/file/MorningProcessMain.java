@@ -84,10 +84,10 @@ public final class MorningProcessMain {
             publication) -> {
           var root = RootStartupContext.create();
           var snapshot = root.capture(RootStartupContext.Service.MORNING);
-          var requests = openRequests();
-          return ResourceScope.use(
-              requests::close,
-              () -> {
+          return ResourceScope.acquire(
+              MorningProcessMain::openRequests,
+              OwnedTransferDirectory::close,
+              requests -> {
                 var files = new BackupWorkerRequestFiles(requests, LinuxInodeSecurity.create());
                 EnvironmentInodePolicy.require(files.read().equals(request));
                 var terminal = BackupUnitTermination.create(root, snapshot);
@@ -101,10 +101,10 @@ public final class MorningProcessMain {
                           root.recheck(snapshot);
                           original.verify();
                           database.recheckConsistent(state.activation().run());
-                          var startup = openCurrent();
-                          ResourceScope.use(
-                              startup::close,
-                              () -> {
+                          ResourceScope.acquire(
+                              MorningProcessMain::openCurrent,
+                              OwnedTransferDirectory::close,
+                              startup -> {
                                 EnvironmentInodePolicy.require(
                                     new StartupPermitFiles(startup, LinuxInodeSecurity.create())
                                         .current()
