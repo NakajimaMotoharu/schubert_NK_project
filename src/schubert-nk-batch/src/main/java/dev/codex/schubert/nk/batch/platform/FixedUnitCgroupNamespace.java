@@ -56,15 +56,15 @@ final class FixedUnitCgroupNamespace {
   Snapshot observe(MaintenanceUnit unit) throws IOException {
     Objects.requireNonNull(unit, "fixed Unit");
     check();
-    var owner = new Owner(host);
-    return ResourceScope.use(
-        owner::close,
-        () -> {
+    return ResourceScope.<Owner, Snapshot, StorageIoException>acquire(
+        () -> new Owner(host),
+        Owner::close,
+        owner -> {
           var identities = new ArrayList<Identity>();
-          int directory = owner.add(host.openRoot());
+          int directory = owner.openRoot();
           identities.add(identity(directory, 0));
           for (int i = 0; i < SEGMENTS.size(); i++) {
-            directory = owner.add(host.openDirectory(directory, SEGMENTS.get(i)));
+            directory = owner.openDirectory(directory, SEGMENTS.get(i));
             identities.add(identity(directory, i + 1));
           }
           require(identities.get(1).device() == identities.get(2).device());
@@ -72,14 +72,13 @@ final class FixedUnitCgroupNamespace {
           boolean present = true;
           int leaf = -1;
           try {
-            leaf = host.openDirectory(directory, unit.serviceName());
+            leaf = owner.openDirectory(directory, unit.serviceName());
           } catch (StorageIoException failure) {
             if (failure.reason() != StorageIoException.Reason.MISSING) throw failure;
             present = false;
           }
-          // BUG277: only the open syscall's MISSING is absence. Register before any fallible IO.
+          // BUG277/SSC308: only the open syscall's MISSING is absence; registration is primitive.
           if (present) {
-            owner.add(leaf);
             var child = identity(leaf, 4);
             require(child.device() == identities.get(4).device());
             identities.add(child);
@@ -119,19 +118,44 @@ final class FixedUnitCgroupNamespace {
     if (!valid) throw new IOException("maintenance cgroup namespace unavailable");
   }
 
-  private static final class Owner {
+  // SSC308/PT-OPS-CGROUPFD001-008: package-visible for independent primitive ownership tests.
+  static final class Owner {
     private final DirectoryCalls calls;
     private final int[] descriptors = new int[6];
+    private final boolean[] secondaryFailures = new boolean[6];
     private int count;
+    private boolean closed;
 
     Owner(DirectoryCalls calls) {
-      this.calls = calls;
+      this.calls = Objects.requireNonNull(calls, "cgroup directory calls");
     }
 
-    int add(int descriptor) throws IOException {
-      require(descriptor >= 0);
+    int openRoot() throws StorageIoException {
+      guard();
+      int descriptor = calls.openRoot();
+      if (descriptor < 0) throw unavailable();
+      for (int index = 0; index < count; index++)
+        if (descriptors[index] == descriptor) throw unavailable();
       descriptors[count++] = descriptor;
       return descriptor;
+    }
+
+    int openDirectory(int parent, String name) throws StorageIoException {
+      Objects.requireNonNull(name, "cgroup directory segment");
+      guard();
+      boolean held = false;
+      for (int index = 0; index < count; index++) if (descriptors[index] == parent) held = true;
+      if (!held) throw unavailable();
+      int descriptor = calls.openDirectory(parent, name);
+      if (descriptor < 0) throw unavailable();
+      for (int index = 0; index < count; index++)
+        if (descriptors[index] == descriptor) throw unavailable();
+      descriptors[count++] = descriptor;
+      return descriptor;
+    }
+
+    private void guard() throws StorageIoException {
+      if (closed || count == descriptors.length) throw unavailable();
     }
 
     int descriptor(int position) {
@@ -139,17 +163,57 @@ final class FixedUnitCgroupNamespace {
     }
 
     void close() throws StorageIoException {
-      closeFrom(count - 1);
+      if (closed) return;
+      closed = true;
+      for (int index = 0; index < count; index++) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException known) {
+          throw closeAfterKnown(index + 1, known);
+        } catch (RuntimeException | Error primary) {
+          drain(index + 1);
+          appendSecondary(primary);
+          throw primary;
+        }
+      }
     }
 
-    private void closeFrom(int position) throws StorageIoException {
-      if (position < 0) return;
-      ResourceScope.use(
-          () -> calls.close(descriptors[position]),
-          () -> {
-            closeFrom(position - 1);
-            return Boolean.TRUE;
-          });
+    private StorageIoException closeAfterKnown(int remaining, StorageIoException primary) {
+      boolean multiple = false;
+      for (int index = remaining; index < count; index++) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException secondary) {
+          multiple = true;
+        } catch (RuntimeException | Error unknown) {
+          drain(index + 1);
+          appendSecondary(unknown);
+          throw unknown;
+        }
+      }
+      return new StorageIoException(
+          !multiple && primary.getSuppressed().length == 0
+              ? primary.reason()
+              : StorageIoException.Reason.UNAVAILABLE);
+    }
+
+    private void drain(int remaining) {
+      for (int index = remaining; index < count; index++) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException | RuntimeException | Error secondary) {
+          secondaryFailures[index] = true;
+        }
+      }
+    }
+
+    private void appendSecondary(Throwable primary) {
+      for (int index = 0; index < count; index++)
+        if (secondaryFailures[index]) primary.addSuppressed(unavailable());
+    }
+
+    private static StorageIoException unavailable() {
+      return new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
   }
 }
