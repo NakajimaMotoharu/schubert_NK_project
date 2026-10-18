@@ -28,3 +28,9 @@ FES/flaky/skipped/not-runを成功算入0、fixture/harness失敗は原因を保
 v1/65292は全六format0→protocolの既存failIfNoTests=trueで止まり対象0件、再現不成立として保存。v2は全四reactor moduleのguardを抑制せず、必要な依存契約としてPayloadGoldenVectorTest三（独立64layout/最大繰返し/並行byte）・ResourceScopeTest八（所有/例外優先/null/並行）・ApiNonSecretConfigTest七（既定/境界/非秘密テンプレート/決定性）を全source inventory付きで明示する。Redは**対象4＋依存18=22**、Greenは**対象4＋既codec7＋依存18=29**。fault再現成立は001/002の`native acquisition before scratch failure`で期待0・実1のAssertionだけとし、同じ2件の別理由失敗は認めない。依存試験を元296の成功へ加算せず当new Test sourceの選択結果とする。全体回帰/全scope成功を代用しない。YKT1220全四moduleのactual XMLまで確認する。
 
 v2/73357は全22到達・依存18/negative二成功だが当Main二が全class copyの未使用constructor/型階層検証で失敗し、**予定Red不成立**。BUG1457/YKT1221でv3をstatic対象methodの厳密copyへ是正し、ClassFile.verifyと実ロードを無効化しない。constructorの試験範囲や元Main coverageは変更せず、copyだけでそれらの合格を宣言しない。元v2ログ/XML/物理Main779同byte差0は保持する。
+
+## OPS-SCRATCH-BC001～003（Green後・独立bytecode後検証）
+
+PG5542は固定fb49c857の29case/四counter100と当class SHAを必須とし、legacy jarの当classが元273d2710全体資格のactual physical SHAと一致することを確認する。NEWARRAYがnative ctorより前、両methodの全post-prefix opcode/operand/handlerが旧版と同一（native/buffer local slot1/2入替とpool参照indexだけ正規化）を検査する。数値literalやbranch targetを正規化して変更を隠さない。これを機能goldenの代用にせず構造非変更の追加証拠にする。
+
+同じGreen runのtest classをjavapし全八fixture factoryをSourceFile/一意method/ctor直後store/その次の命令はany-finally保護済み/normal・exception end二で独立照合、source/class SHAを保存する。negative-control factoryは意図した危険型として別計上、元八の非該当に混ぜない。late/wrong handler/store/cleanup欠落とliteral変化を独立Python fixtureで拒否する。未実施の全体237や全scope当Source資格をこの二methodの後検証だけで合格化0。
