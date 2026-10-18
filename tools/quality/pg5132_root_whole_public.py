@@ -1,6 +1,10 @@
 """Allowlisted projection of original fresh3814 XML, no new tests/signing/deployment."""
 import ast
 import inspect
+import hashlib
+import json
+import os
+import sys
 import pg5058_whole_case_projection as previous
 from pg5128_root_full import SOURCE
 
@@ -36,5 +40,32 @@ def main():
     return ns['main']()
 
 
+def publish_qualification():
+    path = previous.W / 'pg5130-root-whole-qualified-v1/manifest.safe.json'
+    raw = path.read_bytes(); proof = json.loads(raw); value = proof['result']
+    out = previous.ROOT / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional' / SLOT
+    projected = json.loads((out / 'manifest.json').read_bytes())
+    if not (type(proof['actualExit']) is int and proof['actualExit'] == 0 and proof['source'] == SOURCE
+            and value['tests'] == 3814 and value['suites'] == 556 and value['mainClasses'] == 1654
+            and value['staticSixModules'] == value['FESFlakyNotRun'] == 0
+            and value['allOriginalCaseIdentitiesRetained'] is True and value['allSixFormatBeforeAnyPt'] is True
+            and projected['qualificationManifestSha256'] == hashlib.sha256(raw).hexdigest()):
+        raise ValueError('same original full and case projection qualification')
+    keys = ('productionSource','sourceSnapshot','sourceArchiveSha256','tests','suites','mainClasses',
+            'FESFlakyNotRun','staticSixModules','allSixMainBuildsPassed','allSixFormatBeforeAnyPt',
+            'formatBeforePtProofSha256','allOriginalCaseIdentitiesRetained','modules','coverage','jarHashes',
+            'allPhysicalMainSha256','changedClasses','unchangedPhysicalClasses','oldNativeImported',
+            'candidateNativePending','F03Accepted','formalAccepted','global100','serverManifestSha256')
+    output = {key:value[key] for key in keys}
+    output.update(deploymentHold=['BUG1414','YKT1178'], newSourceNativeQualified=False,
+                  unacceptedSourceIsNotPromoted=True, wholeReplayed=False, acceptedLeafDelta=0, effortPercent=None)
+    with (out / 'qualification.json').open('x') as target:
+        json.dump(output,target,ensure_ascii=False,indent=2);target.write('\n');target.flush();os.fsync(target.fileno())
+    print(json.dumps({'actualExit':0,'sha256':hashlib.sha256((out/'qualification.json').read_bytes()).hexdigest(),
+                      'tests':3814,'mainClasses':1654,'deploymentHeld':True}))
+
+
 if __name__ == '__main__':
-    main()
+    if sys.argv[1:] == ['--qualification-summary']: publish_qualification()
+    elif not sys.argv[1:]: main()
+    else: raise SystemExit('known read-only publication mode required')
