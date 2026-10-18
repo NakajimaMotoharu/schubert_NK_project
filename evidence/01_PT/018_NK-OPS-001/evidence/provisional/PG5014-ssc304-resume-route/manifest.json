@@ -1,0 +1,43 @@
+{
+  "scope": "PG4990/4992 unused, PG5004/5006 RO, PG5012/5014 finite code-only publication",
+  "status": "PASS_LIMITED_CONNECTION_NOT_FORMAL_PGPT",
+  "candidateSource": "a2ecc77ca312c383246c94ea692c4db7487112cd",
+  "priorSource": "04bbdb73b532537e3546191d72dee913b17629a0",
+  "currentSourceAfter": "a2ecc77ca312c383246c94ea692c4db7487112cd",
+  "release": "PG4980",
+  "bomSha256": "78a6f8631f188303dd28b4470868564599beda23e9cc5b5a983c7535fea56ef4",
+  "environment": "Existing isolated Linux PGPT VM, unchanged boot; JDK25.0.4, PostgreSQL18.6, signed schema028",
+  "branch": "dev-foundation",
+  "operators": ["1a332f7d47bf3f720fedfb13ff55acacdad640a6", "c678044714b0a05adda58563a58df14d86d502db", "23dec9002e1e19a08f43483b751070fe85be66cf"],
+  "testIds": ["PT-OPS-UNUSED-4992-001..004", "CONNECTION-4996-001", "PT-OPS-RO-5000-001..004", "PT-OPS-PUBLICATION-5008-001..004"],
+  "commands": ["pg4990_ssc304_unused_dispatch.py stage", "pg4990_ssc304_unused_dispatch.py place", "pg4992_ssc304_unused_post.py", "pg5004_ssc304_ro_dispatch.py stage (v2)", "pg5004_ssc304_ro_dispatch.py prepare-ro (v2)", "pg5006_ssc304_ro_post.py", "pg5012_ssc304_publication_dispatch.py stage", "pg5012_ssc304_publication_dispatch.py activate", "pg5014_ssc304_publication_post.py"],
+  "actualExitCodes": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "preservedFailure": {
+    "run": "PG5004-stage-v1",
+    "actualExit": 1,
+    "privateLogSha256": "7beee19b89c24c9aef7701670a68b24fd46c30e393ffe5bd85a7bdc5422d173c",
+    "bug": "BUG-1402",
+    "lateral": "YKT-1166",
+    "normalizedOrCountedAsPass": false
+  },
+  "independentPostResults": [
+    {"run": "PG4992", "observedUTC": "2026-10-18T06:56:47.687355Z", "manifestSha256": "db2192e3f5e75234a1f841efdd0b368fba6500ff947960f92a33ff0f31f77dda", "payloadSha256": "f97a8e258ad01c009e60a8f07045e24d7b06c3fd45d141de93197674a825ccc5"},
+    {"run": "PG5006", "observedUTC": "2026-10-18T07:02:59.245296Z", "manifestSha256": "d7ee7e9f3b78f9dfccac0eafd62eb96d55cb7fa2b577a4d902a2a2e3837476cb", "payloadSha256": "b517ba8f3dc73b0539b5555e49de15e293c6dc6264af38c11c322e493ba81b08"},
+    {"run": "PG5014", "observedUTC": "2026-10-18T07:06:23.164200Z", "manifestSha256": "de40c166c54f9ecaf022e6e3cb7245eab6eb65e16b530ff0b80e86823ed706ca", "payloadSha256": "8e70433e52454d1520d417a02430a5100f1c77b1ef75c9b21161003a657d91a8", "afterSha256": "03d3cd12a41861fa7c495949aebe5ac12cf3a638f66b13f3ef9e0ef96a059d8f"}
+  ],
+  "independentOracle": "Full11 original snapshot equality, twice-read24 SQL tables,32 complete Unit configuration fields, signed187 artifact inventory/hash,PID1 namespace RO mount and literal normal receipt,all7 finite phase snapshots,normal ten-reference return; not candidate Production-generated expected values",
+  "expectedAndActual": {
+    "databaseTablesUnchanged": 24,
+    "configurationFieldsUnchanged": 32,
+    "signedArtifactsVerified": 187,
+    "historicalNativeStreamsPreservedOnly": 80,
+    "finitePhasesVerified": 7,
+    "unitExchangeAndReload": false,
+    "businessRootStartIssued": false,
+    "oldNativeAppliedToNewSource": false,
+    "rawSecretOrDatabaseExported": false
+  },
+  "coverage": {"newProductionCounterCredit": false, "newCandidateNativeQualified": false, "formalWhole100Accepted": false},
+  "formalUnchanged": {"run": "PT-WEB-20260925-24", "tests": 1964, "scopes": 53, "effortCompletion": null, "QA051final": "HELD"},
+  "specifications": ["1036_SSC304_未使用受入・current全80保全仕様.md", "1037_SSC304_候補RO・有限公開単体接続仕様.md"]
+}
