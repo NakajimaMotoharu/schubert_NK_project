@@ -61,13 +61,13 @@ def coverage_hashes(paths, root, hash_file=selected.sha):
     return result
 
 
-def main():
+def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
     run = RUN if args.group == 'elf' else W / 'pg5124-root-pending-green-v1'
     if args.group == 'guards': run = W / 'pg5126-root-guards-green-v1'
-    if args.group == 'factory': run = W / 'pg5136-factory-io-green-v6'
+    if args.group == 'factory': run = W / factory_run_name
     public = PUBLIC if args.group == 'elf' else PUBLIC.parent / run.name
     if args.group == 'factory': public = PUBLIC.parent / (run.name + '-metadata-v2')
     required = (28, 4, 8) if args.group == 'elf' else (47, 7, 20)
@@ -87,7 +87,7 @@ def main():
     for name, digest in begin['inputs'].items():
         if selected.sha(run / 'source' / name) != digest:
             raise ValueError('original fixed snapshot input changed')
-    if selected.main_delta(run / 'source', args.group if args.group in ('elf','factory') else 'pending') != result['mainDelta']:
+    if measurement_module.main_delta(run / 'source', args.group if args.group in ('elf','factory') else 'pending') != result['mainDelta']:
         raise ValueError('actual compiled Main delta changed')
     # Independent actual XML counter/static re-read, not merely a runner exit-code assertion.
     wanted = {
@@ -209,10 +209,11 @@ def main():
              'effortPercent': None, 'oldNativeImported': False, 'newSourceNativeQualified': False,
              'wholeCoverage100': False, 'rawXmlPropertiesOrSecretsExported': False,
              'vmActions': 0, 'mavenReissued': False, 'recordedUTC': datetime.datetime.now(datetime.timezone.utc).isoformat()}
-    if args.group == 'factory':
+    if args.group == 'factory' and factory_run_name == 'pg5136-factory-io-green-v6':
         value.update(supersedesMetadataOnlyManifestSha256='384a1470e8b88a4d199329f025e8276cac9d0e2c2ea11b9378e942e268968708',
                      oldMetadataPreserved=True, bytecodeProofSha256='5ce0522445487607c5e153c0874dce22e0ef43a14e743221f16d143273f85272',
                      ssc=['SSC308'], linkedFactoryBugs=['BUG1414','BUG1416','BUG1417','BUG1418','BUG1419','BUG1420','BUG1421'])
+    if extra_fields: value.update(extra_fields)
     os.umask(0o077); public.mkdir(parents=True)
     with (public / 'manifest.json').open('x') as output:
         json.dump(value, output, ensure_ascii=False, indent=2); output.write('\n'); output.flush(); os.fsync(output.fileno())

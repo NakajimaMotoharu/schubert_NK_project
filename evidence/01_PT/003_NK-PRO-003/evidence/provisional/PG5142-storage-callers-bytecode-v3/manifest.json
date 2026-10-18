@@ -1,0 +1,128 @@
+{
+  "source": "d916dd96b9454fb012293c3e430688ce9c367a1b",
+  "selectedManifestSha256": "20aec030d8e8e3ebb656893e458f71f9322745cdf390a48fa0710d2dbcfce4d1",
+  "actualExit": 0,
+  "failures": [],
+  "classes": {
+    "StorageRootInspection": {
+      "sites": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.StorageRootInspection$Inode inspectOne(java.nio.file.Path, int, dev.codex.schubert.nk.storage.StorageIdentity, dev.codex.schubert.nk.storage.StorageIdentity, dev.codex.schubert.nk.storage.StorageIdentity) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 21,
+          "portPcs": [
+            1,
+            6,
+            16
+          ]
+        }
+      ],
+      "factoryReturnPcs": {
+        "OwnedTransferDirectory.open:": [
+          7
+        ]
+      },
+      "classSha256": "bb9fc0519f7d48f327cfdbf75349d965e1cf8b6ee99903656e4ecb29cccf2142",
+      "javapSha256": "e89fb179cd24e992f5008711d7252d7138399d28df0dee10724cf6c1e96b4e51"
+    },
+    "ExistingFileAccess": {
+      "sites": [
+        {
+          "method": "private <T> T walk(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.util.List<java.lang.String>, int, long, dev.codex.schubert.nk.storage.ExistingFileAccess$ReadOperation<T>) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 77,
+          "portPcs": [
+            55,
+            60,
+            72
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$walk$1(long, dev.codex.schubert.nk.storage.ExistingFileAccess$ReadOperation, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 42,
+          "portPcs": [
+            22,
+            27,
+            37
+          ]
+        }
+      ],
+      "factoryReturnPcs": {
+        "ExistingFileAccess$Io.openReadOnly:": [
+          10
+        ],
+        "OwnedTransferDirectory.openExistingChild:": [
+          5
+        ]
+      },
+      "classSha256": "320381b4806ccad873aa8f256bc60198cae7eff5b48a62e8cc5539d962eb120d",
+      "javapSha256": "6046c1c0b407f33117d3c80e4ad4772046595e0884a45e57921780a1c1be5ab7"
+    },
+    "ServiceConfigFiles": {
+      "sites": [
+        {
+          "method": "public dev.codex.schubert.nk.storage.ServiceConfigFiles$Contents read(dev.codex.schubert.nk.storage.ServiceConfigFiles$Service) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 25,
+          "portPcs": [
+            8,
+            13,
+            20
+          ]
+        },
+        {
+          "method": "private static java.lang.String lambda$readOne$0(dev.codex.schubert.nk.storage.ServiceConfigFiles$Io, dev.codex.schubert.nk.storage.StorageIdentity, long, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 41,
+          "portPcs": [
+            19,
+            24,
+            36
+          ]
+        }
+      ],
+      "factoryReturnPcs": {
+        "ServiceConfigFiles$Io.openReadOnly:": [
+          7
+        ],
+        "OwnedTransferDirectory.open:": [
+          11
+        ]
+      },
+      "classSha256": "c9d8c5d44008e0b9d0694b67bd5e2d8e6d7cc65e44090d07c275af0f0e459e6f",
+      "javapSha256": "ff8e4d5c6655367751c89d7bc13e03342ef699876c9ec796ceb76710a62c8dbb"
+    },
+    "LinuxFilesystemClassifier": {
+      "sites": [
+        {
+          "method": "public java.lang.String filesystem(java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 73,
+          "portPcs": [
+            56,
+            61,
+            68
+          ]
+        }
+      ],
+      "factoryReturnPcs": {},
+      "classSha256": "355887884ec2d9f6302ee1cb25f7e17e7a75d3262f0f3d1182e0b45c37330f70",
+      "javapSha256": "d6fc4e974e451344d9e2fc7ff46a5e57501c1a157aa998af07ee2193791bd201"
+    }
+  },
+  "borrowedNonApplicable": {
+    "class": "LinuxExecDescriptors",
+    "reason": "No acquired resource or changed flags before existing use; mutations under protection",
+    "classSha256": "76cd66cc5b0ce0ae9d4489cf5321d243b6117c91365b4a195848764bbdbac9df",
+    "javapSha256": "2f4610dc689458aa45c72843e6725f6e36be3f73839e5dd1298a31973182f384"
+  },
+  "wholeHorizontalComplete": false,
+  "actualHeapOomReproduced": false,
+  "formalAccepted": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ]
+}
