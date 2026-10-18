@@ -92,31 +92,31 @@ public final class BackupDatabaseWorker {
     var fixed = Objects.requireNonNull(ports.identity(), "fixed backup identity");
     var before = Objects.requireNonNull(ports.self(), "worker kernel identity");
     admit(fixed, before);
-    var credentials = Objects.requireNonNull(ports.credentials(), "credential owner");
-    ResourceScope.use(
-        credentials::close,
-        () -> {
+    ResourceScope.acquire(
+        ports::credentials,
+        OwnedTransferDirectory::close,
+        credentials -> {
           var request = BackupWorkerRequest.consume(ports.request(credentials));
           if (request.verification().isPresent()) {
             verifyExisting(request, fixed, before);
             return Boolean.TRUE;
           }
-          var runtime = Objects.requireNonNull(ports.runtime(), "runtime owner");
-          return ResourceScope.use(
-              runtime::close,
-              () -> {
+          return ResourceScope.acquire(
+              ports::runtime,
+              OwnedTransferDirectory::close,
+              runtime -> {
                 Metadata ram = directory(runtime, fixed, true);
-                var backup = Objects.requireNonNull(ports.backup(), "backup owner");
-                return ResourceScope.use(
-                    backup::close,
-                    () -> {
+                return ResourceScope.acquire(
+                    ports::backup,
+                    OwnedTransferDirectory::close,
+                    backup -> {
                       Metadata parent = directory(backup, fixed, false);
                       require(parent.device() != ram.device() || parent.inode() != ram.inode());
                       String name = request.directoryName() + ".part";
-                      var child = backup.createPrivateChild(name);
-                      return ResourceScope.use(
-                          child::close,
-                          () -> {
+                      return ResourceScope.acquire(
+                          () -> backup.createPrivateChild(name),
+                          OwnedTransferDirectory::close,
+                          child -> {
                             Metadata original = directory(child, fixed, false);
                             require(original.device() == parent.device());
                             UUID file = UUID.randomUUID();
@@ -181,15 +181,15 @@ public final class BackupDatabaseWorker {
       ChildStartupContext.Observed before)
       throws IOException {
     var claim = request.verification().orElseThrow();
-    var backup = Objects.requireNonNull(ports.backup(), "retained backup owner");
-    ResourceScope.use(
-        backup::close,
-        () -> {
+    ResourceScope.acquire(
+        ports::backup,
+        OwnedTransferDirectory::close,
+        backup -> {
           var parent = directory(backup, fixed, false);
-          var child = backup.openExistingChild(request.directoryName());
-          return ResourceScope.use(
-              child::close,
-              () -> {
+          return ResourceScope.acquire(
+              () -> backup.openExistingChild(request.directoryName()),
+              OwnedTransferDirectory::close,
+              child -> {
                 var original = directory(child, fixed, false);
                 require(original.device() == parent.device());
                 var captured =
@@ -203,12 +203,10 @@ public final class BackupDatabaseWorker {
                           var digest = digest();
                           byte[] buffer = new byte[65536];
                           try {
-                            var opened =
-                                Objects.requireNonNull(
-                                    ports.io().open(output), "held dump channel");
-                            ResourceScope.use(
-                                opened::close,
-                                () -> {
+                            ResourceScope.acquire(
+                                () -> ports.io().open(output),
+                                java.nio.channels.SeekableByteChannel::close,
+                                opened -> {
                                   var bytes = java.nio.ByteBuffer.wrap(buffer);
                                   long total = 0;
                                   while (total < claim.dumpSize()) {

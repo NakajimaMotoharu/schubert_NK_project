@@ -99,11 +99,14 @@ public final class BackupBundlePublisher {
 
   private void force(Path held, long expected, long started) throws IOException {
     guard(started);
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        Writer::close,
+        writer -> {
           guard(started);
           require(writer.size() == expected);
           guard(started);

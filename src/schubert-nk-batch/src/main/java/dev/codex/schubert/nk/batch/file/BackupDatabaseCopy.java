@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
@@ -133,11 +134,14 @@ public final class BackupDatabaseCopy {
 
   private void write(Path held, byte[] bytes, int beforeSize) throws IOException {
     guard();
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        InspectorEnvironmentPublisher.Writer::close,
+        writer -> {
           require(writer.size() == beforeSize);
           ByteBuffer buffer = ByteBuffer.wrap(bytes);
           while (buffer.hasRemaining()) {
@@ -158,11 +162,14 @@ public final class BackupDatabaseCopy {
   private void verify(Path held, Metadata expected, byte[] bytes) throws IOException {
     byte[] readback = new byte[bytes.length + 1];
     try {
-      var channel = io.open(held);
-      if (channel == null) throw unavailable();
-      ResourceScope.use(
-          channel,
+      ResourceScope.acquire(
           () -> {
+            var channel = io.open(held);
+            if (channel == null) throw unavailable();
+            return channel;
+          },
+          SeekableByteChannel::close,
+          channel -> {
             require(channel.size() == bytes.length);
             ByteBuffer buffer = ByteBuffer.wrap(readback);
             buffer.limit(bytes.length);

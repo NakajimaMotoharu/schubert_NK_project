@@ -16,19 +16,24 @@ NAMES=('viewfd001PrimitiveHighDescriptorsCloseInReverseExactlyOnce',
     'viewfd008IndependentParallelOwnersNeverShareSlotsOrConsumeEachOther')
 
 
+def revalidated_case_ids(*,view_new=False):
+    overrides=common.revalidated_case_ids()
+    overrides.update({('dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest',name):
+        {'testId':'PT-OPS-MBPUB'+str(i).zfill(3),'newIndependentCase':True,'newInThisChange':False}
+        for i,name in enumerate(morning.NAMES,7)})
+    overrides.update({('dev.codex.schubert.nk.batch.file.StartupAdmissionViewOwnerTest',name):
+        {'testId':'PT-OPS-VIEWFD-'+str(i).zfill(3),'newIndependentCase':True,'newInThisChange':view_new}
+        for i,name in enumerate(NAMES,1)})
+    return overrides
+
+
 def main():
     run=public.W/'pg5248-startup-view-owner-green-v1';result=json.loads((run/'manifest.safe.json').read_bytes())
     path=selected.ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5250-startup-view-bytecode-v1/manifest.json'
     proof=json.loads(path.read_bytes())
     if proof['actualExit']!=0 or proof['source']!=result['sourceSnapshot'] or proof['physicalMain']!=764:
         raise ValueError('same-source actual primitive/typed-catch/drain and Owner four100 first')
-    entry.configure();overrides=common.revalidated_case_ids()
-    overrides.update({('dev.codex.schubert.nk.batch.file.MorningBackupRequestPublicationTest',name):
-        {'testId':'PT-OPS-MBPUB'+str(i).zfill(3),'newIndependentCase':True,'newInThisChange':False}
-        for i,name in enumerate(morning.NAMES,7)})
-    overrides.update({('dev.codex.schubert.nk.batch.file.StartupAdmissionViewOwnerTest',name):
-        {'testId':'PT-OPS-VIEWFD-'+str(i).zfill(3),'newIndependentCase':True,'newInThisChange':True}
-        for i,name in enumerate(NAMES,1)})
+    entry.configure();overrides=revalidated_case_ids(view_new=True)
     diagnostic=selected.ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5247-view-runtime-diagnostic-v1/manifest.json'
     return public.main(factory_run_name=run.name,measurement_module=selected,required_counts=(829,98,54),
         case_overrides=overrides,extra_suites=entry.extra_suites(),
