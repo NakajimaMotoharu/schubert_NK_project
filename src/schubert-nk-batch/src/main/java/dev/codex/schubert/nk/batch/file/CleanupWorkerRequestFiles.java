@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -441,11 +442,14 @@ public final class CleanupWorkerRequestFiles {
 
   private void write(Path held, byte[] content) throws IOException {
     guard();
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        InspectorEnvironmentPublisher.Writer::close,
+        writer -> {
           require(writer.size() == 0);
           ByteBuffer buffer = ByteBuffer.wrap(content);
           while (buffer.hasRemaining()) {
@@ -476,11 +480,14 @@ public final class CleanupWorkerRequestFiles {
 
   private void read(Path held, long length, byte[] bytes) throws IOException {
     guard();
-    var channel = io.open(held);
-    if (channel == null) throw unavailable();
-    ResourceScope.use(
-        channel,
+    ResourceScope.acquire(
         () -> {
+          var channel = io.open(held);
+          if (channel == null) throw unavailable();
+          return channel;
+        },
+        SeekableByteChannel::close,
+        channel -> {
           require(channel.size() == length);
           ByteBuffer buffer = ByteBuffer.wrap(bytes);
           buffer.limit((int) length);

@@ -101,10 +101,10 @@ final class MorningBackupRequestPublication implements MorningBackupPreparation.
     Objects.requireNonNull(part, "new-only request part");
     try {
       check();
-      Owner owner = Objects.requireNonNull(open.open(), "owned request root");
-      ResourceScope.use(
-          owner::close,
-          () -> {
+      ResourceScope.acquire(
+          open::open,
+          Owner::close,
+          owner -> {
             check();
             owner.prepare(request, part);
             check();

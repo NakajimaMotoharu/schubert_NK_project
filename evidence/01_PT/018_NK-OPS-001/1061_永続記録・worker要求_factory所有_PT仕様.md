@@ -1,5 +1,7 @@
 # 永続記録・worker要求の取得前scope
 
+追加発見：Morning.publishの1scopeは本群で保護するが、openNative内部の取得後wrapper gapが別途残るためMorning class/原237の当1siteを限定完了へ計上しない。BUG1414/YKT1178へ修正前追記済み。原分類は他3classの7siteだけFIXED_LIMITED増加を要求し、追加内部経路は次の所有移管群で閉じる。現群の新規発見として記録し、仕様や試験期待を緩和しない。
+
 NK-DAT-001/NK-BAT-001/NK-OPS-001、RD DAT/BAK/OPS009・UI251・SS332/341/343/354・SSC308・BUG1414/YKT1178。主費WBS-P004-03、構成費P017-03.03（終了/close）・P017-06・P017-07.02（資源例外）、親03/07は非加算。群1197の開始.3/1/3共有ppは一度固定、1198/1199の費用leaf訂正は追加費/受入ではない。child split/専有N-T/null、先行child受入/全契約/451の未達を保つ。
 
 対象：DurableRecordFiles readFile/write/forceの3、BackupWorkerRequestFiles read/writeの2、CleanupWorkerRequestFiles read/writeの2、MorningBackupRequestPublication.publishの1。前七つのnullablechannel/customWriterはnull時だけ既UNAVAILABLE IOException、nonnull側はfactory直返却・unboundclose・全port先行。Morningはopen::open/Owner::closeでnullのNPE型を保持（内部診断messageは資源共通名へ統一、利用者向け電文/例外分類は不変）。公開前後gate/割込/所有/namespace/new-only/再open/metadata/EOF/force/原本保護/UNKNOWN/close優先順位は変更しない。実DB/Backup/VM/秘密情報操作0。

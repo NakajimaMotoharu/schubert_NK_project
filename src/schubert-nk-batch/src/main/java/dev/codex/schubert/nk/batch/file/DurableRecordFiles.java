@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
@@ -245,11 +246,14 @@ final class DurableRecordFiles {
 
   private void readFile(Path held, long expected, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    var channel = io.open(held);
-    if (channel == null) throw unavailable();
-    ResourceScope.use(
-        channel::close,
+    ResourceScope.acquire(
         () -> {
+          var channel = io.open(held);
+          if (channel == null) throw unavailable();
+          return channel;
+        },
+        SeekableByteChannel::close,
+        channel -> {
           require(channel.size() == expected);
           while (buffer.hasRemaining()) {
             int position = buffer.position();
@@ -267,11 +271,14 @@ final class DurableRecordFiles {
 
   private void write(Path held, byte[] bytes) throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(bytes);
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        InspectorEnvironmentPublisher.Writer::close,
+        writer -> {
           require(writer.size() == 0);
           while (buffer.hasRemaining()) {
             int position = buffer.position();
@@ -287,11 +294,14 @@ final class DurableRecordFiles {
   }
 
   private void force(Path held, int size) throws IOException {
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        InspectorEnvironmentPublisher.Writer::close,
+        writer -> {
           require(writer.size() == size);
           writer.force();
           require(writer.size() == size);
