@@ -102,6 +102,79 @@ final class LinuxStartupAdmissionTest {
   }
 
   @Test
+  void childfd009OwnerSetAdoptsBothAndConsumesProofBeforeAdmissionOnce() throws Exception {
+    Fixture first = new Fixture();
+    var owners = new LinuxStartupAdmission.FdOwners(A, P, first);
+    assertTrue(first.closed.isEmpty());
+    assertTrue(first.calls.isEmpty());
+    owners.close();
+    owners.close();
+    assertEquals(List.of(P, A), first.closed);
+    Fixture early = new Fixture();
+    var earlyOwners = new LinuxStartupAdmission.FdOwners(A, P, early);
+    earlyOwners.closeProof();
+    assertEquals(List.of(P), early.closed);
+    earlyOwners.close();
+    earlyOwners.closeProof();
+    assertEquals(List.of(P, A), early.closed);
+    assertThrows(NullPointerException.class, () -> new LinuxStartupAdmission.FdOwners(A, P, null));
+  }
+
+  @Test
+  void childfd010OwnerSetCompoundFailuresKeepIndependentPriorityAndBothConsumption() {
+    for (int primary = 0; primary < 4; primary++) {
+      for (int secondary = 0; secondary < 4; secondary++) {
+        int firstKind = primary;
+        int lastKind = secondary;
+        RuntimeException p = new IllegalStateException("PRIVATE-P");
+        RuntimeException a = new IllegalArgumentException("PRIVATE-A");
+        Error pe = new AssertionError("PRIVATE-P-FATAL");
+        Error ae = new AssertionError("PRIVATE-A-FATAL");
+        Fixture fixture =
+            new Fixture() {
+              @Override
+              public int close(int fd) {
+                closed.add(fd);
+                int kind = fd == P ? firstKind : lastKind;
+                if (kind == 1) return -1;
+                if (kind == 2) throw fd == P ? p : a;
+                if (kind == 3) throw fd == P ? pe : ae;
+                return 0;
+              }
+            };
+        var owners = new LinuxStartupAdmission.FdOwners(A, P, fixture);
+        if (primary == 0 && secondary == 0) {
+          assertDoesNotThrow(owners::close);
+        } else {
+          Throwable actual = assertThrows(Throwable.class, owners::close);
+          if (primary >= 2) {
+            assertSame(primary == 2 ? p : pe, actual);
+            assertEquals(secondary == 0 ? 0 : 1, actual.getSuppressed().length);
+            if (secondary != 0) {
+              StorageIoException redacted =
+                  assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
+              assertEquals("transfer storage operation failed", redacted.getMessage());
+              assertNull(redacted.getCause());
+            }
+          } else if (secondary >= 2) {
+            assertSame(secondary == 2 ? a : ae, actual);
+            assertEquals(0, actual.getSuppressed().length);
+          } else {
+            StorageIoException redacted = assertInstanceOf(StorageIoException.class, actual);
+            assertEquals(StorageIoException.Reason.UNAVAILABLE, redacted.reason());
+            assertEquals("transfer storage operation failed", redacted.getMessage());
+            assertNull(redacted.getCause());
+            assertEquals(0, redacted.getSuppressed().length);
+          }
+        }
+        assertEquals(List.of(P, A), fixture.closed);
+        assertDoesNotThrow(owners::close);
+        assertEquals(List.of(P, A), fixture.closed);
+      }
+    }
+  }
+
+  @Test
   void childfd001RootSealsImmediateCloexecAndEarlyProofClose() {
     var f = new Fixture();
     var retained = new AtomicReference<byte[]>();

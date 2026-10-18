@@ -11,6 +11,7 @@ import java.lang.invoke.MethodHandleProxies;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.IntSupplier;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -140,12 +141,15 @@ public final class LinuxSealedProof {
     if (publicBytes.length == 0 || publicBytes.length > 8192) throw invalid();
     byte[] copy = publicBytes.clone();
     try (Arena arena = Arena.ofConfined()) {
-      int descriptor =
-          retainedCreate.call(
-              arena.allocateFrom("schubert-startup-proof"), 3); // CLOEXEC|ALLOW_SEALING
-      if (descriptor < 0) throw unavailable();
-      return ResourceScope.use(
-          () -> closeOwned(descriptor), () -> prepare(arena, descriptor, copy, operation));
+      return ResourceScope.acquire(
+          () ->
+              new Descriptor(
+                  () ->
+                      retainedCreate.call(
+                          arena.allocateFrom("schubert-startup-proof"),
+                          3)), // CLOEXEC|ALLOW_SEALING
+          Descriptor::close,
+          owned -> prepare(arena, owned.fd, copy, operation));
     } finally {
       Arrays.fill(copy, (byte) 0);
     }
@@ -163,11 +167,11 @@ public final class LinuxSealedProof {
     }
     // F_SEAL_SEAL|SHRINK|GROW|WRITE; no future mutation or removal of seals.
     if (fcntl.call(descriptor, 1033, 15) != 0) throw unavailable();
-    int reserved = fcntl.call(descriptor, 1030, 128); // F_DUPFD_CLOEXEC; existing A reserves FD128
-    if (reserved < 0) throw unavailable();
-    return ResourceScope.use(
-        () -> closeOwned(reserved),
-        () -> {
+    return ResourceScope.acquire(
+        () -> new Descriptor(() -> fcntl.call(descriptor, 1030, 128)), // F_DUPFD_CLOEXEC
+        Descriptor::close,
+        owned -> {
+          int reserved = owned.fd;
           if (reserved < 128 || reserved > 65535) throw unavailable();
           return operation.execute(reserved);
         });
@@ -198,6 +202,20 @@ public final class LinuxSealedProof {
 
   private void closeOwned(int descriptor) throws StorageIoException {
     if (close.call(descriptor) != 0) throw unavailable(); // Consume once, never retry close.
+  }
+
+  private final class Descriptor {
+    private final int fd;
+
+    private Descriptor(IntSupplier acquire) throws StorageIoException {
+      int acquired = acquire.getAsInt();
+      if (acquired < 0) throw unavailable();
+      fd = acquired;
+    }
+
+    private void close() throws StorageIoException {
+      closeOwned(fd);
+    }
   }
 
   @SuppressWarnings("restricted")

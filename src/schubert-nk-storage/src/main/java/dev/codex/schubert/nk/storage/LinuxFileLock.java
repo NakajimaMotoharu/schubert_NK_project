@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.IntSupplier;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -172,22 +173,28 @@ public final class LinuxFileLock {
       StartupOperation<T> operation)
       throws IOException {
     MemorySegment state = arena.allocate(STATE);
-    int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
-    if (descriptor < 0) throw unavailable();
-    var original = new OwnedDescriptor(descriptor, close);
-    return ResourceScope.use(
-        original::close,
-        () -> {
-          int reserved = duplication.call(descriptor, 1030, 128);
-          if (reserved < 0 || reserved == descriptor) throw unavailable();
-          var owned = new OwnedDescriptor(reserved, close);
-          return ResourceScope.use(
-              owned::close,
-              () -> {
-                if (reserved < 128 || reserved > 65535) throw unavailable();
-                return locked(state, reserved, () -> operation.execute(reserved));
-              });
-        });
+    return ResourceScope.acquire(
+        () ->
+            new OwnedDescriptor(
+                () -> open.call(state, arena.allocateFrom(path), 0x80000, 0), close),
+        OwnedDescriptor::close,
+        original ->
+            ResourceScope.acquire(
+                () ->
+                    new OwnedDescriptor(
+                        () -> duplicateStartup(duplication, original.descriptor), close),
+                OwnedDescriptor::close,
+                owned -> {
+                  int reserved = owned.descriptor;
+                  if (reserved < 128 || reserved > 65535) throw unavailable();
+                  return locked(state, reserved, () -> operation.execute(reserved));
+                }));
+  }
+
+  private static int duplicateStartup(LinuxExecDescriptors.FcntlCall duplication, int original) {
+    int reserved = duplication.call(original, 1030, 128);
+    // The same FD denotes no newly acquired ownership. Preserve the original owner's close.
+    return reserved == original ? -1 : reserved;
   }
 
   // BUG-140/YKT-110: one return from the Arena owner; this helper only borrows its lifetime.
@@ -195,10 +202,12 @@ public final class LinuxFileLock {
       throws IOException {
     MemorySegment state = arena.allocate(STATE);
     // Intentional follow of the caller's retained kernel FD, never a replaceable raw pathname.
-    int descriptor = open.call(state, arena.allocateFrom(path), 0x80000, 0);
-    if (descriptor < 0) throw unavailable();
-    var owned = new OwnedDescriptor(descriptor, close);
-    return ResourceScope.use(owned::close, () -> locked(state, owned.descriptor, operation));
+    return ResourceScope.acquire(
+        () ->
+            new OwnedDescriptor(
+                () -> open.call(state, arena.allocateFrom(path), 0x80000, 0), close),
+        OwnedDescriptor::close,
+        owned -> locked(state, owned.descriptor, operation));
   }
 
   private <T> Optional<T> locked(MemorySegment state, int descriptor, Operation<T> operation)
@@ -249,9 +258,11 @@ public final class LinuxFileLock {
     private final int descriptor;
     private final CloseCall retainedClose;
 
-    private OwnedDescriptor(int descriptor, CloseCall close) {
-      this.descriptor = descriptor;
+    private OwnedDescriptor(IntSupplier acquire, CloseCall close) throws StorageIoException {
       this.retainedClose = close;
+      int acquired = acquire.getAsInt();
+      if (acquired < 0) throw unavailable();
+      this.descriptor = acquired;
     }
 
     @Override

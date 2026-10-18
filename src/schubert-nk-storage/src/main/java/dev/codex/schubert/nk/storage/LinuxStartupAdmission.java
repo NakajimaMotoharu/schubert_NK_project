@@ -129,16 +129,17 @@ public final class LinuxStartupAdmission {
         || proofFd > 65535
         || admissionFd == proofFd)
       throw new IllegalArgumentException("invalid child startup descriptors");
-    var admissionOwner = new FdOwner(admissionFd, io);
-    return ResourceScope.use(
-        admissionOwner::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> new FdOwners(admissionFd, proofFd, io),
+        FdOwners::close,
+        owners -> {
           byte[][] payload = {new byte[0]};
           try {
             Identity identity =
-                ResourceScope.use(
-                    new FdOwner(proofFd, io)::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> owners,
+                    FdOwners::closeProof,
+                    borrowed -> {
                       // Both are newly inherited (CLOEXEC0). No future process may inherit either
                       // capability.
                       require(io.fcntl(admissionFd, 1, 0) == 0 && io.fcntl(proofFd, 1, 0) == 0);
@@ -155,7 +156,7 @@ public final class LinuxStartupAdmission {
                       return new Identity(admissionFd, admission.device(), admission.inode());
                     });
             // Proof owner is consumed before callback; A owner is outermost and consumed last.
-            return operation.execute(new Lease(identity, admissionOwner), payload[0]);
+            return operation.execute(new Lease(identity, owners.admission), payload[0]);
           } finally {
             Arrays.fill(payload[0], (byte) 0);
           }
@@ -184,6 +185,33 @@ public final class LinuxStartupAdmission {
 
   private static StorageIoException unavailable() {
     return new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+  }
+
+  static final class FdOwners {
+    private final FdOwner admission;
+    private final FdOwner proof;
+    private final java.io.Closeable admissionRelease;
+    private final ResourceScope.Action<Boolean> proofRelease;
+
+    FdOwners(int admissionFd, int proofFd, Io io) {
+      Objects.requireNonNull(io, "inherited descriptor IO");
+      admission = new FdOwner(admissionFd, io);
+      proof = new FdOwner(proofFd, io);
+      admissionRelease = admission::close;
+      proofRelease =
+          () -> {
+            proof.close();
+            return Boolean.TRUE;
+          };
+    }
+
+    void closeProof() throws StorageIoException {
+      proof.close();
+    }
+
+    void close() throws StorageIoException {
+      ResourceScope.use(admissionRelease, proofRelease);
+    }
   }
 
   private static final class FdOwner {
