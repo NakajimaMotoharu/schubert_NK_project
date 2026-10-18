@@ -14,6 +14,12 @@ PG4982元74204 actual0、観測03:55:58.685613Z、payload **6484a28755039da0716d
 
 ## PT-OPS-UNUSED-4986-001～003：18 roleのdata/境界
 
+### 2026-10-18実結果
+
+新接続/guest所有のfresh認証後、4990stage67596/06:55:20～23Z actual0、place53029/06:55:33～06:56:25Z actual0、4992post51748/06:56:47Z actual0（全UTC）。operator1a332f7d4、current04bb/PG4860/083・candidatea2ecc/PG4980/78a6。全24/full11/32設定/原本Backup/native80・187署名byte・十Ref正常返却・epoch不変、起動停止reload/DB書込0。payloadSHA f97a8e258ad01c009e60a8f07045e24d7b06c3fd45d141de93197674a825ccc5、private元manifest=`work/pgpt-runs/PG379/pg4992-ssc304-unused-post-v1/manifest.safe.json`。stage log70c8da90db7970d6a9bc18ebe538180e0accb17ab6452bffe22f97df24bc2dcc、place log2c89fdccb4fc1a948db55db8e35ccd3a4a73c71bd26ab2ff38f3eee0eca3c932。
+
+place終了前にpost hostpreflightを一度呼びreceipt不存在で拒否、guest操作/output生成0。元place0回収後の実postは初回一度だけ。event1132に運用手戻りを保存、失敗を成功へ加算0。全体正式/候補nativeは未認定、旧全80は保全確認だけ。
+
 `pg4986_ssc304_unused_sources_test.py`管理3件。全18SourceをCurrent04bb/newCandidatea2eccへ一回だけ束縛、任意hash内substring/negative UUIDは変更しない。current実Root tuple/正常WARNING10/boot79aは過去データだけで起動権限ではない。actualRootPID882496は現生存値ではなく閉鎖世代の不存在検査、未知PIDへの操作0。SQL/history/Browser等のPROTECTED capsuleは実4916保持byteのまま、全Python namespace/実BUNDLE_HASH未注入・正規注入位置を検査。現80nativeはall treeを捕捉しlegacy10/72へ縮小しない。誤source/BOM/before/native count/資源/候補配備済み・native creditは拒否する。
 
 ## PT-OPS-UNUSED-4988-001：actual current ABI全18 host検証
