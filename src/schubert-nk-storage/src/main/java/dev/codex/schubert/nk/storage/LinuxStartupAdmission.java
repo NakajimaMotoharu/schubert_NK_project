@@ -129,14 +129,14 @@ public final class LinuxStartupAdmission {
         || proofFd > 65535
         || admissionFd == proofFd)
       throw new IllegalArgumentException("invalid child startup descriptors");
-    return ResourceScope.acquire(
+    return ResourceScope.<FdOwners, T, StorageIoException>acquire(
         () -> new FdOwners(admissionFd, proofFd, io),
         FdOwners::close,
         owners -> {
           byte[][] payload = {new byte[0]};
           try {
             Identity identity =
-                ResourceScope.acquire(
+                ResourceScope.<FdOwners, Identity, StorageIoException>acquire(
                     () -> owners,
                     FdOwners::closeProof,
                     borrowed -> {

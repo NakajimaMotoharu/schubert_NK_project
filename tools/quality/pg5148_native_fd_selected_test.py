@@ -5,6 +5,13 @@ import pg5148_native_fd_selected as role
 
 
 class SelectedCommandsTest(unittest.TestCase):
+    def test_nonchecked_acquisition_boundaries_explicitly_preserve_narrow_io_contract(self):
+        admission=(role.ROOT/'src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java').read_text()
+        classifier=(role.ROOT/'src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java').read_text()
+        self.assertEqual(admission.count('ResourceScope.<FdOwners, T, StorageIoException>acquire('),1)
+        self.assertEqual(admission.count('ResourceScope.<FdOwners, Identity, StorageIoException>acquire('),1)
+        self.assertEqual(classifier.count('ResourceScope.<Arena, String, StorageIoException>acquire('),1)
+
     def test_private_parent_and_native_fixture_child_umasks_are_separate(self):
         self.assertEqual(role.TEST_UMASK, 0o027)
         raw = inspect.getsource(role.main)
