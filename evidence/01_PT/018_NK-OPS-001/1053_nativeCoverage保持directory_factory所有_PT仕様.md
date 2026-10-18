@@ -1,5 +1,7 @@
 # NK-OPS-001 / native coverage保持directory IO所有
 
+実測後の追加PT（製造/実行前）：536/73の当source178ではcheckedのmode0x81a4側trueが未網羅1branch。既SS343固定readonly agent metadataに対し、新nchannel193001ReadOnlyAgentMetadataRequiresExactlyOneLink / **PT-NEXPORT193-META001**を追加する。uid/gid0・mode0100644・nlink1・dev2/ino3・空ACLのliteral mapで各Identity fieldが同literal、links0/2はIOExceptionを期待する。metadata値の照合だけでRoot/readonlyFS/署名/起動authorityを与えたと呼ばず、実namespace/DB/VMを操作しない。新Java予定0だった開始基点は保持し、測定で判明した試験追加1と記録する。新Test sourceの限定240/33を回収し、旧536を新source全試験へ算術合成しない。
+
 主WBS-P018-08、source開始86ea5a200、SSC308/BUG1414/YKT1178・SS333343354/451、RD OPS009/SYS002/UI251。群開始費.3/1/3共有ppを着手前固定、元/v3/v4未較正597.25を改訂/完成扱いしない。対象NativeCoveragePrivateFileのverifyPinnedAgent2scopeとexport5scope、全7取得後callback生成gap。能力/agent hash/pin/Root readonly/二時刻metadata/role/同owner・profile/新一回/既terminal/UNKNOWN保全/公開fieldを変えない。
 
 既承認factory内取得・全port取得前構築・同Directory一度closeへ接続するだけで、coverage分母/除外/収集点/真終端条件やagent引数は変えない。7取得すべて資源を返した後にcallback/null guardを生成せず、既wrapper先行確保/IO Reason/redaction/unknown・compound優先順位を保持する。署名/配備/Unit/native実行を発行しない。

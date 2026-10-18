@@ -480,6 +480,26 @@ final class NativeCoverageExportTest {
   }
 
   @Test
+  void nchannel193001ReadOnlyAgentMetadataRequiresExactlyOneLink() throws Exception {
+    Map<String, Object> metadata =
+        new HashMap<>(
+            Map.of("uid", 0, "gid", 0, "mode", 0100644, "nlink", 1, "dev", 2L, "ino", 3L));
+    var identity = NativeCoveragePrivateFile.checked(metadata, new byte[0], 0, 0, 0100644);
+    assertEquals(0L, identity.uid());
+    assertEquals(0L, identity.gid());
+    assertEquals(0100644, identity.mode());
+    assertEquals(1, identity.links());
+    assertEquals(2L, identity.device());
+    assertEquals(3L, identity.inode());
+    for (int links : new int[] {0, 2}) {
+      metadata.put("nlink", links);
+      assertThrows(
+          IOException.class,
+          () -> NativeCoveragePrivateFile.checked(metadata, new byte[0], 0, 0, 0100644));
+    }
+  }
+
+  @Test
   void nchannel1278001PinShapeDataPreservesShortCircuitNotPhysicalAuthority() throws Exception {
     for (long size : new long[] {-1, 0, 307842, 307844}) {
       int[] reads = {0};
