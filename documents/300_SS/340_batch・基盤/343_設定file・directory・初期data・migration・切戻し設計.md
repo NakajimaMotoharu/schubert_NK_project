@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC307 Root launch待機の内部observation port・例外分類
+
+SSC137/143/306、NK-OPS-001・WBS-P018-03.02、RD/UI/外部契約変更不要。RootStartupPendingの既native入口はroot.serviceRootDeadlineで得た同一絶対期限、同じLinuxMonotonicClock、25ms Thread.sleep、同じroot/self/issued/ownerと同じAPI/WEB選択へだけbindする。package内WaitIo（nowNanos/requireOwner/readLaunch/pause）と内部awaitLaunch(self,deadline,io)へ既順序を移す。CLI/ENV/公開constructorから差替えず、fake portはOS/DB/permit authorityを与えない。
+
+各loopの順序は clock<deadline→owner完全一致→同current/start-intent/launch読取、launch有なら既verifySelf→owner再一致→clock<deadline→return、無ければ25ms待機し同じdeadlineで次loop。期限を延長/再起算せず、等号/超過で拒否、owner/自己generationの不一致時に後段を呼ばない。InterruptedExceptionは現在threadのinterruptを再設定し既固定IOException("root launch unavailable")/秘密cause無し、未知IO/Runtime/Errorは従来どおり伝播する。
+
+launch欠落分類だけ内部LaunchRead/readLaunchへ抽出する。既requireStartIntent後、同ResourceScope action内でreadLaunchを呼ぶ位置と同一resource close/例外優先順位を保持し、StorageIoException.Reason.MISSINGだけOptional.empty、COLLISION/UNAVAILABLEその他IO/Runtime/Errorは同一失敗のまま。intent欠落やclose失敗を待機へ誤変換しない。null port/self/Optional/recordはI/O前又は返却境界でfail-fast、NPEの正常化は禁止。observeのnative identity/current/permit/guard/原本未完検査は本群では変更しない。
+
+SSC306限定実績：Main/Testbb006492a（Main5e897d92c）、5120green-v3全28/4/新8・旧6・依存14、六format0/三compile module static0、digest29行/3method/36branchmiss0、当754Mainはouter変更1/SAM追加1/他752同byte。公開manifest1fbe4b6c/1045・1046、BUG1411/1412工具・期待値是正は失敗保全のうえ限定close。新whole/native/四100・正式は未完、配備a2ecc/PG4980への変更無し。
+
 ## SSC306 Root ELF固定SHA-256の内部port・同値read-count検査
 
 SS343/SSC137/143/354・411のtestability内部具体化。対象RootServiceExecutableAdmission.digestのみ、RD/UI/353運用/外部CLI/ENV/権限・固定setpriv/Java link/hash・所有/期限・ELF条件・8MiB上限は変更しない。package内のnon-nullなDigestFactoryを追加し、既entryは固定`MessageDigest.getInstance("SHA-256")`のfresh instanceだけを渡す。caller入力からalgorithm/provider/pathを選択できず、global providerや共有mutable hookを変更しない。port/入力はresource読取り前にnonnull資格、factoryのnull返却も内部不変条件違反として拒否する。

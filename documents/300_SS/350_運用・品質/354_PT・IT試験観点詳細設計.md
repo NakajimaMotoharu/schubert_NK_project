@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC307 Root待機の順序・期限・MISSING限定と割込み独立PT
+
+SS343 SSC307、RootStartupPending。独立literal時刻/clock-owner-read-pauseの順序列を用い、API/WEB即成功、missing→成功、繰返しmissing→元期限、期限直前/同値/超過、後段owner/clock/自己世代拒否、観測IO/Runtime/Errorのidentity、null、割込み再設定/固定message/cause無しを確認する。sleep実時間を待って期待値を作らず、portの記録列・呼出回数・不実行をassertする。LaunchReadはMISSINGだけempty、他Reason/一般IO/Runtime/Errorは同一object、null port/recordは失敗を確認、nativeのstart-intent前提と同Scope内catch位置を維持する。fake成功は本物Root/Unit/権限/DB成功へ加算しない。既自己世代/StartupLaunchFiles・Root ELFと当新PTを同source選択し、六format先行・実compile三module static・元a2eccから累積予定Main byte差を照合する。変更群後のfreshwhole/当source native・四100/全正式は別受入。
+
 ## SSC306 Root ELF provider失敗・read-count同値の独立PT
 
 SS343 SSC306。default SHA256/固定64byteELF caa6f4f5…fe8は元期待値のまま、package内factory faultでNoSuch→固定IO/no cause/no inputread、未知Runtime/Error同一identity、null/欠落はI/O前拒否を確認する。global Security providerを変更せず、Reflection/private呼出しや架空coverage除外を使わない。n>0・n==positionの同値整理は過大申告8193/position8192・負/零/count違い/EOF-position/size違い/上限正当値・超過を独立fixtureで確認し、拒否を弱めない。借用channelをdigestがcloseしない/呼出側ResourceScopeが同一資源を回収/作業buffer wipeの正常・例外を検証する。新source選択PT/静的/byte差を限定資格し、旧3791/10nativeを新source合格へ合算せず、必要変更群が揃ったfresh全体/同source実経路/四100・F03/正式は別に閉鎖する。
