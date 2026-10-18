@@ -1,0 +1,480 @@
+{
+  "F03Accepted": false,
+  "acceptedLeafDelta": 0,
+  "actualExit": 0,
+  "allSixFormatBeforePT": true,
+  "builtStaticIssues": {
+    "api": 0,
+    "bootstrap": 0,
+    "protocol": 0,
+    "storage": 0
+  },
+  "caseIds": {
+    "PT-IDEM-SCRATCH001": {
+      "expectedEndAtFault": 0,
+      "expectedNativeAcquired": 0,
+      "realHeapExhaustion": false,
+      "result": "PASS"
+    },
+    "PT-IDEM-SCRATCH002": {
+      "expectedEndAtFault": 0,
+      "expectedNativeAcquired": 0,
+      "realHeapExhaustion": false,
+      "result": "PASS"
+    },
+    "PT-IDEM-SCRATCH003": {
+      "expectedEndAtFault": 0,
+      "expectedNativeAcquired": 1,
+      "realHeapExhaustion": false,
+      "result": "PASS"
+    },
+    "PT-IDEM-SCRATCH004": {
+      "expectedEndAtFault": 0,
+      "expectedNativeAcquired": 1,
+      "realHeapExhaustion": false,
+      "result": "PASS"
+    }
+  },
+  "caseScope": {
+    "codec": 7,
+    "fault": 4,
+    "necessaryDependencyContracts": 18
+  },
+  "coverageReport": {
+    "counterContentUnchanged": true,
+    "path": "api-selected-jacoco.xml",
+    "publicSha256": "e1b9a1ee4fa7521d64fb6882ba3736ef5ac0942d3b3fffa42f3baf4f20543985",
+    "rawSha256": "c0bf6f8862327c968d751bc17b8c1a28d1b44c46656f0e5d41f8e86607f84888",
+    "redactedSessionRecords": 1,
+    "scope": "entire selected API report; only named target qualified100; global source quality remains pending",
+    "semanticSha256": "02e5def98c0449db5168a0f26d0c635baefb52c8365123a4042c8d43a7e7c3da"
+  },
+  "deployedSourceUnchanged": "29612b2a484a5ab7418e02a491c4360af7444626",
+  "effortPercent": null,
+  "errors": 0,
+  "failed": 0,
+  "fixtures": {
+    "AuthenticationInboxInspectorTest.java": {
+      "anyHandlers": [
+        [
+          19,
+          68,
+          81,
+          "any"
+        ],
+        [
+          81,
+          83,
+          81,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxInspectorTest$Fixture",
+      "classSha256": "cf0e82ced020bd2f985f52114393313b1cbbfe404c3952621fbee537d3539cf6",
+      "constructorPc": 14,
+      "endPcs": [
+        70,
+        85
+      ],
+      "firstProtectedActionPc": 19,
+      "immediateStorePc": 17,
+      "method": "dev.codex.schubert.nk.api.idempotency.InboxCompletion savedBytes(dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, byte[], dev.codex.schubert.nk.api.idempotency.InboxCompletionState, dev.codex.schubert.nk.api.idempotency.InboxResultReference) throws java.lang.Exception",
+      "sourceSha256": "00c6f6e9786bbb67a9b8dae7e4481089de4f17725ffd9c0d7ae7de9985d27ab7"
+    },
+    "InboxResponseInspectorTest.java": {
+      "anyHandlers": [
+        [
+          19,
+          68,
+          76,
+          "any"
+        ],
+        [
+          76,
+          78,
+          76,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.maintenance.InboxResponseInspectorTest$Fixture",
+      "classSha256": "8b63922785c381bfe1ff5aeb7a9d4887ac7a22c1bcd91b3d5c494afa631ebbbd",
+      "constructorPc": 14,
+      "endPcs": [
+        70,
+        80
+      ],
+      "firstProtectedActionPc": 19,
+      "immediateStorePc": 17,
+      "method": "dev.codex.schubert.nk.api.idempotency.InboxCompletion saved(dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, byte[], dev.codex.schubert.nk.api.idempotency.InboxCompletionState, java.time.Instant) throws java.lang.Exception",
+      "sourceSha256": "d80b5c0ce3c2372a0e188953f2ef338e6a2b77d8b54fa0cb423a5b33e7af19dd"
+    },
+    "LogVectors.java": {
+      "anyHandlers": [
+        [
+          19,
+          68,
+          76,
+          "any"
+        ],
+        [
+          76,
+          78,
+          76,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.application.log.LogVectors",
+      "classSha256": "e66b80f28b80c2d2e5a7dc2ef79d5b54198fb1383d20fab2788d1592cbfb8c77",
+      "constructorPc": 14,
+      "endPcs": [
+        70,
+        80
+      ],
+      "firstProtectedActionPc": 19,
+      "immediateStorePc": 17,
+      "method": "static dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(byte[], java.util.UUID, long, java.lang.String) throws java.lang.Exception",
+      "sourceSha256": "7b1f242ad258ec0f404f406cf1c7767a22b77c336083fc38e665b89b10c50834"
+    },
+    "MediaReplayFixture.java": {
+      "anyHandlers": [
+        [
+          29,
+          77,
+          85,
+          "any"
+        ],
+        [
+          85,
+          87,
+          85,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.application.media.MediaReplayFixture",
+      "classSha256": "77468d982a27a1309a06ed9971b95c1b3a979ddaa2241328d66906d56650dc0f",
+      "constructorPc": 24,
+      "endPcs": [
+        79,
+        89
+      ],
+      "firstProtectedActionPc": 29,
+      "immediateStorePc": 27,
+      "method": "static dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(dev.codex.schubert.nk.api.application.media.MediaRequest, byte[]) throws java.lang.Exception",
+      "sourceSha256": "81a17140481af1c2b96db52440743c22f1d00aead98b78c6b892ad26f44d3979"
+    },
+    "QuestionQueryReplayServiceTest.java": {
+      "anyHandlers": [
+        [
+          19,
+          68,
+          76,
+          "any"
+        ],
+        [
+          76,
+          78,
+          76,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.application.question.QuestionQueryReplayServiceTest",
+      "classSha256": "b4d58f8cf5f1ff27b6599ca984662aaa6b1cc7da88c7843c4b6a588c4e9f8f1f",
+      "constructorPc": 14,
+      "endPcs": [
+        70,
+        80
+      ],
+      "firstProtectedActionPc": 19,
+      "immediateStorePc": 17,
+      "method": "static dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(byte[], java.util.UUID, long, java.lang.String) throws java.lang.Exception",
+      "sourceSha256": "7404e5c3b7cec23ec65fc27410ee7b222957a54f8470f3a39d1d5480af93ac2c"
+    },
+    "ResponseSnapshotCodecTest.java": {
+      "anyHandlers": [
+        [
+          17,
+          73,
+          80,
+          "any"
+        ],
+        [
+          80,
+          82,
+          80,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "classSha256": "f9ec375834a37e405ed436181c5fb47c5bd0222a26547d10fba333c8a9a2ece8",
+      "constructorPc": 13,
+      "endPcs": [
+        74,
+        83
+      ],
+      "firstProtectedActionPc": 17,
+      "immediateStorePc": 16,
+      "method": "private static byte[] independentCompress(byte[], byte[]) throws java.lang.Exception",
+      "sourceSha256": "e3599816867e51871714a40e24518f3d52d74fa81a09bf3ce9cb9713f81f0f70"
+    },
+    "ScenarioReplayFixture.java": {
+      "anyHandlers": [
+        [
+          29,
+          77,
+          85,
+          "any"
+        ],
+        [
+          85,
+          87,
+          85,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.application.scenario.ScenarioReplayFixture",
+      "classSha256": "2622747ab875ac8580090bcdbac50d2475ff501f07a940e2a455c05ff95f4ddd",
+      "constructorPc": 24,
+      "endPcs": [
+        79,
+        89
+      ],
+      "firstProtectedActionPc": 29,
+      "immediateStorePc": 27,
+      "method": "static dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(dev.codex.schubert.nk.api.application.scenario.ScenarioRequest, byte[]) throws java.lang.Exception",
+      "sourceSha256": "f21ed7812613d5d182834a6c35bcbb8074c97356bb6b41b6c0bb01119a474c9f"
+    },
+    "UserMutationReplayServiceTest.java": {
+      "anyHandlers": [
+        [
+          19,
+          68,
+          76,
+          "any"
+        ],
+        [
+          76,
+          78,
+          76,
+          "any"
+        ]
+      ],
+      "class": "dev.codex.schubert.nk.api.application.admin.UserMutationReplayServiceTest",
+      "classSha256": "c016445946b6fa034f09734c3fb2cb2df11e57fbf4ab27d5ed9fa196e9d2104a",
+      "constructorPc": 14,
+      "endPcs": [
+        70,
+        80
+      ],
+      "firstProtectedActionPc": 19,
+      "immediateStorePc": 17,
+      "method": "static dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(byte[], java.util.UUID, long, java.lang.String) throws java.lang.Exception",
+      "sourceSha256": "d75013e8864d9d0f7c215809702f2dc4a90cfb7762110aac1bb6c726f5adb40a"
+    }
+  },
+  "formalAccepted": false,
+  "history": [
+    {
+      "actualCases": 0,
+      "actualExit": 1,
+      "exactSelectedInventory": false,
+      "greenSelectedQualified": false,
+      "originalManifestSha256": "216985af140701b3589006bdd4ed27e0107661330d1db1cef64828ccfe7f03ab",
+      "phase": "red",
+      "phaseExits": [
+        0,
+        1
+      ],
+      "purposefulRedEstablished": false,
+      "run": "PG5540-red-v1",
+      "sourceSnapshot": "a78b94c62e278595d3869e85237708cc83ebeb76",
+      "suites": 0
+    },
+    {
+      "actualCases": 22,
+      "actualExit": 1,
+      "exactSelectedInventory": true,
+      "greenSelectedQualified": false,
+      "originalManifestSha256": "b5b6ff133b0be37819c1ee47032f4c09fa1d715dfe95f27143b9d960d1c5a749",
+      "phase": "red",
+      "phaseExits": [
+        0,
+        1
+      ],
+      "purposefulRedEstablished": false,
+      "run": "PG5540-red-v2",
+      "sourceSnapshot": "c75052c1b59d87697c8a064d02267578bb0910fc",
+      "suites": 4
+    },
+    {
+      "actualCases": 22,
+      "actualExit": 1,
+      "exactSelectedInventory": true,
+      "greenSelectedQualified": false,
+      "originalManifestSha256": "5631973e95503d23953d42dbfdc26b1f2e0196d7b736d9adc44ead94ab6e6c0a",
+      "phase": "red",
+      "phaseExits": [
+        0,
+        1
+      ],
+      "purposefulRedEstablished": true,
+      "run": "PG5540-red-v3",
+      "sourceSnapshot": "0bc2b81a5e7ccc822c9e6e3385bcb340ebf183a2",
+      "suites": 4
+    },
+    {
+      "actualCases": 29,
+      "actualExit": 0,
+      "exactSelectedInventory": true,
+      "greenSelectedQualified": true,
+      "originalManifestSha256": "fb49c8579faff830f2df86f80286f9073392d436b0b986a537b3a0bbbf8e6a78",
+      "phase": "green",
+      "phaseExits": [
+        0,
+        0
+      ],
+      "purposefulRedEstablished": false,
+      "run": "PG5540-green-v1",
+      "sourceSnapshot": "a19a9f7d940b4f9fba47e51bd9be675f4420401b",
+      "suites": 5
+    }
+  ],
+  "independentBytecodeReceiptSha256": "cc4b8e5ccd0b1f359b9acd1bb44e1d0cefad390cc5a48bc99b7c5219965fcbb1",
+  "mainBytecode": {
+    "compress": {
+      "allocationAfterNativeBeforeGuard": false,
+      "classSha256": "9edf1d418944aba0b1add8d599356379f0ce0e42d8c3931d785714518ca207ab",
+      "constructorPc": 11,
+      "endPcs": [
+        73,
+        108
+      ],
+      "handlers": [
+        [
+          23,
+          63,
+          79,
+          "Class java/lang/Throwable"
+        ],
+        [
+          81,
+          85,
+          88,
+          "Class java/lang/Throwable"
+        ],
+        [
+          15,
+          67,
+          100,
+          "any"
+        ],
+        [
+          79,
+          102,
+          100,
+          "any"
+        ]
+      ],
+      "postPrefixBodyAndHandlersUnchanged": true,
+      "scratchNewarrayPc": 3,
+      "scratchProtectedByErrorHandler": false
+    },
+    "decompress": {
+      "allocationAfterNativeBeforeGuard": false,
+      "classSha256": "9edf1d418944aba0b1add8d599356379f0ce0e42d8c3931d785714518ca207ab",
+      "constructorPc": 10,
+      "endPcs": [
+        125,
+        169
+      ],
+      "handlers": [
+        [
+          22,
+          115,
+          131,
+          "Class java/lang/Throwable"
+        ],
+        [
+          133,
+          137,
+          140,
+          "Class java/lang/Throwable"
+        ],
+        [
+          14,
+          119,
+          152,
+          "Class java/util/zip/DataFormatException"
+        ],
+        [
+          131,
+          152,
+          152,
+          "Class java/util/zip/DataFormatException"
+        ],
+        [
+          14,
+          119,
+          161,
+          "any"
+        ],
+        [
+          131,
+          163,
+          161,
+          "any"
+        ]
+      ],
+      "postPrefixBodyAndHandlersUnchanged": true,
+      "scratchNewarrayPc": 3,
+      "scratchProtectedByErrorHandler": false
+    }
+  },
+  "oldNativeImported": false,
+  "physicalMainDelta": {
+    "added": [],
+    "changed": [
+      "api:dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.class"
+    ],
+    "count": 779,
+    "declaredDeltaQualified": true,
+    "removed": []
+  },
+  "productionInputSnapshot": "a19a9f7d940b4f9fba47e51bd9be675f4420401b",
+  "redIsNotPass": true,
+  "redOriginalManifestSha256": "5631973e95503d23953d42dbfdc26b1f2e0196d7b736d9adc44ead94ab6e6c0a",
+  "selectedCases": 29,
+  "selectedOriginalManifestSha256": "fb49c8579faff830f2df86f80286f9073392d436b0b986a537b3a0bbbf8e6a78",
+  "skipped": 0,
+  "sourceFixed": true,
+  "suites": 5,
+  "targetCounters": {
+    "BRANCH": {
+      "covered": 70,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 49,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 624,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 154,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 14,
+      "missed": 0
+    }
+  },
+  "targetFour100": true,
+  "targetProgram": "NK-MSG-002/ResponseSnapshotCodec",
+  "vmActions": 0,
+  "wholeRegressionAccepted": false
+}

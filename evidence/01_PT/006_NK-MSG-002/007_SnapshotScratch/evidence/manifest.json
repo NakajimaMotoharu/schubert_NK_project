@@ -1,0 +1,72 @@
+{
+  "actual": "29 exact cases PASS/FES0; every count/Error identity assertion passed; target L154 M14 C1 B70, all missed0",
+  "actualExit": 0,
+  "branchAtSourceCommit": "dev-foundation",
+  "branchEvidence": "Recorded [dev-foundation a19a9f7d9] commit/push immediately before original Green. Original runner did not separately capture branch; no current branch substituted as a past measurement.",
+  "bugIds": [
+    "BUG-1453",
+    "BUG-1456",
+    "BUG-1457"
+  ],
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+      "spotless:check"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-api",
+      "-am",
+      "-Dtest=dev.codex.schubert.nk.api.idempotency.SnapshotScratchOwnershipTest,dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest,dev.codex.schubert.nk.storage.ResourceScopeTest,dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest,dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "-Dsurefire.failIfNoSpecifiedTests=false",
+      "package",
+      "org.jacoco:jacoco-maven-plugin:0.8.15:report",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ]
+  ],
+  "coverageScope": "Named codec target100 only; complete selected API XML retained with session hashes; new-source whole/native/451 pending",
+  "dataManifest": {
+    "path": "output/PG5544-scratch-v1/manifest.json",
+    "sha256": "e8f6006e3c0bfef23d730b9337551f73fa4ae67934dcc1af3999800078ab5f96"
+  },
+  "expected": "001/002 native acquired0; negative003/004 acquired1; end at synthetic fault0; identical fixed Error; original independent wire/JCE values unchanged",
+  "formalAccepted": false,
+  "input": "Four synthetic byte-array scratch-fault vectors, seven independent codec vectors, eighteen explicitly inventoried dependency contracts",
+  "maven": "3.9.12 fixed executable path in original commands and documented toolchain; no later version used as a past observation",
+  "oldNativeImported": false,
+  "originalCompletedUTC": "2026-10-18T22:33:12.960258+00:00",
+  "originalEnvironmentFromFiveXml": {
+    "java.specification.version": "25",
+    "java.vendor": "Ubuntu",
+    "java.version": "25.0.4",
+    "java.vm.version": "25.0.4+7-1-26.04-Ubuntu",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "os.version": "7.0.0-38-generic"
+  },
+  "originalReceiptSha256": "fb49c8579faff830f2df86f80286f9073392d436b0b986a537b3a0bbbf8e6a78",
+  "originalStartedUTC": "2026-10-18T22:31:58.187269+00:00",
+  "programId": "NK-MSG-002",
+  "rawSecretsOrPropertiesPublished": false,
+  "recordedUTC": "2026-10-18T22:43:34.017753+00:00",
+  "sourceSnapshot": "a19a9f7d940b4f9fba47e51bd9be675f4420401b",
+  "specification": "../001_SnapshotScratch_単体テスト仕様書.md",
+  "sscIds": [],
+  "wholeAccepted": false,
+  "yktIds": [
+    "YKT-1217",
+    "YKT-1220",
+    "YKT-1221"
+  ]
+}

@@ -15,4 +15,8 @@ Greenの対象ResponseSnapshotCodecは**LINE154/0・METHOD14/0・CLASS1/0・BRAN
 
 当Main二の失敗前nativeなし/固定Error同一性、negative二の旧型検出と最後の実end、元独立JCE/圧縮golden七の正常/境界/null/未知/暗号provider/破損/trailing/dictionary/bombを検証。expectedは固定count・独立vectorで、production methodから生成0。class copyは静的対象methodの命令/handler保持・scratch前Error/観測挿入だけで、JVM検証を無効化せずMain他methodのcoverageの代替0。
 
-後続PG5542は当実bytecodeでscratch先行、post-prefix本文/handlerと既例外優先の構造不変、全八fixture（修正一/非該当七）を独立照合予定。whole3900等はまだ実行しておらず、算術加算で認定しない。F03/CHR/全四100/451/trace/引継ぎ・新Source実経路は未受入。BUG1455歴史stderr同一性UNKNOWNも保持。全raw properties/秘密はprivate、公開hash/数値のみ。
+PG5542/元11257真正0、当実class SHA9edf1d418944aba0b1add8d599356379f0ce0e42d8c3931d785714518ca207abでscratch PC3がcompress ctor11/decompress ctor10より先、post-prefix本文/handlerはlocal slot1/2とpool indexだけ正規化して旧版と厳密一致。endはcompress73/108、decompress125/169の二siteを維持。全八fixture（修正一/非該当七）も即時store後の次命令がany-finally保護内/normal・exception end二を確認。private receipt SHA **cc4b8e5ccd0b1f359b9acd1bb44e1d0cefad390cc5a48bc99b7c5219965fcbb1**、独立否定Python二成功。old jarの当classも元全体actual SHAへ照合した。
+
+公開[データmanifest](evidence/output/PG5544-scratch-v1/manifest.json) **e8f6006e3c0bfef23d730b9337551f73fa4ae67934dcc1af3999800078ab5f96**／[実行context manifest](evidence/manifest.json) **6ee205b87bbc664c1bef0a34cc4b9c70a7ae22017a5567511670502bd517d5f6**。全API selected XMLはsession IDをSHAへ変換しcounter/意味を不変保持、target外も報告から除外0。OS/JDKは元五suite XMLのcoherent propertiesから抽出し現在環境で過去を埋めない。branchは実行直前source commit/pushのdev-foundation記録を根拠とし、元runnerが独立branch field未捕捉だった事実も明示。publisherの初回unused import一はcommit前に除去/lint0、既出力を再生成・上書きせずcontextを新canonical manifestへ追加した。
+
+BUG1453/YKT1217は当codec単体・全八横展開の是正/再発防止まで確認。新Source whole3900等はまだ実行しておらず算術加算で認定しない。F03/CHR/全四100/451/trace/引継ぎ・新Source実経路は未受入、全体資格前状態を維持。BUG1455歴史stderr同一性UNKNOWNも保持。全raw properties/秘密はprivate、公開hash/数値のみ。
