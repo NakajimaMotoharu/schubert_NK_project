@@ -13,3 +13,5 @@ OPS-WHOLE-SNAP004: 元3896の全case identityを保持、独立git差分で新Sn
 OPS-WHOLE-SNAP005: 出力未回収だけを理由にMaven再実行0。長期jobの元session/owner/start/begin/server manifestへ再付着し、独立5552相当を元成果読取りだけで行う。全scope current source/runのformal acceptanceはcoverage/CHR/native/F03/trace/QA051等が残る間false、IT/ST完了0。各actual command/OS/JDK/branch/commit/終了/XML/hashは元privateとsanitized publicへ記録し、raw properties/session/credentialsをGitへ保存しない。
 
 PG5550 driver source生成/全standalone namespace/count/newonly/guardのpure二成功、actual未実行。新群1281/K01.01主（他leaf参照0）開始1/3/8pp固定、v4未較正597.25の減額・完成率換算0。実結果は1140へ追補、限界枠10%以下では新規発行せず保全。
+
+PG5552独立qualifierは新3900が真正終了0の後だけ発行する。旧PG5414-six-v1全3896/1664はmanifest/Jar/XMLの固定実hashを比較oracleに使い、当Source新successへ合算しない。new当全1664がactual六Jar/classesに一致し、selected779との部分一致とcodeca一変更/残1663同byte・新Test四のみをsource/実XML両側から検査する。全namespace/static・wrong1664 map/未知変更/追加/欠落/非SHAの否定をpure二で検証済み、実5552未発行。raw3936等の別件数/古いmoduleの未実行を借りない。
