@@ -1,5 +1,17 @@
 # 1038 当a2ecc通常Root・samepeer接続仕様
 
+## 実immutable before結果
+
+5036元90769 actual0/2026-10-18 07:21:34Z/payload691f6f8cd8d3e25cca23af9c65147dbc54d530854052c9cf907a3e96fc02f3d3。全11原像のbeforeSHA=03d3cd12a41861fa7c495949aebe5ac12cf3a638f66b13f3ef9e0ef96a059d8f、24表/旧native80/当公開Unit bytesとfresh live tuple一致、DB読取0/raw非公開。Rootの真正終端/全24post/新native資格とは別の限定証拠。
+
+## PT-OPS-BROWSER-5053-001～006：当source後続準備
+
+5045はlocal reboot後の新SOCKS（55169 loopbackのみ）をnew-onlyで作り、private localboot/parent ticks-argv・child ticks-argv/executable/PPID/全UID-GID/正確listener inodeを前後二読。元1191の厳密qualify/captureを別namespaceへ束縛し歴史EXPECTEDを変更しない。旧proxyへ再付着/鍵転送/Root操作0、既listener不在を要求する。
+
+5046は元12caseのsource正literal一箇所だけ変更し、元のassertion/業務入力/期待値を不変に固定、当5038真正DONEなしに実preflightしない。5048は同四owner/current/Source/BOM/実socket/TLS/0cap/no-new-privilegeを前後照合し、freshSOCKSも完全一致、browser12caseと独立all24差分を要求。whole/terminal phaseはnumeric actual0・同source・dict schemaに厳密、bool/foreign/null拒否。
+
+5050は当5042のORACLEをROOT_ORACLEとして全byte保持、当Browser前後/owner/contextの完全CHAINと独立Browseroracleを接続し、真正GUARDは別capsuleのまま保持する。親/子や歴史sourceの成功をunionしない。5052は当chainで認証したtyped18を私有出力するだけで、新実行許可ではない。compositeは元SSHのstart receipt/ownershipを先に保存しchild.waitで真正exitまで保持、timeout後の独立queryへ勝手に切替えない。6管理試験0/Production PT加点0、実Browser/wholepostはRoot真正DONE後だけ発行する。
+
 ## 実起動受理・同世代live（真正終端ではない）
 
 operator2926038a2、5034元34347実0/07:14:04Z、5032元12373実0/07:14:12Z/payload d6a14e724498427b02e99de10c4f83cd72aa13c4986f2a052ae3247b05884b4f、候補query20/保護10/Outbox669/通知6（before限定・raw非公開）。5022元20780 client0/07:15:01Z/payload af21f495d643365d89659cf15726a9b8558f1cc4fdd8de40aebafd5acf1aa3aa、元1800秒・一start・正常metadataRef返却。5024元10425fresh実0/07:15:58Z/payload99db781574e9804d738eb7d331058a5fee92611e8eb8e3fec70a230c12b1a465、同boot/source/BOM/run/cutoff/activation/Invocation/Job/Root生成を一致確認。全識別子は私有manifest、成功は親真正終端と独立に判定する。watch80748は同元だけ継続。
