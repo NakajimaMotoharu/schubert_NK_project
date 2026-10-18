@@ -1,5 +1,7 @@
 # NK-OPS-001 native coverage directory所有 限定結果
 
+readonly metadata追補：Test source **50bc4cd2e7b4d96e0f8b6d3f0668eaa304f99a1f**、Production全764classは178と同byte。PG5164元61546終了0/240PT33suite/六format0/三static0、新PT-NEXPORT193-META001のreadonly mode0100644・単一link/不正0,2を独立literalで確認、公開PG5166 **4a36eae33387e2b55b3debf71e17896ad9b8ae2628bfe11133e0d2dcf23af7c6**。当小選択のcheckedは15行1method全covered/28branch covered・8missで、他suiteを含む旧536の35covered/1missと範囲が異なり加減算0。新caseが未網羅側readonly agent metadataを検証したが、class四100や新全537の合格とは呼ばない。次の必要変更群で全bootstrapを再実行し当branch全量を測定する。開始時新Java0→測定発見による追加1を分離、元全3832予定は新Test追加後3833予定へ（未実行のまま）。
+
 仕様1053/SSC308/BUG1414/YKT1178、source **178b8d6d9d17bd610953ba1f2122e970af2d174b**・dev-foundation。PG5156-v2元93972真正exit0、`python3 tools/quality/pg5156_native_coverage_selected.py green --group factory`、**536PT/73suite/FES/flaky/notrun0**。bootstrap全42suite319PT（Java file47の他5はfixture/probe）、storage全25suite180PT、Root関連6suite37PTを当snapshotで実行、別run成功の合成0。新Java case0、既独立41・関連495、六format先行0/NullAway・ErrorProne0/三compile module SpotBugs0。
 
 storage四counter1212行/291method/39class/531branch各miss0。対象NativeCoveragePrivateFileは145行/27method/1class/149branch covered、**miss29行/12method/0class/1branch**で未100。未実行12methodは固定Root agentの実pathやproduction portであり、旧nativeを合算せず同source実経路で別資格する。checkedのreadonly agent mode0x81a4側の未網羅1branchは、次の独立metadata goldenを追加してhostでも明示検証する（仕様1053追補、既536を新test source成功へ転用しない）。
