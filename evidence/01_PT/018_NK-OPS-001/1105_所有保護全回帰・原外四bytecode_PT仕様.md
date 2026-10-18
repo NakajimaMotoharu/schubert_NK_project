@@ -12,7 +12,7 @@ source29612b2a484a5ab7418e02a491c4360af7444626固定、原baselinee8ecff1bec1d7d
 
 - ApiApplicationPreparation: codecs/transfer/assets/outboxのcompiler TWRはfactory返却→astore→次body操作を覆う例外範囲・既逆順closeを検証。
 - InspectorApplication: native credential rootと内部root/password/connectionsの各TWR、factory途中失敗でも以前取得分のcloseを確認。
-- BootstrapAdminMain: root/username/password/dbPassword/source/pool/connectionのTWRと既secret消去、read-only inspectionで新ADMINを実行しない。
+- BootstrapAdminMain: root/username/password/dbPassword/source/connectionのTWR六箇所と既secret消去、read-only inspectionで新ADMINを実行しない。初稿のpoolは当entryに無く、Sourceが直接Connectionを返すため母数へ入れない。
 - WebNativeRuntime: runtime本体/全状態はstart前、broker/codecs/transfer/assets等の返却直後field store、WebProcessMainの事前全port→WebRuntimeExecution保護で部分ownerのclose/UNKNOWN保持。元WebRuntimeStop期限と順序を維持する。検索だけで非該当認定しない。
 
 四sourceファイルはe8ecから不変であることをsource diffで確認済みだが、それだけでbytecode受入としない。個々のprotect PC/handler/field store/外側scopeを証跡へ記録する。TWRの元addSuppressed契約はcommon ResourceScopeの異なる優先へ勝手に置換しない。実取得の追加gapがあればBUG/YKTを修正前登録し、必要な設計補足を先行する。
