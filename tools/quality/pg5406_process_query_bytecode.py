@@ -6,8 +6,8 @@ import pg5150_native_fd_bytecode as native
 import pg5265_owned_factory_proof as publish
 import pg5404_process_query_selected as entry
 
-SOURCE='93616b8fba14489ba83f8ee548d5bead808b05f0'
-RUN='pg5404-process-query-green-v2'
+SOURCE='29612b2a484a5ab7418e02a491c4360af7444626'
+RUN='pg5404-process-query-green-v3'
 OUT='PG5406-process-query-bytecode-v1'
 PACKAGE='dev.codex.schubert.nk.batch.platform.'
 
