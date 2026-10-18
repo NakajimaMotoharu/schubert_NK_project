@@ -1,4 +1,6 @@
-# NK-PRO-003 / SSC308 IO所有単体仕様（製造前）
+# NK-PRO-003 / SSC308 IO所有単体仕様（製造前仕様と限定実行追補）
+
+2026-10-18追補：「製造前」は初版時点。現source6d7a54a01、factory001～012はPT-IOFACT-001～012に一対一、dirfactory001～003はPT-DIRFACT-001～003、RootEntryRejectionTest.guard004はPT-ROOTGUARD-004。DIR001は実kernel root inode/一度close、002はnull/取得失敗同一例外/未所有close0、003はclose失敗時FD消費と設定 '/'拒否。Root004はprimitive319/負値/取得例外/nullの所有境界を独立固定期待で確認。実222件と実bytecode/全storage四counterの結果・全失敗履歴・hash・commandは017を参照。新source全体/native/横展開の合格は主張しない。
 
 主担当WBS-P003-08（ResourceScope）/P003-04（OwnedTransferDirectory）、Root/N15参照費0。RD FIL001009/OPS009・UI237251、SS333/343/354・SSC063/304/308、BUG1414/YKT1178。起点sourcee8ecの親全体/独立資格を先に回収し、凍結src/Testを変更しない。設計only9762b2da5→origin/main **b92c887e399b4b0e9ae8552045c0a5b1a425ae87/PR156**（四文書のみ、通常merge/remote確認）。群1180開始費.8/3/8共有pp固定、元/v3/v4/歴史受入を上書きせず、専有費/N-T/消化率null。
 
