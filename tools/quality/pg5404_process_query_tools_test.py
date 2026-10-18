@@ -40,5 +40,26 @@ class QueryScope(unittest.TestCase):
         self.assertTrue(entry.REQUIRED<=entry.selected.EXTRA_CHANGED)
         self.assertEqual(entry.repetitions(),entry.previous.repetitions())
 
+    def test_query_ports_reject_common_io_normalization_or_legacy_use(self):
+        from pg5406_process_query_bytecode import query_sites
+        def method(kinds):
+            return {'header':'fixture','ops':[(index,'invokedynamic',kind) for index,kind in enumerate(kinds)]+
+                [(3,'invokestatic','ProcessResourceScope.acquire:')],'handlers':[]}
+        ports=['ResourceScope$Acquire;','java/util/function/Consumer;','ProcessResourceScope$OwnedQuery;']
+        self.assertEqual(len(query_sites([method(ports)])),1)
+        for invalid in [ports[:2],['ResourceScope$Acquire;','ResourceScope$Release;','ResourceScope$OwnedAction;'],ports[::-1]]:
+            with self.assertRaises(ValueError):query_sites([method(invalid)])
+        with self.assertRaises(ValueError):
+            query_sites([{'header':'old','ops':[(0,'invokestatic','ProcessResourceScope.use:')],'handlers':[]}])
+
+    def test_success_path_never_executes_null_only_rejection(self):
+        from pg5138_factory_bytecode import positive_path
+        method={'header':'fixture','handlers':[], 'ops':[(0,'astore_1',''),(1,'aload_1',''),
+            (2,'ifnull','5'),(3,'aload_1',''),(4,'goto','8'),(5,'aload_1',''),
+            (6,'invokestatic','Objects.requireNonNull:'),(7,'checkcast','Process'),(8,'putfield','process'),(9,'return','')]}
+        self.assertEqual(positive_path(method,0,None,'nonnull'),[0,1,2,3,4,8])
+        bad={'header':'bad','handlers':[],'ops':[(0,'invokestatic','Objects.requireNonNull:'),(1,'return','')]}
+        with self.assertRaises(ValueError):positive_path(bad,0,None,'nonnull')
+
 
 if __name__=='__main__':unittest.main()

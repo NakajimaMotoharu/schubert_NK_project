@@ -6,8 +6,8 @@ import pg5150_native_fd_bytecode as native
 import pg5265_owned_factory_proof as publish
 import pg5404_process_query_selected as entry
 
-SOURCE='053b1aacbd074c8f780902ba3eeedc62fc695fab'
-RUN='pg5404-process-query-green-v1'
+SOURCE='93616b8fba14489ba83f8ee548d5bead808b05f0'
+RUN='pg5404-process-query-green-v2'
 OUT='PG5406-process-query-bytecode-v1'
 PACKAGE='dev.codex.schubert.nk.batch.platform.'
 
@@ -31,7 +31,7 @@ def main():
     work=entry.selected.ROOT.parent/'pgpt-runs/PG379';run=work/RUN;prior_run=work/'pg5390-archive-pipeline-green-v2'
     result=json.loads((run/'manifest.safe.json').read_bytes());prior=json.loads((prior_run/'manifest.safe.json').read_bytes())
     if type(result['actualExit']) is not int or result['actualExit']!=0 or result['phaseExits']!=[0,0] or (
-        result['sourceSnapshot'],result['tests'],result['suites'])!=(SOURCE,1163,137):
+        result['sourceSnapshot'],result['tests'],result['suites'])!=(SOURCE,1164,137):
         raise ValueError('current original terminal/source/complete inventory first')
     if prior['actualExit']!=0 or prior['sourceSnapshot']!='60bc8f54b154e82c16ad3a32a71143d7ca80affe':
         raise ValueError('exact prior byte reference only, never counter import')
@@ -55,18 +55,24 @@ def main():
     if 'Class java/lang/InterruptedException' not in prefix['handlerTypes']:
         raise ValueError('declared interruption protected with original query semantics')
     proofs['ProcessResourceScope']={'scopes':[], 'factoryPrefix':prefix,**hashed}
-    for name,nullable in [('SystemctlStateSource$StdIo',True),('InspectorUnitProbe$SafeStream',False),('InspectorUnitProbe$QueryProcess',False)]:
+    for name in ('SystemctlStateSource$StdIo','InspectorUnitProbe$SafeStream','InspectorUnitProbe$QueryProcess'):
         methods,hashed=bytecode.decode(run/'source','batch',PACKAGE+name)
         constructor=bytecode.one([m for m in methods if name+'(' in m['header']],'one complete wrapper constructor')
         opened=bytecode.index_of(constructor,'ResourceScope$Acquire.open:')
         if not any('Object."<init>":' in op[2] for op in constructor['ops'][:opened]):
             raise ValueError('wrapper construction begins before getter/start')
         positive=bytecode.positive_path(constructor,opened+1,None,'nonnull')
-        if nullable and any(op[1].startswith('if') for op in constructor['ops'][opened+1:]):
-            raise ValueError('Systemctl getter remains nullable until all three protected')
-        if not nullable and not any(op[1] in ('ifnonnull','ifnull') for op in constructor['ops'][opened+1:]):
-            raise ValueError('Inspector still rejects missing process/stream immediately')
-        proofs[name]={'scopes':[],'nullableDeferredAdmission':nullable,'postAcquisitionSuccessPcs':positive,**hashed}
+        if any(op[1].startswith('if') for op in constructor['ops'][opened+1:]):
+            raise ValueError('wrapper only stores nullable return; admission is protected by owned action')
+        proofs[name]={'scopes':[],'admissionInOwnedAction':True,'postAcquisitionSuccessPcs':positive,**hashed}
+    admissions=[]
+    for method in decoded['InspectorUnitProbe$NativeReader']:
+        points=[i for i,op in enumerate(method['ops']) if '$SafeStream.required:' in op[2] or '$QueryProcess.required:' in op[2]]
+        if not points:continue
+        if len(points)!=1 or any(not op[1].startswith('aload') for op in method['ops'][:points[0]]):
+            raise ValueError('each Inspector owner admits immediately, before any next getter or body action')
+        admissions.append(method['header'])
+    if len(admissions)!=8:raise ValueError('both queries preserve four immediate admissions each')
     # The wrapper factory allocates the wrapper BEFORE the constructor may invoke any getter/start.
     constructed={}
     for outer,wrapper,expected in [('SystemctlStateSource','SystemctlStateSource$StdIo',3),
@@ -94,10 +100,12 @@ def main():
         for v in c.findall('counter') if v.get('type') in ('LINE','METHOD','CLASS','BRANCH')}
         for c in report.findall('package/class') if c.get('name') in names}
     if len(targets)!=6:raise ValueError('every query target including previous unexecuted NativeReader')
+    if any(v['missed'] for counters in targets.values() for v in counters.values()):
+        raise ValueError('all query classes four100, no ignored deadline/exception branch')
     value={'source':SOURCE,'actualExit':0,'physicalMain':767,'semanticClasses':7,'proofs':proofs,
         'nestedDebugEquivalent':debug,'otherPhysicalClassesUnchanged':len(after)-len(changed)-len(entry.ADDED),
         'addedMain':sorted(entry.ADDED),'removedMain':[],'netMainGrowth':2,'targetClassCounters':targets,
-        'queryWrapperFactories':constructed,'oldQueryUseOpcodeAndHandlerSemanticsEqual':True,
+        'queryWrapperFactories':constructed,'immediateOwnedAdmissions':admissions,'oldQueryUseOpcodeAndHandlerSemanticsEqual':True,
         'originalScopeSites':12,'currentOwnedScopes':12,'selectedManifestSha256':entry.selected.sha(run/'manifest.safe.json'),
         'implementationDecision':'PG-D432','bugs':['BUG1414'],'ykt':['YKT1178'],'ssc':['SSC308'],
         'wholeHorizontalComplete':False,'formalAccepted':False,'nativeImported':False,'vmActions':0,'testReplays':0}

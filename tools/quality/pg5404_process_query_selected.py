@@ -30,5 +30,5 @@ def extra_suites():
 
 if __name__=='__main__':
     configure()
-    raise SystemExit(selected.main(stem_override='pg5404-process-query',version_override='v2',
+    raise SystemExit(selected.main(stem_override='pg5404-process-query',version_override='v3',
         extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases(),case_repetitions=repetitions()))
