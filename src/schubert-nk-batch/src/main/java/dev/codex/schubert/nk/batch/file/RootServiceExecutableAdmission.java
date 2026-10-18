@@ -47,6 +47,12 @@ final class RootServiceExecutableAdmission {
     void requireAbsent(Path held) throws IOException;
   }
 
+  /** SSC306/PT-ROOTELF-SSC306-001..004: internal failure port, never external configuration. */
+  @FunctionalInterface
+  interface DigestFactory {
+    MessageDigest create() throws NoSuchAlgorithmException;
+  }
+
   private RootServiceExecutableAdmission() {}
 
   @SuppressFBWarnings(
@@ -316,9 +322,16 @@ final class RootServiceExecutableAdmission {
 
   static String digest(SeekableByteChannel input) throws IOException {
     Objects.requireNonNull(input);
+    return digest(input, () -> MessageDigest.getInstance("SHA-256"));
+  }
+
+  /** SSC306: borrowed channel, fixed native binding above; no provider/global mutation. */
+  static String digest(SeekableByteChannel input, DigestFactory factory) throws IOException {
+    Objects.requireNonNull(input);
+    Objects.requireNonNull(factory);
     MessageDigest hash;
     try {
-      hash = MessageDigest.getInstance("SHA-256");
+      hash = Objects.requireNonNull(factory.create());
     } catch (NoSuchAlgorithmException known) {
       throw new IOException("root executable unavailable");
     }
@@ -333,7 +346,8 @@ final class RootServiceExecutableAdmission {
           require(bytes.position() == 0);
           break;
         }
-        require(n > 0 && n == bytes.position() && n <= material.length);
+        // ByteBuffer.position <= capacity == material.length, so equality also proves the bound.
+        require(n > 0 && n == bytes.position());
         for (int i = 0; i < n && total + i < header.length; i++)
           header[(int) total + i] = material[i];
         total += n;
