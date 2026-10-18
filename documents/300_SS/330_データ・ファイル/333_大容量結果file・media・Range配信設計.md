@@ -1,5 +1,15 @@
 # 大容量結果file・media・Range配信設計
 
+## SSC308 取得前port構築・factory内IO所有とdescriptor wrapper先行確保
+
+BUG1414/YKT1178、FIL001009/OPS009・UI237251、WBS-P003-08（共通scope）/P003-04（保持directory）。RD/UI/外部file/HTTP/権限契約変更不要。既ResourceScope.useの引数検証・IO正規化/既Reason・unknown例外優先順位はそのまま保持する。追加factory所有入口ではAcquire<R,E extends IOException>/Release<R>/OwnedAction<R,T>を全て取得前に構築・nonnull検証し、helper内で同一Rを取得した直後から保護域に入れ、releaseへ当同一objectを一度だけ渡す。factoryのchecked E・Runtime/Error失敗はbody/release無しで元identityを伝播、null返却はfail-fast。bodyのnullable結果契約は既use同様に明示して許容する。
+
+取得後のbody/close規則：成功はbody結果→release、IOはStorageIoExceptionの既path-free固定messageへ変換し、既storage reasonはsuppressed無しの場合だけ保持する。primary IOにsecondary Runtime/Errorならsecondaryを優先、その他はprimaryを保持しsecondaryを固定StorageIoExceptionで秘匿suppressedへ追加、同一object/self-suppressionを新規導入しない。Java TWRの別優先順位へ置換しない。Acquire以後・保護域前のcallback/new/boxingをなくし、実Java25 bytecodeと独立matrixで確認する。新公開Java helperは内部adapterの所有補助でありHTTP/CLI/ENVから資源能力を追加しない。
+
+OwnedTransferDirectoryのstateLock等のJava wrapperはnative open前に確保する。openRoot(DirectoryCalls)を既openRoot能力の同一FD wrapperとして追加し、設定pathのopenがroot '/'を拒否する既制約は変更しない。openExistingDate/Childはwrapper確保→open→descriptor格納→返却、open/openDate/createPrivateChild/publishChild等のowned scopeは上記factory入口で取得から保護する。EntryHandleもEntryOpenのprimitive int取得前にobject確保し、取得後boxingやcallback確保をしない。既NOFOLLOW/segment/名前/CREATE_NEW/0640・0600/0700/同期/非上書き・rename後不確実性/descriptor消費前close・借用path非exportを維持、転送は新wrapper構築成功後だけ元descriptor=-1とする。
+
+まずRoot ELF/待機の同経路と共通directoryの取得siteを是正する。全Main68file237 ResourceScope.use候補は各外側保護域/既所有者/transfer/borrowを個別判定し、修正又は非該当根拠と再発防止PTまで記録する。候補検索だけでYKT1178をcloseしない。元e8ec全体/旧native/原本/成功・失敗証拠は保全、新sourceへ旧成功を輸入せず、未是正sourceは配備しない。
+
 SSC063継続/PG171・BUG195/YKT154: 同じIO close優先順位をDurableRecordFiles.readFile/write/force、InspectorEnvironmentReader.readFile、InspectorEnvironmentPublisher.writeNew/forceExisting、ExistingFileAccess.walkのchannel/childへ適用する。nullable IO resourceは従来の固定IO拒否（ExistingFileAccessのnonnull channelは境界NPE拒否）を所有受領前に実施し、callbackの値/IO順/サイズ/metadata/partial保全/借用root・非公開能力を変更しない。8所有scopeを既知IO＋未知cleanup/同一未知body＋cleanupの各Runtime/NPE/Error3型で独立再試験する。Directory/Process/JDBC等の残候補は別段で未完了を維持する。IO型と回復責務を変える一般frameworkや追加coverage除外は採用しない。
 
 SSC063/PG170・BUG195/YKT154（先行6e59c153）: resource bodyとcloseの複合は標準TWR self-suppressionへ依存せず明示的に解決する。Storage.ResourceScope.use(Closeable,Action<T>)は受領したcloseを全経路で1回だけ実施し、body成功後のclose成功まで返さない。close/action nullは所有受領前に拒否。generic callbackの明示nullable結果は透過し、呼出側の既存null契約を変えない。

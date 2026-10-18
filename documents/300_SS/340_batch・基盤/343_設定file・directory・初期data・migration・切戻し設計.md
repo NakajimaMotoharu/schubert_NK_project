@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC308 Root IO所有の取得後callback構築gap是正
+
+SS333 SSC308・BUG1414/YKT1178、SSC137/143/304/306307。RootServiceExecutableAdmissionのtop Root FD・usr/bin/etc/alternatives/opt/JDK/java-bin/channel、RootStartupPendingのlaunch/observe directoryは同一取得順/metadata/pin/SELinux外部設定/ACL/能力・世代/borrowed contextを保持し、取得前port構築→factory内取得→同一資源scopeへ接続する。topは既DirectoryCalls.openRootをOwnedTransferDirectory.openRootの同FD wrapperで扱い、追加open/close再試行/任意pathを導入しない。exec直前の既bin/usr明示close・その後のidempotent owner解放、全observer正常close先行、親30分/既Unit期限/同一世代・所有の条件は変えない。close・factory例外のidentity/redaction/優先順位はSS333どおりで、JDBC TWR契約へ混同しない。
+
+既e8ecのPG5128は別固定sourceとして全体/独立資格を回収するが、当gap是正前には署名/配備しない。新共通helper/Directory/Root変更群の所定fresh whole/同source実経路/native・全四100/F03/451を別に閉鎖し、旧3791/10nativeや途中3814成功を新source成功へ合算しない。
+
+SSC307限定実績：source558974ad9、5124元80431 actual47/7/新待機12、六format0/三compile static0/757予定差、待機21行/2method/8branch全miss0、同source ELF込み50行/5method/44branch、公開663063b3/1047・1048。追加Testのみe8ecで5126実50/8/新guard3、全Root Io0/公開bcc4ff2b/1049・1050。これらは正常・例外portの限定証明で、今回gapを否定する根拠にはしない。製造/限定PT完了、新全体/native/正式未受入。
+
 ## SSC307 Root launch待機の内部observation port・例外分類
 
 SSC137/143/306、NK-OPS-001・WBS-P018-03.02、RD/UI/外部契約変更不要。RootStartupPendingの既native入口はroot.serviceRootDeadlineで得た同一絶対期限、同じLinuxMonotonicClock、25ms Thread.sleep、同じroot/self/issued/ownerと同じAPI/WEB選択へだけbindする。package内WaitIo（nowNanos/requireOwner/readLaunch/pause）と内部awaitLaunch(self,deadline,io)へ既順序を移す。CLI/ENV/公開constructorから差替えず、fake portはOS/DB/permit authorityを与えない。
