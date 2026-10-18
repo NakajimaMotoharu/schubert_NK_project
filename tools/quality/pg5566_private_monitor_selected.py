@@ -25,6 +25,20 @@ EXPECTED_CHANGES={
  'web:dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.class'}
 
 
+def physical_delta(prior,physical,phase):
+    if set(prior)!=set(physical):raise ValueError('no missing/added physical Main allowed')
+    changed={k for k in prior if prior[k]!=physical[k]}
+    allowed={k for k in prior if any(k==owner+'.class'or k.startswith(owner+'$')for owner in(
+        'batch:dev/codex/schubert/nk/batch/platform/BackupUnitStartClient',
+        'batch:dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient',
+        'bootstrap:dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission',
+        'web:dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime'))}
+    # Added lock/body lines also shift sibling nested-class LineNumberTable. Retain every raw
+    # physical difference, and require independent debug-only qualification, never ignore it.
+    okay=changed==set()if phase=='red'else EXPECTED_CHANGES<=changed<=allowed
+    return changed,okay,sorted(changed-EXPECTED_CHANGES)
+
+
 def inventory(snapshot,phase):
     specs={**DEPENDENCIES,CODEC:('api',7),**(OWNERS if phase=='green'else{WEB:OWNERS[WEB]})};expected={}
     for name,(module,count)in specs.items():
@@ -89,15 +103,16 @@ def main():
         if report.exists():coverage[module]={c.get('name'):{v.get('type'):{'covered':int(v.get('covered')),'missed':int(v.get('missed'))}for v in c.findall('counter')}for c in ET.parse(report).getroot().findall('package/class')if module+':'+c.get('name')+'.class'in EXPECTED_CHANGES}
     physical={m+':'+p.relative_to(snapshot/('src/schubert-nk-'+m+'/target/classes')).as_posix():sha(p)for m in built for p in(snapshot/('src/schubert-nk-'+m+'/target/classes')).rglob('*.class')}
     prior={k:v for k,v in before['allPhysicalMainSha256'].items()if k.split(':',1)[0]in built}
-    changed={k for k in prior.keys()&physical.keys()if prior[k]!=physical[k]}
+    changed,physical_ok,debug_pending=physical_delta(prior,physical,args.phase)
     fixed=all(sha(snapshot/name)==digest for name,digest in inputs.items())and subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()==head and not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT)
-    physical_ok=set(prior)==set(physical)and changed==(EXPECTED_CHANGES if args.phase=='green'else set())
     red=fixed and physical_ok and actual==expected and phases==[0,1]and not errors and not skipped and failed==[[WEB,'monitor004CallerLockCannotBlockConfirmedLifetimeClose']]and expected_failure
     green=fixed and physical_ok and actual==expected and phases==[0,0]and not failed and not errors and not skipped and set(static)==set(built)and not any(static.values())
     value={'actualExit':next((v for v in phases if v),0),'sourceSnapshot':head,'branch':branch,'baseProductionSource':BASE,'phase':args.phase,'startedUTC':started,'completedUTC':utc(),
         'phaseExits':phases,'sourceFixed':fixed,'expectedCases':sum(map(len,expected.values())),'actualCases':sum(map(len,actual.values())),'suites':len(actual),
         'exactSelectedInventory':actual==expected,'failed':failed,'errors':errors,'skipped':skipped,'purposefulRedEstablished':red,'greenSelectedQualified':green,
-        'staticBuiltModules':static,'targetCounters':coverage,'physicalMain':{'count':len(physical),'changed':sorted(changed),'declaredDeltaQualified':physical_ok,'sha256':physical},
+        'staticBuiltModules':static,'targetCounters':coverage,'physicalMain':{'count':len(physical),'changed':sorted(changed),'declaredSourceDeltaQualified':physical_ok,
+            'requiredCodeChangedClasses':sorted(EXPECTED_CHANGES)if args.phase=='green'else[],
+            'additionalPhysicalClassesPendingDebugQualification':debug_pending,'sha256':physical},
         'xmlHashes':xmls,'commands':commands,'archiveSha256':sha(archive),'formalAccepted':False,'coverageWholeAccepted':False,'vmActions':0,'oldNativeImported':False}
     with(out/'manifest.safe.json').open('x')as f:json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
     print(json.dumps({k:v for k,v in value.items()if k not in('physicalMain','commands','xmlHashes','targetCounters')},sort_keys=True))

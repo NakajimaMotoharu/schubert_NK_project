@@ -113,6 +113,8 @@ public final class MaintenanceUnitStopClient {
     policy.requireSafe(unit);
     context.recheck();
     interrupted();
+    // Private Attempt state lock must exist before invoking the possibly delivered native stop.
+    Object stateLock = new Object();
     @Nullable Process process;
     try {
       process =
@@ -128,10 +130,10 @@ public final class MaintenanceUnitStopClient {
       // Once start is invoked, its failure does not prove no client was spawned. Return an opaque
       // unreapable UNKNOWN; MorningStopPass must not normally unwind M or issue the next stop.
       // No source exception/cause or command detail crosses this boundary. BUG-315/SSC-105.
-      return new Attempt(unit, context, null);
+      return new Attempt(unit, context, null, stateLock);
     }
-    if (process == null) return new Attempt(unit, context, null);
-    var attempt = new Attempt(unit, context, process);
+    if (process == null) return new Attempt(unit, context, null, stateLock);
+    var attempt = new Attempt(unit, context, process, stateLock);
     attempt.awaitClient();
     return attempt;
   }
@@ -143,6 +145,7 @@ public final class MaintenanceUnitStopClient {
 
   /** Opaque owner for a possibly live stop client. Never auto-destroys it. */
   public static final class Attempt {
+    private final Object stateLock;
     private final MaintenanceUnit retainedUnit;
     private final Context context;
     private final @Nullable Process process;
@@ -151,7 +154,9 @@ public final class MaintenanceUnitStopClient {
     private boolean streamsClosed;
     private boolean poisoned;
 
-    private Attempt(MaintenanceUnit unit, Context context, @Nullable Process process) {
+    private Attempt(
+        MaintenanceUnit unit, Context context, @Nullable Process process, Object stateLock) {
+      this.stateLock = stateLock;
       this.retainedUnit = unit;
       this.context = context;
       this.process = process;
@@ -161,44 +166,48 @@ public final class MaintenanceUnitStopClient {
       return retainedUnit;
     }
 
-    public synchronized Status status() {
-      return retainedStatus;
+    public Status status() {
+      synchronized (stateLock) {
+        return retainedStatus;
+      }
     }
 
     /** Reap under the still-held parent locks; UNKNOWN never grants an unlock or stop success. */
-    public synchronized Status awaitClient() {
-      if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
-      if (process == null) return Status.UNKNOWN; // No handle means no reaping proof.
-      try {
-        context.recheck();
-        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
-        if (!stdinClosed) {
-          stdinClosed = true; // A failed close is not retried against an uncertain descriptor.
-          Objects.requireNonNull(process.getOutputStream(), "stop stdin").close();
-        }
-        if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
-        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
-        var stdout = Objects.requireNonNull(process.getInputStream(), "stop stdout");
-        Closeable stderr;
+    public Status awaitClient() {
+      synchronized (stateLock) {
+        if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
+        if (process == null) return Status.UNKNOWN; // No handle means no reaping proof.
         try {
-          stderr = Objects.requireNonNull(process.getErrorStream(), "stop stderr");
-        } catch (RuntimeException | Error failure) {
-          closeOne(stdout);
-          throw failure;
+          context.recheck();
+          if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+          if (!stdinClosed) {
+            stdinClosed = true; // A failed close is not retried against an uncertain descriptor.
+            Objects.requireNonNull(process.getOutputStream(), "stop stdin").close();
+          }
+          if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
+          if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+          var stdout = Objects.requireNonNull(process.getInputStream(), "stop stdout");
+          Closeable stderr;
+          try {
+            stderr = Objects.requireNonNull(process.getErrorStream(), "stop stderr");
+          } catch (RuntimeException | Error failure) {
+            closeOne(stdout);
+            throw failure;
+          }
+          boolean closed = closeBoth(stdout, stderr);
+          streamsClosed = true;
+          if (!closed) return Status.UNKNOWN;
+          context.recheck();
+          retainedStatus =
+              process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
+          return retainedStatus;
+        } catch (InterruptedException interrupted) {
+          Thread.currentThread().interrupt();
+          return Status.UNKNOWN;
+        } catch (IOException | RuntimeException | Error failure) {
+          poisoned = true;
+          return Status.UNKNOWN;
         }
-        boolean closed = closeBoth(stdout, stderr);
-        streamsClosed = true;
-        if (!closed) return Status.UNKNOWN;
-        context.recheck();
-        retainedStatus =
-            process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
-        return retainedStatus;
-      } catch (InterruptedException interrupted) {
-        Thread.currentThread().interrupt();
-        return Status.UNKNOWN;
-      } catch (IOException | RuntimeException | Error failure) {
-        poisoned = true;
-        return Status.UNKNOWN;
       }
     }
 

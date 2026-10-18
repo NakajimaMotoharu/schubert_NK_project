@@ -162,6 +162,7 @@ public final class ServiceStartupAdmission {
   }
 
   private static final class ReadyOnce implements Ready {
+    private final Object stateLock = new Object();
     private final Ready delegate;
     private final Information retainedInformation;
     private boolean active = true;
@@ -174,33 +175,41 @@ public final class ServiceStartupAdmission {
       this.retainedInformation = information;
     }
 
-    public synchronized void release() throws IOException {
-      if (!active || attempted) {
-        poisoned = true;
-        throw new IOException("startup readiness unavailable");
+    public void release() throws IOException {
+      synchronized (stateLock) {
+        if (!active || attempted) {
+          poisoned = true;
+          throw new IOException("startup readiness unavailable");
+        }
+        attempted = true;
+        try {
+          delegate.release();
+          released = true;
+        } catch (IOException | RuntimeException | Error failure) {
+          poisoned = true;
+          throw failure;
+        }
       }
-      attempted = true;
-      try {
-        delegate.release();
-        released = true;
-      } catch (IOException | RuntimeException | Error failure) {
-        poisoned = true;
-        throw failure;
+    }
+
+    public Map<String, String> information() throws IOException {
+      synchronized (stateLock) {
+        if (!active || attempted) throw new IOException("release information unavailable");
+        return Map.copyOf(retainedInformation.read());
       }
     }
 
-    public synchronized Map<String, String> information() throws IOException {
-      if (!active || attempted) throw new IOException("release information unavailable");
-      return Map.copyOf(retainedInformation.read());
+    private void complete() throws IOException {
+      synchronized (stateLock) {
+        active = false;
+        if (!released || poisoned) throw new IOException("startup readiness unavailable");
+      }
     }
 
-    private synchronized void complete() throws IOException {
-      active = false;
-      if (!released || poisoned) throw new IOException("startup readiness unavailable");
-    }
-
-    private synchronized void finish() {
-      active = false;
+    private void finish() {
+      synchronized (stateLock) {
+        active = false;
+      }
     }
   }
 

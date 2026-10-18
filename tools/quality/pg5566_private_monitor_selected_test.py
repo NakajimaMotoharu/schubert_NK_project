@@ -5,6 +5,19 @@ import pg5566_private_monitor_selected as entry
 
 
 class SelectedMonitor(unittest.TestCase):
+    def test_extra_nested_debug_bytes_are_retained_not_silently_ignored(self):
+        required={k:'a'*64 for k in entry.EXPECTED_CHANGES}
+        sibling='batch:dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Policy.class'
+        required[sibling]='a'*64
+        after={k:'b'*64 for k in required}
+        changed,okay,pending=entry.physical_delta(required,after,'green')
+        self.assertTrue(okay);self.assertEqual(len(changed),7);self.assertEqual(pending,[sibling])
+        self.assertFalse(entry.physical_delta(required,required,'green')[1])
+        self.assertFalse(entry.physical_delta(required,after,'red')[1])
+        bad={**required,'api:unexpected.class':'a'*64};wrong={**after,'api:unexpected.class':'b'*64}
+        self.assertFalse(entry.physical_delta(bad,wrong,'green')[1])
+        with self.assertRaises(ValueError):entry.physical_delta(required,{},'green')
+
     def test_exact_source_inventory_all_affected_and_dependencies(self):
         red=entry.inventory(entry.ROOT,'red');green=entry.inventory(entry.ROOT,'green')
         self.assertEqual(sum(map(len,red.values())),29)

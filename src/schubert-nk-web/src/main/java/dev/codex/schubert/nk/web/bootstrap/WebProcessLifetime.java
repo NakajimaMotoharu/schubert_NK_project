@@ -14,6 +14,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class WebProcessLifetime implements AutoCloseable {
+  private final Object stateLock = new Object();
   private final AtomicBoolean retainedStopping = new AtomicBoolean();
   private final AtomicBoolean failed = new AtomicBoolean();
   private final CountDownLatch finished = new CountDownLatch(1);
@@ -21,10 +22,12 @@ final class WebProcessLifetime implements AutoCloseable {
   private final Thread hook = new Thread(this::shutdown, "web-stop-owner");
   private boolean installed;
 
-  synchronized void install() {
-    if (installed) throw new IllegalStateException("Web stop owner already installed");
-    Runtime.getRuntime().addShutdownHook(hook);
-    installed = true;
+  void install() {
+    synchronized (stateLock) {
+      if (installed) throw new IllegalStateException("Web stop owner already installed");
+      Runtime.getRuntime().addShutdownHook(hook);
+      installed = true;
+    }
   }
 
   boolean stopping() {
@@ -74,19 +77,21 @@ final class WebProcessLifetime implements AutoCloseable {
 
   /** Only called after every admitted owner scope confirmed cleanup. */
   @Override
-  public synchronized void close() {
-    stop();
-    try {
-      if (installed) {
-        installed = false;
-        try {
-          Runtime.getRuntime().removeShutdownHook(hook);
-        } catch (IllegalStateException shutdownInProgress) {
-          /* Exact hook already waiting. */
+  public void close() {
+    synchronized (stateLock) {
+      stop();
+      try {
+        if (installed) {
+          installed = false;
+          try {
+            Runtime.getRuntime().removeShutdownHook(hook);
+          } catch (IllegalStateException shutdownInProgress) {
+            /* Exact hook already waiting. */
+          }
         }
+      } finally {
+        finished.countDown();
       }
-    } finally {
-      finished.countDown();
     }
   }
 

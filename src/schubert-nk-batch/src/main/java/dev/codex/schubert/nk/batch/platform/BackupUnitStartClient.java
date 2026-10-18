@@ -360,18 +360,20 @@ public final class BackupUnitStartClient {
     interrupted();
     // SSC106: a failed or uncertain publication is pre-start and issues no systemctl request.
     // Once published, all unknown delivery paths leave the marker for the next M admission.
+    // BUG1459: caller-visible Attempt cannot be its own lock. Allocate before any intent/process.
+    Object stateLock = new Object();
     MarkerLease marker = Objects.requireNonNull(intent.begin(), "retained start marker");
     if (Thread.currentThread().isInterrupted())
-      return new Attempt(context, null, marker, budget, unit);
+      return new Attempt(context, null, marker, budget, unit, stateLock);
     @Nullable Process process;
     try {
       var command = new java.util.ArrayList<>(COMMAND);
       command.set(command.size() - 1, unit.serviceName());
       process = retainedStart.execute(List.copyOf(command));
     } catch (IOException | RuntimeException | Error uncertainStart) {
-      return new Attempt(context, null, marker, budget, unit);
+      return new Attempt(context, null, marker, budget, unit, stateLock);
     }
-    var attempt = new Attempt(context, process, marker, budget, unit);
+    var attempt = new Attempt(context, process, marker, budget, unit, stateLock);
     attempt.awaitClient();
     return attempt;
   }
@@ -511,6 +513,7 @@ public final class BackupUnitStartClient {
 
   /** Opaque owner of a possibly live start client; never destroys or silently closes it. */
   public static final class Attempt {
+    private final Object stateLock;
     private final Context context;
     private final @Nullable Process process;
     private final MarkerLease marker;
@@ -529,7 +532,9 @@ public final class BackupUnitStartClient {
         @Nullable Process process,
         MarkerLease marker,
         Optional<MorningParentBudget> budget,
-        MaintenanceUnit unit) {
+        MaintenanceUnit unit,
+        Object stateLock) {
+      this.stateLock = stateLock;
       this.context = context;
       this.process = process;
       this.marker = marker;
@@ -537,54 +542,61 @@ public final class BackupUnitStartClient {
       this.unit = unit;
     }
 
-    public synchronized Status status() {
-      return retainedStatus;
+    public Status status() {
+      synchronized (stateLock) {
+        return retainedStatus;
+      }
     }
 
     /** Same inode owners and confirmed client release; neither ready nor retirement authority. */
-    public synchronized void requireRetained(RetirementGate gate) throws IOException {
-      Objects.requireNonNull(gate);
-      if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
-          || retainedStatus != Status.CLIENT_EXITED_ZERO
-          || !stdinClosed
-          || !streamsClosed
-          || retired
-          || retiring
-          || retireUncertain) throw new IOException("service intent proof unavailable");
-      context.recheck();
-      gate.verify();
-      marker.requireRetained();
-      gate.verify();
-      context.recheck();
+    public void requireRetained(RetirementGate gate) throws IOException {
+      synchronized (stateLock) {
+        Objects.requireNonNull(gate);
+        if ((unit != MaintenanceUnit.API && unit != MaintenanceUnit.WEB)
+            || retainedStatus != Status.CLIENT_EXITED_ZERO
+            || !stdinClosed
+            || !streamsClosed
+            || retired
+            || retiring
+            || retireUncertain) throw new IOException("service intent proof unavailable");
+        context.recheck();
+        gate.verify();
+        marker.requireRetained();
+        gate.verify();
+        context.recheck();
+      }
     }
 
     /** Live daemon profile/ordinary peer gates are distinct from the worker terminus contract. */
-    public synchronized void retireReadyAfter(RetirementGate before, RetirementGate after)
-        throws IOException {
-      Objects.requireNonNull(before);
-      Objects.requireNonNull(after);
-      if ((unit != MaintenanceUnit.API
-              && unit != MaintenanceUnit.WEB
-              && unit != MaintenanceUnit.CADDY)
-          || !stdinClosed
-          || !streamsClosed) throw new IOException("live intent retirement unavailable");
-      retireAfter(before);
-      // Failure after unlink/close is UNKNOWN and must be retained by the enclosing parent.
-      context.recheck();
-      after.verify();
-      context.recheck();
+    public void retireReadyAfter(RetirementGate before, RetirementGate after) throws IOException {
+      synchronized (stateLock) {
+        Objects.requireNonNull(before);
+        Objects.requireNonNull(after);
+        if ((unit != MaintenanceUnit.API
+                && unit != MaintenanceUnit.WEB
+                && unit != MaintenanceUnit.CADDY)
+            || !stdinClosed
+            || !streamsClosed) throw new IOException("live intent retirement unavailable");
+        retireAfter(before);
+        // Failure after unlink/close is UNKNOWN and must be retained by the enclosing parent.
+        context.recheck();
+        after.verify();
+        context.recheck();
+      }
     }
 
     /** Close-only: marker stays durable, no receipt/retirement/unlock authority is granted. */
-    public synchronized void preserveObservation() throws IOException {
-      if ((unit != MaintenanceUnit.API
-              && unit != MaintenanceUnit.WEB
-              && unit != MaintenanceUnit.CADDY)
-          || retired
-          || retiring
-          || retireUncertain) throw new IOException("service observation close unavailable");
-      retireUncertain = true;
-      marker.closeObservation();
+    public void preserveObservation() throws IOException {
+      synchronized (stateLock) {
+        if ((unit != MaintenanceUnit.API
+                && unit != MaintenanceUnit.WEB
+                && unit != MaintenanceUnit.CADDY)
+            || retired
+            || retiring
+            || retireUncertain) throw new IOException("service observation close unavailable");
+        retireUncertain = true;
+        marker.closeObservation();
+      }
     }
 
     /**
@@ -592,63 +604,67 @@ public final class BackupUnitStartClient {
      * termination, and original identity have been checked. Client exit zero alone is insufficient.
      * An exception leaves the marker unrepaired; UNKNOWN and nonzero cannot retire.
      */
-    synchronized void retireAfter(RetirementGate gate) throws IOException {
-      Objects.requireNonNull(gate, "parent completion proof");
-      if (retainedStatus != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
-        throw new IOException("backup intent retirement unavailable");
-      retiring = true;
-      try {
-        context.recheck();
-        gate.verify();
-        context.recheck();
-        retireUncertain = true;
-        marker.retire();
-        retired = true;
-      } finally {
-        retiring = false;
+    void retireAfter(RetirementGate gate) throws IOException {
+      synchronized (stateLock) {
+        Objects.requireNonNull(gate, "parent completion proof");
+        if (retainedStatus != Status.CLIENT_EXITED_ZERO || retired || retiring || retireUncertain)
+          throw new IOException("backup intent retirement unavailable");
+        retiring = true;
+        try {
+          context.recheck();
+          gate.verify();
+          context.recheck();
+          retireUncertain = true;
+          marker.retire();
+          retired = true;
+        } finally {
+          retiring = false;
+        }
       }
     }
 
     /** Reap under still-held parent owners; UNKNOWN is never a worker or unlock receipt. */
-    public synchronized Status awaitClient() {
-      if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
-      if (process == null) return Status.UNKNOWN;
-      try {
-        context.recheck();
-        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
-        if (!stdinClosed) {
-          stdinClosed = true;
-          Objects.requireNonNull(process.getOutputStream(), "start stdin").close();
-        }
-        if (budget.isPresent()) {
-          long remaining = budget.orElseThrow().remainingNanos();
-          if (!process.waitFor(
-              Math.min(TimeUnit.SECONDS.toNanos(120), remaining), TimeUnit.NANOSECONDS))
-            return Status.UNKNOWN;
-          budget.orElseThrow().requireWithin();
-        } else if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
-        if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
-        var stdout = Objects.requireNonNull(process.getInputStream(), "start stdout");
-        Closeable stderr;
+    public Status awaitClient() {
+      synchronized (stateLock) {
+        if (retainedStatus != Status.UNKNOWN || streamsClosed || poisoned) return retainedStatus;
+        if (process == null) return Status.UNKNOWN;
         try {
-          stderr = Objects.requireNonNull(process.getErrorStream(), "start stderr");
-        } catch (RuntimeException | Error failure) {
-          closeOne(stdout);
-          throw failure;
+          context.recheck();
+          if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+          if (!stdinClosed) {
+            stdinClosed = true;
+            Objects.requireNonNull(process.getOutputStream(), "start stdin").close();
+          }
+          if (budget.isPresent()) {
+            long remaining = budget.orElseThrow().remainingNanos();
+            if (!process.waitFor(
+                Math.min(TimeUnit.SECONDS.toNanos(120), remaining), TimeUnit.NANOSECONDS))
+              return Status.UNKNOWN;
+            budget.orElseThrow().requireWithin();
+          } else if (!process.waitFor(120, TimeUnit.SECONDS)) return Status.UNKNOWN;
+          if (Thread.currentThread().isInterrupted()) return Status.UNKNOWN;
+          var stdout = Objects.requireNonNull(process.getInputStream(), "start stdout");
+          Closeable stderr;
+          try {
+            stderr = Objects.requireNonNull(process.getErrorStream(), "start stderr");
+          } catch (RuntimeException | Error failure) {
+            closeOne(stdout);
+            throw failure;
+          }
+          boolean closed = closeBoth(stdout, stderr);
+          streamsClosed = true;
+          if (!closed) return Status.UNKNOWN;
+          context.recheck();
+          retainedStatus =
+              process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
+          return retainedStatus;
+        } catch (InterruptedException interrupted) {
+          Thread.currentThread().interrupt();
+          return Status.UNKNOWN;
+        } catch (IOException | RuntimeException | Error failure) {
+          poisoned = true;
+          return Status.UNKNOWN;
         }
-        boolean closed = closeBoth(stdout, stderr);
-        streamsClosed = true;
-        if (!closed) return Status.UNKNOWN;
-        context.recheck();
-        retainedStatus =
-            process.exitValue() == 0 ? Status.CLIENT_EXITED_ZERO : Status.CLIENT_EXITED_NONZERO;
-        return retainedStatus;
-      } catch (InterruptedException interrupted) {
-        Thread.currentThread().interrupt();
-        return Status.UNKNOWN;
-      } catch (IOException | RuntimeException | Error failure) {
-        poisoned = true;
-        return Status.UNKNOWN;
       }
     }
 
