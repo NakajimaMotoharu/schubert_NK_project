@@ -22,3 +22,7 @@ Main296を変更する前にfault四だけを新clean Test commitで実行し、
 全六formatをPT前に確認し、package（bootstrap test-jarも同sourceで生成）＋当selected11＋built四module SpotBugs/NullAway/Werror＋JaCoCo reportを実行する。未実行upstreamPTはselected成功へ数えず、全体coverage/全回帰/451合格は別。target四counter結果と物理Main差分は実行後002へ記録、全体100を当selectionで代用しない。当Source fresh全体は必要別工程で行い旧296 native/全体を新Sourceへ転用0。
 
 FES/flaky/skipped/not-runを成功算入0、fixture/harness失敗は原因を保存し新version/sourceで必要部分だけ再試験、旧ログ上書き0。公開resultはallowlist/hashのみ、private rawXML properties/秘密をGitへ保存しない。群開始1278/補正1279・0.5/1.5/4ppは未較正固定、実費不明null、正式1964/53/QA051finalは保持。
+
+## BUG1456/v2補足（上位仕様・品質非変更）
+
+v1/65292は全六format0→protocolの既存failIfNoTests=trueで止まり対象0件、再現不成立として保存。v2は全四reactor moduleのguardを抑制せず、必要な依存契約としてPayloadGoldenVectorTest三（独立64layout/最大繰返し/並行byte）・ResourceScopeTest八（所有/例外優先/null/並行）・ApiNonSecretConfigTest七（既定/境界/非秘密テンプレート/決定性）を全source inventory付きで明示する。Redは**対象4＋依存18=22**、Greenは**対象4＋既codec7＋依存18=29**。fault再現成立は001/002の`native acquisition before scratch failure`で期待0・実1のAssertionだけとし、同じ2件の別理由失敗は認めない。依存試験を元296の成功へ加算せず当new Test sourceの選択結果とする。全体回帰/全scope成功を代用しない。YKT1220全四moduleのactual XMLまで確認する。

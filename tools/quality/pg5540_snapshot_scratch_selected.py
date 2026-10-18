@@ -20,6 +20,10 @@ FAULT={
     'scratch002DecompressAllocationFailureCannotOwnNativeInflater',
     'scratch003NegativeControlDetectsDeflaterBeforeUnprotectedArray',
     'scratch004NegativeControlDetectsInflaterBeforeUnprotectedArray'}
+DEPENDENCIES={
+    'dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest':('protocol',3),
+    'dev.codex.schubert.nk.storage.ResourceScopeTest':('storage',8),
+    'dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest':('bootstrap',7)}
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -51,6 +55,11 @@ def main():
     tests=snapshot/'src/schubert-nk-api/src/test/java'/PACKAGE.replace('.','/')
     expected={PACKAGE+'SnapshotScratchOwnershipTest':FAULT}
     if test_names(tests/'SnapshotScratchOwnershipTest.java')!=FAULT:raise ValueError('four independent fixed fault cases')
+    for name,(module,count)in DEPENDENCIES.items():
+        path=snapshot/('src/schubert-nk-'+module+'/src/test/java')/(name.replace('.','/')+'.java')
+        names=test_names(path)
+        if len(names)!=count:raise ValueError('explicit unchanged dependency contract inventory')
+        expected[name]=names
     if args.phase=='green':
         names=test_names(tests/'ResponseSnapshotCodecTest.java')
         if len(names)!=7:raise ValueError('all original seven independent codec vectors required')
@@ -60,7 +69,8 @@ def main():
         base+['-pl','src/schubert-nk-api','-am','-Dtest='+','.join(expected),'-Dsurefire.failIfNoSpecifiedTests=false','package',
             'org.jacoco:jacoco-maven-plugin:0.8.15:report','com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']]
     inputs={str(p.relative_to(snapshot)):sha(p)for p in snapshot.rglob('*')if p.is_file()}
-    env={**os.environ,'JAVA_HOME':str(TC/'jdk-25.0.4'),'PATH':str(TC/'jdk-25.0.4/bin')+os.pathsep+os.environ['PATH']}
+    env={k:v for k,v in os.environ.items()if k not in('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS','CLASSPATH')}
+    env.update(JAVA_HOME=str(TC/'jdk-25.0.4'),PATH=str(TC/'jdk-25.0.4/bin')+os.pathsep+os.environ['PATH'],MAVEN_OPTS='-Xmx768m -Djava.io.tmpdir='+str(out))
     started=utc();phases=[]
     (out/'start.safe.json').write_text(json.dumps({'sourceSnapshot':head,'baseProductionSource':BASE,'phase':args.phase,'startedUTC':started,'commands':commands,'archiveSha256':sha(archive),'replayAllowed':False},sort_keys=True))
     for index,command in enumerate(commands,1):
@@ -115,7 +125,8 @@ def main():
         'actualCases':sum(map(len,actual.values())),'suites':len(actual),'exactSelectedInventory':inventory,'failed':failed,'errors':errors,'skipped':skipped,
         'purposefulRedEstablished':red,'greenSelectedQualified':green,'staticBuiltModules':static,'targetCounters':target_counters,
         'xmlHashes':xmls,'commands':commands,'archiveSha256':sha(archive),'formalAccepted':False,'coverageWholeAccepted':False,'vmActions':0,'oldNativeImported':False,
-        'physicalMain':{'count':len(physical),'changed':changed,'added':added,'removed':removed,'declaredDeltaQualified':physical_ok,'sha256':physical},'targetFour100':target100}
+        'physicalMain':{'count':len(physical),'changed':changed,'added':added,'removed':removed,'declaredDeltaQualified':physical_ok,'sha256':physical},'targetFour100':target100,
+        'caseScope':{'fault':4,'codec':7 if args.phase=='green'else 0,'necessaryDependencyContracts':18},'noTestsGuardSuppressed':False}
     with(out/'manifest.safe.json').open('x')as target:json.dump(value,target,sort_keys=True);target.flush();os.fsync(target.fileno())
     print(json.dumps({k:value[k]for k in('actualExit','phase','sourceFixed','expectedCases','actualCases','suites','exactSelectedInventory','failed','errors','skipped','purposefulRedEstablished','greenSelectedQualified','staticBuiltModules','targetCounters','targetFour100','formalAccepted')},sort_keys=True))
     return value['actualExit']or(0 if green or red else 1)
