@@ -34,6 +34,7 @@ FACTORY_FULL = ROOT.parent / 'pgpt-runs/PG379/pg5130-root-whole-qualified-v1/man
 SCOPE = 'dev/codex/schubert/nk/storage/ResourceScope'
 DIRECTORY = 'dev/codex/schubert/nk/storage/OwnedTransferDirectory'
 TEST_UMASK = 0o027
+EXTRA_CHANGED = set()
 
 
 def storage_suites():
@@ -98,6 +99,7 @@ def main_delta(snapshot, group='elf'):
         native_names = ('LinuxFileLock','LinuxSealedProof','LinuxStartupAdmission')
         allowed_changed |= {native+n+'.class' for n in native_names} | {native+'LinuxFileLock$OwnedDescriptor.class'}
         allowed_added |= {native+'LinuxSealedProof$Descriptor.class',native+'LinuxStartupAdmission$FdOwners.class'}
+        allowed_changed |= EXTRA_CHANGED
         optional_debug = {key for key in expected if any(key.startswith(native+n+'$') for n in native_names)} - allowed_changed
     else:
         optional_debug = set()
@@ -108,7 +110,7 @@ def main_delta(snapshot, group='elf'):
             'physicalSha256': actual}
 
 
-def main():
+def main(*, stem_override=None, version_override=None, extra_suites=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
@@ -123,6 +125,12 @@ def main():
     if args.group == 'factory': version = 'v2'
     if args.group != 'factory' or args.phase != 'green': raise ValueError('this new run accepts factory green only')
     stem = 'pg5148-native-fd'
+    if stem_override is not None:
+        if not re.fullmatch(r'pg[0-9]+-[a-z-]+',stem_override): raise ValueError('new bounded run stem')
+        stem=stem_override
+    if version_override is not None:
+        if not re.fullmatch(r'v[0-9]+',version_override): raise ValueError('bounded version')
+        version=version_override
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)
@@ -139,6 +147,7 @@ def main():
     suites = SUITES if args.group == 'elf' else {**SUITES, **PENDING_SUITES}
     if args.group in ('guards', 'factory'): suites = {**suites, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     if args.group == 'factory': suites = {**suites, **storage_suites()}
+    if extra_suites is not None: suites={**suites,**extra_suites}
     for name, module in suites.items():
         text = (snapshot / ('src/schubert-nk-' + module + '/src/test/java/' + name.replace('.', '/') + '.java')).read_text()
         methods = re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(', text)

@@ -143,15 +143,15 @@ final class NativeCoveragePrivateFile {
           "SSC193/PG-D375 fixed Root-managed Linux opt agent pin only; NEXPORT193/native metadata/RO; no arbitrary path or coverage exclusion")
   static void verifyPinnedAgent() throws IOException {
     var security = LinuxInodeSecurity.create();
-    var opt = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/opt"));
-    ResourceScope.use(
-        opt::close,
-        () -> {
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of("/opt")),
+        OwnedTransferDirectory::close,
+        opt -> {
           Identity first = directory(opt, security, 0, 0, 0x41ed);
-          var tools = opt.openExistingChild("pgpt-tools-pg390");
-          ResourceScope.use(
-              tools::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> opt.openExistingChild("pgpt-tools-pg390"),
+              OwnedTransferDirectory::close,
+              tools -> {
                 Identity before = directory(tools, security, 0, 0, 0x41ed);
                 FileState file =
                     tools.atExistingEntryHandle(
@@ -222,27 +222,27 @@ final class NativeCoveragePrivateFile {
     if (ordinary.isPresent()) {
       verifyOrdinaryProcess(fixed, ordinary.orElseThrow(), cgroup);
     }
-    var run = io.openRun();
-    ResourceScope.use(
-        run::close,
-        () -> {
+    ResourceScope.acquire(
+        io::openRun,
+        OwnedTransferDirectory::close,
+        run -> {
           Identity top = directory(run, security, 0, 0, 0x41ed, io);
-          var service = run.openExistingChild("schubert-nk");
-          ResourceScope.use(
-              service::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> run.openExistingChild("schubert-nk"),
+              OwnedTransferDirectory::close,
+              service -> {
                 Identity serviceBefore = directory(service, security, 0, 0, 0x41ed, io);
-                var parent = service.openExistingChild("pt-coverage");
-                ResourceScope.use(
-                    parent::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> service.openExistingChild("pt-coverage"),
+                    OwnedTransferDirectory::close,
+                    parent -> {
                       Identity parentBefore = directory(parent, security, 0, 0, 0x41ed, io);
                       String role = profile.directory();
-                      var target = parent.openExistingChild(role);
                       Identity saved =
-                          ResourceScope.use(
-                              target::close,
-                              () -> {
+                          ResourceScope.acquire(
+                              () -> parent.openExistingChild(role),
+                              OwnedTransferDirectory::close,
+                              target -> {
                                 Identity original =
                                     directory(target, security, uid, gid, 0x41c0, io);
                                 target.atDirectory(
@@ -258,10 +258,10 @@ final class NativeCoveragePrivateFile {
                                         directory(target, security, uid, gid, 0x41c0, io)));
                                 return original;
                               });
-                      var reopened = parent.openExistingChild(role);
-                      ResourceScope.use(
-                          reopened::close,
-                          () -> {
+                      ResourceScope.acquire(
+                          () -> parent.openExistingChild(role),
+                          OwnedTransferDirectory::close,
+                          reopened -> {
                             require(
                                 saved.equals(directory(reopened, security, uid, gid, 0x41c0, io)));
                             return Boolean.TRUE;
