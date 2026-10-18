@@ -23,5 +23,14 @@ def matrix():
 Owned = matrix()
 
 
+class CompleteTransport(unittest.TestCase):
+    def test_actual_emitted_stage_binds_every_current_identity_and_archive_path(self):
+        raw = dispatch.namespace()['stage']()
+        for marker in ('/opt/schubert-nk/releases/0.1.0-PG4980', role.SOURCE, role.BOM,
+                       dispatch.ARCHIVE, dispatch.REMOTE, dispatch.GUEST):
+            self.assertIn(marker, raw)
+        self.assertNotIn('/opt/schubert-nk/releases/0.1.0-PG4860', raw)
+
+
 if __name__ == '__main__':
     unittest.main()
