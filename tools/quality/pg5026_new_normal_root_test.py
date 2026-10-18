@@ -11,7 +11,7 @@ from unittest.mock import patch
 from pyflakes.api import check, checkPath
 import pg5016_new_current_readonly as current
 import pg5018_new_current_same_peer_observer as observer
-import pg5020_current_query_oracle_preflight as oracle
+import pg5032_new_day_query_preflight as oracle
 import pg5022_new_normal_root_once as entry
 import pg5024_new_normal_live_binding as binding
 

@@ -10,7 +10,7 @@ from pg4996_resume_connection import authenticate_host
 W, P, SSH = previous.W, previous.P, previous.SSH
 SLOT = 'pg5022-new-normal-root-once-v1'
 SOURCE, BOM = observer.SOURCE, observer.BOM
-QUALIFICATION = 'pg5026-new-normal-root-qualification-v1'
+QUALIFICATION = 'pg5034-newday-normal-root-qualification-v1'
 
 
 def oracle_applicable(proof, now, before_sha):
@@ -37,7 +37,7 @@ def payload(hashes):
 
 def main():
     from pg5016_new_current_readonly import context
-    oracle_applicable(json.loads((W / 'pg5020-current-query-oracle-preflight-v1/manifest.safe.json').read_bytes()),
+    oracle_applicable(json.loads((W / 'pg5032-new-day-query-preflight-v1/manifest.safe.json').read_bytes()),
                       datetime.datetime.now(datetime.timezone.utc), context())
     ns = {**vars(previous.previous), 'post': post, 'observer': observer, 'SLOT': SLOT,
           'SOURCE': SOURCE, 'BOM': BOM, 'QUALIFICATION': QUALIFICATION,

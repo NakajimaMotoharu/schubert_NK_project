@@ -1,5 +1,13 @@
 # 1038 当a2ecc通常Root・samepeer接続仕様
 
+## 新営業日追加依存（2026-10-18）
+
+5016fresh全読取0/07:09:13Z、容量16582156288byte・現a2ecc/78a6/全80保全、5018stage0/07:09:31Z、初期5026qualification0/07:09:50Z（af21f495 Rootpayload）。5020同日限定preflightは当日履歴不足で実1/07:09:58Z、Root未発行・DB/時計不変更。正常な適用性拒否をProduction障害としない。別fresh5032/5034を使い、旧失敗/資格/同peer watch80748を保持する。
+
+PT-OPS-NEWDAY-5030-001～004：SS341承認済み新JST日全10step/attempt1とSS324 query期限処理。独立4632新日全24 oracleと4742暗号query codecを合成し、Session予定削除後のLGN immutable参照は保護、認証済QSD/NTS/UDTは独立byte検査して期限候補のみ削除。正常literal（notification1/session2/query1/protected1）、query残存/削除漏れ/誤count/attempt/同日混在/未知layout/破損cipher/未削除sessionを拒否する。Productionや実DB後像からexpected生成0。新4＋既query3の7管理試験とRoot7の計14成功。
+
+5032は当before/Source/BOM・実今と2h後で当日履歴0・未対応cleanup候補0・認証query候補の適用性を検査し、KEYゼロ化・生値非公開・DB/時計/Root変更0を保持。5034は新5030/32/Rootguardを含む全hosthash・emittedhash/独立選択・static0を新namespaceへ固定。旧5026の同じnamespaceは再利用しない。Root5022は5032実0と5034実0だけを要求する。scope/品質/元1800budgetは不変、日付条件の追加発見はevent1139・元見積は固定。
+
 Program NK-OPS-001、WBS-N15.02 ordinary準備subset0.3/1/3pp、SS343/354/451。Main/Testsourcea2ecc/PG4980/BOM78a6、真正有限公開5014after03d3cd12が先行。既3791/553/1650全回帰・署名・18ABI・unused/RO/有限公開の元成功は参照だけで再演しない。旧04bb native80/Rootは保存データで新起動の権限ではない。
 
 ## PT-OPS-ROOT-5026-001～007
