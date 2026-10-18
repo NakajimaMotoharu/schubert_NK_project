@@ -261,30 +261,30 @@ final class MorningStartupRoots {
   }
 
   private EnvironmentInodePolicy.Snapshot inspect(Path path, Profile profile) throws IOException {
-    var hostRoot = OwnedTransferDirectory.open(host, path);
-    return ResourceScope.use(
-        hostRoot::close,
-        () -> {
-          var localRoot = OwnedTransferDirectory.open(local, path);
-          return ResourceScope.use(
-              localRoot::close,
-              () -> {
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(host, path),
+        OwnedTransferDirectory::close,
+        hostRoot -> {
+          return ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(local, path),
+              OwnedTransferDirectory::close,
+              localRoot -> {
                 var before = snapshot(hostRoot, profile, true);
                 var privateBefore = snapshot(localRoot, profile, false);
                 require(
                     before.metadata().equals(privateBefore.metadata())
                         && before.filesystem().equals(privateBefore.filesystem()));
-                var hostAgain = OwnedTransferDirectory.open(host, path);
-                ResourceScope.use(
-                    hostAgain::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> OwnedTransferDirectory.open(host, path),
+                    OwnedTransferDirectory::close,
+                    hostAgain -> {
                       require(before.equals(snapshot(hostAgain, profile, true)));
                       return true;
                     });
-                var localAgain = OwnedTransferDirectory.open(local, path);
-                ResourceScope.use(
-                    localAgain::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> OwnedTransferDirectory.open(local, path),
+                    OwnedTransferDirectory::close,
+                    localAgain -> {
                       require(privateBefore.equals(snapshot(localAgain, profile, false)));
                       return true;
                     });

@@ -50,12 +50,12 @@ final class MorningCurrentInvalidation {
     Objects.requireNonNull(state, "same-run original");
     if (expected.service() != RootStartupContext.Service.MORNING) throw unavailable();
     context.recheck(expected);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    return ResourceScope.use(
-        directory::close,
-        () -> {
+    var calls = LinuxDirectoryCalls.create();
+    Path startupPath = Path.of("/run/schubert-nk/startup");
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, startupPath),
+        OwnedTransferDirectory::close,
+        directory -> {
           var files = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
           return invalidate(
               () -> context.recheck(expected),

@@ -166,10 +166,11 @@ final class MorningCleanupExecution {
           budget.requireWithin();
           context.recheck(expected);
           original.verify();
-          var startup = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), currentPath);
-          ResourceScope.use(
-              startup::close,
-              () -> {
+          var currentCalls = LinuxDirectoryCalls.create();
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(currentCalls, currentPath),
+              OwnedTransferDirectory::close,
+              startup -> {
                 require(
                     new StartupPermitFiles(startup, LinuxInodeSecurity.create())
                         .current()
@@ -194,12 +195,12 @@ final class MorningCleanupExecution {
                 expected.invocation(), expected.pid(), expected.startTicks()),
             Optional.empty(),
             budget.deadlineNanos());
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/cleanup-request"));
-    return ResourceScope.use(
-        directory::close,
-        () -> {
+    var requestCalls = LinuxDirectoryCalls.create();
+    Path requestPath = Path.of("/run/schubert-nk/cleanup-request");
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(requestCalls, requestPath),
+        OwnedTransferDirectory::close,
+        directory -> {
           var security = LinuxInodeSecurity.create();
           var owners =
               CleanupWorkerRequestFiles.forOwner(
@@ -280,12 +281,12 @@ final class MorningCleanupExecution {
       matchType = SuppressMatchType.EXACT,
       justification = "SS343 fixed Inspector environment root, no alternate namespace; CEXEC004")
   private static void requireInspectorEnvironmentClear() throws IOException {
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/maintenance"));
-    ResourceScope.use(
-        directory::close,
-        () -> {
+    var calls = LinuxDirectoryCalls.create();
+    Path maintenancePath = Path.of("/run/schubert-nk/maintenance");
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, maintenancePath),
+        OwnedTransferDirectory::close,
+        directory -> {
           new InspectorEnvironmentPublisher(directory, LinuxInodeSecurity.create()).requireFresh();
           return Boolean.TRUE;
         });

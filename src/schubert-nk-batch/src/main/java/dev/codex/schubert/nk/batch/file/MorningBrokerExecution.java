@@ -106,10 +106,11 @@ final class MorningBrokerExecution {
       parent.check();
       retainedLive.recheck();
       databaseProof.verify();
-      var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), credentialPath);
-      return ResourceScope.use(
-          credentials::close,
-          () ->
+      var credentialCalls = LinuxDirectoryCalls.create();
+      return ResourceScope.acquire(
+          () -> OwnedTransferDirectory.open(credentialCalls, credentialPath),
+          OwnedTransferDirectory::close,
+          credentials ->
               readObservations(
                   new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create()),
                   parent,
@@ -176,10 +177,11 @@ final class MorningBrokerExecution {
               current.boot().equals(epoch.boot())
                   && current.epoch().equals(epoch.epoch())
                   && current.activation().equals(epoch.activation()));
-          var startup = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startupPath);
-          ResourceScope.use(
-              startup::close,
-              () -> {
+          var startupCalls = LinuxDirectoryCalls.create();
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(startupCalls, startupPath),
+              OwnedTransferDirectory::close,
+              startup -> {
                 require(
                     new StartupPermitFiles(startup, LinuxInodeSecurity.create())
                         .current()
@@ -192,10 +194,11 @@ final class MorningBrokerExecution {
         };
     parent.check();
     database.recheckConsistent(state.activation().run());
-    var credentials = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), credentialPath);
-    return ResourceScope.use(
-        credentials::close,
-        () -> {
+    var credentialCalls = LinuxDirectoryCalls.create();
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(credentialCalls, credentialPath),
+        OwnedTransferDirectory::close,
+        credentials -> {
           var reader = new RootBatchCredentialReader(credentials, LinuxInodeSecurity.create());
           var cycle = MorningBrokerUnitCycle.create(context, expected, budget, parent::check);
           var observations = new ArrayList<Observations>();

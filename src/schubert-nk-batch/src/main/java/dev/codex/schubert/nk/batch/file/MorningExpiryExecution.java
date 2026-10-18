@@ -66,10 +66,11 @@ final class MorningExpiryExecution {
           budget.requireWithin();
           context.recheck(expected);
           original.verify();
-          var current = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), currentPath);
-          ResourceScope.use(
-              current::close,
-              () -> {
+          var currentCalls = LinuxDirectoryCalls.create();
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(currentCalls, currentPath),
+              OwnedTransferDirectory::close,
+              current -> {
                 require(
                     new StartupPermitFiles(current, LinuxInodeSecurity.create())
                         .current()
@@ -104,10 +105,11 @@ final class MorningExpiryExecution {
                 expected.invocation(), expected.pid(), expected.startTicks()),
             Optional.empty(),
             budget.deadlineNanos());
-    var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), requestsPath);
-    return ResourceScope.use(
-        directory::close,
-        () -> {
+    var requestCalls = LinuxDirectoryCalls.create();
+    return ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(requestCalls, requestsPath),
+        OwnedTransferDirectory::close,
+        directory -> {
           var security = LinuxInodeSecurity.create();
           var requests = CleanupWorkerRequestFiles.forExpiry(directory, security);
           var owners =

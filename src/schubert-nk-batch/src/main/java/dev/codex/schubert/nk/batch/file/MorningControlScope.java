@@ -481,50 +481,48 @@ final class MorningControlScope {
       brokerIntent
           .requireClear(); // Under M, before old run/DB/stop: unknown daemon start stays isolated.
     }
-    var startup =
-        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
-            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
-            java.nio.file.Path.of("/run/schubert-nk/startup"));
-    dev.codex.schubert.nk.storage.ResourceScope.use(
-        startup::close,
-        () -> {
+    var startupCalls = dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+    var startupPath = java.nio.file.Path.of("/run/schubert-nk/startup");
+    dev.codex.schubert.nk.storage.ResourceScope.acquire(
+        () -> dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(startupCalls, startupPath),
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory::close,
+        startup -> {
           StartupLaunchFiles.requireNoServiceResidue(
               startup, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create());
           return Boolean.TRUE;
         });
-    var cleanup =
-        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
-            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
-            java.nio.file.Path.of("/run/schubert-nk/cleanup-request"));
-    dev.codex.schubert.nk.storage.ResourceScope.use(
-        cleanup::close,
-        () -> {
+    var cleanupCalls = dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+    var cleanupPath = java.nio.file.Path.of("/run/schubert-nk/cleanup-request");
+    dev.codex.schubert.nk.storage.ResourceScope.acquire(
+        () -> dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(cleanupCalls, cleanupPath),
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory::close,
+        cleanup -> {
           new CleanupWorkerRequestFiles(
                   cleanup, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
               .requireClear();
           return Boolean.TRUE;
         });
     root.recheck(expected);
-    var directory =
-        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
-            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
-            java.nio.file.Path.of("/run/schubert-nk/expiry-request"));
-    dev.codex.schubert.nk.storage.ResourceScope.use(
-        directory::close,
-        () -> {
+    var expiryCalls = dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+    var expiryPath = java.nio.file.Path.of("/run/schubert-nk/expiry-request");
+    dev.codex.schubert.nk.storage.ResourceScope.acquire(
+        () -> dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(expiryCalls, expiryPath),
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory::close,
+        directory -> {
           CleanupWorkerRequestFiles.forExpiry(
                   directory, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
               .requireClear();
           return Boolean.TRUE;
         });
     root.recheck(expected);
-    var inspector =
-        dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
-            dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create(),
-            java.nio.file.Path.of("/run/schubert-nk/maintenance"));
-    dev.codex.schubert.nk.storage.ResourceScope.use(
-        inspector::close,
-        () -> {
+    var inspectorCalls = dev.codex.schubert.nk.storage.LinuxDirectoryCalls.create();
+    var inspectorPath = java.nio.file.Path.of("/run/schubert-nk/maintenance");
+    dev.codex.schubert.nk.storage.ResourceScope.acquire(
+        () ->
+            dev.codex.schubert.nk.storage.OwnedTransferDirectory.open(
+                inspectorCalls, inspectorPath),
+        dev.codex.schubert.nk.storage.OwnedTransferDirectory::close,
+        inspector -> {
           new InspectorEnvironmentPublisher(
                   inspector, dev.codex.schubert.nk.storage.LinuxInodeSecurity.create())
               .requireFresh(); // Only Inspector env/UUID.part; sibling maintenance records are
