@@ -15,7 +15,7 @@ JAVAP = selected.TC / 'jdk-25.0.4/bin/javap'
 def methods(raw):
     result = []; current = None
     for line in raw.splitlines():
-        if line.startswith('  ') and not line.startswith('    ') and '(' in line and line.rstrip().endswith(';'):
+        if line.startswith('  ') and not line.startswith('    ') and ('(' in line or line.strip() == 'static {};') and line.rstrip().endswith(';'):
             current = {'header':line.strip(), 'ops':[], 'handlers':[]}; result.append(current)
         elif current is not None:
             opcode = re.fullmatch(r'\s+(\d+):\s+(\S+)(?:\s+(.*))?', line)

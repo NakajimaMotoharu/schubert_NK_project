@@ -40,6 +40,7 @@ def callers(methods):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--version',choices=('v2','v3'),required=True)
+    parser.add_argument('--revision',choices=('original','parser-v2'),default='original')
     args=parser.parse_args()
     run=selected.ROOT.parent/('pgpt-runs/PG379/pg5140-storage-callers-green-'+args.version)
     manifest=json.loads((run/'manifest.safe.json').read_bytes())
@@ -75,7 +76,8 @@ def main():
        'borrowedNonApplicable':{'class':'LinuxExecDescriptors','reason':'No acquired resource or changed flags before existing use; mutations under protection',**borrowed_hash},
        'wholeHorizontalComplete':False,'actualHeapOomReproduced':False,'formalAccepted':False,
        'vmActions':0,'testReplays':0,'bugs':['BUG1414'],'ykt':['YKT1178'],'ssc':['SSC308']}
-    out=selected.ROOT/('evidence/01_PT/003_NK-PRO-003/evidence/provisional/PG5142-storage-callers-bytecode-'+args.version)
+    suffix='' if args.revision=='original' else '-'+args.revision
+    out=selected.ROOT/('evidence/01_PT/003_NK-PRO-003/evidence/provisional/PG5142-storage-callers-bytecode-'+args.version+suffix)
     os.umask(0o077);out.mkdir(parents=True)
     with(out/'manifest.json').open('x') as f:
         json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
