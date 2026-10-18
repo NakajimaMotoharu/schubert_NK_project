@@ -11,3 +11,5 @@ OPS-MONITOR-WHOLE003：独立postで旧3900全identity保持＋新四をactual X
 OPS-MONITOR-WHOLE004：元jobのsource/run/begin/owner/終了manifest/logを保存し結果未回収だけを理由に再実行0。actual commandは既PYTHONPATH/runtime付き `python3 -B tools/quality/pg5572_monitor_required_whole.py`。実3904の原OS/JDK等は元manifest/XML、公開は許可列だけ。独立post工具/実結果は後追補、正式1964/53/工数null/QA051final/F03/451/CHR/traceは未成立のまま。
 
 群1288/K01.01主1/3/8pp固定、F03参照費0、v4未較正597.25の減額/完成率化0。開始fresh枠>10%を必須とし、通常小受入/commitで停止しない。
+
+PG5574独立postを準備しpure二成功：全1664mapの欠落/未知差分/旧map再使用を拒否、全11（code六/debug五）を必須で残1653同byteとする。新四caseをa19→2fcの実git差分から抽出し元XMLと照合、原3900保持・別source結果加算0。全体元終了0の前にはactualを発行しない。commandは所定PYTHONPATH/runtime付き`python3 -B tools/quality/pg5574_monitor_whole_qualification.py`、prepared source2fcのRoot/native/正式を成功化しない。
