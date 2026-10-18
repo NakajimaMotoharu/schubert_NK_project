@@ -52,13 +52,13 @@ final class RootCurrentPermitPreflight {
     Objects.requireNonNull(expected, "root actor");
     Objects.requireNonNull(releaseHash, "actual release hash");
     root.recheck(expected);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    var calls = LinuxDirectoryCalls.create();
+    Path path = Path.of("/run/schubert-nk/startup");
     var observed =
-        ResourceScope.use(
-            directory::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> OwnedTransferDirectory.open(calls, path),
+            OwnedTransferDirectory::close,
+            directory -> {
               var files = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
               var before = files.current();
               var permit = files.readIssued();

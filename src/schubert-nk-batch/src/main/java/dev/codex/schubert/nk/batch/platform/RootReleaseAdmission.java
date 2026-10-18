@@ -317,28 +317,28 @@ public final class RootReleaseAdmission {
     Objects.requireNonNull(io);
     require(!Thread.currentThread().isInterrupted() && security.effectiveUid() == 0);
     Path fixedUsr = Path.of("/usr");
-    var usr = OwnedTransferDirectory.open(calls, fixedUsr);
     String result =
-        ResourceScope.use(
-            usr::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> OwnedTransferDirectory.open(calls, fixedUsr),
+            OwnedTransferDirectory::close,
+            usr -> {
               var first = usr.atDirectory(p -> osSnapshot(p, true, security, io));
-              var lib = usr.openExistingChild("lib");
               String text =
-                  ResourceScope.use(
-                      lib::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> usr.openExistingChild("lib"),
+                      OwnedTransferDirectory::close,
+                      lib -> {
                         var before = lib.atDirectory(p -> osSnapshot(p, true, security, io));
                         String value =
                             lib.atExistingEntryHandle(
                                 "os-release",
                                 held -> {
                                   var file = osSnapshot(held, false, security, io);
-                                  var stream =
-                                      Objects.requireNonNull(io.open(held), "owned OS stream");
                                   byte[] bytes =
-                                      ResourceScope.use(
-                                          stream::close, () -> stream.readNBytes(8193));
+                                      ResourceScope.acquire(
+                                          () -> io.open(held),
+                                          InputStream::close,
+                                          stream -> stream.readNBytes(8193));
                                   require(Long.valueOf(bytes.length).equals(file.get("size")));
                                   require(file.equals(osSnapshot(held, false, security, io)));
                                   lib.atExistingEntryHandle(
@@ -355,10 +355,10 @@ public final class RootReleaseAdmission {
                                 });
                         require(
                             before.equals(lib.atDirectory(p -> osSnapshot(p, true, security, io))));
-                        var reopened = usr.openExistingChild("lib");
-                        ResourceScope.use(
-                            reopened::close,
-                            () -> {
+                        ResourceScope.acquire(
+                            () -> usr.openExistingChild("lib"),
+                            OwnedTransferDirectory::close,
+                            reopened -> {
                               require(
                                   before.equals(
                                       reopened.atDirectory(
@@ -368,10 +368,10 @@ public final class RootReleaseAdmission {
                         return value;
                       });
               require(first.equals(usr.atDirectory(p -> osSnapshot(p, true, security, io))));
-              var current = OwnedTransferDirectory.open(calls, fixedUsr);
-              ResourceScope.use(
-                  current::close,
-                  () -> {
+              ResourceScope.acquire(
+                  () -> OwnedTransferDirectory.open(calls, fixedUsr),
+                  OwnedTransferDirectory::close,
+                  current -> {
                     require(
                         first.equals(current.atDirectory(p -> osSnapshot(p, true, security, io))));
                     return Boolean.TRUE;

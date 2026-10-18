@@ -345,11 +345,14 @@ public final class StartupPermitFiles {
         p -> {
           Snapshot before = file(p, 0, directory);
           require(before.metadata().size() == 0);
-          var writer = io.openWriter(p);
-          if (writer == null) throw unavailable();
-          ResourceScope.use(
-              writer::close,
+          ResourceScope.acquire(
               () -> {
+                var writer = io.openWriter(p);
+                if (writer == null) throw unavailable();
+                return writer;
+              },
+              InspectorEnvironmentPublisher.Writer::close,
+              writer -> {
                 require(writer.size() == 0);
                 ByteBuffer buffer = ByteBuffer.wrap(content);
                 while (buffer.hasRemaining()) {
@@ -386,11 +389,14 @@ public final class StartupPermitFiles {
               name,
               p -> {
                 Snapshot before = file(p, 1, directory);
-                SeekableByteChannel reader = io.open(p);
-                if (reader == null) throw unavailable();
-                ResourceScope.use(
-                    reader::close,
+                ResourceScope.acquire(
                     () -> {
+                      SeekableByteChannel reader = io.open(p);
+                      if (reader == null) throw unavailable();
+                      return reader;
+                    },
+                    SeekableByteChannel::close,
+                    reader -> {
                       require(reader.size() == before.metadata().size());
                       ByteBuffer bytes = ByteBuffer.wrap(buffer);
                       while (bytes.hasRemaining()) {
