@@ -36,7 +36,11 @@ class Schema(unittest.TestCase):
             with self.assertRaises(ValueError):
                 proof.native_reference(bad, '0' * 64, 'literal-source', 'literal-bom')
         wrong = copy.deepcopy(value)
-        wrong['native'].pop(next(iter(wrong['native'])))
+        wrong['native'].pop('/run/schubert-nk/pt-coverage/test/0.exec')
+        with self.assertRaises(ValueError):
+            self.qualify(wrong)
+        wrong = copy.deepcopy(value)
+        wrong['native'].pop('/run/schubert-nk/pt-coverage')
         with self.assertRaises(ValueError):
             self.qualify(wrong)
 

@@ -11,3 +11,5 @@ PT-OPS-RETAIN-5092-001～004管理4件0：当full factory静的0、元全top関�
 5092元11395 local1、通常gate再取得で発行前拒否/guest未実行。BUG1406/YKT1170へ修正前起票。新5094はSSC305の厳密故障phase822byte/stack/未終端と当host46551/t981997/argvb441/boot8cffa/solefd4-gate66306-9337730の前後認証を必須とする限定診断入口。普通management_gateは変更せず元ownerが保持。PT-OPS-RETAIN-5094-001～004管理4件0：完全namespace、新onlyslot、別故障/別ownerではSSH0、実mainのmock SSH一回・raw耐久保存→元結果・再送拒否。`python3 -B -m unittest pg5094_failed_phase_full_proof_test`。同guest操作未発行の5092を再送せず別slotで実fullproofを一回実施する。
 
 5094元35827 guestactual1/08:32:06Z、raw stderr94byte/KeyError/306行のnative基準schema不一致を保存、BUG1407/YKT1171修正前起票。全proofは未合格、signal0/元verify保持。元sealed5066にはnativeキーが無いため、実enriched5080 raw/SHAaf59/source/BOM/全24/86を不可分資格するpure native_referenceへ是正。root directory自身も含む実tree形の独立fixture、欠落/foreign/hash/count/null負例を追加。新5098別slotで完全entry/bodyの管理10件0（元5092四件＋新schema二件＋新entry四件）、通常gate・原関数/SQL/署名/元rootend不変。同失敗slotを再送せず、当fixed候補だけ実読取へ進める。
+
+管理試験追補：53a7d0571直前の最終再試験は、fixture先頭へrootを追加した後のcount負例がrootをpopしていたため1失敗（10件中9成功）。同commit内の「10管理0」はその再試験時点では誤記であり、この追補で訂正、実VM未発行。root自体必須を明示し、root欠落とexec85件を別反例へ分離した後の再実行結果だけで新候補を判定する。過去の失敗を削除/成功へ読み替えず、53a7はそのまま履歴保全。

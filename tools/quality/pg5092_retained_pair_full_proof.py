@@ -31,6 +31,7 @@ def native_reference(raw, expected_hash, source, bom):
     if (type(value) is not dict or value.get('source') != source or value.get('manifestSha256') != bom
             or type(value.get('rows')) is not dict or len(value['rows']) != 24
             or type(value.get('native')) is not dict
+            or '/run/schubert-nk/pt-coverage' not in value['native']
             or sum(type(p) is str and p.endswith('.exec') for p in value['native']) != 86
             or any(type(p) is not str or (p != '/run/schubert-nk/pt-coverage'
                        and not p.startswith('/run/schubert-nk/pt-coverage/'))
