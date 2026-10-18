@@ -115,6 +115,9 @@ final class LinuxSystemdSessionTest {
       var owned = Arena.ofConfined();
       var session = new LinuxSystemdSession(calls, owned);
       session.start(() -> 5000000);
+      int beforeRestart = literal.events.size();
+      assertThrows(IOException.class, () -> session.start(() -> 5000000));
+      assertEquals(beforeRestart, literal.events.size());
       for (int round = 0; round < 2; round++) {
         assertEquals(1, session.owner(4999999).pid());
         assertEquals(
@@ -262,6 +265,79 @@ final class LinuxSystemdSessionTest {
       session.close();
       assertTrue(session.closed());
       assertFalse(owned.scope().isAlive());
+    }
+  }
+
+  /**
+   * PT-OPS-FFMOWN006: an invalidated output buffer never turns pointer decode failure into success.
+   */
+  @Test
+  void ffmown006OutputDecodeFailureRefusesCleanupClaimsAndAnyFurtherNativeCall() throws Exception {
+    for (String target : OUTPUT_CALLS) {
+      try (var data = Arena.ofConfined()) {
+        var owned = Arena.ofConfined();
+        var literal = new Calls(data);
+        LinuxSystemdSession.Calls calls =
+            (symbol, arguments) -> {
+              Object status = literal.call(symbol, arguments);
+              if (symbol.equals(target))
+                owned.close(); // Independent hostile-lifetime fixture, not real OOM.
+              return status;
+            };
+        var session = new LinuxSystemdSession(calls, owned);
+        assertThrows(IllegalStateException.class, () -> outputRoute(session, target));
+        assertFalse(owned.scope().isAlive());
+        assertFalse(session.closed());
+        int before = literal.events.size();
+        assertThrows(IOException.class, session::close);
+        assertThrows(IOException.class, () -> session.owner(5000000));
+        assertEquals(before, literal.events.size());
+        assertFalse(literal.events.contains("sd_bus_close_unref"));
+      }
+    }
+  }
+
+  /** PT-OPS-FFMOWN007/BUG1444: consumed bus + failed arena close is sticky UNKNOWN. */
+  @Test
+  void ffmown007ArenaCloseUnknownAfterBusConsumptionNeverAllowsANextQueryOrRetry()
+      throws Exception {
+    for (Throwable failure :
+        List.of(
+            new IllegalStateException("synthetic arena close"),
+            new LinkageError("synthetic arena close"))) {
+      try (var data = Arena.ofConfined();
+          var backing = Arena.ofConfined()) {
+        int[] closes = {0};
+        Arena failing =
+            new Arena() {
+              public MemorySegment allocate(long size, long alignment) {
+                return backing.allocate(size, alignment);
+              }
+
+              public MemorySegment.Scope scope() {
+                return backing.scope();
+              }
+
+              public void close() {
+                closes[0]++;
+                if (failure instanceof RuntimeException runtime) throw runtime;
+                throw (Error) failure;
+              }
+            };
+        var literal = new Calls(data);
+        var session = new LinuxSystemdSession(literal, failing);
+        session.start(() -> 5000000);
+        assertSame(failure, assertThrows(failure.getClass(), session::close));
+        assertEquals(1, closes[0]);
+        assertEquals(1, literal.events.stream().filter("sd_bus_close_unref"::equals).count());
+        assertTrue(backing.scope().isAlive());
+        assertFalse(session.closed());
+        int before = literal.events.size();
+        assertThrows(IOException.class, () -> session.owner(5000000));
+        assertThrows(IOException.class, session::close);
+        assertEquals(before, literal.events.size());
+        assertEquals(1, closes[0]);
+      }
     }
   }
 

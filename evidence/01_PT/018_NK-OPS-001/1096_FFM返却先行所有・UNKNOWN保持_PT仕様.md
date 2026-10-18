@@ -1,5 +1,7 @@
 # FFM返却先行所有・UNKNOWN保持 PT仕様
 
+追補：原PG5356/e550e3736は元83429真正0/1097・132/三static0、Factory全四100・outer miss3line2branchの限定証拠として保存。新FFMOWN006は五返却先をfixtureが失効させたdecode Runtime拒否/未正常化・追加nativecall0を確認（実OOM/原本memory破壊ではない）。007はBUG1444/YKT1208のArena close Runtime/Error故障portでbus一度消費後もUNKNOWN/次照会0・Arena再close0を確認。002へ二度目startがCcall0で拒否されるoracleを追加。唯一のprivate release callerはreleaseOutputの非zero guard内であり重複private NULL条件だけ除去、NULL nativecall0の既全試験を維持して実bytecodeで証明する。新commandは同entryのPG5364-v1、新source予定1099invocation132suite/論理1090/独立87（当群7＋既80）、新whole予定3878/561/1661は未実行。元1097結果の再演/coverage合算0、当source全四counterを実測して判定する。
+
 NK-OPS-001/LinuxSystemdSession/Factory.create/start/ownerValue/read/releaseOutput、OPS009/SYS002/UI251/SS343354/SSC308・BUG1414/YKT1178/PG-D429。設計only655bbd45e→origin/mainc40b6755e/PR163、実施a2c1a8af5（914競合は旧SSC304記録と両方保持）。原237内四scopeと原外Arena→Session/bus出力追跡二境界を分離する。
 
 Sessionはnative前に三out bufferとprimitive byte状態を確保、Factoryは既handoffでArena→完成Sessionを保護。引数準備後callOutput内でPENDING=1→native call→正常復帰直後RETURNED=2→return、返却pointerのdecodeは保護域内。UNCONFIRMED=3をclose前に登録し、正常確認だけ空き0へ。未知C callは当pointerをfreeせずslot/arena保持、別既知requestは従来順に一度cleanup、全globalUNKNOWNは次read/close拒否で保持。MemorySegment返却decode失敗でもSession私有のoutが残る。元ABI/同thread/local socket/全query五秒/固定target/型・null・境界/owner二読/権限不変、RPC再発行0。

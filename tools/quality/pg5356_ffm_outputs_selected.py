@@ -22,5 +22,5 @@ def extra_suites():
 
 if __name__=='__main__':
     configure()
-    raise SystemExit(selected.main(stem_override='pg5356-ffm-outputs',version_override='v1',
+    raise SystemExit(selected.main(stem_override='pg5364-ffm-outputs',version_override='v1',
         extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases(),case_repetitions=repetitions()))

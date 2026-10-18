@@ -370,7 +370,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   }
 
   private void release(String symbol, MemorySegment value) throws IOException {
-    if (value.address() == 0) return;
+    // Only releaseOutput calls this after its single explicit nonzero admission.
     Object after = call(symbol, value);
     if (!(after instanceof MemorySegment pointer) || pointer.address() != 0) {
       uncertain = true;
@@ -382,8 +382,13 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   public void close() throws IOException {
     check();
     releaseOutput(0, "sd_bus_close_unref");
-    arena.close();
-    retainedClosed = true;
+    try {
+      arena.close();
+      retainedClosed = true;
+    } catch (RuntimeException | Error failure) {
+      uncertain = true;
+      throw failure;
+    }
   }
 
   @Override
