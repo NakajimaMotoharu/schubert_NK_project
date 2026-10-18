@@ -200,8 +200,9 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
   }
 
   private static byte[] compress(byte[] plaintext) {
-    Deflater deflater = new Deflater(3);
+    // BUG1453/PG-D434: scratch failure must precede native ownership; retain end() priority.
     byte[] buffer = new byte[BUFFER_BYTES];
+    Deflater deflater = new Deflater(3);
     try (var output = new WipingByteArrayOutputStream()) {
       deflater.setInput(plaintext);
       deflater.finish();
@@ -217,8 +218,9 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
   }
 
   private static byte[] decompress(byte[] compressed) {
-    Inflater inflater = new Inflater();
+    // PT-IDEM-SCRATCH002: no native Inflater exists if this allocation fails.
     byte[] buffer = new byte[BUFFER_BYTES];
+    Inflater inflater = new Inflater();
     try (var output = new WipingByteArrayOutputStream()) {
       inflater.setInput(compressed);
       while (!inflater.finished()) {

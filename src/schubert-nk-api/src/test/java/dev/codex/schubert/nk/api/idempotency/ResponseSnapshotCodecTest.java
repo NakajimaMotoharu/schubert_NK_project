@@ -437,13 +437,15 @@ final class ResponseSnapshotCodecTest {
   }
 
   private static byte[] independentCompress(byte[] plaintext, byte[] dictionary) throws Exception {
-    Deflater deflater = new Deflater(3);
-    if (dictionary != null) {
-      deflater.setDictionary(dictionary);
-    }
     ByteArrayOutputStream output = new ByteArrayOutputStream();
-    try (DeflaterOutputStream stream = new DeflaterOutputStream(output, deflater)) {
-      stream.write(plaintext);
+    Deflater deflater = new Deflater(3);
+    try {
+      if (dictionary != null) {
+        deflater.setDictionary(dictionary);
+      }
+      try (DeflaterOutputStream stream = new DeflaterOutputStream(output, deflater)) {
+        stream.write(plaintext);
+      }
     } finally {
       deflater.end();
     }
