@@ -31,7 +31,7 @@ def payload():
 
 
 def main():
-    actual = json.loads((role.W / 'pg5004-prepare-ro-v1.safe.json').read_bytes())
+    actual = json.loads((role.W / 'pg5004-prepare-ro-v2.safe.json').read_bytes())
     if not (type(actual.get('actualExit')) is int and actual['actualExit'] == 0
             and actual.get('sourceQualified') is True and actual.get('candidateSource') == role.SOURCE
             and actual.get('currentApprovalEpochChanged') is False):

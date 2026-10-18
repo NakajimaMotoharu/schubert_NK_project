@@ -43,12 +43,18 @@ class Ro(unittest.TestCase):
 
     def test_explicit_actions_actual_current_and_single_gate(self):
         raw = dispatch.entry_source()
-        for marker in ('pg5002-frozen-v1.safe.json', 'pg5004-stage-v1.exit',
+        for marker in ('pg5002-frozen-v1.safe.json', 'pg5004-stage-v2.exit',
                        '0.1.0-PG4860', 'Pg5000OriginalTupleTest', "['stage'],['prepare-ro']"):
             self.assertIn(marker, raw)
         self.assertEqual(1, raw.count('with management_gate('))
         self.assertIn(dispatch.GUEST, dispatch.STAGE)
         self.assertIn(dispatch.REMOTE, dispatch.STAGE)
+        self.assertIn("('/opt/schubert-nk/releases/0.1.0-PG4860')", dispatch.STAGE)
+        self.assertIn('/home/ubuntu/pg5004-fixed-stage-v2/pg5000-ssc304-ro-tools-v1.retry2.tar', dispatch.STAGE)
+        for old in ('0.1.0-PG4702', 'pg4872', 'pg4876'):
+            self.assertNotIn(old, dispatch.STAGE)
+        self.assertIn("archive=P/(role.TOOLS+'.retry2.tar')", raw)
+        self.assertIn("('pg5004-'+action+'-v2')", raw)
         with patch.object(dispatch.sys, 'argv', ['tool', 'activate']), patch.object(dispatch, 'authenticate_host') as auth:
             with self.assertRaises(ValueError):
                 dispatch.main()

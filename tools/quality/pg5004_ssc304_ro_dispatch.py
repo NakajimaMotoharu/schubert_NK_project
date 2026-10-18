@@ -6,14 +6,22 @@ from pg5002_ssc304_ro_compile import TARGET, generated
 from pg4996_resume_connection import authenticate_host
 
 GUEST = '/var/lib/pgpt-s1-preservation/' + role.TOOLS
-REMOTE = '/home/ubuntu/pg5004-fixed-stage-v1'
-STAGE = previous.STAGE.replace(previous.GUEST, GUEST).replace(previous.REMOTE, REMOTE)
+REMOTE = '/home/ubuntu/pg5004-fixed-stage-v2'
+STAGE = (previous.STAGE.replace(previous.GUEST, GUEST).replace(previous.REMOTE, REMOTE)
+         .replace('0.1.0-PG4702', '0.1.0-PG4860')
+         .replace('pg4872-ssc301-302-ro-tools-v1.tar', 'pg5000-ssc304-ro-tools-v1.retry2.tar'))
 
 
 def entry_source():
     raw = previous.entry_source()
     for a, b in [('pg4876', 'pg5004'), ('pg4874', 'pg5002'), ('Pg4872', 'Pg5000'), ('PG4702', 'PG4860')]:
         raw = raw.replace(a, b)
+    marker = "archive=P/(role.TOOLS+'.tar')"
+    if raw.count(marker) != 1:
+        raise ValueError('one new-only retry archive boundary')
+    raw = raw.replace(marker, "archive=P/(role.TOOLS+'.retry2.tar')", 1)
+    raw = raw.replace("('pg5004-'+action+'-v1')", "('pg5004-'+action+'-v2')")
+    raw = raw.replace('pg5004-stage-v1.exit', 'pg5004-stage-v2.exit')
     return raw
 
 
