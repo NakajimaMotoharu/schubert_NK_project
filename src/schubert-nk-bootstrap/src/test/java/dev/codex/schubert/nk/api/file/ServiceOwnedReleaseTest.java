@@ -33,6 +33,12 @@ final class ServiceOwnedReleaseTest {
     assertEquals(0, calls.get());
     retaining.close(expected);
     assertEquals(1, calls.get());
+    var legacyCalls = new AtomicInteger();
+    Closeable legacy = legacyCalls::incrementAndGet;
+    assertSame(legacy, ServiceProcessResources.release(legacy, false));
+    ServiceProcessResources.release(legacy, false).close();
+    ServiceProcessResources.release(legacy, true).close();
+    assertEquals(2, legacyCalls.get());
   }
 
   @Test

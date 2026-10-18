@@ -1,5 +1,7 @@
 # Service resource取得・UNKNOWN保持 PT仕様
 
+追補BUG1442/YKT1206：PG5332/96f743eacは1090/132・機能/静的0だが四coverage miss5line/1branchの限定成功として不変保存。新PG5340では正常旧release false同identity/true一度をSERVICEOWN001へ追加、UNKNOWN永久loopを元二catch frame内へ戻し、一回の観測待機だけが返るhelperへ分離する。非復帰を正常化/偽throw/除外せず四counter100を独立確認する。同じ試験件数1090/132、新TestID加算0。初回PG5332元83870はsuite登録前エラー/Maven未着手・元出力のみ保持、登録後96sourceの成功と区別。fresh再実行は新Main sourceのため必要、旧成功の確認再演ではない。
+
 Program NK-OPS-001/ServiceProcessResources.execute/withDatabase/ownedRelease/release、SYS002/004,DAT001/UI212243253/SS311342343354・SSC308、BUG1414/YKT1178、PG-D427。対象原4root/credential set/source/pool。全取得port/解放port/actionはfactory前に構築し、非null成功後のcallback構築gapを保護、nullは従来NPE型/checked factory Eと既IO/unknown compound優先を維持する。source password copyは保護body先頭で消し、pool呼出/UNKNOWN保持前に消去、factory失敗もfinally消去。retainfalseのrelease identity、retaintrueの一度close/固定redaction/interrupt後も外側保持・自動retry0を変えない。
 
 新ServiceOwnedReleaseTest 4method：SERVICEOWN001固定同一resource/取得前calls0/正常一度、002null両branch/失敗factory・null結果はbody/release0、003四固定例外identity/四close、004独立子JVM三種IO/Runtime/Errorで固定`attempts=1 downstream=0`/interrupt後生存/秘密出力無し/owned test TERM143。期待はliteral/独立counter・identity/OS子生存で算出しProduction結果から作らない。既ServiceProcessResources7（正常/複合/部分失敗・消去/null/ACL/並行/Web上限）とServiceNativeRelease1は当source再検証。既Probeにownedルートのみ追加、旧通常呼出の期待・assert不変。固定fixture資源だけで実VM成功・provider正常closeと解釈しない。

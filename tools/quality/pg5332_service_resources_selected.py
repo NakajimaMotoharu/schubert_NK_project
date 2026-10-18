@@ -24,7 +24,7 @@ def extra_suites():
 
 def main():
     configure()
-    return selected.main(stem_override='pg5332-service-resources',version_override='v1',
+    return selected.main(stem_override='pg5340-service-resources',version_override='v1',
         extra_suites=extra_suites(),case_name_aliases=aliases.invocation_aliases(),case_repetitions=repetitions())
 
 

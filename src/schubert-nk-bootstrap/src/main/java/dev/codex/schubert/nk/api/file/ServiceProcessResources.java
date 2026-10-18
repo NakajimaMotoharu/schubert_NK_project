@@ -167,7 +167,8 @@ public final class ServiceProcessResources {
       try {
         release.close(resource);
       } catch (IOException | RuntimeException | Error unconfirmed) {
-        retainUnconfirmed();
+        System.err.println("service resource release unconfirmed");
+        while (true) observeUnconfirmed();
       }
     };
   }
@@ -181,20 +182,18 @@ public final class ServiceProcessResources {
       try {
         resource.close();
       } catch (IOException | RuntimeException | Error unconfirmed) {
-        retainUnconfirmed();
+        System.err.println("service resource release unconfirmed");
+        while (true) observeUnconfirmed();
       }
     };
   }
 
-  private static void retainUnconfirmed() {
-    System.err.println("service resource release unconfirmed");
-    while (true) {
-      try {
-        // Periodic observation wakeup, never a release/automatic retry/termination proof.
-        Thread.sleep(1000);
-      } catch (InterruptedException notification) {
-        /* UNKNOWN still owns the full outer frame. */
-      }
+  private static void observeUnconfirmed() {
+    try {
+      // Only this single observation tick returns. The original catch frame never returns.
+      Thread.sleep(1000);
+    } catch (InterruptedException notification) {
+      /* UNKNOWN still owns the full outer frame, never a release/termination proof. */
     }
   }
 }
