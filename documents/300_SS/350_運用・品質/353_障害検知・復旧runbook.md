@@ -1,5 +1,9 @@
 # 障害検知・復旧runbook
 
+## SSC305 当既存ADMINの終了比較拒否・保持pair回収
+
+SS343 SSC305を適用する。5086verify元67671はPREPARE_DATABASE_SCOPE、Ref子のsnapshot68の終了比較拒否で保持、execute/credential発行前。元Rootのstart/endを混同しない。5084 frozen・元byte/log・実pair927504/927536と全100/7FD・子bus・M-A/OFD/SQL0/全24/原本/native86をfresh認証した一つの回収接続だけで、新十Ref/全原値の耐久proof→予約/pidfd/子TERM一回→子消失/親同一再読→親TERM一回→全資源/原値→正常新Refs/同hostgate自然継承を実施する。旧pid/観測proofだけで操作せず、foreign/unknownはsignal0・隔離。元verify/close UNKNOWNは解消と呼ばず、別独立post0後だけnew-only再試験へ進む。旧全3791/署名/Root等は再演しない。
+
 ## SSC298 post済みmetadata-only scopeの限定回収
 
 SS343 SSC298に従い、元4494/26012 UNKNOWNを再実行しない。4504で固定metadata828676/4FD・子829193のZ/rawWaitStatus0とpost manifest7ab5cdc6/全新post scope正常を認証し、旧parent未waitを正常化しない。新only同artifact proof/全新十Ref正常・独立反例・設計only main公開後、当metadataだけ通常pidfd TERM一回、子は自然reapでsignal0、元hostgate自然継承/元transport実値とguest終端を別保存する。旧二pid/Root/Unit/VM/DBserver等への操作0。
