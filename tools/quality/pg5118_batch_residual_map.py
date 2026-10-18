@@ -32,8 +32,22 @@ def parse_report(raw):
     root=ET.fromstring(raw)
     if root.tag!='report':raise ValueError('one JaCoCo report required')
     total=counters(root);sums={k:{'missed':0,'covered':0}for k in COUNTERS}
-    rows=[];seen=set()
+    rows=[];seen=set();source_lines={'missed':0,'covered':0};source_seen=set()
     for package in root.findall('package'):
+        for source in package.findall('sourcefile'):
+            key=(package.attrib.get('name'),source.attrib['name'])
+            if key in source_seen:raise ValueError('unique sourcefile within package required')
+            source_seen.add(key)
+            lines_seen=set();actual={'missed':0,'covered':0}
+            for line in source.findall('line'):
+                nr,mi,ci=(int(line.attrib[k])for k in ('nr','mi','ci'))
+                if nr<=0 or nr in lines_seen or min(mi,ci)<0 or mi+ci==0:
+                    raise ValueError('unique positive source line and instruction counts required')
+                lines_seen.add(nr)
+                actual['covered'if ci>0 else'missed']+=1
+            if actual!=counters(source)['LINE']:
+                raise ValueError('source line instructions reconcile to declared LINE')
+            for field in source_lines:source_lines[field]+=actual[field]
         for cls in package.findall('class'):
             name=cls.attrib['name'];source=cls.attrib.get('sourcefilename')
             if name in seen or not re.fullmatch(r'[A-Za-z_$][A-Za-z0-9_$/]*',name)or any(not part for part in name.split('/')):
@@ -56,10 +70,15 @@ def parse_report(raw):
                                     'line':int(method.attrib['line'])if'line'in method.attrib else None,
                                     'counters':m,'branchOutcome':'UNKNOWN_REQUIRES_CODE_OR_BYTECODE_AND_INDEPENDENT_PT'})
             rows.append({'class':name,'sourceFilename':source,'counters':count,'methods':methods})
-    if sums!=total:raise ValueError('all class counters must reconcile with immutable root counters')
+    if source_lines!=total['LINE']or any(sums[k]!=total[k]for k in COUNTERS if k!='LINE'):
+        raise ValueError('source LINE and additive class counters reconcile with immutable root counters')
+    if any(sums['LINE'][k]<source_lines[k]for k in source_lines):
+        raise ValueError('class LINE occurrences cannot be below unique source lines')
     return {'counters':total,'classes':sorted(rows,key=lambda v:(-v['counters']['LINE']['missed'],v['class'])),
             'physicalReportedCodeClasses':len(seen),'affectedClasses':len(rows),
-            'affectedMethods':sum(len(r['methods'])for r in rows),'counterReconciled':True}
+            'affectedMethods':sum(len(r['methods'])for r in rows),'counterReconciled':True,
+            'lineReconciliation':{'sourceUnique':source_lines,'classOccurrences':sums['LINE'],
+                                  'classOverlapDelta':{k:sums['LINE'][k]-source_lines[k]for k in source_lines}}}
 
 
 def source_hints(row,tests):

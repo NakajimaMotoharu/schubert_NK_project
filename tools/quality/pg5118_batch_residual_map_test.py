@@ -6,7 +6,8 @@ import pg5118_batch_residual_map as target
 COUNT='<counter type="LINE" missed="2" covered="0"/><counter type="METHOD" missed="1" covered="0"/><counter type="CLASS" missed="1" covered="0"/><counter type="BRANCH" missed="2" covered="0"/>'
 METHOD='<method name="run" desc="()V" line="10">'+COUNT+'</method>'
 CLASS='<class name="dev/example/A" sourcefilename="A.java">'+METHOD+COUNT+'</class>'
-XML=('<report name="literal"><package name="dev/example">'+CLASS+'</package>'+COUNT+'</report>').encode()
+LINES='<sourcefile name="A.java"><line nr="10" mi="3" ci="0" mb="2" cb="0"/><line nr="11" mi="1" ci="0" mb="0" cb="0"/><counter type="LINE" missed="2" covered="0"/></sourcefile>'
+XML=('<report name="literal"><package name="dev/example">'+CLASS+LINES+'</package>'+COUNT+'</report>').encode()
 
 
 class Residual(unittest.TestCase):
@@ -30,11 +31,24 @@ class Residual(unittest.TestCase):
             target.parse_report(b'<counter type="LINE" missed="3" covered="0"/>'.join(wrong))
 
     def test_no_residual_is_only_counter_measurement_not_new_tests(self):
-        raw=XML.replace(b'missed="2" covered="0"',b'missed="0" covered="2"').replace(b'missed="1" covered="0"',b'missed="0" covered="1"')
+        raw=XML.replace(b'missed="2" covered="0"',b'missed="0" covered="2"').replace(b'missed="1" covered="0"',b'missed="0" covered="1"').replace(b'mi="3" ci="0"',b'mi="0" ci="3"').replace(b'mi="1" ci="0"',b'mi="0" ci="1"')
         value=target.parse_report(raw)
         self.assertEqual([],value['classes'])
         self.assertEqual(0,value['affectedMethods'])
         for path in (target.__file__,__file__):self.assertEqual(0,checkPath(path))
+
+    def test_two_classes_shared_source_line_is_one_covered_line(self):
+        count='<counter type="LINE" missed="0" covered="1"/><counter type="METHOD" missed="0" covered="1"/><counter type="CLASS" missed="0" covered="1"/>'
+        cls='<class name="dev/A" sourcefilename="A.java">'+count+'</class>'
+        source='<sourcefile name="A.java"><line nr="10" mi="1" ci="3"/><counter type="LINE" missed="0" covered="1"/></sourcefile>'
+        total='<counter type="LINE" missed="0" covered="1"/><counter type="METHOD" missed="0" covered="2"/><counter type="CLASS" missed="0" covered="2"/>'
+        raw=('<report><package name="dev">'+cls+cls.replace('dev/A','dev/A$1')+source+'</package>'+total+'</report>').encode()
+        value=target.parse_report(raw)
+        self.assertEqual({'missed':0,'covered':1},value['lineReconciliation']['sourceUnique'])
+        self.assertEqual({'missed':0,'covered':2},value['lineReconciliation']['classOccurrences'])
+        self.assertEqual({'missed':0,'covered':1},value['lineReconciliation']['classOverlapDelta'])
+        for bad in (raw.replace(b'ci="3"',b'ci="0"'),raw.replace(b'</sourcefile>',b'<line nr="10" mi="0" ci="1"/></sourcefile>')):
+            with self.assertRaises(ValueError):target.parse_report(bad)
 
 
 if __name__=='__main__':unittest.main()
