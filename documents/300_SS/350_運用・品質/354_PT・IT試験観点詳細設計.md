@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+限定検証追補（2026-10-18）：source6d7a54a01・独立新16を含む222PT/32suite、全storage四counter1200行/269method/37class/537branch各miss0、六format/実compile三static0、取得直後保護域と旧use56opcode/handler同義の実bytecodeを確認（003016/017、PG5138 5ce05224・訂正公開e3024935）。Root11/共通Directory5だけの結果であり、残候補/新source全体/native/全正式品質は未完。失敗v1～v5/metadata384aは保持、既全体/旧nativeを転用しない。共通caller等の残候補は同規則と既独立oracleで個別修正又は非該当根拠・再発防止確認を続ける。
+
 Root top補足：専用RootDescriptorの有効FD319（Integer cache範囲外）・負FD・open失敗・null callsと一度closeを独立literalで検証し、primitive保持で取得後boxing無しを実bytecodeで確認する。Root checkedにOwnedDirectory由来のIO Reason変換を加えず、同FD・同型・同一失敗と既close優先順位を保持する。fake DirectoryCallsが他native操作を呼ばれた場合はfailし、Root authority/本物起動の代用にしない。
 
 SS333/343 SSC308。全port null/構築Errorがacquire前、factory IO/Runtime/Error/null時のbody/release0、正常nullable結果と同一resource一度close、body/close全IO reason・unknown型・同一object・既suppressedの独立matrixを固定literal順序/identity/秘匿messageで検証する。期待値を製造use/acquireで生成せず、SS333表のルールを直接assertする。既ResourceScope全PT・全Directory能力PTを同source再実行し、公開API既正常/境界/失敗/NOFOLLOW/transfer/close/並行の契約を保持。wrapper/stateLock/EntryHandle確保がnativeopen前、取得直後保護域前にnew/invokedynamic/boxing無しをJava25実bytecodeで確認し、実OOME発生や任意native成功を捏造しない。Root固定metadata/pin/世代/owner/期限/借用能力と新source実経路は別に資格、68file237siteの残判定と追加予防testまでYKT未完。旧成功/別sourcecounterの合算/coverage除外/安易なsuppressionは禁止。
