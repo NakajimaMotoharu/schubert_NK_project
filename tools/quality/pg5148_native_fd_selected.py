@@ -111,7 +111,19 @@ def main_delta(snapshot, group='elf'):
             'physicalSha256': actual}
 
 
-def main(*, stem_override=None, version_override=None, extra_suites=None):
+def expected_invocations(methods,aliases,source):
+    if len(set(aliases.values()))!=len(aliases):raise ValueError('one-to-one explicit invocation aliases')
+    for observed,canonical in aliases.items():
+        if canonical not in methods or observed!=canonical+'(Path)' or not re.search(
+                r'void\s+'+re.escape(canonical)+r'\(\s*@TempDir\s+Path\s+temporary\s*\)',source):
+            raise ValueError('only exact declared TempDir Path invocation')
+    reverse={canonical:observed for observed,canonical in aliases.items()}
+    result=[reverse.get(method,method) for method in methods]
+    if len(set(result))!=len(result):raise ValueError('invocation collision')
+    return sorted(result)
+
+
+def main(*, stem_override=None, version_override=None, extra_suites=None, case_name_aliases=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
@@ -155,6 +167,10 @@ def main(*, stem_override=None, version_override=None, extra_suites=None):
         if len(methods) != text.count('@Test') or len(set(methods)) != len(methods):
             raise ValueError('literal exact nonempty case inventory')
         expected[name] = sorted(methods)
+    for name,aliases in (case_name_aliases or {}).items():
+        if name not in suites:raise ValueError('invocation alias outside selected suite')
+        text=(snapshot/('src/schubert-nk-'+suites[name]+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
+        expected[name]=expected_invocations(expected[name],aliases,text)
     env = {k: v for k, v in os.environ.items() if k not in ('JAVA_TOOL_OPTIONS', 'JDK_JAVA_OPTIONS', '_JAVA_OPTIONS', 'CLASSPATH')}
     env.update(JAVA_HOME=str(TC / 'jdk-25.0.4'), PATH=str(TC / 'jdk-25.0.4/bin') + ':' + os.environ['PATH'],
                MAVEN_OPTS='-Xmx768m -Djava.io.tmpdir=' + str(work),
@@ -165,6 +181,7 @@ def main(*, stem_override=None, version_override=None, extra_suites=None):
     begin = {'sourceSnapshot': head, 'deployedSource': BASE, 'phase': args.phase, 'group': args.group, 'startUTC': utc(),
              'archiveSha256': sha(archive), 'inputs': inputs, 'expectedMethods': expected,
              'commands': commands, 'parentUmask': '0077', 'childMavenUmask': '0027',
+             'invocationAliases':case_name_aliases or {},
              'vmActions': 0, 'wholeRegression': False, 'formalAccepted': False}
     (work / 'begin.safe.json').write_text(json.dumps(begin, sort_keys=True))
     codes = []; logs = {}

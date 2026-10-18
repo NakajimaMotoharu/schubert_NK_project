@@ -174,7 +174,7 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
         cases = evidence.cases(raw, name)
         aliases=(case_name_aliases or {}).get(name,{})
         if aliases:
-            if result.get('qualifiedInvocationAliases',{}).get(name)!=aliases:
+            if result.get('qualifiedInvocationAliases',result.get('invocationAliases',{})).get(name)!=aliases:
                 raise ValueError('same explicit independently-qualified invocation aliases')
             source=(run/'source'/('src/schubert-nk-'+module+'/src/test/java/'+name.replace('.','/')+'.java')).read_text()
             if len(set(aliases.values()))!=len(aliases):raise ValueError('invocation aliases must be one-to-one')
@@ -184,7 +184,8 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
                 matching=[case for case in cases if case['method']==observed]
                 if len(matching)!=1:raise ValueError('exactly one original observed invocation')
                 matching[0]['observedInvocation']=observed;matching[0]['method']=canonical
-        if sorted(c['method'] for c in cases) != begin['expectedMethods'][name]:
+        expected_methods=sorted(aliases.get(method,method) for method in begin['expectedMethods'][name])
+        if sorted(c['method'] for c in cases) != expected_methods:
             raise ValueError('literal original case inventory')
         for case in cases:
             if name.endswith('.RootElfDigestPortTest'):

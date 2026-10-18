@@ -311,32 +311,32 @@ public final class MaintenanceRunFiles {
       try {
         T result;
         {
-          var var = OwnedTransferDirectory.open(directories, varPath);
           result =
-              ResourceScope.use(
-                  var::close,
-                  () -> {
-                    var lib = var.openExistingChild(LITERAL_LIB);
-                    return ResourceScope.use(
-                        lib::close,
-                        () -> {
-                          var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
-                          return ResourceScope.use(
-                              app::close,
-                              () -> {
-                                var maintenance = app.openExistingChild("maintenance");
-                                return ResourceScope.use(
-                                    maintenance::close,
-                                    () -> {
-                                      var runs = maintenance.openExistingChild(LITERAL_RUNS);
-                                      return ResourceScope.use(
-                                          runs::close,
-                                          () -> {
-                                            var attempts =
-                                                maintenance.openExistingChild(LITERAL_ATTEMPTS);
-                                            return ResourceScope.use(
-                                                attempts::close,
-                                                () -> {
+              ResourceScope.acquire(
+                  () -> OwnedTransferDirectory.open(directories, varPath),
+                  OwnedTransferDirectory::close,
+                  var -> {
+                    return ResourceScope.acquire(
+                        () -> var.openExistingChild(LITERAL_LIB),
+                        OwnedTransferDirectory::close,
+                        lib -> {
+                          return ResourceScope.acquire(
+                              () -> lib.openExistingChild(LITERAL_SCHUBERT_NK),
+                              OwnedTransferDirectory::close,
+                              app -> {
+                                return ResourceScope.acquire(
+                                    () -> app.openExistingChild("maintenance"),
+                                    OwnedTransferDirectory::close,
+                                    maintenance -> {
+                                      return ResourceScope.acquire(
+                                          () -> maintenance.openExistingChild(LITERAL_RUNS),
+                                          OwnedTransferDirectory::close,
+                                          runs -> {
+                                            return ResourceScope.acquire(
+                                                () ->
+                                                    maintenance.openExistingChild(LITERAL_ATTEMPTS),
+                                                OwnedTransferDirectory::close,
+                                                attempts -> {
                                                   var roots =
                                                       List.of(
                                                           var,
@@ -397,18 +397,18 @@ public final class MaintenanceRunFiles {
   }
 
   private void verifyHostAncestors(List<Snapshot> privateValues) throws StorageIoException {
-    var var = OwnedTransferDirectory.open(host.orElseThrow(), varPath);
-    ResourceScope.use(
-        var::close,
-        () -> {
-          var lib = var.openExistingChild(LITERAL_LIB);
-          return ResourceScope.use(
-              lib::close,
-              () -> {
-                var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
-                return ResourceScope.use(
-                    app::close,
-                    () -> {
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(host.orElseThrow(), varPath),
+        OwnedTransferDirectory::close,
+        var -> {
+          return ResourceScope.acquire(
+              () -> var.openExistingChild(LITERAL_LIB),
+              OwnedTransferDirectory::close,
+              lib -> {
+                return ResourceScope.acquire(
+                    () -> lib.openExistingChild(LITERAL_SCHUBERT_NK),
+                    OwnedTransferDirectory::close,
+                    app -> {
                       var hostRoots = List.of(var, lib, app);
                       var before = new ArrayList<Snapshot>();
                       for (int index = 0; index < hostRoots.size(); index++) {
@@ -655,8 +655,10 @@ public final class MaintenanceRunFiles {
     }
 
     private void verifyStartupPrivate(DirectoryCalls privateCalls) throws IOException {
-      var var = OwnedTransferDirectory.open(privateCalls, varPath);
-      ResourceScope.use(var::close, () -> verifyStartupPrivate(List.of(var), 0));
+      ResourceScope.acquire(
+          () -> OwnedTransferDirectory.open(privateCalls, varPath),
+          OwnedTransferDirectory::close,
+          var -> verifyStartupPrivate(List.of(var), 0));
     }
 
     private Boolean verifyStartupPrivate(List<OwnedTransferDirectory> views, int index)
@@ -678,10 +680,10 @@ public final class MaintenanceRunFiles {
           LITERAL_LIB, LITERAL_SCHUBERT_NK, "maintenance", LITERAL_RUNS, LITERAL_ATTEMPTS
         };
         var parent = index == 4 ? views.get(3) : current;
-        var next = parent.openExistingChild(names[index]);
-        ResourceScope.use(
-            next::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> parent.openExistingChild(names[index]),
+            OwnedTransferDirectory::close,
+            next -> {
               var added = new ArrayList<>(views);
               added.add(next);
               return verifyStartupPrivate(List.copyOf(added), index + 1);
@@ -1190,31 +1192,30 @@ public final class MaintenanceRunFiles {
 
     private void verifyNamespace() throws StorageIoException {
       {
-        var var = OwnedTransferDirectory.open(directories, varPath);
-        ResourceScope.use(
-            var::close,
-            () -> {
-              var lib = var.openExistingChild(LITERAL_LIB);
-              return ResourceScope.use(
-                  lib::close,
-                  () -> {
-                    var app = lib.openExistingChild(LITERAL_SCHUBERT_NK);
-                    return ResourceScope.use(
-                        app::close,
-                        () -> {
-                          var maintenance = app.openExistingChild("maintenance");
-                          return ResourceScope.use(
-                              maintenance::close,
-                              () -> {
-                                var runs = maintenance.openExistingChild(LITERAL_RUNS);
-                                return ResourceScope.use(
-                                    runs::close,
-                                    () -> {
-                                      var attempts =
-                                          maintenance.openExistingChild(LITERAL_ATTEMPTS);
-                                      return ResourceScope.use(
-                                          attempts::close,
-                                          () -> {
+        ResourceScope.acquire(
+            () -> OwnedTransferDirectory.open(directories, varPath),
+            OwnedTransferDirectory::close,
+            var -> {
+              return ResourceScope.acquire(
+                  () -> var.openExistingChild(LITERAL_LIB),
+                  OwnedTransferDirectory::close,
+                  lib -> {
+                    return ResourceScope.acquire(
+                        () -> lib.openExistingChild(LITERAL_SCHUBERT_NK),
+                        OwnedTransferDirectory::close,
+                        app -> {
+                          return ResourceScope.acquire(
+                              () -> app.openExistingChild("maintenance"),
+                              OwnedTransferDirectory::close,
+                              maintenance -> {
+                                return ResourceScope.acquire(
+                                    () -> maintenance.openExistingChild(LITERAL_RUNS),
+                                    OwnedTransferDirectory::close,
+                                    runs -> {
+                                      return ResourceScope.acquire(
+                                          () -> maintenance.openExistingChild(LITERAL_ATTEMPTS),
+                                          OwnedTransferDirectory::close,
+                                          attempts -> {
                                             List<Snapshot> actual =
                                                 capture(
                                                     List.of(
@@ -1264,11 +1265,14 @@ public final class MaintenanceRunFiles {
     return root.atDirectory(
         held -> {
           Set<String> names = new HashSet<>();
-          var entries = io.openNames(held);
-          if (entries == null) throw unavailable();
-          ResourceScope.use(
-              entries::close,
+          ResourceScope.acquire(
               () -> {
+                var entries = io.openNames(held);
+                if (entries == null) throw unavailable();
+                return entries;
+              },
+              DirectoryStream::close,
+              entries -> {
                 try {
 
                   for (Path child : entries) {
