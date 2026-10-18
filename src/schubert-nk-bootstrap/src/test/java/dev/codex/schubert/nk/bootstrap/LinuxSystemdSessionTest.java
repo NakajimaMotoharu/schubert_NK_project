@@ -341,6 +341,47 @@ final class LinuxSystemdSessionTest {
     }
   }
 
+  /**
+   * PT-OPS-FFMOWN008: positive process progress skips wait but never renews the original budget.
+   */
+  @Test
+  void ffmown008PositiveAuthenticationProgressUsesNoWaitAndNeverRenewsBudget() throws Exception {
+    for (boolean expires : new boolean[] {false, true}) {
+      try (var data = Arena.ofConfined()) {
+        var literal = new Calls(data);
+        literal.readyAfter = expires ? Integer.MAX_VALUE : 2;
+        LinuxSystemdSession.Calls calls =
+            (symbol, arguments) -> {
+              Object value = literal.call(symbol, arguments);
+              if (symbol.equals("sd_bus_process")) {
+                if (expires) literal.elapsedMicros += 2000000;
+                return 1;
+              }
+              return value;
+            };
+        var owned = Arena.ofConfined();
+        var session = new LinuxSystemdSession(calls, owned);
+        SystemManagerObservation.Budget budget =
+            () -> {
+              long remaining = 5000000 - literal.elapsedMicros;
+              if (remaining < 1) throw new IOException("synthetic original budget");
+              return remaining;
+            };
+        if (expires) assertThrows(IOException.class, () -> session.start(budget));
+        else session.start(budget);
+        assertEquals(
+            expires ? 3 : 2, literal.events.stream().filter("sd_bus_process"::equals).count());
+        assertEquals(0, literal.events.stream().filter("sd_bus_wait"::equals).count());
+        assertEquals(expires ? 6000000 : 0, literal.elapsedMicros);
+        assertTrue(literal.rpcBudgets.isEmpty());
+        session.close();
+        assertEquals(1, literal.events.stream().filter("sd_bus_close_unref"::equals).count());
+        assertTrue(session.closed());
+        assertFalse(owned.scope().isAlive());
+      }
+    }
+  }
+
   static final class Calls implements LinuxSystemdSession.Calls {
     final Arena data;
     final MemorySegment bus, creds, message;

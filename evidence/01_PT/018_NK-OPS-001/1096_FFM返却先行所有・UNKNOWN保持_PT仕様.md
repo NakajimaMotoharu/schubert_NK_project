@@ -1,5 +1,7 @@
 # FFM返却先行所有・UNKNOWN保持 PT仕様
 
+最終追補BUG1445/YKT1209：PG5364/8558は1099成功でもsd_bus_process!=0枝が一つ未網羅でPG5366独立post拒否1、manifest無しを保持。FFMOWN008で正進捗1の二tick→RUNNING・wait0、三tick→元5秒budget失効・wait0/renew0を固定独立値で確認する。Main code/全764 byteは8558と不変、試験だけを追加した新sourceのPG5372-v1予定1100invocation132suite/論理1091/独立88（当群8＋既80）を資格する。新whole予定3879/561/1661は未実行、旧1097/1099の成功やcoverageを合算しない。
+
 追補：原PG5356/e550e3736は元83429真正0/1097・132/三static0、Factory全四100・outer miss3line2branchの限定証拠として保存。新FFMOWN006は五返却先をfixtureが失効させたdecode Runtime拒否/未正常化・追加nativecall0を確認（実OOM/原本memory破壊ではない）。007はBUG1444/YKT1208のArena close Runtime/Error故障portでbus一度消費後もUNKNOWN/次照会0・Arena再close0を確認。002へ二度目startがCcall0で拒否されるoracleを追加。唯一のprivate release callerはreleaseOutputの非zero guard内であり重複private NULL条件だけ除去、NULL nativecall0の既全試験を維持して実bytecodeで証明する。新commandは同entryのPG5364-v1、新source予定1099invocation132suite/論理1090/独立87（当群7＋既80）、新whole予定3878/561/1661は未実行。元1097結果の再演/coverage合算0、当source全四counterを実測して判定する。
 
 NK-OPS-001/LinuxSystemdSession/Factory.create/start/ownerValue/read/releaseOutput、OPS009/SYS002/UI251/SS343354/SSC308・BUG1414/YKT1178/PG-D429。設計only655bbd45e→origin/mainc40b6755e/PR163、実施a2c1a8af5（914競合は旧SSC304記録と両方保持）。原237内四scopeと原外Arena→Session/bus出力追跡二境界を分離する。
