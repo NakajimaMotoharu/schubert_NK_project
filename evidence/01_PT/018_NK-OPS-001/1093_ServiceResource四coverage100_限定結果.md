@@ -1,0 +1,11 @@
+# Service resource四coverage100 限定結果
+
+1092/PG-D427/SSC308、Main/Test **7aa3ab90c26701a6cce96fe92151e85a802fb3cb**/dev-foundation。PG5340-v2元3012真正0/phase[0,0]/**1090invocation132suite/FES・flaky・skip・not-run0**、六format先行/NullAway・ErrorProne0/三compiled static0/全storage四miss0。1081論理method/反復一method10回、新独立4＋既74再検証＝独立78/関連1012、当変更sourceで新TestID追加0（群として4）。ServiceProcessResources全体 **68line/23method/1class/4branch各miss0**、除外/抑制/偽throw0。
+
+PG5342実0、`evidence/provisional/PG5342-service-resources-bytecode-v1/manifest.json` SHA **2f32e51efac58e6478c29402adf17a792b2ceedfd7aa6d4aabbb59c72aeb91a3**。四factory直返却/全port先行、password消去を保護source action先頭/失敗finallyに維持。二releaseのUNKNOWN loopは元catch frameに直接残り、IO/Runtime/Error/interrupt後も一度close/外側frame保持・正常終了0。待機helper一回のreturnは解放成功ではない。全764Mainは当class意味1だけ/他763同byte/nested差0。実providerの正常解放/ordinary VM受入の代替ではない。
+
+公開PG5344 `--group factory` 実0、`evidence/provisional/pg5340-service-resources-green-v2-metadata-v2/manifest.json` SHA **c509ad8eaf7912f850a7d4df67044094770b93fd32deb846aca95dae3ee61e38**。全1090 TestID/class/method/独立fixture期待/実値・実行日時/OS/JDK/tool/source/command/exit/XML/static/coverage/hashをallowlist公開。隔離実PG18.6 binary SHA30a38e05…を**当run開始**で取得、原本/VM業務DB操作0と分離。PG5346分類実0 **a26115832f2785548fb7287b03a31d772fbcb62fe732e14b5ec6cf85e55ef1af**、原237 **203限定/1借用/33UNKNOWN**。四siteは先の96source分類から再資格しただけで重複加算0、原外2factory限定/正式0/readonly四候補未確定。
+
+失敗・過渡結果も保全：PG5332初回83870は旧42suite guardでMaven開始前終了1/manifest未生成（BUG1441）、登録後96f743eacのPG5332元36858は1090/132成功だが5line/1branch未網羅の限定結果（e29b8729/60d1693a/f03531b3）で現在へcoverage合算0。新2efsourceのPG5340-v1元27598はCloseable import不足のtestCompile終了1/[0,1]/186PT25suiteのみ・後続not-run（BUG1443）。新v2で正常release枝/元catch内非復帰loopを実証してBUG1442解決。PG5336の一度の`--group factory`指定漏れは既別elf参照を拒否して公開無し、適切な指定で限定公開、Maven再演無し。成功確認のための再演ではなく**変更sourceの再資格**を二回必要とした。
+
+管理3（module不一致拒否/全43明示・undeclared/missing拒否/新4ID一意・将来credit0）/関連十tool pyflakes0。BUG1441/1442/1443とYKT1205/1206/1207の全対象修正・非該当/予防確認を満たし当範囲のみclose、BUG1414/YKT1178全体OPEN。群1232開始.5/1.5/4共有pp固定、原4限定/新4・工具成長漏れ/coverage構造是正/試験import手戻り/source再資格を分離、原/v3/v4未較正597.25据置・消化率/専有費/N-Tnull。正式1964PT53scope/歴史17/190/leafdelta0/工数null。whole予定3869PT561suite1661Mainは未実行/currentnative/全体四100/F03/CHR/451/QA051final/trace/引継ぎ未完、署名配備0。次はSystemManagerObservationのsession取得・pendingUNKNOWNを保護→残process/FFMへ。原本DB/Backup/鍵/stash7/Currentbaseline/native/成功失敗証拠保持・VM操作0。

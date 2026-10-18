@@ -1,0 +1,149 @@
+{
+  "source": "7aa3ab90c26701a6cce96fe92151e85a802fb3cb",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "ServiceProcessResources": {
+      "scopes": [
+        {
+          "method": "private void execute(dev.codex.schubert.nk.api.file.ServiceProcessResources$Operation, boolean) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 30,
+          "portPcs": [
+            8,
+            13,
+            25
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean withDatabase(dev.codex.schubert.nk.api.file.ServiceCredentialSet, dev.codex.schubert.nk.api.file.ServiceProcessResources$Operation, boolean) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 52,
+          "portPcs": [
+            27,
+            32,
+            47
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$withDatabase$1(char[], boolean, dev.codex.schubert.nk.api.file.ServiceProcessResources$Operation, dev.codex.schubert.nk.api.file.ServiceCredentialSet, dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource) throws java.io.IOException;",
+          "acquirePc": 30,
+          "portPcs": [
+            8,
+            13,
+            25
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$execute$1(boolean, dev.codex.schubert.nk.api.file.ServiceProcessResources$Operation, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 50,
+          "portPcs": [
+            28,
+            33,
+            45
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$execute$0() throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "rawReturnPcs": [
+            17
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.api.file.ServiceCredentialSet lambda$execute$2(dev.codex.schubert.nk.api.file.ServiceCredentialReader) throws dev.codex.schubert.nk.api.file.ServiceCredentialException;",
+          "acquisition": "ServiceCredentialSet.load:",
+          "rawReturnPcs": [
+            11
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource lambda$withDatabase$0(char[]) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "$SourceFactory.open:",
+          "rawReturnPcs": [
+            17
+          ]
+        },
+        {
+          "method": "private com.zaxxer.hikari.HikariDataSource lambda$withDatabase$2(dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "$PoolFactory.open:",
+          "rawReturnPcs": [
+            10
+          ]
+        }
+      ],
+      "classSha256": "8558a479af180f45f23c0735cc9153900c7994d589827caff5bffbae0eee8855",
+      "javapSha256": "86dc26a91de93d5dd6f8a3e694b824d3c0d7b5c8e064277bec440c060ec5ab69"
+    }
+  },
+  "selectedManifestSha256": "f7948f6e05c22298f582433fc22bded7c6a6c515c393beda4a0a08edc74ceef9",
+  "semanticClasses": 1,
+  "nestedDebugEquivalent": [],
+  "otherPhysicalClassesUnchanged": 763,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/api/file/ServiceProcessResources": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 68
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 23
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "serviceFourCounters": {
+    "BRANCH": {
+      "missed": 0,
+      "covered": 4
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 68
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 23
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "sourceClass": {
+    "classSha256": "8558a479af180f45f23c0735cc9153900c7994d589827caff5bffbae0eee8855",
+    "javapSha256": "86dc26a91de93d5dd6f8a3e694b824d3c0d7b5c8e064277bec440c060ec5ab69"
+  },
+  "allFourProtected": true,
+  "retainedOriginalCatchFrames": 2,
+  "passwordClearedBeforePool": true,
+  "passwordFailureFinally": true,
+  "implementationDecision": "PG-D427",
+  "newJavaCasesInGroup": 4,
+  "newJavaCasesInThisSource": 0,
+  "previousLimitedRun": "PG5332; partial coverage5line1branch; never imported",
+  "failedCurrentV1": "PG5340-v1; testCompile import failure;186/25 not accepted"
+}
