@@ -2,6 +2,8 @@
 
 ## SSC305 当既存ADMINの終了比較拒否・保持pair回収
 
+当回収は2026-10-18に5096実0/元verify実143・UNKNOWN保全/5100別post0で限定完了、当927504/927536/host46551は終了済・再操作不可。是正new-only実20/post/native0の根拠はSS343の当実績・dev-foundation9ce065ff7/1042・1043。以下は当一回契約の履歴で、将来の別PID/boot/sourceへ数値を転用しない。新たな保持は現在の所有と全原値を再認証し、必要な設計/台帳分類を先行する。全PGPT/正式/QA051finalの完了は宣言しない。
+
 SS343 SSC305を適用する。5086verify元67671はPREPARE_DATABASE_SCOPE、Ref子のsnapshot68の終了比較拒否で保持、execute/credential発行前。元Rootのstart/endを混同しない。5084 frozen・元byte/log・実pair927504/927536と全100/7FD・子bus・M-A/OFD/SQL0/全24/原本/native86をfresh認証した一つの回収接続だけで、新十Ref/全原値の耐久proof→予約/pidfd/子TERM一回→子消失/親同一再読→親TERM一回→全資源/原値→正常新Refs/同hostgate自然継承を実施する。旧pid/観測proofだけで操作せず、foreign/unknownはsignal0・隔離。元verify/close UNKNOWNは解消と呼ばず、別独立post0後だけnew-only再試験へ進む。旧全3791/署名/Root等は再演しない。
 
 ## SSC298 post済みmetadata-only scopeの限定回収

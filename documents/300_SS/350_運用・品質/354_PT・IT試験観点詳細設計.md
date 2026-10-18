@@ -2,6 +2,8 @@
 
 ## SSC305 親start/endの独立比較と当保持pairの否定試験
 
+実績追補2026-10-18：5102 end/start/旧end/null/bool/foreign/欠落の独立負例＋完全graph5件、5108全関数/三前像/実終端前提3件、5116全1650/two-pair/public4件が成功。5098/5096/5100の全原値/所有/各一回TERM/元143UNKNOWN/別post、是正5104五ABI・5106三phase・5108captured20/1.77017秒・5112 CRC/session/二単調・5114公開が全actual0。失敗byte/slot/中間fixture失敗も保存し、元3791/署名/Root/完了ABI再演0。dev-foundation9ce065ff7/1042・1043で追跡し、この限定是正の完了を四coverage全100/F03/CHR/正式/ITSTへ拡大しない。
+
 SS343/353 SSC305、BUG1405/YKT1169。真正receiptのstart306951851178us/end308517705767usを独立oracleとし、終了比較へstart/旧end/null/foreignrunを入れた反例を拒否する。元3791/独立資格は再利用して検査目的で再実行せず、工具の全出力/parent receipt全byte・新release/BOM/namespaceだけを束縛する。現在pairのargv/exe/authority/cgroup/全task/全FD/同inode-OFD/子bus/SQL0・全原値を二読し、共有/run二時刻の合法単調変化と不一致を分ける。foreign generation/第三子/別FD/誤bus/DBpeerあり/不正proof/既予約/TERM直前変化ではsignal0、一回子→親/各15秒/30秒reap・全資源0・旧closeUNKNOWN/元exit維持と独立別postを検証する。正常fixtureを実権限にせず、各実操作は当現在値/耐久proofで資格する。旧source nativeを加算せず四100/F03/CHR/正式/ITSTは未完とする。
 
 ## SSC-285：署名拒否前39FDと最終emit閉包

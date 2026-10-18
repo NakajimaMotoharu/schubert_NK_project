@@ -2,6 +2,8 @@
 
 ## SSC305 当a2ecc既存ADMINの親終端比較・保持Ref pairの限定回収
 
+当限定契約の実績（2026-10-18、製造/限定PT完了・全PGPT未完）：初回設計only9b9967b1f→main fb96f60f0/PR152を先行し、元verify143/旧closeUNKNOWNを保持したまま5098全原値proof→5096一回子親回収/同hostgate継承→5100別全post0、是正新5102/04/06/08で親end独立反例・当ABI五phase/新stage/verify/実20/独立全postを各0で閉鎖した。Unit実1.77017秒/元30秒以内、既単一ADMIN/全24・32・187/原本Backup・二credential私有退役/全資源0を検証。当具体PID/slotは終了・退役済で再実行を許可しない。5112全1650CRC/session/二pair独立単調・最新closing10stream12point/旧source輸入0、5114元六XMLを秘匿公開。BUG1405/YKT1169および付随1406～08/1170～72を全対象再試験付き限定close。実施/証跡はdev-foundation 9ce065ff7・1042/1043・公開PG5112 manifest SHA60dadc92cf4fa7ff66427348675d0b9ad2f9e1d9b3f34e29d19d95868f105773に保存、実装/設定/工具/証跡はこの設計only反映へ混入しない。batch残739line/147method/9class/434branch、F03/CHR/451/QA051final/正式1964PT・53scope/17・190/工数nullは未更新・別未完。
+
 BUG1405/YKT1169、SS343/353/354・SSC274/276/277/279/300～304の内部具体化。RD/UI・業務仕様・CLI/ENV・原30分Root/30秒ADMIN期限・451/QA051 finalは変更しない。現a2ecc/PG4980/BOM78a6/187/schema028/boot79aの既存ADMIN20に対し、元親run15322936・activationb683・Invocationabe95の**start306951851178usとend308517705767usを別値で検証**する。end照合へstartを代入した工具5082は誤りであり原byte/失敗/未終端を保持する。独立の真正親receiptを使い、同じ誤値を持つfixture同士の一致で資格しない。Root/Browser/ownedstop/全3791/署名/host ABIの既成功を再演しない。
 
 当verifyの保持Java927504/t31055084/argvSHA8bfbbbf082fadbc9569bbc0f2d21980d9eb02a03f1215594f983b5b79e6dc0bc/100FD、唯一Ref子927536/t31055311/argvSHAf8a143d4a170fe7cfe34b17bc0cafebd4150523c2dbcf1e0e0a3c521e11e4656/7FDを**観測基点のみ**とする。sudo927502は対象外。新しく原argv/exe/全authority/cgroup/全task親子、全FD set/target/inode/type/mode/権限・実M-A sole FLOCK/OFD、子唯一private systembus名と実PID/UIDを二読して束縛する。共有/run directoryの二時刻だけはSSC277の非減少・current上限でfresh資格し、同fresh像を以降固定する。他のFD不一致、第三子、foreign owner、元helper/hash/失敗phase不一致ならsignal0・保持とする。
