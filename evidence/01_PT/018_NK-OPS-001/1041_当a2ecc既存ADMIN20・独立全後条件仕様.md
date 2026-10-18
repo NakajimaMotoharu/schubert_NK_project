@@ -9,3 +9,9 @@ Program NK-OPS-001、SS343/354/451/SSC300～304承認契約。主担当WBS-N15.0
 before元actual0から得たSHA・row数・世代だけで新工具を束縛し、旧4930/旧04bb成功を実権限にしない。実順は固定/push→5080 read-only新before→全dependency工具作成/完全namespaceと独立guard管理試験→当PG4980 host compile全phase0→新stage→verify→既存ADMIN有限一回→独立全24/credential退役/全資源0→同source新native資格。各実権限は直前のactual前提で確認し、Root再演/旧tool退役操作の再発行/手DB修復/旧native加算なし。新source/所有不明はUNKNOWN保持して回収を先行する。
 
 実command/時刻/OS/JDK/HEAD/exit/hash/独立期待値は元manifestへ、公開は許可列のみ。四coverage100/CHR/F03/451/QA051final/trace/引継ぎの未完と正式1964PT/53scope・17/190・工数nullを維持する。
+
+## 現before実0・新graph検査
+
+5080元21554 actual0/2026-10-18T08:12:24Z/operator a8285fdce、payload05daf8861036263884979c0b842471d25b75ac8a7423e3eaef3615e0be32b527、before SHAaf59c9ebb4bac4bac238f81ae28cb5bf2840b6e32ee529b2ec7ee514054faa1e、894batch行/86native/全24・32・187・全資源空/既存単一ADMIN/credential無し/四namespace空、全正常Refs。DB/起動/停止/credential書込0。
+
+新5082/84/86/88はこの実SHA/894/86とRoot run15322936・activationb683・Invocationabe95・start306951851178・真正終端07:40:43Zに束縛。PT-OPS-BOOTSTRAP-5082-001～004管理4件0、完全18filesのPython静的0、旧権限/Source/BOM/JAR/constructor共有graph/前提失敗拒否/一回性・archive traversal防御/全STAGE release literalとfresh認証経路を確認。`python3 -B -m unittest pg5082_current_bootstrap_test`。元5060親receiptは全byte同一。実host5084compileはこれからであり、有限execute許可は未成立。
