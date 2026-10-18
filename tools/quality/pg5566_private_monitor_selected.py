@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import tarfile
 import xml.etree.ElementTree as ET
@@ -51,14 +52,15 @@ def inventory(snapshot,phase):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red','green'));args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red','green'));parser.add_argument('--version',default='v1');args=parser.parse_args()
+    if not re.fullmatch(r'v[1-9][0-9]*',args.version):raise ValueError('bounded explicit new-only attempt version')
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('clean committed input first')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()
     reference=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5550-current3900-cases/qualification.json'
     if sha(reference)!='5914b32a415f39e6a17147bee326a619995f31fe1383f54282242c3c13b356be':raise ValueError('immutable original qualified a19 reference')
     before=json.loads(reference.read_bytes())
     if(before['productionSource'],before['tests'],before['mainClasses'])!=(BASE,3900,1664):raise ValueError('actual base source, never old296 native')
-    os.umask(0o077);out=ROOT.parent/'pgpt-runs/PG379'/('pg5566-private-monitor-'+args.phase+'-v1');out.mkdir(mode=0o700)
+    os.umask(0o077);out=ROOT.parent/'pgpt-runs/PG379'/('pg5566-private-monitor-'+args.phase+'-'+args.version);out.mkdir(mode=0o700)
     archive=out/'source.tar'
     with archive.open('xb')as f:subprocess.run(['git','archive',head,'src','pom.xml','mvnw','.mvn','program/characterization'],cwd=ROOT,stdout=f,check=True);f.flush();os.fsync(f.fileno())
     snapshot=out/'source';snapshot.mkdir(mode=0o700)

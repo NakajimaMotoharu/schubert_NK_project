@@ -31,5 +31,14 @@ class SelectedMonitor(unittest.TestCase):
             self.assertIn(fact,raw)
         for path in(entry.__file__,__file__):self.assertEqual(checkPath(path),0)
 
+    def test_all_consumers_of_common_test_helper_have_test_scope_not_production_copy(self):
+        import xml.etree.ElementTree as ET
+        ns={'m':'http://maven.apache.org/POM/4.0.0'}
+        for module in('web','batch'):
+            tree=ET.parse(entry.ROOT/('src/schubert-nk-'+module+'/pom.xml'))
+            deps=[d for d in tree.findall('m:dependencies/m:dependency',ns)if d.findtext('m:artifactId',namespaces=ns)=='schubert-nk-bootstrap'and d.findtext('m:type',namespaces=ns)=='test-jar']
+            self.assertEqual(len(deps),1);self.assertEqual(deps[0].findtext('m:scope',namespaces=ns),'test')
+        self.assertEqual(len(list(entry.ROOT.glob('src/*/src/test/java/**/CallerMonitorProbe.java'))),1)
+
 
 if __name__=='__main__':unittest.main()
