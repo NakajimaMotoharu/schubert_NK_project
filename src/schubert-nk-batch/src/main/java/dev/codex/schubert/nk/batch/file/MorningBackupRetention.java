@@ -129,10 +129,12 @@ final class MorningBackupRetention {
     Objects.requireNonNull(work);
     owner.check();
     var identity = new dev.codex.schubert.nk.bootstrap.FixedServiceIdentity().resolveBackup();
-    var root = OwnedTransferDirectory.open(directoryCalls(), Path.of("/srv/schubert-nk/backup"));
-    return ResourceScope.use(
-        root::close,
-        () -> {
+    var calls = directoryCalls();
+    Path backupPath = Path.of("/srv/schubert-nk/backup");
+    return ResourceScope.<OwnedTransferDirectory, T, IOException>acquire(
+        () -> OwnedTransferDirectory.open(calls, backupPath),
+        OwnedTransferDirectory::close,
+        root -> {
           var security = LinuxInodeSecurity.create();
           var retained =
               new MorningBackupRetention(

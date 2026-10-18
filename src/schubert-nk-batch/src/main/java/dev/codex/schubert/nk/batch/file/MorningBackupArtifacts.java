@@ -120,10 +120,11 @@ final class MorningBackupArtifacts {
             value ->
                 StartupReleaseManifest.createHost(identities.configurationGroup()).verify(value));
     var artifact = new java.util.concurrent.atomic.AtomicReference<BackupManifest>();
-    var config = OwnedTransferDirectory.open(host, Path.of("/etc/schubert-nk"));
-    ResourceScope.use(
-        config::close,
-        () -> {
+    Path configPath = Path.of("/etc/schubert-nk");
+    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(host, configPath),
+        OwnedTransferDirectory::close,
+        config -> {
           var configBefore = directory(config, identities.configurationGroup(), 0x41e8);
           Boolean result =
               config.atExistingEntryHandle(
@@ -187,111 +188,146 @@ final class MorningBackupArtifacts {
                                               0,
                                               false,
                                               () -> {
-                                                var credentials =
-                                                    config.openExistingChild("credentials");
-                                                return ResourceScope.use(
-                                                    credentials::close,
-                                                    () -> {
-                                                      var credentialsBefore =
-                                                          directory(credentials, 0, 0x41c0);
-                                                      return withInputs(
-                                                          credentials,
-                                                          CREDENTIALS,
-                                                          0,
-                                                          true,
-                                                          () -> {
-                                                            var identity =
-                                                                identities.resolveBackup();
-                                                            var backup = openBackup();
-                                                            return ResourceScope.use(
-                                                                backup::close,
-                                                                () -> {
-                                                                  var pending =
-                                                                      backup.openExistingChild(
-                                                                          request.directoryName()
-                                                                              + ".part");
-                                                                  ResourceScope.use(
-                                                                      pending::close,
-                                                                      () -> {
-                                                                        directory(
-                                                                            pending,
-                                                                            identity.gid(),
-                                                                            0x41c0,
-                                                                            identity.uid());
-                                                                        var processes =
-                                                                            new BackupArchiveProcess(
-                                                                                security, budget);
-                                                                        write(
-                                                                            pending,
-                                                                            "config.tar",
-                                                                            output ->
-                                                                                config.atDirectory(
-                                                                                    source -> {
-                                                                                      processes
-                                                                                          .configuration(
-                                                                                              source,
-                                                                                              output,
-                                                                                              CONFIG);
-                                                                                      return Boolean
-                                                                                          .TRUE;
-                                                                                    }));
-                                                                        write(
-                                                                            pending,
-                                                                            "credentials.tar.age",
-                                                                            output ->
-                                                                                credentials
-                                                                                    .atDirectory(
-                                                                                        source -> {
-                                                                                          processes
-                                                                                              .credentials(
-                                                                                                  source,
-                                                                                                  output,
-                                                                                                  recipient,
-                                                                                                  CREDENTIALS);
-                                                                                          return Boolean
-                                                                                              .TRUE;
-                                                                                        }));
-                                                                        return Boolean.TRUE;
-                                                                      });
-                                                                  check();
-                                                                  var observed =
-                                                                      new BackupArtifactVerifier(
-                                                                              backup,
-                                                                              security,
-                                                                              identity.uid(),
-                                                                              identity.gid())
-                                                                          .observePending(request);
-                                                                  var manifest =
-                                                                      new BackupManifest(
-                                                                          begins.database(),
-                                                                          begins.configuration(),
-                                                                          request.started(),
-                                                                          Instant.now()
-                                                                              .truncatedTo(
-                                                                                  ChronoUnit
-                                                                                      .MICROS),
-                                                                          profile.versions(),
-                                                                          recipientHash,
-                                                                          observed.dump(),
-                                                                          observed.configuration(),
-                                                                          observed.credentials());
-                                                                  artifact.set(
-                                                                      manifest); // Claims only: no
-                                                                  // DB or
-                                                                  // publication
-                                                                  // before ALL input
-                                                                  // closes.
-                                                                  check();
-                                                                  require(
-                                                                      credentialsBefore.equals(
-                                                                          directory(
-                                                                              credentials,
-                                                                              0,
-                                                                              0x41c0)));
-                                                                  return Boolean.TRUE;
-                                                                });
-                                                          });
-                                                    });
+                                                return ResourceScope
+                                                    .<OwnedTransferDirectory, Boolean, IOException>
+                                                        acquire(
+                                                            () ->
+                                                                config.openExistingChild(
+                                                                    "credentials"),
+                                                            OwnedTransferDirectory::close,
+                                                            credentials -> {
+                                                              var credentialsBefore =
+                                                                  directory(credentials, 0, 0x41c0);
+                                                              return withInputs(
+                                                                  credentials,
+                                                                  CREDENTIALS,
+                                                                  0,
+                                                                  true,
+                                                                  () -> {
+                                                                    var identity =
+                                                                        identities.resolveBackup();
+                                                                    return ResourceScope
+                                                                        .<OwnedTransferDirectory,
+                                                                            Boolean, IOException>
+                                                                            acquire(
+                                                                                MorningBackupArtifacts
+                                                                                    ::openBackup,
+                                                                                OwnedTransferDirectory
+                                                                                    ::close,
+                                                                                backup -> {
+                                                                                  ResourceScope
+                                                                                      .<OwnedTransferDirectory,
+                                                                                          Boolean,
+                                                                                          IOException>
+                                                                                          acquire(
+                                                                                              () ->
+                                                                                                  backup
+                                                                                                      .openExistingChild(
+                                                                                                          request
+                                                                                                                  .directoryName()
+                                                                                                              + ".part"),
+                                                                                              OwnedTransferDirectory
+                                                                                                  ::close,
+                                                                                              pending -> {
+                                                                                                directory(
+                                                                                                    pending,
+                                                                                                    identity
+                                                                                                        .gid(),
+                                                                                                    0x41c0,
+                                                                                                    identity
+                                                                                                        .uid());
+                                                                                                var
+                                                                                                    processes =
+                                                                                                        new BackupArchiveProcess(
+                                                                                                            security,
+                                                                                                            budget);
+                                                                                                write(
+                                                                                                    pending,
+                                                                                                    "config.tar",
+                                                                                                    output ->
+                                                                                                        config
+                                                                                                            .atDirectory(
+                                                                                                                source -> {
+                                                                                                                  processes
+                                                                                                                      .configuration(
+                                                                                                                          source,
+                                                                                                                          output,
+                                                                                                                          CONFIG);
+                                                                                                                  return Boolean
+                                                                                                                      .TRUE;
+                                                                                                                }));
+                                                                                                write(
+                                                                                                    pending,
+                                                                                                    "credentials.tar.age",
+                                                                                                    output ->
+                                                                                                        credentials
+                                                                                                            .atDirectory(
+                                                                                                                source -> {
+                                                                                                                  processes
+                                                                                                                      .credentials(
+                                                                                                                          source,
+                                                                                                                          output,
+                                                                                                                          recipient,
+                                                                                                                          CREDENTIALS);
+                                                                                                                  return Boolean
+                                                                                                                      .TRUE;
+                                                                                                                }));
+                                                                                                return Boolean
+                                                                                                    .TRUE;
+                                                                                              });
+                                                                                  check();
+                                                                                  var observed =
+                                                                                      new BackupArtifactVerifier(
+                                                                                              backup,
+                                                                                              security,
+                                                                                              identity
+                                                                                                  .uid(),
+                                                                                              identity
+                                                                                                  .gid())
+                                                                                          .observePending(
+                                                                                              request);
+                                                                                  var manifest =
+                                                                                      new BackupManifest(
+                                                                                          begins
+                                                                                              .database(),
+                                                                                          begins
+                                                                                              .configuration(),
+                                                                                          request
+                                                                                              .started(),
+                                                                                          Instant
+                                                                                              .now()
+                                                                                              .truncatedTo(
+                                                                                                  ChronoUnit
+                                                                                                      .MICROS),
+                                                                                          profile
+                                                                                              .versions(),
+                                                                                          recipientHash,
+                                                                                          observed
+                                                                                              .dump(),
+                                                                                          observed
+                                                                                              .configuration(),
+                                                                                          observed
+                                                                                              .credentials());
+                                                                                  artifact.set(
+                                                                                      manifest); // Claims only: no
+                                                                                  // DB or
+                                                                                  // publication
+                                                                                  // before ALL
+                                                                                  // input
+                                                                                  // closes.
+                                                                                  check();
+                                                                                  require(
+                                                                                      credentialsBefore
+                                                                                          .equals(
+                                                                                              directory(
+                                                                                                  credentials,
+                                                                                                  0,
+                                                                                                  0x41c0)));
+                                                                                  return Boolean
+                                                                                      .TRUE;
+                                                                                });
+                                                                  });
+                                                            });
                                               });
                                       require(
                                           recipientBefore.equals(file(recipient, 0, 0x8180, 1024)));
@@ -313,12 +349,12 @@ final class MorningBackupArtifacts {
     require(release.equals(current));
     var manifest = Objects.requireNonNull(artifact.get(), "actual observed backup content");
     var identity = identities.resolveBackup();
-    var backup =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/srv/schubert-nk/backup"));
-    ResourceScope.use(
-        backup::close,
-        () -> {
+    var backupCalls = LinuxDirectoryCalls.create();
+    Path backupPath = Path.of("/srv/schubert-nk/backup");
+    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(backupCalls, backupPath),
+        OwnedTransferDirectory::close,
+        backup -> {
           new BackupManifestPublisher(backup, security, identity.uid(), identity.gid())
               .create(manifest, part);
           new BackupBundlePublisher(backup, security, identity.uid(), identity.gid())
@@ -348,10 +384,11 @@ final class MorningBackupArtifacts {
     if (index == BackupProfile.TOOL_KEYS.size()) return work.run();
     String key = BackupProfile.TOOL_KEYS.get(index);
     Path fixed = Path.of(Objects.requireNonNull(TOOLS.get(key)));
-    var root = OwnedTransferDirectory.open(host, Objects.requireNonNull(fixed.getParent()));
-    return ResourceScope.use(
-        root::close,
-        () ->
+    Path parent = Objects.requireNonNull(fixed.getParent());
+    return ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(
+        () -> OwnedTransferDirectory.open(host, parent),
+        OwnedTransferDirectory::close,
+        root ->
             root.atExistingEntryHandle(
                 Objects.requireNonNull(fixed.getFileName(), "fixed tool file name").toString(),
                 held -> {
@@ -555,10 +592,11 @@ final class MorningBackupArtifacts {
       matchType = SuppressMatchType.EXACT,
       justification = "SS343/SSC110 actual fixed host hostname, not DNS/caller input")
   private String hostname() throws IOException {
-    var etc = OwnedTransferDirectory.open(host, Path.of("/etc"));
-    return ResourceScope.use(
-        etc::close,
-        () -> {
+    Path etcPath = Path.of("/etc");
+    return ResourceScope.<OwnedTransferDirectory, String, IOException>acquire(
+        () -> OwnedTransferDirectory.open(host, etcPath),
+        OwnedTransferDirectory::close,
+        etc -> {
           var before = directory(etc, 0, 0x41ed);
           String value =
               etc.atExistingEntryHandle(

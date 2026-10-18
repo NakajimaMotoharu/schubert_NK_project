@@ -55,12 +55,12 @@ final class MorningBackupReuse {
     budget.requireWithin();
     context.recheck(expected);
     var identity = new dev.codex.schubert.nk.bootstrap.FixedServiceIdentity().resolveBackup();
-    var root =
-        OwnedTransferDirectory.open(
-            LinuxHostDirectoryCalls.create(), Path.of("/srv/schubert-nk/backup"));
-    return ResourceScope.use(
-        root::close,
-        () -> {
+    var calls = LinuxHostDirectoryCalls.create();
+    Path backupPath = Path.of("/srv/schubert-nk/backup");
+    return ResourceScope.<OwnedTransferDirectory, T, IOException>acquire(
+        () -> OwnedTransferDirectory.open(calls, backupPath),
+        OwnedTransferDirectory::close,
+        root -> {
           long started = System.nanoTime();
           var reader =
               new BackupManifestReader(
