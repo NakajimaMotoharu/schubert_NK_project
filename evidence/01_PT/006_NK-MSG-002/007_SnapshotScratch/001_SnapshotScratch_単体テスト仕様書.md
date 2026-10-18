@@ -11,7 +11,7 @@
 |PT-IDEM-SCRATCH003/scratch003|明示した旧型negative-control Deflater→array→try/finallyへ同じ注入|取得1/end0で未保護gapを検出。fixture finallyで保有nativeを実解放し後続へ漏らさない|
 |PT-IDEM-SCRATCH004/scratch004|同negative-control Inflater版|取得1/end0。同上|
 
-JDK25実ClassFile APIで**test-only別名copy**を生成し、対象methodの実NEWARRAY1/constructor1/end2という形を独立に検査する。自己field/method参照だけcopyへ束縛、ctor成功後に取得を観測、end成功後に解放を観測する。Errorは実heap枯渇ではなく固定fixture、raw key/DB不要。別名copyは実Main CRCやcoverageへ混ぜず、agent除外設定変更0。Mainのgoldenは元クラスに対して従来の独立JCE/圧縮値で行い、production methodからexpectedを生成しない。null/欠落/AAD/key/境界/暗号provider異常は元七caseを全件再実行、既期待値変更0。
+JDK25実ClassFile APIで**test-only別名のstatic target method copy**を生成し、対象methodの一意性/static/descriptor([B)[B・実NEWARRAY1/constructor1/end2という形を独立に検査する。元命令・helper参照・handlerを保持してctor成功後に取得、end成功後に解放を観測、元scratch命令直前にだけErrorを挿入する。Errorは実heap枯渇ではなく固定fixture、raw key/DB不要。別名copyは実Main CRCやcoverageへ混ぜず、agent除外設定変更0。Main他method/constructorは元goldenとfresh全体の対象のままで、fault copyはそれらの成功を主張しない。Mainのgoldenは元クラスに対して従来の独立JCE/圧縮値で行い、production methodからexpectedを生成しない。null/欠落/AAD/key/境界/暗号provider異常は元七caseを全件再実行、既期待値変更0。
 
 ## Red/Green／coverage
 
@@ -26,3 +26,5 @@ FES/flaky/skipped/not-runを成功算入0、fixture/harness失敗は原因を保
 ## BUG1456/v2補足（上位仕様・品質非変更）
 
 v1/65292は全六format0→protocolの既存failIfNoTests=trueで止まり対象0件、再現不成立として保存。v2は全四reactor moduleのguardを抑制せず、必要な依存契約としてPayloadGoldenVectorTest三（独立64layout/最大繰返し/並行byte）・ResourceScopeTest八（所有/例外優先/null/並行）・ApiNonSecretConfigTest七（既定/境界/非秘密テンプレート/決定性）を全source inventory付きで明示する。Redは**対象4＋依存18=22**、Greenは**対象4＋既codec7＋依存18=29**。fault再現成立は001/002の`native acquisition before scratch failure`で期待0・実1のAssertionだけとし、同じ2件の別理由失敗は認めない。依存試験を元296の成功へ加算せず当new Test sourceの選択結果とする。全体回帰/全scope成功を代用しない。YKT1220全四moduleのactual XMLまで確認する。
+
+v2/73357は全22到達・依存18/negative二成功だが当Main二が全class copyの未使用constructor/型階層検証で失敗し、**予定Red不成立**。BUG1457/YKT1221でv3をstatic対象methodの厳密copyへ是正し、ClassFile.verifyと実ロードを無効化しない。constructorの試験範囲や元Main coverageは変更せず、copyだけでそれらの合格を宣言しない。元v2ログ/XML/物理Main779同byte差0は保持する。

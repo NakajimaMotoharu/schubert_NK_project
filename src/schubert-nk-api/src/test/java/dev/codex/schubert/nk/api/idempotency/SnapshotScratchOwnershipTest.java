@@ -6,10 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.lang.classfile.ClassFile;
-import java.lang.classfile.ClassTransform;
 import java.lang.classfile.CodeTransform;
+import java.lang.classfile.MethodTransform;
 import java.lang.classfile.Opcode;
-import java.lang.classfile.instruction.FieldInstruction;
 import java.lang.classfile.instruction.InvokeInstruction;
 import java.lang.classfile.instruction.NewPrimitiveArrayInstruction;
 import java.lang.constant.ClassDesc;
@@ -89,24 +88,12 @@ public final class SnapshotScratchOwnershipTest {
     ClassFile files = ClassFile.of();
     var model = files.parse(bytes);
     int[] sites = new int[3];
-    CodeTransform selfReferences =
-        (builder, element) -> {
-          if (element instanceof FieldInstruction field
-              && field.owner().asInternalName().equals(oldName)) {
-            builder.fieldAccess(
-                field.opcode(), copy, field.name().stringValue(), field.typeSymbol());
-          } else if (element instanceof InvokeInstruction invoke
-              && invoke.owner().asInternalName().equals(oldName)) {
-            builder.invoke(
-                invoke.opcode(),
-                copy,
-                invoke.name().stringValue(),
-                invoke.typeSymbol(),
-                invoke.isInterface());
-          } else {
-            builder.with(element);
-          }
-        };
+    var methods =
+        model.methods().stream().filter(m -> m.methodName().equalsString(method)).toList();
+    assertEquals(1, methods.size());
+    var target = methods.getFirst();
+    assertEquals("([B)[B", target.methodType().stringValue());
+    assertEquals(ClassFile.ACC_STATIC, target.flags().flagsMask() & ClassFile.ACC_STATIC);
     CodeTransform allocationFault =
         (builder, element) -> {
           if (element instanceof NewPrimitiveArrayInstruction) {
@@ -128,13 +115,14 @@ public final class SnapshotScratchOwnershipTest {
           }
         };
     byte[] transformed =
-        files.transformClass(
-            model,
+        files.build(
             copy,
-            ClassTransform.transformingMethodBodies(selfReferences)
-                .andThen(
-                    ClassTransform.transformingMethodBodies(
-                        m -> m.methodName().equalsString(method), allocationFault)));
+            builder ->
+                builder
+                    .withVersion(model.majorVersion(), model.minorVersion())
+                    .withFlags(ClassFile.ACC_PUBLIC | ClassFile.ACC_FINAL | ClassFile.ACC_SUPER)
+                    .withSuperclass(ClassDesc.of("java.lang.Object"))
+                    .transformMethod(target, MethodTransform.transformingCode(allocationFault)));
     assertEquals(1, sites[0], "one actual primitive scratch allocation");
     assertEquals(1, sites[1], "one actual native constructor");
     assertEquals(2, sites[2], "normal and exceptional native cleanup sites");
