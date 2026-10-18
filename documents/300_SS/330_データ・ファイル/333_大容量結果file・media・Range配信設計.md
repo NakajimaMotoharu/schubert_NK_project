@@ -2,6 +2,10 @@
 
 ## SSC308 取得前port構築・factory内IO所有とdescriptor wrapper先行確保
 
+StartupAdmissionFile.ViewOwner追加詳細（BUG1414/YKT1178、2026-10-18）：private readonly viewの全取得予定数はroot1＋runtimeのN segment＋app1＋entry1＝N+3。owner/primitive int slot/failure scratch/全portを最初のnative open前に有限確保する。各openRoot/openDirectory/openEntryはclosed/容量を取得前に検査、有効かつ既保持FDと異なる返却値の後はprimitive比較/格納/返却だけとし、Integer boxing・List grow・callback/new・追加Java helper呼出しを挟まない。負値は新所有なし、既保持FD自身の返却も新所有とせず拒否し元FDを一度だけ消費する。runtime/固定名/権限/NOFOLLOW/host-private照合と外部能力は変更しない。
+
+同ViewOwnerのcloseは既消費flagを先に確定し全保持FDへ逆順に一度ずつnative closeを試みる。drain中はcallback/配列/例外/suppressed等を新規確保せず、事前scratchへ失敗を記録し全試行後だけ既ResourceScopeと同じIO Reason/unknown identity/複合優先順位・秘匿suppressedを組み立てる。消費済みは再close/再openへ使わず、native closeが例外を返した事実をkernel解放成功へ読み替えない。失敗FD数値の再試行や別authorityによるcloseは禁止。単なる検索/use置換や実heapOOME未再現を完了根拠にせず、独立fault matrix/実bytecodeと必要同source全体/nativeで別資格する。
+
 native FD横展開の確定詳細：LinuxFileLockのopen/dup及びLinuxSealedProofのmemfd/reserved取得では、全portとprimitive保持wrapperを取得前に確保し、有効FD取得後は非負確認/primitive格納/返却だけとする。dupが元FD自身を返す異常は新所有ではなく元FDの二重closeをしない。factory後にInteger boxingやObjects/literal解決を挟まない。元flock/flags/seal/mode/write/範囲/close優先順位と消費回数を保持する。
 
 実装詳細の確定補足：factoryの戻りをslotへ格納した直後からIO/Runtime/Error保護域へ入り、標準nonnull検査もその保護域内で行う。null返却はNPEを伝播しbody/release0、非null資源の失敗時だけreleaseする。成功資源を保護域外のliteral解決/明示例外確保/boxingへ露出させない。これは既null拒否/例外優先順位を変えず、静的解析の抑制も追加しない。
