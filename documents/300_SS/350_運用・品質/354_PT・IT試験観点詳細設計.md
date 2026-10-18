@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC305 親start/endの独立比較と当保持pairの否定試験
+
+SS343/353 SSC305、BUG1405/YKT1169。真正receiptのstart306951851178us/end308517705767usを独立oracleとし、終了比較へstart/旧end/null/foreignrunを入れた反例を拒否する。元3791/独立資格は再利用して検査目的で再実行せず、工具の全出力/parent receipt全byte・新release/BOM/namespaceだけを束縛する。現在pairのargv/exe/authority/cgroup/全task/全FD/同inode-OFD/子bus/SQL0・全原値を二読し、共有/run二時刻の合法単調変化と不一致を分ける。foreign generation/第三子/別FD/誤bus/DBpeerあり/不正proof/既予約/TERM直前変化ではsignal0、一回子→親/各15秒/30秒reap・全資源0・旧closeUNKNOWN/元exit維持と独立別postを検証する。正常fixtureを実権限にせず、各実操作は当現在値/耐久proofで資格する。旧source nativeを加算せず四100/F03/CHR/正式/ITSTは未完とする。
+
 ## SSC-285：署名拒否前39FDと最終emit閉包
 
 QA047/BUG1305/YKT1071：最終Java/Python/fixture実出力のboot/source/BOM/signature stem/全Rootbindingを独立oracleで確認する。composer本文だけの成功・同じ旧値を持つfixtureの相互一致を資格にせず、旧b2d6/pg2654・未知/欠落/null/余剰/誤署名をM/A/DB/Ref取得前に拒否する。正常ABI/署名/実scopeに加え、この署名拒否がDB/Ref/サービス停止へ進まないことを独立に確認する。
