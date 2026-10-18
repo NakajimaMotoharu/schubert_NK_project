@@ -169,11 +169,11 @@ public final class BackupArtifactVerifier {
       try {
         require(security.effectiveUid() == 0);
         Metadata parent = directory(root, started);
-        var child = root.openExistingChild(request.directoryName() + ".part");
         var result =
-            ResourceScope.use(
-                child::close,
-                () -> {
+            ResourceScope.acquire(
+                () -> root.openExistingChild(request.directoryName() + ".part"),
+                OwnedTransferDirectory::close,
+                child -> {
                   Metadata initial = directory(child, started);
                   require(initial.device() == parent.device());
                   names(child, started, Set.copyOf(pendingNames));
@@ -221,10 +221,10 @@ public final class BackupArtifactVerifier {
                   }
                   names(child, started, Set.copyOf(pendingNames));
                   require(initial.equals(directory(child, started)));
-                  var rebound = root.openExistingChild(request.directoryName() + ".part");
-                  ResourceScope.use(
-                      rebound::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> root.openExistingChild(request.directoryName() + ".part"),
+                      OwnedTransferDirectory::close,
+                      rebound -> {
                         require(initial.equals(directory(rebound, started)));
                         return Boolean.TRUE;
                       });
@@ -281,11 +281,11 @@ public final class BackupArtifactVerifier {
               expected.configuration().size(),
               LITERAL_CREDENTIALS_TAR_AGE,
               expected.credentials().size());
-      var child = root.openExistingChild(expected.directoryName());
       boolean same =
-          ResourceScope.use(
-              child::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> root.openExistingChild(expected.directoryName()),
+              OwnedTransferDirectory::close,
+              child -> {
                 Metadata initial = directory(child, started);
                 require(initial.device() == parent.device());
                 boolean matching = true;
@@ -342,10 +342,10 @@ public final class BackupArtifactVerifier {
     synchronized (lock) {
       owner.check();
       require(admitted.equals(verifyWithin(expected, started)));
-      var child = root.openExistingChild(expected.directoryName());
-      ResourceScope.use(
-          child::close,
-          () -> {
+      ResourceScope.acquire(
+          () -> root.openExistingChild(expected.directoryName()),
+          OwnedTransferDirectory::close,
+          child -> {
             require(admitted.directory().equals(directory(child, started)));
             for (String name :
                 List.of(
@@ -379,21 +379,24 @@ public final class BackupArtifactVerifier {
             require(sameDirectoryInode(admitted.directory(), directory(child, started)));
             child.atDirectory(
                 held -> {
-                  var stream = io.openNames(held);
-                  if (stream == null) throw unavailable();
-                  return ResourceScope.use(
-                      stream,
+                  return ResourceScope.acquire(
                       () -> {
+                        var stream = io.openNames(held);
+                        if (stream == null) throw unavailable();
+                        return stream;
+                      },
+                      DirectoryStream::close,
+                      stream -> {
                         guard(started);
                         require(!stream.iterator().hasNext());
                         guard(started);
                         return Boolean.TRUE;
                       });
                 });
-            var rebound = root.openExistingChild(expected.directoryName());
-            ResourceScope.use(
-                rebound::close,
-                () -> {
+            ResourceScope.acquire(
+                () -> root.openExistingChild(expected.directoryName()),
+                OwnedTransferDirectory::close,
+                rebound -> {
                   require(sameDirectoryInode(admitted.directory(), directory(rebound, started)));
                   return Boolean.TRUE;
                 });
@@ -446,11 +449,11 @@ public final class BackupArtifactVerifier {
         require(security.effectiveUid() == 0);
         Metadata parent = directory(root, started);
         guard(started);
-        var child = root.openExistingChild(directoryName);
         BundleSnapshot result =
-            ResourceScope.use(
-                child::close,
-                () -> {
+            ResourceScope.acquire(
+                () -> root.openExistingChild(directoryName),
+                OwnedTransferDirectory::close,
+                child -> {
                   Metadata initial = directory(child, started);
                   require(initial.device() == parent.device());
                   names(child, started);
@@ -528,10 +531,10 @@ public final class BackupArtifactVerifier {
                   names(child, started);
                   require(initial.equals(directory(child, started)));
                   guard(started);
-                  var rebound = root.openExistingChild(directoryName);
-                  ResourceScope.use(
-                      rebound::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> root.openExistingChild(directoryName),
+                      OwnedTransferDirectory::close,
+                      rebound -> {
                         require(initial.equals(directory(rebound, started)));
                         return Boolean.TRUE;
                       });
@@ -622,11 +625,14 @@ public final class BackupArtifactVerifier {
     directory.atDirectory(
         held -> {
           guard(started);
-          DirectoryStream<Path> stream = io.openNames(held);
-          if (stream == null) throw unavailable();
-          ResourceScope.use(
-              stream,
+          ResourceScope.acquire(
               () -> {
+                DirectoryStream<Path> stream = io.openNames(held);
+                if (stream == null) throw unavailable();
+                return stream;
+              },
+              DirectoryStream::close,
+              stream -> {
                 guard(started);
                 Set<String> names = new HashSet<>();
                 for (Path child : stream) {
@@ -657,11 +663,14 @@ public final class BackupArtifactVerifier {
     guard(started);
     MessageDigest hash = Objects.requireNonNull(digests.create(), "backup digest");
     guard(started);
-    SeekableByteChannel opened = io.open(held);
-    if (opened == null) throw unavailable();
-    return ResourceScope.use(
-        opened,
+    return ResourceScope.acquire(
         () -> {
+          SeekableByteChannel opened = io.open(held);
+          if (opened == null) throw unavailable();
+          return opened;
+        },
+        SeekableByteChannel::close,
+        opened -> {
           SeekableByteChannel channel = opened;
           guard(started);
           require(channel.size() == claim.size());

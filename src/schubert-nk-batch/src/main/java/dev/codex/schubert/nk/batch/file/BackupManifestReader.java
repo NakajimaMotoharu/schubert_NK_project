@@ -199,10 +199,10 @@ public final class BackupManifestReader {
   }
 
   List<String> retentionFiles(String name, long started) throws StorageIoException {
-    var child = root.openExistingChild(name);
-    return ResourceScope.use(
-        child::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> root.openExistingChild(name),
+        OwnedTransferDirectory::close,
+        child -> {
           Metadata before = directory(child, started);
           List<String> result = names(child, started);
           require(before.equals(directory(child, started)));
@@ -225,11 +225,14 @@ public final class BackupManifestReader {
     List<String> names =
         directory.atDirectory(
             held -> {
-              DirectoryStream<Path> stream = io.openNames(held);
-              if (stream == null) throw unavailable();
-              return ResourceScope.use(
-                  stream,
+              return ResourceScope.acquire(
                   () -> {
+                    DirectoryStream<Path> stream = io.openNames(held);
+                    if (stream == null) throw unavailable();
+                    return stream;
+                  },
+                  DirectoryStream::close,
+                  stream -> {
                     Set<String> seen = new HashSet<>();
                     for (Path entry : stream) {
                       guard(started);
@@ -278,11 +281,11 @@ public final class BackupManifestReader {
         guard(started);
         Metadata parent = directory(root, started);
         guard(started);
-        var child = root.openExistingChild(name);
         Metadata original =
-            ResourceScope.use(
-                child::close,
-                () -> {
+            ResourceScope.acquire(
+                () -> root.openExistingChild(name),
+                OwnedTransferDirectory::close,
+                child -> {
                   Metadata initial = directory(child, started);
                   require(initial.device() == parent.device());
                   guard(started);
@@ -303,10 +306,10 @@ public final class BackupManifestReader {
                   guard(started);
                   require(initial.equals(directory(child, started)));
                   guard(started);
-                  var rebound = root.openExistingChild(name);
-                  ResourceScope.use(
-                      rebound::close,
-                      () -> {
+                  ResourceScope.acquire(
+                      () -> root.openExistingChild(name),
+                      OwnedTransferDirectory::close,
+                      rebound -> {
                         require(initial.equals(directory(rebound, started)));
                         return Boolean.TRUE;
                       });
@@ -359,11 +362,14 @@ public final class BackupManifestReader {
 
   private void readFile(Path held, long expected, byte[] bytes, long started) throws IOException {
     guard(started);
-    SeekableByteChannel opened = io.open(held);
-    if (opened == null) throw unavailable();
-    ResourceScope.use(
-        opened,
+    ResourceScope.acquire(
         () -> {
+          SeekableByteChannel opened = io.open(held);
+          if (opened == null) throw unavailable();
+          return opened;
+        },
+        SeekableByteChannel::close,
+        opened -> {
           guard(started);
           require(opened.size() == expected);
           guard(started);

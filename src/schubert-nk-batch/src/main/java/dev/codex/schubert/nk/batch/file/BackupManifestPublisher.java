@@ -75,10 +75,10 @@ public final class BackupManifestPublisher {
         Metadata parent = directory(root, started);
         String name = trusted.directoryName() + ".part";
         guard(started);
-        var child = root.openExistingChild(name);
-        ResourceScope.use(
-            child::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> root.openExistingChild(name),
+            OwnedTransferDirectory::close,
+            child -> {
               Metadata initial = directory(child, started);
               require(initial.device() == parent.device());
               guard(started);
@@ -114,10 +114,10 @@ public final class BackupManifestPublisher {
               Metadata finalChild = directory(child, started);
               require(identity(initial, finalChild));
               guard(started);
-              var rebound = root.openExistingChild(name);
-              ResourceScope.use(
-                  rebound::close,
-                  () -> {
+              ResourceScope.acquire(
+                  () -> root.openExistingChild(name),
+                  OwnedTransferDirectory::close,
+                  rebound -> {
                     require(finalChild.equals(directory(rebound, started)));
                     return Boolean.TRUE;
                   });
@@ -138,11 +138,14 @@ public final class BackupManifestPublisher {
 
   private void write(Path held, byte[] content, long started) throws IOException {
     guard(started);
-    var writer = io.openWriter(held);
-    if (writer == null) throw unavailable();
-    ResourceScope.use(
-        writer::close,
+    ResourceScope.acquire(
         () -> {
+          var writer = io.openWriter(held);
+          if (writer == null) throw unavailable();
+          return writer;
+        },
+        InspectorEnvironmentPublisher.Writer::close,
+        writer -> {
           guard(started);
           require(writer.size() == 0);
           guard(started);
@@ -180,11 +183,14 @@ public final class BackupManifestPublisher {
         held -> {
           require(expected.equals(capture(held, false, started)));
           guard(started);
-          var channel = io.open(held);
-          if (channel == null) throw unavailable();
-          ResourceScope.use(
-              channel,
+          ResourceScope.acquire(
               () -> {
+                var channel = io.open(held);
+                if (channel == null) throw unavailable();
+                return channel;
+              },
+              java.nio.channels.SeekableByteChannel::close,
+              channel -> {
                 guard(started);
                 require(channel.size() == content.length);
                 guard(started);
