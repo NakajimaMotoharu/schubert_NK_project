@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+FFM返却先補足（SS343）：初回native前の三私有out slot/primitive状態・Arena完成handoff、全引数準備→PENDING→C呼出→正常復帰直後RETURNEDの順をactual bytecodeで照合する。全四返却scope、bus取得、request/reply/string/arrayのNULL/負/未知型、各C callのIO/Runtime/Error、返却slotへpointerを書いてから例外を投げる故障、decode故障、close例外/不正戻りを独立に確認する。未知返却が0扱い/free成功に変換されないこと、既知request cleanupの旧順・一度試行、UNKNOWNのslot/arena保持・次read0、正常時の三slot再用/arena閉鎖を固定call列・外側owner/状態・literal値から検証する。期待をproduction mergerから作らず、旧literal ABI/期限/owner再読/八targetを当source再検証する。原237内四siteと原外constructor/bus取得補足を別に記録、限定PT/全体/native/451の成功を合算しない。
+
 完成owner handoff補足（2026-10-19、SS333343）：全port null/構築Errorが取得前、factory IO/Runtime/Error/null時の組立/解放0、完成nonnull ownerの同一identity/責任移管・補助側close0、組立IO/Runtime/Error/null時の同一R一次解放と既複合優先/秘匿・既suppressed/同一object、独立並行ownerを固定oracleで確認する。期待値をacquire/handoff/旧useから生成しない。取得前の状態/callback確保、完成nonnull後のprimitive移管→即return、失敗時のみ事前release、全旧acquire/use opcode/handler不変を実Java25 bytecodeと当source全storage四100で確認する。factory内部の各wrapper境界、原use237外の直接open/TWR/手動tryは追加母数・失敗例外/close優先も独立比較し、wrapper検索・限定成功・実OOM未再現を全体/native完了にしない。
 
 StartupAdmissionFile primitive ViewOwner補足：N+3予定容量（root/runtime/app/entry）、FD319以上、負FD、duplicate既保持FD、満杯/closedの取得前拒否、各openのIO/Runtime/Errorと未登録FD無し、host/private同一性・exec前service→host消費を独立に検証する。逆順3FDのclose正常/IO/Runtime/Errorの64組を固定goldenのprimary型/identity/Reason/秘匿suppressed数・全FD試行順/回数で照合し、複合故障でも途中drainを省略しない。既suppressed/同一例外/idempotent/独立ownerも含め、expectedにproduction merger/useを使わない。全wrapper/scratch/portが初回native前、容量checkが各open前、有効FD後primitiveのみ、drain中callback/new/suppressed操作0を実Java25 bytecodeで証明する。実heapOOME/本物authority/未知close成功を捏造せず、新sourceの限定PT・全体/native/451とYKT全体は別受入のまま。
