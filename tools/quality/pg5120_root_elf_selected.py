@@ -21,7 +21,7 @@ SUITES = {
     'dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmissionTest': 'batch',
     'dev.codex.schubert.nk.batch.file.RootElfDigestPortTest': 'batch',
 }
-BUILT = ('protocol', 'storage', 'bootstrap', 'batch')
+BUILT = ('storage', 'bootstrap', 'batch')
 SIX = ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch')
 
 
@@ -70,7 +70,8 @@ def main():
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed source required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    work = ROOT.parent / ('pgpt-runs/PG379/pg5120-root-elf-' + args.phase + '-v2')
+    version = 'v2' if args.phase == 'red' else 'v3'
+    work = ROOT.parent / ('pgpt-runs/PG379/pg5120-root-elf-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)
     archive = work / 'source.tar'
@@ -137,7 +138,7 @@ def main():
                                              for v in method.findall('counter')}
     if actual != expected: reasons.append('exact selected case inventory incomplete')
     if not all(sha(snapshot / path) == digest for path, digest in inputs.items()): reasons.append('frozen input changed')
-    if set(static) != set(BUILT) or any(static.values()): reasons.append('required four-module fresh static incomplete/nonzero')
+    if set(static) != set(BUILT) or any(static.values()): reasons.append('required three compiled-module fresh static incomplete/nonzero')
     if len(counters) != 3 or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
                                    if kind in ('LINE', 'METHOD', 'BRANCH')):
         reasons.append('all digest overload/default-factory line/method/branch required')

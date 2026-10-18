@@ -113,8 +113,13 @@ final class RootElfDigestPortTest {
     var input = new Input(elf(8192));
     input.overreport = true;
     var failure =
-        assertThrows(IOException.class, () -> RootServiceExecutableAdmission.digest(input));
-    assertEquals("root executable unavailable", failure.getMessage());
+        assertThrows(
+            dev.codex.schubert.nk.storage.StorageIoException.class,
+            () -> RootServiceExecutableAdmission.digest(input));
+    assertEquals("transfer storage operation failed", failure.getMessage());
+    assertEquals(
+        dev.codex.schubert.nk.storage.StorageIoException.Reason.UNAVAILABLE, failure.reason());
+    assertNull(failure.getCause());
     assertEquals(1, input.reads);
     assertEquals(8192, input.position);
     input.assertBorrowedAndWiped();

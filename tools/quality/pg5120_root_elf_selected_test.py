@@ -23,7 +23,7 @@ class SelectedCommandsTest(unittest.TestCase):
             'dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest': 'bootstrap',
             'dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmissionTest': 'batch',
             'dev.codex.schubert.nk.batch.file.RootElfDigestPortTest': 'batch'})
-        self.assertEqual(role.BUILT, ('protocol', 'storage', 'bootstrap', 'batch'))
+        self.assertEqual(role.BUILT, ('storage', 'bootstrap', 'batch'))
 
 
 if __name__ == '__main__':

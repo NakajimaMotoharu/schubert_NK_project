@@ -10,10 +10,12 @@ WBS-P018-03.02。関連RD/UIは既NK-OPS-001追跡を継承、SS343/354/SSC137/1
 |002 unavailableAlgorithmIsRedactedAndDoesNotReadOrClose|factoryからNoSuchAlgorithmException（公開marker付き）|既固定IOExceptionメッセージroot executable unavailable、cause/suppressedなし、read/close0。port一回|
 |003 unexpectedRuntimeAndErrorPreserveIdentityWithoutIo|factoryからIllegalStateException/AssertionError|同一object伝播、read/close0。未知失敗を成功/固定IOへ変換しない|
 |004 nullContractsFailBeforeInputReads|input null / factory null / factory戻りnull|NPE fail-fast、input nullではfactory0、借用read/close0。NPEをcatchして正常扱いしない|
-|005 oversizedReadReportIsRejectedAndBufferIsWiped|channelがbuffer8192byte書込後8193申告|IOException固定redacted、借用close0、実bufferゼロ。n==positionに違反し、旧上限検査削除で拒否を失わない|
+|005 oversizedReadReportIsRejectedAndBufferIsWiped|channelがbuffer8192byte書込後8193申告|StorageIoException/Reason.UNAVAILABLE、SS333の固定literal transfer storage operation failed/cause無し、借用close0、実bufferゼロ。n==positionに違反し、旧上限検査削除で拒否を失わない。provider専用messageとは区別（BUG1412是正根拠）|
 |006 exactBufferBoundaryAndSplitHeaderKeepLiteralDigest|同64byte入力をchunk1/7/64/8192で読む|全て同じliteral hash、全input64byte消費、借用close0/zeroize。chunk設定はbuffer容量を変えない|
 |007 readFailurePreservesIdentityAndWipesWithoutClose|実readが同一IOException / RuntimeException / Errorを投げる|同一object、読み出し開始時に捕捉したbufferが全ゼロ、借用close0|
 |008 exactMaximumElfHasIndependentFixedHash|8MiB、同header/残0、chunk8192|Python標準hashlibによる独立固定vectorをtest literalへ凍結。8MiB以下の境界を厳格に維持、全bufferゼロ/close0|
+
+008の独立算出command：`python3 -c 'import hashlib; v=bytearray(8388608);v[:7]=bytes([127,69,76,70,2,1,1]);v[18]=62;print(hashlib.sha256(v).hexdigest())'`、結果9c75e29938e99e5c154bf35e94a362e3e4de159e98ca02b25a032956e98aeca0。製造を呼ばない。005の期待値はSS333のStorageIoException固定契約とSS343のread invariant拒否保持に基づき、旧a2eccのrequire経路も独立に照合。誤期待値へMainを変更しない。
 
 既RootServiceExecutableAdmissionTestの全caseを変更せず再実行し、旧header各offset、0/1/63/8MiB+1、zero/negative/count/EOF位置/size/IO/ACL/nullを維持。依存reactorの実storage/bootstrap suiteも選択し、NoTests/Failed/flaky/skipped/not-runは合格0。
 
