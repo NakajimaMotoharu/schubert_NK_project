@@ -2,6 +2,8 @@
 
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
+完成owner handoff補足（2026-10-19、SS333343）：全port null/構築Errorが取得前、factory IO/Runtime/Error/null時の組立/解放0、完成nonnull ownerの同一identity/責任移管・補助側close0、組立IO/Runtime/Error/null時の同一R一次解放と既複合優先/秘匿・既suppressed/同一object、独立並行ownerを固定oracleで確認する。期待値をacquire/handoff/旧useから生成しない。取得前の状態/callback確保、完成nonnull後のprimitive移管→即return、失敗時のみ事前release、全旧acquire/use opcode/handler不変を実Java25 bytecodeと当source全storage四100で確認する。factory内部の各wrapper境界、原use237外の直接open/TWR/手動tryは追加母数・失敗例外/close優先も独立比較し、wrapper検索・限定成功・実OOM未再現を全体/native完了にしない。
+
 StartupAdmissionFile primitive ViewOwner補足：N+3予定容量（root/runtime/app/entry）、FD319以上、負FD、duplicate既保持FD、満杯/closedの取得前拒否、各openのIO/Runtime/Errorと未登録FD無し、host/private同一性・exec前service→host消費を独立に検証する。逆順3FDのclose正常/IO/Runtime/Errorの64組を固定goldenのprimary型/identity/Reason/秘匿suppressed数・全FD試行順/回数で照合し、複合故障でも途中drainを省略しない。既suppressed/同一例外/idempotent/独立ownerも含め、expectedにproduction merger/useを使わない。全wrapper/scratch/portが初回native前、容量checkが各open前、有効FD後primitiveのみ、drain中callback/new/suppressed操作0を実Java25 bytecodeで証明する。実heapOOME/本物authority/未知close成功を捏造せず、新sourceの限定PT・全体/native/451とYKT全体は別受入のまま。
 
 2026-10-18限定資格更新：source1c45f4ec6の537PT/73suite・六format先行0/三compile static0、共通storage四counter全miss0、immutable release16scopeは全port取得前構築とfactory直返却を実bytecodeで確認（1055/1056、PG5170 f97a2352・公開0769e9ea）。直前Source50bcのreadonly agent metadata新1を同大選択へ含め、checkedは15行/1method/36branch全miss0、NativeCoveragePrivateFile全classのbranch150/150を実測した。ただし同classの29行/12methodは未実行で四100ではなく、全new source/native/CHR/451は別受入。原237候補は52限定是正/1借用非該当/184未判定、追加prebuilt release1の非該当根拠も保存し、全体YKTを閉じない。既全体/別source/別scopeのcoverageや成功を合算しない。
