@@ -7,13 +7,14 @@ NAMES=('queryown001LiteralTwentyFourFailurePriorityRows',
     'queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression',
     'queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease',
     'queryown005SystemctlDefersNullButOwnsEveryPriorGetter',
-    'queryown006InspectorRejectsEachMissingGetterBeforeNextInBothModes')
+    'queryown006InspectorRejectsEachMissingGetterBeforeNextInBothModes',
+    'queryown007StreamingDeadlineAndDrainCancellationUseIndependentMonotonicVectors')
 
 
 class QueryScope(unittest.TestCase):
     def test_original_query_suites_and_six_new_methods_are_exact(self):
         folder=entry.selected.ROOT/'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform'
-        for name,count in [('SystemctlStateSourceTest',8),('InspectorUnitProbeTest',11),('ProcessResourceScopeTest',6)]:
+        for name,count in [('SystemctlStateSourceTest',8),('InspectorUnitProbeTest',11),('ProcessResourceScopeTest',7)]:
             raw=(folder/(name+'.java')).read_text()
             methods=re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(',raw)
             self.assertEqual(len(methods),count);self.assertEqual(raw.count('@Test'),count)

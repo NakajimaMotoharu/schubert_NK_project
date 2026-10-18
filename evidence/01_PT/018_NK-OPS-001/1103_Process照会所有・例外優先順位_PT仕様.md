@@ -1,5 +1,7 @@
 # Process照会所有・例外優先順位 PT仕様
 
+是正追補: 053b1aacb/PG5404-v1元34092は1163/137試験FES0だがstatic二件で最終1、BUG1447/YKT1211を修正前起票。有効resource返却後のcallを増やさずnull側のみObjects.requireNonNull、NPE型/即時拒否を維持する。NativeReaderの未網羅9行6branchも同群で閉じるため、package限定monotonic port（native既定System.nanoTime固定・外部override無し）を追加し、QUERYOWN007で取得前invalid、wait前期限0/有限wait false/非0exit/wait後期限0、阻止drainのget timeout/interruptとfinally cancel・全所有closeを固定tick/別latchで決定的に確認する。試験目的のsleep・時間競争・Production expected生成無し。新source v2予定1164/137/論理1155/独立105、whole予定3896/562/1664未実行。初稿六method/1163は初回source履歴であり現行へ合算しない。
+
 NK-OPS-001 / OPS009 / UI251 / SS341343354 / SSC308 / BUG1414・YKT1178 / PG-D432。
 対象はSystemctlStateSource四箇所・InspectorUnitProbe.NativeReaderの通常/streaming各四箇所、ProcessResourceScope.acquire、StdIo/SafeStream/QueryProcess。原237分類の残十二を対象とし、全工程・実VMの受入ではない。
 

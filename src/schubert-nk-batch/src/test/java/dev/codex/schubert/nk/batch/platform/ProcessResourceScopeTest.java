@@ -254,6 +254,146 @@ final class ProcessResourceScopeTest {
     }
   }
 
+  @Test
+  void queryown007StreamingDeadlineAndDrainCancellationUseIndependentMonotonicVectors() {
+    for (String mode : List.of("beforeWait", "wait", "exit", "beforeGet", "timeout", "interrupt")) {
+      var child = new StreamingChild(mode);
+      var ticks = new AtomicInteger();
+      long remaining = mode.equals("timeout") ? 1 : TimeUnit.SECONDS.toNanos(1);
+      var reader =
+          new InspectorUnitProbe.NativeReader(
+              command -> child,
+              InspectorUnitSnapshot.Target.INSPECTOR,
+              () -> {
+                int tick = ticks.getAndIncrement();
+                return (mode.equals("beforeWait") && tick == 1
+                        || mode.equals("beforeGet") && tick == 2)
+                    ? TimeUnit.SECONDS.toNanos(1)
+                    : 0;
+              });
+      try {
+        var actual =
+            assertThrows(
+                StopGateException.class,
+                () -> reader.executeStreaming(List.of("fixed fixture"), 8, remaining));
+        assertEquals(
+            mode.equals("exit")
+                ? StopGateFailure.COMMAND_FAILURE
+                : mode.equals("interrupt") ? StopGateFailure.INTERRUPTED : StopGateFailure.TIMEOUT,
+            actual.reason());
+        assertEquals(0, actual.getSuppressed().length);
+        assertEquals(mode.equals("beforeWait") ? 0 : 1, child.waits);
+        assertEquals(1, child.outputClosed);
+        assertEquals(1, child.inputClosed);
+        assertEquals(1, child.errorClosed);
+        assertEquals(1, child.destroyed);
+        assertEquals(mode.equals("interrupt"), Thread.currentThread().isInterrupted());
+      } finally {
+        Thread.interrupted();
+        child.drained.countDown();
+      }
+    }
+    var starts = new AtomicInteger();
+    var reader =
+        new InspectorUnitProbe.NativeReader(
+            command -> {
+              starts.incrementAndGet();
+              throw new AssertionError("no invalid launch");
+            });
+    for (long[] input :
+        List.of(new long[] {0, 1}, new long[] {-1, 1}, new long[] {1, 0}, new long[] {1, -1})) {
+      assertEquals(
+          StopGateFailure.TIMEOUT,
+          assertThrows(
+                  StopGateException.class,
+                  () -> reader.executeStreaming(List.of("fixed fixture"), (int) input[0], input[1]))
+              .reason());
+    }
+    assertEquals(0, starts.get());
+  }
+
+  private static final class StreamingChild extends Process {
+    final String mode;
+    final CountDownLatch drained = new CountDownLatch(1);
+    int waits, destroyed, outputClosed, inputClosed, errorClosed;
+
+    StreamingChild(String mode) {
+      this.mode = mode;
+    }
+
+    @Override
+    public InputStream getInputStream() {
+      return new InputStream() {
+        @Override
+        public int read() throws IOException {
+          try {
+            if (!drained.await(5, TimeUnit.SECONDS))
+              throw new IOException("unreleased fixture drain");
+          } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            throw new IOException("cancelled fixture drain");
+          }
+          return -1;
+        }
+
+        @Override
+        public void close() {
+          outputClosed++;
+          drained.countDown();
+        }
+      };
+    }
+
+    @Override
+    public OutputStream getOutputStream() {
+      return new ByteArrayOutputStream() {
+        @Override
+        public void close() {
+          inputClosed++;
+        }
+      };
+    }
+
+    @Override
+    public InputStream getErrorStream() {
+      return new ByteArrayInputStream(new byte[0]) {
+        @Override
+        public void close() {
+          errorClosed++;
+        }
+      };
+    }
+
+    @Override
+    public boolean waitFor(long timeout, TimeUnit unit) {
+      waits++;
+      assertEquals(TimeUnit.NANOSECONDS, unit);
+      assertEquals(mode.equals("timeout") ? 1 : TimeUnit.SECONDS.toNanos(1), timeout);
+      return !mode.equals("wait");
+    }
+
+    @Override
+    public int waitFor() {
+      throw new AssertionError("no unbounded wait");
+    }
+
+    @Override
+    public int exitValue() {
+      if (mode.equals("interrupt")) Thread.currentThread().interrupt();
+      return mode.equals("exit") ? 1 : 0;
+    }
+
+    @Override
+    public boolean isAlive() {
+      return destroyed == 0;
+    }
+
+    @Override
+    public void destroy() {
+      destroyed++;
+    }
+  }
+
   private static Throwable failure(int index) {
     return switch (index) {
       case 0 -> null;

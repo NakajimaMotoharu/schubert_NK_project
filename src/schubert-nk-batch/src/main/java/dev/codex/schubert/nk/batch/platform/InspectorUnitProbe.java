@@ -107,6 +107,7 @@ public final class InspectorUnitProbe {
 
     private final Start start;
     private final InspectorUnitSnapshot.Target target;
+    private final java.util.function.LongSupplier nanoTime;
 
     NativeReader() {
       this(
@@ -124,8 +125,18 @@ public final class InspectorUnitProbe {
     }
 
     NativeReader(Start start, InspectorUnitSnapshot.Target target) {
+      this(start, target, System::nanoTime);
+    }
+
+    // Internal monotonic PT port only; native binding always fixes System.nanoTime, no config
+    // override.
+    NativeReader(
+        Start start,
+        InspectorUnitSnapshot.Target target,
+        java.util.function.LongSupplier nanoTime) {
       this.start = Objects.requireNonNull(start, "query start");
       this.target = Objects.requireNonNull(target, "fixed Unit target");
+      this.nanoTime = Objects.requireNonNull(nanoTime, "query monotonic clock");
     }
 
     @Override
@@ -168,7 +179,7 @@ public final class InspectorUnitProbe {
       interrupted();
       if (limit < 1 || remainingNanos <= 0) throw new StopGateException(StopGateFailure.TIMEOUT);
       byte[][] bytes = {new byte[0]};
-      long began = System.nanoTime();
+      long began = nanoTime.getAsLong();
       long timeout = Math.min(TimeUnit.SECONDS.toNanos(5), remainingNanos);
       try {
         ProcessResourceScope.acquire(
@@ -204,7 +215,7 @@ public final class InspectorUnitProbe {
                                               });
                                       var reader = Thread.startVirtualThread(drain);
                                       try {
-                                        long left = timeout - (System.nanoTime() - began);
+                                        long left = timeout - (nanoTime.getAsLong() - began);
                                         if (left <= 0
                                             || !owned.process.waitFor(left, TimeUnit.NANOSECONDS))
                                           throw new StopGateException(StopGateFailure.TIMEOUT);
@@ -212,7 +223,7 @@ public final class InspectorUnitProbe {
                                         if (owned.process.exitValue() != 0)
                                           throw new StopGateException(
                                               StopGateFailure.COMMAND_FAILURE);
-                                        left = timeout - (System.nanoTime() - began);
+                                        left = timeout - (nanoTime.getAsLong() - began);
                                         if (left <= 0)
                                           throw new StopGateException(StopGateFailure.TIMEOUT);
                                         try {
@@ -327,8 +338,7 @@ public final class InspectorUnitProbe {
 
     SafeStream(ResourceScope.Acquire<T, IOException> acquire) throws IOException {
       @Nullable T returned = Objects.requireNonNull(acquire, "query stream acquire").open();
-      if (returned == null) throw new NullPointerException("query stream");
-      resource = returned;
+      resource = returned != null ? returned : Objects.requireNonNull(returned, "query stream");
     }
 
     // BUG187/YKT147: explicit early EOF/discard; scope fallback shares the one-close state.
@@ -348,8 +358,7 @@ public final class InspectorUnitProbe {
 
     QueryProcess(ResourceScope.Acquire<Process, IOException> acquire) throws IOException {
       @Nullable Process returned = Objects.requireNonNull(acquire, "query process acquire").open();
-      if (returned == null) throw new NullPointerException("query process");
-      process = returned;
+      process = returned != null ? returned : Objects.requireNonNull(returned, "query process");
     }
 
     @Override
