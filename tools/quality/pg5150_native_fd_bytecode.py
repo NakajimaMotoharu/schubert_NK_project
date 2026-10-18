@@ -1,6 +1,7 @@
 """Actual primitive holder success paths, prebuilt dual-owner cleanup and physical nested debug proof."""
 import json
 import os
+import re
 import pg5138_factory_bytecode as bytecode
 import pg5148_native_fd_selected as selected
 
@@ -29,6 +30,27 @@ def same_methods(old,new):
         raise ValueError('nested debug-only class method/opcode/handler semantics changed')
 
 
+def dual_close(methods):
+    return bytecode.one([m for m in methods if re.search(r'(?:^| )void close\(\)',m['header'])],
+                        'one dual release')
+
+
+def require_reference(expected,key,actual):
+    if key not in expected or expected[key] != actual:
+        raise ValueError('actual old class must match original qualified whole SHA')
+
+
+def reference_hashes(reference):
+    result=reference.get('result',{})
+    if (type(reference.get('actualExit')) is not int or reference['actualExit']!=0
+        or result.get('productionSource')!=selected.FACTORY_REFERENCE or result.get('tests')!=3814
+        or result.get('mainClasses')!=1654 or result.get('staticSixModules')!=0
+        or result.get('FESFlakyNotRun')!=0 or result.get('allSixFormatBeforeAnyPt') is not True
+        or len(result.get('allPhysicalMainSha256',{}))!=1654):
+        raise ValueError('qualified original result envelope/source/physical schema required')
+    return result['allPhysicalMainSha256']
+
+
 def main():
     result=json.loads((RUN/'manifest.safe.json').read_bytes())
     if result['actualExit']!=0 or result['tests']!=224 or result['suites']!=32:
@@ -49,11 +71,12 @@ def main():
         raise ValueError('both owners must exist before adoption')
     if sum(op[1]=='invokedynamic' for op in ctor['ops'])!=2 or any('Io.' in op[2] for op in ctor['ops']):
         raise ValueError('both close ports constructed with no native operation before adoption')
-    close=bytecode.one([m for m in owners if ' void close()' in m['header']],'one dual release')
+    close=dual_close(owners)
     if any(op[1] in ('new','invokedynamic','ldc','ldc_w','anewarray','newarray') for op in close['ops']):
         raise ValueError('dual release must use prebuilt ports')
     bytecode.index_of(close,'ResourceScope.use:')
-    old_snapshot=selected.ROOT.parent/'pgpt-runs/PG379/pg5130-root-whole-qualified-v1/source'
+    old_snapshot=selected.ROOT.parent/'pgpt-runs/PG379/pg5140-storage-callers-green-v3/source'
+    original=reference_hashes(json.loads(selected.FACTORY_FULL.read_bytes()))
     prefix='storage:dev/codex/schubert/nk/storage/'
     semantic={prefix+n+'.class' for n in NATIVE}|{prefix+'LinuxFileLock$OwnedDescriptor.class'}
     debug=[]
@@ -61,6 +84,7 @@ def main():
         if not any(key.startswith(prefix+n+'$') for n in NATIVE) or key in semantic:continue
         name=key.split(':',1)[1][:-6].replace('/','.')
         prior,prior_hash=bytecode.decode(old_snapshot,'storage',name)
+        require_reference(original,key,prior_hash['classSha256'])
         current,current_hash=bytecode.decode(snapshot,'storage',name)
         same_methods(prior,current)
         debug.append({'class':name,'old':prior_hash,'current':current_hash,'allMethodOpcodeAndHandlerSemanticsEqual':True})

@@ -61,7 +61,8 @@ def coverage_hashes(paths, root, hash_file=selected.sha):
     return result
 
 
-def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None):
+def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=selected, extra_fields=None,
+         required_counts=None, case_overrides=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
@@ -73,6 +74,7 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
     required = (28, 4, 8) if args.group == 'elf' else (47, 7, 20)
     if args.group == 'guards': required = (50, 8, 23)
     if args.group == 'factory': required = (222, 32, 39)
+    if required_counts is not None: required = required_counts
     suite_modules = selected.SUITES if args.group == 'elf' else {**selected.SUITES, **selected.PENDING_SUITES}
     if args.group in ('guards', 'factory'): suite_modules = {**suite_modules, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     if args.group == 'factory': suite_modules = {**suite_modules, **selected.storage_suites()}
@@ -163,7 +165,12 @@ def main(*, factory_run_name='pg5136-factory-io-green-v6', measurement_module=se
             elif name.endswith('.OwnedDirectoryFactoryTest'):
                 if case['method'] not in DIRECTORY_NAMES: raise ValueError('unknown directory case')
                 case.update(testId='PT-DIRFACT-'+str(DIRECTORY_NAMES.index(case['method'])+1).zfill(3),newIndependentCase=True)
+        for case in cases:
+            if case_overrides and (name,case['method']) in case_overrides:
+                case.update(case_overrides[(name,case['method'])])
         records += cases; suites.append({'class': name, 'module': module, 'originalXmlSha256': digest, 'tests': len(cases)})
+    if case_overrides and not set(case_overrides) <= {(c['class'],c['method']) for c in records}:
+        raise ValueError('every declared new case override must match one actual XML identity')
     if len(records) != required[0] or sum(r['newIndependentCase'] for r in records) != required[2]:
         raise ValueError('exact literal required cases')
     failures = []
