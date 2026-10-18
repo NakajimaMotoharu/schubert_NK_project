@@ -1,0 +1,350 @@
+{
+  "source": "1c45f4ec689d2796d271dc745b7d9cde1827a31b",
+  "actualExit": 0,
+  "proofs": {
+    "ReleasePayloadVerification": {
+      "scopes": [
+        {
+          "method": "private void walk(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String, java.util.Map<java.lang.String, java.util.Set<java.lang.String>>, java.util.Map<java.lang.String, dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact>, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, byte[], dev.codex.schubert.nk.bootstrap.ReleaseInventory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 167,
+          "portPcs": [
+            137,
+            142,
+            162
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification$FileValue read(java.nio.file.Path, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, boolean) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 73,
+          "portPcs": [
+            52,
+            57,
+            68
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification$JarValue archive(java.nio.file.Path, java.lang.String, java.util.Map<java.lang.String, dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact>) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 29,
+          "portPcs": [
+            10,
+            15,
+            24
+          ]
+        },
+        {
+          "method": "static int sqlChecksum(byte[]) throws java.io.IOException;",
+          "acquirePc": 33,
+          "portPcs": [
+            18,
+            23,
+            28
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.bootstrap.ReleasePayloadVerification$JarValue lambda$archive$1(java.lang.String, java.util.Map, java.security.MessageDigest, java.util.zip.ZipFile) throws java.io.IOException;",
+          "acquirePc": 302,
+          "portPcs": [
+            285,
+            290,
+            297
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$names$0(java.util.Set, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 19,
+          "portPcs": [
+            2,
+            7,
+            14
+          ]
+        },
+        {
+          "method": "private java.lang.Boolean lambda$walk$2(java.lang.String, java.util.Map, java.util.Map, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, byte[], dev.codex.schubert.nk.bootstrap.ReleaseInventory, dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 53,
+          "portPcs": [
+            35,
+            40,
+            48
+          ]
+        }
+      ],
+      "factoryReturns": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$walk$4(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$walk$1(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private java.nio.file.DirectoryStream lambda$names$1(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "StartupReleaseManifest$Io.names:",
+          "directReturnPcs": [
+            10
+          ]
+        },
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$read$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "StartupReleaseManifest$Io.open:",
+          "directReturnPcs": [
+            10
+          ]
+        },
+        {
+          "method": "private java.util.zip.ZipFile lambda$archive$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "StartupReleaseManifest$Io.archive:",
+          "directReturnPcs": [
+            10
+          ]
+        },
+        {
+          "method": "private static java.io.InputStream lambda$archive$2(java.util.zip.ZipFile, java.util.zip.ZipEntry) throws java.io.IOException;",
+          "acquisition": "java/util/zip/ZipFile.getInputStream:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static java.io.BufferedReader lambda$sqlChecksum$0(java.lang.String) throws java.io.IOException;",
+          "acquisition": "java/io/BufferedReader.\"<init>\":",
+          "directReturnPcs": [
+            18
+          ]
+        }
+      ],
+      "classSha256": "d7b62cc58a3db9c9cafd77d4846a3651a67b0686cab44a615425281cd59c18d9",
+      "javapSha256": "8ae467afdc2ad01ea86a7945222af99b71ec6a5f55a50c2c96f4f754ca8c683a"
+    },
+    "StartupReleaseManifest": {
+      "scopes": [
+        {
+          "method": "private <T> T inspectApplication(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ApplicationOperation<T>) throws java.io.IOException;",
+          "acquirePc": 18,
+          "portPcs": [
+            1,
+            6,
+            13
+          ]
+        },
+        {
+          "method": "private <T> T released(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ReleaseOperation<T>) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquirePc": 20,
+          "portPcs": [
+            1,
+            6,
+            15
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ManifestValue lambda$manifest$0(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 58,
+          "portPcs": [
+            36,
+            41,
+            53
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$released$1(java.lang.String, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ReleaseOperation, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 41,
+          "portPcs": [
+            18,
+            23,
+            36
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$released$3(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ReleaseOperation, java.lang.String, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 67,
+          "portPcs": [
+            49,
+            54,
+            62
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$released$3(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ReleaseOperation, java.lang.String, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 111,
+          "portPcs": [
+            93,
+            98,
+            106
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$inspectApplication$1(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ApplicationOperation, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 30,
+          "portPcs": [
+            11,
+            16,
+            25
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$inspectApplication$3(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ApplicationOperation, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 65,
+          "portPcs": [
+            47,
+            52,
+            60
+          ]
+        },
+        {
+          "method": "private java.lang.Object lambda$inspectApplication$3(dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$ApplicationOperation, dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.bootstrap.StartupReleaseManifest$Snapshot, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;",
+          "acquirePc": 103,
+          "portPcs": [
+            86,
+            91,
+            98
+          ]
+        }
+      ],
+      "factoryReturns": [
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$inspectApplication$6() throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            11
+          ]
+        },
+        {
+          "method": "private dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$inspectApplication$0() throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            11
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$released$6(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$released$4(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$released$2(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.lang.String) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$released$0(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$inspectApplication$4(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$inspectApplication$2(dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            7
+          ]
+        },
+        {
+          "method": "private java.nio.channels.SeekableByteChannel lambda$manifest$1(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "StartupReleaseManifest$Io.open:",
+          "directReturnPcs": [
+            10
+          ]
+        }
+      ],
+      "classSha256": "297deea41182d77a68d3db8c512b7ed605d0315d2fd4869d0b5b1c3a30ac5ba6",
+      "javapSha256": "6af9a5836b361546b3f0dbbe9583f6cedbcd59d9e58f39050820c5fcee9bb122"
+    }
+  },
+  "physicalMain": 764,
+  "newOuterChanges": 2,
+  "debugEquivalent": [],
+  "otherPhysicalClassesUnchanged": 762,
+  "previousSource": "50bc4cd2e7b4d96e0f8b6d3f0668eaa304f99a1f",
+  "selectedManifestSha256": "a5603e3ae9d47d19e6a845f5f9459fdef492933890388a5315099c3104de719d",
+  "metadataCheckedCounters": {
+    "INSTRUCTION": {
+      "covered": 138,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 36,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 15,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 19,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "coverageDirectoryClassCounters": {
+    "INSTRUCTION": {
+      "covered": 927,
+      "missed": 158
+    },
+    "BRANCH": {
+      "covered": 150,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 145,
+      "missed": 29
+    },
+    "COMPLEXITY": {
+      "covered": 102,
+      "missed": 12
+    },
+    "METHOD": {
+      "covered": 27,
+      "missed": 12
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "metadataBranch100": true,
+  "targetClassBranch100": true,
+  "wholeFourCounters100": false,
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0
+}
