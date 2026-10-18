@@ -22,6 +22,13 @@ def prove(*,entry,run_name,prior_name,source,tests,suites,package,scopes,kinds,o
     if result['actualExit']!=0 or result['phaseExits']!=[0,0] or result['tests']!=tests or result['suites']!=suites or result['sourceSnapshot']!=source:
         raise ValueError('exact original selected source, terminal and all current counts required')
     prior=json.loads((prior_run/'manifest.safe.json').read_bytes())
+    if prior.get('actualExit')!=0:
+        prior_qualification=prior_run/'qualification.safe.json'
+        qualified=json.loads(prior_qualification.read_bytes())
+        public.validate_separate_qualification(qualified,prior,selected.sha(prior_run/'manifest.safe.json'))
+        if type(qualified['actualExit']) is not int or qualified['actualExit']!=0 or qualified['phaseExits']!=[0,0]:
+            raise ValueError('prior reference must have genuine independent qualification')
+        prior=qualified
     before=prior['mainDelta']['physicalSha256'];after=result['mainDelta']['physicalSha256']
     required={entry.PREFIX+n+'.class' for n in entry.OUTERS};optional={entry.PREFIX+n+'.class' for n in entry.DEBUG}
     changed={key for key in before if key in after and before[key]!=after[key]}

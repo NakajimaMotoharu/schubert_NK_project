@@ -1,0 +1,198 @@
+{
+  "source": "2a48e4e1b3fc5f90d35f7b8a9ce049947402f1df",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "MorningCaddyReadiness": {
+      "scopes": [
+        {
+          "method": "static void closeLoginInput(dev.codex.schubert.nk.storage.ResourceScope$Acquire<java.io.InputStream, java.io.IOException>) throws java.io.IOException;",
+          "acquirePc": 28,
+          "portPcs": [
+            13,
+            18,
+            23
+          ]
+        }
+      ],
+      "factories": [],
+      "classSha256": "9aff40f8d0039e12ee855cbc8aff5af3feb1ea63f3787b899f08c1f3319d7e9d",
+      "javapSha256": "d17861ca967ef691ac7312da716b987e551ccb2729f08369e2913759fb6fcb52"
+    },
+    "MorningCaddyReadiness$NativeIo": {
+      "scopes": [],
+      "factories": [],
+      "classSha256": "4d95bc793aeb8d14194adaae6036e3c0f0c782dc81da2bcde767148f7f0b6481",
+      "javapSha256": "e85f477b3f845ee9bb1ba98425cdd0da84b454c7fd2cdf66745a963c83b05bb7"
+    },
+    "MorningServiceReadiness$NativeIo": {
+      "scopes": [
+        {
+          "method": "static byte[] read(java.nio.file.Path, int) throws java.io.IOException;",
+          "acquirePc": 17,
+          "portPcs": [
+            1,
+            6,
+            12
+          ]
+        },
+        {
+          "method": "public dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$Response get(java.lang.String) throws java.io.IOException;",
+          "acquirePc": 124,
+          "portPcs": [
+            108,
+            113,
+            119
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static java.io.InputStream lambda$read$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "Files.newInputStream:",
+          "rawReturnPcs": [
+            14
+          ]
+        }
+      ],
+      "classSha256": "6d0be5b87def872be63f17c59d3d3d28a232759153ee2cb406a6f2f689b83c71",
+      "javapSha256": "84b22ff44d4b62880ecf97ba0b319ac6fd7016efe52ae11a46e22c1129d7a11c"
+    }
+  },
+  "selectedManifestSha256": "ecd95c42e3b546e9d9862fa723b3f860ff2b7b474af10e10887d1f4db76a8c32",
+  "semanticClasses": 3,
+  "nestedDebugEquivalent": [],
+  "otherPhysicalClassesUnchanged": 761,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness": {
+      "BRANCH": {
+        "missed": 12,
+        "covered": 140
+      },
+      "LINE": {
+        "missed": 27,
+        "covered": 147
+      },
+      "METHOD": {
+        "missed": 5,
+        "covered": 16
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$NativeIo": {
+      "BRANCH": {
+        "missed": 1,
+        "covered": 19
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 44
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$NativeIo": {
+      "BRANCH": {
+        "missed": 26,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 70,
+        "covered": 0
+      },
+      "METHOD": {
+        "missed": 6,
+        "covered": 0
+      },
+      "CLASS": {
+        "missed": 1,
+        "covered": 0
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "nullableCaddyFactory": {
+    "method": "private static java.io.InputStream lambda$closeLoginInput$0(dev.codex.schubert.nk.storage.ResourceScope$Acquire, java.io.InputStream) throws java.io.IOException;",
+    "positiveNoHeapPcs": [
+      6,
+      9,
+      10,
+      11,
+      18
+    ],
+    "classSha256": "9aff40f8d0039e12ee855cbc8aff5af3feb1ea63f3787b899f08c1f3319d7e9d",
+    "javapSha256": "d17861ca967ef691ac7312da716b987e551ccb2729f08369e2913759fb6fcb52"
+  },
+  "caddyRawGetterPositivePaths": {
+    "getErrorStream:": [
+      11
+    ],
+    "getInputStream:": []
+  },
+  "serviceDirectHttpFactoryReferences": [
+    "#335 = MethodHandle       5:#336        // REF_invokeVirtual java/net/URLConnection.getInputStream:()Ljava/io/InputStream;",
+    "#335 REF_invokeVirtual java/net/URLConnection.getInputStream:()Ljava/io/InputStream;"
+  ],
+  "focusedCaddyHelperCounters": {
+    "closeLoginInput": {
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "lambda$closeLoginInput$1": {
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "lambda$closeLoginInput$0": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "newJavaCases": 6,
+  "realNullBodyAcquisitionsCounted": false,
+  "nativeOwnerExecutionQualified": false
+}
