@@ -26,11 +26,11 @@ def state_registration(method):
             'returnedStorePc':method['ops'][after[0]][0]}
 
 
-def main():
-    run,value=proof.prove(entry=entry,run_name=RUN,prior_name='pg5348-manager-session-green-v1',
-        source=SOURCE,tests=1099,suites=132,package='dev.codex.schubert.nk.bootstrap.',
+def main(*,source=SOURCE,run_name=RUN,tests=1099,new_cases=7,out_name=OUT):
+    run,value=proof.prove(entry=entry,run_name=run_name,prior_name='pg5348-manager-session-green-v1',
+        source=source,tests=tests,suites=132,package='dev.codex.schubert.nk.bootstrap.',
         scopes={'LinuxSystemdSession':4,'LinuxSystemdSession$Factory':0},
-        kinds={'LinuxSystemdSession':{},'LinuxSystemdSession$Factory':{}},out_name=OUT,module='bootstrap')
+        kinds={'LinuxSystemdSession':{},'LinuxSystemdSession$Factory':{}},out_name=out_name,module='bootstrap')
     methods,hashed=bytecode.decode(run/'source','bootstrap',CLASS)
     constructor=bytecode.one([m for m in methods if 'LinuxSystemdSession(' in m['header']],'one session constructor')
     arrays=[(i,o) for i,o in enumerate(constructor['ops']) if o[1] in ('newarray','anewarray')]
@@ -71,10 +71,10 @@ def main():
     value.update(primitiveCallState=registration,registeredNativeSites=sites,
         threeStrongOutputSlotsBeforeNative=True,releaseUnconfirmedBeforeDecode=True,
         arenaCloseUnknownSticky=True,constructorHandoffProtected=True,sourceClass=hashed,
-        newJavaCasesInGroup=7,originalScopeSites=4,additionalBoundariesOutsideOriginal=2,
+        newJavaCasesInGroup=new_cases,originalScopeSites=4,additionalBoundariesOutsideOriginal=2,
         implementationDecision='PG-D429',prototypeRun='PG5356/e5501097; partial counters; no imports')
     value['bugs'].append('BUG1444');value['ykt'].append('YKT1208')
-    proof.publish(entry,value,OUT)
+    proof.publish(entry,value,out_name)
 
 
 if __name__=='__main__':main()

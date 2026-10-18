@@ -1,0 +1,153 @@
+{
+  "source": "fceffefd6639ae0b217565dc0acdf0d2e0a2a6fe",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "LinuxSystemdSession": {
+      "scopes": [
+        {
+          "method": "private java.lang.String ownerValue(java.lang.String, java.lang.String, char, long) throws java.io.IOException;",
+          "acquirePc": 29,
+          "portPcs": [
+            7,
+            13,
+            24
+          ]
+        },
+        {
+          "method": "public java.lang.String read(dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Service, dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Property, long) throws java.io.IOException;",
+          "acquirePc": 142,
+          "portPcs": [
+            116,
+            122,
+            137
+          ]
+        },
+        {
+          "method": "public java.lang.String read(dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Service, dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Property, long) throws java.io.IOException;",
+          "acquirePc": 329,
+          "portPcs": [
+            301,
+            307,
+            324
+          ]
+        },
+        {
+          "method": "private java.lang.String lambda$ownerValue$2(java.lang.String, java.lang.String, long, char, java.lang.foreign.MemorySegment) throws java.io.IOException;",
+          "acquirePc": 197,
+          "portPcs": [
+            175,
+            181,
+            192
+          ]
+        }
+      ],
+      "factories": [],
+      "classSha256": "15c5bafbe6c28e3c5eb8ba239a97fb073b962955365545a119ddbb361f709289",
+      "javapSha256": "1af403000b7f73feddab4ae3ac8944ac908907d266a714453388497509fc1a70"
+    },
+    "LinuxSystemdSession$Factory": {
+      "scopes": [],
+      "factories": [],
+      "classSha256": "c4ff4cde64de09e760ecfeadcb62f3fa8e0f0d2b0bfc0e4a3a73ac4c09cc9d9d",
+      "javapSha256": "b12f3dc7c86b8e6468fd3fc030b234e9475a2f999af67c0cefa43bba16163e1c"
+    }
+  },
+  "selectedManifestSha256": "c988687d82b762d32fd3ad658dd689b997e358f0284ec6949c0c69870b5a0c9d",
+  "semanticClasses": 2,
+  "nestedDebugEquivalent": [
+    {
+      "class": "dev.codex.schubert.nk.bootstrap.LinuxSystemdSession$Native",
+      "old": {
+        "classSha256": "a831d2f20edc5efcdacbbd857873ad87e606d52817c97a51252bc6582c3c4ee5",
+        "javapSha256": "2879e2f9b225f2155f0343defdaafff52eb492ca752682bb96a10659a3159fc3"
+      },
+      "current": {
+        "classSha256": "5ed0abac996d4aafbc8b480ef554f9a32b7cb9ea69457b33ec022c4a7405fcd4",
+        "javapSha256": "2879e2f9b225f2155f0343defdaafff52eb492ca752682bb96a10659a3159fc3"
+      },
+      "allOpcodeHandlerSemanticsEqual": true
+    }
+  ],
+  "otherPhysicalClassesUnchanged": 761,
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/bootstrap/LinuxSystemdSession$Factory": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 3
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/bootstrap/LinuxSystemdSession": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 104
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 196
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 33
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414",
+    "BUG1444"
+  ],
+  "ykt": [
+    "YKT1178",
+    "YKT1208"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0,
+  "primitiveCallState": {
+    "pendingStorePc": 6,
+    "nativeCallPc": 10,
+    "returnedStorePc": 21
+  },
+  "registeredNativeSites": [
+    "public void start(dev.codex.schubert.nk.bootstrap.SystemManagerObservation$Budget) throws java.io.IOException;",
+    "private java.lang.String lambda$read$5(long, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment) throws java.io.IOException;",
+    "private java.lang.String lambda$read$2(long, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment, java.lang.foreign.MemorySegment) throws java.io.IOException;",
+    "private java.lang.String lambda$ownerValue$2(java.lang.String, java.lang.String, long, char, java.lang.foreign.MemorySegment) throws java.io.IOException;",
+    "private java.lang.String lambda$ownerValue$5(long, java.lang.foreign.MemorySegment, char, java.lang.foreign.MemorySegment) throws java.io.IOException;"
+  ],
+  "threeStrongOutputSlotsBeforeNative": true,
+  "releaseUnconfirmedBeforeDecode": true,
+  "arenaCloseUnknownSticky": true,
+  "constructorHandoffProtected": true,
+  "sourceClass": {
+    "classSha256": "15c5bafbe6c28e3c5eb8ba239a97fb073b962955365545a119ddbb361f709289",
+    "javapSha256": "1af403000b7f73feddab4ae3ac8944ac908907d266a714453388497509fc1a70"
+  },
+  "newJavaCasesInGroup": 8,
+  "originalScopeSites": 4,
+  "additionalBoundariesOutsideOriginal": 2,
+  "implementationDecision": "PG-D429",
+  "prototypeRun": "PG5356/e5501097; partial counters; no imports"
+}
