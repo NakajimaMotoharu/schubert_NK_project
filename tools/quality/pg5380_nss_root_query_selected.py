@@ -15,6 +15,7 @@ OPTIONAL={'bootstrap:dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.class'
     'batch:dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo$UnitQuery.class'}
 RELATED={'dev.codex.schubert.nk.batch.platform.RootStartupContextTest':'batch'}
 FILES={'FixedServiceIdentity','RootStartupContext'}
+OUTERS=FILES  # Original source basenames for classifier adapter; physical keys are REQUIRED.
 
 
 def configure():

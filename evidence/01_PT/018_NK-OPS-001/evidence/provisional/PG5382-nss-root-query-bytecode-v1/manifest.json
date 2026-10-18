@@ -1,0 +1,197 @@
+{
+  "source": "d3f618962cc3a0297c818cd4890698c2269a0f5f",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "semanticClasses": 2,
+  "nestedDebugEquivalent": [],
+  "otherPhysicalClassesUnchanged": 762,
+  "proofs": {
+    "dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$NativeQuery": {
+      "scopes": [
+        {
+          "method": "public byte[] read(java.util.List<java.lang.String>) throws java.io.IOException;",
+          "acquirePc": 17,
+          "portPcs": [
+            2,
+            7,
+            12
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$read$2(java.lang.Process) throws java.io.IOException;",
+          "acquirePc": 22,
+          "portPcs": [
+            6,
+            11,
+            17
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$read$3(java.lang.Process, java.io.InputStream) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$read$4(java.lang.Process, java.io.InputStream, java.io.OutputStream) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        }
+      ],
+      "rawFactoryTails": {
+        "FixedServiceIdentity$Start.execute:": [
+          [
+            10
+          ]
+        ]
+      },
+      "classSha256": "01b4e704678426e43fee8b790700c6bc23765813a9793672bdffcc42e5d1525d",
+      "javapSha256": "dbf9ae84e71866ddf3a2b04c7814c1853bb71da79248e3d3cff69258abc21a19"
+    },
+    "dev.codex.schubert.nk.batch.platform.RootStartupContext$NativeIo": {
+      "scopes": [
+        {
+          "method": "private static byte[] read(java.nio.file.Path, int) throws java.io.IOException;",
+          "acquirePc": 17,
+          "portPcs": [
+            1,
+            6,
+            12
+          ]
+        },
+        {
+          "method": "private static byte[] queryUnit(dev.codex.schubert.nk.batch.platform.SystemctlStateSource$Start, dev.codex.schubert.nk.batch.platform.RootStartupContext$Service, java.lang.String) throws java.io.IOException;",
+          "acquirePc": 18,
+          "portPcs": [
+            3,
+            8,
+            13
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$queryUnit$2(java.lang.Process) throws java.io.IOException;",
+          "acquirePc": 22,
+          "portPcs": [
+            6,
+            11,
+            17
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$queryUnit$3(java.lang.Process, java.io.InputStream) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$queryUnit$4(java.lang.Process, java.io.InputStream, java.io.OutputStream) throws java.io.IOException;",
+          "acquirePc": 23,
+          "portPcs": [
+            6,
+            11,
+            18
+          ]
+        }
+      ],
+      "rawFactoryTails": {
+        "SystemctlStateSource$Start.execute:": [
+          [
+            34
+          ]
+        ],
+        "java/nio/file/Files.newInputStream:": [
+          [
+            14
+          ]
+        ]
+      },
+      "classSha256": "6d448090fdcd79419ee8b222b83d42cf5e4c9c76a20439fc6626f0d56d4de9b3",
+      "javapSha256": "800c8b1eb4e4126e8c626b4c847ebb1256c691e889cdf289e92e9e5b14510b38"
+    }
+  },
+  "targetClassCounters": {
+    "dev/codex/schubert/nk/bootstrap/FixedServiceIdentity$NativeQuery": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 26
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 56
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 29
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "selectedManifestSha256": "bfefc5703f199cf37d02d0e9e0055570eb27277ff438fc2a8381120040a1e91a",
+  "storageFourCounters": {
+    "BRANCH": {
+      "covered": 533,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 39,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 1222,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 294,
+      "missed": 0
+    }
+  },
+  "originalScopeSites": 9,
+  "newJavaCasesInGroup": 4,
+  "implementationDecision": "PG-D430",
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "actualHeapOomReproduced": false,
+  "vmActions": 0,
+  "testReplays": 0
+}
