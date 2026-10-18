@@ -1,0 +1,11 @@
+# a19全3900公開・当Source静的診断結果
+
+Main/Test a19、operator8b80f7084／dev-foundation。PG5556元exec79006真正0、六実Jarの独立5552 hashと全849source一致。PMD7.28真正exit4／raw1647／processing error0、Checkstyle14.3真正0／指摘0。PMDは未合格である。server manifest **771387e70729f005cb6fe5cbc8a5a4ad6b338402629835f0f0bde230dd471218**、raw XML be5350d7、payload d16a6539。原private/元server XMLは保全、Maven/診断再実行0。
+
+PG5558元exec38855真正0、3900個別case許可列（hash c4e735f4）を新専用公開し、summary **5914b32a415f39e6a17147bee326a619995f31fe1383f54282242c3c13b356be**。旧3896保持＋新四のTestID→実XMLへの一意trace、全1664実byte／六counter／未達／global100falseを保存。元raw properties/session/秘密を出力0。四pure工具成功、PG5560是正後は関係六pure成功（Production PTへ加算0）。
+
+PG5560-v1元11447はproducerとのpath suffix不一致により読取前FileNotFoundErrorで1、BUG1458/YKT1222を先行起票。完全report/input prefix一致へ是正し、**新v2元11814真正0**、公開manifest **7a7e73525d491875f74685208f07595500c448a9cd380a2f4d6590162f564740**。失敗v1を消さず、元PG5556を再診断0。fresh1647全行のsource/span/rule/ordinalを元診断へ照合、239thread行は全て個別一致、旧source13reviewの無検証転記0。現在review252内訳=context非該当239・false positive4・必要契約8・style保留1、**NOT_REVIEWED1395／F03false**。
+
+Snapshot二はactual新codec class9edf1d41とPG5542実PC3先行/handler不変・当whole四fault＋七goldenへ結合。OperationFingerprintはphysical同byteとTWR実handlerを根拠とし当wholeケースへ再結合、旧native成功を借りない。BUG1453/YKT1217はHOST_WHOLE_QUALIFIED_PENDING_NATIVE_IMPACT（原実経路要件保持）。BUG1458/1222は新projection機能範囲を完了、既main/static/新native/CHR/451/formal全体を認定しない。
+
+command/fixture/oracleは1143・5556/5558/5560工具。OS/JDKの過去値は元wholeXML／当診断固定tool manifest参照、現在値から逆算0。原DBBackup/鍵/native/stash7/Currentbaseline変更0。正式1964/53・工数null・QA051final・BUG1455歴史stderr不明を維持し、当工程の通常区切りで停止しない。
