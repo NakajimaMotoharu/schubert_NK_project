@@ -132,12 +132,13 @@ public final class SystemManagerObservation {
       properties = new Property[] {Property.ID, Property.INVOCATION, Property.PID, Property.START};
     else throw unavailable();
     long began = clock.getAsLong();
-    Session session = Objects.requireNonNull(factory.create(), "fresh system manager session");
-    pending = session;
     try {
-      return ResourceScope.use(
-          session::close,
-          () -> {
+      return ResourceScope.acquire(
+          factory::create,
+          Session::close,
+          session -> {
+            // Only a primitive reference write before any work under acquired ownership.
+            pending = session;
             session.start(() -> remaining(began));
             Owner first = session.owner(remaining(began));
             if (first.pid() != 1
@@ -159,7 +160,8 @@ public final class SystemManagerObservation {
             return result.toString().getBytes(StandardCharsets.US_ASCII);
           });
     } finally {
-      if (session.closed()) pending = null;
+      Session current = pending;
+      if (current != null && current.closed()) pending = null;
     }
   }
 

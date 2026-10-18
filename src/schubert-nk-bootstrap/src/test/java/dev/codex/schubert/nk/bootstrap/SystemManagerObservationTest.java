@@ -10,6 +10,99 @@ import org.junit.jupiter.api.Test;
 
 /** Independent fixed bytes/stateful owner and clock oracle; MANAGER817001..006. */
 final class SystemManagerObservationTest {
+  /** PT-OPS-MANAGEROWN001: failed/null acquisition never registers a pending owner. */
+  @Test
+  void managerown001FactoryFailuresKeepIdentityAndAllowAFreshNextAcquisition() throws Exception {
+    Throwable[] failures = {
+      new IOException("synthetic"),
+      new IllegalStateException("synthetic"),
+      new AssertionError("synthetic"),
+      null
+    };
+    for (Throwable failure : failures) {
+      int[] creates = {0};
+      var accepted = new Session();
+      var query =
+          new SystemManagerObservation(
+              () -> {
+                if (creates[0]++ != 0) return accepted;
+                if (failure instanceof IOException io) throw io;
+                if (failure instanceof RuntimeException runtime) throw runtime;
+                if (failure instanceof Error fatal) throw fatal;
+                return null;
+              },
+              () -> 0);
+      Class<? extends Throwable> expected =
+          failure == null ? NullPointerException.class : failure.getClass();
+      Throwable actual =
+          assertThrows(expected, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
+      if (failure != null) assertSame(failure, actual);
+      assertEquals(1, creates[0]);
+      assertTrue(accepted.events.isEmpty());
+      assertTrue(
+          new String(
+                  query.read(SystemManagerObservation.Service.API, FIELDS),
+                  StandardCharsets.US_ASCII)
+              .startsWith("Id=schubert-nk-api.service\nLoadState=loaded\n"));
+      assertEquals(2, creates[0]);
+      assertEquals("close", accepted.events.getLast());
+      assertTrue(accepted.closed);
+    }
+  }
+
+  /** PT-OPS-MANAGEROWN002: post-release close observation is not a new release operation. */
+  @Test
+  void managerown002UnconfirmedPostCloseObservationRetainsPendingAndNeverCreatesAgain() {
+    var delegate = new Session();
+    var failure = new IllegalStateException("synthetic close observation");
+    int[] creates = {0}, checks = {0};
+    var session =
+        new SystemManagerObservation.Session() {
+          public void start(SystemManagerObservation.Budget budget) throws IOException {
+            delegate.start(budget);
+          }
+
+          public SystemManagerObservation.Owner owner(long micros) throws IOException {
+            return delegate.owner(micros);
+          }
+
+          public String read(
+              SystemManagerObservation.Service service,
+              SystemManagerObservation.Property property,
+              long micros)
+              throws IOException {
+            return delegate.read(service, property, micros);
+          }
+
+          public void close() throws IOException {
+            delegate.close();
+          }
+
+          public boolean closed() {
+            checks[0]++;
+            throw failure;
+          }
+        };
+    var query =
+        new SystemManagerObservation(
+            () -> {
+              creates[0]++;
+              return session;
+            },
+            () -> 0);
+    assertSame(
+        failure,
+        assertThrows(
+            IllegalStateException.class,
+            () -> query.read(SystemManagerObservation.Service.API, FIELDS)));
+    assertTrue(delegate.closed);
+    assertEquals(1, checks[0]);
+    assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
+    assertEquals(1, creates[0]);
+    assertEquals(1, checks[0]);
+    assertEquals(1, delegate.events.stream().filter("close"::equals).count());
+  }
+
   static final String FIELDS =
       "Id,LoadState,ActiveState,SubState,MainPID,InvocationID,ControlGroup";
   static final String DEADLINE = "Id,InvocationID,MainPID,ExecMainStartTimestampMonotonic";
