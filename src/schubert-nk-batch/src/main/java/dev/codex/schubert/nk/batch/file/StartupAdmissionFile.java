@@ -13,8 +13,6 @@ import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -134,18 +132,18 @@ public final class StartupAdmissionFile {
 
   private <T> T withView(DirectoryCalls calls, boolean hostView, ViewOperation<T> operation)
       throws IOException {
-    var owner = new ViewOwner(calls);
-    return ResourceScope.use(
-        owner::close,
-        () -> {
-          int directory = owner.add(calls.openRoot());
+    return ResourceScope.<ViewOwner, T, StorageIoException>acquire(
+        () -> new ViewOwner(calls, Math.addExact(runtime.getNameCount(), 3)),
+        ViewOwner::close,
+        owner -> {
+          int directory = owner.openRoot();
           for (Path segment : runtime)
-            directory = owner.add(calls.openDirectory(directory, segment.toString()));
+            directory = owner.openDirectory(directory, segment.toString());
           Identity runIdentity = identity(held(directory), true, hostView);
-          int app = owner.add(calls.openDirectory(directory, "schubert-nk"));
+          int app = owner.openDirectory(directory, "schubert-nk");
           Identity appIdentity = identity(held(app), true, hostView);
           require(runIdentity.device() == appIdentity.device());
-          int entry = owner.add(calls.openEntry(app, "startup-admission.lock"));
+          int entry = owner.openEntry(app, "startup-admission.lock");
           Path file = held(entry);
           Identity fileIdentity = identity(file, false, hostView);
           require(appIdentity.device() == fileIdentity.device());
@@ -210,35 +208,99 @@ public final class StartupAdmissionFile {
   }
 
   /** Private root observation owner only, not a general exported file capability. */
-  private static final class ViewOwner {
+  static final class ViewOwner {
     private final DirectoryCalls calls;
-    private final List<Integer> descriptors = new ArrayList<>();
+    private final int[] descriptors;
+    private final @Nullable Throwable[] failures;
+    private int count;
     private boolean closed;
 
-    ViewOwner(DirectoryCalls calls) {
-      this.calls = calls;
+    ViewOwner(DirectoryCalls calls, int capacity) {
+      this.calls = Objects.requireNonNull(calls, "view directory calls");
+      if (capacity < 1) throw new IllegalArgumentException("positive private view capacity");
+      descriptors = new int[capacity];
+      failures = new Throwable[capacity];
     }
 
-    int add(int descriptor) throws StorageIoException {
-      require(descriptor >= 0);
-      descriptors.add(descriptor);
+    // SSC308/VIEWFD001-008: guard before native IO, then only primitive work on valid new FD.
+    int openRoot() throws StorageIoException {
+      guard();
+      int descriptor = calls.openRoot();
+      if (descriptor < 0) throw unavailable();
+      for (int index = 0; index < count; index++)
+        if (descriptors[index] == descriptor) throw unavailable();
+      descriptors[count++] = descriptor;
       return descriptor;
+    }
+
+    int openDirectory(int parent, String name) throws StorageIoException {
+      Objects.requireNonNull(name, "view directory segment");
+      guard();
+      parent(parent);
+      int descriptor = calls.openDirectory(parent, name);
+      if (descriptor < 0) throw unavailable();
+      for (int index = 0; index < count; index++)
+        if (descriptors[index] == descriptor) throw unavailable();
+      descriptors[count++] = descriptor;
+      return descriptor;
+    }
+
+    int openEntry(int parent, String name) throws StorageIoException {
+      Objects.requireNonNull(name, "view entry name");
+      guard();
+      parent(parent);
+      int descriptor = calls.openEntry(parent, name);
+      if (descriptor < 0) throw unavailable();
+      for (int index = 0; index < count; index++)
+        if (descriptors[index] == descriptor) throw unavailable();
+      descriptors[count++] = descriptor;
+      return descriptor;
+    }
+
+    private void guard() throws StorageIoException {
+      if (closed || count == descriptors.length) throw unavailable();
+    }
+
+    private void parent(int descriptor) throws StorageIoException {
+      for (int index = 0; index < count; index++) if (descriptors[index] == descriptor) return;
+      throw unavailable();
     }
 
     void close() throws StorageIoException {
       if (closed) return;
       closed = true; // Consume all ownership once, even if a native close reports failure.
-      closeFrom(0);
+      int failed = 0;
+      for (int index = count - 1; index >= 0; index--) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException | RuntimeException | Error failure) {
+          failures[failed++] = failure;
+        }
+      }
+      // No allocation/exception aggregation precedes completion of every native close attempt.
+      if (failed == 0) return;
+      Throwable primary = firstFailure(Objects.requireNonNull(failures[0]));
+      for (int index = 1; index < failed; index++) {
+        Throwable secondary = Objects.requireNonNull(failures[index]);
+        if (primary instanceof StorageIoException && !(secondary instanceof StorageIoException)) {
+          primary = secondary;
+        } else {
+          primary.addSuppressed(unavailable());
+          if (primary instanceof StorageIoException) primary = unavailable();
+        }
+      }
+      if (primary instanceof StorageIoException known) throw known;
+      if (primary instanceof RuntimeException runtime) throw runtime;
+      throw (Error) primary;
     }
 
-    private void closeFrom(int position) throws StorageIoException {
-      if (position == descriptors.size()) return;
-      ResourceScope.use(
-          () -> calls.close(descriptors.get(position)),
-          () -> {
-            closeFrom(position + 1);
-            return Boolean.TRUE;
-          });
+    private static Throwable firstFailure(Throwable failure) {
+      if (failure instanceof StorageIoException known)
+        return new StorageIoException(
+            known.getSuppressed().length == 0
+                ? known.reason()
+                : StorageIoException.Reason.UNAVAILABLE);
+      return failure;
     }
   }
 
