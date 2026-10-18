@@ -58,6 +58,8 @@ def append(group,event_type,values):
     revision,digest=estimate_identity(values)
     specification=json.loads((ROOT/'documents/400_PGPT/470_PMO/487_WBS実行計測規約.json').read_bytes())
     if event_type not in specification['eventTypes']:raise ValueError('registered 487 event type required')
+    if values.get('workCategory') is not None and values['workCategory'] not in specification['workCategories']:
+        raise ValueError('registered 487 work category required; unknown stays null')
     template=specification['eventTemplate']
     if values.get('wbsLeafIds'):
         nodes={}

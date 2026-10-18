@@ -1,10 +1,25 @@
 import inspect
+import hashlib
+import tempfile
 import unittest
+from pathlib import Path
 from pyflakes.api import check,checkPath
 import pg5414_ownership_whole as entry
 
 
 class OwnershipWhole(unittest.TestCase):
+    def test_partial_archive_resume_is_exact_and_never_replays_started_namespace(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);out=root/'partial';out.mkdir();archive=out/'source.tar'
+            archive.write_bytes(b'fixture immutable archive')
+            digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+            self.assertEqual(entry.validate_partial(out,digest),archive)
+            with self.assertRaises(ValueError):entry.validate_partial(out,'0'*64)
+            marker=out/'begin.safe.json';marker.write_bytes(b'issued')
+            with self.assertRaises(ValueError):entry.validate_partial(out,digest)
+            marker.unlink();archive.unlink();archive.symlink_to(root/'missing')
+            with self.assertRaises(ValueError):entry.validate_partial(out,digest)
+            with self.assertRaises(ValueError):entry.validate_partial(root/'absent',digest)
     def test_literal_inventory_rejects_missing_extra_and_false_terminals(self):
         raw=entry.server_source(entry.SOURCE,'c'*64)
         self.assertEqual(check(raw,'<complete ownership whole>'),0)

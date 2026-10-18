@@ -1,5 +1,7 @@
 # 所有保護全回帰・原外四bytecode PT仕様
 
+BUG1448/初回依存失敗追補: 実commandは `PYTHONPATH=/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg5414_ownership_whole.py`。初回は依存importより先にlocal source.tarのみ作成して停止1、remote転送/Maven0。是正後は依存/standalone staticを新出力より先に確認、同専用outにsource.tarだけ・byte hashが改めて生成した同source git archiveと完全一致する場合のみ、未作成helper/begin/未発行remoteを続行する。begin/helper等が既存なら再開を拒否し元job照合へ戻る。旧archive/失敗を消去・上書きせず、回帰の二回発行にしない。
+
 source29612b2a484a5ab7418e02a491c4360af7444626固定、原baselinee8ecff1bec1d7ddd51cdfbf803acda07c2f6cdb9/PG5130全3814を保持。PG5404-v3の1164/137・六target四100・三static0とPG5406/5410を前提に、**必要な新sourceの全六3896PT/562suite/1664Mainを一度**実行する。旧3791/3814成功の確認再演ではない。git diffから原@Test名削除0・新82、旧RepeatedTest十回は既存で新加算0、suite純増六を独立source inventoryで照合する。実数・元終了code/XMLが期待を満たさなければ全合格にしない。
 
 対象全六module protocol/storage/bootstrap/api/web/batch、全新既Java/JS/SQL/config testcase、関連全RD/UI/SS/SSC308/BUG1414/YKT1178。command `python3 -B tools/quality/pg5414_ownership_whole.py`。既承認LANサーバ上の新専用source/run/tools/archive名だけ使用、host鍵固定/actual転送hash/source不変・全六format-before-any-PT/全Maven・NullAway/ErrorProne/全六SpotBugs/全XML FES・flaky・notrun0/全Main jar-target hash/JaCoCo四counterを保存。NoTests、interrupt、unknown exitや欠測は不合格/UNKNOWN、同一job再発行0。親や業務Unit起動ではなく隔離PG/PT host jobで、原本/VM DB・Backup/配備/鍵操作0、隔離fixtureDB使用。既工具version/envは421・各run/private/manifestへ。

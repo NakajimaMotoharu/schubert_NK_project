@@ -1,7 +1,9 @@
 """Required fresh whole after factory manufacture; preserve original six-format/static contract."""
 import ast
+import hashlib
 import inspect
 import json
+import os
 import subprocess
 import pg4420_shared_manager_full as driver
 import pg5128_root_full as previous
@@ -17,6 +19,25 @@ READONLY=(
     'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java')
 
 
+def validate_partial(out,expected):
+    if out.is_symlink() or not out.is_dir() or set(p.name for p in out.iterdir())!={'source.tar'}:
+        raise ValueError('resume only pretransfer archive-only directory; never replay an issued job')
+    archive=out/'source.tar'
+    if archive.is_symlink() or not archive.is_file() or hashlib.sha256(archive.read_bytes()).hexdigest()!=expected:
+        raise ValueError('unchanged original immutable source archive required')
+    return archive
+
+
+def prepare_archive(out):
+    expected=subprocess.check_output(['git','archive',SOURCE,'src','pom.xml','.mvn','mvnw','program/characterization'],cwd=ROOT)
+    if out.exists():return validate_partial(out,hashlib.sha256(expected).hexdigest())
+    os.umask(0o077);out.mkdir(mode=0o700)
+    archive=out/'source.tar'
+    with archive.open('xb') as stream:
+        stream.write(expected);stream.flush();os.fsync(stream.fileno())
+    return archive
+
+
 def server_source(head,digest):
     raw=previous.server_source(head,digest).replace('PG5128',LABEL).replace(previous.SOURCE,SOURCE)
     class Counts(ast.NodeTransformer):
@@ -30,6 +51,9 @@ def server_source(head,digest):
 
 
 def main():
+    from pyflakes.api import check
+    if check(server_source(SOURCE,'0'*64),'<dependency guard before any new output>'):
+        raise ValueError('all standalone dependencies and static before local or remote mutations')
     run=W/RUN;result=json.loads((run/'manifest.safe.json').read_bytes())
     if not(type(result['actualExit']) is int and result['actualExit']==0 and result['phaseExits']==[0,0]
            and result['sourceSnapshot']==SOURCE and result['tests']==1164 and result['suites']==137 and not result['reasons']):
@@ -47,9 +71,12 @@ def main():
     old="'tests': 3721, 'suites': 545, 'mainClasses': 1644"
     if raw.count(old)!=1:raise ValueError('one original planned whole inventory')
     raw=raw.replace(old,"'tests': 3896, 'suites': 562, 'mainClasses': 1664")
+    begin=raw.index('    out = W /')
+    end=raw.index('    digest =')
+    raw=raw[:begin]+"    out=W/'pg5414-ownership-query-six-v1'\n    archive=prepare_archive(out)\n"+raw[end:]
     raw=raw.replace('SSC295 shared strict native manager reader across bootstrap/batch; old7bb native not portable; selected4412 NoTests preserved',
         'SSC308 factory ownership manufacture; fresh selected1164/137 qualified; original3814 plus82 exact new methods/no removed method; all1664 physical Main; readonly TWR/preowner actual audit pending; no old native/counters imported')
-    namespace={**vars(driver),'SOURCE':SOURCE,'LABEL':LABEL,'server_source':server_source}
+    namespace={**vars(driver),'SOURCE':SOURCE,'LABEL':LABEL,'server_source':server_source,'prepare_archive':prepare_archive}
     exec(compile(raw,'<required ownership whole once>','exec'),namespace)
     return namespace['main']()
 
