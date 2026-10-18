@@ -76,7 +76,9 @@ def canonical(method):
     for pc, op, arg in method['ops']:
         if op.startswith('if') or op in ('goto','goto_w'):
             arg = '@' + str(labels[int(arg.split()[0])])
-        else: arg = re.sub(r'#\d+', '#CP', arg)
+        else:
+            operand, separator, comment = re.sub(r'#\d+', '#CP', arg).partition('//')
+            arg = ' '.join(operand.split()) + (' //' + comment if separator else '')
         ops.append((op.replace('ldc_w','ldc'),arg))
     handlers = [(labels[a],labels[b],labels[c],kind) for a,b,c,kind in method['handlers']]
     return {'ops':ops,'handlers':handlers}

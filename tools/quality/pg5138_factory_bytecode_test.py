@@ -4,6 +4,15 @@ import pg5138_factory_bytecode as role
 
 
 class FactoryBytecode(unittest.TestCase):
+    def test_canonical_cp_padding_is_not_literal_or_handler_normalization(self):
+        old = {'ops':[(0,'ldc','#7                  // String resource release'),(2,'areturn','')], 'handlers':[]}
+        new = {'ops':[(0,'ldc','#15                 // String resource release'),(2,'areturn','')], 'handlers':[]}
+        self.assertEqual(role.canonical(old), role.canonical(new))
+        for changed in ({'ops':[(0,'ldc','#15 // String resource release '),(2,'areturn','')], 'handlers':[]},
+                        {'ops':[(0,'aconst_null',''),(2,'areturn','')], 'handlers':[]},
+                        {**new,'handlers':[(0,2,2,'Class java/io/IOException')]}):
+            self.assertNotEqual(role.canonical(old), role.canonical(changed))
+
     def test_nonnull_success_skips_only_null_fault_and_requires_all_handlers(self):
         method = {'ops':[(0,'invokeinterface','ResourceScope$Acquire.open:()Ljava/lang/Object;'),
                          (5,'astore_3',''),(6,'aload_3',''),(7,'ifnonnull','20'),(10,'new','NPE'),
