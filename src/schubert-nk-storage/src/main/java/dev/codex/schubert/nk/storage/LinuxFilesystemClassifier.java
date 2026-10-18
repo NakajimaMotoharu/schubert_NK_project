@@ -69,7 +69,7 @@ public final class LinuxFilesystemClassifier {
     if (!path.matches("/proc/self/fd/(0|[1-9][0-9]{0,9})")
         || Long.parseLong(path.substring(14)) > Integer.MAX_VALUE)
       throw new IllegalArgumentException("invalid held inode capability");
-    return ResourceScope.acquire(
+    return ResourceScope.<Arena, String, StorageIoException>acquire(
         Arena::ofConfined,
         Arena::close,
         arena -> {
