@@ -1,6 +1,5 @@
 """One new closed current stage/verify/existingADMIN20; no Root or foreign operations."""
 import inspect
-import sys
 import pg4936_current_bootstrap_dispatch as previous
 import pg5082_current_bootstrap_sources as role
 
@@ -22,6 +21,4 @@ def namespace():
 
 
 if __name__ == '__main__':
-    if sys.argv[1:] not in (['stage'], ['verify'], ['execute']):
-        raise SystemExit('one current existing20 phase required')
-    raise SystemExit(namespace()['main']())
+    raise SystemExit('retired refused5086 slots; use the qualified new-only corrected graph, never replay old phases')
