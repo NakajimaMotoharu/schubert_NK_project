@@ -13,6 +13,18 @@ import org.junit.jupiter.api.Test;
 /** NATIVE-LIFE001..003: notification never substitutes for confirmed resource completion. */
 final class WebProcessLifetimeTest {
   @Test
+  void monitor004CallerLockCannotBlockConfirmedLifetimeClose() throws Exception {
+    var lifetime = new WebProcessLifetime();
+    try {
+      dev.codex.schubert.nk.bootstrap.CallerMonitorProbe.requireIndependent(
+          lifetime, lifetime::close);
+      assertTrue(lifetime.stopping());
+    } finally {
+      lifetime.close();
+    }
+  }
+
+  @Test
   void life001StopFailureInterruptNullAndHookInstallation() throws Exception {
     try (var lifetime = new WebProcessLifetime()) {
       assertFalse(lifetime.stopping());

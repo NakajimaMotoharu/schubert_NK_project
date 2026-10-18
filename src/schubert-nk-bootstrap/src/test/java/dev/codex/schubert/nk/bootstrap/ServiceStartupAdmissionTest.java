@@ -11,6 +11,29 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-STARTADMIT-001..008. Independent literal packet; callback factory ordering, not R2. */
 final class ServiceStartupAdmissionTest {
+  @Test
+  void monitor003CallerLockCannotBlockReadyInformationOrRelease() throws Exception {
+    var fixture = new Fixture();
+    fixture
+        .subject()
+        .execute(
+            ready -> {
+              try {
+                CallerMonitorProbe.requireIndependent(
+                    ready,
+                    () -> {
+                      assertEquals(Map.of("commit", "a".repeat(40)), ready.information());
+                      ready.release();
+                    });
+              } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw new IOException("test owner interrupted", interrupted);
+              }
+            });
+    assertEquals(1, fixture.releases);
+    assertEquals(1, fixture.finalCloses);
+  }
+
   static final Map<String, String> ENV =
       Map.of(
           "SCHUBERT_NK_STARTUP_ADMISSION_FD",

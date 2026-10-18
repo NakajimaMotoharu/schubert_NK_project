@@ -1,0 +1,11 @@
+# Private monitor所有契約（BUG1459/YKT1223）
+
+Program NK-OPS-001/NK-WEB-002、SS343352354/411§9/F03。Main baseline a19、全3900/563/1664は保存成功であり新Sourceへ転用しない。対象4owner/14methodは915/916に先行起票済み。
+
+OPS-MONITOR001～004：callerがBackup Attempt／stop Attempt／Ready／Web lifetimeのthis monitorを保持し、別threadの正規status／ready情報とrelease／closeを呼ぶ。固定期待は監視objectのロックが内部private state排他と独立であり、latchで実完了を確認する。固定5秒上限はdeadlock防止の試験期限で業務timeoutを変更しない。worker失敗は独立に捕捉し、finallyでcaller monitorを解放後にjoin/回収、試験失敗も成功化0。旧Sourceの未完了反例を保存し、未実装TDDではなく実装済411違反としてBUG管理する。
+
+OPS-MONITOR005：14method同時移行、同object専用private final lock、nested retireReadyAfter→retireAfter reentrancy、既順序/例外/UNKNOWNを保持。新lockはprocess/intent取得前、Ready/Webは既protected frame/起動前であり追加acquisition gapを作らない。元PMD161statementは各private final field・owner・非公開を追跡し規則の推奨と411の必須同期を区別、Wiping四overrideは親sync整合の既例外に限定する。
+
+selectedは全四既suite42＋新四＝46、上流の独立protocol golden三/storageResourceScope八/API非秘密設定七を含み、apiに対象0を作らないため既codec七も含む全71件を予定。実sourceからcase名集合を独立抽出、failed/skipped/flaky/not-runを算入0。全六formatを先行、全六package/NullAway/SpotBugs、当source実counterとMain物理差分を保存。新counter100未達を除外しない。全体回帰/nativeは変更群受入所定時に必要範囲を別群で実施し、確認目的の旧成功再演0。実command/exit/hashと条件成立は1146へ保存する。
+
+Red実行は未修正Mainを保持し、同じ排他欠陥の独立代表Webの新MONITOR004だけが予定latch未完了で失敗する29件（Web四＋依存18＋codec七）に限定する。上流Ready新試験の予定失敗で下流をnot-runにしないためであり、他三新試験のRed成功/失敗を捏造しない。Greenは四owner全71を必須とし、red五builtは当a19の全1323実Mainと同byte、green六builtは全1664中宣言六差分/他同byte・追加削除0を独立確認する。command `python3 -B tools/quality/pg5566_private_monitor_selected.py red`／`green`（既PYTHONPATH）。新lock前確保の是正はRed回収後のみ。

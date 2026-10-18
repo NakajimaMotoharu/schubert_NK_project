@@ -11,6 +11,16 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343/SSC092/105/106 fixed-argv, intent and unknown-owner vectors; no real Unit start. */
 final class BackupUnitStartClientTest {
+  @Test
+  void monitor001CallerLockCannotBlockOwnedStartStatus() throws Exception {
+    var process = child();
+    var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> process).start();
+    dev.codex.schubert.nk.bootstrap.CallerMonitorProbe.requireIndependent(
+        attempt,
+        () -> assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status()));
+    process.allClosed();
+  }
+
   private static InspectorUnitProbeFixture.Child child() {
     var child = new InspectorUnitProbeFixture.Child(new byte[0]);
     child.waitSeconds = 120;

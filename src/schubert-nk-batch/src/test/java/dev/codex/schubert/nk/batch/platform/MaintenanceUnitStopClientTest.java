@@ -9,6 +9,18 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343/SSC102 independent argv/status/ownership vectors; no real stop in host PT. */
 final class MaintenanceUnitStopClientTest {
+  @Test
+  void monitor002CallerLockCannotBlockOwnedStopStatus() throws Exception {
+    var process = child();
+    var attempt =
+        new MaintenanceUnitStopClient(() -> {}, unit -> {}, command -> process)
+            .stop(MaintenanceUnit.API);
+    dev.codex.schubert.nk.bootstrap.CallerMonitorProbe.requireIndependent(
+        attempt,
+        () -> assertEquals(MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO, attempt.status()));
+    process.allClosed();
+  }
+
   private static final List<String> NAMES =
       List.of(
           "caddy.service",
