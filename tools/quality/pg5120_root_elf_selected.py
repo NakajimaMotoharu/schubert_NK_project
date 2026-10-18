@@ -77,14 +77,14 @@ def main_delta(snapshot, group='elf'):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
-    parser.add_argument('--group', choices=('elf', 'pending'), default='elf')
+    parser.add_argument('--group', choices=('elf', 'pending', 'guards'), default='elf')
     args = parser.parse_args()
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed source required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     version = 'v2' if args.phase == 'red' else 'v3'
-    stem = 'pg5120-root-elf' if args.group == 'elf' else 'pg5124-root-pending'
-    if args.group == 'pending': version = 'v1'
+    stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards'}[args.group]
+    if args.group != 'elf': version = 'v1'
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
     work.mkdir(mode=0o700)
@@ -99,6 +99,7 @@ def main():
     inputs = {str(p.relative_to(snapshot)): sha(p) for p in snapshot.rglob('*') if p.is_file()}
     expected = {}
     suites = SUITES if args.group == 'elf' else {**SUITES, **PENDING_SUITES}
+    if args.group == 'guards': suites = {**suites, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
     for name, module in suites.items():
         text = (snapshot / ('src/schubert-nk-' + module + '/src/test/java/' + name.replace('.', '/') + '.java')).read_text()
         methods = re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(', text)
@@ -145,7 +146,7 @@ def main():
         cov = target / 'site/jacoco/jacoco.xml'
         if cov.is_file() and module == 'batch':
             for c in ET.parse(cov).getroot().findall('package/class'):
-                if c.get('name') in ({CLASS, PENDING} if args.group == 'pending' else {CLASS}):
+                if c.get('name') in ({CLASS, PENDING} if args.group != 'elf' else {CLASS}):
                     for method in c.findall('method'):
                         digest_target = c.get('name') == CLASS and (method.get('name') == 'digest' or method.get('name', '').startswith('lambda$digest$'))
                         pending_target = c.get('name') == PENDING and (method.get('name') == 'readLaunch' or (method.get('name') == 'awaitLaunch' and '$WaitIo;' in method.get('desc', '')))
@@ -156,12 +157,12 @@ def main():
     if actual != expected: reasons.append('exact selected case inventory incomplete')
     if not all(sha(snapshot / path) == digest for path, digest in inputs.items()): reasons.append('frozen input changed')
     if set(static) != set(BUILT) or any(static.values()): reasons.append('required three compiled-module fresh static incomplete/nonzero')
-    if len(counters) != (5 if args.group == 'pending' else 3) or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
+    if len(counters) != (5 if args.group != 'elf' else 3) or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
                                    if kind in ('LINE', 'METHOD', 'BRANCH')):
         reasons.append('all digest overload/default-factory line/method/branch required')
     delta = None
     if codes == [0, 0]:
-        try: delta = main_delta(snapshot, args.group)
+        try: delta = main_delta(snapshot, 'elf' if args.group == 'elf' else 'pending')
         except ValueError as failure: reasons.append(str(failure))
     result = {**{k: v for k, v in begin.items() if k != 'inputs'}, 'endUTC': utc(), 'phaseExits': codes,
               'actualExit': 0 if codes == [0, 0] and not reasons else 1, 'tests': sum(map(len, actual.values())),
