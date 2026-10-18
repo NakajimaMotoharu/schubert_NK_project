@@ -26,16 +26,20 @@ def publish_current(*,entry,run_name,proof_name,counts,spec,proof_key,extra,
                     independent_cases=54,case_overrides=None,qualification_path=None,case_repetitions=None):
     if type(independent_cases) is not int or independent_cases<0:
         raise ValueError('explicit nonnegative independent case count required')
+    entry.configure()
     run=public.W/run_name;result=json.loads((run/'manifest.safe.json').read_bytes())
     path=entry.selected.ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/proof_name/'manifest.json'
-    proof=json.loads(path.read_bytes());validate_proof(proof,result,764)
+    expected_main=getattr(entry,'EXPECTED_MAIN',764)
+    if type(expected_main) is not int or expected_main!=764+len(entry.selected.EXTRA_ADDED)-len(entry.selected.EXTRA_REMOVED):
+        raise ValueError('explicit physical Main growth matches the named added/removed registry')
+    proof=json.loads(path.read_bytes());validate_proof(proof,result,expected_main)
     fields={'newIndependentCases':0,'priorIndependentCasesRevalidated':independent_cases,'newJavaCasesInThisGroup':0,
         'spec':spec,'ssc':['SSC308'],'bugs':['BUG1414'],'ykt':['YKT1178'],
         proof_key:entry.selected.sha(path),'storageFourCounters':result['storageFourCounters'],
         'semanticClasses':proof['semanticClasses'],'nestedDebugEquivalent':proof['nestedDebugEquivalent'],
         'otherPhysicalClassesUnchanged':proof['otherPhysicalClassesUnchanged'],'targetClassCounters':proof['targetClassCounters'],
         'nativeOwnerExecutionQualified':False,'wholeHorizontalComplete':False}
-    fields.update(extra);entry.configure()
+    fields.update(extra)
     return public.main(factory_run_name=run_name,measurement_module=entry.selected,required_counts=(*counts,independent_cases),
         case_overrides=ids.revalidated_case_ids() if case_overrides is None else case_overrides,
         extra_suites=entry.extra_suites(),case_name_aliases=entry.aliases.invocation_aliases(),

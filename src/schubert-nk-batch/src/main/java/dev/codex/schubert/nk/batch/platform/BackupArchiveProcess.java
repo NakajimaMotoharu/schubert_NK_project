@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.platform;
 
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -214,37 +215,34 @@ public final class BackupArchiveProcess {
       throws IOException {
     if (Thread.currentThread().isInterrupted()) throw invalid();
     remaining(began);
-    List<Process> processes;
+    var terminal = new TerminalPlan();
     try {
-      processes = Objects.requireNonNull(start.execute(commands, environment, output), "processes");
-    } catch (IOException failure) {
-      throw invalid();
-    }
-    try {
-      List<StdinOwner> inputs = new ArrayList<>();
-      ResourceScope.use(
-          () -> terminate(processes),
-          () ->
-              streams(
-                  processes,
-                  0,
-                  inputs,
-                  () -> {
-                    if (processes.size() != commands.size()) throw invalid();
-                    inputs.getFirst().writeAndClose(input);
-                    for (Process process : processes) {
-                      long remaining = remaining(began);
-                      try {
-                        if (!process.waitFor(remaining, TimeUnit.NANOSECONDS)
-                            || process.exitValue() != 0) throw invalid();
-                      } catch (InterruptedException failure) {
-                        Thread.currentThread().interrupt();
-                        throw invalid();
-                      }
+      ResourceScope.acquire(
+          () -> start.execute(commands, environment, output),
+          terminal::close,
+          processes -> {
+            List<StdIoOwner> inputs = new ArrayList<>();
+            return streams(
+                processes,
+                0,
+                inputs,
+                () -> {
+                  if (processes.size() != commands.size()) throw invalid();
+                  inputs.getFirst().writeAndClose(input);
+                  for (Process process : processes) {
+                    long remaining = remaining(began);
+                    try {
+                      if (!process.waitFor(remaining, TimeUnit.NANOSECONDS)
+                          || process.exitValue() != 0) throw invalid();
+                    } catch (InterruptedException failure) {
+                      Thread.currentThread().interrupt();
+                      throw invalid();
                     }
-                    if (Thread.currentThread().isInterrupted()) throw invalid();
-                    return Boolean.TRUE;
-                  }));
+                  }
+                  if (Thread.currentThread().isInterrupted()) throw invalid();
+                  return Boolean.TRUE;
+                });
+          });
     } catch (IOException failure) {
       throw invalid();
     }
@@ -264,45 +262,48 @@ public final class BackupArchiveProcess {
   }
 
   private static Boolean streams(
-      List<Process> processes, int index, List<StdinOwner> inputs, Work work) throws IOException {
+      List<Process> processes, int index, List<StdIoOwner> inputs, Work work) throws IOException {
     if (index == processes.size()) return work.run();
     Process process = processes.get(index);
     if (process == null) throw invalid();
-    var output = process.getInputStream();
-    return ResourceScope.use(
-        () -> close(output),
-        () -> {
-          var input = process.getOutputStream();
-          var owner = new StdinOwner(input);
-          return ResourceScope.use(
-              owner::close,
-              () -> {
-                var error = process.getErrorStream();
-                return ResourceScope.use(
-                    () -> close(error),
-                    () -> {
-                      if (output == null || input == null || error == null) throw invalid();
-                      inputs.add(owner);
-                      return streams(processes, index + 1, inputs, work);
-                    });
-              });
-        });
+    return ResourceScope.acquire(
+        () -> new StdIoOwner(process::getInputStream),
+        StdIoOwner::close,
+        output ->
+            ResourceScope.acquire(
+                () -> new StdIoOwner(process::getOutputStream),
+                StdIoOwner::close,
+                owner ->
+                    ResourceScope.acquire(
+                        () -> new StdIoOwner(process::getErrorStream),
+                        StdIoOwner::close,
+                        error -> {
+                          if (!output.present() || !owner.present() || !error.present())
+                            throw invalid();
+                          inputs.add(owner);
+                          return streams(processes, index + 1, inputs, work);
+                        })));
   }
 
   private static void close(@Nullable Closeable stream) throws IOException {
     if (stream != null) stream.close();
   }
 
-  private static final class StdinOwner {
-    private final @Nullable OutputStream stream;
+  private static final class StdIoOwner {
+    private final @Nullable Closeable stream;
     private boolean closed;
 
-    StdinOwner(@Nullable OutputStream stream) {
-      this.stream = stream;
+    StdIoOwner(ResourceScope.Acquire<Closeable, IOException> acquire) throws IOException {
+      // NEW/constructor state precedes the getter; nullable result is a local absence, not success.
+      stream = Objects.requireNonNull(acquire, "stdio acquisition").open();
+    }
+
+    boolean present() {
+      return stream != null;
     }
 
     void writeAndClose(byte[] bytes) throws IOException {
-      var owned = Objects.requireNonNull(stream, "admitted stdin");
+      var owned = (OutputStream) Objects.requireNonNull(stream, "admitted stdin");
       owned.write(bytes);
       close();
     }
@@ -315,35 +316,125 @@ public final class BackupArchiveProcess {
     }
   }
 
-  private static void terminate(List<Process> processes) throws IOException {
-    // BUG271/SSC091: request every stop first; never release borrowed parent FDs while alive.
-    ResourceScope.use(
-        () -> holdTerminals(processes),
-        () -> {
-          terminate(processes, 0);
+  /** All callbacks and interrupt scratch exist before the pipeline factory is invoked. */
+  static final class TerminalPlan {
+    private List<Process> processes = List.of();
+    private final AtomicBoolean interrupted = new AtomicBoolean();
+    private final NativeStart.Pending pending;
+    private boolean confirmed;
+    private final ResourceScope.Acquire<List<Process>, IOException> acquire = () -> processes;
+    private final ResourceScope.Release<List<Process>> hold = ignored -> holdAll();
+    private final ResourceScope.OwnedAction<List<Process>, Boolean> stop =
+        ignored -> {
+          stopAll();
           return Boolean.TRUE;
-        });
-  }
+        };
 
-  private static void holdTerminals(List<Process> processes) throws IOException {
-    var interrupted = new AtomicBoolean(Thread.interrupted());
-    try {
-      holdTerminals(processes, 0, interrupted);
-    } finally {
-      if (interrupted.get()) Thread.currentThread().interrupt();
+    TerminalPlan() {
+      this(new NativeStart.PendingHold());
     }
-  }
 
-  private static void holdTerminals(List<Process> processes, int index, AtomicBoolean interrupted)
-      throws IOException {
-    if (index == processes.size()) return;
-    ResourceScope.use(
-        () -> holdTerminals(processes, index + 1, interrupted),
-        () -> {
+    TerminalPlan(NativeStart.Pending pending) {
+      this.pending = Objects.requireNonNull(pending, "unconfirmed terminal hold");
+    }
+
+    void close(List<Process> supplied) throws IOException {
+      processes = Objects.requireNonNull(supplied, "owned processes");
+      confirmed = false;
+      try {
+        ResourceScope.acquire(acquire, hold, stop);
+      } catch (RuntimeException | Error first) {
+        // E.g. a broken collection prevents enumeration. Production never unwinds unconfirmed.
+        if (!confirmed) pending.hold(first);
+        throw first;
+      }
+    }
+
+    private void stopAll() throws IOException {
+      for (int index = 0; index < processes.size(); index++) {
+        try {
+          stopOne(processes.get(index));
+        } catch (IOException first) {
+          stopAfterKnown(index + 1, first);
+          throw first;
+        } catch (RuntimeException | Error first) {
+          secondary(first, stopRest(index + 1));
+          throw first;
+        }
+      }
+    }
+
+    private void stopAfterKnown(int begin, IOException first) throws IOException {
+      int failures = 0;
+      for (int index = begin; index < processes.size(); index++) {
+        try {
+          stopOne(processes.get(index));
+        } catch (IOException later) {
+          failures++;
+        } catch (RuntimeException | Error unknown) {
+          secondary(unknown, stopRest(index + 1));
+          throw unknown;
+        }
+      }
+      secondary(first, failures);
+    }
+
+    private int stopRest(int begin) {
+      int failures = 0;
+      for (int index = begin; index < processes.size(); index++) {
+        try {
+          stopOne(processes.get(index));
+        } catch (IOException | RuntimeException | Error later) {
+          failures++;
+        }
+      }
+      return failures;
+    }
+
+    private void holdAll() {
+      interrupted.set(Thread.interrupted());
+      try {
+        for (int index = 0; index < processes.size(); index++) {
           Process process = processes.get(index);
-          if (process != null) holdTerminal(process, interrupted);
-          return Boolean.TRUE;
-        });
+          try {
+            if (process != null) holdTerminal(process, interrupted);
+          } catch (RuntimeException | Error first) {
+            int failures = 0;
+            for (int rest = index + 1; rest < processes.size(); rest++) {
+              Process remaining = processes.get(rest);
+              try {
+                if (remaining != null) holdTerminal(remaining, interrupted);
+              } catch (RuntimeException | Error later) {
+                failures++;
+              }
+            }
+            confirmed = true;
+            secondary(first, failures);
+            throw first;
+          }
+        }
+        confirmed = true;
+      } finally {
+        if (interrupted.get()) Thread.currentThread().interrupt();
+      }
+    }
+
+    private static void secondary(Throwable primary, int count) {
+      for (int index = 0; index < count; index++)
+        primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
+    }
+
+    private static void stopOne(@Nullable Process process) throws IOException {
+      if (process != null && process.isAlive()) {
+        process.destroy();
+        try {
+          if (!process.waitFor(5, TimeUnit.SECONDS)) throw invalid();
+        } catch (InterruptedException failure) {
+          Thread.currentThread().interrupt();
+          throw invalid();
+        }
+      }
+    }
   }
 
   private static void holdTerminal(Process process, AtomicBoolean interrupted) {
@@ -381,25 +472,6 @@ public final class BackupArchiveProcess {
   private static void backoff(AtomicBoolean interrupted) {
     LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(10));
     if (Thread.interrupted()) interrupted.set(true);
-  }
-
-  private static void terminate(List<Process> processes, int index) throws IOException {
-    if (index == processes.size()) return;
-    ResourceScope.use(
-        () -> terminate(processes, index + 1),
-        () -> {
-          Process process = processes.get(index);
-          if (process != null && process.isAlive()) {
-            process.destroy();
-            try {
-              if (!process.waitFor(5, TimeUnit.SECONDS)) throw invalid();
-            } catch (InterruptedException failure) {
-              Thread.currentThread().interrupt();
-              throw invalid();
-            }
-          }
-          return Boolean.TRUE;
-        });
   }
 
   private static IOException invalid() {

@@ -15,6 +15,290 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS341/343; PT-OPS-ARCHPROC001..008. Commands/environment are independent literal oracles. */
 final class BackupArchiveProcessTest {
+  private static final String STOP_TYPES =
+      "NIREIIRERRRREEEE" + "IIREIIRERRRREEEE" + "RRRRRRRRRRRRRRRR" + "EEEEEEEEEEEEEEEE";
+  private static final String STOP_SUPPRESSED =
+      "0000000001110111" + "0000000001110111" + "0111122212221222" + "0111122212221222";
+  private static final String STOP_WINNER =
+      "xx22xx2211111111" + "xx22xx2211111111" + "0000000000000000" + "0000000000000000";
+
+  private static final class TerminalVector extends Process {
+    final int index;
+    final char stop, hold;
+    final Throwable failure;
+    final List<String> events;
+    final String termEvent, confirmEvent;
+    final CyclicBarrier barrier;
+    boolean alive = true, stopped, observed;
+
+    TerminalVector(
+        int index,
+        char stop,
+        char hold,
+        Throwable failure,
+        List<String> events,
+        CyclicBarrier barrier) {
+      this.index = index;
+      this.stop = stop;
+      this.hold = hold;
+      this.failure = failure;
+      this.events = events;
+      this.barrier = barrier;
+      termEvent = "term" + index;
+      confirmEvent = "confirm" + index;
+    }
+
+    public InputStream getInputStream() {
+      return InputStream.nullInputStream();
+    }
+
+    public OutputStream getOutputStream() {
+      return OutputStream.nullOutputStream();
+    }
+
+    public InputStream getErrorStream() {
+      return InputStream.nullInputStream();
+    }
+
+    public int waitFor() {
+      return 0;
+    }
+
+    public boolean waitFor(long time, TimeUnit unit) {
+      assertEquals(5, time);
+      assertEquals(TimeUnit.SECONDS, unit);
+      return stop != 'I';
+    }
+
+    public int exitValue() {
+      return 0;
+    }
+
+    public boolean isAlive() {
+      if (stopped && !observed) {
+        observed = true;
+        events.add(confirmEvent);
+        if (hold != 'N') raise(failure);
+      }
+      return alive;
+    }
+
+    public void destroy() {
+      events.add(termEvent);
+      stopped = true;
+      alive = false;
+      if (barrier != null && index == 0)
+        try {
+          barrier.await(10, TimeUnit.SECONDS);
+        } catch (Exception failure) {
+          throw new AssertionError(failure);
+        }
+      if (stop == 'R' || stop == 'E') raise(failure);
+    }
+
+    static void raise(Throwable failure) {
+      if (failure instanceof RuntimeException runtime) throw runtime;
+      throw (Error) failure;
+    }
+  }
+
+  private static Throwable vectorFailure(char kind) {
+    return kind == 'E'
+        ? new LinkageError("synthetic terminal")
+        : new IllegalStateException("synthetic terminal");
+  }
+
+  /**
+   * PT-OPS-ARCHOWN001: 64 literal stop/cleanup precedence vectors, every child stopped before
+   * holds.
+   */
+  @Test
+  void archiveown001All64StopStatesMatchIndependentLiteralPrecedenceAndOrder() throws Exception {
+    assertEquals(64, STOP_TYPES.length());
+    assertEquals(64, STOP_SUPPRESSED.length());
+    assertEquals(64, STOP_WINNER.length());
+    char[] states = {'N', 'I', 'R', 'E'};
+    for (int vector = 0; vector < 64; vector++) {
+      var events = new ArrayList<String>(16);
+      var processes = new ArrayList<Process>(3);
+      for (int index = 0; index < 3; index++) {
+        char kind = states[(vector >> (4 - index * 2)) & 3];
+        processes.add(new TerminalVector(index, kind, 'N', vectorFailure(kind), events, null));
+      }
+      Throwable actual = null;
+      try {
+        new BackupArchiveProcess.TerminalPlan().close(processes);
+      } catch (IOException | RuntimeException | Error failure) {
+        actual = failure;
+      }
+      char type = STOP_TYPES.charAt(vector);
+      if (type == 'N') assertNull(actual);
+      else {
+        assertNotNull(actual);
+        if (type == 'I') assertInstanceOf(StorageIoException.class, actual);
+        else {
+          int winner = STOP_WINNER.charAt(vector) - '0';
+          assertSame(((TerminalVector) processes.get(winner)).failure, actual);
+        }
+        assertEquals(STOP_SUPPRESSED.charAt(vector) - '0', actual.getSuppressed().length);
+        for (Throwable secondary : actual.getSuppressed()) {
+          assertInstanceOf(StorageIoException.class, secondary);
+          assertNull(secondary.getCause());
+        }
+      }
+      assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+      assertTrue(processes.stream().noneMatch(Process::isAlive));
+    }
+  }
+
+  /**
+   * PT-OPS-ARCHOWN002: 27 independent hold-primary vectors after all children have really ended.
+   */
+  @Test
+  void archiveown002All27HoldStatesKeepFirstUnknownAndConfirmEveryRemainingChild()
+      throws Exception {
+    String types = "NRERRREEE" + "RRRRRRRRR" + "EEEEEEEEE";
+    String suppressed = "000011011" + "011122122" + "011122122";
+    String winners = "x22111111" + "000000000" + "000000000";
+    assertEquals(27, types.length());
+    assertEquals(27, suppressed.length());
+    assertEquals(27, winners.length());
+    char[] states = {'N', 'R', 'E'};
+    for (int vector = 0; vector < 27; vector++) {
+      var events = new ArrayList<String>(16);
+      var processes = new ArrayList<Process>(3);
+      for (int index = 0, divisor = 9; index < 3; index++, divisor /= 3) {
+        char kind = states[vector / divisor % 3];
+        processes.add(new TerminalVector(index, 'N', kind, vectorFailure(kind), events, null));
+      }
+      Throwable actual = null;
+      try {
+        new BackupArchiveProcess.TerminalPlan().close(processes);
+      } catch (RuntimeException | Error failure) {
+        actual = failure;
+      }
+      if (types.charAt(vector) == 'N') assertNull(actual);
+      else {
+        assertSame(((TerminalVector) processes.get(winners.charAt(vector) - '0')).failure, actual);
+        assertEquals(suppressed.charAt(vector) - '0', actual.getSuppressed().length);
+      }
+      assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+    }
+  }
+
+  /**
+   * PT-OPS-ARCHOWN003: unenumerable ownership enters the prebuilt pending port, never normal
+   * success.
+   */
+  @Test
+  void archiveown003UnknownCollectionNeverUnwindsAsConfirmedTerminal() {
+    var failure = new LinkageError("synthetic collection observation");
+    List<Process> broken =
+        new AbstractList<>() {
+          public Process get(int index) {
+            throw failure;
+          }
+
+          public int size() {
+            return 1;
+          }
+        };
+    var holds = new AtomicInteger();
+    var plan =
+        new BackupArchiveProcess.TerminalPlan(
+            first -> {
+              assertSame(failure, first);
+              holds.incrementAndGet();
+            });
+    assertSame(failure, assertThrows(LinkageError.class, () -> plan.close(broken)));
+    assertEquals(1, holds.get());
+    assertThrows(NullPointerException.class, () -> new BackupArchiveProcess.TerminalPlan(null));
+    assertThrows(
+        NullPointerException.class, () -> new BackupArchiveProcess.TerminalPlan().close(null));
+  }
+
+  /**
+   * PT-OPS-ARCHOWN004: absence admission still waits for all three getters; cancellation is
+   * restored.
+   */
+  @Test
+  void archiveown004NullableGettersAndIdleChildrenPreserveAdmissionAndInterrupt() throws Exception {
+    for (String absent : List.of("nullOut", "nullIn", "nullErr")) {
+      var fixture = new Fixture();
+      fixture.scenario = absent;
+      refused(() -> fixture.runner.credentials(DIR, OUT, KEY, List.of("public")));
+      var first = fixture.processes.getFirst();
+      assertEquals(absent.equals("nullOut") ? 0 : 1, first.outAcquired);
+      assertEquals(absent.equals("nullIn") ? 0 : 1, first.inAcquired);
+      assertEquals(absent.equals("nullErr") ? 0 : 1, first.errAcquired);
+      fixture.closed();
+    }
+    var events = new ArrayList<String>();
+    var ended = new TerminalVector(0, 'N', 'N', vectorFailure('N'), events, null);
+    ended.alive = false;
+    Thread.currentThread().interrupt();
+    try {
+      new BackupArchiveProcess.TerminalPlan().close(Arrays.asList(null, ended));
+      assertTrue(Thread.currentThread().isInterrupted());
+      assertTrue(events.isEmpty());
+    } finally {
+      Thread.interrupted();
+    }
+  }
+
+  /**
+   * PT-OPS-ARCHOWN005: repeated provider identities never cause self-suppression or raw new graph
+   * entries.
+   */
+  @Test
+  void archiveown005ExistingAndRepeatedUnknownKeepIdentityAndSanitizeOnlyLaterFailures()
+      throws Exception {
+    var primary = new IllegalStateException("synthetic");
+    var prior = new IOException("synthetic existing");
+    primary.addSuppressed(prior);
+    var events = new ArrayList<String>();
+    List<Process> processes =
+        List.of(
+            new TerminalVector(0, 'R', 'N', primary, events, null),
+            new TerminalVector(1, 'R', 'N', primary, events, null),
+            new TerminalVector(2, 'E', 'N', vectorFailure('E'), events, null));
+    assertSame(
+        primary,
+        assertThrows(
+            IllegalStateException.class,
+            () -> new BackupArchiveProcess.TerminalPlan().close(processes)));
+    assertEquals(3, primary.getSuppressed().length);
+    assertSame(prior, primary.getSuppressed()[0]);
+    for (int index = 1; index < 3; index++)
+      assertInstanceOf(StorageIoException.class, primary.getSuppressed()[index]);
+    assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+  }
+
+  /** PT-OPS-ARCHOWN006: simultaneous plans cannot adopt or consume another call's processes. */
+  @Test
+  void archiveown006ParallelPlansNeverStopOrConfirmEachOthersProcesses() throws Exception {
+    var barrier = new CyclicBarrier(2);
+    try (var executor = Executors.newFixedThreadPool(2)) {
+      var futures = new ArrayList<Future<List<String>>>();
+      for (int size : List.of(1, 2))
+        futures.add(
+            executor.submit(
+                () -> {
+                  var events = new ArrayList<String>();
+                  var processes = new ArrayList<Process>();
+                  for (int index = 0; index < size; index++)
+                    processes.add(
+                        new TerminalVector(index, 'N', 'N', vectorFailure('N'), events, barrier));
+                  new BackupArchiveProcess.TerminalPlan().close(processes);
+                  return events;
+                }));
+      assertEquals(List.of("term0", "confirm0"), futures.get(0).get(15, TimeUnit.SECONDS));
+      assertEquals(
+          List.of("term0", "term1", "confirm0", "confirm1"),
+          futures.get(1).get(15, TimeUnit.SECONDS));
+    }
+  }
+
   private static final Path DIR = Path.of("/proc/self/fd/101"),
       OUT = Path.of("/proc/self/fd/102"),
       KEY = Path.of("/proc/self/fd/103");

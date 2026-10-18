@@ -38,6 +38,13 @@ DIRECTORY = 'dev/codex/schubert/nk/storage/OwnedTransferDirectory'
 TEST_UMASK = 0o027
 EXTRA_CHANGED = set()
 EXTRA_DEBUG = set()
+EXTRA_ADDED = set()
+EXTRA_REMOVED = set()
+
+
+def validate_physical_delta(changed,added,removed,required,optional,expected_added,expected_removed):
+    if not required<=set(changed) or not set(changed)<=required|optional or set(added)!=expected_added or set(removed)!=expected_removed:
+        raise ValueError('declared semantic changes plus explicitly bounded nested debug candidates only')
 
 
 def storage_suites():
@@ -103,11 +110,12 @@ def main_delta(snapshot, group='elf'):
         allowed_changed |= {native+n+'.class' for n in native_names} | {native+'LinuxFileLock$OwnedDescriptor.class'}
         allowed_added |= {native+'LinuxSealedProof$Descriptor.class',native+'LinuxStartupAdmission$FdOwners.class'}
         allowed_changed |= EXTRA_CHANGED
+        allowed_added |= EXTRA_ADDED
         optional_debug = ({key for key in expected if any(key.startswith(native+n+'$') for n in native_names)} | EXTRA_DEBUG) - allowed_changed
     else:
         optional_debug = set()
-    if not allowed_changed <= set(changed) or not set(changed) <= allowed_changed | optional_debug or set(added) != allowed_added or removed:
-        raise ValueError('declared semantic changes plus explicitly bounded nested debug candidates only')
+    validate_physical_delta(changed,added,removed,allowed_changed,optional_debug,allowed_added,
+        EXTRA_REMOVED if group=='factory' else set())
     return {'referenceSource': source, 'originalPhysicalMain': classes, 'selectedPhysicalMain': len(actual),
             'changed': changed, 'added': added, 'removed': removed, 'oldNativeImported': False,
             'physicalSha256': actual}
