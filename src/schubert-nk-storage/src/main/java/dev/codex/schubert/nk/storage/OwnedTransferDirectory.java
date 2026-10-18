@@ -37,6 +37,14 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     this.descriptor = descriptor;
   }
 
+  /** SSC308/PT-DIRFACT-001..003: wrap the existing root FD only after all Java state exists. */
+  public static OwnedTransferDirectory openRoot(DirectoryCalls calls) throws StorageIoException {
+    Objects.requireNonNull(calls, "calls");
+    var owned = new OwnedTransferDirectory(calls, -1);
+    owned.descriptor = calls.openRoot();
+    return owned;
+  }
+
   /** Open every absolute path segment NOFOLLOW; never creates or chmods the configured root. */
   public static OwnedTransferDirectory open(DirectoryCalls calls, Path root)
       throws StorageIoException {
@@ -46,10 +54,10 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       throw new IllegalArgumentException("invalid transfer root");
     }
     // JDK Path parsing has already rejected NUL; native calls recheck each segment before use.
-    OwnedTransferDirectory current = new OwnedTransferDirectory(calls, calls.openRoot());
-    return ResourceScope.use(
-        current::close,
-        () -> {
+    return ResourceScope.acquire(
+        () -> openRoot(calls),
+        OwnedTransferDirectory::close,
+        current -> {
           for (Path segment : root) {
             int next = calls.openDirectory(current.descriptor, segment.toString());
             int previous = current.descriptor;
@@ -72,8 +80,10 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       if (date.getYear() < 1 || date.getYear() > 9999) {
         throw new IllegalArgumentException("invalid transfer date");
       }
-      return new OwnedTransferDirectory(
-          calls, calls.openDirectory(descriptor, date.format(DateTimeFormatter.BASIC_ISO_DATE)));
+      var owned = new OwnedTransferDirectory(calls, -1);
+      owned.descriptor =
+          calls.openDirectory(descriptor, date.format(DateTimeFormatter.BASIC_ISO_DATE));
+      return owned;
     }
   }
 
@@ -82,7 +92,9 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     synchronized (stateLock) {
       requireSegment(name);
       requireOpen();
-      return new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
+      var owned = new OwnedTransferDirectory(calls, -1);
+      owned.descriptor = calls.openDirectory(descriptor, name);
+      return owned;
     }
   }
 
@@ -96,7 +108,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       requireSegment(name);
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
-      return withEntry(calls.openEntry(descriptor, name), operation);
+      return withEntry(() -> calls.openEntry(descriptor, name), operation);
     }
   }
 
@@ -139,11 +151,11 @@ public final class OwnedTransferDirectory implements AutoCloseable {
         // EEXIST proves no type/ownership: openDirectory still performs O_DIRECTORY|O_NOFOLLOW.
         created = false;
       }
-      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
       final boolean initializeCreated = created;
-      return ResourceScope.use(
-          child::close,
-          () -> {
+      return ResourceScope.acquire(
+          () -> openExistingChild(name),
+          OwnedTransferDirectory::close,
+          child -> {
             if (initializeCreated) {
               child.atDirectory(initialize);
               calls.sync(child.descriptor);
@@ -165,10 +177,10 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       requireSegment(name);
       requireOpen();
       calls.createPrivateDirectory(descriptor, name);
-      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, name));
-      return ResourceScope.use(
-          child::close,
-          () -> {
+      return ResourceScope.acquire(
+          () -> openExistingChild(name),
+          OwnedTransferDirectory::close,
+          child -> {
             calls.sync(child.descriptor);
             calls.sync(descriptor);
             var result = new OwnedTransferDirectory(calls, child.descriptor);
@@ -227,7 +239,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     Objects.requireNonNull(id, "id");
     Objects.requireNonNull(operation, LITERAL_OPERATION);
     requireOpen();
-    return withEntry(calls.openEntry(descriptor, id + suffix), operation);
+    return withEntry(() -> calls.openEntry(descriptor, id + suffix), operation);
   }
 
   /** CREATE_NEW and own the actual inode before starting any writer callback. */
@@ -236,7 +248,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       Objects.requireNonNull(id, "id");
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
-      return withEntry(calls.createFile(descriptor, id + LITERAL_PART), operation);
+      return withEntry(() -> calls.createFile(descriptor, id + LITERAL_PART), operation);
     }
   }
 
@@ -249,7 +261,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       Objects.requireNonNull(id, "id");
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
-      return withEntry(calls.createPrivateFile(descriptor, id + LITERAL_PART), operation);
+      return withEntry(() -> calls.createPrivateFile(descriptor, id + LITERAL_PART), operation);
     }
   }
 
@@ -266,17 +278,21 @@ public final class OwnedTransferDirectory implements AutoCloseable {
         throw new IllegalArgumentException("private entry name and operation required");
       requireSegment(name);
       requireOpen();
-      return withEntry(calls.createPrivateFile(descriptor, name), operation);
+      return withEntry(() -> calls.createPrivateFile(descriptor, name), operation);
     }
   }
 
-  private <T> T withEntry(int ownedDescriptor, FileOperation<T> operation)
-      throws StorageIoException {
-    EntryHandle entry = new EntryHandle(calls, ownedDescriptor);
-    // ResourceScope owns both one-close and path-free compound I/O normalization (SSC063).
-    return ResourceScope.use(
-        entry::close,
-        () -> execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation));
+  @FunctionalInterface
+  private interface EntryOpen {
+    int open() throws StorageIoException;
+  }
+
+  private <T> T withEntry(EntryOpen open, FileOperation<T> operation) throws StorageIoException {
+    // The JVM allocates EntryHandle before evaluating open.open(); its constructor only stores.
+    return ResourceScope.acquire(
+        () -> new EntryHandle(calls, open.open()),
+        EntryHandle::close,
+        entry -> execute(Path.of("/proc/self/fd", Integer.toString(entry.descriptor)), operation));
   }
 
   private static <T> T execute(Path capability, FileOperation<T> operation)
@@ -380,10 +396,10 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       requireSegment(ready);
       if (pending.equals(ready)) throw new IllegalArgumentException("identical directory names");
       requireOpen();
-      var child = new OwnedTransferDirectory(calls, calls.openDirectory(descriptor, pending));
-      ResourceScope.use(
-          child::close,
-          () -> {
+      ResourceScope.acquire(
+          () -> openExistingChild(pending),
+          OwnedTransferDirectory::close,
+          child -> {
             calls.publish(descriptor, pending, ready);
             calls.sync(descriptor);
             return Boolean.TRUE;

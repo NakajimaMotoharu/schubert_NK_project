@@ -20,6 +20,57 @@ public final class ResourceScope {
     T run() throws IOException;
   }
 
+  /** SSC308/PT-IOFACT-001..005: all ports exist before this acquisition is invoked. */
+  @FunctionalInterface
+  public interface Acquire<R, E extends IOException> {
+    R open() throws E;
+  }
+
+  @FunctionalInterface
+  public interface Release<R> {
+    void close(R resource) throws IOException;
+  }
+
+  @FunctionalInterface
+  public interface OwnedAction<R, T extends @Nullable Object> {
+    T run(R resource) throws IOException;
+  }
+
+  /**
+   * SSC308/PT-IOFACT-001..012: factory failures retain E/identity; owned failures follow use's
+   * explicit IO precedence. No callback or wrapper is allocated after ownership starts.
+   */
+  public static <R, T extends @Nullable Object, E extends IOException> T acquire(
+      Acquire<R, E> acquire, Release<R> release, OwnedAction<R, T> action)
+      throws E, StorageIoException {
+    Objects.requireNonNull(acquire, "resource acquire");
+    Objects.requireNonNull(release, "resource release");
+    Objects.requireNonNull(action, "resource action");
+    R resource = Objects.requireNonNull(acquire.open(), "acquired resource");
+    try {
+      T result;
+      try {
+        result = action.run(resource);
+      } catch (IOException | RuntimeException | Error primary) {
+        try {
+          release.close(resource);
+        } catch (IOException | RuntimeException | Error secondary) {
+          if (primary instanceof IOException && !(secondary instanceof IOException))
+            throw secondary;
+          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
+        }
+        throw primary;
+      }
+      release.close(resource);
+      return result;
+    } catch (IOException failure) {
+      throw new StorageIoException(
+          failure instanceof StorageIoException storage && failure.getSuppressed().length == 0
+              ? storage.reason()
+              : StorageIoException.Reason.UNAVAILABLE);
+    }
+  }
+
   public static <T extends @Nullable Object> T use(Closeable release, Action<T> action)
       throws StorageIoException {
     Objects.requireNonNull(release, "resource release");

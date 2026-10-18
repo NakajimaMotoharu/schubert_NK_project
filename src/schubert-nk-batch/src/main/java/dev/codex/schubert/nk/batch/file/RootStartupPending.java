@@ -80,10 +80,10 @@ final class RootStartupPending {
 
           @Override
           public Optional<StartupLaunchRecord> readLaunch() throws IOException {
-            var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startup);
-            return ResourceScope.use(
-                directory::close,
-                () -> {
+            return ResourceScope.acquire(
+                () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startup),
+                OwnedTransferDirectory::close,
+                directory -> {
                   var files =
                       new StartupLaunchFiles(
                           directory, LinuxInodeSecurity.create(), issued.current());
@@ -163,13 +163,12 @@ final class RootStartupPending {
         self.service() == RootStartupContext.Service.API
             || self.service() == RootStartupContext.Service.WEB);
     root.recheck(self);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
+    Path startup = Path.of("/run/schubert-nk/startup");
     var owner =
-        ResourceScope.use(
-            directory::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), startup),
+            OwnedTransferDirectory::close,
+            directory -> {
               var current = new StartupPermitFiles(directory, LinuxInodeSecurity.create());
               require(
                   issued.current().equals(current.current())

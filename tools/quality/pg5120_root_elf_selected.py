@@ -29,6 +29,21 @@ PENDING_SUITES = {
     'dev.codex.schubert.nk.batch.file.RootStartupPendingTest': 'batch',
     'dev.codex.schubert.nk.batch.file.StartupLaunchFilesTest': 'batch',
 }
+FACTORY_REFERENCE = 'e8ecff1bec1d7ddd51cdfbf803acda07c2f6cdb9'
+FACTORY_FULL = ROOT.parent / 'pgpt-runs/PG379/pg5130-root-whole-qualified-v1/manifest.safe.json'
+SCOPE = 'dev/codex/schubert/nk/storage/ResourceScope'
+DIRECTORY = 'dev/codex/schubert/nk/storage/OwnedTransferDirectory'
+
+
+def storage_suites():
+    folder = ROOT / 'src/schubert-nk-storage/src/test/java'
+    result = {}
+    for path in sorted(folder.rglob('*Test.java')):
+        if path.is_symlink(): raise ValueError('physical test source only')
+        if '@Test' in path.read_text():
+            result[path.relative_to(folder).with_suffix('').as_posix().replace('/', '.')] = 'storage'
+    if len(result) != 25: raise ValueError('actual all25 storage suites required')
+    return result
 
 
 def commands_for(base, suites=SUITES):
@@ -48,11 +63,13 @@ def utc():
 
 
 def main_delta(snapshot, group='elf'):
-    reference = json.loads(FULL.read_bytes())
+    reference = json.loads((FACTORY_FULL if group == 'factory' else FULL).read_bytes())
     q = reference['result']
-    if not (reference['actualExit'] == 0 and q['productionSource'] == BASE
-            and q['tests'] == 3791 and q['mainClasses'] == 1650
-            and len(q['allPhysicalMainSha256']) == 1650
+    source = FACTORY_REFERENCE if group == 'factory' else BASE
+    tests, classes = (3814, 1654) if group == 'factory' else (3791, 1650)
+    if not (type(reference['actualExit']) is int and reference['actualExit'] == 0 and q['productionSource'] == source
+            and q['tests'] == tests and q['mainClasses'] == classes
+            and len(q['allPhysicalMainSha256']) == classes
             and q['allSixFormatBeforeAnyPt'] is True and q['staticSixModules'] == 0
             and q['FESFlakyNotRun'] == 0):
         raise ValueError('original same-source qualification required')
@@ -67,9 +84,15 @@ def main_delta(snapshot, group='elf'):
     if group == 'pending':
         allowed_changed.add('batch:' + PENDING + '.class')
         allowed_added |= {'batch:' + PENDING + suffix + '.class' for suffix in ('$WaitIo', '$LaunchRead', '$1')}
+    if group == 'factory':
+        allowed_changed = {'batch:' + CLASS + '.class', 'batch:' + PENDING + '.class',
+                           'batch:' + PENDING + '$1.class', 'storage:' + SCOPE + '.class',
+                           'storage:' + DIRECTORY + '.class', 'storage:' + DIRECTORY + '$EntryHandle.class'}
+        allowed_added = {'storage:' + SCOPE + suffix + '.class' for suffix in ('$Acquire', '$Release', '$OwnedAction')}
+        allowed_added |= {'storage:' + DIRECTORY + '$EntryOpen.class', 'batch:' + CLASS + '$RootDescriptor.class'}
     if set(changed) != allowed_changed or set(added) != allowed_added or removed:
         raise ValueError('only cumulative SSC306/307 declared Main delta may differ')
-    return {'referenceSource': BASE, 'originalPhysicalMain': 1650, 'selectedPhysicalMain': len(actual),
+    return {'referenceSource': source, 'originalPhysicalMain': classes, 'selectedPhysicalMain': len(actual),
             'changed': changed, 'added': added, 'removed': removed, 'oldNativeImported': False,
             'physicalSha256': actual}
 
@@ -77,13 +100,14 @@ def main_delta(snapshot, group='elf'):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=('red', 'green'))
-    parser.add_argument('--group', choices=('elf', 'pending', 'guards'), default='elf')
+    parser.add_argument('--group', choices=('elf', 'pending', 'guards', 'factory'), default='elf')
     args = parser.parse_args()
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed source required')
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     version = 'v2' if args.phase == 'red' else 'v3'
-    stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards'}[args.group]
+    stem = {'elf': 'pg5120-root-elf', 'pending': 'pg5124-root-pending', 'guards': 'pg5126-root-guards',
+            'factory': 'pg5136-factory-io'}[args.group]
     if args.group != 'elf': version = 'v1'
     work = ROOT.parent / ('pgpt-runs/PG379/' + stem + '-' + args.phase + '-' + version)
     os.umask(0o077)
@@ -99,7 +123,8 @@ def main():
     inputs = {str(p.relative_to(snapshot)): sha(p) for p in snapshot.rglob('*') if p.is_file()}
     expected = {}
     suites = SUITES if args.group == 'elf' else {**SUITES, **PENDING_SUITES}
-    if args.group == 'guards': suites = {**suites, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
+    if args.group in ('guards', 'factory'): suites = {**suites, 'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest': 'batch'}
+    if args.group == 'factory': suites = {**suites, **storage_suites()}
     for name, module in suites.items():
         text = (snapshot / ('src/schubert-nk-' + module + '/src/test/java/' + name.replace('.', '/') + '.java')).read_text()
         methods = re.findall(r'@Test\s+void\s+([A-Za-z0-9_]+)\(', text)
@@ -144,25 +169,31 @@ def main():
         if static_path.is_file():
             static[module] = len(ET.parse(static_path).getroot().findall('.//BugInstance'))
         cov = target / 'site/jacoco/jacoco.xml'
-        if cov.is_file() and module == 'batch':
+        if cov.is_file() and (module == 'batch' or args.group == 'factory' and module == 'storage'):
             for c in ET.parse(cov).getroot().findall('package/class'):
-                if c.get('name') in ({CLASS, PENDING} if args.group != 'elf' else {CLASS}):
+                required = {CLASS, PENDING} if args.group != 'elf' else {CLASS}
+                if args.group == 'factory': required |= {SCOPE, DIRECTORY, CLASS + '$RootDescriptor'}
+                if c.get('name') in required:
                     for method in c.findall('method'):
                         digest_target = c.get('name') == CLASS and (method.get('name') == 'digest' or method.get('name', '').startswith('lambda$digest$'))
                         pending_target = c.get('name') == PENDING and (method.get('name') == 'readLaunch' or (method.get('name') == 'awaitLaunch' and '$WaitIo;' in method.get('desc', '')))
-                        if digest_target or pending_target:
+                        factory_target = args.group == 'factory' and (
+                            c.get('name') == SCOPE and method.get('name') in ('acquire', 'use')
+                            or c.get('name') == DIRECTORY and method.get('name') == 'openRoot'
+                            or c.get('name') == CLASS + '$RootDescriptor' and method.get('name') in ('<init>', 'close'))
+                        if digest_target or pending_target or factory_target:
                             key = method.get('name') + method.get('desc')
                             counters[key] = {v.get('type'): {'missed': int(v.get('missed')), 'covered': int(v.get('covered'))}
                                              for v in method.findall('counter')}
     if actual != expected: reasons.append('exact selected case inventory incomplete')
     if not all(sha(snapshot / path) == digest for path, digest in inputs.items()): reasons.append('frozen input changed')
     if set(static) != set(BUILT) or any(static.values()): reasons.append('required three compiled-module fresh static incomplete/nonzero')
-    if len(counters) != (5 if args.group != 'elf' else 3) or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
+    if len(counters) != (10 if args.group == 'factory' else 5 if args.group != 'elf' else 3) or any(v['missed'] for counts in counters.values() for kind, v in counts.items()
                                    if kind in ('LINE', 'METHOD', 'BRANCH')):
         reasons.append('all digest overload/default-factory line/method/branch required')
     delta = None
     if codes == [0, 0]:
-        try: delta = main_delta(snapshot, 'elf' if args.group == 'elf' else 'pending')
+        try: delta = main_delta(snapshot, args.group if args.group in ('elf', 'factory') else 'pending')
         except ValueError as failure: reasons.append(str(failure))
     result = {**{k: v for k, v in begin.items() if k != 'inputs'}, 'endUTC': utc(), 'phaseExits': codes,
               'actualExit': 0 if codes == [0, 0] and not reasons else 1, 'tests': sum(map(len, actual.values())),

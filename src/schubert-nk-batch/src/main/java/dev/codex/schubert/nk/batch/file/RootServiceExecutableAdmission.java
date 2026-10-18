@@ -3,11 +3,13 @@ package dev.codex.schubert.nk.batch.file;
 import static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;
 
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -53,6 +55,24 @@ final class RootServiceExecutableAdmission {
     MessageDigest create() throws NoSuchAlgorithmException;
   }
 
+  /** SSC308/PT-ROOTGUARD-004: new wrapper before primitive open, no post-open boxing/state. */
+  static final class RootDescriptor implements java.io.Closeable {
+    private final DirectoryCalls calls;
+    final int descriptor;
+
+    RootDescriptor(DirectoryCalls calls) throws StorageIoException {
+      this.calls = Objects.requireNonNull(calls);
+      int held = this.calls.openRoot();
+      require(held >= 0);
+      descriptor = held;
+    }
+
+    @Override
+    public void close() throws StorageIoException {
+      calls.close(descriptor);
+    }
+  }
+
   private RootServiceExecutableAdmission() {}
 
   @SuppressFBWarnings(
@@ -70,22 +90,23 @@ final class RootServiceExecutableAdmission {
     root.recheck(self);
     var calls = LinuxDirectoryCalls.create();
     var security = LinuxInodeSecurity.create();
-    int top = calls.openRoot();
-    ResourceScope.use(
-        () -> calls.close(top),
-        () -> {
-          checked(Path.of("/proc/self/fd/" + top), 0x41ed, security);
+    ResourceScope.acquire(
+        () -> new RootDescriptor(calls),
+        RootDescriptor::close,
+        top -> {
+          checked(Path.of("/proc/self/fd/" + top.descriptor), 0x41ed, security);
           return Boolean.TRUE;
         });
-    var usr = OwnedTransferDirectory.open(calls, Path.of("/usr"));
-    ResourceScope.use(
-        usr::close,
-        () -> {
+    Path usrPath = Path.of("/usr");
+    ResourceScope.acquire(
+        () -> OwnedTransferDirectory.open(calls, usrPath),
+        OwnedTransferDirectory::close,
+        usr -> {
           var beforeUsr = usr.atDirectory(p -> checked(p, 0x41ed, security));
-          var bin = usr.openExistingChild("bin");
-          ResourceScope.use(
-              bin::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> usr.openExistingChild("bin"),
+              OwnedTransferDirectory::close,
+              bin -> {
                 var beforeBin = bin.atDirectory(p -> checked(p, 0x41ed, security));
                 bin.atExistingEntryHandle(
                     "setpriv",
@@ -131,15 +152,15 @@ final class RootServiceExecutableAdmission {
         link -> {
           var before = checked(link, 0xa1ff, security);
           requireSelector(bin, before, firstTarget, security);
-          var etc = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), etcPath);
-          ResourceScope.use(
-              etc::close,
-              () -> {
+          ResourceScope.acquire(
+              () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), etcPath),
+              OwnedTransferDirectory::close,
+              etc -> {
                 var etcBefore = etc.atDirectory(p -> checked(p, 0x41ed, security));
-                var alternatives = etc.openExistingChild("alternatives");
-                ResourceScope.use(
-                    alternatives::close,
-                    () -> {
+                ResourceScope.acquire(
+                    () -> etc.openExistingChild("alternatives"),
+                    OwnedTransferDirectory::close,
+                    alternatives -> {
                       var alternativesBefore =
                           alternatives.atDirectory(p -> checked(p, 0x41ed, security));
                       alternatives.atExistingEntryHandle(
@@ -147,23 +168,24 @@ final class RootServiceExecutableAdmission {
                           alternative -> {
                             var alternateBefore = checked(alternative, 0xa1ff, security);
                             requireSelector(alternatives, alternateBefore, target, security);
-                            var opt =
-                                OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath);
-                            ResourceScope.use(
-                                opt::close,
-                                () -> {
+                            ResourceScope.acquire(
+                                () ->
+                                    OwnedTransferDirectory.open(
+                                        LinuxDirectoryCalls.create(), optPath),
+                                OwnedTransferDirectory::close,
+                                opt -> {
                                   var optBefore =
                                       opt.atDirectory(p -> checked(p, 0x41ed, security));
-                                  var jdk = opt.openExistingChild("jdk-25.0.4");
-                                  ResourceScope.use(
-                                      jdk::close,
-                                      () -> {
+                                  ResourceScope.acquire(
+                                      () -> opt.openExistingChild("jdk-25.0.4"),
+                                      OwnedTransferDirectory::close,
+                                      jdk -> {
                                         var jdkBefore =
                                             jdk.atDirectory(p -> checked(p, 0x41ed, security));
-                                        var javaBin = jdk.openExistingChild("bin");
-                                        ResourceScope.use(
-                                            javaBin::close,
-                                            () -> {
+                                        ResourceScope.acquire(
+                                            () -> jdk.openExistingChild("bin"),
+                                            OwnedTransferDirectory::close,
+                                            javaBin -> {
                                               var binBefore =
                                                   javaBin.atDirectory(
                                                       p -> checked(p, 0x41ed, security));
@@ -306,11 +328,11 @@ final class RootServiceExecutableAdmission {
     Objects.requireNonNull(capabilities);
     var before = checked(held, 0x81ed, security);
     capabilities.requireAbsent(held);
-    var input = Files.newByteChannel(held, Set.of(StandardOpenOption.READ));
     String actual =
-        ResourceScope.use(
-            input::close,
-            () -> {
+        ResourceScope.acquire(
+            () -> Files.newByteChannel(held, Set.of(StandardOpenOption.READ)),
+            SeekableByteChannel::close,
+            input -> {
               String result = digest(input);
               require(Long.valueOf(input.size()).equals(before.get("size")));
               return result;

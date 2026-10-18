@@ -36,6 +36,19 @@ class SelectedCommandsTest(unittest.TestCase):
         self.assertEqual(command[0], role.commands_for(['MAVEN'])[0])
         self.assertIn('-Dtest=' + ','.join(suites), command[1])
 
+    def test_factory_scope_uses_all_actual_storage_and_strict_three_compiled_modules(self):
+        storage = role.storage_suites()
+        self.assertEqual(len(storage), 25)
+        self.assertEqual(set(storage.values()), {'storage'})
+        for required in ('FactoryResourceScopeTest','OwnedDirectoryFactoryTest','ResourceScopeTest','OwnedTransferDirectoryTest'):
+            self.assertIn('dev.codex.schubert.nk.storage.' + required, storage)
+        suites = {**role.SUITES, **role.PENDING_SUITES,
+                  'dev.codex.schubert.nk.batch.file.RootEntryRejectionTest':'batch', **storage}
+        self.assertEqual(len(suites), 32)
+        commands = role.commands_for(['MAVEN'], suites)
+        self.assertIn('-Dtest=' + ','.join(suites), commands[1])
+        self.assertEqual(commands[0], role.commands_for(['MAVEN'])[0])
+
 
 if __name__ == '__main__':
     unittest.main()

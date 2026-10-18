@@ -106,4 +106,95 @@ final class RootEntryRejectionTest {
     assertEquals("transfer storage operation failed", failure.getMessage());
     assertNull(failure.getCause());
   }
+
+  /** PT-ROOTGUARD-004 / SSC308: primitive319 is outside Integer's mandated cache. */
+  @Test
+  void guard004RootDescriptorPreallocatesAndPreservesPrimitiveFailureOwnership() throws Exception {
+    var calls = new RootCalls();
+    int actual =
+        dev.codex.schubert.nk.storage.ResourceScope.acquire(
+            () -> new RootServiceExecutableAdmission.RootDescriptor(calls),
+            RootServiceExecutableAdmission.RootDescriptor::close,
+            owned -> owned.descriptor);
+    assertEquals(319, actual);
+    assertEquals(1, calls.opens);
+    assertEquals(1, calls.closes);
+    assertEquals(319, calls.closedDescriptor);
+    var bad = new RootCalls();
+    bad.value = -1;
+    unavailable(
+        assertThrows(
+            StorageIoException.class,
+            () -> new RootServiceExecutableAdmission.RootDescriptor(bad)));
+    assertEquals(1, bad.opens);
+    assertEquals(0, bad.closes);
+    var failed = new RootCalls();
+    var failure = new StorageIoException(StorageIoException.Reason.MISSING);
+    failed.failure = failure;
+    assertSame(
+        failure,
+        assertThrows(
+            StorageIoException.class,
+            () -> new RootServiceExecutableAdmission.RootDescriptor(failed)));
+    assertEquals(1, failed.opens);
+    assertEquals(0, failed.closes);
+    assertThrows(
+        NullPointerException.class, () -> new RootServiceExecutableAdmission.RootDescriptor(null));
+  }
+
+  private static final class RootCalls implements dev.codex.schubert.nk.storage.DirectoryCalls {
+    private int value = 319;
+    private int opens;
+    private int closes;
+    private int closedDescriptor = -1;
+    private @org.jspecify.annotations.Nullable StorageIoException failure;
+
+    @Override
+    public int openRoot() throws StorageIoException {
+      opens++;
+      if (failure != null) throw failure;
+      return value;
+    }
+
+    @Override
+    public void close(int descriptor) {
+      closes++;
+      closedDescriptor = descriptor;
+    }
+
+    @Override
+    public int openDirectory(int parent, String name) {
+      throw new AssertionError("unexpected traversal");
+    }
+
+    @Override
+    public int openEntry(int parent, String name) {
+      throw new AssertionError("unexpected entry");
+    }
+
+    @Override
+    public int createFile(int parent, String name) {
+      throw new AssertionError("unexpected create");
+    }
+
+    @Override
+    public void createDirectory(int parent, String name) {
+      throw new AssertionError("unexpected create");
+    }
+
+    @Override
+    public void publish(int parent, String part, String ready) {
+      throw new AssertionError("unexpected publish");
+    }
+
+    @Override
+    public void unlink(int parent, String name) {
+      throw new AssertionError("unexpected unlink");
+    }
+
+    @Override
+    public void sync(int parent) {
+      throw new AssertionError("unexpected sync");
+    }
+  }
 }
