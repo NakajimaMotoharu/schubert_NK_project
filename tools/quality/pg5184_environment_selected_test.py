@@ -1,9 +1,17 @@
 import re
 import unittest
 import pg5184_environment_selected as role
+import pg5180_backup_public as common
 
 
 class EnvironmentScope(unittest.TestCase):
+    def test_revalidated_public_case_ids_do_not_claim_new_work_or_omit_metadata(self):
+        ids=common.revalidated_case_ids()
+        self.assertEqual(len(ids),3)
+        self.assertEqual({value['testId'] for value in ids.values()},
+                         {'PT-OPS-CHILDFD-009','PT-OPS-CHILDFD-010','PT-NEXPORT193-META001'})
+        self.assertTrue(all(value['newIndependentCase'] and value['newInThisChange'] is False for value in ids.values()))
+
     def test_all_environment_suites_and_case_inventory_are_exact_without_probe_counting(self):
         counts={}
         folder=role.selected.ROOT/'src/schubert-nk-batch/src/test/java'
