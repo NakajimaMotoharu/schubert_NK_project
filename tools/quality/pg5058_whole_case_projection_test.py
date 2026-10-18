@@ -7,6 +7,14 @@ import pg5058_whole_case_projection as projection
 
 
 class Cases(unittest.TestCase):
+    def test_original_archive_snapshot_terminal_does_not_require_dot_git(self):
+        good = {'actualExit': 0, 'mavenExit': 0, 'sourceSnapshotHead': 'a' * 40, 'sourceInputsUnchanged': True}
+        projection.qualify_snapshot(good, 'a' * 40)
+        for key, value in [('actualExit', False), ('mavenExit', False), ('mavenExit', 1),
+                           ('sourceSnapshotHead', 'b' * 40), ('sourceInputsUnchanged', 1), ('sourceInputsUnchanged', False)]:
+            with self.assertRaises(ValueError):
+                projection.qualify_snapshot({**good, key: value}, 'a' * 40)
+
     def test_only_allowed_fields_and_unique_physical_ordinal(self):
         blob = b'<testsuite tests="2"><properties><property name="password" value="PRIVATE_CANARY"/></properties><testcase classname="dev.codex.schubert.nk.batch.ExampleTest" name="PRIVATE_CANARY"/><testcase classname="dev.codex.schubert.nk.batch.ExampleTest" name="PRIVATE_CANARY"/><system-out>PRIVATE_CANARY</system-out></testsuite>'
         values = projection.project_xml('batch', 'TEST-example.xml', blob, hashlib.sha256(blob).hexdigest())
