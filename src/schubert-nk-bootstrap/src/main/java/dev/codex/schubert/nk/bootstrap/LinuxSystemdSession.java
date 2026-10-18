@@ -43,6 +43,10 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
 
   private final Calls calls;
   private final Arena arena;
+  // SSC308: all three native out buffers and primitive states precede any C acquisition.
+  // 0=not called/empty, 1=call pending, 2=returned normally, 3=release unconfirmed.
+  private final MemorySegment[] outputs;
+  private final byte[] outputState;
   private final long thread = Thread.currentThread().threadId();
   private MemorySegment bus = MemorySegment.NULL;
   private boolean retainedClosed;
@@ -53,6 +57,8 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   LinuxSystemdSession(Calls calls, Arena arena) {
     this.calls = Objects.requireNonNull(calls);
     this.arena = Objects.requireNonNull(arena);
+    outputState = new byte[3];
+    outputs = new MemorySegment[] {pointer(), pointer(), pointer()};
   }
 
   static final class Factory {
@@ -61,7 +67,9 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     LinuxSystemdSession create() throws IOException {
       // Only immutable native ABI handles are shared. Every bus/owner/property read is fresh.
       if (binding == null) binding = Native.calls();
-      return new LinuxSystemdSession(binding, Arena.ofConfined());
+      Calls ready = Objects.requireNonNull(binding, "immutable system manager binding");
+      return ResourceScope.handoff(
+          Arena::ofConfined, Arena::close, owned -> new LinuxSystemdSession(ready, owned));
     }
   }
 
@@ -94,6 +102,41 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     return arena.allocate(ValueLayout.ADDRESS);
   }
 
+  private MemorySegment prepareOutput(int slot) throws IOException {
+    check();
+    outputs[slot].set(ValueLayout.ADDRESS, 0, MemorySegment.NULL);
+    outputState[slot] = 0;
+    return outputs[slot];
+  }
+
+  // Java constructs the varargs/all argument values before entering this method.
+  private Object callOutput(int slot, String symbol, Object... arguments) throws IOException {
+    outputState[slot] = 1;
+    Object status = call(symbol, arguments);
+    outputState[slot] = 2;
+    return status;
+  }
+
+  private void releaseOutput(int slot, String symbol) throws IOException {
+    if (outputState[slot] == 0) return;
+    if (outputState[slot] != 2) {
+      uncertain = true;
+      throw SystemManagerObservation.unavailable();
+    }
+    outputState[slot] = 3;
+    try {
+      MemorySegment value = outputs[slot].get(ValueLayout.ADDRESS, 0);
+      if (value.address() != 0) {
+        if (symbol.equals("free")) call(symbol, value);
+        else release(symbol, value);
+      }
+      outputState[slot] = 0;
+    } catch (IOException | RuntimeException | Error failure) {
+      uncertain = true;
+      throw failure;
+    }
+  }
+
   private long remaining(long micros) throws IOException {
     check();
     var current = budget;
@@ -117,9 +160,15 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     Objects.requireNonNull(source);
     if (bus.address() != 0) throw SystemManagerObservation.unavailable();
     budget = source;
-    MemorySegment result = pointer();
-    Object status = call("sd_bus_new", result);
-    bus = result.get(ValueLayout.ADDRESS, 0); // Capture ownership even if the status is a failure.
+    MemorySegment result = prepareOutput(0);
+    Object status = callOutput(0, "sd_bus_new", result);
+    try {
+      bus = result.get(ValueLayout.ADDRESS, 0);
+    } catch (RuntimeException | Error failure) {
+      // The returned native address is still in the preowned slot, never lost as NULL.
+      uncertain = true;
+      throw failure;
+    }
     if (!(status instanceof Integer code) || code < 0 || bus.address() == 0)
       throw SystemManagerObservation.unavailable();
     integer("sd_bus_set_method_call_timeout", bus, remaining(5_000_000));
@@ -153,33 +202,41 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   private String ownerValue(String member, String argument, char kind, long micros)
       throws IOException {
     timeout(micros);
-    MemorySegment result = pointer();
-    Object status =
-        call(
-            "sd_bus_message_new_method_call",
-            bus,
-            result,
-            text("org.freedesktop.DBus"),
-            text("/org/freedesktop/DBus"),
-            text("org.freedesktop.DBus"),
-            text(member));
-    MemorySegment request = result.get(ValueLayout.ADDRESS, 0);
-    return ResourceScope.use(
-        () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, request),
-        () -> {
+    return ResourceScope.acquire(
+        () -> prepareOutput(1),
+        result -> releaseOutput(1, LITERAL_SD_BUS_MESSAGE_UNREF),
+        result -> {
+          Object status =
+              callOutput(
+                  1,
+                  "sd_bus_message_new_method_call",
+                  bus,
+                  result,
+                  text("org.freedesktop.DBus"),
+                  text("/org/freedesktop/DBus"),
+                  text("org.freedesktop.DBus"),
+                  text(member));
+          MemorySegment request = result.get(ValueLayout.ADDRESS, 0);
           if (!(status instanceof Integer code) || code < 0 || request.address() == 0)
             throw SystemManagerObservation.unavailable();
           integer("sd_bus_message_set_auto_start", request, 0);
           integer("sd_bus_message_append_basic", request, (byte) 's', text(argument));
-          var output = pointer();
-          // Each explicit RPC receives the original query's remaining budget, never renewed.
-          timeout(micros);
-          Object called =
-              call("sd_bus_call", bus, request, remaining(micros), MemorySegment.NULL, output);
-          MemorySegment reply = output.get(ValueLayout.ADDRESS, 0);
-          return ResourceScope.use(
-              () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, reply),
-              () -> {
+          return ResourceScope.acquire(
+              () -> prepareOutput(2),
+              output -> releaseOutput(2, LITERAL_SD_BUS_MESSAGE_UNREF),
+              output -> {
+                // Each explicit RPC uses the original budget after all preparation.
+                timeout(micros);
+                Object called =
+                    callOutput(
+                        2,
+                        "sd_bus_call",
+                        bus,
+                        request,
+                        remaining(micros),
+                        MemorySegment.NULL,
+                        output);
+                MemorySegment reply = output.get(ValueLayout.ADDRESS, 0);
                 if (!(called instanceof Integer ok) || ok < 0 || reply.address() == 0)
                   throw SystemManagerObservation.unavailable();
                 var value = kind == 's' ? pointer() : arena.allocate(ValueLayout.JAVA_INT);
@@ -215,24 +272,23 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     MemorySegment type = text("org.freedesktop.systemd1." + property.kind);
     MemorySegment name = text(property.member);
     if (property.type == 's') {
-      var result = pointer();
-      timeout(micros);
-      Object status =
-          call(
-              "sd_bus_get_property_string",
-              bus,
-              destination,
-              path,
-              type,
-              name,
-              MemorySegment.NULL,
-              result);
-      MemorySegment value = result.get(ValueLayout.ADDRESS, 0);
-      return ResourceScope.use(
-          () -> {
-            if (value.address() != 0) call("free", value);
-          },
-          () -> {
+      return ResourceScope.acquire(
+          () -> prepareOutput(1),
+          result -> releaseOutput(1, "free"),
+          result -> {
+            timeout(micros);
+            Object status =
+                callOutput(
+                    1,
+                    "sd_bus_get_property_string",
+                    bus,
+                    destination,
+                    path,
+                    type,
+                    name,
+                    MemorySegment.NULL,
+                    result);
+            MemorySegment value = result.get(ValueLayout.ADDRESS, 0);
             if (!(status instanceof Integer code) || code < 0)
               throw SystemManagerObservation.unavailable();
             return string(value);
@@ -255,24 +311,25 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
           ? Integer.toUnsignedString(value.get(ValueLayout.JAVA_INT, 0))
           : Long.toUnsignedString(value.get(ValueLayout.JAVA_LONG, 0));
     }
-    var result = pointer();
     var signature = text("ay");
-    timeout(micros);
-    Object status =
-        call(
-            "sd_bus_get_property",
-            bus,
-            destination,
-            path,
-            type,
-            name,
-            MemorySegment.NULL,
-            result,
-            signature);
-    MemorySegment message = result.get(ValueLayout.ADDRESS, 0);
-    return ResourceScope.use(
-        () -> release(LITERAL_SD_BUS_MESSAGE_UNREF, message),
-        () -> {
+    return ResourceScope.acquire(
+        () -> prepareOutput(1),
+        result -> releaseOutput(1, LITERAL_SD_BUS_MESSAGE_UNREF),
+        result -> {
+          timeout(micros);
+          Object status =
+              callOutput(
+                  1,
+                  "sd_bus_get_property",
+                  bus,
+                  destination,
+                  path,
+                  type,
+                  name,
+                  MemorySegment.NULL,
+                  result,
+                  signature);
+          MemorySegment message = result.get(ValueLayout.ADDRESS, 0);
           if (!(status instanceof Integer code) || code < 0 || message.address() == 0)
             throw SystemManagerObservation.unavailable();
           var data = pointer();
@@ -324,7 +381,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   @Override
   public void close() throws IOException {
     check();
-    release("sd_bus_close_unref", bus);
+    releaseOutput(0, "sd_bus_close_unref");
     arena.close();
     retainedClosed = true;
   }

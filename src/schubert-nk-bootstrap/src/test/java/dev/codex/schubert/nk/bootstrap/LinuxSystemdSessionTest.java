@@ -10,6 +10,261 @@ import org.junit.jupiter.api.Test;
 
 /** Literal sd-bus ABI arguments and independently allocated C reply vectors; MANAGER817007..012. */
 final class LinuxSystemdSessionTest {
+  private static final List<String> OUTPUT_CALLS =
+      List.of(
+          "sd_bus_new",
+          "sd_bus_message_new_method_call",
+          "sd_bus_call",
+          "sd_bus_get_property_string",
+          "sd_bus_get_property");
+
+  private static int outputIndex(String symbol) {
+    return switch (symbol) {
+      case "sd_bus_new" -> 0;
+      case "sd_bus_message_new_method_call" -> 1;
+      case "sd_bus_call" -> 4;
+      default -> 6;
+    };
+  }
+
+  private static void outputRoute(LinuxSystemdSession session, String target) throws IOException {
+    session.start(() -> 5000000);
+    session.owner(4999999);
+    if (target.equals("sd_bus_get_property_string"))
+      session.read(
+          SystemManagerObservation.Service.API, SystemManagerObservation.Property.ID, 4999998);
+    if (target.equals("sd_bus_get_property"))
+      session.read(
+          SystemManagerObservation.Service.API,
+          SystemManagerObservation.Property.INVOCATION,
+          4999998);
+  }
+
+  private static void failWith(Throwable failure) throws IOException {
+    if (failure instanceof IOException io) throw io;
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  private static String released(Calls literal, String symbol, Object[] arguments) {
+    if (symbol.equals("free")) return "free";
+    long pointer = Calls.segment(arguments[0]).address();
+    if (pointer == literal.bus.address()) return "bus";
+    if (pointer == literal.creds.address()) return "request";
+    if (pointer == literal.message.address()) return "reply";
+    throw new AssertionError("foreign independent pointer");
+  }
+
+  /** PT-OPS-FFMOWN001: C may write the output and then fail; no guessed free/retry. */
+  @Test
+  void ffmown001WriteThenUnknownKeepsOutputAndArenaWithoutRetry() throws Exception {
+    for (String target : OUTPUT_CALLS)
+      for (Throwable failure :
+          List.of(
+              new IOException("synthetic"),
+              new IllegalStateException("synthetic"),
+              new LinkageError("synthetic"))) {
+        try (var data = Arena.ofConfined();
+            var owned = Arena.ofConfined()) {
+          var literal = new Calls(data);
+          var out = new ArrayList<MemorySegment>();
+          LinuxSystemdSession.Calls calls =
+              (symbol, arguments) -> {
+                if (symbol.equals(target)) out.add(Calls.segment(arguments[outputIndex(symbol)]));
+                Object value = literal.call(symbol, arguments);
+                if (symbol.equals(target)) failWith(failure);
+                return value;
+              };
+          var session = new LinuxSystemdSession(calls, owned);
+          Class<? extends Throwable> expected =
+              failure instanceof IOException ? IOException.class : failure.getClass();
+          Throwable actual = assertThrows(expected, () -> outputRoute(session, target));
+          if (!(failure instanceof IOException)) assertSame(failure, actual);
+          assertEquals(1, out.size());
+          assertNotEquals(0, out.getFirst().get(ValueLayout.ADDRESS, 0).address());
+          assertTrue(owned.scope().isAlive());
+          assertFalse(session.closed());
+          int before = literal.events.size();
+          assertThrows(IOException.class, session::close);
+          assertThrows(IOException.class, () -> session.owner(5000000));
+          assertEquals(before, literal.events.size());
+          assertEquals(0, literal.events.stream().filter("free"::equals).count());
+          assertEquals(
+              target.equals("sd_bus_call") ? 1 : target.startsWith("sd_bus_get_property") ? 6 : 0,
+              literal.events.stream().filter("sd_bus_message_unref"::equals).count());
+          assertFalse(literal.events.contains("sd_bus_close_unref"));
+        }
+      }
+  }
+
+  /** PT-OPS-FFMOWN002: only three private result buffers, normal reuse and literal close order. */
+  @Test
+  void ffmown002ThreeOutputSlotsReuseAndLegacyReplyRequestFreeBusOrder() throws Exception {
+    try (var data = Arena.ofConfined()) {
+      var literal = new Calls(data);
+      var addresses = new HashSet<Long>();
+      var closes = new ArrayList<String>();
+      LinuxSystemdSession.Calls calls =
+          (symbol, arguments) -> {
+            if (OUTPUT_CALLS.contains(symbol))
+              addresses.add(Calls.segment(arguments[outputIndex(symbol)]).address());
+            if (symbol.equals("free") || symbol.endsWith("_unref"))
+              closes.add(released(literal, symbol, arguments));
+            return literal.call(symbol, arguments);
+          };
+      var owned = Arena.ofConfined();
+      var session = new LinuxSystemdSession(calls, owned);
+      session.start(() -> 5000000);
+      for (int round = 0; round < 2; round++) {
+        assertEquals(1, session.owner(4999999).pid());
+        assertEquals(
+            "loaded",
+            session.read(
+                SystemManagerObservation.Service.API,
+                SystemManagerObservation.Property.ID,
+                4999998));
+        assertEquals(
+            "00112233445566778899aabbccddeeff",
+            session.read(
+                SystemManagerObservation.Service.API,
+                SystemManagerObservation.Property.INVOCATION,
+                4999998));
+        assertEquals(1, session.owner(4999999).pid());
+      }
+      session.close();
+      assertEquals(3, addresses.size());
+      var oneRound =
+          List.of(
+              "reply", "request", "reply", "request", "reply", "request", "free", "reply", "reply",
+              "request", "reply", "request", "reply", "request");
+      var expected = new ArrayList<>(oneRound);
+      expected.addAll(oneRound);
+      expected.add("bus");
+      assertEquals(expected, closes);
+      assertTrue(session.closed());
+      assertFalse(owned.scope().isAlive());
+    }
+  }
+
+  /** PT-OPS-FFMOWN003: a returned error status still gives a known output to release. */
+  @Test
+  void ffmown003NegativeAndWrongStatusesReleaseKnownOutputsInOriginalOrder() throws Exception {
+    var beforeProperty = List.of("reply", "request", "reply", "request", "reply", "request");
+    for (String target : OUTPUT_CALLS)
+      for (Object bad : List.of(-5, "invalid status")) {
+        try (var data = Arena.ofConfined()) {
+          var literal = new Calls(data);
+          var closes = new ArrayList<String>();
+          LinuxSystemdSession.Calls calls =
+              (symbol, arguments) -> {
+                if (symbol.equals("free") || symbol.endsWith("_unref"))
+                  closes.add(released(literal, symbol, arguments));
+                Object value = literal.call(symbol, arguments);
+                return symbol.equals(target) ? bad : value;
+              };
+          var owned = Arena.ofConfined();
+          var session = new LinuxSystemdSession(calls, owned);
+          assertThrows(IOException.class, () -> outputRoute(session, target));
+          session.close();
+          List<String> expected =
+              switch (target) {
+                case "sd_bus_new" -> List.of("bus");
+                case "sd_bus_message_new_method_call" -> List.of("request", "bus");
+                case "sd_bus_call" -> List.of("reply", "request", "bus");
+                default -> {
+                  var sequence = new ArrayList<>(beforeProperty);
+                  sequence.add(target.equals("sd_bus_get_property_string") ? "free" : "reply");
+                  sequence.add("bus");
+                  yield sequence;
+                }
+              };
+          assertEquals(expected, closes);
+          assertTrue(session.closed());
+          assertFalse(owned.scope().isAlive());
+        }
+      }
+  }
+
+  /** PT-OPS-FFMOWN004: unknown reply close still drains the distinct known request once. */
+  @Test
+  void ffmown004UnknownReplyReleaseDrainsKnownRequestButRetainsBusAndArena() throws Exception {
+    for (Throwable failure :
+        List.of(
+            new IOException("synthetic"),
+            new IllegalStateException("synthetic"),
+            new LinkageError("synthetic"))) {
+      try (var data = Arena.ofConfined();
+          var owned = Arena.ofConfined()) {
+        var literal = new Calls(data);
+        var closes = new ArrayList<String>();
+        LinuxSystemdSession.Calls calls =
+            (symbol, arguments) -> {
+              String closed = "";
+              if (symbol.equals("free") || symbol.endsWith("_unref")) {
+                closed = released(literal, symbol, arguments);
+                closes.add(closed);
+              }
+              Object value = literal.call(symbol, arguments);
+              if (closed.equals("reply")) failWith(failure);
+              return value;
+            };
+        var session = new LinuxSystemdSession(calls, owned);
+        session.start(() -> 5000000);
+        Class<? extends Throwable> expected =
+            failure instanceof IOException ? IOException.class : failure.getClass();
+        Throwable actual = assertThrows(expected, () -> session.owner(4999999));
+        if (!(failure instanceof IOException)) assertSame(failure, actual);
+        assertEquals(List.of("reply", "request"), closes);
+        assertTrue(owned.scope().isAlive());
+        assertThrows(IOException.class, session::close);
+        assertEquals(List.of("reply", "request"), closes);
+        assertFalse(session.closed());
+      }
+    }
+  }
+
+  /** PT-OPS-FFMOWN005: pre-C budget failure has no reply; bad array decode frees known message. */
+  @Test
+  void ffmown005BeforeCallFailureAndArrayDecodeFailureKeepExactOwnership() throws Exception {
+    try (var data = Arena.ofConfined()) {
+      var literal = new Calls(data);
+      var owned = Arena.ofConfined();
+      var failure = new LinkageError("synthetic argument budget");
+      var session = new LinuxSystemdSession(literal, owned);
+      session.start(
+          () -> {
+            if (!literal.events.isEmpty()
+                && literal.events.getLast().equals("sd_bus_message_append_basic")) throw failure;
+            return 5000000;
+          });
+      assertSame(failure, assertThrows(LinkageError.class, () -> session.owner(4999999)));
+      assertFalse(literal.events.contains("sd_bus_call"));
+      assertEquals(1, literal.events.stream().filter("sd_bus_message_unref"::equals).count());
+      session.close();
+      assertTrue(session.closed());
+      assertFalse(owned.scope().isAlive());
+    }
+    try (var data = Arena.ofConfined()) {
+      var literal = new Calls(data);
+      var owned = Arena.ofConfined();
+      var session = new LinuxSystemdSession(literal, owned);
+      session.start(() -> 5000000);
+      session.owner(4999999);
+      literal.arrayLength = 17;
+      assertThrows(
+          IOException.class,
+          () ->
+              session.read(
+                  SystemManagerObservation.Service.API,
+                  SystemManagerObservation.Property.INVOCATION,
+                  4999998));
+      assertEquals(7, literal.events.stream().filter("sd_bus_message_unref"::equals).count());
+      session.close();
+      assertTrue(session.closed());
+      assertFalse(owned.scope().isAlive());
+    }
+  }
+
   static final class Calls implements LinuxSystemdSession.Calls {
     final Arena data;
     final MemorySegment bus, creds, message;
