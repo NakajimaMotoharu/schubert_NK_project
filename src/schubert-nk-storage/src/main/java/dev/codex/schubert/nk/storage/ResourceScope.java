@@ -47,22 +47,25 @@ public final class ResourceScope {
     Objects.requireNonNull(release, "resource release");
     Objects.requireNonNull(action, "resource action");
     @Nullable R resource = acquire.open();
-    if (resource == null) Objects.requireNonNull(resource, "acquired resource");
     try {
       T result;
+      R owned;
       try {
-        result = action.run(resource);
+        owned = Objects.requireNonNull(resource, "acquired resource");
+        result = action.run(owned);
       } catch (IOException | RuntimeException | Error primary) {
-        try {
-          release.close(resource);
-        } catch (IOException | RuntimeException | Error secondary) {
-          if (primary instanceof IOException && !(secondary instanceof IOException))
-            throw secondary;
-          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
+        if (resource != null) {
+          try {
+            release.close(resource);
+          } catch (IOException | RuntimeException | Error secondary) {
+            if (primary instanceof IOException && !(secondary instanceof IOException))
+              throw secondary;
+            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
+          }
         }
         throw primary;
       }
-      release.close(resource);
+      release.close(owned);
       return result;
     } catch (IOException failure) {
       throw new StorageIoException(

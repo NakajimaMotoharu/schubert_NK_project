@@ -7,7 +7,7 @@ import subprocess
 import pg5120_root_elf_selected as selected
 
 ROOT = selected.ROOT
-RUN = ROOT.parent / 'pgpt-runs/PG379/pg5136-factory-io-green-v5'
+RUN = ROOT.parent / 'pgpt-runs/PG379/pg5136-factory-io-green-v6'
 OUT = ROOT / 'evidence/01_PT/003_NK-PRO-003/evidence/provisional/PG5138-factory-bytecode-v1'
 JAVAP = selected.TC / 'jdk-25.0.4/bin/javap'
 
