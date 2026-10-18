@@ -1,0 +1,7 @@
+# NSS・Root取得9境界 PT仕様
+
+NK-OPS-001/FixedServiceIdentity.NativeQuery.read・RootStartupContext.NativeIo.read/queryUnit、SYS002/004・OPS009/UI212251/SS311342343354/SSC308・BUG1414/YKT1178/PG-D430。原NSS4＋Root5（file1/Process4）の九scopeを各取得前三portの共通acquireへ接続。factory E IOException/Runtime/Error/nullと既body IO正規化を混同せず、getterごとの旧nonnull admission順/同資源close err→in→out→ownedProcess・interrupt再設定/元五秒/固定command/環境/読取1025・4097上限/NOFOLLOWを維持する。Rootの通常本経路はsystem-manager readerでありlegacy queryは独立比較fixtureとして保持、任意CLI/ENV/API能力を追加しない。
+
+新NSSOWN001/ROOTQUERYOWN001は各三getter×null/Runtime/Errorで、既取得だけの固定cleanup列=processのみ/stdout→process/stdin→stdout→process・同unknown identity/Process destroy一度を確認。002は各factory IO/Runtime/Error/nullの元identity/NPE・一度取得試行/未取得cleanup0を固定counterで確認。oracleは別fakeのliteralイベント/例外identityで作成、production methodでexpected生成0。既NSS10＋新2、Root18＋新2を当source再検証する。Root actual ordinary hostのread-only proc/固定systemd照会は既fixture契約として実行、原本/VM業務操作ではない。
+
+command `python3 -B tools/quality/pg5380_nss_root_query_selected.py green --group factory`、予定1122invocation133suite（旧選択1100＋既Root18＋新4）、論理1113/既固定反復1method10回、独立92（当群4＋既88）・関連1030。新whole予定3883PT561suite1661Mainは未実行、Root既18をwholeへ二重追加しない。元source/archive/input/実日時・OS/JDK/tool/隔離PG binary/command/owner/exit/XML/static/coverage/hashをprivate保存しallowlist公開。六format先行/NullAway・ErrorProne0/三static0/全storage四100を確認、両対象四counterはmiss含め記録しnative-onlyを100へ加算0。全764Mainのmoduleまたぎ意味二＋限定nested同義・全9port先行/Start.executeとFiles raw factory/Process getter直接methodrefをactual照合。未確認の残Backup7/Systemctl4/Inspector8とreadonly四は未完、旧source/native結果の合算0。

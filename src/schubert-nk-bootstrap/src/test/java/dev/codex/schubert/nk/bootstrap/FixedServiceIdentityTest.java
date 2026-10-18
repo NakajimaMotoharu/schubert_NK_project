@@ -11,6 +11,117 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SERVICEID-001..008; public literal NSS vectors, no production expected generation. */
 final class FixedServiceIdentityTest {
+  /** PT-OPS-NSSOWN001: every getter failure/null closes only already acquired resources. */
+  @Test
+  void nssown001GetterNullRuntimeAndFatalKeepExactPartialCleanupOrder() {
+    for (int at : List.of(1, 2, 3))
+      for (Throwable failure :
+          new Throwable[] {
+            null, new IllegalStateException("synthetic"), new LinkageError("synthetic")
+          }) {
+        var events = new ArrayList<String>();
+        var process =
+            new Fake() {
+              public InputStream getInputStream() {
+                if (at == 1) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getInputStream();
+              }
+
+              public OutputStream getOutputStream() {
+                if (at == 2) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getOutputStream();
+              }
+
+              public InputStream getErrorStream() {
+                if (at == 3) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getErrorStream();
+              }
+
+              public void destroy() {
+                events.add("process");
+                super.destroy();
+              }
+            };
+        process.alive = true;
+        process.out =
+            new ByteArrayInputStream(bytes("PUBLIC\n")) {
+              public void close() {
+                events.add("stdout");
+              }
+            };
+        process.in =
+            new ByteArrayOutputStream() {
+              public void close() {
+                events.add("stdin");
+              }
+            };
+        process.err =
+            new ByteArrayInputStream(new byte[0]) {
+              public void close() {
+                events.add("stderr");
+              }
+            };
+        Class<? extends Throwable> expected =
+            failure == null ? NullPointerException.class : failure.getClass();
+        Throwable actual =
+            assertThrows(
+                expected,
+                () ->
+                    new FixedServiceIdentity.NativeQuery(command -> process)
+                        .read(List.of("fixed")));
+        if (failure != null) assertSame(failure, actual);
+        assertEquals(
+            switch (at) {
+              case 1 -> List.of("process");
+              case 2 -> List.of("stdout", "process");
+              default -> List.of("stdin", "stdout", "process");
+            },
+            events);
+        assertEquals(1, process.destroyed);
+      }
+  }
+
+  private static void throwGetter(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  /** PT-OPS-NSSOWN002: no normalization of the declared acquisition E before scope entry. */
+  @Test
+  void nssown002FactoryIoRuntimeFatalAndNullNeverBecomeAProcessOwner() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IOException("synthetic"),
+          new IllegalStateException("synthetic"),
+          new LinkageError("synthetic"),
+          null
+        }) {
+      int[] opens = {0};
+      var query =
+          new FixedServiceIdentity.NativeQuery(
+              command -> {
+                opens[0]++;
+                if (failure instanceof IOException io) throw io;
+                if (failure != null) throwGetter(failure);
+                return null;
+              });
+      Class<? extends Throwable> expected =
+          failure == null ? NullPointerException.class : failure.getClass();
+      Throwable actual = assertThrows(expected, () -> query.read(List.of("fixed")));
+      if (failure != null) assertSame(failure, actual);
+      assertEquals(1, opens[0]);
+    }
+  }
+
   static byte[] bytes(String s) {
     return s.getBytes(StandardCharsets.US_ASCII);
   }
@@ -278,7 +389,7 @@ final class FixedServiceIdentityTest {
     assertEquals(List.of(2L), copy.groups());
   }
 
-  static final class Fake extends Process {
+  static class Fake extends Process {
     boolean alive, done = true, interrupt;
     int exit, destroyed;
     InputStream out = new ByteArrayInputStream(bytes("PUBLIC\n")),

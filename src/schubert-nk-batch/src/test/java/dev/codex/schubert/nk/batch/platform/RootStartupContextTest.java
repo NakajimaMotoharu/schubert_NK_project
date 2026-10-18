@@ -10,6 +10,118 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
+  /** PT-OPS-ROOTQUERYOWN001: partial getter ownership closes in the old strict order. */
+  @Test
+  void rootqueryown001GetterNullRuntimeAndFatalKeepExactPartialCleanupOrder() {
+    for (int at : List.of(1, 2, 3))
+      for (Throwable failure :
+          new Throwable[] {
+            null, new IllegalStateException("synthetic"), new LinkageError("synthetic")
+          }) {
+        var events = new ArrayList<String>();
+        var process =
+            new FakeProcess() {
+              public InputStream getInputStream() {
+                if (at == 1) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getInputStream();
+              }
+
+              public OutputStream getOutputStream() {
+                if (at == 2) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getOutputStream();
+              }
+
+              public InputStream getErrorStream() {
+                if (at == 3) {
+                  if (failure != null) throwGetter(failure);
+                  return null;
+                }
+                return super.getErrorStream();
+              }
+
+              public void destroy() {
+                events.add("process");
+                super.destroy();
+              }
+            };
+        process.alive = true;
+        process.output =
+            new ByteArrayInputStream(bytes("PUBLIC\n")) {
+              public void close() {
+                events.add("stdout");
+              }
+            };
+        process.input =
+            new ByteArrayOutputStream() {
+              public void close() {
+                events.add("stdin");
+              }
+            };
+        process.error =
+            new ByteArrayInputStream(new byte[0]) {
+              public void close() {
+                events.add("stderr");
+              }
+            };
+        Class<? extends Throwable> expected =
+            failure == null ? NullPointerException.class : failure.getClass();
+        Throwable actual =
+            assertThrows(
+                expected,
+                () ->
+                    new RootStartupContext.NativeIo(command -> process)
+                        .unit(RootStartupContext.Service.API));
+        if (failure != null) assertSame(failure, actual);
+        assertEquals(
+            switch (at) {
+              case 1 -> List.of("process");
+              case 2 -> List.of("stdout", "process");
+              default -> List.of("stdin", "stdout", "process");
+            },
+            events);
+        assertEquals(1, process.destroyed);
+      }
+  }
+
+  private static void throwGetter(Throwable failure) {
+    if (failure instanceof RuntimeException runtime) throw runtime;
+    throw (Error) failure;
+  }
+
+  /** PT-OPS-ROOTQUERYOWN002: factory failures are not body IO, and never yield a held process. */
+  @Test
+  void rootqueryown002FactoryIoRuntimeFatalAndNullNeverBecomeAProcessOwner() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IOException("synthetic"),
+          new IllegalStateException("synthetic"),
+          new LinkageError("synthetic"),
+          null
+        }) {
+      int[] opens = {0};
+      var io =
+          new RootStartupContext.NativeIo(
+              command -> {
+                opens[0]++;
+                if (failure instanceof IOException known) throw known;
+                if (failure != null) throwGetter(failure);
+                return null;
+              });
+      Class<? extends Throwable> expected =
+          failure == null ? NullPointerException.class : failure.getClass();
+      Throwable actual =
+          assertThrows(expected, () -> io.unitDeadline(RootStartupContext.Service.API));
+      if (failure != null) assertSame(failure, actual);
+      assertEquals(1, opens[0]);
+    }
+  }
+
   // ROOTLAUNCH001..006: the fixed other-Root query is authenticated by the same Morning self.
   static class LaunchFixture extends Fixture {
     RootStartupContext.Service target = RootStartupContext.Service.API;
@@ -620,7 +732,7 @@ final class RootStartupContextTest {
     }
   }
 
-  static final class FakeProcess extends Process {
+  static class FakeProcess extends Process {
     boolean alive;
     boolean done = true;
     int exit;

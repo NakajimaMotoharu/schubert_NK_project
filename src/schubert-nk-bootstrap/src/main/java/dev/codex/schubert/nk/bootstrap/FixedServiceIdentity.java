@@ -214,36 +214,33 @@ public final class FixedServiceIdentity {
     }
 
     public byte[] read(List<String> command) throws IOException {
-      Process p = Objects.requireNonNull(start.execute(command), "NSS process");
-      return ResourceScope.use(
-          () -> {
+      return ResourceScope.acquire(
+          () -> start.execute(command),
+          p -> {
             if (p.isAlive()) p.destroy();
           },
-          () -> {
-            var output = Objects.requireNonNull(p.getInputStream(), "NSS stdout");
-            return ResourceScope.use(
-                output::close,
-                () -> {
-                  var input = Objects.requireNonNull(p.getOutputStream(), "NSS stdin");
-                  return ResourceScope.use(
-                      input::close,
-                      () -> {
-                        var error = Objects.requireNonNull(p.getErrorStream(), "NSS stderr");
-                        return ResourceScope.use(
-                            error::close,
-                            () -> {
-                              try {
-                                if (!p.waitFor(5, TimeUnit.SECONDS) || p.exitValue() != 0)
-                                  throw unavailable();
-                              } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw unavailable();
-                              }
-                              return output.readNBytes(1025);
-                            });
-                      });
-                });
-          });
+          p ->
+              ResourceScope.<java.io.InputStream, byte[], IOException>acquire(
+                  p::getInputStream,
+                  java.io.InputStream::close,
+                  output ->
+                      ResourceScope.<java.io.OutputStream, byte[], IOException>acquire(
+                          p::getOutputStream,
+                          java.io.OutputStream::close,
+                          input ->
+                              ResourceScope.<java.io.InputStream, byte[], IOException>acquire(
+                                  p::getErrorStream,
+                                  java.io.InputStream::close,
+                                  error -> {
+                                    try {
+                                      if (!p.waitFor(5, TimeUnit.SECONDS) || p.exitValue() != 0)
+                                        throw unavailable();
+                                    } catch (InterruptedException e) {
+                                      Thread.currentThread().interrupt();
+                                      throw unavailable();
+                                    }
+                                    return output.readNBytes(1025);
+                                  }))));
     }
   }
 }

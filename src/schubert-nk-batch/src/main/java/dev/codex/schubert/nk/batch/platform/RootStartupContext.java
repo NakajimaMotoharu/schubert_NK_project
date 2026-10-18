@@ -560,9 +560,10 @@ public final class RootStartupContext {
     }
 
     private static byte[] read(Path path, int maximum) throws IOException {
-      var input = Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS);
-      return dev.codex.schubert.nk.storage.ResourceScope.use(
-          input::close, () -> input.readNBytes(maximum));
+      return dev.codex.schubert.nk.storage.ResourceScope.acquire(
+          () -> Files.newInputStream(path, LinkOption.NOFOLLOW_LINKS),
+          java.io.InputStream::close,
+          input -> input.readNBytes(maximum));
     }
 
     @Override
@@ -578,8 +579,8 @@ public final class RootStartupContext {
 
     private static byte[] queryUnit(
         SystemctlStateSource.Start start, Service service, String fields) throws IOException {
-      Process process =
-          Objects.requireNonNull(
+      return dev.codex.schubert.nk.storage.ResourceScope.acquire(
+          () ->
               start.execute(
                   List.of(
                       "/usr/bin/systemctl",
@@ -589,39 +590,35 @@ public final class RootStartupContext {
                       "show",
                       "--property=" + fields,
                       service.unit())),
-              "system manager process");
-      return dev.codex.schubert.nk.storage.ResourceScope.use(
-          () -> {
+          process -> {
             if (process.isAlive()) process.destroy();
           },
-          () -> {
-            var stdout = Objects.requireNonNull(process.getInputStream(), "system manager stdout");
-            return dev.codex.schubert.nk.storage.ResourceScope.use(
-                stdout::close,
-                () -> {
-                  var stdin =
-                      Objects.requireNonNull(process.getOutputStream(), "system manager stdin");
-                  return dev.codex.schubert.nk.storage.ResourceScope.use(
-                      stdin::close,
-                      () -> {
-                        var stderr =
-                            Objects.requireNonNull(
-                                process.getErrorStream(), "system manager stderr");
-                        return dev.codex.schubert.nk.storage.ResourceScope.use(
-                            stderr::close,
-                            () -> {
-                              try {
-                                if (!process.waitFor(5, TimeUnit.SECONDS)
-                                    || process.exitValue() != 0) throw unavailable();
-                              } catch (InterruptedException interrupted) {
-                                Thread.currentThread().interrupt();
-                                throw unavailable();
-                              }
-                              return stdout.readNBytes(4097);
-                            });
-                      });
-                });
-          });
+          process ->
+              dev.codex.schubert.nk.storage.ResourceScope
+                  .<java.io.InputStream, byte[], IOException>acquire(
+                      process::getInputStream,
+                      java.io.InputStream::close,
+                      stdout ->
+                          dev.codex.schubert.nk.storage.ResourceScope
+                              .<java.io.OutputStream, byte[], IOException>acquire(
+                                  process::getOutputStream,
+                                  java.io.OutputStream::close,
+                                  stdin ->
+                                      dev.codex.schubert.nk.storage.ResourceScope
+                                          .<java.io.InputStream, byte[], IOException>acquire(
+                                              process::getErrorStream,
+                                              java.io.InputStream::close,
+                                              stderr -> {
+                                                try {
+                                                  if (!process.waitFor(5, TimeUnit.SECONDS)
+                                                      || process.exitValue() != 0)
+                                                    throw unavailable();
+                                                } catch (InterruptedException interrupted) {
+                                                  Thread.currentThread().interrupt();
+                                                  throw unavailable();
+                                                }
+                                                return stdout.readNBytes(4097);
+                                              }))));
     }
   }
 }
