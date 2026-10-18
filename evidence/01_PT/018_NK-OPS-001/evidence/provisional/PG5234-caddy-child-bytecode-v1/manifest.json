@@ -1,0 +1,146 @@
+{
+  "source": "baa200243e1b0aef983c3871e2e3e964aad27101",
+  "actualExit": 0,
+  "physicalMain": 764,
+  "proofs": {
+    "dev.codex.schubert.nk.batch.file.CaddyPublicConfiguration": {
+      "module": "batch",
+      "scopes": [
+        {
+          "method": "private static byte[] read(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, boolean) throws java.io.IOException;",
+          "acquirePc": 83,
+          "portPcs": [
+            64,
+            69,
+            78
+          ]
+        },
+        {
+          "method": "private static byte[] walk(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, boolean, java.util.List<dev.codex.schubert.nk.storage.OwnedTransferDirectory>, java.util.List<java.lang.String>, int) throws java.io.IOException;",
+          "acquirePc": 102,
+          "portPcs": [
+            77,
+            82,
+            97
+          ]
+        },
+        {
+          "method": "private static byte[] lambda$walk$3(dev.codex.schubert.nk.storage.LinuxInodeSecurity, boolean, dev.codex.schubert.nk.bootstrap.FixedServiceIdentity$Value, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;",
+          "acquirePc": 40,
+          "portPcs": [
+            25,
+            30,
+            35
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$read$0(dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.open:",
+          "directReturnPcs": [
+            5
+          ]
+        },
+        {
+          "method": "private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$walk$1(dev.codex.schubert.nk.storage.OwnedTransferDirectory, java.util.List, int) throws dev.codex.schubert.nk.storage.StorageIoException;",
+          "acquisition": "OwnedTransferDirectory.openExistingChild:",
+          "directReturnPcs": [
+            14
+          ]
+        },
+        {
+          "method": "private static java.io.InputStream lambda$walk$4(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "Files.newInputStream:",
+          "directReturnPcs": [
+            8
+          ]
+        }
+      ],
+      "classSha256": "c7ac7d93864941f86f64026a2df9b0e989e66fb53885f394e3045b8657a029a7",
+      "javapSha256": "6436707d332510a20c88386adfd947e41e23a2654c666b281230a3885f463e45"
+    },
+    "dev.codex.schubert.nk.bootstrap.ChildStartupContext$NativeIo": {
+      "module": "bootstrap",
+      "scopes": [
+        {
+          "method": "private static byte[] read(java.nio.file.Path, int) throws java.io.IOException;",
+          "acquirePc": 17,
+          "portPcs": [
+            1,
+            6,
+            12
+          ]
+        }
+      ],
+      "factories": [
+        {
+          "method": "private static java.io.InputStream lambda$read$0(java.nio.file.Path) throws java.io.IOException;",
+          "acquisition": "Files.newInputStream:",
+          "directReturnPcs": [
+            14
+          ]
+        }
+      ],
+      "classSha256": "c9cf001bed2d10c8702f3e1fd2fd832e790d27d045e2dd704aa7ea00d21fb77f",
+      "javapSha256": "c559e171864d04a145ad34fbaefe8bfe273cb50c093fc539997342537280b343"
+    }
+  },
+  "selectedManifestSha256": "a9fde771b06285c6bbf0de2d584662bee4d39d97bf0ccea4549d47a69692a4db",
+  "semanticClasses": 2,
+  "directoryFactories": 2,
+  "rawStreamFactories": 2,
+  "otherPhysicalClassesUnchanged": 762,
+  "targetClassCounters": {
+    "dev.codex.schubert.nk.batch.file.CaddyPublicConfiguration": {
+      "BRANCH": {
+        "missed": 78,
+        "covered": 22
+      },
+      "LINE": {
+        "missed": 109,
+        "covered": 24
+      },
+      "METHOD": {
+        "missed": 21,
+        "covered": 2
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev.codex.schubert.nk.bootstrap.ChildStartupContext$NativeIo": {
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 24
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 18
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "bugs": [
+    "BUG1414"
+  ],
+  "ykt": [
+    "YKT1178"
+  ],
+  "ssc": [
+    "SSC308"
+  ],
+  "wholeHorizontalComplete": false,
+  "formalAccepted": false,
+  "nativeImported": false,
+  "vmActions": 0,
+  "testReplays": 0
+}
