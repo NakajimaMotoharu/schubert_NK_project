@@ -1,8 +1,10 @@
 # Startup ViewOwnerのprimitive登録・全逆順drain
 
+BUG1432/YKT1196是正追補：最初のsource673/PG5240-v1は829PT全成功/Owner四100でもSpotBugs RuntimeException汎用throw1で不合格として保持。固定4.10.4 ThrowingExceptions.sawOpcode実bytecodeはATHROW時の型がRuntimeExceptionであることを検出する。汎用Throwable scratch/castへ型を失わず、closeのnative catch内に元Runtime/Error union primaryを保つ非再帰三phase（first/known/drain）へ内部是正する。secondary scratchは取得前確保boolean bitmapとし、後続unknownは全native試行後だけ固定suppressedへ変換する。全64golden/既期待・identity/Reason/順序は変更0、synthetic method移動・sneaky throw・抑制/除外を使わない。修正sourceはpg5248→pg5250実bytecode→pg5252公開→pg5254分類で新規資格し、旧pg5240終了1/829・全counterを0化/転用しない。
+
 WBS-P018-03.02、群1211開始.8/3/8共有pp固定・親03非加算/先行.01未受入/実費・工数null。BUG1414/YKT1178の同原因、SSC308補足SS333/343/354/914はdesign-only **abf662cd3→origin/main19e591804/PR161**、通常CLEAN/MERGEABLE/check無し確認後merge・remote祖先確認済み、実施branch33dfb24a1。PR添付100上限拒否は保全し迂回0、未受入code/tool/evidenceはmainへ混在0。RD/UI/外部/原本/current/Unit/exec前service→host消費/A借用規則の変更なし・新QA不要。
 
-対象StartupAdmissionFile.withView/ViewOwner。owner/primitive int slots/Throwable scratch/全portを初回native前に確保し、容量はruntime段数N＋root1/app1/entry1＝**N+3**。各openはclosed/満杯・必要parent/nameの内部不変条件を取得前に検査し、native有効FD後は非負/既保持duplicateをprimitiveで判定して格納/返却、new/boxing/grow/callback/追加helper呼出しを挟まない。負FDは新所有無し、duplicateは既FDの新所有と見なさず元owner一回のみ。Math容量算定/配列確保の失敗はnative前で資源0。
+対象StartupAdmissionFile.withView/ViewOwner。owner/primitive int slots/secondary失敗bitmap/全portを初回native前に確保し、容量はruntime段数N＋root1/app1/entry1＝**N+3**。各openはclosed/満杯・必要parent/nameの内部不変条件を取得前に検査し、native有効FD後は非負/既保持duplicateをprimitiveで判定して格納/返却、new/boxing/grow/callback/追加helper呼出しを挟まない。負FDは新所有無し、duplicateは既FDの新所有と見なさず元owner一回のみ。Math容量算定/配列確保の失敗はnative前で資源0。
 
 closeは論理consume flagを先に確定して全FDを逆順一度ずつ試行し、drain中のcallback/new/suppressed/例外正規化確保0、事前scratchへ失敗を保持。全試行後だけ既ResourceScopeと同じIO Reason/unknown identity/秘匿suppressedを合成する。単独Storage IOは既suppressed無しのReasonを保持、複合IOはUNAVAILABLE、primary IO＋secondary Runtime/Errorはsecondary優先、他は元primary＋固定Storage IO suppressed。DirectoryCalls.closeは失敗時もFDをconsumeする契約で再試行しない。論理消費/close例外をkernel正常解放やUNKNOWN業務成功へ読替えない。実heapOOMEを誘発/再現したとは扱わない。
 

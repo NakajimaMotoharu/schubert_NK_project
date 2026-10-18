@@ -211,7 +211,7 @@ public final class StartupAdmissionFile {
   static final class ViewOwner {
     private final DirectoryCalls calls;
     private final int[] descriptors;
-    private final @Nullable Throwable[] failures;
+    private final boolean[] secondaryFailures;
     private int count;
     private boolean closed;
 
@@ -219,7 +219,7 @@ public final class StartupAdmissionFile {
       this.calls = Objects.requireNonNull(calls, "view directory calls");
       if (capacity < 1) throw new IllegalArgumentException("positive private view capacity");
       descriptors = new int[capacity];
-      failures = new Throwable[capacity];
+      secondaryFailures = new boolean[capacity];
     }
 
     // SSC308/VIEWFD001-008: guard before native IO, then only primitive work on valid new FD.
@@ -269,38 +269,53 @@ public final class StartupAdmissionFile {
     void close() throws StorageIoException {
       if (closed) return;
       closed = true; // Consume all ownership once, even if a native close reports failure.
-      int failed = 0;
       for (int index = count - 1; index >= 0; index--) {
         try {
           calls.close(descriptors[index]);
-        } catch (StorageIoException | RuntimeException | Error failure) {
-          failures[failed++] = failure;
+        } catch (StorageIoException known) {
+          throw closeAfterKnown(index - 1, known);
+        } catch (RuntimeException | Error primary) {
+          drain(index - 1);
+          appendSecondary(primary);
+          throw primary;
         }
       }
-      // No allocation/exception aggregation precedes completion of every native close attempt.
-      if (failed == 0) return;
-      Throwable primary = firstFailure(Objects.requireNonNull(failures[0]));
-      for (int index = 1; index < failed; index++) {
-        Throwable secondary = Objects.requireNonNull(failures[index]);
-        if (primary instanceof StorageIoException && !(secondary instanceof StorageIoException)) {
-          primary = secondary;
-        } else {
-          primary.addSuppressed(unavailable());
-          if (primary instanceof StorageIoException) primary = unavailable();
-        }
-      }
-      if (primary instanceof StorageIoException known) throw known;
-      if (primary instanceof RuntimeException runtime) throw runtime;
-      throw (Error) primary;
     }
 
-    private static Throwable firstFailure(Throwable failure) {
-      if (failure instanceof StorageIoException known)
-        return new StorageIoException(
-            known.getSuppressed().length == 0
-                ? known.reason()
-                : StorageIoException.Reason.UNAVAILABLE);
-      return failure;
+    // Keep the original typed catch alive: the first unknown supersedes prior known IO only.
+    private StorageIoException closeAfterKnown(int remaining, StorageIoException primary) {
+      boolean multiple = false;
+      for (int index = remaining; index >= 0; index--) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException secondary) {
+          multiple = true;
+        } catch (RuntimeException | Error unknown) {
+          drain(index - 1);
+          appendSecondary(unknown);
+          throw unknown;
+        }
+      }
+      // Every FD was attempted before this normalization can allocate or inspect suppression.
+      return new StorageIoException(
+          !multiple && primary.getSuppressed().length == 0
+              ? primary.reason()
+              : StorageIoException.Reason.UNAVAILABLE);
+    }
+
+    private void drain(int remaining) {
+      for (int index = remaining; index >= 0; index--) {
+        try {
+          calls.close(descriptors[index]);
+        } catch (StorageIoException | RuntimeException | Error secondary) {
+          secondaryFailures[index] = true;
+        }
+      }
+    }
+
+    private void appendSecondary(Throwable primary) {
+      for (int index = count - 1; index >= 0; index--)
+        if (secondaryFailures[index]) primary.addSuppressed(unavailable());
     }
   }
 
