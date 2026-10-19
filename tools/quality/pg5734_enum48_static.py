@@ -57,7 +57,7 @@ def main():
     raw=inspect.getsource(previous.main)
     replacements={
       "proof['protocolFour100Qualified']":"proof['selectedQualified']",
-      "(proof['tests'],proof['suites'])==(88,18)":"(proof['tests'],proof['suites'])==(5,5)",
+      "(proof['tests'],proof['suites'])==(88,18)":"(proof['tests'],proof['suites'])==(12,7)",
       "(snapshot if m=='protocol'else old_snapshot)":"snapshot",
       "expected={k:v for k,v in before['allPhysicalMainSha256'].items()if not k.startswith('protocol:')}\n    expected.update({'protocol:'+k:v for k,v in proof['allPhysicalProtocolMainSha256'].items()})":"expected=proof['allPhysicalMainSha256']",
       "if len(changes)!=18 or any(not p.startswith('src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/')for p in changes):raise ValueError('only eighteen declared enum sources changed')":"if set(changes)!=set(RENAMES):raise ValueError('all37 exact enum-only source models')",

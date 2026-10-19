@@ -1,5 +1,7 @@
 # F03残enum21内部命名・独立値catalog仕様
 
+実行追補BUG1479：元5732-v1はNoTests guardで終了1/新五case not-run。POM/guardは維持し、新v2へprotocol独立PayloadGoldenVectorTest三件（SS322/323の64layout固定hash）とWeb HttpByteRangeParserTest四件（SS333の固定interval/境界/null/100parse並行）を必要なreactor契約として追加する。PT_DEFAULT、通信/外部data/サービス無し。全12件/7suite・各六module最低一suiteの一致を要求する。下の当初五caseは新規fixtureの内訳であり全実行期待件数は12へ訂正、元失敗証拠を上書きせず新Main/Test sourceはfe8aと同byte、変更は工具/記録だけ。既成功確認の無根拠反復ではなく当新sourceに必要なreactor限定契約であり、正式/全体へ合算しない。
+
 2026-10-20、BUG1478/YKT1237、WBS-F03主担当（共通費再加算0）。NK-OPS-001/NK-AUT-001/NK-MSG-001/NK-BAT-001/NK-DAT-001、411/451。PG5732/5734のsourceは次clean commit、群1332開始見積.5/2/5pp固定。対象は915 BUG1478の14enum/21private field、先行protocol27と合わせ37enum/48field。外側の実起動/回収/DB/permission/所有コード不変更、SS正本変更無し。
 
 ## 独立oracleとTestID

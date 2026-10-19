@@ -8,13 +8,15 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from pg5540_snapshot_scratch_selected import ROOT,TC,sha,utc,test_names
 
-SLOT='pg5732-enum48-selected-v1'
+SLOT='pg5732-enum48-selected-v2'
 MODULES=('protocol','storage','bootstrap','api','web','batch')
 PACKAGE='dev.codex.schubert.nk.'
 CASES={
+ 'protocol':{'protocol.codec.PayloadGoldenVectorTest'},
  'storage':{'storage.EnumValueCatalogCompatibilityTest'},
  'bootstrap':{'api.file.EnumValueCatalogCompatibilityTest'},
  'api':{'api.security.EnumValueCatalogCompatibilityTest'},
+ 'web':{'web.media.HttpByteRangeParserTest'},
  'batch':{'batch.platform.EnumValueCatalogCompatibilityTest','batch.repository.EnumValueCatalogCompatibilityTest'}}
 TARGETS={
  'storage':['storage/ServiceCredentialId'],
@@ -36,15 +38,17 @@ def main():
         for cls in classes:
             name=PACKAGE+cls;path=snapshot/('src/schubert-nk-'+module+'/src/test/java')/(name.replace('.','/')+'.java')
             names=test_names(path)
-            if len(names)!=1:raise ValueError('one explicit finite catalog case per fixture')
+            count=3 if module=='protocol'else 4 if module=='web'else 1
+            if len(names)!=count:raise ValueError('explicit independent catalog/dependency cases')
             expected[name]=names
+    if set(CASES)!=set(MODULES)or sum(map(len,expected.values()))!=12 or len(expected)!=7:raise ValueError('all six module NoTests guards retained')
     inputs={p.relative_to(snapshot).as_posix():sha(p)for p in snapshot.rglob('*')if p.is_file()}
     env={k:v for k,v in os.environ.items()if k not in('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','_JAVA_OPTIONS','CLASSPATH')}
     env.update(JAVA_HOME=str(TC/'jdk-25.0.4'),PATH=str(TC/'jdk-25.0.4/bin')+os.pathsep+os.environ['PATH'],MAVEN_OPTS='-Xmx768m -Djava.io.tmpdir='+str(out))
     base=[str(TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'),'-B','-o','-ntp','-Dmaven.repo.local='+str(TC/'m2/repository'),'-pl',','.join('src/schubert-nk-'+m for m in MODULES)]
     commands=[base+['spotless:check'],base+['-Dtest='+','.join(sorted(expected)),'-Dsurefire.failIfNoSpecifiedTests=false','package','org.jacoco:jacoco-maven-plugin:0.8.15:report','com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']]
     started=utc()
-    with(out/'begin.safe.json').open('x')as f:json.dump({'source':head,'archiveSha256':sha(archive),'startedUTC':started,'commands':commands,'expected':{k:sorted(v)for k,v in expected.items()},'expectedTests':5,'vmActions':0,'replayAllowed':False},f,sort_keys=True)
+    with(out/'begin.safe.json').open('x')as f:json.dump({'source':head,'archiveSha256':sha(archive),'startedUTC':started,'commands':commands,'expected':{k:sorted(v)for k,v in expected.items()},'expectedTests':12,'vmActions':0,'replayAllowed':False},f,sort_keys=True)
     exits=[]
     for i,command in enumerate(commands,1):
         with(out/f'phase-{i}.private.log').open('xb')as f:
