@@ -6,6 +6,10 @@ import pg5568_monitor_bytecode as entry
 
 
 class ActualPrivateMonitor(unittest.TestCase):
+    def test_each_source_profile_is_fixed_to_original_case_scope_and_hash(self):
+        self.assertEqual(entry.PROFILES['v2'],(71,'27d1b35269b9a4e8848100565e7d6b901f425cd599805c6afe1031dc874ced50'))
+        self.assertEqual(entry.PROFILES['v3'],(73,'9eef40acd5388ebf53737907bb5d664cf60a38430894de07a4a56df31896ca73'))
+
     def test_actual_six_role_paths_are_bom_bound_before_any_output(self):
         jars=entry.release_jars(entry.W/'pg5430-release-v1')
         self.assertEqual(set(jars),{'api','web','batch','bootstrap','protocol','storage'})

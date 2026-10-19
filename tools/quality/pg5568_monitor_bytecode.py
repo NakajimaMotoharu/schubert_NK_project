@@ -1,5 +1,6 @@
 """Actual selected bytes: fourteen private monitors, acquisition order, all debug differences."""
 import hashlib
+import argparse
 import json
 import os
 from pathlib import Path
@@ -12,6 +13,8 @@ import pg5566_private_monitor_selected as selection
 ROOT=selection.ROOT
 W=ROOT.parent/'pgpt-runs/PG379'
 SLOT='pg5568-monitor-bytecode-v2'
+PROFILES={'v2':(71,'27d1b35269b9a4e8848100565e7d6b901f425cd599805c6afe1031dc874ced50'),
+    'v3':(73,'9eef40acd5388ebf53737907bb5d664cf60a38430894de07a4a56df31896ca73')}
 JARS={'api':'api/api.jar','web':'web/web.jar','batch':'operations/batch.jar',
     **{m:'api/lib/schubert-nk-'+m+'-0.1.0-SNAPSHOT.jar'for m in('protocol','storage','bootstrap')}}
 METHODS={
@@ -87,9 +90,13 @@ def lexical_private_locks(baseline):
 
 
 def main():
-    selected=W/'pg5566-private-monitor-green-v2/manifest.safe.json';raw=selected.read_bytes();proof=json.loads(raw)
-    if not(proof['actualExit']==0 and proof['greenSelectedQualified']and proof['actualCases']==71 and proof['sourceFixed']
-        and proof['physicalMain']['count']==1664 and len(proof['physicalMain']['sha256'])==1664):raise ValueError('genuine fixed71 green/all1664 first, never partial41')
+    parser=argparse.ArgumentParser();parser.add_argument('--version',choices=tuple(PROFILES),default='v2');args=parser.parse_args()
+    expected_cases,receipt=PROFILES[args.version]
+    selected=W/('pg5566-private-monitor-green-'+args.version)/'manifest.safe.json';raw=selected.read_bytes();proof=json.loads(raw)
+    if sha(raw)!=receipt:raise ValueError('fixed original selected profile hash')
+    if not(proof['actualExit']==0 and proof['greenSelectedQualified']and proof['actualCases']==expected_cases and proof['sourceFixed']
+        and proof['physicalMain']['count']==1664 and len(proof['physicalMain']['sha256'])==1664):raise ValueError('genuine selected profile/all1664 first, never partial41')
+    if args.version=='v3'and proof.get('scopeIncludesRuntimeCanary')is not True:raise ValueError('new runtime oracle negatives are mandatory')
     source=proof['sourceSnapshot']
     if subprocess.check_output(['git','diff',source,'--','src','pom.xml','.mvn','program/characterization'],cwd=ROOT):raise ValueError('same fixed source before proof')
     baseline=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5550-current3900-cases/qualification.json';prior=json.loads(baseline.read_bytes())
@@ -101,7 +108,7 @@ def main():
         with zipfile.ZipFile(jars[module])as z:blob=z.read(entry)
         if sha(blob)!=prior['allPhysicalMainSha256'][key]:raise ValueError('each actual old class must equal a19 before any output')
         originals[key]=blob
-    out=W/SLOT;os.umask(0o077);out.mkdir(mode=0o700);classes=out/'toolclasses';classes.mkdir()
+    out=W/('pg5568-monitor-bytecode-'+args.version);os.umask(0o077);out.mkdir(mode=0o700);classes=out/'toolclasses';classes.mkdir()
     helper=Path(__file__).with_name('MonitorDebugCanonical.java')
     subprocess.run([str(selection.TC/'jdk-25.0.4/bin/javac'),'--release','25','-Xlint:all','-Werror','-d',str(classes),str(helper)],check=True)
     comparisons=[];decoded={}
@@ -132,7 +139,7 @@ def main():
         acquire[name]=allocation_before_native(bytecode.one([m for m in decoded[key]if bytecode.named(m,method)],'one actual native owner entry'),name.startswith('Backup'))
     original=json.loads((ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5560-snapshot-static-findings-v1/manifest.json').read_bytes())
     rows,fields=lexical_private_locks(original)
-    value={'actualExit':0,'sourceSnapshot':source,'selectedManifestSha256':sha(raw),'actualSelectedCases':71,'allPhysicalMain':1664,
+    value={'actualExit':0,'sourceSnapshot':source,'selectedManifestSha256':sha(raw),'actualSelectedCases':expected_cases,'allPhysicalMain':1664,
         'allPhysicalDifferenceClassifications':comparisons,'privateMonitorMethods':monitors,'lockBeforeNativeAcquisition':acquire,
         'existingStatementRows':rows,'existingPrivateLockFields':fields,'existingStatementSourceHashesUnchanged':True,
         'pmdPerformanceDispositionPending':True,'debugStrippingAnalysisOnly':True,'rawMainOrNativeCrcRewritten':False,
