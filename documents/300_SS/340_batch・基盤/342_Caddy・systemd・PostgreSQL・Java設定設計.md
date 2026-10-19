@@ -455,3 +455,7 @@ Minor/patch導入時は必ず導入versionの公式資料とconfig validatorで�
 | 2026-09-01 | QA-041/UIC-001承認を反映し、Artemis再配送設定と実効delayを1秒、5秒、25秒へ確定。 |
 | 2026-09-01 | QA-042/UIC-002承認を反映し、Artemisのmemory high-water、disk paging、page/disk full設定をrelease値へ確定。 |
 | 2026-09-01 | QA-043/UIC-003承認を反映し、`schubert_backup`のtimeout/hbaとbatchとの権限分離をrelease値へ確定。 |
+
+## SSC309 same-PID exec世代の一時状態
+
+世代専用の再照合はLinux非leader exec切替中のstat Zを同PID/startTicksの未終端確認として保持する。Z単体から生存/ready/終了を発行しない。self/PID1/初回Root捕捉のstate制限は不変更。boot/Unit/Invocation/cgroup/ticksは従来どおり二読一致、X/x/未知/不正/再利用は拒否。ordinaryのUID/GID/groups/caps/NNP・cmdline・所有socket・実HTTP200 UP/infoの前後照合を必須にし、true zombie/未readyは元期限内のpending、期限延長/再起動/UNKNOWN正常化なし。SS343/354・SSC164/BUG1470/YKT1233に横断追跡する。
