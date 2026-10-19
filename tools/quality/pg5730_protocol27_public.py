@@ -7,7 +7,7 @@ from pg5728_protocol27 import SLOT as PROTOCOL
 def main():
     raw=inspect.getsource(previous.main)
     replacements={
-      'PG5726-enum-static-v1':'PG5729-protocol27-static-v1',
+      'PG5726-enum-static-v1':'PG5729-protocol27-static-v2',
       'target18StaticAndAbiQualified':'target27StaticAndAbiQualified',
       'PG5727-protocol88-enum18':'PG5730-protocol88-enum27',
       '1181_semantic_enum内部命名是正・互換単体テスト仕様.md':'1183_protocol残九field是正・通常PT仕様.md',

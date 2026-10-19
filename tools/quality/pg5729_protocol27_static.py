@@ -6,7 +6,7 @@ import re
 import pg5726_enum_static_abi as previous
 from pg5728_protocol27 import SLOT as PROTOCOL
 
-SLOT='pg5729-protocol27-static-v1'
+SLOT='pg5729-protocol27-static-v2'
 ROOT=previous.ROOT
 PREFIX='src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/'
 BROKER=PREFIX+'transport/BrokerTopology.java'
@@ -53,6 +53,7 @@ def renamed_source(path,raw):
 
 def normalize_contract(text):
     text=re.sub(r'\b(?:'+ '|'.join(REVERSE)+r')\b',lambda m:REVERSE[m[0]],text)
+    text=re.sub(r'#\d+[ \t]+(?=//)','<cp> ',text)
     return re.sub(r'#\d+','<cp>',text)
 
 
@@ -67,7 +68,7 @@ def main():
     raw=raw.replace("if old.count('private final String wireValue;')!=1 or new!=required:","if new!=required:",1)
     raw=raw.replace("normalize=lambda text:re.sub(r'#\\d+','<cp>',text.replace('encodedValue','wireValue'))",'normalize=normalize_contract',1)
     raw=raw.replace("'privateTokenEdits':3","'renamedPrivateFields':len(RENAMES[path])",1)
-    raw=raw.replace('target18StaticAndAbiQualified','target27StaticAndAbiQualified').replace('PG5726-enum-static-v1','PG5729-protocol27-static-v1')
+    raw=raw.replace('target18StaticAndAbiQualified','target27StaticAndAbiQualified').replace('PG5726-enum-static-v1','PG5729-protocol27-static-v2')
     ns={**vars(previous),'SLOT':SLOT,'PROTOCOL':PROTOCOL,'RENAMES':renames,'renamed_source':renamed_source,'normalize_contract':normalize_contract}
     exec(compile(raw,'<same reviewed static-only runner/new27 private names>','exec'),ns)
     return ns['main']()
