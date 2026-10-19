@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-010 — PT_DEFAULT：統合sourceの必要host全3932
+
+1193/群1341/1342/PG5754、source9463。元6db/全3908の成功はscope/副作用分類の根拠だけで新source PASSへ転用しない。原test/resources/POMは不変更、新18file/24caseは既点検済みの有限pure fixtureのみ。従来のpinned mini専用hostとMaven/自己temporary PostgreSQL/Node/ShellCheckで通常全PT、VM/実業務DB/サービス・配備・failed-cohort/intent/permit操作0。発行前host一致job無し/headroom/未使用namespace/source/hashを確認し一回だけ。生成server/transfer driverを読取・二固定生成check0、拒否の探査/代替試験ではない。旧未知拒否の安全条件をこの判定で充足したとはしない。
+
 ## PTPRE-009 — PT_DEFAULT：例外16のconstructor値/null境界
 
 1191/PG-D439/BUG1482/1483、各package ExceptionValueContractTest十三methodと固定依存四、全17/13。入力enum/合成message/cause/数値のみ、例外を構築して値を検査するだけで、例外の名称に含むJMS/crypto/stop/login/session処理を呼ばない。実serialize/deserialize/DB/network/鍵/権限/VM/Unit/回収0。Test-only redでJMS二null拒否の予定失敗を元Main同byteで保存し、狭いPG後の別greenへ進む。Java serialized schema非対応境界はPG-D439で明示、generic renamer guard不変更・拒否操作再試行とは無関係。代替確認や正常PASSへredを算入しない。
