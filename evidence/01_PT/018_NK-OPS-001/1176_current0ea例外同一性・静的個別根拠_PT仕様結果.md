@@ -1,0 +1,11 @@
+# current0ea 例外同一性・静的個別根拠 PT仕様／結果
+
+WBS-F03/451/SS342資源例外・元1647診断、群1318着手前.25/.75/2pp。Main/Test/source0ea/全3905・563/1664と実Rootを変更せず、PMD CompareObjectsWithEqualsのうちThrowable自己suppression回避だけを個別確認する。Thread/request/値比較への一括免除、rawrule抑制、coverage除外0。
+
+5689元80778 actual0/typedfacts **21a9d5a8c8e01e9aca8429e1487a87a9de21cf2f3fb00c7cf44e15540f332b1e**。全849source/全1664actualclass・固定thirdparty/compile-only依存を前後照合、SourceSuppressionIdentityInventoryをJDK25 lint全0でcompile。独立JDK fixtureは同一ThrowableのaddSuppressedがIllegalArgumentException、別identityだがequals=trueの二Throwableでは本来のsuppressedが保存されることを確認。compilerは同じ二operandのThrowable subtype・直接guardされたaddSuppressed・no再代入/fieldmutation/lambdaescapeの厳密30siteを出力した。型情報だけで全指摘を合格化0。
+
+5690は既current1647 review182ec34e・元3905全cases/全1664実classへ、各path/行/column/sourceSHAとtyped30を一意join。PMDend-columnはexclusive、probeはend-1 inclusiveであることを明示し、最後column+1だけ正規化（範囲拡大/部分一致0）。各owningclass実byteと当3905原XMLを添付。OutboxJmsSenderはOutboxDispatcherTest/OwnedOutboxDispatcherTest、LocalLogoutHandlerはLogoutControllerTestが直接consumer試験（srcに実呼出し/同一例外fixtureあり）、他は同名Test。JDK identity契約に不可欠な30だけREQUIRED_CONTRACT、残35比較は未確認のまま。
+
+pure四成功（元82677）: 30/65だけ・未処理Thread/request維持、入力不変/原警告全1647保持、foreignsource/bool0/old3896/1650/失敗whole/不明helper・fixture・actualclass改ざん拒否、重複/未知kind/一column変化/sourceSHA改ざん拒否、元owningcase失敗拒否/static0。初期TDDのinclusive/exclusive差一は構築中に是正、実VM/PMD/Production失敗と混同0。
+
+実公開 **PG5690-current-identity-review-v1/manifest.json SHA7d318fea2b0cdddaf7af4de85aaf6453356689ab0b06d42e9d7dcaa24ee4c53e**。context260/FP4/required116＝個別根拠380（前350＋30）、field64判断待ち/style1/未review1202。PMD生1647/processing0/Checkstyle0は変更0。**F03全体未受入**、30/1647を工程率としない。元3905・署名・VM成功の確認再演0、原/v3/v4未較正597.25・工数/N-T/専有費null、正式1964/53・QA051finalと全後続品質条件は維持。
