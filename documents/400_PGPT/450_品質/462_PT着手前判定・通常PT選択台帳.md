@@ -1,0 +1,55 @@
+# PT着手前判定・通常PT選択台帳
+
+2026-10-20、477/478の現行補足に従う書面上の事前分類。PTPRE-001から連番で管理する。`PT_DEFAULT`は通常PTを選ぶ判定であり、この記録だけで試験・PG・遠隔操作を発行しない。`REVIEW_STATIC`は特定済み拒否PT又は具体的危険動作の最小範囲だけ、対象/安全条件不明は`HOLD_SCOPE_UNRESOLVED`。非公開分類器の予測・通過保証・境界探索はしない。
+
+## 判定基点と既存実績
+
+HEAD **a1b525ff7**、dev-foundation。915/916の既存dirtyのみ（7add/1delete、1add/1delete）を保全、src dirty0。候補Main/Test実績source **6b6db7df47486a7e48eed6620c8f95bc38175933**、先行実装9ab2ac0a3と同byteのsemantic十八是正。残protocol九fieldはBUG1476/群1328の**予定だけ**で未実装、新source未固定/null。
+
+公開PG5727 `evidence/01_PT/001_NK-PRO-001/evidence/provisional/PG5727-protocol88-enum18/manifest.json` SHA256 **61b5c26bf8393d1d3ce0cb14dc554438722e9311fb0a930566f0d2f07d40a09d** を元記録と照合：88件/18suite/FES等0、実物理Main174、型null/SpotBugs0、line3468/3468・method741/741・class157/157・branch1010/1010。当sourceの通常実行PTであり、再実行や代替確認へ重複加算しない。PG5726既公開static/ABI SHA **bbe8a746058ecf28ede7392255d5b60822168aa7fd9f62d4739c4fb4a835f9a9**、raw1629/PMD4/処理error0/CS0、F03未受入。
+
+今回確認したwrapper `tools/quality/pg5724_semantic_enum_protocol.py` SHA **c3e6526ad3b47860c411982a5eafa2c0aab6613f0c105cf77de4aa554bd5ec10** はgit archive→私有snapshot→protocol限定format→package/PT→coverage→SpotBugs。PTを暗黙に行うので「静的checkだけ」と呼ばない。既SLOT-v2は実行済み/new-onlyのため再利用不可。将来は新sourceと未使用namespaceを先に固定する。以下は計画commandであり今回実行しない。
+
+共通予定入口（固定snapshotのrootで）：JDK25.0.4、既Maven3.9.12、`mvn -B -o -ntp -Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository -pl src/schubert-nk-protocol …`。offline固定・protocolだけ、characterizationはroot reactor読込用にarchiveへ含めるが実行対象にしない。作業先は自己所有の未使用snapshot/targetだけ、通常user権限。既service/DB/credential/VM/配備/他者processへの操作は不要。
+
+## PTPRE-001 — PT_DEFAULT：純粋enum serialization互換
+
+- TestID：PT-PRO-F03-ENUM001/002、EnumWireCompatibilityTest二method。SS323/333/354・1181、WBS-F03主担当/P001-03参照費0。
+- source：上記6b6db7df4を基点。現test source SHA **889acf4e3f4ae3bf62e2481617b287b9abddd8c0ea14d364e38dd4ec3762a139**。将来のenum対象拡張時は新hash/fixtureを再確認する。
+- fixture：独立固定enum stream（クラス名/UID0/flags12/定数名がliteral）、明示enum型のserial descriptor。メモリ内ByteArray/Input/OutputStreamだけ、入力は固定合成byteで外部取得/任意class payloadではない。
+- 予定command：共通入口＋`-Dtest=dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest test`。
+- 権限/副作用：通常user、自己所有Maven/JVM子・targetの生成だけ、streamはtry-with-resourcesで閉じる。通信先なし。権限変更/認証回避/実credential/外部deserialize/永続化なし。
+- 依存：PG差分/独立vectorの確定と新source/snapshot。失敗cohort・permit・VM livenessには依存しない。
+- 判定根拠：既承認の名前/codec/互換性を固定fixtureで照合する通常単体試験。`serialization`という語だけで危険扱いしない。将来の通常PT候補として具体化済みだが、今回の実行許可やPASSを付与しない。
+
+## PTPRE-002 — PT_DEFAULT：header/file/topology値catalog
+
+- 対象：HeaderModelTest、BrokerTopologyTest、ProtocolSemanticTypeTest。SS321/323/333・既独立header/enum table/PT-PRO-001-T04、BUG1476予定九field、WBS-F03主/P001-01参照費0。
+- source：予定九fieldの新PGは未実装・新hash未固定。既6b6db7df4の成功を将来sourceへ流用しない。
+- fixture：固定header byte、明示enum constant/順序/値、address/queue/TTL/body-lengthのSS321 literal、null/未知値。BrokerTopologyはJMS classを持たない値catalogでありbroker接続・権限変更をしない。
+- 予定command：共通入口＋`-Dtest=dev.codex.schubert.nk.protocol.header.HeaderModelTest,dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest,dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest test`。
+- 権限/副作用：上記ローカルtarget/JVMだけ、ネットワーク/DB/サービス/Artemis起動なし。依存は新PG/fixture/source固定と通常build条件のみ。
+- 判定：通常PTを優先できる。名称にArtemis/headerがあっても具体的な危険操作は含まれず、レビュー代替へ一括変更しない。新source未固定なので**着手準備未了**、ここで実行しない。
+
+## PTPRE-003 — PT_DEFAULT：codec正常・境界・null・異常入力
+
+- 対象小群：FieldCodecTest、MessageCodecTest、PayloadGoldenVectorTest、LargeResultRecordCodecTest、AuthenticationErrorProfileTest。NK-PRO-001/SS322/323/354、WBS-P001-01/02/03の消費側固有契約（共通費の再加算なし）。
+- source：6b6db7df4を現在基点、変化時に再判定。fixtureは限定byte配列、固定長offset/length/padding/NFC/未知code/欠落/null。AuthenticationErrorProfileは防御側の固定エラー電文変換で、実ログイン・credential取得・認証回避を行わない。
+- 予定command：共通入口＋`-Dtest=FieldCodecTest,MessageCodecTest,PayloadGoldenVectorTest,LargeResultRecordCodecTest,AuthenticationErrorProfileTest test`。
+- 権限/副作用/依存：通常ローカルJVMと自己targetのみ、通信先なし。新source/固定golden/入力上限を確認してから通常PT。wrapper/command/source/対象が変われば再判定。
+- 判定：通常null/境界/例外試験をsecurityという語だけで除外しない。既成功の再確認だけを目的とする再実行は不要、source変更時の必要範囲だけ選ぶ。
+
+## PTPRE-004 — REVIEW_STATIC：現時点の対象0
+
+今回得られた拒否metadataは具体的PTを識別しないため、代替へ切替できる特定PTは0。三つの通常PT小群を危険候補へ広げない。新たに具体的な拒否又は危険動作が特定された時だけ、その最小TestID/操作/根拠を461へ追加し、PG強化レビューと許可静的checkを対応付ける。分類器を探る試行はしない。現時点の代替確認完了・代替受入は0。
+
+## PTPRE-005 — HOLD_SCOPE_UNRESOLVED：二つの停止turnと実操作前提
+
+- PTALT-001：停止turn01a1544d-c46a-7680-b0ce-572a1720aeac。
+- PTALT-002：停止turn01a15632-7dab-76c1-a091-627130e6777b。保存errorは対象のないcybersecurity flag、最後の1328記録command終了0。両turnとも拒否TestID/具体操作は未特定/null。成功済protocol88/元3908や終了0の記録を拒否PTと断定しない。
+- 旧失敗cohort回収・intent/permit退役取消・現在所有不明のVM/サービス/配備操作及び同じ検証は保留。予定commandは発行しない。権限・副作用・現在依存が不明なので、通常PT/代替確認に読み替えない。
+- 根拠：現在source/所有/DB/原値/lockの必要安全条件は未再認証で、書面レビューはその代替にならない。拒否操作の再送・言換え・分割・別モデル/経路は禁止。不明を0や成功で埋めない。
+
+## 今回の限定作業の境界
+
+新PG・新試験・静的check実行・遠隔接続・VM/process操作は0。公開既存証跡と予定wrapperの非秘密ソース/工程資料だけを読み、分類と記録を行った。PG省略やPGPT全完了/利用者の全体停止とは扱わない。将来の通常PTに移るには新source/実command/fixture/未使用namespaceを固定し、今回の限定指令から実行へ自動拡張しない。再拒否は再試行せず保全・報告する。
