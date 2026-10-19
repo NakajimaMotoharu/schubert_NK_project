@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-008 — PT_DEFAULT：Revocation codecの固定合成vector七件
+
+1189/BUG1481/PG5742、既七RERUN003a～gと必要reactor八の全15case/7suite。固定public合成鍵/contextと独立JCA/length-prefix/有限100thread、実credential/外部cryptogram/認証/通信/DB/VM/Unit/回収無し。provider不在negativeは自己所有test JVM内だけのSunJCE一時remove→finally同位置restore、OS/provider設定fileや別processを変更しない。変更は冗長String null比較一箇所、鍵選択契約/erase不変。command/環境が変われば再判定、既成功や拒否代替へ重複計上0。
+
 ## PTPRE-007 — PT_DEFAULT：Web監査sinkの有限故障契約
 
 1187/群1334、四つのWebAuditSinkContractTest。メモリLogger/固定clock/合成byte/DB-openを禁止するDataSource spyのみ、外部DBfixture/@BeforeAllを起動せず、実暗号通信・server・native/Unit/VM/失敗cohort0。PG5738は通常六modulecompile/型null/静的と明示12case/7suite、Web四caseが既Range四を置換する。同Mainなので既静的hash/全class一致後だけraw1599当spanを再束縛し全PMDの反復実行を避ける。未知拒否や実資源所有の証明に用いず、代替確認へ混ぜない。

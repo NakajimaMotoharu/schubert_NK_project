@@ -140,7 +140,7 @@ public final class RevocationPayloadCodec implements AutoCloseable {
 
   private byte[] selectKey(String version) {
     if (version.equals(currentVersion)) return currentKey;
-    if (previousVersion != null && version.equals(previousVersion))
+    if (version.equals(previousVersion))
       return Objects.requireNonNull(previousKey, "paired previous revocation key");
     throw new RevocationPayloadException(RevocationPayloadException.Reason.KEY_UNAVAILABLE);
   }
