@@ -10,14 +10,14 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class CleanupStoppedException extends RuntimeException {
   private static final long serialVersionUID = 1L;
-  private final CleanupStopReason reason;
+  private final CleanupStopReason failureReason;
 
   public CleanupStoppedException(CleanupStopReason reason) {
     super("cleanup did not complete");
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public CleanupStopReason reason() {
-    return reason;
+    return failureReason;
   }
 }

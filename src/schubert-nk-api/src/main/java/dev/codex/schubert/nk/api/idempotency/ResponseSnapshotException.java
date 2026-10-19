@@ -16,19 +16,19 @@ public final class ResponseSnapshotException extends RuntimeException {
     CRYPTO_UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   ResponseSnapshotException(Reason reason, String message) {
     super(message);
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   ResponseSnapshotException(Reason reason, String message, Throwable cause) {
     super(message, cause);
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

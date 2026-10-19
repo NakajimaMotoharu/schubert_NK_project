@@ -8,16 +8,16 @@ import org.springframework.security.authentication.LockedException;
  */
 public final class MqLoginLockedException extends LockedException {
   private static final long serialVersionUID = 1L;
-  private final int retryAfterSeconds;
+  private final int lockDelaySeconds;
 
   public MqLoginLockedException(int retryAfterSeconds) {
     super("login temporarily locked");
     if (retryAfterSeconds < 0 || retryAfterSeconds > 900)
       throw new IllegalArgumentException("login lock delay is outside 0..900");
-    this.retryAfterSeconds = retryAfterSeconds;
+    this.lockDelaySeconds = retryAfterSeconds;
   }
 
   public int retryAfterSeconds() {
-    return retryAfterSeconds;
+    return lockDelaySeconds;
   }
 }

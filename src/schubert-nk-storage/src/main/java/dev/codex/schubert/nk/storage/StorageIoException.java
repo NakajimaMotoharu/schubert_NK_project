@@ -13,14 +13,14 @@ public final class StorageIoException extends IOException {
     UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   public StorageIoException(Reason reason) {
     super("transfer storage operation failed");
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

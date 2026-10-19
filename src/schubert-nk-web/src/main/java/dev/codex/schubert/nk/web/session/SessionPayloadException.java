@@ -16,14 +16,14 @@ public final class SessionPayloadException extends RuntimeException {
     CRYPTO_UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   SessionPayloadException(Reason reason) {
     super("session encrypted payload rejected: " + Objects.requireNonNull(reason, "reason"));
-    this.reason = reason;
+    this.failureReason = reason;
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

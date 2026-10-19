@@ -12,14 +12,14 @@ public final class ProtectedReadWireException extends RuntimeException {
     UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   public ProtectedReadWireException(Reason reason) {
     super("protected read exchange rejected", null, false, true);
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

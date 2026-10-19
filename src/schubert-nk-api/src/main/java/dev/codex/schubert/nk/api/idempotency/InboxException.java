@@ -15,15 +15,15 @@ public final class InboxException extends SQLException {
     TRANSACTION_REQUIRED
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   InboxException(Reason reason, String message) {
     super(message, sqlState(reason));
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 
   private static String sqlState(Reason reason) {

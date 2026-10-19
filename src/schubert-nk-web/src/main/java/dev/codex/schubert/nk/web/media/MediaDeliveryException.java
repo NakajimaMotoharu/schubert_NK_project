@@ -14,15 +14,15 @@ public final class MediaDeliveryException extends IOException {
     UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   public MediaDeliveryException(Reason reason) {
     super("media delivery failed");
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 
   public int httpStatus() {
@@ -30,6 +30,6 @@ public final class MediaDeliveryException extends IOException {
   }
 
   public OptionalInt retryAfterSeconds() {
-    return reason == Reason.BUSY ? OptionalInt.of(1) : OptionalInt.empty();
+    return failureReason == Reason.BUSY ? OptionalInt.of(1) : OptionalInt.empty();
   }
 }

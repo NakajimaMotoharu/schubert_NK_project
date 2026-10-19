@@ -7,14 +7,14 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class StopGateException extends RuntimeException {
   private static final long serialVersionUID = 1L;
-  private final StopGateFailure reason;
+  private final StopGateFailure failureReason;
 
   StopGateException(StopGateFailure reason) {
     super("application stop check failed");
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public StopGateFailure reason() {
-    return reason;
+    return failureReason;
   }
 }

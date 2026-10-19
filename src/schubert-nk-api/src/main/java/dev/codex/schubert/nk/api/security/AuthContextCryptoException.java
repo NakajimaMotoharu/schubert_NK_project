@@ -12,14 +12,14 @@ public final class AuthContextCryptoException extends RuntimeException {
     CRYPTO_UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   AuthContextCryptoException(Reason reason) {
     super("authentication context cryptography failed");
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

@@ -12,14 +12,14 @@ public final class ScenarioWireException extends RuntimeException {
     UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   public ScenarioWireException(Reason reason) {
     super("scenario exchange rejected", null, false, true);
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }

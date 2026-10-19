@@ -14,14 +14,14 @@ public final class MqLoginExchangeException extends RuntimeException {
     UNAVAILABLE
   }
 
-  private final Reason reason;
+  private final Reason failureReason;
 
   public MqLoginExchangeException(Reason reason) {
     super("login exchange rejected", null, false, true);
-    this.reason = Objects.requireNonNull(reason, "reason");
+    this.failureReason = Objects.requireNonNull(reason, "reason");
   }
 
   public Reason reason() {
-    return reason;
+    return failureReason;
   }
 }
