@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC309 世代存在とRoot/ordinary資格の分離
+
+RootStartupContextの世代専用読取だけstat Zの同startTicksを保持し、missingGenerationはZを消失としない。終了は同boot/親の前後認証下で二回のNoSuchFileだけ、未知IO/別ticks/別cgroup/Unit driftは拒否する。Root/self/PID1捕捉はZを拒否し、ordinary readyはSS342の完全なidentity/command/socket/HTTP/infoを独立に満たす必要がある。非leader execの一時Zを通過してもreadyを短絡せず、恒久Zは元deadlineまで未readyとして非成功にする。設定、権限、permit、世代、元120秒/親30分、owned停止順序とUNKNOWN保持は不変更。BUG1470/YKT1233/SSC309、独立kernel反例PG5706及びSS354へ追跡。既failed cohortの回収は別承認済契約で行い、正常DONE前提の停止を失敗runへ流用しない。
+
 ## SSC308 Root IO所有の取得後callback構築gap是正
 
 FFM返却先の継続補足（2026-10-19、BUG1414/YKT1178）：LinuxSystemdSessionのbus/message/malloc文字列は、C呼出後にMemorySegment wrapperやscope callbackを構築してから所有登録しない。Arena→完成Sessionは既handoffで保護し、初回native前にSession私有の三out slot（bus、request/property、reply）とprimitive状態を確保する。元の同期・同thread経路の同時最大三所有だけであり、追加RPC/権限/再送/新公開入口ではない。各呼出の全引数準備後、C呼出直前にslotをPENDING、正常復帰直後にprimitiveでRETURNEDへする。pointer decodeに失敗してもslotと状態はSessionに残す。scopeはout slotからC呼出/返却の検査・変換全体までを先行保護する。

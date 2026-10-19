@@ -350,3 +350,7 @@ QA050承認に基づき、初期5秒/30秒/5分後の継続再試行を15分で�
 既定性能基準（STANDARD同時10名×同期request、end-to-end p95<=2.5秒、MQ待ち<=2.0秒）と既定資源予算を維持し、timeout/error率・API/DB CPU・lock待ち/pool・Inbox増加/WAL・MQ/journal/disk・再試行残件/最古時間と解消までの時間を同条件で記録する。基準未達や再試行起因の資源逼迫があれば因果を確認し、DB/lease/送信制御等の不具合を単に間隔変更で隠さない。
 
 間隔による負荷が原因なら継続間隔を調整し、同条件の通常業務性能・障害復帰・失効確認遅延/残件解消を再測定して採用値を決める。変更前後の設定値/source/環境/負荷件数/測定期間/比較結果/判断者を残し、UI226/242/253・SS314/343/354と変更台帳を整合してmainへ反映する。保持/削除proof・鍵保全・8h idle・wire/認可条件は間隔調整で変えない。IT/STの合格と実装/配備の完了は実証まで未完了とする。
+
+## SSC309 exec中の世代とreadyの独立反例
+
+PT-OPS-EXECGEN309001～003：API/Web固定世代の一時Z→同PID/startTicksのordinary復帰、Z継続中は終了false、二回NoSuch後のみ終了true。Zを初回Root/self/PID1へ使えず、X/x/未知、不正/別ticks、cgroup/Unit drift、未知IOを拒否する。世代guardの通過だけではreadyにならず、空cmdlineはsocket/HTTP前false、復帰後は完全ordinary/same-socket/HTTP200 UP/infoを要求し503を拒否。kernel fixtureはpidfd非終端を独立に観測し、業務Root再起動を使わない。元失敗raw state未保存と新再現を区別し、旧source成功/失敗nativeを新sourceの正常nativeへ合算しない。元期限/UNKNOWN/451四100は不変更、fresh必要全体と実nativeは別受入。
