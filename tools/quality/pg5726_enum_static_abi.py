@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from pg5724_semantic_enum_protocol import ROOT,TC,SLOT as PROTOCOL,BASE
 from pg5584_field_accessor_inspection import compile_only_artifacts
+from pmd_diagnostic_identity import diagnostic_row
 
 W=ROOT.parent/'pgpt-runs/PG379'
 SLOT='pg5726-semantic-enum-static-v1'
@@ -68,8 +69,7 @@ def main():
         path=os.path.relpath(file.get('name'),snapshot)
         if path not in sources:raise ValueError('every finding belongs to this exact source')
         for warning in file.findall('{*}violation'):
-            fields={'sourcePath':path,'sourceSha256':sources[path],**{k:warning.get(k)for k in('rule','beginline','endline','priority')}}
-            rows.append({'findingId':'F03-PMD-'+hashlib.sha256(json.dumps(fields,sort_keys=True).encode()).hexdigest(),**fields,'status':'NOT_REVIEWED_CURRENT_SOURCE'})
+            rows.append(diagnostic_row(path,sources[path],warning,len(rows)+1))
     errors=len(tree.findall('.//{*}error'));cs_count=len(ET.parse(out/'checkstyle.xml').getroot().findall('.//error'))
     remaining=[r for r in rows if r['rule']=='AvoidFieldNameMatchingMethodName'and r['sourcePath']in changes]
     done=pmd_exit in(0,4)and cs_exit==0 and errors==cs_count==0 and not remaining and all(hashlib.sha256((snapshot/p).read_bytes()).hexdigest()==h for p,h in sources.items())

@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-007 — PT_DEFAULT：Web監査sinkの有限故障契約
+
+1187/群1334、四つのWebAuditSinkContractTest。メモリLogger/固定clock/合成byte/DB-openを禁止するDataSource spyのみ、外部DBfixture/@BeforeAllを起動せず、実暗号通信・server・native/Unit/VM/失敗cohort0。PG5738は通常六modulecompile/型null/静的と明示12case/7suite、Web四caseが既Range四を置換する。同Mainなので既静的hash/全class一致後だけraw1599当spanを再束縛し全PMDの反復実行を避ける。未知拒否や実資源所有の証明に用いず、代替確認へ混ぜない。
+
 ## PTPRE-006 — PT_DEFAULT：残14enum/21fieldの有限値catalog
 
 1185/BUG1478/群1332、API・storage・bootstrap・batchの新五`EnumValueCatalogCompatibilityTest`、有限literal getter/変換/null/enum descriptorだけ。Source固定は次clean commit、namespace PG5732-enum48-selected-v1、後続PG5734静的。六modulecompile/型null/SpotBugsと限定五PT、全五case/XML一致必須。実factory生成・credential読取・DB・通信・DBus/native・Unit start/stop・permit回収0。外側業務コード不変更の明示sourceモデルと実ABI照合を付ける。nested enumの型名だけで保留対象の実回収操作と同一視せず、未知拒否/実所有依存とは分離する。command/source/作用変更時は再判定、拒否を探る試行ではない。

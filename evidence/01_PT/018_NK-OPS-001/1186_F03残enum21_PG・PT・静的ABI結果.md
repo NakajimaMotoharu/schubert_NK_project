@@ -2,7 +2,7 @@
 
 2026-10-20、1185/BUG1478/YKT1237。PG実装fe8a208a4、実検証source **a718e3a2f0c948c6016986b16917c22d39471dfa**（Main/Testはfe8aと同byte、工具だけBUG1479是正）。PG5732-v2元90313 actual0、22:49:15.598143Z→22:51:24.526419Z、archive **2c508820c3eadcb74ae106fa72b70a6991f0af699dd794d3810940b8807dd773**、phase0/0/source固定。
 
-通常実行**12PT/7suite、全XML一意・FES/flaky/rerun0**。新五値catalog caseと必要依存golden3/Range4、旧成功の合算無し。六module全1664Mainを当sourceでcompile、型null/SpotBugs六module各0。対象14enumの実LINE182/182・METHOD62/62・CLASS14/14・BRANCH14/14、全counter miss0（branch無し型は0/0と記録、除外追加0）。module全体coverage100は主張しない。実個別counterは公開元manifestを正とする。
+通常実行**12PT/7suite、全XML一意・FES/flaky/rerun0**。新五値catalog caseと必要依存golden3/Range4、旧成功の合算無し。六module全1664Mainを当sourceでcompile、型null/SpotBugs六module各0。対象14enumの実LINE187/187・METHOD56/56・CLASS14/14・BRANCH14/14、全counter miss0（branch無し型は0/0と記録、除外追加0）。module全体coverage100は主張しない。実個別counterは公開元manifestを正とする。集約記載の手計算誤記182/62は元公開targetCounters十四行の機械合計187/56へ訂正、元manifest/実測/PASS/個別counterは不変更。
 
 PG5734元59815 actual0：元6dbからの37file/48private fieldを厳密モデル・全37enum公開ABI/opcode同義で照合し、外側業務処理は不変更。全849Main/当六compile1664auxでPMD7.28.0 exit4/raw**1599**/処理error0、Checkstyle14.3.0 exit0/指摘0。当48同名field警告0、残はserialized Throwable16。今回21除去、先行protocol含め計48除去。YKT1237全64中48是正だが残16/全F03未受入。
 
