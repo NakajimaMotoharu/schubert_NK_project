@@ -1,9 +1,12 @@
 import copy
+import hashlib
 import json
 from pathlib import Path
 import symtable
+import struct
 import tempfile
 import unittest
+import zipfile
 from pyflakes.api import checkPath
 import pg5598_current_signed_candidate as entry
 
@@ -36,13 +39,25 @@ class CurrentHostCandidate(unittest.TestCase):
         jars={'api':'api/api.jar','web':'web/web.jar','batch':'operations/batch.jar',**{m:'api/lib/schubert-nk-'+m+'-0.1.0-SNAPSHOT.jar'for m in('protocol','storage','bootstrap')}}
         for module,path in jars.items():
             candidate=entry.W/'pg5566-private-monitor-green-v3/source'/('src/schubert-nk-'+module+'/target/schubert-nk-'+module+'-0.1.0-SNAPSHOT.jar')
-            value=entry.verify_candidate_container(entry.OLD/path,candidate,a[module],b[module],module)
+            digest=hashlib.sha256(candidate.read_bytes()).hexdigest()
+            value=entry.verify_candidate_container(entry.OLD/path,candidate,a[module],b[module],module,digest)
             self.assertTrue(value['allMembersValidated'])
             if module=='batch':
-                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,candidate,a[module],b[module],'api')
+                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,candidate,a[module],b[module],'api',digest)
+            with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,candidate,a[module],b[module],module,'0'*64)
             with tempfile.TemporaryDirectory(prefix='pgpt-current-jar-negative-')as folder:
                 foreign=Path(folder)/'foreign.jar';foreign.write_bytes(candidate.read_bytes()+b'FOREIGN')
-                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,foreign,a[module],b[module],module)
+                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,foreign,a[module],b[module],module,digest)
+                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,foreign,a[module],b[module],module,hashlib.sha256(foreign.read_bytes()).hexdigest())
+                raw=bytearray(candidate.read_bytes())
+                with zipfile.ZipFile(candidate)as archive:
+                    cursor=archive.start_dir
+                    for item in archive.infolist():
+                        if not item.is_dir():
+                            struct.pack_into('<I',raw,cursor+38,0o100755<<16);break
+                        n,e,c=struct.unpack_from('<HHH',raw,cursor+28);cursor+=46+n+e+c
+                foreign.write_bytes(raw)
+                with self.assertRaises(ValueError):entry.verify_candidate_container(entry.OLD/path,foreign,a[module],b[module],module,hashlib.sha256(raw).hexdigest())
         for path in(entry.__file__,__file__):self.assertEqual(checkPath(path),0)
 
     def test_unqualified_or_wrong_source_gate_refused(self):
