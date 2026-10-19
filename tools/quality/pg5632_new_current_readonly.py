@@ -7,7 +7,7 @@ import pg5630_current_publication_post as post
 from pg4996_resume_connection import authenticate_host
 
 SOURCE,BOM=post.role.SOURCE,post.role.BOM
-SLOT='pg5632-new-current-readonly-v1'
+SLOT='pg5632-new-current-readonly-v2'
 AFTER='/var/lib/pgpt-s1-preservation/'+post.SLOT+'/after.private.json'
 
 

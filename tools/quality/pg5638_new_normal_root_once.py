@@ -12,7 +12,7 @@ from pg4996_resume_connection import authenticate_host
 W,P,SSH=previous.W,previous.P,previous.SSH
 SLOT='pg5638-new-normal-root-once-v1'
 SOURCE,BOM=observer.SOURCE,observer.BOM
-QUALIFICATION='pg5642-current-normal-root-qualification-v1'
+QUALIFICATION='pg5642-current-normal-root-qualification-v2'
 
 
 def oracle_applicable(proof,now,before_sha):
