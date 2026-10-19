@@ -1,4 +1,4 @@
-"""Original3904 result-only qualification: old3900 retained, four new, all11 raw changes."""
+"""Unused reader rebound before first issue: original3905/old3900/new5/all11 raw changes."""
 import ast
 import hashlib
 import inspect
@@ -9,7 +9,7 @@ import subprocess
 from pyflakes.api import check
 from lan_server import copy,run
 import pg5552_snapshot_whole_qualification as previous
-import pg5572_monitor_required_whole as entry
+import pg5588_scope_canary_whole as entry
 from pg5566_private_monitor_selected import EXPECTED_CHANGES
 
 SOURCE,ROOT,W=entry.SOURCE,entry.ROOT,entry.W
@@ -25,6 +25,7 @@ ADDED={
  ('dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClientTest','monitor002CallerLockCannotBlockOwnedStopStatus'),
  ('dev.codex.schubert.nk.bootstrap.ServiceStartupAdmissionTest','monitor003CallerLockCannotBlockReadyInformationOrRelease'),
  ('dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest','monitor004CallerLockCannotBlockConfirmedLifetimeClose')}
+ADDED.add(('dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest','bat283bBootstrapFixtureCannotMaskWrongRuntimeScopeOrDuplicate'))
 
 
 def physical_difference(old,new,candidate):
@@ -39,16 +40,22 @@ def physical_difference(old,new,candidate):
 
 def qualifier_source():
     raw=previous.qualifier_source()
-    for before,after in(("out = base / 'runs/PG5550-six-v1'","out = base / 'runs/PG5572-six-v1'"),
-        ("source = base / 'source-full-PG5550'","source = base / 'source-full-PG5572'"),
+    for before,after in(("out = base / 'runs/PG5550-six-v1'","out = base / 'runs/PG5588-six-v1'"),
+        ("source = base / 'source-full-PG5550'","source = base / 'source-full-PG5588'"),
         ("old = base / 'runs/PG5414-six-v1'","old = base / 'runs/PG5550-six-v1'"),
-        ('transfer/PG5550-source.tar','transfer/PG5572-source.tar')):
+        ('transfer/PG5550-source.tar','transfer/PG5588-source.tar')):
         if raw.count(before)!=1:raise ValueError('one exact original/current path binding')
         raw=raw.replace(before,after,1)
     class Counts(ast.NodeTransformer):
         def visit_Constant(self,node):
-            if type(node.value)is int and node.value in(3896,3900):return ast.copy_location(ast.Constant({3896:3900,3900:3904}[node.value]),node)
-            if isinstance(node.value,str):node.value=node.value.replace('actual qualified296/3896 baseline manifest','actual qualifieda19/3900 baseline manifest').replace('all3896 original identities retained plus exact4 independent scratch methods','all3900 original identities retained plus exact4 independent caller-monitor methods')
+            if type(node.value)is int and node.value in(3896,3900):return ast.copy_location(ast.Constant({3896:3900,3900:3905}[node.value]),node)
+            if isinstance(node.value,str):node.value=node.value.replace('actual qualified296/3896 baseline manifest','actual qualifieda19/3900 baseline manifest').replace('all3896 original identities retained plus exact4 independent scratch methods','all3900 original identities retained plus exact5 independent monitor and runtime-canary methods')
+            return node
+        def visit_Compare(self,node):
+            node=self.generic_visit(node)
+            if isinstance(node.left,ast.Call)and isinstance(node.left.func,ast.Name)and node.left.func.id=='len'and len(node.left.args)==1 and isinstance(node.left.args[0],ast.Name)and node.left.args[0].id=='additions':
+                for value in node.comparators:
+                    if isinstance(value,ast.Constant)and value.value==4:value.value=5
             return node
     return ast.unparse(ast.fix_missing_locations(Counts().visit(ast.parse(raw))))
 
@@ -65,21 +72,21 @@ def added_cases():
         if before-after:raise ValueError('no original test renamed/removed')
         cls=path.split('/src/test/java/',1)[1][:-5].replace('/','.')
         added.extend((cls,name)for name in sorted(after-before))
-    if len(added)!=4 or set(added)!=ADDED:raise ValueError('only four independently specified caller-monitor cases')
+    if len(added)!=5 or set(added)!=ADDED:raise ValueError('only five independently specified monitor/canary cases')
     return sorted(added)
 
 
 def main():
     original=json.loads((W/entry.SLOT/'manifest.safe.json').read_bytes())
-    if type(original['actualExit'])is not int or original['actualExit']!=0 or original['source']!=SOURCE:raise ValueError('original3904 must genuinely finish0 first, never rerun for collection')
-    if subprocess.check_output(['git','diff',SOURCE,'--','src','pom.xml','mvnw','.mvn','program/characterization'],cwd=ROOT):raise ValueError('fixed canonical2fc source')
+    if type(original['actualExit'])is not int or original['actualExit']!=0 or original['source']!=SOURCE:raise ValueError('original3905 must genuinely finish0 first, never rerun for collection')
+    if subprocess.check_output(['git','diff',SOURCE,'--','src','pom.xml','mvnw','.mvn','program/characterization'],cwd=ROOT):raise ValueError('fixed canonical0ea source')
     before_raw=(W/previous.SLOT/'manifest.safe.json').read_bytes()
     if hashlib.sha256(before_raw).hexdigest()!='892c226284831d450792e601fe7a618e1951b828c58e4eca839613b806cb901f':raise ValueError('actual immutable qualifieda19 original3900')
     prior=json.loads(before_raw)['result']
-    selected_raw=(W/'pg5566-private-monitor-green-v2/manifest.safe.json').read_bytes();proof_raw=(W/'pg5568-monitor-bytecode-v2/manifest.safe.json').read_bytes()
-    if hashlib.sha256(selected_raw).hexdigest()!='27d1b35269b9a4e8848100565e7d6b901f425cd599805c6afe1031dc874ced50'or hashlib.sha256(proof_raw).hexdigest()!='fb7917b4b9d9944f0cf3a6fb286d173569e31193ab1e8fbc31cf3f2f91d554ec':raise ValueError('immutable actual current71/14/11 physical proof')
+    selected_raw=(W/'pg5566-private-monitor-green-v3/manifest.safe.json').read_bytes();proof_raw=(W/'pg5568-monitor-bytecode-v3/manifest.safe.json').read_bytes()
+    if hashlib.sha256(selected_raw).hexdigest()!='9eef40acd5388ebf53737907bb5d664cf60a38430894de07a4a56df31896ca73'or hashlib.sha256(proof_raw).hexdigest()!='8e852219d9ada714da01b66604238ecf21025bfae14ce76b0d33a21bf87f0d32':raise ValueError('immutable actual current73/14/11 physical proof')
     selected=json.loads(selected_raw);proof=json.loads(proof_raw)
-    if not(selected['sourceSnapshot']==proof['sourceSnapshot']==SOURCE and selected['greenSelectedQualified']and proof['actualExit']==0
+    if not(selected['sourceSnapshot']==proof['sourceSnapshot']==SOURCE and selected['greenSelectedQualified']and selected['actualCases']==73 and selected['scopeIncludesRuntimeCanary']and proof['actualExit']==0 and proof['actualSelectedCases']==73
         and{r['class']:r['classification']for r in proof['allPhysicalDifferenceClassifications']}==PHYSICAL_KINDS):raise ValueError('actual all11 qualified code/debug classifications')
     candidate=selected['physicalMain']['sha256'];physical_difference(prior['allPhysicalMainSha256'],candidate,candidate)
     begin=json.loads((W/entry.SLOT/'begin.safe.json').read_bytes());cases=added_cases()
@@ -87,8 +94,8 @@ def main():
         'archiveSha256':begin['archiveSha256'],'aliases':{},'newCases':cases,'declaredNewCases':cases,'invocationAliases':{},'candidateMain':candidate,
         'allMainSourceSha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()for p in ROOT.glob('src/*/src/main/java/**/*.java')}}
     raw='PHYSICAL_KINDS='+repr(PHYSICAL_KINDS)+'\n'+inspect.getsource(physical_difference)+'\n'+qualifier_source()+"\nprint(__import__('json').dumps(qualify("+repr(data)+")))\n"
-    if check(raw,'<actual original3904 independent reader>'):raise ValueError('all standalone namespace before output')
-    compile(raw,'<original3904 result only>','exec')
+    if check(raw,'<actual original3905 independent reader>'):raise ValueError('all standalone namespace before output')
+    compile(raw,'<original3905 result only>','exec')
     os.umask(0o077);out=W/SLOT;out.mkdir(mode=0o700);path=out/'qualify.private.py'
     with path.open('x')as f:f.write(raw);f.flush();os.fsync(f.fileno())
     digest=hashlib.sha256(raw.encode()).hexdigest();remote='/home/mini/schubert-nk-pgpt/transfer/PG5574-monitor-qualified-v1'
