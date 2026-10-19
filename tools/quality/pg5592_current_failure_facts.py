@@ -8,7 +8,7 @@ import subprocess
 from source_catch_context_inventory_test import facts as catch_facts
 from source_jdbc_close_precedence_inventory_test import facts as jdbc_facts
 from pg5584_field_accessor_inspection import compile_only_artifacts,JDK
-from pg5590_current_static_projection import SOURCE,ROOT,W,BASE,load_fixed,PREPARED
+from pg5590_current_static_projection import SOURCE,ROOT,W,load_fixed,PREPARED
 
 SLOT='pg5592-current-failure-facts-v1'
 

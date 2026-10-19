@@ -34,7 +34,9 @@ class CurrentFindingBindings(unittest.TestCase):
                 if kind=='coordinate':rows[0]['beginline']='999999'
                 if kind=='hash':rows[0]['sourceSha256']='0'*64
                 if kind=='missing':rows.pop()
-                if kind=='class':whole['allPhysicalMainSha256'][next(iter(maps['witnesses'].values()))['actualCompiledClassSha256'].keys().__iter__().__next__()]='0'*64
+                if kind=='class':
+                    class_key=next(iter(next(iter(maps['witnesses'].values()))['actualCompiledClassSha256']))
+                    whole['allPhysicalMainSha256'][class_key]='0'*64
                 if kind=='oldcase':cases[0]['result']='SKIPPED'
                 if kind=='sourceMirror':fields['all849SourceHashes'][next(iter(fields['all849SourceHashes']))]='0'*64
                 with self.assertRaises(ValueError):entry.bind_prepared(rows,cases,whole,maps,fields)
