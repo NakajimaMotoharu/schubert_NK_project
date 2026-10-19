@@ -1,0 +1,1008 @@
+{
+  "actualExit": 0,
+  "archiveSha256": "4b1a06d3c2cd9a21dd35a877ab9754889954d06e8c4be2fa75144f376bea0952",
+  "baseSource": "6b6db7df47486a7e48eed6620c8f95bc38175933",
+  "completedUTC": "2026-10-19T22:41:18.405692+00:00",
+  "coverage": {
+    "BRANCH": {
+      "covered": 1010,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 157,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 1273,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 17405,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 3468,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 741,
+      "missed": 0
+    }
+  },
+  "coverageXmlSha256": "2109ab4d4c65147283608453841c9239e9d6e5a5c356a181be0bbea01f6e03a7",
+  "exactInventory": true,
+  "failedOrSkipped": [],
+  "formalAccepted": false,
+  "fullRegressionPending": true,
+  "phaseExits": [
+    0,
+    0
+  ],
+  "protocolFour100Qualified": true,
+  "ptAlternativeCompleted": 0,
+  "refusedPtRetried": false,
+  "source": "d77712899fca49f80bef4a6356e96e9bb90b149f",
+  "sourceFixed": true,
+  "startedUTC": "2026-10-19T22:40:57.703589+00:00",
+  "staticIssues": 0,
+  "suites": 18,
+  "tests": 88,
+  "vmActions": 0,
+  "xmlHashes": {
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest": "701edaaaf716c7f6989bca923cab8e0cdffb978d3bd6eb2e58bec24a3048dfcf",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "08915045d5ac269ba1bfdd675a4e3277051072c727a65cfd7016751b774adc22",
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest": "6453d745af930bc9cb021df7dd136180372b7ade00ae0dceb943a3cc5424ba98",
+    "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+    "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest": "f623ecd2befce0a2a787076795f61b1e4ecce2c80211569304105856100649f6",
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest": "964910cac3281a8b49a0362e7433e06257d363d0dd3de72fb1750d405ac1b7fd",
+    "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+    "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+    "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest": "f5ea924b81169bd14396b0ae47808642d5ce2a557abe9bcbead6551dbb1f8ebb",
+    "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest": "6b71a6b586ce2bb38110381f1a8edbeae2d99ae24e04d28d07276d7bcedcb0eb",
+    "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+    "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest": "0f0494d29a9315d437dc9a5594afbbb6bab65f92857ff53864742adf30b4d96b",
+    "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest": "24bef18711c5a24dfd5f84041160ce068921141df96fa146e6a8dd3925f29a50"
+  },
+  "run": "pg5728-protocol27-v1",
+  "branch": "dev-foundation",
+  "executionKind": "NORMAL_EXECUTED_PT_NOT_ALTERNATIVE",
+  "hostOS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "jacoco": "0.8.15",
+  "spotbugsPlugin": "4.10.4.0",
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol",
+      "spotless:check"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol",
+      "package",
+      "org.jacoco:jacoco-maven-plugin:0.8.15:report",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ]
+  ],
+  "actualPhysicalMain": 174,
+  "actualTestCases": [
+    {
+      "testId": "PT-WHOLE-fa073b7d3a9c6bcbb46a3f8cff18f31c355864a5667dabcc031b223c0c60b81b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "27a2db12d0c76c678e637edc59ebe1d513fbccbdb76999bc22e6aa2ed467dd86",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "xmlSha256": "701edaaaf716c7f6989bca923cab8e0cdffb978d3bd6eb2e58bec24a3048dfcf",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b8dd8e7b64f839d3a3fc97fbb5aa04e082b83ff123bef15d41e465ff8fc74b4b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "82f30fb3dc979ca0c17173da0a6b74733bb61e85cd9098732fa2c03bc9933104",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "xmlSha256": "701edaaaf716c7f6989bca923cab8e0cdffb978d3bd6eb2e58bec24a3048dfcf",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b861124ea7e72bcc55179acd8a289b9968e5a0768f99c0c34ad5d2f6684a747f",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "8516f3d3a5a419b40fedca2a8171e07a31014fe934a86797adb08f33718b8375",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest.xml",
+      "xmlSha256": "701edaaaf716c7f6989bca923cab8e0cdffb978d3bd6eb2e58bec24a3048dfcf",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9252c869913e82560800ab3746f71cc42ab3d060884375dd6dcddfc98d3b6b9f",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "3cb983d564ca70416f8a43c55cc0a5a808c13614bb47e4020f027ff40a9c405b",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "xmlSha256": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-651264867d399ba1a51c984c784af5d39ee7ecc5aefee727cdb9a79af237798c",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "606db6b86fed7e52203bd0627dfc974c34d8a3658519e832d8b955f89b2c7f2b",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "xmlSha256": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-830a15b72dbcbfbfe9127e021d1dcf1fab256f913517b6dcb8c25ecde9418879",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "3e84b5efd747b56aafbf95957536a9fa76767232f02fbb4e2194053e8229f372",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "xmlSha256": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-fb5e57314fc4fb1d835578bcea256c99d98771b8a90f18a2a3c9bc9eba2c4bff",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "b39c2767ed879eecb2a9695d6597821ccc6e7a83b6e28b51a539b74adcf22cd3",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "xmlSha256": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-79d86a31a18d01b0687d6a396426348d59fe5dec9fd4d783f151047d6aaacc31",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "d8a431571483b79ee93d0705b3801c0c75813b2baf227a8f8787aeadfed5f3c4",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.FieldCodecTest.xml",
+      "xmlSha256": "b0873257f82c7fac39e980ca2f4a7ba67ee5ee4c0b4574e9f2ccbb8e5f4dd459",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-15b6590fbe23c0b908a6e9d8b60013d817ae543f864f9fc596438059674f8a65",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "d428c6e36bb23f67a2829ca780a8a87884bd0a5c039c9d13527dc45f3e1b62d1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-4a07e06e2e5c1c3a1013a47763fd1b097baf78296ed3dfe35e321010b87a3773",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "77f3415f6ac8637bd8e88e91d94e2f380ac2439b2178911e3b20fea2930ddfca",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-ae03d2df69227c62807ab527be0617e8689b909262df5d5556ee6c701e1ef5d3",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "2e953bb8dc30c9406d95402d8617693fae854f7a4b503e0f9deaf65064dc4581",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-d8e7d57b01c4c8bf1550743f7f50989d80ecc08ba30fccc9240a678824fa3550",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "ae93fffc438469330c2be756717b3cca7d15059fab651fbf1ffd64a9cf79d548",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-e563af16793d29a63b86e7605c2d1a865267aabfd596245735e0a56dde66e506",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "d294121669fd6e218dc4b535f8619c01596ca0b62e54234862b8f0a742eceff6",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-663ea0085fc2eec81219708d901b2da651138c53c907e633922a1a8b34b76f8f",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "a8a4430c8ee4a2735db52327feed46785c830f71b1ca48ed44f44102375e3023",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-86726b8e62d402345e94fc3da599138167f07f90d66658c8b293b3a67a55b52d",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "14a2dfc60fcd7717e97abde9e8a86bd616e507a0a9347951c68fbacff434eb1d",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.MessageCodecTest.xml",
+      "xmlSha256": "fe126a0fa8324b14ae327e774c468f4ec51c00bf192325fd856074e0abfc863c",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b5f55186c327330d8299196d9fceb089f1a65df00926131b70793a85d3dcaad6",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "7baeb9ec6b60c0e95eb9fd0766a2ad2041c569d6ed5fc9327ac0f5647d32d418",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9c684e58d8f7ee5190131a1f63d7c30d05d1cd4ebcea09bd87d28fe7ab3e7606",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "237f196648045c4bfd269b36cb272b8dbe33570ea2c3d4e2687551602f01fc8a",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-31e9d5f05b7f190a80c637190f066f2366b58849e0c62adabe215190cac44612",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "112e86c96bf38bbb5260ff0b0b3810d5fd0dcd7b73b78c79609f483a1a243c17",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-8e0756e3e4773f0bfc6298e06deab77311e291c17f273065a14f1859ca4a0537",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "36ba6b248e79d224b736e87d2e5ea72f62911f8b974cd47379df75fb401e53a7",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-c38055866ec18589dffddbccf373484cf36af67c944ee583a680ee1b9bab5c86",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "dd12f3b01d069905e559ea6dafdcb16fe658f5e9c777b2456f5a0aed6895adc3",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-4cf2bd249702ddf47aa875d11e49e3f126817fb3eace7d598232d882df9ac965",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "42fdbc718d16bcc9bdfd73b9d655fffd59c00f30ae1fe14b7fd13cf57f752cac",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-740db696c55ed25568d9f6de11cdea70495bc93c7a52016c89b8ec05e1c9eb44",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "4e55335eb016d832b11208ee3e67caeb256a868874aa47f7ef85364ee7ceb4a7",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-4e597147a35559645b115b5537ca46170262389e1b5d6338e37f040dc79f7e2b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "caseOrdinalInXml": 8,
+      "caseNameSha256": "4a32c2d998b7004c1d272b2be31ad4fa1153fc71051a3383858f36eb4504a523",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadCodecTest.xml",
+      "xmlSha256": "177d2e10daeef861d7783295d350eed5b3d9575b3b1649106de2579754921aca",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-4afca431561a58e7293455b12b48482b2c6dd76f2c7c25b9ec61afdadbe901cf",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "ff87a9041a8fd7502199b3e00c08271f2bc25eff559dd0df9056d55dbcc82390",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "08915045d5ac269ba1bfdd675a4e3277051072c727a65cfd7016751b774adc22",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5dc54e6259dddd78d1d0becd3433d2ba20cd280581fa15a1c8250ced0c23e3d4",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "1d2e3fb1a96f12805a88895ef336fbf5754e08db14407279ecd62acbfb9c5975",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "08915045d5ac269ba1bfdd675a4e3277051072c727a65cfd7016751b774adc22",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-04442756b18b52352761b9d46192ac670bf10f6a24326fefa49b55361e52d150",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "af3f145850aff994bd655fb7ece401cd128a8b8f35af69f9653daa956a02d1f5",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "08915045d5ac269ba1bfdd675a4e3277051072c727a65cfd7016751b774adc22",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-298290b516bbd908507dd9a2b88fd872ccb721938e4d0fc832cc398bb20dcb1c",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "884dc3bc66569bd469bda861c327b5040315da2148147c96e8cd1ab9a2e5125d",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "xmlSha256": "6453d745af930bc9cb021df7dd136180372b7ade00ae0dceb943a3cc5424ba98",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-a3e7dcd65b618049f6a5f08356076f1ae7c9021420e461725e750f38ba52426f",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "eccc8108866f96237f8b041cf8879ea3609c2c6d1aadf46e79334ae77754210a",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "xmlSha256": "6453d745af930bc9cb021df7dd136180372b7ade00ae0dceb943a3cc5424ba98",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-e15d29912370380caf7aa3619d114d8b80ffcf7f42d44f919ed1e4ac81c5308c",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "957df979a18a8d7ab302e2f0c045d8b78d45844bd37e731ec862df5eb604828e",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest.xml",
+      "xmlSha256": "6453d745af930bc9cb021df7dd136180372b7ade00ae0dceb943a3cc5424ba98",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-a5ce0cb83f10fb3bb07126093244084a4bb667a872ff1001713d95facd7e13da",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "ab391426db87472a86e35526cab26f4c28e508712fe3aeb0587601e9328ce222",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-17145455d8e80cb9c826cfed50219e11852f7dea0a4d6f6efbaa03147cc62f01",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "72f54310139a4f61116dfbd85b5cb9e7e3d34ed607f298463d77868715d54ead",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-54dad622c3a88fa488a24e8b0a21c67a6c63d25e5b0bd21296f38aa9aec45525",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "3b04a6ab12dd801fcded794f787eeb19f83267b8c12587dbd4faf5a1287466b0",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f42334567b152c450142e9636f24219417f0a605e9f93ef861b1db66be1689a8",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "98eeeaf33386a0418d8404c8e30c695b9a66ea770d0f677c66801b9788a14f8e",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-7e4e3d18755b1857022d69413f57a856bfbba2fdd70c2a8b09add94a6f0d16f0",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "b0275a11b870facb7dea27a360a30f47ba6f176dd39d6eac707683e4d8efcf11",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-828d9f613ce5c96131aae357c875813def92657a83bc39fb76bd0378e39a2943",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "33be0735f4dda6172f678dcafbc1d50352a4761aa8ccb22af084571faf72a607",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f224889073f2c146bcb54be0c8e6f82d71a1999d10a3b85d2b873e0df389366a",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "3bff689d93f54334f231e100dbb415e0309285bd3a2f9e62651eb4dd083ba9a7",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest.xml",
+      "xmlSha256": "bbf9156254de2aab6b2bbeb8bf9a95c7c6fac200fc7100b331a1a0a7e4e875a5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-6163ff7e1394abe34386304fa31afc4f513221b3ff6e51624f63311a63c0e0b7",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "d70cbf0ae1caacac9e4457403a3ab2f1255be8f7a9f93f91411c2f17dd9787b5",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-011008b54db8b47719aee5b440e24971fcbf2e19a99d24f392b42b0915237f82",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "2f9a06412660ee62669be0328b98c837ed51580c33f0847bbeca8baf6f1b578d",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-ea7794ee6962d6fa07a2a8694bc9904b8933b26e8744a8b17ae6cf32ef0ff002",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "f9a9ac7e429fecb02350d599f06f3553716560245ece6d913ebec56d517850b1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f2624133d86eba04811131e473f7af42624eedb06a236b1d34024b18f99b2d1b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "b48529b1d366cff3cc5879e038d3738084bc79f9a85c70c83ce5f2d808c41134",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-7611b6f92751452d21b9a8f400d53ccba45696b65ad5b005880b37078109d753",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "30e1a54bb9a61277af6312e546b777484176d243e686711aa91eb26e7a9bb899",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-6e45a6f099eb9f505c9a1d60d82bb7ff7a086fc9c13d1ff349bd9a5e09cfec56",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "7e657d46cbcffcce5bf2bd74e617f05072cc9134775fc155b614e9a95c722560",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5763164882a5de90c8e6ea37f7b12955f90f9839477fd661ee81fe0fc6f291ce",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "3ac078ce654db12a810c55a6d83b9caa8463f3b3f6a3a7ca2cec2d845b13c459",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest.xml",
+      "xmlSha256": "77a857aa858e63d0b6141036041449fb5e30d86dd8dcf66b4398657720dd0daa",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5a308e1f266571ef40f2b16cf44f4eaf75496a23304240fde6ab7b6c232262de",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "7111728b20e7957c28989e96a11bae8c860b18120030fc35ee643404ed6859f1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-d6ea8b54d684e302466c7c0c257f18f42ffc1448af2a41ff19a436329df8351e",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "c075e1ded0d1251225e3d88a50d64b6712b764f51f7709b0cfcbe350fa0f995b",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-995436e889254e34084e4959707426c4a798a4442abbb6d9107834fdde2c69dc",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "5f01ecd4ca1b78dfc1833df2dcdad94f861e2c11c38eb9e68282fbe321b43081",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5ede19106e7296bd7d3a05ea20bf9787550498ca456ba5682ff29f65f790e8a9",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "bb4a580c7f071f1a81bfcd9de2e608d8759c5f17206c3cb338048b3735c4428c",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5c6392665595680a63cd9b18615865442f3e248eb26b9b86ee02b9a97f2768b9",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "b77d7217b462119eac59ac2aea246ad61337b9f33fa7c76db5a71703cd6ec4df",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-c0bb218ef55db9a192134ee5aa7f45a9d8af5e03043a50c02eb2b728442d7f97",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "4cdf5d228a75f81b3e3ed14d100a26f8c0857260a40ad0853d1eca8b5d00acd2",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-e05fe9afde5b4fe32497e0254ce9fe941bfae019c922b911ede0de807dff0616",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "69bdd4bc716fef0bba99e3adf466da65d37a4bf10caa753484ff1c3bb69e4463",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.header.HeaderModelTest.xml",
+      "xmlSha256": "8ca758612c6a38cd991c4bc80ba56b78f057140be84c0a8ac06e17cbd007aecb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-fccc27c9b1b133f335ff99fcf5b030be9635716f1554c9c7efc43cf85d57c945",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "df0667838cf5000c0c6519d67459aaac2e86a1a5bfd0561b7094c42cd94aa27e",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "xmlSha256": "f623ecd2befce0a2a787076795f61b1e4ecce2c80211569304105856100649f6",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-00b16bfd351dc494b02cb614b79f99d61d215c92599bc486478cfa935712c1ce",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "661cf9d7141d0e3683e97721be21bc0c5321c16d4e1121dfb3ba67d994126467",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "xmlSha256": "f623ecd2befce0a2a787076795f61b1e4ecce2c80211569304105856100649f6",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-38c0af9213e1400a0200171170d36f6ec6cb6f96c295ce5f20fa0054bcbed455",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "21e44b99e5606ab575d9a5a569d1ef6bce754afc7c59da2e70a5e0ef5967bbe3",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest.xml",
+      "xmlSha256": "f623ecd2befce0a2a787076795f61b1e4ecce2c80211569304105856100649f6",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-976024600fbe029792b8b74bbf97ee38b54cd8a2799e6a836435fe7aea5710b1",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "0cc2259576f1b455a6dbf1d0a4e7dd9cd3757f4c0e75481c040d03fdac12acf3",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "xmlSha256": "964910cac3281a8b49a0362e7433e06257d363d0dd3de72fb1750d405ac1b7fd",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-fe4cf0e947a2bc738164655dbc73b49016fe6f7fd9543178cdc8045446a5651b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "c7a0e3d8fc7df2b487f20a9b1919d80834a2334edd98b97e31de92048d30d0be",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "xmlSha256": "964910cac3281a8b49a0362e7433e06257d363d0dd3de72fb1750d405ac1b7fd",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-ebb52d51f98c6afd5378ef82bf1adb624994003849b833bb7ff80abb5633c1a9",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "2327151ebf1ffef265506c4f65e93be95ffdf30fba37ad7dc07a8e3b1e419f94",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "xmlSha256": "964910cac3281a8b49a0362e7433e06257d363d0dd3de72fb1750d405ac1b7fd",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-085d4edd50a0b5c94748d1b8f95a9c833ec9df8ab2f61d70ae9f372171231ffa",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "1da5869d0a18abd25f1ecc179a2f361d95a23f305afcc225e83681e23f4f6afb",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest.xml",
+      "xmlSha256": "964910cac3281a8b49a0362e7433e06257d363d0dd3de72fb1750d405ac1b7fd",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f42c7b2bec82d24920ad992b79638ce8ba2ad5aa77311ba940ffc00a4505796b",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "dc73ccf1e5901fd4211b0e1215ab30335efca9ca312e28eb4b11edd6233b450d",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-cc622bcc9437fcf0c8fe1ba60ea291ca47a8d5d8204f057b52d6f079835aa2f4",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "62245f464f246accd74aaff3ffc7c2af32c1be4f0331259462beab4d78d642fc",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-26c554f8582514df66cf163ffcca10001d000ff121a92380b6230065131237f0",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "92b4dc54ae0a1a92cef26b8ab303414566f48bdd04ef77d9d0d130fd16060fbf",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-66319af0d0c3a356b8e5e061c3cda02428059df74e83ff9515873f6884d1de53",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "2a6811c30f1c448e0fedf8586b385f2463a3aa3027d7ba489332077583c68053",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-456308712f2ab0e921421f50e3171a6ddba93e43c6f58c59f9079fd561abf3aa",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "b61738fb5d1d811ab5fc410a806c440cfd9d52e56751fe5015cb874b9152047a",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-ac96177ca6cd90767bb90546aa4832c04e3c91d207cef4ab14edeb0c7ad18132",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "d5864d5589534cc37994a5882cf6de213a351933d2ba4ad05ab4ef6b3829fc6e",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9fbf63ef332c76c996090d2d9ffa05d149c05993bd7cda49346718b362f55340",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 7,
+      "caseNameSha256": "1e91bf8c3b56181bb206c64260ef7381baa53262ec34b6d7f31fcf1d26e84da2",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-472d5533649d65d3c36fb2bc06daf6c811ae8736bdbb5a48c03ff6d509d4ceed",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "caseOrdinalInXml": 8,
+      "caseNameSha256": "562138c0dc6eb2f0f615b9925e9281bd4993270ef0ed463d0b6bbf125f890ad8",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest.xml",
+      "xmlSha256": "81971eaa1a2e816ec99f61e3b3bada5112414de7af54cbb70ba83199e4fdf001",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-7cd84f0931e49aed635b072d7f3e4b5edec4d5ebeeebe6f9589aaf5a7e52104f",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "bc4720c13dd0bb3d1fa457cecbfa20f8e27311d5bec2eb6e2c01df36af1dfa75",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-e0eae132865803e08306ecca5de14eeda936ce93321193f8702eecdf25a6d927",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "18b218f2215d285681926320c66e52df9c92a3d0f574e3b0d7f4f95d00fa50ab",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-e10e4d8f00c96ca581545b72184bb8001a966eb724a6b7739ca2bbcc85c56150",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "67107ebe282b4a4b0a08aa50d6052bf448892accedb6f0cfd89dc80e8213bbd7",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b434f1c3468e2432a6dfbe63de83b964d2db652fb5b0538990edac3cc24a423c",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "d6a086ea17886061fc9f5e63bb37591fdb888560d2ef59f2f9e523b9cb7e4d99",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9daef806c90a7db0e8ae5d27f77f806d63c18ad3159e10f8c9561a26af1e0b94",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "acdeef906de57de2c66a0cb6eed8986eebdae06c8b79fffe321b7a82ab67b08f",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-88fe05ca5161542daa5731769afa6a45e65db6a4e3dd98ecd22b99dae899bef4",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "caseOrdinalInXml": 6,
+      "caseNameSha256": "e1f76bc78ec90f383717e4d38b260290ae074c30cc83fb438dd3a54a6c117d63",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.xml",
+      "xmlSha256": "d81426c8039f1c617fb465eb694434d273f1289bfc55938b6f161d5c79b12038",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b7f967275e7f6ae718de135c4987251098c4c29888d2a33c809643e2823995d6",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "5fbab5d312229ca9cacc55a12a133c87992b7dfce402f6cff821331c1f9b0edc",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "xmlSha256": "f5ea924b81169bd14396b0ae47808642d5ce2a557abe9bcbead6551dbb1f8ebb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-497586e17131c309d29cf7f868b266e435aed1f1fabe4aeecfe6b597b2ae7e41",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "5c8174d43070388a375dd8042dbff369c3a0afd3b7550e5d8daa771525c519b1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "xmlSha256": "f5ea924b81169bd14396b0ae47808642d5ce2a557abe9bcbead6551dbb1f8ebb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-1a520568fa23f39d81cbe157c8674e5218b842fae60d217e311d1b98af30d9e2",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "f594e5fdd1bf1c27759d9975d648f62adb1ac19338b9b0966ef5305e364d5c87",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "xmlSha256": "f5ea924b81169bd14396b0ae47808642d5ce2a557abe9bcbead6551dbb1f8ebb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-8695ba768a1bbd167dc779da256936b3d161ecdb9a5e2d531ef9f132b2ebf01c",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "943aa567adf8131ac5b5f99f580a4298a135f594777360dea5c9410f10aa3918",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest.xml",
+      "xmlSha256": "f5ea924b81169bd14396b0ae47808642d5ce2a557abe9bcbead6551dbb1f8ebb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5aecfd563641fe9fbe091ec563840c54cc3159600fe58f35b23e47cb40d35ada",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "573882b997b3f45b447386c0f873aea0eb69526b44116235ba44fd5f0a430242",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest.xml",
+      "xmlSha256": "6b71a6b586ce2bb38110381f1a8edbeae2d99ae24e04d28d07276d7bcedcb0eb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-fb996fa5d71ab0d8bb6ecb3516d4add7701383b8be0c3edd9d528277cd868951",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "3fe56f0df78e1208702f4f16ddc321d818335d4bf78ba560b52ba8846791968b",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest.xml",
+      "xmlSha256": "6b71a6b586ce2bb38110381f1a8edbeae2d99ae24e04d28d07276d7bcedcb0eb",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-28f2825b094e7e3e36b39dedad5fa07d5084759934197f05a5b173ffe725843a",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "080e6a8461dd0747ae27f2bfca075f4eb6ce389e60d5b4a4f685b01feeb3a0c8",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "xmlSha256": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-51122d7f05eabff0398165087ed93febf1609609bba86a60d91d6a24fc0a2a26",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "f2f55fb265ecd85c937041cc9ceb8b71f15db78167cc81a4607a951ee2bdd298",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "xmlSha256": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-25509fb1800ebce4e4b896bc579ded28fbdc491e5abcb6280817a599d178230a",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "d6638a1fce0d5fbd648219f49f382dbdc9ab57671b46bc6761369815112dcbef",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "xmlSha256": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-663eb9f30a777eb6958a76311654909f5cb7eaf5f48f745bd8e77f0b669a8571",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "7aea84cad7c15af9b090ed186e6736764144b51537bd2d738bf817a47513e873",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "xmlSha256": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-19142a445db6fbfea184c4892f5ca08060be785b9b9b1517a875f3e59b2718e5",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "2dc42c0f7e6c824ee5aa15d880ae97b5a24489ea57feff4cd3a2d5f5f1f0e87c",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest.xml",
+      "xmlSha256": "ba00630d20bfe953594c69e30183c916845872b3b17c50e8d7d548aa2f080db5",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-605d426704d416dd96a4974ccc1d696f4deb160f71db9fc5cca5d6eb072a9cb0",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "36d4175dc184e28f49b5d3c204d541288ef52d3602ba7df3311da5ca269febee",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "xmlSha256": "0f0494d29a9315d437dc9a5594afbbb6bab65f92857ff53864742adf30b4d96b",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b8931831e6ab62c2844bb96c151057a28f94c2cb7c2362e9ea957d488fb94b79",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "bd87e38061ab54260f3fc7b5d9b355309aa11069a014cef607c36e464b0c8a4a",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "xmlSha256": "0f0494d29a9315d437dc9a5594afbbb6bab65f92857ff53864742adf30b4d96b",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-40a8249fc8ffa660ee546e05076c85912f7ba627870e55cf7928138c48b61ac1",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "e4e5f613680e2d0c1b66ce824b889e5ca4304a961927dc9603bca63079f15c67",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "xmlSha256": "0f0494d29a9315d437dc9a5594afbbb6bab65f92857ff53864742adf30b4d96b",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-dc813855d5e09690ed568aad8db4a6f4e7f226647fc346f66e11621a7a58ac9d",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "3ea7da5e063d4a39505bad9acb3def4a783eff0ffa39574801d40109833b76ce",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.time.JstWireTimestampTest.xml",
+      "xmlSha256": "0f0494d29a9315d437dc9a5594afbbb6bab65f92857ff53864742adf30b4d96b",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f43639d5b4e03eca32313eb3c98c0c65053d30a3f5d64db963d7ccaf094172c0",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "d8b1508486d08e85782be1fb4276f264cd2b561a3e0fb0e7196e26612f512bd1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "xmlSha256": "24bef18711c5a24dfd5f84041160ce068921141df96fa146e6a8dd3925f29a50",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-895fb24ee580b469c31144b4bb5ab9f52a85ba16ff7948a8f817bd520b212a8a",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "da7ad487beeb223bb167704bb19cbacf7bff730b86b4f0cf66a4cc820009194d",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest.xml",
+      "xmlSha256": "24bef18711c5a24dfd5f84041160ce068921141df96fa146e6a8dd3925f29a50",
+      "result": "PASS_ORIGINAL_XML"
+    }
+  ],
+  "privateManifestSha256": "502a6f05c6aa33f4d3548bd9343c93707f9e4e944565a8b7756fd74be4cbcb82",
+  "staticManifestSha256": "6587f9f792bf82c0953f06ec56789777089560ec9b9184e05d0763b0b328d828",
+  "oracleRefs": [
+    "1183_protocol残九field是正・通常PT仕様.md",
+    "ProtocolSemanticTypeTest.approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables",
+    "EnumWireCompatibilityTest.enum001SerializedAnswerStateMatchesIndependentProtocolVector",
+    "EnumWireCompatibilityTest.enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor"
+  ],
+  "bugs": [
+    "BUG1476"
+  ],
+  "crossCheck": "YKT1237",
+  "coverageExclusionsAdded": 0,
+  "coverageMissingByCounter": {
+    "LINE": 0,
+    "METHOD": 0,
+    "CLASS": 0,
+    "BRANCH": 0
+  },
+  "fullCurrentSourceAcceptance": false,
+  "liveResourcesVerified": false,
+  "refusalException": "PTALT-001/002 unresolved; this subset is ordinary executed PT"
+}
