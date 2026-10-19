@@ -38,8 +38,10 @@ class Root(unittest.TestCase):
 
     def test_before_window_and_key_redaction(self):
         raw=oracle.payload();self.assertEqual(check(raw,'<actual0ea independent before>'),0)
-        for marker in(current.AFTER,current.context(),current.BOM,'now+datetime.timedelta(hours=2)',"'rootStartIssued':False","'plaintextLogged':False","'dbOrClockChanged':False",r"KEY[:]=b'\0'*len(KEY)"):
+        for marker in(current.AFTER,current.context(),current.BOM,'now+datetime.timedelta(minutes=35)',"'rootStartIssued':False","'plaintextLogged':False","'dbOrClockChanged':False",r"KEY[:]=b'\0'*len(KEY)"):
             self.assertIn(marker,raw)
+        self.assertIn('require(day==now.astimezone',raw)
+        self.assertIn("{'CLEAN_SESSION','CLEAN_LOG','CLEAN_NOTIFICATION'}<=skips",raw)
 
     def test_foreign_source_bad_window_or_before_never_authorizes(self):
         now=datetime.datetime(2026,10,19,14,0,tzinfo=datetime.timezone.utc)
@@ -53,6 +55,7 @@ class Root(unittest.TestCase):
             with self.assertRaises(ValueError):entry.oracle_applicable(bad,now,'a'*64)
         for shift in(-1,3):
             with self.assertRaises(ValueError):entry.oracle_applicable(proof,now+datetime.timedelta(hours=shift),'a'*64)
+        with self.assertRaises(ValueError):entry.oracle_applicable(proof,now+datetime.timedelta(minutes=91),'a'*64)
 
     def test_durable_manifest_barrier_before_one_start(self):
         raw=entry.action();nodes=ast.parse(raw).body

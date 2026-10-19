@@ -14,6 +14,10 @@ class Current94Fixture(ast.NodeTransformer):
     def visit_Call(self,node):
         if ast.unparse(node.func)=='admission.live':
             return ast.copy_location(ast.Call(func=ast.Name(id='independent_observed',ctx=ast.Load()),args=[],keywords=[]),node)
+        if isinstance(node.func,ast.Attribute)and node.func.attr=='assertNotIn'and node.args and isinstance(node.args[0],ast.Constant)and node.args[0].value=='require(all(history.values()))':
+            node.func.attr='assertIn'
+        if isinstance(node.func,ast.Attribute)and node.func.attr=='assertIn'and len(node.args)==2 and ast.unparse(node.args[1])=="values['ORACLE']"and isinstance(node.args[0],ast.Constant)and node.args[0].value==r"KEY[:]=b'\0'*len(KEY)":
+            node.args[0]=ast.Constant(r'KEY[:]=b"\0"*len(KEY)')
         return self.generic_visit(node)
 
     def visit_Constant(self,node):
@@ -21,7 +25,10 @@ class Current94Fixture(ast.NodeTransformer):
         if type(node.value)is str:
             value=node.value
             for before,after in(('all80','all94'),('before80','before94'),('current80','current94'),("nativeExecEntries':80","nativeExecEntries':94"),('!=80','!=94'),
-              ('PG4980','PG5598'),('pg4980-manifest.sig','pg5598-manifest.sig')):value=value.replace(before,after)
+              ('PG4980','PG5598'),('pg4980-manifest.sig','pg5598-manifest.sig'),('def qualify_new_day','def qualify('),
+              ('def expected_inbox','def classify_query_inbox'),('inbox=expected_inbox(before,expected)',"inbox=classify_query_inbox(before,expected['inbox_scan_candidates'],KEY,LAYOUTS)"),
+              ('result=qualify_current(before,now,','result=qualify(before,now,')):
+                value=value.replace(before,after)
             return ast.copy_location(ast.Constant(value),node)
         return node
 

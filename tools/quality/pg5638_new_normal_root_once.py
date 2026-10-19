@@ -12,13 +12,15 @@ from pg4996_resume_connection import authenticate_host
 W,P,SSH=previous.W,previous.P,previous.SSH
 SLOT='pg5638-new-normal-root-once-v1'
 SOURCE,BOM=observer.SOURCE,observer.BOM
-QUALIFICATION='pg5642-current-normal-root-qualification-v2'
+QUALIFICATION='pg5642-current-normal-root-qualification-v3'
 
 
 def oracle_applicable(proof,now,before_sha):
     ns={**vars(previous.previous.previous),'SOURCE':SOURCE}
     exec(compile(inspect.getsource(previous.previous.previous.oracle_applicable),'<independent source/window applicability>','exec'),ns)
-    return ns['oracle_applicable'](proof,now,before_sha)
+    ns['oracle_applicable'](proof,now,before_sha)
+    upper=datetime.datetime.fromisoformat(proof['result']['projections'][1]['cutoff'])
+    if now+datetime.timedelta(seconds=1800)>upper:raise ValueError('full original Root budget must fit independent window')
 
 
 def action():

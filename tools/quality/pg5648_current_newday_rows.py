@@ -1,10 +1,10 @@
-"""Actual0ea all24 raw-first capture and independent newday/query postconditions."""
+"""Actual0ea all24 raw-first capture and independent same-day/query postconditions."""
 import types
-import pg5040_current_newday_rows as previous
+import pg4756_new_current_same_day_rows as previous
 import pg5644_current_admission_image as admission
 import pg5646_current_genuine_terminal as terminal
 
-SLOT='pg5648-current-newday-all24-v1'
+SLOT='pg5648-current-same-day-all24-v2'
 key_source=previous.key_source
 
 
