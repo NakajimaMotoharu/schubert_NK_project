@@ -231,6 +231,62 @@ final class RootStartupContextTest {
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
   }
 
+  /** PT-OPS-EXECGEN309001: Linux nonleader exec can expose Z without losing the generation. */
+  @Test
+  void execgen309001TransientZombieIsPendingGenerationNeverAnExit() throws Exception {
+    for (var service : List.of(RootStartupContext.Service.API, RootStartupContext.Service.WEB)) {
+      var f = new LaunchFixture();
+      f.target = service;
+      f.targetUnit =
+          unit(service).replace("MainPID=42", "MainPID=200").replace(INV, "2".repeat(32));
+      f.targetGroup = "0::/system.slice/" + service.unit() + "\n";
+      var root = f.context();
+      var morning = root.capture(RootStartupContext.Service.MORNING);
+      var child = root.captureServiceRoot(morning, service);
+      f.targetStat = stat(200, "999").replace(") R ", ") Z ");
+      assertDoesNotThrow(() -> root.recheckServiceGeneration(morning, child));
+      assertFalse(root.serviceGenerationExited(morning, child));
+      f.targetStat = stat(200, "999");
+      f.rootUid = 999;
+      root.recheckServiceGeneration(morning, child);
+      assertFalse(root.serviceGenerationExited(morning, child));
+      f.targetStat = "<MISSING>";
+      assertTrue(root.serviceGenerationExited(morning, child));
+    }
+  }
+
+  /** PT-OPS-EXECGEN309002: a pending state grants neither Root admission nor foreign ownership. */
+  @Test
+  void execgen309002StrictCaptureAndForeignGenerationRemainRejected() throws Exception {
+    var f = new LaunchFixture();
+    var root = f.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    for (String state : List.of("Z", "X", "x", "?", "ZZ")) {
+      f.targetStat = stat(200, "999").replace(") R ", ") " + state + " ");
+      assertThrows(IOException.class, () -> root.captureServiceRoot(morning, f.target));
+      if (!state.equals("Z")) {
+        assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+        assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
+      }
+    }
+    f.targetStat = stat(200, "1000").replace(") R ", ") Z ");
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+    assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
+    f.targetStat = stat(200, "999").replace(") R ", ") Z ");
+    f.targetGroup = "0::/system.slice/foreign.service\n";
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+    f.targetGroup = "0::/system.slice/schubert-nk-api.service\n";
+    f.targetDrift = true;
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+    f.targetDrift = false;
+    f.own = stat(42, "12345").replace(") R ", ") Z ");
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+    f.own = stat(42, "12345");
+    f.init = stat(1, "5").replace(") R ", ") Z ");
+    assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
+  }
+
   @Test
   void capturedServicePidMustReallyDisappearAndIoOrReuseNeverBecomesTerminal() throws Exception {
     var f = new LaunchFixture();

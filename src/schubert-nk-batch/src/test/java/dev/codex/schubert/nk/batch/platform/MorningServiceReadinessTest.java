@@ -98,6 +98,35 @@ final class MorningServiceReadinessTest {
     assertEquals(0, f.sockets);
   }
 
+  /** PT-OPS-EXECGEN309003: a generation retained through exec cannot short-circuit readiness. */
+  @Test
+  void execgen309003PendingGenerationNeedsOrdinaryCommandSocketAndHttp() throws Exception {
+    var kernel = new RootStartupContextTest.LaunchFixture();
+    var root = kernel.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    kernel.targetStat = RootStartupContextTest.stat(200, "999").replace(") R ", ") Z ");
+    var f = new Fixture();
+    f.command = "";
+    var observer =
+        new MorningServiceReadiness(
+            () -> root.recheckServiceGeneration(morning, child),
+            f,
+            new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L)),
+            MAIN,
+            INFO);
+    assertFalse(assertDoesNotThrow(observer::ready));
+    assertEquals(0, f.sockets);
+    assertEquals(2, f.requests); // status and empty cmdline, no HTTP.
+    assertFalse(root.serviceGenerationExited(morning, child));
+    kernel.targetStat = RootStartupContextTest.stat(200, "999");
+    f.command = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
+    assertTrue(observer.ready());
+    assertEquals(2, f.sockets);
+    f.health = new MorningServiceReadiness.Response(503, "{\"status\":\"DOWN\"}");
+    assertFalse(observer.ready());
+  }
+
   @Test
   void ready428001IndependentGoldenAndSameInodeRequired() throws Exception {
     var f = new Fixture();
