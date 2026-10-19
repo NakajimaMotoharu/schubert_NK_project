@@ -11,7 +11,7 @@ from pg1446_current_cold_stage import P,SSH,W
 from pg1674_critical_management_gate import management_gate
 import pg5476_current_admission_image as admission
 
-SLOT='pg5606-current-full-preservation-v1'
+SLOT='pg5606-current-full-preservation-v2'
 SOURCE=admission.SOURCE
 FIELDS=('backup','configuration','extraDurable','originals','pid1','rows','runtime','startup','unitFilesActual','units','native')
 
@@ -53,12 +53,6 @@ def payload():
     require(native == second_native and fresh_rows == second_rows)
     expected_native = native_expected(original['native'], CATALOG_POINTS)
     require({p:v for p,v in native.items() if p.endswith('.exec')} == expected_native)
-    stable_source = sealed('pg5496_stable_journal.py', HASHES['pg5496_stable_journal.py']).decode()
-    stable_ast = ast.parse(stable_source)
-    functions = [n for n in stable_ast.body if isinstance(n, ast.FunctionDef) and n.name in {'pairs','project'}]
-    require(len(functions) == 2)
-    stable = {'json':json,'require':require}
-    exec(compile(ast.Module(body=functions,type_ignores=[]),'<same-source PID1 history>', 'exec'), stable)
     journal = command(['journalctl','--boot='+ROOT_BINDING['boot'].replace('-',''),'_PID=1','UNIT=schubert-nk-morning-controller.service','INVOCATION_ID='+ROOT_BINDING['invocation'],'-o','json','--no-pager'])
     fresh_pid1 = json.loads(stable['project'](journal))
     require(fresh_pid1 == after['pid1'])
@@ -83,6 +77,21 @@ def payload():
         finally:os.close(fd)
 '''
     raw=raw.replace(marker,replacement,1)
+    marker="\nbus = dbus.SystemBus(private=True)\nmanager ="
+    if raw.count(marker)!=1:raise ValueError('one top-level metadata-reference acquisition boundary')
+    preflight="""
+stable_path = base / 'pg5496-current-owned-tools-v1' / 'pg5496_stable_journal.py'
+stable_stat = stable_path.lstat()
+require(stat.S_ISREG(stable_stat.st_mode) and stable_stat.st_uid == stable_stat.st_gid == 0 and stable_stat.st_nlink == 1 and not os.listxattr(stable_path))
+stable_source = stable_path.read_bytes()
+require(hashlib.sha256(stable_source).hexdigest() == HASHES['pg5496_stable_journal.py'] and metadata9(stable_path.lstat()) == metadata9(stable_stat))
+stable_ast = ast.parse(stable_source)
+functions = [n for n in stable_ast.body if isinstance(n,ast.FunctionDef) and n.name in {'pairs','project'}]
+require(len(functions) == 2)
+stable = {'json':json,'require':require}
+exec(compile(ast.Module(body=functions,type_ignores=[]),'<same-source PID1 history>', 'exec'),stable)
+"""
+    raw=raw.replace(marker,preflight+marker,1)
     header='NEW_SLOT='+repr(SLOT)+'\nFULL11='+repr(FIELDS)+'\nCATALOG_POINTS='+repr(catalog['selected'])+'\nROOT_BINDING='+repr(admission.live())+'\n'+inspect.getsource(native_expected)+'\n'
     tail="""
 require(len(refs)==10)

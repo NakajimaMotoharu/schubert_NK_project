@@ -46,6 +46,10 @@ class FreshBeforeImage(unittest.TestCase):
         refs=[n for n in ast.walk(tree)if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='UnrefUnit']
         self.assertEqual(len(refs),1)
         self.assertIn('finally:\n    for u in reversed(refs)',raw)
+        self.assertIn("stable_path = base / 'pg5496-current-owned-tools-v1' / 'pg5496_stable_journal.py'",raw)
+        self.assertNotIn("sealed('pg5496_stable_journal.py'",raw)
+        self.assertLess(raw.index('stable_stat = stable_path.lstat()'),raw.index('manager.RefUnit(u)'))
+        self.assertLess(raw.index("hashlib.sha256(stable_source).hexdigest() == HASHES"),raw.index('manager.RefUnit(u)'))
         self.assertNotIn("'ownedExplicitStops': 4",raw)
         for path in(entry.__file__,__file__):self.assertEqual(checkPath(path),0)
 
