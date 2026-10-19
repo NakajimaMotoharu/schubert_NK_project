@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from pg5540_snapshot_scratch_selected import ROOT,TC,sha,utc,test_names
 
-SLOT='pg5724-semantic-enum-protocol-v1'
+SLOT='pg5724-semantic-enum-protocol-v2'
 BASE='6db56feeea6df0e355c018e6b80ad4e40c2d90f5'
 
 
@@ -16,7 +16,7 @@ def main():
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('freeze clean committed input')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     os.umask(0o077);out=ROOT.parent/'pgpt-runs/PG379'/SLOT;out.mkdir(mode=0o700);archive=out/'source.tar'
-    with archive.open('xb')as f:subprocess.run(['git','archive',head,'src','pom.xml','mvnw','.mvn','tools/quality/static'],cwd=ROOT,stdout=f,check=True);f.flush();os.fsync(f.fileno())
+    with archive.open('xb')as f:subprocess.run(['git','archive',head,'src','pom.xml','mvnw','.mvn','program/characterization','tools/quality/static'],cwd=ROOT,stdout=f,check=True);f.flush();os.fsync(f.fileno())
     source=out/'source';source.mkdir()
     with tarfile.open(archive)as f:f.extractall(source,filter='data')
     module=source/'src/schubert-nk-protocol';target=module/'target'
