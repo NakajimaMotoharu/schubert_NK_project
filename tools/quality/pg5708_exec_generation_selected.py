@@ -16,6 +16,8 @@ CASES={
  'dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest':'protocol',
  'dev.codex.schubert.nk.storage.ResourceScopeTest':'storage',
  'dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest':'bootstrap',
+ 'dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest':'api',
+ 'dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest':'web',
  PACKAGE+'RootStartupContextTest':'batch',
  PACKAGE+'MorningServiceReadinessTest':'batch',
  PACKAGE+'MorningServiceReadinessNativeTest':'batch'}
@@ -82,7 +84,7 @@ def main():
     green=fixed and declared and actual==expected and exits==[0,0]and not failed and not errors and not skipped and set(static)==set(MODULES)and not any(static.values())
     value={'sourceSnapshot':head,'phase':args.phase,'startedUTC':start,'completedUTC':utc(),'actualExit':next((e for e in exits if e),0),'phaseExits':exits,'sourceFixed':fixed,'exactInventory':actual==expected,'tests':sum(map(len,actual.values())),'suites':len(actual),'failed':failed,'errors':errors,'skipped':skipped,'staticBuiltModules':static,'purposefulRedEstablished':red,'greenSelectedQualified':green,'declaredPhysicalDelta':declared,'physicalDifferences':changes,'allPhysicalMainSha256':physical,'targetCounters':counters,'xmlHashes':xmls,'archiveSha256':sha(archive),'formalAccepted':False,'normalNativeQualified':False,'vmActions':0}
     with(out/'manifest.safe.json').open('x')as f:json.dump(value,f,sort_keys=True);f.flush();os.fsync(f.fileno())
-    print(json.dumps({k:v for k,v in value.items()if k not in('allPhysicalMainSha256','targetCounters','xmlHashes')},sort_keys=True))
+    print(json.dumps({**{k:v for k,v in value.items()if k not in('allPhysicalMainSha256','targetCounters','xmlHashes','physicalDifferences')},'physicalDifferenceCount':len(changes),'mainClasses':len(physical)},sort_keys=True))
     return 0 if red or green else 1
 
 
