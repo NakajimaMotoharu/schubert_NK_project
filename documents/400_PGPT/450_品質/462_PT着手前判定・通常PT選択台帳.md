@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-009 — PT_DEFAULT：例外16のconstructor値/null境界
+
+1191/PG-D439/BUG1482/1483、各package ExceptionValueContractTest十三methodと固定依存四、全17/13。入力enum/合成message/cause/数値のみ、例外を構築して値を検査するだけで、例外の名称に含むJMS/crypto/stop/login/session処理を呼ばない。実serialize/deserialize/DB/network/鍵/権限/VM/Unit/回収0。Test-only redでJMS二null拒否の予定失敗を元Main同byteで保存し、狭いPG後の別greenへ進む。Java serialized schema非対応境界はPG-D439で明示、generic renamer guard不変更・拒否操作再試行とは無関係。代替確認や正常PASSへredを算入しない。
+
 ## PTPRE-008 — PT_DEFAULT：Revocation codecの固定合成vector七件
 
 1189/BUG1481/PG5742、既七RERUN003a～gと必要reactor八の全15case/7suite。固定public合成鍵/contextと独立JCA/length-prefix/有限100thread、実credential/外部cryptogram/認証/通信/DB/VM/Unit/回収無し。provider不在negativeは自己所有test JVM内だけのSunJCE一時remove→finally同位置restore、OS/provider設定fileや別processを変更しない。変更は冗長String null比較一箇所、鍵選択契約/erase不変。command/環境が変われば再判定、既成功や拒否代替へ重複計上0。
