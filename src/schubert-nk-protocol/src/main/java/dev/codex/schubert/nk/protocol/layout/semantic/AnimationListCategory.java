@@ -5,14 +5,14 @@ public enum AnimationListCategory implements WireEnum {
   MAIN("MAIN"),
   OVA("OVA");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   AnimationListCategory(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

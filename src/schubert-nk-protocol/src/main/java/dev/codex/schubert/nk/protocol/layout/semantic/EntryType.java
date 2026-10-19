@@ -5,14 +5,14 @@ public enum EntryType implements WireEnum {
   DIALOGUE("dialogue"),
   NARRATION("narration");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   EntryType(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

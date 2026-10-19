@@ -6,14 +6,14 @@ public enum UserState implements WireEnum {
   DISABLED("DISABLED"),
   LOCKED("LOCKED");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   UserState(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

@@ -6,14 +6,14 @@ public enum LogLevel implements WireEnum {
   WARN("WARN"),
   ERROR("ERROR");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   LogLevel(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

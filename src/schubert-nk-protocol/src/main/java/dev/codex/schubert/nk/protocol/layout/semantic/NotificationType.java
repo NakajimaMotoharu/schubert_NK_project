@@ -6,14 +6,14 @@ public enum NotificationType implements WireEnum {
   COMPLETED("COMPLETED"),
   ERROR("ERROR");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   NotificationType(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

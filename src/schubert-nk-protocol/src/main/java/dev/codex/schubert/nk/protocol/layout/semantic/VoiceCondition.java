@@ -5,14 +5,14 @@ public enum VoiceCondition implements WireEnum {
   PRESENT("1"),
   ABSENT("0");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   VoiceCondition(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

@@ -7,14 +7,14 @@ public enum VideoCategory implements WireEnum {
   OVA("OVA"),
   OPENING("OPENING");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   VideoCategory(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

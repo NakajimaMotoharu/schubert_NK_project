@@ -5,14 +5,14 @@ public enum ContentDisposition implements WireEnum {
   INLINE("I"),
   ATTACHMENT("A");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   ContentDisposition(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

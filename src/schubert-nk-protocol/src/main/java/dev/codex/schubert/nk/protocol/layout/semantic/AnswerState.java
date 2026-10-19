@@ -6,14 +6,14 @@ public enum AnswerState implements WireEnum {
   UNANSWERED("UNANSWERED"),
   ERROR("ERROR");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   AnswerState(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

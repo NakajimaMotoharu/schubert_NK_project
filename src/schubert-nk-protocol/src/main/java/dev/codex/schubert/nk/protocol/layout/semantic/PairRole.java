@@ -6,14 +6,14 @@ public enum PairRole implements WireEnum {
   INSTRUMENTAL("I"),
   NONE("N");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   PairRole(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

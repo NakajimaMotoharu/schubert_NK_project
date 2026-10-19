@@ -9,14 +9,14 @@ public enum MediaMimeType implements WireEnum {
   AUDIO_FLAC("audio/flac"),
   VIDEO_MP4("video/mp4");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   MediaMimeType(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

@@ -9,14 +9,14 @@ public enum LogType implements WireEnum {
   SYSTEM("SYSTEM"),
   BATCH("BATCH");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   LogType(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

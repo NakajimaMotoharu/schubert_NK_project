@@ -5,14 +5,14 @@ public enum DeliveryMode implements WireEnum {
   INLINE("I"),
   FILE("F");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   DeliveryMode(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

@@ -8,14 +8,14 @@ public enum NotificationState implements WireEnum {
   ERROR("ERROR"),
   CANCELLED("CANCELLED");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   NotificationState(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

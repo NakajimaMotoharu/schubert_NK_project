@@ -5,14 +5,14 @@ public enum UserRole implements WireEnum {
   USER("USER"),
   ADMIN("ADMIN");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   UserRole(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

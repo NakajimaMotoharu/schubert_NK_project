@@ -8,14 +8,14 @@ public enum NotificationErrorCode implements WireEnum {
   DATA_INTEGRITY("DATA_INTEGRITY"),
   PROTOCOL_ERROR("PROTOCOL_ERROR");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   NotificationErrorCode(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

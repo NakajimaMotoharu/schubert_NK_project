@@ -6,14 +6,14 @@ public enum AnimationCategory implements WireEnum {
   SUBTRACK("SUBTRACK"),
   OVA("OVA");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   AnimationCategory(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }

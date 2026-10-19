@@ -5,14 +5,14 @@ public enum GameCode implements WireEnum {
   NUKITASHI_1("NUKITASHI1"),
   NUKITASHI_2("NUKITASHI2");
 
-  private final String wireValue;
+  private final String encodedValue;
 
   GameCode(String wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   @Override
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 }
