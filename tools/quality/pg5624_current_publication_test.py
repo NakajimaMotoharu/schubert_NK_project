@@ -1,7 +1,10 @@
 import ast
 import inspect
+import json
+from pathlib import Path
 import symtable
 import unittest
+from unittest.mock import patch
 from pyflakes.api import check,checkPath
 import pg5624_current_publication_sources as role
 import pg5626_current_publication_compile as compiler
@@ -38,6 +41,28 @@ class CurrentFinitePublication(unittest.TestCase):
         self.assertEqual(checkPath(__file__),0)
         tree=ast.parse(raw)
         self.assertFalse([n for n in ast.walk(tree)if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr in('StartUnit','StopUnit','KillUnit','RestartUnit')])
+
+    def test_actual_frozen24_post_complete_seven_oracles_and_durable_sql_before_parse(self):
+        raw=post.payload();self.assertEqual(check(raw,'<actual frozen24 complete independent post>'),0)
+        for marker in(role.SOURCE,role.BOM,'pg5598-manifest.sig',post.FULL_BEFORE,post.FULL_SHA,
+          "old_after={**after,'native':expected['native']}",'len(phases)>=7',"oracle['PHASES']","for stamp,phase,observed in phases:oracle['verify']",
+          'originalBackupNative94Preserved','oldNativeNotAppliedToNewSource',"'newSourceParentNotStarted':True"):
+            self.assertIn(marker,raw)
+        tree=ast.parse(raw);reader=next(n for n in ast.walk(tree)if isinstance(n,ast.FunctionDef)and n.name=='read_rows');body=ast.unparse(reader)
+        self.assertLess(body.index('sql-read-'),body.index('json.loads(line)'))
+        self.assertLess(body.index('os.fsync(fd)'),body.index('json.loads(line)'))
+        held=next(n for n in tree.body if isinstance(n,ast.Try)and 'UnrefUnit'in ast.unparse(n.finalbody))
+        self.assertGreater(tree.body[-1].lineno,held.end_lineno)
+
+    def test_actual_frozen_finite_class_kind_foreign_source_and_unready_post_refused(self):
+        fixed=json.loads((role.W/'pg5626-frozen-v1.safe.json').read_bytes());dispatch.qualify_fixed(fixed)
+        for key,value in(('actualExit',False),('productionSource',role.SOURCE),('candidateSource',role.CURRENT)):
+            with self.assertRaises(ValueError):dispatch.qualify_fixed({**fixed,key:value})
+        wrong={**fixed,'fileHashes':{**fixed['fileHashes'],'Pg5616CandidateRo.class':'0'*64}}
+        with self.assertRaises(ValueError):dispatch.qualify_fixed(wrong)
+        with patch.object(dispatch.sys,'argv',['tool','stage']),patch.object(post,'payload',side_effect=ValueError('post unavailable')),patch.object(dispatch,'authenticate_host')as auth,self.assertRaises(ValueError):dispatch.main()
+        auth.assert_not_called()
+        self.assertTrue(Path(role.W/'pg5626-frozen-v1.safe.json').is_file())
 
 
 if __name__=='__main__':unittest.main()
