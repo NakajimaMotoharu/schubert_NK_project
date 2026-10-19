@@ -42,7 +42,7 @@ final class EnumWireCompatibilityTest {
     }
   }
 
-  /** PT-PRO-F03-ENUM002: all eighteen explicit enum types have no default serialized fields. */
+  /** PT-PRO-F03-ENUM002: all twenty-three protocol enum types have no serialized fields. */
   @Test
   void enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor() {
     for (Class<?> type :
@@ -64,7 +64,12 @@ final class EnumWireCompatibilityTest {
             UserRole.class,
             UserState.class,
             VideoCategory.class,
-            VoiceCondition.class)) {
+            VoiceCondition.class,
+            dev.codex.schubert.nk.protocol.header.InteractionKind.class,
+            dev.codex.schubert.nk.protocol.header.MessageKind.class,
+            dev.codex.schubert.nk.protocol.header.ResultCode.class,
+            dev.codex.schubert.nk.protocol.file.ContentDisposition.class,
+            dev.codex.schubert.nk.protocol.transport.BrokerTopology.class)) {
       var descriptor = ObjectStreamClass.lookup(type);
       assertEquals(0, descriptor.getFields().length, type.getName());
       assertEquals(0L, descriptor.getSerialVersionUID(), type.getName());

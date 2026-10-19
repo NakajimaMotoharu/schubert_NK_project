@@ -18,16 +18,16 @@ public enum ResultCode {
   TEMPORARY_FAILURE("9000", false),
   RESOURCE_LIMIT("9001", false);
 
-  private final String wireValue;
+  private final String encodedValue;
   private final boolean successProfile;
 
   ResultCode(String wireValue, boolean successProfile) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
     this.successProfile = successProfile;
   }
 
   public String wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 
   public boolean usesSuccessProfile() {
@@ -37,7 +37,7 @@ public enum ResultCode {
   public static ResultCode fromWire(String value) {
     Objects.requireNonNull(value, "value");
     return Arrays.stream(values())
-        .filter(candidate -> candidate.wireValue.equals(value))
+        .filter(candidate -> candidate.encodedValue.equals(value))
         .findFirst()
         .orElseThrow(() -> new IllegalArgumentException("unknown result code"));
   }

@@ -7,14 +7,14 @@ public enum ContentDisposition {
   INLINE('I'),
   ATTACHMENT('A');
 
-  private final char wireValue;
+  private final char encodedValue;
 
   ContentDisposition(char wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   public char wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 
   public static ContentDisposition fromWire(String value) {

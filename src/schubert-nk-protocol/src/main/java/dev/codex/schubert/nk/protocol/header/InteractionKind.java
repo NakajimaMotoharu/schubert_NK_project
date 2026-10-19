@@ -8,14 +8,14 @@ public enum InteractionKind {
   ASYNC_ACCEPTANCE('A'),
   INTERNAL('I');
 
-  private final char wireValue;
+  private final char encodedValue;
 
   InteractionKind(char wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   public char wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 
   public static InteractionKind fromWire(String value) {

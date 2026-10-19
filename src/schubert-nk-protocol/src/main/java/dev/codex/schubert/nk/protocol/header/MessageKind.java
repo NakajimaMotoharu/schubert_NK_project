@@ -8,14 +8,14 @@ public enum MessageKind {
   RESPONSE('S'),
   EVENT('E');
 
-  private final char wireValue;
+  private final char encodedValue;
 
   MessageKind(char wireValue) {
-    this.wireValue = wireValue;
+    this.encodedValue = wireValue;
   }
 
   public char wireValue() {
-    return wireValue;
+    return encodedValue;
   }
 
   public static MessageKind fromWire(String value) {

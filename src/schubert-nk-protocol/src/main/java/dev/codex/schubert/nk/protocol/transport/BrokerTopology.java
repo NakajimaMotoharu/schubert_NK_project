@@ -11,49 +11,49 @@ public enum BrokerTopology {
   DEAD_LETTER("nk.dead.letter", 1_000_000, 0),
   EXPIRY("nk.expiry", 1_000_000, 0);
 
-  private final String address;
-  private final String queue;
-  private final String fullyQualifiedQueue;
-  private final int maximumBodyLength;
-  private final long timeToLiveMillis;
+  private final String encodedAddress;
+  private final String queueName;
+  private final String qualifiedQueueName;
+  private final int bodyLengthLimit;
+  private final long ttlMillis;
 
   BrokerTopology(String address, int maximumBodyLength, long timeToLiveMillis) {
-    this.address = address;
-    queue = address + ".q";
-    fullyQualifiedQueue = address + "::" + queue;
-    this.maximumBodyLength = maximumBodyLength;
-    this.timeToLiveMillis = timeToLiveMillis;
+    this.encodedAddress = address;
+    queueName = address + ".q";
+    qualifiedQueueName = address + "::" + queueName;
+    this.bodyLengthLimit = maximumBodyLength;
+    this.ttlMillis = timeToLiveMillis;
   }
 
   public String address() {
-    return address;
+    return encodedAddress;
   }
 
   public String queue() {
-    return queue;
+    return queueName;
   }
 
   public String fullyQualifiedQueue() {
-    return fullyQualifiedQueue;
+    return qualifiedQueueName;
   }
 
   public int maximumBodyLength() {
-    return maximumBodyLength;
+    return bodyLengthLimit;
   }
 
   public long timeToLiveMillis() {
-    return timeToLiveMillis;
+    return ttlMillis;
   }
 
   public boolean expirationRequired() {
-    return timeToLiveMillis > 0;
+    return ttlMillis > 0;
   }
 
   /** Resolves an exact approved physical address and rejects dynamic destinations. */
   public static BrokerTopology requireAddress(String address) {
     Objects.requireNonNull(address, "address");
     for (BrokerTopology destination : values()) {
-      if (destination.address.equals(address)) {
+      if (destination.encodedAddress.equals(address)) {
         return destination;
       }
     }
