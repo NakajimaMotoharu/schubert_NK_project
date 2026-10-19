@@ -1,0 +1,525 @@
+{
+  "F03Accepted": false,
+  "acceptedLeafDelta": 0,
+  "actualExit": 0,
+  "contextRows": 21,
+  "currentDiagnosticAndWholeBindingPending": true,
+  "effortPercent": null,
+  "formalAccepted": false,
+  "freshCurrentDiagnosticClaimed": false,
+  "freshWholeClaimed": false,
+  "localMaps": 19,
+  "primaryRule": {
+    "definitionSha256": "fc73e2a7fa9b4b05cc33540debaf788dfb615306fac3c0d37e23f4ebefdac534",
+    "jarSha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+    "name": "UseConcurrentHashMap",
+    "version": "7.28.0"
+  },
+  "rawDiagnosticBaselineSha256": "7a7e73525d491875f74685208f07595500c448a9cd380a2f4d6590162f564740",
+  "rawDiagnosticBaselineSource": "a19a9f7d940b4f9fba47e51bd9be675f4420401b",
+  "recordedUTC": "2026-10-18T23:59:01.420790+00:00",
+  "ruleSuppressionAdded": false,
+  "singleUseFields": 2,
+  "sourceContexts": [
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local parser map becomes a defensive immutable manifest",
+      "beginline": "37",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "37",
+      "findingId": "F03-PMD-a67f49f21bc79b34e79f5ef3fec9515f7f034ed220d154281c37cd9be5948575",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "hashes",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "AssetChecksumManifestTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java",
+      "sourceSha256": "277695ad2fa22c60deb86c4aa1223fdcaaac4167bb1f33c3a473f58772ecd65d",
+      "sourceSpanSha256": "c491aa1f21af072326c7b748bc52bee15186d3830d19853bd1b542d4a166fc33"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "constructor-local map is copied; secret byte arrays remain private under the existing state lock",
+      "beginline": "60",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "60",
+      "findingId": "F03-PMD-f46389bbeaecc4c839dbc29c316fb1bfbad5a9cfdab70228dbdcbb229bffd6ef",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "copies",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "AuthContextCodecTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "sourceSha256": "f109c79807493154044e8aa0c051ce59650ed1cd016bfc374e3b7b607671e370",
+      "sourceSpanSha256": "2f601b4ea536a209b557da34cdf34dbada026209857c01ae61339a657e7dd9c1"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "per-invocation maps in synchronous held-inode callbacks; only individual digest values or defensive BundleSnapshot copies leave",
+      "beginline": "180",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "180",
+      "findingId": "F03-PMD-b1335c0e49058a72608b15c3f23c686a8242354ee1c2495ebaf6e64c11604fa3",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "snapshots",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "BackupArtifactVerifierTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "sourceSha256": "7f0422d0ce3254445e50b9ed961e6699d853225c1acc449b21ba9d7de1af1791",
+      "sourceSpanSha256": "a6e8b3598eba0bbdf057d97d02190c9776b730be75a8162d16b119e86839ab7e"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "per-invocation maps in synchronous held-inode callbacks; only individual digest values or defensive BundleSnapshot copies leave",
+      "beginline": "181",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "181",
+      "findingId": "F03-PMD-0379dffc5c7aa786d8cbc0b452d08822ad9cd66126764454d296b0ed54d7c2a7",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "observed",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "BackupArtifactVerifierTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "sourceSha256": "7f0422d0ce3254445e50b9ed961e6699d853225c1acc449b21ba9d7de1af1791",
+      "sourceSpanSha256": "44308d2445f710687ac0732663857c1cf258d651e0da3b9bd28c8075552e6bb7"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "per-invocation maps in synchronous held-inode callbacks; only individual digest values or defensive BundleSnapshot copies leave",
+      "beginline": "478",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "478",
+      "findingId": "F03-PMD-7e862a8ee92722f60efd61976d023a78dc7309b202f64d2d7dafa2667dc4cd70",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "snapshots",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "BackupArtifactVerifierTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "sourceSha256": "7f0422d0ce3254445e50b9ed961e6699d853225c1acc449b21ba9d7de1af1791",
+      "sourceSpanSha256": "a6e8b3598eba0bbdf057d97d02190c9776b730be75a8162d16b119e86839ab7e"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "per-invocation maps in synchronous held-inode callbacks; only individual digest values or defensive BundleSnapshot copies leave",
+      "beginline": "479",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "479",
+      "findingId": "F03-PMD-c511adbc20abd34f9642c570da2e58de56f9ac4888e8f3aed3c23dc8b9c62ea2",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "observed",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "BackupArtifactVerifierTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "sourceSha256": "7f0422d0ce3254445e50b9ed961e6699d853225c1acc449b21ba9d7de1af1791",
+      "sourceSpanSha256": "44308d2445f710687ac0732663857c1cf258d651e0da3b9bd28c8075552e6bb7"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1037",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1037",
+      "findingId": "F03-PMD-ea564c7e35595eac0b4c19bcc7a7c5e9cf49cf6999a605f8f04e90f4ecf927ec",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "runs",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "adf1b7eb84cd4f724ee56cdf9da2b0e661d5383ce8660daee4f3b4cc79ac41ce"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1038",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1038",
+      "findingId": "F03-PMD-425a0c9ae764ba17769fa3e545064f92a63bca95b69aaf249efaaa609873489d",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "begins",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "8b9eef803b59fe25196c9a24f564948b4656a6c6106e5df23fe95fc17d146b54"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1039",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1039",
+      "findingId": "F03-PMD-208767fb82057d693446994d9c9343ac626127e3d7c60184b5db0de95da584de",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "done",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "0314b8fc84dfe3491a6d91d68b5999ff8e646d7ca39e265ae540b774cf1cb230"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1040",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1040",
+      "findingId": "F03-PMD-3032156d856177cb8ae84e2d2bfa40afa33bc6eed95e1b7c411dac66332a9062",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "plans",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "bf7d0d13f570369f63137cbb0750a3c87e8e52f2fd1d94834bcc28611393ab95"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1126",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1126",
+      "findingId": "F03-PMD-a1def0716aa46f6913fa700a9a573f2097a90aa6ade5ae682c9d91a0a78dbcbc",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "runs",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "adf1b7eb84cd4f724ee56cdf9da2b0e661d5383ce8660daee4f3b4cc79ac41ce"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1127",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1127",
+      "findingId": "F03-PMD-1d3449c0182e873d0c418d6efcc5b67a934f671957f3dc37f47d54bb04f84da8",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "begins",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "8b9eef803b59fe25196c9a24f564948b4656a6c6106e5df23fe95fc17d146b54"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local scan/retirement maps enter private immutable Inventory or defensive graph snapshots",
+      "beginline": "1128",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "1128",
+      "findingId": "F03-PMD-cc87e8d261c9435b7065c47676748a9daac96e924a6ac0bbbb3c83cc88e922e3",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "done",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceRunFilesTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "sourceSpanSha256": "0314b8fc84dfe3491a6d91d68b5999ff8e646d7ca39e265ae540b774cf1cb230"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local strict parser map is copied before publication",
+      "beginline": "104",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "104",
+      "findingId": "F03-PMD-1588947bb80e0c819ee5083f12dbb71116b66290af51044caf4ef245f3ea266f",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "fields",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "InspectorUnitSnapshotTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
+      "sourceSha256": "0a42bd999bec1c49c408a679b6f984930fc7ca2fe7d8ebabae29ad5b3b5bebb0",
+      "sourceSpanSha256": "135574500964ed0cb97e2bd4d09f29a163729f5b637bf0280f5e98be0390ef8f"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "local strict parser map is copied before publication",
+      "beginline": "43",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "43",
+      "findingId": "F03-PMD-d20dbf6dcd5b818fa65d40e20ff70d11cde3c7484e4c68847707b9e418803f0e",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "fields",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceStopSnapshotTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+      "sourceSha256": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4",
+      "sourceSpanSha256": "135574500964ed0cb97e2bd4d09f29a163729f5b637bf0280f5e98be0390ef8f"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "method-local validation scratch map; void parse does not publish the map",
+      "beginline": "53",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "53",
+      "findingId": "F03-PMD-498c0a8ae1d1699804b0c9688d12c3908e8e0fe38130731a7e4b54be7428e1b7",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "fields",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MaintenanceUnitStopPolicyTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java",
+      "sourceSha256": "b4b7fc677bbe515cd048ba73e673afdd9a24fc0174d97694ed1035c74a9de0ef",
+      "sourceSpanSha256": "4d6a24b4ae13471e622eeaae60270644df5ab1be7590888769012cb5f63122e5"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "two private fields belong to a new single-use nonescaping verifier; local archive SQL map is copied into JarValue",
+      "beginline": "49",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "49",
+      "findingId": "F03-PMD-317d024593989ca703b4269e3cbb53eebc17bc89480ae86a809ebc2602b9fcf0",
+      "kind": "SINGLE_USE_VERIFIER_FIELD",
+      "mapVariable": "jars",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "ReleasePayloadVerificationTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "sourceSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+      "sourceSpanSha256": "c0236247e09e0138f0e2f9d781bf60a12e19c53f5bafa04dc9185ac917f8272a"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "two private fields belong to a new single-use nonescaping verifier; local archive SQL map is copied into JarValue",
+      "beginline": "50",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "50",
+      "findingId": "F03-PMD-30b135e62f12378d8acf0cf1c82b94036697dde213c2fcf86141d62e9fdaba66",
+      "kind": "SINGLE_USE_VERIFIER_FIELD",
+      "mapVariable": "checksums",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "ReleasePayloadVerificationTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "sourceSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+      "sourceSpanSha256": "269f52e0a13ec3d74324713054cdd19d609fa1c5165e9bba052e9bba979791d1"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "two private fields belong to a new single-use nonescaping verifier; local archive SQL map is copied into JarValue",
+      "beginline": "297",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "297",
+      "findingId": "F03-PMD-086be2882fe0fb6ee83b16bbdc0393eaaff766a7b2ff8a35b5983df84d96054b",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "sql",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "ReleasePayloadVerificationTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "sourceSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+      "sourceSpanSha256": "d85440a761b5b66e27d9838e8aa3ae80cd4d0ee85213f38838f31d992192f8b1"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "per-call ordered decode map goes through the defensive immutable FieldValueSet boundary",
+      "beginline": "169",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "169",
+      "findingId": "F03-PMD-dc2c8fd11cb1ec94df224aacb9cae8ebb1f855273f761f25b7e6da66338d82c0",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "values",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "PayloadGoldenVectorTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "sourceSha256": "38f9b8d4e5a4aee7afef87edb102317a55182b3e1b958ec2f0f6496770cff181",
+      "sourceSpanSha256": "030da01c72bfec22040672b4c682f2f71c1fe57067c602e748a6810606bbfb0a"
+    },
+    {
+      "assessmentScope": "CONCURRENCY_PREMISE_ONLY_NOT_FUNCTIONAL_CERTIFICATION",
+      "basis": "response receives an immutable copy of per-call header scratch",
+      "beginline": "96",
+      "currentDiagnosticAndWholeBindingPending": true,
+      "endline": "96",
+      "findingId": "F03-PMD-2e55a24734f5f88e680dfea6da61a402bcef242814a474685494f453f6e23827",
+      "kind": "LOCAL_SCRATCH",
+      "mapVariable": "headers",
+      "priority": "3",
+      "rawWarningRetained": true,
+      "relatedTestClass": "MediaRangeServiceTest",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+      "sourceSha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a",
+      "sourceSpanSha256": "39adb262886207995cab72293b0025ae1ab05cef75492f393aa6c84e0551a31d"
+    }
+  ],
+  "sourceSnapshot": "2fc563a5f2fba4cfaf6f7a5bd56fe8909c1910ad",
+  "threadSafetyCertified": false,
+  "vmActions": 0,
+  "witnesses": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java": {
+      "actualCompiledClassSha256": {
+        "api:dev/codex/schubert/nk/api/file/AssetChecksumManifest.class": "bb8d3185a53e8d657f61e365e4c977d5841593d7b91e67c9eacf9d9edf3f84d5"
+      },
+      "requiredReviewedSnippetSha256": [
+        "2345038f289dcf37d1a522e7c2fb780ff5b40ddcfcc15952baf3c5cdbd8abfa0"
+      ],
+      "sourceSha256": "277695ad2fa22c60deb86c4aa1223fdcaaac4167bb1f33c3a473f58772ecd65d"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java": {
+      "actualCompiledClassSha256": {
+        "api:dev/codex/schubert/nk/api/security/AuthContextCodec.class": "54a0051c293b820138ba26dba7e6664bd397b2c306867e655025cd65852e5b30"
+      },
+      "requiredReviewedSnippetSha256": [
+        "99c68e7d7211be183e1374b498dda31e0bfed6b3bec8055cb28cd0249e4b6997",
+        "5b3daec611cb93d4a615b63289110ba2c9ef817dc22f7f1c087af15a074916b5"
+      ],
+      "sourceSha256": "f109c79807493154044e8aa0c051ce59650ed1cd016bfc374e3b7b607671e370"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java": {
+      "actualCompiledClassSha256": {
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$BundleSnapshot.class": "f2f7b3bba0edc1420e5c5a66f3db88bd74c86ebbc1e4e6f57095c33d8ae1098b",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Digests.class": "f8c5e26504e7ed77b32eeaadae5f059d7efa9dd48f3713254d82441f17dea750",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$FileClaim.class": "9fc4b942b8c96d8079f3b330c1fbcf34ce516e2b464f591d3d884716b85ea74d",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Force.class": "18e2e74244a580ce7890634cfc99258e9a863e9894d18c908b73eebf6903423f",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Io.class": "a6e3cd9bebe11c185ffabeeaddd94069d003962f98ca6c0182e4ae63ad5ace3f",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$NioIo.class": "99a7746310c2f8c714a6a78a072020d471c07c6b97e11b83418c490c34f69267",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$PendingDigests.class": "7209a7fbe98baebf3f111c7a0ba9a94b927fc582f9517ed370e89c8825644247",
+        "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.class": "10bbdeed09734a68caaf5ac3604c68733c26a6ae10756ea3d06a9f93bde3a403"
+      },
+      "requiredReviewedSnippetSha256": [
+        "f1f1d00f0047317a63b204561ff27832bc960e5c761a913ea818e63a86ee1a31",
+        "cf5ad45b2de97740f01c59b461d7f98cd49205896f1568ecf6dc486dfef4a2e5",
+        "520b7ca5879221158223f06da673da97109b3f3fa21f7818622e489f4c49d145",
+        "463230e2e9c7ef15e010ed1277d24f0ee5ee393b93548d6619354d0efc53e822"
+      ],
+      "sourceSha256": "7f0422d0ce3254445e50b9ed961e6699d853225c1acc449b21ba9d7de1af1791"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java": {
+      "actualCompiledClassSha256": {
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "1f6b52d28ae34b1b01223b2e1959d3731dbb2ffe546a6a5a2509fad8bfca47f2",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "d7ac4158bf03cd033c9315f58a6ff1b3bd092a5d358eaa93ee432f618ba9a852",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "e2ca1c2f91d58f9d7d1f12ed3b567161331a4de2833a7d1fb1a1ba18642e5310",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "1ff22fa8e508a668dec8c9ef1aa0ee30975ffcfd141444e2740f7842a7ff7f41",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "f0af09373d1a1a27bf043970ccdd5993167c671764d29a9a51a7e82ece8ac8e1",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6984919b0cb92afa5ea9bd7e14ced8c7fad6e0f221571141de4b608b0e64604c",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "88e98ce4628dc2f385ac43fef03959630bcae262617cd62298dcd3d8c9a88c4c",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+        "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "6f92765dc094797a272c061390512836694732c33639765b1a448849626787fb"
+      },
+      "requiredReviewedSnippetSha256": [
+        "78250ec4f847870233e9c2da1035c70905b98d72008045275ba717abfff76f04",
+        "f8f8d5f49906c6d03b8c5fb4162d902e9ab66150ece2553c3fb851498fdc26b8",
+        "13504fc2469a08dc89a9baef6caef0b3f0749b5f19385e2cd8db53e845bbaeef",
+        "e025b3ac18a25dce313a999a2cbb122e225b67105dd18717be532b95a89757e1",
+        "5ec5fb23012f695244071b0115a7dd45c9ae7a69c74f025fec73091243e299df"
+      ],
+      "sourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java": {
+      "actualCompiledClassSha256": {
+        "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot$Target.class": "7eee69fe3d8eac9f22147bc70ea20dfa8076fcf5b566a49c2256ca86d311679d",
+        "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.class": "90180d89ef15cacb183ab093e3773b80b7de87ed435c27bd8796c350c45ab48a"
+      },
+      "requiredReviewedSnippetSha256": [
+        "abd1cc7f7d7dd6144918955994f6c8971f6f479a76e8322747ee2bbbba7dbb10"
+      ],
+      "sourceSha256": "0a42bd999bec1c49c408a679b6f984930fc7ca2fe7d8ebabae29ad5b3b5bebb0"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java": {
+      "actualCompiledClassSha256": {
+        "batch:dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class": "24215a68cad48c13b84d6a7180eda4ae6b2aebee3e126c96cb4f31938ddbe969"
+      },
+      "requiredReviewedSnippetSha256": [
+        "64f086eead3ebca885d35d8e3312dadaecafd3e7573593dea2e356351721f66c"
+      ],
+      "sourceSha256": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java": {
+      "actualCompiledClassSha256": {
+        "batch:dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$NativeSource.class": "ec29a4a11156c64ef103e4af5871526c1dd840846fda2c44fc84e8acfefc0650",
+        "batch:dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$Source.class": "cc200a8839cbcbe042f54778be1bde39754743598923d9423f2ed805ddc6c992",
+        "batch:dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.class": "ea093c04ec43c594e6a82a6e88f39f5b1f651005f3e5080f2ba33bb047a3e99d"
+      },
+      "requiredReviewedSnippetSha256": [
+        "222eeaba11b93401735c49193e89aa10cab18f965b2ff5342f0d6790548c194e",
+        "f2de40c3b129bfaebcc628449e8d2301c8b50e89e4e306b0103113c3a942b0a7"
+      ],
+      "sourceSha256": "b4b7fc677bbe515cd048ba73e673afdd9a24fc0174d97694ed1035c74a9de0ef"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": {
+      "actualCompiledClassSha256": {
+        "bootstrap:dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification$FileValue.class": "17a167a6df33c850a9fbb5f3ce187d0be038c8b630f7368847c8b34fcfd0b213",
+        "bootstrap:dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification$JarValue.class": "d82772fe8f1954421c7c776240178fe4439e9316d1ba4b35f003bb42a5bb0492",
+        "bootstrap:dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.class": "d7b62cc58a3db9c9cafd77d4846a3651a67b0686cab44a615425281cd59c18d9"
+      },
+      "requiredReviewedSnippetSha256": [
+        "636464af60880d0046acf31e7d9ef76fea104f8c279bf6d0d5755295fa993761",
+        "731bc0882f41cc6b2ae1290ab60bb81b710b2db634e83bb66517ce2fd2ec6358"
+      ],
+      "sourceSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": {
+      "singleUseImmediateVerifySites": 2,
+      "sourceSha256": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": {
+      "actualCompiledClassSha256": {
+        "protocol:dev/codex/schubert/nk/protocol/codec/PayloadCodec$1.class": "53f9aa0b90a4c1b18ddb96d610e8e350c290fafd882894e771e79cff8994f1bc",
+        "protocol:dev/codex/schubert/nk/protocol/codec/PayloadCodec.class": "959c46b304f0cc5792f4ed70d97cc316e90e478599f58066fccd97b05b7616f5"
+      },
+      "requiredReviewedSnippetSha256": [
+        "5b50cea566768ea32ccdbfde44c1c1f4dcb2f5b9515f12ca523183696747fb88"
+      ],
+      "sourceSha256": "38f9b8d4e5a4aee7afef87edb102317a55182b3e1b958ec2f0f6496770cff181"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java": {
+      "defensiveOrderedImmutableSink": true,
+      "sourceSha256": "2c292124a30ee4ed275ad2d43818b46c73c8f5648edd60914992da786e6f555b"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java": {
+      "actualCompiledClassSha256": {
+        "web:dev/codex/schubert/nk/web/media/MediaRangeService$FileSource.class": "bed817501847367e143d838b97bcac5a6d5f829689630bb04ff07488a50e600b",
+        "web:dev/codex/schubert/nk/web/media/MediaRangeService$ReadOperation.class": "e67eee1f672bc26fc565e221b6e6b3e2fbe5dcb1f6f438529bd422934a65ec31",
+        "web:dev/codex/schubert/nk/web/media/MediaRangeService$Response.class": "5c0027f150f9ccb146ac263a20fa0904de848228daf664f5eebe8a2a5bf717db",
+        "web:dev/codex/schubert/nk/web/media/MediaRangeService.class": "f26b78af15d7ab9dbe89b62c6dc0556cda398ca8f8268a94ab5fd77b1fa43bef"
+      },
+      "requiredReviewedSnippetSha256": [
+        "23bffbf9259f390ae4e84cef71914de2a5d7c71dcdef952086e078204d57ff99"
+      ],
+      "sourceSha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a"
+    }
+  }
+}

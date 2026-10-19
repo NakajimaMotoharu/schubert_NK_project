@@ -90,6 +90,7 @@ final class BatchRuntimeDependencyTest {
   }
 
   private static void assertStartupDependencies(String pom) {
+    assertBootstrapTestFixtures(pom);
     var direct = new java.util.HashSet<String>();
     var blocks = DEPENDENCY.matcher(pom);
     while (blocks.find()) {
@@ -120,6 +121,7 @@ final class BatchRuntimeDependencyTest {
               artifact.equals("schubert-nk-bootstrap") ? "dev.codex.schubert" : "org.flywaydb",
               artifact);
       assertFalse(declared.contains("<scope>"), "SS311 default compile dependency");
+      assertFalse(declared.contains("<type>"), "fixed startup uses the main library jar");
     }
     String driver = dependencyBlock(pom, "org.flywaydb", "flyway-database-postgresql");
     assertTrue(driver.contains("<scope>runtime</scope>"), "root Flyway PG adapter runtime");
@@ -137,10 +139,69 @@ final class BatchRuntimeDependencyTest {
     while (matcher.find()) {
       String value = matcher.group();
       if (value.contains("<groupId>" + group + "</groupId>")
-          && value.contains("<artifactId>" + artifact + "</artifactId>")) found.add(value);
+          && value.contains("<artifactId>" + artifact + "</artifactId>")
+          && !value.contains("<scope>test</scope>")) found.add(value);
     }
     assertEquals(1, found.size(), "one fixed root startup declaration");
     return found.getFirst();
+  }
+
+  /** PT-BAT-283B/BUG1463: an independent test fixture is not a second runtime startup jar. */
+  @Test
+  void bat283bBootstrapFixtureCannotMaskWrongRuntimeScopeOrDuplicate() {
+    String main =
+        "<dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>";
+    String fixture =
+        "<dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version><type>test-jar</type><scope>test</scope></dependency>";
+    assertEquals(
+        main, dependencyBlock(main + fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+    assertBootstrapTestFixtures(main + fixture);
+    assertBootstrapTestFixtures(main);
+    assertThrows(
+        AssertionError.class,
+        () -> dependencyBlock(fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+    assertThrows(
+        AssertionError.class,
+        () ->
+            dependencyBlock(main + main + fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+    for (String wrong :
+        new String[] {
+          fixture + fixture,
+          fixture.replace("<scope>test</scope>", "<scope>runtime</scope>"),
+          fixture.replace("<scope>test</scope>", "<scope>compile</scope>"),
+          fixture.replace("<scope>test</scope>", ""),
+          fixture.replace("<type>test-jar</type>", "<type>jar</type>"),
+          fixture.replace("<type>test-jar</type>", ""),
+          fixture.replace("${project.version}", "0.0.0-foreign"),
+          fixture.replace("</dependency>", "<classifier>foreign</classifier></dependency>")
+        }) {
+      assertThrows(
+          AssertionError.class,
+          () -> {
+            assertEquals(
+                main, dependencyBlock(main + wrong, "dev.codex.schubert", "schubert-nk-bootstrap"));
+            assertBootstrapTestFixtures(main + wrong);
+          });
+    }
+  }
+
+  private static void assertBootstrapTestFixtures(String pom) {
+    int fixtures = 0;
+    var matcher = DEPENDENCY.matcher(pom);
+    while (matcher.find()) {
+      String block = matcher.group();
+      if (block.contains("<groupId>dev.codex.schubert</groupId>")
+          && block.contains("<artifactId>schubert-nk-bootstrap</artifactId>")
+          && block.contains("<scope>test</scope>")) {
+        fixtures++;
+        assertTrue(block.contains("<type>test-jar</type>"), "only the explicit test fixture jar");
+        assertTrue(
+            block.contains("<version>${project.version}</version>"),
+            "same project fixture version");
+        assertFalse(block.contains("<classifier>"), "no alternate fixture classifier");
+      }
+    }
+    assertTrue(fixtures <= 1, "test-only fixture declaration cannot be duplicated");
   }
 
   private static String postgresBlock(String pom) {

@@ -40,19 +40,25 @@ def physical_delta(prior,physical,phase):
     return changed,okay,sorted(changed-EXPECTED_CHANGES)
 
 
-def inventory(snapshot,phase):
+def inventory(snapshot,phase,include_canary=False):
     specs={**DEPENDENCIES,CODEC:('api',7),**(OWNERS if phase=='green'else{WEB:OWNERS[WEB]})};expected={}
     for name,(module,count)in specs.items():
         path=snapshot/('src/schubert-nk-'+module+'/src/test/java')/(name.replace('.','/')+'.java')
         names=test_names(path)
         if len(names)!=count:raise ValueError('all declared independent owner/dependency cases '+name)
         expected[name]=names
-    if sum(map(len,expected.values()))!=(71 if phase=='green'else 29):raise ValueError('exact selected scope required')
+    if include_canary:
+        if phase!='green':raise ValueError('runtime canary only in the fully affected green scope')
+        name='dev.codex.schubert.nk.batch.bootstrap.BatchRuntimeDependencyTest'
+        names=test_names(snapshot/'src/schubert-nk-batch/src/test/java'/(name.replace('.','/')+'.java'))
+        if names!={'bat283RuntimePostgresDriverAndScopeCanaries','bat283bBootstrapFixtureCannotMaskWrongRuntimeScopeOrDuplicate'}:raise ValueError('both original runtime oracle and independent new scope negatives')
+        expected[name]=names
+    if sum(map(len,expected.values()))!=((73 if include_canary else 71)if phase=='green'else 29):raise ValueError('exact selected scope required')
     return expected
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red','green'));parser.add_argument('--version',default='v1');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red','green'));parser.add_argument('--version',default='v1');parser.add_argument('--include-runtime-canary',action='store_true');args=parser.parse_args()
     if not re.fullmatch(r'v[1-9][0-9]*',args.version):raise ValueError('bounded explicit new-only attempt version')
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('clean committed input first')
     head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()
@@ -65,7 +71,7 @@ def main():
     with archive.open('xb')as f:subprocess.run(['git','archive',head,'src','pom.xml','mvnw','.mvn','program/characterization'],cwd=ROOT,stdout=f,check=True);f.flush();os.fsync(f.fileno())
     snapshot=out/'source';snapshot.mkdir(mode=0o700)
     with tarfile.open(archive)as f:f.extractall(snapshot,filter='data')
-    expected=inventory(snapshot,args.phase);built=('protocol','storage','bootstrap','api','web')+ (('batch',)if args.phase=='green'else())
+    expected=inventory(snapshot,args.phase,args.include_runtime_canary);built=('protocol','storage','bootstrap','api','web')+ (('batch',)if args.phase=='green'else())
     base=[str(TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'),'-B','-o','-ntp','-Dmaven.repo.local='+str(TC/'m2/repository')]
     commands=[base+['-pl',','.join('src/schubert-nk-'+m for m in('protocol','storage','bootstrap','api','web','batch')),'spotless:check'],
         base+['-pl',','.join('src/schubert-nk-'+m for m in built),'-Dtest='+','.join(expected),'-Dsurefire.failIfNoSpecifiedTests=false',
@@ -110,7 +116,7 @@ def main():
     red=fixed and physical_ok and actual==expected and phases==[0,1]and not errors and not skipped and failed==[[WEB,'monitor004CallerLockCannotBlockConfirmedLifetimeClose']]and expected_failure
     green=fixed and physical_ok and actual==expected and phases==[0,0]and not failed and not errors and not skipped and set(static)==set(built)and not any(static.values())
     value={'actualExit':next((v for v in phases if v),0),'sourceSnapshot':head,'branch':branch,'baseProductionSource':BASE,'phase':args.phase,'startedUTC':started,'completedUTC':utc(),
-        'phaseExits':phases,'sourceFixed':fixed,'expectedCases':sum(map(len,expected.values())),'actualCases':sum(map(len,actual.values())),'suites':len(actual),
+        'phaseExits':phases,'sourceFixed':fixed,'expectedCases':sum(map(len,expected.values())),'actualCases':sum(map(len,actual.values())),'suites':len(actual),'scopeIncludesRuntimeCanary':args.include_runtime_canary,
         'exactSelectedInventory':actual==expected,'failed':failed,'errors':errors,'skipped':skipped,'purposefulRedEstablished':red,'greenSelectedQualified':green,
         'staticBuiltModules':static,'targetCounters':coverage,'physicalMain':{'count':len(physical),'changed':sorted(changed),'declaredSourceDeltaQualified':physical_ok,
             'requiredCodeChangedClasses':sorted(EXPECTED_CHANGES)if args.phase=='green'else[],

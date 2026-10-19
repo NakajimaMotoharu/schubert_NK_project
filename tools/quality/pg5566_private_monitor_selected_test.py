@@ -22,6 +22,9 @@ class SelectedMonitor(unittest.TestCase):
         red=entry.inventory(entry.ROOT,'red');green=entry.inventory(entry.ROOT,'green')
         self.assertEqual(sum(map(len,red.values())),29)
         self.assertEqual(sum(map(len,green.values())),71)
+        expanded=entry.inventory(entry.ROOT,'green',True)
+        self.assertEqual(sum(map(len,expanded.values())),73)
+        with self.assertRaises(ValueError):entry.inventory(entry.ROOT,'red',True)
         self.assertEqual(len(entry.EXPECTED_CHANGES),6)
         self.assertTrue(set(entry.OWNERS)<=green.keys())
 
