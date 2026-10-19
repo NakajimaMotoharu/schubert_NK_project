@@ -171,7 +171,7 @@ public final class RootStartupContext {
     byte[] bytes = new byte[0];
     try {
       bytes = Objects.requireNonNull(io.stat(captured.pid()));
-      require(start(bytes, captured.pid()) == captured.startTicks());
+      require(start(bytes, captured.pid(), true) == captured.startTicks());
       return false;
     } catch (java.nio.file.NoSuchFileException gone) {
       return true;
@@ -237,10 +237,10 @@ public final class RootStartupContext {
               && pid <= Integer.MAX_VALUE
               && pid != morning.pid()
               && !invocation.equals(morning.invocation()));
-      long ticks = start(io.stat(pid), pid);
+      long ticks = start(io.stat(pid), pid, !rootPhase);
       require(ascii(io.cgroup(pid), 4096).equals("0::" + group + "\n"));
       if (rootPhase) require(io.serviceRootUid(pid) == 0);
-      long afterTicks = start(io.stat(pid), pid);
+      long afterTicks = start(io.stat(pid), pid, !rootPhase);
       byte[] second = Objects.requireNonNull(io.unit(target));
       try {
         require(ticks == afterTicks && Arrays.equals(first, second));
@@ -381,6 +381,12 @@ public final class RootStartupContext {
   }
 
   private static long start(byte[] bytes, long pid) throws IOException {
+    return start(bytes, pid, false);
+  }
+
+  // SSC309: during nonleader exec the leader can be Z while the same process generation
+  // persists. This is existence data only, never Root admission, readiness or an exit proof.
+  private static long start(byte[] bytes, long pid, boolean generationOnly) throws IOException {
     String text = ascii(bytes, 4096);
     require(text.endsWith("\n"));
     require(text.startsWith(pid + " ("));
@@ -389,7 +395,7 @@ public final class RootStartupContext {
     String[] fields = text.substring(delimiter + 2, text.length() - 1).split(" ", -1);
     require(
         fields.length >= 20
-            && fields[0].matches("[RSIDTWtKP]")
+            && fields[0].matches(generationOnly ? "[RSIDTWtKPZ]" : "[RSIDTWtKP]")
             && fields[19].matches("[1-9][0-9]{0,18}"));
     try {
       return Long.parseLong(fields[19]);

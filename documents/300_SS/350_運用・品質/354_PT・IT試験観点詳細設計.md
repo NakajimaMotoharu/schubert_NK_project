@@ -353,4 +353,4 @@ QA050承認に基づき、初期5秒/30秒/5分後の継続再試行を15分で�
 
 ## SSC309 exec中の世代とreadyの独立反例
 
-PT-OPS-EXECGEN309001～003：API/Web固定世代の一時Z→同PID/startTicksのordinary復帰、Z継続中は終了false、二回NoSuch後のみ終了true。Zを初回Root/self/PID1へ使えず、X/x/未知、不正/別ticks、cgroup/Unit drift、未知IOを拒否する。世代guardの通過だけではreadyにならず、空cmdlineはsocket/HTTP前false、復帰後は完全ordinary/same-socket/HTTP200 UP/infoを要求し503を拒否。kernel fixtureはpidfd非終端を独立に観測し、業務Root再起動動を使わない。元失敗raw state未保存と新再現を区別し、旧source成功/失敗nativeを新sourceの正常nativeへ合算しない。元期限/UNKNOWN/451四100は不変更、fresh必要全体と実nativeは別受入。
+PT-OPS-EXECGEN309001～003：API/Web固定世代の一時Z→同PID/startTicksのordinary復帰、Z継続中は終了false、二回NoSuch後のみ終了true。Zを初回Root/self/PID1へ使えず、X/x/未知、不正/別ticks、cgroup/Unit drift、未知IOを拒否する。世代guardの通過だけではreadyにならず、空cmdlineはsocket/HTTP前false、復帰後は完全ordinary/same-socket/HTTP200 UP/infoを要求し503を拒否。kernel fixtureはpidfd非終端を独立に観測し、業務Root再起動を使わない。元失敗raw state未保存と新再現を区別し、旧source成功/失敗nativeを新sourceの正常nativeへ合算しない。元期限/UNKNOWN/451四100は不変更、fresh必要全体と実nativeは別受入。
