@@ -47,14 +47,14 @@ public final class RootStartupContext {
     MORNING("schubert-nk-morning-controller.service"),
     CLEANUP("schubert-nk-cleanup.service"),
     EXPIRY("schubert-nk-expiry-cleanup.service");
-    private final String unit;
+    private final String systemUnit;
 
     Service(String unit) {
-      this.unit = unit;
+      this.systemUnit = unit;
     }
 
     public String unit() {
-      return unit;
+      return systemUnit;
     }
   }
 

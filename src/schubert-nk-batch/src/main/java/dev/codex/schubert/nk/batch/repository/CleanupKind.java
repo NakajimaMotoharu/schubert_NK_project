@@ -17,20 +17,20 @@ public enum CleanupKind {
   BATCH_RUNS("batch_runs", 1000),
   INBOX_PROGRESS("inbox_progress", 1000),
   LOG_PROGRESS("log_progress", 1000);
-  private final String function;
-  private final int maximumRows;
+  private final String sqlFunction;
+  private final int rowLimit;
 
   CleanupKind(String suffix, int maximumRows) {
-    this.function = "schubert.maintenance_cleanup_" + suffix;
-    this.maximumRows = maximumRows;
+    this.sqlFunction = "schubert.maintenance_cleanup_" + suffix;
+    this.rowLimit = maximumRows;
   }
 
   public String function() {
-    return function;
+    return sqlFunction;
   }
 
   public int maximumRows() {
-    return maximumRows;
+    return rowLimit;
   }
 
   /**

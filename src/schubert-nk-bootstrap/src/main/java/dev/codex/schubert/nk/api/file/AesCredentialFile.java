@@ -10,19 +10,19 @@ public enum AesCredentialFile {
   RESPONSE_CURRENT("api-inbox-response-aes-current", false),
   RESPONSE_PREVIOUS("api-inbox-response-aes-previous", true);
 
-  private final String fileName;
-  private final boolean optional;
+  private final String credentialFileName;
+  private final boolean optionalCredential;
 
   AesCredentialFile(String fileName, boolean optional) {
-    this.fileName = fileName;
-    this.optional = optional;
+    this.credentialFileName = fileName;
+    this.optionalCredential = optional;
   }
 
   public String fileName() {
-    return fileName;
+    return credentialFileName;
   }
 
   public boolean optional() {
-    return optional;
+    return optionalCredential;
   }
 }

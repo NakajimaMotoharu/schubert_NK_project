@@ -61,14 +61,14 @@ public final class InspectorUnitSnapshot {
     MORNING("schubert-nk-morning-controller.service"),
     API("schubert-nk-api.service"),
     WEB("schubert-nk-web.service");
-    private final String unit;
+    private final String systemUnit;
 
     Target(String unit) {
-      this.unit = unit;
+      this.systemUnit = unit;
     }
 
     public String unit() {
-      return unit;
+      return systemUnit;
     }
   }
 

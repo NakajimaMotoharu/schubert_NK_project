@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-006 — PT_DEFAULT：残14enum/21fieldの有限値catalog
+
+1185/BUG1478/群1332、API・storage・bootstrap・batchの新五`EnumValueCatalogCompatibilityTest`、有限literal getter/変換/null/enum descriptorだけ。Source固定は次clean commit、namespace PG5732-enum48-selected-v1、後続PG5734静的。六modulecompile/型null/SpotBugsと限定五PT、全五case/XML一致必須。実factory生成・credential読取・DB・通信・DBus/native・Unit start/stop・permit回収0。外側業務コード不変更の明示sourceモデルと実ABI照合を付ける。nested enumの型名だけで保留対象の実回収操作と同一視せず、未知拒否/実所有依存とは分離する。command/source/作用変更時は再判定、拒否を探る試行ではない。
+
 ## 現行実行追補（2026-10-20、7f7a64af6の継続訂正）
 
 下記07:30の限定書面分類は履歴。現在は通常PG/PTの自走が承認され、分類だけ/三群だけの終了条件は解除された。BUG1476の残九fieldは実装済み、ENUM002の明示型23への拡張と1183を固定し、clean commitをPG5728のsourceとして保存する。PTPRE001～003の対象・権限・offline/有限fixture/副作用は同じでPT_DEFAULTを維持する。PG5728は通常実行PT、5729は別静的ABI照合、5730は元結果公開。各namespaceは未使用確認後一回だけ。未知拒否と実所有依存操作のHOLDは維持し、実行済PTと代替を混同しない。小群終了後も独立した後続WBSへ継続する。

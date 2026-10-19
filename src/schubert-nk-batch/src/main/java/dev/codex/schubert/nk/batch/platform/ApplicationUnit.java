@@ -4,13 +4,13 @@ package dev.codex.schubert.nk.batch.platform;
 enum ApplicationUnit {
   API("schubert-nk-api.service"),
   WEB("schubert-nk-web.service");
-  private final String serviceName;
+  private final String unitName;
 
   ApplicationUnit(String serviceName) {
-    this.serviceName = serviceName;
+    this.unitName = serviceName;
   }
 
   String serviceName() {
-    return serviceName;
+    return unitName;
   }
 }

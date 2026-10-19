@@ -15,14 +15,14 @@ public record MaintenanceCompletion(
     SUCCESS(0),
     WARNING(10);
 
-    private final int exitCode;
+    private final int processExitCode;
 
     Outcome(int exitCode) {
-      this.exitCode = exitCode;
+      this.processExitCode = exitCode;
     }
 
     public int exitCode() {
-      return exitCode;
+      return processExitCode;
     }
   }
 

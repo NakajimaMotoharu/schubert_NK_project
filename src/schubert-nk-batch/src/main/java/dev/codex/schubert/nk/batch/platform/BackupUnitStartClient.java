@@ -46,36 +46,36 @@ public final class BackupUnitStartClient {
         InspectorUnitSnapshot.Target.ARTEMIS,
         "/run/schubert-nk/startup",
         "broker-start.intent");
-    private final MaintenanceUnit unit;
-    private final InspectorUnitSnapshot.Target observation;
-    private final String requestDirectory;
-    private final String marker;
+    private final MaintenanceUnit systemUnit;
+    private final InspectorUnitSnapshot.Target observedTarget;
+    private final String requestPath;
+    private final String intentFileName;
 
     Target(
         MaintenanceUnit unit,
         InspectorUnitSnapshot.Target observation,
         String directory,
         String marker) {
-      this.unit = unit;
-      this.observation = observation;
-      this.requestDirectory = directory;
-      this.marker = marker;
+      this.systemUnit = unit;
+      this.observedTarget = observation;
+      this.requestPath = directory;
+      this.intentFileName = marker;
     }
 
     public MaintenanceUnit unit() {
-      return unit;
+      return systemUnit;
     }
 
     public InspectorUnitSnapshot.Target observation() {
-      return observation;
+      return observedTarget;
     }
 
     public String requestDirectory() {
-      return requestDirectory;
+      return requestPath;
     }
 
     public String marker() {
-      return marker;
+      return intentFileName;
     }
 
     /** Only Cleanup controls Inspector; the four other fixed starts are Morning-owned. */

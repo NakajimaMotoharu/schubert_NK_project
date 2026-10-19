@@ -67,14 +67,14 @@ public enum ArtemisConnectionFactoryProvider {
     ASYNC(0),
     WEB_LOG(64 * 1024);
 
-    private final int windowBytes;
+    private final int configuredWindowBytes;
 
     ConsumerProfile(int windowBytes) {
-      this.windowBytes = windowBytes;
+      this.configuredWindowBytes = windowBytes;
     }
 
     public int windowBytes() {
-      return windowBytes;
+      return configuredWindowBytes;
     }
   }
 }

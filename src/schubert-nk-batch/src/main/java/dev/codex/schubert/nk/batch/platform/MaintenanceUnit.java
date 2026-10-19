@@ -14,17 +14,17 @@ public enum MaintenanceUnit {
   BACKUP("schubert-nk-backup.service"),
   ARTEMIS("artemis.service");
 
-  private final String serviceName;
+  private final String unitName;
 
   MaintenanceUnit(String serviceName) {
-    this.serviceName = serviceName;
+    this.unitName = serviceName;
   }
 
   public String serviceName() {
-    return serviceName;
+    return unitName;
   }
 
   public String controlGroup() {
-    return "/system.slice/" + serviceName;
+    return "/system.slice/" + unitName;
   }
 }

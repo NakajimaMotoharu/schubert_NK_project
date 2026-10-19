@@ -26,14 +26,14 @@ public final class SystemManagerObservation {
     BROKER("artemis.service"),
     CADDY("caddy.service");
 
-    private final String unit;
+    private final String systemUnit;
 
     Service(String unit) {
-      this.unit = unit;
+      this.systemUnit = unit;
     }
 
     public String unit() {
-      return unit;
+      return systemUnit;
     }
   }
 

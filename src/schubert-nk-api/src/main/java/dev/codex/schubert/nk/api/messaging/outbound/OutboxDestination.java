@@ -7,14 +7,14 @@ public enum OutboxDestination {
   ASYNC_WORK("nk.async.work"),
   DLQ("nk.dead.letter");
 
-  private final String address;
+  private final String physicalAddress;
 
   OutboxDestination(String address) {
-    this.address = address;
+    this.physicalAddress = address;
   }
 
   public String address() {
-    return address;
+    return physicalAddress;
   }
 
   public static OutboxDestination fromAddress(String address) {
@@ -22,7 +22,7 @@ public enum OutboxDestination {
       throw new NullPointerException("address");
     }
     return Arrays.stream(values())
-        .filter(destination -> destination.address.equals(address))
+        .filter(destination -> destination.physicalAddress.equals(address))
         .findFirst()
         .orElseThrow(() -> new IllegalArgumentException("outbox destination is not allowed"));
   }

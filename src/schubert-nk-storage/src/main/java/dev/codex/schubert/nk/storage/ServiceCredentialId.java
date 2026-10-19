@@ -37,14 +37,14 @@ public enum ServiceCredentialId {
   private static final List<ServiceCredentialId> WEB =
       List.of(DB_WEB, MQ_WEB, WEB_SESSION_AES_CURRENT, WEB_REVOKE_AES_CURRENT, WEB_LOG_AES_CURRENT);
 
-  private final ServiceConfigFiles.Service service;
-  private final String fileName;
-  private final Kind kind;
+  private final ServiceConfigFiles.Service owningService;
+  private final String credentialFileName;
+  private final Kind credentialKind;
 
   ServiceCredentialId(ServiceConfigFiles.Service service, String fileName, Kind kind) {
-    this.service = service;
-    this.fileName = fileName;
-    this.kind = kind;
+    this.owningService = service;
+    this.credentialFileName = fileName;
+    this.credentialKind = kind;
   }
 
   public static List<ServiceCredentialId> forService(ServiceConfigFiles.Service service) {
@@ -55,14 +55,14 @@ public enum ServiceCredentialId {
   }
 
   public ServiceConfigFiles.Service service() {
-    return service;
+    return owningService;
   }
 
   public String fileName() {
-    return fileName;
+    return credentialFileName;
   }
 
   public Kind kind() {
-    return kind;
+    return credentialKind;
   }
 }

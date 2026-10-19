@@ -5,13 +5,13 @@ public enum LoginAttemptKind {
   USER(5),
   IP(10);
 
-  private final int threshold;
+  private final int failureThreshold;
 
   LoginAttemptKind(int threshold) {
-    this.threshold = threshold;
+    this.failureThreshold = threshold;
   }
 
   public int threshold() {
-    return threshold;
+    return failureThreshold;
   }
 }

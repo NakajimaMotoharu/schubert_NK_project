@@ -16,13 +16,13 @@ public enum BatchStep {
   CLEAN_TRANSFER(false),
   CLEAN_EXPIRY(false);
 
-  private final boolean backup;
+  private final boolean backupStep;
 
   BatchStep(boolean backup) {
-    this.backup = backup;
+    this.backupStep = backup;
   }
 
   public boolean backup() {
-    return backup;
+    return backupStep;
   }
 }
