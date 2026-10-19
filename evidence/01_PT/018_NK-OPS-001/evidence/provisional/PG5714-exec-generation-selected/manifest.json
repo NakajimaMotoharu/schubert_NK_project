@@ -1,0 +1,403 @@
+{
+  "actualExit": 0,
+  "source": "6db56feeea6df0e355c018e6b80ad4e40c2d90f5",
+  "priorSource": "0ea400109d79e47327d9fff105ff763f9310a31f",
+  "redManifestSha256": "c3fd9c95c8c8a87c6d68cd689a35556296a0502ccd764af837d6c071ba181da9",
+  "greenManifestSha256": "f14cfae4b742be45d2c89a84efef0eea1653756c058db8c2c54678be7b6c088f",
+  "tests": 62,
+  "suites": 8,
+  "allPhysicalMain": 1664,
+  "physicalDifferences": [
+    {
+      "physicalClass": "batch:dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo.class",
+      "oldSha256": "6d448090fdcd79419ee8b222b83d42cf5e4c9c76a20439fc6626f0d56d4de9b3",
+      "newSha256": "c4c601773417c7d26e966dbae06df393ee866aa6eac5835f80ccf5b83bd39579",
+      "debugOnly": true
+    },
+    {
+      "physicalClass": "batch:dev/codex/schubert/nk/batch/platform/RootStartupContext.class",
+      "oldSha256": "dd3a6ccf5075c80039ea5083743ff8c3655a767ad71f1391fdf1002da0e5740c",
+      "newSha256": "00c87c7af75a74c63fc7bb2debd7d11bdf551b1f9851e25731db837d54801fc5",
+      "debugOnly": false
+    }
+  ],
+  "cases": [
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "method": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "method": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "method": "sharedCodecProducesIdenticalBytesUnderConcurrentUse",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "unknownCompoundFailures",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "knownIoFailures",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "unknownBodyFailures",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "concurrentScopes",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "nullAndNullableContracts",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "nestedScopes",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "knownBodyUnknownCleanup",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+      "method": "successfulOwnership",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg006ShippedTemplatesMatchApprovedDefaults",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg002LayeredNonSecretOverridesAndScalarTypes",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg001IndependentDefaultsAndCanonicalHash",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg007IndependentManifestCountAndCanonicalHash",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.bootstrap.ApiNonSecretConfigTest",
+      "method": "opsApiCfg005NullUnknownAndConcurrentDeterminism",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "currentPreviousUnknownTamperAndEveryAadMutationDenyClosed",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "identitySnapshotKeyAndLifecycleContractsRejectNullAndInvalidValues",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "scope002QuestionScopeFrameMatchesIndependentCompressionAadAndJceCiphertext",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "fixedNonceCiphertextMatchesIndependentCompressionAndAadVector",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "unavailableAesProviderProducesTypedBoundedFailure",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodecTest",
+      "method": "zeroAndMaximumPlaintextRoundTripAndEveryLengthBoundaryIsGuarded",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+      "method": "life001StopFailureInterruptNullAndHookInstallation",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+      "method": "life002ForeignHookWaitsForActualOwnerNotificationAndPreservesInterrupt",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+      "method": "monitor004CallerLockCannotBlockConfirmedLifetimeClose",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+      "method": "life003HealthyOwnerAwaitsIndependentStop",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428002EveryIdentityAndCapFieldIsMandatory",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428006ExpectedMapCannotBeMalformedOrUseWireVersionAsOracle",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428005ExactLinuxTcpAddressesAndOwnedDescriptors",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428004NullIoAndEveryBeforeAfterFailurePropagate",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "execgen309003PendingGenerationNeedsOrdinaryCommandSocketAndHttp",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready1413001RawNonAsciiStatusRejectsBeforeCommandSocketsOrHttp",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428001IndependentGoldenAndSameInodeRequired",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+      "method": "ready428003HttpLiteralVersionAndStatusNegative",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessNativeTest",
+      "method": "native428010RealOwnedFixedLoopbackListenerAndBoundedHttp",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessNativeTest",
+      "method": "native428011NoFollowAndByteLimitCloseBeforeFailure",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessNativeTest",
+      "method": "native428012ValidatedPidAndOnlyTwoFixedPorts",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "execgen309002StrictCaptureAndForeignGenerationRemainRejected",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootqueryown002FactoryIoRuntimeFatalAndNullNeverBecomeAProcessOwner",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx010NativeServiceUidRejectsInvalidPidAndOrdinaryCaller",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx002RootProcInitBootAndInvocationDomains",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "execgen309001TransientZombieIsPendingGenerationNeverAnExit",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootqueryown001GetterNullRuntimeAndFatalKeepExactPartialCleanupOrder",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx005AsciiBoundsNullAndObservationDrift",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "kernelStatusRequiresAllFourRootUidValuesAndWholeBytes",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx009CleanupOwnUnitNotMorningOrApi",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "ordinaryGenerationKeepsRootUidCaptureStrictAndBorrowsOriginalDeadline",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootServiceDeadlineUsesActualUnitStartNotNewBudget",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx003StatStartBoundaryAndPidNamespaceBinding",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx007NativeStreamsFaultsAndUnknownPriority",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx011NativeDeadlineUsesFixedPropertiesAndPreservesIoFailure",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx006FixedSystemBusQueryAndAllProcessResults",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx001LiteralContextAndTwoObservations",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "capturedServicePidMustReallyDisappearAndIoOrReuseNeverBecomesTerminal",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx004EveryManagerPropertyAndCgroupRefused",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx008NativeKernelReadsAndOrdinaryUidRefusal",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootGenerationNeverNormalizesUidCgroupBootManagerAndPidDrift",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "rootctx010SameInvocationOuterDeadlineIsAnIndependentUpperBound",
+      "result": "PASS"
+    },
+    {
+      "class": "dev.codex.schubert.nk.batch.platform.RootStartupContextTest",
+      "method": "morningCapturesOnlyActualFixedServiceRootGeneration",
+      "result": "PASS"
+    }
+  ],
+  "staticBuiltModules": {
+    "api": 0,
+    "batch": 0,
+    "bootstrap": 0,
+    "protocol": 0,
+    "storage": 0,
+    "web": 0
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/batch/platform/MorningServiceReadiness": {
+      "BRANCH": {
+        "covered": 75,
+        "missed": 6
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 44,
+        "missed": 5
+      },
+      "INSTRUCTION": {
+        "covered": 539,
+        "missed": 45
+      },
+      "LINE": {
+        "covered": 84,
+        "missed": 10
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext": {
+      "BRANCH": {
+        "covered": 133,
+        "missed": 21
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 82,
+        "missed": 20
+      },
+      "INSTRUCTION": {
+        "covered": 1168,
+        "missed": 8
+      },
+      "LINE": {
+        "covered": 199,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 25,
+        "missed": 0
+      }
+    }
+  },
+  "formalAccepted": false,
+  "wholeCoverageAccepted": false,
+  "normalNativeQualified": false,
+  "wholeMorningAccepted": false,
+  "vmActions": 0
+}
