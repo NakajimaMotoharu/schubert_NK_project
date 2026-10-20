@@ -1,5 +1,13 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC313 API管理HTTPの停止要求・完了分離（2026-10-21、内部詳細補足/S1）
+
+SS342SSC158の不確定close非正常化をAPI管理HTTPへ具体化する。固定loopback8091/5値info/route/method/readiness admissionは不変更。close要求はstopping通知で直ちにDOWNへ、private final lock下のclosed（完了）とは分ける。closedはJDK server.stop(0)が正常終了し、owned executor.shutdownNow後のactual terminationが所定残budget内に確認できた後だけ確定する。stop不確定はserverStoppedを確定せず、完了前の再closeをno-opにしない。stop確認済みでexecutor joinだけ未確認なら再closeはstopを再発行せずjoinを再確認する。これは保持handleのcomponent retry契約で、native UNKNOWNの自動retryや実VM/Unit停止の再発行許可ではない。
+
+close()の既定上限30秒、内部closeWithin(Duration)は0～30秒のみ。null/負/上限超過は停止通知前に拒否する。lock待ちとexecutor待ちを同じ単調deadlineから差し引き、0を無期限waitへ変換しない。新割込はflag復元して不確定失敗、呼出前からの割込は一時的に保持/clearして実終端を確認し、全帰還で復元する（既READY005のJDK stop前のcaller interrupt保持を維持）。不確定lock/joinは固定IllegalStateException、provider stop Runtime/Errorは同一性を保持し、正常停止receipt/clean markerとしない。
+
+BUG1547/YKT1307/PG-D462/1294、SS342/354。S1は管理ownerだけの内部設計確定で、API親TWR・既JMS group/factoryのclosed前置・partial factory/UNKNOWN時の借用依存保持は同群の後続S2/S3調査・別詳細補足を必要とする。S1だけでAPI全native lifetimeやRoot真正終了を認定しない。constructor取得前state準備（SSC312）・外部画面/電文/SQL/role/親30分/既Unit期限は不変更、確定後は新規資源取得を行わずnormalclose冪等とする。
+
 ## SSC312 HTTP資源factoryの取得前owner準備（2026-10-21、内部詳細補足）
 
 API/Web管理HTTPは、入力・固定loopback住所/port/backlog32を検証し、owner・全flag/lock・未開始executor（core/max1、queue32、daemon名は既定）・応答情報を先に準備してからHttpServer factoryを一度だけ呼ぶ。取得成功後は追加の未保護allocationを挟まずfinal serverへ格納してownerを返す。取得例外/nullは成功へ変換せず、未取得serverをcloseしない。factory内部で取得後に失敗した資源はfactoryの責務であり、callerが未返却資源を推定回収しない。WebHttpServerも未refreshのMVC context・private final lifecycleLock・ownerを先に準備してからTomcat supplierを一度取得しfinal格納、既startWithOwnerの捕捉callbackとvendor設定/startは既存try内を維持する。未refresh MVCはclose義務のある開始済資源として扱わない。
