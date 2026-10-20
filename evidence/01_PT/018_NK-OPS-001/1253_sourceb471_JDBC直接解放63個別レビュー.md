@@ -1,0 +1,11 @@
+# 1253 sourceb471：JDBC直接解放63個別レビュー
+
+群DIRECT_JDBC_FINALLY21_REVIEW/event1439、WBS-F03、着手見積0.25/0.75/2共有pp固定。主対象21finallyの内側に同じ順位判定を行う42generic catchが存在することを調査で確認し、同じ所有契約の関連対象として点検、別費用の重複加算0。Production **b4711c45845d897f76bc11bf8288e43fb0becc51**、7source、code/Test変更0。
+
+対象=LogCleanupService4/CleanupDatabaseSession3/CleanupTerminalRepository2/MorningDatabaseSession4/SchemaHistoryAdmission2/ServiceDatabaseAdmission2/ReceiptReferenceRepository4。SS331332のSSC063/199・SS341/343の既contractに従い、所有Connectionと借用Connection内のStatement/ResultSetを区別し、direct close一回と隣接catchでprimary保持を確認。成功body後もclose帰還前に正常値を返さない。既知SQL＋未知closeはcloseのidentity、未知Runtime/NPE/Error primaryは元identity＋新しい固定秘匿secondary、既知同士は固定不成功、同Throwableを自身へsuppressedしない。一般TWRへ変更するとこの優先順位が変わるため、当既PGに追加変更は不要。これはPG省略や全finallyの免除ではなく当63箇所の具体的適用判断。
+
+全21finallyの各閉資源/helper/guard・源hash・Test source/hash/semantic TestID・独立9行matrixは `evidence/provisional/PG6002-direct-jdbc-finally63-v1/manifest.json` SHA **ad81ef51ee6c97ec86f72266a3e8bfd8183cb4789b91cd00949395ba8fbfd181**、decisions SHA **381253f5991b87ab60c449f4465d4b3e04e038a39db79b75633e2e38f2a4bb57**。既5996/ec7291b5の573へ63理由を追加、**636新whole待ち/未レビュー730/raw1366全保持**。42catchは当source5998型fact1094の正確なcatch・非正常帰還に束縛、全source/helperは5992/8511666実proofと一致。原独立Testのclose/combined failure oracle（CDB008/SCHEMA006/ReceiptFault等）を読取り点検し、Production helperで期待値を生成0。新same-source全体へjoinするまで動的検証済みとしない。
+
+初回工具はclass単位helper集約とconnectionFailure欠落によりactual1/出力前停止。BUG1521/YKT1281を先行起票し、元工具 **5e3a2f060407e17f23a9a8aa0d728cdd591caea7ab0f3395b02e2f808012ad56**・test **dbebc4a677e3ae53bd9a68d6a58a716cc5f9dbff29cb10a54884c38410cbc199** をWorkPG379/pg6002-original-owner-map-v1に保持。所有Connectionと内側JDBCの固定helperを別選択/別source照合、正当なconnectionFailure隣接代入も検査へ追加。独立三unitで正当三owner形・未知owner/誤helper/重複close/無条件throw/正常returnを拒否し、実再レビューexit0。原Production/元921/型fact/静的/期待値は不変更・再PT0。
+
+実command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<既pyflakes runtime> python3 -B tools/quality/pg6002_direct_jdbc_finally_review.py`、2026-10-20/dev-foundation/既Java25.0.4型fact、各source/path/hashはmanifest。BUG1521/YKT1281当工具scope完了・本保存commit。これは通常の静的適用性レビューで、PTALT001002の拒否範囲特定や実行免除完成ではない（0）。実DB/lock/Root/Unit/job終端・nativeを実証しない。別のInspectorLockHandoff finally1件、残F03/global/正式/QA051final/実VM等HOLDは未完、工数null/原v3v4維持。

@@ -2,6 +2,7 @@
 import hashlib
 import json
 import subprocess
+import re
 from collections import Counter
 import pg5978_web_form_static as previous
 from pg5940_private_lock_compile import ROOT, W, TC, sha
@@ -60,6 +61,35 @@ def debug_proof(before, current, changed):
     return dict(classes=nested, bytecodeAndPrivateDescriptorsEqual=True, disassemblySha256=hashlib.sha256(b).hexdigest())
 
 
+def executable_sections(text):
+    """Drop field declarations, retain every executable descriptor and symbolic instruction."""
+    result=[]; block=[]
+    def finish():
+        if any(line.strip()=='Code:' for line in block):
+            result.extend(block)
+    for line in text.splitlines():
+        if re.match(r'^  \S',line) or line=='}':
+            finish();block=[]
+        if '//' in line:
+            instruction,comment=line.split('//',1)
+            line=re.sub(r'#\d+', '#CP',instruction)+'//'+comment
+        block.append(line.rstrip())
+    finish()
+    if not result:
+        raise ValueError('at least one actual executable code section required')
+    return '\n'.join(result)
+
+
+def executable_proof(before,current):
+    names=[r['path'].split('/src/main/java/')[1][:-5].replace('/','.') for r in plan()['sourcePlans']]
+    def read(root):
+        return subprocess.check_output([str(TC/'jdk-25.0.4/bin/javap'),'-c','-p','-s','-classpath',str(root/'src/schubert-nk-web/target/classes'),*names],text=True)
+    left=executable_sections(read(before));right=executable_sections(read(current))
+    if left!=right:
+        raise ValueError('literal constants must preserve every24 outer method instruction/descriptor; unknown delta held')
+    return dict(classes=names,allMethodDescriptorsAndSymbolicInstructionsEqual=True,normalizedDisassemblySha256=hashlib.sha256(right.encode()).hexdigest(),normalization='Only field sections and numeric constant-pool operands removed; symbolic comments including bootstrap indices retained')
+
+
 def runner_source():
     raw = previous.runner_source()
     changes = {
@@ -74,13 +104,18 @@ def runner_source():
         if raw.count(old) != 1:
             raise ValueError('one exact Web42 static binding: '+old)
         raw = raw.replace(old,new,1)
+    old='    debug = debug_proof(previous, snapshot, changed)'
+    if raw.count(old)!=1:
+        raise ValueError('one all24 actual executable comparison point')
+    raw=raw.replace(old,old+'\n    executables = executable_proof(previous, snapshot)',1)
+    raw=raw.replace('existingPublicAbiUnchanged=True,','existingPublicAbiUnchanged=True, all24ExecutableProof=executables,',1)
     compile(raw,'<Web42 all851 static>','exec')
     return raw
 
 
 def main():
     scope = {**vars(previous.previous.previous), 'OLD': OLD, 'COMPILE': 'pg5990-web-contract-selected921-v1', 'SLOT': 'pg5992-web-contract-static-v1',
-             'plan': plan, 'validate_source': validate_source, 'physical_changes': physical_changes, 'expected_rules': expected_rules, 'debug_proof': debug_proof}
+             'plan': plan, 'validate_source': validate_source, 'physical_changes': physical_changes, 'expected_rules': expected_rules, 'debug_proof': debug_proof, 'executable_proof': executable_proof}
     exec(compile(runner_source(), '<Web42 all-source static>', 'exec'), scope)
     return scope['main']()
 

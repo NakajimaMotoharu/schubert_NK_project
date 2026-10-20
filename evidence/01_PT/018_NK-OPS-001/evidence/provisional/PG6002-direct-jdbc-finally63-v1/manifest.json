@@ -1,0 +1,711 @@
+{
+  "actualExit": 0,
+  "source": "b4711c45845d897f76bc11bf8288e43fb0becc51",
+  "baseManifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5996-web-contract-dispositions-v1/manifest.json",
+  "baseManifestSha256": "ec7291b5ee72e48f6c19f74c2e7e35693017543be9e0f0f9837df2e27e49f22d",
+  "decisionsSha256": "381253f5991b87ab60c449f4465d4b3e04e038a39db79b75633e2e38f2a4bb57",
+  "rawFindings": 1366,
+  "newIndividualDispositions": 63,
+  "statusCounts": {
+    "NOT_REVIEWED_CURRENT_SOURCE": 730,
+    "SOURCE_REBOUND_CURRENT_WHOLE_PENDING": 636
+  },
+  "scopes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+      "helperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "helperSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+      "nestedHelperPath": null,
+      "nestedHelperSha256": null,
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-ae2d41b1d354894922bc4e41541862c59623dafd4608cd352f4e83a8ae5d1e25",
+          "directOwners": [
+            "row"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-4c6b121a4809a2611428f487a9b031902992dc95665bf6389d9d6f05a73dd0f8",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "statementFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-5bba2ec2e6bab6c7f5d615b1e3dbf0fca1b920a06847525a8da7d0d4a369f11c",
+          "directOwners": [
+            "row"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-cd4c9bae7a8bfcd42910ae925727919dcae67c6dff024f52ee3e217e384f51cb",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "statementFailure",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 13,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "sourceSha256": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7",
+      "helperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "helperSha256": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7",
+      "nestedHelperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "nestedHelperSha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-019ba884c012e7f9820d3891d4a6d20ae73b648e815872dc8e39db306aa5e880",
+          "directOwners": [
+            "owned",
+            "connection"
+          ],
+          "helper": "closeReplace",
+          "precedenceGuards": [
+            [
+              "primary",
+              "unavailable()"
+            ],
+            [
+              "primary",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-05c0b2bda588cc945744248e94f93ac743efdeed800853573d65df0a756cb8a7",
+          "directOwners": [
+            "rows"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-4a9e5a8fbf902b44f08f2d74b257f9e8ce3dea8d30c05618051cd1f6ad8f12f8",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "failure",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 10,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "helperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "helperSha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "nestedHelperPath": null,
+      "nestedHelperSha256": null,
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-23d26478d3fc5bac3824f97b2314208a740ef9fddc3bba7bcc6dc0292b35dfc3",
+          "directOwners": [
+            "rows"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "rowsFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-76c8bccda97b9d3c60e9f67883751652c52de048159b0afd8683cee714a04b12",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "statementFailure",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 16,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "sourceSha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "helperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "helperSha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "nestedHelperPath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "nestedHelperSha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-bb412a9bc847a57a09ea560d8ca1448253dc769d85de91cc2988eb07494ea4e0",
+          "directOwners": [
+            "owned",
+            "connection"
+          ],
+          "helper": "closeReplace",
+          "precedenceGuards": [
+            [
+              "primary",
+              "unavailable()"
+            ],
+            [
+              "primary",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-714cf8d96f4a4c303807051eb7cd40eddcccb5c3f38e6c52818167ac5ab1391f",
+          "directOwners": [
+            "rows"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-e15c7588d1ee837b3c62e8f948222f90abe71fdab3b15ac621ea6ad6c34c0d3e",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "failure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-efee87658c5cc341945161c6f6d166fcc49d64519bc0a316faad274235462c1a",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcResourceFailures.replace",
+          "precedenceGuards": [
+            [
+              "failure",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 65,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "sourceSha256": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+      "helperPath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "helperSha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "nestedHelperPath": null,
+      "nestedHelperSha256": null,
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-ba234126cfac56d108b73f734e5213b18820235d6eaffcdd3532636aa9ddc392",
+          "directOwners": [
+            "rows"
+          ],
+          "helper": "JdbcAdmissionFailures.replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-c6bf8000b2e10b9e93b615c73a53922942dcfa7b0955bf5868dcf828c9713e31",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcAdmissionFailures.replace",
+          "precedenceGuards": [
+            [
+              "primary",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 9,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "sourceSha256": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+      "helperPath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "helperSha256": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+      "nestedHelperPath": null,
+      "nestedHelperSha256": null,
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-c914a5568790404e0709106f96c2390f5073b8d59af45da6da93510fbb1e18f2",
+          "directOwners": [
+            "rows"
+          ],
+          "helper": "JdbcAdmissionFailures.replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-1aec78adb5a420d1a3a1dd923c388fcbf35e3893da0cb20ccc0b39fff38638b8",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "JdbcAdmissionFailures.replace",
+          "precedenceGuards": [
+            [
+              "primary",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 4,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+      "helperPath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "helperSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+      "nestedHelperPath": null,
+      "nestedHelperSha256": null,
+      "blocks": [
+        {
+          "findingId": "F03-PMD2-bd045414b6bafe2e8eddb4b8ef3f37d98fb0a79419d7dc985ec2cea7f721accc",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "statementFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-994aea3ab0f09b3e43439b475526283c6c68774b72dbd7f2ca320af1fc621aee",
+          "directOwners": [
+            "row"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "rowFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-1a38bad5630b2fa7196f6512b48b4e1216f536d3f70e2e87000fddebb532a2f6",
+          "directOwners": [
+            "statement"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "statementFailure",
+              "secondary"
+            ]
+          ]
+        },
+        {
+          "findingId": "F03-PMD2-159b77ca1f24d7f7041e759e457ad45d445c2347467262e61f15d57866b66b01",
+          "directOwners": [
+            "connection"
+          ],
+          "helper": "replace",
+          "precedenceGuards": [
+            [
+              "connectionFailure",
+              "secondary"
+            ]
+          ]
+        }
+      ],
+      "plannedTestReferences": 8,
+      "independentPrecedenceMatrix": [
+        [
+          "NONE",
+          "SQL",
+          "SECONDARY_SQL_FIXED"
+        ],
+        [
+          "NONE",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "SQL",
+          "SQL",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "SQL",
+          "UNKNOWN",
+          "SECONDARY_IDENTITY"
+        ],
+        [
+          "UNKNOWN",
+          "SQL",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "UNKNOWN",
+          "UNKNOWN",
+          "PRIMARY_IDENTITY_FIXED_SUPPRESSED"
+        ],
+        [
+          "NONE",
+          "NONE",
+          "SUCCESS_ONLY_AFTER_CLOSE"
+        ],
+        [
+          "SQL",
+          "NONE",
+          "PRIMARY_SQL_FIXED"
+        ],
+        [
+          "UNKNOWN",
+          "NONE",
+          "PRIMARY_IDENTITY"
+        ]
+      ]
+    }
+  ],
+  "currentWholeJoinPending": true,
+  "sourceCodeChanged": false,
+  "executedPtAdded": 0,
+  "ptAlternativeCompleted": 0,
+  "F03Accepted": false,
+  "formalAccepted": false,
+  "vmActions": 0
+}
