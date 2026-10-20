@@ -30,6 +30,8 @@ import java.util.Optional;
  * PG-D-083; PT-ADM-014..023.
  */
 public final class UserCommandService {
+  private static final int MAXIMUM_USER_VERSION = 999_999_999;
+
   private static final java.lang.String LITERAL_ACTIVE = "ACTIVE";
 
   @FunctionalInterface
@@ -248,7 +250,7 @@ public final class UserCommandService {
           if (kind == Update.UNLOCK
               && !before.lockedUntil().map(time -> time.isAfter(metadata.at())).orElse(false))
             return accepted(stored, before, ResultCode.IDEMPOTENT_SUCCESS);
-          if (before.version() == 999_999_999)
+          if (before.version() == MAXIMUM_USER_VERSION)
             return rejected(ResultCode.RESOURCE_LIMIT, Optional.of(id), stored);
           Values next;
           try {
@@ -280,18 +282,28 @@ public final class UserCommandService {
               }) {
             int p = 1;
             switch (kind) {
-              case ENABLE, DISABLE ->
-                  s.setString(p++, next.enabled() ? LITERAL_ACTIVE : "DISABLED");
-              case PROMOTE, DEMOTE -> s.setString(p++, next.role().wireValue());
+              case ENABLE, DISABLE -> {
+                s.setString(p, next.enabled() ? LITERAL_ACTIVE : "DISABLED");
+                p++;
+              }
+              case PROMOTE, DEMOTE -> {
+                s.setString(p, next.role().wireValue());
+                p++;
+              }
               case RESET_PASSWORD -> {
-                s.setString(p++, next.hash().orElseThrow());
-                s.setObject(p++, metadata.at().atOffset(java.time.ZoneOffset.UTC));
+                s.setString(p, next.hash().orElseThrow());
+                p++;
+                s.setObject(p, metadata.at().atOffset(java.time.ZoneOffset.UTC));
+                p++;
               }
               case UNLOCK -> {}
             }
-            s.setObject(p++, metadata.at().atOffset(java.time.ZoneOffset.UTC));
-            s.setLong(p++, actor.userId());
-            s.setLong(p++, id.value());
+            s.setObject(p, metadata.at().atOffset(java.time.ZoneOffset.UTC));
+            p++;
+            s.setLong(p, actor.userId());
+            p++;
+            s.setLong(p, id.value());
+            p++;
             s.setLong(p, expectedVersion);
             changed = s.executeUpdate();
           }

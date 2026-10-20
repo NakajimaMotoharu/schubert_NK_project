@@ -19,6 +19,8 @@ import java.util.Objects;
  * migration checks or hash every asset on GET. No physical path or hash appears in toString().
  */
 public final class AssetChecksumManifest {
+  private static final byte LINE_FEED = '\n';
+
   static final int MAXIMUM_ENTRIES = 59_627;
   static final int MAXIMUM_LINE_BYTES = 578;
   private final Map<String, String> hashes;
@@ -37,20 +39,22 @@ public final class AssetChecksumManifest {
     Map<String, String> hashes = new HashMap<>();
     int length = 0;
     try {
-      int read;
-      while ((read = channel.read(buffer)) != -1) {
+      while (true) {
+        int read = channel.read(buffer);
+        if (read == -1) break;
         require(read > 0);
         buffer.flip();
         while (buffer.hasRemaining()) {
           byte value = buffer.get();
-          if (value == '\n') {
+          if (value == LINE_FEED) {
             require(hashes.size() < expectedEntries);
             addLine(hashes, line, length);
             Arrays.fill(line, (byte) 0);
             length = 0;
           } else {
             require(length < line.length);
-            line[length++] = value;
+            line[length] = value;
+            length++;
           }
         }
         buffer.clear();

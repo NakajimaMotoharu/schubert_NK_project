@@ -19,7 +19,8 @@ class WipingByteArrayOutputStream extends ByteArrayOutputStream {
   @Override
   public synchronized void write(int value) {
     reserve(1);
-    buf[count++] = (byte) value;
+    buf[count] = (byte) value;
+    count++;
   }
 
   @Override

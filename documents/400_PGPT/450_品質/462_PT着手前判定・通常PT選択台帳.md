@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-022 — PT_DEFAULT：API三owner十二表現後35/10
+
+1236/PG-D447、API UserCommand10/AssetChecksum4/SecretBuffer3/ResponseSnapshot7＋他五moduleguard十一。新only自己所有snapshot/offline Maven/六format先行・通常PT・JaCoCo/SpotBugs。temp PostgreSQL18は既fixtureの新data/ランダムloopback port/専用ownerで起動停止し、本source schema/grant/Synthetic入力だけ。実VM/current/Unit/原本DBBackup/鍵/permit/失敗Root/実ADMINには接続しない。synchronized親整合の個別静的点検は未実行PTの代替でなく通常PG品質確認。fresh枠>10/clean source/未使用namespace・全command副作用を確認し一回、既成果を再演しない。拒否probe/別経路再試行0。
+
 ## PTPRE-021 — PT_DEFAULT：storage三十PG後の199/33
 
 1234/PG-D446/BUG1507/YKT1267。全storage188＋他五module固定guard十一、既自己所有temp file/FD/匿名memfd/有限child・fake portsだけ、offline Maven/全六format先行・package/JaCoCo/SpotBugsを含む通常PT。実VM/current/Unit/原本DBBackup/鍵/permit/failed-cohortへ接続0、権限/経路変更0。原3973終端/独立資格と全Main証拠保全後にPGし、clean source/fresh枠>10/新only snapshotで一回実行する。wrapperを静的だけと呼ばず、独立oracle/実XML四counterを保持する。命名定数/同じcritical sectionのprivate reentrant lock是正であり、拒否probe/再試行/未同定PT代替0。既source成功を新sourceへ合算しない。
