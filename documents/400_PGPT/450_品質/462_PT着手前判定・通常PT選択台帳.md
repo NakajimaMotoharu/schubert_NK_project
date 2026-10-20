@@ -1,5 +1,11 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-033 — PT_DEFAULT：SSC310後の当source全3979・594
+
+1270/event1458、sourcec4d0242abの通常148/16・全8511667/一outer三debug/公開ABI・他18method不変・PMD1305/CS0資格後。tool `pg6060_expiry_current_whole.py`は既承認ordinary非root host snapshot profileを継承、全六format先行→offline全Maven/JUnit/JaCoCo/型nullSpotBugs、自己所有tempPG/in-process JMS/loopback HTTP/有限child/DOM固定vectorのみ。手続の実体は過去通常fullと同じで、VM/current/Unit/Root/failed-cohort/原本DB/Backup/鍵/permitへ接続・操作しない。独立lexical宣言は普通3963＋既同byteBackupStartIntentFilesTestの普通6/RepeatedTest10=3979、594suite。Repeated10を新10機能やflaky再試行と混同せず、原XML上の全実結果を検査する。拒否PT再試行/境界probe0。
+
+clean operator/source固定、既pinned mini@aru host/同ordinary whole無し/headroom/新onlynamespace `pg6060-expiry-six-v1`を先行し一回。現配備/failed Root/VMの安全条件を本host資格で満たしたことにしない。旧8c3976/新c4選択148の確認再演でなく、read実挙動・既期待訂正後の必要同source横断である。単独小修正ごとの反復を避け、終了0後は原XML/Jarを読取して追加build/PTなしで全差・実counter・分類接続へ進む。
+
 ## PTPRE-032 — PT_DEFAULT：Expiry read複合故障の純JDBC反例・局所是正
 
 green着手前追記：設計only PR165/main615d40b1eを確認、局所Main一/新Test三＋既BAT287一期待補正を固定する。予定同工具greenは**148PT/16suite**（全六guard12、新pure3、Expiry実DB8/SSC304TWR24、保持監査14、Cleanup保持照合1、Morning DB65/Expiry8/観測4/Access9）を一回実行。新proxyはpure、既実DBはBatchDatabaseFixtureが@TempDir専有PostgreSQL18・ランダムloopback port・固定test role・既migrationだけを生成しfinally停止、原本/VMDB/既runへ接続しない。選択全Testの直接業務Service/VM/current/sudo操作なし、既65の成功を足算せず当新source XMLを読む。coverageは全実counterを報告し不足を未達表示、target100未充足を正式PASSへ補完しない。command=`python3 -B tools/quality/pg6052_expiry_combined_selected.py green`（同PYTHONPATH）、new-only pg6052-expiry-combined-green-v1。元red13/1失敗は不変保持・再演0。
