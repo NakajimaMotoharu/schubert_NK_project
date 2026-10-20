@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-030 — PT_DEFAULT：二source例外境界・独立port試験
+
+1259/PG-D453/BUG1523。既承認aru ordinary非rootoffline fixture profile、batch mq関連suite＋全Web913＋依存guardを予定し、実named Test inventoryで件数を固定する。新三Testは合成ClientMessage/ClientSessionと借用Guardだけ、メッセージ配送/実broker/DB/Root/VM/Unit/current/permit/failed-cohort操作なし。他既suiteは自己所有tempDB/in-process broker/loopback/有限childだけ。新source/clean/new-only/fresh枠・全六format→型null/通常PT/coverage/全Main物理差、固定raw静的を実確認。実操作リスク不変・拒否PT再送/境界探索なし。staticの名でPTを隠さず通常実行と記録する。
+
 ## PTPRE-029 — PT_DEFAULT：四同値PG群67sourceの必要全3973
 
 1256/PG6014、既承認の専用mini@aru ordinary offline fixture profile、全3973/592のTest/oracle/resourcesは元PG5944/source288から不変更。全六Maven/JUnit・自己所有tempPG/in-process JMS/loopback ephemeral HTTP/有限child・DOM/golden/null/例外/再送・並行だけ。新sourcebc0の67Main103条件private定数・独立6006/6008/6010資格後に限り、新only namespace/現在pinned identity/同job無し/disk RAM headroomを確認して一回。実VM/current/Unit/Root/原本DBBackup/鍵/permit/failed-cohortは不操作、権限/アクセス経路変更や拒否再試行0。実Caddy/Browser/native・Root真正DONEの代用にしない、旧native/coverageを新sourceへ合算0。

@@ -123,8 +123,6 @@ public final class WebBrokerContexts implements AutoCloseable {
       stopping = true;
       try {
         owner.close();
-      } catch (Error fatal) {
-        throw fatal;
       } catch (Exception failure) {
         dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
         throw new IllegalStateException("Web broker factory close failed");

@@ -76,6 +76,35 @@ public final class ArtemisManagementReadinessClient {
     void write(ClientMessage message);
   }
 
+  @FunctionalInterface
+  interface OperationEncoder {
+    void encode(ClientMessage message, String resource, String operation, Object... arguments)
+        throws Exception;
+  }
+
+  // PG-D453/PT-OPS-ENC001..003: the provider declares checked failures at this boundary.
+  // Keep unknown runtime identity, let Error propagate, and redact only declared failures.
+  static void encodeOperation(
+      ClientMessage message,
+      String resource,
+      String operation,
+      OperationEncoder encoder,
+      Object... arguments) {
+    Objects.requireNonNull(encoder, "management operation encoder");
+    try {
+      encoder.encode(message, resource, operation, arguments);
+    } catch (RuntimeException unknown) {
+      throw unknown;
+    } catch (Exception failure) {
+      throw managementFailure(failure);
+    }
+  }
+
+  private static ArtemisManagementReadinessException managementFailure(Exception failure) {
+    if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
+    return new ArtemisManagementReadinessException();
+  }
+
   private final Reader reader;
 
   public ArtemisManagementReadinessClient() {
@@ -167,14 +196,11 @@ public final class ArtemisManagementReadinessClient {
   }
 
   static void putAcceptorsOperation(ClientMessage message) {
-    try {
-      ManagementHelper.putOperationInvocation(message, ResourceNames.BROKER, "getAcceptorsAsJSON");
-    } catch (RuntimeException | Error unknown) {
-      throw unknown;
-    } catch (Exception failure) {
-      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
-    }
+    encodeOperation(
+        message,
+        ResourceNames.BROKER,
+        "getAcceptorsAsJSON",
+        ManagementHelper::putOperationInvocation);
   }
 
   static Object acceptorStarted(ClientSession session) {
@@ -197,15 +223,12 @@ public final class ArtemisManagementReadinessClient {
   }
 
   static void putRolesOperation(ClientMessage message, String addressMatch) {
-    try {
-      ManagementHelper.putOperationInvocation(
-          message, ResourceNames.BROKER, "getRolesAsJSON", addressMatch);
-    } catch (RuntimeException | Error unknown) {
-      throw unknown;
-    } catch (Exception failure) {
-      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
-    }
+    encodeOperation(
+        message,
+        ResourceNames.BROKER,
+        "getRolesAsJSON",
+        ManagementHelper::putOperationInvocation,
+        addressMatch);
   }
 
   static Object queueMetric(ClientSession session, String queue, String attribute) {
@@ -235,27 +258,21 @@ public final class ArtemisManagementReadinessClient {
   }
 
   static void putExpiryOperation(ClientMessage message, String operation, String selector) {
-    try {
-      ManagementHelper.putOperationInvocation(
-          message, ResourceNames.QUEUE + "nk.expiry.q", operation, selector);
-    } catch (RuntimeException | Error unknown) {
-      throw unknown;
-    } catch (Exception failure) {
-      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
-    }
+    encodeOperation(
+        message,
+        ResourceNames.QUEUE + "nk.expiry.q",
+        operation,
+        ManagementHelper::putOperationInvocation,
+        selector);
   }
 
   static void putAddressSettingsOperation(ClientMessage message, String address) {
-    try {
-      ManagementHelper.putOperationInvocation(
-          message, ResourceNames.BROKER, "getAddressSettingsAsJSON", address);
-    } catch (RuntimeException | Error unknown) {
-      throw unknown;
-    } catch (Exception failure) {
-      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
-    }
+    encodeOperation(
+        message,
+        ResourceNames.BROKER,
+        "getAddressSettingsAsJSON",
+        ManagementHelper::putOperationInvocation,
+        address);
   }
 
   static Object read(ClientSession session, String attribute, Exchange exchange) {
@@ -294,11 +311,10 @@ public final class ArtemisManagementReadinessClient {
       }
       checkParentDeadline();
       return result;
-    } catch (RuntimeException | Error unknown) {
+    } catch (RuntimeException unknown) {
       throw unknown;
     } catch (Exception failure) {
-      if (failure instanceof InterruptedException) Thread.currentThread().interrupt();
-      throw new ArtemisManagementReadinessException();
+      throw managementFailure(failure);
     }
   }
 }
