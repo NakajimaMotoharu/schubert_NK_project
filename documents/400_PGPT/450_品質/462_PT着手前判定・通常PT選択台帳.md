@@ -1,5 +1,8 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-011 — PT_DEFAULT：JMS自己suppressionの有限proxy七件
+
+BUG1485/YKT1245・1200、API InboundTransactionsPrimaryContractTest五件とWeb ReplyIsolationPrimaryContractTest二件。固定RuntimeException/Protocol例外/equals-true別例外/Errorと、許可methodだけを受けるメモリJMSContext/Message proxyを使用。呼ぶのは通常例外/rollback/isolation制御だけで、proxyはgetSessionMode/rollback/合成property/明示createProducer失敗以外を拒否、実Broker/DB/network/service/VM/鍵/原本/permit/failed-cohort操作0。実wire/credential/cookie/sessionを入れない。test-only redで元Main1664同byteと正確な三失敗を確認し、三identity guard後の別greenへ進む。既元3932は元sourceだけの証拠で新sourceへ加算せず、変更群の必要全体は後で一回まとめる。Normal PTであり拒否PT代替ではない。
 ## PTPRE-010 — PT_DEFAULT：統合sourceの必要host全3932
 
 1193/群1341/1342/PG5754、source9463。元6db/全3908の成功はscope/副作用分類の根拠だけで新source PASSへ転用しない。原test/resources/POMは不変更、新18file/24caseは既点検済みの有限pure fixtureのみ。従来のpinned mini専用hostとMaven/自己temporary PostgreSQL/Node/ShellCheckで通常全PT、VM/実業務DB/サービス・配備・failed-cohort/intent/permit操作0。発行前host一致job無し/headroom/未使用namespace/source/hashを確認し一回だけ。生成server/transfer driverを読取・二固定生成check0、拒否の探査/代替試験ではない。旧未知拒否の安全条件をこの判定で充足したとはしない。
