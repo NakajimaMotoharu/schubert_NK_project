@@ -1,0 +1,2882 @@
+[
+  {
+    "findingId": "F03-PMD2-1044e8ebc68615298399b653a79b3e3cd954ef2ec5c635eed4c7b844817b20f8",
+    "legacyFindingId": "F03-PMD-6c7986a09c4c1e1eab5b68ab37df8101751f5d88592b0906e59f8a7494a8dc52",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "59",
+    "endline": "59",
+    "priority": "3",
+    "begincolumn": "31",
+    "endcolumn": "47",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 83,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2578",
+        "finalDirect": "true",
+        "firstLine": "59",
+        "kind": "CATCH",
+        "lastLine": "59",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2531",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-169a7346d8984f64e1b6af9e34d8a6a647d8c60c2bf16493dd310f4c4d74cbc7",
+    "legacyFindingId": "F03-PMD-6c7986a09c4c1e1eab5b68ab37df8101751f5d88592b0906e59f8a7494a8dc52",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "59",
+    "endline": "59",
+    "priority": "3",
+    "begincolumn": "50",
+    "endcolumn": "55",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 84,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2578",
+        "finalDirect": "true",
+        "firstLine": "59",
+        "kind": "CATCH",
+        "lastLine": "59",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2531",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-78ff5dee8e11cf33877ccd077f13a0e64495190b699316b2345df38b45c62c09",
+    "legacyFindingId": "F03-PMD-b5df25ef48effc2037d983787ad7332d1f1326c1b6dc2c4e37b082be28dc8dd4",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "DoNotThrowExceptionInFinally",
+    "beginline": "62",
+    "endline": "71",
+    "priority": "4",
+    "begincolumn": "9",
+    "endcolumn": "8",
+    "diagnosticTextSha256": "0e45bc9f28c86cb09ea2a990565447ffe2088c8ae5bc672bce5d6534aff47b7d",
+    "rawXmlOrdinal": 85,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-334b5ebed9770afa5bcdda410cf63decd8c340f52721a148b0bd1739de575fb2",
+    "legacyFindingId": "F03-PMD-7e9806f7c3815c141830ec5c52bad59495dbd6b3d25cb0de8830cfd3e71c236d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "65",
+    "endline": "65",
+    "priority": "3",
+    "begincolumn": "33",
+    "endcolumn": "49",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 86,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2758",
+        "finalDirect": "false",
+        "firstLine": "65",
+        "kind": "CATCH",
+        "lastLine": "65",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2711",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-70db374a87dcd3b2b3c2903417cc23ba1d276a6f4fa15acfda1b12faa52a1766",
+    "legacyFindingId": "F03-PMD-7e9806f7c3815c141830ec5c52bad59495dbd6b3d25cb0de8830cfd3e71c236d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "65",
+    "endline": "65",
+    "priority": "3",
+    "begincolumn": "52",
+    "endcolumn": "57",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 87,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2758",
+        "finalDirect": "false",
+        "firstLine": "65",
+        "kind": "CATCH",
+        "lastLine": "65",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2711",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-e95f3fcf5e541e6c3528370c781a33082d2d4bf76c913299d8fa58bb063fec36",
+    "legacyFindingId": "F03-PMD-ae68784850f83a872abd71af23f9974dc9fe80e36d6a78eabec184bcef8f1f03",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "67",
+    "endline": "67",
+    "priority": "3",
+    "begincolumn": "53",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "rawXmlOrdinal": 88,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-563f3ff5bfcfacb97049777b618f316ca7678955612d6e762e18986aab630dc9",
+    "legacyFindingId": "F03-PMD-1b2c74f3137d754ad76a6d1233d3576e3086374e8641169443e4070a1c40d13e",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "72",
+    "endline": "72",
+    "priority": "3",
+    "begincolumn": "29",
+    "endcolumn": "45",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 89,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "3058",
+        "finalDirect": "false",
+        "firstLine": "72",
+        "kind": "CATCH",
+        "lastLine": "72",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#verify()",
+        "otherThrows": "1",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "0",
+        "start": "3019",
+        "type": "java.sql.SQLException|java.lang.RuntimeException"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-6af1f5b86db42779d1815f071f41882765852d2cfd54b6a07b0a47f873f8e926",
+    "legacyFindingId": "F03-PMD-ee14d9d77fac723738caee7ff0ee0707d07d444f8088d40f69777871fa6a2fc4",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "99",
+    "endline": "99",
+    "priority": "3",
+    "begincolumn": "16",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 90,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "4242",
+        "finalDirect": "true",
+        "firstLine": "99",
+        "kind": "CATCH",
+        "lastLine": "99",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#probe(java.util.function.Supplier<jakarta.jms.JMSContext>,dev.codex.schubert.nk.protocol.transport.BrokerTopology,boolean)",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "4210",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-d6ef7a4e8ea231826b11ba24d8354dc213a50074217b66b9da4cca99fed0845b",
+    "legacyFindingId": "F03-PMD-ee14d9d77fac723738caee7ff0ee0707d07d444f8088d40f69777871fa6a2fc4",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "99",
+    "endline": "99",
+    "priority": "3",
+    "begincolumn": "35",
+    "endcolumn": "40",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 91,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "4242",
+        "finalDirect": "true",
+        "firstLine": "99",
+        "kind": "CATCH",
+        "lastLine": "99",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#probe(java.util.function.Supplier<jakarta.jms.JMSContext>,dev.codex.schubert.nk.protocol.transport.BrokerTopology,boolean)",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "4210",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-440aac60355a55a3fc11eaa7ef5a7f3d2a93001dcc905e8ba0dc1c78e4288aa3",
+    "legacyFindingId": "F03-PMD-1d3f276770ef6f971ce6a9ffe9d708e60b4d44ae291f7816cb0883cec1e12614",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "DoNotThrowExceptionInFinally",
+    "beginline": "102",
+    "endline": "113",
+    "priority": "4",
+    "begincolumn": "9",
+    "endcolumn": "8",
+    "diagnosticTextSha256": "0e45bc9f28c86cb09ea2a990565447ffe2088c8ae5bc672bce5d6534aff47b7d",
+    "rawXmlOrdinal": 92,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-e0de4d16a3ff25d0dc985a5b2038411e18b823a109243c72f6390c0aee49df21",
+    "legacyFindingId": "F03-PMD-d60756084a2cb25361d43e37a08880187feeb051150e1c6afe8fa0d2a0fbbada",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "105",
+    "endline": "105",
+    "priority": "3",
+    "begincolumn": "18",
+    "endcolumn": "34",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 93,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "4404",
+        "finalDirect": "false",
+        "firstLine": "105",
+        "kind": "CATCH",
+        "lastLine": "105",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#probe(java.util.function.Supplier<jakarta.jms.JMSContext>,dev.codex.schubert.nk.protocol.transport.BrokerTopology,boolean)",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "4372",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-419b97d6266f5f1db68e7eb2abb9aea95d4d845083890dec803c34ec661fe6da",
+    "legacyFindingId": "F03-PMD-d60756084a2cb25361d43e37a08880187feeb051150e1c6afe8fa0d2a0fbbada",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "105",
+    "endline": "105",
+    "priority": "3",
+    "begincolumn": "37",
+    "endcolumn": "42",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 94,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "4404",
+        "finalDirect": "false",
+        "firstLine": "105",
+        "kind": "CATCH",
+        "lastLine": "105",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#probe(java.util.function.Supplier<jakarta.jms.JMSContext>,dev.codex.schubert.nk.protocol.transport.BrokerTopology,boolean)",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "4372",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-ae978ba289f9743e9719286830716e8b28de44125350f6f3a3f3f7b214f3998c",
+    "legacyFindingId": "F03-PMD-4e51dd087d66f60399fb2dd3b40e2518a2bdb651da4116d342129c778e3e727b",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "109",
+    "endline": "109",
+    "priority": "3",
+    "begincolumn": "53",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "rawXmlOrdinal": 95,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-5825fa7b21919da7d1d015ffed7caf3c2241c69903f2b469ee46f84f996ec148",
+    "legacyFindingId": "F03-PMD-5c3cadf3231e9413bb8787c66c4ea5ea27c885b2a67f02e54c35969340334bd4",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+    "sourceSha256": "9b51d7cb6533c0d16c7af33d072d1154121034bfa3ff0165e8317a6b0cccf233",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "114",
+    "endline": "114",
+    "priority": "3",
+    "begincolumn": "14",
+    "endcolumn": "30",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 96,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "750cd67a0ec24a5f7098f21b988fef1975ed8b8ca28739513aa5495325cb6a53",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b1bfdc4a8e359057f569cba6034cfd2b1069f22b16a82d866b164a5f732aa1d8",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "0fc05cf59d39a3c4b013d8d7f487adc233dc2d2a18573dfec4986be38d4c8c66",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "c0740552773352d60b9e06384b0e13df095342040832121404156073803228bd",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "aaf8473a8ba3b5253e7a5cc6c8f0e6b8a7caa9502724d75a9db9c8dd06e63e7f",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "2dc2ec9e46bdf2ed2bdbf1c81503338bb04fba98f6a33883b12b9245f5ee4b6c",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "b6750ec3432663fc7f0cdd7dd66e86187c80b3470ad6b29e4efabebba02f7017",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "3b0dafc8cc065467e64a363a4c9cc4f42d745e8f8b8ff832898933e69ceb0169",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "39b6c7edd82f40fe254bec7b74a37fae2592cc2df6dc98478c2ef86d06dbee26",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "248820ae59bcb1c8a043c4e578cde57df5983713866d6bcc8cf77d65d01e7719",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "56b7f846b7f0052e69558c00020b10e146d82c9a513a339ffee6fbc271c59cc5",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "6123a700185f4a5e2c21d93b331dc2c55d7fb3e00eb006166178a896ceb0c49b",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "68708d6c3d65c27a9e4a6a141e8c156234b1d222b12f529b2caab6aed175cf44",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadinessTest",
+        "caseNameSha256": "1a19fbe168cbc3721850c1f6c1c7094343207bd6522f1196fb338fbed80808e7",
+        "currentTestSourceSha256": "0b36bc5d2a61ab7a8bfcd4ee3de50963587eecb2621fbcd2379b028a5cb69196"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "4858",
+        "finalDirect": "false",
+        "firstLine": "114",
+        "kind": "CATCH",
+        "lastLine": "114",
+        "method": "dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness#probe(java.util.function.Supplier<jakarta.jms.JMSContext>,dev.codex.schubert.nk.protocol.transport.BrokerTopology,boolean)",
+        "otherThrows": "1",
+        "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "0",
+        "start": "4834",
+        "type": "java.lang.RuntimeException"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-3eebe0c7d68763d0b6a89884522e07a8a468d264702eec2fbfc1afe3bf1c8131",
+    "legacyFindingId": "F03-PMD-7ab8d6c6e52012210cd2e0acf5d51160d1ef9e31229457c594349a7be17845bb",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "34",
+    "endline": "34",
+    "priority": "3",
+    "begincolumn": "31",
+    "endcolumn": "47",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1158,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "1513",
+        "finalDirect": "true",
+        "firstLine": "34",
+        "kind": "CATCH",
+        "lastLine": "34",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "1466",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-b3147bf54db2caa9e8f490dd0cd511ad4f4f4fbec4095a0b1b5abf088db39538",
+    "legacyFindingId": "F03-PMD-7ab8d6c6e52012210cd2e0acf5d51160d1ef9e31229457c594349a7be17845bb",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "34",
+    "endline": "34",
+    "priority": "3",
+    "begincolumn": "50",
+    "endcolumn": "55",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1159,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "1513",
+        "finalDirect": "true",
+        "firstLine": "34",
+        "kind": "CATCH",
+        "lastLine": "34",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "1466",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-bdfd0f3f0f8a35f706b9a7582a7b6659601ebe3414437c265c3eabc747aa2c2f",
+    "legacyFindingId": "F03-PMD-ff399174085948943f85b4efde4e5f2fafb5379f6961481d7d9b4d620fcb9aa5",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "DoNotThrowExceptionInFinally",
+    "beginline": "37",
+    "endline": "45",
+    "priority": "4",
+    "begincolumn": "9",
+    "endcolumn": "8",
+    "diagnosticTextSha256": "0e45bc9f28c86cb09ea2a990565447ffe2088c8ae5bc672bce5d6534aff47b7d",
+    "rawXmlOrdinal": 1160,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-877d4890e36a6af6b527b94294574482a896f6377544c6369f7a10e79b43aefb",
+    "legacyFindingId": "F03-PMD-1726c6c132f19a61eace35fa84e4cbefe070b6cc6485cf6bc011d750235b930d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "40",
+    "endline": "40",
+    "priority": "3",
+    "begincolumn": "33",
+    "endcolumn": "49",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1161,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "1693",
+        "finalDirect": "false",
+        "firstLine": "40",
+        "kind": "CATCH",
+        "lastLine": "40",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "1646",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-c6559c5d22aa8ba37b036cc37bd9081a73b3aa6f500bff75194096002b4aeae7",
+    "legacyFindingId": "F03-PMD-1726c6c132f19a61eace35fa84e4cbefe070b6cc6485cf6bc011d750235b930d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "40",
+    "endline": "40",
+    "priority": "3",
+    "begincolumn": "52",
+    "endcolumn": "57",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1162,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "1693",
+        "finalDirect": "false",
+        "firstLine": "40",
+        "kind": "CATCH",
+        "lastLine": "40",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "1646",
+        "type": "java.sql.SQLException|java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-3a9bf35cb5a6380e4ac4aba9ca6dedfcccf275167e929596b9e5284fb15cdb62",
+    "legacyFindingId": "F03-PMD-65a4bdb6f04e2c3496d3dcb9a2914a36f1b283cb926fea3701742d5609885d0b",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "41",
+    "endline": "41",
+    "priority": "3",
+    "begincolumn": "53",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "rawXmlOrdinal": 1163,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-c1d78f11791031f5dfaef18250257ccfda129c9f2b66c4500147706421e7620b",
+    "legacyFindingId": "F03-PMD-ce7b7f55e63f4107c0d37f76191f2d2bdfc5d1d90efa75123c2692ffb3a8b9d1",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "46",
+    "endline": "46",
+    "priority": "3",
+    "begincolumn": "29",
+    "endcolumn": "45",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1164,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "1898",
+        "finalDirect": "false",
+        "firstLine": "46",
+        "kind": "CATCH",
+        "lastLine": "46",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "1",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "0",
+        "start": "1859",
+        "type": "java.sql.SQLException|java.lang.RuntimeException"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-b0e44ae7156d5c4ff40f99cd4ca6a023caa95570f02714886ce1c5fc8143dd2a",
+    "legacyFindingId": "F03-PMD-fd6204d56846603d5b4ede33c08d1b20dd8781df228ab480f273bcaf86239f8f",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "56",
+    "endline": "56",
+    "priority": "3",
+    "begincolumn": "16",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1165,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2396",
+        "finalDirect": "true",
+        "firstLine": "56",
+        "kind": "CATCH",
+        "lastLine": "56",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2364",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-d49eb7c319fcf3aa0ae5d10e2e9f24504f8a2728008b64cf72b70b085b23d05b",
+    "legacyFindingId": "F03-PMD-fd6204d56846603d5b4ede33c08d1b20dd8781df228ab480f273bcaf86239f8f",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "56",
+    "endline": "56",
+    "priority": "3",
+    "begincolumn": "35",
+    "endcolumn": "40",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1166,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2396",
+        "finalDirect": "true",
+        "firstLine": "56",
+        "kind": "CATCH",
+        "lastLine": "56",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2364",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-8f25aa0569bcf99f2ab82da71ffc55ce94e98ddf3873bc250620cc60abaf7574",
+    "legacyFindingId": "F03-PMD-8e79b6005594dde66e06623bf4e18528293f363bd8177d393918153fb60c24c5",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "DoNotThrowExceptionInFinally",
+    "beginline": "59",
+    "endline": "67",
+    "priority": "4",
+    "begincolumn": "9",
+    "endcolumn": "8",
+    "diagnosticTextSha256": "0e45bc9f28c86cb09ea2a990565447ffe2088c8ae5bc672bce5d6534aff47b7d",
+    "rawXmlOrdinal": 1167,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. Throwing from this exact finally is intentional only for no primary failure or a fatal close over an ordinary primary. It never replaces an existing fatal primary, and ordinary close failures never hide an ordinary primary. Unconditional throw, ignored close or ordinary TWR precedence would change the established startup contract. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-64b5df915c86a559c95e7e16e25fadffc0fa36eb5821aa2122937ebc875c13e6",
+    "legacyFindingId": "F03-PMD-35c58a6c8bf2d463868279a996be052aef1b9124e5ead09fd2bd7dc165d0f16a",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "62",
+    "endline": "62",
+    "priority": "3",
+    "begincolumn": "18",
+    "endcolumn": "34",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1168,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2558",
+        "finalDirect": "false",
+        "firstLine": "62",
+        "kind": "CATCH",
+        "lastLine": "62",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2526",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-a0342753a147ffd9212a9824b33787b4ad715d56deb3cdacbdb0e3f062da486f",
+    "legacyFindingId": "F03-PMD-35c58a6c8bf2d463868279a996be052aef1b9124e5ead09fd2bd7dc165d0f16a",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "62",
+    "endline": "62",
+    "priority": "3",
+    "begincolumn": "37",
+    "endcolumn": "42",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1169,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2558",
+        "finalDirect": "false",
+        "firstLine": "62",
+        "kind": "CATCH",
+        "lastLine": "62",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "0",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "1",
+        "start": "2526",
+        "type": "java.lang.RuntimeException|java.lang.Error"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-0a8c75103d1ec63b76be65f3b70d0bdaf0841e5c5a53372855125859915822dc",
+    "legacyFindingId": "F03-PMD-3c48ad1b24facca0b1a256641b2a9b59f0d7f341b698766f2848d61d55856321",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "63",
+    "endline": "63",
+    "priority": "3",
+    "begincolumn": "53",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "rawXmlOrdinal": 1170,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This Error category check distinguishes fatal ownership cleanup from an ordinary SQL/JMS failure; it is not serialization/type guessing or recovery. The explicit primary/close matrix keeps fatal identity and prevents ordinary unavailable conversion from swallowing a fatal close. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  },
+  {
+    "findingId": "F03-PMD2-142017b5f0d380968bb068c9dd7e179d7bd399bb82489587ac2376c6596de167",
+    "legacyFindingId": "F03-PMD-e87baba951f73a438c7e538bbc304638d0ee5a9c51139470566c73d0cfa5ff56",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+    "sourceSha256": "acb9d295ba24570312003e95931c99bf80adbb4aa8a35f6cfddea885275c5a67",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "68",
+    "endline": "68",
+    "priority": "3",
+    "begincolumn": "14",
+    "endcolumn": "30",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1171,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "priorReason": "SS311/321/342/352; existing PG221/234/266/BUG248/249/250/321 startup and redaction contracts. This catch either retains/rethrows the exact inspection failure, handles a close failure using explicit fatal precedence, or emits only a fixed ordinary startup diagnostic. Fatal Error is outside the ordinary redaction catch. No message consumption/DB mutation/retry/normal-success fallback is implemented here. Actual provider state, parent budget/Root DONE and DB/lock release require their independent downstream gates.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "plannedCurrentTestRefs": [
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "af70ece599227e8387a34d2d912a035832e4d719e69d6f25c950c8a2e92de462",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "a4f4ae67b020ee1be196632d10cc9efd0dba2a86851d60db53fd2bada543ab7d",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "4122a09513215e640cc57905fe4211c4f5134675c2dc7e0e2f0f18da32731b8c",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "bb16869edc692b15d7bf8e71e353e3f4b12ab31f9f2c80e768f78fed85c407f8",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "0bb790136ea3a2489a84bab22bff80b864efd8fd49a4d5c3df6b7fca0c61c217",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      },
+      {
+        "klass": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadinessTest",
+        "caseNameSha256": "33e8c3c33e8db53bfa80229ce9a38f64aa8bcaf70b100eecd1a50a93fe49f612",
+        "currentTestSourceSha256": "cadedd4207e47cc4c424e3f2a1c3fe47bbec95e45b65cb56079d30e4976597f3"
+      }
+    ],
+    "currentCatchFacts": [
+      {
+        "assignments": "0",
+        "breaks": "0",
+        "continues": "0",
+        "end": "2748",
+        "finalDirect": "false",
+        "firstLine": "68",
+        "kind": "CATCH",
+        "lastLine": "68",
+        "method": "dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness#verify()",
+        "otherThrows": "1",
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+        "returns": "0",
+        "sameThrows": "0",
+        "start": "2724",
+        "type": "java.lang.RuntimeException"
+      }
+    ],
+    "currentTypeFactsSha256": "d52d27c514a96948c432476e2c948462deed6dbd4cf8fd7635a4d9380a81ca8c",
+    "reviewSource": "288062f3960a0a50ec82685da3b407f0c9e2934e",
+    "implementationReviewedNoChangeRequired": true,
+    "historicalPtImportedAsCurrent": false,
+    "ptAlternativeCompleted": false
+  }
+]
