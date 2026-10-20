@@ -17,6 +17,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class LinuxExecDescriptors {
+  private static final int FD_CLOEXEC = 1;
+
   private final FcntlCall fcntl;
 
   public interface FcntlCall {
@@ -84,9 +86,10 @@ public final class LinuxExecDescriptors {
   }
 
   private void inherit(int descriptor, Operation operation) throws StorageIoException {
-    if (fcntl.call(descriptor, 1, 0) != 1) throw unavailable(); // F_GETFD: exactly FD_CLOEXEC
+    if (fcntl.call(descriptor, 1, 0) != FD_CLOEXEC)
+      throw unavailable(); // F_GETFD: exactly FD_CLOEXEC
     ResourceScope.use(
-        () -> set(descriptor, 1),
+        () -> set(descriptor, FD_CLOEXEC),
         () -> {
           set(descriptor, 0); // F_SETFD: only the reserved descriptor becomes inheritable
           operation.execute();

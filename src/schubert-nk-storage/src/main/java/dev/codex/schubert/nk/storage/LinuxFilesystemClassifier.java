@@ -22,6 +22,10 @@ public final class LinuxFilesystemClassifier {
   // glibc LP64 bits/statfs.h: seven words, fsid(two int), three words, four spare words.
   // sizeof=120/alignment=8, f_type is the first word. Re-review on JDK/ABI changes.
   private static final long SIZE = 120;
+  private static final long EXT_FAMILY_MAGIC = 0xEF53L;
+  private static final long XFS_MAGIC = 0x58465342L;
+  private static final long BTRFS_MAGIC = 0x9123683EL;
+  private static final long TMPFS_MAGIC = 0x01021994L;
   private final StatfsCall statfs;
 
   @FunctionalInterface
@@ -76,10 +80,10 @@ public final class LinuxFilesystemClassifier {
           var state = arena.allocate(SIZE, 8);
           if (statfs.call(arena.allocateFrom(path), state) != 0) throw unavailable();
           long magic = state.get(ValueLayout.JAVA_LONG, 0);
-          if (magic == 0xEF53L) return "ext2/ext3/ext4";
-          if (magic == 0x58465342L) return "xfs";
-          if (magic == 0x9123683EL) return "btrfs";
-          if (magic == 0x01021994L) return "tmpfs";
+          if (magic == EXT_FAMILY_MAGIC) return "ext2/ext3/ext4";
+          if (magic == XFS_MAGIC) return "xfs";
+          if (magic == BTRFS_MAGIC) return "btrfs";
+          if (magic == TMPFS_MAGIC) return "tmpfs";
           throw unavailable();
         });
   }

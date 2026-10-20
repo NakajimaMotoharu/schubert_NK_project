@@ -10,7 +10,7 @@ PREFIX = 'src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/'
 REWRITES = {
     'LinuxExecDescriptors.java': [
         ('public final class LinuxExecDescriptors {', 'public final class LinuxExecDescriptors {\n  private static final int FD_CLOEXEC = 1;\n'),
-        ('if (fcntl.call(descriptor, 1, 0) != 1)', 'if (fcntl.call(descriptor, 1, 0) != FD_CLOEXEC)'),
+        ('if (fcntl.call(descriptor, 1, 0) != 1) throw unavailable();', 'if (fcntl.call(descriptor, 1, 0) != FD_CLOEXEC)\n      throw unavailable();'),
         ('() -> set(descriptor, 1)', '() -> set(descriptor, FD_CLOEXEC)')],
     'LinuxFilesystemClassifier.java': [
         ('  private static final long SIZE = 120;', '  private static final long SIZE = 120;\n  private static final long EXT_FAMILY_MAGIC = 0xEF53L;\n  private static final long XFS_MAGIC = 0x58465342L;\n  private static final long BTRFS_MAGIC = 0x9123683EL;\n  private static final long TMPFS_MAGIC = 0x01021994L;'),
@@ -21,15 +21,15 @@ REWRITES = {
     'LinuxSealedProof.java': [
         ('public final class LinuxSealedProof {', 'public final class LinuxSealedProof {\n  private static final int REQUIRED_SEALS = 15;\n'),
         ('fcntl.call(descriptor, 1033, 15)', 'fcntl.call(descriptor, 1033, REQUIRED_SEALS)'),
-        ('if (fcntl.call(admittedDescriptor, 1034, 0) != 15)', 'if (fcntl.call(admittedDescriptor, 1034, 0) != REQUIRED_SEALS)')],
+        ('if (fcntl.call(admittedDescriptor, 1034, 0) != 15) throw unavailable();', 'if (fcntl.call(admittedDescriptor, 1034, 0) != REQUIRED_SEALS)\n      throw unavailable();')],
     'StorageAttributeGuard.java': [
         ('public final class StorageAttributeGuard {', 'public final class StorageAttributeGuard {\n  private static final long MINIMUM_FILE_SIZE = 1;\n'),
         ('if (expectedSize < 1 || expectedSize > 48_000_000L)', 'if (expectedSize < MINIMUM_FILE_SIZE || expectedSize > 48_000_000L)'),
         ('if (expectedSize < 1)', 'if (expectedSize < MINIMUM_FILE_SIZE)')],
     'StorageRootInspection.java': [
         ('public final class StorageRootInspection {', 'public final class StorageRootInspection {\n  private static final int ASSET_ROOT_INDEX = 0;\n  private static final int TRANSFER_ROOT_INDEX = 1;\n  private static final int BACKUP_ROOT_INDEX = 2;\n'),
-        ('if (index == 0)', 'if (index == ASSET_ROOT_INDEX)'),
-        ('else if (index == 1)', 'else if (index == TRANSFER_ROOT_INDEX)'),
+        ('if (index == 0) StorageAttributeGuard.directory(attributes, asset);', 'if (index == ASSET_ROOT_INDEX)\n                      StorageAttributeGuard.directory(attributes, asset);'),
+        ('else if (index == 1) StorageAttributeGuard.directory(attributes, transfer);', 'else if (index == TRANSFER_ROOT_INDEX)\n                      StorageAttributeGuard.directory(attributes, transfer);'),
         ('else if (index == 2)', 'else if (index == BACKUP_ROOT_INDEX)')],
     'OwnedTransferDirectory.java': [
         ('import java.util.UUID;', 'import java.util.UUID;\nimport java.util.concurrent.locks.ReentrantLock;'),

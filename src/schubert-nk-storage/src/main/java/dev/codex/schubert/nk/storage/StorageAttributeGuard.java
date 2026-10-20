@@ -11,6 +11,8 @@ import java.util.Objects;
  * attribute map is not root admission, authorization, descriptor/hash verification or I/O.
  */
 public final class StorageAttributeGuard {
+  private static final long MINIMUM_FILE_SIZE = 1;
+
   private StorageAttributeGuard() {}
 
   public static void directory(Map<String, Object> attributes, StorageIdentity identity)
@@ -25,7 +27,7 @@ public final class StorageAttributeGuard {
       throws StorageIoException {
     Objects.requireNonNull(attributes, "attributes");
     Objects.requireNonNull(identity, "identity");
-    if (expectedSize < 1 || expectedSize > 48_000_000L) {
+    if (expectedSize < MINIMUM_FILE_SIZE || expectedSize > 48_000_000L) {
       throw new IllegalArgumentException("invalid transfer file size");
     }
     existingFile(attributes, identity, expectedSize);
@@ -40,7 +42,7 @@ public final class StorageAttributeGuard {
       throws StorageIoException {
     Objects.requireNonNull(attributes, "attributes");
     Objects.requireNonNull(identity, "identity");
-    if (expectedSize < 1) {
+    if (expectedSize < MINIMUM_FILE_SIZE) {
       throw new IllegalArgumentException("invalid existing file size");
     }
     requireRegularFile(attributes, identity);

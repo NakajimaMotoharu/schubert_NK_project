@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Shared file-adapter directory capability; path replacement never redirects an operation.
@@ -23,7 +24,7 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   private static final java.lang.String LITERAL_PART = ".part";
 
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
-  private final Object stateLock = new Object();
+  private final ReentrantLock stateLock = new ReentrantLock();
   private final DirectoryCalls calls;
   private int descriptor;
 
@@ -74,7 +75,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * Existing child only; reader never creates, initializes, syncs or repairs a date. RD01/SS333.
    */
   public OwnedTransferDirectory openExistingDate(LocalDate date) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(date, "date");
       requireOpen();
       if (date.getYear() < 1 || date.getYear() > 9999) {
@@ -84,17 +86,22 @@ public final class OwnedTransferDirectory implements AutoCloseable {
       owned.descriptor =
           calls.openDirectory(descriptor, date.format(DateTimeFormatter.BASIC_ISO_DATE));
       return owned;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Existing Asset child only. NK-MED-001; UI237/243; SS333; SSC-028; PT-MED-018/019. */
   public OwnedTransferDirectory openExistingChild(String name) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(name);
       requireOpen();
       var owned = new OwnedTransferDirectory(calls, -1);
       owned.descriptor = calls.openDirectory(descriptor, name);
       return owned;
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -104,11 +111,14 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    */
   public <T> T atExistingEntryHandle(String name, FileOperation<T> operation)
       throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(name);
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return withEntry(() -> calls.openEntry(descriptor, name), operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -131,7 +141,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   /** Initialize only the directory this call created; never repairs an existing date. */
   public OwnedTransferDirectory openDate(LocalDate date, FileOperation<Boolean> initialize)
       throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(date, "date");
       Objects.requireNonNull(initialize, "initialize");
       requireOpen();
@@ -164,6 +175,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
             child.descriptor = -1;
             return result;
           });
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -173,7 +186,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * NK-OPS-001/BAK/BKO/UI251/SS333 7.6/341 6.1/343; SSC068/PG186; CDIR001..008.
    */
   public OwnedTransferDirectory createPrivateChild(String name) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(name);
       requireOpen();
       calls.createPrivateDirectory(descriptor, name);
@@ -187,27 +201,38 @@ public final class OwnedTransferDirectory implements AutoCloseable {
             child.descriptor = -1;
             return result;
           });
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Inspect this held directory, not its replaceable configured path; never export the path. */
   public <T> T atDirectory(FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return execute(Path.of("/proc/self/fd", Integer.toString(descriptor)), operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
   public <T> T atPart(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       return atFile(id, LITERAL_PART, operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
   public <T> T atReady(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       return atFile(id, ".ready", operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -222,15 +247,21 @@ public final class OwnedTransferDirectory implements AutoCloseable {
 
   /** Hold the part inode; caller must validate its Unix attributes before any read. */
   public <T> T atPartHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       return atHandle(id, LITERAL_PART, operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Hold the ready inode; a replaced name cannot redirect the scoped capability. */
   public <T> T atReadyHandle(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       return atHandle(id, ".ready", operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -244,11 +275,14 @@ public final class OwnedTransferDirectory implements AutoCloseable {
 
   /** CREATE_NEW and own the actual inode before starting any writer callback. */
   public <T> T createPart(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(id, "id");
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return withEntry(() -> calls.createFile(descriptor, id + LITERAL_PART), operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -257,11 +291,14 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * PT-OPS-PFILE-001/003/004/005. Caller validates metadata/ACL and forces written content.
    */
   public <T> T createPrivatePart(UUID id, FileOperation<T> operation) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(id, "id");
       Objects.requireNonNull(operation, LITERAL_OPERATION);
       requireOpen();
       return withEntry(() -> calls.createPrivateFile(descriptor, id + LITERAL_PART), operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -273,12 +310,15 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    */
   public <T> T createPrivateEntry(String name, FileOperation<T> operation)
       throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (name == null || operation == null)
         throw new IllegalArgumentException("private entry name and operation required");
       requireSegment(name);
       requireOpen();
       return withEntry(() -> calls.createPrivateFile(descriptor, name), operation);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -326,11 +366,14 @@ public final class OwnedTransferDirectory implements AutoCloseable {
 
   /** Atomic no-replace publication, then directory durability; never unlinks ready on failure. */
   public void publish(UUID id) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(id, "id");
       requireOpen();
       calls.publish(descriptor, id + LITERAL_PART, id + ".ready");
       calls.sync(descriptor);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -339,10 +382,13 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * exclusive diagnostic cleanup is a separate scoped file-adapter policy.
    */
   public void deletePart(UUID id) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(id, "id");
       requireOpen();
       calls.unlink(descriptor, id + LITERAL_PART);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -352,12 +398,15 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * the rename; callers must reconcile the uncertain result under their exclusive lock.
    */
   public void publishAs(UUID id, String name) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Objects.requireNonNull(id, "id");
       requireSegment(name);
       requireOpen();
       calls.publish(descriptor, id + LITERAL_PART, name);
       calls.sync(descriptor);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -366,21 +415,27 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * PT-OPS-PFILE-004..006. Does not itself establish run ownership, stable namespace or child stop.
    */
   public void unlinkEntry(String name) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(name);
       requireOpen();
       calls.unlink(descriptor, name);
       calls.sync(descriptor);
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Admitted empty child only; Root/M+A/identity gates belong to the cleanup caller. SSC118. */
   public void removeEmptyChild(String name) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(name);
       requireOpen();
       calls.removeEmptyDirectory(descriptor, name);
       calls.sync(descriptor);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -391,7 +446,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * alone does not certify a backup. Partial publication is never undone.
    */
   public void publishChild(String pending, String ready) throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireSegment(pending);
       requireSegment(ready);
       if (pending.equals(ready)) throw new IllegalArgumentException("identical directory names");
@@ -404,6 +460,8 @@ public final class OwnedTransferDirectory implements AutoCloseable {
             calls.sync(descriptor);
             return Boolean.TRUE;
           });
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -412,9 +470,12 @@ public final class OwnedTransferDirectory implements AutoCloseable {
    * SSC-022; PT-SCN-008-P01/P03 and BUG-036 monitor regression.
    */
   public void sync() throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireOpen();
       calls.sync(descriptor);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -427,12 +488,15 @@ public final class OwnedTransferDirectory implements AutoCloseable {
   /** Consume ownership before close: even an interrupted/failed close must not reuse the FD. */
   @Override
   public void close() throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (descriptor >= 0) {
         int previous = descriptor;
         descriptor = -1;
         calls.close(previous);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 }

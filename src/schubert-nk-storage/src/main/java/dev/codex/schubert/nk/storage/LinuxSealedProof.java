@@ -22,6 +22,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class LinuxSealedProof {
+  private static final int REQUIRED_SEALS = 15;
+
   private final CreateCall retainedCreate;
   private final WriteCall write;
   private final ReadCall retainedRead;
@@ -166,7 +168,7 @@ public final class LinuxSealedProof {
       offset += (int) count;
     }
     // F_SEAL_SEAL|SHRINK|GROW|WRITE; no future mutation or removal of seals.
-    if (fcntl.call(descriptor, 1033, 15) != 0) throw unavailable();
+    if (fcntl.call(descriptor, 1033, REQUIRED_SEALS) != 0) throw unavailable();
     return ResourceScope.acquire(
         () -> new Descriptor(() -> fcntl.call(descriptor, 1030, 128)), // F_DUPFD_CLOEXEC
         Descriptor::close,
@@ -182,7 +184,8 @@ public final class LinuxSealedProof {
    */
   public byte[] read(int admittedDescriptor) throws StorageIoException {
     if (admittedDescriptor < 128 || admittedDescriptor > 65535) throw invalid();
-    if (fcntl.call(admittedDescriptor, 1034, 0) != 15) throw unavailable(); // F_GET_SEALS
+    if (fcntl.call(admittedDescriptor, 1034, 0) != REQUIRED_SEALS)
+      throw unavailable(); // F_GET_SEALS
     try (Arena arena = Arena.ofConfined()) {
       MemorySegment buffer = arena.allocate(8193);
       int offset = 0;

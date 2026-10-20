@@ -21,6 +21,10 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class StorageRootInspection {
+  private static final int ASSET_ROOT_INDEX = 0;
+  private static final int TRANSFER_ROOT_INDEX = 1;
+  private static final int BACKUP_ROOT_INDEX = 2;
+
   private StorageRootInspection() {}
 
   public static void inspect(
@@ -61,9 +65,11 @@ public final class StorageRootInspection {
                   try {
                     Map<String, Object> attributes =
                         Files.readAttributes(path, "unix:owner,group,mode,nlink,dev,ino");
-                    if (index == 0) StorageAttributeGuard.directory(attributes, asset);
-                    else if (index == 1) StorageAttributeGuard.directory(attributes, transfer);
-                    else if (index == 2) requireBackup(attributes, backup);
+                    if (index == ASSET_ROOT_INDEX)
+                      StorageAttributeGuard.directory(attributes, asset);
+                    else if (index == TRANSFER_ROOT_INDEX)
+                      StorageAttributeGuard.directory(attributes, transfer);
+                    else if (index == BACKUP_ROOT_INDEX) requireBackup(attributes, backup);
                     else requireDirectory(attributes);
                     try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
                       requireSecureStream(entries);
