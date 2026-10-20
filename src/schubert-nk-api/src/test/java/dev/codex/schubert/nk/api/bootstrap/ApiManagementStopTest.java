@@ -236,7 +236,7 @@ final class ApiManagementStopTest {
     assertTrue(condition.getAsBoolean());
   }
 
-  private static final class StopFailureServer extends HttpServer {
+  static class StopFailureServer extends HttpServer {
     private final AtomicInteger stops = new AtomicInteger();
     private final CountDownLatch stopEntered = new CountDownLatch(1);
     private final CountDownLatch releaseStop;

@@ -36,9 +36,11 @@ final class ApiManagementServer implements AutoCloseable {
   private final AtomicBoolean promoted = new AtomicBoolean();
   private final AtomicBoolean promotionAttempted = new AtomicBoolean();
   private final AtomicBoolean stopping = new AtomicBoolean();
+  private final AtomicBoolean started = new AtomicBoolean();
   private final ReentrantLock stopLock = new ReentrantLock();
   private boolean closed;
   private boolean serverStopped;
+  private boolean startAttempted;
 
   static ApiManagementServer open(Map<String, String> information, BooleanSupplier healthy)
       throws IOException {
@@ -54,19 +56,44 @@ final class ApiManagementServer implements AutoCloseable {
   static ApiManagementServer open(
       Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
       throws IOException {
-    Objects.requireNonNull(information, "public information");
-    Objects.requireNonNull(healthy, "runtime health");
-    Objects.requireNonNull(factory, "management factory");
-    String json = publicJson(information);
-    var result = new ApiManagementServer(healthy, json, port, factory);
+    var result = bind(information, healthy, port, factory);
     try {
-      result.server.setExecutor(result.executor);
-      result.server.createContext("/", result::respond);
-      result.server.start();
+      result.start();
       return result;
     } catch (RuntimeException | Error failure) {
       result.close();
       throw failure;
+    }
+  }
+
+  // SSC316: native caller registers the bound owner before any fallible start operation.
+  static ApiManagementServer bind(Map<String, String> information, BooleanSupplier healthy)
+      throws IOException {
+    return bind(information, healthy, 8091, HttpServer::create);
+  }
+
+  static ApiManagementServer bind(
+      Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
+      throws IOException {
+    Objects.requireNonNull(information, "public information");
+    Objects.requireNonNull(healthy, "runtime health");
+    Objects.requireNonNull(factory, "management factory");
+    String json = publicJson(information);
+    return new ApiManagementServer(healthy, json, port, factory);
+  }
+
+  void start() {
+    stopLock.lock();
+    try {
+      if (stopping.get() || startAttempted)
+        throw new IllegalStateException("API management start unavailable");
+      startAttempted = true;
+      server.setExecutor(executor);
+      server.createContext("/", this::respond);
+      server.start();
+      started.set(true);
+    } finally {
+      stopLock.unlock();
     }
   }
 
@@ -110,8 +137,10 @@ final class ApiManagementServer implements AutoCloseable {
 
   void promote(ServiceStartupAdmission.Ready ready) throws IOException {
     Objects.requireNonNull(ready, "admission ready");
-    if (stopping.get() || !promotionAttempted.compareAndSet(false, true) || !healthy.getAsBoolean())
-      throw new IOException("API readiness unavailable");
+    if (!started.get()
+        || stopping.get()
+        || !promotionAttempted.compareAndSet(false, true)
+        || !healthy.getAsBoolean()) throw new IOException("API readiness unavailable");
     ready.release();
     if (stopping.get() || !healthy.getAsBoolean())
       throw new IOException("API readiness unavailable");
@@ -119,7 +148,7 @@ final class ApiManagementServer implements AutoCloseable {
   }
 
   boolean ready() {
-    return !stopping.get() && promoted.get() && healthy.getAsBoolean();
+    return started.get() && !stopping.get() && promoted.get() && healthy.getAsBoolean();
   }
 
   int port() {

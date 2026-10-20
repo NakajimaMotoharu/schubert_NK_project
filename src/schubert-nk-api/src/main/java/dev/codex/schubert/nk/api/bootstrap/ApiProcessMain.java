@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
 import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -172,74 +173,94 @@ public final class ApiProcessMain {
                     .executeRetainingUnknown(
                         (pool, credentials) -> {
                           System.err.println("API startup entered BROKER");
-                          try (var broker =
-                              ApiBrokerContexts.create(
-                                  credentials, inputs.config().value("nk.mq.url"))) {
-                            System.err.println("API startup entered DEPENDENCY_READINESS");
-                            new ApiDependencyReadiness(
-                                    pool, broker.sync(), broker.webLog(), broker.async())
-                                .verify();
-                            System.err.println("API startup entered APPLICATION_PREPARATION");
-                            ApiApplicationPreparation.execute(
-                                pool,
-                                credentials,
-                                java.nio.file.Path.of(
-                                    inputs.config().value("nk.api.storage.transfer-root")),
-                                java.nio.file.Path.of(
-                                    inputs.config().value("nk.api.storage.asset-root")),
-                                Integer.parseInt(
-                                    inputs.config().value("nk.api.storage.asset-manifest-entries")),
-                                java.time.Clock.systemUTC(),
-                                broker.async()::get,
-                                (processors, outbox) -> {
-                                  var sync = new ApiSyncRequestDispatcher(processors);
-                                  var clock = java.time.Clock.systemUTC();
-                                  var worker =
-                                      new QuestionWorkerService(
-                                          pool,
-                                          new StubAnswerProvider(clock),
-                                          outbox::wake,
-                                          lifetime::stopping,
-                                          clock);
-                                  System.err.println("API startup entered READY_INFORMATION");
-                                  var information = ready.information();
-                                  System.err.println("API startup entered OUTBOX_START");
-                                  outbox.start();
-                                  var groupsReady = new java.util.concurrent.atomic.AtomicBoolean();
-                                  System.err.println("API startup entered MANAGEMENT");
-                                  try (var management =
-                                      ApiManagementServer.open(
-                                          information,
-                                          applicationReadiness(
-                                              groupsReady::get,
+                          ResourceScope.acquire(
+                              () ->
+                                  ApiBrokerContexts.createRetainingUnknown(
+                                      credentials, inputs.config().value("nk.mq.url")),
+                              ServiceProcessResources.ownedRelease(ApiBrokerContexts::close, true),
+                              broker -> {
+                                System.err.println("API startup entered DEPENDENCY_READINESS");
+                                new ApiDependencyReadiness(
+                                        pool, broker.sync(), broker.webLog(), broker.async())
+                                    .verify();
+                                System.err.println("API startup entered APPLICATION_PREPARATION");
+                                ApiApplicationPreparation.executeRetainingUnknown(
+                                    pool,
+                                    credentials,
+                                    java.nio.file.Path.of(
+                                        inputs.config().value("nk.api.storage.transfer-root")),
+                                    java.nio.file.Path.of(
+                                        inputs.config().value("nk.api.storage.asset-root")),
+                                    Integer.parseInt(
+                                        inputs
+                                            .config()
+                                            .value("nk.api.storage.asset-manifest-entries")),
+                                    java.time.Clock.systemUTC(),
+                                    broker.async()::get,
+                                    (processors, outbox) -> {
+                                      var sync = new ApiSyncRequestDispatcher(processors);
+                                      var clock = java.time.Clock.systemUTC();
+                                      var worker =
+                                          new QuestionWorkerService(
+                                              pool,
+                                              new StubAnswerProvider(clock),
+                                              outbox::wake,
                                               lifetime::stopping,
-                                              outbox::healthy))) {
-                                    System.err.println("API startup entered CONSUMERS");
-                                    try (var runtime =
-                                        ApiMessagingRuntime.start(
-                                            broker.sync(),
-                                            broker.webLog(),
-                                            broker.async(),
-                                            lifetime.guardSync(sync),
-                                            lifetime.guardEvent(new WebLogIngestService(pool)),
-                                            lifetime.guardEvent(worker),
-                                            clock,
-                                            lifetime.committedFailureHandler(),
-                                            lifetime::fail)) {
-                                      try {
-                                        groupsReady.set(true);
-                                        System.err.println("API startup entered ADMISSION_RELEASE");
-                                        management.promote(ready);
-                                        lifetime.await(
-                                            runtimeReadiness(runtime::ready, outbox::healthy));
-                                      } finally {
-                                        lifetime.stop();
-                                        groupsReady.set(false);
-                                      }
-                                    }
-                                  }
-                                });
-                          }
+                                              clock);
+                                      System.err.println("API startup entered READY_INFORMATION");
+                                      var information = ready.information();
+                                      System.err.println("API startup entered OUTBOX_START");
+                                      outbox.start();
+                                      var groupsReady =
+                                          new java.util.concurrent.atomic.AtomicBoolean();
+                                      System.err.println("API startup entered MANAGEMENT");
+                                      ResourceScope.acquire(
+                                          () ->
+                                              ApiManagementServer.bind(
+                                                  information,
+                                                  applicationReadiness(
+                                                      groupsReady::get,
+                                                      lifetime::stopping,
+                                                      outbox::healthy)),
+                                          ServiceProcessResources.ownedRelease(
+                                              ApiManagementServer::close, true),
+                                          management -> {
+                                            management.start();
+                                            System.err.println("API startup entered CONSUMERS");
+                                            return ResourceScope.acquire(
+                                                () ->
+                                                    ApiMessagingRuntime.startRetainingUnknown(
+                                                        broker.sync(),
+                                                        broker.webLog(),
+                                                        broker.async(),
+                                                        lifetime.guardSync(sync),
+                                                        lifetime.guardEvent(
+                                                            new WebLogIngestService(pool)),
+                                                        lifetime.guardEvent(worker),
+                                                        clock,
+                                                        lifetime.committedFailureHandler(),
+                                                        lifetime::fail),
+                                                ServiceProcessResources.ownedRelease(
+                                                    ApiMessagingRuntime::close, true),
+                                                runtime -> {
+                                                  try {
+                                                    groupsReady.set(true);
+                                                    System.err.println(
+                                                        "API startup entered ADMISSION_RELEASE");
+                                                    management.promote(ready);
+                                                    lifetime.await(
+                                                        runtimeReadiness(
+                                                            runtime::ready, outbox::healthy));
+                                                    return Boolean.TRUE;
+                                                  } finally {
+                                                    lifetime.stop();
+                                                    groupsReady.set(false);
+                                                  }
+                                                });
+                                          });
+                                    });
+                                return Boolean.TRUE;
+                              });
                         });
               });
       // Exact normal whole-cleanup marker; generic stopped diagnostics are not success evidence.

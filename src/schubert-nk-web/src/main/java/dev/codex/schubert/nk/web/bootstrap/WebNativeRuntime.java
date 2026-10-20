@@ -106,7 +106,7 @@ final class WebNativeRuntime implements AutoCloseable {
     synchronized (ownerLock) {
       if (startAttempted || stopping.get()) throw new IOException("Web startup unavailable");
       startAttempted = true;
-      broker = WebBrokerContexts.create(credentials, config.value("nk.mq.url"));
+      broker = WebBrokerContexts.createRetainingUnknown(credentials, config.value("nk.mq.url"));
       var currentBroker = Objects.requireNonNull(broker);
       new WebDependencyReadiness(database, currentBroker.contexts()).verify();
       codecs = WebNativeCodecs.create(credentials);
