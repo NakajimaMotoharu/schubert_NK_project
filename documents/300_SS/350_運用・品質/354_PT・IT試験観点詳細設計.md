@@ -1,5 +1,10 @@
 # PT・IT試験観点詳細設計
 
+## SSC315 API factory内部所有の独立PT（S3a）
+
+三profileの12設定はSS321 literalから独立goldenで検証する。自己所有未接続factory fixtureの各setter全12・IAE/ISE/NPE/Error、取得失敗/null、close複合/同一Throwable/一度close/成功live/credential-freeを検証し、実VM/broker/context/原本DB/鍵へ接続しない。broker親は三取得の各失敗/null・全成功と逆順close/元primary同一性・個別secondary/未取得close0を確認し、actual JVMで全state/capacity/phaseが最初のfactory前、最後取得後のfinal格納だけと照合する。
+
+既Testの期待値をproductionから生成せず、既partial primary順位をprovider設定の順位へ一括変更しない。新source影響PT/六format型nullSpotBugs/原XML/六Jar/全物理/当四counter・必要全体を関連変更群で確認する。native UNKNOWN保持・実親/CHR/451は別依存として未完、拒否PTを試し直す目的ではない。BUG1553/YKT1307/SSC315、S2実行source固定中はMain/Test変更禁止。
 ## SSC314 API JMS close所有の独立PT（S2）
 
 PT-API-JMS-CLOSE001..006/1297は自己所有JMS proxyと有限latch/Threadのみで、三consumer/親group/brokerのfirst close Runtime/Error、確認済み子の再発行0、未知子の再確認・全成功後冪等、停止後DOWN/escaped supplier非受理・新callback処理0、並行closeの二重発行0、startup/fatal優先・nullを検証する。期待値は独立literal child別回数/順序/同一例外と実Thread終端。既「失敗後二度目正常no-op」oracleはSS342SSC158に反し、当反例・SSC314を根拠に補正し履歴を保持する。

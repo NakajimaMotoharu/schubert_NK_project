@@ -1,5 +1,9 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC315 API factory返却前の所有（S3a）
+
+SS321SSC315のAPI provider設定保護/親broker取得前準備を適用する。factory内部の未返却資源はsupplier側で一度close、親brokerは正常返却した三factoryだけを所有し、未取得の推定close/親owner準備後置をしない。固定設定/権限/期限/業務不変更、partial cleanup例外の同一性・順序は境界別に維持する。native UNKNOWNの保持・Root/DB後条件は別S3b未完で、局所設定PTをそれらの実証へ流用しない。BUG1553/YKT1307、SS321354。
+
 ## SSC314 API JMSのclose phase（2026-10-21、S2）
 
 SS321SSC314をSS342SSC158のUNKNOWN非正常化へ接続する。三consumer/親group/brokerは停止通知と成功子phase・全完了を分け、private final lock下の成功子だけを再close対象外とする。新callback/contextの拒否と既ACK/rollback/例外優先を維持し、close失敗後の再closeを無条件正常にしない。独立finite自己所有proxyで検証し、実親/DB/鍵/Root/Unit期限と未確認外側保持をその局所結果から認定しない。native partial factory/外側保持のS3は未完として別gateを要する。BUG1548/YKT1307/PG-D463、SS321/354。
