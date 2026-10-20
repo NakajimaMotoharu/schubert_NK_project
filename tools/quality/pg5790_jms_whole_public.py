@@ -53,7 +53,8 @@ def main():
         trace.append({'class':cls,'method':method,'designTestId':'PT-JMS-PRE'+method[4:7],'actualWholeTestId':match[0]['testId'],'xmlSha256':match[0]['xmlSha256']})
     if len({r['designTestId']for r in trace})!=7:raise ValueError('seven exact new design TestIDs')
     public=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'/SLOT;public.mkdir()
-    summary={**q,'newCaseTestIdTrace':trace,'qualificationReceiptSha256':hashlib.sha256(qraw).hexdigest(),'projectionActualExit':code,'projectionPayloadSha256':hashlib.sha256(raw.encode()).hexdigest(),'wholeReplayed':False,'newSourceNativeQualified':False,'acceptedLeafDelta':0,'effortPercent':None,'ptAlternativeCompleted':0}
+    cases_sha=hashlib.sha256((json.dumps(cases,ensure_ascii=False,indent=2)+'\n').encode()).hexdigest()
+    summary={**q,'newCaseTestIdTrace':trace,'casesSha256':cases_sha,'qualificationReceiptSha256':hashlib.sha256(qraw).hexdigest(),'projectionActualExit':code,'projectionPayloadSha256':hashlib.sha256(raw.encode()).hexdigest(),'wholeReplayed':False,'newSourceNativeQualified':False,'acceptedLeafDelta':0,'effortPercent':None,'ptAlternativeCompleted':0}
     for name,value in(('cases.json',cases),('qualification.json',summary)):
         with(public/name).open('x')as f:json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     print(json.dumps({'actualExit':0,'source':SOURCE,'tests':3939,'suites':583,'mainClasses':1664,'newCasesTraced':len(trace),'changedTargetFour100':q['changedTargetFour100'],'summarySha256':hashlib.sha256((public/'qualification.json').read_bytes()).hexdigest(),'casesSha256':hashlib.sha256((public/'cases.json').read_bytes()).hexdigest(),'formalAccepted':False}))
