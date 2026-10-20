@@ -15,6 +15,25 @@ public final class OwnedRetentionProcess {
 
   public static void assertHeld(Class<?> driver, List<String> output, String... arguments)
       throws Exception {
+    assertHeld(driver, output, List.of(), arguments);
+  }
+
+  /** Exact SLF4J 2.0.18 NOP fallback literals, not an arbitrary diagnostic filter. */
+  public static void assertFactoryHeld(Class<?> driver, List<String> output, String... arguments)
+      throws Exception {
+    assertHeld(
+        driver,
+        output,
+        List.of(
+            "SLF4J(W): No SLF4J providers were found.",
+            "SLF4J(W): Defaulting to no-operation (NOP) logger implementation",
+            "SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details."),
+        arguments);
+  }
+
+  private static void assertHeld(
+      Class<?> driver, List<String> output, List<String> preamble, String... arguments)
+      throws Exception {
     var command = new ArrayList<String>();
     command.add(Path.of(System.getProperty("java.home"), "bin", "java").toString());
     for (String option : ManagementFactory.getRuntimeMXBean().getInputArguments())
@@ -28,6 +47,8 @@ public final class OwnedRetentionProcess {
         var stderr = process.errorReader()) {
       var executor = Executors.newSingleThreadExecutor();
       try {
+        for (String expected : preamble)
+          assertEquals(expected, executor.submit(stderr::readLine).get(5, TimeUnit.SECONDS));
         assertEquals(
             "service resource release unconfirmed",
             executor.submit(stderr::readLine).get(5, TimeUnit.SECONDS));

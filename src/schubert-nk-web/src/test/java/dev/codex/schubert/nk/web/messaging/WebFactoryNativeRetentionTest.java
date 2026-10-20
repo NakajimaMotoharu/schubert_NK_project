@@ -48,7 +48,8 @@ final class WebFactoryNativeRetentionTest {
   @Test
   void hold316009ProviderAndReturnedOwnerKeepOuterFrame() throws Exception {
     for (int kind = 0; kind < 2; kind++)
-      OwnedRetentionProcess.assertHeld(Driver.class, List.of("CLOSE"), Integer.toString(kind));
+      OwnedRetentionProcess.assertFactoryHeld(
+          Driver.class, List.of("CLOSE"), Integer.toString(kind));
   }
 
   public static final class FaultFactory extends WebBrokerFactoryOwnershipTest.ProbeFactory {

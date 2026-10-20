@@ -53,7 +53,7 @@ final class ApiFactoryNativeRetentionTest {
   @Test
   void hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry() throws Exception {
     for (int kind = 0; kind < 3; kind++)
-      OwnedRetentionProcess.assertHeld(
+      OwnedRetentionProcess.assertFactoryHeld(
           Driver.class, Collections.nCopies(kind == 2 ? 3 : 1, "CLOSE"), Integer.toString(kind));
   }
 
