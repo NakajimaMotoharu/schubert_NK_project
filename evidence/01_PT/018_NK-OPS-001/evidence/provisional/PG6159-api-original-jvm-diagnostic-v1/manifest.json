@@ -1,0 +1,269 @@
+{
+  "actualExit": 0,
+  "purpose": "PG_DIAGNOSTIC_ONLY_PARENT_RUN_REJECTED",
+  "source": "8f0ba4cb06467e5e1c9b25f8360bbc1db4d963ea",
+  "originalRunExit": 1,
+  "originalStaticApiFindings": 4,
+  "originalManifestSha256": "a4fdb91aa532b488f58802039922d2a95bfce5ae06a83d40a7c46ff3836a7f2a",
+  "all851MainUnchanged": true,
+  "originalApiJarSha256": "fab8cf781e49e20ad857a4468f5f7cdc118ccb31b8ec5d825f99d43ba55e61d8",
+  "closeOrder": [
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumers",
+      "publicAbiUnchanged": true,
+      "lockBeforeActualBeforeCompleted": [
+        6,
+        34,
+        79
+      ],
+      "closedOnlyLockedClose": true
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers",
+      "publicAbiUnchanged": true,
+      "lockBeforeActualBeforeCompleted": [
+        6,
+        16,
+        27
+      ],
+      "closedOnlyLockedClose": true
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers",
+      "publicAbiUnchanged": true,
+      "lockBeforeActualBeforeCompleted": [
+        6,
+        16,
+        27
+      ],
+      "closedOnlyLockedClose": true
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime",
+      "publicAbiUnchanged": true,
+      "lockBeforeActualBeforeCompleted": [
+        6,
+        18,
+        21
+      ],
+      "closedOnlyLockedClose": true
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts",
+      "publicAbiUnchanged": true,
+      "lockBeforeActualBeforeCompleted": [
+        2,
+        34,
+        71
+      ],
+      "closedOnlyLockedClose": true
+    }
+  ],
+  "providerConfiguration": {
+    "acquireOffset": 20,
+    "setterOffsets": [
+      41,
+      48,
+      55,
+      60,
+      65,
+      72,
+      79,
+      86,
+      91,
+      96,
+      101,
+      106
+    ],
+    "closeOffset": 114,
+    "typedRanges": [
+      [
+        37,
+        110,
+        111,
+        "java/lang/RuntimeException"
+      ],
+      [
+        37,
+        110,
+        111,
+        "java/lang/Error"
+      ],
+      [
+        113,
+        117,
+        120,
+        "java/lang/RuntimeException"
+      ],
+      [
+        113,
+        117,
+        120,
+        "java/lang/Error"
+      ]
+    ]
+  },
+  "brokerPreparation": {
+    "acquireInstructionIndices": [
+      23,
+      37,
+      51
+    ],
+    "allStatePreparedBeforeFirst": true,
+    "preallocatedCapacity": 3,
+    "postAcquireAllocations": 0
+  },
+  "originalEightTargetCounters": {
+    "api:api/bootstrap/ApiManagementServer": {
+      "BRANCH": {
+        "covered": 56,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 109,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 13,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/config/ApiBrokerContexts": {
+      "BRANCH": {
+        "covered": 26,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 87,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 16,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/config/ArtemisConnectionFactoryProvider": {
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 43,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile": {
+      "BRANCH": {
+        "covered": 0,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/ApiMessagingRuntime": {
+      "BRANCH": {
+        "covered": 44,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 77,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 11,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/QuestionWorkConsumers": {
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 63,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/SyncRequestConsumers": {
+      "BRANCH": {
+        "covered": 48,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 87,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/WebLogConsumers": {
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      }
+    }
+  },
+  "testsExecutedByReader": 0,
+  "additionalBuilds": 0,
+  "wholeQualified": false,
+  "sixModuleStaticAccepted": false,
+  "formalAccepted": false,
+  "nativeQualified": false,
+  "ptAlternativeCompleted": 0
+}

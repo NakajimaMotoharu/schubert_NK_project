@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
@@ -27,7 +26,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
   private final List<JMSContext> contexts;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
-  private final ReentrantLock closeLock = new ReentrantLock();
+  private final Object closeLock = new Object();
   private final boolean[] contextClosed = new boolean[CONCURRENCY];
   private boolean closed;
 
@@ -129,8 +128,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
   @Override
   public void close() {
     halted.set(true);
-    closeLock.lock();
-    try {
+    synchronized (closeLock) {
       if (closed) return;
       Throwable failure = null;
       for (int index = 0; index < contexts.size(); index++) {
@@ -151,8 +149,6 @@ public final class SyncRequestConsumers implements AutoCloseable {
         throw new IllegalStateException("API sync consumer close failed", failure);
       }
       closed = true;
-    } finally {
-      closeLock.unlock();
     }
   }
 

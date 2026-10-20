@@ -216,7 +216,11 @@ final class ApiConsumerCloseOwnershipTest {
       assertTrue(gate.entered.await(5, TimeUnit.SECONDS));
       assertFalse(ready(owner));
       second.start();
-      await(() -> second.getState() == Thread.State.WAITING);
+      // SS314 requires blocked serialization, not one specific private lock implementation.
+      await(
+          () ->
+              second.getState() == Thread.State.WAITING
+                  || second.getState() == Thread.State.BLOCKED);
       assertEquals(1, gate.closes.get());
     } finally {
       gate.release.countDown();

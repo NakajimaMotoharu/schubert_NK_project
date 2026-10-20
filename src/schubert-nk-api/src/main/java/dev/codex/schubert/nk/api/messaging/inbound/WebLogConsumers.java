@@ -8,7 +8,6 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
@@ -23,7 +22,7 @@ public final class WebLogConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
-  private final ReentrantLock closeLock = new ReentrantLock();
+  private final Object closeLock = new Object();
   private boolean closed;
 
   private WebLogConsumers(Supplier<JMSContext> factory) {
@@ -121,8 +120,7 @@ public final class WebLogConsumers implements AutoCloseable {
   @Override
   public void close() {
     halted.set(true);
-    closeLock.lock();
-    try {
+    synchronized (closeLock) {
       if (closed) return;
       try {
         context.close();
@@ -130,8 +128,6 @@ public final class WebLogConsumers implements AutoCloseable {
         throw new IllegalStateException("API Web log consumer close failed", failure);
       }
       closed = true;
-    } finally {
-      closeLock.unlock();
     }
   }
 }

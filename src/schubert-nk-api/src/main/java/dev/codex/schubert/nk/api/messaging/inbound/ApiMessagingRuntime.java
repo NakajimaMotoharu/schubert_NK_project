@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.jspecify.annotations.Nullable;
@@ -22,7 +21,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
   private final List<AutoCloseable> groups;
   private final AtomicBoolean terminal;
   private final AtomicBoolean stopping = new AtomicBoolean();
-  private final ReentrantLock closeLock = new ReentrantLock();
+  private final Object closeLock = new Object();
   private final boolean[] groupClosed = new boolean[MAXIMUM_CONSUMER_GROUPS];
   private boolean closed;
 
@@ -156,13 +155,10 @@ public final class ApiMessagingRuntime implements AutoCloseable {
   @Override
   public void close() {
     stopping.set(true);
-    closeLock.lock();
-    try {
+    synchronized (closeLock) {
       if (closed) return;
       closeGroups(groups, groupClosed);
       closed = true;
-    } finally {
-      closeLock.unlock();
     }
   }
 

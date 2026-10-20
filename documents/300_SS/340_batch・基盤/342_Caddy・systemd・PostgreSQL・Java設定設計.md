@@ -1,5 +1,13 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC316 API nativeの取得前所有・UNKNOWN保有（2026-10-21、S3b）
+
+ordinary APIは全acquire/release/action portをその資源の取得前に準備し、ResourceScopeとServiceProcessResourcesの既native ownedReleaseを使ってbroker→application内側資源→management→consumerの所有を接続する。API管理HTTPはbindで全owner/state/未開始executorとbound serverを返し、native ownerが捕捉してからstart/configureする。既openはbind/startを合わせたcomponent互換entryとして元例外契約を維持し、startは一度だけ、停止要求後/重複startを拒否する。
+
+native partial startup/closeが未確認なら、同failure frameで固定UNKNOWN保持し、外側Outbox/codecs/roots/broker/DB/key/Root scopeへunwindしない。close成功後だけ次ownerへ進む。API内側applicationのnative entryにも同ownedReleaseを適用し、legacy component/TWRの例外順位は不変更。API cleanup complete/finished通知は全既scopeが正常帰還した場合だけ。既hookは通知のみでclose/System.exitを発行しない。
+
+保持helperはbootstrap既releaseを明示再利用する内部APIで、固定診断のみ・自動retry/正常receipt/新Root操作権限を持たない。親30分/既Unit・component期限は不変更、UNKNOWNを時間超過の正常終了にしない。Web返却済みphase/Executionは維持し返却前factory native経路だけ接続する。SS321343354/SSC316、BUG1547/1556/YKT1307。
+
 ## SSC315 API factory返却前の所有（S3a）
 
 SS321SSC315のAPI provider設定保護/親broker取得前準備を適用する。factory内部の未返却資源はsupplier側で一度close、親brokerは正常返却した三factoryだけを所有し、未取得の推定close/親owner準備後置をしない。固定設定/権限/期限/業務不変更、partial cleanup例外の同一性・順序は境界別に維持する。native UNKNOWNの保持・Root/DB後条件は別S3b未完で、局所設定PTをそれらの実証へ流用しない。BUG1553/YKT1307、SS321354。
