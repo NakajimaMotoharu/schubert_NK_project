@@ -57,14 +57,18 @@ def emitted(data):
     return raw
 
 
-def main():
+def operator_source():
     raw=inspect.getsource(previous.main)
     replacements={'PG5832-six-v1':'PG5860-six-v1',"['tests']==3967":"['tests']==3971",'PG5808-current3955-cases':'PG5832-current3967-cases','42bdfb97cdc1f3b1944e28e144e91993ed2f05bc269a289ba6f20e6d7f29a376':'fcceece52ccd16cf81f0b0e67060464ce0414a723417d2f827b8e29a9bcd9023','PG5830-isolation-static-v1':'PG5858-terminal-static-v1','pg5830-isolation-static-v1':'pg5858-terminal-static-v1','PG5834-qualified-v1':'PG5862-qualified-v1'}
     for old,new in replacements.items():
         if raw.count(old)!=1:raise ValueError('one independent3971 operator binding: '+old)
         raw=raw.replace(old,new,1)
+    compile(raw,'<original3971 qualification operator>','exec');return raw
+
+
+def main():
     scope={**vars(previous),'SOURCE':SOURCE,'ROOT':ROOT,'W':W,'ORIGINAL':ORIGINAL,'SLOT':SLOT,'PHYSICAL_KINDS':PHYSICAL_KINDS,'physical_difference':physical_difference,'added_cases':added_cases,'emitted':emitted}
-    exec(compile(raw,'<original3971 qualification operator>','exec'),scope)
+    exec(compile(operator_source(),'<original3971 qualification operator>','exec'),scope)
     return scope['main']()
 
 

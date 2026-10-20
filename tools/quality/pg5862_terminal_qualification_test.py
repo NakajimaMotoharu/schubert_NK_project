@@ -14,5 +14,13 @@ class Independent3971ReaderTest(unittest.TestCase):
         self.assertIn("old = base / 'runs/PG5832-six-v1'",raw)
         self.assertEqual(8,sum(map(len,target.previous.TARGETS.values())))
 
+    def test_operator_reads_exact_new_original_and_prior_reference(self):
+        raw=target.operator_source()
+        self.assertIn("['tests']==3971",raw)
+        self.assertIn('PG5832-current3967-cases',raw)
+        self.assertIn('PG5858-terminal-static-v1',raw)
+        self.assertIn('PG5862-qualified-v1',raw)
+        self.assertNotIn('PG5808-current3955-cases',raw)
+
 
 if __name__=='__main__':unittest.main()
