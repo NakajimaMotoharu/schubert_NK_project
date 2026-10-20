@@ -1,0 +1,176 @@
+{
+  "actualExit": 0,
+  "source": "9463db1ac23437043facf95b87f64b9fc7e758bd",
+  "priorRebindSha256": "4ce7da2d11ac41fc2e087dc4f0887b89ef139cf7b813f5c815a89ca9012ee55b",
+  "priorReviewSha256": "7d318fea2b0cdddaf7af4de85aaf6453356689ab0b06d42e9d7dcaa24ee4c53e",
+  "currentSourceByteProofSha256": "d7845886112e75b0bbacb1dd0f6ae9603d017802275fed355311728b7cac338a",
+  "installedPmdJarSha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd",
+  "installedRules": {
+    "DoNotUseThreads": {
+      "entry": "category/java/multithreading.xml",
+      "entrySha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "definitionSha256": "e3620af612dfb35fd6984877afb19784ba47e74557bfda3dfe1a6aa6f251cb29"
+    },
+    "UseConcurrentHashMap": {
+      "entry": "category/java/multithreading.xml",
+      "entrySha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "definitionSha256": "fc73e2a7fa9b4b05cc33540debaf788dfb615306fac3c0d37e23f4ebefdac534"
+    },
+    "UseProperClassLoader": {
+      "entry": "category/java/errorprone.xml",
+      "entrySha256": "38b7c3ff9c6d211100f92dd2695fc41a69c305068eeb0fb76b0a5cbeeb2862e5",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "definitionSha256": "6568cf905ccfdf568c1d4010d3a4d6653dcb2ad90777ff1da495f827e20d8b0f"
+    }
+  },
+  "recheckedHeldDispositions": 12,
+  "newDispositionsCreated": 1,
+  "changedScopeProofs": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "oldSourceSha256": "c77085120b95627fea4aa50bed57f481a51ce06ea3edc003fe466505fd0cd134",
+      "currentSourceSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "scope": "outer class unchanged; only bounded nested enum edits",
+      "lineShift": 0,
+      "declaringClass": "batch:dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.class",
+      "oldPhysicalSha256": "51ad0a4843beada1cabdf74b0491a111eff080f30f89ae062394560a2866dfb8",
+      "currentPhysicalSha256": "51ad0a4843beada1cabdf74b0491a111eff080f30f89ae062394560a2866dfb8"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
+      "oldSourceSha256": "0a42bd999bec1c49c408a679b6f984930fc7ca2fe7d8ebabae29ad5b3b5bebb0",
+      "currentSourceSha256": "a69a3ab5d53aedde2982176c43bbec15e27358921cd4d5140e395fee228e8cd4",
+      "scope": "outer class unchanged; only bounded nested enum edits",
+      "lineShift": 0,
+      "declaringClass": "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.class",
+      "oldPhysicalSha256": "90180d89ef15cacb183ab093e3773b80b7de87ed435c27bd8796c350c45ab48a",
+      "currentPhysicalSha256": "90180d89ef15cacb183ab093e3773b80b7de87ed435c27bd8796c350c45ab48a"
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java": {
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "oldSourceSha256": "b03065ce5e6eeb740be97c81df0251cda2ac11609c8d740ca2db1f03c440d7c7",
+      "currentSourceSha256": "f80c1e4f90072efbaf2bcd5ae049f38c708731c564488dafc69f8c5588cc874c",
+      "scope": "outer class unchanged; only bounded nested enum edits",
+      "lineShift": 0,
+      "declaringClass": "bootstrap:dev/codex/schubert/nk/bootstrap/SystemManagerObservation.class",
+      "oldPhysicalSha256": "c997fe53331b4b3002f740d95ffbbee5298d077d1668d26bc604d96691c66648",
+      "currentPhysicalSha256": "c997fe53331b4b3002f740d95ffbbee5298d077d1668d26bc604d96691c66648"
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java": {
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java",
+      "oldSourceSha256": "4913a1eb7ddfd4ed7368dfdb6dbc3cf8c60a4eac56f656c5e01a0e1b7ef1cab5",
+      "currentSourceSha256": "8281f715abd82572704c868764f642e10b19e10b4475fd0983735e0fbe340fa8",
+      "scope": "complete NativeIo tail and opcode",
+      "lineShift": 6,
+      "declaringClass": "batch:dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo.class",
+      "oldPhysicalSha256": "6d448090fdcd79419ee8b222b83d42cf5e4c9c76a20439fc6626f0d56d4de9b3",
+      "currentPhysicalSha256": "c4c601773417c7d26e966dbae06df393ee866aa6eac5835f80ccf5b83bd39579",
+      "opcodeSha256": "e962f53dd9ff42148d4820d16b8da00621b8926c8d3667df67a0d742f7ecd985",
+      "debugDifferenceNotDiscarded": true
+    }
+  },
+  "recheckedFindings": [
+    {
+      "findingId": "F03-PMD2-6f03a4e21ad80265ba543652f06557ed51521c635d89609eb57ce8cfe16e8170",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "line": "366",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-1ec171116020193901c8a1adbbf1b42d504eef13a47670c32a2cbd97ce555e16",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "line": "510",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-64e795f14d4150a473a8ff46d2d6cd1d61537b326b3c4059dffecfd98d05efb2",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "line": "633",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-ab7e16ed00b57e013a99ec98cbf2988e8065a847125b77e9ae6546367e550738",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "line": "645",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-cee90052ee66cf47b9cbde63bae585efd33184c02c5de2d41a5e3321003a7531",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "line": "662",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-0e0654470ebc197a8532ae6da352d611e48263ca5e0210da42034b8ad7008690",
+      "rule": "UseConcurrentHashMap",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
+      "line": "104",
+      "reason": "Method-confined mutable builder becomes Map.copyOf in immutable snapshot constructor; no concurrent mutable escape. Concurrent-access premise does not hold for this exact map."
+    },
+    {
+      "findingId": "F03-PMD2-11852cc2043ce7a96e558ff5956cf835972b5eaa8447c977b993f87469114e11",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "line": "105",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-9110ba61069881d5e38c2f52b697b4f19274b84b1a6a7d06f313eca6a830c552",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "line": "116",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-b03caf99ad47d2d7c11fb24bf55aab94e2da5cb1716ac16741e3cb53d4e5175c",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "line": "118",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-b85795429df2c61bea8cba42c90a5a6f657a2541f59b1c9e2aa639a178d1c9f6",
+      "rule": "NullAssignment",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "line": "164",
+      "reason": "Finally clears pending only after current != null and current.closed(); otherwise exact pending owner is retained. Null means no remaining close obligation, not successful runtime recovery proof."
+    },
+    {
+      "findingId": "F03-PMD2-b170e55176befe172ef950b6c0a524e25e29bc7b4457f8adb4df6c39f8364940",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "line": "171",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    },
+    {
+      "findingId": "F03-PMD2-83195cb37641a2d4ee36f7dfa453dcb8802e8a47456cc14bbc906d8ca8fd3ed6",
+      "rule": "DoNotUseThreads",
+      "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/RootStartupContext.java",
+      "line": "623",
+      "reason": "Installed J2EE-managed-thread premise is inapplicable to approved standalone Java process. This finding does not certify thread safety, owned cleanup or real VM success."
+    }
+  ],
+  "newFindingId": "F03-PMD2-1b134ade17b03db8ccd19dc0ae99b8fe38c0e378f5b21f801cddffece375f900",
+  "currentRawFindings": 1582,
+  "statusCounts": {
+    "NOT_REVIEWED_CURRENT_SOURCE": 1198,
+    "SOURCE_REBOUND_CURRENT_WHOLE_PENDING": 384
+  },
+  "currentWholeJoinPending": true,
+  "executedPtAdded": 0,
+  "ptAlternativeCompleted": 0,
+  "rawWarningsRemoved": 0,
+  "sourceCodeChanged": false,
+  "analyzerReexecuted": false,
+  "historicalPtImportedAsCurrent": false,
+  "F03Accepted": false,
+  "formalAccepted": false,
+  "vmActions": 0
+}
