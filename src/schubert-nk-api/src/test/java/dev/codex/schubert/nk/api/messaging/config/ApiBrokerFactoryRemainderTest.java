@@ -43,20 +43,18 @@ class ApiBrokerFactoryRemainderTest {
               return new char[] {'P', 'T'};
             };
         if (failAt == 0) {
-          try (var owner =
-              ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider)) {
-            owner.close();
-            owner.close();
-            assertEquals(
-                List.of(
-                    "openSYNC",
-                    "openWEB_LOG",
-                    "openASYNC",
-                    "closeASYNC",
-                    "closeWEB_LOG",
-                    "closeSYNC"),
-                calls);
-          }
+          var owner = ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider);
+          owner.close();
+          owner.close();
+          assertEquals(
+              List.of(
+                  "openSYNC",
+                  "openWEB_LOG",
+                  "openASYNC",
+                  "closeASYNC",
+                  "closeWEB_LOG",
+                  "closeSYNC"),
+              calls);
         } else {
           assertThrows(
               NullPointerException.class,

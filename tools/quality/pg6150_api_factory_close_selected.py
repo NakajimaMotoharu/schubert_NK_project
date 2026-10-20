@@ -8,6 +8,7 @@ from pg5984_web_form_selected_v2 import node_environment
 from pg6140_api_jms_close_selected import MAIN as STOP_MAIN, TESTS as STOP_TESTS, BASELINE
 
 ROOT = engine.ROOT
+SLOT = 'pg6150-api-factory-close-selected-v1'
 MAIN = STOP_MAIN | {'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java'}
 TESTS = STOP_TESTS | {'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/'+p+'.java' for p in (
     'inbound/QuestionWorkConsumersTest', 'inbound/SyncRequestConsumersTest', 'inbound/WebLogConsumersTest',
@@ -40,7 +41,7 @@ def main():
     cases, counts = inventory()
     if (sum(counts.values()), len(counts)) != (1955, 321):
         raise ValueError('all current API/Web plus guards, no arithmetic PASS aggregation')
-    scope = {**vars(engine), 'SLOT': 'pg6150-api-factory-close-selected-v1', 'NODE_PATH': node_environment(),
+    scope = {**vars(engine), 'SLOT': SLOT, 'NODE_PATH': node_environment(),
         'CASES': cases, 'COUNTS': counts, 'TARGETS': TARGETS, 'test_names': source_test_names}
     exec(compile(runner_source(), '<ordinary current combined path>', 'exec'), scope)
     return scope['main']()
