@@ -1,5 +1,11 @@
 # Artemis物理構成・JMS設定設計
 
+SSC311（2026-10-20、BUG1537/YKT1297、Web factory取得・設定の所有）：§6のendpoint/全12設定/role/credential/consumer値は不変更。WebBrokerContexts public createはcredential非null確認、password supplier・owner/lock等全state準備をfactory取得より前に完了し、private ctor最後に固定endpoint factory取得/設定を行う。取得/設定成功後は同factoryをfinal factory/ownerへ格納するだけで完成ownerを返し、取得後のcallback/owner/state allocation gapを作らない。open時のpassword copy消去と既live close retry/固定例外・停止規約は維持する。
+
+設定用の内部acquire portは取得前にnonnull検証し、helper内一回取得/nonnull確認直後から既12settingを保護する。全設定成功時だけlive factoryを返し、Runtime/NPE/Error失敗時は当factory.closeを一度試みる。通常は同一primaryを保持しclose失敗を一回suppressedへ追加、同一Throwableは自身へ追加しない。closeがErrorかつprimary非Errorの時だけ同close Errorを優先してprimaryをsuppressedへ保持する。factoryにはまだuser/passwordを設定せず接続/consumerを開始しない。例外/cause/suppressedのprovider診断をログへ出さず、close UNKNOWNを成功へ変更・自動再試行しない。
+
+既三引数注入constructorはcallerが正常完成まで提供factory/ownerを保護する借用入口として区別する。Productionのcreateは取得済み資源をそのctorへ渡して組み立てず、上記factory-last経路を使う。RD/UI/外部業務/wire/認証権限/設定値/既正常結果は不変更。SS343/354・MQFACT311001..003・PG判断/独立PT/実bytecode/同source品質へ追跡し、設計反映自体をPG/PT/native/正式完了にしない。
+
 SSC151153155（PG/PT、2026-10-01）：既存物理SYNC_REQUEST/SYNC_REPLY_WEBはregistry-valid QSBREQ01 Q/A、QSBRSP01 S/Aも運ぶ（応答kindはUI232のSでありRではない）。他通常S/内部IとProtocolValidatorのexact profile/transport/route一致は維持、他layoutの偽Aや内部eventを許さない。全4API/Web送受信境界を同契約でPTする。内部QWKはguard済みactual delivery metadataをbusiness portへ渡す。業務最終QWK DLQだけは新Outbox dispatch UUID Dを_AMQ_DUPL_IDへ使い、body/header/NKMessageIDは元Wを保持する。元transport ID/count/error/detectedAtは不変列、元async address/queue/API_WORKは固定で§11 bounded propertyを構成する。通常workのduplicate ID＝Wは不変更。DB最終ERRORだけでは元ACKせず、対応DのSENTまで確認する。consumer/元body/秘密redaction/role/TTL/local transactionは緩めない。
 
 SSC146（BUG411/YKT328、PG/PT隔離認証fixture）：app login usernameはAPI=`nk_api`、Web=`nk_web`とし、それぞれ同名ACL roleへ一対一で対応付ける。roleは認可、username/passwordは認証の別概念であり、role名だけが正しくても別userのcredentialでは接続を許可しない。固定mq-api/mq-webを通常LoadCredentialで受領し、管理login/roleをappへ転用しない。既存Ops login schubert_ops→nk_ops、保守login schubert_maintenance→nk_mq_maintenanceは維持。ユーザ名aliasやpassword fallbackをProductionへ追加しない。fixtureの旧private設定を保存して限定配置/readback/実認証/誤user・誤credential・cross-role負系をPT297298に記録する。UI231のACL表・6Address/Queue・電文互換・秘密保管契約は不変更。
