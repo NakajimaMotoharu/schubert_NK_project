@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-013 — PT_DEFAULT：受信rollback未確認の有限proxy四経路
+
+BUG1489/YKT1249/PG-D441/1208。当test-only sourceを先に固定、API三consumerとWeb reply各一@Testで、合成BytesMessage.getBodyLength失敗→rollback状態変更前Runtime→ready/通知/再入を確認する。JMSContext/JMSConsumerは許可methodだけのメモリproxyで実Broker/DB/network/VM/Unit/current/鍵/原本/permit/failed-cohort不操作。原Main1664同byteのredを保持、Maven依存でWebが未実施ならAPIの再現は再演せず未実施Webだけ別run。是正後はtyped未確認/同一Throwable/null/通常rollback成功・Error等を追加して有限greenを行う。通常PTを拒否代替へ広げず、境界探索/拒否再試行0。
+
 ## PTPRE-012 — PT_DEFAULT：JMS三guard後の必要host全3939
 
 1202/PG5780、source2bbb、元14限定green/独立849source・1664byte二差/全ABI・新六branchを前提に、同sourceの新3939/583全体へ進む。旧3932の再確認ではなく新七proxy caseを含む統合再試験。既専用host mini/pinned key/offline worker1/自己所有temporary DB・broker等のfixture profileは従前と同じ、guest/Unit/current/原本/鍵/permit/failed-cohort不操作。元job無し・headroom・未使用namespace・source/hashを発行前認証し、一回だけ新実行する。未知拒否へのprobe/代替試験ではなく、終了/独立資格まで未受入。
