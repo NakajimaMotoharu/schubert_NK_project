@@ -37,3 +37,5 @@ fixtureは許可済method以外をAssertionErrorで拒否し、固定合成例�
 Sourceをclean commitで固定、Main1665（新一）と全850 source、target七型の実line/method/class/branchを出力する。限定54の成功やcounter不足を全体100へ広げず、必要fresh whole・当source native/CHR/451・正式は別未完。新型/例外/並行はAPI既terminal remainderの独立順序/実in-process配送試験を含む。外側WebNativeRuntime/WebLogApplicationRuntimeのfatal signal接続はsource/必要wholeで点検し、実native所有確認は保留のまま。
 
 PG5800-v1/source1fe/47590はserialVersionUID欠落によりcompile1・PT0、BUG1491/YKT1251へ修正前起票。元runを保持してnew-v2へ移行、抑制でなく新Main/fixture三例外へ既規約1Lを付与する。全PT未実行からの必要再試験であり、成功済全回帰の再演ではない。
+
+PG5800-v2/226f/89305は30件/8suiteのうち旧API remainder一failure、残not-run。BUG1492/YKT1252修正前起票。uncertain modeのfixture内部real.rollback成功はapplicationの確認ではなく、SS/PG-D441から後続Question業務0を独立期待とする。三groupのbusiness2・Question呼出1・明示rollback3、正常/protocol先行modeの期待は保持し、stopped owner close後の同一QWKREQ01 golden payloadが実in-process brokerへ未ACK返却されることを検査する。Production不変更、new-v3で全有限54/必要wholeへ進む。原失敗を期待修正後のPASSへ改記しない。

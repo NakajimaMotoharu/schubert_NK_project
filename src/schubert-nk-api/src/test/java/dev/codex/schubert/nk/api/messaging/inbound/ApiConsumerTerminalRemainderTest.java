@@ -140,12 +140,27 @@ class ApiConsumerTerminalRemainderTest {
             assertFalse(runtime.ready());
             assertTrue(runtime.terminalFailureObserved());
           }
-          assertEquals(3, business.get());
-          assertEquals(2, questionCalls.get());
+          // The application cannot observe the fixture's internal real.rollback() success
+          // after the provider throws. PG-D441 requires UNKNOWN to stop before the next work.
+          assertEquals(uncertain ? 2 : 3, business.get());
+          assertEquals(uncertain ? 1 : 2, questionCalls.get());
           assertEquals(protocolFirst ? 6 : 0, commits.get());
-          assertEquals(protocolFirst ? 1 : 4, rollbacks.get());
+          assertEquals(protocolFirst ? 1 : uncertain ? 3 : 4, rollbacks.get());
           assertEquals(protocolFirst ? 1 : 0, protocols.get());
           assertEquals(protocolFirst ? 0 : 1, fatals.get());
+        }
+        if (uncertain) {
+          // Closing the stopped owner must return the uncommitted work, never ACK it.
+          try (var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+              var pending =
+                  observer.createConsumer(
+                      new ActiveMQQueue(BrokerTopology.ASYNC_WORK.fullyQualifiedQueue()))) {
+            var returned = pending.receive(5000);
+            assertNotNull(returned);
+            assertArrayEquals(
+                InternalEventListenerTest.eventWire("QWKREQ01", 64),
+                returned.getBody(byte[].class));
+          }
         }
       } finally {
         broker.stop();

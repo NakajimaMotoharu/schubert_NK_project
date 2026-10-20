@@ -47,7 +47,7 @@ def runner_source():
 
 
 def main():
-    namespace={**vars(engine),'SLOT':'pg5800-rollback-selected54-v2','CASES':CASES,'COUNTS':COUNTS,'TARGETS':TARGETS,'test_names':source_test_names}
+    namespace={**vars(engine),'SLOT':'pg5800-rollback-selected54-v3','CASES':CASES,'COUNTS':COUNTS,'TARGETS':TARGETS,'test_names':source_test_names}
     exec(compile(runner_source(),'<finite54 current rollback PT>','exec'),namespace)
     return namespace['main']()
 
