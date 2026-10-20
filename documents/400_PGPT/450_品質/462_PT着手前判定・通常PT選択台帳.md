@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-017 — PT_DEFAULT：protocol表現是正後の全96＋guard九
+
+1220/PG-D443/BUG1498、new Main sourceは元3967の終端/資格保全後に固定する。既protocol全96と依存guard九はbyte/literal/TSV/JCA等の有限local fixtureだけ、source/POM/oracle/Current baseline不変更、VM/実DB/鍵/Unit/配備/permit/failed-cohort不操作。pg5844はsnapshotへformat→package/PT/coverage/SpotBugsを行う**通常PT**であり静的のみ/拒否代替と呼ばない。NoTests/strict warning維持、source/namespace/fresh枠を確認して一回実行する。型名にprotocol/transportが含まれていても実broker/業務通信は行わない。既run中のMain/Test変更は禁止し、新source正式全体の同run整合は残変更群の後に別途確認する。
+
 ## PTPRE-016 — PT_DEFAULT：恒久隔離是正後の必要全3967
 
 1217/PG5832/source6b5cea563、元3955再確認ではなくSS322のnew共通型・既六Main是正と新12/三suiteのsame-source統合検証。既fixture profile/専用mini固定key/offline・自己所有一時DB/in-process broker等だけで、guest/Unit/current/原本DBBackup/鍵/permit/failed-cohort不操作。限定66/18と全851/1666/ABI/無除外staticの独立証拠を前提とし、発行前現job/headroom/new-only namespace/source/hashを認証して一回だけ実行する。未知拒否HOLDは維持、通常PTを拒否代替へ混ぜず、終了後は元XML/physical/counterと真正終端を独立資格確認する。
