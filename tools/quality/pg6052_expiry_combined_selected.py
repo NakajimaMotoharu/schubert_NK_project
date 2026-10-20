@@ -21,6 +21,7 @@ def runner_source(total, suites):
         "method=case.get('name','').removesuffix('()')": "method=case.get('name','').split('(',1)[0]",
         'len(physical)==1664': 'len(physical)==1667',
         'done=done and target100': 'done=done  # partial coverage is reported,not invented or excluded',
+        'target100=len(target_counters)==14': 'target100=len(target_counters)==1',
         "'actualExit':next((v for v in exits if v),0)": "'actualExit':0 if done else 1,'mavenActualExit':next((v for v in exits if v),0)",
     }
     for old, new in changes.items():

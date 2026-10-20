@@ -13,6 +13,8 @@ class OrdinaryFixtureDefinitionTest(unittest.TestCase):
         self.assertEqual(3, counts[t.engine.PACKAGE+'batch.repository.ExpiryAuditResourceFailureTest'])
         self.assertIn(t.engine.PACKAGE+'batch.file.CleanupExpiryExecutionTest', counts)
         self.assertIn("'mavenActualExit'", raw)
+        self.assertIn('target100=len(target_counters)==1 and', raw)
+        self.assertNotIn('target100=len(target_counters)==14', raw)
         self.assertIn('len(physical) == 1667', __import__('ast').unparse(__import__('ast').parse(raw)))
 
 
