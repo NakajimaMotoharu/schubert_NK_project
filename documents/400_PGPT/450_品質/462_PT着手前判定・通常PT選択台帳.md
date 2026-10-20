@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-020 — PT_DEFAULT：単一session整理＋正規Sync並行後の3973全体
+
+1230/source79098cfa5、既3971 source再確認ではなく、三receiverの逐次terminal PGと新TERM005/006の正規独立context二件を同sourceで検証する。前提83/22真正0/六型null静的0、5882全851/1666・三物理差/公開ABI不変・raw1586、5890元XML/六TERM一意trace済み。既専用host/pinned mini/offline・自己所有一時DB/in-process broker等の同じfixture profile、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。fresh枠>10・現一致job無し/headroom/new-only認証後一回発行、元job/固定source/真正終端/原XMLを照合し重複再起動しない。不正同session再入/coverage除外/旧native輸入/拒否probeは0。正式/global/native/CHR/実Root未受入は別であり、全体途中を合格にしない。
+
 ## PTPRE-019 — PT_DEFAULT：commit済terminal是正後の必要3971全体
 
 1224/5860/source0f572da66、旧3967sourceの確認再演ではなく、四receiverのhalt追加・旧oracle五補完・新TERM四とprotocol八物理差を同sourceで統合照合する。先に81/22真正0/六型null静的0、5858独立全851/1666・四receiver差/ABI不変、5866原XML/新四traceを確認済み。専用mini/pinned key・既fixture profileの自己所有temporary DB/in-process broker等だけ、実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort操作0。fresh枠>10・現一致job無し/headroom/new-only namespaceを発行前確認、一回発行後は元job/source/archive/所有を照合して観測する。未知拒否のprobe/再試行やPT代替ではなく通常PT、未回収だけで再発行しない。全体真正0・独立資格・実counterは未受入、現在の選択未網羅を100へ補完しない。
