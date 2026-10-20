@@ -150,14 +150,14 @@ final class WebBrokerFactoryOwnershipTest {
   /** No connection/session is ever opened; the test always releases its own locator. */
   private static final class ProbeFactory extends ActiveMQConnectionFactory {
     @java.io.Serial private static final long serialVersionUID = 1L;
-    final List<String> settings = new ArrayList<>();
+    final transient List<String> settings = new ArrayList<>();
     boolean ready;
     int failAt;
     int closes;
     Throwable primary;
     Throwable closeFailure;
 
-    ProbeFactory() {
+    public ProbeFactory() {
       super(false, new TransportConfiguration(InVMConnectorFactory.class.getName()));
       ready = true;
     }
