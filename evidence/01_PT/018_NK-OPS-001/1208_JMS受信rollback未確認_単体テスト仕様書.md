@@ -39,3 +39,7 @@ Sourceをclean commitで固定、Main1665（新一）と全850 source、target�
 PG5800-v1/source1fe/47590はserialVersionUID欠落によりcompile1・PT0、BUG1491/YKT1251へ修正前起票。元runを保持してnew-v2へ移行、抑制でなく新Main/fixture三例外へ既規約1Lを付与する。全PT未実行からの必要再試験であり、成功済全回帰の再演ではない。
 
 PG5800-v2/226f/89305は30件/8suiteのうち旧API remainder一failure、残not-run。BUG1492/YKT1252修正前起票。uncertain modeのfixture内部real.rollback成功はapplicationの確認ではなく、SS/PG-D441から後続Question業務0を独立期待とする。三groupのbusiness2・Question呼出1・明示rollback3、正常/protocol先行modeの期待は保持し、stopped owner close後の同一QWKREQ01 golden payloadが実in-process brokerへ未ACK返却されることを検査する。Production不変更、new-v3で全有限54/必要wholeへ進む。原失敗を期待修正後のPASSへ改記しない。
+
+v3/c4ab/元28532は01:34:37.718538Z→01:36:58.101378Z/actual0・全54/15/FES等0/六型nullSpotBugs0、archive7908802118edeb5d5935a69024297c3f118922826062162deccaa6a0f4c3b7c0。target七全体の100は未達、未実測0/0で補完しない。Webのowned三引数start由来default signal methodは未実行だったため、UNC016で実際にその境界の未確認rollback→readyfalse/再入0/ACK0を追加する。単にlambda methodを呼ぶcoverage用assertではない。
+
+新owner close後の待機上限5秒が第二再配送delay5秒と同値の潜在flakyをBUG1493/YKT1253に起票し、test deadlineだけ10秒へ変更する。Production/Mainはv3と不変、期待payload・全callback/commit条件不変更。新v4で同限定54（case増分0）を実行し、そのsourceを必要whole3955/587へ固定する。v3の成功を新sourceへ合算せず、source再認証/fixture hardeningとして計測する。

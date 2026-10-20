@@ -155,7 +155,8 @@ class ApiConsumerTerminalRemainderTest {
               var pending =
                   observer.createConsumer(
                       new ActiveMQQueue(BrokerTopology.ASYNC_WORK.fullyQualifiedQueue()))) {
-            var returned = pending.receive(5000);
+            // Second redelivery is 5s (SS321); fixture deadline includes scheduler margin.
+            var returned = pending.receive(10000);
             assertNotNull(returned);
             assertArrayEquals(
                 InternalEventListenerTest.eventWire("QWKREQ01", 64),

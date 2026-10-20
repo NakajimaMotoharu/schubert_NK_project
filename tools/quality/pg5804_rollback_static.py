@@ -59,7 +59,7 @@ def pg_contract(snapshot,value,old):
 def runner_source():
     raw=inspect.getsource(engine.main)
     replacements={
-      "pg5774-jms-primary-green-v1/manifest.safe.json":"pg5800-rollback-selected54-v3/manifest.safe.json",
+      "pg5774-jms-primary-green-v1/manifest.safe.json":"pg5800-rollback-selected54-v4/manifest.safe.json",
       "(v['tests'],v['suites'])==(14,7)":"(v['tests'],v['suites'])==(54,15)",
       "pg5750-exception-static-v1/manifest.safe.json":"pg5776-jms-primary-static-v1/manifest.safe.json",
       "provisional/PG5750-exception-static-v1/manifest.json":"provisional/PG5776-jms-primary-static-v1/manifest.json",

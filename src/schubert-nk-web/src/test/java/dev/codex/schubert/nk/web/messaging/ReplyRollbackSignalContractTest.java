@@ -127,6 +127,19 @@ final class ReplyRollbackSignalContractTest {
       assertFalse(owner.ready());
       assertNull(fixture.listener);
     }
+    // The legacy owned-start overload has no signal argument; its local terminal/ready contract
+    // must still stop a provider whose rollback is unconfirmed, not silently resume delivery.
+    var legacy = new Fixture();
+    try (var owner = ArtemisReplyConsumers.bind(legacy::context)) {
+      owner.start(legacy.reply(), ignored -> fail("not a committed DLQ"));
+      legacy.rollbackFailure = new JMSRuntimeException("synthetic rollback");
+      legacy.deliver();
+      assertFalse(owner.ready());
+      assertTrue(owner.terminalFailureObserved());
+      legacy.deliver();
+      assertEquals(1, legacy.reads);
+      assertEquals(0, legacy.commits);
+    }
   }
 
   private static final class Fixture {
