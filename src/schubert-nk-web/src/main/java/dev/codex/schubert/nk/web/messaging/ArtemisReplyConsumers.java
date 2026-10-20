@@ -101,21 +101,20 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
               reply.onMessage(opened, message);
             } catch (CommittedFatalReplyException fatal) {
               halted.set(true);
-              if (terminal.compareAndSet(false, true)) {
-                onTerminal.accept(fatal);
-              }
+              // This dedicated session serializes callbacks; halt excludes later deliveries.
+              terminal.set(true);
+              onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               halted.set(true);
-              if (terminal.compareAndSet(false, true)) {
-                if (fatal instanceof Error) {
-                  try {
-                    opened.rollback();
-                  } catch (RuntimeException | Error unconfirmed) {
-                    // Never ACK or re-open this transaction; the outer owner retains cleanup.
-                  }
+              terminal.set(true);
+              if (fatal instanceof Error) {
+                try {
+                  opened.rollback();
+                } catch (RuntimeException | Error unconfirmed) {
+                  // Never ACK or re-open this transaction; the outer owner retains cleanup.
                 }
-                onFatal.run();
               }
+              onFatal.run();
               if (fatal instanceof Error error) throw error;
             } catch (JMSException | RuntimeException retryable) {
               // Confirmed rollback only; the broker controls redelivery.

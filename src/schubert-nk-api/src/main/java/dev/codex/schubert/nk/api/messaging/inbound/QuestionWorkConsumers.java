@@ -54,19 +54,20 @@ public final class QuestionWorkConsumers implements AutoCloseable {
               listener.onMessage(context, message);
             } catch (CommittedFatalInboundException fatal) {
               result.halted.set(true);
-              if (result.terminal.compareAndSet(false, true)) onTerminal.accept(fatal);
+              // This dedicated session serializes callbacks; halt excludes later deliveries.
+              result.terminal.set(true);
+              onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);
-              if (result.terminal.compareAndSet(false, true)) {
-                if (fatal instanceof Error) {
-                  try {
-                    context.rollback();
-                  } catch (RuntimeException | Error unconfirmed) {
-                    // Keep fatal stop/unconfirmed rollback distinct from committed protocol DLQ.
-                  }
+              result.terminal.set(true);
+              if (fatal instanceof Error) {
+                try {
+                  context.rollback();
+                } catch (RuntimeException | Error unconfirmed) {
+                  // Keep fatal stop/unconfirmed rollback distinct from committed protocol DLQ.
                 }
-                onFatal.run();
               }
+              onFatal.run();
             } catch (JMSException | RuntimeException retryable) {
               // Confirmed rollback only; real delivery metadata and max4 still govern retry.
             }

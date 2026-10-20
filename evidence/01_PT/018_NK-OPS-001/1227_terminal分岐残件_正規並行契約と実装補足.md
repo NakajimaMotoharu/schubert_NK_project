@@ -1,5 +1,9 @@
 # 1227 terminal分岐残件：正規並行契約と実装補足（実行前）
 
+2026-10-20 PG追補：1229で元3971真正0/独立全byte・XMLを確認し、core140/148（四consumer各miss2）を実測した。三単一session Mainの既halt後をterminal確定/通知へ整理し、Sync Main全文は保持、新TERM005/006/fixture初回hookを実装した。hooksは初回commit/rollback一回に限定、各context一worker・future後にだけcounterを読み、helper既defaultはno-op。2commit/protocol1又は2rollback/fatal1/metadata2/business0・将来全四callback追加0/所有close4が独立期待、未検証PGなので成功へ加点しない。
+
+追加methodは`CommittedTerminalAdmissionContractTest.term005SyncTwoInFlightCommittedCallbacksSignalOnce`と`term006SyncTwoInFlightIsolationFailuresSignalOnce`。実行予定=`pg5880_terminal_serial_green.py`新serial83-v1→`pg5882_terminal_serial_static.py`新v1→新source3973。Main三file全文は元0f5の通知guardだけの宣言変換・既public ABI/全1666の三差だけ・無除外raw1586を独立検査する。元3971/旧native/coverageの新成功輸入0。
+
 PG-D445/BUG1501継続、SS321§6～7/322§11/352/451、WBS-F03/P005-03。現在source0f572da66のPG5860全3971が実行中であり、本書は追加PG/PTの準備、Production/Test未変更・追加動的試験未実行。元全体真正終端と独立実counterを確認してから当必要部分だけ適用する。既成功確認目的の再実行ではない。
 
 SS321はSync四独立session、Question/WebLog/Web reply各専用一sessionを定める。[Jakarta Messaging 3.1 §6.2/6.2.5](https://jakarta.ee/specifications/messaging/3.1/jakarta-messaging-spec-3.1.html)はJMSContextの内部sessionと同一session listenerの逐次実行を規定する。したがって後続callbackが入口haltを観測する単一sessionと、異なるSync contextで既に処理中の複数callbackを区別する。同一contextへの再入・並行を合成してcoverageのfalse側を作らない。

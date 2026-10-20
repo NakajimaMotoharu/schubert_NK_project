@@ -23,6 +23,8 @@ public final class FatalIsolationFixture {
   private int closeCount;
   private int unexpectedCount;
   private int sendCount;
+  private Runnable firstCommit = () -> {};
+  private Runnable firstRollback = () -> {};
 
   public FatalIsolationFixture(boolean checked) {
     this(checked, true);
@@ -60,6 +62,7 @@ public final class FatalIsolationFixture {
                       });
                 case "rollback":
                   rollbackCount++;
+                  if (rollbackCount == 1) firstRollback.run();
                   return null; // Rollback is deliberately CONFIRMED, not the BUG1489 fixture.
                 case "createProducer":
                   return Proxy.newProxyInstance(
@@ -76,6 +79,7 @@ public final class FatalIsolationFixture {
                       });
                 case "commit":
                   commitCount++;
+                  if (commitCount == 1) firstCommit.run();
                   return null;
                 case "close":
                   closeCount++;
@@ -143,5 +147,13 @@ public final class FatalIsolationFixture {
 
   public int sends() {
     return sendCount;
+  }
+
+  public void onFirstCommit(Runnable rendezvous) {
+    firstCommit = java.util.Objects.requireNonNull(rendezvous);
+  }
+
+  public void onFirstRollback(Runnable rendezvous) {
+    firstRollback = java.util.Objects.requireNonNull(rendezvous);
   }
 }

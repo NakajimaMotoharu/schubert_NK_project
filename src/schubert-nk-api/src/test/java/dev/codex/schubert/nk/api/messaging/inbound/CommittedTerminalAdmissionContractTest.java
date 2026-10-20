@@ -12,7 +12,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
-/** SS322§11; PG-D444/BUG1501/YKT1261; PT-JMS-TERM001..003, finite memory ports only. */
+/** SS322§11; PG-D444/445/BUG1501/YKT1261; TERM001..003/005/006, finite memory ports only. */
 final class CommittedTerminalAdmissionContractTest {
   @Test
   void term001SyncCommitStopsAllFourContextAdmissions() throws Exception {
@@ -27,6 +27,92 @@ final class CommittedTerminalAdmissionContractTest {
   @Test
   void term003WebLogCommitStopsFurtherAdmissions() throws Exception {
     verify(2, 1);
+  }
+
+  @Test
+  void term005SyncTwoInFlightCommittedCallbacksSignalOnce() throws Exception {
+    verifyTwoInFlight(false);
+  }
+
+  @Test
+  void term006SyncTwoInFlightIsolationFailuresSignalOnce() throws Exception {
+    verifyTwoInFlight(true);
+  }
+
+  private static void verifyTwoInFlight(boolean isolationFailure) throws Exception {
+    var contexts = new ArrayList<FatalIsolationFixture>();
+    var protocol = new AtomicInteger();
+    var fatal = new AtomicInteger();
+    var business = new AtomicInteger();
+    var entered = new java.util.concurrent.CyclicBarrier(2);
+    Runnable rendezvous =
+        () -> {
+          try {
+            entered.await(5, java.util.concurrent.TimeUnit.SECONDS);
+          } catch (InterruptedException failure) {
+            Thread.currentThread().interrupt();
+            throw new AssertionError("independent context rendezvous interrupted", failure);
+          } catch (java.util.concurrent.BrokenBarrierException
+              | java.util.concurrent.TimeoutException failure) {
+            throw new AssertionError("two independent contexts must already be in flight", failure);
+          }
+        };
+    Supplier<JMSContext> factory =
+        () -> {
+          var fixture = new FatalIsolationFixture(false, isolationFailure);
+          if (isolationFailure) fixture.onFirstRollback(rendezvous);
+          else fixture.onFirstCommit(rendezvous);
+          contexts.add(fixture);
+          return fixture.context();
+        };
+    try (var runtime =
+        SyncRequestConsumers.start(
+            factory,
+            new SyncRequestListener(
+                request -> {
+                  business.incrementAndGet();
+                  return new byte[0];
+                },
+                Clock.fixed(Instant.parse("2026-10-20T00:00:00Z"), ZoneOffset.UTC)),
+            ignored -> protocol.incrementAndGet(),
+            fatal::incrementAndGet)) {
+      assertEquals(4, contexts.size());
+      assertTrue(runtime.ready());
+      // One worker per context, never concurrent callbacks on the same JMS session.
+      try (var executor = java.util.concurrent.Executors.newFixedThreadPool(2)) {
+        var first = executor.submit(contexts.get(0)::deliver);
+        var second = executor.submit(contexts.get(1)::deliver);
+        first.get(10, java.util.concurrent.TimeUnit.SECONDS);
+        second.get(10, java.util.concurrent.TimeUnit.SECONDS);
+      }
+      assertFalse(runtime.ready());
+      assertTrue(runtime.terminalFailureObserved());
+      assertEquals(2, contexts.stream().mapToInt(FatalIsolationFixture::metadataReads).sum());
+      assertEquals(
+          isolationFailure ? 0 : 2, contexts.stream().mapToInt(FatalIsolationFixture::sends).sum());
+      assertEquals(
+          isolationFailure ? 0 : 2,
+          contexts.stream().mapToInt(FatalIsolationFixture::commits).sum());
+      assertEquals(
+          isolationFailure ? 2 : 0,
+          contexts.stream().mapToInt(FatalIsolationFixture::rollbacks).sum());
+      assertEquals(isolationFailure ? 0 : 1, protocol.get());
+      assertEquals(isolationFailure ? 1 : 0, fatal.get());
+      assertEquals(0, business.get());
+      for (var context : contexts) context.deliver();
+      assertEquals(2, contexts.stream().mapToInt(FatalIsolationFixture::metadataReads).sum());
+      assertEquals(
+          isolationFailure ? 0 : 2,
+          contexts.stream().mapToInt(FatalIsolationFixture::commits).sum());
+      assertEquals(
+          isolationFailure ? 2 : 0,
+          contexts.stream().mapToInt(FatalIsolationFixture::rollbacks).sum());
+      assertEquals(isolationFailure ? 0 : 1, protocol.get());
+      assertEquals(isolationFailure ? 1 : 0, fatal.get());
+      assertEquals(0, contexts.stream().mapToInt(FatalIsolationFixture::unexpectedCalls).sum());
+      assertEquals(0, contexts.stream().mapToInt(FatalIsolationFixture::closes).sum());
+    }
+    assertEquals(4, contexts.stream().mapToInt(FatalIsolationFixture::closes).sum());
   }
 
   private static void verify(int kind, int count) throws Exception {

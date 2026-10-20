@@ -64,21 +64,20 @@ public final class WebLogConsumers implements AutoCloseable {
               listener.onMessage(opened, message);
             } catch (CommittedFatalInboundException fatal) {
               runtime.halted.set(true);
-              if (runtime.terminal.compareAndSet(false, true)) {
-                onTerminal.accept(fatal);
-              }
+              // This dedicated session serializes callbacks; halt excludes later deliveries.
+              runtime.terminal.set(true);
+              onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               runtime.halted.set(true);
-              if (runtime.terminal.compareAndSet(false, true)) {
-                if (fatal instanceof Error) {
-                  try {
-                    opened.rollback();
-                  } catch (RuntimeException | Error unconfirmed) {
-                    // Stop remains fatal/unconfirmed; no ACK and no provider text escapes.
-                  }
+              runtime.terminal.set(true);
+              if (fatal instanceof Error) {
+                try {
+                  opened.rollback();
+                } catch (RuntimeException | Error unconfirmed) {
+                  // Stop remains fatal/unconfirmed; no ACK and no provider text escapes.
                 }
-                onFatal.run();
               }
+              onFatal.run();
             } catch (JMSException | RuntimeException retryable) {
               // Confirmed rollback only; Artemis owns redelivery and delivery-count policy.
             }
