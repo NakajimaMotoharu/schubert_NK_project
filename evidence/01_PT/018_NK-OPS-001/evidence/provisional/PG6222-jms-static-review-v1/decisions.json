@@ -1,0 +1,3478 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "104",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "sync ",
+    "diagnosticTextSha256": "408d6e9854dbfa471a6e08b019ef0a0aceda1f2f699672860c651470fbe86c7c",
+    "endcolumn": "13",
+    "endline": "104",
+    "findingId": "F03-PMD2-2fb8781cb1547e9e5b7f8354e9324ced1eac97e25d88de14fb1e290594d7860a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-efc442a7f7e7aea915288636304ed15a450053fd6da87282e553645c20abb202",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 115,
+    "reason": "1322 additional individual PG/source review: sync is the first returned prepared-owner factory. It is immediately registered in preallocated owners capacity3, before later factory acquisition. The returned owner keeps it live; local TWR would prematurely stop the live broker.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "webLog ",
+    "diagnosticTextSha256": "408d6e9854dbfa471a6e08b019ef0a0aceda1f2f699672860c651470fbe86c7c",
+    "endcolumn": "17",
+    "endline": "110",
+    "findingId": "F03-PMD2-1af720a160f1c50c1231abba5ef53be9e964437eb1fd39f6bc21cceb50994e1d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3d90235109b07cd330560ead6d8ff489171dc25e0c3c3f90001c313a748b4d17",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 116,
+    "reason": "1322 additional individual PG/source review: webLog is the second returned factory, immediately registered under the already prepared owner. A later factory failure closes registered owners in reverse; the provider owns its own unreturned failed factory.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "115",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "async ",
+    "diagnosticTextSha256": "408d6e9854dbfa471a6e08b019ef0a0aceda1f2f699672860c651470fbe86c7c",
+    "endcolumn": "16",
+    "endline": "115",
+    "findingId": "F03-PMD2-bf1af48b593d6080af7155abd0dde3be600fc0b4ec7bbb37a00d7f7647fb84ac",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d409d30a8517eadca9c42711bbfee21e8f272445230e73f189551a2354db0395",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 117,
+    "reason": "1322 additional individual PG/source review: async is the third returned factory. All three registered factories transfer to final retained fields with no further provider call; owner close handles each actual successful phase. No speculative close of unacquired factories occurs.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "123",
+    "findingId": "F03-PMD2-f96cfad21d3f3ba3b1c2b24cfbc81d522b2d29dc18a12046ff4affbe2126b9a4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-61da0d0d61eb88fafaf17d8b0ad16dac0a9b397c170bd06b6b5a9075d00f6c23",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 118,
+    "reason": "1322 additional individual PG/source review: Partial broker constructor startup must reclaim only already returned factories on RTE/Error. Native unconfirmed close retains UNKNOWN; ordinary component keeps its specified primary with reverse secondaries, not an invented fatal-priority change.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "123",
+    "findingId": "F03-PMD2-a93076ec42cda97a0da2916ded9046799342fb19e5c870825f11e8c0270e7822",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-61da0d0d61eb88fafaf17d8b0ad16dac0a9b397c170bd06b6b5a9075d00f6c23",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 119,
+    "reason": "1322 additional individual PG/source review: Partial broker constructor startup must reclaim only already returned factories on RTE/Error. Native unconfirmed close retains UNKNOWN; ordinary component keeps its specified primary with reverse secondaries, not an invented fatal-priority change.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "127",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Exception ",
+    "diagnosticTextSha256": "2bff381afd0af02eadebaf2c99a8db1ca7d4002a1ed27e2ffd152db438651fdb",
+    "endcolumn": "27",
+    "endline": "127",
+    "findingId": "F03-PMD2-d0cf1eb17bd85a22f56156b2a1db8967872f3b62aa7e52ab686cc93a35d16bf3",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ed60333edf752b5ed8dc7ee9558caf1860125a2a50bc9baa8da1262c84605a9d",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 120,
+    "reason": "1322 additional individual PG/source review: AutoCloseable factory owner may throw checked Exception or Error. Each partial reverse close uses native UNKNOWN before continuing; ordinary component records secondaries against original startup failure. Provider-local failed acquisition is not closed again.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "127",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "35",
+    "endline": "127",
+    "findingId": "F03-PMD2-55a47df62632084ed0d49f745c8980f5d7bd827f8df8932b4627dbd8905d3350",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ed60333edf752b5ed8dc7ee9558caf1860125a2a50bc9baa8da1262c84605a9d",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 121,
+    "reason": "1322 additional individual PG/source review: AutoCloseable factory owner may throw checked Exception or Error. Each partial reverse close uses native UNKNOWN before continuing; ordinary component records secondaries against original startup failure. Provider-local failed acquisition is not closed again.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "15",
+    "beginline": "130",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "closing != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "33",
+    "endline": "130",
+    "findingId": "F03-PMD2-5b0f8e8eeec2e777149dad0502a0b4dcca8d44f321bc7f969fd0f683151b9394",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e188ccf6be66a0958fb0c152e7f8a7b02c7ff7c767bfde1265eab890e6706efe",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 122,
+    "reason": "1322 additional individual PG/source review: Only a distinct cleanup Throwable is suppressed on constructor primary. Reference identity is mandatory for Java self-suppression safety; equals cannot substitute.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "198",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "198",
+    "findingId": "F03-PMD2-a18cfd2a961a5c53414b211d68735bbcf6ee039b05de50e5735b33347f378280",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d53cea04724f0f3935247afe38fe5ab2ab9a5a4126aad9aeb48b955bbce05d6d",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 123,
+    "reason": "1322 additional individual PG/source review: Credential supplier RuntimeException/null is rejected as fixed unavailable without provider diagnostic or password graph. It is failure, never successful authentication; Error is not caught here. Stop state excludes new contexts before copying.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "207",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "207",
+    "findingId": "F03-PMD2-a62bbe9211e7f905684dd0923f6797194795ba6142711f0873f75f7dc0c9243a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-91062164e4a4f5592a48f6216298e981d4299302c8ec1b25fc657901acc344cc",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 124,
+    "reason": "1322 additional individual PG/source review: Context creation RuntimeException/null and invalid credential length become fixed unavailable. The owned char copy is wiped in finally even when a fatal Error propagates; successful context ownership is returned to consumer, not locally closed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "229",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Exception ",
+    "diagnosticTextSha256": "2bff381afd0af02eadebaf2c99a8db1ca7d4002a1ed27e2ffd152db438651fdb",
+    "endcolumn": "27",
+    "endline": "229",
+    "findingId": "F03-PMD2-90daa18cf4da9b112a830a33ba05c203ba460e50bb1f6b6a9548a0a9ad107a03",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a4f7511ad7f1251c65a10f96ad4d0804e61ff029d15e936a08d9da8d1a8316ba",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 125,
+    "reason": "1322 additional individual PG/source review: Actual registered AutoCloseable owners are attempted in reverse, with success cache only after each close returns. Exception/Error are accumulated for explicit failure/native hold; no unconfirmed phase is marked closed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "229",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "35",
+    "endline": "229",
+    "findingId": "F03-PMD2-2791a01d1c44d1e21a9585bd54b9700577cfe3deda2715ca12cc31a08ae63f9c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a4f7511ad7f1251c65a10f96ad4d0804e61ff029d15e936a08d9da8d1a8316ba",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 126,
+    "reason": "1322 additional individual PG/source review: Actual registered AutoCloseable owners are attempted in reverse, with success cache only after each close returns. Exception/Error are accumulated for explicit failure/native hold; no unconfirmed phase is marked closed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "53",
+    "beginline": "230",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "58",
+    "endline": "230",
+    "findingId": "F03-PMD2-54deb876402d2cb2f0e4449721e930ada42272a09a25002f1fef3d2bb191c7b6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e0332d38e9aa84ea9686e3c1841cb2e4ca4740b02d3d94ad5aca64de6f319988",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "admittedApiCredentialSetCreatesTwoConfiguredFactoriesWithoutOpeningContext",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.ApiBrokerContextsCredentialTest",
+        "method": "loadedApiCredentialOpensBothProfilesAgainstIsolatedRealBroker",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "d73cc76edd6be0eff2a47f28bb84ee28a466c23894849f9f3aea26b09da69637"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.class": "74cb377102fa8a4c53096ac7e9bf7a86e2354d3aa69c23eb3361655f25b3a005"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 127,
+    "reason": "1322 additional individual PG/source review: Direct Error must dominate an earlier nonfatal owner-close failure. The final Error is rethrown directly after the UNKNOWN policy; equality/type erasure would lose this fatal classification.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts.java",
+    "sourceSha256": "0557b6a1fa9f77bd2e85ce6d79824f41fceb5ea1629c736db39346eff7f05b66",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "96",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "96",
+    "findingId": "F03-PMD2-19b9c8d5726703a3f8f02535c07c6c08d982d28e21b9e4f5d2d7c34f8c37a972",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e1c5d54b91d8520e2de3301b345146a60da6a36aae2e599d406b0d6e2f6fb221",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 128,
+    "reason": "1322 additional individual PG/source review: All twelve locator settings are inside the single acquired factory protection region. Configuration RTE/Error must close that unreturned factory; normal configured factory ownership is returned, not closed early.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "96",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "96",
+    "findingId": "F03-PMD2-c759932666edfb1ac1c9ee894218f148af8ce989d2c6dff40adfb515b5cfefcb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e1c5d54b91d8520e2de3301b345146a60da6a36aae2e599d406b0d6e2f6fb221",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 129,
+    "reason": "1322 additional individual PG/source review: All twelve locator settings are inside the single acquired factory protection region. Configuration RTE/Error must close that unreturned factory; normal configured factory ownership is returned, not closed early.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "99",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "99",
+    "findingId": "F03-PMD2-3e8a3b90defe331c1e3e893bd293469781ff9f355ce48f5f1aa7b85b782384c5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a73c3f5a75fd129ec4d538d1cb828783d57711b4bd7f60e87d86dd90c9573a2a",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 130,
+    "reason": "1322 additional individual PG/source review: Secondary factory-close RTE/Error is delivered to the prebuilt native UNKNOWN policy before ordinary component exception ranking. Catching only JMS checked exceptions would miss this vendor unchecked release boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "99",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "99",
+    "findingId": "F03-PMD2-623554c39173135f93e976d66840b92c128957ed2b43aadddc1d229822edc1d5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a73c3f5a75fd129ec4d538d1cb828783d57711b4bd7f60e87d86dd90c9573a2a",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 131,
+    "reason": "1322 additional individual PG/source review: Secondary factory-close RTE/Error is delivered to the prebuilt native UNKNOWN policy before ordinary component exception ranking. Catching only JMS checked exceptions would miss this vendor unchecked release boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "101",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "39",
+    "endline": "101",
+    "findingId": "F03-PMD2-71850e6a57ad874e234a5a25d1c469b9853834bb70d5d242340d57da93448707",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a52c57ee5b7ac615bed97d2cec9f3bf4e840545ebaff9e904e7f9d571bcf25c4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 132,
+    "reason": "1322 additional individual PG/source review: Two exact Error predicates promote fatal cleanup over nonfatal setup, otherwise preserve original fatal setup. Four overlapping PMD spans are retained; independent compound factory cases, not rule suppression, support this boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "101",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "39",
+    "endline": "101",
+    "findingId": "F03-PMD2-3b805deb3fd869f818c45d930fbcaaaf7387ac30ca9de860bc3cac60d443a341",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a52c57ee5b7ac615bed97d2cec9f3bf4e840545ebaff9e904e7f9d571bcf25c4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 133,
+    "reason": "1322 additional individual PG/source review: Two exact Error predicates promote fatal cleanup over nonfatal setup, otherwise preserve original fatal setup. Four overlapping PMD spans are retained; independent compound factory cases, not rule suppression, support this boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "64",
+    "beginline": "101",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "69",
+    "endline": "101",
+    "findingId": "F03-PMD2-b338a6b8d5fdbf27064cfebd74a67e1bc0d718f7485b7b48e62b116583f27386",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a52c57ee5b7ac615bed97d2cec9f3bf4e840545ebaff9e904e7f9d571bcf25c4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 134,
+    "reason": "1322 additional individual PG/source review: Two exact Error predicates promote fatal cleanup over nonfatal setup, otherwise preserve original fatal setup. Four overlapping PMD spans are retained; independent compound factory cases, not rule suppression, support this boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "64",
+    "beginline": "101",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "69",
+    "endline": "101",
+    "findingId": "F03-PMD2-98f1cb7d93b09819cf3885bd9e9ecad66df7b5b9fee91b743aada63556036b81",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a52c57ee5b7ac615bed97d2cec9f3bf4e840545ebaff9e904e7f9d571bcf25c4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 135,
+    "reason": "1322 additional individual PG/source review: Two exact Error predicates promote fatal cleanup over nonfatal setup, otherwise preserve original fatal setup. Four overlapping PMD spans are retained; independent compound factory cases, not rule suppression, support this boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "105",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "secondary != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "33",
+    "endline": "105",
+    "findingId": "F03-PMD2-69cf84bd741d3f6d3da7f771f491034702a981ac63bf2a8befd6aee350076d57",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c2b4979cb833e51ef576e1035fa983575fa8a95640b17f1d55d8ea7564c4d038",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316007ProviderPartialAndReturnedBrokerKeepOuterFrameWithoutRetry",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.config.ApiFactoryNativeRetentionTest",
+        "method": "hold316006FinitePolicyStillFailsAndNullPolicyPrecedesAcquisition",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "883baa9204945cd4b4b90e85e02efa9ec91122325c525e3a76a0d66a4a5a6eef"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile.class": "b6033504b9b37cfcb2f450c1557800465962e64091718a8473616af59719a28a",
+      "api:dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.class": "4d53005b2a5ec40ce826e23fefa1fa2ff6b24a2b23b7e59498b190f50a57128b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 136,
+    "reason": "1322 additional individual PG/source review: Throwable reference identity prevents primary.addSuppressed(primary). Structural/value equality is not the self-suppression relation; distinct failures retain the original component exception order.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java",
+    "sourceSha256": "48073b13ba2b9a428883f9ad85067bafdca7a2e31e505d6b4d3e14574b26d41e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "183",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "183",
+    "findingId": "F03-PMD2-ab65f4aca491cae80f311dcd8ae3c4dd850fd140983485dda9f577b58467230b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1e42b9dd8978c657c49329c0233ae44b98dc1bbf3b6e4fc97d5013afee53f5cf",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 137,
+    "reason": "1322 additional individual PG/source review: Startup of the prepared list of sync/WebLog/optional async groups must send fatal notification and close already opened groups on RTE/Error. All fixed ownership state/list capacity exists before first group acquisition.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "183",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "183",
+    "findingId": "F03-PMD2-ddc3f990f904f6abbae2cfed6aee23b835452e71ff5ed7601068ee75510dda76",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1e42b9dd8978c657c49329c0233ae44b98dc1bbf3b6e4fc97d5013afee53f5cf",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 138,
+    "reason": "1322 additional individual PG/source review: Startup of the prepared list of sync/WebLog/optional async groups must send fatal notification and close already opened groups on RTE/Error. All fixed ownership state/list capacity exists before first group acquisition.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "187",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "187",
+    "findingId": "F03-PMD2-8c6e7f79c31f5fec751dde73337b679e89efa3eb7ee017a39a1c0c5860489fe2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d11dd6bdc54cbf2cbbae8bf19168d200f8e4129c1ed061acf03b64f761a274ff",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 139,
+    "reason": "1322 additional individual PG/source review: Notification callback itself may fail with RTE/Error; retaining its priority while still closing prepared groups requires this exact catch. Native group unknown hold remains inside release, so normal parent return is not inferred.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "187",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "187",
+    "findingId": "F03-PMD2-70f3eb8846db2b4d3e1b1e51a8f721ce22f13ba5ecb3551ce555884d6f92bcc8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d11dd6bdc54cbf2cbbae8bf19168d200f8e4129c1ed061acf03b64f761a274ff",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 140,
+    "reason": "1322 additional individual PG/source review: Notification callback itself may fail with RTE/Error; retaining its priority while still closing prepared groups requires this exact catch. Native group unknown hold remains inside release, so normal parent return is not inferred.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "188",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "42",
+    "endline": "188",
+    "findingId": "F03-PMD2-06d78711ccc5097a934f0b9de6ab555de63d699ea31638a21af0c3124ef2e4c9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2e9c54d4719d8ac61fa83305d1dd27e3cb89fa134e74cfa09fa7bcbf3b484c52",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 141,
+    "reason": "1322 additional individual PG/source review: Two exact predicates distinguish fatal notification from nonfatal startup. Only that mixed case changes retained primary; overlapping PMD warning spans remain raw, and direct Error cannot be demoted to generic startup failure.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "188",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "42",
+    "endline": "188",
+    "findingId": "F03-PMD2-53f3c7b8984126fe64c6edde9c273a0a794a32359bd6c67d85b341d2021d2524",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2e9c54d4719d8ac61fa83305d1dd27e3cb89fa134e74cfa09fa7bcbf3b484c52",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 142,
+    "reason": "1322 additional individual PG/source review: Two exact predicates distinguish fatal notification from nonfatal startup. Only that mixed case changes retained primary; overlapping PMD warning spans remain raw, and direct Error cannot be demoted to generic startup failure.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "67",
+    "beginline": "188",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "72",
+    "endline": "188",
+    "findingId": "F03-PMD2-0327f84d4e20e43dd236fd124a5841fe9daa8e8a1c150fdc70983a1506c1bd41",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2e9c54d4719d8ac61fa83305d1dd27e3cb89fa134e74cfa09fa7bcbf3b484c52",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 143,
+    "reason": "1322 additional individual PG/source review: Two exact predicates distinguish fatal notification from nonfatal startup. Only that mixed case changes retained primary; overlapping PMD warning spans remain raw, and direct Error cannot be demoted to generic startup failure.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "67",
+    "beginline": "188",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "72",
+    "endline": "188",
+    "findingId": "F03-PMD2-05ee0968b80c82f202f62e771b9ce5bf08a83b8a6dd19c311088f0b94f8b67c8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2e9c54d4719d8ac61fa83305d1dd27e3cb89fa134e74cfa09fa7bcbf3b484c52",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 144,
+    "reason": "1322 additional individual PG/source review: Two exact predicates distinguish fatal notification from nonfatal startup. Only that mixed case changes retained primary; overlapping PMD warning spans remain raw, and direct Error cannot be demoted to generic startup failure.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "20",
+    "beginline": "192",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "notification != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "43",
+    "endline": "192",
+    "findingId": "F03-PMD2-37ee8a21c32b3f868dffcee6386364a7ad6e1534e44eb3c180dfab9da25b1ea1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-51de46a8dd0f250edc0d022160b8911d7af38213e8f650d58ce1c83978c13c99",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 145,
+    "reason": "1322 additional individual PG/source review: Notification identical to startup primary must not self-suppress; distinct notification can be retained. Reference identity is the Java Throwable relation, not business value equality.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "196",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "196",
+    "findingId": "F03-PMD2-be4616476b69e95de5d7ee10063ca45d9afcdf4154282163a96891686f700a2b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-badb65fc118ea310f847c521f1f74a4e9647cb933398f0c30b8df5d00ea404e0",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 146,
+    "reason": "1322 additional individual PG/source review: Prepared runtime close reports Error directly or its own fixed nonfatal wrapper with a first group cause. Catching both retains declared startup cleanup priority; native UNKNOWN group close does not return into this block.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "196",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "196",
+    "findingId": "F03-PMD2-fb9a9c7a878d9f81a7ad863512636fd60ba9dbb7b8d8d74c0c37746951600158",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-badb65fc118ea310f847c521f1f74a4e9647cb933398f0c30b8df5d00ea404e0",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 147,
+    "reason": "1322 additional individual PG/source review: Prepared runtime close reports Error directly or its own fixed nonfatal wrapper with a first group cause. Catching both retains declared startup cleanup priority; native UNKNOWN group close does not return into this block.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "32",
+    "beginline": "200",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "37",
+    "endline": "200",
+    "findingId": "F03-PMD2-cd9374fcd3963f34d8247f4bf59f36b665fac6e593ca30293983e9f44a8595b4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d7aa76d59d59a9c0486629f5eea9c0f95254e4b7bd406eecc812e443d4e579f4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 148,
+    "reason": "1322 additional individual PG/source review: Exact closing Error bypasses wrapper unwrapping; nonfatal closing is the internally guaranteed fixed wrapper/cause. Two overlapping spans reflect one necessary fatal-type decision, not an arbitrary subtype switch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "32",
+    "beginline": "200",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "37",
+    "endline": "200",
+    "findingId": "F03-PMD2-9a1247ae7b9309b969d43dea33c38faddd3555240241a7431c8534aad17c4951",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d7aa76d59d59a9c0486629f5eea9c0f95254e4b7bd406eecc812e443d4e579f4",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 149,
+    "reason": "1322 additional individual PG/source review: Exact closing Error bypasses wrapper unwrapping; nonfatal closing is the internally guaranteed fixed wrapper/cause. Two overlapping spans reflect one necessary fatal-type decision, not an arbitrary subtype switch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "202",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "cleanup != retained)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "32",
+    "endline": "202",
+    "findingId": "F03-PMD2-ef3ec4d83a89329e347923f3f75375c015f601bf4ea11fa31a771857b3d2b1b1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f2fe72ead501561ee98660acc4ad7817f25c0375b67841270c7cc8c79f6b459a",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 150,
+    "reason": "1322 additional individual PG/source review: The unwrapped actual cleanup cause is suppressed only when not identical to retained startup. Reference identity prevents a self-edge, without invoking arbitrary Throwable.equals.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "221",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "221",
+    "findingId": "F03-PMD2-2fb811374f51d5b206be9eb6d74dc54a3ed0ad600e9181e372d284cd23aba436",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0cb127fba0fed26cfa94d425f39207564839daeea5e5b11131bc1b6037326574",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 151,
+    "reason": "1322 additional individual PG/source review: Private final closeLock serializes group success caches and final completion after stopping is atomically published. It is not this/class/user lock. Unknown close cannot mark group/whole completion; start uses a not-yet-published prepared runtime.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "235",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Exception ",
+    "diagnosticTextSha256": "2bff381afd0af02eadebaf2c99a8db1ca7d4002a1ed27e2ffd152db438651fdb",
+    "endcolumn": "25",
+    "endline": "235",
+    "findingId": "F03-PMD2-41b53592959fc99adc88c46307b6141db3c3e260299f72ec00c98365081420c9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a89c8927b577d6ba5a0236da3b921bd323f2f3cf2739895f311e820d31674373",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 152,
+    "reason": "1322 additional individual PG/source review: Each registered AutoCloseable group is closed in reverse and only successful phases cached. Exception/Error must be distinguished and reported; normal component accumulates failures while native group policy retains its exact UNKNOWN frame.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "235",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "33",
+    "endline": "235",
+    "findingId": "F03-PMD2-20afcce630dc48dd83ae7731fbc23ce226f21ecbb3188929afce9872b96f970e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a89c8927b577d6ba5a0236da3b921bd323f2f3cf2739895f311e820d31674373",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 153,
+    "reason": "1322 additional individual PG/source review: Each registered AutoCloseable group is closed in reverse and only successful phases cached. Exception/Error must be distinguished and reported; normal component accumulates failures while native group policy retains its exact UNKNOWN frame.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "51",
+    "beginline": "236",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "56",
+    "endline": "236",
+    "findingId": "F03-PMD2-ee3f293c5264c003847195a1b3be5f660b19f15097137a36b0b9c9b9a6cd92b9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6f91083eeaf101a697ce20a7e12ef24ad5c1c8279d46ca1dcaf9f9f3478ab213",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 154,
+    "reason": "1322 additional individual PG/source review: Fatal group-close Error replaces a nonfatal accumulated failure, then is rethrown directly. The required fatal classification cannot be represented by wrapping every Throwable as successful cleanup.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "238",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "closing != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "36",
+    "endline": "238",
+    "findingId": "F03-PMD2-98d5b52ecfb98dc4c2c2ba949c75fb7ae47ac7c93faa64fbdd196a4199d4a23a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a3e9093a7a9a06fe563ea2da08836698e9e1f8cfb2609684f1eea98bdb5ffcec",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316003CompleteNativeComponentClosesSixKnownChildrenNormally",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316004FiniteObserverCannotTurnFailedCloseIntoCompletion",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiNativeRetentionTest",
+        "method": "hold316005LiveAndPartialNativeConsumerOwnersKeepOuterFrame",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "65c9750b585432b428333820452c87919bf937a256fed1957232c1fed00a3c7a"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime$Async.class": "1b32fdadb3adba92337e190ca9f4f4fc69635a91667cadad1b54c8fd04d2ee6b",
+      "api:dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.class": "45906b60b6e9cf2ab35d030d514256f7f33672ba06bde0f186ad3be18e2cf806"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 155,
+    "reason": "1322 additional individual PG/source review: Distinct later close failures may be suppressed on the retained failure; identical Throwable is excluded to prevent self-suppression. This is an ownership/exception graph identity relation.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/ApiMessagingRuntime.java",
+    "sourceSha256": "d4d120958601613bb9e8865c33319ce7f69e89bbaca48cbea59907783c3e02f9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "63",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "configured ",
+    "diagnosticTextSha256": "408d6e9854dbfa471a6e08b019ef0a0aceda1f2f699672860c651470fbe86c7c",
+    "endcolumn": "19",
+    "endline": "63",
+    "findingId": "F03-PMD2-5964a57a94f84a7ddda69a339c1bc0b30f7eaa578600119cb500b7d5982e9b60",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-497d314fabe234f18fe96e222a04d8812d415e55e6f3252c23c19ef96c91729d",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1258,
+    "reason": "1322 additional individual PG/source review: configured is returned only after supplier-local settings protection, and is immediately captured as both factory and owner in the already prepared instance. Native policy/lock/password fields exist before acquisition. No local TWR may stop the returned live broker.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "118",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "118",
+    "findingId": "F03-PMD2-a0756be515eaadd83f1ed0d4b9ec08295b667986fab7c7d8b4b5a009026b3bc2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cde6ec910de0f6b1eebd8409353167460dfe301838722fc73ac67a7112d827c8",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1259,
+    "reason": "1322 additional individual PG/source review: RTE/Error from any of the twelve fixed settings requires one close of the unreturned owned factory; successful configuration returns ownership. This is the same protected resource boundary, not generic validation recovery.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "118",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "118",
+    "findingId": "F03-PMD2-652336950e0b3922e092c1d3b28180412cd57b91c369b5de0783761b1aee7375",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cde6ec910de0f6b1eebd8409353167460dfe301838722fc73ac67a7112d827c8",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1260,
+    "reason": "1322 additional individual PG/source review: RTE/Error from any of the twelve fixed settings requires one close of the unreturned owned factory; successful configuration returns ownership. This is the same protected resource boundary, not generic validation recovery.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "121",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "121",
+    "findingId": "F03-PMD2-32ed82ac5132d9b815d62fd571e38ef01098232e7f3c35e11478394362a03ea3",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-fcc6e655c9a194a756ae9124340c4b92618c1f591ffe0d29ff883e0bbbbcbb85",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1261,
+    "reason": "1322 additional individual PG/source review: Vendor unchecked cleanup failure first enters fixed native UNKNOWN policy. Finite ordinary component then uses explicit Error/primary ranking and self-suppression guard; unconfirmed native cleanup cannot unwind downstream owners.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "121",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "121",
+    "findingId": "F03-PMD2-980f06c5fd16ab33aef427064e2068a73bccccd898f84979ae7b8dca20fa6d4e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-fcc6e655c9a194a756ae9124340c4b92618c1f591ffe0d29ff883e0bbbbcbb85",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1262,
+    "reason": "1322 additional individual PG/source review: Vendor unchecked cleanup failure first enters fixed native UNKNOWN policy. Finite ordinary component then uses explicit Error/primary ranking and self-suppression guard; unconfirmed native cleanup cannot unwind downstream owners.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "39",
+    "endline": "123",
+    "findingId": "F03-PMD2-4f03dfc4fe1143f9bdc2a77ffba36572d390a78ce8af175661faae400b668b5e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-243d4e044210552708acdd49319ddebf865b07eb216ea1c4e62b9cafc4f37597",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1263,
+    "reason": "1322 additional individual PG/source review: Two predicates preserve fatal setup unless fatal cleanup supersedes nonfatal setup. The four actual overlapping warning spans are individually retained, not removed by a rule-wide exemption.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "39",
+    "endline": "123",
+    "findingId": "F03-PMD2-843fc4b23dc93f091b7e013058ab54bbda1b92bbfa0654ce8236a0683036d7c5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-243d4e044210552708acdd49319ddebf865b07eb216ea1c4e62b9cafc4f37597",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1264,
+    "reason": "1322 additional individual PG/source review: Two predicates preserve fatal setup unless fatal cleanup supersedes nonfatal setup. The four actual overlapping warning spans are individually retained, not removed by a rule-wide exemption.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "64",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "69",
+    "endline": "123",
+    "findingId": "F03-PMD2-cb8ac2f057ffc4f4acd5ad54c36c73ee40c1392fd5d88240c5cff719adab5ecb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-243d4e044210552708acdd49319ddebf865b07eb216ea1c4e62b9cafc4f37597",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1265,
+    "reason": "1322 additional individual PG/source review: Two predicates preserve fatal setup unless fatal cleanup supersedes nonfatal setup. The four actual overlapping warning spans are individually retained, not removed by a rule-wide exemption.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "64",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error)",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "69",
+    "endline": "123",
+    "findingId": "F03-PMD2-00c8235a9af8bd8fb9e20c921684ece3fdafdd489e8fcb6552ff15bb248cff60",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-243d4e044210552708acdd49319ddebf865b07eb216ea1c4e62b9cafc4f37597",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1266,
+    "reason": "1322 additional individual PG/source review: Two predicates preserve fatal setup unless fatal cleanup supersedes nonfatal setup. The four actual overlapping warning spans are individually retained, not removed by a rule-wide exemption.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "127",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "secondary != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "33",
+    "endline": "127",
+    "findingId": "F03-PMD2-688ccaed8052f4f72d1d4a6adb3dbebbd2113320cf39874d7282bdde7b47dc90",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-900e2ce1fcc53a6cd88f9fdf728bf74865e3112216682bc483cc996a94cef58a",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1267,
+    "reason": "1322 additional individual PG/source review: Reference inequality excludes suppressing a Throwable onto itself while retaining distinct ordinary cleanup failure. It is identity, not a domain value comparison.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "160",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "160",
+    "findingId": "F03-PMD2-45c2b6ecce58ff647f3ef8f18a7234b91ada176697c665fd4e3df663f88a1146",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-06e2f6bb4123d2ef6235d0af1e85054b9716d1af48b9aeaf9d0bd73f02439ede",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1268,
+    "reason": "1322 additional individual PG/source review: Credential supplier RuntimeException/null is a fixed unavailable failure under stateLock; Error still propagates. No raw supplier text, credential or successful fallback context is produced.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "169",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "169",
+    "findingId": "F03-PMD2-8f7c6395190b2bc24bf278e6c1e16f6e190b2ff21074bec37871c756d380021f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c6df098d98c3b0019fdb6fbb4d671e54ac7302275cf28e2d63c65a10c3f13fd8",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1269,
+    "reason": "1322 additional individual PG/source review: Invalid credential/context creation RTE/null becomes fixed unavailable and the local char copy is always wiped. Returned real JMSContext ownership belongs to the consumer, not this borrowed factory callback.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "187",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Exception ",
+    "diagnosticTextSha256": "2bff381afd0af02eadebaf2c99a8db1ca7d4002a1ed27e2ffd152db438651fdb",
+    "endcolumn": "25",
+    "endline": "187",
+    "findingId": "F03-PMD2-e5d13bae3b1fede79ab360256757ed28e033e01699d3295d41be44d78065eb8d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-06f0acf63a82a4bb998253f8342a026c100ba7fd68ac02efc9161aabbb4f97f8",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1270,
+    "reason": "1322 additional individual PG/source review: AutoCloseable owner may fail with checked or unchecked exception/Error. Native UNKNOWN policy precedes any unwind, ordinary failure traverses fatal graph before redacted fixed exception. closed cache is written only on confirmed normal close.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "187",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "33",
+    "endline": "187",
+    "findingId": "F03-PMD2-61f19d711fa193af1f812fc5f123c6afc655351648bde5bb684930f1abe229f2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-06f0acf63a82a4bb998253f8342a026c100ba7fd68ac02efc9161aabbb4f97f8",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1271,
+    "reason": "1322 additional individual PG/source review: AutoCloseable owner may fail with checked or unchecked exception/Error. Native UNKNOWN policy precedes any unwind, ordinary failure traverses fatal graph before redacted fixed exception. closed cache is written only on confirmed normal close.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "32",
+    "beginline": "189",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "37",
+    "endline": "189",
+    "findingId": "F03-PMD2-8e3a0e0e9a68dfb3c94eff8d94ebdec44e803b8fafa82ae41b1f3a7d9881c754",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c273a01592f0ad0c685de512996205e7486e5d8177a1e908c7c08ec970fdf5df",
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.file.WebBrokerContextsCredentialTest",
+        "method": "native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "07dd8962ca2872c8ae7d56d3e05107769e634f51dcdd43ca9b38428cb00bbdbf"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316008FiniteObserverKeepsFailureAndNullPolicyDoesNotAcquire",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.WebFactoryNativeRetentionTest",
+        "method": "hold316009ProviderAndReturnedOwnerKeepOuterFrame",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+        "xmlSha256": "a42eb3a69fc92c25654d500e939fd271ed48f40f1bd1cafc850a4da2967955d7"
+      }
+    ],
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class": "252ababe3d5c642765dfe65d81c609cb44bdcb87e9a11fcebca9d8646cc1327d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "qualificationSha256": "b000fbecefc854567332c21530dd63d1de411c06042f00d9e182e2def106ac34",
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1272,
+    "reason": "1322 additional individual PG/source review: Direct Error must be rethrown without an IllegalStateException wrapper; indirect fatal graphs are separately checked by SessionStoreException.preserveFatal. This type test is the declared fatal boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_GLOBAL_FUNCTIONAL_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "55109c74737208f906b69c04cd0931b466d2fadd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+    "sourceSha256": "98e6b9fc9514a4e26fec309b64067ec056a7bc7974c606d07ccd5d4e678b4398",
+    "status": "REQUIRED_CONTRACT"
+  }
+]
