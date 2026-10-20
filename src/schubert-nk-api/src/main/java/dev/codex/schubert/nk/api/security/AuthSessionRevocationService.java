@@ -24,6 +24,8 @@ import java.util.UUID;
  * PT-AUT-008-R01..04. No active principal is produced by the Logout path.
  */
 public final class AuthSessionRevocationService {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   private final ContextHash hashes;
   private final SessionAuditWriter audit = new SessionAuditWriter();
 
@@ -238,7 +240,7 @@ public final class AuthSessionRevocationService {
       statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(2, reason.name());
       statement.setObject(3, id);
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("session changed during revocation", "40001");
     }
   }

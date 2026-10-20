@@ -15,6 +15,8 @@ import java.util.Optional;
  * NK-QRY-001/NTF-001; PG-D332; PT-QRY039..045. Borrowed transaction only.
  */
 final class QuestionMutationAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   enum Event {
     SESSION_INVALID,
     OWNER_DENIED,
@@ -78,7 +80,7 @@ final class QuestionMutationAuditWriter {
         s.setNull(9, Types.VARCHAR);
       }
       s.setString(10, details.toString());
-      if (s.executeUpdate() != 1)
+      if (s.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical question mutation audit count is invalid");
     }
   }

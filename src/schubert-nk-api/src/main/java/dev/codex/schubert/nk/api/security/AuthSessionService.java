@@ -25,6 +25,8 @@ import java.util.function.Supplier;
  * PT-AUT-005-I/006.
  */
 public final class AuthSessionService {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   private static final String LOCK_USER =
       "select status from schubert.app_users where id=? for update";
   private static final String INSERT =
@@ -107,7 +109,7 @@ public final class AuthSessionService {
         statement.setObject(8, expiresAt.atOffset(java.time.ZoneOffset.UTC));
         statement.setString(9, client.getHostAddress());
         statement.setObject(10, messageId);
-        if (statement.executeUpdate() != 1) {
+        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
           throw new SQLException("session insert did not create one row", "40001");
         }
       } finally {
@@ -125,7 +127,7 @@ public final class AuthSessionService {
         try (var statement = connection.prepareStatement(REPLACE)) {
           statement.setObject(1, issuedAt.atOffset(java.time.ZoneOffset.UTC));
           statement.setObject(2, active.get(index));
-          if (statement.executeUpdate() != 1) {
+          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
             throw new SQLException("session replacement changed during issue", "40001");
           }
         }

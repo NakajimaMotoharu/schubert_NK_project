@@ -17,6 +17,8 @@ import java.util.UUID;
  * NK-AUT-001; AUT-001/MON-004; UI226/252; SS314 §12/351 §3..4; PT-AUT-004-01..04.
  */
 public final class LoginAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   void write(
       Connection connection,
       LoginResult result,
@@ -57,7 +59,7 @@ public final class LoginAuditWriter {
       statement.setString(8, safeUsername);
       statement.setString(9, client.getHostAddress());
       statement.setString(10, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical login audit did not create one row", "40001");
     }
   }

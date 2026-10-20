@@ -18,6 +18,8 @@ import java.util.Optional;
  * SSC-034/PG-D-087/PT-ADM-034..039.
  */
 final class UserRequestAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   enum Event {
     SESSION_INVALID,
     ROLE_DENIED,
@@ -93,7 +95,7 @@ final class UserRequestAuditWriter {
         statement.setNull(9, Types.VARCHAR);
       }
       statement.setString(10, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical user admission audit did not create one row");
     }
   }

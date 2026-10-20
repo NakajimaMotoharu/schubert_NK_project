@@ -18,6 +18,8 @@ import java.util.UUID;
  * Trace: NK-AUT-001, AUT-001..004/MQ-004; UI226 §5..7; SS312 §3/314 §6/332 §5; PT-AUT-007.
  */
 public final class AuthenticationContextVerifier {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   private static final String LOCK_USER =
       "select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id where"
           + " s.context_hash=? for update of u";
@@ -60,7 +62,7 @@ public final class AuthenticationContextVerifier {
         statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setObject(3, session.id());
-        if (statement.executeUpdate() != 1) {
+        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
           throw new SQLException("authentication session changed during verification", "40001");
         }
       }

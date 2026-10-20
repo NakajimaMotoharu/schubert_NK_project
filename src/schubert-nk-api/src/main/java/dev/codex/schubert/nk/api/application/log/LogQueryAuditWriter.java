@@ -17,6 +17,8 @@ import java.util.Optional;
  * PG-D-092/PT-ADM-068/069/071..073. Only a currently verified actor may be supplied.
  */
 final class LogQueryAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   enum Event {
     SESSION_INVALID,
     ROLE_DENIED,
@@ -80,7 +82,7 @@ final class LogQueryAuditWriter {
         statement.setNull(9, Types.VARCHAR);
       }
       statement.setString(10, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical log query audit did not create one row");
     }
   }

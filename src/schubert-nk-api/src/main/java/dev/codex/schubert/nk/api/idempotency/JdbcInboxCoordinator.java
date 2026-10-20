@@ -24,6 +24,8 @@ import java.util.UUID;
  * <p>Trace: NK-MSG-002, RD MQ-006..010/FUN-103..105, UI 241/242, SS 324 §4..§7, PT-IDEM-004..006.
  */
 public final class JdbcInboxCoordinator {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   private static final String SELECT_COLUMNS =
       "correlation_id,request_layout_id,request_version,owner_user_id,operation_token,"
           + "request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,"
@@ -216,7 +218,7 @@ public final class JdbcInboxCoordinator {
       statement.setBytes(1, body);
       statement.setString(2, encrypted.keyVersion());
       statement.setObject(3, request.messageId());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("Scenario Inbox replacement was not applied", "40001");
     } finally {
       Arrays.fill(body, (byte) 0);
@@ -369,7 +371,7 @@ public final class JdbcInboxCoordinator {
       // Replay bypasses this transition, so repeated delivery cannot prolong retention.
       statement.setObject(10, completion.completedAt().atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(11, messageId);
-      if (statement.executeUpdate() != 1) {
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
         throw failure(
             InboxException.Reason.STATE_CORRUPT,
             "Inbox PROCESSING row disappeared before completion");

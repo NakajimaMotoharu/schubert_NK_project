@@ -21,6 +21,8 @@ import java.util.Optional;
  * AUT-001; UI226 §4; SS312 §4/314 §5/331 §4/332 §5; PT-AUT-003-D01..05.
  */
 public final class LoginAttemptRepository {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   private static final String USER =
       "select"
           + " id,username,role,status,password_hash,failed_count,failure_window_started_at,locked_until"
@@ -141,7 +143,7 @@ public final class LoginAttemptRepository {
           statement.setBoolean(4, success);
           statement.setObject(5, now.atOffset(java.time.ZoneOffset.UTC));
           statement.setLong(6, account.identity().userId());
-          if (statement.executeUpdate() != 1)
+          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
             throw new SQLException("login user update count differs", "40001");
         }
       }
@@ -153,7 +155,7 @@ public final class LoginAttemptRepository {
         setInstant(statement, 3, state.lockedUntil());
         statement.setObject(4, now.atOffset(java.time.ZoneOffset.UTC));
         statement.setString(5, locked.clientAddress());
-        if (statement.executeUpdate() != 1)
+        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
           throw new SQLException("login IP update count differs", "40001");
       }
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {

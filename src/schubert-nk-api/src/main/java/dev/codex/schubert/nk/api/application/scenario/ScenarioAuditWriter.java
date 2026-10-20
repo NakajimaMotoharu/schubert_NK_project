@@ -19,6 +19,8 @@ import java.util.Objects;
  * caller owns authentication, transaction and rollback. Saved replay never writes it again.
  */
 final class ScenarioAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   void write(
       Connection connection,
       AuthenticatedActor actor,
@@ -72,7 +74,7 @@ final class ScenarioAuditWriter {
           Normalizer.normalize(actor.username(), Normalizer.Form.NFC)
               .replaceAll("[\\r\\n\\t\\u2028\\u2029]", " "));
       statement.setString(8, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical scenario audit did not create one row");
     }
   }

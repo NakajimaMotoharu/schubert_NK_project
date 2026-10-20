@@ -17,6 +17,8 @@ import java.util.UUID;
  * §12/351 §4/352 §12, SSC-010; PT-AUT-006-03/008-R.
  */
 public final class SessionAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   void write(
       Connection connection,
       long actorId,
@@ -45,7 +47,7 @@ public final class SessionAuditWriter {
       if (client.isPresent()) statement.setString(5, client.orElseThrow().getHostAddress());
       else statement.setNull(5, Types.VARCHAR);
       statement.setString(6, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical session audit did not create one row", "40001");
     }
   }

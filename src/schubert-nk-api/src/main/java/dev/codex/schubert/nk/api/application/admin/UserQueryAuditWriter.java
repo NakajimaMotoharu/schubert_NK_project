@@ -17,6 +17,8 @@ import java.util.Optional;
  * Only a currently verified actor may be supplied.
  */
 final class UserQueryAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+
   enum Event {
     SESSION_INVALID,
     ROLE_DENIED,
@@ -80,7 +82,7 @@ final class UserQueryAuditWriter {
         statement.setNull(9, Types.VARCHAR);
       }
       statement.setString(10, details.toString());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical user query audit did not create one row");
     }
   }

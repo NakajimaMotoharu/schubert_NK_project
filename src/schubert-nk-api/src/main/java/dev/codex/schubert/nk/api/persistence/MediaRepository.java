@@ -56,6 +56,8 @@ import java.util.function.IntFunction;
  * projections alone must never authorize a file response.
  */
 public final class MediaRepository {
+  private static final int EXPECTED_RESULT_ROWS = 1;
+
   private static final java.lang.String LITERAL_CATEGORY = "category";
 
   /** PT-MED-015/017: canonical N12 identity and SS333 Audio OGG mapping, not file admission. */
@@ -190,7 +192,7 @@ public final class MediaRepository {
               bounded(r, "total_count", 999));
         },
         rows -> {
-          if (rows.size() != 1) throw new MediaQueryException(false);
+          if (rows.size() != EXPECTED_RESULT_ROWS) throw new MediaQueryException(false);
           return payload("ANMRSP01", rows.getFirst(), List.of());
         });
   }

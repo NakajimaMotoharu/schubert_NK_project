@@ -108,6 +108,7 @@ def runner_source():
         "'expectedTests':12": "'expectedTests':1021",
         "method=case.get('name','').removesuffix('()')": "method=case.get('name','').split('(',1)[0]",
         'len(physical)==1664': 'len(physical)==1666',
+        "'actualExit':next((v for v in exits if v),0)": "'actualExit':0 if done else 1,'mavenActualExit':next((v for v in exits if v),0)",
         "target100=len(target_counters)==14 and all(all(c[k]['missed']==0 and c[k]['covered']>0 for k in('LINE','METHOD','CLASS'))and c['BRANCH']['missed']==0 for c in target_counters.values())": "target100=len(target_counters)==16 and all(c[k]['missed']==0 and c[k]['covered']>0 for c in target_counters.values() for k in('LINE','METHOD','CLASS','BRANCH'))",
         "with(out/'manifest.safe.json').open('x')as f:": "value.update(executionKind='NORMAL_API_SQL_SELECTED1021',apiCases=1010,guardCases=11,noDeployedRuntimeOperation=True,oldSuccessImported=False)\n    with(out/'manifest.safe.json').open('x')as f:"}
     for old, new in changes.items():

@@ -12,6 +12,9 @@ import java.text.Normalizer;
 
 /** Critical allowlist audit in the same transaction. NK-ADM-001; SS351/352; PT-ADM-014..023. */
 final class UserAuditWriter {
+  private static final int EXPECTED_AFFECTED_ROWS = 1;
+  private static final int MAXIMUM_DETAILS_UTF8_BYTES = 1024;
+
   void write(
       Connection c,
       AuthenticatedActor actor,
@@ -30,7 +33,7 @@ final class UserAuditWriter {
     var known = change.after().or(change::before);
     known.ifPresent(state -> details.addProperty("targetUsername", safe(state.username())));
     String json = details.toString();
-    if (json.getBytes(StandardCharsets.UTF_8).length > 1024)
+    if (json.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_DETAILS_UTF8_BYTES)
       throw new SQLException("user audit exceeds limit");
     if (success && kind != Mutation.RESET_PASSWORD && kind != Mutation.UNLOCK)
       insert(c, actor, metadata, action, "ACTION", json, success);
@@ -85,7 +88,7 @@ final class UserAuditWriter {
       s.setLong(8, actor.userId());
       s.setString(9, safe(actor.username()));
       s.setString(10, details);
-      if (s.executeUpdate() != 1)
+      if (s.executeUpdate() != EXPECTED_AFFECTED_ROWS)
         throw new SQLException("critical user audit did not create one row");
     }
   }

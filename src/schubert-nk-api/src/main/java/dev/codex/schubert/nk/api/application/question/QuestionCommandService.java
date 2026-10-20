@@ -25,6 +25,8 @@ import java.util.OptionalLong;
  * 323/324/332§8..10/351; PG-D-331; PT-QRY028..032/NTF012..016.
  */
 public final class QuestionCommandService {
+  private static final long MAXIMUM_MUTATION_VERSION = 999_999_999L;
+
   private static final java.lang.String LITERAL_STATE = "state";
 
   private static final String QUESTION_ADMIN =
@@ -161,7 +163,7 @@ public final class QuestionCommandService {
       if (state != NotificationState.RECEIVED)
         return new CancelResult(
             ResultCode.NOT_CANCELLABLE, OptionalLong.of(job), Optional.of(state), Optional.empty());
-      if (version == 999_999_999L)
+      if (version == MAXIMUM_MUTATION_VERSION)
         return new CancelResult(
             ResultCode.RESOURCE_LIMIT, OptionalLong.empty(), Optional.empty(), Optional.empty());
       require(!metadata.at().isBefore(changed));
@@ -244,7 +246,7 @@ public final class QuestionCommandService {
         }
       }
       if (deleted) return new DeleteResult(ResultCode.IDEMPOTENT_SUCCESS, deletedAt);
-      if (version == 999_999_999L)
+      if (version == MAXIMUM_MUTATION_VERSION)
         return new DeleteResult(ResultCode.RESOURCE_LIMIT, Optional.empty());
       try (var s = admin ? c.prepareStatement(DELETE_ADMIN) : c.prepareStatement(DELETE_USER)) {
         s.setObject(1, metadata.at().atOffset(ZoneOffset.UTC));
