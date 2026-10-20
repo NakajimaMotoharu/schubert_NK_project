@@ -6,7 +6,7 @@ import pg5860_terminal_whole as target
 
 class CoherentTerminalWholeTest(unittest.TestCase):
     def test_current_source_inventory_and_unchanged_gate_profile(self):
-        actual=subprocess.check_output(['git','rev-parse','a46c781e9'],cwd=target.ROOT,text=True).strip()
+        actual=subprocess.check_output(['git','rev-parse','0f572da66'],cwd=target.ROOT,text=True).strip()
         self.assertEqual(actual,target.SOURCE)
         raw=target.server_source(target.SOURCE,'a'*64)
         constants=[n.value for n in ast.walk(ast.parse(raw))if isinstance(n,ast.Constant)]

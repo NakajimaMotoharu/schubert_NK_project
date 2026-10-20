@@ -8,7 +8,7 @@ from pyflakes.api import check
 import pg5832_isolation_whole as previous
 
 ROOT,W=previous.ROOT,previous.W
-SOURCE='a46c781e9ec0260f0297fd6a8c4de39c73e9257c'
+SOURCE='0f572da66c9e3f0818cddb5bf679e7b8bc0f47da'
 LABEL='PG5860';SLOT='pg5860-terminal-six-v1'
 NEW_TESTS={'api/messaging/inbound/CommittedTerminalAdmissionContractTest','web/messaging/ReplyCommittedTerminalAdmissionContractTest'}
 CHANGED_TESTS={'api/messaging/inbound/FatalIsolationFixture','api/messaging/inbound/ApiConsumerTerminalRemainderTest','api/messaging/inbound/SyncRequestConsumersTest','api/messaging/inbound/WebLogConsumersTest','web/messaging/ReplyRollbackSignalContractTest','web/messaging/ArtemisReplyConsumersTest'}
