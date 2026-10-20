@@ -35,7 +35,9 @@ enum InboundTransactions {
       context.commit();
     } catch (JMSException | RuntimeException isolationFailure) {
       rollbackAfterFailure(context, isolationFailure);
-      isolationFailure.addSuppressed(protocolFailure);
+      if (isolationFailure != protocolFailure) {
+        isolationFailure.addSuppressed(protocolFailure);
+      }
       if (isolationFailure instanceof JMSException jmsFailure) {
         throw jmsFailure;
       }
@@ -47,7 +49,9 @@ enum InboundTransactions {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
+      if (failure != rollbackFailure) {
+        failure.addSuppressed(rollbackFailure);
+      }
     }
   }
 }

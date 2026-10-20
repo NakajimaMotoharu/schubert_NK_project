@@ -53,7 +53,9 @@ public final class ArtemisReplyConsumer {
       context.commit();
     } catch (JMSException | RuntimeException isolationFailure) {
       rollbackAfterFailure(context, isolationFailure);
-      isolationFailure.addSuppressed(protocolFailure);
+      if (isolationFailure != protocolFailure) {
+        isolationFailure.addSuppressed(protocolFailure);
+      }
       if (isolationFailure instanceof JMSException jmsFailure) {
         throw jmsFailure;
       }
