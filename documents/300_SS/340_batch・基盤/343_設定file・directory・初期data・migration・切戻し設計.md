@@ -2,6 +2,8 @@
 
 ## SSC318 keeper二次失敗の扱い
 
+native policy getterの取得前呼出によりretainer/fixed observer/fallbackのclass初期化を完了させる。tick故障時はfixed monotonic1000ms fallbackを用い、外部flag・別Root・permit発行で切替えない。IRQ/早期parkとfallback故障もUNKNOWNのまま扱い、後者のVM/CPUリスクを正常性の保証に読み替えない。
+
 SS342のUNKNOWN保持内で診断/tickが失敗しても外側資源/失敗frameを保持し、normal終了/再close/新Root/復旧権限を発行しない。fixed observerは取得前に準備し、外部設定で切替えない。raw例外・credentialは出力せず、JVM/OS終了時には既cold-boot隔離/再認証契約を維持する。自己所有childの有限観測を実native/Rootの解放・正常終了と扱わない。BUG1563/YKT1320/SS354。
 
 ## SSC316 native解放失敗時の借用資源保持（S3b）
