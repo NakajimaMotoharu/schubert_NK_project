@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC312 HTTP取得前準備の独立PT
+
+SS313/342のowner準備を対象とし、PT-HTTP-OWN001(API management)/002(Web management)/003(Web HTTP)でfactory一度・固定127.0.0.1/backlog32・取得IOException/IAE/ISE/NPE/Errorの同一性・null拒否・未取得のclose/owner通知0を独立fixtureで確認する。Tomcat supplierはchecked IOException非適用。既正常HTTP/拒否URL/情報5値/interrupt/失敗close再試行/所有callbackの全影響PTを併せて実施する。テスト自身が取得した実server/fixtureはfinallyで解放する。
+
+未保護allocation失敗は故意のOOMで再現せず、実compiled constructorの全field初期化とexecutor/MVC/lock/address allocationがfactory前、取得後はnonnull/final格納/returnだけであることを独立JVM命令解析で反証点検する。全原XML・同source/全Main物理差・public ABI・実四counter・無除外静的を照合する。未到達branchや未測定nativeをPASS/100へ補完せず、新source全体は必要な変更群をまとめて真正結果を確認する。BUG1545/YKT1305、仕様1286/PG-D461、旧source成功の移植0。
+
 ## SSC311 Web factory設定・完成ownerの独立検証
 
 SS321/343SSC311・BUG1537/YKT1297。MQFACT311001は既endpoint/設定12値/user-password未設定の独立literalを保持し、public createで全supplier/owner/lock準備→factory取得/設定→final格納だけのactual bytecodeを確認する。MQFACT311002はfresh factoryの各12setterでIAE/ISE/NPE/Errorを注入し、setter prefix/一度close・正常時close0でlive返却/取得失敗・nullで未取得close0を検証する。MQFACT311003はprimary/closeのRuntime各種/Error/同一Throwableを独立表で与え、通常は同一primary＋secondary一回、close Error＋primary非Errorだけ同close Error＋primary一回、同一Throwable self-suppression無しを確認する。ExpectedをProduction merger/helperから作らない。

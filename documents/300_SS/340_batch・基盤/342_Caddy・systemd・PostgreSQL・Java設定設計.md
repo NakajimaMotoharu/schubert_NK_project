@@ -1,5 +1,11 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC312 HTTP資源factoryの取得前owner準備（2026-10-21、内部詳細補足）
+
+API/Web管理HTTPは、入力・固定loopback住所/port/backlog32を検証し、owner・全flag/lock・未開始executor（core/max1、queue32、daemon名は既定）・応答情報を先に準備してからHttpServer factoryを一度だけ呼ぶ。取得成功後は追加の未保護allocationを挟まずfinal serverへ格納してownerを返す。取得例外/nullは成功へ変換せず、未取得serverをcloseしない。factory内部で取得後に失敗した資源はfactoryの責務であり、callerが未返却資源を推定回収しない。WebHttpServerも未refreshのMVC context・private final lifecycleLock・ownerを先に準備してからTomcat supplierを一度取得しfinal格納、既startWithOwnerの捕捉callbackとvendor設定/startは既存try内を維持する。未refresh MVCはclose義務のある開始済資源として扱わない。
+
+取得後の既start/stop/destroy/cleanup例外順位・失敗owner再試行・readiness・API8091/Web8081/業務8080・URL/電文/権限/SQL/制限を変更しない。実OOM/実運用漏えいを観測したとの認定ではなく、取得後のowner準備allocation gapを構造上除く。BUG1545/YKT1305、関連SS313/342/354、PG-D461。取得前準備→factory最後→final格納は実ClassFile順序を独立点検し、故意のOOMや稼働VM操作で検証しない。動的PTは通常の有限self-owned fixtureだけ、拒否PT代替や実親/native/配備証明とは分離する。
+
 SSC237（2026-10-09、SSC187203実配線補足、BUG938/YKT707）：Caddy/Web/API各typed intentのbefore/after及びAPI保持確認、DONE前後を一つの同owner-thread完了順序へ接続する。pending/退役後の各gateは、同Root/保持原本graph/同ordinary世代・identity/socket/info/ready/run整合と全evidence行/seal/保持receiptをTX外で再読する。退役後gateをpeer/run照合だけで代用しない。SQL中は既純ownerを維持しDB再入しない。Caddy-before直前の独立重複full呼出は不要だが、retireReadyAfter内部のbefore/after証明は削除しない。失敗phaseを固定列挙、IO/RUNTIME/FATALだけとprocess-local monotonic経過（権限・期限ではない）を一回記録し、未知保持/元30分/逆順停止契約を維持。元例外message/stackや秘密を診断へ出さず、原因不明を時間超過だけで正常化しない。停止中のquery160中央値5.384061msは限定測定、旧timeout原因確定/性能受入ではない。キャッシュ・transport変更・期限緩和は本補足の対象外。
 
 SSC235（2026-10-09、QA047内のPG758失敗世代復旧）：343の当source限定profileを適用する。親の元1800秒timeout143/RootDONE無しを正常終了へ置換せず、API/Web/Caddy/Artemisの捕捉同世代を発行直前再照合し、新M→A→専用DB/advisory71419602・固定十Unitの同private bus Refと実保持FDの下でCaddy→Web→API→残保守→Artemisを正規停止する。依存による先行停止は同世代の真正kernel/native/PID1/vendor witnessで検証し、stopを再発行しない。current七startup現物・親/child launchとsecurity・元原本/全24/Backup/Transfer/旧失敗証跡を保全する。全kernel/当native終端・後条件成立後だけ正規同epoch失効と既存Pair退役へ進む。配備/再起動/期限延長/未知ownerへの停止0。停止中Unitは固定LoadUnit/RefUnitで観測保持できるがstartはしない。各通常資源close不明は非成功・再隔離し、旧失敗のclose成功を推論しない。
