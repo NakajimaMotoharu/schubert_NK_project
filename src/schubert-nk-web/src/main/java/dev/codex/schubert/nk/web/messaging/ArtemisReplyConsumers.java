@@ -20,7 +20,7 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
-  private volatile boolean closed;
+  private boolean closed;
   private volatile boolean stopping;
   private boolean startAttempted;
   private volatile boolean started;
