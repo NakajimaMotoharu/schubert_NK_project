@@ -1,0 +1,9 @@
+# 1271 localMap11・Expiry14の個別PGレビュー
+
+NK-OPS-001/NK-BAT-001、SS331332333343354/411451・SSC063199200304310/BUG1530/YKT1290、主F03/event1459開始0.25/.75/2共有pp。Productionc4d0242abe53fa7916451ac22caffcdfc13d82b6、全3979原job12515実行中につきMain/Test固定。対象は当static6054全1305の下記25診断だけ。拒否PT代替ではなく通常PG品質レビューで、実装は全source/借用/同期/資源の個別検査を行い、必要な変更があれば元job保全後に台帳先行で実PGする。sourceが正しいと確認した箇所は変更不要の根拠を残す。
+
+1. BackupArtifactVerifierのobservePending local snapshots/observed二、retained captureの同二（計4）。各mapは呼出局所で、同期OwnedTransferDirectory.atExistingEntryHandle→withEntry→ResourceScope.acquire→execute(operation)のinline bodyのみがアクセスする。callbackはmapを返却/fieldへ保存せず、PendingDigestsには三digest値だけ、BundleSnapshotにはconstructorのMap.copyOfで別immutable mapを返す。割込確認のThread.currentThreadは並行共有を意味しない。実Root/backup保有の成功証明ではない。
+2. MaintenanceRunFilesのinventory局所runs/begins/done/plans四、scan局所runs/begins/done三（計7）。逐次loop/readで収集し、Inventory compact constructor又はgraphで全mapをMap.copyOfしてから返す。元mutable mapをfield/他threadへ公開せず、同stateLockでの実処理も保持する。copy元と公開後参照を混同せず、当UseConcurrentHashMapはstatic-context不適用として個別理由を残す。実DB/namespace/原本の状態は本レビューで認定しない。
+3. Expiry read二CloseResource、typed primary/secondaryに対するGeneric八、finally二、successful usingJdbcのThrowable二（計14）。6062 parse-only原AST二scope e700803c・SS332310のtyped順位/現148の独立68合成・実L251/M25/C4/B188全miss0・usingJdbcのSS343304 exactJavaTWR/24独立Testとjoinする。CloseResourceはpresentRead identity aliasで新資源を作らず実scopeで一度closeするFalse positive、他は個別型/捕捉目的/cleanup優先を説明する。stage/finish二広catchは今回対象外、無根拠に必要扱いしない。
+
+全25に原findingID/sourceSHA/座標/実fragment・source/bytecounter参照を保持し、別token/源/不明ownerを拒否する。map11はstatic-context premiseだけで動的PTを主張せず、Expiry14は当選択148の原case参照を保持する。currentWholeJoinPendingのままレビューを作り、元3979終了後にしかcurrent wholeのPT参照/正式判断へ接続しない。旧606理由は源/診断列/全owner byteと当原XMLで再認証し、算術加算だけで受入を作らない。全体四100/F03/native/CHR/451/trace/QA051final/PTALT保留は維持する。

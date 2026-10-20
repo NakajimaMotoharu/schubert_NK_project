@@ -57,15 +57,17 @@ def validate_scope(row):
                 nonExecutableDeclarations=row['nonExecutableDeclarations'], declaredIOExceptionPreserved=allowed_io)
 
 
-def main():
-    if subprocess.check_output(['git', 'diff', SOURCE, '--', 'src'], cwd=ROOT):
+def collect(owners, source, slot):
+    if not owners or any(not re.fullmatch(r'[A-Z][A-Za-z0-9]*', name) or type(count) is not int or count < 1 for name, count in owners.items()) or not re.fullmatch(r'pg\d+-[a-z0-9-]+-v[1-9][0-9]*', slot):
+        raise ValueError('explicit finite owner counts and new-only safe namespace')
+    if subprocess.check_output(['git', 'diff', source, '--', 'src'], cwd=ROOT):
         raise ValueError('Main/Test frozen during original6040')
-    paths = [ROOT/('src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/'+name+'.java') for name in sorted(OWNERS)]
+    paths = [ROOT/('src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/'+name+'.java') for name in sorted(owners)]
     before = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths}
     for p in paths:
         if re.search(r'\bconnection\s*\.\s*(close|commit|rollback|setAutoCommit|setReadOnly|setTransactionIsolation)\s*\(', p.read_text()):
             raise ValueError('borrowed connection mutation/close outside this ownership proof')
-    os.umask(0o077); out = W/'pg6046-jdbc-ownership24-facts-v3'; out.mkdir(mode=0o700); classes = out/'toolclasses'; classes.mkdir()
+    os.umask(0o077); out = W/slot; out.mkdir(mode=0o700); classes = out/'toolclasses'; classes.mkdir()
     helper = ROOT/'tools/quality/SourceJdbcOwnershipInventory.java'
     commands = [[str(TC/'jdk-25.0.4/bin/javac'), '-proc:none', '-implicit:none', '-Xlint:all', '-Werror', '-d', str(classes), str(helper)],
                 [str(TC/'jdk-25.0.4/bin/java'), '-cp', str(classes), 'SourceJdbcOwnershipInventory', *map(str, paths)]]
@@ -83,22 +85,26 @@ def main():
     records = decode_records(outputs[-1]); verified = []
     for row in records:
         path = Path(row['path']); name = path.stem
-        if path not in paths or name not in OWNERS:
+        if path not in paths or name not in owners:
             raise ValueError('only declared six source owners')
         value = validate_scope(row)
         relative = path.relative_to(ROOT).as_posix()
         verified.append({**row, 'path': relative, 'sourcePath': relative,
                          'sourceSha256': before[relative], 'ownership': value})
-    counts = {name: sum(Path(r['path']).stem == name for r in records) for name in OWNERS}
-    if counts != OWNERS or len(records) != 24 or before != {p.relative_to(ROOT).as_posix(): sha(p) for p in paths}:
+    counts = {name: sum(Path(r['path']).stem == name for r in records) for name in owners}
+    if counts != owners or len(records) != sum(owners.values()) or before != {p.relative_to(ROOT).as_posix(): sha(p) for p in paths}:
         raise ValueError('all24 individual immediate protected allocations,source fixed')
-    value = dict(actualExit=0, source=SOURCE, phaseExits=exits, commands=commands, helperSha256=sha(helper),
+    value = dict(actualExit=0, source=source, phaseExits=exits, commands=commands, helperSha256=sha(helper),
         allSourceHashes=before, counts=counts, scopes=verified, parseOnly=True, typeResolutionClaimed=False,
         sourceCodeChanged=False, productionMethodsInvoked=0, testsExecuted=0, actualCoverage=None,
         dispositionCreated=0, originalWholePending=True, formalAccepted=False, ptAlternativeCompleted=0, vmActions=0)
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(value, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
-    print(json.dumps(dict(actualExit=0, source=SOURCE, owners=6, protectedAllocations=24, testsExecuted=0, dispositionCreated=0, manifestSha256=sha(out/'manifest.safe.json'))))
+    print(json.dumps(dict(actualExit=0, source=source, owners=len(owners), protectedAllocations=len(records), testsExecuted=0, dispositionCreated=0, manifestSha256=sha(out/'manifest.safe.json'))))
+
+
+def main():
+    return collect(OWNERS, SOURCE, 'pg6046-jdbc-ownership24-facts-v3')
 
 
 if __name__ == '__main__':
