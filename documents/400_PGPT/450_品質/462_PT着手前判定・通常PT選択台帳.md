@@ -1,5 +1,7 @@
 # PT着手前判定・通常PT選択台帳
 
+PTPRE026環境再試験追記（2026-10-20）：元5976実Node不在errorはBUG1518/YKT1278、拒否ではない。新5984-v2は同canonical a623/元archive同SHA/同921-149・全Test不変、固定既Node24.19.0をPATHへ追加するだけ。四JSは有限ローカルDOM fixture、VM/実Browser/外部接続/権限変更なし、当PT_DEFAULTを維持。元jobは真正終了1確認済、再付着/二重起動なし。純guard・fresh枠>10/clean source/新namespaceから必要再試験、元失敗を保持し真正0/独立検証前は合格へ加算しない。
+
 ## PTPRE-026 — PT_DEFAULT：Web form/view22後の921/149
 
 1249/PG-D450/BUG1517。Web全143suite/913case＋既他五module guard六suite/八case、同じ承認済みhost fixture profile。自己所有new-only snapshot/offline Maven・全六format先行→package/JUnit/JaCoCo/SpotBugs、temp PostgreSQL/in-process broker/loopback ephemeral HTTP・公開DOM fixture/有限childだけ。実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作・権限/経路変更0。Web security機能名だけで危険扱いせず実作用を既profileと新literal限定差から判定、拒否probe/同操作再試行/代替確認でない。fresh>10/clean source/未使用namespace後一回、新source当12の明示四counter100/全XML/全Mainを確認、旧成功/欠落をPASS100へ補完しない。
