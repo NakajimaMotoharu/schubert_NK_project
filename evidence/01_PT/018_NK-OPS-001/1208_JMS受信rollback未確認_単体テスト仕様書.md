@@ -35,3 +35,5 @@ fixtureは許可済method以外をAssertionErrorで拒否し、固定合成例�
 実command `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<pyflakes-runtime> python3 -B tools/quality/pg5800_rollback_green.py`。六module/15suiteの明示54case=protocol7/storage1/bootstrap1/API21/Web22/batch2。全16追加caseと原例外・隔離・通常処理/実in-process Artemisの既独立oracleをまとめる。既EmbeddedActiveMQは自己temporary root/vm transportのみ、実guest/サービス/配備/failed-cohort/permit/原本DBBackup/鍵へ非接続。MavenのNoTestsを維持、TempDir注入を持つ通常@TestのXML名は一意なsource method名へ対応し、parameterized/skip/別名の算術加算を拒否する。
 
 Sourceをclean commitで固定、Main1665（新一）と全850 source、target七型の実line/method/class/branchを出力する。限定54の成功やcounter不足を全体100へ広げず、必要fresh whole・当source native/CHR/451・正式は別未完。新型/例外/並行はAPI既terminal remainderの独立順序/実in-process配送試験を含む。外側WebNativeRuntime/WebLogApplicationRuntimeのfatal signal接続はsource/必要wholeで点検し、実native所有確認は保留のまま。
+
+PG5800-v1/source1fe/47590はserialVersionUID欠落によりcompile1・PT0、BUG1491/YKT1251へ修正前起票。元runを保持してnew-v2へ移行、抑制でなく新Main/fixture三例外へ既規約1Lを付与する。全PT未実行からの必要再試験であり、成功済全回帰の再演ではない。

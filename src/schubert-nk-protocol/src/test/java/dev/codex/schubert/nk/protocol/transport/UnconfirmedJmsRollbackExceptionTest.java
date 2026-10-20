@@ -48,6 +48,8 @@ final class UnconfirmedJmsRollbackExceptionTest {
   }
 
   private static final class EqualFailure extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     @Override
     public boolean equals(Object other) {
       return other instanceof EqualFailure;
@@ -60,6 +62,8 @@ final class UnconfirmedJmsRollbackExceptionTest {
   }
 
   private static final class SuppressionDisabledFailure extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     SuppressionDisabledFailure() {
       super("synthetic primary", null, false, false);
     }
