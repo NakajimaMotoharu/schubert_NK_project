@@ -73,7 +73,7 @@ def executable_sections(text):
             finish();block=[]
         if '//' in line:
             instruction,comment=line.split('//',1)
-            line=re.sub(r'#\d+', '#CP',instruction)+'//'+comment
+            line=re.sub(r'#\d+', '#CP',instruction).rstrip()+' //'+comment
         block.append(line.rstrip())
     finish()
     if not result:

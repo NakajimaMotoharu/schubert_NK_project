@@ -60,10 +60,10 @@ def main():
     if sha(oldsp) != '4be1ee7550f3cf719b5da6a362ad418c444eadd2deea7b7368c50807a20b3ad8' or sha(oldpp) != json.loads(oldsp.read_bytes())['privateManifestSha256']:
         raise ValueError('actual prior32f all8511667/static1329 immutable')
     old = json.loads(oldpp.read_bytes()); qp = BASE/'PG6040-current3976-cases/qualification.json'
-    receipt = json.loads((W/'pg6042-original3976-artifacts-v1/manifest.safe.json').read_bytes())
+    receipt = json.loads((W/'pg6042-original3976-artifacts-v2/manifest.safe.json').read_bytes())
     if receipt['actualExit'] != 0 or receipt['source'] != SOURCE or receipt['publicQualificationSha256'] != sha(qp):
         raise ValueError('genuine original3976 artifact reader receipt required')
-    q = json.loads(qp.read_bytes()); jars = W/'pg6042-original3976-artifacts-v1/jars'; declaration = plan()
+    q = json.loads(qp.read_bytes()); jars = W/'pg6042-original3976-artifacts-v2/jars'; declaration = plan()
     if not (q['actualExit'] == q['FESFlakyNotRun'] == q['staticSixModules'] == 0 and q['productionSource'] == SOURCE
             and (q['tests'], q['suites'], q['mainClasses']) == (3976, 593, 1667) and q['allSixFormatBeforeAnyPt']):
         raise ValueError('same-source true3976/593/1667/null/static/format first')
@@ -95,7 +95,7 @@ def main():
     for filename in ('pmd.xml', 'checkstyle.xml'):
         if sha(ROOT/'tools/quality/static'/filename) != sha(before_root/'tools/quality/static'/filename):
             raise ValueError('unfiltered original rule files unchanged')
-    os.umask(0o077); out = W/'pg6044-remaining33-static-v1'; out.mkdir(mode=0o700)
+    os.umask(0o077); out = W/'pg6044-remaining33-static-v2'; out.mkdir(mode=0o700)
     files = out/'all-main.txt'; files.write_text(''.join(str(ROOT/p)+'\n' for p in sorted(current)))
     tail = (W/'pg6034-corrected-boundary-static-v1/aux-classpath.txt').read_text().splitlines()[6:]
     release = W/'pg5430-release-v1'; bom = release/'RELEASE-MANIFEST.json'
@@ -146,7 +146,7 @@ def main():
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(value, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
     public = {k: v for k, v in value.items() if k not in ('commands', 'allSourceHashes', 'auxClassHashes')}
-    public['privateManifestSha256'] = sha(out/'manifest.safe.json'); target = BASE/'PG6044-remaining33-static-v1'; target.mkdir()
+    public['privateManifestSha256'] = sha(out/'manifest.safe.json'); target = BASE/'PG6044-remaining33-static-v2'; target.mkdir()
     for filename, body in (('manifest.json', public), ('findings.json', rows)):
         with (target/filename).open('x') as f:
             json.dump(body, f, ensure_ascii=False, indent=2); f.write('\n'); f.flush(); os.fsync(f.fileno())

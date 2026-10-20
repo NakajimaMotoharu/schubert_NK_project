@@ -4,6 +4,14 @@ import pg6042_original3976_artifacts as t
 
 
 class OriginalArtifactReaderTest(unittest.TestCase):
+    def test_production_and_characterization_are_separate_but_inputs_retained(self):
+        inputs = {'src/schubert-nk-api/src/main/java/P.java': 'p',
+                  'program/characterization/src/main/java/C.java': 'c',
+                  'unrelated/src/main/java/U.java': 'u',
+                  'src/schubert-nk-other/src/main/java/X.java': 'x'}
+        self.assertEqual({'src/schubert-nk-api/src/main/java/P.java': 'p'}, t.production_source_inputs(inputs))
+        self.assertEqual(4, len(inputs))
+
     def test_complete_read_only_namespace_and_case_duplicates(self):
         raw = t.emitted('0'*64)
         self.assertEqual(0, check(raw, '<original3976 artifact reader full definitions>'))

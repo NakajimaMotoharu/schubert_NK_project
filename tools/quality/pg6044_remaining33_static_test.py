@@ -3,6 +3,13 @@ import pg6044_remaining33_static as t
 
 
 class OriginalJarStaticProofTest(unittest.TestCase):
+    def test_only_numeric_cp_and_comment_alignment_are_normalized(self):
+        original = '  void value();\n    descriptor: ()V\n    Code:\n       0: ldc           #99                  // String one  two\n       2: invokedynamic #7, 0 // InvokeDynamic #0:call:()V\n       7: return\n}'
+        equivalent = original.replace('#99                  //', '#100                 //')
+        self.assertEqual(t.executable_sections(original), t.executable_sections(equivalent))
+        for old, new in [('ldc ', 'ldc_w '), ('()V', '()I'), ('one  two', 'one two'), ('String one  two', 'String different'), ('InvokeDynamic #0:', 'InvokeDynamic #1:')]:
+            self.assertNotEqual(t.executable_sections(original), t.executable_sections(equivalent.replace(old, new)))
+
     def test_zero_literal_does_not_remove_other_rules(self):
         before = dict(AvoidLiteralsInIfCondition=33, AvoidCatchingGenericException=4)
         t.expected_rules(before, dict(AvoidCatchingGenericException=4))

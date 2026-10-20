@@ -13,8 +13,8 @@ from lan_server import run, copy
 from pg6040_remaining33_whole import SOURCE, ROOT, W, BASE, SLOT as ORIGINAL, plan
 from pg6030_error_boundary_public import NEW_TEST, NEW_METHODS
 
-SLOT = 'pg6042-original3976-artifacts-v1'
-REMOTE = '/home/mini/schubert-nk-pgpt/transfer/PG6042-original3976-v1'
+SLOT = 'pg6042-original3976-artifacts-v2'
+REMOTE = '/home/mini/schubert-nk-pgpt/transfer/PG6042-original3976-v2'
 MODULES = ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch')
 
 
@@ -23,6 +23,11 @@ def expected_case_keys(rows):
     if len(result) != len(rows):
         raise ValueError('unique expected source Test identities,not invocation aliases')
     return result
+
+
+def production_source_inputs(inputs):
+    prefixes = tuple('src/schubert-nk-'+module+'/src/main/java/' for module in ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'))
+    return {k: v for k, v in inputs.items() if k.startswith(prefixes) and k.endswith('.java')}
 
 
 def physical_difference(before, after, owners):
@@ -139,8 +144,8 @@ def inspect_original(data):
     targets = {key: all_counts[key] for key in data['changedOwnerKeys']}
     if len(targets) != 23 or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} for v in targets.values()):
         raise ValueError('all23 actual outer counter sets explicit,no missing-as-zero')
-    main_inputs = {k: v for k, v in data['allSourceInputs'].items() if '/src/main/java/' in k and k.endswith('.java')}
-    if len(main_inputs) != 851:
+    main_inputs = production_source_inputs(data['allSourceInputs'])
+    if len(main_inputs) != 851 or main_inputs != data['expectedMainSourceInputs']:
         raise ValueError('all851 actual Main source inputs explicit')
     value = dict(actualExit=0, productionSource=data['source'], sourceSnapshot=data['source'], tests=3976, suites=593, mainClasses=1667,
         serverManifestSha256=digest(out/'manifest.safe.json'), sourceArchiveSha256=data['archiveSha256'], returnedOriginalTerminalExact=True,
@@ -160,7 +165,7 @@ def inspect_original(data):
 def emitted(data_hash):
     raw = 'import hashlib,json\nfrom pathlib import Path\np=Path('+repr(REMOTE+'/input.safe.json')+')\n'
     raw += 'if hashlib.sha256(p.read_bytes()).hexdigest()!='+repr(data_hash)+':raise ValueError("fixed input bytes")\n'
-    raw += inspect.getsource(expected_case_keys)+'\n'+inspect.getsource(physical_difference)+'\n'+inspect.getsource(global_four100)+'\n'+inspect.getsource(inspect_original)
+    raw += inspect.getsource(expected_case_keys)+'\n'+inspect.getsource(production_source_inputs)+'\n'+inspect.getsource(physical_difference)+'\n'+inspect.getsource(global_four100)+'\n'+inspect.getsource(inspect_original)
     raw += '\nprint(json.dumps(inspect_original(json.loads(p.read_bytes()))))\n'
     if check(raw, '<complete original3976 artifact reader>'):
         raise ValueError('complete independent read-only reader namespace')
@@ -196,7 +201,10 @@ def main():
     expected += [dict(module='batch', **{'class': NEW_TEST}, caseNameSha256=hashlib.sha256(name.encode()).hexdigest()) for name in sorted(NEW_METHODS)]
     owners = {r['path'].split('/')[1].removeprefix('schubert-nk-')+':'+r['path'].split('/src/main/java/')[1][:-5]+'.class' for r in plan()['sourcePlans']}
     owners.add('web:dev/codex/schubert/nk/web/messaging/WebBrokerContexts.class')
-    data = dict(source=SOURCE, returnedOriginalResult=original['result'], archiveSha256=begin['archiveSha256'], allSourceInputs=inputs,
+    main_inputs = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in ROOT.glob('src/*/src/main/java/**/*.java')}
+    if len(main_inputs) != 851 or main_inputs != production_source_inputs(inputs):
+        raise ValueError('actual all851 Production/archive identity;CHR remains in full input check')
+    data = dict(source=SOURCE, returnedOriginalResult=original['result'], archiveSha256=begin['archiveSha256'], allSourceInputs=inputs, expectedMainSourceInputs=main_inputs,
                 expectedCases=expected, priorFullMain=json.loads(oldpath.read_bytes())['allPhysicalMainSha256'], changedOwnerKeys=sorted(owners))
     os.umask(0o077); out = W/SLOT; out.mkdir(mode=0o700); dp = out/'input.safe.json'
     with dp.open('x') as f:
@@ -237,7 +245,8 @@ def main():
         payloadSha256=hashlib.sha256(payload.read_bytes()).hexdigest(), inputSha256=hashlib.sha256(dp.read_bytes()).hexdigest(),
         publicQualificationSha256=hashlib.sha256((public/'qualification.json').read_bytes()).hexdigest(),
         publicCasesSha256=hashlib.sha256((public/'cases.json').read_bytes()).hexdigest(), originalArtifactJarsFetched=6,
-        wholeReplayed=False, formalAccepted=False, currentStaticPhysicalQualificationPending=True, vmActions=0)
+        wholeReplayed=False, formalAccepted=False, currentStaticPhysicalQualificationPending=True, vmActions=0,
+        readerAttempt=2, priorReaderFailurePreserved='BUG1532/pg6042-original3976-artifacts-v1')
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(receipt, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
     print(json.dumps(receipt)); print(json.dumps(dict(tests=3976, suites=593, mainClasses=1667, global100=value['global100'])))
