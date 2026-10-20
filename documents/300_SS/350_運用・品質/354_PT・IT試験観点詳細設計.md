@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC319 callbackの確認済rollback境界
+
+三consumerと実listener/二delegating wrapperについて、null・session mode preflightのRTE/不正・正常rollback/不確定rollback・directError・fatal通知例外、配送間reset、Sync四contextの分離、停止後callback拒否を独立入力/回数/状態で検査する。public互換entryの元例外identity/checked契約・既ACK/commit/rollback/DLQ/再送上限の非回帰も確認する。確認通知前の例外を通常retryへ混ぜず、通知は同context正常rollback後だけ、別thread/非同期で成功状態を書かない。単体proxyの成功を実Root/VM/current/cohort/nativeの実績へ合算しない。BUG1565/YKT1322/SS321342/SSC319。
+
 ## SSC318 UNKNOWN診断/tickの故障
 
 取得前getter/class初期化と実factoryの順序を当JVMで照合する。tick故障後の再観測は独立nanoTimeで1000ms以上を検証し、IRQ/park早期帰還も含める。fallback自体のRTE/Errorでも外側markerなしを自己所有有限childで確認し、fault portは取得前に構成する。実JVMのOOM/クラッシュ等を故意に起こす試験や実Root操作へ拡大しない。
