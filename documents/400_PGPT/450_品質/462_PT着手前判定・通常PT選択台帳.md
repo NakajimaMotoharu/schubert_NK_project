@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-019 — PT_DEFAULT：commit済terminal是正後の必要3971全体
+
+1224/5860/source0f572da66、旧3967sourceの確認再演ではなく、四receiverのhalt追加・旧oracle五補完・新TERM四とprotocol八物理差を同sourceで統合照合する。先に81/22真正0/六型null静的0、5858独立全851/1666・四receiver差/ABI不変、5866原XML/新四traceを確認済み。専用mini/pinned key・既fixture profileの自己所有temporary DB/in-process broker等だけ、実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort操作0。fresh枠>10・現一致job無し/headroom/new-only namespaceを発行前確認、一回発行後は元job/source/archive/所有を照合して観測する。未知拒否のprobe/再試行やPT代替ではなく通常PT、未回収だけで再発行しない。全体真正0・独立資格・実counterは未受入、現在の選択未網羅を100へ補完しない。
+
 ## PTPRE-018 — PT_DEFAULT：commit済terminal後の四つの有限入場停止red
 
 1223/BUG1501/PG-D444、test-only sourceでMain862/851source・1666byteを保持。四caseはメモリJMS proxy/固定Clock/許可methodだけ、DLQ staging/commitを正常合成し、first一回成功とpost callback0を分けて確認する。実Broker/DB/network/VM/Unit/原本/鍵/permit/failed-cohort不操作、production expected生成/拒否探査/再試行/代替確認ではない。API三redの依存でWeb一未実行なら成功へ算入せず未実施Webだけ別run。新namespace/clean source/fresh枠>10とwrapperの作用を確認して通常PTとして行う。

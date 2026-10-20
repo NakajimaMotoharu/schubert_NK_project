@@ -1,0 +1,1550 @@
+[
+  {
+    "findingId": "F03-PMD2-9d6e0b95db22e9a468de0aabcff81deff272da62fe96956478691c900f90a0a1",
+    "legacyFindingId": "F03-PMD-b0f0eb2cac7b2c8ec6b97ec55fcd00c0ce90c7f1db9f9d7e1a82a562831c35e8",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "82",
+    "endline": "82",
+    "priority": "3",
+    "begincolumn": "30",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1239,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire ADMITTED_BODY_RELEASE_ONCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "ADMITTED_BODY_RELEASE_ONCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2267dc12d151b4b81522d8e75201fcd7c6434be15ae1b31be9bcde12a034ac00",
+    "legacyFindingId": "F03-PMD-b0f0eb2cac7b2c8ec6b97ec55fcd00c0ce90c7f1db9f9d7e1a82a562831c35e8",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "82",
+    "endline": "82",
+    "priority": "3",
+    "begincolumn": "49",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1240,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire ADMITTED_BODY_RELEASE_ONCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "ADMITTED_BODY_RELEASE_ONCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-69ad9a11ace505cbccf31f002ce5ff1109610cb089c6fd6a9c1eae3975c80e3f",
+    "legacyFindingId": "F03-PMD-44b7d7e747865b3af506455c47647b5497edd21b75cb4fa03347df96d34d7f80",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "86",
+    "endline": "86",
+    "priority": "3",
+    "begincolumn": "34",
+    "endcolumn": "50",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1241,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire SECONDARY_FAILURE_IS_NEVER_SUCCESS site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "SECONDARY_FAILURE_IS_NEVER_SUCCESS",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-5c89f91c543fadc996c3bdd5329b6e0383c0e34f5685afbb9c2ac313d5714698",
+    "legacyFindingId": "F03-PMD-44b7d7e747865b3af506455c47647b5497edd21b75cb4fa03347df96d34d7f80",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "86",
+    "endline": "86",
+    "priority": "3",
+    "begincolumn": "53",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1242,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire SECONDARY_FAILURE_IS_NEVER_SUCCESS site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "SECONDARY_FAILURE_IS_NEVER_SUCCESS",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-d811166f07eae2a7da78633c402d8931421ffa62d5f8d9bc22b858c65aa04142",
+    "legacyFindingId": "F03-PMD-99fe499870433c5e4dc25110170cb976c1bffbac4c6609640fde170a911e199e",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "87",
+    "endline": "87",
+    "priority": "3",
+    "begincolumn": "36",
+    "endcolumn": "47",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1243,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-827865091de1c7e757ab36b28f50f9077d2c42d161c50d9ef03b7b54d9c8bc35",
+    "legacyFindingId": "F03-PMD-99fe499870433c5e4dc25110170cb976c1bffbac4c6609640fde170a911e199e",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "87",
+    "endline": "87",
+    "priority": "3",
+    "begincolumn": "36",
+    "endcolumn": "47",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1244,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-fd84e14334e0129cf3273cba1d43edc535d1fa01c3389a48a3eb73b25c3c9da4",
+    "legacyFindingId": "F03-PMD-99fe499870433c5e4dc25110170cb976c1bffbac4c6609640fde170a911e199e",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "87",
+    "endline": "87",
+    "priority": "3",
+    "begincolumn": "74",
+    "endcolumn": "85",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1245,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-85772edfc14722acc48ffe1750f942b774ae24b0b7de59ca26ca8885d814c873",
+    "legacyFindingId": "F03-PMD-99fe499870433c5e4dc25110170cb976c1bffbac4c6609640fde170a911e199e",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "87",
+    "endline": "87",
+    "priority": "3",
+    "begincolumn": "74",
+    "endcolumn": "85",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1246,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-c403ee55e78f0bef76a7dd2c9e93b4398784ac0a8740092da99df24275255755",
+    "legacyFindingId": "F03-PMD-0c1feb98a91bf9b04b44f4c7c033893ee7baada8095078f847dccfb61fedfca8",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "98",
+    "endline": "98",
+    "priority": "3",
+    "begincolumn": "30",
+    "endcolumn": "48",
+    "diagnosticTextSha256": "373e86a2b12bbdb76f3a17a4b1e2debe18b05452c2105d2ad329e494eb2dcce6",
+    "rawXmlOrdinal": 1247,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This acquire PATH_FREE_REASON_WITHOUT_RAW_CAUSE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "acquire",
+    "reviewedContract": "PATH_FREE_REASON_WITHOUT_RAW_CAUSE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-IOFACT001..018"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory001SuccessAndNullableBodyUseSameResourceOnce"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory002EveryNullPortFailsBeforeAcquire"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory003NullAcquisitionNeverEntersBodyOrRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory005PortConstructionErrorsPrecedeAcquisition"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-8500549635179ec3658d5e34df6b0b10e67fe2b772034e65db9245fc7a49678e",
+    "legacyFindingId": "F03-PMD-6b6df407386fa9215070c4a85ccc6b06b4eb69d560f4879602b1d560f14c9ecf",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "112",
+    "endline": "112",
+    "priority": "3",
+    "begincolumn": "30",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1248,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use ADMITTED_BODY_RELEASE_ONCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "ADMITTED_BODY_RELEASE_ONCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-08859e0d32fc33fc4937faaaea16f28e5c7e291d5ee0a7b4e72a228da02e7351",
+    "legacyFindingId": "F03-PMD-6b6df407386fa9215070c4a85ccc6b06b4eb69d560f4879602b1d560f14c9ecf",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "112",
+    "endline": "112",
+    "priority": "3",
+    "begincolumn": "49",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1249,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use ADMITTED_BODY_RELEASE_ONCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "ADMITTED_BODY_RELEASE_ONCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-7291ef43ec7bcdc8d2fb653894c7eb9742f5c1757c798758c4ec35a577d919fa",
+    "legacyFindingId": "F03-PMD-7760d7640110fc9a5413779d14f24f5675615f1ac5ff46efcbd94c95cd9b5645",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "115",
+    "endline": "115",
+    "priority": "3",
+    "begincolumn": "32",
+    "endcolumn": "48",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 1250,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use SECONDARY_FAILURE_IS_NEVER_SUCCESS site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "SECONDARY_FAILURE_IS_NEVER_SUCCESS",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-3009b1aab5a1bf044163cb42a5dc037249a26ad9b2b4dee0e4d4e3e17bea3c29",
+    "legacyFindingId": "F03-PMD-7760d7640110fc9a5413779d14f24f5675615f1ac5ff46efcbd94c95cd9b5645",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "115",
+    "endline": "115",
+    "priority": "3",
+    "begincolumn": "51",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 1251,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use SECONDARY_FAILURE_IS_NEVER_SUCCESS site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "SECONDARY_FAILURE_IS_NEVER_SUCCESS",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-13fa8c14ad1b50681ff272ee2744bb7dc30646c2404b938a5bfada2ef8eb65a6",
+    "legacyFindingId": "F03-PMD-12de7f77c8e85808c8730c3f0b2a626f269b9085ce29d1cbf111bb8895dc2b97",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "116",
+    "endline": "116",
+    "priority": "3",
+    "begincolumn": "34",
+    "endcolumn": "45",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1252,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-1e4ff8d8029adde860fe068f51ff414f6810005cf952e6f7ffd0c6e5a2e069f9",
+    "legacyFindingId": "F03-PMD-12de7f77c8e85808c8730c3f0b2a626f269b9085ce29d1cbf111bb8895dc2b97",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "116",
+    "endline": "116",
+    "priority": "3",
+    "begincolumn": "34",
+    "endcolumn": "45",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1253,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-b55fe36ed34b77a08e1fe8675b5df0476f199c2b77c661f187be943b4a00c832",
+    "legacyFindingId": "F03-PMD-12de7f77c8e85808c8730c3f0b2a626f269b9085ce29d1cbf111bb8895dc2b97",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "116",
+    "endline": "116",
+    "priority": "3",
+    "begincolumn": "72",
+    "endcolumn": "83",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1254,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-20fdc6e0906d33604bdf9601cbac46cc72185be374673cc4e7b3d3e75a46a1a8",
+    "legacyFindingId": "F03-PMD-12de7f77c8e85808c8730c3f0b2a626f269b9085ce29d1cbf111bb8895dc2b97",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "116",
+    "endline": "116",
+    "priority": "3",
+    "begincolumn": "72",
+    "endcolumn": "83",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 1255,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "KNOWN_IO_VS_UNKNOWN_CLOSE_PRECEDENCE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-a5aa7866552005a4a03e16ac1585976997fb7e7131225840656cc86e13b96a77",
+    "legacyFindingId": "F03-PMD-f6c7012ab100abcfeff2801f49db8bcfc23d4b7cd41c205b79de7bd4a6eb52f9",
+    "sourcePath": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "126",
+    "endline": "126",
+    "priority": "3",
+    "begincolumn": "30",
+    "endcolumn": "48",
+    "diagnosticTextSha256": "373e86a2b12bbdb76f3a17a4b1e2debe18b05452c2105d2ad329e494eb2dcce6",
+    "rawXmlOrdinal": 1256,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 explicitly specifies IO versus Runtime/Error compound precedence, single release and path-free normalization. This use PATH_FREE_REASON_WITHOUT_RAW_CAUSE site implements that finite failure matrix. A generic catch neither returns normally nor acknowledges recovery; unknown Runtime/NPE/Error identity propagates, known IO alone is normalized. Narrowing away Error/Runtime or replacing with TWR changes the approved priority. Full source and separate normal/null/IO/unknown/self-failure/nested/parallel fixture identities reviewed; current dynamic joins remain pending.",
+    "reviewedMethod": "use",
+    "reviewedContract": "PATH_FREE_REASON_WITHOUT_RAW_CAUSE",
+    "relatedDesign": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "designSha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "PT-OPS-RSCOPE001..008"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "concurrentScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "successfulOwnership"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures"
+      },
+      {
+        "class": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  }
+]
