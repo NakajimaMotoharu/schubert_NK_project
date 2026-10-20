@@ -56,12 +56,18 @@ final class ApiManagementServer implements AutoCloseable {
   static ApiManagementServer open(
       Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
       throws IOException {
+    var cleanupDiagnostic = new IllegalStateException("API management stop unconfirmed");
     var result = bind(information, healthy, port, factory);
     try {
       result.start();
       return result;
     } catch (RuntimeException | Error failure) {
-      result.close();
+      try {
+        result.close();
+      } catch (RuntimeException | Error unconfirmed) {
+        if (unconfirmed instanceof Error && !(failure instanceof Error)) throw unconfirmed;
+        if (unconfirmed != failure) failure.addSuppressed(cleanupDiagnostic);
+      }
       throw failure;
     }
   }

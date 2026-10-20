@@ -184,6 +184,81 @@ final class ApiManagementBindTest {
       OwnedRetentionProcess.assertHeld(Driver.class, List.of("START", "STOP"), kind);
   }
 
+  @Test
+  void bind316006FailedOpenRetainsPrimaryAndRedactsCleanup() throws Exception {
+    for (int primaryKind = 0; primaryKind < 2; primaryKind++) {
+      for (int cleanupKind = 0; cleanupKind < 4; cleanupKind++) {
+        Throwable primary =
+            primaryKind == 0
+                ? new IllegalStateException("fixture primary")
+                : new AssertionError("fixture primary");
+        Optional<Throwable> secondary =
+            switch (cleanupKind) {
+              case 0 -> Optional.empty();
+              case 1 -> Optional.of(new IllegalStateException("fixture private cleanup"));
+              case 2 -> Optional.of(new AssertionError("fixture private cleanup"));
+              default -> Optional.of(primary);
+            };
+        var captured = new AtomicReference<ApiManagementStopTest.StopFailureServer>();
+        try {
+          var actual =
+              assertThrows(
+                  Throwable.class,
+                  () ->
+                      ApiManagementServer.open(
+                          INFO,
+                          () -> true,
+                          0,
+                          (address, backlog) -> {
+                            var fixture =
+                                new ApiManagementStopTest.StopFailureServer(
+                                    address, backlog, Optional.empty(), false) {
+                                  @Override
+                                  public void setExecutor(Executor executor) {
+                                    super.setExecutor(executor);
+                                    super
+                                        .start(); // Known-started own fixture, so final disposal is
+                                                  // independently real.
+                                    if (primary instanceof RuntimeException runtime) throw runtime;
+                                    throw (Error) primary;
+                                  }
+
+                                  @Override
+                                  public void stop(int delay) {
+                                    if (secondary.isPresent()) {
+                                      var failure = secondary.orElseThrow();
+                                      if (failure instanceof RuntimeException runtime)
+                                        throw runtime;
+                                      throw (Error) failure;
+                                    }
+                                    super.stop(delay);
+                                  }
+                                };
+                            captured.set(fixture);
+                            return fixture;
+                          }));
+          if (secondary.orElse(null) instanceof Error && !(primary instanceof Error)) {
+            assertSame(secondary.orElseThrow(), actual);
+            assertEquals(0, primary.getSuppressed().length);
+          } else {
+            assertSame(primary, actual);
+            if (secondary.orElse(null) == primary) assertEquals(0, actual.getSuppressed().length);
+            else {
+              assertEquals(1, actual.getSuppressed().length);
+              assertEquals(IllegalStateException.class, actual.getSuppressed()[0].getClass());
+              assertEquals(
+                  "API management stop unconfirmed", actual.getSuppressed()[0].getMessage());
+              assertNull(actual.getSuppressed()[0].getCause());
+            }
+          }
+        } finally {
+          var fixture = captured.get();
+          if (fixture != null) fixture.dispose();
+        }
+      }
+    }
+  }
+
   private static class SetupFailureServer extends ApiManagementStopTest.StopFailureServer {
     private final int phase;
     private final Throwable marker;
