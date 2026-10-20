@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-20 12:37更新：[1221](../../evidence/01_PT/018_NK-OPS-001/1221_恒久隔離是正_全3967実行結果.md)でsource6b5/元PG5832の真正0・3967/590/1666/独立資格・八core四counter100・現482根拠接続を確認した。BUG1494の受信policy限定scopeはclose、次のcodec八指摘1498は[1220](../../evidence/01_PT/018_NK-OPS-001/1220_protocol表現是正_単体テスト仕様書.md)に沿って実PGへ進む。未review1112/raw1594・global/native/CHR/正式/QA051final/工数nullは別未完。下記の観測中表記は当時の履歴で最新456/460を優先する。
+
 2026-10-20現行入口：478 D/477により通常PG/PTを継続し、具体的拒否対象未特定の実操作は461/462でHOLDを維持する。Main/Test source6b5cea563の恒久protocol隔離失敗是正は[1216仕様](../../evidence/01_PT/018_NK-OPS-001/1216_恒久protocol隔離失敗_単体テスト仕様書.md)・[1218限定66結果](../../evidence/01_PT/018_NK-OPS-001/1218_恒久隔離是正_限定実行結果.md)、必要3967/590/1666全体は[1217](../../evidence/01_PT/018_NK-OPS-001/1217_恒久隔離是正_必要全体試験仕様書.md)に従って元job観測中で、まだ全体受入ではない。[1219](../../evidence/01_PT/018_NK-OPS-001/1219_現source851_静的根拠再認証.md)のpending482/未review1112/raw1594と[1220](../../evidence/01_PT/018_NK-OPS-001/1220_protocol表現是正_単体テスト仕様書.md)の次八指摘PG計画を分離する。最新の真正終端・source・枠・次commandは456先頭、依存は460を正とし、旧1964PT/53scope・17/190・工数率null/QA051finalは未更新。小群/commit/報告だけで停止せず、旧source成果やレビューを実行PT/coverageへ合算しない。
 
 2026-10-15 PG3184実Browser十二/独立全24→3146失敗二prefix込み全seal→3148親18→3152 ABI→3154正規四owned停止→3156別全postを全actual0で保存。[870実行結果](../../evidence/01_PT/018_NK-OPS-001/870_PG3184_実Browser十二case・全24複合seal・正規停止実行結果.md)。質問一/重複0、全十Unit-kernel/全client-advisory-flock0、native22物理はCRC/session資格前。正式1964/53・工数null・QA051final保留・四100未完を維持。
