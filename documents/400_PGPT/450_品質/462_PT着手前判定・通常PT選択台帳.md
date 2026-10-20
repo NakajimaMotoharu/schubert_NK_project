@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-015 — PT_DEFAULT：SS322の隔離失敗exit、八つの有限独立red
+
+1216/BUG1494/YKT1254、Main2e3bを保ち新Test sourceだけ追加。API Sync/Question/WebLog各checked/RuntimeとWeb reply二case、fake Message/Contextのmetadata read失敗＋正常rollbackからready/fatal/ACK/再入を確認する。Fixtureはメモリproxy・固定合成例外とClock、予期しないoperation0をassertする。実provider/DB/VM/サービス/権限/原本/鍵/permit/failed-cohort不操作、未知拒否の探査/再試行やPT代替ではない。原3955は終了/独立資格済みで再起動しない。redの依存skipは未合格、未実施Webだけ別runで補完し、PGの後に通常green/必要全体へ進む。
+
 ## PTPRE-014 — PT_DEFAULT：未確認rollback是正後の必要host全3955
 
 1212/PG5808/source2e3b。新16/四suite以外は従来のapproved host fixture profile、既四TestはPG-D441のcause保持・外側UNKNOWN・未ACK・正常checked枝補完でoracleを独立確定。旧元3939の確認再演ではなく、新Main一/既八差と統合品質を検査する。専用mini/pinned key/offline Maven/temporary DB・in-process broker等だけ、実VM・Unit/current・原本DBBackup/鍵/permit/failed-cohort不操作。新job発行前の現所有・job/headroom/未使用namespace/source/hashを確認、一回だけ実行。既拒否は未特定HOLDのまま、通常全体を拒否PT代替へ分類しない。
