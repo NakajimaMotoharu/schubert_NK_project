@@ -26,6 +26,8 @@ import java.util.function.Supplier;
  * Ready files are never deleted by this class.
  */
 final class ScenarioFileWriter implements ScenarioFilePublisher {
+  private static final int MAXIMUM_COLLISION_RETRY_INDEX = 3;
+
   private static final ZoneId JST = ZoneId.of("Asia/Tokyo");
   private final OwnedTransferDirectory root;
   private final StorageIdentity identity;
@@ -77,7 +79,8 @@ final class ScenarioFileWriter implements ScenarioFilePublisher {
       }
       // Retry begins only after the attempt's directory and reservation have both closed.
       if (result.isPresent()) return result.orElseThrow();
-      if (attempt >= 3) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
+      if (attempt >= MAXIMUM_COLLISION_RETRY_INDEX)
+        throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
   }
 

@@ -54,6 +54,9 @@ import java.util.function.IntFunction;
  * later.
  */
 public final class ScenarioRepository {
+  private static final int MAXIMUM_DETAIL_RECORDS = 10_000;
+  private static final int MAXIMUM_PAGED_TOTAL_RECORDS = 99_999_900;
+
   private static final java.lang.String LITERAL_REQUEST = "request";
 
   private static final String FROM =
@@ -257,7 +260,7 @@ public final class ScenarioRepository {
         try (ResultSet result = statement.executeQuery()) {
           if (!result.next()) throw new SQLException("missing page aggregate");
           long total = number(result, "total");
-          if (total > 99_999_900) throw new ScenarioQueryException(true);
+          if (total > MAXIMUM_PAGED_TOTAL_RECORDS) throw new ScenarioQueryException(true);
           int effective = integer(result, "effective");
           int pages = integer(result, "pages");
           List<PayloadRecord> records = new ArrayList<>();
@@ -360,7 +363,8 @@ public final class ScenarioRepository {
             List<ScenarioEntryRecord> records = new ArrayList<>();
             do {
               if (result.getObject("id") != null) {
-                if (records.size() == 10000) throw new ScenarioQueryException(true);
+                if (records.size() == MAXIMUM_DETAIL_RECORDS)
+                  throw new ScenarioQueryException(true);
                 Optional<AudioId> audio =
                     Optional.ofNullable(result.getObject("audio_file_id", Long.class))
                         .map(AudioId::new);

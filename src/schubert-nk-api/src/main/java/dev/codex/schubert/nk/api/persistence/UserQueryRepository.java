@@ -35,6 +35,8 @@ import java.util.Optional;
  * Current authentication and Inbox orchestration must precede registration.
  */
 public final class UserQueryRepository {
+  private static final int MAXIMUM_PAGED_TOTAL_RECORDS = 49_999_950;
+
   private static final String PROJECTION =
       """
       with projected as (
@@ -116,7 +118,7 @@ public final class UserQueryRepository {
         try (ResultSet result = statement.executeQuery()) {
           require(result.next());
           long total = number(result, "total");
-          if (total > 49_999_950) throw new UserQueryException(true);
+          if (total > MAXIMUM_PAGED_TOTAL_RECORDS) throw new UserQueryException(true);
           int pages = Math.toIntExact(number(result, "pages"));
           int effective = Math.toIntExact(number(result, "effective"));
           require(

@@ -46,6 +46,8 @@ import java.util.Optional;
  * ADMIN. Deleted notification text is SQL NULL.
  */
 public final class QuestionQueryRepository {
+  private static final int MAXIMUM_PAGED_TOTAL_RECORDS = 49_999_950;
+
   private static final java.lang.String LITERAL_WITH_PROJECTED_AS = "with projected as (";
 
   private static final java.lang.String LITERAL_QUESTION_BODY = "question_body";
@@ -277,7 +279,8 @@ public final class QuestionQueryRepository {
         try (var r = s.executeQuery()) {
           require(r.next());
           long total = number(r, "total");
-          if (total > 49_999_950) throw new QuestionQueryException(ResultCode.RESOURCE_LIMIT);
+          if (total > MAXIMUM_PAGED_TOTAL_RECORDS)
+            throw new QuestionQueryException(ResultCode.RESOURCE_LIMIT);
           int pages = Math.toIntExact(number(r, "pages"));
           int effective = Math.toIntExact(number(r, "effective"));
           require(

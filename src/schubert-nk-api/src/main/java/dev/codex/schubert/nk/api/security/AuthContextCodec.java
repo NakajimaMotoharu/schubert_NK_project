@@ -20,6 +20,8 @@ import org.jspecify.annotations.Nullable;
  * NK-AUT-001, AUT-001/DAT-009; UI226; SS314 §6/352 §11.2; PT-AUT-005-C01..04.
  */
 public final class AuthContextCodec implements AutoCloseable {
+  private static final int AUTH_CONTEXT_KEY_BYTES = 32;
+
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
   private final java.util.concurrent.locks.ReentrantLock stateLock =
@@ -185,7 +187,8 @@ public final class AuthContextCodec implements AutoCloseable {
 
   private static void validateKey(byte[] key) {
     Objects.requireNonNull(key, "key");
-    if (key.length != 32) throw new IllegalArgumentException("auth context key must be 256 bits");
+    if (key.length != AUTH_CONTEXT_KEY_BYTES)
+      throw new IllegalArgumentException("auth context key must be 256 bits");
   }
 
   private void ensureOpen() {

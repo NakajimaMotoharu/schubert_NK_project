@@ -23,6 +23,8 @@ import org.jspecify.annotations.Nullable;
  * never contain a body, credential, session, property value or transport ID.
  */
 public final class JmsMessageGuard {
+  private static final int MINIMUM_DELIVERY_COUNT = 1;
+
   private static final String PROPERTY_MESSAGE_ID = "NKMessageID";
   private static final String PROPERTY_LAYOUT_ID = "NKLayoutID";
   private static final String PROPERTY_PROTOCOL_VERSION = "NKProtocolVersion";
@@ -109,7 +111,7 @@ public final class JmsMessageGuard {
       throw rejection("transport delivery count is missing");
     }
     int count = message.getIntProperty(PROPERTY_DELIVERY_COUNT);
-    if (count < 1) {
+    if (count < MINIMUM_DELIVERY_COUNT) {
       throw rejection("transport delivery count is outside its range");
     }
     return count;

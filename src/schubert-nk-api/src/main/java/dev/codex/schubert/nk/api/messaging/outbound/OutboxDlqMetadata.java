@@ -16,6 +16,8 @@ public record OutboxDlqMetadata(
     int deliveryCount,
     String errorCode,
     Instant detectedAt) {
+  private static final int MINIMUM_DELIVERY_COUNT = 1;
+
   public static final String RETRY_EXHAUSTED = "QUESTION_RETRY_EXHAUSTED";
   private static final Instant MINIMUM = Instant.parse("0001-01-01T00:00:00Z");
   private static final Instant MAXIMUM = Instant.parse("9999-12-31T23:59:59.999999Z");
@@ -29,7 +31,7 @@ public record OutboxDlqMetadata(
         || originalTransportId.length() > 128
         || originalTransportId.chars().anyMatch(c -> c < 0x20 || c > 0x7e))
       throw new IllegalArgumentException("DLQ transport identity is outside its bounded contract");
-    if (deliveryCount < 1)
+    if (deliveryCount < MINIMUM_DELIVERY_COUNT)
       throw new IllegalArgumentException("DLQ delivery count must be positive");
     if (!errorCode.equals(RETRY_EXHAUSTED))
       throw new IllegalArgumentException("DLQ business error code is unsupported");

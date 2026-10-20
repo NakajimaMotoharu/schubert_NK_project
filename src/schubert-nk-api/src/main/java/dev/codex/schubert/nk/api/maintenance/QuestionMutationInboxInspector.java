@@ -45,6 +45,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class QuestionMutationInboxInspector {
+  private static final int EXPECTED_QUESTION_WORK_BYTES = 320;
+
   private static final java.lang.String LITERAL_0000 = "0000";
 
   private static final java.lang.String LITERAL_OWNER_USER_ID = "owner_user_id";
@@ -204,7 +206,7 @@ public final class QuestionMutationInboxInspector {
               || time(r, "sent_at").isBefore(completed)) return false;
           byte[] wire = requireValue(r.getBytes("body"));
           try {
-            if (wire.length != 320) return false;
+            if (wire.length != EXPECTED_QUESTION_WORK_BYTES) return false;
             var h = HeaderCodec.standard().peek(wire);
             // HeaderCodec already enforces layout-specific kind/interaction/context/length.
             // Select the one allowed layout before comparing its authenticated DB identities.

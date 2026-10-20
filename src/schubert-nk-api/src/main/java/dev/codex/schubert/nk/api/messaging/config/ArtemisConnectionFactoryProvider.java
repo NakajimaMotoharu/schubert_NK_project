@@ -16,6 +16,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
  */
 public enum ArtemisConnectionFactoryProvider {
   INSTANCE;
+  private static final int MAXIMUM_TCP_PORT = 65_535;
 
   private static final int MIB = 1024 * 1024;
   private static final Pattern LOOPBACK_CORE =
@@ -33,7 +34,7 @@ public enum ArtemisConnectionFactoryProvider {
     var match = LOOPBACK_CORE.matcher(endpoint);
     if (!match.matches()) throw new IllegalArgumentException("Artemis endpoint unavailable");
     int port = Integer.parseInt(Objects.requireNonNull(match.group(1), "matched port"));
-    if (port > 65_535) throw new IllegalArgumentException("Artemis endpoint unavailable");
+    if (port > MAXIMUM_TCP_PORT) throw new IllegalArgumentException("Artemis endpoint unavailable");
     TransportConfiguration connector =
         new TransportConfiguration(
             NettyConnectorFactory.class.getName(),

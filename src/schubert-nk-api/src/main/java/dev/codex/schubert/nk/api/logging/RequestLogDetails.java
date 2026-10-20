@@ -15,13 +15,15 @@ import java.util.Optional;
 
 /** Strict REQUEST details allowlist. Trace: NK-MSG-002, SS351 section 3.3, SSC-008, PT-IDEM-012. */
 final class RequestLogDetails {
+  private static final int MAXIMUM_REQUEST_DETAILS_UTF8_BYTES = 1024;
+
   private RequestLogDetails() {}
 
   static String normalize(Optional<String> input, Optional<UserRole> role) {
     Objects.requireNonNull(input, "input");
     Objects.requireNonNull(role, "role");
     String text = input.orElse("{}");
-    if (text.getBytes(StandardCharsets.UTF_8).length > 1024) {
+    if (text.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_REQUEST_DETAILS_UTF8_BYTES) {
       throw invalid();
     }
     JsonObject output = new JsonObject();

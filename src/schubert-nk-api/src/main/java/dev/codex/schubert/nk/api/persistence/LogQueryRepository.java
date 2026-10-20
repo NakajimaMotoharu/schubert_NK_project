@@ -37,6 +37,8 @@ import java.util.UUID;
  * raw query or secret projection.
  */
 public final class LogQueryRepository {
+  private static final int MAXIMUM_PAGED_TOTAL_RECORDS = 99_999_900;
+
   private static final String COLUMNS =
       "id,logged_at,category,level,action,message,request_id,message_id,correlation_id,http_method,request_uri,status_code,duration_ms,remote_address,details";
 
@@ -126,7 +128,7 @@ public final class LogQueryRepository {
         try (var rows = statement.executeQuery()) {
           require(rows.next());
           long total = number(rows, "total");
-          if (total > 99999900) throw new LogQueryException(true);
+          if (total > MAXIMUM_PAGED_TOTAL_RECORDS) throw new LogQueryException(true);
           int pages = Math.toIntExact(number(rows, "pages"));
           int effective = Math.toIntExact(number(rows, "effective"));
           require(

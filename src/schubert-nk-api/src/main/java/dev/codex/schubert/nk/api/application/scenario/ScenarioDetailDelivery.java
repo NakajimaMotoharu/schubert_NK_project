@@ -20,6 +20,8 @@ import java.util.Optional;
  * NK-SCN-001; RD FUN-004/005/FIL-001..009; UI234 §10/237; SS333 §4/5; PT-SCN-008-R01..R03.
  */
 public final class ScenarioDetailDelivery {
+  private static final int MAXIMUM_INLINE_RECORDS = 200;
+
   private static final LayoutId RESPONSE = new LayoutId("SCNRSP01");
   private final ScenarioFilePublisher publisher;
 
@@ -33,7 +35,7 @@ public final class ScenarioDetailDelivery {
     Objects.requireNonNull(snapshot, "snapshot");
     Objects.requireNonNull(generatedAt, "generatedAt");
     // 256 + 1728 + 200 * 4800 = 961984 < 1000000. Snapshot validation fixes all these widths.
-    if (snapshot.records().size() <= 200) {
+    if (snapshot.records().size() <= MAXIMUM_INLINE_RECORDS) {
       return new TypedPayloadValues(RESPONSE, snapshot.metadata(), List.copyOf(snapshot.records()));
     }
     LargeResultDescriptor file =

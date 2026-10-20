@@ -17,6 +17,10 @@ import java.util.function.BooleanSupplier;
 
 /** Fixed loopback management only. SS342 §5.2/SSC158/PG-D334/PT-OPS-API-READY001..008. */
 final class ApiManagementServer implements AutoCloseable {
+  private static final String INFORMATION_PATH = "/actuator/info";
+  private static final String METRICS_PATH = "/actuator/prometheus";
+  private static final int JSON_OPENING_DELIMITER_LENGTH = 1;
+
   @FunctionalInterface
   interface Factory {
     HttpServer create(InetSocketAddress address, int backlog) throws IOException;
@@ -94,7 +98,7 @@ final class ApiManagementServer implements AutoCloseable {
       String value = Objects.requireNonNull(information.get(key), "public version");
       if (!value.matches("[A-Za-z0-9][A-Za-z0-9._+\\-]{0,127}"))
         throw new IllegalArgumentException("invalid public version");
-      if (json.length() > 1) json.append(',');
+      if (json.length() > JSON_OPENING_DELIMITER_LENGTH) json.append(',');
       json.append('"').append(key).append("\":\"").append(value).append('"');
     }
     return json.append('}').toString();
@@ -130,10 +134,10 @@ final class ApiManagementServer implements AutoCloseable {
         boolean up = ready();
         status = up ? 200 : 503;
         body = up ? "{\"status\":\"UP\"}" : "{\"status\":\"DOWN\"}";
-      } else if ("/actuator/info".equals(path)) {
+      } else if (INFORMATION_PATH.equals(path)) {
         status = 200;
         body = information;
-      } else if ("/actuator/prometheus".equals(path)) {
+      } else if (METRICS_PATH.equals(path)) {
         status = 200;
         contentType = "text/plain; version=0.0.4; charset=utf-8";
         body =

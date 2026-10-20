@@ -50,6 +50,8 @@ import javax.sql.DataSource;
  * SS312§8/9,324,331,332§8,351,353§7.2; SSC153..156; AWORK001..013.
  */
 public final class QuestionWorkerService implements InternalEventProcessor {
+  private static final int TERMINAL_DELIVERY_COUNT = 4;
+
   private static final java.lang.String LITERAL_QWKREQ01 = "QWKREQ01";
 
   private static final java.lang.String LITERAL_COMPLETED = "COMPLETED";
@@ -134,7 +136,8 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         transaction(c -> fail(c, event.header(), work, wire, delivery, "PROCESS_FAILED", false));
         return;
       } catch (RuntimeException unavailable) {
-        if (delivery.deliveryCount() < 4) throw new TemporaryInfrastructureException();
+        if (delivery.deliveryCount() < TERMINAL_DELIVERY_COUNT)
+          throw new TemporaryInfrastructureException();
         Stage failed =
             transaction(c -> fail(c, event.header(), work, wire, delivery, "SYSTEM_UNAVAIL", true));
         if (failed instanceof PendingDlq pending) awaitSent(event.header(), wire, pending);

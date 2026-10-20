@@ -8,6 +8,8 @@ import org.jspecify.annotations.Nullable;
 
 /** Current/previous fingerprint keys with deny-closed version selection. */
 public final class FingerprintKeyRing implements AutoCloseable {
+  private static final int MINIMUM_FINGERPRINT_KEY_BYTES = 32;
+
   private final String currentVersion;
   private final byte[] currentKey;
   private final @Nullable String previousVersion;
@@ -96,7 +98,7 @@ public final class FingerprintKeyRing implements AutoCloseable {
 
   private static byte[] validateKey(byte[] key, String name) {
     Objects.requireNonNull(key, name);
-    if (key.length < 32) {
+    if (key.length < MINIMUM_FINGERPRINT_KEY_BYTES) {
       throw new IllegalArgumentException(name + " must contain at least 256 bits");
     }
     return key.clone();
