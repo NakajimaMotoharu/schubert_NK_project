@@ -20,7 +20,7 @@ QSHA = '0d11101550922d207fec3ba3f1d2fa9bbb3b35a5b5fabfc83cdb35a6ea950788'
 CSHA = 'af2845e1a6c82581975e6a3362db9392696092542467040236d73212736528f1'
 
 
-def current_refs(prior, index, context_only=False):
+def current_refs(prior, index, context_only=False, source=SOURCE):
     if not prior:
         if not context_only:
             raise ValueError('empty PT references only for an explicit static-context premise')
@@ -31,7 +31,7 @@ def current_refs(prior, index, context_only=False):
         if key not in index:
             raise ValueError('each prior semantic case must exist in genuine current whole')
         row = index[key]
-        if row['source'] != SOURCE or row['result'] != 'PASS_ORIGINAL_XML':
+        if row['source'] != source or row['result'] != 'PASS_ORIGINAL_XML':
             raise ValueError('current original XML only,never historical PASS')
         result.append({k: row[k] for k in ('testId', 'xmlSha256', 'class', 'caseNameSha256', 'source')})
     return result

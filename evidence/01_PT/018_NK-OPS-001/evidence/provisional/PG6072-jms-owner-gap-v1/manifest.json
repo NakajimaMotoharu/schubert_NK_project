@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "source": "c4d0242abe53fa7916451ac22caffcdfc13d82b6",
+  "sourceQualificationSha256": "14128e3496c796aca15bb9bd8bc46d87a2662a34e8f412125d1b667ff029c885",
+  "owners": [
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers",
+      "caller": "  public static dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);",
+      "factoryInstructionOffset": 29,
+      "constructorInstructionOffset": 53,
+      "constructorOutsideAllExceptionRanges": true,
+      "fieldAllocations": [
+        "java/util/concurrent/locks/ReentrantLock",
+        "java/util/concurrent/atomic/AtomicBoolean",
+        "java/util/concurrent/atomic/AtomicBoolean"
+      ],
+      "constructorCodeSha256": "0349a0b013c00faee3b59d0533d28fd578d72d53cae21f090c797ff4064c8925",
+      "callerCodeSha256": "1a0b55fb139a08ee9104dd119a2df8d1db3acb8568e4ece22e35ae6f6284dea9"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers",
+      "caller": "  public static dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumers start(java.util.function.Supplier<jakarta.jms.JMSContext>, dev.codex.schubert.nk.api.messaging.inbound.WebLogListener, java.util.function.Consumer<dev.codex.schubert.nk.api.messaging.inbound.CommittedFatalInboundException>, java.lang.Runnable);",
+      "factoryInstructionOffset": 29,
+      "constructorInstructionOffset": 53,
+      "constructorOutsideAllExceptionRanges": true,
+      "fieldAllocations": [
+        "java/util/concurrent/atomic/AtomicBoolean",
+        "java/util/concurrent/atomic/AtomicBoolean"
+      ],
+      "constructorCodeSha256": "8c66fcfaad37e84975b0bed28bae50be6ac9d14b2266236d0b9d575148a63cb0",
+      "callerCodeSha256": "3bd96f5063ddd630314638b4f95f9ddd316bd4ea76662ca33ec96d8ce09f0d78"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumers",
+      "caller": "  public static dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumers bind(dev.codex.schubert.nk.web.messaging.JmsContextFactory);",
+      "factoryInstructionOffset": 12,
+      "constructorInstructionOffset": 25,
+      "constructorOutsideAllExceptionRanges": true,
+      "fieldAllocations": [
+        "java/util/concurrent/atomic/AtomicBoolean",
+        "java/util/concurrent/atomic/AtomicBoolean",
+        "java/util/concurrent/locks/ReentrantLock"
+      ],
+      "constructorCodeSha256": "1e571be98e9930f930c03a476b3afd94985a84a8b392ddeeff73cc3839c5c2a9",
+      "callerCodeSha256": "383c8bbaaf4091a5b8fe3bbd5e68e415e8b891feee783024fb95ea2e2675d36d"
+    }
+  ],
+  "additionalGroupCapture": {
+    "className": "dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime",
+    "defaultCapacityBeforeFirstAcquire": true,
+    "firstAddAfterFirstAcquiredGroup": true,
+    "codeSha256": "9a1f08409ce79d213f236f9d392a568f2b247ef3fd42552c0a3f306d196be09a"
+  },
+  "staticCounterexamples": 4,
+  "dynamicOomExecuted": false,
+  "productionMethodsInvoked": 0,
+  "testsExecuted": 0,
+  "additionalBuildsIssued": 0,
+  "sourceCodeChanged": false,
+  "formalAccepted": false,
+  "ptAlternativeCompleted": 0,
+  "originalJarSha256": {
+    "api": "c6c4defe21f0311a283bd2a0607d7af910065403fff2c656074b1e06b205dc4a",
+    "web": "e69b018168c1b7c21d7552b26f1b6f82b9cad8432774016a16d2715fffccb98a"
+  }
+}
