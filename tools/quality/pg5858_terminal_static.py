@@ -6,7 +6,7 @@ import pg5776_jms_primary_static as engine
 from pg5804_rollback_static import class_key,signature
 
 OWNERS={
- 'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/'+n+'.java':owner for n,owner in(('SyncRequestConsumers','runtime.halted'),('QuestionWorkConsumers','result.halted'),('WebLogConsumers','result.halted'))}
+ 'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/'+n+'.java':owner for n,owner in(('SyncRequestConsumers','runtime.halted'),('QuestionWorkConsumers','result.halted'),('WebLogConsumers','runtime.halted'))}
 OWNERS['src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java']='halted'
 MODIFIED=set(OWNERS)
 
@@ -40,7 +40,7 @@ def pg_contract(snapshot,value,old):
 def runner_source():
     raw=inspect.getsource(engine.main)
     changes={
-      'pg5774-jms-primary-green-v1/manifest.safe.json':'pg5856-terminal-selected70-v1/manifest.safe.json',
+      'pg5774-jms-primary-green-v1/manifest.safe.json':'pg5856-terminal-selected70-v2/manifest.safe.json',
       "(v['tests'],v['suites'])==(14,7)":"(v['tests'],v['suites'])==(70,20)",
       'pg5750-exception-static-v1/manifest.safe.json':'pg5848-protocol-expression-static-v1/manifest.safe.json',
       'provisional/PG5750-exception-static-v1/manifest.json':'provisional/PG5848-protocol-expression-static-v1/manifest.json',

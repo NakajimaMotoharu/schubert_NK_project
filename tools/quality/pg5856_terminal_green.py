@@ -15,7 +15,7 @@ def runner_source():
 
 
 def main():
-    scope={**vars(previous.previous.engine),'SLOT':'pg5856-terminal-selected70-v1','CASES':CASES,'COUNTS':COUNTS,'TARGETS':TARGETS,'test_names':previous.previous.source_test_names}
+    scope={**vars(previous.previous.engine),'SLOT':'pg5856-terminal-selected70-v2','CASES':CASES,'COUNTS':COUNTS,'TARGETS':TARGETS,'test_names':previous.previous.source_test_names}
     exec(compile(runner_source(),'<finite70 terminal PGPT>','exec'),scope)
     return scope['main']()
 
