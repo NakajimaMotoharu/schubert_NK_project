@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-025 — PT_DEFAULT：API SQL/limit21条件後の1021/175
+
+1247/PG-D449/BUG1516。全API169suite/1010caseと既他五module guard六suite/十一case。自己所有新snapshot/offline Maven、六format先行→package/通常JUnit/JaCoCo/SpotBugs、Java25.0.4/Maven3.9.12と既temp PostgreSQL18・in-process broker・loopback ephemeral HTTP/file/有限child fixtureだけ。実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作、権限/アクセス経路変更0。wrapperは静的のみと呼ばず通常PT、rawTestExpectedやbusiness oracleを変えない。新source/clean/new-only/fresh枠を確認して一回、FES/flaky/rerun/not-run0・当16全四counterを実測。旧成功/未測定/欠落counterを100へ補完しない。拒否probe/再試行/代替確認0。
+
 ## PTPRE-024 — PT_DEFAULT：専有lock33/93後の一回全3973
 
 1242/PG-D448/BUG1514、sourceは実PG保存後に固定。独立Main-only型survey/plan工具fixtureは合成Java/tokenのみ、Productionメソッド不実行。compile-onlyは自己所有新snapshot・offline Maven package -DskipTests/SpotBugs、TestはcompileするがSurefire実行0、POMにexec/サービス暗黙起動がないことを事前確認。通常wholeは既承認aru/miniの固定host key・offline同fixture profile/new temp DB/file/in-process brokerだけ、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。33sourceを横断するため選択ほぼ全体＋全体の二重試験をせず、一回3973/592を変更群通常PT兼同source統合検証とする。fresh>10/clean source/同job無し/headroom/new-only認証後一回発行、真正終端/原XML/全8511666/実34counterを照合する。拒否probe/同操作の代替route/未同定PT免除0、旧成功輸入0。
