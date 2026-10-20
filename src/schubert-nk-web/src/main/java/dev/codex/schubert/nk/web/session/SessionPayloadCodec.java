@@ -19,7 +19,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class SessionPayloadCodec implements AutoCloseable {
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
   private final byte[] currentKey;
   private final @Nullable String previousVersion;
@@ -60,7 +61,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
   /** Nonnull arguments. Writes current key with a new nonce; all owned transient arrays erased. */
   public EncryptedSessionPayload encrypt(
       SessionPayloadIdentity identity, SessionAttributes attributes) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(attributes, "attributes");
@@ -98,6 +100,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
         Arrays.fill(encrypted, (byte) 0);
         Arrays.fill(envelope, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -106,7 +110,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
    */
   public SessionAttributes decrypt(
       SessionPayloadIdentity identity, EncryptedSessionPayload payload) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(payload, "payload");
@@ -141,6 +146,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
         Arrays.fill(aad, (byte) 0);
         Arrays.fill(plaintext, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -167,10 +174,13 @@ public final class SessionPayloadCodec implements AutoCloseable {
   /** Erases owned key copies after in-flight operations finish; repeated close is harmless. */
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Arrays.fill(currentKey, (byte) 0);
       if (previousKey != null) Arrays.fill(previousKey, (byte) 0);
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 }

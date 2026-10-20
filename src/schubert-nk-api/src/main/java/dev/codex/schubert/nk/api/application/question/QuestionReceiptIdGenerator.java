@@ -10,7 +10,8 @@ import java.util.function.IntUnaryOperator;
  */
 public final class QuestionReceiptIdGenerator {
   private static final String ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final IntUnaryOperator randomIndex;
 
   QuestionReceiptIdGenerator(IntUnaryOperator randomIndex) {
@@ -28,7 +29,8 @@ public final class QuestionReceiptIdGenerator {
    * Creates a candidate. Caller must enforce database uniqueness and reuse existing IDs on replay.
    */
   public QuestionReceiptId generate() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       StringBuilder value = new StringBuilder(26);
       for (int i = 0; i < 26; i++) {
         int index = randomIndex.applyAsInt(32);
@@ -38,6 +40,8 @@ public final class QuestionReceiptIdGenerator {
         value.append(ALPHABET.charAt(index));
       }
       return new QuestionReceiptId(value.toString());
+    } finally {
+      stateLock.unlock();
     }
   }
 }

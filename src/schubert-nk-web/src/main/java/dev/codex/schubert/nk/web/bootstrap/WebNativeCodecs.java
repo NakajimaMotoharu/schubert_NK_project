@@ -25,7 +25,8 @@ public final class WebNativeCodecs implements AutoCloseable {
     String version(ServiceCredentialId id);
   }
 
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final SessionPayloadCodec retainedSession;
   private final WebLogPayloadCodec retainedLog;
   private final RevocationPayloadCodec retainedRevoke;
@@ -94,25 +95,34 @@ public final class WebNativeCodecs implements AutoCloseable {
 
   /** Borrowed until this owner closes; callers must not close a child before the process ends. */
   public SessionPayloadCodec session() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireOpen();
       return retainedSession;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Borrowed until this owner closes; callers must not close a child before the process ends. */
   public WebLogPayloadCodec log() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireOpen();
       return retainedLog;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Third purpose, retained until the worker and every borrower has been joined. */
   public RevocationPayloadCodec revoke() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireOpen();
       return retainedRevoke;
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -122,7 +132,8 @@ public final class WebNativeCodecs implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) return;
       closed = true;
       try {
@@ -134,6 +145,8 @@ public final class WebNativeCodecs implements AutoCloseable {
           retainedSession.close();
         }
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 }

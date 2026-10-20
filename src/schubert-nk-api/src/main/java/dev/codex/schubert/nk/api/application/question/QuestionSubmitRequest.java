@@ -21,7 +21,8 @@ import java.util.UUID;
  * UI224/236; SS312/323 section9.6/324; PG189/SSC070; PT-QST-SUB001..008.
  */
 public final class QuestionSubmitRequest implements AutoCloseable {
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final CommonHeader retainedHeader;
   private final UUID retainedOperationToken;
   private final char[] question;
@@ -60,31 +61,41 @@ public final class QuestionSubmitRequest implements AutoCloseable {
 
   /** Immutable trace only, never proof of current authentication. */
   public CommonHeader header() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       return retainedHeader;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Separate Inbox operation key; excluded from canonical fields. */
   public UUID operationToken() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       return retainedOperationToken;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Caller owns and clears the returned body copy. */
   public char[] copyQuestion() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       return question.clone();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Caller authenticates the actor and separately closes each returned canonical scope. */
   public CanonicalRequest canonical(AuthenticatedActor actor) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(actor, "actor");
       return new CanonicalRequest(
@@ -93,6 +104,8 @@ public final class QuestionSubmitRequest implements AutoCloseable {
           "001",
           "QUESTION:NEW",
           List.of(CanonicalField.text("question", new String(question))));
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -105,9 +118,12 @@ public final class QuestionSubmitRequest implements AutoCloseable {
    */
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Arrays.fill(question, '\0');
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 

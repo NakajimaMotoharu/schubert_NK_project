@@ -28,7 +28,8 @@ public final class WebBrokerContexts implements AutoCloseable {
   private static final Pattern LOOPBACK_CORE =
       Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
 
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final Supplier<char[]> passwords;
   private final ConnectionFactory factory;
   private final AutoCloseable owner;
@@ -86,7 +87,8 @@ public final class WebBrokerContexts implements AutoCloseable {
   }
 
   private JMSContext open() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (stopping) throw new IllegalStateException(UNAVAILABLE);
       char[] copy;
       try {
@@ -105,12 +107,15 @@ public final class WebBrokerContexts implements AutoCloseable {
       } finally {
         Arrays.fill(copy, '\0');
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) return;
       stopping = true;
       try {
@@ -122,6 +127,8 @@ public final class WebBrokerContexts implements AutoCloseable {
         throw new IllegalStateException("Web broker factory close failed");
       }
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 

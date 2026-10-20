@@ -35,7 +35,8 @@ public final class InspectorEnvironmentFiles {
   private static final String CONFIG = "schubert-nk";
   private static final String MAINTENANCE = "maintenance";
   private static final String NAME = "inbox-inspector.env";
-  private final Object lifecycleLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lifecycleLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final Path etcPath;
   private final Path runPath;
   private final DirectoryCalls directories;
@@ -122,7 +123,8 @@ public final class InspectorEnvironmentFiles {
       throws StorageIoException {
     Objects.requireNonNull(run, "run");
     Objects.requireNonNull(operation, "environment operation");
-    synchronized (lifecycleLock) {
+    lifecycleLock.lock();
+    try {
       require(!Thread.currentThread().isInterrupted());
       require(security.effectiveUid() == 0);
       byte[][] reference = {new byte[0]};
@@ -220,6 +222,8 @@ public final class InspectorEnvironmentFiles {
       } finally {
         Arrays.fill(reference[0], (byte) 0);
       }
+    } finally {
+      lifecycleLock.unlock();
     }
   }
 

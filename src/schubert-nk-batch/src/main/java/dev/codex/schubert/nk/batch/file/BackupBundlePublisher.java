@@ -29,7 +29,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class BackupBundlePublisher {
   private static final long DEADLINE = 1_800_000_000_000L;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final BackupArtifactVerifier verifier;
   private final BackupManifestReader reader;
@@ -73,7 +74,8 @@ public final class BackupBundlePublisher {
   /** All failures preserve the pending or published bundle; no implicit retry or DB commit. */
   public BackupFileDigest publish(BackupManifest trusted) throws StorageIoException {
     Objects.requireNonNull(trusted, "trusted manifest");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = clock.getAsLong();
       guard(started);
       var before =
@@ -94,6 +96,8 @@ public final class BackupBundlePublisher {
       require(before.samePublished(after));
       guard(started);
       return after.manifest();
+    } finally {
+      lock.unlock();
     }
   }
 

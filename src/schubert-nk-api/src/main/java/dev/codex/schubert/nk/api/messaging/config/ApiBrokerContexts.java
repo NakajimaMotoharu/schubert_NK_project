@@ -24,7 +24,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class ApiBrokerContexts implements AutoCloseable {
   private static final String UNAVAILABLE = "API broker context unavailable";
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final Supplier<char[]> passwords;
   private final ConnectionFactory retainedSync;
   private final ConnectionFactory retainedWebLog;
@@ -130,7 +131,8 @@ public final class ApiBrokerContexts implements AutoCloseable {
   }
 
   private JMSContext open(ConnectionFactory factory) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) throw new IllegalStateException(UNAVAILABLE);
       char[] copy;
       try {
@@ -149,12 +151,15 @@ public final class ApiBrokerContexts implements AutoCloseable {
       } finally {
         Arrays.fill(copy, '\0');
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) return;
       closed = true;
       Throwable failure = null;
@@ -168,6 +173,8 @@ public final class ApiBrokerContexts implements AutoCloseable {
       }
       if (failure instanceof Error fatal) throw fatal;
       if (failure != null) throw new IllegalStateException("API broker factory close failed");
+    } finally {
+      stateLock.unlock();
     }
   }
 

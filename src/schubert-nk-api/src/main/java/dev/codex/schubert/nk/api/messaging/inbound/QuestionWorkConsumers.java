@@ -18,7 +18,8 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
  */
 public final class QuestionWorkConsumers implements AutoCloseable {
   private final JMSContext context;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
   private boolean closed;
@@ -97,14 +98,18 @@ public final class QuestionWorkConsumers implements AutoCloseable {
   }
 
   public boolean ready() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return !closed && !terminal.get();
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public void close() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (closed) return;
       closed = true;
       try {
@@ -112,6 +117,8 @@ public final class QuestionWorkConsumers implements AutoCloseable {
       } catch (RuntimeException failure) {
         throw new IllegalStateException("API Question consumer close failed", failure);
       }
+    } finally {
+      lock.unlock();
     }
   }
 }

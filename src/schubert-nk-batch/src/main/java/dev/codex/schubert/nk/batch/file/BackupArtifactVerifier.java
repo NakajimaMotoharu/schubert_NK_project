@@ -53,7 +53,8 @@ public final class BackupArtifactVerifier {
       List.of(MANIFEST, LITERAL_SCHUBERT_NK_DUMP, LITERAL_CONFIG_TAR, LITERAL_CREDENTIALS_TAR_AGE);
   private static final Set<String> REQUIRED = Set.copyOf(RETAINED_NAMES);
   private static final long DEADLINE = 1_800_000_000_000L;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final long uid;
@@ -161,7 +162,8 @@ public final class BackupArtifactVerifier {
   /** Fixed request-derived pending bundle, reusing the exact verifier inode/read policy. SSC110. */
   public PendingDigests observePending(BackupWorkerRequest request) throws StorageIoException {
     Objects.requireNonNull(request, "owned backup request");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = clock.getAsLong();
       byte[] buffer = new byte[65536];
       var pendingNames =
@@ -241,6 +243,8 @@ public final class BackupArtifactVerifier {
       } finally {
         Arrays.fill(buffer, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -339,7 +343,8 @@ public final class BackupArtifactVerifier {
     Objects.requireNonNull(expected);
     Objects.requireNonNull(admitted);
     Objects.requireNonNull(owner);
-    synchronized (lock) {
+    lock.lock();
+    try {
       owner.check();
       require(admitted.equals(verifyWithin(expected, started)));
       ResourceScope.acquire(
@@ -406,6 +411,8 @@ public final class BackupArtifactVerifier {
             owner.check();
             return Boolean.TRUE;
           });
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -440,7 +447,8 @@ public final class BackupArtifactVerifier {
       @Nullable Long suppliedStart,
       boolean compareClaims)
       throws StorageIoException {
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = suppliedStart == null ? clock.getAsLong() : suppliedStart;
       byte[] buffer = new byte[65536];
       byte[] canonical = BackupManifestCodec.encode(expected);
@@ -559,6 +567,8 @@ public final class BackupArtifactVerifier {
         Arrays.fill(buffer, (byte) 0);
         Arrays.fill(canonical, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 

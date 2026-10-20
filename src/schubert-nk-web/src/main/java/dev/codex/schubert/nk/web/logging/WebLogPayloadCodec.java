@@ -34,7 +34,8 @@ public final class WebLogPayloadCodec implements AutoCloseable {
   private static final int MINIMUM_ENVELOPE_BYTES = 37;
 
   // BUG-036/YKT-032: callers must not own the key/nonce/close synchronization monitor.
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
   private final byte[] currentKey;
   private final @Nullable String previousVersion;
@@ -74,7 +75,8 @@ public final class WebLogPayloadCodec implements AutoCloseable {
 
   /** Validates identity and wire content, then encrypts with the current key and a new nonce. */
   public EncryptedWebLogPayload encrypt(WebLogPayloadIdentity identity, byte[] plaintext) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(plaintext, "plaintext");
@@ -113,12 +115,15 @@ public final class WebLogPayloadCodec implements AutoCloseable {
         Arrays.fill(encrypted, (byte) 0);
         Arrays.fill(stored, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Authenticates envelope/row identity before releasing an exact, validated WLGEVT01 copy. */
   public byte[] decrypt(WebLogPayloadIdentity identity, EncryptedWebLogPayload payload) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(payload, "payload");
@@ -165,6 +170,8 @@ public final class WebLogPayloadCodec implements AutoCloseable {
         Arrays.fill(aad, (byte) 0);
         Arrays.fill(plaintext, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -231,12 +238,15 @@ public final class WebLogPayloadCodec implements AutoCloseable {
   /** Erases owned key copies; repeated close is safe and all later operations fail closed. */
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       Arrays.fill(currentKey, (byte) 0);
       if (previousKey != null) {
         Arrays.fill(previousKey, (byte) 0);
       }
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 }

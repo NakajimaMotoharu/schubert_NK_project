@@ -30,7 +30,8 @@ public final class BackupDatabaseCopy {
     void execute(Path heldPgpass) throws IOException;
   }
 
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final InspectorEnvironmentPublisher.Io io;
@@ -60,7 +61,8 @@ public final class BackupDatabaseCopy {
   /** Consumes and clears raw bytes even on failure. Created material is retired only on success. */
   public void dump(byte[] raw, UUID part, Dump dump) throws StorageIoException {
     Objects.requireNonNull(raw, "owned pgpass bytes");
-    synchronized (lock) {
+    lock.lock();
+    try {
       try {
         Objects.requireNonNull(part, "new material id");
         Objects.requireNonNull(dump, "fixed dump");
@@ -99,6 +101,8 @@ public final class BackupDatabaseCopy {
       } finally {
         Arrays.fill(raw, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 

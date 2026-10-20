@@ -25,7 +25,8 @@ public final class SpringWebSession implements Session {
   public static final String CSRF = "csrfToken";
   public static final String SAVED_REQUEST = "savedRequest";
   public static final String OPERATION_TOKENS = "operationTokens";
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final SpringEncryptedSessionRepository owner;
   private final EncryptedWebSessionRepository lifecycle;
   private final Clock clock;
@@ -44,16 +45,22 @@ public final class SpringWebSession implements Session {
 
   @Override
   public String getId() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return snapshot.sessionId().cookieValue();
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public String changeSessionId() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       snapshot = lifecycle.rotate(snapshot.sessionId()).orElseThrow(SessionStoreException::new);
       return snapshot.sessionId().cookieValue();
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -63,7 +70,8 @@ public final class SpringWebSession implements Session {
   @Override
   public <T> @Nullable T getAttribute(String name) {
     Objects.requireNonNull(name, "name");
-    synchronized (lock) {
+    lock.lock();
+    try {
       var attributes = snapshot.attributes();
       return (T)
           switch (name) {
@@ -74,12 +82,15 @@ public final class SpringWebSession implements Session {
             case OPERATION_TOKENS -> attributes.operationTokens();
             default -> null;
           };
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public Set<String> getAttributeNames() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       var names = new LinkedHashSet<String>();
       var attributes = snapshot.attributes();
       if (attributes.principal().isPresent()) names.add(PRINCIPAL);
@@ -87,13 +98,16 @@ public final class SpringWebSession implements Session {
       if (attributes.savedRequest().isPresent()) names.add(SAVED_REQUEST);
       names.add(OPERATION_TOKENS);
       return Set.copyOf(names);
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public void setAttribute(String name, @Nullable Object value) {
     Objects.requireNonNull(name, "name");
-    synchronized (lock) {
+    lock.lock();
+    try {
       var attributes = snapshot.attributes();
       switch (name) {
         case PRINCIPAL -> {
@@ -148,6 +162,8 @@ public final class SpringWebSession implements Session {
         }
         default -> throw invalid();
       }
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -158,54 +174,75 @@ public final class SpringWebSession implements Session {
 
   @Override
   public Instant getCreationTime() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return snapshot.row().identity().createdAt();
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public void setLastAccessedTime(Instant accessedAt) {
     Objects.requireNonNull(accessedAt, "accessedAt");
-    synchronized (lock) {
+    lock.lock();
+    try {
       snapshot =
           lifecycle.touch(snapshot.sessionId(), accessedAt).orElseThrow(SessionStoreException::new);
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public Instant getLastAccessedTime() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return snapshot.row().lastAccessedAt();
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public void setMaxInactiveInterval(Duration interval) {
     Objects.requireNonNull(interval, "interval");
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!Duration.ofSeconds(snapshot.row().maxInactiveSeconds()).equals(interval))
         throw invalid();
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public Duration getMaxInactiveInterval() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return Duration.ofSeconds(snapshot.row().maxInactiveSeconds());
+    } finally {
+      lock.unlock();
     }
   }
 
   @Override
   public boolean isExpired() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       return !snapshot.row().expiresAt().isAfter(Objects.requireNonNull(clock.instant(), "clock"));
+    } finally {
+      lock.unlock();
     }
   }
 
   void save(SpringEncryptedSessionRepository repository) {
     if (owner != repository) throw invalid();
-    synchronized (lock) {
+    lock.lock();
+    try {
       snapshot = lifecycle.find(snapshot.sessionId()).orElseThrow(SessionStoreException::new);
+    } finally {
+      lock.unlock();
     }
   }
 

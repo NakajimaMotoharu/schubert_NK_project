@@ -162,7 +162,8 @@ public final class ServiceStartupAdmission {
   }
 
   private static final class ReadyOnce implements Ready {
-    private final Object stateLock = new Object();
+    private final java.util.concurrent.locks.ReentrantLock stateLock =
+        new java.util.concurrent.locks.ReentrantLock();
     private final Ready delegate;
     private final Information retainedInformation;
     private boolean active = true;
@@ -176,7 +177,8 @@ public final class ServiceStartupAdmission {
     }
 
     public void release() throws IOException {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         if (!active || attempted) {
           poisoned = true;
           throw new IOException("startup readiness unavailable");
@@ -189,26 +191,37 @@ public final class ServiceStartupAdmission {
           poisoned = true;
           throw failure;
         }
+      } finally {
+        stateLock.unlock();
       }
     }
 
     public Map<String, String> information() throws IOException {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         if (!active || attempted) throw new IOException("release information unavailable");
         return Map.copyOf(retainedInformation.read());
+      } finally {
+        stateLock.unlock();
       }
     }
 
     private void complete() throws IOException {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         active = false;
         if (!released || poisoned) throw new IOException("startup readiness unavailable");
+      } finally {
+        stateLock.unlock();
       }
     }
 
     private void finish() {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         active = false;
+      } finally {
+        stateLock.unlock();
       }
     }
   }

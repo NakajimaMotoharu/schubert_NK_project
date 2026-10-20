@@ -24,7 +24,8 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   private volatile boolean stopping;
   private boolean startAttempted;
   private volatile boolean started;
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
 
   private ArtemisReplyConsumers(JMSContext context) {
     this.context = context;
@@ -80,7 +81,8 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
     Objects.requireNonNull(reply, "reply");
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "onFatal");
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (stopping || startAttempted)
         throw new IllegalStateException("Web reply start unavailable");
       startAttempted = true;
@@ -122,6 +124,8 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
           });
       opened.start();
       started = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -135,7 +139,8 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) return;
       stopping = true;
       try {
@@ -145,6 +150,8 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
         throw new IllegalStateException("Web reply consumer close failed", failure);
       }
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 }

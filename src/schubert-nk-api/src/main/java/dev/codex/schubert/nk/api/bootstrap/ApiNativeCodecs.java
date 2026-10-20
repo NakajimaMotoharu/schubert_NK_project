@@ -22,7 +22,8 @@ public final class ApiNativeCodecs implements AutoCloseable {
     String version(ServiceCredentialId id);
   }
 
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final AuthContextCodec retainedContexts;
   private final ResponseSnapshotCodec retainedSnapshots;
   private final FingerprintKeyRing retainedFingerprints;
@@ -95,23 +96,32 @@ public final class ApiNativeCodecs implements AutoCloseable {
   }
 
   public AuthContextCodec contexts() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       requireOpen();
       return retainedContexts;
+    } finally {
+      lock.unlock();
     }
   }
 
   public ResponseSnapshotCodec snapshots() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       requireOpen();
       return retainedSnapshots;
+    } finally {
+      lock.unlock();
     }
   }
 
   public FingerprintKeyRing fingerprints() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       requireOpen();
       return retainedFingerprints;
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -120,12 +130,15 @@ public final class ApiNativeCodecs implements AutoCloseable {
   }
 
   public void close() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (closed) return;
       closed = true;
       retainedFingerprints.close();
       retainedSnapshots.close();
       retainedContexts.close();
+    } finally {
+      lock.unlock();
     }
   }
 }

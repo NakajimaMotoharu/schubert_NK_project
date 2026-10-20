@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from pg5540_snapshot_scratch_selected import ROOT, TC
 
-FIELD = ('path', 'owner', 'name', 'typeStart', 'typeEnd', 'initStart', 'initEnd', 'blockCount', 'otherReads', 'eligible')
+FIELD = ('path', 'owner', 'name', 'typeStart', 'typeEnd', 'initStart', 'initEnd', 'blockCount', 'otherReads', 'eligible', 'serializableOwner', 'superclass')
 BLOCK = ('path', 'fieldOwner', 'name', 'start', 'end', 'bodyStart', 'bodyEnd', 'expressionStart', 'expressionEnd', 'blockOwner', 'method', 'parentKind')
 
 
@@ -27,6 +27,9 @@ def facts(text):
             if row['eligible'] not in ('true', 'false'):
                 raise ValueError('explicit eligible predicate')
             row['eligible'] = row['eligible'] == 'true'; fields.append(row)
+            if row['serializableOwner'] not in ('true', 'false'):
+                raise ValueError('resolved serialization premise')
+            row['serializableOwner'] = row['serializableOwner'] == 'true'
         else:
             blocks.append(row)
     index = {(r['path'], r['owner'], r['name']): r for r in fields}
@@ -39,7 +42,7 @@ def facts(text):
             raise ValueError('one eligible field and unique block source span')
         seen.add((row['path'], row['start']))
     for ident, row in index.items():
-        if row['eligible'] and (row['otherReads'] != 0 or row['blockCount'] != sum((b['path'], b['fieldOwner'], b['name']) == ident for b in blocks)):
+        if row['eligible'] and (row['otherReads'] != 0 or row['serializableOwner'] or row['superclass'] != 'java.lang.Object' or row['blockCount'] != sum((b['path'], b['fieldOwner'], b['name']) == ident for b in blocks)):
             raise ValueError('every eligible field reference is exactly a monitor block')
     return {'fields': fields, 'blocks': blocks}
 
@@ -64,6 +67,16 @@ final class Example {
   void foreign(Example other) { synchronized(other.qualified) {} }
   void imported() { synchronized(supplied) {} synchronized(mutable) {} }
 }
+final class Serialized implements java.io.Serializable {
+  private static final long serialVersionUID = 1L;
+  private final Object serialized = new Object();
+  void call() { synchronized(serialized) {} }
+}
+class Parent {}
+final class Inherited extends Parent {
+  private final Object inherited = new Object();
+  void call() { synchronized(inherited) {} }
+}
 '''
         with tempfile.TemporaryDirectory(prefix='pgpt-monitor-symbols-') as temp:
             root = Path(temp); classes = root/'classes'; classes.mkdir(); sources = root/'input'; sources.mkdir()
@@ -75,7 +88,7 @@ final class Example {
             self.assertEqual({'lock'}, {r['name'] for r in value['fields'] if r['eligible']})
             self.assertEqual(4, len(value['blocks']))
             self.assertEqual(1, sum(r['parentKind'] == 'IF' for r in value['blocks']))
-            self.assertEqual({'alias', 'waiting', 'qualified'}, {r['name'] for r in value['fields'] if not r['eligible']})
+            self.assertEqual({'alias', 'waiting', 'qualified', 'serialized', 'inherited'}, {r['name'] for r in value['fields'] if not r['eligible']})
             self.assertNotIn('supplied', {r['name'] for r in value['fields']})
             self.assertNotIn('mutable', {r['name'] for r in value['fields']})
             self.assertTrue(any(r['blockOwner'].endswith('$Nested') for r in value['blocks']))

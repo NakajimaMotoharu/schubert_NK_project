@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-024 — PT_DEFAULT：専有lock33/93後の一回全3973
+
+1242/PG-D448/BUG1514、sourceは実PG保存後に固定。独立Main-only型survey/plan工具fixtureは合成Java/tokenのみ、Productionメソッド不実行。compile-onlyは自己所有新snapshot・offline Maven package -DskipTests/SpotBugs、TestはcompileするがSurefire実行0、POMにexec/サービス暗黙起動がないことを事前確認。通常wholeは既承認aru/miniの固定host key・offline同fixture profile/new temp DB/file/in-process brokerだけ、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。33sourceを横断するため選択ほぼ全体＋全体の二重試験をせず、一回3973/592を変更群通常PT兼同source統合検証とする。fresh>10/clean source/同job無し/headroom/new-only認証後一回発行、真正終端/原XML/全8511666/実34counterを照合する。拒否probe/同操作の代替route/未同定PT免除0、旧成功輸入0。
+
 ## PTPRE-023 — PT_DEFAULT：storage/API二PG群後の必要同source3973
 
 1238/source682a4b99e。1235 storage六＋1237 API三の新Main九/十六物理差を一回の同source全体へ統合する。Test/oracle/gate/resources/POMは旧3973から不変、選択199/35と全Main静的の根拠を前提とし旧fullを新成功へ移植しない。既承認専用aru/miniの同offline fixture profile・新temp DB/自己所有file/in-process brokerだけ、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。fresh枠>10/clean operator/pinned host現job無し/headroom/new-only認証後一回、元job/source固定・途中は未受入、真正終端/原XML/allclass/実counterを独立検証する。拒否probe/代替再試行0。

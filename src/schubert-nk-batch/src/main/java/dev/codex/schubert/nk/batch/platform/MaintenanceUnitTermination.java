@@ -24,7 +24,8 @@ public final class MaintenanceUnitTermination {
     byte[] processes() throws IOException;
   }
 
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final FixedUnitCgroupNamespace.Context context;
   private final MaintenanceUnit unit;
   private final Observations observations;
@@ -120,7 +121,8 @@ public final class MaintenanceUnitTermination {
   }
 
   public Optional<Observation> quiescentObservation() throws IOException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       try {
         check();
         var before = read();
@@ -153,6 +155,8 @@ public final class MaintenanceUnitTermination {
       } catch (IOException failure) {
         throw unavailable();
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

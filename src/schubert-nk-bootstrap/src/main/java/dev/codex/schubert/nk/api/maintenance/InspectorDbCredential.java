@@ -14,7 +14,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorDbCredential implements AutoCloseable {
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final char[] password;
   private boolean closed;
 
@@ -60,19 +61,25 @@ public final class InspectorDbCredential implements AutoCloseable {
 
   /** Caller owns this copy and must erase it; no immutable password String is retained here. */
   public char[] copyPassword() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) throw new IllegalStateException("inspector database credential is closed");
       return password.clone();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (!closed) {
         Arrays.fill(password, '\0');
         closed = true;
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

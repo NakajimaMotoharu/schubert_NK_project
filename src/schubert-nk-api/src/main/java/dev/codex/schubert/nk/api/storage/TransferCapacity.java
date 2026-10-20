@@ -12,7 +12,8 @@ final class TransferCapacity {
   private static final long WARNING_FILES = 5_000;
   private static final long CRITICAL_FILES = 9_000;
   private static final long MAXIMUM_FILE_BYTES = 48_000_000;
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private long retainedBytes;
   private long retainedFiles;
   private long reservedBytes;
@@ -38,7 +39,8 @@ final class TransferCapacity {
     if (byteLength < 1 || byteLength > MAXIMUM_FILE_BYTES) {
       throw new IllegalArgumentException("invalid transfer reservation size");
     }
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (retainedBytes + reservedBytes >= CRITICAL_BYTES
           || retainedFiles + reservedFiles >= CRITICAL_FILES) {
         throw new CapacityExceededException();
@@ -48,11 +50,14 @@ final class TransferCapacity {
       reservedBytes += byteLength;
       reservedFiles++;
       return reservation;
+    } finally {
+      stateLock.unlock();
     }
   }
 
   Snapshot snapshot() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       long bytes = retainedBytes + reservedBytes;
       long files = retainedFiles + reservedFiles;
       Level level;
@@ -64,6 +69,8 @@ final class TransferCapacity {
         level = Level.NORMAL;
       }
       return new Snapshot(bytes, files, level);
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -80,24 +87,30 @@ final class TransferCapacity {
     }
 
     void retain() {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         if (!active) throw new IllegalStateException("transfer reservation is no longer active");
         retainedBytes += bytes;
         retainedFiles++;
         reservedBytes -= bytes;
         reservedFiles--;
         active = false;
+      } finally {
+        stateLock.unlock();
       }
     }
 
     @Override
     public void close() {
-      synchronized (stateLock) {
+      stateLock.lock();
+      try {
         if (active) {
           reservedBytes -= bytes;
           reservedFiles--;
           active = false;
         }
+      } finally {
+        stateLock.unlock();
       }
     }
   }

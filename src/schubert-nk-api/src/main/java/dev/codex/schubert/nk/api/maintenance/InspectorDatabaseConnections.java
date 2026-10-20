@@ -25,7 +25,8 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
       Pattern.compile(
           "jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/([a-z_][a-z0-9_]{0,62})");
   private static final String ROLE = "schubert_inbox_inspector";
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String url;
   private final String database;
   private final char[] password;
@@ -61,7 +62,8 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
    */
   @Override
   public Connection open() throws SQLException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) throw unavailable();
       var properties = new Properties();
       properties.setProperty("user", ROLE);
@@ -84,6 +86,8 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
       } finally {
         properties.clear();
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -111,11 +115,14 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (!closed) {
         Arrays.fill(password, '\0');
         closed = true;
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

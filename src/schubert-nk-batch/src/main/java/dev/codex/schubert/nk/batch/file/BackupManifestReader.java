@@ -47,7 +47,8 @@ import org.jspecify.annotations.Nullable;
 public final class BackupManifestReader {
   private static final String NAME = "MANIFEST.json";
   private static final long DEADLINE = 1_800_000_000_000L;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final long uid;
@@ -132,7 +133,8 @@ public final class BackupManifestReader {
    */
   public BackupManifest findCleanupClaims(CleanupWorkerRequest request) throws StorageIoException {
     Objects.requireNonNull(request, "fixed cleanup request");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = clock.getAsLong();
       try {
         guard(started);
@@ -163,12 +165,15 @@ public final class BackupManifestReader {
           | NoSuchAlgorithmException failure) {
         throw unavailable();
       }
+    } finally {
+      lock.unlock();
     }
   }
 
   /** SSC133/ISSRET001..008: actual bounded names under the borrowed backup root. */
   List<String> retentionNames(long started) throws StorageIoException {
-    synchronized (lock) {
+    lock.lock();
+    try {
       require(security.effectiveUid() == 0);
       Metadata before = directory(root, started);
       List<String> result = names(started);
@@ -176,6 +181,8 @@ public final class BackupManifestReader {
       require(security.effectiveUid() == 0);
       guard(started);
       return result;
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -272,7 +279,8 @@ public final class BackupManifestReader {
         name.length() == 52
             && name.matches(
                 "[0-9]{8}-[0-9]{6}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"));
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = suppliedStart == null ? clock.getAsLong() : suppliedStart;
       byte[] bytes = new byte[4097];
       try {
@@ -331,6 +339,8 @@ public final class BackupManifestReader {
       } finally {
         Arrays.fill(bytes, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 

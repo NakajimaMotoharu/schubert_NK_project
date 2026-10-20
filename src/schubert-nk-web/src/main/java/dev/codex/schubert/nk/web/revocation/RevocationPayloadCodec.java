@@ -20,7 +20,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class RevocationPayloadCodec implements AutoCloseable {
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
   private final byte[] currentKey;
   private final @Nullable String previousVersion;
@@ -58,7 +59,8 @@ public final class RevocationPayloadCodec implements AutoCloseable {
 
   public EncryptedRevocationPayload encrypt(
       RevocationPayloadIdentity identity, AuthenticationContext context) {
-    synchronized (lock) {
+    lock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "revocation identity");
       Objects.requireNonNull(context, "revocation context");
@@ -96,12 +98,15 @@ public final class RevocationPayloadCodec implements AutoCloseable {
         Arrays.fill(encrypted, (byte) 0);
         Arrays.fill(envelope, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 
   public AuthenticationContext decrypt(
       RevocationPayloadIdentity identity, EncryptedRevocationPayload payload) {
-    synchronized (lock) {
+    lock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "revocation identity");
       Objects.requireNonNull(payload, "revocation payload");
@@ -135,6 +140,8 @@ public final class RevocationPayloadCodec implements AutoCloseable {
         Arrays.fill(aad, (byte) 0);
         Arrays.fill(plaintext, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -161,10 +168,13 @@ public final class RevocationPayloadCodec implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       Arrays.fill(currentKey, (byte) 0);
       if (previousKey != null) Arrays.fill(previousKey, (byte) 0);
       closed = true;
+    } finally {
+      lock.unlock();
     }
   }
 }

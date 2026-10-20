@@ -97,7 +97,8 @@ public final class EncryptedSessionSecurityContextRepository implements Security
 
   /** Request-scoped cache, private monitor, stable initial generated flag. Never shared by bean. */
   private final class Deferred implements DeferredSecurityContext {
-    private final Object lock = new Object();
+    private final java.util.concurrent.locks.ReentrantLock lock =
+        new java.util.concurrent.locks.ReentrantLock();
     private final HttpServletRequest request;
     private Optional<SecurityContext> context = Optional.empty();
     private boolean generated;
@@ -108,7 +109,8 @@ public final class EncryptedSessionSecurityContextRepository implements Security
 
     @Override
     public SecurityContext get() {
-      synchronized (lock) {
+      lock.lock();
+      try {
         if (context.isEmpty()) {
           var principal = stored(request);
           generated = principal.isEmpty();
@@ -118,14 +120,19 @@ public final class EncryptedSessionSecurityContextRepository implements Security
           context = Optional.of(value);
         }
         return context.orElseThrow();
+      } finally {
+        lock.unlock();
       }
     }
 
     @Override
     public boolean isGenerated() {
-      synchronized (lock) {
+      lock.lock();
+      try {
         get();
         return generated;
+      } finally {
+        lock.unlock();
       }
     }
   }

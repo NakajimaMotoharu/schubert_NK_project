@@ -16,7 +16,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ServiceCredentialSet implements AutoCloseable {
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final ServiceConfigFiles.Service service;
   private final Map<ServiceCredentialId, InspectorDbCredential> passwords;
   private final Map<ServiceCredentialId, InspectorAesCredential> keys;
@@ -57,24 +58,33 @@ public final class ServiceCredentialSet implements AutoCloseable {
 
   /** Returned copy belongs to the caller and must be cleared after driver setup. */
   public char[] copyPassword(ServiceCredentialId id) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       require(id, ServiceCredentialId.Kind.PASSWORD);
       return Objects.requireNonNull(passwords.get(id), "loaded password").copyPassword();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Returned copy belongs to the caller and must be cleared after codec setup. */
   public byte[] copyKey(ServiceCredentialId id) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       require(id, ServiceCredentialId.Kind.KEY);
       return Objects.requireNonNull(keys.get(id), "loaded key").copyKey();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   public String version(ServiceCredentialId id) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       require(id, ServiceCredentialId.Kind.KEY);
       return Objects.requireNonNull(keys.get(id), "loaded key").version();
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -87,11 +97,14 @@ public final class ServiceCredentialSet implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (!closed) {
         clear(passwords, keys);
         closed = true;
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

@@ -33,7 +33,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class InspectorEnvironmentPublisher {
   private static final String NAME = "inbox-inspector.env";
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final Io io;
@@ -73,7 +74,8 @@ public final class InspectorEnvironmentPublisher {
    */
   public void prepare(BatchRun run) throws StorageIoException {
     Objects.requireNonNull(run, "run");
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       begin();
       byte[] content = InspectorRunEnvironment.encode(run);
       try {
@@ -123,12 +125,15 @@ public final class InspectorEnvironmentPublisher {
       } finally {
         Arrays.fill(content, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Native S2 never reuses an old env/part, even if its canonical run happens to match. */
   public void requireFresh() throws StorageIoException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       begin();
       directory();
       root.atDirectory(
@@ -145,21 +150,27 @@ public final class InspectorEnvironmentPublisher {
             return true;
           });
       directory();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   public void prepareNew(BatchRun run) throws StorageIoException {
     Objects.requireNonNull(run, "run");
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       requireFresh();
       prepare(run);
+    } finally {
+      stateLock.unlock();
     }
   }
 
   /** Caller has confirmed the child is terminal. A different run is never retired implicitly. */
   public void retire(BatchRun run) throws StorageIoException {
     Objects.requireNonNull(run, "run");
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       begin();
       try {
         Snapshot directory = directory();
@@ -176,6 +187,8 @@ public final class InspectorEnvironmentPublisher {
       } catch (IOException failure) {
         throw unavailable();
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

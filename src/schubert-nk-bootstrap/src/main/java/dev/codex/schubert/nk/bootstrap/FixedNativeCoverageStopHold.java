@@ -24,7 +24,8 @@ public final class FixedNativeCoverageStopHold implements AutoCloseable {
     @Nullable Removal remove(Thread hook);
   }
 
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final Calls calls;
   private final CountDownLatch finished = new CountDownLatch(1);
   private final Thread owner = Thread.currentThread();
@@ -68,19 +69,25 @@ public final class FixedNativeCoverageStopHold implements AutoCloseable {
 
   /** Main's exclusive capture owner, not the waiting VM hook, controls this outer release. */
   public void verifyOwner() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       // closed is checked first: close consumes installed, so an installed-then-closed state
       // must not be represented by an unreachable later condition. Same refusal semantics.
       if (closed || !installed || Thread.currentThread() != owner)
         throw new IllegalStateException("fixed PT stop hold unavailable");
+    } finally {
+      lock.unlock();
     }
   }
 
   void install() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (installed || closed) throw new IllegalStateException("fixed PT stop hold unavailable");
       installed = true;
       calls.add(hook); // Consume install attempt before possible unknown native refusal.
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -100,7 +107,8 @@ public final class FixedNativeCoverageStopHold implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (closed) return;
       closed = true;
       try {
@@ -113,6 +121,8 @@ public final class FixedNativeCoverageStopHold implements AutoCloseable {
       } finally {
         finished.countDown();
       }
+    } finally {
+      lock.unlock();
     }
   }
 }

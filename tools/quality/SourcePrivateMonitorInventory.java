@@ -19,13 +19,16 @@ final class SourcePrivateMonitorInventory {
     final long typeEnd;
     final long initStart;
     final long initEnd;
+    final boolean serializableOwner;
+    final String superclass;
     final List<Block> blocks = new ArrayList<>();
     int otherReads;
     Field(String path, String owner, String name, long typeStart, long typeEnd,
-        long initStart, long initEnd) {
+        long initStart, long initEnd, boolean serializableOwner, String superclass) {
       this.path = path; this.owner = owner; this.name = name;
       this.typeStart = typeStart; this.typeEnd = typeEnd;
       this.initStart = initStart; this.initEnd = initEnd;
+      this.serializableOwner = serializableOwner; this.superclass = superclass;
     }
   }
 
@@ -58,7 +61,8 @@ final class SourcePrivateMonitorInventory {
           null, manager.getJavaFileObjectsFromPaths(files));
       var units = new ArrayList<CompilationUnitTree>(); task.parse().forEach(units::add); task.analyze();
       if (diagnostics.getDiagnostics().stream().anyMatch(d -> d.getKind() == Diagnostic.Kind.ERROR)) throw new IllegalArgumentException("every source symbol must resolve");
-      Trees trees = Trees.instance(task); var elements = task.getElements();
+      Trees trees = Trees.instance(task); var elements = task.getElements(); var types = task.getTypes();
+      var serializable = elements.getTypeElement("java.io.Serializable").asType();
       var positions = trees.getSourcePositions();
       Map<Element, Field> fields = new LinkedHashMap<>();
       for (var unit : units) {
@@ -76,11 +80,12 @@ final class SourcePrivateMonitorInventory {
               Element constructor = trees.getElement(TreePath.getPath(unit, init));
               if (constructor instanceof ExecutableElement method
                   && method.getEnclosingElement().toString().equals("java.lang.Object")) {
+                var owner = (TypeElement) variable.getEnclosingElement();
                 fields.put(variable, new Field(relative,
-                    elements.getBinaryName((TypeElement) variable.getEnclosingElement()).toString(),
+                    elements.getBinaryName(owner).toString(),
                     variable.getSimpleName().toString(), positions.getStartPosition(unit, node.getType()),
                     positions.getEndPosition(unit, node.getType()), positions.getStartPosition(unit, init.getIdentifier()),
-                    positions.getEndPosition(unit, init.getIdentifier())));
+                    positions.getEndPosition(unit, init.getIdentifier()), types.isAssignable(owner.asType(), serializable), owner.getSuperclass().toString()));
               }
             }
             return super.visitVariable(node, unused);
@@ -121,10 +126,12 @@ final class SourcePrivateMonitorInventory {
         }.scan(unit, null);
       }
       for (var field : fields.values()) {
-        boolean eligible = field.otherReads == 0 && !field.blocks.isEmpty();
+        boolean eligible = field.otherReads == 0 && !field.blocks.isEmpty()
+            && !field.serializableOwner && field.superclass.equals("java.lang.Object");
         System.out.println("MONITOR_FIELD\t" + field.path + "\t" + field.owner + "\t" + field.name
             + "\t" + field.typeStart + "\t" + field.typeEnd + "\t" + field.initStart + "\t" + field.initEnd
-            + "\t" + field.blocks.size() + "\t" + field.otherReads + "\t" + eligible);
+            + "\t" + field.blocks.size() + "\t" + field.otherReads + "\t" + eligible
+            + "\t" + field.serializableOwner + "\t" + field.superclass);
         if (!eligible) continue;
         for (var block : field.blocks) {
           if (block.start < 0 || block.end <= block.start || block.bodyStart <= block.start

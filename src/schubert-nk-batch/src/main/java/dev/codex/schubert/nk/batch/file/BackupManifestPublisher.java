@@ -30,7 +30,8 @@ import org.jspecify.annotations.Nullable;
 public final class BackupManifestPublisher {
   private static final String NAME = "MANIFEST.json";
   private static final long DEADLINE = 1_800_000_000_000L;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final long uid;
@@ -64,7 +65,8 @@ public final class BackupManifestPublisher {
   public void create(BackupManifest trusted, UUID partId) throws StorageIoException {
     Objects.requireNonNull(trusted, "trusted manifest");
     Objects.requireNonNull(partId, "part id");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = clock.getAsLong();
       byte[] content = BackupManifestCodec.encode(trusted);
       byte[] readback = new byte[content.length + 1];
@@ -133,6 +135,8 @@ public final class BackupManifestPublisher {
         Arrays.fill(content, (byte) 0);
         Arrays.fill(readback, (byte) 0);
       }
+    } finally {
+      lock.unlock();
     }
   }
 

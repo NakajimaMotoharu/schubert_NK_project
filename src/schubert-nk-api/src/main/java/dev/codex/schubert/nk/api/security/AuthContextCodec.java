@@ -22,7 +22,8 @@ import org.jspecify.annotations.Nullable;
 public final class AuthContextCodec implements AutoCloseable {
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
   private final Map<String, byte[]> keys;
   private final SecureRandom random;
@@ -67,7 +68,8 @@ public final class AuthContextCodec implements AutoCloseable {
   }
 
   public EncryptedAuthContext encrypt(AuthContextIdentity identity, AuthenticationContext raw) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(raw, "raw");
@@ -107,12 +109,15 @@ public final class AuthContextCodec implements AutoCloseable {
         Arrays.fill(plaintext, (byte) 0);
         Arrays.fill(nonce, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   public AuthenticationContext decrypt(
       AuthContextIdentity identity, EncryptedAuthContext storedContext) {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(storedContext, "storedContext");
@@ -151,6 +156,8 @@ public final class AuthContextCodec implements AutoCloseable {
       } finally {
         Arrays.fill(stored, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -187,9 +194,12 @@ public final class AuthContextCodec implements AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       for (byte[] key : keys.values()) Arrays.fill(key, (byte) 0);
       closed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 }

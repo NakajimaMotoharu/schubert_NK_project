@@ -30,7 +30,8 @@ final class DurableRecordFiles {
   private static final Pattern RETAINED_NAME =
       Pattern.compile(
           "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.(run|begin|done|plan|retire)");
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final OwnedTransferDirectory root;
   private final InodeSecurityCalls security;
   private final InspectorEnvironmentPublisher.Io io;
@@ -53,7 +54,8 @@ final class DurableRecordFiles {
   /** Caller-owned canonical bytes; only an initial entry-open MISSING means absence. */
   Optional<byte[]> read(String name) throws StorageIoException {
     name(name);
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       begin();
       byte[] buffer = new byte[205];
       try {
@@ -76,6 +78,8 @@ final class DurableRecordFiles {
       } finally {
         Arrays.fill(buffer, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -85,7 +89,8 @@ final class DurableRecordFiles {
     Objects.requireNonNull(bytes, "record bytes");
     Objects.requireNonNull(partId, "part identity");
     byte[] copy = bytes.clone();
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       try {
         content(name, copy);
         begin();
@@ -131,6 +136,8 @@ final class DurableRecordFiles {
       } finally {
         Arrays.fill(copy, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -141,7 +148,8 @@ final class DurableRecordFiles {
     name(name);
     Objects.requireNonNull(bytes, "record bytes");
     byte[] copy = bytes.clone();
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       try {
         content(name, copy);
         begin();
@@ -162,6 +170,8 @@ final class DurableRecordFiles {
       } finally {
         Arrays.fill(copy, (byte) 0);
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 

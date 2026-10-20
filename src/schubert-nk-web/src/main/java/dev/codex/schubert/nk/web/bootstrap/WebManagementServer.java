@@ -34,7 +34,8 @@ final class WebManagementServer implements AutoCloseable {
   private final AtomicBoolean promotionAttempted = new AtomicBoolean();
   private final AtomicBoolean closed = new AtomicBoolean();
   private final AtomicBoolean stopping = new AtomicBoolean();
-  private final Object stopLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stopLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private boolean serverStopped;
   private boolean startAttempted;
   private volatile boolean started;
@@ -98,7 +99,8 @@ final class WebManagementServer implements AutoCloseable {
   }
 
   void start() {
-    synchronized (stopLock) {
+    stopLock.lock();
+    try {
       if (stopping.get() || startAttempted)
         throw new IllegalStateException("Web management start unavailable");
       startAttempted = true;
@@ -106,6 +108,8 @@ final class WebManagementServer implements AutoCloseable {
       server.createContext("/", this::respond);
       server.start();
       started = true;
+    } finally {
+      stopLock.unlock();
     }
   }
 
@@ -197,7 +201,8 @@ final class WebManagementServer implements AutoCloseable {
     Objects.requireNonNull(remaining, "management stop budget");
     if (remaining.isNegative() || remaining.compareTo(java.time.Duration.ofSeconds(30)) > 0)
       throw new IllegalArgumentException("invalid stop budget");
-    synchronized (stopLock) {
+    stopLock.lock();
+    try {
       if (closed.get()) return;
       stopping.set(true);
       promoted.set(false);
@@ -219,6 +224,8 @@ final class WebManagementServer implements AutoCloseable {
         throw new IOException("Web management stop unconfirmed");
       }
       closed.set(true);
+    } finally {
+      stopLock.unlock();
     }
   }
 }

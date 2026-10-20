@@ -15,7 +15,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class InspectorAesCredential implements AutoCloseable {
   private static final byte[] MAGIC = "NKKEY1\n".getBytes(StandardCharsets.US_ASCII);
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String retainedVersion;
   private final byte[] key;
   private boolean closed;
@@ -72,30 +73,39 @@ public final class InspectorAesCredential implements AutoCloseable {
 
   /** Caller owns and must clear this copy after initializing the existing cipher codec. */
   public byte[] copyKey() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) throw new IllegalStateException("inspector AES credential is closed");
       return key.clone();
+    } finally {
+      stateLock.unlock();
     }
   }
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (!closed) {
         Arrays.fill(key, (byte) 0);
         closed = true;
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
   @Override
   public String toString() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       return "InspectorAesCredential[version="
           + retainedVersion
           + ", key=<redacted>, closed="
           + closed
           + "]";
+    } finally {
+      stateLock.unlock();
     }
   }
 }

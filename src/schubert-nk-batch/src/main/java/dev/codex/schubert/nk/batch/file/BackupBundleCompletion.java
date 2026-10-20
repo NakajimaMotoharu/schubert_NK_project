@@ -28,7 +28,8 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class BackupBundleCompletion {
   private static final long DEADLINE = 1_800_000_000_000L;
-  private final Object lock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock lock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final BackupManifestReader reader;
   private final BackupArtifactVerifier verifier;
   private final BackupCommitService commits;
@@ -65,7 +66,8 @@ public final class BackupBundleCompletion {
     Objects.requireNonNull(name, "backup directory name");
     Objects.requireNonNull(database, "database handle");
     Objects.requireNonNull(configuration, "configuration handle");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long started = clock.getAsLong();
       guard(started);
       var manifest = reader.readWithin(name, database, configuration, started);
@@ -92,6 +94,8 @@ public final class BackupBundleCompletion {
       // This can fail after commit. Never claim rollback; a retry must revalidate the files.
       guard(started);
       return stored;
+    } finally {
+      lock.unlock();
     }
   }
 

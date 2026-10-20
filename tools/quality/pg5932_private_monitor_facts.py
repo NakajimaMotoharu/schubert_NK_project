@@ -16,7 +16,7 @@ def main():
     helper = ROOT/'tools/quality/SourcePrivateMonitorInventory.java'
     fixture = ROOT/'tools/quality/source_private_monitor_inventory_test.py'
     helper_sha, fixture_sha = sha(helper), sha(fixture)
-    os.umask(0o077); out = W/'pg5932-private-monitor-facts-v2'; out.mkdir(mode=0o700)
+    os.umask(0o077); out = W/'pg5932-private-monitor-facts-v3'; out.mkdir(mode=0o700)
     classes = out/'toolclasses'; classes.mkdir()
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     commands = [['python3', '-B', '-m', 'unittest', 'source_private_monitor_inventory_test'],

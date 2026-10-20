@@ -25,7 +25,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
-  private final Object stateLock = new Object();
+  private final java.util.concurrent.locks.ReentrantLock stateLock =
+      new java.util.concurrent.locks.ReentrantLock();
   private final String url;
   private final String role;
   private final String applicationName;
@@ -65,7 +66,8 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
 
   @Override
   public Connection getConnection() throws SQLException {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (closed) throw unavailable();
       var properties = new Properties();
       properties.setProperty("user", role);
@@ -90,6 +92,8 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
       } finally {
         properties.clear();
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -148,11 +152,14 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
 
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (!closed) {
         Arrays.fill(password, '\0');
         closed = true;
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
