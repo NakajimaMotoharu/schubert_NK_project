@@ -9,3 +9,5 @@ EXP310001: 固定run UUID12345678-9abc-def0-8123-456789abcdef/cutoff2026-09-12T1
 EXP310002（設計確定後）: test-only JdbcResourceCasesの独立68合成（2scope×SQL/IAE/ISE/NPE/Error primary-secondary・同一Throwable・成功body/close異常）を全検証。EXP310003（同）: 正常empty/監査snapshot、null resource/mandatory projection、不正値・provider unknown identity、body成功close故障・acquisition失敗・各一度close/借用Connection不変更。68はJUnit一件の内数、追加68PASSにしない。既Expiry/retained SUCCESS/callerの影響suiteとYKT対象も個別確認し、必要source全体・nativeは別終了依存に保持する。
 
 coverage要求はline/method/class/branch100%。選択fixtureで届かない既program分岐は未達として表示し、redのcoverageや旧source成功をgreenへ輸入しない。実環境の全24DB/Root所有/原本Backupを本proxyから認定しない。SSC310は独立反例と現SS適用性の確認後に詳細確定・設計だけmainへ公開し、それまではoracle/正本変更0。
+
+2026-10-20確定：独立反例1268を受け、SSC310はdesign-only e48bca17d/PR165→main615d40b1eefcc5f3a65a29e4556e803ca188ceb4へ通常merge/remote確認。EXP310002/003は上記独立期待で実装、初回3個のJUnit合計（68合成は内数）。既BAT287 readRuntimeの未知同一性期待補正はSS332/354明記後だけ実施、他固定拒否は維持。新source greenは148/16・既六guard＋実Expiry/保持監査/SSC304TWR/DB session/caller影響群、各case名は原source宣言と実XML一対一、原red/旧3976の算術加算0。全実counterと終了コード/静的・source/run整合を別結果へ記録する。

@@ -547,7 +547,6 @@ final class ExpiryAuditRepositoryTest {
             "read",
             "readNullStatement",
             "readNullRows",
-            "readRuntime",
             "readExecute",
             "readNext",
             "readNextAndRowClose",
@@ -570,6 +569,15 @@ final class ExpiryAuditRepositoryTest {
         assertNull(caught.getCause());
         assertFalse(caught.toString().contains("SQL_SECRET_SENTINEL"));
       }
+      // SSC310: unknown provider Runtime is not malformed SQL/data projection.
+      var provider = new IllegalStateException("public unknown provider fixture");
+      assertSame(
+          provider,
+          assertThrows(
+              IllegalStateException.class,
+              () ->
+                  new ExpiryAuditRepository(failingConnection(parent, "readRuntime", provider))
+                      .read(attempt)));
       assertThrows(
           IllegalArgumentException.class,
           () ->
@@ -604,6 +612,11 @@ final class ExpiryAuditRepositoryTest {
   }
 
   private static Connection failingConnection(Connection delegate, String operation) {
+    return failingConnection(delegate, operation, new IllegalStateException("SQL_SECRET_SENTINEL"));
+  }
+
+  private static Connection failingConnection(
+      Connection delegate, String operation, IllegalStateException provider) {
     return (Connection)
         Proxy.newProxyInstance(
             Connection.class.getClassLoader(),
@@ -626,8 +639,7 @@ final class ExpiryAuditRepositoryTest {
                       || operation.equals("finishNull")
                       || operation.equals("readNullStatement")
                       || operation.equals("successNullStatement")) return null;
-                  if (operation.endsWith("Runtime"))
-                    throw new IllegalStateException("SQL_SECRET_SENTINEL");
+                  if (operation.endsWith("Runtime")) throw provider;
                   if (operation.equals("readExecute")
                       || operation.equals("readNext")
                       || operation.equals("readNextAndRowClose")

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -255,45 +256,70 @@ public final class ExpiryAuditRepository {
                   + "target_count,success_count,failure_count,byte_count,ended_at,error_code,"
                   + "error_summary from schubert.batch_runs where "
                   + HANDLE);
-      if (statement == null) throw new BatchRepositoryException();
+      @Nullable Throwable statementFailure = null;
       try {
-        statement.setQueryTimeout(5);
-        bindHandle(statement, 1, attempt);
-        ResultSet rows = statement.executeQuery();
-        if (rows == null) throw new BatchRepositoryException();
+        var query = presentRead(statement);
+        query.setQueryTimeout(5);
+        bindHandle(query, 1, attempt);
+        ResultSet rows = query.executeQuery();
+        @Nullable Throwable rowFailure = null;
         try {
-          if (!rows.next()) {
+          var values = presentRead(rows);
+          if (!values.next()) {
             guarded(attempt.run());
             return Optional.empty();
           }
-          OffsetDateTime cutoff = rows.getObject("expiry_cutoff_at", OffsetDateTime.class);
-          OffsetDateTime ended = rows.getObject("ended_at", OffsetDateTime.class);
+          OffsetDateTime cutoff = values.getObject("expiry_cutoff_at", OffsetDateTime.class);
+          OffsetDateTime ended = values.getObject("ended_at", OffsetDateTime.class);
           Snapshot value =
               new Snapshot(
-                  required(rows.getString("status")),
+                  presentRead(values.getString("status")),
                   cutoff == null ? null : cutoff.toInstant(),
-                  rows.getObject("expiry_before_count", Long.class),
-                  rows.getObject("expiry_after_count", Long.class),
-                  required(rows.getObject("target_count", Long.class)),
-                  required(rows.getObject("success_count", Long.class)),
-                  required(rows.getObject("failure_count", Long.class)),
-                  required(rows.getObject("byte_count", Long.class)),
+                  values.getObject("expiry_before_count", Long.class),
+                  values.getObject("expiry_after_count", Long.class),
+                  presentRead(values.getObject("target_count", Long.class)),
+                  presentRead(values.getObject("success_count", Long.class)),
+                  presentRead(values.getObject("failure_count", Long.class)),
+                  presentRead(values.getObject("byte_count", Long.class)),
                   ended == null ? null : ended.toInstant(),
-                  rows.getString("error_code"),
-                  rows.getString("error_summary"));
+                  values.getString("error_code"),
+                  values.getString("error_summary"));
           // id is the primary key; no second row exists for this exact handle.
-          if (!validSnapshot(attempt, value)) throw new BatchRepositoryException();
+          if (!validSnapshot(attempt, value))
+            throw new SQLDataException("Expiry projection invalid");
           guarded(attempt.run());
           return Optional.of(value);
+        } catch (SQLException | RuntimeException | Error failure) {
+          rowFailure = failure;
+          throw failure;
         } finally {
-          rows.close();
+          if (rows != null)
+            try {
+              rows.close();
+            } catch (SQLException | RuntimeException | Error secondary) {
+              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+            }
         }
+      } catch (SQLException | RuntimeException | Error failure) {
+        statementFailure = failure;
+        throw failure;
       } finally {
-        statement.close();
+        if (statement != null)
+          try {
+            statement.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+          }
       }
-    } catch (SQLException | RuntimeException failure) {
+    } catch (SQLException failure) {
       throw new BatchRepositoryException();
     }
+  }
+
+  /** SSC310: malformed mandatory DB values are known SQL failures, not provider Runtime. */
+  private static <T> T presentRead(@Nullable T value) throws SQLDataException {
+    if (value == null) throw new SQLDataException("Expiry projection missing");
+    return value;
   }
 
   static boolean validSnapshot(BatchStepAttempt attempt, Snapshot value) {

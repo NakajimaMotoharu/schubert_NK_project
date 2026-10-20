@@ -2,6 +2,8 @@
 
 ## PTPRE-032 — PT_DEFAULT：Expiry read複合故障の純JDBC反例・局所是正
 
+green着手前追記：設計only PR165/main615d40b1eを確認、局所Main一/新Test三＋既BAT287一期待補正を固定する。予定同工具greenは**148PT/16suite**（全六guard12、新pure3、Expiry実DB8/SSC304TWR24、保持監査14、Cleanup保持照合1、Morning DB65/Expiry8/観測4/Access9）を一回実行。新proxyはpure、既実DBはBatchDatabaseFixtureが@TempDir専有PostgreSQL18・ランダムloopback port・固定test role・既migrationだけを生成しfinally停止、原本/VMDB/既runへ接続しない。選択全Testの直接業務Service/VM/current/sudo操作なし、既65の成功を足算せず当新source XMLを読む。coverageは全実counterを報告し不足を未達表示、target100未充足を正式PASSへ補完しない。command=`python3 -B tools/quality/pg6052_expiry_combined_selected.py green`（同PYTHONPATH）、new-only pg6052-expiry-combined-green-v1。元red13/1失敗は不変保持・再演0。
+
 1267/BUG1530/YKT1290/SSC310、Production8c（初回Test追加前のMain不変更）、予定command `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:../toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg6052_expiry_combined_selected.py red`。新only自己所有snapshot、JDK25/Maven3.9.12 offline、六format先行・六module guard12＋Expiry純proxy新1の計13。新Testはjava.sql public interfaceのin-memory proxy、固定UUID/time/SQLException/AssertionError、Connectionのclose/commit/rollback/config/未定義呼出はAssertionErrorで拒否する。新DB・broker・ネットワーク・child・serviceを当Testから起動せず、通常guardも固定vector/enum/Rangeのみ。Main/依存の通常compile/JUnit/JaCoCo/SpotBugs以外をwrapperに含めない。真正redの一件失敗を期待し、失敗をPASS/coverage100へ変換しない。是正後はSS確定後の独立68合成・正常null/getter/closeと影響Repository試験をnew-only greenへ追加し、旧red再演0。実VM/current/Root/failed-cohort/intent/permit/DB原本/鍵・拒否境界探索/再試行0。PT代替対象ではない。
 
 ## PTPRE-031 — PT_DEFAULT：全残33同値条件後の必要一回3976/593

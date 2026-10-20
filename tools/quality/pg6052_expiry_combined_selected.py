@@ -8,6 +8,7 @@ from pg5966_api_sql_selected import source_test_names
 ROOT = engine.ROOT
 MAIN = 'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java'
 TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java'
+OLD_TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepositoryTest.java'
 BASE = '8c869d7cea21d587b859b3e72e3516d9d2deb5c8'
 
 
@@ -30,9 +31,15 @@ def runner_source(total, suites):
     return raw
 
 
-def inventory():
+def inventory(phase='red'):
     cases = {m: set(v) for m, v in engine.CASES.items()}
     cases['batch'].add('batch.repository.ExpiryAuditResourceFailureTest')
+    if phase == 'green':
+        cases['batch'].update('batch.repository.'+name for name in (
+            'ExpiryAuditRepositoryTest', 'ExpirySuccessfulScopeTest',
+            'MorningExpiryObservationInvariantTest', 'MorningExpirySessionTest',
+            'MorningDatabaseAccessContractTest', 'MorningDatabaseSessionTest'))
+        cases['batch'].update(('batch.file.CleanupExpiryExecutionTest', 'batch.file.RetainedExpiryAuditTest'))
     counts = {engine.PACKAGE+c: len(source_test_names(ROOT/('src/schubert-nk-'+m+'/src/test/java')/((engine.PACKAGE+c).replace('.', '/')+'.java'))) for m, cs in cases.items() for c in cs}
     return cases, counts
 
@@ -44,11 +51,11 @@ def main():
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT):
         raise ValueError('clean committed Test/source/operator first')
     changed = set(subprocess.check_output(['git', 'diff', '--name-only', BASE, 'HEAD', '--', 'src'], cwd=ROOT, text=True).splitlines())
-    if changed != ({TEST} if args.phase == 'red' else {TEST, MAIN}):
+    if changed != ({TEST} if args.phase == 'red' else {TEST, MAIN, OLD_TEST}):
         raise ValueError('only focused Test on old Main(red),localized read+Test(green)')
     if subprocess.check_output(['git', 'diff', BASE, 'HEAD', '--', 'pom.xml', '.mvn', 'mvnw', 'tools/quality/static', 'program/characterization'], cwd=ROOT):
         raise ValueError('unchanged build/static/Current gates')
-    cases, counts = inventory()
+    cases, counts = inventory(args.phase)
     if args.phase == 'red' and (sum(counts.values()), len(counts)) != (13, 8):
         raise ValueError('one independent counterexample plus twelve unchanged guards')
     targets = {'batch': ['batch/repository/ExpiryAuditRepository']}
