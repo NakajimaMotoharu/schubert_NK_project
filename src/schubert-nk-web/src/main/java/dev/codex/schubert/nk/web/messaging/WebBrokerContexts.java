@@ -40,9 +40,16 @@ public final class WebBrokerContexts implements AutoCloseable {
 
   public static WebBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
     Objects.requireNonNull(credentials, "Web credentials");
-    var factory = newFactory(endpoint);
     return new WebBrokerContexts(
-        () -> credentials.copyPassword(ServiceCredentialId.MQ_WEB), factory, factory);
+        () -> credentials.copyPassword(ServiceCredentialId.MQ_WEB), endpoint);
+  }
+
+  private WebBrokerContexts(Supplier<char[]> passwords, String endpoint) {
+    this.passwords = Objects.requireNonNull(passwords, "password source");
+    // SSC311: owner/lock/password port are complete before acquiring the provider resource.
+    var configured = newFactory(endpoint);
+    this.factory = configured;
+    this.owner = configured;
   }
 
   static ActiveMQConnectionFactory newFactory(String endpoint) {
@@ -63,20 +70,39 @@ public final class WebBrokerContexts implements AutoCloseable {
                 TransportConstants.NETTY_CONNECT_TIMEOUT,
                 3_000),
             "schubert-nk-core");
-    var factory = new ActiveMQConnectionFactory(false, connector);
-    factory.setCallTimeout(2_000);
-    factory.setClientFailureCheckPeriod(10_000);
-    factory.setConnectionTTL(30_000);
-    factory.setInitialConnectAttempts(3);
-    factory.setReconnectAttempts(-1);
-    factory.setRetryInterval(1_000);
-    factory.setRetryIntervalMultiplier(2.0);
-    factory.setMaxRetryInterval(30_000);
-    factory.setConsumerWindowSize(1_048_576);
-    factory.setBlockOnDurableSend(true);
-    factory.setPreAcknowledge(false);
-    factory.setUseTopologyForLoadBalancing(false);
-    return factory;
+    return configureOwned(() -> new ActiveMQConnectionFactory(false, connector));
+  }
+
+  /** SSC311: all ports precede acquisition; failed configuration owns one close attempt. */
+  static ActiveMQConnectionFactory configureOwned(Supplier<ActiveMQConnectionFactory> acquire) {
+    Objects.requireNonNull(acquire, "factory acquisition");
+    var factory = Objects.requireNonNull(acquire.get(), "JMS factory");
+    try {
+      factory.setCallTimeout(2_000);
+      factory.setClientFailureCheckPeriod(10_000);
+      factory.setConnectionTTL(30_000);
+      factory.setInitialConnectAttempts(3);
+      factory.setReconnectAttempts(-1);
+      factory.setRetryInterval(1_000);
+      factory.setRetryIntervalMultiplier(2.0);
+      factory.setMaxRetryInterval(30_000);
+      factory.setConsumerWindowSize(1_048_576);
+      factory.setBlockOnDurableSend(true);
+      factory.setPreAcknowledge(false);
+      factory.setUseTopologyForLoadBalancing(false);
+      return factory;
+    } catch (RuntimeException | Error primary) {
+      try {
+        factory.close();
+      } catch (RuntimeException | Error secondary) {
+        if (secondary instanceof Error && !(primary instanceof Error)) {
+          secondary.addSuppressed(primary);
+          throw secondary;
+        }
+        if (secondary != primary) primary.addSuppressed(secondary);
+      }
+      throw primary;
+    }
   }
 
   WebBrokerContexts(Supplier<char[]> passwords, ConnectionFactory factory, AutoCloseable owner) {
