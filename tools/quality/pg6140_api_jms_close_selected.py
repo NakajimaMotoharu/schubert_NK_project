@@ -7,6 +7,7 @@ from pg5966_api_sql_selected import source_test_names
 from pg5984_web_form_selected_v2 import node_environment
 
 ROOT = engine.ROOT
+SLOT = 'pg6140-api-jms-close-selected-v1'
 BASELINE = 'ca0383ac0729065fe03d4cd4b1303c9afa7e4b21'
 PREFIX = 'src/schubert-nk-api/src/'
 MAIN = {PREFIX+'main/java/dev/codex/schubert/nk/api/'+p+'.java' for p in (
@@ -44,7 +45,7 @@ def main():
     cases, counts = inventory()
     if (sum(counts.values()), len(counts)) != (1950, 320):
         raise ValueError('all current API/Web plus guards; seven additional independent Tests')
-    scope = {**vars(engine), 'SLOT': 'pg6140-api-jms-close-selected-v1', 'NODE_PATH': node_environment(),
+    scope = {**vars(engine), 'SLOT': SLOT, 'NODE_PATH': node_environment(),
         'CASES': cases, 'COUNTS': counts, 'TARGETS': TARGETS, 'test_names': source_test_names}
     exec(compile(runner_source(), '<ordinary API/Web self-owned tests>', 'exec'), scope)
     return scope['main']()

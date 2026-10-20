@@ -36,9 +36,9 @@ final class ApiBrokerContextsTest {
                 factories.get(1),
                 factories.get(2));
         var escaped = owner.sync();
-        var failure =
-            assertThrows(
-                marker instanceof Error ? Error.class : IllegalStateException.class, owner::close);
+        Class<? extends Throwable> expectedType =
+            marker instanceof Error ? Error.class : IllegalStateException.class;
+        var failure = assertThrows(expectedType, owner::close);
         if (marker instanceof Error) assertSame(marker, failure);
         else {
           assertEquals("API broker factory close failed", failure.getMessage());

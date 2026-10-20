@@ -38,10 +38,9 @@ final class ApiConsumerCloseOwnershipTest {
           var index = new AtomicInteger();
           var owner = open(kind, () -> contexts.get(index.getAndIncrement()).context);
           assertTrue(ready(owner));
-          var failure =
-              assertThrows(
-                  marker instanceof Error ? Error.class : IllegalStateException.class,
-                  owner::close);
+          Class<? extends Throwable> expectedType =
+              marker instanceof Error ? Error.class : IllegalStateException.class;
+          var failure = assertThrows(expectedType, owner::close);
           if (marker instanceof Error) assertSame(marker, failure);
           else assertSame(marker, failure.getCause());
           assertFalse(ready(owner));
@@ -105,10 +104,9 @@ final class ApiConsumerCloseOwnershipTest {
         }
         var runtime = parent(contexts);
         assertTrue(runtime.ready());
-        var failure =
-            assertThrows(
-                marker instanceof Error ? Error.class : IllegalStateException.class,
-                runtime::close);
+        Class<? extends Throwable> expectedType =
+            marker instanceof Error ? Error.class : IllegalStateException.class;
+        var failure = assertThrows(expectedType, runtime::close);
         if (marker instanceof Error) assertSame(marker, failure);
         assertEquals(List.of(5, 4, 0, 1, 2, 3), order);
         assertFalse(runtime.ready());

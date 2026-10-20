@@ -1,5 +1,10 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-038 — PT_DEFAULT：API JMS停止phase/S2・全API/Web
+
+先行判定はsourceadの1297で記述済み、本台帳への索引追記は元v1後。SSC314/PG-D463/1548YKT1307、五Main/新7Test/既誤oracle二件補正/fixturefinally是正。通常finite自己所有hostの全API/Web＋六module guard1950/320/1667、実VM/current/Root/既DBBackup/failed-cohort/intent/permitにアクセス0。六format型nullSpotBugs・原XML/Jar/全Main物理/六target実四100を要求、静的名義の動的実行ではない。旧source成功の輸入0。
+
+元v1/6140真正1はBUG1551のTest compile三件、5/3実行・1945not-run/当counter未測定のまま保存1298。修正は型指定だけ・production期待値不変更、新onlyv2/6144で必要再試験する。拒否操作再試行や境界probeではなく通常compile欠陥の是正、旧元job再発行0。native部分factory/外側保持のS3は別依存、S2局所gateだけで全native/正式へ拡大しない。
 ## PTPRE-037 — PT_DEFAULT：API管理stop反例/S1
 
 1294/PG-D462/1547YKT1307/SSC313、main f589dba33設計only確認済。新ApiManagementStopTestは自己所有loopback port0のJDK server wrapperで最初のstopだけliteral Runtime、二度目の実stop呼出回数2を期待する。既API管理7Test＋他module guardを通常Mavenで選択、full expected20/9suite、旧Main反例はJUnit failure1を期待し、reactor failfastによる後続module not-runは成功へ加算しない。fixtureはfinallyでdelegate stop0/own executor actual joinを確認し、既サービス/DB/VM/Root/failed-cohort/intent/permit操作なし。six format先行、通常compile/型null/PT/JaCoCo/SpotBugs profileだけ、静的名義で動的を隠さない。source/archive固定・新onlyslot・元job結果未回収理由の再起動0。
