@@ -8,6 +8,7 @@ import wbs_progress_audit as audit
 import wbs_candidate_trace as trace
 from pg3282_wbs_current_source_apply import rewrite_root, replace_public, group_coverage
 from pg4948_current_trace_public import owner_measurement
+from pg6104_sourcefile_line_projection import projection
 from pg6082_web_factory_qualification import SOURCE
 
 ROOT = audit.ROOT
@@ -152,11 +153,17 @@ def report():
     require(observed == applied['audit']['currentPhysicalCandidate'], 'same actual applied current candidate observation')
     measured = json.loads((PUBLIC/'manifest.json').read_bytes())
     owners = owner_measurement(inventory['currentPhysicalCandidate']['artifacts'],group_coverage(measured))
-    require(owners['remaining'] == observed['remaining'], 'all actual missed counters assigned once to existing owners')
+    lines = projection(measured,inventory['currentPhysicalCandidate']['artifacts'],ROOT)
+    require(all(owners['remaining'][k] == observed['remaining'][k] for k in ('METHOD','CLASS','BRANCH'))
+            and lines['sourcefileLineTotals']['missed'] == observed['remaining']['LINE']
+            and lines['classFamilyLineTotals']['missed'] == owners['remaining']['LINE'],
+            'each counter compared in its actual domain;all missed class lines retained')
+    owners['lineCounterDomain'] = 'SUM_OF_OWNED_CLASS_FAMILY_LINE_COUNTERS_NOT_MODULE_SOURCEFILE_LINES'
     value = dict(actualExit=0,productionSource=SOURCE,kind='CURRENT943_HOST_ONLY_TRACE_NOT_ACCEPTANCE',
         historicalArtifacts=941,currentArtifacts=943,physicalSupportAdditions=2,logicalScopeChanged=False,
         historicalAcceptedTasks=17,acceptedLeafDelta=0,formalAccepted=False,effortPercent=None,
-        currentMeasurement=observed,currentJavaOwnerCounters=owners,measurementManifestSha256=sha((PUBLIC/'manifest.json').read_bytes()),
+        currentMeasurement=observed,currentJavaOwnerCounters=owners,sourcefileLineReconciliation=lines,
+        measurementManifestSha256=sha((PUBLIC/'manifest.json').read_bytes()),
         beforeFileHashes=staged['before'],afterFileHashes=staged['after'],
         stageReceiptSha256=sha((OUT/'stage.safe.json').read_bytes()),applyReceiptSha256=sha((OUT/'apply.safe.json').read_bytes()),
         oldSourceNativeImported=False,nativeQualified=False,sourceChanges=0,testsExecuted=0,vmActions=0)
