@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC314 API JMS close所有の独立PT（S2）
+
+PT-API-JMS-CLOSE001..006/1297は自己所有JMS proxyと有限latch/Threadのみで、三consumer/親group/brokerのfirst close Runtime/Error、確認済み子の再発行0、未知子の再確認・全成功後冪等、停止後DOWN/escaped supplier非受理・新callback処理0、並行closeの二重発行0、startup/fatal優先・nullを検証する。期待値は独立literal child別回数/順序/同一例外と実Thread終端。既「失敗後二度目正常no-op」oracleはSS342SSC158に反し、当反例・SSC314を根拠に補正し履歴を保持する。
+
+当sourceの全既関連API Test/六format型nullSpotBugs・全原XML/Jar/物理差/当実四counterを確認し、未達を補完しない。変更群をまとめて必要fresh全体・static理由/traceを認証し、旧source成功を加算しない。実VM/current/DB/鍵/Root/Unit/failed-cohort/intent/permit操作0、拒否対象probe0、PTALT代替数0。BUG1548/YKT1307、fixture finally改善BUG1549/YKT1308は次の関連影響PTへ同梱し独立して記録する。
+
 ## SSC313 API管理HTTPの停止PT（S1）
 
 PT-API-STOP001..004は自己所有loopback HttpServerと独立fault wrapper/有限latchだけで、stop Runtime/Error後の再close（同一例外/stop再試行）、stop成功後のexecutor未終端/0budget・再join（stop二重発行0）、lock待ち/待ち中割込、executor待ち割込のflag復元、既preinterrupt成功/既冪等、null/負/30秒超の未操作を確認する。期待値はSS342SSC313の状態/回数/actual thread terminalから独立literalで定める。故障は修正前915へ登録してから旧codeのstop再試行反例を実行し、fixture自身はfinallyで実server/workerを必ず終了させる。

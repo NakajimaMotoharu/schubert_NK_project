@@ -1,5 +1,11 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC314 API JMSの停止通知と確認済みclose（2026-10-21、内部詳細/S2）
+
+SyncRequestConsumers/WebLogConsumers/QuestionWorkConsumers、ApiMessagingRuntime、ApiBrokerContextsはclose要求と全子資源のclose完了を別状態にする。停止通知後はreadyをDOWN、新callback/新contextを非受理とし、既callbackのACK/rollback規約を変えない。各ownerのprivate final lockでcloseを直列化する。Syncの四context・親最大三group・broker最大三factoryは取得前に成功phase領域を準備し、子close正常帰還後だけその子を確認済みとする。再closeは確認済み子を再発行せず、未確認子だけ既定順序で確認する。全子の成功後だけclosed、未確認Runtime/Errorを後続no-op成功へ変換しない。
+
+Syncのcontext順序、親/brokerの逆順、全子への停止試行、既Error優先/同一Throwable/self-suppression回避・固定秘匿例外を維持する。provider closeそのものの時間上限を新設したり親30分/Unit期限を延長しない。このcomponent保持handleでの明示再確認は、native UNKNOWNの自動retry・VM/Root/Unit再操作の許可ではない。部分factory失敗時のowner/外側借用依存の保持はS3で別確認し、S2局所結果をnative全体へ拡大しない。BUG1548/YKT1307/PG-D463、SS342/354、RD/UI/業務仕様不変更。
+
 SSC311（2026-10-20、BUG1537/YKT1297、Web factory取得・設定の所有）：§6のendpoint/全12設定/role/credential/consumer値は不変更。WebBrokerContexts public createはcredential非null確認、password supplier・owner/lock等全state準備をfactory取得より前に完了し、private ctor最後に固定endpoint factory取得/設定を行う。取得/設定成功後は同factoryをfinal factory/ownerへ格納するだけで完成ownerを返し、取得後のcallback/owner/state allocation gapを作らない。open時のpassword copy消去と既live close retry/固定例外・停止規約は維持する。
 
 設定用の内部acquire portは取得前にnonnull検証し、helper内一回取得/nonnull確認直後から既12settingを保護する。全設定成功時だけlive factoryを返し、Runtime/NPE/Error失敗時は当factory.closeを一度試みる。通常は同一primaryを保持しclose失敗を一回suppressedへ追加、同一Throwableは自身へ追加しない。closeがErrorかつprimary非Errorの時だけ同close Errorを優先してprimaryをsuppressedへ保持する。factoryにはまだuser/passwordを設定せず接続/consumerを開始しない。例外/cause/suppressedのprovider診断をログへ出さず、close UNKNOWNを成功へ変更・自動再試行しない。
