@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BooleanSupplier;
 
 /** Fixed loopback management only. SS342 §5.2/SSC158/PG-D334/PT-OPS-API-READY001..008. */
@@ -20,6 +22,7 @@ final class ApiManagementServer implements AutoCloseable {
   private static final String INFORMATION_PATH = "/actuator/info";
   private static final String METRICS_PATH = "/actuator/prometheus";
   private static final int JSON_OPENING_DELIMITER_LENGTH = 1;
+  private static final Duration CLOSE_TIMEOUT = Duration.ofSeconds(30);
 
   @FunctionalInterface
   interface Factory {
@@ -32,7 +35,10 @@ final class ApiManagementServer implements AutoCloseable {
   private final String information;
   private final AtomicBoolean promoted = new AtomicBoolean();
   private final AtomicBoolean promotionAttempted = new AtomicBoolean();
-  private final AtomicBoolean closed = new AtomicBoolean();
+  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final ReentrantLock stopLock = new ReentrantLock();
+  private boolean closed;
+  private boolean serverStopped;
 
   static ApiManagementServer open(Map<String, String> information, BooleanSupplier healthy)
       throws IOException {
@@ -104,15 +110,16 @@ final class ApiManagementServer implements AutoCloseable {
 
   void promote(ServiceStartupAdmission.Ready ready) throws IOException {
     Objects.requireNonNull(ready, "admission ready");
-    if (closed.get() || !promotionAttempted.compareAndSet(false, true) || !healthy.getAsBoolean())
+    if (stopping.get() || !promotionAttempted.compareAndSet(false, true) || !healthy.getAsBoolean())
       throw new IOException("API readiness unavailable");
     ready.release();
-    if (closed.get() || !healthy.getAsBoolean()) throw new IOException("API readiness unavailable");
+    if (stopping.get() || !healthy.getAsBoolean())
+      throw new IOException("API readiness unavailable");
     promoted.set(true);
   }
 
   boolean ready() {
-    return !closed.get() && promoted.get() && healthy.getAsBoolean();
+    return !stopping.get() && promoted.get() && healthy.getAsBoolean();
   }
 
   int port() {
@@ -155,15 +162,48 @@ final class ApiManagementServer implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed.compareAndSet(false, true)) {
-      promoted.set(false);
-      boolean interrupted = Thread.currentThread().isInterrupted();
+    closeWithin(CLOSE_TIMEOUT);
+  }
+
+  /** SSC313/PG-D462/PT-API-STOP001..004: requested stop is not confirmed termination. */
+  void closeWithin(Duration remaining) {
+    Objects.requireNonNull(remaining, "API management stop budget");
+    if (remaining.isNegative() || remaining.compareTo(CLOSE_TIMEOUT) > 0)
+      throw new IllegalArgumentException("invalid API stop budget");
+    long deadline = System.nanoTime() + remaining.toNanos();
+    stopping.set(true);
+    promoted.set(false);
+    // READY005: preserve a notification already present on entry while checking actual join.
+    boolean interrupted = Thread.interrupted();
+    try {
       try {
-        server.stop(0);
-      } finally {
-        if (interrupted) Thread.currentThread().interrupt();
+        if (!stopLock.tryLock(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
+          throw new IllegalStateException("API management stop unconfirmed");
+      } catch (InterruptedException notification) {
+        Thread.currentThread().interrupt();
+        throw new IllegalStateException("API management stop unconfirmed");
       }
-      executor.shutdownNow();
+      try {
+        if (closed) return;
+        if (!serverStopped) {
+          server.stop(0);
+          serverStopped = true;
+        }
+        executor.shutdownNow();
+        try {
+          if (!executor.awaitTermination(
+              Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
+            throw new IllegalStateException("API management stop unconfirmed");
+        } catch (InterruptedException notification) {
+          Thread.currentThread().interrupt();
+          throw new IllegalStateException("API management stop unconfirmed");
+        }
+        closed = true;
+      } finally {
+        stopLock.unlock();
+      }
+    } finally {
+      if (interrupted) Thread.currentThread().interrupt();
     }
   }
 }
