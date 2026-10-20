@@ -10,8 +10,8 @@ from static_disposition_overlay import BASE,load
 from pg5764_static_whole_join import current_reference
 
 OUT=BASE/'PG5792-current-static-whole-v1'
-QUALIFIED_PUBLIC_SHA=None
-CURRENT_CASES_SHA=None
+QUALIFIED_PUBLIC_SHA='1a5a5db819bde6bf01c85b4bb43017b8aae15bd59407b66adfbc4f5a0ca23c45'
+CURRENT_CASES_SHA='6b8489660ecb397be6e020893eb3257df216ed5845923c4c93c832451b99bfbb'
 
 
 def qualified_whole():
