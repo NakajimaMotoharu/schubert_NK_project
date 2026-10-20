@@ -1,5 +1,11 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-034 — PT_DEFAULT：JMS owner四source後の全API/Web1933・317
+
+1273/PG-D457/BUG1537YKT1297、元c4全3979/594及び631joinを1274へ保全済み・全元job終了後だけ実PG。今回Main四/Test三（新JUnit3、IAE/ISE/NPE/Error/null fixture内数）、公開API/SQL/DB/wire/role/ACKrollback/stop-before-close/既期待不変更。予定command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:../toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg6074_jms_owner_selected.py`、新only pg6074-jms-owner-selected-v1。自己所有snapshotで六format先行、通常offline compile/型null/SpotBugs/JaCoCo、**全API1012/全Web914＋他四module guard7＝1933件/317suite**、全1667Main・当四outer実四counter100を要求する。旧c4をPASSとして輸入しない。
+
+既profileの自己所有tempPG・in-process Artemis・loopback HTTP/有限child・Node24.19.0固定DOM/固定vectorと新pure factory counter/Throwableだけ。WebNativeRuntimePartialTestはtemp credential fixtureと未使用DB proxy・partial ownerであり実native起動を行わない。wrapperはMaven通常PT以外のVM/Unit/current/Root/原本DBBackup/鍵/failed-cohort/intent/permit操作を持たない。新fixtureはheap枯渇や実broker障害を起こさず、静的JVM順序の反例/是正証拠と実行PTを分離する。Node guard/clean operator/新namespace・source固定を先行し一回。未達target coverage/失敗/skipped/not-runを成功へ加算せず、次のactual Jar/descriptor/ABI/源・全物理差/無除外PMD/Checkstyleを追加build/PTなしで確認する。
+
 ## PTPRE-033 — PT_DEFAULT：SSC310後の当source全3979・594
 
 1270/event1458、sourcec4d0242abの通常148/16・全8511667/一outer三debug/公開ABI・他18method不変・PMD1305/CS0資格後。tool `pg6060_expiry_current_whole.py`は既承認ordinary非root host snapshot profileを継承、全六format先行→offline全Maven/JUnit/JaCoCo/型nullSpotBugs、自己所有tempPG/in-process JMS/loopback HTTP/有限child/DOM固定vectorのみ。手続の実体は過去通常fullと同じで、VM/current/Unit/Root/failed-cohort/原本DB/Backup/鍵/permitへ接続・操作しない。独立lexical宣言は普通3963＋既同byteBackupStartIntentFilesTestの普通6/RepeatedTest10=3979、594suite。Repeated10を新10機能やflaky再試行と混同せず、原XML上の全実結果を検査する。拒否PT再試行/境界probe0。

@@ -21,6 +21,51 @@ import org.junit.jupiter.api.io.TempDir;
 /** CORE004..006 independent ownership faults + actual guarded broker callback Error/no ACK. */
 class QuestionWorkConsumersTest {
   @Test
+  void jmsown001AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IllegalArgumentException("public factory argument"),
+          new IllegalStateException("public factory state"),
+          new NullPointerException("public factory null"),
+          new AssertionError("public factory fatal")
+        }) {
+      var calls = new AtomicInteger();
+      var signals = new AtomicInteger();
+      assertSame(
+          failure,
+          assertThrows(
+              Throwable.class,
+              () ->
+                  QuestionWorkConsumers.start(
+                      () -> {
+                        calls.incrementAndGet();
+                        if (failure instanceof RuntimeException runtime) throw runtime;
+                        throw (Error) failure;
+                      },
+                      new QuestionWorkListener(ignored -> {}, Clock.systemUTC()),
+                      ignored -> {},
+                      signals::incrementAndGet)));
+      assertEquals(1, calls.get());
+      assertEquals(0, signals.get());
+    }
+    var calls = new AtomicInteger();
+    var signals = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            QuestionWorkConsumers.start(
+                () -> {
+                  calls.incrementAndGet();
+                  return null;
+                },
+                new QuestionWorkListener(ignored -> {}, Clock.systemUTC()),
+                ignored -> {},
+                signals::incrementAndGet));
+    assertEquals(1, calls.get());
+    assertEquals(0, signals.get());
+  }
+
+  @Test
   void core008SameCloseThrowableNeverSuppressesItselfOrSkipsLaterContexts() {
     for (Throwable shared :
         List.of(new AssertionError("shared"), new IllegalStateException("shared"))) {

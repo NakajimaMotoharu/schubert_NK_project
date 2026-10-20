@@ -41,6 +41,41 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-JMS-014 A-D: the dedicated Web reply consumer lifecycle on real Artemis and failure paths. */
 final class ArtemisReplyConsumersTest {
   @Test
+  void jmsown003BindAcquisitionFailureAndNullKeepIdentityBeforeOwnership() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IllegalArgumentException("public factory argument"),
+          new IllegalStateException("public factory state"),
+          new NullPointerException("public factory null"),
+          new AssertionError("public factory fatal")
+        }) {
+      var calls = new AtomicInteger();
+      assertSame(
+          failure,
+          assertThrows(
+              Throwable.class,
+              () ->
+                  ArtemisReplyConsumers.bind(
+                      () -> {
+                        calls.incrementAndGet();
+                        if (failure instanceof RuntimeException runtime) throw runtime;
+                        throw (Error) failure;
+                      })));
+      assertEquals(1, calls.get());
+    }
+    var calls = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ArtemisReplyConsumers.bind(
+                () -> {
+                  calls.incrementAndGet();
+                  return null;
+                }));
+    assertEquals(1, calls.get());
+  }
+
+  @Test
   void nativeSameFatalStartupAndCloseMustNotSelfSuppress() {
     var fatal = new LinkageError("same synthetic fatal");
     var closes = new AtomicInteger();

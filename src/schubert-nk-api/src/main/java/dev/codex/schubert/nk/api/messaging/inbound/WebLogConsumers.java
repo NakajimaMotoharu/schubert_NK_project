@@ -24,8 +24,9 @@ public final class WebLogConsumers implements AutoCloseable {
   private final AtomicBoolean halted = new AtomicBoolean();
   private volatile boolean closed;
 
-  private WebLogConsumers(JMSContext context) {
-    this.context = context;
+  private WebLogConsumers(Supplier<JMSContext> factory) {
+    // BUG1537: all state allocation precedes acquisition; only final storage follows it.
+    this.context = Objects.requireNonNull(factory.get(), "JMS context");
   }
 
   /** Installs the callback before delivery starts; failed startup always releases its session. */
@@ -45,8 +46,8 @@ public final class WebLogConsumers implements AutoCloseable {
     Objects.requireNonNull(listener, "listener");
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
-    JMSContext opened = Objects.requireNonNull(factory.get(), "JMS context");
-    WebLogConsumers runtime = new WebLogConsumers(opened);
+    WebLogConsumers runtime = new WebLogConsumers(factory);
+    JMSContext opened = runtime.context;
     try {
       opened.setAutoStart(false);
       if (opened.getSessionMode() != JMSContext.SESSION_TRANSACTED) {

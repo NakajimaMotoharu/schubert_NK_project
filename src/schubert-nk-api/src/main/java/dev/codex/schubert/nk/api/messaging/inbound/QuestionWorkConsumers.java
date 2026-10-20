@@ -24,8 +24,9 @@ public final class QuestionWorkConsumers implements AutoCloseable {
   private final AtomicBoolean halted = new AtomicBoolean();
   private boolean closed;
 
-  private QuestionWorkConsumers(JMSContext context) {
-    this.context = context;
+  private QuestionWorkConsumers(Supplier<JMSContext> factory) {
+    // BUG1537: initialize this owner/lock/flags before acquiring its only external resource.
+    this.context = Objects.requireNonNull(factory.get(), "async context");
   }
 
   public static QuestionWorkConsumers start(
@@ -37,8 +38,8 @@ public final class QuestionWorkConsumers implements AutoCloseable {
     Objects.requireNonNull(listener, "work listener");
     Objects.requireNonNull(onTerminal, "terminal signal");
     Objects.requireNonNull(onFatal, "fatal signal");
-    var context = Objects.requireNonNull(factory.get(), "async context");
-    var result = new QuestionWorkConsumers(context);
+    var result = new QuestionWorkConsumers(factory);
+    var context = result.context;
     try {
       context.setAutoStart(false);
       if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED)

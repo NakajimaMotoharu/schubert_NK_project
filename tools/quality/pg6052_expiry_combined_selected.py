@@ -12,7 +12,9 @@ OLD_TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repo
 BASE = '8c869d7cea21d587b859b3e72e3516d9d2deb5c8'
 
 
-def runner_source(total, suites):
+def runner_source(total, suites, target_count=1):
+    if type(target_count) is not int or target_count < 1:
+        raise ValueError('explicit nonempty current target cardinality')
     raw = inspect.getsource(engine.main)
     changes = {
         "count=3 if module=='protocol'else 4 if module=='web'else 1": 'count=COUNTS[name]',
@@ -21,7 +23,7 @@ def runner_source(total, suites):
         "method=case.get('name','').removesuffix('()')": "method=case.get('name','').split('(',1)[0]",
         'len(physical)==1664': 'len(physical)==1667',
         'done=done and target100': 'done=done  # partial coverage is reported,not invented or excluded',
-        'target100=len(target_counters)==14': 'target100=len(target_counters)==1',
+        'target100=len(target_counters)==14': 'target100=len(target_counters)=='+str(target_count),
         "'actualExit':next((v for v in exits if v),0)": "'actualExit':0 if done else 1,'mavenActualExit':next((v for v in exits if v),0)",
     }
     for old, new in changes.items():

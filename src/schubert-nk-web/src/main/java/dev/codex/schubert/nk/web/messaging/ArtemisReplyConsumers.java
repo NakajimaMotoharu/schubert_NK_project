@@ -27,8 +27,9 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
 
-  private ArtemisReplyConsumers(JMSContext context) {
-    this.context = context;
+  private ArtemisReplyConsumers(JmsContextFactory factory) {
+    // BUG1537: field initialization is complete before acquiring the dedicated context.
+    this.context = Objects.requireNonNull(factory.open(), "JMS context");
   }
 
   /** Installs the listener before delivery starts; a failed startup releases its session. */
@@ -67,7 +68,7 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   /** Native caller captures this owner before listener setup or delivery can fail. */
   public static ArtemisReplyConsumers bind(JmsContextFactory factory) {
     Objects.requireNonNull(factory, "factory");
-    return new ArtemisReplyConsumers(Objects.requireNonNull(factory.open(), "JMS context"));
+    return new ArtemisReplyConsumers(factory);
   }
 
   public void start(ArtemisReplyConsumer reply, Consumer<CommittedFatalReplyException> onTerminal) {

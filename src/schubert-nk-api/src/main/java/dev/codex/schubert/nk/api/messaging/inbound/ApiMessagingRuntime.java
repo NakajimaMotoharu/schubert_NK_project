@@ -17,6 +17,7 @@ import org.jspecify.annotations.Nullable;
  * MQ003/006/008/010; UI212213231251; SS312321342; PG-D333/BUG488/YKT362/PT-JMS016/CORE001..006.
  */
 public final class ApiMessagingRuntime implements AutoCloseable {
+  private static final int MAXIMUM_CONSUMER_GROUPS = 3;
   private final List<AutoCloseable> groups;
   private final AtomicBoolean terminal;
   private final AtomicBoolean closed = new AtomicBoolean();
@@ -95,7 +96,8 @@ public final class ApiMessagingRuntime implements AutoCloseable {
         () -> {
           if (terminal.compareAndSet(false, true)) onFatal.run();
         };
-    var groups = new ArrayList<AutoCloseable>();
+    // BUG1537: no first-add backing-array allocation after a group already owns JMS contexts.
+    var groups = new ArrayList<AutoCloseable>(MAXIMUM_CONSUMER_GROUPS);
     try {
       groups.add(
           SyncRequestConsumers.start(

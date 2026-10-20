@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,6 +39,51 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG228/PT-JMS-015: actual Artemis Web-log projection consumer, not full API bootstrap. */
 final class WebLogConsumersTest {
+  @Test
+  void jmsown002AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification() {
+    for (Throwable failure :
+        new Throwable[] {
+          new IllegalArgumentException("public factory argument"),
+          new IllegalStateException("public factory state"),
+          new NullPointerException("public factory null"),
+          new AssertionError("public factory fatal")
+        }) {
+      var calls = new AtomicInteger();
+      var signals = new AtomicInteger();
+      assertSame(
+          failure,
+          assertThrows(
+              Throwable.class,
+              () ->
+                  WebLogConsumers.start(
+                      () -> {
+                        calls.incrementAndGet();
+                        if (failure instanceof RuntimeException runtime) throw runtime;
+                        throw (Error) failure;
+                      },
+                      new WebLogListener(ignored -> {}, Clock.systemUTC()),
+                      ignored -> {},
+                      signals::incrementAndGet)));
+      assertEquals(1, calls.get());
+      assertEquals(0, signals.get());
+    }
+    var calls = new AtomicInteger();
+    var signals = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            WebLogConsumers.start(
+                () -> {
+                  calls.incrementAndGet();
+                  return null;
+                },
+                new WebLogListener(ignored -> {}, Clock.systemUTC()),
+                ignored -> {},
+                signals::incrementAndGet));
+    assertEquals(1, calls.get());
+    assertEquals(0, signals.get());
+  }
+
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-03T00:00:00Z"), ZoneOffset.UTC);
   private static final UUID EVENT_ID = UUID.fromString("00000000-0000-0000-0000-000000000003");
