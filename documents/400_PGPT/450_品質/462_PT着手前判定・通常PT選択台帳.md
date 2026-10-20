@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-021 — PT_DEFAULT：storage三十PG後の199/33
+
+1234/PG-D446/BUG1507/YKT1267。全storage188＋他五module固定guard十一、既自己所有temp file/FD/匿名memfd/有限child・fake portsだけ、offline Maven/全六format先行・package/JaCoCo/SpotBugsを含む通常PT。実VM/current/Unit/原本DBBackup/鍵/permit/failed-cohortへ接続0、権限/経路変更0。原3973終端/独立資格と全Main証拠保全後にPGし、clean source/fresh枠>10/新only snapshotで一回実行する。wrapperを静的だけと呼ばず、独立oracle/実XML四counterを保持する。命名定数/同じcritical sectionのprivate reentrant lock是正であり、拒否probe/再試行/未同定PT代替0。既source成功を新sourceへ合算しない。
+
 ## PTPRE-020 — PT_DEFAULT：単一session整理＋正規Sync並行後の3973全体
 
 1230/source79098cfa5、既3971 source再確認ではなく、三receiverの逐次terminal PGと新TERM005/006の正規独立context二件を同sourceで検証する。前提83/22真正0/六型null静的0、5882全851/1666・三物理差/公開ABI不変・raw1586、5890元XML/六TERM一意trace済み。既専用host/pinned mini/offline・自己所有一時DB/in-process broker等の同じfixture profile、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。fresh枠>10・現一致job無し/headroom/new-only認証後一回発行、元job/固定source/真正終端/原XMLを照合し重複再起動しない。不正同session再入/coverage除外/旧native輸入/拒否probeは0。正式/global/native/CHR/実Root未受入は別であり、全体途中を合格にしない。
