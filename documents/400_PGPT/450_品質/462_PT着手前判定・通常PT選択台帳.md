@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-029 — PT_DEFAULT：四同値PG群67sourceの必要全3973
+
+1256/PG6014、既承認の専用mini@aru ordinary offline fixture profile、全3973/592のTest/oracle/resourcesは元PG5944/source288から不変更。全六Maven/JUnit・自己所有tempPG/in-process JMS/loopback ephemeral HTTP/有限child・DOM/golden/null/例外/再送・並行だけ。新sourcebc0の67Main103条件private定数・独立6006/6008/6010資格後に限り、新only namespace/現在pinned identity/同job無し/disk RAM headroomを確認して一回。実VM/current/Unit/Root/原本DBBackup/鍵/permit/failed-cohortは不操作、権限/アクセス経路変更や拒否再試行0。実Caddy/Browser/native・Root真正DONEの代用にしない、旧native/coverageを新sourceへ合算0。
+
 ## PTPRE-028 — PT_DEFAULT：API既固定境界18後の1021/175
 
 1254/PG-D452/BUG1522。同じ承認済みhost fixture profileのAPI全1010/169＋他五module guard11/6、offline Maven/自己所有new snapshot・全六format先行→通常package/JUnit/JaCoCo/SpotBugs。固定Node依存もguardし、tempPG/独立rollback・in-process broker/loopback ephemeral HTTP/有限child/固定vectorだけ。Root/VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作。変更は15Mainの同値定数だけで権限/実環境/fixture副作用は不変、暗号/認証という名称を理由に代替へ広げない。拒否操作再試行/境界probe0。fresh>10/clean source/新only→全1021原XML/各15実四100・全8511666/Jar/ABI/raw実差で受入、未測定/旧成功の新source移植0。

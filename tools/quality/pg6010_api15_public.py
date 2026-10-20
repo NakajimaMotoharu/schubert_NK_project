@@ -10,7 +10,7 @@ from pg6006_api_bounds_selected import inventory
 from pg5966_api_sql_selected import source_test_names
 
 SOURCE = 'bc0cac2f6a7055b938f581e8cd163db398f8a656'
-STATIC_SHA = 'PENDING_ACTUAL_STATIC_PROOF'
+STATIC_SHA = '7c3a5d7b6e4a2246b8a73bdbb74c19a12ffdb010349ac27ca8af0bd623f43bbf'
 
 
 def four100(counters):
