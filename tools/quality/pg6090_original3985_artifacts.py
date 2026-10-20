@@ -92,7 +92,8 @@ def main():
         returnedOriginalResult=original['result'], archiveSha256=begin['archiveSha256'], allSourceInputs=inputs,
         expectedMainSourceInputs=main_inputs, expectedCases=expected,
         priorFullMain=json.loads(oldq.read_bytes())['allPhysicalMainSha256'], changedOwnerKeys=owner_keys,
-        physicalExpectedCounts=[1667, 1667], physicalExpectedAdded=[], expectedCurrentMain=proof['allPhysicalMainSha256'])
+        physicalExpectedCounts=[1667, 1667], physicalExpectedAdded=[], expectedCurrentMain=proof['allPhysicalMainSha256'],
+        includeCoverageXml=True)
     return reader.collect(data, original_path, 'pg6090-original3985-artifacts-v1',
         '/home/mini/schubert-nk-pgpt/transfer/PG6090-original3985-v1', 'PG6088-current3985-cases')
 

@@ -94,7 +94,7 @@ def inspect_original(data):
             and begin['sourceArchiveSha256'] == data['archiveSha256'] and begin['inputs'] == data['allSourceInputs']):
         raise ValueError('durable allsix format-before-PT/source/archive/complete input proof')
     start = timing['ptStartEpochNs']; end = int(datetime.datetime.fromisoformat(original['endUTC']).timestamp()*1e9)
-    actual, physical, all_counts, modules, artifacts = [], {}, {}, {}, {}
+    actual, physical, all_counts, modules, artifacts, coverage_artifacts = [], {}, {}, {}, {}, {}
     for module in ('protocol', 'storage', 'bootstrap', 'api', 'web', 'batch'):
         target = source/('src/schubert-nk-'+module+'/target'); xmls = {}; seen_suites = set()
         def check_time(path):
@@ -143,6 +143,10 @@ def inspect_original(data):
             raise ValueError('every original module XML/Main/counter/zero failure receipt exact')
         # Only generated Main jars, never raw test logs/DB/key/runtime files.
         artifacts[module] = base64.b64encode(jarpath.read_bytes()).decode('ascii')
+        if data.get('includeCoverageXml') is True:
+            if campaign != 'PG6088':
+                raise ValueError('only explicitly reviewed current3985 original coverage export')
+            coverage_artifacts[module] = base64.b64encode(coverage.read_bytes()).decode('ascii')
     if expected_case_keys(actual) != expected_case_keys(data['expectedCases']) or (len(actual), sum(m['suites'] for m in modules.values()), len(physical)) != expected_counts or not set(all_counts) <= set(physical):
         raise ValueError('exact3976 semantic Test set/593 suites/all1667,not old PASS arithmetic')
     changed, added, unchanged = physical_difference(data['priorFullMain'], physical, set(data['changedOwnerKeys']), data.get('physicalExpectedCounts', (1666, 1667)), data.get('physicalExpectedAdded'))
@@ -166,6 +170,8 @@ def inspect_original(data):
         currentOriginalXmlQualified=True, currentStaticPhysicalQualificationPending=True, formalAccepted=False, F03Accepted=False,
         sourceFiles=851, allSourceHashes=main_inputs,
         oldNativeImported=False, candidateNativePending=True, vmActions=0, refusedPtRetried=False, cases=actual, artifactJarBase64=artifacts)
+    if coverage_artifacts:
+        value['artifactCoverageXmlBase64'] = coverage_artifacts
     return value
 
 
@@ -248,7 +254,20 @@ def collect(data, original_path, slot, remote, public_name, attempt=1, prior_fai
             raise ValueError('original jar transport bytes must match verified receipt')
         with (jars/('schubert-nk-'+module+'.jar')).open('xb') as f:
             f.write(body); f.flush(); os.fsync(f.fileno())
+    coverage_values = value.pop('artifactCoverageXmlBase64', None)
     cases = value.pop('cases'); public = BASE/public_name; public.mkdir()
+    if coverage_values is not None:
+        if data.get('campaign') != 'PG6088' or data.get('includeCoverageXml') is not True or set(coverage_values) != set(MODULES):
+            raise ValueError('only six explicitly requested original current coverage reports')
+        for module in MODULES:
+            body = base64.b64decode(coverage_values[module], validate=True)
+            if hashlib.sha256(body).hexdigest() != value['modules'][module]['coverageXmlSha256']:
+                raise ValueError('original coverage transport hash equals independently verified report')
+            ET.fromstring(body)
+            folder = public/'coverage'/module/'site/jacoco'; folder.mkdir(parents=True)
+            with (folder/'jacoco.xml').open('xb') as f:
+                f.write(body); f.flush(); os.fsync(f.fileno())
+        value['coverageRoot'] = (public/'coverage').relative_to(ROOT).as_posix()
     for filename, body in (('cases.json', cases), ('qualification.json', value)):
         with (public/filename).open('x') as f:
             json.dump(body, f, ensure_ascii=False, indent=2); f.write('\n'); f.flush(); os.fsync(f.fileno())
@@ -257,7 +276,8 @@ def collect(data, original_path, slot, remote, public_name, attempt=1, prior_fai
         publicQualificationSha256=hashlib.sha256((public/'qualification.json').read_bytes()).hexdigest(),
         publicCasesSha256=hashlib.sha256((public/'cases.json').read_bytes()).hexdigest(), originalArtifactJarsFetched=6,
         wholeReplayed=False, formalAccepted=False, currentStaticPhysicalQualificationPending=True, vmActions=0,
-        readerAttempt=attempt, priorReaderFailurePreserved=prior_failure)
+        readerAttempt=attempt, priorReaderFailurePreserved=prior_failure,
+        originalCoverageXmlFetched=6 if coverage_values is not None else 0)
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(receipt, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
     print(json.dumps(receipt)); print(json.dumps(dict(tests=value['tests'], suites=value['suites'], mainClasses=value['mainClasses'], global100=value['global100'])))
