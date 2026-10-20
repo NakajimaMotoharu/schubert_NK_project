@@ -5,6 +5,7 @@ import subprocess
 import tarfile
 from pathlib import PurePosixPath
 import pg6042_original3976_artifacts as reader
+from pg5940_private_lock_compile import sha
 from pg6082_web_factory_qualification import SOURCE
 from pg6074_jms_owner_selected import MAIN as PREPARED_MAIN, TESTS
 from pg6080_web_factory_selected import MAIN as PROVIDER_MAIN, TEST as PROVIDER_TEST
@@ -62,7 +63,7 @@ def main():
         raise ValueError('only five Main/four Test sources')
     begin = json.loads((W/'pg6088-jms-owner-six-v1/begin.safe.json').read_bytes())
     archive = W/'pg6088-jms-owner-six-v1/source.tar'
-    if reader.sha(archive) != begin['archiveSha256']:
+    if sha(archive) != begin['archiveSha256']:
         raise ValueError('original fixed source archive')
     inputs = {}
     with tarfile.open(archive) as tar:
@@ -74,15 +75,15 @@ def main():
                 raise ValueError('all unique regular archived inputs')
             inputs[member.name] = hashlib.sha256(tar.extractfile(member).read()).hexdigest()
     oldq = BASE/'PG6060-current3979-cases/qualification.json'; oldcases = oldq.with_name('cases.json')
-    if reader.sha(oldq) != '4a411f7710e793e34204cc738d7882c69d500967b719c596c48687e195b84a5e' or reader.sha(oldcases) != 'b4f4fb0d819b59fa971f8795793a9e5d061ef542c1a4d9c2cb3b4acfa6155c03':
+    if sha(oldq) != '4a411f7710e793e34204cc738d7882c69d500967b719c596c48687e195b84a5e' or sha(oldcases) != 'b4f4fb0d819b59fa971f8795793a9e5d061ef542c1a4d9c2cb3b4acfa6155c03':
         raise ValueError('historical physical and semantic case identities immutable,not PASS transfer')
     expected = [{k: r[k] for k in ('module', 'class', 'caseNameSha256')} for r in json.loads(oldcases.read_bytes())]
     expected += new_case_identities()
     qp = BASE/'PG6082-web-factory-qualification-v1/manifest.json'; private = W/'pg6082-web-factory-qualification-v1/manifest.safe.json'
-    if reader.sha(qp) != '134e8181764a40b725fd0fa9365f5d18fa714b66221e4f46b992d3f84cd7e735':
+    if sha(qp) != '134e8181764a40b725fd0fa9365f5d18fa714b66221e4f46b992d3f84cd7e735':
         raise ValueError('actual current925 physical/source qualification')
     q = json.loads(qp.read_bytes())
-    if reader.sha(private) != q['privateManifestSha256']:
+    if sha(private) != q['privateManifestSha256']:
         raise ValueError('qualified original private source/class map hash')
     proof = json.loads(private.read_bytes()); main_inputs = reader.production_source_inputs(inputs)
     if main_inputs != proof['allSourceHashes'] or len(main_inputs) != 851 or proof['source'] != SOURCE:

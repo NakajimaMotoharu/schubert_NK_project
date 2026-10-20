@@ -16,6 +16,17 @@ from pg6048_current_jdbc24_review import current_refs
 from pg6090_original3985_artifacts import OLD, TESTS, new_case_identities
 
 
+def source_case_candidates(text, method):
+    prefix = r'(?m)^\s*(?:public\s+)?void\s+'+re.escape(method)+r'\s*'
+    zero = re.findall(prefix+r'\(\s*\)', text)
+    path = re.findall(prefix+r'\(\s*@TempDir\s+Path\s+[A-Za-z_$][A-Za-z0-9_$]*\s*\)', text)
+    if len(zero) == 1 and not path:
+        return method, method+'()'
+    if len(path) == 1 and not zero and 'import java.nio.file.Path;' in text and 'import org.junit.jupiter.api.io.TempDir;' in text:
+        return (method+'(Path)',)
+    raise ValueError('only one explicit zero-argument or imported TempDir Path Test signature;no guessed display alias')
+
+
 def reviewed_result(qsha, csha):
     if any(re.fullmatch('[0-9a-f]{64}', x) is None for x in (qsha, csha)):
         raise ValueError('explicit genuine current qualification/cases SHA256')
@@ -120,7 +131,8 @@ def reviewed_result(qsha, csha):
             if sha(path) != declared['sourceSha256']:
                 raise ValueError('independent reviewed Test source stays exact')
             for method in declared['methods']:
-                matches = [index[(name, hashlib.sha256(n.encode()).hexdigest())] for n in (method, method+'()') if (name, hashlib.sha256(n.encode()).hexdigest()) in index]
+                candidates = source_case_candidates(path.read_text(), method)
+                matches = [index[(name, hashlib.sha256(n.encode()).hexdigest())] for n in candidates if (name, hashlib.sha256(n.encode()).hexdigest()) in index]
                 if len(matches) != 1 or matches[0]['source'] != SOURCE or matches[0]['result'] != 'PASS_ORIGINAL_XML':
                     raise ValueError('each named review Test has exactly one genuine current whole PASS')
                 refs.append({k: matches[0][k] for k in ('testId','xmlSha256','class','caseNameSha256','source')})

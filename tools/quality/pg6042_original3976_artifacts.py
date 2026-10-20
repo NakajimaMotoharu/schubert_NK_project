@@ -7,6 +7,7 @@ import os
 import shlex
 import subprocess
 import tarfile
+import xml.etree.ElementTree as ET
 from pathlib import PurePosixPath
 from pyflakes.api import check
 from lan_server import run, copy

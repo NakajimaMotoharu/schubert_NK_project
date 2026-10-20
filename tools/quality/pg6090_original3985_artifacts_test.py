@@ -1,5 +1,7 @@
 import ast
+import inspect
 import unittest
+from pyflakes.api import checkPath
 import pg6090_original3985_artifacts as p
 
 
@@ -18,6 +20,13 @@ class OriginalArtifactDefinitionTest(unittest.TestCase):
         self.assertIn("coverage_artifacts[module]", raw)
         for value in ('mvn ', 'systemctl', 'qemu-system', 'sudo ', '--resume', '--recover'):
             self.assertNotIn(value, raw)
+
+    def test_all_used_reader_exports_and_both_operator_namespaces_are_complete(self):
+        for node in ast.walk(ast.parse(inspect.getsource(p))):
+            if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name) and node.value.id == 'reader':
+                self.assertTrue(hasattr(p.reader, node.attr), node.attr)
+        self.assertEqual(0, checkPath(p.__file__))
+        self.assertEqual(0, checkPath(p.reader.__file__))
 
 
 if __name__ == '__main__':

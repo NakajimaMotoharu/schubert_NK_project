@@ -1,10 +1,17 @@
 import copy
 import json
 import unittest
-from pg6092_current3985_static_join import BASE, W, ROOT, reviewed_result, ordered_pairs, bind_one, validate_rationales
+from pg6092_current3985_static_join import BASE, W, ROOT, reviewed_result, ordered_pairs, bind_one, validate_rationales, source_case_candidates
 
 
 class CurrentDispositionDefinitionTest(unittest.TestCase):
+    def test_exact_source_signature_not_a_guessed_parenthesis_suffix(self):
+        self.assertEqual(('caseA','caseA()'),source_case_candidates('void caseA() {}','caseA'))
+        text='import java.nio.file.Path;\nimport org.junit.jupiter.api.io.TempDir;\nvoid caseB(@TempDir Path root) {}'
+        self.assertEqual(('caseB(Path)',),source_case_candidates(text,'caseB'))
+        for bad in ('void caseB(String x) {}',text.replace('Path root','Path root, String x'),text.replace('import java.nio.file.Path;',''),text+'\nvoid caseB() {}'):
+            with self.assertRaises(ValueError):source_case_candidates(bad,'caseB')
+
     def test_invalid_or_missing_qualification_never_becomes_current_pass(self):
         with self.assertRaises(ValueError):
             reviewed_result('not-a-hash', 'not-a-hash')
