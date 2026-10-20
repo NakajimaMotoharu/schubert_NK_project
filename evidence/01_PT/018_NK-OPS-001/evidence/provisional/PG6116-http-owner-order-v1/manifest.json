@@ -1,0 +1,150 @@
+{
+  "actualExit": 0,
+  "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+  "qualificationSha256": "504e9754e0c815e97a70870d576988c9a7bde3aeabec6427a71bd15657ae1103",
+  "owners": [
+    {
+      "constructor": "  private dev.codex.schubert.nk.api.bootstrap.ApiManagementServer(java.util.function.BooleanSupplier, java.lang.String, int, dev.codex.schubert.nk.api.bootstrap.ApiManagementServer$Factory) throws java.io.IOException;",
+      "preparedFields": [
+        "healthy",
+        "information",
+        "executor",
+        "promoted",
+        "promotionAttempted",
+        "closed"
+      ],
+      "factoryOffset": 97,
+      "postAcquireOpcodes": [
+        "ldc",
+        "invokestatic",
+        "checkcast",
+        "putfield",
+        "return"
+      ],
+      "constructorSha256": "a8b7b280fd2eb77c87c24c61d7ccf07cea61d67099b688172ef0d4d3a1519f20",
+      "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementServer",
+      "unchangedMethods": [
+        "  boolean ready();",
+        "  int port();",
+        "  private static java.lang.String publicJson(java.util.Map<java.lang.String, java.lang.String>);",
+        "  private void respond(com.sun.net.httpserver.HttpExchange) throws java.io.IOException;",
+        "  public void close();",
+        "  static dev.codex.schubert.nk.api.bootstrap.ApiManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier) throws java.io.IOException;",
+        "  static dev.codex.schubert.nk.api.bootstrap.ApiManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier, int) throws java.io.IOException;",
+        "  void promote(dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Ready) throws java.io.IOException;"
+      ],
+      "changedCaller": [
+        "  static dev.codex.schubert.nk.api.bootstrap.ApiManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier, int, dev.codex.schubert.nk.api.bootstrap.ApiManagementServer$Factory) throws java.io.IOException;"
+      ],
+      "oldPrivateSignatures": [
+        "  private dev.codex.schubert.nk.api.bootstrap.ApiManagementServer(com.sun.net.httpserver.HttpServer, java.util.concurrent.ThreadPoolExecutor, java.util.function.BooleanSupplier, java.lang.String);",
+        "  private static java.lang.Thread lambda$open$0(java.lang.Runnable);"
+      ],
+      "newPrivateSignatures": [
+        "  private dev.codex.schubert.nk.api.bootstrap.ApiManagementServer(java.util.function.BooleanSupplier, java.lang.String, int, dev.codex.schubert.nk.api.bootstrap.ApiManagementServer$Factory) throws java.io.IOException;",
+        "  private static java.lang.Thread lambda$new$0(java.lang.Runnable);"
+      ],
+      "publicAbiUnchanged": true
+    },
+    {
+      "constructor": "  private dev.codex.schubert.nk.web.bootstrap.WebManagementServer(java.util.function.BooleanSupplier, java.lang.String, int, dev.codex.schubert.nk.web.bootstrap.WebManagementServer$Factory) throws java.io.IOException;",
+      "preparedFields": [
+        "healthy",
+        "information",
+        "executor",
+        "promoted",
+        "promotionAttempted",
+        "closed",
+        "stopping",
+        "stopLock"
+      ],
+      "factoryOffset": 119,
+      "postAcquireOpcodes": [
+        "ldc",
+        "invokestatic",
+        "checkcast",
+        "putfield",
+        "return"
+      ],
+      "constructorSha256": "58b9a15b7c24f7bc973e30ad4a4ebf096c6816164620e8cb69dc911ec50acde6",
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServer",
+      "unchangedMethods": [
+        "  boolean ready();",
+        "  int port();",
+        "  private static java.lang.String publicJson(java.util.Map<java.lang.String, java.lang.String>);",
+        "  private void respond(com.sun.net.httpserver.HttpExchange) throws java.io.IOException;",
+        "  public void close() throws java.io.IOException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebManagementServer bind(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier) throws java.io.IOException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier) throws java.io.IOException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier, int) throws java.io.IOException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebManagementServer open(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier, int, dev.codex.schubert.nk.web.bootstrap.WebManagementServer$Factory) throws java.io.IOException;",
+        "  void closeWithin(java.time.Duration) throws java.io.IOException;",
+        "  void promote(dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission$Ready) throws java.io.IOException;",
+        "  void start();"
+      ],
+      "changedCaller": [
+        "  static dev.codex.schubert.nk.web.bootstrap.WebManagementServer bind(java.util.Map<java.lang.String, java.lang.String>, java.util.function.BooleanSupplier, int, dev.codex.schubert.nk.web.bootstrap.WebManagementServer$Factory) throws java.io.IOException;"
+      ],
+      "oldPrivateSignatures": [
+        "  private dev.codex.schubert.nk.web.bootstrap.WebManagementServer(com.sun.net.httpserver.HttpServer, java.util.concurrent.ThreadPoolExecutor, java.util.function.BooleanSupplier, java.lang.String);",
+        "  private static java.lang.Thread lambda$bind$0(java.lang.Runnable);"
+      ],
+      "newPrivateSignatures": [
+        "  private dev.codex.schubert.nk.web.bootstrap.WebManagementServer(java.util.function.BooleanSupplier, java.lang.String, int, dev.codex.schubert.nk.web.bootstrap.WebManagementServer$Factory) throws java.io.IOException;",
+        "  private static java.lang.Thread lambda$new$0(java.lang.Runnable);"
+      ],
+      "publicAbiUnchanged": true
+    },
+    {
+      "constructor": "  private dev.codex.schubert.nk.web.bootstrap.WebHttpServer(java.util.function.Supplier<org.apache.catalina.startup.Tomcat>);",
+      "preparedFields": [
+        "mvc",
+        "lifecycleLock"
+      ],
+      "factoryOffset": 28,
+      "postAcquireOpcodes": [
+        "checkcast",
+        "ldc",
+        "invokestatic",
+        "checkcast",
+        "putfield",
+        "return"
+      ],
+      "constructorSha256": "6940578eef68435c352c72ea3ce19513228378ffb371bb5ad2375864e678d037",
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServer",
+      "unchangedMethods": [
+        "  private static void lambda$mappedPaths$0(java.util.HashSet, org.springframework.web.servlet.mvc.method.RequestMappingInfo);",
+        "  private static void lambda$startWithOwner$0(java.util.Map, org.springframework.beans.factory.config.ConfigurableListableBeanFactory) throws org.springframework.beans.BeansException;",
+        "  private static void lambda$startWithOwner$1(org.springframework.beans.factory.config.ConfigurableListableBeanFactory, java.lang.Class, java.lang.Object);",
+        "  public int port();",
+        "  public java.util.Set<java.lang.String> mappedPaths();",
+        "  public static dev.codex.schubert.nk.web.bootstrap.WebHttpServer start(java.nio.file.Path, int, jakarta.servlet.Filter, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;",
+        "  public static dev.codex.schubert.nk.web.bootstrap.WebHttpServer start(java.nio.file.Path, int, jakarta.servlet.Filter, java.util.Map<java.lang.Class<?>, ?>, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;",
+        "  public void close() throws org.apache.catalina.LifecycleException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebHttpServer startOwned(java.nio.file.Path, int, jakarta.servlet.Filter, java.util.Map<java.lang.Class<?>, ?>, java.util.function.Consumer<dev.codex.schubert.nk.web.bootstrap.WebHttpServer>, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebHttpServer startWithFactory(java.nio.file.Path, int, jakarta.servlet.Filter, java.util.Map<java.lang.Class<?>, ?>, java.util.function.Supplier<org.apache.catalina.startup.Tomcat>, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;",
+        "  static dev.codex.schubert.nk.web.bootstrap.WebHttpServer startWithFactory(java.nio.file.Path, int, jakarta.servlet.Filter, java.util.function.Supplier<org.apache.catalina.startup.Tomcat>, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;",
+        "  static java.util.Map<java.lang.Class<?>, ?> checkedDependencies(java.util.Map<java.lang.Class<?>, ?>);",
+        "  static void validateConfiguration(java.nio.file.Path, int, java.lang.Class<?>[]);"
+      ],
+      "changedCaller": [
+        "  static dev.codex.schubert.nk.web.bootstrap.WebHttpServer startWithOwner(java.nio.file.Path, int, jakarta.servlet.Filter, java.util.Map<java.lang.Class<?>, ?>, java.util.function.Supplier<org.apache.catalina.startup.Tomcat>, java.util.function.Consumer<dev.codex.schubert.nk.web.bootstrap.WebHttpServer>, java.lang.Class<?>...) throws org.apache.catalina.LifecycleException;"
+      ],
+      "oldPrivateSignatures": [
+        "  private dev.codex.schubert.nk.web.bootstrap.WebHttpServer(org.apache.catalina.startup.Tomcat, org.springframework.web.context.support.AnnotationConfigWebApplicationContext);"
+      ],
+      "newPrivateSignatures": [
+        "  private dev.codex.schubert.nk.web.bootstrap.WebHttpServer(java.util.function.Supplier<org.apache.catalina.startup.Tomcat>);"
+      ],
+      "publicAbiUnchanged": true
+    }
+  ],
+  "nestedDebugOnly": [],
+  "testsExecuted": 0,
+  "additionalBuildsIssued": 0,
+  "dynamicOomExecuted": false,
+  "vmActions": 0,
+  "formalAccepted": false,
+  "nativeQualified": false,
+  "ptAlternativeCompleted": 0
+}

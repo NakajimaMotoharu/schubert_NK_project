@@ -1,6 +1,6 @@
 """Independent synthetic JVM order counterexamples; never load or invoke Production."""
 import unittest
-from pg6116_http_owner_order import prepared_owner
+from pg6116_http_owner_order import prepared_owner, resolved_body
 
 
 class Order(unittest.TestCase):
@@ -35,6 +35,21 @@ class Order(unittest.TestCase):
         ):
             with self.subTest(code=code), self.assertRaises(ValueError):
                 self.verify(code)
+
+    def test_bootstrap_index_is_resolved_with_actual_handle_and_arguments(self):
+        code = '  private void x();\n    Code:\n       0: invokedynamic #CP, 0 // InvokeDynamic #1:apply:()Ljava/lang/Object;\n       5: return'
+        verbose = '''BootstrapMethods:
+  1: #20 REF_invokeStatic LambdaMetafactory.metafactory
+    Method arguments:
+      #21 ()V
+      #22 REF_invokeVirtual Example.respond:()V
+InnerClasses:
+'''
+        shifted = verbose.replace('  1:', '  0:').replace('#20 ', '#50 ').replace('#21 ', '#51 ').replace('#22 ', '#52 ')
+        self.assertEqual(resolved_body(code, verbose), resolved_body(code.replace('Dynamic #1:', 'Dynamic #0:'), shifted))
+        self.assertNotEqual(resolved_body(code, verbose), resolved_body(code, verbose.replace('Example.respond', 'Example.other')))
+        with self.assertRaises(ValueError):
+            resolved_body(code.replace('Dynamic #1:', 'Dynamic #9:'), verbose)
 
 
 if __name__ == '__main__':
