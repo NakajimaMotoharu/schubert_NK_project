@@ -25,6 +25,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
+  private static final int FIXED_LOGIN_TIMEOUT_SECONDS = 3;
+
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
   private final String url;
@@ -126,7 +128,7 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
 
   @Override
   public void setLoginTimeout(int seconds) throws SQLException {
-    if (seconds != 3) throw unsupported();
+    if (seconds != FIXED_LOGIN_TIMEOUT_SECONDS) throw unsupported();
   }
 
   @Override

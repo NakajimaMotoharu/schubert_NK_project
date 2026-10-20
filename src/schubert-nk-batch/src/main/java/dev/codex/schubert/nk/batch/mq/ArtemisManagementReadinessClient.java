@@ -22,6 +22,8 @@ import org.apache.activemq.artemis.api.core.management.ResourceNames;
  * NK-OPS-001; MQ-001/002/009/010,SYS-004; UI231/251; SS321/342; PG235/PT-OPS-MQ-005..007.
  */
 public final class ArtemisManagementReadinessClient {
+  private static final long MINIMUM_REQUEST_TIMEOUT_NANOS = 1_000_000L;
+
   // SSC125: a synchronous borrowed timeout, never a role/credential/parent capability.
   // All existing fixed Ops/Expiry management exchanges pass through query below.
   private static final ThreadLocal<Optional<MaintenanceOwnerFrame.Guard>> PARENT_DEADLINE =
@@ -52,7 +54,8 @@ public final class ArtemisManagementReadinessClient {
     var owner = PARENT_DEADLINE.get();
     if (owner.isEmpty()) return 2000L; // Existing standalone read-only/PT contract.
     long remaining = owner.orElseThrow().remainingNanos();
-    if (remaining < 1_000_000L) throw new IOException("management deadline unavailable");
+    if (remaining < MINIMUM_REQUEST_TIMEOUT_NANOS)
+      throw new IOException("management deadline unavailable");
     return Math.min(2000L, remaining / 1_000_000L);
   }
 

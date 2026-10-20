@@ -25,6 +25,8 @@ public record BackupManifest(
     BackupFileDigest dump,
     BackupFileDigest configuration,
     BackupFileDigest credentials) {
+  private static final int MAXIMUM_DIRECTORY_YEAR = 9999;
+
   private static final ZoneId JST = ZoneId.of("Asia/Tokyo");
   private static final DateTimeFormatter NAME =
       DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss", Locale.ROOT).withZone(JST);
@@ -49,7 +51,7 @@ public record BackupManifest(
     time(startedAt, databaseStep.startedAt());
     time(startedAt, configurationStep.startedAt());
     time(contentFinishedAt, startedAt);
-    if (startedAt.atZone(JST).getYear() > 9999)
+    if (startedAt.atZone(JST).getYear() > MAXIMUM_DIRECTORY_YEAR)
       throw new IllegalArgumentException("invalid backup directory year");
     if (!recipientSha256.matches("[0-9a-f]{64}"))
       throw new IllegalArgumentException("invalid backup recipient fingerprint");

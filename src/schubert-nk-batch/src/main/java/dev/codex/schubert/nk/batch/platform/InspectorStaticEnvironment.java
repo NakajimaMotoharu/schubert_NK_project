@@ -14,6 +14,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorStaticEnvironment {
+  private static final int MAXIMUM_INTERFACE_NAMES_CHARACTERS = 65536;
+  private static final int MAXIMUM_TCP_PORT = 65535;
+
   public static final int MAXIMUM_BYTES = 65848;
   private static final Pattern FILE =
       Pattern.compile(
@@ -30,9 +33,10 @@ public final class InspectorStaticEnvironment {
     // Non-ASCII bytes decode to replacement characters that the complete ASCII grammar rejects.
     var match = FILE.matcher(new String(observed, StandardCharsets.US_ASCII));
     if (!match.matches()) throw invalid();
-    if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535) throw invalid();
+    if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > MAXIMUM_TCP_PORT)
+      throw invalid();
     String names = Objects.requireNonNull(match.group(2));
-    if (names.length() > 65536) throw invalid();
+    if (names.length() > MAXIMUM_INTERFACE_NAMES_CHARACTERS) throw invalid();
     var unique = new HashSet<String>();
     for (String version : names.split(",", -1)) {
       if (!VERSION.matcher(version).matches() || !unique.add(version)) throw invalid();

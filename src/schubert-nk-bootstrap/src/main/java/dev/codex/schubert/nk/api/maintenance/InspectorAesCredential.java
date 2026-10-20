@@ -14,6 +14,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class InspectorAesCredential implements AutoCloseable {
+  private static final int AES_KEY_BYTES = 32;
+
   private static final byte[] MAGIC = "NKKEY1\n".getBytes(StandardCharsets.US_ASCII);
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
@@ -43,7 +45,7 @@ public final class InspectorAesCredential implements AutoCloseable {
       if (!version.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,15}")) throw invalid();
       encoded = Arrays.copyOfRange(input, 8 + versionLength, input.length - 1);
       decoded = Base64.getDecoder().decode(encoded);
-      if (decoded.length != 32) throw invalid();
+      if (decoded.length != AES_KEY_BYTES) throw invalid();
       byte[] canonical = Base64.getEncoder().encode(decoded);
       try {
         if (!Arrays.equals(encoded, canonical)) throw invalid();

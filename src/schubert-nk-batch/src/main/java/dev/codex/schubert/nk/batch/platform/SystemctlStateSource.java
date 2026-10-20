@@ -17,6 +17,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class SystemctlStateSource implements ApplicationStopGate.StateSource {
+  private static final int MAXIMUM_STATE_OUTPUT_BYTES = 1024;
+
   @FunctionalInterface
   interface Start {
     Process execute(List<String> command) throws IOException;
@@ -75,7 +77,7 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
                                   bytes[0] =
                                       Objects.requireNonNull(
                                           stdout.readNBytes(1025), "systemctl output");
-                                  if (bytes[0].length > 1024)
+                                  if (bytes[0].length > MAXIMUM_STATE_OUTPUT_BYTES)
                                     throw new StopGateException(StopGateFailure.MALFORMED_STATE);
                                 })));
           });

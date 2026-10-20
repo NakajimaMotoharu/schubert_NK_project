@@ -40,6 +40,8 @@ import org.jspecify.annotations.NullMarked;
 /** Same continuous Morning callback, no new M/A/DB owner. SS341/343 SSC119/CEXEC001. */
 @NullMarked
 final class MorningCleanupExecution {
+  private static final int REJECTED_EXIT_STATUS = 30;
+
   private MorningCleanupExecution() {}
 
   /** Data only: genuine current receipt and seven separate optional original references. SSC126. */
@@ -227,7 +229,7 @@ final class MorningCleanupExecution {
                   operation -> database.handoffCleanup(operation::execute),
                   receipt -> {
                     parent.check();
-                    if (receipt.exitCode() == 30)
+                    if (receipt.exitCode() == REJECTED_EXIT_STATUS)
                       database.observeCleanupRejected(state.activation().run(), receipt, parent);
                     else
                       result.set(
@@ -267,7 +269,8 @@ final class MorningCleanupExecution {
                     parent.check();
                   });
           parent.check();
-          if (terminal.exitCode() == 30) throw new IOException("Cleanup rejected");
+          if (terminal.exitCode() == REJECTED_EXIT_STATUS)
+            throw new IOException("Cleanup rejected");
           var observed = Objects.requireNonNull(result.get(), "actual Cleanup readback");
           return new Completion(
               observed,

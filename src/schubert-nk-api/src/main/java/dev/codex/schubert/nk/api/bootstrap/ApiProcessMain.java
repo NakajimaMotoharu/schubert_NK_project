@@ -28,6 +28,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ApiProcessMain {
+  private static final int EXPECTED_FAILURE_STATUS_COUNT = 1;
+
   private final Map<String, String> environment;
   private final NonSecretConfigSource source;
   private final IntConsumer termination;
@@ -69,7 +71,7 @@ public final class ApiProcessMain {
       ConfigurationLoad input, int[] failureCode) throws IOException {
     Objects.requireNonNull(input, "configuration input");
     Objects.requireNonNull(failureCode, "configuration failure status");
-    if (failureCode.length != 1)
+    if (failureCode.length != EXPECTED_FAILURE_STATUS_COUNT)
       throw new IllegalArgumentException("one configuration failure status required");
     try {
       var inputs = Objects.requireNonNull(input.load(), "startup inputs");

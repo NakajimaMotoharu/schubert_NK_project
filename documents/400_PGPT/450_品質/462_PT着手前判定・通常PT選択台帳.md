@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-031 — PT_DEFAULT：全残33同値条件後の必要一回3976/593
+
+1263/PG-D455/BUG1529、既承認mini@aru ordinary非root offline fixture profile。全六format先行→通常Maven/JUnit/JaCoCo/型nullSpotBugs、自己所有tempPG/in-process JMS/loopback HTTP/有限child・固定wire/DOM/null例外並行fixtureだけ。全Test/oracleは32fから不変更、予想3976/593/851source1667Mainは実原XMLで検証する。Source33条件は値不変更・全method命令等価を後続独立確認、実VM/Unit/Root/current/原本DBBackup/鍵/permit/failed-cohortへ接続・権限変更0、拒否PT再試行/境界probe0。fresh枠/clean operator/新only namespace/当hostの同job無し・headroom/pinned keyを先行し一回。旧full3973やselected965の算術合算を新全体合格にしない。native実測不足・PTALT未特定/実安全不明HOLDを解除しない。
+
 ## PTPRE-030 — PT_DEFAULT：二source例外境界・独立port試験
 
 1259/PG-D453/BUG1523。既承認aru ordinary非rootoffline fixture profile、batch mq関連suite＋全Web913＋依存guardを予定し、実named Test inventoryで件数を固定する。新三Testは合成ClientMessage/ClientSessionと借用Guardだけ、メッセージ配送/実broker/DB/Root/VM/Unit/current/permit/failed-cohort操作なし。他既suiteは自己所有tempDB/in-process broker/loopback/有限childだけ。新source/clean/new-only/fresh枠・全六format→型null/通常PT/coverage/全Main物理差、固定raw静的を実確認。実操作リスク不変・拒否PT再送/境界探索なし。staticの名でPTを隠さず通常実行と記録する。

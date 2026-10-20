@@ -30,6 +30,10 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class MorningServiceReadiness {
+  private static final int JSON_OPENING_DELIMITER_LENGTH = 1;
+  private static final int MAXIMUM_SOCKET_DIRECTORY_ENTRIES = 65536;
+  private static final int SUCCESS_HTTP_STATUS = 200;
+
   private static final java.lang.String LITERAL_SERVICE_OBSERVATION_UNAVAILABLE =
       "service observation unavailable";
 
@@ -106,7 +110,7 @@ public final class MorningServiceReadiness {
           ? value.matches("[0-9a-f]{40}")
           : value.matches("[A-Za-z0-9][A-Za-z0-9._+\\-]{0,127}")))
         throw new IllegalArgumentException("invalid public information");
-      if (json.length() > 1) json.append(',');
+      if (json.length() > JSON_OPENING_DELIMITER_LENGTH) json.append(',');
       json.append('"').append(key).append("\":\"").append(value).append('"');
     }
     this.information = json.append('}').toString();
@@ -228,7 +232,8 @@ public final class MorningServiceReadiness {
       try (var entries = Files.newDirectoryStream(proc.resolve("fd"))) {
         int count = 0;
         for (Path entry : entries) {
-          if (++count > 65536) throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
+          if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES)
+            throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
           try {
             String target = Files.readSymbolicLink(entry).toString();
             if (target.matches("socket:\\[[1-9][0-9]{0,19}\\]"))
@@ -265,7 +270,7 @@ public final class MorningServiceReadiness {
         connection.setConnectTimeout(500);
         connection.setReadTimeout(500);
         int status = connection.getResponseCode();
-        if (status != 200) return new Response(status, "");
+        if (status != SUCCESS_HTTP_STATUS) return new Response(status, "");
         return ResourceScope.acquire(
             connection::getInputStream,
             java.io.InputStream::close,

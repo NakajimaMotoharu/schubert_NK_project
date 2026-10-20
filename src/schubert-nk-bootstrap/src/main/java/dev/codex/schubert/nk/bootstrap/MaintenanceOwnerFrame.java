@@ -27,6 +27,8 @@ public record MaintenanceOwnerFrame(
     Parent morning,
     Optional<Parent> cleanup,
     long deadlineNanos) {
+  private static final long MINIMUM_QUERY_TIMEOUT_NANOS = 1_000_000_000L;
+
   public static final int MAXIMUM_BYTES = 1024;
   private static final UUID NIL = new UUID(0, 0);
 
@@ -42,7 +44,7 @@ public record MaintenanceOwnerFrame(
     /** JDBC integer seconds are rounded DOWN, never beyond the common parent deadline. */
     default int queryTimeoutSeconds() throws IOException {
       long remaining = remainingNanos();
-      if (remaining < 1_000_000_000L) throw unavailable();
+      if (remaining < MINIMUM_QUERY_TIMEOUT_NANOS) throw unavailable();
       return (int) Math.min(5L, remaining / 1_000_000_000L);
     }
   }

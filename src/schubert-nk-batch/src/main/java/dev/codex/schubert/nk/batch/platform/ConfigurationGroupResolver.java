@@ -22,6 +22,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ConfigurationGroupResolver {
+  private static final char GROUP_FIELD_SEPARATOR = ':';
+
   private static final byte[] PREFIX = "schubert:".getBytes(StandardCharsets.US_ASCII);
   private final Start start;
 
@@ -162,7 +164,7 @@ public final class ConfigurationGroupResolver {
     for (int index = 0; index < length - 1; index++) {
       int value = Byte.toUnsignedInt(bytes[index]);
       require(value >= 32 && value != 127);
-      if (value == ':') {
+      if (value == GROUP_FIELD_SEPARATOR) {
         if (count < separators.length) separators[count] = index;
         count++;
       }

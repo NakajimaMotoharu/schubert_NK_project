@@ -14,6 +14,9 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class InspectorDbCredential implements AutoCloseable {
+  private static final char BYTE_ORDER_MARK = '\ufeff';
+  private static final char OPTIONAL_LINE_TERMINATOR = '\n';
+
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
   private final char[] password;
@@ -32,7 +35,7 @@ public final class InspectorDbCredential implements AutoCloseable {
     try {
       if (input.length < 1 || input.length > 65536) throw invalid();
       int length = input.length;
-      if (input[length - 1] == '\n') {
+      if (input[length - 1] == OPTIONAL_LINE_TERMINATOR) {
         length--;
         if (length > 0 && input[length - 1] == '\r') length--;
       }
@@ -43,7 +46,7 @@ public final class InspectorDbCredential implements AutoCloseable {
       // UTF-8 is stateless; this final flush has no pending character output.
       decoder.flush(target);
       int characters = target.position();
-      if (decoded[0] == '\ufeff') throw invalid();
+      if (decoded[0] == BYTE_ORDER_MARK) throw invalid();
       for (int i = 0; i < characters; i++) {
         char value = decoded[i];
         if (value == 0 || value == '\r' || value == '\n') throw invalid();

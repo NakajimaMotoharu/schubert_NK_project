@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ArtemisAcceptorReadinessClient {
+  private static final int EXPECTED_ACCEPTOR_COUNT = 1;
+
   private static final java.lang.String LITERAL_NAME = "name";
 
   private static final java.lang.String LITERAL_FACTORYCLASSNAME = "factoryClassName";
@@ -77,7 +79,7 @@ public final class ArtemisAcceptorReadinessClient {
   private static Map<String, String> verifyResponse(String json) {
     try {
       var values = JsonUtil.readJsonArray(json);
-      if (values.size() != 1) throw new ArtemisManagementReadinessException();
+      if (values.size() != EXPECTED_ACCEPTOR_COUNT) throw new ArtemisManagementReadinessException();
       if (!(values.get(0) instanceof JsonObject acceptor))
         throw new ArtemisManagementReadinessException();
       if (!ACCEPTOR_FIELDS.equals(acceptor.keySet())

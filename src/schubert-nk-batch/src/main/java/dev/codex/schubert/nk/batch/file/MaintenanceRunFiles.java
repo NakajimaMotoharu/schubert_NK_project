@@ -57,6 +57,8 @@ import org.jspecify.annotations.Nullable;
 // PG172/SSC063, BUG195/YKT154; resource precedence and PT evidence/01_PT/017/050.
 @NullMarked
 public final class MaintenanceRunFiles {
+  private static final int FIXED_ROOT_FILE_COUNT = 5;
+
   private static final java.lang.String LITERAL_DMI_HARDCODED_ABSOLUTE_FILENAME =
       "DMI_HARDCODED_ABSOLUTE_FILENAME";
 
@@ -675,7 +677,7 @@ public final class MaintenanceRunFiles {
           !observed.filesystem().equals("tmpfs")
               && observed.metadata().equals(actual.metadata())
               && observed.filesystem().equals(actual.filesystem()));
-      if (index < 5) {
+      if (index < FIXED_ROOT_FILE_COUNT) {
         String[] names = {
           LITERAL_LIB, LITERAL_SCHUBERT_NK, "maintenance", LITERAL_RUNS, LITERAL_ATTEMPTS
         };

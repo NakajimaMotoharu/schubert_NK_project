@@ -27,6 +27,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class RootServiceLauncher {
+  private static final int EXPECTED_SERVICE_ARGUMENTS = 1;
+
   @FunctionalInterface
   interface Admission {
     void verify(ServiceConfigFiles.Service service) throws IOException;
@@ -85,7 +87,7 @@ public final class RootServiceLauncher {
   static int run(String[] args, Admission admission) {
     Objects.requireNonNull(args, "fixed service arguments");
     Objects.requireNonNull(admission, "root admission");
-    if (args.length != 1) return 70;
+    if (args.length != EXPECTED_SERVICE_ARGUMENTS) return 70;
     ServiceConfigFiles.Service service;
     switch (args[0]) {
       case "WEB" -> service = ServiceConfigFiles.Service.WEB;

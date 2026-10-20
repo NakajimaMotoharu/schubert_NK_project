@@ -32,6 +32,8 @@ import org.jspecify.annotations.NullMarked;
 /** Fixed Ubuntu amd64 trusted payloads; held ELF is not a third inherited FD. SSC137/PT297. */
 @NullMarked
 final class RootServiceExecutableAdmission {
+  private static final int RETAINED_SYMBOLIC_LINK_MODE = 0xa1ff;
+
   private static final java.lang.String LITERAL_JAVA = "java";
 
   static final String SETPRIV = "86965a019d37dc11d176ce8cbe9f5f5f8f37027c95e03cb4a8cad4c73d940993";
@@ -315,7 +317,7 @@ final class RootServiceExecutableAdmission {
             && (mode != 0x81ed || size > 0 && size <= MAXIMUM));
     require(a.get("lastModifiedTime") instanceof FileTime && a.get("ctime") instanceof FileTime);
     // On a retained symlink getxattr would follow its target; check its typed metadata instead.
-    if (mode != 0xa1ff) require(security.accessAcl(held, 44).length == 0);
+    if (mode != RETAINED_SYMBOLIC_LINK_MODE) require(security.accessAcl(held, 44).length == 0);
     return Map.copyOf(a);
   }
 

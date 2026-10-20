@@ -15,6 +15,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class SystemManagerObservation {
+  private static final int MAXIMUM_PUBLIC_OBSERVATION_CHARACTERS = 4096;
+
   /** Fixed observations only; no caller-supplied Unit or service action. SSC295. */
   public enum Service {
     API("schubert-nk-api.service"),
@@ -153,7 +155,7 @@ public final class SystemManagerObservation {
               if (value.length() > 4096 || !value.chars().allMatch(c -> c >= 32 && c <= 126))
                 throw unavailable();
               result.append(property.member).append('=').append(value).append('\n');
-              if (result.length() > 4096) throw unavailable();
+              if (result.length() > MAXIMUM_PUBLIC_OBSERVATION_CHARACTERS) throw unavailable();
             }
             if (!first.equals(session.owner(remaining(began)))) throw unavailable();
             remaining(began);

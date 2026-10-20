@@ -42,6 +42,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class BackupArtifactVerifier {
+  private static final int FILE_TYPE_MASK = 0xf000;
+  private static final int REGULAR_FILE_TYPE = 0x8000;
+
   private static final java.lang.String LITERAL_SCHUBERT_NK_DUMP = "schubert_nk.dump";
 
   private static final java.lang.String LITERAL_CONFIG_TAR = "config.tar";
@@ -304,7 +307,7 @@ public final class BackupArtifactVerifier {
                                 raw.size() >= 0
                                     && raw.device() == initial.device()
                                     && raw.inode() > 0);
-                            if ((raw.mode() & 0xf000) != 0x8000) {
+                            if ((raw.mode() & FILE_TYPE_MASK) != REGULAR_FILE_TYPE) {
                               require(raw.equals(metadata(io.attributes(held))));
                               guard(started);
                               return false;

@@ -29,6 +29,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class StartupAdmissionFile {
+  private static final int MINIMUM_PRIVATE_VIEW_CAPACITY = 1;
+
   private final Path runtime;
   private final DirectoryCalls host;
   private final DirectoryCalls service;
@@ -217,7 +219,8 @@ public final class StartupAdmissionFile {
 
     ViewOwner(DirectoryCalls calls, int capacity) {
       this.calls = Objects.requireNonNull(calls, "view directory calls");
-      if (capacity < 1) throw new IllegalArgumentException("positive private view capacity");
+      if (capacity < MINIMUM_PRIVATE_VIEW_CAPACITY)
+        throw new IllegalArgumentException("positive private view capacity");
       descriptors = new int[capacity];
       secondaryFailures = new boolean[capacity];
     }

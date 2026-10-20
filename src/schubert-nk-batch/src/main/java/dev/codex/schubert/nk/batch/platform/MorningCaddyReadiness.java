@@ -29,6 +29,10 @@ import org.jspecify.annotations.Nullable;
 /** Same-parent fixed Caddy daemon/validate/owned TLS login proof. SS342/SSC178/CADDY455. */
 @NullMarked
 public final class MorningCaddyReadiness {
+  private static final int IPV4_ADDRESS_BYTES = 4;
+  private static final int MAXIMUM_SOCKET_DIRECTORY_ENTRIES = 65536;
+  private static final int SUCCESS_HTTP_STATUS = 200;
+
   /** SSC308/PT-CADDYSTREAM001-006: nullable HTTP body, never nullable common ownership. */
   static void closeLoginInput(ResourceScope.Acquire<InputStream, IOException> open)
       throws IOException {
@@ -131,7 +135,7 @@ public final class MorningCaddyReadiness {
         || !captured.equals(io.actor(invocation))) throw unavailable();
     var sockets = Set.copyOf(Objects.requireNonNull(io.sockets(pid)));
     if (sockets.isEmpty()) return false;
-    if (io.login() != 200) return false;
+    if (io.login() != SUCCESS_HTTP_STATUS) return false;
     guard.check();
     if (!captured.equals(io.actor(invocation)) || !before.equals(io.manager())) throw unavailable();
     var after = Set.copyOf(Objects.requireNonNull(io.sockets(pid)));
@@ -390,7 +394,7 @@ public final class MorningCaddyReadiness {
       try (var entries = Files.newDirectoryStream(proc.resolve("fd"))) {
         int count = 0;
         for (Path entry : entries) {
-          if (++count > 65536) throw unavailable();
+          if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES) throw unavailable();
           try {
             String target = Files.readSymbolicLink(entry).toString();
             if (target.matches("socket:\\[[1-9][0-9]{0,19}\\]"))
@@ -412,7 +416,7 @@ public final class MorningCaddyReadiness {
                   descriptors,
                   kernelAddress(literal),
                   literal.length == 16));
-      if (literal.length == 4) {
+      if (literal.length == IPV4_ADDRESS_BYTES) {
         byte[] mapped = new byte[16];
         mapped[10] = (byte) 255;
         mapped[11] = (byte) 255;

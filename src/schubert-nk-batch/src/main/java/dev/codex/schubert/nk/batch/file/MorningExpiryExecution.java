@@ -38,6 +38,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class MorningExpiryExecution {
+  private static final int REJECTED_EXIT_STATUS = 30;
+
   private MorningExpiryExecution() {}
 
   @SuppressFBWarnings(
@@ -174,7 +176,7 @@ final class MorningExpiryExecution {
                     parent.check();
                   });
           parent.check();
-          if (actual.exitCode() == 30) throw new IOException("Expiry rejected");
+          if (actual.exitCode() == REJECTED_EXIT_STATUS) throw new IOException("Expiry rejected");
           return Objects.requireNonNull(
               result.get(), "actual Expiry terminal/receipt/audit readback");
         });

@@ -30,6 +30,12 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class LinuxSystemdSession implements SystemManagerObservation.Session {
+  private static final char STRING_PROPERTY_TYPE = 's';
+  private static final int COMPLETE_OUTPUT_STATE = 2;
+  private static final int EXPECTED_BASIC_READ_VALUES = 1;
+  private static final int MAXIMUM_PROPERTY_UTF8_BYTES = 4096;
+  private static final int READY_STATUS = 1;
+
   private static final java.lang.String LITERAL_SD_BUS_MESSAGE_UNREF = "sd_bus_message_unref";
 
   private static final java.lang.String LITERAL_RESTRICTED = "restricted";
@@ -119,7 +125,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
 
   private void releaseOutput(int slot, String symbol) throws IOException {
     if (outputState[slot] == 0) return;
-    if (outputState[slot] != 2) {
+    if (outputState[slot] != COMPLETE_OUTPUT_STATE) {
       uncertain = true;
       throw SystemManagerObservation.unavailable();
     }
@@ -149,7 +155,8 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
 
   private void timeout(long micros) throws IOException {
     long left = remaining(micros);
-    if (integer("sd_bus_is_ready", bus) != 1) throw SystemManagerObservation.unavailable();
+    if (integer("sd_bus_is_ready", bus) != READY_STATUS)
+      throw SystemManagerObservation.unavailable();
     integer("sd_bus_set_method_call_timeout", bus, left);
     remaining(micros); // Setter/ready work must not cross the original deadline before sending.
   }
@@ -240,8 +247,8 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
                 if (!(called instanceof Integer ok) || ok < 0 || reply.address() == 0)
                   throw SystemManagerObservation.unavailable();
                 var value = kind == 's' ? pointer() : arena.allocate(ValueLayout.JAVA_INT);
-                if (integer("sd_bus_message_read_basic", reply, (byte) kind, value) != 1)
-                  throw SystemManagerObservation.unavailable();
+                if (integer("sd_bus_message_read_basic", reply, (byte) kind, value)
+                    != EXPECTED_BASIC_READ_VALUES) throw SystemManagerObservation.unavailable();
                 remaining(micros);
                 return kind == 's'
                     ? string(value.get(ValueLayout.ADDRESS, 0))
@@ -271,7 +278,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     MemorySegment destination = text(unique);
     MemorySegment type = text("org.freedesktop.systemd1." + property.kind);
     MemorySegment name = text(property.member);
-    if (property.type == 's') {
+    if (property.type == STRING_PROPERTY_TYPE) {
       return ResourceScope.acquire(
           () -> prepareOutput(1),
           result -> releaseOutput(1, "free"),
@@ -365,7 +372,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
       if (octet == 0) break;
       bytes[end++] = octet;
     }
-    if (end > 4096) throw SystemManagerObservation.unavailable();
+    if (end > MAXIMUM_PROPERTY_UTF8_BYTES) throw SystemManagerObservation.unavailable();
     return new String(bytes, 0, end, java.nio.charset.StandardCharsets.UTF_8);
   }
 
