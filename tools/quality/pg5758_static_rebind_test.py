@@ -26,5 +26,23 @@ class ExactRebindTest(unittest.TestCase):
         c,o,raw,classes=self.inputs();raw+=b'class Other {}\n';digest=hashlib.sha256(raw).hexdigest();c['sourceSha256']=o['sourceSha256']=digest
         self.assertEqual('OWNER_MAPPING_AMBIGUOUS',bind_one(c,[o],raw,classes,classes)[1])
 
+    def test_missing_empty_whitespace_or_nontext_rationale_never_rebinds(self):
+        c,o,raw,classes=self.inputs()
+        for value in (None,'','  \n',0,[]):
+            row,kind=bind_one(c,[{**o,'reason':value,'priorReason':value}],raw,classes,classes)
+            self.assertEqual('MISSING_PRIOR_RATIONALE',kind)
+            self.assertEqual('NOT_REVIEWED_CURRENT_SOURCE',row['status'])
+
+    def test_prior_reason_fallback_survives_two_successive_rebinds(self):
+        c,o,raw,classes=self.inputs();del o['reason'];o['priorReason']='independent retained reason'
+        first,kind=bind_one(c,[o],raw,classes,classes)
+        self.assertEqual('REBOUND',kind)
+        self.assertEqual('independent retained reason',first['reason'])
+        self.assertEqual(first['reason'],first['priorReason'])
+        first['status']=first['priorDisposition']
+        second,kind=bind_one(c,[first],raw,classes,classes)
+        self.assertEqual('REBOUND',kind)
+        self.assertEqual(first['reason'],second['reason'])
+
 
 if __name__=='__main__':unittest.main()

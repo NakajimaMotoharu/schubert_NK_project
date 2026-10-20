@@ -6,7 +6,7 @@ from collections import Counter
 from pg5540_snapshot_scratch_selected import ROOT, sha
 from static_disposition_overlay import BASE, load
 from pg5910_storage_static_rebind import ordered_pairs
-from pg5758_static_rebind import bind_one
+from pg5758_static_rebind import bind_one, rationale_text
 
 SOURCE = '682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b'
 OLD = '7a664ce0a99860bb75e1e1a3ae30354a9840528a'
@@ -17,7 +17,10 @@ def prior_disposition(row):
     value = copy.deepcopy(row)
     if value['status'] == 'SOURCE_REBOUND_CURRENT_WHOLE_PENDING':
         value['status'] = value['priorDisposition']
-        value['reason'] = value['priorReason']
+    reason = rationale_text(value)
+    if reason is None:
+        raise ValueError('individual rationale required before restoring prior disposition')
+    value['reason'] = value['priorReason'] = reason
     return value
 
 

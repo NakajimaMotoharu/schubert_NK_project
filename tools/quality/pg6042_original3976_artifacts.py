@@ -64,7 +64,7 @@ def inspect_original(data):
     base = Path('/home/mini/schubert-nk-pgpt')
     campaign = data.get('campaign', 'PG6040')
     expected_counts = tuple(data.get('expectedCounts', (3976, 593, 1667)))
-    if (campaign, expected_counts, len(data['changedOwnerKeys'])) not in (('PG6040', (3976, 593, 1667), 23), ('PG6060', (3979, 594, 1667), 1)):
+    if (campaign, expected_counts, len(data['changedOwnerKeys'])) not in (('PG6040', (3976, 593, 1667), 23), ('PG6060', (3979, 594, 1667), 1), ('PG6088', (3985, 595, 1667), 5)):
         raise ValueError('explicit reviewed whole campaign/counts/owner inventory')
     source = base/('source-full-'+campaign); out = base/('runs/'+campaign+'-six-v1')
     digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()

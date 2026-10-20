@@ -1,6 +1,6 @@
 """Overlay cannot change source/rule/coordinates, delete IDs or double-count reviews."""
 import unittest
-from static_disposition_overlay import apply_decisions,load,BASE
+from static_disposition_overlay import apply_decisions,load,BASE,validate_rationales
 
 
 class ImmutableReviewOverlay(unittest.TestCase):
@@ -27,6 +27,13 @@ class ImmutableReviewOverlay(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'never whole success'):apply_decisions([row],[{**decision,**changes}])
         rows=load(BASE/'PG5788-jms-guard4-v1/manifest.json','bac472e8d9f65dc58725a5ee4d952192dda0a95cb8d910877468ce2547a89ae7','2bbb85a297d7f7bd1b0c243d343e0da509faf99a')
         self.assertEqual(1585,len(rows));self.assertEqual(476,sum(r['status']=='SOURCE_REBOUND_CURRENT_WHOLE_PENDING'for r in rows))
+
+    def test_missing_payload_is_not_a_valid_classification(self):
+        for status in ('REQUIRED_CONTRACT','FALSE_POSITIVE','CONTEXT_NOT_APPLICABLE','SOURCE_REBOUND_CURRENT_WHOLE_PENDING'):
+            for reason in (None,'',' \n',0):
+                with self.assertRaisesRegex(ValueError,'nonblank individual rationale'):
+                    validate_rationales([{**self.row(),'status':status,'reason':reason}])
+            validate_rationales([{**self.row(),'status':status,'priorReason':'exact independent original reason'}])
 
 
 if __name__=='__main__':unittest.main()

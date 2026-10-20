@@ -5,6 +5,7 @@ import json
 from collections import Counter
 from pathlib import Path
 from pg5540_snapshot_scratch_selected import ROOT
+from pg5758_static_rebind import rationale_text
 
 BASE=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional'
 IDENTITY=('findingId','sourcePath','sourceSha256','rule','beginline','endline','begincolumn','endcolumn')
@@ -41,6 +42,12 @@ def read_exact(path,digest):
     return json.loads(raw)
 
 
+def validate_rationales(rows):
+    for row in rows:
+        if row['status'] in DECIDED|{'SOURCE_REBOUND_CURRENT_WHOLE_PENDING'} and rationale_text(row) is None:
+            raise ValueError('classified diagnostic requires nonblank individual rationale;historical missing text is not approval')
+
+
 def load(path,digest,source,seen=()):
     if digest in seen or len(seen)>63:raise ValueError('acyclic bounded review chain')
     value=read_exact(path,digest)
@@ -57,4 +64,5 @@ def load(path,digest,source,seen=()):
     if Counter(r['status']for r in rows)!=Counter(value['statusCounts']):raise ValueError('all dispositions/counts correspond to immutable raw inventory')
     count=value.get('rawFindings',value.get('currentRawFindings'))
     if len(rows)!=count:raise ValueError('complete raw finding count')
+    validate_rationales(rows)
     return rows

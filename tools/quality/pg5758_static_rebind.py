@@ -17,11 +17,17 @@ OUT=ROOT/'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5758-current-disp
 def coordinate(row):return(row['sourcePath'],row['rule'],*(int(row[k])for k in('beginline','endline','begincolumn','endcolumn')))
 
 
+def rationale_text(row):
+    return next((s for s in (row.get('reason'),row.get('priorReason'))if isinstance(s,str)and s.strip()),None)
+
+
 def bind_one(row,candidates,raw,before_classes,current_classes):
     result=copy.deepcopy(row)
     if len(candidates)!=1:return result,'NO_OR_AMBIGUOUS_PRIOR'
     old=candidates[0]
     if old.get('status')not in ALLOWED:return result,'PRIOR_NOT_DISPOSITIONED'
+    reason=rationale_text(old)
+    if reason is None:return result,'MISSING_PRIOR_RATIONALE'
     if old['sourceSha256']!=row['sourceSha256']:return result,'SOURCE_CHANGED'
     if hashlib.sha256(raw).hexdigest()!=row['sourceSha256']:raise ValueError('actual current source must match exact diagnostic')
     types=re.findall(rb'^(?:(?:public|final|abstract|sealed|non-sealed|strictfp)\s+)*(?:class|record|enum|interface)\s+([A-Za-z_$][A-Za-z0-9_$]*)',raw,re.M)
@@ -32,7 +38,7 @@ def bind_one(row,candidates,raw,before_classes,current_classes):
     current={k:v for k,v in current_classes.items()if k==prefix+'.class'or k.startswith(prefix+'$')}
     if not current or current!=before:return result,'OWNER_PHYSICAL_BYTES_CHANGED'
     result.update(status='SOURCE_REBOUND_CURRENT_WHOLE_PENDING',priorDisposition=old['status'],priorFindingId=old['findingId'],
-      priorReason=old.get('reason',''),historicalCaseIds=[r['testId']for r in old.get('wholeCaseRefs',[])],currentWholeCaseRefs=[],
+      reason=reason,priorReason=reason,historicalCaseIds=[r['testId']for r in old.get('wholeCaseRefs',[])],currentWholeCaseRefs=[],
       currentWholeJoinPending=True,newDispositionCreated=False,rawWarningRetained=True,sourceAndCoordinatesExact=True,
       owningPhysicalClassesCount=len(current),owningPhysicalClassesSha256=hashlib.sha256(json.dumps(current,sort_keys=True).encode()).hexdigest())
     return result,'REBOUND'
