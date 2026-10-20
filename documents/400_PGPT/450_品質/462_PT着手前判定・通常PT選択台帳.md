@@ -1,5 +1,8 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-040 — PT_DEFAULT：S3b前半の有限自己所有保持fixture25/13
+
+1304/1306、SS316/PG-D466、元6162全851/1667・六strict compile/静的0（実PT0）。source保存後src/build/Current不変更を確認し、6164新only25/13を一回。自己所有proxy/未接続locator・既synthetic credential/isolated loopback component・有限自己所有JVMだけ、実VM/current/Root/既DBBackup/鍵/failed-cohort/intent/permit操作0。子watchdog20秒・直接Process handleのbounded回収・外側marker未帰還と固定診断を独立literalで確認、子143をnative資格にしない。19子観測はJUnit件数に加算0、有限policyは例外throwを維持し固定native非復帰と別判定。全六gatesと原結果/部分counterを保存、全分岐は後続関連群とまとめた新sourceで確認し未測定を100補完0。拒否PTの再試行/境界探索/代替扱い0、Main/Test固定は元真正終端まで。
 ## PTPRE-039 — PT_DEFAULT：S2/S3aの同API/Web経路をまとめた必要影響PT
 
 1297/1299/1300、SSC314315/PG-D463464/1548-1554。三consumer/親group/broker＋API provider、六Main/十Test（新provider四Test＋親一Testを追加、旧no-op八Testの補正、管理fixturefinally修正）。固定JDK/Maven・通常finite自己所有PG/JMS/loopback/DOM/child fixtureのみ、実VM/current/Root/原本DBBackup/鍵/failed-cohort/intent/permit操作0。旧refusal再試行や境界probe0、PTALT代替0。
