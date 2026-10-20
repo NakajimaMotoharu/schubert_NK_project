@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC310適用境界（2026-10-20、BUG1530/YKT1290）：SSC304のsuccessful直下usingJdbcは既Java25 TWR意味（同一secondary/self-suppressionを含む）を維持する。そのbodyから呼ぶExpiryAuditRepository.read内の二owned JDBC資源は、保持監査照合に対するSS331SSC200/SS332SSC063199の固定秘匿secondary・未知primary優先契約であり、SS332SSC310に従って局所是正する。二種類のscopeを一つのhelper/例外順位へ一括置換しない。stage/finish直下scope、原本/Backup/権限/DB/Unit/runtime世代・期限/所有/正常業務は不変更。実環境の安全条件やnative資格をproxy試験だけで認定しない。
+
 ## SSC309 世代存在とRoot/ordinary資格の分離
 
 RootStartupContextの世代専用読取だけstat Zの同startTicksを保持し、missingGenerationはZを消失としない。終了は同boot/親の前後認証下で二回のNoSuchFileだけ、未知IO/別ticks/別cgroup/Unit driftは拒否する。Root/self/PID1捕捉はZを拒否し、ordinary readyはSS342の完全なidentity/command/socket/HTTP/infoを独立に満たす必要がある。非leader execの一時Zを通過してもreadyを短絡せず、恒久Zは元deadlineまで未readyとして非成功にする。設定、権限、permit、世代、元120秒/親30分、owned停止順序とUNKNOWN保持は不変更。BUG1470/YKT1233/SSC309、独立kernel反例PG5706及びSS354へ追跡。既failed cohortの回収は別承認済契約で行い、正常DONE前提の停止を失敗runへ流用しない。
