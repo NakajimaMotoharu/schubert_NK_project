@@ -31,6 +31,8 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private final ConnectionFactory retainedWebLog;
   private final @Nullable ConnectionFactory retainedAsync;
   private final List<AutoCloseable> owners;
+  private final boolean[] ownerClosed;
+  private boolean stopping;
   private boolean closed;
 
   public static ApiBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
@@ -114,6 +116,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
     this.retainedWebLog = Objects.requireNonNull(webLog, "Web Log factory");
     this.retainedAsync = async;
     this.owners = owners;
+    this.ownerClosed = new boolean[owners.size()];
   }
 
   public Supplier<JMSContext> sync() {
@@ -133,7 +136,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private JMSContext open(ConnectionFactory factory) {
     stateLock.lock();
     try {
-      if (closed) throw new IllegalStateException(UNAVAILABLE);
+      if (stopping) throw new IllegalStateException(UNAVAILABLE);
       char[] copy;
       try {
         copy = Objects.requireNonNull(passwords.get(), "password copy");
@@ -161,11 +164,13 @@ public final class ApiBrokerContexts implements AutoCloseable {
     stateLock.lock();
     try {
       if (closed) return;
-      closed = true;
+      stopping = true;
       Throwable failure = null;
       for (int index = owners.size() - 1; index >= 0; index--) {
+        if (ownerClosed[index]) continue;
         try {
           owners.get(index).close();
+          ownerClosed[index] = true;
         } catch (Exception | Error closing) {
           if (failure == null || closing instanceof Error && !(failure instanceof Error))
             failure = closing;
@@ -173,6 +178,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
       }
       if (failure instanceof Error fatal) throw fatal;
       if (failure != null) throw new IllegalStateException("API broker factory close failed");
+      closed = true;
     } finally {
       stateLock.unlock();
     }

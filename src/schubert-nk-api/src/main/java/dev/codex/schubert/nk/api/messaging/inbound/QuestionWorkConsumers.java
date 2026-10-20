@@ -20,7 +20,6 @@ public final class QuestionWorkConsumers implements AutoCloseable {
   private final JMSContext context;
   private final java.util.concurrent.locks.ReentrantLock lock =
       new java.util.concurrent.locks.ReentrantLock();
-  private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
   private boolean closed;
 
@@ -57,11 +56,9 @@ public final class QuestionWorkConsumers implements AutoCloseable {
             } catch (CommittedFatalInboundException fatal) {
               result.halted.set(true);
               // This dedicated session serializes callbacks; halt excludes later deliveries.
-              result.terminal.set(true);
               onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);
-              result.terminal.set(true);
               if (fatal instanceof Error) {
                 try {
                   context.rollback();
@@ -99,25 +96,21 @@ public final class QuestionWorkConsumers implements AutoCloseable {
   }
 
   public boolean ready() {
-    lock.lock();
-    try {
-      return !closed && !terminal.get();
-    } finally {
-      lock.unlock();
-    }
+    return !halted.get();
   }
 
   @Override
   public void close() {
+    halted.set(true);
     lock.lock();
     try {
       if (closed) return;
-      closed = true;
       try {
         context.close();
       } catch (RuntimeException failure) {
         throw new IllegalStateException("API Question consumer close failed", failure);
       }
+      closed = true;
     } finally {
       lock.unlock();
     }

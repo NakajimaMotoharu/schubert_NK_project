@@ -8,6 +8,7 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
@@ -22,7 +23,8 @@ public final class WebLogConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
-  private volatile boolean closed;
+  private final ReentrantLock closeLock = new ReentrantLock();
+  private boolean closed;
 
   private WebLogConsumers(Supplier<JMSContext> factory) {
     // BUG1537: all state allocation precedes acquisition; only final storage follows it.
@@ -109,7 +111,7 @@ public final class WebLogConsumers implements AutoCloseable {
 
   /** Liveness of this one Queue, not full API broker-management readiness. */
   public boolean ready() {
-    return !closed && !terminal.get();
+    return !halted.get();
   }
 
   public boolean terminalFailureObserved() {
@@ -118,14 +120,18 @@ public final class WebLogConsumers implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed) {
-      return;
-    }
-    closed = true;
+    halted.set(true);
+    closeLock.lock();
     try {
-      context.close();
-    } catch (RuntimeException failure) {
-      throw new IllegalStateException("API Web log consumer close failed", failure);
+      if (closed) return;
+      try {
+        context.close();
+      } catch (RuntimeException failure) {
+        throw new IllegalStateException("API Web log consumer close failed", failure);
+      }
+      closed = true;
+    } finally {
+      closeLock.unlock();
     }
   }
 }

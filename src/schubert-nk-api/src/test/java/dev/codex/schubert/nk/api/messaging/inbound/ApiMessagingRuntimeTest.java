@@ -344,7 +344,9 @@ final class ApiMessagingRuntimeTest {
     assertEquals(
         "API sync consumer close failed", failure.getCause().getSuppressed()[0].getMessage());
     assertEquals(5, closed.get());
-    runtime.close();
+    // SSC314/BUG1548: every child is still unconfirmed; a second call must fail again.
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals(10, closed.get());
     assertFalse(runtime.ready());
   }
 

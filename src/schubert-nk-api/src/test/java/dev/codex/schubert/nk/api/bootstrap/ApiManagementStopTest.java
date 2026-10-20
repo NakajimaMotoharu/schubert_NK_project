@@ -130,15 +130,17 @@ final class ApiManagementStopTest {
     } finally {
       var fixture = captured.get();
       if (fixture != null) fixture.releaseStop.countDown();
-      if (first != null) {
-        first.join(5000);
-        assertFalse(first.isAlive());
+      try {
+        try {
+          if (first != null) first.join(5000);
+        } finally {
+          if (second != null) second.join(5000);
+        }
+      } finally {
+        if (fixture != null) fixture.dispose();
       }
-      if (second != null) {
-        second.join(5000);
-        assertFalse(second.isAlive());
-      }
-      if (fixture != null) fixture.dispose();
+      if (first != null) assertFalse(first.isAlive());
+      if (second != null) assertFalse(second.isAlive());
     }
   }
 
@@ -188,12 +190,13 @@ final class ApiManagementStopTest {
       assertTrue(executor.isTerminated());
     } finally {
       release.countDown();
-      if (closer != null) {
-        closer.join(5000);
-        assertFalse(closer.isAlive());
-      }
       var fixture = captured.get();
-      if (fixture != null) fixture.dispose();
+      try {
+        if (closer != null) closer.join(5000);
+      } finally {
+        if (fixture != null) fixture.dispose();
+      }
+      if (closer != null) assertFalse(closer.isAlive());
     }
   }
 

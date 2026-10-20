@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
@@ -26,7 +27,9 @@ public final class SyncRequestConsumers implements AutoCloseable {
   private final List<JMSContext> contexts;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
-  private volatile boolean closed;
+  private final ReentrantLock closeLock = new ReentrantLock();
+  private final boolean[] contextClosed = new boolean[CONCURRENCY];
+  private boolean closed;
 
   private SyncRequestConsumers(List<JMSContext> contexts) {
     this.contexts = contexts;
@@ -116,7 +119,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
 
   /** A terminal protocol error makes readiness false even before the owner exits nonzero. */
   public boolean ready() {
-    return !closed && !terminal.get();
+    return !halted.get();
   }
 
   public boolean terminalFailureObserved() {
@@ -125,25 +128,31 @@ public final class SyncRequestConsumers implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed) {
-      return;
-    }
-    closed = true;
-    Throwable failure = null;
-    for (JMSContext context : contexts) {
-      try {
-        context.close();
-      } catch (RuntimeException | Error closing) {
-        if (failure == null || closing instanceof Error && !(failure instanceof Error)) {
-          failure = closing;
-        } else if (closing != failure) {
-          failure.addSuppressed(closing);
+    halted.set(true);
+    closeLock.lock();
+    try {
+      if (closed) return;
+      Throwable failure = null;
+      for (int index = 0; index < contexts.size(); index++) {
+        if (contextClosed[index]) continue;
+        try {
+          contexts.get(index).close();
+          contextClosed[index] = true;
+        } catch (RuntimeException | Error closing) {
+          if (failure == null || closing instanceof Error && !(failure instanceof Error)) {
+            failure = closing;
+          } else if (closing != failure) {
+            failure.addSuppressed(closing);
+          }
         }
       }
-    }
-    if (failure instanceof Error fatal) throw fatal;
-    if (failure != null) {
-      throw new IllegalStateException("API sync consumer close failed", failure);
+      if (failure instanceof Error fatal) throw fatal;
+      if (failure != null) {
+        throw new IllegalStateException("API sync consumer close failed", failure);
+      }
+      closed = true;
+    } finally {
+      closeLock.unlock();
     }
   }
 

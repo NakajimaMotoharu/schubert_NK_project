@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.jspecify.annotations.Nullable;
@@ -20,10 +21,13 @@ public final class ApiMessagingRuntime implements AutoCloseable {
   private static final int MAXIMUM_CONSUMER_GROUPS = 3;
   private final List<AutoCloseable> groups;
   private final AtomicBoolean terminal;
-  private final AtomicBoolean closed = new AtomicBoolean();
+  private final AtomicBoolean stopping = new AtomicBoolean();
+  private final ReentrantLock closeLock = new ReentrantLock();
+  private final boolean[] groupClosed = new boolean[MAXIMUM_CONSUMER_GROUPS];
+  private boolean closed;
 
   private ApiMessagingRuntime(List<AutoCloseable> groups, AtomicBoolean terminal) {
-    this.groups = List.copyOf(groups);
+    this.groups = groups;
     this.terminal = terminal;
   }
 
@@ -98,6 +102,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
         };
     // BUG1537: no first-add backing-array allocation after a group already owns JMS contexts.
     var groups = new ArrayList<AutoCloseable>(MAXIMUM_CONSUMER_GROUPS);
+    var runtime = new ApiMessagingRuntime(groups, terminal);
     try {
       groups.add(
           SyncRequestConsumers.start(
@@ -112,7 +117,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
                 new QuestionWorkListener(async.processor(), clock),
                 signal,
                 fatalSignal));
-      return new ApiMessagingRuntime(groups, terminal);
+      return runtime;
     } catch (RuntimeException | Error failure) {
       Throwable retained = failure;
       try {
@@ -125,7 +130,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
         } else if (notification != failure) failure.addSuppressed(notification);
       }
       try {
-        closeGroups(groups);
+        runtime.close();
       } catch (RuntimeException | Error closing) {
         // closeGroups exposes Error directly, otherwise its own fixed wrapper with nonnull
         // first group cause. Preserve the original startup cleanup boundary, not that wrapper.
@@ -141,7 +146,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
 
   /** Group liveness only. Outer owner also admits DB/management/storage/all31 and Outbox. */
   public boolean ready() {
-    return !closed.get() && !terminal.get();
+    return !stopping.get() && !terminal.get();
   }
 
   public boolean terminalFailureObserved() {
@@ -150,14 +155,24 @@ public final class ApiMessagingRuntime implements AutoCloseable {
 
   @Override
   public void close() {
-    if (closed.compareAndSet(false, true)) closeGroups(groups);
+    stopping.set(true);
+    closeLock.lock();
+    try {
+      if (closed) return;
+      closeGroups(groups, groupClosed);
+      closed = true;
+    } finally {
+      closeLock.unlock();
+    }
   }
 
-  private static void closeGroups(List<AutoCloseable> groups) {
+  private static void closeGroups(List<AutoCloseable> groups, boolean[] groupClosed) {
     Throwable failure = null;
     for (int index = groups.size() - 1; index >= 0; index--) {
+      if (groupClosed[index]) continue;
       try {
         groups.get(index).close();
+        groupClosed[index] = true;
       } catch (Exception | Error closing) {
         if (failure == null || closing instanceof Error && !(failure instanceof Error))
           failure = closing;

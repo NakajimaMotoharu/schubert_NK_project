@@ -14,6 +14,47 @@ import org.junit.jupiter.api.Test;
 /** PT-JMS-024 A-F: synthetic public credential only; no real password or session is retained. */
 final class ApiBrokerContextsTest {
   @Test
+  void closePhaseRetriesOnlyUnknownFactoryAndNeverReadsSecretsAfterStop() {
+    for (int bad = 0; bad < 3; bad++) {
+      for (Throwable marker :
+          java.util.List.of(
+              new IllegalStateException("PT_PUBLIC_MARKER"),
+              new AssertionError("PT_PUBLIC_FATAL"))) {
+        var factories = java.util.List.of(new FakeFactory(), new FakeFactory(), new FakeFactory());
+        factories.get(bad).closeFault = marker;
+        var reads = new AtomicInteger();
+        var owner =
+            new ApiBrokerContexts(
+                () -> {
+                  reads.incrementAndGet();
+                  return new char[] {'P'};
+                },
+                factories.get(0),
+                factories.get(1),
+                factories.get(2),
+                factories.get(0),
+                factories.get(1),
+                factories.get(2));
+        var escaped = owner.sync();
+        var failure =
+            assertThrows(
+                marker instanceof Error ? Error.class : IllegalStateException.class, owner::close);
+        if (marker instanceof Error) assertSame(marker, failure);
+        else {
+          assertEquals("API broker factory close failed", failure.getMessage());
+          assertNull(failure.getCause());
+        }
+        assertThrows(IllegalStateException.class, escaped::get);
+        assertEquals(0, reads.get());
+        factories.get(bad).closeFault = null;
+        owner.close();
+        owner.close();
+        for (int i = 0; i < 3; i++) assertEquals(i == bad ? 2 : 1, factories.get(i).closes);
+      }
+    }
+  }
+
+  @Test
   void completeThirdProfileOwnsDistinctFactoryErasesCopyAndClosesAllOnFault() {
     var sync = new FakeFactory();
     var log = new FakeFactory();
@@ -171,7 +212,10 @@ final class ApiBrokerContextsTest {
     assertNull(failure.getCause());
     assertEquals(1, ordinarySync.closes);
     assertEquals(1, ordinaryLog.closes);
-    owner.close();
+    // SSC314/BUG1548: failed provider closes remain unconfirmed, not a normal no-op.
+    assertThrows(IllegalStateException.class, owner::close);
+    assertEquals(2, ordinarySync.closes);
+    assertEquals(2, ordinaryLog.closes);
 
     var fatalSync = new FakeFactory();
     var fatalLog = new FakeFactory();
