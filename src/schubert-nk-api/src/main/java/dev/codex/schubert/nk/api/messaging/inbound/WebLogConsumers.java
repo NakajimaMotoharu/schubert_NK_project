@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -64,18 +65,20 @@ public final class WebLogConsumers implements AutoCloseable {
               if (runtime.terminal.compareAndSet(false, true)) {
                 onTerminal.accept(fatal);
               }
-            } catch (JMSException | RuntimeException retryable) {
-              // WebLogListener rolled back; Artemis owns redelivery and delivery-count policy.
-            } catch (Error fatal) {
+            } catch (UnconfirmedJmsRollbackException | Error fatal) {
               runtime.halted.set(true);
               if (runtime.terminal.compareAndSet(false, true)) {
-                try {
-                  opened.rollback();
-                } catch (RuntimeException | Error unconfirmed) {
-                  // Stop remains fatal/unconfirmed; no ACK and no provider text escapes.
+                if (fatal instanceof Error) {
+                  try {
+                    opened.rollback();
+                  } catch (RuntimeException | Error unconfirmed) {
+                    // Stop remains fatal/unconfirmed; no ACK and no provider text escapes.
+                  }
                 }
                 onFatal.run();
               }
+            } catch (JMSException | RuntimeException retryable) {
+              // Confirmed rollback only; Artemis owns redelivery and delivery-count policy.
             }
           });
       opened.start();

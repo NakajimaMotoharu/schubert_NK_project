@@ -240,12 +240,14 @@ final class ArtemisReplyConsumerTest {
     JMSRuntimeException rollbackFailure = new JMSRuntimeException("synthetic-rollback-failure");
     rollbackContext.rollbackFailure = rollbackFailure;
     JMSException primary = new JMSException("synthetic-primary-failure");
-    JMSException observed =
+    var unconfirmed =
         assertThrows(
-            JMSException.class,
+            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
             () -> consumer.onMessage(rollbackContext.proxy(), failingBytes(primary)));
+    Throwable observed = unconfirmed.getCause();
     assertEquals(primary, observed);
     assertArrayEquals(new Throwable[] {rollbackFailure}, observed.getSuppressed());
+    assertArrayEquals(new Throwable[] {rollbackFailure}, unconfirmed.getSuppressed());
   }
 
   @Test
@@ -255,11 +257,12 @@ final class ArtemisReplyConsumerTest {
     JMSRuntimeException primary = new JMSRuntimeException("synthetic-shared-provider-failure");
     context.commitFailure = primary;
     context.rollbackFailure = primary;
-    assertSame(
-        primary,
+    var unconfirmed =
         assertThrows(
-            JMSRuntimeException.class,
-            () -> consumer.onMessage(context.proxy(), validReplyBytes())));
+            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
+            () -> consumer.onMessage(context.proxy(), validReplyBytes()));
+    assertSame(primary, unconfirmed.getCause());
+    assertEquals(0, unconfirmed.getSuppressed().length);
     assertEquals(1, context.commits);
     assertEquals(1, context.rollbacks);
     assertEquals(0, primary.getSuppressed().length);

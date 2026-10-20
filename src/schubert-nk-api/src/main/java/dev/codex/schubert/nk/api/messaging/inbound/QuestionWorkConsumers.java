@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import java.util.Objects;
@@ -52,18 +53,20 @@ public final class QuestionWorkConsumers implements AutoCloseable {
               listener.onMessage(context, message);
             } catch (CommittedFatalInboundException fatal) {
               if (result.terminal.compareAndSet(false, true)) onTerminal.accept(fatal);
-            } catch (JMSException | RuntimeException retryable) {
-              // Listener rolled back. Real Artemis delivery metadata and fixed max4 govern retry.
-            } catch (Error fatal) {
+            } catch (UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);
               if (result.terminal.compareAndSet(false, true)) {
-                try {
-                  context.rollback();
-                } catch (RuntimeException | Error unconfirmed) {
-                  // Keep fatal stop/unconfirmed rollback distinct from committed protocol DLQ.
+                if (fatal instanceof Error) {
+                  try {
+                    context.rollback();
+                  } catch (RuntimeException | Error unconfirmed) {
+                    // Keep fatal stop/unconfirmed rollback distinct from committed protocol DLQ.
+                  }
                 }
                 onFatal.run();
               }
+            } catch (JMSException | RuntimeException retryable) {
+              // Confirmed rollback only; real delivery metadata and max4 still govern retry.
             }
           });
       context.start();

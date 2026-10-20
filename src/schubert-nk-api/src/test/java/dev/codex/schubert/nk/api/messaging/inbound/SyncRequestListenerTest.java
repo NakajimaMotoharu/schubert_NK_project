@@ -374,10 +374,12 @@ final class SyncRequestListenerTest {
         messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
     JMSException isolationFailure = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = isolationFailure;
-    JMSException checkedObserved =
+    var unconfirmed =
         assertThrows(
-            JMSException.class,
+            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
             () -> listener.onMessage(checkedIsolationContext.proxy(), checkedMessage.message));
+    Throwable checkedObserved = unconfirmed.getCause();
+    assertSame(rollbackFailure, unconfirmed.getSuppressed()[0]);
     assertSame(isolationFailure, checkedObserved);
     assertEquals(1, checkedIsolationContext.rollbacks);
     assertTrue(

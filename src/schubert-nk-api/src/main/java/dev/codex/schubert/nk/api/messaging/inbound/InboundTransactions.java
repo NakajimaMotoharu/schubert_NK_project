@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.messaging.outbound.DlqSender;
 import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
@@ -34,10 +35,10 @@ enum InboundTransactions {
       DLQ.sendUntrusted(context, message, originalDestination, fatal);
       context.commit();
     } catch (JMSException | RuntimeException isolationFailure) {
-      rollbackAfterFailure(context, isolationFailure);
       if (isolationFailure != protocolFailure) {
         isolationFailure.addSuppressed(protocolFailure);
       }
+      rollbackAfterFailure(context, isolationFailure);
       if (isolationFailure instanceof JMSException jmsFailure) {
         throw jmsFailure;
       }
@@ -52,6 +53,7 @@ enum InboundTransactions {
       if (failure != rollbackFailure) {
         failure.addSuppressed(rollbackFailure);
       }
+      throw new UnconfirmedJmsRollbackException(failure, rollbackFailure);
     }
   }
 }

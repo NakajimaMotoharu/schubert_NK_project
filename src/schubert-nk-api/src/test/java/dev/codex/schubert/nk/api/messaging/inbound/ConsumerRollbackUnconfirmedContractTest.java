@@ -22,26 +22,41 @@ final class ConsumerRollbackUnconfirmedContractTest {
 
   @Test
   void syncRollbackUnconfirmedStopsAllFourContexts() throws Exception {
-    verify(0, 4);
+    verify(0, 4, true);
   }
 
   @Test
   void questionRollbackUnconfirmedStopsFurtherWork() throws Exception {
-    verify(1, 1);
+    verify(1, 1, true);
   }
 
   @Test
   void webLogRollbackUnconfirmedStopsFurtherLogs() throws Exception {
-    verify(2, 1);
+    verify(2, 1, true);
   }
 
-  private static void verify(int kind, int count) throws Exception {
+  @Test
+  void syncConfirmedRollbackKeepsAllFourContextsRetryReady() throws Exception {
+    verify(0, 4, false);
+  }
+
+  @Test
+  void questionConfirmedRollbackKeepsRetryReady() throws Exception {
+    verify(1, 1, false);
+  }
+
+  @Test
+  void webLogConfirmedRollbackKeepsRetryReady() throws Exception {
+    verify(2, 1, false);
+  }
+
+  private static void verify(int kind, int count, boolean unconfirmed) throws Exception {
     var contexts = new ArrayList<Fixture>();
     var fatal = new AtomicInteger();
     var committedFatal = new AtomicInteger();
     java.util.function.Supplier<JMSContext> factory =
         () -> {
-          var fixture = new Fixture();
+          var fixture = new Fixture(unconfirmed);
           contexts.add(fixture);
           return fixture.context();
         };
@@ -85,13 +100,13 @@ final class ConsumerRollbackUnconfirmedContractTest {
       assertTrue(ready.getAsBoolean());
       contexts.getFirst().deliver();
       assertAll(
-          () -> assertFalse(ready.getAsBoolean(), "unconfirmed rollback is not retry-ready"),
-          () -> assertEquals(1, fatal.get()),
+          () -> assertEquals(!unconfirmed, ready.getAsBoolean()),
+          () -> assertEquals(unconfirmed ? 1 : 0, fatal.get()),
           () -> assertEquals(0, committedFatal.get()),
           () -> assertEquals(1, contexts.getFirst().rollbacks));
       for (var context : contexts) context.deliver();
-      assertEquals(1, contexts.stream().mapToInt(c -> c.reads).sum());
-      assertEquals(1, fatal.get());
+      assertEquals(unconfirmed ? 1 : count + 1, contexts.stream().mapToInt(c -> c.reads).sum());
+      assertEquals(unconfirmed ? 1 : 0, fatal.get());
       assertEquals(0, contexts.stream().mapToInt(c -> c.commits).sum());
       assertEquals(0, contexts.stream().mapToInt(c -> c.closes).sum());
     }
@@ -99,11 +114,16 @@ final class ConsumerRollbackUnconfirmedContractTest {
   }
 
   private static final class Fixture {
+    private final boolean unconfirmed;
     private MessageListener listener;
     private int reads;
     private int rollbacks;
     private int commits;
     private int closes;
+
+    Fixture(boolean unconfirmed) {
+      this.unconfirmed = unconfirmed;
+    }
 
     JMSContext context() {
       return (JMSContext)
@@ -129,7 +149,9 @@ final class ConsumerRollbackUnconfirmedContractTest {
                         });
                   case "rollback":
                     rollbacks++;
-                    throw new JMSRuntimeException("synthetic unconfirmed rollback");
+                    if (unconfirmed)
+                      throw new JMSRuntimeException("synthetic unconfirmed rollback");
+                    return null;
                   case "commit":
                     commits++;
                     return null;

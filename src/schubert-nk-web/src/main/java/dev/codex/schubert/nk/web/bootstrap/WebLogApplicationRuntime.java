@@ -187,7 +187,8 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
             failure -> {
               terminal.set(true);
               onTerminal.accept(failure);
-            });
+            },
+            () -> terminal.set(true));
     WebLogReplayWorker replay = null;
     try {
       replay = WebLogReplayWorker.start(logDispatcher, logWorker, logBatchLimit, logInterval);

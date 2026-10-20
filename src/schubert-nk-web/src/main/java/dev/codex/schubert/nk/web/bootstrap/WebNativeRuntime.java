@@ -144,6 +144,7 @@ final class WebNativeRuntime implements AutoCloseable {
           .start(
               new ArtemisReplyConsumer(
                   client, new JmsReplyDecoder(), new ArtemisReplyDlqSender(clock)),
+              failureSignal,
               failureSignal);
       replay = WebLogReplayWorker.start(dispatcher, "native-web", 100, Duration.ofSeconds(1));
       var logout = new LogoutWireClient(client, sender, clock, UUID::randomUUID, timeout);

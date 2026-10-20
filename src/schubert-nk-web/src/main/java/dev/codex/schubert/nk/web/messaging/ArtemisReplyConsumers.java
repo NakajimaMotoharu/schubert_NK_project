@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -17,6 +18,7 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 public final class ArtemisReplyConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
+  private final AtomicBoolean halted = new AtomicBoolean();
   private volatile boolean closed;
   private volatile boolean stopping;
   private boolean startAttempted;
@@ -32,12 +34,22 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
       JmsContextFactory factory,
       ArtemisReplyConsumer reply,
       Consumer<CommittedFatalReplyException> onTerminal) {
+    return start(factory, reply, onTerminal, () -> {});
+  }
+
+  /** Fatal infrastructure notification is distinct from a committed protocol-DLQ result. */
+  public static ArtemisReplyConsumers start(
+      JmsContextFactory factory,
+      ArtemisReplyConsumer reply,
+      Consumer<CommittedFatalReplyException> onTerminal,
+      Runnable onFatal) {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(reply, "reply");
     Objects.requireNonNull(onTerminal, "onTerminal");
+    Objects.requireNonNull(onFatal, "onFatal");
     ArtemisReplyConsumers runtime = bind(factory);
     try {
-      runtime.start(reply, onTerminal);
+      runtime.start(reply, onTerminal, onFatal);
       return runtime;
     } catch (RuntimeException | Error failure) {
       try {
@@ -57,8 +69,16 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   }
 
   public void start(ArtemisReplyConsumer reply, Consumer<CommittedFatalReplyException> onTerminal) {
+    start(reply, onTerminal, () -> {});
+  }
+
+  public void start(
+      ArtemisReplyConsumer reply,
+      Consumer<CommittedFatalReplyException> onTerminal,
+      Runnable onFatal) {
     Objects.requireNonNull(reply, "reply");
     Objects.requireNonNull(onTerminal, "onTerminal");
+    Objects.requireNonNull(onFatal, "onFatal");
     synchronized (stateLock) {
       if (stopping || startAttempted)
         throw new IllegalStateException("Web reply start unavailable");
@@ -75,14 +95,28 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
               "JMS consumer");
       consumer.setMessageListener(
           message -> {
+            if (halted.get()) return;
             try {
               reply.onMessage(opened, message);
             } catch (CommittedFatalReplyException fatal) {
               if (terminal.compareAndSet(false, true)) {
                 onTerminal.accept(fatal);
               }
+            } catch (UnconfirmedJmsRollbackException | Error fatal) {
+              halted.set(true);
+              if (terminal.compareAndSet(false, true)) {
+                if (fatal instanceof Error) {
+                  try {
+                    opened.rollback();
+                  } catch (RuntimeException | Error unconfirmed) {
+                    // Never ACK or re-open this transaction; the outer owner retains cleanup.
+                  }
+                }
+                onFatal.run();
+              }
+              if (fatal instanceof Error error) throw error;
             } catch (JMSException | RuntimeException retryable) {
-              // ArtemisReplyConsumer rolled back; the broker controls redelivery.
+              // Confirmed rollback only; the broker controls redelivery.
             }
           });
       opened.start();

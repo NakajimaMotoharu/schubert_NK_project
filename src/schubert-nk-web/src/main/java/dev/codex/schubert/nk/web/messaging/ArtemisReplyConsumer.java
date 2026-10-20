@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
@@ -52,10 +53,10 @@ public final class ArtemisReplyConsumer {
       fatalSender.send(context, message);
       context.commit();
     } catch (JMSException | RuntimeException isolationFailure) {
-      rollbackAfterFailure(context, isolationFailure);
       if (isolationFailure != protocolFailure) {
         isolationFailure.addSuppressed(protocolFailure);
       }
+      rollbackAfterFailure(context, isolationFailure);
       if (isolationFailure instanceof JMSException jmsFailure) {
         throw jmsFailure;
       }
@@ -70,6 +71,7 @@ public final class ArtemisReplyConsumer {
       if (rollbackFailure != failure) {
         failure.addSuppressed(rollbackFailure);
       }
+      throw new UnconfirmedJmsRollbackException(failure, rollbackFailure);
     }
   }
 }

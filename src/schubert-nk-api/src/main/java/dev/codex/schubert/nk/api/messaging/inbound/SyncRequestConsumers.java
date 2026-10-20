@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -71,18 +72,20 @@ public final class SyncRequestConsumers implements AutoCloseable {
                 if (runtime.terminal.compareAndSet(false, true)) {
                   onTerminal.accept(fatal);
                 }
-              } catch (JMSException | RuntimeException retryable) {
-                // SyncRequestListener has rolled back. Broker redelivery owns the retry schedule.
-              } catch (Error fatal) {
+              } catch (UnconfirmedJmsRollbackException | Error fatal) {
                 runtime.halted.set(true);
                 if (runtime.terminal.compareAndSet(false, true)) {
-                  try {
-                    context.rollback();
-                  } catch (RuntimeException | Error unconfirmed) {
-                    // Fatal/unconfirmed remains nonzero; owner closes the context, never ACKs.
+                  if (fatal instanceof Error) {
+                    try {
+                      context.rollback();
+                    } catch (RuntimeException | Error unconfirmed) {
+                      // Fatal/unconfirmed remains nonzero; owner closes the context, never ACKs.
+                    }
                   }
                   onFatal.run();
                 }
+              } catch (JMSException | RuntimeException retryable) {
+                // Only a confirmed rollback reaches ordinary broker-controlled redelivery.
               }
             });
       }

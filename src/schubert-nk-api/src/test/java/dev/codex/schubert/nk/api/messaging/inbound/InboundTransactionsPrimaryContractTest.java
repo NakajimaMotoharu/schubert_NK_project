@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Message;
 import java.lang.reflect.Proxy;
@@ -19,7 +20,12 @@ final class InboundTransactionsPrimaryContractTest {
   void jmsP001SameRollbackFailureNeverSelfSuppresses() {
     var primary = new IllegalStateException("synthetic primary");
     var fixture = new Fixture(primary, null);
-    assertDoesNotThrow(() -> InboundTransactions.rollbackAfterFailure(fixture.context(), primary));
+    var observed =
+        assertThrows(
+            UnconfirmedJmsRollbackException.class,
+            () -> InboundTransactions.rollbackAfterFailure(fixture.context(), primary));
+    assertSame(primary, observed.getCause());
+    assertEquals(0, observed.getSuppressed().length);
     assertEquals(1, fixture.rollbacks);
     assertEquals(0, fixture.commits);
     assertEquals(0, primary.getSuppressed().length);
@@ -32,7 +38,12 @@ final class InboundTransactionsPrimaryContractTest {
     assertEquals(primary, secondary);
     assertNotSame(primary, secondary);
     var fixture = new Fixture(secondary, null);
-    InboundTransactions.rollbackAfterFailure(fixture.context(), primary);
+    var observed =
+        assertThrows(
+            UnconfirmedJmsRollbackException.class,
+            () -> InboundTransactions.rollbackAfterFailure(fixture.context(), primary));
+    assertSame(primary, observed.getCause());
+    assertSame(secondary, observed.getSuppressed()[0]);
     assertEquals(1, fixture.rollbacks);
     assertEquals(1, primary.getSuppressed().length);
     assertSame(secondary, primary.getSuppressed()[0]);
