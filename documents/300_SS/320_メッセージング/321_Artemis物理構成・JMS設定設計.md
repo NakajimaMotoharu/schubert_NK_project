@@ -1,5 +1,11 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC315 API factory取得・設定・親owner準備（2026-10-21、S3a）
+
+API providerもSSC311 Webと同様に、profile/endpoint/固定connector・supplier等の準備をfactory取得前に行う。取得後は追加の未保護allocationを挟まず12設定をtryで保護、成功時だけlive factoryを返す。設定Runtime/Errorでは一度closeし元primaryを同一保持、close Error対非Error primaryだけfatal優先、別secondaryはsuppressed、同一Throwableは自己抑制しない。取得自体の例外/nullは未取得資源を推定closeしない。既全設定/三window・credential-free/loopback値を変更しない。
+
+ApiBrokerContextsはowner/lock/password supplier・三owner backing容量/成功phaseを最初のprovider取得より前に準備する。SYNC→WEB_LOG→ASYNCの各正常返却を既容量へ格納し、最後の取得後はfinal field格納だけでownerを完成する。途中失敗は既取得だけ逆順でcloseし、既PG-D379の元primary同一性と個別secondary列挙を維持する。借用注入constructorの所有/credential copyは不変更、live closeはSSC314の確認済みphaseに従う。native返却前UNKNOWN時の外側保持は別S3b gate未完であり、本component契約だけから実native完了を認めない。BUG1553/YKT1307、SS342354、RD/UI/業務不変更。
+
 ## SSC314 API JMSの停止通知と確認済みclose（2026-10-21、内部詳細/S2）
 
 SyncRequestConsumers/WebLogConsumers/QuestionWorkConsumers、ApiMessagingRuntime、ApiBrokerContextsはclose要求と全子資源のclose完了を別状態にする。停止通知後はreadyをDOWN、新callback/新contextを非受理とし、既callbackのACK/rollback規約を変えない。各ownerのprivate final lockでcloseを直列化する。Syncの四context・親最大三group・broker最大三factoryは取得前に成功phase領域を準備し、子close正常帰還後だけその子を確認済みとする。再closeは確認済み子を再発行せず、未確認子だけ既定順序で確認する。全子の成功後だけclosed、未確認Runtime/Errorを後続no-op成功へ変換しない。
