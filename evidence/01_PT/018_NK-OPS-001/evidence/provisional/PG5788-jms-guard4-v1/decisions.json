@@ -1,0 +1,211 @@
+[
+  {
+    "findingId": "F03-PMD2-ada5eb202675807f5cf043fe32c03f7723354ee82736ac977804f3f01b8194cc",
+    "legacyFindingId": "F03-PMD-c6030a60221ab505c74e84950e8edb70ebe1ca16ef61d8e3f514b2f972ae5935",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+    "sourceSha256": "4e1ab3d2a52efa8489a2f3fd356ddd408bee049eb5d23e40e0da99191e868082",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "38",
+    "endline": "38",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 190,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS312/321/352, PG-D440: exact Throwable self-suppression is forbidden by JDK identity, not equals. The current compiler proves the compared parameters guard the same addSuppressed call without reassignment/field mutation/lambda escape. Independent equal-valued distinct Throwable fixture verifies that distinct nodes remain retained. Only this exact typed span is reviewed; runtime/owned cleanup or pending whole success is not inferred.",
+    "typedSelfSuppressionFact": {
+      "firstColumn": "11",
+      "firstLine": "38",
+      "kind": "SELF_SUPPRESSION_GUARD",
+      "lastColumn": "45",
+      "lastLine": "38",
+      "leftSymbol": "isolationFailure",
+      "leftType": "java.lang.Exception",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "rightSymbol": "protocolFailure",
+      "rightType": "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException"
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "newDispositionCreated": true,
+    "recheckedMovedPrior": false,
+    "actualNewGuardBranches": {
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure",
+      "line": 38,
+      "missedBranches": 0,
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java"
+    },
+    "selectedContractCases": [
+      {
+        "designTestId": "PT-JMS-PRE004",
+        "method": "jmsP004SameProtocolIsolationFailureRemainsOriginalAndUncommitted",
+        "actualTestId": "PT-WHOLE-f2f038e9e00bbbd197d0d332dafda90e4321a9626b9442d394045d5c92bea828",
+        "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+      },
+      {
+        "designTestId": "PT-JMS-PRE005",
+        "method": "jmsP005DistinctIsolationFailureRetainsProtocolAndNeverCommits",
+        "actualTestId": "PT-WHOLE-cffeaee3ed45c1d903856b5f850fe6b0a16d150b545af71a1017474033916493",
+        "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+      }
+    ],
+    "currentSelectedManifestSha256": "9be091b5b0293ce1c04998890decbe36a09912b875d980deea1ab257708ba5aa"
+  },
+  {
+    "findingId": "F03-PMD2-b186535b14e58c0e1a81221d2d6fce7a99a724305d7d6115b19e80a319d5f2ac",
+    "legacyFindingId": "F03-PMD-48c0f6f4f56aeba62b565ab306672e42c59fa3028e1d9a2243f60323d25d36b7",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+    "sourceSha256": "4e1ab3d2a52efa8489a2f3fd356ddd408bee049eb5d23e40e0da99191e868082",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "52",
+    "endline": "52",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "37",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 193,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS312/321/352, PG-D440: exact Throwable self-suppression is forbidden by JDK identity, not equals. The current compiler proves the compared parameters guard the same addSuppressed call without reassignment/field mutation/lambda escape. Independent equal-valued distinct Throwable fixture verifies that distinct nodes remain retained. Only this exact typed span is reviewed; runtime/owned cleanup or pending whole success is not inferred.",
+    "typedSelfSuppressionFact": {
+      "firstColumn": "11",
+      "firstLine": "52",
+      "kind": "SELF_SUPPRESSION_GUARD",
+      "lastColumn": "36",
+      "lastLine": "52",
+      "leftSymbol": "failure",
+      "leftType": "java.lang.Throwable",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "rightSymbol": "rollbackFailure",
+      "rightType": "java.lang.RuntimeException"
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "newDispositionCreated": true,
+    "recheckedMovedPrior": false,
+    "actualNewGuardBranches": {
+      "coveredBranches": 2,
+      "guard": "failure != rollbackFailure",
+      "line": 52,
+      "missedBranches": 0,
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java"
+    },
+    "selectedContractCases": [
+      {
+        "designTestId": "PT-JMS-PRE001",
+        "method": "jmsP001SameRollbackFailureNeverSelfSuppresses",
+        "actualTestId": "PT-WHOLE-345434e35e7734651696ceda943c6fb6e5c3961ed30c0cd2c0dae03b0b31a13e",
+        "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+      },
+      {
+        "designTestId": "PT-JMS-PRE002",
+        "method": "jmsP002DistinctEqualsTrueRollbackFailureIsRetainedByIdentity",
+        "actualTestId": "PT-WHOLE-49e43301d1ddd49b940066c85d2ee14efe7787749638d713c670b7dba95d0922",
+        "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+      }
+    ],
+    "currentSelectedManifestSha256": "9be091b5b0293ce1c04998890decbe36a09912b875d980deea1ab257708ba5aa"
+  },
+  {
+    "findingId": "F03-PMD2-27393a7ef374a6bfa5c881357da0d10ce0ebac3219939b8457c3c133aeb587ca",
+    "legacyFindingId": "F03-PMD-352e36c728912d86872a4e358a457b25ffebfdf1ec98e172d517d59934be72e9",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "8bea5566f8f62bed2ec08620ec7fad43eb0ec27c37969c352157d430f4049d36",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "56",
+    "endline": "56",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1444,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS312/321/352, PG-D440: exact Throwable self-suppression is forbidden by JDK identity, not equals. The current compiler proves the compared parameters guard the same addSuppressed call without reassignment/field mutation/lambda escape. Independent equal-valued distinct Throwable fixture verifies that distinct nodes remain retained. Only this exact typed span is reviewed; runtime/owned cleanup or pending whole success is not inferred.",
+    "typedSelfSuppressionFact": {
+      "firstColumn": "11",
+      "firstLine": "56",
+      "kind": "SELF_SUPPRESSION_GUARD",
+      "lastColumn": "45",
+      "lastLine": "56",
+      "leftSymbol": "isolationFailure",
+      "leftType": "java.lang.Exception",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "rightSymbol": "protocolFailure",
+      "rightType": "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException"
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "newDispositionCreated": true,
+    "recheckedMovedPrior": false,
+    "actualNewGuardBranches": {
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure",
+      "line": 56,
+      "missedBranches": 0,
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java"
+    },
+    "selectedContractCases": [
+      {
+        "designTestId": "PT-JMS-PRE006",
+        "method": "jmsP006SameProtocolIsolationFailureNeverSelfSuppressesOrCommits",
+        "actualTestId": "PT-WHOLE-2c5d4b1450f6a004a4d3bc5ed8ceaaa27848ca973434f94606969aa886231947",
+        "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d"
+      },
+      {
+        "designTestId": "PT-JMS-PRE007",
+        "method": "jmsP007DistinctIsolationFailureRetainsProtocolAndNeverCommits",
+        "actualTestId": "PT-WHOLE-a256a7271c92e638adf73c2846d188301ce3e1e9fea0da4ea3e93c0cd7ce7e4f",
+        "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d"
+      }
+    ],
+    "currentSelectedManifestSha256": "9be091b5b0293ce1c04998890decbe36a09912b875d980deea1ab257708ba5aa"
+  },
+  {
+    "findingId": "F03-PMD2-6c7694f0e64264af1ccc9b814e433633eb4871f2815af5fde9df6502fae63fee",
+    "legacyFindingId": "F03-PMD-1a079f7135551abedacc5ff841b8297c818a49adb426be35f23c1c9a95545949",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "8bea5566f8f62bed2ec08620ec7fad43eb0ec27c37969c352157d430f4049d36",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "70",
+    "endline": "70",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "37",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1447,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "SS312/321/352, PG-D440: exact Throwable self-suppression is forbidden by JDK identity, not equals. The current compiler proves the compared parameters guard the same addSuppressed call without reassignment/field mutation/lambda escape. Independent equal-valued distinct Throwable fixture verifies that distinct nodes remain retained. Only this exact typed span is reviewed; runtime/owned cleanup or pending whole success is not inferred.",
+    "typedSelfSuppressionFact": {
+      "firstColumn": "11",
+      "firstLine": "70",
+      "kind": "SELF_SUPPRESSION_GUARD",
+      "lastColumn": "36",
+      "lastLine": "70",
+      "leftSymbol": "rollbackFailure",
+      "leftType": "java.lang.RuntimeException",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "rightSymbol": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "newDispositionCreated": false,
+    "recheckedMovedPrior": true,
+    "unchangedMethodTailSha256": "a4f7acc31ff279f9e0f59ccc9e40d9ed90e3a5633b0013c239efec98e50cfbae",
+    "unchangedMethodOpcodeSha256": "bdfb8d0893eb00ac3ac1ffef421705272a35c83f49cadc0090be174f65ccdabb",
+    "priorFindingId": "F03-PMD2-5edb80ad07a13789a3ff6855b9d6f72dc4864d3b641d39d33fd0b376f3e90093"
+  }
+]
