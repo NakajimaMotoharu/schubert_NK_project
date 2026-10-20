@@ -12,6 +12,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class GameListViewModel {
+  private static final int MAXIMUM_GAME_RECORDS = 10;
+
   private final TopBarViewModel topBar;
   private final List<Card> games;
 
@@ -23,7 +25,8 @@ public final class GameListViewModel {
   public static GameListViewModel from(SessionPrincipal principal, List<GameRecord> records) {
     Objects.requireNonNull(principal, "principal");
     var copy = List.copyOf(records);
-    if (copy.size() > 10) throw new IllegalArgumentException("invalid game list size");
+    if (copy.size() > MAXIMUM_GAME_RECORDS)
+      throw new IllegalArgumentException("invalid game list size");
     return new GameListViewModel(principal, copy);
   }
 

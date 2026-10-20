@@ -16,6 +16,10 @@ import org.jspecify.annotations.NullMarked;
 /** SCR015/FUN009/AUT002/UI222,225,236/SS313,332; PG-D344/PT-USER-HTTP001..010. */
 @NullMarked
 public final class UserSearchForm {
+  private static final int MAXIMUM_PAGE_NUMBER = 999_999;
+  private static final int MAXIMUM_USERNAME_UTF8_BYTES = 64;
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_USERNAME = "username";
 
   private static final java.lang.String LITERAL_ROLE = "role";
@@ -48,7 +52,7 @@ public final class UserSearchForm {
     for (String name : FIELDS) {
       var input = snapshot.getOrDefault(name, List.of(""));
       String value = "";
-      if (input.size() != 1) issues.put(name, INVALID);
+      if (input.size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put(name, INVALID);
       else {
         String raw = input.getFirst();
         if (raw.codePoints().anyMatch(UserSearchForm::invalidCharacter)) issues.put(name, INVALID);
@@ -57,7 +61,7 @@ public final class UserSearchForm {
       values.put(name, value);
     }
     String username = Objects.requireNonNull(values.get(LITERAL_USERNAME));
-    if (username.getBytes(StandardCharsets.UTF_8).length > 64)
+    if (username.getBytes(StandardCharsets.UTF_8).length > MAXIMUM_USERNAME_UTF8_BYTES)
       issues.put(LITERAL_USERNAME, "UsernameはUTF-8で64 byte以内にしてください。");
     if (!Set.of("", "USER", "ADMIN").contains(values.get(LITERAL_ROLE)))
       issues.put(LITERAL_ROLE, INVALID);
@@ -70,7 +74,7 @@ public final class UserSearchForm {
       else {
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
+          if (number > MAXIMUM_PAGE_NUMBER) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
           issues.put(LITERAL_PAGE, INVALID);

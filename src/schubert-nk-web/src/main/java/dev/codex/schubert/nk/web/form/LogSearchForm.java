@@ -24,6 +24,9 @@ import org.jspecify.annotations.NullMarked;
 /** SCR014/FUN008/AUT/UI222,225,235/SS313,352/SSC073/PG214/PT-WEB278..285. */
 @NullMarked
 public final class LogSearchForm {
+  private static final int MAXIMUM_PAGE_NUMBER = 999_999;
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   public enum Field {
     FORM,
     Q,
@@ -100,7 +103,7 @@ public final class LogSearchForm {
     FIELDS.forEach(
         (name, field) -> {
           var input = snapshot.getOrDefault(name, List.of(""));
-          if (input.size() != 1) {
+          if (input.size() != SINGLE_PARAMETER_VALUE_COUNT) {
             values.put(field, "");
             issues.put(field, Code.BINDING);
           } else {
@@ -129,7 +132,7 @@ public final class LogSearchForm {
       else {
         try {
           int parsed = Integer.parseInt(text);
-          if (parsed > 999999) issues.putIfAbsent(Field.PAGE, Code.VALUE);
+          if (parsed > MAXIMUM_PAGE_NUMBER) issues.putIfAbsent(Field.PAGE, Code.VALUE);
           else page = Math.max(1, parsed);
         } catch (NumberFormatException exception) {
           issues.putIfAbsent(Field.PAGE, Code.VALUE);

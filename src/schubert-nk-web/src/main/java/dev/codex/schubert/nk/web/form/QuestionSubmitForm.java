@@ -15,6 +15,8 @@ import org.jspecify.annotations.NullMarked;
 /** SCR018/QST001/UI224,236/SS313,323; PG-D351/PT-QST-FORM001..008. Request scope only. */
 @NullMarked
 public final class QuestionSubmitForm implements AutoCloseable {
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_QUESTION = "question";
 
   private static final Set<String> FIELDS = Set.of(LITERAL_QUESTION, "operation_token");
@@ -40,12 +42,12 @@ public final class QuestionSubmitForm implements AutoCloseable {
     for (var entry : snapshot.entrySet()) {
       if (!FIELDS.contains(entry.getKey()) && !entry.getKey().equals("_csrf"))
         issues.put("form", INVALID);
-      if (entry.getValue().size() != 1) issues.put("form", INVALID);
+      if (entry.getValue().size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put("form", INVALID);
     }
     var values = new HashMap<String, String>();
     for (String name : FIELDS) {
       List<String> input = snapshot.getOrDefault(name, List.of());
-      if (input.size() == 1) values.put(name, input.getFirst());
+      if (input.size() == SINGLE_PARAMETER_VALUE_COUNT) values.put(name, input.getFirst());
       else {
         values.put(name, "");
         issues.put(name, INVALID);

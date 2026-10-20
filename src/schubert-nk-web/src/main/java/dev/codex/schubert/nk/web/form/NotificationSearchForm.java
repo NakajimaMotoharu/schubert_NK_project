@@ -21,6 +21,9 @@ import org.jspecify.annotations.NullMarked;
 /** SCR020/NTF/UI224,236/SS313,314; PG-D347/PT-NTF-HTTP001..010. No owner input. */
 @NullMarked
 public final class NotificationSearchForm {
+  private static final int MAXIMUM_PAGE_NUMBER = 999_999;
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_TYPE = "type";
 
   private static final java.lang.String LITERAL_PAGE = "page";
@@ -57,7 +60,7 @@ public final class NotificationSearchForm {
     for (String name : FIELDS) {
       var input = snapshot.getOrDefault(name, List.of(""));
       String value = "";
-      if (input.size() != 1) issues.put(name, INVALID);
+      if (input.size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put(name, INVALID);
       else {
         String raw = input.getFirst();
         if (raw.codePoints().anyMatch(NotificationSearchForm::invalidCharacter))
@@ -75,7 +78,7 @@ public final class NotificationSearchForm {
       else
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
+          if (number > MAXIMUM_PAGE_NUMBER) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
           issues.put(LITERAL_PAGE, INVALID);

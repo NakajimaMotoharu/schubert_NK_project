@@ -15,6 +15,8 @@ import org.jspecify.annotations.NullMarked;
 /** Closed SCR017 binding only; FUN009/AUT002003/UI225236/SS313314; PG-D353/016069. */
 @NullMarked
 final class UserMutationInput implements AutoCloseable {
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_OPERATION = "operation";
 
   private static final java.lang.String LITERAL_EXPECTED_VERSION = "expected_version";
@@ -78,7 +80,7 @@ final class UserMutationInput implements AutoCloseable {
           Objects.requireNonNull(key, "name");
           List<String> copy = List.copyOf(value);
           if (!permitted.contains(key) && !key.equals("_csrf")) issues.put("form", INVALID);
-          if (copy.size() != 1) issues.put("form", INVALID);
+          if (copy.size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put("form", INVALID);
           else values.put(key, copy.getFirst());
         });
     for (String name : permitted) {

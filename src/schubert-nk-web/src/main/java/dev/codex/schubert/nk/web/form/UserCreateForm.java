@@ -16,6 +16,8 @@ import org.jspecify.annotations.NullMarked;
 /** SCR016/FUN009/AUT002/UI225,236/SS313,314; PG-D345/PT-USER-CREATE001..008. */
 @NullMarked
 public final class UserCreateForm implements AutoCloseable {
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_USERNAME = "username";
 
   private static final java.lang.String LITERAL_ROLE = "role";
@@ -65,11 +67,11 @@ public final class UserCreateForm implements AutoCloseable {
     for (var entry : snapshot.entrySet()) {
       if (!FIELDS.contains(entry.getKey()) && !entry.getKey().equals("_csrf"))
         issues.put("form", INVALID);
-      if (entry.getValue().size() != 1) issues.put("form", INVALID);
+      if (entry.getValue().size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put("form", INVALID);
     }
     for (String name : FIELDS) {
       List<String> input = snapshot.getOrDefault(name, List.of());
-      if (input.size() == 1) values.put(name, input.getFirst());
+      if (input.size() == SINGLE_PARAMETER_VALUE_COUNT) values.put(name, input.getFirst());
       else {
         values.put(name, "");
         issues.put(name, INVALID);

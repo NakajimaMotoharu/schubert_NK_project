@@ -14,6 +14,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class RouteListViewModel {
+  private static final int MAXIMUM_ROUTE_RECORDS = 50;
+
   private final TopBarViewModel topBar;
   private final String game;
   private final List<Card> routes;
@@ -29,7 +31,8 @@ public final class RouteListViewModel {
     Objects.requireNonNull(principal, "principal");
     Objects.requireNonNull(game, "game");
     var copy = List.copyOf(records);
-    if (copy.size() > 50) throw new IllegalArgumentException("invalid route list size");
+    if (copy.size() > MAXIMUM_ROUTE_RECORDS)
+      throw new IllegalArgumentException("invalid route list size");
     return new RouteListViewModel(principal, game, copy);
   }
 

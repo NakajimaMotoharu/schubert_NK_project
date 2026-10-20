@@ -15,6 +15,8 @@ import org.jspecify.annotations.NullMarked;
 /** Display-only verified scenario projection. FUN004/UI223,234/SS313,333/PG195/PT-WEB194..205. */
 @NullMarked
 public final class ScenarioDetailViewModel {
+  private static final int MAXIMUM_INLINE_RECORDS = 200;
+
   private final TopBarViewModel topBar;
   private final long id;
   private final String game;
@@ -67,7 +69,8 @@ public final class ScenarioDetailViewModel {
       throw new IllegalArgumentException("inconsistent navigation");
     }
     if (data.deliveryMode() == DeliveryMode.INLINE) {
-      if (copy.size() > 200) throw new IllegalArgumentException("invalid inline count");
+      if (copy.size() > MAXIMUM_INLINE_RECORDS)
+        throw new IllegalArgumentException("invalid inline count");
     } else {
       if (copy.isEmpty() || copy.size() > 10000 || copy.size() != data.fileRecordCount()) {
         throw new IllegalArgumentException("invalid resolved file count");

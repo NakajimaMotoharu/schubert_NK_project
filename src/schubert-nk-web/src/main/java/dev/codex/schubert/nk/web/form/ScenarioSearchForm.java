@@ -19,6 +19,9 @@ import org.jspecify.annotations.NullMarked;
 /** Search input boundary. FUN003/UI222,223,234/SS313,352/SSC072/PG199/PT-WEB214..221. */
 @NullMarked
 public final class ScenarioSearchForm {
+  private static final int MAXIMUM_PAGE_NUMBER = 999_999;
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   public enum Field {
     FORM,
     Q,
@@ -81,7 +84,7 @@ public final class ScenarioSearchForm {
     FIELDS.forEach(
         (name, field) -> {
           var input = snapshot.getOrDefault(name, List.of(""));
-          if (input.size() != 1) {
+          if (input.size() != SINGLE_PARAMETER_VALUE_COUNT) {
             values.put(field, "");
             issues.put(field, Code.BINDING);
           } else {
@@ -110,7 +113,7 @@ public final class ScenarioSearchForm {
       else {
         try {
           int parsed = Integer.parseInt(text);
-          if (parsed > 999999) issues.putIfAbsent(Field.PAGE, Code.VALUE);
+          if (parsed > MAXIMUM_PAGE_NUMBER) issues.putIfAbsent(Field.PAGE, Code.VALUE);
           else page = Math.max(1, parsed);
         } catch (NumberFormatException exception) {
           issues.putIfAbsent(Field.PAGE, Code.VALUE);

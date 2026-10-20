@@ -14,6 +14,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ScenarioFileListViewModel {
+  private static final int MAXIMUM_FILE_RECORDS = 500;
+
   private final TopBarViewModel topBar;
   private final String game;
   private final String prefix;
@@ -44,7 +46,8 @@ public final class ScenarioFileListViewModel {
     Objects.requireNonNull(routeName, "routeName");
     var copy = List.copyOf(records);
     if (prefix < 0 || prefix > 99) throw new IllegalArgumentException("invalid route prefix");
-    if (copy.size() > 500) throw new IllegalArgumentException("invalid file list size");
+    if (copy.size() > MAXIMUM_FILE_RECORDS)
+      throw new IllegalArgumentException("invalid file list size");
     return new ScenarioFileListViewModel(principal, game, prefix, routeName, copy);
   }
 

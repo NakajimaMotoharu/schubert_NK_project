@@ -23,6 +23,11 @@ import org.jspecify.annotations.NullMarked;
 /** SCR022/UI224236/SS313314; PG-D350/PT-QRY-HTTP001..003,012. No HTTP role/context. */
 @NullMarked
 public final class QuestionSearchForm {
+  private static final int MAXIMUM_KEYWORD_UTF8_BYTES = 256;
+  private static final int MAXIMUM_PAGE_NUMBER = 999_999;
+  private static final int MAXIMUM_USERNAME_UTF8_BYTES = 64;
+  private static final int SINGLE_PARAMETER_VALUE_COUNT = 1;
+
   private static final java.lang.String LITERAL_KEYWORD = "keyword";
 
   private static final java.lang.String LITERAL_USERNAME = "username";
@@ -69,7 +74,7 @@ public final class QuestionSearchForm {
     for (String name : FIELDS) {
       var input = snapshot.getOrDefault(name, List.of(""));
       String value = "";
-      if (input.size() != 1) issues.put(name, INVALID);
+      if (input.size() != SINGLE_PARAMETER_VALUE_COUNT) issues.put(name, INVALID);
       else {
         String raw = input.getFirst();
         if (raw.codePoints().anyMatch(QuestionSearchForm::invalidCharacter))
@@ -80,9 +85,9 @@ public final class QuestionSearchForm {
     }
     if (!admin) values.put(LITERAL_USERNAME, "");
     if (Objects.requireNonNull(values.get(LITERAL_KEYWORD)).getBytes(StandardCharsets.UTF_8).length
-        > 256) issues.put(LITERAL_KEYWORD, INVALID);
+        > MAXIMUM_KEYWORD_UTF8_BYTES) issues.put(LITERAL_KEYWORD, INVALID);
     if (Objects.requireNonNull(values.get(LITERAL_USERNAME)).getBytes(StandardCharsets.UTF_8).length
-        > 64) issues.put(LITERAL_USERNAME, INVALID);
+        > MAXIMUM_USERNAME_UTF8_BYTES) issues.put(LITERAL_USERNAME, INVALID);
     if (!Set.of("", "ANSWERED", "UNANSWERED", "ERROR").contains(values.get(LITERAL_STATE)))
       issues.put(LITERAL_STATE, INVALID);
     int page = 1;
@@ -92,7 +97,7 @@ public final class QuestionSearchForm {
       else
         try {
           int number = Integer.parseInt(text);
-          if (number > 999999) issues.put(LITERAL_PAGE, INVALID);
+          if (number > MAXIMUM_PAGE_NUMBER) issues.put(LITERAL_PAGE, INVALID);
           else page = Math.max(1, number);
         } catch (NumberFormatException failure) {
           issues.put(LITERAL_PAGE, INVALID);
