@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC320（2026-10-21、PT-IDEM-FAIL320/BUG1566/1567・YKT1323/1324）：ordinary API OutboxのJMS primary無し/typed/Runtime/Errorとclose SQL適用外/Runtime/Error、JDBC setup SQL/Runtime/Errorとclose正常/SQL/Runtime/Error/同一Throwable、rollback二次失敗を自己所有・未接続proxyで独立matrix確認する。期待は元Error保持、nonfatal primary＋cleanup ErrorはそのError保持、同一Throwable self-suppression0、close一回・未返却setup失敗ではclaim/commit/rollback/JMS0。既public型/固定診断・正常実DB/JMS/短TX・lease時刻・duplicate因果graphは非回帰。matrix入力をJUnit数へ水増しせず、未実行/失敗と元成功sourceを分離する。既whole6244のsource固定/原XML/Jar回収後に新実装/独立PTを進め、同source型null/静的/必要回帰/coverage・横展開を確認する。実Root/current/未知cohort/native動的PTの代わりにはならず、安全HOLDを解除しない。
+
 ## SSC319 callbackの確認済rollback境界
 
 追加：rollback自体のRuntimeException/Error・試行前通知/正常後通知の順序とnull/例外を検査する。direct-processing Errorの一回rollbackと、既rollbackがErrorで不確定になった時の再発行0を分け、元Error identityを保つ。preflight/前配送/別contextの確認を流用しない。未実装red/失敗/未実行の入力は合格へ算入しない。

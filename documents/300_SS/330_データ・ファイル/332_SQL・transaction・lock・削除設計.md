@@ -1,5 +1,7 @@
 # SQL・transaction・lock・削除設計
 
+SSC320（2026-10-21、ordinary API Outbox/BUG1567）：factory自身がopenしたnonnull connectionのsetAutoCommit(false)を含む返却前setupはSQL/RTE/Error全てで保護し、失敗時に一回closeしてから失敗を伝播する。caller TWRへまだ渡っていないことを理由に未closeを許容しない。primary Errorは元identity、nonfatal primary＋cleanup Errorはcleanup Error identityを優先し、異なる元primaryをsecondaryへ保持する。非fatal同士は既primary/固定分類を維持し、同一Throwableを自身へsuppressed追加しない。setup close及び既rollbackの二次失敗に適用、追加rollback/close/claim/commit/JMS sendや新TXを発行しない。正常claim/mark TWR・短TX/no-XA・借用Connection非所有契約・SQL literal/role/backoff/leaseは不変更。WebLog等の既全体try/finallyは個別の適用/非該当確認とし、batchの既SQL/unknown変換を一括変更しない。
+
 SSC310（2026-10-20、BUG1530/YKT1290、Expiry監査read局所補足）：SSC200保持SUCCESS照合からも呼ばれる`ExpiryAuditRepository.read`のStatement/ResultSet二scopeへSSC063199の既優先順位を明示適用する。取得後ただちにprimary記録とtyped try/finallyで保護し、取得nonnull確認/body中のSQL・未知Runtime/NPE/Errorを記録してから同じ資源を逆順に一度direct closeする。SQL primary＋SQL secondaryは原因/suppressedなし固定BatchRepositoryException、未知primaryは同一instanceを保持しsecondaryには新しい固定BatchRepositoryExceptionだけを追加する。同一Throwableも自身へ追加せず、SQL primary＋未知cleanupは未知cleanup同一instanceを優先する。成功bodyの結果も両close成功まで返さない。
 
 `read`のnull Statement/ResultSet・必須DB列nullと既validSnapshot=falseだけを固定SQLDataExceptionへ分類し、最外側はSQLだけ固定BatchRepositoryExceptionへ変換する。getter/prepare/query/close等provider呼出をpure投影検査と分け、未知IAE/ISE/NPE/Errorを広いRuntime catchで正常化・固定化しない。public attempt/constructor null・不正step等の契約拒否は従来どおり。cutoff/ended/nullable before/after・既Snapshot検査、全SQL/bind/queryTimeout5秒・同run guard前後・取得失敗時未取得資源close0・借用Connectionのcommit/rollback/config/close禁止は不変更。

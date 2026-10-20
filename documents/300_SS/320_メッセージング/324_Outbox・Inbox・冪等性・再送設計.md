@@ -1,5 +1,7 @@
 # Outbox・Inbox・冪等性・再送設計
 
+SSC320（2026-10-21、BUG1566/1567・YKT1323/1324、ordinary API Outbox内部補足）：send/claim/markの短TX分割、固定MessageID duplicate排除、lease/backoff/SQL/外部wireは不変更。送信の非fatal primary＋JMS close Errorをtyped送信失敗だけに落とさず、そのcleanup Error同一性をfatal側へ伝播し、異なる元primaryをsecondaryへ保持する。既primary Errorはその同一性を保ち、close Errorを含むsecondaryで置換しない。primary無しの既close境界・固定redactionを維持し、同一Throwableのself-suppressionを行わない。Errorを普通再送の成功/失敗markへ正常化しない。DB初期化でまだcallerへ返していないconnectionにもSS332の一回owned close/複合順位を適用する。これは実Root/native停止の証明や未知cohortの回収許可ではない。
+
 SSC157（2026-10-02、実装前）：新QSS/QSDの取得scopeをSS352のNKQRY1内部frameへ暗号保存し、成功/確定error（特にADMIN全件9001）を同じscopeへ拘束する。read-only stageの取得scopeをwrite現在認証で上書きしない。取得USER又は現在ADMINなら元scopeの凍結結果を許可、取得ADMIN→現在USERはQSS0103/QSD0104を非保存で返しSECURITY監査する。失効は先に0102。元snapshot/state/code/completed/expiryは不変更、未保存stageならInbox handlerへ渡す前に拒否。NTS/NTDはowner固定・raw profile不変更。通常QSS/QSDは無scope旧rawを9000で保護し、現在質問/Usernameから所有scopeを推測しない。12.8の保守はprefixのsyntax/layout/固定wireだけ検査し、旧raw検査と現在role非比較を維持する。24h/owner/HMAC/NONE/外部電文は不変更。
 
 SSC156（2026-10-02）：最終retry ERROR＋新D commit後は元Wを再処理せず、同Dの実SENTを短いDB観測で確認してから元ACK。通常送信/mark前crashはD duplicate IDで再送する。元JMS sessionのhard crash/rollbackではBroker max4によるWコピーとDコピーがDLQに併存し得るため、exact-one物理コピーを仮定しない。元ordinary W proof/D metadataを不変で保全し、353 §7.2の同W論理隔離・個別承認整理を適用する。Broker生成コピーの欠落propertyをDから書換え/補完しない。停止時SENT未確認は非成功rollback。max4、no-XA、D!=W、body/header/correlation W保持、application ACK前SENTは不変更。
