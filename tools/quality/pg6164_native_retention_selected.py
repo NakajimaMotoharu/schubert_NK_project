@@ -6,6 +6,7 @@ from pg5966_api_sql_selected import source_test_names
 from pg5984_web_form_selected_v2 import node_environment
 
 ROOT=engine.ROOT
+SLOT='pg6164-native-retention-selected-v1'
 CODE='ecc7b4cd969aebd4bbb91a8635f1a2f66d4a5c3b'
 
 
@@ -37,7 +38,7 @@ def main():
         'api':['api/messaging/inbound/'+n for n in ('SyncRequestConsumers','WebLogConsumers','QuestionWorkConsumers','ApiMessagingRuntime')]
             +['api/messaging/config/'+n for n in ('ApiBrokerContexts','ArtemisConnectionFactoryProvider','ArtemisConnectionFactoryProvider$ConsumerProfile')],
         'web':['web/messaging/WebBrokerContexts']}
-    scope={**vars(engine),'SLOT':'pg6164-native-retention-selected-v1','NODE_PATH':node_environment(),
+    scope={**vars(engine),'SLOT':SLOT,'NODE_PATH':node_environment(),
         'CASES':cases,'COUNTS':counts,'TARGETS':targets,'test_names':source_test_names}
     exec(compile(runner_source(),'<ordinary finite own policy fixtures>','exec'),scope)
     return scope['main']()

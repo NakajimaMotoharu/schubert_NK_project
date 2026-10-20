@@ -34,7 +34,8 @@ public final class OwnedRetentionProcess {
         for (String expected : output)
           assertEquals(expected, executor.submit(stdout::readLine).get(5, TimeUnit.SECONDS));
         assertFalse(process.waitFor(100, TimeUnit.MILLISECONDS));
-        process.destroy();
+        // Signal the exact new process generation without closing our verification readers.
+        assertTrue(process.toHandle().destroy());
         assertTrue(process.waitFor(5, TimeUnit.SECONDS));
         assertEquals(
             143, process.exitValue(), "fixture TERM is not a normal/native cleanup receipt");
