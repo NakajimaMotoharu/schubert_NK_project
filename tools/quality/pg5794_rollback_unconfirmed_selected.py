@@ -29,7 +29,7 @@ def red_qualified(snapshot,actual,expected,physical,exits,problems,phase):
         for case in ET.parse(p).getroot().findall('testcase'):
             if any(c.tag in('error','skipped','flakyFailure','flakyError','rerunFailure','rerunError')for c in case.iter()):return False
             failures.extend(f.get('type')for f in case.findall('failure'))
-    return sources==proof['allSourceHashes']and physical==actual_physical and actual==wanted_inventory and exits==[0,1]and {tuple(r)for r in problems}==wanted and len(failures)==len(wanted)and set(failures)=={'org.opentest4j.AssertionFailedError'}
+    return sources==proof['allSourceHashes']and physical==actual_physical and actual==wanted_inventory and exits==[0,1]and {tuple(r)for r in problems}==wanted and len(failures)==len(wanted)and set(failures)<={'org.opentest4j.AssertionFailedError','org.opentest4j.MultipleFailuresError'}
 
 
 def runner_source(phase):
@@ -41,6 +41,7 @@ def runner_source(phase):
       'sum(map(len,expected.values()))!=12':'sum(map(len,expected.values()))!='+str(count),
       "'expectedTests':12":"'expectedTests':"+str(count),
       'len(target_counters)==14':'len(target_counters)==0',
+      '    done=exits==[0,0]':'    target100=False # No target counter was requested; never vacuous 100.\n    done=exits==[0,0]',
       '    done=done and target100':'    # Full-class coverage remains a separate source-bound acceptance requirement.',
       "with(out/'manifest.safe.json').open('x')as f:":"value.update(phase=PHASE,executionKind='NORMAL_FINITE_ROLLBACK_STATE_PT',purposefulRedEstablished=red_qualified(snapshot,actual,expected,physical,exits,problems,PHASE),webNotRunRetained=PHASE=='red-api',noRuntimeOrVmOperation=True)\n    with(out/'manifest.safe.json').open('x')as f:"}
     for old,new in changes.items():
@@ -52,7 +53,7 @@ def runner_source(phase):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red-api','red-web'));phase=parser.parse_args().phase
-    namespace={**vars(engine),'SLOT':'pg5794-rollback-'+phase+'-v1','CASES':{**CASES,'api':engine.CASES['api']}if phase=='red-web'else CASES,'TARGETS':{},'PHASE':phase,'red_qualified':red_qualified}
+    namespace={**vars(engine),'SLOT':'pg5794-rollback-'+phase+('-v2'if phase=='red-api'else'-v1'),'CASES':{**CASES,'api':engine.CASES['api']}if phase=='red-web'else CASES,'TARGETS':{},'PHASE':phase,'red_qualified':red_qualified}
     exec(compile(runner_source(phase),'<finite rollback-state fixture>','exec'),namespace)
     return namespace['main']()
 

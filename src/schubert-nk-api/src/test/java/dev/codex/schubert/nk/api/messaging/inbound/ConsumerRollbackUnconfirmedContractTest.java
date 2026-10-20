@@ -62,7 +62,7 @@ final class ConsumerRollbackUnconfirmedContractTest {
         var runtime =
             QuestionWorkConsumers.start(
                 factory,
-                new QuestionWorkListener((event, delivery) -> {}, CLOCK),
+                new QuestionWorkListener(event -> {}, CLOCK),
                 ignored -> committedFatal.incrementAndGet(),
                 fatal::incrementAndGet);
         owner = runtime;
@@ -72,7 +72,7 @@ final class ConsumerRollbackUnconfirmedContractTest {
         var runtime =
             WebLogConsumers.start(
                 factory,
-                new WebLogListener((event, delivery) -> {}, CLOCK),
+                new WebLogListener(event -> {}, CLOCK),
                 ignored -> committedFatal.incrementAndGet(),
                 fatal::incrementAndGet);
         owner = runtime;

@@ -12,6 +12,7 @@ class FiniteRollbackSelectionTest(unittest.TestCase):
             self.assertNotIn('lan_server',value)
             self.assertNotIn('systemctl',value)
             self.assertIn('out.mkdir(mode=0o700)',value)
+            self.assertIn('target100=False',value)
         self.assertEqual(3,len(target.RED_API));self.assertEqual(1,len(target.RED_WEB))
 
 
