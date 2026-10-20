@@ -212,7 +212,8 @@ final class WebManagementServer implements AutoCloseable {
         boolean interrupted = Thread.currentThread().isInterrupted();
         try {
           server.stop(0);
-          serverStopped = true;
+          // SSC317: normal stop return does not prove unstarted selector/socket release.
+          if (started) serverStopped = true;
         } finally {
           if (interrupted) Thread.currentThread().interrupt();
         }
@@ -225,6 +226,7 @@ final class WebManagementServer implements AutoCloseable {
         Thread.currentThread().interrupt();
         throw new IOException("Web management stop unconfirmed");
       }
+      if (!started) throw new IOException("Web management stop unconfirmed");
       closed.set(true);
     } finally {
       stopLock.unlock();

@@ -65,19 +65,8 @@ final class ApiManagementBindTest {
   }
 
   @Test
-  void bind316002UnstartedOwnerClosesAndInvalidInputsPrecedeFactory() throws Exception {
-    int port;
-    var server = ApiManagementServer.bind(INFO, () -> true, 0, HttpServer::create);
-    try {
-      port = server.port();
-    } finally {
-      server.close();
-    }
-    assertThrows(IllegalStateException.class, server::start);
-    try (var rebound = ApiManagementServer.open(INFO, () -> true, port)) {
-      assertEquals(port, rebound.port());
-      assertFalse(rebound.ready());
-    }
+  void bind316002UnstartedOwnerRetainsAndInvalidInputsPrecedeFactory() throws Exception {
+    OwnedRetentionProcess.assertHeld(StartupDriver.class, List.of("STOP"), "-1", "runtime");
     var acquired = new AtomicInteger();
     ApiManagementServer.Factory forbidden =
         (address, backlog) -> {
@@ -97,38 +86,11 @@ final class ApiManagementBindTest {
   }
 
   @Test
-  void bind316003EverySetupFailureLeavesTheCapturedOwnerClosableWithoutStartRetry()
-      throws Exception {
+  void bind316003EveryUnconfirmedSetupReleaseRetainsWithoutStartRetry() throws Exception {
     for (int phase = 0; phase < 3; phase++) {
-      for (Throwable marker :
-          List.of(
-              new IllegalStateException("fixture start"), new AssertionError("fixture start"))) {
-        int failAt = phase;
-        var captured = new AtomicReference<SetupFailureServer>();
-        try {
-          var server =
-              ApiManagementServer.bind(
-                  INFO,
-                  () -> true,
-                  0,
-                  (address, backlog) -> {
-                    var fixture = new SetupFailureServer(address, backlog, failAt, marker);
-                    captured.set(fixture);
-                    return fixture;
-                  });
-          assertSame(marker, assertThrows(marker.getClass(), server::start));
-          assertFalse(server.ready());
-          assertThrows(IllegalStateException.class, server::start);
-          server.close();
-          assertTrue(captured.get().executor().isTerminated());
-          try (var rebound = ApiManagementServer.open(INFO, () -> true, server.port())) {
-            assertFalse(rebound.ready());
-          }
-        } finally {
-          var fixture = captured.get();
-          if (fixture != null) fixture.dispose();
-        }
-      }
+      for (String kind : List.of("runtime", "error"))
+        OwnedRetentionProcess.assertHeld(
+            StartupDriver.class, List.of("STOP"), Integer.toString(phase), kind);
     }
   }
 
@@ -256,6 +218,47 @@ final class ApiManagementBindTest {
     public void start() {
       super.start();
       fail(2);
+    }
+  }
+
+  /** A normal stop return after unconfirmed start is not an owned release receipt. */
+  public static final class StartupDriver {
+    public static void main(String[] arguments) throws IOException {
+      OwnedRetentionProcess.deadline();
+      int phase = Integer.parseInt(arguments[0]);
+      Throwable marker =
+          arguments[1].equals("runtime")
+              ? new IllegalStateException("fixture setup")
+              : new AssertionError("fixture setup");
+      try {
+        ResourceScope.acquire(
+            () ->
+                ApiManagementServer.bind(
+                    INFO,
+                    () -> true,
+                    0,
+                    (address, backlog) ->
+                        new SetupFailureServer(address, backlog, phase, marker) {
+                          @Override
+                          public void stop(int delay) {
+                            System.out.println("STOP");
+                            super.stop(delay);
+                          }
+                        }),
+            ServiceProcessResources.ownedRelease(ApiManagementServer::close, true),
+            owner -> {
+              if (phase >= 0) {
+                assertSame(marker, assertThrows(marker.getClass(), owner::start));
+                assertFalse(owner.ready());
+                assertThrows(IllegalStateException.class, owner::start);
+                if (marker instanceof RuntimeException runtime) throw runtime;
+                throw (Error) marker;
+              }
+              return Boolean.TRUE;
+            });
+      } finally {
+        System.out.println("OUTER_RELEASED");
+      }
     }
   }
 

@@ -216,7 +216,8 @@ final class ApiManagementServer implements AutoCloseable {
         if (closed) return;
         if (!serverStopped) {
           server.stop(0);
-          serverStopped = true;
+          // SSC317: unstarted JDK stop can return with a bound selector/socket retained.
+          if (started.get()) serverStopped = true;
         }
         executor.shutdownNow();
         try {
@@ -227,6 +228,7 @@ final class ApiManagementServer implements AutoCloseable {
           Thread.currentThread().interrupt();
           throw new IllegalStateException("API management stop unconfirmed");
         }
+        if (!started.get()) throw new IllegalStateException("API management stop unconfirmed");
         closed = true;
       } finally {
         stopLock.unlock();
