@@ -1,5 +1,11 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC316 native専用の返却前/close UNKNOWN保持（2026-10-21、S3b）
+
+既component entryは元cleanup例外順位と明示保持handle再確認を維持する。ordinary native entryは明示したRetainingUnknown経路だけを固定trueで選び、三consumerのpartial startup/returned close、API/Web provider設定失敗cleanup、API broker partial/live closeまで同状態を伝播する。provider closeが未確認ならそのcatch frameで既ServiceProcessResourcesの固定UNKNOWN保持へ入り、以後のclose再発行/正常return/外側ownerのcleanupをしない。native保持は外部環境/入力のpermissionやadmission bypassではなく、既admitted graphの解放失敗時だけの処理である。
+
+API親groupは最初の取得前ownerと成功phaseを維持し、未返却childのclose UNKNOWNも内側で保持する。新consumer停止後処理をしない既halted/guardとS2成功phaseを維持する。normal componentの既Runtime/Error/secondary順位は変更しない。Webの返却済みNativeRuntimeは既phase/Execution保持を維持し、返却前factoryだけ明示native経路を接続する。固定設定/全window/role/credential/ACKrollback/再送/期限は不変更。BUG1547/1548/1553/1556/YKT1307、SS342343354。
+
 ## SSC315 API factory取得・設定・親owner準備（2026-10-21、S3a）
 
 API providerもSSC311 Webと同様に、profile/endpoint/固定connector・supplier等の準備をfactory取得前に行う。取得後は追加の未保護allocationを挟まず12設定をtryで保護、成功時だけlive factoryを返す。設定Runtime/Errorでは一度closeし元primaryを同一保持、close Error対非Error primaryだけfatal優先、別secondaryはsuppressed、同一Throwableは自己抑制しない。取得自体の例外/nullは未取得資源を推定closeしない。既全設定/三window・credential-free/loopback値を変更しない。

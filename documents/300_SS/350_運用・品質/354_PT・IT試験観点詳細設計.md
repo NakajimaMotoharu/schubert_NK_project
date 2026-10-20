@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC316 native保持接続の独立component PT（S3b）
+
+三consumer/API親/broker/API-Web providerのnative entryの正常終了、partial startup/close Runtime/ErrorのUNKNOWN保持、API管理bind捕捉後start失敗・重複/停止後start拒否、inner roots/codecs/outboxから外側への解放順序を独立literal/実counter/JVMで照合する。normal componentの元例外順位/close再確認/TWR期待値は維持する。全callback/release portが各取得前に準備されることを実ClassFileと独立source fixtureで確認する。
+
+保持の動的PTはJMS proxy/未接続locator/ephemeral HTTPと、当testが起動・所有する自己所有JVM childのみ。固定UNKNOWN診断/未帰還/外側finally marker不在、明示preinterrupt後も保有を有限観測し、そのchildだけ有限手順で終了・回収する。捕捉Mainの実agent記録を同sourceへ接続し、子143を正常cleanup/Root/DONE/実VM資格に算入しない。legacy正常/境界/null/異常/例外/並行/再送と六format型null静的・実四counter/必要全体を確認し、未測定を補完しない。現元1955終端までMain/Test固定、拒否対象probe/拒否操作再試行0・PTALT対象不明保持、実VM/current/DB/failed-cohort/intent/permit安全HOLD不変更。
+
 ## SSC315 API factory内部所有の独立PT（S3a）
 
 三profileの12設定はSS321 literalから独立goldenで検証する。自己所有未接続factory fixtureの各setter全12・IAE/ISE/NPE/Error、取得失敗/null、close複合/同一Throwable/一度close/成功live/credential-freeを検証し、実VM/broker/context/原本DB/鍵へ接続しない。broker親は三取得の各失敗/null・全成功と逆順close/元primary同一性・個別secondary/未取得close0を確認し、actual JVMで全state/capacity/phaseが最初のfactory前、最後取得後のfinal格納だけと照合する。
