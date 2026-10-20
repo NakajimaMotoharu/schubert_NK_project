@@ -14,6 +14,11 @@ COUNTERS=('LINE','METHOD','CLASS','BRANCH')
 MOVES={
  'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdQuery.java':'src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java',
  'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/LinuxSystemdSession.java':'src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java'}
+SUPPORT={
+ 'src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java':
+   ('WBS-P005-03','6b5cea563b6f68b0b604afc06490063793e49662'),
+ 'src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java':
+   ('WBS-P005-03','226fbb6c5348ae0ade9d25f8c579c43d653298a9')}
 
 
 def require(value,message):
@@ -66,6 +71,17 @@ def current_measurement(candidate,historical_source):
             and value['F03Accepted']is False,'candidate technical measurement, not acceptance')
     require(value['canonicalAcceptance']['source']==historical_source
             and value['canonicalAcceptance']['automaticSourceRebinding']is False,'historical acceptance preserved')
+    if candidate['version']==2:
+        require(value.get('measurementKind')=='CURRENT_HOST_ONLY_ORIGINAL_WHOLE'
+                and value.get('nativeQualified')is False,'host-only trace does not inherit old native success')
+        original=value['originalQualification'];qualified_path=ROOT/canonical(original['path'])
+        require(qualified_path.is_file()and sha(qualified_path.read_bytes())==original['sha256'],'independent original whole qualification hash')
+        qualified=json.loads(qualified_path.read_bytes())
+        require(qualified['actualExit']==qualified['FESFlakyNotRun']==qualified['staticSixModules']==0
+                and qualified['productionSource']==candidate['source']
+                and qualified['currentOriginalXmlQualified']is True and qualified['returnedOriginalTerminalExact']is True
+                and (qualified['tests'],qualified['suites'],qualified['mainClasses'])==(value['tests'],value['suites'],value['mainClasses']),
+                'same-source actual host-only whole,not begin/old source/estimated counters')
     modules={};remaining={k:0 for k in COUNTERS}
     root=ROOT/canonical(value['coverageRoot'])
     for module in value['modules']:
@@ -80,6 +96,10 @@ def current_measurement(candidate,historical_source):
                 counts[kind]={key:int(node.attrib[key])for key in ('missed','covered')}
         require(set(counts)==set(COUNTERS)and all(min(c.values())>=0 for c in counts.values()),'four complete current counters')
         require(all(value['moduleCounters'][name][k]==counts[k]for k in COUNTERS),'current candidate counter drift')
+        if candidate['version']==2:
+            require(qualified['modules'][name]['coverageXmlSha256']==module['coverageXmlSha256']
+                    and all(qualified['modules'][name]['coverage'][k]==counts[k]for k in COUNTERS),
+                    'all six original actual coverage reports and counters exact')
         modules[name]=counts
         for k in COUNTERS:remaining[k]+=counts[k]['missed']
     require(len(modules)==6 and remaining==value['remaining'],'all-six actual candidate totals')
@@ -89,26 +109,54 @@ def current_measurement(candidate,historical_source):
             'moduleCounters':modules,'acceptedLeafDelta':0,'formalAccepted':False,'effortPercent':None}
 
 
+def support_declarations(candidate,old):
+    version=candidate['version'];require(type(version)is int and version in(1,2),'explicit trace schema version')
+    expected=set(SUPPORT)if version==2 else set()
+    if version==2:
+        require(candidate.get('logicalScopeChanged')is False
+                and candidate.get('physicalScopeDelta')=={'addedSupport':sorted(SUPPORT),'removed':[]},
+                'only two named support families,not a hidden logical scope change')
+    actual={a['path']for a in candidate['artifacts']if a.get('historicalPath')is None}
+    require(actual==expected,'exact declared support addition set')
+    for artifact in candidate['artifacts']:
+        if artifact['path']not in expected:continue
+        owner,origin=SUPPORT[artifact['path']]
+        require(artifact.get('historicalPath')is None and artifact.get('implementationSupportOnly')is True
+                and artifact.get('supportingExistingLeaf')==artifact['owner']==artifact['costOwner']==owner
+                and artifact.get('originCommit')==origin and artifact['kind']=='JAVA'
+                and type(artifact.get('additionalBudgetPp'))in(int,float)and artifact['additionalBudgetPp']==0
+                and any(a['owner']==a['costOwner']==owner for a in old),
+                'support belongs to one existing owner/known origin with no new cost or acceptance')
+    return expected
+
+
 def verify_candidate(inventory):
     candidate=inventory['currentPhysicalCandidate'];old=inventory['artifacts']
-    require(candidate['version']==1 and candidate['historicalSource']==inventory['source']
+    require(type(candidate['version'])is int and candidate['version']in(1,2)and candidate['historicalSource']==inventory['source']
             and candidate['historicalDescriptorSha256']==descriptor_digest(old),'immutable historical descriptor binding')
     require(candidate['acceptedLeafDelta']==0 and candidate['scopeChanged']is False and candidate['effortPercent']is None,'candidate no acceptance/effort/scope promotion')
     require(candidate['relocations']==MOVES,'only two approved SSC295 relocations')
     design=candidate['design'];design_raw=git_artifacts(design['source'],[design['path']])[design['path']]
     require(sha(design_raw)==design['sha256']and 'SSC295 固定manager読取のbootstrap共通化'.encode()in design_raw,'canonical SSC295 design provenance')
     paths=[a['path']for a in candidate['artifacts']];old_paths=[a['path']for a in old]
-    require(len(paths)==len(set(paths))==len(old_paths),'current candidate no missing/extra/duplicate family')
+    support=support_declarations(candidate,old)
+    require(len(paths)==len(set(paths))==len(old_paths)+len(support),'current candidate no missing/extra/duplicate family')
     expected=eligible(git_files(candidate['source']))
     tracked=subprocess.check_output(['git','ls-files','-z','src','program/characterization'],cwd=ROOT).decode().split('\0')[:-1]
     require(set(paths)==expected==eligible(tracked),'current physical candidate exact Git/worktree scope')
     original={a['path']:a for a in old};used=set();blobs=git_artifacts(candidate['source'],paths)
     for artifact in candidate['artifacts']:
-        prior_path=artifact['historicalPath'];require(prior_path in original and prior_path not in used,'one-to-one historical candidate lineage');used.add(prior_path)
-        prior=original[prior_path];path=artifact['path']
-        require(path==MOVES.get(prior_path,prior_path),'no unapproved artifact relocation')
-        require(artifact['owner']==artifact['costOwner']==prior['owner']==prior['costOwner']
-                and artifact['kind']==prior['kind']and artifact['acceptance']=='UNASSESSED','unchanged single cost owner; no acceptance promotion')
+        path=artifact['path'];prior_path=artifact['historicalPath']
+        if path in support:
+            origin=SUPPORT[path][1]
+            require(sha(git_artifacts(origin,[path])[path])==artifact['sha256'],'exact unchanged introduced support implementation')
+            require(artifact['acceptance']=='UNASSESSED','support has no acceptance promotion')
+        else:
+            require(prior_path in original and prior_path not in used,'one-to-one historical candidate lineage');used.add(prior_path)
+            prior=original[prior_path]
+            require(path==MOVES.get(prior_path,prior_path),'no unapproved artifact relocation')
+            require(artifact['owner']==artifact['costOwner']==prior['owner']==prior['costOwner']
+                    and artifact['kind']==prior['kind']and artifact['acceptance']=='UNASSESSED','unchanged single cost owner; no acceptance promotion')
         require(sha(blobs[path])==artifact['sha256'],'current candidate Git byte mismatch')
         actual=ROOT/path;require(actual.is_file()and not actual.is_symlink()and sha(actual.read_bytes())==artifact['sha256'],'current candidate physical byte mismatch')
         if artifact['kind']=='JAVA':
@@ -116,4 +164,6 @@ def verify_candidate(inventory):
             require(artifact['module']==module and artifact['class']==name,'current Java module/class/path identity')
     require(used==set(old_paths),'all historical families retained')
     result=current_measurement(candidate,inventory['source'])
-    return {**result,'physicalArtifacts':len(paths),'relocations':len(MOVES),'historicalSource':inventory['source']}
+    observed={**result,'physicalArtifacts':len(paths),'relocations':len(MOVES),'historicalSource':inventory['source']}
+    if candidate['version']==2:observed.update(implementationSupportAdditions=len(support),logicalScopeChanged=False,nativeQualified=False)
+    return observed
