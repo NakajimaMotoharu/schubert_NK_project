@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC310 Expiry read局所の独立JDBC複合故障
+
+SS331SSC200/332SSC063199310・343SSC304境界、BUG1530/YKT1290。EXP310001は未修正readに対しResultSet.nextの独立Error primary＋ResultSet.closeの独立SQL secondaryを与え、同一primary＋新固定BatchRepositoryException suppressed一件・逆順一度closeを期待する。SQL closeが元Errorを置換して固定例外となれば不合格。EXP310002はread二scopeの独立68合成表（SQL/IAE/ISE/NPE/Errorの全25対×二scope、同一Throwable×四×二、成功body/close故障×五×二）で同一性/固定秘匿/一度closeを確認する。68はJUnit case内数であり追加68PTとは計上しない。ExpectedはProduction merger/helperを呼ばない固定表で作る。
+
+EXP310003は正常empty/完全Snapshot、null資源/必須列・不正投影/取得失敗/各getter未知/成功close障害、借用Connection変更禁止・guard順を確認する。既BAT287のreadRuntimeだけ未知provider同一性へ補正し、stageRuntime/finishRuntimeの既別scope期待・SQL/null/不正DB値の固定拒否は維持する。既実PostgreSQL Expiry stage/finish/idempotency/保持別run SUCCESS/rollback・監査不変とcaller影響suiteも新sourceで照合する。SS343SSC304のJavaTWR参照試験を保持して混同を防ぐ。line/method/class/branch100%を要求し、pure proxy限定結果を実DB/Root所有/native/旧source coverageへ転用しない。必要同source全体/CHR/451/正式受入は別終了依存のまま。
+
 ## SSC308 factory-owned IO例外matrix・wrapper取得順の独立PT
 
 FFM返却先補足（SS343）：初回native前の三私有out slot/primitive状態・Arena完成handoff、全引数準備→PENDING→C呼出→正常復帰直後RETURNEDの順をactual bytecodeで照合する。全四返却scope、bus取得、request/reply/string/arrayのNULL/負/未知型、各C callのIO/Runtime/Error、返却slotへpointerを書いてから例外を投げる故障、decode故障、close例外/不正戻りを独立に確認する。未知返却が0扱い/free成功に変換されないこと、既知request cleanupの旧順・一度試行、UNKNOWNのslot/arena保持・次read0、正常時の三slot再用/arena閉鎖を固定call列・外側owner/状態・literal値から検証する。期待をproduction mergerから作らず、旧literal ABI/期限/owner再読/八targetを当source再検証する。原237内四siteと原外constructor/bus取得補足を別に記録、限定PT/全体/native/451の成功を合算しない。
