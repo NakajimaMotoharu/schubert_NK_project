@@ -18,6 +18,8 @@ import java.util.function.UnaryOperator;
  * metadata, never authorization or business-result proof.
  */
 public final class SessionOperationTokenLifecycle {
+  private static final int MAXIMUM_SESSION_OPERATIONS = 10;
+
   private final EncryptedWebSessionRepository repository;
   private final Clock clock;
   private final Supplier<UUID> ids;
@@ -53,10 +55,10 @@ public final class SessionOperationTokenLifecycle {
         current -> {
           var tokens = new ArrayList<>(current.operationTokens());
           long pending = tokens.stream().filter(token -> token.completedAt().isEmpty()).count();
-          if (pending + required.size() > 10) return current;
+          if (pending + required.size() > MAXIMUM_SESSION_OPERATIONS) return current;
           var candidates = new ArrayList<SessionOperationToken>();
           for (String purpose : required) {
-            if (tokens.size() == 10) {
+            if (tokens.size() == MAXIMUM_SESSION_OPERATIONS) {
               int oldest = -1;
               for (int index = 0; index < tokens.size(); index++) {
                 var completion = tokens.get(index).completedAt();

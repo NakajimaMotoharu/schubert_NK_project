@@ -38,6 +38,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @NullMarked
 public final class AnimationController {
+  private static final int HTTP_OK = 200;
+
   private final AnimationWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -133,7 +135,7 @@ public final class AnimationController {
       return Optional.empty();
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return Optional.empty();
     }

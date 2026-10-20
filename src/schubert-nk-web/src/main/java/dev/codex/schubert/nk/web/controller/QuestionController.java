@@ -52,6 +52,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class QuestionController {
+  private static final int HTTP_OK = 200;
+
   private static final java.lang.String LITERAL_QSBREQ01 = "QSBREQ01";
 
   private static final java.lang.String LITERAL_PAGE = "page";
@@ -154,7 +156,7 @@ public final class QuestionController {
         return null;
       }
       int status = mapper.httpStatus(result.resultCode());
-      if (status != 200) {
+      if (status != HTTP_OK) {
         if (status == 400 || status == 503)
           return redisplay(
               actor, model, response, form, status, status == 400 ? "入力項目を確認してください。" : RETRY);
@@ -239,7 +241,7 @@ public final class QuestionController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }
@@ -323,7 +325,7 @@ public final class QuestionController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }
@@ -394,7 +396,7 @@ public final class QuestionController {
       return null;
     }
     int readStatus = mapper.httpStatus(result.resultCode());
-    if (readStatus != 200) {
+    if (readStatus != HTTP_OK) {
       response.sendError(readStatus);
       return null;
     }
@@ -498,7 +500,7 @@ public final class QuestionController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       if (status == 400 || status == 409 || status == 503)
         return showDetail(id, actor, model, request, response, Optional.of(form), status, RETRY);
       response.sendError(status);

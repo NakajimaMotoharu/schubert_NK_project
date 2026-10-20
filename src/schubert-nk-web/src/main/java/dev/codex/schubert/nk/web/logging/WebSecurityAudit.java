@@ -20,6 +20,8 @@ import java.util.UUID;
  * UI226/252; SS314/351/352; PG-D-107/PT-WEB-095..100.
  */
 public final class WebSecurityAudit {
+  private static final int MAXIMUM_IP_LITERAL_CHARACTERS = 45;
+
   private static final java.lang.String LITERAL_DENIED = "DENIED";
 
   private static final java.lang.String LITERAL_AUTHORIZATION_DENIED = "AUTHORIZATION_DENIED";
@@ -149,7 +151,7 @@ public final class WebSecurityAudit {
 
   private static String canonicalAddress(String value) {
     try {
-      if (value.length() > 45) throw new IllegalArgumentException();
+      if (value.length() > MAXIMUM_IP_LITERAL_CHARACTERS) throw new IllegalArgumentException();
       String canonical = InetAddress.ofLiteral(value).getHostAddress();
       if (canonical.contains("%")) throw new IllegalArgumentException();
       return canonical;

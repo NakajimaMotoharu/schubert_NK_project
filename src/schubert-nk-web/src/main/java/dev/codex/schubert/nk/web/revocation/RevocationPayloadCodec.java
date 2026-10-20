@@ -19,6 +19,9 @@ import org.jspecify.annotations.Nullable;
  * owner must retain required previous keys while rows/borrowers exist.
  */
 public final class RevocationPayloadCodec implements AutoCloseable {
+  private static final int AES_KEY_BYTES = 32;
+  private static final int ENVELOPE_FORMAT_VERSION = 1;
+
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   private final java.util.concurrent.locks.ReentrantLock lock =
       new java.util.concurrent.locks.ReentrantLock();
@@ -116,7 +119,7 @@ public final class RevocationPayloadCodec implements AutoCloseable {
       byte[] plaintext = new byte[0];
       try {
         if (stored.length < 101 || !Arrays.equals(stored, 0, 6, MAGIC, 0, 6)) throw invalid();
-        if (stored[6] != 1) throw invalid();
+        if (stored[6] != ENVELOPE_FORMAT_VERSION) throw invalid();
         int length = Byte.toUnsignedInt(stored[7]);
         if (length < 1 || length > 16 || stored.length != 8 + length + 12 + 64 + 16)
           throw invalid();
@@ -154,7 +157,7 @@ public final class RevocationPayloadCodec implements AutoCloseable {
 
   private static void validateKey(byte[] key) {
     Objects.requireNonNull(key, "revocation key");
-    if (key.length != 32)
+    if (key.length != AES_KEY_BYTES)
       throw new IllegalArgumentException("revocation key must contain 256 bits");
   }
 

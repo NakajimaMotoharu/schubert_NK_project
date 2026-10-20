@@ -50,6 +50,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class ScenarioController {
+  private static final int HTTP_OK = 200;
+
   private static final java.lang.String LITERAL_PAGE = "page";
 
   private final ScenarioWireClient client;
@@ -227,7 +229,7 @@ public final class ScenarioController {
       return Optional.empty();
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return Optional.empty();
     }

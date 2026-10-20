@@ -53,6 +53,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @NullMarked
 public final class ContentDetailController {
+  private static final int HTTP_OK = 200;
+
   private final ScenarioWireClient scenarios;
   private final MediaDescriptorWireClient media;
   private final MusicWireClient music;
@@ -223,7 +225,7 @@ public final class ContentDetailController {
       return false;
     }
     int status = mapper.httpStatus(result);
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return false;
     }

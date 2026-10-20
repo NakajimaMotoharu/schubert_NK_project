@@ -59,6 +59,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class UserAdminController {
+  private static final String LOCKED_STATE = "LOCKED";
+  private static final int HTTP_OK = 200;
+
   private static final java.lang.String LITERAL_PASSWORD = "PASSWORD";
 
   private static final java.lang.String LITERAL_UCRREQ01 = "UCRREQ01";
@@ -148,7 +151,7 @@ public final class UserAdminController {
         return null;
       }
       int status = mapper.httpStatus(result.resultCode());
-      if (status != 200) {
+      if (status != HTTP_OK) {
         if (status == 400 || status == 409 || status == 503)
           return showCreate(
               actor,
@@ -241,7 +244,7 @@ public final class UserAdminController {
         return null;
       }
       int status = mapper.httpStatus(result.resultCode());
-      if (status != 200) {
+      if (status != HTTP_OK) {
         if (status == 400 || status == 409 || status == 503)
           return showChange(
               id,
@@ -313,7 +316,7 @@ public final class UserAdminController {
         operations.add("ROLE");
       }
       operations.add(LITERAL_PASSWORD);
-      if ("LOCKED".equals(page.getValues().get("state"))) operations.add("UNLOCK");
+      if (LOCKED_STATE.equals(page.getValues().get("state"))) operations.add("UNLOCK");
       try {
         var issued =
             tokens
@@ -482,7 +485,7 @@ public final class UserAdminController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }
@@ -537,7 +540,7 @@ public final class UserAdminController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }

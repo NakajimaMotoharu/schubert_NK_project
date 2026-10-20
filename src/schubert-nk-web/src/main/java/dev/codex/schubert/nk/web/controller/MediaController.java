@@ -42,6 +42,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @NullMarked
 public final class MediaController {
+  private static final int HTTP_OK = 200;
+
   private final MediaDescriptorWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final MediaRangeService service;
@@ -158,7 +160,7 @@ public final class MediaController {
         return;
       }
       int status = mapper.httpStatus(wire.resultCode());
-      if (status != 200) {
+      if (status != HTTP_OK) {
         response.sendError(status);
         return;
       }

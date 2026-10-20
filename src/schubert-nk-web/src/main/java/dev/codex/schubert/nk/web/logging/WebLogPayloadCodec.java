@@ -26,6 +26,9 @@ import org.jspecify.annotations.Nullable;
  * serialize key/nonce access; caller arrays are never retained or erased.
  */
 public final class WebLogPayloadCodec implements AutoCloseable {
+  private static final int AES_KEY_BYTES = 32;
+  private static final int ENVELOPE_FORMAT_VERSION = 1;
+
   public static final int PLAINTEXT_BYTES = 2_336;
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   private static final int NONCE_BYTES = 12;
@@ -136,7 +139,7 @@ public final class WebLogPayloadCodec implements AutoCloseable {
             || !Arrays.equals(stored, 0, MAGIC.length, MAGIC, 0, MAGIC.length)) {
           throw invalidPayload();
         }
-        if (stored[6] != 1) {
+        if (stored[6] != ENVELOPE_FORMAT_VERSION) {
           throw invalidPayload();
         }
         int keyLength = Byte.toUnsignedInt(stored[7]);
@@ -223,7 +226,7 @@ public final class WebLogPayloadCodec implements AutoCloseable {
 
   private static byte[] requireKey(byte[] key) {
     Objects.requireNonNull(key, "key");
-    if (key.length != 32) {
+    if (key.length != AES_KEY_BYTES) {
       throw new IllegalArgumentException("web log key must contain exactly 256 bits");
     }
     return key.clone();

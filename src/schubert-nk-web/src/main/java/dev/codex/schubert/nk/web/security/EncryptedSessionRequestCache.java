@@ -23,6 +23,8 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
  * cookie/header/body replay, arbitrary Security object serialization, or authorization grant.
  */
 public final class EncryptedSessionRequestCache implements RequestCache {
+  private static final String AJAX_REQUEST_VALUE = "XMLHttpRequest";
+
   private final SpringEncryptedSessionRepository sessions;
 
   public EncryptedSessionRequestCache(SpringEncryptedSessionRepository sessions) {
@@ -91,7 +93,7 @@ public final class EncryptedSessionRequestCache implements RequestCache {
   }
 
   private static Optional<SavedScreenTarget> candidate(HttpServletRequest request) {
-    if ("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With")))
+    if (AJAX_REQUEST_VALUE.equalsIgnoreCase(request.getHeader("X-Requested-With")))
       return Optional.empty();
     String query = request.getQueryString();
     String location = request.getRequestURI() + (query == null ? "" : "?" + query);

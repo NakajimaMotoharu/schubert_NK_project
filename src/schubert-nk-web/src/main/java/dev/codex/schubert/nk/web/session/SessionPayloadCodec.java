@@ -18,6 +18,9 @@ import org.jspecify.annotations.Nullable;
  * SSC-039/PG-D-095/PT-WEB-016..023. Owns key copies; no DB, HTTP or authorization decisions.
  */
 public final class SessionPayloadCodec implements AutoCloseable {
+  private static final int AES_KEY_BYTES = 32;
+  private static final int ENVELOPE_FORMAT_VERSION = 1;
+
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
@@ -121,7 +124,7 @@ public final class SessionPayloadCodec implements AutoCloseable {
       byte[] plaintext = new byte[0];
       try {
         if (stored.length < 37 || !Arrays.equals(stored, 0, 6, MAGIC, 0, 6)) throw invalid();
-        if (stored[6] != 1) throw invalid();
+        if (stored[6] != ENVELOPE_FORMAT_VERSION) throw invalid();
         int keyLength = Byte.toUnsignedInt(stored[7]);
         int nonceOffset = 8 + keyLength;
         int cipherOffset = nonceOffset + 12;
@@ -160,7 +163,8 @@ public final class SessionPayloadCodec implements AutoCloseable {
 
   private static void validateKey(byte[] key) {
     Objects.requireNonNull(key, "key");
-    if (key.length != 32) throw new IllegalArgumentException("session key must contain 256 bits");
+    if (key.length != AES_KEY_BYTES)
+      throw new IllegalArgumentException("session key must contain 256 bits");
   }
 
   private static SessionPayloadException invalid() {

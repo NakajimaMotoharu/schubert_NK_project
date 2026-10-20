@@ -18,12 +18,14 @@ public record SessionAttributes(
     Optional<String> csrfToken,
     Optional<SavedRequestTarget> savedRequest,
     List<SessionOperationToken> operationTokens) {
+  private static final int MAXIMUM_SESSION_OPERATIONS = 10;
+
   public SessionAttributes {
     Objects.requireNonNull(principal, "principal");
     Objects.requireNonNull(csrfToken, "csrfToken");
     Objects.requireNonNull(savedRequest, "savedRequest");
     operationTokens = List.copyOf(operationTokens);
-    if (operationTokens.size() > 10)
+    if (operationTokens.size() > MAXIMUM_SESSION_OPERATIONS)
       throw new IllegalArgumentException("session operation count is invalid");
     var ids = new HashSet<UUID>();
     for (var token : operationTokens)

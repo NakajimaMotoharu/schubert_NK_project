@@ -28,6 +28,8 @@ import org.jspecify.annotations.Nullable;
  * Codec/DataSource ownership stays with the caller. Mutation callbacks must be pure and bounded.
  */
 public final class EncryptedWebSessionRepository {
+  private static final int MAXIMUM_SESSION_VERSION = 999_999_999;
+
   private final DataSource dataSource;
   private final SessionPayloadCodec codec;
   private final Clock clock;
@@ -244,7 +246,7 @@ public final class EncryptedWebSessionRepository {
       Connection connection, WebSessionRow current, SessionAttributes attributes, Instant now) {
     Instant access = now.isBefore(current.lastAccessedAt()) ? current.lastAccessedAt() : now;
     Instant expiry = access.plusSeconds(current.maxInactiveSeconds());
-    if (current.version() == 999999999) {
+    if (current.version() == MAXIMUM_SESSION_VERSION) {
       UUID uuid = required(ids.get());
       require(!uuid.equals(current.identity().id()));
       var identity =

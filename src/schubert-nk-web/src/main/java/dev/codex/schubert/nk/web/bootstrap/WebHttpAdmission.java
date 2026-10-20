@@ -14,6 +14,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class WebHttpAdmission {
+  private static final int MINIMUM_ACTIVE_REQUESTS = 1;
+
   private final Object lock = new Object();
   private final BooleanSupplier ownerStopping;
   private boolean retainedAccepting;
@@ -52,7 +54,8 @@ public final class WebHttpAdmission {
 
   void completed() {
     synchronized (lock) {
-      if (active < 1) throw new IllegalStateException("Web HTTP completion unavailable");
+      if (active < MINIMUM_ACTIVE_REQUESTS)
+        throw new IllegalStateException("Web HTTP completion unavailable");
       active--;
       lock.notifyAll();
     }

@@ -13,6 +13,8 @@ import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
 
 /** NK-WEB-001; FUN-001/AUT-004; UI226; SS313/314 §8.1/352; PG-D-100/PT-WEB-051/052. */
 public final class FormCsrfTokenRequestHandler implements CsrfTokenRequestHandler {
+  private static final String CSRF_QUERY_PARAMETER = "_csrf";
+
   @Override
   public void handle(
       HttpServletRequest request, HttpServletResponse response, Supplier<CsrfToken> deferred) {
@@ -31,7 +33,8 @@ public final class FormCsrfTokenRequestHandler implements CsrfTokenRequestHandle
       if (query != null) {
         for (String parameter : query.split("&", -1)) {
           String key = parameter.split("=", 2)[0];
-          if ("_csrf".equals(URLDecoder.decode(key, StandardCharsets.UTF_8))) return null;
+          if (CSRF_QUERY_PARAMETER.equals(URLDecoder.decode(key, StandardCharsets.UTF_8)))
+            return null;
         }
       }
       String[] values = request.getParameterValues("_csrf");

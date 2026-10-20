@@ -38,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class LogController {
+  private static final int HTTP_OK = 200;
+
   private final LogSearchWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -86,7 +88,7 @@ public final class LogController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }

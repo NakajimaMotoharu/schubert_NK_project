@@ -39,6 +39,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @NullMarked
 public final class MusicController {
+  private static final int HTTP_OK = 200;
+
   private final MusicWireClient client;
   private final ApiSessionInvalidHandler invalid;
   private final WebResultMapper mapper = new WebResultMapper();
@@ -141,7 +143,7 @@ public final class MusicController {
       return Optional.empty();
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return Optional.empty();
     }

@@ -27,6 +27,8 @@ import org.jspecify.annotations.Nullable;
  * <p>Trace: NK-MSG-001; RD MQ-004/MQ-005/MQ-008; UI 231; SS 321 sections 8-9 and 322 section 5.
  */
 public final class JmsReplyDecoder {
+  private static final int MINIMUM_DELIVERY_COUNT = 1;
+
   private static final String PROPERTY_MESSAGE_ID = "NKMessageID";
   private static final String PROPERTY_LAYOUT_ID = "NKLayoutID";
   private static final String PROPERTY_PROTOCOL_VERSION = "NKProtocolVersion";
@@ -117,7 +119,7 @@ public final class JmsReplyDecoder {
       throw rejection("reply delivery count is missing");
     }
     int count = message.getIntProperty(PROPERTY_DELIVERY_COUNT);
-    if (count < 1) {
+    if (count < MINIMUM_DELIVERY_COUNT) {
       throw rejection("reply delivery count is outside its range");
     }
     return count;

@@ -21,6 +21,10 @@ import org.jspecify.annotations.Nullable;
  * not a retry; enqueue schedules 5s, failures schedule 30s/300s/900s forever.
  */
 public final class PendingRevocationRepository {
+  private static final int EXPECTED_INSERT_ROWS = 1;
+  private static final int MAXIMUM_LOADED_CIPHERTEXT_BYTES = 116;
+  private static final int MINIMUM_STORED_CIPHERTEXT_BYTES = 29;
+
   public void enqueue(
       Connection connection,
       RevocationPayloadIdentity identity,
@@ -51,7 +55,7 @@ public final class PendingRevocationRepository {
       statement.setObject(5, due.atOffset(ZoneOffset.UTC));
       statement.setObject(6, expiresAt == null ? null : expiresAt.atOffset(ZoneOffset.UTC));
       statement.setString(7, failure.name());
-      if (statement.executeUpdate() != 1)
+      if (statement.executeUpdate() != EXPECTED_INSERT_ROWS)
         throw new SQLDataException("revocation insert not established", "22000");
     }
   }
@@ -158,9 +162,10 @@ public final class PendingRevocationRepository {
       if (!owner.toString().equals(lease)) throw new IllegalArgumentException("invalid lease");
       String keyVersion = required(result.getString("key_version"));
       int size = required(result.getObject("ciphertext_length", Integer.class));
-      if (size < 29) throw new IllegalArgumentException("invalid stored ciphertext length");
+      if (size < MINIMUM_STORED_CIPHERTEXT_BYTES)
+        throw new IllegalArgumentException("invalid stored ciphertext length");
       @Nullable EncryptedRevocationPayload payload = null;
-      if (size <= 116) {
+      if (size <= MAXIMUM_LOADED_CIPHERTEXT_BYTES) {
         byte[] stored = required(result.getBytes("context_ciphertext"));
         if (stored.length != size)
           throw new IllegalArgumentException("invalid stored ciphertext size");

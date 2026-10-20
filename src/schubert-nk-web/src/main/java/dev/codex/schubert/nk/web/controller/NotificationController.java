@@ -45,6 +45,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @NullMarked
 public final class NotificationController {
+  private static final int HTTP_OK = 200;
+
   private static final java.lang.String LITERAL_NTCREQ01 = "NTCREQ01";
 
   private final NotificationWireClient client;
@@ -104,7 +106,7 @@ public final class NotificationController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       response.sendError(status);
       return null;
     }
@@ -176,7 +178,7 @@ public final class NotificationController {
       return null;
     }
     int readStatus = mapper.httpStatus(result.resultCode());
-    if (readStatus != 200) {
+    if (readStatus != HTTP_OK) {
       response.sendError(readStatus);
       return null;
     }
@@ -284,7 +286,7 @@ public final class NotificationController {
       return null;
     }
     int status = mapper.httpStatus(result.resultCode());
-    if (status != 200) {
+    if (status != HTTP_OK) {
       if (status == 400 || status == 409 || status == 503)
         return showDetail(
             id,

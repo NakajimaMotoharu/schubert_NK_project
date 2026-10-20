@@ -24,6 +24,8 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class WebBrokerContexts implements AutoCloseable {
+  private static final int MAXIMUM_TCP_PORT = 65_535;
+
   private static final String UNAVAILABLE = "Web broker context unavailable";
   private static final Pattern LOOPBACK_CORE =
       Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
@@ -48,7 +50,8 @@ public final class WebBrokerContexts implements AutoCloseable {
     var match = LOOPBACK_CORE.matcher(endpoint);
     if (!match.matches()) throw new IllegalArgumentException("Web Artemis endpoint unavailable");
     int port = Integer.parseInt(Objects.requireNonNull(match.group(1), "matched port"));
-    if (port > 65_535) throw new IllegalArgumentException("Web Artemis endpoint unavailable");
+    if (port > MAXIMUM_TCP_PORT)
+      throw new IllegalArgumentException("Web Artemis endpoint unavailable");
     var connector =
         new TransportConfiguration(
             NettyConnectorFactory.class.getName(),

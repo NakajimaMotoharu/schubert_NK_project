@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  * SSC-040/PG-D-096/PT-WEB-024..031. Public arguments nonnull; no connection lifecycle ownership.
  */
 public final class JdbcWebSessionStore {
+  private static final int EXPECTED_INSERT_ROWS = 1;
+
   private static final java.lang.String LITERAL_CONNECTION = "connection";
 
   private static final String COLUMNS =
@@ -83,7 +85,7 @@ public final class JdbcWebSessionStore {
         statement.setObject(7, row.expiresAt().atOffset(java.time.ZoneOffset.UTC));
         statement.setInt(8, row.maxInactiveSeconds());
         statement.setLong(9, row.version());
-        if (statement.executeUpdate() != 1) throw new SessionStoreException();
+        if (statement.executeUpdate() != EXPECTED_INSERT_ROWS) throw new SessionStoreException();
       }
     } catch (SQLException
         | IllegalArgumentException
