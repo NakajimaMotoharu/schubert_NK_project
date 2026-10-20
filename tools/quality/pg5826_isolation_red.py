@@ -59,7 +59,7 @@ def runner_source(phase):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('phase',choices=('red-api','red-web'));phase=parser.parse_args().phase
-    scope={**vars(engine),'SLOT':'pg5826-isolation-'+phase+'-v1','CASES':{**CASES,'api':engine.CASES['api']}if phase=='red-web'else CASES,'TARGETS':{},'PHASE':phase,'red_qualified':red_qualified}
+    scope={**vars(engine),'SLOT':'pg5826-isolation-'+phase+('-v2'if phase=='red-api'else'-v1'),'CASES':{**CASES,'api':engine.CASES['api']}if phase=='red-web'else CASES,'TARGETS':{},'PHASE':phase,'red_qualified':red_qualified}
     exec(compile(runner_source(phase),'<finite independent isolation policy red>','exec'),scope)
     return scope['main']()
 

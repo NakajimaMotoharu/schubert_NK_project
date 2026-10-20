@@ -72,7 +72,7 @@ final class FatalIsolationConsumersContractTest {
                         CLOCK),
                     ignored -> committed.incrementAndGet(),
                     fatal::incrementAndGet);
-            yield new Owner(runtime, runtime::ready);
+            yield new Owner(runtime::close, runtime::ready);
           }
           case 1 -> {
             var runtime =
@@ -81,7 +81,7 @@ final class FatalIsolationConsumersContractTest {
                     new QuestionWorkListener(event -> business.incrementAndGet(), CLOCK),
                     ignored -> committed.incrementAndGet(),
                     fatal::incrementAndGet);
-            yield new Owner(runtime, runtime::ready);
+            yield new Owner(runtime::close, runtime::ready);
           }
           case 2 -> {
             var runtime =
@@ -90,7 +90,7 @@ final class FatalIsolationConsumersContractTest {
                     new WebLogListener(event -> business.incrementAndGet(), CLOCK),
                     ignored -> committed.incrementAndGet(),
                     fatal::incrementAndGet);
-            yield new Owner(runtime, runtime::ready);
+            yield new Owner(runtime::close, runtime::ready);
           }
           default -> throw new AssertionError("finite three groups");
         };
@@ -120,10 +120,10 @@ final class FatalIsolationConsumersContractTest {
     assertEquals(count, contexts.stream().mapToInt(FatalIsolationFixture::closes).sum());
   }
 
-  private record Owner(AutoCloseable value, BooleanSupplier ready) implements AutoCloseable {
+  private record Owner(Runnable closeAction, BooleanSupplier ready) implements AutoCloseable {
     @Override
-    public void close() throws Exception {
-      value.close();
+    public void close() {
+      closeAction.run();
     }
   }
 }
