@@ -1,0 +1,13 @@
+# 1214 現source根拠467再認証とidentity十四個別確認
+
+F03、PG-D440/441、SS321/352、canonical2e3b。現在3955元job/9019の固定Main/Testを変更せず、sourceレビュー/型・静的証拠の確認を実施した。拒否PT代替でも新Production PTでもない。SS322のBUG1494は別未解決で、ここでcallbackのretry/停止分類や実VM/資源確認を受入しない。
+
+PG5816実0：旧2bbbの480個別根拠のうち、完全source/hash・診断全座標・全owner実class byteが現在と一致する467だけを再束縛。変化した七sourceのThrowable guard十三は自動移管せず保留した。全1595診断と一意ID/順序を保持、元3939のPT参照は歴史として分離しcurrent whole参照を空へ戻した。新根拠/新PT/解析再実行0。public `7faf04eb1070ed49c2284a75ec361e7f67f1374a2ba7c55e30a11aac9722c5c8`、全診断 `d00690afd317eb102cc338c68ac407d3d9a22ad754ffd9ac08a7799b24bc9676`。
+
+PG5818/元28627実0：全850 Main-only source/実1665classと固定third-party/providedを検証、既独立fixture1・Javac lint0・proc:none parse/analyzeから現在76 reference比較の型/列/operandを取得。private manifest `7a30e3ed84fcacdb928317fec8a9182aa9fbdbd2e426f590be3123de15df72a4`。これは型factsであってPT成功や一括rule免除ではない。
+
+PG5820-v3実0：元十三guardの実source spanから同じoperand/operatorを対応付け、現在型fact・direct addSuppressed又は同一node early-return・間の代入/callback無しを確認。新constructor一件はfresh wrapperのcause node重複防止を別理由として、同/別equals-true・suppression無効/nullの当source四fixtureと実L5/M1/C1/B2 miss0へ結び付けた。十三の再確認を十三の新規根拠にしない。現sourceへ束縛した**pending481**（再認証/再確認480＋新一）、未review1114/raw1595保持。current whole参照は真正元3955/独立資格後まで空、Production PT/coverage/正式加点0。
+
+public `a64aaa208d14e5b519dc5e11df7bdb2a449e180e9743ed86ac066089790c5b4c`、overlay `4849d9a097d993f2b0879d3c903beb38d1451cf9b48e7769bb72ed5884db33ce`。元v1/v2のcolumn/schema工具不備はBUG1495/YKT1255へ修正前起票・private failed-v1/v2を保全。inclusive column/前後誤差・他symbol/間のmutation・継承reason/欠落拒否のunit2、最終pyflakes0・全十四実照合0で当工具scopeのみCLOSED。元typefacts/Main/3955job/PMDは再実行していない。
+
+次：元9019を継続観測→真正終端0後だけ5814/原XML/当481とcurrent case join。BUG1494は四経路redから必要PG/PTを行う。既3939/旧native・未実測値を新sourceへ合算しない。正式1964/53、17/190、工数率null、QA051final/PTALT-HOLDは維持する。
