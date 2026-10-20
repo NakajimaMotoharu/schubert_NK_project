@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.messaging.inbound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -120,6 +121,7 @@ final class WebLogConsumersTest {
       var processed = new AtomicInteger();
       var signals = new AtomicInteger();
       var terminal = new AtomicReference<CommittedFatalInboundException>();
+      var notified = new CountDownLatch(1);
       try (var runtime =
           WebLogConsumers.start(
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
@@ -127,16 +129,28 @@ final class WebLogConsumersTest {
               failure -> {
                 terminal.set(failure);
                 signals.incrementAndGet();
+                notified.countDown();
               })) {
         sendInvalid(producer);
-        sendInvalid(producer);
         assertNotNull(dlq.receive(5_000));
-        assertNotNull(dlq.receive(5_000));
+        assertTrue(notified.await(5, TimeUnit.SECONDS));
+        producer
+            .createProducer()
+            .setDeliveryMode(DeliveryMode.PERSISTENT)
+            .send(
+                queue(BrokerTopology.WEB_LOG), producer.createTextMessage("second-unacknowledged"));
+        assertNull(dlq.receive(200));
         assertEquals(0, processed.get());
         assertEquals(1, signals.get());
         assertNotNull(terminal.get());
         assertTrue(runtime.terminalFailureObserved());
         assertFalse(runtime.ready());
+      }
+      try (var pending = observer.createConsumer(queue(BrokerTopology.WEB_LOG))) {
+        var returned = pending.receive(10_000);
+        assertNotNull(returned);
+        assertEquals("second-unacknowledged", returned.getBody(String.class));
+        assertNull(pending.receiveNoWait());
       }
     } finally {
       broker.stop();

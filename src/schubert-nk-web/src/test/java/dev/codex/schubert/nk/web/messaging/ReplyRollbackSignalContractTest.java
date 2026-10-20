@@ -90,14 +90,14 @@ final class ReplyRollbackSignalContractTest {
         if (fatalError) {
           var error = new AssertionError("synthetic later fatal");
           fixture.readFailure = error;
-          assertSame(error, assertThrows(AssertionError.class, fixture::deliver));
+          fixture.deliver(); // SS322: a decided terminal admits no later provider input.
           assertEquals(0, fixture.rollbacks);
         } else {
           fixture.deliver();
-          assertEquals(1, fixture.rollbacks);
+          assertEquals(0, fixture.rollbacks);
         }
         fixture.deliver();
-        assertEquals(1, fixture.reads);
+        assertEquals(0, fixture.reads);
         assertEquals(0, fixture.fatal.get());
         assertEquals(1, fixture.committed.get());
         assertEquals(1, fixture.commits); // Only the independently staged protocol DLQ was ACKed.

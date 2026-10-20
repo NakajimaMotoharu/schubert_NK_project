@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +25,8 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -184,6 +187,7 @@ final class ArtemisReplyConsumersTest {
             observer.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
       AtomicReference<CommittedFatalReplyException> terminal = new AtomicReference<>();
       AtomicInteger signals = new AtomicInteger();
+      var notified = new CountDownLatch(1);
       try (ArtemisReplyConsumers consumers =
           ArtemisReplyConsumers.start(
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED),
@@ -191,20 +195,31 @@ final class ArtemisReplyConsumersTest {
               failure -> {
                 terminal.set(failure);
                 signals.incrementAndGet();
+                notified.countDown();
               })) {
-        for (int index = 0; index < 2; index++) {
-          producer
-              .createProducer()
-              .setDeliveryMode(DeliveryMode.PERSISTENT)
-              .send(
-                  new ActiveMQQueue(REPLY_QUEUE), producer.createTextMessage("synthetic-invalid"));
-        }
+        producer
+            .createProducer()
+            .setDeliveryMode(DeliveryMode.PERSISTENT)
+            .send(new ActiveMQQueue(REPLY_QUEUE), producer.createTextMessage("first-invalid"));
         assertNotNull(dlq.receive(5_000));
-        assertNotNull(dlq.receive(5_000));
+        assertTrue(notified.await(5, TimeUnit.SECONDS));
+        producer
+            .createProducer()
+            .setDeliveryMode(DeliveryMode.PERSISTENT)
+            .send(
+                new ActiveMQQueue(REPLY_QUEUE),
+                producer.createTextMessage("second-unacknowledged"));
+        assertNull(dlq.receive(200));
         assertNotNull(terminal.get());
         assertEquals(1, signals.get());
         assertFalse(consumers.ready());
         assertTrue(consumers.terminalFailureObserved());
+      }
+      try (var pending = observer.createConsumer(new ActiveMQQueue(REPLY_QUEUE))) {
+        var returned = pending.receive(10_000);
+        assertNotNull(returned);
+        assertEquals("second-unacknowledged", returned.getBody(String.class));
+        assertNull(pending.receiveNoWait());
       }
     } finally {
       broker.stop();

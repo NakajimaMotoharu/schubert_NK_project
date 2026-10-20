@@ -1,5 +1,18 @@
 # 1223 commit済terminalの入場停止：単体テスト仕様書
 
+## 最新の再試験対象（BUG1503/YKT1263、実行前）
+
+green-v2/sourcea46/41739は真正1、実68/18・新TERM四成功だが旧Web二oracle不合格、batch未実行。archive9ae5fe8624fe5868343382fe07350605e40720f35026e436059663ea4f6d777fを保持。横断読取でAPI Sync/WebLogの二oracleも同じSS違反期待と判明。実装期待への追従ではなくSS322のcommit後exitから次を先に固定する。
+
+| 既存Test | 訂正する独立期待 | fixture/後条件 |
+|---|---|---|
+| ReplyRollbackSignalContractTest.priorProtocolTerminalIsNeverRenotifiedOrReclassifiedAsUnconfirmedCommit | 先頭commit1/通知1後、後続read/rollback/fatal通知0・追加commit0。後続Error入力も読まない | 有限memory、正常/Runtime/Error入力、owner close1 |
+| ArtemisReplyConsumersTest.invalidRepliesAreCommittedToDlqAndTerminalIsSignalledOnce | 先頭DLQ一、通知latch後の二件目はDLQ無し、owner close後に返却 | 実in-process broker専用TempDir、固定text second-unacknowledgedを独立比較 |
+| SyncRequestConsumersTest.invalidMessageCommitsToDlqAndSignalsTerminal | 同上、四contextの先頭通知完了後に二件目を発行 | 同上、既inflightを取り消す期待にはしない |
+| WebLogConsumersTest.permanentInvalidEventsCommitDlqAndSignalTerminalOnce | 同上、processed0・通知1 | 同上 |
+
+新v3は旧66＋TERM四＋API既存lifecycle十一=**81/22**、Main851/物理1666・八targetを実測する。既6b5全3967から新case四だけ増加し必要全体は3971/592、helper一＋旧oracle五の同一TestID補完を宣言する。未達branchを除外/人工再入で100化しない。実行/静的/全体は未受入、旧結果を上書きしない。
+
 NK-MSG-001/NK-WEB-002、RD MQ008/010・UI231・SS321§7/322§11/352、PG-D444/BUG1501/YKT1261。隔離commit後exitは、同じreceiver groupの後続callbackを入場停止する独立期待である。readyfalse/通知一回だけを成功条件にせず、後続のmetadata/DLQ再送/commit/業務/rollbackも停止する。修正前Mainはsource862、全851/1666・既private/public proofを保持する。
 
 | Test ID | class/method | fixture | SSからの固定期待 |
