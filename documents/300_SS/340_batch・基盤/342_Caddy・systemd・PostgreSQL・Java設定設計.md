@@ -1,5 +1,9 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC319 ordinary受信のrollback資格
+
+SS321SSC319の同期確認port/stateをordinary API三consumerへ接続する。確認stateは取得前に準備し、同配送/contextのrollback正常帰還だけで普通retryを許す。未確認callback例外は既halted/terminal・fatal通知へ分離し、処理成功・正常close・新Rootの権限にしない。public listener互換・既UNKNOWN保持/親30分/Unit期限は維持、実Root/native/DB後条件は別資格。BUG1565/YKT1322。
+
 ## SSC318 UNKNOWN keeper内の二次失敗（2026-10-21）
 
 実装補足：native fixed policyは取得前の明示getter呼出でretainer classを初期化し、単なるmethod reference作成だけで初期化済みと仮定しない。通常tick失敗時は、取得前準備した固定fallbackでmonotonicな1000ms待機を挟み、IRQ/park早期帰還でもその待機期限を維持する。fallback自体がVM障害等で不能でもUNKNOWNを正常終了へ変換しないが、VM健全性/低CPUを保証するとはしない。これは規約411の無制限busy loopを通常運用として許可する補足ではない。
