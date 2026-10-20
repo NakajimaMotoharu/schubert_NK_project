@@ -9,7 +9,7 @@ import javax.tools.*;
 /** Symbol facts only: inline private final Object used exclusively as a monitor, never a waiver. */
 final class SourcePrivateMonitorInventory {
   private record Block(long start, long end, long bodyStart, long bodyEnd,
-      long expressionStart, long expressionEnd, String owner, String method) {}
+      long expressionStart, long expressionEnd, String owner, String method, String parentKind) {}
 
   private static final class Field {
     final String path;
@@ -106,9 +106,10 @@ final class SourcePrivateMonitorInventory {
               }
             }
             Tree expression = strip(sync.getExpression());
+            String parentKind = TreePath.getPath(unit, sync).getParentPath().getLeaf().getKind().name();
             field.blocks.add(new Block(positions.getStartPosition(unit, sync), positions.getEndPosition(unit, sync),
                 positions.getStartPosition(unit, sync.getBlock()), positions.getEndPosition(unit, sync.getBlock()),
-                positions.getStartPosition(unit, expression), positions.getEndPosition(unit, expression), owner, method));
+                positions.getStartPosition(unit, expression), positions.getEndPosition(unit, expression), owner, method, parentKind));
           }
           @Override public Void visitIdentifier(IdentifierTree node, Void unused) {
             read(true); return super.visitIdentifier(node, unused);
@@ -130,7 +131,7 @@ final class SourcePrivateMonitorInventory {
               || block.bodyEnd > block.end || block.expressionStart < block.start || block.expressionEnd > block.bodyStart) throw new IllegalArgumentException("bounded source spans required");
           System.out.println("MONITOR_BLOCK\t" + field.path + "\t" + field.owner + "\t" + field.name
               + "\t" + block.start + "\t" + block.end + "\t" + block.bodyStart + "\t" + block.bodyEnd
-              + "\t" + block.expressionStart + "\t" + block.expressionEnd + "\t" + block.owner + "\t" + block.method);
+              + "\t" + block.expressionStart + "\t" + block.expressionEnd + "\t" + block.owner + "\t" + block.method + "\t" + block.parentKind);
         }
       }
     }

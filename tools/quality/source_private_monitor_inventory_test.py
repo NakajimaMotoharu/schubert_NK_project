@@ -6,7 +6,7 @@ from pathlib import Path
 from pg5540_snapshot_scratch_selected import ROOT, TC
 
 FIELD = ('path', 'owner', 'name', 'typeStart', 'typeEnd', 'initStart', 'initEnd', 'blockCount', 'otherReads', 'eligible')
-BLOCK = ('path', 'fieldOwner', 'name', 'start', 'end', 'bodyStart', 'bodyEnd', 'expressionStart', 'expressionEnd', 'blockOwner', 'method')
+BLOCK = ('path', 'fieldOwner', 'name', 'start', 'end', 'bodyStart', 'bodyEnd', 'expressionStart', 'expressionEnd', 'blockOwner', 'method', 'parentKind')
 
 
 def facts(text):
@@ -57,6 +57,7 @@ final class Example {
   Example(Object input) { supplied = input; }
   int read() { synchronized(lock) { return 1; } }
   void write() { synchronized(this.lock) { read(); } }
+  void conditional(boolean run) { if (run) synchronized(lock) {} }
   final class Nested { void call() { synchronized(lock) {} } }
   Object escape() { synchronized(alias) {} return alias; }
   void waitOnce() throws InterruptedException { synchronized(waiting) { waiting.wait(1); } }
@@ -72,7 +73,8 @@ final class Example {
             result = subprocess.run([str(TC/'jdk-25.0.4/bin/java'), '-cp', str(classes), 'SourcePrivateMonitorInventory', str(sources), str(classes)], check=True, capture_output=True, text=True)
             value = facts(result.stdout)
             self.assertEqual({'lock'}, {r['name'] for r in value['fields'] if r['eligible']})
-            self.assertEqual(3, len(value['blocks']))
+            self.assertEqual(4, len(value['blocks']))
+            self.assertEqual(1, sum(r['parentKind'] == 'IF' for r in value['blocks']))
             self.assertEqual({'alias', 'waiting', 'qualified'}, {r['name'] for r in value['fields'] if not r['eligible']})
             self.assertNotIn('supplied', {r['name'] for r in value['fields']})
             self.assertNotIn('mutable', {r['name'] for r in value['fields']})
