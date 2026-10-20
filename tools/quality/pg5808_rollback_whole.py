@@ -8,11 +8,11 @@ from pyflakes.api import check
 import pg5780_jms_primary_whole as previous
 
 ROOT,W=previous.ROOT,previous.W
-SOURCE='9b80cc9540ff9b23ce45ee0c6893141db407be18'
+SOURCE='2e3b0d50679ad6f1a984e25bd400db6f3ad9e798'
 LABEL='PG5808';SLOT='pg5808-rollback-six-v1'
 PROOFS={
- 'PG5802-rollback54-v1/manifest.json':'PENDING_ACTUAL_RESULT',
- 'PG5804-rollback-static-v1/manifest.json':'PENDING_ACTUAL_RESULT'}
+ 'PG5812-current-rollback54-v1/manifest.json':'b822a415878f1794b30f27320bbfc1353afd6b7aaa8b07dd7fed25bb5402b797',
+ 'PG5810-rollback-static-reauth-v1/manifest.json':'68b697ad9162315810ccc0c4adb0cceb200dc60ca44c8686750998742cea5c23'}
 CHANGED_TESTS={
  'api/messaging/inbound/InboundTransactionsPrimaryContractTest',
  'api/messaging/inbound/SyncRequestListenerTest',

@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-014 — PT_DEFAULT：未確認rollback是正後の必要host全3955
+
+1212/PG5808/source2e3b。新16/四suite以外は従来のapproved host fixture profile、既四TestはPG-D441のcause保持・外側UNKNOWN・未ACK・正常checked枝補完でoracleを独立確定。旧元3939の確認再演ではなく、新Main一/既八差と統合品質を検査する。専用mini/pinned key/offline Maven/temporary DB・in-process broker等だけ、実VM・Unit/current・原本DBBackup/鍵/permit/failed-cohort不操作。新job発行前の現所有・job/headroom/未使用namespace/source/hashを確認、一回だけ実行。既拒否は未特定HOLDのまま、通常全体を拒否PT代替へ分類しない。
+
 ## PTPRE-013 — PT_DEFAULT：受信rollback未確認の有限proxy四経路
 
 BUG1489/YKT1249/PG-D441/1208。当test-only sourceを先に固定、API三consumerとWeb reply各一@Testで、合成BytesMessage.getBodyLength失敗→rollback状態変更前Runtime→ready/通知/再入を確認する。JMSContext/JMSConsumerは許可methodだけのメモリproxyで実Broker/DB/network/VM/Unit/current/鍵/原本/permit/failed-cohort不操作。原Main1664同byteのredを保持、Maven依存でWebが未実施ならAPIの再現は再演せず未実施Webだけ別run。是正後はtyped未確認/同一Throwable/null/通常rollback成功・Error等を追加して有限greenを行う。通常PTを拒否代替へ広げず、境界探索/拒否再試行0。
