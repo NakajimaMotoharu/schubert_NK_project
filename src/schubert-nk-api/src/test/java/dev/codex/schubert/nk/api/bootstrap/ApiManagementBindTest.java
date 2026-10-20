@@ -216,9 +216,8 @@ final class ApiManagementBindTest {
                                   @Override
                                   public void setExecutor(Executor executor) {
                                     super.setExecutor(executor);
-                                    super
-                                        .start(); // Known-started own fixture, so final disposal is
-                                                  // independently real.
+                                    // Start only this owned fixture for real disposal.
+                                    super.start();
                                     if (primary instanceof RuntimeException runtime) throw runtime;
                                     throw (Error) primary;
                                   }
