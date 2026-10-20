@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-028 — PT_DEFAULT：API既固定境界18後の1021/175
+
+1254/PG-D452/BUG1522。同じ承認済みhost fixture profileのAPI全1010/169＋他五module guard11/6、offline Maven/自己所有new snapshot・全六format先行→通常package/JUnit/JaCoCo/SpotBugs。固定Node依存もguardし、tempPG/独立rollback・in-process broker/loopback ephemeral HTTP/有限child/固定vectorだけ。Root/VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作。変更は15Mainの同値定数だけで権限/実環境/fixture副作用は不変、暗号/認証という名称を理由に代替へ広げない。拒否操作再試行/境界probe0。fresh>10/clean source/新only→全1021原XML/各15実四100・全8511666/Jar/ABI/raw実差で受入、未測定/旧成功の新source移植0。
+
 ## PTPRE-027 — PT_DEFAULT：残Web42条件後の921/149
 
 1251/PG-D451/BUG1520。同canonicalの全Web913＋guard8、元5984と同じ承認済み自己所有ローカルfixture profile/固定Node依存・offline Maven。tempPG/in-process broker/loopback ephemeral HTTP/有限child/DOM fixtureだけで、実Browser/実VM/Unit/current/業務原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作。変更は24sourceのprimitive/String固定値のみでfixture副作用・権限・通信先は不変、暗号/sessionという名称だけで代替へ広げない。実拒否の再試行/境界probe/回避0。fresh>10/clean source/新only slot→通常921全XML/全24実四100と全Main静的・byte照合、旧成功/欠落を新成功へ補完0。
