@@ -1,0 +1,516 @@
+{
+  "actualExit": 0,
+  "source": "9463db1ac23437043facf95b87f64b9fc7e758bd",
+  "baseManifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5768-reference-identity35-v1/manifest.json",
+  "baseManifestSha256": "9ba9f2af5c8d4c578bf3c645288759ef64bc3e6f818ac88117703c0c81f65484",
+  "priorOverlaySha256": "d34e3f2ac12769a2351795e738524bc00797fed227786ccd5f1ae25065298ae5",
+  "currentCatchFactsSha256": "63e865210e51cdb6dcae78f0784d970b1bc1fa38aae403acab4f9e843b69d7e5",
+  "historicalTypedJdbcFactsSha256": "f19448f741d78ef78472744f45dc07f4e0427943a1c46260c7538810b6ee9a33",
+  "historicalTypeProofReauthenticatedByExactSourceAndAllOwnerBytes": true,
+  "historicalPtImportedAsCurrent": false,
+  "currentWholeQualificationSha256": "ac4d3ccf6e9be8c1222aec8d09dd17508975f6475b3380faced765ce4c836b18",
+  "newIndividualDispositions": 54,
+  "approvedPrimaryCaptureScopes": 27,
+  "scopes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupStepRepository#inspect(dev.codex.schubert.nk.batch.backup.BackupManifest,java.time.Instant)",
+      "catchFirstLine": "162",
+      "finally": {
+        "firstLine": "165",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "173",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BackupStepRepository#inspect(dev.codex.schubert.nk.batch.backup.BackupManifest,java.time.Instant)",
+      "catchFirstLine": "150",
+      "finally": {
+        "firstLine": "153",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "161",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "failure"
+      },
+      "sourceSha256": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#finish(dev.codex.schubert.nk.batch.repository.BatchStepAttempt,java.time.Instant,dev.codex.schubert.nk.batch.repository.BatchStepResult)",
+      "catchFirstLine": "147",
+      "finally": {
+        "firstLine": "150",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "158",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#history(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.BatchStep,java.time.LocalDate,java.time.Instant)",
+      "catchFirstLine": "292",
+      "finally": {
+        "firstLine": "295",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "303",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "1f12f53edf490bfc22db9a94a72aa57ce54e145b075faa23fe5e2124756a138c",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#history(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.BatchStep,java.time.LocalDate,java.time.Instant)",
+      "catchFirstLine": "280",
+      "finally": {
+        "firstLine": "283",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "291",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "4a071c734d852e1a61f733f0e39f2c33a8886df6ca7dbf2e7e299d64dcaf6900",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#abandon(dev.codex.schubert.nk.batch.repository.BatchRunRepository.History,java.time.Instant)",
+      "catchFirstLine": "323",
+      "finally": {
+        "firstLine": "326",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "334",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "1f12f53edf490bfc22db9a94a72aa57ce54e145b075faa23fe5e2124756a138c",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#insert(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.BatchStep,java.time.LocalDate,int,java.time.Instant,boolean,dev.codex.schubert.nk.batch.repository.BatchStepResult.Reason)",
+      "catchFirstLine": "389",
+      "finally": {
+        "firstLine": "392",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "400",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "1f12f53edf490bfc22db9a94a72aa57ce54e145b075faa23fe5e2124756a138c",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#insert(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.BatchStep,java.time.LocalDate,int,java.time.Instant,boolean,dev.codex.schubert.nk.batch.repository.BatchStepResult.Reason)",
+      "catchFirstLine": "377",
+      "finally": {
+        "firstLine": "380",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "388",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "4a071c734d852e1a61f733f0e39f2c33a8886df6ca7dbf2e7e299d64dcaf6900",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#replayed(dev.codex.schubert.nk.batch.repository.BatchStepAttempt,java.time.Instant,dev.codex.schubert.nk.batch.repository.BatchStepResult)",
+      "catchFirstLine": "440",
+      "finally": {
+        "firstLine": "443",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "451",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "1f12f53edf490bfc22db9a94a72aa57ce54e145b075faa23fe5e2124756a138c",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.BatchRunRepository#replayed(dev.codex.schubert.nk.batch.repository.BatchStepAttempt,java.time.Instant,dev.codex.schubert.nk.batch.repository.BatchStepResult)",
+      "catchFirstLine": "428",
+      "finally": {
+        "firstLine": "431",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "439",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "failure"
+      },
+      "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "retainedBodySha256": "4a071c734d852e1a61f733f0e39f2c33a8886df6ca7dbf2e7e299d64dcaf6900",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupRepository#execute(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.CleanupKind,int)",
+      "catchFirstLine": "66",
+      "finally": {
+        "firstLine": "69",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "75",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupRepository#execute(dev.codex.schubert.nk.batch.repository.BatchRun,dev.codex.schubert.nk.batch.repository.CleanupKind,int)",
+      "catchFirstLine": "56",
+      "finally": {
+        "firstLine": "59",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "65",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupRepository#readLogProgress(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "112",
+      "finally": {
+        "firstLine": "115",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "121",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupRepository#readLogProgress(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "102",
+      "finally": {
+        "firstLine": "105",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "111",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "33f742d39f4b2bd3bc12c5dbd4f7099c44ce4447b9d9ce81adcaf00f1504bfc1",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 2,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupStepRepository#execute(dev.codex.schubert.nk.batch.repository.BatchStepAttempt,dev.codex.schubert.nk.batch.repository.CleanupKind,int)",
+      "catchFirstLine": "84",
+      "finally": {
+        "firstLine": "87",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "95",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "failure"
+      },
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupStepRepository#execute(dev.codex.schubert.nk.batch.repository.BatchStepAttempt,dev.codex.schubert.nk.batch.repository.CleanupKind,int)",
+      "catchFirstLine": "72",
+      "finally": {
+        "firstLine": "75",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "83",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "failure"
+      },
+      "sourceSha256": "77f82496e394914b409f6893e6bf518bcd88fc1e7fcf6f52724eb2f63153c33c",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun,java.time.Instant,boolean)",
+      "catchFirstLine": "218",
+      "finally": {
+        "firstLine": "221",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "229",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun,java.time.Instant,boolean)",
+      "catchFirstLine": "206",
+      "finally": {
+        "firstLine": "209",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "217",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "rowsFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "ab13a0ab62f2a99d3b0d324c60f9982d44e0679726197236e4cf3f69dc2a7ec5",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#progressSeal(dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.Entry)",
+      "catchFirstLine": "392",
+      "finally": {
+        "firstLine": "395",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "402",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "1f12f53edf490bfc22db9a94a72aa57ce54e145b075faa23fe5e2124756a138c",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#progressSeal(dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository.Entry)",
+      "catchFirstLine": "381",
+      "finally": {
+        "firstLine": "384",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "391",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "rowsFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "bde69318ae3fa351b2bfd74e3e3960a9cc32e2250745a9e9e534223c53c90b3e",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#readRejected(dev.codex.schubert.nk.batch.repository.BatchRun,java.time.Instant)",
+      "catchFirstLine": "530",
+      "finally": {
+        "firstLine": "533",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "541",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository#readRejected(dev.codex.schubert.nk.batch.repository.BatchRun,java.time.Instant)",
+      "catchFirstLine": "518",
+      "finally": {
+        "firstLine": "521",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "529",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+        "primary": "rowsFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "2baed428e77bb6fee2114ecac7d66d1ee5917d45e1bc9f25beb1ac5ba7eba90d",
+      "retainedBodySha256": "ab13a0ab62f2a99d3b0d324c60f9982d44e0679726197236e4cf3f69dc2a7ec5",
+      "currentOwnerClassCount": 6,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "75",
+      "finally": {
+        "firstLine": "78",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "85",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "64",
+      "finally": {
+        "firstLine": "67",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "74",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "method": "dev.codex.schubert.nk.batch.repository.MorningDatabaseSession.Session#recheckConsistent(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "1071",
+      "finally": {
+        "firstLine": "1074",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "1082",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+        "primary": "failure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+      "retainedBodySha256": "b16f159e40e491539b970e59896744c030580ec8955ae9c275082c44251b2466",
+      "currentOwnerClassCount": 17,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.RunReferenceRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "69",
+      "finally": {
+        "firstLine": "72",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "79",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+        "primary": "statementFailure",
+        "resourceType": "java.sql.Statement",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "retainedBodySha256": "c2f744f20d0cd7c8034c141c511b9f3acd1f510bfc76ebae4868c4ebf80e930d",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "method": "dev.codex.schubert.nk.batch.repository.RunReferenceRepository#read(dev.codex.schubert.nk.batch.repository.BatchRun)",
+      "catchFirstLine": "58",
+      "finally": {
+        "firstLine": "61",
+        "kind": "JDBC_CLOSE",
+        "lastLine": "68",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+        "primary": "rowFailure",
+        "resourceType": "java.sql.ResultSet",
+        "secondary": "secondary"
+      },
+      "sourceSha256": "f9ef20bb9fcdd35983e5c18bbd4cff7b52f80553828af2dfa399954ee9bf55e0",
+      "retainedBodySha256": "ced8fe4a2f5ba0d320b1a5d8cd73dadf1c7c1fae51b4959707b1fd883d1a3675",
+      "currentOwnerClassCount": 1,
+      "diagnostics": 2
+    }
+  ],
+  "rawFindings": 1582,
+  "statusCounts": {
+    "CONTEXT_NOT_APPLICABLE": 261,
+    "REQUIRED_CONTRACT": 208,
+    "FALSE_POSITIVE": 4,
+    "NOT_REVIEWED_CURRENT_SOURCE": 1109
+  },
+  "productionChanges": 0,
+  "testExecutionsIssued": 0,
+  "wholeReplayed": false,
+  "ptAlternativeCompleted": 0,
+  "F03Accepted": false,
+  "formalAccepted": false,
+  "vmActions": 0
+}
