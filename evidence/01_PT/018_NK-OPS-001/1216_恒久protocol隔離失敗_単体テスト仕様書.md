@@ -9,7 +9,7 @@ Program NK-MSG-001/NK-WEB-002、RD MQ008/010・UI231、SS321§7/322§11/352、PG
 | ISO005/006 | 同.iso005/006WebLog* | 同上 | WebLog停止、同じ固定期待 |
 | ISO007/008 | web.messaging.ReplyFatalIsolationContractTest.iso007/008Reply* | 同上 | Web reply readyfalse/terminaltrue/fatal1/CommittedFatal0、read1/rollback1/commit0、次decode0 |
 
-Test IDの正式prefixは`PT-JMS-`。各IDが一つの@Test/source methodへ一意対応する。共通FatalIsolationFixtureは既API test-jarに含むtest専用portで、限定JMSContext/JMSConsumer/Messageのメモリproxyだけ。plain MessageでBytesMessageではない恒久不正を与え、DLQ metadata.getJMSMessageIDから固定JMSException/JMSRuntimeExceptionをthrow、rollbackは正常復帰する。予期しないmethodはcounterを増やしてAssertionError、期待counter0もassertして、誤fixtureのError停止を正常PASSにしない。実Broker/DB/VM/Unit/current/原本Backup/鍵/permit/failed-cohort不操作。
+Test IDの正式prefixは`PT-JMS-`。各IDが一つの@Test/source methodへ一意対応する。API FatalIsolationFixtureとWeb test内の独立Fixtureは限定JMSContext/JMSConsumer/Messageのメモリproxyだけ。BUG1497でAPI test-jar公開の誤仮定を訂正し、module/POM依存を追加しない。plain MessageでBytesMessageではない恒久不正を与え、DLQ metadata.getJMSMessageIDから固定JMSException/JMSRuntimeExceptionをthrow、rollbackは正常復帰する。予期しないmethodはcounterを増やしてAssertionError、期待counter0もassertして、誤fixtureのError停止を正常PASSにしない。実Broker/DB/VM/Unit/current/原本Backup/鍵/permit/failed-cohort不操作。
 
 各caseは開始readytrue/正規context数、初回の非commit fatal/業務未実行、次callback抑止、callback内close0と外側close全context数を検査する。期待値はproduction methodから生成せず、SS322/SS321から0/1と状態を明示する。固定Clockは2026-10-20T00:00Z。原3955/source2e3b・全850/1665は保存済み、test-only redのMain全同byteを独立照合する。
 
