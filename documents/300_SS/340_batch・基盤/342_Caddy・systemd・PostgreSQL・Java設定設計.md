@@ -2,6 +2,8 @@
 
 ## SSC319 ordinary受信のrollback資格
 
+rollbackの試行前attemptedと正常後confirmedを別同期port/stateとし、同配送にresetする。既rollbackのErrorをdirect-processing Errorと誤認して二回目のbest-effort rollbackを発行しない。元Error identity、既一回のdirect Error rollback、native UNKNOWN/親Unit期限は維持、外部運用操作は増やさない。
+
 SS321SSC319の同期確認port/stateをordinary API三consumerへ接続する。確認stateは取得前に準備し、同配送/contextのrollback正常帰還だけで普通retryを許す。未確認callback例外は既halted/terminal・fatal通知へ分離し、処理成功・正常close・新Rootの権限にしない。public listener互換・既UNKNOWN保持/親30分/Unit期限は維持、実Root/native/DB後条件は別資格。BUG1565/YKT1322。
 
 ## SSC318 UNKNOWN keeper内の二次失敗（2026-10-21）
