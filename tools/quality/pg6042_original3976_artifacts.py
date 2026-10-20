@@ -30,11 +30,12 @@ def production_source_inputs(inputs):
     return {k: v for k, v in inputs.items() if k.startswith(prefixes) and k.endswith('.java')}
 
 
-def physical_difference(before, after, owners):
+def physical_difference(before, after, owners, expected_counts=(1666, 1667), expected_added=None):
     added = set(after)-set(before); removed = set(before)-set(after)
     interface = 'batch:dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient$OperationEncoder.class'
     changed = {k for k in before.keys() & after.keys() if before[k] != after[k]}
-    if (len(before), len(after)) != (1666, 1667) or added != {interface} or removed or not owners <= changed:
+    wanted = {interface} if expected_added is None else set(expected_added)
+    if (len(before), len(after)) != tuple(expected_counts) or added != wanted or removed or not owners or not owners <= changed:
         raise ValueError('all old1666/current1667;declared interface1 and all23 changed owners')
     if any(not any(k == o or k.startswith(o[:-6]+'$') for o in owners) for k in changed | added):
         raise ValueError('no undeclared physical change outside23 source owners')
@@ -61,16 +62,20 @@ def inspect_original(data):
     import xml.etree.ElementTree as ET
     import zipfile
     base = Path('/home/mini/schubert-nk-pgpt')
-    source = base/'source-full-PG6040'; out = base/'runs/PG6040-six-v1'
+    campaign = data.get('campaign', 'PG6040')
+    expected_counts = tuple(data.get('expectedCounts', (3976, 593, 1667)))
+    if (campaign, expected_counts, len(data['changedOwnerKeys'])) not in (('PG6040', (3976, 593, 1667), 23), ('PG6060', (3979, 594, 1667), 1)):
+        raise ValueError('explicit reviewed whole campaign/counts/owner inventory')
+    source = base/('source-full-'+campaign); out = base/('runs/'+campaign+'-six-v1')
     digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
     original = json.loads((out/'manifest.safe.json').read_bytes())
     returned = data['returnedOriginalResult']
     terminal_fields = ('run', 'actualExit', 'mavenExit', 'sourceInputsUnchanged', 'sourceSnapshotHead', 'productionSource', 'tests', 'expectedTests', 'startUTC', 'endUTC', 'elapsedSeconds', 'logSha256')
-    if any(original[k] != returned[k] for k in terminal_fields) or original['run'] != 'PG6040-six-v1' or original['productionSource'] != data['source'] or original['sourceSnapshotHead'] != data['source']:
+    if any(original[k] != returned[k] for k in terminal_fields) or original['run'] != campaign+'-six-v1' or original['productionSource'] != data['source'] or original['sourceSnapshotHead'] != data['source']:
         raise ValueError('exact original returned terminal/run/source,not a begin or another job')
-    if not (original['actualExit'] == original['mavenExit'] == 0 and original['tests'] == 3976 and not original['issues'] and original['sourceInputsUnchanged']):
+    if not (original['actualExit'] == original['mavenExit'] == 0 and original['tests'] == expected_counts[0] and not original['issues'] and original['sourceInputsUnchanged']):
         raise ValueError('genuine original3976 terminal0 required')
-    if digest(base/'transfer/PG6040-source.tar') != data['archiveSha256']:
+    if digest(base/('transfer/'+campaign+'-source.tar')) != data['archiveSha256']:
         raise ValueError('original source archive identity')
     for name, expected in data['allSourceInputs'].items():
         path = source/name
@@ -138,16 +143,18 @@ def inspect_original(data):
             raise ValueError('every original module XML/Main/counter/zero failure receipt exact')
         # Only generated Main jars, never raw test logs/DB/key/runtime files.
         artifacts[module] = base64.b64encode(jarpath.read_bytes()).decode('ascii')
-    if expected_case_keys(actual) != expected_case_keys(data['expectedCases']) or (len(actual), sum(m['suites'] for m in modules.values()), len(physical)) != (3976, 593, 1667) or not set(all_counts) <= set(physical):
+    if expected_case_keys(actual) != expected_case_keys(data['expectedCases']) or (len(actual), sum(m['suites'] for m in modules.values()), len(physical)) != expected_counts or not set(all_counts) <= set(physical):
         raise ValueError('exact3976 semantic Test set/593 suites/all1667,not old PASS arithmetic')
-    changed, added, unchanged = physical_difference(data['priorFullMain'], physical, set(data['changedOwnerKeys']))
+    changed, added, unchanged = physical_difference(data['priorFullMain'], physical, set(data['changedOwnerKeys']), data.get('physicalExpectedCounts', (1666, 1667)), data.get('physicalExpectedAdded'))
+    if data.get('expectedCurrentMain') is not None and physical != data['expectedCurrentMain']:
+        raise ValueError('current selected and whole compiled Main byte maps exactly equal;PT successes not imported')
     targets = {key: all_counts[key] for key in data['changedOwnerKeys']}
-    if len(targets) != 23 or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} for v in targets.values()):
+    if len(targets) != len(data['changedOwnerKeys']) or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} for v in targets.values()):
         raise ValueError('all23 actual outer counter sets explicit,no missing-as-zero')
     main_inputs = production_source_inputs(data['allSourceInputs'])
     if len(main_inputs) != 851 or main_inputs != data['expectedMainSourceInputs']:
         raise ValueError('all851 actual Main source inputs explicit')
-    value = dict(actualExit=0, productionSource=data['source'], sourceSnapshot=data['source'], tests=3976, suites=593, mainClasses=1667,
+    value = dict(actualExit=0, productionSource=data['source'], sourceSnapshot=data['source'], tests=expected_counts[0], suites=expected_counts[1], mainClasses=expected_counts[2],
         serverManifestSha256=digest(out/'manifest.safe.json'), sourceArchiveSha256=data['archiveSha256'], returnedOriginalTerminalExact=True,
         FESFlakyNotRun=0, staticSixModules=0, modules=modules, allPhysicalMainSha256=physical, allActualClassCounters=all_counts,
         coveragePhysicalClassKeysNotInXml=sorted(set(physical)-set(all_counts)), changedOuterCounters=targets,
@@ -162,8 +169,8 @@ def inspect_original(data):
     return value
 
 
-def emitted(data_hash):
-    raw = 'import hashlib,json\nfrom pathlib import Path\np=Path('+repr(REMOTE+'/input.safe.json')+')\n'
+def emitted(data_hash, remote=REMOTE):
+    raw = 'import hashlib,json\nfrom pathlib import Path\np=Path('+repr(remote+'/input.safe.json')+')\n'
     raw += 'if hashlib.sha256(p.read_bytes()).hexdigest()!='+repr(data_hash)+':raise ValueError("fixed input bytes")\n'
     raw += inspect.getsource(expected_case_keys)+'\n'+inspect.getsource(production_source_inputs)+'\n'+inspect.getsource(physical_difference)+'\n'+inspect.getsource(global_four100)+'\n'+inspect.getsource(inspect_original)
     raw += '\nprint(json.dumps(inspect_original(json.loads(p.read_bytes()))))\n'
@@ -206,23 +213,27 @@ def main():
         raise ValueError('actual all851 Production/archive identity;CHR remains in full input check')
     data = dict(source=SOURCE, returnedOriginalResult=original['result'], archiveSha256=begin['archiveSha256'], allSourceInputs=inputs, expectedMainSourceInputs=main_inputs,
                 expectedCases=expected, priorFullMain=json.loads(oldpath.read_bytes())['allPhysicalMainSha256'], changedOwnerKeys=sorted(owners))
-    os.umask(0o077); out = W/SLOT; out.mkdir(mode=0o700); dp = out/'input.safe.json'
+    return collect(data, original_path, SLOT, REMOTE, 'PG6040-current3976-cases', 2, 'BUG1532/pg6042-original3976-artifacts-v1')
+
+
+def collect(data, original_path, slot, remote, public_name, attempt=1, prior_failure=None):
+    os.umask(0o077); out = W/slot; out.mkdir(mode=0o700); dp = out/'input.safe.json'
     with dp.open('x') as f:
         json.dump(data, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
-    raw = emitted(hashlib.sha256(dp.read_bytes()).hexdigest()); payload = out/'read-original.private.py'
+    raw = emitted(hashlib.sha256(dp.read_bytes()).hexdigest(), remote); payload = out/'read-original.private.py'
     with payload.open('x') as f:
         f.write(raw); f.flush(); os.fsync(f.fileno())
-    code, _ = run('mkdir -m700 '+REMOTE, timeout=30)
+    code, _ = run('mkdir -m700 '+shlex.quote(remote), timeout=30)
     if code:
         raise ValueError('new reader namespace unavailable;inspect saved result,do not reissue')
     for local in (dp, payload):
-        code, _ = copy(local, REMOTE+'/', timeout=90)
+        code, _ = copy(local, remote+'/', timeout=90)
         if code:
             raise ValueError('fixed reader/input transfer failed')
-    code, text = run('sha256sum '+REMOTE+'/input.safe.json '+REMOTE+'/read-original.private.py', timeout=30)
+    code, text = run('sha256sum '+shlex.quote(remote+'/input.safe.json')+' '+shlex.quote(remote+'/read-original.private.py'), timeout=30)
     if code or any(hashlib.sha256(p.read_bytes()).hexdigest() not in text for p in (dp, payload)):
         raise ValueError('independent input/reader bytes confirmed before read')
-    code, text = run('python3 -B '+shlex.quote(REMOTE+'/read-original.private.py'), timeout=240)
+    code, text = run('python3 -B '+shlex.quote(remote+'/read-original.private.py'), timeout=240)
     if code:
         with (out/'failure.private.log').open('x') as f:
             f.write(text)
@@ -237,19 +248,20 @@ def main():
             raise ValueError('original jar transport bytes must match verified receipt')
         with (jars/('schubert-nk-'+module+'.jar')).open('xb') as f:
             f.write(body); f.flush(); os.fsync(f.fileno())
-    cases = value.pop('cases'); public = BASE/'PG6040-current3976-cases'; public.mkdir()
+    cases = value.pop('cases'); public = BASE/public_name; public.mkdir()
     for filename, body in (('cases.json', cases), ('qualification.json', value)):
         with (public/filename).open('x') as f:
             json.dump(body, f, ensure_ascii=False, indent=2); f.write('\n'); f.flush(); os.fsync(f.fileno())
-    receipt = dict(actualExit=0, source=SOURCE, originalManifestSha256=hashlib.sha256(original_path.read_bytes()).hexdigest(),
+    receipt = dict(actualExit=0, source=data['source'], originalManifestSha256=hashlib.sha256(original_path.read_bytes()).hexdigest(),
         payloadSha256=hashlib.sha256(payload.read_bytes()).hexdigest(), inputSha256=hashlib.sha256(dp.read_bytes()).hexdigest(),
         publicQualificationSha256=hashlib.sha256((public/'qualification.json').read_bytes()).hexdigest(),
         publicCasesSha256=hashlib.sha256((public/'cases.json').read_bytes()).hexdigest(), originalArtifactJarsFetched=6,
         wholeReplayed=False, formalAccepted=False, currentStaticPhysicalQualificationPending=True, vmActions=0,
-        readerAttempt=2, priorReaderFailurePreserved='BUG1532/pg6042-original3976-artifacts-v1')
+        readerAttempt=attempt, priorReaderFailurePreserved=prior_failure)
     with (out/'manifest.safe.json').open('x') as f:
         json.dump(receipt, f, sort_keys=True); f.flush(); os.fsync(f.fileno())
-    print(json.dumps(receipt)); print(json.dumps(dict(tests=3976, suites=593, mainClasses=1667, global100=value['global100'])))
+    print(json.dumps(receipt)); print(json.dumps(dict(tests=value['tests'], suites=value['suites'], mainClasses=value['mainClasses'], global100=value['global100'])))
+    return receipt
 
 
 if __name__ == '__main__':

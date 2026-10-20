@@ -37,11 +37,14 @@ def current_refs(prior, index, context_only=False):
     return result
 
 
-def alias_binding(text, scope):
-    helper = re.findall(r'private\s+static\s+<T>\s+T\s+present\s*\(@Nullable\s+T\s+value\)\s+throws\s+SQLDataException\s*\{\s*if\s*\(value\s*==\s*null\)\s*throw\s+new\s+SQLDataException\s*\(\s*"(?:\\.|[^"\\])*"\s*\)\s*;\s*return\s+value\s*;\s*\}', text)
+def alias_binding(text, scope, helper_name='present'):
+    if helper_name not in ('present', 'presentRead'):
+        raise ValueError('explicit reviewed identity helper only')
+    helper_token = re.escape(helper_name)
+    helper = re.findall(r'private\s+static\s+<T>\s+T\s+'+helper_token+r'\s*\(@Nullable\s+T\s+value\)\s+throws\s+SQLDataException\s*\{\s*if\s*\(value\s*==\s*null\)\s*throw\s+new\s+SQLDataException\s*\(\s*"(?:\\.|[^"\\])*"\s*\)\s*;\s*return\s+value\s*;\s*\}', text)
     if len(helper) != 1 or text.count(scope['body']) != 1:
         raise ValueError('one exact identity-only helper and unambiguous AST protected body')
-    match = re.match(r'\{\s*(?P<declaration>var\s+(?P<alias>\w+)\s*=\s*present\s*\(\s*'+re.escape(scope['variable'])+r'\s*\)\s*;)', scope['body'])
+    match = re.match(r'\{\s*(?P<declaration>var\s+(?P<alias>\w+)\s*=\s*'+helper_token+r'\s*\(\s*'+re.escape(scope['variable'])+r'\s*\)\s*;)', scope['body'])
     if match is None:
         raise ValueError('first protected declaration is identity alias of this exact acquired resource')
     offset = text.index(scope['body'])
