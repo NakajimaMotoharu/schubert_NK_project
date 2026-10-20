@@ -59,6 +59,51 @@ final class ServiceResourceRetentionTest {
             Boolean.toString(failure != 0));
   }
 
+  @Test
+  void hold318001DiagnosticFailureDoesNotUnwindTheOriginalFrame() throws Exception {
+    for (String kind : List.of("runtime", "error"))
+      OwnedRetentionProcess.assertHeldWhenDiagnosticUnavailable(
+          DiagnosticDriver.class,
+          List.of("CLOSE", "DIAGNOSTIC_FAILED", "INTERVAL_CONFIRMED"),
+          kind);
+  }
+
+  public static final class DiagnosticDriver {
+    public static void main(String[] arguments) throws Exception {
+      OwnedRetentionProcess.deadline();
+      var original = System.err;
+      try (var unavailable =
+          new java.io.PrintStream(
+              java.io.OutputStream.nullOutputStream(),
+              false,
+              java.nio.charset.StandardCharsets.UTF_8) {
+            @Override
+            public void println(String message) {
+              assertEquals("service resource release unconfirmed", message);
+              System.out.println("DIAGNOSTIC_FAILED");
+              if (arguments[0].equals("runtime"))
+                throw new IllegalStateException("fixture diagnostic");
+              throw new AssertionError("fixture diagnostic");
+            }
+          }) {
+        System.setErr(unavailable);
+        try {
+          ServiceProcessResources.ownedRelease(
+                  (Object ignored) -> {
+                    System.out.println("CLOSE");
+                    OwnedRetentionProcess.observeInterval(Thread.currentThread());
+                    throw new IOException("fixture release");
+                  },
+                  true)
+              .close(new Object());
+        } finally {
+          System.setErr(original);
+          System.out.println("OUTER_RELEASED");
+        }
+      }
+    }
+  }
+
   public static final class Driver {
     public static void main(String[] arguments) throws Exception {
       OwnedRetentionProcess.deadline();

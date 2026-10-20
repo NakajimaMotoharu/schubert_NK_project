@@ -15,7 +15,13 @@ public final class OwnedRetentionProcess {
 
   public static void assertHeld(Class<?> driver, List<String> output, String... arguments)
       throws Exception {
-    assertHeld(driver, output, List.of(), arguments);
+    assertHeld(driver, output, List.of(), true, arguments);
+  }
+
+  /** Only for a deliberately unavailable child diagnostic; final stderr EOF remains mandatory. */
+  public static void assertHeldWhenDiagnosticUnavailable(
+      Class<?> driver, List<String> output, String... arguments) throws Exception {
+    assertHeld(driver, output, List.of(), false, arguments);
   }
 
   /** Exact SLF4J 2.0.18 NOP fallback literals, not an arbitrary diagnostic filter. */
@@ -28,11 +34,16 @@ public final class OwnedRetentionProcess {
             "SLF4J(W): No SLF4J providers were found.",
             "SLF4J(W): Defaulting to no-operation (NOP) logger implementation",
             "SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details."),
+        true,
         arguments);
   }
 
   private static void assertHeld(
-      Class<?> driver, List<String> output, List<String> preamble, String... arguments)
+      Class<?> driver,
+      List<String> output,
+      List<String> preamble,
+      boolean diagnostic,
+      String... arguments)
       throws Exception {
     var command = new ArrayList<String>();
     command.add(Path.of(System.getProperty("java.home"), "bin", "java").toString());
@@ -49,9 +60,10 @@ public final class OwnedRetentionProcess {
       try {
         for (String expected : preamble)
           assertEquals(expected, executor.submit(stderr::readLine).get(5, TimeUnit.SECONDS));
-        assertEquals(
-            "service resource release unconfirmed",
-            executor.submit(stderr::readLine).get(5, TimeUnit.SECONDS));
+        if (diagnostic)
+          assertEquals(
+              "service resource release unconfirmed",
+              executor.submit(stderr::readLine).get(5, TimeUnit.SECONDS));
         for (String expected : output)
           assertEquals(expected, executor.submit(stdout::readLine).get(5, TimeUnit.SECONDS));
         assertFalse(process.waitFor(100, TimeUnit.MILLISECONDS));
