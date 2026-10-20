@@ -1,5 +1,9 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC314 API JMSのclose phase（2026-10-21、S2）
+
+SS321SSC314をSS342SSC158のUNKNOWN非正常化へ接続する。三consumer/親group/brokerは停止通知と成功子phase・全完了を分け、private final lock下の成功子だけを再close対象外とする。新callback/contextの拒否と既ACK/rollback/例外優先を維持し、close失敗後の再closeを無条件正常にしない。独立finite自己所有proxyで検証し、実親/DB/鍵/Root/Unit期限と未確認外側保持をその局所結果から認定しない。native partial factory/外側保持のS3は未完として別gateを要する。BUG1548/YKT1307/PG-D463、SS321/354。
+
 ## SSC313 API管理HTTPの停止要求・完了分離（2026-10-21、内部詳細補足/S1）
 
 SS342SSC158の不確定close非正常化をAPI管理HTTPへ具体化する。固定loopback8091/5値info/route/method/readiness admissionは不変更。close要求はstopping通知で直ちにDOWNへ、private final lock下のclosed（完了）とは分ける。closedはJDK server.stop(0)が正常終了し、owned executor.shutdownNow後のactual terminationが所定残budget内に確認できた後だけ確定する。stop不確定はserverStoppedを確定せず、完了前の再closeをno-opにしない。stop確認済みでexecutor joinだけ未確認なら再closeはstopを再発行せずjoinを再確認する。これは保持handleのcomponent retry契約で、native UNKNOWNの自動retryや実VM/Unit停止の再発行許可ではない。
