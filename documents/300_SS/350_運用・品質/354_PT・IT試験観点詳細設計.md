@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC311 Web factory設定・完成ownerの独立検証
+
+SS321/343SSC311・BUG1537/YKT1297。MQFACT311001は既endpoint/設定12値/user-password未設定の独立literalを保持し、public createで全supplier/owner/lock準備→factory取得/設定→final格納だけのactual bytecodeを確認する。MQFACT311002はfresh factoryの各12setterでIAE/ISE/NPE/Errorを注入し、setter prefix/一度close・正常時close0でlive返却/取得失敗・nullで未取得close0を検証する。MQFACT311003はprimary/closeのRuntime各種/Error/同一Throwableを独立表で与え、通常は同一primary＋secondary一回、close Error＋primary非Errorだけ同close Error＋primary一回、同一Throwable self-suppression無しを確認する。ExpectedをProduction merger/helperから作らない。
+
+fixtureのfactoryは自己所有・接続/consumer未開始、test専用解除で最終解放を確認し実broker/VM/current/鍵/原本へ接続しない。実heap枯渇を誘発せずJVM順序はPG静的証拠としてPT PASS/実測coverageと分離する。正常Web/既consumer全close/既live close retry・秘匿・password copy破棄/借用constructorのcaller所有を回帰し、四counter/型null/全物理/公開ABI/無除外解析・必要同source全体/native/CHR/451/正式を別資格する。失敗/未実行/別sourceを合格へ加算しない。
+
 ## SSC310 Expiry read局所の独立JDBC複合故障
 
 SS331SSC200/332SSC063199310・343SSC304境界、BUG1530/YKT1290。EXP310001は未修正readに対しResultSet.nextの独立Error primary＋ResultSet.closeの独立SQL secondaryを与え、同一primary＋新固定BatchRepositoryException suppressed一件・逆順一度closeを期待する。SQL closeが元Errorを置換して固定例外となれば不合格。EXP310002はread二scopeの独立68合成表（SQL/IAE/ISE/NPE/Errorの全25対×二scope、同一Throwable×四×二、成功body/close故障×五×二）で同一性/固定秘匿/一度closeを確認する。68はJUnit case内数であり追加68PTとは計上しない。ExpectedはProduction merger/helperを呼ばない固定表で作る。
