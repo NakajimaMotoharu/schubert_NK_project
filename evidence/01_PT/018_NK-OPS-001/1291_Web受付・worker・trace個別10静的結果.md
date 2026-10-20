@@ -1,0 +1,11 @@
+# 1291 Web受付・worker・trace：個別10箇所の静的結果
+
+仕様1289/source acb5fe9c375ede57f5d15fc5fc392f2197c910d4、PG6122/59994真正exit0。原1939/318の全四class source/hash/独立Test全文/全宣言case原XMLをjoinし、実WebJarの全class bytesを6114の物理mapと一致確認してからJVMを読取った。新動的PT/build/VM/current操作0、拒否PT代替完成0、正式受入0。raw1311はそのまま保持。
+
+WebHttpAdmission六private final monitor、WebLogReplayWorkerのvolatile Reportとfatal前検査のgeneric一、RevocationRetryWorkerのfatal前検査generic一、WebRequestTraceのvolatile安全表示snapshot一の計10をREQUIRED_CONTRACTとして理由を個別保存。全outer/nestedの原実counterをそのまま保存し未達0を確認、純interfaceの空counterは非実測のまま、100へ補完0。worker内包/direct Errorは実既独立fixtureのfailed/completed加点0/terminal・actual thread joinで検証されており、実配備nativeの生存証明へは流用しない。actor/Report可視性の根拠はJMM静的契約で、実native競合を測った主張ではない。
+
+公開PG6122-web-lifecycle-review-v1/manifest.json SHA **de556946d7407b1e0ddc7925fffb7aaa33c9ebf3b7adcb27d75183ea4797cd49**、reviews.json SHA **88e2c6c4f1480082143231fc01e6244f07817df9d0279f7e91f905b2bbd21151**、原1939資格504e9754e0c815e97a70870d576988c9a7bde3aeabec6427a71bd15657ae1103。実行command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg6122_web_lifecycle_review.py --qualification-sha256 504e9754e0c815e97a70870d576988c9a7bde3aeabec6427a71bd15657ae1103`。環境は原1939同host/JDK25.0.4・javap、当toolは実際のMain methodを呼ばない。
+
+初回6122は公開前exit1（BUG1546/YKT1306）：acquireは二正常return＋一例外でexit3、他五scopeはexit2なのに全scope2と誤仮定。先行起票後、同captured lock-local/書換なし/expected release数・bounded CFGのreturn深度/例外catch-all解放を検査するhelperへ是正した。全六actual methodのprivate lock/state/wait-notifyも点検し、二正常/一正常/欠落/異lock/未知数/保護欠落/slot上書きの独立fixtureで再発防止。工具unit最終5/pyflakes0、Production PTの再演0。当工具scopeCLOSED、修正commit/本証跡commit参照、完了2026-10-21。
+
+この10は新PGレビュー実績であり新10PTではない。F03 wholeへの当source再joinはPG6118真正3988/595後まで未完、旧721や当1939を全体合格へ輸入しない。全体four100/native/CHR/451/trace/正式1964-53/17-190/工数null/QA051final/PTALT未特定・実操作HOLD/原v3v4は維持する。

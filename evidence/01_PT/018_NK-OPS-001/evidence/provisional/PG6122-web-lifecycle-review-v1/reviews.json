@@ -1,0 +1,1217 @@
+[
+  {
+    "begincolumn": "5",
+    "beginline": "34",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "34",
+    "findingId": "F03-PMD2-8eaea37851de7a877deaf1774c6dfc9875f89f497caae3bcdb373d58e03812ae",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-814e6145f1d7dfe3a635145ba333078950fde6557ad54bc6c66ed085a3b39c5d",
+    "priority": "3",
+    "rawXmlOrdinal": 1089,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: admit atomically checks stopped/duplicate admission/ownerStopping and publishes accepting under the same private final monitor; STOP005/001002",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "5",
+    "beginline": "42",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "42",
+    "findingId": "F03-PMD2-cc5af00d736b67f032e45b260112928b33858494b45c0cbdef2c7eddd17ef377",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-83baad9eda0e286bdfe551480899443be393b66d0ea51f9d6a5c4cdb439b6e8f",
+    "priority": "3",
+    "rawXmlOrdinal": 1090,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: accepting observes retained admission and current external stop notification under the same private monitor; STOP005",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "5",
+    "beginline": "48",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "48",
+    "findingId": "F03-PMD2-e3c4b0efd7171977fdfa4a33c7b61e7a7504467f80741640761f29f5c84a82a7",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-caf2cc45d227113391607cbcc7b8e46e827084a9c70bf98419f85678b2528ae0",
+    "priority": "3",
+    "rawXmlOrdinal": 1091,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: acquire combines admission check and active lease increment with refuse/drain exclusion; STOP001002/003",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "5",
+    "beginline": "56",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "56",
+    "findingId": "F03-PMD2-9550b130e9fdedba00753cd43c1829bd3092da18b6498168499f57ad68846fbc",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-87468b0e578efd739670d025b692c7561a1befbc30ccd65956ed31b26d046c08",
+    "priority": "3",
+    "rawXmlOrdinal": 1092,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: completed checks minimum active count,decrements once and notifyAll on the identical monitor used by drain; STOP001002/003",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "5",
+    "beginline": "65",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "65",
+    "findingId": "F03-PMD2-d25e68c02deda98d3b7595350e6fd378278d6a2fab28c081b8cc2906c5e315f3",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d15b617f2345987208d3501fafdc788214d19c271be6cf2b14983362d4ac980",
+    "priority": "3",
+    "rawXmlOrdinal": 1093,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: refuse disables new admission without inventing completion of existing leases; STOP001002/003",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "5",
+    "beginline": "76",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "76",
+    "findingId": "F03-PMD2-82755ef0122a6a58a90d5294c46e9c1c9eb41c62d01f74aae1196ac63b08ad3c",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1825047f9d478cae098ca7bfa10f94da95f9a5f92d92c6c491beae03cbfef9c7",
+    "priority": "3",
+    "rawXmlOrdinal": 1094,
+    "rule": "AvoidSynchronizedStatement",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+    "sourceSha256": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: drain disables admission then loops on active under same monitor;wait releases it for completed;deadline/interrupt remain unconfirmed,not success; STOP001002/003",
+    "diagnosticFragment": "synchronized ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "module": "web",
+        "sourceSha256": "f8d29c3ca7f70549a9bee3268e46ebce34abf95b6863f0a946645f210285ef72",
+        "methods": [
+          "stop001002BoundaryInterruptAndConcurrentCompletion",
+          "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+          "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop005OwnerTermRefusesImmediatelyWithoutWaitingForOwnerPolling",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop003ActualAsyncRemainsOwnedAfterServletReturns",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionTest",
+        "method": "stop001002BoundaryInterruptAndConcurrentCompletion",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a3b3ac9a74692988469808515c6549e07b67cb916c58c7d49ddf183271113d60"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "44",
+    "beginline": "26",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "54",
+    "endline": "26",
+    "findingId": "F03-PMD2-2c4831d7f8a8bfe8ca55a6ea5e1c4d949c724e4dc1037c307309d72605747ef3",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f5a93a7f46055fa169207e0a6b180f1177508ec720e46c5923a47b1762529846",
+    "priority": "2",
+    "rawXmlOrdinal": 1176,
+    "rule": "AvoidUsingVolatile",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "1d7a6c9a21a8b2cc14684b0cf72de466a02a636a8a6c01e4379d7ea2fa59d509",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: worker publishes immutable Report reference to snapshot readers using volatile;separate AtomicLong aggregate fields do not promise a multi-field atomic snapshot; W01/temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+    "diagnosticFragment": "lastReport ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "module": "web",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d",
+        "methods": [
+          "boundedStopReportsUnresponsiveWorkerThenReleases",
+          "closeIsIdempotentAndRejectsInvalidInputs",
+          "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+          "interruptedStopRestoresCallerFlag",
+          "nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+          "realOutboxRetriesInBackgroundAndSendsOnce",
+          "rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+          "rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+          "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "boundedStopReportsUnresponsiveWorkerThenReleases",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "realOutboxRetriesInBackgroundAndSendsOnce",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "closeIsIdempotentAndRejectsInvalidInputs",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "interruptedStopRestoresCallerFlag",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": {},
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 29,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": {
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 26,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 263,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 61,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "31",
+    "beginline": "70",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "70",
+    "findingId": "F03-PMD2-4220ef44b5de7bd1e53129b217638e679c5607aaee5c1dfd889653604d03c071",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-786daafcbed10a6c9a1127e9679ec9021e08d6fa3010ad34f1745d1257912fad",
+    "priority": "3",
+    "rawXmlOrdinal": 1178,
+    "rule": "AvoidCatchingGenericException",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "1d7a6c9a21a8b2cc14684b0cf72de466a02a636a8a6c01e4379d7ea2fa59d509",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: SQL/Runtime failures traverse fatal graph before failed-cycle accounting;transient retry relies on persisted lease/backoff,no provider diagnostic;hidden Error terminates without cycle credit; rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+    "diagnosticFragment": "RuntimeException ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "module": "web",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d",
+        "methods": [
+          "boundedStopReportsUnresponsiveWorkerThenReleases",
+          "closeIsIdempotentAndRejectsInvalidInputs",
+          "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+          "interruptedStopRestoresCallerFlag",
+          "nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+          "realOutboxRetriesInBackgroundAndSendsOnce",
+          "rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+          "rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+          "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "fatalVmFailureMakesWorkerNotReadyWithoutExposingCause",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "boundedStopReportsUnresponsiveWorkerThenReleases",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "rerun008HiddenFatalStopsWithoutFailedCycleAndSelfJoinRejects",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "realOutboxRetriesInBackgroundAndSendsOnce",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "rerun008SecondCloseMustJoinStillAliveWorkerRatherThanSucceed",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "closeIsIdempotentAndRejectsInvalidInputs",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "temporarySqlAndRuntimeFailuresRecoverWithoutLeakingDetails",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "method": "interruptedStopRestoresCallerFlag",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "a0d76c5ecb8e0bc99a8d3e97d7fa25a0872fd8a3f0bb58bc84b6d8738a437a0c"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": {},
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 29,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": {
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 26,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 263,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 61,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "46",
+    "beginline": "63",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "59",
+    "endline": "63",
+    "findingId": "F03-PMD2-c3f470eff84a129b39476d59ba77ba3d7ac1ff4e9f91579d090e7e5983cf20b7",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b0cfc82e2cf0549954c7fe6c3b6b1aeab08db754f609492cce95448f7436fe46",
+    "priority": "2",
+    "rawXmlOrdinal": 1192,
+    "rule": "AvoidUsingVolatile",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+    "sourceSha256": "e913d995a5cd7443c96fede3171b2cc241b5340f952532c382e5246180382ad1",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: immutable Optional<TopBarViewModel> display snapshot is published across request/async observers by volatile;no principal/session/token retained;REQ007/008;JMM static premise,not native race measurement",
+    "diagnosticFragment": "retainedActor ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "module": "web",
+        "sourceSha256": "3228ace4f5af19355701047acd9240fb06e9dbf68e6ec0a1c57554d13d4894e4",
+        "methods": [
+          "req004ActualInventoryAndEveryClosedRouteRejectUnknown",
+          "req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite",
+          "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator",
+          "req006AllFourAttributeBoundariesRedactFrameworkFaults",
+          "req006AllNullAndMistypedMetadataAreRejected",
+          "req006ServerIdentityIsStableAndDoesNotGrantTransport",
+          "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp",
+          "req008HundredConcurrentRequestsDoNotCrossContaminate",
+          "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+          "req008OutOfOrderNestedCloseCannotPublishAClosedTrace"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req006ServerIdentityIsStableAndDoesNotGrantTransport",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req008OutOfOrderNestedCloseCannotPublishAClosedTrace",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req006AllFourAttributeBoundariesRedactFrameworkFaults",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req004ActualInventoryAndEveryClosedRouteRejectUnknown",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+        "method": "req006AllNullAndMistypedMetadataAreRejected",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "9f9ca979d11d7a2be7cd479452fa0c58ac12432a6f59dd945c31cc4ff2b52e56"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope.class": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 6,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 53,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 15,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/logging/WebRequestTrace.class": {
+        "BRANCH": {
+          "covered": 14,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 24,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 378,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 58,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  },
+  {
+    "begincolumn": "16",
+    "beginline": "62",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "62",
+    "findingId": "F03-PMD2-b225eba7448ee55d9a049b0b0b8813a2128117ee95ead702edd59f2c3bcf7ab5",
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3a9e4464d994c49ba4292cd63d976bf7f6f8caac533d9a7133f05e1a3db6751a",
+    "priority": "3",
+    "rawXmlOrdinal": 1283,
+    "rule": "AvoidCatchingGenericException",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+    "sourceSha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3",
+    "status": "REQUIRED_CONTRACT",
+    "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+    "reason": "1289 individual review: fixed Runtime dispatch failure traverses fatal graph before failed++;nested/direct Error reaches terminal handler without success/failed credit;row backoff remains retry authority; rerun008bTransientFailureRecoveryAndFatalTerminalNeverExposeProvider",
+    "diagnosticFragment": "RuntimeException ",
+    "rawWarningRetained": true,
+    "declaredIndependentTests": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "module": "web",
+        "sourceSha256": "b6ceda5474cb7b53ae1efed0fb79365f6d589af124a4b10e5dd23ba081df17e2",
+        "methods": [
+          "nativeBudget002ZeroIsBoundedAndActualJoinRetainsUnknownWorker",
+          "rerun008aPublicCoordinatorOwnsNoOuterDbKeyOrBroker",
+          "rerun008bTransientFailureRecoveryAndFatalTerminalNeverExposeProvider",
+          "rerun008cUnknownJoinRepeatedJoinAndInterruptedOwnerRemainUnknown",
+          "rerun008dSelfJoinRejectsWithoutDeadlockThenExternalJoinConfirms",
+          "rerun008eNullBoundsAndSnapshotInvariants"
+        ]
+      }
+    ],
+    "original1939CaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "rerun008bTransientFailureRecoveryAndFatalTerminalNeverExposeProvider",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "nativeBudget002ZeroIsBoundedAndActualJoinRetainsUnknownWorker",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "rerun008cUnknownJoinRepeatedJoinAndInterruptedOwnerRemainUnknown",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "rerun008aPublicCoordinatorOwnsNoOuterDbKeyOrBroker",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "rerun008eNullBoundsAndSnapshotInvariants",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryWorkerTest",
+        "method": "rerun008dSelfJoinRejectsWithoutDeadlockThenExternalJoinConfirms",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+        "xmlSha256": "0c269ea86571a4170fb7c8b545f5d306e6fb5b507a2565144a6ff40353d4fe97"
+      }
+    ],
+    "actualClassCounters": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker$DispatchAction.class": {},
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker$Snapshot.class": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 22,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 23,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 228,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 56,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 11,
+          "missed": 0
+        }
+      }
+    },
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "formalAccepted": false,
+    "testsExecutedByReview": 0,
+    "ptAlternativeCompleted": 0
+  }
+]

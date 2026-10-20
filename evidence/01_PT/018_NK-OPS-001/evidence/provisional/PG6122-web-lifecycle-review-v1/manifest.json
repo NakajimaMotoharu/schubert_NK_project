@@ -1,0 +1,234 @@
+{
+  "actualExit": 0,
+  "source": "acb5fe9c375ede57f5d15fc5fc392f2197c910d4",
+  "reviewed": 10,
+  "newlyReviewed": 10,
+  "statusCounts": {
+    "REQUIRED_CONTRACT": 10
+  },
+  "qualificationSha256": "504e9754e0c815e97a70870d576988c9a7bde3aeabec6427a71bd15657ae1103",
+  "currentRawFindings": 1311,
+  "privateMonitorMethods": [
+    "  public void admit() throws java.io.IOException;",
+    "  public boolean accepting();",
+    "  boolean acquire();",
+    "  void completed();",
+    "  public void refuse();",
+    "  public void drain(java.time.Duration) throws java.io.IOException;"
+  ],
+  "workerFacts": [
+    {
+      "className": "WebLogReplayWorker",
+      "runCodeSha256": "98620b4ac56210d2ee4f1e712953380074143b957bfd17d38ade31af1e1a8a0e",
+      "fatalCodeSha256": "8a9f5fc16126ee79fefe40e2bf984309f237c28ac2801e8e148484bc0d6608f7"
+    },
+    {
+      "className": "RevocationRetryWorker",
+      "runCodeSha256": "02bf99b3a7589d7e48a4efb57dfa9a682ba6d3f42df719b954f3077625d67722",
+      "fatalCodeSha256": "597716f0160f1033ad5ccb6c5d4a28b40f27bf087df221b9b38c7003e03b0178"
+    }
+  ],
+  "actualClassCounters": {
+    "WebHttpAdmission": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 206,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 48,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      }
+    },
+    "WebLogReplayWorker": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": {},
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 29,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": {
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 26,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 263,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 61,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        }
+      }
+    },
+    "WebRequestTrace": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope.class": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 6,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 53,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 15,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/logging/WebRequestTrace.class": {
+        "BRANCH": {
+          "covered": 14,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 24,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 378,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 58,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 0
+        }
+      }
+    },
+    "RevocationRetryWorker": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker$DispatchAction.class": {},
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker$Snapshot.class": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 3,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 22,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.class": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 23,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 228,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 56,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 11,
+          "missed": 0
+        }
+      }
+    }
+  },
+  "currentWholeJoinPending": true,
+  "testsExecuted": 0,
+  "newPtPassesClaimed": 0,
+  "dynamicOomExecuted": false,
+  "rawWarningsRemoved": 0,
+  "actualRuntimeProven": false,
+  "F03Accepted": false,
+  "formalAccepted": false,
+  "ptAlternativeCompleted": 0
+}
