@@ -196,8 +196,22 @@ final class InternalEventListenerTest {
       sendEvent(producer, BrokerTopology.WEB_LOG, eventWire("WLGEVT01", 2_080));
       log.onMessage(listenerContext, required(logQueue.receive(5_000)));
 
-      assertEquals(1, workCount.get());
-      assertEquals(1, logCount.get());
+      var rollbackPhases = new AtomicInteger();
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      work.onMessage(
+          listenerContext,
+          required(workQueue.receive(5_000)),
+          rollbackPhases::incrementAndGet,
+          rollbackPhases::incrementAndGet);
+      sendEvent(producer, BrokerTopology.WEB_LOG, eventWire("WLGEVT01", 2_080));
+      log.onMessage(
+          listenerContext,
+          required(logQueue.receive(5_000)),
+          rollbackPhases::incrementAndGet,
+          rollbackPhases::incrementAndGet);
+      assertEquals(0, rollbackPhases.get(), "successful commits never publish rollback phases");
+      assertEquals(2, workCount.get());
+      assertEquals(2, logCount.get());
       assertNull(workQueue.receive(250));
       assertNull(logQueue.receive(250));
     } finally {

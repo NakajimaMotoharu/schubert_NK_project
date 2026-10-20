@@ -13,6 +13,15 @@ import org.junit.jupiter.api.Test;
 final class ServiceResourceRetentionTest {
   @Test
   void hold316001NormalAndNullPortsNeverManufactureAnUnknownRelease() throws Exception {
+    var closeCalls = new AtomicInteger();
+    Closeable closeable = closeCalls::incrementAndGet;
+    assertSame(closeable, ServiceProcessResources.release(closeable, false));
+    ServiceProcessResources.release(closeable, false).close();
+    ServiceProcessResources.release(closeable, true).close();
+    assertEquals(2, closeCalls.get(), "normal close executes once per explicit release");
+    for (boolean retained : List.of(false, true))
+      assertThrows(
+          NullPointerException.class, () -> ServiceProcessResources.release(null, retained));
     var calls = new AtomicInteger();
     ResourceScope.Release<Object> release = ignored -> calls.incrementAndGet();
     assertSame(release, ServiceProcessResources.ownedRelease(release, false));
