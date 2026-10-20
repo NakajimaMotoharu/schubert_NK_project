@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-018 — PT_DEFAULT：commit済terminal後の四つの有限入場停止red
+
+1223/BUG1501/PG-D444、test-only sourceでMain862/851source・1666byteを保持。四caseはメモリJMS proxy/固定Clock/許可methodだけ、DLQ staging/commitを正常合成し、first一回成功とpost callback0を分けて確認する。実Broker/DB/network/VM/Unit/原本/鍵/permit/failed-cohort不操作、production expected生成/拒否探査/再試行/代替確認ではない。API三redの依存でWeb一未実行なら成功へ算入せず未実施Webだけ別run。新namespace/clean source/fresh枠>10とwrapperの作用を確認して通常PTとして行う。
+
 ## PTPRE-017 — PT_DEFAULT：protocol表現是正後の全96＋guard九
 
 1220/PG-D443/BUG1498、new Main sourceは元3967の終端/資格保全後に固定する。既protocol全96と依存guard九はbyte/literal/TSV/JCA等の有限local fixtureだけ、source/POM/oracle/Current baseline不変更、VM/実DB/鍵/Unit/配備/permit/failed-cohort不操作。pg5844はsnapshotへformat→package/PT/coverage/SpotBugsを行う**通常PT**であり静的のみ/拒否代替と呼ばない。NoTests/strict warning維持、source/namespace/fresh枠を確認して一回実行する。型名にprotocol/transportが含まれていても実broker/業務通信は行わない。既run中のMain/Test変更は禁止し、新source正式全体の同run整合は残変更群の後に別途確認する。

@@ -5,23 +5,31 @@ import static org.junit.jupiter.api.Assertions.*;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
+import jakarta.jms.JMSProducer;
 import jakarta.jms.JMSRuntimeException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageListener;
 import java.lang.reflect.Proxy;
 import java.util.concurrent.atomic.AtomicReference;
 
-/** SS322§11; BUG1494/YKT1254; PT-JMS-ISO001..008. Pure fixture shared via existing test-jar. */
+/** SS322§11; ISO001..006/TERM001..003. API-local fixture, no test-jar/module crossing. */
 public final class FatalIsolationFixture {
   private final Exception isolationFailure;
+  private final boolean failIsolation;
   private final AtomicReference<MessageListener> listener = new AtomicReference<>();
   private int readCount;
   private int rollbackCount;
   private int commitCount;
   private int closeCount;
   private int unexpectedCount;
+  private int sendCount;
 
   public FatalIsolationFixture(boolean checked) {
+    this(checked, true);
+  }
+
+  public FatalIsolationFixture(boolean checked, boolean failIsolation) {
+    this.failIsolation = failIsolation;
     isolationFailure =
         checked
             ? new JMSException("synthetic checked isolation read")
@@ -53,6 +61,19 @@ public final class FatalIsolationFixture {
                 case "rollback":
                   rollbackCount++;
                   return null; // Rollback is deliberately CONFIRMED, not the BUG1489 fixture.
+                case "createProducer":
+                  return Proxy.newProxyInstance(
+                      JMSProducer.class.getClassLoader(),
+                      new Class<?>[] {JMSProducer.class},
+                      (p, m, a) -> {
+                        if (m.getName().equals("send")) {
+                          sendCount++;
+                          return p;
+                        }
+                        if (m.getName().equals("setDeliveryMode")
+                            || m.getName().equals("setTimeToLive")) return p;
+                        throw unexpected();
+                      });
                 case "commit":
                   commitCount++;
                   return null;
@@ -77,8 +98,20 @@ public final class FatalIsolationFixture {
                     (proxy, method, args) -> {
                       if (method.getName().equals("getJMSMessageID")) {
                         readCount++;
-                        throw isolationFailure;
+                        if (failIsolation) throw isolationFailure;
+                        return null;
                       }
+                      if (method.getName().equals("getStringProperty")
+                          || method.getName().equals("getJMSCorrelationID")) return null;
+                      if (method.getName().equals("propertyExists")) return false;
+                      if (java.util.Set.of(
+                              "clearProperties",
+                              "setJMSCorrelationID",
+                              "setJMSReplyTo",
+                              "setJMSType",
+                              "setStringProperty",
+                              "setIntProperty")
+                          .contains(method.getName())) return null;
                       throw unexpected();
                     }));
   }
@@ -106,5 +139,9 @@ public final class FatalIsolationFixture {
 
   public int unexpectedCalls() {
     return unexpectedCount;
+  }
+
+  public int sends() {
+    return sendCount;
   }
 }
