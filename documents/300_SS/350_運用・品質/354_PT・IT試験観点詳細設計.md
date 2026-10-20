@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC313 API管理HTTPの停止PT（S1）
+
+PT-API-STOP001..004は自己所有loopback HttpServerと独立fault wrapper/有限latchだけで、stop Runtime/Error後の再close（同一例外/stop再試行）、stop成功後のexecutor未終端/0budget・再join（stop二重発行0）、lock待ち/待ち中割込、executor待ち割込のflag復元、既preinterrupt成功/既冪等、null/負/30秒超の未操作を確認する。期待値はSS342SSC313の状態/回数/actual thread terminalから独立literalで定める。故障は修正前915へ登録してから旧codeのstop再試行反例を実行し、fixture自身はfinallyで実server/workerを必ず終了させる。
+
+対象ApiManagementServer close/promote/ready/constructorの全四counter100・全分岐と全既管理HTTP Test、六format型nullSpotBugs・原XML/source/Jar/全物理差・無除外静的を確認する。S1局所PTとS2/S3の親resource保持・native/Root/CHR/同source全体を分離し、旧3988結果を変更後sourceへ合算しない。実VM/既サービス/intent/permit/failed-cohortへは操作しない。関連1294/PG-D462/BUG1547/YKT1307。
+
 ## SSC312 HTTP取得前準備の独立PT
 
 SS313/342のowner準備を対象とし、PT-HTTP-OWN001(API management)/002(Web management)/003(Web HTTP)でfactory一度・固定127.0.0.1/backlog32・取得IOException/IAE/ISE/NPE/Errorの同一性・null拒否・未取得のclose/owner通知0を独立fixtureで確認する。Tomcat supplierはchecked IOException非適用。既正常HTTP/拒否URL/情報5値/interrupt/失敗close再試行/所有callbackの全影響PTを併せて実施する。テスト自身が取得した実server/fixtureはfinallyで解放する。

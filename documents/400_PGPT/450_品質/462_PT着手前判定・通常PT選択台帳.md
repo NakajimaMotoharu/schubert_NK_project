@@ -1,5 +1,11 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-037 — PT_DEFAULT：API管理stop反例/S1
+
+1294/PG-D462/1547YKT1307/SSC313、main f589dba33設計only確認済。新ApiManagementStopTestは自己所有loopback port0のJDK server wrapperで最初のstopだけliteral Runtime、二度目の実stop呼出回数2を期待する。既API管理7Test＋他module guardを通常Mavenで選択、full expected20/9suite、旧Main反例はJUnit failure1を期待し、reactor failfastによる後続module not-runは成功へ加算しない。fixtureはfinallyでdelegate stop0/own executor actual joinを確認し、既サービス/DB/VM/Root/failed-cohort/intent/permit操作なし。six format先行、通常compile/型null/PT/JaCoCo/SpotBugs profileだけ、静的名義で動的を隠さない。source/archive固定・新onlyslot・元job結果未回収理由の再起動0。
+
+是正後のgreenは新境界Testを追加した実宣言件数で固定し、対象実四counter100/原XML・全8511667/六Jar/物理差/無除外静的を要求する。redは不具合再現であって合格/PT代替ではない。必要全体はS2/S3とまとめて実施し、旧3988/729を新sourceへ加算しない。コード都合のoracle変更/除外/人工到達0、正式/工数null/QA051final/実操作HOLD維持。
+
 ## PTPRE-036 — PT_DEFAULT：HTTP群変更後の同source全3988/595
 
 1288。前提はPG6112真正1939/318→6114原XML/全8511667/六Jar/無除外静的→6116実三owner順序/ABI。未成立時に発行しない。元870の3985と599925を新acbへ合算0、三HTTP owner＋一lock modifierをまとめた必要横断である。pg6118のdefinition2unit/pg6120のreader完全payload/export/source追加3caseと既reader4unitを先行、wrapperは既通常非root有限hostprofileから件数/source/新namespaceだけ変更し、VM/current/Root/failed-cohort/permit/原本DBBackupへ接続・操作しない。fresh枠/clean source/ordinary同job無し/headroomを先行し一回、固定snapshotは真正終端まで変更しない。全体費主K01.01/F03参照0、定義準備は1480内・実全体stage見積0.5/1.5/4、受入criteria/全四100/正式/native/CHRは別照合。
