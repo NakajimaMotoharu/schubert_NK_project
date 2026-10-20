@@ -14,5 +14,12 @@ class FinitePlan(unittest.TestCase):
         raw=runner_source();self.assertNotIn('-DskipTests',raw);self.assertIn("'expectedTests':14",raw)
         self.assertIn('targetFour100RequiredBeforeProgramCompletion=True',raw)
 
+    def test_web_red_uses_nonfailing_api_dependency_and_exact10(self):
+        raw=runner_source('red-web');self.assertIn('sum(map(len,expected.values()))!=10',raw)
+        self.assertIn("'expectedTests':10",raw)
+        self.assertIn("PHASE=='red-web'",raw)
+        pom=(ROOT/'src/schubert-nk-web/pom.xml').read_text()
+        self.assertIn('<artifactId>schubert-nk-api</artifactId>',pom)
+
 
 if __name__=='__main__':unittest.main()
