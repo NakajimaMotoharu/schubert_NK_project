@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC318 UNKNOWN診断/tickの故障
+
+BUG1563/YKT1320/SS342343。自己所有有限childで固定診断RTE/Error・観測tickRTE/Errorを注入し、元release失敗後の同frame持続、close再試行なし、外側markerなし・IRQ/通常保持を独立確認する。診断不能時は期待stderr無しを明示して全EOFを検査し、任意診断の読み飛ばしにしない。子の143/有限観測を実Root/native成功に算入せず、process/VM停止とpersistent tick障害の残存リスクを保持する。
+
 ## SSC317 未start JDK管理HTTPの反例と保持
 
 BUG1560/YKT1317/SS342。未start bind及び設定各位置のRuntimeException/Errorについて、stop正常返却を成功とせず固定UNCONFIRMED・native外側frame未解放/二重closeなしを自己所有有限childで独立検査する。子143/未測定を実native資格へ加算しない。正常start済みのHTTP DOWN/UP/DOWN・実executor終端・同port再bind・既例外/並行/budgetを維持する。vendor未起動時の完全解放は未保証の残存リスクとして記録し、解放成功の期待へ書き換えない。未受入code/全体品質は設計公開と区別する。

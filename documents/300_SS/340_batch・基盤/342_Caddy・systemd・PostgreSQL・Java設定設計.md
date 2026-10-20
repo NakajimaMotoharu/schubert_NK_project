@@ -1,5 +1,9 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC318 UNKNOWN keeper内の二次失敗（2026-10-21）
+
+SS316の固定UNKNOWN保持は、固定診断又は観測tickからRuntimeException/Errorが発生しても同failure frame/外側借用資源の保持を続ける。診断はbest-effortでraw原因を出さず、失敗してもnormal receipt/再close/Root再発行を行わない。観測portは資源取得前のclass初期化で準備しnative固定portだけを使う。通常観測は1000ms、IRQ時の保持/親30分/Unit期限を変更しない。process/VM自体が停止する障害まで保持を保証せず、persistent tick失敗時のCPU負荷等を残存リスクとして記録する。BUG1563/YKT1320/SS343354。
+
 ## SSC317 未start管理HTTPの完了解釈（2026-10-21）
 
 API/Web管理serverは正常start完了が確認できない時、JDK stop(0)の正常返却だけをsocket/selector解放完了とは解釈しない。実停止通知・既stop/実executor joinを行ってもその状態は固定UNCONFIRMEDとし、closed/serverStoppedの成功cacheを立てず、nativeの既所有frame/外側借用資源保持へ接続する。正常start済みの従来の実stop/join/冪等完了は維持する。
