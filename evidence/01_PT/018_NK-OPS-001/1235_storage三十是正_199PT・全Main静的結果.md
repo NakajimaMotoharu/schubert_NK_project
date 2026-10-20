@@ -10,7 +10,7 @@ PG5904-selected199-v1/元session79175、2026-10-20T06:05:45.723494Z～06:07:55.2
 
 PMD7.28/Checkstyle14.3の既固定rules/no exclusion、raw **1586→1556**（AvoidLiteralsInIfCondition九/AvoidSynchronizedStatement二十一を実PGで解消）、processing/CS0。他rule分布と残rawを保持する。公開`evidence/provisional/PG5906-storage30-static-v1/manifest.json` **a0c4d80e21a1a20a05928d26a35168be6802aa01e2bc8a682bb6e49959ca5365**、findings **25bca31961c97c84386e0764c005ac4a341ac66241f29a9425722b15a8b8ff40**、private **9923b4d456d30c8fd0b3c23d531c85ff43f260a3644f7476962575b4e431ed44**。
 
-5908独立元XML/全851/1666/各target実counter reader actual0、公開`evidence/provisional/PG5908-storage199-v1/manifest.json` **91f2dce1489f9aa1ec4e8d35d29f8106ae1200d306e8f1483e158962f3d625366**。既literal/kernel call/fixed map・1,2,3 byte/例外/所有/再入/parallel closeとcaller monitor非干渉を維持した。期待値はProduction methodから生成しない。
+5908独立元XML/全851/1666/各target実counter reader actual0、公開`evidence/provisional/PG5908-storage199-v1/manifest.json` **91f2dce1489f9aa1ec4e8d35d29f8106ae1200d306e8f1483e158962f3d62506**。既literal/kernel call/fixed map・1,2,3 byte/例外/所有/再入/parallel closeとcaller monitor非干渉を維持した。期待値はProduction methodから生成しない。
 
 | 六target（全miss0） | line | method | class | branch |
 |---|---:|---:|---:|---:|

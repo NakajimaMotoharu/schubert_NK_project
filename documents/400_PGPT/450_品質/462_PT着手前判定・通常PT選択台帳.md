@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-023 — PT_DEFAULT：storage/API二PG群後の必要同source3973
+
+1238/source682a4b99e。1235 storage六＋1237 API三の新Main九/十六物理差を一回の同source全体へ統合する。Test/oracle/gate/resources/POMは旧3973から不変、選択199/35と全Main静的の根拠を前提とし旧fullを新成功へ移植しない。既承認専用aru/miniの同offline fixture profile・新temp DB/自己所有file/in-process brokerだけ、実VM/Unit/current/原本/鍵/permit/failed-cohort不操作。fresh枠>10/clean operator/pinned host現job無し/headroom/new-only認証後一回、元job/source固定・途中は未受入、真正終端/原XML/allclass/実counterを独立検証する。拒否probe/代替再試行0。
+
 ## PTPRE-022 — PT_DEFAULT：API三owner十二表現後35/10
 
 1236/PG-D447、API UserCommand10/AssetChecksum4/SecretBuffer3/ResponseSnapshot7＋他五moduleguard十一。新only自己所有snapshot/offline Maven/六format先行・通常PT・JaCoCo/SpotBugs。temp PostgreSQL18は既fixtureの新data/ランダムloopback port/専用ownerで起動停止し、本source schema/grant/Synthetic入力だけ。実VM/current/Unit/原本DBBackup/鍵/permit/失敗Root/実ADMINには接続しない。synchronized親整合の個別静的点検は未実行PTの代替でなく通常PG品質確認。fresh枠>10/clean source/未使用namespace・全command副作用を確認し一回、既成果を再演しない。拒否probe/別経路再試行0。
