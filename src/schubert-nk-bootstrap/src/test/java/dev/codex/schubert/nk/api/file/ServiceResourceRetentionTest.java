@@ -1,0 +1,89 @@
+package dev.codex.schubert.nk.api.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.storage.ResourceScope;
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.Test;
+
+/** PT-NHOLD316001; literal release/outer-frame oracles, no DB/Root/service credentials. */
+final class ServiceResourceRetentionTest {
+  @Test
+  void hold316001NormalAndNullPortsNeverManufactureAnUnknownRelease() throws Exception {
+    var calls = new AtomicInteger();
+    ResourceScope.Release<Object> release = ignored -> calls.incrementAndGet();
+    assertSame(release, ServiceProcessResources.ownedRelease(release, false));
+    ServiceProcessResources.ownedRelease(release, true).close(new Object());
+    assertEquals(1, calls.get());
+    for (boolean retained : List.of(false, true))
+      assertThrows(
+          NullPointerException.class, () -> ServiceProcessResources.ownedRelease(null, retained));
+    var marker = new IOException("public fixture");
+    ResourceScope.Release<Object> failing =
+        ignored -> {
+          throw marker;
+        };
+    assertSame(
+        marker,
+        assertThrows(
+            IOException.class,
+            () -> ServiceProcessResources.ownedRelease(failing, false).close(new Object())));
+    var seen = new java.util.concurrent.atomic.AtomicReference<Throwable>();
+    assertSame(
+        marker,
+        assertThrows(
+            IOException.class,
+            () -> ServiceProcessResources.ownedRelease(failing, seen::set).close(new Object())));
+    assertSame(marker, seen.get());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ServiceProcessResources.ownedRelease(
+                release, (java.util.function.Consumer<Throwable>) null));
+    assertThrows(
+        NullPointerException.class, () -> ServiceProcessResources.retainUnknownRelease(null));
+  }
+
+  @Test
+  void hold316002UnknownIoRuntimeErrorKeepOuterFrameAndDoNotRetry() throws Exception {
+    for (int style = 0; style < 2; style++)
+      for (int failure = 0; failure < 3; failure++)
+        OwnedRetentionProcess.assertHeld(
+            Driver.class,
+            List.of("CLOSE", "INTERVAL_CONFIRMED"),
+            Integer.toString(style),
+            Integer.toString(failure),
+            Boolean.toString(failure != 0));
+  }
+
+  public static final class Driver {
+    public static void main(String[] arguments) throws Exception {
+      OwnedRetentionProcess.deadline();
+      int style = Integer.parseInt(arguments[0]);
+      int kind = Integer.parseInt(arguments[1]);
+      boolean interrupted = Boolean.parseBoolean(arguments[2]);
+      Closeable failing =
+          () -> {
+            System.out.println("CLOSE");
+            OwnedRetentionProcess.observeInterval(Thread.currentThread());
+            if (interrupted) Thread.currentThread().interrupt();
+            switch (kind) {
+              case 0 -> throw new IOException("public fixture");
+              case 1 -> throw new IllegalStateException("public fixture");
+              default -> throw new AssertionError("public fixture");
+            }
+          };
+      try {
+        if (style == 0)
+          ServiceProcessResources.ownedRelease((Object ignored) -> failing.close(), true)
+              .close(new Object());
+        else ServiceProcessResources.release(failing, true).close();
+      } finally {
+        System.out.println("OUTER_RELEASED");
+      }
+    }
+  }
+}

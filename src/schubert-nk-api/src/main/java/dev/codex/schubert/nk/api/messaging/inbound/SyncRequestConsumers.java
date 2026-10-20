@@ -24,14 +24,16 @@ public final class SyncRequestConsumers implements AutoCloseable {
   public static final int CONCURRENCY = 4;
 
   private final List<JMSContext> contexts;
+  private final Consumer<Throwable> onUnconfirmed;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
   private final Object closeLock = new Object();
   private final boolean[] contextClosed = new boolean[CONCURRENCY];
   private boolean closed;
 
-  private SyncRequestConsumers(List<JMSContext> contexts) {
+  private SyncRequestConsumers(List<JMSContext> contexts, Consumer<Throwable> onUnconfirmed) {
     this.contexts = contexts;
+    this.onUnconfirmed = onUnconfirmed;
   }
 
   /** Opens all sessions and listeners before starting delivery; partial startup is closed. */
@@ -47,12 +49,23 @@ public final class SyncRequestConsumers implements AutoCloseable {
       SyncRequestListener listener,
       Consumer<CommittedFatalInboundException> onTerminal,
       Runnable onFatal) {
+    return start(factory, listener, onTerminal, onFatal, ignored -> {});
+  }
+
+  // SSC316: only the complete native parent chooses true; ordinary component contracts stay false.
+  static SyncRequestConsumers start(
+      Supplier<JMSContext> factory,
+      SyncRequestListener listener,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal,
+      Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(listener, "listener");
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
     List<JMSContext> opened = new ArrayList<>(CONCURRENCY);
-    SyncRequestConsumers runtime = new SyncRequestConsumers(opened);
+    SyncRequestConsumers runtime = new SyncRequestConsumers(opened, onUnconfirmed);
     try {
       for (int index = 0; index < CONCURRENCY; index++) {
         JMSContext context = Objects.requireNonNull(factory.get(), "JMS context");
@@ -144,6 +157,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
           }
         }
       }
+      if (failure != null) onUnconfirmed.accept(failure);
       if (failure instanceof Error fatal) throw fatal;
       if (failure != null) {
         throw new IllegalStateException("API sync consumer close failed", failure);

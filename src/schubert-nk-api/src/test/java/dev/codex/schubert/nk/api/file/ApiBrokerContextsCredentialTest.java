@@ -39,6 +39,12 @@ final class ApiBrokerContextsCredentialTest {
           assertNotNull(owner.sync());
           assertNotNull(owner.webLog());
         }
+        try (var owner =
+            ApiBrokerContexts.createRetainingUnknown(credentials, "tcp://127.0.0.1:61616")) {
+          assertNotNull(owner.sync());
+          assertNotNull(owner.webLog());
+          assertNotNull(owner.async());
+        }
       }
       ServiceCredentialSetTest.assertCleared(io);
     }

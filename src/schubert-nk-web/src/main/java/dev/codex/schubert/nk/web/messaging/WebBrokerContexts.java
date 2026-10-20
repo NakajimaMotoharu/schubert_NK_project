@@ -1,12 +1,14 @@
 package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
@@ -35,24 +37,40 @@ public final class WebBrokerContexts implements AutoCloseable {
   private final Supplier<char[]> passwords;
   private final ConnectionFactory factory;
   private final AutoCloseable owner;
+  private final Consumer<Throwable> onUnconfirmed;
   private boolean closed;
   private boolean stopping;
 
   public static WebBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
     Objects.requireNonNull(credentials, "Web credentials");
     return new WebBrokerContexts(
-        () -> credentials.copyPassword(ServiceCredentialId.MQ_WEB), endpoint);
+        () -> credentials.copyPassword(ServiceCredentialId.MQ_WEB), endpoint, false);
   }
 
-  private WebBrokerContexts(Supplier<char[]> passwords, String endpoint) {
+  /** SSC316: keep the native outer frame after unconfirmed partial factory cleanup. */
+  public static WebBrokerContexts createRetainingUnknown(
+      ServiceCredentialSet credentials, String endpoint) {
+    Objects.requireNonNull(credentials, "Web credentials");
+    return new WebBrokerContexts(
+        () -> credentials.copyPassword(ServiceCredentialId.MQ_WEB), endpoint, true);
+  }
+
+  private WebBrokerContexts(Supplier<char[]> passwords, String endpoint, boolean retainUnknown) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
+    this.onUnconfirmed =
+        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
     // SSC311: owner/lock/password port are complete before acquiring the provider resource.
-    var configured = newFactory(endpoint);
+    var configured = newFactory(endpoint, onUnconfirmed);
     this.factory = configured;
     this.owner = configured;
   }
 
   static ActiveMQConnectionFactory newFactory(String endpoint) {
+    return newFactory(endpoint, ignored -> {});
+  }
+
+  private static ActiveMQConnectionFactory newFactory(
+      String endpoint, Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(endpoint, "Artemis endpoint");
     var match = LOOPBACK_CORE.matcher(endpoint);
     if (!match.matches()) throw new IllegalArgumentException("Web Artemis endpoint unavailable");
@@ -70,12 +88,18 @@ public final class WebBrokerContexts implements AutoCloseable {
                 TransportConstants.NETTY_CONNECT_TIMEOUT,
                 3_000),
             "schubert-nk-core");
-    return configureOwned(() -> new ActiveMQConnectionFactory(false, connector));
+    return configureOwned(() -> new ActiveMQConnectionFactory(false, connector), onUnconfirmed);
   }
 
   /** SSC311: all ports precede acquisition; failed configuration owns one close attempt. */
   static ActiveMQConnectionFactory configureOwned(Supplier<ActiveMQConnectionFactory> acquire) {
+    return configureOwned(acquire, ignored -> {});
+  }
+
+  static ActiveMQConnectionFactory configureOwned(
+      Supplier<ActiveMQConnectionFactory> acquire, Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(acquire, "factory acquisition");
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
     var factory = Objects.requireNonNull(acquire.get(), "JMS factory");
     try {
       factory.setCallTimeout(2_000);
@@ -95,6 +119,7 @@ public final class WebBrokerContexts implements AutoCloseable {
       try {
         factory.close();
       } catch (RuntimeException | Error secondary) {
+        onUnconfirmed.accept(secondary);
         if (secondary instanceof Error && !(primary instanceof Error)) {
           secondary.addSuppressed(primary);
           throw secondary;
@@ -106,9 +131,19 @@ public final class WebBrokerContexts implements AutoCloseable {
   }
 
   WebBrokerContexts(Supplier<char[]> passwords, ConnectionFactory factory, AutoCloseable owner) {
+    this(passwords, factory, owner, false);
+  }
+
+  WebBrokerContexts(
+      Supplier<char[]> passwords,
+      ConnectionFactory factory,
+      AutoCloseable owner,
+      boolean retainUnknown) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
     this.factory = Objects.requireNonNull(factory, "JMS factory");
     this.owner = Objects.requireNonNull(owner, "JMS owner");
+    this.onUnconfirmed =
+        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
   }
 
   public JmsContextFactory contexts() {
@@ -149,7 +184,9 @@ public final class WebBrokerContexts implements AutoCloseable {
       stopping = true;
       try {
         owner.close();
-      } catch (Exception failure) {
+      } catch (Exception | Error failure) {
+        onUnconfirmed.accept(failure);
+        if (failure instanceof Error fatal) throw fatal;
         dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
         throw new IllegalStateException("Web broker factory close failed");
       }

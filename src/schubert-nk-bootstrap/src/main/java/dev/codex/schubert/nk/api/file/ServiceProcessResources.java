@@ -16,6 +16,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Consumer;
 import javax.sql.DataSource;
 import org.jspecify.annotations.NullMarked;
 
@@ -159,16 +160,24 @@ public final class ServiceProcessResources {
   }
 
   /** SSC308: this resource-independent port is completely constructed before acquisition. */
-  static <R> ResourceScope.Release<R> ownedRelease(
+  public static <R> ResourceScope.Release<R> ownedRelease(
       ResourceScope.Release<R> release, boolean retainUnknown) {
     Objects.requireNonNull(release, "service resource release");
     if (!retainUnknown) return release;
+    return ownedRelease(release, ServiceProcessResources::retainUnknownRelease);
+  }
+
+  // A finite observer may inspect the failure in component PT; returning still rethrows UNKNOWN.
+  static <R> ResourceScope.Release<R> ownedRelease(
+      ResourceScope.Release<R> release, Consumer<Throwable> onUnconfirmed) {
+    Objects.requireNonNull(release, "service resource release");
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed release policy");
     return resource -> {
       try {
         release.close(resource);
       } catch (IOException | RuntimeException | Error unconfirmed) {
-        System.err.println("service resource release unconfirmed");
-        while (true) observeUnconfirmed();
+        onUnconfirmed.accept(unconfirmed);
+        throw unconfirmed;
       }
     };
   }
@@ -178,14 +187,17 @@ public final class ServiceProcessResources {
   static Closeable release(Closeable resource, boolean retainUnknown) {
     Objects.requireNonNull(resource, "service resource release");
     if (!retainUnknown) return resource;
-    return () -> {
-      try {
-        resource.close();
-      } catch (IOException | RuntimeException | Error unconfirmed) {
-        System.err.println("service resource release unconfirmed");
-        while (true) observeUnconfirmed();
-      }
-    };
+    var release = ServiceProcessResources.<Closeable>ownedRelease(Closeable::close, true);
+    return () -> release.close(resource);
+  }
+
+  /**
+   * SSC316: fixed native retention only; no retry, release, normal completion or raw diagnostic.
+   */
+  public static void retainUnknownRelease(Throwable unconfirmed) {
+    Objects.requireNonNull(unconfirmed, "unconfirmed release");
+    System.err.println("service resource release unconfirmed");
+    while (true) observeUnconfirmed();
   }
 
   private static void observeUnconfirmed() {

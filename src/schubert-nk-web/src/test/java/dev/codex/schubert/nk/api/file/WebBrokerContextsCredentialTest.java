@@ -24,6 +24,26 @@ final class WebBrokerContextsCredentialTest {
   @TempDir Path temporary;
 
   @Test
+  void native316LoadedSyntheticCredentialBuildsFactoryWithoutOpeningContext() throws Exception {
+    try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
+      ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.WEB);
+      var io = new InspectorCredentialLoaderTest.TestIo();
+      var reader =
+          new ServiceCredentialReader(
+              fixture.held,
+              new InspectorCredentialLoaderTest.TestSecurity(io),
+              ServiceConfigFiles.Service.WEB,
+              io);
+      try (var credentials = ServiceCredentialSet.load(reader, ServiceConfigFiles.Service.WEB);
+          var owner =
+              WebBrokerContexts.createRetainingUnknown(credentials, "tcp://127.0.0.1:61616")) {
+        assertNotNull(owner.contexts());
+      }
+      ServiceCredentialSetTest.assertCleared(io);
+    }
+  }
+
+  @Test
   void loadedWebRoleOpensRealBrokerAndOuterReplyProbeClosesBorrowedContext() throws Exception {
     int port;
     try (var reservation = new ServerSocket(0)) {

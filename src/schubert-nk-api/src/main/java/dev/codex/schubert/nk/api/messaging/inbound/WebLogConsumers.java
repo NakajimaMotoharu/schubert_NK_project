@@ -20,12 +20,14 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
  */
 public final class WebLogConsumers implements AutoCloseable {
   private final JMSContext context;
+  private final Consumer<Throwable> onUnconfirmed;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
   private final Object closeLock = new Object();
   private boolean closed;
 
-  private WebLogConsumers(Supplier<JMSContext> factory) {
+  private WebLogConsumers(Supplier<JMSContext> factory, Consumer<Throwable> onUnconfirmed) {
+    this.onUnconfirmed = onUnconfirmed;
     // BUG1537: all state allocation precedes acquisition; only final storage follows it.
     this.context = Objects.requireNonNull(factory.get(), "JMS context");
   }
@@ -43,11 +45,21 @@ public final class WebLogConsumers implements AutoCloseable {
       WebLogListener listener,
       Consumer<CommittedFatalInboundException> onTerminal,
       Runnable onFatal) {
+    return start(factory, listener, onTerminal, onFatal, ignored -> {});
+  }
+
+  static WebLogConsumers start(
+      Supplier<JMSContext> factory,
+      WebLogListener listener,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal,
+      Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(factory, "factory");
     Objects.requireNonNull(listener, "listener");
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
-    WebLogConsumers runtime = new WebLogConsumers(factory);
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
+    WebLogConsumers runtime = new WebLogConsumers(factory, onUnconfirmed);
     JMSContext opened = runtime.context;
     try {
       opened.setAutoStart(false);
@@ -124,7 +136,9 @@ public final class WebLogConsumers implements AutoCloseable {
       if (closed) return;
       try {
         context.close();
-      } catch (RuntimeException failure) {
+      } catch (RuntimeException | Error failure) {
+        onUnconfirmed.accept(failure);
+        if (failure instanceof Error fatal) throw fatal;
         throw new IllegalStateException("API Web log consumer close failed", failure);
       }
       closed = true;

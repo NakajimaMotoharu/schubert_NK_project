@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import jakarta.jms.JMSContext;
 import java.time.Clock;
 import java.util.ArrayList;
@@ -46,7 +47,8 @@ public final class ApiMessagingRuntime implements AutoCloseable {
         null,
         clock,
         onTerminal,
-        () -> {});
+        () -> {},
+        false);
   }
 
   public static ApiMessagingRuntime start(
@@ -59,6 +61,54 @@ public final class ApiMessagingRuntime implements AutoCloseable {
       Clock clock,
       Consumer<CommittedFatalInboundException> onTerminal,
       Runnable onFatal) {
+    return startComplete(
+        syncFactory,
+        webLogFactory,
+        asyncFactory,
+        syncProcessor,
+        webLogProcessor,
+        questionProcessor,
+        clock,
+        onTerminal,
+        onFatal,
+        false);
+  }
+
+  /** SSC316: native partial cleanup retains its exact outer frame after an unconfirmed close. */
+  public static ApiMessagingRuntime startRetainingUnknown(
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
+      Supplier<JMSContext> asyncFactory,
+      SyncRequestProcessor syncProcessor,
+      InternalEventProcessor webLogProcessor,
+      InternalEventProcessor questionProcessor,
+      Clock clock,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal) {
+    return startComplete(
+        syncFactory,
+        webLogFactory,
+        asyncFactory,
+        syncProcessor,
+        webLogProcessor,
+        questionProcessor,
+        clock,
+        onTerminal,
+        onFatal,
+        true);
+  }
+
+  private static ApiMessagingRuntime startComplete(
+      Supplier<JMSContext> syncFactory,
+      Supplier<JMSContext> webLogFactory,
+      Supplier<JMSContext> asyncFactory,
+      SyncRequestProcessor syncProcessor,
+      InternalEventProcessor webLogProcessor,
+      InternalEventProcessor questionProcessor,
+      Clock clock,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal,
+      boolean retainUnknown) {
     return startSelected(
         syncFactory,
         webLogFactory,
@@ -69,7 +119,8 @@ public final class ApiMessagingRuntime implements AutoCloseable {
             Objects.requireNonNull(questionProcessor, "question processor")),
         clock,
         onTerminal,
-        onFatal);
+        onFatal,
+        retainUnknown);
   }
 
   private record Async(Supplier<JMSContext> factory, InternalEventProcessor processor) {}
@@ -82,7 +133,8 @@ public final class ApiMessagingRuntime implements AutoCloseable {
       @Nullable Async async,
       Clock clock,
       Consumer<CommittedFatalInboundException> onTerminal,
-      Runnable onFatal) {
+      Runnable onFatal,
+      boolean retainUnknown) {
     Objects.requireNonNull(syncFactory, "sync factory");
     Objects.requireNonNull(webLogFactory, "Web Log factory");
     Objects.requireNonNull(syncProcessor, "syncProcessor");
@@ -90,6 +142,8 @@ public final class ApiMessagingRuntime implements AutoCloseable {
     Objects.requireNonNull(clock, "clock");
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
+    Consumer<Throwable> onUnconfirmed =
+        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
     var terminal = new AtomicBoolean();
     Consumer<CommittedFatalInboundException> signal =
         failure -> {
@@ -105,17 +159,26 @@ public final class ApiMessagingRuntime implements AutoCloseable {
     try {
       groups.add(
           SyncRequestConsumers.start(
-              syncFactory, new SyncRequestListener(syncProcessor, clock), signal, fatalSignal));
+              syncFactory,
+              new SyncRequestListener(syncProcessor, clock),
+              signal,
+              fatalSignal,
+              onUnconfirmed));
       groups.add(
           WebLogConsumers.start(
-              webLogFactory, new WebLogListener(webLogProcessor, clock), signal, fatalSignal));
+              webLogFactory,
+              new WebLogListener(webLogProcessor, clock),
+              signal,
+              fatalSignal,
+              onUnconfirmed));
       if (async != null)
         groups.add(
             QuestionWorkConsumers.start(
                 async.factory(),
                 new QuestionWorkListener(async.processor(), clock),
                 signal,
-                fatalSignal));
+                fatalSignal,
+                onUnconfirmed));
       return runtime;
     } catch (RuntimeException | Error failure) {
       Throwable retained = failure;

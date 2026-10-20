@@ -18,11 +18,13 @@ import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
  */
 public final class QuestionWorkConsumers implements AutoCloseable {
   private final JMSContext context;
+  private final Consumer<Throwable> onUnconfirmed;
   private final Object lock = new Object();
   private final AtomicBoolean halted = new AtomicBoolean();
   private boolean closed;
 
-  private QuestionWorkConsumers(Supplier<JMSContext> factory) {
+  private QuestionWorkConsumers(Supplier<JMSContext> factory, Consumer<Throwable> onUnconfirmed) {
+    this.onUnconfirmed = onUnconfirmed;
     // BUG1537: initialize this owner/lock/flags before acquiring its only external resource.
     this.context = Objects.requireNonNull(factory.get(), "async context");
   }
@@ -32,11 +34,21 @@ public final class QuestionWorkConsumers implements AutoCloseable {
       QuestionWorkListener listener,
       Consumer<CommittedFatalInboundException> onTerminal,
       Runnable onFatal) {
+    return start(factory, listener, onTerminal, onFatal, ignored -> {});
+  }
+
+  static QuestionWorkConsumers start(
+      Supplier<JMSContext> factory,
+      QuestionWorkListener listener,
+      Consumer<CommittedFatalInboundException> onTerminal,
+      Runnable onFatal,
+      Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(factory, "async factory");
     Objects.requireNonNull(listener, "work listener");
     Objects.requireNonNull(onTerminal, "terminal signal");
     Objects.requireNonNull(onFatal, "fatal signal");
-    var result = new QuestionWorkConsumers(factory);
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
+    var result = new QuestionWorkConsumers(factory, onUnconfirmed);
     var context = result.context;
     try {
       context.setAutoStart(false);
@@ -105,7 +117,9 @@ public final class QuestionWorkConsumers implements AutoCloseable {
       if (closed) return;
       try {
         context.close();
-      } catch (RuntimeException failure) {
+      } catch (RuntimeException | Error failure) {
+        onUnconfirmed.accept(failure);
+        if (failure instanceof Error fatal) throw fatal;
         throw new IllegalStateException("API Question consumer close failed", failure);
       }
       closed = true;

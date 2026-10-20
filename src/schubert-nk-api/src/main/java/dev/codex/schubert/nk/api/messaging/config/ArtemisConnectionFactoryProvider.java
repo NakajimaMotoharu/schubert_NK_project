@@ -1,7 +1,9 @@
 package dev.codex.schubert.nk.api.messaging.config;
 
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
@@ -30,6 +32,15 @@ public enum ArtemisConnectionFactoryProvider {
 
   /** Uses the admitted loopback Core URL verbatim; no provider-selected host or fallback port. */
   public ActiveMQConnectionFactory create(ConsumerProfile profile, String endpoint) {
+    return create(profile, endpoint, false);
+  }
+
+  ActiveMQConnectionFactory createRetainingUnknown(ConsumerProfile profile, String endpoint) {
+    return create(profile, endpoint, true);
+  }
+
+  private ActiveMQConnectionFactory create(
+      ConsumerProfile profile, String endpoint, boolean retainUnknown) {
     Objects.requireNonNull(profile, "profile");
     Objects.requireNonNull(endpoint, "endpoint");
     var match = LOOPBACK_CORE.matcher(endpoint);
@@ -47,14 +58,25 @@ public enum ArtemisConnectionFactoryProvider {
                 TransportConstants.NETTY_CONNECT_TIMEOUT,
                 3_000),
             "schubert-nk-core");
-    return configureOwned(profile, () -> new ActiveMQConnectionFactory(false, connector));
+    Consumer<Throwable> onUnconfirmed =
+        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+    return configureOwned(
+        profile, () -> new ActiveMQConnectionFactory(false, connector), onUnconfirmed);
   }
 
   /** SSC315/PG-D464: all input ports precede acquisition; failed setup owns one close. */
   static ActiveMQConnectionFactory configureOwned(
       ConsumerProfile profile, Supplier<ActiveMQConnectionFactory> acquire) {
+    return configureOwned(profile, acquire, ignored -> {});
+  }
+
+  static ActiveMQConnectionFactory configureOwned(
+      ConsumerProfile profile,
+      Supplier<ActiveMQConnectionFactory> acquire,
+      Consumer<Throwable> onUnconfirmed) {
     Objects.requireNonNull(profile, "profile");
     Objects.requireNonNull(acquire, "factory acquisition");
+    Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
     int windowBytes = profile.windowBytes();
     var factory = Objects.requireNonNull(acquire.get(), "JMS factory");
     try {
@@ -75,6 +97,7 @@ public enum ArtemisConnectionFactoryProvider {
       try {
         factory.close();
       } catch (RuntimeException | Error secondary) {
+        onUnconfirmed.accept(secondary);
         if (secondary instanceof Error && !(primary instanceof Error)) {
           secondary.addSuppressed(primary);
           throw secondary;

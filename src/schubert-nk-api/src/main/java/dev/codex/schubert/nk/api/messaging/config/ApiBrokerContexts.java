@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.config;
 
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.jspecify.annotations.NullMarked;
@@ -33,15 +35,32 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private final @Nullable ConnectionFactory retainedAsync;
   private final List<AutoCloseable> owners;
   private final boolean[] ownerClosed;
+  private final Consumer<Throwable> onUnconfirmed;
   private boolean stopping;
   private boolean closed;
 
   public static ApiBrokerContexts create(ServiceCredentialSet credentials, String endpoint) {
+    return create(credentials, endpoint, false);
+  }
+
+  /** SSC316: ordinary native assembly retains returned and partial factory UNKNOWN scopes. */
+  public static ApiBrokerContexts createRetainingUnknown(
+      ServiceCredentialSet credentials, String endpoint) {
+    return create(credentials, endpoint, true);
+  }
+
+  private static ApiBrokerContexts create(
+      ServiceCredentialSet credentials, String endpoint, boolean retainUnknown) {
     Objects.requireNonNull(credentials, "credentials");
     return createOwned(
         () -> credentials.copyPassword(ServiceCredentialId.MQ_API),
         endpoint,
-        ArtemisConnectionFactoryProvider.INSTANCE::create);
+        (profile, admittedEndpoint) ->
+            retainUnknown
+                ? ArtemisConnectionFactoryProvider.INSTANCE.createRetainingUnknown(
+                    profile, admittedEndpoint)
+                : ArtemisConnectionFactoryProvider.INSTANCE.create(profile, admittedEndpoint),
+        retainUnknown);
   }
 
   /**
@@ -53,10 +72,20 @@ public final class ApiBrokerContexts implements AutoCloseable {
       BiFunction<
               ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
           provider) {
+    return createOwned(passwords, endpoint, provider, false);
+  }
+
+  static ApiBrokerContexts createOwned(
+      Supplier<char[]> passwords,
+      String endpoint,
+      BiFunction<
+              ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
+          provider,
+      boolean retainUnknown) {
     Objects.requireNonNull(passwords, "password source");
     Objects.requireNonNull(provider, "factory provider");
     Objects.requireNonNull(endpoint, "Artemis endpoint");
-    return new ApiBrokerContexts(passwords, endpoint, provider);
+    return new ApiBrokerContexts(passwords, endpoint, provider, retainUnknown);
   }
 
   /** SSC315: prepare all ownership state before the first provider resource exists. */
@@ -65,8 +94,11 @@ public final class ApiBrokerContexts implements AutoCloseable {
       String endpoint,
       BiFunction<
               ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
-          provider) {
+          provider,
+      boolean retainUnknown) {
     this.passwords = passwords;
+    this.onUnconfirmed =
+        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
     this.owners = new ArrayList<>(3);
     this.ownerClosed = new boolean[3];
     var sync =
@@ -93,6 +125,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
         try {
           owners.get(index).close();
         } catch (Exception | Error closing) {
+          onUnconfirmed.accept(closing);
           // Keep the existing partial-factory primary and individual reverse-order secondary.
           if (closing != failure) failure.addSuppressed(closing);
         }
@@ -138,6 +171,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
     this.retainedAsync = async;
     this.owners = owners;
     this.ownerClosed = new boolean[owners.size()];
+    this.onUnconfirmed = ignored -> {};
   }
 
   public Supplier<JMSContext> sync() {
@@ -197,6 +231,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
             failure = closing;
         }
       }
+      if (failure != null) onUnconfirmed.accept(failure);
       if (failure instanceof Error fatal) throw fatal;
       if (failure != null) throw new IllegalStateException("API broker factory close failed");
       closed = true;
