@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "executionKind": "ORIGINAL_RED_ARTIFACT_QUALIFICATION_NOT_PT_PASS",
+  "runs": [
+    {
+      "phase": "red-api",
+      "run": "pg5826-isolation-red-api-v2",
+      "source": "30ca1993d5aa0fbc1d378eddec4d8044286702aa",
+      "originalManifestSha256": "c6dea9e4680402d1b08f076cc80ce5722fa6950e679a712b5f6bb94f9b0dec33",
+      "archiveSha256": "0d144c833d9bb0f9670bed48c335070c9e767afca8ccbab885a1046b615ea0d1",
+      "startedUTC": "2026-10-20T02:49:03.344487+00:00",
+      "completedUTC": "2026-10-20T02:50:39.216754+00:00",
+      "phaseExits": [
+        0,
+        1
+      ],
+      "actualExit": 1,
+      "executedCases": 13,
+      "suites": 6,
+      "expectedFailureIds": [
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso001SyncCheckedIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso002SyncRuntimeIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso003QuestionCheckedIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso004QuestionRuntimeIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso005WebLogCheckedIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+          "iso006WebLogRuntimeIsolationFailureStopsWithoutAck"
+        ]
+      ],
+      "purposefulRedEstablished": true,
+      "xmlHashes": {
+        "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest.xml": "278ab62f9a78a0dd5ecada757cccfb1d0e87edae8c92b30c923b7ded70018ece",
+        "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest.xml": "b6d1159d16bddc672be9beedd6848370ea0a3d0eaa94cfaa893a06af22959cf2",
+        "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest.xml": "91f521c451439daca8f57ed1cc4caafb19b0ee24c901f645a1dd554abb467af8",
+        "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest.xml": "34d91eb7cd075cc4ab2dbfcadb24a231e7be0a03b80e6a237bc49d278e6567dc",
+        "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest.xml": "b140a7795af01a677229050c986795b184970bef902cb9a25138ee8b013f61e0",
+        "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml": "2c03385c096a490f62672cd9f44ba4ad50e8bc4388e15de7a3e4b857e518783c"
+      },
+      "webNotRunRetained": true,
+      "actualPhysicalMain": 1350,
+      "unmodifiedProductionSource": "2e3b0d50679ad6f1a984e25bd400db6f3ad9e798"
+    },
+    {
+      "phase": "red-web",
+      "run": "pg5826-isolation-red-web-v2",
+      "source": "945325794ceeadfe96e33cd4440acb4c2f2920ff",
+      "originalManifestSha256": "2ebcf6cfedb1158b87f1c64acb0d43e33b822df00adc604a23f3f91a9ce96930",
+      "archiveSha256": "64d59f0848868a39280f0287181d7acb8e8154b6a39e4b66f61c309af06a87b8",
+      "startedUTC": "2026-10-20T02:53:39.889663+00:00",
+      "completedUTC": "2026-10-20T02:55:38.579633+00:00",
+      "phaseExits": [
+        0,
+        1
+      ],
+      "actualExit": 1,
+      "executedCases": 10,
+      "suites": 7,
+      "expectedFailureIds": [
+        [
+          "dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest",
+          "iso007ReplyCheckedIsolationFailureStopsWithoutAck"
+        ],
+        [
+          "dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest",
+          "iso008ReplyRuntimeIsolationFailureStopsWithoutAck"
+        ]
+      ],
+      "purposefulRedEstablished": true,
+      "xmlHashes": {
+        "src/schubert-nk-web/target/surefire-reports/TEST-dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest.xml": "f1eba6bf47d398b639c9651cbecbabba6893ebd0aeadd842d878241d2f9d96fd",
+        "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest.xml": "eabf014f3778be9ccb805c46a161bcad3eda883d36802c6ba5f1f100e1d9467e",
+        "src/schubert-nk-batch/target/surefire-reports/TEST-dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest.xml": "18f6a65b399a514b938cf72ef71fd6a33da2c15fd82908092b042b6e253e41af",
+        "src/schubert-nk-api/target/surefire-reports/TEST-dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest.xml": "967b5c55c311f6ff37fb32aeb1f3f6ea6f7f5590c5063a91ed10a3471c4bda5a",
+        "src/schubert-nk-storage/target/surefire-reports/TEST-dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest.xml": "570fa38011f0c52592a929534aa9671b134f7db5cd5d7726dc72fef8b9616c17",
+        "src/schubert-nk-bootstrap/target/surefire-reports/TEST-dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest.xml": "8d7619f8e8bc15d94801d453db1cc05942f44f4c67fe78194e82e59cdc6a0af9",
+        "src/schubert-nk-protocol/target/surefire-reports/TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml": "6c0ccd9c43b19d9efde460b69c68c7536ce5e4cf6c4cab51703ff84e38748d96"
+      },
+      "webNotRunRetained": false,
+      "actualPhysicalMain": 1665,
+      "unmodifiedProductionSource": "2e3b0d50679ad6f1a984e25bd400db6f3ad9e798"
+    }
+  ],
+  "purposefulFailureCases": 8,
+  "productionPtPassCredit": 0,
+  "alternativesCompleted": 0,
+  "formalAccepted": false,
+  "wholePassIsNotSpecificationAcceptance": true,
+  "BUG1494Open": true,
+  "BUG1496FixtureCompileCorrected": true,
+  "BUG1497FixtureDependencyCorrected": true,
+  "preservedUnqualifiedAttempts": [
+    {
+      "run": "pg5826-isolation-red-api-v1",
+      "manifestSha256": "b690aae4f92c7ea8cf9b88225e7353a2f734245f311d16716144b94197100664",
+      "reason": "fixture try lint error; API/Web not run",
+      "actualExit": 1,
+      "executedCases": 7
+    },
+    {
+      "run": "pg5826-isolation-red-web-v1",
+      "manifestSha256": "b55327ddab0a1e21348c54794880ba7d780d63f999a86c179db788fa5fece802",
+      "reason": "missing API test class dependency; Web not run",
+      "actualExit": 1,
+      "executedCases": 8
+    }
+  ],
+  "runtimeOrVmOperations": 0
+}

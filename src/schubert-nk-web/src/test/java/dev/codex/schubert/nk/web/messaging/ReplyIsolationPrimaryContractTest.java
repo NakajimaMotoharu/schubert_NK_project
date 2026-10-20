@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.messaging;
 import static org.junit.jupiter.api.Assertions.*;
 
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Message;
@@ -21,8 +22,9 @@ final class ReplyIsolationPrimaryContractTest {
     assertSame(
         protocol,
         assertThrows(
-            PermanentProtocolException.class,
-            () -> fixture.consumer().onMessage(fixture.context(), fixture.message())));
+                FailedJmsIsolationException.class,
+                () -> fixture.consumer().onMessage(fixture.context(), fixture.message()))
+            .getCause());
     assertEquals(1, fixture.rollbacks);
     assertEquals(0, fixture.commits);
     assertEquals(0, protocol.getSuppressed().length);
@@ -36,8 +38,9 @@ final class ReplyIsolationPrimaryContractTest {
     assertSame(
         isolation,
         assertThrows(
-            IllegalStateException.class,
-            () -> fixture.consumer().onMessage(fixture.context(), fixture.message())));
+                FailedJmsIsolationException.class,
+                () -> fixture.consumer().onMessage(fixture.context(), fixture.message()))
+            .getCause());
     assertEquals(1, fixture.rollbacks);
     assertEquals(0, fixture.commits);
     assertEquals(1, isolation.getSuppressed().length);

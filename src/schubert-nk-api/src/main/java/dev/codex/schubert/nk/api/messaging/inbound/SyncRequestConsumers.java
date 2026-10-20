@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -72,7 +73,9 @@ public final class SyncRequestConsumers implements AutoCloseable {
                 if (runtime.terminal.compareAndSet(false, true)) {
                   onTerminal.accept(fatal);
                 }
-              } catch (UnconfirmedJmsRollbackException | Error fatal) {
+              } catch (FailedJmsIsolationException
+                  | UnconfirmedJmsRollbackException
+                  | Error fatal) {
                 runtime.halted.set(true);
                 if (runtime.terminal.compareAndSet(false, true)) {
                   if (fatal instanceof Error) {

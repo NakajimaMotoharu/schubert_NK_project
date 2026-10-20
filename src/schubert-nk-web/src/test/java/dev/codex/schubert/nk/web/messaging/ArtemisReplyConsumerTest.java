@@ -277,10 +277,11 @@ final class ArtemisReplyConsumerTest {
     JMSException checked = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = checked;
     ContextState checkedContext = new ContextState();
-    JMSException checkedObserved =
+    Throwable checkedObserved =
         assertThrows(
-            JMSException.class,
-            () -> consumer.onMessage(checkedContext.proxy(), checkedMessage.message));
+                dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
+                () -> consumer.onMessage(checkedContext.proxy(), checkedMessage.message))
+            .getCause();
     assertEquals(checked, checkedObserved);
     assertEquals(1, checkedContext.rollbacks);
     assertTrue(
@@ -293,16 +294,41 @@ final class ArtemisReplyConsumerTest {
     ContextState commitContext = new ContextState();
     JMSRuntimeException runtime = new JMSRuntimeException("synthetic-DLQ-commit-failure");
     commitContext.commitFailure = runtime;
-    JMSRuntimeException runtimeObserved =
+    Throwable runtimeObserved =
         assertThrows(
-            JMSRuntimeException.class,
-            () -> consumer.onMessage(commitContext.proxy(), commitMessage.message));
+                dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
+                () -> consumer.onMessage(commitContext.proxy(), commitMessage.message))
+            .getCause();
     assertEquals(runtime, runtimeObserved);
     assertEquals(1, commitContext.rollbacks);
     assertTrue(
         Arrays.stream(runtimeObserved.getSuppressed())
             .anyMatch(
                 dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
+
+    // SS322§11 / ISO: keep the isolation phase even when its rollback is also unknown.
+    MessageState unknownMessage =
+        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+    JMSException unknownIsolation = new JMSException("synthetic-DLQ-unknown-read");
+    unknownMessage.transportReadFailure = unknownIsolation;
+    ContextState unknownContext = new ContextState();
+    JMSRuntimeException rollback = new JMSRuntimeException("synthetic-DLQ-unknown-rollback");
+    unknownContext.rollbackFailure = rollback;
+    var phase =
+        assertThrows(
+            dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
+            () -> consumer.onMessage(unknownContext.proxy(), unknownMessage.message));
+    var unknown =
+        assertInstanceOf(
+            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
+            phase.getCause());
+    assertSame(unknownIsolation, unknown.getCause());
+    assertArrayEquals(new Throwable[] {rollback}, unknown.getSuppressed());
+    assertInstanceOf(
+        dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class,
+        phase.getSuppressed()[0]);
+    assertEquals(1, unknownContext.rollbacks);
+    assertEquals(0, unknownContext.commits);
   }
 
   private static ArtemisReplyConsumer consumer(ReplyCorrelationRegistry registry) {

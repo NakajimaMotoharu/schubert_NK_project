@@ -367,8 +367,8 @@ final class SyncRequestListenerTest {
     assertEquals(1, readContext.rollbacks);
     assertEquals(0, readContext.commits);
 
-    // Checked DLQ read failure with a confirmed rollback stays the original retryable cause.
-    // This is separate from the next fixture whose rollback itself is unconfirmed (PG-D441).
+    // SS322§11 / PG-D442: even confirmed rollback cannot make failed permanent isolation retryable.
+    // Original isolation identity remains the cause; unconfirmed rollback is retained separately.
     ContextState confirmedIsolationContext = new ContextState();
     MessageState confirmedMessage =
         messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
@@ -377,8 +377,10 @@ final class SyncRequestListenerTest {
     assertSame(
         confirmedIsolationFailure,
         assertThrows(
-            JMSException.class,
-            () -> listener.onMessage(confirmedIsolationContext.proxy(), confirmedMessage.message)));
+                dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
+                () ->
+                    listener.onMessage(confirmedIsolationContext.proxy(), confirmedMessage.message))
+            .getCause());
     assertEquals(1, confirmedIsolationContext.rollbacks);
     assertEquals(0, confirmedIsolationContext.commits);
     assertEquals(1, confirmedIsolationFailure.getSuppressed().length);
@@ -393,10 +395,17 @@ final class SyncRequestListenerTest {
         messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
     JMSException isolationFailure = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = isolationFailure;
-    var unconfirmed =
+    var failedIsolation =
         assertThrows(
-            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
+            dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
             () -> listener.onMessage(checkedIsolationContext.proxy(), checkedMessage.message));
+    var unconfirmed =
+        assertInstanceOf(
+            dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException.class,
+            failedIsolation.getCause());
+    assertInstanceOf(
+        dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class,
+        failedIsolation.getSuppressed()[0]);
     Throwable checkedObserved = unconfirmed.getCause();
     assertSame(rollbackFailure, unconfirmed.getSuppressed()[0]);
     assertSame(isolationFailure, checkedObserved);
@@ -412,10 +421,11 @@ final class SyncRequestListenerTest {
     commitIsolationContext.commitFailure = commitFailure;
     MessageState commitMessage =
         messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
-    JMSRuntimeException runtimeObserved =
+    Throwable runtimeObserved =
         assertThrows(
-            JMSRuntimeException.class,
-            () -> listener.onMessage(commitIsolationContext.proxy(), commitMessage.message));
+                dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
+                () -> listener.onMessage(commitIsolationContext.proxy(), commitMessage.message))
+            .getCause();
     assertSame(commitFailure, runtimeObserved);
     assertEquals(1, commitIsolationContext.rollbacks);
     assertTrue(

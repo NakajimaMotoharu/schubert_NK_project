@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Message;
@@ -70,7 +71,9 @@ final class InboundTransactionsPrimaryContractTest {
     var primary = new PermanentProtocolException("synthetic protocol");
     var fixture = new Fixture(null, primary);
     assertSame(
-        primary, assertThrows(PermanentProtocolException.class, () -> isolate(fixture, primary)));
+        primary,
+        assertThrows(FailedJmsIsolationException.class, () -> isolate(fixture, primary))
+            .getCause());
     assertEquals(1, fixture.rollbacks);
     assertEquals(0, fixture.commits);
     assertEquals(0, primary.getSuppressed().length);
@@ -82,7 +85,9 @@ final class InboundTransactionsPrimaryContractTest {
     var isolation = new IllegalStateException("synthetic isolation");
     var fixture = new Fixture(null, isolation);
     assertSame(
-        isolation, assertThrows(IllegalStateException.class, () -> isolate(fixture, protocol)));
+        isolation,
+        assertThrows(FailedJmsIsolationException.class, () -> isolate(fixture, protocol))
+            .getCause());
     assertEquals(1, fixture.rollbacks);
     assertEquals(0, fixture.commits);
     assertEquals(1, isolation.getSuppressed().length);

@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.messaging.outbound.DlqSender;
 import dev.codex.schubert.nk.api.messaging.outbound.FatalDlqMetadata;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -27,8 +28,7 @@ enum InboundTransactions {
       BrokerTopology originalDestination,
       FatalDlqMetadata.DetectedBy detectedBy,
       Clock clock,
-      PermanentProtocolException protocolFailure)
-      throws JMSException {
+      PermanentProtocolException protocolFailure) {
     try {
       FatalDlqMetadata fatal =
           new FatalDlqMetadata("PROTOCOL_INVALID", detectedBy, clock.instant());
@@ -38,11 +38,12 @@ enum InboundTransactions {
       if (isolationFailure != protocolFailure) {
         isolationFailure.addSuppressed(protocolFailure);
       }
-      rollbackAfterFailure(context, isolationFailure);
-      if (isolationFailure instanceof JMSException jmsFailure) {
-        throw jmsFailure;
+      try {
+        rollbackAfterFailure(context, isolationFailure);
+      } catch (UnconfirmedJmsRollbackException unconfirmed) {
+        throw new FailedJmsIsolationException(unconfirmed, protocolFailure);
       }
-      throw isolationFailure;
+      throw new FailedJmsIsolationException(isolationFailure, protocolFailure);
     }
   }
 

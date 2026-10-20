@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -53,7 +54,7 @@ public final class QuestionWorkConsumers implements AutoCloseable {
               listener.onMessage(context, message);
             } catch (CommittedFatalInboundException fatal) {
               if (result.terminal.compareAndSet(false, true)) onTerminal.accept(fatal);
-            } catch (UnconfirmedJmsRollbackException | Error fatal) {
+            } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);
               if (result.terminal.compareAndSet(false, true)) {
                 if (fatal instanceof Error) {

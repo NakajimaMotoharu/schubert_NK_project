@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.messaging;
 
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -47,8 +48,7 @@ public final class ArtemisReplyConsumer {
   }
 
   private void isolateFatal(
-      JMSContext context, Message message, PermanentProtocolException protocolFailure)
-      throws JMSException {
+      JMSContext context, Message message, PermanentProtocolException protocolFailure) {
     try {
       fatalSender.send(context, message);
       context.commit();
@@ -56,11 +56,12 @@ public final class ArtemisReplyConsumer {
       if (isolationFailure != protocolFailure) {
         isolationFailure.addSuppressed(protocolFailure);
       }
-      rollbackAfterFailure(context, isolationFailure);
-      if (isolationFailure instanceof JMSException jmsFailure) {
-        throw jmsFailure;
+      try {
+        rollbackAfterFailure(context, isolationFailure);
+      } catch (UnconfirmedJmsRollbackException unconfirmed) {
+        throw new FailedJmsIsolationException(unconfirmed, protocolFailure);
       }
-      throw isolationFailure;
+      throw new FailedJmsIsolationException(isolationFailure, protocolFailure);
     }
   }
 
