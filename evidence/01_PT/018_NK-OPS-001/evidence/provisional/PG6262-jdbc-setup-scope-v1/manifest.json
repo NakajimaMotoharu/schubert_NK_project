@@ -1,0 +1,560 @@
+{
+  "actualExit": 0,
+  "additionalAffectedOwners": [],
+  "affectedOwners": [
+    "api:api.messaging.outbound.OutboxDispatcher"
+  ],
+  "formalAccepted": false,
+  "jdbcCallsExecuted": 0,
+  "newAcceptedLeaves": 0,
+  "ownerCount": 19,
+  "owners": [
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.admin.UserMutationApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              18,
+              51,
+              87,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$Outcome transaction(dev.codex.schubert.nk.api.application.admin.UserMutationRequest, java.time.Instant);",
+          "ownedCloseOffsets": [
+            56,
+            94
+          ],
+          "setAutoCommitOffset": 20
+        }
+      ],
+      "sourceSha256": "74e5c40ac50bb668ab0952701208b127d754b5ad933bda8903243ca457c5fc56"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.admin.UserQueryApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              52,
+              88,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$SqlOperation<T>);",
+          "ownedCloseOffsets": [
+            57,
+            95
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "fb0792fa0b6f8940b64d60622adc0f1f9f147f73dbcdcfc11e4c7efd59f63e0d"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.log.LogQueryApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              52,
+              88,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$SqlOperation<T>);",
+          "ownedCloseOffsets": [
+            57,
+            95
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "49a5b7cd753337efd88d570c5822900e8a637978665255754b905e5f3cb35913"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.media.MediaApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              58,
+              94,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.media.MediaApplicationService$SqlOperation<T>);",
+          "ownedCloseOffsets": [
+            63,
+            101
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "0c7042c8c17cc0c424fe891cea51b018f0ec52a59dc1b0ed21825051e7607f93"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.question.QuestionMutationApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              18,
+              51,
+              87,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$Outcome transaction(dev.codex.schubert.nk.api.application.question.QuestionMutationRequest, java.time.Instant);",
+          "ownedCloseOffsets": [
+            56,
+            94
+          ],
+          "setAutoCommitOffset": 20
+        }
+      ],
+      "sourceSha256": "b75346a1d37457dd690baa9a83236f8a78fd0966b645a2b58586e75abdd8bcf4"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.question.QuestionQueryApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              52,
+              88,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$SqlOperation<T>);",
+          "ownedCloseOffsets": [
+            57,
+            95
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "dd5078ed8e4405afdbf4604661a17c21510b878097cdfc530d0f152155d1ecc6"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.question.QuestionSubmissionService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              20,
+              69,
+              96,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$Outcome transaction(dev.codex.schubert.nk.api.application.question.QuestionSubmitRequest, java.time.Instant, long, long) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [
+            76,
+            105
+          ],
+          "setAutoCommitOffset": 23
+        },
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              20,
+              66,
+              93,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private boolean sent(dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$Accepted, dev.codex.schubert.nk.api.application.question.QuestionSubmitRequest, long, long) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [
+            73,
+            102
+          ],
+          "setAutoCommitOffset": 23
+        },
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              102,
+              115,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private void auditRetained(dev.codex.schubert.nk.api.application.question.QuestionSubmitRequest, dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$RetainedRequest) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [
+            107,
+            122
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.question.QuestionWorkerService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              169,
+              202,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(dev.codex.schubert.nk.api.application.question.QuestionWorkerService$DatabaseWork<T>) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [
+            174,
+            208
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.application.scenario.ScenarioApplicationService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              19,
+              58,
+              94,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationService$SqlOperation<T>);",
+          "ownedCloseOffsets": [
+            63,
+            101
+          ],
+          "setAutoCommitOffset": 21
+        }
+      ],
+      "sourceSha256": "fedf4aa2a94ea6ead082db7e3e2617565faa97d6a3d1a150f1e66fe2e05856e4"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.bootstrap.BootstrapAdminMain",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_BORROWED_CONNECTION_CALLER_OWNS",
+          "errorProtectedEdges": [
+            [
+              8,
+              85,
+              93,
+              "any"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  static int createAndCommit(java.sql.Connection, java.lang.String, char[]) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [],
+          "setAutoCommitOffset": 18
+        }
+      ],
+      "sourceSha256": "d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.dispatch.JdbcSyncRequestProcessor",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              25,
+              68,
+              101,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  public byte[] process(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>);",
+          "ownedCloseOffsets": [
+            73,
+            107
+          ],
+          "setAutoCommitOffset": 27
+        }
+      ],
+      "sourceSha256": "8bebd1972e38b02a8c69cdd1647b8880366cca662851f0f03d7fbd351df6345f"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.logging.WebLogIngestService",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              63,
+              94,
+              133,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  public boolean ingest(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>);",
+          "ownedCloseOffsets": [
+            101,
+            142
+          ],
+          "setAutoCommitOffset": 66
+        }
+      ],
+      "sourceSha256": "3ac3e41946ff6d7a7da99cbf1ee2dc95397964e22be7d52e9b846a1312c7278a"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.maintenance.InboxCleanup",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              20,
+              90,
+              130,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T owned(dev.codex.schubert.nk.api.maintenance.InboxCleanup$Work<T>);",
+          "ownedCloseOffsets": [
+            95,
+            136
+          ],
+          "setAutoCommitOffset": 45
+        }
+      ],
+      "sourceSha256": "5a421f78ff2179e385561b6777f030709ab185be18b914c95006bc204ec51d2b"
+    },
+    {
+      "jarSha256": "5f242a01f5b9779c7162d37d2f96cabbea214baa457995100fac3029889faeba",
+      "owner": "api:api.messaging.outbound.OutboxDispatcher",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+      "sites": [
+        {
+          "classification": "AFFECTED_BUG1567_UNRETURNED_SETUP",
+          "errorProtectedEdges": [],
+          "explicitCloseHelper": null,
+          "method": "  private java.sql.Connection transaction() throws java.sql.SQLException;",
+          "ownedCloseOffsets": [],
+          "setAutoCommitOffset": 20
+        }
+      ],
+      "sourceSha256": "30fb18aaed5dbca160cdf886d8af9b11829270b4ad102cb51407cb5983e5c01b"
+    },
+    {
+      "jarSha256": "53643b7bb145b70409123b54b544d89a421cdda560be67f58ace47e6a45f7e64",
+      "owner": "web:web.logging.WebLogDispatcher",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              20,
+              46,
+              102,
+              "Class java/lang/Error"
+            ],
+            [
+              20,
+              46,
+              110,
+              "any"
+            ]
+          ],
+          "explicitCloseHelper": {
+            "actualCloseOffsets": [
+              1
+            ],
+            "method": "  private static void closeAfterFailure(java.sql.Connection, java.lang.Throwable) throws java.sql.SQLException;"
+          },
+          "method": "  private <T> T transaction(dev.codex.schubert.nk.web.logging.WebLogDispatcher$SqlAction<T>) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [],
+          "setAutoCommitOffset": 22
+        }
+      ],
+      "sourceSha256": "8f0f8c34add12f62da5b1f2def4d86127f97dae350dfa79f277a68cada498ac8"
+    },
+    {
+      "jarSha256": "53643b7bb145b70409123b54b544d89a421cdda560be67f58ace47e6a45f7e64",
+      "owner": "web:web.logging.WebRequestLogProducer",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              20,
+              120,
+              135,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private void project(dev.codex.schubert.nk.web.logging.WebLogPayloadIdentity, dev.codex.schubert.nk.web.logging.EncryptedWebLogPayload, java.time.Instant) throws java.sql.SQLException;",
+          "ownedCloseOffsets": [
+            127,
+            144
+          ],
+          "setAutoCommitOffset": 23
+        }
+      ],
+      "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3"
+    },
+    {
+      "jarSha256": "53643b7bb145b70409123b54b544d89a421cdda560be67f58ace47e6a45f7e64",
+      "owner": "web:web.receipt.ReceiptReferenceRepository",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              18,
+              58,
+              113,
+              "Class java/lang/Error"
+            ],
+            [
+              18,
+              58,
+              121,
+              "any"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository$Work<T>);",
+          "ownedCloseOffsets": [
+            59,
+            124
+          ],
+          "setAutoCommitOffset": 20
+        }
+      ],
+      "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e"
+    },
+    {
+      "jarSha256": "53643b7bb145b70409123b54b544d89a421cdda560be67f58ace47e6a45f7e64",
+      "owner": "web:web.revocation.RevocationRetryCoordinator",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXPLICIT_ERROR_CAPTURE_AND_OWNED_CLOSE",
+          "errorProtectedEdges": [
+            [
+              7,
+              70,
+              73,
+              "Class java/lang/Error"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator$SqlWork<T>);",
+          "ownedCloseOffsets": [
+            113
+          ],
+          "setAutoCommitOffset": 31
+        }
+      ],
+      "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d"
+    },
+    {
+      "jarSha256": "53643b7bb145b70409123b54b544d89a421cdda560be67f58ace47e6a45f7e64",
+      "owner": "web:web.session.EncryptedWebSessionRepository",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+      "sites": [
+        {
+          "classification": "NONAPPLICABLE_EXISTING_TWR_OR_FINALLY_PROTECTION",
+          "errorProtectedEdges": [
+            [
+              15,
+              46,
+              59,
+              "Class java/lang/Error"
+            ],
+            [
+              10,
+              46,
+              95,
+              "Class java/lang/Throwable"
+            ]
+          ],
+          "explicitCloseHelper": null,
+          "method": "  private <T> T transaction(dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository$Work<T>);",
+          "ownedCloseOffsets": [
+            51,
+            101
+          ],
+          "setAutoCommitOffset": 17
+        }
+      ],
+      "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae"
+    }
+  ],
+  "qualificationSha256": "4495f3778a40c33c3de9f6fbd1082581fba8f7cf02caafae55687b32928b8bfe",
+  "residual": [
+    "BUG1567 direct target not yet reproduced/fixed",
+    "normal regression and new fault matrix still required",
+    "TWR/other finally compound exception identity is outside this narrow non-returned setup gap and remains existing broader ledgers"
+  ],
+  "scope": "STATIC_ORIGINAL_JVM_FOR_UNRETURNED_SETUP_ERROR_ONLY_NOT_ALL_COMPOUND_FAILURES",
+  "setupSites": 21,
+  "source": "97dd2ba6185143632439f32dfc1d663061f1e55c",
+  "testsExecuted": 0,
+  "vmActions": 0
+}
