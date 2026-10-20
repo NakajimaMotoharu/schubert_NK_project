@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-016 — PT_DEFAULT：恒久隔離是正後の必要全3967
+
+1217/PG5832/source6b5cea563、元3955再確認ではなくSS322のnew共通型・既六Main是正と新12/三suiteのsame-source統合検証。既fixture profile/専用mini固定key/offline・自己所有一時DB/in-process broker等だけで、guest/Unit/current/原本DBBackup/鍵/permit/failed-cohort不操作。限定66/18と全851/1666/ABI/無除外staticの独立証拠を前提とし、発行前現job/headroom/new-only namespace/source/hashを認証して一回だけ実行する。未知拒否HOLDは維持、通常PTを拒否代替へ混ぜず、終了後は元XML/physical/counterと真正終端を独立資格確認する。
+
 ## PTPRE-015 — PT_DEFAULT：SS322の隔離失敗exit、八つの有限独立red
 
 1216/BUG1494/YKT1254、Main2e3bを保ち新Test sourceだけ追加。API Sync/Question/WebLog各checked/RuntimeとWeb reply二case、fake Message/Contextのmetadata read失敗＋正常rollbackからready/fatal/ACK/再入を確認する。Fixtureはメモリproxy・固定合成例外とClock、予期しないoperation0をassertする。実provider/DB/VM/サービス/権限/原本/鍵/permit/failed-cohort不操作、未知拒否の探査/再試行やPT代替ではない。原3955は終了/独立資格済みで再起動しない。redの依存skipは未合格、未実施Webだけ別runで補完し、PGの後に通常green/必要全体へ進む。
