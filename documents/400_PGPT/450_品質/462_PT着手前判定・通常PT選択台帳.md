@@ -1,5 +1,8 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-012 — PT_DEFAULT：JMS三guard後の必要host全3939
+
+1202/PG5780、source2bbb、元14限定green/独立849source・1664byte二差/全ABI・新六branchを前提に、同sourceの新3939/583全体へ進む。旧3932の再確認ではなく新七proxy caseを含む統合再試験。既専用host mini/pinned key/offline worker1/自己所有temporary DB・broker等のfixture profileは従前と同じ、guest/Unit/current/原本/鍵/permit/failed-cohort不操作。元job無し・headroom・未使用namespace・source/hashを発行前認証し、一回だけ新実行する。未知拒否へのprobe/代替試験ではなく、終了/独立資格まで未受入。
 ## PTPRE-011 — PT_DEFAULT：JMS自己suppressionの有限proxy七件
 
 BUG1485/YKT1245・1200、API InboundTransactionsPrimaryContractTest五件とWeb ReplyIsolationPrimaryContractTest二件。固定RuntimeException/Protocol例外/equals-true別例外/Errorと、許可methodだけを受けるメモリJMSContext/Message proxyを使用。呼ぶのは通常例外/rollback/isolation制御だけで、proxyはgetSessionMode/rollback/合成property/明示createProducer失敗以外を拒否、実Broker/DB/network/service/VM/鍵/原本/permit/failed-cohort操作0。実wire/credential/cookie/sessionを入れない。test-only redで元Main1664同byteと正確な三失敗を確認し、三identity guard後の別greenへ進む。既元3932は元sourceだけの証拠で新sourceへ加算せず、変更群の必要全体は後で一回まとめる。Normal PTであり拒否PT代替ではない。

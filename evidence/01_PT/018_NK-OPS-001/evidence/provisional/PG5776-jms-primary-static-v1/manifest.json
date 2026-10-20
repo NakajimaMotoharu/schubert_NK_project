@@ -1,0 +1,76 @@
+{
+  "actualExit": 0,
+  "source": "2bbb85a297d7f7bd1b0c243d343e0da509faf99a",
+  "previousMainSource": "9463db1ac23437043facf95b87f64b9fc7e758bd",
+  "changedSourcePaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java"
+  ],
+  "physicalMain": 1664,
+  "changedPhysicalClasses": [
+    "api:dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.class",
+    "web:dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.class"
+  ],
+  "unchangedPhysicalClasses": 1662,
+  "allFieldAndMethodDescriptorsUnchanged": true,
+  "inputSourceFiles": 849,
+  "actualAuxClasses": 1664,
+  "pmdExit": 4,
+  "pmdRawFindings": 1585,
+  "ruleCounts": {
+    "AvoidLiteralsInIfCondition": 154,
+    "AssignmentInOperand": 23,
+    "AvoidCatchingGenericException": 615,
+    "CompareObjectsWithEquals": 68,
+    "AvoidSynchronizedStatement": 175,
+    "DoNotUseThreads": 239,
+    "AvoidInstanceofChecksInCatchClause": 109,
+    "CloseResource": 70,
+    "AvoidUsingVolatile": 25,
+    "EmptyCatchBlock": 19,
+    "DoNotThrowExceptionInFinally": 52,
+    "UseConcurrentHashMap": 21,
+    "NullAssignment": 3,
+    "ReturnEmptyCollectionRatherThanNull": 1,
+    "HardCodedCryptoKey": 1,
+    "AvoidSynchronizedAtMethodLevel": 4,
+    "UnusedReturnValue": 4,
+    "AvoidDuplicateLiterals": 1,
+    "UseProperClassLoader": 1
+  },
+  "pmdProcessingErrors": 0,
+  "checkstyleExit": 0,
+  "checkstyleFindings": 0,
+  "newGuardsActualCoverage": [
+    {
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "line": 38,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure"
+    },
+    {
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "line": 52,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "failure != rollbackFailure"
+    },
+    {
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "line": 56,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure"
+    }
+  ],
+  "selectedManifestSha256": "261f2a0bd470dc2e4886c9580d5a91aad1f9d04e5b768349cfea694da7f4d792",
+  "pmdXmlSha256": "043b32299057c3a6a5d58869c0cfa1f3947f23e4fc11f93ac554955f7d0e5913",
+  "checkstyleXmlSha256": "1f53bd8ef149483da921658b99afde4b5fc5b29545b5fc9cacf3c171374af4bd",
+  "formalAccepted": false,
+  "F03Accepted": false,
+  "fullCoverageClaimed": false,
+  "ptAlternativeCompleted": 0,
+  "vmActions": 0,
+  "privateManifestSha256": "20d59881ea4470164681f82ab299b1f70e6dc01108e3792b9a98cd89ba5d4c87"
+}

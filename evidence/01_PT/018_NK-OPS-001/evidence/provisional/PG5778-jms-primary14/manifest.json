@@ -1,0 +1,405 @@
+{
+  "actualExit": 0,
+  "archiveSha256": "e103b77e4e09742ed4148d92e383eb6c90cbe4d654a29d271740602216f86edf",
+  "completedUTC": "2026-10-20T00:31:42.692658+00:00",
+  "exactInventory": true,
+  "executionKind": "NORMAL_EXECUTED_PT_NOT_ALTERNATIVE",
+  "failedOrSkipped": [],
+  "formalAccepted": false,
+  "fullCoverageClaimed": false,
+  "fullRegressionPending": true,
+  "phase": "green",
+  "phaseExits": [
+    0,
+    0
+  ],
+  "ptAlternativeCompleted": 0,
+  "purposefulRedEstablished": false,
+  "selectedQualified": true,
+  "source": "2bbb85a297d7f7bd1b0c243d343e0da509faf99a",
+  "sourceFixed": true,
+  "startedUTC": "2026-10-20T00:29:35.668935+00:00",
+  "staticIssues": {
+    "api": 0,
+    "batch": 0,
+    "bootstrap": 0,
+    "protocol": 0,
+    "storage": 0,
+    "web": 0
+  },
+  "suites": 7,
+  "targetCounters": {
+    "api:api/messaging/inbound/InboundTransactions": {
+      "BRANCH": {
+        "covered": 5,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 16,
+        "missed": 5
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "web:web/messaging/ArtemisReplyConsumer": {
+      "BRANCH": {
+        "covered": 4,
+        "missed": 4
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 18,
+        "missed": 18
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      }
+    }
+  },
+  "targetFour100": false,
+  "targetFour100RequiredBeforeProgramCompletion": true,
+  "tests": 14,
+  "vmActions": 0,
+  "xmlHashes": {
+    "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": {
+      "module": "bootstrap",
+      "sha256": "669cf2117d68a54cf4d26a29d171b8a92a6e23a89f1816fc739bab188e4df044"
+    },
+    "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest": {
+      "module": "api",
+      "sha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest": {
+      "module": "batch",
+      "sha256": "b9ac538f76f9be6228f3dbdab40d1afdc69997173dcc4bf40f498a2873f373c0"
+    },
+    "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest": {
+      "module": "batch",
+      "sha256": "95604ebd775c63d27fc1e1374a59cdd73bf5eed4a1f1f2f2964d0487acba1758"
+    },
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": {
+      "module": "protocol",
+      "sha256": "ee27adb3020f4b92daf685ac06902b5821280f65906819a943d490722338b58d"
+    },
+    "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": {
+      "module": "storage",
+      "sha256": "cb06f5eaafb2b0983ff07504da449a947f5b8ab985cb3ca8e1cc2b43190c4b41"
+    },
+    "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest": {
+      "module": "web",
+      "sha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d"
+    }
+  },
+  "branch": "dev-foundation",
+  "run": "pg5774-jms-primary-green-v1",
+  "hostOS": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "jdk": "25.0.4",
+  "maven": "3.9.12",
+  "jacoco": "0.8.15",
+  "spotbugsPlugin": "4.10.4.0",
+  "commands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-fae",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+      "spotless:check"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-B",
+      "-o",
+      "-ntp",
+      "-fae",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "-pl",
+      "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+      "-Dtest=dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest,dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest,dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest,dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest,dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest,dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest,dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+      "-Dsurefire.failIfNoSpecifiedTests=false",
+      "package",
+      "org.jacoco:jacoco-maven-plugin:0.8.15:report",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ]
+  ],
+  "actualMainClasses": 1664,
+  "actualTestCases": [
+    {
+      "testId": "PT-WHOLE-d2affb77af63e999f10503cccac095df8ac6f631d49767bac3fbe92a5917da41",
+      "module": "bootstrap",
+      "class": "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "a3437c66a2714dcde4da6cddc0d04476165946d61ccac8f6c162c9bca36dd5b5",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest.xml",
+      "xmlSha256": "669cf2117d68a54cf4d26a29d171b8a92a6e23a89f1816fc739bab188e4df044",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-81632e19c894ff86fc0ef0b5c62ae33e54109cb71840a2e14dbc54ce8b725bb5",
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "0b9713ac6fae8307bd1990ed0a9784887d9c803cc19afaa8993f9c64ddaaa6e6",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest.xml",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-49e43301d1ddd49b940066c85d2ee14efe7787749638d713c670b7dba95d0922",
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "ec72d170f10fcb4cba0fb95a643f74a4b6c2cbd744f8887d90979038534d23b1",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest.xml",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-345434e35e7734651696ceda943c6fb6e5c3961ed30c0cd2c0dae03b0b31a13e",
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "aaa3e3d28c79f0f6976542415c527b369ce0c3296d537aa22dfa8303afeb78bb",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest.xml",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-cffeaee3ed45c1d903856b5f850fe6b0a16d150b545af71a1017474033916493",
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "caseOrdinalInXml": 4,
+      "caseNameSha256": "a0a246fa5578a5d1594637bc55ec7f6aa4fe5f221b371fcb446bed8d110eed09",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest.xml",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-f2f038e9e00bbbd197d0d332dafda90e4321a9626b9442d394045d5c92bea828",
+      "module": "api",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "caseOrdinalInXml": 5,
+      "caseNameSha256": "fe3b8be63c321c4e866f4e598d031c792689b882492c32e26aae3077fc67e83f",
+      "sourceXml": "TEST-dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest.xml",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9f3f1feb7037ae8cc838f05c0e029755cee5b7d2a48af040a8b2e9bb501bee66",
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "4c10114e444cd685bdabc27e1baecc120d5e5b795cfe2728a9243ccd1d0bb97e",
+      "sourceXml": "TEST-dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest.xml",
+      "xmlSha256": "b9ac538f76f9be6228f3dbdab40d1afdc69997173dcc4bf40f498a2873f373c0",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-b2c2aee8553bac5928716fad30674bcdc221c47fc08ceb2e9c283ac297bd1987",
+      "module": "batch",
+      "class": "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "98799bbb68895c5c10985066a99ba477534408c406ceb33077c6b1e78cb2c971",
+      "sourceXml": "TEST-dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest.xml",
+      "xmlSha256": "95604ebd775c63d27fc1e1374a59cdd73bf5eed4a1f1f2f2964d0487acba1758",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-4afca431561a58e7293455b12b48482b2c6dd76f2c7c25b9ec61afdadbe901cf",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "ff87a9041a8fd7502199b3e00c08271f2bc25eff559dd0df9056d55dbcc82390",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "ee27adb3020f4b92daf685ac06902b5821280f65906819a943d490722338b58d",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-5dc54e6259dddd78d1d0becd3433d2ba20cd280581fa15a1c8250ced0c23e3d4",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "1d2e3fb1a96f12805a88895ef336fbf5754e08db14407279ecd62acbfb9c5975",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "ee27adb3020f4b92daf685ac06902b5821280f65906819a943d490722338b58d",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-04442756b18b52352761b9d46192ac670bf10f6a24326fefa49b55361e52d150",
+      "module": "protocol",
+      "class": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "caseOrdinalInXml": 3,
+      "caseNameSha256": "af3f145850aff994bd655fb7ece401cd128a8b8f35af69f9653daa956a02d1f5",
+      "sourceXml": "TEST-dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest.xml",
+      "xmlSha256": "ee27adb3020f4b92daf685ac06902b5821280f65906819a943d490722338b58d",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-9f5eb8013d11a0672e9ec3e4a564050cf965f246c682da729dbf1f8e90842d44",
+      "module": "storage",
+      "class": "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "cfbad0131eb5dd018d6a2568ed182eae5fa8bfd8ca5c4c51edbd81799b5e98cd",
+      "sourceXml": "TEST-dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest.xml",
+      "xmlSha256": "cb06f5eaafb2b0983ff07504da449a947f5b8ab985cb3ca8e1cc2b43190c4b41",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-a256a7271c92e638adf73c2846d188301ce3e1e9fea0da4ea3e93c0cd7ce7e4f",
+      "module": "web",
+      "class": "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+      "caseOrdinalInXml": 1,
+      "caseNameSha256": "50a8a593383a632a9268271faf4762e39d1f88a4e7d3e9da8acf1a8bcc033817",
+      "sourceXml": "TEST-dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest.xml",
+      "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d",
+      "result": "PASS_ORIGINAL_XML"
+    },
+    {
+      "testId": "PT-WHOLE-2c5d4b1450f6a004a4d3bc5ed8ceaaa27848ca973434f94606969aa886231947",
+      "module": "web",
+      "class": "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+      "caseOrdinalInXml": 2,
+      "caseNameSha256": "c71bbbd10088eac519e1c56fc593fb0a6c79abee1df3706dd62d11de4c2e3705",
+      "sourceXml": "TEST-dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest.xml",
+      "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d",
+      "result": "PASS_ORIGINAL_XML"
+    }
+  ],
+  "newDesignTestIdTrace": [
+    {
+      "designTestId": "PT-JMS-PRE003",
+      "method": "jmsP003RollbackErrorRemainsFatalAndSameIdentity",
+      "actualTestId": "PT-WHOLE-81632e19c894ff86fc0ef0b5c62ae33e54109cb71840a2e14dbc54ce8b725bb5",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    {
+      "designTestId": "PT-JMS-PRE002",
+      "method": "jmsP002DistinctEqualsTrueRollbackFailureIsRetainedByIdentity",
+      "actualTestId": "PT-WHOLE-49e43301d1ddd49b940066c85d2ee14efe7787749638d713c670b7dba95d0922",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    {
+      "designTestId": "PT-JMS-PRE001",
+      "method": "jmsP001SameRollbackFailureNeverSelfSuppresses",
+      "actualTestId": "PT-WHOLE-345434e35e7734651696ceda943c6fb6e5c3961ed30c0cd2c0dae03b0b31a13e",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    {
+      "designTestId": "PT-JMS-PRE005",
+      "method": "jmsP005DistinctIsolationFailureRetainsProtocolAndNeverCommits",
+      "actualTestId": "PT-WHOLE-cffeaee3ed45c1d903856b5f850fe6b0a16d150b545af71a1017474033916493",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    {
+      "designTestId": "PT-JMS-PRE004",
+      "method": "jmsP004SameProtocolIsolationFailureRemainsOriginalAndUncommitted",
+      "actualTestId": "PT-WHOLE-f2f038e9e00bbbd197d0d332dafda90e4321a9626b9442d394045d5c92bea828",
+      "xmlSha256": "56776c0bd85abed424cd8dfc25d230502f64685f0c6eab326901a64746110512"
+    },
+    {
+      "designTestId": "PT-JMS-PRE007",
+      "method": "jmsP007DistinctIsolationFailureRetainsProtocolAndNeverCommits",
+      "actualTestId": "PT-WHOLE-a256a7271c92e638adf73c2846d188301ce3e1e9fea0da4ea3e93c0cd7ce7e4f",
+      "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d"
+    },
+    {
+      "designTestId": "PT-JMS-PRE006",
+      "method": "jmsP006SameProtocolIsolationFailureNeverSelfSuppressesOrCommits",
+      "actualTestId": "PT-WHOLE-2c5d4b1450f6a004a4d3bc5ed8ceaaa27848ca973434f94606969aa886231947",
+      "xmlSha256": "a6ef33efc5f05001bd35ea2519c66c14c79fb7d347dbb8ea011583c0745aa75d"
+    }
+  ],
+  "coverageXmlHashes": {
+    "api": "2a282ddc71fd7d841486f41b191be0712759541ad6eeaeeb0a3bea893e9720e6",
+    "batch": "c02a3ca20b8898cd0b247e3bf95b6383a2d15c87cdaa6fe3e70df25aa14f3813",
+    "bootstrap": "22d3053aea3f2c3dd7810a6470d2147380b10430cc6cdddd2b259ea123d7ce1f",
+    "protocol": "476e8b6c33f8aae6e451c91fae2c87c4897e55846d6789b40f4c36eeeb48f276",
+    "storage": "05f3cd45d546d3a21950af8c8a818281ece7a9d85fc1bb2e7d984a5ad3fa3413",
+    "web": "cc19d8b2a30fa34e362fff3e34b6cbeacdc9ce94ce3ca7b430a2dfa1292a01eb"
+  },
+  "privateManifestSha256": "261f2a0bd470dc2e4886c9580d5a91aad1f9d04e5b768349cfea694da7f4d792",
+  "independentStaticManifestSha256": "aa0368e648a0d1e25d2413e9aa8c08966a30feeea5ea87b3841e78fc66abf72f",
+  "purposefulApiRed": {
+    "originalActualExit": 1,
+    "originalSource": "a677e6afeb2c26e26b85112e7627719273a53705",
+    "productionMainSource": "9463db1ac23437043facf95b87f64b9fc7e758bd",
+    "originalManifestSha256": "7a9ebcc48ba8971997d25b951aec3cfbaf37d108b9f7b9703c2c9db2d2b5e2fe",
+    "purposefulApiRedEstablished": true,
+    "wholeRedEstablished": false,
+    "webTestsNotRun": 2,
+    "actualCompiledMainClasses": 1349,
+    "unbuiltMainClasses": 315,
+    "all849MainSourceUnchanged": true,
+    "assessmentSha256": "ad67c81903c0b3b8b0571b5ec92547f7d70a0ae557b1a8094ba6158339369b02",
+    "redPurposeTests": 2,
+    "passedAddedToGreen": 0
+  },
+  "purposefulWebRed": {
+    "source": "faa590a5cca16f8a37f5581aa6de8317ebd48d53",
+    "actualExit": 1,
+    "startedUTC": "2026-10-20T00:26:59.639902+00:00",
+    "completedUTC": "2026-10-20T00:28:59.020087+00:00",
+    "archiveSha256": "11ac47827983a6e7c5a92f74fef012cbeac5d61236b61ab911c08533545b3bbe",
+    "tests": 10,
+    "suites": 7,
+    "failedOrSkipped": [
+      [
+        "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+        "jmsP006SameProtocolIsolationFailureNeverSelfSuppressesOrCommits"
+      ]
+    ],
+    "purposefulRedEstablished": true,
+    "manifestSha256": "91033c40cd0a612547c800960bd8764b6c6265c7e1812222600aa6313167d08f",
+    "redPurposeTests": 1,
+    "passedAddedToGreen": 0
+  },
+  "oracleRef": "1200_JMS原例外自己抑制_単体テスト仕様書.md",
+  "bugRefs": [
+    "BUG1485",
+    "BUG1486"
+  ],
+  "yktRefs": [
+    "YKT1245",
+    "YKT1246"
+  ],
+  "newGuardsActualCoverage": [
+    {
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "line": 38,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure"
+    },
+    {
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "line": 52,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "failure != rollbackFailure"
+    },
+    {
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "line": 56,
+      "missedBranches": 0,
+      "coveredBranches": 2,
+      "guard": "isolationFailure != protocolFailure"
+    }
+  ],
+  "coverageExclusionsAdded": 0,
+  "fullCurrentSourceAcceptance": false,
+  "liveResourcesVerified": false,
+  "refusalScope": "PTALT001/002 unresolved; dependent operations held"
+}
