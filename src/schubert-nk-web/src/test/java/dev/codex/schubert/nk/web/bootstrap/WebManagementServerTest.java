@@ -18,6 +18,135 @@ import org.junit.jupiter.api.Test;
  * Independent actual HTTP status/JSON literals, not a native startup admission. WEB-READY001..003.
  */
 final class WebManagementServerTest {
+  /** BUG1561/YKT1318/PG-D471: fixed independent eight-input exception-priority matrix. */
+  @Test
+  void ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic() throws Exception {
+    for (int primaryKind = 0; primaryKind < 2; primaryKind++) {
+      for (int cleanupKind = 0; cleanupKind < 4; cleanupKind++) {
+        Throwable primary =
+            primaryKind == 0
+                ? new IllegalStateException("fixture primary")
+                : new AssertionError("fixture primary");
+        java.util.Optional<Throwable> secondary =
+            switch (cleanupKind) {
+              case 0 -> java.util.Optional.empty();
+              case 1 -> java.util.Optional.of(new IllegalStateException("fixture private cleanup"));
+              case 2 -> java.util.Optional.of(new AssertionError("fixture private cleanup"));
+              default -> java.util.Optional.of(primary);
+            };
+        var fixture = new CompoundFailureServer(primary, secondary);
+        try {
+          var actual =
+              assertThrows(
+                  Throwable.class,
+                  () ->
+                      WebManagementServer.open(INFO, () -> true, 0, (address, backlog) -> fixture));
+          assertEquals(1, fixture.setupCalls);
+          assertEquals(1, fixture.stopCalls);
+          if (secondary.orElse(null) instanceof Error && !(primary instanceof Error)) {
+            assertSame(secondary.orElseThrow(), actual);
+            assertEquals(0, primary.getSuppressed().length);
+          } else {
+            assertSame(primary, actual);
+            if (secondary.orElse(null) == primary) assertEquals(0, actual.getSuppressed().length);
+            else {
+              assertEquals(1, actual.getSuppressed().length);
+              var diagnostic = actual.getSuppressed()[0];
+              assertEquals(IOException.class, diagnostic.getClass());
+              assertEquals("Web management stop unconfirmed", diagnostic.getMessage());
+              assertNull(diagnostic.getCause());
+              assertNotSame(secondary.orElse(null), diagnostic);
+            }
+          }
+        } finally {
+          fixture.dispose();
+        }
+      }
+    }
+  }
+
+  /** No socket is opened: only the prepared owner executor and compound exception boundary. */
+  private static final class CompoundFailureServer extends com.sun.net.httpserver.HttpServer {
+    private final Throwable primary;
+    private final java.util.Optional<Throwable> secondary;
+    private java.util.Optional<java.util.concurrent.ThreadPoolExecutor> executor =
+        java.util.Optional.empty();
+    private int setupCalls;
+    private int stopCalls;
+
+    CompoundFailureServer(Throwable primary, java.util.Optional<Throwable> secondary) {
+      this.primary = primary;
+      this.secondary = secondary;
+    }
+
+    void dispose() throws InterruptedException {
+      if (executor.isEmpty()) return; // No acquired executor; preserve the original assertion.
+      var owned = executor.orElseThrow();
+      owned.shutdownNow();
+      assertTrue(owned.awaitTermination(3, java.util.concurrent.TimeUnit.SECONDS));
+    }
+
+    private static void fail(Throwable marker) {
+      if (marker instanceof RuntimeException runtime) throw runtime;
+      throw (Error) marker;
+    }
+
+    @Override
+    public void setExecutor(java.util.concurrent.Executor value) {
+      executor = java.util.Optional.of((java.util.concurrent.ThreadPoolExecutor) value);
+      setupCalls++;
+      fail(primary);
+    }
+
+    @Override
+    public java.util.concurrent.Executor getExecutor() {
+      return executor.orElseThrow();
+    }
+
+    @Override
+    public void stop(int delay) {
+      assertEquals(0, delay);
+      stopCalls++;
+      secondary.ifPresent(CompoundFailureServer::fail);
+    }
+
+    @Override
+    public void start() {
+      throw new AssertionError("unexpected fixture start");
+    }
+
+    @Override
+    public void bind(java.net.InetSocketAddress address, int backlog) {
+      throw new AssertionError("unexpected fixture bind");
+    }
+
+    @Override
+    public com.sun.net.httpserver.HttpContext createContext(
+        String path, com.sun.net.httpserver.HttpHandler handler) {
+      throw new AssertionError("unexpected fixture context");
+    }
+
+    @Override
+    public com.sun.net.httpserver.HttpContext createContext(String path) {
+      throw new AssertionError("unexpected fixture context");
+    }
+
+    @Override
+    public void removeContext(String path) {
+      throw new AssertionError("unexpected fixture context removal");
+    }
+
+    @Override
+    public void removeContext(com.sun.net.httpserver.HttpContext context) {
+      throw new AssertionError("unexpected fixture context removal");
+    }
+
+    @Override
+    public java.net.InetSocketAddress getAddress() {
+      return new java.net.InetSocketAddress("127.0.0.1", 0);
+    }
+  }
+
   /** SS342/SSC312/PG-D461/PT-HTTP-OWN002: acquisition failure never becomes an owner. */
   @Test
   void httpOwn002FactoryFailureIdentityAndNullAreNotStarted() {

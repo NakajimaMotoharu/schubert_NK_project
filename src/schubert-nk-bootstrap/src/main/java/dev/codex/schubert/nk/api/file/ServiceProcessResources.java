@@ -212,7 +212,8 @@ public final class ServiceProcessResources {
    * SSC316: fixed native retention only; no retry, release, normal completion or raw diagnostic.
    */
   public static void retainUnknownRelease(Throwable unconfirmed) {
-    retainUnknownRelease(unconfirmed, UNKNOWN_OBSERVATION, UNKNOWN_FALLBACK);
+    diagnoseUnknownRelease(unconfirmed);
+    while (true) observeUnknownInterval(UNKNOWN_OBSERVATION, UNKNOWN_FALLBACK);
   }
 
   // Prebuilt fault ports permit finite component observation; native policy always fixes both.
@@ -220,20 +221,28 @@ public final class ServiceProcessResources {
     Objects.requireNonNull(unconfirmed, "unconfirmed release");
     Objects.requireNonNull(observation, "unconfirmed observation");
     Objects.requireNonNull(fallback, "unconfirmed fallback");
+    diagnoseUnknownRelease(unconfirmed);
+    while (true) observeUnknownInterval(observation, fallback);
+  }
+
+  // PG-D472/SS318: finite protected actions; each native/test entry owns its non-returning loop.
+  private static void diagnoseUnknownRelease(Throwable unconfirmed) {
+    Objects.requireNonNull(unconfirmed, "unconfirmed release");
     try {
       System.err.println("service resource release unconfirmed");
     } catch (RuntimeException | Error unavailableDiagnostic) {
       // Diagnostic failure is still UNKNOWN, not permission to unwind or report normal cleanup.
     }
-    while (true) {
+  }
+
+  private static void observeUnknownInterval(Runnable observation, Runnable fallback) {
+    try {
+      observation.run();
+    } catch (RuntimeException | Error unavailableObservation) {
       try {
-        observation.run();
-      } catch (RuntimeException | Error unavailableObservation) {
-        try {
-          fallback.run();
-        } catch (RuntimeException | Error unavailableFallback) {
-          // Even a VM-level wait failure cannot make an unconfirmed release successful.
-        }
+        fallback.run();
+      } catch (RuntimeException | Error unavailableFallback) {
+        // A failed tick never releases ownership; the calling loop still cannot return.
       }
     }
   }
@@ -242,8 +251,9 @@ public final class ServiceProcessResources {
   static void waitUnknownInterval() {
     long deadline = System.nanoTime() + OBSERVATION_NANOS;
     Thread.interrupted();
-    long left;
-    while ((left = deadline - System.nanoTime()) > 0) {
+    while (true) {
+      long left = deadline - System.nanoTime();
+      if (left <= 0) return;
       LockSupport.parkNanos(left);
       Thread.interrupted();
     }

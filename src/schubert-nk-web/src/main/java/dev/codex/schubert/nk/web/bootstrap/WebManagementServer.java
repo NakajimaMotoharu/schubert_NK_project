@@ -23,6 +23,7 @@ import java.util.function.BooleanSupplier;
 final class WebManagementServer implements AutoCloseable {
   private static final String INFORMATION_PATH = "/actuator/info";
   private static final String METRICS_PATH = "/actuator/prometheus";
+  private static final String STOP_UNCONFIRMED = "Web management stop unconfirmed";
   private static final int JSON_OPENING_DELIMITER_LENGTH = 1;
 
   @FunctionalInterface
@@ -58,6 +59,8 @@ final class WebManagementServer implements AutoCloseable {
   static WebManagementServer open(
       Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
       throws IOException {
+    // PG-D471/PT-WEB-READY007: fixed secondary exists before acquiring the bound owner.
+    var cleanupDiagnostic = new IOException(STOP_UNCONFIRMED);
     var result = bind(information, healthy, port, factory);
     try {
       result.start();
@@ -67,6 +70,9 @@ final class WebManagementServer implements AutoCloseable {
         result.close();
       } catch (IOException closing) {
         failure.addSuppressed(closing);
+      } catch (RuntimeException | Error unconfirmed) {
+        if (unconfirmed instanceof Error && !(failure instanceof Error)) throw unconfirmed;
+        if (unconfirmed != failure) failure.addSuppressed(cleanupDiagnostic);
       }
       throw failure;
     }
@@ -221,12 +227,12 @@ final class WebManagementServer implements AutoCloseable {
       executor.shutdownNow();
       try {
         if (!executor.awaitTermination(remaining.toNanos(), TimeUnit.NANOSECONDS))
-          throw new IOException("Web management stop unconfirmed");
+          throw new IOException(STOP_UNCONFIRMED);
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
-        throw new IOException("Web management stop unconfirmed");
+        throw new IOException(STOP_UNCONFIRMED);
       }
-      if (!started) throw new IOException("Web management stop unconfirmed");
+      if (!started) throw new IOException(STOP_UNCONFIRMED);
       closed.set(true);
     } finally {
       stopLock.unlock();
