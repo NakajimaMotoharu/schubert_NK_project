@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "source": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+  "baseManifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG5920-buffer-map-contracts-v2/manifest.json",
+  "baseManifestSha256": "7a874e49cbcc7946f9651784dbd092af3a791c035f152761e3619e2133bd365e",
+  "decisionsSha256": "3785851958f559b97d6399ef69bf9c20cacaa250f7dbc35f02a615d01b7f4729",
+  "rawFindings": 1544,
+  "newIndividualDispositions": 13,
+  "exactDirectRethrowScopes": 7,
+  "currentCatchFactsSha256": "bd5bf95bc9b301958f6f0cac23437f79cb3889fd6bc74cbb5f1ed9ec5323fc2b",
+  "statusCounts": {
+    "NOT_REVIEWED_CURRENT_SOURCE": 999,
+    "SOURCE_REBOUND_CURRENT_WHOLE_PENDING": 545
+  },
+  "scopes": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "method": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient#putAcceptorsOperation(org.apache.activemq.artemis.api.core.client.ClientMessage)",
+      "catchFirstLine": "172",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "19e12b2dd7189ea873d8c7dc69ab7d01b74f1ce0c17faecf5acddf49e490a44c",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "method": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient#putRolesOperation(org.apache.activemq.artemis.api.core.client.ClientMessage,java.lang.String)",
+      "catchFirstLine": "203",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "19e12b2dd7189ea873d8c7dc69ab7d01b74f1ce0c17faecf5acddf49e490a44c",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "method": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient#putExpiryOperation(org.apache.activemq.artemis.api.core.client.ClientMessage,java.lang.String,java.lang.String)",
+      "catchFirstLine": "241",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "19e12b2dd7189ea873d8c7dc69ab7d01b74f1ce0c17faecf5acddf49e490a44c",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "method": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient#putAddressSettingsOperation(org.apache.activemq.artemis.api.core.client.ClientMessage,java.lang.String)",
+      "catchFirstLine": "253",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "19e12b2dd7189ea873d8c7dc69ab7d01b74f1ce0c17faecf5acddf49e490a44c",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "method": "dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient#query(org.apache.activemq.artemis.api.core.client.ClientSession,dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient.MessageWriter)",
+      "catchFirstLine": "297",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "19e12b2dd7189ea873d8c7dc69ab7d01b74f1ce0c17faecf5acddf49e490a44c",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+      "method": "dev.codex.schubert.nk.bootstrap.LinuxSystemdSession.Native#invoke(java.lang.invoke.@org.jspecify.annotations.Nullable MethodHandle,java.lang.Object[])",
+      "catchFirstLine": "517",
+      "type": "java.lang.RuntimeException|java.lang.Error",
+      "followingCheckedBoundary": "Throwable",
+      "bodySha256": "38e6e3b24a0fe8958a6d10e35578ddb75733486480e2f30cc70c0f92b615fc17",
+      "diagnostics": 2
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+      "method": "dev.codex.schubert.nk.web.messaging.WebBrokerContexts#close()",
+      "catchFirstLine": "118",
+      "type": "java.lang.Error",
+      "followingCheckedBoundary": "Exception",
+      "bodySha256": "5b3a40323cd8db3f373dc56900290baee6d5929c74358d72617921b163a4ca3c",
+      "diagnostics": 1
+    }
+  ],
+  "currentWholeJoinPending": true,
+  "historicalPtImportedAsCurrent": false,
+  "executedPtAdded": 0,
+  "ptAlternativeCompleted": 0,
+  "sourceCodeChanged": false,
+  "implementationReviewedNoChangeRequired": true,
+  "wholeReplayed": false,
+  "F03Accepted": false,
+  "formalAccepted": false,
+  "vmActions": 0
+}
