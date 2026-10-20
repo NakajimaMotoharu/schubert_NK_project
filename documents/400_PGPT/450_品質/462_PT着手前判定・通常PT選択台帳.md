@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-036 — PT_DEFAULT：HTTP群変更後の同source全3988/595
+
+1288。前提はPG6112真正1939/318→6114原XML/全8511667/六Jar/無除外静的→6116実三owner順序/ABI。未成立時に発行しない。元870の3985と599925を新acbへ合算0、三HTTP owner＋一lock modifierをまとめた必要横断である。pg6118のdefinition2unit/pg6120のreader完全payload/export/source追加3caseと既reader4unitを先行、wrapperは既通常非root有限hostprofileから件数/source/新namespaceだけ変更し、VM/current/Root/failed-cohort/permit/原本DBBackupへ接続・操作しない。fresh枠/clean source/ordinary同job無し/headroomを先行し一回、固定snapshotは真正終端まで変更しない。全体費主K01.01/F03参照0、定義準備は1480内・実全体stage見積0.5/1.5/4、受入criteria/全四100/正式/native/CHRは別照合。
+
 ## PTPRE-035 — PT_DEFAULT：SSC312 HTTP owner三箇所・全API/Web
 
 1286/PG-D461/1545YKT1305、main ff8268606 design-only反映済。全known元job終了後の三Main/三既Testに新独立@Test各一。通常finite self-owned host snapshot（tempPG/in-processJMS/loopbackHTTP/有限child/固定DOM）だけ、実VM/配備/Root/current/failed-cohort/intent/permit/原本DBBackup/鍵へアクセスしない。工具6112は既通常API/Webprofileの対象と件数のみ変更し、source固定/clean operator/新onlynamespace・六format先行/型nullSpotBugs/原XML/全1667Mainと三対象四counterを要求する。見込1939/318は宣言集計で照合後に一回開始し、未確認終端を再発行しない。拒否対象probe/PT代替への算入0。
