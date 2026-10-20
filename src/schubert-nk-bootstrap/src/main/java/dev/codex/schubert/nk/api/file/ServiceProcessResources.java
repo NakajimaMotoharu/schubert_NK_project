@@ -16,6 +16,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.Consumer;
 import javax.sql.DataSource;
 import org.jspecify.annotations.NullMarked;
@@ -29,6 +31,16 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ServiceProcessResources {
+  private static final long OBSERVATION_MILLIS = 1000;
+  private static final long OBSERVATION_NANOS = TimeUnit.MILLISECONDS.toNanos(OBSERVATION_MILLIS);
+  private static final Runnable UNKNOWN_OBSERVATION = ServiceProcessResources::observeUnconfirmed;
+  private static final Runnable UNKNOWN_FALLBACK = ServiceProcessResources::waitUnknownInterval;
+
+  static {
+    // Resolve this standard wait implementation before any native resource acquisition.
+    LockSupport.parkNanos(0);
+  }
+
   public record Inputs(
       ServiceConfigFiles.Service service,
       ServiceCredentialLocation credentials,
@@ -164,7 +176,12 @@ public final class ServiceProcessResources {
       ResourceScope.Release<R> release, boolean retainUnknown) {
     Objects.requireNonNull(release, "service resource release");
     if (!retainUnknown) return release;
-    return ownedRelease(release, ServiceProcessResources::retainUnknownRelease);
+    return ownedRelease(release, unknownReleasePolicy());
+  }
+
+  /** SSC318: invocation initializes this retaining class before the caller's factory runs. */
+  public static Consumer<Throwable> unknownReleasePolicy() {
+    return ServiceProcessResources::retainUnknownRelease;
   }
 
   // A finite observer may inspect the failure in component PT; returning still rethrows UNKNOWN.
@@ -195,15 +212,47 @@ public final class ServiceProcessResources {
    * SSC316: fixed native retention only; no retry, release, normal completion or raw diagnostic.
    */
   public static void retainUnknownRelease(Throwable unconfirmed) {
+    retainUnknownRelease(unconfirmed, UNKNOWN_OBSERVATION, UNKNOWN_FALLBACK);
+  }
+
+  // Prebuilt fault ports permit finite component observation; native policy always fixes both.
+  static void retainUnknownRelease(Throwable unconfirmed, Runnable observation, Runnable fallback) {
     Objects.requireNonNull(unconfirmed, "unconfirmed release");
-    System.err.println("service resource release unconfirmed");
-    while (true) observeUnconfirmed();
+    Objects.requireNonNull(observation, "unconfirmed observation");
+    Objects.requireNonNull(fallback, "unconfirmed fallback");
+    try {
+      System.err.println("service resource release unconfirmed");
+    } catch (RuntimeException | Error unavailableDiagnostic) {
+      // Diagnostic failure is still UNKNOWN, not permission to unwind or report normal cleanup.
+    }
+    while (true) {
+      try {
+        observation.run();
+      } catch (RuntimeException | Error unavailableObservation) {
+        try {
+          fallback.run();
+        } catch (RuntimeException | Error unavailableFallback) {
+          // Even a VM-level wait failure cannot make an unconfirmed release successful.
+        }
+      }
+    }
+  }
+
+  // Fixed monotonic fallback; an interrupt or spurious unpark cannot accelerate retry ticks.
+  static void waitUnknownInterval() {
+    long deadline = System.nanoTime() + OBSERVATION_NANOS;
+    Thread.interrupted();
+    long left;
+    while ((left = deadline - System.nanoTime()) > 0) {
+      LockSupport.parkNanos(left);
+      Thread.interrupted();
+    }
   }
 
   private static void observeUnconfirmed() {
     try {
       // Only this single observation tick returns. The original catch frame never returns.
-      Thread.sleep(1000);
+      Thread.sleep(OBSERVATION_MILLIS);
     } catch (InterruptedException notification) {
       /* UNKNOWN still owns the full outer frame, never a release/termination proof. */
     }

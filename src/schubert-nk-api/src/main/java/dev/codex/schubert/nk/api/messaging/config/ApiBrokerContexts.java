@@ -98,7 +98,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
       boolean retainUnknown) {
     this.passwords = passwords;
     this.onUnconfirmed =
-        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
     this.owners = new ArrayList<>(3);
     this.ownerClosed = new boolean[3];
     var sync =

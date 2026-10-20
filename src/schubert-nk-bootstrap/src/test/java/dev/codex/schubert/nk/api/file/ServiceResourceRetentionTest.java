@@ -45,6 +45,21 @@ final class ServiceResourceRetentionTest {
                 release, (java.util.function.Consumer<Throwable>) null));
     assertThrows(
         NullPointerException.class, () -> ServiceProcessResources.retainUnknownRelease(null));
+    assertThrows(
+        NullPointerException.class,
+        () -> ServiceProcessResources.unknownReleasePolicy().accept(null));
+    Runnable observe = calls::incrementAndGet;
+    int before = calls.get();
+    assertThrows(
+        NullPointerException.class,
+        () -> ServiceProcessResources.retainUnknownRelease(null, observe, observe));
+    assertThrows(
+        NullPointerException.class,
+        () -> ServiceProcessResources.retainUnknownRelease(marker, null, observe));
+    assertThrows(
+        NullPointerException.class,
+        () -> ServiceProcessResources.retainUnknownRelease(marker, observe, null));
+    assertEquals(before, calls.get(), "invalid keeper ports cannot start observation");
   }
 
   @Test
@@ -66,6 +81,100 @@ final class ServiceResourceRetentionTest {
           DiagnosticDriver.class,
           List.of("CLOSE", "DIAGNOSTIC_FAILED", "INTERVAL_CONFIRMED"),
           kind);
+  }
+
+  @Test
+  void hold318002TickFailureWaitsAFullFallbackIntervalDespiteInterrupts() throws Exception {
+    for (String kind : List.of("runtime", "error"))
+      OwnedRetentionProcess.assertHeld(
+          ObservationDriver.class,
+          List.of("CLOSE", "TICK_FAILED", "TICK_RETRY_DELAY_CONFIRMED", "INTERVAL_CONFIRMED"),
+          "tick",
+          kind);
+  }
+
+  @Test
+  void hold318003FallbackFailureStillCannotReleaseTheOuterOwner() throws Exception {
+    for (String kind : List.of("runtime", "error"))
+      OwnedRetentionProcess.assertHeld(
+          ObservationDriver.class,
+          List.of("CLOSE", "TICK_FAILED", "FALLBACK_FAILED", "INTERVAL_CONFIRMED"),
+          "fallback",
+          kind);
+  }
+
+  public static final class ObservationDriver {
+    public static void main(String[] arguments) throws Exception {
+      OwnedRetentionProcess.deadline();
+      boolean fallbackFailure = arguments[0].equals("fallback");
+      Throwable marker =
+          arguments[1].equals("runtime")
+              ? new IllegalStateException("fixture observation")
+              : new AssertionError("fixture observation");
+      var attempts = new AtomicInteger();
+      var firstAt = new java.util.concurrent.atomic.AtomicLong();
+      Runnable observation =
+          () -> {
+            int attempt = attempts.incrementAndGet();
+            if (attempt == 1) {
+              firstAt.set(System.nanoTime());
+              System.out.println("TICK_FAILED");
+              fail(marker);
+            }
+            if (attempt == 2 && !fallbackFailure)
+              System.out.println(
+                  System.nanoTime() - firstAt.get() >= 1_000_000_000L
+                      ? "TICK_RETRY_DELAY_CONFIRMED"
+                      : "EARLY_TICK");
+            try {
+              Thread.sleep(1000);
+            } catch (InterruptedException notification) {
+              // One notification cannot release an UNKNOWN owner.
+            }
+          };
+      Runnable fallback =
+          fallbackFailure
+              ? () -> {
+                System.out.println("FALLBACK_FAILED");
+                fail(marker);
+              }
+              : ServiceProcessResources::waitUnknownInterval;
+      java.util.function.Consumer<Throwable> policy =
+          unconfirmed ->
+              ServiceProcessResources.retainUnknownRelease(unconfirmed, observation, fallback);
+      Thread owner = Thread.currentThread();
+      var wake =
+          new Thread(
+              () -> {
+                try {
+                  Thread.sleep(100);
+                } catch (InterruptedException interrupted) {
+                  Thread.currentThread().interrupt();
+                }
+                owner.interrupt();
+              },
+              "self-owned-observer-interrupt");
+      wake.setDaemon(true);
+      wake.start();
+      try {
+        ServiceProcessResources.ownedRelease(
+                (Object ignored) -> {
+                  System.out.println("CLOSE");
+                  OwnedRetentionProcess.observeInterval(owner);
+                  owner.interrupt();
+                  throw new IOException("fixture release");
+                },
+                policy)
+            .close(new Object());
+      } finally {
+        System.out.println("OUTER_RELEASED");
+      }
+    }
+
+    private static void fail(Throwable marker) {
+      if (marker instanceof RuntimeException runtime) throw runtime;
+      throw (Error) marker;
+    }
   }
 
   public static final class DiagnosticDriver {

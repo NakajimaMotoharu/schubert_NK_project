@@ -23,6 +23,7 @@ final class ApiManagementServer implements AutoCloseable {
   private static final String METRICS_PATH = "/actuator/prometheus";
   private static final int JSON_OPENING_DELIMITER_LENGTH = 1;
   private static final Duration CLOSE_TIMEOUT = Duration.ofSeconds(30);
+  private static final String STOP_UNCONFIRMED = "API management stop unconfirmed";
 
   @FunctionalInterface
   interface Factory {
@@ -56,7 +57,7 @@ final class ApiManagementServer implements AutoCloseable {
   static ApiManagementServer open(
       Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
       throws IOException {
-    var cleanupDiagnostic = new IllegalStateException("API management stop unconfirmed");
+    var cleanupDiagnostic = new IllegalStateException(STOP_UNCONFIRMED);
     var result = bind(information, healthy, port, factory);
     try {
       result.start();
@@ -213,10 +214,10 @@ final class ApiManagementServer implements AutoCloseable {
     try {
       try {
         if (!stopLock.tryLock(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
-          throw new IllegalStateException("API management stop unconfirmed");
+          throw new IllegalStateException(STOP_UNCONFIRMED);
       } catch (InterruptedException notification) {
         Thread.currentThread().interrupt();
-        throw new IllegalStateException("API management stop unconfirmed");
+        throw new IllegalStateException(STOP_UNCONFIRMED);
       }
       try {
         if (closed) return;
@@ -229,12 +230,12 @@ final class ApiManagementServer implements AutoCloseable {
         try {
           if (!executor.awaitTermination(
               Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
-            throw new IllegalStateException("API management stop unconfirmed");
+            throw new IllegalStateException(STOP_UNCONFIRMED);
         } catch (InterruptedException notification) {
           Thread.currentThread().interrupt();
-          throw new IllegalStateException("API management stop unconfirmed");
+          throw new IllegalStateException(STOP_UNCONFIRMED);
         }
-        if (!started.get()) throw new IllegalStateException("API management stop unconfirmed");
+        if (!started.get()) throw new IllegalStateException(STOP_UNCONFIRMED);
         closed = true;
       } finally {
         stopLock.unlock();

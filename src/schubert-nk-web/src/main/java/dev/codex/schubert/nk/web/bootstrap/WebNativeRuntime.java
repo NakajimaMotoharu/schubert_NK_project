@@ -69,10 +69,10 @@ final class WebNativeRuntime implements AutoCloseable {
       new WebRuntimeFailureSignal<>(terminal);
   private final AtomicBoolean stopping = new AtomicBoolean();
   private final Object ownerLock = new Object();
-  private volatile @Nullable WebBrokerContexts broker;
-  private volatile @Nullable WebNativeCodecs codecs;
-  private volatile @Nullable OwnedTransferDirectory transfer;
-  private volatile @Nullable OwnedTransferDirectory assets;
+  private @Nullable WebBrokerContexts broker;
+  private @Nullable WebNativeCodecs codecs;
+  private @Nullable OwnedTransferDirectory transfer;
+  private @Nullable OwnedTransferDirectory assets;
   private volatile @Nullable ArtemisReplyConsumers replies;
   private volatile @Nullable WebLogReplayWorker replay;
   private volatile @Nullable RevocationRetryWorker retry;

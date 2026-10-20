@@ -58,7 +58,7 @@ public final class WebBrokerContexts implements AutoCloseable {
   private WebBrokerContexts(Supplier<char[]> passwords, String endpoint, boolean retainUnknown) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
     this.onUnconfirmed =
-        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
     // SSC311: owner/lock/password port are complete before acquiring the provider resource.
     var configured = newFactory(endpoint, onUnconfirmed);
     this.factory = configured;
@@ -143,7 +143,7 @@ public final class WebBrokerContexts implements AutoCloseable {
     this.factory = Objects.requireNonNull(factory, "JMS factory");
     this.owner = Objects.requireNonNull(owner, "JMS owner");
     this.onUnconfirmed =
-        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
   }
 
   public JmsContextFactory contexts() {

@@ -143,7 +143,7 @@ public final class ApiMessagingRuntime implements AutoCloseable {
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
     Consumer<Throwable> onUnconfirmed =
-        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
     var terminal = new AtomicBoolean();
     Consumer<CommittedFatalInboundException> signal =
         failure -> {

@@ -59,7 +59,7 @@ public enum ArtemisConnectionFactoryProvider {
                 3_000),
             "schubert-nk-core");
     Consumer<Throwable> onUnconfirmed =
-        retainUnknown ? ServiceProcessResources::retainUnknownRelease : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
     return configureOwned(
         profile, () -> new ActiveMQConnectionFactory(false, connector), onUnconfirmed);
   }
