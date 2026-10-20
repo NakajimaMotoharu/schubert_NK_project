@@ -367,6 +367,25 @@ final class SyncRequestListenerTest {
     assertEquals(1, readContext.rollbacks);
     assertEquals(0, readContext.commits);
 
+    // Checked DLQ read failure with a confirmed rollback stays the original retryable cause.
+    // This is separate from the next fixture whose rollback itself is unconfirmed (PG-D441).
+    ContextState confirmedIsolationContext = new ContextState();
+    MessageState confirmedMessage =
+        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+    JMSException confirmedIsolationFailure = new JMSException("synthetic-confirmed-DLQ-read");
+    confirmedMessage.transportReadFailure = confirmedIsolationFailure;
+    assertSame(
+        confirmedIsolationFailure,
+        assertThrows(
+            JMSException.class,
+            () -> listener.onMessage(confirmedIsolationContext.proxy(), confirmedMessage.message)));
+    assertEquals(1, confirmedIsolationContext.rollbacks);
+    assertEquals(0, confirmedIsolationContext.commits);
+    assertEquals(1, confirmedIsolationFailure.getSuppressed().length);
+    assertInstanceOf(
+        dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class,
+        confirmedIsolationFailure.getSuppressed()[0]);
+
     ContextState checkedIsolationContext = new ContextState();
     JMSRuntimeException rollbackFailure = new JMSRuntimeException("synthetic-rollback-failure");
     checkedIsolationContext.rollbackFailure = rollbackFailure;

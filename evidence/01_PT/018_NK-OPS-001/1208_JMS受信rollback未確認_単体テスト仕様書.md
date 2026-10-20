@@ -43,3 +43,5 @@ PG5800-v2/226f/89305は30件/8suiteのうち旧API remainder一failure、残not-
 v3/c4ab/元28532は01:34:37.718538Z→01:36:58.101378Z/actual0・全54/15/FES等0/六型nullSpotBugs0、archive7908802118edeb5d5935a69024297c3f118922826062162deccaa6a0f4c3b7c0。target七全体の100は未達、未実測0/0で補完しない。Webのowned三引数start由来default signal methodは未実行だったため、UNC016で実際にその境界の未確認rollback→readyfalse/再入0/ACK0を追加する。単にlambda methodを呼ぶcoverage用assertではない。
 
 新owner close後の待機上限5秒が第二再配送delay5秒と同値の潜在flakyをBUG1493/YKT1253に起票し、test deadlineだけ10秒へ変更する。Production/Mainはv3と不変、期待payload・全callback/commit条件不変更。新v4で同限定54（case増分0）を実行し、そのsourceを必要whole3955/587へ固定する。v3の成功を新sourceへ合算せず、source再認証/fixture hardeningとして計測する。
+
+v4は1211の通り全54・六static0/独立物理/PMD raw1595を確認。API checked DLQ read failure＋rollback正常復帰の既PT-JMS006を新入力で補完し、原checked identity/rollback1/commit0/protocol causeを期待する（実装から期待を逆算しない）。Main850/1665は不変更、case増分0、v5/new-only snapshotへ固定。新v5における全Main byte/source・固定third-party/rule同一を確認後だけ、元PMD/CS結果をsource再認証し、実行済PTは元v4と混ぜない。必要wholeは現Test sourceで3955/587、未実行/coverage不足は受入へ加算0。
