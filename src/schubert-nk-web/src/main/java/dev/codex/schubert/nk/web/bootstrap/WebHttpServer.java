@@ -38,9 +38,10 @@ public final class WebHttpServer implements AutoCloseable {
   private boolean destroyed;
   private boolean started;
 
-  private WebHttpServer(Tomcat tomcat, AnnotationConfigWebApplicationContext mvc) {
-    this.tomcat = tomcat;
-    this.mvc = mvc;
+  private WebHttpServer(Supplier<Tomcat> tomcatFactory) {
+    this.mvc = new AnnotationConfigWebApplicationContext();
+    // SSC312/PG-D461/PT-HTTP-OWN003: unrefreshed MVC/lock/owner before acquisition.
+    this.tomcat = Objects.requireNonNull(tomcatFactory.get(), "tomcatFactory result");
   }
 
   /**
@@ -106,9 +107,9 @@ public final class WebHttpServer implements AutoCloseable {
     Objects.requireNonNull(featureConfigurations, "featureConfigurations");
     validateConfiguration(runtimeDirectory, port, featureConfigurations);
     Map<Class<?>, ?> registeredDependencies = checkedDependencies(dependencies);
-    var tomcat = Objects.requireNonNull(tomcatFactory.get(), "tomcatFactory result");
-    var mvc = new AnnotationConfigWebApplicationContext();
-    var result = new WebHttpServer(tomcat, mvc);
+    var result = new WebHttpServer(tomcatFactory);
+    var tomcat = result.tomcat;
+    var mvc = result.mvc;
     try {
       if (owner != null) owner.accept(result);
       tomcat.setBaseDir(runtimeDirectory.toString());

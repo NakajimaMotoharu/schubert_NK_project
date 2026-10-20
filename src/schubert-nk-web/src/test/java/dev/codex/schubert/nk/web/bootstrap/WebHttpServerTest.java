@@ -31,6 +31,59 @@ import org.springframework.web.bind.annotation.ResponseBody;
 class WebHttpServerTest {
   @TempDir Path root;
 
+  /** SS313/342/SSC312/PG-D461/PT-HTTP-OWN003; no container/owner notification on failed get. */
+  @Test
+  void httpOwn003FailedSupplierIdentityAndNullNeverNotifyOwner() {
+    Filter security = (request, response, chain) -> chain.doFilter(request, response);
+    for (Throwable primary :
+        java.util.List.of(
+            new IllegalArgumentException("synthetic acquisition"),
+            new IllegalStateException("synthetic acquisition"),
+            new NullPointerException("synthetic acquisition"),
+            new AssertionError("synthetic acquisition"))) {
+      var calls = new AtomicInteger();
+      var notifications = new AtomicInteger();
+      assertSame(
+          primary,
+          assertThrows(
+              primary.getClass(),
+              () ->
+                  WebHttpServer.startWithOwner(
+                      root,
+                      0,
+                      security,
+                      Map.of(),
+                      () -> {
+                        assertEquals(1, calls.incrementAndGet());
+                        if (primary instanceof RuntimeException unchecked) throw unchecked;
+                        throw (Error) primary;
+                      },
+                      server -> notifications.incrementAndGet())));
+      assertEquals(1, calls.get());
+      assertEquals(0, notifications.get());
+    }
+    var nullCalls = new AtomicInteger();
+    var notifications = new AtomicInteger();
+    assertEquals(
+        "tomcatFactory result",
+        assertThrows(
+                NullPointerException.class,
+                () ->
+                    WebHttpServer.startWithOwner(
+                        root,
+                        0,
+                        security,
+                        Map.of(),
+                        () -> {
+                          nullCalls.incrementAndGet();
+                          return null;
+                        },
+                        server -> notifications.incrementAndGet()))
+            .getMessage());
+    assertEquals(1, nullCalls.get());
+    assertEquals(0, notifications.get());
+  }
+
   @Test
   void nativeOwner001CapturePrecedesVendorStartAndFatalKeepsRetryableOwner() throws Exception {
     var captured = new java.util.concurrent.atomic.AtomicReference<WebHttpServer>();

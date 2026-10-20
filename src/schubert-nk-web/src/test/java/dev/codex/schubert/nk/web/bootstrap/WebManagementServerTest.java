@@ -18,6 +18,55 @@ import org.junit.jupiter.api.Test;
  * Independent actual HTTP status/JSON literals, not a native startup admission. WEB-READY001..003.
  */
 final class WebManagementServerTest {
+  /** SS342/SSC312/PG-D461/PT-HTTP-OWN002: acquisition failure never becomes an owner. */
+  @Test
+  void httpOwn002FactoryFailureIdentityAndNullAreNotStarted() {
+    for (Throwable primary :
+        java.util.List.of(
+            new IOException("synthetic acquisition"),
+            new IllegalArgumentException("synthetic acquisition"),
+            new IllegalStateException("synthetic acquisition"),
+            new NullPointerException("synthetic acquisition"),
+            new AssertionError("synthetic acquisition"))) {
+      var calls = new AtomicInteger();
+      assertSame(
+          primary,
+          assertThrows(
+              primary.getClass(),
+              () ->
+                  WebManagementServer.bind(
+                      INFO,
+                      () -> true,
+                      0,
+                      (address, backlog) -> {
+                        assertEquals(1, calls.incrementAndGet());
+                        assertEquals("127.0.0.1", address.getAddress().getHostAddress());
+                        assertEquals(0, address.getPort());
+                        assertEquals(32, backlog);
+                        if (primary instanceof IOException checked) throw checked;
+                        if (primary instanceof RuntimeException unchecked) throw unchecked;
+                        throw (Error) primary;
+                      })));
+      assertEquals(1, calls.get());
+    }
+    var nullCalls = new AtomicInteger();
+    assertEquals(
+        "management server",
+        assertThrows(
+                NullPointerException.class,
+                () ->
+                    WebManagementServer.bind(
+                        INFO,
+                        () -> true,
+                        0,
+                        (address, backlog) -> {
+                          nullCalls.incrementAndGet();
+                          return null;
+                        }))
+            .getMessage());
+    assertEquals(1, nullCalls.get());
+  }
+
   @Test
   void ready003StartupFailureKeepsInterruptedCleanupSeparate() throws Exception {
     var captured = new java.util.concurrent.atomic.AtomicReference<PartiallyStartedServer>();

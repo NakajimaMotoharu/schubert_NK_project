@@ -1,5 +1,11 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-035 — PT_DEFAULT：SSC312 HTTP owner三箇所・全API/Web
+
+1286/PG-D461/1545YKT1305、main ff8268606 design-only反映済。全known元job終了後の三Main/三既Testに新独立@Test各一。通常finite self-owned host snapshot（tempPG/in-processJMS/loopbackHTTP/有限child/固定DOM）だけ、実VM/配備/Root/current/failed-cohort/intent/permit/原本DBBackup/鍵へアクセスしない。工具6112は既通常API/Webprofileの対象と件数のみ変更し、source固定/clean operator/新onlynamespace・六format先行/型nullSpotBugs/原XML/全1667Mainと三対象四counterを要求する。見込1939/318は宣言集計で照合後に一回開始し、未確認終端を再発行しない。拒否対象probe/PT代替への算入0。
+
+595全suiteの必要新全体は変更群をまとめて後続実施し、既8703985/599925を新source全体成功へ加算0。取得失敗の新3JUnit内の複数inputはPT件数を水増しせず、OOMは未実行でJVM構造proofを別記録する。未達targetcounterを補完せず、当真正結果・path/hash/exit/入力/期待/実際/環境は1287へ。共有費主K01.01とF03参照費0を混同しない。
+
 ## PTPRE-034 — PT_DEFAULT：JMS owner四source後の全API/Web1933・317
 
 1273/PG-D457/BUG1537YKT1297、元c4全3979/594及び631joinを1274へ保全済み・全元job終了後だけ実PG。今回Main四/Test三（新JUnit3、IAE/ISE/NPE/Error/null fixture内数）、公開API/SQL/DB/wire/role/ACKrollback/stop-before-close/既期待不変更。予定command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:../toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg6074_jms_owner_selected.py`、新only pg6074-jms-owner-selected-v1。自己所有snapshotで六format先行、通常offline compile/型null/SpotBugs/JaCoCo、**全API1012/全Web914＋他四module guard7＝1933件/317suite**、全1667Main・当四outer実四counter100を要求する。旧c4をPASSとして輸入しない。

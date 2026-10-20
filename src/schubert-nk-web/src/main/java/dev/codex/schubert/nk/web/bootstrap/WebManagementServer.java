@@ -84,22 +84,7 @@ final class WebManagementServer implements AutoCloseable {
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
     String json = publicJson(information);
-    var server =
-        Objects.requireNonNull(
-            factory.create(new InetSocketAddress("127.0.0.1", port), 32), "management server");
-    var executor =
-        new ThreadPoolExecutor(
-            1,
-            1,
-            0,
-            TimeUnit.MILLISECONDS,
-            new ArrayBlockingQueue<>(32),
-            task -> {
-              var thread = new Thread(task, "web-management");
-              thread.setDaemon(true);
-              return thread;
-            });
-    return new WebManagementServer(server, executor, healthy, json);
+    return new WebManagementServer(healthy, json, port, factory);
   }
 
   void start() {
@@ -118,11 +103,24 @@ final class WebManagementServer implements AutoCloseable {
   }
 
   private WebManagementServer(
-      HttpServer server, ThreadPoolExecutor executor, BooleanSupplier healthy, String information) {
-    this.server = server;
-    this.executor = executor;
+      BooleanSupplier healthy, String information, int port, Factory factory) throws IOException {
     this.healthy = healthy;
     this.information = information;
+    var address = new InetSocketAddress("127.0.0.1", port);
+    this.executor =
+        new ThreadPoolExecutor(
+            1,
+            1,
+            0,
+            TimeUnit.MILLISECONDS,
+            new ArrayBlockingQueue<>(32),
+            task -> {
+              var thread = new Thread(task, "web-management");
+              thread.setDaemon(true);
+              return thread;
+            });
+    // SSC312/PG-D461/PT-HTTP-OWN002: all locks/flags/executor precede bound server.
+    this.server = Objects.requireNonNull(factory.create(address, 32), "management server");
   }
 
   private static String publicJson(Map<String, String> information) {

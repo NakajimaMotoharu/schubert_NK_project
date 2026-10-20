@@ -52,10 +52,24 @@ final class ApiManagementServer implements AutoCloseable {
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
     String json = publicJson(information);
-    var server =
-        Objects.requireNonNull(
-            factory.create(new InetSocketAddress("127.0.0.1", port), 32), "management server");
-    var executor =
+    var result = new ApiManagementServer(healthy, json, port, factory);
+    try {
+      result.server.setExecutor(result.executor);
+      result.server.createContext("/", result::respond);
+      result.server.start();
+      return result;
+    } catch (RuntimeException | Error failure) {
+      result.close();
+      throw failure;
+    }
+  }
+
+  private ApiManagementServer(
+      BooleanSupplier healthy, String information, int port, Factory factory) throws IOException {
+    this.healthy = healthy;
+    this.information = information;
+    var address = new InetSocketAddress("127.0.0.1", port);
+    this.executor =
         new ThreadPoolExecutor(
             1,
             1,
@@ -67,24 +81,8 @@ final class ApiManagementServer implements AutoCloseable {
               thread.setDaemon(true);
               return thread;
             });
-    var result = new ApiManagementServer(server, executor, healthy, json);
-    try {
-      server.setExecutor(executor);
-      server.createContext("/", result::respond);
-      server.start();
-      return result;
-    } catch (RuntimeException | Error failure) {
-      result.close();
-      throw failure;
-    }
-  }
-
-  private ApiManagementServer(
-      HttpServer server, ThreadPoolExecutor executor, BooleanSupplier healthy, String information) {
-    this.server = server;
-    this.executor = executor;
-    this.healthy = healthy;
-    this.information = information;
+    // SSC312/PG-D461/PT-HTTP-OWN001: no owner/state allocation after server acquisition.
+    this.server = Objects.requireNonNull(factory.create(address, 32), "management server");
   }
 
   private static String publicJson(Map<String, String> information) {
