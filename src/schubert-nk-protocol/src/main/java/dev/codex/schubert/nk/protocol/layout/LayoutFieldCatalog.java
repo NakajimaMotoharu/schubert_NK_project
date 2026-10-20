@@ -9,6 +9,9 @@ import java.util.Objects;
 
 /** Immutable 389-field UI 234-236 catalog. Trace: NK-PRO-001, SS 322 §2/§12. */
 public final class LayoutFieldCatalog {
+  private static final int CATALOG_COLUMN_COUNT = 8;
+  private static final int MINIMUM_POSITIVE_VALUE = 1;
+
   private static final String CATALOG_TSV =
       """
         LGNREQ01\tDATA\tUsername\t1\t64\tX\tM\tNFC・trim後1～64 byte
@@ -464,7 +467,7 @@ public final class LayoutFieldCatalog {
         continue;
       }
       String[] cells = line.split("\\t", -1);
-      if (cells.length != 8) {
+      if (cells.length != CATALOG_COLUMN_COUNT) {
         throw new LayoutValidationException("field catalog row must contain eight columns");
       }
       LayoutDefinition layout = registry.require(cells[0], 1);
@@ -596,7 +599,7 @@ public final class LayoutFieldCatalog {
     } catch (NumberFormatException exception) {
       throw new LayoutValidationException(label + " is not an integer", exception);
     }
-    if (parsed < 1) {
+    if (parsed < MINIMUM_POSITIVE_VALUE) {
       throw new LayoutValidationException(label + " must be positive");
     }
     return parsed;

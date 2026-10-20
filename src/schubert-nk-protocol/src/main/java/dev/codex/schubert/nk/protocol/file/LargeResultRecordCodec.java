@@ -79,7 +79,8 @@ public final class LargeResultRecordCodec {
         if (single < 0) {
           throw new PermanentProtocolException("large-result stream ends within a record");
         }
-        result[offset++] = (byte) single;
+        result[offset] = (byte) single;
+        offset++;
       } else {
         offset += read;
       }

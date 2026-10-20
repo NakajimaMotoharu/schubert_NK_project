@@ -8,6 +8,8 @@ public enum InteractionKind {
   ASYNC_ACCEPTANCE('A'),
   INTERNAL('I');
 
+  private static final int WIRE_CODE_LENGTH = 1;
+
   private final char encodedValue;
 
   InteractionKind(char wireValue) {
@@ -20,7 +22,7 @@ public enum InteractionKind {
 
   public static InteractionKind fromWire(String value) {
     Objects.requireNonNull(value, "value");
-    if (value.length() != 1) {
+    if (value.length() != WIRE_CODE_LENGTH) {
       throw new IllegalArgumentException("interaction kind must be exactly one byte");
     }
     return switch (value.charAt(0)) {

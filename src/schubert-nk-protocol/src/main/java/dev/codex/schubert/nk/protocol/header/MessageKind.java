@@ -8,6 +8,8 @@ public enum MessageKind {
   RESPONSE('S'),
   EVENT('E');
 
+  private static final int WIRE_CODE_LENGTH = 1;
+
   private final char encodedValue;
 
   MessageKind(char wireValue) {
@@ -20,7 +22,7 @@ public enum MessageKind {
 
   public static MessageKind fromWire(String value) {
     Objects.requireNonNull(value, "value");
-    if (value.length() != 1) {
+    if (value.length() != WIRE_CODE_LENGTH) {
       throw new IllegalArgumentException("message kind must be exactly one byte");
     }
     return switch (value.charAt(0)) {

@@ -15,6 +15,8 @@ public record LayoutDefinition(
     int maximumRecordCount,
     int maximumTotalLength) {
 
+  private static final int SUPPORTED_VERSION = 1;
+
   public static final int HEADER_LENGTH = 256;
   public static final int MAXIMUM_BODY_LENGTH = 1_000_000;
   private static final int MAXIMUM_DECLARED_FIELD_LENGTH = 999_999;
@@ -42,7 +44,7 @@ public record LayoutDefinition(
     Objects.requireNonNull(id, "id");
     Objects.requireNonNull(messageKind, "messageKind");
     Objects.requireNonNull(interactionKind, "interactionKind");
-    if (version != 1) {
+    if (version != SUPPORTED_VERSION) {
       throw new LayoutValidationException("only layout version 001 is supported");
     }
     validateDeclaredLength("dataLength", dataLength);
