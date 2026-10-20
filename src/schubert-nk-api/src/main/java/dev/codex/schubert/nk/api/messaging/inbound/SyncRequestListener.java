@@ -27,6 +27,7 @@ import java.util.Optional;
  * 7-8.
  */
 public final class SyncRequestListener {
+  private static final Runnable UNOBSERVED_ROLLBACK = () -> {};
   private static final ExpectedRoute REQUEST_ROUTE =
       new ExpectedRoute(
           MessageKind.REQUEST,
@@ -48,6 +49,14 @@ public final class SyncRequestListener {
 
   /** Processes one delivery; no explicit {@code Message.acknowledge()} is performed. */
   public void onMessage(JMSContext context, Message message) throws JMSException {
+    onMessage(context, message, UNOBSERVED_ROLLBACK, UNOBSERVED_ROLLBACK);
+  }
+
+  // SSC319/PT-JMS-RB319: synchronous non-owning phase ports, never a new transaction.
+  void onMessage(JMSContext context, Message message, Runnable attempted, Runnable confirmed)
+      throws JMSException {
+    Objects.requireNonNull(attempted, "rollback attempt observer");
+    Objects.requireNonNull(confirmed, "rollback completion observer");
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(message, "message");
     if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
@@ -76,10 +85,12 @@ public final class SyncRequestListener {
           BrokerTopology.SYNC_REQUEST,
           FatalDlqMetadata.DetectedBy.API_SYNC,
           clock,
-          protocolFailure);
+          protocolFailure,
+          attempted,
+          confirmed);
       throw new CommittedFatalInboundException(protocolFailure);
     } catch (JMSException | RuntimeException failure) {
-      InboundTransactions.rollbackAfterFailure(context, failure);
+      InboundTransactions.rollbackAfterFailure(context, failure, attempted, confirmed);
       throw failure;
     }
   }

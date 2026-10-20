@@ -25,6 +25,7 @@ import java.util.Optional;
  * PT-JMS-005～007/009.
  */
 final class TransactedEventListener {
+  private static final Runnable UNOBSERVED_ROLLBACK = () -> {};
   private final BrokerTopology destination;
   private final FatalDlqMetadata.DetectedBy detectedBy;
   private final InternalEventProcessor processor;
@@ -55,6 +56,14 @@ final class TransactedEventListener {
   }
 
   void onMessage(JMSContext context, Message message) throws JMSException {
+    onMessage(context, message, UNOBSERVED_ROLLBACK, UNOBSERVED_ROLLBACK);
+  }
+
+  // SSC319/PT-JMS-RB319: all rollback paths, including failed fatal isolation, share the ports.
+  void onMessage(JMSContext context, Message message, Runnable attempted, Runnable confirmed)
+      throws JMSException {
+    Objects.requireNonNull(attempted, "rollback attempt observer");
+    Objects.requireNonNull(confirmed, "rollback completion observer");
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(message, "message");
     if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
@@ -78,10 +87,10 @@ final class TransactedEventListener {
       context.commit();
     } catch (PermanentProtocolException protocolFailure) {
       InboundTransactions.isolateFatal(
-          context, message, destination, detectedBy, clock, protocolFailure);
+          context, message, destination, detectedBy, clock, protocolFailure, attempted, confirmed);
       throw new CommittedFatalInboundException(protocolFailure);
     } catch (JMSException | RuntimeException failure) {
-      InboundTransactions.rollbackAfterFailure(context, failure);
+      InboundTransactions.rollbackAfterFailure(context, failure, attempted, confirmed);
       throw failure;
     }
   }

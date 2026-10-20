@@ -25,4 +25,10 @@ public final class WebLogListener {
   public void onMessage(JMSContext context, Message message) throws JMSException {
     delegate.onMessage(context, message);
   }
+
+  // SSC319/PT-JMS-RB319: callback confirmation is synchronous and specific to this context.
+  void onMessage(JMSContext context, Message message, Runnable attempted, Runnable confirmed)
+      throws JMSException {
+    delegate.onMessage(context, message, attempted, confirmed);
+  }
 }

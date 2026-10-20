@@ -10,6 +10,7 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import java.time.Clock;
+import java.util.Objects;
 
 /**
  * Shared API-local fatal isolation and rollback mechanics for transacted listeners.
@@ -21,6 +22,7 @@ enum InboundTransactions {
   ;
 
   private static final DlqSender DLQ = new DlqSender();
+  private static final Runnable UNOBSERVED_ROLLBACK = () -> {};
 
   static void isolateFatal(
       JMSContext context,
@@ -29,6 +31,29 @@ enum InboundTransactions {
       FatalDlqMetadata.DetectedBy detectedBy,
       Clock clock,
       PermanentProtocolException protocolFailure) {
+    isolateFatal(
+        context,
+        message,
+        originalDestination,
+        detectedBy,
+        clock,
+        protocolFailure,
+        UNOBSERVED_ROLLBACK,
+        UNOBSERVED_ROLLBACK);
+  }
+
+  // SSC319: fatal-isolation rollback must retain the same per-delivery attempt qualification.
+  static void isolateFatal(
+      JMSContext context,
+      Message message,
+      BrokerTopology originalDestination,
+      FatalDlqMetadata.DetectedBy detectedBy,
+      Clock clock,
+      PermanentProtocolException protocolFailure,
+      Runnable attempted,
+      Runnable confirmed) {
+    Objects.requireNonNull(attempted, "rollback attempt observer");
+    Objects.requireNonNull(confirmed, "rollback completion observer");
     try {
       FatalDlqMetadata fatal =
           new FatalDlqMetadata("PROTOCOL_INVALID", detectedBy, clock.instant());
@@ -39,7 +64,7 @@ enum InboundTransactions {
         isolationFailure.addSuppressed(protocolFailure);
       }
       try {
-        rollbackAfterFailure(context, isolationFailure);
+        rollbackAfterFailure(context, isolationFailure, attempted, confirmed);
       } catch (UnconfirmedJmsRollbackException unconfirmed) {
         throw new FailedJmsIsolationException(unconfirmed, protocolFailure);
       }
@@ -48,6 +73,14 @@ enum InboundTransactions {
   }
 
   static void rollbackAfterFailure(JMSContext context, Throwable failure) {
+    rollbackAfterFailure(context, failure, UNOBSERVED_ROLLBACK, UNOBSERVED_ROLLBACK);
+  }
+
+  static void rollbackAfterFailure(
+      JMSContext context, Throwable failure, Runnable attempted, Runnable confirmed) {
+    Objects.requireNonNull(attempted, "rollback attempt observer");
+    Objects.requireNonNull(confirmed, "rollback completion observer");
+    attempted.run();
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
@@ -56,5 +89,6 @@ enum InboundTransactions {
       }
       throw new UnconfirmedJmsRollbackException(failure, rollbackFailure);
     }
+    confirmed.run();
   }
 }

@@ -68,6 +68,11 @@ public final class SyncRequestConsumers implements AutoCloseable {
     SyncRequestConsumers runtime = new SyncRequestConsumers(opened, onUnconfirmed);
     try {
       for (int index = 0; index < CONCURRENCY; index++) {
+        // SSC319: distinct per-context state/ports exist before its factory acquires a context.
+        var rollbackAttempted = new AtomicBoolean();
+        var rollbackConfirmed = new AtomicBoolean();
+        Runnable attemptingRollback = () -> rollbackAttempted.set(true);
+        Runnable confirmingRollback = () -> rollbackConfirmed.set(true);
         JMSContext context = Objects.requireNonNull(factory.get(), "JMS context");
         opened.add(context);
         context.setAutoStart(false);
@@ -82,8 +87,10 @@ public final class SyncRequestConsumers implements AutoCloseable {
         consumer.setMessageListener(
             message -> {
               if (runtime.halted.get()) return;
+              rollbackAttempted.set(false);
+              rollbackConfirmed.set(false);
               try {
-                listener.onMessage(context, message);
+                listener.onMessage(context, message, attemptingRollback, confirmingRollback);
               } catch (CommittedFatalInboundException fatal) {
                 runtime.halted.set(true);
                 if (runtime.terminal.compareAndSet(false, true)) {
@@ -94,7 +101,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
                   | Error fatal) {
                 runtime.halted.set(true);
                 if (runtime.terminal.compareAndSet(false, true)) {
-                  if (fatal instanceof Error) {
+                  if (fatal instanceof Error && rollbackAttempted.compareAndSet(false, true)) {
                     try {
                       context.rollback();
                     } catch (RuntimeException | Error unconfirmed) {
@@ -104,7 +111,11 @@ public final class SyncRequestConsumers implements AutoCloseable {
                   onFatal.run();
                 }
               } catch (JMSException | RuntimeException retryable) {
-                // Only a confirmed rollback reaches ordinary broker-controlled redelivery.
+                if (!rollbackConfirmed.get()) {
+                  runtime.halted.set(true);
+                  if (runtime.terminal.compareAndSet(false, true)) onFatal.run();
+                }
+                // Only this delivery's confirmed rollback permits broker-controlled retry.
               }
             });
       }

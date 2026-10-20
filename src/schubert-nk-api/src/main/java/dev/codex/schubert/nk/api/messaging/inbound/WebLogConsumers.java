@@ -59,6 +59,10 @@ public final class WebLogConsumers implements AutoCloseable {
     Objects.requireNonNull(onTerminal, "onTerminal");
     Objects.requireNonNull(onFatal, "fatal signal");
     Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
+    var rollbackAttempted = new AtomicBoolean();
+    var rollbackConfirmed = new AtomicBoolean();
+    Runnable attemptingRollback = () -> rollbackAttempted.set(true);
+    Runnable confirmingRollback = () -> rollbackConfirmed.set(true);
     WebLogConsumers runtime = new WebLogConsumers(factory, onUnconfirmed);
     JMSContext opened = runtime.context;
     try {
@@ -74,8 +78,10 @@ public final class WebLogConsumers implements AutoCloseable {
       consumer.setMessageListener(
           message -> {
             if (runtime.halted.get()) return;
+            rollbackAttempted.set(false);
+            rollbackConfirmed.set(false);
             try {
-              listener.onMessage(opened, message);
+              listener.onMessage(opened, message, attemptingRollback, confirmingRollback);
             } catch (CommittedFatalInboundException fatal) {
               runtime.halted.set(true);
               // This dedicated session serializes callbacks; halt excludes later deliveries.
@@ -84,7 +90,7 @@ public final class WebLogConsumers implements AutoCloseable {
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               runtime.halted.set(true);
               runtime.terminal.set(true);
-              if (fatal instanceof Error) {
+              if (fatal instanceof Error && rollbackAttempted.compareAndSet(false, true)) {
                 try {
                   opened.rollback();
                 } catch (RuntimeException | Error unconfirmed) {
@@ -93,7 +99,12 @@ public final class WebLogConsumers implements AutoCloseable {
               }
               onFatal.run();
             } catch (JMSException | RuntimeException retryable) {
-              // Confirmed rollback only; Artemis owns redelivery and delivery-count policy.
+              if (!rollbackConfirmed.get()) {
+                runtime.halted.set(true);
+                runtime.terminal.set(true);
+                onFatal.run();
+              }
+              // Only this delivery's confirmed rollback permits broker-controlled retry.
             }
           });
       opened.start();

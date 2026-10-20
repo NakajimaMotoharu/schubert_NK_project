@@ -48,6 +48,10 @@ public final class QuestionWorkConsumers implements AutoCloseable {
     Objects.requireNonNull(onTerminal, "terminal signal");
     Objects.requireNonNull(onFatal, "fatal signal");
     Objects.requireNonNull(onUnconfirmed, "unconfirmed close policy");
+    var rollbackAttempted = new AtomicBoolean();
+    var rollbackConfirmed = new AtomicBoolean();
+    Runnable attemptingRollback = () -> rollbackAttempted.set(true);
+    Runnable confirmingRollback = () -> rollbackConfirmed.set(true);
     var result = new QuestionWorkConsumers(factory, onUnconfirmed);
     var context = result.context;
     try {
@@ -62,15 +66,17 @@ public final class QuestionWorkConsumers implements AutoCloseable {
       consumer.setMessageListener(
           message -> {
             if (result.halted.get()) return;
+            rollbackAttempted.set(false);
+            rollbackConfirmed.set(false);
             try {
-              listener.onMessage(context, message);
+              listener.onMessage(context, message, attemptingRollback, confirmingRollback);
             } catch (CommittedFatalInboundException fatal) {
               result.halted.set(true);
               // This dedicated session serializes callbacks; halt excludes later deliveries.
               onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);
-              if (fatal instanceof Error) {
+              if (fatal instanceof Error && rollbackAttempted.compareAndSet(false, true)) {
                 try {
                   context.rollback();
                 } catch (RuntimeException | Error unconfirmed) {
@@ -79,7 +85,11 @@ public final class QuestionWorkConsumers implements AutoCloseable {
               }
               onFatal.run();
             } catch (JMSException | RuntimeException retryable) {
-              // Confirmed rollback only; real delivery metadata and max4 still govern retry.
+              if (!rollbackConfirmed.get()) {
+                result.halted.set(true);
+                onFatal.run();
+              }
+              // Only this delivery's confirmed rollback permits broker-controlled retry.
             }
           });
       context.start();
