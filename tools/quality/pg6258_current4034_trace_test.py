@@ -26,6 +26,13 @@ class ActualOriginalCandidate(unittest.TestCase):
     def setUpClass(cls):
         cls.texts={name:(subject.PMO/name).read_text()for name in subject.NAMES}
         cls.head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=subject.ROOT,text=True).strip()
+        saved=json.loads(cls.texts[subject.NAMES[2]])
+        if saved['currentPhysicalCandidate']['source']!='870010d6681d74519237be7a7ca6381a190f471a':
+            # After legitimate application, test the preserved before-metadata, never rewrite it.
+            prior=[r for r in saved['currentPhysicalCandidateHistory']if r['source']=='870010d6681d74519237be7a7ca6381a190f471a']
+            if len(prior)!=1:raise ValueError('one preserved original before-candidate fixture')
+            cls.head=prior[0]['metadataSource']
+            cls.texts={name:subprocess.check_output(['git','show',cls.head+':documents/400_PGPT/470_PMO/'+name],cwd=subject.ROOT,text=True)for name in subject.NAMES}
         cls.proposed,cls.observed=subject.candidates(cls.texts,cls.head)
         cls.inventory=json.loads(cls.proposed[subject.NAMES[2]])
 

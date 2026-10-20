@@ -1,4 +1,6 @@
+import copy
 import inspect
+import json
 import unittest
 from pyflakes.api import check
 import pg6263_branchless_original as subject
@@ -30,6 +32,31 @@ class Shape(unittest.TestCase):
             self.assertIn(token,raw)
         source=inspect.getsource(reader.global_four100)
         self.assertIn("('LINE', 'METHOD', 'CLASS', 'BRANCH')",source)
+
+    def actual(self):
+        from pg5940_private_lock_compile import BASE
+        q=json.loads((BASE/'PG6244-current4034-cases/qualification.json').read_bytes())
+        return q['changedOuterCounters'],{k:v['BRANCH']for k,v in q['counterNotApplicable'].items()},q
+
+    def test_actual_returned_counter_shape_is_preserved_without_zero_injection(self):
+        targets,proof,q=self.actual();before=copy.deepcopy(targets)
+        result=reader.counter_applicability(targets,proof,q['allPhysicalMainSha256'],q['productionSource'],'PG6244')
+        self.assertEqual(q['counterNotApplicable'],result)
+        self.assertEqual(before,targets)
+        for key in proof:self.assertNotIn('BRANCH',targets[key])
+
+    def test_wrong_source_hash_condition_method_count_raw_shape_and_campaign_rejected(self):
+        targets,proof,q=self.actual();key=subject.OWNERS[0]
+        for field,value in (('source','0'*40),('classSha256','0'*64),('conditionalInstructions',['ifnonnull']),
+                            ('methodCount',2),('instructionCount',0),('rawCounterPreserved',False)):
+            bad=copy.deepcopy(proof);bad[key][field]=value
+            with self.subTest(field=field),self.assertRaises(ValueError):
+                reader.counter_applicability(targets,bad,q['allPhysicalMainSha256'],q['productionSource'],'PG6244')
+        for campaign in ('PG6212','PG9999'):
+            with self.assertRaises(ValueError):reader.counter_applicability(targets,proof,q['allPhysicalMainSha256'],q['productionSource'],campaign)
+        with self.assertRaises(ValueError):reader.counter_applicability(targets,{},q['allPhysicalMainSha256'],q['productionSource'],'PG6244')
+        extra=copy.deepcopy(targets);extra[key]['BRANCH']={'missed':0,'covered':0}
+        with self.assertRaises(ValueError):reader.counter_applicability(extra,proof,q['allPhysicalMainSha256'],q['productionSource'],'PG6244')
 
 
 if __name__=='__main__':unittest.main()

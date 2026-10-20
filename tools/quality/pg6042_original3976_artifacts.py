@@ -53,6 +53,24 @@ def global_four100(modules):
     return all(module['coverage'][k]['missed'] == 0 for module in modules.values() for k in ('LINE', 'METHOD', 'CLASS', 'BRANCH'))
 
 
+def counter_applicability(targets, branchless, physical, source, campaign):
+    permitted = {'api:dev/codex/schubert/nk/api/messaging/inbound/'+n+'.class' for n in ('QuestionWorkListener','WebLogListener')} if campaign == 'PG6244' else set()
+    if branchless and set(branchless) != permitted:
+        raise ValueError('only two independently reviewed original branchless wrappers')
+    result = {}
+    for key, value in branchless.items():
+        if (key not in targets or set(targets[key]) != {'LINE', 'METHOD', 'CLASS'}
+                or value['source'] != source or value['classSha256'] != physical[key]
+                or value['conditionalInstructions'] != [] or value['methodCount'] != 3
+                or value['instructionCount'] <= 0 or len(value['methodInstructionsSha256']) != 64
+                or value['rawCounterPreserved'] is not True or value['branchCounter'] != 'NOT_APPLICABLE_NO_CONDITIONAL_OR_SWITCH'):
+            raise ValueError('branchless proof and exact original physical/raw counter shape')
+        result[key] = {'BRANCH': value}
+    if any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} and key not in result for key, v in targets.items()):
+        raise ValueError('all actual outer counter sets explicit,no missing-as-zero')
+    return result
+
+
 def inspect_original(data):
     import base64
     import datetime
@@ -154,20 +172,8 @@ def inspect_original(data):
     if data.get('expectedCurrentMain') is not None and physical != data['expectedCurrentMain']:
         raise ValueError('current selected and whole compiled Main byte maps exactly equal;PT successes not imported')
     targets = {key: all_counts[key] for key in data['changedOwnerKeys']}
-    branchless = data.get('branchlessOwnerProofs', {})
-    permitted = {'api:dev/codex/schubert/nk/api/messaging/inbound/'+n+'.class' for n in ('QuestionWorkListener','WebLogListener')} if campaign == 'PG6244' else set()
-    if branchless and set(branchless) != permitted:
-        raise ValueError('only two independently reviewed original branchless wrappers')
-    not_applicable = {}
-    for key, value in branchless.items():
-        if (key not in targets or set(targets[key]) != {'LINE', 'METHOD', 'CLASS'}
-                or value['source'] != data['source'] or value['classSha256'] != physical[key]
-                or value['conditionalInstructions'] != [] or value['methodCount'] != 3
-                or value['instructionCount'] <= 0 or len(value['methodInstructionsSha256']) != 64
-                or value['rawCounterPreserved'] is not True or value['branchCounter'] != 'NOT_APPLICABLE_NO_CONDITIONAL_OR_SWITCH'):
-            raise ValueError('branchless proof and exact original physical/raw counter shape')
-        not_applicable[key] = {'BRANCH': value}
-    if len(targets) != len(data['changedOwnerKeys']) or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} and key not in not_applicable for key, v in targets.items()):
+    not_applicable = counter_applicability(targets, data.get('branchlessOwnerProofs', {}), physical, data['source'], campaign)
+    if len(targets) != len(data['changedOwnerKeys']):
         raise ValueError('all23 actual outer counter sets explicit,no missing-as-zero')
     main_inputs = production_source_inputs(data['allSourceInputs'])
     if len(main_inputs) != 851 or main_inputs != data['expectedMainSourceInputs']:
@@ -192,7 +198,7 @@ def inspect_original(data):
 def emitted(data_hash, remote=REMOTE):
     raw = 'import hashlib,json\nfrom pathlib import Path\np=Path('+repr(remote+'/input.safe.json')+')\n'
     raw += 'if hashlib.sha256(p.read_bytes()).hexdigest()!='+repr(data_hash)+':raise ValueError("fixed input bytes")\n'
-    raw += inspect.getsource(expected_case_keys)+'\n'+inspect.getsource(production_source_inputs)+'\n'+inspect.getsource(physical_difference)+'\n'+inspect.getsource(global_four100)+'\n'+inspect.getsource(inspect_original)
+    raw += inspect.getsource(expected_case_keys)+'\n'+inspect.getsource(production_source_inputs)+'\n'+inspect.getsource(physical_difference)+'\n'+inspect.getsource(global_four100)+'\n'+inspect.getsource(counter_applicability)+'\n'+inspect.getsource(inspect_original)
     raw += '\nprint(json.dumps(inspect_original(json.loads(p.read_bytes()))))\n'
     if check(raw, '<complete original3976 artifact reader>'):
         raise ValueError('complete independent read-only reader namespace')
