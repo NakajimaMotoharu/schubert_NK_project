@@ -77,23 +77,24 @@ public final class ArtemisManagementReadinessClient {
   }
 
   @FunctionalInterface
-  interface OperationEncoder {
+  interface OperationEncoder<E extends Exception> {
     void encode(ClientMessage message, String resource, String operation, Object... arguments)
-        throws Exception;
+        throws E;
   }
 
   // PG-D453/PT-OPS-ENC001..003: the provider declares checked failures at this boundary.
-  // Keep unknown runtime identity, let Error propagate, and redact only declared failures.
-  static void encodeOperation(
+  // PG-D454: preserve the unchecked category together; normalize only checked failures.
+  // Error would also escape without this clause: Exception does not catch Error.
+  static <E extends Exception> void encodeOperation(
       ClientMessage message,
       String resource,
       String operation,
-      OperationEncoder encoder,
+      OperationEncoder<E> encoder,
       Object... arguments) {
     Objects.requireNonNull(encoder, "management operation encoder");
     try {
       encoder.encode(message, resource, operation, arguments);
-    } catch (RuntimeException unknown) {
+    } catch (RuntimeException | Error unknown) {
       throw unknown;
     } catch (Exception failure) {
       throw managementFailure(failure);
@@ -311,7 +312,7 @@ public final class ArtemisManagementReadinessClient {
       }
       checkParentDeadline();
       return result;
-    } catch (RuntimeException unknown) {
+    } catch (RuntimeException | Error unknown) {
       throw unknown;
     } catch (Exception failure) {
       throw managementFailure(failure);
