@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-026 — PT_DEFAULT：Web form/view22後の921/149
+
+1249/PG-D450/BUG1517。Web全143suite/913case＋既他五module guard六suite/八case、同じ承認済みhost fixture profile。自己所有new-only snapshot/offline Maven・全六format先行→package/JUnit/JaCoCo/SpotBugs、temp PostgreSQL/in-process broker/loopback ephemeral HTTP・公開DOM fixture/有限childだけ。実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作・権限/経路変更0。Web security機能名だけで危険扱いせず実作用を既profileと新literal限定差から判定、拒否probe/同操作再試行/代替確認でない。fresh>10/clean source/未使用namespace後一回、新source当12の明示四counter100/全XML/全Mainを確認、旧成功/欠落をPASS100へ補完しない。
+
 ## PTPRE-025 — PT_DEFAULT：API SQL/limit21条件後の1021/175
 
 1247/PG-D449/BUG1516。全API169suite/1010caseと既他五module guard六suite/十一case。自己所有新snapshot/offline Maven、六format先行→package/通常JUnit/JaCoCo/SpotBugs、Java25.0.4/Maven3.9.12と既temp PostgreSQL18・in-process broker・loopback ephemeral HTTP/file/有限child fixtureだけ。実VM/Unit/current/原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作、権限/アクセス経路変更0。wrapperは静的のみと呼ばず通常PT、rawTestExpectedやbusiness oracleを変えない。新source/clean/new-only/fresh枠を確認して一回、FES/flaky/rerun/not-run0・当16全四counterを実測。旧成功/未測定/欠落counterを100へ補完しない。拒否probe/再試行/代替確認0。
