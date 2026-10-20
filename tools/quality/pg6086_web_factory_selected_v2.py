@@ -11,7 +11,7 @@ def runner_source(total=None, suites=None):
     old = "head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()"
     if raw.count(old) != 1:
         raise ValueError('one fixed source snapshot identity,not later operator HEAD')
-    return raw.replace(old, 'head=SOURCE', 1)
+    return raw.replace(old, 'head='+repr(SOURCE), 1)
 
 
 def main():
