@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.messaging.config;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
 import org.apache.activemq.artemis.core.remoting.impl.netty.NettyConnectorFactory;
@@ -46,20 +47,42 @@ public enum ArtemisConnectionFactoryProvider {
                 TransportConstants.NETTY_CONNECT_TIMEOUT,
                 3_000),
             "schubert-nk-core");
-    ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(false, connector);
-    factory.setCallTimeout(2_000);
-    factory.setClientFailureCheckPeriod(10_000);
-    factory.setConnectionTTL(30_000);
-    factory.setInitialConnectAttempts(3);
-    factory.setReconnectAttempts(-1);
-    factory.setRetryInterval(1_000);
-    factory.setRetryIntervalMultiplier(2.0);
-    factory.setMaxRetryInterval(30_000);
-    factory.setConsumerWindowSize(profile.windowBytes());
-    factory.setBlockOnDurableSend(true);
-    factory.setPreAcknowledge(false);
-    factory.setUseTopologyForLoadBalancing(false);
-    return factory;
+    return configureOwned(profile, () -> new ActiveMQConnectionFactory(false, connector));
+  }
+
+  /** SSC315/PG-D464: all input ports precede acquisition; failed setup owns one close. */
+  static ActiveMQConnectionFactory configureOwned(
+      ConsumerProfile profile, Supplier<ActiveMQConnectionFactory> acquire) {
+    Objects.requireNonNull(profile, "profile");
+    Objects.requireNonNull(acquire, "factory acquisition");
+    int windowBytes = profile.windowBytes();
+    var factory = Objects.requireNonNull(acquire.get(), "JMS factory");
+    try {
+      factory.setCallTimeout(2_000);
+      factory.setClientFailureCheckPeriod(10_000);
+      factory.setConnectionTTL(30_000);
+      factory.setInitialConnectAttempts(3);
+      factory.setReconnectAttempts(-1);
+      factory.setRetryInterval(1_000);
+      factory.setRetryIntervalMultiplier(2.0);
+      factory.setMaxRetryInterval(30_000);
+      factory.setConsumerWindowSize(windowBytes);
+      factory.setBlockOnDurableSend(true);
+      factory.setPreAcknowledge(false);
+      factory.setUseTopologyForLoadBalancing(false);
+      return factory;
+    } catch (RuntimeException | Error primary) {
+      try {
+        factory.close();
+      } catch (RuntimeException | Error secondary) {
+        if (secondary instanceof Error && !(primary instanceof Error)) {
+          secondary.addSuppressed(primary);
+          throw secondary;
+        }
+        if (secondary != primary) primary.addSuppressed(secondary);
+      }
+      throw primary;
+    }
   }
 
   /** Consumer profiles are separate factories because Artemis window size is locator-wide. */

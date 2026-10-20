@@ -197,8 +197,10 @@ final class SyncRequestConsumersTest {
     assertEquals("synthetic-close-2", failure.getCause().getSuppressed()[0].getMessage());
     assertEquals(4, closes.get());
     assertFalse(consumers.ready());
-    consumers.close();
-    assertEquals(4, closes.get());
+    // SSC314/BUG1554: only the two failed contexts are retried; healthy contexts stay closed.
+    var retried = assertThrows(IllegalStateException.class, consumers::close);
+    assertEquals("synthetic-close-1", retried.getCause().getMessage());
+    assertEquals(6, closes.get());
   }
 
   @Test

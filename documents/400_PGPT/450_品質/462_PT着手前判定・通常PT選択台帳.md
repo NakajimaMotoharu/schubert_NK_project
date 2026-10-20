@@ -1,5 +1,10 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-039 — PT_DEFAULT：S2/S3aの同API/Web経路をまとめた必要影響PT
+
+1297/1299/1300、SSC314315/PG-D463464/1548-1554。三consumer/親group/broker＋API provider、六Main/十Test（新provider四Test＋親一Testを追加、旧no-op八Testの補正、管理fixturefinally修正）。固定JDK/Maven・通常finite自己所有PG/JMS/loopback/DOM/child fixtureのみ、実VM/current/Root/原本DBBackup/鍵/failed-cohort/intent/permit操作0。旧refusal再試行や境界probe0、PTALT代替0。
+
+元v1 compile1/v2旧oracle六件不合格は保全、新onlypg6150で実宣言1955/321/1667、六format/型nullSpotBugs・八target実四100をgateにする。定義import/pyflakes/件数/六Main十Test差分/生成engine compile0を着手前確認済み。source commit/push・clean/fresh枠後に一回だけ発行し、Main/Testは元終端まで固定。全体再演ではなく関連製造をまとめた必要影響PT、真正0後原XML/六Jar/全物理/無除外静的・当sourceの個別理由/必要全体へ接続する。S3b/native/CHR/451/現traceは別未完で旧成功を加算しない。
 ## PTPRE-038 — PT_DEFAULT：API JMS停止phase/S2・全API/Web
 
 先行判定はsourceadの1297で記述済み、本台帳への索引追記は元v1後。SSC314/PG-D463/1548YKT1307、五Main/新7Test/既誤oracle二件補正/fixturefinally是正。通常finite自己所有hostの全API/Web＋六module guard1950/320/1667、実VM/current/Root/既DBBackup/failed-cohort/intent/permitにアクセス0。六format型nullSpotBugs・原XML/Jar/全Main物理/六target実四100を要求、静的名義の動的実行ではない。旧source成功の輸入0。

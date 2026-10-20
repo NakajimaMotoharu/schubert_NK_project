@@ -97,9 +97,9 @@ class ApiConsumerRemainderTest {
     assertSame(fatal, assertThrows(AssertionError.class, owner::close));
     assertEquals(4, closes.get());
     assertEquals(0, fatal.getSuppressed().length);
-    owner.close();
+    assertSame(fatal, assertThrows(AssertionError.class, owner::close));
     assertFalse(owner.ready());
-    assertEquals(4, closes.get());
+    assertEquals(8, closes.get());
   }
 
   @Test
@@ -152,8 +152,17 @@ class ApiConsumerRemainderTest {
       assertEquals(List.of("close6", "close5", "close1", "close2", "close3", "close4"), calls);
       assertEquals(kind == 1 ? 1 : 0, firstFatal.getSuppressed().length);
       if (kind == 1) assertSame(laterFatal, firstFatal.getSuppressed()[0]);
-      runtime.close();
-      assertEquals(6, calls.size());
+      if (kind == 0) {
+        runtime.close();
+        assertEquals(6, calls.size());
+      } else {
+        assertSame(firstFatal, assertThrows(AssertionError.class, runtime::close));
+        // Successful children never run again; only the two faulting contexts remain unknown.
+        assertEquals(8, calls.size());
+        assertEquals(
+            kind == 3 ? List.of("close6", "close1") : List.of("close6", "close5"),
+            calls.subList(6, 8));
+      }
       assertFalse(runtime.ready());
     }
   }

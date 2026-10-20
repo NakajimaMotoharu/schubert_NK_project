@@ -249,8 +249,9 @@ final class WebLogConsumersTest {
     assertEquals("API Web log consumer close failed", closeFailure.getMessage());
     assertEquals(1, closes.get());
     assertFalse(runtime.ready());
-    runtime.close();
-    assertEquals(1, closes.get());
+    // SSC314/BUG1554: a permanent provider fault cannot turn into a normal no-op.
+    assertThrows(IllegalStateException.class, runtime::close);
+    assertEquals(2, closes.get());
 
     closes.set(0);
     var startupFailure =

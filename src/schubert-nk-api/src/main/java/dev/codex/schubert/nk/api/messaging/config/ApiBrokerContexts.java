@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -54,27 +55,47 @@ public final class ApiBrokerContexts implements AutoCloseable {
           provider) {
     Objects.requireNonNull(passwords, "password source");
     Objects.requireNonNull(provider, "factory provider");
-    var sync = provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, endpoint);
+    Objects.requireNonNull(endpoint, "Artemis endpoint");
+    return new ApiBrokerContexts(passwords, endpoint, provider);
+  }
+
+  /** SSC315: prepare all ownership state before the first provider resource exists. */
+  private ApiBrokerContexts(
+      Supplier<char[]> passwords,
+      String endpoint,
+      BiFunction<
+              ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
+          provider) {
+    this.passwords = passwords;
+    this.owners = new ArrayList<>(3);
+    this.ownerClosed = new boolean[3];
+    var sync =
+        Objects.requireNonNull(
+            provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.SYNC, endpoint),
+            "sync factory");
+    owners.add(sync);
     try {
       var webLog =
-          provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, endpoint);
-      try {
-        var async =
-            provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, endpoint);
-        return new ApiBrokerContexts(passwords, sync, webLog, async, sync, webLog, async);
-      } catch (RuntimeException | Error failure) {
+          Objects.requireNonNull(
+              provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.WEB_LOG, endpoint),
+              "Web Log factory");
+      owners.add(webLog);
+      var async =
+          Objects.requireNonNull(
+              provider.apply(ArtemisConnectionFactoryProvider.ConsumerProfile.ASYNC, endpoint),
+              "async factory");
+      owners.add(async);
+      this.retainedSync = sync;
+      this.retainedWebLog = webLog;
+      this.retainedAsync = async;
+    } catch (RuntimeException | Error failure) {
+      for (int index = owners.size() - 1; index >= 0; index--) {
         try {
-          webLog.close();
-        } catch (RuntimeException | Error closing) {
+          owners.get(index).close();
+        } catch (Exception | Error closing) {
+          // Keep the existing partial-factory primary and individual reverse-order secondary.
           if (closing != failure) failure.addSuppressed(closing);
         }
-        throw failure;
-      }
-    } catch (RuntimeException | Error failure) {
-      try {
-        sync.close();
-      } catch (RuntimeException | Error closing) {
-        if (closing != failure) failure.addSuppressed(closing);
       }
       throw failure;
     }

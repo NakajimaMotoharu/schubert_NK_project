@@ -11,6 +11,73 @@ import org.junit.jupiter.api.Test;
 /** PT-OPS-API-FACT001: fixed literal profiles, distinct failures, all earlier owners closed. */
 class ApiBrokerFactoryRemainderTest {
   @Test
+  void fact315004NullAtEveryPositionAndCompleteOwnerHaveLiteralReverseCleanup() {
+    for (int at = 0; at <= 3; at++) {
+      var calls = new ArrayList<String>();
+      var factories = new ArrayList<ActiveMQConnectionFactory>();
+      var index = new AtomicInteger();
+      var reads = new AtomicInteger();
+      int failAt = at;
+      java.util.function.BiFunction<
+              ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
+          provider =
+              (profile, endpoint) -> {
+                assertEquals("tcp://127.0.0.1:61616", endpoint);
+                calls.add("open" + profile.name());
+                if (index.incrementAndGet() == failAt) return null;
+                var factory =
+                    new ActiveMQConnectionFactory() {
+                      @Override
+                      public void close() {
+                        calls.add("close" + profile.name());
+                        super.close();
+                      }
+                    };
+                factories.add(factory);
+                return factory;
+              };
+      try {
+        java.util.function.Supplier<char[]> passwords =
+            () -> {
+              reads.incrementAndGet();
+              return new char[] {'P', 'T'};
+            };
+        if (failAt == 0) {
+          try (var owner =
+              ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider)) {
+            owner.close();
+            owner.close();
+            assertEquals(
+                List.of(
+                    "openSYNC",
+                    "openWEB_LOG",
+                    "openASYNC",
+                    "closeASYNC",
+                    "closeWEB_LOG",
+                    "closeSYNC"),
+                calls);
+          }
+        } else {
+          assertThrows(
+              NullPointerException.class,
+              () -> ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider));
+          assertEquals(
+              switch (failAt) {
+                case 1 -> List.of("openSYNC");
+                case 2 -> List.of("openSYNC", "openWEB_LOG", "closeSYNC");
+                default ->
+                    List.of("openSYNC", "openWEB_LOG", "openASYNC", "closeWEB_LOG", "closeSYNC");
+              },
+              calls);
+        }
+        assertEquals(0, reads.get());
+      } finally {
+        for (var factory : factories) factory.getServerLocator().close();
+      }
+    }
+  }
+
+  @Test
   void everyPartialFactoryFaultClosesEarlierProfilesAndPreservesIdentity() {
     for (int failAt = 1; failAt <= 3; failAt++) {
       for (boolean fatal : List.of(false, true)) {
@@ -88,6 +155,17 @@ class ApiBrokerFactoryRemainderTest {
                 },
                 "tcp://127.0.0.1:61616",
                 null));
+    assertEquals(0, calls.get());
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            ApiBrokerContexts.createOwned(
+                () -> new char[] {'P', 'T'},
+                null,
+                (profile, endpoint) -> {
+                  calls.incrementAndGet();
+                  throw new AssertionError("must not acquire");
+                }));
     assertEquals(0, calls.get());
   }
 

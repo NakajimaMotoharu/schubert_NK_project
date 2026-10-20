@@ -83,8 +83,10 @@ class QuestionWorkConsumersTest {
       assertEquals(0, shared.getSuppressed().length);
       assertEquals(4, closes.get());
       assertFalse(owner.ready());
-      owner.close();
-      assertEquals(4, closes.get());
+      // SSC314/BUG1554: all four contexts still fail; no successful completion exists.
+      var retried = assertThrows(kind, owner::close);
+      assertSame(shared, shared instanceof Error ? retried : retried.getCause());
+      assertEquals(8, closes.get());
     }
   }
 
@@ -235,9 +237,13 @@ class QuestionWorkConsumersTest {
         assertEquals(
             "API Question consumer close failed",
             assertThrows(IllegalStateException.class, owner::close).getMessage());
-      owner.close();
+      Class<? extends Throwable> expectedClose =
+          closing instanceof Error ? AssertionError.class : IllegalStateException.class;
+      var retried = assertThrows(expectedClose, owner::close);
+      if (closing instanceof Error) assertSame(closing, retried);
+      else assertSame(closing, retried.getCause());
       assertFalse(owner.ready());
-      assertEquals(1, count.get());
+      assertEquals(2, count.get());
     }
   }
 
