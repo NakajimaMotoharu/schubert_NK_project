@@ -1,5 +1,11 @@
 # 画面template・controller・form設計
 
+## SSC312 HTTP資源factoryの取得前owner準備（2026-10-21、内部詳細補足）
+
+API/Web管理HTTPは、入力・固定loopback住所/port/backlog32を検証し、owner・全flag/lock・未開始executor（core/max1、queue32、daemon名は既定）・応答情報を先に準備してからHttpServer factoryを一度だけ呼ぶ。取得成功後は追加の未保護allocationを挟まずfinal serverへ格納してownerを返す。取得例外/nullは成功へ変換せず、未取得serverをcloseしない。factory内部で取得後に失敗した資源はfactoryの責務であり、callerが未返却資源を推定回収しない。WebHttpServerも未refreshのMVC context・private final lifecycleLock・ownerを先に準備してからTomcat supplierを一度取得しfinal格納、既startWithOwnerの捕捉callbackとvendor設定/startは既存try内を維持する。未refresh MVCはclose義務のある開始済資源として扱わない。
+
+取得後の既start/stop/destroy/cleanup例外順位・失敗owner再試行・readiness・API8091/Web8081/業務8080・URL/電文/権限/SQL/制限を変更しない。実OOM/実運用漏えいを観測したとの認定ではなく、取得後のowner準備allocation gapを構造上除く。BUG1545/YKT1305、関連SS313/342/354、PG-D461。取得前準備→factory最後→final格納は実ClassFile順序を独立点検し、故意のOOMや稼働VM操作で検証しない。動的PTは通常の有限self-owned fixtureだけ、拒否PT代替や実親/native/配備証明とは分離する。
+
 ## 1. 目的・追跡
 
 SSC176内部接続補足（2026-10-04）：SCR007/010/013の4GETは明示ContentDetailMvcConfigurationの一つのbounded参照adapterへ注入する。既存Scenario/Animation/Music階層controllerは維持し、SCN/VID/MTRの既存verified facade・API0102終端handlerと保持済transferのLargeResultReaderを借用する。Scenario IDは既存game経路と混同しないnumeric mappingで受け、FILEはSS333の属性/hash/全record/held能力を検証してから既存ScenarioDetailViewModelへ渡す。fragment `#entry-ID`はHTTPへ送られず既存entry anchor/`:target`によるhighlightを維持、任意anchorを業務要求へ追加しない。VIDは検証済request-bound metadataだけ、Musicはstored pair_key/role/display_orderによる閉display projectionだけをHTMLへ渡し、descriptor/DTO/context/物理pathを入れない。戻り先・title/pair表示・全順序・media/DL操作はUI223/235のまま。borrowed root・DB/JMS/codecの所有を変えず、画面単体成功でSS342 fullreadyを公開しない。追跡PG-D365/PT-CONTENT001～009/016079080、独立literal wire/DOM/file integrity/境界null例外並行・同source品質/実nativeを別受入とする。RD/UI/DIF/電文/DDL変更なし。
