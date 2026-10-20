@@ -1,0 +1,280 @@
+{
+  "actualExit": 0,
+  "source": "6b5cea563b6f68b0b604afc06490063793e49662",
+  "branch": "dev-foundation",
+  "run": "pg5828-isolation-selected66-v1",
+  "startedUTC": "2026-10-20T02:58:06.748810+00:00",
+  "completedUTC": "2026-10-20T03:00:30.341244+00:00",
+  "archiveSha256": "44af39e32c3aa0f86cd8accf284d242286d873527a086f65b96115132d0836ef",
+  "originalManifestSha256": "7e7ed1c0cfec1709efa82991c180918a9aaa0da2564a3cb5726617a5f9423de5",
+  "staticManifestSha256": "a8db12fed46184684ec8d911266dedac6206f42ca65be2fcd8f8c424ab6bbf8f",
+  "xmlHashes": {
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70",
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest": "4dd7c0c8ec5be52c2bf4e8f7b5522c75b8ab002d8503eae24ed8789050b879d7",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "a01de3b27723ae4c428bf6357048cf6517a565474f6e3766e58b3975023cc19e",
+    "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "8cf85e1e6682255129b8d6c5b30c9272a2c82966aa20ce10adfd9bc4b750b0a6",
+    "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "70bef4f96beae230aa86ef3655a4629ff437ef01f66c635e8698ca4214e56904",
+    "dev.codex.schubert.nk.api.messaging.inbound.ConsumerRollbackUnconfirmedContractTest": "ba61eed94a3f6be621eaf845f4c2f0d9f19c7d448b278d76aeb2c8ddbaa9aa2c",
+    "dev.codex.schubert.nk.api.messaging.inbound.ApiConsumerTerminalRemainderTest": "12f8fa09eb4b925b9300e119bf41e9120c0f9eb8ca12ad9c7f3f4898f9a2b741",
+    "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0",
+    "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest": "084f723330691547f48de89764ca15bd04083fe9b5bc2ebdeb62f88370d7a2cf",
+    "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListenerTest": "656c66908434624554129da90edee14af08a20f6908182805cd19e9eb5ba1eef",
+    "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest": "c918535afe49e91a3937c0afaa34fb2d5fdbfba54a91c0f560954b7f8592ac0e",
+    "dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest": "1c0cc052fbd4d73ff96ad11c838495e426a4ad6232891d72dc31dc9e5dd9f132",
+    "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest": "8c8546f5f6b898c48efd6a9853e930a3c0337e618636ae57f9b97df4bd070191",
+    "dev.codex.schubert.nk.web.messaging.ReplyRollbackUnconfirmedContractTest": "e036438661be66fd010cdfda29df916148c5967dc7180033d120405356e27e98",
+    "dev.codex.schubert.nk.web.messaging.ReplyRollbackSignalContractTest": "32af28f28277dbe186313e3107e5e750bb2e1b15ea81db0d88674b5220dacc45",
+    "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest": "5631dee185aca01bed3f636def1251d19cda68f07a1799bafbf4354264aa445b",
+    "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest": "70f84e66e7bf6a32ed007e7d84bf5853b71c25bde2c5d56dea354ea57f0630eb",
+    "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest": "e9a66e9f5cee325c50c2b7c8c8662f1739059c8c59e57c8c9b0c1c57e6464de8"
+  },
+  "caseTrace": [
+    {
+      "designTestId": "PT-JMS-ISO001",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso001SyncCheckedIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO002",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso002SyncRuntimeIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO003",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso003QuestionCheckedIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO004",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso004QuestionRuntimeIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO005",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso005WebLogCheckedIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO006",
+      "class": "dev.codex.schubert.nk.api.messaging.inbound.FatalIsolationConsumersContractTest",
+      "method": "iso006WebLogRuntimeIsolationFailureStopsWithoutAck",
+      "xmlSha256": "8a25bb9b5c41a5a2bcb759f8020d435ad2c29d18ad246a3d775ae33889eadbf0"
+    },
+    {
+      "designTestId": "PT-JMS-ISO007",
+      "class": "dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest",
+      "method": "iso007ReplyCheckedIsolationFailureStopsWithoutAck",
+      "xmlSha256": "1c0cc052fbd4d73ff96ad11c838495e426a4ad6232891d72dc31dc9e5dd9f132"
+    },
+    {
+      "designTestId": "PT-JMS-ISO008",
+      "class": "dev.codex.schubert.nk.web.messaging.ReplyFatalIsolationContractTest",
+      "method": "iso008ReplyRuntimeIsolationFailureStopsWithoutAck",
+      "xmlSha256": "1c0cc052fbd4d73ff96ad11c838495e426a4ad6232891d72dc31dc9e5dd9f132"
+    },
+    {
+      "designTestId": "PT-JMS-ISO009",
+      "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "method": "iso009PrimaryAndProtocolAreRequired",
+      "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+    },
+    {
+      "designTestId": "PT-JMS-ISO010",
+      "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "method": "iso010SameNodeIsRetainedWithoutSelfSuppression",
+      "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+    },
+    {
+      "designTestId": "PT-JMS-ISO011",
+      "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "method": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity",
+      "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+    },
+    {
+      "designTestId": "PT-JMS-ISO012",
+      "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "method": "iso012DisabledPrimarySuppressionCannotHideProtocol",
+      "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+    }
+  ],
+  "tests": 66,
+  "suites": 18,
+  "mainSource": 851,
+  "physicalMain": 1666,
+  "phaseExits": [
+    0,
+    0
+  ],
+  "staticIssues": {
+    "api": 0,
+    "batch": 0,
+    "bootstrap": 0,
+    "protocol": 0,
+    "storage": 0,
+    "web": 0
+  },
+  "targetCounters": {
+    "api:api/messaging/inbound/InboundTransactions": {
+      "BRANCH": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 23,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/QuestionWorkConsumers": {
+      "BRANCH": {
+        "covered": 13,
+        "missed": 17
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 45,
+        "missed": 19
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      }
+    },
+    "api:api/messaging/inbound/SyncRequestConsumers": {
+      "BRANCH": {
+        "covered": 21,
+        "missed": 27
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 51,
+        "missed": 30
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 4
+      }
+    },
+    "api:api/messaging/inbound/WebLogConsumers": {
+      "BRANCH": {
+        "covered": 13,
+        "missed": 17
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 41,
+        "missed": 23
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 3
+      }
+    },
+    "protocol:protocol/transport/FailedJmsIsolationException": {
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "protocol:protocol/transport/UnconfirmedJmsRollbackException": {
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "web:web/messaging/ArtemisReplyConsumer": {
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "web:web/messaging/ArtemisReplyConsumers": {
+      "BRANCH": {
+        "covered": 26,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 75,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 12,
+        "missed": 0
+      }
+    }
+  },
+  "targetFour100": false,
+  "formalAccepted": false,
+  "fullCoverageClaimed": false,
+  "ptAlternativeCompleted": 0,
+  "fullRegressionPending": true,
+  "BUG1494Open": true,
+  "vmActions": 0,
+  "toolchain": {
+    "jdk": "25.0.4",
+    "maven": "3.9.12",
+    "jacoco": "0.8.15",
+    "spotbugs": "4.10.4.0"
+  }
+}

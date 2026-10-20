@@ -1,0 +1,949 @@
+[
+  {
+    "findingId": "F03-PMD2-9a6d66d46ad49e629ab8680d47fe75270e6512609d8f62818890c76b7af1a8d9",
+    "legacyFindingId": "F03-PMD-9edcffe842fe587aa5b723139f4c0a5441fd44edd02afce932c3d1c034bc17d7",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+    "sourceSha256": "ed6ec400f30d2965a089cd9ec45e73e0eef8ab6d1b37494a029c2daf6feba9d3",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "38",
+    "endline": "38",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 190,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "11",
+      "firstLine": "38",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "45",
+      "lastLine": "38",
+      "leftExpression": "isolationFailure",
+      "leftType": "java.lang.Exception",
+      "method": "isolateFatal",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "rightExpression": "protocolFailure",
+      "rightType": "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-47b4eee2fe4ca2729c0d82bebd78c58a4d969effea2c549e5b26b3e55b299517",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-f2f038e9e00bbbd197d0d332dafda90e4321a9626b9442d394045d5c92bea828",
+        "xmlSha256": "c2feed9b181d4a32039809d0dd3f10c21a1f34fb4bb7988b0aab80124d449c95",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+        "caseNameSha256": "fe3b8be63c321c4e866f4e598d031c792689b882492c32e26aae3077fc67e83f"
+      },
+      {
+        "testId": "PT-WHOLE-cffeaee3ed45c1d903856b5f850fe6b0a16d150b545af71a1017474033916493",
+        "xmlSha256": "c2feed9b181d4a32039809d0dd3f10c21a1f34fb4bb7988b0aab80124d449c95",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+        "caseNameSha256": "a0a246fa5578a5d1594637bc55ec7f6aa4fe5f221b371fcb446bed8d110eed09"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-8489f2b85f18b9ed18d54efc367021f4fce882ebf7b24ded7ac3ff0049648905",
+    "legacyFindingId": "F03-PMD-8430552cc8755fe9618c9c97a3df3797d7cda9fb8a530114d663a414ce627e06",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+    "sourceSha256": "ed6ec400f30d2965a089cd9ec45e73e0eef8ab6d1b37494a029c2daf6feba9d3",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "54",
+    "endline": "54",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "37",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 192,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "11",
+      "firstLine": "54",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "36",
+      "lastLine": "54",
+      "leftExpression": "failure",
+      "leftType": "java.lang.Throwable",
+      "method": "rollbackAfterFailure",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java",
+      "rightExpression": "rollbackFailure",
+      "rightType": "java.lang.RuntimeException"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-f35f079c0d5fb032bb79c9e4acf0197c054a28658bb82436cd15fc586470fc1b",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-345434e35e7734651696ceda943c6fb6e5c3961ed30c0cd2c0dae03b0b31a13e",
+        "xmlSha256": "c2feed9b181d4a32039809d0dd3f10c21a1f34fb4bb7988b0aab80124d449c95",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+        "caseNameSha256": "aaa3e3d28c79f0f6976542415c527b369ce0c3296d537aa22dfa8303afeb78bb"
+      },
+      {
+        "testId": "PT-WHOLE-49e43301d1ddd49b940066c85d2ee14efe7787749638d713c670b7dba95d0922",
+        "xmlSha256": "c2feed9b181d4a32039809d0dd3f10c21a1f34fb4bb7988b0aab80124d449c95",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+        "caseNameSha256": "ec72d170f10fcb4cba0fb95a643f74a4b6c2cbd744f8887d90979038534d23b1"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-7e412e4eabcc44ce4c8cf0fee265d963011e22a11a5febbb691304b03731a037",
+    "legacyFindingId": "F03-PMD-9a6860d0fadf9ffe534f12cd6664a44907fca108223f0af2b3c519b10bb56b40",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+    "sourceSha256": "3ad58fee415383b373761fa18290151aa9851fdd431997629b553a1c2dc5c998",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "84",
+    "endline": "84",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "43",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 210,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "84",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "42",
+      "lastLine": "84",
+      "leftExpression": "notification",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-97ecb62fac3d6f0c903dd0ebe65511b973e76f4810f5d117534def8102a23cf6",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-60ff2967c38015ec4b03a9739da0923ee97b9a574e31cd10b87554fcde14393d",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "ee58534ef906859b5ed0b07870a138df31588506c6c03a2e00553ed7fdded172"
+      },
+      {
+        "testId": "PT-WHOLE-9786017971d38be4f98a191ab4362e9305c0a1183a735dd267a93007594137e3",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d0ae9d6c54dce8c6d8aef2c0a3967b6ae949f3d5a39680165880ac976ece01ad"
+      },
+      {
+        "testId": "PT-WHOLE-ef29fa3992d7d798f3064dec888a6be1955c1cc276f1bc008cadbc7bfaff1468",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d695bf9f2ff3b61d3009dae5947649a1ffe0402c5fbd4b0b07dbed381e788e9a"
+      },
+      {
+        "testId": "PT-WHOLE-5bd06fb6b8b1d3d781e2730657bef1921a8c1427d77cef5c4376ef5a647ba5d8",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "71b53db6ade206de6e211396c1089a1fd76e90851e9408a9a9f8a218e3128da5"
+      },
+      {
+        "testId": "PT-WHOLE-4b7aa8b22a22dbf7f4c45deff832bf4c5e0c7550173c12d0a88efa168f1df55e",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "e3b8cffb5a3bfebd6bed5848b8e01218dbea73be4aebbc1eb52a0f8747290ae8"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-bfe336596ae757f7119059c5c1ffe4d6b498252fa877b150edd17be93c4ba03c",
+    "legacyFindingId": "F03-PMD-4daa328d4a35cfd31b667fc9819400b193f091ec6d589636c01df3fb0451ad9a",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+    "sourceSha256": "3ad58fee415383b373761fa18290151aa9851fdd431997629b553a1c2dc5c998",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "90",
+    "endline": "90",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 215,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "90",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "31",
+      "lastLine": "90",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "rightExpression": "retained",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-c4dd398354e44861e3619c8308a4450eb69f454314f5b20571f720c6784eaecf",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-60ff2967c38015ec4b03a9739da0923ee97b9a574e31cd10b87554fcde14393d",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "ee58534ef906859b5ed0b07870a138df31588506c6c03a2e00553ed7fdded172"
+      },
+      {
+        "testId": "PT-WHOLE-9786017971d38be4f98a191ab4362e9305c0a1183a735dd267a93007594137e3",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d0ae9d6c54dce8c6d8aef2c0a3967b6ae949f3d5a39680165880ac976ece01ad"
+      },
+      {
+        "testId": "PT-WHOLE-ef29fa3992d7d798f3064dec888a6be1955c1cc276f1bc008cadbc7bfaff1468",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d695bf9f2ff3b61d3009dae5947649a1ffe0402c5fbd4b0b07dbed381e788e9a"
+      },
+      {
+        "testId": "PT-WHOLE-5bd06fb6b8b1d3d781e2730657bef1921a8c1427d77cef5c4376ef5a647ba5d8",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "71b53db6ade206de6e211396c1089a1fd76e90851e9408a9a9f8a218e3128da5"
+      },
+      {
+        "testId": "PT-WHOLE-4b7aa8b22a22dbf7f4c45deff832bf4c5e0c7550173c12d0a88efa168f1df55e",
+        "xmlSha256": "52570077bd39c8af109846a6e939d38705472192439fe7adaf470ff0c8d01917",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "e3b8cffb5a3bfebd6bed5848b8e01218dbea73be4aebbc1eb52a0f8747290ae8"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-1b895d1278b7b7628a9337ed43b6049d9f91b37f561a3f34a05bdea229c06100",
+    "legacyFindingId": "F03-PMD-cf6ffeeef53f6377c41197806dc5de7138ef06471368a0ac060736c7bd67bebc",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+    "sourceSha256": "9e0eccb23c2e610e41f7dd6cbc4a849d84b300a5e44c4161999703ce3572f00e",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "108",
+    "endline": "108",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "43",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 238,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "108",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "42",
+      "lastLine": "108",
+      "leftExpression": "notification",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-71c68d71d1ba86180e89439f0e83e09f029d061345ca8158582b70438f6efd07",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-a21142d64583ef5018ea31b5ac768a7a574f517085ab14c36edaf7a46743cf64",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "fa5b4dfd11abd8e75253eeb36e5985515883eb0db5c80a195fdd5c5c90adc00f"
+      },
+      {
+        "testId": "PT-WHOLE-0dda013c20a3a1ec495bcb136705a4031571c2ef206cc35569dc92e15b7b555a",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "db3695d289f80c48f3f0c4d171ce0e6ac2550867f154d727316dc827a738511e"
+      },
+      {
+        "testId": "PT-WHOLE-7f4c2dfaada0a87e84e0bd8399b6b3ced1c2f8a7c7b4a37fafbeac3e98f2db39",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "1d8aff84b6da9f6a79cd0b8bfe48476563979b479f373d44d7760eb7782729c3"
+      },
+      {
+        "testId": "PT-WHOLE-f28613569532fc5349ef86e538c6e5da10fc3f504548d02f0408273a746ac392",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d93e66bbbaef4625cbd53a18a1824e8efb8ede13d9282811c9b4412f6f96b5ff"
+      },
+      {
+        "testId": "PT-WHOLE-aa08163454c0c6977119f493901c4f9c1e02ec5779658bc15ca5123219891165",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d4a0d17c9918e9016a30f0ecb6bb3e2e1b39d27449761a08a471b611d65aa88f"
+      },
+      {
+        "testId": "PT-WHOLE-69630dae845058461b5c718f57c89b47b7d6f739c9780e583271ec6cd4c62055",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "10ba43bff865884cc8953aee65c533f5ee7b57d81260c6b4b5d165bba471adb5"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-817b4b3d19b6559b6ddeba8714d4229166751d14f754ea83787c75555da7e2a5",
+    "legacyFindingId": "F03-PMD-e58fbd6cf0d8f2ba41cb3c9b743487be26470c86a18483bec86c11415962328d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+    "sourceSha256": "9e0eccb23c2e610e41f7dd6cbc4a849d84b300a5e44c4161999703ce3572f00e",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "138",
+    "endline": "138",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "38",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 243,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "138",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "37",
+      "lastLine": "138",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "close",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-8c15632feae26f896b6f0296d662198e8946bb31513232d1ed617279146e5533",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-a21142d64583ef5018ea31b5ac768a7a574f517085ab14c36edaf7a46743cf64",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "fa5b4dfd11abd8e75253eeb36e5985515883eb0db5c80a195fdd5c5c90adc00f"
+      },
+      {
+        "testId": "PT-WHOLE-0dda013c20a3a1ec495bcb136705a4031571c2ef206cc35569dc92e15b7b555a",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "db3695d289f80c48f3f0c4d171ce0e6ac2550867f154d727316dc827a738511e"
+      },
+      {
+        "testId": "PT-WHOLE-7f4c2dfaada0a87e84e0bd8399b6b3ced1c2f8a7c7b4a37fafbeac3e98f2db39",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "1d8aff84b6da9f6a79cd0b8bfe48476563979b479f373d44d7760eb7782729c3"
+      },
+      {
+        "testId": "PT-WHOLE-f28613569532fc5349ef86e538c6e5da10fc3f504548d02f0408273a746ac392",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d93e66bbbaef4625cbd53a18a1824e8efb8ede13d9282811c9b4412f6f96b5ff"
+      },
+      {
+        "testId": "PT-WHOLE-aa08163454c0c6977119f493901c4f9c1e02ec5779658bc15ca5123219891165",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d4a0d17c9918e9016a30f0ecb6bb3e2e1b39d27449761a08a471b611d65aa88f"
+      },
+      {
+        "testId": "PT-WHOLE-69630dae845058461b5c718f57c89b47b7d6f739c9780e583271ec6cd4c62055",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "10ba43bff865884cc8953aee65c533f5ee7b57d81260c6b4b5d165bba471adb5"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-4f5e86140f1e0b0a76b96ee77f33438f8d2ff76755c3c4a6a1e7ef40f25d0f40",
+    "legacyFindingId": "F03-PMD-eac4b9905944f0acbdae2ac37723b54c50426a382e742f231f8b67e76525674e",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+    "sourceSha256": "9e0eccb23c2e610e41f7dd6cbc4a849d84b300a5e44c4161999703ce3572f00e",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "154",
+    "endline": "154",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "36",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 247,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "11",
+      "firstLine": "154",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "35",
+      "lastLine": "154",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "closeAfterFailure",
+      "operator": "EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/SyncRequestConsumers.java",
+      "rightExpression": "startupFailure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "IDENTICAL_THROWABLE_EARLY_RETURN",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-d040114c7e3e95746a61ae7cf14d7c36e5ebc5f05834a415ef9d547e56bbb55c",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-a21142d64583ef5018ea31b5ac768a7a574f517085ab14c36edaf7a46743cf64",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "fa5b4dfd11abd8e75253eeb36e5985515883eb0db5c80a195fdd5c5c90adc00f"
+      },
+      {
+        "testId": "PT-WHOLE-0dda013c20a3a1ec495bcb136705a4031571c2ef206cc35569dc92e15b7b555a",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "db3695d289f80c48f3f0c4d171ce0e6ac2550867f154d727316dc827a738511e"
+      },
+      {
+        "testId": "PT-WHOLE-7f4c2dfaada0a87e84e0bd8399b6b3ced1c2f8a7c7b4a37fafbeac3e98f2db39",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "1d8aff84b6da9f6a79cd0b8bfe48476563979b479f373d44d7760eb7782729c3"
+      },
+      {
+        "testId": "PT-WHOLE-f28613569532fc5349ef86e538c6e5da10fc3f504548d02f0408273a746ac392",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d93e66bbbaef4625cbd53a18a1824e8efb8ede13d9282811c9b4412f6f96b5ff"
+      },
+      {
+        "testId": "PT-WHOLE-aa08163454c0c6977119f493901c4f9c1e02ec5779658bc15ca5123219891165",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "d4a0d17c9918e9016a30f0ecb6bb3e2e1b39d27449761a08a471b611d65aa88f"
+      },
+      {
+        "testId": "PT-WHOLE-69630dae845058461b5c718f57c89b47b7d6f739c9780e583271ec6cd4c62055",
+        "xmlSha256": "fe2f525a6e6d319c695525ec4758194e4d6dc9459501f408561f4e9befc71303",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.SyncRequestConsumersTest",
+        "caseNameSha256": "10ba43bff865884cc8953aee65c533f5ee7b57d81260c6b4b5d165bba471adb5"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-8c94bdf004d573da126cd614908e95f0ace63a33641205486f87cb81dc89fcb2",
+    "legacyFindingId": "F03-PMD-45bcdf960ee9e561d4f3a291dd1b226ee3e9a0ad327a7aa83b0bf692e5faafa1",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+    "sourceSha256": "736a282fefc798679ec30916ae8337d49a94a938da40bba27018a6d405011f4b",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "96",
+    "endline": "96",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "43",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 268,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "96",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "42",
+      "lastLine": "96",
+      "leftExpression": "notification",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-ddba71774b09199e625b386a41851cf95ab30b2bee86d3c43e7f4b7053f530cc",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-c6678547575db9775169c7a8cf5d5658d99496032141033af0d0a5ad82c4cd6f",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "fad4b12e4f8361a0ce8d826f922348b60d42e7e426feca7d2f528eff1fe2ac59"
+      },
+      {
+        "testId": "PT-WHOLE-2b74b5077ae8a68b641ee00f951a724029ea3fdeaeff21013074de4ba357cde7",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "01a378973746f2afd2a4ab98b69c52b2c6d25c4a03db8fc8558ac5a1685b1cc6"
+      },
+      {
+        "testId": "PT-WHOLE-ed3c28c51750724c803dc01795ee4738ce7bc5af890a1f7e2605768cbe93686a",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "a1c246bc7be7bf02ebbf35c90cff38f302767f7e5843c3994863f9621be83a46"
+      },
+      {
+        "testId": "PT-WHOLE-b08a901ddec525c6accae3d4c2ac1c498da84a93c30a3f5d0d3a36a02108fa41",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "805920b00981864604c172ca9fb730a9600cc339f879a733aa8a629272636b2a"
+      },
+      {
+        "testId": "PT-WHOLE-3d89145f36869d214fc6235293c3a43143d23a7f902f359a19922b1328bb8b4d",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "674031535b738d19cb7827250f4f7971f0b1118e2c5ccf967647a9a1179c813e"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-63cecc347d77c0cfb27997eb82fc93a7580a7640a2cb828ff41fe17971ce9816",
+    "legacyFindingId": "F03-PMD-0f04bde23511a9ebbd15227788decf40312f7706a788d1fbb06c0666e72502fb",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+    "sourceSha256": "736a282fefc798679ec30916ae8337d49a94a938da40bba27018a6d405011f4b",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "102",
+    "endline": "102",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 273,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "102",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "31",
+      "lastLine": "102",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "rightExpression": "retained",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-44a5e0db28852ee9dccde5bc1169bc85bd39052549a3e3de45a5fdf6cf4828bf",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-c6678547575db9775169c7a8cf5d5658d99496032141033af0d0a5ad82c4cd6f",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "fad4b12e4f8361a0ce8d826f922348b60d42e7e426feca7d2f528eff1fe2ac59"
+      },
+      {
+        "testId": "PT-WHOLE-2b74b5077ae8a68b641ee00f951a724029ea3fdeaeff21013074de4ba357cde7",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "01a378973746f2afd2a4ab98b69c52b2c6d25c4a03db8fc8558ac5a1685b1cc6"
+      },
+      {
+        "testId": "PT-WHOLE-ed3c28c51750724c803dc01795ee4738ce7bc5af890a1f7e2605768cbe93686a",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "a1c246bc7be7bf02ebbf35c90cff38f302767f7e5843c3994863f9621be83a46"
+      },
+      {
+        "testId": "PT-WHOLE-b08a901ddec525c6accae3d4c2ac1c498da84a93c30a3f5d0d3a36a02108fa41",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "805920b00981864604c172ca9fb730a9600cc339f879a733aa8a629272636b2a"
+      },
+      {
+        "testId": "PT-WHOLE-3d89145f36869d214fc6235293c3a43143d23a7f902f359a19922b1328bb8b4d",
+        "xmlSha256": "bce7dde772d43a2a461c58c2a1dc3744cba53051838b336de2f5608e1d01fc1e",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "674031535b738d19cb7827250f4f7971f0b1118e2c5ccf967647a9a1179c813e"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-cfa0daae975c6872c10455b5a1bac4f8873a8a9b5ed21e0611a7a3494c698b71",
+    "legacyFindingId": "F03-PMD-bcfaad87f09a1016fb1fedaea4902fe4b72bd7cb5470f8642b8c83bf3e66c5df",
+    "sourcePath": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+    "sourceSha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "22",
+    "endline": "22",
+    "priority": "3",
+    "begincolumn": "9",
+    "endcolumn": "35",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1218,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D442; SS322/352. This fresh wrapper retains isolation/unknown-rollback primary as its cause; only a distinct protocol Throwable becomes an additional diagnostic node. Value equality is not node identity. Current Throwable parameters and exact constructor guard, independent same/distinct-equals-true/disabled-suppression/null fixtures and actual both identity branches establish this narrow contract, not external receiver or owned cleanup success.",
+    "typedReferenceFact": {
+      "firstColumn": "9",
+      "firstLine": "22",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "34",
+      "lastLine": "22",
+      "leftExpression": "protocolFailure",
+      "leftType": "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException",
+      "method": "<init>",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "rightExpression": "primary",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "FRESH_ISOLATION_WRAPPER_CAUSE_NODE_DEDUPLICATION",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentSelectedCaseRefs": [
+      {
+        "designTestId": "PT-JMS-ISO009",
+        "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "method": "iso009PrimaryAndProtocolAreRequired",
+        "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+      },
+      {
+        "designTestId": "PT-JMS-ISO010",
+        "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "method": "iso010SameNodeIsRetainedWithoutSelfSuppression",
+        "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+      },
+      {
+        "designTestId": "PT-JMS-ISO011",
+        "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "method": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity",
+        "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+      },
+      {
+        "designTestId": "PT-JMS-ISO012",
+        "class": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "method": "iso012DisabledPrimarySuppressionCannotHideProtocol",
+        "xmlSha256": "07bdc65e1b1c2b4989ce4b582c3af5d6cf5f1151d754f63946803d05306d0d70"
+      }
+    ],
+    "currentSelectedManifestSha256": "c6244a36c37c2101c0625c911b35cc94f196b490186414ff034ffcc3d21a4057",
+    "actualConstructorCounters": {
+      "BRANCH": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 6,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "newDispositionCreated": true
+  },
+  {
+    "findingId": "F03-PMD2-d1455742d824b9d8df4beb0e32e25c4d4ef4b5717d0666f8f816c7bdf21fdc73",
+    "legacyFindingId": "F03-PMD-6774756523dcab28fce59dbf9d1734e308aa58b830c3adccaad975fd09ae1f27",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "d548ab212a5d4b81cec195d098e433471f7cff889de95b75b65ff7cd37048f09",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "56",
+    "endline": "56",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1448,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "11",
+      "firstLine": "56",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "45",
+      "lastLine": "56",
+      "leftExpression": "isolationFailure",
+      "leftType": "java.lang.Exception",
+      "method": "isolateFatal",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "rightExpression": "protocolFailure",
+      "rightType": "dev.codex.schubert.nk.protocol.codec.PermanentProtocolException"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-f3c55a52af2826f21d1559c06af480bec78f3fb975d9146b9be7e80655734de0",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-2c5d4b1450f6a004a4d3bc5ed8ceaaa27848ca973434f94606969aa886231947",
+        "xmlSha256": "e7cc106352aae02f1fbed2ca4737c08abad18e124912a232dc608fca5593cd8c",
+        "class": "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+        "caseNameSha256": "c71bbbd10088eac519e1c56fc593fb0a6c79abee1df3706dd62d11de4c2e3705"
+      },
+      {
+        "testId": "PT-WHOLE-a256a7271c92e638adf73c2846d188301ce3e1e9fea0da4ea3e93c0cd7ce7e4f",
+        "xmlSha256": "e7cc106352aae02f1fbed2ca4737c08abad18e124912a232dc608fca5593cd8c",
+        "class": "dev.codex.schubert.nk.web.messaging.ReplyIsolationPrimaryContractTest",
+        "caseNameSha256": "50a8a593383a632a9268271faf4762e39d1f88a4e7d3e9da8acf1a8bcc033817"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-19aef7b217d6f9fe35471161be369edd193e57dd846f2fdf2884233b921b3fe1",
+    "legacyFindingId": "F03-PMD-e46e093ecca23ece78a527f93628938fa4ab1b0259419d9da768a76ce52d4502",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "d548ab212a5d4b81cec195d098e433471f7cff889de95b75b65ff7cd37048f09",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "72",
+    "endline": "72",
+    "priority": "3",
+    "begincolumn": "11",
+    "endcolumn": "37",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1450,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "11",
+      "firstLine": "72",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "36",
+      "lastLine": "72",
+      "leftExpression": "rollbackFailure",
+      "leftType": "java.lang.RuntimeException",
+      "method": "rollbackAfterFailure",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-4003e66ea1c113f107c15e46b3f5ee4b629fdb4548d1239fb5486e81c6b3d045",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-febded8acc70b053aa38a4269d8f33c8bc31577ddf04a6509043df5c99a85340",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "cacfe3e9a70e207511e76ea8f143aa628a8307571e9f2dbe654b091c19fcb339"
+      },
+      {
+        "testId": "PT-WHOLE-15acfdf44950aefa2a6e88451527689a2efd70b90930e50e37f2cc14cb03b0de",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "2abf1afe2b421aa38f8be04fcd55c8ba02d65c33d04e2e5d1443fdd0677a33e1"
+      },
+      {
+        "testId": "PT-WHOLE-32086cabd5eba16aa49c1632808d9b1ddae6618bf9fab62a79fabeb2f92c6920",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "651edb0dd8df894173c769b356bdc37abe92e4cf41cd1434d0e279c8f8fb92a8"
+      },
+      {
+        "testId": "PT-WHOLE-958e9c92d9c4e0bdad464fe9b4026a908d21eba1bb6d9c119c867b299c256b20",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "ff7a064427b2322104d2671db2c058d9f9c334a4ce6928dcb2a332bad840c1ae"
+      },
+      {
+        "testId": "PT-WHOLE-96345c8a9f4b8473c52055e26b71b1eaecdaadbf4534bb7a7719184c10242c4d",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "3143a6b77aa8fa14272d7814cb4ed73093294f51a378a537f234fedad8e49b7d"
+      },
+      {
+        "testId": "PT-WHOLE-bbcc55dd7b35bf5680708063563b352551a8c8b8e673298b6d7c4af7add4ca0a",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "fa3380aff663e735525921ee46018f01a2894cfde69dd1fed8861c74dae6d4f9"
+      },
+      {
+        "testId": "PT-WHOLE-2c17dec20bcb257e4d7aa31e0a3a259b8b503e78e9d8e4fecd8b5b25064064c8",
+        "xmlSha256": "a99a6d0f9214f16e018d7c2701d3a5d2dcc540e6a86225bdd91396b9d636fbc2",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "caseNameSha256": "f76e5db8f4b9236cdd8080ebc1cc8eae7701adedb11b37a7a9121433bbf663d1"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  },
+  {
+    "findingId": "F03-PMD2-fedb4748d0fd8caa2eefe18fce3e1d76caedb5b895050da3a001e3f0c91cea7a",
+    "legacyFindingId": "F03-PMD-03aa58c2573274b2f062b5189015bc8057fdb27e78bb85f701ac1b63b1fb38fb",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+    "sourceSha256": "ad77d31d7658cf612e414f7af1f28c3016378d05c85eae67d4d2ab0ac6df7326",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "59",
+    "endline": "59",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "31",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1458,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "reason": "PG-D440/442; SS321/322/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "59",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "30",
+      "lastLine": "59",
+      "leftExpression": "failure",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "rightExpression": "closing",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "73bf3e0917421ff4897f6b765bcf75805b68ed640cf153c1fe826a35fac69344",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "priorFindingId": "F03-PMD2-1e986bb00c742f86c009ad20f8b83bae52470393fba39392235cc82a5b66487e",
+    "priorReason": "PG-D440/441; SS321/352. Reference identity distinguishes actual Throwable nodes even for equals-true distinct failures. The current compiler resolves this exact pair and direct append/early-return control, with no intervening assignment/callback. This local retention fact does not validate retry policy, resource completion, or BUG1494 fatal-isolation handling.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-9eef469856b5baaf1a410d1775ae1731fab77566fabb528aa327b61ce6d8fa40",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "fbaeba862b8b9550b97709bd364c1466c3ee5dc95ef34951e52fb1461a655b5e"
+      },
+      {
+        "testId": "PT-WHOLE-e9308996d12b91890ea057d026691e3a7771d24ab41feafb667b7fba90566191",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "0620478f6b7d562b731068df452f4296043a11c1baeebdc61d8633120fe09021"
+      },
+      {
+        "testId": "PT-WHOLE-b37f97c35be320e2dbb2ed901a3c8934c80476f2806ca690acebed8c952fe63e",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "96d24e82ed22655602b6efa2057cc43088bd77996c6c4beac621ff4cc661ba38"
+      },
+      {
+        "testId": "PT-WHOLE-193de871a192189993a7f52f984374277613fb5af4da0a54d088da8ba21b6e37",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "9a92f19460dcba08d409bd0c0cc8d4c586ced7089d4b6a32613687ea2567011e"
+      },
+      {
+        "testId": "PT-WHOLE-6da26d1f6a23d426fb462f543f86b73150564a080a709173533025c1ab65074b",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "8f4931101eb5692f896c1588748d6bad45951dc3409fe1abab2d63c1aee58f00"
+      },
+      {
+        "testId": "PT-WHOLE-75e467633a9f9a5ed5b0a6de79f3a9f7d1856d311f49f1165ca6b0ab8b1c5de6",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "7ff1508e2bf566684ee03f6d32ce828b7d3e91fd2b6488a6ff35f389d397693e"
+      },
+      {
+        "testId": "PT-WHOLE-00314b348d7f4e3785dccac9d0c502fff767ba86956f7e92ee6fd28814d2d58c",
+        "xmlSha256": "c329ab0f0f699e65a8dde2bf846a3059d5408ba90d42819a4473ad008831e3e8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "54110a0836060fc9b86016149e1ea869c39210f3e65cad4b9540addaafe7c097"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false
+  }
+]
