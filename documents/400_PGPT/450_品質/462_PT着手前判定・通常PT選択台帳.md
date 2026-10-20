@@ -1,5 +1,9 @@
 # PT着手前判定・通常PT選択台帳
 
+## PTPRE-027 — PT_DEFAULT：残Web42条件後の921/149
+
+1251/PG-D451/BUG1520。同canonicalの全Web913＋guard8、元5984と同じ承認済み自己所有ローカルfixture profile/固定Node依存・offline Maven。tempPG/in-process broker/loopback ephemeral HTTP/有限child/DOM fixtureだけで、実Browser/実VM/Unit/current/業務原本DBBackup/鍵/permit/failed-cohort/実ADMIN不操作。変更は24sourceのprimitive/String固定値のみでfixture副作用・権限・通信先は不変、暗号/sessionという名称だけで代替へ広げない。実拒否の再試行/境界probe/回避0。fresh>10/clean source/新only slot→通常921全XML/全24実四100と全Main静的・byte照合、旧成功/欠落を新成功へ補完0。
+
 PTPRE026環境再試験追記（2026-10-20）：元5976実Node不在errorはBUG1518/YKT1278、拒否ではない。新5984-v2は同canonical a623/元archive同SHA/同921-149・全Test不変、固定既Node24.19.0をPATHへ追加するだけ。四JSは有限ローカルDOM fixture、VM/実Browser/外部接続/権限変更なし、当PT_DEFAULTを維持。元jobは真正終了1確認済、再付着/二重起動なし。純guard・fresh枠>10/clean source/新namespaceから必要再試験、元失敗を保持し真正0/独立検証前は合格へ加算しない。
 
 ## PTPRE-026 — PT_DEFAULT：Web form/view22後の921/149
