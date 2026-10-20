@@ -2,6 +2,8 @@
 
 ## SSC318 UNKNOWN keeper内の二次失敗（2026-10-21）
 
+実装補足：native fixed policyは取得前の明示getter呼出でretainer classを初期化し、単なるmethod reference作成だけで初期化済みと仮定しない。通常tick失敗時は、取得前準備した固定fallbackでmonotonicな1000ms待機を挟み、IRQ/park早期帰還でもその待機期限を維持する。fallback自体がVM障害等で不能でもUNKNOWNを正常終了へ変換しないが、VM健全性/低CPUを保証するとはしない。これは規約411の無制限busy loopを通常運用として許可する補足ではない。
+
 SS316の固定UNKNOWN保持は、固定診断又は観測tickからRuntimeException/Errorが発生しても同failure frame/外側借用資源の保持を続ける。診断はbest-effortでraw原因を出さず、失敗してもnormal receipt/再close/Root再発行を行わない。観測portは資源取得前のclass初期化で準備しnative固定portだけを使う。通常観測は1000ms、IRQ時の保持/親30分/Unit期限を変更しない。process/VM自体が停止する障害まで保持を保証せず、persistent tick失敗時のCPU負荷等を残存リスクとして記録する。BUG1563/YKT1320/SS343354。
 
 ## SSC317 未start管理HTTPの完了解釈（2026-10-21）

@@ -2,6 +2,8 @@
 
 ## SSC318 UNKNOWN診断/tickの故障
 
+取得前getter/class初期化と実factoryの順序を当JVMで照合する。tick故障後の再観測は独立nanoTimeで1000ms以上を検証し、IRQ/park早期帰還も含める。fallback自体のRTE/Errorでも外側markerなしを自己所有有限childで確認し、fault portは取得前に構成する。実JVMのOOM/クラッシュ等を故意に起こす試験や実Root操作へ拡大しない。
+
 BUG1563/YKT1320/SS342343。自己所有有限childで固定診断RTE/Error・観測tickRTE/Errorを注入し、元release失敗後の同frame持続、close再試行なし、外側markerなし・IRQ/通常保持を独立確認する。診断不能時は期待stderr無しを明示して全EOFを検査し、任意診断の読み飛ばしにしない。子の143/有限観測を実Root/native成功に算入せず、process/VM停止とpersistent tick障害の残存リスクを保持する。
 
 ## SSC317 未start JDK管理HTTPの反例と保持
