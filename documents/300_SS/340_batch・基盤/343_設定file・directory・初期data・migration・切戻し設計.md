@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC316 native解放失敗時の借用資源保持（S3b）
+
+SS321342SSC316の明示native retentionは、既credential/password supplier・DB・原本root/Backupを先に解放する理由にしない。未確認closeの同catch frameを保有し、新しいclose/復旧/permit/Root操作は発行しない。保持の指定はordinary native組立内の固定値だけ、外部設定/環境変数/role/権限/署名/期限を変更しない。固定診断のみで原例外message/stack/鍵/password/session/tokenを出力しない。既ownedReleaseのportは取得前に準備し、未取得の推定closeはしない。legacy componentのTWR/例外順位は維持する。実native後条件は別gateであり、host自己所有fixtureの143終了や静的確認を代用しない。BUG1547/1556/YKT1307、SS354。
+
 SSC311（2026-10-20、BUG1537/YKT1297）：WebBrokerContextsのbroker factoryはSS321SSC311に従い、credential参照supplier・owner/lockを先に完成させ、ctor最後に取得/設定し同一factoryをfinal二fieldへ格納する。内部設定helperは全port先行→一回取得→直ちに保護した既12setting→live返却、失敗時一度close/既定primary保持・closeError対非Errorprimaryだけfatal優先・self-suppression禁止とする。これはJMS provider専用の境界であり、SSC304 exactJavaTWRやSS332SQL/unknown順位へ一括置換しない。三引数注入ctorのcaller所有、既live owner closeのretry/固定例外、open/password copy消去/外側credential寿命・Unit/current/原本/権限は不変更。
 
 SSC310適用境界（2026-10-20、BUG1530/YKT1290）：SSC304のsuccessful直下usingJdbcは既Java25 TWR意味（同一secondary/self-suppressionを含む）を維持する。そのbodyから呼ぶExpiryAuditRepository.read内の二owned JDBC資源は、保持監査照合に対するSS331SSC200/SS332SSC063199の固定秘匿secondary・未知primary優先契約であり、SS332SSC310に従って局所是正する。二種類のscopeを一つのhelper/例外順位へ一括置換しない。stage/finish直下scope、原本/Backup/権限/DB/Unit/runtime世代・期限/所有/正常業務は不変更。実環境の安全条件やnative資格をproxy試験だけで認定しない。
