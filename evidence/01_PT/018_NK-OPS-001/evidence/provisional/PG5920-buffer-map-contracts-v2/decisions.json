@@ -1,0 +1,248 @@
+[
+  {
+    "findingId": "F03-PMD2-e22bb3d9b28f137e74e6ac57a8a73833fb7a9f51a7b9e19b7a791d8326bcc36a",
+    "legacyFindingId": "F03-PMD-9641428a732c23a13903bf8d33c64b84e28da9535b2dc7a7cb282bd1856ed1c9",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/AssetChecksumManifest.java",
+    "sourceSha256": "503f89c284da8e356acc0ff45cf865b40cd094a783b04abce2389a89bb59a8b9",
+    "rule": "UseConcurrentHashMap",
+    "beginline": "39",
+    "endline": "39",
+    "priority": "3",
+    "begincolumn": "25",
+    "endcolumn": "49",
+    "diagnosticTextSha256": "f53b489a71068df028c83c493d44472bfb002d379bfbcdf0d2d6b3c5995e78a4",
+    "rawXmlOrdinal": 109,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "CONTEXT_NOT_APPLICABLE",
+    "reason": "SS333/343: this read-local parser map is populated only on its current thread, rejects duplicate paths, then constructor defensively publishes Map.copyOf. It is not a shared concurrent registry; replacing it by a concurrent map would not establish any new required concurrency contract. Explicitly rechecked after loop/index PG; no automatic old-source rationale transfer.",
+    "priorReason": "SS333/343: this read-local parser map is populated only on its current thread, rejects duplicate paths, then constructor defensively publishes Map.copyOf. It is not a shared concurrent registry; replacing it by a concurrent map would not establish any new required concurrency contract. Explicitly rechecked after loop/index PG; no automatic old-source rationale transfer.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "currentSelectedCaseRefs": [
+      {
+        "class": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+        "caseNameSha256": "0b17d8be37011cafb6de0151410a5fefcdfce662764b3e3351fcdacfe59844dc",
+        "selectedXmlSha256": "ac37acb4bfa42d951cf888dcc64979d682be548333cb232d786e7cccd09b0fe0",
+        "selectedMethod": "med044ConcurrentMatchesOwnImmutableInput"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+        "caseNameSha256": "bef3bd03bf2f398a9c94be2eae2242949a0beba7396eeef8bc0e449d731ca246",
+        "selectedXmlSha256": "ac37acb4bfa42d951cf888dcc64979d682be548333cb232d786e7cccd09b0fe0",
+        "selectedMethod": "med042MalformedAndMismatchedCountsNeverPublishPartialCatalog"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+        "caseNameSha256": "3d5827db4d3da426f8843108a485412e4d069ee25347862886c597c419616d36",
+        "selectedXmlSha256": "ac37acb4bfa42d951cf888dcc64979d682be548333cb232d786e7cccd09b0fe0",
+        "selectedMethod": "med041LiteralManifestsPreserveApprovedPathsAndHashes"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.file.AssetChecksumManifestTest",
+        "caseNameSha256": "fa9a11783e8b1cc64e8ffb4d5ffad2cccb7a7c8edc7dd4b0aa1dbfd15cdcd2d4",
+        "selectedXmlSha256": "ac37acb4bfa42d951cf888dcc64979d682be548333cb232d786e7cccd09b0fe0",
+        "selectedMethod": "med043PartialReadsIoFailuresAndHashMismatchesRemainRedacted"
+      }
+    ],
+    "selectedQualificationSha256": "414ebabb5791e2bd142e034f3c82d103053fec1acb3873972908474d97341d4f",
+    "reviewSource": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+    "reviewKind": "REGULAR_STATIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE",
+    "parentJdkSignatureSha256": "1eb56fbcb7fc3215f9e1734bd06a5ec40349df99b074dad99723236775f278b9",
+    "sourceContractSha256": "503f89c284da8e356acc0ff45cf865b40cd094a783b04abce2389a89bb59a8b9",
+    "historicalPtImportedAsCurrent": false
+  },
+  {
+    "findingId": "F03-PMD2-ec2ab32c34b807417f8e91760c7bf8b4a64ca784032c9600eedb141827da19dc",
+    "legacyFindingId": "F03-PMD-02f6f617b940e86532a662ec3fb6248b794e1014c42bcde7f76cc70a206958ea",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "beginline": "20",
+    "endline": "20",
+    "priority": "3",
+    "begincolumn": "28",
+    "endcolumn": "33",
+    "diagnosticTextSha256": "fe682a0c2c16e39a43f8505e9f22c90bda3af013196fc64bb7a405ff0cb3836a",
+    "rawXmlOrdinal": 121,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "CONTEXT_NOT_APPLICABLE",
+    "reason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "priorReason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "currentSelectedCaseRefs": [
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "a4c6cdc74adbbaaec85613582194406eec3c292d6131d22723ebd9ded2f78d9d",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "7368c087d997bd377d564c2c8fbb717103725500ef37504513267f3cf56c9e2a",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "132e751294a9af189ecd5c6bbdc3f3a6c5ba72732811bb7b3120d4592c87252f",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose"
+      }
+    ],
+    "selectedQualificationSha256": "414ebabb5791e2bd142e034f3c82d103053fec1acb3873972908474d97341d4f",
+    "reviewSource": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+    "reviewKind": "REGULAR_STATIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE",
+    "parentJdkSignatureSha256": "1eb56fbcb7fc3215f9e1734bd06a5ec40349df99b074dad99723236775f278b9",
+    "sourceContractSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "historicalPtImportedAsCurrent": false
+  },
+  {
+    "findingId": "F03-PMD2-f87da52eaa9513fa70bebf2991ba873cf483ba233fb7fe88604be75583eaa5a2",
+    "legacyFindingId": "F03-PMD-61037b73cf95464a5a0f59b023c101cd53ca095dd5cea49159a5e1d02229c11d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "beginline": "27",
+    "endline": "27",
+    "priority": "3",
+    "begincolumn": "28",
+    "endcolumn": "33",
+    "diagnosticTextSha256": "fe682a0c2c16e39a43f8505e9f22c90bda3af013196fc64bb7a405ff0cb3836a",
+    "rawXmlOrdinal": 122,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "CONTEXT_NOT_APPLICABLE",
+    "reason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "priorReason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "currentSelectedCaseRefs": [
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "a4c6cdc74adbbaaec85613582194406eec3c292d6131d22723ebd9ded2f78d9d",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "7368c087d997bd377d564c2c8fbb717103725500ef37504513267f3cf56c9e2a",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "132e751294a9af189ecd5c6bbdc3f3a6c5ba72732811bb7b3120d4592c87252f",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose"
+      }
+    ],
+    "selectedQualificationSha256": "414ebabb5791e2bd142e034f3c82d103053fec1acb3873972908474d97341d4f",
+    "reviewSource": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+    "reviewKind": "REGULAR_STATIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE",
+    "parentJdkSignatureSha256": "1eb56fbcb7fc3215f9e1734bd06a5ec40349df99b074dad99723236775f278b9",
+    "sourceContractSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "historicalPtImportedAsCurrent": false
+  },
+  {
+    "findingId": "F03-PMD2-95295d8da7eff405ded4b13a952e6622b58639177f8e549d0a76b7fd988aa2e1",
+    "legacyFindingId": "F03-PMD-169c93311a9a4b0248f3e19755fae4e7577f7eb485f5c0a7d317fe1d27594a6c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "beginline": "47",
+    "endline": "47",
+    "priority": "3",
+    "begincolumn": "28",
+    "endcolumn": "33",
+    "diagnosticTextSha256": "fe682a0c2c16e39a43f8505e9f22c90bda3af013196fc64bb7a405ff0cb3836a",
+    "rawXmlOrdinal": 123,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "CONTEXT_NOT_APPLICABLE",
+    "reason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "priorReason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "currentSelectedCaseRefs": [
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "a4c6cdc74adbbaaec85613582194406eec3c292d6131d22723ebd9ded2f78d9d",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "7368c087d997bd377d564c2c8fbb717103725500ef37504513267f3cf56c9e2a",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "132e751294a9af189ecd5c6bbdc3f3a6c5ba72732811bb7b3120d4592c87252f",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose"
+      }
+    ],
+    "selectedQualificationSha256": "414ebabb5791e2bd142e034f3c82d103053fec1acb3873972908474d97341d4f",
+    "reviewSource": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+    "reviewKind": "REGULAR_STATIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE",
+    "parentJdkSignatureSha256": "1eb56fbcb7fc3215f9e1734bd06a5ec40349df99b074dad99723236775f278b9",
+    "sourceContractSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "historicalPtImportedAsCurrent": false
+  },
+  {
+    "findingId": "F03-PMD2-317c7e683a6b6e95f3206d60bc3aa797beb6dd7801eb767d6190e141d77d8132",
+    "legacyFindingId": "F03-PMD-d76170a0169fe8dea6a77b7eeef4ed59a50e2967566c5c4777d99c80c697db2d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "beginline": "58",
+    "endline": "58",
+    "priority": "3",
+    "begincolumn": "30",
+    "endcolumn": "38",
+    "diagnosticTextSha256": "fe682a0c2c16e39a43f8505e9f22c90bda3af013196fc64bb7a405ff0cb3836a",
+    "rawXmlOrdinal": 124,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "CONTEXT_NOT_APPLICABLE",
+    "reason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "priorReason": "411/SS324/352: nonpublic operation-local wiping adapter must share the inherited ByteArrayOutputStream intrinsic monitor for protected buf/count with synchronized copy/size/writeTo/reset. Production has two private codec TWR scopes plus one package-private canonical TWR scope with private borrow-only helpers; all return defensive byte copies, never an escaping owner. calculate clears its canonical copy in finally. The buffer type label is not a fourth allocation. Four overrides do bounded array work, not native/blocking I/O. Replacing only these monitors would break parent consistency. Keep raw warnings; no general concurrency/performance waiver.",
+    "rawWarningRetained": true,
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "currentSelectedCaseRefs": [
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "a4c6cdc74adbbaaec85613582194406eec3c292d6131d22723ebd9ded2f78d9d",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "7368c087d997bd377d564c2c8fbb717103725500ef37504513267f3cf56c9e2a",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "streamBoundsAndExceptionalExitWipeAllOwnedCapacity"
+      },
+      {
+        "class": "dev.codex.schubert.nk.api.idempotency.SecretBufferTest",
+        "caseNameSha256": "132e751294a9af189ecd5c6bbdc3f3a6c5ba72732811bb7b3120d4592c87252f",
+        "selectedXmlSha256": "b427a181babc2b486b9ac3ca9c80ef94083781fa035c51f367217e3173683fae",
+        "selectedMethod": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose"
+      }
+    ],
+    "selectedQualificationSha256": "414ebabb5791e2bd142e034f3c82d103053fec1acb3873972908474d97341d4f",
+    "reviewSource": "682a4b99eb0b95bcd4f1cd276fea75b5f2e62e3b",
+    "reviewKind": "REGULAR_STATIC_CONTRACT_REVIEW_NOT_PT_ALTERNATIVE",
+    "parentJdkSignatureSha256": "1eb56fbcb7fc3215f9e1734bd06a5ec40349df99b074dad99723236775f278b9",
+    "sourceContractSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "historicalPtImportedAsCurrent": false
+  }
+]
