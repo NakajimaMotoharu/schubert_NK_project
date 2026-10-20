@@ -1,0 +1,516 @@
+{
+  "actualExit": 0,
+  "source": "32f5537ea83d158716e687eea88df51a14d14daf",
+  "baseStaticManifestSha256": "4be1ee7550f3cf719b5da6a362ad418c444eadd2deea7b7368c50807a20b3ad8",
+  "selectedSourceFiles": 22,
+  "selectedDiagnosticConditions": 33,
+  "sourcePlans": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "beforeSha256": "b47e4c0c8c14a97125708c0048d5cadcf6a807beccfe82388d89410690ebba16",
+      "predictedAfterSha256": "bf21cb8297681c1f8c2bac49df01045b30a7c9a4ddecb5ba9af231d3a2954929",
+      "changes": [
+        [
+          "if (failureCode.length != 1)",
+          "if (failureCode.length != EXPECTED_FAILURE_STATUS_COUNT)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int EXPECTED_FAILURE_STATUS_COUNT = 1;"
+      ],
+      "findingIds": [
+        "F03-PMD2-63b2a744599f2b0e78bee730768c883ef6d5fdc904213c11f495030a4af3a009"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+      "beforeSha256": "82509d06db97dc5d7a7b945f4d359fe86c85c34b2137521e5e68262fc8d7e7ec",
+      "predictedAfterSha256": "4edbbd1ad918c5222a534cf6d9330aecd40f9e76118c555a529374cb04bfe6ac",
+      "changes": [
+        [
+          "if (startedAt.atZone(JST).getYear() > 9999)",
+          "if (startedAt.atZone(JST).getYear() > MAXIMUM_DIRECTORY_YEAR)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int MAXIMUM_DIRECTORY_YEAR = 9999;"
+      ],
+      "findingIds": [
+        "F03-PMD2-24883234424f4543a848756f938db3d88e59a05d076d67e8e7c11a8ae0cef235"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "beforeSha256": "5ebd555a6433127b975a3e69abc3ef8dece3ad0db4781125b15d0dcccad301db",
+      "predictedAfterSha256": "244c5b3542468956bbe0fef5ae2054f8deb509d4d5db537e4e9b4d2ba9727cbf",
+      "changes": [
+        [
+          "if ((raw.mode() & 0xf000) != 0x8000)",
+          "if ((raw.mode() & FILE_TYPE_MASK) != REGULAR_FILE_TYPE)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int FILE_TYPE_MASK = 0xf000;",
+        "private static final int REGULAR_FILE_TYPE = 0x8000;"
+      ],
+      "findingIds": [
+        "F03-PMD2-70756099312e2f68b81f5f6295e4531462136301f1b49837fcc159be953cb646"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "beforeSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+      "predictedAfterSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+      "changes": [
+        [
+          "if (index < 5)",
+          "if (index < FIXED_ROOT_FILE_COUNT)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int FIXED_ROOT_FILE_COUNT = 5;"
+      ],
+      "findingIds": [
+        "F03-PMD2-7be14fb9e8263f8807df822b220b3d369a6ba8c9e6a05640e9f55a371f51a374"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java",
+      "beforeSha256": "b9c6d5fca4d491243517f67d82b04bf21c2eacf5747905fa7790cb4976b4fa6e",
+      "predictedAfterSha256": "36649443598a528b56a048aff50a26ebc74c04b936628fb40cffd49ef8e71a14",
+      "changes": [
+        [
+          "if (receipt.exitCode() == 30)",
+          "if (receipt.exitCode() == REJECTED_EXIT_STATUS)",
+          1
+        ],
+        [
+          "if (terminal.exitCode() == 30)",
+          "if (terminal.exitCode() == REJECTED_EXIT_STATUS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int REJECTED_EXIT_STATUS = 30;"
+      ],
+      "findingIds": [
+        "F03-PMD2-9b5c04695b8e883d474bf451b6fbd3ef906a9c972ed0673634da91fb91ced5f3",
+        "F03-PMD2-fbc1c7176a9067174629f82cb4ec7a97d32ec0cf20ec20436d635df280831e33"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java",
+      "beforeSha256": "d49589562dba0d18db85549aa108accd8de69c81baea81872b10a191826bc8a8",
+      "predictedAfterSha256": "5e6bf8b77ab12f406e2a52c93fcecef70923393672b94702fae934fd6f4d19cb",
+      "changes": [
+        [
+          "if (actual.exitCode() == 30)",
+          "if (actual.exitCode() == REJECTED_EXIT_STATUS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int REJECTED_EXIT_STATUS = 30;"
+      ],
+      "findingIds": [
+        "F03-PMD2-ac26fda9e0688e2dbde95d611a7c123b5de14a9b6acbb6b9340a902a2301c0d2"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.java",
+      "beforeSha256": "c998a5ee4d7286442f4916a427b61d70d22f7a62b4741c963cce52f5313929cc",
+      "predictedAfterSha256": "04efbba4deb8101b038a9faa978c090fc3227e86dc4658abc4b5dfde959d28c7",
+      "changes": [
+        [
+          "if (mode != 0xa1ff)",
+          "if (mode != RETAINED_SYMBOLIC_LINK_MODE)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int RETAINED_SYMBOLIC_LINK_MODE = 0xa1ff;"
+      ],
+      "findingIds": [
+        "F03-PMD2-a862473150ca8a149e41f14846e72cd3f1b275fc8468d3e1087a9713e5dd899c"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceLauncher.java",
+      "beforeSha256": "6c925ef4969332cdc203a23dbc72b6ecde5abf6f41cea7a9e31b57e2193dc8ca",
+      "predictedAfterSha256": "0112b7877483404cc98f94750a1744c9af76a60b06e12696d6b7fd93b8300ea6",
+      "changes": [
+        [
+          "if (args.length != 1)",
+          "if (args.length != EXPECTED_SERVICE_ARGUMENTS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int EXPECTED_SERVICE_ARGUMENTS = 1;"
+      ],
+      "findingIds": [
+        "F03-PMD2-f18ce3bf0132c66dc728c51d83de5e2184e2bece316693ae35512ae0204a90da"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+      "beforeSha256": "7ed099a5fdfec2d7c0d4cb8e73f3715950fc2fa499ac5dfa912f4dadfaf5e5cd",
+      "predictedAfterSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+      "changes": [
+        [
+          "if (capacity < 1)",
+          "if (capacity < MINIMUM_PRIVATE_VIEW_CAPACITY)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int MINIMUM_PRIVATE_VIEW_CAPACITY = 1;"
+      ],
+      "findingIds": [
+        "F03-PMD2-2c405b7aba0a2aad010a0ba84caf1d6911efebc16b1b7bda2dd260a4a4284203"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+      "beforeSha256": "24d6bdc9829d202185b7ec0dfcffa59d623548de0db9fad9fef71bc004c8bccd",
+      "predictedAfterSha256": "32bdcede64efafb409107c400bab7b0ec74953b6c4fb5a1e8a018429a5c49ab8",
+      "changes": [
+        [
+          "if (values.size() != 1)",
+          "if (values.size() != EXPECTED_ACCEPTOR_COUNT)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int EXPECTED_ACCEPTOR_COUNT = 1;"
+      ],
+      "findingIds": [
+        "F03-PMD2-3a99a0c8d4083c0dc4e903d8179d48917d344b0e7052f0e62afff7e00949f05c"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "beforeSha256": "0206e58f2e94360dc7cc8d0f8bf7a56166d066f75348f20e9d4da90592ab24ef",
+      "predictedAfterSha256": "3eb82d01455cf8d2932baf0bc9ed57c2d843a5bd7e071cdc285958a370413f73",
+      "changes": [
+        [
+          "if (remaining < 1_000_000L)",
+          "if (remaining < MINIMUM_REQUEST_TIMEOUT_NANOS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final long MINIMUM_REQUEST_TIMEOUT_NANOS = 1_000_000L;"
+      ],
+      "findingIds": [
+        "F03-PMD2-ba2e18f135cfc59d6c2572d1e267cfce3b66c1b0914507d5cd13f2ffe2dd743b"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+      "beforeSha256": "9aaff97bd52b388dd00ae74f99731d68d95d6e56c444965c8976c500b79eacd7",
+      "predictedAfterSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+      "changes": [
+        [
+          "if (value == ':')",
+          "if (value == GROUP_FIELD_SEPARATOR)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final char GROUP_FIELD_SEPARATOR = ':';"
+      ],
+      "findingIds": [
+        "F03-PMD2-b22959da15cc786096da58ab0625482c3c9b3105effc25716c816346356c5f38"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java",
+      "beforeSha256": "13b2109a21a6fa9de17be1408a1e38ee101e18bc85d5e9aee50adc1709d16b0f",
+      "predictedAfterSha256": "164f6dfe9f1143f86b868ada1b0a7d5a5687b6fc42fc901941a4f0193f702258",
+      "changes": [
+        [
+          "if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > 65535)",
+          "if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > MAXIMUM_TCP_PORT)",
+          1
+        ],
+        [
+          "if (names.length() > 65536)",
+          "if (names.length() > MAXIMUM_INTERFACE_NAMES_CHARACTERS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int MAXIMUM_INTERFACE_NAMES_CHARACTERS = 65536;",
+        "private static final int MAXIMUM_TCP_PORT = 65535;"
+      ],
+      "findingIds": [
+        "F03-PMD2-1de6e5154817ef2ebd9e53c66f292b1678b08fa7d01dc3495dd6cbe1a8d2f627",
+        "F03-PMD2-c95f1a61c45714352a521047e4e5556e7de485b79ee35b3ac4b7259a5875482c"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+      "beforeSha256": "337b6dc3eadcdef9c4ac8ebe37873333b8b3373b97b47ca029e096933d0124df",
+      "predictedAfterSha256": "7252e8f22ffe9a00e2528cc6ad33c853fa7f103d92027fb6f1bb94ca10783316",
+      "changes": [
+        [
+          "if (io.login() != 200)",
+          "if (io.login() != SUCCESS_HTTP_STATUS)",
+          1
+        ],
+        [
+          "if (++count > 65536)",
+          "if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES)",
+          1
+        ],
+        [
+          "if (literal.length == 4)",
+          "if (literal.length == IPV4_ADDRESS_BYTES)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int IPV4_ADDRESS_BYTES = 4;",
+        "private static final int MAXIMUM_SOCKET_DIRECTORY_ENTRIES = 65536;",
+        "private static final int SUCCESS_HTTP_STATUS = 200;"
+      ],
+      "findingIds": [
+        "F03-PMD2-9a9b559b07cc929ed367975e2d0cae40ca5713f8d09e03a8159ba8076adbae8c",
+        "F03-PMD2-0f823c02e4b8732c1291b88d6503e39db0ab1f85731969be5ec9ec1e1a1f1297",
+        "F03-PMD2-507313952ccddbd4ca4647c832fb962bde564d7e4aaf994736a494340f6a6dc9"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "beforeSha256": "9913b3fbe7c334a38faf869ccf7d5c522c7b02b3a3f933be4f35ba86dbfad3cf",
+      "predictedAfterSha256": "534b4750d8fcb7a017f65a3d99cc895d5cc3f69791078f9223c2afaaa5a73153",
+      "changes": [
+        [
+          "if (json.length() > 1)",
+          "if (json.length() > JSON_OPENING_DELIMITER_LENGTH)",
+          1
+        ],
+        [
+          "if (++count > 65536)",
+          "if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES)",
+          1
+        ],
+        [
+          "if (status != 200)",
+          "if (status != SUCCESS_HTTP_STATUS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int JSON_OPENING_DELIMITER_LENGTH = 1;",
+        "private static final int MAXIMUM_SOCKET_DIRECTORY_ENTRIES = 65536;",
+        "private static final int SUCCESS_HTTP_STATUS = 200;"
+      ],
+      "findingIds": [
+        "F03-PMD2-432b582726567264905ba11b138ac4cdad97fe30bc81a2cff921898c9447a2c1",
+        "F03-PMD2-37d8702f8b5dc7370932a5c2ab6c12ad30e28f0a1236abdc9b4b787c71e85485",
+        "F03-PMD2-7594e883b24e72b3f5e1af8c11e5006abd1003e96cd2ba136b0d64e9639135e3"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+      "beforeSha256": "8c95b0fd86ee4105fb46cff1a453c877933dfd688d1dcaecafbd0d7ba818a838",
+      "predictedAfterSha256": "a1cec7d9ec384cf8f4a69c50b7f295433f528446567de2d66504cfd710bf5e23",
+      "changes": [
+        [
+          "if (bytes[0].length > 1024)",
+          "if (bytes[0].length > MAXIMUM_STATE_OUTPUT_BYTES)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int MAXIMUM_STATE_OUTPUT_BYTES = 1024;"
+      ],
+      "findingIds": [
+        "F03-PMD2-fef6908f95260a6179db22a8a78d695b1dce0f6f63cc51fd66bc7f1ecc2de1e9"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "beforeSha256": "03a437d0dd804074bd205b4dfb58a0533617ce952b93c4193d3d8b7530a59a83",
+      "predictedAfterSha256": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500",
+      "changes": [
+        [
+          "if (seconds != 3)",
+          "if (seconds != FIXED_LOGIN_TIMEOUT_SECONDS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int FIXED_LOGIN_TIMEOUT_SECONDS = 3;"
+      ],
+      "findingIds": [
+        "F03-PMD2-4c2bb6e2983344c1a2690f48845b93ba5b85361116654c0aadedde8d003839b4"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java",
+      "beforeSha256": "6cdf8e64e59d4a1b73bf5ed3ed2fdc03c94bd048e2b9f38c72aad42f14710145",
+      "predictedAfterSha256": "653122ba99e00ebd2b29eb2d1d406f79e370d1f577b4cc212a411535439c7bf8",
+      "changes": [
+        [
+          "if (decoded.length != 32)",
+          "if (decoded.length != AES_KEY_BYTES)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int AES_KEY_BYTES = 32;"
+      ],
+      "findingIds": [
+        "F03-PMD2-2f4d893e800c3ca30421e19d6fd19520700767ecb22f0c6ea15ac12ddb016d45"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "beforeSha256": "a1b39158eda99adc7c28caa28377905205b94816e3531095ed97f74ab4d5f56d",
+      "predictedAfterSha256": "68f7c253171f2245f0b238f7c4481eaf5495acca9330aa750947f2ff1cd67ae0",
+      "changes": [
+        [
+          "if (input[length - 1] == '\\n')",
+          "if (input[length - 1] == OPTIONAL_LINE_TERMINATOR)",
+          1
+        ],
+        [
+          "if (decoded[0] == '\\ufeff')",
+          "if (decoded[0] == BYTE_ORDER_MARK)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final char BYTE_ORDER_MARK = '\\ufeff';",
+        "private static final char OPTIONAL_LINE_TERMINATOR = '\\n';"
+      ],
+      "findingIds": [
+        "F03-PMD2-901674666a7d12c7c60eb1579cf985b5e08fdb16f83e6b8b9a6684e2f284619f",
+        "F03-PMD2-8b6eb8d272397e70ee6ee6159a22eae373f3840aa0fa32dcb71bc2dab4a0cdcd"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+      "beforeSha256": "1a645dafdb04823d31e04b6e3708f681761ab0d47d9fda07150228809da652e2",
+      "predictedAfterSha256": "862ef7c72e488db95ebfd9836d92993ea876a4e7a9c472fae0f7c4669f40621c",
+      "changes": [
+        [
+          "if (outputState[slot] != 2)",
+          "if (outputState[slot] != COMPLETE_OUTPUT_STATE)",
+          1
+        ],
+        [
+          "if (integer(\"sd_bus_is_ready\", bus) != 1)",
+          "if (integer(\"sd_bus_is_ready\", bus) != READY_STATUS)",
+          1
+        ],
+        [
+          "if (integer(\"sd_bus_message_read_basic\", reply, (byte) kind, value) != 1)",
+          "if (integer(\"sd_bus_message_read_basic\", reply, (byte) kind, value) != EXPECTED_BASIC_READ_VALUES)",
+          1
+        ],
+        [
+          "if (property.type == 's')",
+          "if (property.type == STRING_PROPERTY_TYPE)",
+          1
+        ],
+        [
+          "if (end > 4096)",
+          "if (end > MAXIMUM_PROPERTY_UTF8_BYTES)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final char STRING_PROPERTY_TYPE = 's';",
+        "private static final int COMPLETE_OUTPUT_STATE = 2;",
+        "private static final int EXPECTED_BASIC_READ_VALUES = 1;",
+        "private static final int MAXIMUM_PROPERTY_UTF8_BYTES = 4096;",
+        "private static final int READY_STATUS = 1;"
+      ],
+      "findingIds": [
+        "F03-PMD2-86fa22e9827e00b2031b00c4f2036cb6cb590fb891bedbbde4734fd9a5b21787",
+        "F03-PMD2-dfa025dc96ff01f0f4e41b438699824a1b9047ef8677986af90493796d8be257",
+        "F03-PMD2-b180b69380794fae9eaeb5f62baa96fa7a24d8c28fb38c20db38b9143038238f",
+        "F03-PMD2-da1bcdf634028d1c96cfd0e90f63505fdde76d13a0551711297fe23a4770aa98",
+        "F03-PMD2-552eb8614dcd51086d249d8d72b2a2fa58ddce5fdf7ad834f7f6b529a62b7232"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "beforeSha256": "03661881be1ffa4a76d7a22dcc0e6be5aa109638f73bc35b87ca3902ff4c2a6d",
+      "predictedAfterSha256": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+      "changes": [
+        [
+          "if (remaining < 1_000_000_000L)",
+          "if (remaining < MINIMUM_QUERY_TIMEOUT_NANOS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final long MINIMUM_QUERY_TIMEOUT_NANOS = 1_000_000_000L;"
+      ],
+      "findingIds": [
+        "F03-PMD2-037f7ac9d9b72453a1f485a0ad14cb2bea444532038f7959fefad5014d7cac72"
+      ],
+      "productionApplied": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "beforeSha256": "f80c1e4f90072efbaf2bcd5ae049f38c708731c564488dafc69f8c5588cc874c",
+      "predictedAfterSha256": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+      "changes": [
+        [
+          "if (result.length() > 4096)",
+          "if (result.length() > MAXIMUM_PUBLIC_OBSERVATION_CHARACTERS)",
+          1
+        ]
+      ],
+      "constants": [
+        "private static final int MAXIMUM_PUBLIC_OBSERVATION_CHARACTERS = 4096;"
+      ],
+      "findingIds": [
+        "F03-PMD2-eecd036480114aa3df49698207541d2eedef7b3e8d1210db8cd5af6b3eebaea4"
+      ],
+      "productionApplied": false
+    }
+  ],
+  "testsExecuted": 0,
+  "productionApplied": false,
+  "plannedWholeTests": 3976,
+  "plannedWholeSuites": 593,
+  "plannedPhysicalMain": 1667,
+  "allChangedMethodInstructionsMustRemainEquivalent": true,
+  "nativeCountersRemainPending": true,
+  "noCoverageOrPtSuccessImported": true,
+  "formalAccepted": false,
+  "F03Accepted": false,
+  "ptAlternativeCompleted": 0,
+  "vmActions": 0
+}
