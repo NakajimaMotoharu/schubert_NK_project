@@ -1,0 +1,1430 @@
+[
+  {
+    "findingId": "F03-PMD2-0a2442856469cfae623b4708aa9721fa20fa1e7f447bae9337cd41ab000066f4",
+    "legacyFindingId": "F03-PMD-4f1b5b5b3993e20748cbf784fe178d4170f3d129ab934b7e77517bb6c1b8839a",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "44",
+    "endline": "44",
+    "priority": "3",
+    "begincolumn": "51",
+    "endcolumn": "67",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 820,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-5b97c69c372f8dbaf4c08622a141b3bb52fa69b002395216641c1572dd0f3916",
+    "legacyFindingId": "F03-PMD-4f1b5b5b3993e20748cbf784fe178d4170f3d129ab934b7e77517bb6c1b8839a",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "44",
+    "endline": "44",
+    "priority": "3",
+    "begincolumn": "70",
+    "endcolumn": "75",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 821,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-0143c4ce5c751eca7a291b7ea6f7ccfc0ce0d89b5d5f7c71366f3119a11ded35",
+    "legacyFindingId": "F03-PMD-5be24776814bb4732d8449f9d8f5c7cded3dfc2a4f61bd9e4402f3907fbf1b94",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "48",
+    "endline": "48",
+    "priority": "3",
+    "begincolumn": "18",
+    "endcolumn": "34",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 822,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-281b231878ad08c3814bd911a258a033db4aa99d2a5d3de245c2218a34a6a167",
+    "legacyFindingId": "F03-PMD-5be24776814bb4732d8449f9d8f5c7cded3dfc2a4f61bd9e4402f3907fbf1b94",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "48",
+    "endline": "48",
+    "priority": "3",
+    "begincolumn": "37",
+    "endcolumn": "42",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 823,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-49afa00f5be2f648f697bc66d5288e254191305b96001c4e171a54bb42acbf0c",
+    "legacyFindingId": "F03-PMD-e431707539268882956a1c2ea5faa8f0ccba00c2def06c5da35181ff0ca18876",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "49",
+    "endline": "49",
+    "priority": "3",
+    "begincolumn": "35",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 824,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2beb6fb5365dc4620c4cef9dda07cc2dc01d5773e1cc20a7988793d86c1188e8",
+    "legacyFindingId": "F03-PMD-e431707539268882956a1c2ea5faa8f0ccba00c2def06c5da35181ff0ca18876",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "49",
+    "endline": "49",
+    "priority": "3",
+    "begincolumn": "35",
+    "endcolumn": "46",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 825,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2b96f1737afccf8a41a4eb1259cca6cda897a3c1590bc03edbd57fbc29f55ad8",
+    "legacyFindingId": "F03-PMD-0898da26272e0a73d6448cef1574cb5e0675556df25d5a24baae2eade0b3f149",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "50",
+    "endline": "50",
+    "priority": "3",
+    "begincolumn": "41",
+    "endcolumn": "61",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 826,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-74b93f52b778ff3a0bb92713451f59ea001c41259fd3f1202ba9feb4de51c21b",
+    "legacyFindingId": "F03-PMD-0898da26272e0a73d6448cef1574cb5e0675556df25d5a24baae2eade0b3f149",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "50",
+    "endline": "50",
+    "priority": "3",
+    "begincolumn": "41",
+    "endcolumn": "61",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 827,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-df93857e7a97004d2f632de0e911af3b5ef7d82953ec083717ce4ed92afd2136",
+    "legacyFindingId": "F03-PMD-037c113357c2b7f40c83d05ab7fdf981cdb6039e37aa2d9628dbb12a35b477d5",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "51",
+    "endline": "51",
+    "priority": "3",
+    "begincolumn": "41",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 828,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-54f6ec5b3929369d1cd9b5df807562a12abb19f363586e6fc780cba46f78ac76",
+    "legacyFindingId": "F03-PMD-037c113357c2b7f40c83d05ab7fdf981cdb6039e37aa2d9628dbb12a35b477d5",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "51",
+    "endline": "51",
+    "priority": "3",
+    "begincolumn": "41",
+    "endcolumn": "58",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 829,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-3601a36181596a9646f5dd5cf4dc3696da814a98be176df4897608759046b44a",
+    "legacyFindingId": "F03-PMD-0426fff022eda0ed0263ae5d0aeddc8a32d02a33ddf5bb421e020f81e29d291d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "52",
+    "endline": "52",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 830,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-dd2021a3444012f7aec3b9e1330ad8349c4301d5a36c054c8f20fdbeeca95d06",
+    "legacyFindingId": "F03-PMD-0426fff022eda0ed0263ae5d0aeddc8a32d02a33ddf5bb421e020f81e29d291d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "52",
+    "endline": "52",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 831,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2b331780d2dcb3c2df2346c0d9fa5f24e07428fc8d96d29951c87b04535ed3e4",
+    "legacyFindingId": "F03-PMD-5a5660ab2c5e81c71a62653d85908aa6fe316db566f0efc631c9a4020014a875",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "53",
+    "endline": "53",
+    "priority": "3",
+    "begincolumn": "36",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 832,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-3a755211d0eb3120c1478e9d7d76a487099cba56e858f28b98e7f1ee7bddebd1",
+    "legacyFindingId": "F03-PMD-5a5660ab2c5e81c71a62653d85908aa6fe316db566f0efc631c9a4020014a875",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "53",
+    "endline": "53",
+    "priority": "3",
+    "begincolumn": "36",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 833,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The acquire catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "acquire",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-1b334ee5c94e3d47e3c8d53f5d853325ff86bbaf977a292e7e61c9301c87c89d",
+    "legacyFindingId": "F03-PMD-3c48cbd189da5f8d9a984e2592e51af4ce941a228df223046ce8cab0cd0e4695",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "68",
+    "endline": "68",
+    "priority": "3",
+    "begincolumn": "51",
+    "endcolumn": "67",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 835,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-b7253424848534d6b714c408b54b5a93347bae70a6de816cca98402eca77d56d",
+    "legacyFindingId": "F03-PMD-3c48cbd189da5f8d9a984e2592e51af4ce941a228df223046ce8cab0cd0e4695",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "68",
+    "endline": "68",
+    "priority": "3",
+    "begincolumn": "70",
+    "endcolumn": "75",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 836,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-06f1198619da83b1a6c716bbccfd7b1b8f5119b4f77df05ad6b894c87fb5df9e",
+    "legacyFindingId": "F03-PMD-2a8af68946b6e86f65663da5d7d4f86c502c43de29d8bd79b7b5799962d5ff94",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "71",
+    "endline": "71",
+    "priority": "3",
+    "begincolumn": "16",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "rawXmlOrdinal": 837,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-b91cfe2f7a4c76df9c21aba0c52c6a703d7fdc85889835f221c3268c603bd9b1",
+    "legacyFindingId": "F03-PMD-2a8af68946b6e86f65663da5d7d4f86c502c43de29d8bd79b7b5799962d5ff94",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidCatchingGenericException",
+    "beginline": "71",
+    "endline": "71",
+    "priority": "3",
+    "begincolumn": "35",
+    "endcolumn": "40",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "rawXmlOrdinal": 838,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-9c32a59bc0b45821b0921f419ff2f8263bf05d295dea0629fb68d26c855c8b8e",
+    "legacyFindingId": "F03-PMD-36654257798d36f27631bae06353ba8a76ce99978a7763ab89a49d9286c1de46",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "72",
+    "endline": "72",
+    "priority": "3",
+    "begincolumn": "33",
+    "endcolumn": "44",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 839,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2fe71d432366cbacea20dc083c16f426136dff4deacbd0099b913337011823f6",
+    "legacyFindingId": "F03-PMD-36654257798d36f27631bae06353ba8a76ce99978a7763ab89a49d9286c1de46",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "72",
+    "endline": "72",
+    "priority": "3",
+    "begincolumn": "33",
+    "endcolumn": "44",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "rawXmlOrdinal": 840,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-ccf1f6f75cf4487ea8f5a57316adddb1fc16f7ca359ce6f8d8c26dd6aff35b84",
+    "legacyFindingId": "F03-PMD-353622e68c494179c6ce20be4e12310dad38292eeb3bd09f2bba4898ce78b071",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "73",
+    "endline": "73",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "59",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 841,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-308d9b156cef84542b0b6ddc6104cb0cef30da88a7fa9798c67763fc391ab818",
+    "legacyFindingId": "F03-PMD-353622e68c494179c6ce20be4e12310dad38292eeb3bd09f2bba4898ce78b071",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "73",
+    "endline": "73",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "59",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 842,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-d481e50d23f0913420d7691d6eac5d07ea2097fbb482d36773ed1f5110bdd9a2",
+    "legacyFindingId": "F03-PMD-d9eb05d642717ee7da214e9967f3d0c73fdf77be9cd70858a48b74ec4478e10b",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "74",
+    "endline": "74",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 843,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-9e1d30a4814390a4ebd9398227af7e7b8dd0cfae87a0985560c426f0012a612b",
+    "legacyFindingId": "F03-PMD-d9eb05d642717ee7da214e9967f3d0c73fdf77be9cd70858a48b74ec4478e10b",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "74",
+    "endline": "74",
+    "priority": "3",
+    "begincolumn": "39",
+    "endcolumn": "56",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 844,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-260a20393655441b9db511bfe5a4a20587bb7ce23986662de8d6acd71ec46d14",
+    "legacyFindingId": "F03-PMD-2740879b127d5bdd678933f4296883e5b5006b4a38a446da002b6e6ac56f6656",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "75",
+    "endline": "75",
+    "priority": "3",
+    "begincolumn": "37",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 845,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-00b98da3279364bcd23e1373538ca22d748c60634e5c06dc661ddb2346f15999",
+    "legacyFindingId": "F03-PMD-2740879b127d5bdd678933f4296883e5b5006b4a38a446da002b6e6ac56f6656",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "75",
+    "endline": "75",
+    "priority": "3",
+    "begincolumn": "37",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "2d5fa95270ef3c8880be6a8170016fd482a8f3e35c8eb9df169af9d17e89a33a",
+    "rawXmlOrdinal": 846,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-2deee3a0cc2783913a3700ab139fb3c03f4af42ac6a7366998a3ed6e48533b65",
+    "legacyFindingId": "F03-PMD-471f1ee6cc40a9a826c36878614dbec935138efb2568766a7ff47f4d2b9b23da",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "77",
+    "endline": "77",
+    "priority": "3",
+    "begincolumn": "34",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 847,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  },
+  {
+    "findingId": "F03-PMD2-5bf2ecf20c06b5b29f0d9d9f52c3181d1d363d3e2457497ce2c4ae9d296caacb",
+    "legacyFindingId": "F03-PMD-471f1ee6cc40a9a826c36878614dbec935138efb2568766a7ff47f4d2b9b23da",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "sourceSha256": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "beginline": "77",
+    "endline": "77",
+    "priority": "3",
+    "begincolumn": "34",
+    "endcolumn": "54",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "rawXmlOrdinal": 848,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "newDispositionCreated": true,
+    "reason": "SS333 SSC063/308 and SS343 specify query cleanup: known IO/interruption/StopGate body versus unknown cleanup selects the same unknown cleanup and retains cancellation; otherwise the original primary node survives with a fixed path-free COMMAND_FAILURE secondary. The use catch/type site neither normalizes unknown failure to success nor proves external process completion. The current complete source and separate literal24-row normal/known/unknown priority table, null/factory/shared/nested/parallel contracts were reviewed. Current full XML joins remain pending.",
+    "reviewedMethod": "use",
+    "relatedDesign": [
+      "SS333 SSC063/308",
+      "SS343 query/stop scope"
+    ],
+    "programId": "NK-OPS-001",
+    "testIds": [
+      "QUERYOWN001..004"
+    ],
+    "plannedCurrentTestRefs": [
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown001LiteralTwentyFourFailurePriorityRows"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown002FactoryAndNullBoundariesNeverReleaseUnownedResource"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown003SharedAndPreexistingExceptionsKeepIdentityWithoutSelfSuppression"
+      },
+      {
+        "class": "dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest",
+        "method": "queryown004ParallelScopesRetainDistinctOwnersAndReverseNestedRelease"
+      }
+    ],
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true,
+    "currentPhysicalProofSha256": "c0061c3edc8b20bb8605e864cc92665952f55ebf6e24c901e95c5880f93700ba",
+    "noPtExecutedByReview": true
+  }
+]

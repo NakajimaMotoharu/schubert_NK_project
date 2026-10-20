@@ -1,4 +1,4 @@
-"""Join500 reasons to original3971 actual XML only; no PT/analyzer/runtime invocation."""
+"""Join528 reasons to original3971 actual XML only; no PT/analyzer/runtime invocation."""
 import copy
 import hashlib
 import json
@@ -9,14 +9,17 @@ from pg5860_terminal_whole import SOURCE,W
 from static_disposition_overlay import BASE,load
 from pg5846_static3967_join import current_reference as prior_reference
 from pg5874_storage_resource18_review import USE
+from pg5878_process_resource28_review import METHODS as QUERY_METHODS
 
 
 def current_reference(reference,index):
-    if 'method'not in reference or not reference.get('class','').startswith('dev.codex.schubert.nk.storage.'):
+    classes={'dev.codex.schubert.nk.storage.ResourceScopeTest','dev.codex.schubert.nk.storage.FactoryResourceScopeTest','dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest'}
+    if 'method'not in reference or reference.get('class')not in classes:
         return prior_reference(reference,index)
     cls=reference['class'];method=reference['method']
     if cls=='dev.codex.schubert.nk.storage.ResourceScopeTest':allowed=method in USE
     elif cls=='dev.codex.schubert.nk.storage.FactoryResourceScopeTest':allowed=any(method.startswith('factory'+str(i).zfill(3))for i in range(1,19))
+    elif cls=='dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest':allowed=method in QUERY_METHODS
     else:allowed=False
     if not allowed or 'caseNameSha256'in reference:raise ValueError('only declared storage resource method provenance')
     found=[r for name in(method,method+'()')for r in index.get((cls,hashlib.sha256(name.encode()).hexdigest()),[])]
@@ -33,7 +36,7 @@ def qualified_whole():
 
 
 def main():
-    qp,cp,_q,cases=qualified_whole();bp=BASE/'PG5874-storage-resource18-v1/manifest.json';bsha='cf5b78c76561861ef2a4a034ce88924312f7ffb10c4c72089f83af8f22607e3d';rows=load(bp,bsha,SOURCE)
+    qp,cp,_q,cases=qualified_whole();bp=BASE/'PG5878-process-resource28-v1/manifest.json';bsha='5fb1e22e9d08f72cca81206b7ef74ebef0f9752679b06ec808c561324de39e78';rows=load(bp,bsha,SOURCE)
     oldq=BASE/'PG5832-current3967-cases/qualification.json';oldcp=oldq.with_name('cases.json')
     if sha(oldq)!='fcceece52ccd16cf81f0b0e67060464ce0414a723417d2f827b8e29a9bcd9023'or sha(oldcp)!='fc8d6037da80e10e1af2978e9e1b2b150220158b035c5063341ea86ee3af902d':raise ValueError('historical3967 identities only, no PASS import')
     historical={c['testId']:c for c in json.loads(oldcp.read_bytes())};index=defaultdict(list)
@@ -53,7 +56,7 @@ def main():
             static_only+=1
         value=copy.deepcopy(row);value.update(status=row['priorDisposition'],currentWholeCaseRefs=refs,currentWholeJoinPending=False,currentQualificationSha256=sha(qp),currentCasesSha256=sha(cp),reviewSource=SOURCE,historicalPtImportedAsCurrent=False,staticContextPremiseOnly=not refs)
         result.append(value);joined+=1;refs_unique.update(r['testId']for r in refs)
-    if joined!=500 or static_only!=239 or len(result)!=1586:raise ValueError('all500 reasons and all1586 raw rows preserved;239 static-only premises')
+    if joined!=528 or static_only!=239 or len(result)!=1586:raise ValueError('all528 reasons and all1586 raw rows preserved;239 static-only premises')
     out=BASE/'PG5876-current-static3971-v1';os.umask(0o077);out.mkdir();fp=out/'findings.json'
     with fp.open('x')as f:json.dump(result,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     value={'actualExit':0,'source':SOURCE,'priorPendingManifestSha256':bsha,'currentWholeQualificationSha256':sha(qp),'currentWholeCasesSha256':sha(cp),'currentWholeTests':3971,'currentRawFindings':1586,'sourceAndWholeJoinedDispositions':joined,'staticContextPremiseOnly':static_only,'uniqueCurrentCaseReferences':len(refs_unique),'statusCounts':dict(Counter(r['status']for r in result)),'inventoryFile':'findings.json','inventorySha256':sha(fp),'executedPtAdded':0,'ptAlternativeCompleted':0,'historicalPtImportedAsCurrent':False,'sourceCodeChanged':False,'analyzerReexecuted':False,'rawWarningsRemoved':0,'wholePassIsNotSpecificationAcceptance':True,'F03Accepted':False,'formalAccepted':False,'vmActions':0}

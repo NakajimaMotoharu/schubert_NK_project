@@ -24,5 +24,12 @@ class CurrentXMLProvenanceTest(unittest.TestCase):
         self.assertEqual(row['testId'],current_reference(full,{(ref['class'],digest):[row]})['testId'])
         with self.assertRaises(ValueError):current_reference(full,defaultdict(list))
 
+    def test_only_four_declared_query_scope_method_provenances(self):
+        ref={'class':'dev.codex.schubert.nk.batch.platform.ProcessResourceScopeTest','method':'queryown001LiteralTwentyFourFailurePriorityRows'}
+        digest=hashlib.sha256(ref['method'].encode()).hexdigest();row={'class':ref['class'],'caseNameSha256':digest,'xmlSha256':'a'*64,'testId':'PT-WHOLE-'+('b'*64),'result':'PASS_ORIGINAL_XML'}
+        self.assertEqual(row['testId'],current_reference(ref,{(ref['class'],digest):[row]})['testId'])
+        with self.assertRaises(ValueError):current_reference({**ref,'method':'notDeclared'}, {})
+        with self.assertRaises(ValueError):current_reference(ref,{(ref['class'],digest):[{**row,'result':'UNKNOWN'}]})
+
 
 if __name__=='__main__':unittest.main()
