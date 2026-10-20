@@ -1,0 +1,379 @@
+[
+  {
+    "findingId": "F03-PMD2-ff0b61d7257e7f3b59619efde43f24e6fb1f5021b6ebc8419bbdcd2b84a8980e",
+    "legacyFindingId": "F03-PMD-025f66722ff7449ea102417d515212c9704c441b71e1e5be2257bb1e75898a9c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+    "sourceSha256": "d9fe6b860045ade8e93d8fe7f8eec3727ed170f3e657cf61a952ad29726d933c",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "86",
+    "endline": "86",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "43",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 210,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "priorFindingId": "F03-PMD2-c545bf19cc9986d0a7bbdff44e5632faeec3cace1748f988b8585d9ea6e130ed",
+    "priorReason": "PG-D444; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-60ff2967c38015ec4b03a9739da0923ee97b9a574e31cd10b87554fcde14393d",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "ee58534ef906859b5ed0b07870a138df31588506c6c03a2e00553ed7fdded172"
+      },
+      {
+        "testId": "PT-WHOLE-9786017971d38be4f98a191ab4362e9305c0a1183a735dd267a93007594137e3",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d0ae9d6c54dce8c6d8aef2c0a3967b6ae949f3d5a39680165880ac976ece01ad"
+      },
+      {
+        "testId": "PT-WHOLE-ef29fa3992d7d798f3064dec888a6be1955c1cc276f1bc008cadbc7bfaff1468",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d695bf9f2ff3b61d3009dae5947649a1ffe0402c5fbd4b0b07dbed381e788e9a"
+      },
+      {
+        "testId": "PT-WHOLE-5bd06fb6b8b1d3d781e2730657bef1921a8c1427d77cef5c4376ef5a647ba5d8",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "71b53db6ade206de6e211396c1089a1fd76e90851e9408a9a9f8a218e3128da5"
+      },
+      {
+        "testId": "PT-WHOLE-4b7aa8b22a22dbf7f4c45deff832bf4c5e0c7550173c12d0a88efa168f1df55e",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "e3b8cffb5a3bfebd6bed5848b8e01218dbea73be4aebbc1eb52a0f8747290ae8"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false,
+    "reason": "PG-D445; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "86",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "42",
+      "lastLine": "86",
+      "leftExpression": "notification",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "aade9992f685e6c0ec0fa25b753e3a8d5bcfab57ea019070fd86ccee4e61b2fb",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true
+  },
+  {
+    "findingId": "F03-PMD2-2cbb5e2e598d63f90d216aa819c11578c9a6174bb6d9ce8abe898c8bec5e932b",
+    "legacyFindingId": "F03-PMD-98be5758ef2f3f043a196249f33e470ee8457d05aea5649b612cef2492c5dc30",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+    "sourceSha256": "d9fe6b860045ade8e93d8fe7f8eec3727ed170f3e657cf61a952ad29726d933c",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "92",
+    "endline": "92",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 215,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "priorFindingId": "F03-PMD2-5b6f93107f05e68d20b60436e946932976323498f4582ccb247eede4553faa00",
+    "priorReason": "PG-D444; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-60ff2967c38015ec4b03a9739da0923ee97b9a574e31cd10b87554fcde14393d",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "ee58534ef906859b5ed0b07870a138df31588506c6c03a2e00553ed7fdded172"
+      },
+      {
+        "testId": "PT-WHOLE-9786017971d38be4f98a191ab4362e9305c0a1183a735dd267a93007594137e3",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d0ae9d6c54dce8c6d8aef2c0a3967b6ae949f3d5a39680165880ac976ece01ad"
+      },
+      {
+        "testId": "PT-WHOLE-ef29fa3992d7d798f3064dec888a6be1955c1cc276f1bc008cadbc7bfaff1468",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "d695bf9f2ff3b61d3009dae5947649a1ffe0402c5fbd4b0b07dbed381e788e9a"
+      },
+      {
+        "testId": "PT-WHOLE-5bd06fb6b8b1d3d781e2730657bef1921a8c1427d77cef5c4376ef5a647ba5d8",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "71b53db6ade206de6e211396c1089a1fd76e90851e9408a9a9f8a218e3128da5"
+      },
+      {
+        "testId": "PT-WHOLE-4b7aa8b22a22dbf7f4c45deff832bf4c5e0c7550173c12d0a88efa168f1df55e",
+        "xmlSha256": "27a2d579ca7841ce315e3aaa26ea1fd851932d78f3252cc76f2230a10d008799",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkConsumersTest",
+        "caseNameSha256": "e3b8cffb5a3bfebd6bed5848b8e01218dbea73be4aebbc1eb52a0f8747290ae8"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false,
+    "reason": "PG-D445; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "92",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "31",
+      "lastLine": "92",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java",
+      "rightExpression": "retained",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "aade9992f685e6c0ec0fa25b753e3a8d5bcfab57ea019070fd86ccee4e61b2fb",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true
+  },
+  {
+    "findingId": "F03-PMD2-f0c75fc008d456031540e1c7570aa0b5c6a0ac559a6e6d12b2ade6d9ed13a73c",
+    "legacyFindingId": "F03-PMD-45d6b8eae1d8701eca095f275b6ab1be535f33a46efb3b046a92d143ca3fcc0a",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+    "sourceSha256": "f7983dd5f05ffb9ee384078e61a9cca0482c3148a992f7f3ab3ea31578c54fea",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "96",
+    "endline": "96",
+    "priority": "3",
+    "begincolumn": "20",
+    "endcolumn": "43",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 268,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "priorFindingId": "F03-PMD2-8805a277278036d368bef4b356d2e6d2ad33c3f4d281d219444272d01efb86c0",
+    "priorReason": "PG-D444; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-c6678547575db9775169c7a8cf5d5658d99496032141033af0d0a5ad82c4cd6f",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "fad4b12e4f8361a0ce8d826f922348b60d42e7e426feca7d2f528eff1fe2ac59"
+      },
+      {
+        "testId": "PT-WHOLE-2b74b5077ae8a68b641ee00f951a724029ea3fdeaeff21013074de4ba357cde7",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "01a378973746f2afd2a4ab98b69c52b2c6d25c4a03db8fc8558ac5a1685b1cc6"
+      },
+      {
+        "testId": "PT-WHOLE-ed3c28c51750724c803dc01795ee4738ce7bc5af890a1f7e2605768cbe93686a",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "a1c246bc7be7bf02ebbf35c90cff38f302767f7e5843c3994863f9621be83a46"
+      },
+      {
+        "testId": "PT-WHOLE-b08a901ddec525c6accae3d4c2ac1c498da84a93c30a3f5d0d3a36a02108fa41",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "805920b00981864604c172ca9fb730a9600cc339f879a733aa8a629272636b2a"
+      },
+      {
+        "testId": "PT-WHOLE-3d89145f36869d214fc6235293c3a43143d23a7f902f359a19922b1328bb8b4d",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "674031535b738d19cb7827250f4f7971f0b1118e2c5ccf967647a9a1179c813e"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false,
+    "reason": "PG-D445; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "typedReferenceFact": {
+      "firstColumn": "20",
+      "firstLine": "96",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "42",
+      "lastLine": "96",
+      "leftExpression": "notification",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "rightExpression": "failure",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "aade9992f685e6c0ec0fa25b753e3a8d5bcfab57ea019070fd86ccee4e61b2fb",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true
+  },
+  {
+    "findingId": "F03-PMD2-5831619696bfca1898d1a4202788a8c4e71eeb4666948fd2a47c7b608e4da709",
+    "legacyFindingId": "F03-PMD-140d2d96eff09a3977cc189988fa433367d2bf4c967ac9191467e261becb865d",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+    "sourceSha256": "f7983dd5f05ffb9ee384078e61a9cca0482c3148a992f7f3ab3ea31578c54fea",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "102",
+    "endline": "102",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "32",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 273,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "priorFindingId": "F03-PMD2-83872f094b22482b13e8abad47aad3577574a3400d40a8a3087e8ba13e3dd4b9",
+    "priorReason": "PG-D444; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-c6678547575db9775169c7a8cf5d5658d99496032141033af0d0a5ad82c4cd6f",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "fad4b12e4f8361a0ce8d826f922348b60d42e7e426feca7d2f528eff1fe2ac59"
+      },
+      {
+        "testId": "PT-WHOLE-2b74b5077ae8a68b641ee00f951a724029ea3fdeaeff21013074de4ba357cde7",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "01a378973746f2afd2a4ab98b69c52b2c6d25c4a03db8fc8558ac5a1685b1cc6"
+      },
+      {
+        "testId": "PT-WHOLE-ed3c28c51750724c803dc01795ee4738ce7bc5af890a1f7e2605768cbe93686a",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "a1c246bc7be7bf02ebbf35c90cff38f302767f7e5843c3994863f9621be83a46"
+      },
+      {
+        "testId": "PT-WHOLE-b08a901ddec525c6accae3d4c2ac1c498da84a93c30a3f5d0d3a36a02108fa41",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "805920b00981864604c172ca9fb730a9600cc339f879a733aa8a629272636b2a"
+      },
+      {
+        "testId": "PT-WHOLE-3d89145f36869d214fc6235293c3a43143d23a7f902f359a19922b1328bb8b4d",
+        "xmlSha256": "2b5d88973c5121a4b2721cc698733190b17d437f0d458ef9a5aa3e7496038846",
+        "class": "dev.codex.schubert.nk.api.messaging.inbound.WebLogConsumersTest",
+        "caseNameSha256": "674031535b738d19cb7827250f4f7971f0b1118e2c5ccf967647a9a1179c813e"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false,
+    "reason": "PG-D445; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "102",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "31",
+      "lastLine": "102",
+      "leftExpression": "closing",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "rightExpression": "retained",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "aade9992f685e6c0ec0fa25b753e3a8d5bcfab57ea019070fd86ccee4e61b2fb",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true
+  },
+  {
+    "findingId": "F03-PMD2-818bcc86677727446dc0ef7342090c5e44f1dd890f921974139fbff1b707194b",
+    "legacyFindingId": "F03-PMD-5526d36865c4946bc25321acadc7cfee5e54f46ee793b838a4015795c92fbdfd",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+    "sourceSha256": "cfd1e04ad2944bbabfd6dc0da31ebd6e421628befb0a608801d96a46c6ad3c6e",
+    "rule": "CompareObjectsWithEquals",
+    "beginline": "59",
+    "endline": "59",
+    "priority": "3",
+    "begincolumn": "13",
+    "endcolumn": "31",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "rawXmlOrdinal": 1450,
+    "identitySchema": 2,
+    "status": "SOURCE_REBOUND_CURRENT_WHOLE_PENDING",
+    "priorDisposition": "REQUIRED_CONTRACT",
+    "priorFindingId": "F03-PMD2-cdf61e9a546bd0992a5e18aa9c727122bef42b7463af4a2a3a8b6ae5c847cf74",
+    "priorReason": "PG-D444; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "historicalWholeCaseRefs": [
+      {
+        "testId": "PT-WHOLE-9eef469856b5baaf1a410d1775ae1731fab77566fabb528aa327b61ce6d8fa40",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "fbaeba862b8b9550b97709bd364c1466c3ee5dc95ef34951e52fb1461a655b5e"
+      },
+      {
+        "testId": "PT-WHOLE-e9308996d12b91890ea057d026691e3a7771d24ab41feafb667b7fba90566191",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "0620478f6b7d562b731068df452f4296043a11c1baeebdc61d8633120fe09021"
+      },
+      {
+        "testId": "PT-WHOLE-b37f97c35be320e2dbb2ed901a3c8934c80476f2806ca690acebed8c952fe63e",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "96d24e82ed22655602b6efa2057cc43088bd77996c6c4beac621ff4cc661ba38"
+      },
+      {
+        "testId": "PT-WHOLE-193de871a192189993a7f52f984374277613fb5af4da0a54d088da8ba21b6e37",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "9a92f19460dcba08d409bd0c0cc8d4c586ced7089d4b6a32613687ea2567011e"
+      },
+      {
+        "testId": "PT-WHOLE-6da26d1f6a23d426fb462f543f86b73150564a080a709173533025c1ab65074b",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "8f4931101eb5692f896c1588748d6bad45951dc3409fe1abab2d63c1aee58f00"
+      },
+      {
+        "testId": "PT-WHOLE-75e467633a9f9a5ed5b0a6de79f3a9f7d1856d311f49f1165ca6b0ab8b1c5de6",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "7ff1508e2bf566684ee03f6d32ce828b7d3e91fd2b6488a6ff35f389d397693e"
+      },
+      {
+        "testId": "PT-WHOLE-00314b348d7f4e3785dccac9d0c502fff767ba86956f7e92ee6fd28814d2d58c",
+        "xmlSha256": "116fed4b92e14bde87a0c284fbbcc3f35e3f9c80fd7b1809f277641b0e0bf8e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumersTest",
+        "caseNameSha256": "54110a0836060fc9b86016149e1ea869c39210f3e65cad4b9540addaafe7c097"
+      }
+    ],
+    "recheckedChangedSource": true,
+    "newDispositionCreated": false,
+    "reason": "PG-D445; SS322/352. The compiler resolves this exact Throwable pair and the whole condition directly controls diagnostic append/early-return. Identity distinguishes nodes even for equals-true distinct failures. No assignment/callback intervenes. This narrow retention rationale does not establish receiver admission coverage, retry policy, Root ownership or cleanup.",
+    "typedReferenceFact": {
+      "firstColumn": "13",
+      "firstLine": "59",
+      "kind": "REFERENCE_IDENTITY",
+      "lastColumn": "30",
+      "lastLine": "59",
+      "leftExpression": "failure",
+      "leftType": "java.lang.Throwable",
+      "method": "start",
+      "operator": "NOT_EQUAL_TO",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "rightExpression": "closing",
+      "rightType": "java.lang.Throwable"
+    },
+    "typedFactsSha256": "aade9992f685e6c0ec0fa25b753e3a8d5bcfab57ea019070fd86ccee4e61b2fb",
+    "directGuardShape": "DISTINCT_THROWABLE_APPEND",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "rawWarningRetained": true
+  }
+]
