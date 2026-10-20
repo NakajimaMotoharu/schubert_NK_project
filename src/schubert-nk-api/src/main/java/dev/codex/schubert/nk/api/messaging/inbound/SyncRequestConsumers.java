@@ -70,6 +70,7 @@ public final class SyncRequestConsumers implements AutoCloseable {
               try {
                 listener.onMessage(context, message);
               } catch (CommittedFatalInboundException fatal) {
+                runtime.halted.set(true);
                 if (runtime.terminal.compareAndSet(false, true)) {
                   onTerminal.accept(fatal);
                 }

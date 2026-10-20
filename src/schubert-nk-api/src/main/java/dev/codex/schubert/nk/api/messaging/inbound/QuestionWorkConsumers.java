@@ -53,6 +53,7 @@ public final class QuestionWorkConsumers implements AutoCloseable {
             try {
               listener.onMessage(context, message);
             } catch (CommittedFatalInboundException fatal) {
+              result.halted.set(true);
               if (result.terminal.compareAndSet(false, true)) onTerminal.accept(fatal);
             } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
               result.halted.set(true);

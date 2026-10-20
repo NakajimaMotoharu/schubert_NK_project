@@ -17,4 +17,6 @@ API helperは既FatalIsolationFixtureのAPI内拡張で、元ISO001～006の失�
 
 red後のPGでは四consumerのCommittedFatal catchにhalted=trueを加え、最初のcommit/ACK・通知一回を維持する。普通のrollback再送、非commit isolation/unknown/Error、既inflight/他groupのowner責務は変えない。旧API統合TestのprotocolFirstだけをbusiness/questionCalls/rollback0・commit三（各group一）へSSから訂正し、元brokerの正常後続wireが未処理/未ACKでowner close後に戻る独立後条件を確認する。元protocolFirstの仕様違反を許すPASSは改記せず履歴として保持。
 
+当redはAPI元69479/10case六suite・目的三failure、Web元82962/九case七suite・目的一failureだけ、全851/1666は元862同byteで成立。5855独立元XML検証実0/公開e4419d0226f86570831110cb62bc7663b7675d5acc8582f134a1e30e186d9d5e、redを成功PTへ加点0。greenは`pg5856_terminal_green.py`（旧66＋新四/計70・20suite、target八/実1666）で実行し、同じ@Test内でpost-terminal後のSync四contextを各一workerから同時callbackしてvisibilityも確認する。これはgreenで追加実行する並行観点であり、初回redで実行済みとはしない。Questionの実返却は既独立QWKREQ01の全byteを比較、元TTL/遅延は不変更・既10秒待機で確認する。最終は`pg5858_terminal_static.py`の全851/1666・四catch一行以外不変更/ABI/無除外staticと必要same-source全体へ進む。
+
 次のgreen/静的/必要全体は新sourceを固定して仕様・command・対象commit・環境・全counter/XML/hash・関連BUGへ追記する。旧6b5-3967/862-protocol105/旧nativeを新sourceへ合算せず、正式1964/53・17/190/工数null・QA051final/実所有HOLDは維持。現在は修正前red準備でありPG/PT完了ではない。

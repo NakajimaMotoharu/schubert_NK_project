@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "executionKind": "ORIGINAL_FOUR_RED_ARTIFACT_QUALIFICATION_NOT_PT_PASS",
+  "unmodifiedProductionSource": "86287c3fb83b483050b88dce04bc644961682bc4",
+  "runs": [
+    {
+      "phase": "red-api",
+      "run": "pg5854-terminal-red-api-v1",
+      "source": "3756e976cb67d6cd28395f45d47b6d923a42d5e5",
+      "manifestSha256": "fc558fd09fa9e9c36a5d5b95c735a6ce994f1686fa822f465d23b7c5c90240bd",
+      "archiveSha256": "aca0f27a641fb3d0dfa3a845a7eb111047405ca6e7bf0001e2869ff22b5214bb",
+      "startedUTC": "2026-10-20T04:11:43.336737+00:00",
+      "completedUTC": "2026-10-20T04:13:15.596675+00:00",
+      "actualExit": 1,
+      "phaseExits": [
+        0,
+        1
+      ],
+      "executedCases": 10,
+      "suites": 6,
+      "expectedFailureIds": [
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.CommittedTerminalAdmissionContractTest",
+          "term001SyncCommitStopsAllFourContextAdmissions"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.CommittedTerminalAdmissionContractTest",
+          "term002QuestionCommitStopsFurtherAdmissions"
+        ],
+        [
+          "dev.codex.schubert.nk.api.messaging.inbound.CommittedTerminalAdmissionContractTest",
+          "term003WebLogCommitStopsFurtherAdmissions"
+        ]
+      ],
+      "xmlHashes": {
+        "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest": "2e217c8389cd978b598f4004f11bfc6853ed2dac1eeb0479a38ff8fca5837936",
+        "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest": "5053a5c9d66dff018ac35925f20fc2a20ef6fcfdd08c5fcbc9171f07e1a0ee06",
+        "dev.codex.schubert.nk.api.messaging.inbound.CommittedTerminalAdmissionContractTest": "4ee720f4d71a14e076942080ec802dbf4d1deb72eee9188fd39f207e0efc0ad9",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "ba2ec31deb7e2fdb9bde33c4b26568e1ed9b22f0387b22abbdb961c422a5ab81",
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "781ce383b30bf69b4b5fcef83b6b35afc5f312532f9039ea11b0817874763c60",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "9179df820854ccaf61f7cf0813606d2cfa8d703f1667a6daf127799c4d1a731a"
+      },
+      "physicalMain": 1351,
+      "purposefulRedEstablished": true,
+      "webNotRunRetained": true
+    },
+    {
+      "phase": "red-web",
+      "run": "pg5854-terminal-red-web-v1",
+      "source": "3756e976cb67d6cd28395f45d47b6d923a42d5e5",
+      "manifestSha256": "3a213a60fdba2940d905361ced35c501c211e05fbc9da01c55672430bdfade66",
+      "archiveSha256": "aca0f27a641fb3d0dfa3a845a7eb111047405ca6e7bf0001e2869ff22b5214bb",
+      "startedUTC": "2026-10-20T04:13:49.489650+00:00",
+      "completedUTC": "2026-10-20T04:15:41.917165+00:00",
+      "actualExit": 1,
+      "phaseExits": [
+        0,
+        1
+      ],
+      "executedCases": 9,
+      "suites": 7,
+      "expectedFailureIds": [
+        [
+          "dev.codex.schubert.nk.web.messaging.ReplyCommittedTerminalAdmissionContractTest",
+          "term004ReplyCommitStopsFurtherAdmissions"
+        ]
+      ],
+      "xmlHashes": {
+        "dev.codex.schubert.nk.web.messaging.ReplyCommittedTerminalAdmissionContractTest": "6d4a637b920f6a4c0b02bf81bd1676f790f432ee2476fda28980c2270b7c4db7",
+        "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest": "440b89f11eb3628395c298ad3a67e36157d145efe4646d6c5237cf384f638754",
+        "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest": "63352aec58d98f5f8f3698ff33c36bdcb75406a8ea0afee65b153e98ea3b9df2",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "0e00e35954f2fa4db5555549b628aea1761ddbe3ea8bf0b6dcb5a20bf71eba90",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "495b3ed0eecb27ff3a9d0d0f05f1ed2e1942d99176c81ac680becb7cf890344d",
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "59381ebc7b6da5b7e823cca82de717ad4f5318d78d0760930f66c99c3ceb9cc9",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "3d81f28fd02b8956fee43156c7a745ed315b9a3bb47018549721522c93e4dca5"
+      },
+      "physicalMain": 1666,
+      "purposefulRedEstablished": true,
+      "webNotRunRetained": false
+    }
+  ],
+  "purposefulFailureCases": 4,
+  "productionPtPassCredit": 0,
+  "ptAlternativeCompleted": 0,
+  "formalAccepted": false,
+  "BUG1501Open": true,
+  "vmActions": 0
+}

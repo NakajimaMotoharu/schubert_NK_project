@@ -1,5 +1,7 @@
 # API consumer終端・部分close PT仕様（PG474）
 
+2026-10-20 REM004訂正追補（BUG1501/YKT1261/PG-D444、1223）：protocolFirstは最初のDLQ commit/元ACKだけを各group一回許し、それ以後は同groupの業務/再隔離/commit/rollbackを0とする。旧Testが期待したbusiness3/commit6はSS322§11のcommit後exitに反するため履歴として保持し、現期待はbusiness/questionCalls/rollback0・commit三（Sync/WebLog/Question各一）・通知一。非protocol modeの普通の再送/unknown期待は不変更、実Question正常wireは未処理/未ACKのままowner close後に返ることも確認する。下表の「fatal後ACK0」は最初の正常隔離commit自体を禁止する意味ではなく、終端後の新たなACK禁止と区別する。過去の成功結果を新期待の合格へ改記しない。
+
 NK-MSG-001/002/ASY-001・NK-OPS-001、RD MQ003006008010/MON005、UI212213231251、SS312321342343/451。PG473/a5の同host+8fresh nativeはAPI96branch/122line/4method未網羅。まず公開起動経路での独立provider故障試験を追加し、未受入の分岐を除外しない。既承認仕様違反を発見した場合は修正前915/916・必要設計台帳へ登録する。
 
 |Test ID|対象|独立期待値・fixture|

@@ -63,6 +63,7 @@ public final class WebLogConsumers implements AutoCloseable {
             try {
               listener.onMessage(opened, message);
             } catch (CommittedFatalInboundException fatal) {
+              result.halted.set(true);
               if (runtime.terminal.compareAndSet(false, true)) {
                 onTerminal.accept(fatal);
               }

@@ -100,6 +100,7 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
             try {
               reply.onMessage(opened, message);
             } catch (CommittedFatalReplyException fatal) {
+              halted.set(true);
               if (terminal.compareAndSet(false, true)) {
                 onTerminal.accept(fatal);
               }

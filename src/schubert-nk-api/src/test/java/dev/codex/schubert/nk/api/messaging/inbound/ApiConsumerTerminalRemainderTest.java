@@ -129,7 +129,7 @@ class ApiConsumerTerminalRemainderTest {
             var message = slot.consumer().receive(5000);
             assertNotNull(message);
             callback.onMessage(message);
-            if (n == 5) {
+            if (n == 5 && !protocolFirst) {
               assertEquals(1, questionCalls.get());
               message =
                   slot.consumer().receive(5000); // real rollback/redelivery, never new work issue.
@@ -142,14 +142,15 @@ class ApiConsumerTerminalRemainderTest {
           }
           // The application cannot observe the fixture's internal real.rollback() success
           // after the provider throws. PG-D441 requires UNKNOWN to stop before the next work.
-          assertEquals(uncertain ? 2 : 3, business.get());
-          assertEquals(uncertain ? 1 : 2, questionCalls.get());
-          assertEquals(protocolFirst ? 6 : 0, commits.get());
-          assertEquals(protocolFirst ? 1 : uncertain ? 3 : 4, rollbacks.get());
+          // SS322§11 / PG-D444: committed protocol terminal stops this group's later work.
+          assertEquals(protocolFirst ? 0 : uncertain ? 2 : 3, business.get());
+          assertEquals(protocolFirst ? 0 : uncertain ? 1 : 2, questionCalls.get());
+          assertEquals(protocolFirst ? 3 : 0, commits.get());
+          assertEquals(protocolFirst ? 0 : uncertain ? 3 : 4, rollbacks.get());
           assertEquals(protocolFirst ? 1 : 0, protocols.get());
           assertEquals(protocolFirst ? 0 : 1, fatals.get());
         }
-        if (uncertain) {
+        if (uncertain || protocolFirst) {
           // Closing the stopped owner must return the uncommitted work, never ACK it.
           try (var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
               var pending =
