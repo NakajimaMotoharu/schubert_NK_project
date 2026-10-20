@@ -1,4 +1,8 @@
-# 1323 Web管理複合例外・次群PG/PT仕様（未着手source）
+# 1323 Web管理複合例外・次群PG/PT仕様（実PG済・選択PT前）
+
+製造開始追記：元6212/6214真正0・4027/605/8511667/全Jar同source資格後、Web/Core二MainとWeb一Testを実PG。PG-D472ではCore公開非帰還delegateの実L2/M1未測定を保存し、entry自身のloopと有限diagnostic/tick helperへ分離、固定port/同frame/例外/1000ms契約を維持する。これは除外・期待値変更・coverage補完ではなく、観測は新source実counterに限る。全新旧64の独立PT/JVMで是正を検証予定、まだ合格ではない。
+
+依存追加：SS319/PG-D473の同配送rollback確認を同じ接続経路の後続PGへ追加した。元全4027は保存済み、まず当二Mainの選択64/原資格を閉じ、後続consumer内部依存を実装・独立PTした後に変更群の必要全回帰を一度まとめる。中間sourceの未実行whole4028を合格扱いせず、最終宣言数はその時の実inventoryで確定する。quality/451は不変更。
 
 1320～1322/BUG1561/YKT1318の横展開。現Production551/元PG6212全体はMain/Test固定を維持し、真正終端・原資格確認後だけ次群を製造する。現在は仕様・工具定義準備だけでWeb修正済/PT成功とはしない。別source成功流用/旧全体再発行0。
 

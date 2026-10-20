@@ -1,5 +1,13 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC319 ordinary配送の確認済rollback（2026-10-21、内部補足）
+
+SYNC/ASYNC_WORK/WEB_LOGのordinary retryは、その配送・同じcontextのrollbackが正常帰還したことを必要とする。listenerは既null/session preflight・処理順/元例外identity/公開checked契約を保ち、内部同期通知portはrollback正常帰還後だけ呼ぶ。preflight失敗、rollback失敗、確認port失敗等をcatch型だけから確認済へ読み替えない。public互換entryは新通知を要求しないが、登録済consumerは当内部portを明示使用する。
+
+consumer側の確認stateは所有準備時に確保し、各配送直前にreset、正常rollback後の同期通知だけで更新する。Sync四contextは別state、単一sessionの直列callback内の値を他sessionへ共有しない。普通retry catchで未確認ならhalted/terminal・既fatal通知へ分離し、ACK/commit・追加rollback・新業務再送・close/Root操作をそのcatchから発行しない。確認済だけ既broker delivery-count/最大回数/backoffへ委ねる。CommittedFatal/FailedIsolation/UnconfirmedRollback/directErrorの既typed境界、fatal notificationとUNKNOWN解放保持は維持する。
+
+BUG1565/YKT1322。外部入力/role/admission/画面/電文/SQL/再送上限/親30分・Unit期限は不変更。自己所有finite proxyでnull/preflight/rollback/配送reset/context分離/停止・旧public例外互換を検証する。現providerでの障害発生実測や実Root/nativeの所有・後条件をこの局所仕様から認定しない。
+
 ## SSC316 native専用の返却前/close UNKNOWN保持（2026-10-21、S3b）
 
 既component entryは元cleanup例外順位と明示保持handle再確認を維持する。ordinary native entryは明示したRetainingUnknown経路だけを固定trueで選び、三consumerのpartial startup/returned close、API/Web provider設定失敗cleanup、API broker partial/live closeまで同状態を伝播する。provider closeが未確認ならそのcatch frameで既ServiceProcessResourcesの固定UNKNOWN保持へ入り、以後のclose再発行/正常return/外側ownerのcleanupをしない。native保持は外部環境/入力のpermissionやadmission bypassではなく、既admitted graphの解放失敗時だけの処理である。
