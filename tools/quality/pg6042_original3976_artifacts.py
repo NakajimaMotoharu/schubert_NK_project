@@ -154,7 +154,20 @@ def inspect_original(data):
     if data.get('expectedCurrentMain') is not None and physical != data['expectedCurrentMain']:
         raise ValueError('current selected and whole compiled Main byte maps exactly equal;PT successes not imported')
     targets = {key: all_counts[key] for key in data['changedOwnerKeys']}
-    if len(targets) != len(data['changedOwnerKeys']) or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} for v in targets.values()):
+    branchless = data.get('branchlessOwnerProofs', {})
+    permitted = {'api:dev/codex/schubert/nk/api/messaging/inbound/'+n+'.class' for n in ('QuestionWorkListener','WebLogListener')} if campaign == 'PG6244' else set()
+    if branchless and set(branchless) != permitted:
+        raise ValueError('only two independently reviewed original branchless wrappers')
+    not_applicable = {}
+    for key, value in branchless.items():
+        if (key not in targets or set(targets[key]) != {'LINE', 'METHOD', 'CLASS'}
+                or value['source'] != data['source'] or value['classSha256'] != physical[key]
+                or value['conditionalInstructions'] != [] or value['methodCount'] != 3
+                or value['instructionCount'] <= 0 or len(value['methodInstructionsSha256']) != 64
+                or value['rawCounterPreserved'] is not True or value['branchCounter'] != 'NOT_APPLICABLE_NO_CONDITIONAL_OR_SWITCH'):
+            raise ValueError('branchless proof and exact original physical/raw counter shape')
+        not_applicable[key] = {'BRANCH': value}
+    if len(targets) != len(data['changedOwnerKeys']) or any(set(v) != {'LINE', 'METHOD', 'CLASS', 'BRANCH'} and key not in not_applicable for key, v in targets.items()):
         raise ValueError('all23 actual outer counter sets explicit,no missing-as-zero')
     main_inputs = production_source_inputs(data['allSourceInputs'])
     if len(main_inputs) != 851 or main_inputs != data['expectedMainSourceInputs']:
@@ -162,7 +175,7 @@ def inspect_original(data):
     value = dict(actualExit=0, productionSource=data['source'], sourceSnapshot=data['source'], tests=expected_counts[0], suites=expected_counts[1], mainClasses=expected_counts[2],
         serverManifestSha256=digest(out/'manifest.safe.json'), sourceArchiveSha256=data['archiveSha256'], returnedOriginalTerminalExact=True,
         FESFlakyNotRun=0, staticSixModules=0, modules=modules, allPhysicalMainSha256=physical, allActualClassCounters=all_counts,
-        coveragePhysicalClassKeysNotInXml=sorted(set(physical)-set(all_counts)), changedOuterCounters=targets,
+        coveragePhysicalClassKeysNotInXml=sorted(set(physical)-set(all_counts)), changedOuterCounters=targets, counterNotApplicable=not_applicable,
         changedPhysicalClasses=changed, addedPhysicalClasses=added, unchangedPhysicalClasses=unchanged,
         global100=global_four100(modules), allSixFormatBeforeAnyPt=True, formatBeforePtProofSha256=digest(out/'format-before-pt.safe.json'),
         command=begin['command'], os=dict(system=os.uname().sysname, release=os.uname().release, machine=os.uname().machine),

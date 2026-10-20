@@ -14,7 +14,7 @@ require,sha,trace,audit=base.require,base.sha,base.trace,base.audit
 
 def read_qualified():
     qp=BASE/'PG6244-current4034-cases/qualification.json';cp=qp.with_name('cases.json')
-    receipt=json.loads((W/'pg6250-original4034-artifacts-v1/manifest.safe.json').read_bytes())
+    receipt=json.loads((W/'pg6250-original4034-artifacts-v2/manifest.safe.json').read_bytes())
     originalpath=W/'pg6244-confirmed-rollback-six-v1/manifest.safe.json';original=json.loads(originalpath.read_bytes())
     require(receipt['actualExit']==original['actualExit']==0 and receipt['source']==original['source']==SOURCE
         and receipt['wholeReplayed']is False and receipt['originalManifestSha256']==sha(originalpath.read_bytes())
