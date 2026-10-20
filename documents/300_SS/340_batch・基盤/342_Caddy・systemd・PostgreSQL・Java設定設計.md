@@ -1,5 +1,11 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC317 未start管理HTTPの完了解釈（2026-10-21）
+
+API/Web管理serverは正常start完了が確認できない時、JDK stop(0)の正常返却だけをsocket/selector解放完了とは解釈しない。実停止通知・既stop/実executor joinを行ってもその状態は固定UNCONFIRMEDとし、closed/serverStoppedの成功cacheを立てず、nativeの既所有frame/外側借用資源保持へ接続する。正常start済みの従来の実stop/join/冪等完了は維持する。
+
+根拠はJDK25.0.4未start bind及びsetup失敗後の独立port再bind反例（BUG1560/YKT1317）。vendor内部selectorの詳細原因は推定と区別する。cleanup中の新server.start、private JDK reflection、別FDへの権限変更、JDK更新によって正常停止を推定しない。完全解放が未保証のまま所有を保持する残存リスクを明記し、Root正常/DONE/新起動可能とはしない。SS316のUNKNOWN保持・親/Unit期限とRD/UI/業務契約は不変更。componentの固定失敗診断と実nativeの保持/後条件は別資格を要する。
+
 ## SSC316 API nativeの取得前所有・UNKNOWN保有（2026-10-21、S3b）
 
 ordinary APIは全acquire/release/action portをその資源の取得前に準備し、ResourceScopeとServiceProcessResourcesの既native ownedReleaseを使ってbroker→application内側資源→management→consumerの所有を接続する。API管理HTTPはbindで全owner/state/未開始executorとbound serverを返し、native ownerが捕捉してからstart/configureする。既openはbind/startを合わせたcomponent互換entryとして元例外契約を維持し、startは一度だけ、停止要求後/重複startを拒否する。

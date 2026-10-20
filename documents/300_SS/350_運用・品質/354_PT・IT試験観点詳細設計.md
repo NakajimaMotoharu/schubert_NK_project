@@ -1,5 +1,9 @@
 # PT・IT試験観点詳細設計
 
+## SSC317 未start JDK管理HTTPの反例と保持
+
+BUG1560/YKT1317/SS342。未start bind及び設定各位置のRuntimeException/Errorについて、stop正常返却を成功とせず固定UNCONFIRMED・native外側frame未解放/二重closeなしを自己所有有限childで独立検査する。子143/未測定を実native資格へ加算しない。正常start済みのHTTP DOWN/UP/DOWN・実executor終端・同port再bind・既例外/並行/budgetを維持する。vendor未起動時の完全解放は未保証の残存リスクとして記録し、解放成功の期待へ書き換えない。未受入code/全体品質は設計公開と区別する。
+
 ## SSC316 native保持接続の独立component PT（S3b）
 
 三consumer/API親/broker/API-Web providerのnative entryの正常終了、partial startup/close Runtime/ErrorのUNKNOWN保持、API管理bind捕捉後start失敗・重複/停止後start拒否、inner roots/codecs/outboxから外側への解放順序を独立literal/実counter/JVMで照合する。normal componentの元例外順位/close再確認/TWR期待値は維持する。全callback/release portが各取得前に準備されることを実ClassFileと独立source fixtureで確認する。
