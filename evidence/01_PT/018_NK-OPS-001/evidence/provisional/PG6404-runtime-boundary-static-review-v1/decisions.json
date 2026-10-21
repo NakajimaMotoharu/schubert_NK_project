@@ -1,0 +1,1110 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "89",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Throwable ",
+    "diagnosticTextSha256": "a122f0a4131a314e73c39985e4fe8d9128f396bf2d858a8db58912b1578f8cdd",
+    "endcolumn": "23",
+    "endline": "89",
+    "findingId": "F03-PMD2-0469000bd40ab3ad79e80de6732ddf921405e6603b43825fb773bd17e17ead63",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-99513f5877e78e8fea3dfdcdebd3fb4697fc372220b2f82d1a0adcc0622dcedf",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Capture.class": "ccaa303592c9ea1b102ae4e3d31ca8db1f2d3c049ae53cf395214ec415b46906",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Operation.class": "f4b8befb4b1c7a6d7dd011904bfd624a20c8ed82dec47d9adf5118fff5640c31",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.class": "bd58ddc2c61f87f53feddf54d495f38b266da0eb49ef4941ad0ed7ac14546a64"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest",
+        "sourceSha256": "180c3919ad329896a1d2534617c522ebca90c64fe2952eeb26f120ff32971b74"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 72,
+    "reason": "The final process-entry closing/capture boundary consumes any Throwable only into the specified fixed bootstrap status50 and literal diagnostic. Termination is invoked with that observed status, not success. This is the approved standalone ADMIN entry contract, not ordinary JMS worker fatal ranking; this review issues no ADMIN operation.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+    "sourceSha256": "d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Throwable ",
+    "diagnosticTextSha256": "a122f0a4131a314e73c39985e4fe8d9128f396bf2d858a8db58912b1578f8cdd",
+    "endcolumn": "23",
+    "endline": "123",
+    "findingId": "F03-PMD2-91c26e5e18272b7141ef63ffd96eec45546b131dd6b71394f47d8673af71413a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-77d1a72bf1e586fc01d04e69e552437c8d57526feb967322098a1897fc164d46",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Capture.class": "ccaa303592c9ea1b102ae4e3d31ca8db1f2d3c049ae53cf395214ec415b46906",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Operation.class": "f4b8befb4b1c7a6d7dd011904bfd624a20c8ed82dec47d9adf5118fff5640c31",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.class": "bd58ddc2c61f87f53feddf54d495f38b266da0eb49ef4941ad0ed7ac14546a64"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest",
+        "sourceSha256": "180c3919ad329896a1d2534617c522ebca90c64fe2952eeb26f120ff32971b74"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 73,
+    "reason": "The entry operation failure retains default status50 and only fixed public diagnostics. Input nulls are rejected before actions; the subsequent finished label is an entry diagnostic rather than proof of successful schema/admin/bootstrap. No role/key/DB operation is performed by this applicability review.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+    "sourceSha256": "d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "130",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Throwable ",
+    "diagnosticTextSha256": "a122f0a4131a314e73c39985e4fe8d9128f396bf2d858a8db58912b1578f8cdd",
+    "endcolumn": "23",
+    "endline": "130",
+    "findingId": "F03-PMD2-66f9c21327fb91cb9c212090e7303d1fe899eeefe7de452a5adccd2158694683",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c56d3740369f4841bb1df466109613f7682eced6ac6f760c269a3861fe8e17ef",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Capture.class": "ccaa303592c9ea1b102ae4e3d31ca8db1f2d3c049ae53cf395214ec415b46906",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain$Operation.class": "f4b8befb4b1c7a6d7dd011904bfd624a20c8ed82dec47d9adf5118fff5640c31",
+      "api:dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.class": "bd58ddc2c61f87f53feddf54d495f38b266da0eb49ef4941ad0ed7ac14546a64"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.bootstrap.BootstrapAdminMainTest",
+        "sourceSha256": "180c3919ad329896a1d2534617c522ebca90c64fe2952eeb26f120ff32971b74"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 74,
+    "reason": "A failed PT capture changes the process result to50 and cannot create native qualification. The capture-complete diagnostic is printed only after a true capture result. An attempted/error capture remains distinct from confirmed stream evidence.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+    "sourceSha256": "d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "165",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "current ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "16",
+    "endline": "165",
+    "findingId": "F03-PMD2-afb30796ad0450da4396ef4723053cc2aecbe26a97234aee3ecdb4e0003b9895",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-38bee1043f4ca43c735842beb1fed0ea3f904b276a617ec6132921f6664e2832",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.class": "c7ac7d93864941f86f64026a2df9b0e989e66fb53885f394e3045b8657a029a7"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CaddyPublicConfigurationTest",
+        "sourceSha256": "5b51baeb0a6acadd8abd200e9c0a294ec64beab1f638b853bb865abf42660401"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 408,
+    "reason": "current aliases the last already-owned directory in held. It is not a new acquisition. Recursive children enter ResourceScope immediately and remain in the held chain during child access; closing this borrowed alias locally would violate the parent lifetime. This review reads source only, not actual root/CA files.",
+    "rule": "CloseResource",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+    "sourceSha256": "f0d5b21a34e7e9d5879663ee49e4645d34115aef60b2d3119594cf9c424a731f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "260",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (ArtemisExpiryPurgeException actualFailure) {\n      // Real attempted purge. No fabricated after=0/before and no unexecuted FAILED.\n    }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "6",
+    "endline": "262",
+    "findingId": "F03-PMD2-0da34f6665bcb5ec17e5186f1964c311e2087f5e32694ec438f98d9e4b478157",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-43289bf5a896a5c617e1ed59cf3eaa50e893e5987e327021b518a76eb9764ee2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$1.class": "0eac866cc6d98bc080a231137fc4120fb1af40fce200bd1c6d44ef95beb5bdf1",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$ExpiryWork.class": "01eaea8e8b139cfee040083a44f28a288c3aaa817a015e5c7e58cde0aa3605d6",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.class": "9785d511951c2d6f5c83a676b31d5dc8137b3cb8c9176ce7d13791880f4a4b4e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest",
+        "sourceSha256": "5107043b12c095f3ee5e828a9c18f1a11816abe04ae22aecd93b4bd44e6ac622"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 415,
+    "reason": "An actual typed purge failure leaves purgeSucceeded=false and after=null; no fabricated after count or unattempted failure is emitted. A separate observed health result determines WARNING versus FAILED. The empty catch deliberately preserves that result contract, not a successful purge.",
+    "rule": "EmptyCatchBlock",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+    "sourceSha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "266",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (ArtemisManagementReadinessException actualHealthFailure) {\n      /* Actual Ops failure blocks startup. */\n    }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "6",
+    "endline": "268",
+    "findingId": "F03-PMD2-d4703f9c5268ece01c20a3b36a3019e1842bb54803b570d283ea750932df0d40",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1b4f37ad59a9a77ead6e749eba4efcaf925f996677c7f6e541439c462870c580",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$1.class": "0eac866cc6d98bc080a231137fc4120fb1af40fce200bd1c6d44ef95beb5bdf1",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution$ExpiryWork.class": "01eaea8e8b139cfee040083a44f28a288c3aaa817a015e5c7e58cde0aa3605d6",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.class": "9785d511951c2d6f5c83a676b31d5dc8137b3cb8c9176ce7d13791880f4a4b4e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupExpiryExecutionTest",
+        "sourceSha256": "5107043b12c095f3ee5e828a9c18f1a11816abe04ae22aecd93b4bd44e6ac622"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 416,
+    "reason": "Typed management-health failure leaves healthy=false, forcing FAILED and preventing startup admission even if purge completed. It does not silently turn unavailable Ops into healthy or reuse a previous observation.",
+    "rule": "EmptyCatchBlock",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+    "sourceSha256": "f7100ed36f815cb45f44e6ab9d829d183d359f6aa437aed6c8203d27863b8c3b",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "118",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "118",
+    "findingId": "F03-PMD2-2ca2a041fc12a74e364f64d70d04daf5b0d77e8118ebc4eb766e8d8f726b9300",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7640f72dfb1e2fd5579c12d32ae25c78970b1ae67d6b286e8479d168674b89a8",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Context.class": "d473dac3d6aa2109a13db53f1e1fcfa075d337f87579123ff5d442c571f6d1bb",
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Io.class": "eeebe565feb367f3cfe5c7927ca2c469f7a433c697a93107b339acc0108320e5",
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NativeObservations.class": "aeb0daf19ba933670a90a68d97c4726cc7671829635056951cf9dcb44549146d",
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NioIo.class": "bb4d3324a53e3669c3a4fe970660a77b705271d2c435345207ec9b89a3a8a9d7",
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Observations.class": "3862daa4e9b56a7947f90a0b094d7e59759b177c02b15d4461cd227c663e495c",
+      "batch:dev/codex/schubert/nk/batch/platform/BackupUnitTermination.class": "cca961a96ceb75d116e3ae24f4ecf4f8de27b8a2a583f9e03e0b31ebf0e41df7"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.BackupUnitTerminationTest",
+        "sourceSha256": "089059194dfff5f59763c3d32d463eb5a6731ba6d3fabc8a82fb13382fcfbf1c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 616,
+    "reason": "Private stateLock serializes the full quiescence observation against object state, not caller-monitor ownership. Exact parent/budget/manager/kernel checks are still required before Optional presence; synchronization itself proves no real Unit termination or lock release.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+    "sourceSha256": "e3c8c4eebb3f1d4ac53f3b32f3f497ccaebea609a0821bd9aeaabe61fe64b6f9",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "252",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "252",
+    "findingId": "F03-PMD2-ae1f0a8ffbd8b24477808fd4f8f3e9a9bfa0e9aeeebb4b296a41b6a7a5143b48",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c993868eab501cc9944e384426115acefab3b492d0cb711f2387ec7532839bd1",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class": "c23d6def56433f0650f55a406719ff64dc58f5d3cc099ef27a1c8511614b1234",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class": "9b4ef5b7215ca76ee7a0ca4fb72a15c34b8dd03789dc67316a67833327650ae5",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class": "3bad8405a6c8523b26d6d193b1a4902cc5fa2898a8e07776ed09730bd85ca3dc",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class": "2f59930ccde34978f9b3cf7fcd1e901b9a381dde9b4522814d1fd464f88a6f04",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class": "f1f6f0a293453e69b5e64be5ca9904734130ae31f1a3c9afeab91bbc0f5ac4ec",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class": "501290b9ebe038c1465e85747ea90340fff5b17c95df2cd9b79069ba3987deeb"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+        "sourceSha256": "0fb89e88b07200d66b9d3f5ddb563b7fab7baf4326934aaff6e430954e0131e9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 651,
+    "reason": "Both unchecked query/process result failures wipe the locally owned observation buffer before identical rethrow. Known interruption/IO map separately to fixed StopGate reason. No provider text or partially read bytes are returned as valid Unit evidence.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "sourceSha256": "cfd6a67fba5f487f3e3f5195ca9a308c1c9ad447a295fe22b8ed230ae8cac9a0",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "252",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "252",
+    "findingId": "F03-PMD2-850c2255e8ffb0b92347db855759fcac289a1bce4b7d2ce5c4e61da401540205",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c993868eab501cc9944e384426115acefab3b492d0cb711f2387ec7532839bd1",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class": "c23d6def56433f0650f55a406719ff64dc58f5d3cc099ef27a1c8511614b1234",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class": "9b4ef5b7215ca76ee7a0ca4fb72a15c34b8dd03789dc67316a67833327650ae5",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class": "3bad8405a6c8523b26d6d193b1a4902cc5fa2898a8e07776ed09730bd85ca3dc",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class": "2f59930ccde34978f9b3cf7fcd1e901b9a381dde9b4522814d1fd464f88a6f04",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class": "f1f6f0a293453e69b5e64be5ca9904734130ae31f1a3c9afeab91bbc0f5ac4ec",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class": "501290b9ebe038c1465e85747ea90340fff5b17c95df2cd9b79069ba3987deeb"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+        "sourceSha256": "0fb89e88b07200d66b9d3f5ddb563b7fab7baf4326934aaff6e430954e0131e9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 652,
+    "reason": "Both unchecked query/process result failures wipe the locally owned observation buffer before identical rethrow. Known interruption/IO map separately to fixed StopGate reason. No provider text or partially read bytes are returned as valid Unit evidence.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "sourceSha256": "cfd6a67fba5f487f3e3f5195ca9a308c1c9ad447a295fe22b8ed230ae8cac9a0",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "325",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "325",
+    "findingId": "F03-PMD2-f9b9ce20b825ab22d57a14e648f1b07bd76d0831642df81356ca799de9b2c02f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9dc07315c036e262fc394ba748f279223b81434ecb2b4a16b7d2eae399bb4aa8",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class": "c23d6def56433f0650f55a406719ff64dc58f5d3cc099ef27a1c8511614b1234",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class": "9b4ef5b7215ca76ee7a0ca4fb72a15c34b8dd03789dc67316a67833327650ae5",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class": "3bad8405a6c8523b26d6d193b1a4902cc5fa2898a8e07776ed09730bd85ca3dc",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class": "2f59930ccde34978f9b3cf7fcd1e901b9a381dde9b4522814d1fd464f88a6f04",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class": "f1f6f0a293453e69b5e64be5ca9904734130ae31f1a3c9afeab91bbc0f5ac4ec",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class": "501290b9ebe038c1465e85747ea90340fff5b17c95df2cd9b79069ba3987deeb"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+        "sourceSha256": "0fb89e88b07200d66b9d3f5ddb563b7fab7baf4326934aaff6e430954e0131e9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 654,
+    "reason": "Both unchecked later command observation failures wipe the owned byte buffer and retain failure identity, after explicit known IO/interruption mapping. The public result is never inferred from a command start or missing response.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "sourceSha256": "cfd6a67fba5f487f3e3f5195ca9a308c1c9ad447a295fe22b8ed230ae8cac9a0",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "325",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "325",
+    "findingId": "F03-PMD2-4ce51bf1f272bfa7ec1532f59d3290312d14c2b16c779b9a798959997930e7b5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9dc07315c036e262fc394ba748f279223b81434ecb2b4a16b7d2eae399bb4aa8",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class": "c23d6def56433f0650f55a406719ff64dc58f5d3cc099ef27a1c8511614b1234",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class": "9b4ef5b7215ca76ee7a0ca4fb72a15c34b8dd03789dc67316a67833327650ae5",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class": "3bad8405a6c8523b26d6d193b1a4902cc5fa2898a8e07776ed09730bd85ca3dc",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class": "2f59930ccde34978f9b3cf7fcd1e901b9a381dde9b4522814d1fd464f88a6f04",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class": "f1f6f0a293453e69b5e64be5ca9904734130ae31f1a3c9afeab91bbc0f5ac4ec",
+      "batch:dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class": "501290b9ebe038c1465e85747ea90340fff5b17c95df2cd9b79069ba3987deeb"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.InspectorUnitProbeTest",
+        "sourceSha256": "0fb89e88b07200d66b9d3f5ddb563b7fab7baf4326934aaff6e430954e0131e9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 655,
+    "reason": "Both unchecked later command observation failures wipe the owned byte buffer and retain failure identity, after explicit known IO/interruption mapping. The public result is never inferred from a command start or missing response.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "sourceSha256": "cfd6a67fba5f487f3e3f5195ca9a308c1c9ad447a295fe22b8ed230ae8cac9a0",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "231",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "231",
+    "findingId": "F03-PMD2-994005490335ce604c2ac9ee15928862c7ec4d28cacf75ad5424d65d9caf6e7e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c75a64144582aacdf3cb116c40d083bdc8a61133ea92bce220a2cf1a93f8d79a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$1.class": "1b2064977478924ea0a3456fd81f0200f73fb9e5fd735ccfa3544f43d6c22391",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Baseline.class": "60130516349ae74db1f32ce41213edf6e76c19855a1cc7d29cd0b27aa288fe3f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Live.class": "0f5d5b3bf28432be7a6b7442fa2bc7686e7367f5145ba3ce0807a977576b1032",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Observation.class": "c8e733e21f8622f4a6696550d7400a4d1bf6e106dfdb7734c294825f3b571553",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$ParentProof.class": "fb8b4dd97aaa47005c25fff2f971867621467ef6652aa33936d150133458f1b1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Projection.class": "19d0be23e08d91db4634ba21e0ae7855b17c00b8c0c2f515a3222633eb1166d3",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Readiness.class": "e6c40ea727c1b5c72ca118cfa3eb7fcbc4093f0615a67c094a298ada9af948cb",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Retain.class": "e6989b5f0622be2e84243ca323812b1be6cacd0ba819104fc3d70d984850da87",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Start.class": "21d5686df744f4da8af570232a12bc1f3626f45cda2af0532850cd34e8c897e6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.class": "3874fb9a998330ca9de90a814b67c381b6caeb0cee68c04a3d12ada052718395"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycleTest",
+        "sourceSha256": "f8feaee1ca3016b4533e57e375bf4f0b635cdedf2c9e4497857f454fe2da7414"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 689,
+    "reason": "Both unchecked uncertainty paths enter the already-prepared retention owner before leaving the start/admission callback. The fixed production retention does not return; the AssertionError explicitly rejects a returning invalid seam, not normal readiness or release. No broker start/stop is executed here.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+    "sourceSha256": "5c69b77ddb52446e8fc833222d8402da87e23ae589b8c0cdc90c6a8061c649c5",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "231",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "231",
+    "findingId": "F03-PMD2-934f225ff611394d34360d8233568a12b0dce0972d9119b41307a5f326e7a014",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c75a64144582aacdf3cb116c40d083bdc8a61133ea92bce220a2cf1a93f8d79a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$1.class": "1b2064977478924ea0a3456fd81f0200f73fb9e5fd735ccfa3544f43d6c22391",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Baseline.class": "60130516349ae74db1f32ce41213edf6e76c19855a1cc7d29cd0b27aa288fe3f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Live.class": "0f5d5b3bf28432be7a6b7442fa2bc7686e7367f5145ba3ce0807a977576b1032",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Observation.class": "c8e733e21f8622f4a6696550d7400a4d1bf6e106dfdb7734c294825f3b571553",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$ParentProof.class": "fb8b4dd97aaa47005c25fff2f971867621467ef6652aa33936d150133458f1b1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Projection.class": "19d0be23e08d91db4634ba21e0ae7855b17c00b8c0c2f515a3222633eb1166d3",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Readiness.class": "e6c40ea727c1b5c72ca118cfa3eb7fcbc4093f0615a67c094a298ada9af948cb",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Retain.class": "e6989b5f0622be2e84243ca323812b1be6cacd0ba819104fc3d70d984850da87",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle$Start.class": "21d5686df744f4da8af570232a12bc1f3626f45cda2af0532850cd34e8c897e6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.class": "3874fb9a998330ca9de90a814b67c381b6caeb0cee68c04a3d12ada052718395"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycleTest",
+        "sourceSha256": "f8feaee1ca3016b4533e57e375bf4f0b635cdedf2c9e4497857f454fe2da7414"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 690,
+    "reason": "Both unchecked uncertainty paths enter the already-prepared retention owner before leaving the start/admission callback. The fixed production retention does not return; the AssertionError explicitly rejects a returning invalid seam, not normal readiness or release. No broker start/stop is executed here.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java",
+    "sourceSha256": "5c69b77ddb52446e8fc833222d8402da87e23ae589b8c0cdc90c6a8061c649c5",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "15",
+    "beginline": "397",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "++count ",
+    "diagnosticTextSha256": "211876167b7c918687b9aa62f7fbd9e26286aa92be52b637a84cafcb9b786a77",
+    "endcolumn": "22",
+    "endline": "397",
+    "findingId": "F03-PMD2-9077f35c4bb430b75c07c9aa7c7bcfc7e3e71ad2767f6237ab34ac404aaff3c2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-92fdcb2277080bb388dc06a65aae89eacde4b0833288e710780a7aa8d1e184fb",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Guard.class": "3d1605820ea4ab82b428a54ca5935a786a9047962cfda5af5871e630ba6f30b1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Io.class": "185ba4427d9fa642d4a11f4de1db746849381b64c6c6af8cb9376c8f6aa14279",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$NativeIo.class": "e97c9b11905bf33896c3db777bfc75be1dfa7dacb74be3b1f1b2fa1e665d5901",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.class": "bc029f6b5ebc081caddeadeebc3f3a4abe5c0585944d7fc8e24a40c4003d14d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest",
+        "sourceSha256": "429067ed7de739680991a0439dc00f69660981c72c98b14dd1cb472624d6be40"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 695,
+    "reason": "Pre-increment bounds each descriptor directory entry before examining its symlink; the fixed maximum rejects excessive enumeration. Only validated socket syntax is collected, followed by independent network/owner/generation checks. A count or symlink alone cannot certify ownership.",
+    "rule": "AssignmentInOperand",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+    "sourceSha256": "7252e8f22ffe9a00e2528cc6ad33c853fa7f103d92027fb6f1bb94ca10783316",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "402",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (NoSuchFileException gone) {\n            /* Never counts as owned evidence. */\n          }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "12",
+    "endline": "404",
+    "findingId": "F03-PMD2-314e2ca4438821213340a5a31ed7f9f6c280e681a422d1fdf2b3899e7a49e9f3",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ce026015c2d51701c0ef9a97268e240af776b86408cc1caa9ad85ae31327b8f2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Guard.class": "3d1605820ea4ab82b428a54ca5935a786a9047962cfda5af5871e630ba6f30b1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$Io.class": "185ba4427d9fa642d4a11f4de1db746849381b64c6c6af8cb9376c8f6aa14279",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness$NativeIo.class": "e97c9b11905bf33896c3db777bfc75be1dfa7dacb74be3b1f1b2fa1e665d5901",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.class": "bc029f6b5ebc081caddeadeebc3f3a4abe5c0585944d7fc8e24a40c4003d14d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningCaddyReadinessTest",
+        "sourceSha256": "429067ed7de739680991a0439dc00f69660981c72c98b14dd1cb472624d6be40"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 696,
+    "reason": "A descriptor disappearing during read adds no owned socket evidence. Remaining listeners must still satisfy the exact captured owner checks; the absent entry is not a clean stop or a fabricated matching socket.",
+    "rule": "EmptyCatchBlock",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+    "sourceSha256": "7252e8f22ffe9a00e2528cc6ad33c853fa7f103d92027fb6f1bb94ca10783316",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "379",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "379",
+    "findingId": "F03-PMD2-ea56b96f3f5749c0c9b88cffee27fe3238776fa1e5bbbe615b6255becc55abd8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-de813f525623ba0b5b03d2aa7ee4669b6309a336f770d24b1a8e424be3489de4",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Closed.class": "64bef6c2e454f34797791a68ca5230e6cf8fd2ee971a9c2091facaaca6fd0db3",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Evidence.class": "90b00f4774563a52b799a5a3cfed27d628173645f228f459f05f3167ef2b010f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$NoPrior.class": "ccabfa37d0d6f89ece33cc459f8efd7ee8ed46093c235c629eb5e6e63673159c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Query.class": "0a7e71e96d7e48dfacf66ab2ac469b2267240612b55c1b42e606b58e76a4026c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.class": "2c0f6f84bb47ef8be517bffe2443e2a2da7ec7b2f7e5e59ccdf02cb6f25fb58d"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningPreviousBrokerTest",
+        "sourceSha256": "7e9a891d7ca78be306b0b1814c994c811acab743be94b2a2a2a0f3f169e2c184"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 701,
+    "reason": "Both unchecked journal validation/parent-check failures wipe the just-returned owned bytes before identical rethrow. Successful returned bytes must meet explicit length and parent conditions. No previous journal/boot/owner is accepted from this source-only reason.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java",
+    "sourceSha256": "6d93d8d06aef73476b0cae74fd1edbeaf73c5bdd133ae05b872089044c996629",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "379",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "379",
+    "findingId": "F03-PMD2-201e09fc870c06357dd62ff4d729e9273276cb3228f8d90afa26cad291fb2d90",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-de813f525623ba0b5b03d2aa7ee4669b6309a336f770d24b1a8e424be3489de4",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Closed.class": "64bef6c2e454f34797791a68ca5230e6cf8fd2ee971a9c2091facaaca6fd0db3",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Evidence.class": "90b00f4774563a52b799a5a3cfed27d628173645f228f459f05f3167ef2b010f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$NoPrior.class": "ccabfa37d0d6f89ece33cc459f8efd7ee8ed46093c235c629eb5e6e63673159c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker$Query.class": "0a7e71e96d7e48dfacf66ab2ac469b2267240612b55c1b42e606b58e76a4026c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.class": "2c0f6f84bb47ef8be517bffe2443e2a2da7ec7b2f7e5e59ccdf02cb6f25fb58d"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningPreviousBrokerTest",
+        "sourceSha256": "7e9a891d7ca78be306b0b1814c994c811acab743be94b2a2a2a0f3f169e2c184"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 702,
+    "reason": "Both unchecked journal validation/parent-check failures wipe the just-returned owned bytes before identical rethrow. Successful returned bytes must meet explicit length and parent conditions. No previous journal/boot/owner is accepted from this source-only reason.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java",
+    "sourceSha256": "6d93d8d06aef73476b0cae74fd1edbeaf73c5bdd133ae05b872089044c996629",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "15",
+    "beginline": "235",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "++count ",
+    "diagnosticTextSha256": "211876167b7c918687b9aa62f7fbd9e26286aa92be52b637a84cafcb9b786a77",
+    "endcolumn": "22",
+    "endline": "235",
+    "findingId": "F03-PMD2-ba01ec37aecddb6139f979b80f5770d33a49580c48c7e2daed86ba4e26715488",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5a99dd2e24f32879807ff1134b3c5704904228a4d4ca837063aa51bc0c75f06b",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$1.class": "5bb6b6b792c8999373a5b2118eb1d7e9d970a5836ae3211540ef0f9f48199c38",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Guard.class": "381d6931da519ec5d849cec3bb034428cd81b06b6318b0493a504247675b93ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Io.class": "afad94efd93f893b5c879f1e3a28a555e1dd441bf1285b8ad419f75ca313fccc",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$NativeIo.class": "97c074a47b416ba27191b4e7d379c2210b395169fbdc27487bd3905d7ca02d07",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Response.class": "6b067f3146d0f718f661eee19f11a1c870a3740e45b04c8c33976e57c86f74e5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.class": "1c3c4eaaa522183151a7d4c6134edff8c1de4c90cebdb8c11d9b767b862959ca"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+        "sourceSha256": "f9cca3795ca91b0f62f83d83ede8ea1b6968f322949f467e26bb38b918791a08"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 703,
+    "reason": "The fixed descriptor-entry limit increments once per observed entry before any symlink evidence is accepted. It prevents unbounded scanning, while all subsequent listener and original actor checks remain independent requirements.",
+    "rule": "AssignmentInOperand",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+    "sourceSha256": "534b4750d8fcb7a017f65a3d99cc895d5cc3f69791078f9223c2afaaa5a73153",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "241",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (NoSuchFileException gone) {\n            /* Kernel FD closed; cannot become owned evidence. */\n          }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "12",
+    "endline": "243",
+    "findingId": "F03-PMD2-a86ce6ae19a3f559d96a6e4b1308ce6282d7d169954e53ff56b485b8e59a1f83",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-612c831cec21131aa7f66654164253502bb58a3f677a76374f17db2a9b73dc18",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$1.class": "5bb6b6b792c8999373a5b2118eb1d7e9d970a5836ae3211540ef0f9f48199c38",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Guard.class": "381d6931da519ec5d849cec3bb034428cd81b06b6318b0493a504247675b93ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Io.class": "afad94efd93f893b5c879f1e3a28a555e1dd441bf1285b8ad419f75ca313fccc",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$NativeIo.class": "97c074a47b416ba27191b4e7d379c2210b395169fbdc27487bd3905d7ca02d07",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness$Response.class": "6b067f3146d0f718f661eee19f11a1c870a3740e45b04c8c33976e57c86f74e5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.class": "1c3c4eaaa522183151a7d4c6134edff8c1de4c90cebdb8c11d9b767b862959ca"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningServiceReadinessTest",
+        "sourceSha256": "f9cca3795ca91b0f62f83d83ede8ea1b6968f322949f467e26bb38b918791a08"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 704,
+    "reason": "A concurrently closed FD is skipped without adding an ownership witness. Missing evidence cannot satisfy the exact listener/socket requirement or prove process termination; this is not a retry or access to a live process by the review.",
+    "rule": "EmptyCatchBlock",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+    "sourceSha256": "534b4750d8fcb7a017f65a3d99cc895d5cc3f69791078f9223c2afaaa5a73153",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "95",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "95",
+    "findingId": "F03-PMD2-d8f08bd50919f7f456647b7e5f6d519f5d030c38add6d2e8969764bc4d3543d9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5f9a0ff0ca2eb04b36348f03450259f498abdcadddbe328437c06a44cac86f9a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess.class": "6bd5f1583abe222ca3d4a9ed557748994046598dc80eed29fc1eb07c64022ee8",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$Start.class": "67488d446a5ff78e62ef1eb3f980127b7c92c0e9a228e1d90bca09bc0d5c38b7",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$StdIo.class": "3496d34d24e3a8930a88254db678937ab9891c1d04956471a3d19f02510c3644",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource.class": "274da1a952ed74b1f0047cd441df0d4a7c9f12410de84f443351af0d57cd3c60"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
+        "sourceSha256": "b58cc324a101712f046d778f64ec6477a0e9bcb92e40489d87f6cbd6e24d8061"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 746,
+    "reason": "Both unchecked command/projection/resource failures wipe owned bytes before identical rethrow; known command/IO/interruption failures use separate fixed reasons. Nonzero exit and oversized output are explicitly rejected. Source inspection does not invoke systemctl or infer actual service state.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "sourceSha256": "a1cec7d9ec384cf8f4a69c50b7f295433f528446567de2d66504cfd710bf5e23",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "95",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "95",
+    "findingId": "F03-PMD2-ed5d678053ea7e86cef55536e5a170aefd0696dafddb4baee1ff6356753097ad",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5f9a0ff0ca2eb04b36348f03450259f498abdcadddbe328437c06a44cac86f9a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess.class": "6bd5f1583abe222ca3d4a9ed557748994046598dc80eed29fc1eb07c64022ee8",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$Start.class": "67488d446a5ff78e62ef1eb3f980127b7c92c0e9a228e1d90bca09bc0d5c38b7",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource$StdIo.class": "3496d34d24e3a8930a88254db678937ab9891c1d04956471a3d19f02510c3644",
+      "batch:dev/codex/schubert/nk/batch/platform/SystemctlStateSource.class": "274da1a952ed74b1f0047cd441df0d4a7c9f12410de84f443351af0d57cd3c60"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.SystemctlStateSourceTest",
+        "sourceSha256": "b58cc324a101712f046d778f64ec6477a0e9bcb92e40489d87f6cbd6e24d8061"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 747,
+    "reason": "Both unchecked command/projection/resource failures wipe owned bytes before identical rethrow; known command/IO/interruption failures use separate fixed reasons. Nonzero exit and oversized output are explicitly rejected. Source inspection does not invoke systemctl or infer actual service state.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "sourceSha256": "a1cec7d9ec384cf8f4a69c50b7f295433f528446567de2d66504cfd710bf5e23",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "167",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "167",
+    "findingId": "F03-PMD2-467edb4572b81ae120bf65213ee4a8ebd613f399b7435cbc049741d34d4402fb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ddd5499a0e3ff5d04fbd7c2f5f914cc6a77326ea8a869972083aa4f9a096bdd9",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1132,
+    "reason": "Startup Runtime/Error retains the same primary after cleanup of a standalone component; native callers registered their partial owner before the fallible start and therefore defer cleanup to that owned phase. This explicit owner/null split is not blanket proof that a failed native cleanup completed.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "54",
+    "beginline": "167",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "59",
+    "endline": "167",
+    "findingId": "F03-PMD2-cf5a7600f344564cda6d5e27f1339e49df9a10d2f01affb0656e6bb1cc72360a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ddd5499a0e3ff5d04fbd7c2f5f914cc6a77326ea8a869972083aa4f9a096bdd9",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1133,
+    "reason": "Startup Runtime/Error retains the same primary after cleanup of a standalone component; native callers registered their partial owner before the fallible start and therefore defer cleanup to that owned phase. This explicit owner/null split is not blanket proof that a failed native cleanup completed.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "172",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "55",
+    "endline": "172",
+    "findingId": "F03-PMD2-2ca620e1762ebf7acd909e79f0f3f04ae0268dfde9fcbee8f4718fbd6cd6d849",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-21977c696d43afad9663fa430ff5fc32298cf5e153bc6f466c022d8de19b01bf",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1134,
+    "reason": "Standalone failed-destroy Runtime/Error is suppressed only when distinct from the startup primary, preventing self-suppression. The original startup still propagates, never a successfully returned server. Actual cleanup uncertainty and native owner retention remain separate YKT1318/1329 domains.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "58",
+    "beginline": "172",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "63",
+    "endline": "172",
+    "findingId": "F03-PMD2-3a27501d67be9249529b2598dfbbbb436ad44201b9b6170bec9458c61bfcfe2c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-21977c696d43afad9663fa430ff5fc32298cf5e153bc6f466c022d8de19b01bf",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1135,
+    "reason": "Standalone failed-destroy Runtime/Error is suppressed only when distinct from the startup primary, preventing self-suppression. The original startup still propagates, never a successfully returned server. Actual cleanup uncertainty and native owner retention remain separate YKT1318/1329 domains.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  }
+]
