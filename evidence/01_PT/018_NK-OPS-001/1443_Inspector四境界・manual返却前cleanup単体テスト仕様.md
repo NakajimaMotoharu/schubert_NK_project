@@ -1,5 +1,7 @@
 # Inspector四境界・返却前manual cleanup PT仕様（実装前）
 
+具体化：新InspectorFailureGraph329Test9/SHAef773d294da5f18f685744c20f7ababa1d7838ed95f77dc2be4e9f3253b1c5a7、Main794/全旧Testbyte不変更、format67233終了0/管理三0/pyflakes0。driver `pg6588_inspector_graph_selected.py red` は新only21/8、元API停止時予測15/5/F7/not-run6、正常handoff005/null006は既実装で成功を期待。元原XMLの既定七assertionをread-redで確認する。greenは同source新9＋既DBconnection7/AuthInspector8/NonAuth8/QMutation16＋六module baseline12＝60/12、全Testbytes固定。green既fixtureは専用tempPG18/Flyway/loopbackのみのPT_DEFAULT、実VM/原本/failed cohortなし。redは純proxy/独立JCE/固定vectorのみ。
+
 同群ORDINARY_JDBC_MAPPER329/event1625、開始.5/1.5/4pp不変、追加発見BUG1595/YKT1348を区別する。主P004-04、共通P018-05の再製造費重複0、実配賦/N/T null。関連SS312/314/324/332/3436.6/354、QA046/SSC329330、BUG1592/YKT1345。実Main/Testは先行256原qualificationが終わるまで変更しない。
 
 ## 着手前判定
