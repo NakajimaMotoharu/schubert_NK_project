@@ -1,5 +1,7 @@
 # Web SQL catalog・REQUEST投影graph PT仕様（PG前）
 
+当結果は1452：同六Testbytesのsource d48a13f4d/元6608/38-13真正0、原6610資格d4fece4a・Receipt四100/REQUEST missL3M1。以下は実装前仕様・初期run計画として保持し、fixture変更とnewonly v2は1449/1450を優先する。
+
 具体化：ReceiptFailureGraph329Test3/SHA7a544f472a5d0f1d28d4a1abe7d28ef00cc33fe005840a4696bb8c6f5eaadc63、RequestProjectionFailureGraph329Test3/SHA15aff325918c7451e2c5c727e0959655c27c1a0a9e42a92d01ada9c0345d002e。Main6855dcf9eと全旧Testbyte不変更、format59419終了0/管理三0/pyflakes0。`pg6600_web_catalog_graph_selected.py red`はnewonly18/9、Web停止時予測16/7/F4/not-run2、各003の既優先/非fatal結果は元で成功を期待。green38/13＝baseline12＋新6＋Receipt既8＋REQUEST既9＋WebStartup pure3、自己所有tempPG/Flywayの既domainは別PT_DEFAULT。原読取6604は全8511667/Jar/XML/counter/rawstatic、元成功・Current・全Test期待値を上書きしない。
 
 群ORDINARY_JDBC_MAPPER329/event1625/開始.5/1.5/4ppを維持、原-v4残予測と混同しない。485実物ではReceiptReferenceRepository主WBS-P011-04、WebRequestLogProducer主WBS-P006-03、共通口P018-06/既費用を二重加算0。関連BUG1592/YKT1345/1348・SS312329330/314/3319.4/332/3513.4/354、QA048。parent実配賦/N/T/工数率null。
