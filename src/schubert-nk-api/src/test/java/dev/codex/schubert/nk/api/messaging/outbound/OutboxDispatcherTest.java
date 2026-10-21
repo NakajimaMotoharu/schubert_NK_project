@@ -177,6 +177,55 @@ final class OutboxDispatcherTest {
   }
 
   @Test
+  @Timeout(value = 15, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
+  void graph322002NestedFatalNeverMarksOrdinaryFailureAndNonfatalCycleStillRetries()
+      throws Exception {
+    for (int kind = 0; kind < 7; kind++) {
+      resetDatabase();
+      var repository = new JdbcOutboxRepository(() -> 0);
+      long id = enqueue(repository, uuid(2300 + kind), NOW);
+      var fatal = new LinkageError("synthetic graph fatal");
+      Throwable leaf = kind == 6 ? new SQLException("synthetic ordinary leaf") : fatal;
+      var graph = OwnedOutboxDispatcherTest.graph322(leaf, kind == 6 ? 4 : kind);
+      var opens = new AtomicInteger();
+      var jms = new AtomicInteger();
+      var dispatch =
+          new OutboxDispatcher(
+              () -> {
+                opens.incrementAndGet();
+                return appConnection();
+              },
+              () -> {
+                jms.incrementAndGet();
+                throw new IllegalStateException("synthetic provider boundary", graph);
+              },
+              repository,
+              new OutboxJmsSender(),
+              CLOCK);
+      if (kind < 6) {
+        assertSame(fatal, assertThrows(Error.class, () -> dispatch.dispatch("graph", 1)));
+        assertEquals(1, opens.get(), "only committed claim; no ordinary mark transaction");
+        assertEquals("PENDING", text(id, "status"));
+        assertEquals("0", text(id, "attempt_count"));
+        assertNull(text(id, "last_error_code"));
+        assertEquals(NOW, timestamp(id, "next_attempt_at"));
+      } else {
+        assertEquals(new OutboxDispatchReport(1, 0, 1, 0), dispatch.dispatch("graph", 1));
+        assertEquals(2, opens.get());
+        assertEquals("ERROR", text(id, "status"));
+        assertEquals("1", text(id, "attempt_count"));
+        assertEquals("JMS_SEND_FAILURE", text(id, "last_error_code"));
+        assertEquals(NOW.plusSeconds(1), timestamp(id, "next_attempt_at"));
+      }
+      assertEquals(1, jms.get());
+      if (kind < 6) {
+        assertEquals("graph", text(id, "lease_owner"));
+        assertEquals(NOW.plusSeconds(10), timestamp(id, "lease_until"));
+      }
+    }
+  }
+
+  @Test
   @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
   void cause3404UnconfirmedCommitAlwaysRollsBackClosesAndPreservesOriginalGraph() {
     for (boolean mixed : List.of(false, true)) {

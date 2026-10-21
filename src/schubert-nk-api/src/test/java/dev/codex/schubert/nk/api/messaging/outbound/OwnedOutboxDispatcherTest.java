@@ -14,6 +14,107 @@ import org.junit.jupiter.api.Test;
 /** Owned thread lifecycle at real dispatch/open boundary, not a synthetic covered run method. */
 class OwnedOutboxDispatcherTest {
   @Test
+  void graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch() throws Exception {
+    var previous = System.err;
+    var output = new ByteArrayOutputStream();
+    try (var capturing = new PrintStream(output, true, StandardCharsets.UTF_8)) {
+      System.setErr(capturing);
+      for (int kind = 0; kind < 6; kind++) {
+        Error fatal = new LinkageError("synthetic graph fatal");
+        Throwable graph = graph322(fatal, kind);
+        var entered = new CountDownLatch(1);
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        var thread = new AtomicReference<Thread>();
+        var owned =
+            OwnedOutboxDispatcher.start(
+                dispatcher(
+                    () -> {
+                      thread.set(Thread.currentThread());
+                      attempts.incrementAndGet();
+                      entered.countDown();
+                      if (graph instanceof SQLException sql) throw sql;
+                      throw (RuntimeException) graph;
+                    }),
+                "pt");
+        try {
+          assertTrue(entered.await(3, TimeUnit.SECONDS));
+          thread.get().join(1000);
+          assertFalse(thread.get().isAlive(), "nested fatal must terminate the exact owned worker");
+          assertFalse(owned.healthy());
+          assertEquals(1, attempts.get(), "fatal graph never authorizes another DB claim");
+          assertThrows(IllegalStateException.class, owned::wake);
+        } finally {
+          owned.close();
+        }
+      }
+      assertEquals(
+          ("NK_API_OUTBOX_FATAL" + System.lineSeparator()).repeat(6),
+          output.toString(StandardCharsets.UTF_8));
+    } finally {
+      System.setErr(previous);
+    }
+    Throwable ordinary = graph322(new SQLException("synthetic ordinary leaf"), 4);
+    var retried = new CountDownLatch(2);
+    var owned =
+        OwnedOutboxDispatcher.start(
+            dispatcher(
+                () -> {
+                  retried.countDown();
+                  throw (RuntimeException) ordinary;
+                }),
+            "pt");
+    try {
+      assertTrue(retried.await(3, TimeUnit.SECONDS));
+      assertTrue(owned.healthy(), "nonfatal cyclic graph keeps existing ordinary retry");
+    } finally {
+      owned.close();
+    }
+  }
+
+  /** Independent fixed Throwable graph; never invokes the Production classifier. */
+  static Throwable graph322(Throwable leaf, int kind) {
+    switch (kind) {
+      case 0 -> {
+        var sql = new SQLException("synthetic primary");
+        sql.addSuppressed(leaf);
+        return sql;
+      }
+      case 1 -> {
+        return new IllegalStateException("synthetic cause", leaf);
+      }
+      case 2 -> {
+        var jms = new jakarta.jms.JMSException("synthetic linked");
+        jms.setLinkedException(new Exception("synthetic linked leaf", leaf));
+        return new IllegalStateException("synthetic outer", jms);
+      }
+      case 3 -> {
+        var sql = new SQLException("synthetic next");
+        sql.setNextException(new SQLException("synthetic next leaf", leaf));
+        return new IllegalStateException("synthetic outer", sql);
+      }
+      case 4 -> {
+        var first = new IllegalStateException("synthetic first");
+        var second = new IllegalStateException("synthetic second", first);
+        first.initCause(second);
+        first.addSuppressed(second);
+        second.addSuppressed(leaf);
+        return first;
+      }
+      default -> {
+        var first = new IllegalStateException("synthetic provider cycle");
+        var jms = new jakarta.jms.JMSException("synthetic provider");
+        jms.setLinkedException(first);
+        var sql = new SQLException("synthetic next cycle");
+        sql.setNextException(sql);
+        sql.addSuppressed(leaf);
+        jms.initCause(sql);
+        first.initCause(jms);
+        return first;
+      }
+    }
+  }
+
+  @Test
   void outbox005AssemblyStartsNoClaimsAndStartCloseAreSingleOwner() throws Exception {
     var attempts = new CountDownLatch(1);
     var d =
