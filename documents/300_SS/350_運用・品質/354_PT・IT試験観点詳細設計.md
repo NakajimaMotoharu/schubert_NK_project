@@ -1,5 +1,11 @@
 # PT・IT試験観点詳細設計
 
+## SSC333 ordinary startup/multi-close secondary PG/PT（2026-10-22）
+
+BUG1604/YKT1357。自己所有JMS interface proxyだけで、NoSupp Runtime primary＋通知/closing側のcause/suppressed/JMSlinked/SQLnext Errorを固定object identityで再現する。startup通知一回/close必要全数・順序を先にassertし、その後の元Error選択と、普通非fatal時の既catalog/cause/suppressed・same object非自己抑制・直接primary/直接closeの既優先を確認する。期待値は事前固定objectとliteral counter/table、Production methodをexpected生成へ使わない。
+
+Sync四contextは第一close失敗からも各一回を試行し、成功済phaseは次の明示component closeで再closeしない。全close前の早期fatal throw、追加ACK/commit/start/業務再送、診断の公開JSON漏出を禁止する。onUnconfirmedは普通callbackの呼出/引渡し・正常return後だけの分類を観測し、実native非帰還UNKNOWN・所有の資格をproxyだけで認定しない。既SSC332/通常domain・当source全体/四counter/静的/traceとjoinし、native/拒否PT代替/正式認定へ混ぜない。
+
 ## SSC332 ordinary consumer graph/rollback実証 PG/PT（2026-10-22）
 
 BUG1602/YKT1355・1354、PT-JMS-CONS332001～008。自己所有のJMSContext/JMSConsumer/BytesMessage interface proxyだけを使用し、外部broker/DB/VM/Root/原本/鍵不要。最初のbody getterに固定Runtime/JMS/Errorを注入し、DLQ/processor到達0、rollback回数・owner通知・ready/terminal・元Error identity/後続配送無処理を独立counterで確認する。expectedは事前固定object/整数literalで、Productionで算出しない。
