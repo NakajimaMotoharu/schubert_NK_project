@@ -8,8 +8,8 @@ from pg6500_web_owned_component_qualification_v5 import original_source
 ROOT, W, BASE, sha = base.ROOT, base.W, base.BASE, base.sha
 LABEL = 'PG6490'
 SLOT = 'pg6490-web-component-six-v1'
-QSHA = None  # Must be replaced by genuine original27 qualification, never a predicted success.
-ORDER_SHA = None
+QSHA = '67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722'
+ORDER_SHA = 'd92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a'
 
 
 def definitions():
