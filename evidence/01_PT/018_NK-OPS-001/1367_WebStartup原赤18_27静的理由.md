@@ -1,0 +1,9 @@
+# Web startup元red18/8・追加27source理由
+
+元PG6360/tool28174/source db7782a334a3db35598ede4f765d71e52e3677cbは04:39:13.802446Z～04:40:51.974806Z/98.172360秒、真正1/Maven1/phase[0,1]。宣言20/10のうち実18/8/F2E0S0、後Batch2/2 not-run。START324001は新nonnull契約のNPE未発生TDD、START324002はdummy child期待exit0に対しactual1。子内部counterは元XMLに保存されていないため、実数を捏造せずsource上の違反経路とchild assertion条件を分離する。未到達の残modeはPASS0。入力/oracleは1365/1366のまま固定し、確認だけのred再実行0。
+
+原archive0819f7f13da237fad68e32966f54fdfdb45fea2bdd692be217c44bb508c0c316、原manifest2a6e246cd03cf45083091cd8fc89dc9f21fe47b261c2789d61043b560f5565ed、新2件XML f98e6256d04ef42d1e60c4eaabe24d9f2566979beb0d2c8e3c18429471daa5e6。公開 `evidence/provisional/PG6360-web-startup-red-v1/manifest.json`へ保持。Web verify失敗前のtarget0/0はreport未生成placeholderであり未測定、100%へ補完0。全六静的gate/六Jar/新全体資格は未成立。実業務Web/VM/DB/Root/permit/cohort操作0。
+
+並行してsource固定中にPG6362の三owner27span（LinuxSystemdSession13/FixedUnitCgroupNamespace8/ArtemisManagementReadinessClient6）を読取点検し、原aed4048のTest blob/実caseへ結合。公開 `evidence/provisional/PG6362-systemd-cgroup-static-review-v1/manifest.json` SHA256558673dec3399b54cd6525aa777867fe1a84dac93dac3c88c4cf7fa56dc8acc3。FFM output slot/uncertain・arena閉鎖、有限C文字列decode、preallocated descriptor owner/known-vs-unknown drain、checked management encoder/timeout/borrowed session境界の個別理由。source閲覧でありFFM/D-Bus/cgroup/Core管理操作は一切発行0。raw1356維持、REQUIRED884/CONTEXT262/FP32/未分類191→164/旧14pending。二工具正負/pyflakes0、追加Production PT/coverage/F03全受入0。
+
+次=元red/source/oracle/27理由を保存push→Web startup ordered helperとServiceProcessResourcesの保護済み有限action factoryだけPG、取得前policy構築/最初UNKNOWNで同frame loop/interval後fence/無後続close・無retry。関連54/15は新sourceから一度、原XML/Jar/851/1667/当counter・PMD/Checkstyle資格後に必要同source全体へ集約する。factory返却前部分取得/他startupのYKTは未閉鎖、旧成功新source転用0、正式1964/53・17/190/工数null/QA051final/PTALT不明代替0・実環境HOLD/全保全物を維持する。
