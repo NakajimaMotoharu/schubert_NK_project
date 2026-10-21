@@ -1,0 +1,541 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "249",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "249",
+    "findingId": "F03-PMD2-36655a4b0d3cb7f553320a86c63579ac020e665011ca19beb3b3e1f3c08c75cf",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-30b3e42f31038245435e1154c19fd16926ecb3db4d1b7fd90c3bc019533f6884",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.class": "08be6325e811c64c7daeb233f2af4c66c958fb7976ea308aa548c1b721258cf6"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+        "sourceSha256": "ebe546549bdc1fefc726be63a3f228ba8ba0ffc060508b8640c303313dc938f4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1142,
+    "reason": "1346 individual current session/lifecycle source applicability: Private stopLock serializes the exact http/replay/replies owner sequence and stoppedResources cursor. Failure retains the current phase and downstream borrowers; success alone increments its cursor. Public readiness/stopping atomics do not substitute for actual external ownership evidence.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
+    "sourceSha256": "07faff3aec79329e4ccd51f0dbcce4f2ceef11cf43bd9b9d203be02ca57a5c6a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "256",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Exception ",
+    "diagnosticTextSha256": "2bff381afd0af02eadebaf2c99a8db1ca7d4002a1ed27e2ffd152db438651fdb",
+    "endcolumn": "27",
+    "endline": "256",
+    "findingId": "F03-PMD2-815ba3d07e7030cf5c4a7b89756ef6f7aa31391f44a1423b82965ccd6691bd1e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-16408db719692c29200edbae4ae1eb6796e03b9e93d345e5a80f1a01ddeb23a7",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.class": "08be6325e811c64c7daeb233f2af4c66c958fb7976ea308aa548c1b721258cf6"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntimeTest",
+        "sourceSha256": "ebe546549bdc1fefc726be63a3f228ba8ba0ffc060508b8640c303313dc938f4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1143,
+    "reason": "1346 individual current session/lifecycle source applicability: AutoCloseable checked failure and RTE stop at the same resource, preserve any nested Error, and emit fixed unconfirmed state. closed is set only after all three normal returns. This reason deliberately excludes startup catch221 and cleanup270/274, whose compound ownership is still unreviewed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
+    "sourceSha256": "07faff3aec79329e4ccd51f0dbcce4f2ceef11cf43bd9b9d203be02ca57a5c6a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "26",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "26",
+    "findingId": "F03-PMD2-91504d164e3771b85e042448f256162b99636dae6878ce0ce36b3bf38106880f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-987a3c13e7e1be23fc782e1b6606c88e7372648276ac1a42066ec2faeea2ce92",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.class": "87e5d07d612faf5b951e716cdc6d585249601bbe27fa25c7b0b07d12d5e35083"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+        "sourceSha256": "d4f0a6c4bd1a6a1503f7d419a8f53db4f8b273b08c804d46e446486ba334c009"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1181,
+    "reason": "1346 individual current session/lifecycle source applicability: Private stateLock serializes hook registration with owner close, not this/class/caller monitors. installed is published only after addShutdownHook returns normally; duplicate registration is rejected. Registration is not VM/process ownership certification.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+    "sourceSha256": "b2f9b2ce239f3d16274baedf2aec1a0d91dad7ff30c6405f891e3513e3905b9a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "81",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "81",
+    "findingId": "F03-PMD2-9c58a125ef349a9d7b4d53dd087258d933d8e04a765c8f29b4bdc65e425ee5ae",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c417bc950258426602a7a889731de9bc10510b2a0c4eda7e4e1f68c88d03752b",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.class": "87e5d07d612faf5b951e716cdc6d585249601bbe27fa25c7b0b07d12d5e35083"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebProcessLifetimeTest",
+        "sourceSha256": "d4f0a6c4bd1a6a1503f7d419a8f53db4f8b273b08c804d46e446486ba334c009"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1187,
+    "reason": "1346 individual current session/lifecycle source applicability: The same private stateLock serializes installed removal and the finally finished notification. The latch is released only when the caller invokes close after confirmed owned scopes; shutdown-in-progress does not restart or close providers. Remaining unmeasured hook branches are not marked covered by this review.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+    "sourceSha256": "b2f9b2ce239f3d16274baedf2aec1a0d91dad7ff30c6405f891e3513e3905b9a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "71",
+    "beginline": "34",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "87",
+    "endline": "34",
+    "findingId": "F03-PMD2-bf9786aba13856e0bd514bc54f97a5dc54a4bb2f2731912bac096383925dc758",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d9507e48bd0eac6a1d365b96f6e06d20f626c5774ee1a79e44ae9a8b1911a5ac",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop$Step.class": "652c71d1a8ff8d4ad7a09927180da2dc5095ce854ccc208c850b2f2b8ae672d5",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.class": "83e2813a33779b3671223ad52ca4fa4a83328fcc53c23ad480caa1fd239a2a6e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "sourceSha256": "5be5419670b74db328939688d51ced48885d6ddac42618ea5832ddec822e8061"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1195,
+    "reason": "1346 individual current session/lifecycle source applicability: The current confirmed phase advances only after normal close. Checked/RTE failure is inspected for nested fatal identity then converted to fixed IOException, without running a later phase or extending the original deadline. Direct Error is uncaught. Actual runtime stop/postconditions remain a separate held dependency.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+    "sourceSha256": "0cedc1417ddc419a11896516ad7e2d76cd6277c42711815120f35191e1cd7a6a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "80",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "80",
+    "findingId": "F03-PMD2-088237ddfa5b89fa21ccf6f6be178bfbf6c9792a1db6a8cd939dda2e377f2eae",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f2e64d743f144d1b43e1c0e895f633d7a36f8a35e54c523c1fcdf228e1e15b05",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator$Outcome.class": "40a8fdee995779544cb2c657a8aa79123ce2b7a5b7c1418cbdd2fd468bd89082",
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.class": "97c162327244f7f3af9416f289e07ba6a4d669aa8f39b456f5f0b77d34626082"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1314,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked Logout-body spans still attempt local invalidation and then preserve the full transient fatal graph before fixed redaction. Only explicit approved wire codes can select CONFIRMED; durable invalidate-and-retain must return normally for QUEUED. Neither exception branch invents remote revoke or local commit success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java",
+    "sourceSha256": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "80",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "80",
+    "findingId": "F03-PMD2-59feab8faa6d3eaf1797a46c0f6ac83b48a0581638419655f4cdd79864a08264",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f2e64d743f144d1b43e1c0e895f633d7a36f8a35e54c523c1fcdf228e1e15b05",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator$Outcome.class": "40a8fdee995779544cb2c657a8aa79123ce2b7a5b7c1418cbdd2fd468bd89082",
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.class": "97c162327244f7f3af9416f289e07ba6a4d669aa8f39b456f5f0b77d34626082"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1315,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked Logout-body spans still attempt local invalidation and then preserve the full transient fatal graph before fixed redaction. Only explicit approved wire codes can select CONFIRMED; durable invalidate-and-retain must return normally for QUEUED. Neither exception branch invents remote revoke or local commit success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java",
+    "sourceSha256": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "83",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "83",
+    "findingId": "F03-PMD2-a0b161640aca3305b584a671f86dddbfcb420dce041eb383a568c732194cfb38",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d453777550711b4de274e1b78092e2664556c3039f4b3f798cea7dad69e8049d",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator$Outcome.class": "40a8fdee995779544cb2c657a8aa79123ce2b7a5b7c1418cbdd2fd468bd89082",
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.class": "97c162327244f7f3af9416f289e07ba6a4d669aa8f39b456f5f0b77d34626082"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1316,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked invalidation-cleanup spans retain only a distinct secondary on the original. preserveFatal follows identity-visited causes/suppressed even for cyclic provider failures, then emits a fixed catalog failure. This is not retry authorization or proof that failed local destruction completed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java",
+    "sourceSha256": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "83",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "83",
+    "findingId": "F03-PMD2-7e48df218a9fd22d47cc928f2f0c2fd15da05bd430bb5867199a7748ce78428d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d453777550711b4de274e1b78092e2664556c3039f4b3f798cea7dad69e8049d",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator$Outcome.class": "40a8fdee995779544cb2c657a8aa79123ce2b7a5b7c1418cbdd2fd468bd89082",
+      "web:dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.class": "97c162327244f7f3af9416f289e07ba6a4d669aa8f39b456f5f0b77d34626082"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1317,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked invalidation-cleanup spans retain only a distinct secondary on the original. preserveFatal follows identity-visited causes/suppressed even for cyclic provider failures, then emits a fixed catalog failure. This is not retry authorization or proof that failed local destruction completed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java",
+    "sourceSha256": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "58",
+    "beginline": "305",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "74",
+    "endline": "305",
+    "findingId": "F03-PMD2-591a9139a6653b957721fd586b2d2d06da1f5f169ea6b322612be885c19a2d28",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3eef27063bfaff4af35884f2d58bf0bf4451590263eb223c197d3790cb7c26b2",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Loaded.class": "f5e10f1105d58089116c684d211e9e1858310fe75e8ff18c952034df7cd0bde7",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Work.class": "3e133a654737be7ec453891c596b14111ca50213843e319f1bf15d231337ace9",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class": "abee7f1cda6d5c3eb8f80266fe576f863f20ad26e282aa3ab0230d1f3dfd269a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+        "sourceSha256": "a4c36ad47cde9afbbcf448b744b80d88c7c2c8195f7844b8670328b8ff9883bb"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1349,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked transaction-body spans keep failure inside the acquired Connection scope. One rollback is attempted before fixed SessionStoreException; direct or nested Error is preserved by the identity-visited cause/suppressed graph, not classified as a valid session. Normal commit precedes return and connection close. This is applicability of the boundary, not blanket proof of all vendor close combinations.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "77",
+    "beginline": "305",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "82",
+    "endline": "305",
+    "findingId": "F03-PMD2-2f3ceced92124443a530e6b0edde771c93b8555c942f1441a90741e8e0619433",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3eef27063bfaff4af35884f2d58bf0bf4451590263eb223c197d3790cb7c26b2",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Loaded.class": "f5e10f1105d58089116c684d211e9e1858310fe75e8ff18c952034df7cd0bde7",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Work.class": "3e133a654737be7ec453891c596b14111ca50213843e319f1bf15d231337ace9",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class": "abee7f1cda6d5c3eb8f80266fe576f863f20ad26e282aa3ab0230d1f3dfd269a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+        "sourceSha256": "a4c36ad47cde9afbbcf448b744b80d88c7c2c8195f7844b8670328b8ff9883bb"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1350,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked transaction-body spans keep failure inside the acquired Connection scope. One rollback is attempted before fixed SessionStoreException; direct or nested Error is preserved by the identity-visited cause/suppressed graph, not classified as a valid session. Normal commit precedes return and connection close. This is applicability of the boundary, not blanket proof of all vendor close combinations.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "308",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "308",
+    "findingId": "F03-PMD2-313e596f35777f983a3a09874ae59a5af63ebb33aa24a0239937e41d17d38c35",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a4040be6b819d030b1f515f9da557462b8c681304c100a1ac49d3dd42dfeff5d",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Loaded.class": "f5e10f1105d58089116c684d211e9e1858310fe75e8ff18c952034df7cd0bde7",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Work.class": "3e133a654737be7ec453891c596b14111ca50213843e319f1bf15d231337ace9",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class": "abee7f1cda6d5c3eb8f80266fe576f863f20ad26e282aa3ab0230d1f3dfd269a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+        "sourceSha256": "a4c36ad47cde9afbbcf448b744b80d88c7c2c8195f7844b8670328b8ff9883bb"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1351,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked rollback-secondary spans attach only a distinct Throwable to the original, then preserveFatal checks the combined graph before fixed redaction. Failure never becomes a committed mutation, API authorization, or new session. The borrowed DataSource/codec remain outer-owned.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "308",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "57",
+    "endline": "308",
+    "findingId": "F03-PMD2-701e64fd503be8b5c6a98978a0393585d1cae026df20efe54bdeb78439c048d7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a4040be6b819d030b1f515f9da557462b8c681304c100a1ac49d3dd42dfeff5d",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Loaded.class": "f5e10f1105d58089116c684d211e9e1858310fe75e8ff18c952034df7cd0bde7",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Work.class": "3e133a654737be7ec453891c596b14111ca50213843e319f1bf15d231337ace9",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class": "abee7f1cda6d5c3eb8f80266fe576f863f20ad26e282aa3ab0230d1f3dfd269a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+        "sourceSha256": "a4c36ad47cde9afbbcf448b744b80d88c7c2c8195f7844b8670328b8ff9883bb"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1352,
+    "reason": "1346 individual current session/lifecycle source applicability: Both unchecked rollback-secondary spans attach only a distinct Throwable to the original, then preserveFatal checks the combined graph before fixed redaction. Failure never becomes a committed mutation, API authorization, or new session. The borrowed DataSource/codec remain outer-owned.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "314",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "314",
+    "findingId": "F03-PMD2-18bcb9d0743556e12bd972a16db2e531ba79dc65b5680b7eb2d4978254b8efb4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0be37e813b40e7f9b81413ab079f9be5dfa5b7dc5efdd8ea8f4eb0eff1754de7",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Loaded.class": "f5e10f1105d58089116c684d211e9e1858310fe75e8ff18c952034df7cd0bde7",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository$Work.class": "3e133a654737be7ec453891c596b14111ca50213843e319f1bf15d231337ace9",
+      "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class": "abee7f1cda6d5c3eb8f80266fe576f863f20ad26e282aa3ab0230d1f3dfd269a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.EncryptedWebSessionRepositoryTest",
+        "sourceSha256": "a4c36ad47cde9afbbcf448b744b80d88c7c2c8195f7844b8670328b8ff9883bb"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinatorTest",
+        "sourceSha256": "50a09f5931199e9cf390080ec80aa8be96d97d3c0d0df106b1f154fc7e78f071"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1354,
+    "reason": "1346 individual current session/lifecycle source applicability: Outer RTE including generated TWR self-suppression failure is inspected for nested Error before fixed SessionStoreException. SQL/close failure cannot escape as a successful snapshot; raw provider details are not retained. Existing transaction/concurrency and Logout fatal/cyclic fixtures supply semantic references, not native completion.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sourceSha256": "4e6a442dbbca4a59cb703660100598f2f92abaf878172909a1720969f06b3cae",
+    "status": "REQUIRED_CONTRACT"
+  }
+]

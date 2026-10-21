@@ -4,8 +4,8 @@ import pg6282_current4040_static_join as prior
 from pg6306_current4043_trace import SOURCE,read_qualified
 from pg6308_current4043_static_plan import PRIOR,PRIOR_SHA,OLD
 
-INPUT=prior.BASE/'PG6310-web321-static-review-v1/manifest.json'
-INPUT_SHA='d848def968743126450d2e5d770c986e00e23352f0bdb57a42ef6b5e07425fe9'
+INPUT=prior.BASE/'PG6314-web-session-static-review-v1/manifest.json'
+INPUT_SHA='39c0e2d43b3eb5c3c22fc5508a4e275da8e4d6ba0aef8651982adb87658db2fb'
 
 
 def definitions():
