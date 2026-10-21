@@ -1,5 +1,7 @@
 # Outbox・Inbox・冪等性・再送設計
 
+SSC329（BUG1592/YKT1345）：ordinary JDBCの23505/2200H等を重複・確定業務結果へ判定する前にも、完了済resource closeの例外graphにErrorが無いことを確認する。Error付きSQLstateをnormal duplicate/replay/validationへ変換せず、同一fatalを伝播する。raw SQLExceptionを上位へ渡すだけの箇所・rollback secondaryをprimaryへattachする箇所と、graphを破棄してcatalog/業務結果を生成する箇所を区別し、各最終受取境界とowned cleanupまで追跡する。既正常SQLstate/Inbox・Outbox atomicity・commit/rollback境界・retry/backoff/ACK順は不変更、未確認commitを失敗確定/再実行許可へ読み替えない。113明示SQL catchは検索範囲だけであり、非SQLの同じresource marker catchも個別適用性を点検する。全対象の修正又は非該当根拠・独立再発防止/同source品質が揃うまで横展開を完了としない。
+
 SSC323（2026-10-21、BUG1573/YKT1328/1323）：ordinary WebLogDispatcherのtyped failureCode決定前及びWebLogReplayWorkerの周期retry前にもSS322と同じcause/suppressed/JMS linked/SQL next・identity-visited検査を行う。内包Errorを同一fatalとして伝播、非fatal循環は有限帰還し既ERROR/attempt/lease/backoffと固定redactionを維持する。一般session catalogの所有契約は置換せずordinary二境界の純粋非I/O確認へ限定、graph書換え/新mark/rollback/close/権限操作0。自己所有workerのterminal/failedCycle0、temporary DBの未mark/既claim保持と非fatal通常後条件を独立確認する。API/Webを同sourceで照合し中間の成功全回帰を目的無く再演せず、実Root/native/拒否保留の受入へ転用しない。
 
 SSC322（2026-10-21、BUG1572/YKT1328/1323、ordinary API Outbox）：send失敗をmarkFailureへ分類する前、及びowned workerがSQL/RTEをtemporary retryへ分類する前に、cause/suppressed/JMS linked/SQL nextの失敗graphをThrowable同一性のvisited集合で走査する。内包Errorは同一Errorとして伝播し普通失敗mark/周期retryへ正常化しない。Error無しの循環/重複edgeは有限帰還し既ordinary分類・lease/backoff/固定redactionを維持する。確認は非所有・非I/O、graphへ新cause/suppressedを追加せずDB/JMS/close/rollback/再送回数/wire/権限不変更。直接cleanupのSS320/321順位と一般TWR正常契約は置換しない。自己所有fixtureの全edge/循環/identity、未mark/未再試行と非fatal後条件を同sourceで確認し、実Root/native/未確認資源解放の証明へ代用しない。
