@@ -1,5 +1,13 @@
 # PT・IT試験観点詳細設計
 
+## SSC332 ordinary consumer graph/rollback実証 PG/PT（2026-10-22）
+
+BUG1602/YKT1355・1354、PT-JMS-CONS332001～008。自己所有のJMSContext/JMSConsumer/BytesMessage interface proxyだけを使用し、外部broker/DB/VM/Root/原本/鍵不要。最初のbody getterに固定Runtime/JMS/Errorを注入し、DLQ/processor到達0、rollback回数・owner通知・ready/terminal・元Error identity/後続配送無処理を独立counterで確認する。expectedは事前固定object/整数literalで、Productionで算出しない。
+
+API三consumerは確認済rollbackでもcause/suppressed/JMSlinked/SQLnext内Errorをhalt/既通知へ分け、通知正常return時は元direct Error同様returnする。ordinary cycleは有限で確認済だけretry、配送別reset/context別stateを保つ。Webはnull/preflight未確認、rollback Error一回性、graph/direct Errorの通知後identity、通知Runtime/Errorの非優先、ordinary confirmed retry/停止後無処理/public onMessage互換を検証する。
+
+原反例→必要PG→同新旧Test bytesで既domain・同source必要全体/四counter/静的/traceを照合する。局所proxy成功をprovider実測/実native/Root/PGPT正式認定や拒否PT代替へ転用しない。未実行/UNKNOWN/別sourceは加点しない。
+
 ## SSC331 ordinary local audit/terminal callback PG/PT（2026-10-22）
 
 BUG1601/YKT1354、PT-WEB-LOCAL331001～004。既sourceでprimitive logger Runtime内包Errorの破棄、terminal Runtime graphの固定catalog化をpure System.Logger/Runnable/DataSource proxyで独立再現し、DB/VM/Root/外部JMS・実鍵・session発行を要しない。expected Errorは入力とは別に固定作成したobject identity、通知順/回数・DB/identifier0、JSONの明示literalで判定し、Production methodでexpectedを生成しない。
