@@ -226,6 +226,35 @@ final class OutboxDispatcherTest {
   }
 
   @Test
+  void graph322003NullProviderEdgesKeepOrdinaryFailureAndExactRetryPostconditions()
+      throws Exception {
+    var repository = new JdbcOutboxRepository(() -> 0);
+    long id = enqueue(repository, uuid(2400), NOW);
+    var sql = new SQLException("synthetic null next");
+    sql.addSuppressed(new JMSException("synthetic null linked"));
+    var opens = new AtomicInteger();
+    var dispatch =
+        new OutboxDispatcher(
+            () -> {
+              opens.incrementAndGet();
+              return appConnection();
+            },
+            () -> {
+              throw new IllegalStateException("synthetic ordinary graph", sql);
+            },
+            repository,
+            new OutboxJmsSender(),
+            CLOCK);
+    assertEquals(new OutboxDispatchReport(1, 0, 1, 0), dispatch.dispatch("graph-null", 1));
+    assertEquals(2, opens.get());
+    assertEquals("ERROR", text(id, "status"));
+    assertEquals("1", text(id, "attempt_count"));
+    assertEquals("JMS_SEND_FAILURE", text(id, "last_error_code"));
+    assertEquals(NOW.plusSeconds(1), timestamp(id, "next_attempt_at"));
+    assertNull(text(id, "lease_owner"));
+  }
+
+  @Test
   @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
   void cause3404UnconfirmedCommitAlwaysRollsBackClosesAndPreservesOriginalGraph() {
     for (boolean mixed : List.of(false, true)) {

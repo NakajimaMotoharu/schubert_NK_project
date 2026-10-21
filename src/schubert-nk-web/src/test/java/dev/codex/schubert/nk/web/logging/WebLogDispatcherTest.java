@@ -58,6 +58,55 @@ final class WebLogDispatcherTest {
   }
 
   @Test
+  void graph323002ProviderFatalNeverMarksOrdinaryFailureAndNullEdgesStillRetry() throws Exception {
+    try (var codec = codec()) {
+      for (int kind = 0; kind < 4; kind++) {
+        db.reset();
+        enqueue(codec);
+        var fatal = new LinkageError("synthetic provider fatal");
+        Throwable leaf = kind == 3 ? new SQLException("synthetic ordinary") : fatal;
+        var graph = WebLogReplayWorkerTest.providerGraph323(leaf, kind);
+        var opens = new AtomicInteger();
+        var jms = new AtomicInteger();
+        var dispatch =
+            new WebLogDispatcher(
+                source(
+                    () -> {
+                      opens.incrementAndGet();
+                      return db.web();
+                    }),
+                repository,
+                new WebLogMessageSender(
+                    codec,
+                    () -> {
+                      jms.incrementAndGet();
+                      throw graph;
+                    }),
+                Clock.fixed(NOW, ZoneOffset.UTC));
+        if (kind < 3) {
+          assertSame(fatal, assertThrows(Error.class, () -> dispatch.dispatch("graph", 1)));
+          assertEquals(1, opens.get());
+          assertEquals("PENDING", column("status"));
+          assertEquals("0", column("attempt_count"));
+          assertNull(column("last_error_code"));
+          assertEquals(NOW, timestamp("next_attempt_at"));
+          assertEquals("graph", column("lease_owner"));
+          assertEquals(NOW.plusSeconds(10), timestamp("lease_until"));
+        } else {
+          assertEquals(new WebLogDispatcher.Report(1, 0, 1, 0), dispatch.dispatch("graph", 1));
+          assertEquals(2, opens.get());
+          assertEquals("ERROR", column("status"));
+          assertEquals("1", column("attempt_count"));
+          assertEquals("JMS_SEND_FAILURE", column("last_error_code"));
+          assertEquals(NOW.plusMillis(1100), timestamp("next_attempt_at"));
+          assertNull(column("lease_owner"));
+        }
+        assertEquals(1, jms.get());
+      }
+    }
+  }
+
+  @Test
   void resultTimeRetryAndNoDatabaseLockDuringJms() throws Exception {
     var broker = WebLogMessageSenderTest.broker(Files.createDirectory(root.resolve("time-broker")));
     try (var factory = new ActiveMQConnectionFactory("vm://0");

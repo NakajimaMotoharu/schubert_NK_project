@@ -33,6 +33,79 @@ final class WebLogReplayWorkerTest {
   private static final WebLogDispatcher.Report EMPTY = new WebLogDispatcher.Report(0, 0, 0, 0);
 
   @Test
+  void graph323001ProviderFatalEdgesStopWithoutOrdinaryFailedCycle() throws Exception {
+    for (int kind = 0; kind < 3; kind++) {
+      var fatal = new LinkageError("synthetic provider fatal");
+      var graph = providerGraph323(fatal, kind);
+      var calls = new AtomicInteger();
+      var worker =
+          WebLogReplayWorker.start(
+              () -> {
+                calls.incrementAndGet();
+                throw graph;
+              },
+              Duration.ofMillis(1),
+              Duration.ofSeconds(1));
+      try {
+        await(worker::terminalFailureObserved);
+        assertFalse(worker.running());
+        assertEquals(1, calls.get());
+        assertEquals(0, worker.snapshot().failedCycles());
+        assertEquals(0, worker.snapshot().completedCycles());
+      } finally {
+        worker.close();
+      }
+    }
+    var ordinary = providerGraph323(new SQLException("synthetic ordinary"), 3);
+    var worker =
+        WebLogReplayWorker.start(
+            () -> {
+              throw ordinary;
+            },
+            Duration.ofMillis(1),
+            Duration.ofSeconds(1));
+    try {
+      await(() -> worker.snapshot().failedCycles() >= 2);
+      assertTrue(worker.running());
+      assertFalse(worker.terminalFailureObserved());
+      assertEquals(0, worker.snapshot().completedCycles());
+    } finally {
+      worker.close();
+    }
+  }
+
+  /** Independent provider edges and cycles; no Production traversal builds the oracle. */
+  static RuntimeException providerGraph323(Throwable leaf, int kind) {
+    switch (kind) {
+      case 0 -> {
+        var jms = new jakarta.jms.JMSException("synthetic linked");
+        jms.setLinkedException(new Exception("synthetic leaf", leaf));
+        return new IllegalStateException("synthetic outer", jms);
+      }
+      case 1 -> {
+        var sql = new SQLException("synthetic next");
+        sql.setNextException(new SQLException("synthetic leaf", leaf));
+        return new IllegalStateException("synthetic outer", sql);
+      }
+      case 2 -> {
+        var first = new IllegalStateException("synthetic cycle one");
+        var second = new IllegalStateException("synthetic cycle two", first);
+        first.initCause(second);
+        first.addSuppressed(second);
+        second.addSuppressed(leaf);
+        return first;
+      }
+      default -> {
+        var sql = new SQLException("synthetic null next");
+        sql.addSuppressed(new jakarta.jms.JMSException("synthetic null linked"));
+        var first = new IllegalStateException("synthetic ordinary", sql);
+        first.addSuppressed(leaf);
+        return first;
+      }
+    }
+  }
+
+  @Test
   void nativeBudget001ZeroIsBoundedAndRemainingActualJoinAllowsRetry() throws Exception {
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
