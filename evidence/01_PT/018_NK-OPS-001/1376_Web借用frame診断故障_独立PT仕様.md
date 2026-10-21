@@ -19,3 +19,7 @@ WBS-P018-06主/関連P018-05,F03、群WEB_OUTER_FRAME_DIAGNOSTIC325（event1568�
 ## 関連green/資格の準備（未実行）
 
 PG6398はbaseline12/既Execution2/新fixture1/Lifetime5/共通retention5の実宣言25/11を関連群とし、元redのTest全byteを保持して当一Mainだけの差分を要求する。RED_SOURCE/RED_MANIFEST_SHAは未束縛None、元redを実証するまでPG greenを拒否する。PG6400はその真正25の原全8511667/六Jar/XML/対象実四counterを照合するだけでPTを起動しない。新工具定義一0、red二/semantic join二と計五工具0は管理試験、Production加点0。実red/greenや現在の全体の合否を先取りしない。
+
+## src反映・red着手前（2026-10-21）
+
+元全4052/6388真正0・当6390trace/audit0を1378/1379で保全後、一Testだけをsrcへ反映。正規Spotless apply元36206真正0、既Main/全旧Test変更0、整形後Test SHA `d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0`（draftとの違いは通常整形）。原4052q5b42051bとactual宣言15/9を照合、6396のWHOLE_QUALIFICATION_SHAをその真正値へ固定。まだred未実行、fresh43残57/reset1793082864/短期不明。clean commit/push後だけ新only6396を一回発行し、元終端まで全Main/Test固定、結果を見てからPGする。
