@@ -1,5 +1,9 @@
 # Consumer332 ordinary graph/rollback PT仕様
 
+## 事前compile失敗・新only是正（BUG1603/YKT1356）
+
+元6652/11185と6654/22215はf0c1fa87e/archive ca43a4c6、phase0,1真正1/0PT0suite。API fixtureの汎用checked closeがjavac try警告四件で-Werrorへ違反、予定反例とは異なるので原赤資格なし。具体三owner close dispatch/unchecked署名へ限定是正し、入力/期待値/全Main/既Testは固定。Web同型は既具体ownerで非該当。旧run/manifestを上書きせず、新赤6660/6662-v2・green6664-v2/原6666-v2を使用する。以下6652/6654/6656/6658は旧初期計画として保持、現在のcommandは同driver/新SLOTS。再試験前は当fixture障害OPEN。
+
 Program NK-MSG-001/002、対象API SyncRequestConsumers/WebLogConsumers/QuestionWorkConsumers、Web ArtemisReplyConsumer/Consumers。RD MQ003～010/ASY001～009/MON005、UI212213231、SS312/321/354/SSC332、BUG1602/YKT1355・1354。主費WBS-P005-02、P005-03/P006-05/P012-01は同群参照・追加共通費0。着手event1665、低.5/標準2/高5共有週次pp・未較正、原/v4/旧群不変更、実N/T/専有費null。
 
 設計only sourcefe21609a9/PR196→main9cca2275bef6ffb29d96d623e7637b61e05d3d58は通常merge/remote確認済。SS321354/914三fileのみ、PG/tool/evidence混入0、自己承認/保護迂回0。添付API cap100一回失敗/再試行・既添付削除0。gh pr diff --checkは未対応flagで終了1、local git diff --check終了0と変更三file/内容確認を使用、失敗を検査成功へ変換しない。

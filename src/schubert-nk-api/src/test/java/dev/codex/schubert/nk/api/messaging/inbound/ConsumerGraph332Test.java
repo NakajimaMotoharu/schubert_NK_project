@@ -210,8 +210,12 @@ final class ConsumerGraph332Test {
     }
 
     @Override
-    public void close() throws Exception {
-      owner.close();
+    public void close() {
+      switch (kind) {
+        case 0 -> ((SyncRequestConsumers) owner).close();
+        case 1 -> ((WebLogConsumers) owner).close();
+        default -> ((QuestionWorkConsumers) owner).close();
+      }
       assertEquals(kind == 0 ? 4 : 1, closes.get());
     }
   }

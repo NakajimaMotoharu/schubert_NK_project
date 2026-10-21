@@ -19,7 +19,7 @@ MAINS={
    for n in ('ArtemisReplyConsumer','ArtemisReplyConsumers')}
 TARGETS={'api':['api/messaging/inbound/'+n for n in ('SyncRequestConsumers','WebLogConsumers','QuestionWorkConsumers')],
          'web':['web/messaging/ArtemisReplyConsumer','web/messaging/ArtemisReplyConsumers']}
-SLOTS={'red-api':'pg6652-consumer-api-red-v1','red-web':'pg6654-consumer-web-red-v1','green':'pg6656-consumer-graph-green-v1'}
+SLOTS={'red-api':'pg6660-consumer-api-red-v2','red-web':'pg6662-consumer-web-red-v2','green':'pg6664-consumer-graph-green-v2'}
 EXPECTED={'red-api':(16,8),'red-web':(16,8),'green':(77,20)}
 
 
@@ -55,7 +55,7 @@ def read_red(phase):
            ('cons332005WrappedFatalSignalsThenRethrowsOriginalWithoutSecondRollback','cons332006PreflightIsNotConfirmedAndStateResetsPerDelivery','cons332007RollbackFatalIsNeverReissuedAndNotificationCannotMaskIt','cons332008OrdinaryCycleDirectFatalAndPublicListenerContractsRemain'))
     expected={(cls,n):'expected: <true> but was: <false>' for n in names}
     value=original.inspect(W/SLOTS[phase],lambda s:guard_source(s,phase),(10,5) if api else (14,6),expected,TESTS,6 if api else 2)
-    print(json.dumps(original.publish(value,BASE/('PG6652-consumer-api-original-red-v1' if api else 'PG6654-consumer-web-original-red-v1'))))
+    print(json.dumps(original.publish(value,BASE/('PG6660-consumer-api-original-red-v2' if api else 'PG6662-consumer-web-original-red-v2'))))
 
 
 def qualify_green():
@@ -66,7 +66,7 @@ def qualify_green():
       '0f3beb9b42cf6c40b3a30aac55331507ea4805ce231bd82d7fd80317146d4f8b',
       W/'pg6650-local-audit-qualification-v1/manifest.safe.json',
       W/'pg6650-local-audit-qualification-v1/findings.safe.json',
-      'pg6658-consumer-graph-qualification-v1','PG6658-consumer-graph-qualification-v1',expected_phase_exits=(0,0,0))
+      'pg6666-consumer-graph-qualification-v2','PG6666-consumer-graph-qualification-v2',expected_phase_exits=(0,0,0))
 
 
 def main():
