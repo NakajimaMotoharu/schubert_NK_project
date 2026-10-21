@@ -19,3 +19,13 @@ API helperはpackage-private入口、Web二helperも同package Testから呼ぶ�
 予定API赤inventory16/9（基準12＋旧Auth1＋新Auth3）、Web赤19/10（基準12＋旧Session1＋新Web6）、green23/12（基準12＋旧2＋新9）。赤の実件数は停止moduleまでなのでinventory満数とは限らない。red originalの意図したassertion差を独立回収し、compile/timeout/別例外を目的の反例としない。三Main最小PGはAPIにcause/SQL next、Web二つにSQL nextだけを追記、既順とvisited保持。red Test bytesをgreenで固定し、原全Main/Jar/XML資格・三helper全分岐と必要当source全4082/617（宣言検査後）/既domain非回帰へ接続する。
 
 JMS linkedは三helperのJDBC入力責務に非該当。既四sender/dispatcherは別の四edge契約を持ち同source全体参照へ再結合する。一般application/JDBC catalog全域のYKT1323は本三箇所で完了扱いにしない。QA051final/実Root等HOLD・正式1964/53・17/190・工数null/PTALT代替0不変更。群開始見積り/command/source/run/日時・結果hashは元4073の原資格後の着手記録で確定、推定を実費/完了へ算入しない。
+
+## 着手確定（2026-10-21 23:11JST）
+
+元4073/6526/6528/当traceの真正0とsource固定解除を確認、群1623/WBS-P007-03主担当＋P015-01/05参照、.3/1/3ppを先行固定。新三Testclassの各001/002/003は表の同番号method（Auth auth328001/002/003、Session/Revocation graph328001/002/003）。Main/gates/旧oracle変更0、formatter55689終了0、定義/Scope/compile-first/赤assertion限定管理三0。
+
+- AuthenticationJdbcGraph328Test SHA c73217cbaa48bfe70bfc1a03f25b8c23b8490ccc7fb1e3674070e6499786daf6
+- SessionJdbcGraph328Test SHA 86ffb80768b51695b877a255aa1665c64e69f2bf6e8b0835f82df470892b7d7c
+- RevocationJdbcGraph328Test SHA 1933a72138937489085e50e6f9388af72a568c0e3faa0a2dbe7a114b272edc89
+
+固定PYTHONPATH/JDK25.0.4/Maven3.9.12で `python3 -B tools/quality/pg6534_jdbc_fatal_graph_selected.py api-red`、元終了後に同Testsource/oldMainで`web-red`、両原artifactを `pg6536_jdbc_original_red.py` で独立照合。API赤は10/6・目的F2、Web赤は17/8・目的F4を見込む（後段not-runを成功にしない）。見込みと違うcompile/timeout/別exceptionは目的反例としない。原赤保全後だけ三Main PG/同Testbytes green23/12へ。
