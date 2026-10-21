@@ -9,7 +9,7 @@ class SemanticClassJoin(unittest.TestCase):
         self.source='1'*40;self.text=b'Independent literal semantic Test source\n'
         self.cls='dev.codex.schubert.nk.api.application.QueryTest'
         self.declaration=dict(className=self.cls,sourceSha256=hashlib.sha256(self.text).hexdigest())
-        self.case=dict(testId='PT-INDEPENDENT-001',xmlSha256='2'*64,**{'class':self.cls},
+        self.case=dict(module='api',testId='PT-INDEPENDENT-001',xmlSha256='2'*64,**{'class':self.cls},
             caseNameSha256='3'*64,source=self.source,result='PASS_ORIGINAL_XML')
 
     def call(self,declarations=None,cases=None,reader=None):

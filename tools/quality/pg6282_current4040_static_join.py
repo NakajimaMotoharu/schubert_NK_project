@@ -23,13 +23,16 @@ def declared_class_references(declarations,cases,source,read_source):
     result=[];seen=set()
     for declaration in declarations:
         cls=declaration['className']
-        match=re.fullmatch(r'dev\.codex\.schubert\.nk\.(web|batch|api)\.(?:[A-Za-z_$][A-Za-z0-9_$]*\.)*[A-Za-z_$][A-Za-z0-9_$]*',cls)
-        if not match or cls in seen:raise ValueError('one explicit ordinary Web/batch/API semantic Test class')
-        seen.add(cls);module=match.group(1)
-        path='src/schubert-nk-'+module+'/src/test/java/'+cls.replace('.','/')+'.java'
-        if hashlib.sha256(read_source(path)).hexdigest()!=declaration['sourceSha256']:raise ValueError('exact declared current semantic Test source')
+        match=re.fullmatch(r'dev\.codex\.schubert\.nk\.(web|batch|api|bootstrap|storage|protocol)\.(?:[A-Za-z_$][A-Za-z0-9_$]*\.)*[A-Za-z_$][A-Za-z0-9_$]*',cls)
+        if not match or cls in seen:raise ValueError('one explicit project semantic Test class')
+        seen.add(cls)
         actual=[r for r in cases if r['class']==cls]
         if not actual or any(r['source']!=source or r['result']!='PASS_ORIGINAL_XML'for r in actual):raise ValueError('same-source genuine original semantic Test cases')
+        modules={r.get('module')for r in actual}
+        if len(modules)!=1 or not modules<={'protocol','storage','bootstrap','api','web','batch'}:raise ValueError('one explicit original XML module, never infer from package')
+        module=next(iter(modules))
+        path='src/schubert-nk-'+module+'/src/test/java/'+cls.replace('.','/')+'.java'
+        if hashlib.sha256(read_source(path)).hexdigest()!=declaration['sourceSha256']:raise ValueError('exact declared current semantic Test source')
         if len({r['caseNameSha256']for r in actual})!=len(actual):raise ValueError('unique semantic case identity')
         result.extend(current_reference(r)for r in actual)
     return result

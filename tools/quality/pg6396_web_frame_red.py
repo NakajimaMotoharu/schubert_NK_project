@@ -10,7 +10,7 @@ from pg5940_private_lock_compile import ROOT, W, BASE, sha
 OLD = 'c34159083bfec296fd929ec9b2fbdbb80831c05c'
 TEST = 'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecutionRetentionTest.java'
 DRAFT = ROOT/'tools/quality/fixtures/pg6396/WebRuntimeExecutionRetentionTest.java'
-WHOLE_QUALIFICATION_SHA = None
+WHOLE_QUALIFICATION_SHA = '5b42051bf7ca435c44e3f7caa2fb0fca245faae9c32c3fda4b508ee40a4314b4'
 
 
 def inventory(draft=False):
