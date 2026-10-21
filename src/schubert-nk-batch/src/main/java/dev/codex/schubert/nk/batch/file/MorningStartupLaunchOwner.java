@@ -479,7 +479,7 @@ final class MorningStartupLaunchOwner {
     Objects.requireNonNull(launch);
     Objects.requireNonNull(stop);
     Objects.requireNonNull(completion);
-    var started = new ArrayList<T>();
+    var started = new ArrayList<T>(2);
     try {
       started.add(
           Objects.requireNonNull(
