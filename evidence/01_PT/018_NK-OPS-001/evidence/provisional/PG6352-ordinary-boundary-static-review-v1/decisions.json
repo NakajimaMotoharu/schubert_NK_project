@@ -1,0 +1,2117 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "87",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "414cfcf4219530f029cfca9ac271d53af2986fbf40def4e0cdc4044306efcac6",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2c4d35d4f647913772d1b6a751c67fced35d023456c19c6f96e79d8d26c0d06e",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "2eab553e9409a182ad8616cd14c571fd7fb1a78c6430f289623efa89cb837dd5",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-5cab857fcacb7ea96e7b005b0f985ffe027e0d9562c4dbb7d77aeb6567f06a92",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "ddbefe7e50df987310c6287c2456ac7583cea66cb4714bdba66dce79f7543fb0",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e1281ef8004913b960b9a20a0a8811ea3cef552be32006c9e6dbb1fd30a865ca",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "cc6b5895fd7c345abb022280efa26079cd9f895c1539f9689abeb4cb6df15d4d",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2134b3613f0ab12e867cc6359e8756b7653ddbcb65382475fdf828982824768c",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "47ac877973b035109bda644af008fff931fb6e8abd9db1c75fa46abaaa3211fd",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-6b1b7b13a90f9a942163f2a120a5e8e1246fe3e5871dc749ab0237563f9996c9",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "44317d52c1ce353da242e0aebe9d3abf78ae19a8d26c07cda6f66acedc6ca00f",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e0fc651aacdaa13b3e6f7ced4bf61fad7c7fb929aeafcc83fe90791bc4fd274b",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "87",
+    "findingId": "F03-PMD2-a8f434429c49c1fca12816e81b094b61419155003b40c76c0b54b0dfc815e8d1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c3572e7465036d72c250ef0c85a8ecdaa2208c100c44d134528b0e5f8b7f9cf3",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs$1.class": "df95b82a42ad2290036df0493aa9981314a16c2403bcfd61478d36e8f54f5990",
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs$KeySource.class": "c255432e0f69677357e0023d68219f2105390acebfa128e0e13f127975294b06",
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.class": "3ecbfa9f73f6a0b5265057cbb850624dd3d90680dc8ca2826a609651d26eff97"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 59,
+    "reason": "Both Runtime/Error factory failures close only already-created local codec children and rethrow; finally wipes each acquired key copy. The key source remains borrowed. These fixed codec implementations and synthetic fixture checks do not certify real credentials or every arbitrary failing child close.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.java",
+    "sourceSha256": "954d5e681611662f756af20cfa2bac895fa96e0d99c2ba0913952bf7a9f2b8c3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "87",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "414cfcf4219530f029cfca9ac271d53af2986fbf40def4e0cdc4044306efcac6",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2c4d35d4f647913772d1b6a751c67fced35d023456c19c6f96e79d8d26c0d06e",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "2eab553e9409a182ad8616cd14c571fd7fb1a78c6430f289623efa89cb837dd5",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-5cab857fcacb7ea96e7b005b0f985ffe027e0d9562c4dbb7d77aeb6567f06a92",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "ddbefe7e50df987310c6287c2456ac7583cea66cb4714bdba66dce79f7543fb0",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e1281ef8004913b960b9a20a0a8811ea3cef552be32006c9e6dbb1fd30a865ca",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "cc6b5895fd7c345abb022280efa26079cd9f895c1539f9689abeb4cb6df15d4d",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2134b3613f0ab12e867cc6359e8756b7653ddbcb65382475fdf828982824768c",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "47ac877973b035109bda644af008fff931fb6e8abd9db1c75fa46abaaa3211fd",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-6b1b7b13a90f9a942163f2a120a5e8e1246fe3e5871dc749ab0237563f9996c9",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      },
+      {
+        "caseNameSha256": "44317d52c1ce353da242e0aebe9d3abf78ae19a8d26c07cda6f66acedc6ca00f",
+        "class": "dev.codex.schubert.nk.api.bootstrap.ApiNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e0fc651aacdaa13b3e6f7ced4bf61fad7c7fb929aeafcc83fe90791bc4fd274b",
+        "xmlSha256": "b4851f11bafe9cee20a3ae65d3da6406b1e0e352fdd61d0f415f8dc125efd056"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "87",
+    "findingId": "F03-PMD2-a55aad909033101fdbd64b2e29771ea19fcde3a776fb5ca038f874b6b5d47e4b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c3572e7465036d72c250ef0c85a8ecdaa2208c100c44d134528b0e5f8b7f9cf3",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs$1.class": "df95b82a42ad2290036df0493aa9981314a16c2403bcfd61478d36e8f54f5990",
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs$KeySource.class": "c255432e0f69677357e0023d68219f2105390acebfa128e0e13f127975294b06",
+      "api:dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.class": "3ecbfa9f73f6a0b5265057cbb850624dd3d90680dc8ca2826a609651d26eff97"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 60,
+    "reason": "Both Runtime/Error factory failures close only already-created local codec children and rethrow; finally wipes each acquired key copy. The key source remains borrowed. These fixed codec implementations and synthetic fixture checks do not certify real credentials or every arbitrary failing child close.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNativeCodecs.java",
+    "sourceSha256": "954d5e681611662f756af20cfa2bac895fa96e0d99c2ba0913952bf7a9f2b8c3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "44",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "774e6787c34cf1e0d18a70f96e3903873914bd908a0640face6b2593d81c7afb",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8b48ef4d0e9eb23022730d561984d9c145a2376f69986520c63f5b373fe18ee5",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "8947ce1798bb7cea6d28f0cf03d24b3f044563b7520a14ac80b0b5f67d82fe97",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-25742440466efe2cda272e619421957447182c380d3933a21834bcc5b3251db2",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "b918b687ce8ae89959841c7f4dd9f6825a69d8004c25acdedb4dd02f467f5fe4",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-fc6faf43acc4030e344252ecb2d9e70622cc85eab249272222c1184a375c7901",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "1fb63e945c24ee23c735471ab865cfc831a730587d6764cdbe234682aeaea755",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-36c3f2e9d02fd58eb152ff4fb9c356df7b2adc9f52a97d58bf8c997f70913c63",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "3af6949eb9595ebc2d9983ba9db9098b1abcb2090f139fccce9b33afa6ef1cd6",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-de4316fa2de5242108f780d4294431d8484e953148eed7a6afdf78a38431f55e",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "52c1719511097e476cde568d0f81e7a4b7705d675708cef28175c77db16e5500",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-cec7bf274b8717b57a3bfffd568d6e3e2a81b788c20ca637bd4315d43d6911a3",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "f01f3224d8c5c596de24ac1bb895d38ee38451fac73a8e20fafe0c4834b52dca",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9079b4e59b61a30a6b3ac4546868c00e1c44554e57f72120c287c01b80bb8b84",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "a21553440f3b709ad3789216c0045ed9203644e0be509d109052239067338074",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-30d714fbb2586a333776d4ddf1f2ac9aacf54414754ba5d07d11376646ddb766",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "68c7af044fb9389f79dc4e20c14cc99abcee24691911e5af16b1ec94e00718e3",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-acd7856119636296e22b46e88f896e8e16591fc137e2a0f1aff2304ef8ebdfb6",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "4609244efa9240fc7c557f81cf4f15d06377c49e070901697a66c575f0f7abb5",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c83d3c8c99776216e17985c0dff8c8965b596de8d9b98047c33710ae09014ed4",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "8a51aec4aa75b84eeb5e7d0a8a5fccf7d6b1bbc388d74b9e6195b867bf749be2",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1bf0957c8bf65067936625bfd4b9aa8bad0176f1ffead18bfca38bd219eb1d0f",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "a6b3911b79a3d084be04d6e0d4316101d859e7d14de5a2caec8b623d2c744abb",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-43f0dfeed9aff36c046e5d19201b81eb5ad8bb374c78c2ea99a47169ea3f07f2",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "2d290b85d018f0935c0570b07a8cf7a1c8e858bec0268ae9cc0a10c0efe04b2b",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-445bfa0e4e20179db121022d0ce7eafe93197a895c1d8e9f2957723a2dd366d6",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "e87a3460e1ef73690c5994097b602730a8468a9d3db39b3e25c89e45e82e5a15",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-788745100854e91acbfade9ee2af5b90e73dac1c9caf75c111fc586a4ee532ac",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "44",
+    "findingId": "F03-PMD2-1aa14101a6292619875b5374e5b2bce92be6071997bb74989b460d2e96872100",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0f575243b1ff23b1bc9a5103d585b4fc4529d480fafcecf7ea89d917a6f8184f",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.class": "55786eea3f65ecc1b0bd11af1b1bb07361b167db3f5cba0159dd87d569a45174"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 89,
+    "reason": "SQL/RTE inside the owned short transaction attempts rollback before rethrow and TWR close. Handler response cannot escape before commit/close. An attached rollback SQL failure prevents permanent rejection from being treated as confirmed. Arbitrary compound provider graphs remain YKT1323, not blanket accepted.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+    "sourceSha256": "8bebd1972e38b02a8c69cdd1647b8880366cca662851f0f03d7fbd351df6345f",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "56",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "774e6787c34cf1e0d18a70f96e3903873914bd908a0640face6b2593d81c7afb",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8b48ef4d0e9eb23022730d561984d9c145a2376f69986520c63f5b373fe18ee5",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "8947ce1798bb7cea6d28f0cf03d24b3f044563b7520a14ac80b0b5f67d82fe97",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-25742440466efe2cda272e619421957447182c380d3933a21834bcc5b3251db2",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "b918b687ce8ae89959841c7f4dd9f6825a69d8004c25acdedb4dd02f467f5fe4",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-fc6faf43acc4030e344252ecb2d9e70622cc85eab249272222c1184a375c7901",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "1fb63e945c24ee23c735471ab865cfc831a730587d6764cdbe234682aeaea755",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-36c3f2e9d02fd58eb152ff4fb9c356df7b2adc9f52a97d58bf8c997f70913c63",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "3af6949eb9595ebc2d9983ba9db9098b1abcb2090f139fccce9b33afa6ef1cd6",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-de4316fa2de5242108f780d4294431d8484e953148eed7a6afdf78a38431f55e",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "52c1719511097e476cde568d0f81e7a4b7705d675708cef28175c77db16e5500",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-cec7bf274b8717b57a3bfffd568d6e3e2a81b788c20ca637bd4315d43d6911a3",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "f01f3224d8c5c596de24ac1bb895d38ee38451fac73a8e20fafe0c4834b52dca",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9079b4e59b61a30a6b3ac4546868c00e1c44554e57f72120c287c01b80bb8b84",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "a21553440f3b709ad3789216c0045ed9203644e0be509d109052239067338074",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-30d714fbb2586a333776d4ddf1f2ac9aacf54414754ba5d07d11376646ddb766",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "68c7af044fb9389f79dc4e20c14cc99abcee24691911e5af16b1ec94e00718e3",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-acd7856119636296e22b46e88f896e8e16591fc137e2a0f1aff2304ef8ebdfb6",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "4609244efa9240fc7c557f81cf4f15d06377c49e070901697a66c575f0f7abb5",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c83d3c8c99776216e17985c0dff8c8965b596de8d9b98047c33710ae09014ed4",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "8a51aec4aa75b84eeb5e7d0a8a5fccf7d6b1bbc388d74b9e6195b867bf749be2",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1bf0957c8bf65067936625bfd4b9aa8bad0176f1ffead18bfca38bd219eb1d0f",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "a6b3911b79a3d084be04d6e0d4316101d859e7d14de5a2caec8b623d2c744abb",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-43f0dfeed9aff36c046e5d19201b81eb5ad8bb374c78c2ea99a47169ea3f07f2",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "2d290b85d018f0935c0570b07a8cf7a1c8e858bec0268ae9cc0a10c0efe04b2b",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-445bfa0e4e20179db121022d0ce7eafe93197a895c1d8e9f2957723a2dd366d6",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      },
+      {
+        "caseNameSha256": "e87a3460e1ef73690c5994097b602730a8468a9d3db39b3e25c89e45e82e5a15",
+        "class": "dev.codex.schubert.nk.api.security.LoginInboxServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-788745100854e91acbfade9ee2af5b90e73dac1c9caf75c111fc586a4ee532ac",
+        "xmlSha256": "d1916549d5520d40309f65764c526773edd106a003b3bb0c31003f665b5e8ca3"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "56",
+    "findingId": "F03-PMD2-d5d892f7eeb744669322ad8701377c1abf87629ea68ba5e8958301ca953832e7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-48533333c7fcf4e895ff236b458913e835f8a9766ce053882dc80d5354ac3557",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.class": "55786eea3f65ecc1b0bd11af1b1bb07361b167db3f5cba0159dd87d569a45174"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 90,
+    "reason": "Outer SQL/RTE, including uncertain commit/close, becomes a fixed infrastructure retry signal, never a reply or automatic JDBC retry. The explicit PermanentProtocolException branch only preserves a clean permanent rejection; no provider text is emitted.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+    "sourceSha256": "8bebd1972e38b02a8c69cdd1647b8880366cca662851f0f03d7fbd351df6345f",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "55",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "f7900b24feb11a9e60d283e207e7afd4bbf5ed55c2106e67272a6c9b6a7ff70a",
+        "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-732b32bd6b440aec840f30d8678f817236f76352b522441f4c30dcc18f44b6d7",
+        "xmlSha256": "f9d15763f15dec3501cd710f060d0adc304e3311df522d8047730b9557f4493a"
+      },
+      {
+        "caseNameSha256": "da617e8dcefd34871c59f998ffe89d3dbdd8dac1e22e209d6f042228e452c2cb",
+        "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e78ebb65fb8e8ef25a92322c954cd5e23981ede3573d6f03f7a2c25afafe64f9",
+        "xmlSha256": "f9d15763f15dec3501cd710f060d0adc304e3311df522d8047730b9557f4493a"
+      },
+      {
+        "caseNameSha256": "7159f8815afd5ac8f1377393316ac5c236541170efa54d76eea13b753b3888e3",
+        "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0049f0ad70d6dd40189b7e5047a84267572c4c01a954a6349dc2d6c555b61d22",
+        "xmlSha256": "f9d15763f15dec3501cd710f060d0adc304e3311df522d8047730b9557f4493a"
+      },
+      {
+        "caseNameSha256": "508d9a4fc701e1e0b56d9c026730d14202a33a5c0473979dba636a9b04cbcc44",
+        "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d38d9c074c99266b0d6148bf2947ad723730d60ecc60edbd20333d3c7d5c59b1",
+        "xmlSha256": "f9d15763f15dec3501cd710f060d0adc304e3311df522d8047730b9557f4493a"
+      },
+      {
+        "caseNameSha256": "b253043e346e883a707de7a310c02d91689391208b8ed7e5bf20fbc1abbbe8e8",
+        "class": "dev.codex.schubert.nk.api.logging.WebLogIngestServiceTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f06d78eaa453ebeb180ffa4d06322edb2239930fa293f36d435395710f5b829b",
+        "xmlSha256": "f9d15763f15dec3501cd710f060d0adc304e3311df522d8047730b9557f4493a"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "55",
+    "findingId": "F03-PMD2-50ff0d81665ab33361464973df9dc60619746681a8508147ff6bee87a8dbc760",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-72f5c3e0f5bfeb7a05d712ae03d95d2f220afac18a2312cefdcbeeaad8300b48",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/logging/WebLogIngestService.class": "3821ade61d7a507d84a249b8c0e0ba4eab99b97a2e14f27912904d9bccf0b13b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 105,
+    "reason": "Projection insert/commit SQL/RTE attempts rollback, retains rollback SQL failure, and rethrows through owned connection close before JMS ACK owner returns. Duplicate source_message_id leaves original columns unchanged. This is not proof that arbitrary compound rollback/close graphs satisfy every fatal-ranking contract.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+    "sourceSha256": "3ac3e41946ff6d7a7da99cbf1ee2dc95397964e22be7d52e9b846a1312c7278a",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "207",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "dceb47bc69cc7d2e4925e2f5e545c688daa9ef8cfcd72356bb3d5381b7d1e7b8",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-31e95d468283beff1714b417f128120d7e6f0a68de5ce6f49f178c3e0ad9a47f",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "62fb48b57254981770f111672c91c9c3817d92e3bcb44ca39220dfc3fcdc0256",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-3e9c3f29bb82fe1648ab7ad4f30015c4f3e0bf06b61a914a7deae1ec1f65e61a",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "7c9f58daa25f4f92143319797e7f2459a28d76382416bc2fb468bae8eb3aaaf6",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-39a6cb6ea01bca4120e3d627d8ca2b32c76c7375bc3fdb14d727dc10cac35240",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "b894ec2e7d0504e28a0c28943789affb5475c61aabdb24e5a1c0c800c5a815da",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-09022a34b0ce67227de4a77805b5714a8239c887d44a7c580a8104e9b87cdd65",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "ab3fa117461db24177ff10072c6745e6a8a470341caceb55faa4f49e1e050804",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-bc7a1ff0bb143aba183b8fae08ff8ae4a42391251d7e3cf52f97d904cefa94da",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "bc53ac0dacd40be1cbbe05ed9f574f53eba6fc6d012f0421f8c8a9cd567f4527",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-63b2df39af857deb77247d7b484377af32d3db239e473a05ce78333300ed55f3",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "fa721bdf3cc0b8f957a97d76c4a51ed082bb4efb643b0c14e8150a734961fd5b",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-a783e554cf3f62f638378deb1f9b2232c0d50fde963125b091adf4bec62f831c",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "c3bba37a55b9263df94e52f412b0f1a1e16792ecf156819c5c430385c2d000a3",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-a21d8713d6ffc894c6e7f68faaaf9ec6f325781ef47815fc8434ad0ce12dd2c4",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "07fb83d56e18d2c51f2b929b0af1214b367b47b422ab6d7ae7f6fd3c1b7b1a8e",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-67e1b1e46d5924292a9ab886e5bcaca56654d9c9760fc61e5b6de26b49b6746d",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "58d2077758953d4042ea501f2f33c8f6116a11b7c386142f481f0847071fcfbe",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0ff3aa845f837aa46e3360d967ca0359bb5acae043431ebca5154cf1c84a3f3c",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "b7e0186c8851a6371a7e691506cde6b380dfa7f2fae6daa16650f343bbce831a",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2eb9ce395f4239ac29f65793ef16ae9baa8ccdd6455f73c49d08bf738dce4122",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "cc799ab3a11ed97047f6a58e258e1c58ed484925b91ff929ca3f7aec413237b1",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c499da57d4dbd05ee86190cf3edd50aa11c9ffed1a774ed1afdac6053d10051e",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "d7cf84cf41364744b59a42aa2e211ec5f72532ac9f3ef56fb1b58328a6352051",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-4d4c8220a43b220b4f0314f41fd30457feaceb67f0b852fa77b56911017238d1",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "a84571fb478c2c26981289525c3fafe4364757bab2a9f26867322b99eb47356d",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-fef4c7cfc518a35874306bc9c5e6d2dbaa70a408e4f27a4390fc36dd523525dc",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "737ce4e55f07b4885499f2172a7d9d76acec85e83c6b10c1fdf6af5fe1a5ef02",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9ca117936327f0f9acf028c451efd122c4369ad8dc168493127d1304b334c6be",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "f1a60798bc05b1f810c3169ad2d518aecd53c434ba187ba2e89594c8cb5aa151",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f094464659c6d7ab266ab427bfd2ebcaea31393e07d2f09018835828f02f1658",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "c5901f8c70acf31568c9c837cbde0001b13117075c8c0f9e6cfe62328dfe7bb1",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8a1906ec8107968cbae24765c7025c09a4db6e65f0b0fdc3ea80c36d3a4135af",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "b666519f0fedcf8e75ed5e280229cdf2e0546df6a129ea0851b87e1025e5dd49",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-6e2bccbb79f099de1ea004525a1e90e27d3833110e65a9eb47d20b155c6d1a7f",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "5189a7a704789b4e6192abafc8909ff1ee7dfab0b16a3b93d69d72f96d2d14d9",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e3ac0d681d16437bb8fe56a56fb7b5d32c095de16f49a99fcf10556f44a6d8c0",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "30616b12b32b4fcc7950d14b2f2cec1960cdcc00a259e08541e18a54858e25d9",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f271630c13ae446e06768f1af112ac58e8aafd84094b27bc0e31e9d7c523f304",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "cbf2606e38fa9c3b0ed7353369f323fe2e179772d609710855863ea17eff7ac1",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-693f3a1d8b98a3decf242435dd05a9ca1489689859937cf7ecf661801f02fd88",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "83d9e92f473b0885616b1b93d1e05369c6c07ad9b490040fdec338713004c57a",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0d99e80772cb13005cad8a68b8ee4c260689d91710658dc9fe82ea3a400c0253",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "1f4fdb9d6badcddf81df53fdd9b4d71e496d134e167b3ee837ce87d25d7bf784",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e5149f17596d60cbac063305dea4bbba399582f43f5ef7e4011c8fcc534ea514",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "9acbbf60b31d4de2a2ec4a5ea4bf9d1f15fcf8a339c189d2f9549e35d2b6416d",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0f37b814f85d46928c30d51b66c1fe8f14e2dcc0365efdad46383e60b062c6f7",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "78691dfa97a03a87360cdf4edc524cedde5e38417d5aadbce08b74a801521f2f",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-adb05cce2845e5126f222441e0b4ab7c7095d4ff9a206bcaadcb708791968c03",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "7a83399630709466e054417548f33917fd0a6cdae342278bbc5de9531281ed1e",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-27fb04d0d4a41d37165eab28fee2e5ed3e9067fcb4d6461db81d2bce42e709d6",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "3e734fb94c688dc0aca31f25acf58b27a87fa65f5fc0f5ed04f6e24d449b1fe9",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-53bff27551927240c394f18d1ce706f58f646324d79b3b44e8df2e244ec97cd6",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "ecb487c61c8700f69c055024311d671292bda2aba9e5fcff52a0d938a0e6af4e",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-3b814a7c61395c72566ad0d6ef1dd323fdaa859c3e7f159be7382bc30d25d814",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "0c4b935c71b0c7ae34c8bc3de026c9762b18fbea6f0779ad669c8833786754e0",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9a88aec7453933d2578950883d9ca63a70588e4fb67f87e8a68cb065778c3a3c",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "207",
+    "findingId": "F03-PMD2-e54d91a99a15ccbdba71d106be438064f46c4f4ce342cf486b7dcd66badaa64a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3a7956d66a72f1dc9f8321e3c98f3a643349ce0cd9c92c301bd3eb1a48baee96",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$Candidate.class": "0dd70589e17db6ccf1c3603207f9f5eb4996503c3881977fb93331bcf6828da8",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$LoadedProgress.class": "df559b295ca7e81da170fb9a3bd30a345bc1f45fcdf5d817c9d032f94adb6cbd",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$Work.class": "bb4f8aa69f5d7b3eb8cbb90eb42e94d20ba1f30574bd826a83d009aa2b677cb0",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup.class": "f03656ac66f96918a0a4d0f37efc0db5f58c8b9b38dd7f55604c0cd56a20ac6d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 106,
+    "reason": "Before commit, bounded owned-work SQL/RTE attempts rollback; after committed=true a late parent failure is not falsely rolled back. Transaction verification and parent checks precede commit; owned connection closes before a value escapes.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+    "sourceSha256": "5a421f78ff2179e385561b6777f030709ab185be18b914c95006bc204ec51d2b",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "217",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "dceb47bc69cc7d2e4925e2f5e545c688daa9ef8cfcd72356bb3d5381b7d1e7b8",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-31e95d468283beff1714b417f128120d7e6f0a68de5ce6f49f178c3e0ad9a47f",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "62fb48b57254981770f111672c91c9c3817d92e3bcb44ca39220dfc3fcdc0256",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-3e9c3f29bb82fe1648ab7ad4f30015c4f3e0bf06b61a914a7deae1ec1f65e61a",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "7c9f58daa25f4f92143319797e7f2459a28d76382416bc2fb468bae8eb3aaaf6",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-39a6cb6ea01bca4120e3d627d8ca2b32c76c7375bc3fdb14d727dc10cac35240",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "b894ec2e7d0504e28a0c28943789affb5475c61aabdb24e5a1c0c800c5a815da",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-09022a34b0ce67227de4a77805b5714a8239c887d44a7c580a8104e9b87cdd65",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "ab3fa117461db24177ff10072c6745e6a8a470341caceb55faa4f49e1e050804",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-bc7a1ff0bb143aba183b8fae08ff8ae4a42391251d7e3cf52f97d904cefa94da",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "bc53ac0dacd40be1cbbe05ed9f574f53eba6fc6d012f0421f8c8a9cd567f4527",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-63b2df39af857deb77247d7b484377af32d3db239e473a05ce78333300ed55f3",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "fa721bdf3cc0b8f957a97d76c4a51ed082bb4efb643b0c14e8150a734961fd5b",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-a783e554cf3f62f638378deb1f9b2232c0d50fde963125b091adf4bec62f831c",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "c3bba37a55b9263df94e52f412b0f1a1e16792ecf156819c5c430385c2d000a3",
+        "class": "dev.codex.schubert.nk.api.maintenance.InboxCleanupNonAuthenticationTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-a21d8713d6ffc894c6e7f68faaaf9ec6f325781ef47815fc8434ad0ce12dd2c4",
+        "xmlSha256": "0228c7ab3ff7f69fcd998444f71af4269d3b9185b511ebdbec3bd7b429c1690f"
+      },
+      {
+        "caseNameSha256": "07fb83d56e18d2c51f2b929b0af1214b367b47b422ab6d7ae7f6fd3c1b7b1a8e",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-67e1b1e46d5924292a9ab886e5bcaca56654d9c9760fc61e5b6de26b49b6746d",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "58d2077758953d4042ea501f2f33c8f6116a11b7c386142f481f0847071fcfbe",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0ff3aa845f837aa46e3360d967ca0359bb5acae043431ebca5154cf1c84a3f3c",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "b7e0186c8851a6371a7e691506cde6b380dfa7f2fae6daa16650f343bbce831a",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2eb9ce395f4239ac29f65793ef16ae9baa8ccdd6455f73c49d08bf738dce4122",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "cc799ab3a11ed97047f6a58e258e1c58ed484925b91ff929ca3f7aec413237b1",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c499da57d4dbd05ee86190cf3edd50aa11c9ffed1a774ed1afdac6053d10051e",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "d7cf84cf41364744b59a42aa2e211ec5f72532ac9f3ef56fb1b58328a6352051",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-4d4c8220a43b220b4f0314f41fd30457feaceb67f0b852fa77b56911017238d1",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "a84571fb478c2c26981289525c3fafe4364757bab2a9f26867322b99eb47356d",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-fef4c7cfc518a35874306bc9c5e6d2dbaa70a408e4f27a4390fc36dd523525dc",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "737ce4e55f07b4885499f2172a7d9d76acec85e83c6b10c1fdf6af5fe1a5ef02",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9ca117936327f0f9acf028c451efd122c4369ad8dc168493127d1304b334c6be",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "f1a60798bc05b1f810c3169ad2d518aecd53c434ba187ba2e89594c8cb5aa151",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f094464659c6d7ab266ab427bfd2ebcaea31393e07d2f09018835828f02f1658",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "c5901f8c70acf31568c9c837cbde0001b13117075c8c0f9e6cfe62328dfe7bb1",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8a1906ec8107968cbae24765c7025c09a4db6e65f0b0fdc3ea80c36d3a4135af",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "b666519f0fedcf8e75ed5e280229cdf2e0546df6a129ea0851b87e1025e5dd49",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-6e2bccbb79f099de1ea004525a1e90e27d3833110e65a9eb47d20b155c6d1a7f",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "5189a7a704789b4e6192abafc8909ff1ee7dfab0b16a3b93d69d72f96d2d14d9",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e3ac0d681d16437bb8fe56a56fb7b5d32c095de16f49a99fcf10556f44a6d8c0",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "30616b12b32b4fcc7950d14b2f2cec1960cdcc00a259e08541e18a54858e25d9",
+        "class": "dev.codex.schubert.nk.api.maintenance.AuthenticationInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f271630c13ae446e06768f1af112ac58e8aafd84094b27bc0e31e9d7c523f304",
+        "xmlSha256": "1fa0c7675982429c29328ad7c03f9141fbc3120d52456480b1514436fcba954f"
+      },
+      {
+        "caseNameSha256": "cbf2606e38fa9c3b0ed7353369f323fe2e179772d609710855863ea17eff7ac1",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-693f3a1d8b98a3decf242435dd05a9ca1489689859937cf7ecf661801f02fd88",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "83d9e92f473b0885616b1b93d1e05369c6c07ad9b490040fdec338713004c57a",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0d99e80772cb13005cad8a68b8ee4c260689d91710658dc9fe82ea3a400c0253",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "1f4fdb9d6badcddf81df53fdd9b4d71e496d134e167b3ee837ce87d25d7bf784",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e5149f17596d60cbac063305dea4bbba399582f43f5ef7e4011c8fcc534ea514",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "9acbbf60b31d4de2a2ec4a5ea4bf9d1f15fcf8a339c189d2f9549e35d2b6416d",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-0f37b814f85d46928c30d51b66c1fe8f14e2dcc0365efdad46383e60b062c6f7",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "78691dfa97a03a87360cdf4edc524cedde5e38417d5aadbce08b74a801521f2f",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-adb05cce2845e5126f222441e0b4ab7c7095d4ff9a206bcaadcb708791968c03",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "7a83399630709466e054417548f33917fd0a6cdae342278bbc5de9531281ed1e",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-27fb04d0d4a41d37165eab28fee2e5ed3e9067fcb4d6461db81d2bce42e709d6",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "3e734fb94c688dc0aca31f25acf58b27a87fa65f5fc0f5ed04f6e24d449b1fe9",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-53bff27551927240c394f18d1ce706f58f646324d79b3b44e8df2e244ec97cd6",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "ecb487c61c8700f69c055024311d671292bda2aba9e5fcff52a0d938a0e6af4e",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-3b814a7c61395c72566ad0d6ef1dd323fdaa859c3e7f159be7382bc30d25d814",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      },
+      {
+        "caseNameSha256": "0c4b935c71b0c7ae34c8bc3de026c9762b18fbea6f0779ad669c8833786754e0",
+        "class": "dev.codex.schubert.nk.api.maintenance.QuestionQueryInboxCleanupTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9a88aec7453933d2578950883d9ca63a70588e4fb67f87e8a68cb065778c3a3c",
+        "xmlSha256": "56b8e6da8d0c5411384f47ab313597a53bfaf6f19a9664e5c719e75febf15d55"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "217",
+    "findingId": "F03-PMD2-744eddba7e06e5425a7128a063587bfcc3695bd3b0070c648e6b5e95344be594",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a3499be2100a1205d2acd5d8b8c1ceeecf8beee88b63d9154ebfc7a7ed7b8f31",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$Candidate.class": "0dd70589e17db6ccf1c3603207f9f5eb4996503c3881977fb93331bcf6828da8",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$LoadedProgress.class": "df559b295ca7e81da170fb9a3bd30a345bc1f45fcdf5d817c9d032f94adb6cbd",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup$Work.class": "bb4f8aa69f5d7b3eb8cbb90eb42e94d20ba1f30574bd826a83d009aa2b677cb0",
+      "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup.class": "f03656ac66f96918a0a4d0f37efc0db5f58c8b9b38dd7f55604c0cd56a20ac6d"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 107,
+    "reason": "Outer SQL/RTE emits only fixed InboxMaintenanceException, stripping bound values and unknown commit diagnostics. A fixed failure is not a successful durable inspection cursor or permission to repeat a committed mutation. No actual maintenance is performed by this review.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+    "sourceSha256": "5a421f78ff2179e385561b6777f030709ab185be18b914c95006bc204ec51d2b",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "24",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "b39221c3dd06a69b4d4d3f6d8e785d37100e6522267e5666436f08324b246be0",
+        "class": "dev.codex.schubert.nk.api.security.ContextHashTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-fe2866ee17230d7a4ebb4565b7525480ec91af741f4524c16c76234526b4dd10",
+        "xmlSha256": "23dec63a85b7d2ea1caeff3c30789580d310b7192c1479f45c15d5ef1db517d3"
+      },
+      {
+        "caseNameSha256": "b3f341523aba214d0670f3456fa35202a236d0a0c7d699af85a06d565602bb61",
+        "class": "dev.codex.schubert.nk.api.security.ContextHashTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1864c5ac6911d455e2ce70678de1dabaf2d10fadbde94c04b2b4092061cf69e7",
+        "xmlSha256": "23dec63a85b7d2ea1caeff3c30789580d310b7192c1479f45c15d5ef1db517d3"
+      },
+      {
+        "caseNameSha256": "e80d68cb4f318bf2ea7408d28ea0a7732b200e701a0425c825a8c7eefce72107",
+        "class": "dev.codex.schubert.nk.api.security.ContextHashTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-5d0c02a5a87a260c6089ee15a287d59869d2f51ac754f4bae8b701c6a9209fe1",
+        "xmlSha256": "23dec63a85b7d2ea1caeff3c30789580d310b7192c1479f45c15d5ef1db517d3"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "24",
+    "findingId": "F03-PMD2-ff17ba3036003af80b3895c0e3c3725fb2942b71969badde05ed73ed216fbac9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-09554c9965cfcdd8101484645bf7c0c224b30a31ee26301f1ecae031648cd7da",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/security/ContextHash.class": "d9d13bced7584a6c50b83ce7abe45adfb115933bcca903cb9b441dfbf3b6b322"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 285,
+    "reason": "Private stateLock serializes the non-thread-safe retained MessageDigest across input ASCII conversion, digest and both finally wipes. No caller monitor is used; the returned hex is a repository lookup value, not logged raw authentication context. Independent hash vectors/concurrency are associated below, not new credential access.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+    "sourceSha256": "9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "42",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "7c22384d4975e7eb213b24d25ecd25b16b5ff160931b99fb0cd7f58b90128233",
+        "class": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-590c13e6f0b4ef819ef7ce505727e4fd52d75f0fa6d838b92c59eb87bcdeb323",
+        "xmlSha256": "c40fb7fcae951c61a1b887a2df57b71ac6a59c58c5ecfa0cbbaa7d3377ee352a"
+      },
+      {
+        "caseNameSha256": "eccfe733743d5e02bf09447eaa340da7b20262824c653c55c1313a879948bf84",
+        "class": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-ee2d3b5bc06933acc9b3c08f50eaf65c4bd4a41d5dc2eb0f8a321478e39a6fcb",
+        "xmlSha256": "c40fb7fcae951c61a1b887a2df57b71ac6a59c58c5ecfa0cbbaa7d3377ee352a"
+      },
+      {
+        "caseNameSha256": "e7aa3f8175962a32e1303cbadb74e45920a33d4bb5a41a38aa2e0e7306d6e103",
+        "class": "dev.codex.schubert.nk.api.storage.ScenarioReadyFileInspectorTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9f9cf87e741701d61e3a9bc93e175b674e49f033c2000a3ef41c240dae0d7141",
+        "xmlSha256": "c40fb7fcae951c61a1b887a2df57b71ac6a59c58c5ecfa0cbbaa7d3377ee352a"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "42",
+    "findingId": "F03-PMD2-551e1f2c83bdcb9fa9a914f0fc3f3bbfbd42fe2fb9802074e0aae92f8bc2309a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e92e3fc012d21efb58575748cbcf6f2a211067a6068ddbc83b75bd2309a25b1a",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector.class": "9a5ebc7b6f197cfab31f3d197288603d70a31abbd63f78641776eac6474cf62c"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 289,
+    "reason": "Outer StorageIo/RTE maps root capability or cleanup uncertainty to UNAVAILABLE. Only typed MISSING before entering the specific date/entry handle may become absence; opened/verified resource close failure cannot become PRESENT or clean MISSING. No mutation or real transfer file is inspected here.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector.java",
+    "sourceSha256": "64c3367522dfb4e30af3abaa070e68341b1bb508e5adee0d9058b1a2ddfa0885",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "85",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "88d64abcb27ca17126211e9d077f048ad9f1d5a2bad985c3c1ff89b5055fc6d6",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-875151681ec5d5cfb54c30f642718d3e9dcec7f957b612e50f05f5ebdfebaee5",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "2ff15529083b8b7fd3ee1678b69a5edee453b2922ec09b946c2abd8eba743371",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e1711e9a8499e673d11a1f8879ff587a194f08899c1337997c3f4fa8d09321c3",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "93c3d5063c9c5fdc045a510d65d879a44612e606206dbf9fe523ef0fc1497ca5",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c49afdeb64cc15508d9973d7fe942e8e9ef35755faae020bf538136a81787924",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "ce19d714e8b4bfcb6e3d7b805111d5a8c5cd2c386cdafdb7d8a908b12cf48fa4",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-90d55e9ffb83054c0bcf32ad9a2a47dc7002ceec14e14181133888faf2d77db9",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "06cd7623f431d7dad57bed44daecca8bec5302343d84a7110d8f927b2a8e5553",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-aa82cf20aa9c69a7347969c9b3c135b2ece8de44db0603873796c9e652d1c26e",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "85",
+    "findingId": "F03-PMD2-795ecf1e9667daf0a1fb71e3e45c4e3ca4a071ba0f8a8a659b71420ad5486ff8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9ef837104b40a156a2deb049b190196f3f374ac4b700390b099873611f76fe29",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs$1.class": "29c918c952917ceb6f5edf6da75f5be585bcbac962e35969b4e0ba8a8fc85b9d",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs$KeySource.class": "1b977894fa7567c697d70b18f01e1bcbbfe888aa52c4109367a89c5a55ce50d0",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.class": "1bf28c8061d36e92aee5fb56de8f18d2fee0de43a8ab27d5051d444783010003"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1164,
+    "reason": "Both Runtime/Error factory failures close created log/session codecs before rethrow; all three acquired copies are wiped by finally, including missing/invalid later-purpose failures. Successful returned owner alone retains children. This source review does not read actual keys or prove native admission.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+    "sourceSha256": "8c6616da95480f339028ca37e23f2eda7e83621c93899526016a4445358a7a0f",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "85",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "88d64abcb27ca17126211e9d077f048ad9f1d5a2bad985c3c1ff89b5055fc6d6",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-875151681ec5d5cfb54c30f642718d3e9dcec7f957b612e50f05f5ebdfebaee5",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "2ff15529083b8b7fd3ee1678b69a5edee453b2922ec09b946c2abd8eba743371",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e1711e9a8499e673d11a1f8879ff587a194f08899c1337997c3f4fa8d09321c3",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "93c3d5063c9c5fdc045a510d65d879a44612e606206dbf9fe523ef0fc1497ca5",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c49afdeb64cc15508d9973d7fe942e8e9ef35755faae020bf538136a81787924",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "ce19d714e8b4bfcb6e3d7b805111d5a8c5cd2c386cdafdb7d8a908b12cf48fa4",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-90d55e9ffb83054c0bcf32ad9a2a47dc7002ceec14e14181133888faf2d77db9",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      },
+      {
+        "caseNameSha256": "06cd7623f431d7dad57bed44daecca8bec5302343d84a7110d8f927b2a8e5553",
+        "class": "dev.codex.schubert.nk.web.bootstrap.WebNativeCodecsTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-aa82cf20aa9c69a7347969c9b3c135b2ece8de44db0603873796c9e652d1c26e",
+        "xmlSha256": "071c81c785d11189d478489b50d94f293ed1eb4288914f380716b68e4b356f45"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "85",
+    "findingId": "F03-PMD2-f767c27821dffc1de006c39adbdb3bf08184c3bcecbd77c53fda6ce1c2dd847e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9ef837104b40a156a2deb049b190196f3f374ac4b700390b099873611f76fe29",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs$1.class": "29c918c952917ceb6f5edf6da75f5be585bcbac962e35969b4e0ba8a8fc85b9d",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs$KeySource.class": "1b977894fa7567c697d70b18f01e1bcbbfe888aa52c4109367a89c5a55ce50d0",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.class": "1bf28c8061d36e92aee5fb56de8f18d2fee0de43a8ab27d5051d444783010003"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1165,
+    "reason": "Both Runtime/Error factory failures close created log/session codecs before rethrow; all three acquired copies are wiped by finally, including missing/invalid later-purpose failures. Successful returned owner alone retains children. This source review does not read actual keys or prove native admission.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java",
+    "sourceSha256": "8c6616da95480f339028ca37e23f2eda7e83621c93899526016a4445358a7a0f",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "199",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "c279cea60c693556250f19b1b762b3968920b2645926d537de0f72438bc849e6",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5867a60c42a3c68bd36d3c642542fc2c08383ebc46e3895505cb4dcec3d2d35",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7c6fda523af2755a2ca34b20bc28f4a0e50f42236ff4e2a208a7270193c248e5",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1af166da5173a7d36955d6257240124d5b40dba0ecdf0ff1eee5bb0ae155a297",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "15dfb9950b90513197e29a054ff32669ce11baae9d8ba66c1e33a0821b06fa26",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e29f341d2f178081dd8fd04814a2a62ec4367a5d84f9da6ef7ae3c60e6fb18a2",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "ee052d4662e6ab2135851c544745df56851542545316da02488a292b4e24eeb1",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9d2b149e50eb2773431cfa6d2e2ff2d12959b06f7b1bf399469dfb6822a384f5",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7bfcf7ab8b9558db58ad1ab7f8307360b716517d97d303bcd8fc59853b13311b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7ee4b687669f222281600978c5ef47f0f72696152af1cc5a6b9b0e786e2f5d08",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "3ac2c681084cd680a3bcb8046598d8fa4d326d2b386d42ab19665de245e39db7",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-209865a377f99ab26ebcd7c796e6751ae3b2345b2ec19fe3a0a672aac879537e",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "8a866420fe71dce483786897779e321584e9bf514b4b0f0b2676343d4389fc89",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-118d0cea5425a2b6744fffa7b0c4f16c195e6edd188d4dbbda025cdd6a96e8ac",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "53dd1625203f7f5f60d81a8b39cf5f8ae5eb11732ea6dc55ec5230f3e88c931f",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-098e02c4fcf23157c1c578ce2b5daac3942a1a033d196d58b4d2fb36bbb1af73",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "fffa397f027ebd31652710b648118b0a7df8ae8d0d2a9bc4c7710077e883846b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d509fd4b1de7f2507b1d5aa6a1c702122ea22af50c94a0f3ce7d03de741c907b",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "199",
+    "findingId": "F03-PMD2-be2e5656c0685f65b72ccb5a106aadbf424f40caf19d0f6416a2177b6396f2e8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c9776c9a7047308408a8ba51ec25576e7cba21b025dd15b916c9e6873afdd08e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class": "9ac54cd96800bd5162ab9caa52e8146c13a9d482c63e565bbc1f96bf17a0cd51"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1224,
+    "reason": "The best-effort projection boundary marks a previously emitted local request record FAILED with fixed code, never treats encrypted enqueue/commit failure as successful projection. Wire is wiped in finally. This applicability reason does not promote arbitrary nested fatal provider policy to accepted; YKT1323 remains open.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "271",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "c279cea60c693556250f19b1b762b3968920b2645926d537de0f72438bc849e6",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5867a60c42a3c68bd36d3c642542fc2c08383ebc46e3895505cb4dcec3d2d35",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7c6fda523af2755a2ca34b20bc28f4a0e50f42236ff4e2a208a7270193c248e5",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1af166da5173a7d36955d6257240124d5b40dba0ecdf0ff1eee5bb0ae155a297",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "15dfb9950b90513197e29a054ff32669ce11baae9d8ba66c1e33a0821b06fa26",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e29f341d2f178081dd8fd04814a2a62ec4367a5d84f9da6ef7ae3c60e6fb18a2",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "ee052d4662e6ab2135851c544745df56851542545316da02488a292b4e24eeb1",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9d2b149e50eb2773431cfa6d2e2ff2d12959b06f7b1bf399469dfb6822a384f5",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7bfcf7ab8b9558db58ad1ab7f8307360b716517d97d303bcd8fc59853b13311b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7ee4b687669f222281600978c5ef47f0f72696152af1cc5a6b9b0e786e2f5d08",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "3ac2c681084cd680a3bcb8046598d8fa4d326d2b386d42ab19665de245e39db7",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-209865a377f99ab26ebcd7c796e6751ae3b2345b2ec19fe3a0a672aac879537e",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "8a866420fe71dce483786897779e321584e9bf514b4b0f0b2676343d4389fc89",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-118d0cea5425a2b6744fffa7b0c4f16c195e6edd188d4dbbda025cdd6a96e8ac",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "53dd1625203f7f5f60d81a8b39cf5f8ae5eb11732ea6dc55ec5230f3e88c931f",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-098e02c4fcf23157c1c578ce2b5daac3942a1a033d196d58b4d2fb36bbb1af73",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "fffa397f027ebd31652710b648118b0a7df8ae8d0d2a9bc4c7710077e883846b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d509fd4b1de7f2507b1d5aa6a1c702122ea22af50c94a0f3ce7d03de741c907b",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "271",
+    "findingId": "F03-PMD2-25ab9a4db1b9380908a6026d52c8986501a343b9354aa6c6f1b19a80a4272a7d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-bcd90379e6d16b5939fd230ac2ad8bdd2c09ffed61e7edad3ae78ae74b7171a4",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class": "9ac54cd96800bd5162ab9caa52e8146c13a9d482c63e565bbc1f96bf17a0cd51"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1228,
+    "reason": "Both RTE/Error transaction-body spans attempt rollback and still close the owned connection before propagation. Direct Error is not consumed by the outer SQL/RTE projection catch. Null constructor/trace contracts are checked outside that best-effort scope.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "271",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "c279cea60c693556250f19b1b762b3968920b2645926d537de0f72438bc849e6",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5867a60c42a3c68bd36d3c642542fc2c08383ebc46e3895505cb4dcec3d2d35",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7c6fda523af2755a2ca34b20bc28f4a0e50f42236ff4e2a208a7270193c248e5",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1af166da5173a7d36955d6257240124d5b40dba0ecdf0ff1eee5bb0ae155a297",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "15dfb9950b90513197e29a054ff32669ce11baae9d8ba66c1e33a0821b06fa26",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e29f341d2f178081dd8fd04814a2a62ec4367a5d84f9da6ef7ae3c60e6fb18a2",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "ee052d4662e6ab2135851c544745df56851542545316da02488a292b4e24eeb1",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9d2b149e50eb2773431cfa6d2e2ff2d12959b06f7b1bf399469dfb6822a384f5",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7bfcf7ab8b9558db58ad1ab7f8307360b716517d97d303bcd8fc59853b13311b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7ee4b687669f222281600978c5ef47f0f72696152af1cc5a6b9b0e786e2f5d08",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "3ac2c681084cd680a3bcb8046598d8fa4d326d2b386d42ab19665de245e39db7",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-209865a377f99ab26ebcd7c796e6751ae3b2345b2ec19fe3a0a672aac879537e",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "8a866420fe71dce483786897779e321584e9bf514b4b0f0b2676343d4389fc89",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-118d0cea5425a2b6744fffa7b0c4f16c195e6edd188d4dbbda025cdd6a96e8ac",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "53dd1625203f7f5f60d81a8b39cf5f8ae5eb11732ea6dc55ec5230f3e88c931f",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-098e02c4fcf23157c1c578ce2b5daac3942a1a033d196d58b4d2fb36bbb1af73",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "fffa397f027ebd31652710b648118b0a7df8ae8d0d2a9bc4c7710077e883846b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d509fd4b1de7f2507b1d5aa6a1c702122ea22af50c94a0f3ce7d03de741c907b",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "271",
+    "findingId": "F03-PMD2-bc4866ecd04e8b5c8866a9edbc717ecdaac6b07e5aea4541f45bd921c130cdc9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-bcd90379e6d16b5939fd230ac2ad8bdd2c09ffed61e7edad3ae78ae74b7171a4",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class": "9ac54cd96800bd5162ab9caa52e8146c13a9d482c63e565bbc1f96bf17a0cd51"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1229,
+    "reason": "Both RTE/Error transaction-body spans attempt rollback and still close the owned connection before propagation. Direct Error is not consumed by the outer SQL/RTE projection catch. Null constructor/trace contracts are checked outside that best-effort scope.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "274",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "c279cea60c693556250f19b1b762b3968920b2645926d537de0f72438bc849e6",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5867a60c42a3c68bd36d3c642542fc2c08383ebc46e3895505cb4dcec3d2d35",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7c6fda523af2755a2ca34b20bc28f4a0e50f42236ff4e2a208a7270193c248e5",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1af166da5173a7d36955d6257240124d5b40dba0ecdf0ff1eee5bb0ae155a297",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "15dfb9950b90513197e29a054ff32669ce11baae9d8ba66c1e33a0821b06fa26",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e29f341d2f178081dd8fd04814a2a62ec4367a5d84f9da6ef7ae3c60e6fb18a2",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "ee052d4662e6ab2135851c544745df56851542545316da02488a292b4e24eeb1",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9d2b149e50eb2773431cfa6d2e2ff2d12959b06f7b1bf399469dfb6822a384f5",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7bfcf7ab8b9558db58ad1ab7f8307360b716517d97d303bcd8fc59853b13311b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7ee4b687669f222281600978c5ef47f0f72696152af1cc5a6b9b0e786e2f5d08",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "3ac2c681084cd680a3bcb8046598d8fa4d326d2b386d42ab19665de245e39db7",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-209865a377f99ab26ebcd7c796e6751ae3b2345b2ec19fe3a0a672aac879537e",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "8a866420fe71dce483786897779e321584e9bf514b4b0f0b2676343d4389fc89",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-118d0cea5425a2b6744fffa7b0c4f16c195e6edd188d4dbbda025cdd6a96e8ac",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "53dd1625203f7f5f60d81a8b39cf5f8ae5eb11732ea6dc55ec5230f3e88c931f",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-098e02c4fcf23157c1c578ce2b5daac3942a1a033d196d58b4d2fb36bbb1af73",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "fffa397f027ebd31652710b648118b0a7df8ae8d0d2a9bc4c7710077e883846b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d509fd4b1de7f2507b1d5aa6a1c702122ea22af50c94a0f3ce7d03de741c907b",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "274",
+    "findingId": "F03-PMD2-1dc3328e3ddac4b6937bd8527820e833886e9cbadd763f605cf0485f58c9e9ef",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0a7cd780e59434de4550f975cbb904f3de15672ff7070752dd8d3304f8840185",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class": "9ac54cd96800bd5162ab9caa52e8146c13a9d482c63e565bbc1f96bf17a0cd51"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1230,
+    "reason": "Rollback RTE becomes a distinct suppressed secondary on the body primary, guarded against self-suppression. It is not a successful enqueue or release of an unconfirmed transaction; the original proceeds through TWR cleanup.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "276",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "c279cea60c693556250f19b1b762b3968920b2645926d537de0f72438bc849e6",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5867a60c42a3c68bd36d3c642542fc2c08383ebc46e3895505cb4dcec3d2d35",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7c6fda523af2755a2ca34b20bc28f4a0e50f42236ff4e2a208a7270193c248e5",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-1af166da5173a7d36955d6257240124d5b40dba0ecdf0ff1eee5bb0ae155a297",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "15dfb9950b90513197e29a054ff32669ce11baae9d8ba66c1e33a0821b06fa26",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e29f341d2f178081dd8fd04814a2a62ec4367a5d84f9da6ef7ae3c60e6fb18a2",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "ee052d4662e6ab2135851c544745df56851542545316da02488a292b4e24eeb1",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-9d2b149e50eb2773431cfa6d2e2ff2d12959b06f7b1bf399469dfb6822a384f5",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "7bfcf7ab8b9558db58ad1ab7f8307360b716517d97d303bcd8fc59853b13311b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7ee4b687669f222281600978c5ef47f0f72696152af1cc5a6b9b0e786e2f5d08",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "3ac2c681084cd680a3bcb8046598d8fa4d326d2b386d42ab19665de245e39db7",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-209865a377f99ab26ebcd7c796e6751ae3b2345b2ec19fe3a0a672aac879537e",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "8a866420fe71dce483786897779e321584e9bf514b4b0f0b2676343d4389fc89",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-118d0cea5425a2b6744fffa7b0c4f16c195e6edd188d4dbbda025cdd6a96e8ac",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "53dd1625203f7f5f60d81a8b39cf5f8ae5eb11732ea6dc55ec5230f3e88c931f",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-098e02c4fcf23157c1c578ce2b5daac3942a1a033d196d58b4d2fb36bbb1af73",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      },
+      {
+        "caseNameSha256": "fffa397f027ebd31652710b648118b0a7df8ae8d0d2a9bc4c7710077e883846b",
+        "class": "dev.codex.schubert.nk.web.logging.WebRequestLogProducerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d509fd4b1de7f2507b1d5aa6a1c702122ea22af50c94a0f3ce7d03de741c907b",
+        "xmlSha256": "1ca99832365b1b64ae36294d185e1d646f001de99e3fb51023b675ad95d1bea7"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "23",
+    "endline": "276",
+    "findingId": "F03-PMD2-97603fb6b5c7bb50093d3bc454d97ecabb8216a9a0099288c983a183ecd9b4e0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d1d2e9095b353952a2510d8297e3d8c4b8d665e90da269fe2b0a350cb10e2d0",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class": "9ac54cd96800bd5162ab9caa52e8146c13a9d482c63e565bbc1f96bf17a0cd51"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1232,
+    "reason": "Rollback Error is rethrown as the same fatal object, with original failure attached only when identity differs; owned connection still closes through TWR. This does not claim a real rollback or physical resource release from source inspection.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+    "sourceSha256": "0adcda9425034b0b15c224170571e6540b73f5bc01394c466920e487e4605ca3",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "44",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "cacfe3e9a70e207511e76ea8f143aa628a8307571e9f2dbe654b091c19fcb339",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-93a724a63b7667f7102aa394aeb24469943ed4888dd707b1a5ffbae2323ff8fe",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "2abf1afe2b421aa38f8be04fcd55c8ba02d65c33d04e2e5d1443fdd0677a33e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e5f1a992c64c67d6a7c999425c787ed402d1523d917d8d30c13c8202e0ce4514",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "651edb0dd8df894173c769b356bdc37abe92e4cf41cd1434d0e279c8f8fb92a8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-314ba3f99872df43d447d341f74f9d2fc98e7c588b3a60ecca0ab9b1757cc74c",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "ff7a064427b2322104d2671db2c058d9f9c334a4ce6928dcb2a332bad840c1ae",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-df2a0b953d14977ed298be220be880d65e0900aea4efb689b3f3c0c8155a538d",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "3143a6b77aa8fa14272d7814cb4ed73093294f51a378a537f234fedad8e49b7d",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-db0367a4f730ec46a593d18333cd68e2096688a9ed29824f2fa639281b513866",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "fa3380aff663e735525921ee46018f01a2894cfde69dd1fed8861c74dae6d4f9",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-642f39cf2e1effd6111e85cbe6f539fdca086c0f43fb90bb1dacceddd29f4237",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "f76e5db8f4b9236cdd8080ebc1cc8eae7701adedb11b37a7a9121433bbf663d1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d535951f825adc1b185aba5d869d56f0569f25ede60186d463848e7abcc08969",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "44",
+    "findingId": "F03-PMD2-67c91461bffe34e377ed439587cb9317a5e2e188b52f40889e3c1077862b78ee",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-34a9ab0fbf503d77100813f9692ad1a997a29c5eb442b494363b0d9c0333008e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.class": "4254cd4088319af6d19eba3bb850c2ad74af3a1aa657ae4af64bf6bdf28fcbfa"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1241,
+    "reason": "Receive/decode/correlate/commit JMS/RTE failure calls rollback on the caller-borrowed transacted context and rethrows. A returned waiter completion requires actual commit; this consumer neither opens nor closes that shared context.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "d548ab212a5d4b81cec195d098e433471f7cff889de95b75b65ff7cd37048f09",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "55",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "cacfe3e9a70e207511e76ea8f143aa628a8307571e9f2dbe654b091c19fcb339",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-93a724a63b7667f7102aa394aeb24469943ed4888dd707b1a5ffbae2323ff8fe",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "2abf1afe2b421aa38f8be04fcd55c8ba02d65c33d04e2e5d1443fdd0677a33e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e5f1a992c64c67d6a7c999425c787ed402d1523d917d8d30c13c8202e0ce4514",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "651edb0dd8df894173c769b356bdc37abe92e4cf41cd1434d0e279c8f8fb92a8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-314ba3f99872df43d447d341f74f9d2fc98e7c588b3a60ecca0ab9b1757cc74c",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "ff7a064427b2322104d2671db2c058d9f9c334a4ce6928dcb2a332bad840c1ae",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-df2a0b953d14977ed298be220be880d65e0900aea4efb689b3f3c0c8155a538d",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "3143a6b77aa8fa14272d7814cb4ed73093294f51a378a537f234fedad8e49b7d",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-db0367a4f730ec46a593d18333cd68e2096688a9ed29824f2fa639281b513866",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "fa3380aff663e735525921ee46018f01a2894cfde69dd1fed8861c74dae6d4f9",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-642f39cf2e1effd6111e85cbe6f539fdca086c0f43fb90bb1dacceddd29f4237",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "f76e5db8f4b9236cdd8080ebc1cc8eae7701adedb11b37a7a9121433bbf663d1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d535951f825adc1b185aba5d869d56f0569f25ede60186d463848e7abcc08969",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "55",
+    "findingId": "F03-PMD2-135521cd99be0b601af557b65d619f90ac0e48c163ac50450fd1d9726a6fd566",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cea155aeae1d613f98a7130a367d8b77ee1fc0d008dd775afcd87357b088259b",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.class": "4254cd4088319af6d19eba3bb850c2ad74af3a1aa657ae4af64bf6bdf28fcbfa"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1242,
+    "reason": "DLQ-isolation JMS/RTE failure retains distinct protocol primary and attempts rollback. Failed rollback becomes FailedJmsIsolationException, not CommittedFatalReplyException/ACK. Actual DLQ send is not issued in this review.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "d548ab212a5d4b81cec195d098e433471f7cff889de95b75b65ff7cd37048f09",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "71",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "cacfe3e9a70e207511e76ea8f143aa628a8307571e9f2dbe654b091c19fcb339",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-93a724a63b7667f7102aa394aeb24469943ed4888dd707b1a5ffbae2323ff8fe",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "2abf1afe2b421aa38f8be04fcd55c8ba02d65c33d04e2e5d1443fdd0677a33e1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-e5f1a992c64c67d6a7c999425c787ed402d1523d917d8d30c13c8202e0ce4514",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "651edb0dd8df894173c769b356bdc37abe92e4cf41cd1434d0e279c8f8fb92a8",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-314ba3f99872df43d447d341f74f9d2fc98e7c588b3a60ecca0ab9b1757cc74c",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "ff7a064427b2322104d2671db2c058d9f9c334a4ce6928dcb2a332bad840c1ae",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-df2a0b953d14977ed298be220be880d65e0900aea4efb689b3f3c0c8155a538d",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "3143a6b77aa8fa14272d7814cb4ed73093294f51a378a537f234fedad8e49b7d",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-db0367a4f730ec46a593d18333cd68e2096688a9ed29824f2fa639281b513866",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "fa3380aff663e735525921ee46018f01a2894cfde69dd1fed8861c74dae6d4f9",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-642f39cf2e1effd6111e85cbe6f539fdca086c0f43fb90bb1dacceddd29f4237",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      },
+      {
+        "caseNameSha256": "f76e5db8f4b9236cdd8080ebc1cc8eae7701adedb11b37a7a9121433bbf663d1",
+        "class": "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumerTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d535951f825adc1b185aba5d869d56f0569f25ede60186d463848e7abcc08969",
+        "xmlSha256": "940a99b05213ce4ef61e4327705f356189ea34c6c8483bb865809b899f39cc19"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "71",
+    "findingId": "F03-PMD2-a261cadf004476ab37934bdf6d74233b6f3a174d689bcc3452ca7cc267767c46",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e15c51c9f5f6daa89b75d65f1e753527f30aeba3b4e2ff028508d724a9eb73dc",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.class": "4254cd4088319af6d19eba3bb850c2ad74af3a1aa657ae4af64bf6bdf28fcbfa"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1244,
+    "reason": "Rollback RTE retains distinct secondary and throws UnconfirmedJmsRollbackException; self-suppression is guarded. The caller cannot infer confirmed rollback or commit, and remains owner of its context.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+    "sourceSha256": "d548ab212a5d4b81cec195d098e433471f7cff889de95b75b65ff7cd37048f09",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "35",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "48ebae7a5dc0f716ee260e36b5a3de02bfd2c611513b504f4f054b09720bdd2f",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-2b0cd0192e846e21cb86879db4988b7e18062f1bd511f09614687694b0eeeba9",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "da8de3ae4f2f169f1edf4c57601ee715b1b690022d1dd8cb406de3fda248f3d5",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-33d4519c70e90effd6e2a8ee83e8490dd16afb062b410c88573522c84a2f6fa1",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "7baa15d5469428ef13822d89092f4180d37c54f1105ab29a3a67de452e7bc8ed",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-b4a4e5c515b3e0c336a3a2486f878b9bd28b90ddeec1c610d651569a101229b7",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "49cf805cee7339b12e9aeb4b4a291fffff444752c0a47b61d01dcc5c06cd852f",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-4aa09511cd135db650d8f0c87a4928f94a6ff4319012d76b5ddc8c3411a2eafb",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "982744c7327ea4e7a1de12fb6b9101428d9a57c22c9eceff8961bfb811301f76",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-244e8d8b41f86a3ff28a55f8022c8c1a6af40ac4e59573e5398acc818d21c4f0",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "7a78c6a87729d707f25711e888fb77d4628ed4f343702e21b0b16cef83c21374",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-00353ebb09a5266978741abab5453b66dcb05d0383d8d6d878daaf291e557392",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "097bc3a51edde5afa17ffded743746b5c7d70eea9485fd9a38a672184551ba85",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f5feea755caa6acdfb9f430f6acae0aab439f9a2468dfbb4d17d25b800958f96",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "118dc8245231a24102ce613722a0398255b9938d9462262b921ee42b1cd8a66b",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-c5eca4c596f0d226a997d25ffe2599f9202fe32c508dd119f7008edc2fbdd1f2",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "e699b1038eb1500f584b38c1e0e22cac12d5cd72b67fc4c849a66a8e18cb31f8",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-359570eaa4ad68e0de3f564b38ff098cb458476a0c9e2f42ebb5b2eba071bfd2",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      },
+      {
+        "caseNameSha256": "2ffc6557186abd0aa9b40424031c6a5ae9f6717eb4046ee74382c255d38ea872",
+        "class": "dev.codex.schubert.nk.web.session.ErrorMvcTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-6a954992bae91e52000c7207ee83cf77f0197967905772b145ece0ae38896e08",
+        "xmlSha256": "4caa96dbe572af177afa85804d3ea1a834eba0bbea991decc1c63ae2c29e8e4f"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "35",
+    "findingId": "F03-PMD2-f357b4fcfd78d560dc86fef28b17c518bf26ef5ecec7b3c677372feee668f74b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-64fb04b616a9acc057b3b1a9d706473cf3db9a9d6dfaf9098df42ef0f11a09e7",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.class": "31e41cb8710a61626aaa22397f4deba9fd733336fa9b25a2c7a72b11eff64f2b"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1335,
+    "reason": "Error-filter init Servlet/RTE failure attempts errors.destroy and always business.destroy in finally, then fails rather than accepting initialized routing. Cleanup failure may replace init failure but is never successful init. Internal ERROR routing remains separate from business authorization, and thread security context always clears in doFilter.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
+    "sourceSha256": "f10da434b1a7ec9ba2e96f8e5106e174ca8dfae5ba64f484ae6b282d15700660",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "60",
+    "currentWholeCaseRefs": [
+      {
+        "caseNameSha256": "82683193d229f1a38bbd2fc2526013126c4d4c816b2b061a4c2d13d73a5b6012",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8e582a539947a06e6b6c91da7d62284bc9785ec58d0002e450a52066a2e8473e",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "0483fb67ff9e7af7615587c48603564036818b216f0a1e3b22b50b990f9a9e4e",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-357ad907a2564b661ecff3d97af637e8f0967148d9ef5ffe512f28b5b13f63f7",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "e61aaa72132296374cba0f180110731bf755a462e080865936039fbe643e90a7",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-67e7946d3f3412b40c9a79629134b93737c2198a504d13529bfbd659dc698edb",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "3e6849bbdb80e28c3ce6c423ef0a92a14724d1fe8bd57ea2e3b2ba44d768a908",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-cbe27fa33a61408efb9f6d599237d80beeb9cf4d14d989437738d67dd2b40878",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "7e3c216e5abfab06aa6255dd024aad580682e0a2d1c81a9c327f2b4d8fb6bf21",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-78ba42f1a85781c1573f941b1113a3388ff11c0fe0382e9f4dfd38e4d4931899",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "5eebdef6b8a45c78575f346c376c391bac44608465c40929727c132dbc1a2ace",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f082eda93d8916fce39398ebd59503c9005eb06d276e09c7d7c94be5482929cd",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "97a825d16805fb615ec77a5f3cd18e621b11044a6875b7d6878f0fd5db032eb6",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-8b6c665541ec85d659dd1101ecf618ec0cbd9738f3471264e5a36fd0f2184584",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "21c68455d57a6bf7e0f807b7a354beb727b89609bef2bfbcc1a8c7184c45f808",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-22fc1257aa996d3e40d734ac184d193231377a0ba1fbc8ed40437b0c459e2154",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "56259cdc9461833ea15b297b833ccb18f6fba20dbeec87f7d2caf4ce905723f9",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-7c9043a2bf78f551445594a3d41f047d355d49d1b5420f7acc65d5af16cca1fb",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "5a189731cc5b22bce2a281ae5abd083e0de6ed5900c2b92c67644463ffc005b7",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-d71823158ce1b7a0914239c9add76b01d595f5db74a1a87a7ae713093df88326",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "b5ab4b64b9246a96d2e2c7fcc65e28498dddd8d936272436dcc693babcdb61b4",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-f0abf47dbfd573341037f273d6bd5d1c0aa996f02e04534d686fb6f02730480b",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      },
+      {
+        "caseNameSha256": "529bbaf0299cffc8975d8fa9d424cd5517e0c9bbe29fc3e3beaefe9474a8936d",
+        "class": "dev.codex.schubert.nk.web.logging.JdbcWebSessionStoreTest",
+        "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+        "testId": "PT-WHOLE-03172cac36d7a240aac0c0092b4dcc0d639ae0afdfc740ba2d52be3bdfd15c53",
+        "xmlSha256": "e40dfea70971801084db009fa1a1d744c809e167dfd6b4e062ce1f2b3f135ba5"
+      }
+    ],
+    "currentWholeJoinPending": false,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "60",
+    "findingId": "F03-PMD2-44427e7bd7a028b9322f47ae38474dd3d5f6b94b8c06d779cae768cded1d5c43",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6d7e4bd26b41cdffac346f290cb65e9c4fd662f99d63c5a6708494601e273754",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore$InvalidStoredRow.class": "d7a122c885959cbaf079a308c490c52652863a6d1c7798bb35a3867021b8f703",
+      "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class": "f0b5e4a60079168b8972d4aa4567c9a1eaf241ae01bfff52d2555e97a75ddd82"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1354,
+    "reason": "SQL/RTE findLocked failure preserves fatal cause/suppressed identity graph then emits only fixed SessionStoreException. A malformed row becomes deletable InvalidSessionRowException only after both owned JDBC resources close cleanly; the connection/transaction stays borrowed. Provider-linked graphs outside this helper contract are not globally certified.",
+    "reviewScope": "SOURCE_APPLICABILITY_WITH_ASSOCIATED_CASES_NOT_EVERY_BRANCH_OR_REAL_RUNTIME",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+    "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c",
+    "status": "REQUIRED_CONTRACT"
+  }
+]
