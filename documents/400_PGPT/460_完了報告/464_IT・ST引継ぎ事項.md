@@ -1,5 +1,7 @@
 # IT・ST引継ぎ事項
 
+2026-10-22追記：SSC333/334/1470 ordinary consumer/broker/parentの終端graph・close順/成功phase・copy wipeは当source限定host127で確認。実UNKNOWN非帰還を解除・実close成功へ変換する変更はない。実native/CHR・global四100・正式と1471全体は当時未受入で、PG/PT残件を後続IT/STへ転嫁しない。署名済み・配備済み・旧boot/native成功を新sourceの所有/資格に読み替えず、実操作のHOLDは478 Dに従う。IT/ST合格宣言0。
+
 ## 2026-10-09 当source普通親の実測引継ぎ（PG/PT限定・IT/ST未実施）
 
 現正式はPT-WEB-20260925-24/1964PT/53scopeのまま。新candidate1ec19782a/PG715/schema028はhost3502PT517suite/static6zero、当ordinary55ac sameRootAPI-Web-Caddy/実CurrentA01/真正PID1-RootDONE/ownedstop/全24資源0/八nativeを限定検証済みだが、全四coverage100/全CHR/正式工程は未完了。下段9/20以前の正式・割合は履歴で現在率に使わない。

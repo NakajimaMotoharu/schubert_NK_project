@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-22更新：[1468](../../evidence/01_PT/018_NK-OPS-001/1468_ConsumerCleanup333_原83結果・横展開継続.md)のSSC333原83と[1470](../../evidence/01_PT/018_NK-OPS-001/1470_BrokerParent334_原反例・実装・再試験.md)のSSC334原127/33・六SpotBugs0を限定確認。元source d48f8ebf8/資格9c92e0bf、必要[1471全体4184仕様](../../evidence/01_PT/018_NK-OPS-001/1471_BrokerCleanup全体4184_独立原資格仕様.md)を開始し同元観測中、全体合格・global四100・native/CHR/正式は未更新。1607/1608・1360/1361はfixture/lock scopeのみ完了、1604/1606等は当source全体/品質前OPEN。最新456/460が実行状態の正、拒否未特定の実操作HOLD/代替完了0・個別17/190/工数null/QA051final/正式1964-53を維持。
+
 2026-10-20更新：[1222](../../evidence/01_PT/018_NK-OPS-001/1222_protocol表現是正_実行結果.md)でsource862のcodec八表現PG/105PT・六target/全protocol module実四counter100・無除外PMD八是正を限定確認、1498/1258当scopeclose。現raw1586/pending根拠482/未review1104、同source global全体/native/CHR/正式は未受入。次は独立F03/storage九指摘の判定・必要PG/PTへ進む。最新456/460を正とし、原見積/工数null/正式1964-53・17-190は更新しない。
 
 2026-10-20 12:37更新：[1221](../../evidence/01_PT/018_NK-OPS-001/1221_恒久隔離是正_全3967実行結果.md)でsource6b5/元PG5832の真正0・3967/590/1666/独立資格・八core四counter100・現482根拠接続を確認した。BUG1494の受信policy限定scopeはclose、次のcodec八指摘1498は[1220](../../evidence/01_PT/018_NK-OPS-001/1220_protocol表現是正_単体テスト仕様書.md)に沿って実PGへ進む。未review1112/raw1594・global/native/CHR/正式/QA051final/工数nullは別未完。下記の観測中表記は当時の履歴で最新456/460を優先する。
