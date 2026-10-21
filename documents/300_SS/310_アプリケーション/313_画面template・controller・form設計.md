@@ -1,5 +1,9 @@
 # 画面template・controller・form設計
 
+## SSC324 Web startup cleanupの依存owner保持
+
+BUG1574/YKT1329：WebLogApplicationRuntimeが取得済みのReplay/repliesをstartup失敗後に閉じる順序はReplay→repliesとし、最初のcloseがchecked/RTE/Errorで未確認なら後続close/再close/正常return/外側unwindを禁止する。固定UNKNOWN retention policyは資源取得より前のclass初期化で準備する。cleanup開始後にarray/保持callbackを新規割当せず、元startup failure・失敗した資源・後続ownerをreachability fence付き同じ呼出frameへ保持する。固定秘匿診断だけ、割込は解放証明ではない。既正常startup/checked failure/通常closeの確認後retry・業務/HTTP/wire/SS352契約は不変更。factoryが返却する前の部分取得や他runtimeのUNKNOWNは別個に照合し、本scope成功から推測しない。
+
 ## SSC312 HTTP資源factoryの取得前owner準備（2026-10-21、内部詳細補足）
 
 API/Web管理HTTPは、入力・固定loopback住所/port/backlog32を検証し、owner・全flag/lock・未開始executor（core/max1、queue32、daemon名は既定）・応答情報を先に準備してからHttpServer factoryを一度だけ呼ぶ。取得成功後は追加の未保護allocationを挟まずfinal serverへ格納してownerを返す。取得例外/nullは成功へ変換せず、未取得serverをcloseしない。factory内部で取得後に失敗した資源はfactoryの責務であり、callerが未返却資源を推定回収しない。WebHttpServerも未refreshのMVC context・private final lifecycleLock・ownerを先に準備してからTomcat supplierを一度取得しfinal格納、既startWithOwnerの捕捉callbackとvendor設定/startは既存try内を維持する。未refresh MVCはclose義務のある開始済資源として扱わない。

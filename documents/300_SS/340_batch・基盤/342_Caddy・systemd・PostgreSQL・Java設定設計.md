@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC324（BUG1574/YKT1329）：SS313の既取得Web startup owner cleanupがUNKNOWNなら、元startup/後続ownerを保持した同frameで既固定ServiceProcessResources retentionへ入り、Root/native停止や解放完了へ読み替えない。取得前policy準備/無新規保持callback/到達性fenceを要求する。既Unitの期限・元親budget・停止/隔離・borrowed資源は不変更、同scopeのdummy child JVM終端は実Web/Root/native後条件の証明ではない。実環境の安全HOLDを解除しない。
+
 ## SSC319 ordinary受信のrollback資格
 
 rollbackの試行前attemptedと正常後confirmedを別同期port/stateとし、同配送にresetする。既rollbackのErrorをdirect-processing Errorと誤認して二回目のbest-effort rollbackを発行しない。元Error identity、既一回のdirect Error rollback、native UNKNOWN/親Unit期限は維持、外部運用操作は増やさない。
