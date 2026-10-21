@@ -106,6 +106,7 @@ public final class AuthenticationService {
         | IllegalArgumentException
         | IllegalStateException
         | AuthContextCryptoException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       // No provider, credential, SQL parameter or encoding contents cross the application boundary.
       throw new AuthenticationInfrastructureException();
     } finally {

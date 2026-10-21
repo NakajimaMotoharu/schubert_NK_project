@@ -111,6 +111,7 @@ public final class LoginAttemptRepository {
         }
       }
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     }
   }
@@ -159,6 +160,7 @@ public final class LoginAttemptRepository {
           throw new SQLException("login IP update count differs", "40001");
       }
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     }
   }

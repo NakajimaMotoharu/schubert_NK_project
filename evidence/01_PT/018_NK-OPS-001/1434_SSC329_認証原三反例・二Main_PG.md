@@ -1,0 +1,7 @@
+# SSC329 authentication original three counterexamples / two Main PG
+
+元6556/16612はsource2730527208b7737e3d490f9d3ddddceaec1171a5、2026-10-21T15:27:21.056016Z～15:29:13.623337Z、archiveb49faa6dfc5931d810de2922a3c5c023c73248d412f4d27153af675aaa0fc53a、真正1/phase0,0,1/9tests/5suites/F3/E/S/flaky0。後段6not-runをPASSへ加点0。原read-red終了0/f66891eb7102dfe6f1617f537b6ca733bfd3f6afe7e2ca1588e5c9fc27146a2aで、1433の予定三method・Expected AssertionError/actual AuthenticationInfrastructureExceptionを一致確認した。
+
+二MainだけPG：LoginAttemptRepository lock/record二catch、AuthenticationService critical auditを含む既catchに既AuthenticationInfrastructureException.preserveFatalを三呼出追加する。328のsuppressed→cause→SQLnext、root直接Error優先、visited/固定診断をそのまま使い、SQL/認証結果/役割/session上限/backoff/borrowed所有・input wipeを変更しない。PG-D486/BUG1592/YKT1345/SSC329/SS312314324332354、WBS-P007-01を当class主担当として群1625共通費へ二重加算しない。
+
+TestSHA09b0e9f16f25f37aee9f044f009bb91288ed05e473eab1c5612395ea3188e642固定。green15/8で3mode×lock/record両outcome/audit、statement/result/Connection counter、password char配列wipeを確認し、原6560の8511667/Jar/XML/当staticと結合する。redは各最初の反例後のmode未到達であり、greenへ旧結果を移植しない。新green/資格/既domain/全113/当全体/四100/正式/nativeはまだ未実施又は未受入。
