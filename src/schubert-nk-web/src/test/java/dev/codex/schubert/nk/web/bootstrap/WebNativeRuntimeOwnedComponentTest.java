@@ -527,7 +527,8 @@ final class WebNativeRuntimeOwnedComponentTest {
               ? new StorageIdentity("schubert-api", "schubert-web")
               : new StorageIdentity("schubert-data", "schubert-read"),
           entry.getValue());
-      assertTrue(entry.getKey().atDirectory(Files::isDirectory));
+      boolean directory = entry.getKey().atDirectory(Files::isDirectory);
+      assertTrue(directory);
       return Boolean.TRUE;
     }
 
