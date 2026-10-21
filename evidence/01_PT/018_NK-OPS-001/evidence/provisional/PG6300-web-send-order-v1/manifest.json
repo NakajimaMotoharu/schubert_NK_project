@@ -1,0 +1,191 @@
+{
+  "actualExit": 0,
+  "additionalBuildsIssued": 0,
+  "formalAccepted": false,
+  "helpersExecutableEqual": true,
+  "newWipeOffsets": [
+    286,
+    311
+  ],
+  "oldWipeOffsets": [
+    294,
+    319
+  ],
+  "originalSelectedTests": 84,
+  "ownershipReviewed": true,
+  "privateHelperProofs": {
+    "logging.WebLogMessageSender": {
+      "actualIoCalls": 1,
+      "closeOffset": 1,
+      "exceptionRegions": [
+        [
+          0,
+          6,
+          9,
+          "Class java/lang/RuntimeException"
+        ],
+        [
+          0,
+          6,
+          9,
+          "Class java/lang/Error"
+        ]
+      ],
+      "otherMethodsUnchanged": [
+        "  private static void rollback(jakarta.jms.JMSContext, java.lang.Throwable);",
+        "  public dev.codex.schubert.nk.web.logging.WebLogMessageSender(dev.codex.schubert.nk.web.logging.WebLogPayloadCodec, dev.codex.schubert.nk.web.messaging.JmsContextFactory);",
+        "  static boolean duplicateConfirmed(java.lang.Throwable);"
+      ],
+      "publicAbiUnchanged": true
+    },
+    "messaging.ArtemisRequestSender": {
+      "actualIoCalls": 1,
+      "closeOffset": 1,
+      "exceptionRegions": [
+        [
+          0,
+          6,
+          9,
+          "Class java/lang/RuntimeException"
+        ],
+        [
+          0,
+          6,
+          9,
+          "Class java/lang/Error"
+        ]
+      ],
+      "otherMethodsUnchanged": [
+        "  private static void rollbackAfterFailure(jakarta.jms.JMSContext, java.lang.Throwable);",
+        "  public dev.codex.schubert.nk.web.messaging.ArtemisRequestSender(dev.codex.schubert.nk.web.messaging.JmsContextFactory);",
+        "  public void send(java.util.UUID, byte[]) throws jakarta.jms.JMSException;",
+        "  static {};"
+      ],
+      "publicAbiUnchanged": true
+    }
+  },
+  "productionClassesExecuted": 0,
+  "ptAlternativeCompleted": 0,
+  "qualificationSha256": "00b8f41991bf05c2aaf439cc502ecf6afba47f9247587684941ee168dbc75c27",
+  "residualRisks": [
+    "global/native/CHR/451/F03/trace pending",
+    "synthetic provider faults and static caller proof do not establish actual Unit/resource completion"
+  ],
+  "scope": "ORIGINAL_SOURCE_JVM_NOT_REAL_ROOT_NATIVE_OR_PT_ALTERNATIVE",
+  "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+  "testsExecuted": 0,
+  "unchangedCallerProofs": {
+    "logging.WebLogDispatcher": {
+      "actualRuntimeAuthorityProven": false,
+      "callOffset": 5,
+      "classSha256": "eb65b1258b803890b25930e81a2017a7b35446779c91208e135fff3b63d5829e",
+      "method": "  private java.util.Optional<java.lang.String> send(dev.codex.schubert.nk.web.logging.ClaimedWebLog);",
+      "typedAndFinallyRegions": [
+        [
+          0,
+          11,
+          12,
+          "Class dev/codex/schubert/nk/web/logging/WebLogPayloadException"
+        ],
+        [
+          0,
+          11,
+          19,
+          "Class dev/codex/schubert/nk/web/logging/WebLogSendException"
+        ]
+      ]
+    },
+    "logging.WebLogReplayWorker": {
+      "actualRuntimeAuthorityProven": false,
+      "callOffset": 15,
+      "classSha256": "a8165b78042014fa48e5f655d47c3b5b1932e2a572bce378db5d57ed2e504a22",
+      "method": "  private void run();",
+      "typedAndFinallyRegions": [
+        [
+          10,
+          39,
+          42,
+          "Class java/sql/SQLException"
+        ],
+        [
+          10,
+          39,
+          42,
+          "Class java/lang/RuntimeException"
+        ]
+      ]
+    },
+    "messaging.JmsRequestReplyClient": {
+      "actualRuntimeAuthorityProven": false,
+      "callOffset": 121,
+      "classSha256": "54a1aeff1136917d88193d462e572e6538fe372080ee3356d32145d66009d5e8",
+      "method": "  public byte[] exchange(java.util.UUID, byte[], java.time.Duration, dev.codex.schubert.nk.web.messaging.JmsRequestSender) throws jakarta.jms.JMSException;",
+      "typedAndFinallyRegions": [
+        [
+          111,
+          151,
+          170,
+          "Class java/util/concurrent/TimeoutException"
+        ],
+        [
+          111,
+          151,
+          194,
+          "Class java/lang/InterruptedException"
+        ],
+        [
+          111,
+          151,
+          222,
+          "Class java/util/concurrent/ExecutionException"
+        ],
+        [
+          111,
+          151,
+          238,
+          "any"
+        ],
+        [
+          53,
+          160,
+          252,
+          "any"
+        ]
+      ]
+    }
+  },
+  "unchangedWlgCoreCallSequence": [
+    "InterfaceMethod jakarta/jms/JMSContext.getSessionMode:()I",
+    "InterfaceMethod jakarta/jms/JMSContext.createBytesMessage:()Ljakarta/jms/BytesMessage;",
+    "InterfaceMethod jakarta/jms/BytesMessage.writeBytes:([B)V",
+    "InterfaceMethod jakarta/jms/BytesMessage.setJMSCorrelationID:(Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/BytesMessage.setStringProperty:(Ljava/lang/String;Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/JMSContext.createProducer:()Ljakarta/jms/JMSProducer;",
+    "InterfaceMethod jakarta/jms/JMSProducer.setDeliveryMode:(I)Ljakarta/jms/JMSProducer;",
+    "InterfaceMethod jakarta/jms/JMSProducer.setTimeToLive:(J)Ljakarta/jms/JMSProducer;",
+    "Method dev/codex/schubert/nk/protocol/transport/BrokerTopology.fullyQualifiedQueue:()Ljava/lang/String;",
+    "Method org/apache/activemq/artemis/jms/client/ActiveMQQueue.\"<init>\":(Ljava/lang/String;)V",
+    "InterfaceMethod jakarta/jms/JMSProducer.send:(Ljakarta/jms/Destination;Ljakarta/jms/Message;)Ljakarta/jms/JMSProducer;",
+    "Method rollback:(Ljakarta/jms/JMSContext;Ljava/lang/Throwable;)V",
+    "InterfaceMethod jakarta/jms/JMSContext.commit:()V",
+    "Method rollback:(Ljakarta/jms/JMSContext;Ljava/lang/Throwable;)V"
+  ],
+  "unchangedWlgLiterals": [
+    "row",
+    "JMS context",
+    "web log JMS context is not transacted",
+    "NKMessageID",
+    "NKLayoutID",
+    "WLGEVT01",
+    "NKProtocolVersion",
+    "001",
+    "_AMQ_DUPL_ID",
+    "web log JMS send was not confirmed",
+    "web log JMS commit was not confirmed",
+    "web log JMS lifecycle failed"
+  ],
+  "vmActions": 0
+}

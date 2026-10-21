@@ -10,17 +10,17 @@ class Original(unittest.TestCase):
         import pg6042_original3976_artifacts as reader
         expected={('PG6040',(3976,593,1667),23),('PG6060',(3979,594,1667),1),
             ('PG6088',(3985,595,1667),5),('PG6118',(3988,595,1667),4),
-            ('PG6196',(4024,605,1667),13),('PG6212',(4027,605,1667),7),('PG6244',(4034,606,1667),10),('PG6272',(4040,607,1667),2)}
+            ('PG6196',(4024,605,1667),13),('PG6212',(4027,605,1667),7),('PG6244',(4034,606,1667),10),('PG6272',(4040,607,1667),2),('PG6302',(4043,607,1667),2)}
         tree=ast.parse(inspect.getsource(reader.inspect_original));found=[]
         for node in ast.walk(tree):
             if isinstance(node,ast.Compare) and any(isinstance(op,ast.NotIn) for op in node.ops):
                 right=node.comparators[-1]
                 if isinstance(right,ast.Tuple):found.append(ast.literal_eval(right))
         self.assertIn(expected,[set(v) for v in found])
-        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272'),found)
+        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272','PG6302'),found)
         self.assertNotIn(('PG9999',(4027,605,1667),7),expected)
         # The transport boundary independently repeats the same finite export set.
-        self.assertIn("data.get('campaign') not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272')",inspect.getsource(reader.collect))
+        self.assertIn("data.get('campaign') not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302')",inspect.getsource(reader.collect))
 
     def test_three_actual_added_names_not_pass_arithmetic(self):
         rows=subject.new_case_identities(subject.original_source())
