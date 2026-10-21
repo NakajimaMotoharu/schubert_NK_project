@@ -1,5 +1,11 @@
 # ConsumerCleanup333 ordinary secondary保持 PT仕様（実装前）
 
+## 着手時固定（2026-10-22）
+
+先行4170/原75a039af・115SQL/JVM58/static/tracef49aafdeまで真正0で完了し、全当job終了を照合してMain/Test固定を解除した。新群ORDINARY_CONSUMER_CLEANUP_GRAPH/event1672は低.3/標準1/高3共有週次pp（未較正）を着手前固定、共通参照追加費0/原-v4・過去開始見積は不変更。Main f16f相当/全旧Testを保持し、API ConsumerCleanup333Test四method SHA adfb40da6654dc33c067906bf7653d82a03c662b9a1af662ecdf4764c1a52b1d、Web ReplyCleanup333Test二method SHA580db6d4c9c804c3f1281978bc80ae91ac3c93b01e4a4ebe4cd12a3b74ce2234を追加。formatter39127/管理三/pyflakes/diff-checkすべて0、動的PTは未実施。
+
+`python3 -B tools/quality/pg6680_consumer_cleanup_selected.py PHASE`、PYTHONPATH既三path。新onlyAPI赤6680/Web赤6682→read-api/read-webは既予定五failureの専用message（CONS333-kind startup secondary after all closes、CONS333-4 deferred fatal after four closes、CONS333-5 reply secondary after close）を元XML/phase0,0,1/真正1と完全照合する。fixture/preflightのassertは先に回数/順序/禁止操作0を検査し、別失敗を予定identity反例にしない。green6684=83/22、原6686は旧原77dc608c84の全Main mapを比較して必要四Main差/全8511667/原Jar/XML/actual counter/PMD rawを検査する。Web333005は四graphに加えてNoSupp primary＋直接close Errorの第五入力も含める。APIの旧direct Error controlsは同一/別cleanup objectとNoSupp＋直接close優先も明示する。ordinary same Runtime closeは別wrapperのcause cycleを作り得るが、自己抑制と混同せず既finite/catalog/causeを期待する。
+
 BUG1604/YKT1357、SSC333、NK-MSG-001/002、API SyncRequestConsumers/WebLogConsumers/QuestionWorkConsumersおよびWeb ArtemisReplyConsumersのstartup/close。RD MQ003～010/UI212213231、SS312321354（342参照）。主費WBS-P005-02、P005-03/P006-05/P012-01は同群共通参照で追加費0。新群開始前見積は着手eventで固定し、現PG6668全体群や当初/v4を減額・完成扱いしない。
 
 設計only dda2965e0/PR197→main0caf68c60c8dac43ecf2b29941deb12a4ff15850、二SS/914三fileだけ通常merge/remote確認済。実装/tools/evidence混入0、添付cap100一回失敗/迂回0。現PG6668/sourcef16fは実行中、元真正終端/原資格までMain/Testは変更しない。本書は次群の独立oracleであり、PT実施/PG完了を示さない。
