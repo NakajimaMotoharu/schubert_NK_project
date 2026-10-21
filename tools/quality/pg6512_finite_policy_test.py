@@ -19,7 +19,7 @@ class FinitePolicyDefinitionTest(unittest.TestCase):
         compile(raw, '<finite policy checked>', 'exec')
 
     def test_guard_rejects_extra_main_and_changed_gate(self):
-        selected.guard_source('HEAD')
+        selected.guard_source('a03b6153469f3478ed3b40d2c82e3f89c4d221ab')
         with patch.object(selected.subprocess, 'check_output', return_value='extra Main'):
             with self.assertRaises(ValueError):
                 selected.guard_source('HEAD')
