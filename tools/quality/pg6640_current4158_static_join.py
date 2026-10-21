@@ -49,6 +49,7 @@ RULE_REASONS={
  'CompareObjectsWithEquals':'Throwable reference identity is required for same-object/self-suppression and direct-fatal precedence; equals is not Throwable graph identity.',
  'DoNotThrowExceptionInFinally':'Owned resource close must run once and may report the approved selected failure; the explicit primary/secondary table prevents accidental masking. No normal result is fabricated.'}
 SUPPLEMENT={
+ 'QuestionQueryRepository':['api.application.question.QuestionQueryRepositoryTest','api.persistence.BorrowedJdbcFatal329Test'],
  'InboxCleanup':['api.maintenance.InboxCleanupNonAuthenticationTest','api.maintenance.AuthenticationInboxCleanupTest','api.maintenance.QuestionQueryInboxCleanupTest'],
  'JdbcSyncRequestProcessor':['api.dispatch.JdbcTransactionBoundary329Test','api.dispatch.JdbcTransactionFatal329Test','api.dispatch.JdbcRollbackAttachment330Test'],
  'TemporaryInfrastructureException':['api.error.TemporaryFailureGraph329Test','api.error.ApiStartupGraph330Test'],
@@ -99,7 +100,10 @@ def original_refs(value,cases,source):
     else:
         name=value['sourcePath'].rsplit('/',1)[1].removesuffix('.java')
         direct=value['sourcePath'].split('/src/main/java/')[1][:-5].replace('/','.')+'Test'
-        names={direct}|{'dev.codex.schubert.nk.'+s for s in SUPPLEMENT.get(name,[])}
+        required={'dev.codex.schubert.nk.'+s for s in SUPPLEMENT.get(name,[])}
+        if not required<={r['class'] for r in cases}:
+            raise ValueError('each explicitly declared component Test class needs original XML')
+        names={direct}|required
         refs=[current_reference(r) for r in cases if r['class'] in names]
     context=value.get('staticContextPremiseOnly') is True
     if not refs and not context:raise ValueError('no arbitrary empty current-case binding')
@@ -158,7 +162,8 @@ def main():
         currentWholeQualificationSha256=sha(qp),currentWholeCasesSha256=sha(qp.with_name('cases.json')),
         testsExecuted=0,pmdRawRemoved=0,checkstyleFindings=0,formalAccepted=False,F03Accepted=False,
         ptAlternativeCompleted=0,vmActions=0,newAcceptedLeaves=0,effortPercent=None,
-        readerAttempt=2,priorReaderFailure='BUG-1599/session43398/ValueError/no public artifact; no PT replay',
+        readerAttempt=3,priorReaderFailures=['BUG-1599/session43398/global ordinal ID mismatch/no public artifact',
+          'BUG-1600/session24984/missing cross-package refs/no public artifact'],
         operatorHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         operatorBranch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip(),
         toolSha256=sha(ROOT/'tools/quality/pg6640_current4158_static_join.py'),pythonVersion=sys.version.split()[0],

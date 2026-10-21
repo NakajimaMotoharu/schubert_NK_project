@@ -4,6 +4,16 @@ import pg6640_current4158_static_join as p
 
 
 class StaticOriginalBindingTest(unittest.TestCase):
+    def test_cross_package_component_refs_are_explicit_and_complete(self):
+        row=dict(status='REQUIRED_CONTRACT',sourcePath='src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java')
+        classes=['dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest',
+                 'dev.codex.schubert.nk.api.persistence.BorrowedJdbcFatal329Test']
+        cases=[dict(testId='actual-'+str(i),xmlSha256='xml-'+str(i),**{'class':cls},caseNameSha256='n'+str(i),source='current') for i,cls in enumerate(classes)]
+        actual=p.original_refs(row,cases,'current')
+        self.assertEqual(set(classes),{c['class'] for c in actual['currentWholeCaseRefs']})
+        with self.assertRaises(ValueError):p.original_refs(row,cases[:1],'current')
+        with self.assertRaises(ValueError):p.original_refs(row,[dict(cases[0],**{'class':'dev.codex.schubert.nk.api.persistence.QuestionQueryRepositoryTest'})],'current')
+
     def test_global_ordinal_changes_keep_current_id_and_prior_rationale(self):
         old={k:'same' for k in p.SEMANTIC}
         old.update(findingId='old-global-id',rawXmlOrdinal=4,status='REQUIRED_CONTRACT',reason='individual prior rationale')
