@@ -1,5 +1,13 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC332 ordinary consumerのfatal graphとWeb返信rollback実証（2026-10-22）
+
+BUG1602/YKT1355・1354。普通retryへ委ねる前にcause/suppressed/JMS linked/SQL nextをidentity visitedで有限分類し、到達可能Errorをretry可能としない。API Sync/WebLog/Questionは元direct Errorと同じhalted/terminal・既owner fatal通知を行い、通知が正常returnした場合は元API契約どおりErrorを再throwしない。graph分類口はpure・非I/Oとし通知/再送を代行しない。
+
+Web Replyのpublic onMessageは元例外identity/checked署名とnull/session preflightを保持する。登録consumerの内部同期portは、同配送・同contextのrollback直前attemptedと正常帰還後confirmedを分離し、両state/portはcontext取得前に確保、各配送前resetする。未確認の非Errorは普通retryにせずhalted/terminal・既fatal通知へ。preflightやrollback例外を確認済としない。直接/内包Error時の既best-effort rollbackは未試行だけ一回、既rollbackが失敗した場合に再発行しない。
+
+Webで選択したErrorはowner通知を一回試みた後も同一objectで伝播し、通知Runtime/Errorが当Errorを覆わない。非Error typed fatalの従来通知・CommittedFatalの区別を保持する。普通retryはconfirmedかつ非fatal graphだけ、brokerの既delivery-count/backoff/上限に委ねる。ACK/commit/close/追加業務再送/Root等をこの是正から追加しない。startup/close・native UNKNOWN所有契約、業務/role/wire/DB・DIFは不変更。
+
 ## SSC319 ordinary配送の確認済rollback（2026-10-21、内部補足）
 
 試行資格も区別する：内部portはrollback呼出直前のattempted通知と、正常帰還後だけのconfirmed通知を分ける。consumerは両stateを同配送でresetする。direct Errorに対する既best-effort rollbackは未試行時だけ一回、既rollbackがErrorで不確定なら再発行せずfatal/UNKNOWN側を維持する。public listenerの元Error identity/checked契約は不変更で、Errorを別型へ包んで回避しない。通知portは同期のprimitive state更新だけ、取得前に準備しI/O/ACK/追加業務を持たない。
