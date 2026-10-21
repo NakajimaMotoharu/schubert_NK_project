@@ -25,3 +25,9 @@ BUG1592/1593/1598とYKT1345/1346/1348/1351の当ordinary JDBC/readiness/JMS scop
 publishだけ終了0、[host測定manifest](evidence/provisional/PG6642-current4158-host-measurement-v1/manifest.json) SHA `69a242446c7604255db1a2f6881aeb36bc065c626b21d374f580fe7d6da5de34`。まだWBS正本は未更新。次commit/pushclean→wbs_progress_audit.py before→同工具stage→stage proofをcommit/push→apply→audit after→report、全candidate/current manifest hashを確認して結果を追記する。既current943以外のscope追加/費用追加/受入昇格はしない。
 
 fresh used65残35/reset1793082865/secondarynull/券0、reset markerの一秒差を同窓確定へ丸めず、N/T/専有費・工数率はnull。原見積/v4/JDBC群/JMS群/K01開始見積は固定。PTALT001/002対象未特定/代替0、正式1964/53・個別17/190・QA051final・全HOLD維持。小受入/報告/commitでは停止せず、trace更新後も独立PG/PTへ継続する。
+
+## current943更新完了
+
+before auditは旧current候補f39のbyteと現Main2dの不一致を正しく拒否して終了1（古い候補を現成功へ正規化しない）。その記録を保持し、stageはstrictな新候補943検査で終了0、private stage SHA460d3de9・public stage.jsonを3e4e80561で保存/push後にapplyを一回だけ実施。apply/after audit/reportの同session93344は全終了0。hist941/17、481master/484budget、旧formal/工数nullを不変にし、current943のsource/byte/測定だけ2dへ更新、旧f39とmetadataHEAD/measurementをhistoryへ保全した。
+
+[current trace report](evidence/provisional/PG6642-current943-trace-v1/manifest.json) SHA `8f74e444a998bd05b6c85e4ea95fc4a1b7ee78dca97efe5552460a8aa309c36b`、current Java owner116の技術四counter closed92/gap23/別CHR1、module全四100はprotocol/storageの2/6。これはWBS個別criteria/終了依存の完了率ではない。owner class-family line missed3486とmodule sourcefile line missed3478の差8を既projectionで全照合し、line域を混ぜない。Method679/Class38/Branch714は一致。旧snapshotのHOST/VM分類を新source runtime成功へ流用しない。受入増分0、旧正式1964/53維持。
