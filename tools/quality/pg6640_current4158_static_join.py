@@ -2,10 +2,12 @@
 import copy
 import json
 import os
+import subprocess
+import sys
 from collections import Counter
 from pg5940_private_lock_compile import ROOT,W,BASE,sha
-from pg5910_storage_static_rebind import ordered_pairs
-from static_disposition_overlay import load,IDENTITY,validate_rationales
+from pg5910_storage_static_rebind import ordered_pairs,SEMANTIC
+from static_disposition_overlay import load,validate_rationales
 from pg6638_current115_receivers import read_whole,body_at
 from pg6282_current4040_static_join import current_reference
 
@@ -108,6 +110,20 @@ def original_refs(value,cases,source):
     return result
 
 
+def rebind_unchanged(row,previous):
+    # BUG1599/YKT1352: the full per-file semantic sequence is paired upstream.
+    # PMD2 IDs include global XML ordinal, which may change in an unchanged file.
+    if any(previous[key]!=row[key] for key in SEMANTIC):
+        raise ValueError('all original source/coordinates/rule/message/schema semantics exact')
+    value=copy.deepcopy(previous)
+    value.update({key:item for key,item in row.items() if key!='status'})
+    value.update(priorReviewSource=OLD,priorReviewManifestSha256=sha(PRIOR),
+                 priorFindingId=previous['findingId'],priorRawXmlOrdinal=previous['rawXmlOrdinal'],
+                 diagnosticIdentityMapping='EXACT_ENTIRE_SOURCE_DIAGNOSTIC_SEQUENCE_CURRENT_RAW_ID_RETAINED',
+                 priorCurrentRefs=previous.get('currentWholeCaseRefs',[]))
+    return value
+
+
 def main():
     qp,q,cases=read_whole();source=q['productionSource']
     prior=load(PRIOR,sha(PRIOR),OLD)
@@ -127,11 +143,7 @@ def main():
         if pair is None:
             value=review_changed(row);counts['changedCurrentSourceReviewedOrHeld']+=1
         else:
-            previous=pair[0];value=copy.deepcopy(previous)
-            for key in IDENTITY:
-                if value[key]!=row[key]:raise ValueError('unchanged diagnostic entire-file exact identity')
-            value.update(priorReviewSource=OLD,priorReviewManifestSha256=sha(PRIOR),
-                         priorCurrentRefs=previous.get('currentWholeCaseRefs',[]))
+            value=rebind_unchanged(row,pair[0])
             counts['unchangedPriorHeld' if value['status']=='NOT_REVIEWED_CURRENT_SOURCE' else 'exactCurrentSourceRationaleReauthenticated']+=1
         value=original_refs(value,cases,source)
         if value['status']!='NOT_REVIEWED_CURRENT_SOURCE':
@@ -145,7 +157,12 @@ def main():
         statusCounts=dict(Counter(r['status'] for r in result)),joined=dict(counts),priorManifestSha256=sha(PRIOR),
         currentWholeQualificationSha256=sha(qp),currentWholeCasesSha256=sha(qp.with_name('cases.json')),
         testsExecuted=0,pmdRawRemoved=0,checkstyleFindings=0,formalAccepted=False,F03Accepted=False,
-        ptAlternativeCompleted=0,vmActions=0,newAcceptedLeaves=0,effortPercent=None)
+        ptAlternativeCompleted=0,vmActions=0,newAcceptedLeaves=0,effortPercent=None,
+        readerAttempt=2,priorReaderFailure='BUG-1599/session43398/ValueError/no public artifact; no PT replay',
+        operatorHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        operatorBranch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip(),
+        toolSha256=sha(ROOT/'tools/quality/pg6640_current4158_static_join.py'),pythonVersion=sys.version.split()[0],
+        command='python3 -B tools/quality/pg6640_current4158_static_join.py',wholeReplayed=False,additionalBuildsIssued=0)
     with (out/'manifest.json').open('x') as f:json.dump(value,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     print(json.dumps(dict(actualExit=0,statusCounts=value['statusCounts'],manifestSha256=sha(out/'manifest.json'))))
 
