@@ -1,0 +1,257 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "46",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "46",
+    "endline": "46",
+    "findingId": "F03-PMD2-79f0db6efb52ba865771210771057d0752b21eecc2c2af8a10d4383ea580dde7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a0f82c0427e2837d969d79fca6036294e6e4752fa6d0f354563f4f573fa6d355",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Io.class": "ba208fc27cc19fae08ccd016c286aa1ddfccde6fa4d800b6c11410c594937e07",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Start.class": "bbaa3f5e4393b69790be2ea04135fb1e3020c12f3819015aefe1e325f04e24bc",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+        "sourceSha256": "34f64821483044cd0e72634b390dc65853bcd521fe7410ed87cc138bb6d22921"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+        "sourceSha256": "d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+        "sourceSha256": "117c370d6f01dbc8bb1fa73d3ecfad45c7d046f385fb6bc87b074162625eb725"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1191,
+    "reason": "Both Runtime/Error from the sole close attempt, together with typed IOException, retain the same borrowed callback frame rather than report normal cleanup. The fixed prepared diagnostic and protected finite tick precede five reachability fences inside both javac finally clones. Original normal/null/primary exception behavior remains separate and tested; arbitrary stop callback/VM fatal failures are not claimed safe.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "46",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "54",
+    "endline": "46",
+    "findingId": "F03-PMD2-629e152354af9ed0af47768abcecf06663981a1704f2088387ffafa3be150006",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a0f82c0427e2837d969d79fca6036294e6e4752fa6d0f354563f4f573fa6d355",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Io.class": "ba208fc27cc19fae08ccd016c286aa1ddfccde6fa4d800b6c11410c594937e07",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Start.class": "bbaa3f5e4393b69790be2ea04135fb1e3020c12f3819015aefe1e325f04e24bc",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+        "sourceSha256": "34f64821483044cd0e72634b390dc65853bcd521fe7410ed87cc138bb6d22921"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+        "sourceSha256": "d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+        "sourceSha256": "117c370d6f01dbc8bb1fa73d3ecfad45c7d046f385fb6bc87b074162625eb725"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1192,
+    "reason": "Both Runtime/Error from the sole close attempt, together with typed IOException, retain the same borrowed callback frame rather than report normal cleanup. The fixed prepared diagnostic and protected finite tick precede five reachability fences inside both javac finally clones. Original normal/null/primary exception behavior remains separate and tested; arbitrary stop callback/VM fatal failures are not claimed safe.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "64",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (RuntimeException | Error unavailableDiagnostic) {\n      // Diagnostic failure never confirms cleanup or permits the borrowed frame to unwind.\n    }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "6",
+    "endline": "66",
+    "findingId": "F03-PMD2-a314e5c4a55b4f4a8fce3aa33a9aee1362f7f1bc886732b942200c950eb67a8f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-10f4b657a1969c1b8ae6ab2964b64e708e6550e8bb0e06b8365561b3fa8ac8d4",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Io.class": "ba208fc27cc19fae08ccd016c286aa1ddfccde6fa4d800b6c11410c594937e07",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Start.class": "bbaa3f5e4393b69790be2ea04135fb1e3020c12f3819015aefe1e325f04e24bc",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+        "sourceSha256": "34f64821483044cd0e72634b390dc65853bcd521fe7410ed87cc138bb6d22921"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+        "sourceSha256": "d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+        "sourceSha256": "117c370d6f01dbc8bb1fa73d3ecfad45c7d046f385fb6bc87b074162625eb725"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1193,
+    "reason": "A failed fixed WEB cleanup diagnostic is contained solely to preserve UNKNOWN, not treated as successful print/release. The original outer frame keeps its callbacks and close failure alive and never retries cleanup; the fixed literal cannot disclose provider data.",
+    "rule": "EmptyCatchBlock",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "64",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "64",
+    "findingId": "F03-PMD2-b98d11a3f8a1f47407d192e7eeb22f447f7ab35075aae54715873b160f7e2a72",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-faef08e17b38436afb2c819537d5e2a4b83da47f4573fdce557ba8893d9c2a7a",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Io.class": "ba208fc27cc19fae08ccd016c286aa1ddfccde6fa4d800b6c11410c594937e07",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Start.class": "bbaa3f5e4393b69790be2ea04135fb1e3020c12f3819015aefe1e325f04e24bc",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+        "sourceSha256": "34f64821483044cd0e72634b390dc65853bcd521fe7410ed87cc138bb6d22921"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+        "sourceSha256": "d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+        "sourceSha256": "117c370d6f01dbc8bb1fa73d3ecfad45c7d046f385fb6bc87b074162625eb725"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1194,
+    "reason": "Both unchecked fixed diagnostic failures are contained before returning to the caller-owned holding loop. No new raw failure graph, normal receipt or downstream close is produced. Normal and exceptional finally inputs are distinct original26 actual cases and must still join the current whole before F03 acceptance.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "64",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "64",
+    "findingId": "F03-PMD2-3716a716dcdbf4bf0b52b457883332fd0676ee5a0ce5b5ea3435ec21f88c8b69",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-faef08e17b38436afb2c819537d5e2a4b83da47f4573fdce557ba8893d9c2a7a",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Io.class": "ba208fc27cc19fae08ccd016c286aa1ddfccde6fa4d800b6c11410c594937e07",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution$Start.class": "bbaa3f5e4393b69790be2ea04135fb1e3020c12f3819015aefe1e325f04e24bc",
+      "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionTest",
+        "sourceSha256": "34f64821483044cd0e72634b390dc65853bcd521fe7410ed87cc138bb6d22921"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+        "sourceSha256": "d0767c10bbc29e43b78885c0a3fd38336378e6f9cc099075ac46006d774dfeb0"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+        "sourceSha256": "117c370d6f01dbc8bb1fa73d3ecfad45c7d046f385fb6bc87b074162625eb725"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1195,
+    "reason": "Both unchecked fixed diagnostic failures are contained before returning to the caller-owned holding loop. No new raw failure graph, normal receipt or downstream close is produced. Normal and exceptional finally inputs are distinct original26 actual cases and must still join the current whole before F03 acceptance.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "sourceSha256": "0741f73cae738e645b957acf26d93cfdf21b44b05b655fa8962b55f701d377cb",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  }
+]
