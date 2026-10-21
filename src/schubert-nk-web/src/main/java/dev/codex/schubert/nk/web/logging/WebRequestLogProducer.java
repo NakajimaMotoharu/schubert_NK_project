@@ -38,6 +38,7 @@ import java.util.UUID;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Local-first REQUEST -> existing encrypted outbox; UI235252/SS312351/SSC172/PG-D354/REQ001..016.
@@ -221,19 +222,25 @@ public final class WebRequestLogProducer {
 
   /** A broken primitive local sink is terminal, never a successful audit observation. */
   private boolean local(Level level, JsonObject json) {
+    @Nullable RuntimeException localFailure = null;
     try {
       if (logger.isLoggable(level)) {
         logger.log(level, json.toString());
         return true;
       }
     } catch (RuntimeException failure) {
-      // No provider/cause is exposed. The owner signal is outside this logger failure scope.
+      // SSC331/BUG1601: retain only until the existing owner signal has been attempted.
+      localFailure = failure;
     }
     try {
       onTerminal.run();
     } catch (RuntimeException failedSignal) {
+      // Preserve the callback's precedence, but never mask a remaining logger fatal.
+      WebStartupException.preserveFatal(failedSignal);
+      if (localFailure != null) WebStartupException.preserveFatal(localFailure);
       throw new IllegalStateException("request audit terminal signal failed");
     }
+    if (localFailure != null) WebStartupException.preserveFatal(localFailure);
     return false;
   }
 
