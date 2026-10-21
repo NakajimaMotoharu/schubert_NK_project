@@ -5,8 +5,8 @@ import pg6396_web_frame_red as red
 
 ROOT, W, BASE, sha = red.ROOT, red.W, red.BASE, red.sha
 MAIN = 'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java'
-RED_SOURCE = None
-RED_MANIFEST_SHA = None
+RED_SOURCE = '46b0c4a4972c10e153b91cb4ae5dd637effbc02d'
+RED_MANIFEST_SHA = '8d868c1ec153e416da93071170968a1b0628f805bb8230c6c984dd34df250ce1'
 
 
 def inventory(draft=False):
@@ -30,7 +30,11 @@ def guard_source(source):
         raise ValueError('bind genuine red evidence before PG green')
     path = W/'pg6396-web-frame-red-v1/manifest.safe.json'
     m = json.loads(path.read_bytes())
-    if sha(path) != RED_MANIFEST_SHA or m['source'] != RED_SOURCE or m['actualExit'] != 1 or not m['sourceFixed']:
+    if not (sha(path) == RED_MANIFEST_SHA and m['source'] == RED_SOURCE
+            and m['actualExit'] == m['mavenActualExit'] == 1 and m['sourceFixed']
+            and m['phaseExits'] == [0, 1] and (m['tests'], m['suites']) == (13, 7)
+            and m['failedOrSkipped'] == [['dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest',
+                                        'exec325001UnknownCloseAndDiagnosticFailuresNeverUnwindOrRetry']]):
         raise ValueError('same original red terminal and source, no failed result normalization')
     red.guard_source(RED_SOURCE)
     if subprocess.check_output(['git', 'diff', '--name-only', RED_SOURCE, source, '--', 'src'], cwd=ROOT, text=True).splitlines() != [MAIN]:

@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
+import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import java.io.IOException;
+import java.lang.ref.Reference;
 import java.util.Objects;
 import org.apache.catalina.LifecycleException;
 import org.jspecify.annotations.NullMarked;
@@ -10,6 +12,11 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class WebRuntimeExecution {
+  // SSC325/PG-D479: prepare policies before the first callback can borrow/acquire resources.
+  private static final Runnable UNKNOWN_DIAGNOSTIC = WebRuntimeExecution::diagnoseUnknown;
+  private static final Runnable UNKNOWN_INTERVAL =
+      ServiceProcessResources.unknownReleaseObservationPolicy();
+
   private WebRuntimeExecution() {}
 
   @FunctionalInterface
@@ -37,10 +44,25 @@ final class WebRuntimeExecution {
       try {
         close.run();
       } catch (IOException | RuntimeException | Error unconfirmed) {
-        System.err.println("WEB cleanup unconfirmed");
+        UNKNOWN_DIAGNOSTIC.run();
         // Keep this exact borrowed frame alive; each observation interval returns, not the owner.
-        while (true) WebProcessLifetime.holdUnknownInterval();
+        while (true) {
+          UNKNOWN_INTERVAL.run();
+          Reference.reachabilityFence(start);
+          Reference.reachabilityFence(await);
+          Reference.reachabilityFence(stop);
+          Reference.reachabilityFence(close);
+          Reference.reachabilityFence(unconfirmed);
+        }
       }
+    }
+  }
+
+  private static void diagnoseUnknown() {
+    try {
+      System.err.println("WEB cleanup unconfirmed");
+    } catch (RuntimeException | Error unavailableDiagnostic) {
+      // Diagnostic failure never confirms cleanup or permits the borrowed frame to unwind.
     }
   }
 }
