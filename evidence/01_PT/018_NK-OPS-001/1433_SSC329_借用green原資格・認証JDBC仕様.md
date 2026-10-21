@@ -6,6 +6,8 @@
 
 PT_DEFAULT。BUG1592/YKT1345/SSC329、SS312/314/324/332/354、NK-AUT-001、UI226/234。群1625/.5/1.5/4を継承し、SQLCATCH074～076の適用性を確認する。通常業務/SQL/認証許可/session上限/再送間隔/権限は不変更。
 
+481/485で当認証classの共有主担当はWBS-P007-01と確認。群1625のJDBC横断共通費へ追加予算を加算せず、認証source/criteriaはP007-01へ対応付け、P018-09等のconsumerへ二重計上しない。群内の専有配賦は証拠不足でnull。
+
 新`AuthenticationJdbcBoundary329Test` PT-AUTH-BOUNDARY329001 lockForAttempt、002 recordFailure/recordSuccess（共通record）、003 authenticateのcritical audit。自己所有JDBC interface proxy/有限SQL・固定UTC/typed rowsだけを用いる。3mode=SQL primary＋statement.close Error、SQL.next.causeだけError、非fatalSQL-next cycle。前二modeは元Error、最後はliteral `authentication storage is unavailable`・cause null/suppressed0。各methodのprepare/execute/Statement close、借用Connection commit/rollback/close0を独立counterで確認する。
 
 lockは最初のSELECT失敗なのでStatement1/ResultSet0、recordはaccount無/IP emptyからIP UPDATEで失敗してStatement1/ResultSet0、success/failure双方を別fixtureで検査。auditはuser不在ResultSet→IP作成→IP emptyのResultSet→IP失敗counter更新→audit SQL失敗、Statement5/ResultSet2各close1。時刻・行数を固定literalで供給、provider password照合は自己所有BiPredicate falseで1回、session発行0。入力char配列はError/非fatalとも全ゼロへwipeする期待を独立配列で確認する。
