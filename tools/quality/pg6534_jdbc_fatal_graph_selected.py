@@ -6,7 +6,7 @@ from pg5940_private_lock_compile import ROOT, W, BASE, sha
 import finite_selected_profile as profile
 
 OLD = 'f39de2986cbe0dc4a552f64d55ac723002cc77f6'
-RED_SOURCE = None
+RED_SOURCE = '0416a76ef03135d3b14153221b4c33e55083bc3b'
 TESTS = {
  'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcGraph328Test.java',
  'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java',

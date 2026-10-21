@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1591",
+  "formalAccepted": false,
+  "originals": {
+    "api-red": {
+      "TestHashes": {
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcGraph328Test.java": "c73217cbaa48bfe70bfc1a03f25b8c23b8490ccc7fb1e3674070e6499786daf6",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationJdbcGraph328Test.java": "1933a72138937489085e50e6f9388af72a568c0e3faa0a2dbe7a114b272edc89",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "86ffb80768b51695b877a255aa1665c64e69f2bf6e8b0835f82df470892b7d7c"
+      },
+      "actualPassNotFullInventory": true,
+      "archiveSha256": "a02a4165bde8e5009661f31b48084d69530d46d68da842d9bee430bafa4732bb",
+      "beginSha256": "be9bf291077bf39aeae51c3866c92a7a94fe0eea99475f5fa902fb491a53ea09",
+      "errorsSkippedFlaky": 0,
+      "expectedPurposefulFailures": [
+        [
+          "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test",
+          "auth328001CauseFatalCannotBecomeAnInfrastructureResult"
+        ],
+        [
+          "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test",
+          "auth328002SqlNextCycleTerminatesAndPreservesTheOriginalFatal"
+        ]
+      ],
+      "originalExit": 1,
+      "originalManifestSha256": "bd040bb70365d4a77279439a5decdb2c4506778d587c26aa76f6111bf11dbbe4",
+      "run": "pg6534-jdbc-api-red-v1",
+      "source": "0416a76ef03135d3b14153221b4c33e55083bc3b",
+      "suites": 6,
+      "tests": 10,
+      "unavailableLaterReactorModulesNotPassed": true,
+      "xmlHashes": {
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "313020b58478bb03dafd944c5ae6a8d6ec7acfaaf49654506216293ce7964264",
+        "dev.codex.schubert.nk.api.security.AuthenticationFailureGraphTest": "afcd3a08fa44e7257231803bf85d2771944e797d7520e4e987149377aa934354",
+        "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test": "05834cc9c7157ece3166102b16ae3daca2da73facebba5a498c3c4652101fd78",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "ccc5148b989bdbf8f49abecf0d9bbeb00d025578a635ba7c3b86636bf1bc8cdd",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "ede5395bfe6708def40caa8b73b32a5ac432f52f7d594a03755652ec782b71a5",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "7440f37b8162dfdc4c49c2afedd1b6520c0cfb9c80b5cb085040252c54cc15c8"
+      }
+    },
+    "web-red": {
+      "TestHashes": {
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcGraph328Test.java": "c73217cbaa48bfe70bfc1a03f25b8c23b8490ccc7fb1e3674070e6499786daf6",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationJdbcGraph328Test.java": "1933a72138937489085e50e6f9388af72a568c0e3faa0a2dbe7a114b272edc89",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "86ffb80768b51695b877a255aa1665c64e69f2bf6e8b0835f82df470892b7d7c"
+      },
+      "actualPassNotFullInventory": true,
+      "archiveSha256": "a02a4165bde8e5009661f31b48084d69530d46d68da842d9bee430bafa4732bb",
+      "beginSha256": "8bb8a9eb7b78f87295b6348af9940a2ddef435ceaed3561f8f44e5d255738261",
+      "errorsSkippedFlaky": 0,
+      "expectedPurposefulFailures": [
+        [
+          "dev.codex.schubert.nk.web.revocation.RevocationJdbcGraph328Test",
+          "graph328001SqlNextFatalCannotBecomeAnOrdinaryCatalog"
+        ],
+        [
+          "dev.codex.schubert.nk.web.revocation.RevocationJdbcGraph328Test",
+          "graph328002MixedCyclesAreFiniteAndLateFatalRetainsIdentity"
+        ],
+        [
+          "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+          "graph328001SqlNextFatalCannotBecomeAnOrdinaryCatalog"
+        ],
+        [
+          "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+          "graph328002MixedCyclesAreFiniteAndLateFatalRetainsIdentity"
+        ]
+      ],
+      "originalExit": 1,
+      "originalManifestSha256": "7d9995562de1c902b010854349ed562bba706d5f89fa47f54a2111d41c4002af",
+      "run": "pg6536-jdbc-web-red-v1",
+      "source": "0416a76ef03135d3b14153221b4c33e55083bc3b",
+      "suites": 8,
+      "tests": 17,
+      "unavailableLaterReactorModulesNotPassed": true,
+      "xmlHashes": {
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "9c537952242659a8b7b02a68c62e292a5caba90011e295636bec6cc0d79c06eb",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "cacfc527766fae154bf48e01bf3039d7a3976bf3ca067a10b4c3e3a2cef8f1a7",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "5162ac248a0f1b63d3771c2aba1bdb1ec493d54d9f906e485ae9d33215b4d399",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "a67989a78c60c27bda135cbc37ecf3c49c2d037f5d749e7b85060bd0fdebcc4d",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest": "c9bda13d413cbe073ad2f37c1df4539560dd493d1c4756317a2864a08dd77ed4",
+        "dev.codex.schubert.nk.web.revocation.RevocationJdbcGraph328Test": "296d5b934f0732e1bd2c4892492ea52574a15ecc92aed82b38068734e542fd49",
+        "dev.codex.schubert.nk.web.session.SessionFailureGraphTest": "735f1fbe1c4c2c15e6523690c9d1929049a9df43a9c47cd053d6b2c54d760c8e",
+        "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test": "df7e6f7d61e1f0ea057387edb8a1f7bfb322d4f4601b7128be349635942560db"
+      }
+    }
+  },
+  "ptAlternativeCompleted": 0,
+  "rollout": "YKT-1344",
+  "source": "0416a76ef03135d3b14153221b4c33e55083bc3b",
+  "testsExecutedByReader": 0,
+  "vmActions": 0
+}

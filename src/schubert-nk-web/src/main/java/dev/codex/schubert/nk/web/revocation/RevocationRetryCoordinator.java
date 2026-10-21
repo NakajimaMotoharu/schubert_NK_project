@@ -159,6 +159,11 @@ public final class RevocationRetryCoordinator {
       Throwable cause = candidate.getCause();
       if (cause != null) pending.add(cause);
       pending.addAll(Arrays.asList(candidate.getSuppressed()));
+      // SSC328: this transaction boundary has the same JDBC next edge as the session store.
+      if (candidate instanceof SQLException sql) {
+        SQLException next = sql.getNextException();
+        if (next != null) pending.add(next);
+      }
     }
   }
 

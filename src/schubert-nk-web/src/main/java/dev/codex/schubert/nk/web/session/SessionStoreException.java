@@ -26,6 +26,11 @@ public sealed class SessionStoreException extends RuntimeException
       Throwable cause = candidate.getCause();
       if (cause != null) pending.add(cause);
       pending.addAll(java.util.Arrays.asList(candidate.getSuppressed()));
+      // SSC328: next is last; direct Error and the existing cause/suppressed order stay fixed.
+      if (candidate instanceof java.sql.SQLException sql) {
+        java.sql.SQLException next = sql.getNextException();
+        if (next != null) pending.add(next);
+      }
     }
   }
 }

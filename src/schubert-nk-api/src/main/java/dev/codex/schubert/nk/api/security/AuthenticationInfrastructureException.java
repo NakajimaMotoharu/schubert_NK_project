@@ -21,6 +21,13 @@ public final class AuthenticationInfrastructureException extends RuntimeExceptio
       if (seen.put(current, Boolean.TRUE) != null) continue;
       if (current instanceof Error fatal) throw fatal;
       for (Throwable closing : current.getSuppressed()) pending.addLast(closing);
+      // SSC328: keep the existing suppressed priority, then inspect the other JDBC edges.
+      Throwable cause = current.getCause();
+      if (cause != null) pending.addLast(cause);
+      if (current instanceof java.sql.SQLException sql) {
+        java.sql.SQLException next = sql.getNextException();
+        if (next != null) pending.addLast(next);
+      }
     }
   }
 }
