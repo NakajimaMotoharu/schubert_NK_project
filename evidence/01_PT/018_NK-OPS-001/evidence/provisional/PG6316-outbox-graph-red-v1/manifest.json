@@ -1,0 +1,51 @@
+{
+  "source": "3bb2339f702c91b51476e17e22723da193638174",
+  "branch": "dev-foundation",
+  "run": "pg6316-outbox-graph-red-v1",
+  "startedUTC": "2026-10-21T02:28:46.310167+00:00",
+  "completedUTC": "2026-10-21T02:30:05.456587+00:00",
+  "command": "python3 -B tools/quality/pg6316_outbox_graph_red.py",
+  "actualExit": 1,
+  "mavenActualExit": 1,
+  "declaredTests": 38,
+  "declaredSuites": 9,
+  "actualTests": 32,
+  "actualSuites": 6,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "notRunTests": 6,
+  "notRunSuites": 3,
+  "sourceMainUnchangedFrom": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+  "originalArchiveSha256": "e41cba7a45092d81cac4e91b2ae65dd983b3a05a9b60ee7b3731d3ca6201c18f",
+  "originalManifestSha256": "573c34705494563f7794b316798f020866bf1021db20142719eed636b60190b1",
+  "failuresVerifiedFromOriginalXml": [
+    {
+      "testId": "PT-IDEM-GRAPH322001",
+      "class": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+      "method": "graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch",
+      "xmlSha256": "256492778375ebb8659495c7791d80195bc91ba03340b9f0937e2fc239eff285",
+      "expected": "exact owned worker terminated before another dispatch after SQLException.suppressed Error",
+      "actual": "worker still alive at independent one-second join assertion"
+    },
+    {
+      "testId": "PT-IDEM-GRAPH322002",
+      "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+      "method": "graph322002NestedFatalNeverMarksOrdinaryFailureAndNonfatalCycleStillRetries",
+      "xmlSha256": "3ada93ba5b9b4b42b39c812fcc7e0d7b0d0b17565c13dd555424e9a712084c0f",
+      "expected": "identical nested Error before ordinary failure mark",
+      "actual": "dispatch returned without throwing Error"
+    }
+  ],
+  "remainingMatrixInputs": "NOT_REACHED_RETAINED_NOT_PASS",
+  "originalArtifactPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6316-outbox-graph-red-v1",
+  "coverage": "API post-test report not executed; generated zero placeholders are unmeasured, not coverage success",
+  "bugIds": ["BUG-1572"],
+  "yktIds": ["YKT-1323", "YKT-1328"],
+  "sscIds": ["SSC-322"],
+  "productionClassesChanged": 0,
+  "vmActions": 0,
+  "formalAccepted": false,
+  "ptAlternativeCompleted": 0,
+  "privateProviderTextRetained": false
+}

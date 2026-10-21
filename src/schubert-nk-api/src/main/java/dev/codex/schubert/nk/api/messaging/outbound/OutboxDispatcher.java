@@ -1,11 +1,17 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+import jakarta.jms.JMSException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Instant;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Coordinates short DB claim/mark transactions around a separate transacted JMS send.
@@ -43,6 +49,7 @@ public final class OutboxDispatcher {
       try {
         sender.send(contextProvider, entry);
       } catch (OutboxSendException | RuntimeException exception) {
+        preserveFatal(exception);
         if (markFailure(entry, clock.instant(), failureCode(exception))) {
           failed++;
         } else {
@@ -120,6 +127,29 @@ public final class OutboxDispatcher {
 
   private static String failureCode(Throwable exception) {
     return exception instanceof OutboxIntegrityException ? "OUTBOX_INTEGRITY" : "JMS_SEND_FAILURE";
+  }
+
+  /** SSC322/PT-IDEM-GRAPH322001/002: inspect transient edges before ordinary retry/mark. */
+  static void preserveFatal(Throwable failure) {
+    var pending = new ArrayDeque<Throwable>();
+    Set<Throwable> seen = Collections.newSetFromMap(new IdentityHashMap<>());
+    pending.add(failure);
+    while (!pending.isEmpty()) {
+      Throwable candidate = pending.remove();
+      if (!seen.add(candidate)) continue;
+      if (candidate instanceof Error fatal) throw fatal;
+      Throwable cause = candidate.getCause();
+      if (cause != null) pending.add(cause);
+      pending.addAll(Arrays.asList(candidate.getSuppressed()));
+      if (candidate instanceof JMSException jms) {
+        Exception linked = jms.getLinkedException();
+        if (linked != null) pending.add(linked);
+      }
+      if (candidate instanceof SQLException sql) {
+        SQLException next = sql.getNextException();
+        if (next != null) pending.add(next);
+      }
+    }
   }
 
   private static void rollback(Connection connection, Throwable failure) {

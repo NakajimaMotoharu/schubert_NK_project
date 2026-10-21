@@ -75,6 +75,7 @@ public final class OwnedOutboxDispatcher implements AutoCloseable {
         try {
           dispatcher.dispatch(owner, 32);
         } catch (SQLException | RuntimeException temporary) {
+          OutboxDispatcher.preserveFatal(temporary);
           // Durable leases/retry rows remain authoritative; a short later cycle retries.
           // No unbounded provider text is exposed and no row is declared SENT by this owner.
         }
