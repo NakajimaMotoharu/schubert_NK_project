@@ -1,5 +1,11 @@
 # 認証・認可・session・CSRF実装設計
 
+## SSC328 ordinary認証/sessionのfatal JDBC graph（2026-10-21）
+
+既BUG622/628のfatal cleanup保持を、同じ認証/sessionのtransient JDBC例外graphへ明確化する。cause、suppressed、SQLException.getNextExceptionの全reachable Errorは同一objectのまま伝播し、固定AuthenticationInfrastructureException/SessionStoreException又は通常の再送/9000/503へ縮退させない。Error無しのgraphはobject identityで訪問済みを除き有限帰還し、SQL/provider text/cause/suppressedを固定catalogへ保持しない。JMS linkedは当JDBC境界の入力契約ではなく、送信境界SS312の別契約のまま。
+
+既直接primary Errorを最優先にし、既edgeのみの順位は不変更。認証は従来のsuppressed順の後にcause/SQL next、sessionは従来のcause→suppressed順の後にSQL nextを追加する（各nodeのFIFO探索）。新edgeを先に回して既fatalの選択を変更しない。正常/非fatal時の業務結果・認証/session/SQL/transaction/最大2session・DIFは不変更。BUG1591/YKT1344、PT-AUTH-GRAPH328001..003/PT-SESSION-GRAPH328001..003で、pure固定Throwableのcause/next fatal・混合cycle・Error無し・既順位を独立検査する。実Root/Unit/DB原本/keys/cohortへの操作・権限を追加しない。設計補足確定とPG/PT/native/正式品質の完了を区別する。
+
 ## SSC267 Login単体試験の独立境界（2026-10-12）
 
 §5.1のUser→IP lock順、locked時hash省略、PBKDF2-v1 310000 iteration、最大2session・最古revoke、DB/MQ timeout9000・失敗counter不増を維持する。承認roleのstatement1500ms/lock500msを、実機CPUや並列request数を理由に延長しない。同user8並列12requestが全件一度でcommitすることは外部保証ではない。
