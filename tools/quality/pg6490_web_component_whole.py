@@ -3,7 +3,7 @@ import inspect
 import json
 import subprocess
 import pg6188_native_ownership_whole as base
-from pg6496_web_owned_component_qualification_v4 import original_source
+from pg6500_web_owned_component_qualification_v5 import original_source
 
 ROOT, W, BASE, sha = base.ROOT, base.W, base.BASE, base.sha
 LABEL = 'PG6490'
@@ -39,7 +39,7 @@ def prerequisites(source):
         raise ValueError('clean committed operator/proof first')
     if subprocess.check_output(['git', 'diff', source, '--', 'src', 'pom.xml', '.mvn', 'mvnw', 'tools/quality/static', 'program/characterization'], cwd=ROOT):
         raise ValueError('canonical original27 Main/Test/gates fixed')
-    qp = BASE/'PG6496-web-owned-component-qualification-v4/manifest.json'
+    qp = BASE/'PG6500-web-owned-component-qualification-v5/manifest.json'
     op = BASE/'PG6484-web-owned-runtime-order-v1/manifest.json'
     if QSHA is None or ORDER_SHA is None or sha(qp) != QSHA or sha(op) != ORDER_SHA:
         raise ValueError('exact genuine current27 and JVM/default binding proof first')
@@ -51,7 +51,7 @@ def prerequisites(source):
             and order['structure']['fixedDefaultFourBindings'] and len(order['actualCaseRefs']) == 7
             and order['nativeRootOrAuthorizationProven'] is False):
         raise ValueError('current seven actual XML cases/JVM/default bindings; not native proof')
-    private = W/'pg6496-web-owned-component-qualification-v4/manifest.safe.json'
+    private = W/'pg6500-web-owned-component-qualification-v5/manifest.safe.json'
     if sha(private) != q['privateManifestSha256']:
         raise ValueError('original all8511667 map')
     proof = json.loads(private.read_bytes())

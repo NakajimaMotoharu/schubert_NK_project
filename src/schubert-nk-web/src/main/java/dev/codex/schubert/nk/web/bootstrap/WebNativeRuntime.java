@@ -61,6 +61,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class WebNativeRuntime implements AutoCloseable {
+  private static final String CONFIG_DESCRIPTION = "Web config";
   private final DataSource database;
   private final ServiceCredentialSet credentials;
   private final WebNonSecretConfig config;
@@ -126,7 +127,7 @@ final class WebNativeRuntime implements AutoCloseable {
       throws IOException {
     this.database = Objects.requireNonNull(database, "Web database");
     this.credentials = Objects.requireNonNull(credentials, "Web credentials");
-    this.config = Objects.requireNonNull(config, "Web config");
+    this.config = Objects.requireNonNull(config, CONFIG_DESCRIPTION);
     this.retainedReady = Objects.requireNonNull(ready, "Root admission ready");
     this.information = Map.copyOf(ready.information());
     this.ownerStopping = Objects.requireNonNull(ownerStopping, "Web stop notification");
@@ -261,7 +262,7 @@ final class WebNativeRuntime implements AutoCloseable {
       justification =
           "SS343 fixed Web runtime namespace under systemd ownership; no caller path or override")
   static Path nativePath(WebNonSecretConfig config, String key) {
-    Objects.requireNonNull(config, "Web config");
+    Objects.requireNonNull(config, CONFIG_DESCRIPTION);
     return switch (Objects.requireNonNull(key, "Web internal path key")) {
       case "runtime" -> Path.of("/run/schubert-nk/web");
       case "nk.web.storage.transfer-root", "nk.web.storage.asset-root" ->
@@ -271,7 +272,7 @@ final class WebNativeRuntime implements AutoCloseable {
   }
 
   static int nativePort(WebNonSecretConfig config, String key) {
-    Objects.requireNonNull(config, "Web config");
+    Objects.requireNonNull(config, CONFIG_DESCRIPTION);
     return switch (Objects.requireNonNull(key, "Web internal port key")) {
       case "nk.web.http.port", "nk.web.management.port" -> Integer.parseInt(config.value(key));
       default -> throw new IllegalArgumentException("Web internal port unavailable");
@@ -409,7 +410,8 @@ final class WebNativeRuntime implements AutoCloseable {
   }
 
   static Duration replyTimeout(WebNonSecretConfig config) {
-    String value = Objects.requireNonNull(config, "Web config").value("nk.web.mq.reply-timeout");
+    String value =
+        Objects.requireNonNull(config, CONFIG_DESCRIPTION).value("nk.web.mq.reply-timeout");
     return value.endsWith("ms")
         ? Duration.ofMillis(Long.parseLong(value.substring(0, value.length() - 2)))
         : Duration.ofSeconds(Long.parseLong(value.substring(0, value.length() - 1)));

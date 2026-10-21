@@ -6,7 +6,8 @@ import subprocess
 import zipfile
 from pg5940_private_lock_compile import ROOT, W, BASE, TC, sha
 from pg6056_expiry_read_methods import methods
-from pg6084_web_factory_order import instructions, narrow_or_wide_literal_body
+from pg6084_web_factory_order import instructions
+from pg6116_http_owner_order import resolved_body
 from classfile_field_flags import fields
 from pg6470_web_owned_component_selected import MAIN
 
@@ -48,6 +49,9 @@ def analyze(raw, verbose, physical):
     directory = [i for i, (_, op, arg) in enumerate(ops) if op.startswith('invoke') and 'OwnedTransferDirectory.open:' in arg]
     if len(directory) != 2 or any(ops[i+1][1] != 'putfield' or field not in ops[i+1][2] for i, field in zip(directory, ('transfer:', 'assets:'))):
         raise ValueError('both directory roots captured before verification/borrowed use')
+    offsets = [r['offset'] for r in captures]
+    if offsets != sorted(offsets) or not offsets[1] < ops[directory[0]+1][0] < ops[directory[1]+1][0] < offsets[2]:
+        raise ValueError('existing broker/codecs/two directories/replies/replay/retry/management acquisition order')
     default = [v for k, v in blocks.items() if k.startswith('  '+CLS+'(') and k.endswith('BooleanSupplier) throws java.io.IOException;')]
     if len(default) != 1 or sum(op == 'invokedynamic' for _, op, _ in instructions(default[0])) != 4:
         raise ValueError('one five-argument default delegates exactly four prepared method references')
@@ -66,14 +70,14 @@ def analyze(raw, verbose, physical):
 
 
 def main():
-    qp = BASE/'PG6496-web-owned-component-qualification-v4/manifest.json'
-    q = json.loads(qp.read_bytes()); pp = W/'pg6496-web-owned-component-qualification-v4/manifest.safe.json'
+    qp = BASE/'PG6500-web-owned-component-qualification-v5/manifest.json'
+    q = json.loads(qp.read_bytes()); pp = W/'pg6500-web-owned-component-qualification-v5/manifest.safe.json'
     if q['actualExit'] != 0 or (q['tests'], q['suites'], q['physicalMain']) != (27, 11, 1667) or sha(pp) != q['privateManifestSha256']:
         raise ValueError('genuine original27 all-source qualification first')
     proof = json.loads(pp.read_bytes()); source = q['source']
     if {p.relative_to(ROOT).as_posix(): sha(p) for p in ROOT.glob('src/*/src/main/java/**/*.java')} != proof['allSourceHashes']:
         raise ValueError('all851 current Main fixed')
-    snapshot = W/'pg6494-web-owned-component-v4/source'; jar = snapshot/JAR
+    snapshot = W/'pg6498-web-owned-component-v5/source'; jar = snapshot/JAR
     prior = W/'pg6466-nio-collision-selected-v1/source'/JAR
     with zipfile.ZipFile(jar) as archive:
         physical = archive.read(CLS.replace('.', '/')+'.class')
@@ -82,8 +86,9 @@ def main():
     def read(path, verbose=False):
         return subprocess.check_output([str(TC/'jdk-25.0.4/bin/javap'), '-p', '-v' if verbose else '-c', '-s', '-classpath', str(path), CLS], text=True)
     raw = read(jar); before, after = methods(read(prior)), methods(raw)
+    old_verbose, current_verbose = read(prior, True), read(jar, True)
     preserved = [k for k in before if not k.startswith('  '+CLS+'(') and ' void start()' not in k]
-    if any(k not in after or narrow_or_wide_literal_body(before[k]) != narrow_or_wide_literal_body(after[k]) for k in preserved):
+    if any(k not in after or resolved_body(before[k], old_verbose) != resolved_body(after[k], current_verbose) for k in preserved):
         raise ValueError('all prior non-constructor/start methods including close lambdas retain exact normalized instructions and exception edges')
     owners = [p for p in ROOT.glob('src/*/src/main/java/**/*.java') if 'new WebNativeRuntime(' in p.read_text()]
     if len(owners) != 1 or not str(owners[0]).endswith('/WebProcessMain.java'):
@@ -96,7 +101,8 @@ def main():
     if len(refs) != 7 or any(r['result'] != 'PASS_ORIGINAL_XML' for r in refs):
         raise ValueError('seven current original independent component cases only')
     value = dict(actualExit=0, source=source, qualificationSha256=sha(qp), classSha256=hashlib.sha256(physical).hexdigest(),
-        sourceSha256=sha(snapshot/MAIN), structure=analyze(raw, read(jar, True), physical),
+        sourceSha256=sha(snapshot/MAIN), structure=analyze(raw, current_verbose, physical),
+        bootstrapHandlesAndAllArgumentsResolved=True,
         unchangedPriorMethods=len(preserved), soleProductionDefaultCaller=True, actualCaseRefs=refs,
         publicAlternativeConfigAdded=False, startupOrderChanged=False, ownComponentOnly=True,
         nativeRootOrAuthorizationProven=False, productionTestsExecutedByReader=0, buildsIssued=0,
