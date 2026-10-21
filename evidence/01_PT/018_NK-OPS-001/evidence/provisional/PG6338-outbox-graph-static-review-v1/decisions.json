@@ -1,0 +1,1719 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "38",
+    "beginline": "51",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "54",
+    "endline": "51",
+    "findingId": "F03-PMD2-3fc5576769f4ab8a5b29f5bf653edc3be28ba713a0fd3680c2387406dda73992",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f323d0b386d5c29c879cf1cc92dedbcc3cfa50b04d6b6ec0bafbb50a9c646d13",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 241,
+    "reason": "1355 current ordinary Outbox source applicability: Ordinary Runtime/typed send failure is inspected for fatal cause/suppressed/linked/next before markFailure. Direct Error is not caught. Independent322002/003 assert no mark for nested Error and exact normal retry SQL afterconditions; failure code is not proof of successful send.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "75",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "75",
+    "findingId": "F03-PMD2-e73e6b9158ea7d112285e53014e64c652cf685c9f5348cf2fbfa0701d59b2d5c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6aa317014a0edec21f1878b7e1d1a5b871a0fe64d91dc2db3eb94bf4854db25a",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 242,
+    "reason": "1355 current ordinary Outbox source applicability: Claim SQL/RTE failure attempts existing rollback and rethrows before owned TWR close. Fatal graph retained by TWR is classified at the actual owned worker boundary, not called successful claim. The graph change does not alter transaction or rollback policy.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "88",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "88",
+    "findingId": "F03-PMD2-751c65d14007bd0827581387d60003bb1b475f7a8c6118b3a1e3958d86f67f32",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-397815331736c6ed1d86819a4aa3d1b407abc3c41e0cc365e77b2b3f3f8bf513",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 243,
+    "reason": "1355 current ordinary Outbox source applicability: markSent SQL/RTE failure rolls back and rethrows; neither computed marked boolean nor JMS success bypasses commit/owned close. Nested cleanup fatal is not authorized as another worker cycle. This is not a guarantee of actual vendor recovery.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "102",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "102",
+    "findingId": "F03-PMD2-75e4612178aeb683f353e3cdcef29f1e877e1860a487a05b72d04f9707531a2d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d768639b4c4c945fae71a8b0ad4235fa27a0b2724732c5d2748ef4e62b94e292",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 244,
+    "reason": "1355 current ordinary Outbox source applicability: markFailure SQL/RTE failure attempts rollback and rethrows; the durable attempt/backoff transition must commit normally before return. Fatal classification cannot issue an extra mark or create a success receipt.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "114",
+    "findingId": "F03-PMD2-016b97bbab1b1c7634f05b3e8c37f3b7cb8b1690a3b4f70c390ea79d9edd2a6e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2706ecd0bc15afc40e7dd59c1f9a2290537b831b04c44c8850a5268e7183395f",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 245,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked setup spans guard an acquired but unreturned Connection. Exactly one closeAfterSetupFailure runs before failure propagation; original fatal and nonfatal-over-fatal cleanup follow unchanged SS320, with no JDBC lease or JMS work issued during failed setup.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "114",
+    "findingId": "F03-PMD2-bd402f23ed256ac5dcd8ad9300dab49afca0f368babd3e72918bdf13e7003cac",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2706ecd0bc15afc40e7dd59c1f9a2290537b831b04c44c8850a5268e7183395f",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 246,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked setup spans guard an acquired but unreturned Connection. Exactly one closeAfterSetupFailure runs before failure propagation; original fatal and nonfatal-over-fatal cleanup follow unchanged SS320, with no JDBC lease or JMS work issued during failed setup.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "123",
+    "findingId": "F03-PMD2-73114754aad9d6bd0be68d07e8f7a3370a2343953ea84e33de0b4bd77f9abce6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d982ed459375b3cce7bab06bef10223729c6f29aff7b201aab90820bf4104648",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 247,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked close-secondary spans use the existing distinct/fatal severity combiner and never retry the close. The factory retains original identity or promoted cleanup Error; graph inspection adds no I/O or suppression mutation.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "123",
+    "findingId": "F03-PMD2-a40f02cab4f2116e943a74520a92ebcc31c7c7928df78b580b9cbcfcb808893f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d982ed459375b3cce7bab06bef10223729c6f29aff7b201aab90820bf4104648",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 248,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked close-secondary spans use the existing distinct/fatal severity combiner and never retry the close. The factory retains original identity or promoted cleanup Error; graph inspection adds no I/O or suppression mutation.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "158",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "158",
+    "findingId": "F03-PMD2-ee976b77d0d420d5bd0b27301dd9dcc38a1fe0aa69d1a6c44f676356f19d574c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0c8f95a8f8c1923c686cffe589f9cfb5de40fd453fab363a6fcd93cf713a5344",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 249,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked rollback-secondary spans retain the existing SS320 severity policy. A failed rollback is not confirmed successful transaction or permission to mark/send again. The owned worker subsequently distinguishes any fatal retained in a nonfatal graph.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "158",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "158",
+    "findingId": "F03-PMD2-52182c2c754031d6f490ac628ad2f9a9e4545ed5aebc15c872de25d04f00fac8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0c8f95a8f8c1923c686cffe589f9cfb5de40fd453fab363a6fcd93cf713a5344",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 250,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked rollback-secondary spans retain the existing SS320 severity policy. A failed rollback is not confirmed successful transaction or permission to mark/send again. The owned worker subsequently distinguishes any fatal retained in a nonfatal graph.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "169",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "primary != secondary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "29",
+    "endline": "169",
+    "findingId": "F03-PMD2-164d1973d8ac3e5a32aa5f428155fc5cd3cc1626308266125430d771a9e727ed",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8d5169f51c60db40c0a667c1fe3ab010139c8280190f8a782caa361dae1f9496",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class": "fb1cc9d8409ade48c64b2ff79cecdf04776e8deb215eee4781067308ced9be2a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+        "sourceSha256": "062f789b78d1d691367542958f555526b8db0804243e026d2298092f2e6b5ee9"
+      },
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OutboxFailureOwnershipTest",
+        "sourceSha256": "6da99cd8631720de9385237bb4e26fbfccb214153bd1e7825e75151547cb14e5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 251,
+    "reason": "1355 current ordinary Outbox source applicability: Throwable reference inequality is deliberate: identical provider objects must not self-suppress and equals does not express failure identity. Fatal/nonfatal precedence and one cleanup invocation remain separately verified.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.java",
+    "sourceSha256": "2bc06a6ea61d12e35923fd694789a6aa467917bf508acc611b07b31346bb606c",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "17",
+    "beginline": "16",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread ",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "23",
+    "endline": "16",
+    "findingId": "F03-PMD2-fc0edfcb4cfb3e408027cacb789bc2e78e4295009afb8666a5df2a315d90ad51",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-70d9a3e2ec3688404f3b81ed1f299b6433ef1ad6bb77143f7b1f44c94d802ae3",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 267,
+    "reason": "1355 current ordinary Outbox source applicability: Standalone SS311/324/342 process owns this exact background thread handle, not an injected J2EE container-managed thread. Field ownership is not current VM/process ownership evidence.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "standaloneModulePomSha256": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "25",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread(",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "24",
+    "endline": "25",
+    "findingId": "F03-PMD2-8d45881d21c0207bca7b5c20f22c588da93fbf3cfca4f6e52bfd64c4646fb1ae",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9ae6f513fdb478c94dbf0a19ffff2005d23989702ed7ddcc65b4fdb655f0a131",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 268,
+    "reason": "1355 current ordinary Outbox source applicability: The dedicated non-daemon dispatcher is constructed before start and starts only through its exact owner; ordinary HTTP request threads do not send. This standalone JavaSE owner contract is outside the pinned J2EE managed-thread prohibition, not authority to launch a real Root.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "standaloneModulePomSha256": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "43",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "43",
+    "findingId": "F03-PMD2-d232352bb31bb66ca4b763bc4cdf8e52421b878b1f82c72d1e4b770c98c32959",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7840d217f04f6f76832084d506f8df67d99ddb5b3848181da236fbd438625ab1",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 269,
+    "reason": "1355 current ordinary Outbox source applicability: Private lock serializes start with stopping and started publication; this/class/caller monitor is not borrowed. No claim occurs before the exact owner starts its prepared thread.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "51",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "51",
+    "findingId": "F03-PMD2-58874ba88607b651ded072060db86be73f9d895a0f6068f02673f43922060ca5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-26581098e153c1a44af9d05a406461e06d22c4651201318d47e24e95603f3292",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 270,
+    "reason": "1355 current ordinary Outbox source applicability: wake checks started/stopping/failed and publishes signalled under the same private lock as the wait. No provider object or lease is exposed under this monitor.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "60",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "60",
+    "findingId": "F03-PMD2-8cc8dc46d1a33469a9539ac9ab283fd6e8548d43c4340299d79d25bf4e44eb64",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ac1e053d0b237702f44ccd12e08a7ad3776ba2ac4f96e61222c73daebde42503",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 271,
+    "reason": "1355 current ordinary Outbox source applicability: healthy snapshots started/stopping/failed under the same private monitor as state changes. It is local worker health, not external readiness or proof of physical cleanup.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "68",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "21",
+    "endline": "68",
+    "findingId": "F03-PMD2-21500bd1fa78e716897be3148ac5dc0b3e7c8e6b8c57ee374cc7f6c9a2c1a21b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e2cbf4d96cb88a4824b163e3a342c2def737f325466945eb63189ca5caa3aa02",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 272,
+    "reason": "1355 current ordinary Outbox source applicability: The worker waits and consumes signalled under the same private monitor, then releases it before DB/JMS dispatch. Stop notifications cannot be lost across the two stopping checks.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "77",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "77",
+    "findingId": "F03-PMD2-d25151068dcbf67ece046bf4dd7613ad64d18125493eead70a2977c63b6f7e49",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-95e41d4241ff117c57065fee7ca50c805c1451478968402ff6bc35b795dd28b5",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 273,
+    "reason": "1355 current ordinary Outbox source applicability: SQL/RTE from actual dispatch is examined for fatal graph before any later retry. Error escapes to the enclosing fatal branch; only Error-free ordinary infrastructure failure retains the existing periodic cycle. No raw provider text is emitted.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "84",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "84",
+    "findingId": "F03-PMD2-91d3b93b08bfc73088627af88524a656e00979cad29935cd9c7188a38db68b4e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-014505c2c832358f4d5f2e323637e0c2624e0c50bd9c3f96d6f59a0ac332ce56",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 274,
+    "reason": "1355 current ordinary Outbox source applicability: Restoring this exact worker interrupt after wait failure is a standalone JavaSE interruption contract, not container thread creation. The following private-lock state update makes the owner unhealthy.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "standaloneModulePomSha256": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "85",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "85",
+    "findingId": "F03-PMD2-cb9ce5847124511f819e50cc402a55e52f5bec6ecaa445ccc147d159434dde34",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-463d39c58d1418cdb3ce457cedd921b1d110fe34e8723ab01130f68367bde7a7",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 275,
+    "reason": "1355 current ordinary Outbox source applicability: Interrupted worker marks failed and notifies under the same private monitor as wake/healthy. The owner still joins before dependencies may be released; no external resource close is inferred.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "89",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "19",
+    "endline": "89",
+    "findingId": "F03-PMD2-ba38f20c34c00b7a8c9133f919ae335318838c185d05d1f494ddd14fd99cb63c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-209233b9f5126e735f540fc74bdeef7f0518b6a8eedf822ebd4aeac4c2b574c4",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 276,
+    "reason": "1355 current ordinary Outbox source applicability: Direct/promoted Error marks this worker failed before rethrow to its fixed uncaught diagnostic. It is never converted to ordinary SQL retry or a committed outbox result. Arbitrary failing provider diagnostic getters and real VM OOM remain residual risks.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "90",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "90",
+    "findingId": "F03-PMD2-a6f423272964c5e6e763dcfcc45905b38a85c09fe8d0f9ba04eccd867c8adf37",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c1138cf586a517c7e4ae3f9a6d1e707b55d86c7d88d7b46c70a8bb8eb6292722",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 277,
+    "reason": "1355 current ordinary Outbox source applicability: Fatal failed-state publication and notification use the same private lock as all health observers. This synchronized scope does not perform DB/JMS I/O or close outer dependencies.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "100",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "15",
+    "endline": "100",
+    "findingId": "F03-PMD2-a81f1715980f4e99777bb2a49976b57ca2ed7af291995093b799946ba9c0d8b1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-204eaa3085ccca2bd475b060565a999815839a2bfa6effdf4c27d94fd0bdc659",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 278,
+    "reason": "1355 current ordinary Outbox source applicability: Current caller thread identity is observed solely to reject owner self-join in this standalone process. It neither starts another thread nor proves actual native/Unit stop.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "standaloneModulePomSha256": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "100",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.currentThread() == worker)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "41",
+    "endline": "100",
+    "findingId": "F03-PMD2-db9986bbbc12d010c7efed9035b46cc25d7c42bf5e7b16b5fbcf01b3b5b05259",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ee847ea1c523e37e648ee3a838424cdc00cf169d85f4db69fd5b3713e76b1514",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 279,
+    "reason": "1355 current ordinary Outbox source applicability: Thread reference identity is required for self-join rejection; equals is not the ownership predicate. The branch precedes stop publication and join of the exact worker.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "102",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "102",
+    "findingId": "F03-PMD2-780d30349b76c29c3b6774d8f0bb2259d606b79ea1786446d6439e1c28ed5165",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ba9a8ae6295de972bdceb6023152da56bc2952e738c6726bdab1a33c0a830686",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcherTest",
+        "sourceSha256": "c920f0893ae5038af8f318434c736477a1633a1ad4591653e322be8a182bbd5c"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 280,
+    "reason": "1355 current ordinary Outbox source applicability: close publishes stopping and notify under the private lock, then releases it before joining. Concurrent provider dispatch can finish without needing an externally held caller monitor.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "22",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "28",
+    "endline": "114",
+    "findingId": "F03-PMD2-ab1bd9c8ae6fcc13769a8aa253d85dd48b2d19874928a9abd20faf4027330091",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1dfdfbbf79a7a52d9ae4401857539fe912471c7a74dcae57509be5af3c3997c0",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class": "ed2e58121c61ca5838012ddd15263d0204f30cce633235f26b2355aae42caeb4"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 281,
+    "reason": "1355 current ordinary Outbox source applicability: Only the closing caller interrupt flag is restored after the exact worker has been joined, preserving existing shutdown behavior. Pinned J2EE managed-thread premise does not apply to this standalone owner observation.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+    "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+    "standaloneModulePomSha256": "e4f9cff1d3112175cd2aeacea3a183d9b1d6d47c95b56fefda0679b47dabe4b4",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "93",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "93",
+    "findingId": "F03-PMD2-827db8ae5e9c118e22815f0641a53638180aae778f8a1de4443b8d62efe75992",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-aaef875f9e65d39231d1aeb34a6fefabc0af28af0cda8962a6d65c7dc2d3e2d1",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1195,
+    "reason": "1355 current ordinary Outbox source applicability: Transaction work/commit SQL/RTE failure is retained as primary and triggers one existing rollback before rethrow and owned finally close. The ordinary failure graph boundary is separate; this review does not replace existing Web JDBC compound precedence with API SS320 ordering.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "97",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "97",
+    "findingId": "F03-PMD2-e847371bea88b5354b1c793c83c28f47c92910e930dff2769c8d27c296c9867b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7cc6ad0229d11512131e13e54aa3345bab2eef7c149f3056decf2e39ba348622",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1196,
+    "reason": "1355 current ordinary Outbox source applicability: Rollback RTE is retained only as a distinct secondary on the original failure. It cannot turn a failed transaction into a successful projected log or durable retry mark.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "15",
+    "beginline": "98",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "rollbackFailure != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "41",
+    "endline": "98",
+    "findingId": "F03-PMD2-59e6f2181a0844498e7ef3efb5865706665d0989d04374c99c6038ecf740575d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ced07a633e0f7a3672be2e65b8e332c3c22004273f8459af9bac610878a2c0e1",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1197,
+    "reason": "1355 current ordinary Outbox source applicability: Same provider Throwable must not be added to itself. Reference identity is the suppression contract and must not invoke provider equals.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "99",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "23",
+    "endline": "99",
+    "findingId": "F03-PMD2-bb86c6d21e65408d13a81458fd463758e0bae47dda253899cda1bcd6c5823fcb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ae87198924c9caa486c90900b90e6c2599d8fc9d02229d54ffff41470ce599f4",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1198,
+    "reason": "1355 current ordinary Outbox source applicability: Rollback Error remains fatal and retains the distinct nonfatal transaction failure. It does not authorize another rollback, mark or JMS send.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "105",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "105",
+    "findingId": "F03-PMD2-346a58b90851bc08a93c871431798987b9d71bed1c1641d4eb4ce6a79613866a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9db11539b112975e1a0c022421f5a563dab2bae6ecf7e3a900ec1e0eafa6b79c",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1199,
+    "reason": "1355 current ordinary Outbox source applicability: Both outer unchecked spans retain primary through owned Connection finally even for setup failure. No not-yet-acquired connection is closed; normal return still requires commit and close. This is the existing Web owner boundary, not physical DB release certification.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "105",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "105",
+    "findingId": "F03-PMD2-41ac2f618e56ab7a7444c76cd9693465eea6ca493e31fd84981acdea59d57f92",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9db11539b112975e1a0c022421f5a563dab2bae6ecf7e3a900ec1e0eafa6b79c",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1200,
+    "reason": "1355 current ordinary Outbox source applicability: Both outer unchecked spans retain primary through owned Connection finally even for setup failure. No not-yet-acquired connection is closed; normal return still requires commit and close. This is the existing Web owner boundary, not physical DB release certification.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "117",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "117",
+    "findingId": "F03-PMD2-6db3bd7f90b63cb12a31ed8a9b842330e22b91c2c508e84922146941f9e5f63b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a7ad5a8217454f3ad62357b4294627c1f1e7be9719ad9df265bbcb363ae77f2f",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1201,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked Connection.close spans use the unchanged Web compound contract. A distinct close Error remains fatal and retains primary; other distinct close failures stay secondary. The new graph inspection does not silently rewrite the established Web fatal-primary ranking.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "117",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "117",
+    "findingId": "F03-PMD2-747debddfcdb47785e18e34365821ef1fb1be493bfd80dd8d3842194cb8bd49f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a7ad5a8217454f3ad62357b4294627c1f1e7be9719ad9df265bbcb363ae77f2f",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1202,
+    "reason": "1355 current ordinary Outbox source applicability: Both unchecked Connection.close spans use the unchanged Web compound contract. A distinct close Error remains fatal and retains primary; other distinct close failures stay secondary. The new graph inspection does not silently rewrite the established Web fatal-primary ranking.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "119",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "35",
+    "endline": "119",
+    "findingId": "F03-PMD2-6f1da1d6069a3f18ddd31d8d4d2c4e0332cd788ca224befde052aa554e88139e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-87b18d3a6f0d06dd864000708e8a307c4d397b0346b377cebc3d51b72961869c",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1203,
+    "reason": "1355 current ordinary Outbox source applicability: Close Error severity must be distinguished from ordinary SQL/RTE cleanup to prevent nonfatal retry normalization. This type predicate implements the established Web owner contract, not an external success or cleanup confirmation.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "45",
+    "beginline": "119",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "fatal != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "61",
+    "endline": "119",
+    "findingId": "F03-PMD2-21db142005b6f3df7404acf5d51b9ec1a445ba6ddb68665cae5b6612c2338f56",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-45b999235b57bf4c59f1ca61deb08733e8b63ee7f6e7e11a6dc8b0a0cc5ba595",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1204,
+    "reason": "1355 current ordinary Outbox source applicability: A close Error identical to primary cannot suppress itself. Distinct close Error retains the original through existing Web priority; identity is not semantic equals.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "123",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "closing != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "29",
+    "endline": "123",
+    "findingId": "F03-PMD2-876eb271bbae02463dc1330fcb8b049c0f3fcbe490b60619cbdb31ec3969814d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ab97820edefdd3549277cfd8943fca99aedf3e490bb82043a34f8fedb2625526",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$SqlAction.class": "9df9a5e541155a9ebee7854e9fd79fbccab72a3b600f1151dd75ca4c4a9060e6",
+      "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class": "36089d629461c1be852372a2e53c99d650714546471773167a45ef1173100964"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "5c5a5edda107a137b89c9ea3995de276519699ac4054a95003fe5fbde9139dd5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1205,
+    "reason": "1355 current ordinary Outbox source applicability: Non-promoted cleanup is added only for a distinct Throwable. Same Error/RTE remains itself; no provider equals, repeated close or new failure-code work is introduced.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+    "sourceSha256": "62da1f47e3ad46d0574f07f18bd0a0e1c36876c6a135981e462261a53f525f30",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "17",
+    "beginline": "21",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread ",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "23",
+    "endline": "21",
+    "findingId": "F03-PMD2-cb5832be5020ba6a0c382f822e50d6ed73d0e46b3af4488ef855cdca80fe4e4c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e4c05dca6235d2e86106f8b019317cf66263c30e821f03d9f18bd76bf84799c3",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1217,
+    "reason": "1355 current ordinary Outbox source applicability: Standalone SS311/324 JavaSE Web runtime retains its exact dedicated replay handle, not a J2EE-managed pool thread. A saved handle is not current native ownership proof.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "standaloneModulePomSha256": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "26",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "lastReport ",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "54",
+    "endline": "26",
+    "findingId": "F03-PMD2-5784dc5d6f0cafba47458e2429971cc1d530df11494e8f89b837a736021acf5f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-005c2e53e0d8a2c6b1d043065031c0a0f744e2e52fcdecdb88f5c4c8b4e44568",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310"
+      }
+    ],
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1218,
+    "reason": "1355 current ordinary Outbox source applicability: The immutable lastReport reference is published by the worker and read by snapshot callers without a common lock; volatile visibility is required. Atomic cycle counters do not make every independent reference read a safely published replacement, and aggregate snapshot is not a transaction receipt.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidUsingVolatile",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "41",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "15",
+    "endline": "41",
+    "findingId": "F03-PMD2-9d0024923fc3bdd5a420e5431b008df16b1116494c19cecc9f433c9b32f2e75a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1915cab85dad1cfaead258ffc40b85c9db021cf20c8eaf8ed5cfb175ae0f1abc",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1219,
+    "reason": "1355 current ordinary Outbox source applicability: Prepared daemon platform thread has one outer owner and fixed terminal handler, then starts only through the factory. The standalone off-HTTP replay contract is outside the pinned J2EE prohibition; real runtime thread permission/termination is not certified here.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "standaloneModulePomSha256": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "70",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "70",
+    "findingId": "F03-PMD2-ac6e0d1e5e32071e680ae7f15f42f96c29264f5d63ef35a092ea342227ce2668",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1aea3b7f80bb246705ec697c998a45e1a7b8ac34e8203f1801ef6d1d64d26100",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1220,
+    "reason": "1355 current ordinary Outbox source applicability: SQL/RTE is inspected through the dedicated full provider graph before failedCycles increments. Fatal graph terminates with no completed/failed ordinary cycle; Error-free failures preserve schedule/backoff and redacted aggregate metrics. General session catalog behavior is not widened.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "15",
+    "endline": "107",
+    "findingId": "F03-PMD2-915201f46f689eb8fded801366c706d77028f3802c561bdcba876766e37a2b99",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f86e03eaf12ebc239f3d7167a21eca1b5ce7fc30c9ecc1fc3a0edef329211ed0",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1221,
+    "reason": "1355 current ordinary Outbox source applicability: Current caller identity is observed only to reject joining the same worker in standalone bounded close. It is neither a thread launch nor proof of an actual Root owner.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "standaloneModulePomSha256": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.currentThread() == thread)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "41",
+    "endline": "107",
+    "findingId": "F03-PMD2-439e3dc6cc2dff370f1c87df8ef263b9ec4d519d29158128af04e483c984c741",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b31d891f64ca0c7ec5a5ae5f7d5a1ef582e45ed56e088512328be2ae3cfef5d3",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1222,
+    "reason": "1355 current ordinary Outbox source applicability: Reference equality compares caller with the exact retained thread for self-join safety; value equality would not express ownership. A failed self-join is not a clean stop.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "114",
+    "findingId": "F03-PMD2-e43755a22a8ec481ad235b864ff83c9533c5e4a026cfb5a36a87fbd1fb821b4a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-354ba61a68e148117c2186857113db194b6afa6bf535a7ecf373e8829936a147",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$DispatchAction.class": "5323177a091e3568d15fdc03ccd1dcea8890d06f5a7755f5c77c6a4e61efd756",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker$Snapshot.class": "7a701446f9162efa41dc2e0c5647682b834bcbe3952992a26c993f6c7d7ae638",
+      "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class": "042eabdb08ad9297369b60d6fcdd5e5c72089be99767a06edc41ed682e9f713e"
+    },
+    "pinnedRule": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1223,
+    "reason": "1355 current ordinary Outbox source applicability: Caught join interruption restores only the caller interrupt before fixed unconfirmed-stop exception. The standalone owner still requires a genuine join; pinned J2EE managed-thread restriction is not the execution context.",
+    "reviewScope": "PINNED_STANDALONE_RULE_PREMISE_ONLY",
+    "rule": "DoNotUseThreads",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+    "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "standaloneModulePomSha256": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  }
+]
