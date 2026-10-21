@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Set;
 import org.apache.activemq.artemis.api.core.ActiveMQDuplicateIdException;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Authenticates Web-local storage before committing one persistent WLGEVT01 message. Trace:
@@ -33,34 +34,43 @@ public final class WebLogMessageSender {
   public void send(ClaimedWebLog row) throws WebLogSendException {
     Objects.requireNonNull(row, "row");
     byte[] wire = codec.decrypt(row.identity(), row.payload());
-    try (JMSContext context = Objects.requireNonNull(contexts.open(), "JMS context")) {
-      if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
-        throw new WebLogSendException("web log JMS context is not transacted");
-      }
+    try {
+      JMSContext context = Objects.requireNonNull(contexts.open(), "JMS context");
+      @Nullable Throwable primary = null;
       try {
-        BytesMessage message = context.createBytesMessage();
-        message.writeBytes(wire);
-        message.setJMSCorrelationID(row.identity().correlationId().toString());
-        message.setStringProperty("NKMessageID", row.identity().messageId().toString());
-        message.setStringProperty("NKLayoutID", "WLGEVT01");
-        message.setStringProperty("NKProtocolVersion", "001");
-        message.setStringProperty("_AMQ_DUPL_ID", row.identity().messageId().toString());
-        context
-            .createProducer()
-            .setDeliveryMode(DeliveryMode.PERSISTENT)
-            .setTimeToLive(0)
-            .send(new ActiveMQQueue(BrokerTopology.WEB_LOG.fullyQualifiedQueue()), message);
-      } catch (JMSException | RuntimeException failure) {
-        rollback(context, failure);
-        throw new WebLogSendException("web log JMS send was not confirmed", failure);
-      }
-      try {
-        context.commit();
-      } catch (RuntimeException failure) {
-        rollback(context, failure);
-        if (!duplicateConfirmed(failure)) {
-          throw new WebLogSendException("web log JMS commit was not confirmed", failure);
+        if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
+          throw new WebLogSendException("web log JMS context is not transacted");
         }
+        try {
+          BytesMessage message = context.createBytesMessage();
+          message.writeBytes(wire);
+          message.setJMSCorrelationID(row.identity().correlationId().toString());
+          message.setStringProperty("NKMessageID", row.identity().messageId().toString());
+          message.setStringProperty("NKLayoutID", "WLGEVT01");
+          message.setStringProperty("NKProtocolVersion", "001");
+          message.setStringProperty("_AMQ_DUPL_ID", row.identity().messageId().toString());
+          context
+              .createProducer()
+              .setDeliveryMode(DeliveryMode.PERSISTENT)
+              .setTimeToLive(0)
+              .send(new ActiveMQQueue(BrokerTopology.WEB_LOG.fullyQualifiedQueue()), message);
+        } catch (JMSException | RuntimeException failure) {
+          rollback(context, failure);
+          throw new WebLogSendException("web log JMS send was not confirmed", failure);
+        }
+        try {
+          context.commit();
+        } catch (RuntimeException failure) {
+          rollback(context, failure);
+          if (!duplicateConfirmed(failure)) {
+            throw new WebLogSendException("web log JMS commit was not confirmed", failure);
+          }
+        }
+      } catch (WebLogSendException | RuntimeException | Error failure) {
+        primary = failure;
+        throw failure;
+      } finally {
+        closeAfterFailure(context, primary);
       }
     } catch (WebLogSendException failure) {
       throw failure;
@@ -68,6 +78,20 @@ public final class WebLogMessageSender {
       throw new WebLogSendException("web log JMS lifecycle failed", failure);
     } finally {
       Arrays.fill(wire, (byte) 0);
+    }
+  }
+
+  /** SSC321: one owned close, fatal priority and provider same-Throwable protection. */
+  private static void closeAfterFailure(JMSContext context, @Nullable Throwable primary) {
+    try {
+      context.close();
+    } catch (RuntimeException | Error closing) {
+      if (primary == null) throw closing;
+      if (closing instanceof Error fatal && !(primary instanceof Error)) {
+        fatal.addSuppressed(primary);
+        throw fatal;
+      }
+      if (closing != primary) primary.addSuppressed(closing);
     }
   }
 

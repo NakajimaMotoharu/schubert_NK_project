@@ -87,6 +87,11 @@ public final class ArtemisRequestSender implements JmsRequestSender {
       if (primary == null) {
         throw closing;
       }
+      // SSC321/PT-IDEM-WEB321001: fatal close cannot become ordinary request failure.
+      if (closing instanceof Error fatal && !(primary instanceof Error)) {
+        fatal.addSuppressed(primary);
+        throw fatal;
+      }
       if (closing != primary) {
         primary.addSuppressed(closing);
       }
