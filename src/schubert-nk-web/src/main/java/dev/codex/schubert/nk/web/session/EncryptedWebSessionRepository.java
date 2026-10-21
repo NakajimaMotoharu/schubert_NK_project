@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.session;
 
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import dev.codex.schubert.nk.web.revocation.EncryptedRevocationPayload;
 import dev.codex.schubert.nk.web.revocation.PendingRevocationRepository;
 import dev.codex.schubert.nk.web.revocation.RevocationFailureCode;
@@ -306,7 +307,8 @@ public final class EncryptedWebSessionRepository {
         try {
           connection.rollback();
         } catch (SQLException | RuntimeException | Error rollback) {
-          if (failure != rollback) failure.addSuppressed(rollback);
+          // SS312/332/354, SSC329330: the outer TWR still owns close on early fatal propagation.
+          WebStartupException.attachSecondary(failure, rollback);
         }
         SessionStoreException.preserveFatal(failure);
         throw new SessionStoreException();

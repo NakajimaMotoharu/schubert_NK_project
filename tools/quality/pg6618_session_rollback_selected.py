@@ -8,7 +8,7 @@ import finite_selected_profile as profile
 import finite_original_red as original
 
 OLD='78f4a54fa340bacfcc8ba5528348276b5c3209da'
-RED_SOURCE=None
+RED_SOURCE='93f1410684a8d515bc602dd787b3063ddd690547'
 TEST='src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionRollbackAttachment329Test.java'
 MAIN='src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java'
 TARGETS={'web':['web/session/EncryptedWebSessionRepository']}
