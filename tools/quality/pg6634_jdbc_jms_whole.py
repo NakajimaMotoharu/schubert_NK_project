@@ -9,7 +9,7 @@ ROOT,W,BASE,sha=base.ROOT,base.W,base.BASE,base.sha
 OLD='f39de2986cbe0dc4a552f64d55ac723002cc77f6'
 LABEL='PG6634'
 SLOT='pg6634-jdbc-jms-six-v1'
-QSHA=None  # Freeze only after the genuine original PG6630/86 qualification exists.
+QSHA='12b0ae457468b7c9c52d4e2ad10da8daf6084f962ffb084236c78fa76db55f87'
 
 
 def original_source():
