@@ -1,4 +1,12 @@
 # PT・IT試験観点詳細設計
+## SSC334 ordinary broker/親runtime PG/PT（2026-10-22）
+
+BUG1604/YKT1357・1606/YKT1359。自己所有ConnectionFactory/JMSContext/consumer/owner interface proxyと未接続ActiveMQ locatorのsetter fixtureだけで、API/Web supplier/createContext四edge fatal graph・finally copy wipe、API多owner/Web単owner closeのlate graph・全必要順/数・成功phase再close0を独立Error identity/整数literalで検証する。実credential/DB/network/VM/Root/failed cohort/permit/実native操作を発行しない。fixture locatorはcaller finallyでdisposeし、報告close失敗を実環境の解放成功へ変換しない。
+
+provider/Web configureOwnedのNoSupp primary＋close graph、API partial-constructionの第三provider失敗からreverse closeをすべて試行してからのfallback、親runtimeの未取得Web-log factory NoSupp＋通知graph/既取得Sync全closeを反例化する。標準suppressionでraw primaryへ保持できるpartial factory outcome、直接primary/closeの既表・same object非自己抑制・非fatal固定診断は別controlで維持する。parent closeはpublic/既testability portから実childを組み、reflectionでprivate groupを偽造しない。
+
+production methodでexpectedを生成せず、事前固定Error object・SSのrole/setting/diagnostic literal・明示close順/zero-op/wipe表を使う。原counterexample/同source input hash→必要PG→全新旧Test bytes固定/既domain→原Jar/XML/全Main/四counter/静的/traceへ結合する。実測不足/native/CHR/正式・拒否PT代替は分離し、代替完了や実環境所有の証明へ補完しない。
+
 ## SSC333 ordinary startup/multi-close secondary PG/PT（2026-10-22）
 
 BUG1604/YKT1357。自己所有JMS interface proxyだけで、NoSupp Runtime primary＋通知/closing側のcause/suppressed/JMSlinked/SQLnext Errorを固定object identityで再現する。startup通知一回/close必要全数・順序を先にassertし、その後の元Error選択と、普通非fatal時の既catalog/cause/suppressed・same object非自己抑制・直接primary/直接closeの既優先を確認する。期待値は事前固定objectとliteral counter/table、Production methodをexpected生成へ使わない。
