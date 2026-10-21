@@ -1,5 +1,7 @@
 # BrokerParent334 ordinary graph境界 PT仕様（実装前）
 
+是正後固定source00a1cff1a97ddb3b238cff0988db60ae73b3114f、API config Test SHA1f041abc7682885bd63bd6bb9b541073147b293aa2888f3c5e56affde712d7ba。parent/Web/全旧Test/Main903bは不変。formatter/管理三/pyflakes0・remote同期clean確認。新only6698/6700→6702/6704を使用し、以下旧b4c8fc0eは初回compile停止sourceの履歴。実接続/serializationは発行しない。fresh共有残31%、実token/専有費/期間差不明null。
+
 ## 初回compile停止・新only是正（BUG1607/YKT1360）
 
 4ba67acda/archive11cc5cdd、元6690/99517と6692/71599は両phase0,1真正1/0PT0suite、OrderedProbeのExternalizable public no-arg ctor一件不足を既-Werrorが検出。八予定反例/合格へ加算0、元manifest/診断を保持。Test subclassへ有効な既定index0/empty orderを準備するpublic no-argだけ追加、既arg ctorの独立input/expected・Main903b/他Test bytesは固定、実serializationや接続を発行しない。新SLOTS=API赤6698/Web赤6700-v2、green6702-v2/原6704-v2、driver名/宣言17-9・15-8・127-33は不変更。以下v1番号は初期計画履歴として保持する。
