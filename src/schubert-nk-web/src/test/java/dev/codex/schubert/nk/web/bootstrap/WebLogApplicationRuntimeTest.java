@@ -56,8 +56,111 @@ import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** PG231: real Log-path Web boot plus deterministic resource-failure boundaries. */
+/** PG231/SSC324 START003: Log-path boot, ownership and distinct fatal infrastructure health. */
 final class WebLogApplicationRuntimeTest {
+
+  @Test
+  void start324003FatalReplyInfrastructureSignalsRuntimeWithoutBusinessAck() throws Exception {
+    var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
+    var listener = new java.util.concurrent.atomic.AtomicReference<jakarta.jms.MessageListener>();
+    var opened = new AtomicInteger();
+    var closed = new AtomicInteger();
+    var rollbacks = new AtomicInteger();
+    var commits = new AtomicInteger();
+    var committedSignals = new AtomicInteger();
+    var reads = new AtomicInteger();
+    var fatal = new AssertionError("synthetic provider fatal");
+    dev.codex.schubert.nk.web.messaging.JmsContextFactory contexts =
+        () -> {
+          opened.incrementAndGet();
+          return (JMSContext)
+              Proxy.newProxyInstance(
+                  JMSContext.class.getClassLoader(),
+                  new Class<?>[] {JMSContext.class},
+                  (proxy, method, arguments) ->
+                      switch (method.getName()) {
+                        case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+                        case "setAutoStart", "start" -> null;
+                        case "createQueue" -> new ActiveMQQueue((String) arguments[0]);
+                        case "createConsumer" ->
+                            Proxy.newProxyInstance(
+                                jakarta.jms.JMSConsumer.class.getClassLoader(),
+                                new Class<?>[] {jakarta.jms.JMSConsumer.class},
+                                (consumer, action, values) ->
+                                    switch (action.getName()) {
+                                      case "setMessageListener" -> {
+                                        assertTrue(
+                                            listener.compareAndSet(
+                                                null, (jakarta.jms.MessageListener) values[0]));
+                                        yield null;
+                                      }
+                                      case "close" -> null;
+                                      default ->
+                                          throw new AssertionError(
+                                              "unexpected consumer fixture operation");
+                                    });
+                        case "rollback" -> {
+                          rollbacks.incrementAndGet();
+                          yield null;
+                        }
+                        case "commit" -> {
+                          commits.incrementAndGet();
+                          yield null;
+                        }
+                        case "close" -> {
+                          closed.incrementAndGet();
+                          yield null;
+                        }
+                        default -> throw new AssertionError("unexpected context fixture operation");
+                      });
+        };
+    try (var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null)) {
+      try (var runtime =
+          WebLogApplicationRuntime.start(
+              root,
+              0,
+              source(db::web),
+              contexts,
+              sessionCodec,
+              clock,
+              audit(),
+              java.util.UUID::randomUUID,
+              dispatcher(source(db::web), logCodec, contexts),
+              "web-log-worker",
+              10,
+              Duration.ofMillis(10),
+              ignored -> committedSignals.incrementAndGet())) {
+        assertTrue(runtime.ready());
+        assertFalse(runtime.terminalFailureObserved());
+        assertEquals(2, opened.get(), "reply owner and one readiness probe, no business send");
+        assertEquals(1, closed.get(), "only readiness probe has returned before fault");
+        var message =
+            (jakarta.jms.BytesMessage)
+                Proxy.newProxyInstance(
+                    jakarta.jms.BytesMessage.class.getClassLoader(),
+                    new Class<?>[] {jakarta.jms.BytesMessage.class},
+                    (proxy, method, arguments) -> {
+                      if (!method.getName().equals("getBodyLength"))
+                        throw new AssertionError("unexpected body fixture accessor");
+                      reads.incrementAndGet();
+                      throw fatal;
+                    });
+        var callback = listener.get();
+        assertNotNull(callback);
+        assertSame(fatal, assertThrows(AssertionError.class, () -> callback.onMessage(message)));
+        assertEquals(1, reads.get());
+        assertEquals(1, rollbacks.get());
+        assertEquals(0, commits.get());
+        assertEquals(0, committedSignals.get());
+        assertTrue(runtime.terminalFailureObserved());
+        assertFalse(runtime.ready());
+      }
+      assertEquals(2, closed.get(), "both synthetic contexts closed by their actual owner scopes");
+    } finally {
+      db.stop();
+    }
+  }
 
   @Test
   void rerun008UnknownWorkerJoinMustRetainReplyOwnerAndAllowRetry() {
