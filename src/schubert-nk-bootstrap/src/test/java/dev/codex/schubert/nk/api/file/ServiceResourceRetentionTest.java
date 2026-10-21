@@ -12,6 +12,77 @@ import org.junit.jupiter.api.Test;
 /** PT-NHOLD316001; literal release/outer-frame oracles, no DB/Root/service credentials. */
 final class ServiceResourceRetentionTest {
   @Test
+  @org.junit.jupiter.api.parallel.ResourceLock(org.junit.jupiter.api.parallel.Resources.SYSTEM_ERR)
+  void hold318004PreparedDiagnosticUsesLiteralAndChecksNullBeforeSink() throws Exception {
+    var original = System.err;
+    var bytes = new java.io.ByteArrayOutputStream();
+    try (var output =
+        new java.io.PrintStream(bytes, true, java.nio.charset.StandardCharsets.UTF_8)) {
+      try {
+        System.setErr(output);
+        var diagnostic = ServiceProcessResources.unknownReleaseDiagnosticPolicy();
+        diagnostic.accept(new IOException("synthetic non-public IO detail"));
+        diagnostic.accept(new AssertionError("synthetic non-public fatal detail"));
+        var absent = assertThrows(NullPointerException.class, () -> diagnostic.accept(null));
+        assertEquals("unconfirmed release", absent.getMessage());
+      } finally {
+        System.setErr(original);
+      }
+      String line = "service resource release unconfirmed" + System.lineSeparator();
+      assertEquals(line + line, bytes.toString(java.nio.charset.StandardCharsets.UTF_8));
+    }
+  }
+
+  @Test
+  @org.junit.jupiter.api.parallel.ResourceLock(org.junit.jupiter.api.parallel.Resources.SYSTEM_ERR)
+  void hold318005PreparedDiagnosticContainsRuntimeAndFatalSinkFailures() throws Exception {
+    var original = System.err;
+    for (boolean fatal : List.of(false, true)) {
+      var messages = new java.util.ArrayList<String>();
+      try (var output =
+          new java.io.PrintStream(
+              new java.io.ByteArrayOutputStream(), true, java.nio.charset.StandardCharsets.UTF_8) {
+            @Override
+            public void println(String message) {
+              messages.add(message);
+              if (fatal) throw new AssertionError("synthetic sink fatal");
+              throw new IllegalStateException("synthetic sink runtime");
+            }
+          }) {
+        try {
+          System.setErr(output);
+          assertDoesNotThrow(
+              () ->
+                  ServiceProcessResources.unknownReleaseDiagnosticPolicy()
+                      .accept(new IOException("synthetic primary retained elsewhere")));
+        } finally {
+          System.setErr(original);
+        }
+        // Assertions are outside the callback protected by the Production catch.
+        assertEquals(List.of("service resource release unconfirmed"), messages);
+      }
+    }
+  }
+
+  @Test
+  void hold318006PreparedObservationIsFiniteAndConsumesNotificationOnly() {
+    assertTimeoutPreemptively(
+        java.time.Duration.ofSeconds(5),
+        () -> {
+          var observation = ServiceProcessResources.unknownReleaseObservationPolicy();
+          try {
+            observation.run();
+            assertFalse(Thread.currentThread().isInterrupted());
+            Thread.currentThread().interrupt();
+            observation.run();
+            assertFalse(Thread.currentThread().isInterrupted());
+          } finally {
+            Thread.interrupted();
+          }
+        });
+  }
+
+  @Test
   void hold316001NormalAndNullPortsNeverManufactureAnUnknownRelease() throws Exception {
     var closeCalls = new AtomicInteger();
     Closeable closeable = closeCalls::incrementAndGet;
