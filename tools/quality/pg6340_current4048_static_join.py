@@ -4,8 +4,8 @@ import pg6282_current4040_static_join as prior
 from pg6334_current4048_trace import SOURCE,read_qualified
 from pg6336_current4048_static_plan import PRIOR,PRIOR_SHA,OLD
 
-INPUT=prior.BASE/'PG6338-outbox-graph-static-review-v1/manifest.json'
-INPUT_SHA='913d5fb156d4e7c99a679f4699b829bed01cab175fa06427c1769f871929499a'
+INPUT=prior.BASE/'PG6344-question-storage-static-review-v1/manifest.json'
+INPUT_SHA='05336045ed9b0df5eb0472cd30e86e3cf46e827ab52f944de5446c543f51cb82'
 
 
 def definitions():

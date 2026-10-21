@@ -1,0 +1,607 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "137",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "137",
+    "findingId": "F03-PMD2-9f6af5d7525c9cd9a65cbec6f1604e78cb0143022be873c64881100ee2b3091d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9860db2b4a70887ea6405293f941b3591f5ee76fb9d02e162645f9772bacb560",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Accepted.class": "455bc2a1f87f9ff170c85d4ce2654d910c0d5cec0e08a729d6e4a7b7dfd0906f",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Denied.class": "199b88f151b62c2a53dae9ad5cf37a10fb645abb08fcedfe0cb63e3b44a877f3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage.class": "aba164e894c98b698a8104334bed66a50cd995a943edb57ec8d4c438b2f816ea",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Outcome.class": "b62e5151c66590bc69eb9e6e2c36365eeb0a20b7b7ab79a2f9961a0584960d76",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$RetainedRequest.class": "08e02c015532c9c4893655267b21f0258a4f18b1876068353c09cc781124f731",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class": "203e37f46da7aef0e2c09215c536f5879881bd6a9e5cf51eb83357c4cb448c42"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+        "sourceSha256": "ab4a05c3d297443c69fe23eaeb2a25a7a4fe0485a894a62eb51d23c51ae8dee4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 26,
+    "reason": "1356 individual question/query/file owner source applicability: The request-owned decoded body closes/wipes before generic SQL/RTE maps to fixed infrastructure failure. The preceding permanent-error branch rejects suppressed cleanup uncertainty instead of claiming permanent valid result. This path returns no accepted question or invented retry receipt.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "202",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "202",
+    "findingId": "F03-PMD2-dee8eff3e1408aaba96a218cb5af54bdc859ea8db0411859add1b7a36e9fe886",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b609883cd55edc460bd8e043bbe9e26d7d8e02479690b8f3637e025db8f994ed",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Accepted.class": "455bc2a1f87f9ff170c85d4ce2654d910c0d5cec0e08a729d6e4a7b7dfd0906f",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Denied.class": "199b88f151b62c2a53dae9ad5cf37a10fb645abb08fcedfe0cb63e3b44a877f3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage.class": "aba164e894c98b698a8104334bed66a50cd995a943edb57ec8d4c438b2f816ea",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Outcome.class": "b62e5151c66590bc69eb9e6e2c36365eeb0a20b7b7ab79a2f9961a0584960d76",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$RetainedRequest.class": "08e02c015532c9c4893655267b21f0258a4f18b1876068353c09cc781124f731",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class": "203e37f46da7aef0e2c09215c536f5879881bd6a9e5cf51eb83357c4cb448c42"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+        "sourceSha256": "ab4a05c3d297443c69fe23eaeb2a25a7a4fe0485a894a62eb51d23c51ae8dee4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 28,
+    "reason": "1356 individual question/query/file owner source applicability: Submission SQL/RTE attempts the existing rollback and propagates through owned Connection TWR. A created acceptance escapes only after commit/close; subsequent SENT polling is outside that transaction. This applicability does not certify every arbitrary compound provider graph.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "410",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "PSQLException ",
+    "diagnosticTextSha256": "7d01c41c9ecb0a6b3f0035626c4035ee7407d803f75e7e911099e8d818cd90d8",
+    "endcolumn": "47",
+    "endline": "410",
+    "findingId": "F03-PMD2-2181e9c942f4ec72b545d4345817d96614ba0ead2f7c9f1fc4543384e13baa58",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f99dc9c297d373a30f378669b0641aef3c2047e5c838ac57a5a312673b2b4c75",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Accepted.class": "455bc2a1f87f9ff170c85d4ce2654d910c0d5cec0e08a729d6e4a7b7dfd0906f",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Denied.class": "199b88f151b62c2a53dae9ad5cf37a10fb645abb08fcedfe0cb63e3b44a877f3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage.class": "aba164e894c98b698a8104334bed66a50cd995a943edb57ec8d4c438b2f816ea",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Outcome.class": "b62e5151c66590bc69eb9e6e2c36365eeb0a20b7b7ab79a2f9961a0584960d76",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$RetainedRequest.class": "08e02c015532c9c4893655267b21f0258a4f18b1876068353c09cc781124f731",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class": "203e37f46da7aef0e2c09215c536f5879881bd6a9e5cf51eb83357c4cb448c42"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+        "sourceSha256": "ab4a05c3d297443c69fe23eaeb2a25a7a4fe0485a894a62eb51d23c51ae8dee4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 29,
+    "reason": "1356 individual question/query/file owner source applicability: Only PostgreSQL23505 with the exact uq_questions_receipt_id server constraint may consume one of the three bounded receipt attempts. PSQLException type and nullable structured error are necessary to distinguish that specific collision from operation/message conflict or unrelated SQL failure; rollback/release of the savepoint precedes retry. Raw provider text is never exposed as a user result.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "477",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "477",
+    "findingId": "F03-PMD2-7036c47d07865fdfc81950c01f999f0dd602587ecfe126c0e7414f9bec8dc9c6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0e2a35d28b63146452a425a50b4f151de3496ac1890fdc300e84394beed095ec",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Accepted.class": "455bc2a1f87f9ff170c85d4ce2654d910c0d5cec0e08a729d6e4a7b7dfd0906f",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Denied.class": "199b88f151b62c2a53dae9ad5cf37a10fb645abb08fcedfe0cb63e3b44a877f3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage.class": "aba164e894c98b698a8104334bed66a50cd995a943edb57ec8d4c438b2f816ea",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Outcome.class": "b62e5151c66590bc69eb9e6e2c36365eeb0a20b7b7ab79a2f9961a0584960d76",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$RetainedRequest.class": "08e02c015532c9c4893655267b21f0258a4f18b1876068353c09cc781124f731",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class": "203e37f46da7aef0e2c09215c536f5879881bd6a9e5cf51eb83357c4cb448c42"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+        "sourceSha256": "ab4a05c3d297443c69fe23eaeb2a25a7a4fe0485a894a62eb51d23c51ae8dee4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 30,
+    "reason": "1356 individual question/query/file owner source applicability: SENT proof is a separate short readOnly transaction; SQL/RTE attempts rollback and propagates before owned close. This catch cannot publish another QWK, retain a waiting DB transaction, or promote an unconfirmed message to SENT.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "582",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "582",
+    "findingId": "F03-PMD2-145a563f2d2c1898c90d0b5754cd788271759f48637a7b7521134d91167c55d6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f5c89f0f1b3e8246c168400f8de5cc90f74040fba9d51da7b1f4eb72fed5a3d6",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Accepted.class": "455bc2a1f87f9ff170c85d4ce2654d910c0d5cec0e08a729d6e4a7b7dfd0906f",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Denied.class": "199b88f151b62c2a53dae9ad5cf37a10fb645abb08fcedfe0cb63e3b44a877f3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage.class": "aba164e894c98b698a8104334bed66a50cd995a943edb57ec8d4c438b2f816ea",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$Outcome.class": "b62e5151c66590bc69eb9e6e2c36365eeb0a20b7b7ab79a2f9961a0584960d76",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService$RetainedRequest.class": "08e02c015532c9c4893655267b21f0258a4f18b1876068353c09cc781124f731",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class": "203e37f46da7aef0e2c09215c536f5879881bd6a9e5cf51eb83357c4cb448c42"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest",
+        "sourceSha256": "ab4a05c3d297443c69fe23eaeb2a25a7a4fe0485a894a62eb51d23c51ae8dee4"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 31,
+    "reason": "1356 individual question/query/file owner source applicability: Retained-attempt audit SQL/RTE attempts rollback and rethrows through owned close. The fixed conflict/temporary code is not a new business acceptance or evidence that an earlier outbox send completed. No body/session/provider text is emitted by this catch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "sourceSha256": "788e32981d8d6986eb22eeb2efdda317a6bdfba3bf7447179a1aa390237100c9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "138",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "138",
+    "findingId": "F03-PMD2-85929dde37648102413597e3f4c1792caf6009b92e56c7187140bc1a643aa37f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-81594f8b76f2b8bfc06292cb13151d4dc9faef13cf6e546eb51b33b03e52b2ff",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$DatabaseWork.class": "800c358bbf7403a6092800386f5dbb8d4cce1ef72475f0900be19edc45a958b4",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Deleted.class": "2bdf14d7a4beda38d482ac0ed03db9a3128552e8054a771a29633e0569949f9d",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Job.class": "0a887dddefb7a3d7dd48240e38ad5ae1192d5eba14d44e0805f239c13db5d300",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$PendingDlq.class": "f0b7da81bc4feae8753625ec3c240691c65c338fa53ce36044eb0da92e28f1eb",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Ready.class": "62a6628866bf0ad6ed7f321d7d13de5643be8332bc0b98d4497f5a7cc0cb92d3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Stage.class": "2474f543898cc70401d470ba74d19c75cc804a05259e509c2f9d92b9b1a51dbd",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Terminal.class": "220c14f3af88981d2991dfbf0852b42f386e45bd651fc97187f698b7997f6d10",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class": "ee8383d946f0a75c0fd71c71787d12d54615bdf4242445bf39461ad4fb3e08b4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+        "sourceSha256": "7b0fdef2ec3ae48a4d2b9c513c7edc26968993f0f52304b9de7e69ed0a73c048"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 32,
+    "reason": "1356 individual question/query/file owner source applicability: Provider Runtime failure is deliberately distinct from AnswerBusinessException: before terminal delivery it is temporary; at the configured terminal delivery the existing fail transaction and pending-DLQ/SENT path applies. This generic provider boundary never constructs a successful answer; direct Error is not caught here, and final ACK still requires its separate durable proof.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+    "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "150",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "150",
+    "findingId": "F03-PMD2-310d844a6ea94ce3f55a27127dee4ce8464caf00539c100fad1b56328eb02a63",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cfc1eea01a855a3d9995ac65a4199898abe52f8633bafb5ddf9326236c8a23f7",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$DatabaseWork.class": "800c358bbf7403a6092800386f5dbb8d4cce1ef72475f0900be19edc45a958b4",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Deleted.class": "2bdf14d7a4beda38d482ac0ed03db9a3128552e8054a771a29633e0569949f9d",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Job.class": "0a887dddefb7a3d7dd48240e38ad5ae1192d5eba14d44e0805f239c13db5d300",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$PendingDlq.class": "f0b7da81bc4feae8753625ec3c240691c65c338fa53ce36044eb0da92e28f1eb",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Ready.class": "62a6628866bf0ad6ed7f321d7d13de5643be8332bc0b98d4497f5a7cc0cb92d3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Stage.class": "2474f543898cc70401d470ba74d19c75cc804a05259e509c2f9d92b9b1a51dbd",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Terminal.class": "220c14f3af88981d2991dfbf0852b42f386e45bd651fc97187f698b7997f6d10",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class": "ee8383d946f0a75c0fd71c71787d12d54615bdf4242445bf39461ad4fb3e08b4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+        "sourceSha256": "7b0fdef2ec3ae48a4d2b9c513c7edc26968993f0f52304b9de7e69ed0a73c048"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 33,
+    "reason": "1356 individual question/query/file owner source applicability: Outer SQL/RTE maps to a fixed infrastructure failure while finally wipes the event wire. Permanent identity failure with suppressed cleanup uncertainty is handled separately. This does not authorize another business work copy, manufacture final ACK or expose provider body/cause.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+    "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "660",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "660",
+    "findingId": "F03-PMD2-cfab320bfbb702559ecaa75e5da70c580bfd0fa262237602f9992804712163c2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-246a5aec0525f574e2e7f9a7cf72275c75b3ae40e66df54da99fafc0e4ebc38b",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$DatabaseWork.class": "800c358bbf7403a6092800386f5dbb8d4cce1ef72475f0900be19edc45a958b4",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Deleted.class": "2bdf14d7a4beda38d482ac0ed03db9a3128552e8054a771a29633e0569949f9d",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Job.class": "0a887dddefb7a3d7dd48240e38ad5ae1192d5eba14d44e0805f239c13db5d300",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$PendingDlq.class": "f0b7da81bc4feae8753625ec3c240691c65c338fa53ce36044eb0da92e28f1eb",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Ready.class": "62a6628866bf0ad6ed7f321d7d13de5643be8332bc0b98d4497f5a7cc0cb92d3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Stage.class": "2474f543898cc70401d470ba74d19c75cc804a05259e509c2f9d92b9b1a51dbd",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Terminal.class": "220c14f3af88981d2991dfbf0852b42f386e45bd651fc97187f698b7997f6d10",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class": "ee8383d946f0a75c0fd71c71787d12d54615bdf4242445bf39461ad4fb3e08b4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+        "sourceSha256": "7b0fdef2ec3ae48a4d2b9c513c7edc26968993f0f52304b9de7e69ed0a73c048"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 34,
+    "reason": "1356 individual question/query/file owner source applicability: Both unchecked work/setup-statement/commit spans must attempt rollback before rethrow and owned TWR close. Direct Error is rethrown, not converted to ordinary successful answer. The transaction and timeout statements are not held around the external provider call; arbitrary nested provider-error policy remains a separate contract.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+    "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "660",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "660",
+    "findingId": "F03-PMD2-51e966a08422c636c399508775143d3160644ad0b62b4a126456f4c7cfab2ec2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-246a5aec0525f574e2e7f9a7cf72275c75b3ae40e66df54da99fafc0e4ebc38b",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$DatabaseWork.class": "800c358bbf7403a6092800386f5dbb8d4cce1ef72475f0900be19edc45a958b4",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Deleted.class": "2bdf14d7a4beda38d482ac0ed03db9a3128552e8054a771a29633e0569949f9d",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Job.class": "0a887dddefb7a3d7dd48240e38ad5ae1192d5eba14d44e0805f239c13db5d300",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$PendingDlq.class": "f0b7da81bc4feae8753625ec3c240691c65c338fa53ce36044eb0da92e28f1eb",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Ready.class": "62a6628866bf0ad6ed7f321d7d13de5643be8332bc0b98d4497f5a7cc0cb92d3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Stage.class": "2474f543898cc70401d470ba74d19c75cc804a05259e509c2f9d92b9b1a51dbd",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Terminal.class": "220c14f3af88981d2991dfbf0852b42f386e45bd651fc97187f698b7997f6d10",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class": "ee8383d946f0a75c0fd71c71787d12d54615bdf4242445bf39461ad4fb3e08b4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+        "sourceSha256": "7b0fdef2ec3ae48a4d2b9c513c7edc26968993f0f52304b9de7e69ed0a73c048"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 35,
+    "reason": "1356 individual question/query/file owner source applicability: Both unchecked work/setup-statement/commit spans must attempt rollback before rethrow and owned TWR close. Direct Error is rethrown, not converted to ordinary successful answer. The transaction and timeout statements are not held around the external provider call; arbitrary nested provider-error policy remains a separate contract.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+    "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "663",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "663",
+    "findingId": "F03-PMD2-d9de3d2b7d986beaa3c92824b4fefdcbf7b70b99e2969b36380479fae2854b6b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8e6def7c824290c9b565ca625ba0f9797ccf7d09ac292ac4f48973687a1f57ed",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$DatabaseWork.class": "800c358bbf7403a6092800386f5dbb8d4cce1ef72475f0900be19edc45a958b4",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Deleted.class": "2bdf14d7a4beda38d482ac0ed03db9a3128552e8054a771a29633e0569949f9d",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Job.class": "0a887dddefb7a3d7dd48240e38ad5ae1192d5eba14d44e0805f239c13db5d300",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$PendingDlq.class": "f0b7da81bc4feae8753625ec3c240691c65c338fa53ce36044eb0da92e28f1eb",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Ready.class": "62a6628866bf0ad6ed7f321d7d13de5643be8332bc0b98d4497f5a7cc0cb92d3",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Stage.class": "2474f543898cc70401d470ba74d19c75cc804a05259e509c2f9d92b9b1a51dbd",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService$Terminal.class": "220c14f3af88981d2991dfbf0852b42f386e45bd651fc97187f698b7997f6d10",
+      "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class": "ee8383d946f0a75c0fd71c71787d12d54615bdf4242445bf39461ad4fb3e08b4"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionWorkerServiceTest",
+        "sourceSha256": "7b0fdef2ec3ae48a4d2b9c513c7edc26968993f0f52304b9de7e69ed0a73c048"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 36,
+    "reason": "1356 individual question/query/file owner source applicability: Rollback RTE remains a secondary failure on the original and is never a committed work result. Original failure then propagates through Connection close; the catch does not repeat rollback, send a new dispatch or claim physical DB cleanup success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+    "sourceSha256": "df72e6b0de78f419a30eddcfa6e2416d88c7b8ca05c00547cef4708bb8d24188",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "311",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "311",
+    "findingId": "F03-PMD2-3354e2c48f6087f3a4fc0e1eb722253864ceb83cdc20f5ccadf2f8397a31271b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d5086d0755b92c8baf5a5ac79454e55a2f09f394bba2b5dca81bbf732e0a9ba3",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository$RowMapper.class": "64041f2bfa092b6440952bd1bfcbc9794ecceca64017d3288df8f04264ae63b9",
+      "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.class": "66da9c3d778aae73e680ad697f2d92dc3b8361f4075becd869fe94c7157d6051"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+        "sourceSha256": "a227ef746a447f782fa7bca60f695fd6a4d660f44426968e0892359e22e739d5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 282,
+    "reason": "1356 individual question/query/file owner source applicability: List projection SQL/RTE is mapped to a fixed temporary query error rather than returning partial records. The preceding explicit QuestionQueryException branch preserves a known result only with no suppressed resource failure. Statement/ResultSet are owned locally; the Connection remains borrowed and no repository commit/rollback occurs.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+    "sourceSha256": "dfd1c19baa2b133d9cd3d504d1a1284e4a665d6ef1cd0a4b5173d050c4658d88",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "344",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "344",
+    "findingId": "F03-PMD2-341b346453cc3c5f25ec6da4c74483dadf800d7e5d84441d52d0e1cdc3380b82",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8bcd20f4dbe831f6ba8ea2a25025eccff814e5428142c7977c66f20407bbeeda",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository$RowMapper.class": "64041f2bfa092b6440952bd1bfcbc9794ecceca64017d3288df8f04264ae63b9",
+      "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.class": "66da9c3d778aae73e680ad697f2d92dc3b8361f4075becd869fe94c7157d6051"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryRepositoryTest",
+        "sourceSha256": "a227ef746a447f782fa7bca60f695fd6a4d660f44426968e0892359e22e739d5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 283,
+    "reason": "1356 individual question/query/file owner source applicability: Detail SQL/RTE prevents incomplete/invalid/multiple-row or cleanup failure from becoming Optional.empty/success. Owned result/statement close through TWR; the caller owns the Connection and transaction. This classification does not bypass separate USER/ADMIN SQL binding or turn a temporary query error into authorization.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+    "sourceSha256": "dfd1c19baa2b133d9cd3d504d1a1284e4a665d6ef1cd0a4b5173d050c4658d88",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "134",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "53",
+    "endline": "134",
+    "findingId": "F03-PMD2-c94f751719b7b356dc53ff56eab4819f7bd99617fe9eef25d4617d83e09bf23b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-fa49f6b183721ceb62649d8e76c611335a3220dac13a0c964469df41afadb4ac",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter$Attempt.class": "72dbf3e445a3b514dd468ec1ee35ff283b3f720477d554238cca51e724bc3019",
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter.class": "68eddc89f2fee0828223213ebd38d742e3d5275c62defe391eba2f3e11356fc9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest",
+        "sourceSha256": "6643074e01a1ecb514b29c58af387aff1186946c796a9f91b0a43457f67398fe"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 286,
+    "reason": "1356 individual question/query/file owner source applicability: Owned write/publish/verify StorageIo/RTE failure inspects request-local created/published state. Only an owned unpublished part is eligible for delete; unknown rename/fsync cleanup retains the reservation and returns fixed unavailable. No complete descriptor escapes from this catch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java",
+    "sourceSha256": "00beb3cfaba4dcb08f2991e03f898556e2fc8e320679deb1d61e98b90b30522b",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "145",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "StorageIoException ",
+    "diagnosticTextSha256": "373e86a2b12bbdb76f3a17a4b1e2debe18b05452c2105d2ad329e494eb2dcce6",
+    "endcolumn": "53",
+    "endline": "145",
+    "findingId": "F03-PMD2-a8b68dea8e878a41df4824db2449c575d56df9e835dbcf69d017f33ccb0fff55",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-fc308570eda2474e89b2e8384ddb862aae8cf288472a6a6c5bddd7168454518b",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter$Attempt.class": "72dbf3e445a3b514dd468ec1ee35ff283b3f720477d554238cca51e724bc3019",
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter.class": "68eddc89f2fee0828223213ebd38d742e3d5275c62defe391eba2f3e11356fc9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest",
+        "sourceSha256": "6643074e01a1ecb514b29c58af387aff1186946c796a9f91b0a43457f67398fe"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 287,
+    "reason": "1356 individual question/query/file owner source applicability: Only unpublished StorageIoException.COLLISION returns the approved empty collision result. Runtime/unknown/published failures must not trigger another publication or quota release as a clean collision. The type-and-reason predicate distinguishes that exact checked storage contract, not a broad success exemption.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java",
+    "sourceSha256": "00beb3cfaba4dcb08f2991e03f898556e2fc8e320679deb1d61e98b90b30522b",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "152",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "152",
+    "findingId": "F03-PMD2-891fe49850e7c4d85ee0a635666efd5b73402f4ba7851b5ad263e4d67ce3e755",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-858c0639f495178c276c6b871bfecef94f6b859e2eb8a757373bff75980ab995",
+    "owningPhysicalClassHashes": {
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter$Attempt.class": "72dbf3e445a3b514dd468ec1ee35ff283b3f720477d554238cca51e724bc3019",
+      "api:dev/codex/schubert/nk/api/storage/ScenarioFileWriter.class": "68eddc89f2fee0828223213ebd38d742e3d5275c62defe391eba2f3e11356fc9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.api.storage.ScenarioFileWriterTest",
+        "sourceSha256": "6643074e01a1ecb514b29c58af387aff1186946c796a9f91b0a43457f67398fe"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 288,
+    "reason": "1356 individual question/query/file owner source applicability: The outer StorageIo/RTE boundary includes directory/compound close failure and emits fixed unavailable without physical paths. A computed descriptor is returned only after owned TWR completion. Existing ready/part reservation retention is not real filesystem deletion or native completion evidence from this review.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+    "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioFileWriter.java",
+    "sourceSha256": "00beb3cfaba4dcb08f2991e03f898556e2fc8e320679deb1d61e98b90b30522b",
+    "status": "REQUIRED_CONTRACT"
+  }
+]
