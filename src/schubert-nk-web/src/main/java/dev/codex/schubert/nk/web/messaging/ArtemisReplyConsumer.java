@@ -15,6 +15,7 @@ import java.util.Objects;
  * 7/9.
  */
 public final class ArtemisReplyConsumer {
+  private static final Runnable UNOBSERVED_ROLLBACK = () -> {};
   private final JmsRequestReplyClient client;
   private final JmsReplyDecoder decoder;
   private final ArtemisReplyDlqSender fatalSender;
@@ -28,6 +29,14 @@ public final class ArtemisReplyConsumer {
 
   /** Returns true for an active waiter and false for a valid late reply. */
   public boolean onMessage(JMSContext context, Message message) throws JMSException {
+    return onMessage(context, message, UNOBSERVED_ROLLBACK, UNOBSERVED_ROLLBACK);
+  }
+
+  // SSC332: non-owning synchronous phase ports; public checked/identity contract stays unchanged.
+  boolean onMessage(JMSContext context, Message message, Runnable attempted, Runnable confirmed)
+      throws JMSException {
+    Objects.requireNonNull(attempted, "rollback attempt observer");
+    Objects.requireNonNull(confirmed, "rollback completion observer");
     Objects.requireNonNull(context, "context");
     Objects.requireNonNull(message, "message");
     if (context.getSessionMode() != JMSContext.SESSION_TRANSACTED) {
@@ -39,16 +48,20 @@ public final class ArtemisReplyConsumer {
       context.commit();
       return completed;
     } catch (PermanentProtocolException protocolFailure) {
-      isolateFatal(context, message, protocolFailure);
+      isolateFatal(context, message, protocolFailure, attempted, confirmed);
       throw new CommittedFatalReplyException(protocolFailure);
     } catch (JMSException | RuntimeException failure) {
-      rollbackAfterFailure(context, failure);
+      rollbackAfterFailure(context, failure, attempted, confirmed);
       throw failure;
     }
   }
 
   private void isolateFatal(
-      JMSContext context, Message message, PermanentProtocolException protocolFailure) {
+      JMSContext context,
+      Message message,
+      PermanentProtocolException protocolFailure,
+      Runnable attempted,
+      Runnable confirmed) {
     try {
       fatalSender.send(context, message);
       context.commit();
@@ -57,7 +70,7 @@ public final class ArtemisReplyConsumer {
         isolationFailure.addSuppressed(protocolFailure);
       }
       try {
-        rollbackAfterFailure(context, isolationFailure);
+        rollbackAfterFailure(context, isolationFailure, attempted, confirmed);
       } catch (UnconfirmedJmsRollbackException unconfirmed) {
         throw new FailedJmsIsolationException(unconfirmed, protocolFailure);
       }
@@ -65,7 +78,9 @@ public final class ArtemisReplyConsumer {
     }
   }
 
-  private static void rollbackAfterFailure(JMSContext context, Throwable failure) {
+  private static void rollbackAfterFailure(
+      JMSContext context, Throwable failure, Runnable attempted, Runnable confirmed) {
+    attempted.run();
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
@@ -74,5 +89,6 @@ public final class ArtemisReplyConsumer {
       }
       throw new UnconfirmedJmsRollbackException(failure, rollbackFailure);
     }
+    confirmed.run();
   }
 }

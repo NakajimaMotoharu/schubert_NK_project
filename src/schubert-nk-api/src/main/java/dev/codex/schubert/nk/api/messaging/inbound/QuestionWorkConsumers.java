@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
@@ -85,7 +86,14 @@ public final class QuestionWorkConsumers implements AutoCloseable {
               }
               onFatal.run();
             } catch (JMSException | RuntimeException retryable) {
-              if (!rollbackConfirmed.get()) {
+              boolean fatalGraph = false;
+              try {
+                TemporaryInfrastructureException.preserveFatal(retryable);
+              } catch (Error fatal) {
+                // SSC332: API direct-fatal policy is halt/notify, not rethrow after notification.
+                fatalGraph = true;
+              }
+              if (fatalGraph || !rollbackConfirmed.get()) {
                 result.halted.set(true);
                 onFatal.run();
               }

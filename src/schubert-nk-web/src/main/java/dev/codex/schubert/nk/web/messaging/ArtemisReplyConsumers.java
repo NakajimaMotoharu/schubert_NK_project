@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.messaging;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException;
 import dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackException;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
@@ -20,6 +21,11 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
   private final JMSContext context;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final AtomicBoolean halted = new AtomicBoolean();
+  // All ports/state exist before factory.open; this one session serializes deliveries.
+  private final AtomicBoolean rollbackAttempted = new AtomicBoolean();
+  private final AtomicBoolean rollbackConfirmed = new AtomicBoolean();
+  private final Runnable attemptingRollback = () -> rollbackAttempted.set(true);
+  private final Runnable confirmingRollback = () -> rollbackConfirmed.set(true);
   private boolean closed;
   private volatile boolean stopping;
   private boolean startAttempted;
@@ -100,33 +106,53 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
       consumer.setMessageListener(
           message -> {
             if (halted.get()) return;
+            rollbackAttempted.set(false);
+            rollbackConfirmed.set(false);
             try {
-              reply.onMessage(opened, message);
+              reply.onMessage(opened, message, attemptingRollback, confirmingRollback);
             } catch (CommittedFatalReplyException fatal) {
               halted.set(true);
               // This dedicated session serializes callbacks; halt excludes later deliveries.
               terminal.set(true);
               onTerminal.accept(fatal);
-            } catch (FailedJmsIsolationException | UnconfirmedJmsRollbackException | Error fatal) {
-              halted.set(true);
-              terminal.set(true);
-              if (fatal instanceof Error) {
-                try {
-                  opened.rollback();
-                } catch (RuntimeException | Error unconfirmed) {
-                  // Never ACK or re-open this transaction; the outer owner retains cleanup.
-                }
-              }
-              onFatal.run();
-              if (fatal instanceof Error error) throw error;
-            } catch (JMSException | RuntimeException retryable) {
-              // Confirmed rollback only; the broker controls redelivery.
+            } catch (JMSException | RuntimeException | Error failure) {
+              deliveryFailure(failure, onFatal);
             }
           });
       opened.start();
       started = true;
     } finally {
       stateLock.unlock();
+    }
+  }
+
+  private void deliveryFailure(Throwable failure, Runnable onFatal) {
+    Error selectedFatal = null;
+    try {
+      WebStartupException.preserveFatal(failure);
+    } catch (Error fatal) {
+      selectedFatal = fatal;
+    }
+    if (selectedFatal == null
+        && !(failure instanceof FailedJmsIsolationException)
+        && !(failure instanceof UnconfirmedJmsRollbackException)
+        && rollbackConfirmed.get()) {
+      return; // Confirmed, nonfatal rollback only: broker-controlled retry.
+    }
+    halted.set(true);
+    terminal.set(true);
+    if (selectedFatal != null && rollbackAttempted.compareAndSet(false, true)) {
+      try {
+        context.rollback();
+      } catch (RuntimeException | Error unconfirmed) {
+        // Selected fatal retains identity; no second rollback/ACK, owner retains cleanup.
+      }
+    }
+    try {
+      onFatal.run();
+    } finally {
+      // SSC332: notification cannot mask the selected Error. No owned cleanup is skipped here.
+      if (selectedFatal != null) throw selectedFatal;
     }
   }
 
