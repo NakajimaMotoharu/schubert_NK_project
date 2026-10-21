@@ -3,7 +3,7 @@ import inspect
 import pg6676_sql58_original_jvm as prior
 from pg6708_original4184_artifacts import read_whole
 
-SQLSHA=None  # Actual PG6714 hash, never inferred from the historical source.
+SQLSHA='8b7f9db189817cc953cdfaa94dc219336bf7424f86aa07faf284e0af9c749c42'
 
 
 def definition():
