@@ -1,0 +1,774 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "566",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "StorageIoException ",
+    "diagnosticTextSha256": "373e86a2b12bbdb76f3a17a4b1e2debe18b05452c2105d2ad329e494eb2dcce6",
+    "endcolumn": "67",
+    "endline": "566",
+    "findingId": "F03-PMD2-72f23e69c07dda8a06468891242d4083923df86d132e0784a2f01bd4ad691366",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3527922d3b91125799339d85c1e3013168e0fbe65f773f15bc2411392fb89e0b",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$BundleSnapshot.class": "2845fe9fb7406c18e0d524439839bb6b073f61fd67d779468eb13cf3b8e756d6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Digests.class": "f8c5e26504e7ed77b32eeaadae5f059d7efa9dd48f3713254d82441f17dea750",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$FileClaim.class": "52a32a5dafe63cd7a32847ab917a505fdf701ba4a3e3ab911a528c4bbe71d4ff",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Force.class": "18e2e74244a580ce7890634cfc99258e9a863e9894d18c908b73eebf6903423f",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$Io.class": "a6e3cd9bebe11c185ffabeeaddd94069d003962f98ca6c0182e4ae63ad5ace3f",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$NioIo.class": "49b6ff15140c69828c2eaff23ab026ae11816db9302a069244231d9126f37708",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier$PendingDigests.class": "f5bf3b561712068a756cc8c8504d36fc49c757379b6bfe5ce2bc8cc2ce8083a5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.class": "a7a128d4689c85d2abce0b689faf50abbe4d6d350083f9921c10cf8f448339e8"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupArtifactVerifierTest",
+        "sourceSha256": "07cbc6be5dd0e011493dece2ebfe0cc90ecb5ef2d55bc7e225756cb07903543b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 373,
+    "reason": "The typed StorageIoException reason is retained only in the explicit force-verification mode; every other checked directory or unsupported-operation failure becomes fixed unavailable. The catch never grants admission, repairs storage or consumes a failed-cohort artifact. Both owned byte arrays are zeroed and the lock is released by enclosing finally blocks. This is source applicability, not an actual Backup authenticity proof.",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "sourceSha256": "244c5b3542468956bbe0fef5ae2054f8deb509d4d5db537e4e9b4d2ba9727cbf",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "45",
+    "beginline": "68",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "61",
+    "endline": "68",
+    "findingId": "F03-PMD2-1dc24444cc7a5f0eb8c4609f2a13f5c4fad0a4206137b6fa8b8781608caee324",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-59b46c7e5e0bc1ca2a6fbac33a1b68eef3d055ca86569835c62dee060b1922c3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class": "ee172626e73f95c72ac1378e403623a593ba4b325464671a313860fdb1ef41ed"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+        "sourceSha256": "efef580f95679df4f2ee21d3cb8b5319993057661e88e45fad06ab0db94bed32"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 410,
+    "reason": "Unchecked transaction-observation failures run the bounded rollback recovery and then preserve the primary identity. A failed rollback cannot restore autoCommit and thereby accidentally commit. Successful observation rolls back the read-only FOR UPDATE work; neither this method nor the catch issues DELETE, commit or a permit. Caller disposal of a failed borrowed connection remains a precondition.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "sourceSha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "64",
+    "beginline": "68",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "69",
+    "endline": "68",
+    "findingId": "F03-PMD2-372ca0511551dcfad0329b35a16d76f0560db6c0f3ca872cca5afa0834ffe133",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-59b46c7e5e0bc1ca2a6fbac33a1b68eef3d055ca86569835c62dee060b1922c3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class": "ee172626e73f95c72ac1378e403623a593ba4b325464671a313860fdb1ef41ed"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+        "sourceSha256": "efef580f95679df4f2ee21d3cb8b5319993057661e88e45fad06ab0db94bed32"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 411,
+    "reason": "Unchecked transaction-observation failures run the bounded rollback recovery and then preserve the primary identity. A failed rollback cannot restore autoCommit and thereby accidentally commit. Successful observation rolls back the read-only FOR UPDATE work; neither this method nor the catch issues DELETE, commit or a permit. Caller disposal of a failed borrowed connection remains a precondition.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "sourceSha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "92",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "92",
+    "findingId": "F03-PMD2-4914b39705d1e44e785d491dc162cac64bfa3889762f5ac1c55685b31fc9d8de",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0b1bd7bf8aa1bb8068bf7c381777639ca9de5e2857057597577954d84227dfa2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class": "ee172626e73f95c72ac1378e403623a593ba4b325464671a313860fdb1ef41ed"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+        "sourceSha256": "efef580f95679df4f2ee21d3cb8b5319993057661e88e45fad06ab0db94bed32"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 412,
+    "reason": "Unchecked rollback/restoration failures are not successful recovery: an unknown primary remains primary with a fresh fixed suppressed marker; known-primary/unknown-cleanup propagates the cleanup; known repository failure is mapped to fixed unavailable. No raw provider message is published and no connection is certified reusable after failure.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "sourceSha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "92",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "92",
+    "findingId": "F03-PMD2-b48ffc328153246b18493a0102f583671e100018483d4f856f2e2ca59f52e6b4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0b1bd7bf8aa1bb8068bf7c381777639ca9de5e2857057597577954d84227dfa2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class": "ee172626e73f95c72ac1378e403623a593ba4b325464671a313860fdb1ef41ed"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+        "sourceSha256": "efef580f95679df4f2ee21d3cb8b5319993057661e88e45fad06ab0db94bed32"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 413,
+    "reason": "Unchecked rollback/restoration failures are not successful recovery: an unknown primary remains primary with a fresh fixed suppressed marker; known-primary/unknown-cleanup propagates the cleanup; known repository failure is mapped to fixed unavailable. No raw provider message is published and no connection is certified reusable after failure.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "sourceSha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "97",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "BatchRepositoryException)",
+    "diagnosticTextSha256": "8df8415dc4a39e3b421fb6b3c0297e8756e56d18cf4277441c63e20f1ea4bc9b",
+    "endcolumn": "54",
+    "endline": "97",
+    "findingId": "F03-PMD2-1a143cc01a3887f1fc3eeaa4d102aa58ee62c0e4342a59cf89e199a7c69cf12c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e1d6a920ab929d4d399a1983fd3730a42ad4e0b74dbf9a3da3093686f5b6fe04",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.class": "ee172626e73f95c72ac1378e403623a593ba4b325464671a313860fdb1ef41ed"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupBackupAdmissionTest",
+        "sourceSha256": "efef580f95679df4f2ee21d3cb8b5319993057661e88e45fad06ab0db94bed32"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 414,
+    "reason": "Only the typed repository failure is converted to the fixed checked unavailable result; arbitrary RuntimeException/Error is not mislabeled as a known repository outcome. The preceding unknown-primary branch preserves that original identity. Tests explicitly distinguish known and unknown primary/cleanup combinations; actual DB ownership is not proven by this review.",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "sourceSha256": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "548",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "548",
+    "findingId": "F03-PMD2-4f723aa0537bfb5e2f73c0ba8af952ffe4cc9476b213b18ff13434a04cee4619",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-29344c673a78bf3b9f24a00dfa96f2c6aecc18787ac354950e222bc909071e75",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Work.class": "6145d8fa5a4a539962c8b7c4146999c6ebe912e9123c1fb0e8dfabd22d57c372",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Writer.class": "e32479712b3ae29018030c984ddc91b46063a5db0b71f4a375b7b2d372af25a2",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.class": "a721de044988925499acdaf57443c680737835a73d334e2ed363c10d66f9e210"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest",
+        "sourceSha256": "d70307e61da80b3a01a3d5b604d7a928e4262db47bdfd4fc8e36723ae3356351"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupStageTest",
+        "sourceSha256": "b73659f32009573fcdb6250a071a5497170156600a03cf63a834ecdfec0bee93"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 454,
+    "reason": "The bounded file-read buffer is zeroed on checked or unchecked failure and the same failure is rethrown. The catch neither treats partial bytes as complete nor hides a failed close. Successful return requires all requested bytes plus exact EOF/size; enclosing FileChannel ownership remains try-with-resources.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+    "sourceSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "548",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "548",
+    "findingId": "F03-PMD2-78c94e36a64475b0a7ded7d05db2f3da8693e952ffa2e92d1d6f128740b03d8d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-29344c673a78bf3b9f24a00dfa96f2c6aecc18787ac354950e222bc909071e75",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Work.class": "6145d8fa5a4a539962c8b7c4146999c6ebe912e9123c1fb0e8dfabd22d57c372",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Writer.class": "e32479712b3ae29018030c984ddc91b46063a5db0b71f4a375b7b2d372af25a2",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.class": "a721de044988925499acdaf57443c680737835a73d334e2ed363c10d66f9e210"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest",
+        "sourceSha256": "d70307e61da80b3a01a3d5b604d7a928e4262db47bdfd4fc8e36723ae3356351"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupStageTest",
+        "sourceSha256": "b73659f32009573fcdb6250a071a5497170156600a03cf63a834ecdfec0bee93"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 455,
+    "reason": "The bounded file-read buffer is zeroed on checked or unchecked failure and the same failure is rethrown. The catch neither treats partial bytes as complete nor hides a failed close. Successful return requires all requested bytes plus exact EOF/size; enclosing FileChannel ownership remains try-with-resources.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+    "sourceSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "563",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "(read = input.read(buffer)) ",
+    "diagnosticTextSha256": "5381ff18e48e60b22488fd56805762bda58ff89119b7ad919c2e725d57343279",
+    "endcolumn": "43",
+    "endline": "563",
+    "findingId": "F03-PMD2-3348eaabc15886c240ff83208574d07c611dce8af384cf5894abcccee2456343",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9c5edf8f79e24a662d5ca0d410d1ebc495fb8073e74bde07095e58761157d798",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Work.class": "6145d8fa5a4a539962c8b7c4146999c6ebe912e9123c1fb0e8dfabd22d57c372",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts$Writer.class": "e32479712b3ae29018030c984ddc91b46063a5db0b71f4a375b7b2d372af25a2",
+      "batch:dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.class": "a721de044988925499acdaf57443c680737835a73d334e2ed363c10d66f9e210"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupPreparationTest",
+        "sourceSha256": "d70307e61da80b3a01a3d5b604d7a928e4262db47bdfd4fc8e36723ae3356351"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningBackupStageTest",
+        "sourceSha256": "b73659f32009573fcdb6250a071a5497170156600a03cf63a834ecdfec0bee93"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 456,
+    "reason": "The single read result is assigned once and compared with EOF before digest update. Zero progress is explicitly rejected, the total read count and final size must match the initial size, and the digest byte buffer is zeroed in finally. This streaming pattern avoids a second consuming read; it does not certify concurrent-file immutability beyond the surrounding verification contract.",
+    "rule": "AssignmentInOperand",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+    "sourceSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "393",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "393",
+    "findingId": "F03-PMD2-4c29297003b0eb9681ebbcb1f047fb2f51e729d24f8ba960e844b8c562be3dc2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-67d1f9141f43f92e654a8be0da823211d4b56ca556ea76eb0b59e3dd438eb649",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 678,
+    "reason": "Once normal Backup start may have been delivered, IOException/RuntimeException/Error cannot authorize normal parent unwind. Any uncertain receipt, original/request check, quiescence or retirement enters the existing non-returning retain port. Outstanding state is cleared only after all barriers; source review does not prove that a real child stopped or retire an actual intent.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "393",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "393",
+    "findingId": "F03-PMD2-b7d98bf8d99593cebce870ce4dd8b0a4aab9a753e0e5efb5fa276c51bb1585eb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-67d1f9141f43f92e654a8be0da823211d4b56ca556ea76eb0b59e3dd438eb649",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 679,
+    "reason": "Once normal Backup start may have been delivered, IOException/RuntimeException/Error cannot authorize normal parent unwind. Any uncertain receipt, original/request check, quiescence or retirement enters the existing non-returning retain port. Outstanding state is cleared only after all barriers; source review does not prove that a real child stopped or retire an actual intent.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "40",
+    "beginline": "474",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "56",
+    "endline": "474",
+    "findingId": "F03-PMD2-9048eb49baac17239d979fb7410cecf363d2782c1042e457a585adee46fb9707",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-35ea61874907c9bd5af733d5d38532b711a4f21d20c05fb95ea92e9b1ea72327",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 681,
+    "reason": "Within the normal child handoff, receipt/outcome/stop uncertainty invokes retain instead of returning a forged terminal receipt. The one-start CAS, fixed budget and gate checks remain in their original order. This applies to ordinary Backup/Cleanup/Expiry contract source, not failed-cohort recovery or an actual Unit action.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "59",
+    "beginline": "474",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "64",
+    "endline": "474",
+    "findingId": "F03-PMD2-a7e871471ccce3168440d8531032b74933439828b809ed1c7ac33ce6d1a6be1b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-35ea61874907c9bd5af733d5d38532b711a4f21d20c05fb95ea92e9b1ea72327",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 682,
+    "reason": "Within the normal child handoff, receipt/outcome/stop uncertainty invokes retain instead of returning a forged terminal receipt. The one-start CAS, fixed budget and gate checks remain in their original order. This applies to ordinary Backup/Cleanup/Expiry contract source, not failed-cohort recovery or an actual Unit action.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "501",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "501",
+    "findingId": "F03-PMD2-4c13d9b55481fdc934e85b7721f20d0bab77738414d94d7c1d3e9bbb6fb9ef14",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b2bfaf4486d265487399816be17025a0d11e0aedfac6ef36961eed0239e5fe85",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 684,
+    "reason": "After advisory reacquisition, completion, repeated same-terminal checks and retirement barriers precede clearing outstanding. Any unchecked/checked uncertainty retains the owner rather than exposing a success or moving to another child. This review executes no retire operation and supplies no native lifetime proof; those dependencies remain held or separately required.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "501",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "501",
+    "findingId": "F03-PMD2-a605de5fe816c196d5a84fc65b6c889d815b4b8128261a400d5de7f28c59acba",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b2bfaf4486d265487399816be17025a0d11e0aedfac6ef36961eed0239e5fe85",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1.class": "ca0858606d67171489f6cdd8691f004aa3bafc292468a0174962c97a95b398ff",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2.class": "f10a4ed301b193a7944846d0dcdb2d10991e96c7e55f15ffa5fd6d8f7495e06f",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3.class": "ad03dd555711873b367acf1b67cc6ecafa945f1d235ff9112066d063d5aafee2",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion.class": "9dd76c49e609ca9b889e342806f47c8ffef8e490002ed54f203b9d4a9812f2ac",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult.class": "0d5ddfa77ea70f77fb72de62694837eeba6d0d0281bf346b154f183052e47eb5",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion.class": "2360cc94d8d69caf1776e1c457d98f14c79825e712d500396a6ec041e2801b7a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate.class": "8685884b4b53ad37e372e9dcfe0508042f6f93f07d84245d83dd992a6c0ba04e",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff.class": "cedcc83a4016605540a32549269c6f56780c7dd3a5c77c49c21fb0b1dc449317",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion.class": "a489e7d4e925e7f3ae02d44892ac79a6158722b3a08ff04c81663c9e3fcb0962",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork.class": "4922dc3fd9cccc1a79a6d1fa75fc69b0e211ec77023d907ea0c56042f94d3b95",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class": "86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof.class": "b1f67e0d88995cc4db742105d0558cec502895efa44e0e7d8ca714cd6a55892d",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt.class": "cf4c0ec35aca9fb50cf7a2c116d97580fd0f851e1946f39367310e5f105073ce",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain.class": "8fcc18435511f2978a969a2fa73ba99e560a6509d2b5252c75cf8b772aefe7ec",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start.class": "b9eda7c5a3a517be5c153fa566d85a6e16b5325717b787a9e75f7a794ab97125",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt.class": "1ea8f247f484b2bd7d2da608c5a6264276ceda03587ee5c0927a318c3fb94051",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started.class": "2010709134fe490f1b81c05da307b67f2c1189d9334c7a57dd973ec084dd0528",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop.class": "9161281fa2d1745dd99d45e43eb093f55f05d7b0e52720dcfba46c5bef39c9a1",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt.class": "cb21dc520614c9668551a44192f83bf1d4f099fbd518a36a8e451e867012349c",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal.class": "9763dd0715ff0834f738ee5ef54181575d696c683f3045906fe25cdd9998e376",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved.class": "4056f010eb841db6fb9a3819c64a2a8235850eea77206b31b056b4b1a161aca6",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait.class": "cfd50d9109f09e06c7b1bcf49d744c485cf8875e12254835d8baf698b02a4146",
+      "batch:dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.class": "dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycleTest",
+        "sourceSha256": "755b7ac18f8952dc9d0add6062e09588f62b40ef91de91b5e05e7c0e52b5398b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 685,
+    "reason": "After advisory reacquisition, completion, repeated same-terminal checks and retirement barriers precede clearing outstanding. Any unchecked/checked uncertainty retains the owner rather than exposing a success or moving to another child. This review executes no retire operation and supplies no native lifetime proof; those dependencies remain held or separately required.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  }
+]
