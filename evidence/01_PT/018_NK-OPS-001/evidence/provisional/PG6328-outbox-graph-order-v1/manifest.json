@@ -1,0 +1,308 @@
+{
+  "actualExit": 0,
+  "additionalBuildsIssued": 0,
+  "changedPhysical": [
+    "api:dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher.class",
+    "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class",
+    "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report.class",
+    "web:dev/codex/schubert/nk/web/logging/WebLogDispatcher.class",
+    "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class"
+  ],
+  "comparisonToolSha256": "ada75a7f6e747e0ea3fd6ffcf4aa2f6d5d70a1c55ff1f0c29cd397278d011982",
+  "formalAccepted": false,
+  "fourBoundaryProofs": {
+    "api:messaging.outbound.OutboxDispatcher": {
+      "classificationOffsets": [
+        78
+      ],
+      "otherMethodsUnchanged": [
+        "  private boolean markFailure(dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry, java.time.Instant, java.lang.String) throws java.sql.SQLException;",
+        "  private boolean markSent(dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry, java.time.Instant) throws java.sql.SQLException;",
+        "  private java.sql.Connection transaction() throws java.sql.SQLException;",
+        "  private java.util.List<dev.codex.schubert.nk.api.messaging.outbound.OutboxEntry> claim(java.lang.String, java.time.Instant, int) throws java.sql.SQLException;",
+        "  private static java.lang.String failureCode(java.lang.Throwable);",
+        "  private static void retainFailure(java.lang.Throwable, java.lang.Throwable);",
+        "  private static void rollback(java.sql.Connection, java.lang.Throwable);",
+        "  public dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher(dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider, dev.codex.schubert.nk.api.messaging.outbound.TransactedJmsContextProvider, dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository, dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender, java.time.Clock);",
+        "  static void closeAfterSetupFailure(java.sql.Connection, java.lang.Throwable);"
+      ],
+      "policy": {
+        "actualIoOrCleanupCalls": 0,
+        "diagnosticGetterCalls": 4,
+        "graphMutationCalls": 0,
+        "identityVisitedBeforeClassification": true,
+        "invocations": [
+          "Method java/util/ArrayDeque.\"<init>\":()V",
+          "Method java/util/IdentityHashMap.\"<init>\":()V",
+          "Method java/util/Collections.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/util/ArrayDeque.isEmpty:()Z",
+          "Method java/util/ArrayDeque.remove:()Ljava/lang/Object;",
+          "InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z",
+          "Method java/lang/Throwable.getCause:()Ljava/lang/Throwable;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/lang/Throwable.getSuppressed:()[Ljava/lang/Throwable;",
+          "Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;",
+          "Method java/util/ArrayDeque.addAll:(Ljava/util/Collection;)Z",
+          "Method jakarta/jms/JMSException.getLinkedException:()Ljava/lang/Exception;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/sql/SQLException.getNextException:()Ljava/sql/SQLException;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z"
+        ],
+        "oneIdentityErrorExit": true
+      },
+      "publicAbiUnchanged": true
+    },
+    "api:messaging.outbound.OwnedOutboxDispatcher": {
+      "classificationOffsets": [
+        78
+      ],
+      "otherMethodsUnchanged": [
+        "  private dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher(dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher, java.lang.String);",
+        "  private static void lambda$new$0(java.lang.Thread, java.lang.Throwable);",
+        "  public boolean healthy();",
+        "  public static dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher create(dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher, java.lang.String);",
+        "  public static dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher start(dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher, java.lang.String);",
+        "  public void close();",
+        "  public void start();",
+        "  public void wake();"
+      ],
+      "policy": null,
+      "publicAbiUnchanged": true
+    },
+    "web:logging.WebLogDispatcher": {
+      "classificationOffsets": [
+        14,
+        25
+      ],
+      "otherMethodsUnchanged": [
+        "  private <T> T transaction(dev.codex.schubert.nk.web.logging.WebLogDispatcher$SqlAction<T>) throws java.sql.SQLException;",
+        "  private java.lang.Boolean lambda$dispatch$1(dev.codex.schubert.nk.web.logging.ClaimedWebLog, java.util.Optional, java.sql.Connection) throws java.sql.SQLException;",
+        "  private java.lang.Boolean lambda$dispatch$2(dev.codex.schubert.nk.web.logging.ClaimedWebLog, java.sql.Connection) throws java.sql.SQLException;",
+        "  private java.util.List lambda$dispatch$0(java.lang.String, int, java.sql.Connection) throws java.sql.SQLException;",
+        "  private static void closeAfterFailure(java.sql.Connection, java.lang.Throwable) throws java.sql.SQLException;",
+        "  public dev.codex.schubert.nk.web.logging.WebLogDispatcher$Report dispatch(java.lang.String, int) throws java.sql.SQLException;",
+        "  public dev.codex.schubert.nk.web.logging.WebLogDispatcher(javax.sql.DataSource, dev.codex.schubert.nk.web.logging.WebLogOutboxRepository, dev.codex.schubert.nk.web.logging.WebLogMessageSender, java.time.Clock);"
+      ],
+      "policy": {
+        "actualIoOrCleanupCalls": 0,
+        "diagnosticGetterCalls": 4,
+        "graphMutationCalls": 0,
+        "identityVisitedBeforeClassification": true,
+        "invocations": [
+          "Method java/util/ArrayDeque.\"<init>\":()V",
+          "Method java/util/IdentityHashMap.\"<init>\":()V",
+          "Method java/util/Collections.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/util/ArrayDeque.isEmpty:()Z",
+          "Method java/util/ArrayDeque.remove:()Ljava/lang/Object;",
+          "InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z",
+          "Method java/lang/Throwable.getCause:()Ljava/lang/Throwable;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/lang/Throwable.getSuppressed:()[Ljava/lang/Throwable;",
+          "Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;",
+          "Method java/util/ArrayDeque.addAll:(Ljava/util/Collection;)Z",
+          "Method jakarta/jms/JMSException.getLinkedException:()Ljava/lang/Exception;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z",
+          "Method java/sql/SQLException.getNextException:()Ljava/sql/SQLException;",
+          "Method java/util/ArrayDeque.add:(Ljava/lang/Object;)Z"
+        ],
+        "oneIdentityErrorExit": true
+      },
+      "publicAbiUnchanged": true
+    },
+    "web:logging.WebLogReplayWorker": {
+      "classificationOffsets": [
+        44
+      ],
+      "otherMethodsUnchanged": [
+        "  private dev.codex.schubert.nk.web.logging.WebLogReplayWorker(dev.codex.schubert.nk.web.logging.WebLogReplayWorker$DispatchAction, java.time.Duration, java.time.Duration);",
+        "  private static dev.codex.schubert.nk.web.logging.WebLogDispatcher$Report lambda$start$0(dev.codex.schubert.nk.web.logging.WebLogDispatcher, java.lang.String, int) throws java.sql.SQLException;",
+        "  private void lambda$new$0(java.lang.Thread, java.lang.Throwable);",
+        "  public boolean running();",
+        "  public boolean terminalFailureObserved();",
+        "  public dev.codex.schubert.nk.web.logging.WebLogReplayWorker$Snapshot snapshot();",
+        "  public static dev.codex.schubert.nk.web.logging.WebLogReplayWorker start(dev.codex.schubert.nk.web.logging.WebLogDispatcher, java.lang.String, int, java.time.Duration);",
+        "  public void close();",
+        "  public void closeWithin(java.time.Duration);",
+        "  static dev.codex.schubert.nk.web.logging.WebLogReplayWorker start(dev.codex.schubert.nk.web.logging.WebLogReplayWorker$DispatchAction, java.time.Duration, java.time.Duration);",
+        "  static {};"
+      ],
+      "policy": null,
+      "publicAbiUnchanged": true
+    }
+  },
+  "helperExecutableEqual": true,
+  "originalSelectedTests": 89,
+  "ownershipReviewed": true,
+  "productionClassesExecuted": 0,
+  "ptAlternativeCompleted": 0,
+  "qualificationSha256": "e8e0961898824f64eb493a18995ca9f8ddb27be84a1805314fac703426a426bf",
+  "reportDebugOnly": {
+    "afterLineNumbers": [
+      {
+        "lineNumber": 157,
+        "method": "<init>(IIII)V",
+        "offset": 1543,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 158,
+        "method": "<init>(IIII)V",
+        "offset": 1547,
+        "startPc": 4
+      },
+      {
+        "lineNumber": 164,
+        "method": "<init>(IIII)V",
+        "offset": 1551,
+        "startPc": 42
+      },
+      {
+        "lineNumber": 157,
+        "method": "<init>(IIII)V",
+        "offset": 1555,
+        "startPc": 52
+      },
+      {
+        "lineNumber": 166,
+        "method": "<init>(IIII)V",
+        "offset": 1559,
+        "startPc": 73
+      },
+      {
+        "lineNumber": 156,
+        "method": "toString()Ljava/lang/String;",
+        "offset": 1708,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "hashCode()I",
+        "offset": 1771,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "equals(Ljava/lang/Object;)Z",
+        "offset": 1835,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "claimed()I",
+        "offset": 1906,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "sent()I",
+        "offset": 1967,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "failed()I",
+        "offset": 2028,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 156,
+        "method": "leaseLost()I",
+        "offset": 2089,
+        "startPc": 0
+      }
+    ],
+    "afterSha256": "6bb0713e1e3bdffccd3774db81773eb2adee3abc7f4e35bc9ca12a33f3468b5a",
+    "beforeLineNumbers": [
+      {
+        "lineNumber": 126,
+        "method": "<init>(IIII)V",
+        "offset": 1543,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 127,
+        "method": "<init>(IIII)V",
+        "offset": 1547,
+        "startPc": 4
+      },
+      {
+        "lineNumber": 133,
+        "method": "<init>(IIII)V",
+        "offset": 1551,
+        "startPc": 42
+      },
+      {
+        "lineNumber": 126,
+        "method": "<init>(IIII)V",
+        "offset": 1555,
+        "startPc": 52
+      },
+      {
+        "lineNumber": 135,
+        "method": "<init>(IIII)V",
+        "offset": 1559,
+        "startPc": 73
+      },
+      {
+        "lineNumber": 125,
+        "method": "toString()Ljava/lang/String;",
+        "offset": 1708,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "hashCode()I",
+        "offset": 1771,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "equals(Ljava/lang/Object;)Z",
+        "offset": 1835,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "claimed()I",
+        "offset": 1906,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "sent()I",
+        "offset": 1967,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "failed()I",
+        "offset": 2028,
+        "startPc": 0
+      },
+      {
+        "lineNumber": 125,
+        "method": "leaseLost()I",
+        "offset": 2089,
+        "startPc": 0
+      }
+    ],
+    "beforeSha256": "19066f5cfc168f18dc45c3850f5ae163f20e826164a88b55021fe75bedebc3fc",
+    "lineNumberNormalizedEqual": true,
+    "normalizedAfterSha256": "bf4688115f50de85f38216b19c1fe56862c12a4481ba9aadc45deeddadaef622",
+    "normalizedBeforeSha256": "bf4688115f50de85f38216b19c1fe56862c12a4481ba9aadc45deeddadaef622",
+    "onlyParsedLineNumberU2Masked": true,
+    "productionClassesExecuted": 0,
+    "rawEqual": false
+  },
+  "residualRisks": [
+    "global/F03/native/CHR/451/trace remain separate",
+    "finite standard Throwable fixtures do not prove arbitrary provider getter failure, actual VM OOM or physical cleanup"
+  ],
+  "scope": "ORIGINAL_SOURCE_JVM_NOT_REAL_RUNTIME_NATIVE_OR_PT_ALTERNATIVE",
+  "source": "aed19c6dca368e9717309d6f744d7917c6b7b32c",
+  "testsExecuted": 0,
+  "unchangedPhysical": 1662,
+  "vmActions": 0
+}
