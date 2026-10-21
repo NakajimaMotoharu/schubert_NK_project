@@ -1,5 +1,11 @@
 # Log・metric・alert・error code設計
 
+## SSC331 primitive local sink/terminal通知のfatal保持（2026-10-22）
+
+WebRequestLogProducer.localは普通のlogger Runtime/disabled loggerで既同Web ownerのfixed terminal signalを一回、DB/JMS/識別子新規発行0とする。Runtime内包のErrorを正常な観測/falseや新catalogへ捨てず、通知後に既pure Web graph分類で同一Errorを伝播する。直接logger Errorは従来の即伝播（通知0）を維持する。
+
+terminal callback Runtimeはcallback graph→logger graphの順に分類し、両非fatalだけ従来固定`request audit terminal signal failed`のIllegalStateExceptionを返す（provider cause/suppressedを持たせない）。直接callback Errorは従来の優先/通知1。cause/suppressed/JMS linked/SQL nextと非fatal cycle/aliasを扱い、元文面・Throwableをlocal/alertへ出さない。通常のmetadata/REQUEST code・HTTP応答/transport/wire/DB/owner/再送は変更しない。詳細312 SSC331、独立観点354、BUG1601/YKT1354。
+
 ## 1. 目的・追跡
 
 WebからAPI/DB/MQ/file/batchまでを追跡するstructured log、監査event/action、機密除外、error code、
