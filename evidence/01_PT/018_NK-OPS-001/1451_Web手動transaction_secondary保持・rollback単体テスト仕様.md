@@ -1,5 +1,7 @@
 # Web手動transaction secondary保持・rollback PT仕様（PG前）
 
+実Test定義：WebOwnedAttachment329Test六method/SHA512991fd327f7b3b9924686179941bd8c9ebabb809718a9475e5d1f7be80d028。Main d48a13f4d・全旧Testbyte不変更、format39254終了0/管理三0/pyflakes0。`pg6612_web_owned_attachment_selected.py red`のnewonly6612/18-8、予定原16/6 F5/not-run2、四identity不一致とdirectError rollback0のcounter不一致を事前固定。identity比較はassertThrows(Throwable)の実際object==固定expected Errorで型も含めて検証し、その前にsource/prepare/transaction/send0前提assertを行う。green6614/39-11→原6616、いずれも現時点未実行。
+
 具体化方針：同じowned Connection proxyを二programで共有するため、予定二classから`WebOwnedAttachment329Test`一class六methodへ集約する（TestID/期待値/六ケースscopeは不変更）。redはbaseline12＋新6＝18/8、Web停止時予測16/6/F5/not-run2。greenは新6＋旧WebLogDispatcher10/Revocation8＋WebStartup pure3＋baseline12＝39/11。constructor/JMS facadeはpure objectsのみ、replies pending0とsender到達0を独立確認する。
 
 485実物で主担当はWebLogDispatcher=WBS-P006-04、RevocationRetryCoordinator=WBS-P015-05、共通口P018-06。これらはP006-03のREQUEST producerと同一WBSではなく、共通費と個別consumerの配賦を推測しない。新codeは先行6608/6610の原qualification終了まで変更しない。
