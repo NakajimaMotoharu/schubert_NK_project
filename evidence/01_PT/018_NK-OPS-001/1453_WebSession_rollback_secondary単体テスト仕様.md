@@ -1,5 +1,7 @@
 # WebSession rollback secondary PT仕様（PG前）
 
+着手具体化：主WBS-P015-01（485実物）、Program NK-WEB-001。新SessionRollbackAttachment329Test3/SHA7d923ba8240e6a530a088e6674ecd19dace2a8caeb16d28af81e26f69c5eba26、Main78f4a54fa/全旧Testbytes不変更、format1800終了0/管理三0/pyflakes0。driver `pg6618_session_rollback_selected.py red`はnewonly15/8、予定元13/6 F1/not-run2、002003既identity/通常catalogは成功を期待。green6620/33-12＝baseline12＋新3＋既Repository11/SessionFailure1/SessionJdbc3283/WebStartup3、既Repository実DBは自己所有tempPG/FlywayのみのPT_DEFAULT。原6622で当8511667/六Jar/XML/counter/rawstaticを照合、現動的未実行。
+
 BUG1592/YKT1345/1348、SS312329330/314/331/332/354。原115SQL scopeのEncryptedWebSessionRepository.transactionはrollback SQL/RTE/Errorをinline addSuppressedするため、suppression無効primaryのsecondary fatalを失い得る。既TWR Connection.close/SessionStoreのcause-suppressed-next分類と通常catalogは維持し、SQL/RTE/Error attachmentだけ既qualified WebStartup pure口へ接続する候補。権限/session/CSRF/認可/DB列/TTL/正常動作を変更しない。先行manual二ownerの原資格後に着手し、現在の固定Main/Testを変更しない。
 
 予定PT-WEB-SESSION-ATTACH329001～003（新一class三method）：001 setAutoCommitでsuppression無効Runtime、rollbackにSQL next/cause/suppressedのError又はdirectError、同一fatal/rollback1/close1、後続readOnly/SQL/commit/session識別子発行0。002 primary graphとsecondary両fatal/直接primaryErrorとsecondaryErrorは既primary優先、同一Throwable self-attach0・close一回を保持。003 非fatalcycle/同一Throwable・欠落Connectionは原因/suppressedなし既SessionStoreException、null/異常を成功へ補完しない。期待値は固定Error identity・明示counter/固定catalog文字列から独立に作る。
