@@ -17,3 +17,5 @@ PROCESSING期待はSS312 Workerのbegin commit→provider→完了transactionと
 赤は新3＋baseline12=15/8、API停止時9/5/F2を予測（Expected AssertionError but nothing thrown、後段6not-run）。新反例だけの赤→原XML照合→変換前guard・必要同群PG→同oracle/既業務domain・必要同source全体で確認する。Unknown/compile/timeout/errorを目的赤としない。
 
 実行command/OS/JDK/version/branch/source/archive/終了code/XML/hash/当counter/障害/再試験は010と018の公開manifestへ真正回収後記録。現在は仕様だけで未実行、coverage/各domain/全品質/正式/native/IT/STは未受入。
+
+新TestSHAa86a9a6dcbcae3959be6098b791454faee4cea056dca2c1e0d24550c11ed2765、formatter0/定義管理三0。6578 red15/8/原読取を準備しただけで動的未実行、Main f3fffb不変更。command=`PYTHONPATH=tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime python3 -B tools/quality/pg6578_provider_graph_red.py red`。20秒各Test上限、actor/connection/rootは自己fixtureだけ。
