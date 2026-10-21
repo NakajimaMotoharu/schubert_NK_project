@@ -1,0 +1,2803 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "163",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "163",
+    "findingId": "F03-PMD2-f0214688a5330ec858db1016e4bcd2f70994fc8d7c6ccd6fa0fe18090da945b0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7756ccafb9f9017788ee9a6b51acfd11a5613d8b33440648a6193efd8862a20d",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 389,
+    "reason": "Before a service-intent owner is returned, checked/unchecked assembly failure attempts the locally owned directory close and rethrows. Checked close failure is suppressed, not treated as success; unchecked close can supersede, never authorize start. Normal lease ownership is separately transferred to the returned marker owner; this review grants no real startup authority.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "163",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "163",
+    "findingId": "F03-PMD2-116df42842e8f48d689b188f6f2d0c3454af6392a86cb3e6368b2697d6dd0377",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7756ccafb9f9017788ee9a6b51acfd11a5613d8b33440648a6193efd8862a20d",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 390,
+    "reason": "Before a service-intent owner is returned, checked/unchecked assembly failure attempts the locally owned directory close and rethrows. Checked close failure is suppressed, not treated as success; unchecked close can supersede, never authorize start. Normal lease ownership is separately transferred to the returned marker owner; this review grants no real startup authority.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "207",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "207",
+    "findingId": "F03-PMD2-c625d90f484c2553f25cce2130819d1ca1fe809f026501942aec62bd0c629478",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-38237035960491429baa0c814995bb9acb51cd0e966534c5ac802d864cbcc5d6",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 391,
+    "reason": "A private final monitor serializes gate, snapshot and missing-only observation with begin/retire on this instance. An existing or unknown marker fails; it is not automatically repaired. This local monitor does not prove M/A, external process or Unit state.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "224",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "224",
+    "findingId": "F03-PMD2-512c965d2c2ed89969ce9af6a7a099e29705614f3b299fc55b9081d2309fc7cb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-75dc2dadc31f6114fc0ec217a9135bec55a1b2e66a63b51f6c4082fcae341eb9",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 392,
+    "reason": "The compound new-only create/force/sync/identity/gate sequence shares the private reentrant monitor. begun becomes true only after durable checks; later failure leaves residue and cannot authorize a start. Actual publication or ownership is not demonstrated by source review.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "257",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "257",
+    "findingId": "F03-PMD2-614f2b20efeeac224a934106be34495ed289927da06977346d7c60c0977f9cd0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0494ad7db6c47a880284cf3bb212ba7fecdde4a0383bcaf8d046f2fce607d78c",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 393,
+    "reason": "The package-scoped existing-marker capture serializes begun/token identity and before/after gate checks. Its documented caller failed-generation proof is external and remains held; the monitor itself creates no recovery or retirement authority. No such operation is executed or independently investigated here.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "274",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "274",
+    "findingId": "F03-PMD2-2637f1e2a9f5d3db3fe50488762e586c037990a24a3ed57e47c8cdd727a894b7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4b021752efcb33767a2ea244530747fdf4279b9144c95ec729a694e5cd4c24cc",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 394,
+    "reason": "Same-owner token identity, begun, gate and snapshot checks surround the single unlink under one private monitor. The external whole-Unit/original prerequisite is not inferred from equality or synchronization. This review executes no retirement and does not certify successful persistence after an unknown return.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "290",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "290",
+    "findingId": "F03-PMD2-3ca71524b57dafd25a399944beb8ac509c1885a49b690029828e55f46321e370",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-18838b648bd6b0b66c7c3a772385397d8ba142a5ece5af4be6cdc0996489e413",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 396,
+    "reason": "Same-object token ownership and marker snapshot/gate observations are one compound synchronized read. It cannot substitute a previous boot or foreign token, nor prove actual ownership merely because local locking succeeded.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "318",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "318",
+    "findingId": "F03-PMD2-cfcf819786e74bb187d8473195e19840a03a2f2e2d682ee933229ebe36ecda84",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-84ba0e1582bb6d8ddf1836cb927cd05107e65a2d32677118788154ba2a7677ba",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 398,
+    "reason": "The fixed-marker preservation branch uses the same reentrant monitor and entered-before-MISSING guard so unknown/invalid existing entries are not silently replaced. All actual recovery/quarantine prerequisites stay outside this static warning rationale and held; no real marker is read or changed.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "352",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "352",
+    "findingId": "F03-PMD2-a80225cf1797ca4cfe79db1b7f06947a0fc89d811dbacd115bfc241dc165842a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e406bdd0bad4ba55d4e8750a49fc0e326c86d7a55c8124dab293e2aa1767138a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.class": "e96cd9912401a4e895d3d74efaf3e261967e3d6039272511d3a921375c21c0d8",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.class": "0ad47908c78712844cc1fe0ec5b85125080c038ff1b7c5352f17cb863b947af5",
+      "batch:dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.class": "ec599e3ac25bdca67d72808eaa7240a921781b322d6a22ffab9cfb75bb070e00"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupStartIntentFilesTest",
+        "sourceSha256": "fb6bd4639b0f3747dab58808e178b6a094443a77ea621fbdca5d485c048793a0"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 401,
+    "reason": "The locally owned directory close is serialized with marker observations. This is a lifecycle critical section, not a concurrent-map optimization. A thrown close is not converted into terminal success or evidence that a real owner released.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "57",
+    "beginline": "158",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "phase[0]++)",
+    "diagnosticTextSha256": "dff2500952fac250b470eb919d78f80fb2e6362adfc2a477b2e81e67181f7c03",
+    "endcolumn": "67",
+    "endline": "158",
+    "findingId": "F03-PMD2-85925f9f5d1a431d48a84e7857346f76bc2b056315e40a1ded37a0529f655623",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7fa7b298c2534f4462375664d758e83e05a06af4666be63791879166f7e86ad3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class": "09e1d32fc6b46d7bd2b9e61345a52c4947062c064dc51728b908934dc0dd062e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class": "d62b56ab5aaf27056d517ab456951abea044916ef18beb82f6989d803758f748",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class": "b67fbde2db3abba3f93b4088143e5e157e98ba93719af294e5b99c96e9d529e9",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class": "5057e9aa800e5856254eca31fe8d140cbcd1f8e9513a6846c11a07a6c127d18e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class": "91a2bc89731a873611193922098ec992b5462f423122b39d2454b9783397d8ce",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class": "a2e832fe44c935f8eaded9839f1f5e5f79d7ead9439b7ab0dcba6134f99fd196",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication.class": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 475,
+    "reason": "The single phase[0] increment compares each callback ordinal against the literal three-boundary order, after owner check and before expected-state/gate/proof observations. A failed ordinal stops publication; it is not retried or accepted. This local integer progression alone conveys no permit authority.",
+    "rule": "AssignmentInOperand",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+    "sourceSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "205",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "46",
+    "endline": "205",
+    "findingId": "F03-PMD2-c92cac41a4808be7c44fa1da6eacc326837f2dd188cb61818e13fddb621a597d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4a40639a1c6ad11c9bdb251e03aee9744ffc1ab4926c6a84065f6c9206594c70",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class": "09e1d32fc6b46d7bd2b9e61345a52c4947062c064dc51728b908934dc0dd062e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class": "d62b56ab5aaf27056d517ab456951abea044916ef18beb82f6989d803758f748",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class": "b67fbde2db3abba3f93b4088143e5e157e98ba93719af294e5b99c96e9d529e9",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class": "5057e9aa800e5856254eca31fe8d140cbcd1f8e9513a6846c11a07a6c127d18e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class": "91a2bc89731a873611193922098ec992b5462f423122b39d2454b9783397d8ce",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class": "a2e832fe44c935f8eaded9839f1f5e5f79d7ead9439b7ab0dcba6134f99fd196",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication.class": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 476,
+    "reason": "Before publication started, any checked/unchecked intent-observation close uncertainty calls the pre-retained nonreturn port. aborted becomes true only after normal close; normal return cannot fabricate successful release after an exception. Actual parent lifetime still needs independent evidence.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+    "sourceSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "205",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "54",
+    "endline": "205",
+    "findingId": "F03-PMD2-56e4261ee0151ed2564159eed69d6b50d71b63b9407bc11667d2bf23615981ce",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4a40639a1c6ad11c9bdb251e03aee9744ffc1ab4926c6a84065f6c9206594c70",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class": "09e1d32fc6b46d7bd2b9e61345a52c4947062c064dc51728b908934dc0dd062e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class": "d62b56ab5aaf27056d517ab456951abea044916ef18beb82f6989d803758f748",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class": "b67fbde2db3abba3f93b4088143e5e157e98ba93719af294e5b99c96e9d529e9",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class": "5057e9aa800e5856254eca31fe8d140cbcd1f8e9513a6846c11a07a6c127d18e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class": "91a2bc89731a873611193922098ec992b5462f423122b39d2454b9783397d8ce",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class": "a2e832fe44c935f8eaded9839f1f5e5f79d7ead9439b7ab0dcba6134f99fd196",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication.class": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 477,
+    "reason": "Before publication started, any checked/unchecked intent-observation close uncertainty calls the pre-retained nonreturn port. aborted becomes true only after normal close; normal return cannot fabricate successful release after an exception. Actual parent lifetime still needs independent evidence.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+    "sourceSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "232",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "232",
+    "findingId": "F03-PMD2-dd83bc976234b7ae2ac624d51507f9865aac4950bf2bbd57d61d758ff187b1c5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c521cee7912981cc165420547d0f47916eff134b92519b96d716284ce35d0798",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class": "09e1d32fc6b46d7bd2b9e61345a52c4947062c064dc51728b908934dc0dd062e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class": "d62b56ab5aaf27056d517ab456951abea044916ef18beb82f6989d803758f748",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class": "b67fbde2db3abba3f93b4088143e5e157e98ba93719af294e5b99c96e9d529e9",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class": "5057e9aa800e5856254eca31fe8d140cbcd1f8e9513a6846c11a07a6c127d18e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class": "91a2bc89731a873611193922098ec992b5462f423122b39d2454b9783397d8ce",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class": "a2e832fe44c935f8eaded9839f1f5e5f79d7ead9439b7ab0dcba6134f99fd196",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication.class": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 478,
+    "reason": "After publication may have started, checked/unchecked failures cannot produce a normal abort receipt: they enter the existing retention port. The source catch is required, but its delegated revoke/quarantine actions and original/current state are not exercised or authorized by this review; safety holds remain unchanged.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+    "sourceSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "232",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "232",
+    "findingId": "F03-PMD2-d821d4dbf408a832188e665510cc8bade43439028ed99b913988ac3040c2ced8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c521cee7912981cc165420547d0f47916eff134b92519b96d716284ce35d0798",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$1.class": "9545d7682cece01968878140699ad004eebd8d708f67c21e08f530b597d73ab5",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$2.class": "3f02d97b16023fb3b37c3504181ce5832b33a859c83b163cc6265887ee6f07b1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Gate.class": "09e1d32fc6b46d7bd2b9e61345a52c4947062c064dc51728b908934dc0dd062e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Intents.class": "d62b56ab5aaf27056d517ab456951abea044916ef18beb82f6989d803758f748",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenIntent.class": "b67fbde2db3abba3f93b4088143e5e157e98ba93719af294e5b99c96e9d529e9",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$OpenStore.class": "5057e9aa800e5856254eca31fe8d140cbcd1f8e9513a6846c11a07a6c127d18e",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Retain.class": "91a2bc89731a873611193922098ec992b5462f423122b39d2454b9783397d8ce",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication$Store.class": "a2e832fe44c935f8eaded9839f1f5e5f79d7ead9439b7ab0dcba6134f99fd196",
+      "batch:dev/codex/schubert/nk/batch/file/MorningPermitPublication.class": "60f00cd137a3c2c9ce0e485009fa214b6e43ee1db2e446d4aac1d05d2710ed77"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 479,
+    "reason": "After publication may have started, checked/unchecked failures cannot produce a normal abort receipt: they enter the existing retention port. The source catch is required, but its delegated revoke/quarantine actions and original/current state are not exercised or authorized by this review; safety holds remain unchanged.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+    "sourceSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "159",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (RuntimeException | Error diagnosticFailure) {\n        // SSC326: best-effort diagnosis must return to the original owner's UNKNOWN retention.\n      }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "8",
+    "endline": "161",
+    "findingId": "F03-PMD2-4ffd578eac6281cbe30d0a786b944076baf83ec278c02f7da8b339c017872257",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1faa77dc8163df0a61ccbc3968ec277ecd364fee77b70b0ed66f34eb43c1ab2c",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 485,
+    "reason": "This catch contains only a secondary diagnostic failure after a nonnull primary is already UNKNOWN. It returns to the original completion catch and its retain call, not to successful completion or release. Normal phase/null behavior is explicitly separate; actual parent retention is not proven here.",
+    "rule": "EmptyCatchBlock",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "159",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "159",
+    "findingId": "F03-PMD2-ef9627629812f06ad943f1bdefd680a5d04a0a3f8512192484e1678cf15c61ad",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-11ade12a05fcce168b965d67bb167fba590a20dc0abb8f052c1937f14415b07e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 486,
+    "reason": "The fixed failure classification, clock, string construction and sink are protected for both RuntimeException and Error. Same independent current23 cases exercise the two secondary origins and types; no Throwable message or graph is printed. The raw warnings remain visible and current whole binding is still required.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "159",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "159",
+    "findingId": "F03-PMD2-47dbfe9164b79ce9fe090c9224c7167123e54d9d3c83264a73c7cab56d8443cf",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-11ade12a05fcce168b965d67bb167fba590a20dc0abb8f052c1937f14415b07e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 487,
+    "reason": "The fixed failure classification, clock, string construction and sink are protected for both RuntimeException and Error. Same independent current23 cases exercise the two secondary origins and types; no Throwable message or graph is printed. The raw warnings remain visible and current whole binding is still required.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "17",
+    "beginline": "302",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (IOException notYetReady) {\n                // Do not accept uncertainty; bounded failure stops the whole owned graph.\n              }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "16",
+    "endline": "304",
+    "findingId": "F03-PMD2-24124902d495d721f4794b42ef3f39245088b4bf58fa19c90e3b0a7d23cee4ea",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a04b31ab4e86976d2b9fe19ad2e11ab3e77d26c23fec9b11865098bbb905c564",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 488,
+    "reason": "A typed Caddy-readiness IOException means not yet ready only within the same remaining parent/caddy floor. The next bounded loop still rechecks peers and budget; failure outside that window stops the owned graph. It is not an ignored success or a new startup retry.",
+    "rule": "EmptyCatchBlock",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "307",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "50",
+    "endline": "307",
+    "findingId": "F03-PMD2-d2283dccc5630a0c3f9033cc5dc7f35b48e1d74f13b494ff68ce089047f41553",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3f937f47101fa3dba20fff4f6f3d2683b4b423d3b1c60c2fce89de755462c8d2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 489,
+    "reason": "Readiness/budget/peer uncertainty after Caddy start enters the existing stopOnly path before the original failure may propagate. Unknown termination must retain and cannot authorize ordinary parent unwind. Real Unit stop/quiescence is not established by this local source reason.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "53",
+    "beginline": "307",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "58",
+    "endline": "307",
+    "findingId": "F03-PMD2-96e56bcb956e6fdaa990d87527ff99409a50dd0fafe9dd1abc98850e4e7088f8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3f937f47101fa3dba20fff4f6f3d2683b4b423d3b1c60c2fce89de755462c8d2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 490,
+    "reason": "Readiness/budget/peer uncertainty after Caddy start enters the existing stopOnly path before the original failure may propagate. Unknown termination must retain and cannot authorize ordinary parent unwind. Real Unit stop/quiescence is not established by this local source reason.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "36",
+    "beginline": "311",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "52",
+    "endline": "311",
+    "findingId": "F03-PMD2-c11d9de854c9d967d321715d545eec9719962c62536da5bf9bec30a87b0f5ac7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c4fca1dbf3f2c2f444cbd6f2376e199d7fb0f55fdd7d6076b25876f14a6c8a05",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 491,
+    "reason": "After confirmed stop, a checked/unchecked failure closing the attempt observation goes to retain instead of reporting released resources. It neither retries a consumed close nor retires an actual intent in this review.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "55",
+    "beginline": "311",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "60",
+    "endline": "311",
+    "findingId": "F03-PMD2-89242f18bec098adbaf9da93a9c9611c71f0326506736af234174d67141529e4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c4fca1dbf3f2c2f444cbd6f2376e199d7fb0f55fdd7d6076b25876f14a6c8a05",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 492,
+    "reason": "After confirmed stop, a checked/unchecked failure closing the attempt observation goes to retain instead of reporting released resources. It neither retries a consumed close nor retires an actual intent in this review.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "400",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "50",
+    "endline": "400",
+    "findingId": "F03-PMD2-43aee3145f811f8b674e36b01b6c289ab28b8901b4571075e82e3f1e2985fc08",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8f7e12794da301080b2e1b34481a736d77a30a0787f87fed440bdea554337bbe",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 493,
+    "reason": "Any uncertain completion/retirement/readback failure calls the now-protected failure diagnostic and immediately the existing retention port. Original23/JVM proves the diagnostic edge only; actual DONE, resource lifetime and native termination remain separate unproven dependencies.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "53",
+    "beginline": "400",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "58",
+    "endline": "400",
+    "findingId": "F03-PMD2-5a56b2560625cb2a5ec5f6e191c471b39818d939ed5df6ab97834305fa639bd2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8f7e12794da301080b2e1b34481a736d77a30a0787f87fed440bdea554337bbe",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 494,
+    "reason": "Any uncertain completion/retirement/readback failure calls the now-protected failure diagnostic and immediately the existing retention port. Original23/JVM proves the diagnostic edge only; actual DONE, resource lifetime and native termination remain separate unproven dependencies.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "435",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "435",
+    "findingId": "F03-PMD2-dd411299ba8d4372f36046338b3b3f6fe6d048d8f1812ade920d2b1b2ca4ba06",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6b4365ad94c9e240c93a838ea141f7a9a28903c64d3ad931a8c635f68c42d401",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 495,
+    "reason": "stopOnly catches all checked/unchecked stop, owner, budget and kernel-observation uncertainty and retains. A zero client exit is insufficient without fresh quiescent observation; no unknown state is normalized into stop success.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "435",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "435",
+    "findingId": "F03-PMD2-dee14f9d65f5729c65ea050d97758a90953588f85c8791f39c433071ebc11d5d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6b4365ad94c9e240c93a838ea141f7a9a28903c64d3ad931a8c635f68c42d401",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 496,
+    "reason": "stopOnly catches all checked/unchecked stop, owner, budget and kernel-observation uncertainty and retains. A zero client exit is insufficient without fresh quiescent observation; no unknown state is normalized into stop success.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "491",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "491",
+    "findingId": "F03-PMD2-114deb60ce5392e7a295ecf3e87dc94c52f78d687510b02db45eea7913b4cb75",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c8196ca65e19038744f9139f5d801848433686bab5ca0c0bd826758b4fa29b55",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 497,
+    "reason": "The fixed API/Web sequence retains returned owners before the next launch and reverses only those owners on launch/completion failure. Capacity2 now precedes acquisition and immutable snapshots do not expose the mutable list. The production stop port is the existing nonreturn-on-unknown implementation; arbitrary failing replacement ports are not certified.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "491",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "491",
+    "findingId": "F03-PMD2-49936718f032d6d4c4a947fe0c2a922c423501bd9339d366f7ea3843326b3549",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c8196ca65e19038744f9139f5d801848433686bab5ca0c0bd826758b4fa29b55",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 498,
+    "reason": "The fixed API/Web sequence retains returned owners before the next launch and reverses only those owners on launch/completion failure. Capacity2 now precedes acquisition and immutable snapshots do not expose the mutable list. The production stop port is the existing nonreturn-on-unknown implementation; arbitrary failing replacement ports are not certified.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "518",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "518",
+    "findingId": "F03-PMD2-712fe5ebe66237092f6b2a52e73ea1b132bfd53f747d2d80e2b67a8e2e874fc1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f1614e3d941ef685f23507f8bafbb5c06719523eba08067f2c073e88c4830935",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 499,
+    "reason": "Uncertain stop, whole-child observation, preserved handle, original, DB or parent recheck enters retain instead of continuing the earlier-owner unwind. Existing captured unit/termination references are used and no real stop is issued by this static review.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "518",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "518",
+    "findingId": "F03-PMD2-80e1cf9056fb66a148c2e64c09d8b3c98d090bfdfb18d48509d0617990f4f98a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f1614e3d941ef685f23507f8bafbb5c06719523eba08067f2c073e88c4830935",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 500,
+    "reason": "Uncertain stop, whole-child observation, preserved handle, original, DB or parent recheck enters retain instead of continuing the earlier-owner unwind. Existing captured unit/termination references are used and no real stop is issued by this static review.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "634",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "catch (java.net.ConnectException notYetListening) {\n          // A fixed socket can appear before its HTTP acceptor. Never promote unknown IO.\n        }\n",
+    "diagnosticTextSha256": "274920abdb42bee01d0e6ffb067002528fd24454b2d35c7f732f27070e2c06d3",
+    "endcolumn": "10",
+    "endline": "636",
+    "findingId": "F03-PMD2-9359956e4ab1529bad122589be86f0530879e0dcb4959cf955065f06c37706c2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a41c473d4385803fd3f7215a8a5b5cfbe8ca6df74756da6579e040de9b1bad27",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 501,
+    "reason": "Only ConnectException from the fixed same-generation readiness socket is temporarily interpreted as not listening. The same child and parent deadlines, original/DB/earlier readiness checks continue; other I/O is not swallowed, and no ready result is fabricated.",
+    "rule": "EmptyCatchBlock",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "659",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "46",
+    "endline": "659",
+    "findingId": "F03-PMD2-ad2ddb34a8a1610e01de4f35fb711d35d43986a7211df83aebafc788209b4895",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a02a5ef72ea234806c4e79126ca95786f003772ed95c132e77307cbd2f8008a1",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 502,
+    "reason": "A failed observation close after the known terminal path cannot set observationClosed or unwind: the existing retention port is invoked. No second successful close, startup or retirement is inferred from uncertainty.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "659",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "54",
+    "endline": "659",
+    "findingId": "F03-PMD2-3c6e039f74977a05a74d96ddf06c9544c689bc51436b8ae196a834ee6d394945",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a02a5ef72ea234806c4e79126ca95786f003772ed95c132e77307cbd2f8008a1",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 503,
+    "reason": "A failed observation close after the known terminal path cannot set observationClosed or unwind: the existing retention port is invoked. No second successful close, startup or retirement is inferred from uncertainty.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "28",
+    "beginline": "665",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "44",
+    "endline": "665",
+    "findingId": "F03-PMD2-bfcba76f8dc11c1c90c8ac82fc1c70eff370a2427d734ded01397954ddb0a189",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ea324ab7fde0b16733abbf3c55c84b4a18a63655555bf0200d0ebec555999a39",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 504,
+    "reason": "Without a captured ticket, a potentially delivered child failure retains immediately. With the captured identity, existing stop/whole-terminal verification precedes closing the observation or propagating failure. This source path does not authenticate any currently running child.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "47",
+    "beginline": "665",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "52",
+    "endline": "665",
+    "findingId": "F03-PMD2-c4551a603ed64aa8a9db67a169a6c4d89aa7e4e988a39876d0224a176d336334",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ea324ab7fde0b16733abbf3c55c84b4a18a63655555bf0200d0ebec555999a39",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 505,
+    "reason": "Without a captured ticket, a potentially delivered child failure retains immediately. With the captured identity, existing stop/whole-terminal verification precedes closing the observation or propagating failure. This source path does not authenticate any currently running child.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "680",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "46",
+    "endline": "680",
+    "findingId": "F03-PMD2-3f72986512f296422ef3dd5361c89d10c7f4e57b6be6247398b77d0f645229b7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5685db304d87362c79fec1a08c4738fa8ada13a2e956d07a22f05b4d4b08c540",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 506,
+    "reason": "Any secondary stop/termination/original/DB/budget/observation uncertainty is retained before the primary failure may return. Parent scope release is not authorized by catching Error, and no failed-cohort recovery is performed by this check.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "680",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "54",
+    "endline": "680",
+    "findingId": "F03-PMD2-78fe264d7d7d51c4ab8a318fccd30e78c22624bb8692bf2d7cbfab3f29a003e3",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5685db304d87362c79fec1a08c4738fa8ada13a2e956d07a22f05b4d4b08c540",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerTest",
+        "sourceSha256": "67684ad54a9c213c1030402e65966b843f712f434f5be33d9ccca50e8b8e2aab"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwnerAdmissionTest",
+        "sourceSha256": "fb5045ccf0372a514b8864807c4c051c787497c1236ded05ca56b2fcd2d77385"
+      },
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest",
+        "sourceSha256": "7529b4771bd70c312b798ef9eb9e738dc0bf2ae9017955b3bae5e737ab82ef83"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 507,
+    "reason": "Any secondary stop/termination/original/DB/budget/observation uncertainty is retained before the primary failure may return. Parent scope release is not authorized by catching Error, and no failed-cohort recovery is performed by this check.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "746",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "746",
+    "findingId": "F03-PMD2-7591b2ad7504201a5a06360705baf19bea77bc672e98a10d10b10ba7e4f80bd2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-584533ea873febb1d26f04b3a2bde49b451b4b736cd932ccce381242f5f420ca",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 508,
+    "reason": "The pinned rule prohibits thread management in J2EE containers. SS311/343 define this batch as a standalone process; the 25ms sleep is a bounded readiness observation interval on its own thread, not creation/control of a managed container task or proof of actual readiness.",
+    "rule": "DoNotUseThreads",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE",
+    "threadRulePremise": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    }
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "748",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "748",
+    "findingId": "F03-PMD2-7108592c9496390a6518a064fa676772ecd0d5ad7e59b55bd38cb191920e1b30",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-812f0544d57f0c1407cf4cee9fde2898d90a717ac489c3d1db49454c9c1d4284",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 509,
+    "reason": "Restoring the current thread interruption after InterruptedException preserves the existing fixed failure contract. The batch is not a J2EE-managed component and this notification operation creates no foreign thread or stop authority.",
+    "rule": "DoNotUseThreads",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE",
+    "threadRulePremise": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    }
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "757",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "757",
+    "findingId": "F03-PMD2-7c670e2426ab46b4841d3b7375a3aadd58984a63c3ad3991f801080f20376ac2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-81794d22f98797efeee5dd54c7b8a03c992e98760f6e4c3d50aed25fbc99b737",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$ApiRetained.class": "2016afb65e88361fc888a258a2cc4963e4d21e8bd16dbd0c1c027529b81aba87",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Completion.class": "2ef83bb590c09a418cd569a1652648d2b17ed0420ff8fd321d0ec15f39cec467",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionPhase.class": "7d3e432b74cd209e324705f0dc5fa10e1c2319933acca9aa46fb3898f0a8fdf0",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionProgress.class": "7605fad7ecf3f2be7cee12bbe12bf6f5f3d6f2836dac5305ef1534fd160d75a6",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$CompletionRetirement.class": "148916aa7adb185d7934e57f176a13e93bee4fa57ddb3124ff590b7799c38cb1",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Launch.class": "e28f986b081baa5a7220fa01fc010745c106b3b8fb6d6075dbb811d61dd24165",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Started.class": "19407da3646aaa549146b36139aab81ec8cf488625dc9eb05461fa2681b96f93",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner$Stop.class": "e21f5c057e72f831d8ac0a84302321ee697c8ef99ec3c96af07ffd7277026792",
+      "batch:dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.class": "9e040187a6107fdd26b8794b4f096fdf428ae32649b4edfb79ceb1c45f3307da"
+    },
+    "plannedCurrentWholeCaseClasses": [],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 510,
+    "reason": "Clearing only the current interruption after an existing retention park prevents a hot retry notification. It does not release the holding frame, certify cleanup, extend the parent budget or manipulate a container-managed worker; actual native lifetime remains unproven.",
+    "rule": "DoNotUseThreads",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "sourceSha256": "caca5ef9c6f8ab5e5084bf0ee363871b5e61fce4f023fd3daf9ca484faa0d99a",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE",
+    "threadRulePremise": {
+      "resource": "category/java/multithreading.xml",
+      "sha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+      "version": "7.28.0"
+    }
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "19",
+    "beginline": "235",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "count++]",
+    "diagnosticTextSha256": "211876167b7c918687b9aa62f7fbd9e26286aa92be52b637a84cafcb9b786a77",
+    "endcolumn": "26",
+    "endline": "235",
+    "findingId": "F03-PMD2-57ed7462cf3656ae92513e3b9aa1aed2822265c52a1fe9a5c8f5c2c7849a22ee",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c8d22e993950272a34d673a2486b575d7aa464406054c0a1e6dce3e644db37d2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 529,
+    "reason": "guard checks primitive capacity before native open; the valid distinct FD is stored into the preallocated slot before increment. No boxing, List grow or callback allocation intervenes. Duplicate/negative descriptors are rejected before adoption, preserving existing ownership rather than fabricating a fresh one.",
+    "rule": "AssignmentInOperand",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "19",
+    "beginline": "247",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "count++]",
+    "diagnosticTextSha256": "211876167b7c918687b9aa62f7fbd9e26286aa92be52b637a84cafcb9b786a77",
+    "endcolumn": "26",
+    "endline": "247",
+    "findingId": "F03-PMD2-9d0725c715ece2677d0f5bb9207c58131f7c69957baebb4f9cc53d0855550345",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-28ccd1988d96be73ace9a4fe04d7ef51ca4f224233329e4fc6d429b09bc7f94a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 530,
+    "reason": "After parent membership and bounded-capacity guards, a valid distinct directory descriptor is stored in its fixed primitive slot and count increments once. The assignment is the required nonallocating capture, not an accidental conditional mutation.",
+    "rule": "AssignmentInOperand",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "19",
+    "beginline": "259",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "count++]",
+    "diagnosticTextSha256": "211876167b7c918687b9aa62f7fbd9e26286aa92be52b637a84cafcb9b786a77",
+    "endcolumn": "26",
+    "endline": "259",
+    "findingId": "F03-PMD2-a5e654331fabb62dfdcbeda50894855f9f53ed718dac9829a8cc5266070e7818",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d9e4ce573ba3ec61bd63c68c856bd9ca377f2231a5bd5a5b4d774c55f1783d20",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 531,
+    "reason": "Entry FD capture follows the same prechecked primitive capacity, parent and duplicate constraints. Post-increment records exactly one newly valid descriptor; no heap growth can lose that descriptor between native return and registration.",
+    "rule": "AssignmentInOperand",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "280",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "34",
+    "endline": "280",
+    "findingId": "F03-PMD2-e58be2e10eb94a0da1ac22f008dd65dad923c24abb79ba3f76a578d991c05552",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6fcd85c388f83490597524e97303430f28166c04480f73b39841bf02ddcbf497",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 532,
+    "reason": "close consumes this owner once, then an unchecked primary drains earlier descriptors before rethrowing that same primary with fixed secondary markers. It does not certify kernel release from a consumed cursor and never retries an uncertain descriptor.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "280",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "42",
+    "endline": "280",
+    "findingId": "F03-PMD2-1e31822b1eacdcb8333526ca10e9bafd3b60a314e459d7042afe04c81be5c7c4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6fcd85c388f83490597524e97303430f28166c04480f73b39841bf02ddcbf497",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 533,
+    "reason": "close consumes this owner once, then an unchecked primary drains earlier descriptors before rethrowing that same primary with fixed secondary markers. It does not certify kernel release from a consumed cursor and never retries an uncertain descriptor.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "296",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "34",
+    "endline": "296",
+    "findingId": "F03-PMD2-a705bdef5d7eee4df6a4e6fe71dfaa52118f433dac5b8441031e6059621c22a5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d6b72c04b3f329ab022cc8f0975edf3bbcd010f6c75b2f2129dbd6a512cee40f",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 534,
+    "reason": "The first unknown drain failure supersedes a previous known storage error only after remaining descriptors have each been attempted. Prior known/unknown exception precedence is explicit; fixed normalization happens after the reverse drain, not before it can strand remaining owners.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "296",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "42",
+    "endline": "296",
+    "findingId": "F03-PMD2-98eaa920b3e5a6451ae5efa76593c58d02a72ddf29e2e4d1019f78fdddd76db2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d6b72c04b3f329ab022cc8f0975edf3bbcd010f6c75b2f2129dbd6a512cee40f",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 535,
+    "reason": "The first unknown drain failure supersedes a previous known storage error only after remaining descriptors have each been attempted. Prior known/unknown exception precedence is explicit; fixed normalization happens after the reverse drain, not before it can strand remaining owners.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "313",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "55",
+    "endline": "313",
+    "findingId": "F03-PMD2-f1fe229d864b6cf3e06a08aca7c1416ad01e4249b3ee1726f8232465afdca079",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b76c5d402bc9a1c19c520fe41958512c9d1252d082374b539c4bdfe9472d8253",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 536,
+    "reason": "During reverse drain, secondary checked/unchecked close failures are recorded only in preallocated primitive flags so later descriptors are still attempted. Suppression markers are constructed after all attempts; failure flags do not stand in for successful physical closure.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "58",
+    "beginline": "313",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "63",
+    "endline": "313",
+    "findingId": "F03-PMD2-93f3601989e0b84f693f05d3d4b24a3a2d2985501a182a535f62b82678aa8b8a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b76c5d402bc9a1c19c520fe41958512c9d1252d082374b539c4bdfe9472d8253",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Admission.class": "1584d1b3441d09c60ae11df2c1cf45270eb27589dded45d6fd155e6191bbe22e",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$AdmittedOperation.class": "8771741f213b87adb0c873194d2f6a294f8e6a4816c18d4a25dcc90bf0c604f8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Identity.class": "9f77a314217861c25f43bcc779f6ec3fa69a0ec503feeda2fb2efb8b0a62e2f2",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Io.class": "5a31095a38568bd9156472eeeea1459b14905d8fbae233de7b9c8471515b818a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$NioIo.class": "88d8c4730755bb679f10d5679759e8a1cc61f33be2dbbf2bd43c85c4b7db1841",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$Snapshot.class": "31eec307cd60cd2cc43b8b5461a8b00b93243ff261d278cf2f60bf07494406de",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOperation.class": "c5688cf3ccf7f5ac9a0a2cbc082f899010c609a65f93485610ff9d5fc14196a8",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile$ViewOwner.class": "7f19e04f5aba5ea51714a050ce67ba34d9fc6b1b1c8b30bac6ef11fce11836da",
+      "batch:dev/codex/schubert/nk/batch/file/StartupAdmissionFile.class": "2a5d4f4b97c52eed21705bda6116303d482c08b08679d5a8ac00cd971257d3ac"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupAdmissionFileTest",
+        "sourceSha256": "b243d6386ce45c9b20be5e2e442c3ced77e271e8c861fc94e1f36b4dd8686875"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 537,
+    "reason": "During reverse drain, secondary checked/unchecked close failures are recorded only in preallocated primitive flags so later descriptors are still attempted. Suppression markers are constructed after all attempts; failure flags do not stand in for successful physical closure.",
+    "rule": "AvoidCatchingGenericException",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java",
+    "sourceSha256": "39640390a7cbee7bc4ae5770a2dd68bc3a246c049d387ac709b8fb99c140dc1b",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "86",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "86",
+    "findingId": "F03-PMD2-12dd1f23cb371f201859084634ed3810933207105e3adf441a62d753050a4f7d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a66960f00814b8194c281e6aa808472948e6964a1ab345564e493e340c346457",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 539,
+    "reason": "A private final stateLock protects the complete fresh-epoch/current replace and before/after directory checks. This internal transaction is not a concurrent-map use case and local synchronization alone never authenticates boot, original or external owner state.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "115",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "115",
+    "findingId": "F03-PMD2-72a66e9ca32d3db8bde4bb0c9e915a5abe9170f4434e75c4888af9dcf7875d9d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-29d81827a534a8c09c4f913c13edf311b65a6ee4216762beb2730fb3d20dfede",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 540,
+    "reason": "INVALID/current/permit bindings, private part write/readback, three issue proofs and current replacement form one reentrant local critical section. Content is zeroed in finally. The caller must still supply every actual prestart proof; no real issue action is performed here.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "164",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "164",
+    "findingId": "F03-PMD2-26603abe3317fc206825549e7791edc09a37bc27f129ab8f65c7f804e953e9e7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-270cb88a1e188e86738c9a2b052269c16ac739b46aa87f0aec2c9712744be6d3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 541,
+    "reason": "The same-attempt INVALID/derived-ISSUED comparison and current replacement are serialized with reads/issue. The code does not accept a foreign/undecodable current or delete retained files. Actual revocation/ownership is outside this source warning check and remains held.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "196",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "196",
+    "findingId": "F03-PMD2-22d268b5080ef85f944163ec65da8dee2b9963075ce2b6b48a361c77b62575fd",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-106bf37a3eaa62b73125d5be7e1c2c44f7cbed6d2feb7e5d3da4d27df71eddae",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 542,
+    "reason": "current read and begin/finish namespace snapshots share the private stateLock with writers. This prevents local interleaving of the compound observation; it does not replace immutable original, directory or cross-process admission checks.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "212",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "212",
+    "findingId": "F03-PMD2-2f82c29258b7e3a6a5da48e593b50335ad39a05fe9fa0f3e16b75d97c03833ca",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-52e66cbd91578825d67ae3b6a0fb4f5bf80345c37fe9197d877b04946d680909",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 543,
+    "reason": "Issued reads recheck publication intent on both sides of exact permit decoding under the same local monitor. Missing/corrupt/INVALID never grants admission and no state is repaired to make the read succeed.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "248",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "248",
+    "findingId": "F03-PMD2-0c26f0be495c1605c7246558b3c9b808154ae8310bd71fb3dca4b70b2ddad352",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5d547e2fe787a4c593612b5304419444d79605a41c3a5a75967d4dc12e646db8",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 544,
+    "reason": "Package-only revoked-state correlation is serialized with current state, verifies exact INVALID and binds the retained permit bytes, then clears its temporary buffer. Its trusted M/A prerequisite is not created by synchronization; no actual recovery or reuse is exercised.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "284",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "284",
+    "findingId": "F03-PMD2-d6edcbfd5163ce83fc4227e448e8640497763be489d89786e5c19f8c1e73aa4f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-2b4fde4541f25640733dafcb80c339e9db569ac615e68e99ccecebf8d4cf2ff4",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Io.class": "a1206afd6240c4dec38e003b7e1bf5ca791b0ef8678a7a953614ab70d1f5d28d",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssuePhase.class": "2941887d486589acff12d5cfef5fd148a60df7d2384fd22f60157cce39860c3f",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$IssueProof.class": "5f1d6f2e0c73e374f935ce170b108e382da9f7b9e4b2d8c01b501e77c7163ebe",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$NioIo.class": "56e247181c3e41aa34a446dd9f2f2bf3e75cbd39af06134f8f89263c1c22530a",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Parts.class": "76df940c9e7f7a473aef2c312b2ea424ab7acdfea3226932b004719513123ec1",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles$Revoked.class": "97cc63deedda342ca134c4d6eae6d8ae1fa13ff7bcd0e3467168a81cd028eb90",
+      "batch:dev/codex/schubert/nk/batch/file/StartupPermitFiles.class": "cd28bc013bd0e1959320460cf3f3d390c7deb6c5d165523ecd2cce0e6802f262"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.StartupPermitFilesTest",
+        "sourceSha256": "06932d1b522a8ae6fc9a2d7239819806ad41f3f70f0915bbbfe169f537f2754b"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 545,
+    "reason": "Issuer readback checks current ISSUED and the exact attempted permit under the same monitor. It is a publication barrier, explicitly not Root admission or a substitute for actual external readiness/ownership checks.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "bbbc3f7f13b6858535515dc495ad53839683fb24",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/StartupPermitFiles.java",
+    "sourceSha256": "6a9aff26978de396200992a2aeda7c327dfc75aa10adfc9c412be06043287bf3",
+    "standalonePomSha256": {
+      "batch": "83f2ee9a80d1993f4a05cf91fe9c64155383b51435447634800dee6c99a65517"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  }
+]
