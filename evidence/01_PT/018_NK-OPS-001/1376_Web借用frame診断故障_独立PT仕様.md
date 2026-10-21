@@ -15,3 +15,7 @@ Driverのworkerは不活性dummy daemonのみ。JDK/java agentは当runの実引
 まず元6386真正終端→6388原全artifact・当source資格/traceを保全する。その後だけTest draftをsrc/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrapへapply_patchし、正規format/一Testだけdiffguard・実4052資格hash固定、clean commit/push。PG6396新onlyred15/9（baseline12/既Execution2/新1、9入力を9試験へ水増ししない）を一回実行し反例と未到達を保存する。旧sourceのMainを変えずredを確認後、固定診断の保護・取得前finite policy・同frame5fenceを当一MainへPG、同oracle＋関連Life/共通retentionでgreen/静的/JVM・必要同源全体へ進む。現在未実行。失敗/not-run/flaky/skippedをPASSへ算入0。
 
 WBS-P018-06主/関連P018-05,F03、群WEB_OUTER_FRAME_DIAGNOSTIC325（event1568）開始.5/1.5/4pp凍結。これは追加発見/今後の是正を区別する見積りで、原/v4の減額・完成率・親参照の追加費ではない。実N/T/専有費/工数null、正式1964/53・17/190/QA051final/PTALT不明代替0/保全HOLDを維持。通常unit/レビュー/commitで停止せず、元全体待機中は独立source点検を継続する。
+
+## 関連green/資格の準備（未実行）
+
+PG6398はbaseline12/既Execution2/新fixture1/Lifetime5/共通retention5の実宣言25/11を関連群とし、元redのTest全byteを保持して当一Mainだけの差分を要求する。RED_SOURCE/RED_MANIFEST_SHAは未束縛None、元redを実証するまでPG greenを拒否する。PG6400はその真正25の原全8511667/六Jar/XML/対象実四counterを照合するだけでPTを起動しない。新工具定義一0、red二/semantic join二と計五工具0は管理試験、Production加点0。実red/greenや現在の全体の合否を先取りしない。
