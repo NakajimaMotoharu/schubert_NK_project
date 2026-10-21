@@ -4,8 +4,8 @@ import pg6282_current4040_static_join as prior
 from pg6420_current4054_trace import SOURCE, read_qualified
 from pg6418_current4054_static_plan import PRIOR, PRIOR_SHA, OLD
 
-INPUT = prior.BASE/'PG6428-backup-normal-static-review-v1/manifest.json'
-INPUT_SHA = '2da516f19954d662b9cec1d2db70cbc0a1a8c0d7b31f09da22737158102f42bf'
+INPUT = prior.BASE/'PG6430-fixed-request-static-review-v1/manifest.json'
+INPUT_SHA = '289442a437cb39d765ccfd029385d054f9b80a42491331e42409119f56ae3dbf'
 
 
 def definitions():

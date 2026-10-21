@@ -1,0 +1,810 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "53",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "53",
+    "findingId": "F03-PMD2-61268d1f23b3248fc479c74722918688e14021b7480731ea0438fa3e9ba3be91",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9288731f6a20ed3e3ec28a8e089c70f06fded08a9e1954e6065de361fbd67c7b",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+        "sourceSha256": "16cdc70f365efef81441bda1425da0d5534e9c52081336ece556decb70cdc2b5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 402,
+    "reason": "A private final monitor serializes the entire new-only prepare sequence, including part identity, publication and parent recheck. Replacing only individual accesses with concurrent containers would not protect this compound protocol. Encoded content is zeroed in finally. This local exclusion is not cross-process M/A admission.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "91",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "91",
+    "findingId": "F03-PMD2-20027f5308dea15cbf3507d78b338c2feb1d435ba733f7712efbd8472b652bd6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5c7f2085b2118be24e4977d1a64dfaa3ec75c860c8821bf90e9e09c2cc2218cb",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+        "sourceSha256": "16cdc70f365efef81441bda1425da0d5534e9c52081336ece556decb70cdc2b5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 403,
+    "reason": "The same reentrant private monitor keeps read/equality/directory validation and missing-only prepare atomic within this object; nested read/prepare use the same monitor. Missing is the sole swallowed typed condition, with directory equality checked before preparing. Caller same-run proof remains external.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "120",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "120",
+    "findingId": "F03-PMD2-a5c887d57cc8268f147c04b47c658b294d5f31a0126705744a89c13d62bbeff6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-62554e9bf8e9ab27f340d3a729289385fbc4e459984daaa1ae9fa2f83c6b503d",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+        "sourceSha256": "16cdc70f365efef81441bda1425da0d5534e9c52081336ece556decb70cdc2b5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 404,
+    "reason": "The compound replacement protocol holds its private monitor across previous read, same-run/strict-newer validation, caller proof, repeat equality, retire and prepare. The proof callback is a required external precondition, not manufactured by synchronization. This static statement does not approve or execute any real replacement.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "145",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "145",
+    "findingId": "F03-PMD2-b7ddb0ed230aa72141ca5d1aa69089783e03ed7ee0cb254c46da5ede4c0574e2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-12031d10b34c1e97a61c676780da75613317113b28a6f2f73dca9e45a4f23aac",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+        "sourceSha256": "16cdc70f365efef81441bda1425da0d5534e9c52081336ece556decb70cdc2b5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 405,
+    "reason": "Read snapshots and directory/file identity rechecks are serialized with writes on this instance. The temporary maximum-plus-one buffer is wiped in finally; the returned consumed request is independent of that buffer. File and directory ownership remain borrowed from the enclosing scope.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "170",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "170",
+    "findingId": "F03-PMD2-c9d4478b4f6beacf2ab5555e20655b6961c39bbac4716a7ac492013036c3510e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3dd0494494fb2a3b44aa35de516af7c0f883eb7299a009b49f953e19fb7c15bb",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles$ResumeProof.class": "1861146ab0bd3d49f175945d9f7cb29147c4b5d890a1f3f79d5379623dc952b6",
+      "batch:dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.class": "14b07c2a05ea676c50f3be5c93031f440dc4d666d24e7d329267b6a0ecd7dd22"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.BackupWorkerRequestFilesTest",
+        "sourceSha256": "16cdc70f365efef81441bda1425da0d5534e9c52081336ece556decb70cdc2b5"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 406,
+    "reason": "Retire equality, same-file recheck, unlink and durability sync form one local critical section. The documented full Unit-termination precondition is not inferred from source equality or the monitor. No actual retirement is executed or accepted by this review.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java",
+    "sourceSha256": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "262",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "262",
+    "findingId": "F03-PMD2-80a747566fc03639014e2b52dd0ef672111793220cc8e95a76d88edae1668567",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-977f00d4d2714a9460d8bbdd80786e2c34b015df1ec969d80e9a21d02673dece",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+        "sourceSha256": "1396343e4de1db531c32ee50fb20ead2e1da3cf81b7a344f5e0b8f95ddcb7b80"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 420,
+    "reason": "Empty-namespace observation and directory equality share a private final monitor with normal request methods. DirectoryStream closes with try-with-resources and unknown entries cause failure, never automatic repair. Cross-process/real startup admission is outside this local rule rationale.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sourceSha256": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "291",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "291",
+    "findingId": "F03-PMD2-1527f4f2c9417b8d49fc350a350c3398a203d0fbb29a8587759bd176a2d22b0c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-30a44fc637d9392f02733c57612f49764bc96df4c1ad89da579d55af4b84907c",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+        "sourceSha256": "1396343e4de1db531c32ee50fb20ead2e1da3cf81b7a344f5e0b8f95ddcb7b80"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 421,
+    "reason": "Exact owned-name enumeration is checked as a whole under the same local monitor, rejecting duplicates, unknown names and missing entries before directory recheck. It does not infer that any actual child is quiescent or authorize retirement.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sourceSha256": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "328",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "328",
+    "findingId": "F03-PMD2-9eb686b150009f28718ad100b65838cf84cc454bb022dd8f9f651a99adc2fa06",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ac4c80513b24830a3a6c1b54d016240d82db2ceb0218d474a9a382f2c6e1f778",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+        "sourceSha256": "1396343e4de1db531c32ee50fb20ead2e1da3cf81b7a344f5e0b8f95ddcb7b80"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 422,
+    "reason": "New-only content publication, inode and byte verification are one compound monitored protocol. The buffer is wiped on every exit; the monitor does not replace the external owner/role and directory contracts. Actual permit/Unit actions are not part of this source review.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sourceSha256": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "372",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "372",
+    "findingId": "F03-PMD2-37dfd8995264da81310c96060faa139595c37638a461868874f23159c01d80e0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f72e1f4df0476f595fcfadcb3c4e449fe5790b2825e94cceee2a98582cba24c4",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+        "sourceSha256": "1396343e4de1db531c32ee50fb20ead2e1da3cf81b7a344f5e0b8f95ddcb7b80"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 423,
+    "reason": "The private monitor protects read plus before/after file and directory checks from this instance concurrent writes. The maximum-plus-one temporary byte array is cleared in finally; only the exact-sized returned copy escapes. No native filesystem stability claim is added.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sourceSha256": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "408",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "408",
+    "findingId": "F03-PMD2-bcb0e9f62778b6e4d57e0a22b57472d0a3e4ef45a53fdf8d6033de925c1e9268",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-9c78f371d891f8d341fee370c9a6feaea09d11df04d33d8ba669e18b6d28b14b",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$OwnerSource.class": "2222ae42a18f847885eb91536172d9f1c0aac4fc28bdfa62b70f2a10df10905c",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupName.class": "935a4d74f978f88b20bdd8f80775f141cb9b1b5df55246d2ce63033123b3de3d",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles$StartupSource.class": "b736f28dc77bd7765d146ffe151a8efb3c7cc764b0a1b3e8dd734d9d6d43c777",
+      "batch:dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.class": "964bf085213a079095cb4b604cbe2c7740c23e4e14c453a44636c470b9a6dc7c"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFilesTest",
+        "sourceSha256": "1396343e4de1db531c32ee50fb20ead2e1da3cf81b7a344f5e0b8f95ddcb7b80"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 424,
+    "reason": "Expected/actual comparison, repeat snapshot, unlink, sync and parent identity form one monitored local operation. Both byte arrays are cleared in finally, including errors. External terminal/owner prerequisites are still required and no real retire is issued.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "sourceSha256": "c35f946f01b4f90b493e01065ecbfb285f6ef39e9ef6f55ca502463cda8ba283",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "311",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "311",
+    "findingId": "F03-PMD2-adbeeabcafbbe0e045ba86456a900d0b6cce81569030cbeb1f3cb9dcd6b09f35",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ee2af923a2fc716a785a828137532fe18f7c0235511b7d6f1e867698921aed2d",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 437,
+    "reason": "The private scopeLock prevents overlapping six-root callback sessions from this owner. Nested ResourceScope acquisition closes in reverse order; session.invalidate executes in finally before those scopes unwind. A monitor alone does not prove live DB or native resource release.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "668",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "current ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "18",
+    "endline": "668",
+    "findingId": "F03-PMD2-f9a827e660517ca58fdac536f4b741f50c9ddcb3e0d8faed542d6374cdd352c7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5ef6084a94a6e3e6fc758a0513936b49e03aa063ab7ac6143be64ee7e7a687bc",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 440,
+    "reason": "The views.get alias borrows the current OwnedTransferDirectory from recursive ResourceScope frames. It must not close that directory early: each acquisition is paired with OwnedTransferDirectory::close in its own frame, and recursive child aliases remain within the callback. This is a scoped-ownership false-positive rationale, not an extra coverage exclusion.",
+    "rule": "CloseResource",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "13",
+    "beginline": "684",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "parent ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "19",
+    "endline": "684",
+    "findingId": "F03-PMD2-a189a8b8dc62f2bcff4ec7e5a9e569de1a6a1a696966781b1f6df56309df09a6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-70b0bbcd579a372f271c4e6c6c3910d6e738fe999f4df514f1cc6247564bff21",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 441,
+    "reason": "The selected parent aliases either current or the earlier maintenance view so sibling attempts opens under the correct parent. Both aliases are borrowed; child acquisition alone owns the new resource, and ResourceScope closes it on callback exit. Closing parent here would violate the still-live outer frame.",
+    "rule": "CloseResource",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "1098",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "1098",
+    "findingId": "F03-PMD2-e955e22e39e9e064abe3bcb834f1c0d7e262f0d584683505346fd15569504d00",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ca6b5633e673cd267fa3606b20977dcab6595e81ffe7d027b54a170dd902f41a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 446,
+    "reason": "The private session stateLock serializes open-check, begin, operation and final interrupt observation against finish/invalidate. It is a compound lifecycle invariant, not a map-performance question. Checked I/O/crypto failures map to fixed unavailable and unknown failures are not fabricated as success.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "1180",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "root ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "34",
+    "endline": "1180",
+    "findingId": "F03-PMD2-5b1bf70534a9227fd175a659e14f89fd9f11f7d4d9b618942f067ca2b6999553",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-67a82239a144a8b98cd61a3839a7cecbd800e1a4148515989cc3023592eadc51",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 451,
+    "reason": "The roots.get alias is owned by the enclosing execute ResourceScope stack, not by this record decoder. The decoder captures only the borrowed root reference and file snapshot; byte arrays are zeroed in finally. Session lifetime gates prevent use after enclosing scope invalidation.",
+    "rule": "CloseResource",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "1249",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "1249",
+    "findingId": "F03-PMD2-60db44f86df30beed01a66f6fb30bb92afbb76c1fabe1358389389da66af9541",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-94d8847468b96a37532b2908aaac6922438014e881045955a68e7b0f0d484338",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 452,
+    "reason": "The same stateLock serializes finish with session work; finally sets open=false even if begin or namespace verification fails. finish cannot certify a successful namespace when that verification threw. Actual storage/native conditions remain unproven.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "1260",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "1260",
+    "findingId": "F03-PMD2-2b0eec3ff01ae4f6f8e23f59538e488e98757828657eaca67980dc5746f9b080",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-6dbb68b3c1a5f45e342c4a37eb94128ec90c0c637f211ea2fb22cdb9806c4455",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "6b5559ab1a31ab83bd9bdb7dbb22a75ef56cb61c3c9d542be475d8992438209f",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+      "batch:dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "c0b6a7e0f2a50ff18d34c0611ee315454c1d788725299f84275fb983e1c84f16"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.file.MaintenanceRunFilesTest",
+        "sourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 453,
+    "reason": "Unconditional invalidation shares the private stateLock and clears open before the six owned outer directory scopes close. It supplies local session-lifetime exclusion only, with no foreign resource shutdown, failed-cohort recovery or terminal success implied.",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+    "standalonePomSha256": {
+      "bootstrap": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "web": "c8aad59d825b4c1c3b253b3dd79d5929228363f31ff0c953513f9dc55d46840b"
+    },
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT",
+    "threadRulePremise": null
+  }
+]
