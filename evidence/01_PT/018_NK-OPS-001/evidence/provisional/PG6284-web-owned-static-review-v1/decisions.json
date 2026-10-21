@@ -1,0 +1,1264 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "9",
+    "beginline": "112",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "mvc ",
+    "diagnosticTextSha256": "79d361eea44b3efc3a14a0cbb7c3b17f17743522f7b7dfc7e18c4f67047c5d0f",
+    "endcolumn": "12",
+    "endline": "112",
+    "findingId": "F03-PMD2-e94f914dbbd98010caced7f5788506b390b1a408ecf565c6b2296bada3975179",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e6ec7ea8d72f959333da05af7e9362a55d323232974f94d8f6bead00c8eca8cd",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1130,
+    "reason": "1338 individual ordinary Web source applicability: The prepared WebHttpServer returned from construction retains the same Tomcat and MVC before vendor mutation. Explicit caller/native owner captures this wrapper before start; failed caller-less start destroys, while captured partial owner retains it for confirmed close. Existing component UNKNOWN/BUG1561 and actual native closure are not certified by this resource-transfer reason.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "163",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "19",
+    "endline": "163",
+    "findingId": "F03-PMD2-3949f22c606c9f82678a5202929689196c062f7a597a1af291daf7e46e2e77d4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ba46e2a2a451bb44b0bba27cc027c0a30ceb7851507aec5538d53bdbe759d0c1",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1132,
+    "reason": "1338 individual ordinary Web source applicability: Successful vendor start publishes started under the same private lifecycleLock as port/mappedPaths/close. Caller-owned monitor or this/class lock is not used. This does not prove actual runtime readiness.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "216",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "216",
+    "findingId": "F03-PMD2-652552faea4e3c2ecf49aaa58ec5020c85a53d9b9fa703d25f50f7e6b32a9d56",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-70c31c84fa0f2d0c187f243789b3352486bbc6ae4f9aadaeba55e273591cdf5e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1138,
+    "reason": "1338 individual ordinary Web source applicability: port reads closed/started and the actual connector under private lifecycleLock shared with close. It rejects unstarted/closed owners; a returned number is not a Root/native terminal receipt.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "226",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "226",
+    "findingId": "F03-PMD2-24fdd2141404afd55d44e517d38135541e06180b947e7a39b6835d111d988a83",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7a827911984a5c8c54e14ebf3ae145a8cc4958de1529f581d96b61b1cba481a6",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1139,
+    "reason": "1338 individual ordinary Web source applicability: mappedPaths snapshots the actual MVC handler registry only while this started owner cannot be concurrently closed under lifecycleLock. Immutable copy escapes, not a mutable registry or held monitor.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "240",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "240",
+    "findingId": "F03-PMD2-66f013e76edafb453a387354818d90cd1066b4500f60e63a391e73d0977c5241",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4be8d7f3eba5cc4827b6bd47cd4a7469c8c78b9206d81fb3b61b279b20651dba",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebHttpServer.class": "410394390aa9fda314871b72991ad798b353a9fced75e5712b6ea9aeda9ae07a"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebHttpServerTest",
+        "sourceSha256": "fe7c119c4dcebfef305bee5e58177f31a863c4871621fce240497f8547856bcc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1140,
+    "reason": "1338 individual ordinary Web source applicability: close serializes this exact owner stop/destroy phases under lifecycleLock. stopped/destroyed are published only after their respective normal vendor returns; failed phases remain retryable UNKNOWN rather than fabricated completion. Socket/native release still requires separate evidence.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidSynchronizedStatement",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+    "sourceSha256": "a79ddaa533cd409a94e1c86133daf07fe237083d8d0a5366c4dd77d6b4f7d612",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "48",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "48",
+    "findingId": "F03-PMD2-32e49cd0824c368e217439d1e12927312e43ba6abd776aa620cef283d74d26c9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e86887852f054a3d28dc9052f6a6b499ba0b4b9c0dc56d4ca9f3eb57c993b1d2",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1283,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked insert-body spans retain primary across direct Statement finally close. Only verified three-column tuple is inserted with ON CONFLICT do nothing; close must succeed under the existing SQL/unknown precedence before the tuple read can proceed. No business UPDATE or API authorization is inferred.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "54",
+    "beginline": "48",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "59",
+    "endline": "48",
+    "findingId": "F03-PMD2-0d57d939219afdb365bff44fbfdccdb29650afcfdb10fbc0ae685346ded404bc",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e86887852f054a3d28dc9052f6a6b499ba0b4b9c0dc56d4ca9f3eb57c993b1d2",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1284,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked insert-body spans retain primary across direct Statement finally close. Only verified three-column tuple is inserted with ON CONFLICT do nothing; close must succeed under the existing SQL/unknown precedence before the tuple read can proceed. No business UPDATE or API authorization is inferred.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "97",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "97",
+    "findingId": "F03-PMD2-a3d3e590c8d9feff864f25e4cbcf2797a9116442e514f3de84a1c9e3be25c17b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4ba4ea3afa640ab06297d380cc7a54c116d45feea80bec576b2d5d922e83384b",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1288,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked row-body spans retain primary until owned ResultSet closes once. Missing/invalid/duplicate projection remains failure; borrowed Connection stays open for the enclosing transaction owner. Existing receipt unknown-primary/fixed-secondary contract is not replaced by API Outbox SS320 ranking.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "97",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "97",
+    "findingId": "F03-PMD2-fe93bdfb061f6661ee0e307f7e2188b91f41f5a7362011b0ba28d5f88c261bdf",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4ba4ea3afa640ab06297d380cc7a54c116d45feea80bec576b2d5d922e83384b",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1289,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked row-body spans retain primary until owned ResultSet closes once. Missing/invalid/duplicate projection remains failure; borrowed Connection stays open for the enclosing transaction owner. Existing receipt unknown-primary/fixed-secondary contract is not replaced by API Outbox SS320 ranking.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "107",
+    "findingId": "F03-PMD2-c3230c95c47053b956e31ed75b8a18cc84005335cc4e6cd7d00f82d08f7ed2b7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3a70cbbad30ddade11d079531809c8995a6c9929bfe20ca58bf07eb860a288fc",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1293,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked statement-body spans protect the owned Statement, including failures from ResultSet cleanup. Finally closes once before Optional projection escapes. replace records only fixed diagnostics on unknown primary; this reason does not authorize raw provider logging.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "107",
+    "findingId": "F03-PMD2-d7acdb8a6f9ac4706f28059d6f767dcbdb5e81b130d16671fd058fc711e2a4af",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-3a70cbbad30ddade11d079531809c8995a6c9929bfe20ca58bf07eb860a288fc",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1294,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked statement-body spans protect the owned Statement, including failures from ResultSet cleanup. Finally closes once before Optional projection escapes. replace records only fixed diagnostics on unknown primary; this reason does not authorize raw provider logging.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "131",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "131",
+    "findingId": "F03-PMD2-2496b07a4ad37079c8f633c7ccf7f11bfb12f948da3808ae7222ec998fc3ac09",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-44618d05ff98fc8d24f092293efdf6f837f6faea741829b51f87f8d8597d11df",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1298,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked work/commit spans attempt one rollback before propagating failed short transaction. A normally computed value cannot escape before commit and outer owned close. Fixed SQL vs unknown precedence follows RCPT005 compound fixtures, not ordinary retry success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "131",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "57",
+    "endline": "131",
+    "findingId": "F03-PMD2-e345f7dfabcd459dcdf9a4a4e0e0dd5cb923a3ce22799968855c27a9a83b7fce",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-44618d05ff98fc8d24f092293efdf6f837f6faea741829b51f87f8d8597d11df",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1299,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked work/commit spans attempt one rollback before propagating failed short transaction. A normally computed value cannot escape before commit and outer owned close. Fixed SQL vs unknown precedence follows RCPT005 compound fixtures, not ordinary retry success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "134",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "134",
+    "findingId": "F03-PMD2-6e5af699abd9f416dca9fef37fae9f309784108b2754388cfd2541c46de83c78",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d772cf144896cb217bc5a942d377b1c6e6bee986b6180ff88f99b700483bc42",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1300,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked rollback-secondary spans use the established receipt replace policy. SQL+unknown promotes unknown; existing unknown primary retains identity plus new fixed ReceiptReferenceException. No failed rollback is a success receipt or additional work dispatch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "54",
+    "beginline": "134",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "59",
+    "endline": "134",
+    "findingId": "F03-PMD2-600a7e174e2e38a4dce10a75e0787b4d030fe34fd54b4f5a9a85cb2971114481",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d772cf144896cb217bc5a942d377b1c6e6bee986b6180ff88f99b700483bc42",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1301,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked rollback-secondary spans use the established receipt replace policy. SQL+unknown promotes unknown; existing unknown primary retains identity plus new fixed ReceiptReferenceException. No failed rollback is a success receipt or additional work dispatch.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "139",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "139",
+    "findingId": "F03-PMD2-a2ac62fa1a105c29a15e47dba4dff4960bd7322e8ff85bb2f0470ebb3c91e5db",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-041f54b14564522d9a58c8a79b25610d33f85cd40f8767de57b6a333e5ebd6bd",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1302,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked outer connection spans retain primary across direct owned finally close, including setup failure. Connection acquisition failure has no acquired owner. No JDBC transaction is held across IF030/JMS, and receipt locator never substitutes for API authorization.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "139",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "139",
+    "findingId": "F03-PMD2-2f69bf0fd7a3530a303c631bd4e3343476aef240b5706d13612395727503e8f5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-041f54b14564522d9a58c8a79b25610d33f85cd40f8767de57b6a333e5ebd6bd",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository$Work.class": "4a150a1081e7335ba206fb86254b0356080df6c7be7222fd94d9f00cd5582811",
+      "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class": "d336257b8542afc2a16aa3222e2e2098074a4a3651aaadfffe89977976776a1b"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepositoryTest",
+        "sourceSha256": "15ee2dcb2750ed5fbbce36722ad59299f946d9de516d5919d488ed439f55f378"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.receipt.ReceiptReferenceFaultTest",
+        "sourceSha256": "d7b56fe3f63cf2c1a01f997123fba5fc430c8cb0b2c594a0684ffdd36544a0e1"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1303,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked outer connection spans retain primary across direct owned finally close, including setup failure. Connection acquisition failure has no acquired owner. No JDBC transaction is held across IF030/JMS, and receipt locator never substitutes for API authorization.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+    "sourceSha256": "8cb6e679d72dcd0bd9d21e898afdc07f50c2a54d909c652c18e0c3d4e8faab8e",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "26",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "connection ",
+    "diagnosticTextSha256": "8c972f1339d015cb161db351cbfc9a15c99ed055d9ddf018d8341fafdbddc247",
+    "endcolumn": "36",
+    "endline": "110",
+    "findingId": "F03-PMD2-b0d1f5a2edb32f610add7238cda2dc09556f2c9575e94402e3745d3dcc1ada66",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-25e561917d1b0b0e264e4ff44f57a16d0f1cb226b2e51c38df94a935aabbb626",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1312,
+    "reason": "1338 individual ordinary Web source applicability: Nullable connection is the explicit owner state. After acquisition every body/setup outcome is captured, optional rollback runs once on failure, then same connection closes once before any result returns. Null/open failure has no acquired resource. This is not a TWR omission or ownership of the shared DataSource.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CloseResource",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "121",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "121",
+    "findingId": "F03-PMD2-673e070e9973e8b412f992ae07ae382701e5e5175d205cabc8759a3b34fb90ad",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d2ecdb74dc92352622a2839e9dab9545a8c5c699753f1730b67d370a63906df8",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1313,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked body/setup/commit spans retain failure to ensure rollback/close still execute. A result is withheld until cleanup. Final preserveFatal traverses the retained cause/suppressed identity graph before fixed RevocationRetryException, preventing direct/nested Error normalization.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "121",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "121",
+    "findingId": "F03-PMD2-d549e9ffa72d8a9e01a2cf0d8608eb3670c156981e53548957a5592cb55bb697",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d2ecdb74dc92352622a2839e9dab9545a8c5c699753f1730b67d370a63906df8",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1314,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked body/setup/commit spans retain failure to ensure rollback/close still execute. A result is withheld until cleanup. Final preserveFatal traverses the retained cause/suppressed identity graph before fixed RevocationRetryException, preventing direct/nested Error normalization.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "127",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "127",
+    "findingId": "F03-PMD2-1960be15b40ec37a0b7496fc71c33e9f51d9cc55cc601068b249733c235ee85b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-53d5704e4de4a2179ae3049c4033593642d995c2b14f9de6ce46d9859e937cad",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1315,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked rollback spans retain secondary via combine without self-suppression, then still attempt owned close. Failure graph is checked for Error afterward. This does not erase durable revoke rows or repeat business request publication.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "127",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "127",
+    "findingId": "F03-PMD2-3d1810e374868723adcd30cbd3bdf3628af814307e6cea45594b46ba1841242a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-53d5704e4de4a2179ae3049c4033593642d995c2b14f9de6ce46d9859e937cad",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1316,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked rollback spans retain secondary via combine without self-suppression, then still attempt owned close. Failure graph is checked for Error afterward. This does not erase durable revoke rows or repeat business request publication.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "134",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "134",
+    "findingId": "F03-PMD2-c942e8b54b3bccb7d311fa87977c9ad5c800b367efe556e47249adf23cc92568",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1ba570adbc9595e3933d842b1f3600f13459bb37a95ec53797a9c317d32fe543",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1317,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked close spans retain graph and withhold success; preserveFatal traverses cycles safely before fixed exception. Successful request result alone is not committed-and-closed success. Actual broker/VM revoke outcome is outside this source applicability check.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "134",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "134",
+    "findingId": "F03-PMD2-d07607b43165187a898559b86bb4318b404ebee47689e4648d081a9e34e23526",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1ba570adbc9595e3933d842b1f3600f13459bb37a95ec53797a9c317d32fe543",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome.class": "2e6fc18a2357e8c49fe387f1a66e55ab55e87f70b42173e9606a75eafab8ab8f",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$SqlWork.class": "f4f2d14448961521ecd723f928a331b1254e40c706d13d2e759442ce2ea017fc",
+      "web:dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.class": "c27d8728405ce326c9a8371b8451310960987e3c47647d387bdcce43b0cae253"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinatorTest",
+        "sourceSha256": "a828a144246c1a31289e9e941681d9f72fd131c9f940a033359cbe71c830e5cc"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1318,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked close spans retain graph and withhold success; preserveFatal traverses cycles safely before fixed exception. Successful request result alone is not committed-and-closed success. Actual broker/VM revoke outcome is outside this source applicability check.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+    "sourceSha256": "490687a756a5e50d78a50e17dd368555b658ec845d337a68e55a62ce0a6a9f9d",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "42",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "42",
+    "findingId": "F03-PMD2-2fc9e048e51cf72daf6590f3b72b7c8f91ff90628a898378ab5ef8236036e708",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-789935ccf597c4a644899fbdaaa072b7e3c195bf6f7d7b689c05c1050630d8b5",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1330,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked terminal Logout spans attempt request display/security-context cleanup, preserve direct/nested fatal identity, then emit only fixed SessionStoreException. This does not bypass the existing authenticated POST/CSRF chain or manufacture durable revoke success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "42",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "42",
+    "findingId": "F03-PMD2-306a2ea61705fea8bfb4b9028244ac7887db4e5aa089ded6dba26a639bfd3f89",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-789935ccf597c4a644899fbdaaa072b7e3c195bf6f7d7b689c05c1050630d8b5",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1331,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked terminal Logout spans attempt request display/security-context cleanup, preserve direct/nested fatal identity, then emit only fixed SessionStoreException. This does not bypass the existing authenticated POST/CSRF chain or manufacture durable revoke success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "66",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "66",
+    "findingId": "F03-PMD2-975163146e9ccf8442c92483e1706a6db5810d5cf8afabf267761d5f9ab18079",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d844f4239a9637a053f383bfaa51c3dc896ac9c5fbd27ecfa4fff7cfd9686b64",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1333,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked durable enqueue/logout spans still invalidate the owned Servlet session once. It does not acquire a new session, redirect on failure, or treat failed enqueue as durable success; original graph proceeds through preserveFatal.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "66",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "66",
+    "findingId": "F03-PMD2-0e6eb7784333566ec0e06f354b60104dbd8bd685243eba2f35a755839472da35",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-d844f4239a9637a053f383bfaa51c3dc896ac9c5fbd27ecfa4fff7cfd9686b64",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1334,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked durable enqueue/logout spans still invalidate the owned Servlet session once. It does not acquire a new session, redirect on failure, or treat failed enqueue as durable success; original graph proceeds through preserveFatal.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "71",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "32",
+    "endline": "71",
+    "findingId": "F03-PMD2-ecd1c0ce345bfc19250ec26de708b277b98db6e6c856346c94976f6f965835f2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8296eef8112978ad4f31120a3c452165c522fa04c75e1097c38f0874cbc956df",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1335,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked session-invalidation cleanup spans retain distinct secondary on original failure and then preserveFatal checks the full identity graph. A local cleanup failure cannot silently become Logout success; provider text is not exposed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "71",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "40",
+    "endline": "71",
+    "findingId": "F03-PMD2-32b2a30b4c8be1be0ffd868cd6963dad85c7757fdc6b4c5d96cf59e65e118106",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8296eef8112978ad4f31120a3c452165c522fa04c75e1097c38f0874cbc956df",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1336,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked session-invalidation cleanup spans retain distinct secondary on original failure and then preserveFatal checks the full identity graph. A local cleanup failure cannot silently become Logout success; provider text is not exposed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "95",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "95",
+    "findingId": "F03-PMD2-47bae035864c239653b228a06f797f7e899a08303b3b69f3ebdd4b7e9a12671f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-30ddf7953c9d7dba1ecfa751d09863d3365c6ffebdc2a2c4ffc3e135a63f590e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1338,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked display-cleanup spans preserve original fatal graph when present and fatal secondary otherwise. Finally clears thread SecurityContext; a fixed session-store failure is not authentication success. This reason does not prove every third-party clear operation physically completed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "95",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "95",
+    "findingId": "F03-PMD2-89e3f7ba3c45475a7761ee64883c3cb8062923099f5c247b626aa1594b5c393e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-30ddf7953c9d7dba1ecfa751d09863d3365c6ffebdc2a2c4ffc3e135a63f590e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1339,
+    "reason": "1338 individual ordinary Web source applicability: Both unchecked display-cleanup spans preserve original fatal graph when present and fatal secondary otherwise. Finally clears thread SecurityContext; a fixed session-store failure is not authentication success. This reason does not prove every third-party clear operation physically completed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "110",
+    "findingId": "F03-PMD2-2ee6cf3622aea24e05c90c2e000c565504c5a17b8ab92dea3807ffedbd901446",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-26a749248b3c01a9f2ed44f7194894ddcee46698b7fbc3b0f9378b2ffdeea8e9",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/security/LocalLogoutHandler.class": "4d504c154901fd1b2c670b49dc766a633fd3412ffa3545962bbee5da055417b0"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.session.LogoutControllerTest",
+        "sourceSha256": "e2f1327f6f5bc896f710ac433883efde0962c87ec9a65bf21f4d50ec65c74109"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1341,
+    "reason": "1338 individual ordinary Web source applicability: Session invalidation RTE is classified to fixed SessionStoreException only after nested Error preservation. Direct Error is not caught by this RTE clause and propagates through the outer cleanup path; no session is created as fallback.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+    "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+    "status": "REQUIRED_CONTRACT"
+  }
+]

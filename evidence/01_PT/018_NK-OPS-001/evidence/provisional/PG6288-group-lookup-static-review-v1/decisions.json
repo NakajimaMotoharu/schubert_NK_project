@@ -1,0 +1,692 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "45",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "20",
+    "endline": "45",
+    "findingId": "F03-PMD2-dabfbd34e092aa0968037f21a90f091004e952f49ec2082e749373de1bdac258",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cab512b3b383188acae18af2d7acd4a5d83e674e59dd233f73fa4a7b719bb44c",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 621,
+    "reason": "1339 individual standalone lookup source applicability: Standalone batch checks only current caller interrupt before acquisition. This is JavaSE fixed-process ownership, not a Jakarta EE thread container; the premise proves no process/Unit/VM ownership.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "45",
+    "beginline": "70",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Executors.newVirtualThreadPerTaskExecutor();",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "88",
+    "endline": "70",
+    "findingId": "F03-PMD2-fc402e8e00469f9b99d869c4222761ed3f95bf13be54547604f6375cf8beb228",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-40f82a043ee57530c4b7e782898e5696ed433d78f22ab15157c143253127b5cd",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 622,
+    "reason": "1339 individual standalone lookup source applicability: Private virtual-thread executor belongs to this one finite NSS lookup scope. It reads bounded stdout only and is closed before wiping the shared buffer. No application-server managed executor is borrowed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "51",
+    "beginline": "74",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "readers.submit(() -> read(output, bytes));",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "92",
+    "endline": "74",
+    "findingId": "F03-PMD2-38d8ff5ba0bf7ed5052cdfec056534735bf76212c6a26b8d2e2ef0859944de08",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-41c632a21b07b4616ab8b49788794598786cad5e3af50ce59555d09f914ac75b",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 623,
+    "reason": "1339 individual standalone lookup source applicability: Only the lookup-owned executor Future is borrowed into the nested TERM-before-join scope. Closing executor is distinct from process termination; neither is inferred from daemon or Future existence.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "16",
+    "beginline": "89",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "22",
+    "endline": "89",
+    "findingId": "F03-PMD2-aa4dcce92fb78c112be3bc6724a103218af9daa8a6ce447a477cb577f8eed7f4",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-768df7d4371602913de7b7a95eb6c6b865631330ed2a7135e476d01dbec60908",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 624,
+    "reason": "1339 individual standalone lookup source applicability: After all owned scopes finish, the current caller interrupt is rechecked before returning canonical GID. It is not an unsolicited mutation of another thread or evidence of successful lookup.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "7",
+    "beginline": "92",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "13",
+    "endline": "92",
+    "findingId": "F03-PMD2-981b839ed84b0a445fdd20d3a5e03957044044e4759bc8b20adc8cfefcf564fd",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a3e2ef0147bd5e03a194391ea8de37014700eb72768addba42cafd9a9d2d663e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 625,
+    "reason": "1339 individual standalone lookup source applicability: Caught InterruptedException restores the same current-thread interrupt before fixed IOException redaction. Missing/failed lookup never falls back to a target-derived GID.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "51",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "67",
+    "endline": "107",
+    "findingId": "F03-PMD2-3e309d8f94bc37e5da904536822b4f18908e21fe6ae6bfa23feee9e5b543e5db",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-dd76d04bd5236de9303df1c120c1ff3f1f96f61f0200bb70abaf7cf6a86ea668",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 626,
+    "reason": "1339 individual standalone lookup source applicability: Both unchecked work spans retain original identity while the explicit resource release is attempted once. Known IO/interruption differs from unknown Runtime/Error; nested owned scopes remain responsible for their own stdio/executor/process, not arbitrary external resources.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "70",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "75",
+    "endline": "107",
+    "findingId": "F03-PMD2-6f8a32bfa29765de482c7a90781cfe740e30aeb81974484ba2b1771e370cf5d0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-dd76d04bd5236de9303df1c120c1ff3f1f96f61f0200bb70abaf7cf6a86ea668",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 627,
+    "reason": "1339 individual standalone lookup source applicability: Both unchecked work spans retain original identity while the explicit resource release is attempted once. Known IO/interruption differs from unknown Runtime/Error; nested owned scopes remain responsible for their own stdio/executor/process, not arbitrary external resources.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "46",
+    "endline": "110",
+    "findingId": "F03-PMD2-3ad1094a69bfba5d65fd3dc9de4e21306536422f59d4e8c2d9851aa7cbfe4ff7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a8d4f6427b950fdac817a831837824c1a01f9877b155d5fad1507fb562d951ed",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 628,
+    "reason": "1339 individual standalone lookup source applicability: Both unchecked release-secondary spans preserve unknown-primary identity plus new fixed diagnostic. A known IO/interruption primary may be superseded by unknown cleanup; sameThrowable never becomes its own suppressed node because unavailable() is newly fixed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "54",
+    "endline": "110",
+    "findingId": "F03-PMD2-47bae137e8796dc6fab75e9ecf985f8a44ce8bdbed31d08ab947c83cce168f0d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a8d4f6427b950fdac817a831837824c1a01f9877b155d5fad1507fb562d951ed",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 629,
+    "reason": "1339 individual standalone lookup source applicability: Both unchecked release-secondary spans preserve unknown-primary identity plus new fixed diagnostic. A known IO/interruption primary may be superseded by unknown cleanup; sameThrowable never becomes its own suppressed node because unavailable() is newly fixed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "111",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "IOException ",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "endcolumn": "44",
+    "endline": "111",
+    "findingId": "F03-PMD2-d95f55d60d4608811e967940e09c21652989372e30efb923e09e42f3ff13b08f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d8644f96a8361ddb5a3e3ff500ca439dc34736af4d98b1b658f8d6d45c0ab8a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 630,
+    "reason": "1339 individual standalone lookup source applicability: Four overlapping predicates distinguish the established checked IOException/InterruptedException primary from unchecked cleanup. This is explicit failure-contract classification, not general business polymorphism; known-only cleanup remains fixed, unknown cleanup propagates.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "111",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "IOException ",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "endcolumn": "44",
+    "endline": "111",
+    "findingId": "F03-PMD2-e484d04bfc07221efb212257aedd079111952a6d0eedd57b6bfc19b51ec7191a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d8644f96a8361ddb5a3e3ff500ca439dc34736af4d98b1b658f8d6d45c0ab8a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 631,
+    "reason": "1339 individual standalone lookup source applicability: Four overlapping predicates distinguish the established checked IOException/InterruptedException primary from unchecked cleanup. This is explicit failure-contract classification, not general business polymorphism; known-only cleanup remains fixed, unknown cleanup propagates.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "67",
+    "beginline": "111",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "InterruptedException)",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "endcolumn": "87",
+    "endline": "111",
+    "findingId": "F03-PMD2-44179d581f49121d00fe2690e134c4db1ce746a297524888d77ee0eb524494d1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d8644f96a8361ddb5a3e3ff500ca439dc34736af4d98b1b658f8d6d45c0ab8a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 632,
+    "reason": "1339 individual standalone lookup source applicability: Four overlapping predicates distinguish the established checked IOException/InterruptedException primary from unchecked cleanup. This is explicit failure-contract classification, not general business polymorphism; known-only cleanup remains fixed, unknown cleanup propagates.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "67",
+    "beginline": "111",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "InterruptedException)",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "endcolumn": "87",
+    "endline": "111",
+    "findingId": "F03-PMD2-d15ba843e26e7ebd26b995f7f2e71d470520431ff2eb475e25437ab476a6d48e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7d8644f96a8361ddb5a3e3ff500ca439dc34736af4d98b1b658f8d6d45c0ab8a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 633,
+    "reason": "1339 individual standalone lookup source applicability: Four overlapping predicates distinguish the established checked IOException/InterruptedException primary from unchecked cleanup. This is explicit failure-contract classification, not general business polymorphism; known-only cleanup remains fixed, unknown cleanup propagates.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "112",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "IOException)",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "endcolumn": "48",
+    "endline": "112",
+    "findingId": "F03-PMD2-a2456f23d4e1fa7bf83c60acda1560dde6947e3d2cf45b2fc0a72a2e175d2072",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ad0664523d1d56336ed9b177571a43d631f4d9c0fb7a6688f189089a6920e7ac",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 634,
+    "reason": "1339 individual standalone lookup source applicability: The two overlapping IOException tests retain checked IO primary when cleanup is also IO. The rule does not authorize raw provider messages to escape the outer fixed lookup-unavailable boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "37",
+    "beginline": "112",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "IOException)",
+    "diagnosticTextSha256": "e86017547b8588d3253e576d11c49f2d205d8a08a40d56dee5d9755696e34443",
+    "endcolumn": "48",
+    "endline": "112",
+    "findingId": "F03-PMD2-da3a6e93fcc94b7e1a7d8f73697f30d467b1aa77350088a2714fc8a466fe7276",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-ad0664523d1d56336ed9b177571a43d631f4d9c0fb7a6688f189089a6920e7ac",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 635,
+    "reason": "1339 individual standalone lookup source applicability: The two overlapping IOException tests retain checked IO primary when cleanup is also IO. The rule does not authorize raw provider messages to escape the outer fixed lookup-unavailable boundary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "113",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "InterruptedException)",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "endcolumn": "54",
+    "endline": "113",
+    "findingId": "F03-PMD2-8b2e504ee9190ce058db03882b5258bf107471cd54c7ec15f4d9790db9d5ee1b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f7608f8c326237ccde95adadf1931250b95933991e4134d7c9ee91b0efe9651e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 636,
+    "reason": "1339 individual standalone lookup source applicability: Both overlapping InterruptedException tests ensure interrupt restoration before propagating unknown cleanup. Unknown primary retains its original identity; the branch does not fabricate a canonical group result.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "34",
+    "beginline": "113",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "InterruptedException)",
+    "diagnosticTextSha256": "d4ebfc5d19a57a5015d58b10b179b7a9b2d9018ca09090ad607b5b81385b2d9b",
+    "endcolumn": "54",
+    "endline": "113",
+    "findingId": "F03-PMD2-23895254633422417a08d351b1307ebf03d7050408950cbac517633ff884e836",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f7608f8c326237ccde95adadf1931250b95933991e4134d7c9ee91b0efe9651e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 637,
+    "reason": "1339 individual standalone lookup source applicability: Both overlapping InterruptedException tests ensure interrupt restoration before propagating unknown cleanup. Unknown primary retains its original identity; the branch does not fabricate a canonical group result.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "56",
+    "beginline": "113",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Thread.",
+    "diagnosticTextSha256": "39cf8a513ff78938400707291ff2aa9924024aae2648e10b13c1c615a5e96880",
+    "endcolumn": "62",
+    "endline": "113",
+    "findingId": "F03-PMD2-1b344b0927370b6eec334e41639f7d7e4ef3764c4933a8384a4d222663de3b2c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b91d14c1da5b519c0b3c17322dec1a1e259f69c1f28059fda670149f0437e3dd",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$NativeProcess.class": "633c78c55cbcb6f870e46975a5ed7b819decdca8525e1282702ab7dc8a5c1b85",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver$Start.class": "0915dbd0a03c613a052da93796bedfb0bda4bcc830177abb57e548d78e707ca9",
+      "batch:dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.class": "dab2f34a90d72269c2eb9fcb32e5430234be8bd54d7cc8ffb66da2fbb18f6067"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolverTest",
+        "sourceSha256": "ce5ff6c2f2ceff9892657f302f3c05623197cc802c10f71fb1e3bbc747487b85"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 638,
+    "reason": "1339 individual standalone lookup source applicability: When interrupted known primary is superseded by unknown cleanup, the current caller interrupt is restored first. This is a local JavaSE notification contract and no managed-thread scheduling policy.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "DoNotUseThreads",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "sourceSha256": "101b894dd376757d29940596454e9a126e0783fc520acf88472ac66552118a45",
+    "staticContextPremiseOnly": true,
+    "status": "CONTEXT_NOT_APPLICABLE"
+  }
+]

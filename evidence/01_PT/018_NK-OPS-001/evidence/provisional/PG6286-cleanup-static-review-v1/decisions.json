@@ -1,0 +1,1202 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "110",
+    "findingId": "F03-PMD2-1b278705903e9e019858d0dcb2fbb5d13420c6f25a371e9b700c80a6e341f0d9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c23e5c2c631efaac2f5f51ad0da465eb0b339eb9bcc931e95eeb73b139748f32",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 321,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked action spans in owned(release,action) release exactly the acquired scope once before original failure propagates. Success returns only after release normally completes. Borrowed parent connection is not closed by this helper.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "110",
+    "findingId": "F03-PMD2-5b7bbecce10e72d7688c1007789456e1cbe027b7a86c021eaef621718c6be43a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-c23e5c2c631efaac2f5f51ad0da465eb0b339eb9bcc931e95eeb73b139748f32",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 322,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked action spans in owned(release,action) release exactly the acquired scope once before original failure propagates. Success returns only after release normally completes. Borrowed parent connection is not closed by this helper.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "113",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "113",
+    "findingId": "F03-PMD2-214dbb3572b159a7933714de248a51aa50e9e332d0e2690112a4ff82ce6ad80b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a26951cbf19597c617adc68fa1e7e9df374128d84d4f7b25b5443a80938d3836",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 323,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked release-secondary spans apply the established batch known/unknown and fixed-diagnostic precedence through replace. Unknown primary is retained by identity with a new fixed secondary, including same-Throwable reentry; no raw secondary graph or false success is emitted.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "113",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "113",
+    "findingId": "F03-PMD2-ec5a9ed53a73a2fedee6a2054b9d3b775873ac4cacc3362be92d7aa78283eefa",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a26951cbf19597c617adc68fa1e7e9df374128d84d4f7b25b5443a80938d3836",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 324,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked release-secondary spans apply the established batch known/unknown and fixed-diagnostic precedence through replace. Unknown primary is retained by identity with a new fixed secondary, including same-Throwable reentry; no raw secondary graph or false success is emitted.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "203",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "203",
+    "findingId": "F03-PMD2-9e037d37ecdc0b2ef0d7602510eb922e38bc8d59e513ac46edf4fdebab8a7065",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7890f4d1e3932b19de0dfdaa809e6790308c046a01e0050a0332f8cce4994e86",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 326,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-acquire row-body spans retain primary before direct ResultSet close. Missing/null/duplicate lock projection is non-success; acquired tracks the actual boolean, not success inferred from query execution. Original batch lock gate/SQL remains unchanged.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "203",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "57",
+    "endline": "203",
+    "findingId": "F03-PMD2-1b559aa1b6e931840a7214594a0ce76be8ec30f09d136eb33f32d43434b65de8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-7890f4d1e3932b19de0dfdaa809e6790308c046a01e0050a0332f8cce4994e86",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 327,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-acquire row-body spans retain primary before direct ResultSet close. Missing/null/duplicate lock projection is non-success; acquired tracks the actual boolean, not success inferred from query execution. Original batch lock gate/SQL remains unchanged.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "213",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "213",
+    "findingId": "F03-PMD2-7e788474c0369a0435b812af2f7ab1f49e9f7d99f91c3f023e4d575a971f78fb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4ab654ce054029fe4b02e38bed7a3493ea6e0376addf9f61a30cdc0ad0135441",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 331,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-acquire statement-body spans retain primary before one direct Statement close, including ResultSet cleanup failure. The acquired session lease remains under the enclosing owner; this source review does not establish actual current advisory ownership.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "213",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "213",
+    "findingId": "F03-PMD2-51302d7fff3aaf87dcf448e963fa1386bc206fc312a9b70c02908a31d0bc38be",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4ab654ce054029fe4b02e38bed7a3493ea6e0376addf9f61a30cdc0ad0135441",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 332,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-acquire statement-body spans retain primary before one direct Statement close, including ResultSet cleanup failure. The acquired session lease remains under the enclosing owner; this source review does not establish actual current advisory ownership.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "35",
+    "beginline": "241",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "51",
+    "endline": "241",
+    "findingId": "F03-PMD2-24eddff7d5b5c9fa83562d429ddd54bbaf5c7100474d889abdc92846f6ddc9d5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-93112a6cf99c086735253c4b138708ff13d97cf69b75fcc5706bafdc8d5d5dd2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 336,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-release row-body spans retain failure until ResultSet closes. The row must explicitly prove a single true release; empty/false/multiple rows are rejected, not treated as unlocked success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "54",
+    "beginline": "241",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "59",
+    "endline": "241",
+    "findingId": "F03-PMD2-9310bb80b387d8db8149616a932ebabc707e4e32e9f55aadeacc657eaa70ad99",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-93112a6cf99c086735253c4b138708ff13d97cf69b75fcc5706bafdc8d5d5dd2",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 337,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-release row-body spans retain failure until ResultSet closes. The row must explicitly prove a single true release; empty/false/multiple rows are rejected, not treated as unlocked success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "251",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "251",
+    "findingId": "F03-PMD2-9a62a96043ac75d5d99bbf7d28b8d685fe0b076c727024a4ea9c8e93c098f33e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a556f1a3a8ce5d27416677c27cf94bc5a5c6cb19ec8baf1c05fc75f8d81db28a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 341,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-release statement-body spans preserve the established fixed/unknown mapping while always closing this Statement. Borrowed connection ownership and failed-transaction disposal requirement remain unchanged; actual DB lock release requires separate runtime evidence.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "251",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "57",
+    "endline": "251",
+    "findingId": "F03-PMD2-7a1ad7a42e233c175dbef9995ca5e37313cba07ccb024cb5253bb880018675ac",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a556f1a3a8ce5d27416677c27cf94bc5a5c6cb19ec8baf1c05fc75f8d81db28a",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class": "017b3615294fe2ef0fdb365ca916f2808ec6b144a1826252f6603365af1c7d41",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class": "52137e82dc74104e64035e12713f59b03b7ade537abaee799cb44e8b640aec62",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class": "686628de5254a52d66d38a6e738bb874e52f6a587f38737461a15e22b1fe8c11",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class": "40f1b902338a10166a9b2f0c414f018b48c72d508aa4658fbe574ebcb9085ce9",
+      "batch:dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class": "371e2451addac0db1977de17bcbf80dc779dc7310c4f436d7c120ef7cacee482"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.LogCleanupServiceTest",
+        "sourceSha256": "9b24ce5a9f7bc1b83b20d7353d6c24a47a9434c905a628affeb126edc104ee79"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 342,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked advisory-release statement-body spans preserve the established fixed/unknown mapping while always closing this Statement. Borrowed connection ownership and failed-transaction disposal requirement remain unchanged; actual DB lock release requires separate runtime evidence.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "fb2b1b70aecb744e1c598cbbfddf2997a7ee890f68edcc11d34291dbc385ad70",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "100",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "100",
+    "findingId": "F03-PMD2-27b271e4ed5982c82cea76e6af74532d2b803c376eccc76ab12ceed0f9c2286c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-50251e237e655995882e1dde374d1ffe7505b674bc7fb362b139d02052542843",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 348,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked transaction-body spans retain the primary. Before durable commit, rollback must complete before autoCommit restoration; after committed=true, no fictitious rollback of a durable chunk occurs. Caller owns connection disposal; service does not close/reopen it. Mutation gate precedes transaction and surrounds actual commit.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "100",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "100",
+    "findingId": "F03-PMD2-05751bc77790439e6a76d753b17f69830769546bd468da9dba09e71231a3e6ef",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-50251e237e655995882e1dde374d1ffe7505b674bc7fb362b139d02052542843",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 349,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked transaction-body spans retain the primary. Before durable commit, rollback must complete before autoCommit restoration; after committed=true, no fictitious rollback of a durable chunk occurs. Caller owns connection disposal; service does not close/reopen it. Mutation gate precedes transaction and surrounds actual commit.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "105",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "105",
+    "findingId": "F03-PMD2-2f87f67f98bad37c3c2793f3e8d18b94f2daa80bcba83b52d0aac0eb6165e6c8",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0aec9a303bc43a639e5d8b90dfc0f2eb239b650456ae0edc12f0b6676b1c6f1e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 350,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked rollback/restoration-secondary spans implement SS341/BUG193 primary/secondary policy. Unknown primary identity outranks cleanup; known primary with unknown cleanup propagates that unknown identity. Known-only failures become fixed DATABASE_FAILURE. No failed rollback permits restoration/success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "105",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "55",
+    "endline": "105",
+    "findingId": "F03-PMD2-22a5b49203c07421c700ef228c06c77722f070f01d1078a8739b7f5821f55875",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0aec9a303bc43a639e5d8b90dfc0f2eb239b650456ae0edc12f0b6676b1c6f1e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 351,
+    "reason": "1339 individual ordinary batch source applicability: Both unchecked rollback/restoration-secondary spans implement SS341/BUG193 primary/secondary policy. Unknown primary identity outranks cleanup; known primary with unknown cleanup propagates that unknown identity. Known-only failures become fixed DATABASE_FAILURE. No failed rollback permits restoration/success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "32",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error\n",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "37",
+    "endline": "107",
+    "findingId": "F03-PMD2-0300e1a19e9cec895014505888f2fc4ba46b1b6ffa7167eebabdc579553f9818",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-99ab7ef317208741d6a1245f58a99d69d5f9089b54c9be0a67ac8c6429b5280e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 352,
+    "reason": "1339 individual ordinary batch source applicability: Error primary is unknown and must retain its original identity on SQL/RTE/Error cleanup failure. The two overlapping analyzer occurrences are preserved; a fresh fixed CleanupStoppedException is secondary rather than raw provider diagnostics.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "32",
+    "beginline": "107",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error\n",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "37",
+    "endline": "107",
+    "findingId": "F03-PMD2-edb00f898013486113fcf7cd2f233237a5f7ea86419877f649019923ed0095e6",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-99ab7ef317208741d6a1245f58a99d69d5f9089b54c9be0a67ac8c6429b5280e",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 353,
+    "reason": "1339 individual ordinary batch source applicability: Error primary is unknown and must retain its original identity on SQL/RTE/Error cleanup failure. The two overlapping analyzer occurrences are preserved; a fresh fixed CleanupStoppedException is secondary rather than raw provider diagnostics.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "36",
+    "beginline": "108",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException\n",
+    "diagnosticTextSha256": "fae12b1bd51962cbc17e94afd67e206c40ff66cff74de1bf6770538fe1fef8c9",
+    "endcolumn": "52",
+    "endline": "108",
+    "findingId": "F03-PMD2-8665900cf65d5518981cc13287531c85cf6d010161aca19c7a7f6044557cdba1",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-326ff20cca8e763dc5520bb8cc656c3c4e94bd94350277efd713efaa9e802be0",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 354,
+    "reason": "1339 individual ordinary batch source applicability: Runtime primary is separated from known BatchRepositoryException/CleanupStoppedException subclasses before exception mapping. Generic Runtime is not always a retryable database error and cannot be blanket-wrapped.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "36",
+    "beginline": "108",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException\n",
+    "diagnosticTextSha256": "fae12b1bd51962cbc17e94afd67e206c40ff66cff74de1bf6770538fe1fef8c9",
+    "endcolumn": "52",
+    "endline": "108",
+    "findingId": "F03-PMD2-cadb1de22437e4c84e2481fb855ff769e379463f437a6e2b17b906dad8f71d97",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-326ff20cca8e763dc5520bb8cc656c3c4e94bd94350277efd713efaa9e802be0",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 355,
+    "reason": "1339 individual ordinary batch source applicability: Runtime primary is separated from known BatchRepositoryException/CleanupStoppedException subclasses before exception mapping. Generic Runtime is not always a retryable database error and cannot be blanket-wrapped.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "41",
+    "beginline": "109",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "BatchRepositoryException)",
+    "diagnosticTextSha256": "8df8415dc4a39e3b421fb6b3c0297e8756e56d18cf4277441c63e20f1ea4bc9b",
+    "endcolumn": "65",
+    "endline": "109",
+    "findingId": "F03-PMD2-4521fdfb5bf216fba715fa90dae8085c28462e7dc2b250dbe6b60132a5900c8c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-323d7bd0e4931b6d34175427dd677884a5ef0732a9a1b75d7815232a501652a3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 356,
+    "reason": "1339 individual ordinary batch source applicability: BatchRepositoryException is a known fixed repository failure, excluded from the unknown-Runtime branch. This predicate is the explicit class contract, not polymorphic business behavior requiring visitor substitution.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "41",
+    "beginline": "109",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "BatchRepositoryException)",
+    "diagnosticTextSha256": "8df8415dc4a39e3b421fb6b3c0297e8756e56d18cf4277441c63e20f1ea4bc9b",
+    "endcolumn": "65",
+    "endline": "109",
+    "findingId": "F03-PMD2-5e289c3e17d96ef73a52eec17e9e8dbfd82b23d4e39bdadeb016ceb5a585f2c9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-323d7bd0e4931b6d34175427dd677884a5ef0732a9a1b75d7815232a501652a3",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 357,
+    "reason": "1339 individual ordinary batch source applicability: BatchRepositoryException is a known fixed repository failure, excluded from the unknown-Runtime branch. This predicate is the explicit class contract, not polymorphic business behavior requiring visitor substitution.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "41",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "CleanupStoppedException)",
+    "diagnosticTextSha256": "f6888f2e9a9e1a078c2406d7bad5a84ce22c1233c9673cad5f6155cf126e0c82",
+    "endcolumn": "64",
+    "endline": "110",
+    "findingId": "F03-PMD2-df9893f637e0366eff42fe308e15aab1e2831a6ed1dd017ccb4c92881945f877",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-15980339aa21079e838848c8d2c21e4498e26cf95a4b77f2644ecd3cd08809d5",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 358,
+    "reason": "1339 individual ordinary batch source applicability: CleanupStoppedException is a known enumerated stop reason, not arbitrary unknown runtime. The distinct known-vs-unknown classification preserves identity/redaction without claiming that a stopped batch succeeded.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "41",
+    "beginline": "110",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "CleanupStoppedException)",
+    "diagnosticTextSha256": "f6888f2e9a9e1a078c2406d7bad5a84ce22c1233c9673cad5f6155cf126e0c82",
+    "endcolumn": "64",
+    "endline": "110",
+    "findingId": "F03-PMD2-3a516a3d4875bd00809e517671579fe68bc6bf21103814e48e7dcf8ba103ebda",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-15980339aa21079e838848c8d2c21e4498e26cf95a4b77f2644ecd3cd08809d5",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 359,
+    "reason": "1339 individual ordinary batch source applicability: CleanupStoppedException is a known enumerated stop reason, not arbitrary unknown runtime. The distinct known-vs-unknown classification preserves identity/redaction without claiming that a stopped batch succeeded.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "44",
+    "endline": "114",
+    "findingId": "F03-PMD2-4e22dac0f7aeeeb9d6da2464c0234363b1a60bc89d760e31f4402cc161c2f84b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8a95373a8ee5dba3dc5ab532f5f2121ba00620a096be98d0fad3dd0bc0bd79e0",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 360,
+    "reason": "1339 individual ordinary batch source applicability: With known primary, cleanup Error remains the same fatal object. It cannot be mapped to ordinary fixed DATABASE_FAILURE; earlier unknown-primary handling has already retained its own identity by contract.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "114",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "44",
+    "endline": "114",
+    "findingId": "F03-PMD2-d78af2cf458daf708145fe0cac6e5b64a100dcb9edfcdc59d19ae0beb00bbb2e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-8a95373a8ee5dba3dc5ab532f5f2121ba00620a096be98d0fad3dd0bc0bd79e0",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 361,
+    "reason": "1339 individual ordinary batch source applicability: With known primary, cleanup Error remains the same fatal object. It cannot be mapped to ordinary fixed DATABASE_FAILURE; earlier unknown-primary handling has already retained its own identity by contract.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "115",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException\n",
+    "diagnosticTextSha256": "fae12b1bd51962cbc17e94afd67e206c40ff66cff74de1bf6770538fe1fef8c9",
+    "endcolumn": "55",
+    "endline": "115",
+    "findingId": "F03-PMD2-f1983dbf51bf8ecfe233c7bdb4a93f41b72a43a57974e3afbf233bb61f0e1905",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0fc48ada90048c0fe3f1630d9169dce51b3d306d313ee88c27d39e005ad74d32",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 362,
+    "reason": "1339 individual ordinary batch source applicability: With known primary, only unknown cleanup Runtime propagates as itself. Known repository/stop subclasses are excluded by the following narrow type predicates. Restoration and durable-success claims are withheld.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "39",
+    "beginline": "115",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException\n",
+    "diagnosticTextSha256": "fae12b1bd51962cbc17e94afd67e206c40ff66cff74de1bf6770538fe1fef8c9",
+    "endcolumn": "55",
+    "endline": "115",
+    "findingId": "F03-PMD2-6329594b90cbef657b21510816846122c73afa5311b241f80e81033e7ae48dfa",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0fc48ada90048c0fe3f1630d9169dce51b3d306d313ee88c27d39e005ad74d32",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 363,
+    "reason": "1339 individual ordinary batch source applicability: With known primary, only unknown cleanup Runtime propagates as itself. Known repository/stop subclasses are excluded by the following narrow type predicates. Restoration and durable-success claims are withheld.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "116",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "BatchRepositoryException)",
+    "diagnosticTextSha256": "8df8415dc4a39e3b421fb6b3c0297e8756e56d18cf4277441c63e20f1ea4bc9b",
+    "endcolumn": "68",
+    "endline": "116",
+    "findingId": "F03-PMD2-2762f1d3bbc34ebe77dbc2a4fc9eab88e631f5077e5b4fd33bddd2b6889e46fb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-bb63f1630bbf88f002349d360c4e2ee507c313719a9f69a5d785f54a4b4c03b7",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 364,
+    "reason": "1339 individual ordinary batch source applicability: Cleanup BatchRepositoryException is known by the established fixed contract; its provider diagnostics must not replace the fixed DATABASE_FAILURE summary. This is not catch-all suppression of arbitrary failures.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "116",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "BatchRepositoryException)",
+    "diagnosticTextSha256": "8df8415dc4a39e3b421fb6b3c0297e8756e56d18cf4277441c63e20f1ea4bc9b",
+    "endcolumn": "68",
+    "endline": "116",
+    "findingId": "F03-PMD2-0511c0a54463e07fb3e83a3b420e936ea9f6d3b9e3b79e6cf1f48a250969e659",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-bb63f1630bbf88f002349d360c4e2ee507c313719a9f69a5d785f54a4b4c03b7",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 365,
+    "reason": "1339 individual ordinary batch source applicability: Cleanup BatchRepositoryException is known by the established fixed contract; its provider diagnostics must not replace the fixed DATABASE_FAILURE summary. This is not catch-all suppression of arbitrary failures.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "117",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "CleanupStoppedException)",
+    "diagnosticTextSha256": "f6888f2e9a9e1a078c2406d7bad5a84ce22c1233c9673cad5f6155cf126e0c82",
+    "endcolumn": "67",
+    "endline": "117",
+    "findingId": "F03-PMD2-8de943b369dea0fe1f77d1dcbadd0156c09004aef96957463570a9b3e70dad7f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f7d2ec6e49bf3d9933ed2b9b9506d45fea829cbf7afe71ef90607f5406f8da46",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 366,
+    "reason": "1339 individual ordinary batch source applicability: Cleanup CleanupStoppedException is known and fixed; unknown subclass category is excluded before final mapping. The source still throws non-success and leaves caller responsible for connection disposal.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "117",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "CleanupStoppedException)",
+    "diagnosticTextSha256": "f6888f2e9a9e1a078c2406d7bad5a84ce22c1233c9673cad5f6155cf126e0c82",
+    "endcolumn": "67",
+    "endline": "117",
+    "findingId": "F03-PMD2-6bf262d7a12603bae9a7fe30ae29540ac31605db5924caa6c6e3e075b982b55a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f7d2ec6e49bf3d9933ed2b9b9506d45fea829cbf7afe71ef90607f5406f8da46",
+    "owningPhysicalClassHashes": {
+      "batch:dev/codex/schubert/nk/batch/cleanup/StepCleanupService.class": "b54c5fc9c5958b3dbbe0464e3d1ea0571ecb5a0a5e57cd3338cb9ef7376774cc"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.batch.cleanup.StepCleanupServiceTest",
+        "sourceSha256": "6fe72e874be220642a762c488d15158e3d6a3965ef59dbc1aadadaa0157b284f"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 367,
+    "reason": "1339 individual ordinary batch source applicability: Cleanup CleanupStoppedException is known and fixed; unknown subclass category is excluded before final mapping. The source still throws non-success and leaves caller responsible for connection disposal.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "b4230118efcc429ee29d6e6f5761c55175f1e85e",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "sourceSha256": "d596b52c53b09455e9c45003b8dcd8c494f835c456b84f6384d52f450edf2bc9",
+    "status": "REQUIRED_CONTRACT"
+  }
+]
