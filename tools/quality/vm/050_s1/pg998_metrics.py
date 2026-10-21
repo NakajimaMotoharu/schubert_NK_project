@@ -15,6 +15,19 @@ V4=Path('/home/mini/codex/project1/work/PMO/hourly-monitor/wbs-reestimate-v4-PGP
 
 def canonical_fields(values,event_type):
     result=dict(values)
+    # BUG1576/487: a one-second marker difference is still an unconfirmed interval.
+    # Preserve raw quota observations and caller intent; never round or infer a real reset.
+    if result.get('sameQuotaWindow') is not None or result.get('observedSharedPp') is not None:
+        before=result.get('quotaBefore');after=result.get('quotaAfter')
+        first=before.get('resetsAt') if isinstance(before,dict) else None
+        last=after.get('resetsAt') if isinstance(after,dict) else None
+        if type(first) is not int or type(last) is not int or first!=last:
+            result['quotaWindowReportedBeforeGuard']={
+                'sameQuotaWindow':result.get('sameQuotaWindow'),
+                'observedSharedPp':result.get('observedSharedPp')}
+            result['sameQuotaWindow']=None
+            result['observedSharedPp']=None
+            result['quotaWindowComparisonStatus']='UNDETERMINED_MARKER_INTERVALS_SPLIT_NO_RESET_INFERRED'
     primary=values.get('primaryWbs')
     if primary:
         leaves=list(dict.fromkeys([primary]+list(values.get('componentWbs') or [])))
