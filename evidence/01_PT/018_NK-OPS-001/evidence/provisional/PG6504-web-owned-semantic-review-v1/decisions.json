@@ -1,0 +1,758 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "87",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "replies;",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "59",
+    "endline": "87",
+    "findingId": "F03-PMD2-94780500af2d02e48442f981fbc2290d62f91c568e5340862b2964f226e40c3b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-53cd21e594069576ac10e9a00236b8c8335a1d56bec9eaacc5f3406e2e124231",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1168,
+    "reason": "The five volatile handles are independently published snapshots, not an atomic aggregate. replies is captured before consumer start, read once by healthy, and closed only through the private-lock stop sequence. Actual field flags and the unchanged health/close instructions complement the owned running-consumer/close tests; latch visibility alone is not used as a JMM proof.",
+    "rule": "AvoidUsingVolatile",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "49",
+    "beginline": "88",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "replay;",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "55",
+    "endline": "88",
+    "findingId": "F03-PMD2-fb88bcd37ca5541dcd73190937ac94d6cd8ec0e051eaf644135cb283796092bd",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-de6038b4e7d795fc235684bcef169a85b090c6843ee4b56e6878504392b3f95c",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1169,
+    "reason": "replay is retained immediately after its owned worker start and published for an unlocked health snapshot. The private monitor serializes start and close; the volatile read does not authorize release. Actual worker readiness and post-close false state are checked with a dedicated empty production-schema DB, while descriptor/JVM lifetime checks preserve the outer owner.",
+    "rule": "AvoidUsingVolatile",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "52",
+    "beginline": "89",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "retry;",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "57",
+    "endline": "89",
+    "findingId": "F03-PMD2-ad47784a952ad96d49c5b97cb1202b47e6b22bf01310fdae1f70da30371820c7",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-b0c8dff0819070cb497b6cc60a407198e64297b95a22b9a1e2837bf61bab3018",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1170,
+    "reason": "retry is an independently published owned worker, captured before other startup work and inspected once for health. The same private lock and ordered stop retain its dependencies until worker close. Actual self-owned DB/JMS startup and stopping/publication negatives test the intended component contract; neither synthetic Ready nor this flag proves real Root authorization.",
+    "rule": "AvoidUsingVolatile",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "44",
+    "beginline": "90",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "http;",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "48",
+    "endline": "90",
+    "findingId": "F03-PMD2-27b6eeccab13ef5fc421a19c1098735e04d52911b30518579b0d5b8f20b3db7b",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-072a4bd05493b3397e55533f8cbccc76df776f0eb46faa6550d196b7be25a07c",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1171,
+    "reason": "http is captured by the existing native assembly owner callback before HTTP initialization can fail. The volatile handle supports the unlocked health snapshot; all mutation and ordered stop retain the private lock. Actual HTTP assembly/start, Ready failure and concurrent-close serialization are exercised; the original capture lambda and close opcodes/bootstrap targets are independently unchanged.",
+    "rule": "AvoidUsingVolatile",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "50",
+    "beginline": "91",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "management;",
+    "diagnosticTextSha256": "f2e0bfb23902c54ce1d653c6b6c78d1720f14ca8d047f09319acd528c033bbeb",
+    "endcolumn": "60",
+    "endline": "91",
+    "findingId": "F03-PMD2-7e303a5818245e227d9aa60c0b612b768e90a085e84d5fd56dac4d954d2b077e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-137611978d13876ddeb3abbdd0c8654f15695c4fb4b398e8631053e2a45fbfdd",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "2",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1172,
+    "reason": "management is stored immediately after bind and before start/promote. ready snapshots the same volatile manager, whose own stopping/promoted state controls publication. A synthetic release IOException cannot promote, and normal/duplicate close makes ready false. This does not replace real generation/peer or admission authentication.",
+    "rule": "AvoidUsingVolatile",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "142",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "142",
+    "findingId": "F03-PMD2-9a646c63c60d9d681c9127b6b81f584f9ff193ea428e644e12d28d4c2ade4fd0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-5402a03451466c884ea4b973cef548426d74c796886c28ab8a86451f1ce0e108",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1173,
+    "reason": "The private final ownerLock protects the compound startAttempted/stopping check, acquisition/capture order and final promotion. It is neither the exposed runtime object nor a managed-container monitor. A bounded separate close thread is actually BLOCKED at the private monitor during the first owned verification gate; startup proceeds before the known owners can be closed. Source/JVM prove the same monitor on all exits.",
+    "rule": "AvoidSynchronizedStatement",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "146",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "currentBroker ",
+    "diagnosticTextSha256": "d16da763e32e9ab086ecf38f6ecaf11b3880fb9b17a074651869fd40ff55ff25",
+    "endcolumn": "24",
+    "endline": "146",
+    "findingId": "F03-PMD2-836af6eff5ed48654c4218d1d3e8dc4d0a68f904273adb6a61f5b6fff2226852",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-5f011973fed1a9a5a293ce3477e18edb1ddacccf8be59adc7012e8fe4b6fee3a",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1174,
+    "reason": "currentBroker is a borrowed alias of the immediately captured broker field, not a second owned factory/context. It must remain open across readiness, consumer/dispatcher assembly and all workers. JVM proves immediate field capture and no close in start; actual own TCP broker/start/healthy and reverse close test the component path. The field is released in the existing final stop phase only.",
+    "rule": "CloseResource",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "149",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "keys ",
+    "diagnosticTextSha256": "9f379f922ed9f9017725b5f3f159e60653ab89d1f3b9fcb8d08ccca33530bbf5",
+    "endcolumn": "15",
+    "endline": "149",
+    "findingId": "F03-PMD2-bc20b54f9ef6cc09e99a3c3799541d04fcc1bc7742996699bd699bd31d4c1919",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-c6b2399e3d366fe17a28b7f3aa2a5f5ff34aad3ef1380637fc60cadc73d1e095",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327002VerificationFailureKeepsCapturedOwnerAndOriginalThrowable",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1175,
+    "reason": "keys aliases the already retained WebNativeCodecs owner; wrapping this local in TWR would prematurely invalidate codec dependencies of the HTTP/worker graph. The field capture, no startup alias close and unchanged ordered codec release are independently proven. Synthetic five-key outer credentials remain borrowed and readable after normal and failed startup close; real credentials/native authorization are not claimed.",
+    "rule": "CloseResource",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "154",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "transferRoot ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "23",
+    "endline": "154",
+    "findingId": "F03-PMD2-ebbbee7b322f649dc0135350df8333a44f652df12df305e9b548bfa4ee9bc908",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-ed6995654fe4e6ef9bec3fece562c3702d9f5b5dc894d90e3634397e5078847d",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327002VerificationFailureKeepsCapturedOwnerAndOriginalThrowable",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1176,
+    "reason": "transferRoot aliases the field captured immediately after descriptor-based open, before fixed identity verification. On the first proof IO/RTE/Error/null/false failure, one own FD remains known until normal close; successful startup retains both roots and close consumes them once. Interface FD spying and inode-backed own paths are independent of private fields. No deployed transfer root is touched.",
+    "rule": "CloseResource",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "161",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "assetRoot ",
+    "diagnosticTextSha256": "01a05c3ed795dbcffcaf6a93ea4216cf34bb91a14ecd4840d216c9cbd8ae95f8",
+    "endcolumn": "20",
+    "endline": "161",
+    "findingId": "F03-PMD2-b38744ed335e0277a0098e0e95e3b49e077605418fb5cc10f09ac3177d485276",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-b43571b8769752d4c72e95c1feb48125c524d6b43efaf40ce7f05e8413b54fc3",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327007NativeBindingsUseFixedLiteralsAndVerifyOwnMetadata",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327002VerificationFailureKeepsCapturedOwnerAndOriginalThrowable",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1177,
+    "reason": "assetRoot is a borrowed alias of the second immediately captured owned root. First-root-success/second-proof-null-or-false cases retain two known FDs until ordinary close; successful startup and concurrent close keep the same bounded ownership. The real native metadata helper is separately tested on an own inode, without treating synthetic component role assertions as OS authorization.",
+    "rule": "CloseResource",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "249",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "control ",
+    "diagnosticTextSha256": "858d7731c7c7957e8466cfe09bc57150317b9bb6afe5f700a4645caeb0677de2",
+    "endcolumn": "18",
+    "endline": "249",
+    "findingId": "F03-PMD2-2c32d3405592cb37d6fb17418c03c50b372b6edf5599542e4be2da3ce9751d6a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-fd319d4eadff846b922ac9da9abbc7a7bb7b474c06573c7632388d2e215b7062",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1178,
+    "reason": "control aliases the immediately stored management owner, so local TWR would terminate the endpoint after startup. Actual bind/start/promote and release-failure cases keep the field and never falsely publish ready; ordered close clears readiness without re-promoting or repeating FD closure. JVM proves the capture-before-start and unchanged close/bootstrap semantics, not external Root completion.",
+    "rule": "CloseResource",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "5",
+    "beginline": "366",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "synchronized ",
+    "diagnosticTextSha256": "f53b06c65aae5b3206db0109ac5eea70fd783ded1c19c595b81cc104bc8f8f97",
+    "endcolumn": "17",
+    "endline": "366",
+    "findingId": "F03-PMD2-48711c001afc40d3916b614a62c7cd29d7f112505bb859abea68df47f834d6a9",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "independentTestSourceSha256": "98ff8a3a785c9d5df5782d992dcf68a748c2df7386449fdbaa992629fe78e932",
+    "jvmOwnershipProofSha256": "d92b841cbbbbbe64680fd01609c8c21ee84de21d43732d7ffe8df02fedf0864a",
+    "legacyFindingId": "F03-PMD-6c44b0489eca94c3d6a41285883d607131b177d1c4b2852e4e474b6464da0f5e",
+    "nativeRootOrAuthorizationProven": false,
+    "originalSelectedCaseRefs": [
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327006OuterStoppingCannotPublishReady",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327001StartedHandlesRemainOwnedUntilIdempotentClose",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327003ReadyFailureNeverPromotesAndCloseReleasesKnownComponents",
+        "module": "web",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+        "xmlSha256": "12bc1d828acc9f9667f05393008d43bf499266fa16cbaac324964b0f0c17d837"
+      }
+    ],
+    "originalSelectedQualificationSha256": "67be969bc999b8cc5cd020faea6f1604bf8c32ebf8673f6db4a13910a8e90722",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.class": "3a33c690458410e8ad2996694b3ac3a5b5c1cf0f0a69ced4d6253c5df14d4e6f"
+    },
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1179,
+    "reason": "The same private final ownerLock serializes admission refusal, the existing ten-phase stop cursor and concurrent start/close. No successful cursor step is repeated on duplicate close. Actual owned FD zero, public false states and concurrent close completion are checked; UNKNOWN retry/retention and real native ownership remain separate dependencies, not inferred from this monitor.",
+    "rule": "AvoidSynchronizedStatement",
+    "selectedComponentOnly": true,
+    "source": "e45cfd31c8d610922f4e9432cc1cf11fa9b48338",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+    "sourceSha256": "cc2ba8716e579b6a23a6f5f07328d7808a0a8a05e65e36514c18e9ed7f55ce0f",
+    "staticContextPremiseOnly": false,
+    "status": "REQUIRED_CONTRACT"
+  }
+]
