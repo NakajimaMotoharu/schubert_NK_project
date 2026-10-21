@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
@@ -53,6 +54,13 @@ public final class OutboxJmsSender {
         context.commit();
       } catch (RuntimeException exception) {
         rollback(context, exception);
+        // BUG1598/SSC322330: a duplicate cause cannot hide fatal rollback edges.
+        // Defer through the existing transport type until the owned close has run.
+        try {
+          TemporaryInfrastructureException.preserveFatal(exception);
+        } catch (Error fatal) {
+          throw new OutboxSendException("outbox JMS commit was not confirmed", exception);
+        }
         if (!isDuplicateConfirmation(exception)) {
           throw new OutboxSendException("outbox JMS commit was not confirmed", exception);
         }
@@ -166,12 +174,18 @@ public final class OutboxJmsSender {
     };
   }
 
-  private static void rollback(JMSContext context, Throwable failure) {
+  private static void rollback(JMSContext context, Throwable failure) throws OutboxSendException {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      if (rollbackFailure != failure) {
-        failure.addSuppressed(rollbackFailure);
+      try {
+        TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
+      } catch (Error fatal) {
+        // A provider may disable suppression. Keep the graph without promoting it
+        // before close: a direct close Error retains its existing SS320 priority.
+        var deferred = new OutboxSendException("outbox JMS send was not confirmed", fatal);
+        deferred.addSuppressed(failure);
+        throw deferred;
       }
     }
   }

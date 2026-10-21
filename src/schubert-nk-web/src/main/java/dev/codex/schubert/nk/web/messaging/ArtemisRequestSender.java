@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
@@ -27,6 +28,17 @@ public final class ArtemisRequestSender implements JmsRequestSender {
   /** Validates one complete request wire, sends it once, and commits the local JMS transaction. */
   @Override
   public void send(UUID correlationId, byte[] encodedBody) throws JMSException {
+    try {
+      sendOwned(correlationId, encodedBody);
+    } catch (JMSException | RuntimeException failure) {
+      // BUG1598/SSC321330: this boundary has no dispatcher classifier. Inspect only
+      // after owned close, so direct cleanup Error priority remains unchanged.
+      WebStartupException.preserveFatal(failure);
+      throw failure;
+    }
+  }
+
+  private void sendOwned(UUID correlationId, byte[] encodedBody) throws JMSException {
     Objects.requireNonNull(correlationId, "correlationId");
     Objects.requireNonNull(encodedBody, "encodedBody");
     CommonHeader header = HeaderCodec.standard().peek(encodedBody);
@@ -74,8 +86,12 @@ public final class ArtemisRequestSender implements JmsRequestSender {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      if (rollbackFailure != failure) {
-        failure.addSuppressed(rollbackFailure);
+      try {
+        WebStartupException.attachSecondary(failure, rollbackFailure);
+      } catch (Error fatal) {
+        var deferred = new IllegalStateException("JMS request rollback failed", fatal);
+        deferred.addSuppressed(failure);
+        throw deferred;
       }
     }
   }
@@ -92,9 +108,7 @@ public final class ArtemisRequestSender implements JmsRequestSender {
         fatal.addSuppressed(primary);
         throw fatal;
       }
-      if (closing != primary) {
-        primary.addSuppressed(closing);
-      }
+      WebStartupException.attachSecondary(primary, closing);
     }
   }
 }

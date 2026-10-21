@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.logging;
 
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import dev.codex.schubert.nk.web.messaging.JmsContextFactory;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
@@ -62,6 +63,13 @@ public final class WebLogMessageSender {
           context.commit();
         } catch (RuntimeException failure) {
           rollback(context, failure);
+          // BUG1598/SSC323330: classify fatal edges before duplicate-success collapse,
+          // while preserving the owned-close priority through the transport carrier.
+          try {
+            WebStartupException.preserveFatal(failure);
+          } catch (Error fatal) {
+            throw new WebLogSendException("web log JMS commit was not confirmed", failure);
+          }
           if (!duplicateConfirmed(failure)) {
             throw new WebLogSendException("web log JMS commit was not confirmed", failure);
           }
@@ -91,16 +99,20 @@ public final class WebLogMessageSender {
         fatal.addSuppressed(primary);
         throw fatal;
       }
-      if (closing != primary) primary.addSuppressed(closing);
+      WebStartupException.attachSecondary(primary, closing);
     }
   }
 
-  private static void rollback(JMSContext context, Throwable failure) {
+  private static void rollback(JMSContext context, Throwable failure) throws WebLogSendException {
     try {
       context.rollback();
     } catch (RuntimeException rollbackFailure) {
-      if (rollbackFailure != failure) {
-        failure.addSuppressed(rollbackFailure);
+      try {
+        WebStartupException.attachSecondary(failure, rollbackFailure);
+      } catch (Error fatal) {
+        var deferred = new WebLogSendException("web log JMS send was not confirmed", fatal);
+        deferred.addSuppressed(failure);
+        throw deferred;
       }
     }
   }

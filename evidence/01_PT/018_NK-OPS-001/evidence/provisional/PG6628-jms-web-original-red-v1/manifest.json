@@ -1,0 +1,45 @@
+{
+  "TestHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSecondary330Test.java": "5137af76ddf50588a1ca2f12aac06e16546c86cc1cac1cc4a88303188a78680f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java": "640c6d71223b113e5967fcb6a5ff3736f17755ca63fa64776cd52be48cf000ed"
+  },
+  "actualExit": 0,
+  "archiveSha256": "2231b0a5bcd06e2affd3ccbee1a4bdf0ff01e31f0a3015457f2758a56681a66e",
+  "expectedFailures": [
+    [
+      "dev.codex.schubert.nk.web.logging.JmsSecondary330Test",
+      "jms330004LogDisabledPrimaryCannotLoseRollbackOrCloseFatal"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.JmsSecondary330Test",
+      "jms330005LogDuplicateCannotHideRollbackFatalAndDirectCloseStillWins"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.JmsSecondary330Test",
+      "jms330007RequestRetainsDisabledPrimaryRollbackFatalAfterOwnedClose"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.JmsSecondary330Test",
+      "jms330008RequestClassifiesCloseGraphAfterModeFailureOrSuccessfulCommit"
+    ]
+  ],
+  "formalAccepted": false,
+  "laterNotRun": 2,
+  "originalExit": 1,
+  "originalManifestSha256": "7d04d3ee2ba6ec4eef5c6d34d91df2ab3ef35b02f2648cea8f5c724151b72b62",
+  "ptAlternativeCompleted": 0,
+  "run": "pg6628-jms-secondary-web-red-v1",
+  "source": "87c6901df5050256cbcffc3d53355f7c12b582cf",
+  "suites": 6,
+  "tests": 16,
+  "testsExecutedByReader": 0,
+  "vmActions": 0,
+  "xmlHashes": {
+    "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "027dff93b246c6fd675ce49d1a713e986066835a475a06abb7f8962cdeabb3e6",
+    "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "4958a527eaa92f611098409cb6036de9c17c81b2058f24f2f4c7166e9a06e68e",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "6a3c095a77ade2d9add5c36ea3222e55126c2bab9a3dcdf53a400e1cc1e0b906",
+    "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "43e274a26c97a14ed43a2847ec606c40326034ad123bdfb3bfa0ecb88078aae7",
+    "dev.codex.schubert.nk.web.logging.JmsSecondary330Test": "8958834b8ad379ae38122dcea1bf0c9cda62520e6eaa727066d5290ce3a2e02b",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest": "a6f7c03a5190d949e773bef7d5e19473553828d0c22ada4c0aeb9a3f393bf1d2"
+  }
+}
