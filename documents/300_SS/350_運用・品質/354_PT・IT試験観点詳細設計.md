@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC321（2026-10-21、PT-IDEM-WEB321001～003/BUG1569/1570・YKT1323/1326）：Web通常requestとdurable log送信をsynthetic SS固定wire/認証済WLG fixture・未接続JMS proxyで検査する。非fatal Runtime/JMS/typed primary×close Error、元Error×close正常/別Error/同一Error、同一Runtime、primary無しのclose失敗を独立matrixとする。期待は元Error又はnonfatal上のcleanup Errorの同一性、異なる失敗だけsuppressed/self-suppression0、one-close、mode失敗時stage/commit/rollback0、stage failure時の既rollback、正常bodyの既property/body/commitとplain wire wipe。独立byte golden/固定Throwableを使用し、production methodからexpectedを作らない。matrixをJUnit数へ水増しせず、既API SS320/別source成功をWebの成功へ移植しない。red原結果→PG→同一oracle green、既real broker/DB正常・duplicate graph/再送・型null/静的/必要同source品質/actualcounterを確認。実Root/VM/current/cohort/native/PTALT保留は解除しない。
+
 SSC320（2026-10-21、PT-IDEM-FAIL320/BUG1566/1567・YKT1323/1324）：ordinary API OutboxのJMS primary無し/typed/Runtime/Errorとclose SQL適用外/Runtime/Error、JDBC setup SQL/Runtime/Errorとclose正常/SQL/Runtime/Error/同一Throwable、rollback二次失敗を自己所有・未接続proxyで独立matrix確認する。期待は元Error保持、nonfatal primary＋cleanup ErrorはそのError保持、同一Throwable self-suppression0、close一回・未返却setup失敗ではclaim/commit/rollback/JMS0。既public型/固定診断・正常実DB/JMS/短TX・lease時刻・duplicate因果graphは非回帰。matrix入力をJUnit数へ水増しせず、未実行/失敗と元成功sourceを分離する。既whole6244のsource固定/原XML/Jar回収後に新実装/独立PTを進め、同source型null/静的/必要回帰/coverage・横展開を確認する。実Root/current/未知cohort/native動的PTの代わりにはならず、安全HOLDを解除しない。
 
 ## SSC319 callbackの確認済rollback境界
