@@ -264,6 +264,10 @@ final class BrokerGraph334Test {
     final int index;
     final transient List<Integer> order;
 
+    public OrderedProbe() {
+      this(0, new ArrayList<>());
+    }
+
     OrderedProbe(int index, List<Integer> order) {
       this.index = index;
       this.order = order;

@@ -1,5 +1,9 @@
 # BrokerParent334 ordinary graph境界 PT仕様（実装前）
 
+## 初回compile停止・新only是正（BUG1607/YKT1360）
+
+4ba67acda/archive11cc5cdd、元6690/99517と6692/71599は両phase0,1真正1/0PT0suite、OrderedProbeのExternalizable public no-arg ctor一件不足を既-Werrorが検出。八予定反例/合格へ加算0、元manifest/診断を保持。Test subclassへ有効な既定index0/empty orderを準備するpublic no-argだけ追加、既arg ctorの独立input/expected・Main903b/他Test bytesは固定、実serializationや接続を発行しない。新SLOTS=API赤6698/Web赤6700-v2、green6702-v2/原6704-v2、driver名/宣言17-9・15-8・127-33は不変更。以下v1番号は初期計画履歴として保持する。
+
 ## 実行前固定（2026-10-22）
 
 Main903b/全旧Test保持、新API config4method SHA b4c8fc0e50f047cb3732f298717bde29cf0b98e1b9ef9ccb2db464a469d1e1e5、API parent1 SHAe450d657a0d8045cb5a9db3eccfb60d966438969d6a0bd925a279ce59fec02a1、Web3 SHA5ab0f744557cf4619b09a06f7390956e3eb3fa7cd1cebd134fcb788611e9e189。formatter35902/管理三/pyflakes/diff-checkすべて0、動的PT未実施。実行前別pathレビューでrole/mode/arity・endpointのassertをfault capture外へ移し、spyはpublic role/mode/arityだけ記録、password引数は保存しない。open失敗でcaller-owned factoryをauto closeしていないこともcapture後に検査し、caller TWR終了時だけclose1/各三reverseを検査する。
