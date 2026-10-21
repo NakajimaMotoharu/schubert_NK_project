@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
+import static dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal;
+
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
@@ -277,12 +279,14 @@ public final class ScenarioRepository {
         }
       }
     } catch (ScenarioQueryException failure) {
+      preserveFatal(failure);
       // BUG-031: a close failure can attach raw SQL to the resource-scope capacity exception.
       throw new ScenarioQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException failure) {
+      preserveFatal(failure);
       throw new ScenarioQueryException(false);
     }
   }
@@ -387,11 +391,13 @@ public final class ScenarioRepository {
         }
       }
     } catch (ScenarioQueryException failure) {
+      preserveFatal(failure);
       throw new ScenarioQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException failure) {
+      preserveFatal(failure);
       throw new ScenarioQueryException(false);
     }
   }
@@ -440,11 +446,13 @@ public final class ScenarioRepository {
       return validate(
           new TypedPayloadValues(new LayoutId(layout), data.apply(records.size()), records));
     } catch (ScenarioQueryException failure) {
+      preserveFatal(failure);
       throw new ScenarioQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException failure) {
+      preserveFatal(failure);
       throw new ScenarioQueryException(false);
     }
   }

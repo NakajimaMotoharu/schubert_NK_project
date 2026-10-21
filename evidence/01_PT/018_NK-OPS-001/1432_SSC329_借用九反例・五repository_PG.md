@@ -1,0 +1,11 @@
+# SSC329 borrowed nine original counterexamples / five repository PG
+
+1431の元6550/55707はsourceac5f4d6c7115ae25f6c7e46e05589c0842deb94b、2026-10-21T15:13:54.914141Z～15:15:46.930330Z、archived7862d0aaa568c98f283aa3329a369ad6e212c7b38c089f4cdcd15a8608c8268、真正1/phase0,0,1/17tests/6suites/F9/E/S/flaky0。後段6not-runはPASSへ加点0。原read-red終了0/ed5c555a061d934fc946d6fc7f095a3f04571863c93492a9d7dd7d7be82c581aは九methodの期待AssertionError対実固有QueryExceptionという予測と一致、核心境界二Testは成功。失敗sourceと原XMLは再演/上書きしない。
+
+## 修正
+
+PG-D485、SS312/324/332/354/SSC329、BUG1592/YKT1345。User/Scenario/Media/Log/Questionの五Repositoryにstatic shared classifier import、SQL変換9＋capacity marker変換7へ計16呼出を追加する。各呼出はTWRによるStatement/ResultSet closeの後、既resultCode/suppressed判定又は固定診断生成の前。SQL/バインド/行数/結果/role/Connection所有は不変更、既common classifierは当原8cfeのまま。
+
+二TestのSHA c70b5737c9ddca06c13eed96147312a2dd096fcfb74ed0f075da9cfb41b2eee6/f4152513fab5d61f7e20f12f59d002211f2bfda565ba91a224e7f33d690618ebを固定する。同oracle green23/9で各境界のSQL+close Error、SQLnext fatal、該当marker+close Error、普通SQL/固定redactionと借用ownershipを実証し、core protocol/rollback同Throwableも確認する。元redで各methodの最初の反例以降は到達していないため、追加modeの実証はgreen原XML/当sourceでのみ確認する。
+
+当五ファイルのguard追加だけで全113site/業務domain/同source全体/静的F03/全四100/正式/nativeを閉鎖しない。green/原6554は次実行、実測値/hash未定。全HOLD/QA051final/正式1964-53/17-190/工数null/PTALT代替0/原-v4不変。

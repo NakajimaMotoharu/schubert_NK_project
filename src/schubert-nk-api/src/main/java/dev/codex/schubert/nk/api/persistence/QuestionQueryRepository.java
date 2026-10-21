@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+import static dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
@@ -306,9 +307,11 @@ public final class QuestionQueryRepository {
         }
       }
     } catch (QuestionQueryException failure) {
+      preserveFatal(failure);
       if (failure.getSuppressed().length == 0) throw failure;
       throw new QuestionQueryException(ResultCode.TEMPORARY_FAILURE);
     } catch (SQLException | RuntimeException failure) {
+      preserveFatal(failure);
       throw new QuestionQueryException(ResultCode.TEMPORARY_FAILURE);
     }
   }
@@ -342,6 +345,7 @@ public final class QuestionQueryRepository {
         }
       }
     } catch (SQLException | RuntimeException failure) {
+      preserveFatal(failure);
       throw new QuestionQueryException(ResultCode.TEMPORARY_FAILURE);
     }
   }

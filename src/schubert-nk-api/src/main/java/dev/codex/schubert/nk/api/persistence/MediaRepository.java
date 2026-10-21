@@ -1,5 +1,7 @@
 package dev.codex.schubert.nk.api.persistence;
 
+import static dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal;
+
 import dev.codex.schubert.nk.api.database.RequiredColumn;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
@@ -345,12 +347,14 @@ public final class MediaRepository {
       }
       return finish.apply(List.copyOf(records));
     } catch (MediaQueryException failure) {
+      preserveFatal(failure);
       throw new MediaQueryException(
           failure.resultCode() == ResultCode.RESOURCE_LIMIT && failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException failure) {
+      preserveFatal(failure);
       throw new MediaQueryException(false);
     }
   }

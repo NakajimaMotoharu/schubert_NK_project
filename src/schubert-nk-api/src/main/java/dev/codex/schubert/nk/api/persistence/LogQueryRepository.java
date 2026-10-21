@@ -1,8 +1,8 @@
 package dev.codex.schubert.nk.api.persistence;
 
-// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
-
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+import static dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal;
+// PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.api.security.AuthorizationService;
@@ -156,11 +156,13 @@ public final class LogQueryRepository {
       }
       return response;
     } catch (LogQueryException failure) {
+      preserveFatal(failure);
       throw new LogQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException failure) {
+      preserveFatal(failure);
       throw new LogQueryException(false);
     }
   }

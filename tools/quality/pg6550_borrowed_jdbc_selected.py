@@ -9,7 +9,7 @@ from pg6054_expiry_read_qualification import qualify
 import finite_selected_profile as profile
 
 OLD = '8cfe4388a58af3a5229c2c367353abd44e75bedf'
-RED_SOURCE = None
+RED_SOURCE = 'ac5f4d6c7115ae25f6c7e46e05589c0842deb94b'
 TESTS = {
  'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/BorrowedJdbcFatal329Test.java',
  'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionBoundary329Test.java'}

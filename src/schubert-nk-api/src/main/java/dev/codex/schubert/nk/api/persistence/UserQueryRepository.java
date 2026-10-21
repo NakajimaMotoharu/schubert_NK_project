@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.persistence;
 
+import static dev.codex.schubert.nk.api.error.TemporaryInfrastructureException.preserveFatal;
 // PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
@@ -144,12 +145,14 @@ public final class UserQueryRepository {
         }
       }
     } catch (UserQueryException failure) {
+      preserveFatal(failure);
       throw new UserQueryException(failure.getSuppressed().length == 0);
     } catch (SQLException
         | IllegalArgumentException
         | IllegalStateException
         | ArithmeticException
         | java.time.DateTimeException failure) {
+      preserveFatal(failure);
       throw new UserQueryException(false);
     }
   }
@@ -213,6 +216,7 @@ public final class UserQueryRepository {
         | IllegalStateException
         | ArithmeticException
         | java.time.DateTimeException failure) {
+      preserveFatal(failure);
       throw new UserQueryException(false);
     }
   }
