@@ -1,4 +1,12 @@
 # Artemis物理構成・JMS設定設計
+## SSC333 ordinary consumer startup/closeのsecondary保持（2026-10-22）
+
+BUG1604/YKT1357。API Sync/WebLog/Questionのstartup通知・cleanupとSync複数context close、Web Reply startupは、suppression無効でもnotification/closing graphのErrorを捨てない。addSuppressedの成否だけを保持の実証とせず、未連結secondaryを一時scopeへ保持する。必要owned closeを完了してから既module-local pure graph口で分類、直接primary/通知選択済Error・直接close Errorの既component優先を先に保ち、非fatal時は従来catalog/cause/suppressed順へ帰還する。同一Throwableの自己抑制はしない。
+
+Sync multi-closeは各失敗graphのErrorを遅延捕捉し、残contextのcloseを継続する。最初の直接Errorを含む既選択表と、成功済contextのphaseは保持し、再確認close時に成功phaseを再closeしない。分類を早期throwする共通attachmentへ盲目的に置換しない。全close試行後のonUnconfirmed引渡し・既非帰還UNKNOWNと所有を維持し、そのcallbackが正常returnした場合だけ後段のfatal選択・throwへ進む。UNKNOWNを回避して次工程へ移す変更はしない。
+
+raw provider graphはprivate一時scope/既所有者の障害引渡しに限り、catalog/log/公開JSONへ追加保存しない。登録配送SSC332の確認済rollback/API通知後return/Web同一Error再throw、正常業務/role/SQL/ACK/commit/再送backoff/上限・Unit/親期限は不変更。実VM/current/Root/cohort/鍵/intent/permit/nativeの保留を、このordinary内部契約から解除しない。
+
 
 ## SSC332 ordinary consumerのfatal graphとWeb返信rollback実証（2026-10-22）
 
