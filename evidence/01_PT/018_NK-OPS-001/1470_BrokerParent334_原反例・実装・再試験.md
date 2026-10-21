@@ -1,5 +1,9 @@
 # BrokerParent334 原反例・実装・再試験
 
+## green v2静的停止・必要是正（BUG1608/YKT1361）
+
+元6702/session72103/source2d5cb53f8/archive11b6d324、UTC23:12:12.419478～23:14:25.564481はphase0,0,1真正1。実79PT/19suite/FES0、API SpotBugs一件UL_UNRELEASED_LOCK_EXCEPTION_PATHのため後続未実行・127合格ではない。原manifest/XML/static保持。915/916先行起票後、API closeのscratch clearをtry、stateLock.unlockを内finallyに限定是正。Test/期待値/残三Main不変更、抑制/除外/人工fill例外注入0。既openのcopy clearは既外finally unlock、Sync closeはmonitor、partial constructorはlockなしを横展開確認。新only green6710-v3/原6712-v3へ切替、旧6702/未着手6704は再実行しない。全体6706/原6708の前提も原6712へ更新、以下旧番号は履歴保持。
+
 1469、PG-D499、SS321/354 SSC334、BUG1604/1606/1607・YKT1357/1359/1360。WBS-P005-03主、P005-04/P005-02共通参照追加費0。group1674の低.5/標準1.5/高4ppは固定・未較正、実N/T/専有費/工数率null。PT_DEFAULT・自己所有proxy/未接続factory/有限自己所有childだけ。実credential/DB/VM/Root/failed cohort/鍵/intent/permit/native操作0、拒否代替完了0。
 
 ## 元run・独立期待値（2026-10-22）

@@ -53,9 +53,9 @@ def prerequisites(source):
     if subprocess.check_output(['git','diff',source,'--','src','pom.xml','.mvn','mvnw',
                                'tools/quality/static','program/characterization'],cwd=ROOT):
         raise ValueError('same original127 Main/Test/gates fixed throughout whole and reader')
-    qp=BASE/'PG6704-broker-parent-qualification-v2/manifest.json'
+    qp=BASE/'PG6712-broker-parent-qualification-v3/manifest.json'
     if QSHA is None or sha(qp)!=QSHA:raise ValueError('freeze actual original127 qualification first')
-    q=json.loads(qp.read_bytes());private=W/'pg6704-broker-parent-qualification-v2/manifest.safe.json'
+    q=json.loads(qp.read_bytes());private=W/'pg6712-broker-parent-qualification-v3/manifest.safe.json'
     if not(q['source']==source and q['actualExit']==0 and (q['tests'],q['suites'],q['physicalMain'])==(127,33,1667)
            and sha(private)==q['privateManifestSha256']):
         raise ValueError('actual original127 and all Main/Jars')

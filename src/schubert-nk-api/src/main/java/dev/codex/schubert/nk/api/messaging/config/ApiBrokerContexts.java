@@ -261,8 +261,11 @@ public final class ApiBrokerContexts implements AutoCloseable {
       }
       closed = true;
     } finally {
-      Arrays.fill(closeFailures, null);
-      stateLock.unlock();
+      try {
+        Arrays.fill(closeFailures, null);
+      } finally {
+        stateLock.unlock();
+      }
     }
   }
 

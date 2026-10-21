@@ -21,7 +21,7 @@ MAINS={
  'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java'}
 TARGETS={'api':['api/messaging/config/ApiBrokerContexts','api/messaging/config/ArtemisConnectionFactoryProvider','api/messaging/inbound/ApiMessagingRuntime'],
          'web':['web/messaging/WebBrokerContexts']}
-SLOTS={'red-api':'pg6698-broker-api-red-v2','red-web':'pg6700-broker-web-red-v2','green':'pg6702-broker-parent-green-v2'}
+SLOTS={'red-api':'pg6698-broker-api-red-v2','red-web':'pg6700-broker-web-red-v2','green':'pg6710-broker-parent-green-v3'}
 EXPECTED={'red-api':(17,9),'red-web':(15,8),'green':(127,33)}
 
 
@@ -80,7 +80,7 @@ def qualify_green():
       '8e52123141aa8acd8cfa9da8e46966824dbb6bafa8959118ebc1870fff6989f5',
       W/'pg6686-consumer-cleanup-qualification-v1/manifest.safe.json',
       W/'pg6686-consumer-cleanup-qualification-v1/findings.safe.json',
-      'pg6704-broker-parent-qualification-v2','PG6704-broker-parent-qualification-v2',expected_phase_exits=(0,0,0))
+      'pg6712-broker-parent-qualification-v3','PG6712-broker-parent-qualification-v3',expected_phase_exits=(0,0,0))
 
 
 def main():
