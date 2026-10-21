@@ -1,5 +1,7 @@
 # NK-ASY-001 空回答provider単体テスト仕様書
 
+2026-10-22暫定追補：providerのBusiness/Runtime failure graphをQuestionWorkerのERROR/DLQへ分類する前のfatal保持は、011_NK-QST-001/009 provider例外graph仕様と対応結果へ追跡する。元Error/PROCESSING保持・Error無しcycleの既結果を独立に確認する。STB001～005/旧正式provider認定を置換せず、実Root/native/ACK/外部AI/IT/STの合格へ外挿しない。
+
 PG420補足（2026-10-02、暫定・正式provider認定は不変更）：実`QuestionWorkerService`/固定`AnswerBusinessException`のDB/JMS/元ACK接続は011_NK-QST-001の005受付・再送・Worker仕様と006実績へ追跡する。AWORK001～013で本STUB5を再使用し、実PG18・Artemis・削除三点・再配送/最終DLQ・監査を確認中。本文/provider/時刻の単独契約を本書のSTB001～005で維持し、外部AI/ordinary native ready/全100%/IT/STは未受入。
 
 計測対象は実行codeを持つAnswerResult/StubAnswerProvider全体。AnswerProviderは抽象method宣言のみで実行命令がなく、JaCoCo除外設定は追加しない。分岐命令が生成されない場合のbranchは0/0としてmanifestへ明示し、missed branchのあるclassを0/0へ置換しない。
