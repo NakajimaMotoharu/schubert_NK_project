@@ -1,0 +1,105 @@
+{
+  "actualExit": 0,
+  "expectedFailures": [
+    [
+      "api-red",
+      "dev.codex.schubert.nk.api.dispatch.ApiReadinessFailureGraph330Test",
+      "ready330001DbGraphsPreserveFatalAfterOneCloseAndNeverOpenJms"
+    ],
+    [
+      "api-red",
+      "dev.codex.schubert.nk.api.dispatch.ApiReadinessFailureGraph330Test",
+      "ready330002JmsLinkedAndBothCloseGraphsPreserveFatalAfterCleanup"
+    ],
+    [
+      "web-red",
+      "dev.codex.schubert.nk.web.bootstrap.WebReadinessFailureGraph330Test",
+      "ready330001DbGraphsPreserveFatalAfterOneCloseAndNeverOpenJms"
+    ],
+    [
+      "web-red",
+      "dev.codex.schubert.nk.web.bootstrap.WebReadinessFailureGraph330Test",
+      "ready330002JmsLinkedAndBothCloseGraphsPreserveFatalAfterCleanup"
+    ]
+  ],
+  "formalAccepted": false,
+  "originals": {
+    "api-red": {
+      "TestHashes": {
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiReadinessFailureGraph330Test.java": "301e5bbbdcdcdb611fdfde01f2061bf8b14de2a2620514d063fcf5ee03d64d30",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebReadinessFailureGraph330Test.java": "1bff3207f54cbc10c711faa2feed81825e495b62da2a87f1612247d9fc2694ca"
+      },
+      "actualExit": 0,
+      "archiveSha256": "f8081c2418ec7e184c6915bc598de48a19a1771ba124a9eea9bb53fc041d8ccb",
+      "expectedFailures": [
+        [
+          "dev.codex.schubert.nk.api.dispatch.ApiReadinessFailureGraph330Test",
+          "ready330001DbGraphsPreserveFatalAfterOneCloseAndNeverOpenJms"
+        ],
+        [
+          "dev.codex.schubert.nk.api.dispatch.ApiReadinessFailureGraph330Test",
+          "ready330002JmsLinkedAndBothCloseGraphsPreserveFatalAfterCleanup"
+        ]
+      ],
+      "formalAccepted": false,
+      "laterNotRun": 6,
+      "originalExit": 1,
+      "originalManifestSha256": "afcfc14a849b65acda259f9a34186165483b011a23f3ce06d7727bf0372d8c9a",
+      "ptAlternativeCompleted": 0,
+      "run": "pg6562-readiness-api-red-v1",
+      "source": "964ba455a6c9d87ffcf38f9862bce79d26d6f0a4",
+      "suites": 5,
+      "tests": 9,
+      "testsExecutedByReader": 0,
+      "vmActions": 0,
+      "xmlHashes": {
+        "dev.codex.schubert.nk.api.dispatch.ApiReadinessFailureGraph330Test": "cc90f787de2ee575188862b28d535f9041bbbf7636c09edc3131686cff8b8109",
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "d8081c148b61d64c3b51f7873c9179c25e8a49d7dbad0c5f66423fb6013a0e53",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "e35b8b63839bc9cd8d49b28802f59bc9874f891a650449a9ff3cf19a6fcf161d",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "0c7281361b1cfd886fc61ef16fc383b22a6d61aa2eed0038d7ff9aae29989fbd",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "4d9f94519fe83a8850a020727440be13d458d3dccc2f11dc9a23f7a6ef9e3095"
+      }
+    },
+    "web-red": {
+      "TestHashes": {
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiReadinessFailureGraph330Test.java": "301e5bbbdcdcdb611fdfde01f2061bf8b14de2a2620514d063fcf5ee03d64d30",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebReadinessFailureGraph330Test.java": "1bff3207f54cbc10c711faa2feed81825e495b62da2a87f1612247d9fc2694ca"
+      },
+      "actualExit": 0,
+      "archiveSha256": "f8081c2418ec7e184c6915bc598de48a19a1771ba124a9eea9bb53fc041d8ccb",
+      "expectedFailures": [
+        [
+          "dev.codex.schubert.nk.web.bootstrap.WebReadinessFailureGraph330Test",
+          "ready330001DbGraphsPreserveFatalAfterOneCloseAndNeverOpenJms"
+        ],
+        [
+          "dev.codex.schubert.nk.web.bootstrap.WebReadinessFailureGraph330Test",
+          "ready330002JmsLinkedAndBothCloseGraphsPreserveFatalAfterCleanup"
+        ]
+      ],
+      "formalAccepted": false,
+      "laterNotRun": 2,
+      "originalExit": 1,
+      "originalManifestSha256": "c5c7bfb04aae3bd43d4676b8f80c59bcf4361fd891541516bca0eb4d63629747",
+      "ptAlternativeCompleted": 0,
+      "run": "pg6564-readiness-web-red-v1",
+      "source": "964ba455a6c9d87ffcf38f9862bce79d26d6f0a4",
+      "suites": 6,
+      "tests": 13,
+      "testsExecutedByReader": 0,
+      "vmActions": 0,
+      "xmlHashes": {
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "6efee164dfd6a1f7acfde08dc703ea87f9347e7448acff712cdcbe9589e5f4d7",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "7323d26cc208f149ac00a20914f51c856e115d936afe73a0a58cbcf16d5a8046",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "04aef91f600f1e7191766c1ddabe55614419efd27c1ca64a7aaf461f6fb0af73",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "0add2bf28de29aa168e7a340a5bb28deb68172eb4bc672d018dc63d3f9735fd5",
+        "dev.codex.schubert.nk.web.bootstrap.WebReadinessFailureGraph330Test": "0ce3e835dee04acd389f6ceb98ba729324bd37b1b620bf00752f02db55426043",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest": "6150235f6dfe7c86fa2a66ff3389a955e90106e6d252cbe645346cba4ee95ee8"
+      }
+    }
+  },
+  "ptAlternativeCompleted": 0,
+  "source": "964ba455a6c9d87ffcf38f9862bce79d26d6f0a4",
+  "testsExecutedByReader": 0,
+  "vmActions": 0
+}

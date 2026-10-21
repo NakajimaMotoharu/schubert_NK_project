@@ -41,9 +41,11 @@ public final class WebDependencyReadiness {
           if (primary == null || closing instanceof Error && !(primary instanceof Error)) {
             throw closing;
           }
+          WebStartupException.attachSecondary(primary, closing);
         }
       }
     } catch (SQLException | RuntimeException failure) {
+      WebStartupException.preserveFatal(failure);
       throw new WebStartupException("Web technical database");
     }
     try {
@@ -63,9 +65,11 @@ public final class WebDependencyReadiness {
           if (primary == null || closing instanceof Error && !(primary instanceof Error)) {
             throw closing;
           }
+          WebStartupException.attachSecondary(primary, closing);
         }
       }
     } catch (RuntimeException failure) {
+      WebStartupException.preserveFatal(failure);
       throw new WebStartupException("Web Artemis reply Queue");
     }
   }

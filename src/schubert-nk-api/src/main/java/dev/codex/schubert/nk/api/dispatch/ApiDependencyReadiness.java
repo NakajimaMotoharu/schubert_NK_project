@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.dispatch;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.JMSContext;
 import java.sql.Connection;
@@ -67,9 +68,11 @@ public final class ApiDependencyReadiness {
           if (primary == null || closing instanceof Error && !(primary instanceof Error)) {
             throw closing;
           }
+          TemporaryInfrastructureException.attachSecondary(primary, closing);
         }
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new IllegalStateException("API database unavailable");
     }
     probe(broker, BrokerTopology.SYNC_REQUEST, webLog == null);
@@ -105,13 +108,15 @@ public final class ApiDependencyReadiness {
         } catch (RuntimeException | Error closing) {
           // Readiness exposes no provider detail. A fatal close must not be hidden behind an
           // ordinary inspection failure; otherwise the primary failure keeps precedence.
-          // No suppression is needed for this fixed/redacted startup boundary.
+          // Retain only in the transient primary graph until the fixed catalog is classified.
           if (primary == null || closing instanceof Error && !(primary instanceof Error)) {
             throw closing;
           }
+          TemporaryInfrastructureException.attachSecondary(primary, closing);
         }
       }
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new IllegalStateException("API Artemis receive queues unavailable");
     }
   }

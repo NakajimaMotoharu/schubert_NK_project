@@ -13,6 +13,8 @@ class ReadinessDefinitionTest(unittest.TestCase):
             raw=profile.runner(*expected,selected.TARGETS)
             self.assertIn('exits==[0,0,0]',raw)
             self.assertLess(raw.index("['-DskipTests'"),raw.index("['-Dtest='"))
+        _, green=selected.inventory('green')
+        self.assertEqual((24,11),(sum(green.values()),len(green)))
 
     def test_source_scope_and_premature_green_guards(self):
         with patch.object(selected.subprocess,'check_output',side_effect=['\n'.join(selected.TESTS),b'']):
@@ -33,6 +35,14 @@ class ReadinessDefinitionTest(unittest.TestCase):
         first=dict(source='a',TestHashes={'x':'hash'});second=dict(source='b',TestHashes={'x':'hash'})
         with patch.object(selected.original,'inspect',side_effect=[first,second]):
             with self.assertRaisesRegex(ValueError,'same original'):selected.read_red()
+
+    def test_green_reader_exact_four_main_and_three_phases(self):
+        with patch.object(selected,'W') as w,patch.object(selected,'guard_source') as guard,patch.object(selected,'qualify') as qualify:
+            w.__truediv__.return_value.__truediv__.return_value.read_bytes.return_value=b'{"source":"fixture"}'
+            selected.qualify_green()
+        guard.assert_called_once_with('fixture','green')
+        self.assertEqual((24,11),qualify.call_args.args[3]);self.assertEqual(selected.MAINS,qualify.call_args.args[4])
+        self.assertEqual((0,0,0),qualify.call_args.kwargs['expected_phase_exits'])
 
 
 if __name__=='__main__':unittest.main()
