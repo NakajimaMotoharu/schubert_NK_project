@@ -16,7 +16,7 @@ MAINS={
  'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java',
  'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java'}
 TARGETS={'web':['web/receipt/ReceiptReferenceRepository','web/logging/WebRequestLogProducer']}
-SLOTS={'red':'pg6600-web-catalog-graph-red-v1','green':'pg6602-web-catalog-graph-green-v1'}
+SLOTS={'red':'pg6606-web-catalog-graph-red-v2','green':'pg6608-web-catalog-graph-green-v2'}
 
 
 def inventory(phase):
@@ -50,7 +50,7 @@ def read_red():
               (request,'request329001SqlGraphCannotBecomeOrdinaryLocalProjectionFailure'):missing,
               (request,'request329002DisabledSuppressionRollbackGraphKeepsFatalAndStillCloses'):missing}
     value=original.inspect(W/SLOTS['red'],lambda s:guard_source(s,'red'),(16,7),expected,TESTS,2)
-    print(json.dumps(original.publish(value,BASE/'PG6600-web-catalog-original-red-v1')))
+    print(json.dumps(original.publish(value,BASE/'PG6606-web-catalog-original-red-v2')))
 
 
 def qualify_green():
@@ -61,7 +61,7 @@ def qualify_green():
         '4084897514ba3dda64c4b3abd3416fcb0c2c202c6aacc34311ea9a77a4ea8908',
         W/'pg6598-inspector-qualification-v2/manifest.safe.json',
         W/'pg6598-inspector-qualification-v2/findings.safe.json',
-        'pg6604-web-catalog-qualification-v1','PG6604-web-catalog-qualification-v1',expected_phase_exits=(0,0,0))
+        'pg6610-web-catalog-qualification-v2','PG6610-web-catalog-qualification-v2',expected_phase_exits=(0,0,0))
 
 
 def main():

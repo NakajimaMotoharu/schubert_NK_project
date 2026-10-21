@@ -51,6 +51,7 @@ final class RequestProjectionFailureGraph329Test {
       var closes = new AtomicInteger();
       var rollbacks = new AtomicInteger();
       var commits = new AtomicInteger();
+      var prepares = new AtomicInteger();
       var connection =
           (Connection)
               Proxy.newProxyInstance(
@@ -59,7 +60,11 @@ final class RequestProjectionFailureGraph329Test {
                   (object, method, args) ->
                       switch (method.getName()) {
                         case "setAutoCommit" -> null;
-                        case "prepareStatement" -> throw primary;
+                        case "getAutoCommit" -> false;
+                        case "prepareStatement" -> {
+                          prepares.incrementAndGet();
+                          throw primary;
+                        }
                         case "rollback" -> {
                           rollbacks.incrementAndGet();
                           throw graph(second, 2);
@@ -85,6 +90,7 @@ final class RequestProjectionFailureGraph329Test {
         assertEquals(1, closes.get());
         assertEquals(1, rollbacks.get());
         assertEquals(0, commits.get());
+        assertEquals(1, prepares.get());
       }
     }
   }
