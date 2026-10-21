@@ -61,12 +61,18 @@ public final class ArtemisReplyConsumers implements AutoCloseable {
       runtime.start(reply, onTerminal, onFatal);
       return runtime;
     } catch (RuntimeException | Error failure) {
+      Throwable closingFailure = null;
       try {
         runtime.close();
       } catch (RuntimeException | Error closing) {
+        closingFailure = closing;
         if (failure != closing) failure.addSuppressed(closing);
       }
-      dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
+      // SSC333: preserve the existing direct table before inspecting unlinked secondary graphs.
+      if (failure instanceof Error fatal) throw fatal;
+      if (closingFailure instanceof Error fatal) throw fatal;
+      WebStartupException.preserveFatal(failure);
+      if (closingFailure != null) WebStartupException.preserveFatal(closingFailure);
       throw new IllegalStateException("Web reply consumer startup failed", failure);
     }
   }

@@ -119,22 +119,30 @@ public final class WebLogConsumers implements AutoCloseable {
       return runtime;
     } catch (RuntimeException | Error failure) {
       Throwable retained = failure;
+      Throwable notificationFailure = null;
       try {
         onFatal.run();
       } catch (RuntimeException | Error notification) {
+        notificationFailure = notification;
         if (notification instanceof Error && !(failure instanceof Error)) {
           retained = notification;
           // Error notification and non-Error failure cannot be the same object (PG-D379).
           notification.addSuppressed(failure);
         } else if (notification != failure) failure.addSuppressed(notification);
       }
+      Throwable closingFailure = null;
       try {
         runtime.close();
       } catch (RuntimeException | Error closing) {
+        closingFailure = closing;
         if (closing instanceof Error fatal && !(retained instanceof Error)) throw fatal;
         if (closing != retained) retained.addSuppressed(closing);
       }
       if (retained instanceof Error fatal) throw fatal;
+      TemporaryInfrastructureException.preserveFatal(retained);
+      if (notificationFailure != null)
+        TemporaryInfrastructureException.preserveFatal(notificationFailure);
+      if (closingFailure != null) TemporaryInfrastructureException.preserveFatal(closingFailure);
       throw new IllegalStateException("API Web log consumer startup failed", retained);
     }
   }

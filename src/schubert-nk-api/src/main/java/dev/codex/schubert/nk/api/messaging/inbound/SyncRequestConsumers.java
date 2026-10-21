@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Establishes the four independent transacted API sync consumers before declaring readiness. Each
@@ -30,6 +31,8 @@ public final class SyncRequestConsumers implements AutoCloseable {
   private final AtomicBoolean halted = new AtomicBoolean();
   private final Object closeLock = new Object();
   private final boolean[] contextClosed = new boolean[CONCURRENCY];
+  // SSC333: allocated before acquisition; private per-close scratch, cleared even on failure.
+  private final @Nullable Throwable[] closeFailures = new Throwable[CONCURRENCY];
   private boolean closed;
 
   private SyncRequestConsumers(List<JMSContext> contexts, Consumer<Throwable> onUnconfirmed) {
@@ -133,17 +136,24 @@ public final class SyncRequestConsumers implements AutoCloseable {
       return runtime;
     } catch (RuntimeException | Error failure) {
       Throwable retained = failure;
+      Throwable notificationFailure = null;
       try {
         onFatal.run();
       } catch (RuntimeException | Error notification) {
+        notificationFailure = notification;
         if (notification instanceof Error && !(failure instanceof Error)) {
           retained = notification;
           // Error notification and non-Error failure cannot be the same object (PG-D379).
           notification.addSuppressed(failure);
         } else if (notification != failure) failure.addSuppressed(notification);
       }
-      runtime.closeAfterFailure(retained);
+      Throwable closingFailure = runtime.closeAfterFailure(retained);
       if (retained instanceof Error fatal) throw fatal;
+      if (closingFailure instanceof Error fatal) throw fatal;
+      TemporaryInfrastructureException.preserveFatal(retained);
+      if (notificationFailure != null)
+        TemporaryInfrastructureException.preserveFatal(notificationFailure);
+      if (closingFailure != null) TemporaryInfrastructureException.preserveFatal(closingFailure);
       throw new IllegalStateException("API sync consumer startup failed", retained);
     }
   }
@@ -162,36 +172,47 @@ public final class SyncRequestConsumers implements AutoCloseable {
     halted.set(true);
     synchronized (closeLock) {
       if (closed) return;
-      Throwable failure = null;
-      for (int index = 0; index < contexts.size(); index++) {
-        if (contextClosed[index]) continue;
-        try {
-          contexts.get(index).close();
-          contextClosed[index] = true;
-        } catch (RuntimeException | Error closing) {
-          if (failure == null || closing instanceof Error && !(failure instanceof Error)) {
-            failure = closing;
-          } else if (closing != failure) {
-            failure.addSuppressed(closing);
+      try {
+        Throwable failure = null;
+        for (int index = 0; index < contexts.size(); index++) {
+          if (contextClosed[index]) continue;
+          try {
+            contexts.get(index).close();
+            contextClosed[index] = true;
+          } catch (RuntimeException | Error closing) {
+            closeFailures[index] = closing;
+            if (failure == null || closing instanceof Error && !(failure instanceof Error)) {
+              failure = closing;
+            } else if (closing != failure) {
+              failure.addSuppressed(closing);
+            }
           }
         }
+        if (failure != null) onUnconfirmed.accept(failure);
+        if (failure instanceof Error fatal) throw fatal;
+        if (failure != null) {
+          // No graph accessor runs until all required close attempts/UNKNOWN handoff finish.
+          TemporaryInfrastructureException.preserveFatal(failure);
+          for (Throwable closing : closeFailures) {
+            if (closing != null) TemporaryInfrastructureException.preserveFatal(closing);
+          }
+          throw new IllegalStateException("API sync consumer close failed", failure);
+        }
+        closed = true;
+      } finally {
+        java.util.Arrays.fill(closeFailures, null);
       }
-      if (failure != null) onUnconfirmed.accept(failure);
-      if (failure instanceof Error fatal) throw fatal;
-      if (failure != null) {
-        throw new IllegalStateException("API sync consumer close failed", failure);
-      }
-      closed = true;
     }
   }
 
-  private void closeAfterFailure(Throwable startupFailure) {
+  private @Nullable Throwable closeAfterFailure(Throwable startupFailure) {
     try {
       close();
     } catch (RuntimeException | Error closing) {
-      if (closing instanceof Error fatal && !(startupFailure instanceof Error)) throw fatal;
-      if (closing == startupFailure) return;
-      startupFailure.addSuppressed(closing);
+      if (closing instanceof Error fatal && !(startupFailure instanceof Error)) return fatal;
+      if (closing != startupFailure) startupFailure.addSuppressed(closing);
+      return closing;
     }
+    return null;
   }
 }
