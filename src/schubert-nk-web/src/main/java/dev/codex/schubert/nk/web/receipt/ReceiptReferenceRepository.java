@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.receipt;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
@@ -147,6 +148,7 @@ public final class ReceiptReferenceRepository {
         }
       }
     } catch (SQLException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new ReceiptReferenceException();
     }
   }
@@ -158,6 +160,12 @@ public final class ReceiptReferenceRepository {
 
   /** SS331/332: unknown close dominates known SQL; primary unknown retains fixed diagnostics. */
   private static boolean replace(@Nullable Throwable primary, Throwable secondary) {
+    // SS312/331/332/354; SSC329; preserve the old unknown-selection policy. Only SQLs that
+    // would reach the fixed catalog need this pre-discard graph check. GRAPH329001..003.
+    if (primary instanceof SQLException && secondary instanceof SQLException) {
+      SessionStoreException.preserveFatal(primary);
+      SessionStoreException.preserveFatal(secondary);
+    }
     if (primary == null
         || (primary instanceof SQLException && !(secondary instanceof SQLException))) return true;
     if (!(primary instanceof SQLException)) primary.addSuppressed(new ReceiptReferenceException());

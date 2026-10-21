@@ -1,5 +1,7 @@
 # NK-WEB-002 Scenario階層画面単体テスト仕様書
 
+Program共通追補（2026-10-22、Scenario画面本体の仕様変更なし）：ReceiptReferenceRepositoryのPT-WEB-RECEIPT-GRAPH329001～003は[018/1448](../018_NK-OPS-001/1448_Web_SQLcatalog・REQUEST投影graph単体テスト仕様.md)へ一意に追跡する。SS312/3319.4/332/354・QA048/BUG1592、独立SQL/unknown優先/閉資源counter・固定catalog・例外graphの仕様であり、表示/認可/technical locatorの業務契約は不変更。旧不適格赤/fixture是正は1449、当原資格・coverage未確定分を正式画面PTへ加算しない。
+
 対象: ScenarioController.games/routes/filesと内部認証/交換/終端helper、ScenarioMvcConfiguration、WebMvcConfiguration view allowlist追補、templates/scenarios.html・scenario-routes.html・scenario-files.html・fragments/layout.htmlの共有user操作。FUN004/AUT001～003/SYS006/TST001～005、UI221～223/234/264、SS311/313/314/323/352、SSC071/PG194。他画面や本番bootstrapは対象外。
 
 | Test ID | method | 事前条件/入力/操作 | 独立期待 |

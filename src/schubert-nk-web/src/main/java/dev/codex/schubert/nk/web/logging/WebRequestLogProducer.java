@@ -15,7 +15,9 @@ import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
 import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import dev.codex.schubert.nk.web.security.LoginClientAddress;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.net.InetAddress;
@@ -197,6 +199,8 @@ public final class WebRequestLogProducer {
         Arrays.fill(wire, (byte) 0);
       }
     } catch (SQLException | RuntimeException failure) {
+      // SS312/332/351/354, SSC329330/BUG1592: only ordinary failures reach FAILED audit.
+      SessionStoreException.preserveFatal(failure);
       // Projection is explicitly FAILED; no exception is turned into logging success. Boundaries
       // and constructor null contracts are checked outside this best-effort projection scope.
       details.addProperty("projectionStatus", "FAILED");
@@ -272,7 +276,7 @@ public final class WebRequestLogProducer {
         try {
           connection.rollback();
         } catch (SQLException | RuntimeException rollback) {
-          if (rollback != failure) failure.addSuppressed(rollback);
+          WebStartupException.attachSecondary(failure, rollback);
         } catch (Error fatal) {
           if (fatal != failure) fatal.addSuppressed(failure);
           throw fatal;

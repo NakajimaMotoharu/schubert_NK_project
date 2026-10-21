@@ -8,7 +8,7 @@ import finite_selected_profile as profile
 import finite_original_red as original
 
 OLD='6855dcf9e253599673e57815fc9f408d043d8315'
-RED_SOURCE=None
+RED_SOURCE='c21054c2c712d1f6216301728bf92f25cadc9dce'
 TESTS={
  'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptFailureGraph329Test.java',
  'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test.java'}
