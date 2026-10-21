@@ -1,0 +1,127 @@
+{
+  "actualExceptionCaseRefs": [
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimePendingFailureRetentionTest",
+      "method": "exec325002PendingStartOrAwaitFailureKeepsTheExceptionalFinallyFrame",
+      "module": "web",
+      "result": "PASS_ORIGINAL_XML",
+      "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+      "xmlSha256": "40d07ac339d73287dffea7d4c0ad6fc4ebb5fe9b56cdb5bc4df98f581cc8030f"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecutionRetentionTest",
+      "method": "exec325001UnknownCloseAndDiagnosticFailuresNeverUnwindOrRetry",
+      "module": "web",
+      "result": "PASS_ORIGINAL_XML",
+      "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+      "xmlSha256": "f0fda47fa30ea44f51273725b36159728780bb8d5ebc099aa668417137500eed"
+    }
+  ],
+  "actualExit": 0,
+  "additionalBuildsIssued": 0,
+  "branchPercentage": null,
+  "branchlessOwnerProofs": {
+    "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class": {
+      "branchCounter": "NOT_APPLICABLE_NO_CONDITIONAL_OR_SWITCH",
+      "classSha256": "6e198508e9c7a2944994c5421b574a12b7e362a34524b405f57487879758143e",
+      "conditionalInstructions": [],
+      "instructionCount": 86,
+      "methodCount": 4,
+      "methodInstructionsSha256": "ccfa0f8bf62db18b2513572e76cc237a4b707512447d558ebb21d679c955c29a",
+      "rawCounterPreserved": true,
+      "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d"
+    }
+  },
+  "changedPhysical": [
+    "web:dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.class"
+  ],
+  "classInitializationBeforeExecuteCallbacks": true,
+  "descriptorsPreserved": true,
+  "finallyLoops": [
+    {
+      "backedge": 94,
+      "closeAttempts": 1,
+      "closeHandler": 55,
+      "closeOffset": 47,
+      "diagnosticOffset": 60,
+      "fenceOffsets": [
+        74,
+        78,
+        82,
+        86,
+        91
+      ],
+      "heldLocalSlots": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "loopReturnThrowAllocations": 0,
+      "loopTarget": 65,
+      "tickOffset": 68
+    },
+    {
+      "backedge": 165,
+      "closeAttempts": 1,
+      "closeHandler": 126,
+      "closeOffset": 118,
+      "diagnosticOffset": 131,
+      "fenceOffsets": [
+        145,
+        149,
+        153,
+        157,
+        162
+      ],
+      "heldLocalSlots": [
+        0,
+        1,
+        2,
+        3,
+        6
+      ],
+      "loopReturnThrowAllocations": 0,
+      "loopTarget": 136,
+      "tickOffset": 139
+    }
+  ],
+  "fixedDiagnosticProtected": true,
+  "formalAccepted": false,
+  "ownershipReviewed": true,
+  "preparedPrivateFinalPolicies": true,
+  "productionClassesExecuted": 0,
+  "ptAlternativeCompleted": 0,
+  "qualificationSha256": "f214986209f003c92248644f55e617042af273ab6b652a2e753dffceda30498f",
+  "rawCounter": {
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 3,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 59,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 27,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 3,
+      "missed": 0
+    }
+  },
+  "residual": [
+    "actualVM/Root/native/CHR/global100/F03/451 still separate",
+    "arbitrary stop callback failure and VM fatal termination are outside this local proof"
+  ],
+  "source": "669ad5fd83f67ad031b2c1734d7fc5716599d35d",
+  "testsExecuted": 0,
+  "unchangedPhysical": 1666,
+  "vmActions": 0
+}
