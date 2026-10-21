@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import subprocess
+import re
 from collections import Counter
 from pg5940_private_lock_compile import ROOT,W,BASE,sha
 from pg6276_current4040_trace import SOURCE,read_qualified
@@ -11,11 +12,27 @@ from pg6278_current4040_static_plan import PRIOR,PRIOR_SHA,OLD
 from pg6092_current3985_static_join import source_case_candidates
 from static_disposition_overlay import load,validate_rationales
 
-INPUT=BASE/'PG6288-group-lookup-static-review-v1/manifest.json'
-INPUT_SHA='11a530449d3c3f1967a63be5c3a0ca090363555225dbf32aef72c08250e47d32'
+INPUT=BASE/'PG6292-standalone-thread-context-v1/manifest.json'
+INPUT_SHA='d5d9ce807a77220b7ff1517a95fabe62683acf82a1398ab30d7e97efceafcba7'
 
 
 def current_reference(row):return {k:row[k]for k in ('testId','xmlSha256','class','caseNameSha256','source')}
+
+
+def declared_class_references(declarations,cases,source,read_source):
+    result=[];seen=set()
+    for declaration in declarations:
+        cls=declaration['className']
+        match=re.fullmatch(r'dev\.codex\.schubert\.nk\.(web|batch|api)\.(?:[A-Za-z_$][A-Za-z0-9_$]*\.)*[A-Za-z_$][A-Za-z0-9_$]*',cls)
+        if not match or cls in seen:raise ValueError('one explicit ordinary Web/batch/API semantic Test class')
+        seen.add(cls);module=match.group(1)
+        path='src/schubert-nk-'+module+'/src/test/java/'+cls.replace('.','/')+'.java'
+        if hashlib.sha256(read_source(path)).hexdigest()!=declaration['sourceSha256']:raise ValueError('exact declared current semantic Test source')
+        actual=[r for r in cases if r['class']==cls]
+        if not actual or any(r['source']!=source or r['result']!='PASS_ORIGINAL_XML'for r in actual):raise ValueError('same-source genuine original semantic Test cases')
+        if len({r['caseNameSha256']for r in actual})!=len(actual):raise ValueError('unique semantic case identity')
+        result.extend(current_reference(r)for r in actual)
+    return result
 
 
 def main():
@@ -51,16 +68,8 @@ def main():
                 by_identity[(cls,actual[0]['caseNameSha256'])]=current_reference(actual[0])
             refs=list(by_identity.values())
         if not refs and old.get('plannedCurrentWholeCaseClasses'):
-            for declaration in old['plannedCurrentWholeCaseClasses']:
-                cls=declaration['className']
-                module=next((m for m in ('web','batch')if cls.startswith('dev.codex.schubert.nk.'+m+'.')),None)
-                if module is None:raise ValueError('only explicit ordinary Web/batch semantic Test modules')
-                path='src/schubert-nk-'+module+'/src/test/java/'+cls.replace('.','/')+'.java'
-                text=subprocess.check_output(['git','show',SOURCE+':'+path],cwd=ROOT)
-                if hashlib.sha256(text).hexdigest()!=declaration['sourceSha256']:raise ValueError('exact declared current semantic Test source')
-                actual=[r for r in cases if r['class']==cls]
-                if not actual:raise ValueError('semantic Test class must occur in actual original whole XML')
-                refs.extend(current_reference(r)for r in actual)
+            refs=declared_class_references(old['plannedCurrentWholeCaseClasses'],cases,SOURCE,
+                lambda path:subprocess.check_output(['git','show',SOURCE+':'+path],cwd=ROOT))
         context=old.get('staticContextPremiseOnly')is True and old.get('status')=='CONTEXT_NOT_APPLICABLE'
         if not refs and not context:
             value['wholeSourceQualifiedCaseBindingStillPending']=True

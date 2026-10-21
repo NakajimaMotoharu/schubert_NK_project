@@ -15,3 +15,15 @@ Logはowned(release,action)のaction/cleanupとSessionLeaseのadvisory取得/解
 ConfigurationGroupResolverの実source全18spanを読取り、12は既owned scope/checked IO・interrupt対未知Runtime/Errorの固定secondary契約に必要、6は専用JavaSEプロセス/virtual-thread executor/同caller interruptでありJakarta EE限定DoNotUseThreadsの前提外と判定。各scopeはTERM-before-reader-join/stdio close後buffer wipe、known primary＋unknown cleanup/unknown primary保持・固定secondaryを明示する。実getent/プロセス/lookup/DB/サービスは**起動しない**。既Testの当sourceSHAとactual owner class familyを保存するだけで、GID認証や現在process所有の証拠ではない。
 
 公開PG6288-group-lookup-static-review-v1/manifest.json SHA256 `11a530449d3c3f1967a63be5c3a0ca090363555225dbf32aef72c08250e47d32`。raw1350=103required/6context前提外/846whole-pending/395未判定。source b423の新個別理由は109件（Outbox26＋Web33＋batch32＋lookup18）、旧source判定の再結合832＋元14pendingと区別。context前提外は実停止/owner/PT成功ではない。新5→7→8定義は全0、lookup一定義を含む9結果は次checkpointへ記録。F03全合格/正式加点/拒否PT代替完了0、原24250全回帰観測を継続する。
+
+## 通常API四applicationの12失敗境界（PG6290）
+
+UserMutation/UserQuery/LogQuery/MediaApplicationService各3spanのouter process/transaction SQL-RTE/外側固定Infrastructure分類を個別点検。永久protocol mismatch等の先行専用catchを維持し、一般RTEを成功reply/空queryへ正常化せず固定非成功へ伝える。短いowned JDBC transactionだけをrollback/TWR close、file準備をDB lock中に行わず、ここで別business要求/新connection/retryを発行しない。Mediaの認証拒否・Inbox mismatchはsuppressed未知closeが有ればInfrastructureへ分類する既contractを明示する。**各catchの適用性理由は全てのTWR複合vendor failureの品質認定ではない。**
+
+公開PG6290-application-static-review-v1/manifest.json SHA256 `952e8b7755eb35165a26d1c67a1e9a0ceaffc834c8918a22fbc0e5fe1da662d9`。全1350 raw保持、新個別理由121=required115/context6、whole-pending846/未判定383。actualsource/ownerfamily/当既Test sourceSHAを記録、当全体XMLへの結合前に動的成功を付けない。新一定義を加え10の結果を次checkpointへ記録、原full一回/Main-Test固定/正式・工数null/HOLD不変更。
+
+## 既pinしたPMDのJ2EE前提と16caller観測（PG6292）
+
+実PMD7.28.0 `pmd-java-7.28.0.jar!/category/java/multithreading.xml` SHA256 `a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3`を読取り、DoNotUseThreadsはJ2EE管理threadを前提とすることを確認。SS311/342/343のstandalone batch/bootstrapに残っていた16実spanはcurrentThreadの割込確認/復元又はthreadIdの記録/一致検査であり、J2EE containerで独自threadを作る操作ではない。各実source行/ownerfamilyとJAR非WAR/EAR/EJBの既構成を照合し、個別CONTEXT_NOT_APPLICABLE理由へ分類する。**新thread/process/Unit/VM/DB操作0、native owner確認・実終了を推測0。**
+
+対象=BackupArtifactVerifier2、MaintenanceRunFiles3、ArtemisManagementReadinessClient2、SystemctlStateSource1、LinuxSystemdSession2、MaintenanceOwnerFrame2、SystemManagerObservation4。公開PG6292-standalone-thread-context-v1/manifest.json SHA256 `d5d9ce807a77220b7ff1517a95fabe62683acf82a1398ab30d7e97efceafcba7`。raw1350=required115/context22/whole-pending846/未判定367、新個別理由137。全診断を保持し、NOPMD/除外/rule変更なし。contextの前提外は品質条件緩和ではなく、実rowごとの限定適用性判定でF03全受入にはしない。二工具定義とwrong-rulehash負例を実施し、元whole観測継続、当actualqualification前のjoinは行わない。
