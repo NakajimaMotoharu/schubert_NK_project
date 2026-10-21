@@ -29,6 +29,15 @@ source4ce1521aa80d2a77920df68ee03889df6cbbdf3f、archive SHA a6c13b4e6d4eba7d48d
 
 ## PGと別パス点検
 
+当d48fの別経路sourceレビュー（実行PT/拒否代替ではない）:
+
+- RB334-01: API三slot/owner listと親三group/stateは取得前準備、partialの未返却providerはprovider自身のconfigureOwned責務、返却後はreverse owned closeへ記録する。最初の取得失敗を取得済みと扱わない。
+- RB334-02: API/WebのstateLockはsupplier/createContext/stop/closeを直列化。scratchはprivateでclose lock内だけ使用、clear異常でも内finally unlock（1608）。context利用期間自体は外側がconsumer→broker順に止める既責務であり、新たなborrow期限/再取得権限を作らない。
+- RB334-03: 親groupsはprivate、追加されるSync/WebLog/Questionは実final child。普通の非Error closeは新しい固定cause wrapper、Errorは直接という契約なので親final guardで全保持graphへ到達する。反射で到達不能NoSupp groupを作らず、直接Error優先表は従来どおり。他のgroup失敗でも全試行・成功phase再close0を維持する。
+- RB334-04: 原startup primary/通知/非Error cleanup causeを別参照で持ち、全必要close後にだけ分類。native onUnconfirmedが非帰還ならそのままUNKNOWN、捕捉して正常returnへ変えない。openのguardがErrorをthrowしてもcopy取得済みなら既finally wipe・外finally unlock、未取得copyやcaller factoryを勝手に消去/closeしない。新catalog/公開JSON/logへprivate graphを追加しない。
+
+四点はSS321/354と実class/取得・帰還順からの点検であり、実VM所有・native資格・新source全体PASS/global100の証拠ではない。後者は1471元終端/原資格/実counter待ち、ptAlternativeCompletedは0のまま。
+
 四Main/PG-D499のみ。標準suppressionでprimary identityとreverse個別secondaryを維持するraw factory境界、fixed cause-less redaction前のfinal guardを区別。全closeより前にgraph accessorを呼ばない。直接Errorの既優先表→正常returnしたUNKNOWN callback→graph分類、scratch finally clear、createContext finally wipe、成功owner再close0をsource順から再点検。親groupは実公開childの固定cause carrierに限定し、届かないNoSupp groupを反射で作らない。実UNKNOWN非帰還を復旧済みとせず、実資源保留解除0。format32741終了0・Test差0。
 
 次commandは同driver green（新only6702/宣言127PT33suite）→元真正0後qualify-green（6704）。全851source/1667physical・六Jar/XML・四counter・静的の実数を記録し、必要同source全体/横展開完了前に全閉鎖しない。現在green未実施/合格未認定。旧f16f全4170/903b83・各native/traceを新sourceへ転用0。
