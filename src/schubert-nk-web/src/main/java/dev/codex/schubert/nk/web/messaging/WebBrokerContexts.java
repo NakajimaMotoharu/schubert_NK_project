@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.messaging;
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
 import java.util.Arrays;
@@ -124,7 +125,8 @@ public final class WebBrokerContexts implements AutoCloseable {
           secondary.addSuppressed(primary);
           throw secondary;
         }
-        if (secondary != primary) primary.addSuppressed(secondary);
+        // SSC334/FACT334008: classify an unretained secondary only after the owned close.
+        WebStartupException.attachSecondary(primary, secondary);
       }
       throw primary;
     }
@@ -158,6 +160,7 @@ public final class WebBrokerContexts implements AutoCloseable {
       try {
         copy = Objects.requireNonNull(passwords.get(), "password copy");
       } catch (RuntimeException failure) {
+        WebStartupException.preserveFatal(failure);
         throw new IllegalStateException(UNAVAILABLE);
       }
       try {
@@ -167,6 +170,7 @@ public final class WebBrokerContexts implements AutoCloseable {
             factory.createContext("nk_web", new String(copy), JMSContext.SESSION_TRANSACTED),
             "JMS context");
       } catch (RuntimeException failure) {
+        WebStartupException.preserveFatal(failure);
         throw new IllegalStateException(UNAVAILABLE);
       } finally {
         Arrays.fill(copy, '\0');
@@ -187,7 +191,7 @@ public final class WebBrokerContexts implements AutoCloseable {
       } catch (Exception | Error failure) {
         onUnconfirmed.accept(failure);
         if (failure instanceof Error fatal) throw fatal;
-        dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
+        WebStartupException.preserveFatal(failure);
         throw new IllegalStateException("Web broker factory close failed");
       }
       closed = true;

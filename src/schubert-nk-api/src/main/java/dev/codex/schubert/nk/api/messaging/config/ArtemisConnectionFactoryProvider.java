@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.config;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import java.util.Map;
 import java.util.Objects;
@@ -102,7 +103,8 @@ public enum ArtemisConnectionFactoryProvider {
           secondary.addSuppressed(primary);
           throw secondary;
         }
-        if (secondary != primary) primary.addSuppressed(secondary);
+        // SSC334/FACT334004: retain the legacy raw carrier; fallback only if it cannot attach.
+        TemporaryInfrastructureException.attachSecondary(primary, secondary);
       }
       throw primary;
     }

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.config;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
@@ -35,6 +36,8 @@ public final class ApiBrokerContexts implements AutoCloseable {
   private final @Nullable ConnectionFactory retainedAsync;
   private final List<AutoCloseable> owners;
   private final boolean[] ownerClosed;
+  // SSC334/FACT334002..003: prepare scratch before any factory acquisition; never publish it.
+  private final @Nullable Throwable[] closeFailures = new Throwable[3];
   private final Consumer<Throwable> onUnconfirmed;
   private boolean stopping;
   private boolean closed;
@@ -121,16 +124,28 @@ public final class ApiBrokerContexts implements AutoCloseable {
       this.retainedWebLog = webLog;
       this.retainedAsync = async;
     } catch (RuntimeException | Error failure) {
-      for (int index = owners.size() - 1; index >= 0; index--) {
-        try {
-          owners.get(index).close();
-        } catch (Exception | Error closing) {
-          onUnconfirmed.accept(closing);
-          // Keep the existing partial-factory primary and individual reverse-order secondary.
-          if (closing != failure) failure.addSuppressed(closing);
+      try {
+        for (int index = owners.size() - 1; index >= 0; index--) {
+          try {
+            owners.get(index).close();
+          } catch (Exception | Error closing) {
+            closeFailures[index] = closing;
+            onUnconfirmed.accept(closing);
+            // Keep the existing raw primary and individual reverse-order secondary.
+            if (closing != failure) failure.addSuppressed(closing);
+          }
         }
+        if (failure.getSuppressed().length == 0) {
+          // Only an unretained secondary needs fallback, after all required close attempts.
+          for (int index = owners.size() - 1; index >= 0; index--) {
+            Throwable closing = closeFailures[index];
+            if (closing != null) TemporaryInfrastructureException.attachSecondary(failure, closing);
+          }
+        }
+        throw failure;
+      } finally {
+        Arrays.fill(closeFailures, null);
       }
-      throw failure;
     }
   }
 
@@ -196,6 +211,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
       try {
         copy = Objects.requireNonNull(passwords.get(), "password copy");
       } catch (RuntimeException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         throw new IllegalStateException(UNAVAILABLE);
       }
       try {
@@ -205,6 +221,7 @@ public final class ApiBrokerContexts implements AutoCloseable {
             factory.createContext("nk_api", new String(copy), JMSContext.SESSION_TRANSACTED),
             "JMS context");
       } catch (RuntimeException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         throw new IllegalStateException(UNAVAILABLE);
       } finally {
         Arrays.fill(copy, '\0');
@@ -227,15 +244,24 @@ public final class ApiBrokerContexts implements AutoCloseable {
           owners.get(index).close();
           ownerClosed[index] = true;
         } catch (Exception | Error closing) {
+          closeFailures[index] = closing;
           if (failure == null || closing instanceof Error && !(failure instanceof Error))
             failure = closing;
         }
       }
       if (failure != null) onUnconfirmed.accept(failure);
       if (failure instanceof Error fatal) throw fatal;
-      if (failure != null) throw new IllegalStateException("API broker factory close failed");
+      if (failure != null) {
+        TemporaryInfrastructureException.preserveFatal(failure);
+        for (int index = owners.size() - 1; index >= 0; index--) {
+          Throwable closing = closeFailures[index];
+          if (closing != null) TemporaryInfrastructureException.preserveFatal(closing);
+        }
+        throw new IllegalStateException("API broker factory close failed");
+      }
       closed = true;
     } finally {
+      Arrays.fill(closeFailures, null);
       stateLock.unlock();
     }
   }

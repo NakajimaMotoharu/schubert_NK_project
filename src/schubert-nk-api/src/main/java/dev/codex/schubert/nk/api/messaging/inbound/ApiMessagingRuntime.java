@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import jakarta.jms.JMSContext;
 import java.time.Clock;
@@ -182,9 +183,12 @@ public final class ApiMessagingRuntime implements AutoCloseable {
       return runtime;
     } catch (RuntimeException | Error failure) {
       Throwable retained = failure;
+      Throwable notificationFailure = null;
+      Throwable cleanupFailure = null;
       try {
         fatalSignal.run();
       } catch (RuntimeException | Error notification) {
+        notificationFailure = notification;
         if (notification instanceof Error && !(failure instanceof Error)) {
           retained = notification;
           // Error notification and non-Error failure cannot be the same object (PG-D379).
@@ -198,10 +202,16 @@ public final class ApiMessagingRuntime implements AutoCloseable {
         // first group cause. Preserve the original startup cleanup boundary, not that wrapper.
         var cleanup =
             closing instanceof Error ? closing : Objects.requireNonNull(closing.getCause());
+        cleanupFailure = cleanup;
         if (cleanup instanceof Error fatal && !(retained instanceof Error)) throw fatal;
         if (cleanup != retained) retained.addSuppressed(cleanup);
       }
       if (retained instanceof Error fatal) throw fatal;
+      // SSC334/FACT334005: all owned groups have been attempted before graph classification.
+      TemporaryInfrastructureException.preserveFatal(retained);
+      if (notificationFailure != null)
+        TemporaryInfrastructureException.preserveFatal(notificationFailure);
+      if (cleanupFailure != null) TemporaryInfrastructureException.preserveFatal(cleanupFailure);
       throw new IllegalStateException("API messaging startup failed", retained);
     }
   }
@@ -239,6 +249,9 @@ public final class ApiMessagingRuntime implements AutoCloseable {
       }
     }
     if (failure instanceof Error fatal) throw fatal;
-    if (failure != null) throw new IllegalStateException("API messaging close failed", failure);
+    if (failure != null) {
+      TemporaryInfrastructureException.preserveFatal(failure);
+      throw new IllegalStateException("API messaging close failed", failure);
+    }
   }
 }
