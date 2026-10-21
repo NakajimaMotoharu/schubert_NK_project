@@ -2,8 +2,10 @@ package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageAttributeGuard;
 import dev.codex.schubert.nk.storage.StorageIdentity;
 import dev.codex.schubert.nk.storage.StorageIoException;
@@ -44,7 +46,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
+import java.util.function.ToIntBiFunction;
 import javax.sql.DataSource;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -64,6 +68,12 @@ final class WebNativeRuntime implements AutoCloseable {
   private final Map<String, String> information;
   private final WebHttpAdmission admission;
   private final BooleanSupplier ownerStopping;
+  private final ResourceScope.Acquire<DirectoryCalls, StorageIoException> directories;
+  private final BiFunction<WebNonSecretConfig, String, Path> paths;
+  private final ToIntBiFunction<WebNonSecretConfig, String> ports;
+  private final ResourceScope.OwnedAction<
+          Map.Entry<OwnedTransferDirectory, StorageIdentity>, @Nullable Boolean>
+      directoryProof;
   private final AtomicBoolean terminal = new AtomicBoolean();
   private final WebRuntimeFailureSignal<CommittedFatalReplyException> failureSignal =
       new WebRuntimeFailureSignal<>(terminal);
@@ -88,20 +98,45 @@ final class WebNativeRuntime implements AutoCloseable {
       ServiceStartupAdmission.Ready ready,
       BooleanSupplier ownerStopping)
       throws IOException {
+    this(
+        database,
+        credentials,
+        config,
+        ready,
+        ownerStopping,
+        LinuxDirectoryCalls::create,
+        WebNativeRuntime::nativePath,
+        WebNativeRuntime::nativePort,
+        WebNativeRuntime::nativeVerify);
+  }
+
+  /** SSC327/PG-D482: internal ports only; Production retains the fixed five-argument binding. */
+  WebNativeRuntime(
+      DataSource database,
+      ServiceCredentialSet credentials,
+      WebNonSecretConfig config,
+      ServiceStartupAdmission.Ready ready,
+      BooleanSupplier ownerStopping,
+      ResourceScope.Acquire<DirectoryCalls, StorageIoException> directories,
+      BiFunction<WebNonSecretConfig, String, Path> paths,
+      ToIntBiFunction<WebNonSecretConfig, String> ports,
+      ResourceScope.OwnedAction<
+              Map.Entry<OwnedTransferDirectory, StorageIdentity>, @Nullable Boolean>
+          directoryProof)
+      throws IOException {
     this.database = Objects.requireNonNull(database, "Web database");
     this.credentials = Objects.requireNonNull(credentials, "Web credentials");
     this.config = Objects.requireNonNull(config, "Web config");
     this.retainedReady = Objects.requireNonNull(ready, "Root admission ready");
     this.information = Map.copyOf(ready.information());
     this.ownerStopping = Objects.requireNonNull(ownerStopping, "Web stop notification");
+    this.directories = Objects.requireNonNull(directories, "Web directory acquire");
+    this.paths = Objects.requireNonNull(paths, "Web internal paths");
+    this.ports = Objects.requireNonNull(ports, "Web internal ports");
+    this.directoryProof = Objects.requireNonNull(directoryProof, "Web directory proof");
     this.admission = new WebHttpAdmission(ownerStopping);
   }
 
-  @SuppressFBWarnings(
-      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
-      matchType = SuppressMatchType.EXACT,
-      justification =
-          "SS343 fixed Web runtime namespace under systemd ownership; no caller path or override")
   void start() throws IOException, org.apache.catalina.LifecycleException {
     synchronized (ownerLock) {
       if (startAttempted || stopping.get()) throw new IOException("Web startup unavailable");
@@ -111,19 +146,21 @@ final class WebNativeRuntime implements AutoCloseable {
       new WebDependencyReadiness(database, currentBroker.contexts()).verify();
       codecs = WebNativeCodecs.create(credentials);
       var keys = Objects.requireNonNull(codecs);
-      var directories = LinuxDirectoryCalls.create();
+      var directoryCalls = Objects.requireNonNull(directories.open(), "Web directory calls");
       transfer =
           OwnedTransferDirectory.open(
-              directories, Path.of(config.value("nk.web.storage.transfer-root")));
+              directoryCalls, paths.apply(config, "nk.web.storage.transfer-root"));
       var transferRoot = Objects.requireNonNull(transfer);
       var transferIdentity = new StorageIdentity("schubert-api", "schubert-web");
-      verify(transferRoot, transferIdentity);
+      if (!Boolean.TRUE.equals(directoryProof.run(Map.entry(transferRoot, transferIdentity))))
+        throw new IOException("Web directory proof unavailable");
       assets =
           OwnedTransferDirectory.open(
-              directories, Path.of(config.value("nk.web.storage.asset-root")));
+              directoryCalls, paths.apply(config, "nk.web.storage.asset-root"));
       var assetRoot = Objects.requireNonNull(assets);
       var assetIdentity = new StorageIdentity("schubert-data", "schubert-read");
-      verify(assetRoot, assetIdentity);
+      if (!Boolean.TRUE.equals(directoryProof.run(Map.entry(assetRoot, assetIdentity))))
+        throw new IOException("Web directory proof unavailable");
       var clock = Clock.systemUTC();
       var timeout = replyTimeout(config);
       var client =
@@ -196,8 +233,8 @@ final class WebNativeRuntime implements AutoCloseable {
               audit,
               UUID::randomUUID);
       application.startOwnedWithCoreSessionDependencies(
-          Path.of("/run/schubert-nk/web"),
-          Integer.parseInt(config.value("nk.web.http.port")),
+          paths.apply(config, "runtime"),
+          ports.applyAsInt(config, "nk.web.http.port"),
           assembly::dependencies,
           owned -> http = owned,
           WebBusinessAssembly.configurations());
@@ -206,7 +243,7 @@ final class WebNativeRuntime implements AutoCloseable {
           WebManagementServer.bind(
               information,
               this::healthy,
-              Integer.parseInt(config.value("nk.web.management.port")),
+              ports.applyAsInt(config, "nk.web.management.port"),
               com.sun.net.httpserver.HttpServer::create);
       var control = Objects.requireNonNull(management);
       control.start();
@@ -216,6 +253,38 @@ final class WebNativeRuntime implements AutoCloseable {
             admission.admit();
           });
     }
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      matchType = SuppressMatchType.EXACT,
+      justification =
+          "SS343 fixed Web runtime namespace under systemd ownership; no caller path or override")
+  static Path nativePath(WebNonSecretConfig config, String key) {
+    Objects.requireNonNull(config, "Web config");
+    return switch (Objects.requireNonNull(key, "Web internal path key")) {
+      case "runtime" -> Path.of("/run/schubert-nk/web");
+      case "nk.web.storage.transfer-root", "nk.web.storage.asset-root" ->
+          Path.of(config.value(key));
+      default -> throw new IllegalArgumentException("Web internal path unavailable");
+    };
+  }
+
+  static int nativePort(WebNonSecretConfig config, String key) {
+    Objects.requireNonNull(config, "Web config");
+    return switch (Objects.requireNonNull(key, "Web internal port key")) {
+      case "nk.web.http.port", "nk.web.management.port" -> Integer.parseInt(config.value(key));
+      default -> throw new IllegalArgumentException("Web internal port unavailable");
+    };
+  }
+
+  static Boolean nativeVerify(Map.Entry<OwnedTransferDirectory, StorageIdentity> entry)
+      throws StorageIoException {
+    Objects.requireNonNull(entry, "Web directory proof entry");
+    verify(
+        Objects.requireNonNull(entry.getKey(), "Web directory"),
+        Objects.requireNonNull(entry.getValue(), "Web directory identity"));
+    return Boolean.TRUE;
   }
 
   private static final Set<String> REQUIRED_PATHS =
