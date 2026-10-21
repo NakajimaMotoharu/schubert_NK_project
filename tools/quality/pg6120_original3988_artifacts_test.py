@@ -26,7 +26,7 @@ class Definition(unittest.TestCase):
         emitted = subject.reader.emitted('0'*64, '/home/mini/schubert-nk-pgpt/transfer/PG6120-definition-only')
         self.assertEqual(0, check(emitted, '<complete original reader definition>'))
         self.assertIn("('PG6118', (3988, 595, 1667), 4)", source)
-        self.assertIn("campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408', 'PG6452')", source)
+        self.assertIn("campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408', 'PG6452', 'PG6490')", source)
         self.assertIn('expected_case_keys', source)
 
 

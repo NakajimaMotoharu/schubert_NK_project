@@ -66,14 +66,14 @@ def analyze(raw, verbose, physical):
 
 
 def main():
-    qp = BASE/'PG6488-web-owned-component-qualification-v3/manifest.json'
-    q = json.loads(qp.read_bytes()); pp = W/'pg6488-web-owned-component-qualification-v3/manifest.safe.json'
+    qp = BASE/'PG6496-web-owned-component-qualification-v4/manifest.json'
+    q = json.loads(qp.read_bytes()); pp = W/'pg6496-web-owned-component-qualification-v4/manifest.safe.json'
     if q['actualExit'] != 0 or (q['tests'], q['suites'], q['physicalMain']) != (27, 11, 1667) or sha(pp) != q['privateManifestSha256']:
         raise ValueError('genuine original27 all-source qualification first')
     proof = json.loads(pp.read_bytes()); source = q['source']
     if {p.relative_to(ROOT).as_posix(): sha(p) for p in ROOT.glob('src/*/src/main/java/**/*.java')} != proof['allSourceHashes']:
         raise ValueError('all851 current Main fixed')
-    snapshot = W/'pg6486-web-owned-component-v3/source'; jar = snapshot/JAR
+    snapshot = W/'pg6494-web-owned-component-v4/source'; jar = snapshot/JAR
     prior = W/'pg6466-nio-collision-selected-v1/source'/JAR
     with zipfile.ZipFile(jar) as archive:
         physical = archive.read(CLS.replace('.', '/')+'.class')

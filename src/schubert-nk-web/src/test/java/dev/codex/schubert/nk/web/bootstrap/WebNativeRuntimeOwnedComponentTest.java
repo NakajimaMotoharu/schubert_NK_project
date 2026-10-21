@@ -385,6 +385,8 @@ final class WebNativeRuntimeOwnedComponentTest {
 
     Fixture(Path root) throws Exception {
       this.root = root;
+      // Validate the exact shared fixture format before creating any external owned resource.
+      assertEquals("tcp://127.0.0.1:1", configAtPort(1).value("nk.mq.url"));
       for (String name : new String[] {"runtime", "transfer", "assets", "keys"})
         Files.createDirectory(root.resolve(name));
       database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("database")));
@@ -429,8 +431,12 @@ final class WebNativeRuntimeOwnedComponentTest {
     }
 
     WebNonSecretConfig config() throws java.security.NoSuchAlgorithmException {
-      return WebNonSecretConfig.parse(
-          "nk:\n  mq:\n    url: tcp://127.0.0.1:" + brokerPort + "\n", "");
+      return configAtPort(brokerPort);
+    }
+
+    private static WebNonSecretConfig configAtPort(int port)
+        throws java.security.NoSuchAlgorithmException {
+      return WebNonSecretConfig.parse("", "nk.mq.url: tcp://127.0.0.1:" + port + "\n");
     }
 
     DataSource source() {
