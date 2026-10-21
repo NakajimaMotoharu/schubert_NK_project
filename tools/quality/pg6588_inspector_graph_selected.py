@@ -8,7 +8,7 @@ import finite_selected_profile as profile
 import finite_original_red as original
 
 OLD='794207803ebc219f4ff93d4f7079a2d98da0d713'
-RED_SOURCE=None
+RED_SOURCE='a602a2cd19b47bd29e0dfbae3a560ee6d88f33a8'
 TEST='src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java'
 NAMES={'InspectorDatabaseConnections','AuthenticationInboxInspector','NonAuthenticationInboxInspector','QuestionMutationInboxInspector'}
 MAINS={'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/'+n+'.java' for n in NAMES}

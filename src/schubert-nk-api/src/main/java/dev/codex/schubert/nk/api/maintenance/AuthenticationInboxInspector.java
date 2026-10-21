@@ -87,6 +87,7 @@ public final class AuthenticationInboxInspector {
         | AuthenticationInfrastructureException
         | ResponseSnapshotException
         | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       return false;
     }
   }

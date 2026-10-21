@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
 import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
@@ -173,6 +174,7 @@ public final class NonAuthenticationInboxInspector {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return false;
     }
   }

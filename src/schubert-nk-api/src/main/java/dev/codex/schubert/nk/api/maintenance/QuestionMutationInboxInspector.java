@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
 import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
@@ -143,6 +144,7 @@ public final class QuestionMutationInboxInspector {
         | IllegalArgumentException
         | IllegalStateException
         | DateTimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return false;
     }
   }

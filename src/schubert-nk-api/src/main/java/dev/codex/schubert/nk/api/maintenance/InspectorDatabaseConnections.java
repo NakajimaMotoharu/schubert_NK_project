@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,7 +59,8 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
   }
 
   /**
-   * Returns an admitted fresh connection owned by caller, never retained/closed by this provider.
+   * Returns an admitted fresh connection owned by caller; only unreturned failed admission is
+   * closed here. SS312/332/343/354; SSC329330; BUG1595/YKT1348; PT-DB-INSPECTOR-GRAPH329001..006.
    */
   @Override
   public Connection open() throws SQLException {
@@ -73,15 +75,20 @@ public final class InspectorDatabaseConnections implements SqlConnectionProvider
       try {
         Connection connection = connector.connect(url, properties);
         if (connection == null) throw unavailable();
-        boolean returned = false;
         try {
           admit(connection);
-          returned = true;
           return connection;
-        } finally {
-          if (!returned) connection.close();
+        } catch (SQLException | RuntimeException | Error failure) {
+          try {
+            connection.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            TemporaryInfrastructureException.attachSecondary(failure, secondary);
+          }
+          TemporaryInfrastructureException.preserveFatal(failure);
+          throw failure;
         }
       } catch (SQLException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         throw unavailable();
       } finally {
         properties.clear();
