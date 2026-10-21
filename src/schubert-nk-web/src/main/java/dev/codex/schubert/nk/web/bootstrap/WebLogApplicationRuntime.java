@@ -20,6 +20,7 @@ import dev.codex.schubert.nk.web.security.MqLoginClient;
 import dev.codex.schubert.nk.web.security.MqLoginContextProbe;
 import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
 import dev.codex.schubert.nk.web.session.SessionStoreException;
+import java.lang.ref.Reference;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Duration;
@@ -43,6 +44,12 @@ import org.jspecify.annotations.Nullable;
  * 314/321/324/342/352; PG231/PT-SCR127..130.
  */
 public final class WebLogApplicationRuntime implements AutoCloseable {
+  // SSC324/PG-D478: initialize protected actions before any startup resource factory runs.
+  private static final Consumer<Throwable> UNKNOWN_DIAGNOSTIC =
+      dev.codex.schubert.nk.api.file.ServiceProcessResources.unknownReleaseDiagnosticPolicy();
+  private static final Runnable UNKNOWN_INTERVAL =
+      dev.codex.schubert.nk.api.file.ServiceProcessResources.unknownReleaseObservationPolicy();
+
   private final AutoCloseable http;
   private final AutoCloseable replay;
   private final AutoCloseable replies;
@@ -267,13 +274,25 @@ public final class WebLogApplicationRuntime implements AutoCloseable {
 
   static void closeAfterFailure(
       Exception startupFailure, @Nullable AutoCloseable replay, AutoCloseable replies) {
-    for (AutoCloseable resource : new AutoCloseable[] {replay, replies}) {
-      if (resource != null) {
-        try {
-          resource.close();
-        } catch (Exception closing) {
-          if (startupFailure != closing) startupFailure.addSuppressed(closing);
-        }
+    Objects.requireNonNull(startupFailure, "startup failure");
+    Objects.requireNonNull(replies, "owned replies");
+    if (replay != null) closeStartupResource(startupFailure, replay, replies);
+    closeStartupResource(startupFailure, replies, null);
+  }
+
+  private static void closeStartupResource(
+      Exception startupFailure, AutoCloseable resource, @Nullable AutoCloseable downstream) {
+    try {
+      resource.close();
+    } catch (Exception | Error unconfirmed) {
+      UNKNOWN_DIAGNOSTIC.accept(unconfirmed);
+      // No retry or downstream release. Each finite tick keeps the same original owner frame.
+      while (true) {
+        UNKNOWN_INTERVAL.run();
+        Reference.reachabilityFence(startupFailure);
+        Reference.reachabilityFence(unconfirmed);
+        Reference.reachabilityFence(resource);
+        Reference.reachabilityFence(downstream);
       }
     }
   }

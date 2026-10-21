@@ -184,6 +184,16 @@ public final class ServiceProcessResources {
     return ServiceProcessResources::retainUnknownRelease;
   }
 
+  /** SSC324/PG-D478: prebuild before acquisition when the caller owns the retaining frame. */
+  public static Consumer<Throwable> unknownReleaseDiagnosticPolicy() {
+    return ServiceProcessResources::diagnoseUnknownRelease;
+  }
+
+  /** Protected finite tick only; caller must retain its owners in a non-returning loop. */
+  public static Runnable unknownReleaseObservationPolicy() {
+    return () -> observeUnknownInterval(UNKNOWN_OBSERVATION, UNKNOWN_FALLBACK);
+  }
+
   // A finite observer may inspect the failure in component PT; returning still rethrows UNKNOWN.
   static <R> ResourceScope.Release<R> ownedRelease(
       ResourceScope.Release<R> release, Consumer<Throwable> onUnconfirmed) {
