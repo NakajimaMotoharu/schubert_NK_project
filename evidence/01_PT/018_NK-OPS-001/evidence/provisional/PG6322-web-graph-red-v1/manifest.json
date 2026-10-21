@@ -1,0 +1,58 @@
+{
+  "source": "fb06b82db9db04837050e48c48899019312b133a",
+  "branch": "dev-foundation",
+  "run": "pg6322-web-graph-red-v1",
+  "startedUTC": "2026-10-21T02:45:03.318126+00:00",
+  "completedUTC": "2026-10-21T02:47:00.650530+00:00",
+  "command": "python3 -B tools/quality/pg6322_web_graph_red.py",
+  "actualExit": 1,
+  "mavenActualExit": 1,
+  "declaredTests": 53,
+  "declaredSuites": 10,
+  "actualTests": 51,
+  "actualSuites": 8,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "notRunTests": 2,
+  "notRunSuites": 2,
+  "sourceMainUnchangedFrom": "65facffca6123ab4314864b4e934b6d4b007404e",
+  "originalArchiveSha256": "97441ad395e5521011c6fb08237da77f5dd30c25867de63bbc42978434107339",
+  "originalManifestSha256": "a8d955560d4e745e5ad73b239ef35d582b9f3589a1efff4455450a14c0894f99",
+  "failuresVerifiedFromOriginalXml": [
+    {
+      "testId": "PT-IDEM-GRAPH323001",
+      "class": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+      "method": "graph323001ProviderFatalEdgesStopWithoutOrdinaryFailedCycle",
+      "xmlSha256": "09bff1423cf57a78026d257d4c27608585f390c743115930d9a2a53dd09a1715",
+      "expected": "fatal linked Error produces owned worker terminal without ordinary failedCycle",
+      "actual": "terminal condition not reached within independent bounded observation"
+    },
+    {
+      "testId": "PT-IDEM-GRAPH323002",
+      "class": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+      "method": "graph323002ProviderFatalNeverMarksOrdinaryFailureAndNullEdgesStillRetry",
+      "xmlSha256": "2c753f0532621b9ab77a1ccf8d8c5b147a5909a9d4396af8872e9b317c96b910",
+      "expected": "identical linked Error before ordinary failure mark",
+      "actual": "dispatch returned without throwing Error"
+    }
+  ],
+  "newNormalCase": {
+    "testId": "PT-IDEM-GRAPH322003",
+    "class": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcherTest",
+    "method": "graph322003NullProviderEdgesKeepOrdinaryFailureAndExactRetryPostconditions",
+    "xmlSha256": "24ac10ee1e5228e322a7dcf4f0a3b4fd3c6acd488047c0bd364a73706f58a339",
+    "result": "PASS_ORIGINAL_XML_NOT_GLOBAL_COVERAGE"
+  },
+  "remainingFailureMatrixInputs": "NOT_REACHED_RETAINED_NOT_PASS",
+  "coverage": "Web post-test report not executed; generated zero placeholders are not measured success; API counters belong to this red subset only",
+  "originalArtifactPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6322-web-graph-red-v1",
+  "bugIds": ["BUG-1573"],
+  "yktIds": ["YKT-1323", "YKT-1328"],
+  "sscIds": ["SSC-323"],
+  "productionClassesChanged": 0,
+  "vmActions": 0,
+  "formalAccepted": false,
+  "ptAlternativeCompleted": 0,
+  "privateProviderTextRetained": false
+}

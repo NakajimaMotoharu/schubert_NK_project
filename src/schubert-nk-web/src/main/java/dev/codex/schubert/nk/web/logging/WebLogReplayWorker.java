@@ -68,7 +68,7 @@ public final class WebLogReplayWorker implements AutoCloseable {
         lastReport = Objects.requireNonNull(action.dispatch(), "web log report");
         completedCycles.incrementAndGet();
       } catch (SQLException | RuntimeException failure) {
-        dev.codex.schubert.nk.web.session.SessionStoreException.preserveFatal(failure);
+        WebLogDispatcher.preserveFatal(failure);
         // Do not emit provider text or payload. A later due/expired lease is replayed next cycle.
         failedCycles.incrementAndGet();
       }

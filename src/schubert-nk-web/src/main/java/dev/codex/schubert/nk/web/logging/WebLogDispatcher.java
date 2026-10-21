@@ -1,11 +1,17 @@
 package dev.codex.schubert.nk.web.logging;
 
+import jakarta.jms.JMSException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Clock;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import javax.sql.DataSource;
 import org.jspecify.annotations.Nullable;
 
@@ -67,8 +73,10 @@ public final class WebLogDispatcher {
       sender.send(row);
       return Optional.empty();
     } catch (WebLogPayloadException failure) {
+      preserveFatal(failure);
       return Optional.of("WEB_LOG_PAYLOAD_INVALID");
     } catch (WebLogSendException failure) {
+      preserveFatal(failure);
       return Optional.of("JMS_SEND_FAILURE");
     }
   }
@@ -113,6 +121,29 @@ public final class WebLogDispatcher {
         throw fatal;
       }
       if (closing != primary) primary.addSuppressed(closing);
+    }
+  }
+
+  /** SSC323/PT-IDEM-GRAPH323001/002: transient provider graph before ordinary mark/retry. */
+  static void preserveFatal(Throwable failure) {
+    var pending = new ArrayDeque<Throwable>();
+    Set<Throwable> seen = Collections.newSetFromMap(new IdentityHashMap<>());
+    pending.add(failure);
+    while (!pending.isEmpty()) {
+      Throwable candidate = pending.remove();
+      if (!seen.add(candidate)) continue;
+      if (candidate instanceof Error fatal) throw fatal;
+      Throwable cause = candidate.getCause();
+      if (cause != null) pending.add(cause);
+      pending.addAll(Arrays.asList(candidate.getSuppressed()));
+      if (candidate instanceof JMSException jms) {
+        Exception linked = jms.getLinkedException();
+        if (linked != null) pending.add(linked);
+      }
+      if (candidate instanceof SQLException sql) {
+        SQLException next = sql.getNextException();
+        if (next != null) pending.add(next);
+      }
     }
   }
 
