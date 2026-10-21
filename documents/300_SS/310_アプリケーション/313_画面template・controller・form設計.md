@@ -1,5 +1,7 @@
 # 画面template・controller・form設計
 
+SSC327（2026-10-21、WebNativeRuntime component PT）：ordinary Webの実startup body/五volatile公開/二ownerLock/五borrowed aliasを、実Root許可とは分離した自己所有DB/JMS/HTTPで検証するため、同package内の既標準functional型によるI/O portを追加する。Productionの既5引数constructorとWebProcessMain唯一の5引数構築は維持し、directory Acquire・path BiFunction・port ToIntBiFunction・directory検証OwnedActionを固定native method referenceへbindする。追加の9引数constructorは内部component用のみで、CLI/YAML/ENV/HTTP/署名・権限へ選択入口を設けない。通常配置の固定path/OS identity/port値・Root admission/promote・業務/画面/電文/DBは不変更。SS343/354、WEBOWN327001～007に追跡し、既空owner成功を当実startupの代替にしない。
+
 ## SSC325 Web借用frameのUNKNOWN診断故障
 
 WebRuntimeExecution.executeでcloseが未確認となった場合、固定「WEB cleanup unconfirmed」の診断自体がRuntimeException/Errorをthrowしても元borrowed frameをunwindしない。保護診断と固定有限観測policyは取得前に準備し、start/await/stop/close callbackと元unconfirmedを同frame loop内の到達性fenceで保持する。正常順序・stop通知の既非throwing native実装と例外順位は変更せず、再close・外側finally・正常終了への読替えを禁止する。VM致命終了まで保証するものではなく、当component成功で実native安全条件を代替しない。

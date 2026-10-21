@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC327/PT-OPS-WEBOWN327001～007：自己所有temporary PostgreSQL（既production Flyway）、loopback ephemeral Artemis/HTTP、synthetic credential set/Ready、TempDirのrootだけでWebNativeRuntimeの実start/healthy/ready/closeを検証する。固定経路のdefault bindingは別にsource/JVMと独立literalで照合し、実Root/auth/署名をfixture成功へ置換しない。通常起動のRoot Ready callback一回・borrowed credentials不消費・同32routes、未完startup/verify失敗/false/null・重複start/close、五handle公開と終了後未ready、private ownerLockのstart/close競合を制御latch/有限deadlineで確認する。Reflection/private field書換え、実メモリ枯渇、実Root/cohort/Unit/VM/permit操作を用いない。null port/設定/collection要素と固定native path/port key拒否をnegative testし、cleanupは自己所有資源だけを確実に回収する。直接I/O portは全callbackを取得前に完成させ、即時owner field格納と検証前後・管理owner捕捉後promoteを当JVMで照合する。実行PT/静的順序/未実施nativeを分離し、当sourceの必要全体/実counter/静的/CHR/451は別条件、IT/ST完了を宣言しない。
+
 SSC326（2026-10-21、PT-OPS-COMPLETION326001/BUG1581/YKT1320）：自己所有のpure Java CompletionProgress clock/sinkだけでIO/Runtime/Error主障害×sink/clockのRuntime/Errorを独立fixtureで与え、failure通知が外へ二次障害をthrowせず元catchのretainへ進めることを確認する。正常固定literal/主障害秘密不出力/null拒否とphase診断の元失敗伝播は非回帰。失敗/未実行を合格へ含めずred→一Main PG→固定oracle green、同source JVMのfailure保護域・completion catchのfailure→retain順序、必要静的/全体を確認する。実Root/DB/Unit/VM/intent/permit/cohort操作は不要で、拒否PT代替や実native証拠にしない。
 
 SSC325（EXEC325001、BUG1578/YKT1320）：Web借用frameのdummy close IO/RTE/Errorと診断通常/RTE/Errorを自己所有最小child JVMだけで組合せ、start/await/stop/close各一回・再close0・非復帰・外側finally0を通常間隔及び割込後に確認する。失敗前反例・同一oracleのPG後検証、既正常/null/start-await例外の関連PT・必要同source全体・取得前policy/JVM到達性fenceを照合する。実Web/Root/DB/VM操作や拒否境界探索ではなく、dummy daemonの終了を実native解放・全coverageへ加算しない。

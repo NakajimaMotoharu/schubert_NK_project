@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC327（2026-10-21）：WebNativeRuntimeの内部I/O portはRuntime組立時・最初の取得前にnonnullで確立する。default path bindingは既asset/transfer config二keyと固定/run/schubert-nk/webのみ、default port bindingは既HTTP/management二keyのみ、default directoryはLinuxDirectoryCalls.create、default検証は既StorageAttributeGuardと同一の保持root/StorageIdentityを使う。startはbroker→dependency→codecs→directories→transfer/verify→assets/verify→workers→HTTP/mappings→management/start/promoteの元順序と即時field captureを保つ。検証用Map.Entryの一時値はfieldへowner捕捉後にだけ作り、検証callback自体は取得前に準備済みとする。検証false/nullは固定IOExceptionで不成功、その他nullは境界拒否しNPEを正常化しない。Production既5引数からのみ固定native bindingを選び、実根拠不明Root/VM/current/cohort/permit/intentのHOLDを解除しない。volatile/ownerLock/逆順十phase・元deadline/UNKNOWN/borrowed DB/credentialsの寿命は変更しない。package内部fixtureによる別path/ephemeral port/自己所有検証は実Root許可/配備/署名/認証の証明ではなく、外部からのoverride機能ではない。
+
 SSC326（2026-10-21、BUG1581/YKT1320）：MorningStartupLaunchOwnerの完了UNKNOWN後に呼ぶCompletionProgress.failureは、nonnull主障害の固定IO/FATAL/RUNTIME分類を維持し、emit内の時計/sink/文字列生成のRuntimeException/Errorを封じて元completion catchのretainへ戻す。診断不能は成功通知/正常解放ではない。通常phase通知・constructor/null境界は既どおり失敗を伝播し、固定literal/phase/elapsed計算/retirement順序/親30分/元Unit期限/DB/権限を変更しない。当局所診断保護で実親保持/真正DONE/nativeを証明せず、元依存と実環境HOLDを維持する。
 
 ## SSC318 keeper二次失敗の扱い
