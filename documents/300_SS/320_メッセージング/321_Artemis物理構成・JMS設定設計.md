@@ -1,5 +1,13 @@
 # Artemis物理構成・JMS設定設計
 
+## SSC334 ordinary broker/親runtimeのcatalog・factory secondary（2026-10-22）
+
+BUG1604/YKT1357・1606/YKT1359。ApiMessagingRuntimeの最終startup/close wrapper前、API/Web brokerのpassword supplier/createContext/closeのfixed catalog前では、既API Temp/Web Startupのpure finite graph口でcause/suppressed/JMS linked/SQL nextを分類してから通常診断へ縮退する。provider text/causeを新fixed catalogへ持ち込まず、非fatal時の既message/cause/suppressed契約を保つ。borrowed input copyはcreateContext失敗/分類Errorでも既finallyでwipe、copy取得前失敗を取得済と推定せず、context取得失敗からcaller-owned factoryを勝手にcloseしない。
+
+API provider/Web configureOwnedおよびAPI broker partial constructionは、既直接primary/直接closeのcomponent別選択表・raw primary identity・individual reverse secondary順を維持する。raw carrierに元graphを保持できる場合は無用な別型への変換をしない。suppression無効で別secondaryを保持できない場合だけ、必要owned close後のqualified attachment fallbackで元Errorを保持する。複数ownerのpartial/live closeは、取得前にprivate scratchを準備し、既close試行順・成功phase/再closeなしを保持、既onUnconfirmed通知が正常returnした後にだけ未保持graphを分類する。最初の直接Errorの既優先を保ち、scratchは終了finallyでclearする。callbackの非帰還UNKNOWNをcatchして次工程へ進む変更はしない。
+
+親group closeは実childの非Error cause carrier/直接Error契約を確認し、全必要group close後の最終wrapper前で分類する。startupの通知/cleanupで連結できないsecondaryも同じ終端後に分類する。private field/listを反射で差し替えた人工入力を要求しない。全graphはprivate一時scope/既障害引渡しだけ、公開log/JSON/新catalogへ追加保存しない。role/credential源/connector/12設定/window/backoff・normal ACK/commit/業務/wire/SQL/Unit/親期限は不変更、実Root/VM/cohort/鍵/permit/nativeの保留解除ではない。
+
 ## SSC333 ordinary consumer startup/closeのsecondary保持（2026-10-22）
 
 BUG1604/YKT1357。API Sync/WebLog/Questionのstartup通知・cleanupとSync複数context close、Web Reply startupは、suppression無効でもnotification/closing graphのErrorを捨てない。addSuppressedの成否だけを保持の実証とせず、未連結secondaryを一時scopeへ保持する。必要owned closeを完了してから既module-local pure graph口で分類、直接primary/通知選択済Error・直接close Errorの既component優先を先に保ち、非fatal時は従来catalog/cause/suppressed順へ帰還する。同一Throwableの自己抑制はしない。
