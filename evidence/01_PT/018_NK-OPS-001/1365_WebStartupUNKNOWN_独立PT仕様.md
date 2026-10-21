@@ -1,0 +1,20 @@
+# Web startup UNKNOWN依存owner保持・独立PT仕様
+
+BUG1574/YKT1329/SSC324、NK-WEB-002/NK-MSG-001/002、MQ003..008/AUT002/MON003、UI225226231232235、SS313/342/352/354。対象WebLogApplicationRuntime.closeAfterFailure及びPG追加される直接owned-close helper、WBS-P018-06主費/参照P018-05,F03追加費0。修正前Mainはaedと同byte、全既存Test/oracleとCurrentを保持する。SS324 design-only PR186は494ac1747b3ecf62dfb0328d634b2eacb95a6e46→main c8488d363f6846e199f56e0554b39270a4992f8e、四文書12insertのみ、通常merge/fetch済。attachment100件上限一回失敗のみ・再送0。
+
+## Test ID・独立oracle
+
+- START324001：新WebStartupRetentionTestの正常順序/nullable Replay/null境界。dummy Replay→repliesを明示listへ各一度記録して正常帰還。Replay無しはrepliesだけ。startup/repliesのnullは取得/close前に拒否する内部nonnull契約をPGで明確化、失敗を正常値にしない。固定list/counter/NPE型はProductionのmethodをexpected生成に使用せず手記する。
+- START324002：environment空・新TempDir stdout/err・JaCoCoを同run継承する自己所有最小child JVM。実業務Main/worker/provider/Rootを起動せず、daemonに与える全AutoCloseableはcounterだけのdummy。Replay closeのIOException/RTE/Error/同一startup RTEと、Replay正常→replies IOExceptionについて、最初のclose一回・後続close0・helper非復帰・外側finally0を、1000msを超える正常保持と割込後の保持で独立観測する。各daemon ownerのalive/TIMED_WAITINGと保持frameも確認し、単に出力だけでnonreturnとしない。最後のchild終了0はdummy daemonを終えるfixture終了であり、実native cleanup/Root終了proofではない。
+
+childの期限は全fixture20秒、期限超過時はこのProcessBuilderのhandleのみforce cleanup/5秒待機し、失敗を成功へ補正しない。dummy資源以外に借用資源/DB/JMS/ネットワーク/credential/VM/Unit/intent/permit/cohortは一切持たない。PT_DEFAULTであり拒否境界を探る試し実行・拒否操作再試行ではない。fixed診断だけをexpectedにし、provider本文/cause/rawをGitへ保存しない。
+
+## PGと試験順
+
+取得前class初期化で固定ServiceProcessResources.unknownReleasePolicyを準備し、保持時に新array/callback割当をしない。最初のchecked/RTE/Error close失敗では固定policyへ入り、finallyのreachabilityFenceで元startup/失敗資源/後続ownerの到達性を保持する。正常close順と通常runtime.closeのretry契約は不変更。元factoryがhandleを返却する前の部分取得とstartPathの未捕捉Errorは別YKT対象であり、このhelper修正だけで全startupを認定しない。
+
+新Test-only sourceでPG6360予定purpose-red（baseline12/7＋既lifetime5＋UNKNOWN1＋新2=20件/10suite）を一回。新normal null契約の未実装初失敗はTDD、実装済みUNKNOWN契約違反はBUG1574。元反例・未到達matrixを保存後、Main一classだけPG・全独立oracle固定、関連既WebLogApplicationRuntime/ReplayWorker/ArtemisReplyConsumers/ServiceResourceRetentionの正常・異常・UNKNOWN試験を集約して新greenを実施。実宣言inventory/対象commit/commandは新工具定義時に確定、件数を算術PASSへ加算しない。必要同source全体は新WebLifetime一件も含む一campaignへ集約する。
+
+実行日時/OS-JDK/tool/branch/source/run/command/exit/入力/固定期待/実際値/coverage/BUG/SSCは新manifestと次結果書へ保存する（現在未実行）。coverageは新source原XMLの四counterのみ、旧aed4048/新3deda18/旧nativeを合成しない。失敗/flaky/skipped/not-runは合格0。新sourceの全体/physical/static/rawF03/trace/native/CHR/451と正式は別条件。
+
+群開始.5/2/6pp凍結・追加発見として原-v4/前見積を保持、専有費/実N-T/工数null。freshused40/残60/reset1793082864/secondary不明。正式1964PT/53scope/17-190/QA051final/PTALT001002対象不明代替0/実環境HOLDと全保全物維持。通常red/PG/green/commitで停止しない。

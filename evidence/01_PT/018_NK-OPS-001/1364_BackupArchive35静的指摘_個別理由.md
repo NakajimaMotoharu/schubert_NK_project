@@ -1,0 +1,7 @@
+# Backup原子完了・Archive所有の35指摘
+
+PG6358公開 `evidence/provisional/PG6358-backup-archive-static-review-v1/manifest.json` SHA256 `7ef99f90b7192abf4c570705b43fa83eae72aa951abd99c71d1a504477bc5250`。sourceaedの二owner35span（BackupCommitService16/BackupArchiveProcess19）を元4048の同source/同Test blob/原caseへ結合。raw1356保持、REQUIRED857/CONTEXT262/FP32/未分類226→191/元pending14維持。
+
+Backup二stepのupdate/commit失敗・rollback/復元失敗では、未知primary保持と固定secondary、known primary時の未知cleanup優先をSS331/341/343・既BUG193 mixed failure matrixの独立assertionと照合。catch内型検査はその契約区別に必要で、正常成功/秘密露出へ変換しない。Archiveはstdio取得前owner構築、未確定process collectionでのprebuilt pending、残owned handleの有限stop試行と別terminal hold、初回unknown同一性・後続unknown backoff、pipeline部分起動不明時のnonreturn隔離を個別点検。Test-only pending portのreturn/controlled escapeを実Production成功や確定障害と断定しない。実Backup/Root/pipeline/stop/VM/DB/credential/原本操作0。
+
+正負工具二/pyflakes0、pipeline unknown理由欠落は失敗。新確定仕様不一致なし・Main PG修正不要、これは各条件の動的再試験やnative資源後条件の実証ではなくsource適用性点検。Production PT/build/coverage測定/例外代替完了/正式/工数率加点0。群F03_BACKUP_ARCHIVE35 .25/1/3ppと原-v4凍結、実N/T専有費null。次は新WebLifetime Testだけで全4049を反復せず、別途発見したstartup UNKNOWN依存owner保持BUG1574/SSC324の独立red→Main PG→関連選択を先行し、必要同source全体を一回へ集約する。元aed4048と新3deda18は再演しない。

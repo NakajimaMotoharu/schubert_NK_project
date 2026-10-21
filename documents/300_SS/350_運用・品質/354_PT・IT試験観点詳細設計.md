@@ -1,5 +1,7 @@
 # PT・IT試験観点詳細設計
 
+SSC324（START324001/002、BUG1574/YKT1329）：Web startup cleanupを外部接続無しの自己所有dummy資源/最小child JVMで独立検証する。正常はReplay→replies各一回、Replay無しはreplies一回、null boundaryを拒否する。checked/RTE/Error及び同一startup ThrowableのReplay close失敗では後続close0/外側finally0/非復帰/再close0、Replay正常→replies失敗でも非復帰・外側finally0を、正常保持間隔と割込後で明示counter/frameから観測する。失敗前sourceで反例を保存し、同oracleをPG後に再実行、関連component実HTTP/JMS/worker試験と必要同source全体を行う。fixture終了はdummy daemonのみの終了であり実native owner解放成功へ加算しない。PG強化レビュー/静的と実PT/coverageは区別し、旧UNKNOWN/拒否対象保留は維持する。
+
 SSC323（2026-10-21、PT-IDEM-GRAPH323001/002・BUG1573/YKT1328）：Web Outbox linked/next Error、cause/suppressed循環とError無し/null provider edgeを固定fixtureで検証。自己所有replay workerがfatalでterminal/非running・completed/failedCycle0、普通cycleではfailedCycle増加/非terminalであること、既temporary DBのfatal未mark/PENDING/attempt0/元leaseと普通ERROR/next時刻を独立oracleとする。APIの追加normal provider-null Testは既red期待を変更しない。旧source/未到達を成功へ加算せず、二Web MainPG・同oracle green/当原資格/全graph分岐/必要同source品質を要求する。一般session契約・実Root/current/cohort/native/拒否対象保留は別範囲として保持する。
 
 SSC322（2026-10-21、PT-IDEM-GRAPH322001/002・BUG1572/YKT1328）：ordinary Outboxのcause/suppressed/JMS linked/SQL nextと循環/重複graphを固定Throwableで作り、Errorを同一fatalとして伝播し普通markFailure/次周期retryを行わないことを確認する。自己所有workerの一回open/固定診断/healthy false/終了と、既temporary DBのclaim後PENDING・attempt0/未mark/lease不変を独立後条件とする。Error無しのcyclic graphは有限帰還し従来の普通retry/ERROR・attempt/next時刻を維持する。二method内matrixをJUnit件数へ水増しせず、production graph methodをexpected生成に使用しない。元4043成功を本未試験条件へ移植せず、red→PG→同oracle green/全edge分岐/同source静的・必要品質を確認。実VM/current/Root/cohort/nativeと拒否PT保留を解除しない。
