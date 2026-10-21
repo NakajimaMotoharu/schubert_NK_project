@@ -78,8 +78,8 @@ def main():
     for module,classes in TARGETS.items():
         for name in classes:
             counters=coverage.get(module,{}).get('classes',{}).get('dev/codex/schubert/nk/'+name,{})
-            target_counters[module+':'+name]={k:counters.get(k,{'covered':0,'missed':0})for k in('LINE','METHOD','CLASS','BRANCH')}
-    target100=len(target_counters)==14 and all(all(c[k]['missed']==0 and c[k]['covered']>0 for k in('LINE','METHOD','CLASS'))and c['BRANCH']['missed']==0 for c in target_counters.values())
+            target_counters[module+':'+name]={k:counters[k]for k in('LINE','METHOD','CLASS','BRANCH')if k in counters}
+    target100=len(target_counters)==14 and all(set(c)=={'LINE','METHOD','CLASS','BRANCH'}and all(c[k]['missed']==0 and c[k]['covered']>0 for k in('LINE','METHOD','CLASS','BRANCH'))for c in target_counters.values())
     done=exits==[0,0]and actual==expected and not problems and fixed and len(physical)==1664 and set(static)==set(MODULES)and not any(static.values())
     done=done and target100
     value={'actualExit':next((v for v in exits if v),0),'source':head,'startedUTC':started,'completedUTC':utc(),'phaseExits':exits,'sourceFixed':fixed,'archiveSha256':sha(archive),'tests':sum(map(len,actual.values())),'suites':len(actual),'exactInventory':actual==expected,'failedOrSkipped':problems,'staticIssues':static,'coverage':coverage,'xmlHashes':xmls,'allPhysicalMainSha256':physical,'targetCounters':target_counters,'targetFour100':target100,'selectedQualified':done,'formalAccepted':False,'fullRegressionPending':True,'fullCoverageClaimed':False,'vmActions':0,'ptAlternativeCompleted':0}
