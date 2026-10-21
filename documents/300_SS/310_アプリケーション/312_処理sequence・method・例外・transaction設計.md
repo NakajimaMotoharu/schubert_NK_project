@@ -1,5 +1,11 @@
 # 処理sequence・method・例外・transaction設計
 
+## SSC330 ordinary readiness graph・pure secondary保持（2026-10-22）
+
+ordinary API/Webのreadinessは、Connection/JMSContextのowned closeを一回試みた後で通常startup catalogを返す前に、cause/suppressed/JMS linked/SQL nextのfinite graphをidentity visitedで分類する。到達可能なErrorは元object、非fatal循環は有限帰還し、provider graphを新catalogに保持しない。既manual cleanupの直接primary Error/直接close Errorの選択を先に維持し、捨てていた非fatal型secondaryも同scopeのprimary graphへ一時連結する。wrapped Errorをその型だけでnonfatalと断定しない。
+
+共通pure分類/secondary attachmentはAPI内のTemporaryInfrastructureException、Web内のWebStartupExceptionへ置く。Auth既suppressed優先/Session既JDBC専用portを無関係に変更せず、bootstrap/protocolへのJMS依存追加やWeb→API依存を行わない。attachmentはprimary/secondaryのnull契約を検査し同一objectならself-suppressionを行わず、別objectだけaddSuppressedする。suppression無効で連結できない場合はprimary graph、次にsecondary graphを分類してErrorを失わない。途中でfatalが伝播してもcallerのfinally/TWRで残るowned closeを完了させる。既SS329 API ownerへの再利用は各呼出/同source品質へ追跡し、close成功/rollback成功を捏造しない。BUG1593/YKT1346、既SQL部分は1592/1345と同一siteで二重費/二重受入なし。
+
 ## SSC329 ordinary JDBC fatal保持・owned transaction（2026-10-21）
 
 SQLException/RuntimeExceptionを固定catalogや業務SQLstateへ変換する前に、捕捉したfinite exception graphのcause/suppressed/SQLException.nextへ到達可能なErrorを元objectで伝播する。非fatal graphはidentity visitedで有限帰還し、provider text/cause/suppressedを新catalogへ保持しない。ordinary APIの共有分類はapi.error.TemporaryInfrastructureExceptionのpure static portへ置き、API内で再利用する（新module/GAV/権限依存なし）。既Authのsuppressed優先とWeb/sessionのcause優先はSSC328を維持する。Web内部の同分類は既SessionStoreException portを使い、production Web→API依存を追加しない。
