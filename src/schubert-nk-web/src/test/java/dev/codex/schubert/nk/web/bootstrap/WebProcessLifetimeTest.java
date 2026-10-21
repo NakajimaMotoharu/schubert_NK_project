@@ -3,15 +3,104 @@ package dev.codex.schubert.nk.web.bootstrap;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-/** NATIVE-LIFE001..003: notification never substitutes for confirmed resource completion. */
+/** NATIVE-LIFE001..004: notification never substitutes for confirmed resource completion. */
 final class WebProcessLifetimeTest {
+  @TempDir Path temporary;
+
+  @Test
+  void life004OwnedJvmTermClosesWhileShutdownIsInProgress() throws Exception {
+    var command = new ArrayList<String>();
+    command.add(
+        Path.of(Objects.requireNonNull(System.getProperty("java.home")), "bin/java").toString());
+    var agents =
+        ManagementFactory.getRuntimeMXBean().getInputArguments().stream()
+            .filter(value -> value.startsWith("-javaagent:") && value.contains("jacoco"))
+            .toList();
+    assertFalse(agents.isEmpty(), "same-run child coverage agent is mandatory, not skipped");
+    command.addAll(agents);
+    command.addAll(
+        List.of(
+            "-cp",
+            Objects.requireNonNull(System.getProperty("surefire.test.class.path")),
+            HookDriver.class.getName()));
+    Path out = Files.createTempFile(temporary, "lifetime-", ".out");
+    Path err = Files.createTempFile(temporary, "lifetime-", ".err");
+    var builder =
+        new ProcessBuilder(command).redirectOutput(out.toFile()).redirectError(err.toFile());
+    builder.environment().clear();
+    Process child = builder.start();
+    try {
+      long until = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+      while (!Files.readString(out).contains("WEB_COMPONENT_READY\n")
+          && child.isAlive()
+          && System.nanoTime() < until) Thread.sleep(5);
+      assertEquals("WEB_COMPONENT_READY\n", Files.readString(out));
+      assertTrue(child.isAlive());
+      child.destroy(); // Only this ProcessBuilder-owned fixture; never a service or numeric PID.
+      assertTrue(
+          child.waitFor(5, TimeUnit.SECONDS), "owned fixture must finish within its deadline");
+      assertEquals(143, child.exitValue(), "actual Linux SIGTERM; not a Root success code");
+      assertEquals("WEB_COMPONENT_READY\nWEB_COMPONENT_CLOSED\n", Files.readString(out));
+      assertEquals("", Files.readString(err));
+      assertFalse(child.isAlive());
+    } finally {
+      if (child.isAlive()) {
+        child.destroyForcibly();
+        assertTrue(child.waitFor(5, TimeUnit.SECONDS), "only owned fixture cleanup");
+      }
+    }
+  }
+
+  /** No application Main, providers, network, credentials, VM or borrowed scope. */
+  public static final class HookDriver {
+    private HookDriver() {}
+
+    public static void main(String[] arguments) throws Exception {
+      var dumped = new CountDownLatch(1);
+      Runtime.getRuntime()
+          .addShutdownHook(
+              new Thread(
+                  () -> {
+                    try {
+                      dumped.await();
+                    } catch (InterruptedException interrupted) {
+                      Thread.currentThread().interrupt();
+                    }
+                  },
+                  "fixture-coverage-drain"));
+      try {
+        try (var lifetime = new WebProcessLifetime()) {
+          lifetime.install();
+          System.out.println("WEB_COMPONENT_READY");
+          lifetime.await(() -> true);
+        }
+        System.out.println("WEB_COMPONENT_CLOSED");
+        // Public agent API captures real post-close probes if its automatic hook ran early.
+        // This instrumentation barrier is not proof of native provider ownership or cleanup.
+        Object agent = Class.forName("org.jacoco.agent.rt.RT").getMethod("getAgent").invoke(null);
+        Class.forName("org.jacoco.agent.rt.IAgent")
+            .getMethod("dump", boolean.class)
+            .invoke(agent, false);
+      } finally {
+        dumped.countDown();
+      }
+    }
+  }
+
   @Test
   void monitor004CallerLockCannotBlockConfirmedLifetimeClose() throws Exception {
     var lifetime = new WebProcessLifetime();
