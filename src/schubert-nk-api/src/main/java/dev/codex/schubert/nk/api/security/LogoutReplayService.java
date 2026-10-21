@@ -115,6 +115,7 @@ public final class LogoutReplayService {
           Optional.of(snapshots.encrypt(identity(request, owner), body)),
           at.truncatedTo(ChronoUnit.MICROS));
     } catch (ResponseSnapshotException | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } finally {
       Arrays.fill(body, (byte) 0);
@@ -186,6 +187,7 @@ public final class LogoutReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     }
   }

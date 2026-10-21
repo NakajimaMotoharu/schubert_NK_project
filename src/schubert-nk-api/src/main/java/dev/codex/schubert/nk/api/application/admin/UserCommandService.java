@@ -119,6 +119,7 @@ public final class UserCommandService {
                 }
               }
             } catch (SQLException failure) {
+              TemporaryInfrastructureException.preserveFatal(failure);
               if (!"2200H".equals(failure.getSQLState()) || failure.getSuppressed().length != 0)
                 throw failure;
               c.rollback(savepoint);
@@ -360,6 +361,7 @@ public final class UserCommandService {
         | IllegalStateException
         | ArithmeticException
         | java.time.DateTimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       // BUG-045: DB typed-value and clock conversion failures are not input-policy denials.
       throw new TemporaryInfrastructureException();
     }
@@ -396,6 +398,7 @@ public final class UserCommandService {
         return value;
       }
     } catch (IllegalArgumentException invalid) {
+      TemporaryInfrastructureException.preserveFatal(invalid);
       throw new SQLException("stored user is invalid");
     }
   }
@@ -406,6 +409,7 @@ public final class UserCommandService {
       require(hash != null && hash.matches("\\{pbkdf2-v1}[0-9a-f]{96}"));
       return hash;
     } catch (IllegalArgumentException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new SQLException("password encoding is unavailable");
     } finally {
       Arrays.fill(normalized, '\0');

@@ -132,9 +132,11 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
     try (var request = QuestionSubmitRequest.decode(message)) {
       return processOwned(request);
     } catch (PermanentProtocolException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       throw failure;
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -155,6 +157,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
     try {
       outcome = transaction(request, received, start, budget);
     } catch (RetainedRequest failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       // The newly inserted PROCESSING row was rolled back. Never restore/predict history.
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       if (failure.actorId != 0) auditRetained(request, failure);
@@ -171,6 +174,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
       try {
         confirmed = sent(accepted, request, start, budget);
       } catch (RetainedRequest elapsed) {
+        TemporaryInfrastructureException.preserveFatal(elapsed);
         if (elapsed.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
         break;
       }
@@ -199,7 +203,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
         Outcome outcome = execute(connection, request, received, start, budget);
         connection.commit();
         return outcome;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         rollback(connection, failure);
         throw failure;
       }
@@ -219,6 +223,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
           authentication.verify(
               connection, request.header().authenticationContext().orElseThrow(), clock.instant());
     } catch (AuthenticationContextException invalid) {
+      TemporaryInfrastructureException.preserveFatal(invalid);
       audit(connection, Optional.empty(), request, "AUTHORIZATION_DENIED", "0102", received);
       return new Denied(ResultCode.SESSION_INVALID);
     }
@@ -251,6 +256,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
                   received.plusSeconds(604800)),
               c -> create(c, request, actor, clock.instant().truncatedTo(ChronoUnit.MICROS)));
     } catch (InboxException conflict) {
+      TemporaryInfrastructureException.preserveFatal(conflict);
       if (conflict.getSuppressed().length != 0) throw conflict;
       if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {
         audit(connection, Optional.of(actor), request, "QUESTION_SUBMITTED", "0105", received);
@@ -407,6 +413,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
         return new QuestionSubmitResponseData(
             receipt, new QuestionId(id), at.truncatedTo(ChronoUnit.MILLIS));
       } catch (SQLException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (!(failure instanceof PSQLException postgres) || !"23505".equals(failure.getSQLState()))
           throw failure;
         var error = postgres.getServerErrorMessage();
@@ -474,7 +481,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
         boolean sent = proof(connection, accepted, request);
         connection.commit();
         return sent;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         rollback(connection, failure);
         throw failure;
       }
@@ -579,7 +586,7 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
             retained.code == ResultCode.CONFLICT ? "0105" : "9000",
             clock.instant());
         connection.commit();
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         rollback(connection, failure);
         throw failure;
       }
@@ -746,8 +753,8 @@ public final class QuestionSubmissionService implements SyncRequestProcessor {
   private static void rollback(Connection connection, Throwable failure) {
     try {
       connection.rollback();
-    } catch (SQLException rollback) {
-      failure.addSuppressed(rollback);
+    } catch (SQLException | RuntimeException | Error rollback) {
+      TemporaryInfrastructureException.attachSecondary(failure, rollback);
     }
   }
 

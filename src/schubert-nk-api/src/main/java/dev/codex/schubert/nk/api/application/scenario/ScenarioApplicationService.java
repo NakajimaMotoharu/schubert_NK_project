@@ -109,6 +109,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
     } catch (PermanentProtocolException failure) {
       throw failure;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -130,9 +131,11 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
           clock.instant(),
           completed.replay());
     } catch (AccessRejected denied) {
+      TemporaryInfrastructureException.preserveFatal(denied);
       return responses.failure(
           request, ResultCode.SESSION_INVALID, identifiers.get(), clock.instant());
     } catch (IOException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -155,6 +158,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
       try {
         return new Initial(actor, new Query(request.query(queries, connection, actor)));
       } catch (ScenarioQueryException full) {
+        TemporaryInfrastructureException.preserveFatal(full);
         // BUG-038/YKT-034: query limits and physical quota use different exception contracts.
         if (full.resultCode() != ResultCode.RESOURCE_LIMIT)
           throw new TemporaryInfrastructureException();
@@ -178,6 +182,7 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
                     : new Success(delivery.deliver(detail.value().orElseThrow(), clock.instant()));
           };
         } catch (CapacityExceededException full) {
+          TemporaryInfrastructureException.preserveFatal(full);
           yield new Failed(ResultCode.RESOURCE_LIMIT);
         }
       }
@@ -290,25 +295,28 @@ public final class ScenarioApplicationService implements SyncRequestProcessor {
         T result = Objects.requireNonNull(operation.run(connection), "transaction result");
         connection.commit();
         return result;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (AuthenticationContextException | AccessRejected failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       // BUG-039: fixed internal boundary, never the multi-catch common RuntimeException type.
       throw new AccessRejected();
     } catch (InboxException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length == 0
           && failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)
         throw new PermanentProtocolException(
             "scenario request identity differs from its saved request");
       throw new TemporaryInfrastructureException();
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

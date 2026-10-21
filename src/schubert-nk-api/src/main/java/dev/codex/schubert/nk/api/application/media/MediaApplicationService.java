@@ -90,6 +90,7 @@ public final class MediaApplicationService implements SyncRequestProcessor {
     } catch (PermanentProtocolException failure) {
       throw failure;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -109,9 +110,11 @@ public final class MediaApplicationService implements SyncRequestProcessor {
           clock.instant(),
           completed.replay());
     } catch (AccessRejected denied) {
+      TemporaryInfrastructureException.preserveFatal(denied);
       return responses.failure(
           request, ResultCode.SESSION_INVALID, identifiers.get(), clock.instant());
     } catch (IOException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -134,6 +137,7 @@ public final class MediaApplicationService implements SyncRequestProcessor {
       try {
         return new Initial(actor, new Query(request.query(queries, connection, actor)));
       } catch (MediaQueryException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (failure.resultCode() != ResultCode.RESOURCE_LIMIT)
           throw new TemporaryInfrastructureException();
         return new Initial(actor, new Failed(ResultCode.RESOURCE_LIMIT));
@@ -225,24 +229,27 @@ public final class MediaApplicationService implements SyncRequestProcessor {
         T result = Objects.requireNonNull(operation.run(connection), "transaction result");
         connection.commit();
         return result;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (AuthenticationContextException | AccessRejected failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       throw new AccessRejected();
     } catch (InboxException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length == 0
           && failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)
         throw new PermanentProtocolException(
             "media request identity differs from its saved request");
       throw new TemporaryInfrastructureException();
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

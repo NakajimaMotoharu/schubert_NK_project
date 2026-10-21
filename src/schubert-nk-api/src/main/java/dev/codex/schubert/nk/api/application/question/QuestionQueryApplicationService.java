@@ -103,6 +103,7 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
     } catch (PermanentProtocolException failure) {
       throw failure;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -115,6 +116,7 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
           authentication.inspectReadOnly(
               connection, request.header().authenticationContext().orElseThrow(), clock.instant());
     } catch (AuthenticationContextException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return new Rejected(Rejection.SESSION_INVALID);
     }
     var canonical = request.canonical(actor);
@@ -123,6 +125,7 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
       try {
         stored = inbox.inspectMessage(connection, identity(request, actor, canonical, received));
       } catch (InboxException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (messageMismatch(failure)) return new Mismatch(actor);
         throw failure;
       }
@@ -141,6 +144,7 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
                 ? new Success(value.orElseThrow())
                 : new Failure(ResultCode.NOT_FOUND));
       } catch (QuestionQueryException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (failure.resultCode() == ResultCode.VALIDATION_ERROR)
           return new Rejected(Rejection.VALIDATION);
         if (failure.resultCode() != ResultCode.RESOURCE_LIMIT) throw failure;
@@ -289,15 +293,16 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
         T value = operation.run(connection);
         connection.commit();
         return value;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

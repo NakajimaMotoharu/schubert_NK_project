@@ -4,6 +4,7 @@ package dev.codex.schubert.nk.api.maintenance;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
@@ -204,17 +205,18 @@ public final class InboxCleanup {
           committed = true;
           checkParent(); // A late failure is NOT proof that committed mutation was rolled back.
           return result;
-        } catch (SQLException | RuntimeException failure) {
+        } catch (SQLException | RuntimeException | Error failure) {
           if (!committed)
             try {
               connection.rollback();
-            } catch (SQLException rollbackFailure) {
-              failure.addSuppressed(rollbackFailure);
+            } catch (SQLException | RuntimeException | Error rollbackFailure) {
+              TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
             }
           throw failure;
         }
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       // Do not retain bound columns/provider text/cause/suppressed close or uncertain commit data.
       throw new InboxMaintenanceException();
     }
@@ -225,6 +227,7 @@ public final class InboxCleanup {
       try {
         parentGuard.orElseThrow().check();
       } catch (IOException unavailable) {
+        TemporaryInfrastructureException.preserveFatal(unavailable);
         throw new SQLDataException("maintenance owner unavailable");
       }
     }
@@ -237,6 +240,7 @@ public final class InboxCleanup {
     try {
       seconds = parentGuard.orElseThrow().queryTimeoutSeconds();
     } catch (IOException unavailable) {
+      TemporaryInfrastructureException.preserveFatal(unavailable);
       throw new SQLDataException("maintenance owner unavailable");
     }
     try (var statement =

@@ -4,6 +4,7 @@ package dev.codex.schubert.nk.api.idempotency;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,6 +106,7 @@ public final class JdbcInboxCoordinator {
       insert(connection, request, fingerprint);
       connection.releaseSavepoint(beforeInsert);
     } catch (SQLException exception) {
+      TemporaryInfrastructureException.preserveFatal(exception);
       if (!"23505".equals(exception.getSQLState())) {
         throw exception;
       }

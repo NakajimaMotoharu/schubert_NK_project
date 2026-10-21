@@ -90,6 +90,7 @@ public final class UserMutationApplicationService implements SyncRequestProcesso
     } catch (PermanentProtocolException failure) {
       throw failure;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -103,15 +104,16 @@ public final class UserMutationApplicationService implements SyncRequestProcesso
         Outcome result = execute(connection, request, received);
         connection.commit();
         return result;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -128,6 +130,7 @@ public final class UserMutationApplicationService implements SyncRequestProcesso
               request.targetUserId(),
               clock.instant());
     } catch (AuthenticationContextException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       audit.write(connection, Optional.empty(), request, Event.SESSION_INVALID, clock.instant());
       return new Denied(ResultCode.SESSION_INVALID);
     }
@@ -164,6 +167,7 @@ public final class UserMutationApplicationService implements SyncRequestProcesso
                       request, actor, result, identifiers.get(), clock.instant());
                 });
       } catch (InboxException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (failure.getSuppressed().length != 0) throw failure;
         if (failure.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {
           audit.write(

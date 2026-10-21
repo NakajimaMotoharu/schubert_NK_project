@@ -129,12 +129,14 @@ public final class LoginInboxService {
         canonical.close();
       }
     } catch (InboxException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {
         throw new PermanentProtocolException(
             "login request identity differs from its saved request");
       }
       throw new AuthenticationInfrastructureException();
     } catch (SQLException | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } finally {
       Arrays.fill(password, '\0');

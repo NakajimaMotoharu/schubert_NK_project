@@ -103,6 +103,7 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
     } catch (PermanentProtocolException failure) {
       throw failure;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -115,6 +116,7 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
           authentication.inspectReadOnly(
               connection, request.header().authenticationContext().orElseThrow(), clock.instant());
     } catch (AuthenticationContextException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return new Rejected(ResultCode.SESSION_INVALID);
     }
     if (actor.role() != Role.ADMIN) return new Rejected(ResultCode.FORBIDDEN);
@@ -124,6 +126,7 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
       try {
         stored = inbox.inspectMessage(connection, identity(request, actor, canonical, received));
       } catch (InboxException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (messageMismatch(failure)) return new Mismatch(actor);
         throw failure;
       }
@@ -137,6 +140,7 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
       try {
         return new Ready(actor, new Success(request.query(queries, connection, actor)));
       } catch (LogQueryException failure) {
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (failure.resultCode() != ResultCode.RESOURCE_LIMIT) throw failure;
         return new Ready(actor, new Failure(ResultCode.RESOURCE_LIMIT));
       }
@@ -153,6 +157,7 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
           authentication.verify(
               connection, request.header().authenticationContext().orElseThrow(), clock.instant());
     } catch (AuthenticationContextException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return reject(connection, request, Optional.empty(), ResultCode.SESSION_INVALID);
     }
     if (actor.role() != Role.ADMIN)
@@ -260,15 +265,16 @@ public final class LogQueryApplicationService implements SyncRequestProcessor {
         T value = operation.run(connection);
         connection.commit();
         return value;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

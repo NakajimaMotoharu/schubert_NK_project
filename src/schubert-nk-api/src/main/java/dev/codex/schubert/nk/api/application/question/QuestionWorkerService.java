@@ -133,9 +133,11 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       try {
         answer = Objects.requireNonNull(provider.answer(ready.question), "provider result");
       } catch (AnswerBusinessException expected) {
+        TemporaryInfrastructureException.preserveFatal(expected);
         transaction(c -> fail(c, event.header(), work, wire, delivery, "PROCESS_FAILED", false));
         return;
       } catch (RuntimeException unavailable) {
+        TemporaryInfrastructureException.preserveFatal(unavailable);
         if (delivery.deliveryCount() < TERMINAL_DELIVERY_COUNT)
           throw new TemporaryInfrastructureException();
         Stage failed =
@@ -145,9 +147,11 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       }
       transaction(c -> complete(c, event.header(), work, wire, answer));
     } catch (PermanentProtocolException invalid) {
+      TemporaryInfrastructureException.preserveFatal(invalid);
       if (invalid.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       throw invalid;
     } catch (SQLException | RuntimeException unavailable) {
+      TemporaryInfrastructureException.preserveFatal(unavailable);
       throw new TemporaryInfrastructureException();
     } finally {
       Arrays.fill(wire, (byte) 0);
@@ -375,6 +379,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         }
       }
     } catch (PermanentProtocolException inconsistentProof) {
+      TemporaryInfrastructureException.preserveFatal(inconsistentProof);
       // This is durable ERROR/send proof, not invalid inbound wire: never fatal-ACK it.
       throw new TemporaryInfrastructureException();
     }
@@ -432,6 +437,7 @@ public final class QuestionWorkerService implements InternalEventProcessor {
         return sent;
       }
     } catch (PermanentProtocolException inconsistentProof) {
+      TemporaryInfrastructureException.preserveFatal(inconsistentProof);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -660,8 +666,8 @@ public final class QuestionWorkerService implements InternalEventProcessor {
       } catch (SQLException | RuntimeException | Error failure) {
         try {
           c.rollback();
-        } catch (SQLException | RuntimeException cleanup) {
-          failure.addSuppressed(cleanup);
+        } catch (SQLException | RuntimeException | Error cleanup) {
+          TemporaryInfrastructureException.attachSecondary(failure, cleanup);
         }
         throw failure;
       }

@@ -100,6 +100,7 @@ public final class QuestionMutationApplicationService implements SyncRequestProc
     } catch (PermanentProtocolException invalid) {
       throw invalid;
     } catch (RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -112,15 +113,16 @@ public final class QuestionMutationApplicationService implements SyncRequestProc
         var outcome = execute(c, request, received);
         c.commit();
         return outcome;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           c.rollback();
-        } catch (SQLException cleanup) {
-          failure.addSuppressed(cleanup);
+        } catch (SQLException | RuntimeException | Error cleanup) {
+          TemporaryInfrastructureException.attachSecondary(failure, cleanup);
         }
         throw failure;
       }
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -135,6 +137,7 @@ public final class QuestionMutationApplicationService implements SyncRequestProc
               request.header().authenticationContext().orElseThrow(IllegalArgumentException::new),
               clock.instant());
     } catch (AuthenticationContextException invalid) {
+      TemporaryInfrastructureException.preserveFatal(invalid);
       audit.write(c, Optional.empty(), request, Event.SESSION_INVALID, clock.instant());
       return new Denied(ResultCode.SESSION_INVALID);
     }
@@ -170,6 +173,7 @@ public final class QuestionMutationApplicationService implements SyncRequestProc
                       request, actor, result, identifiers.get(), clock.instant());
                 });
       } catch (InboxException conflict) {
+        TemporaryInfrastructureException.preserveFatal(conflict);
         if (conflict.getSuppressed().length != 0) throw conflict;
         if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {
           audit.write(c, Optional.of(actor), request, Event.TOKEN_MISMATCH, clock.instant());

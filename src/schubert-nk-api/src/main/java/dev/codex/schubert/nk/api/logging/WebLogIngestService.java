@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.api.logging;
 
 // PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.messaging.inbound.InternalEventProcessor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
@@ -52,15 +53,16 @@ public final class WebLogIngestService implements InternalEventProcessor {
         boolean inserted = insert(connection, event, data, details, address);
         connection.commit();
         return inserted;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
-          failure.addSuppressed(rollbackFailure);
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
     } catch (SQLException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       // SQL error messages may embed bound JSON/IP values; the listener needs only a retry signal.
       throw new LogProjectionDatabaseException();
     }

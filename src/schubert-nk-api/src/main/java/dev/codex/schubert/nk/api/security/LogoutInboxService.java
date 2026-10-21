@@ -133,11 +133,13 @@ public final class LogoutInboxService {
             execution.status() == InboxExecutionStatus.REPLAY);
       }
     } catch (InboxException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)
         throw new PermanentProtocolException(
             "Logout request identity differs from its saved request");
       throw new AuthenticationInfrastructureException();
     } catch (SQLException | IllegalArgumentException | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     }
   }

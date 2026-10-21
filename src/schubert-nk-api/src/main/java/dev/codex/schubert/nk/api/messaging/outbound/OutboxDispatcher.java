@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import jakarta.jms.JMSException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -72,7 +73,7 @@ public final class OutboxDispatcher {
         List<OutboxEntry> claimed = repository.claim(connection, worker, now, limit);
         connection.commit();
         return claimed;
-      } catch (SQLException | RuntimeException exception) {
+      } catch (SQLException | RuntimeException | Error exception) {
         rollback(connection, exception);
         throw exception;
       }
@@ -85,7 +86,7 @@ public final class OutboxDispatcher {
         boolean marked = repository.markSent(connection, entry, now);
         connection.commit();
         return marked;
-      } catch (SQLException | RuntimeException exception) {
+      } catch (SQLException | RuntimeException | Error exception) {
         rollback(connection, exception);
         throw exception;
       }
@@ -99,7 +100,7 @@ public final class OutboxDispatcher {
             repository.markFailure(connection, entry, now, code, "outbox send was not confirmed");
         connection.commit();
         return marked;
-      } catch (SQLException | RuntimeException exception) {
+      } catch (SQLException | RuntimeException | Error exception) {
         rollback(connection, exception);
         throw exception;
       }
@@ -166,6 +167,6 @@ public final class OutboxDispatcher {
       fatal.addSuppressed(primary); // Fatal/nonfatal objects cannot be identical.
       throw fatal;
     }
-    if (primary != secondary) primary.addSuppressed(secondary);
+    TemporaryInfrastructureException.attachSecondary(primary, secondary);
   }
 }

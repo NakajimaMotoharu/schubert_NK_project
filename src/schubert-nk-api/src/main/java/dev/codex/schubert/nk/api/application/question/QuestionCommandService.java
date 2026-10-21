@@ -194,6 +194,7 @@ public final class QuestionCommandService {
           Optional.of(NotificationState.CANCELLED),
           Optional.of(metadata.at()));
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -277,6 +278,7 @@ public final class QuestionCommandService {
           "DELETED");
       return new DeleteResult(ResultCode.SUCCESS, Optional.of(metadata.at()));
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

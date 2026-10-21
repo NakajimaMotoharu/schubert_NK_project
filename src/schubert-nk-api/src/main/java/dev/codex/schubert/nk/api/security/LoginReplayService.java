@@ -104,6 +104,7 @@ public final class LoginReplayService {
           Optional.of(snapshots.encrypt(identity(requestId), body)),
           completedAt.truncatedTo(ChronoUnit.MICROS));
     } catch (ResponseSnapshotException | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       throw new AuthenticationInfrastructureException();
     } finally {
       Arrays.fill(body, (byte) 0);
@@ -168,6 +169,7 @@ public final class LoginReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      AuthenticationInfrastructureException.preserveFatal(failure);
       // No provider text, parameter, ciphertext, context, cause or suppressed close error escapes.
       throw new AuthenticationInfrastructureException();
     }
