@@ -8,6 +8,15 @@ OLD = '7059b1e1f4403078bb6bbc7d8c8371e68aeaff2f'
 MAIN = 'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java'
 TEST = 'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntimeOwnedComponentTest.java'
 SLOT = 'pg6470-web-owned-component-v1'
+COMPILE_BEFORE_PT = False
+
+
+def compile_first(raw):
+    before = "commands=[base+['spotless:check'],base+['-Dtest='"
+    after = "commands=[base+['spotless:check'],base+['-DskipTests','test-compile'],base+['-Dtest='"
+    if raw.count(before) != 1 or raw.count('exits==[0,0]') != 1:
+        raise ValueError('explicit three-phase profile; no test skip in execution phase')
+    return raw.replace(before, after, 1).replace('exits==[0,0]', 'exits==[0,0,0]', 1)
 
 
 def inventory():
@@ -42,6 +51,8 @@ def main():
     if raw.count(before) != 1:
         raise ValueError('one pinned Node environment')
     raw = raw.replace(before, 'os.pathsep+NODE_PATH,MAVEN_OPTS', 1)
+    if COMPILE_BEFORE_PT:
+        raw = compile_first(raw)
     scope = {**vars(engine), 'SLOT': SLOT, 'NODE_PATH': prior.prior.prior.node_environment(),
         'CASES': cases, 'COUNTS': counts,
         'TARGETS': {'web': ['web/bootstrap/WebNativeRuntime'], 'batch': ['batch/file/BackupStartIntentFiles']},

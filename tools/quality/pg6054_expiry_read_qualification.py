@@ -19,9 +19,11 @@ RUN = W/'pg6052-expiry-combined-green-v1'
 OLD = BASE/'PG6044-remaining33-static-v2/manifest.json'
 
 
-def actual_original(manifest, begin, expected, source=SOURCE, expected_counts=(148, 16)):
+def actual_original(manifest, begin, expected, source=SOURCE, expected_counts=(148, 16), expected_phase_exits=(0, 0)):
+    if tuple(expected_phase_exits) not in ((0, 0), (0, 0, 0)):
+        raise ValueError('explicit all-zero two-phase or compile-first three-phase contract only')
     if not (manifest['source'] == begin['source'] == source and manifest['actualExit'] == manifest['mavenActualExit'] == 0
-            and manifest['phaseExits'] == [0, 0] and manifest['exactInventory'] and manifest['sourceFixed']
+            and manifest['phaseExits'] == list(expected_phase_exits) and manifest['exactInventory'] and manifest['sourceFixed']
             and manifest['selectedQualified'] and not manifest['failedOrSkipped']
             and (manifest['tests'], manifest['suites'], begin['expectedTests']) == (expected_counts[0], expected_counts[1], expected_counts[0])
             and set(manifest['staticIssues']) == set(MODULES) and not any(manifest['staticIssues'].values())
@@ -30,7 +32,7 @@ def actual_original(manifest, begin, expected, source=SOURCE, expected_counts=(1
 
 
 def qualify(source, run, case_definitions, expected_counts, source_paths, old_public_path,
-            old_public_sha, old_path, prior_raw_path, slot, public_name):
+            old_public_sha, old_path, prior_raw_path, slot, public_name, expected_phase_exits=(0, 0)):
     manifest_path = run/'manifest.safe.json'; begin_path = run/'begin.safe.json'
     m, b = [json.loads(p.read_bytes()) for p in (manifest_path, begin_path)]
     snapshot = run/'source'
@@ -38,7 +40,7 @@ def qualify(source, run, case_definitions, expected_counts, source_paths, old_pu
         for mod in MODULES for n in case_definitions[mod]}
     if (sum(map(len, expected.values())), len(expected)) != tuple(expected_counts):
         raise ValueError('complete explicit module/case/suite inventory')
-    actual_original(m, b, expected, source, expected_counts)
+    actual_original(m, b, expected, source, expected_counts, expected_phase_exits)
     if sha(run/'source.tar') != b['archiveSha256'] or m['archiveSha256'] != b['archiveSha256']:
         raise ValueError('original source archive identity')
     archived = {}

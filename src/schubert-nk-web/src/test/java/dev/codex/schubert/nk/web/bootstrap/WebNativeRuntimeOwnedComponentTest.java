@@ -533,12 +533,27 @@ final class WebNativeRuntimeOwnedComponentTest {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
+      Throwable failure = null;
       try {
         broker.stop();
-      } finally {
-        database.stop();
+      } catch (Throwable primary) {
+        if (primary instanceof InterruptedException) Thread.currentThread().interrupt();
+        failure = primary;
       }
+      try {
+        database.stop();
+      } catch (Throwable secondary) {
+        if (secondary instanceof InterruptedException) Thread.currentThread().interrupt();
+        if (failure == null) failure = secondary;
+        else if (secondary instanceof Error && !(failure instanceof Error)) {
+          if (secondary != failure) secondary.addSuppressed(failure);
+          failure = secondary;
+        } else if (secondary != failure) failure.addSuppressed(secondary);
+      }
+      if (failure instanceof Error fatal) throw fatal;
+      if (failure instanceof RuntimeException runtime) throw runtime;
+      if (failure != null) throw new IOException("own component fixture stop unconfirmed", failure);
       assertTrue(live.isEmpty());
     }
   }
