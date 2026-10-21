@@ -1,5 +1,9 @@
 # 画面template・controller・form設計
 
+## SSC325 Web借用frameのUNKNOWN診断故障
+
+WebRuntimeExecution.executeでcloseが未確認となった場合、固定「WEB cleanup unconfirmed」の診断自体がRuntimeException/Errorをthrowしても元borrowed frameをunwindしない。保護診断と固定有限観測policyは取得前に準備し、start/await/stop/close callbackと元unconfirmedを同frame loop内の到達性fenceで保持する。正常順序・stop通知の既非throwing native実装と例外順位は変更せず、再close・外側finally・正常終了への読替えを禁止する。VM致命終了まで保証するものではなく、当component成功で実native安全条件を代替しない。
+
 ## SSC324 Web startup cleanupの依存owner保持
 
 BUG1574/YKT1329：WebLogApplicationRuntimeが取得済みのReplay/repliesをstartup失敗後に閉じる順序はReplay→repliesとし、最初のcloseがchecked/RTE/Errorで未確認なら後続close/再close/正常return/外側unwindを禁止する。固定UNKNOWN retention policyは資源取得より前のclass初期化で準備する。cleanup開始後にarray/保持callbackを新規割当せず、元startup failure・失敗した資源・後続ownerをreachability fence付き同じ呼出frameへ保持する。固定秘匿診断だけ、割込は解放証明ではない。既正常startup/checked failure/通常closeの確認後retry・業務/HTTP/wire/SS352契約は不変更。factoryが返却する前の部分取得や他runtimeのUNKNOWNは別個に照合し、本scope成功から推測しない。
