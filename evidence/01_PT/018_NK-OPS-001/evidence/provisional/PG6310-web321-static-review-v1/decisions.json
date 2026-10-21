@@ -1,0 +1,846 @@
+[
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "57",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "49",
+    "endline": "57",
+    "findingId": "F03-PMD2-241843cbbc104e58858389ba734057f2873690408c0d7da5c17e5264355eef8f",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-4909a2da5c1dd8e3febea9ee12ed96942b053edff9841d04eb4f1f48c4e7d114",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1207,
+    "reason": "1345 individual SS321 Web source applicability: Stage JMS/RTE triggers one rollback then fixed WebLogSendException with original cause. Wire authentication/decryption precedes acquisition; normal MessageID/property/duplicate contracts remain unchanged.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "18",
+    "beginline": "63",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "34",
+    "endline": "63",
+    "findingId": "F03-PMD2-96e91c6d48fd9166894afd6e48c19bfee2e6dea987577a372f4e8baa5bff0b50",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b28afdd3f56bb8b4ace156b6ebf9a323847712c91cc307320a15523494dc6316",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1208,
+    "reason": "1345 individual SS321 Web source applicability: Commit RTE triggers existing rollback and only the exact typed cause/linked duplicate graph can confirm previous delivery. Suppressed cleanup is not duplicate evidence; unrelated failures remain typed unconfirmed.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "38",
+    "beginline": "69",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "54",
+    "endline": "69",
+    "findingId": "F03-PMD2-eb41b3921516c93dd54b6b947c226fb947153b767014b61f450d0ecd88c45f9d",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5138d5c7ceacb66df63f8b41992d4fa2ccb78ecf9b93e8987c0a91ba9593723f",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1209,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked body spans retain primary in the minimal manual owned scope. Direct Error stays fatal, typed/JMS transport failure stays non-success, and finally closes exactly once without relying on generated TWR self-suppression.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "57",
+    "beginline": "69",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "62",
+    "endline": "69",
+    "findingId": "F03-PMD2-f9173a7cc0e55e8efc420a738aaeb837677901fe51227c35aded5aa84e9b559c",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5138d5c7ceacb66df63f8b41992d4fa2ccb78ecf9b93e8987c0a91ba9593723f",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1210,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked body spans retain primary in the minimal manual owned scope. Direct Error stays fatal, typed/JMS transport failure stays non-success, and finally closes exactly once without relying on generated TWR self-suppression.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "77",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "77",
+    "findingId": "F03-PMD2-eb1f0cad35b069167ba16c890d3672428700ce5af168614ffc6cd666042448b3",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5d131bc758c8b150abd8a3015eb42042df1297638992dd438c585c5be94d5c43",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1211,
+    "reason": "1345 individual SS321 Web source applicability: Only remaining RTE at the outer lifecycle boundary is mapped to the existing fixed WebLogSendException. The promoted/direct Error bypasses it; decrypt/open failure still wipes the acquired plaintext and does not close an unacquired context.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "88",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "88",
+    "findingId": "F03-PMD2-135e3bf896df7ffa9411f7c7fcedac206b9bd53760bff52cd0e867340cc4a5db",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5cfcacc481a721e78e75f3a3c5faa3fa518288c4c5bbf214e8838dd5d913b877",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1212,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked close spans implement the SS321 one-close/identity contract. Original84 independently covers no-primary/nonfatal/fatal, different/same Throwable and normal-body wipe; neither close failure nor computed body implies committed/closed success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "88",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "88",
+    "findingId": "F03-PMD2-85954a63f1563773fcab0a1b191390904ff1c5cc049acf960b916347663b522e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-5cfcacc481a721e78e75f3a3c5faa3fa518288c4c5bbf214e8838dd5d913b877",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1213,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked close spans implement the SS321 one-close/identity contract. Original84 independently covers no-primary/nonfatal/fatal, different/same Throwable and normal-body wipe; neither close failure nor computed body implies committed/closed success.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "90",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "35",
+    "endline": "90",
+    "findingId": "F03-PMD2-b83df71ddb99b3a9914cb9ac6ff3d6e91c15f170b9db6519b6c30d9364e414be",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-28b22c3001eb0fbf0a5f840bbe2cf0d3658126ccd390bb61231d89fb5750236c",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1214,
+    "reason": "1345 individual SS321 Web source applicability: Cleanup Error over non-Error primary must escape as the identical Error, retaining the earlier failure suppressed. It cannot become a durable ordinary send-retry classification. Existing primary Error retains its identity.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "94",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "closing != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "29",
+    "endline": "94",
+    "findingId": "F03-PMD2-773978a299860e71a7e262bacd9187b8ba4abcbc0b94f77af7520dd26c522cee",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-67563cd48ac199e99088728aafbdffcf0733a0b8ac38d24e38ef8e11d4584593",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1215,
+    "reason": "1345 individual SS321 Web source applicability: The explicit reference identity guard replaces generated TWR self-suppression behavior. Same Error or RTE is never added to itself, avoiding IllegalArgumentException masking the primary.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "101",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "101",
+    "findingId": "F03-PMD2-02c11235f3122c63ee298a8da0a0f198f58a5be007eb70b6afb265b84bd115cb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-f486328a72fbb1cf6969914af016f13528a34e19db5c04081a7d0b4ce03c8457",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1216,
+    "reason": "1345 individual SS321 Web source applicability: Rollback RTE is secondary on an unconfirmed original failure, never a successful commit signal. This helper does not catch Error or retry rollback.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "102",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "rollbackFailure != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "37",
+    "endline": "102",
+    "findingId": "F03-PMD2-0cf7accc046f79f4d854a43ce6ae073f88d8def25696408fe0b1438afc53cc4e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-b1977bc6e462eb138f537c59503d6f42db9bb357bfe3a60ed8e72456fa458d57",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/logging/WebLogMessageSender.class": "6d64ce23d28bced6f5c0b53fdf7807a0dcfd67c79997ef0d41fdf3e823741dce"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogMessageSenderTest",
+        "sourceSha256": "af4c630338d75728cd8170d56ebd3964e4f4fd000715c1fec42afc69a0bbb31b"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogDispatcherTest",
+        "sourceSha256": "ed846b65afa0f0c6ce4c49d5f9b9a345f4c00e1658690416a6ffc8b3e76d1521"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.logging.WebLogReplayWorkerTest",
+        "sourceSha256": "b41b4dbd592d6c7b6d9ec79cf0e1922737411f84a7133e35a353c218e0b7c00d"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1217,
+    "reason": "1345 individual SS321 Web source applicability: Provider may rethrow the same RTE from stage and rollback. Distinct-only suppression keeps original cause identity and avoids executing provider equals.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+    "sourceSha256": "b908beb2a6bdeb4164cff66ffcbf1d1ffe42c50da6f0ebada27a3cf29b14f730",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "31",
+    "beginline": "61",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "47",
+    "endline": "61",
+    "findingId": "F03-PMD2-98b402f8ce573c944de01efe34b0226f09fd65c5337b44fbbb75e26ab54adcbe",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-0454e3db5ed9cd71524303950f16b8865c5b649beb8dba0ace1ef4fe82f1414d",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1265,
+    "reason": "1345 individual SS321 Web source applicability: Checked JMS and provider RTE stage/commit failure trigger the existing one rollback attempt and original rethrow. The new owned finally may promote a close Error; this catch does not convert Error to ordinary request failure.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "29",
+    "beginline": "65",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "45",
+    "endline": "65",
+    "findingId": "F03-PMD2-745cd8754ea7bb05d49c5ddf1a45cb7ef83fcce04cf8e44f7827cbeb43529b4a",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cd163fe36d8c25e18876c7416651adb47eeb69dfa97ac96237fbcb6d2c7954d8",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1266,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked primary spans record the exact acquired-context failure before finally. JMS/RTE/Error identity flows into owned close, not a successful response or fabricated commit. It does not own the caller correlation registry.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "48",
+    "beginline": "65",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "53",
+    "endline": "65",
+    "findingId": "F03-PMD2-24fb1831f6a00f2ccfed51a217b50ad116c39eccfff0d45615cde94a8ab216c2",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-cd163fe36d8c25e18876c7416651adb47eeb69dfa97ac96237fbcb6d2c7954d8",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1267,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked primary spans record the exact acquired-context failure before finally. JMS/RTE/Error identity flows into owned close, not a successful response or fabricated commit. It does not own the caller correlation registry.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "76",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "76",
+    "findingId": "F03-PMD2-91efb69c46bf0eb42081903daf2bbd634a521e0c197ed8e7f019f743c8b1cc1e",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-a113673dc91eb0d02562fd43c0d7b1048fad09c02de27d2d3ce805f465e9218e",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1268,
+    "reason": "1345 individual SS321 Web source applicability: Secondary rollback RTE remains attached only to a distinct original failure; Error is not caught by this helper. Rollback is not proof of confirmed send or permission to issue another request.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "77",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "rollbackFailure != failure)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "37",
+    "endline": "77",
+    "findingId": "F03-PMD2-7d8db4aae601c34edd5ce2b5f425c9d09f13a1b5927bca61f1b0cf1e4207f4dd",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-e877ebe5d642f79a8bcaf64b6e4f8d1a9860b91b56760eacbc06cd6da122176b",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1269,
+    "reason": "1345 individual SS321 Web source applicability: Rollback can rethrow the same provider RTE. Reference inequality prevents self-suppression; provider equals would not express Throwable identity safely.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "14",
+    "beginline": "86",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "RuntimeException ",
+    "diagnosticTextSha256": "914db642c080d87c8fc45b131710ede9b246376032b2a3760c1dcb0db9bac8a7",
+    "endcolumn": "30",
+    "endline": "86",
+    "findingId": "F03-PMD2-8694486e6b595ef4372ec3b989daa8b827a9cc705d1e1ef4f84b3b5f20269ea5",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1265f20077bda11b80a307f7867df1e900f77e1605b3ea8b235ba1b5a92576ee",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1270,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked close spans protect the one owned context.close. No-primary closes retain their existing direct type; nonfatal primary plus Error promotes that Error, otherwise original primary is retained. Independent321001 matrix/source-JVM and original84 verify this narrow policy, not actual Root completion.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "33",
+    "beginline": "86",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "d17f2f22ebc37b0d4c534f3ce6eefa411896e3f638780b6df35dc8ccda4ad9ba",
+    "endcolumn": "38",
+    "endline": "86",
+    "findingId": "F03-PMD2-9026303ea7fd197c024bffed8b8033c432977cf8e561968678eea4f865051dd0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-1265f20077bda11b80a307f7867df1e900f77e1605b3ea8b235ba1b5a92576ee",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1271,
+    "reason": "1345 individual SS321 Web source applicability: Both unchecked close spans protect the one owned context.close. No-primary closes retain their existing direct type; nonfatal primary plus Error promotes that Error, otherwise original primary is retained. Independent321001 matrix/source-JVM and original84 verify this narrow policy, not actual Root completion.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidCatchingGenericException",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "30",
+    "beginline": "91",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "Error ",
+    "diagnosticTextSha256": "b2f74ec75a9266983a18fb6d0e7e263c932ac7c6ffbdde072c0a6a22aa4be703",
+    "endcolumn": "35",
+    "endline": "91",
+    "findingId": "F03-PMD2-fd2559dd065f44b3d737ed4306af141aaf5f45e4582d865567837b7e1ce641c0",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-57bfa2e9564ece599ba5640892ae0490d7efedf2b986f201717aa803bd47c3d4",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1272,
+    "reason": "1345 individual SS321 Web source applicability: Direct cleanup Error must supersede only non-Error primary. These identities cannot be equal by type; original primary is retained suppressed on the fatal object. Other primary Error stays original.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "AvoidInstanceofChecksInCatchClause",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  },
+  {
+    "F03Accepted": false,
+    "actualRuntimeProven": false,
+    "begincolumn": "11",
+    "beginline": "95",
+    "currentWholeCaseRefs": [],
+    "currentWholeJoinPending": true,
+    "diagnosticFragment": "closing != primary)",
+    "diagnosticTextSha256": "ac8392e297289d505cd3a7d8be3e85e5b52eadb96ac36f48659f666e3d1b99a1",
+    "endcolumn": "29",
+    "endline": "95",
+    "findingId": "F03-PMD2-511552a9c16e9dc6da2f4a5845b55cd9aa3a8c71bd2b60f54d8bed7418b0a6bb",
+    "formalAccepted": false,
+    "identitySchema": 2,
+    "legacyFindingId": "F03-PMD-23462fc18f0d6317bf981b5fc96ba0e44758588ca67065db2788d0d14fd22c68",
+    "owningPhysicalClassHashes": {
+      "web:dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.class": "cdebd0eb54c7d2927bed43de93f3e41f56536868768c102b1576c8cf2bfef310"
+    },
+    "plannedCurrentWholeCaseClasses": [
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.ArtemisRequestSenderTest",
+        "sourceSha256": "f85ac7e4f358961151aa566a9497d6a470ce71a3013de5a5a5ba95538ebe9787"
+      },
+      {
+        "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+        "sourceSha256": "8f406e02cdbba55a85b00d2a6564e329e2c3c9aceae0184b53b175d2a49c6db9"
+      }
+    ],
+    "priority": "3",
+    "ptAlternativeCompleted": 0,
+    "rawWarningRetained": true,
+    "rawXmlOrdinal": 1273,
+    "reason": "1345 individual SS321 Web source applicability: Distinct reference guard excludes provider same-Throwable self-suppression. It applies after fatal priority and cannot manufacture a successful send.",
+    "reviewScope": "APPLICABILITY_ONLY_NOT_RUNTIME_OR_COVERAGE_ACCEPTANCE",
+    "rule": "CompareObjectsWithEquals",
+    "source": "5eb040421ae9ea06ecc70c6eb2e152871c2d0d42",
+    "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+    "sourceSha256": "a73b6c2bf3a568a7f0edb9cb969c92e603465c637ed6b4f71c8ad4bd331d66f6",
+    "status": "REQUIRED_CONTRACT"
+  }
+]
