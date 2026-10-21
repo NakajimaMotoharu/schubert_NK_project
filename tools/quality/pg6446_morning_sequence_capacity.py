@@ -10,7 +10,7 @@ from pg6186_native_ownership_order import methods, instructions, one_call
 
 OLD_SOURCE = '5aa08a26ef867810ddf73349e09a13c6520341b1'
 OLD_QSHA = '0a1a830e54043d67f1ace8abb61aedc008eaa3431517719ecabcd8589400f3ff'
-CURRENT_QSHA = None
+CURRENT_QSHA = '8eb15b608718eb0f9eac4a92ccd03db4882a5436876d13c66563beedc3daf3c0'
 CLS = 'dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner'
 MAIN = 'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java'
 
@@ -73,8 +73,38 @@ def record(current=False):
     if physical != {k: v for k, v in proof['allPhysicalMainSha256'].items() if k.startswith('batch:')} or sha(run/MAIN) != proof['allSourceHashes'][MAIN]:
         raise ValueError('original Batch bytes and source unchanged')
     raw = subprocess.check_output([str(TC/'jdk-25.0.4/bin/javap'), '-p', '-c', '-s', '-classpath', str(jar), CLS], text=True)
+    diagnostic = None
+    if current:
+        old = W/'pg6442-morning-diagnostic-qualification-v1/manifest.safe.json'
+        old_public = BASE/'PG6442-morning-diagnostic-qualification-v1/manifest.json'
+        if sha(old_public) != OLD_QSHA or sha(old) != json.loads(old_public.read_bytes())['privateManifestSha256']:
+            raise ValueError('immutable preceding diagnostic source/class proof')
+        before = json.loads(old.read_bytes())
+        nested = 'batch:'+CLS.replace('.', '/')+'$CompletionProgress.class'
+        if before['allPhysicalMainSha256'][nested] != physical[nested]:
+            raise ValueError('previously proved diagnostic class must be physically identical')
+        old_jar = W/'pg6440-morning-diagnostic-green-v1/source/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar'
+        old_raw = subprocess.check_output([str(TC/'jdk-25.0.4/bin/javap'), '-p', '-c', '-s', '-classpath', str(old_jar), CLS], text=True)
+        previous, now = methods(old_raw), methods(raw)
+        if set(previous) != set(now) or any(previous[k] != now[k] for k in previous if ' void sequence(' not in k):
+            raise ValueError('all actual outer methods except sequence unchanged after CP-index normalization')
+        orderp = BASE/'PG6444-morning-diagnostic-order-v1/manifest.json'
+        if sha(orderp) != '2e806bc4138a952baa473e954ecf76853d1be75d120b9e4b3bbd65fda79d485b':
+            raise ValueError('immutable diagnostic order, no previous PT/native success import')
+        order = json.loads(orderp.read_bytes())
+        if order['classSha256'] != physical[nested]:
+            raise ValueError('same diagnostic class instructions as independently reviewed')
+        cases = json.loads(p.with_name('cases.safe.json').read_bytes())
+        refs = [c for c in cases if c['className'] == 'dev.codex.schubert.nk.batch.file.MorningCompletionRetirementTest'
+                and c['method'].startswith('completion32600')]
+        if len(refs) != 2:
+            raise ValueError('two fresh original current diagnostic cases, not old PASS transfer')
+        diagnostic = dict(classSha256=physical[nested], priorOrderSha256=sha(orderp),
+            allOuterMethodsExceptSequenceEquivalent=True, actualCurrentCaseRefs=refs,
+            priorPtOrNativeSuccessImported=False, actualNativeRetentionProven=False)
     value = dict(actualExit=0, source=source, qualificationSha256=sha(qp), classSha256=physical['batch:'+CLS.replace('.', '/')+'.class'],
         sourceSha256=sha(run/MAIN), order=analyze(methods(raw), current), jdk=jdk_proof(),
+        diagnosticReauthentication=diagnostic,
         status='FIXED_TWO_SLOTS_ALLOCATED_BEFORE_LAUNCH' if current else 'ORIGINAL_POST_RETURN_FIRST_GROW_GAP',
         productionTestsExecuted=0, buildsIssued=0, vmActions=0, ptAlternativeCompleted=0,
         formalAccepted=False, effortPercent=None, actualHeapFailureMeasured=False)

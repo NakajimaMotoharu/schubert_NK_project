@@ -32,6 +32,14 @@ class Definition(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'external alias'):
             subject.analyze(bad, False)
 
+    def test_genuine_current_jvm_has_two_preallocated_slots(self):
+        jar = subject.W/'pg6448-morning-sequence-green-v1/source/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar'
+        raw = subject.subprocess.check_output([str(subject.TC/'jdk-25.0.4/bin/javap'), '-p', '-c', '-s', '-classpath', str(jar), subject.CLS], text=True)
+        actual = subject.analyze(subject.methods(raw), True)
+        self.assertEqual((2, 2), (actual['capacity'], actual['maximumAdds']))
+        self.assertFalse(actual['registeredOnlyAfterFirstGrowRisk'])
+        self.assertLess(actual['constructorOffset'], actual['launchOffsets'][0])
+
 
 if __name__ == '__main__':
     unittest.main()

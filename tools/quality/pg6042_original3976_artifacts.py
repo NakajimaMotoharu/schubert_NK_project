@@ -89,7 +89,7 @@ def inspect_original(data):
     base = Path('/home/mini/schubert-nk-pgpt')
     campaign = data.get('campaign', 'PG6040')
     expected_counts = tuple(data.get('expectedCounts', (3976, 593, 1667)))
-    if (campaign, expected_counts, len(data['changedOwnerKeys'])) not in (('PG6040', (3976, 593, 1667), 23), ('PG6060', (3979, 594, 1667), 1), ('PG6088', (3985, 595, 1667), 5), ('PG6118', (3988, 595, 1667), 4), ('PG6196', (4024, 605, 1667), 13), ('PG6212', (4027, 605, 1667), 7), ('PG6244', (4034, 606, 1667), 10), ('PG6272', (4040, 607, 1667), 2), ('PG6302', (4043, 607, 1667), 2), ('PG6330', (4048, 607, 1667), 4), ('PG6386', (4052, 608, 1667), 2), ('PG6408', (4054, 610, 1667), 1)):
+    if (campaign, expected_counts, len(data['changedOwnerKeys'])) not in (('PG6040', (3976, 593, 1667), 23), ('PG6060', (3979, 594, 1667), 1), ('PG6088', (3985, 595, 1667), 5), ('PG6118', (3988, 595, 1667), 4), ('PG6196', (4024, 605, 1667), 13), ('PG6212', (4027, 605, 1667), 7), ('PG6244', (4034, 606, 1667), 10), ('PG6272', (4040, 607, 1667), 2), ('PG6302', (4043, 607, 1667), 2), ('PG6330', (4048, 607, 1667), 4), ('PG6386', (4052, 608, 1667), 2), ('PG6408', (4054, 610, 1667), 1), ('PG6452', (4056, 610, 1667), 1)):
         raise ValueError('explicit reviewed whole campaign/counts/owner inventory')
     source = base/('source-full-'+campaign); out = base/('runs/'+campaign+'-six-v1')
     digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -169,7 +169,7 @@ def inspect_original(data):
         # Only generated Main jars, never raw test logs/DB/key/runtime files.
         artifacts[module] = base64.b64encode(jarpath.read_bytes()).decode('ascii')
         if data.get('includeCoverageXml') is True:
-            if campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408'):
+            if campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408', 'PG6452'):
                 raise ValueError('only explicitly reviewed current3985 original coverage export')
             coverage_artifacts[module] = base64.b64encode(coverage.read_bytes()).decode('ascii')
     if expected_case_keys(actual) != expected_case_keys(data['expectedCases']) or (len(actual), sum(m['suites'] for m in modules.values()), len(physical)) != expected_counts or not set(all_counts) <= set(physical):
@@ -283,7 +283,7 @@ def collect(data, original_path, slot, remote, public_name, attempt=1, prior_fai
     coverage_values = value.pop('artifactCoverageXmlBase64', None)
     cases = value.pop('cases'); public = BASE/public_name; public.mkdir()
     if coverage_values is not None:
-        if data.get('campaign') not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408') or data.get('includeCoverageXml') is not True or set(coverage_values) != set(MODULES):
+        if data.get('campaign') not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408', 'PG6452') or data.get('includeCoverageXml') is not True or set(coverage_values) != set(MODULES):
             raise ValueError('only six explicitly requested original current coverage reports')
         for module in MODULES:
             body = base64.b64decode(coverage_values[module], validate=True)

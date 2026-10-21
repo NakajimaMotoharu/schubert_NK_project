@@ -26,7 +26,7 @@ class OriginalArtifactDefinitionTest(unittest.TestCase):
         raw = p.reader.emitted('0'*64, '/home/mini/schubert-nk-pgpt/transfer/PG6090-original3985-v1')
         ast.parse(raw)
         self.assertIn("('PG6088', (3985, 595, 1667), 5)", raw)
-        self.assertIn("campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408')", raw)
+        self.assertIn("campaign not in ('PG6088', 'PG6118', 'PG6196', 'PG6212', 'PG6244', 'PG6272', 'PG6302', 'PG6330', 'PG6386', 'PG6408', 'PG6452')", raw)
         self.assertIn("coverage_artifacts[module]", raw)
         for value in ('mvn ', 'systemctl', 'qemu-system', 'sudo ', '--resume', '--recover'):
             self.assertNotIn(value, raw)

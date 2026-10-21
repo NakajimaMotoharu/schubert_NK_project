@@ -20,7 +20,7 @@ class Definition(unittest.TestCase):
                 right=node.comparators[-1]
                 if isinstance(right,ast.Tuple):found.append(ast.literal_eval(right))
         self.assertTrue(any(('PG6330',(4048,607,1667),4)in item for item in found))
-        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272','PG6302','PG6330', 'PG6386', 'PG6408'),found)
+        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272','PG6302','PG6330', 'PG6386', 'PG6408', 'PG6452'),found)
         values=subject.definitions()['main'].__code__.co_consts
         for item in ('PG6330-six-v1','PG6302-current4043-cases/qualification.json',
             'PG6326-web-graph-qualification-v1/manifest.json','PG6330-current4048-cases',
