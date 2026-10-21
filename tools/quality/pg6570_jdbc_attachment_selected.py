@@ -8,7 +8,7 @@ import finite_selected_profile as profile
 import finite_original_red as original
 
 OLD='e033db0f806549a20adb01e788f5d1d5e2d73d92'
-RED_SOURCE=None
+RED_SOURCE='9f801319f097f323c24d8597167887d5bda0a78a'
 TEST='src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcRollbackAttachment330Test.java'
 MAINS={'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java'}
 TARGETS={'api':['api/dispatch/JdbcSyncRequestProcessor','api/error/TemporaryInfrastructureException']}

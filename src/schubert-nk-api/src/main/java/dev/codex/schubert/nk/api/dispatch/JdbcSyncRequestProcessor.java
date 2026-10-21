@@ -46,7 +46,7 @@ public final class JdbcSyncRequestProcessor implements SyncRequestProcessor {
           connection.rollback();
         } catch (SQLException | RuntimeException | Error rollbackFailure) {
           // Retained only within this scope to distinguish an unconfirmed permanent rejection.
-          if (rollbackFailure != failure) failure.addSuppressed(rollbackFailure);
+          TemporaryInfrastructureException.attachSecondary(failure, rollbackFailure);
         }
         throw failure;
       }
