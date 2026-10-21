@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.revocation;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData;
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
 import dev.codex.schubert.nk.web.messaging.LogoutWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
@@ -121,18 +122,24 @@ public final class RevocationRetryCoordinator {
     } catch (SQLException | RuntimeException | Error primary) {
       failure = primary;
     }
-    if (failure != null && connection != null) {
-      try {
-        connection.rollback();
-      } catch (SQLException | RuntimeException | Error secondary) {
-        failure = combine(failure, secondary);
+    try {
+      if (failure != null && connection != null) {
+        try {
+          connection.rollback();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          failure = combine(failure, secondary);
+        }
       }
-    }
-    if (connection != null) {
-      try {
-        connection.close();
-      } catch (SQLException | RuntimeException | Error secondary) {
-        failure = combine(failure, secondary);
+    } catch (Error fatal) {
+      // SS312/332/354, SSC329330: retain fatal classification until the remaining close.
+      failure = fatal;
+    } finally {
+      if (connection != null) {
+        try {
+          connection.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          failure = combine(failure, secondary);
+        }
       }
     }
     if (failure != null) {
@@ -144,7 +151,7 @@ public final class RevocationRetryCoordinator {
 
   private static Throwable combine(@Nullable Throwable primary, Throwable secondary) {
     if (primary == null) return secondary;
-    if (primary != secondary) primary.addSuppressed(secondary);
+    WebStartupException.attachSecondary(primary, secondary);
     return primary;
   }
 

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.logging;
 
+import dev.codex.schubert.nk.web.bootstrap.WebStartupException;
 import jakarta.jms.JMSException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -90,13 +91,17 @@ public final class WebLogDispatcher {
         T value = action.execute(connection);
         connection.commit();
         return value;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         primary = failure;
         try {
           connection.rollback();
         } catch (SQLException | RuntimeException rollbackFailure) {
-          if (rollbackFailure != failure) failure.addSuppressed(rollbackFailure);
+          WebStartupException.attachSecondary(failure, rollbackFailure);
         } catch (Error fatal) {
+          if (failure instanceof Error) {
+            WebStartupException.attachSecondary(failure, fatal);
+            throw failure;
+          }
           fatal.addSuppressed(failure);
           throw fatal;
         }
@@ -120,7 +125,7 @@ public final class WebLogDispatcher {
         fatal.addSuppressed(primary);
         throw fatal;
       }
-      if (closing != primary) primary.addSuppressed(closing);
+      WebStartupException.attachSecondary(primary, closing);
     }
   }
 

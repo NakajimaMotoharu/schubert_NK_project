@@ -8,7 +8,7 @@ import finite_selected_profile as profile
 import finite_original_red as original
 
 OLD='d48a13f4d36fe51bd5a333d0d0d926b76d1e280a'
-RED_SOURCE=None
+RED_SOURCE='dbb0a503b1e778a87a895c24352c3d00a33b88c2'
 TEST='src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test.java'
 MAINS={'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/'+p+'.java' for p in
        ('logging/WebLogDispatcher','revocation/RevocationRetryCoordinator')}

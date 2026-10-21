@@ -1,5 +1,18 @@
 # Web手動transaction secondary保持・rollback PT仕様（PG前）
 
+Program NK-MSG-002/NK-WEB-001、class `web.logging.WebOwnedAttachment329Test`の一意対応：
+
+| method | Test ID |
+|---|---|
+| owned329001DispatcherRollbackGraphSurvivesDisabledSuppression | PT-WEB-DISPATCH-ATTACH329001 |
+| owned329002DispatcherCloseGraphSurvivesAndNonFatalRawSqlRemainsSame | PT-WEB-DISPATCH-ATTACH329002 |
+| owned329003DispatcherDirectErrorRollsBackAndKeepsLegacyClosePriority | PT-WEB-DISPATCH-ATTACH329003 |
+| owned329004RevocationRollbackGraphCannotSkipRemainingClose | PT-WEB-REVOCATION-ATTACH329001 |
+| owned329005RevocationCloseGraphAndBothFatalGraphsKeepPrimary | PT-WEB-REVOCATION-ATTACH329002 |
+| owned329006RevocationNonFatalAndDirectErrorPoliciesRemainFixed | PT-WEB-REVOCATION-ATTACH329003 |
+
+原反例確定：元6612/dbb0a503b source固定、UTC2026-10-21T17:55:15.327283～17:57:35.609859、archivec819902db8ffc77ceba9ec1098da5a8dc61fcf805cb033b6dd535d43823138b1、実16/6 F5/phase0,0,1真正1/E/S/flaky0、原`PG6612-web-owned-original-red-v1/manifest.json` SHA060b6f31a3cfc873a575611c94ec78278fa35813970fe3f98f9c994273af19ceで事前五assertion一致・not-run2加点0。既006非fatal/directError優先は成功。次PG-D493の二Main接続、全六/旧Testbytes固定→green6614/39-11/原6616、現未実行。
+
 実Test定義：WebOwnedAttachment329Test六method/SHA512991fd327f7b3b9924686179941bd8c9ebabb809718a9475e5d1f7be80d028。Main d48a13f4d・全旧Testbyte不変更、format39254終了0/管理三0/pyflakes0。`pg6612_web_owned_attachment_selected.py red`のnewonly6612/18-8、予定原16/6 F5/not-run2、四identity不一致とdirectError rollback0のcounter不一致を事前固定。identity比較はassertThrows(Throwable)の実際object==固定expected Errorで型も含めて検証し、その前にsource/prepare/transaction/send0前提assertを行う。green6614/39-11→原6616、いずれも現時点未実行。
 
 具体化方針：同じowned Connection proxyを二programで共有するため、予定二classから`WebOwnedAttachment329Test`一class六methodへ集約する（TestID/期待値/六ケースscopeは不変更）。redはbaseline12＋新6＝18/8、Web停止時予測16/6/F5/not-run2。greenは新6＋旧WebLogDispatcher10/Revocation8＋WebStartup pure3＋baseline12＝39/11。constructor/JMS facadeはpure objectsのみ、replies pending0とsender到達0を独立確認する。
