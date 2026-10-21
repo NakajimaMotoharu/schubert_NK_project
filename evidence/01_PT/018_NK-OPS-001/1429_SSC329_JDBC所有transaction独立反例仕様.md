@@ -6,7 +6,7 @@ Program NK-MSG-002/NK-AUT-001、`JdbcSyncRequestProcessor.process`。RD MQ-003/0
 
 PT_DEFAULT。既存API requestは入力fixtureだけ、期待値は下記literalと別counter/元Error object。JDBC interface proxy、固定clock、有限Throwableだけを用い、DB/network/process/VM/Root/原本/鍵/permit操作なし。5秒timeout。拒否対象を探る実行や代替経路ではない。既保留/PTALT001/002を解除しない。
 
-未修正Main1b663c1b0の新Test-only sourceを固定し、6544-redでformat→全六testCompile→選択PT/static、真正終端と原XMLを保存する。予定全20/8、APIで停止した場合は実11/5と後続not-runを区別。compile/timeout/errorは目的赤ではない。旧Mainによる下記001/002/003/004/007のassertion失敗を予測し、実結果は独立読取で確定する。PG後も同Test bytesを固定しgreen20/8、全体4073へ算術加算しない。
+未修正Main1b663c1b0の新Test-only sourceを固定し、6544-redでformat→全六testCompile→選択PT/static、真正終端と原XMLを保存する。予定全20/8、APIで停止した場合は14/5と後続not-runを区別（初期11/5は手計算誤り、開始後の宣言一覧でprotocol3/storage1/bootstrap1/API1+8=14へ訂正、実結果は未回収・変更なし）。compile/timeout/errorは目的赤ではない。旧Mainによる下記001/002/003/004/007のassertion失敗を予測し、実結果は独立読取で確定する。001/002/003/007は期待AssertionErrorに対する実TemporaryInfrastructureException、004はcommit後rollback欠落のevent list不一致が予測反例。PG後も同Test bytesを固定しgreen20/8、全体4073へ算術加算しない。
 
 |Test ID / method suffix|入力・独立期待値|
 |---|---|

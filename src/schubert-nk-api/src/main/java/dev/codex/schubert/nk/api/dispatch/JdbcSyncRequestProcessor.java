@@ -41,19 +41,21 @@ public final class JdbcSyncRequestProcessor implements SyncRequestProcessor {
                 handler.handle(connection, request, clock.instant()), "encoded response");
         connection.commit();
         return response;
-      } catch (SQLException | RuntimeException failure) {
+      } catch (SQLException | RuntimeException | Error failure) {
         try {
           connection.rollback();
-        } catch (SQLException rollbackFailure) {
+        } catch (SQLException | RuntimeException | Error rollbackFailure) {
           // Retained only within this scope to distinguish an unconfirmed permanent rejection.
-          failure.addSuppressed(rollbackFailure);
+          if (rollbackFailure != failure) failure.addSuppressed(rollbackFailure);
         }
         throw failure;
       }
     } catch (PermanentProtocolException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       if (failure.getSuppressed().length != 0) throw new TemporaryInfrastructureException();
       throw new PermanentProtocolException("request transaction rejected invalid protocol");
     } catch (SQLException | RuntimeException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       // Includes uncertain commit/close; Inbox makes subsequent delivery safe in either outcome.
       throw new TemporaryInfrastructureException();
     }

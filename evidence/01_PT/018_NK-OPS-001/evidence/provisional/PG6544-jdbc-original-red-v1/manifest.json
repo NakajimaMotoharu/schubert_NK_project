@@ -1,0 +1,32 @@
+{
+  "actualExit": 0,
+  "archiveSha256": "c3daa8f9444f7b34d290540f8e9088ed5433fa62e3b514bc369d1ce82f65e27c",
+  "bug": "BUG-1592",
+  "expectedFailures": [
+    "tx329001SqlPrimaryAndCloseFatalRetainIdentityAfterRollback",
+    "tx329002ProtocolPrimaryAndCloseFatalCannotBecomeTemporary",
+    "tx329003DirectFatalRollsBackOnceDespiteSecondaryAndSameClose",
+    "tx329004CommitFatalWinsOverRollbackAndCloseFatals",
+    "tx329007SqlNextCauseFatalCannotBecomeTheFixedCatalog"
+  ],
+  "formalAccepted": false,
+  "laterNotRun": 6,
+  "originalExit": 1,
+  "originalManifestSha256": "37892721b9437c1c9fe527dd72f4b49cf0f304faa23e759c47c0aa16ee923c6d",
+  "ptAlternativeCompleted": 0,
+  "rollout": "YKT-1345",
+  "run": "pg6544-jdbc-transaction-red-v1",
+  "source": "1e82fab587ca06d2030c59a4b74a0093e479d6f5",
+  "suites": 5,
+  "testSha256": "8fe95ca61af9b2cf76b1fceda0d5217e337271acd61c75d056141c4904d028c3",
+  "tests": 14,
+  "testsExecutedByReader": 0,
+  "vmActions": 0,
+  "xmlHashes": {
+    "dev.codex.schubert.nk.api.dispatch.JdbcTransactionFatal329Test": "94da65bcc6d7b841d00b843203e5d9aae25939be8919acee016a052e7817945c",
+    "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "c4c227412e7aec0dc5e2243fee6aab0b2cbfcfa41282c8d8c8c469a47b16f5d7",
+    "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "2d363b208ca8a13386003473374a90dfd009cabee4526a3abb4fd95ab6d09a12",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "2cf3ec3e8da6a84397a14a3c58e6d72a0c59f5f8908c3a40721ec26277d94b7b",
+    "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "ffdedb883a41f7b51e88dfc6c994869b39c9c4de273262d1e4a2204c79ae8647"
+  }
+}

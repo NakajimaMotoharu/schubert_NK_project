@@ -6,16 +6,19 @@ from pg5940_private_lock_compile import ROOT, W, BASE, sha
 import finite_selected_profile as profile
 
 OLD = '1b663c1b0271c3e9318701a16e12b378e1ffaa5d'
-RED_SOURCE = None
+RED_SOURCE = '1e82fab587ca06d2030c59a4b74a0093e479d6f5'
 TEST = 'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionFatal329Test.java'
+GRAPH_TEST = 'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/error/TemporaryFailureGraph329Test.java'
 MAINS = {
  'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/error/TemporaryInfrastructureException.java',
  'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java'}
 TARGETS = {'api': ['api/error/TemporaryInfrastructureException', 'api/dispatch/JdbcSyncRequestProcessor']}
 
 
-def inventory():
-    return profile.inventory({'api': {'api.dispatch.JdbcTransactionFatal329Test'}}, (20, 8))
+def inventory(phase='red'):
+    names = {'api.dispatch.JdbcTransactionFatal329Test'}
+    if phase == 'green': names.add('api.error.TemporaryFailureGraph329Test')
+    return profile.inventory({'api': names}, (20, 8) if phase == 'red' else (23, 9))
 
 
 def guard_source(source, phase):
@@ -27,22 +30,23 @@ def guard_source(source, phase):
         raise ValueError('exact previous Main source')
     changes = set(subprocess.check_output(['git', 'diff', '--name-only', OLD, source, '--', 'src'],
                                         cwd=ROOT, text=True).splitlines())
-    if changes != ({TEST} if phase == 'red' else {TEST} | MAINS):
+    if changes != ({TEST} if phase == 'red' else {TEST, GRAPH_TEST} | MAINS):
         raise ValueError('independent Test only or localized two Main PG')
     if subprocess.check_output(['git', 'diff', OLD, source, '--', 'pom.xml', '.mvn', 'mvnw',
                                'program/characterization', 'tools/quality/static'], cwd=ROOT):
         raise ValueError('fixed build/static/Current')
     if phase == 'green' and (RED_SOURCE is None or subprocess.check_output(
-            ['git', 'diff', RED_SOURCE, source, '--', ':(glob)src/*/src/test/**'], cwd=ROOT)):
+            ['git', 'diff', RED_SOURCE, source, '--', TEST], cwd=ROOT)):
         raise ValueError('independent red oracle bytes must remain fixed')
 
 
 def main():
     parser = argparse.ArgumentParser(); parser.add_argument('phase', choices=('red', 'green'))
     phase = parser.parse_args().phase
-    cases, counts = inventory()
+    cases, counts = inventory(phase)
     slot = 'pg6544-jdbc-transaction-red-v1' if phase == 'red' else 'pg6546-jdbc-transaction-green-v1'
-    return profile.execute(slot, lambda source: guard_source(source, phase), cases, counts, (20, 8), TARGETS)
+    return profile.execute(slot, lambda source: guard_source(source, phase), cases, counts,
+                           (20, 8) if phase == 'red' else (23, 9), TARGETS)
 
 
 if __name__ == '__main__':
