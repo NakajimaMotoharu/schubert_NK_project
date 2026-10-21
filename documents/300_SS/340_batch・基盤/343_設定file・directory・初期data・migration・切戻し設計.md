@@ -1,5 +1,7 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+SSC326（2026-10-21、BUG1581/YKT1320）：MorningStartupLaunchOwnerの完了UNKNOWN後に呼ぶCompletionProgress.failureは、nonnull主障害の固定IO/FATAL/RUNTIME分類を維持し、emit内の時計/sink/文字列生成のRuntimeException/Errorを封じて元completion catchのretainへ戻す。診断不能は成功通知/正常解放ではない。通常phase通知・constructor/null境界は既どおり失敗を伝播し、固定literal/phase/elapsed計算/retirement順序/親30分/元Unit期限/DB/権限を変更しない。当局所診断保護で実親保持/真正DONE/nativeを証明せず、元依存と実環境HOLDを維持する。
+
 ## SSC318 keeper二次失敗の扱い
 
 native policy getterの取得前呼出によりretainer/fixed observer/fallbackのclass初期化を完了させる。tick故障時はfixed monotonic1000ms fallbackを用い、外部flag・別Root・permit発行で切替えない。IRQ/早期parkとfallback故障もUNKNOWNのまま扱い、後者のVM/CPUリスクを正常性の保証に読み替えない。

@@ -205,4 +205,83 @@ final class MorningCompletionRetirementTest {
     if (failure instanceof RuntimeException unchecked) throw unchecked;
     throw (Error) failure;
   }
+
+  @Test
+  void completion326001FailureDiagnosticCannotThrowBeforeOwnerRetention() {
+    var vectors = new ArrayList<org.junit.jupiter.api.function.Executable>();
+    var primary =
+        List.of(
+            new IOException("PRIVATE primary"),
+            new IllegalStateException("PRIVATE primary"),
+            new AssertionError("PRIVATE primary"));
+    var labels = List.of("IO", "RUNTIME", "FATAL");
+    for (int index = 0; index < primary.size(); index++) {
+      var original = primary.get(index);
+      var label = labels.get(index);
+      for (boolean clockFailure : List.of(false, true))
+        for (boolean error : List.of(false, true))
+          vectors.add(
+              () -> {
+                var reads = new AtomicLong();
+                var lines = new ArrayList<String>();
+                var secondary =
+                    error
+                        ? new AssertionError("PRIVATE secondary")
+                        : new IllegalStateException("PRIVATE secondary");
+                var progress =
+                    new MorningStartupLaunchOwner.CompletionProgress(
+                        () -> {
+                          long call = reads.incrementAndGet();
+                          if (clockFailure && call == 2) throwUnchecked(secondary);
+                          return 100;
+                        },
+                        line -> {
+                          lines.add(line);
+                          throwUnchecked(secondary);
+                        });
+                assertDoesNotThrow(() -> progress.failure(original));
+                assertEquals(2, reads.get());
+                assertEquals(
+                    clockFailure
+                        ? List.of()
+                        : List.of(
+                            "event=morning.completion phase=CADDY_BEFORE classification="
+                                + label
+                                + " elapsedNanos=0"),
+                    lines);
+              });
+    }
+    assertAll(vectors);
+  }
+
+  @Test
+  void completion326002NormalPhaseDiagnosticStillPropagatesIdenticalFailure() {
+    for (boolean clockFailure : List.of(false, true))
+      for (boolean error : List.of(false, true)) {
+        var reads = new AtomicLong();
+        var secondary =
+            error
+                ? new AssertionError("PRIVATE secondary")
+                : new IllegalStateException("PRIVATE secondary");
+        var progress =
+            new MorningStartupLaunchOwner.CompletionProgress(
+                () -> {
+                  long call = reads.incrementAndGet();
+                  if (clockFailure && call == 2) throwUnchecked(secondary);
+                  return 100;
+                },
+                line -> throwUnchecked(secondary));
+        assertSame(
+            secondary,
+            assertThrows(
+                secondary.getClass(),
+                () -> progress.phase(MorningStartupLaunchOwner.CompletionPhase.DONE_AFTER)));
+        assertEquals(2, reads.get());
+      }
+  }
+
+  private static void throwUnchecked(Throwable failure) {
+    if (failure instanceof Error fatal) throw fatal;
+    throw (RuntimeException) failure;
+  }
 }
