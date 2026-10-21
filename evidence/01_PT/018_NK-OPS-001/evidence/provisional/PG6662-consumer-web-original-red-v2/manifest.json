@@ -1,0 +1,45 @@
+{
+  "TestHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/ConsumerGraph332Test.java": "3be45454f213a5d3f51e385450a3889022a07d92a09ad701871c875ed441a0c9",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyConsumerGraph332Test.java": "3185beb70e0d77e24ee751c00105855dc90a4881209ea20072be27985e2269a9"
+  },
+  "actualExit": 0,
+  "archiveSha256": "939deaef03ebe70e76aff83518c99ff5c6d481b2dc4c08228a5347a6e8ce2ba7",
+  "expectedFailures": [
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyConsumerGraph332Test",
+      "cons332005WrappedFatalSignalsThenRethrowsOriginalWithoutSecondRollback"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyConsumerGraph332Test",
+      "cons332006PreflightIsNotConfirmedAndStateResetsPerDelivery"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyConsumerGraph332Test",
+      "cons332007RollbackFatalIsNeverReissuedAndNotificationCannotMaskIt"
+    ],
+    [
+      "dev.codex.schubert.nk.web.messaging.ReplyConsumerGraph332Test",
+      "cons332008OrdinaryCycleDirectFatalAndPublicListenerContractsRemain"
+    ]
+  ],
+  "formalAccepted": false,
+  "laterNotRun": 2,
+  "originalExit": 1,
+  "originalManifestSha256": "27db25b3233a995018cfc5b4c3d14b91ef40908c017c1b68b42289f107aad453",
+  "ptAlternativeCompleted": 0,
+  "run": "pg6662-consumer-web-red-v2",
+  "source": "cf3ca339897f2483cecc0daf174d8d4c6f7a50f8",
+  "suites": 6,
+  "tests": 14,
+  "testsExecutedByReader": 0,
+  "vmActions": 0,
+  "xmlHashes": {
+    "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "27163f065677e44e06bbb75a316927b5da47c93cf9a7e8cbb511ce14c569b246",
+    "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "48f632b811a2a3118173f9ec10c35fa9af4004f369a701b59fcc3bb4d56a0979",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "8694fdbc5aeeaac2d0742a73919c62f63752ea19350bfdf0f1d11d7b597ca42d",
+    "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "0171a73ef5866141369e40d675c45dffe69b71703950bbd34da47b7119fef773",
+    "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest": "d9a9e41fb62fe9dad67ecc84ba968de032c2405b9ef3c206b55627c42d8c66fd",
+    "dev.codex.schubert.nk.web.messaging.ReplyConsumerGraph332Test": "f72b96fe57c79b4d421a612c0efc4dfd8b73cb15bd87a750dd3ac1cffc225f29"
+  }
+}

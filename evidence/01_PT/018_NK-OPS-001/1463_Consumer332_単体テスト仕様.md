@@ -1,5 +1,7 @@
 # Consumer332 ordinary graph/rollback PT仕様
 
+元cf3ca3398の再現資格：6660/43639（10/5 F3、UTC21:14:10.385251～21:17:26.485077）/6662/65920（14/6 F4、UTC21:14:11.993132～21:17:52.384343）は共にphase0,0,1/真正1、archive939deaef03ebe70e76aff83518c99ff5c6d481b2dc4c08228a5347a6e8ce2ba7。原manifest3fb575dea05bd7c722fad0cb9111b87ed78d25e79bc523e23d7f3c7be3eec74a/142180f96268ebc75139d00d5b5361d86be18c4c8a2695219f9b817e5ad4b7ebで七予定boolean assertion完全一致。Test固定SHA API3be45454f213a5d3f51e385450a3889022a07d92a09ad701871c875ed441a0c9/Web3185beb70e0d77e24ee751c00105855dc90a4881209ea20072be27985e2269a9。PG-D497/3e7a56c36で五Mainだけ必要PG、format/管理3/pyflakes0。green最初の呼出は未commit原manifest二件をclean guardが正しく拒否し、Maven/新run未開始0PT。公開原証跡を保存してから同未使用slotへ進む（security拒否の再試行ではない）。
+
 ## 事前compile失敗・新only是正（BUG1603/YKT1356）
 
 元6652/11185と6654/22215はf0c1fa87e/archive ca43a4c6、phase0,1真正1/0PT0suite。API fixtureの汎用checked closeがjavac try警告四件で-Werrorへ違反、予定反例とは異なるので原赤資格なし。具体三owner close dispatch/unchecked署名へ限定是正し、入力/期待値/全Main/既Testは固定。Web同型は既具体ownerで非該当。旧run/manifestを上書きせず、新赤6660/6662-v2・green6664-v2/原6666-v2を使用する。以下6652/6654/6656/6658は旧初期計画として保持、現在のcommandは同driver/新SLOTS。再試験前は当fixture障害OPEN。
