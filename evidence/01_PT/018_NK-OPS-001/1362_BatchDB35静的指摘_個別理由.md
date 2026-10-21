@@ -1,0 +1,9 @@
+# Batch DB/Cleanup 35指摘の個別PGレビュー
+
+PG6354 sourceaed原4048の七class35spanをsource断片・SS331/332/341/343/SSC063/199/304/310・元同sourceの各semantic Testと照合。公開 `evidence/provisional/PG6354-batch-database-static-review-v1/manifest.json` SHA256 `33d467098f3881a2a92b4de30992f921c51f312eddd572a2bad2c8e2b231805a`。対象はCleanupDatabaseSession7、MorningDatabaseSession14、CleanupTerminalRepository4、ExpiryAuditRepository2、InspectorLockHandoff5、LogCleanupService1、MaintenanceMutationGuard2。raw1356保持、REQUIRED787/CONTEXT262/FP32/未分類261/元pending14。
+
+取得直後Statement/ResultSet保護・一回close・借用Connection、callback thread/lifetimeと七volatile flagのvisibilityの限定用途、未知callbackに対する固定秘匿secondary、必須再取得失敗で成功値を返さないfinally、commit後guard失敗をrollback成功としない点、transaction-local timeout確認を個別理由へ記録。実際のロック取得/解除・Cleanup/Expiry/Backup/Root/VM/DB/key操作は一切行わず、原4048の既存case hashを関連づけた読取/PG適用性点検のみ。
+
+YKT1323横展開判断：SS332のSQL/unknown順位とSS343SSC304 successful直下usingJdbcのJava25 TWR（同一secondary/self-suppression含む）は承認済みの異なる局所契約。通常JMS senderのfatal順位・identity guardを機械的に全JDBCへ適用しない。実装都合でSS/旧oracleを変更0。本35件で新しい確定仕様不一致なし・PG修正不要だが、他domain/任意provider複合例外/実経路の残るYKT1323全体を閉鎖0。
+
+工具正負二test/pyflakes0、欠落volatile spanは受入失敗。追加Production PT/build/coverage測定0、F03全受入/正式1964-53/17-190/工数率加点0。開始群F03_BATCH_DATABASE35 .25/.75/2pp凍結、共有used39残61/reset1793082864/secondary不明、実N/T/専有費null・原-v4不変更。次は残261個別指摘・必要PGと独立PTを継続する。旧14pending・新3deda全体/native未実施・QA051final/PTALT不明代替0・実環境HOLD/全保全を維持。
