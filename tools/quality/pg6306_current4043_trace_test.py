@@ -1,5 +1,7 @@
 import unittest
 import copy
+import json
+import subprocess
 from unittest.mock import patch
 import pg6306_current4043_trace as trace
 import pg6308_current4043_static_plan as plan
@@ -37,6 +39,43 @@ class FixedDefinitions(unittest.TestCase):
         self.assertFalse(value['F03Accepted']);self.assertEqual(0,value['testsExecuted'])
         for r in rows:self.assertTrue(r['currentWholeJoinPending']);self.assertEqual([],r['currentWholeCaseRefs'])
         for path in (trace.__file__,plan.__file__,review.__file__,__file__):self.assertEqual(0,checkPath(path))
+
+
+class ActualOriginalCandidate(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.texts={name:(trace.PMO/name).read_text()for name in trace.NAMES}
+        cls.head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=trace.ROOT,text=True).strip()
+        saved=json.loads(cls.texts[trace.NAMES[2]])
+        old='b4230118efcc429ee29d6e6f5761c55175f1e85e'
+        if saved['currentPhysicalCandidate']['source']!=old:
+            prior=[r for r in saved['currentPhysicalCandidateHistory']if r['source']==old]
+            if len(prior)!=1:raise ValueError('one preserved original before-candidate fixture')
+            cls.head=prior[0]['metadataSource']
+            cls.texts={name:subprocess.check_output(['git','show',cls.head+':documents/400_PGPT/470_PMO/'+name],cwd=trace.ROOT,text=True)for name in trace.NAMES}
+        cls.proposed,cls.observed=trace.candidates(cls.texts,cls.head)
+        cls.inventory=json.loads(cls.proposed[trace.NAMES[2]])
+
+    def test_exact943_original4043_and_immutable_history_cost_acceptance(self):
+        old=json.loads(self.texts[trace.NAMES[2]])
+        self.assertEqual(old['artifacts'],self.inventory['artifacts'])
+        self.assertEqual(old['measurementBindings'],self.inventory['measurementBindings'])
+        self.assertEqual((943,4043,607,0),(self.observed['physicalArtifacts'],self.observed['tests'],self.observed['suites'],self.observed['acceptedLeafDelta']))
+        self.assertEqual({'LINE':3554,'METHOD':687,'CLASS':38,'BRANCH':723},self.observed['remaining'])
+        self.assertEqual(trace.SOURCE,self.inventory['currentPhysicalCandidate']['source'])
+        for name in trace.NAMES[:2]:self.assertEqual(self.texts[name],self.proposed[name])
+        before=json.loads(self.texts[trace.NAMES[3]]);after=json.loads(self.proposed[trace.NAMES[3]])
+        for key in ('rows','counts','source','measurementRun','formal','wholeEffortCompletionRate'):
+            self.assertEqual(before[key],after[key])
+
+    def test_wrong_bytes_missing_duplicate_acceptance_measurement_cost_rejected(self):
+        changes=(lambda c:c['artifacts'].pop(),lambda c:c['artifacts'].append(copy.deepcopy(c['artifacts'][0])),
+            lambda c:c['artifacts'][0].update(sha256='a'*64),lambda c:c.update(acceptedLeafDelta=1),
+            lambda c:c['artifacts'][-1].update(additionalBudgetPp=1),
+            lambda c:c['measurement'].update(sha256='b'*64),lambda c:c.update(effortPercent=100))
+        for i,change in enumerate(changes):
+            bad=copy.deepcopy(self.inventory);change(bad['currentPhysicalCandidate'])
+            with self.subTest(vector=i),self.assertRaises(ValueError):trace.trace.verify_candidate(bad)
 
 
 if __name__=='__main__':unittest.main()
