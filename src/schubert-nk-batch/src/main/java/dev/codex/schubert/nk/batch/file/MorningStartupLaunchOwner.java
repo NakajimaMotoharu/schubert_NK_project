@@ -153,7 +153,12 @@ final class MorningStartupLaunchOwner {
 
     void failure(Throwable failure) {
       Objects.requireNonNull(failure);
-      emit(failure instanceof IOException ? "IO" : failure instanceof Error ? "FATAL" : "RUNTIME");
+      try {
+        emit(
+            failure instanceof IOException ? "IO" : failure instanceof Error ? "FATAL" : "RUNTIME");
+      } catch (RuntimeException | Error diagnosticFailure) {
+        // SSC326: best-effort diagnosis must return to the original owner's UNKNOWN retention.
+      }
     }
 
     private void emit(String classification) {
