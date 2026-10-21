@@ -1,5 +1,11 @@
 # 処理sequence・method・例外・transaction設計
 
+## SSC329 ordinary JDBC fatal保持・owned transaction（2026-10-21）
+
+SQLException/RuntimeExceptionを固定catalogや業務SQLstateへ変換する前に、捕捉したfinite exception graphのcause/suppressed/SQLException.nextへ到達可能なErrorを元objectで伝播する。非fatal graphはidentity visitedで有限帰還し、provider text/cause/suppressedを新catalogへ保持しない。ordinary APIの共有分類はapi.error.TemporaryInfrastructureExceptionのpure static portへ置き、API内で再利用する（新module/GAV/権限依存なし）。既Authのsuppressed優先とWeb/sessionのcause優先はSSC328を維持する。Web内部の同分類は既SessionStoreException portを使い、production Web→API依存を追加しない。
+
+owned transactionはhandler/commitのSQL・Runtime・Error失敗時にrollbackを一回試み、owned connection closeも一回完了させてから結果を返すか失敗を伝播する。rollbackのSQL/Runtime/Errorは元primaryへ同一object以外だけ一時attachし、直接primary Errorのidentity/優先を維持する。TWRが同一Throwableのself-suppressionを別例外へ包んだ場合も、そのcause内Errorを通常catalogへ縮退させない。commit後close失敗はcommitを取り消せたことにせず、応答/ACKの成功を返さない。borrowed repositoryはConnectionのcommit/rollback/closeを新しく所有せず、既Statement/ResultSet closeの後に変換前fatal分類を行う。既通常catalog/SQL/更新数/DB role/再送・DIFは不変更。BUG1592/YKT1345、実原本DB/Root/VM/cohort/keysへの操作権限を追加しない。
+
 SSC156（2026-10-02、Worker実装前）：retry_countはmin(actual count-1,3)、実delivery metadataは非cap。AnswerResult.answeredAtの有限UTCµsをstarted/received以上で検査し、answer/job/notificationの同完了stampへ使用、wireだけms。通常最終ERRORは既存DのSENT後だけ元ACK。ERROR+D commit～元ACKにhard crash/session rollbackが起きると、固定Broker max4が元WをDLQ移動し、startup dispatcherのD送信と2物理コピーになり得る。双方を同Wの論理隔離として保全し、353 §7.2で個別照合/承認整理する。ERROR時のprovider再実行、新D生成、ordinary W proof変更は禁止。停止要求でD未確認の待機を解く場合は正常復帰せずrollbackする。shared stop→consumer drain/close→Outbox join→DB/factory/key/root closeの所有順を守り、待機中DB/JMSを保持しない。
 
 PG/PT内部接続補足（SSC153154155、2026-10-01、実装前）：普通APIは31 requestとQWK/WebLog、全3consumer、専用Outbox lifecycleを実接続するまでready/A releaseを許さない。共通event portはguard検証済みactual delivery count・bounded transport ID・UTC受信時刻をQuestionへ渡す。Questionのcount-less呼出しをdelivery1と推測しない。
