@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -38,6 +40,98 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-JMS-005/006 production request sender transaction and transport tests. */
 final class ArtemisRequestSenderTest {
   private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
+  /** SSC321/BUG1569: fixed primary/cleanup ownership table, no broker or connected context. */
+  @Test
+  void cleanup321001FatalCleanupAndOriginalFailureIdentity() {
+    int[][] owner = {{0, 0, 1, 0}, {0, 0, 0, 0}, {0, 0, 1, 0}};
+    for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
+      for (int closeKind : primaryKind == 2 ? new int[] {2, 0, 1} : new int[] {2, 0, 1, 3}) {
+        Throwable primary =
+            switch (primaryKind) {
+              case 0 -> new IllegalStateException("independent primary");
+              case 1 -> new AssertionError("independent primary");
+              default -> new JMSException("independent primary");
+            };
+        Optional<Throwable> closing =
+            switch (closeKind) {
+              case 0 -> Optional.empty();
+              case 1 -> Optional.of(new IllegalArgumentException("independent cleanup"));
+              case 2 -> Optional.of(new LinkageError("independent cleanup"));
+              default -> Optional.of(primary);
+            };
+        AtomicInteger closed = new AtomicInteger();
+        AtomicInteger written = new AtomicInteger();
+        AtomicInteger commits = new AtomicInteger();
+        AtomicInteger rollbacks = new AtomicInteger();
+        JMSContext context =
+            cleanup321Context(primary, closing, closed, written, commits, rollbacks);
+        var actual =
+            assertThrows(
+                Throwable.class,
+                () ->
+                    new ArtemisRequestSender(() -> context)
+                        .send(MESSAGE_ID, independentRequestWire()));
+        Throwable expected = owner[primaryKind][closeKind] == 0 ? primary : closing.orElseThrow();
+        assertSame(expected, actual);
+        if (expected != primary)
+          assertArrayEquals(new Throwable[] {primary}, actual.getSuppressed());
+        else if (closing.isPresent() && closing.orElseThrow() != primary)
+          assertArrayEquals(new Throwable[] {closing.orElseThrow()}, actual.getSuppressed());
+        else assertEquals(0, actual.getSuppressed().length);
+        for (Throwable secondary : actual.getSuppressed()) assertNotSame(actual, secondary);
+        assertEquals(1, closed.get());
+        assertEquals(primaryKind == 2 ? 1 : 0, written.get());
+        assertEquals(0, commits.get());
+        assertEquals(primaryKind == 2 ? 1 : 0, rollbacks.get());
+      }
+    }
+  }
+
+  private static JMSContext cleanup321Context(
+      Throwable primary,
+      Optional<Throwable> closing,
+      AtomicInteger closed,
+      AtomicInteger written,
+      AtomicInteger commits,
+      AtomicInteger rollbacks) {
+    BytesMessage bytes =
+        (BytesMessage)
+            Proxy.newProxyInstance(
+                BytesMessage.class.getClassLoader(),
+                new Class<?>[] {BytesMessage.class},
+                (proxy, method, arguments) -> {
+                  if (!method.getName().equals("writeBytes"))
+                    throw new AssertionError("unexpected synthetic message call");
+                  written.incrementAndGet();
+                  throw primary;
+                });
+    return (JMSContext)
+        Proxy.newProxyInstance(
+            JMSContext.class.getClassLoader(),
+            new Class<?>[] {JMSContext.class},
+            (proxy, method, arguments) -> {
+              switch (method.getName()) {
+                case "getSessionMode":
+                  if (!(primary instanceof JMSException)) throw primary;
+                  return JMSContext.SESSION_TRANSACTED;
+                case "createBytesMessage":
+                  return bytes;
+                case "commit":
+                  commits.incrementAndGet();
+                  return null;
+                case "rollback":
+                  rollbacks.incrementAndGet();
+                  return null;
+                case "close":
+                  closed.incrementAndGet();
+                  if (closing.isPresent()) throw closing.orElseThrow();
+                  return null;
+                default:
+                  throw new AssertionError("unexpected synthetic context call");
+              }
+            });
+  }
 
   @Test
   @DisplayName("PT-JMS-QSB-A-WEB-SEND: valid QSB Q/A, not arbitrary asynchronous wire")

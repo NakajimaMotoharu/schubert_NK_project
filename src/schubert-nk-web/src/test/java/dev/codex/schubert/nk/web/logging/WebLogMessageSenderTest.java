@@ -13,6 +13,7 @@ import java.lang.reflect.Proxy;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -34,6 +35,189 @@ final class WebLogMessageSenderTest {
       new WebLogPayloadIdentity(
           UUID.fromString("00000000-0000-0000-0000-000000000012"),
           UUID.fromString("00000000-0000-0000-0000-000000000015"));
+
+  /** SSC321/BUG1569: independent fixed outcome table, not production-derived expected failures. */
+  @Test
+  void cleanup321002FatalCleanupPriorityAndPlaintextWipe() throws Exception {
+    int[][] outcome = {{0, 1, 2}, {1, 1, 2}, {3, 3, 3}, {1, 1, 2}};
+    try (WebLogPayloadCodec codec = codec()) {
+      byte[] golden = WebLogPayloadCodecTest.goldenWire();
+      ClaimedWebLog row = row(codec.encrypt(IDENTITY, golden));
+      for (int primaryKind : new int[] {1, 0, 2, 3}) {
+        for (int closeKind : new int[] {2, 0, 1}) {
+          Optional<Throwable> primary =
+              switch (primaryKind) {
+                case 0 -> Optional.empty();
+                case 1 -> Optional.of(new IllegalStateException("independent primary"));
+                case 2 -> Optional.of(new AssertionError("independent primary"));
+                default -> Optional.of(new JMSException("independent primary"));
+              };
+          Optional<Throwable> closing =
+              switch (closeKind) {
+                case 0 -> Optional.empty();
+                case 1 -> Optional.of(new IllegalArgumentException("independent cleanup"));
+                default -> Optional.of(new LinkageError("independent cleanup"));
+              };
+          var counts = cleanup321Counters();
+          var plain = new AtomicReference<byte[]>();
+          var captured = new AtomicReference<byte[]>();
+          JMSContext context = cleanup321Context(primary, closing, counts, plain, captured);
+          int expected = outcome[primaryKind][closeKind];
+          if (expected == 0) new WebLogMessageSender(codec, () -> context).send(row);
+          else {
+            Throwable actual =
+                assertThrows(
+                    Throwable.class, () -> new WebLogMessageSender(codec, () -> context).send(row));
+            if (expected == 2) {
+              assertSame(closing.orElseThrow(), actual);
+              if (primaryKind == 0) assertEquals(0, actual.getSuppressed().length);
+              else {
+                assertEquals(1, actual.getSuppressed().length);
+                if (primaryKind == 3)
+                  assertSame(
+                      primary.orElseThrow(),
+                      assertInstanceOf(WebLogSendException.class, actual.getSuppressed()[0])
+                          .getCause());
+                else assertSame(primary.orElseThrow(), actual.getSuppressed()[0]);
+              }
+            } else if (expected == 3) {
+              assertSame(primary.orElseThrow(), actual);
+              assertArrayEquals(
+                  closing.map(value -> new Throwable[] {value}).orElseGet(() -> new Throwable[0]),
+                  actual.getSuppressed());
+            } else {
+              WebLogSendException typed = assertInstanceOf(WebLogSendException.class, actual);
+              assertSame(
+                  primaryKind == 0 ? closing.orElseThrow() : primary.orElseThrow(),
+                  typed.getCause());
+              Throwable carrier = primaryKind == 3 ? typed : primary.orElse(typed);
+              assertArrayEquals(
+                  primaryKind == 0
+                      ? new Throwable[0]
+                      : closing
+                          .map(value -> new Throwable[] {value})
+                          .orElseGet(() -> new Throwable[0]),
+                  carrier.getSuppressed());
+            }
+            for (Throwable secondary : actual.getSuppressed()) assertNotSame(actual, secondary);
+          }
+          assertEquals(1, counts[0].get());
+          assertEquals(primaryKind == 0 || primaryKind == 3 ? 1 : 0, counts[1].get());
+          assertEquals(primaryKind == 0 ? 1 : 0, counts[2].get());
+          assertEquals(primaryKind == 3 ? 1 : 0, counts[3].get());
+          if (primaryKind == 0 || primaryKind == 3) {
+            assertArrayEquals(golden, captured.get());
+            assertArrayEquals(new byte[2336], plain.get());
+          } else {
+            assertNull(captured.get());
+            assertNull(plain.get());
+          }
+        }
+      }
+    }
+  }
+
+  @Test
+  void cleanup321003SameThrowableNeverMasksOriginalFailure() {
+    try (WebLogPayloadCodec codec = codec()) {
+      ClaimedWebLog row = row(codec.encrypt(IDENTITY, WebLogPayloadCodecTest.goldenWire()));
+      for (Throwable primary :
+          new Throwable[] {
+            new AssertionError("independent same fatal"),
+            new IllegalStateException("independent same runtime")
+          }) {
+        var counts = cleanup321Counters();
+        var plain = new AtomicReference<byte[]>();
+        var captured = new AtomicReference<byte[]>();
+        JMSContext context =
+            cleanup321Context(Optional.of(primary), Optional.of(primary), counts, plain, captured);
+        Throwable actual =
+            assertThrows(
+                Throwable.class, () -> new WebLogMessageSender(codec, () -> context).send(row));
+        if (primary instanceof Error) assertSame(primary, actual);
+        else assertSame(primary, assertInstanceOf(WebLogSendException.class, actual).getCause());
+        assertEquals(0, primary.getSuppressed().length);
+        assertEquals(1, counts[0].get());
+        assertEquals(0, counts[1].get());
+        assertEquals(0, counts[2].get());
+        assertEquals(0, counts[3].get());
+        assertNull(captured.get());
+        assertNull(plain.get());
+      }
+    }
+  }
+
+  private static AtomicInteger[] cleanup321Counters() {
+    return new AtomicInteger[] {
+      new AtomicInteger(), new AtomicInteger(), new AtomicInteger(), new AtomicInteger()
+    };
+  }
+
+  private static JMSContext cleanup321Context(
+      Optional<Throwable> primary,
+      Optional<Throwable> closing,
+      AtomicInteger[] counts,
+      AtomicReference<byte[]> plain,
+      AtomicReference<byte[]> captured) {
+    BytesMessage bytes =
+        (BytesMessage)
+            Proxy.newProxyInstance(
+                BytesMessage.class.getClassLoader(),
+                new Class<?>[] {BytesMessage.class},
+                (proxy, method, arguments) -> {
+                  switch (method.getName()) {
+                    case "writeBytes":
+                      counts[1].incrementAndGet();
+                      plain.set((byte[]) arguments[0]);
+                      captured.set(((byte[]) arguments[0]).clone());
+                      if (primary.orElse(null) instanceof JMSException) throw primary.orElseThrow();
+                      return null;
+                    case "setJMSCorrelationID", "setStringProperty":
+                      return null;
+                    default:
+                      throw new AssertionError("unexpected synthetic message call");
+                  }
+                });
+    JMSProducer producer =
+        (JMSProducer)
+            Proxy.newProxyInstance(
+                JMSProducer.class.getClassLoader(),
+                new Class<?>[] {JMSProducer.class},
+                (proxy, method, arguments) -> {
+                  if (!java.util.List.of("setDeliveryMode", "setTimeToLive", "send")
+                      .contains(method.getName()))
+                    throw new AssertionError("unexpected synthetic producer call");
+                  return proxy;
+                });
+    return (JMSContext)
+        Proxy.newProxyInstance(
+            JMSContext.class.getClassLoader(),
+            new Class<?>[] {JMSContext.class},
+            (proxy, method, arguments) -> {
+              switch (method.getName()) {
+                case "getSessionMode":
+                  if (primary.isPresent() && !(primary.orElseThrow() instanceof JMSException))
+                    throw primary.orElseThrow();
+                  return JMSContext.SESSION_TRANSACTED;
+                case "createBytesMessage":
+                  return bytes;
+                case "createProducer":
+                  return producer;
+                case "commit":
+                  counts[2].incrementAndGet();
+                  return null;
+                case "rollback":
+                  counts[3].incrementAndGet();
+                  return null;
+                case "close":
+                  counts[0].incrementAndGet();
+                  if (closing.isPresent()) throw closing.orElseThrow();
+                  return null;
+                default:
+                  throw new AssertionError("unexpected synthetic context call");
+              }
+            });
+  }
 
   @Test
   void sendsExactPlaintextWithPersistentPropertiesAndSuppressesConfirmedDuplicate(
