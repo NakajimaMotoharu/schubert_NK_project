@@ -1,5 +1,13 @@
 # 処理sequence・method・例外・transaction設計
 
+## SSC331 ordinary local audit callback graph（2026-10-22）
+
+§11のprimitive local logger Runtime故障は通常記録成功へ戻さず、既固定onTerminalを一回試みる。Runtime内のcause/suppressed/JMS linked/SQL nextに到達可能なErrorは、通知を試み終えた後に既WebStartupExceptionのpure finite graph portで同一objectを伝播し、falseへ縮退しない。直接logger Errorの既即伝播/通知0は変更しない。
+
+onTerminalがRuntimeを投げた場合はそのcallback graphを先に分類し、非fatalなら保持したlogger Runtime graphも分類する。いずれかのErrorを元objectで伝播し、両方非fatalの場合だけ従来固定IllegalStateException（cause/suppressedなし）とする。直接callback Errorの既優先/通知一回は維持する。同一/alias/cycleを有限に扱い、provider graphをcatalog/local JSON/alertへ保存しない。owner通知前にlogger graphをthrowして必要通知を省略せず、通知やloggerを再試行しない。
+
+通常metadata/PENDING/FAILEDのJSON code、owner/DB/JMS/identifier発行回数、HTTP status/body/header、wire/再送/認可・DIFは不変更。SQL projectionのSSC329と独立にこのlocal境界を確認する。BUG1601/YKT1354、351/354、実VM/Root/cohort/permit操作の承認追加なし。
+
 ## SSC330 ordinary readiness graph・pure secondary保持（2026-10-22）
 
 ordinary API/Webのreadinessは、Connection/JMSContextのowned closeを一回試みた後で通常startup catalogを返す前に、cause/suppressed/JMS linked/SQL nextのfinite graphをidentity visitedで分類する。到達可能なErrorは元object、非fatal循環は有限帰還し、provider graphを新catalogに保持しない。既manual cleanupの直接primary Error/直接close Errorの選択を先に維持し、捨てていた非fatal型secondaryも同scopeのprimary graphへ一時連結する。wrapped Errorをその型だけでnonfatalと断定しない。

@@ -1,5 +1,13 @@
 # PT・IT試験観点詳細設計
 
+## SSC331 ordinary local audit/terminal callback PG/PT（2026-10-22）
+
+BUG1601/YKT1354、PT-WEB-LOCAL331001～004。既sourceでprimitive logger Runtime内包Errorの破棄、terminal Runtime graphの固定catalog化をpure System.Logger/Runnable/DataSource proxyで独立再現し、DB/VM/Root/外部JMS・実鍵・session発行を要しない。expected Errorは入力とは別に固定作成したobject identity、通知順/回数・DB/identifier0、JSONの明示literalで判定し、Production methodでexpectedを生成しない。
+
+logger cause/suppressed/JMS linked/SQL next（isLoggable/log各fault点）→通知1後の元Error、callback graph→logger graphの選択、直接logger Error通知0/直接callback Error通知1の旧優先を確認。非fatal cycle/same object/両ordinary/disabled loggerは有限帰還し、従来fixed IllegalState（cause/suppressedなし）又はfalse、成功loggerは通知0を確認する。provider canaryをJSON/catalogへ保存しない。元callbackを再試行せず、HTTP応答/DB/JMS/識別子発行を追加しない。
+
+当四Test・既REQUEST/projection/Web port域と必要な同source全体/四counter/静的/traceを区別する。未実行/失敗/別source/nativeは合格へ補完せず、拒否PTの代替にも混ぜない。SSC331補足/必要PGは実Root/cohort/permit等の操作権限や未特定拒否scopeの解除を含まない。
+
 SSC330（BUG1593/YKT1346）：自己所有DataSource/Connection/JMSContext/consumerのinterface proxyだけで、API/Web双方のDB primary又はclose graphだけのError、JMS cause-linked-SQLnext又はclose graphだけのError、非fatal循環/未知値/null、直接primary/直接close優先を独立literal/元Error identity/counterで検証する。close各一回、DB失敗時JMS開始0、後続ready0、非fatal固定診断/cause null/suppressed0を要求する。pure graph全edge/重複/循環/優先及びsecondaryの同一object/別object/null/suppression無効も確認し、caller finally/TWRで残るcloseの後条件を別に照合する。PT-API-READY-GRAPH330001..003/PT-WEB-READY-GRAPH330001..003等、修正前red→PG→同oracle/既domain・当source品質へ結合。実DB原本/VM/Root/鍵/permit操作・拒否探索を行わず、PT代替/native受入へ外挿しない。
 
 SSC329（BUG1592/YKT1345）：最初のpublic JdbcSyncRequestProcessorを自己所有JDBC proxy/固定request/clockだけで試験する。SQL又はProtocol primary＋close Error、直接Error＋rollback/close故障、同一Throwable close、cause/suppressed/nextとcycle/非fatal、通常commit/rollback/closeの順と各一回・結果未返却/元Error identity/固定診断を独立counter・literalで照合する。未修正sourceの目的赤を保全してから最小PG/同oracle greenを行う。共有分類の全edge/null/重複・循環・優先は別pure graphで網羅し、各mapperの変換/SQLstate前呼出・borrowed/owned資源境界をsource/JVMと当methodの独立PT/XMLへ結合、必要な直接faultを追加する。PT-TX-GRAPH329001～、113候補と非SQL marker catchの全適用性matrix・必要同source全体/四counter/静的を要求。実DB原本/VM/Root/鍵/permit/cohort操作・拒否境界探索は不要、PT代替やnative受入の意味にしない。
