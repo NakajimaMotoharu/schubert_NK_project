@@ -104,7 +104,7 @@ public final class OutboxDispatcher {
     try {
       connection.setAutoCommit(false);
       return connection;
-    } catch (SQLException | RuntimeException exception) {
+    } catch (SQLException | RuntimeException | Error exception) {
       closeAfterSetupFailure(connection, exception);
       throw exception;
     }
@@ -113,8 +113,8 @@ public final class OutboxDispatcher {
   static void closeAfterSetupFailure(Connection connection, Throwable failure) {
     try {
       connection.close();
-    } catch (SQLException closeFailure) {
-      failure.addSuppressed(closeFailure);
+    } catch (SQLException | RuntimeException | Error closeFailure) {
+      retainFailure(failure, closeFailure);
     }
   }
 
@@ -125,8 +125,17 @@ public final class OutboxDispatcher {
   private static void rollback(Connection connection, Throwable failure) {
     try {
       connection.rollback();
-    } catch (SQLException rollbackFailure) {
-      failure.addSuppressed(rollbackFailure);
+    } catch (SQLException | RuntimeException | Error rollbackFailure) {
+      retainFailure(failure, rollbackFailure);
     }
+  }
+
+  // SSC320/PT-IDEM-FAIL320002..004: a failed cleanup never authorizes a new transaction.
+  private static void retainFailure(Throwable primary, Throwable secondary) {
+    if (secondary instanceof Error fatal && !(primary instanceof Error)) {
+      fatal.addSuppressed(primary); // Fatal/nonfatal objects cannot be identical.
+      throw fatal;
+    }
+    if (primary != secondary) primary.addSuppressed(secondary);
   }
 }

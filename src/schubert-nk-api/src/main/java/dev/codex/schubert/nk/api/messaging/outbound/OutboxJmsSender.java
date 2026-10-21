@@ -81,6 +81,11 @@ public final class OutboxJmsSender {
         if (closing instanceof Error fatal) throw fatal;
         throw new OutboxSendException("outbox JMS context lifecycle failed", closing);
       }
+      // SSC320/PT-IDEM-FAIL320001: fatal cleanup cannot become ordinary send retry.
+      if (closing instanceof Error fatal && !(primary instanceof Error)) {
+        fatal.addSuppressed(primary); // Fatal/nonfatal objects cannot be the same Throwable.
+        throw fatal;
+      }
       if (closing != primary
           && !(primary instanceof OutboxSendException typed && closing == typed.getCause())) {
         primary.addSuppressed(closing);
