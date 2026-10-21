@@ -19,3 +19,5 @@ PT_DEFAULT。新JdbcRollbackAttachment330Test三method、自己所有DataSource/
 赤は新3＋baseline12=15/8、API停止時実9/5/F1・後段6not-runを予測。目的assertionはExpected AssertionError対実TemporaryInfrastructureException、他2はPASS。原XML→一Main rollback secondaryを既qualified pure attachSecondaryへ接続→新3＋既core8/coreboundary2/TemporaryGraph3293/ApiStartupGraph3303＋baseline12=31/12のgreenを実行し、当source原artifact/四counter/既domainへ結合する。red Test bytesは固定、既oracle変更0。全API owner/113site/当全体/全品質は別途残す。
 
 fresh57残43/reset1793082865/secondarynull/券0を01:03JSTに観測。直前reset marker2864との差は未確認区間であり、reset実行/同窓/共有消費0を推定しない。実N/T/専有費/工数率はnull、原-v4・正式1964-53/17-190/QA051final/PTALT代替0/全HOLD不変。
+
+新TestSHAf838ceef21e62d5d33fe2b99303565cbb37a8001e23115b476fb4c953a8a2aeb、formatter0/定義管理三0。6570-red15/8、6572-green31/12、6574原資格の定義を用意しただけで動的未実行、Main e033不変更。
