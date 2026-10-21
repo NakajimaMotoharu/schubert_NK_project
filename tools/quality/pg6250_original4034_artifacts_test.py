@@ -21,7 +21,7 @@ class Definition(unittest.TestCase):
                 right=node.comparators[-1]
                 if isinstance(right,ast.Tuple):found.append(ast.literal_eval(right))
         self.assertTrue(any(('PG6244',(4034,606,1667),10)in item for item in found))
-        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272','PG6302','PG6330'),found)
+        self.assertIn(('PG6088','PG6118','PG6196','PG6212','PG6244','PG6272','PG6302','PG6330', 'PG6386'),found)
 
     def test_original_whole_and_prior_identity_bindings(self):
         values=subject.definitions()['main'].__code__.co_consts

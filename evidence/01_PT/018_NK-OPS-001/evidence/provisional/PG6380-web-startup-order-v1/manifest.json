@@ -1,0 +1,63 @@
+{
+  "actualExit": 0,
+  "additionalBuildsIssued": 0,
+  "changedPhysical": [
+    "bootstrap:dev/codex/schubert/nk/api/file/ServiceProcessResources.class",
+    "web:dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.class"
+  ],
+  "formalAccepted": false,
+  "originalSelectedTests": 22,
+  "ownershipReviewed": true,
+  "productionClassesExecuted": 0,
+  "proofs": {
+    "shared": {
+      "compilerPrivateLambdaRenumberingNotPublicAbi": true,
+      "diagnosticBootstrap": "  9: #CP REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;\n    Method arguments:\n      #CP (Ljava/lang/Object;)V\n      #CP REF_invokeStatic dev/codex/schubert/nk/api/file/ServiceProcessResources.diagnoseUnknownRelease:(Ljava/lang/Throwable;)V\n      #CP (Ljava/lang/Throwable;)V\n",
+      "existingProtectedMethodBodiesUnchanged": [
+        "  private static void diagnoseUnknownRelease(java.lang.Throwable);",
+        "  private static void observeUnconfirmed();",
+        "  private static void observeUnknownInterval(java.lang.Runnable, java.lang.Runnable);",
+        "  public static void retainUnknownRelease(java.lang.Throwable);",
+        "  static void retainUnknownRelease(java.lang.Throwable, java.lang.Runnable, java.lang.Runnable);",
+        "  static void waitUnknownInterval();"
+      ],
+      "observationBootstrap": "  10: #CP REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;\n    Method arguments:\n      #CP ()V\n      #CP REF_invokeStatic dev/codex/schubert/nk/api/file/ServiceProcessResources.lambda$unknownReleaseObservationPolicy$0:()V\n      #CP ()V\n",
+      "publicFactoriesAdded": [
+        "  public static java.lang.Runnable unknownReleaseObservationPolicy();",
+        "  public static java.util.function.Consumer<java.lang.Throwable> unknownReleaseDiagnosticPolicy();"
+      ]
+    },
+    "web": {
+      "classInitializationBeforeStaticFactory": true,
+      "otherMethodBodiesAndEdgesUnchanged": 11,
+      "privateStaticFinalPolicyFields": true,
+      "publicAbiUnchanged": true,
+      "retention": {
+        "backedgeOffset": 43,
+        "closeOffset": 1,
+        "diagnosticOffset": 14,
+        "fenceOffsets": [
+          28,
+          32,
+          36,
+          40
+        ],
+        "loopReturnOrThrow": 0,
+        "loopTarget": 19,
+        "newRetentionAllocations": 0,
+        "tickOffset": 22
+      }
+    }
+  },
+  "ptAlternativeCompleted": 0,
+  "qualificationSha256": "7896c2a6d7d650cf2a67f9270e0ad039360c7a5ba073cf84685adddc578295f7",
+  "residualRisks": [
+    "factory-before-handoff/native/root ownership and true terminal remain separate",
+    "allSource/currentWhole/F03/global100/CHR/451 and rollouts still required"
+  ],
+  "scope": "ORIGINAL_SOURCE_JVM_NOT_REAL_RUNTIME_NATIVE_OR_PT_ALTERNATIVE",
+  "source": "c34159083bfec296fd929ec9b2fbdbb80831c05c",
+  "testsExecuted": 0,
+  "unchangedPhysical": 1665,
+  "vmActions": 0
+}

@@ -11,7 +11,7 @@ from pg6084_web_factory_order import narrow_or_wide_literal_body
 from classfile_field_flags import fields
 from pg6384_web_fatal_callback_retry_qualification import original_source
 
-QUALIFICATION_SHA = None  # Bind only after the original22 reader actually succeeds.
+QUALIFICATION_SHA = '7896c2a6d7d650cf2a67f9270e0ad039360c7a5ba073cf84685adddc578295f7'
 WEB = 'dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntime'
 SHARED = 'dev.codex.schubert.nk.api.file.ServiceProcessResources'
 
