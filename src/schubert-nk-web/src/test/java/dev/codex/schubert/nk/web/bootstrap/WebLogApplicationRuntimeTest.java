@@ -624,7 +624,7 @@ final class WebLogApplicationRuntimeTest {
   }
 
   @Test
-  void scr133SameThrowableAcrossOwnedClosuresKeepsPrimary() {
+  void scr133SameThrowableAcrossOwnedClosuresKeepsPrimary() throws Exception {
     SQLException shared = new SQLException("synthetic shared close failure");
     AtomicInteger closes = new AtomicInteger();
     AutoCloseable owner =
@@ -641,16 +641,8 @@ final class WebLogApplicationRuntimeTest {
     assertEquals(0, shared.getSuppressed().length);
     assertEquals(1, closes.get());
 
-    IllegalStateException startup = new IllegalStateException("synthetic startup failure");
-    AtomicInteger startupCloses = new AtomicInteger();
-    AutoCloseable replay =
-        () -> {
-          startupCloses.incrementAndGet();
-          throw startup;
-        };
-    WebLogApplicationRuntime.closeAfterFailure(startup, replay, replay);
-    assertEquals(2, startupCloses.get());
-    assertEquals(0, startup.getSuppressed().length);
+    // SSC324/BUG1575: same-object startup UNKNOWN must retain, not return after two closes.
+    WebStartupRetentionTest.assertOwnedRetention(root, java.util.List.of("3"));
   }
 
   @Test
@@ -842,17 +834,12 @@ final class WebLogApplicationRuntimeTest {
                   null));
       assertEquals(0, calls.get());
       var primary = new IllegalStateException("startup");
-      WebLogApplicationRuntime.closeAfterFailure(
-          primary,
-          () -> {
-            throw new IllegalStateException("worker close");
-          },
-          () -> {
-            throw new IllegalStateException("reply close");
-          });
-      assertEquals(2, primary.getSuppressed().length);
-      WebLogApplicationRuntime.closeAfterFailure(primary, null, () -> {});
-      assertEquals(2, primary.getSuppressed().length);
+      // SSC324/BUG1575: keep worker and reply UNKNOWN branches in finite, inert owned JVMs.
+      WebStartupRetentionTest.assertOwnedRetention(root, java.util.List.of("1", "4"));
+      var normalReplyClosed = new AtomicInteger();
+      WebLogApplicationRuntime.closeAfterFailure(primary, null, normalReplyClosed::incrementAndGet);
+      assertEquals(1, normalReplyClosed.get());
+      assertEquals(0, primary.getSuppressed().length);
     }
   }
 

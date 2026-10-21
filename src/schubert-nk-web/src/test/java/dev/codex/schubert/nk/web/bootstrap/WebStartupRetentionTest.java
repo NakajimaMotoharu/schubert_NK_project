@@ -44,6 +44,11 @@ final class WebStartupRetentionTest {
 
   @Test
   void start324002UnknownCleanupRetainsDummyOwnersAcrossInterruptInOwnedJvm() throws Exception {
+    assertOwnedRetention(temporary, List.of());
+  }
+
+  /** Shared independent fixture; legacy cases select only their original failure conditions. */
+  static void assertOwnedRetention(Path temporary, List<String> variants) throws Exception {
     var command = new ArrayList<String>();
     command.add(
         Path.of(Objects.requireNonNull(System.getProperty("java.home")), "bin/java").toString());
@@ -58,6 +63,7 @@ final class WebStartupRetentionTest {
             "-cp",
             Objects.requireNonNull(System.getProperty("surefire.test.class.path")),
             Driver.class.getName()));
+    command.addAll(variants);
     Path out = Files.createTempFile(temporary, "startup-", ".out");
     Path err = Files.createTempFile(temporary, "startup-", ".err");
     var builder =
@@ -69,9 +75,11 @@ final class WebStartupRetentionTest {
           child.waitFor(20, TimeUnit.SECONDS),
           "only dummy fixture must complete its bounded observation");
       assertEquals(0, child.exitValue());
+      int cases = variants.isEmpty() ? 5 : variants.size();
       assertEquals(
-          "STARTUP_FIXTURE_RETAINED cases=5 returns=0 outerClosed=0\n", Files.readString(out));
-      assertEquals("service resource release unconfirmed\n".repeat(5), Files.readString(err));
+          "STARTUP_FIXTURE_RETAINED cases=" + cases + " returns=0 outerClosed=0\n",
+          Files.readString(out));
+      assertEquals("service resource release unconfirmed\n".repeat(cases), Files.readString(err));
     } finally {
       if (child.isAlive()) {
         child.destroyForcibly();
@@ -86,8 +94,15 @@ final class WebStartupRetentionTest {
     private Driver() {}
 
     public static void main(String[] arguments) throws Exception {
-      for (int variant = 0; variant < 5; variant++) observe(variant);
-      System.out.println("STARTUP_FIXTURE_RETAINED cases=5 returns=0 outerClosed=0");
+      int cases;
+      if (arguments.length == 0) {
+        for (int variant = 0; variant < 5; variant++) observe(variant);
+        cases = 5;
+      } else {
+        for (String argument : arguments) observe(Integer.parseInt(argument));
+        cases = arguments.length;
+      }
+      System.out.println("STARTUP_FIXTURE_RETAINED cases=" + cases + " returns=0 outerClosed=0");
     }
 
     private static void observe(int variant) throws Exception {
@@ -137,6 +152,8 @@ final class WebStartupRetentionTest {
       retained(owner, worker, replies, returned, outer, variant);
       if (owner.isInterrupted())
         throw new AssertionError("interrupt must not spin or release the owner");
+      if (startup.getSuppressed().length != 0)
+        throw new AssertionError("retention must not mutate startup or self-suppress");
     }
 
     private static void retained(

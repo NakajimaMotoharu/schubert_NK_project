@@ -18,3 +18,5 @@ childの期限は全fixture20秒、期限超過時はこのProcessBuilderのhand
 実行日時/OS-JDK/tool/branch/source/run/command/exit/入力/固定期待/実際値/coverage/BUG/SSCは新manifestと次結果書へ保存する（現在未実行）。coverageは新source原XMLの四counterのみ、旧aed4048/新3deda18/旧nativeを合成しない。失敗/flaky/skipped/not-runは合格0。新sourceの全体/physical/static/rawF03/trace/native/CHR/451と正式は別条件。
 
 群開始.5/2/6pp凍結・追加発見として原-v4/前見積を保持、専有費/実N-T/工数null。freshused40/残60/reset1793082864/secondary不明。正式1964PT/53scope/17-190/QA051final/PTALT001002対象不明代替0/実環境HOLDと全保全物維持。通常red/PG/green/commitで停止しない。
+
+BUG1575追補（元54中断後）：関連旧scr133/scr131に残ったstartup2close/return/suppressed2期待はSSC324に不整合だったため、915/916先行起票と元job自己所有中断の後、二startup部分だけを独立childの同一Throwable/worker/reply UNKNOWN oracleへ訂正する。通常/HTTP/null/通常closeと新default五modeの期待は維持し、startup suppressed0を追加。Production/既gateは11ecc固定、Test二ファイルだけの変更、新source54/15・元資格の真正結果を要求する。詳細1369、旧source/中断/未到達は保持。
