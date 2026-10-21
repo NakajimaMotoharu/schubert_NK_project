@@ -1,5 +1,7 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+SSC330（BUG1593/YKT1346、SS312/354参照）：ordinary API/Web readinessのDB/JMS admissionは、接続/probe/consumer/closeのfinite failure graphを通常startup catalog前に分類する。取得済Connection/JMSContext close各一回、DB失敗後のJMS開始0、JMS失敗後の業務ready0を維持する。直接primary Errorは同一objectで優先、直接close Errorが非Error primaryへ優先する既選択も不変更。捨てた非Error close secondaryの内包Errorも一時attachmentとcause/suppressed/linked/next分類で保持する。正常probe/固定診断/Queue管理側gate・Unit/Root/timeout/権限/順序は不変更、interface proxyの成功は実VM/Root/ordinary業務ready・所有の証明ではない。
+
 SSC325（BUG1578/YKT1320）：Web借用frameの未知close後も固定診断のRTE/Errorは保護し、取得前固定policyとcallback/failure到達性fenceを持つ同frameを維持する。固定診断文・stop通知・Unit/親期限・隔離は不変更、dummy childの終了を実資源解放と認定しない。元source回帰実行中はMain/Testを変更しない。
 
 SSC324（BUG1574/YKT1329）：SS313の既取得Web startup owner cleanupがUNKNOWNなら、元startup/後続ownerを保持した同frameで既固定ServiceProcessResources retentionへ入り、Root/native停止や解放完了へ読み替えない。取得前policy準備/無新規保持callback/到達性fenceを要求する。既Unitの期限・元親budget・停止/隔離・borrowed資源は不変更、同scopeのdummy child JVM終端は実Web/Root/native後条件の証明ではない。実環境の安全HOLDを解除しない。
