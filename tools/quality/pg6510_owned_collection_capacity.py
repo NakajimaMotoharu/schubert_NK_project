@@ -4,7 +4,7 @@ import json
 import os
 import subprocess
 import zipfile
-from pg5940_private_lock_compile import W, BASE, TC, sha
+from pg5940_private_lock_compile import W, BASE, TC, sha as path_sha
 from pg6056_expiry_read_methods import methods
 from pg6084_web_factory_order import instructions
 from pg6078_jms_owner_order import group_capacity
@@ -84,16 +84,17 @@ def main():
         if not refs or any(r['source'] != SOURCE or r['result'] != 'PASS_ORIGINAL_XML' for r in refs):
             raise ValueError('actual current whole semantic Test class required for each ordinary target')
         row['currentWholeCaseRefs'] = [{k:r[k] for k in ('testId','class','caseNameSha256','xmlSha256','source')} for r in refs]
-    value = dict(actualExit=0, source=SOURCE, currentWholeQualificationSha256=sha(qp.read_bytes()),
+    value = dict(actualExit=0, source=SOURCE, currentWholeQualificationSha256=path_sha(qp),
+        readerAttempt=2, priorReaderFailurePreserved='1410/BUG1588/original84694 exit1 before output creation',
         ordinaryTargets=result, productionCodeChanged=False, testsExecuted=0, buildsIssued=0,
         ordinaryFourCollectionFirstGrowRiskPresent=False, heapFailureInjected=False, broaderYktClosed=False,
         candidateSearchCompleted=False, broaderUnreviewedCandidatesRemain=True,
         heldRootOrRecoveryAssessed=False, nativeOwnershipProven=False, formalAccepted=False,
         ptAlternativeCompleted=0, effortPercent=None)
-    out = BASE/'PG6510-owned-collection-capacity-v1'; out.mkdir()
+    out = BASE/'PG6510-owned-collection-capacity-v2'; out.mkdir()
     with (out/'manifest.json').open('x') as f:
         json.dump(value, f, sort_keys=True, indent=2); f.write('\n'); f.flush(); os.fsync(f.fileno())
-    print(json.dumps(dict(actualExit=0, targets=len(result), broaderYktClosed=False, manifestSha256=sha(out/'manifest.json'))))
+    print(json.dumps(dict(actualExit=0, targets=len(result), broaderYktClosed=False, manifestSha256=path_sha(out/'manifest.json'))))
 
 
 if __name__ == '__main__': main()

@@ -1,10 +1,22 @@
 import subprocess
+import inspect
+import tempfile
+from pathlib import Path
 import unittest
 from pyflakes.api import checkPath
 import pg6510_owned_collection_capacity as subject
 
 
 class Capacity(unittest.TestCase):
+    def test_path_hash_contract_fixed_vector_and_bytes_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'literal'
+            # Test-only fixed vector; no private artifact or production expected value generation.
+            path.write_bytes(b'abc')
+            self.assertEqual('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad',subject.path_sha(path))
+            with self.assertRaises(AttributeError): subject.path_sha(b'abc')
+        self.assertIn('currentWholeQualificationSha256=path_sha(qp)',inspect.getsource(subject.main))
+
     def test_four_actual_current_compiled_shapes_without_running_pt(self):
         shapes = subject.compiled_shapes()
         self.assertEqual(4,len(shapes))
