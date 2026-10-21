@@ -10,7 +10,7 @@ ROOT,W,BASE,sha=base.ROOT,base.W,base.BASE,base.sha
 OLD='f16f717d4e5338e7f5b44faef179ada0cf19aae0'
 LABEL='PG6706'
 SLOT='pg6706-broker-cleanup-six-v1'
-QSHA=None  # Freeze only the genuinely returned original127 qualification.
+QSHA='9c92e0bf1ed2ef22826e41d53f42cd6916e5e0bf07c6f472a6717dfa3908f961'
 
 
 def original_source():

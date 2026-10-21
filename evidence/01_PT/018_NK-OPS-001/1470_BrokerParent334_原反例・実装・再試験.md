@@ -1,5 +1,15 @@
 # BrokerParent334 原反例・実装・再試験
 
+## 原127資格（2026-10-22）
+
+元6710/session87154/source d48f8ebf8ed4047763c77fe487c44f7caa03e8f8、archive a90db3614599a6014bb8a5b4dfdb2b8f3474a5056ec85bfff0a62b5bb628bab1、UTC23:15:55.116557～23:19:02.918581、phase0,0,0/真正0、127PT/33suite/FESflaky0/六SpotBugs0/source固定。原6712/session49890も真正0、公開manifest SHA9c92e0bf1ed2ef22826e41d53f42cd6916e5e0bf07c6f472a6717dfa3908f961、private664df5bd4d1670dbca06be9c37ad102fbfb2503bdf61548ed064dde6525ae39a、findingsdc4d8a160fc5ba5f9a4b201111bc918502e6b6d0764afc324dad26a016aa45e0。全851/1667・六原Jar/XML・四outer＋nested二差/残1661同byte、PMD raw1404/processing0/CS0。現全体pending/native資格false/formalfalse。
+
+追加nested ConsumerProfileとAsyncは元83/元127の原Jar class hashを各private physical mapへ照合、nested source完全tokenと`javap -p -c`が同一。javap output SHA各32a5886344fee9151a9c6f37a068e72f8a9fad30bbebfd93b890ff40c1f98a27・5487f779d8e0aaafb18560585cb1988bdaa1f58919654fd850abfe120118e044。単なるowner whitelistで同値を推定せずline/debug物理差と確認、機能差へ二重加点0。
+
+四新対象のL/M/C/B missedはAPI broker11/6/0/3、provider1/2/0/1、親4/1/0/15、Web broker14/7/0/2。未測定補完0。API partialの正常close/null scratch等は既全体のApiBrokerFactoryRemainderTestが独立literal/全close順・raw primaryで確認するので、その旧Testも当source全体で実行する。old全4170を新sourceへ成功転用しない。
+
+BUG1607/YKT1360のfixture scopeとBUG1608/YKT1361のlock finally scopeはcompile/127/原六static0の再試験で完了（修正00a1cff1a/d48f8ebf8）。BUG1604/1606・YKT1357/1359は残同source全体/品質・予防確認があるためOPEN、工程/正式/工数率は閉じない。
+
 ## green v2静的停止・必要是正（BUG1608/YKT1361）
 
 元6702/session72103/source2d5cb53f8/archive11b6d324、UTC23:12:12.419478～23:14:25.564481はphase0,0,1真正1。実79PT/19suite/FES0、API SpotBugs一件UL_UNRELEASED_LOCK_EXCEPTION_PATHのため後続未実行・127合格ではない。原manifest/XML/static保持。915/916先行起票後、API closeのscratch clearをtry、stateLock.unlockを内finallyに限定是正。Test/期待値/残三Main不変更、抑制/除外/人工fill例外注入0。既openのcopy clearは既外finally unlock、Sync closeはmonitor、partial constructorはlockなしを横展開確認。新only green6710-v3/原6712-v3へ切替、旧6702/未着手6704は再実行しない。全体6706/原6708の前提も原6712へ更新、以下旧番号は履歴保持。

@@ -1,5 +1,7 @@
 # SSC333334 必要全体・独立原資格仕様（未実行）
 
+最新前提：6702静的1は保全、1608是正後の6710/source d48f8ebf8ed4047763c77fe487c44f7caa03e8f8原127/33・6712資格9c92e0bfが真正0（1470）。工具QSHAを実hashへ固定し、以下旧6704は初期計画履歴。元127からMain/Test/gatesを固定した全4184/643を一回だけ実行、必要な元6712 static raw1404/1250完全file pair・154新spanは全体原結果後に6716で結合、Root11保留を自動解除0。SQL6714/JVM6718/trace6720は原6708の当source XML/Jarだけを用いる。
+
 1470の新旧127/33真正終端・原6704資格が前提。PG6706/6708は新only、現6702/session72103は同元観測し再起動しない。全Main/Test/gatesを127のsourceから固定し、旧f16f/4170と異なる必要八Main・新五suite14methodをまとめる。一部成功の算術加算ではなく、全4184PT/643suite/全851source1667physicalと六module format-beforePT/compile/null/SpotBugs、原終了code/XML/Jar/JaCoCoを確認する。
 
 command（既三PYTHONPATH）: `python3 -B tools/quality/pg6706_broker_cleanup_whole.py`、真正終了0後だけ`python3 -B tools/quality/pg6708_original4184_artifacts.py`。普通の自己所有finite fixtureは従来の全体と同じ。専用LAN builder上の一回snapshotへ固定し、実VM/current/Root/failed cohort/原本DBBackup/鍵/intent/permit/native資格は対象外・HOLD、拒否境界探索や同操作再試行0。
