@@ -2,6 +2,8 @@
 
 ## SSC328 ordinary認証/sessionのfatal JDBC graph（2026-10-21）
 
+横展開追補（同日・PG前）：RevocationRetryCoordinator.transactionの固定catalog化前にも同じcause/suppressed-only helperがあり、SQLException.nextのfatalを見落とす。ここもsession側と同じ既cause→suppressedの後にnextを追加する。wire送信自体や再送間隔・DB commit/rollback/close順は不変更。対象を三Main/新九Testへ確定し、PT-REVOCATION-GRAPH328001..003でnext fatal・混合cycle・既fatal優先を独立検査する。初期の二Main/六Test計画は履歴、実Root/nativeの保留は不変更。
+
 既BUG622/628のfatal cleanup保持を、同じ認証/sessionのtransient JDBC例外graphへ明確化する。cause、suppressed、SQLException.getNextExceptionの全reachable Errorは同一objectのまま伝播し、固定AuthenticationInfrastructureException/SessionStoreException又は通常の再送/9000/503へ縮退させない。Error無しのgraphはobject identityで訪問済みを除き有限帰還し、SQL/provider text/cause/suppressedを固定catalogへ保持しない。JMS linkedは当JDBC境界の入力契約ではなく、送信境界SS312の別契約のまま。
 
 既直接primary Errorを最優先にし、既edgeのみの順位は不変更。認証は従来のsuppressed順の後にcause/SQL next、sessionは従来のcause→suppressed順の後にSQL nextを追加する（各nodeのFIFO探索）。新edgeを先に回して既fatalの選択を変更しない。正常/非fatal時の業務結果・認証/session/SQL/transaction/最大2session・DIFは不変更。BUG1591/YKT1344、PT-AUTH-GRAPH328001..003/PT-SESSION-GRAPH328001..003で、pure固定Throwableのcause/next fatal・混合cycle・Error無し・既順位を独立検査する。実Root/Unit/DB原本/keys/cohortへの操作・権限を追加しない。設計補足確定とPG/PT/native/正式品質の完了を区別する。
