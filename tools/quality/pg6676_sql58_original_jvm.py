@@ -7,7 +7,7 @@ from pg6644_sql58_original_jvm import match_guard
 from pg6586_api_mapper_jvm_join import jvm_calls
 from pg6670_original4170_artifacts import read_whole
 
-SQLSHA=None  # Freeze the genuine current115 result before any original-JVM export.
+SQLSHA='5480d2be7670bc4856cba1382f525c5fa157c45c8053b301a83e6187515831d7'
 
 
 def main():
