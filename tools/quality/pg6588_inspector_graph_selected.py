@@ -12,8 +12,9 @@ RED_SOURCE='a602a2cd19b47bd29e0dfbae3a560ee6d88f33a8'
 TEST='src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java'
 NAMES={'InspectorDatabaseConnections','AuthenticationInboxInspector','NonAuthenticationInboxInspector','QuestionMutationInboxInspector'}
 MAINS={'src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/'+n+'.java' for n in NAMES}
-TARGETS={'api':['api/maintenance/'+n for n in sorted(NAMES)]}
-SLOTS={'red':'pg6588-inspector-graph-red-v1','green':'pg6590-inspector-graph-green-v1'}
+MAINS.add('src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java')
+TARGETS={'api':['api/maintenance/'+n for n in sorted(NAMES)]+['api/security/AuthenticationInfrastructureException']}
+SLOTS={'red':'pg6588-inspector-graph-red-v1','green':'pg6596-inspector-graph-green-v2'}
 
 
 def inventory(phase):
@@ -29,7 +30,7 @@ def guard_source(source,phase):
     q=json.loads(qp.read_bytes())
     if q['source']!=OLD or q['actualExit']!=0:raise ValueError('exact baseline Main identity')
     changes=set(subprocess.check_output(['git','diff','--name-only',OLD,source,'--','src'],cwd=ROOT,text=True).splitlines())
-    if changes!=({TEST} if phase=='red' else {TEST}|MAINS):raise ValueError('one pure Test / exactly four reviewed inspector Main')
+    if changes!=({TEST} if phase=='red' else {TEST}|MAINS):raise ValueError('one pure Test / exactly four inspector Main plus Auth port visibility')
     if subprocess.check_output(['git','diff',OLD,source,'--','pom.xml','.mvn','mvnw','program/characterization','tools/quality/static'],cwd=ROOT):
         raise ValueError('fixed build/static/Current')
     if phase=='green' and (RED_SOURCE is None or subprocess.check_output(
@@ -64,7 +65,7 @@ def qualify_green():
         'edc091088de4d1890f33a2643378f6cce9eb5da1145eda8070bcd802f3b7fe18',
         W/'pg6584-api-jdbc-domain-qualification-v1/manifest.safe.json',
         W/'pg6584-api-jdbc-domain-qualification-v1/findings.safe.json',
-        'pg6592-inspector-qualification-v1','PG6592-inspector-qualification-v1',expected_phase_exits=(0,0,0))
+        'pg6598-inspector-qualification-v2','PG6598-inspector-qualification-v2',expected_phase_exits=(0,0,0))
 
 
 def main():

@@ -11,8 +11,11 @@ public final class AuthenticationInfrastructureException extends RuntimeExceptio
     super("authentication storage is unavailable");
   }
 
-  /** BUG622/YKT440/QA050: redact ordinary failures without losing fatal JDBC close failures. */
-  static void preserveFatal(Throwable failure) {
+  /**
+   * BUG622/1596; YKT440/1349; SS312314354/SSC329330: pure module-local reuse, preserving the
+   * existing Auth suppressed-first classification without exposing provider diagnostics.
+   */
+  public static void preserveFatal(Throwable failure) {
     var pending = new java.util.ArrayDeque<Throwable>();
     var seen = new java.util.IdentityHashMap<Throwable, Boolean>();
     pending.add(failure);
