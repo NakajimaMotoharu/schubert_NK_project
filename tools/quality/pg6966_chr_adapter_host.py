@@ -38,27 +38,28 @@ def safe_extract(archive, destination):
         source.extractall(destination,filter='data')
 
 
-def main():
+def main(slot=SLOT, format_files=()):
     os.umask(0o077)
-    require(not SLOT.exists(), 'new-only job; existing begin or terminal must be observed, never restarted')
+    require(not slot.exists(), 'new-only job; existing begin or terminal must be observed, never restarted')
     subprocess.run(['git','diff','--exit-code',SOURCE,'--','src','pom.xml','.mvn','mvnw','program/characterization'],
                    cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
     original_baseline = ROOT/'program/characterization/baseline/current'
     before = inventory(original_baseline)
     require(before, 'nonempty original immutable baseline')
-    SLOT.mkdir()
-    archive = SLOT/'source.tar'
+    slot.mkdir()
+    archive = slot/'source.tar'
     paths = ['pom.xml','.mvn','mvnw','program/characterization',
              *['src/schubert-nk-'+m+'/pom.xml' for m in ('protocol','storage','bootstrap','api','web','batch')]]
     with archive.open('xb') as stream:
         subprocess.run(['git','archive','--format=tar',SOURCE,*paths],cwd=ROOT,stdout=stream,check=True)
-    snapshot = SLOT/'snapshot';snapshot.mkdir();safe_extract(archive,snapshot)
+    snapshot = slot/'snapshot';snapshot.mkdir();safe_extract(archive,snapshot)
     require(inventory(snapshot/'program/characterization/baseline/current') == before,
             'snapshot baseline equals preserved original')
     source_inputs = inventory(snapshot)
     command = [str(TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'),'-o','--no-transfer-progress',
                '-Dmaven.repo.local='+str(TC/'m2/repository'),'-pl','program/characterization',
-               '-Dtest='+','.join(SELECTED),'verify']
+               '-Dtest='+','.join(SELECTED),
+               *(['-DspotlessFiles='+','.join(format_files)] if format_files else []),'verify']
     env = {'PATH':str(TC/'jdk-25.0.4/bin')+':/usr/bin:/bin','JAVA_HOME':str(TC/'jdk-25.0.4'),
            'MAVEN_USER_HOME':str(TC/'m2'),'MAVEN_SKIP_RC':'true','LANG':'C.UTF-8',
            'MAVEN_OPTS':'-Xmx2g -Djava.awt.headless=true'}
@@ -67,24 +68,25 @@ def main():
                  startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=command,
                  cwd=str(snapshot),archiveSha256=sha(archive),inputHashes=source_inputs,
                  originalBaselineHashes=before,selectedSuites=list(SELECTED),toolSha256=sha(Path(__file__)),
+                 formatFiles=list(format_files),
                  actualVmActions=0,actualDatabaseActions=0,nativeTestsSelected=0,original4222Replayed=False)
-    write(SLOT/'begin.safe.json',begin)
-    with (SLOT/'maven.log').open('xb') as log:
+    write(slot/'begin.safe.json',begin)
+    with (slot/'maven.log').open('xb') as log:
         child = subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
-        write(SLOT/'process.safe.json',dict(pid=child.pid,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        write(slot/'process.safe.json',dict(pid=child.pid,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                                           source=SOURCE,command=command,cwd=str(snapshot)))
         code = child.wait()
         log.flush();os.fsync(log.fileno())
     # Unknown or nonzero is preserved as such, before any semantic gate.
-    result = dict(source=SOURCE,beginSha256=sha(SLOT/'begin.safe.json'),actualExit=code,
-                  endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),logSha256=sha(SLOT/'maven.log'))
-    write(SLOT/'exit.safe.json',result)
+    result = dict(source=SOURCE,beginSha256=sha(slot/'begin.safe.json'),actualExit=code,
+                  endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),logSha256=sha(slot/'maven.log'))
+    write(slot/'exit.safe.json',result)
     after = inventory(original_baseline)
     snap_after = {p:sha(snapshot/p) for p in source_inputs}
     result.update(originalBaselineUnchanged=after==before,snapshotInputsUnchanged=snap_after==source_inputs,
                   selectedSuites=list(SELECTED),status='RAW_TERMINAL_ONLY_INDEPENDENT_QUALIFICATION_PENDING')
-    write(SLOT/'manifest.safe.json',result)
-    public = BASE/'PG6966-chr-adapter-host-v1';public.mkdir()
+    write(slot/'manifest.safe.json',result)
+    public = BASE/('PG'+slot.name.removeprefix('pg'));public.mkdir()
     write(public/'manifest.json',{**result,'begin':begin,'privateLogCopiedToGit':False})
     print(json.dumps(dict(actualExit=code,source=SOURCE,baselineUnchanged=after==before,
                          publicManifestSha256=sha(public/'manifest.json'),independentQualification='PENDING')))

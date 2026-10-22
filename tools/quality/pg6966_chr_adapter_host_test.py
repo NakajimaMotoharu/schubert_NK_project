@@ -5,9 +5,19 @@ import unittest
 from pathlib import Path
 
 import pg6966_chr_adapter_host as p
+import pg6968_chr_adapter_host_v2 as v2
 
 
 class ChrHostRunGuardTest(unittest.TestCase):
+    def test_v2_exact_common_scope_no_native_format(self):
+        v2.validate()
+        expected = [f'src/main/java/dev/codex/schubert/characterization/{s}.java'
+                    for s in ('ArtifactComparator','GateCli','GateContractValidator','TargetAdapter')]
+        expected += [f'tests/java/dev/codex/schubert/characterization/{s}.java'
+                     for s in ('ArtifactComparatorTest','GateCliTest','GateContractTest',
+                               'GateContractValidatorNegativeTest','TargetAdapterTest')]
+        self.assertEqual(expected,list(v2.FILES))
+
     def test_fixed_five_host_suites_no_current_or_native(self):
         self.assertEqual(('ArtifactComparatorTest','GateCliTest','GateContractTest',
                           'GateContractValidatorNegativeTest','TargetAdapterTest'),p.SELECTED)
