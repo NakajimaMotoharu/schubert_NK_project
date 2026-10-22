@@ -256,6 +256,33 @@ class GateCliTest {
   }
 
   @Test
+  @org.junit.jupiter.api.DisplayName("PT-CHR-PATH-001 parentless log path rejected before IO")
+  void preflightRejectsParentlessLogPathWithoutNpe() throws Exception {
+    PreflightFixture fixture =
+        preflightFixture("parentless-log", temporaryDirectory.resolve("owned-runtime"));
+    Map<String, String> properties = new LinkedHashMap<>(fixture.properties());
+    Path parentless = Path.of("/");
+    assertEquals(null, parentless.getParent());
+    properties.put("chr.pgLog", parentless.toString());
+    withProperties(
+        properties,
+        () ->
+            assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                    GateCli.preflight(
+                        fixture.projectRoot(), temporaryDirectory.resolve("not-written.json"))));
+  }
+
+  @Test
+  @org.junit.jupiter.api.DisplayName("PT-CHR-PATH-002 parentless output rejected before temporary path")
+  void jsonWriterRejectsParentlessOutputWithoutNpe() {
+    assertFalse(Files.exists(Path.of("null.part")), "isolated snapshot has no foreign temporary file");
+    assertThrows(
+        IllegalArgumentException.class, () -> GateCli.writeJson(Path.of("/"), Map.of()));
+  }
+
+  @Test
   void reportMapsEveryGateAndRejectsSecretCanaries() throws Exception {
     Path users =
         ownerOnlyFile(

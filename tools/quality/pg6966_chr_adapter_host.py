@@ -38,10 +38,10 @@ def safe_extract(archive, destination):
         source.extractall(destination,filter='data')
 
 
-def main(slot=SLOT, format_files=()):
+def main(slot=SLOT, format_files=(), source=SOURCE):
     os.umask(0o077)
     require(not slot.exists(), 'new-only job; existing begin or terminal must be observed, never restarted')
-    subprocess.run(['git','diff','--exit-code',SOURCE,'--','src','pom.xml','.mvn','mvnw','program/characterization'],
+    subprocess.run(['git','diff','--exit-code',source,'--','src','pom.xml','.mvn','mvnw','program/characterization'],
                    cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
     original_baseline = ROOT/'program/characterization/baseline/current'
     before = inventory(original_baseline)
@@ -51,7 +51,7 @@ def main(slot=SLOT, format_files=()):
     paths = ['pom.xml','.mvn','mvnw','program/characterization',
              *['src/schubert-nk-'+m+'/pom.xml' for m in ('protocol','storage','bootstrap','api','web','batch')]]
     with archive.open('xb') as stream:
-        subprocess.run(['git','archive','--format=tar',SOURCE,*paths],cwd=ROOT,stdout=stream,check=True)
+        subprocess.run(['git','archive','--format=tar',source,*paths],cwd=ROOT,stdout=stream,check=True)
     snapshot = slot/'snapshot';snapshot.mkdir();safe_extract(archive,snapshot)
     require(inventory(snapshot/'program/characterization/baseline/current') == before,
             'snapshot baseline equals preserved original')
@@ -63,7 +63,7 @@ def main(slot=SLOT, format_files=()):
     env = {'PATH':str(TC/'jdk-25.0.4/bin')+':/usr/bin:/bin','JAVA_HOME':str(TC/'jdk-25.0.4'),
            'MAVEN_USER_HOME':str(TC/'m2'),'MAVEN_SKIP_RC':'true','LANG':'C.UTF-8',
            'MAVEN_OPTS':'-Xmx2g -Djava.awt.headless=true'}
-    begin = dict(source=SOURCE,operatorHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+    begin = dict(source=source,operatorHead=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                  branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip(),
                  startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=command,
                  cwd=str(snapshot),archiveSha256=sha(archive),inputHashes=source_inputs,
@@ -74,11 +74,11 @@ def main(slot=SLOT, format_files=()):
     with (slot/'maven.log').open('xb') as log:
         child = subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
         write(slot/'process.safe.json',dict(pid=child.pid,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                                          source=SOURCE,command=command,cwd=str(snapshot)))
+                                          source=source,command=command,cwd=str(snapshot)))
         code = child.wait()
         log.flush();os.fsync(log.fileno())
     # Unknown or nonzero is preserved as such, before any semantic gate.
-    result = dict(source=SOURCE,beginSha256=sha(slot/'begin.safe.json'),actualExit=code,
+    result = dict(source=source,beginSha256=sha(slot/'begin.safe.json'),actualExit=code,
                   endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),logSha256=sha(slot/'maven.log'))
     write(slot/'exit.safe.json',result)
     after = inventory(original_baseline)
@@ -88,7 +88,7 @@ def main(slot=SLOT, format_files=()):
     write(slot/'manifest.safe.json',result)
     public = BASE/('PG'+slot.name.removeprefix('pg'));public.mkdir()
     write(public/'manifest.json',{**result,'begin':begin,'privateLogCopiedToGit':False})
-    print(json.dumps(dict(actualExit=code,source=SOURCE,baselineUnchanged=after==before,
+    print(json.dumps(dict(actualExit=code,source=source,baselineUnchanged=after==before,
                          publicManifestSha256=sha(public/'manifest.json'),independentQualification='PENDING')))
     require(after == before and snap_after == source_inputs, 'all source inputs and original baseline remain identical')
     raise SystemExit(code)
