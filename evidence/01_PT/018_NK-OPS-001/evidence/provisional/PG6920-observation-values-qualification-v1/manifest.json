@@ -1,0 +1,110 @@
+{
+  "acceptedLeafDelta": 0,
+  "actualExit": 0,
+  "actualTargetCounters": {
+    "batch:dev/codex/schubert/nk/batch/file/MorningBrokerExecution$Observations.class": {
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 17,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "batch:dev/codex/schubert/nk/batch/file/RootServiceFacts$Facts.class": {
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 2,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 17,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 5,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      }
+    }
+  },
+  "additionalBuildsIssued": 0,
+  "all1669PhysicalMainByteExact": true,
+  "all851MainByteExact": true,
+  "counterNotApplicable": {
+    "batch:dev/codex/schubert/nk/batch/file/MorningBrokerExecution$Observations.class": {
+      "counter": "BRANCH",
+      "reason": "Public data record constructor uses Objects.requireNonNull and toString returns fixed literal; actual class XML has no BRANCH counter, no new exclusion/filter.",
+      "result": "NOT_APPLICABLE_ACTUAL_XML_ABSENT"
+    },
+    "batch:dev/codex/schubert/nk/batch/file/RootServiceFacts$Facts.class": {
+      "counter": "BRANCH",
+      "reason": "Public data record constructor uses Objects.requireNonNull and toString returns fixed literal; actual class XML has no BRANCH counter, no new exclusion/filter.",
+      "result": "NOT_APPLICABLE_ACTUAL_XML_ABSENT"
+    }
+  },
+  "effortPercent": null,
+  "formalAccepted": false,
+  "independentTestIdTrace": [
+    {
+      "method": "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+      "originalCase": {
+        "className": "dev.codex.schubert.nk.batch.file.ObservationValueRedactionTest",
+        "method": "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+        "module": "batch",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "94bc77764565d62985592a7e5b92e9206a2d8f4f",
+        "xmlSha256": "f2e458c60024b5c0c1b624afa79dacc9a9a37dfb63e3e9592f6cb18e72a639d7"
+      },
+      "sourcePath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sourceSha256": "06b91d396cab1906d9df5b9a9b74cd73d8688276fb533bf8c0c00907ebddece9",
+      "testId": "PT-OPS-OBSDATA-001"
+    },
+    {
+      "method": "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+      "originalCase": {
+        "className": "dev.codex.schubert.nk.batch.file.ObservationValueRedactionTest",
+        "method": "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+        "module": "batch",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "94bc77764565d62985592a7e5b92e9206a2d8f4f",
+        "xmlSha256": "f2e458c60024b5c0c1b624afa79dacc9a9a37dfb63e3e9592f6cb18e72a639d7"
+      },
+      "sourcePath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sourceSha256": "06b91d396cab1906d9df5b9a9b74cd73d8688276fb533bf8c0c00907ebddece9",
+      "testId": "PT-OPS-OBSDATA-002"
+    }
+  ],
+  "nativeQualified": false,
+  "newSourceGlobalCounters": null,
+  "oldFullImportedIntoNewGlobal": false,
+  "originalTerminalSha256": "a30f4ea5b96b89a0447f911bd420aade7b9f2a916780bc1d11affb72c4965ab2",
+  "ptAlternativeCompleted": 0,
+  "qualificationSha256": "32118884012095e87885c0246f083a27193f2d56394842e8459eed4d770145f4",
+  "selectedSuites": 9,
+  "selectedTests": 17,
+  "sharedReaderSha256": "18d6ec222074acee81c25b1f81e89351a78f2366f8d874b6a2c21fd6ec31d4f4",
+  "source": "94bc77764565d62985592a7e5b92e9206a2d8f4f",
+  "testsExecuted": 0,
+  "toolSha256": "85dd992f0337e8f9a5260a078b0a0c1f7c151f5e7df6a9807b5e8a86bf102729",
+  "vmActions": 0
+}

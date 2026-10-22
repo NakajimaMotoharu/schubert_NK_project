@@ -4,7 +4,7 @@ import pg6916_observation_values_selected as profile
 from pg5940_private_lock_compile import BASE
 from unchanged_selected_evidence import qualify
 
-QSHA = None
+QSHA = '32118884012095e87885c0246f083a27193f2d56394842e8459eed4d770145f4'
 REASON = 'Public data record constructor uses Objects.requireNonNull and toString returns fixed literal; actual class XML has no BRANCH counter, no new exclusion/filter.'
 
 
