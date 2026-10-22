@@ -1,0 +1,409 @@
+{
+  "acceptance": "NOT_APPLIED",
+  "actualCommonCounter": {
+    "BRANCH": {
+      "covered": 539,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 8,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 1087,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 131,
+      "missed": 0
+    }
+  },
+  "actualCrcMismatch": 0,
+  "actualCurrentOrNkCasesExecuted": 0,
+  "actualExit": 0,
+  "actualGateG01toG06NewlyAccepted": false,
+  "actualSessionCount": 1,
+  "canonicalDesigns": {
+    "documents/100_RD/110_総則・方針/112_スコープ定義.md": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+    "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md": "4f5a45aab218140aa91a25ac0c5e02b64279ac4489440a33bfc3031cc77ddbb9",
+    "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md": "4a20782c864b0f823c09eb2c31a908f4326dadca031dd451fcf9a74da857bcb4",
+    "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md": "445541909b1f56ce1785042c974f29bdd131a84d65e2fbdd02a8988c2c9cd5db"
+  },
+  "formalUpdated": false,
+  "newTestExecutions": 0,
+  "old41Imported": false,
+  "oldProduction4222Replayed": false,
+  "originalQualificationSha256": "0bbc80f788ac9c26caada7f363415a803aa6cef3796222d519467d6d60e34631",
+  "parentAdditionalBudgetPp": 0,
+  "parentScopeOverlay": {
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": {
+      "additionalBudgetPp": 0,
+      "currentSha256": "6d6ee6d5b2c4f498548282c235d842723ab7c99150bf937974c4440d57e530e3",
+      "owner": "WBS-P020-01",
+      "priorSha256": "6d6ee6d5b2c4f498548282c235d842723ab7c99150bf937974c4440d57e530e3",
+      "source": "3c70db39377cee751d7ecd12bb439c447e0c61c0"
+    },
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java": {
+      "additionalBudgetPp": 0,
+      "currentSha256": "cf7564629c8a9bdd53767a1ca0f9c49ff887ec751f40abbf6f38fedf3645391e",
+      "owner": "WBS-P020-01",
+      "priorSha256": "ed76d89bbce00761f374884140828848f872cd8801790374bd1ee68016f9ed0d",
+      "source": "3c70db39377cee751d7ecd12bb439c447e0c61c0"
+    },
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": {
+      "additionalBudgetPp": 0,
+      "currentSha256": "6580cedeee10b6bb78a2457d8f367ac5dd30bc67636124071b8c758bd7c81bfc",
+      "owner": "WBS-P020-01",
+      "priorSha256": "6580cedeee10b6bb78a2457d8f367ac5dd30bc67636124071b8c758bd7c81bfc",
+      "source": "3c70db39377cee751d7ecd12bb439c447e0c61c0"
+    },
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": {
+      "additionalBudgetPp": 0,
+      "currentSha256": "0a5e158e24c3e7bfce869a7bb9eda2ea497c3afdc7fcf1d40ae247fe37b3b7a0",
+      "owner": "WBS-P020-01",
+      "priorSha256": "0a5e158e24c3e7bfce869a7bb9eda2ea497c3afdc7fcf1d40ae247fe37b3b7a0",
+      "source": "3c70db39377cee751d7ecd12bb439c447e0c61c0"
+    }
+  },
+  "priorRegister": {
+    "path": "documents/400_PGPT/470_PMO/492_当commonSource個別受入_比較DIF追加.json",
+    "sha256": "26fde91b3dfeb318f7e02421b1ca3b9f8d15241d38fd44b9a933b0d48abe077a"
+  },
+  "requirementTrace": [
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "SCP-004",
+      "line": 10,
+      "owner": "WBS-P020-01",
+      "requirement": "現行互換性を検証する自動試験を整備する。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md"
+    },
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "TST-001",
+      "line": 7,
+      "owner": "WBS-P020-01",
+      "requirement": "現行実装を正として、NK着手前に主要挙動のCharacterization Testを作成する。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md"
+    },
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "TST-002",
+      "line": 8,
+      "owner": "WBS-P020-01",
+      "requirement": "画面デザイン、画面遷移、検索結果、並び順、ページング、メディア操作および主要エラーを比較する。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md"
+    },
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "TST-003",
+      "line": 9,
+      "owner": "WBS-P020-01",
+      "requirement": "内部クラス構成、SQLおよびファイルパスの一致は受入条件としない。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md"
+    },
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "TST-004",
+      "line": 10,
+      "owner": "WBS-P020-01",
+      "requirement": "現行から必要な変更は差異一覧へ記録し、理由と影響を確認した上で受け入れる。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md"
+    },
+    {
+      "acceptance": "UNASSESSED",
+      "designTrace": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "id": "TST-005",
+      "line": 11,
+      "owner": "WBS-P020-01",
+      "requirement": "現行URLおよびbookmarkの互換性は受入条件としない。画面デザイン、遷移および業務挙動を比較対象とする。",
+      "scope": "PGPT",
+      "source": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md"
+    }
+  ],
+  "reviewChecks": [
+    "WBS-P020-01.03:deliverable",
+    "WBS-P020-01.03:quality",
+    "WBS-P020-01:contract",
+    "WBS-P020-01:scope",
+    "WBS-P020-01:quality"
+  ],
+  "semanticReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/1536_CHR_gate工具契約・親範囲_個別受入matrix.md",
+    "sha256": "4b907a68091df007f5f1b71bd039285281d193278dd845028964dbd5b4b79b99"
+  },
+  "sharedStaticReviewSha256": "0e6fc7a9d14b985a19d9d3e506e7f9b96f569396bfba78d1bf838a158ea0525b",
+  "source": "3c70db39377cee751d7ecd12bb439c447e0c61c0",
+  "sourceCases": [
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "fileInventoryUtilitiesHandleMissingFilteredNestedAndLinkedFiles",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "atomicJsonWriterRejectsConcurrentUseOfTheSameOutput",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "preflightValidatesFilesPermissionsStorageNetworkAndPorts",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "verifySourceAcceptsIndependentInventoryAndRejectsDriftAndSymlink",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "reportMapsEveryGateAndRejectsSecretCanaries",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "secretScanHandlesCredentialSessionMissingLargeAndBinaryInputs",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "jsonWriterRejectsParentlessOutputWithoutNpe",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "repeatComparisonRequiresTwentyEightIdenticalArtifacts",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "preflightRejectsParentlessLogPathWithoutNpe",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "baselinePromotionIsImmutableCommitBoundAndSymlinkSafe",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "promotionRejectsNullAndUnnamedSourceBeforeAnyIo",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateCliTest",
+      "method": "mainRejectsMissingUnknownAndIncompleteCommands",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "37de5a20e51cf759d24ff1719b900353a570bf3a59b02887e1285033e1cce241"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding(Path)",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "expectedBaselineContainsAllStaticCounts",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "browserManifestPinsExecutableRevisionAndLocale",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "differenceAllowlistIsCompleteUniqueAndNarrow",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "caddyFixturePreservesAllForwardedRequestHeaders",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractTest",
+      "method": "strengthenedGateContractAcceptsTwoCompleteRepeatableRuns",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "31c71e3661418e22aa64ab011a152d11930baa81695a41a9f61308499fb509c9"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsAlteredBaselineManifestTreeAndCommit",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsMissingFailedAndIncompleteRunArtifacts",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[1]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[2]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[3]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[4]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[5]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[6]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsEveryNonPassExecutionStatus(String)[7]",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsMissingScreenshotDirectoriesAndOptionalReports",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsBroadAndMalformedDifferenceRules",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsMalformedContractSchemaCatalogAndBrowser",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsUnknownCatalogGroupAndSecondaryViewportMismatches",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsComparisonSourceInventoryPreflightAndReviewFailures",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    },
+    {
+      "clazz": "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+      "method": "rejectsIncompleteRequirementMatrix",
+      "result": "PASS_ORIGINAL_XML",
+      "xmlSha256": "b4bc5714c2f161a301fe41b3d724e98cf674b0da5df4e014c4cf5cc26a90fd57"
+    }
+  ],
+  "sourceHashes": {
+    "program/characterization/baseline/current/artifacts/CHR-A01.json": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993",
+    "program/characterization/baseline/current/artifacts/CHR-A02.json": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75",
+    "program/characterization/baseline/current/artifacts/CHR-A03.json": "71f6b1d5e940a17025ae76d977f35ca442a0647125753b5832eccb8da5a70994",
+    "program/characterization/baseline/current/artifacts/CHR-E01.json": "d5864a7688d23239062bfb4b95cf94c4b3da1abf746295d66787e6232a3f0fca",
+    "program/characterization/baseline/current/artifacts/CHR-L01.json": "7c8015cbe754b108447c60be45731ce0c5b5b3a044184febdef2fdf10c4e5134",
+    "program/characterization/baseline/current/artifacts/CHR-M01.json": "c746b82417532889708d5816c05965bf539f6f9f659ed6fde5b95a5f0e02f895",
+    "program/characterization/baseline/current/artifacts/CHR-M02.json": "54153f94ec28d227e0de6f48e1201fea203a8393bea4d69f7a5b7c2e02d20e8e",
+    "program/characterization/baseline/current/artifacts/CHR-M03.json": "6ae6c538ad17e74a17596d26bd909e89089e7025b91d3821b992390aea6984a4",
+    "program/characterization/baseline/current/artifacts/CHR-M04.json": "289b0b1b8bc0282464eac51bbf5a51ae5bd05486efdfd42509570dc5ba691b8f",
+    "program/characterization/baseline/current/artifacts/CHR-M05.json": "dd58b7dfd48e3c44f9e44ed44db195cb1109fa140610b3ed6e65a00e56fd6f9c",
+    "program/characterization/baseline/current/artifacts/CHR-M06.json": "2baaeac37af45dc3d5bfa41e42edc7b9eba9699056435770040586e4e665c91c",
+    "program/characterization/baseline/current/artifacts/CHR-M07.json": "3114210545501ed9311fd342b59472e7fb450f591597d1b4a811648ae0af2a3b",
+    "program/characterization/baseline/current/artifacts/CHR-N01.json": "487289b9b10f8865061fc15e37d58debd7e47602afa2bf8704fb27bfb1eed59f",
+    "program/characterization/baseline/current/artifacts/CHR-O01.json": "76731f9ce334fd6aed892363d680054d2697ace54a138e370528bae107fe42e2",
+    "program/characterization/baseline/current/artifacts/CHR-S01.json": "4f2f2f73e4a3be69d019f5aa3719272caa5be92097c496149d10a018cfdcb728",
+    "program/characterization/baseline/current/artifacts/CHR-S02.json": "f24e9682e094f5a3a3983860afa4a7082fd5ac15101a633ad03b93b482641f87",
+    "program/characterization/baseline/current/artifacts/CHR-S03.json": "eaa4d80f34a9777a2041ba9d08c1a3f84e51837e4d9c6fb5f2dac73fadbd419e",
+    "program/characterization/baseline/current/artifacts/CHR-S04.json": "da0d34b73adaadde9826210d6eb21aeff8f3ae16c613457adafad04fc1c30fbe",
+    "program/characterization/baseline/current/artifacts/CHR-S05.json": "bed685ac5e02a3f4da55a2da17d479ad2935041f7be9cb2fb6d8a4a617724def",
+    "program/characterization/baseline/current/artifacts/CHR-S06.json": "19a69fe122b1cd4f0a816b21807d4a9e63846394d438145be0a6c0f9cf9ca55d",
+    "program/characterization/baseline/current/artifacts/CHR-S07.json": "17d41fd789ceb5f300cebceca45d9a1e561ba7356b630e35cf11009ef4540772",
+    "program/characterization/baseline/current/artifacts/CHR-S08.json": "6b0715bc53a37879e31e7f8494caa3638d15af292aa8f71bcfa84127ff540f20",
+    "program/characterization/baseline/current/artifacts/CHR-U01.json": "5669dda7a9d7aec457023a7287b5508901f02e8e80c20131b281137326e701c7",
+    "program/characterization/baseline/current/artifacts/CHR-U02.json": "08755d79fb4795a3f5c391b9fb0e880c7c1c142c3417885dea96973af929f4d1",
+    "program/characterization/baseline/current/manifest.json": "4eb22323a475e15a3fae4ef9ccf3e128f1616591c2271f048bcf6473915ab8f9",
+    "program/characterization/baseline/current/screenshots/CHR-U01-desktop.png": "3c034d8b00dbcad9bc79a059f07546d22a97c4e077577cfa47598fda66c96b76",
+    "program/characterization/baseline/current/screenshots/CHR-U01-mobile.png": "17f476d099ff38cb2e2dab40ace855c82b50f01f5385f3df9f3ed40fa2173114",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "6d6ee6d5b2c4f498548282c235d842723ab7c99150bf937974c4440d57e530e3",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java": "cf7564629c8a9bdd53767a1ca0f9c49ff887ec751f40abbf6f38fedf3645391e",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "6580cedeee10b6bb78a2457d8f367ac5dd30bc67636124071b8c758bd7c81bfc",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": "0a5e158e24c3e7bfce869a7bb9eda2ea497c3afdc7fcf1d40ae247fe37b3b7a0",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java": "07547bb308d6ae72c304a7cab90370272ce67f5dbd1a31e83ee7aef5ff152ed9",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java": "cb702f1023e1f144b1c9a819ab52b52c52072d307335544221b4ffbe655344fa",
+    "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java": "f177c63e1173c9ac991c5862336a109c0b422971d6ffbedc54bd17c2a6ea4cb7",
+    "program/characterization/tests/resources/browser/manifest.json": "470febbeabe77bbd7b8835baf4cb283c472775c15fa88df89db40bc05c6dbec3",
+    "program/characterization/tests/resources/cases/case-requirements.json": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569",
+    "program/characterization/tests/resources/cases/catalog.json": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+    "program/characterization/tests/resources/cases/dif-allowlist.json": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6",
+    "program/characterization/tests/resources/cases/gate-contract.json": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9",
+    "program/characterization/tests/resources/cases/schema.json": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8",
+    "program/characterization/tests/resources/fixtures/expected.json": "f57d63e0f08600ceae9f2cb7ee867324780b2fa1a9f8d7b5d793222e5a81434c"
+  },
+  "sourceRun": "PG6976-chr-path-green-v1"
+}
