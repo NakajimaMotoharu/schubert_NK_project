@@ -15,7 +15,7 @@ TESTS = {
  'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchFixtureOwnershipTest.java',
  'src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogFixtureOwnershipTest.java'}
 SLOTS = {'red-bootstrap': 'pg6922-db-fixture-red-bootstrap-v1', 'red-batch': 'pg6922-db-fixture-red-batch-v1', 'green': 'pg6924-db-fixture-green-v1'}
-RED_QSHA = None
+RED_QSHA = '97db1cbbeefa2a43961686b891d15b82fc34579ceb431f93f9aa2f8b8267693d'
 GREEN_EXPECTED = (21, 10)
 
 
@@ -40,7 +40,7 @@ def green_guard(source):
     if RED_QSHA is None or sha(qp) != RED_QSHA:
         raise ValueError('freeze both genuine SQL failure/owned cleanup originals first')
     red = json.loads(qp.read_bytes())
-    if not (red['readerActualExit'] == 0 and red['productionTestCounterexamples'] == 2):
+    if not (red['readerActualExit'] == 0 and red['fixtureCounterexamples'] == 2):
         raise ValueError('both separate red module originals')
     if subprocess.check_output(['git', 'diff', red['source'], source, '--', *sorted(TESTS)], cwd=ROOT):
         raise ValueError('all independent new oracle bytes fixed since both red cases')

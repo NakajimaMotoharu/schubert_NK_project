@@ -1,0 +1,88 @@
+{
+  "acceptedLeafDelta": 0,
+  "actualServiceActions": 0,
+  "all1669PhysicalMainByteExact": true,
+  "all851MainByteExact": true,
+  "buildReissued": false,
+  "effortPercent": null,
+  "fixtureCounterexamples": 2,
+  "formalAccepted": false,
+  "originalActualExit": 1,
+  "ptAlternativeCompleted": 0,
+  "readerActualExit": 0,
+  "rows": [
+    {
+      "actualSuites": 4,
+      "actualTests": 8,
+      "allActualXmlSha256": {
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "37b774c8991c1efc73b4662cb54e31547d54f561bc41de117234b19672648313",
+        "dev.codex.schubert.nk.api.logging.ApiLogFixtureOwnershipTest": "746fbb872f1537856a7d5f0b12d5de473e042f35ab299e8331971f614648b715",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "55c49eaa8eb53001831696d38f42f3c4ba6848b40459126a83f3a0b2eee61de2",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "0ceb98218d1f085e95bd73cd647fd5c03cce1bac6594c10200f651ef00d6c0a7"
+      },
+      "cleanupMarker": "PT-DBFIX-1633-A02 ownedResidualStop=true",
+      "exceptionType": "org.opentest4j.AssertionFailedError",
+      "fixtureOnlyResidualStopConfirmed": true,
+      "message": "confirmed started fixture must stop before constructor failure escapes ==> expected: <false> but was: <true>",
+      "method": "dbfix1633002KnownStartedSetupSqlFailureCannotLeaveUnpublishedOwner",
+      "mode": "red-bootstrap",
+      "normalAndConfigCasesPassed": 2,
+      "notRunSuites": 4,
+      "notRunTests": 7,
+      "originalManifestSha256": "741a2c16649848650212a0d6ac637b93a9efffc7cbfd6f89060a01e8338286b5",
+      "originalTestXmlSha256": "746fbb872f1537856a7d5f0b12d5de473e042f35ab299e8331971f614648b715",
+      "result": "FAILED_EXPECTED_CONSTRUCTOR_OWNER_LEAK",
+      "source": "3f785147ae7f2dace5bb79a6d5a16cd0de458289",
+      "staticModulesCompleted": [
+        "protocol",
+        "storage"
+      ],
+      "testId": "PT-DBFIX-1633-A02",
+      "testPath": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogFixtureOwnershipTest.java",
+      "testSourceSha256": "5d5d385ef991dde641418386937e1f12885ddbb223350fc2749989ae727cbe4e"
+    },
+    {
+      "actualSuites": 8,
+      "actualTests": 15,
+      "allActualXmlSha256": {
+        "dev.codex.schubert.nk.api.file.EnumValueCatalogCompatibilityTest": "1d0147cecbcec4c2a6f0d7d0ff6c1f732e68acd7b001bc2eb24c180454bba601",
+        "dev.codex.schubert.nk.api.security.EnumValueCatalogCompatibilityTest": "017ede3e2e81806ed701f6e10ed9ebcae002b246459df0adb9f727c856bf1394",
+        "dev.codex.schubert.nk.batch.platform.EnumValueCatalogCompatibilityTest": "126e8e9510e87c02153934ded2f42fecbd83a0846520eecdbbb6d860c46db1dd",
+        "dev.codex.schubert.nk.batch.repository.BatchFixtureOwnershipTest": "2df4427b698ce696ebbba0fcf6696769c3872973638b7018b132fb600ea30fac",
+        "dev.codex.schubert.nk.batch.repository.EnumValueCatalogCompatibilityTest": "f382a036704b3d5e47c179a5de0072ab4d5d326c1169637b078a4bb3fad71920",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest": "11ec1898fae140b30530471312ec3090505defe951d39dfc6ad13e7158323ca2",
+        "dev.codex.schubert.nk.storage.EnumValueCatalogCompatibilityTest": "9b8d27736eeb5bc9ceb44f35f03220122441451fc752bc704f34d4ff8632a503",
+        "dev.codex.schubert.nk.web.media.HttpByteRangeParserTest": "998de244f1d325f0e5b067339d06d2fcd89194fa508d97b76d5c07088e09054d"
+      },
+      "cleanupMarker": "PT-DBFIX-1633-B02 ownedResidualStop=true",
+      "exceptionType": "org.opentest4j.AssertionFailedError",
+      "fixtureOnlyResidualStopConfirmed": true,
+      "message": "confirmed started fixture must stop before constructor failure escapes ==> expected: <false> but was: <true>",
+      "method": "dbfix1633002KnownStartedSetupSqlFailureCannotLeaveUnpublishedOwner",
+      "mode": "red-batch",
+      "normalAndConfigCasesPassed": 2,
+      "notRunSuites": 0,
+      "notRunTests": 0,
+      "originalManifestSha256": "56357b7bf3d393a3c0a9076f1a24b1300c2a7e3d142607345191ad391fb4f40a",
+      "originalTestXmlSha256": "2df4427b698ce696ebbba0fcf6696769c3872973638b7018b132fb600ea30fac",
+      "result": "FAILED_EXPECTED_CONSTRUCTOR_OWNER_LEAK",
+      "source": "3f785147ae7f2dace5bb79a6d5a16cd0de458289",
+      "staticModulesCompleted": [
+        "api",
+        "bootstrap",
+        "protocol",
+        "storage",
+        "web"
+      ],
+      "testId": "PT-DBFIX-1633-B02",
+      "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchFixtureOwnershipTest.java",
+      "testSourceSha256": "b18bd78f008847e8b1bafe5e17ae6947651938f5ba75abe6b73a9164abbd472a"
+    }
+  ],
+  "source": "3f785147ae7f2dace5bb79a6d5a16cd0de458289",
+  "sourceArchiveSha256": "7e5016f44d3af2c086c0f29970ae5fdee4793505d1fd4a3867e8a1c14cde0f75",
+  "testsExecutedByReader": 0,
+  "toolSha256": "3d41bb1400bf093efe03188ef1b0bc888a059331d6a233b4574bb86bd8f84c0c",
+  "vmActions": 0,
+  "wholeReplayed": false
+}
