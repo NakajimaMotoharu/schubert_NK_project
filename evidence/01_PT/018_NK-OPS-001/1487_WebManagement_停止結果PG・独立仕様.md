@@ -1,5 +1,11 @@
 # WebManagement 停止結果PG・独立仕様
 
+## 後続PG review指摘（当全体sourceは変更しない）
+
+1618/1371を全体6784稼働中・修正前に起票。初期Optional.empty localがbind後/cleanup try前にあり、JDK25.0.4のOptional.<clinit>にはEMPTY用allocationが存在する。Optionalの初期化済みを外部前提にせず、追加bookkeepingを既fixed diagnosticと同じ取得前へ移す必要がある。通常28の合格は保持するが、この潜在順序違反の解決を意味しない。heap枯渇等の動的危険試験/actual操作0、当Main/Testは元全体の真正終端/原資格まで固定。
+
+元4197が成功しても当sourceを最終PG品質閉鎖にせず、原XML/byte/counterを保存する。終端後に宣言位置だけ是正し、取得前順序canary/旧late配置変異拒否・全既独立oracleを同じ新sourceで確認する。無関係metadataのstage/apply往復はせず、既知PG残件を解消してから必要同source品質/traceへ進める。1488の独立pure codec五Testも選択前にまとめて固定できれば、同新sourceの必要全体は一回へまとめ、各群の開始予算/手戻りを混同しない。
+
 ## 全体前提guardの是正（Production全体未発行）
 
 6784初回入口はBUG1617/YKT1370のraw-key集合誤規定で終了1、RUNTIME.preflight/new job/全体PT発行前に停止した。原6782は所定四に加え正規INSTRUCTION/COMPLEXITYを持つ。修正前起票後、四counterの必須存在/整数/正数covered/miss0を検証する専用guardへ是正、追加原counterは変更せず保全。実原六counterと十二変異拒否を管理へ追加し、未実行全体を成功扱いしない。固定Main/Test/元選択28は再演不要、是正工具保存後に初回actual全体だけを開始する。
