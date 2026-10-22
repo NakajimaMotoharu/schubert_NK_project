@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-22最新：[1473](../../evidence/01_PT/018_NK-OPS-001/1473_BrokerCleanup4184_元結果・品質・残method.md)で当d48f全4184/643・六SpotBugs0・原資格/SQL115/静的1404/原JVM58・current943反映まで完了。八変更classのL/B100、六class四100・二classの普通callback M三が残る。PMD未分類保留43→11（旧Rootは維持）。正式/個別17-190/工数null/global100/native/CHRは更新せず、次残methodの必要PG/PTへ継続。以下の「実行中」は当時の履歴。
+
 2026-10-22更新：[1468](../../evidence/01_PT/018_NK-OPS-001/1468_ConsumerCleanup333_原83結果・横展開継続.md)のSSC333原83と[1470](../../evidence/01_PT/018_NK-OPS-001/1470_BrokerParent334_原反例・実装・再試験.md)のSSC334原127/33・六SpotBugs0を限定確認。元source d48f8ebf8/資格9c92e0bf、必要[1471全体4184仕様](../../evidence/01_PT/018_NK-OPS-001/1471_BrokerCleanup全体4184_独立原資格仕様.md)を開始し同元観測中、全体合格・global四100・native/CHR/正式は未更新。1607/1608・1360/1361はfixture/lock scopeのみ完了、1604/1606等は当source全体/品質前OPEN。最新456/460が実行状態の正、拒否未特定の実操作HOLD/代替完了0・個別17/190/工数null/QA051final/正式1964-53を維持。
 
 2026-10-20更新：[1222](../../evidence/01_PT/018_NK-OPS-001/1222_protocol表現是正_実行結果.md)でsource862のcodec八表現PG/105PT・六target/全protocol module実四counter100・無除外PMD八是正を限定確認、1498/1258当scopeclose。現raw1586/pending根拠482/未review1104、同source global全体/native/CHR/正式は未受入。次は独立F03/storage九指摘の判定・必要PG/PTへ進む。最新456/460を正とし、原見積/工数null/正式1964-53・17-190は更新しない。
