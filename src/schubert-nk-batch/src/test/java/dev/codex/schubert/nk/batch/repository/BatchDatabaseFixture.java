@@ -64,21 +64,32 @@ public final class BatchDatabaseFixture {
             + pg.resolve("lib/postgresql/18/lib"),
         "start");
     url = "jdbc:postgresql://127.0.0.1:" + port + "/postgres";
-    try (Connection connection = admin();
-        var statement = connection.createStatement()) {
-      statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
+    try {
+      try (Connection connection = admin();
+          var statement = connection.createStatement()) {
+        statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
+      }
+      Flyway.configure()
+          .dataSource(url, "schubert_migration", "")
+          .defaultSchema("schubert_meta")
+          .schemas("schubert_meta")
+          .createSchemas(true)
+          .initSql("SET ROLE nk_owner")
+          .locations("filesystem:" + resources.resolve("migration"))
+          .validateOnMigrate(true)
+          .cleanDisabled(true)
+          .load()
+          .migrate();
+    } catch (Throwable failure) {
+      // BUG-1633: only the successful start above establishes this fixture's owner.
+      try {
+        stop();
+      } catch (Throwable closeFailure) {
+        if (closeFailure != failure) failure.addSuppressed(closeFailure);
+        if (closeFailure instanceof InterruptedException) Thread.currentThread().interrupt();
+      }
+      throw failure;
     }
-    Flyway.configure()
-        .dataSource(url, "schubert_migration", "")
-        .defaultSchema("schubert_meta")
-        .schemas("schubert_meta")
-        .createSchemas(true)
-        .initSql("SET ROLE nk_owner")
-        .locations("filesystem:" + resources.resolve("migration"))
-        .validateOnMigrate(true)
-        .cleanDisabled(true)
-        .load()
-        .migrate();
   }
 
   public Connection open(String role) throws SQLException {
