@@ -19,6 +19,22 @@ final class ExpiryRequestBoundaryTest {
     UUID nil = new UUID(0, 0);
     Instant cutoff = Instant.parse("2026-09-30T00:00:00Z");
     Instant start = Instant.parse("2026-09-30T00:00:01Z");
+    var ordinary =
+        new CleanupWorkerRequest.Expiry(
+            run, activation, cutoff, boot, epoch, "1".repeat(32), 42, 1, start, false);
+    assertArrayEquals(
+        ExpiryWorkerRequestTest.GOLDEN.getBytes(StandardCharsets.US_ASCII), ordinary.encode());
+    assertEquals(run, ordinary.run());
+    assertEquals(activation, ordinary.activation());
+    assertEquals(cutoff, ordinary.cutoff());
+    assertEquals(boot, ordinary.boot());
+    assertEquals(epoch, ordinary.epoch());
+    assertEquals("1".repeat(32), ordinary.brokerInvocation());
+    assertEquals(42, ordinary.stepId());
+    assertEquals(1, ordinary.attempt());
+    assertEquals(start, ordinary.started());
+    assertFalse(ordinary.skipped());
+    assertTrue(ordinary.prior().isEmpty());
     for (int changed = 0; changed < 4; changed++) {
       UUID suppliedRun = changed == 0 ? nil : run;
       UUID suppliedActivation = changed == 1 ? nil : activation;
