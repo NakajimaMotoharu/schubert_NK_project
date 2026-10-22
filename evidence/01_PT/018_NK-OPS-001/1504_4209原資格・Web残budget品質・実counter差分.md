@@ -35,3 +35,7 @@ command環境は1497と同じ完全PYTHONPATH＋python3 -B、JDK/javap25.0.4/Mav
 publish6872/f8c75b2feb889c087ffa39708973de36ec1623bb1d72e0a79f9fb0dc9da7663cは当host測定だけ。beforeWBS監査1は旧current4c034のWeb Main hashが新Mainと異なる所定stale検出で、Production障害ではない。全元job/reader/JVMは終了済、同成功再演不要。成果保存pushclean→metadata stage/proof保存pushclean→apply/after監査/reportでcurrent943だけ更新する。未適用を更新済みとしない。
 
 BUG1627/YKT1380・SSC335のordinary scopeと1628/29・YKT1381/82のfixture scopeは最終trace後に照合する。hist941/17/481484・原/v4・正式1964/53・工数null・全実環境HOLD/QA051final/PTALT対象未特定・代替完了0は不変更。次は1505自己所有fixtureのnormalDELETE電文化・Io名前境界を最終点検して通常PG/PTへ継続する。fresh最後83/残17/reset1793082864、secondarynull/券0、実N/T/専有費null、通常小群停止0。
+
+最終追記：stage d9c1c051b39cdd7789739d3012d5b649a8629a81737f286d816109fe0fa2a194、公開同JSON proof7511885aaをpushclean後、apply/session55037・after監査・reportが全0。report **65be5c6c6b59d9984825bfd70892ebaa985e3f678c2f76133373c532ed88265b**。current943だけ当Source2b2eへ、旧4c034 metadataは1751271f4へ保全。Java owner116の95技術閉鎖/20gap/CHR1は据置、family集約LINE3477/module3469の差8は既domain集約形状を保持し補正しない。hist/17/481484/正式/工数率の変更0。
+
+1627/YKT1380は修正ec2a964ee・旧三反例9a9c504c/同Testgreen69dba278/当元4209・全原品質と当traceまでordinary scopeを確認してCLOSED。1628/29・YKT1381/82は修正74e18/63559・Ready.release void/既checkedIO表の独立根拠・同v3Test全byteと原結果/traceでfixture scopeだけCLOSED（2026-10-22）。旧compile/誤oracle/元三ERRORを保持する。SS335のmain閲覧用ledgerへ当scope実証を反映し、actualWeb/Root/native/PGPT全体・ITSTは別未受入のまま。全当job/reader終了・同成功再演不要。
