@@ -62,12 +62,12 @@ final class WebManagementServer implements AutoCloseable {
       throws IOException {
     // PG-D471/PT-WEB-READY007: fixed secondary exists before acquiring the bound owner.
     var cleanupDiagnostic = new IOException(STOP_UNCONFIRMED);
+    var closing = Optional.<IOException>empty();
     var result = bind(information, healthy, port, factory);
     try {
       result.start();
       return result;
     } catch (RuntimeException | Error failure) {
-      var closing = Optional.<IOException>empty();
       try {
         closing = result.stopFailure(java.time.Duration.ofSeconds(30));
       } catch (RuntimeException | Error unconfirmed) {
