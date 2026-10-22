@@ -1,5 +1,11 @@
 # TransferIo 実装前仕様・invariant証明
 
+## 初回失敗・fixture是正（2026-10-22、旧本文は着手時履歴）
+
+元6760/session78554/source7b6b3304d/archive a90c0504はphase0,1/actualExit=maven1・0PT0suite。BUG1614 generic Boolean/BooleanSupplier overloadでTest compile失敗、static六未実行・27成功化0、公開失敗manifestと元private診断hashを保存。独立reviewのBUG1613はstream `finally` counterを確認済みcloseと誤認する弱点で、動的native失敗を観測した意味ではない。
+
+修正前915/916起票後、Main/全旧oracleを7b6bのまま固定し、新Testだけlocal boolean・delegate.close正常帰還後counter・全該当fault marker一意assert/device対象観測一回へ是正。source canaryは現順序/二marker/typed booleanを検査し、旧finally・marker欠落・旧7bTest sourceを拒否、管理三＋既profile三=六成功、format0。入力literal/数値期待/例外期待/八TestIDは不変。新runは同tool6760の`pg6764-transfer-io-selected-v2`、原readerは6766（旧6762は未実行）へ固定。既run/log/archiveを上書き/再起動0、再試験前は1612/1613/1614と1365/1366/1367を未完とする。
+
 実行工具（実装後固定）：`python3 -B tools/quality/pg6760_transfer_io_selected.py run`新only27件/10suite、元真正0後同tool `read`で原6762。実宣言は旧Transfer六＋Failure一＋新八＋六guard十二=27、管理三/format0、全旧oracle/他850Main/gates/Current不変。old1667へ黙って合わせず、new1669・old全keys＋明記Io/NioIo二だけ・旧family以外の物理byte差0を原Jarで照合する。full4197/646は新八を含む宣言予定で、まだ合格ではない。
 
 1481準備を着手仕様へ固定。NK-BAT-001/OPS009/FIL006/UI237251/SS333§12/341/SSC118、TransferCleanup、BUG1612/YKT1365・PG-D503、群1693 P017-09低.5/標準1.5/高4pp（未較正・着手前固定）。基点bad7b4533/原4189 Q491bbf38、全Main851/1667・旧Test不変。修正前実測family L4/M0/C0/B10miss。未実装の注入口に対する初回compile不能を既実装の障害PTには数えず、現quality残件と独立oracleを先に固定する。

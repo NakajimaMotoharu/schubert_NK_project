@@ -48,6 +48,7 @@ final class TransferIoBoundaryTest {
         var before = f.original();
         f.fault = fault;
         assertThrows(IOException.class, () -> f.subject(f).execute(CUTOFF));
+        assertEquals(1, f.faultsInjected, "the intended fixture fault was reached");
         f.protectedWithoutMutation(before);
       }
     }
@@ -65,6 +66,7 @@ final class TransferIoBoundaryTest {
             };
         outcome(
             f.subject(f).execute(CUTOFF), 0, 0, 0, 1, 0, BatchStepResult.Reason.PROTECTED_RECORDS);
+        assertEquals(1, f.observations.get(role), "the selected device input was inspected");
         f.protectedWithoutMutation(before);
       }
     }
@@ -140,6 +142,7 @@ final class TransferIoBoundaryTest {
         var before = f.original();
         f.fault = fault;
         assertThrows(IOException.class, () -> f.subject(f).execute(CUTOFF));
+        assertEquals(1, f.faultsInjected, "the intended fixture fault was reached");
         f.protectedWithoutMutation(before);
       }
     }
@@ -151,7 +154,8 @@ final class TransferIoBoundaryTest {
     try (var f = new Fixture(temporary, true)) {
       var before = f.original();
       assertThrows(NullPointerException.class, () -> f.subject(null));
-      assertTrue(f.root.atDirectory(Files::isDirectory));
+      boolean heldDirectory = f.root.atDirectory(Files::isDirectory);
+      assertTrue(heldDirectory);
       f.protectedWithoutMutation(before);
     }
   }
@@ -186,7 +190,7 @@ final class TransferIoBoundaryTest {
     final Set<Integer> descriptors = new HashSet<>();
     final Map<String, Integer> observations = new HashMap<>();
     final long uid, gid;
-    int openedStreams, closedStreams, unlinks, removes, guards;
+    int openedStreams, closedStreams, unlinks, removes, guards, faultsInjected;
     String fault = "";
     boolean nonRemoving;
     BiConsumer<String, Map<String, Object>> transform = (role, values) -> {};
@@ -268,38 +272,43 @@ final class TransferIoBoundaryTest {
       assertEquals(openedStreams, closedStreams, "all streams closed");
     }
 
+    boolean injecting(String name) {
+      if (!fault.equals(name)) return false;
+      faultsInjected++;
+      return true;
+    }
+
     @Override
     public Map<String, Object> metadata(Path held) throws IOException {
-      if (fault.equals("metadataIOException")) throw new IOException("synthetic metadata failure");
-      if (fault.equals("nullMap")) return null;
+      if (injecting("metadataIOException")) throw new IOException("synthetic metadata failure");
+      if (injecting("nullMap")) return null;
       var values = new HashMap<>(nio.metadata(held));
       String role =
           Files.isSameFile(held, path) ? "root" : Files.isDirectory(held) ? "child" : "file";
       observations.merge(role, 1, Integer::sum);
-      if (fault.equals("size")) values.put("size", -1L);
-      if (fault.equals("links")) values.put("nlink", 1);
+      if (injecting("size")) values.put("size", -1L);
+      if (injecting("links")) values.put("nlink", 1);
       transform.accept(role, values);
       return values;
     }
 
     @Override
     public String filesystem(Path held) throws IOException {
-      if (fault.equals("filesystemIOException"))
-        throw new IOException("synthetic filesystem failure");
-      if (fault.equals("nullFilesystem")) return null;
-      return fault.equals("filesystem") ? "unsupported-public-fixture" : nio.filesystem(held);
+      if (injecting("filesystemIOException")) throw new IOException("synthetic filesystem failure");
+      if (injecting("nullFilesystem")) return null;
+      return injecting("filesystem") ? "unsupported-public-fixture" : nio.filesystem(held);
     }
 
     @Override
     public DirectoryStream<Path> openNames(Path held) throws IOException {
-      if (fault.equals("openIOException")) throw new IOException("synthetic enumeration failure");
-      if (fault.equals("nullStream")) return null;
+      if (injecting("openIOException")) throw new IOException("synthetic enumeration failure");
+      if (injecting("nullStream")) return null;
       var delegate = nio.openNames(held);
       openedStreams++;
       return new DirectoryStream<>() {
         @Override
         public Iterator<Path> iterator() {
-          if (fault.equals("iterator"))
+          if (injecting("iterator"))
             throw new DirectoryIteratorException(new IOException("synthetic iterator failure"));
           var iterator = delegate.iterator();
           return new Iterator<>() {
@@ -311,21 +320,18 @@ final class TransferIoBoundaryTest {
             @Override
             public Path next() {
               Path original = iterator.next();
-              return fault.equals("nullEntry")
+              return injecting("nullEntry")
                   ? null
-                  : fault.equals("nullName") ? Path.of("/") : original;
+                  : injecting("nullName") ? Path.of("/") : original;
             }
           };
         }
 
         @Override
         public void close() throws IOException {
-          try {
-            delegate.close();
-          } finally {
-            closedStreams++;
-          }
-          if (fault.equals("close")) throw new IOException("synthetic stream close failure");
+          delegate.close();
+          closedStreams++;
+          if (injecting("close")) throw new IOException("synthetic stream close failure");
         }
       };
     }

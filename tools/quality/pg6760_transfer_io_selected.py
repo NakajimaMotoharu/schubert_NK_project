@@ -11,7 +11,7 @@ OLD='bad7b45337d10341e9972cc9b3f7a0b43d21e465'
 MAIN='src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java'
 TEST='src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/TransferIoBoundaryTest.java'
 ADDED={'batch:dev/codex/schubert/nk/batch/file/TransferCleanup$'+n+'.class' for n in ('Io','NioIo')}
-SLOT='pg6760-transfer-io-selected-v1'
+SLOT='pg6764-transfer-io-selected-v2'
 EXPECTED=(27,10)
 
 
@@ -54,7 +54,7 @@ def read_original():
     return qualification_definition()(source,run,cases,EXPECTED,{MAIN},
       BASE/'PG6746-request-read-original-v1/manifest.json','af3dcb55d39916cd4883ddfa37337c92033b60080e6e9c7c44de760a35b1714a',
       W/'pg6746-request-read-original-v1/manifest.safe.json',W/'pg6746-request-read-original-v1/findings.safe.json',
-      'pg6762-transfer-io-original-v1','PG6762-transfer-io-original-v1',expected_phase_exits=(0,0,0))
+      'pg6766-transfer-io-original-v2','PG6766-transfer-io-original-v2',expected_phase_exits=(0,0,0))
 
 
 def main():
