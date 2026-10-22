@@ -1,0 +1,20 @@
+# 次候補・Retention電文化の削除行と名前境界
+
+6862元4209実行中の独立仕様準備。現Main/Test/gatesは変更せず、当全体原品質・trace後に着手判断する。未実行・未受入、予算の開始記録もまだ行っていない。正式1964/53・17/190・工数null/原-v4・全HOLD・PTALT代替0は不変更。
+
+## 対象と調査根拠
+
+MorningGateEvidence.retention/retentionName、SS341SSC133・SS343のNKBRET1、P018-03.02主担当/共通retention P017-07参照。既全体の未網羅line487～492は**keptではなくDELETE行**で、最初の候補読み取り時の誤認をここで訂正する。既issret007は三mode goldenを検証するが削除発生時のframeを検証しない。名前長guardは510hex以内を維持する正しいdefensive validationであり、到達不能扱いや除去はしない。
+
+BackupManifestReader.namesは注入Io.openNamesのPath集合を同parent/重複/最大4096で検査し、型portからの各nameの255byte上限までは検査しない。BackupArtifactFixtureには既listing portがあり、自己所有DirectoryStreamを閉じつつ不正entry値を注入できる。Resultはprivate constructorのまま正規collectから取得し、reflection/field改変で作らない。Linux実filesystemへ256byte名を作る試験ではなく、Io境界の未対応dataへのnegative testに限る。
+
+## PT_DEFAULT候補の二観点
+
+1. 既BackupArtifactFixtureとMorningBackupRetentionTest.generations/subject/acceptsAllを未変更で使用。@TempDirで今回生成した八世代だけを自己所有writable FDで処理し、最古一件削除・七件保持後のNKBRET1**全byte**を独立期待値と比較する。削除前に自分が生成した各MANIFEST inputをJDK SHA-256で独立計算し、名前・保持七件・DELETE一件・各digest/固定size/ROOT metadataの所定順を手書きSS layoutで作る。Productionのencoder/verifier/resultからexpectedを生成しない。実原本や実Backupへアクセスしない。
+2. 同fixtureの既listing portで255 ASCII byte名（hex510）と256名（hex512）を返す。Mode.FAILED/currentなしの正規collectでResultを得て、255は独立固定BEFORE/AFTER全byte、256はretentionNameのIOExceptionを期待する。Path値を構築するだけで実256byte名へのファイル作成/操作をしない。DB portは全mutating/成功問合せが呼ばれたら失敗とし、actualDB/業務再送/worker startをしない。Io stream/FDは既fixtureに従い閉じる。
+
+fixtureのUID2000/GID2001/effectiveUid0やdev/ino固定値は注入portのdataで、実machineのrole/UID/権限/OS admissionを変更・認定するものではない。kernel操作は今回生成したTempDir/保持FDの範囲に限定。production固定rootを開くMorningBackupRetention.use、Root/M-A/Unit/permit/実credential/native資格は呼ばない。既Root/cohort/原本/鍵の安全HOLDから分離した通常component PTであり、拒否を探る検証・代替PTではない。
+
+## 着手条件と品質
+
+6862/当原品質traceを先に閉じ、fresh>10%・leaf開始見積り・既Fixture/Io契約と独立期待値の最終点検後に新Testだけを追加する。全Main/全旧Test/gates固定、PGは既formatter/producer契約を点検して変更要否を根拠付き決定する。初回に期待違反があれば修正前915/916、設計不備なら所定SSC等を先行する。新JUnit数とsourceは実declarationから固定し、loop vector数を試験件数へ足さない。削除scopeは全対象が今回生成されたTempDir内であることを確認し、user原本/DB dump/鍵を入力やGit成果物にしない。
