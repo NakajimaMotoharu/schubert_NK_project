@@ -1,0 +1,84 @@
+{
+  "acceptedLeafDelta": 0,
+  "actualExit": 0,
+  "actualRuntimePathsAccessed": 0,
+  "artifact": "src/deployment/tmpfiles/schubert-nk-maintenance.conf",
+  "contractComplete": false,
+  "declaredBootProfileEvidenceReady": true,
+  "declaredRules": [
+    "d! /run/schubert-nk 0755 root root -",
+    "d! /run/schubert-nk/maintenance 0700 root root -",
+    "d! /run/schubert-nk/startup 0700 root root -",
+    "d! /run/schubert-nk/backup-request 0700 root root -",
+    "d! /run/schubert-nk/cleanup-request 0700 root root -",
+    "d! /run/schubert-nk/expiry-request 0700 root root -",
+    "f! /run/schubert-nk/maintenance.lock 0600 root root -",
+    "f! /run/schubert-nk/startup-admission.lock 0600 root root -"
+  ],
+  "designMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "designSha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+  "directoryRules": 6,
+  "effortPercent": null,
+  "fileRules": 2,
+  "formalAccepted": false,
+  "inputHashes": {
+    "src/deployment/tmpfiles/schubert-nk-maintenance.conf": "49656572415077cbb06c6449717c68275ae5c4e534665b64f3d1270bf65e1e9c",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java": "76d1c7218147666d40b4331538895d4925010054f2ca13e829e008bd2107864e",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java": "ba48ecd915597753ba3278c13e12cc08bf1f165b7c33b740c1d06a2620eeae51"
+  },
+  "javaPassCountAdded": 0,
+  "localEvidenceChecks": [
+    "WBS-C05:scope"
+  ],
+  "originalCases": [
+    {
+      "method": "fixedProvisioningContract",
+      "originalCase": {
+        "caseNameSha256": "4405c5fb836e91bb24ca7e826ffc83481ead8bf645b585f238d79ddcdcf390d7",
+        "caseOrdinalInXml": 5,
+        "class": "dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest",
+        "module": "batch",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.batch.file.MaintenanceFileLockTest.xml",
+        "testId": "PT-WHOLE-a7fa0b556683d50cd4041d2ab6de520be4b7a840c801045c566f5791bffdc7d5",
+        "xmlSha256": "4baa5f3223662916f1880ff68e613f5c55b24321dfe7f10fa6f7d65a967aebfb"
+      },
+      "testId": "PT-OPS-LOCK-008",
+      "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "testSourceSha256": "76d1c7218147666d40b4331538895d4925010054f2ca13e829e008bd2107864e"
+    },
+    {
+      "method": "fullBom010OnlyFixedSignedBootProvisioningFileIsPermittedAndTamperRefuses",
+      "originalCase": {
+        "caseNameSha256": "ddb6b6350ba92c23f2e54c7309d6d3114723e62830a7c2ff9d117e82ad70d90e",
+        "caseOrdinalInXml": 11,
+        "class": "dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest",
+        "module": "bootstrap",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.bootstrap.ReleasePayloadVerificationTest.xml",
+        "testId": "PT-WHOLE-e4eec95c8b1c56dd6ef1a1507ab5028c2c53e95ba83e4c7f48509aa9c63ea1fa",
+        "xmlSha256": "fa063b94261b77c8a0a11d60e2973f094184f744cb0b74e8b1173ac7370e7455"
+      },
+      "testId": "fullBom010",
+      "testPath": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java",
+      "testSourceSha256": "ba48ecd915597753ba3278c13e12cc08bf1f165b7c33b740c1d06a2620eeae51"
+    }
+  ],
+  "originalQualificationSha256": "728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731",
+  "originalTestsReplayed": false,
+  "permissionChanges": 0,
+  "ptAlternativeCompleted": 0,
+  "qualityComplete": false,
+  "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "testsExecutedByReader": 0,
+  "tmpfilesCommandsIssued": 0,
+  "toolSha256": "2d4cd61f42ae5413c357720d2786709004357aa18300078a8fa9a3c04de3f2c7",
+  "unresolved": [
+    "C05 title covers other persistent directories/owner/mode/capacity; one assigned tmpfiles artifact alone does not prove these",
+    "real boot provisioning, root UID/GID/ACL/nlink/FS/metadata/no-owner condition not reauthenticated",
+    "actual lock/current/old run namespace never read or repaired; no distribution/restore claim"
+  ],
+  "vmActions": 0
+}
