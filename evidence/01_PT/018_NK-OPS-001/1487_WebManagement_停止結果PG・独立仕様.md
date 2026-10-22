@@ -1,5 +1,13 @@
 # WebManagement 停止結果PG・独立仕様
 
+## 限定元28・独立原資格
+
+当source3c5f03d4aca569e4f5e722d7357e04749ad0998c（Main54dc63d1f）、元6780/session88311 UTC03:11:02.505427～03:13:58.700241、176.194814秒、phase0,0,0/actualExit=maven0・28/10/FESflaky0/六SpotBugs0/sourceFixed。archive5aca9e3352d0dbef7e2fff9916164fe6be0ceb13084180279c09f488aaae67db。原6782/session83063真正0、Q60eb1d48db665286a8cfd5d4495c51b80e1ee6cce7af282595a96f5f07f99539、全8511669/六原Jar/XML、物理差はWebManagementServer outer一件だけ/他1668同byte、raw1405/CS0。outer実四L125/M16/C1/B74各miss0、前miss1Lを解消。Factory宣言counter空は空のまま保持する。
+
+6781構造証明0d704b4dee56c6039f625685a2b2732ce25b3aa2d27fe2012db26cbad48c9a2a、逆展開token574c6f739216eb751bbd22deb7a5f4406c0db44fa28fdb3b8d7e44c6c18c3e0b。旧oracle/deadline/interrupt/Unknown/fatal優先/全例外領域を維持、既八input・各HTTP/所有後条件を元XMLから照合。選択再演不要、1615/1616・1368/1369は必要当source全体/品質/traceまでOPEN。
+
+必要一Main変更の横断triggerで6784全4197-646/8511669を一回実施予定、新Test追加0・全旧oracle固定。旧d549成功を流用せず当source原6786を必要とする。全体工具管理三＋component管理二成功、工具修正だけの追加全体0。
+
 ## 実装前後レビューと工具準備
 
 1615/1368先行起票後、一Mainのtyped結果を実装。初案は診断addSuppressedをstopのtry内へ置き、source反証で例外領域差を発見したため、修正前1616/1369へ追加起票した。local Optionalで結果を受け、元Runtime/Error catchを抜けた後にだけ診断を追加する形へ是正、元の診断追加のErrorをstop失敗と混同しない。これはsource構造で確認し、制御不能allocation failureを動的注入した実績ではない。
