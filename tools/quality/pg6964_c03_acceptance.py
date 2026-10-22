@@ -69,8 +69,12 @@ def verify(register):
     prior.require(states[ID]['evidence'] == [dict(path=str(PROOF.relative_to(ROOT)), sha256=HASH,
                   source=SOURCE, run='PG6930-six-v1', verifiedChecks=manifest['localEvidenceChecks'])],
                   'all criteria backed by exact C03 original evidence, not unrelated proof')
-    subprocess.run(['git','diff','--exit-code',SOURCE,'--','src','pom.xml','.mvn','mvnw','tools/quality/static','program/characterization'],
+    subprocess.run(['git','diff','--exit-code',SOURCE,'--','src','pom.xml','.mvn','mvnw','tools/quality/static'],
                    cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
+    if subprocess.check_output(['git','diff',SOURCE,'--','program/characterization'],cwd=ROOT):
+        candidate=json.loads((PMO/'485_WBS網羅性・受入対応.json').read_bytes())['currentPhysicalCandidate']
+        prior.require(prior.initial.wbs_component_overlay.verify(candidate)[1] is not None,
+                      'separately qualified common source is not unverified Production/config drift')
     return dict(actualExit=0,source=SOURCE,currentSourceAccepted=10,newAcceptedThisStage=1,newAcceptedTotal=6,
                 revalidated=4,originalCasesReferenced=8,newProductionPt=0,wholeReplayed=False,
                 formalUpdated=False,wholeEffortCompletionRate=None,runtimeDeploymentVerified=False)

@@ -20,6 +20,7 @@ from pg6092_current3985_static_join import source_case_candidates
 import pg3284_protocol_canonical_fixtures as canonical
 from pg3390_broker_config_oracle import self_check
 import wbs_progress_audit as audit
+import wbs_component_overlay
 
 SOURCE = 'e7d64fda2453e906ee6ccc5fe718e5c29841e4aa'
 IDS = ('WBS-P001-01', 'WBS-P001-02', 'WBS-P002-03', 'WBS-C04', 'WBS-P005-01')
@@ -249,7 +250,7 @@ def verify_register(register):
     require(proof['actualExit'] == 0 and proof['source'] == SOURCE and proof['acceptance'] == 'NOT_APPLIED', 'actual reviewed witness first')
     require(sha(ROOT / proof['semanticReviewPath']) == proof['semanticReviewSha256'], 'fixed semantic review')
     require(register['reviewState'] == 'COMPLETE' and register['acceptedBy'], 'explicit PG review, never coverage inference')
-    require(all(sha(PMO / n) == h for n, h in proof['historicalStateHashes'].items()),
+    require(wbs_component_overlay.historical_state_unchanged(PMO,proof['historicalStateHashes']),
             'historical17/source/criteria/scope/cost state unchanged')
     master = json.loads((PMO / '481_PGPT詳細WBS.json').read_bytes())
     tasks = {t['id']: t for t in master['tasks'] if t['id'] in IDS}

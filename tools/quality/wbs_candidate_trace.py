@@ -8,6 +8,7 @@ import pathlib
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+import wbs_component_overlay
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 COUNTERS=('LINE','METHOD','CLASS','BRANCH')
@@ -145,6 +146,7 @@ def verify_candidate(inventory):
     tracked=subprocess.check_output(['git','ls-files','-z','src','program/characterization'],cwd=ROOT).decode().split('\0')[:-1]
     require(set(paths)==expected==eligible(tracked),'current physical candidate exact Git/worktree scope')
     original={a['path']:a for a in old};used=set();blobs=git_artifacts(candidate['source'],paths)
+    component_hashes,component_result=wbs_component_overlay.verify(candidate)
     for artifact in candidate['artifacts']:
         path=artifact['path'];prior_path=artifact['historicalPath']
         if path in support:
@@ -158,7 +160,7 @@ def verify_candidate(inventory):
             require(artifact['owner']==artifact['costOwner']==prior['owner']==prior['costOwner']
                     and artifact['kind']==prior['kind']and artifact['acceptance']=='UNASSESSED','unchanged single cost owner; no acceptance promotion')
         require(sha(blobs[path])==artifact['sha256'],'current candidate Git byte mismatch')
-        actual=ROOT/path;require(actual.is_file()and not actual.is_symlink()and sha(actual.read_bytes())==artifact['sha256'],'current candidate physical byte mismatch')
+        actual=ROOT/path;require(actual.is_file()and not actual.is_symlink()and sha(actual.read_bytes())==component_hashes.get(path,artifact['sha256']),'current candidate physical byte mismatch')
         if artifact['kind']=='JAVA':
             module=path.split('/')[1].removeprefix('schubert-nk-');name=path.split('/src/main/java/',1)[1][:-5]
             require(artifact['module']==module and artifact['class']==name,'current Java module/class/path identity')
@@ -166,4 +168,5 @@ def verify_candidate(inventory):
     result=current_measurement(candidate,inventory['source'])
     observed={**result,'physicalArtifacts':len(paths),'relocations':len(MOVES),'historicalSource':inventory['source']}
     if candidate['version']==2:observed.update(implementationSupportAdditions=len(support),logicalScopeChanged=False,nativeQualified=False)
+    if component_result is not None:observed['componentOverlay']=component_result
     return observed

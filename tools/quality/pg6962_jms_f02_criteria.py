@@ -300,7 +300,7 @@ def verify_register(register):
     proof = json.loads(proof_path.read_bytes())
     require(proof['actualExit'] == 0 and proof['source'] == SOURCE and proof['acceptance'] == 'NOT_APPLIED'
             and sha(ROOT/proof['semanticReviewPath']) == proof['semanticReviewSha256'],'actual immutable complete review')
-    require(all(sha(PMO/n) == h for n,h in proof['historicalStateHashes'].items()),'no historical17 rebase/scope/cost drift')
+    require(initial.wbs_component_overlay.historical_state_unchanged(PMO,proof['historicalStateHashes']),'no historical17 rebase/scope/cost drift')
     require(all(sha(ROOT/p) == h and initial.git(SOURCE,p) == (ROOT/p).read_bytes() for p,h in proof['allInputHashes'].items()),'current original all source/Test/POM bytes')
     states = register['records']
     require(set(states) == set(initial.IDS) | set(IDS),'exact nine, not bulk17')
