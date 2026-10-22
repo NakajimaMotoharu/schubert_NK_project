@@ -2,6 +2,10 @@
 
 設計先行公開済：source0a714c09a/PR200→main1077f8cd5a9a6a33cd7f3d669b1cd62d132275ac、二SS/914だけを通常merge/fetch確認。PG/PT・実環境/正式の受入ではない。添付APIはcap100で一回失敗、再試行や既添付削除0。実declarationは新三methodを含む**42/15**、旧data束23と既Web16＋新競合三であり、全回帰ではない。
 
+初回6850/session53283/sourcec223ef32860db77c400ef41146dc3e88c23e361cはarchive20b2854c8385e4bbde5f3d4e9cb7fc872a6b8e28f55bbc437eb5848556732940、UTC06:22:27.358792～06:23:16.917578、phase0,1/actual1・Production0/0。新Testのpromoteへboolean literalを返すlambdaを渡したcompile不備で、旧Main反例を再現したとは扱わない。BUG1628/YKT1381を修正前起票し、Web固有Runnableへvoid通知counterを渡す形へ是正。Testの独立期待値/旧Main/既oracleを変えず、新onlypg6856-web-deadline-red-v2で未実行だった実PTを行う。旧6850 namespace/失敗証跡を上書きせず、v2 Testをgreenまで固定する。
+
+是正後local smokeはJAVA_HOME=toolchain/jdk-25.0.4、Maven3.9.12 `-q -o -Dmaven.repo.local=.../m2/repository -DskipTests -pl src/schubert-nk-web -am test-compile`、session38270 actual0（Production PT0、単なるcompile）。format/管理二/工具pyflakes0。旧6850の公開compile failure manifestへ元SHA7a853667/旧Test6373de8eを保存し、成功/反例へ正常化しない。新6856はまだ未発行。
+
 BUG1627/YKT1380/SSC335/PG-D509、P018-06。群開始低.3/標準1/高3週次共有pp、fresh最後81/残19/reset1793082865、開始見積りを固定。K01必要全体費は別に開始前記録し二重計上しない。原/v4/実費N/Tnull/正式1964-53/17-190/工数nullを維持。
 
 ## PG契約と範囲

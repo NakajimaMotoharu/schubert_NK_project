@@ -10,7 +10,7 @@ from pg5940_private_lock_compile import ROOT,W,BASE
 OLD='b2514bf6d80c873ab23940ebae293b95686c1c57'
 MAIN='src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java'
 TEST='src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java'
-RED='pg6850-web-deadline-red-v1'
+RED='pg6856-web-deadline-red-v2'
 GREEN='pg6852-web-deadline-green-v1'
 EXPECTED=(42,15)
 

@@ -131,8 +131,17 @@ final class WebManagementDeadlineTest {
       fixture.release.countDown();
       try {
         if (first != null) first.get(3, TimeUnit.SECONDS);
-        if (hold == Hold.START)
-          assertThrows(IllegalStateException.class, () -> owner.promote(() -> true));
+        if (hold == Hold.START) {
+          var promotions = new AtomicInteger();
+          assertThrows(
+              IllegalStateException.class,
+              () ->
+                  owner.promote(
+                      () -> {
+                        promotions.incrementAndGet();
+                      }));
+          assertEquals(0, promotions.get());
+        }
       } finally {
         try {
           owner.closeWithin(Duration.ofSeconds(3));
