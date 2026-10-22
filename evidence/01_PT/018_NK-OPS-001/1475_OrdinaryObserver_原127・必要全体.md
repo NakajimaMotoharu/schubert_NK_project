@@ -1,0 +1,19 @@
+# OrdinaryObserver 原127・必要全体
+
+1474/PG-D500、BUG1610/YKT1363、主P005-04/Web参照P005-02追加費0。群1681の低.2/標準.6/高1.5ppは固定。Production source01e41088c6562c3b7d103ae0bacc9f693bc1aad4、全Java Test/期待値は元4ce赤/d48原4184からbyte固定。
+
+## PG同値と当原127
+
+PG commit01e41088c、二Mainの普通空observer二/四callsiteを各一private定義に共有。新only展開proofのprivate/public SHAはともに1f53283b55fb4ebc7a7cf6c13cdfd8141ebe8b6da369f65d676ecbbfa0e29608、同sourceで全token/literal/native選択/所有順の旧展開一致。Production test oracleや実所有/native資格ではない。
+
+元6722/session93525、UTC2026-10-22T00:09:57.450147～00:13:09.931142、archive5288e301d60adbc0c3d7f216e39d686bf234049ffeced9dbac3547417f95668d、phase0,0,0/真正0、127PT/33suite/FESflaky0/六SpotBugs0/sourceFixed。原6724/session61426真正0、公開Q70670e2540807bf2c8357d285d50c9aa0a19434b04406cfab8b344ef4dae2fd6、private d6bb08c2cce5cfa4902c378737d822b67dd1ddf6ba04b4c02a0a11eaf6819aff・findings e868d1fbe349ffd62dd10a565f0fc1b8f7e9c77ba335a21b26911a51c6ccbd87。全851/1667・六原Jar/XML、rawPMD1404/processing0/CS0。
+
+API/Webの新lambda$static$0(Throwable)は各METHOD covered1/missed0。選択範囲の未実行はProvider M1（retaining entry）、Web M5（普通未選択entry等）で、全体のmethod100をまだ認定しない。d48原fullとの物理差はProvider/Web二outer＋Provider.ConsumerProfile debug一、1664同byte。nestedの元Jar hashを各原mapへ照合し、token展開のnested不変と完全`javap -p -c`同一SHA32a5886344fee9151a9c6f37a068e72f8a9fad30bbebfd93b890ff40c1f98a27も確認。単にprefixだけで同値としない。
+
+## 必要全体と原資格（着手前）
+
+pg6726_broker_observer_whole.py→元真正0後pg6728_original4184_observer_artifacts.py。QSHA70670を固定、全4184/643は宣言を再照合、二Mainだけ/全旧Test固定・新Javaケース0。前回4184をPASS転用せず当sourceの元全XML/case identities/六Jar/8511667・全四counterと六静的を原artifactから再確認する。普通callback body共有で減ったmethod数そのものを完成率とせず、実M missと全scope契約を確認。F03/native/CHR/正式は別未受入。
+
+後続readersは6730 SQL115・6732 raw1404（1382同file pair/22新span、旧Root11保留維持）・6734原JVM58・6736 current943 trace。管理五/pyflakes0、原NoOp/driver管理六も成功。現在全体未実行・合格未認定、BUG1610/YKT1363・他全体品質はOPEN。
+
+PT_DEFAULT、同じ自己所有有限fixtureだけ。実VM/current/Root/cohort/原本DBBackup/鍵/intent/permit/実nativeへの操作0、拒否再試行/代替完了0。正式1964/53・個別17/190・工数null/QA051final・原-v4不変。fresh使用72/残28/reset1793082864/secondarynull/券0、実N/T/専有費null。通常区切りでは止めず、当群品質後に1472の独立候補へ継続する。
