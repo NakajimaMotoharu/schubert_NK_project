@@ -1,0 +1,1533 @@
+{
+  "acceptedSites": 0,
+  "actualExit": 0,
+  "additionalBuildsIssued": 0,
+  "all58AggregateHit": true,
+  "command": "python3 -B tools/quality/pg6836_sql58_current_jvm.py",
+  "currentWholeQualificationSha256": "87d3de1b887514b10838d3cef748e9421f17574c87ae89a37f5b616a8e1f4dc0",
+  "formalAccepted": false,
+  "guardSites": 58,
+  "jarHashes": {
+    "api": "4500a9b6a6f6afbd8e1d372620bc54ccffd7b736fba40994a8febd8715be53d8",
+    "web": "fa15d8ed59f86f4cc0d29383bda15c0973327c29ed26b61749cb3c5d4623a4bc"
+  },
+  "javapVersion": "25.0.4",
+  "operatorHead": "3c625e54eb5e748def94c754a9b8078fbed18cd9",
+  "perTestFaultCausalityProved": false,
+  "ptAlternativeCompleted": 0,
+  "rows": [
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 388,
+          "line": 122,
+          "member": "private dev.codex.schubert.nk.api.application.admin.UserCommandService$Change lambda$create$0(java.lang.String, char[], java.sql.Connection, dev.codex.schubert.nk.protocol.layout.semantic.UserRole, boolean, dev.codex.schubert.nk.api.application.admin.UserCommandMetadata, dev.codex.schubert.nk.api.security.AuthenticatedActor) throws java.sql.SQLException;",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/admin/UserCommandService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 122,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-001",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "sourceSha256": "ad3d822dc20690cfa5f4bd5a830d4a503a5f217dae7a77d309e4faa3fccb6e12"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 92,
+          "line": 364,
+          "member": "private dev.codex.schubert.nk.api.application.admin.UserMutationResult execute(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation, dev.codex.schubert.nk.api.application.admin.UserCommandMetadata, dev.codex.schubert.nk.api.application.admin.UserCommandService$Operation);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/admin/UserCommandService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 364,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-002",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+      "sourceSha256": "ad3d822dc20690cfa5f4bd5a830d4a503a5f217dae7a77d309e4faa3fccb6e12"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 116,
+          "line": 116,
+          "member": "private dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$Outcome transaction(dev.codex.schubert.nk.api.application.admin.UserMutationRequest, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 116,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-005",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "sourceSha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 117,
+          "line": 287,
+          "member": "private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$SqlOperation<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 287,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-008",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "sourceSha256": "d1140a68e86ce376ced5c88b8acbd700c25dd1892f9482596c10873e4c6274fa"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 117,
+          "line": 277,
+          "member": "private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$SqlOperation<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 277,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-011",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "sourceSha256": "e99b4604337997365950b7e4d062d7f952bdd7ec89996939e7a5e21e34dcf4c0"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 194,
+          "line": 252,
+          "member": "private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.media.MediaApplicationService$SqlOperation<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/media/MediaApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 252,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-014",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "sourceSha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 1149,
+          "line": 197,
+          "member": "public dev.codex.schubert.nk.api.application.question.QuestionCommandService$CancelResult cancel(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, long, dev.codex.schubert.nk.api.application.question.QuestionCommandMetadata);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionCommandService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 197,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-015",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+      "sourceSha256": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 986,
+          "line": 281,
+          "member": "public dev.codex.schubert.nk.api.application.question.QuestionCommandService$DeleteResult logicalDelete(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, long, dev.codex.schubert.nk.api.application.question.QuestionCommandMetadata);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionCommandService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 281,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-016",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java",
+      "sourceSha256": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 116,
+          "line": 125,
+          "member": "private dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$Outcome transaction(dev.codex.schubert.nk.api.application.question.QuestionMutationRequest, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 125,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-019",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+      "sourceSha256": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 117,
+          "line": 305,
+          "member": "private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$SqlOperation<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 305,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-022",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "sourceSha256": "d919b15ab399a820bc9aa7c752c3f79b922a7a94c11046d6f33aa992ac6af0b8"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 75,
+          "line": 139,
+          "member": "public byte[] process(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 139,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-023",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "sourceSha256": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 198,
+          "line": 416,
+          "member": "private dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData insertQuestion(java.sql.Connection, dev.codex.schubert.nk.api.application.question.QuestionSubmitRequest, dev.codex.schubert.nk.api.security.AuthenticatedActor, char[], java.time.Instant) throws java.sql.SQLException;",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 416,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-025",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "sourceSha256": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 321,
+          "line": 154,
+          "member": "public void process(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>, dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadata);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "unavailable",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 154,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-029",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+      "sourceSha256": "e3cf7a1056e03ce46380893697cb2d2faefa02a88ea966a14ff99646763b3c83"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 194,
+          "line": 319,
+          "member": "private <T> T transaction(boolean, dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationService$SqlOperation<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 319,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-034",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "sourceSha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 132,
+          "line": 75,
+          "member": "public void verify();",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 75,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-037",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiDependencyReadiness.java",
+      "sourceSha256": "a9510db3be2c058715da8c4f089d3f49b2e9224447bf6685aeb23f12400d594e"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 158,
+          "line": 58,
+          "member": "public byte[] process(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 58,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-040",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "sourceSha256": "65258747a2876004a921a86841b9bea32cd599a9301d7d6fb9e97c0fcec3db49"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 189,
+          "line": 109,
+          "member": "public dev.codex.schubert.nk.api.idempotency.BoundInboxExecution executeBound(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.InboxRequest, dev.codex.schubert.nk.api.idempotency.InboxHandler) throws java.sql.SQLException;",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "exception",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 109,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-041",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+      "sourceSha256": "f2b26e3f56a3bcce94417f76d10be38058549d3dda778b5fc4979e6324cc4d9e"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 166,
+          "line": 65,
+          "member": "public boolean ingest(dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/logging/WebLogIngestService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 65,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-044",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "sourceSha256": "51f50b7f8f9bc38639b9c269345e7c6c388079cc0696c74a5c590d879dac8a87"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 226,
+          "line": 90,
+          "member": "public boolean isConsistent(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, dev.codex.schubert.nk.api.idempotency.InboxCompletion);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 90,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-045",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector.java",
+      "sourceSha256": "d684f42dfbf75f8c8567ed673140dc08819fec334c7379066587c84f39fe8eb7"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 156,
+          "line": 219,
+          "member": "private <T> T owned(dev.codex.schubert.nk.api.maintenance.InboxCleanup$Work<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/InboxCleanup.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 219,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-048",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+      "sourceSha256": "014f436f55e803092cb9645697da9b7f09402c32cecb70802ae0a86afd176de0"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 133,
+          "line": 87,
+          "member": "public java.sql.Connection open() throws java.sql.SQLException;",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 87,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-114",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+      "sourceSha256": "aec17fa943139c5969a89363a7eaa7b78837253ee0262e57e603ef9e1181343d"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 140,
+          "line": 91,
+          "member": "public java.sql.Connection open() throws java.sql.SQLException;",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 91,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-049",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections.java",
+      "sourceSha256": "aec17fa943139c5969a89363a7eaa7b78837253ee0262e57e603ef9e1181343d"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 635,
+          "line": 177,
+          "member": "public boolean isConsistent(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, dev.codex.schubert.nk.api.idempotency.InboxCompletion);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 177,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-050",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.java",
+      "sourceSha256": "d4ce26053d1865997dafbcb41677f2ef5ada7c6c9c1b577a3b9eeca2cbd087fc"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 507,
+          "line": 147,
+          "member": "public boolean isConsistent(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, dev.codex.schubert.nk.api.idempotency.InboxCompletion, java.util.UUID);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 147,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-051",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java",
+      "sourceSha256": "d032d73536286c951cea3c0f4c3d3928163a659e4471b6b5db403e83bfb35ec7"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 78,
+          "line": 78,
+          "member": "private void run();",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher",
+          "physicalClass": "api:dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "temporary",
+      "expectedReceiver": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher",
+      "guardLine": 78,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-058",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+      "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 766,
+          "line": 165,
+          "member": "public dev.codex.schubert.nk.protocol.layout.TypedPayloadValues search(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/LogQueryRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 165,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-059",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+      "sourceSha256": "6ee33c4b5c5ea6d765aa809a3f9a714fe46f5069dfcd1d3b703acaee638c860d"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 310,
+          "line": 357,
+          "member": "private static <R, T> T query(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, java.lang.String, java.util.List<java.lang.String>, int, dev.codex.schubert.nk.api.persistence.MediaRepository$RowMapper<R>, java.util.function.Function<java.util.List<R>, T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/MediaRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 357,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-060",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java",
+      "sourceSha256": "229fa7d29d001b33323d2fdbf866264c161dba04f876fc29c4f6dce6af7525dc"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 520,
+          "line": 314,
+          "member": "private static dev.codex.schubert.nk.protocol.layout.TypedPayloadValues paged(java.sql.Connection, boolean, boolean, java.util.List<? extends java.util.Optional<?>>, int, java.lang.String, dev.codex.schubert.nk.api.persistence.QuestionQueryRepository$RowMapper<dev.codex.schubert.nk.protocol.layout.PayloadRecord>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 314,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-061",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+      "sourceSha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 227,
+          "line": 348,
+          "member": "private static java.util.Optional<dev.codex.schubert.nk.protocol.layout.TypedPayloadValues> detail(java.sql.Connection, boolean, boolean, java.util.List<? extends java.util.Optional<?>>, java.lang.String, dev.codex.schubert.nk.api.persistence.QuestionQueryRepository$RowMapper<dev.codex.schubert.nk.protocol.layout.PayloadData>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 348,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-062",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+      "sourceSha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 624,
+          "line": 289,
+          "member": "public dev.codex.schubert.nk.protocol.layout.TypedPayloadValues search(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/ScenarioRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 289,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-063",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+      "sourceSha256": "f6d626e2de473b6313f544514e6793c255dfbf2d9dc15249e1134ddd90604265"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 616,
+          "line": 400,
+          "member": "public java.util.Optional<dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshot> detail(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/ScenarioRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 400,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-064",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+      "sourceSha256": "f6d626e2de473b6313f544514e6793c255dfbf2d9dc15249e1134ddd90604265"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 262,
+          "line": 455,
+          "member": "private static dev.codex.schubert.nk.protocol.layout.TypedPayloadValues rows(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, java.lang.String, java.util.List<java.lang.String>, java.lang.String, int, java.util.function.IntFunction<dev.codex.schubert.nk.protocol.layout.PayloadData>, dev.codex.schubert.nk.api.persistence.ScenarioRepository$RowMapper);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/ScenarioRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 455,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-065",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+      "sourceSha256": "f6d626e2de473b6313f544514e6793c255dfbf2d9dc15249e1134ddd90604265"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 729,
+          "line": 155,
+          "member": "public dev.codex.schubert.nk.protocol.layout.TypedPayloadValues search(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/UserQueryRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 155,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-066",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+      "sourceSha256": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 360,
+          "line": 219,
+          "member": "public java.util.Optional<dev.codex.schubert.nk.protocol.layout.TypedPayloadValues> detail(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/persistence/UserQueryRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "guardLine": 219,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-067",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+      "sourceSha256": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 403,
+          "line": 92,
+          "member": "public dev.codex.schubert.nk.api.security.AuthenticatedActor verifyIdentity(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, dev.codex.schubert.nk.api.security.AdminCommandAuthenticator$Mutation, java.util.OptionalLong, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 92,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-068",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+      "sourceSha256": "8b91f57f37b99faccc394751ab7c9b5e15fdfa1b7a8a0e947832d7b672252ee7"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 659,
+          "line": 143,
+          "member": "public dev.codex.schubert.nk.api.security.RevokedContext logoutCurrent(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Clock);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthSessionRevocationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 143,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-069",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sourceSha256": "014b66889f0fcff7372ca4b709e8124852bde3c084e18a6ba0cadf663604c0b9"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 477,
+          "line": 207,
+          "member": "public int revokeAll(java.sql.Connection, dev.codex.schubert.nk.api.security.AuthenticatedActor, long, dev.codex.schubert.nk.api.security.SessionRevocationReason, java.util.Optional<java.net.InetAddress>, java.util.UUID, java.util.UUID, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthSessionRevocationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 207,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-070",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java",
+      "sourceSha256": "014b66889f0fcff7372ca4b709e8124852bde3c084e18a6ba0cadf663604c0b9"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 952,
+          "line": 147,
+          "member": "public dev.codex.schubert.nk.api.security.IssuedContext issue(java.sql.Connection, long, java.net.InetAddress, java.util.UUID, java.util.UUID, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthSessionService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 147,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-071",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+      "sourceSha256": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 328,
+          "line": 71,
+          "member": "public dev.codex.schubert.nk.api.security.AuthenticatedActor verify(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 71,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-072",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sourceSha256": "e4dc9150a2cded204ba286f63c2c85b18411a8d39cee96083bfb61530ef2a1d1"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 74,
+          "line": 100,
+          "member": "public dev.codex.schubert.nk.api.security.AuthenticatedActor inspectReadOnly(java.sql.Connection, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 100,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-073",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+      "sourceSha256": "e4dc9150a2cded204ba286f63c2c85b18411a8d39cee96083bfb61530ef2a1d1"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 409,
+          "line": 109,
+          "member": "public dev.codex.schubert.nk.api.security.LoginResult authenticate(java.sql.Connection, java.lang.String, char[], java.net.InetAddress, java.util.UUID, java.util.UUID, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/AuthenticationService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 109,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-074",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java",
+      "sourceSha256": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 914,
+          "line": 114,
+          "member": "public dev.codex.schubert.nk.api.security.LockedLoginAttempt lockForAttempt(java.sql.Connection, java.lang.String, java.net.InetAddress, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LoginAttemptRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 114,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-075",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sourceSha256": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 415,
+          "line": 163,
+          "member": "private static void record(java.sql.Connection, dev.codex.schubert.nk.api.security.LockedLoginAttempt, java.time.Instant, boolean);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LoginAttemptRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 163,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-076",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java",
+      "sourceSha256": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 382,
+          "line": 139,
+          "member": "public byte[] execute(java.sql.Connection, dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LoginInboxService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 139,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-077",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+      "sourceSha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 432,
+          "line": 172,
+          "member": "public byte[] restore(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.InboxCompletion, java.util.UUID, java.util.UUID, java.time.Instant, boolean);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LoginReplayService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 172,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-078",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java",
+      "sourceSha256": "13b3fab309016c671d89c9a7d78cfb46ecaaa142041e01c4867e668b88cfb3c6"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 435,
+          "line": 142,
+          "member": "public byte[] execute(java.sql.Connection, dev.codex.schubert.nk.protocol.layout.WireMessage<dev.codex.schubert.nk.protocol.layout.FixedPayload>, java.time.Instant);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LogoutInboxService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 142,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-079",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+      "sourceSha256": "8894228a382268524f7a56f808de50a14b2461719e03e1b57c362655a8b2380b"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 450,
+          "line": 190,
+          "member": "public byte[] restore(java.sql.Connection, dev.codex.schubert.nk.api.idempotency.InboxCompletion, long, dev.codex.schubert.nk.protocol.header.AuthenticationContext, java.util.UUID, java.util.UUID, java.time.Instant, boolean);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+          "physicalClass": "api:dev/codex/schubert/nk/api/security/LogoutReplayService.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "guardLine": 190,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-080",
+      "sourcePath": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java",
+      "sourceSha256": "8ecc73a652c4bd9c96ed096c55a159a06cc4f62b99eb128f0c1070e6982d3ddf"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 130,
+          "line": 48,
+          "member": "public void verify();",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/bootstrap/WebStartupException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/bootstrap/WebStartupException",
+      "guardLine": 48,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-083",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java",
+      "sourceSha256": "bf5f3f6357c91a01dc2d8dfcf8b45687e42a011099d6c286cd54c3a6c8de35ab"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 44,
+          "line": 71,
+          "member": "private void run();",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/logging/WebLogDispatcher",
+          "physicalClass": "web:dev/codex/schubert/nk/web/logging/WebLogReplayWorker.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/logging/WebLogDispatcher",
+      "guardLine": 71,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-088",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+      "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 713,
+          "line": 204,
+          "member": "public void complete(dev.codex.schubert.nk.web.logging.WebRequestTrace, int, long, long, java.lang.String, java.util.Optional<java.lang.String>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducer.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 204,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-089",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+      "sourceSha256": "f68eb4c356f08234f64c9ab39af6f463933fe0e69fac7cab35feb24875b80b0e"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 151,
+          "line": 151,
+          "member": "private <T> T transaction(dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository$Work<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 151,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-102",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "sourceSha256": "91ca27ecb2aea560cd08b26c0ef605b2bbbac756afb673722eef816a1ddfb2c4"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 78,
+          "line": 313,
+          "member": "private <T> T transaction(dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository$Work<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 313,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-106",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+      "sourceSha256": "019d4aaab2e5a678959159725fe82217e8cd2d1dce3875ae4e60e7d488fcba92"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 115,
+          "line": 317,
+          "member": "private <T> T transaction(dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository$Work<T>);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 317,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-108",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+      "sourceSha256": "019d4aaab2e5a678959159725fe82217e8cd2d1dce3875ae4e60e7d488fcba92"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 215,
+          "line": 61,
+          "member": "public java.util.Optional<dev.codex.schubert.nk.web.session.WebSessionRow> findLocked(java.sql.Connection, java.lang.String);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 61,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-109",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 251,
+          "line": 94,
+          "member": "public void insert(java.sql.Connection, dev.codex.schubert.nk.web.session.WebSessionRow);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 94,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-110",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 254,
+          "line": 131,
+          "member": "public boolean replace(java.sql.Connection, dev.codex.schubert.nk.web.session.WebSessionRow, dev.codex.schubert.nk.web.session.WebSessionRow);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 131,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-111",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 114,
+          "line": 155,
+          "member": "public boolean delete(java.sql.Connection, dev.codex.schubert.nk.web.session.SessionPayloadIdentity, long);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 155,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-112",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c"
+    },
+    {
+      "accepted": false,
+      "actualJvmPaths": [
+        {
+          "bci": 92,
+          "line": 199,
+          "member": "public boolean deleteByHash(java.sql.Connection, java.lang.String);",
+          "method": "preserveFatal",
+          "owner": "dev/codex/schubert/nk/web/session/SessionStoreException",
+          "physicalClass": "web:dev/codex/schubert/nk/web/session/JdbcWebSessionStore.class"
+        }
+      ],
+      "aggregateGuardLineCounter": {
+        "cb": 0,
+        "ci": 2,
+        "mb": 0,
+        "mi": 0
+      },
+      "catchVariable": "failure",
+      "expectedReceiver": "dev/codex/schubert/nk/web/session/SessionStoreException",
+      "guardLine": 199,
+      "perTestFaultCausalityProved": false,
+      "siteId": "SQLCATCH-113",
+      "sourcePath": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java",
+      "sourceSha256": "4af4ff9c66f6ef611713f1329f14140bfeb526f35a94907e4274c187445ddd6c"
+    }
+  ],
+  "source": "4c0343a55b5fe41dad766a520558363e81f01541",
+  "sql115ManifestSha256": "aa5b05827803e6a1b45219b051515af4885832c4531a498e5e67ae98880df59e",
+  "testsExecuted": 0,
+  "toolSha256": "eaee4d7b2f6b4c1593ed32ade3b58ca0d5c3ab09647ae0e6b087b3e1e3ef8789",
+  "vmActions": 0
+}
