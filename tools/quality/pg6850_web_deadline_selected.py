@@ -5,7 +5,7 @@ import json
 import subprocess
 import finite_selected_profile as profile
 import pg6780_web_management_result_selected as prior
-from pg5940_private_lock_compile import ROOT,W,BASE
+from pg5940_private_lock_compile import ROOT,W,BASE,sha
 
 OLD='b2514bf6d80c873ab23940ebae293b95686c1c57'
 MAIN='src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java'
@@ -28,7 +28,14 @@ def guard(source,green):
 
 
 def red_guard(source):return guard(source,False)
-def green_guard(source):return guard(source,True)
+def green_guard(source):
+    guard(source,True)
+    path=BASE/'PG6858-web-deadline-red-original-v1/manifest.json'
+    if sha(path)!='9a9c504cd8712ea90672f29ec603b788ddc897eb887b66194f7a6d10519232f1':raise ValueError('frozen genuine three counterexamples first')
+    red=json.loads(path.read_bytes())
+    if not(red['readerActualExit']==0 and red['originalActualExit']==1 and red['productionCounterexamplesReproduced']==3
+      and sha(ROOT/TEST)==red['testSourceSha256']):raise ValueError('same actual red Test bytes for green')
+    if subprocess.check_output(['git','diff',red['source'],source,'--',':(glob)src/*/src/test/**/*'],cwd=ROOT):raise ValueError('all old and new Test/oracle bytes fixed since red')
 
 
 def read_green():
