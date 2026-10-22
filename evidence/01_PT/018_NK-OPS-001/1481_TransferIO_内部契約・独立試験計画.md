@@ -23,3 +23,11 @@ mapの欠落/nullは既EnvironmentInodePolicy.metadataのfail-closed、filesyste
 - 既TransferCleanupTest/FailureTestのmtime/size/link/symlink/深さ/親guard/null/既year境界を全byte固定で関連回帰。Test ID・独立期待値/入力/観点/commandは着手仕様で固定し、実行未済を合格にしない。
 
 この段階は計画詳細化で、追加費/消化率/完成率を推定計上しない。PGPTの正式1964/53・17/190・工数null・全実環境HOLD/PTALT代替0/QA051finalを維持し、通常小群完了だけでは停止しない。
+
+## 追加PG反証点検（準備、現source変更0）
+
+`absent`は新Ioへ移さず既NOFOLLOWの実後条件として残せる。自己所有DirectoryCalls fixtureのunlinkが正常returnしても対象を残す非除去故障を入力すれば、元fileが実在するままfalse側を検証できる。これは他者process/競合で再生成を起こす試験でなく、故障backendと実file後条件の不一致の確認で、親guard/失敗WARNING/元byteを保持する。Io surfaceをmetadata/filesystem/openNamesの三読取だけへ縮小する候補とする。
+
+sameDirectoryのuid/gid/mode false側も、現在の全呼出しで両方のMetadataが必ず直前の`inspect(..., true, ...)`に合格するため同じconstructor uid/gidと0750へ固定される。root admittedと次root、child beforeと保持child、空child前後、parent entry再観測の各source originを照合し、private methodへ不正Metadataを反射注入しない。さらに実sourceのcheckRootも`inspect(...,true,admitted.device())`であり、最初のroot admission以外の全観測がadmitted.deviceへ固定されるため、device差はsameDirectoryの前で必ず拒否される。四重複比較を整理する場合は「検査を免除」せず、各fresh inspectのuid/gid/mode/deviceを毎回保つことと受理集合不変を明示して実装前台帳/判断へ残す。実際のuid/gid/mode/device異常はinspectの既/新独立負試験で拒否を確認する。inodeはこのadmissionで固定されないので同一性比較を必ず残す。year上限と同様、冗長述語の同値整理として扱い、coverage結果の除外/到達不能補完はしない。初期検討のroot device=-1再観測という想定は実source照合で訂正し、実装/受入へ転用していない。
+
+新読取口のnull map/filesystem/stream/collection要素は明示した異常入力として固定IOException/StorageIoExceptionで拒否する。DirectoryStreamからのnull Path要素とfileName nullは別であり、NPEをcatchして正常化しない。default NIOとpublic既constructorでは外部IO/所有/削除順を変えず、package-only入力口を親の安全条件証明として公開しない。実装・Test ID・prospective予算・物理型増分は原4189閉鎖後に別途固定する。
