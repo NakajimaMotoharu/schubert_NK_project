@@ -1,0 +1,22 @@
+# 次ordinary候補・API管理停止と既定bind（準備、未着手）
+
+現在の6802/source484cのMain/Testは全体・原品質/trace中固定する。これは次候補だけで群開始/新PG/PT/受入0。基準の原3c5/4197ではApiManagementServerがL125/3 M15/1 C1/0 B74/0、当Main SHA39b359ac76f2e3432bb6669824a7a79e43ac89147ed4cde6db252349b494b044は現sourceと一致。6802当原counterで再照合してから着手する。
+
+## 残件の分解
+
+- default `bind(Map,BooleanSupplier)`一method/line79が未実行。実普通API/native起動ではなく、同公開情報と自己所有loopback8091の管理componentだけで正規bind→start→手書きHTTP503/UP/503・stop/再closeを確認できる候補。source/dependency/fixturesを着手前に点検し、実サービス/VM/Root/Unit/Caddy/認証情報とは接続しない。portが他者に使われていればそれを止めたり奪わない。失敗時の自己所有後条件と必要有限childを先に設計する。
+- open失敗cleanupの`result.close()`通常帰還とcatch終端の2Lは、started=falseならSSC317の未確認を必ず投げるため残る。既bind316006のprimary Runtime/Error×cleanup空/Runtime/Error/同object八入力は独立に実行済。private startedを反射で書換えたり、未起動stopを正常認定するTestを作らず、重複negativeだけ追加しない。
+
+## 内部PG候補（APIはcheckedIOでなくRuntimeの契約）
+
+Webと同じ責務分離の適用性を個別に証明する。private `Optional<IllegalStateException> stopFailure(Duration)`へ既state machineをそのまま分離し、public/package closeWithinはpresentの同fixed例外をthrowする。内部unknownはtryLock timeout・lock Interrupted・executor timeout・executor Interrupted・not startedの五箇所で、入力budgetのNull/IllegalArgument拒否は従来のままthrow、closed及び正常確認後はempty。System.nanoTimeに基づく元絶対deadline/残budget、stopLock/停止flag/再stop/割込の外側finally/途中資源保持を変えない。
+
+openは固定cleanupDiagnosticと初期Optional.emptyを必ずbind前へ準備する。起動失敗時はtry内でstop結果をlocalへ受け、予期しないRuntime/Errorは元のfatal優先/同object suppression表のまま扱う。known固定unknown resultは元primaryへ**既preallocated cleanupDiagnostic**を追加し、内部生成例外を新しいraw診断として公開しない。post-cleanupの診断追加は当catchの外で行い、addSuppressed自体のErrorをstopの例外と混同しない（1616/1618予防）。Optionalはprivate実装結果でありowner/admission能力ではない。
+
+検査は新sourceを元の五throw/二return・open/closeへ厳密に逆展開し、全無関係token/公開API/情報/HTTP/Prometheus/deadline/例外表が一致するかで行う。単にWebのcheckedIO表をコピーしない。runtime/error priority・cause/suppressed/秘密redaction・未確認からouter解放しないこと、例外領域、初期準備順を異なるsource経路から反証する。新lambda等の実physical差/method適用性は原Jar/bytecodeで確認し、宣言/到達不能除外/coverageだけのassertを増やさない。
+
+## 独立PT候補と停止条件
+
+既ApiManagementServerTest/ApiManagementBindTest/ApiManagementStopTest/ApiUnstartedManagementTest等の全sourceを先に確認し、全既oracleを固定。現検証のpublic state・同Throwable identity・fixed message/cause/suppression・実executor/socket解放・期限/割込・未起動保持の意味を維持する。新default bind normal一JUnitは公開literal情報/HTTP期待値と自己所有資源だけで、独立oracleをProduction methodから作らない。actual Native admission/Unit/Root/current/DB/cohort/鍵/permit/原本/実環境復旧は全HOLD、PT_DEFAULTのcomponentと実稼働認定を混同しない。
+
+着手時はactualleaf P018-05（分割有無を再確認）、開始予算/915916/PG判断・該当SS/451を先行し、外部state/例外表が変わる必要があればSSC/QAへ分類する。内部同値なら分類5、sourceを変える前に必要根拠を保存。関連まとめdomainの全旧oracle/原資格が整った後だけ新sourceの必要全体一回/品質/traceへ進む。現full中にSourceを改変0、formal1964/53・17/190・工数null・原/v4・PTALT代替0・QA051final/全HOLD維持、通常候補終了では停止しない。
