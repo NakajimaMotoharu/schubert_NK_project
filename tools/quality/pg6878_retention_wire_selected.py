@@ -9,7 +9,7 @@ from pg5940_private_lock_compile import ROOT, W, BASE
 
 OLD = '2b2e4f70746bd1e1e405e18427dfd45616f51623'
 TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RetentionWireBoundaryTest.java'
-SLOT = 'pg6878-retention-wire-selected-v1'
+SLOT = 'pg6878-retention-wire-selected-v2'
 EXPECTED = (29, 10)
 
 
@@ -34,7 +34,7 @@ def read_original():
     return prior.qualification_definition()(source, run, cases, EXPECTED, set(),
       BASE / 'PG6854-web-deadline-original-v1/manifest.json', '69dba2782be8034e9efac8505b5019d466da0100bd1a3bc105f57760b61466fd',
       W / 'pg6854-web-deadline-original-v1/manifest.safe.json', W / 'pg6854-web-deadline-original-v1/findings.safe.json',
-      'pg6880-retention-wire-original-v1', 'PG6880-retention-wire-original-v1', expected_phase_exits=(0, 0, 0))
+      'pg6880-retention-wire-original-v2', 'PG6880-retention-wire-original-v2', expected_phase_exits=(0, 0, 0))
 
 
 def main():

@@ -115,11 +115,13 @@ final class RetentionWireBoundaryTest {
               HEADER
                   + "MODE|FAILED\nCURRENT|-|-\n"
                   + ROOT
-                  + "COUNTS|1|1|-|0|0\nBEFORE|"
+                  + "COUNTS|1|1|-|0|1\nBEFORE|"
                   + "78".repeat(255)
                   + "\nAFTER|"
                   + "78".repeat(255)
-                  + "\n";
+                  + "\nPROTECT|"
+                  + "78".repeat(255)
+                  + "|READ_ONLY\n";
           assertArrayEquals(expected.getBytes(StandardCharsets.US_ASCII), render(f, result));
         } else {
           assertThrows(IOException.class, () -> render(f, result));

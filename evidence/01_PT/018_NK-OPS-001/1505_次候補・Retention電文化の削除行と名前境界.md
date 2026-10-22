@@ -11,7 +11,7 @@ BackupManifestReader.namesは注入Io.openNamesのPath集合を同parent/重複/
 ## PT_DEFAULT候補の二観点
 
 1. 既BackupArtifactFixtureとMorningBackupRetentionTest.generations/subject/acceptsAllを未変更で使用。@TempDirで今回生成した八世代だけを自己所有writable FDで処理し、最古一件削除・七件保持後のNKBRET1**全byte**を独立期待値と比較する。削除前に自分が生成した各MANIFEST inputをJDK SHA-256で独立計算し、名前・保持七件・DELETE一件・各digest/固定size/ROOT metadataの所定順を手書きSS layoutで作る。Productionのencoder/verifier/resultからexpectedを生成しない。実原本や実Backupへアクセスしない。
-2. 同fixtureの既listing portで255 ASCII byte名（hex510）と256名（hex512）を返す。Mode.FAILED/currentなしの正規collectでResultを得て、255は独立固定BEFORE/AFTER全byte、256はretentionNameのIOExceptionを期待する。Path値を構築するだけで実256byte名へのファイル作成/操作をしない。DB portは全mutating/成功問合せが呼ばれたら失敗とし、actualDB/業務再送/worker startをしない。Io stream/FDは既fixtureに従い閉じる。
+2. 同fixtureの既listing portで255 ASCII byte名（hex510）と256名（hex512）を返す。Mode.FAILED/currentなしの正規collectでResultを得て、255は独立固定BEFORE/AFTERとPROTECT|name|READ_ONLY・COUNTS保護1を含む全byte、256はretentionNameのIOExceptionを期待する（BUG1630/YKT1383: 初稿のREAD_ONLY記述脱落を既SS343§6.17/既failed goldenから訂正、Main/上位仕様変更0）。Path値を構築するだけで実256byte名へのファイル作成/操作をしない。DB portは全mutating/成功問合せが呼ばれたら失敗とし、actualDB/業務再送/worker startをしない。Io stream/FDは既fixtureに従い閉じる。
 
 fixtureのUID2000/GID2001/effectiveUid0やdev/ino固定値は注入portのdataで、実machineのrole/UID/権限/OS admissionを変更・認定するものではない。kernel操作は今回生成したTempDir/保持FDの範囲に限定。production固定rootを開くMorningBackupRetention.use、Root/M-A/Unit/permit/実credential/native資格は呼ばない。既Root/cohort/原本/鍵の安全HOLDから分離した通常component PTであり、拒否を探る検証・代替PTではない。
 
