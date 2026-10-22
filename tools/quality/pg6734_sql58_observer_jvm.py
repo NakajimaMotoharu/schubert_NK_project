@@ -3,7 +3,7 @@ import inspect
 import pg6676_sql58_original_jvm as prior
 from pg6728_original4184_observer_artifacts import read_whole
 
-SQLSHA=None
+SQLSHA='ba5ed0252d5008d1dd2825966aa5d3120932531accb60f22970820cba82dda6c'
 
 
 def definition():
