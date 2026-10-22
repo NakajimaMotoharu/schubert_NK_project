@@ -7,7 +7,7 @@ from pathlib import Path
 import pg6878_retention_wire_selected as selected
 from pg5940_private_lock_compile import ROOT, W, BASE, sha
 
-QSHA = None  # Freeze only after genuine original reader terminal.
+QSHA = '8b33234201d16c5ae4c236fb0b7f0052953dbab88f723c712bb0439ec92bf3d7'
 PRIOR = BASE / 'PG6854-web-deadline-original-v1/manifest.json'
 PRIOR_SHA = '69dba2782be8034e9efac8505b5019d466da0100bd1a3bc105f57760b61466fd'
 CLASS = 'dev/codex/schubert/nk/batch/file/MorningGateEvidence'
