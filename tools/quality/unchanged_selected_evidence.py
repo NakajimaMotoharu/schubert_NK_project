@@ -7,14 +7,20 @@ from pg5940_private_lock_compile import ROOT, W, BASE, sha
 from pg6818_current_counter_delta import explicit_four100
 
 
-def target_counter(tree, physical):
+def target_counter(tree, physical, branchless_reason=None):
     name = physical.split(':', 1)[1].removesuffix('.class')
     found = [c for c in tree.findall('package/class') if c.get('name') == name]
     if len(found) != 1:
         raise ValueError('one actual XML target, no absent-counter synthesis')
     counters = {x.get('type'): {k: int(x.get(k)) for k in ('covered', 'missed')} for x in found[0].findall('counter')}
-    if not explicit_four100(counters):
-        raise ValueError('every four counters present, positive and zero missed')
+    if branchless_reason is None:
+        if not explicit_four100(counters):
+            raise ValueError('every four counters present, positive and zero missed')
+    else:
+        if not isinstance(branchless_reason, str) or not branchless_reason.strip():
+            raise ValueError('explicit source-specific branchless reason')
+        if 'BRANCH' in counters or not all(k in counters and counters[k]['covered'] > 0 for k in ('LINE', 'METHOD', 'CLASS')) or any(c['missed'] for c in counters.values()):
+            raise ValueError('actual branch absent, all actual counters zero missed, positive L/M/C; never remove present branches')
     return counters
 
 
@@ -54,7 +60,8 @@ def qualify(profile, qname, qsha, counts, oldpath, oldsha, targets, test_ids, ou
         xml = run / ('source/src/schubert-nk-' + module + '/target/site/jacoco/jacoco.xml')
         if sha(xml) != original['coverage'][module]['sha256'] or target not in p['allPhysicalMainSha256']:
             raise ValueError('original coverage and physical member')
-        actual[target] = target_counter(ET.parse(xml).getroot(), target)
+        reason = targets[target] if isinstance(targets, dict) else None
+        actual[target] = target_counter(ET.parse(xml).getroot(), target, reason)
         if actual[target] != p['allActualCounters'][target]:
             raise ValueError('same actual original XML counters')
     for path, mapping in test_ids.items():
@@ -68,6 +75,8 @@ def qualify(profile, qname, qsha, counts, oldpath, oldsha, targets, test_ids, ou
       oldFullImportedIntoNewGlobal=False, testsExecuted=0, additionalBuildsIssued=0, vmActions=0,
       formalAccepted=False, nativeQualified=False, acceptedLeafDelta=0, effortPercent=None, ptAlternativeCompleted=0,
       toolSha256=sha(tool), sharedReaderSha256=sha(ROOT / 'tools/quality/unchanged_selected_evidence.py'))
+    if isinstance(targets, dict):
+        value['counterNotApplicable'] = {key: dict(counter='BRANCH', result='NOT_APPLICABLE_ACTUAL_XML_ABSENT', reason=reason) for key, reason in targets.items() if reason is not None}
     out = BASE / outname
     os.umask(0o077)
     out.mkdir()
