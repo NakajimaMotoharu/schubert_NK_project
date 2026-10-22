@@ -1,0 +1,9 @@
+# 次候補：Legacy Receiptのdata-only既定契約（未着手）
+
+1508の元4213/原品質trace完了後に着手を判断する。現在Main/Testは変更しない。次予算案.1/.25/.6pp、P018-03.02主（欠落したtyped証明の拒否）、実Backup cycle参照追加費0。予算開始event/PG-D番号/新Test IDの固定は実着手前に行い、本準備だけで試験成功・WBS受入としない。
+
+既Main MorningBackupUnitCycle.Receipt.observedはOptional.emptyで、単なるfreshZero/statusからBackupUnitReceiptGate.TerminalReceiptを生成しない。既default requirePresent/stoppedは固定IOExceptionで拒否し、通常legacy経路のterminal metadata SUCCESSと真正typed receiptの取得を別契約にする。現全体ではこのinterfaceのobserved defaultのL1/M1だけが未測定。コードは正しく変更不要の候補で、到達不能扱い/除外/実Root成功への読み替えをしない。
+
+PT_DEFAULT候補はpackage-local anonymous Receipt portだけを新Test内で作り、captureを呼べば失敗、freshZeroはpublic合成booleanで基準object一致を検査する。false/trueどちらもobservedは空、requirePresent/stoppedの欠落引数は既固定IOException・cause無し/suppressed0、port副作用0、legacy terminalのOptional.empty/Outcome.SUCCESSだけは既契約どおりを確認する。IO/Process/Unit/DB/Artemis/Backupファイルを取得せず、TerminalReceiptのprivate constructor/field反射や偽実Receipt生成はしない。actual native/Root/所有・原本・鍵・permit/回収の受入に拡大しない。
+
+既関連MorningBackupUnitCycleTestの有限注入fixtureと六module guardを選択し、実JUnit宣言数を先に固定する。独立期待値はempty・fixed message・enumOutcomeとport呼出数から作りproduction methodでexpectedを生成しない。全Main/全旧Test/gates固定、新Testの原XML/counterは同sourceで資格確認し、現4213の既成功を加算しない。失敗なら修正前915/916、SS不備なら所定分類。通常小群では停止せず、fresh残10%の新規禁止/保全停止条件は維持する。
