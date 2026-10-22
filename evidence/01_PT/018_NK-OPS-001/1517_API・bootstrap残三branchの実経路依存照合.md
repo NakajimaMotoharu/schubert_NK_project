@@ -1,0 +1,19 @@
+# API・bootstrap残三branchの実経路依存照合
+
+2026-10-22、1516の元全体待機中に行った読取のみの後続候補整理。現Mainはe7d64fda2453e906ee6ccc5fe718e5c29841e4aaでも旧2e3c全4213時とbyte不変。旧資格80ad328fは歴史的な位置特定だけに使い、新4222の実測として流用しない。全回帰/サービス/VM/Root/ADMIN/配備/native操作を追加発行していない。
+
+|class/methodと旧XML line|未網羅の実数と依存|
+|---|---|
+|BootstrapAdminMain.run line149|BRANCH missed1/covered1。固定ADMIN credentials namespaceを照合し、その先にactor/NSS/current世代・本来のDB oneshotがある。既不正引数/namespace拒否や合成createAndCommitだけでは正規起動成功の実証にならない。SS343/SSC188/234・既PT-ADM-BOOT007..008/669/707と照合し、外部ADMINの起動を今回追加しない|
+|ApiApplicationPreparation.execute line126|BRANCH missed1/covered1。retainUnknown選択の先で実codecとLinuxTransfer ownerを取得し、内側ownerを保持して業務graphを渡す経路。SS342343/SSC316・既ApiPreparationOwnerTest/ApiApplicationPreparationTestのport成功は外部親の同一owner受入ではない。確認できていない実環境安全条件を外して実行しない|
+|FixedNativeCoverageCheckpoint.open line100|BRANCH missed1/covered1。profileありではpinned agent実検証とPublicAgent/PrivateFile exportへ進む。profileなし拒否・合成checkpoint portはnative CRC/session資格の代替にならない。SS342343352/SSC196と照合し、新source/現Unit資格の成功を推定しない|
+
+ここで確認したのはbranchの位置と、その先の必要依存である。coverage XMLはどちらの方向が未実行かを明示するものではなく、方向/到達成功を新たに推定していない。反対方向を意図的に実行する試走・拒否探索は0。未特定拒否操作へ対応付けず、新PTALT例外・REVIEW_STATIC_COMPLETE・実測PASS/coverageを計上しない。これら三branchを到達不能/除外へ変更しない。Root11 PMD未review/F03未受入も別に維持する。
+
+## 読取根拠とhash
+
+元4213のapi coverage XML `evidence/provisional/PG6890-current4213-cases/coverage/api/site/jacoco/jacoco.xml` SHA256=123a17670128d1c9c44d045940c59fbdbe0dd3738d8cf07225931452672c82f0、bootstrap同相対path SHA256=b930dfb76deb55d6585625c3f27bf5b61fd37aeaafce84f2d99043dc85ba0107。標準ElementTreeでsourcefile/line@mb>0を読取、終了0、三該当行を得た。
+
+当Main hash：BootstrapAdminMain=d6d87b4250ff3cf604308c3373d052a46283130a556c37c25c4e858ef1991f61、ApiApplicationPreparation=b7de06e8bbfdf70f983aa965022cb44ec7a413ae3021dbe7b33237e1f4e95166、FixedNativeCoverageCheckpoint=95d70220aaa00265151d92ec1c4d4e5e7e220ed4508668461ce0b497b988e86d。ソースは各src/<module>/src/main/java以下の同名class。読取/sha256sum終了0、本体・試験・gates変更0。
+
+この記録は後続の適用性整理であり受入ではない。先に元PG6930全体の真正終端→当6932原資格/品質/traceを閉じ、元実測が到着してから現在gapを選ぶ。新しい終了依存や外部承認を捏造しない。工数率null/17/190/正式1964/53/QA051final・PTALT完了0は不変。
