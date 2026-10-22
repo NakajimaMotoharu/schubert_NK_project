@@ -1,5 +1,7 @@
 # SystemdBinder ABI 後続独立fixture仕様（未着手）
 
+準備追記：6738のsource-only比較工具と管理三canaryを準備し、当public Source/上表21shapeの一致、actual alias型/lookup routing変更・oracle欠落/変更の拒否を確認した。これは現全体待機中の準備で、Production PG/PTの新規受入・新Java test実行ではない。正式review manifest exportとfixture着手は群予算を固定した後に行い、準備費の専有配賦は不明null、後から開始見積を捏造しない。
+
 NK-OPS-001、WBS-P018-03、bootstrap LinuxSystemdSession.Native.bind/invoke。485でbatch側wrapperも同主担当だが費用を二重計上しない。現1475全体/原回収/品質/traceを先行、今はsrc/Testを変えず新jobも起動しない。PGは既実装のABI/責務/例外契約を下記独立根拠と照合し、変更不要なら理由を残す。誤りが見つかれば915先行起票後に必要PG/SS分類を適用する。
 
 ## 適用性
@@ -45,4 +47,4 @@ PT_DEFAULT候補: JDK25の自己所有upcall stub・confined Arena・fake Symbol
 - `PT-OPS-MANAGER-ABI-001`: 全21symbolの正常dispatcherを二boundary vectorで呼ぶ。期待=各stub2回/他stub誤呼出0、全引数順/primitive bit/pointer対応、symbol固有fixed return、systemd lookup20/libc lookup1。expectedは上表と公開literalだけ。実systemd関数/権限/manager sessionを実行しない。
 - `PT-OPS-MANAGER-ABI-002`: 一symbolずつ欠落するlookupと返却済dispatcherの未知symbol。期待=固定IOException/causeなし、stub呼出0（既正常呼出とは別fresh fixture）、own Arena解放。既null/checked/fatal/closureドメインも当sourceで回帰する。
 
-当候補は新Java2Testの予定で実行済み0、48等のsubvectorを独立JUnit件数へ水増ししない。着手前群予算は後で固定し、source/command/全fixture・原四counter/反証点検を記録する。Source変更や安全条件不明/拒否があればその範囲を保留、拒否を探る試し実行は行わない。nativeQualified=false/正式/個別17-190/工数null/QA051final/代替0は維持する。
+当候補は新Java2Testの予定で実行済み0、内包するsubvectorを独立JUnit件数へ水増ししない。着手前群予算は後で固定し、source/command/全fixture・原四counter/反証点検を記録する。Source変更や安全条件不明/拒否があればその範囲を保留、拒否を探る試し実行は行わない。nativeQualified=false/正式/個別17-190/工数null/QA051final/代替0は維持する。
