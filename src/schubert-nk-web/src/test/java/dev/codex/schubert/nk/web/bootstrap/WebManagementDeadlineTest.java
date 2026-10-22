@@ -133,13 +133,15 @@ final class WebManagementDeadlineTest {
         if (first != null) first.get(3, TimeUnit.SECONDS);
         if (hold == Hold.START) {
           var promotions = new AtomicInteger();
-          assertThrows(
-              IllegalStateException.class,
-              () ->
-                  owner.promote(
-                      () -> {
-                        promotions.incrementAndGet();
-                      }));
+          var unavailable =
+              assertThrows(
+                  IOException.class,
+                  () ->
+                      owner.promote(
+                          () -> {
+                            promotions.incrementAndGet();
+                          }));
+          assertEquals("Web readiness unavailable", unavailable.getMessage());
           assertEquals(0, promotions.get());
         }
       } finally {

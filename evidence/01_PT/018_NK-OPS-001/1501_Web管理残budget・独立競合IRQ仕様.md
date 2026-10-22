@@ -6,6 +6,10 @@
 
 是正後local smokeはJAVA_HOME=toolchain/jdk-25.0.4、Maven3.9.12 `-q -o -Dmaven.repo.local=.../m2/repository -DskipTests -pl src/schubert-nk-web -am test-compile`、session38270 actual0（Production PT0、単なるcompile）。format/管理二/工具pyflakes0。旧6850の公開compile failure manifestへ元SHA7a853667/旧Test6373de8eを保存し、成功/反例へ正常化しない。新6856はまだ未発行。
 
+履歴訂正：上記「Runnable」はvoid-SAMというjavac診断の説明誤称。既WebはServiceStartupAdmission.Ready.release（void/IOException）で、元Web試験はpromotion拒否をIOExceptionとする。6856-v2/source74e18a07ca069d2f09f9c09c1f3fd598397a903c/session93594はphase0,0,1・実29/9・新三失敗・batch13/6未実行、source固定/archive60a21965。第一/第二はsecond.get line122のTimeout、第三は新TestがIllegalStateを誤期待したcleanupのunexpected IOException（line136）で、BUG1629/YKT1382へ修正前起票する。Mainや旧oracleを変えず、新Testを既IOException/fixed message/通知0へ整合する。
+
+反例v3は新onlypg6856-web-deadline-red-v3、六guard12/7＋新Web三/1=15/8へ限定し、無関係な旧domainの再演を省く（greenは全関連42/15）。期待値変更で旧MainをPASS化せず、旧Mainのまま三件の第一owner保持liveness違反を再確認し、そのTest bytesをgreenへ固定する。旧v1compile/旧v2oracle失敗は別に保全する。
+
 BUG1627/YKT1380/SSC335/PG-D509、P018-06。群開始低.3/標準1/高3週次共有pp、fresh最後81/残19/reset1793082865、開始見積りを固定。K01必要全体費は別に開始前記録し二重計上しない。原/v4/実費N/Tnull/正式1964-53/17-190/工数nullを維持。
 
 ## PG契約と範囲

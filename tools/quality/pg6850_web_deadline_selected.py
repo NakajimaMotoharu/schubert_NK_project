@@ -10,12 +10,13 @@ from pg5940_private_lock_compile import ROOT,W,BASE
 OLD='b2514bf6d80c873ab23940ebae293b95686c1c57'
 MAIN='src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java'
 TEST='src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java'
-RED='pg6856-web-deadline-red-v2'
+RED='pg6856-web-deadline-red-v3'
 GREEN='pg6852-web-deadline-green-v1'
 EXPECTED=(42,15)
 
 
-def inventory():
+def inventory(red=False):
+    if red:return profile.inventory({'web':{'web.bootstrap.WebManagementDeadlineTest'}},(15,8))
     return profile.inventory({'batch':{'batch.mq.AcceptorObjectBoundaryTest','batch.mq.ArtemisAcceptorReadinessClientTest','batch.file.PostgresObservationRowsTest','batch.file.MorningGateEvidenceTest'},
       'web':{'web.bootstrap.WebManagementServerTest','web.bootstrap.WebUnstartedManagementTest','web.bootstrap.WebRuntimeStopTest','web.bootstrap.WebManagementDeadlineTest'}},EXPECTED)
 
@@ -41,9 +42,10 @@ def read_green():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('action',choices=('red','green','read-green'));action=parser.parse_args().action
     if action=='read-green':return read_green()
-    cases,counts=inventory();scope={**vars(profile),'runner':prior.runner}
+    cases,counts=inventory(action=='red');scope={**vars(profile),'runner':prior.runner}
     exec(compile(inspect.getsource(profile.execute),'<finite ordinary Web stop deadline>','exec'),scope)
-    return scope['execute'](GREEN if action=='green'else RED,green_guard if action=='green'else red_guard,cases,counts,EXPECTED,{'web':['web/bootstrap/WebManagementServer']})
+    expected=(15,8)if action=='red'else EXPECTED
+    return scope['execute'](GREEN if action=='green'else RED,green_guard if action=='green'else red_guard,cases,counts,expected,{'web':['web/bootstrap/WebManagementServer']})
 
 
 if __name__=='__main__':main()

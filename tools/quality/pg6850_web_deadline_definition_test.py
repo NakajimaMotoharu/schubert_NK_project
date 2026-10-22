@@ -8,6 +8,7 @@ class WebDeadlineDefinitionTest(unittest.TestCase):
         cases,counts=p.inventory();self.assertEqual((42,15),(sum(counts.values()),len(counts)))
         self.assertEqual(6,len(cases))
         with patch.object(p,'EXPECTED',(42,14)),self.assertRaises(ValueError):p.inventory()
+        _,small=p.inventory(True);self.assertEqual((15,8),(sum(small.values()),len(small)))
 
     def test_red_has_no_main_and_green_only_web(self):
         for green,paths in((False,{p.TEST}),(True,{p.MAIN,p.TEST})):
