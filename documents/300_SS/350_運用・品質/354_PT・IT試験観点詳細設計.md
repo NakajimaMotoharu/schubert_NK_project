@@ -1,4 +1,12 @@
 # PT・IT試験観点詳細設計
+
+## SSC335 Web管理lock/join残budget PG/PT（2026-10-22）
+
+BUG1627/YKT1380、PT-WEB-MGMT335001～003。自己所有ephemeral loopback HttpServer/実executor、有限latch/watchdogと二workerだけを使い、実VM/Web/Root/cohort/原本/鍵/permit/Unit操作を要しない。旧Mainで零budget競合・lock待機中IRQ・既IRQでstartとの競合の有限反例を保存し、同Test bytesと全既oracleを固定した是正後に通常PTする。入力null/負/>30秒、正常/再close、stop/join不確定、取得前準備・例外優先は旧表も維持する。
+
+held第一ownerを解放する前の固定IOException・cause/suppressedなし・IRQflag・vendor stopの回数を独立literalで確認し、停止要求後のlate promotionを拒否する。finallyで当fixtureを解放し全Future/worker/実executorを回収、実同port再bindを確認する。時間測定だけで成否を推定せず、第一ownerを保持したまま第二が帰還するlivenessと後条件で判定する。vendor自身の非帰還/全体nativeは未検証のまま、実Root/既HOLDを解除しない。
+
+新/旧domainの元XML/同source原Jar/四counter・静的raw分類・必要全体/traceを照合する。未実行PTや既data-only sourceのsubsetを新Main/global100へ合算しない。代替PTの免除ではなく通常PT、正式/工数率・実環境完了へ加点0。
 ## SSC334 ordinary broker/親runtime PG/PT（2026-10-22）
 
 BUG1604/YKT1357・1606/YKT1359。自己所有ConnectionFactory/JMSContext/consumer/owner interface proxyと未接続ActiveMQ locatorのsetter fixtureだけで、API/Web supplier/createContext四edge fatal graph・finally copy wipe、API多owner/Web単owner closeのlate graph・全必要順/数・成功phase再close0を独立Error identity/整数literalで検証する。実credential/DB/network/VM/Root/failed cohort/permit/実native操作を発行しない。fixture locatorはcaller finallyでdisposeし、報告close失敗を実環境の解放成功へ変換しない。
