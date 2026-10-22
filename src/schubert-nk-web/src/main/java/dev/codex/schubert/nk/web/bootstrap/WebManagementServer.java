@@ -216,34 +216,50 @@ final class WebManagementServer implements AutoCloseable {
     Objects.requireNonNull(remaining, "management stop budget");
     if (remaining.isNegative() || remaining.compareTo(java.time.Duration.ofSeconds(30)) > 0)
       throw new IllegalArgumentException("invalid stop budget");
-    stopLock.lock();
+    // SSC335/PG-D509: a zero remainder must not become an unbounded lock wait.
+    long deadline = System.nanoTime() + remaining.toNanos();
+    stopping.set(true);
+    promoted.set(false);
+    boolean entryInterrupted = Thread.interrupted();
     try {
-      if (closed.get()) return Optional.empty();
-      stopping.set(true);
-      promoted.set(false);
-      if (!serverStopped) {
-        boolean interrupted = Thread.currentThread().isInterrupted();
-        try {
-          server.stop(0);
-          // SSC317: normal stop return does not prove unstarted selector/socket release.
-          if (started) serverStopped = true;
-        } finally {
-          if (interrupted) Thread.currentThread().interrupt();
-        }
-      }
-      executor.shutdownNow();
       try {
-        if (!executor.awaitTermination(remaining.toNanos(), TimeUnit.NANOSECONDS))
+        if (!stopLock.tryLock(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
           return Optional.of(new IOException(STOP_UNCONFIRMED));
-      } catch (InterruptedException interrupted) {
+      } catch (InterruptedException notification) {
         Thread.currentThread().interrupt();
         return Optional.of(new IOException(STOP_UNCONFIRMED));
       }
-      if (!started) return Optional.of(new IOException(STOP_UNCONFIRMED));
-      closed.set(true);
-      return Optional.empty();
+      // Web's existing vendor/await contract sees an entry notification, unlike API SSC313.
+      if (entryInterrupted) Thread.currentThread().interrupt();
+      try {
+        if (closed.get()) return Optional.empty();
+        if (!serverStopped) {
+          boolean interrupted = Thread.currentThread().isInterrupted();
+          try {
+            server.stop(0);
+            // SSC317: normal stop return does not prove unstarted selector/socket release.
+            if (started) serverStopped = true;
+          } finally {
+            if (interrupted) Thread.currentThread().interrupt();
+          }
+        }
+        executor.shutdownNow();
+        try {
+          if (!executor.awaitTermination(
+              Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
+            return Optional.of(new IOException(STOP_UNCONFIRMED));
+        } catch (InterruptedException interrupted) {
+          Thread.currentThread().interrupt();
+          return Optional.of(new IOException(STOP_UNCONFIRMED));
+        }
+        if (!started) return Optional.of(new IOException(STOP_UNCONFIRMED));
+        closed.set(true);
+        return Optional.empty();
+      } finally {
+        stopLock.unlock();
+      }
     } finally {
-      stopLock.unlock();
+      if (entryInterrupted) Thread.currentThread().interrupt();
     }
   }
 }
