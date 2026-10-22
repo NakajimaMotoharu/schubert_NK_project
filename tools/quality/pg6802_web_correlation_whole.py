@@ -10,7 +10,7 @@ from pyflakes.api import check
 ROOT,W,BASE,sha=prior.ROOT,prior.W,prior.BASE,prior.sha
 LABEL='PG6802'
 SLOT='pg6802-web-correlation-six-v1'
-QSHA=None
+QSHA='ad152991b2814cafd19cd68df220dad45b90d9acc6d9467ab0d3559bfacca31b'
 
 
 def original_source():
