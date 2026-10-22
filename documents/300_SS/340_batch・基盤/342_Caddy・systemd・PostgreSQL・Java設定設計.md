@@ -1,5 +1,13 @@
 # Caddy・systemd・PostgreSQL・Java設定設計
 
+## SSC335 Web管理HTTPの有限lock/join budget（2026-10-22）
+
+Web管理のcloseWithinは既0～30秒入力を停止通知前に検証する。停止要求でstopping/DOWN・promotion拒否をlock待ち前に確定し、完了closedとは分離する。lock待ちとexecutor awaitTerminationは同じSystem.nanoTime単調deadlineの残量だけを消費し、零を無期限lock/waitへ変換しない。lock取得失敗・待機中の新IRQは固定IOExceptionで不確定帰還し、IRQflagを復元、vendor stopや完了cacheを推定発行しない。
+
+Web固有の既IRQ表は維持する。呼出前IRQはlock取得待ちだけ一時clearし、取得後はJDK stopより前に復元する。既stop内のflag保存/復元と、その後のawaitが割込で不確定となる契約を変えず、全帰還で元通知を復元する。API SSC313の「一時clearのまま終端確認」と共通化しない。serverStoppedは正常start済みstop正常帰還後だけ、closedは実executor終端後だけ、成功子の再stop0/再join・未知時のowner保持・固定診断/例外順位は従来どおり。
+
+SS342§5.2のWeb30秒phaseとSS352の残phase管理の内部補足。既HTTP/業務/SQL/権限/Unit・親30分を不変更。vendor stop(0)そのものを強制中断できる保証は追加せず、vendor非帰還は既UNKNOWN/Unit境界の残存リスクとして保持する。自己所有の有限HTTP/worker fixtureは実Web/Root/native/配備後条件の代用でない。BUG1627/YKT1380、SS354/SSC335、RD/UI変更不要。
+
 SSC330（BUG1593/YKT1346、SS312/354参照）：ordinary API/Web readinessのDB/JMS admissionは、接続/probe/consumer/closeのfinite failure graphを通常startup catalog前に分類する。取得済Connection/JMSContext close各一回、DB失敗後のJMS開始0、JMS失敗後の業務ready0を維持する。直接primary Errorは同一objectで優先、直接close Errorが非Error primaryへ優先する既選択も不変更。捨てた非Error close secondaryの内包Errorも一時attachmentとcause/suppressed/linked/next分類で保持する。正常probe/固定診断/Queue管理側gate・Unit/Root/timeout/権限/順序は不変更、interface proxyの成功は実VM/Root/ordinary業務ready・所有の証明ではない。
 
 SSC325（BUG1578/YKT1320）：Web借用frameの未知close後も固定診断のRTE/Errorは保護し、取得前固定policyとcallback/failure到達性fenceを持つ同frameを維持する。固定診断文・stop通知・Unit/親期限・隔離は不変更、dummy childの終了を実資源解放と認定しない。元source回帰実行中はMain/Testを変更しない。
