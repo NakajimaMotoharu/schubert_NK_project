@@ -1,5 +1,13 @@
 # SystemdBinder ABI 後続独立fixture仕様（未着手）
 
+## 着手記録（2026-10-22、以下旧「未着手」は準備履歴）
+
+1477当source品質/trace完了後、群1686 P018-03低.2/標準.8/高2ppをprospective固定。PG-D501/source-only6738 cd183662b6788bfef569ece4ed1cd3263b497967cbd8af15b0a5f28e9cd95b46、21shape/lookup一致・Main変更不要。SystemdBinderAbiTestの独立二Testを実装、Main/全旧Test/gates/Current不変、format0/管理五成功。新Testのpointerはown allocation/NULLのみ、addressは比較booleanで非公開、各callbackの失敗flagは帰還後必ず検査する。fixture構築途中失敗もArena.close、callback例外はtyped fallbackでJVMへ流出させず、assertは帰還後だけ。
+
+実commandは`python3 -B tools/quality/pg6740_systemd_owned_abi_selected.py run`、同元真正0後だけ同tool `read`。PYTHONPATHはtools/quality、tools/quality/vm/050_s1、既pyflakes3.4.0 runtime。selected34/9=既六module guards12/7＋既LinuxSystemdSession20/1＋新ABI2/1、既compile-first/六format/null/Werror/SpotBugsを維持する。各21/42subvectorをJUnit件数へ加算しない。driverは一Testだけの差分・全Main/旧Test/gates固定をguard、原readerは同source archive/Jar/XML/all8511667と物理差0を照合しnewbuild/PT0。
+
+PT_DEFAULT事前判定補足：新二Testは実libraryを一切loadしない。関連する既LinuxSystemdSessionTestの一methodは既固定・保護された公開libsystemdをload/bindし、未知symbolのみ呼んで固定失敗を確認する（既成功全体にも含まれる既契約）。実systemd関数/manager session/bus/Unit/Root/VM/業務/DB/credential/既process/permit/intentは一切呼ばない。この既loader照合と新upcall fixtureを区別し「全選択でlibrary load0」とは記録しない。後続原full/native/正式は未実施、当選択は未合格。
+
 準備追記：6738のsource-only比較工具と管理三canaryを準備し、当public Source/上表21shapeの一致、actual alias型/lookup routing変更・oracle欠落/変更の拒否を確認した。これは現全体待機中の準備で、Production PG/PTの新規受入・新Java test実行ではない。正式review manifest exportとfixture着手は群予算を固定した後に行い、準備費の専有配賦は不明null、後から開始見積を捏造しない。
 
 NK-OPS-001、WBS-P018-03、bootstrap LinuxSystemdSession.Native.bind/invoke。485でbatch側wrapperも同主担当だが費用を二重計上しない。現1475全体/原回収/品質/traceを先行、今はsrc/Testを変えず新jobも起動しない。PGは既実装のABI/責務/例外契約を下記独立根拠と照合し、変更不要なら理由を残す。誤りが見つかれば915先行起票後に必要PG/SS分類を適用する。
