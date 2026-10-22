@@ -1,5 +1,7 @@
 # OrdinaryObserver 原127・必要全体
 
+実行中追記：元6726/session44747、operator49f9f069493ed39da3ebf1e869b77c4d4a8725d1、当source01e41088c/archive8461eaa1904162f965d966d5d835fd406a0a298366eadb058839d3820ffbb4fdで開始済。Main/Test/gates固定、同元終端と原6728を待ち確認再演0。以下「着手前」は開始前の仕様履歴。
+
 1474/PG-D500、BUG1610/YKT1363、主P005-04/Web参照P005-02追加費0。群1681の低.2/標準.6/高1.5ppは固定。Production source01e41088c6562c3b7d103ae0bacc9f693bc1aad4、全Java Test/期待値は元4ce赤/d48原4184からbyte固定。
 
 ## PG同値と当原127
