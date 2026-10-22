@@ -1,0 +1,162 @@
+{
+  "acceptedLeafDelta": 0,
+  "actualExit": 0,
+  "command": "python3 -B tools/quality/pg6946_c03_current_criteria.py",
+  "configurationChanges": 0,
+  "configurationKeys": 32,
+  "databaseAccessByReader": false,
+  "designMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "designSha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+  "effortPercent": null,
+  "explicitTimeoutSettings": 20,
+  "formalAccepted": false,
+  "hbaRules": 16,
+  "inputHashes": {
+    "src/deployment/postgresql/pg_hba.conf.template": "c73a1809eb70f3934fcb6621f3d60f782e6a5fef2946f178fad8294e1bcb8850",
+    "src/deployment/postgresql/postgresql.conf.template": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb",
+    "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql": "6021aa46d94cbf8edac059b6c14fc36381c0bad7ceca2930b5939ee9ba6b5522",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/PostgresDeploymentTest.java": "b3d2090ca93a263e77011c16cd4ac915faaa8da4f972270533a3a3d45a0f11cc"
+  },
+  "localEvidenceChecks": [
+    "WBS-C03:contract",
+    "WBS-C03:scope",
+    "WBS-C03:quality"
+  ],
+  "localEvidenceStatus": "CURRENT_CRITERIA_EVIDENCE_READY_NOT_CANONICAL_ACCEPTANCE",
+  "originalCases": [
+    {
+      "method": "literalConfiguration",
+      "originalCase": {
+        "caseNameSha256": "f2f5a42c6eb7ff3088e472041cdc5f6b2675c5267d0bffe2ddd474f655688f9e",
+        "caseOrdinalInXml": 7,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-050cda38e02ad2374ac7f94c8a5e779b827e87abd86ea1968edd8398f62be913",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-001"
+    },
+    {
+      "method": "nativeConfiguration",
+      "originalCase": {
+        "caseNameSha256": "8338d37d278b2ce1b3f508c236e523d45f6a59afbd5bfa9075c99daf9659d19a",
+        "caseOrdinalInXml": 6,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-4ef4f41ea5619f945bfd2ee296642092bfdec4b391ab97c417897dca9a225354",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-002"
+    },
+    {
+      "method": "literalHba",
+      "originalCase": {
+        "caseNameSha256": "95eb53e73678088e599c354a3f36ab5c8fa8c57a29d6fdfaa7a0067c14077d9a",
+        "caseOrdinalInXml": 2,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-a7c93b434d7856440f710100aa64fb3c3f8e7a7191f49f716c2b9e58b1094a90",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-003"
+    },
+    {
+      "method": "nativeHba",
+      "originalCase": {
+        "caseNameSha256": "6e7ad0b4350a9828735c808ac1d65135c5d1647eafdabed778d5895bf68eddff",
+        "caseOrdinalInXml": 3,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-d51d9f1ae5a59b596ea4c28c462d3ef1231a168293c09bbc1cd65a1d84d2cdde",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-004"
+    },
+    {
+      "method": "roleTimeouts",
+      "originalCase": {
+        "caseNameSha256": "d86153d056cd636540633e39d244a79b685f40c63b2fdef0677aea66fec59229",
+        "caseOrdinalInXml": 5,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-dfd50e939c80245b43484a79126d5e291de417caca6d01d12362b3050739feb3",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-005"
+    },
+    {
+      "method": "invalidConfiguration",
+      "originalCase": {
+        "caseNameSha256": "e9be3e7c4111f13147cc198126b862977c01ba0dd62fcff78170aff6ffe51c09",
+        "caseOrdinalInXml": 8,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-d75b39726e15966747a4586aa7239e22be565e9b52e269e3091a2b922e2fb48f",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-006"
+    },
+    {
+      "method": "invalidHba",
+      "originalCase": {
+        "caseNameSha256": "67f2de671dae416ee29fc90ad7a8fa8dc89f823784f3b8b37db926b0051e8788",
+        "caseOrdinalInXml": 1,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-3393a165f9282e1a9d16f056b0efbb18b8388f025b68fe982247b34a18d9af84",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-007"
+    },
+    {
+      "method": "isolationAndEvidence",
+      "originalCase": {
+        "caseNameSha256": "e6b59c2ac0c769c114bece4b757f563583030b891ac8f8c516f77ca92480b39d",
+        "caseOrdinalInXml": 4,
+        "class": "dev.codex.schubert.nk.api.database.PostgresDeploymentTest",
+        "module": "api",
+        "result": "PASS_ORIGINAL_XML",
+        "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+        "sourceXml": "TEST-dev.codex.schubert.nk.api.database.PostgresDeploymentTest.xml",
+        "testId": "PT-WHOLE-16ab415b5c6a26d685393b5a8754e9dcdb2b58f3b6839648a3841707a29d5d7b",
+        "xmlSha256": "4809e0ef48f103290f4b6051c7c726924feedb3f67aa039f1b7c7471df2c1a0c"
+      },
+      "testId": "PT-OPS-PGCFG-008"
+    }
+  ],
+  "originalQualificationSha256": "728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731",
+  "processActions": 0,
+  "ptAlternativeCompleted": 0,
+  "risks": [
+    "OS active config/remote rejection/drift and primary MESSAGE redaction remain separate runtime gates",
+    "canonical historical17 is not rebased by this local evidence audit"
+  ],
+  "roles": 7,
+  "runtimeDeploymentVerified": false,
+  "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "testsExecutedByReader": 0,
+  "toolSha256": "a68f35dbd7a9feb79ef9771900dacb71cf59a5e3c11987eb686629815fd5f058",
+  "vmActions": 0,
+  "wholeReplayed": false
+}
