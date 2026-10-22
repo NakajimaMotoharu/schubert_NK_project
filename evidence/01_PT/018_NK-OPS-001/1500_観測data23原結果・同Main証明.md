@@ -24,3 +24,5 @@ BUG1624/YKT1377のsuite数混同は実guard列挙/旧23/10変異拒否、1625/YK
 Main不変更・新Test二fileを他試験へ共有しない当束では、global source更新だけのための旧成功全回帰を直ちに再演せず、次の必要PG変更と一束の真正全体へまとめる。current全体は**4c034/4203/650/trace195506ae**を保持し、新source全体/coverage/native/CHR/451正式はPENDING。新23を旧4203へ足して4206合格とは報告しない。
 
 個別17/190・正式1964/53・工数null・原/v4・全実環境/Root/cohort/鍵/原本/permit/native・QA051final/PTALT対象未特定/代替完了0は不変更。次独立普通Web管理のclose budget適用性をSS/旧oracleからレビューし、必要ならSSC/BUGを先行してPG/PTへ継続する。判断未確定を既不具合又は新作業完了としない。
+
+追記：1626修正commit **f32ef3878**、1624/25修正b2514bf6d。原結果と全対象/予防確認まで揃い、1624～1626/YKT1377～1379の工具scopeだけCLOSED（2026-10-22）。Production全体/工程受入へ加点0。全当job/readerは終了済、同成功再演不要。
