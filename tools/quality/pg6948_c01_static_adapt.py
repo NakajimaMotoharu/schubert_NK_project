@@ -37,7 +37,7 @@ def verify_json(value, address):
     listen = address if ':' not in address else '[' + address + ']'
     if len(servers) != 1 or servers[0]['listen'] != [listen + ':55160'] or value['admin'] != {'disabled': True}:
         raise ValueError('one exact IP55160 listener declaration and disabled admin, not observed listening')
-    if not servers[0]['automatic_https']['disable_redirects'] or value['apps']['pki']['cas']['local']['install_trust'] is not False:
+    if not servers[0]['automatic_https']['disable_redirects'] or value['apps']['pki']['certificate_authorities']['local']['install_trust'] is not False:
         raise ValueError('no redirect listener or trust-store installation declaration')
     handlers = [n for n in nodes if 'handler' in n]
     if {n['handler'] for n in handlers} != {'subroute', 'request_body', 'headers', 'reverse_proxy'}:
@@ -103,7 +103,12 @@ def main():
         joined.append(dict(testId=f'CADDY455{index:03}', method=name, originalCase=found[0]))
     os.umask(0o077)
     slot = W / SLOT
-    slot.mkdir()
+    # BUG-1635: original IPv4 output exists but its child exit/time receipt was not saved.
+    # Read that exact artifact only; never execute IPv4 again to recover missing metadata.
+    if not slot.is_dir() or sha(slot / 'original-driver.py') != 'e24ab242e24fb088f7340b4cc8d70d845585905ed88f0311fbd6ddc26f7bd044':
+        raise ValueError('preserved original failed driver required before read/remaining IPv6')
+    if sha(slot / '1.Caddyfile') != 'f33eb2f491b7cb1de8cb68c5460382870ceaef82622fe1e79330838960026237' or sha(slot / '1.json') != '28f9a4df19349dc877a1a9765bdd3a4d6615fdb50633d68287b84531416395cf':
+        raise ValueError('original IPv4 artifacts fixed, no replay or overwrite')
     env = {'PATH': os.defpath, 'LANG': 'C.UTF-8', 'GOMAXPROCS': '1',
       'XDG_DATA_HOME': str(slot / 'xdg-data'), 'XDG_CONFIG_HOME': str(slot / 'xdg-config'), 'XDG_CACHE_HOME': str(slot / 'xdg-cache')}
     rows = []
@@ -111,22 +116,54 @@ def main():
         host = address if ':' not in address else '[' + address + ']'
         rendered = text.replace('https://<GLOBAL_IP>', 'https://' + host).replace('bind <GLOBAL_IP>', 'bind ' + address)
         path = slot / (str(index) + '.Caddyfile')
-        with path.open('x') as f:
-            f.write(rendered)
         command = [str(BIN), 'adapt', '--config', str(path), '--adapter', 'caddyfile']
-        started = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        result = subprocess.run(command, cwd=slot, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=15, check=False)
-        # Only fixed input/private raw output. No daemon, --validate/provision, environment display or TLS key access.
-        for suffix, raw in (('json', result.stdout), ('stderr.private.log', result.stderr)):
-            with (slot / (str(index) + '.' + suffix)).open('xb') as f:
-                f.write(raw)
-        if result.returncode != 0:
-            raise ValueError('original static adapt failed; preserve slot, do not rerun automatically')
-        value = json.loads(result.stdout)
+        receipt = slot / (str(index) + '.exit.safe.json')
+        if index == 1:
+            if path.read_text() != rendered:
+                raise ValueError('captured original IPv4 input exact')
+            evidence = dict(source=source, command=command, actualExit=None, startedUTC=None, completedUTC=None,
+              originalDriverActualExit=1, childExitEvidence='NOT_PERSISTED_CONTROL_FLOW_ZERO_CHECK_ONLY',
+              executionPassCounted=False, artifactReadOnly=True)
+        else:
+            before = slot / '2.begin.safe.json'
+            if receipt.exists():
+                evidence = json.loads(receipt.read_bytes())
+                if not before.exists() or evidence['source'] != source or evidence['command'] != command or path.read_text() != rendered or evidence['inputSha256'] != sha(path):
+                    raise ValueError('same original IPv6 begin/exit/input only, no new job')
+            else:
+                if before.exists() or path.exists() or (slot / '2.json').exists():
+                    raise ValueError('existing incomplete IPv6 attempt UNKNOWN; preserve and do not restart')
+                with path.open('x') as f:
+                    f.write(rendered)
+                started = datetime.datetime.now(datetime.timezone.utc).isoformat()
+                start = dict(source=source, command=command, inputSha256=sha(path), startedUTC=started,
+                  caddyBinarySha256=BIN_SHA, toolSha256=sha(ROOT / 'tools/quality/pg6948_c01_static_adapt.py'))
+                with before.open('x') as f:
+                    json.dump(start, f, sort_keys=True)
+                    f.flush()
+                    os.fsync(f.fileno())
+                result = subprocess.run(command, cwd=slot, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=15, check=False)
+                completed = datetime.datetime.now(datetime.timezone.utc).isoformat()
+                # Save actual terminal before semantic checks. Interrupted/unknown never becomes PASS.
+                for suffix, raw in (('json', result.stdout), ('stderr.private.log', result.stderr)):
+                    with (slot / (str(index) + '.' + suffix)).open('xb') as f:
+                        f.write(raw)
+                evidence = dict(start, completedUTC=completed, actualExit=result.returncode,
+                  outputSha256=sha(slot / '2.json'), stderrSha256=sha(slot / '2.stderr.private.log'),
+                  artifactReadOnly=False, childExitZero=result.returncode == 0)
+                with receipt.open('x') as f:
+                    json.dump(evidence, f, sort_keys=True)
+                    f.flush()
+                    os.fsync(f.fileno())
+            if evidence['actualExit'] != 0 or evidence['outputSha256'] != sha(slot / '2.json') or evidence['stderrSha256'] != sha(slot / '2.stderr.private.log'):
+                raise ValueError('original IPv6 terminal/outputs must match; never repeat for recovery')
+        output = slot / (str(index) + '.json')
+        stderr = slot / (str(index) + '.stderr.private.log')
+        value = json.loads(output.read_bytes())
         verify_json(value, address)
-        rows.append(dict(testId=f'PT-C01-ADAPT-{index:03}', address=address, actualExit=result.returncode,
-          command=command, startedUTC=started, inputSha256=sha(path), outputSha256=sha(slot / (str(index) + '.json')),
-          stderrSha256=hashlib.sha256(result.stderr).hexdigest(), stderrPresent=bool(result.stderr),
+        rows.append(dict(evidence, testId=f'PT-C01-ADAPT-{index:03}', address=address, readerSemanticExit=0,
+          executionPassCounted=index == 2 and evidence['actualExit'] == 0,
+          inputSha256=sha(path), outputSha256=sha(output), stderrSha256=sha(stderr), stderrPresent=stderr.stat().st_size > 0,
           sourceConfigSha256=sha(ROOT / ARTIFACT), plainAdaptOnly=True, provisioned=False))
     if any((slot / n).exists() for n in ('xdg-data', 'xdg-config', 'xdg-cache')):
         raise ValueError('unexpected XDG state from static transform; retain private, no success inference')
@@ -134,7 +171,8 @@ def main():
       designMain=subprocess.check_output(['git', 'rev-parse', 'origin/main'], cwd=ROOT, text=True).strip(),
       designSha256=hashlib.sha256(design).hexdigest(), originalQualificationSha256=sha(qp), originalCases=joined,
       caddyVersion='2.6.2', caddyBinarySha256=BIN_SHA, staticAdaptCases=rows, originalTestsReplayed=False,
-      javaPassCountAdded=0, measuredCoverageAdded=False, newStaticAdaptCases=2,
+      javaPassCountAdded=0, measuredCoverageAdded=False, staticArtifactSemanticsChecked=2,
+      staticExecutionPassCounted=1, originalIpv4ExecutionPassCounted=False, originalDriverFailurePreserved=True,
       qualifiedLocalCriteria=['WBS-C01:contract', 'WBS-C01:scope'],
       unaccepted=['WBS-C01:quality full fmt/adapt--validate/validate and real TLS/active config/runtime gates remain separate',
                    'canonical historical17 not rebased; no new mixed-source acceptance'],
@@ -151,7 +189,7 @@ def main():
         f.write('\n')
         f.flush()
         os.fsync(f.fileno())
-    print(json.dumps(dict(actualExit=0, manifestSha256=sha(out / 'manifest.json'), originalCases=3, staticAdaptCases=2,
+    print(json.dumps(dict(actualExit=0, manifestSha256=sha(out / 'manifest.json'), originalCases=3, staticArtifactSemanticsChecked=2, staticExecutionPassCounted=1,
       localCriteria=2, qualityComplete=False, acceptedLeafDelta=0)))
 
 

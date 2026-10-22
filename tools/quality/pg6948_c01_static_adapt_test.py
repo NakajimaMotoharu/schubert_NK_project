@@ -1,4 +1,5 @@
 import copy
+import json
 import unittest
 import pg6948_c01_static_adapt as p
 
@@ -18,7 +19,7 @@ class C01StaticAdaptTest(unittest.TestCase):
         server = dict(listen=[listen + ':55160'], automatic_https={'disable_redirects': True},
           routes=[{'handle': [{'handler': 'subroute', 'routes': [{'handle': handlers}]}]}])
         return {'admin': {'disabled': True}, 'apps': {'http': {'servers': {'owned': server}},
-          'pki': {'cas': {'local': {'install_trust': False}}},
+          'pki': {'certificate_authorities': {'local': {'install_trust': False}}},
           'tls': {'automation': {'policies': [{'issuers': [{'module': 'internal'}]}]}}}}
 
     def test_independent_ipv4_ipv6_semantics(self):
@@ -30,7 +31,7 @@ class C01StaticAdaptTest(unittest.TestCase):
         for mutate in (
           lambda x: x['apps']['http']['servers']['owned'].update(listen=[':55160']),
           lambda x: x['admin'].update(disabled=False),
-          lambda x: x['apps']['pki']['cas']['local'].update(install_trust=True),
+          lambda x: x['apps']['pki']['certificate_authorities']['local'].update(install_trust=True),
           lambda x: x['apps']['http']['servers']['owned']['automatic_https'].update(disable_redirects=False),
           lambda x: x['apps'].update(extra={'handler': 'file_server'})):
             value = self.fixture('127.0.0.1')
@@ -58,6 +59,16 @@ class C01StaticAdaptTest(unittest.TestCase):
                 if change == 'issuer' and node.get('module') == 'internal': node['module'] = 'acme'
             with self.assertRaises(ValueError):
                 p.verify_json(value, '127.0.0.1')
+
+    def test_vendor_tag_and_retained_ipv4_output_without_any_execution(self):
+        # Official v2.6.2 pki.go json tag, not Go member CAs or a self-consistent alias.
+        value = self.fixture('127.0.0.1')
+        value['apps']['pki']['cas'] = value['apps']['pki'].pop('certificate_authorities')
+        with self.assertRaises(KeyError):
+            p.verify_json(value, '127.0.0.1')
+        path = p.W / p.SLOT / '1.json'
+        self.assertEqual('28f9a4df19349dc877a1a9765bdd3a4d6615fdb50633d68287b84531416395cf', p.sha(path))
+        p.verify_json(json.loads(path.read_bytes()), '127.0.0.1')
 
 
 if __name__ == '__main__':

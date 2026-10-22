@@ -1,5 +1,9 @@
 # C01 Caddy静的変換・個別criteria仕様結果
 
+是正準備追記：元失敗を82f5d81c5へ保存push。公式tag certificate_authoritiesへ限定是正し、管理fixtureの自己整合だけでなく固定hashの実保存IPv4 JSONも管理で読取り、全独立semantic条件が成功した。管理四/pyflakes0、新CLI実行0。旧IPv4は静的artifact内容の資格だけで、実行exit/time未保存は依然UNKNOWN/実行PASS加点0。
+
+新IPv6はbegin/source/command/input/binary/tool hashを先に保存し、返却直後のactual exit/完了時刻/output hashをsemantic検査前に保存する。未完begin/inputがあれば新起動しない。既exitがあれば同原結果の読取だけで再起動0。raw child exit0だけをPT PASSと書かず、semantic条件を満たした後に初めて当caseの確認結果とする。現時点ではIPv6未実施、BUG1635/YKT1388 OPEN。
+
 ## 初回tool失敗（是正前保存）
 
 pg6948/session5124はIPv4 JSON保存後、verifierのPKI field cas誤認でKeyError/driver1。管理三は誤schema自己整合で成功していたためBUG1635/YKT1388を修正前登録。元driver e24ab242/私有original-driver.py、input f33eb2f491b7cb1de8cb68c5460382870ceaef82622fe1e79330838960026237、JSON28f9a4df19349dc877a1a9765bdd3a4d6615fdb50633d68287b84531416395cfを保全。child zero check通過は制御流上分かるが独立exit/time receipt未保存なのでactual child exit/startはUNKNOWNのまま実行PASSへ加点しない。新static二件PASSは未成立、IPv6はinput作成前で未実行。
