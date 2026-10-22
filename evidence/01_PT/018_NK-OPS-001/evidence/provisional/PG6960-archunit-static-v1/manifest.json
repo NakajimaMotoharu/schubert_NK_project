@@ -1,0 +1,736 @@
+{
+  "F03Accepted": false,
+  "actualExit": 0,
+  "archunitSha256": "6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f",
+  "archunitVersion": "1.4.2",
+  "canaries": [
+    {
+      "expectedViolatedRules": [],
+      "name": "positive",
+      "receipt": {
+        "actualExit": 0,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-positive/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:48.374437+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:48.108475+00:00",
+        "stderr": "003-canary-positive.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "003-canary-positive.stdout.safe.log",
+        "stdoutSha256": "f40655be5913122dbc49293f8797095738d3152b765d9eceaab4444dd34aa6d0"
+      },
+      "result": {
+        "calls": 8,
+        "dependencies": 19,
+        "findings": [],
+        "imported": 7,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 7,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "FRAMEWORK_FENCES"
+      ],
+      "name": "protocol-jdbc",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-protocol-jdbc/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:48.642353+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:48.376753+00:00",
+        "stderr": "004-canary-protocol-jdbc.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "004-canary-protocol-jdbc.stdout.safe.log",
+        "stdoutSha256": "ce3ac76c59874b18dd33bb29d9f4ccc98fa37bb4e20d6aea63978319c9a140af"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.protocol.BadJdbc",
+            "rule": "FRAMEWORK_FENCES",
+            "target": "java.sql.Connection"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 2,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 1,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "FRAMEWORK_FENCES"
+      ],
+      "name": "storage-jdbc",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-storage-jdbc/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:48.910462+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:48.644548+00:00",
+        "stderr": "005-canary-storage-jdbc.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "005-canary-storage-jdbc.stdout.safe.log",
+        "stdoutSha256": "e29dc13d5f124dd2b87ba901723806e63bb0829021518d08cc42ad5664ff1e6a"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.storage.BadJdbc",
+            "rule": "FRAMEWORK_FENCES",
+            "target": "java.sql.Connection"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 2,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 1,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "FRAMEWORK_FENCES"
+      ],
+      "name": "bootstrap-http",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-bootstrap-http/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:49.179417+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:48.913466+00:00",
+        "stderr": "006-canary-bootstrap-http.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "006-canary-bootstrap-http.stdout.safe.log",
+        "stdoutSha256": "9a4eb0326fcd9b3bc8e7198cd64a8310cbd77b78d71e0ca2df6d459fe3bb41d2"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.api.bootstrap.BadHttp",
+            "rule": "FRAMEWORK_FENCES",
+            "target": "com.sun.net.httpserver.HttpServer"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 2,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 1,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "MODULE_EDGES"
+      ],
+      "name": "api-web",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-web/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:49.448496+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:49.182445+00:00",
+        "stderr": "007-canary-api-web.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "007-canary-api-web.stdout.safe.log",
+        "stdoutSha256": "572661fd427bc757c46315421d6010243ca5cfe83360722cea583eaa0c0aeb81"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.api.BadWeb",
+            "rule": "MODULE_EDGES",
+            "target": "dev.codex.schubert.nk.web.Probe"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 3,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 1,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "MODULE_EDGES"
+      ],
+      "name": "web-api",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-web-api/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:49.718359+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:49.451555+00:00",
+        "stderr": "008-canary-web-api.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "008-canary-web-api.stdout.safe.log",
+        "stdoutSha256": "a1e736e319f3f40a6e8611610858b4439a65a2f8b8e7236552d45538851a2915"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.web.BadApi",
+            "rule": "MODULE_EDGES",
+            "target": "dev.codex.schubert.nk.api.Probe"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 2
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 1,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "FRAMEWORK_FENCES"
+      ],
+      "name": "batch-http",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-batch-http/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:49.987630+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:49.721819+00:00",
+        "stderr": "009-canary-batch-http.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "009-canary-batch-http.stdout.safe.log",
+        "stdoutSha256": "4b7617b64bd159f05ffadeac213e7c204c2f8c10bd5bd90a75ae8b54134312ea"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.batch.BadHttp",
+            "rule": "FRAMEWORK_FENCES",
+            "target": "com.sun.net.httpserver.HttpServer"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 2,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 1,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "CONTROLLER_BOUNDARY"
+      ],
+      "name": "controller-jdbc",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-controller-jdbc/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:50.306665+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:49.990475+00:00",
+        "stderr": "010-canary-controller-jdbc.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "010-canary-controller-jdbc.stdout.safe.log",
+        "stdoutSha256": "989b5fa0426ba5ed07220e7628c4ab556eb420f4dbfdb461966d98178075c9f8"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.web.session.BadController",
+            "rule": "CONTROLLER_BOUNDARY",
+            "target": "java.sql.Connection"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 2
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 1,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "REPOSITORY_DIRECTION"
+      ],
+      "name": "repository-upcall",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-repository-upcall/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:50.575830+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:50.309949+00:00",
+        "stderr": "011-canary-repository-upcall.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "011-canary-repository-upcall.stdout.safe.log",
+        "stdoutSha256": "95dd316a15da0a3ccd000bb13eeebc6e630ec85b3c21898bbfa08108a4305e5c"
+      },
+      "result": {
+        "calls": 10,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.api.persistence.BadRepo",
+            "rule": "REPOSITORY_DIRECTION",
+            "target": "dev.codex.schubert.nk.api.application.High"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 3,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 1
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "FRAMEWORK_FENCES"
+      ],
+      "name": "api-mvc",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-api-mvc/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:50.845287+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:50.579065+00:00",
+        "stderr": "012-canary-api-mvc.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "012-canary-api-mvc.stdout.safe.log",
+        "stdoutSha256": "94a12088e46d16ac6ad923b4c8938e01b51a1ff64c11a49f352b8ec47d371937"
+      },
+      "result": {
+        "calls": 10,
+        "dependencies": 24,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.api.BadMvc",
+            "rule": "FRAMEWORK_FENCES",
+            "target": "org.springframework.web.servlet.ModelAndView"
+          }
+        ],
+        "imported": 9,
+        "modules": {
+          "api": 4,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 1
+        },
+        "physical": 9,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 1,
+          "INTERNAL_OWNER": 0,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    },
+    {
+      "expectedViolatedRules": [
+        "INTERNAL_OWNER"
+      ],
+      "name": "unknown-owner",
+      "receipt": {
+        "actualExit": 1,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+          "ModuleDependencyAudit",
+          "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/protocol.jar",
+          "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/storage.jar",
+          "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/bootstrap.jar",
+          "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/api.jar",
+          "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/web.jar",
+          "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/canary-unknown-owner/batch.jar"
+        ],
+        "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+        "endUTC": "2026-10-22T22:12:51.113651+00:00",
+        "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+        "startUTC": "2026-10-22T22:12:50.848167+00:00",
+        "stderr": "013-canary-unknown-owner.stderr.safe.log",
+        "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+        "stdout": "013-canary-unknown-owner.stdout.safe.log",
+        "stdoutSha256": "41018f1edc6b150854c58676ca518469e039cfc88ba412e5717cecf9e6f8b99b"
+      },
+      "result": {
+        "calls": 9,
+        "dependencies": 22,
+        "findings": [
+          {
+            "origin": "dev.codex.schubert.nk.web.BadUnknown",
+            "rule": "INTERNAL_OWNER",
+            "target": "dev.codex.schubert.nk.api.missing.Marker"
+          }
+        ],
+        "imported": 8,
+        "modules": {
+          "api": 2,
+          "batch": 1,
+          "bootstrap": 1,
+          "protocol": 1,
+          "storage": 1,
+          "web": 2
+        },
+        "physical": 8,
+        "rules": {
+          "CONTROLLER_BOUNDARY": 0,
+          "FRAMEWORK_FENCES": 0,
+          "INTERNAL_OWNER": 1,
+          "MODULE_EDGES": 0,
+          "REPOSITORY_DIRECTION": 0
+        },
+        "version": "1.4.2"
+      }
+    }
+  ],
+  "compileReceipt": {
+    "actualExit": 0,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+      "--release",
+      "25",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "-d",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ModuleDependencyAudit.java"
+    ],
+    "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+    "endUTC": "2026-10-22T22:12:47.625062+00:00",
+    "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+    "startUTC": "2026-10-22T22:12:46.857433+00:00",
+    "stderr": "001-tool-compile.stderr.safe.log",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "001-tool-compile.stdout.safe.log",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "completedUTC": "2026-10-22T22:12:52.991503+00:00",
+  "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+  "formalAccepted": false,
+  "interpretation": "ADDITIONAL_ARCHITECTURE_STATIC_CHECK_NOT_PT_PASS_OR_COVERAGE",
+  "javaBinarySha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+  "javacBinarySha256": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1",
+  "originalJarHashes": {
+    "api": "ee18f7ac5f1e6aa783a90308ece381d5bfa55ae21108ca6407cb0d4d52892766",
+    "batch": "74249e08870a73daf48c0ae61703fbc9451ddb4ad39c364c8b8e6ae1f13b2846",
+    "bootstrap": "512af23cee5c5bfab0fe7650ecd25e90c7441e873e461320321021ed1d1fea9c",
+    "protocol": "508e9021e6c5c357d4074cacf1236857995f592649281bd71200f58c7614b30c",
+    "storage": "7fb739552b8d9425006721d1f4935e4b3e4310f1e10040f80e8e0c1ac3f9ef88",
+    "web": "416dc04c05577938aee402020923ef198ff3f2ff9d3dfc2707eebe1176a10afd"
+  },
+  "originalQualificationSha256": "728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731",
+  "originalWholeReplayed": false,
+  "physicalClasses": 1669,
+  "productionMainTestPomChanges": 0,
+  "run": "PG6930-six-v1",
+  "slf4jSha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+  "slf4jVersion": "2.0.18",
+  "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "staticResult": {
+    "receipt": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg6960-archunit-static-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-protocol.jar",
+        "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-storage.jar",
+        "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-bootstrap.jar",
+        "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-api.jar",
+        "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-web.jar",
+        "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg6932-original4222-artifacts-v1/jars/schubert-nk-batch.jar"
+      ],
+      "driverSha256": "0729235dd9e9f3d8db505890f11dcae336563783ad50ed47ca2573a96c2e446e",
+      "endUTC": "2026-10-22T22:12:52.986483+00:00",
+      "programSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+      "startUTC": "2026-10-22T22:12:51.116593+00:00",
+      "stderr": "014-original-six.stderr.safe.log",
+      "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+      "stdout": "014-original-six.stdout.safe.log",
+      "stdoutSha256": "96c0d788eb5b6e3b9f175381d7f86f6f87eb0cc3a48f1cb2eb3fd10704f3a057"
+    },
+    "result": {
+      "calls": 54776,
+      "dependencies": 76823,
+      "findings": [],
+      "imported": 1669,
+      "modules": {
+        "api": 408,
+        "batch": 573,
+        "bootstrap": 117,
+        "protocol": 176,
+        "storage": 80,
+        "web": 315
+      },
+      "physical": 1669,
+      "rules": {
+        "CONTROLLER_BOUNDARY": 0,
+        "FRAMEWORK_FENCES": 0,
+        "INTERNAL_OWNER": 0,
+        "MODULE_EDGES": 0,
+        "REPOSITORY_DIRECTION": 0
+      },
+      "version": "1.4.2"
+    }
+  },
+  "targetClassesInitialized": false,
+  "testsExecuted": 0,
+  "toolSourceSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1",
+  "vmActions": 0
+}

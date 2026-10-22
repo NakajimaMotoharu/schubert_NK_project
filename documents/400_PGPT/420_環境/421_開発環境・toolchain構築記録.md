@@ -1,5 +1,13 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-23 PG6960/F02 ArchUnit1.4.2・原Jar独立静的確認
+
+既SS311§2のArchUnit工程をtool専用として補完（PG-D516/1526）。入手元は固定Maven Central `https://repo.maven.apache.org/maven2/com/tngtech/archunit/archunit/1.4.2/`、公式release https://www.archunit.org/news/release/2026/04/18/release-v1.4.2.html 。core Jarを既私有toolchain `architecture/archunit-1.4.2/` へ新規取得し、公開SHA1と一致・SHA256 `6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f`（4550585byte）。POM SHA256 `05618298545286d697fa6d066f65aebff7f68e8ec88cbf2c3e7d77ce18f26636`、取得receiptは018/provisional/PG6960-archunit-toolchain-v1/manifest.json。vendor POMはSLF4J2.0.17を宣言するが、toolは既承認・導入済み同APIの2.0.18だけを明示classpathへ置く（SHA25644508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55）。Production POM/runtime/GAV変更0、binaryはGit非格納。licenseは取得POMのApache2.0/BSDを記録。
+
+再現：既Java25.0.4で `PYTHONPATH=tools/quality:tools/quality/vm/050_s1:<既pyflakes-runtime> python3 -B tools/quality/pg6960_archunit.py`。同一成功slotはreceipt/hash読取のみ、未完beginから二重起動しない。新しいsourceへ適用する場合は別の着手/原Jar資格/未使用slotを先に用意する。原PG6930の六Jar全1669class hashを照合し、ArchUnitのclasspath不足型解決を無効化したbytecode importerだけを使用。対象classのload/reflection/init/entry実行0。全物理所属・全1669import・5依存境界rule、手書正1/負10canaryとinitializer非実行を確認する。JDK javac lint/Werror compile0、Production PT再演/新PT/coverage/VM操作0。
+
+当原static終了0、全1669class/76823依存/54776call・rule違反0、正負11canary期待一致。原結果SHA2567f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f。各Java childのbegin/exit/time/stdout/stderr hashをsemantic判定前保存。SLF4Jのprovider未指定/NOP通知3行は原stderrへ保持し、隠蔽やstatic違反扱い0。F03 Root11の意味審査・実Root/VM/native等の成功を本追加staticから主張しない。F02個別受入は別の全criteria/原build/toolchain/終了照合後とする。
+
 ## 2026-10-19 隔離DB観測の明確化（BUG1440/YKT1204）
 
 018/1091を環境区分訂正の正本追補とする。共通選択は一時PostgreSQL18実clusterでDDL/Flyway/Hikari接続を実行するが、原本/VM業務DBへの操作ではない。現在probeは18.6（Ubuntu18.6-0ubuntu0.26.04.1）、postgres SHA30a38e0516ec1bde4b8ca710cf28ba51ee78bd004cabbf3107e7a52d5414a64a。旧run開始時binary identity欠測はnullのまま保ち、遡及認定しない。pg5148の将来開始manifestへ設定binary version/SHAを追加、独立管理二件/九tool lint0、既成功Maven再演/導入/原本DB操作0。
