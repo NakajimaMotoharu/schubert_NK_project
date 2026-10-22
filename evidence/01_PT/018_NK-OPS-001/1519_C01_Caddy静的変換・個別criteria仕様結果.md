@@ -1,5 +1,15 @@
 # C01 Caddy静的変換・個別criteria仕様結果
 
+## 是正後の実結果（2026-10-22）
+
+修正2b7659218をpushclean後、6948を一回実施。元IPv4は再実行せず固定JSONのsemanticだけを読取検証、未実施IPv6のplain adaptは11:10:18.078910～11:10:18.102458 UTC・actual exit0、before/exit/input/outputを保存してから全独立semantic成功。tool SHAは修正commit blobと一致。公開 `evidence/provisional/PG6948-c01-static-adapt-v1/manifest.json` SHA256=7df814760d8a297d08c55f3623d5c6db8de56e31ef37004668dc1087c8323c4b、元v6終了receipt=8f261bc086ad652a9a027665c255eb8f87d6eb06dcc05809e2509f5675e7ea2a、begin/exit原byteも同folderへ保存した。
+
+別のread-only postは元receiptのsource/command/input-output/tool commit hash、public/private JSON同値、両出力semanticを照合してexit0。管理四/pyflakes0に加えて実vendor schemaと未実施v6の真正終了まで確認できたためBUG1635/YKT1388を当tool scope CLOSED。初回driver1・旧v4 child exit/time未保存はそのままで、未知をPASSへ変換していない。
+
+数量は当元Java3件の参照（再実行0/加点0）、静的artifact内容検証2件、direct exit記録付き新static実行1件、local contract/scope二criteria根拠である。2件の新規実行PASSと表現しない。XDG state生成無し、CA/keyのprovisionやdaemon/socket起動の命令は発行していない。WBS-C01 qualityは全fmt/validate/実効/TLS等が残るので未完、canonical受入加算0/正式1964/53/工数null/PTALT0を維持する。
+
+両stderrの警告は各4件：explicit Forwarded header冗長のvendor注意3件＋format差1件、未分類0。原stderrは自己slot private保持/publicはhash/有無だけ。SSがpeerからの明示再構成を指定しているため、注意を消す目的でheader設定を削らない。format/配備validateの未達を黙って合格扱いせず、rendered配布物の後続品質として記録する。plain adaptの成功をvalidate/provision・実公開入口の成功にしない。
+
 是正準備追記：元失敗を82f5d81c5へ保存push。公式tag certificate_authoritiesへ限定是正し、管理fixtureの自己整合だけでなく固定hashの実保存IPv4 JSONも管理で読取り、全独立semantic条件が成功した。管理四/pyflakes0、新CLI実行0。旧IPv4は静的artifact内容の資格だけで、実行exit/time未保存は依然UNKNOWN/実行PASS加点0。
 
 新IPv6はbegin/source/command/input/binary/tool hashを先に保存し、返却直後のactual exit/完了時刻/output hashをsemantic検査前に保存する。未完begin/inputがあれば新起動しない。既exitがあれば同原結果の読取だけで再起動0。raw child exit0だけをPT PASSと書かず、semantic条件を満たした後に初めて当caseの確認結果とする。現時点ではIPv6未実施、BUG1635/YKT1388 OPEN。
