@@ -21,7 +21,7 @@ MAINS={
  'src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java'}
 TARGETS={'api':['api/messaging/config/ApiBrokerContexts','api/messaging/config/ArtemisConnectionFactoryProvider','api/messaging/inbound/ApiMessagingRuntime'],
          'web':['web/messaging/WebBrokerContexts']}
-SLOTS={'red-api':'pg6698-broker-api-red-v2','red-web':'pg6700-broker-web-red-v2','green':'pg6710-broker-parent-green-v3'}
+SLOTS={'red-api':'pg6698-broker-api-red-v2','red-web':'pg6700-broker-web-red-v2','green':'pg6722-broker-observer-green-v1'}
 EXPECTED={'red-api':(17,9),'red-web':(15,8),'green':(127,33)}
 
 
@@ -50,6 +50,13 @@ def guard_source(source,phase):
     if phase=='green':
         reds=[json.loads((W/SLOTS[p]/'begin.safe.json').read_bytes())['source'] for p in ('red-api','red-web')]
         if reds[0]!=reds[1] or subprocess.check_output(['git','diff',reds[0],source,'--',':(glob)src/*/src/test/**'],cwd=ROOT):raise ValueError('both red sources and all Test bytes fixed')
+        proof=json.loads((W/'pg6722-observer-expansion-proof-v1/manifest.safe.json').read_bytes())
+        exact=subprocess.check_output(['git','rev-parse',source],cwd=ROOT,text=True).strip()
+        if not(proof['actualExit']==0 and proof['source']==exact and len(proof['rows'])==2
+               and proof['classification']=='SOURCE_EQUIVALENCE_NOT_TEST_ORACLE'
+               and proof['toolSha256']==sha(ROOT/'tools/quality/pg6722_broker_noop_equivalence.py')
+               and all(row['sourceSha256']==sha(ROOT/row['path']) for row in proof['rows'])):
+            raise ValueError('same committed source ordinary observer expansion proof first')
 
 
 def read_red(phase):
@@ -80,7 +87,7 @@ def qualify_green():
       '8e52123141aa8acd8cfa9da8e46966824dbb6bafa8959118ebc1870fff6989f5',
       W/'pg6686-consumer-cleanup-qualification-v1/manifest.safe.json',
       W/'pg6686-consumer-cleanup-qualification-v1/findings.safe.json',
-      'pg6712-broker-parent-qualification-v3','PG6712-broker-parent-qualification-v3',expected_phase_exits=(0,0,0))
+      'pg6724-broker-observer-qualification-v1','PG6724-broker-observer-qualification-v1',expected_phase_exits=(0,0,0))
 
 
 def main():

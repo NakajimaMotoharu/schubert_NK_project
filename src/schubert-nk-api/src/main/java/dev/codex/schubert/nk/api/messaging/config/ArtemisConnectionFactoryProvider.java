@@ -25,6 +25,8 @@ public enum ArtemisConnectionFactoryProvider {
   private static final int MIB = 1024 * 1024;
   private static final Pattern LOOPBACK_CORE =
       Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
+  // Ordinary failure is still propagated after this stateless observer returns. PG-D500.
+  private static final Consumer<Throwable> ORDINARY_UNCONFIRMED = ignored -> {};
 
   /** Creates a caller-owned factory with the approved reconnect and flow-control policy. */
   public ActiveMQConnectionFactory create(ConsumerProfile profile) {
@@ -60,7 +62,7 @@ public enum ArtemisConnectionFactoryProvider {
                 3_000),
             "schubert-nk-core");
     Consumer<Throwable> onUnconfirmed =
-        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ORDINARY_UNCONFIRMED;
     return configureOwned(
         profile, () -> new ActiveMQConnectionFactory(false, connector), onUnconfirmed);
   }
@@ -68,7 +70,7 @@ public enum ArtemisConnectionFactoryProvider {
   /** SSC315/PG-D464: all input ports precede acquisition; failed setup owns one close. */
   static ActiveMQConnectionFactory configureOwned(
       ConsumerProfile profile, Supplier<ActiveMQConnectionFactory> acquire) {
-    return configureOwned(profile, acquire, ignored -> {});
+    return configureOwned(profile, acquire, ORDINARY_UNCONFIRMED);
   }
 
   static ActiveMQConnectionFactory configureOwned(

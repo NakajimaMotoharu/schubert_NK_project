@@ -32,6 +32,8 @@ public final class WebBrokerContexts implements AutoCloseable {
   private static final String UNAVAILABLE = "Web broker context unavailable";
   private static final Pattern LOOPBACK_CORE =
       Pattern.compile("tcp://127\\.0\\.0\\.1:([1-9][0-9]{0,4})");
+  // One private ordinary observer; UNKNOWN retains its separate nonreturn policy. PG-D500.
+  private static final Consumer<Throwable> ORDINARY_UNCONFIRMED = ignored -> {};
 
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
@@ -59,7 +61,7 @@ public final class WebBrokerContexts implements AutoCloseable {
   private WebBrokerContexts(Supplier<char[]> passwords, String endpoint, boolean retainUnknown) {
     this.passwords = Objects.requireNonNull(passwords, "password source");
     this.onUnconfirmed =
-        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ORDINARY_UNCONFIRMED;
     // SSC311: owner/lock/password port are complete before acquiring the provider resource.
     var configured = newFactory(endpoint, onUnconfirmed);
     this.factory = configured;
@@ -67,7 +69,7 @@ public final class WebBrokerContexts implements AutoCloseable {
   }
 
   static ActiveMQConnectionFactory newFactory(String endpoint) {
-    return newFactory(endpoint, ignored -> {});
+    return newFactory(endpoint, ORDINARY_UNCONFIRMED);
   }
 
   private static ActiveMQConnectionFactory newFactory(
@@ -94,7 +96,7 @@ public final class WebBrokerContexts implements AutoCloseable {
 
   /** SSC311: all ports precede acquisition; failed configuration owns one close attempt. */
   static ActiveMQConnectionFactory configureOwned(Supplier<ActiveMQConnectionFactory> acquire) {
-    return configureOwned(acquire, ignored -> {});
+    return configureOwned(acquire, ORDINARY_UNCONFIRMED);
   }
 
   static ActiveMQConnectionFactory configureOwned(
@@ -145,7 +147,7 @@ public final class WebBrokerContexts implements AutoCloseable {
     this.factory = Objects.requireNonNull(factory, "JMS factory");
     this.owner = Objects.requireNonNull(owner, "JMS owner");
     this.onUnconfirmed =
-        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ignored -> {};
+        retainUnknown ? ServiceProcessResources.unknownReleasePolicy() : ORDINARY_UNCONFIRMED;
   }
 
   public JmsContextFactory contexts() {
