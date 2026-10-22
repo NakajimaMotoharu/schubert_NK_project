@@ -1,0 +1,22 @@
+# Transfer4197 原結果・同source品質
+
+1483/1484、PG-D503/BUG1612/YKT1365。Mainは7b6b3304d、Testを含む固定source d549f8855fe1733bdb67543e310048dc271a8a56。群1696 K01.01予算.3/1/3pp、1693 P017-09予算.5/1.5/4ppを変更せず、正式1964/53・個別17/190・工数null・原/v4を増減しない。
+
+## 元終端・独立原資格
+
+元PG6768-six-v1/session98092/operator985776b6f、UTC2026-10-22T02:30:36.010656～02:59:14.416893、1718.406237秒、actualExit=mavenExit0。4197件/646suite/FESflakyNotRun0、全851Source/1669物理Main、六format-beforePT/compile-null/Werror/SpotBugs0、sourceInputsUnchanged=true。archive12937af328f1aa1feb52c1a39d844a791a76f0f6b955f755d45b6c5642703c3a、log9a0f390284e3082847e998fbb130ee58ce0e62a637f462ba630223cb9907095a、元manifest1a66a85477a06cb826bc974395e6a6a0b25cf2659ebe830db124f7b344bb88bc。
+
+原6770/session33617真正0、Q`PG6768-current4197-cases/qualification.json` b4b22a3e1d8d2c1d0a433c0fb3fa3fb2a77c9aed795cd56e64c8f5947d7122e9、cases ec82f71d9b60937c3cd0305245575ef0bc02e9bb54468c8b48d1ea568c507494、payload595d5dee409d17641d971ff54e21d37599fa6f7fc96c38bdcc6a8ab7f088d906、inpute1d9dfe0652e3f9c4cb5ec2b3718cb76ebb1d07c512a8df9c38e43bf63ba7dee。六原Jar/XML/coverage・全case source/identity・851Main/1669physical・二追加Io/NioIoを原archiveへ結合。旧4189/選択27の算術加算を合格根拠にせず、元全XMLを確認。全体/原reader再演0。
+
+Transfer outerの実四counter L128/M23/C1/B62各miss0。旧同class残4L/10Bは解消。新Io宣言のcounter欠落/branchlessNioIoのbranch欠落は6767の原bytecode適用性として扱い、100へ補完しない。元Counts/Outcomeのsource token/JVM同値と独立八input/資源後条件を1483/1484/6766/6767へ追跡する。
+
+## 同source品質
+
+- 6772 SQL115元XML/source join真正0、SHA7fb4f67b520baf557e31fb5ec27977e94de0c2a64ea1d81672fba1e3fcc8be83。
+- 6774 raw1405/1404exact source pairs真正0、SHA35d0612faf698480c5258930fcab172278e7ad2f6584d3c36a5a4759e1ec42bc。required1089/context275/falsePositive30/未review Root11。新一件year1下限は承認済みcalendar/既3048002/独立grammarを根拠に個別review。raw削除・抑制0、F03は未受入。
+- 6776原Jar/JVM58guard/58path、javap25.0.4、真正0、SHA4f5bedcb52d88babbf8fbb639a695287736656b5379f0d21e0e8d55b71eb9e49。build/PT追加0。
+- 管理八成功（6778三/6772二/6768三）。before WBS監査は旧bad7候補の物理source不一致で終了1、期待されたstale検出を成功へ変換しない。publish測定4b4fb4fa95342613f34495e484debfda3b038c97013d715b0cdf591f25135210、global miss L3474/M675/C38/B699、global100=false。
+
+stage/apply/after監査/reportは未実行、当1612/1365はtrace完了までOPEN。新source native/実業務Root/VM/Unit/原本Backup/DB/鍵/intent/permitは全HOLD、PTALT代替0/QA051final保留/ITST未完了。通常区切りでは停止せず、trace後1485の独立ordinary管理停止結果PG/PTへ進む。
+
+利用枠最後fresh used76/残24/reset1793082864・短期null/券0。途中一秒差markerは丸めず、共有消費と専有費/実N/Tは別。usage79afdd53f7f0b3f8258c1e6828f43c91f0812a7f74823ff6e4f44d35afa4807f（12:01:39 JST、前10:49:44）explicit record0、N/T=null。欠測を0にしない。
