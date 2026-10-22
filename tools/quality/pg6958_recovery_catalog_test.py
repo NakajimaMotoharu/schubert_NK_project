@@ -58,15 +58,26 @@ class RecoveryCatalogTest(unittest.TestCase):
             with self.subTest(value=changed), self.assertRaises(ValueError):
                 subject.verify_register(changed)
 
-    def test_interface_without_actual_counter_requires_explicit_contract(self):
+    def test_interface_empty_counter_requires_physical_metadata_not_missing_key(self):
         path = 'src/schubert-nk-protocol/src/main/java/p/LayoutPayload.java'
-        with patch.object(subject, 'ROOT') as root:
-            root.__truediv__.return_value.read_text.return_value = 'public sealed interface LayoutPayload {}'
-            result = subject.family_counters(path, dict(allActualClassCounters={}))
-            self.assertEqual('ABSTRACT_INTERFACE_NO_EXECUTABLE_METHOD', result['applicability'])
-            root.__truediv__.return_value.read_text.return_value = 'public class LayoutPayload {}'
+        q = dict(allActualClassCounters={'protocol:p/LayoutPayload.class':{}})
+        with self.assertRaises(ValueError):
+            subject.family_counters(path, q)
+        with patch.object(subject, 'empty_counter_reason', return_value={'kind':'ABSTRACT_INTERFACE_NO_CODE'}):
+            result = subject.family_counters(path, q)
+            self.assertEqual({}, result['counters']['protocol:p/LayoutPayload.class'])
+            self.assertEqual('ABSTRACT_INTERFACE_NO_CODE', result['emptyCounterApplicability']['protocol:p/LayoutPayload.class']['kind'])
+
+    def test_synthetic_empty_is_kept_but_cannot_replace_an_executable_outer(self):
+        path = 'src/schubert-nk-protocol/src/main/java/p/Value.java'
+        empty = {'protocol:p/Value$1.class':{}}
+        with patch.object(subject, 'empty_counter_reason', return_value={'kind':'COMPILER_ENUM_SWITCH_HELPER'}):
             with self.assertRaises(ValueError):
-                subject.family_counters(path, dict(allActualClassCounters={}))
+                subject.family_counters(path, dict(allActualClassCounters=empty))
+            counter = {k:dict(missed=0,covered=1) for k in ('LINE','METHOD','CLASS','BRANCH')}
+            result = subject.family_counters(path, dict(allActualClassCounters={**empty,'protocol:p/Value.class':counter}))
+            self.assertEqual({}, result['counters']['protocol:p/Value$1.class'])
+            self.assertEqual(counter, result['counters']['protocol:p/Value.class'])
 
 
 if __name__ == '__main__':

@@ -1,5 +1,4 @@
 # Artemis物理構成・JMS設定設計
-
 ## SSC334 ordinary broker/親runtimeのcatalog・factory secondary（2026-10-22）
 
 BUG1604/YKT1357・1606/YKT1359。ApiMessagingRuntimeの最終startup/close wrapper前、API/Web brokerのpassword supplier/createContext/closeのfixed catalog前では、既API Temp/Web Startupのpure finite graph口でcause/suppressed/JMS linked/SQL nextを分類してから通常診断へ縮退する。provider text/causeを新fixed catalogへ持ち込まず、非fatal時の既message/cause/suppressed契約を保つ。borrowed input copyはcreateContext失敗/分類Errorでも既finallyでwipe、copy取得前失敗を取得済と推定せず、context取得失敗からcaller-owned factoryを勝手にcloseしない。
@@ -15,6 +14,7 @@ BUG1604/YKT1357。API Sync/WebLog/Questionのstartup通知・cleanupとSync複�
 Sync multi-closeは各失敗graphのErrorを遅延捕捉し、残contextのcloseを継続する。最初の直接Errorを含む既選択表と、成功済contextのphaseは保持し、再確認close時に成功phaseを再closeしない。分類を早期throwする共通attachmentへ盲目的に置換しない。全close試行後のonUnconfirmed引渡し・既非帰還UNKNOWNと所有を維持し、そのcallbackが正常returnした場合だけ後段のfatal選択・throwへ進む。UNKNOWNを回避して次工程へ移す変更はしない。
 
 raw provider graphはprivate一時scope/既所有者の障害引渡しに限り、catalog/log/公開JSONへ追加保存しない。登録配送SSC332の確認済rollback/API通知後return/Web同一Error再throw、正常業務/role/SQL/ACK/commit/再送backoff/上限・Unit/親期限は不変更。実VM/current/Root/cohort/鍵/intent/permit/nativeの保留を、このordinary内部契約から解除しない。
+
 
 ## SSC332 ordinary consumerのfatal graphとWeb返信rollback実証（2026-10-22）
 

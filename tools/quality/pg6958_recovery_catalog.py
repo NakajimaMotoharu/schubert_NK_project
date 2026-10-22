@@ -81,15 +81,45 @@ def family_counters(path, q):
     name = path.split('/src/main/java/')[1][:-5]
     rows = {k: v for k, v in q['allActualClassCounters'].items()
             if k == module + ':' + name + '.class' or k.startswith(module + ':' + name + '$')}
-    if not rows:
-        require(path.endswith('/LayoutPayload.java') and 'sealed interface LayoutPayload' in (ROOT / path).read_text(),
-                'only explicit nonexecutable interface; never infer missing coverage as100')
-        return dict(applicability='ABSTRACT_INTERFACE_NO_EXECUTABLE_METHOD', counters={})
-    for counter in rows.values():
+    require(rows, 'physical/coverage family must be present, no inferred coverage')
+    not_applicable = {k: empty_counter_reason(k, q) for k, v in rows.items() if not v}
+    executable = [v for v in rows.values() if v]
+    require(executable or (len(rows) == 1 and next(iter(not_applicable.values()))['kind'] == 'ABSTRACT_INTERFACE_NO_CODE'),
+            'real executable family or independently verified declaration')
+    for counter in executable:
         require(all(k in TYPES and c['missed'] == 0 for k, c in counter.items()), 'all actual family counters missed0')
         require(all(counter[k]['covered'] > 0 for k in ('LINE', 'METHOD', 'CLASS')), 'positive real executable counters')
     return dict(applicability='ACTUAL_ORIGINAL_XML_COUNTERS', counters=rows,
+                emptyCounterApplicability=not_applicable,
                 absentCounters='NOT_APPLICABLE_NOT_SYNTHESIZED')
+
+
+def empty_counter_reason(key, q):
+    allowed = {
+      'dev/codex/schubert/nk/protocol/layout/FieldDefinition$1.class':'COMPILER_ENUM_SWITCH_HELPER',
+      'dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1.class':'COMPILER_ENUM_SWITCH_HELPER',
+      'dev/codex/schubert/nk/protocol/layout/FieldValue.class':'ABSTRACT_INTERFACE_NO_CODE',
+      'dev/codex/schubert/nk/protocol/layout/LayoutPayload.class':'ABSTRACT_INTERFACE_NO_CODE'}
+    module, name = key.split(':', 1)
+    require(module == 'protocol' and name in allowed and q['allActualClassCounters'][key] == {},
+            'only four explicit original empty-counter classes, never arbitrary omission')
+    jar = W / 'pg6932-original4222-artifacts-v1/jars/schubert-nk-protocol.jar'
+    with zipfile.ZipFile(jar) as archive:
+        digest = hashlib.sha256(archive.read(name)).hexdigest()
+    require(digest == q['allPhysicalMainSha256'][key], 'actual original physical class bytes')
+    javap = ROOT.parent / 'toolchain/jdk-25.0.4/bin/javap'
+    raw = subprocess.check_output([str(javap), '-v', '-p', '-classpath', str(jar), name[:-6].replace('/', '.')], text=True)
+    flags = next((s.strip() for s in raw.splitlines() if s.strip().startswith('flags:')), '')
+    kind = allowed[name]
+    if kind == 'ABSTRACT_INTERFACE_NO_CODE':
+        require('ACC_INTERFACE' in flags and 'ACC_ABSTRACT' in flags and 'Code:' not in raw,
+                'actual interface must have no executable Code attribute')
+    else:
+        require('ACC_SYNTHETIC' in flags and 'static {};' in raw,
+                'only actual compiler synthetic switch-table initializer')
+    return dict(kind=kind, actualClassSha256=digest, originalCounter={}, javapExit=0,
+                classFlags=flags, javapOutputSha256=hashlib.sha256(raw.encode()).hexdigest(),
+                coverage100Claim=False, exclusionAdded=False)
 
 
 def canonical_fixtures():
