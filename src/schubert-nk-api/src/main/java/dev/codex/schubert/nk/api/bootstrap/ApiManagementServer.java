@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -58,17 +59,19 @@ final class ApiManagementServer implements AutoCloseable {
       Map<String, String> information, BooleanSupplier healthy, int port, Factory factory)
       throws IOException {
     var cleanupDiagnostic = new IllegalStateException(STOP_UNCONFIRMED);
+    var closing = Optional.<IllegalStateException>empty();
     var result = bind(information, healthy, port, factory);
     try {
       result.start();
       return result;
     } catch (RuntimeException | Error failure) {
       try {
-        result.close();
+        closing = result.stopFailure(CLOSE_TIMEOUT);
       } catch (RuntimeException | Error unconfirmed) {
         if (unconfirmed instanceof Error && !(failure instanceof Error)) throw unconfirmed;
         if (unconfirmed != failure) failure.addSuppressed(cleanupDiagnostic);
       }
+      closing.ifPresent(ignored -> failure.addSuppressed(cleanupDiagnostic));
       throw failure;
     }
   }
@@ -203,6 +206,12 @@ final class ApiManagementServer implements AutoCloseable {
 
   /** SSC313/PG-D462/PT-API-STOP001..004: requested stop is not confirmed termination. */
   void closeWithin(Duration remaining) {
+    var failure = stopFailure(remaining);
+    if (failure.isPresent()) throw failure.orElseThrow();
+  }
+
+  // PG-D506: ordinary close throws at its boundary; startup consumes the same fixed result.
+  private Optional<IllegalStateException> stopFailure(Duration remaining) {
     Objects.requireNonNull(remaining, "API management stop budget");
     if (remaining.isNegative() || remaining.compareTo(CLOSE_TIMEOUT) > 0)
       throw new IllegalArgumentException("invalid API stop budget");
@@ -214,13 +223,13 @@ final class ApiManagementServer implements AutoCloseable {
     try {
       try {
         if (!stopLock.tryLock(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
-          throw new IllegalStateException(STOP_UNCONFIRMED);
+          return Optional.of(new IllegalStateException(STOP_UNCONFIRMED));
       } catch (InterruptedException notification) {
         Thread.currentThread().interrupt();
-        throw new IllegalStateException(STOP_UNCONFIRMED);
+        return Optional.of(new IllegalStateException(STOP_UNCONFIRMED));
       }
       try {
-        if (closed) return;
+        if (closed) return Optional.empty();
         if (!serverStopped) {
           server.stop(0);
           // SSC317: unstarted JDK stop can return with a bound selector/socket retained.
@@ -230,13 +239,14 @@ final class ApiManagementServer implements AutoCloseable {
         try {
           if (!executor.awaitTermination(
               Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS))
-            throw new IllegalStateException(STOP_UNCONFIRMED);
+            return Optional.of(new IllegalStateException(STOP_UNCONFIRMED));
         } catch (InterruptedException notification) {
           Thread.currentThread().interrupt();
-          throw new IllegalStateException(STOP_UNCONFIRMED);
+          return Optional.of(new IllegalStateException(STOP_UNCONFIRMED));
         }
-        if (!started.get()) throw new IllegalStateException(STOP_UNCONFIRMED);
+        if (!started.get()) return Optional.of(new IllegalStateException(STOP_UNCONFIRMED));
         closed = true;
+        return Optional.empty();
       } finally {
         stopLock.unlock();
       }
