@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.DateTimeException;
@@ -18,20 +19,49 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Actual two-level retained Transfer cleanup. Never opens caller paths or recursively deletes.
  * Parent authenticates fixed root, M/A, dedicated DB advisory, stopped applications and total
  * budget through every guard. NK-BAT-001/FIL006/OPS009/UI237/251/SS333§12/341; SSC117/118;
  * PT-OPS-TRANSFER001..003. This file result alone is not a durable DB terminal or startup permit.
+ * PG-D503/1483: read-only IO fault contracts and PT-OPS-TRANSFER-IO-001..008; admission unchanged.
  */
 @NullMarked
 final class TransferCleanup {
   @FunctionalInterface
   interface Guard {
     void verify() throws IOException;
+  }
+
+  /** Borrowed read-only port; held paths and all mutation remain with the existing FD owner. */
+  interface Io {
+    @Nullable Map<String, Object> metadata(Path held) throws IOException;
+
+    @Nullable String filesystem(Path held) throws IOException;
+
+    @Nullable DirectoryStream<Path> openNames(Path held) throws IOException;
+  }
+
+  static final class NioIo implements Io {
+    @Override
+    public Map<String, Object> metadata(Path held) throws IOException {
+      return Files.readAttributes(held, "unix:*");
+    }
+
+    @Override
+    public String filesystem(Path held) throws IOException {
+      return Files.getFileStore(held).type();
+    }
+
+    @Override
+    public DirectoryStream<Path> openNames(Path held) throws IOException {
+      return Files.newDirectoryStream(held);
+    }
   }
 
   record Outcome(long target, long success, long failure, long retained, long bytes) {
@@ -75,12 +105,24 @@ final class TransferCleanup {
   private final long uid;
   private final long gid;
   private final Guard guard;
+  private final Io io;
 
   TransferCleanup(
       OwnedTransferDirectory root, InodeSecurityCalls security, long uid, long gid, Guard guard) {
+    this(root, security, uid, gid, guard, new NioIo());
+  }
+
+  TransferCleanup(
+      OwnedTransferDirectory root,
+      InodeSecurityCalls security,
+      long uid,
+      long gid,
+      Guard guard,
+      Io io) {
     this.root = Objects.requireNonNull(root, "retained fixed Transfer root");
     this.security = Objects.requireNonNull(security, "inode security");
     this.guard = Objects.requireNonNull(guard, "same owner/budget/advisory/application gate");
+    this.io = Objects.requireNonNull(io, "transfer read IO");
     if (uid < 1 || uid > 4294967294L || gid < 1 || gid > 4294967294L)
       throw new IllegalArgumentException("transfer identity invalid");
     this.uid = uid;
@@ -101,7 +143,8 @@ final class TransferCleanup {
           continue;
         }
         date = LocalDate.parse(name, DATE);
-        if (date.getYear() < 1 || date.getYear() > 9999) {
+        // Eight ASCII digits and adjacent strict uuuu/MM/dd already bound the year to 0..9999.
+        if (date.getYear() < 1) {
           counts.retained();
           continue;
         }
@@ -192,7 +235,7 @@ final class TransferCleanup {
   }
 
   private Metadata inspect(Path held, boolean directory, long device) throws IOException {
-    Metadata m = EnvironmentInodePolicy.metadata(Files.readAttributes(held, "unix:*"));
+    Metadata m = EnvironmentInodePolicy.metadata(io.metadata(held));
     require(
         m.mode() == (directory ? 0x41e8 : 0x81a0)
             && m.uid() == uid
@@ -202,18 +245,17 @@ final class TransferCleanup {
             && (device == -1 || m.device() == device));
     byte[] acl = security.accessAcl(held, 44);
     require(acl != null && acl.length == 0 && !security.readOnlyFilesystem(held));
+    String filesystem = io.filesystem(held);
     require(
-        List.of("ext2", "ext3", "ext4", "xfs", "btrfs", "tmpfs")
-            .contains(Files.getFileStore(held).type()));
+        filesystem != null
+            && List.of("ext2", "ext3", "ext4", "xfs", "btrfs", "tmpfs").contains(filesystem));
     return m;
   }
 
   private static boolean sameDirectory(Metadata first, Metadata next) {
-    return first.device() == next.device()
-        && first.inode() == next.inode()
-        && first.uid() == next.uid()
-        && first.gid() == next.gid()
-        && first.mode() == next.mode();
+    // Each operand is directory-admitted by inspect with the fixed UID/GID/mode/device.
+    // Keep fresh admission at ALL five callers; only inode is not fixed by that admission.
+    return first.inode() == next.inode();
   }
 
   private static boolean absent(Path path) throws IOException {
@@ -225,13 +267,15 @@ final class TransferCleanup {
     }
   }
 
-  private static List<String> names(OwnedTransferDirectory directory) throws IOException {
+  private List<String> names(OwnedTransferDirectory directory) throws IOException {
     return directory.atDirectory(
         path -> {
           var result = new ArrayList<String>();
-          try (var entries = Files.newDirectoryStream(path)) {
+          var opened = io.openNames(path);
+          if (opened == null) throw new IOException("transfer enumeration unavailable");
+          try (var entries = opened) {
             for (Path entry : entries) {
-              Path name = entry.getFileName();
+              Path name = entry == null ? null : entry.getFileName();
               if (name == null) throw new IOException("transfer entry invalid");
               result.add(name.toString());
             }
