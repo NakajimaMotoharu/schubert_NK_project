@@ -156,8 +156,12 @@ public final class GateCli {
     Path pgData = pathProperty("chr.pgData");
     Path pgLog = pathProperty("chr.pgLog");
     Path pgSocket = pathProperty("chr.pgSocket");
+    Path logParent = pgLog.getParent();
+    if (logParent == null) {
+      throw new IllegalArgumentException("chr.pgLog must name a file below a directory");
+    }
     Files.createDirectories(runtimeRoot);
-    Files.createDirectories(pgLog.getParent());
+    Files.createDirectories(logParent);
     Files.createDirectories(pgSocket);
 
     List<String> failures = new ArrayList<>();
@@ -380,6 +384,9 @@ public final class GateCli {
   }
 
   static void promoteCurrent(Path projectRoot, Path sourceRun, Path baseline) throws Exception {
+    if (sourceRun == null) throw new IllegalArgumentException("sourceRun must name a run directory");
+    Path runName = sourceRun.getFileName();
+    if (runName == null) throw new IllegalArgumentException("sourceRun must name a run directory");
     String gateCommit = System.getProperty("chr.gateCommit", "");
     if (!gateCommit.matches("[0-9a-f]{7,40}")) {
       throw new IllegalArgumentException(
@@ -412,7 +419,7 @@ public final class GateCli {
     Map<String, Object> manifest = new LinkedHashMap<>();
     manifest.put("schemaVersion", 2);
     manifest.put("target", "current");
-    manifest.put("sourceRun", sourceRun.getFileName().toString());
+    manifest.put("sourceRun", runName.toString());
     manifest.put("caseCount", caseIds(sourceRun.resolve("artifacts")).size());
     manifest.put(
         "screenshotFileCount", regularFiles(sourceRun.resolve("screenshots"), path -> true).size());
@@ -545,13 +552,15 @@ public final class GateCli {
   static void writeJson(Path output, Object value) throws IOException {
     if (output == null) throw new IllegalArgumentException("output is required");
     Path normalized = output.toAbsolutePath().normalize();
+    Path parent = normalized.getParent();
+    if (parent == null) throw new IllegalArgumentException("output must name a file below a directory");
     if (!ACTIVE_OUTPUTS.add(normalized)) {
       throw new IllegalStateException(
           "concurrent write to the same output is not allowed: " + normalized);
     }
     Path temporary = normalized.resolveSibling(normalized.getFileName() + ".part");
     try {
-      Files.createDirectories(normalized.getParent());
+      Files.createDirectories(parent);
       JSON.writeValue(temporary.toFile(), value);
       Files.move(
           temporary,

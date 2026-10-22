@@ -383,6 +383,24 @@ class GateCliTest {
   }
 
   @Test
+  @org.junit.jupiter.api.DisplayName("PT-CHR-PATH-003 unnamed source run rejected before IO")
+  void promotionRejectsNullAndUnnamedSourceBeforeAnyIo() throws Exception {
+    Path baseline = temporaryDirectory.resolve("not-created-baseline");
+    withProperties(
+        Map.of("chr.gateCommit", "abcdef1"),
+        () -> {
+          for (Path invalid : new Path[] {null, Path.of("/")}) {
+            IllegalArgumentException error =
+                assertThrows(
+                    IllegalArgumentException.class,
+                    () -> GateCli.promoteCurrent(SOURCE_ROOT, invalid, baseline));
+            assertEquals("sourceRun must name a run directory", error.getMessage());
+            assertFalse(Files.exists(baseline));
+          }
+        });
+  }
+
+  @Test
   void baselinePromotionIsImmutableCommitBoundAndSymlinkSafe() throws Exception {
     Path sourceRun =
         SOURCE_ROOT
