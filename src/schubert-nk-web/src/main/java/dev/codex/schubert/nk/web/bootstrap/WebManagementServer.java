@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -66,14 +67,14 @@ final class WebManagementServer implements AutoCloseable {
       result.start();
       return result;
     } catch (RuntimeException | Error failure) {
+      var closing = Optional.<IOException>empty();
       try {
-        result.close();
-      } catch (IOException closing) {
-        failure.addSuppressed(closing);
+        closing = result.stopFailure(java.time.Duration.ofSeconds(30));
       } catch (RuntimeException | Error unconfirmed) {
         if (unconfirmed instanceof Error && !(failure instanceof Error)) throw unconfirmed;
         if (unconfirmed != failure) failure.addSuppressed(cleanupDiagnostic);
       }
+      closing.ifPresent(failure::addSuppressed);
       throw failure;
     }
   }
@@ -206,12 +207,18 @@ final class WebManagementServer implements AutoCloseable {
   }
 
   void closeWithin(java.time.Duration remaining) throws IOException {
+    var failure = stopFailure(remaining);
+    if (failure.isPresent()) throw failure.orElseThrow();
+  }
+
+  // PG-D504: internal cleanup consumes a result; the public close boundary keeps checked IO.
+  private Optional<IOException> stopFailure(java.time.Duration remaining) {
     Objects.requireNonNull(remaining, "management stop budget");
     if (remaining.isNegative() || remaining.compareTo(java.time.Duration.ofSeconds(30)) > 0)
       throw new IllegalArgumentException("invalid stop budget");
     stopLock.lock();
     try {
-      if (closed.get()) return;
+      if (closed.get()) return Optional.empty();
       stopping.set(true);
       promoted.set(false);
       if (!serverStopped) {
@@ -227,13 +234,14 @@ final class WebManagementServer implements AutoCloseable {
       executor.shutdownNow();
       try {
         if (!executor.awaitTermination(remaining.toNanos(), TimeUnit.NANOSECONDS))
-          throw new IOException(STOP_UNCONFIRMED);
+          return Optional.of(new IOException(STOP_UNCONFIRMED));
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
-        throw new IOException(STOP_UNCONFIRMED);
+        return Optional.of(new IOException(STOP_UNCONFIRMED));
       }
-      if (!started) throw new IOException(STOP_UNCONFIRMED);
+      if (!started) return Optional.of(new IOException(STOP_UNCONFIRMED));
       closed.set(true);
+      return Optional.empty();
     } finally {
       stopLock.unlock();
     }
