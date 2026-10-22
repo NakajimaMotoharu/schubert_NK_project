@@ -10,13 +10,13 @@ import pg6966_chr_adapter_host as host
 import pg6968_chr_adapter_host_v2 as selected
 
 
-def main():
+def main(prior=None, slot=None):
     os.umask(0o077)
-    slot = host.W/'pg6970-chr-common-static-v1';slot.mkdir()
-    prior = host.W/'pg6968-chr-adapter-host-v2'
+    slot = slot or host.W/'pg6970-chr-common-static-v1';slot.mkdir()
+    prior = prior or host.W/'pg6968-chr-adapter-host-v2'
     receipt = json.loads((prior/'manifest.safe.json').read_bytes())
     begin = json.loads((prior/'begin.safe.json').read_bytes())
-    host.require(receipt['actualExit'] == 0 and receipt['source'] == host.SOURCE
+    host.require(receipt['actualExit'] == 0 and receipt['source'] == begin['source']
                  and receipt['originalBaselineUnchanged'] and receipt['snapshotInputsUnchanged'], 'genuine current host41 original')
     snapshot = prior/'snapshot';target = snapshot/'program/characterization/target'
     inputs = {p:host.sha(snapshot/p) for p in begin['inputHashes']}
@@ -46,7 +46,7 @@ def main():
                   '-Dspotbugs.xmlOutput=true','com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']}
     env = dict(PATH=str(jdk)+':/usr/bin:/bin',JAVA_HOME=str(jdk.parent),MAVEN_USER_HOME=str(host.TC/'m2'),
                MAVEN_SKIP_RC='true',LANG='C.UTF-8',MAVEN_OPTS='-Xmx2g')
-    host.write(slot/'begin.safe.json',dict(source=host.SOURCE,originalHostBeginSha256=host.sha(prior/'begin.safe.json'),
+    host.write(slot/'begin.safe.json',dict(source=begin['source'],originalHostBeginSha256=host.sha(prior/'begin.safe.json'),
                originalHostExitSha256=host.sha(prior/'exit.safe.json'),commands=commands,
                timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),toolSha256=host.sha(Path(__file__)),
                inputHashes=inputs,toolJars={str(p):host.sha(p) for p in cp+[tools/'checkstyle-14.3.0-all.jar']},
@@ -70,12 +70,12 @@ def main():
         if key == 'pmd':records[key]['processingErrors']=len(root.findall('.//{*}error'))
     host.require({p:host.sha(snapshot/p) for p in inputs} == inputs
                  and all(host.sha(target/p) == h for p,h in preserved.items()), 'all original input/PT/class/coverage bytes preserved')
-    value = dict(source=host.SOURCE,run='PG6970-chr-common-static-v1',records=records,findings=findings,
+    value = dict(source=begin['source'],run='PG'+slot.name.removeprefix('pg'),records=records,findings=findings,
                  actualRawStageExitsPreserved=True,newTestsExecuted=0,productionSixChanged=False,
                  originalHostProofUnchanged=True,F03Accepted=False,formalUpdated=False,reviewStatus='PENDING')
     host.write(slot/'manifest.safe.json',value)
-    out = host.BASE/'PG6970-chr-common-static-v1';out.mkdir();host.write(out/'manifest.json',value)
-    print(json.dumps(dict(source=host.SOURCE,records={k:{x:v[x] for x in ('actualExit','findings')} for k,v in records.items()},
+    out = host.BASE/('PG'+slot.name.removeprefix('pg'));out.mkdir();host.write(out/'manifest.json',value)
+    print(json.dumps(dict(source=begin['source'],records={k:{x:v[x] for x in ('actualExit','findings')} for k,v in records.items()},
                          publicManifestSha256=host.sha(out/'manifest.json'),review='PENDING')))
 
 
