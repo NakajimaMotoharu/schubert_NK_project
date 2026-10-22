@@ -1,5 +1,7 @@
 # 残gap適用性・次ordinary候補（着手前）
 
+2026-10-22候補照合訂正（計画条件の訂正、新PT/進捗加点0）：1477当source原6726全4184 coverageと実Testを確認した。Transferの`transfer3048002CalendarLowerUpperBoundaryAndYearZeroAreIndependent`は既に00000101/00010101/99991231を独立検証済みで、year0を未実施とする下表は旧候補の誤認。当line104はci8/mi0/cb3/mb1、未達は8ASCII桁から取り得ないyear>9999のtrue側だけ。year0試験を重複追加しない。他missはinspect/sameDirectory/enumerationの独立IO/metadata観点で、実原本やraceへ拡大しない。BackupWorkerRequestFilesの実残はline97/126の非MISSING再throw、102の二読不一致、138の前後request/dir identity不一致（各実counter保存）。1476元job実行中はsrc/Test変更0、後続着手時に予算/独立oracleを別固定する。
+
 1471の元全体/原回収/同source品質/trace完了を先行し、実行中のMain/Testは変更しない。この文書は候補分解で、群開始・PG/PT・受入・見積減額ではない。通常小群完了だけで停止せず、次の独立候補を既存WBS内で進める。
 
 基点は旧f16f/4170のcoverageXMLに残る箇所であり、新d48f/4184の実測ではない。新全体の実counterとSource byte一致を照合してから着手する。485実物でTransferCleanup.java主P017-09、BackupWorkerRequestFiles.java主P017-03（current943と歴史941に各一descriptor、費用を二重計上しない）。
