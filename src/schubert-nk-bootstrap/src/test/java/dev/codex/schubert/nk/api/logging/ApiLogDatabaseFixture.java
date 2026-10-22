@@ -26,8 +26,16 @@ public final class ApiLogDatabaseFixture {
 
   /** Test-only real upgrade starting point; no deployed database or production config override. */
   public ApiLogDatabaseFixture(Path root, String targetVersion) throws Exception {
+    this(root, targetVersion, System.getProperty("nk.pt.repository"));
+  }
+
+  /** Test-only explicit repository; normal callers retain the original property source. */
+  ApiLogDatabaseFixture(Path root, String targetVersion, String repository) throws Exception {
     java.util.Objects.requireNonNull(targetVersion, "targetVersion");
     this.root = root;
+    if (repository == null || repository.isBlank())
+      throw new IllegalArgumentException("PT repository property is required");
+    Path resources = Path.of(repository).resolve("src/schubert-nk-api/src/main/resources/db");
     String configured = System.getenv("SCHUBERT_PG_ROOT");
     pg =
         configured == null || configured.isBlank()
@@ -62,9 +70,6 @@ public final class ApiLogDatabaseFixture {
             + pg.resolve("lib/postgresql/18/lib"),
         "start");
     url = "jdbc:postgresql://127.0.0.1:" + port + "/postgres";
-    Path resources =
-        Path.of(System.getProperty("nk.pt.repository"))
-            .resolve("src/schubert-nk-api/src/main/resources/db");
     try (Connection connection = admin();
         var statement = connection.createStatement()) {
       statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));

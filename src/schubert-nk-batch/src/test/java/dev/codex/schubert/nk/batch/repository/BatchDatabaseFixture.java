@@ -21,7 +21,15 @@ public final class BatchDatabaseFixture {
   private final String url;
 
   public BatchDatabaseFixture(Path root) throws Exception {
+    this(root, System.getProperty("nk.pt.repository"));
+  }
+
+  /** Test-only explicit repository; no global property mutation for constructor fault cases. */
+  BatchDatabaseFixture(Path root, String repository) throws Exception {
     this.root = root;
+    if (repository == null || repository.isBlank())
+      throw new IllegalArgumentException("PT repository property is required");
+    Path resources = Path.of(repository).resolve("src/schubert-nk-api/src/main/resources/db");
     String configured = System.getenv("SCHUBERT_PG_ROOT");
     pg =
         configured == null || configured.isBlank()
@@ -56,9 +64,6 @@ public final class BatchDatabaseFixture {
             + pg.resolve("lib/postgresql/18/lib"),
         "start");
     url = "jdbc:postgresql://127.0.0.1:" + port + "/postgres";
-    Path resources =
-        Path.of(System.getProperty("nk.pt.repository"))
-            .resolve("src/schubert-nk-api/src/main/resources/db");
     try (Connection connection = admin();
         var statement = connection.createStatement()) {
       statement.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
