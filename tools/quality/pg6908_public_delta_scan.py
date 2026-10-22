@@ -1,4 +1,5 @@
 """Bounded public Git-delta credential-format scan; never inspect runtime/private material."""
+import argparse
 import json
 import os
 import re
@@ -6,7 +7,6 @@ import subprocess
 from pg5940_private_lock_compile import ROOT, BASE, sha
 
 BEFORE = 'd6ecb4cdb36459a56e273d76ccd97241176d6b09'
-OUT = BASE / 'PG6908-public-delta-scan-v1'
 RULES = {
  'PRIVATE_KEY_PEM': re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----'),
  'GITHUB_CREDENTIAL': re.compile(rb'\b(?:gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]{60,})\b'),
@@ -28,10 +28,17 @@ def paths(raw):
     return set(values)
 
 
-def main():
+def output(label):
+    if not re.fullmatch(r'v[1-9][0-9]*', label):
+        raise ValueError('new-only public scan revision, no arbitrary output path')
+    return BASE / ('PG6908-public-delta-scan-' + label)
+
+
+def main(label='v1'):
+    out = output(label)
     names = paths(subprocess.check_output(['git', 'diff', '--name-only', '-z', BEFORE, '--'], cwd=ROOT))
     names.update(paths(subprocess.check_output(['git', 'ls-files', '-z', '--others', '--exclude-standard'], cwd=ROOT)))
-    own = OUT.relative_to(ROOT).as_posix() + '/'
+    own = out.relative_to(ROOT).as_posix() + '/'
     names = {p for p in names if not p.startswith(own)}
     rows, findings = [], []
     for name in sorted(names):
@@ -50,8 +57,8 @@ def main():
       rules=list(RULES), files=rows, findings=findings, rawMatchValuesSaved=False,
       selfOutputExcludedOnly=own, testsExecuted=0, vmActions=0, formalAccepted=False, toolSha256=sha(ROOT / 'tools/quality/pg6908_public_delta_scan.py'))
     os.umask(0o077)
-    OUT.mkdir()
-    p = OUT / 'manifest.json'
+    out.mkdir()
+    p = out / 'manifest.json'
     with p.open('x') as f:
         json.dump(value, f, sort_keys=True, indent=2)
         f.write('\n')
@@ -62,4 +69,6 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--label', default='v1')
+    raise SystemExit(main(parser.parse_args().label))

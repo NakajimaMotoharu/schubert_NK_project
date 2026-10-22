@@ -3,6 +3,12 @@ import pg6908_public_delta_scan as p
 
 
 class PublicDeltaScanTest(unittest.TestCase):
+    def test_new_only_output_label_cannot_escape_public_base(self):
+        self.assertEqual(p.BASE / 'PG6908-public-delta-scan-v2', p.output('v2'))
+        for bad in ('../private', 'v0', 'v1/other', 'V1'):
+            with self.assertRaises(ValueError):
+                p.output(bad)
+
     def test_nul_git_paths_preserve_japanese_and_spaces(self):
         names = {'documents/400_PGPT/日本語 文書.md', 'tools/quality/a.py'}
         self.assertEqual(names, p.paths(('\0'.join(sorted(names)) + '\0').encode()))
