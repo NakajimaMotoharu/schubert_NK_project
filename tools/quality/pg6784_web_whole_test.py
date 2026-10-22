@@ -1,9 +1,19 @@
 import unittest
+import json
 import pg6784_web_management_result_whole as p
 import pg6786_original4197_web_artifacts as original
 
 
 class WebWholeDefinitionTest(unittest.TestCase):
+    def test_all_four_required_and_legitimate_original_six_preserved(self):
+        q=json.loads((p.W/'pg6782-web-management-result-original-v1/manifest.safe.json').read_bytes())
+        raw=q['allActualCounters']['web:dev/codex/schubert/nk/web/bootstrap/WebManagementServer.class']
+        self.assertEqual({'LINE','METHOD','CLASS','BRANCH','INSTRUCTION','COMPLEXITY'},set(raw))
+        p.require_four_counters(raw)
+        for kind in ('LINE','METHOD','CLASS','BRANCH'):
+            for broken in ({k:v for k,v in raw.items()if k!=kind},dict(raw,**{kind:dict(raw[kind],missed=1)}),dict(raw,**{kind:dict(raw[kind],covered=0)})):
+                with self.assertRaises(ValueError):p.require_four_counters(broken)
+
     def test_current4197_declarations_and_all1669_exact(self):
         self.assertEqual((4197,646),p.declared_inventory())
         raw=p.server_source('0'*40,'0'*64)

@@ -1,5 +1,9 @@
 # WebManagement 停止結果PG・独立仕様
 
+## 全体前提guardの是正（Production全体未発行）
+
+6784初回入口はBUG1617/YKT1370のraw-key集合誤規定で終了1、RUNTIME.preflight/new job/全体PT発行前に停止した。原6782は所定四に加え正規INSTRUCTION/COMPLEXITYを持つ。修正前起票後、四counterの必須存在/整数/正数covered/miss0を検証する専用guardへ是正、追加原counterは変更せず保全。実原六counterと十二変異拒否を管理へ追加し、未実行全体を成功扱いしない。固定Main/Test/元選択28は再演不要、是正工具保存後に初回actual全体だけを開始する。
+
 ## 限定元28・独立原資格
 
 当source3c5f03d4aca569e4f5e722d7357e04749ad0998c（Main54dc63d1f）、元6780/session88311 UTC03:11:02.505427～03:13:58.700241、176.194814秒、phase0,0,0/actualExit=maven0・28/10/FESflaky0/六SpotBugs0/sourceFixed。archive5aca9e3352d0dbef7e2fff9916164fe6be0ceb13084180279c09f488aaae67db。原6782/session83063真正0、Q60eb1d48db665286a8cfd5d4495c51b80e1ee6cce7af282595a96f5f07f99539、全8511669/六原Jar/XML、物理差はWebManagementServer outer一件だけ/他1668同byte、raw1405/CS0。outer実四L125/M16/C1/B74各miss0、前miss1Lを解消。Factory宣言counter空は空のまま保持する。

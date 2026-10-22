@@ -34,6 +34,13 @@ def driver_source(fresh):
     return raw[:start]+"'trigger': "+repr(trigger)+raw[end:]
 
 
+def require_four_counters(c):
+    for kind in ('LINE','METHOD','CLASS','BRANCH'):
+        value=c.get(kind)
+        if not isinstance(value,dict)or type(value.get('missed'))is not int or value['missed']!=0 or type(value.get('covered'))is not int or value['covered']<=0:
+            raise ValueError('all original Web four counters explicitly positive and closed')
+
+
 def prerequisites(source):
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT):raise ValueError('clean committed operator first')
     if subprocess.check_output(['git','diff',source,'--','src','pom.xml','.mvn','mvnw','tools/quality/static','program/characterization'],cwd=ROOT):raise ValueError('all selected Main/Test/gates fixed')
@@ -44,7 +51,7 @@ def prerequisites(source):
       and sha(pp)==q['privateManifestSha256']):raise ValueError('genuine original28 all8511669')
     if {x.relative_to(ROOT).as_posix():sha(x)for x in ROOT.glob('src/*/src/main/java/**/*.java')}!=p['allSourceHashes']:raise ValueError('all851 Main exact')
     c=p['allActualCounters']['web:dev/codex/schubert/nk/web/bootstrap/WebManagementServer.class']
-    if set(c)!={'LINE','METHOD','CLASS','BRANCH'}or any(c[k]['missed']!=0 for k in c):raise ValueError('all original Web counters before integrated run')
+    require_four_counters(c)
     from pg6781_web_stop_result_equivalence import verify_source
     verify_source();selected.guard(source);declared_inventory()
 
