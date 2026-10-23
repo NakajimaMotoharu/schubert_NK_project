@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：TransferHealthMonitor(constructor/observe/snapshot/observedUsage/detail/Evaluation)→TRANSFERCONN001～008/1619～1622/PG-D538、RD171/UI252/SS341351。source743/7286真正169PT23suite→7288実42四100/CRC0→7290六compileのみ→7292全1722/旧1669不変・当Batch43一致/歴史Web10byteのみ・二POM厳密→7294全61source/53physical追跡・7296原28理由同byte全照合/新finding0。実collector/Root/制御/exporter/全体451は未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TransferMetricRecorder(constructor/record/missing/snapshot/detail/value/Counts/Usage/Suffix)→TRANSFERMET001～008/1615～1618/PG-D537・BUG1657/1658-YKT1410/1411、RD171/UI252/SS341351。source147/7272真正161PT22suite→7274実40四100/CRC0→7276六compileのみ→7278全1720/旧1669不変・当Batch41一致/歴史Web10byteのみ・二POM厳密→7280全59source/51physical追跡・7283 raw28全分類/新Transfer命名0・旧Mode承認三rawを保持。元936成功161/指摘31・元工具exit1は保全、期待値変更/旧成功転用0。実walk/collector/Root/control/exporter/全体451は未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：BatchMetricContract(Step十/Status四/lookup/labels/names/mode)→BATCHMET001～005、BatchMetricRecorder(constructor/record/detail/seconds/tags)→BATCHREC001～008/1611～1614/PG-D536、RD171/UI252/SS341351。source348/PG7252真正153PT21suite→7254実36四100/CRC0→7256六compileのみ→7258全1716/旧1669不変・当Batch37一致/歴史Web10byteのみ・二POM厳密→7260全57source/47physical追跡・7262 raw28全分類。SDK既同版四Jar再利用/取得0、実Batch/DB/Root/terminal hook/永続lastSuccess/exporter/全体451は未受入。

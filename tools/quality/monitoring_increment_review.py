@@ -16,7 +16,7 @@ def require(value,message):
 
 def review(*, entrypoint, out, pins, source, tests, suites, executable, physical_count,
            added_physical, anchor_counts, new_class, test_ids, reason_document,
-           lock_methods=('observe','snapshot')):
+           lock_methods=('observe','snapshot'),allow_no_new_findings=False):
     invocation=capture(Path(entrypoint));require(not out.exists(),'new-only additive static review')
     proofs={}
     for key,(path,digest) in pins.items():
@@ -31,7 +31,8 @@ def review(*, entrypoint, out, pins, source, tests, suites, executable, physical
     canonical=lambda r:json.dumps(r,sort_keys=True)
     fresh=current['staticRaw']['pmd'];before=old['staticRaw']['pmd']
     prior=Counter(map(canonical,before['findings']));now=Counter(map(canonical,fresh['findings']))
-    require(bool(lock_methods) and len(set(lock_methods))==len(lock_methods),'explicit nonempty unique method list')
+    require((bool(lock_methods) or allow_no_new_findings) and len(set(lock_methods))==len(lock_methods),
+            'explicit unique methods or expressly declared zero new findings')
     require(prior<=now and sum((now-prior).values())==len(lock_methods) and fresh['actualExit']==4
       and fresh['processingErrors']==0,'all raw prior rows plus exact declared additions, no suppression/unknown')
     for row in before['findings']:
