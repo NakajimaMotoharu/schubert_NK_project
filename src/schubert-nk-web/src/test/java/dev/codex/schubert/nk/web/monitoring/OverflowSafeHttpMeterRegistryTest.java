@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,6 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /** HTTPDUR001..012/1725/BUG1681; literal expectations, owned SDK/MockClock/threads only. */
@@ -371,6 +373,13 @@ class OverflowSafeHttpMeterRegistryTest {
                             throw fatal;
                           })));
       assertEquals(6, timer.count());
+      assertEquals(21, timer.totalTime(TimeUnit.SECONDS));
+      assertEquals(6, timer.max(TimeUnit.SECONDS));
+      Supplier<@Nullable Object> nullSupplier = () -> null;
+      Callable<@Nullable Object> nullCallable = () -> null;
+      assertNull(timer.record(nullSupplier));
+      assertNull(timer.recordCallable(nullCallable));
+      assertEquals(8, timer.count());
       assertEquals(21, timer.totalTime(TimeUnit.SECONDS));
       assertEquals(6, timer.max(TimeUnit.SECONDS));
     }

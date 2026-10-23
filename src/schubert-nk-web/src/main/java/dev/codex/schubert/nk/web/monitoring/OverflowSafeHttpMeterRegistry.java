@@ -17,6 +17,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.DoubleAdder;
 import java.util.function.Supplier;
+import org.jspecify.annotations.Nullable;
 
 /** SS351/1725/BUG16811683: public Timer composition, no optional protected SDK hierarchy. */
 public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
@@ -95,7 +96,7 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     }
 
     @Override
-    public <T> T record(Supplier<T> action) {
+    public <T extends @Nullable Object> T record(Supplier<T> action) {
       Objects.requireNonNull(action, "timer supplier");
       long started = clock.monotonicTime();
       try {
@@ -106,7 +107,7 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     }
 
     @Override
-    public <T> T recordCallable(Callable<T> action) throws Exception {
+    public <T extends @Nullable Object> T recordCallable(Callable<T> action) throws Exception {
       Objects.requireNonNull(action, "timer callable");
       long started = clock.monotonicTime();
       try {

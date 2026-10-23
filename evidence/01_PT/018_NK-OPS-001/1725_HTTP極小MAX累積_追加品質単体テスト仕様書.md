@@ -1,5 +1,7 @@
 # 1725 HTTP極小/MAX累積 追加品質単体テスト仕様書
 
+BUG1684補足: d921/8080はNullAwayのcallback型変数upper bound2件でcompile1/PT未開始。e8dab0f50へ元工具/部分四Jar/manifestを保全してから、Supplier/CallableのT extends @Nullable ObjectをSDKと同じにする。callback入力nonnullは不変更、合法なnullable戻りだけそのまま返す。HTTPDUR009にnullable Supplier/Callable二入力を追加（固定clock増分0・実戻りnull/null、既6入力count6/total21/max6を先に維持してcount8/total21/max6）。12IDのまま、期待値追従やNullAway抑制なし、新sourceで必要90/11を検証する。
+
 ## BUG1682/1683後の現行補足（元oracle・開始見積不変更）
 
 27324/8058正常六compile0、8060はJUnit90/11/終了0だがwrapperのsuite10固定値で保存前停止。元工具708dを保持し8074で元XML/exit/hash/sourceを回収（新試験0）、8076七metadata負例を通過。8062は実20四100(L433M92C20B172)/SB指摘0でもMissingClass4(org.LatencyUtilsのoptional型)を持ち、静的資格未受入。この成功PTを新sourceへ転用しない。
