@@ -26,12 +26,22 @@ TOTAL_TESTS = 7
 SOURCE_FILE_COUNT = 3
 SOURCE_ROOT_PREFIX = 'src/schubert-nk-batch/'
 EXTRA_AUXILIARY_JARS = {}
+EXTRA_PRODUCTION_DEPENDENCY_JARS = {}
 RUN = 'PG7006-monitoring-pure-host-v1'
 
 
 def require(value, message):
     if not value:
         raise ValueError(message)
+
+
+def partitioned_auxiliary_jars(sdk,production):
+    require(isinstance(sdk,dict) and isinstance(production,dict),'explicit separate dependency dictionaries')
+    require(not(set(sdk)&set(production)),'SDK and production library identities are disjoint')
+    combined={**sdk,**production}
+    require(all(isinstance(p,str) and Path(p).is_absolute() and isinstance(h,str) and len(h)==64
+      and all(c in '0123456789abcdef' for c in h) for p,h in combined.items()),'explicit absolute path and SHA256, no unknown pin')
+    return combined
 
 
 def main():
@@ -91,11 +101,12 @@ def main():
     pmdcp = [tools/'record-fix-v1/pmd-record-1298.jar',*sorted((tools/'pmd-bin-7.28.0/lib').glob('*.jar'))]
     require(all(p.is_file() for p in libs+pmdcp),'pinned existing static/audit jars')
     rules = host.ROOT/'tools/quality/static'
-    require(all(Path(path).is_file() and host.sha(Path(path))==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),
-            'all fixed extra SDK auxiliary classpath jars')
-    require(all(begin.get('dependencyJarHashes',{}).get(path)==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),
-            'original executed SDK bindings are exactly these static-analysis SDK bytes')
-    aux = ':'.join([str(target/'classes'),str(host.TC/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar'),*EXTRA_AUXILIARY_JARS])
+    auxiliary=partitioned_auxiliary_jars(EXTRA_AUXILIARY_JARS,EXTRA_PRODUCTION_DEPENDENCY_JARS)
+    require(all(Path(path).is_file() and host.sha(Path(path))==digest for path,digest in auxiliary.items()),
+            'all fixed SDK and separately declared production library classpath jars')
+    require(all(begin.get('dependencyJarHashes',{}).get(path)==digest for path,digest in auxiliary.items()),
+            'original executed bindings equal static-analysis dependency bytes')
+    aux = ':'.join([str(target/'classes'),str(host.TC/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar'),*auxiliary])
     static_commands = [
       ('pmd',[str(jdk/'java'),'-cp',':'.join(str(p) for p in pmdcp),'net.sourceforge.pmd.cli.PmdCli','check',
         '--file-list',str(filelist),'--rulesets',str(rules/'pmd.xml'),'--use-version','java-25','--minimum-priority','5',
@@ -129,8 +140,10 @@ def main():
       auditStages=stages,auditLibraries={str(p):host.sha(p) for p in libs},
       formalUpdated=False,wholeSixQualified=False,newAccepted=0,effortPercent=None,
       actualVmActions=0,actualDatabaseActions=0,original4222Repeated=False,original44Repeated=False)
-    require(all(host.sha(Path(path))==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),'SDK bytes unchanged during independent post')
+    require(all(host.sha(Path(path))==digest for path,digest in auxiliary.items()),'all dependency bytes unchanged during independent post')
     value['additionalSdkAuxiliaryJarHashes']=EXTRA_AUXILIARY_JARS
+    if EXTRA_PRODUCTION_DEPENDENCY_JARS:
+        value['productionDependencyJarHashes']=EXTRA_PRODUCTION_DEPENDENCY_JARS
     verify(invocation)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,source=begin['source'],tests=TOTAL_TESTS,counters=totals,

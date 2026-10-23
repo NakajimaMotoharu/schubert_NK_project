@@ -9,7 +9,10 @@
     <version>0.1.0-SNAPSHOT</version><relativePath>../../../pom.xml</relativePath>
   </parent>
   <artifactId>monitoring-api-jobs-pt</artifactId>
+  <!-- PT-only exact qualified normal Jar; stale M2 artifact is retained and never substituted. -->
+  <properties><schubert.pt.protocol.jar>/home/mini/codex/project1/work/pgpt-runs/PG379/pg7614-dlq-health-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar</schubert.pt.protocol.jar></properties>
   <dependencies>
+    <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-protocol</artifactId><version>0.1.0-SNAPSHOT</version><scope>system</scope><systemPath>${schubert.pt.protocol.jar}</systemPath></dependency>
     <dependency><groupId>com.zaxxer</groupId><artifactId>HikariCP</artifactId><version>7.1.0</version></dependency>
     <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.17.1</version></dependency>
     <dependency><groupId>org.jspecify</groupId><artifactId>jspecify</artifactId><version>1.0.1</version></dependency>
