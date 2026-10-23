@@ -22,6 +22,8 @@
   </properties>
 
   <dependencies>
+    <!-- RD171/SS351, PG-D536/BATCHREC: exact existing installed SDK, no exclusions. -->
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.17.1</version></dependency>
     <!-- SSC088: root startup uses only shared credentials/public proof/NSS, no business API. -->
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version><type>test-jar</type><scope>test</scope></dependency>
