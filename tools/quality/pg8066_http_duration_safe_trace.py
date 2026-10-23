@@ -10,6 +10,8 @@ import pg8058_http_duration_safe_six_compile as compilation
 from pg7192_heap_quality_review import anchors
 from host_tool_invocation import capture,verify
 OUT=host.BASE/'PG8066-http-duration-safe-trace-v1'
+PHYSICAL_WITNESS='PG8064-http-duration-safe-six-post-v1/manifest.json'
+CURRENT_WEB_WITNESS='PG8062-http-duration-safe-post-v1/manifest.json'
 SPEC='evidence/01_PT/018_NK-OPS-001/1725_HTTP極小MAX累積_追加品質単体テスト仕様書.md'
 FAMILIES={'OverflowSafeHttpMeterRegistry':'HTTPDUR001..012','OverflowSafeDurationSupport':'HTTPDUR001..012'}
 def require(value,message):
@@ -19,8 +21,8 @@ def main():
     proofs={};pins={}
     for key,path,digest in (
       ('previous','PG8042-exact-duration-trace-v5/manifest.json','232778568815d10f7fa3a952ab8e3210ab857a188858896f562fd51799a33a2e'),
-      ('physical','PG8064-http-duration-safe-six-post-v1/manifest.json',None),
-      ('currentWeb','PG8062-http-duration-safe-post-v1/manifest.json',None)):
+      ('physical',PHYSICAL_WITNESS,None),
+      ('currentWeb',CURRENT_WEB_WITNESS,None)):
         f=host.BASE/path;sha=host.sha(f);require(digest is None or sha==digest,'exact original witness')
         proofs[key]=json.loads(f.read_bytes());pins[key]=dict(path=path,sha256=sha)
     c=proofs['currentWeb'];p=proofs['physical'];previous={r['path']:r for r in proofs['previous']['sourceRows']}

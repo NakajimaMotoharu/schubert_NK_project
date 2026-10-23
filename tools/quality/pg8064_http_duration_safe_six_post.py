@@ -19,6 +19,7 @@ from pg7750_media_stream_six_post_v2 import historical
 
 SLOT=host.W/'pg8064-http-duration-safe-six-post-v1'
 OUT=host.BASE/'PG8064-http-duration-safe-six-post-v1'
+CURRENT_WEB_WITNESS='PG8062-http-duration-safe-post-v1/manifest.json'
 
 def require(value,message):
     if not value:raise ValueError(message)
@@ -28,7 +29,7 @@ def main():
     proofs={};pins={}
     for key,path,digest in (
       ('original','PG6930-current4222-cases/qualification.json','728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731'),
-      ('currentWeb','PG8062-http-duration-safe-post-v1/manifest.json',None),
+      ('currentWeb',CURRENT_WEB_WITNESS,None),
       ('history','PG7820-restart-metric-six-post-v1/manifest.json','517a658dff9a99eed436382515768fdb4cb4413d18552087c445bf5e9448ad27'),
       ('apiHistory','PG8040-exact-duration-six-post-v5/manifest.json','42148108d6ea638087ca0ab150099e6b120956e63dc424bb6a85995397f25167'),
       ('architecture','PG6960-archunit-static-v1/manifest.json','7f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f')):
