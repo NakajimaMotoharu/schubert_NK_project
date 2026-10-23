@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1716_MqProcessingDurationMetric仕様・1717結果追跡、source602808269/当API154PT19suite（新8＋必要既146）・実32四100(L560M103C32B262)/全1781/127delta-112追加physical/生成52/raw17全理由、新BUG0。SS323全64layoutのflow S60/A2/I2/供給秒値だけ、実MQ-clock-consumer hook/exporter・正式/whole451/工数未受入。
+
 2026-10-24最新：1714_DbQueryDuration取得結線仕様・1715結果追跡、sourcee54364742/当API146PT18suite（新8＋必要既138）・実30四100(L523M98C30B247)/全1779/125delta-110追加physical/生成50/raw17全理由、新BUG0。借用providerの完全供給だけread→publication、missing/failureを0秒やFAILURE eventへ捏造0、actual DB-clock-hook/exporter・正式/whole451/工数未受入。
 
 2026-10-24最新：1712_DbQueryDurationMetric仕様・1713結果横展開、source1540267d3/当API138PT17suite（新8＋必要既130）・実28四100(L504M95C28B241)/全1777/123delta-108追加physical/生成45/raw16全理由。BUG1676/1677を元失敗保全で限定閉鎖。供給二query×二outcomeの秒histogram/p95設定要求だけ、実query/DB/clock/exporter・正式/whole451/工数は未受入。
