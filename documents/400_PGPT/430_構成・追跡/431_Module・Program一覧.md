@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P01809/C07共有費0）：AsyncQueueMonitor/Evaluation→ASYNCQUEUE001～008/1674～1675/PG-D550/RD171/UI252/SS351。sourced56b2cc0a/Batch192PT26suite/実46四100/1747Main・旧1669byte不変/全92trace/raw28個別理由、新Main0。ASYNC_QUEUE/API・exact70/90% OR 5000/9000・未知normal復旧0/既lifecycle、actual source/capacity/owner/9001制御/whole451未受入。
+
 2026-10-23追加（P01809/C07共有費0）：WebLogBacklogMonitor/Evaluation→WEBLOG001～008/1672～1673/PG-D549/RD171/UI252/SS351。source3174583f4/Batch184PT25suite/実44四100/1745Main・旧1669byte不変/全90trace/raw28同byte理由/新Main raw0。既threshold→WEB_LOG/WEB lifecycle・partial known abnormal/unknown非正常化/5分10分と原因確認/並行、actual source/owner/合成/制御/whole451未受入。
 
 2026-10-23追加（P01809/C07共有費0）：OutboxMetricCollector constructor/collect/snapshot→OUTBOXCONN001～008/1668～1671/PG-D548/RD171/UI252/SS331351。source69a835b2b/98PT12suite/実20四100/1743Main・旧1669byte不変/全88trace/raw13個別理由、同owner read-close-publication/両family未知化・元failure保持/STD0、実DB-driver-role-source-asOf/外側期限/Root/whole451未受入。

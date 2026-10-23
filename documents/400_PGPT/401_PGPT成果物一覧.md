@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1674 Async Queue警報仕様](../../evidence/01_PT/018_NK-OPS-001/1674_AsyncQueue警報_単体テスト仕様書.md)・[1675結果追跡](../../evidence/01_PT/018_NK-OPS-001/1675_AsyncQueue警報_結果・追跡.md)。sourced56b2cc0a/Batch192PT26suite（元製造新8）/実46四100/CRC0、六正常compile/全1747Main・旧1669byte不変/全92trace/raw28個別理由。供給count/capacityのexact ratio・partial unknownと既lifecycle結線、actual queue/control・正式/工数は未更新。
+
 2026-10-23最新：[1672 WebLog滞留警報仕様](../../evidence/01_PT/018_NK-OPS-001/1672_WebLog滞留警報_単体テスト仕様書.md)・[1673結果追跡](../../evidence/01_PT/018_NK-OPS-001/1673_WebLog滞留警報_結果・追跡.md)。source3174583f4/Batch184PT25suite（元製造新8）/実44四100/CRC0、六正常compile/全1745Main・旧1669byte不変/全90trace/raw28個別理由。片側未知と既知異常/復旧窓のpure結線、actual source/control/正式・工数は未更新。
 
 2026-10-23最新：[1668 API OutboxMetric結線仕様](../../evidence/01_PT/018_NK-OPS-001/1668_APIOutboxMetric結線_単体テスト仕様書.md)～[1671追跡適用性](../../evidence/01_PT/018_NK-OPS-001/1671_APIOutboxMetric結線_追跡・適用性完了.md)。source69a835b2b/98PT12suite（元製造新8）/実20四100/CRC0、六正常compile/全1743Main・旧1669byte不変/全88trace・raw13全個別理由。read-close後の二family同owner公開/未知化/STD0をown fixtureで確認、actualDB/Root・正式/工数は未更新。
