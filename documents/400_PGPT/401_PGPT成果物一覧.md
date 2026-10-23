@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1668 API OutboxMetric結線仕様](../../evidence/01_PT/018_NK-OPS-001/1668_APIOutboxMetric結線_単体テスト仕様書.md)～[1671追跡適用性](../../evidence/01_PT/018_NK-OPS-001/1671_APIOutboxMetric結線_追跡・適用性完了.md)。source69a835b2b/98PT12suite（元製造新8）/実20四100/CRC0、六正常compile/全1743Main・旧1669byte不変/全88trace・raw13全個別理由。read-close後の二family同owner公開/未知化/STD0をown fixtureで確認、actualDB/Root・正式/工数は未更新。
+
 2026-10-23最新：[1664 API Outbox観測Repository仕様](../../evidence/01_PT/018_NK-OPS-001/1664_APIOutbox観測Repository_単体テスト仕様書.md)～[1667追跡適用性](../../evidence/01_PT/018_NK-OPS-001/1667_APIOutbox観測Repository_追跡・適用性完了.md)。source332f970a7/90PT11suite（元製造新10）/実19四100/CRC0、六正常compile/全1742Main・旧1669byte不変/全86trace・raw10全分類。borrowed readonly/型付き日時/固定集計をown JDBC proxyで検証、actualDBと正式/工数は未更新。
 
 2026-10-23最新：[1660 API Outbox滞留時間仕様](../../evidence/01_PT/018_NK-OPS-001/1660_APIOutboxAgeMetric_単体テスト仕様書.md)～[1663追跡適用性](../../evidence/01_PT/018_NK-OPS-001/1663_APIOutboxAgeMetric_追跡・適用性完了.md)。sourced6c7f61b5/80PT10suite（元製造新8）/実17四100/CRC0、六正常compile/全1740Main・旧1669byte不変/全84trace・九静的負改変拒否。生成record六契約は初めから独立oracle・当classへ結合しcounter合成0、actual SQL/Root等・正式/工数は未更新。

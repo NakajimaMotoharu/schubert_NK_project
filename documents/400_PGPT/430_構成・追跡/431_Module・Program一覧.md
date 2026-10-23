@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P01809/C07共有費0）：OutboxMetricCollector constructor/collect/snapshot→OUTBOXCONN001～008/1668～1671/PG-D548/RD171/UI252/SS331351。source69a835b2b/98PT12suite/実20四100/1743Main・旧1669byte不変/全88trace/raw13個別理由、同owner read-close-publication/両family未知化・元failure保持/STD0、実DB-driver-role-source-asOf/外側期限/Root/whole451未受入。
+
 2026-10-23追加（P01809/C07共有費0）：OutboxObservationRepository.read/status/Snapshot→OUTBOXDB001～010/1664～1667/PG-D547/RD171/UI252/SS331351。source332f970a7/90PT11suite/実19四100/1742Main・元1669byte不変/全86trace/raw10個別理由、fixed status COUNT/MIN(created_at)・borrowed readonly RC/typed OffsetDateTime/全close。実DB-driver-asOf/collector/Root/whole451未受入。
 
 2026-10-23追加（P01809/C07共有費0）：OutboxAgeMetricRecorder/Ages/OUTBOXAGE001～008→1660～1663/PG-D546/RD171/UI252/SS331351。d6c7f61b5/80PT10suite/実17四100/1740Main・旧1669byte不変/全84trace/raw8個別理由。非負Duration三つ/初期欠測NaN/真0/STD0/秒overflow安全/64並行/SDK故障所有、生成record六契約を含む。実SQL/時計/最古導出/WEB store/Root/全体451未受入。
