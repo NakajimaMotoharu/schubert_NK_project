@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：TimedDbPoolMonitor(constructor/observe/snapshot/Evaluation)→DBTIME001～008/1603～1606/PG-D534、RD171/UI252/SS351。sourcee9c/PG7224真正132PT18suite→7226実30四100/CRC0→7228六compileのみ→7230全1710/旧1669不変・当Batch31一致/歴史Web10byteのみ→7232全50source/41physical追跡・7234 raw25全分類。実pool/DB/Root/exporter/control/全体451は未受入、別source歴史成果を現在実行へ転用しない。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：MonitoringPoller.observe/observeNow/observeLocked→POLL001～008、JvmHeapHealthMonitor(constructor/observe/observeNow/snapshot)→HEAPCONN001～008、既FilesystemHealthMonitorの共通poll接続/二fixture visibility→1599～1602/PG-D533。source0b8/PG7210真正124PT17suite→7212実28四100・7214六compileのみ→7216全1708/旧1669不変・当Batch29一致/歴史Web10同byteのみ→7218全48source/39physical追跡・7220 raw23全分類。実Root/provider/期限/制御/停止/exporter/全体451は未受入、過去sourceの実行を当sourceへ合成0。
 
 2026-10-23追加更新（P018-09/C07共有費0）：ContinuousConditionWindow.observe/State→MONWINDOW001～008/1561～1562、AlertLifecycle.interruptContinuity→ALERTCONT001～002/1563～1564、TimedFilesystemMonitor(constructor/observe/snapshot/Evaluation)→TIMEDFS001～006/1563～1564。固定source d96df9f09のPG7068/7070＝真正70PT/10suite・実19class四100/単一sessionCRC0、PG7072正規六compileのみ、PG7074全1689/旧1669不変・新20一致へ接続。1566/PG7080 0df85e47は全追加24src/実20class→主所有/Test ID/RD-UI-SS/spec/result/hashを一意対応。既default485/正式/工数nullは更新しない。実collector/実時計/原因撤去/対象owner/制御を当pure値の成功から認定0。
