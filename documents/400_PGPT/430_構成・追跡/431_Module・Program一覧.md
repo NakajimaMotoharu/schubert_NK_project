@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：TimedSyncLatencyMonitor(constructor/observe/snapshot/Evaluation)→SYNCTIME001～008/1607～1610/PG-D535、RD171/UI252/SS351。source00ed/PG7238真正140PT19suite→7240実32四100/CRC0→7242六compileのみ→7244全1712/旧1669不変・当Batch33一致/歴史Web10byteのみ→7246全52source/43physical追跡・7248 raw27全分類。実分布/provider/Root/有限collector/exporter/control/全体451は未受入、別source歴史成果を現在実行へ合成しない。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TimedDbPoolMonitor(constructor/observe/snapshot/Evaluation)→DBTIME001～008/1603～1606/PG-D534、RD171/UI252/SS351。sourcee9c/PG7224真正132PT18suite→7226実30四100/CRC0→7228六compileのみ→7230全1710/旧1669不変・当Batch31一致/歴史Web10byteのみ→7232全50source/41physical追跡・7234 raw25全分類。実pool/DB/Root/exporter/control/全体451は未受入、別source歴史成果を現在実行へ転用しない。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：MonitoringPoller.observe/observeNow/observeLocked→POLL001～008、JvmHeapHealthMonitor(constructor/observe/observeNow/snapshot)→HEAPCONN001～008、既FilesystemHealthMonitorの共通poll接続/二fixture visibility→1599～1602/PG-D533。source0b8/PG7210真正124PT17suite→7212実28四100・7214六compileのみ→7216全1708/旧1669不変・当Batch29一致/歴史Web10同byteのみ→7218全48source/39physical追跡・7220 raw23全分類。実Root/provider/期限/制御/停止/exporter/全体451は未受入、過去sourceの実行を当sourceへ合成0。
