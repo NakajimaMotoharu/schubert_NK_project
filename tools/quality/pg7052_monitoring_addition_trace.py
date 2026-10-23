@@ -17,6 +17,7 @@ COMPONENT_TESTS=54
 COMPONENT_SUITES=7
 SOURCE_COUNT=19
 PHYSICAL_COUNT=16
+SUPPLEMENTARY_CONTRACTS={}
 PINS = {
  'PG7046-monitoring-status-post-v1':'bdee1eecf46db2f6df358c80c344d12e04463414d09e9cc1c77e8068bd62ea74',
  'PG7050-monitoring-status-six-post-v1':'740a1e6cecdc2a732ed0c32ed509ff1e8a76de694d3214de93310bb63a583d3f',
@@ -75,9 +76,27 @@ def main():
             ids,spec,result=('UNITSUP001..005',1553,1555) if stem=='SupplementaryUnitTemplateTest' else ('CONFIGSUP001..004',1556,1557)
             kind='TEST_NOT_JAVA_MAIN'
         require(spec in documents and result in documents,'both spec and result must exist')
+        if delta['owner']=='WBS-P018-09':
+            execution_label=COMPONENT_LABEL
+        else:
+            execution_label='PG7038-c02-four-template-post-v1' if delta['owner']=='WBS-C02' else 'PG7042-c06-config-template-post-v1'
+            require(witnesses[execution_label]['testSourceSha256']==delta['sha256'],
+                    'configuration test source exactly matches its separate original qualification')
+        supplements=[]
+        for family,plan,report in SUPPLEMENTARY_CONTRACTS.get(stem.removesuffix('Test'),[]):
+            require(plan in documents and report in documents,'all additional method contracts exist')
+            supplements.append(dict(testIdFamily=family,
+              specification=dict(path=str(documents[plan].relative_to(host.ROOT)),sha256=host.sha(documents[plan])),
+              result=dict(path=str(documents[report].relative_to(host.ROOT)),sha256=host.sha(documents[report]))))
         rows.append(dict(**delta,kind=kind,testIdFamily=ids,
           specification=dict(path=str(documents[spec].relative_to(host.ROOT)),sha256=host.sha(documents[spec])),
           result=dict(path=str(documents[result].relative_to(host.ROOT)),sha256=host.sha(documents[result])),
+          programResultReferenceSemantics='PROGRAM_HISTORY_NOT_SUBSTITUTE_FOR_CURRENT_EXECUTION',
+          supplementaryMethodContracts=supplements,
+          executionWitness=dict(path=str((host.BASE/execution_label/'manifest.json').relative_to(host.ROOT)),
+            sha256=PINS[execution_label],source=witnesses[execution_label]['source'],
+            tests=witnesses[execution_label]['tests'],
+            separateConfigurationDomain=delta['owner']!='WBS-P018-09'),
           rd='MON005..013' if delta['owner']=='WBS-P018-09' else 'OPS005/OPS009/SYS002',
           ui='252' if delta['owner']=='WBS-P018-09' else '251/253',
           ss='351 sections6..10' if delta['owner']=='WBS-P018-09' else '343'))

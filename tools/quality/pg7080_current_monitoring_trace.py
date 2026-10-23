@@ -2,7 +2,7 @@
 import pg7052_monitoring_addition_trace as trace
 
 
-if __name__=='__main__':
+def configure():
     trace.SOURCE='d96df9f09b46dee9aa75276d474e118609ee890c'
     trace.OUT=trace.host.BASE/'PG7080-current-monitoring-trace-v1'
     trace.COMPONENT_LABEL='PG7070-timed-filesystem-post-v2'
@@ -17,4 +17,8 @@ if __name__=='__main__':
     trace.PHYSICAL_COUNT=20
     trace.CONTRACTS.update(ContinuousConditionWindow=('MONWINDOW001..008',1561,1562),
       TimedFilesystemMonitor=('TIMEDFS001..006',1563,1564),AlertContinuity=('ALERTCONT001..002',1563,1564))
-    trace.main()
+    return trace
+
+
+if __name__=='__main__':
+    configure().main()
