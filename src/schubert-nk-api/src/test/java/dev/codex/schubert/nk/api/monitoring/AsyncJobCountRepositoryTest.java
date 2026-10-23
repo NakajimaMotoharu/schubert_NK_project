@@ -28,13 +28,13 @@ class AsyncJobCountRepositoryTest {
   private static final String SQL =
       "SELECT state, COUNT(*) AS job_count FROM schubert.async_jobs GROUP BY state";
 
-  private record Row(Optional<String> state, long count, boolean sqlNull) {
+  record Row(Optional<String> state, long count, boolean sqlNull) {
     static Row row(String state, long count) {
       return new Row(Optional.of(state), count, false);
     }
   }
 
-  private static final class Fixture {
+  static final class Fixture {
     final List<Row> rows;
     final List<String> closes = new ArrayList<>();
     final Map<String, Throwable> faults = new HashMap<>();
@@ -47,6 +47,7 @@ class AsyncJobCountRepositoryTest {
     int executed;
     int timeout;
     int cursor = -1;
+    Runnable beforeStatementClose = () -> {};
 
     Fixture(Row... rows) {
       this.rows = List.of(rows);
@@ -101,6 +102,7 @@ class AsyncJobCountRepositoryTest {
                     fault("execute");
                     return nullRows ? null : result();
                   case "close":
+                    beforeStatementClose.run();
                     closes.add("PS");
                     fault("PSclose");
                     return null;

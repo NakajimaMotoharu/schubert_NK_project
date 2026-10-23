@@ -12,7 +12,7 @@ METHODS={
  'asyncDb007ReadAndCloseFaultsKeepIdentityAndSuppressionWithoutCauseTraversal',
  'asyncDb008ParallelBorrowedConnectionsHaveNoCrossOwnerState'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7314-api-async-count-host-v1'
     post.OUT=post.host.BASE/'PG7316-api-async-count-post-v1'
@@ -21,4 +21,7 @@ if __name__=='__main__':
     post.NAMES|={post.PREFIX+'persistence/AsyncJobCountRepository'}
     post.EXPECTED_SUITES[host.SUITES[1]]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=16;post.SOURCE_FILE_COUNT=5
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
