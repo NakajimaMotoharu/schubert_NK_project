@@ -51,6 +51,8 @@ def main():
         require(host.sha(file)==item['sha256']==hashlib.sha256(raw).hexdigest(),'each current source exact fixed candidate')
         if path in previous:
             row=dict(previous[path])
+            row['previousSourceByteSha256']=previous[path]['sha256']
+            row['sourceIntroducedSincePreviousTrace']=False
             if row['sha256']!=item['sha256']:
                 require(path in EDITED_EXISTING,'only explicitly planned edits inside prior additions')
                 changed.add(path);row['previousSourceByteSha256']=row['sha256']
@@ -61,7 +63,8 @@ def main():
             require(path.startswith('src/schubert-nk-batch/') and Path(path).name in ALLOWED_NEW_NAMES,
               'only the declared new source files')
             row=dict(item,kind='TEST' if path.endswith('Test.java') else 'MAIN',rd='MON005..013',ui='252',ss='351',
-              testIdFamily=NEW_TEST_IDS,specifications=refs([NEW_SPEC]))
+              testIdFamily=NEW_TEST_IDS,specifications=refs([NEW_SPEC]),previousSourceByteSha256=None,
+              sourceChangedSincePreviousTrace=False,sourceIntroducedSincePreviousTrace=True)
         if path in EXTRA_SPECS:row['specifications']=list(row.get('specifications',[]))+refs(EXTRA_SPECS[path])
         if path in EXTRA_TEST_IDS:row['testIdFamily']=row.get('testIdFamily','')+'/'+EXTRA_TEST_IDS[path]
         if path.startswith('src/schubert-nk-batch/') and '/monitoring/' in path:
