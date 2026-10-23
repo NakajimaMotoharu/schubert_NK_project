@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -239,6 +240,59 @@ class AlertLifecycleTest {
         assertEquals(condition, event.condition());
         assertEquals(service, event.service());
       }
+    }
+  }
+
+  @Test
+  void protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause() {
+    for (var condition : Condition.values()) {
+      for (var service : Service.values()) {
+        for (var level : new Severity[] {Severity.WARNING, Severity.CRITICAL}) {
+          for (var clearance : CauseClearance.values()) {
+            var owner = new AlertLifecycle(condition, service);
+            var first = signal(owner, level, Duration.ZERO);
+            normal(owner, Duration.ofSeconds(1), clearance);
+            var result = normal(owner, Duration.ofDays(1), clearance);
+            boolean protectedKey =
+                condition == Condition.DLQ || condition == Condition.INTEGRITY_CONFIG;
+            boolean staysOpen =
+                protectedKey
+                    || (level == Severity.CRITICAL && clearance == CauseClearance.UNCONFIRMED);
+            assertEquals(staysOpen, result.isOpen());
+            assertEquals(condition, result.condition());
+            assertEquals(service, result.service());
+            assertEquals(level, result.severity());
+            assertEquals(BigInteger.ONE, result.count());
+            assertEquals(TIME, result.firstSeen());
+            assertEquals(TIME, result.lastSeen());
+            if (protectedKey) assertSame(first, owner.snapshot().orElseThrow());
+            else assertEquals(staysOpen, owner.snapshot().isPresent());
+          }
+        }
+      }
+    }
+  }
+
+  @Test
+  void protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent()
+      throws Exception {
+    for (var condition : new Condition[] {Condition.DLQ, Condition.INTEGRITY_CONFIG}) {
+      var owner = new AlertLifecycle(condition, Service.BROKER);
+      var first = signal(owner, Severity.CRITICAL, Duration.ZERO);
+      var tasks = new ArrayList<Callable<Event>>();
+      for (int i = 0; i < 64; i++) {
+        var cause = i % 2 == 0 ? CauseClearance.CONFIRMED : CauseClearance.UNCONFIRMED;
+        tasks.add(() -> normal(owner, Duration.ofSeconds(Long.MAX_VALUE, 999_999_999), cause));
+      }
+      try (var executor = Executors.newFixedThreadPool(8)) {
+        for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertSame(first, result.get());
+      }
+      assertSame(first, owner.snapshot().orElseThrow());
+      assertTrue(first.isOpen());
+      assertEquals(BigInteger.ONE, first.count());
+      assertEquals(TIME, first.firstSeen());
+      assertEquals(TIME, first.lastSeen());
     }
   }
 }

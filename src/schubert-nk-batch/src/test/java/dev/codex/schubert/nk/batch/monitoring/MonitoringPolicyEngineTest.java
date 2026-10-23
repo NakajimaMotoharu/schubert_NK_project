@@ -1,7 +1,6 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -191,10 +190,14 @@ class MonitoringPolicyEngineTest {
                   Severity.NORMAL,
                   context(600, CauseClearance.CONFIRMED))
               .orElseThrow();
-      assertFalse(closed.isOpen());
+      boolean protectedAlert =
+          condition == Condition.DLQ || condition == Condition.INTEGRITY_CONFIG;
+      assertEquals(protectedAlert, closed.isOpen());
       assertEquals(BigInteger.ONE, closed.count());
     }
-    assertTrue(engine.activeAlerts().isEmpty());
+    assertEquals(2, engine.activeAlerts().size());
+    assertEquals(Condition.DLQ, engine.activeAlerts().get(0).condition());
+    assertEquals(Condition.INTEGRITY_CONFIG, engine.activeAlerts().get(1).condition());
   }
 
   @Test

@@ -146,6 +146,8 @@ public final class AlertLifecycle {
 
   private Optional<Event> normal(CauseClearance clearance, Duration elapsed) {
     if (active.isEmpty()) return Optional.empty();
+    // SS351 §12: routine normal samples/cause flags cannot retire investigation-required alerts.
+    if (conditionKey == Condition.DLQ || conditionKey == Condition.INTEGRITY_CONFIG) return active;
     Duration since = recoveringSince.orElse(elapsed);
     recoveringSince = Optional.of(since);
     Event event = active.orElseThrow();
