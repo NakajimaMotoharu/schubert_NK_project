@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-23 Web Micrometer coreを同版のままcompileへ昇格
+
+PG-D527/1573～1575、既managed/test版1.17.1のcoreをWeb direct compileへ正規追加。version変更/依存除外/他POM semantic変更0を7122 9e62721bで確認。runtime Hdr2.2.2は下記1572の正規local導入を使用。core9ca47dfa/commonsf2cee6ef/observationeb34f0cd/Hdr22d1d431の全Jarを元15PT/独立static/六compileの前後hashへ結合した。実SDKの自己所有SimpleMeterRegistry/MockClockだけで15PT/四counter100、実7classを正規Web Jarへ照合、全体451/実exporter/Root runtimeやIT-ST認定ではない。Micrometer registryはcloseを持つがAutoCloseableではないため、Test自己所有scopeにだけ明示bridgeを置き、本番Recorderは借用先をcloseしない。Simple providerは九SLO×35の315内部Gaugeをprimary1785とは別に保持、1573のprimary根拠/残存riskを維持する。新外部通信/SDK版変更/別backend置換0。
+
 ## 2026-10-23 Micrometer1.17.1の正規HdrHistogram2.2.2をoffline補完
 
 1572/PG7104原bd4e07ea。既core1.17.1（§5.8の9ca47dfa…）のruntime依存HdrHistogram2.2.2を、既SHA512検証履歴のあるApache Artemis2.56.0配布libから同版・Jar SHA256 `22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8` とembedded正規POMを保ったままlocal M2へ新規導入した。既元archiveは現存しないため今回全archive再検証済みとは称さず、既導入由来と現在Jar版/metadata/hashを区別する。Maven install-plugin3.1.2/-o/-N/install-file/元pomFile/generatePom=false、JDK25.0.4/Maven3.9.12、repo既toolchain/m2/repository。対象座標非存在を先確認し既物上書き/元Jar変更/依存除外/代替POM/外部通信0、全byte・終端0を保存。cache Jar binaryはGit非格納。元ライセンスはvendor embedded POM/Artemis licenses/LICENSE-hdrhistogram.txtを参照。再現/出所/command/設定/hash/原証跡は1572と `018/evidence/provisional/PG7104-micrometer-dependency-prepare-v1/manifest.json`。これは環境準備でPT合格0、Web Production依存追加/実backend接続は次の別工程で検証する。
