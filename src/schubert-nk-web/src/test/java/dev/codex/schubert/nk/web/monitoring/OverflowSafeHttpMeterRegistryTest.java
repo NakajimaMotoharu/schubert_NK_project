@@ -11,7 +11,6 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.Statistic;
-import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.pause.PauseDetector;
@@ -147,6 +146,12 @@ class OverflowSafeHttpMeterRegistryTest {
         for (long value : values) timer.record(value, TimeUnit.NANOSECONDS);
         assertEquals(5, timer.count());
         assertEquals(1.8446744073709553E10, timer.totalTime(TimeUnit.SECONDS));
+        assertEquals(1.8446744073709553E10, timer.takeSnapshot().total(TimeUnit.SECONDS));
+        assertEquals(3.6893488147419105E9, timer.mean(TimeUnit.SECONDS));
+        var measured = new EnumMap<Statistic, Double>(Statistic.class);
+        timer.measure().forEach(m -> measured.put(m.getStatistic(), m.getValue()));
+        assertEquals(1.8446744073709553E10, measured.get(Statistic.TOTAL_TIME).doubleValue());
+        assertEquals(3, registry.get(NAME + ".histogram").tag("le", "0.05").gauge().value());
         assertEquals(9.223372036854776E9, timer.max(TimeUnit.SECONDS));
         cdf(timer, 3, 3, 3, 3, 3, 3, 3, 3, 3);
       }
@@ -231,7 +236,6 @@ class OverflowSafeHttpMeterRegistryTest {
   @Test
   void httpDur007IncompatibleHistogramPercentilesOrBoundariesFailClosed() {
     try (var registry = new GenericRegistry()) {
-      var id = new Meter.Id(NAME, Tags.empty(), "seconds", null, Meter.Type.TIMER);
       for (var config :
           List.of(
               configuration().percentilesHistogram(true).build(),
@@ -241,8 +245,44 @@ class OverflowSafeHttpMeterRegistryTest {
             IllegalArgumentException.class,
             () ->
                 OverflowSafeHttpMeterRegistry.durationTimer(
-                    registry, id, config, registry.config().pauseDetector()));
+                    registry,
+                    config,
+                    registry.config().pauseDetector(),
+                    () -> {
+                      throw new AssertionError("invalid config factory forbidden");
+                    }));
       }
+      var valid = configuration().build().merge(DistributionStatisticConfig.DEFAULT);
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              OverflowSafeHttpMeterRegistry.durationTimer(
+                  registry,
+                  valid,
+                  new PauseDetector() {},
+                  () -> {
+                    throw new AssertionError("unknown pause factory");
+                  }));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              OverflowSafeHttpMeterRegistry.durationTimer(
+                  registry,
+                  valid,
+                  null,
+                  () -> {
+                    throw new AssertionError("null pause factory");
+                  }));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              OverflowSafeHttpMeterRegistry.durationTimer(
+                  registry, valid, registry.config().pauseDetector(), () -> null));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              OverflowSafeHttpMeterRegistry.durationTimer(
+                  registry, valid, registry.config().pauseDetector(), null));
       assertEquals(0, registry.getMeters().size());
     }
   }
@@ -306,6 +346,33 @@ class OverflowSafeHttpMeterRegistryTest {
       assertEquals(4, timer.count());
       assertEquals(10, timer.totalTime(TimeUnit.SECONDS));
       assertEquals(4, timer.max(TimeUnit.SECONDS));
+      var runtime = new IllegalStateException("owned supplier fault");
+      assertSame(
+          runtime,
+          assertThrows(
+              IllegalStateException.class,
+              () ->
+                  timer.record(
+                      (Supplier<String>)
+                          () -> {
+                            clock.add(Duration.ofSeconds(5));
+                            throw runtime;
+                          })));
+      var fatal = new AssertionError("owned runnable fault");
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  timer.record(
+                      (Runnable)
+                          () -> {
+                            clock.add(Duration.ofSeconds(6));
+                            throw fatal;
+                          })));
+      assertEquals(6, timer.count());
+      assertEquals(21, timer.totalTime(TimeUnit.SECONDS));
+      assertEquals(6, timer.max(TimeUnit.SECONDS));
     }
   }
 
@@ -329,7 +396,8 @@ class OverflowSafeHttpMeterRegistryTest {
 
     @Override
     protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
-      return OverflowSafeHttpMeterRegistry.durationTimer(this, id, config, pause);
+      return OverflowSafeHttpMeterRegistry.durationTimer(
+          this, config, pause, () -> super.newTimer(id, config, pause));
     }
 
     @Override
@@ -355,6 +423,9 @@ class OverflowSafeHttpMeterRegistryTest {
       assertThrows(NullPointerException.class, () -> timer.record(1, null));
       assertThrows(NullPointerException.class, () -> timer.totalTime(null));
       assertThrows(NullPointerException.class, () -> timer.max(null));
+      assertThrows(NullPointerException.class, () -> timer.record((Supplier<Object>) null));
+      assertThrows(NullPointerException.class, () -> timer.recordCallable(null));
+      assertThrows(NullPointerException.class, () -> timer.record((Runnable) null));
       timer.record(-1, TimeUnit.NANOSECONDS);
       assertEquals(0, timer.count());
       timer.record(0, TimeUnit.NANOSECONDS);

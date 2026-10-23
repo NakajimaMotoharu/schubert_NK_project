@@ -1,24 +1,24 @@
 package dev.codex.schubert.nk.web.monitoring;
 
-import io.micrometer.core.instrument.AbstractTimer;
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
-import io.micrometer.core.instrument.distribution.HistogramGauges;
-import io.micrometer.core.instrument.distribution.TimeWindowMax;
+import io.micrometer.core.instrument.distribution.HistogramSnapshot;
+import io.micrometer.core.instrument.distribution.pause.NoPauseDetector;
 import io.micrometer.core.instrument.distribution.pause.PauseDetector;
 import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.micrometer.core.instrument.util.TimeUtils;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.DoubleAdder;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.function.Supplier;
 
-/** SS351/1725/BUG1681: standard cumulative HTTP Timer with overflow-safe scalar total. */
+/** SS351/1725/BUG16811683: public Timer composition, no optional protected SDK hierarchy. */
 public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     implements AutoCloseable, OverflowSafeDurationSupport {
   private static final String DURATION_NAME = "nk_http_request_duration_seconds";
@@ -50,43 +50,86 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
   @Override
   protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
     if (!DURATION_NAME.equals(id.getName())) return super.newTimer(id, config, pause);
-    return durationTimer(this, id, config, pause);
+    return durationTimer(this, config, pause, () -> super.newTimer(id, config, pause));
   }
 
   static Timer durationTimer(
-      MeterRegistry owner, Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
-    if (Boolean.TRUE.equals(config.isPercentileHistogram())
+      MeterRegistry owner,
+      DistributionStatisticConfig config,
+      PauseDetector pause,
+      Supplier<Timer> factory) {
+    if (!(pause instanceof NoPauseDetector)
+        || Boolean.TRUE.equals(config.isPercentileHistogram())
         || !Arrays.equals(new double[0], config.getPercentiles())
         || !Arrays.equals(BOUNDARIES, config.getServiceLevelObjectiveBoundaries()))
       throw new IllegalArgumentException("CONFIG_INVALID");
-    var timer = new OverflowSafeTimer(id, owner.config().clock(), config, pause);
-    HistogramGauges.registerWithCommonFormat(timer, owner);
-    return timer;
+    return new OverflowSafeTimer(
+        Objects.requireNonNull(factory.get(), "HTTP timer delegate"), owner.config().clock());
   }
 
-  /** SDK integer histogram/wrappers/window max; only the cumulative total changes to binary64. */
-  private static final class OverflowSafeTimer extends AbstractTimer {
-    private final LongAdder sampleCount = new LongAdder();
+  /**
+   * The private standard delegate supplies count/max/finite integer buckets only. Its wrapping long
+   * total never escapes: every public sum, mean, measurement and snapshot uses our binary64 total.
+   * Cross-counter atomic scrape is not promised, as with the original SDK timer.
+   */
+  private static final class OverflowSafeTimer implements Timer {
+    private final Timer delegate;
+    private final Clock clock;
     private final DoubleAdder totalNanoseconds = new DoubleAdder();
-    private final TimeWindowMax maximumWindow;
 
-    private OverflowSafeTimer(
-        Meter.Id id, Clock clock, DistributionStatisticConfig config, PauseDetector pause) {
-      super(id, clock, config, pause, TimeUnit.SECONDS, false);
-      maximumWindow = new TimeWindowMax(clock, config);
+    private OverflowSafeTimer(Timer delegate, Clock clock) {
+      this.delegate = delegate;
+      this.clock = clock;
     }
 
     @Override
-    protected void recordNonNegative(long amount, TimeUnit unit) {
-      long nanoseconds = unit.toNanos(amount);
-      sampleCount.increment();
-      totalNanoseconds.add(nanoseconds);
-      maximumWindow.record(nanoseconds, TimeUnit.NANOSECONDS);
+    public Meter.Id getId() {
+      return delegate.getId();
+    }
+
+    @Override
+    public void record(long amount, TimeUnit unit) {
+      Objects.requireNonNull(unit, "timer unit");
+      delegate.record(amount, unit);
+      if (amount >= 0) totalNanoseconds.add(unit.toNanos(amount));
+    }
+
+    @Override
+    public <T> T record(Supplier<T> action) {
+      Objects.requireNonNull(action, "timer supplier");
+      long started = clock.monotonicTime();
+      try {
+        return action.get();
+      } finally {
+        record(clock.monotonicTime() - started, TimeUnit.NANOSECONDS);
+      }
+    }
+
+    @Override
+    public <T> T recordCallable(Callable<T> action) throws Exception {
+      Objects.requireNonNull(action, "timer callable");
+      long started = clock.monotonicTime();
+      try {
+        return action.call();
+      } finally {
+        record(clock.monotonicTime() - started, TimeUnit.NANOSECONDS);
+      }
+    }
+
+    @Override
+    public void record(Runnable action) {
+      Objects.requireNonNull(action, "timer runnable");
+      long started = clock.monotonicTime();
+      try {
+        action.run();
+      } finally {
+        record(clock.monotonicTime() - started, TimeUnit.NANOSECONDS);
+      }
     }
 
     @Override
     public long count() {
-      return sampleCount.longValue();
+      return delegate.count();
     }
 
     @Override
@@ -96,7 +139,29 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
 
     @Override
     public double max(TimeUnit unit) {
-      return maximumWindow.poll(unit);
+      return delegate.max(unit);
+    }
+
+    @Override
+    public TimeUnit baseTimeUnit() {
+      return delegate.baseTimeUnit();
+    }
+
+    @Override
+    public HistogramSnapshot takeSnapshot() {
+      var snapshot = delegate.takeSnapshot();
+      return new HistogramSnapshot(
+          snapshot.count(),
+          totalTime(TimeUnit.NANOSECONDS),
+          snapshot.max(),
+          snapshot.percentileValues(),
+          snapshot.histogramCounts(),
+          null);
+    }
+
+    @Override
+    public void close() {
+      delegate.close();
     }
   }
 }

@@ -1,5 +1,13 @@
 # 1725 HTTP極小/MAX累積 追加品質単体テスト仕様書
 
+## BUG1682/1683後の現行補足（元oracle・開始見積不変更）
+
+27324/8058正常六compile0、8060はJUnit90/11/終了0だがwrapperのsuite10固定値で保存前停止。元工具708dを保持し8074で元XML/exit/hash/sourceを回収（新試験0）、8076七metadata負例を通過。8062は実20四100(L433M92C20B172)/SB指摘0でもMissingClass4(org.LatencyUtilsのoptional型)を持ち、静的資格未受入。この成功PTを新sourceへ転用しない。
+
+現行是正はSDK protected AbstractTimer継承でなく公開Timerへのcomposition。標準SDKへcount/max時間窓/整数九bucketを委譲し、private delegateのwrapするlong totalを外へ出さず、public total/mean/measurement/snapshotをDoubleAdderへ結合する。callbackは固定owner Clockとtry/finally記録、元例外をcatch/format/再試行しない。null unit/callbackは先行NPE拒否し観測を作らない（内部不正入力契約）。NoPause以外/未知pauseはfactory前CONFIG_INVALID、optional依存stub/抑制/新network取得なし。他metricは元SDK。
+
+HTTPDUR007へ未知/null pause・null factory/結果の拒否（登録0）、009へ同一Runtime supplier5秒/Error runnable6秒を追加し元4入力count4/sum10/max4を先に保持した上でcount6/sum21/max6を独立確認、012へnull Supplier/Callable/Runnableの観測前拒否を追加する。ID数は12のまま、元010の期待値・method本文は不変更。新sourceの90/11、同exec実20四100/静的missing0・全1794/141source-125physicalを必要回帰し、旧27324成果は歴史保全。1726へ元二source/当source・BUG1681～1683/YKT1432～1434を結合する。
+
 ## BUG1681是正補足（開始見積・元010本文不変更）
 
 元7e57/8056は78/10中010一件failure、実測count5/sumSeconds0/maxSeconds9.223372036854776E9。第一順序のsum assertで失敗、第二順序とbucketは未到達。8054正常六compile0/PT0は別保持。BUG1681/YKT1432を修正前起票。

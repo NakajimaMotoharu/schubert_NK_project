@@ -62,7 +62,8 @@ class HttpMetricRecorderTest {
     @Override
     protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
       boundaries.add(Objects.requireNonNull(config.getServiceLevelObjectiveBoundaries()).clone());
-      return OverflowSafeHttpMeterRegistry.durationTimer(this, id, config, pause);
+      return OverflowSafeHttpMeterRegistry.durationTimer(
+          this, config, pause, () -> super.newTimer(id, config, pause));
     }
 
     @Override

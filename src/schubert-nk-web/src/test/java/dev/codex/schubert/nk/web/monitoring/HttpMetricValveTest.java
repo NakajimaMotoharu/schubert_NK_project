@@ -48,7 +48,8 @@ class HttpMetricValveTest {
 
     @Override
     protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
-      return OverflowSafeHttpMeterRegistry.durationTimer(this, id, config, pause);
+      return OverflowSafeHttpMeterRegistry.durationTimer(
+          this, config, pause, () -> super.newTimer(id, config, pause));
     }
 
     @Override
