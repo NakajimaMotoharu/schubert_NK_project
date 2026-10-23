@@ -54,7 +54,7 @@ def main():
     for key,path,digest in (
       ('current','PG7790-integrity-metric-post-v1/manifest.json','37cbd4239538d378a060c475fadd7a0151fe99f73046985376161f6d8e36a448'),
       ('physical','PG7794-integrity-metric-six-post-v1/manifest.json',None),
-      ('trace','PG7796-integrity-metric-trace-v1/manifest.json',None),
+      ('trace','PG7810-integrity-metric-trace-v2/manifest.json',None),
       ('previousTrace','PG7778-media-bytes-trace-v1/manifest.json','08afec5b1cd6ac4f7fa9c9dc9017f51e33de2d7cdc17e59e8306d1bd83ff096a'),
       ('old','PG7712-observed-retention-post-v1/manifest.json','4da07632be45c13495dc4929e0b197fc9ed2e6b6b917226e41362a6204774931'),
       ('oldReview','PG7720-observed-retention-review-v1/manifest.json','8dcdce75a2afc017326bbbc4cf88bebfa77e5feb1a31d91b36fe53ba94226f7a'),
