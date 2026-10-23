@@ -13,7 +13,7 @@ METHODS={
  'asyncGauge007ParallelSnapshotsRemainCompleteWithoutCrossOwnerOrSeriesGrowth',
  'asyncGauge008PartialProviderFailureKeepsIdentityAndCallerOwnedRegistry'}
 
-if __name__=='__main__':
+def configure():
     post.SLOT=host.SLOT;post.RUN='PG7300-api-async-metric-host-v1';post.POM=host.POM
     post.OUT=post.host.BASE/'PG7302-api-async-metric-post-v1'
     post.PRIVATE=post.host.W/'pg7302-api-async-metric-post-v1'
@@ -24,4 +24,7 @@ if __name__=='__main__':
     post.NAMES={post.PREFIX+n for n in ('AsyncJobMetricRecorder','AsyncJobMetricRecorder$State','AsyncJobMetricRecorder$Snapshot')}
     post.EXPECTED_SUITES={host.SUITES[0]:dict(tests=8,failures=0,errors=0,skipped=0)}
     post.TOTAL_TESTS=8;post.SOURCE_FILE_COUNT=3
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
