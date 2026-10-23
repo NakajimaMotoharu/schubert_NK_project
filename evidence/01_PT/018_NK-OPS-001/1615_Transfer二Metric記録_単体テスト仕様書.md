@@ -1,5 +1,7 @@
 # 1615 Transfer二Metric記録 単体テスト仕様書
 
+静的期待の範囲訂正（BUG1658/YKT1411、2026-10-23）：下記「全Main PMDの当rule0」は新Transfer全nestedの当rule0に訂正する。全Mainでは旧MonitoringModePolicyの承認済みraw三行（1542のimmutable enum/accessor理由）を抑制せず保持し、旧28raw完全一致・全理由対象source同byte・未分類/有効違反0を確認する。production値/通常PTの期待値変更0。元7282実exit1/工具を保全し、新only reviewで訂正を検証、元161再実行0。
+
 再試験追加（2026-10-23、BUG1657/YKT1410）：元936/7266真正161・7268四100/PMD31は保持し、新規三命名違反だけprivate field改名後の別sourceで7272/7274/7276以降へ再資格する。公開API/独立期待値/新8case数は不変更、旧成功は新sourceへ転用しない。全Main PMDの当rule0と旧28全行一致を再発防止checkに追加し、元31行を抑制/分類だけで消さない。
 
 NK-OPS-001/P018-09/共有C07追加費0、RD171 MON005～013/UI252/SS341§8・SS351§6/8/10・PG-D537。TransferMetricRecorder constructor/record/missing/snapshot/detail/value・Counts/Usage/Suffix。group1856、開始共有16/残84/reset1793306748・1/2/5pp上限10。Inputは固定long files/bytesと二suffixだけ、実file/dir/secure walk/cleanup/Root/DBを一切実行しない。
