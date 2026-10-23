@@ -26,6 +26,8 @@
   </properties>
 
   <dependencies>
+    <!-- RD171/SS351, PG-D539/ASYNCGAUGE: existing installed SDK, exact same1.17.1, no exclusions. -->
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.17.1</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version><type>test-jar</type><scope>test</scope></dependency>
     <dependency>
