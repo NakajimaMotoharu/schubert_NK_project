@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 class FilesystemHealthObservationTest {
   private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
 
-  private static final class FixtureStore extends FileStore {
+  static final class FixtureStore extends FileStore {
     long total = 1000;
     long usable = 200;
     boolean failTotal;
