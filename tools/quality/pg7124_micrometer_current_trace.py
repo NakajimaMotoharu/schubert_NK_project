@@ -9,6 +9,11 @@ import pg6966_chr_adapter_host as host
 from host_tool_invocation import capture,verify
 
 SOURCE='ef6f9f22aaa8b16ffcfe39952bfc9a2196b0308a'
+SOURCE_COUNT=32
+ADDED_PHYSICAL_COUNT=28
+CURRENT_TESTS=15
+CURRENT_EXECUTABLE=7
+WEB_RESULTS=(1574,1575)
 OUT=host.BASE/'PG7124-micrometer-current-trace-v1'
 PINS={
  'physical':('PG7122-micrometer-http-six-post-v1/manifest.json','9e62721bb5c8d54688d863cf0c5d0cdb1574f63167a638e6672662ad99b877fd'),
@@ -28,7 +33,7 @@ def main():
         file=host.BASE/path;require(host.sha(file)==digest,'exact public original qualification pin')
         witnesses[key]=json.loads(file.read_bytes())
     physical=witnesses['physical'];web=witnesses['currentWeb'];history=witnesses['batchHistoryTrace']
-    require(physical['source']==web['source']==SOURCE and web['tests']==15 and web['actualCrcMismatch']==0,
+    require(physical['source']==web['source']==SOURCE and web['tests']==CURRENT_TESTS and web['actualCrcMismatch']==0,
             'genuine current15 source and actual compiled classes')
     by_path={row['path']:row for row in history['sourceRows']}
     require(len(by_path)==25,'complete historical Batch/config source trace domain')
@@ -50,30 +55,33 @@ def main():
             name=current.name
             require(path.startswith('src/schubert-nk-web/'),'only the declared Web new-source/pom domain')
             if name=='pom.xml':
-                ids='HTTPREC001..009/BUILD';plans=[1573];reports=[1574,1575];kind='COMPILE_DEPENDENCY_NOT_EXECUTABLE'
+                ids='HTTPREC001..009/BUILD';plans=[1573];reports=list(WEB_RESULTS);kind='COMPILE_DEPENDENCY_NOT_EXECUTABLE'
                 require(item['status']=='M' and physical['reviewedWebPomChange']['noOtherSemanticChange'],
                         'the one reviewed same-version compile dependency delta')
+            elif name.startswith('HttpMetricValve'):
+                ids='HTTPTERM001..008';plans=[1577];reports=list(WEB_RESULTS)
+                kind='TEST' if name.endswith('Test.java') else 'MAIN'
             elif name.startswith('HttpMetricRecorder'):
-                ids='HTTPREC001..009';plans=[1573];reports=[1574,1575]
+                ids='HTTPREC001..009';plans=[1573];reports=list(WEB_RESULTS)
                 kind='TEST' if name.endswith('Test.java') else 'MAIN'
             elif name.startswith('HttpMetricContract'):
-                ids='HTTPMETRIC001..006';plans=[1570];reports=[1574,1575]
+                ids='HTTPMETRIC001..006';plans=[1570];reports=list(WEB_RESULTS)
                 kind='TEST' if name.endswith('Test.java') else 'MAIN'
             elif name=='http-route-labels.txt':
-                ids='HTTPMETRIC002/003/HTTPREC003/004';plans=[1570,1573];reports=[1574,1575];kind='INDEPENDENT_GOLDEN_RESOURCE'
+                ids='HTTPMETRIC002/003/HTTPREC003/004';plans=[1570,1573];reports=list(WEB_RESULTS);kind='INDEPENDENT_GOLDEN_RESOURCE'
             else:
                 require(name=='package-info.java','only exact declared metadata addition')
-                ids='HTTPMETRIC001..006/HTTPREC001..009';plans=[1570,1573];reports=[1574,1575];kind='NULLABILITY_METADATA_NOT_EXECUTABLE'
+                ids='HTTPMETRIC001..006/HTTPREC001..009';plans=[1570,1573];reports=list(WEB_RESULTS);kind='NULLABILITY_METADATA_NOT_EXECUTABLE'
             row=dict(item,kind=kind,owner='WBS-P018-09',sharedReference='WBS-C07',sharedAdditionalCostPp=0,
               rd='MON005..013',ui='252',ss='313/351',testIdFamily=ids,specifications=refs(plans),results=refs(reports),
-              qualificationRelationship='CURRENT_WEB15_EXECUTION_OR_DECLARED_SUPPORT_INPUT',
-              executionWitness=dict(path=PINS['currentWeb'][0],sha256=PINS['currentWeb'][1],source=SOURCE,tests=15,suites=2),
-              componentCounterScope='SEVEN_CURRENT_WEB_EXECUTABLE_CLASSES_ONLY')
+              qualificationRelationship='CURRENT_WEB_EXECUTION_OR_DECLARED_SUPPORT_INPUT',
+              executionWitness=dict(path=PINS['currentWeb'][0],sha256=PINS['currentWeb'][1],source=SOURCE,tests=CURRENT_TESTS,suites=web['suites']),
+              componentCounterScope='EXACT_DECLARED_CURRENT_WEB_EXECUTABLE_CLASSES_ONLY')
         rows.append(row)
-    require(len(rows)==32 and len({r['path'] for r in rows})==32,'all31 additions and one POM change traced once')
+    require(len(rows)==SOURCE_COUNT and len({r['path'] for r in rows})==SOURCE_COUNT,'all declared additions and one POM change traced once')
     source_rows={r['path']:r for r in rows};classes=[]
     domains=[('HISTORICAL_BATCH_BYTE_IDENTITY_ONLY',physical['historicalBatch']['source'],physical['historicalBatch']['physicalClasses']),
-             ('CURRENT_WEB15_QUALIFIED',SOURCE,physical['currentHttp']['physicalClasses'])]
+             ('CURRENT_WEB_QUALIFIED',SOURCE,physical['currentHttp']['physicalClasses'])]
     for domain,source,entries in domains:
         for name,digest in entries.items():
             role,entry=name.split(':',1)
@@ -81,8 +89,10 @@ def main():
             require(path in source_rows,'every nested/metadata physical class maps to a declared primary source owner')
             classes.append(dict(className=name,sha256=digest,sourcePath=path,owner=source_rows[path]['owner'],
               qualificationDomain=domain,executionSource=source,executable=not entry.endswith('package-info.class'),
-              currentSourceExecutionAccepted=domain=='CURRENT_WEB15_QUALIFIED' and not entry.endswith('package-info.class')))
-    require(len(classes)==28 and len({r['className'] for r in classes})==28,'all20 historical and eight current physical additions exact')
+              currentSourceExecutionAccepted=domain=='CURRENT_WEB_QUALIFIED' and not entry.endswith('package-info.class')))
+    require(len(classes)==ADDED_PHYSICAL_COUNT and len({r['className'] for r in classes})==ADDED_PHYSICAL_COUNT,'all historical and current physical additions exact')
+    require(sum(row['currentSourceExecutionAccepted'] for row in classes)==CURRENT_EXECUTABLE
+            ==len(web['executableClasses']),'actual current qualified class flags and raw CRC inventory match the printed count')
     sdk=physical['currentSdkJarHashes']
     require(sdk==web['additionalSdkAuxiliaryJarHashes'] and len(sdk)==4
             and all(host.sha(Path(p))==h for p,h in sdk.items()),'all executed/static/normal-compile SDK dependencies exact')
@@ -94,7 +104,7 @@ def main():
       actualVmActions=0,actualDatabaseActions=0,formalUpdated=False,newAccepted=0,effortPercent=None)
     verify(invocation)
     os.umask(0o077);OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,sources=32,addedPhysical=28,currentExecutable=7,sdkJars=4,
+    print(json.dumps(dict(actualExit=0,sources=SOURCE_COUNT,addedPhysical=ADDED_PHYSICAL_COUNT,currentExecutable=CURRENT_EXECUTABLE,sdkJars=4,
                          manifestSha256=host.sha(OUT/'manifest.json'))))
 
 

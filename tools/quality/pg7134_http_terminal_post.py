@@ -10,6 +10,7 @@ from pathlib import Path
 import pg6966_chr_adapter_host as host
 import pg7130_http_terminal_host as original
 import pg7032_monitoring_six_artifact_post as steps
+import pg7106_micrometer_http_host as sdk
 from host_tool_invocation import capture, verify
 
 SLOT=host.W/'pg7134-http-terminal-post-v1'
@@ -46,6 +47,8 @@ def main():
     require(host.sha(original.SLOT/'jacoco.exec')==raw['execSha256'],'original one-session execution data')
     dependencies=raw['begin']['dependencyHashes']
     require(all(host.sha(Path(p))==h for p,h in dependencies.items()),'all actual current normal dependencies including internal six Jars')
+    require(all(dependencies.get(p)==h for p,h in sdk.SDK.items())
+            and compiled['begin']['dependencyJarHashes']==sdk.SDK,'actual JVM/static/compile same four pinned Micrometer dependencies')
     os.umask(0o077);SLOT.mkdir();steps.SLOT=SLOT
     component=SLOT/'component';component.mkdir()
     physical={p.relative_to(target/'classes').as_posix():host.sha(p) for p in (target/'classes'/PREFIX).rglob('*.class')}
@@ -129,6 +132,7 @@ def main():
       originalManifestSha256=RAW_SHA,originalCompileSha256=COMPILE_SHA,invocation=invocation,
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),os=platform.platform(),sourceFiles=sources,
       actualCrcMismatch=0,actualSessions=1,physicalClasses=physical,executableClasses=executable,counters=totals,
+      additionalSdkAuxiliaryJarHashes=sdk.SDK,
       staticRaw=static_raw,staticAnalysisPomSha256=host.sha(pom),staticAuxiliaryAliasSemantics='ACTUAL_RUNTIME_BYTE_BINDINGS_NOT_PRODUCTION_COORDINATES',
       coverageScope='ALL_NINE_CURRENT_MONITORING_EXECUTABLES_NOT_ALL_WEB_OR_WHOLE451',
       originalXmlHashes=raw['xmlHashes'],coverageExecSha256=raw['execSha256'],auditStages=stages,
