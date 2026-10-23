@@ -59,7 +59,9 @@ public final class BatchMetricRecorder {
     Objects.requireNonNull(step, "batch step");
     Objects.requireNonNull(status, "batch status");
     Objects.requireNonNull(endedAt, "batch end timestamp");
-    if (endedAt.isBefore(MIN) || endedAt.isAfter(MAX) || endedAt.getNano() % NANOS_PER_MICROSECOND != 0)
+    if (endedAt.isBefore(MIN)
+        || endedAt.isAfter(MAX)
+        || endedAt.getNano() % NANOS_PER_MICROSECOND != 0)
       throw new IllegalArgumentException("invalid batch metric timestamp");
     if (!collectDetailed) return;
     synchronized (lock) {
