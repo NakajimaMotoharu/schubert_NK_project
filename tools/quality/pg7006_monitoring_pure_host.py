@@ -12,10 +12,13 @@ from pg7000_monitoring_mode_host import MODULES, SUITE
 
 SLOT = host.W/'pg7006-monitoring-pure-host-v1'
 POM = 'tools/quality/harnesses/monitoring-pom.xml'
+DEPENDENCY_JARS = {}
 
 
 def main(slot=SLOT, selected=(SUITE,)):
     invocation=capture(Path(__file__))
+    if not all(Path(path).is_file() and host.sha(Path(path))==digest for path,digest in DEPENDENCY_JARS.items()):
+        raise ValueError('all declared external dependency bytes must match fixed pins')
     os.umask(0o077)
     if slot.exists():
         raise ValueError('new-only original run; never replay an existing begin')
@@ -38,7 +41,8 @@ def main(slot=SLOT, selected=(SUITE,)):
                MAVEN_OPTS='-Xmx2g -Djava.awt.headless=true')
     begin = dict(source=source,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       branch='dev-foundation',archiveSha256=host.sha(archive),inputHashes=inputs,commands=commands,
-      toolSha256=host.sha(Path(__file__)),invocation=invocation,selectedSuites=list(selected),actualVmActions=0,
+      toolSha256=host.sha(Path(__file__)),invocation=invocation,dependencyJarHashes=DEPENDENCY_JARS,
+      selectedSuites=list(selected),actualVmActions=0,
       actualDatabaseActions=0,nativeTestsSelected=0,original4222Replayed=False,
       original44Replayed=False,scope='PURE_COMPONENT_NOT_WHOLE_QUALIFICATION')
     host.write(slot/'begin.safe.json',begin)
@@ -59,6 +63,8 @@ def main(slot=SLOT, selected=(SUITE,)):
     code = stages[-1]['actualExit']
     if {p:host.sha(snapshot/p) for p in inputs} != inputs:
         raise ValueError('fixed original source changed')
+    if not all(host.sha(Path(path))==digest for path,digest in DEPENDENCY_JARS.items()):
+        raise ValueError('external dependency changed during original run')
     target = snapshot/'tools/quality/harnesses/target'
     cases, xmls, suites = [], {}, {}
     for path in sorted((target/'surefire-reports').glob('TEST-*.xml')):

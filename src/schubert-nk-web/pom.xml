@@ -44,6 +44,8 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- RD171/SS351, PG-D527/HTTPREC001..009: existing managed1.17.1, no dependency exclusions. -->
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId></dependency>
     <!-- PG-D370/BUG660: compile-only exact SS343 fixed-runtime-path rationale, not runtime. -->
     <dependency><groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.10.4</version><scope>provided</scope></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>

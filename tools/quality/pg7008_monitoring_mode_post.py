@@ -25,6 +25,7 @@ EXPECTED_SUITES = {SUITE:dict(tests=7,failures=0,errors=0,skipped=0)}
 TOTAL_TESTS = 7
 SOURCE_FILE_COUNT = 3
 SOURCE_ROOT_PREFIX = 'src/schubert-nk-batch/'
+EXTRA_AUXILIARY_JARS = {}
 RUN = 'PG7006-monitoring-pure-host-v1'
 
 
@@ -90,7 +91,11 @@ def main():
     pmdcp = [tools/'record-fix-v1/pmd-record-1298.jar',*sorted((tools/'pmd-bin-7.28.0/lib').glob('*.jar'))]
     require(all(p.is_file() for p in libs+pmdcp),'pinned existing static/audit jars')
     rules = host.ROOT/'tools/quality/static'
-    aux = str(target/'classes')+':'+str(host.TC/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar')
+    require(all(Path(path).is_file() and host.sha(Path(path))==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),
+            'all fixed extra SDK auxiliary classpath jars')
+    require(all(begin.get('dependencyJarHashes',{}).get(path)==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),
+            'original executed SDK bindings are exactly these static-analysis SDK bytes')
+    aux = ':'.join([str(target/'classes'),str(host.TC/'m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar'),*EXTRA_AUXILIARY_JARS])
     static_commands = [
       ('pmd',[str(jdk/'java'),'-cp',':'.join(str(p) for p in pmdcp),'net.sourceforge.pmd.cli.PmdCli','check',
         '--file-list',str(filelist),'--rulesets',str(rules/'pmd.xml'),'--use-version','java-25','--minimum-priority','5',
@@ -124,6 +129,8 @@ def main():
       auditStages=stages,auditLibraries={str(p):host.sha(p) for p in libs},
       formalUpdated=False,wholeSixQualified=False,newAccepted=0,effortPercent=None,
       actualVmActions=0,actualDatabaseActions=0,original4222Repeated=False,original44Repeated=False)
+    require(all(host.sha(Path(path))==digest for path,digest in EXTRA_AUXILIARY_JARS.items()),'SDK bytes unchanged during independent post')
+    value['additionalSdkAuxiliaryJarHashes']=EXTRA_AUXILIARY_JARS
     verify(invocation)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,source=begin['source'],tests=TOTAL_TESTS,counters=totals,
