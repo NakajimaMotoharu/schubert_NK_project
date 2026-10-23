@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24 Integrity：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source676b954e7/229普通PT30suite/実56四100/CRC0・正常六compile/PT0・全1757Main/元1669byte不変/三POM・SDK・当五rule0、全環境/command/time/hashは1688。工具draft文字列置換の構文不備は実行前pyflakesで拒否/未実行工具のみ是正→実0、Product再演0、raw28全理由/生成104/除外0・actual操作0。
+
 2026-10-24 Restart：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source9f7697a28/221普通PT29suite/実54四100/CRC0・正常六compile/PT0・全1755Main/元1669byte不変/三POM・SDK・当五rule0、環境/command/time/hashは1686。raw28全理由/変更Threshold百分率method不変/生成新6＋既93当実行/除外0、actual操作0。
 
 2026-10-24 Backup供給観測：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source017308824/212普通PT28suite・実52四100/CRC0・六正常Main/Test compile/PT0・全1753/旧1669byte不変/三POM/SDK/五rule0。全環境/command/time/hashは1684、raw28同byte理由/生成新11＋既82当実行/除外0、actual操作0。

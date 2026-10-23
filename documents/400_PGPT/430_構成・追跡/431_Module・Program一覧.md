@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加：IntegrityHealthMonitor/Evaluation→INTEGRITYMON001～008/1687～1688/PG-D556/RD171/UI252/SS351§7・12。source676b954e7/229PT30suite・実56四100/全1757/100trace/生成104/raw28理由、供給count1重大・未知非正常化/正常/cause両値/MAX時間でも自動close禁止。actual source/probe/調査/修復/退役/collector・正式未受入。
+
 2026-10-24現行：RestartHealthMonitor/Evaluation＋AlertThresholds.restarts/MonitoringPolicyEngine.restartsと対応Test→RESTARTMON001～008・RESTARTFLAG001・THRESH011/013/014/1685～1686/PG-D555/BUG1668-YKT1419/RD171/UI252/SS351。source9f7697a28/221PT29suite・実54四100/全1755/98trace/生成99/raw28全理由、供給count/独立rate-limit結線。actual Unit/history/owner/collector/control・正式未受入。
 
 2026-10-24追加：BackupHealthMonitor/Completion/Evaluation→BACKUPMON001～008/1683～1684/PG-D554/RD171/UI252/SS341351。source017308824/212PT28suite・実52四100/全1753/全96trace/生成93/raw28全理由、供給status/countと既BACKUP/BATCH lifecycle結線。BATCHは論理keyで実source/owner/日付/Backup/collector/制御は未受入、正式/全体PGPTへ合算0。
