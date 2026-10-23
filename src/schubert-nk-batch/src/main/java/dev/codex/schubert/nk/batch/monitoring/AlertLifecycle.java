@@ -102,6 +102,7 @@ public final class AlertLifecycle {
     }
   }
 
+  private static final String INVALID_ELAPSED = "invalid alert elapsed time";
   private static final Duration WARNING_RECOVERY = Duration.ofMinutes(5);
   private static final Duration CRITICAL_RECOVERY = Duration.ofMinutes(10);
   private final Object lock = new Object();
@@ -126,10 +127,10 @@ public final class AlertLifecycle {
     Objects.requireNonNull(clearance, "cause clearance");
     Objects.requireNonNull(at, "observation time");
     Objects.requireNonNull(elapsed, "monotonic elapsed");
-    if (elapsed.isNegative()) throw new IllegalArgumentException("invalid alert elapsed time");
+    if (elapsed.isNegative()) throw new IllegalArgumentException(INVALID_ELAPSED);
     synchronized (lock) {
       if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
-        throw new IllegalArgumentException("invalid alert elapsed time");
+        throw new IllegalArgumentException(INVALID_ELAPSED);
       lastElapsed = Optional.of(elapsed);
       if (observed == Severity.NORMAL) return normal(clearance, elapsed);
       recoveringSince = Optional.empty();
@@ -172,10 +173,10 @@ public final class AlertLifecycle {
   /** Missing samples/gaps preserve the open event but never bridge a normal recovery period. */
   public void interruptContinuity(Duration elapsed) {
     Objects.requireNonNull(elapsed, "monotonic elapsed");
-    if (elapsed.isNegative()) throw new IllegalArgumentException("invalid alert elapsed time");
+    if (elapsed.isNegative()) throw new IllegalArgumentException(INVALID_ELAPSED);
     synchronized (lock) {
       if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
-        throw new IllegalArgumentException("invalid alert elapsed time");
+        throw new IllegalArgumentException(INVALID_ELAPSED);
       lastElapsed = Optional.of(elapsed);
       recoveringSince = Optional.empty();
     }

@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
+from host_tool_invocation import capture, verify
 from pg7006_monitoring_pure_host import POM, SLOT, SUITE
 
 OUT = host.BASE/'PG7008-monitoring-mode-post-v1'
@@ -32,6 +33,7 @@ def require(value, message):
 
 
 def main():
+    invocation=capture(Path(__file__))
     os.umask(0o077);PRIVATE.mkdir()
     original = json.loads((SLOT/'manifest.safe.json').read_bytes())
     begin = json.loads((SLOT/'begin.safe.json').read_bytes())
@@ -110,7 +112,8 @@ def main():
     require(all(host.sha(snapshot/p)==h for p,h in begin['inputHashes'].items()),'all source unchanged after post')
     value=dict(source=begin['source'],sourceRun=RUN,actualExit=0,
       originalManifestSha256=host.sha(SLOT/'manifest.safe.json'),originalBeginSha256=host.sha(SLOT/'begin.safe.json'),
-      originalArchiveSha256=host.sha(SLOT/'source.tar'),command='python3 -B tools/quality/pg7008_monitoring_mode_post.py',
+      originalArchiveSha256=host.sha(SLOT/'source.tar'),command=invocation['actualPythonCommand'],
+      invocation=invocation,
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),os=platform.platform(),
       toolSha256=host.sha(Path(__file__)),harnessPomSha256=host.sha(snapshot/POM),sourceFiles=source_files,
       xmlHashes=original['xmlHashes'],tests=TOTAL_TESTS,suites=len(EXPECTED_SUITES),physicalClasses=physical,executableClasses=independent,
@@ -120,6 +123,7 @@ def main():
       auditStages=stages,auditLibraries={str(p):host.sha(p) for p in libs},
       formalUpdated=False,wholeSixQualified=False,newAccepted=0,effortPercent=None,
       actualVmActions=0,actualDatabaseActions=0,original4222Repeated=False,original44Repeated=False)
+    verify(invocation)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,source=begin['source'],tests=TOTAL_TESTS,counters=totals,
       static={k:dict(actualExit=v['actualExit'],findings=len(v['findings'])) for k,v in raw.items()},

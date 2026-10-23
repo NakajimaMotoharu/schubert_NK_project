@@ -6,6 +6,7 @@ import subprocess
 from pathlib import Path
 
 import pg6908_public_delta_scan as scan
+from host_tool_invocation import capture, verify
 
 BEFORE='4f999670a835e8500dfecee19b456977185eaa69'
 OUT=scan.BASE/'PG6990-recovery-public-delta-v1'
@@ -20,6 +21,7 @@ def allowed(path):
 
 
 def main():
+    invocation=capture(Path(__file__))
     names=scan.paths(subprocess.check_output(['git','diff','--name-only','-z',BEFORE,'--'],cwd=scan.ROOT))
     names.update(scan.paths(subprocess.check_output(['git','ls-files','--others','--exclude-standard','-z'],cwd=scan.ROOT)))
     own=OUT.relative_to(scan.ROOT).as_posix()+'/'
@@ -36,10 +38,11 @@ def main():
     value=dict(actualExit=1 if findings else 0,before=BEFORE,
                head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=scan.ROOT,text=True).strip(),
                timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-               command='python3 -B tools/quality/pg6990_recovery_public_scan.py',toolSha256=scan.sha(Path(__file__)),
+               command=invocation['actualPythonCommand'],invocation=invocation,toolSha256=scan.sha(Path(__file__)),
                files=rows,findings=findings,rules=list(scan.RULES),matchedValuesSaved=False,
                scope='DECLARED_RECOVERY_PUBLIC_TEXT_DELTA_THREE_FORMAT_PATTERNS_NOT_ALL_SECRETS_OR_RUNTIME',
                preciseCommonScope=sorted(COMMON),selfOutputOnlyExcluded=own,newPt=0,vmActions=0,formalUpdated=False)
+    verify(invocation)
     os.umask(0o077);OUT.mkdir()
     with (OUT/'manifest.json').open('x') as f:
         json.dump(value,f,ensure_ascii=False,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())

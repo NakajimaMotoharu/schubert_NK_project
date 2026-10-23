@@ -8,6 +8,7 @@ import zipfile
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
+from host_tool_invocation import capture, verify
 import pg6960_archunit as architecture
 import pg7030_monitoring_six_compile as compile_stage
 
@@ -55,6 +56,7 @@ def step(name, command):
 
 
 def main():
+    invocation=capture(Path(__file__))
     os.umask(0o077)
     require(not OUT.exists(),'new-only post publication')
     SLOT.mkdir(exist_ok=True)
@@ -126,7 +128,7 @@ def main():
     require(receipt['actualExit']==0 and result['physical']==TOTAL_PHYSICAL and not result['findings']
             and all(v==0 for v in result['rules'].values()),'all fresh physical classes/all five rules zero')
     value=dict(actualExit=0,source=raw['source'],timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-      command='python3 -B tools/quality/pg7032_monitoring_six_artifact_post.py',toolSha256=host.sha(Path(__file__)),
+      command=invocation['actualPythonCommand'],invocation=invocation,toolSha256=host.sha(Path(__file__)),
       compileManifestSha256=host.sha(compile_stage.SLOT/'manifest.safe.json'),
       originalWholeQualification=dict(path=str(qp.relative_to(host.ROOT)),sha256=Q_SHA,source=ORIGINAL,notRelabeledAsCurrentPass=True),
       currentComponentQualification=dict(path=str(cp.relative_to(host.ROOT)),sha256=COMPONENT_SHA,tests=COMPONENT_TESTS),
@@ -138,6 +140,7 @@ def main():
       testsExecutedByPost=0,targetsLoadedOrInitialized=False,actualVmActions=0,actualDatabaseActions=0,
       original4222Repeated=False,original44Repeated=False,whole451Accepted=False,
       fullRegressionStillRequiredForFormalAcceptance=True,formalUpdated=False,newAccepted=0,effortPercent=None)
+    verify(invocation)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,source=raw['source'],physical=TOTAL_PHYSICAL,oldUnchanged=1669,
       newExecutable=NEW_EXECUTABLE,newMetadata=1,architecture=result['rules'],

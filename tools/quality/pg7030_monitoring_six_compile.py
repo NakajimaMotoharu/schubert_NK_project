@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
+from host_tool_invocation import capture, verify
 from pg7000_monitoring_mode_host import MODULES
 
 SOURCE = 'c285c38ac4fcc3f16bfd3d2051ec76c352227f74'
@@ -38,6 +39,7 @@ def preflight():
 
 
 def main():
+    invocation=capture(Path(__file__))
     os.umask(0o077)
     if SLOT.exists():
         raise ValueError('new-only source compile, observe original job instead of restarting')
@@ -60,7 +62,7 @@ def main():
       archiveSha256=host.sha(archive),inputHashes=inputs,pomPreflight=poms,
       testsExecuted=0,testStatus='UNRUN_NOT_PASS_COMPILE_ONLY',wholePtQualified=False,
       commonModuleSelected=False,actualVmActions=0,actualDatabaseActions=0,rootMainInvoked=False,
-      toolSha256=host.sha(Path(__file__)))
+      toolSha256=host.sha(Path(__file__)),invocation=invocation)
     host.write(SLOT/'begin.safe.json',begin)
     with (SLOT/'maven.log').open('xb') as log:
         child=subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
@@ -82,6 +84,7 @@ def main():
     value=dict(begin=begin,terminal=terminal,jars=jars,source=SOURCE,actualExit=code,
       testsExecuted=0,testStatus='UNRUN_NOT_PASS_COMPILE_ONLY',sourceInputsUnchanged=True,
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None)
+    verify(invocation)
     host.write(SLOT/'manifest.safe.json',value)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=code,source=SOURCE,jars=len(jars),testsExecuted=0,

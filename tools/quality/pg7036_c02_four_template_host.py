@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
+from host_tool_invocation import capture, verify
 from pg7000_monitoring_mode_host import MODULES
 
 SLOT = host.W/'pg7036-c02-four-template-host-v1'
@@ -24,6 +25,7 @@ METHODS = {'unitSup001BackupAllDeclaredContracts','unitSup002AdminDisabledAndDed
 
 
 def main():
+    invocation=capture(Path(__file__))
     os.umask(0o077)
     if SLOT.exists():
         raise ValueError('new-only actual fixture; observe existing job instead of replay')
@@ -46,7 +48,7 @@ def main():
     begin=dict(source=source,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       branch='dev-foundation',archiveSha256=host.sha(archive),inputHashes=inputs,commands=commands,
       selectedTest=TEST,selectedSuite=SUITE,resourceFiles=list(FILES),actualVmActions=0,actualDatabaseActions=0,
-      productionExecutableDependencies=[],mainSourcesCompiled=0,toolSha256=host.sha(Path(__file__)))
+      productionExecutableDependencies=[],mainSourcesCompiled=0,toolSha256=host.sha(Path(__file__)),invocation=invocation)
     host.write(SLOT/'begin.safe.json',begin)
     stages=[]
     for name,command in commands:
@@ -84,6 +86,7 @@ def main():
       suites=suites,cases=cases,xmlHashes=xmls,actualResources=resources,sourceInputsUnchanged=True,
       coverage='NOT_APPLICABLE_CONFIGURATION_NOT_JAVA_NO_0_OVER_0_PASS',
       formalUpdated=False,newAccepted=0,wholeC02Accepted=False,effortPercent=None)
+    verify(invocation)
     host.write(SLOT/'manifest.safe.json',value);OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=value['actualExit'],source=source,suites=suites,
                          resources=len(resources),manifestSha256=host.sha(OUT/'manifest.json'))))

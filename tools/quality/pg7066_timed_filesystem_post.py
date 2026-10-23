@@ -12,7 +12,7 @@ METHODS={
  'timedFs006ConcurrentOwnerAndLocalStatusLiteral'}
 
 
-if __name__=='__main__':
+def configure():
     post.SLOT=host.SLOT
     post.RUN='PG7064-timed-filesystem-host-v1'
     post.OUT=post.host.BASE/'PG7066-timed-filesystem-post-v1'
@@ -30,4 +30,8 @@ if __name__=='__main__':
                          for name,count in zip(host.SUITES,(7,6,10,4,14,7,6,8,2,6),strict=True)}
     post.TOTAL_TESTS=70
     post.SOURCE_FILE_COUNT=21
-    post.main()
+    return post
+
+
+if __name__=='__main__':
+    configure().main()
