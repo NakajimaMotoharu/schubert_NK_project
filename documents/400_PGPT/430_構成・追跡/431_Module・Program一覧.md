@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加：BackupHealthMonitor/Completion/Evaluation→BACKUPMON001～008/1683～1684/PG-D554/RD171/UI252/SS341351。source017308824/212PT28suite・実52四100/全1753/全96trace/生成93/raw28全理由、供給status/countと既BACKUP/BATCH lifecycle結線。BATCHは論理keyで実source/owner/日付/Backup/collector/制御は未受入、正式/全体PGPTへ合算0。
+
 2026-10-24現行：AlertLifecycle.normalとAlertLifecycleTest/AlertRegistryTest/MonitoringPolicyEngineTest/MonitoringMissingObservationTest→PROTECTEDALERT001～002・ALERTREG002・MONPIPE003・MONMISSING001/1681～1682/PG-D553/RD171/UI252/SS351§12。source3a863d360/204PT・実49四100/全1750/全94trace五編集、BUG1667-YKT1418自動close禁止限定CLOSED。実手動調査/退役/権限・永続は未受入、全体正式へ合算0。
 
 2026-10-24現行訂正完了：Main三/Test三のAsync byte独立入力/ByteUsage/Evaluation、1679～1680/PG-D552/BUG1665-YKT1416。source8f6b3bff2で202PT27suite・実49四100・全1750Main/94source/81physicaltrace/生成82/raw28全分類を確認、元192/200は歴史で割合要件PASSに流用0。実source/control・正式/whole451は未受入。
