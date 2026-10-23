@@ -1,0 +1,13 @@
+# 1678 fresh利用枠binding 是正記録
+
+BUG1664/YKT1415、発見2026-10-23/限定完了2026-10-24。元events1893（Expiry群開始）のquotaBefore23/77を上書きせず、1894へ実観測24/76/reset1793306748との訂正をappend。API応答を読む前にorchestrationへ旧literalを書いたoperator原因、開始見積2/4/8pp・原/v4/v5・元窓0は不変更、群capは旧23基準33を保守的に維持。実費の次観測は訂正24から、直前23→24の共有区間は専有/PGPT/PMOへ推定配賦しない。fresh24でも残76>10、着手停止条件の違反なし。Product source/PT/正式認定に影響0。
+
+修正工具commit `e108bc6ef4be4bd2f0fe035ee72f98ad5309fcf4`。`pmo_quota_binding.receipt`が実get_usage_limitsのcodex bucket（なければlegacy）の使用値・marker・窓と時刻だけをsanitized保存し、accountId/credits等は保持しない。`append_start`が保存receipt SHA/鮮度120秒/未来・expired marker/primary取得可否/ordinary allowed/該当secondaryを含む残10超/旧literal差替/receipt・group重複を検査して実数値をwriterへ結合する。metadataはvendor署名付きではなく、guardは同一性/鮮度/一回性を検証するもの。呼出し側は必ずfresh tool応答を取り込み、古い応答の時刻を更新して再利用してはならない。
+
+QUOTA-GUARD001～010は初回unittest実exit0/10件FES0、元tool chunk3088b5を保持。正確な初回実行時刻は未取得のままnull・後から捏造0/確認再演0、当source hashは後記manifestへ捕捉。QUOTA-WRITER001～004は初回frozen工具sourceから新規に実行し、保存receipt24がwriterへそのまま届く/旧23と改ざん/同receipt・group重複/低残・未知・stale・missingを各確認。自己所有temp metadataとfake appendだけ、実events/利用枠API/Production PT操作0。
+
+`PG7517-quota-binding-writer-post-v1/manifest.json`原SHA `58b7f6e662c8a511a0e21a93f79e53a40aca1477addc7ae498e6bf086ca82e78`、2026-10-24 00:02:14 JST（原UTC start/end参照）、工具四integration実exit0/4件FES0/pyflakes-Werror0/前後source不変。工具10＋4をProduction PT/実測coverage/元190受入へ加算0。
+
+直近1889/1891開始・1892終了の23は当chat実応答23と一致、1893誤記と1894訂正を元JSONで限定照合。古い全履歴のreceipt未取得はunknownのまま全量監査済みとはしない。再発予防対象は以後の新群writerすべて、`append_start`を使い手入力quotaBeforeを禁止する。通常checkpoint/endも同様にfresh receiptの値を直接使い、unknownや0消費を推測しない。
+
+1895は新たな実API応答から直接取得したfresh24/76をactive Expiry群へ結合したcheckpoint（新GROUP_START0/原event変更0）。`fresh-receipt.json`はcanonical semantic SHA `bcdf36349ad488e64ab24d98db0e27aa6e33428421f8528caebaa2f27bd44202`、file SHA `ef23492e46e3cf63934dfa4183e554a92825a4f634c9798758363b2347159344`。pathは7517公開directory、private/account/credential保存0。元Expiry MainとPG-D551は未commit/未試験として保持し、この計測是正で200PTやsource受入を宣言しない。正式1964-53/原190新受入0/工数null/QA051final/PTALT0/actualHOLD不変更。

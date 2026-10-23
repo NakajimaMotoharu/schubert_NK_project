@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：[1678 fresh利用枠binding是正](../../evidence/01_PT/018_NK-OPS-001/1678_fresh利用枠binding_是正記録.md)。BUG1664/YKT1415をtool/operator限定閉鎖、原1893誤23を残してfresh24へ追記訂正・receipt直結guard/初回pure10＋frozen writer4・Product PT加算0。Expiry Main/PG-D551は未commit・未試験、製品資格はd56/192のまま。
+
 2026-10-23最新：[1674 Async Queue警報仕様](../../evidence/01_PT/018_NK-OPS-001/1674_AsyncQueue警報_単体テスト仕様書.md)・[1675結果追跡](../../evidence/01_PT/018_NK-OPS-001/1675_AsyncQueue警報_結果・追跡.md)。sourced56b2cc0a/Batch192PT26suite（元製造新8）/実46四100/CRC0、六正常compile/全1747Main・旧1669byte不変/全92trace/raw28個別理由。供給count/capacityのexact ratio・partial unknownと既lifecycle結線、actual queue/control・正式/工数は未更新。
 
 2026-10-23最新：[1672 WebLog滞留警報仕様](../../evidence/01_PT/018_NK-OPS-001/1672_WebLog滞留警報_単体テスト仕様書.md)・[1673結果追跡](../../evidence/01_PT/018_NK-OPS-001/1673_WebLog滞留警報_結果・追跡.md)。source3174583f4/Batch184PT25suite（元製造新8）/実44四100/CRC0、六正常compile/全1745Main・旧1669byte不変/全90trace/raw28個別理由。片側未知と既知異常/復旧窓のpure結線、actual source/control/正式・工数は未更新。
