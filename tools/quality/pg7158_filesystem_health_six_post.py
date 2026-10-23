@@ -16,6 +16,11 @@ from host_tool_invocation import capture,verify
 
 SLOT=host.W/'pg7158-filesystem-health-six-post-v1'
 OUT=host.BASE/'PG7158-filesystem-health-six-post-v1'
+CURRENT_TESTS=83
+CURRENT_SUITES=12
+CURRENT_PHYSICAL=22
+PHYSICAL_COUNT=1701
+SOURCE_DELTA_COUNT=37
 PINS={
  'original':('PG6930-current4222-cases/qualification.json','728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731'),
  'currentBatch':('PG7154-filesystem-health-post-v1/manifest.json','a86ed6ca91bc6df6d9bd886cf7b487a5253176a2f22b55c7b82b31657a5e110f'),
@@ -41,16 +46,16 @@ def main():
         witnesses[name]=json.loads(file.read_bytes())
     old=witnesses['original'];current=witnesses['currentBatch'];history=witnesses['webHistory']
     require(old['productionSource']=='e7d64fda2453e906ee6ccc5fe718e5c29841e4aa'
-      and current['source']==compilation.SOURCE and current['tests']==83 and current['suites']==12
-      and current['actualCrcMismatch']==0 and current['actualSessions']==1,'current83 exact source/session and historical baseline')
+      and current['source']==compilation.SOURCE and current['tests']==CURRENT_TESTS and current['suites']==CURRENT_SUITES
+      and current['actualCrcMismatch']==0 and current['actualSessions']==1,'current component exact source/session and historical baseline')
     base=old['allPhysicalMainSha256']
     batch={'batch:'+k:v for k,v in current['physicalClasses'].items()}
     web=history['currentHttp']['physicalClasses']
     require(history['source']=='19c777bf3dbe3ddd0286d4c356a00ca8a47c99c5'
-      and history['currentHttp']['tests']==23 and len(base)==1669 and len(batch)==22 and len(web)==10
+      and history['currentHttp']['tests']==23 and len(base)==1669 and len(batch)==CURRENT_PHYSICAL and len(web)==10
       and all(k.startswith('web:') for k in web),'historical ten Web classes, never current Web execution')
     expected={**base,**batch,**web}
-    require(len(expected)==1701,'all three ownership domains disjoint')
+    require(len(expected)==PHYSICAL_COUNT,'all three ownership domains disjoint')
     physical={};jars={}
     require(set(raw['jars'])==set(architecture.MODULES),'all six actual normal Jars')
     for role,item in raw['jars'].items():
@@ -60,7 +65,7 @@ def main():
                 if not entry.endswith('.class'):continue
                 key=role+':'+entry;require(key not in physical,'unique actual physical owner')
                 physical[key]=hashlib.sha256(jar.read(entry)).hexdigest()
-    require(physical==expected,'all1701 exact, original1669 unchanged including debug, current22/historical10 bytes joined')
+    require(physical==expected,'all declared physical bytes exact, original1669 unchanged including debug, current/historical bytes joined')
     parts=subprocess.check_output(['git','diff','--name-status','-z',old['productionSource'],compilation.SOURCE,'--','src'],cwd=host.ROOT).split(b'\0')[:-1]
     require(len(parts)%2==0,'exact source delta grammar')
     extras={'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java':'WBS-C02',
@@ -79,7 +84,7 @@ def main():
         else:require(status=='A' and (allowed or path in extras),'no undeclared legacy code/config/schema changes')
         source_rows.append(dict(path=path,status=status,sha256=host.sha(snapshot/path),owner=extras.get(path,'WBS-P018-09'),
              sharedReference='WBS-C07' if allowed else None,sharedAdditionalCostPp=0))
-    require(len(source_rows)==37 and reviewed_pom is not None,'all36 additions and single reviewed POM node change')
+    require(len(source_rows)==SOURCE_DELTA_COUNT and reviewed_pom is not None,'all declared additions and single reviewed POM node change')
     require(raw['begin']['dependencyJarHashes']==history['currentSdkJarHashes']
       and all(host.sha(Path(p))==h for p,h in raw['begin']['dependencyJarHashes'].items()),'unchanged actual SDK four jars, not a current Web execution claim')
     prior=witnesses['architecture']
@@ -93,12 +98,12 @@ def main():
     stage,text=steps.step('audit-six',[str(architecture.JAVA),'-cp',os.pathsep.join([str(classes),str(architecture.ARCH),str(architecture.SLF)]),
        'ModuleDependencyAudit',*[role+'='+str(jars[role]) for role in architecture.MODULES]])
     result=architecture.parse(text)
-    require(stage['actualExit']==0 and result['physical']==1701 and not result['findings']
+    require(stage['actualExit']==0 and result['physical']==PHYSICAL_COUNT and not result['findings']
       and all(v==0 for v in result['rules'].values()),'all actual physical classes/five rules zero')
     value=dict(actualExit=0,source=compilation.SOURCE,invocation=invocation,witnesses=PINS,
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),compileManifestSha256=host.sha(compilation.SLOT/'manifest.safe.json'),
-      jars=raw['jars'],allPhysicalClassCount=1701,oldPhysicalUnchanged=1669,
-      currentBatch=dict(source=current['source'],tests=83,suites=12,physicalClasses=batch,counters=current['counters'],
+      jars=raw['jars'],allPhysicalClassCount=PHYSICAL_COUNT,oldPhysicalUnchanged=1669,
+      currentBatch=dict(source=current['source'],tests=CURRENT_TESTS,suites=CURRENT_SUITES,physicalClasses=batch,counters=current['counters'],
                         actualCrcMismatch=0,actualSessions=1,currentSourceExecutionAccepted=True),
       historicalWeb=dict(source=history['source'],physicalClasses=web,byteIdentityOnly=True,currentSourceExecutionAccepted=False,
                          coverageNotTransferred=True),newSourceDelta=source_rows,reviewedWebPomChange=reviewed_pom,
@@ -106,7 +111,7 @@ def main():
       targetClassLoadOrInitialization=False,whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None,
       original4222Replayed=False,original44Replayed=False,actualVmActions=0,actualDatabaseActions=0)
     verify(invocation);OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,physical=1701,currentBatch=22,historicalWebOnly=10,sourceDeltas=37,
+    print(json.dumps(dict(actualExit=0,physical=len(physical),currentBatch=len(batch),historicalWebOnly=len(web),sourceDeltas=len(source_rows),
       architecture=result['rules'],manifestSha256=host.sha(OUT/'manifest.json'))))
 
 

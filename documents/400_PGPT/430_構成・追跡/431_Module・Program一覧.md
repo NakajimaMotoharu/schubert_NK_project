@@ -377,6 +377,8 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 ## 5. 更新履歴
 
+2026-10-23 clock追記：NK-OPS-001/P01809/C07、MonitoringObservationClock constructor/context、FilesystemHealthMonitor.observeNow/observeLocked/既observe →OBSCLOCK001..008/FSINPUT001..010・1586～1589/PG-D530/RD171/UI252/SS351。source3b2ef576c/当91PT13suite/実22scope四100/CRC0・全1702正常Jar/全39差分の追跡7174 b0a847a4、当21staticの個別理由7176 7ab9831d。Clock/入力失敗の欠測flagと新旧APIの回復切断は通常PT、実OS時刻/epoch/collector/制御・全体451は未受入。新sourceへ旧Web23/全4222/common44の実行・coverage移植0。
+
 2026-10-23 health観測追記：NK-OPS-001/P01809/C07、FilesystemHealthObservation constructor/read・FilesystemHealthMonitor constructor/observe/snapshot →FSINPUT001..010/1582～1585/PG-D529、RD171/UI252/SS351。sourcebbc230f8a/当83PT12suite・実21scope四100/CRC0/全1701正常Jar・全37差分追跡7160 2d22a8b9。実FS/時刻/collector/制御/Root・全体451は未受入、標準Micrometerを独自backendへ置換0、歴史Web23を当source実行へ合算0。型・全method・独立byte/IEEE oracle・source-owning fixtureから当証拠まで追跡可能。
 
 2026-10-23 HTTP terminal追記：NK-OPS-001/P01809/C07、HttpMetricValve constructor/invoke/log/signalFailure/Completion.claim →HTTPTERM001..008/1577～1581、RD171/UI252/SS312351。candidate19c777bf3・当23PT/九scope四100/CRC0・全1699実Jar/全34差分の追跡は7150 a4b938d8、全五static適用性は7144 67f7d0e9。既request trace/Logger/Mainは原e7からbyte不変、実HTTP/Root登録/exporter/全体451は未受入。旧Batch73/旧Web15/原全体4222/common44を当source全体へ転用しない。個別source別の技術成果であり既正式完了記述を当candidateへ適用0。
