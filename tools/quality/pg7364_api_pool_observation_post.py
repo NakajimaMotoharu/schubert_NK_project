@@ -20,7 +20,7 @@ METHODS={
  'poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts',
  'poolConn008SeparateOwnersAndRepeatedCollectionCannotGrowSeriesOrControlPool'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7362-api-pool-observation-host-v1'
     post.OUT=post.host.BASE/'PG7364-api-pool-observation-post-v1'
@@ -30,4 +30,7 @@ if __name__=='__main__':
     for name in host.SUITES[4:]:post.EXPECTED_SUITES[name]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=48;post.SOURCE_FILE_COUNT=13
     post.EXTRA_AUXILIARY_JARS=host.DEPENDENCIES
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
