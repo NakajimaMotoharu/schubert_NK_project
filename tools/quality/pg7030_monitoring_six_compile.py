@@ -22,6 +22,7 @@ PLUGINS = {'maven-compiler-plugin','maven-surefire-plugin','maven-jar-plugin',
            'jacoco-maven-plugin','spotbugs-maven-plugin','maven-enforcer-plugin',
            'spotless-maven-plugin'}
 DEPENDENCY_JARS = {}
+CAPTURE_TEST_CLASSPATH = False
 
 
 def preflight():
@@ -57,6 +58,9 @@ def main():
     command=[str(host.TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'),'-o',
              '--no-transfer-progress','-Dmaven.repo.local='+str(host.TC/'m2/repository'),
              '-pl',MODULES,'-am','-DskipTests=true','package']
+    if CAPTURE_TEST_CLASSPATH:
+        command += ['org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath',
+                    '-DincludeScope=test','-Dmdep.outputFile=target/pgpt-test-classpath.txt']
     env=dict(PATH=str(host.TC/'jdk-25.0.4/bin')+':/usr/bin:/bin',JAVA_HOME=str(host.TC/'jdk-25.0.4'),
              MAVEN_USER_HOME=str(host.TC/'m2'),MAVEN_SKIP_RC='true',LANG='C.UTF-8',
              MAVEN_OPTS='-Xmx2g -Djava.awt.headless=true')
@@ -66,6 +70,7 @@ def main():
       testsExecuted=0,testStatus='UNRUN_NOT_PASS_COMPILE_ONLY',wholePtQualified=False,
       commonModuleSelected=False,actualVmActions=0,actualDatabaseActions=0,rootMainInvoked=False,
       toolSha256=host.sha(Path(__file__)),invocation=invocation,dependencyJarHashes=DEPENDENCY_JARS)
+    begin['captureTestClasspath']=CAPTURE_TEST_CLASSPATH
     host.write(SLOT/'begin.safe.json',begin)
     with (SLOT/'maven.log').open('xb') as log:
         child=subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
