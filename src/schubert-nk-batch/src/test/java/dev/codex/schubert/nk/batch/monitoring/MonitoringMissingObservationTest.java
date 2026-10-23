@@ -84,7 +84,9 @@ class MonitoringMissingObservationTest {
                     Duration.ofSeconds(600))
                 .orElseThrow()
                 .isOpen());
-        assertFalse(
+        boolean protectedKey =
+            condition == Condition.DLQ || condition == Condition.INTEGRITY_CONFIG;
+        boolean stillOpen =
             registry
                 .observe(
                     condition,
@@ -94,11 +96,20 @@ class MonitoringMissingObservationTest {
                     AT,
                     Duration.ofSeconds(601))
                 .orElseThrow()
-                .isOpen());
-        closed++;
+                .isOpen();
+        assertEquals(protectedKey, stillOpen);
+        if (!stillOpen) closed++;
       }
-    assertEquals(72, closed);
-    assertTrue(registry.activeEvents().isEmpty());
+    assertEquals(60, closed);
+    assertEquals(12, registry.activeEvents().size());
+    for (var event : registry.activeEvents()) {
+      assertTrue(
+          event.condition() == Condition.DLQ || event.condition() == Condition.INTEGRITY_CONFIG);
+      assertTrue(event.isOpen());
+      assertEquals(BigInteger.ONE, event.count());
+      assertEquals(AT, event.firstSeen());
+      assertEquals(AT, event.lastSeen());
+    }
   }
 
   @Test

@@ -1,5 +1,7 @@
 # 1681 調査対象警報の自動close禁止 単体テスト仕様書
 
+2026-10-24追補（元予測を削除しない）：初回source9c087705c/7548は204/F2・原df3badf1、AlertRegistryTest.ALERTREG002とMonitoringMissingObservationTest.MONMISSING001にも旧全72自動close期待値を検出。BUG1667/YKT1418のoracle対象へ追加し、SS351§12から独立に保護二condition×6service=12保持/他60closeへ訂正。欠測301→600→601の元5分境界はそのまま、元epoch/count/first/lastも保持を確認。新ordinary件数は204のまま・失敗2を合格へ加算0。Main一/Test四の五編集anchorへ更新、初回六compile7552は9cのPT0正常で歴史保存、新sourceは7548-v2（工具7549）/7550/7553正常六compile/7554/7556/7558で別資格化。初回三編集/予測sourceと混同しない。
+
 NK-OPS-001/P01809/C07/RD171/UI252/SS351§7・12/353/BUG1667-YKT1418/PG-D553/group1899。既共通normal回復より条件固有禁止を優先する。AlertLifecycle.normalのDLQ/INTEGRITY_CONFIGは供給正常・原因flagだけではactiveを退役しない。手動調査・明示退役の実運用/永続/権限経路は本限定修正で追加・受入しない。
 
 | Test ID / method | fixture/操作/独立期待値 |

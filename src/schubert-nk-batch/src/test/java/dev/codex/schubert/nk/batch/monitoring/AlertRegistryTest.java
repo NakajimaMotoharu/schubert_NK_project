@@ -68,7 +68,16 @@ class AlertRegistryTest {
         observe(registry, condition, service, Severity.NORMAL, 300);
       }
     }
-    assertTrue(registry.activeEvents().isEmpty());
+    assertEquals(12, registry.activeEvents().size());
+    int retained = 0;
+    for (var condition : new Condition[] {Condition.DLQ, Condition.INTEGRITY_CONFIG})
+      for (var service : Service.values()) {
+        var event = registry.activeEvents().get(retained++);
+        assertEquals(condition, event.condition());
+        assertEquals(service, event.service());
+        assertEquals(BigInteger.ONE, event.count());
+        assertTrue(event.isOpen());
+      }
     assertEquals(72, historical.size());
     assertTrue(historical.stream().allMatch(AlertLifecycle.Event::isOpen));
   }
