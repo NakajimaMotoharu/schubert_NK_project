@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24現行：RestartHealthMonitor/Evaluation＋AlertThresholds.restarts/MonitoringPolicyEngine.restartsと対応Test→RESTARTMON001～008・RESTARTFLAG001・THRESH011/013/014/1685～1686/PG-D555/BUG1668-YKT1419/RD171/UI252/SS351。source9f7697a28/221PT29suite・実54四100/全1755/98trace/生成99/raw28全理由、供給count/独立rate-limit結線。actual Unit/history/owner/collector/control・正式未受入。
+
 2026-10-24追加：BackupHealthMonitor/Completion/Evaluation→BACKUPMON001～008/1683～1684/PG-D554/RD171/UI252/SS341351。source017308824/212PT28suite・実52四100/全1753/全96trace/生成93/raw28全理由、供給status/countと既BACKUP/BATCH lifecycle結線。BATCHは論理keyで実source/owner/日付/Backup/collector/制御は未受入、正式/全体PGPTへ合算0。
 
 2026-10-24現行：AlertLifecycle.normalとAlertLifecycleTest/AlertRegistryTest/MonitoringPolicyEngineTest/MonitoringMissingObservationTest→PROTECTEDALERT001～002・ALERTREG002・MONPIPE003・MONMISSING001/1681～1682/PG-D553/RD171/UI252/SS351§12。source3a863d360/204PT・実49四100/全1750/全94trace五編集、BUG1667-YKT1418自動close禁止限定CLOSED。実手動調査/退役/権限・永続は未受入、全体正式へ合算0。

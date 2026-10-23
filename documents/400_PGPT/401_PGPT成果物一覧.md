@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24現行：[1685 Restart仕様](../../evidence/01_PT/018_NK-OPS-001/1685_Restart供給観測・rateLimit是正_単体テスト仕様書.md)・[1686結果横展開](../../evidence/01_PT/018_NK-OPS-001/1686_Restart供給観測・rateLimit是正_結果・横展開.md)。source9f7697a28/221PT29suite・実54四100/全1755/98trace/生成99/raw28理由、元製造8＋是正1・BUG1668-YKT1419限定閉鎖。実Unit/control/正式・全体完了へ加算0。
+
 2026-10-24現行：[1683 Backup供給観測仕様](../../evidence/01_PT/018_NK-OPS-001/1683_Backup供給観測警報_単体テスト仕様書.md)・[1684結果追跡](../../evidence/01_PT/018_NK-OPS-001/1684_Backup供給観測警報_結果・追跡.md)。source017308824/212PT28suite・実52四100/全1753/96trace/生成93/raw28全理由、新製造8/新BUG0。実Backup/運用/whole451・正式受入への加算0。
 
 2026-10-24現行：[1681禁止仕様](../../evidence/01_PT/018_NK-OPS-001/1681_調査対象警報の自動close禁止_単体テスト仕様書.md)・[1682結果横展開](../../evidence/01_PT/018_NK-OPS-001/1682_調査対象警報の自動close禁止_結果・横展開.md)。source3a863d360/204PT27suite/実49四100・全1750/94trace/生成82/raw28全理由、BUG1667-YKT1418当禁止修正閉鎖。初回204F2を保持し、実手動退役/全監視/正式完了へ加算0。

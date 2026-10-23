@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24 Restart：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source9f7697a28/221普通PT29suite/実54四100/CRC0・正常六compile/PT0・全1755Main/元1669byte不変/三POM・SDK・当五rule0、環境/command/time/hashは1686。raw28全理由/変更Threshold百分率method不変/生成新6＋既93当実行/除外0、actual操作0。
+
 2026-10-24 Backup供給観測：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source017308824/212普通PT28suite・実52四100/CRC0・六正常Main/Test compile/PT0・全1753/旧1669byte不変/三POM/SDK/五rule0。全環境/command/time/hashは1684、raw28同byte理由/生成新11＋既82当実行/除外0、actual操作0。
 
 2026-10-24自動close禁止：既toolchain/SDK再利用・導入取得0。source9c初回204F2/normal六compilePT0を保持し、旧oracle二追補source3aの204/27・実49四100/CRC0/新正常六compile/全1750/当五rule/全94traceを別資格。PMD全28は二source行移動をexact二行guard挿入へ結合し抑制0、全環境/command/日時/hash/失敗原因は1682。actual操作0。
