@@ -13,19 +13,19 @@ SLOT = host.W/'pg7006-monitoring-pure-host-v1'
 POM = 'tools/quality/harnesses/monitoring-pom.xml'
 
 
-def main():
+def main(slot=SLOT, selected=(SUITE,)):
     os.umask(0o077)
-    if SLOT.exists():
+    if slot.exists():
         raise ValueError('new-only original run; never replay an existing begin')
     subprocess.run(['git','diff','--exit-code','HEAD','--','src','pom.xml','.mvn','mvnw',POM],
                    cwd=host.ROOT,stdout=subprocess.DEVNULL,check=True)
     source = subprocess.check_output(['git','rev-parse','HEAD'],cwd=host.ROOT,text=True).strip()
-    SLOT.mkdir()
-    archive = SLOT/'source.tar'
+    slot.mkdir()
+    archive = slot/'source.tar'
     with archive.open('xb') as f:
         subprocess.run(['git','archive','--format=tar',source,'pom.xml','.mvn','mvnw','src',
                         'program/characterization/pom.xml',POM],cwd=host.ROOT,stdout=f,check=True)
-    snapshot = SLOT/'snapshot';snapshot.mkdir();host.safe_extract(archive,snapshot)
+    snapshot = slot/'snapshot';snapshot.mkdir();host.safe_extract(archive,snapshot)
     inputs = host.inventory(snapshot)
     maven = [str(host.TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'),'-o',
              '--no-transfer-progress','-Dmaven.repo.local='+str(host.TC/'m2/repository')]
@@ -36,22 +36,22 @@ def main():
                MAVEN_OPTS='-Xmx2g -Djava.awt.headless=true')
     begin = dict(source=source,startUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       branch='dev-foundation',archiveSha256=host.sha(archive),inputHashes=inputs,commands=commands,
-      toolSha256=host.sha(Path(__file__)),selectedSuites=[SUITE],actualVmActions=0,
+      toolSha256=host.sha(Path(__file__)),selectedSuites=list(selected),actualVmActions=0,
       actualDatabaseActions=0,nativeTestsSelected=0,original4222Replayed=False,
       original44Replayed=False,scope='PURE_COMPONENT_NOT_WHOLE_QUALIFICATION')
-    host.write(SLOT/'begin.safe.json',begin)
+    host.write(slot/'begin.safe.json',begin)
     stages = []
     for name, command in commands:
         started = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        with (SLOT/(name+'.log')).open('xb') as log:
+        with (slot/(name+'.log')).open('xb') as log:
             child = subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
-            host.write(SLOT/(name+'-process.safe.json'),dict(pid=child.pid,cwd=str(snapshot),
+            host.write(slot/(name+'-process.safe.json'),dict(pid=child.pid,cwd=str(snapshot),
                        source=source,command=command,startUTC=started))
             code = child.wait();log.flush();os.fsync(log.fileno())
         row = dict(name=name,command=command,actualExit=code,startUTC=started,
                    endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                   logSha256=host.sha(SLOT/(name+'.log')))
-        host.write(SLOT/(name+'-exit.safe.json'),row);stages.append(row)
+                   logSha256=host.sha(slot/(name+'.log')))
+        host.write(slot/(name+'-exit.safe.json'),row);stages.append(row)
         if code:
             break
     code = stages[-1]['actualExit']
@@ -61,9 +61,10 @@ def main():
     cases, xmls, suites = [], {}, {}
     for path in sorted((target/'surefire-reports').glob('TEST-*.xml')):
         root = ET.parse(path).getroot()
-        if root.get('name') != SUITE or suites:
-            raise ValueError('exactly the one selected original suite')
-        suites[SUITE] = {k:int(root.get(k,'0')) for k in ('tests','failures','errors','skipped')}
+        name = root.get('name')
+        if name not in selected or name in suites:
+            raise ValueError('exact declared original suites, no unknown or repeated XML')
+        suites[name] = {k:int(root.get(k,'0')) for k in ('tests','failures','errors','skipped')}
         xmls[path.name] = host.sha(path)
         for case in root.findall('testcase'):
             invalid = [c.tag for c in case if c.tag not in ('system-out','system-err')]
@@ -80,8 +81,8 @@ def main():
     value = dict(source=source,actualExit=code,begin=begin,stages=stages,sourceInputsUnchanged=True,
       suites=suites,cases=cases,xmlHashes=xmls,counters=counters,newAccepted=0,
       formalUpdated=False,effortPercent=None,qualification='RAW_TERMINAL_ONLY_POST_PENDING')
-    host.write(SLOT/'manifest.safe.json',value)
-    out = host.BASE/'PG7006-monitoring-pure-host-v1';out.mkdir();host.write(out/'manifest.json',value)
+    host.write(slot/'manifest.safe.json',value)
+    out = host.BASE/('PG'+slot.name.removeprefix('pg'));out.mkdir();host.write(out/'manifest.json',value)
     print(json.dumps(dict(source=source,actualExit=code,suites=suites,counters=counters,
                          manifestSha256=host.sha(out/'manifest.json'))))
     raise SystemExit(code)

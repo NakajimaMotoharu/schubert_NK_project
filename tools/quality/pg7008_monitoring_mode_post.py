@@ -20,6 +20,10 @@ METHODS = {
  'monMode003AllThirtyTwoServiceStates','monMode004MissingObservationNeverMeansHealthy',
  'monMode005NullContractsAreNotNormalObservations','monMode006UnknownAndAliasedInputIsRedacted',
  'monMode007ConcurrentCallersCannotChangePolicy'}
+EXPECTED_SUITES = {SUITE:dict(tests=7,failures=0,errors=0,skipped=0)}
+TOTAL_TESTS = 7
+SOURCE_FILE_COUNT = 3
+RUN = 'PG7006-monitoring-pure-host-v1'
 
 
 def require(value, message):
@@ -34,17 +38,17 @@ def main():
     require(original['actualExit']==0 and [s['actualExit'] for s in original['stages']]==[0,0],
             'genuine prior format and verify terminal zero')
     require(original['source']==begin['source'] and original['begin']==begin,'original identities')
-    require(original['suites']=={SUITE:dict(tests=7,failures=0,errors=0,skipped=0)},'exact7 one suite FES0')
-    require({c['name'] for c in original['cases']}==METHODS and len(original['cases'])==7
-            and all(c['result']=='PASS' for c in original['cases']),'all seven original invocations no rerun/flaky')
+    require(original['suites']==EXPECTED_SUITES,'exact original declared suites and counts FES0')
+    require({c['name'] for c in original['cases']}==METHODS and len(original['cases'])==TOTAL_TESTS
+            and all(c['result']=='PASS' for c in original['cases']),'all declared original invocations no rerun/flaky')
     snapshot = SLOT/'snapshot';target = snapshot/'tools/quality/harnesses/target'
     require(all(host.sha(snapshot/p)==h for p,h in begin['inputHashes'].items()),'all immutable original source/POM hashes')
     for p,h in original['xmlHashes'].items():
         require(host.sha(target/'surefire-reports'/p)==h,'actual original XML hash')
     source_files = {p:h for p,h in begin['inputHashes'].items() if '/monitoring/' in p and p.endswith('.java')}
-    require(len(source_files)==3 and all(host.sha(host.ROOT/p)==h for p,h in source_files.items()),'current two Main source files/one Test exact')
+    require(len(source_files)==SOURCE_FILE_COUNT and all(host.sha(host.ROOT/p)==h for p,h in source_files.items()),'all declared current Main/Test source files exact')
     physical = {p.relative_to(target/'classes').as_posix():host.sha(p) for p in (target/'classes').rglob('*.class')}
-    require(set(physical)=={n+'.class' for n in NAMES}|{PREFIX+'package-info.class'},'all actual2 executable plus metadata class')
+    require(set(physical)=={n+'.class' for n in NAMES}|{PREFIX+'package-info.class'},'all declared executable plus metadata class')
     jdk = host.TC/'jdk-25.0.4/bin'
     libs = [host.TC/'m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar',
       *[host.TC/f'm2/repository/org/ow2/asm/{n}/9.10.1/{n}-9.10.1.jar' for n in ('asm','asm-tree','asm-commons')]]
@@ -68,7 +72,7 @@ def main():
             for item in parts[3:]:
                 key,missed,covered=item.split(':');counts[key]=dict(missed=int(missed),covered=int(covered))
             independent[parts[1]]=dict(crc64=parts[2],counters=counts)
-    require(set(independent)==NAMES,'both executed CRC identities')
+    require(set(independent)==NAMES,'all declared executed CRC identities')
     for name, value in independent.items():
         measured=original['counters'][name]
         for kind,count in value['counters'].items():
@@ -104,12 +108,12 @@ def main():
       covered=sum(v['counters'][kind]['covered'] for v in independent.values())) for kind in ('LINE','METHOD','CLASS','BRANCH')}
     require(all(v['missed']==0 and v['covered']>0 for v in totals.values()),'all four real component counters100')
     require(all(host.sha(snapshot/p)==h for p,h in begin['inputHashes'].items()),'all source unchanged after post')
-    value=dict(source=begin['source'],sourceRun='PG7006-monitoring-pure-host-v1',actualExit=0,
+    value=dict(source=begin['source'],sourceRun=RUN,actualExit=0,
       originalManifestSha256=host.sha(SLOT/'manifest.safe.json'),originalBeginSha256=host.sha(SLOT/'begin.safe.json'),
       originalArchiveSha256=host.sha(SLOT/'source.tar'),command='python3 -B tools/quality/pg7008_monitoring_mode_post.py',
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),os=platform.platform(),
       toolSha256=host.sha(Path(__file__)),harnessPomSha256=host.sha(snapshot/POM),sourceFiles=source_files,
-      xmlHashes=original['xmlHashes'],tests=7,suites=1,physicalClasses=physical,executableClasses=independent,
+      xmlHashes=original['xmlHashes'],tests=TOTAL_TESTS,suites=len(EXPECTED_SUITES),physicalClasses=physical,executableClasses=independent,
       metadataClasses=[PREFIX+'package-info.class'],actualCrcMismatch=0,actualSessions=1,counters=totals,
       spotbugs=dict(actualExit=0,findings=0,reportSha256=host.sha(target/'spotbugsXml.xml')),
       staticRaw=raw,staticDispositionRequired=any(v['actualExit']!=0 or v['findings'] or v['processingErrors'] for v in raw.values()),
@@ -117,7 +121,7 @@ def main():
       formalUpdated=False,wholeSixQualified=False,newAccepted=0,effortPercent=None,
       actualVmActions=0,actualDatabaseActions=0,original4222Repeated=False,original44Repeated=False)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,source=begin['source'],tests=7,counters=totals,
+    print(json.dumps(dict(actualExit=0,source=begin['source'],tests=TOTAL_TESTS,counters=totals,
       static={k:dict(actualExit=v['actualExit'],findings=len(v['findings'])) for k,v in raw.items()},
       manifestSha256=host.sha(OUT/'manifest.json'))))
 

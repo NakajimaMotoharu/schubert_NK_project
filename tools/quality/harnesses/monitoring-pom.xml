@@ -16,13 +16,17 @@
   <build>
     <sourceDirectory>${project.basedir}/../../../src/schubert-nk-batch/src/main/java</sourceDirectory>
     <testSourceDirectory>${project.basedir}/../../../src/schubert-nk-batch/src/test/java</testSourceDirectory>
+    <testResources><testResource>
+      <directory>${project.basedir}/../../../src/schubert-nk-batch/src/test/resources</directory>
+      <includes><include>monitoring/**</include></includes>
+    </testResource></testResources>
     <plugins>
       <!-- Parent Enforcer/lint/Werror/NullAway configuration remains inherited verbatim. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.0</version>
         <configuration>
           <includes><include>dev/codex/schubert/nk/batch/monitoring/**/*.java</include></includes>
-          <testIncludes><testInclude>dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicyTest.java</testInclude></testIncludes>
+          <testIncludes><testInclude>dev/codex/schubert/nk/batch/monitoring/*Test.java</testInclude></testIncludes>
         </configuration>
       </plugin>
       <plugin>
