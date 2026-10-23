@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 /** Heap getter-only capability with owned fixed values, no actual JVM/GC/management connection. */
 class JvmHeapHealthObservationTest {
-  private static final class Fixture {
+  static final class Fixture {
     Optional<MemoryUsage> usage = Optional.of(new MemoryUsage(-1, 750, 1000, 1000));
     Optional<Throwable> failure = Optional.empty();
     final AtomicInteger reads = new AtomicInteger();

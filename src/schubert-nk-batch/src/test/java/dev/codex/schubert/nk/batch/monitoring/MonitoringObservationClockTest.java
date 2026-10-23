@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 class MonitoringObservationClockTest {
   private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
 
-  private static final class FixtureClock extends Clock {
+  static final class FixtureClock extends Clock {
     Optional<Instant> at = Optional.of(AT);
     Optional<Throwable> failure = Optional.empty();
     final AtomicInteger reads = new AtomicInteger();
