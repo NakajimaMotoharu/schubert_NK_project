@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加：MonitoringModePolicy.verifyObservedRetention/RetentionConfiguration＋MonitoringRetentionConfigurationTest→RETCONF001～008/1700～1701/PG-D562/RD171/UI252§5/SS351§8～9。source323925a42/Batch245PT32suite・実60四100/全1766/111source・97追加physical・生成120別契約/raw28全理由、既Policy一変更/109不変/一Test新。設定の完全供給観測だけで、実retention backend/量/age/権限/配置・全actualHOLD/正式未受入、API130は歴史source153bとして保持。
+
 2026-10-24最新（NK-OPS-001/P01809/C07/RD171/UI252/SS321323351）：InboxReplayMetricRecorder→INBOXMET001～008/1691～1692/PG-D558、MqPressureMetricRecorder/Snapshot→MQPRESS001～008/1693～1694/PG-D559、MqRedeliveryMetricRecorder→MQREDEL001～008/1695～1696/PG-D560、MqPressureMetricCollector→MQCONN001～008/1697～1698/PG-D561。最新候補source153b/130PT16suite・実25四100/全1765Main/全110source・96追加physical・生成41別契約/raw16全個別理由、Main/Test/module・既部品へのspec追加用途は7698/7700へ追跡。SS321§5.4/UI232の旧参照補足は1697。各結果は別source/歴史Batch-Web成功と合算せず、actual source/owner/runtime/Root等HOLD・正式未受入。1699は配置保持の27template限定監査/PT0であり次のobserved-retention guardへ接続する。
 
 2026-10-24追加：DlqHealthMonitor/Observation/Evaluation→DLQMON001～008/1689～1690/PG-D557/RD171/UI252/SS351353。sourcecfd8c12dd/237PT31suite・実59四100/全1760/102trace/生成115/raw28理由、coherent current-entry供給/既threshold/自動close禁止結線。歴史incident/実broker/owner/collector/triage/退役・正式未受入。
