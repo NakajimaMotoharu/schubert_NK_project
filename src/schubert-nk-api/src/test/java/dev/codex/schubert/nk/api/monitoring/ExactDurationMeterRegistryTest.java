@@ -12,6 +12,7 @@ import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.distribution.CountAtBucket;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
@@ -45,7 +46,7 @@ class ExactDurationMeterRegistryTest {
     return new ExactDurationMeterRegistry(SimpleConfig.DEFAULT, FIXED);
   }
 
-  private static DistributionSummary summary(ExactDurationMeterRegistry registry) {
+  private static DistributionSummary summary(MeterRegistry registry) {
     return DistributionSummary.builder(NAME)
         .baseUnit("seconds")
         .publishPercentileHistogram()
@@ -162,13 +163,14 @@ class ExactDurationMeterRegistryTest {
     }
   }
 
-  private static final class Probe extends ExactDurationMeterRegistry {
+  private static final class Probe extends SimpleMeterRegistry implements AutoCloseable {
     Probe() {
       super(SimpleConfig.DEFAULT, FIXED);
     }
 
     DistributionSummary create(String unit, DistributionStatisticConfig config, double scale) {
-      return super.newDistributionSummary(
+      return ExactDurationMeterRegistry.exactDurationSummary(
+          this,
           new Meter.Id(NAME, Tags.empty(), unit, null, Meter.Type.DISTRIBUTION_SUMMARY),
           config,
           scale);
@@ -227,7 +229,7 @@ class ExactDurationMeterRegistryTest {
     }
   }
 
-  private static final class GenericRegistry extends SimpleMeterRegistry implements AutoCloseable {
+  private static class GenericRegistry extends SimpleMeterRegistry implements AutoCloseable {
     GenericRegistry() {
       super(SimpleConfig.DEFAULT, FIXED);
     }
@@ -321,13 +323,7 @@ class ExactDurationMeterRegistryTest {
   @Test
   void exDur010AuxiliaryGaugeFactoryFailureRetainsCallerOwnershipAndIdentity() {
     var failure = new IllegalStateException("owned factory fault");
-    try (var registry =
-        new ExactDurationMeterRegistry(SimpleConfig.DEFAULT, FIXED) {
-          @Override
-          protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-            throw failure;
-          }
-        }) {
+    try (var registry = new FaultRegistry(failure)) {
       assertSame(failure, assertThrows(IllegalStateException.class, () -> summary(registry)));
       assertTrue(registry.getMeters().isEmpty());
     }
@@ -336,6 +332,25 @@ class ExactDurationMeterRegistryTest {
       summary.record(.001);
       assertEquals(1, registry.get(NAME + ".histogram").tag("le", "0.001").gauge().value());
       assertEquals(0, summary.takeSnapshot().percentileValues().length);
+    }
+  }
+
+  private static final class FaultRegistry extends GenericRegistry implements ExactDurationSupport {
+    private final IllegalStateException failure;
+
+    FaultRegistry(IllegalStateException failure) {
+      this.failure = failure;
+    }
+
+    @Override
+    protected DistributionSummary newDistributionSummary(
+        Meter.Id id, DistributionStatisticConfig config, double scale) {
+      return ExactDurationMeterRegistry.exactDurationSummary(this, id, config, scale);
+    }
+
+    @Override
+    protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
+      throw failure;
     }
   }
 }

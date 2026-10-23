@@ -16,6 +16,7 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.simple.SimpleConfig;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,8 @@ class DbQueryDurationMetricCollectorTest {
       List.of(Query.ASYNC_JOB_STATE_COUNTS, Query.OUTBOX_STATUS_COUNTS_OLDEST);
   private static final List<Outcome> OUTCOMES = List.of(Outcome.SUCCESS, Outcome.FAILURE);
 
-  private static final class Registry extends ExactDurationMeterRegistry implements AutoCloseable {
+  private static final class Registry extends SimpleMeterRegistry
+      implements AutoCloseable, ExactDurationSupport {
     final AtomicInteger closes = new AtomicInteger();
     final AtomicInteger factories = new AtomicInteger();
     final AtomicInteger records = new AtomicInteger();
@@ -62,7 +64,7 @@ class DbQueryDurationMetricCollectorTest {
     protected DistributionSummary newDistributionSummary(
         Meter.Id id, DistributionStatisticConfig config, double scale) {
       if (factories.incrementAndGet() == 2) fail(factoryFailure);
-      var delegate = super.newDistributionSummary(id, config, scale);
+      var delegate = ExactDurationMeterRegistry.exactDurationSummary(this, id, config, scale);
       return new DistributionSummary() {
         public Meter.Id getId() {
           return delegate.getId();

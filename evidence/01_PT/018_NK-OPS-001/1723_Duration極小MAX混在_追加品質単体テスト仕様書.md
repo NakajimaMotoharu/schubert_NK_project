@@ -2,6 +2,8 @@
 
 ## BUG1678是正後補足（元oracle・開始見積り不変更）
 
+BUG1679補足: source ded75/PG8006は174/21 FES0だがSpotBugs constructor継承安全性1件でverify1、PG8010は六compile0/PT0。Production registryをfinal化し、package-local ExactDurationSupportの空marker契約と共通factoryを使用する。三fault fixture/ProbeはSDKを直接継承、Production finalを破らない。追加markerはfields/methods/初期化0を非初期化javapで確認し全physicalに保持、counterへ架空加算しない。更新後43Java/実36＋metadata2/physical38、六全1791・138source/122追加physicalを予定。元009期待値、EXDUR十ID、群開始見積・原失敗を不変更。
+
 元source0b78/7962は164/20中DBTIME009・MQTIME009が失敗、各小bucket期待3対実1、verify終了1。同source7966正常六compile終了0/PT0は別証跡として保持。修正前BUG1678/YKT1429起票済み。
 
 ExactDurationMeterRegistry専用EXDUR001..010を追加し、必要既164と合わせ当174/21を予定。001:各五境界の±1ns/equal全15入力、CDF2/5/8/11/14・sum7.833/max1.500000001。002:元009と同独立二極端順序、CDF3/count5/同sum-max。003:負/NaN/±無限/MAX超の6入力で更新なし。004:empty/保持snapshot配列改変・後続観測と非alias。005:scale/unit/histogram/client-percentile/boundary異常をfactory拒否。006:汎用registryはSTANDARDのみ、DEBUGは両recorderで拒否。007:他summary/counterの元SDK動作と所有。008:null構成/clock拒否・durationのclock未読・default構築。009:四worker各64入力1秒と並行128snapshot、終了count/sum256/max1/CDF0/0/0/256/256、全future期限内回収。010:補助gauge factory同一例外・非所有close/再試行なし、le gauge値1。

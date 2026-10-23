@@ -16,7 +16,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /** SS351/1723/BUG1678: exact cumulative finite SLO counts, without HDR range quantization. */
-public class ExactDurationMeterRegistry extends SimpleMeterRegistry implements AutoCloseable {
+public final class ExactDurationMeterRegistry extends SimpleMeterRegistry
+    implements AutoCloseable, ExactDurationSupport {
   private static final Set<String> DURATION_NAMES =
       Set.of("nk_db_query_duration_seconds", "nk_mq_processing_duration_seconds");
   private static final double[] BOUNDARIES = {.001, .01, .1, 1., 1.5};
@@ -31,7 +32,7 @@ public class ExactDurationMeterRegistry extends SimpleMeterRegistry implements A
   }
 
   static void requireCompatible(MeterRegistry registry) {
-    if (!(registry instanceof ExactDurationMeterRegistry))
+    if (!(registry instanceof ExactDurationSupport))
       throw new IllegalArgumentException("CONFIG_INVALID");
   }
 
@@ -40,6 +41,11 @@ public class ExactDurationMeterRegistry extends SimpleMeterRegistry implements A
       Meter.Id id, DistributionStatisticConfig config, double scale) {
     if (!DURATION_NAMES.contains(id.getName()))
       return super.newDistributionSummary(id, config, scale);
+    return exactDurationSummary(this, id, config, scale);
+  }
+
+  static DistributionSummary exactDurationSummary(
+      MeterRegistry owner, Meter.Id id, DistributionStatisticConfig config, double scale) {
     if (scale != 1
         || !"seconds".equals(id.getBaseUnit())
         || !Boolean.TRUE.equals(config.isPercentileHistogram())
@@ -47,7 +53,7 @@ public class ExactDurationMeterRegistry extends SimpleMeterRegistry implements A
         || !Arrays.equals(BOUNDARIES, config.getServiceLevelObjectiveBoundaries()))
       throw new IllegalArgumentException("CONFIG_INVALID");
     var summary = new ExactSummary(id);
-    HistogramGauges.registerWithCommonFormat(summary, this);
+    HistogramGauges.registerWithCommonFormat(summary, owner);
     return summary;
   }
 
