@@ -22,7 +22,7 @@ METHODS={
  'transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues',
  'transferMet008PartialRegistrationFailureAndSeparateOwnersKeepCallerOwnership'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7266-transfer-metric-host-v1'
     post.OUT=post.host.BASE/'PG7268-transfer-metric-post-v1'
@@ -38,4 +38,6 @@ if __name__=='__main__':
     post.EXPECTED_SUITES={name:dict(tests=count,failures=0,errors=0,skipped=0)
         for name,count in zip(host.SUITES,(7,6,10,4,14,7,6,8,2,6,3,10,8,9,8,8,8,8,8,5,8,8),strict=True)}
     post.TOTAL_TESTS=161;post.SOURCE_FILE_COUNT=46
-    post.main()
+    return post
+
+if __name__=='__main__':configure().main()

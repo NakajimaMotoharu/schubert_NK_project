@@ -1,5 +1,7 @@
 # 1615 Transfer二Metric記録 単体テスト仕様書
 
+再試験追加（2026-10-23、BUG1657/YKT1410）：元936/7266真正161・7268四100/PMD31は保持し、新規三命名違反だけprivate field改名後の別sourceで7272/7274/7276以降へ再資格する。公開API/独立期待値/新8case数は不変更、旧成功は新sourceへ転用しない。全Main PMDの当rule0と旧28全行一致を再発防止checkに追加し、元31行を抑制/分類だけで消さない。
+
 NK-OPS-001/P018-09/共有C07追加費0、RD171 MON005～013/UI252/SS341§8・SS351§6/8/10・PG-D537。TransferMetricRecorder constructor/record/missing/snapshot/detail/value・Counts/Usage/Suffix。group1856、開始共有16/残84/reset1793306748・1/2/5pp上限10。Inputは固定long files/bytesと二suffixだけ、実file/dir/secure walk/cleanup/Root/DBを一切実行しない。
 
 固定oracle：`nk_file_transfer_files`/`nk_file_transfer_bytes` はgauge/label suffix、既承認`.part`/`.ready`だけ。DEBUG4系列、STANDARD0、未知NaN（zeroにしない）。Countsは非負、Usageは二Counts非null/各総和long範囲内、byte/件数のoverflowをwrapしない。metricはbinary64、long値原本はsnapshotで正確保持する。別gauge scrapeの同時snapshot一貫性は保証せず、実collector/sourceの認定とは分離する。

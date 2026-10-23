@@ -19,24 +19,24 @@ public final class TransferMetricRecorder {
   }
 
   public static final class Usage {
-    private final Counts part;
-    private final Counts ready;
+    private final Counts partCounts;
+    private final Counts readyCounts;
     private final long files;
     private final long bytes;
 
     public Usage(Counts part, Counts ready) {
-      this.part = Objects.requireNonNull(part, "part counts");
-      this.ready = Objects.requireNonNull(ready, "ready counts");
+      partCounts = Objects.requireNonNull(part, "part counts");
+      readyCounts = Objects.requireNonNull(ready, "ready counts");
       files = Math.addExact(part.files(), ready.files());
       bytes = Math.addExact(part.bytes(), ready.bytes());
     }
 
     public Counts part() {
-      return part;
+      return partCounts;
     }
 
     public Counts ready() {
-      return ready;
+      return readyCounts;
     }
 
     public long totalFiles() {
@@ -51,14 +51,14 @@ public final class TransferMetricRecorder {
   public enum Suffix {
     PART(".part"),
     READY(".ready");
-    private final String label;
+    private final String suffixLabel;
 
     Suffix(String label) {
-      this.label = label;
+      suffixLabel = label;
     }
 
     public String label() {
-      return label;
+      return suffixLabel;
     }
   }
 
