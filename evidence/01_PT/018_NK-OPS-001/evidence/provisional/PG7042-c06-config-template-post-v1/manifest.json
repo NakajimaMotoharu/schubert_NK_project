@@ -1,0 +1,176 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualVmActions": 0,
+  "allApplicationMainClasses": 0,
+  "allResourceBytesMatched": true,
+  "archiveSha256": "d03c648aafdc136058b72ea65be8fb47e6d3c00d50e11b94bd318001598b6635",
+  "batchDefaultsVerified": 11,
+  "canonicalDesignHashes": {
+    "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195",
+    "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+  },
+  "command": "python3 -B tools/quality/pg7042_c06_config_template_post.py",
+  "commonDefaultsVerified": 3,
+  "coverage": "NOT_APPLICABLE_CONFIGURATION_NOT_JAVA_NO_0_OVER_0_PASS",
+  "credentialTargetsRead": false,
+  "directSourceContractCases": 3,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "harnessPomSha256": "2728cfee4a6276a18145047ad2342b2f001cb81031989dbd4a3f6f1b6061873b",
+  "newAccepted": 0,
+  "oracleAuxiliaryCases": 1,
+  "oracleMutations": 11,
+  "oracleNullChecks": 1,
+  "ordinaryRuntimeAssemblyNotInvoked": true,
+  "original4222Repeated": false,
+  "original48Repeated": false,
+  "original5Repeated": false,
+  "originalBeginSha256": "48be76ba9627987bb529ec2c24c073b43823efdcdaf62efa5ebad666a750954d",
+  "originalManifestSha256": "3ce529149d8590257236d2cb3d9ff8e0692b0fb6644f3fa1a2078cfeb11a600b",
+  "realpathSymlinkNssMetadataNotChecked": true,
+  "source": "8c03e7c5ea5461bfe238705972bfa190a71b463a",
+  "sourceDeclarationCount": 55,
+  "sourceFiles": [
+    {
+      "declarationCount": 3,
+      "declarations": {
+        "nk.monitoring.mode": "STANDARD",
+        "nk.protocol.version": "001",
+        "nk.time.display-zone": "Asia/Tokyo"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/common.yml.template",
+      "runtimeAuthority": false,
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+    },
+    {
+      "declarationCount": 20,
+      "declarations": {
+        "nk.api.async-consumers": "1",
+        "nk.api.storage.asset-manifest-entries": 59627,
+        "nk.api.storage.asset-root": "/srv/schubert-nk/data/assets",
+        "nk.api.storage.transfer-root": "/srv/schubert-nk/data/transfer",
+        "nk.api.sync-consumers.initial": "4",
+        "nk.api.sync-consumers.max": "8",
+        "nk.db.connect-timeout": "3s",
+        "nk.db.pool.api.max": "8",
+        "nk.db.pool.api.min": "2",
+        "nk.db.url": "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+        "nk.inbox.reference-retention": "24h",
+        "nk.inbox.update-retention": "7d",
+        "nk.mq.async-work": "nk.async.work",
+        "nk.mq.dlq": "nk.dead.letter",
+        "nk.mq.expiry": "nk.expiry",
+        "nk.mq.sync-reply": "nk.sync.reply.web",
+        "nk.mq.sync-request": "nk.sync.request",
+        "nk.mq.url": "tcp://127.0.0.1:61616",
+        "nk.mq.web-log": "nk.web.log",
+        "nk.outbox.sent-retention": "7d"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/api.yml.template",
+      "runtimeAuthority": false,
+      "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267"
+    },
+    {
+      "declarationCount": 17,
+      "declarations": {
+        "nk.db.connect-timeout": "3s",
+        "nk.db.pool.web.max": "2",
+        "nk.db.pool.web.min": "1",
+        "nk.db.url": "jdbc:postgresql://127.0.0.1:5432/schubert_nk",
+        "nk.mq.url": "tcp://127.0.0.1:61616",
+        "nk.web.http.address": "127.0.0.1",
+        "nk.web.http.port": "8080",
+        "nk.web.management.port": "8081",
+        "nk.web.media.max-range-bytes": "1048576",
+        "nk.web.media.max-streams": "20",
+        "nk.web.mq.reply-timeout": "2s",
+        "nk.web.mq.wait.initial": "12",
+        "nk.web.mq.wait.max": "20",
+        "nk.web.session.idle-timeout": "8h",
+        "nk.web.session.max-per-user": "2",
+        "nk.web.storage.asset-root": "/srv/schubert-nk/data/assets",
+        "nk.web.storage.transfer-root": "/srv/schubert-nk/data/transfer"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/web.yml.template",
+      "runtimeAuthority": false,
+      "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+    },
+    {
+      "declarationCount": 11,
+      "declarations": {
+        "nk.batch.backup-generations": "7",
+        "nk.batch.backup-root": "/srv/schubert-nk/backup",
+        "nk.batch.chunk-size.log": "10000",
+        "nk.batch.chunk-size.notification": "1000",
+        "nk.batch.chunk-size.question": "1000",
+        "nk.batch.expiry-retention": "7d",
+        "nk.batch.log-retention": "90d",
+        "nk.batch.run-retention": "400d",
+        "nk.batch.schedule": "05:00",
+        "nk.batch.transfer-cleanup": "enabled",
+        "nk.batch.zone": "Asia/Tokyo"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/batch.yml.template",
+      "runtimeAuthority": false,
+      "sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9"
+    },
+    {
+      "declarationCount": 1,
+      "declarations": {
+        "SCHUBERT_NK_CONFIG_DIR": "/etc/schubert-nk"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/api.env.template",
+      "runtimeAuthority": false,
+      "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af"
+    },
+    {
+      "declarationCount": 1,
+      "declarations": {
+        "SCHUBERT_NK_CONFIG_DIR": "/etc/schubert-nk"
+      },
+      "inspectorUnrenderedPlaceholders": false,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/web.env.template",
+      "runtimeAuthority": false,
+      "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af"
+    },
+    {
+      "declarationCount": 2,
+      "declarations": {
+        "NK_INSPECTOR_DB_URL": "jdbc:postgresql://127.0.0.1:@PG_PORT@/@PG_DATABASE@",
+        "NK_INSPECTOR_FINGERPRINT_VERSIONS": "@FINGERPRINT_VERSION_NAMES@"
+      },
+      "inspectorUnrenderedPlaceholders": true,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/inbox-inspector.env.template",
+      "runtimeAuthority": false,
+      "sha256": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73"
+    }
+  ],
+  "suites": 1,
+  "testClassHashes": {
+    "dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest$Scalar.class": "e76701ceaeec934242e6232cd4fbd434981c6b2cb12c4f02360c11e7dbd9453d",
+    "dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest.class": "18d13d7dbce884448cb2ddc61ff02a34ae3e2be32be7cec35d78c2491c069448"
+  },
+  "testLintWerror": true,
+  "testSourceSha256": "96df890aca6cdc0279b6334a12443f666d51bf4c2652671f7001ef880de52341",
+  "tests": 4,
+  "timeUTC": "2026-10-23T01:22:41.353296+00:00",
+  "toolSha256": "d6f53d26c59a16ffc2ca8b73d438af6a9ae57382a53e8897249f23d4570e55fb",
+  "wholeC05Accepted": false,
+  "wholeC06Accepted": false,
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.batch.platform.ConfigurationTemplateContractTest.xml": "c1efdef75f29e30e515b6217d172c51032188e3a9aea223db2afbaa212bc802d"
+  }
+}
