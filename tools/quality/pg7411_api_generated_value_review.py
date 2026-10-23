@@ -73,16 +73,25 @@ def main():
     require(hash_code is not None and 'bipush        31' in hash_code.group(1) and 'imul' in hash_code.group(1)
       and 'iadd' in hash_code.group(1),'independent installed JDK25 multiply31/add algorithm')
     jacoco=host.TC/'m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar'
-    filters=inspect(['-p','-c','-classpath',str(jacoco),'org.jacoco.core.internal.analysis.filter.RecordsFilter',
-      'org.jacoco.core.internal.analysis.filter.EnumFilter'])
-    require('hashCode' in filters and 'toString' in filters and 'equals' in filters and 'valueOf' in filters
-      and 'values' in filters,'official preexisting generated-method filters identified, not expanded')
+    parent=inspect(['-p','-c','-classpath',str(jacoco),'org.jacoco.core.internal.analysis.filter.RecordsFilter'])
+    matcher=inspect(['-p','-c','-classpath',str(jacoco),'org.jacoco.core.internal.analysis.filter.RecordsFilter$Matcher'])
+    enum_filter=inspect(['-p','-c','-classpath',str(jacoco),'org.jacoco.core.internal.analysis.filter.EnumFilter'])
+    require('String java/lang/Record' in parent and all('RecordsFilter$Matcher.'+method+':' in parent
+      for method in ('isEquals','isHashCode','isToString','isFieldAccessor')),
+      'actual record target and all four actual delegated Matcher predicates')
+    require(all('String '+literal in matcher for literal in ('hashCode','()I','toString','()Ljava/lang/String;',
+      'equals','(Ljava/lang/Object;)Z','java/lang/runtime/ObjectMethods','bootstrap')),
+      'actual nested Matcher three method names/descriptors and JDK bootstrap literals')
+    require(all('String '+literal in enum_filter for literal in ('java/lang/Enum','values','()[L','valueOf','(Ljava/lang/String;)L')),
+      'actual enum target and both generated factory name/descriptor predicates')
     require(sum(len(r['methods']) for r in rows)==21,'all twenty-one generated methods explicitly reviewed')
     value=dict(actualExit=0,source=compilation.SOURCE,invocation=invocation,timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       witnesses={k:{n:v for n,v in row.items() if n!='value'} for k,row in pin.items()},
       generatedTypes=rows,generatedMethodCount=21,actualNewOrdinaryCases=8,currentWholeComponentTests=72,
       inspectionReceipts=receipts,jdkModulesSha256=host.sha(host.TC/'jdk-25.0.4/lib/modules'),
       jacocoCoreSha256=host.sha(jacoco),jdkHashCombinerExcerpt=hash_code.group(1),
+      officialFilterDelegation=dict(parent='RecordsFilter',matcher='RecordsFilter$Matcher',
+        recordPredicates=['isEquals','isHashCode','isToString','isFieldAccessor'],enumFilter='EnumFilter'),
       independentHashVectors=dict(pool=dict(ordinary=94248,allLongMax=0),outbox=dict(ordinary=3040,allLongMax=-2147483648,zero=0)),
       productionMainAndMetadataBytesUnchanged=True,sourceChanges=changes,coverageCounters=current['counters'],
       filterReason='Only preexisting javac/JDK value plumbing recognized by official JaCoCo; each contract directly verified by independent ordinary vectors. All handwritten logic/constructors/classes retained with positive four counters.',
