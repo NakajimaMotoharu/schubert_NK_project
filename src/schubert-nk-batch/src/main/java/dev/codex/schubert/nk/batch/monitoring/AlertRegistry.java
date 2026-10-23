@@ -42,6 +42,11 @@ public final class AlertRegistry {
     return state(condition, service).observe(observed, clearance, at, elapsed);
   }
 
+  /** Missing input must preserve the event and break any continuous-normal recovery period. */
+  public void interruptContinuity(Condition condition, Service service, Duration elapsed) {
+    state(condition, service).interruptContinuity(elapsed);
+  }
+
   private AlertLifecycle state(Condition condition, Service service) {
     Objects.requireNonNull(condition, "alert condition");
     Objects.requireNonNull(service, "alert service");

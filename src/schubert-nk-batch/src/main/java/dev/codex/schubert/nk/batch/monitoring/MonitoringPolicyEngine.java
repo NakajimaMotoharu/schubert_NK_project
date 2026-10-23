@@ -128,6 +128,11 @@ public final class MonitoringPolicyEngine {
     return policy;
   }
 
+  /** Explicit absence, never a synthetic NORMAL severity or cause-clearance observation. */
+  public void observationMissing(Condition condition, Service service, Duration elapsed) {
+    registry.interruptContinuity(condition, service, elapsed);
+  }
+
   public List<Event> activeAlerts() {
     return registry.activeEvents();
   }
