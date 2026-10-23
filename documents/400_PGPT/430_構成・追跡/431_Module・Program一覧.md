@@ -377,6 +377,8 @@ Program IDは`NK-<領域>-NNN`、Test IDはSS 354の既存群（`PT-CODEC-*`、`
 
 ## 5. 更新履歴
 
+2026-10-23 candidate追記：NK-OPS-001/P018-09、RD171 MON005..013/UI252/SS313351。Batch monitoringの全25追加sourceと歴史20physical（当73件資格source71c6be37c）、Web HttpMetricContract/HttpMetricRecorder・二Test/golden/null metadata/Web core compile POMの七差分・当八physical（実7、当15件sourceef6f9f22a）を1570/1573～1576とPG7124 manifest全32rowへ接続。class/method/TestID・原7118/7122・SDK四Jar・主所有WBS/POM semantic差分を明記。Batch歴史実行とWeb当実行を合成しない。新SDK direct dependencyは既管理core1.17.1、他既Main/全1669byteは不変。全体451/collector/exporter/HTTP terminal/Root接続は未受入、既正式完了記述のsourceを当candidateへ転用しない。
+
 | 日付 | 内容 |
 |---|---|
 | 2026-09-01 | 4 production module、deployment/migration、Characterizationと20 Programを登録。 |
