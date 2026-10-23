@@ -20,8 +20,10 @@ def require(value,message):
     if not value:raise ValueError(message)
 
 
-def anchors(rows,previous):
-    require(len(rows)==42 and len({r['path'] for r in rows})==42,'complete unique row set')
+def anchors(rows,previous,expected=None):
+    expected=expected or dict(changed=1,unchanged=38,introduced=3)
+    size=sum(expected.values())
+    require(len(rows)==size and len({r['path'] for r in rows})==size,'complete unique row set')
     counts=dict(changed=0,unchanged=0,introduced=0)
     for row in rows:
         prior=previous.get(row['path'])
@@ -34,7 +36,7 @@ def anchors(rows,previous):
             require(row['previousSourceByteSha256']==prior['sha256'] and row['sourceIntroducedSincePreviousTrace'] is False
               and row['sourceChangedSincePreviousTrace'] is changed,'immediate previous source/hash flag consistency')
             counts['changed' if changed else 'unchanged']+=1
-    require(counts==dict(changed=1,unchanged=38,introduced=3),'exact one planned extraction and three additions')
+    require(counts==expected,'exact declared changes and additions')
     return counts
 
 
