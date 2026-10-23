@@ -46,8 +46,17 @@ def main():
         row=json.loads(raw);require(count==1 and row['rule']=='AvoidFieldNameMatchingMethodName'
           and row['class'] in ('TransferMetricRecorder.Usage','TransferMetricRecorder.Suffix'),'only the three registered naming defects')
         resolved.append(row)
-    require(len(resolved)==3 and not any(r['rule']=='AvoidFieldNameMatchingMethodName' for r in fresh['findings']),
-      'whole24 Main source recurrence check zero, not merely search')
+    legacy_naming=[r for r in fresh['findings'] if r['rule']=='AvoidFieldNameMatchingMethodName']
+    prior_naming=[r for r in prior['findings'] if r['rule']=='AvoidFieldNameMatchingMethodName']
+    require(len(resolved)==3 and len(legacy_naming)==3
+      and Counter(map(key,legacy_naming))==Counter(map(key,prior_naming))
+      and all(r['class']=='MonitoringModePolicy' for r in legacy_naming)
+      and {r['message'] for r in legacy_naming}=={
+        'Field detailedMetricsEnabled has the same name as a method',
+        'Field retentionDays has the same name as a method',
+        'Field retentionBytes has the same name as a method'}
+      and not any(r['class'].startswith('TransferMetricRecorder') for r in legacy_naming),
+      'new Transfer rule zero and exact three old individually approved enum accessor rows only')
     for row in prior['findings']:
         path='src/schubert-nk-batch/src/main/java/'+row['package'].replace('.','/')+'/'+row['class'].split('.',1)[0]+'.java'
         require(path in current['sourceFiles'] and current['sourceFiles'][path]==old['sourceFiles'][path],
@@ -75,12 +84,14 @@ def main():
       and physical['allPhysicalClassCount']==1720 and not physical['historicalWeb']['currentSourceExecutionAccepted'],
       'current40 qualified separate from historical Web/whole1720 inventory')
     value=dict(actualExit=0,source=current['source'],invocation=invocation,witnesses=PINS,rawPmdFindings=28,rawPmdExit=4,
-      unchangedSourceRationaleCount=28,resolvedNamingRows=resolved,recurrenceRuleCount=0,
+      unchangedSourceRationaleCount=28,resolvedNamingRows=resolved,newTransferNamingRuleCount=0,
+      legacyApprovedNamingRows=legacy_naming,legacyApprovedNamingRuleCount=3,legacyNamingReasonDocument='018/1542',
       privateOnlyChange=rename,negativeGuards=negatives,unclassified=0,suppressionsAdded=0,
-      actualViolationsOutstanding=0,editAnchorCounts=counts,closedLimitedScope=['BUG-1657','YKT-1410'],
+      actualViolationsOutstanding=0,editAnchorCounts=counts,closedLimitedScope=['BUG-1657','YKT-1410','BUG-1658','YKT-1411'],
       originalSourceProofNotTransferred=True,ptExecutedByReview=0,whole451Accepted=False,
       formalUpdated=False,newAccepted=0,effortPercent=None)
     verify(invocation);os.umask(0o077);OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,rawFindings=28,namingRuleCount=0,negativeGuards=len(negatives),anchors=counts,manifestSha256=host.sha(OUT/'manifest.json'))))
+    print(json.dumps(dict(actualExit=0,rawFindings=28,newTransferNamingRuleCount=0,legacyApprovedNamingRuleCount=3,
+      negativeGuards=len(negatives),anchors=counts,manifestSha256=host.sha(OUT/'manifest.json'))))
 
 if __name__=='__main__':main()
