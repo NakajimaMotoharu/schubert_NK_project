@@ -1,5 +1,11 @@
 # 1573 Micrometer HTTP記録 単体テスト仕様書
 
+## 試験用SDK内部表現の補完（2026-10-23、BUG1651/YKT1404）
+
+下記1785はprimary業務Meter（Counter1750＋Timer35）の数を示す。実SimpleMeterRegistry1.17.1はnewTimer内でHistogramGauges.registerWithCommonFormatを呼び、九SLO×35route=315の内部Gaugeも保持するため、registry全物理数は2100。固定Jar primary bytecodeで同呼出/`.histogram`/`le`/base time unit変換を確認した。HTTPREC002/003/004ではprimary数を保ち、aux Gauge315・名前 `nk_http_request_duration_seconds.histogram`・service/route/le三tag・serviceWEB/独立35route各九le（秒 .05/.1/.25/.5/1/1.5/2/2.5/5）を別assertする。009のCounter conflict時partialは既Gauge1＋Timer1＋aux9=11、Timer conflict時は既Gauge1だけ。単に観測数へ期待を変更せず、SS九境界と固定providerの内部表現から導く。
+
+これはcanonical producer metric追加ではなく試験用Simple providerの内部SLO表現。実Prometheusのexposition/命名変換/quantileは引き続き未受入で、内部 `.histogram` 名を新たな外部catalogへ承認しない。元v2の15件/F4は保全し、新sourceで全15を実行してから判定する。Main/SDK版/九SLO・1750/35の業務期待値は不変更。
+
 2026-10-23、PG-D527/NK-OPS-001/P018-09/C07共有費0。着手1/3/7pp・上限10pp、共有11/残89/reset1793306748・元開始0。RD171 MON005～013/UI252/SS351§6・8・10。1570の閉型を実Micrometer core1.17.1へ接続するHttpMetricRecorder。既管理版coreをWeb compile依存へ正規追加し、元正規runtime Hdr2.2.2を含め依存除外0。契約・provider単体は実in-memory SimpleMeterRegistry/MockClockで検証し、実HTTP/DB/Root/VM/公開は行わない。
 
 Registryはcallerが所有し、custom nk_ namespaceにラベルを追加/置換/拒否するfilter/commonTagを設定せず、寿命中その構成を変更しない。Recorderは借用だけでcloseせず、ctor失敗時のpartial registrationもcallerのregistry破棄で回収する。DEBUGは閉1750 request Counter/35 Timerを先行登録し、未知入力が新Meterを作らない。STANDARDはcustom登録0でminimum health等を変更しない。null/不正status/負elapsedは記録前に拒否し、unknown route/methodは1570どおり固定値へ。Callbackは一completionにつき一回、SDK Runtime/Errorは同一objectのままownerへ伝播、log/HTTPへformatしない。counter→timer途中のprovider故障は部分計測が残り得るため同completionの自動再実行を禁止する。HTTP owner側の固定terminal通知/既fatal graph分類・応答保持は未接続の後続条件。

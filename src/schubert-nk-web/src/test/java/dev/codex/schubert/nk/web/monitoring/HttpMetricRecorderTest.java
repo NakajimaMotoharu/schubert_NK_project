@@ -21,9 +21,13 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -154,6 +158,44 @@ class HttpMetricRecorderTest {
     }
   }
 
+  /**
+   * SS nine boundaries plus pinned Simple provider's distinct auxiliary histogram representation.
+   */
+  private static void assertRegistryShape(InspectingRegistry registry) throws Exception {
+    assertEquals(2100, registry.getMeters().size());
+    assertEquals(
+        1750,
+        registry.getMeters().stream()
+            .filter(m -> m.getId().getType() == Meter.Type.COUNTER)
+            .count());
+    assertEquals(
+        35,
+        registry.getMeters().stream().filter(m -> m.getId().getType() == Meter.Type.TIMER).count());
+    var gauges =
+        registry.getMeters().stream().filter(m -> m.getId().getType() == Meter.Type.GAUGE).toList();
+    assertEquals(315, gauges.size());
+    var byRoute = new HashMap<String, Set<Double>>();
+    var counts = new HashMap<String, Integer>();
+    for (var meter : gauges) {
+      var id = meter.getId();
+      assertEquals(DURATION + ".histogram", id.getName());
+      assertEquals(
+          Set.of("service", "route", "le"),
+          id.getTags().stream().map(t -> t.getKey()).collect(java.util.stream.Collectors.toSet()));
+      assertEquals("WEB", id.getTag("service"));
+      String route = Objects.requireNonNull(id.getTag("route"));
+      double boundary = Double.parseDouble(Objects.requireNonNull(id.getTag("le")));
+      assertTrue(Double.isFinite(boundary));
+      byRoute.computeIfAbsent(route, ignored -> new HashSet<>()).add(boundary);
+      counts.merge(route, 1, Integer::sum);
+    }
+    assertEquals(new HashSet<>(routes()), byRoute.keySet());
+    for (Map.Entry<String, Set<Double>> entry : byRoute.entrySet()) {
+      assertEquals(Set.of(.05, .1, .25, .5, 1.0, 1.5, 2.0, 2.5, 5.0), entry.getValue());
+      assertEquals(9, counts.get(entry.getKey()));
+    }
+  }
+
   @Test
   void httpRec001StandardDoesNotRegisterOrClose() {
     try (var registry = new InspectingRegistry()) {
@@ -167,11 +209,11 @@ class HttpMetricRecorderTest {
   }
 
   @Test
-  void httpRec002ActualMeterNamesTagsAndNineSlos() {
+  void httpRec002ActualMeterNamesTagsAndNineSlos() throws Exception {
     try (var registry = new InspectingRegistry()) {
       var recorder = new HttpMetricRecorder(registry, "DEBUG");
       assertTrue(recorder.detailedMetricsRequested());
-      assertEquals(1785, registry.getMeters().size());
+      assertRegistryShape(registry);
       assertEquals(
           1750,
           registry.getMeters().stream()
@@ -216,12 +258,12 @@ class HttpMetricRecorderTest {
         assertEquals(50, duration(registry, route).count());
         assertEquals(50.0, duration(registry, route).totalTime(TimeUnit.SECONDS), 0.0);
       }
-      assertEquals(1785, registry.getMeters().size());
+      assertRegistryShape(registry);
     }
   }
 
   @Test
-  void httpRec004UnknownInputsCannotCreateSeries() {
+  void httpRec004UnknownInputsCannotCreateSeries() throws Exception {
     try (var registry = new InspectingRegistry()) {
       var recorder = new HttpMetricRecorder(registry, "DEBUG");
       for (int index = 0; index < 10_000; index++)
@@ -232,7 +274,7 @@ class HttpMetricRecorderTest {
             1_000_000);
       assertEquals(10_000.0, request(registry, "/**", "OTHER", "2xx").count());
       assertEquals(10_000, duration(registry, "/**").count());
-      assertEquals(1785, registry.getMeters().size());
+      assertRegistryShape(registry);
       for (var meter : registry.getMeters())
         for (var tag : meter.getId().getTags()) {
           assertFalse(tag.getValue().contains("PT_FIXTURE_ONLY"));
@@ -355,7 +397,7 @@ class HttpMetricRecorderTest {
               .register(registry);
         assertThrows(
             IllegalArgumentException.class, () -> new HttpMetricRecorder(registry, "DEBUG"));
-        assertEquals(timer ? 1 : 2, registry.getMeters().size());
+        assertEquals(timer ? 1 : 11, registry.getMeters().size());
         assertFalse(registry.isClosed());
         assertEquals(0, registry.closes.get());
       }
