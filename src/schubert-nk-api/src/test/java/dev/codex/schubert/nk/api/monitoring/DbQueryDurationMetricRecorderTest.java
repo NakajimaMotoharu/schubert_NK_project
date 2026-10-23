@@ -450,4 +450,30 @@ class DbQueryDurationMetricRecorderTest {
       assertEquals(0, registry.closes.get());
     }
   }
+
+  @Test
+  void dbTime009ExtremeRangeOrdersKeepIndependentSmallBucketCountsAndFiniteTotals() {
+    for (var vector :
+        List.of(
+            List.of(0L, 1L, Long.MAX_VALUE, Long.MAX_VALUE, 1L),
+            List.of(Long.MAX_VALUE, Long.MAX_VALUE, 1L, 0L, 1L)))
+      for (var query : QUERIES)
+        for (var outcome : OUTCOMES)
+          try (var registry = new Registry()) {
+            var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+            for (long ns : vector) recorder.record(query, outcome, ns);
+            var value = summary(registry, query.name(), outcome.name());
+            assertEquals(5, value.count());
+            assertEquals(1.8446744073709553E10, value.totalAmount());
+            assertEquals(9.223372036854776E9, value.max());
+            var buckets = new HashMap<Double, Double>();
+            for (var item : value.takeSnapshot().histogramCounts())
+              buckets.put(item.bucket(), item.count());
+            assertEquals(Set.of(.001, .01, .1, 1., 1.5), buckets.keySet());
+            for (double boundary : List.of(.001, .01, .1, 1., 1.5))
+              assertEquals(3.0, buckets.get(boundary).doubleValue());
+            assertEquals(5, registry.records.get());
+            assertEquals(0, registry.closes.get());
+          }
+  }
 }
