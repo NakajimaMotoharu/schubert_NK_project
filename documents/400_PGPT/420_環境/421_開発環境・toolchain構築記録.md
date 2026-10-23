@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 API Outbox観測Repository：既toolchain/SDK/六aux/harness不変更、332f970a7/90普通PT11suite/実19四100/CRC0/六正常Main-Test compile0/PT0、全1742Main・旧1669byte不変/三POM/当五rule0/全86trace。raw10の新existing-variable TWR二件は正確source/row/column・全close故障fixtureへ個別理由、全未分類/有効違反0。導入取得0/実DB-driver接続0、環境/command/time/hashは1664～1667。
+
 2026-10-23 API Outbox滞留時間：既toolchain/六aux/harness不変更・導入取得0、d6c7f61b5/80PT10suite/実17四100/六正常compile/PT0・全1740Main/旧1669byte不変/三POM/当五rule0。API18実byteと歴史Batch43(source9d8/176)/Web10(source6db/27)は別domain、全84trace・新record六generated contract/九negative・raw8全個別理由、環境/command/日時/hashは1660～1663。actualDB/Clock/Root操作0。
 
 2026-10-23 Web生成補足：6dbf7f17b/27PT4suite/実9四100/六正常Main-Test compile・当normal classpath、既SDK/工具再利用・取得0。新JUnit launcherの変更はgenerated Test一追加/27件四型、全失敗・未実行guardを保持。SDK4と正常六compile API専用2を分離、1738Main byte不変/公式filter・JDK同byteのみ参照、元PTの転用0。全command/環境/hashは1659。

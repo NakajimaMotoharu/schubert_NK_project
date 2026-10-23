@@ -1,0 +1,7 @@
+# 1666 API Outbox観測Repository 品質・追跡
+
+source332f970a7461c5eace27d1da0c63bfb4c2852f0e/1664～1665/PG-D547。全1742Mainの元1669がdebug込み不変、当API20（実19＋metadata1）/歴史Batch43(source9d8/176)/Web10(source6db/27)を分離する。前d6cからMain/Test二つだけ追加、元e7から全86source/三POMをhash/ownerへ結合。最新PG7470は全86source/追加73physical・旧84不変2新/当API19だけexecution flag、PG7472は全10rawの個別理由/五domain負改変/新Snapshot五生成contractと既27samebyte・当source実行を結合する。
+
+当source普通PT90/11suite・L314/M66/C19/B161全miss0/単一sessionCRC0、正常六Main/Test compile0・compile内PT0-UNRUN/五architecture rule当Jar0。new CloseResource二件は正確TWR/NULL取得前の拒否/RS→PSと元failure保持をOUTBOXDB001/007/008で検査した同sourceだけへFALSE_POSITIVE適用、新rule抑制/安易な除外なし。全record生成5methodのfixed hash96447/typedアクセス/全fieldtext・generator ObjectMethods全fieldを別確認し、32生成methodを数値counterへ足さない。
+
+原manifestのpath/hashは次の管理checkpointへ追記し、この既hash対象文書は後から改変しない。typed OffsetDateTime・固定SQLが本物PG/driverで実行されたとは主張せず、status/created_atの実source・外側期限/asOf真正性・metric publication/WEB store/actualRoot/全体451/native/CHR・正式/工数は未受入のまま保持する。
