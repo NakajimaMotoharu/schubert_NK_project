@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.monitoring;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Non-I/O mode contract. NK-OPS-001/P018-09; MON010..013; UI252 §5; SS351 §8;
@@ -21,6 +22,15 @@ public enum MonitoringModePolicy {
     GRAFANA,
     EXPORTERS
   }
+
+  /** Supplied configured limits, never observed data age/usage or permission to delete. */
+  public record RetentionConfiguration(int days, long bytes) {
+    public RetentionConfiguration {
+      if (days < 0 || bytes < 0) throw new IllegalArgumentException("CONFIG_INVALID");
+    }
+  }
+
+  private static final String DRIFT_CODE = "CONFIG_DRIFT";
 
   private final boolean detailedMetricsEnabled;
   private final int retentionDays;
@@ -63,9 +73,18 @@ public enum MonitoringModePolicy {
   public void verifyObserved(Map<DetailService, Boolean> observed) {
     var snapshot = Map.copyOf(Objects.requireNonNull(observed, "monitoring observation"));
     if (!snapshot.keySet().equals(EnumSet.allOf(DetailService.class)))
-      throw new IllegalStateException("CONFIG_DRIFT");
+      throw new IllegalStateException(DRIFT_CODE);
     for (boolean enabled : snapshot.values()) {
-      if (enabled != detailedMetricsEnabled) throw new IllegalStateException("CONFIG_DRIFT");
+      if (enabled != detailedMetricsEnabled) throw new IllegalStateException(DRIFT_CODE);
     }
+  }
+
+  /** Complete caller observation only; missing must not become STANDARD's legitimate zero. 1700. */
+  public void verifyObservedRetention(Optional<RetentionConfiguration> observed) {
+    Objects.requireNonNull(observed, "retention configuration observation");
+    if (observed.isEmpty()) throw new IllegalStateException(DRIFT_CODE);
+    var configuration = observed.orElseThrow();
+    if (configuration.days() != retentionDays || configuration.bytes() != retentionBytes)
+      throw new IllegalStateException(DRIFT_CODE);
   }
 }
