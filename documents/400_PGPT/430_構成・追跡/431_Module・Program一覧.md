@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24 Batch monitoring追加：ProcessRestartMetricRecorder constructor/record/detailedMetricsRequested・Reason.parse/values/valueOf → RD171 OPS012/MON008・010～013/UI252/SS342351/PG-D567/1710 RESTARTMET001..008・1711結果/7822全121delta-105追加physical＋元依存別trace。source3751当261/34・実65四100(監視64＋元依存1)/全1774/生成126/raw28理由、新BUG0。実process/Unit/再起動/source真正性・正式/whole451未受入。
+
 2026-10-24 Batch monitoring追加：IntegrityFailureMetricRecorder constructor/record/detailedMetricsRequested・Area.parse/values/valueOf → RD171/UI252/SS341351/PG-D566/1708 INTEGRITYMET001..008・1709結果/7810全119delta-103追加physical。原Repository BatchStep(WBS-P017-02)は元1669内の追加依存trace/INTEGRITYMET001で当source再資格・追加共通費0/親WBS受入0。source5ac当253/33・実63四100(監視62＋元依存1)/全1772/生成124/raw28理由、実検査/修復/退役/正式/whole451未受入。
 
 2026-10-24 Web monitoring追加：MediaBytesMetricRecorder constructor/record/statuses/detailedMetricsRequested・Mode.parse/values/valueOf → RD171/UI252/SS333351/PG-D565/1706 MEDIABYTE001..008・1707結果/7778全117source-101physical。source082当51/7・実13四100/全1770、供給3×3×4固定byte Counterのみ。実配信/HTTP/terminal量真正性未受入、生成新2＋既14/current普通・全8raw理由、正式/工数/whole451不変更。

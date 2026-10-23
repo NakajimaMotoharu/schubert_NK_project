@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：[1710 Restart counter仕様](../../evidence/01_PT/018_NK-OPS-001/1710_ProcessRestartMetric_単体テスト仕様書.md)・[1711結果追跡](../../evidence/01_PT/018_NK-OPS-001/1711_ProcessRestartMetric_結果・追跡.md)。source3751f2150/当261PT34suite（新8＋必要既253）・監視64＋元依存1四100(L978M224C65B447)/全1774/121delta-105追加physical＋元依存別trace/生成126/raw28理由、新BUG0。供給restart24counterのみ、UNKNOWN原因とevent欠測・rate-limit抑止を区別、actual process/Unit/再起動・正式/whole451/工数未受入。
+
 2026-10-24最新：[1708 Batch integrity counter仕様](../../evidence/01_PT/018_NK-OPS-001/1708_BatchIntegrityMetric_単体テスト仕様書.md)・[1709結果横展開](../../evidence/01_PT/018_NK-OPS-001/1709_BatchIntegrityMetric_結果・横展開.md)。source5ac3d6a18/当253PT33suite（新8＋必要既245）・監視62＋原依存1の同exec四100(L947M219C63B435)/全1772/119delta-103追加physical＋元依存別trace/生成124/raw28全理由。BUG1674依存coverage・1675世代混同toolを元失敗保持で限定閉鎖、原1669内依存を新規classへ重複加算0。actual検査/修復/退役/正式/whole451/工数未受入。
 
 2026-10-24最新：[1706 Web media byte仕様](../../evidence/01_PT/018_NK-OPS-001/1706_WebMediaByteMetric_単体テスト仕様書.md)・[1707結果横展開](../../evidence/01_PT/018_NK-OPS-001/1707_WebMediaByteMetric_結果・横展開.md)。source082429175/当Web51PT7suite（新8＋必要既43）・実13四100(L290M60C13B89)/全1770/117trace/生成16/raw既8・新0。BUG1673/YKT1424 private命名を普通PT前是正/原失敗保持で限定閉鎖。供給byte36counterだけでactual配信/terminal hook/HTTP・正式/whole451/工数率へ加算0。
