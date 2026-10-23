@@ -402,4 +402,47 @@ class HttpMetricRecorderTest {
         assertEquals(0, registry.closes.get());
       }
   }
+
+  @Test
+  void httpRec010ExtremeRangeOrdersNeverWrapCumulativeTimerOrLoseSmallBuckets() {
+    for (long[] values :
+        List.of(
+            new long[] {0, 1, Long.MAX_VALUE, Long.MAX_VALUE, 1},
+            new long[] {Long.MAX_VALUE, Long.MAX_VALUE, 1, 0, 1})) {
+      try (var registry = new InspectingRegistry()) {
+        var recorder = new HttpMetricRecorder(registry, "DEBUG");
+        for (long value : values) recorder.record("/search", "GET", 200, value);
+        var metric = duration(registry, "/search");
+        // Only self-owned literal-fixture numbers; never HTTP values, exception text or
+        // identifiers.
+        System.out.println(
+            "HTTP_EXTREME_FIXTURE count="
+                + metric.count()
+                + ";sumSeconds="
+                + metric.totalTime(TimeUnit.SECONDS)
+                + ";maxSeconds="
+                + metric.max(TimeUnit.SECONDS));
+        assertEquals(5, metric.count());
+        assertEquals(5, request(registry, "/search", "GET", "2xx").count());
+        assertEquals(1.8446744073709553E10, metric.totalTime(TimeUnit.SECONDS));
+        assertEquals(9.223372036854776E9, metric.max(TimeUnit.SECONDS));
+        Map<Double, Double> counts = new HashMap<>();
+        for (var bucket : metric.takeSnapshot().histogramCounts())
+          counts.put(bucket.bucket(), bucket.count());
+        assertEquals(
+            Set.of(
+                50000000.0,
+                100000000.0,
+                250000000.0,
+                500000000.0,
+                1000000000.0,
+                1500000000.0,
+                2000000000.0,
+                2500000000.0,
+                5000000000.0),
+            counts.keySet());
+        for (double boundary : BOUNDS) assertEquals(3.0, counts.get(boundary).doubleValue());
+      }
+    }
+  }
 }
