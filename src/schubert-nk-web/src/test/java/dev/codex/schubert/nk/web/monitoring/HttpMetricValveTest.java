@@ -202,11 +202,14 @@ class HttpMetricValveTest {
       wrong.setAttribute(ATTRIBUTE, "not-owned");
       valve.log(wrong, response(200), 0);
       for (int invalid = 0; invalid < 5; invalid++) {
-        var request = request("GET", "/");
+        var request =
+            invalid == 1
+                ? new Request(new Connector(), new org.apache.coyote.Request())
+                : request("GET", "/");
+        if (invalid == 1) WebRequestTrace.ensure(request, () -> new UUID(1, 2));
         var response = response(invalid == 2 ? 99 : invalid == 3 ? 600 : 200);
         valve.invoke(request, response);
         if (invalid == 0) request.removeAttribute(WebRequestTrace.class.getName());
-        if (invalid == 1) request.getCoyoteRequest().method().recycle();
         valve.log(request, response, invalid == 4 ? -1 : 0);
         valve.log(request, response, 0);
       }
