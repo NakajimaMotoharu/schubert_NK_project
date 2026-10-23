@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24最新：1725 HTTP極小/MAX追加品質仕様・1726結果横展開、source731d84d79/当Web90PT11suite（新13＋必要既77）・実20四100(L456M100C20B176)/全1794/141delta-125physical/生成8type27method/raw13全理由・static missing0。元合計0の1failure/中間missing4/NullAway2/wrapper1と回収/metadata schema不備を別保全しBUG1681～1685/YKT1432～1436を限定閉鎖。前Web77から+13ID/実class+2/L+55/M+19/B+16の技術実績、原190新受入0/正式1964-53/工数null・全actualHOLD/whole451未受入維持。
+
 2026-10-24最新：1723 Duration極小/MAX追加品質仕様・1724結果横展開。source6c6ba4ab5/当API174PT21suite（追加品質12＋必要既162）・実36四100(L653M124C36B303)/全1791/138delta-122physical/生成54/raw19全個別理由。元2failure・二compile手戻り・SB1・独立工具不備を別保存し、BUG1678～1680/YKT1429～1431を限定閉鎖。API前162から新12ID/実class+2/L+48/M+13/B+28の技術実績、原190新受入0/正式1964-53/工数null維持。実assembly/DB/MQ/exporter/全actualHOLD・whole451未受入。
 
 2026-10-24最新：1721_WebOutbox観測経路仕様・1722結果追跡、sourcef84acdd7d/当Web77PT10suite（新三Main/26ID＋必要既51）・実18四100(L401M81C18B160)/全1788/135delta-119physical/生成27/raw13全理由、新BUG0。Web前資格から+26ID/実class+5/L+111/M+21/B+71を部品実績に計上。readonly技術schema/JDBC proxy→完全六Gaugeだけ、実DB/owner/source/scheduler/exporter・正式/whole451/工数未受入。

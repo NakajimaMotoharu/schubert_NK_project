@@ -104,9 +104,9 @@ def main():
           and c['sourceFiles'][row['sourcePath']]==row['sourceSha256'],'all generated owner/physical bytes unchanged, not old execution transfer')
         done=subprocess.run([str(host.TC/'jdk-25.0.4/bin/javap'),'-p','-c','-s',str(file)],capture_output=True,text=True,check=False)
         require(done.returncode==0,'noninitializing current generated metadata')
-        row['currentMetadata']=dict(actualExit=0,sha256=hashlib.sha256(done.stdout.encode()).hexdigest(),source=compilation.SOURCE,
+        row['currentMetadata']=dict(actualExit=0,command=done.args,sha256=hashlib.sha256(done.stdout.encode()).hexdigest(),source=compilation.SOURCE,
           actualOrdinaryWitness='PG8100-http-duration-nullable-host-v1',targetInitialized=False)
-        row['historicalJavapReceipt']=row.pop('javapReceipt')
+        if 'javapReceipt' in row:row['historicalJavapReceipt']=row.pop('javapReceipt')
     marker=PREFIX+'OverflowSafeDurationSupport.class'
     require(c['metadataClasses']==[PREFIX+'package-info.class',marker] and len(c['additionalMarkerMetadataProofs'])==1
       and c['additionalMarkerMetadataProofs'][0]['methods']==c['additionalMarkerMetadataProofs'][0]['fields']==0
