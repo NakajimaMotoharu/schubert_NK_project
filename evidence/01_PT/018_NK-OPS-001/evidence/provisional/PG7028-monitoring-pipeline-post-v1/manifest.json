@@ -1,0 +1,614 @@
+{
+  "actualCrcMismatch": 0,
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualSessions": 1,
+  "actualVmActions": 0,
+  "auditLibraries": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+  },
+  "auditStages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ComponentCoverageAudit.java"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "ComponentCoverageAudit",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7026-monitoring-pipeline-host-v1/snapshot/tools/quality/harnesses/target/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7026-monitoring-pipeline-host-v1/snapshot/tools/quality/harnesses/target/classes",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service",
+        "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity",
+        "dev/codex/schubert/nk/batch/monitoring/AlertRegistry",
+        "dev/codex/schubert/nk/batch/monitoring/AlertThresholds",
+        "dev/codex/schubert/nk/batch/monitoring/MetricContract",
+        "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService",
+        "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine",
+        "dev/codex/schubert/nk/batch/monitoring/ObservationContext"
+      ],
+      "stderr": "",
+      "stdout": "CLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle\t213f16ee05508965\tLINE:0:47\tMETHOD:0:5\tCLASS:0:1\tBRANCH:0:24\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance\t93760117468cdc3d\tLINE:0:3\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition\td0e5072de1f5df7a\tLINE:0:13\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event\t37ffe40c0ab54467\tLINE:0:16\tMETHOD:0:8\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service\t6e749e6167cd5860\tLINE:0:7\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity\tc764319c1a2dc358\tLINE:0:4\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertRegistry\t8aa34febb8559c50\tLINE:0:19\tMETHOD:0:4\tCLASS:0:1\tBRANCH:0:8\nCLASS\tdev/codex/schubert/nk/batch/monitoring/AlertThresholds\tee6a9faadac90e57\tLINE:0:65\tMETHOD:0:21\tCLASS:0:1\tBRANCH:0:100\nCLASS\tdev/codex/schubert/nk/batch/monitoring/MetricContract\tc72c60aa316ca03c\tLINE:0:43\tMETHOD:0:8\tCLASS:0:1\tBRANCH:0:6\nCLASS\tdev/codex/schubert/nk/batch/monitoring/MetricContract$Kind\t4c7b32bce2270101\tLINE:0:4\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy\t7a6bbe7cd079e609\tLINE:0:23\tMETHOD:0:7\tCLASS:0:1\tBRANCH:0:9\nCLASS\tdev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService\t8d05386762af8bc6\tLINE:0:5\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine\t67af2ba5d3c0cdf9\tLINE:0:28\tMETHOD:0:16\tCLASS:0:1\tBRANCH:0:0\nCLASS\tdev/codex/schubert/nk/batch/monitoring/ObservationContext\t45dd5ef40bfe0038\tLINE:0:6\tMETHOD:0:1\tCLASS:0:1\tBRANCH:0:2\nSESSION\t1792715900395\t1792715901413\nRESULT\t14\t0\t1\n"
+    }
+  ],
+  "command": "python3 -B tools/quality/pg7008_monitoring_mode_post.py",
+  "counters": {
+    "BRANCH": {
+      "covered": 149,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 14,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 283,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 76,
+      "missed": 0
+    }
+  },
+  "effortPercent": null,
+  "executableClasses": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle": {
+      "counters": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 47,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 5,
+          "missed": 0
+        }
+      },
+      "crc64": "213f16ee05508965"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 3,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "93760117468cdc3d"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 13,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "d0e5072de1f5df7a"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 16,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "crc64": "37ffe40c0ab54467"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 7,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "6e749e6167cd5860"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "c764319c1a2dc358"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry": {
+      "counters": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 19,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "crc64": "8aa34febb8559c50"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds": {
+      "counters": {
+        "BRANCH": {
+          "covered": 100,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 65,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 21,
+          "missed": 0
+        }
+      },
+      "crc64": "ee6a9faadac90e57"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract": {
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 43,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "crc64": "c72c60aa316ca03c"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "4c7b32bce2270101"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy": {
+      "counters": {
+        "BRANCH": {
+          "covered": 9,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 23,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "crc64": "7a6bbe7cd079e609"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "8d05386762af8bc6"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine": {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 28,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 16,
+          "missed": 0
+        }
+      },
+      "crc64": "67af2ba5d3c0cdf9"
+    },
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext": {
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "crc64": "45dd5ef40bfe0038"
+    }
+  },
+  "formalUpdated": false,
+  "harnessPomSha256": "2564d09861babcb9b56775378f64c9aa4fe276233dd912a52a56b992d8c0e388",
+  "metadataClasses": [
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class"
+  ],
+  "newAccepted": 0,
+  "original4222Repeated": false,
+  "original44Repeated": false,
+  "originalArchiveSha256": "c4558bfdc842ca4688c949a2a9407c8f96253e363ff5dd5de25e6e0bf955ddcb",
+  "originalBeginSha256": "5da5b18cf430a6963a9583bdb15e2bd744aee2c532c706e3563a6117ba0699fc",
+  "originalManifestSha256": "cd97cb5454e9b5abe7f4452a2e5cb8820583ec81fb480110be7660c281908f73",
+  "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "physicalClasses": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "532418b911214483712008c5f1e698155a89921e7a522324a8c7d829d45c73ac",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "984380ad7441d2d63beaa62a8dcdf37ffe39912029b1c539e8fe6907e5d2ace4",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "437b0cc331ddc2b3dbeff74190a03031316752d94d8954280ca90c233eec3408",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class": "5f53b739b54db71413fca668c0a416066529d7c9652eb245dbe8cf23075300df",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContract.class": "a9b149b9df0620c6d863fcb9588b87e8e5ac28ad77a8a55a7c4dbd514323a280",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "11826125298283615d52ec3920092ae0334bc052a4fd04dca51ec06c20cf7030",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "046c34e4730b28501beaeff9a0e5e3c096e83434647a707669477edc4f858ce8",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "831863c00f25e0141acb3eaa080423d60cb2ec355f0215e0b01e01169e973981",
+    "dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077"
+  },
+  "source": "c285c38ac4fcc3f16bfd3d2051ec76c352227f74",
+  "sourceFiles": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java": "0941987e4f555a42df0c993f71a9f5e8b934adaf2a15a777389f813bed08774c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java": "afca594b33bc9c92f988ddf519b75b34aaab6eeb0d546e1003465718b1933ace",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java": "ed9cb0ffcbe9a80791410f7008e97746e1d6517e78fd60a505c56e1c6ea2b15b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java": "27f647517fc9bee05fdb31dc702bb10a3f4b7cd5c5c59932c55a7a9b7031a54a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java": "c62937d7cdd6eb053f78580e5a6d889ae464483db272de45ec0b8d93c70121c9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java": "d7df811befb430d563aacc6332adb4f4ff3f6f8e9cb5e17d04a0efcf20b8d61d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java": "7f711d2ab2e633d4c8d12b95083008ae43c00f99c759d1731a0023e13d958f96",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java": "b497ed64ca41a52d63520130560264c72c3a8eaffdcd5d49a3da9a6b1ea2f381",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java": "e082b4f23593eff63f15256a04ba265db6c8d13adef2036d94e01e363f9d7533",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java": "3696e81cea6f82f010526ed2ca39aeceed718bd65c7fad84b4cf2d8a95e24f09",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicyTest.java": "525d72e00ac97b3510537e62426e91f25e0129f3d8812e34380f1efda4b4663c",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java": "65a4dab85ffe67d49d568a6be64ab2f0c5ab9f9515a6fdecefd6eb78e166e53f"
+  },
+  "sourceRun": "PG7026-monitoring-pipeline-host-v1",
+  "spotbugs": {
+    "actualExit": 0,
+    "findings": 0,
+    "reportSha256": "c8d39f5683c823e9283fe72f98cd658dacc775b7a7c96a2410f2d3c8c2e58255"
+  },
+  "staticDispositionRequired": true,
+  "staticRaw": {
+    "checkstyle": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/checkstyle.xml",
+        "@/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/main.txt"
+      ],
+      "findings": [],
+      "processingErrors": 0,
+      "reportSha256": "d2393b7055afc4359c99c405bc441a9e82f5a9bc6714054392f41f84245bc83a"
+    },
+    "pmd": {
+      "actualExit": 4,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+        "net.sourceforge.pmd.cli.PmdCli",
+        "check",
+        "--file-list",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/main.txt",
+        "--rulesets",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+        "--use-version",
+        "java-25",
+        "--minimum-priority",
+        "5",
+        "--aux-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7026-monitoring-pipeline-host-v1/snapshot/tools/quality/harnesses/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--no-cache",
+        "--format",
+        "xml",
+        "--report-file",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7028-monitoring-pipeline-post-v1/pmd.xml"
+      ],
+      "findings": [
+        {
+          "begincolumn": "5",
+          "beginline": "130",
+          "class": "AlertLifecycle",
+          "endcolumn": "17",
+          "endline": "130",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+          "message": "Use ReentrantLock rather than synchronization",
+          "method": "observe",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidSynchronizedStatement",
+          "ruleset": "Multithreading"
+        },
+        {
+          "begincolumn": "5",
+          "beginline": "173",
+          "class": "AlertLifecycle",
+          "endcolumn": "17",
+          "endline": "173",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+          "message": "Use ReentrantLock rather than synchronization",
+          "method": "snapshot",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidSynchronizedStatement",
+          "ruleset": "Multithreading"
+        },
+        {
+          "begincolumn": "17",
+          "beginline": "115",
+          "class": "AlertThresholds",
+          "endcolumn": "20",
+          "endline": "115",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+          "message": "Avoid using literals such as 100 in if statements",
+          "method": "percentage",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidLiteralsInIfCondition",
+          "ruleset": "Error Prone"
+        },
+        {
+          "begincolumn": "47",
+          "beginline": "13",
+          "class": "MetricContract",
+          "endcolumn": "56",
+          "endline": "13",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+          "message": "The String literal \"service\" appears 4 times in this file; the first occurrence is on line 13",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidDuplicateLiterals",
+          "ruleset": "Error Prone"
+        },
+        {
+          "begincolumn": "66",
+          "beginline": "15",
+          "class": "MetricContract",
+          "endcolumn": "75",
+          "endline": "15",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+          "message": "The String literal \"address\" appears 5 times in this file; the first occurrence is on line 15",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidDuplicateLiterals",
+          "ruleset": "Error Prone"
+        },
+        {
+          "begincolumn": "54",
+          "beginline": "24",
+          "class": "MetricContract",
+          "endcolumn": "62",
+          "endline": "24",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals",
+          "message": "The String literal \"status\" appears 4 times in this file; the first occurrence is on line 24",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidDuplicateLiterals",
+          "ruleset": "Error Prone"
+        },
+        {
+          "begincolumn": "25",
+          "beginline": "25",
+          "class": "MonitoringModePolicy",
+          "endcolumn": "47",
+          "endline": "25",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname",
+          "message": "Field detailedMetricsEnabled has the same name as a method",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidFieldNameMatchingMethodName",
+          "ruleset": "Error Prone",
+          "variable": "detailedMetricsEnabled"
+        },
+        {
+          "begincolumn": "21",
+          "beginline": "26",
+          "class": "MonitoringModePolicy",
+          "endcolumn": "34",
+          "endline": "26",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname",
+          "message": "Field retentionDays has the same name as a method",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidFieldNameMatchingMethodName",
+          "ruleset": "Error Prone",
+          "variable": "retentionDays"
+        },
+        {
+          "begincolumn": "22",
+          "beginline": "27",
+          "class": "MonitoringModePolicy",
+          "endcolumn": "36",
+          "endline": "27",
+          "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname",
+          "message": "Field retentionBytes has the same name as a method",
+          "package": "dev.codex.schubert.nk.batch.monitoring",
+          "priority": "3",
+          "rule": "AvoidFieldNameMatchingMethodName",
+          "ruleset": "Error Prone",
+          "variable": "retentionBytes"
+        }
+      ],
+      "processingErrors": 0,
+      "reportSha256": "4f049e13b9f730ca3da8c4dc335521851c83114d0e8f1e678c1eaa1951f2e427"
+    }
+  },
+  "suites": 6,
+  "tests": 48,
+  "timeUTC": "2026-10-23T00:39:12.962670+00:00",
+  "toolSha256": "8c4b7a77503d03b33d663dbe1c46fac45b750be9b714c83b07e3d06362152918",
+  "wholeSixQualified": false,
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest.xml": "d5e5afd1585fbf0966dd5cc60c9d02d7da5c048001bad79ee15b73ba8794dddc",
+    "TEST-dev.codex.schubert.nk.batch.monitoring.AlertRegistryTest.xml": "10d112358746e18959befedddd9c2aa4995aff11f8a20a226bbe1c28f89ea174",
+    "TEST-dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest.xml": "6898c35628a7f4729bb020e19ca31d09d05a47516c14c383f20f824812bd73f4",
+    "TEST-dev.codex.schubert.nk.batch.monitoring.MetricContractTest.xml": "a129f288a160b206090173a585b3bcfa111c12416cdf08b0abea55c73df88c5f",
+    "TEST-dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicyTest.xml": "e353830124d8f28c46a98eb47ca0f6bdd972be139903406609e4b2265d488135",
+    "TEST-dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngineTest.xml": "efa2bc0d61cf9ab21fbdbe865fba3a23ba7e5ff192f0c21ac28d8f20135ce67e"
+  }
+}
