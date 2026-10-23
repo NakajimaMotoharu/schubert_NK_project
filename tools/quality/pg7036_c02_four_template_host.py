@@ -14,6 +14,8 @@ OUT = host.BASE/'PG7036-c02-four-template-host-v1'
 POM = 'tools/quality/harnesses/deployment-unit-pom.xml'
 SUITE = 'dev.codex.schubert.nk.batch.platform.SupplementaryUnitTemplateTest'
 TEST = 'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java'
+RESOURCE_DIRECTORY = 'systemd'
+TARGET_DIRECTORY = 'target-deployment-unit'
 FILES = ('schubert-nk-backup.service.template','schubert-nk-bootstrap-admin.service.template',
          'caddy.service.d/schubert-nk-startup-policy.conf','caddy.service.d/schubert-nk-stop-policy.conf')
 METHODS = {'unitSup001BackupAllDeclaredContracts','unitSup002AdminDisabledAndDedicatedAllDeclaredContracts',
@@ -57,7 +59,7 @@ def main():
                  logSha256=host.sha(SLOT/(name+'.log')))
         host.write(SLOT/(name+'-exit.safe.json'),row);stages.append(row)
         if code:break
-    target=snapshot/'tools/quality/harnesses/target-deployment-unit'
+    target=snapshot/'tools/quality/harnesses'/TARGET_DIRECTORY
     suites={};cases=[];xmls={};resources={}
     for p in sorted((target/'surefire-reports').glob('TEST-*.xml')):
         r=ET.parse(p).getroot()
@@ -69,9 +71,9 @@ def main():
             bad=[n.tag for n in c if n.tag not in ('system-out','system-err')]
             cases.append(dict(name=c.get('name'),result='NOT_PASS' if bad else 'PASS',nonPass=bad))
     for name in FILES:
-        path=target/'test-classes/systemd'/name
+        path=target/'test-classes'/RESOURCE_DIRECTORY/name
         if path.exists():
-            if host.sha(path)!=host.sha(snapshot/'src/deployment/systemd'/name):
+            if host.sha(path)!=host.sha(snapshot/'src/deployment'/RESOURCE_DIRECTORY/name):
                 raise ValueError('actual PT resource must match public source byte exactly')
             resources[name]=host.sha(path)
     if list((target/'classes').rglob('*.class')):
