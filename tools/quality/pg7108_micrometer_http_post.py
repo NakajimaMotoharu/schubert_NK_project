@@ -10,7 +10,7 @@ METHODS={'httpRec001StandardDoesNotRegisterOrClose','httpRec002ActualMeterNamesT
  'httpRec009WrongTypeIsRejectedWithoutAlternativeIdentity'}
 
 
-if __name__=='__main__':
+def configure():
     post.SLOT=host.SLOT
     post.POM=host.POM
     post.RUN='PG7106-micrometer-http-host-v1'
@@ -26,4 +26,8 @@ if __name__=='__main__':
     post.EXPECTED_SUITES={name:dict(tests=count,failures=0,errors=0,skipped=0)
                          for name,count in zip(host.SUITES,(6,9),strict=True)}
     post.EXTRA_AUXILIARY_JARS=host.SDK
-    post.main()
+    return post
+
+
+if __name__=='__main__':
+    configure().main()

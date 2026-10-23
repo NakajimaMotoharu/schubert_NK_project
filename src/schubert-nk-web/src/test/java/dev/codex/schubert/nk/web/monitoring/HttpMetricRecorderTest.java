@@ -46,7 +46,7 @@ class HttpMetricRecorderTest {
     5_000_000_000L
   };
 
-  private static class InspectingRegistry extends SimpleMeterRegistry {
+  private static class InspectingRegistry extends SimpleMeterRegistry implements AutoCloseable {
     final List<double[]> boundaries = new ArrayList<>();
     final AtomicInteger closes = new AtomicInteger();
 
