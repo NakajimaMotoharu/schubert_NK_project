@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "allOriginalTestClassBytesEqualStrictProductionCompile": true,
+  "allOriginalTestClassHashes": {
+    "dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.class": "a202b123719a97521ff50e4c548b8f0fa9feba5ccb371f36920d1331713020c9",
+    "dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.class": "818ff8e0b636aff1e7e84577f27950afe2ec85381c2288f5b81538ea9f69f799",
+    "dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.class": "fd202c1bdf8f92a951cd463795a0a86ed64175ecf6842ce573529e3f0db6be67",
+    "dev/codex/schubert/nk/batch/monitoring/MetricContractTest.class": "2270348512c53b4feb3be09549eea91d19bb734b1e4cd8902575e47d434ea4bb",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicyTest.class": "70a53485ba84ea7bcad95de9e0e00d176b4fefbc863f36bde897b4cf69153391",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest$1.class": "7b8917aa5cab2059334bde214742ae43f2cdcba88341e535cef0d51c7608ef35",
+    "dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.class": "3e9bd2fb836278687e55265434abe1ed5ab04d8ff7d84d96e11085047837f431"
+  },
+  "bug": "BUG-1647",
+  "businessTestsExecuted": 0,
+  "canarySha256": "aafd864cff723960e1c3355ab2a246f2cf5e78cb70bea6c85e37ded7c13feb32",
+  "command": "python3 -B tools/quality/pg7034_test_lint_supplement.py",
+  "compilerCanaryResults": [
+    {
+      "begin": {
+        "businessTestsExecuted": 0,
+        "canarySha256": "aafd864cff723960e1c3355ab2a246f2cf5e78cb70bea6c85e37ded7c13feb32",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+          "-o",
+          "--no-transfer-progress",
+          "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+          "-f",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7034-test-lint-supplement-v1/old/pom.xml",
+          "test-compile"
+        ],
+        "expectedExit": 0,
+        "fixturePomSha256": "09bd0397a77de04d665d599c49b9da141f378947630a47e862983195b4ce3c13",
+        "parentPomSha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+        "startUTC": "2026-10-23T00:54:25.119455+00:00"
+      },
+      "label": "old",
+      "meaning": "OLD_GATE_MISSED_WARNING",
+      "terminal": {
+        "actualExit": 0,
+        "beginSha256": "84a12b6306dba700dbc63147fdabb70564f80eaa0aa24599a3cd8e27df0f7a8e",
+        "endUTC": "2026-10-23T00:54:27.245366+00:00",
+        "expectedExit": 0,
+        "logSha256": "0f1c71dfd7d679b487c64bb3d1938f0f35c9609fea122eabdc1c137f0e3142df"
+      }
+    },
+    {
+      "begin": {
+        "businessTestsExecuted": 0,
+        "canarySha256": "aafd864cff723960e1c3355ab2a246f2cf5e78cb70bea6c85e37ded7c13feb32",
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+          "-o",
+          "--no-transfer-progress",
+          "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+          "-f",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7034-test-lint-supplement-v1/new/pom.xml",
+          "test-compile"
+        ],
+        "expectedExit": 1,
+        "fixturePomSha256": "744308c5232df4b9e6ae99ec324f8bcb2c26f21e6182a043c96ba986ad9c02ff",
+        "parentPomSha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+        "startUTC": "2026-10-23T00:54:27.247008+00:00"
+      },
+      "label": "new",
+      "meaning": "EXPECTED_WARNING_REJECTION_NOT_PT_FAILURE",
+      "terminal": {
+        "actualExit": 1,
+        "beginSha256": "df1d8026570a49b69c63d808854a056b203c47dd7e2247dc8050d669b6eae580",
+        "endUTC": "2026-10-23T00:54:29.438742+00:00",
+        "expectedExit": 1,
+        "logSha256": "913c2f94ba6ce97c69291aa832b8c418a0db38dc23a689ccd253249ddbdcc851"
+      }
+    }
+  ],
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "newHarnessSha256": "d439121558eb7c93fe16bc54e5c54493ff3e252b063932d211551c99a51faa50",
+  "oldHarnessSha256": "2564d09861babcb9b56775378f64c9aa4fe276233dd912a52a56b992d8c0e388",
+  "original4222Replayed": false,
+  "original44Replayed": false,
+  "original48Replayed": false,
+  "originalFullCompileManifestSha256": "e795a9ca9ff3133f3e8aa0a32e615243847708486765073cd1a74a47101abe97",
+  "rollout": "YKT-1400",
+  "source": "c285c38ac4fcc3f16bfd3d2051ec76c352227f74",
+  "testClassCount": 7,
+  "timeUTC": "2026-10-23T00:54:29.444422+00:00",
+  "toolSha256": "14c6c64a730d069771bceadfad4edac252285a9388dd6d77ce17e29ebff973ca"
+}
