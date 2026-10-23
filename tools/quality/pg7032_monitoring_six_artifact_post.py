@@ -16,6 +16,13 @@ OUT = host.BASE/'PG7032-monitoring-six-artifact-post-v1'
 ORIGINAL = 'e7d64fda2453e906ee6ccc5fe718e5c29841e4aa'
 Q_SHA = '728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731'
 COMPONENT_SHA = 'aeabd8ec58d30a538af72ca839a893418d83bb7fd5c43242b5b312e526ef58e7'
+COMPONENT_FILE = host.BASE/'PG7028-monitoring-pipeline-post-v1/manifest.json'
+COMPONENT_TESTS = 48
+TOTAL_PHYSICAL = 1684
+NEW_PHYSICAL = 15
+NEW_EXECUTABLE = 14
+SOURCE_DELTA_COUNT = 15
+EXTRA_TEST_OWNERS = {}
 ARCH_SHA = '7f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f'
 
 
@@ -61,14 +68,14 @@ def main():
     snapshot=compile_stage.SLOT/'snapshot'
     require(all(host.sha(snapshot/p)==h for p,h in raw['begin']['inputHashes'].items()),'fixed entire compile source')
     qp=host.BASE/'PG6930-current4222-cases/qualification.json'
-    cp=host.BASE/'PG7028-monitoring-pipeline-post-v1/manifest.json'
+    cp=COMPONENT_FILE
     ap=host.BASE/'PG6960-archunit-static-v1/manifest.json'
     require(host.sha(qp)==Q_SHA and host.sha(cp)==COMPONENT_SHA and host.sha(ap)==ARCH_SHA,
             'all original qualification witnesses pinned')
     old=json.loads(qp.read_bytes());component=json.loads(cp.read_bytes());prior_arch=json.loads(ap.read_bytes())
     require(old['productionSource']==ORIGINAL and len(old['allPhysicalMainSha256'])==1669,'exact historical source/class inventory')
-    require(component['source']==raw['source'] and component['tests']==48
-            and component['actualCrcMismatch']==0 and component['actualSessions']==1,'genuine same-source pure48 qualification')
+    require(component['source']==raw['source'] and component['tests']==COMPONENT_TESTS
+            and component['actualCrcMismatch']==0 and component['actualSessions']==1,'genuine same-source component qualification')
     physical={};jars={}
     for role,item in raw['jars'].items():
         path=Path(item['path'])
@@ -86,20 +93,26 @@ def main():
             'all old1669 physical bytes preserved, debug mismatch is not ignored')
     added={k:v for k,v in physical.items() if k not in baseline}
     expected={'batch:'+k:v for k,v in component['physicalClasses'].items()}
-    require(added==expected and len(added)==15 and len(physical)==1684,
-            'exact same-source qualified14 executables plus one metadata class')
+    require(added==expected and len(added)==NEW_PHYSICAL and len(physical)==TOTAL_PHYSICAL
+            and len(component['physicalClasses'])==NEW_EXECUTABLE+1,
+            'exact same-source qualified executables plus one metadata class')
     parts=subprocess.check_output(['git','diff','--name-status','-z',ORIGINAL,raw['source'],'--','src'],cwd=host.ROOT).split(b'\0')[:-1]
     source_delta=[]
     require(len(parts)%2==0,'full source delta grammar')
     for index in range(0,len(parts),2):
         status=parts[index].decode();path=parts[index+1].decode()
-        require(status=='A' and path.startswith((
+        monitoring=path.startswith((
           'src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/',
           'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/',
-          'src/schubert-nk-batch/src/test/resources/monitoring/')),'only exact public monitoring additions, no old source changed')
-        source_delta.append(dict(path=path,sha256=host.sha(snapshot/path),owner='WBS-P018-09',
-                                 sharedReference='WBS-C07',sharedAdditionalCostPp=0,acceptance='NOT_WHOLE_LEAF_ACCEPTED'))
-    require(len(source_delta)==15,'eight Main sources/six tests/one independent TSV')
+          'src/schubert-nk-batch/src/test/resources/monitoring/'))
+        require(status=='A' and (monitoring or path in EXTRA_TEST_OWNERS),
+                'only exact public monitoring or declared supplementary Test additions, no old source changed')
+        source_delta.append(dict(path=path,sha256=host.sha(snapshot/path),
+          owner='WBS-P018-09' if monitoring else EXTRA_TEST_OWNERS[path],
+          sharedReference='WBS-C07' if monitoring else None,sharedAdditionalCostPp=0,
+          acceptance='NOT_WHOLE_LEAF_ACCEPTED'))
+    require(len(source_delta)==SOURCE_DELTA_COUNT and set(EXTRA_TEST_OWNERS)<=set(v['path'] for v in source_delta),
+            'all and only declared added source files')
     require(host.sha(architecture.SOURCE)==prior_arch['toolSourceSha256']
             and host.sha(architecture.ARCH)==architecture.ARCH_SHA
             and host.sha(architecture.SLF)==architecture.SLF_SHA,'unchanged qualified architecture tool/dependencies')
@@ -110,15 +123,15 @@ def main():
     receipt,text=step('audit-six',[str(architecture.JAVA),'-cp',os.pathsep.join([str(classes),str(architecture.ARCH),str(architecture.SLF)]),
       'ModuleDependencyAudit',*[m+'='+str(jars[m]) for m in architecture.MODULES]])
     result=architecture.parse(text)
-    require(receipt['actualExit']==0 and result['physical']==1684 and not result['findings']
-            and all(v==0 for v in result['rules'].values()),'all fresh1684/all five rules zero')
+    require(receipt['actualExit']==0 and result['physical']==TOTAL_PHYSICAL and not result['findings']
+            and all(v==0 for v in result['rules'].values()),'all fresh physical classes/all five rules zero')
     value=dict(actualExit=0,source=raw['source'],timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       command='python3 -B tools/quality/pg7032_monitoring_six_artifact_post.py',toolSha256=host.sha(Path(__file__)),
       compileManifestSha256=host.sha(compile_stage.SLOT/'manifest.safe.json'),
       originalWholeQualification=dict(path=str(qp.relative_to(host.ROOT)),sha256=Q_SHA,source=ORIGINAL,notRelabeledAsCurrentPass=True),
-      currentComponentQualification=dict(path=str(cp.relative_to(host.ROOT)),sha256=COMPONENT_SHA,tests=48),
-      jars=raw['jars'],physicalClassCount=1684,existingPhysicalClassCount=1669,existingChangedClassCount=0,
-      newPhysicalClassCount=15,newExecutableClassCount=14,newMetadataClassCount=1,
+      currentComponentQualification=dict(path=str(cp.relative_to(host.ROOT)),sha256=COMPONENT_SHA,tests=COMPONENT_TESTS),
+      jars=raw['jars'],physicalClassCount=TOTAL_PHYSICAL,existingPhysicalClassCount=1669,existingChangedClassCount=0,
+      newPhysicalClassCount=NEW_PHYSICAL,newExecutableClassCount=NEW_EXECUTABLE,newMetadataClassCount=1,
       newPhysicalClasses=added,newSourceDelta=source_delta,componentClassHashesEqualFreshProductionJar=True,
       architecture=dict(result=result,receipt=receipt,toolSourceSha256=host.sha(architecture.SOURCE),
                         originalCanaryQualificationSha256=ARCH_SHA,canariesReplayed=False),
@@ -126,8 +139,8 @@ def main():
       original4222Repeated=False,original44Repeated=False,whole451Accepted=False,
       fullRegressionStillRequiredForFormalAcceptance=True,formalUpdated=False,newAccepted=0,effortPercent=None)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,source=raw['source'],physical=1684,oldUnchanged=1669,
-      newExecutable=14,newMetadata=1,architecture=result['rules'],
+    print(json.dumps(dict(actualExit=0,source=raw['source'],physical=TOTAL_PHYSICAL,oldUnchanged=1669,
+      newExecutable=NEW_EXECUTABLE,newMetadata=1,architecture=result['rules'],
       manifestSha256=host.sha(OUT/'manifest.json'))))
 
 
