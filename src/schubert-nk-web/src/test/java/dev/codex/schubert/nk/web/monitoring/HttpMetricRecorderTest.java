@@ -50,7 +50,8 @@ class HttpMetricRecorderTest {
     5_000_000_000L
   };
 
-  private static class InspectingRegistry extends SimpleMeterRegistry implements AutoCloseable {
+  private static class InspectingRegistry extends SimpleMeterRegistry
+      implements AutoCloseable, OverflowSafeDurationSupport {
     final List<double[]> boundaries = new ArrayList<>();
     final AtomicInteger closes = new AtomicInteger();
 
@@ -61,7 +62,7 @@ class HttpMetricRecorderTest {
     @Override
     protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
       boundaries.add(Objects.requireNonNull(config.getServiceLevelObjectiveBoundaries()).clone());
-      return super.newTimer(id, config, pause);
+      return OverflowSafeHttpMeterRegistry.durationTimer(this, id, config, pause);
     }
 
     @Override

@@ -30,6 +30,7 @@ public final class HttpMetricRecorder {
   public HttpMetricRecorder(MeterRegistry registry, String mode) {
     Objects.requireNonNull(registry, "meter registry");
     collectDetailed = contract.detailedMetricsEnabled(mode);
+    if (collectDetailed) OverflowSafeHttpMeterRegistry.requireCompatible(registry);
     var requests = new HashMap<Labels, Counter>();
     var timers = new EnumMap<Route, Timer>(Route.class);
     if (collectDetailed) {
@@ -38,6 +39,7 @@ public final class HttpMetricRecorder {
         timers.put(
             route,
             Timer.builder(Metric.DURATION.externalName())
+                .publishPercentiles()
                 .tags(tags(labels.durationLabels()))
                 .serviceLevelObjectives(contract.durationBuckets().toArray(Duration[]::new))
                 .register(registry));

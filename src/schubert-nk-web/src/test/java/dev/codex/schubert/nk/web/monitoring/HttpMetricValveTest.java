@@ -9,9 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.pause.PauseDetector;
+import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
@@ -36,8 +38,18 @@ class HttpMetricValveTest {
   private static final String REQUESTS = "nk_http_requests_total";
   private static final String DURATION = "nk_http_request_duration_seconds";
 
-  private static class OwnedRegistry extends SimpleMeterRegistry implements AutoCloseable {
+  private static class OwnedRegistry extends SimpleMeterRegistry
+      implements AutoCloseable, OverflowSafeDurationSupport {
     final AtomicInteger closes = new AtomicInteger();
+
+    OwnedRegistry() {
+      super(SimpleConfig.DEFAULT, new MockClock());
+    }
+
+    @Override
+    protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
+      return OverflowSafeHttpMeterRegistry.durationTimer(this, id, config, pause);
+    }
 
     @Override
     public void close() {
