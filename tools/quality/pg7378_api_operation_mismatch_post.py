@@ -12,7 +12,7 @@ METHODS={
  'opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth',
  'opMis008IndependentOwnersAndRepeatedObservationsDoNotShareCounts'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7376-api-operation-mismatch-host-v1'
     post.OUT=post.host.BASE/'PG7378-api-operation-mismatch-post-v1'
@@ -21,4 +21,7 @@ if __name__=='__main__':
     post.NAMES|={post.PREFIX+n for n in ('OperationMismatchMetricRecorder','OperationMismatchMetricRecorder$Operation')}
     post.EXPECTED_SUITES[host.SUITES[6]]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=56;post.SOURCE_FILE_COUNT=15
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
