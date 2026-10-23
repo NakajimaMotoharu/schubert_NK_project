@@ -1,5 +1,7 @@
 # 1541 MonitoringModePolicy 単体テスト仕様書
 
+実行経路是正（期待値不変更）：PG7000は六format1/PT0、PG7004は六format0→依存Storage no-testsで1/PT0。BUG1645/1646へ修正前起票し旧証拠を保持。新PG7006は親POMのEnforcer/Java25/lint/Werror/NullAwayを継承する限定harnessを新only snapshot内で通常verifyする。原batch三Main source/一Testだけをcompiler includesで選び、failIfNoTests=true・四JaCoCo check100・SpotBugs Max/Lowを維持する。六formatは先行。依存業務moduleのPTをskipした成功とは主張しない。harnessはProduction module追加やPOM品質変更でなく、限定部品PTの工具（全体451は別に必要）。冒頭のPG7000予定manifestより、実原job別manifestと後続1542を優先する。
+
 2026-10-23、group1797、Program NK-OPS-001/P018-09。SS351§8～10/UI252§5/RD171 MON010～013を正とし、PG-D517。C07監査で判明した元計画内の製造不足であり、C07の既監査見積には追加しない。着手見積0.5/1.5/3pp、上限10pp、共有表示6/残94/reset1793306748。工程成果とP018-09/C07全受入は別。
 
 対象はBatchの非I/O・不変policy `MonitoringModePolicy` と閉enum DetailService。STANDARD/DEBUGのstrict外部値、詳細Actuator/Prometheus/Grafana/exporterの全一致、詳細保持15日/5GB（GBはSI=1,000,000,000 byte、GiBへ読み替えない）。STANDARD詳細保持0は基本監視/logの停止を意味しない。実serviceの状態採取・切替・配布・target起動、既Web/API管理HTTP、Root/nativeには接続しない。log levelの制御も受け付けず、監視modeとの混同を防ぐ。
