@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1643 API operation mismatch metric仕様](../../evidence/01_PT/018_NK-OPS-001/1643_APIOperationMismatchMetric_単体テスト仕様書.md)～[1646追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1646_APIOperationMismatchMetric_追跡・適用性完了.md)。当source40cfのAPI56PT7suite（新8）/実12四100/CRC0、六正常compile/全1735Jar/旧1669byte不変・三POM/全77source追跡。raw8全分類/新metric raw0・八purposeの四静的変異と五domain変異を拒否。実token/HMAC/key/auth操作0、正式1964-53/原190新受入0/工数null・全体451/実HOLDは維持し独立残PG/PTへ継続。
+
 2026-10-23最新：[1639 API pool借用観測結線仕様](../../evidence/01_PT/018_NK-OPS-001/1639_APIPool観測結線_単体テスト仕様書.md)～[1642追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1642_APIPool観測結線_追跡・適用性完了.md)。当sourcee874のAPI48PT6suite（新16）/実10四100/CRC0、六正常compile/全1733Jar/旧1669byte不変・三POM/全75source追跡/旧71不変4新。新harness既Hikari一nodeだけ/全品質不変/六負改変、SDK四＋当既補助二Jar各pin、raw8個別分類/未分類・有効違反0。自己所有interface proxyのみ/実pool・DB・管理操作0。正式1964-53・原190新受入0/工数null/全体451・実HOLDは維持し継続。
 
 2026-10-23最新：[1635 API DB pool metric仕様](../../evidence/01_PT/018_NK-OPS-001/1635_APIDbPoolMetric_単体テスト仕様書.md)～[1638追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1638_APIDbPoolMetric_追跡・適用性完了.md)。当sourced237のAPI32PT4suite（新8）・実8class四100/CRC0、六正常compile/全1731Jar/旧1669不変・三POM/全71source追跡/69byte不変2新。新Pool全nestedのraw0・既5rawを当同byteで再分類/未分類・有効違反0、実Hikari/DB管理・接続0。正式1964-53・歴史17/別source新7・原190新受入0/工数null/全体451・実HOLDは維持し独立PG/PTへ継続。

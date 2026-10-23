@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 operation mismatch metric：既SDK四＋Hikari/SLF二aux/JDK25.0.4/Maven3.9.12/静的工具をoffline再利用、導入取得0/harness不変更/実token-HMAC-key-auth操作0。7376/7378当56PT7suite/実12CRC0/L197M41C12B95全miss0/新metric raw0・既8理由同byte再照合、7380正常六compileのみ/7382全1735/三POM/五rule0、7384全77trace。元command/日時/環境/hashは1643～1646、actual全HOLD/全体451未受入を維持。
+
 2026-10-23 API pool借用型観測：既API HikariCP7.1.0/Jar2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b、親管理SLF4J2.0.18/Jar44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55、SDK四Jar/JDK25.0.4/Maven3.9.12をoffline再利用/導入取得0。M2 provenance/POM hash/upstream/re現commandは1639・7362begin/7369、actual pool/config生成/JMX/DBなし。harness一Hikari依存だけ追加し7369で全品質意味不変/六負改変、root parent原e7同byte・Production版不変更。7362/7364当48PT6suite/実10CRC0/四100/raw8全個別理由、7366正常六compileのみ/7368全1733/三POM/五rule0、7370全75trace。実source/管理/外側期限/Root等HOLD不変更。
 
 2026-10-23 API DB pool四metric：既JDK25.0.4/Maven3.9.12/SDK四Jar/静的工具だけ再利用/導入取得0、Hikari/DB管理・接続0。7348/7350当32PT4suite/単一sessionCRC0/L136M31C8B70全miss0、lint-NullAway/SB-CS0/PMD既5同byte理由再分類・新Pool raw0。7352六Main/Test compile-package0/PT0、7354全1731Jar/三POM/五rule0。再現/command/source/OS/tool/hashは1635～1638元manifest、actual source/外側期限/警報等未受入HOLD。

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OperationMismatchMetricRecorder/Operation→OPMIS001～008/1643～1646/PG-D544、RD171/UI252/SS314323324351。source40cf/7376真正56PT7suite（新8）→7378実12四100/CRC0/raw8分類/新metric raw0→7380六compileのみ→7382全1735/旧1669byte不変/当API13一致・歴史Batch43-Web10byteだけ/三POM/五rule0→7384全77source/66physical・7386九静的変異拒否。purpose八種の供給enumだけで実token/HMAC/key/auth/DB/Root操作0、実検知/業務hook/全体451未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API DbPoolMetricObservation.observe/DbPoolMetricCollector.collect/snapshot→POOLREAD001～008/POOLCONN001～008/1639～1642/PG-D543、RD171/UI252/SS342351。sourcee874/7362真正48PT6suite（新16）→7364実10四100/CRC0/raw8全分類/7369当harness一依存だけ品質不変六負改変→7366六compileのみ→7368全1733/旧1669byte不変/当API11一致・歴史Batch43/Web10byteだけ/三POM/五rule0→7370全75source/64physical・7372五転用guard/許可getter四のみ。実pool生成・DB・管理操作0、source真正性/外側期限/Root/exporter/全体451未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API DbPoolMetricRecorder/Counts/State→POOLMET001～008/1635～1638/PG-D542、RD171/UI252/SS342351。sourced237/7348真正32PT4suite（新8）→7350実8四100/CRC0/SB-CS0・新Pool raw0/既5個別理由→7352六compileのみ→7354全1731/旧1669byte不変/当API9一致・歴史Batch43/Web10byteだけ/三POM/五rule0→7356全71source/62physical・7358五負改変。供給API四long→固定4seriesだけ、actual pool/DB/管理/sampling/alert/Root/exporter/全体451未受入。
