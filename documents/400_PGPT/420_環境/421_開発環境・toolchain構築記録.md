@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-23 Micrometer1.17.1の正規HdrHistogram2.2.2をoffline補完
+
+1572/PG7104原bd4e07ea。既core1.17.1（§5.8の9ca47dfa…）のruntime依存HdrHistogram2.2.2を、既SHA512検証履歴のあるApache Artemis2.56.0配布libから同版・Jar SHA256 `22d1d4316c4ec13a68b559e98c8256d69071593731da96136640f864fa14fad8` とembedded正規POMを保ったままlocal M2へ新規導入した。既元archiveは現存しないため今回全archive再検証済みとは称さず、既導入由来と現在Jar版/metadata/hashを区別する。Maven install-plugin3.1.2/-o/-N/install-file/元pomFile/generatePom=false、JDK25.0.4/Maven3.9.12、repo既toolchain/m2/repository。対象座標非存在を先確認し既物上書き/元Jar変更/依存除外/代替POM/外部通信0、全byte・終端0を保存。cache Jar binaryはGit非格納。元ライセンスはvendor embedded POM/Artemis licenses/LICENSE-hdrhistogram.txtを参照。再現/出所/command/設定/hash/原証跡は1572と `018/evidence/provisional/PG7104-micrometer-dependency-prepare-v1/manifest.json`。これは環境準備でPT合格0、Web Production依存追加/実backend接続は次の別工程で検証する。
+
 ## 2026-10-23 PG6960/F02 ArchUnit1.4.2・原Jar独立静的確認
 
 既SS311§2のArchUnit工程をtool専用として補完（PG-D516/1526）。入手元は固定Maven Central `https://repo.maven.apache.org/maven2/com/tngtech/archunit/archunit/1.4.2/`、公式release https://www.archunit.org/news/release/2026/04/18/release-v1.4.2.html 。core Jarを既私有toolchain `architecture/archunit-1.4.2/` へ新規取得し、公開SHA1と一致・SHA256 `6d8adf69a3f109ebe1b395764feb07f919e9e0e2ab5e2ea141d2e6251ba7d17f`（4550585byte）。POM SHA256 `05618298545286d697fa6d066f65aebff7f68e8ec88cbf2c3e7d77ce18f26636`、取得receiptは018/provisional/PG6960-archunit-toolchain-v1/manifest.json。vendor POMはSLF4J2.0.17を宣言するが、toolは既承認・導入済み同APIの2.0.18だけを明示classpathへ置く（SHA25644508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55）。Production POM/runtime/GAV変更0、binaryはGit非格納。licenseは取得POMのApache2.0/BSDを記録。
