@@ -21,6 +21,7 @@ CURRENT_SUITES=1
 CURRENT_PHYSICAL=4
 PHYSICAL_COUNT=1726
 SOURCE_DELTA_COUNT=65
+EXTRA_CURRENT_AUXILIARY_JARS={}
 PINS={
  'original':('PG6930-current4222-cases/qualification.json','728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731'),
  'currentApi':('PG7302-api-async-metric-post-v1/manifest.json','246b450c115954b30a6246c71bda7e5a2b25273fea211e32d729eb9b1b0304fa'),
@@ -95,9 +96,11 @@ def main():
           sharedReference='WBS-C07' if allowed or path in reviewed else None,sharedAdditionalCostPp=0))
     require(len(rows)==SOURCE_DELTA_COUNT and set(reviewed)==set(POM_REVIEWERS),'all declared source owners and all three exact semantic guards')
     sdk=raw['begin']['dependencyJarHashes']
-    require(sdk==proofs['batchHistory']['currentNormalCompileSdkJarHashes']==proofs['webHistory']['currentSdkJarHashes']
-      ==current['additionalSdkAuxiliaryJarHashes'] and all(host.sha(Path(p))==h for p,h in sdk.items()),
-      'same actual four SDK jars normal/currentAPI/historical bindings, not old execution transfer')
+    common=proofs['batchHistory']['currentNormalCompileSdkJarHashes']
+    require(common==proofs['webHistory']['currentSdkJarHashes'] and not(set(common)&set(EXTRA_CURRENT_AUXILIARY_JARS))
+      and sdk=={**common,**EXTRA_CURRENT_AUXILIARY_JARS}==current['additionalSdkAuxiliaryJarHashes']
+      and all(host.sha(Path(p))==h for p,h in sdk.items()),
+      'same original four SDK bytes plus explicitly pinned current-only auxiliary inputs, not historical execution transfer')
     prior=proofs['architecture']
     require(host.sha(architecture.SOURCE)==prior['toolSourceSha256'] and host.sha(architecture.ARCH)==architecture.ARCH_SHA
       and host.sha(architecture.SLF)==architecture.SLF_SHA,'official unchanged architecture tool/library bytes')
@@ -119,7 +122,8 @@ def main():
         currentSourceExecutionAccepted=False,coverageNotTransferred=True),
       historicalWeb=dict(source=web['source'],tests=23,physicalClasses=web['physicalClasses'],byteIdentityOnly=True,
         currentSourceExecutionAccepted=False,coverageNotTransferred=True),newSourceDelta=rows,reviewedPomChanges=reviewed,
-      currentNormalCompileSdkJarHashes=sdk,architecture=dict(result=result,receipt=receipt),targetClassLoadOrInitialization=False,
+      currentNormalCompileSdkJarHashes=sdk,currentOnlyAuxiliaryJarHashes=EXTRA_CURRENT_AUXILIARY_JARS,
+      architecture=dict(result=result,receipt=receipt),targetClassLoadOrInitialization=False,
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None,coverageUnion=False,
       original4222Replayed=False,original44Replayed=False,actualVmActions=0,actualDatabaseActions=0)
     verify(invocation);OUT.mkdir();host.write(OUT/'manifest.json',value)
