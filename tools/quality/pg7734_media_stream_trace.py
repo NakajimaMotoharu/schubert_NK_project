@@ -21,7 +21,7 @@ def main():
     proofs={};pins={}
     for key,name,digest in (
       ('previous','PG7718-observed-retention-trace-v1/manifest.json','a0a514b20ce418692402c5164616cc0b01d62c4f83bc73721e6856e345bc465d'),
-      ('physical','PG7732-media-stream-six-post-v1/manifest.json',None),
+      ('physical','PG7750-media-stream-six-post-v2/manifest.json',None),
       ('currentWeb','PG7744-media-stream-post-v2/manifest.json',None)):
         file=host.BASE/name;sha=host.sha(file);require(digest is None or sha==digest,'original witness hash')
         proofs[key]=json.loads(file.read_bytes());pins[key]=dict(path=name,sha256=sha)

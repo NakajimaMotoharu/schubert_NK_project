@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：[1702 Web media仕様](../../evidence/01_PT/018_NK-OPS-001/1702_WebMediaStreamMetric_単体テスト仕様書.md)・[1703結果追跡](../../evidence/01_PT/018_NK-OPS-001/1703_WebMediaStreamMetric_結果・追跡.md)。sourcea1b528547/当Web35PT5suite（元製造8＋必要既27）、実10四100(L232M50C10B67)/全1767/113trace/生成14/raw5全個別理由。BUG1671classpath前提・1672結果serialization工具を元失敗保全/元compile-解析再演0で限定閉鎖。実stream/admission/HTTP/Browser・正式/whole451/工数率へ加算0。
+
 2026-10-24最新：[1700保持設定完全観測仕様](../../evidence/01_PT/018_NK-OPS-001/1700_保持設定完全観測_単体テスト仕様書.md)・[1701結果追跡](../../evidence/01_PT/018_NK-OPS-001/1701_保持設定完全観測_結果・追跡.md)。source323925a42/当Batch245PT32suite・実60四100/全1766/111trace/生成120/raw28個別理由、既mode全code逆投影一致、新製造8/新BUG0。actual retention backend/保存量/permission/配置・正式/whole451へ加算0。API130は別source153bの歴史byte-onlyで算術合算しない。
 
 2026-10-24最新：[1697 MQ圧力取得結線仕様](../../evidence/01_PT/018_NK-OPS-001/1697_MQ圧力取得結線_単体テスト仕様書.md)・[1698結果追跡](../../evidence/01_PT/018_NK-OPS-001/1698_MQ圧力取得結線_結果・追跡.md)はsource153b/当130PT16suite・実25四100/全1765/110trace/生成41/raw16全個別理由。1691～1698のInbox/MQ圧力/再配送/取得結線で独立Test ID各8を追加（別sourceの成功件数を合算しない）。BUG1669工具誤分類・BUG1670固定label品質はそれぞれ1692/1694へ元失敗・再試験を分離保存し限定閉鎖。実broker/collector source/retention/whole451・正式受入/工数率は未更新。[1699配布保持限定照合](../../evidence/01_PT/018_NK-OPS-001/1699_監視・保持配布限定照合と次独立工程.md)はProduction PT0・次独立guardを選定する監査であり製造完了とはしない。

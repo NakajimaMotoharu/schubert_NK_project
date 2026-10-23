@@ -1,5 +1,7 @@
 # 1702 Web media stream metric 単体テスト仕様書
 
+実行経路追補（2026-10-24、期待値不変更）：BUG1671の前提工具是正により、7730元正常compile→7740 metadata-only→7741 receipt guard→7742初回普通35/5→7744独立post。7732の結果serialization障害BUG1672は7750で元architecture両exit0/出力を回収（再解析0）→7734/7736/7738へ結合。旧7726はpre-begin failure/PT未開始、7728はUNRUNのdraftで成功に含めない。元計画の経路は履歴保持、真正結果/hashは1703参照。
+
 NK-OPS-001/P01809/C07/RD171/UI252/SS333§11～13/SS351§6・8/PG-D563/group1922。MediaStreamsMetricRecorder constructor/record/missing/snapshot/detailedMetricsRequested/private value。既ProtocolのMediaTypeはAUDIO/VIDEO/MUSIC literalだけのpure enumで全source初期化を読取済み。新classは供給active stream数のGauge表示だけで、実media open/close/認可/Range/file read・HTTP/Browser/JMS/DB/Root/配信上限の変更をしない。
 
 DEBUGは`nk_media_streams`/Gauge/label`media_type`だけ、AUDIO/VIDEO/MUSICの固定3seriesを事前登録、初期/欠測NaNと真0を区別。STDは登録/保持0、既HttpMetricContractのstrict mode契約を再利用して未知modeをechoしない。値は独立非負long、16/20/21等を勝手にclamp/加算してadmission結果を捏造しない。LongMAXはsnapshotに原値保持、SDKdoubleの表示丸めは明示する。metric観測自体は実20 stream admissionや16 warningの受入ではなく、外側source/lifetime/警報は別未受入。AtomicReferenceのOptionalLongを一回取得してvalueへ渡し、present/getの二読競合を作らない。registry lifetime/同名namespaceはcaller所有、部分factory失敗後の残meterをretry/closeで解消したとしない。

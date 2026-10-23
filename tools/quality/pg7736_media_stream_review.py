@@ -44,7 +44,7 @@ def main():
     invocation=capture(Path(__file__));require(not OUT.exists(),'new-only review');proofs={};pins={}
     for key,path,digest in (
       ('current','PG7744-media-stream-post-v2/manifest.json','826e231bbfbd3a86ebf86330a250e40ac660ccb945b7198f4ef15e2b1e40154e'),
-      ('trace','PG7734-media-stream-trace-v1/manifest.json',None),('physical','PG7732-media-stream-six-post-v1/manifest.json',None),
+      ('trace','PG7734-media-stream-trace-v1/manifest.json',None),('physical','PG7750-media-stream-six-post-v2/manifest.json',None),
       ('old','PG7436-web-generated-post-v1/manifest.json','b41d9dcff2075a10b3192f9dde387b0f0e2e36473b83bea4a475aae4ef4cbe37'),
       ('oldReview','PG7444-web-generated-review-v1/manifest.json','ff4749fc88d61a0b094162ded43128bfac41c4fc9ddb8875c8425c530771b52c'),
       ('metadataGuards','PG7741-web-classpath-receipt-guards-v1/manifest.json','7d1b5dba156747fc27a458646e597debe90d837ccf326233e308aae671df5059')):
@@ -90,7 +90,7 @@ def main():
     source=(host.ROOT/mainpath).read_text()
     require(host.sha(host.ROOT/mainpath)==c['sourceFiles'][mainpath]
       and 'current -> value(current.get())' in source and 'new HttpMetricContract().detailedMetricsEnabled(mode)' in source
-      and not any(token in source for token in ('catch (','registry.close(','.retry(','new Thread(','Files.','Socket','HttpClient'))),'reviewed one-read immutable observation/borrowed registry/no operational action')
+      and not any(token in source for token in ('catch (','registry.close(','.retry(','new Thread(','Files.','Socket','HttpClient')),'reviewed one-read immutable observation/borrowed registry/no operational action')
     value=dict(actualExit=0,source=compilation.SOURCE,invocation=invocation,timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),witnesses=pins,
       tests=35,suites=5,newProductionCases=8,necessaryExistingCases=27,counters=c['counters'],generatedTypes=prior['generatedTypes'],generatedMethodCount=14,
       rawPmdFindings=5,rawPmdExit=4,individualRationaleRows=prior['individualRationaleRows'],unclassified=0,actualViolationsOutstanding=0,
