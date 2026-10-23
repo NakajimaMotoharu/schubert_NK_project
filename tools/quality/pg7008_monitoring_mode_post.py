@@ -75,7 +75,8 @@ def main():
     classes = PRIVATE/'classes';classes.mkdir()
     source = host.ROOT/'tools/quality/architecture/ComponentCoverageAudit.java'
     commands = [('audit-compile',[str(jdk/'javac'),'--release','25','-proc:none','-Xlint:all','-Werror','-cp',cp,'-d',str(classes),str(source)]),
-      ('audit-run',[str(jdk/'java'),'-cp',str(classes)+':'+cp,'ComponentCoverageAudit',str(target/'jacoco.exec'),str(target/'classes'),*sorted(NAMES)])]
+      ('audit-run',[str(jdk/'java'),'-cp',str(classes)+':'+cp,'ComponentCoverageAudit',str(target/'jacoco.exec'),str(target/'classes'),*sorted(NAMES),
+        *['--metadata='+name.removesuffix('.class') for name in sorted(EXTRA_MARKER_METADATA)]])]
     stages=[];output=''
     for name, command in commands:
         done = subprocess.run(command,capture_output=True,text=True)

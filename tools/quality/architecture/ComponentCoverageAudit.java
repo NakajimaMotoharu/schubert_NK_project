@@ -15,8 +15,20 @@ public final class ComponentCoverageAudit {
 
   public static void main(String[] args) throws Exception {
     if (args.length < 3) throw new IllegalArgumentException("exec, class directory and exact names");
-    Set<String> expected = new TreeSet<>(Arrays.asList(args).subList(2, args.length));
-    if (expected.size() != args.length - 2) throw new IllegalArgumentException("duplicate expected class");
+    var declarations = Arrays.asList(args).subList(2, args.length);
+    if (new TreeSet<>(declarations).size() != declarations.size())
+      throw new IllegalArgumentException("duplicate expected class or metadata");
+    Set<String> expected = new TreeSet<>();
+    Set<String> expectedMetadata = new TreeSet<>();
+    for (String declaration : declarations) {
+      if (declaration.startsWith("--metadata=")) {
+        String name = declaration.substring("--metadata=".length());
+        if (name.isEmpty()) throw new IllegalArgumentException("empty metadata declaration");
+        expectedMetadata.add(name);
+      } else expected.add(declaration);
+    }
+    if (expected.stream().anyMatch(expectedMetadata::contains))
+      throw new IllegalArgumentException("metadata aliases executable declaration");
     var loader = new ExecFileLoader();
     loader.load(new File(args[0]));
     if (loader.getSessionInfoStore().getInfos().size() != 1)
@@ -25,14 +37,23 @@ public final class ComponentCoverageAudit {
     new Analyzer(loader.getExecutionDataStore(), builder).analyzeAll(new File(args[1]));
     if (!builder.getNoMatchClasses().isEmpty()) throw new IllegalStateException("CRC mismatch");
     var actual = new TreeSet<String>();
+    var actualMetadata = new TreeSet<String>();
     for (var type : builder.getClasses().stream()
         .sorted(Comparator.comparing(ICoverageNode::getName)).toList()) {
       if (type.getClassCounter().getTotalCount() == 0) {
-        if (!type.getName().endsWith("/package-info"))
+        if (!type.getName().endsWith("/package-info") && !expectedMetadata.contains(type.getName()))
           throw new IllegalStateException("unknown zero-counter class");
+        if (type.getInstructionCounter().getTotalCount() != 0
+            || type.getMethodCounter().getTotalCount() != 0
+            || type.getLineCounter().getTotalCount() != 0
+            || type.getBranchCounter().getTotalCount() != 0)
+          throw new IllegalStateException("metadata has executable counters");
+        if (expectedMetadata.contains(type.getName())) actualMetadata.add(type.getName());
         System.out.println("METADATA\t" + type.getName());
         continue;
       }
+      if (expectedMetadata.contains(type.getName()))
+        throw new IllegalStateException("executable declared as metadata");
       actual.add(type.getName());
       if (loader.getExecutionDataStore().get(type.getId()) == null)
         throw new IllegalStateException("missing exact executed class");
@@ -52,6 +73,7 @@ public final class ComponentCoverageAudit {
       System.out.println(row);
     }
     if (!actual.equals(expected)) throw new IllegalStateException("exact executable inventory");
+    if (!actualMetadata.equals(expectedMetadata)) throw new IllegalStateException("exact metadata inventory");
     var session = loader.getSessionInfoStore().getInfos().getFirst();
     System.out.println("SESSION\t" + session.getStartTimeStamp() + "\t" + session.getDumpTimeStamp());
     System.out.println("RESULT\t" + actual.size() + "\t0\t1");
