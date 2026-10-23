@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1647 API Outbox件数仕様](../../evidence/01_PT/018_NK-OPS-001/1647_APIOutboxRowsMetric_単体テスト仕様書.md)・[1650生成value追加仕様](../../evidence/01_PT/018_NK-OPS-001/1650_API生成Value契約_追加単体テスト仕様書.md)～[1653再試験・横展開状態](../../evidence/01_PT/018_NK-OPS-001/1653_API生成Value契約_再試験・横展開状態.md)。当sourcefcedは72PT9suite/実15四100/CRC0、元計画OUTBOX8と追加発見GEN8を分離。六正常compile/全1738Jar/旧1669・Main同byte/全80source追跡、生成21methodは独立実契約と公式filterをreviewして分子へ合成0。BUG1660 API限定/1661工具限定・YKT1414は閉鎖、YKT1413は他program点検が残るためOPEN。正式1964-53/原190新受入0/工数null/全体451・実HOLD不変更、独立横展開点検へ継続。
+
 2026-10-23最新：[1643 API operation mismatch metric仕様](../../evidence/01_PT/018_NK-OPS-001/1643_APIOperationMismatchMetric_単体テスト仕様書.md)～[1646追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1646_APIOperationMismatchMetric_追跡・適用性完了.md)。当source40cfのAPI56PT7suite（新8）/実12四100/CRC0、六正常compile/全1735Jar/旧1669byte不変・三POM/全77source追跡。raw8全分類/新metric raw0・八purposeの四静的変異と五domain変異を拒否。実token/HMAC/key/auth操作0、正式1964-53/原190新受入0/工数null・全体451/実HOLDは維持し独立残PG/PTへ継続。
 
 2026-10-23最新：[1639 API pool借用観測結線仕様](../../evidence/01_PT/018_NK-OPS-001/1639_APIPool観測結線_単体テスト仕様書.md)～[1642追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1642_APIPool観測結線_追跡・適用性完了.md)。当sourcee874のAPI48PT6suite（新16）/実10四100/CRC0、六正常compile/全1733Jar/旧1669byte不変・三POM/全75source追跡/旧71不変4新。新harness既Hikari一nodeだけ/全品質不変/六負改変、SDK四＋当既補助二Jar各pin、raw8個別分類/未分類・有効違反0。自己所有interface proxyのみ/実pool・DB・管理操作0。正式1964-53・原190新受入0/工数null/全体451・実HOLDは維持し継続。

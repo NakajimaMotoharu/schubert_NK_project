@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OutboxRowsMetricRecorder/Counts/Status→OUTBOXMET001～008/1647～1648、生成補足GeneratedMetricValueContractTest→GENMET001～008/1650～1653・BUG1660/YKT1413。sourcefced/7402真正72PT9suite→7404実15四100/CRC0/raw8当個別理由→7406六compileのみ/7408全1738・当API16/歴史Batch43-Web10byteだけ/旧1669不変/三POM/五rule0→7410全80source/69physical→7413生成21契約/JDK公式byte/7412型別TestIDと九negative統合。元計画8と追加発見8を分離、BUG1660 API限定/1661工具限定閉鎖・YKT1413全体OPEN。実SQL/dispatch/oldest秒/WEB store/Root/全体451未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OperationMismatchMetricRecorder/Operation→OPMIS001～008/1643～1646/PG-D544、RD171/UI252/SS314323324351。source40cf/7376真正56PT7suite（新8）→7378実12四100/CRC0/raw8分類/新metric raw0→7380六compileのみ→7382全1735/旧1669byte不変/当API13一致・歴史Batch43-Web10byteだけ/三POM/五rule0→7384全77source/66physical・7386九静的変異拒否。purpose八種の供給enumだけで実token/HMAC/key/auth/DB/Root操作0、実検知/業務hook/全体451未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API DbPoolMetricObservation.observe/DbPoolMetricCollector.collect/snapshot→POOLREAD001～008/POOLCONN001～008/1639～1642/PG-D543、RD171/UI252/SS342351。sourcee874/7362真正48PT6suite（新16）→7364実10四100/CRC0/raw8全分類/7369当harness一依存だけ品質不変六負改変→7366六compileのみ→7368全1733/旧1669byte不変/当API11一致・歴史Batch43/Web10byteだけ/三POM/五rule0→7370全75source/64physical・7372五転用guard/許可getter四のみ。実pool生成・DB・管理操作0、source真正性/外側期限/Root/exporter/全体451未受入。

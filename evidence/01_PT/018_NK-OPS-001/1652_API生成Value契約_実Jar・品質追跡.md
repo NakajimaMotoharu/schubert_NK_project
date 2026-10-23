@@ -1,0 +1,7 @@
+# 1652 API生成value契約 実Jar・品質追跡
+
+sourcefcedc05b1/1647・1650～1651。PG7406正常六Main/Test compile-package0/PT0 UNRUN原SHA `a0db7057aa326c291c421aa052ca88e9548ae032d625ed79bd63766166f8f89c`。PG7408-api-generated-contract-six-post-v1原SHA `2c4db84ee9a0c354aca88ef4dd03220d8b6ea9cd8eb8b80e44e2b39b9877924b`：全1738physical＝旧1669全byte不変＋当API16（実15/metadata1、当72PT資格とdebug含む全byte一致）＋歴史Batch43(source743/169)/歴史Web10(source19c/23)byteだけ。四domain重複/欠落0、五ArchUnit規則0/target classload-init0、SDK四＋当既aux二は同pin。
+
+全80source＝追加77＋POM三変更、直前完了trace77からOutbox Main/TestとGeneratedMetricValueContractTest三追加だけ。元dbbからはTest一追加のみで全Main/metadata不変を7413で独立確認。全record/enumをphysical/exec inventoryから削除せず、既定filterが数えない生成21method契約は独立実8caseと1650に明記・当byte/predicateをreviewし、counter52methodへ21を加算0。手書きconstructor/value/validation/全branchは既ordinaryと当scope四100に残る。metadata package-info一は実行codeがない別inventory。
+
+三POM/既harness/DDL・SDK版/親quality settingsは不変更、旧4222/common44/別sourceの成功やcoverageの転用0。全80source/69追加physicalの要求・Test ID・実結果は当API実15/metadata/歴史byte域/POM compile-onlyへ追跡し、四generated source parentへ追加spec1650と新GenTestのGENMET独立familyを明示する。正式default485置換0、原190新受入0/工数null/正式1964-53/QA051final/PTALT0・全体451/native/CHR/実環境HOLD不変更。

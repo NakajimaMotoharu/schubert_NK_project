@@ -28,6 +28,8 @@ DOCS={1623:'1623_APIAsyncJobMetric_単体テスト仕様書.md',1624:'1624_APIAs
 ALLOWED_NEW={'AsyncJobMetricRecorder.java','AsyncJobMetricRecorderTest.java','package-info.java','pom.xml'}
 TEST_ID_FAMILY='ASYNCGAUGE001..008'
 EDITED_EXISTING=set()
+NEW_SOURCE_CONTRACTS={}
+ADDITIONAL_SPEC_IDS_BY_PATH={}
 
 def require(value,message):
     if not value:raise ValueError(message)
@@ -59,8 +61,9 @@ def main():
             row.update(sha256=item['sha256'],previousSourceByteSha256=prior[path]['sha256'],sourceChangedSincePreviousTrace=changed,sourceIntroducedSincePreviousTrace=False)
         else:
             require(path.startswith('src/schubert-nk-api/') and Path(path).name in ALLOWED_NEW,'only declared four newly tracked API files')
+            family,spec=NEW_SOURCE_CONTRACTS.get(Path(path).name,(TEST_ID_FAMILY,SPEC_ID))
             row=dict(item,kind='DEPENDENCY_DESCRIPTOR' if path.endswith('/pom.xml') else 'TEST' if path.endswith('Test.java') else 'MAIN',
-              rd='MON005..013',ui='252',ss='324,331,351',testIdFamily=TEST_ID_FAMILY,specifications=refs(SPEC_ID),
+              rd='MON005..013',ui='252',ss='324,331,351',testIdFamily=family,specifications=refs(spec),
               previousSourceByteSha256=None,sourceChangedSincePreviousTrace=False,sourceIntroducedSincePreviousTrace=True)
         if 'executionWitness' in row:row['historicalExecutionWitness']=row.pop('executionWitness')
         if path.endswith('/pom.xml'):
@@ -76,6 +79,9 @@ def main():
             if 'results' in row:row['historicalResults']=row.pop('results')
             row.update(qualificationRelationship='HISTORICAL_SOURCE_BYTES_UNCHANGED_NOT_CURRENT_EXECUTION',
               componentCounterScope='HISTORICAL_ONLY_NO_CURRENT_COUNTERS',currentSourceCoverageTransferred=False)
+        if path in ADDITIONAL_SPEC_IDS_BY_PATH:
+            row['additionalSpecifications']=refs(*ADDITIONAL_SPEC_IDS_BY_PATH[path])
+            row['additionalTestIdFamily']='GENMET001..008'
         rows.append(row)
     counts=anchors(rows,prior,dict(changed=len(EDITED_EXISTING),unchanged=PREVIOUS_COUNT-len(EDITED_EXISTING),introduced=SOURCE_COUNT-PREVIOUS_COUNT))
     by_path={row['path']:row for row in rows};classes=[]
