@@ -25,6 +25,8 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.0</version>
         <configuration>
+          <showWarnings>true</showWarnings>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
           <includes><include>dev/codex/schubert/nk/batch/monitoring/**/*.java</include></includes>
           <testIncludes><testInclude>dev/codex/schubert/nk/batch/monitoring/*Test.java</testInclude></testIncludes>
         </configuration>
