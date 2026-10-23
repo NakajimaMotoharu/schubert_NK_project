@@ -169,6 +169,18 @@ public final class AlertLifecycle {
     return active;
   }
 
+  /** Missing samples/gaps preserve the open event but never bridge a normal recovery period. */
+  public void interruptContinuity(Duration elapsed) {
+    Objects.requireNonNull(elapsed, "monotonic elapsed");
+    if (elapsed.isNegative()) throw new IllegalArgumentException("invalid alert elapsed time");
+    synchronized (lock) {
+      if (lastElapsed.isPresent() && elapsed.compareTo(lastElapsed.orElseThrow()) < 0)
+        throw new IllegalArgumentException("invalid alert elapsed time");
+      lastElapsed = Optional.of(elapsed);
+      recoveringSince = Optional.empty();
+    }
+  }
+
   public Optional<Event> snapshot() {
     synchronized (lock) {
       return active;
