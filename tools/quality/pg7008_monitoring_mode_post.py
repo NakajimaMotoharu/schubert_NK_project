@@ -11,6 +11,7 @@ from pathlib import Path
 import pg6966_chr_adapter_host as host
 from host_tool_invocation import capture, verify
 from pg7006_monitoring_pure_host import POM, SLOT, SUITE
+from marker_metadata_contract import verify_markers
 
 OUT = host.BASE/'PG7008-monitoring-mode-post-v1'
 PRIVATE = host.W/'pg7008-monitoring-mode-post-v1'
@@ -27,6 +28,7 @@ SOURCE_FILE_COUNT = 3
 SOURCE_ROOT_PREFIX = 'src/schubert-nk-batch/'
 EXTRA_AUXILIARY_JARS = {}
 EXTRA_PRODUCTION_DEPENDENCY_JARS = {}
+EXTRA_MARKER_METADATA = {}
 RUN = 'PG7006-monitoring-pure-host-v1'
 
 
@@ -62,8 +64,11 @@ def main():
     source_files = {p:h for p,h in begin['inputHashes'].items() if p.startswith(SOURCE_ROOT_PREFIX) and '/monitoring/' in p and p.endswith('.java')}
     require(len(source_files)==SOURCE_FILE_COUNT and all(host.sha(host.ROOT/p)==h for p,h in source_files.items()),'all declared current Main/Test source files exact')
     physical = {p.relative_to(target/'classes').as_posix():host.sha(p) for p in (target/'classes').rglob('*.class')}
-    require(set(physical)=={n+'.class' for n in NAMES}|{PREFIX+'package-info.class'},'all declared executable plus metadata class')
+    require(not(set(EXTRA_MARKER_METADATA)&{n+'.class' for n in NAMES})
+      and all(name.startswith(PREFIX) for name in EXTRA_MARKER_METADATA),'metadata never aliases executable/foreign owner')
+    require(set(physical)=={n+'.class' for n in NAMES}|{PREFIX+'package-info.class'}|set(EXTRA_MARKER_METADATA),'all declared executable plus retained metadata classes')
     jdk = host.TC/'jdk-25.0.4/bin'
+    marker_metadata=verify_markers(target/'classes',jdk/'javap',EXTRA_MARKER_METADATA)
     libs = [host.TC/'m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar',
       *[host.TC/f'm2/repository/org/ow2/asm/{n}/9.10.1/{n}-9.10.1.jar' for n in ('asm','asm-tree','asm-commons')]]
     cp = ':'.join(str(p) for p in libs)
@@ -134,7 +139,8 @@ def main():
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),os=platform.platform(),
       toolSha256=host.sha(Path(__file__)),harnessPomSha256=host.sha(snapshot/POM),sourceFiles=source_files,
       xmlHashes=original['xmlHashes'],tests=TOTAL_TESTS,suites=len(EXPECTED_SUITES),physicalClasses=physical,executableClasses=independent,
-      metadataClasses=[PREFIX+'package-info.class'],actualCrcMismatch=0,actualSessions=1,counters=totals,
+      metadataClasses=[PREFIX+'package-info.class',*sorted(EXTRA_MARKER_METADATA)],
+      additionalMarkerMetadataProofs=marker_metadata,actualCrcMismatch=0,actualSessions=1,counters=totals,
       spotbugs=dict(actualExit=0,findings=0,reportSha256=host.sha(target/'spotbugsXml.xml')),
       staticRaw=raw,staticDispositionRequired=any(v['actualExit']!=0 or v['findings'] or v['processingErrors'] for v in raw.values()),
       auditStages=stages,auditLibraries={str(p):host.sha(p) for p in libs},
