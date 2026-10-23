@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1656 Batch生成Value仕様](../../evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md)・[1657結果追跡](../../evidence/01_PT/018_NK-OPS-001/1657_Batch生成Value契約_結果・追跡.md)。source9d8e52037の176PT/24suite・実42四100/CRC0、生成19型60methodを新GENB7で明示確認、六正常compile/全1738Main byte不変/全81trace。BUG1662 Batch限定閉鎖・YKT1413他候補OPEN、正式/工数/actualHOLD不変更。
+
 2026-10-23最新：[1654生成value横展開inventory仕様](../../evidence/01_PT/018_NK-OPS-001/1654_生成Value横展開_inventory仕様.md)～[1655結果・次対象](../../evidence/01_PT/018_NK-OPS-001/1655_生成Value横展開_inventory結果・次対象.md)。固定六Jar/1738を非初期化で照合しrecord356/enum144計500候補、元API6だけ既確認・他494は根拠/安全性照合待ち（未試験/障害とは断定0）。次候補Batch19/Web5、五静的変異拒否。metadataのみ/PT0/新受入0/YKT1413 OPEN、元WBS/正式/工数/全actualHOLD不変更で限定の既根拠照合へ継続。
 
 2026-10-23最新：[1647 API Outbox件数仕様](../../evidence/01_PT/018_NK-OPS-001/1647_APIOutboxRowsMetric_単体テスト仕様書.md)・[1650生成value追加仕様](../../evidence/01_PT/018_NK-OPS-001/1650_API生成Value契約_追加単体テスト仕様書.md)～[1653再試験・横展開状態](../../evidence/01_PT/018_NK-OPS-001/1653_API生成Value契約_再試験・横展開状態.md)。当sourcefcedは72PT9suite/実15四100/CRC0、元計画OUTBOX8と追加発見GEN8を分離。六正常compile/全1738Jar/旧1669・Main同byte/全80source追跡、生成21methodは独立実契約と公式filterをreviewして分子へ合成0。BUG1660 API限定/1661工具限定・YKT1414は閉鎖、YKT1413は他program点検が残るためOPEN。正式1964-53/原190新受入0/工数null/全体451・実HOLD不変更、独立横展開点検へ継続。

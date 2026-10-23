@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P01809/C07追加発見、原190新受入0）：GeneratedBatchValueContractTest/GENB001～007→monitoring record7/enum12・生成60method、1656～1657/BUG1662/YKT1413。source9d8e52037/176PT24suite/実42四100・六compile0・全1738Main byte不変/全81source、歴史API-Webはbyte-only。BUG1662当scope閉鎖/横展開全体OPEN。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OutboxRowsMetricRecorder/Counts/Status→OUTBOXMET001～008/1647～1648、生成補足GeneratedMetricValueContractTest→GENMET001～008/1650～1653・BUG1660/YKT1413。sourcefced/7402真正72PT9suite→7404実15四100/CRC0/raw8当個別理由→7406六compileのみ/7408全1738・当API16/歴史Batch43-Web10byteだけ/旧1669不変/三POM/五rule0→7410全80source/69physical→7413生成21契約/JDK公式byte/7412型別TestIDと九negative統合。元計画8と追加発見8を分離、BUG1660 API限定/1661工具限定閉鎖・YKT1413全体OPEN。実SQL/dispatch/oldest秒/WEB store/Root/全体451未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OperationMismatchMetricRecorder/Operation→OPMIS001～008/1643～1646/PG-D544、RD171/UI252/SS314323324351。source40cf/7376真正56PT7suite（新8）→7378実12四100/CRC0/raw8分類/新metric raw0→7380六compileのみ→7382全1735/旧1669byte不変/当API13一致・歴史Batch43-Web10byteだけ/三POM/五rule0→7384全77source/66physical・7386九静的変異拒否。purpose八種の供給enumだけで実token/HMAC/key/auth/DB/Root操作0、実検知/業務hook/全体451未受入。

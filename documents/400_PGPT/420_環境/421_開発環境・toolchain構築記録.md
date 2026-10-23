@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 Batch generated補足：既toolchain/SDK4/harness不変更、source9d8e52037・176PT/24suite/実42四100/六正常compile/全1738byte一致。正常六compileのSDK4＋API専用既2を当Batch auxiliary4と分離、全Main不変更に基づく五rule/JDK31fold/公式filterの静的性質再利用（実行転用0）。初回commandのPYTHONPATH不足import exit1・実job未開始をtool費へ保存、correct環境初回job0。全command/環境/hashは1657/7420～7430、導入取得0。
+
 2026-10-23 Outbox件数/生成contract：既六aux/JDK25.0.4/Maven3.9.12/JaCoCo0.8.15再利用/取得0。元dbb64普通PT/四100は歴史保全、生成補足Test-only fcedの7402/7404真正72/9suite/実15CRC0/L236M52C15B118全miss0/raw8個別理由、7406正常六compileのみ/7408全1738/三POM/五rule0。javapで6型/生成21method/公式RecordsFilter→nested Matcher/EnumFilter/JDK31 hashを独立確認し生成contract8を実行、counter合成/除外追加0。src.zip symlink先欠落は記録してinstalled bytecodeで照合、7411工具誤判定exit1を保存/39c0915c5→新7413で是正・PT再演0。環境/全command/hash/横展開OPENは1647・1650～1653。
 
 2026-10-23 operation mismatch metric：既SDK四＋Hikari/SLF二aux/JDK25.0.4/Maven3.9.12/静的工具をoffline再利用、導入取得0/harness不変更/実token-HMAC-key-auth操作0。7376/7378当56PT7suite/実12CRC0/L197M41C12B95全miss0/新metric raw0・既8理由同byte再照合、7380正常六compileのみ/7382全1735/三POM/五rule0、7384全77trace。元command/日時/環境/hashは1643～1646、actual全HOLD/全体451未受入を維持。
