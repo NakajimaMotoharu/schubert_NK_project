@@ -114,8 +114,9 @@ public final class MonitoringPolicyEngine {
   }
 
   public Optional<Event> restarts(
-      Service service, long lastTenMinutes, ObservationContext context) {
-    return record(Condition.RESTART, service, thresholds.restarts(lastTenMinutes), context);
+      Service service, long lastTenMinutes, boolean rateLimited, ObservationContext context) {
+    return record(
+        Condition.RESTART, service, thresholds.restarts(lastTenMinutes, rateLimited), context);
   }
 
   public Optional<Event> integrity(Service service, long failures, ObservationContext context) {

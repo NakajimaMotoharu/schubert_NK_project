@@ -84,7 +84,7 @@ class MonitoringPolicyEngineTest {
               critical ? FIVE : ZERO,
               context);
       case BACKUP -> engine.backup(service, true, normal, normal ? 0 : critical ? 2 : 1, context);
-      case RESTART -> engine.restarts(service, normal ? 0 : critical ? 5 : 1, context);
+      case RESTART -> engine.restarts(service, normal ? 0 : critical ? 5 : 1, false, context);
       case INTEGRITY_CONFIG -> engine.integrity(service, normal ? 0 : 1, context);
     };
   }
@@ -233,6 +233,21 @@ class MonitoringPolicyEngineTest {
     assertThrows(
         IllegalArgumentException.class, () -> storage.asyncQueue(Service.API, 1, 0, 0, context));
     assertEquals(before, storage.activeAlerts());
+  }
+
+  @Test
+  void restartFlag001RateLimitIsIndependentOfCountAndInvalidCountCannotMutateState() {
+    var at = context(0, CauseClearance.UNCONFIRMED);
+    var owner = new MonitoringPolicyEngine();
+    assertTrue(owner.restarts(Service.API, 0, false, at).isEmpty());
+    var event = owner.restarts(Service.API, 0, true, at).orElseThrow();
+    assertEquals(Condition.RESTART, event.condition());
+    assertEquals(Service.API, event.service());
+    assertEquals(Severity.CRITICAL, event.severity());
+    assertEquals(BigInteger.ONE, event.count());
+    var before = owner.activeAlerts();
+    assertThrows(IllegalArgumentException.class, () -> owner.restarts(Service.API, -1, true, at));
+    assertEquals(before, owner.activeAlerts());
   }
 
   @Test

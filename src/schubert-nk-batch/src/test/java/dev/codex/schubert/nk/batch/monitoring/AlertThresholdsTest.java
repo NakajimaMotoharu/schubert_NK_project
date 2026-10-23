@@ -140,10 +140,13 @@ class AlertThresholdsTest {
 
   @Test
   void threshold011RestartWindowBoundaries() {
-    assertEquals(Severity.NORMAL, thresholds.restarts(0));
-    assertEquals(Severity.WARNING, thresholds.restarts(1));
-    assertEquals(Severity.WARNING, thresholds.restarts(4));
-    assertEquals(Severity.CRITICAL, thresholds.restarts(5));
+    assertEquals(Severity.NORMAL, thresholds.restarts(0, false));
+    assertEquals(Severity.WARNING, thresholds.restarts(1, false));
+    assertEquals(Severity.WARNING, thresholds.restarts(4, false));
+    assertEquals(Severity.CRITICAL, thresholds.restarts(5, false));
+    assertEquals(Severity.CRITICAL, thresholds.restarts(0, true));
+    assertEquals(Severity.CRITICAL, thresholds.restarts(4, true));
+    assertEquals(Severity.CRITICAL, thresholds.restarts(Long.MAX_VALUE, false));
   }
 
   @Test
@@ -181,7 +184,8 @@ class AlertThresholdsTest {
             () -> thresholds.dbPool(0, ZERO, -1, 0),
             () -> thresholds.dbPool(0, ZERO, 0, -1),
             () -> thresholds.backup(false, false, -1),
-            () -> thresholds.restarts(-1),
+            () -> thresholds.restarts(-1, false),
+            () -> thresholds.restarts(-1, true),
             () -> thresholds.integrity(-1));
     for (var operation : negativeCounts)
       assertEquals(
@@ -248,7 +252,7 @@ class AlertThresholdsTest {
                     thresholds.jvmHeap(75, TEN, false),
                     thresholds.syncP95(2.1, FIVE, ZERO),
                     thresholds.backup(true, false, 1),
-                    thresholds.restarts(1),
+                    thresholds.restarts(1, false),
                     thresholds.integrity(1)));
       for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
         assertEquals(expected, future.get());

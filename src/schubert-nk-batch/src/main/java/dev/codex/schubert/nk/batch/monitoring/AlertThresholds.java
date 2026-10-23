@@ -89,9 +89,9 @@ public final class AlertThresholds {
     return level(consecutiveFailures >= 2, scheduledRunPassed && !todaySuccess);
   }
 
-  public Severity restarts(long lastTenMinutes) {
+  public Severity restarts(long lastTenMinutes, boolean rateLimited) {
     nonnegative(lastTenMinutes);
-    return level(lastTenMinutes >= 5, lastTenMinutes >= 1);
+    return level(lastTenMinutes >= 5 || rateLimited, lastTenMinutes >= 1);
   }
 
   public Severity integrity(long failures) {
