@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24現行：[1689 DLQ仕様](../../evidence/01_PT/018_NK-OPS-001/1689_DLQ供給観測警報_単体テスト仕様書.md)・[1690結果追跡](../../evidence/01_PT/018_NK-OPS-001/1690_DLQ供給観測警報_結果・追跡.md)。sourcecfd8c12dd/237PT31suite・実59四100/全1760/102trace/生成115/raw28理由、新製造8・新BUG0。実broker/triage/退役/正式・全体完了へ加算0。
+
 2026-10-24現行：[1687 Integrity仕様](../../evidence/01_PT/018_NK-OPS-001/1687_Integrity供給観測警報_単体テスト仕様書.md)・[1688結果追跡](../../evidence/01_PT/018_NK-OPS-001/1688_Integrity供給観測警報_結果・追跡.md)。source676b954e7/229PT30suite・実56四100/全1757/100trace/生成104/raw28理由、元製造新8・新BUG0。実probe/調査/修復/退役/正式・全体完了へ加算0。
 
 2026-10-24現行：[1685 Restart仕様](../../evidence/01_PT/018_NK-OPS-001/1685_Restart供給観測・rateLimit是正_単体テスト仕様書.md)・[1686結果横展開](../../evidence/01_PT/018_NK-OPS-001/1686_Restart供給観測・rateLimit是正_結果・横展開.md)。source9f7697a28/221PT29suite・実54四100/全1755/98trace/生成99/raw28理由、元製造8＋是正1・BUG1668-YKT1419限定閉鎖。実Unit/control/正式・全体完了へ加算0。
